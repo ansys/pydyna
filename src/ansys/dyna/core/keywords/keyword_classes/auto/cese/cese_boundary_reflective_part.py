@@ -23,7 +23,12 @@
 """Module providing the CeseBoundaryReflectivePart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEBOUNDARYREFLECTIVEPART_CARD0 = (
+    FieldSchema("surfprt", int, 0, 10, None),
+)
 
 class CeseBoundaryReflectivePart(KeywordBase):
     """DYNA CESE_BOUNDARY_REFLECTIVE_PART keyword"""
@@ -35,19 +40,10 @@ class CeseBoundaryReflectivePart(KeywordBase):
         """Initialize the CeseBoundaryReflectivePart class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "surfprt",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYREFLECTIVEPART_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def surfprt(self) -> typing.Optional[int]:
         """Get or set the Surface part ID referenced in *MESH_SURFACE_ELEMENT cards.

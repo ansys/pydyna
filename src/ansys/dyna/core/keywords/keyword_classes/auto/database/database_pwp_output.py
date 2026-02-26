@@ -23,7 +23,16 @@
 """Module providing the DatabasePwpOutput class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEPWPOUTPUT_CARD0 = (
+    FieldSchema("ivel", int, 0, 10, 0),
+    FieldSchema("iaccx", int, 10, 10, 0),
+    FieldSchema("iaccy", int, 20, 10, 0),
+    FieldSchema("iaccz", int, 30, 10, 0),
+    FieldSchema("ncyout", int, 40, 10, 100),
+)
 
 class DatabasePwpOutput(KeywordBase):
     """DYNA DATABASE_PWP_OUTPUT keyword"""
@@ -35,52 +44,10 @@ class DatabasePwpOutput(KeywordBase):
         """Initialize the DatabasePwpOutput class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ivel",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iaccx",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iaccy",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iaccz",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncyout",
-                        int,
-                        40,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEPWPOUTPUT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ivel(self) -> int:
         """Get or set the Meaning of "velocity" in d3plot and d3thdt output files

@@ -23,7 +23,19 @@
 """Module providing the ControlRemeshing class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLREMESHING_CARD0 = (
+    FieldSchema("rmin", float, 0, 10, None),
+    FieldSchema("rmax", float, 10, 10, None),
+    FieldSchema("vf_loss", float, 20, 10, 1.0),
+    FieldSchema("mfrac", float, 30, 10, 0.0),
+    FieldSchema("dt_min", float, 40, 10, 0.0),
+    FieldSchema("icurv", int, 50, 10, 4),
+    FieldSchema("iadp10", int, 60, 10, 0),
+    FieldSchema("sefang", float, 70, 10, 0.0),
+)
 
 class ControlRemeshing(KeywordBase):
     """DYNA CONTROL_REMESHING keyword"""
@@ -35,74 +47,10 @@ class ControlRemeshing(KeywordBase):
         """Initialize the ControlRemeshing class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "rmin",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rmax",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vf_loss",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mfrac",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt_min",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icurv",
-                        int,
-                        50,
-                        10,
-                        4,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iadp10",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sefang",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLREMESHING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def rmin(self) -> typing.Optional[float]:
         """Get or set the Minimum edge length for the surface mesh surrounding the parts which should be remeshed.

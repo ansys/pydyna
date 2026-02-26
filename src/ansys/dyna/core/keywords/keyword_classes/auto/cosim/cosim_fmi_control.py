@@ -23,7 +23,19 @@
 """Module providing the CosimFmiControl class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_COSIMFMICONTROL_CARD0 = (
+    FieldSchema("appid", str, 0, 20, None),
+    FieldSchema("opt", str, 20, 10, "G"),
+    FieldSchema("mode", str, 30, 10, "P"),
+    FieldSchema("fmi", int, 40, 10, 0),
+)
+
+_COSIMFMICONTROL_CARD1 = (
+    FieldSchema("setting", str, 0, 80, None),
+)
 
 class CosimFmiControl(KeywordBase):
     """DYNA COSIM_FMI_CONTROL keyword"""
@@ -35,54 +47,13 @@ class CosimFmiControl(KeywordBase):
         """Initialize the CosimFmiControl class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "appid",
-                        str,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "opt",
-                        str,
-                        20,
-                        10,
-                        "G",
-                        **kwargs,
-                    ),
-                    Field(
-                        "mode",
-                        str,
-                        30,
-                        10,
-                        "P",
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmi",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "setting",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _COSIMFMICONTROL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _COSIMFMICONTROL_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def appid(self) -> typing.Optional[str]:
         """Get or set the FMU identification. Each FMU must have a unique APPID

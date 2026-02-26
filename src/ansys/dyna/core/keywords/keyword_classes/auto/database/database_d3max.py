@@ -23,7 +23,18 @@
 """Module providing the DatabaseD3Max class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASED3MAX_CARD0 = (
+    FieldSchema("dtcheck", float, 0, 10, None),
+    FieldSchema("me", int, 10, 10, 1),
+    FieldSchema("pstrs", int, 20, 10, 0),
+    FieldSchema("pstrn", int, 30, 10, 0),
+    FieldSchema("ifilt", int, 40, 10, 0),
+    FieldSchema("output", int, 50, 10, 0),
+    FieldSchema("fcutout", float, 60, 10, 0.0),
+)
 
 class DatabaseD3Max(KeywordBase):
     """DYNA DATABASE_D3MAX keyword"""
@@ -35,67 +46,10 @@ class DatabaseD3Max(KeywordBase):
         """Initialize the DatabaseD3Max class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dtcheck",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "me",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pstrs",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pstrn",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifilt",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "output",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fcutout",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASED3MAX_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def dtcheck(self) -> typing.Optional[float]:
         """Get or set the Time step for checking and updating maximum values. For instance, if DTCHECK = 10-6, LS-DYNA will check and update the maximum values every 10-6 seconds (assuming for this example the time units are seconds). It will compare the current values (stress or strain) with the maximum values up to now. If the current values are larger, the maximum values will be replaced by the current values. Otherwise, the maximum values will remain unchanged

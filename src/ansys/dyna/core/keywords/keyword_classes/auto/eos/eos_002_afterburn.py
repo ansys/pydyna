@@ -23,7 +23,37 @@
 """Module providing the Eos002Afterburn class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EOS002AFTERBURN_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("a", float, 10, 10, None),
+    FieldSchema("b", float, 20, 10, None),
+    FieldSchema("r1", float, 30, 10, None),
+    FieldSchema("r2", float, 40, 10, None),
+    FieldSchema("omeg", float, 50, 10, None),
+    FieldSchema("e0", float, 60, 10, None),
+    FieldSchema("vo", float, 70, 10, None),
+)
+
+_EOS002AFTERBURN_CARD1 = (
+    FieldSchema("opt", float, 0, 10, 0.0),
+    FieldSchema("qt", float, 10, 10, None),
+    FieldSchema("t1", float, 20, 10, None),
+    FieldSchema("t2", float, 30, 10, None),
+)
+
+_EOS002AFTERBURN_CARD2 = (
+    FieldSchema("opt", float, 0, 10, 0.0),
+    FieldSchema("q0", float, 10, 10, None),
+    FieldSchema("qa", float, 20, 10, None),
+    FieldSchema("qm", float, 30, 10, 0.5),
+    FieldSchema("qn", float, 40, 10, 0.17),
+    FieldSchema("conm", float, 50, 10, 1.0),
+    FieldSchema("conl", float, 60, 10, 1.0),
+    FieldSchema("cont", float, 70, 10, 1.0),
+)
 
 class Eos002Afterburn(KeywordBase):
     """DYNA EOS_002_AFTERBURN keyword"""
@@ -35,167 +65,16 @@ class Eos002Afterburn(KeywordBase):
         """Initialize the Eos002Afterburn class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omeg",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vo",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "opt",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qt",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "opt",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qa",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qm",
-                        float,
-                        30,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qn",
-                        float,
-                        40,
-                        10,
-                        0.17,
-                        **kwargs,
-                    ),
-                    Field(
-                        "conm",
-                        float,
-                        50,
-                        10,
-                        1.,
-                        **kwargs,
-                    ),
-                    Field(
-                        "conl",
-                        float,
-                        60,
-                        10,
-                        1.,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cont",
-                        float,
-                        70,
-                        10,
-                        1.,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EOS002AFTERBURN_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOS002AFTERBURN_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOS002AFTERBURN_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state ID.

@@ -35,6 +35,7 @@ The auto-generated class handles everything else including:
 - All field properties and card definitions
 - Option card handling
 """
+
 import typing
 
 from ansys.dyna.core.keywords.keyword_classes.auto.mat.mat_295 import Mat295 as Mat295Auto

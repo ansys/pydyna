@@ -23,8 +23,19 @@
 """Module providing the DefineCpmBagInteraction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECPMBAGINTERACTION_CARD0 = (
+    FieldSchema("bagid1", int, 0, 10, None),
+    FieldSchema("bagid2", int, 10, 10, None),
+    FieldSchema("nspec", int, 30, 10, None),
+)
+
+_DEFINECPMBAGINTERACTION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineCpmBagInteraction(KeywordBase):
     """DYNA DEFINE_CPM_BAG_INTERACTION keyword"""
@@ -40,50 +51,20 @@ class DefineCpmBagInteraction(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "bagid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bagid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nspec",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECPMBAGINTERACTION_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCpmBagInteraction.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECPMBAGINTERACTION_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def bagid1(self) -> typing.Optional[int]:
         """Get or set the Airbag ID of source CPM particle bag

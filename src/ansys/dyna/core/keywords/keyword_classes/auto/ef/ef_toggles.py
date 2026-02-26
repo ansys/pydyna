@@ -23,7 +23,18 @@
 """Module providing the EfToggles class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EFTOGGLES_CARD0 = (
+    FieldSchema("iprint1", int, 0, 10, 0),
+    FieldSchema("iprint2", int, 10, 10, 0),
+    FieldSchema("iprint3", int, 20, 10, 0),
+    FieldSchema("iprint4", int, 30, 10, 0),
+    FieldSchema("idata", int, 40, 10, 0),
+    FieldSchema("itraces", int, 50, 10, 0),
+    FieldSchema("irstrt", int, 60, 10, None),
+)
 
 class EfToggles(KeywordBase):
     """DYNA EF_TOGGLES keyword"""
@@ -35,67 +46,10 @@ class EfToggles(KeywordBase):
         """Initialize the EfToggles class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "iprint1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iprint2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iprint3",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iprint4",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idata",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itraces",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irstrt",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EFTOGGLES_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def iprint1(self) -> int:
         """Get or set the Controls output of exchange fractions to the d3hsp file. In almost all situations this should be set to 0 because the “exchange factors” are written to the file exchfl.

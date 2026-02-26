@@ -23,7 +23,12 @@
 """Module providing the CeseBoundaryAxisSymmetricPartSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEBOUNDARYAXISSYMMETRICPARTSET_CARD0 = (
+    FieldSchema("msurf_s", int, 0, 10, None),
+)
 
 class CeseBoundaryAxisSymmetricPartSet(KeywordBase):
     """DYNA CESE_BOUNDARY_AXIS_SYMMETRIC_PART_SET keyword"""
@@ -35,19 +40,10 @@ class CeseBoundaryAxisSymmetricPartSet(KeywordBase):
         """Initialize the CeseBoundaryAxisSymmetricPartSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "msurf_s",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYAXISSYMMETRICPARTSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def msurf_s(self) -> typing.Optional[int]:
         """Get or set the Identifier of a set of surface part IDs created with a *LSO_ID_SET card, where each surface part ID in the set is referenced in *MESH_SURFACE_ELEMENT cards.

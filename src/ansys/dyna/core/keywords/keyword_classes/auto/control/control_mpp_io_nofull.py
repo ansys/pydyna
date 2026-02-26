@@ -23,7 +23,11 @@
 """Module providing the ControlMppIoNofull class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPIONOFULL_CARD0 = (
+)
 
 class ControlMppIoNofull(KeywordBase):
     """DYNA CONTROL_MPP_IO_NOFULL keyword"""
@@ -35,9 +39,7 @@ class ControlMppIoNofull(KeywordBase):
         """Initialize the ControlMppIoNofull class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPIONOFULL_CARD0,
+                **kwargs,
+            ),        ]

@@ -23,7 +23,12 @@
 """Module providing the EmControlErosion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMCONTROLEROSION_CARD0 = (
+    FieldSchema("ectrl", int, 0, 10, 0),
+)
 
 class EmControlErosion(KeywordBase):
     """DYNA EM_CONTROL_EROSION keyword"""
@@ -35,20 +40,10 @@ class EmControlErosion(KeywordBase):
         """Initialize the EmControlErosion class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ectrl",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMCONTROLEROSION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ectrl(self) -> int:
         """Get or set the Erosion search:

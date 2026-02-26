@@ -23,7 +23,11 @@
 """Module providing the LoadSpcforc class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADSPCFORC_CARD0 = (
+)
 
 class LoadSpcforc(KeywordBase):
     """DYNA LOAD_SPCFORC keyword"""
@@ -35,9 +39,7 @@ class LoadSpcforc(KeywordBase):
         """Initialize the LoadSpcforc class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSPCFORC_CARD0,
+                **kwargs,
+            ),        ]

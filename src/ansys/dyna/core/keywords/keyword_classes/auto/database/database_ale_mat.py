@@ -23,7 +23,15 @@
 """Module providing the DatabaseAleMat class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEALEMAT_CARD0 = (
+    FieldSchema("dtout", float, 0, 10, None),
+    FieldSchema("boxlow", int, 10, 10, None),
+    FieldSchema("boxup", int, 20, 10, None),
+    FieldSchema("dtxy", float, 30, 10, None),
+)
 
 class DatabaseAleMat(KeywordBase):
     """DYNA DATABASE_ALE_MAT keyword"""
@@ -35,40 +43,10 @@ class DatabaseAleMat(KeywordBase):
         """Initialize the DatabaseAleMat class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dtout",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxlow",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "boxup",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtxy",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEALEMAT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def dtout(self) -> typing.Optional[float]:
         """Get or set the Time interval between the outputs.

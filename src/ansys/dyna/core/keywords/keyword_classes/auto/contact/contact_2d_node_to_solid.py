@@ -23,7 +23,26 @@
 """Module providing the Contact2DNodeToSolid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTACT2DNODETOSOLID_CARD0 = (
+    FieldSchema("sph", int, 0, 10, None),
+    FieldSchema("solid", int, 10, 10, None),
+    FieldSchema("tbirth", int, 20, 10, None),
+    FieldSchema("tdeath", int, 30, 10, None),
+)
+
+_CONTACT2DNODETOSOLID_CARD1 = (
+    FieldSchema("soft", int, 0, 10, 0),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("vc", float, 20, 10, None),
+    FieldSchema("offd", float, 30, 10, None),
+    FieldSchema("pen", float, 40, 10, 1.0),
+    FieldSchema("fs", float, 50, 10, 0.0),
+    FieldSchema("fd", float, 60, 10, 0.0),
+    FieldSchema("dc", float, 70, 10, 0.0),
+)
 
 class Contact2DNodeToSolid(KeywordBase):
     """DYNA CONTACT_2D_NODE_TO_SOLID keyword"""
@@ -35,105 +54,13 @@ class Contact2DNodeToSolid(KeywordBase):
         """Initialize the Contact2DNodeToSolid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sph",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbirth",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "soft",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vc",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offd",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pen",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fs",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fd",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dc",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTACT2DNODETOSOLID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACT2DNODETOSOLID_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def sph(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID or part set ID for SPH nodes. If SPH>0, a node set ID is assumed, if SPH<0 a part set ID is assumed

@@ -23,7 +23,19 @@
 """Module providing the AleStructuredMeshMotion class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALESTRUCTUREDMESHMOTION_CARD0 = (
+    FieldSchema("mshid", int, 0, 10, None),
+    FieldSchema("option", str, 10, 10, "FOLLOW_GC"),
+    FieldSchema("ammgsid", int, 20, 10, 0),
+    FieldSchema("explim", float, 30, 10, 1.0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("symcod", int, 70, 10, 0),
+)
 
 class AleStructuredMeshMotion(KeywordBase):
     """DYNA ALE_STRUCTURED_MESH_MOTION keyword"""
@@ -35,72 +47,10 @@ class AleStructuredMeshMotion(KeywordBase):
         """Initialize the AleStructuredMeshMotion class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mshid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "option",
-                        str,
-                        10,
-                        10,
-                        "FOLLOW_GC",
-                        **kwargs,
-                    ),
-                    Field(
-                        "ammgsid",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "explim",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "symcod",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDMESHMOTION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mshid(self) -> typing.Optional[int]:
         """Get or set the S-ALE Mesh ID.  A unique number must be specified.

@@ -35,10 +35,10 @@ Labels must be defined in the keyword's labels section or auto-generated.
 from dataclasses import dataclass
 import logging
 import typing
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from keyword_generation.data_model.keyword_data import KeywordData
-from keyword_generation.data_model.label_registry import LabelRegistry
+from keyword_generation.handlers.base_settings import LabelRefSettings, parse_settings_list
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
@@ -46,16 +46,16 @@ logger = logging.getLogger(__name__)
 
 
 @dataclass
-class OverrideFieldSettings:
+class OverrideFieldSettings(LabelRefSettings):
     """Configuration for field property overrides.
 
-    Attributes:
+    Attributes
+    ----------
         ref: Label-based reference to the card (resolved via LabelRegistry)
         field_name: Name of the field to modify (case-insensitive match)
         properties: Dict of properties to override
     """
 
-    ref: str
     field_name: str
     properties: Dict[str, Any]
 
@@ -66,10 +66,12 @@ class OverrideFieldSettings:
         Args:
             data: Dict with 'ref', 'name', and any override properties
 
-        Returns:
+        Returns
+        -------
             OverrideFieldSettings instance
 
-        Raises:
+        Raises
+        ------
             KeyError: If 'ref' or 'name' is missing
         """
         # Extract properties (everything except 'ref' and 'name')
@@ -79,21 +81,6 @@ class OverrideFieldSettings:
             field_name=data["name"],
             properties=properties,
         )
-
-    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
-        """Resolve the label reference to a concrete card index.
-
-        Args:
-            registry: LabelRegistry for resolving label references
-            cards: The cards list to search for the card object.
-
-        Returns:
-            Integer index into kwd_data.cards
-
-        Raises:
-            UndefinedLabelError: If ref label is not found
-        """
-        return registry.resolve_index(self.ref, cards)
 
 
 @handler(
@@ -146,11 +133,6 @@ class OverrideFieldHandler(keyword_generation.handlers.handler_base.KeywordHandl
         - Labels must be defined in the manifest 'labels' section
     """
 
-    @classmethod
-    def _parse_settings(cls, settings: typing.List[typing.Dict[str, typing.Any]]) -> typing.List[OverrideFieldSettings]:
-        """Convert dict settings to typed OverrideFieldSettings instances."""
-        return [OverrideFieldSettings.from_dict(s) for s in settings]
-
     def handle(
         self,
         kwd_data: KeywordData,
@@ -163,11 +145,12 @@ class OverrideFieldHandler(keyword_generation.handlers.handler_base.KeywordHandl
             kwd_data: KeywordData instance containing cards and label_registry
             settings: List of dicts with 'ref', 'name', and override properties
 
-        Raises:
+        Raises
+        ------
             ValueError: If label_registry is not available on kwd_data
             UndefinedLabelError: If a referenced label is not defined
         """
-        typed_settings = self._parse_settings(settings)
+        typed_settings = parse_settings_list(OverrideFieldSettings, settings)
         registry = kwd_data.label_registry
         if registry is None:
             raise ValueError(
@@ -202,7 +185,3 @@ class OverrideFieldHandler(keyword_generation.handlers.handler_base.KeywordHandl
                         field["options"] = props["options"]
                     if "new-name" in props:
                         field["name"] = props["new-name"]
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass

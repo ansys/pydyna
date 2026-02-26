@@ -23,7 +23,13 @@
 """Module providing the CeseBoundaryBlastLoadMsurf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEBOUNDARYBLASTLOADMSURF_CARD0 = (
+    FieldSchema("bid", int, 0, 10, None),
+    FieldSchema("msurfid", int, 10, 10, None),
+)
 
 class CeseBoundaryBlastLoadMsurf(KeywordBase):
     """DYNA CESE_BOUNDARY_BLAST_LOAD_MSURF keyword"""
@@ -35,26 +41,10 @@ class CeseBoundaryBlastLoadMsurf(KeywordBase):
         """Initialize the CeseBoundaryBlastLoadMsurf class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "bid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "msurfid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYBLASTLOADMSURF_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def bid(self) -> typing.Optional[int]:
         """Get or set the Blast source ID.

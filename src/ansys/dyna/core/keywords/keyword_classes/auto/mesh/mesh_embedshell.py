@@ -23,8 +23,13 @@
 """Module providing the MeshEmbedshell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MESHEMBEDSHELL_CARD0 = (
+    FieldSchema("volid", int, 0, 10, None),
+)
 
 class MeshEmbedshell(KeywordBase):
     """DYNA MESH_EMBEDSHELL keyword"""
@@ -36,26 +41,16 @@ class MeshEmbedshell(KeywordBase):
         """Initialize the MeshEmbedshell class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "volid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _MESHEMBEDSHELL_CARD0,
+                **kwargs,
+            ),            SeriesCard(
                 "elements",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("elements")),
-        ]
-
+                data = kwargs.get("elements")),        ]
     @property
     def volid(self) -> typing.Optional[int]:
         """Get or set the ID assigned to the new volume in the keyword *MESH_VOLUME. The size meshes will be applied to this volume

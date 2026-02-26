@@ -23,7 +23,13 @@
 """Module providing the ControlSubcycle class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLSUBCYCLE_CARD0 = (
+    FieldSchema("k", int, 0, 10, 16),
+    FieldSchema("l", int, 10, 10, 1),
+)
 
 class ControlSubcycle(KeywordBase):
     """DYNA CONTROL_SUBCYCLE keyword"""
@@ -35,28 +41,10 @@ class ControlSubcycle(KeywordBase):
         """Initialize the ControlSubcycle class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "k",
-                        int,
-                        0,
-                        10,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "l",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLSUBCYCLE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def k(self) -> int:
         """Get or set the Ratio between the largest and smallest time step

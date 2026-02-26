@@ -23,7 +23,24 @@
 """Module providing the AleTankTest class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALETANKTEST_CARD0 = (
+    FieldSchema("mdotlc", int, 0, 10, 0),
+    FieldSchema("tankvol", float, 10, 10, 0.0),
+    FieldSchema("pamb", float, 20, 10, 0.0),
+    FieldSchema("pfinal", float, 30, 10, 0.0),
+    FieldSchema("machlim", float, 40, 10, 0.0),
+    FieldSchema("velmax", float, 50, 10, 0.0),
+    FieldSchema("aorif", float, 60, 10, 0.0),
+)
+
+_ALETANKTEST_CARD1 = (
+    FieldSchema("ammgidg", int, 0, 10, 0),
+    FieldSchema("ammgida", int, 10, 10, 0),
+    FieldSchema("numpnt", int, 20, 10, 50),
+)
 
 class AleTankTest(KeywordBase):
     """DYNA ALE_TANK_TEST keyword"""
@@ -35,96 +52,13 @@ class AleTankTest(KeywordBase):
         """Initialize the AleTankTest class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mdotlc",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tankvol",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pamb",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfinal",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "machlim",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "velmax",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aorif",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ammgidg",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ammgida",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numpnt",
-                        int,
-                        20,
-                        10,
-                        50,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALETANKTEST_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALETANKTEST_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def mdotlc(self) -> int:
         """Get or set the LCID for mass flow rate as a function of time. This may be obtained directly from the control-volume type input data.

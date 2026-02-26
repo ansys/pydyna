@@ -23,7 +23,13 @@
 """Module providing the DatabaseFormat class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEFORMAT_CARD0 = (
+    FieldSchema("iform", int, 0, 10, 0),
+    FieldSchema("ibinary", int, 10, 10, 0),
+)
 
 class DatabaseFormat(KeywordBase):
     """DYNA DATABASE_FORMAT keyword"""
@@ -35,28 +41,10 @@ class DatabaseFormat(KeywordBase):
         """Initialize the DatabaseFormat class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "iform",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibinary",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEFORMAT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def iform(self) -> int:
         """Get or set the Output format for D3PLOT and D3THDT files

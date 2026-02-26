@@ -23,7 +23,30 @@
 """Module providing the DatabaseAleOperation class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEALEOPERATION_CARD0 = (
+    FieldSchema("fct", int, 0, 10, None),
+    FieldSchema("hisvn", int, 10, 10, None),
+    FieldSchema("wrt", int, 20, 10, 1),
+)
+
+_DATABASEALEOPERATION_CARD1 = (
+    FieldSchema("dt", int, 0, 10, None),
+    FieldSchema("setid", int, 10, 10, None),
+)
+
+_DATABASEALEOPERATION_CARD2 = (
+    FieldSchema("var", int, 0, 10, 0),
+    FieldSchema("var", int, 10, 10, 0),
+    FieldSchema("var", int, 20, 10, 0),
+    FieldSchema("var", int, 30, 10, 0),
+    FieldSchema("var", int, 40, 10, 0),
+    FieldSchema("var", int, 50, 10, 0),
+    FieldSchema("var", int, 60, 10, 0),
+    FieldSchema("var", int, 70, 10, 0),
+)
 
 class DatabaseAleOperation(KeywordBase):
     """DYNA DATABASE_ALE_OPERATION keyword"""
@@ -35,120 +58,16 @@ class DatabaseAleOperation(KeywordBase):
         """Initialize the DatabaseAleOperation class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "fct",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisvn",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wrt",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dt",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "setid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "var",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEALEOPERATION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEALEOPERATION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEALEOPERATION_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def fct(self) -> typing.Optional[int]:
         """Get or set the *DEFINE_FUNCTION ID;

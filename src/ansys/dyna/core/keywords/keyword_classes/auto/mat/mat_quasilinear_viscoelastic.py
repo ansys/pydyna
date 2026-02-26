@@ -23,8 +23,77 @@
 """Module providing the MatQuasilinearViscoelastic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATQUASILINEARVISCOELASTIC_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("k", float, 20, 10, None),
+    FieldSchema("lc1", int, 30, 10, 0),
+    FieldSchema("lc2", int, 40, 10, 0),
+    FieldSchema("n", float, 50, 10, 6.0),
+    FieldSchema("gstart", float, 60, 10, None),
+    FieldSchema("m", float, 70, 10, 6.0),
+)
+
+_MATQUASILINEARVISCOELASTIC_CARD1 = (
+    FieldSchema("so", float, 0, 10, 0.0),
+    FieldSchema("e_min", float, 10, 10, -0.9),
+    FieldSchema("e_max", float, 20, 10, 5.1),
+    FieldSchema("gama1", float, 30, 10, None),
+    FieldSchema("gama2", float, 40, 10, None),
+    FieldSchema("k", float, 50, 10, None),
+    FieldSchema("eh", float, 60, 10, None),
+    FieldSchema("form", int, 70, 10, 0),
+)
+
+_MATQUASILINEARVISCOELASTIC_CARD2 = (
+    FieldSchema("g1", float, 0, 10, None),
+    FieldSchema("beta1", float, 10, 10, None),
+    FieldSchema("g2", float, 20, 10, None),
+    FieldSchema("beta2", float, 30, 10, None),
+    FieldSchema("g3", float, 40, 10, None),
+    FieldSchema("beta3", float, 50, 10, None),
+    FieldSchema("g4", float, 60, 10, None),
+    FieldSchema("beta4", float, 70, 10, None),
+)
+
+_MATQUASILINEARVISCOELASTIC_CARD3 = (
+    FieldSchema("g5", float, 0, 10, None),
+    FieldSchema("beta5", float, 10, 10, None),
+    FieldSchema("g6", float, 20, 10, None),
+    FieldSchema("beta6", float, 30, 10, None),
+    FieldSchema("g7", float, 40, 10, None),
+    FieldSchema("beta7", float, 50, 10, None),
+    FieldSchema("g8", float, 60, 10, None),
+    FieldSchema("beta8", float, 70, 10, None),
+)
+
+_MATQUASILINEARVISCOELASTIC_CARD4 = (
+    FieldSchema("g9", float, 0, 10, None),
+    FieldSchema("beta9", float, 10, 10, None),
+    FieldSchema("g10", float, 20, 10, None),
+    FieldSchema("beta10", float, 30, 10, None),
+    FieldSchema("g11", float, 40, 10, None),
+    FieldSchema("beta11", float, 50, 10, None),
+    FieldSchema("g12", float, 60, 10, None),
+    FieldSchema("beta12", float, 70, 10, None),
+)
+
+_MATQUASILINEARVISCOELASTIC_CARD5 = (
+    FieldSchema("c1", float, 0, 10, None),
+    FieldSchema("c2", float, 10, 10, None),
+    FieldSchema("c3", float, 20, 10, None),
+    FieldSchema("c4", float, 30, 10, None),
+    FieldSchema("c5", float, 40, 10, None),
+    FieldSchema("c6", float, 50, 10, None),
+)
+
+_MATQUASILINEARVISCOELASTIC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatQuasilinearViscoelastic(KeywordBase):
     """DYNA MAT_QUASILINEAR_VISCOELASTIC keyword"""
@@ -40,379 +109,35 @@ class MatQuasilinearViscoelastic(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc1",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc2",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        50,
-                        10,
-                        6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gstart",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        70,
-                        10,
-                        6,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "so",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e_min",
-                        float,
-                        10,
-                        10,
-                        -0.9,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e_max",
-                        float,
-                        20,
-                        10,
-                        5.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gama1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gama2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eh",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "form",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "g1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g3",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g4",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta4",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "g5",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta5",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g6",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta6",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g7",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta7",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g8",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "g9",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta9",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g10",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta10",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g11",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta11",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g12",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta12",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATQUASILINEARVISCOELASTIC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATQUASILINEARVISCOELASTIC_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATQUASILINEARVISCOELASTIC_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATQUASILINEARVISCOELASTIC_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATQUASILINEARVISCOELASTIC_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATQUASILINEARVISCOELASTIC_CARD5,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatQuasilinearViscoelastic.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATQUASILINEARVISCOELASTIC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be chosen.

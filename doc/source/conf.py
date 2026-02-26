@@ -1,5 +1,3 @@
-#import ansys.dyna.solver as solver
-
 import datetime
 import os
 
@@ -154,6 +152,7 @@ html_theme_options = {
         ],
         "output": "api",
     },
+    "announcement": "<style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are removed in version v0.11.0.",
 }
 
 # static path
@@ -173,8 +172,8 @@ BUILD_AUTOKEYWORDS_API = os.environ.get("BUILD_AUTOKEYWORDS_API", "false").lower
 
 if BUILD_AUTOKEYWORDS_API:
     html_theme_options["ansys_sphinx_theme_autoapi"]["templates"] = "autoapi/"
-    # Remove the auto-generated keywords from the ignore list
-    html_theme_options["ansys_sphinx_theme_autoapi"]["ignore"] = []
+    # # Remove the auto-generated keywords from the ignore list
+    # html_theme_options["ansys_sphinx_theme_autoapi"]["ignore"] = []
 
 BUILD_EXAMPLES = os.environ.get("BUILD_EXAMPLES", "true").lower() == "true"
 if BUILD_EXAMPLES:
@@ -236,7 +235,8 @@ def skip_run_subpackage(app, what, name, obj, skip, options):
 
 def setup(sphinx):
     """Add custom extensions to Sphinx."""
-    sphinx.connect("autoapi-skip-member", skip_run_subpackage)
+    if BUILD_API:
+        sphinx.connect("autoapi-skip-member", skip_run_subpackage)
 
     # Add timing instrumentation for performance profiling
     import time

@@ -23,7 +23,17 @@
 """Module providing the IgaEdgeUvw class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_IGAEDGEUVW_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("exyzid", int, 10, 10, None),
+    FieldSchema("nid", int, 20, 10, None),
+    FieldSchema("sense", int, 30, 10, 0),
+    FieldSchema("rstart", float, 40, 20, None),
+    FieldSchema("rend", float, 60, 20, None),
+)
 
 class IgaEdgeUvw(KeywordBase):
     """DYNA IGA_EDGE_UVW keyword"""
@@ -35,55 +45,10 @@ class IgaEdgeUvw(KeywordBase):
         """Initialize the IgaEdgeUvw class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "exyzid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sense",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rstart",
-                        float,
-                        40,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rend",
-                        float,
-                        60,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _IGAEDGEUVW_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Parametric edge ID. A unique number must be chosen.

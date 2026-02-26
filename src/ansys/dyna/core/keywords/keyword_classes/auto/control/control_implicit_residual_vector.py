@@ -23,7 +23,18 @@
 """Module providing the ControlImplicitResidualVector class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITRESIDUALVECTOR_CARD0 = (
+    FieldSchema("iresvec", int, 0, 10, 0),
+    FieldSchema("neig", int, 10, 10, 0),
+    FieldSchema("iformat", int, 20, 10, 0),
+)
+
+_CONTROLIMPLICITRESIDUALVECTOR_CARD1 = (
+    FieldSchema("rv_filenam", str, 0, 256, None),
+)
 
 class ControlImplicitResidualVector(KeywordBase):
     """DYNA CONTROL_IMPLICIT_RESIDUAL_VECTOR keyword"""
@@ -35,47 +46,13 @@ class ControlImplicitResidualVector(KeywordBase):
         """Initialize the ControlImplicitResidualVector class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "iresvec",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "neig",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iformat",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rv_filenam",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITRESIDUALVECTOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITRESIDUALVECTOR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def iresvec(self) -> int:
         """Get or set the Residual vector control flag:

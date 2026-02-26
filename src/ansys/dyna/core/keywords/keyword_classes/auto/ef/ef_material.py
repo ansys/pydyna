@@ -23,7 +23,29 @@
 """Module providing the EfMaterial class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EFMATERIAL_CARD0 = (
+    FieldSchema("nmat", int, 0, 10, None),
+    FieldSchema("name", str, 10, 70, None),
+)
+
+_EFMATERIAL_CARD1 = (
+    FieldSchema("mtyp", int, 0, 10, None),
+    FieldSchema("exe", float, 10, 10, None),
+    FieldSchema("eye", float, 20, 10, None),
+    FieldSchema("eze", float, 30, 10, None),
+)
+
+_EFMATERIAL_CARD2 = (
+    FieldSchema("rhos", float, 0, 10, None),
+    FieldSchema("rhod", float, 10, 10, None),
+    FieldSchema("taus", float, 20, 10, None),
+    FieldSchema("taud", float, 30, 10, None),
+    FieldSchema("rdiffr", float, 40, 10, 1.0),
+    FieldSchema("rdifft", float, 50, 10, 1.0),
+)
 
 class EfMaterial(KeywordBase):
     """DYNA EF_MATERIAL keyword"""
@@ -35,106 +57,16 @@ class EfMaterial(KeywordBase):
         """Initialize the EfMaterial class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nmat",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "name",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mtyp",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "exe",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eye",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eze",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rhos",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhod",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "taus",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "taud",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rdiffr",
-                        float,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rdifft",
-                        float,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EFMATERIAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EFMATERIAL_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EFMATERIAL_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def nmat(self) -> typing.Optional[int]:
         """Get or set the Specifies the material ID, of the exchange factor material.

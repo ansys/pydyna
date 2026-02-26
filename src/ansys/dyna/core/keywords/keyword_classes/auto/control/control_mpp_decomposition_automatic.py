@@ -23,7 +23,11 @@
 """Module providing the ControlMppDecompositionAutomatic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPDECOMPOSITIONAUTOMATIC_CARD0 = (
+)
 
 class ControlMppDecompositionAutomatic(KeywordBase):
     """DYNA CONTROL_MPP_DECOMPOSITION_AUTOMATIC keyword"""
@@ -35,9 +39,7 @@ class ControlMppDecompositionAutomatic(KeywordBase):
         """Initialize the ControlMppDecompositionAutomatic class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONAUTOMATIC_CARD0,
+                **kwargs,
+            ),        ]

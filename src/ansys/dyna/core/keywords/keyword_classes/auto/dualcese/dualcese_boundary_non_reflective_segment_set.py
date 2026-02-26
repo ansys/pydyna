@@ -23,7 +23,15 @@
 """Module providing the DualceseBoundaryNonReflectiveSegmentSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEBOUNDARYNONREFLECTIVESEGMENTSET_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("dirx", float, 10, 10, None),
+    FieldSchema("diry", float, 20, 10, None),
+    FieldSchema("dirz", float, 30, 10, None),
+)
 
 class DualceseBoundaryNonReflectiveSegmentSet(KeywordBase):
     """DYNA DUALCESE_BOUNDARY_NON_REFLECTIVE_SEGMENT_SET keyword"""
@@ -35,40 +43,10 @@ class DualceseBoundaryNonReflectiveSegmentSet(KeywordBase):
         """Initialize the DualceseBoundaryNonReflectiveSegmentSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dirx",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "diry",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dirz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYNONREFLECTIVESEGMENTSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID created with *DUALCESE_SEGMENTSET

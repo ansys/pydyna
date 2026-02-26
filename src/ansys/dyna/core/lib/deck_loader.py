@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for loading decks."""
 
 import io
 import typing
@@ -46,9 +47,11 @@ class DeckLoaderResult:
         self._unprocessed_keywords = []
 
     def add_unprocessed_keyword(self, name):
+        """Add a keyword that was not processed during the deck load."""
         self._unprocessed_keywords.append(name)
 
     def get_summary(self) -> str:
+        """Get a summary of unprocessed keywords."""
         summary = io.StringIO()
         for unprocessed_keyword in self._unprocessed_keywords:
             summary.write(f"Failed to process: {unprocessed_keyword}\n")
@@ -164,7 +167,10 @@ def _on_error(error, import_handlers: typing.List[ImportHandler]):
 
 def _after_import(keyword, import_handlers: typing.List[ImportHandler], context: ImportContext):
     for handler in import_handlers:
-        handler.after_import(context, keyword)
+        try:
+            handler.after_import(context, keyword)
+        except Exception as e:
+            handler.on_error(e)
 
 
 def _get_format_from_keyword_suffix(keyword: str) -> format_type:
@@ -226,16 +232,25 @@ def _load_keyword(
     result: DeckLoaderResult,
     context: ImportContext,
 ) -> None:
-    """Load keyword data into object and append to deck, handling errors."""
+    """Load keyword data into object and append to deck, handling errors.
+
+    If context.strict is True, exceptions are re-raised. If False, keywords
+    that fail to parse for any reason (undefined parameters, invalid field
+    values, malformed data, etc.) are retained as raw strings and a warning
+    is emitted.
+    """
     try:
         keyword_object.loads(keyword_data, deck.parameters)
-        deck.append(keyword_object)
-        _after_import(keyword_object, import_handlers, context)
     except Exception as e:
+        if context is not None and context.strict:
+            raise
         _on_error(e, import_handlers)
         result.add_unprocessed_keyword(keyword)
         deck.append(keyword_data)
         _after_import(keyword_data, import_handlers, context)
+        return
+    deck.append(keyword_object)
+    _after_import(keyword_object, import_handlers, context)
 
 
 def _handle_keyword(
@@ -296,7 +311,6 @@ def _try_load_deck_from_buffer(
     context: typing.Optional[ImportContext],
     import_handlers: typing.List[ImportHandler],
 ) -> None:
-
     iterstate = IterState.USERCOMMENT
     block = []
     encrypted_section = None
@@ -349,6 +363,7 @@ def load_deck(
     context: typing.Optional[ImportContext],
     import_handlers: typing.List[ImportHandler],
 ) -> DeckLoaderResult:
+    """Load a deck from a text string."""
     result = DeckLoaderResult()
     buffer = io.StringIO()
     buffer.write(text)
@@ -363,6 +378,7 @@ def load_deck_from_buffer(
     context: typing.Optional[ImportContext],
     import_handlers: typing.List[ImportHandler],
 ) -> DeckLoaderResult:
+    """Load a deck from a text buffer."""
     result = DeckLoaderResult()
     _try_load_deck_from_buffer(deck, buffer, result, context, import_handlers)
     return result

@@ -23,7 +23,14 @@
 """Module providing the ControlExplicitThermalInitial class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLEXPLICITTHERMALINITIAL_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("idtyp", int, 10, 10, 1),
+    FieldSchema("tempini", float, 20, 10, 0.0),
+)
 
 class ControlExplicitThermalInitial(KeywordBase):
     """DYNA CONTROL_EXPLICIT_THERMAL_INITIAL keyword"""
@@ -35,35 +42,10 @@ class ControlExplicitThermalInitial(KeywordBase):
         """Initialize the ControlExplicitThermalInitial class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idtyp",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tempini",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLEXPLICITTHERMALINITIAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Set ID :

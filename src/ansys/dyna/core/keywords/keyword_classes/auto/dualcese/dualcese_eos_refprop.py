@@ -23,7 +23,40 @@
 """Module providing the DualceseEosRefprop class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEEOSREFPROP_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("ncomp", int, 10, 10, None),
+    FieldSchema("type", str, 20, 10, None),
+    FieldSchema("phase", str, 30, 10, "GAS"),
+    FieldSchema("tabular", str, 40, 10, None),
+)
+
+_DUALCESEEOSREFPROP_CARD1 = (
+    FieldSchema("mol_fr1", float, 0, 10, None),
+    FieldSchema("mol_fr2", float, 10, 10, None),
+    FieldSchema("mol_fr3", float, 20, 10, None),
+    FieldSchema("mol_fr4", float, 30, 10, None),
+    FieldSchema("mol_fr5", float, 40, 10, None),
+    FieldSchema("mol_fr6", float, 50, 10, None),
+    FieldSchema("mol_fr7", float, 60, 10, None),
+    FieldSchema("mol_fr8", float, 70, 10, None),
+)
+
+_DUALCESEEOSREFPROP_CARD2 = (
+    FieldSchema("n_t", float, 0, 10, None),
+    FieldSchema("n_den", float, 10, 10, None),
+    FieldSchema("den_low", float, 20, 10, None),
+    FieldSchema("den_high", float, 30, 10, None),
+    FieldSchema("t_low", float, 40, 10, None),
+    FieldSchema("t_high", float, 50, 10, None),
+)
+
+_DUALCESEEOSREFPROP_CARD3 = (
+    FieldSchema("fluidname", str, 0, 80, None),
+)
 
 class DualceseEosRefprop(KeywordBase):
     """DYNA DUALCESE_EOS_REFPROP keyword"""
@@ -35,165 +68,19 @@ class DualceseEosRefprop(KeywordBase):
         """Initialize the DualceseEosRefprop class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncomp",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        str,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phase",
-                        str,
-                        30,
-                        10,
-                        "GAS",
-                        **kwargs,
-                    ),
-                    Field(
-                        "tabular",
-                        str,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mol_fr1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mol_fr2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mol_fr3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mol_fr4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mol_fr5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mol_fr6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mol_fr7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mol_fr8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "n_t",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n_den",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "den_low",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "den_high",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t_low",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t_high",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fluidname",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSREFPROP_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSREFPROP_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSREFPROP_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSREFPROP_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the ID for this EOS

@@ -23,8 +23,29 @@
 """Module providing the DefineFilter class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEFILTER_CARD0 = (
+    FieldSchema("id", int, 0, 10, 0),
+    FieldSchema("title", str, 10, 70, None),
+)
+
+_DEFINEFILTER_CARD1 = (
+    FieldSchema("type", str, 0, 10, None),
+    FieldSchema("data1", str, 10, 10, None),
+    FieldSchema("data2", str, 20, 10, None),
+    FieldSchema("data3", str, 30, 10, None),
+    FieldSchema("data4", str, 40, 10, None),
+    FieldSchema("data5", str, 50, 10, None),
+    FieldSchema("data6", str, 60, 10, None),
+    FieldSchema("data7", str, 70, 10, None),
+)
+
+_DEFINEFILTER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineFilter(KeywordBase):
     """DYNA DEFINE_FILTER keyword"""
@@ -40,104 +61,23 @@ class DefineFilter(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "title",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "type",
-                        str,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data1",
-                        str,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data2",
-                        str,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data3",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data4",
-                        str,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data5",
-                        str,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data6",
-                        str,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "data7",
-                        str,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEFILTER_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEFILTER_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineFilter.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEFILTER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def id(self) -> int:
         """Get or set the ID of a GEOMETRY defining high explosive particle domain.

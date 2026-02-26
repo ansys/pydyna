@@ -23,7 +23,24 @@
 """Module providing the DatabaseAle class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEALE_CARD0 = (
+    FieldSchema("dtout", float, 0, 10, None),
+    FieldSchema("setid", int, 10, 10, None),
+)
+
+_DATABASEALE_CARD1 = (
+    FieldSchema("var1", int, 0, 10, None),
+    FieldSchema("var2", int, 10, 10, None),
+    FieldSchema("var3", int, 20, 10, None),
+    FieldSchema("var4", int, 30, 10, None),
+    FieldSchema("var5", int, 40, 10, None),
+    FieldSchema("var6", int, 50, 10, None),
+    FieldSchema("var7", int, 60, 10, None),
+    FieldSchema("var8", int, 70, 10, None),
+)
 
 class DatabaseAle(KeywordBase):
     """DYNA DATABASE_ALE keyword"""
@@ -35,86 +52,13 @@ class DatabaseAle(KeywordBase):
         """Initialize the DatabaseAle class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dtout",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "setid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "var1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEALE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEALE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def dtout(self) -> typing.Optional[float]:
         """Get or set the Time interval between the outputs.

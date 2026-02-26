@@ -23,7 +23,17 @@
 """Module providing the IgaEdgeXyz class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_IGAEDGEXYZ_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("nid", int, 10, 10, None),
+    FieldSchema("ori", int, 20, 10, 0),
+    FieldSchema("pidstart", int, 30, 10, None),
+    FieldSchema("pidend", int, 40, 10, None),
+    FieldSchema("psid", int, 50, 10, None),
+)
 
 class IgaEdgeXyz(KeywordBase):
     """DYNA IGA_EDGE_XYZ keyword"""
@@ -35,55 +45,10 @@ class IgaEdgeXyz(KeywordBase):
         """Initialize the IgaEdgeXyz class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ori",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidstart",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pidend",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _IGAEDGEXYZ_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Physical edge ID. A unique number must be chosen.

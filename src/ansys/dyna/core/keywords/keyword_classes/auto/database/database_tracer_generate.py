@@ -23,7 +23,25 @@
 """Module providing the DatabaseTracerGenerate class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASETRACERGENERATE_CARD0 = (
+    FieldSchema("dt", float, 0, 10, None),
+    FieldSchema("valow", float, 10, 10, 0.0),
+    FieldSchema("valup", float, 20, 10, 0.0),
+    FieldSchema("valtype1", int, 30, 10, None),
+    FieldSchema("set", int, 40, 10, None),
+    FieldSchema("setype", int, 50, 10, 0),
+    FieldSchema("mmgset", int, 60, 10, None),
+    FieldSchema("updt", float, 70, 10, None),
+)
+
+_DATABASETRACERGENERATE_CARD1 = (
+    FieldSchema("varloc", int, 0, 10, 0),
+    FieldSchema("valtype2", int, 10, 10, 0),
+    FieldSchema("mmgset", int, 20, 10, 0),
+)
 
 class DatabaseTracerGenerate(KeywordBase):
     """DYNA DATABASE_TRACER_GENERATE keyword"""
@@ -35,99 +53,13 @@ class DatabaseTracerGenerate(KeywordBase):
         """Initialize the DatabaseTracerGenerate class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "valow",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "valup",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "valtype1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "set",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "setype",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmgset",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "updt",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "varloc",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "valtype2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmgset",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASETRACERGENERATE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASETRACERGENERATE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the Interval time between each tracer generation and position update (See Remark 1).

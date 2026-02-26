@@ -23,7 +23,12 @@
 """Module providing the IncludePathRelative class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INCLUDEPATHRELATIVE_CARD0 = (
+    FieldSchema("path", str, 0, 512, None),
+)
 
 class IncludePathRelative(KeywordBase):
     """DYNA INCLUDE_PATH_RELATIVE keyword"""
@@ -35,19 +40,10 @@ class IncludePathRelative(KeywordBase):
         """Initialize the IncludePathRelative class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "path",
-                        str,
-                        0,
-                        512,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INCLUDEPATHRELATIVE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def path(self) -> typing.Optional[str]:
         """Get or set the define a directory in which to look for the include files.

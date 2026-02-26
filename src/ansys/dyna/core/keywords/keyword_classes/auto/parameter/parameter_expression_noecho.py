@@ -23,7 +23,13 @@
 """Module providing the ParameterExpressionNoecho class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_PARAMETEREXPRESSIONNOECHO_CARD0 = (
+    FieldSchema("prmr", str, 0, 10, None),
+    FieldSchema("expression", str, 10, 70, None),
+)
 
 class ParameterExpressionNoecho(KeywordBase):
     """DYNA PARAMETER_EXPRESSION_NOECHO keyword"""
@@ -35,26 +41,10 @@ class ParameterExpressionNoecho(KeywordBase):
         """Initialize the ParameterExpressionNoecho class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "prmr",
-                        str,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "expression",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARAMETEREXPRESSIONNOECHO_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def prmr(self) -> typing.Optional[str]:
         """Get or set the Define the nth parameter in a field of 10.  Within this field the first character must be either an R for a real number or an I for an integer.  Lower or upper case for I or R is okay.  Following the type designation, define the name of the parameter using up to, but not exceeding seven characters.  For example, when defining a shell thickness named, SHLTHK, both inputs RSHLTHK or R   SHLTHK can be used and placed anywhere in the field of 10

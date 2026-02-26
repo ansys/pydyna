@@ -19,11 +19,21 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for core functionality."""
+
+from pathlib import Path
 
 from ansys.dyna.core.keywords import keywords
+from ansys.dyna.core.lib.config import disable_csv_autodetect
 from ansys.dyna.core.lib.deck import Deck
-from ansys.dyna.core.solver.dynasolver import *
-import ansys.dyna.core.solver.grpc_tags
+
+
+def _get_agent_instructions_path() -> str:
+    """Return path to agent instructions file for AI assistants."""
+    return str(Path(__file__).parent / "AGENT.md")
+
+
+AGENT_INSTRUCTIONS: str = _get_agent_instructions_path()
 
 # Version
 # ------------------------------------------------------------------------------

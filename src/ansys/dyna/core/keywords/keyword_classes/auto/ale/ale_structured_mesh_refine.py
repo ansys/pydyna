@@ -23,7 +23,15 @@
 """Module providing the AleStructuredMeshRefine class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALESTRUCTUREDMESHREFINE_CARD0 = (
+    FieldSchema("mshid", int, 0, 10, 0),
+    FieldSchema("ifx_", int, 10, 10, 1, "ifx,"),
+    FieldSchema("ify_", int, 20, 10, 1, "ify,"),
+    FieldSchema("ifz_", int, 30, 10, 1, "ifz,"),
+)
 
 class AleStructuredMeshRefine(KeywordBase):
     """DYNA ALE_STRUCTURED_MESH_REFINE keyword"""
@@ -35,44 +43,10 @@ class AleStructuredMeshRefine(KeywordBase):
         """Initialize the AleStructuredMeshRefine class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mshid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifx,",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ify,",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifz,",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALESTRUCTUREDMESHREFINE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mshid(self) -> int:
         """Get or set the S-ALE Mesh ID. The ID of the Structured ALE mesh to be refined.
@@ -88,32 +62,32 @@ class AleStructuredMeshRefine(KeywordBase):
     def ifx_(self) -> int:
         """Get or set the Refinement factor at each local direction. Please see remark 1.
         """ # nopep8
-        return self._cards[0].get_value("ifx,")
+        return self._cards[0].get_value("ifx_")
 
     @ifx_.setter
     def ifx_(self, value: int) -> None:
         """Set the ifx_ property."""
-        self._cards[0].set_value("ifx,", value)
+        self._cards[0].set_value("ifx_", value)
 
     @property
     def ify_(self) -> int:
         """Get or set the Refinement factor at each local direction. Please see remark 1.
         """ # nopep8
-        return self._cards[0].get_value("ify,")
+        return self._cards[0].get_value("ify_")
 
     @ify_.setter
     def ify_(self, value: int) -> None:
         """Set the ify_ property."""
-        self._cards[0].set_value("ify,", value)
+        self._cards[0].set_value("ify_", value)
 
     @property
     def ifz_(self) -> int:
         """Get or set the Refinement factor at each local direction. Please see remark 1.
         """ # nopep8
-        return self._cards[0].get_value("ifz,")
+        return self._cards[0].get_value("ifz_")
 
     @ifz_.setter
     def ifz_(self, value: int) -> None:
         """Set the ifz_ property."""
-        self._cards[0].set_value("ifz,", value)
+        self._cards[0].set_value("ifz_", value)
 

@@ -20,21 +20,24 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+from dataclasses import dataclass
 import logging
 import typing
+from typing import Optional
 
 from jinja2 import Environment
+from output_manager import OutputManager
+
 import keyword_generation.data_model as data_model
 from keyword_generation.data_model.keyword_data import Card, KeywordData
+from keyword_generation.generators.template_context import KeywordTemplateContext
 from keyword_generation.handlers.registry import HandlerRegistry, create_default_registry
 from keyword_generation.utils import (
-    fix_keyword,
-    get_classname,
     get_license_header,
     handle_single_word_keyword,
 )
 from keyword_generation.utils.domain_mapper import get_keyword_domain
-from output_manager import OutputManager
+from keyword_generation.utils.keyword_utils import KeywordNames
 
 logger = logging.getLogger(__name__)
 
@@ -52,17 +55,44 @@ def _get_source_keyword(keyword: str, settings: typing.Dict[str, typing.Any]) ->
     return source_keyword
 
 
-def _get_jinja_variable(base_variable: typing.Dict) -> typing.Dict:
-    jinja_variable = base_variable.copy()
-    jinja_variable.update(
-        {
-            "license": get_license_header(),
-            "openbrace": "{",
-            "closebrace": "}",
-            "repeated_element_types": {"int": "pd.Int32Dtype()", "float": "np.float64", "str": "str"},
-        }
+def _create_template_context(
+    classname: str, keyword: str, keyword_options: typing.Dict, license: str
+) -> KeywordTemplateContext:
+    """
+    Create a structured template context object for keyword rendering.
+
+    This replaces the old _get_jinja_variable dict building with a typed context object.
+
+    Args:
+        classname: Python class name for the keyword
+        keyword: Full keyword string (e.g., "SECTION_SHELL_TITLE")
+        keyword_options: Keyword configuration from manifest.json
+        license: License header text
+
+    Returns
+    -------
+        KeywordTemplateContext instance ready for template rendering
+    """
+    source_keyword = _get_source_keyword(keyword, keyword_options)
+    generation_settings = keyword_options.get("generation-options", {})
+    initial_labels = keyword_options.get("labels", None)
+    keyword_data = _get_keyword_data(keyword, source_keyword, generation_settings, initial_labels=initial_labels)
+    keyword_data.classname = classname
+
+    # Determine alias if present
+    alias = data_model.get_alias(keyword)
+    alias_subkeyword = None
+    if alias:
+        alias_tokens = alias.split("_")
+        alias = KeywordNames.from_keyword(alias).classname
+        alias_subkeyword = "_".join(alias_tokens[1:])
+
+    return KeywordTemplateContext(
+        license=license,
+        keyword_data=keyword_data,
+        alias=alias,
+        alias_subkeyword=alias_subkeyword,
     )
-    return jinja_variable
 
 
 def _transform_data(data: KeywordData):
@@ -148,17 +178,11 @@ def _do_insertions(kwd_data: KeywordData) -> None:
         else:
             # insert into another card set - may be CardSetsContainer or dict
             if kwd_data.card_sets:
-                sets = (
-                    kwd_data.card_sets.sets if hasattr(kwd_data.card_sets, "sets") else kwd_data.card_sets["sets"]
-                )  # type: ignore
-                card_sets = [
-                    cs for cs in sets if (cs.name if hasattr(cs, "name") else cs["name"]) == insertion_name
-                ]  # type: ignore
+                sets = kwd_data.card_sets.sets if hasattr(kwd_data.card_sets, "sets") else kwd_data.card_sets["sets"]  # type: ignore # noqa: E501
+                card_sets = [cs for cs in sets if (cs.name if hasattr(cs, "name") else cs["name"]) == insertion_name]  # type: ignore # noqa: E501
                 logger.debug(f"Inserting card into {len(card_sets)} card sets matching '{insertion_name}'")
                 for card_set in card_sets:
-                    container = (
-                        card_set.source_cards if hasattr(card_set, "source_cards") else card_set["source_cards"]
-                    )  # type: ignore
+                    container = card_set.source_cards if hasattr(card_set, "source_cards") else card_set["source_cards"]  # type: ignore # noqa: E501
                     index = _get_insertion_index_for_cards(insertion_index, container)
                     insertion_targets.append((index, insertion_card, container))
     for index, item, container in insertion_targets:
@@ -257,26 +281,413 @@ def _handle_keyword_data(
     logger.debug(f"Keyword data handling complete, final card count: {len(kwd_data.cards)}")
 
 
-def _add_define_transform_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[str]):
+@dataclass
+class LinkFieldInfo:
+    """Information about a link field."""
+
+    name: str
+    is_table_group: bool = False
+    is_table: bool = False  # True for TableCard (not TableCardGroup)
+    is_series: bool = False  # True for SeriesCard
+    table_name: Optional[str] = None
+    key_field: Optional[str] = None
+
+
+def _convert_link_fields_to_template_format(
+    link_fields: typing.List[LinkFieldInfo],
+) -> typing.List[typing.Dict[str, typing.Any]]:
+    """Convert LinkFieldInfo objects to template-friendly dict format."""
+    return [
+        {
+            "name": f.name,
+            "is_table_group": f.is_table_group,
+            "is_table": f.is_table,
+            "is_series": f.is_series,
+            "table_name": f.table_name,
+            "key_field": f.key_field,
+        }
+        for f in link_fields
+    ]
+
+
+def _add_define_transform_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
     transform_link_data = {
         "classname": "DefineTransformation",
         "modulename": "define.define_transformation",
         "keyword_type": "DEFINE",
         "keyword_subtype": "TRANSFORMATION",
-        "fields": link_fields,
+        "fields": _convert_link_fields_to_template_format(link_fields),
         "linkid": "tranid",
+        "link_type_name": "DEFINE_TRANSFORMATION",
     }
     link_data.append(transform_link_data)
 
 
+def _add_define_curve_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    curve_link_data = {
+        "classname": "DefineCurve",
+        "modulename": "define.define_curve",
+        "keyword_type": "DEFINE",
+        "keyword_subtype": "CURVE",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "lcid",
+        "link_type_name": "DEFINE_CURVE",
+    }
+    link_data.append(curve_link_data)
+
+
 class LinkIdentity:
+    """Identifies the type of link a field references.
+
+    These values correspond to the "link" field values in kwd.json.
+    """
+
+    NODE = 1
+    ELEMENT_BEAM = 3
+    ELEMENT_SHELL = 4
+    ELEMENT_SOLID = 5
+    MAT = 14
+    SECTION = 15
+    HOURGLASS = 17
+    DEFINE_CURVE = 19
+    DEFINE_BOX = 20
+    DEFINE_COORDINATE_SYSTEM = 21
+    DEFINE_VECTOR = 22
+    PART = 13
+    SET_BEAM = 25
+    SET_DISCRETE = 26
+    SET_NODE = 27
+    SET_PART = 28
+    SET_SEGMENT = 29
+    SET_SOLID = 31
     DEFINE_TRANSFORMATION = 40
+    DEFINE_CURVE_OR_TABLE = 86
+
+
+def _add_mat_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for MAT_* material keywords."""
+    mat_link_data = {
+        "classname": "KeywordBase",
+        "modulename": None,
+        "keyword_type": "MAT",
+        "keyword_subtype": None,
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "mid",
+        "link_type_name": "MAT",
+        "is_polymorphic": True,
+    }
+    link_data.append(mat_link_data)
+
+
+def _add_section_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for SECTION_* keywords."""
+    section_link_data = {
+        "classname": "KeywordBase",
+        "modulename": None,
+        "keyword_type": "SECTION",
+        "keyword_subtype": None,
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "secid",
+        "link_type_name": "SECTION",
+        "is_polymorphic": True,
+    }
+    link_data.append(section_link_data)
+
+
+def _add_part_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for PART keywords (table lookup pattern).
+
+    PART links are special because PART keywords contain multiple parts in a
+    DataFrame. The lookup must search `kwd.parts["pid"]` to find which Part
+    keyword contains the referenced pid.
+    """
+    part_link_data = {
+        "classname": "KeywordBase",
+        "modulename": None,
+        "keyword_type": "PART",
+        "keyword_subtype": None,
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "pid",
+        "link_type_name": "PART",
+        "is_polymorphic": True,
+        "is_table_lookup": True,  # Triggers special lookup in parts DataFrame
+        "target_table_attr": "parts",
+    }
+    link_data.append(part_link_data)
+
+
+def _add_set_link_data(
+    link_data: typing.List[typing.Dict],
+    link_fields: typing.List[LinkFieldInfo],
+    subtype: str,
+    link_type_name: str,
+):
+    """Add link data for SET_* keywords.
+
+    Each SET_* link type resolves only to its specific subtype (e.g., SET_BEAM
+    links only resolve to SET_BEAM keywords, not SET_NODE or SET_PART).
+
+    Uses subkeyword prefix matching since SET_PART includes SET_PART_LIST,
+    SET_PART_ADD, etc.
+
+    Args:
+        link_data: List to append link data to
+        link_fields: Fields that reference this link type
+        subtype: The SET subtype (e.g., "BEAM", "NODE", "PART")
+        link_type_name: The LinkType enum name (e.g., "SET_BEAM")
+    """
+    set_link_data = {
+        "classname": "KeywordBase",
+        "modulename": None,
+        "keyword_type": "SET",
+        "keyword_subtype": subtype,
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "sid",
+        "link_type_name": link_type_name,
+        "is_subtype_prefix": True,
+    }
+    link_data.append(set_link_data)
+
+
+def _add_set_beam_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for SET_BEAM keywords."""
+    _add_set_link_data(link_data, link_fields, "BEAM", "SET_BEAM")
+
+
+def _add_set_discrete_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for SET_DISCRETE keywords."""
+    _add_set_link_data(link_data, link_fields, "DISCRETE", "SET_DISCRETE")
+
+
+def _add_set_node_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for SET_NODE keywords."""
+    _add_set_link_data(link_data, link_fields, "NODE", "SET_NODE")
+
+
+def _add_set_part_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for SET_PART keywords."""
+    _add_set_link_data(link_data, link_fields, "PART", "SET_PART")
+
+
+def _add_set_segment_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for SET_SEGMENT keywords."""
+    _add_set_link_data(link_data, link_fields, "SEGMENT", "SET_SEGMENT")
+
+
+def _add_set_solid_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for SET_SOLID keywords."""
+    _add_set_link_data(link_data, link_fields, "SOLID", "SET_SOLID")
+
+
+def _add_define_curve_or_table_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for polymorphic DEFINE_CURVE or DEFINE_TABLE fields."""
+    polymorphic_link_data = {
+        "classname": "KeywordBase",
+        "modulename": None,
+        "keyword_type": None,
+        "keyword_subtype": None,
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": None,
+        "link_type_name": "DEFINE_CURVE_OR_TABLE",
+        "is_polymorphic": True,
+        "is_multi_target": True,
+        "targets": [
+            {"type": "DEFINE", "subtype": "CURVE", "id_field": "lcid"},
+            {"type": "DEFINE", "subtype": "TABLE", "id_field": "tbid"},
+        ],
+    }
+    link_data.append(polymorphic_link_data)
+
+
+def _add_node_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for NODE keywords."""
+    node_link_data = {
+        "classname": "Node",
+        "modulename": "node.node",
+        "keyword_type": "NODE",
+        "keyword_subtype": "NODE",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "nid",
+        "link_type_name": "NODE",
+        "is_table_lookup": True,  # NODE uses table-based lookup
+    }
+    link_data.append(node_link_data)
+
+
+def _add_hourglass_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for HOURGLASS keywords."""
+    hourglass_link_data = {
+        "classname": "Hourglass",
+        "modulename": "hourglass.hourglass",
+        "keyword_type": "HOURGLASS",
+        "keyword_subtype": "HOURGLASS",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "hgid",
+        "link_type_name": "HOURGLASS",
+    }
+    link_data.append(hourglass_link_data)
+
+
+def _add_define_box_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for DEFINE_BOX keywords."""
+    define_box_link_data = {
+        "classname": "DefineBox",
+        "modulename": "define.define_box",
+        "keyword_type": "DEFINE",
+        "keyword_subtype": "BOX",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "boxid",
+        "link_type_name": "DEFINE_BOX",
+    }
+    link_data.append(define_box_link_data)
+
+
+def _add_define_coordinate_system_link_data(link_data: typing.List[typing.Dict],
+                                            link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for DEFINE_COORDINATE_SYSTEM keywords."""
+    define_coordinate_system_link_data = {
+        "classname": "DefineCoordinateSystem",
+        "modulename": "define.define_coordinate_system",
+        "keyword_type": "DEFINE",
+        "keyword_subtype": "COORDINATE_SYSTEM",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "cid",
+        "link_type_name": "DEFINE_COORDINATE_SYSTEM",
+    }
+    link_data.append(define_coordinate_system_link_data)
+
+
+def _add_define_vector_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for DEFINE_VECTOR keywords."""
+    define_vector_link_data = {
+        "classname": "DefineVector",
+        "modulename": "define.define_vector",
+        "keyword_type": "DEFINE",
+        "keyword_subtype": "VECTOR",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "vid",
+        "link_type_name": "DEFINE_VECTOR",
+    }
+    link_data.append(define_vector_link_data)
+
+
+def _add_element_beam_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for ELEMENT_BEAM keywords."""
+    element_beam_link_data = {
+        "classname": "KeywordBase",
+        "modulename": None,
+        "keyword_type": "ELEMENT",
+        "keyword_subtype": "BEAM",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "eid",
+        "link_type_name": "ELEMENT_BEAM",
+        "is_polymorphic": True,
+        "is_table_lookup": True,
+        "target_table_attr": "elements",
+    }
+    link_data.append(element_beam_link_data)
+
+
+def _add_element_shell_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for ELEMENT_SHELL keywords."""
+    element_shell_link_data = {
+        "classname": "KeywordBase",
+        "modulename": None,
+        "keyword_type": "ELEMENT",
+        "keyword_subtype": "SHELL",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "eid",
+        "link_type_name": "ELEMENT_SHELL",
+        "is_polymorphic": True,
+        "is_table_lookup": True,
+        "target_table_attr": "elements",
+    }
+    link_data.append(element_shell_link_data)
+
+
+def _add_element_solid_link_data(link_data: typing.List[typing.Dict], link_fields: typing.List[LinkFieldInfo]):
+    """Add link data for ELEMENT_SOLID keywords."""
+    element_solid_link_data = {
+        "classname": "KeywordBase",
+        "modulename": None,
+        "keyword_type": "ELEMENT",
+        "keyword_subtype": "SOLID",
+        "fields": _convert_link_fields_to_template_format(link_fields),
+        "linkid": "eid",
+        "link_type_name": "ELEMENT_SOLID",
+        "is_polymorphic": True,
+        "is_table_lookup": True,
+        "target_table_attr": "elements",
+    }
+    link_data.append(element_solid_link_data)
 
 
 def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
-    links = {LinkIdentity.DEFINE_TRANSFORMATION: []}
+    links = {
+        LinkIdentity.NODE: [],
+        LinkIdentity.ELEMENT_BEAM: [],
+        LinkIdentity.ELEMENT_SHELL: [],
+        LinkIdentity.ELEMENT_SOLID: [],
+        LinkIdentity.MAT: [],
+        LinkIdentity.SECTION: [],
+        LinkIdentity.HOURGLASS: [],
+        LinkIdentity.DEFINE_CURVE: [],
+        LinkIdentity.DEFINE_BOX: [],
+        LinkIdentity.DEFINE_COORDINATE_SYSTEM: [],
+        LinkIdentity.DEFINE_VECTOR: [],
+        LinkIdentity.SET_BEAM: [],
+        LinkIdentity.SET_DISCRETE: [],
+        LinkIdentity.SET_NODE: [],
+        LinkIdentity.SET_PART: [],
+        LinkIdentity.SET_SEGMENT: [],
+        LinkIdentity.SET_SOLID: [],
+        LinkIdentity.DEFINE_TRANSFORMATION: [],
+        LinkIdentity.PART: [],
+        LinkIdentity.DEFINE_CURVE_OR_TABLE: [],
+    }
     has_link = False
     for card in kwd_data.cards:
+        # Check if this is a SeriesCard (variable card)
+        variable_meta = card.variable if isinstance(card, Card) else card.get("variable")
+        is_series = variable_meta is not None
+
+        if is_series:
+            # For SeriesCard, check if ANY field has a link
+            # All fields should have the same link type (e.g., all ELEMENT_BEAM)
+            fields = card.get_all_fields() if isinstance(card, Card) else card.get("fields", [])
+            link_type = None
+            for field in fields:
+                if "link" in field:
+                    link_type = field["link"]
+                    break
+
+            if link_type and link_type in links.keys():
+                has_link = True
+                series_name = variable_meta.name if hasattr(variable_meta, "name") else variable_meta.get("name")
+                # Create ONE field info for the SeriesCard itself
+                field_info = LinkFieldInfo(
+                    name=series_name,  # e.g., "element"
+                    is_series=True,
+                    is_table=False,
+                    is_table_group=False,
+                    table_name=None,
+                    key_field=None,
+                )
+                links[link_type].append(field_info)
+            continue  # Skip processing individual fields
+
+        # Check if this is a table_group card (TableCardGroup)
+        is_table_group = card.table_group if isinstance(card, Card) else card.get("table_group", False)
+        table_name = card.overall_name if isinstance(card, Card) else card.get("overall_name")
+        key_field = card.key_field if isinstance(card, Card) else card.get("key_field")
+
+        # Check if this is a table card (TableCard - simple repeating card)
+        table_meta = card.table if isinstance(card, Card) else card.get("table")
+        is_table = table_meta is not None
+        if is_table and not table_name:
+            # For TableCard, table name comes from the metadata
+            table_name = table_meta.name if hasattr(table_meta, "name") else table_meta.get("name")
+
         # Use card.get_all_fields() instead of _get_fields helper
         fields = card.get_all_fields() if isinstance(card, Card) else card.get("fields", [])
         for field in fields:
@@ -286,7 +697,17 @@ def _get_links(kwd_data: KeywordData) -> typing.Optional[typing.Dict]:
             if link not in links.keys():
                 continue
             has_link = True
-            links[link].append(field["name"])
+            # Use property_name for Python-safe identifiers (handles special chars like /)
+            prop_name = field.get("property_name") or field["name"]
+            field_info = LinkFieldInfo(
+                name=prop_name,
+                is_table_group=is_table_group,
+                is_table=is_table,
+                is_series=False,
+                table_name=table_name,
+                key_field=key_field,
+            )
+            links[link].append(field_info)
     if not has_link:
         return None
     return links
@@ -301,8 +722,67 @@ def _add_links(kwd_data: KeywordData) -> None:
     link_data = []
     link_count = 0
     for link_type, link_fields in links.items():
-        if link_type == LinkIdentity.DEFINE_TRANSFORMATION:
+        if not link_fields:
+            continue
+        if link_type == LinkIdentity.NODE:
+            _add_node_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.ELEMENT_BEAM:
+            _add_element_beam_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.ELEMENT_SHELL:
+            _add_element_shell_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.ELEMENT_SOLID:
+            _add_element_solid_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.MAT:
+            _add_mat_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.SECTION:
+            _add_section_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.HOURGLASS:
+            _add_hourglass_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.DEFINE_TRANSFORMATION:
             _add_define_transform_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.DEFINE_CURVE:
+            _add_define_curve_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.DEFINE_BOX:
+            _add_define_box_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.DEFINE_COORDINATE_SYSTEM:
+            _add_define_coordinate_system_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.DEFINE_VECTOR:
+            _add_define_vector_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.PART:
+            _add_part_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.DEFINE_CURVE_OR_TABLE:
+            _add_define_curve_or_table_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.SET_BEAM:
+            _add_set_beam_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.SET_DISCRETE:
+            _add_set_discrete_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.SET_NODE:
+            _add_set_node_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.SET_PART:
+            _add_set_part_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.SET_SEGMENT:
+            _add_set_segment_link_data(link_data, link_fields)
+            link_count += len(link_fields)
+        elif link_type == LinkIdentity.SET_SOLID:
+            _add_set_solid_link_data(link_data, link_fields)
             link_count += len(link_fields)
     kwd_data.links = link_data
     logger.debug(f"Added {link_count} links to keyword data")
@@ -350,44 +830,36 @@ def _get_keyword_data(
     return kwd_data
 
 
-def _get_base_variable(classname: str, keyword: str, keyword_options: typing.Dict) -> typing.Dict:
-    source_keyword = _get_source_keyword(keyword, keyword_options)
-    generation_settings = keyword_options.get("generation-options", {})
-    initial_labels = keyword_options.get("labels", None)
-    keyword_data = _get_keyword_data(keyword, source_keyword, generation_settings, initial_labels=initial_labels)
-    # Set classname directly on dataclass instance
-    keyword_data.classname = classname
-    alias = data_model.get_alias(keyword)
-    alias_subkeyword = None
-    if alias:
-        alias_tokens = alias.split("_")
-        alias = get_classname(fix_keyword(alias))
-        alias_subkeyword = "_".join(alias_tokens[1:])
-    data = {
-        "keyword_data": keyword_data,  # Now a KeywordData instance, not dict
-        "alias": alias,
-        "alias_subkeyword": alias_subkeyword,
-    }
-    return data
-
-
 def generate_class(env: Environment, output_manager: OutputManager, item: typing.Dict):
+    """
+    Generate a Python keyword class from manifest configuration.
+
+    Args:
+        env: Jinja2 environment with loaded templates
+        output_manager: Handles writing output files to appropriate directories
+        item: Keyword configuration dict with 'name' and 'options' keys
+
+    Returns
+    -------
+        Tuple of (classname, filename_stem) for the generated class
+    """
     keyword = item["name"]
-    fixed_keyword = fix_keyword(keyword)
-    classname = item["options"].get("classname", get_classname(fixed_keyword))
+    names = KeywordNames.from_keyword(keyword)
+    classname = item["options"].get("classname", names.classname)
     logger.debug(f"Starting generation for class '{classname}' from keyword '{keyword}'")
     try:
-        base_variable = _get_base_variable(classname, keyword, item["options"])
-        jinja_variable = _get_jinja_variable(base_variable)
+        # Create structured template context
+        license = get_license_header()
+        context = _create_template_context(classname, keyword, item["options"], license)
 
         # Determine domain and create domain subdirectory
         domain = get_keyword_domain(keyword)
-        filename = fixed_keyword.lower() + ".py"
+        filename = names.filename + ".py"
         logger.debug(f"Rendering template for {classname} in domain '{domain}'")
-        content = env.get_template("keyword.j2").render(**jinja_variable)
+        content = env.get_template("keyword.j2").render(**context.to_dict())
         output_manager.write_auto_file(domain, filename, content)
         logger.debug(f"Successfully generated class '{classname}'")
-        return classname, fixed_keyword.lower()
+        return classname, names.filename
     except Exception as e:
         logger.error(f"Failure in generating {classname}", exc_info=True)
         raise e

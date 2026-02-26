@@ -23,7 +23,27 @@
 """Module providing the IgaVolumeXyz class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_IGAVOLUMEXYZ_CARD0 = (
+    FieldSchema("vid", int, 0, 10, None),
+    FieldSchema("nid", int, 10, 10, None),
+    FieldSchema("psid", int, 20, 10, None),
+    FieldSchema("esid", int, 30, 10, None),
+    FieldSchema("fsid", int, 40, 10, None),
+)
+
+_IGAVOLUMEXYZ_CARD1 = (
+    FieldSchema("brid1", int, 0, 10, None),
+    FieldSchema("brid2", int, 10, 10, None),
+    FieldSchema("brid3", int, 20, 10, None),
+    FieldSchema("brid4", int, 30, 10, None),
+    FieldSchema("brid5", int, 40, 10, None),
+    FieldSchema("brid6", int, 50, 10, None),
+    FieldSchema("brid7", int, 60, 10, None),
+    FieldSchema("brid8", int, 70, 10, None),
+)
 
 class IgaVolumeXyz(KeywordBase):
     """DYNA IGA_VOLUME_XYZ keyword"""
@@ -35,107 +55,13 @@ class IgaVolumeXyz(KeywordBase):
         """Initialize the IgaVolumeXyz class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "vid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "esid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fsid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "brid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "brid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "brid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "brid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "brid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "brid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "brid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "brid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _IGAVOLUMEXYZ_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _IGAVOLUMEXYZ_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def vid(self) -> typing.Optional[int]:
         """Get or set the Parametric volume ID. A unique number must be chosen.

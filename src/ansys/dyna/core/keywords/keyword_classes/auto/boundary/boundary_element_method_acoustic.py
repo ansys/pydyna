@@ -23,7 +23,42 @@
 """Module providing the BoundaryElementMethodAcoustic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYELEMENTMETHODACOUSTIC_CARD0 = (
+    FieldSchema("ro", float, 0, 10, None),
+    FieldSchema("c", float, 10, 10, None),
+    FieldSchema("fmin", float, 20, 10, None),
+    FieldSchema("fmax", float, 30, 10, None),
+    FieldSchema("nfreq", int, 40, 10, None),
+    FieldSchema("dt_out", int, 50, 10, None),
+    FieldSchema("t_start", float, 60, 10, None),
+    FieldSchema("pref", float, 70, 10, None),
+)
+
+_BOUNDARYELEMENTMETHODACOUSTIC_CARD1 = (
+    FieldSchema("nsid_ext", int, 0, 10, None),
+    FieldSchema("type_ext", int, 10, 10, 1),
+    FieldSchema("nsid_int", int, 20, 10, None),
+    FieldSchema("type_int", int, 30, 10, 1),
+    FieldSchema("fft_win", int, 40, 10, 0),
+)
+
+_BOUNDARYELEMENTMETHODACOUSTIC_CARD2 = (
+    FieldSchema("method", int, 0, 10, 0),
+    FieldSchema("maxit", int, 10, 10, None),
+    FieldSchema("res", float, 20, 10, None),
+    FieldSchema("ndd", int, 30, 10, None),
+)
+
+_BOUNDARYELEMENTMETHODACOUSTIC_CARD3 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("sstype", int, 10, 10, 0),
+    FieldSchema("norm", int, 20, 10, 0),
+    FieldSchema("bem_type", int, 30, 10, None),
+    FieldSchema("restart", int, 40, 10, 0),
+)
 
 class BoundaryElementMethodAcoustic(KeywordBase):
     """DYNA BOUNDARY_ELEMENT_METHOD_ACOUSTIC keyword"""
@@ -35,185 +70,19 @@ class BoundaryElementMethodAcoustic(KeywordBase):
         """Initialize the BoundaryElementMethodAcoustic class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ro",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmin",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmax",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfreq",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt_out",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t_start",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pref",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nsid_ext",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type_ext",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid_int",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type_int",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fft_win",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "method",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxit",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "res",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ndd",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sstype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "norm",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bem_type",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "restart",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYELEMENTMETHODACOUSTIC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYELEMENTMETHODACOUSTIC_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYELEMENTMETHODACOUSTIC_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BOUNDARYELEMENTMETHODACOUSTIC_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def ro(self) -> typing.Optional[float]:
         """Get or set the Fluid Density

@@ -35,6 +35,7 @@ from typing import Any, Dict, List, Optional
 import keyword_generation.data_model as gen
 from keyword_generation.data_model.keyword_data import Card, KeywordData
 from keyword_generation.data_model.label_registry import LabelRegistry
+from keyword_generation.handlers.base_settings import parse_settings_list
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
@@ -45,17 +46,20 @@ logger = logging.getLogger(__name__)
 class TableCardGroupSettings:
     """Configuration for grouping multiple cards into a table.
 
-    Attributes:
+    Attributes
+    ----------
         refs: List of label references for cards to group
         property_name: Name of the table card group property
         length_func: Optional function to compute group count
         active_func: Optional function to determine if group is active
+        key_field: Key field name for table-aware link properties (e.g., 'pid' for Part)
     """
 
     refs: List[str]
     property_name: str
     length_func: Optional[str] = None
     active_func: Optional[str] = None
+    key_field: Optional[str] = None
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "TableCardGroupSettings":
@@ -64,6 +68,7 @@ class TableCardGroupSettings:
             property_name=data["overall-name"],
             length_func=data.get("length-func"),
             active_func=data.get("active-func"),
+            key_field=data.get("key-field"),
         )
 
     def resolve_indices(self, registry: LabelRegistry, cards: List[Any]) -> List[int]:
@@ -87,13 +92,16 @@ class TableCardGroupSettings:
                 "overall-name": {"type": "string", "description": "Name of the table card group"},
                 "length-func": {"type": "string", "description": "Function to compute group count"},
                 "active-func": {"type": "string", "description": "Function to determine if group is active"},
+                "key-field": {
+                    "type": "string",
+                    "description": "Key field name for table-aware link properties (e.g., 'pid' for Part)",
+                },
             },
             "required": ["refs", "overall-name"],
         },
     },
     output_description=(
-        "Sets kwd_data['table_group']=True, adds card insertion with table card group, "
-        "marks source cards for removal"
+        "Sets kwd_data['table_group']=True, adds card insertion with table card group, marks source cards for removal"
     ),
 )
 class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHandler):
@@ -132,13 +140,6 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
         - Marks all source cards with "mark_for_removal" = 1
     """
 
-    @classmethod
-    def _parse_settings(
-        cls, settings: typing.List[typing.Dict[str, typing.Any]]
-    ) -> typing.List[TableCardGroupSettings]:
-        """Parse dict settings into typed TableCardGroupSettings."""
-        return [TableCardGroupSettings.from_dict(s) for s in settings]
-
     def handle(
         self,
         kwd_data: KeywordData,
@@ -151,14 +152,15 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
             kwd_data: Complete keyword data dictionary
             settings: List of card group definitions
 
-        Raises:
+        Raises
+        ------
             ValueError: If label_registry is not initialized
         """
         if kwd_data.label_registry is None:
             raise ValueError("table-card-group handler requires label_registry to be initialized")
 
         registry = kwd_data.label_registry
-        typed_settings = self._parse_settings(settings)
+        typed_settings = parse_settings_list(TableCardGroupSettings, settings)
         kwd_data.table_group = True
 
         for card_settings in typed_settings:
@@ -167,6 +169,11 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
             logger.debug(
                 f"table-card-group '{card_settings.property_name}': refs {card_settings.refs} -> indices {indices}"
             )
+
+            # Skip empty refs
+            if not indices:
+                logger.debug(f"table-card-group '{card_settings.property_name}': skipping empty refs")
+                continue
 
             # Collect sub_cards using reference semantics
             sub_cards: List[Card] = []
@@ -184,13 +191,10 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
                 overall_name=card_settings.property_name,
                 length_func=card_settings.length_func or "",
                 active_func=card_settings.active_func or "",
+                key_field=card_settings.key_field,
             )
 
             # Mark all source cards for removal and insert group at minimum position
             insertion = gen.Insertion(min(indices), "", group)
             kwd_data.card_insertions.append(insertion)
             logger.debug(f"Created table card group at position {min(indices)}")
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass

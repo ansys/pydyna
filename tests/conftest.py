@@ -8,10 +8,8 @@ import io
 import pathlib
 
 import pytest
-from ansys.dyna.core.pre.launcher import ServerThread
 from ansys.dyna.core.run import run_dyna
 
-# from ansys.dyna.core.pre.Server.kwserver import *
 
 def resolve_test_file(basename, additional_path=""):
     """Resolves a test file's full path based on the base name and the
@@ -24,17 +22,6 @@ def resolve_test_file(basename, additional_path=""):
         raise FileNotFoundError(f"Unable to locate {basename} at {test_files_path}")
     return filename
 
-def get_server_path():
-    """Get the filepath of server."""
-    path = os.path.dirname(os.path.abspath(__file__))
-    server_path = os.path.join(path, os.pardir, "src", "ansys", "dyna", "core", "pre", "Server")
-    return server_path
-
-
-@pytest.fixture()
-def resolve_server_path():
-    """Get the filepath of outputted files."""
-    return get_server_path()
 
 
 @pytest.fixture()
@@ -146,14 +133,6 @@ def thermal_initialfile():
     return resolve_test_file("test_thermal_stress.k", "initial")
 
 
-@pytest.fixture(scope = "session",autouse=True)
-def Connect_Server():
-    """Connect to the kwserver."""
-    path = get_server_path()
-    threadserver = ServerThread(1,port=50051,ip="127.0.0.1",server_path = path)
-    threadserver.daemon = True
-    threadserver.start()
-
 
 def pytest_collection_modifyitems(config, items):
     keywordexpr = config.option.keyword
@@ -162,8 +141,6 @@ def pytest_collection_modifyitems(config, items):
         return  # command line has a -k or -m, let pytest handle it
     skip_run = pytest.mark.skip(reason="run not selected for pytest run (`pytest -m run`).  Skip by default")
     [item.add_marker(skip_run) for item in items if "run" in item.keywords]
-    skip_viz = pytest.mark.skip(reason="viz not selected for pytest run (`pytest -m viz`).  Skip by default")
-    [item.add_marker(skip_viz) for item in items if "viz" in item.keywords]
 
 
 class DynaRunner:

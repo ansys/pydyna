@@ -23,9 +23,19 @@
 """Module providing the SetBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_SETBEAM_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+)
+
+_SETBEAM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetBeam(KeywordBase):
     """DYNA SET_BEAM keyword"""
@@ -35,49 +45,35 @@ class SetBeam(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "element": LinkType.ELEMENT_BEAM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetBeam class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _SETBEAM_CARD0,
+                **kwargs,
+            ),            SeriesCard(
                 "element",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("element")),
-            OptionCardSet(
+                data = kwargs.get("element")),            OptionCardSet(
                 option_spec = SetBeam.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETBEAM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Beam element set ID.
@@ -111,4 +107,13 @@ class SetBeam(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def element_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all ELEMENT keywords for element, keyed by element ID."""
+        return self._get_links_from_series("ELEMENT", "eid", "element", "elements")
+
+    def get_element_link(self, element_id: int) -> typing.Optional[KeywordBase]:
+        """Get the ELEMENT keyword containing the given element_id."""
+        return self._get_link_by_attr("ELEMENT", "eid", element_id, "elements")
 

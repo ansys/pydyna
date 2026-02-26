@@ -23,7 +23,24 @@
 """Module providing the ElementDirectMatrixInputBinary class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ELEMENTDIRECTMATRIXINPUTBINARY_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("ifrmt", int, 10, 10, None),
+)
+
+_ELEMENTDIRECTMATRIXINPUTBINARY_CARD1 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
+
+_ELEMENTDIRECTMATRIXINPUTBINARY_CARD2 = (
+    FieldSchema("mass", str, 0, 10, None),
+    FieldSchema("damp", str, 10, 10, None),
+    FieldSchema("stif", str, 20, 10, None),
+    FieldSchema("inert", str, 30, 10, None),
+)
 
 class ElementDirectMatrixInputBinary(KeywordBase):
     """DYNA ELEMENT_DIRECT_MATRIX_INPUT_BINARY keyword"""
@@ -35,69 +52,16 @@ class ElementDirectMatrixInputBinary(KeywordBase):
         """Initialize the ElementDirectMatrixInputBinary class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifrmt",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mass",
-                        str,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damp",
-                        str,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stif",
-                        str,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inert",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ELEMENTDIRECTMATRIXINPUTBINARY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTDIRECTMATRIXINPUTBINARY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ELEMENTDIRECTMATRIXINPUTBINARY_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Super element ID.

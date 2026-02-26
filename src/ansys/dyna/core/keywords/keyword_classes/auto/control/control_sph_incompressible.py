@@ -23,7 +23,17 @@
 """Module providing the ControlSphIncompressible class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLSPHINCOMPRESSIBLE_CARD0 = (
+    FieldSchema("ibndp", int, 0, 10, 0),
+    FieldSchema("tavg", float, 10, 10, 0.01),
+    FieldSchema("tmax", float, 20, 10, 1e+20),
+    FieldSchema("rol", float, 30, 10, 1e+20),
+    FieldSchema("ihtc", int, 40, 10, 0),
+    FieldSchema("imat", int, 50, 10, 0),
+)
 
 class ControlSphIncompressible(KeywordBase):
     """DYNA CONTROL_SPH_INCOMPRESSIBLE keyword"""
@@ -35,60 +45,10 @@ class ControlSphIncompressible(KeywordBase):
         """Initialize the ControlSphIncompressible class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ibndp",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tavg",
-                        float,
-                        10,
-                        10,
-                        1.0E-2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tmax",
-                        float,
-                        20,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rol",
-                        float,
-                        30,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ihtc",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "imat",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLSPHINCOMPRESSIBLE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ibndp(self) -> int:
         """Get or set the Pressure treatment of boundary particles:

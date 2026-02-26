@@ -19,12 +19,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Module for handling the *INCLUDE card."""
 
 import typing
 
 from ansys.dyna.core.lib.card import Card, Field
+from ansys.dyna.core.lib.field_schema import CardSchema, FieldSchema
 from ansys.dyna.core.lib.field_writer import write_comment_line
-from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.format_type import card_format, format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.kwd_line_formatter import read_line
 
@@ -34,11 +36,16 @@ from ansys.dyna.core.lib.kwd_line_formatter import read_line
 
 class IncludeCard(Card):
     def __init__(self, **kwargs):
-        super().__init__(
-            [
-                Field("filename", str, 0, 80, kwargs.get("filename")),
-            ],
-        )
+        # Inline Card initialization (avoid deprecated constructor path)
+        fields = [Field("filename", str, 0, 80, kwargs.get("filename"))]
+        field_schemas = tuple(FieldSchema.from_field(f) for f in fields)
+        name_to_index = {f.name: i for i, f in enumerate(fields)}
+        self._schema = CardSchema(field_schemas, name_to_index)
+        self._signature = id(self._schema)
+        self._values = [f.value for f in fields]
+        self._active_func = None
+        self._format_type = format_type.default
+        self._card_format = card_format.fixed
 
     def _read_line(self, buf: typing.TextIO) -> str:
         line, to_exit = read_line(buf)
@@ -68,7 +75,10 @@ class IncludeCard(Card):
         format: typing.Optional[format_type] = None,
         buf: typing.Optional[typing.TextIO] = None,
         comment: typing.Optional[bool] = True,
+        **kwargs,
     ) -> typing.Union[str, None]:
+        """Writes the card data to an output text buffer or returns it as a string."""
+        # kwargs may include retain_parameters, parameter_set, etc. - not used by IncludeCard
         if format == None:
             format = self._format_type
 
@@ -81,7 +91,7 @@ class IncludeCard(Card):
                 if len(filename) > 236:
                     raise Exception("Maximum filename length is 236 characters")
                 if len(filename) <= 80:
-                    right_justified_filename = f"{{0:<80}}".format(filename)
+                    right_justified_filename = "{0:<80}".format(filename)
                     buf.write(right_justified_filename)
                 else:
                     buf.write(filename[0:78])

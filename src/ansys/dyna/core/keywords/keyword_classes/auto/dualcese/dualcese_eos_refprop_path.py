@@ -23,7 +23,12 @@
 """Module providing the DualceseEosRefpropPath class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEEOSREFPROPPATH_CARD0 = (
+    FieldSchema("path", str, 0, 80, None),
+)
 
 class DualceseEosRefpropPath(KeywordBase):
     """DYNA DUALCESE_EOS_REFPROP_PATH keyword"""
@@ -35,19 +40,10 @@ class DualceseEosRefpropPath(KeywordBase):
         """Initialize the DualceseEosRefpropPath class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "path",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSREFPROPPATH_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def path(self) -> typing.Optional[str]:
         """Get or set the Path giving the directory where the REFPROP data is installed

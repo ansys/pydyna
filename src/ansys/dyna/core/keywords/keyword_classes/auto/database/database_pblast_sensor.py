@@ -23,7 +23,20 @@
 """Module providing the DatabasePblastSensor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEPBLASTSENSOR_CARD0 = (
+    FieldSchema("dt", float, 0, 10, 0.0),
+    FieldSchema("binary", int, 10, 10, 3),
+)
+
+_DATABASEPBLASTSENSOR_CARD1 = (
+    FieldSchema("id", int, 0, 10, 0),
+    FieldSchema("itype", int, 10, 10, 0),
+    FieldSchema("offset", float, 20, 10, 0.0),
+    FieldSchema("radius", float, 30, 10, 0.0),
+)
 
 class DatabasePblastSensor(KeywordBase):
     """DYNA DATABASE_PBLAST_SENSOR keyword"""
@@ -35,64 +48,13 @@ class DatabasePblastSensor(KeywordBase):
         """Initialize the DatabasePblastSensor class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "binary",
-                        int,
-                        10,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offset",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "radius",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEPBLASTSENSOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEPBLASTSENSOR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def dt(self) -> float:
         """Get or set the Output interval.

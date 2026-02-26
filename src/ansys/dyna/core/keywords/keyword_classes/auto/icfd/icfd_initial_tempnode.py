@@ -23,7 +23,13 @@
 """Module providing the IcfdInitialTempnode class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDINITIALTEMPNODE_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("temp", float, 10, 10, None),
+)
 
 class IcfdInitialTempnode(KeywordBase):
     """DYNA ICFD_INITIAL_TEMPNODE keyword"""
@@ -35,26 +41,10 @@ class IcfdInitialTempnode(KeywordBase):
         """Initialize the IcfdInitialTempnode class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "temp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDINITIALTEMPNODE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Internal ICFD node ID.

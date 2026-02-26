@@ -23,7 +23,16 @@
 """Module providing the DualceseEosVanDerWaalsGeneralized class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEEOSVANDERWAALSGENERALIZED_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("a", float, 10, 10, None),
+    FieldSchema("b", float, 20, 10, None),
+    FieldSchema("ga", float, 30, 10, None),
+    FieldSchema("bt", float, 40, 10, None),
+)
 
 class DualceseEosVanDerWaalsGeneralized(KeywordBase):
     """DYNA DUALCESE_EOS_VAN_DER_WAALS_GENERALIZED keyword"""
@@ -35,47 +44,10 @@ class DualceseEosVanDerWaalsGeneralized(KeywordBase):
         """Initialize the DualceseEosVanDerWaalsGeneralized class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ga",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bt",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSVANDERWAALSGENERALIZED_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state ID

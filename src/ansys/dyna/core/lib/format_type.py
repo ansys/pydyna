@@ -24,6 +24,22 @@
 
 
 class format_type:  # noqa: N801
+    """Field width format for LS-DYNA keywords.
+
+    Controls whether fields use standard (10-char), long (20-char), or default width.
+    """
+
     default = "s"
     standard = "k"
     long = "y"
+
+
+class card_format:  # noqa: N801
+    """Card serialization format for LS-DYNA keywords.
+
+    Controls whether cards are written in fixed-width or comma-delimited format.
+    LS-DYNA supports both formats, and they can be mixed within a deck (but not within a card).
+    """
+
+    fixed = "fixed"
+    csv = "csv"

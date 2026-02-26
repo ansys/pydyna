@@ -23,7 +23,19 @@
 """Module providing the CeseFsiExclude class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEFSIEXCLUDE_CARD0 = (
+    FieldSchema("pid1", int, 0, 10, None),
+    FieldSchema("pid2", int, 10, 10, None),
+    FieldSchema("pid3", int, 20, 10, None),
+    FieldSchema("pid4", int, 30, 10, None),
+    FieldSchema("pid5", int, 40, 10, None),
+    FieldSchema("pid6", int, 50, 10, None),
+    FieldSchema("pid7", int, 60, 10, None),
+    FieldSchema("pid8", int, 70, 10, None),
+)
 
 class CeseFsiExclude(KeywordBase):
     """DYNA CESE_FSI_EXCLUDE keyword"""
@@ -35,68 +47,10 @@ class CeseFsiExclude(KeywordBase):
         """Initialize the CeseFsiExclude class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEFSIEXCLUDE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid1(self) -> typing.Optional[int]:
         """Get or set the IDs of mechanics parts that will be excluded from the FSI interaction calculation with the CESE solver.

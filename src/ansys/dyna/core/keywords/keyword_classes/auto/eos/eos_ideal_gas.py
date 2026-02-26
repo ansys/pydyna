@@ -23,7 +23,23 @@
 """Module providing the EosIdealGas class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EOSIDEALGAS_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("cv0", float, 10, 10, None),
+    FieldSchema("cp0", float, 20, 10, None),
+    FieldSchema("cl", float, 30, 10, None),
+    FieldSchema("cq", float, 40, 10, None),
+    FieldSchema("t0", float, 50, 10, None),
+    FieldSchema("v0", float, 60, 10, None),
+    FieldSchema("vc0", float, 70, 10, None),
+)
+
+_EOSIDEALGAS_CARD1 = (
+    FieldSchema("adiab", float, 0, 10, None),
+)
 
 class EosIdealGas(KeywordBase):
     """DYNA EOS_IDEAL_GAS keyword"""
@@ -35,79 +51,13 @@ class EosIdealGas(KeywordBase):
         """Initialize the EosIdealGas class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cl",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cq",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t0",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vc0",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "adiab",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EOSIDEALGAS_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EOSIDEALGAS_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state label

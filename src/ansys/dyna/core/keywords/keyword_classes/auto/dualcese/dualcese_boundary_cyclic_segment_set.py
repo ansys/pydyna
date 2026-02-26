@@ -23,7 +23,14 @@
 """Module providing the DualceseBoundaryCyclicSegmentSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEBOUNDARYCYCLICSEGMENTSET_CARD0 = (
+    FieldSchema("ssid1", int, 0, 10, None),
+    FieldSchema("ssid2", int, 0, 10, None),
+    FieldSchema("cyctyp", int, 20, 10, 0),
+)
 
 class DualceseBoundaryCyclicSegmentSet(KeywordBase):
     """DYNA DUALCESE_BOUNDARY_CYCLIC_SEGMENT_SET keyword"""
@@ -35,34 +42,10 @@ class DualceseBoundaryCyclicSegmentSet(KeywordBase):
         """Initialize the DualceseBoundaryCyclicSegmentSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid2",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cyctyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYCYCLICSEGMENTSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid1(self) -> typing.Optional[int]:
         """Get or set the Segment set ID created with *DUALCESE_SEGMENTSET

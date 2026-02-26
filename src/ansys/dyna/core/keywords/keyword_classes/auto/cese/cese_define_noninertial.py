@@ -23,7 +23,23 @@
 """Module providing the CeseDefineNoninertial class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEDEFINENONINERTIAL_CARD0 = (
+    FieldSchema("freq", float, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, 0),
+    FieldSchema("pid", int, 20, 10, None),
+    FieldSchema("nx", float, 30, 10, None),
+    FieldSchema("ny", float, 40, 10, None),
+    FieldSchema("nz", float, 50, 10, None),
+)
+
+_CESEDEFINENONINERTIAL_CARD1 = (
+    FieldSchema("l", float, 0, 10, None),
+    FieldSchema("r", float, 10, 10, None),
+    FieldSchema("relv", int, 20, 10, 0),
+)
 
 class CeseDefineNoninertial(KeywordBase):
     """DYNA CESE_DEFINE_NONINERTIAL keyword"""
@@ -35,81 +51,13 @@ class CeseDefineNoninertial(KeywordBase):
         """Initialize the CeseDefineNoninertial class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "freq",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nx",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ny",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nz",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "l",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "relv",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEDEFINENONINERTIAL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CESEDEFINENONINERTIAL_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def freq(self) -> typing.Optional[float]:
         """Get or set the Frequency of rotation.

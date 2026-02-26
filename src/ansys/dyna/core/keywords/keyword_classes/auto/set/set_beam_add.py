@@ -23,9 +23,19 @@
 """Module providing the SetBeamAdd class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_SETBEAMADD_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+)
+
+_SETBEAMADD_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetBeamAdd(KeywordBase):
     """DYNA SET_BEAM_ADD keyword"""
@@ -35,49 +45,35 @@ class SetBeamAdd(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "beams": LinkType.SET_BEAM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetBeamAdd class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _SETBEAMADD_CARD0,
+                **kwargs,
+            ),            SeriesCard(
                 "beams",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("beams")),
-            OptionCardSet(
+                data = kwargs.get("beams")),            OptionCardSet(
                 option_spec = SetBeamAdd.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETBEAMADD_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set ID of new beam set. All beam sets should have a unique set ID.
@@ -111,4 +107,14 @@ class SetBeamAdd(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def beams_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SET_BEAM_* keyword for beams."""
+        return self._get_set_link("BEAM", self.beams)
+
+    @beams_link.setter
+    def beams_link(self, value: KeywordBase) -> None:
+        """Set the SET_BEAM_* keyword for beams."""
+        self.beams = value.sid
 

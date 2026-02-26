@@ -23,7 +23,19 @@
 """Module providing the IcfdBoundaryPrescribedVel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDBOUNDARYPRESCRIBEDVEL_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("dof", int, 10, 10, 1),
+    FieldSchema("vad", int, 20, 10, 1),
+    FieldSchema("lcid", int, 30, 10, None),
+    FieldSchema("sf", float, 40, 10, 1.0),
+    FieldSchema("vid", int, 50, 10, None),
+    FieldSchema("death", float, 60, 10, 1e+28),
+    FieldSchema("birth", float, 70, 10, 0.0),
+)
 
 class IcfdBoundaryPrescribedVel(KeywordBase):
     """DYNA ICFD_BOUNDARY_PRESCRIBED_VEL keyword"""
@@ -35,73 +47,10 @@ class IcfdBoundaryPrescribedVel(KeywordBase):
         """Initialize the IcfdBoundaryPrescribedVel class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dof",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vad",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        60,
-                        10,
-                        1.E+28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDBOUNDARYPRESCRIBEDVEL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the PID for a fluid surface.

@@ -26,8 +26,12 @@ from ansys.dyna.core import keywords as kwd
 
 
 class Transform:
+    """Transform base class."""
+
     def __init__(self, xform: kwd.IncludeTransform):
+        """Transform base class initializer."""
         self._xform: kwd.IncludeTransform = xform
 
     def transform(self, keyword) -> None:
+        """Transform the given keyword."""
         raise Exception("Implementation required for transform")

@@ -23,7 +23,17 @@
 """Module providing the InterfaceBlanksizeSymmetricPlane class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACEBLANKSIZESYMMETRICPLANE_CARD0 = (
+    FieldSchema("x0", float, 0, 10, 0.0),
+    FieldSchema("y0", float, 10, 10, 0.0),
+    FieldSchema("z0", float, 20, 10, 0.0),
+    FieldSchema("v1", float, 30, 10, 1.0),
+    FieldSchema("v2", float, 40, 10, 0.0),
+    FieldSchema("v3", float, 50, 10, 0.0),
+)
 
 class InterfaceBlanksizeSymmetricPlane(KeywordBase):
     """DYNA INTERFACE_BLANKSIZE_SYMMETRIC_PLANE keyword"""
@@ -35,60 +45,10 @@ class InterfaceBlanksizeSymmetricPlane(KeywordBase):
         """Initialize the InterfaceBlanksizeSymmetricPlane class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "x0",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y0",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z0",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v1",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACEBLANKSIZESYMMETRICPLANE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def x0(self) -> float:
         """Get or set the x, y, z coordinates of a point on the symmetric plane.  See example in  Scale Factor and Symmetric Plane.

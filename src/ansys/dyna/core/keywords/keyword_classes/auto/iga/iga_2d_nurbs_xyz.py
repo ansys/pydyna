@@ -23,7 +23,52 @@
 """Module providing the Iga2DNurbsXyz class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_IGA2DNURBSXYZ_CARD0 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("nr", int, 10, 10, None),
+    FieldSchema("ns", int, 20, 10, None),
+    FieldSchema("pr", int, 30, 10, None),
+    FieldSchema("ps", int, 40, 10, None),
+)
+
+_IGA2DNURBSXYZ_CARD1 = (
+    FieldSchema("unir", int, 0, 10, 0),
+    FieldSchema("unis", int, 10, 10, 0),
+)
+
+_IGA2DNURBSXYZ_CARD2 = (
+    FieldSchema("r1", float, 0, 20, None),
+    FieldSchema("r2", float, 20, 20, None),
+    FieldSchema("r3", float, 40, 20, None),
+    FieldSchema("r4", float, 60, 20, None),
+)
+
+_IGA2DNURBSXYZ_CARD3 = (
+    FieldSchema("rfirst", float, 0, 20, None),
+    FieldSchema("rlast", float, 20, 20, None),
+)
+
+_IGA2DNURBSXYZ_CARD4 = (
+    FieldSchema("s1", float, 0, 20, None),
+    FieldSchema("s2", float, 20, 20, None),
+    FieldSchema("s3", float, 40, 20, None),
+    FieldSchema("s4", float, 60, 20, None),
+)
+
+_IGA2DNURBSXYZ_CARD5 = (
+    FieldSchema("sfirst", float, 0, 20, None),
+    FieldSchema("slast", float, 20, 20, None),
+)
+
+_IGA2DNURBSXYZ_CARD6 = (
+    FieldSchema("x", float, 0, 20, None),
+    FieldSchema("y", float, 20, 20, None),
+    FieldSchema("z", float, 40, 20, None),
+    FieldSchema("wgt", float, 60, 20, 1.0),
+)
 
 class Iga2DNurbsXyz(KeywordBase):
     """DYNA IGA_2D_NURBS_XYZ keyword"""
@@ -35,200 +80,28 @@ class Iga2DNurbsXyz(KeywordBase):
         """Initialize the Iga2DNurbsXyz class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nr",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ns",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ps",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unir",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unis",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r1",
-                        float,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r2",
-                        float,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r3",
-                        float,
-                        40,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r4",
-                        float,
-                        60,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "rfirst",
-                        float,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rlast",
-                        float,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "s1",
-                        float,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s2",
-                        float,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s3",
-                        float,
-                        40,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s4",
-                        float,
-                        60,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sfirst",
-                        float,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "slast",
-                        float,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x",
-                        float,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        40,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wgt",
-                        float,
-                        60,
-                        20,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _IGA2DNURBSXYZ_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _IGA2DNURBSXYZ_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _IGA2DNURBSXYZ_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _IGA2DNURBSXYZ_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _IGA2DNURBSXYZ_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _IGA2DNURBSXYZ_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _IGA2DNURBSXYZ_CARD6,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Physical bivariate NURBS ID. A unique number must be chosen.

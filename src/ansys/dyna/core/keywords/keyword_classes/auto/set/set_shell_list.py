@@ -23,9 +23,23 @@
 """Module providing the SetShellList class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_SETSHELLLIST_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("da1", float, 10, 10, 0.0),
+    FieldSchema("da2", float, 20, 10, 0.0),
+    FieldSchema("da3", float, 30, 10, 0.0),
+    FieldSchema("da4", float, 40, 10, 0.0),
+)
+
+_SETSHELLLIST_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetShellList(KeywordBase):
     """DYNA SET_SHELL_LIST keyword"""
@@ -35,81 +49,35 @@ class SetShellList(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "shells": LinkType.ELEMENT_SHELL,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetShellList class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da4",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _SETSHELLLIST_CARD0,
+                **kwargs,
+            ),            SeriesCard(
                 "shells",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("shells")),
-            OptionCardSet(
+                data = kwargs.get("shells")),            OptionCardSet(
                 option_spec = SetShellList.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETSHELLLIST_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Shell element set ID. All shell sets should have a unique set ID.
@@ -187,4 +155,13 @@ class SetShellList(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def shells_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all ELEMENT keywords for shells, keyed by element ID."""
+        return self._get_links_from_series("ELEMENT", "eid", "shells", "elements")
+
+    def get_shells_link(self, element_id: int) -> typing.Optional[KeywordBase]:
+        """Get the ELEMENT keyword containing the given element_id."""
+        return self._get_link_by_attr("ELEMENT", "eid", element_id, "elements")
 

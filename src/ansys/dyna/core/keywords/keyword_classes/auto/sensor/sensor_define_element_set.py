@@ -23,8 +23,28 @@
 """Module providing the SensorDefineElementSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SENSORDEFINEELEMENTSET_CARD0 = (
+    FieldSchema("sensid", int, 0, 10, None),
+    FieldSchema("etype", str, 10, 10, "BEAM"),
+    FieldSchema("elemid", int, 20, 10, None),
+    FieldSchema("comp", str, 30, 10, "XX"),
+    FieldSchema("ctype", str, 40, 10, "STRAIN"),
+    FieldSchema("layer", str, 50, 10, "BOT"),
+    FieldSchema("sf", float, 60, 10, None),
+    FieldSchema("pwr", float, 70, 10, None),
+)
+
+_SENSORDEFINEELEMENTSET_CARD1 = (
+    FieldSchema("setopt", str, 0, 10, "AVG"),
+)
+
+_SENSORDEFINEELEMENTSET_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SensorDefineElementSet(KeywordBase):
     """DYNA SENSOR_DEFINE_ELEMENT_SET keyword"""
@@ -40,101 +60,23 @@ class SensorDefineElementSet(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sensid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "etype",
-                        str,
-                        10,
-                        10,
-                        "BEAM",
-                        **kwargs,
-                    ),
-                    Field(
-                        "elemid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "comp",
-                        str,
-                        30,
-                        10,
-                        "XX",
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctype",
-                        str,
-                        40,
-                        10,
-                        "STRAIN",
-                        **kwargs,
-                    ),
-                    Field(
-                        "layer",
-                        str,
-                        50,
-                        10,
-                        "BOT",
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pwr",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "setopt",
-                        str,
-                        0,
-                        10,
-                        "AVG",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SENSORDEFINEELEMENTSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SENSORDEFINEELEMENTSET_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SensorDefineElementSet.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORDEFINEELEMENTSET_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sensid(self) -> typing.Optional[int]:
         """Get or set the Sensor ID.

@@ -23,7 +23,15 @@
 """Module providing the DualceseBoundaryNonReflectiveMsurf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEBOUNDARYNONREFLECTIVEMSURF_CARD0 = (
+    FieldSchema("mspid", int, 0, 10, None),
+    FieldSchema("dirx", float, 10, 10, None),
+    FieldSchema("diry", float, 20, 10, None),
+    FieldSchema("dirz", float, 30, 10, None),
+)
 
 class DualceseBoundaryNonReflectiveMsurf(KeywordBase):
     """DYNA DUALCESE_BOUNDARY_NON_REFLECTIVE_MSURF keyword"""
@@ -35,40 +43,10 @@ class DualceseBoundaryNonReflectiveMsurf(KeywordBase):
         """Initialize the DualceseBoundaryNonReflectiveMsurf class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mspid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dirx",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "diry",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dirz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYNONREFLECTIVEMSURF_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mspid(self) -> typing.Optional[int]:
         """Get or set the Mesh surface part ID that is referenced by *MESH_SURFACE_ELEMENT cards

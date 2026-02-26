@@ -23,7 +23,31 @@
 """Module providing the AleUpSwitch class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALEUPSWITCH_CARD0 = (
+    FieldSchema("upid", int, 0, 10, 0),
+    FieldSchema("swtime", float, 10, 10, 1e+16),
+)
+
+_ALEUPSWITCH_CARD1 = (
+    FieldSchema("fsi_id1", int, 0, 10, 0),
+    FieldSchema("fsi_id2", int, 10, 10, 0),
+    FieldSchema("fsi_id3", int, 20, 10, 0),
+    FieldSchema("fsi_id4", int, 30, 10, 0),
+    FieldSchema("fsi_id5", int, 40, 10, 0),
+    FieldSchema("fsi_id6", int, 50, 10, 0),
+    FieldSchema("fsi_id7", int, 60, 10, 0),
+    FieldSchema("fsi_id8", int, 70, 10, 0),
+)
+
+_ALEUPSWITCH_CARD2 = (
+    FieldSchema("sid", int, 0, 10, 0),
+    FieldSchema("sidtype", int, 10, 10, 0),
+    FieldSchema("mmgair", int, 20, 10, 0),
+    FieldSchema("mmggas", int, 30, 10, 0),
+)
 
 class AleUpSwitch(KeywordBase):
     """DYNA ALE_UP_SWITCH keyword"""
@@ -35,132 +59,16 @@ class AleUpSwitch(KeywordBase):
         """Initialize the AleUpSwitch class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "upid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swtime",
-                        float,
-                        10,
-                        10,
-                        1.0e+16,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fsi_id1",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fsi_id2",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fsi_id3",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fsi_id4",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fsi_id5",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fsi_id6",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fsi_id7",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fsi_id8",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sidtype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmgair",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmggas",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEUPSWITCH_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEUPSWITCH_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEUPSWITCH_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def upid(self) -> int:
         """Get or set the An ID defines a corresponding *AIRBAG_HYBRID_ID card for use in

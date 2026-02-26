@@ -23,7 +23,27 @@
 """Module providing the InitialStressTshell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALSTRESSTSHELL_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("nplane", int, 10, 10, None),
+    FieldSchema("nthick", int, 20, 10, None),
+    FieldSchema("nhisv", int, 30, 10, None),
+    FieldSchema("large", int, 40, 10, 0),
+)
+
+_INITIALSTRESSTSHELL_CARD1 = (
+    FieldSchema("t", float, 0, 10, None),
+    FieldSchema("sigxx", float, 10, 10, 0.0),
+    FieldSchema("sigyy", float, 20, 10, 0.0),
+    FieldSchema("sigzz", float, 30, 10, 0.0),
+    FieldSchema("sigxy", float, 40, 10, 0.0),
+    FieldSchema("sigyz", float, 50, 10, 0.0),
+    FieldSchema("sigzx", float, 60, 10, 0.0),
+    FieldSchema("eps", float, 70, 10, 0.0),
+)
 
 class InitialStressTshell(KeywordBase):
     """DYNA INITIAL_STRESS_TSHELL keyword"""
@@ -35,115 +55,13 @@ class InitialStressTshell(KeywordBase):
         """Initialize the InitialStressTshell class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nplane",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nthick",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "large",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "t",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigxx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigyy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigzz",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigxy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigyz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigzx",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSTSHELL_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSTSHELL_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the tShell element ID.

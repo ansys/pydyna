@@ -23,7 +23,28 @@
 """Module providing the Case class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CASE_CARD0 = (
+    FieldSchema("caseid", int, 0, 10, None),
+    FieldSchema("jobid", str, 10, 70, None),
+)
+
+_CASE_CARD1 = (
+    FieldSchema("commands", str, 0, 80, None),
+)
+
+_CASE_CARD2 = (
+    FieldSchema("scid1", int, 0, 10, None),
+    FieldSchema("scid2", int, 10, 10, None),
+    FieldSchema("scid3", int, 20, 10, None),
+    FieldSchema("scid4", int, 30, 10, None),
+    FieldSchema("scid5", int, 40, 10, None),
+    FieldSchema("scid6", int, 50, 10, None),
+    FieldSchema("scid7", int, 60, 10, None),
+    FieldSchema("scid8", int, 70, 10, None),
+)
 
 class Case(KeywordBase):
     """DYNA CASE keyword"""
@@ -35,97 +56,16 @@ class Case(KeywordBase):
         """Initialize the Case class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "caseid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "jobid",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "commands",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "scid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "scid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CASE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CASE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CASE_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def caseid(self) -> typing.Optional[int]:
         """Get or set the Identification number for case.

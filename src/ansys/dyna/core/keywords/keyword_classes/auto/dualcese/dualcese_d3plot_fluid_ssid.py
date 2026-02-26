@@ -23,7 +23,16 @@
 """Module providing the DualceseD3PlotFluidSsid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESED3PLOTFLUIDSSID_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+)
+
+_DUALCESED3PLOTFLUIDSSID_CARD1 = (
+    FieldSchema("flow_var", str, 0, 80, None),
+)
 
 class DualceseD3PlotFluidSsid(KeywordBase):
     """DYNA DUALCESE_D3PLOT_FLUID_SSID keyword"""
@@ -35,30 +44,13 @@ class DualceseD3PlotFluidSsid(KeywordBase):
         """Initialize the DualceseD3PlotFluidSsid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "flow_var",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESED3PLOTFLUIDSSID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESED3PLOTFLUIDSSID_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID created with *DUALCESE_SEGMENTSET

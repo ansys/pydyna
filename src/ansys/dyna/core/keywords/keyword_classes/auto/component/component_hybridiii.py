@@ -23,7 +23,27 @@
 """Module providing the ComponentHybridiii class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_COMPONENTHYBRIDIII_CARD0 = (
+    FieldSchema("did", int, 0, 10, None),
+    FieldSchema("size", int, 10, 10, 1),
+    FieldSchema("units", int, 20, 10, 1),
+    FieldSchema("defrm", int, 30, 10, 1),
+    FieldSchema("vx", float, 40, 10, 0.0),
+    FieldSchema("vy", float, 50, 10, 0.0),
+    FieldSchema("vz", float, 60, 10, 0.0),
+)
+
+_COMPONENTHYBRIDIII_CARD1 = (
+    FieldSchema("hx", float, 0, 10, 0.0),
+    FieldSchema("hy", float, 10, 10, 0.0),
+    FieldSchema("hz", float, 20, 10, 0.0),
+    FieldSchema("rx", float, 30, 10, 0.0),
+    FieldSchema("ry", float, 40, 10, 0.0),
+    FieldSchema("rz", float, 50, 10, 0.0),
+)
 
 class ComponentHybridiii(KeywordBase):
     """DYNA COMPONENT_HYBRIDIII keyword"""
@@ -35,119 +55,13 @@ class ComponentHybridiii(KeywordBase):
         """Initialize the ComponentHybridiii class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "did",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "size",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "units",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "defrm",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ry",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _COMPONENTHYBRIDIII_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _COMPONENTHYBRIDIII_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def did(self) -> typing.Optional[int]:
         """Get or set the Dummy ID. A unique number must be specified.

@@ -23,7 +23,15 @@
 """Module providing the BoundaryElementMethodControl class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYELEMENTMETHODCONTROL_CARD0 = (
+    FieldSchema("lwake", int, 0, 10, 50),
+    FieldSchema("dtbem", float, 10, 10, 0.0),
+    FieldSchema("iupbem", int, 20, 10, 100),
+    FieldSchema("farbem", float, 30, 10, 2.0),
+)
 
 class BoundaryElementMethodControl(KeywordBase):
     """DYNA BOUNDARY_ELEMENT_METHOD_CONTROL keyword"""
@@ -35,44 +43,10 @@ class BoundaryElementMethodControl(KeywordBase):
         """Initialize the BoundaryElementMethodControl class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lwake",
-                        int,
-                        0,
-                        10,
-                        50,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtbem",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iupbem",
-                        int,
-                        20,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                    Field(
-                        "farbem",
-                        float,
-                        30,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYELEMENTMETHODCONTROL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def lwake(self) -> int:
         """Get or set the Number of elements in the wake of lifting surfaces. Wakes must be defined for all lifting surfaces.

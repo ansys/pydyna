@@ -23,7 +23,12 @@
 """Module providing the IcfdControlMonolithic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLMONOLITHIC_CARD0 = (
+    FieldSchema("sid", int, 0, 10, 0),
+)
 
 class IcfdControlMonolithic(KeywordBase):
     """DYNA ICFD_CONTROL_MONOLITHIC keyword"""
@@ -35,20 +40,10 @@ class IcfdControlMonolithic(KeywordBase):
         """Initialize the IcfdControlMonolithic class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLMONOLITHIC_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> int:
         """Get or set the Solver ID:

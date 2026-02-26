@@ -23,7 +23,30 @@
 """Module providing the CeseBoundaryCyclicPartSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEBOUNDARYCYCLICPARTSET_CARD0 = (
+    FieldSchema("surfsid1", int, 0, 10, None),
+    FieldSchema("surfsid2", int, 10, 10, None),
+    FieldSchema("cyctyp", int, 20, 10, 0),
+)
+
+_CESEBOUNDARYCYCLICPARTSET_CARD1 = (
+    FieldSchema("axisx1", float, 0, 10, 0.0),
+    FieldSchema("axisy1", float, 10, 10, 0.0),
+    FieldSchema("axisz1", float, 20, 10, 0.0),
+    FieldSchema("dirx", float, 30, 10, None),
+    FieldSchema("diry", float, 40, 10, None),
+    FieldSchema("dirz", float, 50, 10, None),
+    FieldSchema("rotang", float, 60, 10, None),
+)
+
+_CESEBOUNDARYCYCLICPARTSET_CARD2 = (
+    FieldSchema("transx", float, 0, 10, None),
+    FieldSchema("transy", float, 10, 10, None),
+    FieldSchema("transz", float, 20, 10, None),
+)
 
 class CeseBoundaryCyclicPartSet(KeywordBase):
     """DYNA CESE_BOUNDARY_CYCLIC_PART_SET keyword"""
@@ -35,115 +58,16 @@ class CeseBoundaryCyclicPartSet(KeywordBase):
         """Initialize the CeseBoundaryCyclicPartSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "surfsid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfsid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cyctyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "axisx1",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "axisy1",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "axisz1",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dirx",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "diry",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dirz",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rotang",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "transx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "transy",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "transz",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYCYCLICPARTSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYCYCLICPARTSET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYCYCLICPARTSET_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def surfsid1(self) -> typing.Optional[int]:
         """Get or set the Identifiers of two sets of surface part IDs, each created with a *LSO_ID_SET card, where each surface part ID in each set is referenced in *MESH_SURFACE_ELEMENT cards.

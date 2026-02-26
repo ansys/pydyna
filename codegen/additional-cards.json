@@ -20,6 +20,12 @@
             {"name": "HEADING", "type": "string", "default": null, "position": 10, "width": 70, "help": "Descriptor. We suggest using unique descriptions."}
         ]
     },
+    "ID_TITLE": {
+        "fields": [
+            {"name": "ID", "type": "integer", "default": null, "position": 0, "width": 10, "help": "Optional Rigidwall ID."},
+            {"name": "TITLE", "type": "string", "default": null, "position": 10, "width": 70, "help": "Rigidwall id descriptor. It is suggested that unique descriptions be used."}
+        ]
+    },
     "BLANK": {
         "fields": [
             {"name": "__blank1", "type": "integer", "default": null, "position": 0, "used": false, "width": 10, "help": ""},

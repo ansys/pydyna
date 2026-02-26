@@ -24,6 +24,7 @@
 import dataclasses
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -49,9 +50,7 @@ class ParameterLocal(KeywordBase):
                 10,
                 self.Parameter,
                 None,
-                data = kwargs.get("parameters")),
-        ]
-
+                data = kwargs.get("parameters")),        ]
     @property
     def parameters(self) -> SeriesCard:
         """Parameters.."""

@@ -23,7 +23,11 @@
 """Module providing the InterfaceSpg1 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACESPG1_CARD0 = (
+)
 
 class InterfaceSpg1(KeywordBase):
     """DYNA INTERFACE_SPG_1 keyword"""
@@ -35,9 +39,7 @@ class InterfaceSpg1(KeywordBase):
         """Initialize the InterfaceSpg1 class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACESPG1_CARD0,
+                **kwargs,
+            ),        ]

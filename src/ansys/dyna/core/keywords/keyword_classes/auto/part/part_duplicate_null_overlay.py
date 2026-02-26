@@ -23,7 +23,18 @@
 """Module providing the PartDuplicateNullOverlay class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_PARTDUPLICATENULLOVERLAY_CARD0 = (
+    FieldSchema("ptype", str, 0, 10, "PART"),
+    FieldSchema("typeid", int, 10, 10, None),
+    FieldSchema("idpoff", int, 20, 10, 0),
+    FieldSchema("ideoff", int, 30, 10, 0),
+    FieldSchema("density", float, 40, 10, 0.0),
+    FieldSchema("e", float, 50, 10, 0.0),
+    FieldSchema("pr", float, 60, 10, 0.0),
+)
 
 class PartDuplicateNullOverlay(KeywordBase):
     """DYNA PART_DUPLICATE_NULL_OVERLAY keyword"""
@@ -35,67 +46,10 @@ class PartDuplicateNullOverlay(KeywordBase):
         """Initialize the PartDuplicateNullOverlay class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ptype",
-                        str,
-                        0,
-                        10,
-                        "PART",
-                        **kwargs,
-                    ),
-                    Field(
-                        "typeid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idpoff",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ideoff",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "density",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARTDUPLICATENULLOVERLAY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ptype(self) -> str:
         """Get or set the Set to "PART" to duplicate a single part or "PSET" to duplicate a part set.

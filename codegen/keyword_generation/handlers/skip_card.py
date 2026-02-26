@@ -35,7 +35,7 @@ import logging
 from typing import Any, Dict, List
 
 from keyword_generation.data_model.keyword_data import KeywordData
-from keyword_generation.data_model.label_registry import LabelRegistry
+from keyword_generation.handlers.base_settings import LabelRefSettings, parse_settings_list
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
@@ -43,29 +43,15 @@ logger = logging.getLogger(__name__)
 
 
 @dataclass
-class SkipCardSettings:
-    """Configuration for marking a card for removal."""
+class SkipCardSettings(LabelRefSettings):
+    """Configuration for marking a card for removal.
 
-    ref: str
+    Inherits ref and resolve_index from LabelRefSettings.
+    """
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "SkipCardSettings":
         return cls(ref=data["ref"])
-
-    def resolve_index(self, registry: LabelRegistry, cards: List[Any]) -> int:
-        """Resolve label to a concrete card index.
-
-        Args:
-            registry: LabelRegistry for resolving label references.
-            cards: The cards list to search for the card object.
-
-        Returns:
-            Integer index into kwd_data.cards
-
-        Raises:
-            UndefinedLabelError: If ref label is not found
-        """
-        return registry.resolve_index(self.ref, cards)
 
 
 @handler(
@@ -86,11 +72,6 @@ class SkipCardSettings:
 class SkipCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
     """Marks cards for removal from the generated keyword class."""
 
-    @classmethod
-    def _parse_settings(cls, settings: List[Dict[str, Any]]) -> List[SkipCardSettings]:
-        """Convert dict settings to typed SkipCardSettings instances."""
-        return [SkipCardSettings.from_dict(s) for s in settings]
-
     def handle(self, kwd_data: KeywordData, settings: List[Dict[str, Any]]) -> None:
         """
         Mark specified cards for removal.
@@ -99,7 +80,7 @@ class SkipCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             kwd_data: KeywordData instance containing cards and label_registry
             settings: List of dicts with 'ref' key for label reference
         """
-        typed_settings = self._parse_settings(settings)
+        typed_settings = parse_settings_list(SkipCardSettings, settings)
         registry = kwd_data.label_registry
 
         if registry is None:
@@ -109,7 +90,3 @@ class SkipCardHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             index = setting.resolve_index(registry, kwd_data.cards)
             logger.debug(f"Marking card {index} for removal (ref={setting.ref})")
             kwd_data.cards[index]["mark_for_removal"] = 1
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass

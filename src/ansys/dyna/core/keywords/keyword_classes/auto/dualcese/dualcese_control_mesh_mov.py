@@ -23,7 +23,16 @@
 """Module providing the DualceseControlMeshMov class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESECONTROLMESHMOV_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("ialg", int, 10, 10, 9),
+    FieldSchema("ninter", int, 20, 10, 100),
+    FieldSchema("relerr", float, 30, 10, 0.001),
+    FieldSchema("mxdispr", float, 40, 10, 0.01),
+)
 
 class DualceseControlMeshMov(KeywordBase):
     """DYNA DUALCESE_CONTROL_MESH_MOV keyword"""
@@ -35,51 +44,10 @@ class DualceseControlMeshMov(KeywordBase):
         """Initialize the DualceseControlMeshMov class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ialg",
-                        int,
-                        10,
-                        10,
-                        9,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ninter",
-                        int,
-                        20,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                    Field(
-                        "relerr",
-                        float,
-                        30,
-                        10,
-                        1.0E-3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mxdispr",
-                        float,
-                        40,
-                        10,
-                        1.0E-2,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESECONTROLMESHMOV_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the ID for this mesh motion algorithm

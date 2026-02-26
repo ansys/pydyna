@@ -23,9 +23,23 @@
 """Module providing the SetNodeIntersect class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_SETNODEINTERSECT_CARD0 = (
+    FieldSchema("nsid", int, 0, 10, None),
+    FieldSchema("da1", float, 10, 10, 0.0),
+    FieldSchema("da2", float, 20, 10, 0.0),
+    FieldSchema("da3", float, 30, 10, 0.0),
+    FieldSchema("da4", float, 40, 10, 0.0),
+)
+
+_SETNODEINTERSECT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetNodeIntersect(KeywordBase):
     """DYNA SET_NODE_INTERSECT keyword"""
@@ -35,81 +49,35 @@ class SetNodeIntersect(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "nodes": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetNodeIntersect class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "da4",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _SETNODEINTERSECT_CARD0,
+                **kwargs,
+            ),            SeriesCard(
                 "nodes",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("nodes")),
-            OptionCardSet(
+                data = kwargs.get("nodes")),            OptionCardSet(
                 option_spec = SetNodeIntersect.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETNODEINTERSECT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID. All node sets should have a unique set ID.
@@ -187,4 +155,14 @@ class SetNodeIntersect(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def nodes_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SET_NODE_* keyword for nodes."""
+        return self._get_set_link("NODE", self.nodes)
+
+    @nodes_link.setter
+    def nodes_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for nodes."""
+        self.nodes = value.sid
 

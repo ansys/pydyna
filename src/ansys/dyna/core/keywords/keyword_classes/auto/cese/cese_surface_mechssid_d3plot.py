@@ -23,7 +23,13 @@
 """Module providing the CeseSurfaceMechssidD3Plot class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESESURFACEMECHSSIDD3PLOT_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("dir", str, 10, 70, None),
+)
 
 class CeseSurfaceMechssidD3Plot(KeywordBase):
     """DYNA CESE_SURFACE_MECHSSID_D3PLOT keyword"""
@@ -35,26 +41,10 @@ class CeseSurfaceMechssidD3Plot(KeywordBase):
         """Initialize the CeseSurfaceMechssidD3Plot class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dir",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESESURFACEMECHSSIDD3PLOT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Mechanics solver segment set ID that is in contact with the fluid CESE mesh.

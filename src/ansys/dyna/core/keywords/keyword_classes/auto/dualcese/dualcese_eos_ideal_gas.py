@@ -23,7 +23,15 @@
 """Module providing the DualceseEosIdealGas class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEEOSIDEALGAS_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("cv", float, 10, 10, 717.5),
+    FieldSchema("cp", float, 20, 10, 1004.5),
+    FieldSchema("e0", float, 30, 10, 0.0),
+)
 
 class DualceseEosIdealGas(KeywordBase):
     """DYNA DUALCESE_EOS_IDEAL_GAS keyword"""
@@ -35,43 +43,10 @@ class DualceseEosIdealGas(KeywordBase):
         """Initialize the DualceseEosIdealGas class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv",
-                        float,
-                        10,
-                        10,
-                        717.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp",
-                        float,
-                        20,
-                        10,
-                        1004.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e0",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSIDEALGAS_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state identifier

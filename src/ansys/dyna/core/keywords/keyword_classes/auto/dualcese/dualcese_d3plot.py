@@ -23,7 +23,12 @@
 """Module providing the DualceseD3Plot class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESED3PLOT_CARD0 = (
+    FieldSchema("flow_var", str, 0, 80, None),
+)
 
 class DualceseD3Plot(KeywordBase):
     """DYNA DUALCESE_D3PLOT keyword"""
@@ -35,19 +40,10 @@ class DualceseD3Plot(KeywordBase):
         """Initialize the DualceseD3Plot class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "flow_var",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESED3PLOT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def flow_var(self) -> typing.Optional[str]:
         """Get or set the Name of a flow variable to output to the d3plot file. The currently supported variables are:

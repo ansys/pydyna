@@ -23,7 +23,12 @@
 """Module providing the NodeMergeTolerance class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_NODEMERGETOLERANCE_CARD0 = (
+    FieldSchema("tolr", float, 0, 10, None),
+)
 
 class NodeMergeTolerance(KeywordBase):
     """DYNA NODE_MERGE_TOLERANCE keyword"""
@@ -35,19 +40,10 @@ class NodeMergeTolerance(KeywordBase):
         """Initialize the NodeMergeTolerance class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tolr",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _NODEMERGETOLERANCE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def tolr(self) -> typing.Optional[float]:
         """Get or set the Physical distance used to determine whether to merge a nodal pair of	nearby nodes.

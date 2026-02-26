@@ -23,8 +23,21 @@
 """Module providing the DefineSphVicinitySensor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINESPHVICINITYSENSOR_CARD0 = (
+    FieldSchema("prtclsid", int, 0, 10, None),
+    FieldSchema("surfsid", int, 10, 10, None),
+    FieldSchema("ptype", int, 20, 10, 0),
+    FieldSchema("stype", int, 30, 10, 0),
+    FieldSchema("dist", int, 40, 10, 0),
+)
+
+_DEFINESPHVICINITYSENSOR_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineSphVicinitySensor(KeywordBase):
     """DYNA DEFINE_SPH_VICINITY_SENSOR keyword"""
@@ -40,67 +53,20 @@ class DefineSphVicinitySensor(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "prtclsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "surfsid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dist",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESPHVICINITYSENSOR_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineSphVicinitySensor.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESPHVICINITYSENSOR_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def prtclsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID, node ID, part set ID or part ID Specifiying the checked SPH particles. PTYPE below indicates the ID type specified by PRTCLSID.

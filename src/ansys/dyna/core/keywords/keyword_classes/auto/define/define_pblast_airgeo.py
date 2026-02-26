@@ -23,8 +23,46 @@
 """Module providing the DefinePblastAirgeo class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEPBLASTAIRGEO_CARD0 = (
+    FieldSchema("gid", int, 0, 10, 0),
+    FieldSchema("gtype1", int, 10, 10, 1),
+    FieldSchema("gtype2", int, 20, 10, 1),
+)
+
+_DEFINEPBLASTAIRGEO_CARD1 = (
+    FieldSchema("xa", float, 0, 10, 0.0),
+    FieldSchema("ya", float, 10, 10, 0.0),
+    FieldSchema("za", float, 20, 10, 0.0),
+    FieldSchema("xb", float, 30, 10, 0.0),
+    FieldSchema("yb", float, 40, 10, 0.0),
+    FieldSchema("zb", float, 50, 10, 0.0),
+)
+
+_DEFINEPBLASTAIRGEO_CARD2 = (
+    FieldSchema("x0", float, 0, 10, 0.0),
+    FieldSchema("y0", float, 10, 10, 0.0),
+    FieldSchema("z0", float, 20, 10, 0.0),
+    FieldSchema("g1", float, 30, 10, 0.0),
+    FieldSchema("g2", float, 40, 10, 0.0),
+    FieldSchema("g3", float, 50, 10, 0.0),
+)
+
+_DEFINEPBLASTAIRGEO_CARD3 = (
+    FieldSchema("xc", float, 0, 10, 0.0),
+    FieldSchema("yc", float, 10, 10, 0.0),
+    FieldSchema("zc", float, 20, 10, 0.0),
+    FieldSchema("g4", float, 30, 10, 0.0),
+    FieldSchema("g5", float, 40, 10, 0.0),
+    FieldSchema("g6", float, 50, 10, 0.0),
+)
+
+_DEFINEPBLASTAIRGEO_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefinePblastAirgeo(KeywordBase):
     """DYNA DEFINE_PBLAST_AIRGEO keyword"""
@@ -40,209 +78,29 @@ class DefinePblastAirgeo(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "gid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gtype1",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gtype2",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xa",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ya",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "za",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xb",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yb",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zb",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x0",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y0",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z0",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g1",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g3",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xc",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g4",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g5",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g6",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEPBLASTAIRGEO_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPBLASTAIRGEO_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPBLASTAIRGEO_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEPBLASTAIRGEO_CARD3,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefinePblastAirgeo.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEPBLASTAIRGEO_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def gid(self) -> int:
         """Get or set the ID of a GEOMETRY defining initial air particle domain.

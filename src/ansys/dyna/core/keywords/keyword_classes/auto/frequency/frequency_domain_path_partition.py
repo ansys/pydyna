@@ -23,7 +23,14 @@
 """Module providing the FrequencyDomainPathPartition class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINPATHPARTITION_CARD0 = (
+    FieldSchema("fbeg", float, 0, 10, None),
+    FieldSchema("fend", float, 10, 10, None),
+    FieldSchema("filename", str, 20, 60, None),
+)
 
 class FrequencyDomainPathPartition(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_PATH_PARTITION keyword"""
@@ -35,33 +42,10 @@ class FrequencyDomainPathPartition(KeywordBase):
         """Initialize the FrequencyDomainPathPartition class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "fbeg",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fend",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "filename",
-                        str,
-                        20,
-                        60,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINPATHPARTITION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def fbeg(self) -> typing.Optional[float]:
         """Get or set the Beginning frequency for using this database.

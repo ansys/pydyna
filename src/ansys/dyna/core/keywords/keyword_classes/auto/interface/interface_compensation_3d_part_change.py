@@ -23,7 +23,12 @@
 """Module providing the InterfaceCompensation3DPartChange class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACECOMPENSATION3DPARTCHANGE_CARD0 = (
+    FieldSchema("maxgap", float, 0, 10, None),
+)
 
 class InterfaceCompensation3DPartChange(KeywordBase):
     """DYNA INTERFACE_COMPENSATION_3D_PART_CHANGE keyword"""
@@ -35,19 +40,10 @@ class InterfaceCompensation3DPartChange(KeywordBase):
         """Initialize the InterfaceCompensation3DPartChange class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "maxgap",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACECOMPENSATION3DPARTCHANGE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def maxgap(self) -> typing.Optional[float]:
         """Get or set the Maximum gap between the original part and changed part.

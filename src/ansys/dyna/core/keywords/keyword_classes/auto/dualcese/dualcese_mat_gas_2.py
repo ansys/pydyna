@@ -23,7 +23,17 @@
 """Module providing the DualceseMatGas2 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEMATGAS2_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("mu0", float, 10, 10, None),
+    FieldSchema("smu", float, 20, 10, None),
+    FieldSchema("k0", float, 30, 10, None),
+    FieldSchema("sk", float, 40, 10, None),
+    FieldSchema("t0", float, 50, 10, None),
+)
 
 class DualceseMatGas2(KeywordBase):
     """DYNA DUALCESE_MAT_GAS_2 keyword"""
@@ -35,54 +45,10 @@ class DualceseMatGas2(KeywordBase):
         """Initialize the DualceseMatGas2 class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smu",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k0",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sk",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t0",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEMATGAS2_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID

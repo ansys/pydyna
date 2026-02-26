@@ -23,7 +23,16 @@
 """Module providing the NodeScalarValue class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_NODESCALARVALUE_CARD0 = (
+    FieldSchema("nid", int, 0, 8, None),
+    FieldSchema("x1", float, 8, 10, 0.0),
+    FieldSchema("x2", float, 18, 10, 0.0),
+    FieldSchema("x3", float, 28, 10, 0.0),
+    FieldSchema("ndof", int, 38, 8, 0),
+)
 
 class NodeScalarValue(KeywordBase):
     """DYNA NODE_SCALAR_VALUE keyword"""
@@ -35,51 +44,10 @@ class NodeScalarValue(KeywordBase):
         """Initialize the NodeScalarValue class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x1",
-                        float,
-                        8,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x2",
-                        float,
-                        18,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x3",
-                        float,
-                        28,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ndof",
-                        int,
-                        38,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _NODESCALARVALUE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Scalar node ID.

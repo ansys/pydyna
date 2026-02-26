@@ -23,7 +23,24 @@
 """Module providing the IcfdSetNodeList class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDSETNODELIST_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
+)
+
+_ICFDSETNODELIST_CARD1 = (
+    FieldSchema("nid1", int, 0, 10, None),
+    FieldSchema("nid2", int, 10, 10, None),
+    FieldSchema("nid3", int, 20, 10, None),
+    FieldSchema("nid4", int, 30, 10, None),
+    FieldSchema("nid5", int, 40, 10, None),
+    FieldSchema("nid6", int, 50, 10, None),
+    FieldSchema("nid7", int, 60, 10, None),
+    FieldSchema("nid8", int, 70, 10, None),
+)
 
 class IcfdSetNodeList(KeywordBase):
     """DYNA ICFD_SET_NODE_LIST keyword"""
@@ -35,86 +52,13 @@ class IcfdSetNodeList(KeywordBase):
         """Initialize the IcfdSetNodeList class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDSETNODELIST_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDSETNODELIST_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set ID.

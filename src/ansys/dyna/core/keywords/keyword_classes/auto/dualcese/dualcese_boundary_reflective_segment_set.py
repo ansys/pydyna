@@ -23,7 +23,12 @@
 """Module providing the DualceseBoundaryReflectiveSegmentSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEBOUNDARYREFLECTIVESEGMENTSET_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+)
 
 class DualceseBoundaryReflectiveSegmentSet(KeywordBase):
     """DYNA DUALCESE_BOUNDARY_REFLECTIVE_SEGMENT_SET keyword"""
@@ -35,19 +40,10 @@ class DualceseBoundaryReflectiveSegmentSet(KeywordBase):
         """Initialize the DualceseBoundaryReflectiveSegmentSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYREFLECTIVESEGMENTSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID created with *DUALCESE_SEGMENTSET

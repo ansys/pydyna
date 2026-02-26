@@ -23,8 +23,30 @@
 """Module providing the DefineCoordinateSystem class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECOORDINATESYSTEM_CARD0 = (
+    FieldSchema("cid", int, 0, 10, 0),
+    FieldSchema("xo", float, 10, 10, 0.0),
+    FieldSchema("yo", float, 20, 10, 0.0),
+    FieldSchema("zo", float, 30, 10, 0.0),
+    FieldSchema("xl", float, 40, 10, 0.0),
+    FieldSchema("yl", float, 50, 10, 0.0),
+    FieldSchema("zl", float, 60, 10, 0.0),
+    FieldSchema("cidl", int, 70, 10, 0),
+)
+
+_DEFINECOORDINATESYSTEM_CARD1 = (
+    FieldSchema("xp", float, 0, 10, 0.0),
+    FieldSchema("yp", float, 10, 10, 0.0),
+    FieldSchema("zp", float, 20, 10, 0.0),
+)
+
+_DEFINECOORDINATESYSTEM_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineCoordinateSystem(KeywordBase):
     """DYNA DEFINE_COORDINATE_SYSTEM keyword"""
@@ -40,121 +62,23 @@ class DefineCoordinateSystem(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xo",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yo",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zo",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xl",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yl",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zl",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cidl",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECOORDINATESYSTEM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECOORDINATESYSTEM_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCoordinateSystem.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECOORDINATESYSTEM_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def cid(self) -> int:
         """Get or set the Coordinate system ID. A unique number has to be defined.

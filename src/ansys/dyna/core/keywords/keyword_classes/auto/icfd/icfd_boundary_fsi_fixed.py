@@ -23,7 +23,12 @@
 """Module providing the IcfdBoundaryFsiFixed class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDBOUNDARYFSIFIXED_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+)
 
 class IcfdBoundaryFsiFixed(KeywordBase):
     """DYNA ICFD_BOUNDARY_FSI_FIXED keyword"""
@@ -35,19 +40,10 @@ class IcfdBoundaryFsiFixed(KeywordBase):
         """Initialize the IcfdBoundaryFsiFixed class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDBOUNDARYFSIFIXED_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the PID of the fluid surface in contact with the solid domain

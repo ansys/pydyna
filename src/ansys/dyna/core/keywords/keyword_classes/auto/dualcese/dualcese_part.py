@@ -23,7 +23,16 @@
 """Module providing the DualcesePart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEPART_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("mid", int, 10, 10, None),
+    FieldSchema("eosid", int, 20, 10, None),
+    FieldSchema("fsitype", str, 30, 10, None),
+    FieldSchema("mmshid", int, 40, 10, None),
+)
 
 class DualcesePart(KeywordBase):
     """DYNA DUALCESE_PART keyword"""
@@ -35,47 +44,10 @@ class DualcesePart(KeywordBase):
         """Initialize the DualcesePart class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eosid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fsitype",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmshid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEPART_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID (must be different from any other *DUALCESE_PART part ID or from a *DUALCESE_PART_MULTIPHASE PID

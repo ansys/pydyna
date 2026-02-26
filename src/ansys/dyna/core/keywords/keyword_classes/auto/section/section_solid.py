@@ -25,10 +25,35 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SECTIONSOLID_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("elform", int, 10, 10, 1),
+    FieldSchema("aet", int, 20, 10, 0),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("cohoff", float, 60, 10, None),
+    FieldSchema("gaskeit", float, 70, 10, None),
+)
+
+_SECTIONSOLID_CARD1 = (
+    FieldSchema("nip", int, 0, 10, 0),
+    FieldSchema("nxdof", int, 10, 10, 0),
+    FieldSchema("ihgf", int, 20, 10, 0),
+    FieldSchema("itaj", int, 30, 10, 0),
+    FieldSchema("lmc", int, 40, 10, 0),
+    FieldSchema("nhsv", int, 50, 10, 0),
+)
+
+_SECTIONSOLID_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SectionSolid(KeywordBase):
     """DYNA SECTION_SOLID keyword"""
@@ -44,122 +69,14 @@ class SectionSolid(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elform",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aet",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cohoff",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gaskeit",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nip",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nxdof",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ihgf",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itaj",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lmc",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhsv",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-                lambda: self.elform in [101, 102, 103, 104, 105],
-            ),
-            TableCard(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONSOLID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SECTIONSOLID_CARD1,
+                active_func=lambda: self.elform in [101, 102, 103, 104, 105],
+                **kwargs,
+            ),            TableCard(
                 [
                     Field("xi", float, 0, 10, None),
                     Field("eta", float, 10, 10, None),
@@ -170,34 +87,24 @@ class SectionSolid(KeywordBase):
                 lambda: self.nip and self.elform in [101, 102, 103, 104, 105],
                 name="integration_points",
                 **kwargs,
-            ),
-            SeriesCard(
+            ),            SeriesCard(
                 "pi",
                 8,
                 10,
                 float,
                 lambda: self.lmc,
                 lambda: self.elform in [101, 102, 103, 104, 105],
-                data = kwargs.get("pi")),
-            OptionCardSet(
+                data = kwargs.get("pi")),            OptionCardSet(
                 option_spec = SectionSolid.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONSOLID_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.

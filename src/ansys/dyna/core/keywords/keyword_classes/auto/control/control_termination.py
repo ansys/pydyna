@@ -23,7 +23,17 @@
 """Module providing the ControlTermination class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLTERMINATION_CARD0 = (
+    FieldSchema("endtim", float, 0, 10, 0.0),
+    FieldSchema("endcyc", int, 10, 10, 0),
+    FieldSchema("dtmin", float, 20, 10, 0.0),
+    FieldSchema("endeng", float, 30, 10, 0.0),
+    FieldSchema("endmas", float, 40, 10, 100000000.0),
+    FieldSchema("nosol", int, 50, 10, 0),
+)
 
 class ControlTermination(KeywordBase):
     """DYNA CONTROL_TERMINATION keyword"""
@@ -35,60 +45,10 @@ class ControlTermination(KeywordBase):
         """Initialize the ControlTermination class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "endtim",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "endcyc",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtmin",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "endeng",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "endmas",
-                        float,
-                        40,
-                        10,
-                        100000000.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nosol",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLTERMINATION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def endtim(self) -> float:
         """Get or set the Termination time. Mandatory.

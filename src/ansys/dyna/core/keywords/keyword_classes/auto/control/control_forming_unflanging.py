@@ -23,7 +23,27 @@
 """Module providing the ControlFormingUnflanging class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGUNFLANGING_CARD0 = (
+    FieldSchema("noption", int, 0, 10, None),
+    FieldSchema("dvid", int, 10, 10, None),
+    FieldSchema("nunbend", int, 20, 10, None),
+    FieldSchema("stfbend", float, 30, 10, None),
+    FieldSchema("stfcnt", float, 40, 10, None),
+    FieldSchema("iflimit", int, 50, 10, None),
+    FieldSchema("dist", float, 60, 10, None),
+    FieldSchema("ilinear", int, 70, 10, 2),
+)
+
+_CONTROLFORMINGUNFLANGING_CARD1 = (
+    FieldSchema("nb1", int, 0, 10, None),
+    FieldSchema("nb2", int, 10, 10, None),
+    FieldSchema("nb3", int, 20, 10, None),
+    FieldSchema("charlen", float, 30, 10, 150.0),
+    FieldSchema("ndouter", int, 40, 10, None),
+)
 
 class ControlFormingUnflanging(KeywordBase):
     """DYNA CONTROL_FORMING_UNFLANGING keyword"""
@@ -35,109 +55,13 @@ class ControlFormingUnflanging(KeywordBase):
         """Initialize the ControlFormingUnflanging class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "noption",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dvid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nunbend",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stfbend",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stfcnt",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iflimit",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dist",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ilinear",
-                        int,
-                        70,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nb1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nb2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nb3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "charlen",
-                        float,
-                        30,
-                        10,
-                        150.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ndouter",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGUNFLANGING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGUNFLANGING_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def noption(self) -> typing.Optional[int]:
         """Get or set the Flag to turn on an unfolding simulation:

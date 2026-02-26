@@ -23,8 +23,43 @@
 """Module providing the MatJohnsonHolmquistJh1 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATJOHNSONHOLMQUISTJH1_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("g", float, 20, 10, None),
+    FieldSchema("p1", float, 30, 10, None),
+    FieldSchema("s1", float, 40, 10, None),
+    FieldSchema("p2", float, 50, 10, None),
+    FieldSchema("s2", float, 60, 10, None),
+    FieldSchema("c", float, 70, 10, None),
+)
+
+_MATJOHNSONHOLMQUISTJH1_CARD1 = (
+    FieldSchema("epsi", float, 0, 10, None),
+    FieldSchema("t", float, 10, 10, None),
+    FieldSchema("unused", float, 20, 10, None),
+    FieldSchema("alpha", float, 30, 10, None),
+    FieldSchema("sfmax", float, 40, 10, None),
+    FieldSchema("beta", float, 50, 10, None),
+    FieldSchema("dp1", float, 60, 10, None),
+)
+
+_MATJOHNSONHOLMQUISTJH1_CARD2 = (
+    FieldSchema("epfmin", float, 0, 10, None),
+    FieldSchema("epfmax", float, 10, 10, None),
+    FieldSchema("k1", float, 20, 10, None),
+    FieldSchema("k2", float, 30, 10, None),
+    FieldSchema("k3", float, 40, 10, None),
+    FieldSchema("fs", float, 50, 10, None),
+)
+
+_MATJOHNSONHOLMQUISTJH1_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatJohnsonHolmquistJh1(KeywordBase):
     """DYNA MAT_JOHNSON_HOLMQUIST_JH1 keyword"""
@@ -40,184 +75,26 @@ class MatJohnsonHolmquistJh1(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "epsi",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfmax",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dp1",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "epfmin",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epfmax",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k3",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fs",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATJOHNSONHOLMQUISTJH1_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATJOHNSONHOLMQUISTJH1_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATJOHNSONHOLMQUISTJH1_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatJohnsonHolmquistJh1.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATJOHNSONHOLMQUISTJH1_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

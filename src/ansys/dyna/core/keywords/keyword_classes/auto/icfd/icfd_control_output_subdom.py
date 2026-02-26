@@ -23,7 +23,38 @@
 """Module providing the IcfdControlOutputSubdom class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLOUTPUTSUBDOM_CARD0 = (
+    FieldSchema("sname", str, 0, 20, "BOX"),
+)
+
+_ICFDCONTROLOUTPUTSUBDOM_CARD1 = (
+    FieldSchema("pminx", float, 0, 10, None),
+    FieldSchema("pminy", float, 10, 10, None),
+    FieldSchema("pminz", float, 20, 10, None),
+    FieldSchema("pmaxx", float, 30, 10, None),
+    FieldSchema("pmaxy", float, 40, 10, None),
+    FieldSchema("pmaxz", float, 50, 10, None),
+)
+
+_ICFDCONTROLOUTPUTSUBDOM_CARD2 = (
+    FieldSchema("radius", float, 0, 10, None),
+    FieldSchema("centerx", float, 10, 10, None),
+    FieldSchema("centery", float, 20, 10, None),
+    FieldSchema("centerz", float, 30, 10, None),
+)
+
+_ICFDCONTROLOUTPUTSUBDOM_CARD3 = (
+    FieldSchema("radius", float, 0, 10, None),
+    FieldSchema("pminx", float, 10, 10, None),
+    FieldSchema("pminy", float, 20, 10, None),
+    FieldSchema("pminz", float, 30, 10, None),
+    FieldSchema("pmaxx", float, 40, 10, None),
+    FieldSchema("pmaxy", float, 50, 10, None),
+    FieldSchema("pmaxz", float, 60, 10, None),
+)
 
 class IcfdControlOutputSubdom(KeywordBase):
     """DYNA ICFD_CONTROL_OUTPUT_SUBDOM keyword"""
@@ -35,151 +66,19 @@ class IcfdControlOutputSubdom(KeywordBase):
         """Initialize the IcfdControlOutputSubdom class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sname",
-                        str,
-                        0,
-                        20,
-                        "BOX",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pminx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pminy",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pminz",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmaxx",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmaxy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmaxz",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "radius",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "centerx",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "centery",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "centerz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "radius",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pminx",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pminy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pminz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmaxx",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmaxy",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmaxz",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLOUTPUTSUBDOM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLOUTPUTSUBDOM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLOUTPUTSUBDOM_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLOUTPUTSUBDOM_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def sname(self) -> str:
         """Get or set the Shape name.

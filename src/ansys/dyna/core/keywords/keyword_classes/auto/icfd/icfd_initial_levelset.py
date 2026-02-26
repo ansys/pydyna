@@ -23,7 +23,19 @@
 """Module providing the IcfdInitialLevelset class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDINITIALLEVELSET_CARD0 = (
+    FieldSchema("stype", int, 0, 10, 0),
+    FieldSchema("nx", float, 10, 10, None),
+    FieldSchema("ny", float, 20, 10, None),
+    FieldSchema("nz", float, 30, 10, None),
+    FieldSchema("x", float, 40, 10, None),
+    FieldSchema("y", float, 50, 10, None),
+    FieldSchema("z", float, 60, 10, None),
+    FieldSchema("invert", int, 70, 10, 0),
+)
 
 class IcfdInitialLevelset(KeywordBase):
     """DYNA ICFD_INITIAL_LEVELSET keyword"""
@@ -35,70 +47,10 @@ class IcfdInitialLevelset(KeywordBase):
         """Initialize the IcfdInitialLevelset class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "stype",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nx",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ny",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "invert",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDINITIALLEVELSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def stype(self) -> int:
         """Get or set the Initial surface type :

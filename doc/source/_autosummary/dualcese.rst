@@ -90,17 +90,17 @@ DualceseBoundaryPrescribedSegmentSet
     :members:
 
 
-DualceseBoundaryPrescribedTwoPhaseMsurf
----------------------------------------
+DualceseBoundaryPrescribedTwo_PhaseMsurf
+----------------------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.dualcese_boundary_prescribed_two_phase_msurf
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.dualcese_boundary_prescribed_two__phase_msurf
     :members:
 
 
-DualceseBoundaryPrescribedTwoPhaseSegmentSet
---------------------------------------------
+DualceseBoundaryPrescribedTwo_PhaseSegmentSet
+---------------------------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.dualcese_boundary_prescribed_two_phase_segment_set
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.dualcese_boundary_prescribed_two__phase_segment_set
     :members:
 
 
@@ -356,17 +356,17 @@ DualceseInitialSet
     :members:
 
 
-DualceseInitialTwoPhase
------------------------
+DualceseInitialTwo_Phase
+------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.dualcese_initial_two_phase
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.dualcese_initial_two__phase
     :members:
 
 
-DualceseInitialTwoPhaseSet
---------------------------
+DualceseInitialTwo_PhaseSet
+---------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.dualcese_initial_two_phase_set
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.dualcese_initial_two__phase_set
     :members:
 
 

@@ -23,7 +23,34 @@
 """Module providing the IntegrationBeam class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTEGRATIONBEAM_CARD0 = (
+    FieldSchema("irid", int, 0, 10, None),
+    FieldSchema("nip", int, 10, 10, 0),
+    FieldSchema("ra", float, 20, 10, 0.0),
+    FieldSchema("icst", int, 30, 10, 0),
+    FieldSchema("k", int, 40, 10, 1),
+)
+
+_INTEGRATIONBEAM_CARD1 = (
+    FieldSchema("d1", float, 0, 10, None),
+    FieldSchema("d2", float, 10, 10, None),
+    FieldSchema("d3", float, 20, 10, None),
+    FieldSchema("d4", float, 30, 10, None),
+    FieldSchema("sref", float, 40, 10, 0.0),
+    FieldSchema("tref", float, 50, 10, 0.0),
+    FieldSchema("d5", float, 60, 10, None),
+    FieldSchema("d6", float, 70, 10, None),
+)
+
+_INTEGRATIONBEAM_CARD2 = (
+    FieldSchema("s", float, 0, 10, None),
+    FieldSchema("t", float, 10, 10, None),
+    FieldSchema("wf", float, 20, 10, None),
+    FieldSchema("pid", int, 30, 10, None),
+)
 
 class IntegrationBeam(KeywordBase):
     """DYNA INTEGRATION_BEAM keyword"""
@@ -35,145 +62,16 @@ class IntegrationBeam(KeywordBase):
         """Initialize the IntegrationBeam class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "irid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nip",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ra",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icst",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "d1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sref",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tref",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d5",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d6",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "s",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wf",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTEGRATIONBEAM_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTEGRATIONBEAM_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTEGRATIONBEAM_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def irid(self) -> typing.Optional[int]:
         """Get or set the Integration rule ID. (IRID refers to IRID on *SECTION_BEAM card).

@@ -839,6 +839,13 @@ Mat106
     :members:
 
 
+Mat107
+------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_modified_johnson_cook
+    :members:
+
+
 Mat108
 ------
 
@@ -2095,21 +2102,21 @@ Mat326
 Mat3ParameterBarlat
 -------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_3_parameter_barlat
-    :members:
-
-
-Mat3ParameterBarlat
--------------------
-
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_3parameter_barlat
     :members:
 
 
-Mat3ParameterBarlatNlp
-----------------------
+Mat3_ParameterBarlat
+--------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_3_parameter_barlat_nlp
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_3__parameter_barlat
+    :members:
+
+
+Mat3_ParameterBarlatNlp
+-----------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_3__parameter_barlat_nlp
     :members:
 
 
@@ -2386,6 +2393,13 @@ MatAnisotropicElasticPlastic
     :members:
 
 
+MatAnisotropicHyperelastic
+--------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_295
+    :members:
+
+
 MatAnisotropicPlastic
 ---------------------
 
@@ -2491,17 +2505,17 @@ MatBiotHysteretic
     :members:
 
 
-MatBlatzKoFoam
---------------
+MatBlatz_KoFoam
+---------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_blatz_ko_foam
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_blatz__ko_foam
     :members:
 
 
-MatBlatzKoRubber
-----------------
+MatBlatz_KoRubber
+-----------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_blatz_ko_rubber
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_blatz__ko_rubber
     :members:
 
 
@@ -2607,6 +2621,13 @@ MatCohesiveGeneral
 ------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_cohesive_general
+    :members:
+
+
+MatCohesiveMixedMode
+--------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_138
     :members:
 
 
@@ -3023,10 +3044,10 @@ MatEnhancedCompositeDamageModel
     :members:
 
 
-MatExtended3ParameterBarlat
----------------------------
+MatExtended3_ParameterBarlat
+----------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_extended_3_parameter_barlat
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_extended_3__parameter_barlat
     :members:
 
 
@@ -3065,10 +3086,10 @@ MatFiniteElasticStrainPlasticity
     :members:
 
 
-MatFld3ParameterBarlat
-----------------------
+MatFld3_ParameterBarlat
+-----------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_fld_3_parameter_barlat
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_fld_3__parameter_barlat
     :members:
 
 
@@ -3086,17 +3107,17 @@ MatForceLimited
     :members:
 
 
-MatFrazerNashRubber
--------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_frazer_nash_rubber
-    :members:
-
-
 MatFrazerNashRubberModel
 ------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_frazer_nash_rubber_model
+    :members:
+
+
+MatFrazer_NashRubber
+--------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_frazer__nash_rubber
     :members:
 
 
@@ -3146,6 +3167,13 @@ MatGeneralNonlinear6DofDiscreteBeam
 -----------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_general_nonlinear_6dof_discrete_beam
+    :members:
+
+
+MatGeneralSpringDiscreteBeam
+----------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_196
     :members:
 
 
@@ -3282,6 +3310,13 @@ MatHydraulicGasDamperDiscreteBeam
     :members:
 
 
+MatHyperelasticRubber
+---------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_077_h
+    :members:
+
+
 MatHystereticBeam
 -----------------
 
@@ -3401,10 +3436,10 @@ MatJointedRock
     :members:
 
 
-MatKelvinMaxwellViscoelastic
-----------------------------
+MatKelvin_MaxwellViscoelastic
+-----------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_kelvin_maxwell_viscoelastic
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_kelvin__maxwell_viscoelastic
     :members:
 
 
@@ -3443,6 +3478,20 @@ MatKinematicHardeningTransverselyAnisotropicNlp
     :members:
 
 
+MatLaminatedCompositeFabric
+---------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_058
+    :members:
+
+
+MatLaminatedCompositeFabricSolid
+--------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_058_solid
+    :members:
+
+
 MatLaminatedFractureDaimlerCamanho
 ----------------------------------
 
@@ -3478,10 +3527,10 @@ MatLinearElasticDiscreteBeam
     :members:
 
 
-MatLouYoonAnisotropicPlastictiy
--------------------------------
+MatLou_YoonAnisotropicPlastictiy
+--------------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_lou_yoon_anisotropic_plastictiy
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_lou__yoon_anisotropic_plastictiy
     :members:
 
 
@@ -3639,24 +3688,24 @@ MatMomentCurvatureBeam
     :members:
 
 
-MatMooneyRivlinPhaseChange
---------------------------
+MatMooney_RivlinPhaseChange
+---------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_mooney_rivlin_phase_change
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_mooney__rivlin_phase_change
     :members:
 
 
-MatMooneyRivlinRubber
----------------------
+MatMooney_RivlinRubber
+----------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_mooney_rivlin_rubber
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_mooney__rivlin_rubber
     :members:
 
 
-MatMooneyRivlinRubberPhaseChange
---------------------------------
+MatMooney_RivlinRubberPhaseChange
+---------------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_mooney_rivlin_rubber_phase_change
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_mooney__rivlin_rubber_phase_change
     :members:
 
 
@@ -3713,6 +3762,13 @@ MatNull
 -------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_null
+    :members:
+
+
+MatOgdenRubber
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_077_o
     :members:
 
 
@@ -3863,10 +3919,10 @@ MatPitzerCrushableFoam
     :members:
 
 
-MatPlasticGreenNaghdiRate
--------------------------
+MatPlasticGreen_NaghdiRate
+--------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_plastic_green_naghdi_rate
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_plastic_green__naghdi_rate
     :members:
 
 
@@ -3888,6 +3944,13 @@ MatPlasticNonlinearKinematicB
 -----------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_plastic_nonlinear_kinematic_b
+    :members:
+
+
+MatPlasticityCompressionTension
+-------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_124
     :members:
 
 
@@ -4020,14 +4083,14 @@ MatQuasilinearViscoelastic
 MatRambergOsgood
 ----------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ramberg_osgood
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ramberg__osgood
     :members:
 
 
-MatRambergOsgood
-----------------
+MatRamberg_Osgood
+-----------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ramberg_osgood
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ramberg__osgood
     :members:
 
 
@@ -4202,14 +4265,7 @@ MatS15
 MatSamp1
 --------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_samp_1
-    :members:
-
-
-MatSamp1
---------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_samp_1
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_samp__1
     :members:
 
 
@@ -4217,6 +4273,13 @@ MatSampLight
 ------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_samp_light
+    :members:
+
+
+MatSamp_1
+---------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_samp__1
     :members:
 
 
@@ -4322,6 +4385,13 @@ MatSimplifiedRubber
 -------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_simplified_rubber
+    :members:
+
+
+MatSimplifiedRubberFoam
+-----------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_181
     :members:
 
 
@@ -4510,21 +4580,21 @@ MatSpotweldDaimlerchryslerUniaxial
 MatSpotweldDamageFailure
 ------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_spotweld_damage_failure
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_spotweld_damage__failure
     :members:
 
 
-MatSpotweldDamageFailure
-------------------------
+MatSpotweldDamage_Failure
+-------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_spotweld_damage_failure
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_spotweld_damage__failure
     :members:
 
 
-MatSpotweldDamageFailureUniaxial
---------------------------------
+MatSpotweldDamage_FailureUniaxial
+---------------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_spotweld_damage_failure_uniaxial
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_spotweld_damage__failure_uniaxial
     :members:
 
 
@@ -4783,7 +4853,7 @@ MatTailoredProperties
 MatTemperatureDependentOrthotropic
 ----------------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_temperature_dependent_orthotropic
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_023
     :members:
 
 

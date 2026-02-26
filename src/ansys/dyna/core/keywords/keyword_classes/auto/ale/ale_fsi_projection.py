@@ -23,7 +23,23 @@
 """Module providing the AleFsiProjection class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALEFSIPROJECTION_CARD0 = (
+    FieldSchema("lagsid", int, 0, 10, None),
+    FieldSchema("alesid", int, 10, 10, None),
+    FieldSchema("lsidtyp", int, 20, 10, 0),
+    FieldSchema("asidtyp", int, 30, 10, 0),
+    FieldSchema("smmgid", int, 40, 10, None),
+    FieldSchema("icorrec", int, 50, 10, None),
+    FieldSchema("inorm", int, 60, 10, None),
+)
+
+_ALEFSIPROJECTION_CARD1 = (
+    FieldSchema("birth", float, 0, 10, 0.0),
+    FieldSchema("death", float, 10, 10, 10000000000.0),
+)
 
 class AleFsiProjection(KeywordBase):
     """DYNA ALE_FSI_PROJECTION keyword"""
@@ -35,83 +51,13 @@ class AleFsiProjection(KeywordBase):
         """Initialize the AleFsiProjection class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lagsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alesid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lsidtyp",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "asidtyp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smmgid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icorrec",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "inorm",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "birth",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        10,
-                        10,
-                        1.0e10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEFSIPROJECTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEFSIPROJECTION_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def lagsid(self) -> typing.Optional[int]:
         """Get or set the A set ID defining lagrangian part(s) for this coupling(structures).

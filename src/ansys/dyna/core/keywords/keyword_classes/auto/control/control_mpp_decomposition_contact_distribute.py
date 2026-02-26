@@ -23,7 +23,16 @@
 """Module providing the ControlMppDecompositionContactDistribute class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPDECOMPOSITIONCONTACTDISTRIBUTE_CARD0 = (
+    FieldSchema("id1", int, 0, 10, None),
+    FieldSchema("id2", int, 10, 10, None),
+    FieldSchema("id3", int, 20, 10, None),
+    FieldSchema("id4", int, 30, 10, None),
+    FieldSchema("id5", int, 40, 10, None),
+)
 
 class ControlMppDecompositionContactDistribute(KeywordBase):
     """DYNA CONTROL_MPP_DECOMPOSITION_CONTACT_DISTRIBUTE keyword"""
@@ -35,47 +44,10 @@ class ControlMppDecompositionContactDistribute(KeywordBase):
         """Initialize the ControlMppDecompositionContactDistribute class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONCONTACTDISTRIBUTE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the First contact interface ID to distribute. If no contact ID's are specified, the number given here corresponds to the order of the interfaces as they appear in the input, with the first being 1.

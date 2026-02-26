@@ -23,7 +23,12 @@
 """Module providing the CeseBoundaryConjHeatMsurf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEBOUNDARYCONJHEATMSURF_CARD0 = (
+    FieldSchema("msurfid", int, 0, 10, None),
+)
 
 class CeseBoundaryConjHeatMsurf(KeywordBase):
     """DYNA CESE_BOUNDARY_CONJ_HEAT_MSURF keyword"""
@@ -35,19 +40,10 @@ class CeseBoundaryConjHeatMsurf(KeywordBase):
         """Initialize the CeseBoundaryConjHeatMsurf class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "msurfid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEBOUNDARYCONJHEATMSURF_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def msurfid(self) -> typing.Optional[int]:
         """Get or set the Mesh surface part ID.

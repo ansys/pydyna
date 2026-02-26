@@ -23,7 +23,25 @@
 """Module providing the ControlStagedConstruction class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLSTAGEDCONSTRUCTION_CARD0 = (
+    FieldSchema("tstart", float, 0, 10, 0.0),
+    FieldSchema("stgs", int, 10, 10, 0),
+    FieldSchema("stge", int, 20, 10, 0),
+    FieldSchema("accel", float, 30, 10, 0.0),
+    FieldSchema("fact", float, 40, 10, 1e-06),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("dordel", int, 60, 10, 0),
+    FieldSchema("nopdel", int, 70, 10, 0),
+)
+
+_CONTROLSTAGEDCONSTRUCTION_CARD1 = (
+    FieldSchema("itime", int, 0, 10, 0),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("idynain", int, 20, 10, 0),
+)
 
 class ControlStagedConstruction(KeywordBase):
     """DYNA CONTROL_STAGED_CONSTRUCTION keyword"""
@@ -35,102 +53,13 @@ class ControlStagedConstruction(KeywordBase):
         """Initialize the ControlStagedConstruction class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "tstart",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stgs",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stge",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "accel",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fact",
-                        float,
-                        40,
-                        10,
-                        1e-6,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dordel",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nopdel",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "itime",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idynain",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLSTAGEDCONSTRUCTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLSTAGEDCONSTRUCTION_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def tstart(self) -> float:
         """Get or set the Time at start of analysis (normally leave blank)

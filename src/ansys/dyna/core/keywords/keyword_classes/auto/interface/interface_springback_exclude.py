@@ -23,7 +23,12 @@
 """Module providing the InterfaceSpringbackExclude class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACESPRINGBACKEXCLUDE_CARD0 = (
+    FieldSchema("kwdname", str, 0, 80, None),
+)
 
 class InterfaceSpringbackExclude(KeywordBase):
     """DYNA INTERFACE_SPRINGBACK_EXCLUDE keyword"""
@@ -35,19 +40,10 @@ class InterfaceSpringbackExclude(KeywordBase):
         """Initialize the InterfaceSpringbackExclude class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "kwdname",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACESPRINGBACKEXCLUDE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def kwdname(self) -> typing.Optional[str]:
         """Get or set the Exclude cards and their associated data will not be output.

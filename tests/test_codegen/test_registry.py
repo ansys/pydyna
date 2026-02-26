@@ -121,4 +121,3 @@ class TestHandlerRegistry:
 
         # Should not raise an error
         registry.post_process_all(sample_keyword_data)
-

@@ -23,7 +23,13 @@
 """Module providing the FatigueMultiaxial class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FATIGUEMULTIAXIAL_CARD0 = (
+    FieldSchema("maxial", int, 0, 10, 0),
+    FieldSchema("nplane", int, 10, 10, 18),
+)
 
 class FatigueMultiaxial(KeywordBase):
     """DYNA FATIGUE_MULTIAXIAL keyword"""
@@ -35,28 +41,10 @@ class FatigueMultiaxial(KeywordBase):
         """Initialize the FatigueMultiaxial class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "maxial",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nplane",
-                        int,
-                        10,
-                        10,
-                        18,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FATIGUEMULTIAXIAL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def maxial(self) -> int:
         """Get or set the Multiaxial fatigue analysis criterion:

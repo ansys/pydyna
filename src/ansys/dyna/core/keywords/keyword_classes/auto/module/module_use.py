@@ -23,7 +23,18 @@
 """Module providing the ModuleUse class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MODULEUSE_CARD0 = (
+    FieldSchema("mdlid", int, 0, 20, None),
+)
+
+_MODULEUSE_CARD1 = (
+    FieldSchema("type", str, 0, 20, None),
+    FieldSchema("param1", str, 20, 20, None),
+    FieldSchema("param2", str, 40, 20, None),
+)
 
 class ModuleUse(KeywordBase):
     """DYNA MODULE_USE keyword"""
@@ -35,44 +46,13 @@ class ModuleUse(KeywordBase):
         """Initialize the ModuleUse class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mdlid",
-                        int,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "type",
-                        str,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "param1",
-                        str,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "param2",
-                        str,
-                        40,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _MODULEUSE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MODULEUSE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def mdlid(self) -> typing.Optional[int]:
         """Get or set the Module identification defined in *MODULE_LOAD.

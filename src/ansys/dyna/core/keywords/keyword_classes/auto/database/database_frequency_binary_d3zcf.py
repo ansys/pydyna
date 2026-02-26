@@ -23,7 +23,12 @@
 """Module providing the DatabaseFrequencyBinaryD3Zcf class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEFREQUENCYBINARYD3ZCF_CARD0 = (
+    FieldSchema("binary", int, 0, 10, None),
+)
 
 class DatabaseFrequencyBinaryD3Zcf(KeywordBase):
     """DYNA DATABASE_FREQUENCY_BINARY_D3ZCF keyword"""
@@ -35,19 +40,10 @@ class DatabaseFrequencyBinaryD3Zcf(KeywordBase):
         """Initialize the DatabaseFrequencyBinaryD3Zcf class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "binary",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEFREQUENCYBINARYD3ZCF_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def binary(self) -> typing.Optional[int]:
         """Get or set the Flag for writing the binary plot file.  See Remark 1.

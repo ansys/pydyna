@@ -23,7 +23,14 @@
 """Module providing the DualceseMatGas0 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEMATGAS0_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("mu", float, 10, 10, None),
+    FieldSchema("k", float, 20, 10, None),
+)
 
 class DualceseMatGas0(KeywordBase):
     """DYNA DUALCESE_MAT_GAS_0 keyword"""
@@ -35,33 +42,10 @@ class DualceseMatGas0(KeywordBase):
         """Initialize the DualceseMatGas0 class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEMATGAS0_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID

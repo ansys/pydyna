@@ -25,6 +25,7 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -40,83 +41,30 @@ class ControlMppDecompositionTransformation(KeywordBase):
         self._cards = [
             TableCardGroup(
                 [
-                    Card(
-                            [
-                                Field(
-                                    "type",
-                                    str,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "v1",
-                                    float,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "v2",
-                                    float,
-                                    20,
-                                    10,
-                                ),
-                                Field(
-                                    "v3",
-                                    float,
-                                    30,
-                                    10,
-                                ),
-                                Field(
-                                    "v4",
-                                    float,
-                                    40,
-                                    10,
-                                ),
-                                Field(
-                                    "v5",
-                                    float,
-                                    50,
-                                    10,
-                                ),
-                                Field(
-                                    "v6",
-                                    float,
-                                    60,
-                                    10,
-                                ),
-                            ],
+                    (
+                        FieldSchema("type", str, 0, 10, "RX"),
+                        FieldSchema("v1", float, 10, 10, 0.0),
+                        FieldSchema("v2", float, 20, 10, 0.0),
+                        FieldSchema("v3", float, 30, 10, 0.0),
+                        FieldSchema("v4", float, 40, 10, 0.0),
+                        FieldSchema("v5", float, 50, 10, 0.0),
+                        FieldSchema("v6", float, 60, 10, 0.0),
                     ),
-                    Card(
-                            [
-                                Field(
-                                    "v7",
-                                    float,
-                                    0,
-                                    10,
-                                ),
-                                Field(
-                                    "v8",
-                                    float,
-                                    10,
-                                    10,
-                                ),
-                                Field(
-                                    "v9",
-                                    float,
-                                    20,
-                                    10,
-                                ),
-                            ],
-                            lambda: not self.transformation.empty and self.transformation['type'].iloc[-1] in ['VEC3', 'C2R', 'S2R', 'MAT'],
+                    (
+                        FieldSchema("v7", float, 0, 10, 0.0),
+                        FieldSchema("v8", float, 10, 10, 0.0),
+                        FieldSchema("v9", float, 20, 10, 0.0),
                     ),
                 ],
                 None,
                 None,
                 "transformation",
+                card_active_funcs=[
+                    None,
+                    lambda: not self.transformation.empty and self.transformation['type'].iloc[-1] in ['VEC3', 'C2R', 'S2R', 'MAT'],
+                ],
                 **kwargs,
-            ),
-        ]
-
+            ),        ]
     @property
     def transformation(self) -> pd.DataFrame:
         """Gets the full table of transformation."""

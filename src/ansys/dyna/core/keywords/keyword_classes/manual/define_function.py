@@ -23,9 +23,16 @@
 
 import typing
 
-from ansys.dyna.core.lib.card import Card, Field
+from ansys.dyna.core.lib.card import Card
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.text_card import TextCard
+
+# Schema definition for optimized Card creation
+_DEFINEFUNCTION_CARD0 = (
+    FieldSchema("fid", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
 
 
 class DefineFunction(KeywordBase):
@@ -38,11 +45,9 @@ class DefineFunction(KeywordBase):
         """Initialize DefineFunction."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field("fid", int, 0, 10, kwargs.get("fid")),
-                    Field("heading", str, 10, 70, kwargs.get("heading")),
-                ],
+            Card.from_field_schemas_with_defaults(
+                _DEFINEFUNCTION_CARD0,
+                **kwargs,
             ),
             TextCard("function", kwargs.get("function")),
         ]

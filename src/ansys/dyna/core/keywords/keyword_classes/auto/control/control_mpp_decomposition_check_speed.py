@@ -23,7 +23,11 @@
 """Module providing the ControlMppDecompositionCheckSpeed class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPDECOMPOSITIONCHECKSPEED_CARD0 = (
+)
 
 class ControlMppDecompositionCheckSpeed(KeywordBase):
     """DYNA CONTROL_MPP_DECOMPOSITION_CHECK_SPEED keyword"""
@@ -35,9 +39,7 @@ class ControlMppDecompositionCheckSpeed(KeywordBase):
         """Initialize the ControlMppDecompositionCheckSpeed class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONCHECKSPEED_CARD0,
+                **kwargs,
+            ),        ]

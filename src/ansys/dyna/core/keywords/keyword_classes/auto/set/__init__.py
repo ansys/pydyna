@@ -87,7 +87,7 @@ from .set_iga_point_uvw_list_generate_increment_collect import SetIgaPointUvwLis
 from .set_mode import SetMode
 from .set_mode_list import SetModeList
 from .set_mode_list_generate import SetModeListGenerate
-from .set_multi_material_group_list import SetMultiMaterialGroupList
+from .set_multi__material_group_list import SetMulti_MaterialGroupList
 from .set_multi_material_group_list_gpname import SetMultiMaterialGroupListGpname
 from .set_node_add import SetNodeAdd
 from .set_node_add_advanced import SetNodeAddAdvanced

@@ -23,7 +23,12 @@
 """Module providing the DatabaseAceout class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEACEOUT_CARD0 = (
+    FieldSchema("dt", float, 0, 10, None),
+)
 
 class DatabaseAceout(KeywordBase):
     """DYNA DATABASE_ACEOUT keyword"""
@@ -35,19 +40,10 @@ class DatabaseAceout(KeywordBase):
         """Initialize the DatabaseAceout class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEACEOUT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the Time interval between the outputs.

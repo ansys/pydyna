@@ -23,7 +23,12 @@
 """Module providing the DatabaseFatxml class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEFATXML_CARD0 = (
+    FieldSchema("xml", str, 0, 256, None),
+)
 
 class DatabaseFatxml(KeywordBase):
     """DYNA DATABASE_FATXML keyword"""
@@ -35,19 +40,10 @@ class DatabaseFatxml(KeywordBase):
         """Initialize the DatabaseFatxml class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "xml",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEFATXML_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def xml(self) -> typing.Optional[str]:
         """Get or set the xml data.

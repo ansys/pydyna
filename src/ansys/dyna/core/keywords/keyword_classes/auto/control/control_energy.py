@@ -23,7 +23,19 @@
 """Module providing the ControlEnergy class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLENERGY_CARD0 = (
+    FieldSchema("hgen", int, 0, 10, 1),
+    FieldSchema("rwen", int, 10, 10, 2),
+    FieldSchema("slnten", int, 20, 10, 1),
+    FieldSchema("rylen", int, 30, 10, 1),
+    FieldSchema("irgen", int, 40, 10, 2),
+    FieldSchema("maten", int, 50, 10, 1),
+    FieldSchema("drlen", int, 60, 10, 1),
+    FieldSchema("disen", int, 70, 10, 1),
+)
 
 class ControlEnergy(KeywordBase):
     """DYNA CONTROL_ENERGY keyword"""
@@ -35,76 +47,10 @@ class ControlEnergy(KeywordBase):
         """Initialize the ControlEnergy class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "hgen",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rwen",
-                        int,
-                        10,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "slnten",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rylen",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irgen",
-                        int,
-                        40,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maten",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "drlen",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "disen",
-                        int,
-                        70,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLENERGY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def hgen(self) -> int:
         """Get or set the Hourglass energy calculation option.

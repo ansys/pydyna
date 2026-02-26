@@ -23,7 +23,12 @@
 """Module providing the ControlMppContactGroupable class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPCONTACTGROUPABLE_CARD0 = (
+    FieldSchema("grp", int, 0, 10, 1),
+)
 
 class ControlMppContactGroupable(KeywordBase):
     """DYNA CONTROL_MPP_CONTACT_GROUPABLE keyword"""
@@ -35,20 +40,10 @@ class ControlMppContactGroupable(KeywordBase):
         """Initialize the ControlMppContactGroupable class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "grp",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPCONTACTGROUPABLE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def grp(self) -> int:
         """Get or set the The sum of these available options (in any combination that makes sense):

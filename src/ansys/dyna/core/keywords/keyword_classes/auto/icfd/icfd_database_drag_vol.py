@@ -23,7 +23,18 @@
 """Module providing the IcfdDatabaseDragVol class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDDATABASEDRAGVOL_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("cpid", int, 10, 10, None),
+    FieldSchema("dtout", float, 20, 10, 0.0),
+    FieldSchema("perout", int, 30, 10, 0),
+    FieldSchema("divi", int, 40, 10, 10),
+    FieldSchema("elout", int, 50, 10, 0),
+    FieldSchema("ssout", int, 60, 10, 0),
+)
 
 class IcfdDatabaseDragVol(KeywordBase):
     """DYNA ICFD_DATABASE_DRAG_VOL keyword"""
@@ -35,66 +46,10 @@ class IcfdDatabaseDragVol(KeywordBase):
         """Initialize the IcfdDatabaseDragVol class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtout",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "perout",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "divi",
-                        int,
-                        40,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "elout",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssout",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDATABASEDRAGVOL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of the volume where the drag force will be computed

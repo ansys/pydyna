@@ -23,7 +23,17 @@
 """Module providing the IncludeAutoOffsetUser class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INCLUDEAUTOOFFSETUSER_CARD0 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
+
+_INCLUDEAUTOOFFSETUSER_CARD1 = (
+    FieldSchema("noffset", int, 0, 10, None),
+    FieldSchema("neoffset", int, 10, 10, None),
+)
 
 class IncludeAutoOffsetUser(KeywordBase):
     """DYNA INCLUDE_AUTO_OFFSET_USER keyword"""
@@ -35,37 +45,13 @@ class IncludeAutoOffsetUser(KeywordBase):
         """Initialize the IncludeAutoOffsetUser class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "noffset",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "neoffset",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INCLUDEAUTOOFFSETUSER_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INCLUDEAUTOOFFSETUSER_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name to be included.

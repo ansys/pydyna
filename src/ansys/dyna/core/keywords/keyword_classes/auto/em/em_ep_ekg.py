@@ -23,7 +23,13 @@
 """Module providing the EmEpEkg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMEPEKG_CARD0 = (
+    FieldSchema("ekgid", int, 0, 10, None),
+    FieldSchema("psid", float, 10, 10, None),
+)
 
 class EmEpEkg(KeywordBase):
     """DYNA EM_EP_EKG keyword"""
@@ -35,26 +41,10 @@ class EmEpEkg(KeywordBase):
         """Initialize the EmEpEkg class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ekgid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMEPEKG_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ekgid(self) -> typing.Optional[int]:
         """Get or set the Id of the EKG computation.

@@ -23,7 +23,34 @@
 """Module providing the LsoDomain class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LSODOMAIN_CARD0 = (
+    FieldSchema("domain_type", str, 0, 20, "ROGO"),
+)
+
+_LSODOMAIN_CARD1 = (
+    FieldSchema("solver_name", str, 0, 20, "MECH"),
+)
+
+_LSODOMAIN_CARD2 = (
+    FieldSchema("outid", int, 0, 10, None),
+    FieldSchema("refid", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("reduct", int, 30, 10, None),
+)
+
+_LSODOMAIN_CARD3 = (
+    FieldSchema("outid", int, 0, 10, None),
+    FieldSchema("refid", int, 10, 10, None),
+    FieldSchema("override", int, 20, 10, 1),
+    FieldSchema("reduct", int, 30, 10, None),
+)
+
+_LSODOMAIN_CARD4 = (
+    FieldSchema("variable_name", str, 0, 80, None),
+)
 
 class LsoDomain(KeywordBase):
     """DYNA LSO_DOMAIN keyword"""
@@ -35,108 +62,22 @@ class LsoDomain(KeywordBase):
         """Initialize the LsoDomain class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "domain_type",
-                        str,
-                        0,
-                        20,
-                        "ROGO",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "solver_name",
-                        str,
-                        0,
-                        20,
-                        "MECH",
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "outid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "refid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "reduct",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "outid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "refid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "override",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "reduct",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "variable_name",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LSODOMAIN_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LSODOMAIN_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LSODOMAIN_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LSODOMAIN_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LSODOMAIN_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def domain_type(self) -> str:
         """Get or set the The type of domain for which LSO output may be generated.Accepted entries so far are 'thist_point'

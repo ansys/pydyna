@@ -23,7 +23,16 @@
 """Module providing the InterfaceCompensation3DRefineRigid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACECOMPENSATION3DREFINERIGID_CARD0 = (
+    FieldSchema("filename1", str, 0, 80, None),
+)
+
+_INTERFACECOMPENSATION3DREFINERIGID_CARD1 = (
+    FieldSchema("filename2", str, 0, 80, None),
+)
 
 class InterfaceCompensation3DRefineRigid(KeywordBase):
     """DYNA INTERFACE_COMPENSATION_3D_REFINE_RIGID keyword"""
@@ -35,30 +44,13 @@ class InterfaceCompensation3DRefineRigid(KeywordBase):
         """Initialize the InterfaceCompensation3DRefineRigid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename1",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename2",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACECOMPENSATION3DREFINERIGID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACECOMPENSATION3DREFINERIGID_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def filename1(self) -> typing.Optional[str]:
         """Get or set the A keyword file name of rigid tool mesh to be refined.  This should be the tooling mesh used in the forming or flanging simulation, before any compensation is done.  The refined rigid tool mesh will be in the file rigid_refined.tmp.  See keyword example.

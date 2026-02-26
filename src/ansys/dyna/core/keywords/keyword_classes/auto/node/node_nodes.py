@@ -23,7 +23,17 @@
 """Module providing the NodeNodes class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_NODENODES_CARD0 = (
+    FieldSchema("nid", int, 0, 8, None),
+    FieldSchema("x", float, 8, 16, 0.0),
+    FieldSchema("y", float, 24, 16, 0.0),
+    FieldSchema("z", float, 40, 16, 0.0),
+    FieldSchema("tc", int, 56, 8, 0),
+    FieldSchema("rc", int, 64, 8, 0),
+)
 
 class NodeNodes(KeywordBase):
     """DYNA NODE_NODES keyword"""
@@ -35,59 +45,10 @@ class NodeNodes(KeywordBase):
         """Initialize the NodeNodes class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        8,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        24,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        40,
-                        16,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tc",
-                        int,
-                        56,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rc",
-                        int,
-                        64,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _NODENODES_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID.

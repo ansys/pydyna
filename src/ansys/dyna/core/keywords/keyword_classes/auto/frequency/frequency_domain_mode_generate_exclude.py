@@ -23,7 +23,19 @@
 """Module providing the FrequencyDomainModeGenerateExclude class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINMODEGENERATEEXCLUDE_CARD0 = (
+    FieldSchema("m1beg", int, 0, 10, None),
+    FieldSchema("m1end", int, 10, 10, None),
+    FieldSchema("m2beg", int, 20, 10, None),
+    FieldSchema("m2end", int, 30, 10, None),
+    FieldSchema("m3beg", int, 40, 10, None),
+    FieldSchema("m3end", int, 50, 10, None),
+    FieldSchema("m4beg", int, 60, 10, None),
+    FieldSchema("m4end", int, 70, 10, None),
+)
 
 class FrequencyDomainModeGenerateExclude(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_MODE_GENERATE_EXCLUDE keyword"""
@@ -35,68 +47,10 @@ class FrequencyDomainModeGenerateExclude(KeywordBase):
         """Initialize the FrequencyDomainModeGenerateExclude class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "m1beg",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m1end",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m2beg",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m2end",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m3beg",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m3end",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m4beg",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m4end",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINMODEGENERATEEXCLUDE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def m1beg(self) -> typing.Optional[int]:
         """Get or set the First mode ID in block 1.

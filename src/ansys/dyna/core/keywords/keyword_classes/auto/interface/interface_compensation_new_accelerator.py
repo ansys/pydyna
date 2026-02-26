@@ -23,7 +23,16 @@
 """Module providing the InterfaceCompensationNewAccelerator class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACECOMPENSATIONNEWACCELERATOR_CARD0 = (
+    FieldSchema("isteps", int, 0, 10, 0),
+    FieldSchema("tolx", float, 10, 10, 0.5),
+    FieldSchema("toly", float, 20, 10, 0.5),
+    FieldSchema("tolz", float, 30, 10, 0.5),
+    FieldSchema("option", int, 40, 10, 1),
+)
 
 class InterfaceCompensationNewAccelerator(KeywordBase):
     """DYNA INTERFACE_COMPENSATION_NEW_ACCELERATOR keyword"""
@@ -35,52 +44,10 @@ class InterfaceCompensationNewAccelerator(KeywordBase):
         """Initialize the InterfaceCompensationNewAccelerator class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "isteps",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tolx",
-                        float,
-                        10,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "toly",
-                        float,
-                        20,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tolz",
-                        float,
-                        30,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "option",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACECOMPENSATIONNEWACCELERATOR_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def isteps(self) -> int:
         """Get or set the Steps in accelerated compensation procedure, see Remarks.

@@ -23,7 +23,15 @@
 """Module providing the ControlMppRebalance class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPREBALANCE_CARD0 = (
+    FieldSchema("ncycle", int, 0, 10, None),
+    FieldSchema("icoor", int, 10, 10, 0),
+    FieldSchema("icost", int, 20, 10, 0),
+    FieldSchema("thres", float, 30, 10, 1.0),
+)
 
 class ControlMppRebalance(KeywordBase):
     """DYNA CONTROL_MPP_REBALANCE keyword"""
@@ -35,43 +43,10 @@ class ControlMppRebalance(KeywordBase):
         """Initialize the ControlMppRebalance class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ncycle",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icoor",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icost",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thres",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPREBALANCE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ncycle(self) -> typing.Optional[int]:
         """Get or set the Number of cycles between rebalance steps

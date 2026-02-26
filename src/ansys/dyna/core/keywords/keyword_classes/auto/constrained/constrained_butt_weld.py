@@ -23,7 +23,16 @@
 """Module providing the ConstrainedButtWeld class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDBUTTWELD_CARD0 = (
+    FieldSchema("nsid1", int, 0, 10, None),
+    FieldSchema("nsid2", int, 10, 10, None),
+    FieldSchema("eppf", float, 20, 10, 0.0),
+    FieldSchema("sigf", float, 30, 10, 1e+16),
+    FieldSchema("beta", float, 40, 10, 1.0),
+)
 
 class ConstrainedButtWeld(KeywordBase):
     """DYNA CONSTRAINED_BUTT_WELD keyword"""
@@ -35,50 +44,10 @@ class ConstrainedButtWeld(KeywordBase):
         """Initialize the ConstrainedButtWeld class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nsid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eppf",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigf",
-                        float,
-                        30,
-                        10,
-                        1.0e16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDBUTTWELD_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nsid1(self) -> typing.Optional[int]:
         """Get or set the Node set ID for one side of the butt weld, See *SET_NODE_option.

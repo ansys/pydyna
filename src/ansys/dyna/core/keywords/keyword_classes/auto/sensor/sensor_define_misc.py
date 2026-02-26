@@ -23,8 +23,24 @@
 """Module providing the SensorDefineMisc class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SENSORDEFINEMISC_CARD0 = (
+    FieldSchema("sensid", int, 0, 10, None),
+    FieldSchema("mtype", str, 10, 10, "ANGLE"),
+    FieldSchema("i0", str, 20, 10, None),
+    FieldSchema("i1", str, 30, 10, None),
+    FieldSchema("i2", str, 40, 10, None),
+    FieldSchema("i3", str, 50, 10, None),
+    FieldSchema("i4", str, 60, 10, None),
+    FieldSchema("i5", str, 70, 10, None),
+)
+
+_SENSORDEFINEMISC_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SensorDefineMisc(KeywordBase):
     """DYNA SENSOR_DEFINE_MISC keyword"""
@@ -40,86 +56,20 @@ class SensorDefineMisc(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sensid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtype",
-                        str,
-                        10,
-                        10,
-                        "ANGLE",
-                        **kwargs,
-                    ),
-                    Field(
-                        "i0",
-                        str,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i1",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i2",
-                        str,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i3",
-                        str,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i4",
-                        str,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "i5",
-                        str,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SENSORDEFINEMISC_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SensorDefineMisc.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORDEFINEMISC_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sensid(self) -> typing.Optional[int]:
         """Get or set the Sensor ID.

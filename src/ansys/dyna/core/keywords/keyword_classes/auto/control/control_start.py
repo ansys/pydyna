@@ -23,7 +23,12 @@
 """Module providing the ControlStart class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLSTART_CARD0 = (
+    FieldSchema("begtim", float, 0, 10, 0.0),
+)
 
 class ControlStart(KeywordBase):
     """DYNA CONTROL_START keyword"""
@@ -35,20 +40,10 @@ class ControlStart(KeywordBase):
         """Initialize the ControlStart class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "begtim",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLSTART_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def begtim(self) -> float:
         """Get or set the Start time of analysis (default=0.0).

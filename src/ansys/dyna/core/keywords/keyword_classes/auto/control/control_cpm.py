@@ -23,7 +23,18 @@
 """Module providing the ControlCpm class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLCPM_CARD0 = (
+    FieldSchema("cpmout", int, 0, 10, 11),
+    FieldSchema("np2p", int, 10, 10, 5),
+    FieldSchema("ncpmts", int, 20, 10, 0),
+    FieldSchema("cpmerr", int, 30, 10, 0),
+    FieldSchema("sffdc", float, 40, 10, 1.0),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("cpmmf", int, 60, 10, 0),
+)
 
 class ControlCpm(KeywordBase):
     """DYNA CONTROL_CPM keyword"""
@@ -35,67 +46,10 @@ class ControlCpm(KeywordBase):
         """Initialize the ControlCpm class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cpmout",
-                        int,
-                        0,
-                        10,
-                        11,
-                        **kwargs,
-                    ),
-                    Field(
-                        "np2p",
-                        int,
-                        10,
-                        10,
-                        5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncpmts",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpmerr",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sffdc",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cpmmf",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLCPM_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def cpmout(self) -> int:
         """Get or set the Control CPM output database to d3plot

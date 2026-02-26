@@ -23,7 +23,12 @@
 """Module providing the ControlMppDecompositionScaleFactorSph class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPDECOMPOSITIONSCALEFACTORSPH_CARD0 = (
+    FieldSchema("sf", float, 0, 10, None),
+)
 
 class ControlMppDecompositionScaleFactorSph(KeywordBase):
     """DYNA CONTROL_MPP_DECOMPOSITION_SCALE_FACTOR_SPH keyword"""
@@ -35,19 +40,10 @@ class ControlMppDecompositionScaleFactorSph(KeywordBase):
         """Initialize the ControlMppDecompositionScaleFactorSph class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sf",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONSCALEFACTORSPH_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def sf(self) -> typing.Optional[float]:
         """Get or set the Scale factor for SPH elements.

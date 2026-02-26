@@ -23,7 +23,38 @@
 """Module providing the ControlThermalSolver class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLTHERMALSOLVER_CARD0 = (
+    FieldSchema("atype", int, 0, 10, 0),
+    FieldSchema("ptype", int, 10, 10, 0),
+    FieldSchema("solver", int, 20, 10, 11),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("gpt", int, 40, 10, 8),
+    FieldSchema("eqheat", float, 50, 10, 1.0),
+    FieldSchema("fwork", float, 60, 10, 1.0),
+    FieldSchema("sbc", float, 70, 10, 0.0),
+)
+
+_CONTROLTHERMALSOLVER_CARD1 = (
+    FieldSchema("msglvl", int, 0, 10, 0),
+    FieldSchema("maxitr", int, 10, 10, 500),
+    FieldSchema("abstol", float, 20, 10, 1e-10),
+    FieldSchema("reltol", float, 30, 10, 1e-06),
+    FieldSchema("omega", float, 40, 10, 0.0),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("tsf", float, 70, 10, 1.0),
+)
+
+_CONTROLTHERMALSOLVER_CARD2 = (
+    FieldSchema("mxdmp", int, 0, 10, 0),
+    FieldSchema("dtvf", float, 10, 10, 0.0),
+    FieldSchema("varden", int, 20, 10, 0),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("ncycl", int, 40, 10, 1),
+)
 
 class ControlThermalSolver(KeywordBase):
     """DYNA CONTROL_THERMAL_SOLVER keyword"""
@@ -35,184 +66,16 @@ class ControlThermalSolver(KeywordBase):
         """Initialize the ControlThermalSolver class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "atype",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "solver",
-                        int,
-                        20,
-                        10,
-                        11,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gpt",
-                        int,
-                        40,
-                        10,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eqheat",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fwork",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sbc",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "msglvl",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxitr",
-                        int,
-                        10,
-                        10,
-                        500,
-                        **kwargs,
-                    ),
-                    Field(
-                        "abstol",
-                        float,
-                        20,
-                        10,
-                        1.0e-10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "reltol",
-                        float,
-                        30,
-                        10,
-                        1.0E-06,
-                        **kwargs,
-                    ),
-                    Field(
-                        "omega",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tsf",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "mxdmp",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtvf",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "varden",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncycl",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLTHERMALSOLVER_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLTHERMALSOLVER_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLTHERMALSOLVER_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def atype(self) -> int:
         """Get or set the Thermal analysis type:

@@ -23,7 +23,19 @@
 """Module providing the FrequencyDomainModeList class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINMODELIST_CARD0 = (
+    FieldSchema("mid1", int, 0, 10, None),
+    FieldSchema("mid2", int, 10, 10, None),
+    FieldSchema("mid3", int, 20, 10, None),
+    FieldSchema("mid4", int, 30, 10, None),
+    FieldSchema("mid5", int, 40, 10, None),
+    FieldSchema("mid6", int, 50, 10, None),
+    FieldSchema("mid7", int, 60, 10, None),
+    FieldSchema("mid8", int, 70, 10, None),
+)
 
 class FrequencyDomainModeList(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_MODE_LIST keyword"""
@@ -35,68 +47,10 @@ class FrequencyDomainModeList(KeywordBase):
         """Initialize the FrequencyDomainModeList class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINMODELIST_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mid1(self) -> typing.Optional[int]:
         """Get or set the Mode ID 1.

@@ -23,7 +23,23 @@
 """Module providing the DatabaseFsi class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEFSI_CARD0 = (
+    FieldSchema("dtout", float, 0, 10, None),
+    FieldSchema("binary", int, 10, 10, 1),
+)
+
+_DATABASEFSI_CARD1 = (
+    FieldSchema("dbsfi_id", int, 0, 10, None),
+    FieldSchema("sid", int, 10, 10, None),
+    FieldSchema("stdype", int, 20, 10, 0),
+    FieldSchema("swid", int, 30, 10, None),
+    FieldSchema("convid", int, 40, 10, None),
+    FieldSchema("ndsetid", int, 50, 10, None),
+    FieldSchema("cid", int, 60, 10, None),
+)
 
 class DatabaseFsi(KeywordBase):
     """DYNA DATABASE_FSI keyword"""
@@ -35,81 +51,13 @@ class DatabaseFsi(KeywordBase):
         """Initialize the DatabaseFsi class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dtout",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "binary",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dbsfi_id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stdype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "swid",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "convid",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ndsetid",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEFSI_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEFSI_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def dtout(self) -> typing.Optional[float]:
         """Get or set the Output interval

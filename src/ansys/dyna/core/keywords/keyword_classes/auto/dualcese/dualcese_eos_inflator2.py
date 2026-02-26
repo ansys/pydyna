@@ -23,7 +23,44 @@
 """Module providing the DualceseEosInflator2 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEEOSINFLATOR2_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+)
+
+_DUALCESEEOSINFLATOR2_CARD1 = (
+    FieldSchema("cp10", float, 0, 10, 0.0),
+    FieldSchema("cp11", float, 10, 10, 0.0),
+    FieldSchema("cp12", float, 20, 10, 0.0),
+    FieldSchema("cp13", float, 30, 10, 0.0),
+    FieldSchema("cp14", float, 40, 10, 0.0),
+)
+
+_DUALCESEEOSINFLATOR2_CARD2 = (
+    FieldSchema("cp20", float, 0, 10, 0.0),
+    FieldSchema("cp21", float, 10, 10, 0.0),
+    FieldSchema("cp22", float, 20, 10, 0.0),
+    FieldSchema("cp23", float, 30, 10, 0.0),
+    FieldSchema("cp24", float, 40, 10, 0.0),
+)
+
+_DUALCESEEOSINFLATOR2_CARD3 = (
+    FieldSchema("cv10", float, 0, 10, 0.0),
+    FieldSchema("cv11", float, 10, 10, 0.0),
+    FieldSchema("cv12", float, 20, 10, 0.0),
+    FieldSchema("cv13", float, 30, 10, 0.0),
+    FieldSchema("cv14", float, 40, 10, 0.0),
+)
+
+_DUALCESEEOSINFLATOR2_CARD4 = (
+    FieldSchema("cv20", float, 0, 10, 0.0),
+    FieldSchema("cv21", float, 10, 10, 0.0),
+    FieldSchema("cv22", float, 20, 10, 0.0),
+    FieldSchema("cv23", float, 30, 10, 0.0),
+    FieldSchema("cv24", float, 40, 10, 0.0),
+)
 
 class DualceseEosInflator2(KeywordBase):
     """DYNA DUALCESE_EOS_INFLATOR2 keyword"""
@@ -35,195 +72,22 @@ class DualceseEosInflator2(KeywordBase):
         """Initialize the DualceseEosInflator2 class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cp10",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp11",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp12",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp13",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp14",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cp20",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp21",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp22",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp23",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cp24",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cv10",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv11",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv12",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv13",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv14",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cv20",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv21",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv22",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv23",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cv24",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSINFLATOR2_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSINFLATOR2_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSINFLATOR2_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSINFLATOR2_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSINFLATOR2_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state identifier

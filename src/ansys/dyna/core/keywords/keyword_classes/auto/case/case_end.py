@@ -23,7 +23,11 @@
 """Module providing the CaseEnd class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CASEEND_CARD0 = (
+)
 
 class CaseEnd(KeywordBase):
     """DYNA CASE_END keyword"""
@@ -35,9 +39,7 @@ class CaseEnd(KeywordBase):
         """Initialize the CaseEnd class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CASEEND_CARD0,
+                **kwargs,
+            ),        ]

@@ -23,8 +23,39 @@
 """Module providing the DefineDePatternOutput class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEDEPATTERNOUTPUT_CARD0 = (
+    FieldSchema("pid", int, 0, 10, 0),
+    FieldSchema("ptype", int, 10, 10, 0),
+    FieldSchema("xo", float, 20, 10, 0.0),
+    FieldSchema("yo", float, 30, 10, 0.0),
+    FieldSchema("zo", float, 40, 10, 0.0),
+    FieldSchema("xh", float, 50, 10, 0.0),
+    FieldSchema("yh", float, 60, 10, 0.0),
+    FieldSchema("zh", float, 70, 10, 0.0),
+)
+
+_DEFINEDEPATTERNOUTPUT_CARD1 = (
+    FieldSchema("nset", int, 0, 10, 0),
+)
+
+_DEFINEDEPATTERNOUTPUT_CARD2 = (
+    FieldSchema("dist1", float, 0, 10, 0.0),
+    FieldSchema("dist2", float, 10, 10, 0.0),
+    FieldSchema("dist3", float, 20, 10, 0.0),
+    FieldSchema("dist4", float, 30, 10, 0.0),
+    FieldSchema("dist5", float, 40, 10, 0.0),
+    FieldSchema("dist6", float, 50, 10, 0.0),
+    FieldSchema("dist7", float, 60, 10, 0.0),
+    FieldSchema("dist8", float, 70, 10, 0.0),
+)
+
+_DEFINEDEPATTERNOUTPUT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineDePatternOutput(KeywordBase):
     """DYNA DEFINE_DE_PATTERN_OUTPUT keyword"""
@@ -40,173 +71,26 @@ class DefineDePatternOutput(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xo",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yo",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zo",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xh",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yh",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zh",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nset",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "dist1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dist2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dist3",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dist4",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dist5",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dist6",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dist7",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dist8",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDEPATTERNOUTPUT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEPATTERNOUTPUT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEPATTERNOUTPUT_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineDePatternOutput.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEPATTERNOUTPUT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def pid(self) -> int:
         """Get or set the Part or part set ID of the DES

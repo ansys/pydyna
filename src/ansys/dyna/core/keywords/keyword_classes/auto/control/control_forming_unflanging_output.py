@@ -23,7 +23,14 @@
 """Module providing the ControlFormingUnflangingOutput class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGUNFLANGINGOUTPUT_CARD0 = (
+    FieldSchema("thmx", float, 0, 10, 1e+20),
+    FieldSchema("thmn", float, 10, 10, 0.0),
+    FieldSchema("epsmx", float, 20, 10, 1e+20),
+)
 
 class ControlFormingUnflangingOutput(KeywordBase):
     """DYNA CONTROL_FORMING_UNFLANGING_OUTPUT keyword"""
@@ -35,36 +42,10 @@ class ControlFormingUnflangingOutput(KeywordBase):
         """Initialize the ControlFormingUnflangingOutput class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "thmx",
-                        float,
-                        0,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thmn",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsmx",
-                        float,
-                        20,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGUNFLANGINGOUTPUT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def thmx(self) -> float:
         """Get or set the Maximum thickness beyond which elements are deleted; this is

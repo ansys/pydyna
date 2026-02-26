@@ -269,7 +269,8 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             kwd_data: Complete keyword data
             settings: List of card set definitions
 
-        Raises:
+        Raises
+        ------
             Exception: If more than one default target (empty target-name) is specified
             ValueError: If label registry is not available when using refs
         """
@@ -394,7 +395,3 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             kwd_data.card_insertions.append(insertion)
             card_sets.append(card_set)
         kwd_data.card_sets = {"sets": card_sets, "options": has_options}
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass

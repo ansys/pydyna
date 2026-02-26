@@ -7,45 +7,54 @@ inputs:
     description: Enable building the autokeywords API
     required: false
     default: "False"
+
   pdf-pool-size:
     required: false
+
   pdf-string-vacancies:
     required: false
+
   pdf-max-strings:
     required: false
-  PyDynaRunContainer:
+
+  pydyna-run-container:
     description: Run container name
     required: true
+
   python-version:
     description: Python version to use
     required: true
     default: "3.13"
     type: string
+
   github-token:
     description: GitHub token for authentication
     required: true
-
   license-server:
     description: License server address
     required: true
-
   bot-token:
     description: Bot token for authentication
     required: true
-  
   github-actor:
     description: GitHub actor for authentication
     required: true
 
+  use_cache_examples:
+    description: |
+      Whether to use the examples cache. Default is "true".
+    required: false
+    default: true
+    type: boolean
 
 
 runs:
   using: "composite"
   steps:
-    - name: Checkout project
-      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+    - name: Install uv
+      uses: astral-sh/setup-uv@681c641aba71e4a1c380be3ab5e12ad51f415867 # v7.1.6
       with:
-        persist-credentials: true
+        enable-cache: true
 
     - name: Set up Python
       uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
@@ -54,24 +63,34 @@ runs:
         cache: 'pip'
         cache-dependency-path: 'pyproject.toml'
 
+    - name: set up virtual environment
+      run: |
+        python -m venv .venv
+      shell: bash
+
     - name: Install system dependencies
       run: |
         sudo apt-get update
         sudo apt-get install xvfb pandoc texlive-latex-extra latexmk
       shell: bash
 
+    - name: Cache Sphinx build artifacts
+      if: ${{ inputs.use_cache_examples == 'true' }}
+      uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb #v5.0.1
+      with:
+        path: |
+          doc/_build
+          doc/source/examples/
+        key: sphinx-${{ runner.os }}-${{ inputs.python-version }}-${{ hashFiles('doc/source/**/*.rst', 'doc/source/conf.py', 'pyproject.toml', 'examples/**/*') }}-${{ inputs.reset-cache }}
+        restore-keys: |
+          sphinx-${{ runner.os }}-${{ inputs.python-version }}-
+
     - name: Install python dependencies
       run: |
-        python -m pip install .[doc]
-        python -m pip install docker
+        source .venv/bin/activate
+        uv pip install .[doc]
+        uv pip install docker
       shell: bash
-
-    - name: Login to GitHub container registry
-      uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
-      with:
-        registry: ghcr.io
-        username: ${{ inputs.github-actor }}
-        password: ${{ inputs.github-token }}
 
     - name: Set Licensing
       run: |
@@ -81,29 +100,46 @@ runs:
     - name: Install DPF
       uses: ansys/pydpf-actions/install-dpf-server@v2.3 # zizmor: ignore[unpinned-uses]
       with:
-        dpf-standalone-TOKEN: ${{ inputs.bot-token }}
-        ANSYS_VERSION: "242"
+        dpf-standalone-TOKEN: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+        ANSYS_VERSION : "252"
 
-    - name: LS-DYNA Keyword server activation
+    - name: Set DPF environment
       run: |
-        docker pull ghcr.io/ansys/ls-pre:latest
-        docker run -d --name kw_server -p 50051:50051 ghcr.io/ansys/ls-pre:latest && echo "Keyword server active on port 50051."
+        DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v252/ansys/dpf/server_2025_2_pre0"
+        echo "Setting DPF server path to: ${DPF_PATH}"
+        {
+          echo "AWP_ROOT252=${DPF_PATH}"
+          echo "ANSYS_DPF_PATH=${DPF_PATH}"
+          echo "ANSYS_DPF_SERVER_ROOT=${DPF_PATH}"
+        } >> "$GITHUB_ENV"
       shell: bash
+    - name: Login to GitHub container registry
+      if: ${{ inputs.pydyna-run-container != '' }}
+      uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
+      with:
+        registry: ghcr.io
+        username: ${{ inputs.github-actor }}
+        password: ${{ inputs.github-token }}
 
     - name: Pull PyDyna-run image
+      if: ${{ inputs.pydyna-run-container != '' }}
+      env:
+        DOCKER_IMAGE: ${{ inputs.pydyna-run-container }}
       run: |
-        docker pull ghcr.io/ansys/pydyna-run:latest
+        source .venv/bin/activate
+        docker pull $DOCKER_IMAGE
       shell: bash
 
     - name: Build the html documentation
       env:
         ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
         ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
-        PYDYNA_RUN_CONTAINER: ${{ inputs.PyDynaRunContainer }}
-        BUILD_AUTOKEYWORS_API: ${{ inputs.build-autokeywords-api }}
+        PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
+        BUILD_AUTOKEYWORDS_API: ${{ inputs.build-autokeywords-api }}
         LSTC_LICENSE: ansys
       run: |
-        timeout 7200 xvfb-run make -C doc html
+        source .venv/bin/activate
+        timeout 7200 xvfb-run uv run --no-sync -- make -C doc html SPHINXOPTS="-j auto"
       shell: bash
 
     - name: Upload html documentation
@@ -116,12 +152,13 @@ runs:
     - name: "Build the pdf documentation"
       shell: bash
       run: |
-        xvfb-run make -C doc pdf
+        source .venv/bin/activate
+        xvfb-run uv run --no-sync -- make -C doc pdf
       env:
         ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
         ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
         LSTC_LICENSE: ansys
-        PYDYNA_RUN_CONTAINER: ${{ inputs.PyDynaRunContainer }}
+        PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
         PYDYNA_RUN_STREAM: "0"
         extra_mem_bot: 20000000
         extra_mem_top: 30000000
@@ -136,15 +173,3 @@ runs:
         path: doc/_build/latex/*.pdf
         retention-days: 7
 
-    - name: Extract the server logs
-      if: always()
-      run: |
-        docker logs kw_server > server_output.txt
-      shell: bash
-
-    - name: Upload the server logs
-      if: always()
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-      with:
-        name: server_output_docs.txt
-        path: server_output.txt

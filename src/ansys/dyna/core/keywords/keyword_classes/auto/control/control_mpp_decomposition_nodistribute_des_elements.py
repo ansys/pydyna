@@ -23,7 +23,11 @@
 """Module providing the ControlMppDecompositionNodistributeDesElements class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPDECOMPOSITIONNODISTRIBUTEDESELEMENTS_CARD0 = (
+)
 
 class ControlMppDecompositionNodistributeDesElements(KeywordBase):
     """DYNA CONTROL_MPP_DECOMPOSITION_NODISTRIBUTE_DES_ELEMENTS keyword"""
@@ -35,9 +39,7 @@ class ControlMppDecompositionNodistributeDesElements(KeywordBase):
         """Initialize the ControlMppDecompositionNodistributeDesElements class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONNODISTRIBUTEDESELEMENTS_CARD0,
+                **kwargs,
+            ),        ]

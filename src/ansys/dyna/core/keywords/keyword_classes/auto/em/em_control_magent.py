@@ -23,7 +23,12 @@
 """Module providing the EmControlMagent class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMCONTROLMAGENT_CARD0 = (
+    FieldSchema("mcomp", int, 0, 10, 0),
+)
 
 class EmControlMagent(KeywordBase):
     """DYNA EM_CONTROL_MAGENT keyword"""
@@ -35,20 +40,10 @@ class EmControlMagent(KeywordBase):
         """Initialize the EmControlMagent class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mcomp",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMCONTROLMAGENT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def mcomp(self) -> int:
         """Get or set the Magnetization vector recomputation:

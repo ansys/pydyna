@@ -23,7 +23,17 @@
 """Module providing the DualceseControlSolver class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESECONTROLSOLVER_CARD0 = (
+    FieldSchema("eqns", str, 0, 10, "EULER"),
+    FieldSchema("igeom", str, 10, 10, None),
+    FieldSchema("iframe", str, 20, 10, "FIXED"),
+    FieldSchema("mixtype", str, 30, 10, None),
+    FieldSchema("idc", float, 40, 10, 0.25),
+    FieldSchema("isnan", int, 50, 10, 0),
+)
 
 class DualceseControlSolver(KeywordBase):
     """DYNA DUALCESE_CONTROL_SOLVER keyword"""
@@ -35,58 +45,10 @@ class DualceseControlSolver(KeywordBase):
         """Initialize the DualceseControlSolver class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eqns",
-                        str,
-                        0,
-                        10,
-                        "EULER",
-                        **kwargs,
-                    ),
-                    Field(
-                        "igeom",
-                        str,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iframe",
-                        str,
-                        20,
-                        10,
-                        "FIXED",
-                        **kwargs,
-                    ),
-                    Field(
-                        "mixtype",
-                        str,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idc",
-                        float,
-                        40,
-                        10,
-                        0.25,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isnan",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESECONTROLSOLVER_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eqns(self) -> str:
         """Get or set the Select the equations being solved with the dual CESE solver.

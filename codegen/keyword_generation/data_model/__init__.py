@@ -49,10 +49,12 @@ _MODEL: typing.Optional[KeywordDataModel] = None
 def get_config() -> KeywordDataModel:
     """Get the current keyword data model instance.
 
-    Returns:
+    Returns
+    -------
         KeywordDataModel instance
 
-    Raises:
+    Raises
+    ------
         RuntimeError: If configuration has not been loaded yet
     """
     if _MODEL is None:

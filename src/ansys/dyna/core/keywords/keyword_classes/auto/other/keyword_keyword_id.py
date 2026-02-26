@@ -23,7 +23,20 @@
 """Module providing the KeywordKeywordId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_KEYWORDKEYWORDID_CARD0 = (
+    FieldSchema("memory", str, 0, 10, None),
+    FieldSchema("memory2", str, 10, 10, None),
+    FieldSchema("ncpu", int, 20, 10, None),
+)
+
+_KEYWORDKEYWORDID_CARD1 = (
+    FieldSchema("project", str, 0, 20, None),
+    FieldSchema("num", str, 20, 20, None),
+    FieldSchema("stage", str, 40, 40, None),
+)
 
 class KeywordKeywordId(KeywordBase):
     """DYNA KEYWORD_KEYWORD_ID keyword"""
@@ -35,58 +48,13 @@ class KeywordKeywordId(KeywordBase):
         """Initialize the KeywordKeywordId class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "memory",
-                        str,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "memory2",
-                        str,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncpu",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "project",
-                        str,
-                        0,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "num",
-                        str,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stage",
-                        str,
-                        40,
-                        40,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _KEYWORDKEYWORDID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _KEYWORDKEYWORDID_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def memory(self) -> typing.Optional[str]:
         """Get or set the Memory size in units of words to be allocated.

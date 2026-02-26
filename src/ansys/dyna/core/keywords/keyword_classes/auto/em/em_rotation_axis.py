@@ -23,7 +23,18 @@
 """Module providing the EmRotationAxis class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMROTATIONAXIS_CARD0 = (
+    FieldSchema("xp", float, 0, 10, None),
+    FieldSchema("yp", float, 10, 10, None),
+    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("xd", float, 30, 10, None),
+    FieldSchema("yd", float, 40, 10, None),
+    FieldSchema("zd", float, 50, 10, None),
+    FieldSchema("numsec", int, 60, 10, None),
+)
 
 class EmRotationAxis(KeywordBase):
     """DYNA EM_ROTATION_AXIS keyword"""
@@ -35,61 +46,10 @@ class EmRotationAxis(KeywordBase):
         """Initialize the EmRotationAxis class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "xp",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xd",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yd",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zd",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numsec",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMROTATIONAXIS_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def xp(self) -> typing.Optional[float]:
         """Get or set the x coordinate of the point

@@ -23,7 +23,12 @@
 """Module providing the ControlMppDecompositionElcost class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPDECOMPOSITIONELCOST_CARD0 = (
+    FieldSchema("itype", int, 0, 10, 1),
+)
 
 class ControlMppDecompositionElcost(KeywordBase):
     """DYNA CONTROL_MPP_DECOMPOSITION_ELCOST keyword"""
@@ -35,20 +40,10 @@ class ControlMppDecompositionElcost(KeywordBase):
         """Initialize the ControlMppDecompositionElcost class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "itype",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONELCOST_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def itype(self) -> int:
         """Get or set the Hardware specific cost profile.

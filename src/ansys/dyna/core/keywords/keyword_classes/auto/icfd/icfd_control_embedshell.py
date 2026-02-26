@@ -23,7 +23,14 @@
 """Module providing the IcfdControlEmbedshell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLEMBEDSHELL_CARD0 = (
+    FieldSchema("gtype", int, 0, 10, 0),
+    FieldSchema("dist", float, 10, 10, 0.1),
+    FieldSchema("tps", int, 20, 10, 0),
+)
 
 class IcfdControlEmbedshell(KeywordBase):
     """DYNA ICFD_CONTROL_EMBEDSHELL keyword"""
@@ -35,36 +42,10 @@ class IcfdControlEmbedshell(KeywordBase):
         """Initialize the IcfdControlEmbedshell class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "gtype",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dist",
-                        float,
-                        10,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tps",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLEMBEDSHELL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def gtype(self) -> int:
         """Get or set the Gap type. Defines the criteria for selecting a distance to build the gap between the embedded nodes and the newly generated :

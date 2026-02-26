@@ -1,0 +1,17 @@
+            TableCard(
+                [
+{% for field in card.fields %}
+                    Field("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {{field.default}}),
+{% endfor %}
+                ],
+{% if card.table.length_func %}
+                lambda: {{card.table.length_func}},
+{% else %}
+                None,
+{% endif %}
+{% if card.table.active_func %}
+                lambda: {{card.table.active_func}},
+{% endif %}
+                name="{{card.table.name}}",
+                **kwargs,
+            ),

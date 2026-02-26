@@ -23,7 +23,35 @@
 """Module providing the LoadSegmentContactMask class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADSEGMENTCONTACTMASK_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
+_LOADSEGMENTCONTACTMASK_CARD1 = (
+    FieldSchema("lsid", int, 0, 10, None),
+    FieldSchema("p1", float, 10, 10, None),
+    FieldSchema("p2", float, 20, 10, None),
+    FieldSchema("cid1", int, 30, 10, None),
+    FieldSchema("cid2", int, 40, 10, None),
+    FieldSchema("cid3", int, 50, 10, None),
+    FieldSchema("cid4", int, 60, 10, None),
+    FieldSchema("cid5", int, 70, 10, None),
+)
+
+_LOADSEGMENTCONTACTMASK_CARD2 = (
+    FieldSchema("cid1", int, 0, 10, None),
+    FieldSchema("cid2", int, 10, 10, None),
+    FieldSchema("cid3", int, 20, 10, None),
+    FieldSchema("cid4", int, 30, 10, None),
+    FieldSchema("cid5", int, 40, 10, None),
+    FieldSchema("cid6", int, 50, 10, None),
+    FieldSchema("cid7", int, 60, 10, None),
+    FieldSchema("cid8", int, 70, 10, None),
+)
 
 class LoadSegmentContactMask(KeywordBase):
     """DYNA LOAD_SEGMENT_CONTACT_MASK keyword"""
@@ -35,146 +63,16 @@ class LoadSegmentContactMask(KeywordBase):
         """Initialize the LoadSegmentContactMask class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "heading",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lsid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid1",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid2",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid3",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid4",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid5",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "cid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTCONTACTMASK_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTCONTACTMASK_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTCONTACTMASK_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the loading ID

@@ -23,7 +23,17 @@
 """Module providing the BoundarySphNonReflecting class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYSPHNONREFLECTING_CARD0 = (
+    FieldSchema("vtx", float, 0, 10, None),
+    FieldSchema("vty", float, 10, 10, None),
+    FieldSchema("vtz", float, 20, 10, None),
+    FieldSchema("vhx", float, 30, 10, None),
+    FieldSchema("vhy", float, 40, 10, None),
+    FieldSchema("vhz", float, 50, 10, None),
+)
 
 class BoundarySphNonReflecting(KeywordBase):
     """DYNA BOUNDARY_SPH_NON_REFLECTING keyword"""
@@ -35,54 +45,10 @@ class BoundarySphNonReflecting(KeywordBase):
         """Initialize the BoundarySphNonReflecting class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "vtx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vty",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vtz",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vhx",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vhy",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vhz",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYSPHNONREFLECTING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def vtx(self) -> typing.Optional[float]:
         """Get or set the x-coordinate of tail of a normal vector originating on the wall

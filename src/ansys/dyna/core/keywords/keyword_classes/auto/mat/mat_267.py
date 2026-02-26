@@ -23,8 +23,121 @@
 """Module providing the Mat267 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MAT267_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("k", float, 20, 10, None),
+    FieldSchema("mu", float, 30, 10, None),
+    FieldSchema("n", int, 40, 10, 0),
+    FieldSchema("mull", int, 50, 10, 1),
+    FieldSchema("vispl", int, 60, 10, 0),
+    FieldSchema("visel", int, 70, 10, 0),
+)
+
+_MAT267_CARD1 = (
+    FieldSchema("yld0", float, 0, 10, None),
+    FieldSchema("fp", float, 10, 10, None),
+    FieldSchema("gp", float, 20, 10, None),
+    FieldSchema("hp", float, 30, 10, None),
+    FieldSchema("lp", float, 40, 10, None),
+    FieldSchema("mp", float, 50, 10, None),
+    FieldSchema("np", float, 60, 10, None),
+    FieldSchema("pmu", float, 70, 10, None),
+)
+
+_MAT267_CARD2 = (
+    FieldSchema("m1", float, 0, 10, None),
+    FieldSchema("m2", float, 10, 10, None),
+    FieldSchema("m3", float, 20, 10, None),
+    FieldSchema("m4", float, 30, 10, None),
+    FieldSchema("m5", float, 40, 10, None),
+    FieldSchema("time", float, 50, 10, None),
+    FieldSchema("vcon", float, 60, 10, 9.0),
+)
+
+_MAT267_CARD3 = (
+    FieldSchema("q1", float, 0, 10, None),
+    FieldSchema("b1", float, 10, 10, None),
+    FieldSchema("q2", float, 20, 10, None),
+    FieldSchema("b2", float, 30, 10, None),
+    FieldSchema("q3", float, 40, 10, None),
+    FieldSchema("b3", float, 50, 10, None),
+    FieldSchema("q4", float, 60, 10, None),
+    FieldSchema("b4", float, 70, 10, None),
+)
+
+_MAT267_CARD4 = (
+    FieldSchema("k1", float, 0, 10, None),
+    FieldSchema("s1", float, 10, 10, None),
+    FieldSchema("k2", float, 20, 10, None),
+    FieldSchema("s2", float, 30, 10, None),
+    FieldSchema("k3", float, 40, 10, None),
+    FieldSchema("s3", float, 50, 10, None),
+)
+
+_MAT267_CARD5 = (
+    FieldSchema("aopt", float, 0, 10, 0.0),
+    FieldSchema("macf", int, 10, 10, 1),
+    FieldSchema("xp", float, 20, 10, None),
+    FieldSchema("yp", float, 30, 10, None),
+    FieldSchema("zp", float, 40, 10, None),
+    FieldSchema("a1", float, 50, 10, None),
+    FieldSchema("a2", float, 60, 10, None),
+    FieldSchema("a3", float, 70, 10, None),
+)
+
+_MAT267_CARD6 = (
+    FieldSchema("v1", float, 0, 10, None),
+    FieldSchema("v2", float, 10, 10, None),
+    FieldSchema("v3", float, 20, 10, None),
+    FieldSchema("d1", float, 30, 10, None),
+    FieldSchema("d2", float, 40, 10, None),
+    FieldSchema("d3", float, 50, 10, None),
+    FieldSchema("beta", float, 60, 10, None),
+)
+
+_MAT267_CARD7 = (
+    FieldSchema("taui", float, 0, 10, None),
+    FieldSchema("betai_gammai", float, 10, 10, None, "betai/gammai"),
+)
+
+_MAT267_CARD8 = (
+    FieldSchema("taui", float, 0, 10, None),
+    FieldSchema("betai_gammai", float, 10, 10, None, "betai/gammai"),
+)
+
+_MAT267_CARD9 = (
+    FieldSchema("taui", float, 0, 10, None),
+    FieldSchema("betai_gammai", float, 10, 10, None, "betai/gammai"),
+)
+
+_MAT267_CARD10 = (
+    FieldSchema("taui", float, 0, 10, None),
+    FieldSchema("betai_gammai", float, 10, 10, None, "betai/gammai"),
+)
+
+_MAT267_CARD11 = (
+    FieldSchema("taui", float, 0, 10, None),
+    FieldSchema("betai_gammai", float, 10, 10, None, "betai/gammai"),
+)
+
+_MAT267_CARD12 = (
+    FieldSchema("taui", float, 0, 10, None),
+    FieldSchema("betai_gammai", float, 10, 10, None, "betai/gammai"),
+)
+
+_MAT267_CARD13 = (
+    FieldSchema("taui", float, 0, 10, None),
+    FieldSchema("betai_gammai", float, 10, 10, None, "betai/gammai"),
+)
+
+_MAT267_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class Mat267(KeywordBase):
     """DYNA MAT_267 keyword"""
@@ -40,550 +153,59 @@ class Mat267(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mull",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vispl",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "visel",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "yld0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fp",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hp",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mp",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "np",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmu",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "m1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "time",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vcon",
-                        float,
-                        60,
-                        10,
-                        9.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "q1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q3",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q4",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b4",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "k1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k3",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "aopt",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "macf",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xp",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yp",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zp",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "v1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "v3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "taui",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betai/gammai",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "taui",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betai/gammai",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "taui",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betai/gammai",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "taui",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betai/gammai",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "taui",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betai/gammai",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "taui",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betai/gammai",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "taui",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "betai/gammai",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MAT267_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT267_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT267_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT267_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT267_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT267_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT267_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT267_CARD7,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT267_CARD8,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT267_CARD9,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT267_CARD10,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT267_CARD11,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT267_CARD12,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MAT267_CARD13,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = Mat267.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MAT267_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified.
@@ -1243,12 +865,12 @@ class Mat267(KeywordBase):
         """Get or set the VISEL.EQ.1: Dissipating energy factors.(see Holzapfel)
         VISEL.EQ.2: Gamma factors (see Simo).
         """ # nopep8
-        return self._cards[7].get_value("betai/gammai")
+        return self._cards[7].get_value("betai_gammai")
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
         """Set the betai_gammai property."""
-        self._cards[7].set_value("betai/gammai", value)
+        self._cards[7].set_value("betai_gammai", value)
 
     @property
     def taui(self) -> typing.Optional[float]:
@@ -1266,12 +888,12 @@ class Mat267(KeywordBase):
         """Get or set the VISEL.EQ.1: Dissipating energy factors.(see Holzapfel)
         VISEL.EQ.2: Gamma factors (see Simo).
         """ # nopep8
-        return self._cards[8].get_value("betai/gammai")
+        return self._cards[8].get_value("betai_gammai")
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
         """Set the betai_gammai property."""
-        self._cards[8].set_value("betai/gammai", value)
+        self._cards[8].set_value("betai_gammai", value)
 
     @property
     def taui(self) -> typing.Optional[float]:
@@ -1289,12 +911,12 @@ class Mat267(KeywordBase):
         """Get or set the VISEL.EQ.1: Dissipating energy factors.(see Holzapfel)
         VISEL.EQ.2: Gamma factors (see Simo).
         """ # nopep8
-        return self._cards[9].get_value("betai/gammai")
+        return self._cards[9].get_value("betai_gammai")
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
         """Set the betai_gammai property."""
-        self._cards[9].set_value("betai/gammai", value)
+        self._cards[9].set_value("betai_gammai", value)
 
     @property
     def taui(self) -> typing.Optional[float]:
@@ -1312,12 +934,12 @@ class Mat267(KeywordBase):
         """Get or set the VISEL.EQ.1: Dissipating energy factors.(see Holzapfel)
         VISEL.EQ.2: Gamma factors (see Simo).
         """ # nopep8
-        return self._cards[10].get_value("betai/gammai")
+        return self._cards[10].get_value("betai_gammai")
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
         """Set the betai_gammai property."""
-        self._cards[10].set_value("betai/gammai", value)
+        self._cards[10].set_value("betai_gammai", value)
 
     @property
     def taui(self) -> typing.Optional[float]:
@@ -1335,12 +957,12 @@ class Mat267(KeywordBase):
         """Get or set the VISEL.EQ.1: Dissipating energy factors.(see Holzapfel)
         VISEL.EQ.2: Gamma factors (see Simo).
         """ # nopep8
-        return self._cards[11].get_value("betai/gammai")
+        return self._cards[11].get_value("betai_gammai")
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
         """Set the betai_gammai property."""
-        self._cards[11].set_value("betai/gammai", value)
+        self._cards[11].set_value("betai_gammai", value)
 
     @property
     def taui(self) -> typing.Optional[float]:
@@ -1358,12 +980,12 @@ class Mat267(KeywordBase):
         """Get or set the VISEL.EQ.1: Dissipating energy factors.(see Holzapfel)
         VISEL.EQ.2: Gamma factors (see Simo).
         """ # nopep8
-        return self._cards[12].get_value("betai/gammai")
+        return self._cards[12].get_value("betai_gammai")
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
         """Set the betai_gammai property."""
-        self._cards[12].set_value("betai/gammai", value)
+        self._cards[12].set_value("betai_gammai", value)
 
     @property
     def taui(self) -> typing.Optional[float]:
@@ -1381,12 +1003,12 @@ class Mat267(KeywordBase):
         """Get or set the VISEL.EQ.1: Dissipating energy factors.(see Holzapfel)
         VISEL.EQ.2: Gamma factors (see Simo).
         """ # nopep8
-        return self._cards[13].get_value("betai/gammai")
+        return self._cards[13].get_value("betai_gammai")
 
     @betai_gammai.setter
     def betai_gammai(self, value: float) -> None:
         """Set the betai_gammai property."""
-        self._cards[13].set_value("betai/gammai", value)
+        self._cards[13].set_value("betai_gammai", value)
 
     @property
     def title(self) -> typing.Optional[str]:

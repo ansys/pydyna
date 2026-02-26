@@ -23,7 +23,13 @@
 """Module providing the ControlSubcycleMassScaledPartSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLSUBCYCLEMASSSCALEDPARTSET_CARD0 = (
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("ts", float, 10, 10, None),
+)
 
 class ControlSubcycleMassScaledPartSet(KeywordBase):
     """DYNA CONTROL_SUBCYCLE_MASS_SCALED_PART_SET keyword"""
@@ -35,26 +41,10 @@ class ControlSubcycleMassScaledPartSet(KeywordBase):
         """Initialize the ControlSubcycleMassScaledPartSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "psid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ts",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLSUBCYCLEMASSSCALEDPARTSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set ID

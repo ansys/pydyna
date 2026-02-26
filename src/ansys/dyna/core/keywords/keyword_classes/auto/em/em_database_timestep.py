@@ -23,7 +23,12 @@
 """Module providing the EmDatabaseTimestep class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMDATABASETIMESTEP_CARD0 = (
+    FieldSchema("outlv", int, 0, 10, 0),
+)
 
 class EmDatabaseTimestep(KeywordBase):
     """DYNA EM_DATABASE_TIMESTEP keyword"""
@@ -35,20 +40,10 @@ class EmDatabaseTimestep(KeywordBase):
         """Initialize the EmDatabaseTimestep class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "outlv",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMDATABASETIMESTEP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def outlv(self) -> int:
         """Get or set the Determines if the output file should be dumped.

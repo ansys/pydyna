@@ -23,7 +23,17 @@
 """Module providing the EmSolverFem class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMSOLVERFEM_CARD0 = (
+    FieldSchema("reltol", float, 0, 10, 0.001),
+    FieldSchema("maxite", int, 10, 10, 1000),
+    FieldSchema("stype", int, 20, 10, 1),
+    FieldSchema("precon", int, 30, 10, 1),
+    FieldSchema("uselast", int, 40, 10, 1),
+    FieldSchema("ncyclfem", int, 50, 10, 5000),
+)
 
 class EmSolverFem(KeywordBase):
     """DYNA EM_SOLVER_FEM keyword"""
@@ -35,60 +45,10 @@ class EmSolverFem(KeywordBase):
         """Initialize the EmSolverFem class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "reltol",
-                        float,
-                        0,
-                        10,
-                        1e-3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxite",
-                        int,
-                        10,
-                        10,
-                        1000,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "precon",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uselast",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncyclfem",
-                        int,
-                        50,
-                        10,
-                        5000,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMSOLVERFEM_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def reltol(self) -> float:
         """Get or set the Relative tolerance for the solver. The user should try to decrease this tolerance if the results are not accurate enough. More iterations will then be needed.

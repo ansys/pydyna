@@ -23,7 +23,18 @@
 """Module providing the ControlImplicitFormingDyn class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITFORMINGDYN_CARD0 = (
+    FieldSchema("ioption", int, 0, 10, 1),
+    FieldSchema("nsmin", int, 10, 10, None),
+    FieldSchema("nsmax", int, 20, 10, 2),
+    FieldSchema("birth", float, 30, 10, 0.0),
+    FieldSchema("death", float, 40, 10, 1e+20),
+    FieldSchema("penchk", float, 50, 10, 0.0),
+    FieldSchema("dt0", float, 60, 10, None),
+)
 
 class ControlImplicitFormingDyn(KeywordBase):
     """DYNA CONTROL_IMPLICIT_FORMING_DYN keyword"""
@@ -35,66 +46,10 @@ class ControlImplicitFormingDyn(KeywordBase):
         """Initialize the ControlImplicitFormingDyn class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ioption",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsmin",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsmax",
-                        int,
-                        20,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        40,
-                        10,
-                        1.e+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "penchk",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITFORMINGDYN_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ioption(self) -> int:
         """Get or set the Solution type:

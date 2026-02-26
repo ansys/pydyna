@@ -23,7 +23,23 @@
 """Module providing the Iga2DBrep class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_IGA2DBREP_CARD0 = (
+    FieldSchema("brid", int, 0, 10, None),
+)
+
+_IGA2DBREP_CARD1 = (
+    FieldSchema("fid1", int, 0, 10, None),
+    FieldSchema("fid2", int, 10, 10, None),
+    FieldSchema("fid3", int, 20, 10, None),
+    FieldSchema("fid4", int, 30, 10, None),
+    FieldSchema("fid5", int, 40, 10, None),
+    FieldSchema("fid6", int, 50, 10, None),
+    FieldSchema("fid7", int, 60, 10, None),
+    FieldSchema("fid8", int, 70, 10, None),
+)
 
 class Iga2DBrep(KeywordBase):
     """DYNA IGA_2D_BREP keyword"""
@@ -35,79 +51,13 @@ class Iga2DBrep(KeywordBase):
         """Initialize the Iga2DBrep class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "brid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fid1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fid2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fid3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fid4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fid5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fid6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fid7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fid8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _IGA2DBREP_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _IGA2DBREP_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def brid(self) -> typing.Optional[int]:
         """Get or set the Two-dimensional boundary representation ID. A unique number must be chosen.

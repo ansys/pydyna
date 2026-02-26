@@ -23,9 +23,20 @@
 """Module providing the SetBox class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
+
+_SETBOX_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+)
+
+_SETBOX_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SetBox(KeywordBase):
     """DYNA SET_BOX keyword"""
@@ -35,49 +46,35 @@ class SetBox(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "box": LinkType.DEFINE_BOX,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetBox class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            SeriesCard(
+            Card.from_field_schemas_with_defaults(
+                _SETBOX_CARD0,
+                **kwargs,
+            ),            SeriesCard(
                 "box",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("box")),
-            OptionCardSet(
+                data = kwargs.get("box")),            OptionCardSet(
                 option_spec = SetBox.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SETBOX_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set ID of new beam set. All beam sets should have a unique set ID.
@@ -111,4 +108,19 @@ class SetBox(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def box_link(self) -> typing.Optional[DefineBox]:
+        """Get the DefineBox object for box."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.box:
+                return kwd
+        return None
+
+    @box_link.setter
+    def box_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for box."""
+        self.box = value.boxid
 

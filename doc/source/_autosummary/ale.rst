@@ -167,24 +167,24 @@ AleMeshInterface
     :members:
 
 
-AleMultiMaterialGroup
----------------------
+AleMulti_MaterialGroup
+----------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_multi_material_group
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_multi__material_group
     :members:
 
 
-AleMultiMaterialGroupPart
+AleMulti_MaterialGroupPart
+--------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_multi__material_group_part
+    :members:
+
+
+AleMulti_MaterialGroupSet
 -------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_multi_material_group_part
-    :members:
-
-
-AleMultiMaterialGroupSet
-------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_multi_material_group_set
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_multi__material_group_set
     :members:
 
 
@@ -289,28 +289,28 @@ AleStructuredMeshVolumeFilling
 AleStructuredMultiMaterialGroup
 -------------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_multi_material_group
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_multi__material_group
     :members:
 
 
-AleStructuredMultiMaterialGroup
--------------------------------
+AleStructuredMulti_MaterialGroup
+--------------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_multi_material_group
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_multi__material_group
     :members:
 
 
-AleStructuredMultiMaterialGroupAxisym
--------------------------------------
+AleStructuredMulti_MaterialGroupAxisym
+--------------------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_multi_material_group_axisym
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_multi__material_group_axisym
     :members:
 
 
-AleStructuredMultiMaterialGroupPlneps
--------------------------------------
+AleStructuredMulti_MaterialGroupPlneps
+--------------------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_multi_material_group_plneps
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_multi__material_group_plneps
     :members:
 
 

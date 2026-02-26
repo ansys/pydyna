@@ -23,7 +23,12 @@
 """Module providing the IncludeWdInitialBlank class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INCLUDEWDINITIALBLANK_CARD0 = (
+    FieldSchema("filename", str, 0, 256, None),
+)
 
 class IncludeWdInitialBlank(KeywordBase):
     """DYNA INCLUDE_WD_INITIAL_BLANK keyword"""
@@ -35,19 +40,10 @@ class IncludeWdInitialBlank(KeywordBase):
         """Initialize the IncludeWdInitialBlank class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INCLUDEWDINITIALBLANK_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name of the initial sheet blank in keyword format, consisting of *NODE, and *ELEMENT_SHELL information

@@ -23,7 +23,18 @@
 """Module providing the DatabaseExtentBinaryComp class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEEXTENTBINARYCOMP_CARD0 = (
+    FieldSchema("iglb", int, 0, 10, 0),
+    FieldSchema("ixyz", int, 10, 10, 0),
+    FieldSchema("ivel", int, 20, 10, 0),
+    FieldSchema("iacc", int, 30, 10, 0),
+    FieldSchema("istrs", int, 40, 10, 0),
+    FieldSchema("istra", int, 50, 10, 0),
+    FieldSchema("ised", int, 60, 10, 0),
+)
 
 class DatabaseExtentBinaryComp(KeywordBase):
     """DYNA DATABASE_EXTENT_BINARY_COMP keyword"""
@@ -35,68 +46,10 @@ class DatabaseExtentBinaryComp(KeywordBase):
         """Initialize the DatabaseExtentBinaryComp class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "iglb",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ixyz",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ivel",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iacc",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "istrs",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "istra",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ised",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEEXTENTBINARYCOMP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def iglb(self) -> int:
         """Get or set the Output flag for global data

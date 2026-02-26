@@ -156,7 +156,3 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
             }
             new_options.append(new_option)
         kwd_data.options = new_options
-
-    def post_process(self, kwd_data: KeywordData) -> None:
-        """No post-processing required."""
-        pass

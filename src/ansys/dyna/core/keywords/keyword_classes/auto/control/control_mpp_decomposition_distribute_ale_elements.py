@@ -23,7 +23,11 @@
 """Module providing the ControlMppDecompositionDistributeAleElements class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPDECOMPOSITIONDISTRIBUTEALEELEMENTS_CARD0 = (
+)
 
 class ControlMppDecompositionDistributeAleElements(KeywordBase):
     """DYNA CONTROL_MPP_DECOMPOSITION_DISTRIBUTE_ALE_ELEMENTS keyword"""
@@ -35,9 +39,7 @@ class ControlMppDecompositionDistributeAleElements(KeywordBase):
         """Initialize the ControlMppDecompositionDistributeAleElements class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONDISTRIBUTEALEELEMENTS_CARD0,
+                **kwargs,
+            ),        ]

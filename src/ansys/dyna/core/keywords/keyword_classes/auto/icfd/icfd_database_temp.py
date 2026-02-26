@@ -23,7 +23,13 @@
 """Module providing the IcfdDatabaseTemp class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDDATABASETEMP_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("dtout", float, 10, 10, None),
+)
 
 class IcfdDatabaseTemp(KeywordBase):
     """DYNA ICFD_DATABASE_TEMP keyword"""
@@ -35,26 +41,10 @@ class IcfdDatabaseTemp(KeywordBase):
         """Initialize the IcfdDatabaseTemp class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtout",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDATABASETEMP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of the surface where the average temperature and heat flux will be computed.

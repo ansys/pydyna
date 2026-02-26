@@ -23,7 +23,12 @@
 """Module providing the IncludeCompensationBlankBeforeSpringback class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INCLUDECOMPENSATIONBLANKBEFORESPRINGBACK_CARD0 = (
+    FieldSchema("filename", str, 0, 256, None),
+)
 
 class IncludeCompensationBlankBeforeSpringback(KeywordBase):
     """DYNA INCLUDE_COMPENSATION_BLANK_BEFORE_SPRINGBACK keyword"""
@@ -35,19 +40,10 @@ class IncludeCompensationBlankBeforeSpringback(KeywordBase):
         """Initialize the IncludeCompensationBlankBeforeSpringback class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INCLUDECOMPENSATIONBLANKBEFORESPRINGBACK_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Name of the keyword files containing nodes and elements information, with adaptive constraints if exist. Currently all blanks must have the same numbers of nodes and elements.

@@ -23,7 +23,25 @@
 """Module providing the ConstrainedJointUserForce class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONSTRAINEDJOINTUSERFORCE_CARD0 = (
+    FieldSchema("fid", int, 0, 10, None),
+    FieldSchema("jid", int, 10, 10, None),
+    FieldSchema("nhisv", int, 20, 10, 0),
+)
+
+_CONSTRAINEDJOINTUSERFORCE_CARD1 = (
+    FieldSchema("const1", int, 0, 10, None),
+    FieldSchema("const2", int, 10, 10, None),
+    FieldSchema("const3", int, 20, 10, None),
+    FieldSchema("const4", int, 30, 10, None),
+    FieldSchema("const5", int, 40, 10, None),
+    FieldSchema("const6", int, 50, 10, None),
+    FieldSchema("const7", int, 60, 10, None),
+    FieldSchema("const8", int, 70, 10, None),
+)
 
 class ConstrainedJointUserForce(KeywordBase):
     """DYNA CONSTRAINED_JOINT_USER_FORCE keyword"""
@@ -35,94 +53,13 @@ class ConstrainedJointUserForce(KeywordBase):
         """Initialize the ConstrainedJointUserForce class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "fid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "jid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "const1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "const2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "const3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "const4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "const5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "const6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "const7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "const8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTUSERFORCE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDJOINTUSERFORCE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def fid(self) -> typing.Optional[int]:
         """Get or set the Joint user force ID.

@@ -23,8 +23,20 @@
 """Module providing the DefineSetAdaptive class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINESETADAPTIVE_CARD0 = (
+    FieldSchema("setid", int, 0, 10, None),
+    FieldSchema("stype", int, 10, 10, 1),
+    FieldSchema("adplvl", int, 20, 10, None),
+    FieldSchema("adpsize", float, 30, 10, None),
+)
+
+_DEFINESETADAPTIVE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineSetAdaptive(KeywordBase):
     """DYNA DEFINE_SET_ADAPTIVE keyword"""
@@ -40,58 +52,20 @@ class DefineSetAdaptive(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "setid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stype",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adplvl",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "adpsize",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINESETADAPTIVE_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineSetAdaptive.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINESETADAPTIVE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def setid(self) -> typing.Optional[int]:
         """Get or set the Element(shell) set ID or part set ID

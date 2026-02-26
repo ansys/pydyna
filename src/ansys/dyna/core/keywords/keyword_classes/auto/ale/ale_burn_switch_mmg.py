@@ -23,7 +23,46 @@
 """Module providing the AleBurnSwitchMmg class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ALEBURNSWITCHMMG_CARD0 = (
+    FieldSchema("mmgfr", int, 0, 10, None),
+    FieldSchema("mmgto", int, 10, 10, None),
+    FieldSchema("nvarline", int, 20, 10, 0),
+)
+
+_ALEBURNSWITCHMMG_CARD1 = (
+    FieldSchema("react", int, 0, 10, 0),
+)
+
+_ALEBURNSWITCHMMG_CARD2 = (
+    FieldSchema("igni", int, 0, 10, 0),
+    FieldSchema("igniv", int, 10, 10, 0),
+    FieldSchema("ignivf", int, 20, 10, 0),
+)
+
+_ALEBURNSWITCHMMG_CARD3 = (
+    FieldSchema("var", int, 0, 10, 0),
+    FieldSchema("var", int, 10, 10, 0),
+    FieldSchema("var", int, 20, 10, 0),
+    FieldSchema("var", int, 30, 10, 0),
+    FieldSchema("var", int, 40, 10, 0),
+    FieldSchema("var", int, 50, 10, 0),
+    FieldSchema("var", int, 60, 10, 0),
+    FieldSchema("var", int, 70, 10, 0),
+)
+
+_ALEBURNSWITCHMMG_CARD4 = (
+    FieldSchema("par", float, 0, 10, 0.0),
+    FieldSchema("par", float, 10, 10, 0.0),
+    FieldSchema("par", float, 20, 10, 0.0),
+    FieldSchema("par", float, 30, 10, 0.0),
+    FieldSchema("par", float, 40, 10, 0.0),
+    FieldSchema("par", float, 50, 10, 0.0),
+    FieldSchema("par", float, 60, 10, 0.0),
+    FieldSchema("par", float, 70, 10, 0.0),
+)
 
 class AleBurnSwitchMmg(KeywordBase):
     """DYNA ALE_BURN_SWITCH_MMG keyword"""
@@ -35,210 +74,22 @@ class AleBurnSwitchMmg(KeywordBase):
         """Initialize the AleBurnSwitchMmg class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mmgfr",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mmgto",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nvarline",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "react",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "igni",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "igniv",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ignivf",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "var",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "par",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "par",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "par",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "par",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "par",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "par",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "par",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "par",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ALEBURNSWITCHMMG_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEBURNSWITCHMMG_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEBURNSWITCHMMG_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEBURNSWITCHMMG_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ALEBURNSWITCHMMG_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def mmgfr(self) -> typing.Optional[int]:
         """Get or set the ALE multi-material-group (explosive) before the switch.

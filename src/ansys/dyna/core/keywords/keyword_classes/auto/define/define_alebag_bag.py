@@ -23,8 +23,41 @@
 """Module providing the DefineAlebagBag class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEALEBAGBAG_CARD0 = (
+    FieldSchema("bagid", int, 0, 10, None),
+    FieldSchema("sid", int, 10, 10, None),
+    FieldSchema("sidtype", int, 20, 10, 0),
+    FieldSchema("cvbag", int, 30, 10, 1),
+    FieldSchema("iblock", int, 40, 10, 0),
+    FieldSchema("vcof", float, 50, 10, None),
+    FieldSchema("vset", int, 60, 10, None),
+    FieldSchema("vtype", int, 70, 10, 0),
+)
+
+_DEFINEALEBAGBAG_CARD1 = (
+    FieldSchema("nquad", int, 0, 10, 0),
+    FieldSchema("ctype", int, 10, 10, 2),
+    FieldSchema("pfac", float, 20, 10, 0.1),
+    FieldSchema("fric", float, 30, 10, 0.0),
+    FieldSchema("frcmin", float, 40, 10, 0.5),
+    FieldSchema("normtyp", int, 50, 10, 0),
+    FieldSchema("ileak", int, 60, 10, 0),
+    FieldSchema("pleak", float, 70, 10, 0.01),
+)
+
+_DEFINEALEBAGBAG_CARD2 = (
+    FieldSchema("norm", int, 0, 10, 0),
+    FieldSchema("start", float, 10, 10, 0.0),
+    FieldSchema("end", float, 20, 10, 10000000000.0),
+)
+
+_DEFINEALEBAGBAG_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineAlebagBag(KeywordBase):
     """DYNA DEFINE_ALEBAG_BAG keyword"""
@@ -40,185 +73,26 @@ class DefineAlebagBag(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "bagid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sidtype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cvbag",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iblock",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vcof",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vset",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vtype",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nquad",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctype",
-                        int,
-                        10,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pfac",
-                        float,
-                        20,
-                        10,
-                        0.1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fric",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "frcmin",
-                        float,
-                        40,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "normtyp",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ileak",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pleak",
-                        float,
-                        70,
-                        10,
-                        0.01,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "norm",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "start",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "end",
-                        float,
-                        20,
-                        10,
-                        1.0E+10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEALEBAGBAG_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEALEBAGBAG_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEALEBAGBAG_CARD2,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineAlebagBag.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEALEBAGBAG_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def bagid(self) -> typing.Optional[int]:
         """Get or set the Bag mesh definition ID, referred in *AIRBAG_ADVANCED_ALE.

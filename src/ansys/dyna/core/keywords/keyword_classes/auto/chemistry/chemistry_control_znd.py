@@ -23,7 +23,21 @@
 """Module providing the ChemistryControlZnd class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHEMISTRYCONTROLZND_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+)
+
+_CHEMISTRYCONTROLZND_CARD1 = (
+    FieldSchema("f", float, 0, 10, None),
+    FieldSchema("eplus", float, 10, 10, None),
+    FieldSchema("q0", float, 20, 10, None),
+    FieldSchema("gam", float, 30, 10, None),
+    FieldSchema("xyzd", float, 40, 10, None),
+    FieldSchema("detdir", int, 50, 10, None),
+)
 
 class ChemistryControlZnd(KeywordBase):
     """DYNA CHEMISTRY_CONTROL_ZND keyword"""
@@ -35,65 +49,13 @@ class ChemistryControlZnd(KeywordBase):
         """Initialize the ChemistryControlZnd class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "f",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eplus",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gam",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xyzd",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "detdir",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROLZND_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROLZND_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Identifier for this full chemistry calculation.

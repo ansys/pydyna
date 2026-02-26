@@ -23,7 +23,75 @@
 """Module providing the ChemistryInflatorProperties class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHEMISTRYINFLATORPROPERTIES_CARD0 = (
+    FieldSchema("comp_id", int, 0, 10, 1),
+    FieldSchema("pdia", float, 10, 10, None),
+    FieldSchema("pheight", float, 20, 10, None),
+    FieldSchema("pmass", float, 30, 10, None),
+    FieldSchema("totmass", float, 40, 10, None),
+)
+
+_CHEMISTRYINFLATORPROPERTIES_CARD1 = (
+    FieldSchema("tflame", float, 0, 10, None),
+    FieldSchema("pindex", float, 10, 10, None),
+    FieldSchema("a0", float, 20, 10, None),
+    FieldSchema("tdelay", float, 30, 10, None),
+    FieldSchema("risetime", float, 40, 10, None),
+)
+
+_CHEMISTRYINFLATORPROPERTIES_CARD2 = (
+    FieldSchema("comp1id", int, 0, 10, None),
+    FieldSchema("vol1", float, 10, 10, None),
+    FieldSchema("area1", float, 20, 10, None),
+    FieldSchema("cd1", float, 30, 10, None),
+    FieldSchema("p1", float, 40, 10, None),
+    FieldSchema("t1", float, 50, 10, None),
+    FieldSchema("delp1", float, 60, 10, None),
+    FieldSchema("delt1", float, 70, 10, None),
+)
+
+_CHEMISTRYINFLATORPROPERTIES_CARD3 = (
+    FieldSchema("comp2id", int, 0, 10, None),
+    FieldSchema("vol2", float, 10, 10, None),
+    FieldSchema("area2", float, 20, 10, None),
+    FieldSchema("cd2", float, 30, 10, None),
+    FieldSchema("p2", float, 40, 10, None),
+    FieldSchema("t2", float, 50, 10, None),
+    FieldSchema("delp2", float, 60, 10, None),
+    FieldSchema("delt2", float, 70, 10, None),
+)
+
+_CHEMISTRYINFLATORPROPERTIES_CARD4 = (
+    FieldSchema("comp3id", int, 0, 10, None),
+    FieldSchema("vol3", float, 10, 10, None),
+    FieldSchema("p3", float, 20, 10, None),
+    FieldSchema("t3", float, 30, 10, None),
+)
+
+_CHEMISTRYINFLATORPROPERTIES_CARD5 = (
+    FieldSchema("com42id", int, 0, 10, None),
+    FieldSchema("vol4", float, 10, 10, None),
+    FieldSchema("area4", float, 20, 10, None),
+    FieldSchema("cd4", float, 30, 10, None),
+    FieldSchema("p4", float, 40, 10, None),
+    FieldSchema("t4", float, 50, 10, None),
+    FieldSchema("delp4", float, 60, 10, None),
+    FieldSchema("delt4", float, 70, 10, None),
+)
+
+_CHEMISTRYINFLATORPROPERTIES_CARD6 = (
+    FieldSchema("comp5id", int, 0, 10, None),
+    FieldSchema("vol5", float, 10, 10, None),
+    FieldSchema("area5", float, 20, 10, None),
+    FieldSchema("cd5", float, 30, 10, None),
+    FieldSchema("p5", float, 40, 10, None),
+    FieldSchema("t5", float, 50, 10, None),
+    FieldSchema("delp5", float, 60, 10, None),
+    FieldSchema("delt5", float, 70, 10, None),
+)
 
 class ChemistryInflatorProperties(KeywordBase):
     """DYNA CHEMISTRY_INFLATOR_PROPERTIES keyword"""
@@ -35,359 +103,28 @@ class ChemistryInflatorProperties(KeywordBase):
         """Initialize the ChemistryInflatorProperties class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "comp_id",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pdia",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pheight",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pmass",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "totmass",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "tflame",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pindex",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdelay",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "risetime",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "comp1id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vol1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "area1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cd1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "delp1",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "delt1",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "comp2id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vol2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "area2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cd2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "delp2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "delt2",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "comp3id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vol3",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t3",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "com42id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vol4",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "area4",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cd4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p4",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t4",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "delp4",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "delt4",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "comp5id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vol5",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "area5",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cd5",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t5",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "delp5",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "delt5",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYINFLATORPROPERTIES_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYINFLATORPROPERTIES_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYINFLATORPROPERTIES_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYINFLATORPROPERTIES_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYINFLATORPROPERTIES_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYINFLATORPROPERTIES_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYINFLATORPROPERTIES_CARD6,
+                **kwargs,
+            ),        ]
     @property
     def comp_id(self) -> int:
         """Get or set the Chemical composition identifier of the composition for the steady-state propellant combustion.

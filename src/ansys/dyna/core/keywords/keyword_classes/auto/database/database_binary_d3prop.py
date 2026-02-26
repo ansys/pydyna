@@ -23,7 +23,14 @@
 """Module providing the DatabaseBinaryD3Prop class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEBINARYD3PROP_CARD0 = (
+    FieldSchema("ifile", int, 0, 10, 1),
+    FieldSchema("imatl", int, 10, 10, 0),
+    FieldSchema("iwall", int, 20, 10, 0),
+)
 
 class DatabaseBinaryD3Prop(KeywordBase):
     """DYNA DATABASE_BINARY_D3PROP keyword"""
@@ -35,36 +42,10 @@ class DatabaseBinaryD3Prop(KeywordBase):
         """Initialize the DatabaseBinaryD3Prop class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ifile",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "imatl",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iwall",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEBINARYD3PROP_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ifile(self) -> int:
         """Get or set the Specify file for D3PROP output.  (This can also be defined on the command line by adding d3prop = 1 or d3prop = 2 which also sets IMATL =  IWALL = 1)

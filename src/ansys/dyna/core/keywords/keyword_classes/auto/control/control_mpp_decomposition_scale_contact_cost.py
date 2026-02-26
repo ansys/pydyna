@@ -23,7 +23,30 @@
 """Module providing the ControlMppDecompositionScaleContactCost class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPDECOMPOSITIONSCALECONTACTCOST_CARD0 = (
+    FieldSchema("sf", float, 0, 10, None),
+    FieldSchema("id1", int, 10, 10, None),
+    FieldSchema("id2", int, 20, 10, None),
+    FieldSchema("id3", int, 30, 10, None),
+    FieldSchema("id4", int, 40, 10, None),
+    FieldSchema("id5", int, 50, 10, None),
+    FieldSchema("id6", int, 60, 10, None),
+    FieldSchema("id7", int, 70, 10, None),
+)
+
+_CONTROLMPPDECOMPOSITIONSCALECONTACTCOST_CARD1 = (
+    FieldSchema("id8", int, 0, 10, None),
+    FieldSchema("id9", int, 10, 10, None),
+    FieldSchema("id10", int, 20, 10, None),
+    FieldSchema("id11", int, 30, 10, None),
+    FieldSchema("id12", int, 40, 10, None),
+    FieldSchema("id13", int, 50, 10, None),
+    FieldSchema("id14", int, 60, 10, None),
+    FieldSchema("id15", int, 70, 10, None),
+)
 
 class ControlMppDecompositionScaleContactCost(KeywordBase):
     """DYNA CONTROL_MPP_DECOMPOSITION_SCALE_CONTACT_COST keyword"""
@@ -35,128 +58,13 @@ class ControlMppDecompositionScaleContactCost(KeywordBase):
         """Initialize the ControlMppDecompositionScaleContactCost class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "sf",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id1",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id2",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id3",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id4",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id5",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id6",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id7",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "id8",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id9",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id10",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id11",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id12",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id13",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id14",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id15",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONSCALECONTACTCOST_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONSCALECONTACTCOST_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def sf(self) -> typing.Optional[float]:
         """Get or set the Scale factor for SPH elements.

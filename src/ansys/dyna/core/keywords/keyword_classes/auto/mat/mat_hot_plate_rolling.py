@@ -23,8 +23,68 @@
 """Module providing the MatHotPlateRolling class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATHOTPLATEROLLING_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("e", float, 20, 10, None),
+    FieldSchema("pr", float, 30, 10, None),
+    FieldSchema("alphat", float, 40, 10, None),
+    FieldSchema("beta", float, 50, 10, 0.0),
+    FieldSchema("vp", float, 60, 10, 0.0),
+    FieldSchema("tol", float, 70, 10, 1.0),
+)
+
+_MATHOTPLATEROLLING_CARD1 = (
+    FieldSchema("yb", float, 0, 10, None),
+    FieldSchema("qdef", float, 10, 10, None),
+    FieldSchema("r", float, 20, 10, None),
+    FieldSchema("a", float, 30, 10, None),
+    FieldSchema("b", float, 40, 10, None),
+    FieldSchema("minrt", float, 50, 10, None),
+    FieldSchema("post", float, 60, 10, None),
+    FieldSchema("odesol", float, 70, 10, None),
+)
+
+_MATHOTPLATEROLLING_CARD2 = (
+    FieldSchema("asig0", float, 0, 10, None),
+    FieldSchema("bsig0", float, 10, 10, None),
+    FieldSchema("asigs", float, 20, 10, None),
+    FieldSchema("bsigs", float, 30, 10, None),
+    FieldSchema("asigss", float, 40, 10, None),
+    FieldSchema("bsigss", float, 50, 10, None),
+    FieldSchema("aeps", float, 60, 10, None),
+    FieldSchema("beps", float, 70, 10, None),
+)
+
+_MATHOTPLATEROLLING_CARD3 = (
+    FieldSchema("thres", float, 0, 10, None),
+    FieldSchema("m", float, 10, 10, None),
+    FieldSchema("alpha", float, 20, 10, None),
+    FieldSchema("nud", float, 30, 10, None),
+    FieldSchema("u0", float, 40, 10, None),
+    FieldSchema("k", float, 50, 10, None),
+    FieldSchema("nu", float, 60, 10, None),
+    FieldSchema("bnu", float, 70, 10, None),
+)
+
+_MATHOTPLATEROLLING_CARD4 = (
+    FieldSchema("t50", float, 0, 10, None),
+    FieldSchema("n", float, 10, 10, None),
+    FieldSchema("a50", float, 20, 10, None),
+    FieldSchema("d", float, 30, 10, None),
+    FieldSchema("gsf", float, 40, 10, None),
+    FieldSchema("p", float, 50, 10, None),
+    FieldSchema("q", float, 60, 10, None),
+    FieldSchema("qrex", float, 70, 10, None),
+)
+
+_MATHOTPLATEROLLING_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatHotPlateRolling(KeywordBase):
     """DYNA MAT_HOT_PLATE_ROLLING keyword"""
@@ -40,328 +100,32 @@ class MatHotPlateRolling(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pr",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alphat",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vp",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tol",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "yb",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qdef",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "minrt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "post",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "odesol",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "asig0",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bsig0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "asigs",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bsigs",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "asigss",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bsigss",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "aeps",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beps",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "thres",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "m",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nud",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "u0",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "k",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nu",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bnu",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "t50",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "n",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a50",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "d",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gsf",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qrex",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATHOTPLATEROLLING_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATHOTPLATEROLLING_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATHOTPLATEROLLING_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATHOTPLATEROLLING_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATHOTPLATEROLLING_CARD4,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatHotPlateRolling.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATHOTPLATEROLLING_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.

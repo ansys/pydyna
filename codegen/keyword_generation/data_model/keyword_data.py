@@ -55,7 +55,8 @@ class Field:
     """
     Represents a single field within a card.
 
-    Attributes:
+    Attributes
+    ----------
         name: Field name as it appears in the keyword file
         type: Field type (int, float, str)
         position: Column position in the card
@@ -204,6 +205,14 @@ class Field:
                 except (ValueError, TypeError):
                     # If conversion fails, leave as None
                     self.default = None
+        elif self.type == "float":
+            # Convert float defaults from strings
+            if self.default is not None:
+                try:
+                    self.default = float(self.default)
+                except (ValueError, TypeError):
+                    # If conversion fails (e.g., "not used"), leave as None
+                    self.default = None
 
         # Clean up help text (remove leading whitespace from each line)
         if self.help:
@@ -220,7 +229,8 @@ class Card:
     """
     Represents a card within a keyword.
 
-    Attributes:
+    Attributes
+    ----------
         index: Position in the cards list
         fields: List of Field objects
         mark_for_removal: Card removal marker (used by handlers)
@@ -236,6 +246,7 @@ class Card:
         length_func: Function to determine card repetition count
         active_func: Function to determine if card is active
         overall_name: Name for card groups
+        key_field: Key field name for table-aware link properties (e.g., 'pid' for Part)
     """
 
     index: int
@@ -254,6 +265,7 @@ class Card:
     active_func: Optional[str] = None
     overall_name: Optional[str] = None
     active: Optional[str] = None  # Activation condition for option cards
+    key_field: Optional[str] = None  # Key field for table-aware link properties
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Card":
@@ -293,6 +305,7 @@ class Card:
             active_func=data.get("active_func"),
             overall_name=data.get("overall_name"),
             active=data.get("active"),
+            key_field=data.get("key_field"),
         )
 
     def __getitem__(self, key: str) -> Any:
@@ -317,7 +330,8 @@ class Card:
         For regular cards, returns self.fields directly.
         For table_group cards, aggregates fields from all sub_cards.
 
-        Returns:
+        Returns
+        -------
             List of Field instances
         """
         if self.table_group and self.sub_cards:
@@ -357,7 +371,8 @@ class KeywordData:
     - Options may be List[OptionGroup] or List[Dict] during transition period
     - The from_dict/to_dict methods enable conversion at pipeline boundaries
 
-    Attributes:
+    Attributes
+    ----------
         keyword: Base keyword name (e.g., "SECTION")
         subkeyword: Subkeyword variant (e.g., "SHELL")
         title: Full keyword title
@@ -410,7 +425,8 @@ class KeywordData:
         Args:
             data: Dictionary containing keyword data
 
-        Returns:
+        Returns
+        -------
             KeywordData instance
         """
         logger.debug(f"Creating KeywordData for {data.get('keyword')}.{data.get('subkeyword')}")
@@ -478,7 +494,8 @@ class KeywordData:
         - Card sets (source_cards and their options)
         - Top-level options (option cards)
 
-        Returns:
+        Returns
+        -------
             Flat list of all Card instances or dicts requiring field transformation.
             During the transition period, may contain both Card instances and dicts.
         """

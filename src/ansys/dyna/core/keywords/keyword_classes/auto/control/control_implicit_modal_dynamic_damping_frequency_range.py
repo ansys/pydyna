@@ -23,7 +23,19 @@
 """Module providing the ControlImplicitModalDynamicDampingFrequencyRange class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITMODALDYNAMICDAMPINGFREQUENCYRANGE_CARD0 = (
+    FieldSchema("freq1", float, 0, 10, None),
+    FieldSchema("zeta1", float, 10, 10, None),
+    FieldSchema("freq2", float, 20, 10, None),
+    FieldSchema("zeta2", float, 30, 10, None),
+    FieldSchema("freq3", float, 40, 10, None),
+    FieldSchema("zeta3", float, 50, 10, None),
+    FieldSchema("freq4", float, 60, 10, None),
+    FieldSchema("zeta4", float, 70, 10, None),
+)
 
 class ControlImplicitModalDynamicDampingFrequencyRange(KeywordBase):
     """DYNA CONTROL_IMPLICIT_MODAL_DYNAMIC_DAMPING_FREQUENCY_RANGE keyword"""
@@ -35,68 +47,10 @@ class ControlImplicitModalDynamicDampingFrequencyRange(KeywordBase):
         """Initialize the ControlImplicitModalDynamicDampingFrequencyRange class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "freq1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zeta1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "freq2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zeta2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "freq3",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zeta3",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "freq4",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zeta4",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITMODALDYNAMICDAMPINGFREQUENCYRANGE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def freq1(self) -> typing.Optional[float]:
         """Get or set the Frequency value.

@@ -25,6 +25,25 @@ Handler base classes and metadata system for keyword code generation.
 
 This module provides the abstract base class for all handlers and the decorator-based
 metadata system for handler registration and documentation.
+
+ARCHITECTURAL NOTE - Mutable Reference Semantics:
+    The handler system uses mutable reference semantics where handlers modify kwd_data
+    and its nested structures (cards, fields, options) in place. This design is intentional
+    and critical for handlers like card-set and table-card-group, which group cards by
+    appending references (not copies) so that later handlers' modifications automatically
+    appear in all places where the card is referenced.
+
+    Example: card-set groups cards into a reusable set, then conditional-card adds 'func'
+    properties to those same card objects. Because card-set stored references (not copies),
+    the conditional properties appear both in the main cards list AND in the card-set.
+
+    An immutable approach would require significant architectural changes:
+    - Handlers would return new data instead of mutating in place
+    - Card references would need to be resolved in a separate phase
+    - Complex dependency tracking between handlers
+
+    The current mutable design is simpler, more performant, and works correctly for this
+    use case (code generation that runs once during development, not in production loops).
 """
 
 import abc
@@ -42,7 +61,8 @@ class HandlerMetadata:
     """
     Metadata for a keyword handler.
 
-    Attributes:
+    Attributes
+    ----------
         name: Handler name (used as key in manifest.json configuration)
         handler_class: The handler class itself
         phase: Execution phase ('handle' or 'post_process')
@@ -89,7 +109,8 @@ def handler(
         input_schema: JSON Schema dict describing the expected settings structure
         output_description: Description of what keys/fields the handler adds to kwd_data
 
-    Returns:
+    Returns
+    -------
         Decorator function that registers the handler class
 
     Example:
@@ -144,7 +165,8 @@ def get_handler_metadata(name: str) -> Optional[HandlerMetadata]:
     Args:
         name: Handler name
 
-    Returns:
+    Returns
+    -------
         HandlerMetadata if found, None otherwise
     """
     return _HANDLER_METADATA.get(name)
@@ -154,7 +176,8 @@ def get_all_handler_metadata() -> Dict[str, HandlerMetadata]:
     """
     Retrieve metadata for all registered handlers.
 
-    Returns:
+    Returns
+    -------
         Dictionary mapping handler names to their metadata
     """
     return _HANDLER_METADATA.copy()
@@ -172,7 +195,8 @@ def validate_handler_settings(handler_name: str, settings: List[Dict[str, Any]])
         handler_name: Name of the handler
         settings: List of setting dictionaries from manifest.json
 
-    Raises:
+    Raises
+    ------
         ValueError: If settings are invalid or handler not found
         ImportError: If jsonschema package is not available
     """
@@ -213,7 +237,11 @@ class KeywordHandler(metaclass=abc.ABCMeta):
 
     Subclasses must implement:
         - handle(): Main transformation logic
-        - post_process(): Optional finalization logic (runs after all handlers)
+
+    Subclasses may optionally override:
+        - post_process(): Finalization logic (runs after all handlers complete)
+          Default implementation is a no-op. Only override if you need to perform
+          operations that depend on the combined effects of all handlers.
 
     Subclasses should use the @handler decorator to provide metadata including
     name, dependencies, and documentation.
@@ -237,26 +265,32 @@ class KeywordHandler(metaclass=abc.ABCMeta):
                       and label_registry for card referencing
             settings: List of handler-specific setting dictionaries from manifest.json "generation-options"
 
-        Raises:
+        Raises
+        ------
             NotImplementedError: Must be implemented by subclass
         """
         raise NotImplementedError
 
-    @abc.abstractmethod
     def post_process(self, kwd_data: KeywordData) -> None:
         """
-        Finalization logic that runs after all handlers have executed.
+        Optional finalization logic that runs after all handlers have executed.
 
         This phase is useful for cleanup, validation, or transformations that
-        depend on the combined effects of all handlers. Most handlers leave
-        this as a no-op (pass).
+        depend on the combined effects of all handlers. The default implementation
+        is a no-op.
+
+        Override this method only if your handler needs to:
+        - Process data that depends on other handlers' modifications
+        - Perform validation that requires the complete transformed structure
+        - Clean up or finalize state after all transformations
+
+        Current handlers using post_process:
+        - shared-field: Processes deferred negative-index shared fields after options exist
+        - rename-property: Detects property name collisions after all renames complete
 
         Handlers can access kwd_data.label_registry if needed.
 
         Args:
             kwd_data: KeywordData instance after all handle() calls
-
-        Raises:
-            NotImplementedError: Must be implemented by subclass
         """
-        raise NotImplementedError
+        pass

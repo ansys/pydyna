@@ -23,7 +23,43 @@
 """Module providing the InitialStressShellNurbsPatch class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALSTRESSSHELLNURBSPATCH_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("nplane", int, 10, 10, 0),
+    FieldSchema("nthick", int, 20, 10, 0),
+    FieldSchema("nhisv", int, 30, 10, 0),
+    FieldSchema("large", int, 40, 10, 0),
+)
+
+_INITIALSTRESSSHELLNURBSPATCH_CARD1 = (
+    FieldSchema("r", float, 0, 10, None),
+    FieldSchema("s", float, 10, 10, None),
+    FieldSchema("t", float, 20, 10, None),
+)
+
+_INITIALSTRESSSHELLNURBSPATCH_CARD2 = (
+    FieldSchema("sigxx", float, 0, 10, 0.0),
+    FieldSchema("sigyy", float, 10, 10, 0.0),
+    FieldSchema("sigzz", float, 20, 10, 0.0),
+    FieldSchema("sigxy", float, 30, 10, 0.0),
+    FieldSchema("sigyz", float, 40, 10, 0.0),
+    FieldSchema("sigzx", float, 50, 10, 0.0),
+    FieldSchema("eps", float, 60, 10, 0.0),
+)
+
+_INITIALSTRESSSHELLNURBSPATCH_CARD3 = (
+    FieldSchema("hisv1", float, 0, 10, None),
+    FieldSchema("hisv2", float, 10, 10, None),
+    FieldSchema("hisv3", float, 20, 10, None),
+    FieldSchema("hisv4", float, 30, 10, None),
+    FieldSchema("hisv5", float, 40, 10, None),
+    FieldSchema("hisv6", float, 50, 10, None),
+    FieldSchema("hisv7", float, 60, 10, None),
+    FieldSchema("hisv8", float, 70, 10, None),
+)
 
 class InitialStressShellNurbsPatch(KeywordBase):
     """DYNA INITIAL_STRESS_SHELL_NURBS_PATCH keyword"""
@@ -35,196 +71,19 @@ class InitialStressShellNurbsPatch(KeywordBase):
         """Initialize the InitialStressShellNurbsPatch class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nplane",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nthick",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhisv",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "large",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "r",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "s",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sigxx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigyy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigzz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigxy",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigyz",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sigzx",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eps",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "hisv1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hisv8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSSHELLNURBSPATCH_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSSHELLNURBSPATCH_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSSHELLNURBSPATCH_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALSTRESSSHELLNURBSPATCH_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Nurbs element ID.

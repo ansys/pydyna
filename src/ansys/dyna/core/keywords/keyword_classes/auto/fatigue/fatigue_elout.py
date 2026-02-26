@@ -23,7 +23,20 @@
 """Module providing the FatigueElout class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FATIGUEELOUT_CARD0 = (
+    FieldSchema("strsn", int, 0, 10, 0),
+    FieldSchema("index", int, 10, 10, 0),
+    FieldSchema("restrt", int, 20, 10, 0),
+    FieldSchema("texpos", float, 30, 10, 0.0),
+    FieldSchema("dmgmin", float, 40, 10, 0.0),
+)
+
+_FATIGUEELOUT_CARD1 = (
+    FieldSchema("filename", str, 0, 256, None),
+)
 
 class FatigueElout(KeywordBase):
     """DYNA FATIGUE_ELOUT keyword"""
@@ -35,63 +48,13 @@ class FatigueElout(KeywordBase):
         """Initialize the FatigueElout class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "strsn",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "index",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "restrt",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "texpos",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dmgmin",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        256,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FATIGUEELOUT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FATIGUEELOUT_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def strsn(self) -> int:
         """Get or set the Type of fatigue analysis variable:

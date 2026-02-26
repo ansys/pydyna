@@ -23,7 +23,17 @@
 """Module providing the IgaTiedEdgeToEdge class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_IGATIEDEDGETOEDGE_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("type", int, 10, 10, 0),
+    FieldSchema("form", int, 20, 10, 0),
+    FieldSchema("sfd", float, 30, 10, 1.0),
+    FieldSchema("sfr", float, 40, 10, 1.0),
+    FieldSchema("sft", float, 50, 10, 1.0),
+)
 
 class IgaTiedEdgeToEdge(KeywordBase):
     """DYNA IGA_TIED_EDGE_TO_EDGE keyword"""
@@ -35,59 +45,10 @@ class IgaTiedEdgeToEdge(KeywordBase):
         """Initialize the IgaTiedEdgeToEdge class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "form",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfd",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfr",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sft",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _IGATIEDEDGETOEDGE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Apply coupling to entities referenced by the ID field along topologically connected edges. The next field, TYPE, specifies the type of entity to which ID refers because entities of different kinds, such as parts and part sets, are not uniquely numbered.  Currently (as of June 2020), Currently, no types requiring an ID are supported. This field is reserved for future enhancements

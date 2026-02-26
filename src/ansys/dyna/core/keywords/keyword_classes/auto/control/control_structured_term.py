@@ -23,7 +23,11 @@
 """Module providing the ControlStructuredTerm class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLSTRUCTUREDTERM_CARD0 = (
+)
 
 class ControlStructuredTerm(KeywordBase):
     """DYNA CONTROL_STRUCTURED_TERM keyword"""
@@ -35,9 +39,7 @@ class ControlStructuredTerm(KeywordBase):
         """Initialize the ControlStructuredTerm class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLSTRUCTUREDTERM_CARD0,
+                **kwargs,
+            ),        ]

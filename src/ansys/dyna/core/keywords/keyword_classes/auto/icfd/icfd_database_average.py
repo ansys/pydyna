@@ -23,7 +23,12 @@
 """Module providing the IcfdDatabaseAverage class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDDATABASEAVERAGE_CARD0 = (
+    FieldSchema("dt", float, 0, 10, None),
+)
 
 class IcfdDatabaseAverage(KeywordBase):
     """DYNA ICFD_DATABASE_AVERAGE keyword"""
@@ -35,19 +40,10 @@ class IcfdDatabaseAverage(KeywordBase):
         """Initialize the IcfdDatabaseAverage class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDATABASEAVERAGE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the Over each DT time interval, an average of the different fluid variables will be calculated and then reset when moving to the next DT interval.

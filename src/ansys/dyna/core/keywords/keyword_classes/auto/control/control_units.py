@@ -23,7 +23,15 @@
 """Module providing the ControlUnits class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLUNITS_CARD0 = (
+    FieldSchema("length", str, 0, 10, "m"),
+    FieldSchema("time", str, 10, 10, "sec"),
+    FieldSchema("mass", str, 20, 10, "kg"),
+    FieldSchema("temp", str, 30, 10, "k"),
+)
 
 class ControlUnits(KeywordBase):
     """DYNA CONTROL_UNITS keyword"""
@@ -35,44 +43,10 @@ class ControlUnits(KeywordBase):
         """Initialize the ControlUnits class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "length",
-                        str,
-                        0,
-                        10,
-                        "m",
-                        **kwargs,
-                    ),
-                    Field(
-                        "time",
-                        str,
-                        10,
-                        10,
-                        "sec",
-                        **kwargs,
-                    ),
-                    Field(
-                        "mass",
-                        str,
-                        20,
-                        10,
-                        "kg",
-                        **kwargs,
-                    ),
-                    Field(
-                        "temp",
-                        str,
-                        30,
-                        10,
-                        "k",
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLUNITS_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def length(self) -> str:
         """Get or set the Length unit.

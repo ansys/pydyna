@@ -39,12 +39,11 @@ BLOCK4 = "*END"
 
 HEADER = BLOCK1 + BLOCK2 + BLOCK3
 
-
 def __reference_keyword_file(code):
     return code + "*END"
 
 
-@pytest.mark.keywords
+
 def test_deck_001():
     """test title and user comment"""
     deck = Deck()
@@ -65,7 +64,7 @@ def test_deck_001():
     assert "b" in deck.comment_header
 
 
-@pytest.mark.keywords
+
 def test_deck_002():
     """test loading deck header from string"""
     deck = Deck()
@@ -74,7 +73,7 @@ def test_deck_002():
     assert deck.title == "Test Title"
 
 
-@pytest.mark.keywords
+
 def test_deck_003(file_utils):
     """Import the deck with a custom handler.
 
@@ -105,7 +104,7 @@ def test_deck_003(file_utils):
 
 
 
-@pytest.mark.keywords
+
 def test_deck_004(ref_string):
     """test stop reading after *END"""
     keyword_string = ref_string.test_deck_004_string
@@ -114,7 +113,7 @@ def test_deck_004(ref_string):
     assert len(deck._keywords) == 2
 
 
-@pytest.mark.keywords
+
 def test_deck_005():
     """test handling unknown keywords without throwing or discarding them"""
     keyword_string = """*INCLUDE
@@ -139,7 +138,7 @@ $#    ssid
     )
 
 
-@pytest.mark.keywords
+
 def test_control_debug():
     from ansys.dyna.core.lib.deck import Deck
     deck = Deck()
@@ -147,7 +146,7 @@ def test_control_debug():
     deck.write()
 
 
-@pytest.mark.keywords
+
 def test_deck_006(ref_string):
     """test adding two decks together"""
     deck1 = Deck()
@@ -172,7 +171,7 @@ def test_deck_006(ref_string):
     assert len(deck5._keywords) == len(deck3._keywords) + len(deck4._keywords)
 
 
-@pytest.mark.keywords
+
 def test_deck_copy():
     import copy
     x = Deck()
@@ -184,7 +183,7 @@ def test_deck_copy():
     assert y.keywords[0].mid == 100
 
 
-@pytest.mark.keywords
+
 def test_deck_read_parameters():
     """Test reading a deck with parameters."""
     test_string = """*CONTACT_TIED_SHELL_EDGE_TO_SURFACE_BEAM_OFFSET_ID
@@ -199,7 +198,7 @@ def test_deck_read_parameters():
     kwd = deck.keywords[0]
     assert kwd.vdc == 1.12
 
-@pytest.mark.keywords
+
 def test_deck_read_parameter_keyword(ref_string):
     """Test reading a deck with parameters."""
     deck = Deck()
@@ -211,7 +210,39 @@ def test_deck_read_parameter_keyword(ref_string):
     assert kwd.vc == 5.0e-6
     assert kwd.sfsa == -2.65
 
-@pytest.mark.keywords
+
+
+def test_deck_read_parameter_keyword_conditional_card(ref_string):
+    """Test reading a deck with parameters."""
+    deck = Deck()
+    deck.loads(ref_string.test_parametrized_deck_conditional_string)
+    assert len(deck.string_keywords) == 0
+    assert len(deck.keywords) == 2
+
+    #conditional cards with parameters
+    kwd_cnt = deck.keywords[1]
+    assert kwd_cnt.vdc == 5.0e-4
+    assert kwd_cnt.vc == 5.0e-6
+    assert kwd_cnt.sfsa == -2.65
+    assert kwd_cnt.soft == 2
+
+
+def test_deck_read_parameter_keyword_hardcoded_conditional_card(ref_string):
+    """Test reading a deck with parameters."""
+    deck = Deck()
+    deck.loads(ref_string.test_parametrized_deck_hardcoded_optional_card)
+    assert len(deck.string_keywords) == 0
+    assert len(deck.keywords) == 2
+
+    #conditional cards with parameters
+    kwd_cnt = deck.keywords[1]
+    assert kwd_cnt.vdc == 5.0e-4
+    assert kwd_cnt.vc == 5.0e-6
+    assert kwd_cnt.sfsa == -2.65
+    assert kwd_cnt.soft == 2
+
+
+
 def test_deck_007():
     "unit testing for .extend"
     deck = Deck()
@@ -220,7 +251,7 @@ def test_deck_007():
     assert len(deck._keywords) == 0
 
 
-@pytest.mark.keywords
+
 def test_kwdeck_basic_001(file_utils):
     "deck with only kw"
     deck = Deck()
@@ -262,7 +293,7 @@ def test_kwdeck_basic_001(file_utils):
     file_utils.compare_string_with_file(deck_string, "test.k")
 
 
-@pytest.mark.keywords
+
 def test_kwdeck_basic_002(file_utils, ref_string):
     "kw with deck and string"
     deck = Deck()
@@ -285,7 +316,7 @@ def test_kwdeck_basic_002(file_utils, ref_string):
     assert deck.keyword_names[2] == "*INCLUDE"
 
 
-@pytest.mark.keywords
+
 def test_deck_kwlist(ref_string):
     "kw with deck and string"
     deck = Deck()
@@ -307,7 +338,7 @@ def test_deck_kwlist(ref_string):
     assert str_keywords == ref_string.test_kwlist_string
 
 
-@pytest.mark.keywords
+
 def test_deck_load_title(ref_string):
     deck = Deck()
     deck.loads(ref_string.test_title_string)
@@ -315,7 +346,7 @@ def test_deck_load_title(ref_string):
     assert deck.keywords[0].title == "title"
     assert deck.keywords[0].options["TITLE"].active
 
-@pytest.mark.keywords
+
 def test_deck_active_options(ref_string):
     """Test that active options set with setters."""
     deck = Deck()
@@ -327,7 +358,7 @@ def test_deck_active_options(ref_string):
     assert deck_test.keywords[0].options["TITLE"].active
 
 
-@pytest.mark.keywords
+
 def test_deck_default_write_long(ref_string):
     """Test that write(format=format_type.long) on a default deck writes keywords using the long format."""
     deck = Deck()
@@ -336,7 +367,7 @@ def test_deck_default_write_long(ref_string):
     assert deck_string == ref_string.test_long_deck_string
 
 
-@pytest.mark.keywords
+
 def test_deck_long_deck_write_noargs(ref_string):
     "Test that write() on a long deck written writes keywords using with the long format"
     deck = Deck(format=format_type.long)
@@ -345,7 +376,7 @@ def test_deck_long_deck_write_noargs(ref_string):
     assert deck_string == ref_string.test_long_deck_string
 
 
-@pytest.mark.keywords
+
 def test_deck_long_deck_write_standard(ref_string):
     "Test that write(format=format_type.standard) on a long deck writes keywords using with the standard format"
     deck = Deck(format=format_type.long)
@@ -354,7 +385,7 @@ def test_deck_long_deck_write_standard(ref_string):
     assert deck_string == ref_string.test_standard_deck_string
 
 
-@pytest.mark.keywords
+
 def test_deck_long_deck_write_standard_keyword(ref_string):
     "Test that write(format=format_type.standard) on a long deck writes keywords using with the standard format"
     deck = Deck(format=format_type.long)
@@ -363,7 +394,7 @@ def test_deck_long_deck_write_standard_keyword(ref_string):
     assert deck_string == ref_string.test_long_deck_standard_keyword_string
 
 
-@pytest.mark.keywords
+
 def test_deck_read_long_deck_long_keyword():
     """Test that read a long deck with a long keyword works."""
     deck = Deck()
@@ -376,7 +407,7 @@ def test_deck_read_long_deck_long_keyword():
     assert deck.keywords[0].area == 1.0
 
 
-@pytest.mark.keywords
+
 def test_deck_read_long_deck_standard_keyword():
     """Test that read a long deck with a long keyword works."""
     deck = Deck()
@@ -389,7 +420,7 @@ def test_deck_read_long_deck_standard_keyword():
     assert deck.keywords[0].area == 1.0
 
 
-@pytest.mark.keywords
+
 def test_deck_links():
     deck = Deck()
     deck.append(kwd.DefineTransformation(tranid=10, option="POINT", a1=1, a2=2.0, a3=0.0, a4=1.0))
@@ -404,7 +435,7 @@ def test_deck_links():
     assert xforms["a4"][0] == 1.0
 
 
-@pytest.mark.keywords
+
 def test_deck_expand(file_utils):
     """Test that a long deck can read a standard deck."""
     # I think there are more corner cases related to this to iron out..
@@ -417,17 +448,18 @@ def test_deck_expand(file_utils):
     assert expanded_deck.keywords[0].included_from == include_path
 
 
-@pytest.mark.keywords
+
 def test_deck_expand_encoding(file_utils):
     """Test that a long deck can read a standard deck."""
     deck = Deck(format=format_type.long)
     deck.append(kwd.Include(filename=file_utils.get_asset_file_path("encoding_sample.k"), format=format_type.standard))
-    expanded_deck = deck.expand()
+    with pytest.warns(UserWarning, match="could not convert string to float"):
+        expanded_deck = deck.expand()
 
     # check all_keywords instead of keywords because the deck has comma-delimited cards which is not yet supported
     assert len(expanded_deck.all_keywords) == 1
 
-@pytest.mark.keywords
+
 def test_deck_expand_recursive_include_path(file_utils):
     deck = Deck()
     include_path1 = file_utils.get_asset_file_path("expand_test")
@@ -437,9 +469,9 @@ def test_deck_expand_recursive_include_path(file_utils):
     deck.append(kwd.Include(filename='bird_B.k'))
     deck = deck.expand(recurse=True)
     assert len(deck.all_keywords) == 40
-    assert len(deck.keywords) == 36
+    assert len(deck.keywords) == 40
 
-@pytest.mark.keywords
+
 def test_deck_expand_transform(file_utils):
     deck = Deck()
     include_path = file_utils.get_asset_file_path("transform")
@@ -463,7 +495,7 @@ def test_deck_expand_transform(file_utils):
     assert deck.keywords[2].nodes["nid"][0] == 11
     assert deck.keywords[2].nodes["nid"][20] == 31
 
-@pytest.mark.keywords
+
 def test_deck_expand_transform_custom_handler(file_utils):
     """Test using a custom transform handler as an override."""
     deck = Deck()
@@ -490,7 +522,7 @@ def test_deck_expand_transform_custom_handler(file_utils):
     assert deck.keywords[1].elements["pid"][3] == 44
 
 
-@pytest.mark.keywords
+
 def test_deck_expand_with_define_transform(file_utils):
     """Test using a custom transform handler as an override."""
 
@@ -523,7 +555,7 @@ def test_deck_expand_with_define_transform(file_utils):
     xform = kwd.IncludeTransform(filename = os.path.join(include_path, "test.k"))
     xform.tranid_link = define_transform_kwd
     deck.extend([define_transform_kwd, xform])
-    with pytest.warns(UserWarning, match="DEFINE_TRANFORMATION ROTATE option with parameters"):
+    with pytest.warns(UserWarning, match="DEFINE_TRANSFORMATION ROTATE option with parameters"):
         deck.expand()
 
     # multiple transforms
@@ -550,7 +582,7 @@ def test_deck_expand_with_define_transform(file_utils):
     assert expanded.keywords[3].nodes["y"][0] == pytest.approx(-253.570957)
 
 
-@pytest.mark.keywords
+
 def test_deck_clear():
     node = kwd.Node()
     deck = Deck()
@@ -566,7 +598,7 @@ def test_deck_clear():
         deck2.append(node)
 
 
-@pytest.mark.keywords
+
 def test_deck_unprocessed(ref_string):
     deck = Deck()
     deck.loads(ref_string.test_deck_with_unknown_keywords)
@@ -581,7 +613,7 @@ def _verify_encrypted_deck(deck):
     s = deck.encrypted_keywords[0].data
     assert s.startswith("\nhQEOA7Xd7ZA651ZYEAP+OgA+NS90p")
 
-@pytest.mark.keywords
+
 def test_deck_encrypted_import(file_utils):
     """Import an encrypted file as a deck."""
     deck = Deck()
@@ -589,7 +621,7 @@ def test_deck_encrypted_import(file_utils):
     deck.import_file(filename)
     _verify_encrypted_deck(deck)
 
-@pytest.mark.keywords
+
 def test_deck_encrypted_import_expand(file_utils):
     """Import an encrypted file as a deck."""
     deck = Deck()
@@ -601,7 +633,7 @@ def test_deck_encrypted_import_expand(file_utils):
     assert len(deck.get(type="NODE")) == 1
 
 
-@pytest.mark.keywords
+
 def test_deck_encrypted_import_expand_transform(file_utils):
     """Import an encrypted file as a deck."""
     deck = Deck()
@@ -614,14 +646,14 @@ def test_deck_encrypted_import_expand_transform(file_utils):
     assert len(deck.get(type="DEFINE")) == 1
 
 
-@pytest.mark.keywords
+
 def test_deck_remove_superfluous_newlines(ref_string):
     deck = Deck()
     deck.loads(ref_string.test_section_solid_title_deck_string)
     assert deck.write() == ref_string.test_section_solid_title_deck_string
 
 
-@pytest.mark.keywords
+
 def test_series_card_read_write_set(ref_string):
     """test to read and write set cards, especially checking case where last card contains all fields"""
     set_string = ref_string.test_series_card_sets_string
@@ -630,7 +662,7 @@ def test_series_card_read_write_set(ref_string):
     assert input_deck.write() == set_string
 
 
-@pytest.mark.keywords
+
 def test_deck_with_contacts_and_ids(ref_string):
     """if the keyword is read correctly it should end up in the deck as a keyword object and not a string
     this test contact has no optional cards"""
@@ -648,7 +680,7 @@ def test_deck_with_contacts_and_ids(ref_string):
     assert deck.write() == ref_string.test_deck_contact_tied_shell_edge_to_surface_id3
 
 
-@pytest.mark.keywords
+
 def test_deck_remove():
     """a deck is created afterward individual und multiple string_keywords/keywords are removed
     the deck should be empty again in the end"""
@@ -676,7 +708,7 @@ def test_deck_remove():
     assert len(deck.all_keywords) == 0
 
 
-@pytest.mark.keywords
+
 def test_deck_expand_nonlocal_parameters(file_utils):
     """Test reading a deck with parameters without resolving parameter."""
     deck = Deck()
@@ -695,10 +727,10 @@ def test_deck_expand_nonlocal_parameters(file_utils):
         assert section.elform == expected_secid_to_elform[section.secid]
 
 
-@pytest.mark.keywords
-def test_deck_expand_local_parameters_isolation(file_utils):
+
+def test_deck_expand_local_parameters_isolation(file_utils, recwarn):
     """Test that PARAMETER_LOCAL parameters are isolated to their definition file.
-    
+
     This test demonstrates the BUG where PARAMETER_LOCAL leaks to parent decks.
     After the fix, local parameters should NOT be accessible outside their definition file.
     """
@@ -706,49 +738,55 @@ def test_deck_expand_local_parameters_isolation(file_utils):
     cwd = file_utils.assets_folder / "expand_parameters" / "local"
     filename = cwd / "top.k"
     deck.import_file(filename)
-    
+
     # Before expansion, we should have loaded PARAMETER but not PARAMETER_LOCAL from include
     # Only gbl should be in the top-level deck's parameters
     pm_global_value = deck.parameters.get("gbl")
     assert pm_global_value == 200.0
-    
+
     # loc should NOT be accessible from top-level deck before expansion
     with pytest.raises(KeyError):
         deck.parameters.get("loc")
-    
-    # Expand the deck
+
+    # Expand the deck - a warning is expected when top.k tries to resolve &loc
+    # which is local to the include file (correct parameter isolation behavior)
     deck = deck.expand(recurse=True, cwd=cwd)
-    
+
+    # Verify that the expected warning was emitted about 'loc' parameter isolation
+    assert any("'loc'" in str(w.message) for w in recwarn), (
+        "Expected warning about 'loc' parameter not being accessible"
+    )
+
     # After expansion, get all sections
     sections: list[kwd.SectionSolid] = list(deck.get_kwds_by_type("SECTION"))
     # FIXED BEHAVIOR: 3 sections (10, 20, 30) - section 40 fails because it can't resolve &loc
     assert len(sections) == 3
-    
+
     # Section 10 uses gbl (200.0) from top-level
     section_10 = next(s for s in sections if s.secid == 10)
     assert section_10.elform == 200
-    
+
     # Section 20 uses loc (999.0) - substituted during include processing
     section_20 = next(s for s in sections if s.secid == 20)
     assert section_20.elform == 999
-    
+
     # Section 30 uses gbl (200.0) - global param visible in include
     section_30 = next(s for s in sections if s.secid == 30)
     assert section_30.elform == 200
-    
+
     # Section 40 tries to use loc from top level - should fail
     # The substitution happens during loads() before PARAMETER_LOCAL from the include is loaded
     assert len(deck.string_keywords) == 1  # Section 40
-    
+
     # FIXED: After expansion, loc should NOT be in the top-level parameters
     with pytest.raises(KeyError):
         deck.parameters.get("loc")
 
 
-@pytest.mark.keywords
-def test_deck_expand_local_parameters_sibling_isolation(file_utils):
+
+def test_deck_expand_local_parameters_sibling_isolation(file_utils, recwarn):
     """Test that PARAMETER_LOCAL parameters don't leak between sibling includes.
-    
+
     This test demonstrates the BUG where PARAMETER_LOCAL leaks between sibling includes.
     After the fix, sibling includes should not see each other's local parameters.
     """
@@ -756,30 +794,216 @@ def test_deck_expand_local_parameters_sibling_isolation(file_utils):
     cwd = file_utils.assets_folder / "expand_parameters" / "local"
     filename = cwd / "sibling_test_top.k"
     deck.import_file(filename)
-    
-    # Expand the deck
+
+    # Expand the deck - a warning is expected when sibling_b.k tries to resolve &aloc
+    # which is local to sibling_a.k (correct parameter isolation behavior)
     deck = deck.expand(recurse=True, cwd=cwd)
-    
+
+    # Verify that the expected warning was emitted about 'aloc' parameter isolation
+    assert any("'aloc'" in str(w.message) for w in recwarn), (
+        "Expected warning about 'aloc' parameter not being accessible"
+    )
+
     # Get all sections
     sections: list[kwd.SectionSolid] = list(deck.get_kwds_by_type("SECTION"))
     # FIXED BEHAVIOR: 3 sections (50, 51, 61) - section 60 fails because it can't resolve &aloc
     assert len(sections) == 3
-    
+
     # Section 50 uses aloc (111.0) from sibling_a.k
     section_50 = next(s for s in sections if s.secid == 50)
     assert section_50.elform == 111
-    
+
     # Section 51 uses shr (100.0) from top
     section_51 = next(s for s in sections if s.secid == 51)
     assert section_51.elform == 100
-    
+
     # Section 60 - FIXED: Should not be created because aloc is not accessible
     assert len(deck.string_keywords) == 1  # Section 60 failed to parse
-    
+
     # Section 61 uses shr (100.0) from top
     section_61 = next(s for s in sections if s.secid == 61)
     assert section_61.elform == 100
-    
+
     # FIXED: aloc should NOT be in the top-level parameters after expansion
     with pytest.raises(KeyError):
         deck.parameters.get("aloc")
+
+
+
+def test_deck_expand_sibling_parameters(file_utils):
+    """Test that global parameters from one include are visible in sibling includes.
+    
+    This tests the fix for issue #1081 where parameters defined in one include file
+    (params.k) should be visible in a sibling include file (contact.k).
+    
+    Structure:
+    main.k
+      |--- params.k (defines parameters)
+      |--- contact.k (uses parameters from params.k)
+    """
+    deck = Deck()
+    cwd = file_utils.assets_folder / "expand_parameters" / "sibling"
+    filename = cwd / "main.k"
+    deck.import_file(filename)
+    
+    # Expand the deck
+    expanded_deck = deck.expand(recurse=True, cwd=cwd)
+    
+    # After expansion, parameters from params.k should be accessible
+    # and contact.k should be properly parsed as a keyword
+    assert "ssid" in expanded_deck.parameters._params or (
+        expanded_deck.parameters._parent is not None and 
+        "ssid" in expanded_deck.parameters._parent._params
+    )
+    
+    # Get the section keyword
+    sections = list(expanded_deck.get_kwds_by_type("SECTION"))
+    assert len(sections) == 1
+    
+    section = sections[0]
+    # Verify it was parsed as a keyword, not as a string
+    assert section.keyword == "SECTION"
+    assert section.subkeyword == "SOLID"
+    
+    # Verify the parameter values were substituted
+    assert section.secid == 1234.0
+    assert section.elform == 5678.0
+
+
+
+def test_deck_expand_global_parameter_collision(file_utils):
+    """Test that global parameters from sibling includes collide (last one wins).
+    
+    This demonstrates the behavior AFTER the fix for issue #1081.
+    
+    KEY INSIGHT: Parameters are substituted DURING import, not after expansion.
+    So module_a gets scale=1.0 and module_b gets scale=2.0 at their import time.
+    
+    The collision is visible when module_c (consumer) tries to use &scale without
+    defining it - it gets the LAST value from the parent deck (2.0 from module_b).
+    
+    BEFORE the fix: module_c would get KeyError (bug - params were isolated).
+    AFTER the fix: module_c gets 2.0 (correct - global params are shared).
+    """
+    deck = Deck()
+    cwd = file_utils.assets_folder / "expand_parameters" / "collision"
+    filename = cwd / "main_with_consumer.k"
+    deck.import_file(filename)
+    
+    # Expand the deck
+    expanded_deck = deck.expand(recurse=True, cwd=cwd)
+    
+    # Get the sections
+    sections = list(expanded_deck.get_kwds_by_type("SECTION"))
+    assert len(sections) == 3
+    
+    # Find sections by secid
+    section_100 = next(s for s in sections if s.secid == 100)
+    section_200 = next(s for s in sections if s.secid == 200)
+    section_300 = next(s for s in sections if s.secid == 300)
+    
+    # Each module that DEFINES the parameter uses its own value at import time
+    assert section_100.elform == 1.0, "Module A uses its own value (1.0) at import time"
+    assert section_200.elform == 2.0, "Module B uses its own value (2.0) at import time"
+    
+    # Module C (consumer) gets the LAST value from parent deck (demonstrates collision)
+    assert section_300.elform == 2.0, "Module C gets last value (2.0) from parent - collision!"
+    
+    # The parameter in expanded deck should be the last one
+    assert expanded_deck.parameters.get("scale") == 2.0
+
+
+
+def test_deck_expand_local_parameter_no_collision(file_utils):
+    """Test that local parameters from sibling includes do NOT collide.
+    
+    This demonstrates the CORRECT way to avoid collision: use *PARAMETER_LOCAL.
+    When two sibling includes define the same *PARAMETER_LOCAL, each gets its own
+    isolated value.
+    """
+    deck = Deck()
+    cwd = file_utils.assets_folder / "expand_parameters" / "collision_local"
+    filename = cwd / "main.k"
+    deck.import_file(filename)
+    
+    # Expand the deck
+    expanded_deck = deck.expand(recurse=True, cwd=cwd)
+    
+    # Get the sections
+    sections = list(expanded_deck.get_kwds_by_type("SECTION"))
+    assert len(sections) == 2
+    
+    # Find sections by secid
+    section_100 = next(s for s in sections if s.secid == 100)
+    section_200 = next(s for s in sections if s.secid == 200)
+    
+    # With PARAMETER_LOCAL: Each module gets its own value (no collision)
+    assert section_100.elform == 1.0, "Module A should use its own local value (1.0)"
+    assert section_200.elform == 2.0, "Module B should use its own local value (2.0)"
+    
+    # Local parameters should NOT be in the parent deck
+    with pytest.raises(KeyError):
+        expanded_deck.parameters.get("scale")
+
+
+
+def test_deck_nodeset_extraction(file_utils):
+    """Test extracting node set information from a deck.
+    
+    This test demonstrates basic node set extraction capabilities
+    similar to postprocessing workflows in set27_timehistory_analysis.ipynb.
+    Uses a real-world case file from lsdyna_python_parser test cases.
+    """
+    deck = Deck()
+    filename = file_utils.assets_folder / "test_node_sets.k"
+    deck.import_file(filename)
+    
+    # Get all SET keywords
+    sets = list(deck.get_kwds_by_type("SET"))
+    assert len(sets) > 3, "There should be more than 3 SET keywords"
+
+    # Get all SET_NODE keywords using prefix matching
+    # This should match SET_NODE_LIST and other SET_NODE* variants
+    node_sets = list(deck.get_kwds_by_full_type("SET", "NODE"))
+    # node_sets = list(deck.get_kwds_by_full_type("SET", "NODE", "LIST")) ##DOESN'T WORK
+    # node_sets = list(deck.get_kwds_by_full_type("SET", "NODE", "LIST", "TITLE")) ##DOESN'T WORK
+    
+    define_curves = list(deck.get_kwds_by_full_type("DEFINE", "CURVE")) ## WORKS
+
+    # Test: There should be 3 node sets in the deck
+    assert len(node_sets) == 3, "There are 3 node sets in this input deck"
+    
+    # Test that access by list index and access with get_set_by_id are equivalent
+    set_1 = deck.get_set_by_id(1)
+    for set_1_access in [node_sets[0], set_1]:
+        assert set_1_access is not None, "Set with ID 1 should exist"
+        assert set_1_access.sid == 1, "Retrieved set should have sid=1"
+        assert set_1_access.keyword == "SET"
+        
+        # Test: Largest node in set 1 should be 4964
+        assert hasattr(set_1_access, 'nodes'), "Set 1 should have nodes attribute"
+        assert hasattr(set_1_access.nodes, 'data'), "Nodes should have data attribute"
+        set_1_nodes = set_1_access.nodes.data
+        assert len(set_1_nodes) > 0, "Set 1 should contain nodes"
+        largest_node = max(set_1_nodes)
+        assert largest_node == 4964, f"Largest node in set 1 should be 4964, got {largest_node}"
+        
+        # Test: All nodes in set 1 should be consecutive
+        sorted_nodes = sorted(set_1_nodes)
+        expected_consecutive = list(range(sorted_nodes[0], sorted_nodes[-1] + 1))
+        assert sorted_nodes == expected_consecutive, \
+            f"Nodes in set 1 are not consecutive: {sorted_nodes[:10]} ... {sorted_nodes[-10:]}"
+    
+    set_2 = deck.get_set_by_id(2)
+    for set_2_access in [node_sets[1], set_2]:
+        assert set_2_access is not None, "Set with ID 2 should exist"
+        assert set_2_access.sid == 2, "Retrieved set should have sid=2"        
+        
+        assert hasattr(set_2_access, 'nodes'), "Set 2 should have nodes attribute"
+        assert hasattr(set_2_access.nodes, 'data'), "Nodes should have data attribute"
+        set_2_nodes = set_2_access.nodes.data
+        assert len(set_2_nodes) == 164, f"Set 2 should have 164 nodes, found {len(set_2_nodes)}"
+    
+    # Test that non-existent ID returns None
+    set_999 = deck.get_set_by_id(999)
+    assert set_999 is None, "Non-existent set ID should return None"    

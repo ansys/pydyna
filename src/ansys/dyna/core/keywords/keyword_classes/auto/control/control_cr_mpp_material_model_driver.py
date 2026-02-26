@@ -23,7 +23,11 @@
 """Module providing the ControlCrMppMaterialModelDriver class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLCRMPPMATERIALMODELDRIVER_CARD0 = (
+)
 
 class ControlCrMppMaterialModelDriver(KeywordBase):
     """DYNA CONTROL_CR_MPP_MATERIAL_MODEL_DRIVER keyword"""
@@ -35,9 +39,7 @@ class ControlCrMppMaterialModelDriver(KeywordBase):
         """Initialize the ControlCrMppMaterialModelDriver class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLCRMPPMATERIALMODELDRIVER_CARD0,
+                **kwargs,
+            ),        ]

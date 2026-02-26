@@ -23,7 +23,18 @@
 """Module providing the ControlRefineMppDistribution class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLREFINEMPPDISTRIBUTION_CARD0 = (
+    FieldSchema("id", int, 0, 10, 0),
+    FieldSchema("dx", float, 10, 10, 0.0),
+    FieldSchema("dy", float, 20, 10, 0.0),
+    FieldSchema("dz", float, 30, 10, 0.0),
+    FieldSchema("ex", float, 40, 10, 1.0),
+    FieldSchema("ey", float, 50, 10, 1.0),
+    FieldSchema("ez", float, 60, 10, 1.0),
+)
 
 class ControlRefineMppDistribution(KeywordBase):
     """DYNA CONTROL_REFINE_MPP_DISTRIBUTION keyword"""
@@ -35,68 +46,10 @@ class ControlRefineMppDistribution(KeywordBase):
         """Initialize the ControlRefineMppDistribution class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dx",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dy",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dz",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ex",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ey",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ez",
-                        float,
-                        60,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLREFINEMPPDISTRIBUTION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id(self) -> int:
         """Get or set the ID = -NTOTRF in *CONTROL_REFINE_ALE.

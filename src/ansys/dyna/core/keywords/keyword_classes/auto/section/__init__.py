@@ -47,6 +47,6 @@ from .section_sph import SectionSph
 from .section_sph_ellipse import SectionSphEllipse
 from .section_sph_interaction import SectionSphInteraction
 from .section_sph_user import SectionSphUser
-from .section_spring_damper import SectionSpringDamper
+from .section_spring__damper import SectionSpring_Damper
 from .section_spring_damper import SectionSpringDamper
 from .section_tshell import SectionTShell

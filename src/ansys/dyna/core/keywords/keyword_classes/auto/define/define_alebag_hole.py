@@ -23,8 +23,24 @@
 """Module providing the DefineAlebagHole class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEALEBAGHOLE_CARD0 = (
+    FieldSchema("holeid", int, 0, 10, None),
+    FieldSchema("sid", int, 10, 10, None),
+    FieldSchema("sidtype", int, 20, 10, 0),
+    FieldSchema("nquad", int, 30, 10, 1),
+    FieldSchema("xoff", float, 40, 10, 0.0),
+    FieldSchema("nfold", int, 50, 10, 0),
+    FieldSchema("xclen", float, 60, 10, 0.0),
+    FieldSchema("int_ext", int, 70, 10, 0, "int/ext"),
+)
+
+_DEFINEALEBAGHOLE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineAlebagHole(KeywordBase):
     """DYNA DEFINE_ALEBAG_HOLE keyword"""
@@ -40,91 +56,20 @@ class DefineAlebagHole(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "holeid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sidtype",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nquad",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xoff",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfold",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xclen",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "int/ext",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEALEBAGHOLE_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineAlebagHole.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEALEBAGHOLE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def holeid(self) -> typing.Optional[int]:
         """Get or set the Bag hole definition ID, referred in *AIRBAG_ADVANCED_ALE.
@@ -212,14 +157,14 @@ class DefineAlebagHole(KeywordBase):
         EQ: 0 'EXT' if the hole is an external hole
         EQ: 1 'INT' if the hole is an internal hole
         """ # nopep8
-        return self._cards[0].get_value("int/ext")
+        return self._cards[0].get_value("int_ext")
 
     @int_ext.setter
     def int_ext(self, value: int) -> None:
         """Set the int_ext property."""
         if value not in [0, 1, None]:
             raise Exception("""int_ext must be `None` or one of {0,1}.""")
-        self._cards[0].set_value("int/ext", value)
+        self._cards[0].set_value("int_ext", value)
 
     @property
     def title(self) -> typing.Optional[str]:

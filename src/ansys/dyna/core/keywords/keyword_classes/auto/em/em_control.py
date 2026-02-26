@@ -23,7 +23,19 @@
 """Module providing the EmControl class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMCONTROL_CARD0 = (
+    FieldSchema("emsol", int, 0, 10, -1),
+    FieldSchema("numls", int, 10, 10, 100),
+    FieldSchema("macrodt", float, 20, 10, None),
+    FieldSchema("dimtype", int, 30, 10, 0),
+    FieldSchema("nperio", int, 40, 10, 2),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("ncylfem", int, 60, 10, 5000),
+    FieldSchema("ncylbem", int, 70, 10, 5000),
+)
 
 class EmControl(KeywordBase):
     """DYNA EM_CONTROL keyword"""
@@ -35,74 +47,10 @@ class EmControl(KeywordBase):
         """Initialize the EmControl class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "emsol",
-                        int,
-                        0,
-                        10,
-                        -1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numls",
-                        int,
-                        10,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                    Field(
-                        "macrodt",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dimtype",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nperio",
-                        int,
-                        40,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncylfem",
-                        int,
-                        60,
-                        10,
-                        5000,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ncylbem",
-                        int,
-                        70,
-                        10,
-                        5000,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMCONTROL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def emsol(self) -> int:
         """Get or set the Electromagnetism solver selector:

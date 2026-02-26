@@ -23,7 +23,19 @@
 """Module providing the IcfdControlAdapt class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLADAPT_CARD0 = (
+    FieldSchema("minh", float, 0, 10, None),
+    FieldSchema("maxh", float, 10, 10, None),
+    FieldSchema("err", float, 20, 10, 1.0),
+    FieldSchema("mth", int, 30, 10, 0),
+    FieldSchema("nit", int, 40, 10, 0),
+    FieldSchema("var", int, 50, 10, 0),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("kis", int, 70, 10, 0),
+)
 
 class IcfdControlAdapt(KeywordBase):
     """DYNA ICFD_CONTROL_ADAPT keyword"""
@@ -35,73 +47,10 @@ class IcfdControlAdapt(KeywordBase):
         """Initialize the IcfdControlAdapt class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "minh",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxh",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "err",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mth",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nit",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "var",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kis",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLADAPT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def minh(self) -> typing.Optional[float]:
         """Get or set the Minimum mesh size allowed to the mesh generator. The resulting mesh will not have an element smaller than MINH even if the minimum size does not satisfy the maximum error.

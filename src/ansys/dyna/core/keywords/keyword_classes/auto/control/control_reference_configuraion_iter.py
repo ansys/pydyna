@@ -23,7 +23,23 @@
 """Module providing the ControlReferenceConfiguraionIter class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLREFERENCECONFIGURAIONITER_CARD0 = (
+    FieldSchema("maxiter", int, 0, 10, None),
+    FieldSchema("target", str, 10, 70, None),
+)
+
+_CONTROLREFERENCECONFIGURAIONITER_CARD1 = (
+    FieldSchema("method", int, 0, 10, None),
+    FieldSchema("step", float, 10, 10, 1.0),
+    FieldSchema("tol", float, 20, 10, 0.0),
+)
+
+_CONTROLREFERENCECONFIGURAIONITER_CARD2 = (
+    FieldSchema("iter", str, 0, 80, None),
+)
 
 class ControlReferenceConfiguraionIter(KeywordBase):
     """DYNA CONTROL_REFERENCE_CONFIGURAION_ITER keyword"""
@@ -35,64 +51,16 @@ class ControlReferenceConfiguraionIter(KeywordBase):
         """Initialize the ControlReferenceConfiguraionIter class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "maxiter",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "target",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "method",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "step",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tol",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "iter",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLREFERENCECONFIGURAIONITER_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLREFERENCECONFIGURAIONITER_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLREFERENCECONFIGURAIONITER_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def maxiter(self) -> typing.Optional[int]:
         """Get or set the The maximum number of iterations in the iterative method

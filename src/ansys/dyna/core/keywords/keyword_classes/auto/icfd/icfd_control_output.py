@@ -23,7 +23,21 @@
 """Module providing the IcfdControlOutput class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLOUTPUT_CARD0 = (
+    FieldSchema("msgl", int, 0, 10, 0),
+    FieldSchema("outl", int, 10, 10, 0),
+    FieldSchema("dtout", float, 20, 10, 0.0),
+    FieldSchema("lsppout", int, 30, 10, 1),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("itout", int, 50, 10, 0),
+)
+
+_ICFDCONTROLOUTPUT_CARD1 = (
+    FieldSchema("pitout", int, 0, 10, None),
+)
 
 class IcfdControlOutput(KeywordBase):
     """DYNA ICFD_CONTROL_OUTPUT keyword"""
@@ -35,70 +49,13 @@ class IcfdControlOutput(KeywordBase):
         """Initialize the IcfdControlOutput class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "msgl",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "outl",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtout",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lsppout",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itout",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pitout",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLOUTPUT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLOUTPUT_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def msgl(self) -> int:
         """Get or set the Message level.

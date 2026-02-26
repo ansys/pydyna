@@ -23,7 +23,15 @@
 """Module providing the ControlPoreAir class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLPOREAIR_CARD0 = (
+    FieldSchema("pa_rho", float, 0, 10, None),
+    FieldSchema("air_p", float, 10, 10, None),
+    FieldSchema("eterm", float, 20, 10, None),
+    FieldSchema("anamsg", int, 30, 10, 0),
+)
 
 class ControlPoreAir(KeywordBase):
     """DYNA CONTROL_PORE_AIR keyword"""
@@ -35,41 +43,10 @@ class ControlPoreAir(KeywordBase):
         """Initialize the ControlPoreAir class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pa_rho",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "air_p",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eterm",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "anamsg",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLPOREAIR_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pa_rho(self) -> typing.Optional[float]:
         """Get or set the Density of atmospheric air, = 1.184 kg/m3 at 25 C

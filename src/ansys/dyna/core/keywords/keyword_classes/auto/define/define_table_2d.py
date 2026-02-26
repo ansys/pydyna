@@ -22,9 +22,25 @@
 
 """Module providing the DefineTable2D class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+
+_DEFINETABLE2D_CARD0 = (
+    FieldSchema("tbid", int, 0, 10, None),
+    FieldSchema("sfa", float, 10, 10, 1.0),
+    FieldSchema("offa", float, 20, 10, 0.0),
+)
+
+_DEFINETABLE2D_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineTable2D(KeywordBase):
     """DYNA DEFINE_TABLE_2D keyword"""
@@ -34,77 +50,37 @@ class DefineTable2D(KeywordBase):
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
+    _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineTable2D class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
+            Card.from_field_schemas_with_defaults(
+                _DEFINETABLE2D_CARD0,
+                **kwargs,
+            ),            TableCard(
                 [
-                    Field(
-                        "tbid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfa",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "offa",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
+                    Field("value", float, 0, 20, 0.0),
+                    Field("lcid", int, 20, 20, None),
                 ],
-            ),
-            Card(
-                [
-                    Field(
-                        "value",
-                        float,
-                        0,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        20,
-                        20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+                None,
+                name="table",
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineTable2D.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINETABLE2D_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def tbid(self) -> typing.Optional[int]:
         """Get or set the Table ID. Tables and Load curves may not share common ID's.  LS-DYNA3D allows load curve ID's and table ID's to be used interchangeably.
@@ -139,26 +115,14 @@ class DefineTable2D(KeywordBase):
         self._cards[0].set_value("offa", value)
 
     @property
-    def value(self) -> float:
-        """Get or set the Load curve will be defined corresponding to this value, e.g., this value could be a strain rate, see purpose above.
-        """ # nopep8
-        return self._cards[1].get_value("value")
+    def table(self) -> pd.DataFrame:
+        """Get the table of table."""
+        return self._cards[1].table
 
-    @value.setter
-    def value(self, value: float) -> None:
-        """Set the value property."""
-        self._cards[1].set_value("value", value)
-
-    @property
-    def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID used by this value.
-        """ # nopep8
-        return self._cards[1].get_value("lcid")
-
-    @lcid.setter
-    def lcid(self, value: int) -> None:
-        """Set the lcid property."""
-        self._cards[1].set_value("lcid", value)
+    @table.setter
+    def table(self, df: pd.DataFrame):
+        """Set table from the dataframe df"""
+        self._cards[1].table = df
 
     @property
     def title(self) -> typing.Optional[str]:
@@ -173,4 +137,19 @@ class DefineTable2D(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
 

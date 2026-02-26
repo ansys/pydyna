@@ -23,7 +23,22 @@
 """Module providing the LoadSeismicSsiAux class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADSEISMICSSIAUX_CARD0 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
+
+_LOADSEISMICSSIAUX_CARD1 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("gmset", int, 10, 10, None),
+    FieldSchema("sf", float, 20, 10, 1.0),
+    FieldSchema("birth", float, 30, 10, 0.0),
+    FieldSchema("death", float, 40, 10, 1e+28),
+    FieldSchema("isg", int, 50, 10, 0),
+    FieldSchema("memgm", int, 60, 10, 2500000),
+)
 
 class LoadSeismicSsiAux(KeywordBase):
     """DYNA LOAD_SEISMIC_SSI_AUX keyword"""
@@ -35,77 +50,13 @@ class LoadSeismicSsiAux(KeywordBase):
         """Initialize the LoadSeismicSsiAux class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gmset",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "birth",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        40,
-                        10,
-                        1.E+28,
-                        **kwargs,
-                    ),
-                    Field(
-                        "isg",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "memgm",
-                        int,
-                        60,
-                        10,
-                        2500000,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSEISMICSSIAUX_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEISMICSSIAUX_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Name of binary file containing recorded motions

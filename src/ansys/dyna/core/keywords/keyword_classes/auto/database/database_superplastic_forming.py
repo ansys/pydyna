@@ -23,7 +23,12 @@
 """Module providing the DatabaseSuperplasticForming class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASESUPERPLASTICFORMING_CARD0 = (
+    FieldSchema("dtout", float, 0, 10, None),
+)
 
 class DatabaseSuperplasticForming(KeywordBase):
     """DYNA DATABASE_SUPERPLASTIC_FORMING keyword"""
@@ -35,19 +40,10 @@ class DatabaseSuperplasticForming(KeywordBase):
         """Initialize the DatabaseSuperplasticForming class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dtout",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASESUPERPLASTICFORMING_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def dtout(self) -> typing.Optional[float]:
         """Get or set the Output time interval for output to PRESSURE, CURVE1 and CURVE2 files. The PRESSURE file contains general information from the analysis and the files CURVE1 and CURVE2 contain pressure versus time from phases 1 and 2 of the analysis. The pressure file may be plotted in Phase 3 of LS-TAURUS using the SUPERPL option.

@@ -23,7 +23,17 @@
 """Module providing the ControlImplicitTermination class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITTERMINATION_CARD0 = (
+    FieldSchema("deltau", float, 0, 10, 0.0),
+    FieldSchema("delta1", float, 10, 10, 0.0),
+    FieldSchema("ketol", float, 20, 10, 0.0),
+    FieldSchema("ietol", float, 30, 10, 0.0),
+    FieldSchema("tetol", float, 40, 10, 0.0),
+    FieldSchema("nstep", int, 50, 10, 3),
+)
 
 class ControlImplicitTermination(KeywordBase):
     """DYNA CONTROL_IMPLICIT_TERMINATION keyword"""
@@ -35,60 +45,10 @@ class ControlImplicitTermination(KeywordBase):
         """Initialize the ControlImplicitTermination class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "deltau",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "delta1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ketol",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ietol",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tetol",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nstep",
-                        int,
-                        50,
-                        10,
-                        3,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITTERMINATION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def deltau(self) -> float:
         """Get or set the Alternate termination criteria for implicit transient simulation.

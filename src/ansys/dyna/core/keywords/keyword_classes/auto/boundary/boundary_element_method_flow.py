@@ -23,7 +23,18 @@
 """Module providing the BoundaryElementMethodFlow class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYELEMENTMETHODFLOW_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("vx", float, 10, 10, None),
+    FieldSchema("vy", float, 20, 10, None),
+    FieldSchema("vz", float, 30, 10, None),
+    FieldSchema("ro", float, 40, 10, None),
+    FieldSchema("pstatic", float, 50, 10, 0.0),
+    FieldSchema("mach", float, 60, 10, 0.0),
+)
 
 class BoundaryElementMethodFlow(KeywordBase):
     """DYNA BOUNDARY_ELEMENT_METHOD_FLOW keyword"""
@@ -35,63 +46,10 @@ class BoundaryElementMethodFlow(KeywordBase):
         """Initialize the BoundaryElementMethodFlow class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pstatic",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mach",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYELEMENTMETHODFLOW_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Shell set ID for the set of shell elements which define the surface of the bodies of interest (see *SET_SHELL). The nodes of these shells should be ordered so that the shell normals point into the fluid.

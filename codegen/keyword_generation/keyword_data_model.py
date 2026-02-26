@@ -172,7 +172,8 @@ class KeywordDataModel:
             setting: Dict with 'source' and either 'keyword-name'/'card-index'
                     or 'card-name' keys
 
-        Returns:
+        Returns
+        -------
             Card dataclass instance
         """
         source = setting["source"]

@@ -23,7 +23,13 @@
 """Module providing the ControlHourglass936 class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLHOURGLASS936_CARD0 = (
+    FieldSchema("ihq", int, 0, 10, None),
+    FieldSchema("qh", float, 10, 10, 0.3),
+)
 
 class ControlHourglass936(KeywordBase):
     """DYNA CONTROL_HOURGLASS_936 keyword"""
@@ -35,27 +41,10 @@ class ControlHourglass936(KeywordBase):
         """Initialize the ControlHourglass936 class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ihq",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qh",
-                        float,
-                        10,
-                        10,
-                        0.3,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLHOURGLASS936_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ihq(self) -> typing.Optional[int]:
         """Get or set the Default hourglass viscosity type:

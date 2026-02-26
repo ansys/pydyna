@@ -23,7 +23,12 @@
 """Module providing the DeleteElementTshell class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DELETEELEMENTTSHELL_CARD0 = (
+    FieldSchema("esid", int, 0, 10, None),
+)
 
 class DeleteElementTshell(KeywordBase):
     """DYNA DELETE_ELEMENT_TSHELL keyword"""
@@ -35,19 +40,10 @@ class DeleteElementTshell(KeywordBase):
         """Initialize the DeleteElementTshell class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "esid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DELETEELEMENTTSHELL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def esid(self) -> typing.Optional[int]:
         """Get or set the Tshell element set ID, see *SET_TSHELL.

@@ -23,7 +23,12 @@
 """Module providing the ChangeOutput class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHANGEOUTPUT_CARD0 = (
+    FieldSchema("iascii", int, 0, 10, 0),
+)
 
 class ChangeOutput(KeywordBase):
     """DYNA CHANGE_OUTPUT keyword"""
@@ -35,20 +40,10 @@ class ChangeOutput(KeywordBase):
         """Initialize the ChangeOutput class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "iascii",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHANGEOUTPUT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def iascii(self) -> int:
         """Get or set the If iascii=1, all ascii output will be appended to the result of previous run.

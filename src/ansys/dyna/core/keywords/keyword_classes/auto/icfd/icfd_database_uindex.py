@@ -23,7 +23,12 @@
 """Module providing the IcfdDatabaseUindex class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDDATABASEUINDEX_CARD0 = (
+    FieldSchema("out", int, 0, 10, 0),
+)
 
 class IcfdDatabaseUindex(KeywordBase):
     """DYNA ICFD_DATABASE_UINDEX keyword"""
@@ -35,20 +40,10 @@ class IcfdDatabaseUindex(KeywordBase):
         """Initialize the IcfdDatabaseUindex class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "out",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDDATABASEUINDEX_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def out(self) -> int:
         """Get or set the Determines if the solver should calculate the uniformity index.

@@ -23,8 +23,26 @@
 """Module providing the SensorSwitchShellToVent class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SENSORSWITCHSHELLTOVENT_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("type", int, 10, 10, 0),
+    FieldSchema("c23", float, 20, 10, 0.7),
+    FieldSchema("amax", float, 30, 10, None),
+)
+
+_SENSORSWITCHSHELLTOVENT_CARD1 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("ftime", float, 10, 10, 0.0),
+    FieldSchema("c23v", float, 20, 10, 0.7),
+)
+
+_SENSORSWITCHSHELLTOVENT_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SensorSwitchShellToVent(KeywordBase):
     """DYNA SENSOR_SWITCH_SHELL_TO_VENT keyword"""
@@ -40,86 +58,23 @@ class SensorSwitchShellToVent(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "type",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c23",
-                        float,
-                        20,
-                        10,
-                        0.7,
-                        **kwargs,
-                    ),
-                    Field(
-                        "amax",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ftime",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "c23v",
-                        float,
-                        20,
-                        10,
-                        0.7,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SENSORSWITCHSHELLTOVENT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _SENSORSWITCHSHELLTOVENT_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SensorSwitchShellToVent.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SENSORSWITCHSHELLTOVENT_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Part set ID/Part ID.

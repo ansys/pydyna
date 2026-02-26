@@ -71,7 +71,7 @@
         {% endfilter %}
         """ # nopep8
 {% endif %}
-        return self._cards[{{card.index}}].get_value("{{field.name}}")
+        return self._cards[{{card.index}}].get_value("{{field.property_name}}")
 
 {% if not field.readonly %}
     @{{field.property_name}}.setter
@@ -83,10 +83,10 @@
         {% endif %}
 {% if field.card_indices %}
 {% for card_index in field.card_indices %}
-        self._cards[{{card_index}}].set_value("{{field.name}}", value)
+        self._cards[{{card_index}}].set_value("{{field.property_name}}", value)
 {% endfor %}{# card_index in field.card_indices #}
 {% else %}
-        self._cards[{{card.index}}].set_value("{{field.name}}", value)
+        self._cards[{{card.index}}].set_value("{{field.property_name}}", value)
 {% endif %}{# card.indices #}
 
 {% endif %}{# not field.readonly #}

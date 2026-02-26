@@ -25,6 +25,7 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -41,16 +42,14 @@ class MeshNode(KeywordBase):
             TableCard(
                 [
                     Field("nid", int, 0, 8, None),
-                    Field("x", float, 8, 16, 0),
-                    Field("y", float, 24, 16, 0),
-                    Field("z", float, 40, 16, 0),
+                    Field("x", float, 8, 16, 0.0),
+                    Field("y", float, 24, 16, 0.0),
+                    Field("z", float, 40, 16, 0.0),
                 ],
                 None,
                 name="nodes",
                 **kwargs,
-            ),
-        ]
-
+            ),        ]
     @property
     def nodes(self) -> pd.DataFrame:
         """Get the table of nodes."""

@@ -25,6 +25,7 @@ import typing
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -43,15 +44,13 @@ class IcfdBoundaryPrescribedPre(KeywordBase):
                     Field("pid", int, 0, 10, None),
                     Field("lcid", int, 10, 10, None),
                     Field("sf", float, 20, 10, 1.0),
-                    Field("death", float, 30, 10, 1.E+28),
+                    Field("death", float, 30, 10, 1e+28),
                     Field("birth", float, 40, 10, 0.0),
                 ],
                 None,
                 name="boundaries",
                 **kwargs,
-            ),
-        ]
-
+            ),        ]
     @property
     def boundaries(self) -> pd.DataFrame:
         """Get the table of boundaries."""

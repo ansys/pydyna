@@ -23,7 +23,30 @@
 """Module providing the ContactAddWear class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTACTADDWEAR_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("wtype", int, 10, 10, 0),
+    FieldSchema("p1", float, 20, 10, None),
+    FieldSchema("p2", float, 30, 10, None),
+    FieldSchema("p3", float, 40, 10, None),
+    FieldSchema("p4", float, 50, 10, None),
+    FieldSchema("p5", float, 60, 10, None),
+    FieldSchema("p6", float, 70, 10, None),
+)
+
+_CONTACTADDWEAR_CARD1 = (
+    FieldSchema("w1", float, 0, 10, None),
+    FieldSchema("w2", float, 10, 10, None),
+    FieldSchema("w3", float, 20, 10, None),
+    FieldSchema("w4", float, 30, 10, None),
+    FieldSchema("w5", float, 40, 10, None),
+    FieldSchema("w6", float, 50, 10, None),
+    FieldSchema("w7", float, 60, 10, None),
+    FieldSchema("w8", float, 70, 10, None),
+)
 
 class ContactAddWear(KeywordBase):
     """DYNA CONTACT_ADD_WEAR keyword"""
@@ -35,129 +58,13 @@ class ContactAddWear(KeywordBase):
         """Initialize the ContactAddWear class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wtype",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p3",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p4",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p5",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p6",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "w1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "w8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTACTADDWEAR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTADDWEAR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Contact interface ID, see *CONTACT_...

@@ -23,7 +23,31 @@
 """Module providing the DualceseBoundaryPrescribedSegmentSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEBOUNDARYPRESCRIBEDSEGMENTSET_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("idcomp", int, 10, 10, None),
+)
+
+_DUALCESEBOUNDARYPRESCRIBEDSEGMENTSET_CARD1 = (
+    FieldSchema("lc_u", int, 0, 10, None),
+    FieldSchema("lc_v", int, 10, 10, None),
+    FieldSchema("lc_w", int, 20, 10, None),
+    FieldSchema("lc_rho", int, 30, 10, None),
+    FieldSchema("lc_p", int, 40, 10, None),
+    FieldSchema("lc_t", int, 50, 10, None),
+)
+
+_DUALCESEBOUNDARYPRESCRIBEDSEGMENTSET_CARD2 = (
+    FieldSchema("sf_u", float, 0, 10, 1.0),
+    FieldSchema("sf_v", float, 10, 10, 1.0),
+    FieldSchema("sf_w", float, 20, 10, 1.0),
+    FieldSchema("sf_rho", float, 30, 10, 1.0),
+    FieldSchema("sf_p", float, 40, 10, 1.0),
+    FieldSchema("sf_t", float, 50, 10, 1.0),
+)
 
 class DualceseBoundaryPrescribedSegmentSet(KeywordBase):
     """DYNA DUALCESE_BOUNDARY_PRESCRIBED_SEGMENT_SET keyword"""
@@ -35,124 +59,16 @@ class DualceseBoundaryPrescribedSegmentSet(KeywordBase):
         """Initialize the DualceseBoundaryPrescribedSegmentSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "idcomp",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lc_u",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_v",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_w",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_rho",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_p",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lc_t",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sf_u",
-                        float,
-                        0,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_v",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_w",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_rho",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_p",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf_t",
-                        float,
-                        50,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYPRESCRIBEDSEGMENTSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYPRESCRIBEDSEGMENTSET_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYPRESCRIBEDSEGMENTSET_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID created with *DUALCESE_SEGMENTSET

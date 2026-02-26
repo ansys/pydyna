@@ -23,7 +23,26 @@
 """Module providing the DualceseInitialHybrid class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEINITIALHYBRID_CARD0 = (
+    FieldSchema("z1", float, 0, 10, None),
+    FieldSchema("ra", float, 10, 10, None),
+    FieldSchema("uic", float, 20, 10, None),
+    FieldSchema("vic", float, 30, 10, None),
+    FieldSchema("wic", float, 40, 10, None),
+    FieldSchema("rho1", float, 50, 10, None),
+    FieldSchema("rho_a", float, 60, 10, None),
+    FieldSchema("rho_b", float, 70, 10, None),
+)
+
+_DUALCESEINITIALHYBRID_CARD1 = (
+    FieldSchema("pic", float, 0, 10, None),
+    FieldSchema("tic", float, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("ifunc", int, 30, 10, None),
+)
 
 class DualceseInitialHybrid(KeywordBase):
     """DYNA DUALCESE_INITIAL_HYBRID keyword"""
@@ -35,100 +54,13 @@ class DualceseInitialHybrid(KeywordBase):
         """Initialize the DualceseInitialHybrid class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "z1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ra",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "uic",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vic",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wic",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rho1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rho_a",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rho_b",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pic",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tic",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifunc",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEINITIALHYBRID_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DUALCESEINITIALHYBRID_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def z1(self) -> typing.Optional[float]:
         """Get or set the Volume fraction of material 1 (or color function).This is usually a value of 0 or 1. For numerical stability, however, use a very small value instead of zero

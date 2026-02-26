@@ -23,7 +23,19 @@
 """Module providing the FrequencyDomainAcousticFringePlotSphere class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINACOUSTICFRINGEPLOTSPHERE_CARD0 = (
+    FieldSchema("center", int, 0, 10, 1),
+    FieldSchema("r", float, 10, 10, None),
+    FieldSchema("density", int, 20, 10, None),
+    FieldSchema("x", float, 30, 10, None),
+    FieldSchema("y", float, 40, 10, None),
+    FieldSchema("z", float, 50, 10, None),
+    FieldSchema("half1", int, 60, 10, 0),
+    FieldSchema("half2", int, 70, 10, 0),
+)
 
 class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_ACOUSTIC_FRINGE_PLOT_SPHERE keyword"""
@@ -35,71 +47,10 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
         """Initialize the FrequencyDomainAcousticFringePlotSphere class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "center",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "density",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "half1",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "half2",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACOUSTICFRINGEPLOTSPHERE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def center(self) -> int:
         """Get or set the Flag for defining the center point for the sphere.

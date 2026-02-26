@@ -23,7 +23,17 @@
 """Module providing the ControlMppDecompositionRedecomposition class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMPPDECOMPOSITIONREDECOMPOSITION_CARD0 = (
+    FieldSchema("freq", float, 0, 10, None),
+    FieldSchema("defgeo", int, 10, 10, 1),
+    FieldSchema("weight", float, 20, 10, 1.0),
+    FieldSchema("remsph", int, 30, 10, 0),
+    FieldSchema("stime", float, 40, 10, 0.0),
+    FieldSchema("sampt_", float, 50, 10, None, "sampt "),
+)
 
 class ControlMppDecompositionRedecomposition(KeywordBase):
     """DYNA CONTROL_MPP_DECOMPOSITION_REDECOMPOSITION keyword"""
@@ -35,58 +45,10 @@ class ControlMppDecompositionRedecomposition(KeywordBase):
         """Initialize the ControlMppDecompositionRedecomposition class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "freq",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "defgeo",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "weight",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "remsph",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stime",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sampt ",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMPPDECOMPOSITIONREDECOMPOSITION_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def freq(self) -> typing.Optional[float]:
         """Get or set the Determines the number of redecompositions during the solution.
@@ -158,10 +120,10 @@ class ControlMppDecompositionRedecomposition(KeywordBase):
     def sampt_(self) -> typing.Optional[float]:
         """Get or set the Time interval for collecting element cost profile to use in the next REDECOMP step.GT.0:	Sampling from beginning of each redecomposition for length SAMPT(t to t + SAMPT).If SAMPT ≥ FREQ, then the sampling will occur for the entire time interval, FREQ.LT.0 : Sampling from before ending of each redecomposition through to the next redecomposition(t + FREQ - SAMPT to t + FREQ
         """ # nopep8
-        return self._cards[0].get_value("sampt ")
+        return self._cards[0].get_value("sampt_")
 
     @sampt_.setter
     def sampt_(self, value: float) -> None:
         """Set the sampt_ property."""
-        self._cards[0].set_value("sampt ", value)
+        self._cards[0].set_value("sampt_", value)
 

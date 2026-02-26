@@ -23,7 +23,24 @@
 """Module providing the CeseInitialChemistrySet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEINITIALCHEMISTRYSET_CARD0 = (
+    FieldSchema("setid", int, 0, 10, None),
+    FieldSchema("chemid", int, 10, 10, None),
+    FieldSchema("compid", int, 20, 10, None),
+)
+
+_CESEINITIALCHEMISTRYSET_CARD1 = (
+    FieldSchema("uic", float, 0, 10, None),
+    FieldSchema("vic", float, 10, 10, None),
+    FieldSchema("wic", float, 20, 10, None),
+    FieldSchema("rhoic", float, 30, 10, None),
+    FieldSchema("pic", float, 40, 10, None),
+    FieldSchema("tic", float, 50, 10, None),
+    FieldSchema("hic", float, 60, 10, None),
+)
 
 class CeseInitialChemistrySet(KeywordBase):
     """DYNA CESE_INITIAL_CHEMISTRY_SET keyword"""
@@ -35,86 +52,13 @@ class CeseInitialChemistrySet(KeywordBase):
         """Initialize the CeseInitialChemistrySet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "setid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "chemid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "compid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "uic",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vic",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "wic",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rhoic",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "pic",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tic",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hic",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEINITIALCHEMISTRYSET_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CESEINITIALCHEMISTRYSET_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def setid(self) -> typing.Optional[int]:
         """Get or set the Identifier of the CESE element set to initialize.

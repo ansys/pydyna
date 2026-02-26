@@ -26,7 +26,6 @@ from ansys.dyna.core.lib.text_card import TextCard
 import pytest
 
 
-@pytest.mark.keywords
 def test_assign_text_card():
     """test assigning one-line value to text card"""
     t = TextCard("function", "f(a,b,c)=a*2+b*c+sqrt(a*c)")
@@ -37,7 +36,7 @@ def test_assign_text_card():
     assert t._get_comment(format_type.default) == ref
 
 
-@pytest.mark.keywords
+
 def test_read_text_card(string_utils):
     card_text = """1,x-velo
 x(t)=1000*sin(100*t)"""
@@ -48,7 +47,7 @@ x(t)=1000*sin(100*t)"""
     assert t._content_lines[1] == "x(t)=1000*sin(100*t)"
 
 
-@pytest.mark.keywords
+
 def test_text_card_write_long(ref_string):
     """test writing long format text card."""
     t = TextCard("function", "f(a,b,c)=a*2+b*c+sqrt(a*c)")
@@ -58,7 +57,7 @@ def test_text_card_write_long(ref_string):
     assert t._get_comment(format_type.long) == ref_string.test_text_card_long
 
 
-@pytest.mark.keywords
+
 def test_text_card_read_long(string_utils):
     """test reading long format text card."""
     t = TextCard("function", format=format_type.long)

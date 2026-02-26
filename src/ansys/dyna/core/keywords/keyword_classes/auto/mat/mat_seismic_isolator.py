@@ -23,8 +23,87 @@
 """Module providing the MatSeismicIsolator class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_MATSEISMICISOLATOR_CARD0 = (
+    FieldSchema("mid", int, 0, 10, None),
+    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("a", float, 20, 10, 1.0),
+    FieldSchema("beta", float, 30, 10, 0.5),
+    FieldSchema("gamma", float, 40, 10, 0.5),
+    FieldSchema("dispy", float, 50, 10, None),
+    FieldSchema("stiffv", float, 60, 10, None),
+    FieldSchema("itype", int, 70, 10, 0),
+)
+
+_MATSEISMICISOLATOR_CARD1 = (
+    FieldSchema("preload", float, 0, 10, 0.0),
+    FieldSchema("damp", float, 10, 10, 1.0),
+    FieldSchema("mx1", float, 20, 10, 0.0),
+    FieldSchema("mx2", float, 30, 10, 0.0),
+    FieldSchema("my1", float, 40, 10, 0.0),
+    FieldSchema("my2", float, 50, 10, 0.0),
+    FieldSchema("cde", float, 60, 10, 0.0),
+    FieldSchema("iextra", int, 70, 10, 0),
+)
+
+_MATSEISMICISOLATOR_CARD2 = (
+    FieldSchema("fmax", float, 0, 10, 0.0),
+    FieldSchema("delf", float, 10, 10, 0.0),
+    FieldSchema("afric", float, 20, 10, 0.0),
+    FieldSchema("radx", float, 30, 10, 1e+20),
+    FieldSchema("rady", float, 40, 10, 1e+20),
+    FieldSchema("radb", float, 50, 10, 1e+20),
+    FieldSchema("stiffl", float, 60, 10, None),
+    FieldSchema("stiffts", float, 70, 10, 0.0),
+)
+
+_MATSEISMICISOLATOR_CARD3 = (
+    FieldSchema("forcey", float, 0, 10, 0.0),
+    FieldSchema("alpha", float, 10, 10, 0.0),
+    FieldSchema("stifft", float, 20, 10, None),
+    FieldSchema("dfail", float, 30, 10, 1e+20),
+    FieldSchema("fmaxyc", float, 40, 10, None),
+    FieldSchema("fmaxxt", float, 50, 10, None),
+    FieldSchema("fmaxyt", float, 60, 10, None),
+    FieldSchema("ylock", float, 70, 10, None),
+)
+
+_MATSEISMICISOLATOR_CARD4 = (
+    FieldSchema("htcore", float, 0, 10, None),
+    FieldSchema("rcore", float, 10, 10, None),
+    FieldSchema("tshim", float, 20, 10, None),
+    FieldSchema("rolcl", float, 30, 10, None),
+    FieldSchema("roscs", float, 40, 10, None),
+    FieldSchema("thcst", float, 50, 10, None),
+    FieldSchema("yle2", float, 60, 10, None),
+)
+
+_MATSEISMICISOLATOR_CARD5 = (
+    FieldSchema("pcrini", float, 0, 10, None),
+    FieldSchema("diamb", float, 10, 10, None),
+    FieldSchema("fcav0", float, 20, 10, None),
+    FieldSchema("cavk", float, 30, 10, None),
+    FieldSchema("cavtr", float, 40, 10, None),
+    FieldSchema("cava", float, 50, 10, None),
+    FieldSchema("phim", float, 60, 10, None),
+)
+
+_MATSEISMICISOLATOR_CARD6 = (
+    FieldSchema("beta", float, 0, 10, 0.0),
+)
+
+_MATSEISMICISOLATOR_CARD7 = (
+    FieldSchema("kthx", float, 0, 10, None),
+    FieldSchema("kthy", float, 10, 10, None),
+    FieldSchema("kthz", float, 20, 10, None),
+)
+
+_MATSEISMICISOLATOR_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class MatSeismicIsolator(KeywordBase):
     """DYNA MAT_SEISMIC_ISOLATOR keyword"""
@@ -40,430 +119,41 @@ class MatSeismicIsolator(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "mid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ro",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta",
-                        float,
-                        30,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gamma",
-                        float,
-                        40,
-                        10,
-                        0.5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dispy",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stiffv",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "preload",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "damp",
-                        float,
-                        10,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mx1",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mx2",
-                        float,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "my1",
-                        float,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "my2",
-                        float,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cde",
-                        float,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iextra",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "fmax",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "delf",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "afric",
-                        float,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "radx",
-                        float,
-                        30,
-                        10,
-                        1.0e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rady",
-                        float,
-                        40,
-                        10,
-                        1.0e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "radb",
-                        float,
-                        50,
-                        10,
-                        1.0e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stiffl",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stiffts",
-                        float,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "forcey",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alpha",
-                        float,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "stifft",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dfail",
-                        float,
-                        30,
-                        10,
-                        1.0e20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmaxyc",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmaxxt",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fmaxyt",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ylock",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "htcore",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rcore",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tshim",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rolcl",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "roscs",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thcst",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yle2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "pcrini",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "diamb",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fcav0",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cavk",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cavtr",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cava",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "phim",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "beta",
-                        float,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "kthx",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kthy",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "kthz",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _MATSEISMICISOLATOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSEISMICISOLATOR_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSEISMICISOLATOR_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSEISMICISOLATOR_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSEISMICISOLATOR_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSEISMICISOLATOR_CARD5,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSEISMICISOLATOR_CARD6,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _MATSEISMICISOLATOR_CARD7,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = MatSeismicIsolator.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _MATSEISMICISOLATOR_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be chosen.

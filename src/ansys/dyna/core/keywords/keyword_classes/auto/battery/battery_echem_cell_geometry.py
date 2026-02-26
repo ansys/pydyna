@@ -23,7 +23,25 @@
 """Module providing the BatteryEchemCellGeometry class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BATTERYECHEMCELLGEOMETRY_CARD0 = (
+    FieldSchema("imodel", int, 0, 10, None),
+    FieldSchema("alen", float, 10, 10, None),
+    FieldSchema("slen", float, 20, 10, None),
+    FieldSchema("clen", float, 30, 10, None),
+    FieldSchema("acclen", float, 40, 10, None),
+    FieldSchema("cclen", float, 50, 10, None),
+)
+
+_BATTERYECHEMCELLGEOMETRY_CARD1 = (
+    FieldSchema("amesh", int, 0, 10, None),
+    FieldSchema("smesh", int, 10, 10, None),
+    FieldSchema("cmesh", int, 20, 10, None),
+    FieldSchema("accmesh", int, 30, 10, None),
+    FieldSchema("cccmesh", int, 40, 10, None),
+)
 
 class BatteryEchemCellGeometry(KeywordBase):
     """DYNA BATTERY_ECHEM_CELL_GEOMETRY keyword"""
@@ -35,93 +53,13 @@ class BatteryEchemCellGeometry(KeywordBase):
         """Initialize the BatteryEchemCellGeometry class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "imodel",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alen",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "slen",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "clen",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "acclen",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cclen",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "amesh",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "smesh",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cmesh",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "accmesh",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cccmesh",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BATTERYECHEMCELLGEOMETRY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _BATTERYECHEMCELLGEOMETRY_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def imodel(self) -> typing.Optional[int]:
         """Get or set the A battery model identifier

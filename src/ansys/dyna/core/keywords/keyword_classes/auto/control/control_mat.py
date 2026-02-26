@@ -23,7 +23,14 @@
 """Module providing the ControlMat class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLMAT_CARD0 = (
+    FieldSchema("maef", int, 0, 10, 0),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("umchk", int, 20, 10, 0),
+)
 
 class ControlMat(KeywordBase):
     """DYNA CONTROL_MAT keyword"""
@@ -35,35 +42,10 @@ class ControlMat(KeywordBase):
         """Initialize the ControlMat class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "maef",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "umchk",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLMAT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def maef(self) -> int:
         """Get or set the EQ.0:	failure of  *MAT_ADD_EROSION definitions are active.

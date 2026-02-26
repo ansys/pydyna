@@ -23,7 +23,11 @@
 """Module providing the LoadThermalD3Plot class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADTHERMALD3PLOT_CARD0 = (
+)
 
 class LoadThermalD3Plot(KeywordBase):
     """DYNA LOAD_THERMAL_D3PLOT keyword"""
@@ -35,9 +39,7 @@ class LoadThermalD3Plot(KeywordBase):
         """Initialize the LoadThermalD3Plot class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADTHERMALD3PLOT_CARD0,
+                **kwargs,
+            ),        ]

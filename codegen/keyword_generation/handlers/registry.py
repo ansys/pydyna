@@ -17,6 +17,7 @@ reorder, insert, or remove cards without invalidating previously registered labe
 
 See agents/codegen.md for detailed documentation on handler ordering and semantics.
 """
+
 import collections
 import logging
 import typing
@@ -135,10 +136,19 @@ class HandlerRegistry:
 
     def post_process_all(self, kwd_data: KeywordData) -> None:
         """
-        Run post-processing for all handlers that require it.
+        Run post-processing for all registered handlers.
 
-        Post-processing runs for all registered handlers (not just those with settings)
-        in registration order.
+        Post-processing is an optional finalization phase that runs after all handlers
+        have completed their main processing. Handlers only need to override post_process
+        if they require operations that depend on the combined effects of all handlers.
+
+        Currently used by:
+        - shared-field: Processes deferred negative-index shared fields after options exist
+        - rename-property: Detects property name collisions after all renames complete
+
+        Runs for all registered handlers (not just those with settings) in registration
+        order. Handlers with no post-processing needs use the default no-op implementation
+        from the base class.
 
         Args:
             kwd_data: Keyword data structure (contains label_registry if initialized)
@@ -153,7 +163,8 @@ class HandlerRegistry:
         """
         Get list of all registered handler names.
 
-        Returns:
+        Returns
+        -------
             List of handler configuration key names in registration order
         """
         return list(self._handlers.keys())
@@ -166,7 +177,8 @@ def discover_handlers() -> Dict[str, HandlerMetadata]:
     Scans the handlers package for modules, imports them, and collects
     metadata from handlers decorated with @handler.
 
-    Returns:
+    Returns
+    -------
         Dictionary mapping handler names to their metadata
     """
     import importlib
@@ -206,7 +218,8 @@ def create_default_registry() -> HandlerRegistry:
     Handlers are auto-discovered by scanning the handlers package for
     classes decorated with @handler.
 
-    Returns:
+    Returns
+    -------
         Configured HandlerRegistry with all standard handlers
     """
     logger.debug("Creating default handler registry")
@@ -228,9 +241,11 @@ def create_default_registry() -> HandlerRegistry:
         "add-option",
         "card-set",
         "conditional-card",
+        "cascading-card",  # Must run after conditional-card to not conflict with func
         "rename-property",
         "table-card-group",
         "external-card-implementation",
+        "add-mixin",  # Can run late as it doesn't modify cards
         "shared-field",
     ]
 

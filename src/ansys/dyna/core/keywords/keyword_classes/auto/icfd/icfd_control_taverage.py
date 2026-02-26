@@ -23,7 +23,12 @@
 """Module providing the IcfdControlTaverage class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_ICFDCONTROLTAVERAGE_CARD0 = (
+    FieldSchema("dt", float, 0, 10, None),
+)
 
 class IcfdControlTaverage(KeywordBase):
     """DYNA ICFD_CONTROL_TAVERAGE keyword"""
@@ -35,19 +40,10 @@ class IcfdControlTaverage(KeywordBase):
         """Initialize the IcfdControlTaverage class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "dt",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _ICFDCONTROLTAVERAGE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the Over each DT time interval, the average quantities are reset.

@@ -23,7 +23,28 @@
 """Module providing the EmDatabaseFieldline class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EMDATABASEFIELDLINE_CARD0 = (
+    FieldSchema("flid", int, 0, 10, None),
+    FieldSchema("psid", int, 10, 10, None),
+    FieldSchema("dtout", float, 20, 10, None),
+    FieldSchema("npoint", int, 30, 10, 100),
+)
+
+_EMDATABASEFIELDLINE_CARD1 = (
+    FieldSchema("integ", int, 0, 10, 2),
+    FieldSchema("h", float, 10, 10, 0.0),
+    FieldSchema("hmin", float, 20, 10, 0.0),
+    FieldSchema("hmax", float, 30, 10, 10000000000.0),
+    FieldSchema("tolabs", float, 40, 10, 0.001),
+    FieldSchema("tolrel", float, 50, 10, 1e-05),
+)
+
+_EMDATABASEFIELDLINE_CARD2 = (
+    FieldSchema("btype", int, 0, 10, 2),
+)
 
 class EmDatabaseFieldline(KeywordBase):
     """DYNA EM_DATABASE_FIELDLINE keyword"""
@@ -35,105 +56,16 @@ class EmDatabaseFieldline(KeywordBase):
         """Initialize the EmDatabaseFieldline class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "flid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "psid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dtout",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npoint",
-                        int,
-                        30,
-                        10,
-                        100,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "integ",
-                        int,
-                        0,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "h",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmin",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmax",
-                        float,
-                        30,
-                        10,
-                        1e10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tolabs",
-                        float,
-                        40,
-                        10,
-                        1e-3,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tolrel",
-                        float,
-                        50,
-                        10,
-                        1e-5,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "btype",
-                        int,
-                        0,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EMDATABASEFIELDLINE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMDATABASEFIELDLINE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _EMDATABASEFIELDLINE_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def flid(self) -> typing.Optional[int]:
         """Get or set the Field line set ID.

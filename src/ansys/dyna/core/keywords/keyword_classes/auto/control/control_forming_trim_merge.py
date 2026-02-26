@@ -23,7 +23,13 @@
 """Module providing the ControlFormingTrimMerge class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLFORMINGTRIMMERGE_CARD0 = (
+    FieldSchema("imerge", int, 0, 10, 1),
+    FieldSchema("gapm", float, 10, 10, 0.0),
+)
 
 class ControlFormingTrimMerge(KeywordBase):
     """DYNA CONTROL_FORMING_TRIM_MERGE keyword"""
@@ -35,28 +41,10 @@ class ControlFormingTrimMerge(KeywordBase):
         """Initialize the ControlFormingTrimMerge class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "imerge",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gapm",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLFORMINGTRIMMERGE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def imerge(self) -> int:
         """Get or set the Activation flag.  Set to '1' (default) to activate this feature.

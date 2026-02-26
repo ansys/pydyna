@@ -23,7 +23,12 @@
 """Module providing the ControlAirbag class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLAIRBAG_CARD0 = (
+    FieldSchema("ckerr", int, 0, 10, 0),
+)
 
 class ControlAirbag(KeywordBase):
     """DYNA CONTROL_AIRBAG keyword"""
@@ -35,20 +40,10 @@ class ControlAirbag(KeywordBase):
         """Initialize the ControlAirbag class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ckerr",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLAIRBAG_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ckerr(self) -> int:
         """Get or set the Flag to check and report of CV airbag segments for the input

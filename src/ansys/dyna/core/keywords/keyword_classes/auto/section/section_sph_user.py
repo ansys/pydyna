@@ -23,8 +23,24 @@
 """Module providing the SectionSphUser class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_SECTIONSPHUSER_CARD0 = (
+    FieldSchema("secid", int, 0, 10, None),
+    FieldSchema("cslh", float, 10, 10, 1.2),
+    FieldSchema("hmin", float, 20, 10, 0.2),
+    FieldSchema("hmax", float, 30, 10, 2.0),
+    FieldSchema("sphini", float, 40, 10, 0.0),
+    FieldSchema("death", float, 50, 10, 1e+20),
+    FieldSchema("start", float, 60, 10, 0.0),
+    FieldSchema("sphkern", int, 70, 10, 0),
+)
+
+_SECTIONSPHUSER_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class SectionSphUser(KeywordBase):
     """DYNA SECTION_SPH_USER keyword"""
@@ -40,92 +56,20 @@ class SectionSphUser(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "secid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cslh",
-                        float,
-                        10,
-                        10,
-                        1.2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmin",
-                        float,
-                        20,
-                        10,
-                        0.2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "hmax",
-                        float,
-                        30,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sphini",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "death",
-                        float,
-                        50,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "start",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sphkern",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _SECTIONSPHUSER_CARD0,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = SectionSphUser.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONSPHUSER_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.

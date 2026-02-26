@@ -23,7 +23,13 @@
 """Module providing the DatabaseExtentMpgs class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEEXTENTMPGS_CARD0 = (
+    FieldSchema("vtype", int, 0, 10, 0),
+    FieldSchema("comp", int, 10, 10, None),
+)
 
 class DatabaseExtentMpgs(KeywordBase):
     """DYNA DATABASE_EXTENT_MPGS keyword"""
@@ -35,27 +41,10 @@ class DatabaseExtentMpgs(KeywordBase):
         """Initialize the DatabaseExtentMpgs class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "vtype",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "comp",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEEXTENTMPGS_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def vtype(self) -> int:
         """Get or set the Variable type:

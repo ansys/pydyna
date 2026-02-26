@@ -23,7 +23,49 @@
 """Module providing the ComponentHybridiiiJointLeftKnee class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_COMPONENTHYBRIDIIIJOINTLEFTKNEE_CARD0 = (
+    FieldSchema("did", int, 0, 10, None),
+    FieldSchema("q1", float, 10, 10, 0.0),
+    FieldSchema("q2", float, 20, 10, 0.0),
+    FieldSchema("q3", float, 30, 10, 0.0),
+    FieldSchema("fric", float, 40, 10, 0.0),
+)
+
+_COMPONENTHYBRIDIIIJOINTLEFTKNEE_CARD1 = (
+    FieldSchema("c1", float, 0, 10, 0.0),
+    FieldSchema("alo1", float, 10, 10, 0.0),
+    FieldSchema("blo1", float, 20, 10, 0.0),
+    FieldSchema("ahi1", float, 30, 10, 0.0),
+    FieldSchema("bhi1", float, 40, 10, 0.0),
+    FieldSchema("qlo1", float, 50, 10, 0.0),
+    FieldSchema("qhi1", float, 60, 10, 0.0),
+    FieldSchema("sclk1", float, 70, 10, 1.0),
+)
+
+_COMPONENTHYBRIDIIIJOINTLEFTKNEE_CARD2 = (
+    FieldSchema("c2", float, 0, 10, 0.0),
+    FieldSchema("alo2", float, 10, 10, 0.0),
+    FieldSchema("blo2", float, 20, 10, 0.0),
+    FieldSchema("ahi2", float, 30, 10, 0.0),
+    FieldSchema("bhi2", float, 40, 10, 0.0),
+    FieldSchema("qlo2", float, 50, 10, 0.0),
+    FieldSchema("qhi2", float, 60, 10, 0.0),
+    FieldSchema("sclk2", float, 70, 10, 1.0),
+)
+
+_COMPONENTHYBRIDIIIJOINTLEFTKNEE_CARD3 = (
+    FieldSchema("c3", float, 0, 10, 0.0),
+    FieldSchema("alo3", float, 10, 10, 0.0),
+    FieldSchema("blo3", float, 20, 10, 0.0),
+    FieldSchema("ahi3", float, 30, 10, 0.0),
+    FieldSchema("bhi3", float, 40, 10, 0.0),
+    FieldSchema("qlo3", float, 50, 10, 0.0),
+    FieldSchema("qhi3", float, 60, 10, 0.0),
+    FieldSchema("sclk3", float, 70, 10, 1.0),
+)
 
 class ComponentHybridiiiJointLeftKnee(KeywordBase):
     """DYNA COMPONENT_HYBRIDIII_JOINT_LEFT_KNEE keyword"""
@@ -35,255 +77,19 @@ class ComponentHybridiiiJointLeftKnee(KeywordBase):
         """Initialize the ComponentHybridiiiJointLeftKnee class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "did",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "q3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "fric",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c1",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alo1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blo1",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ahi1",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bhi1",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qlo1",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qhi1",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sclk1",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c2",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alo2",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blo2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ahi2",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bhi2",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qlo2",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qhi2",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sclk2",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "c3",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alo3",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "blo3",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ahi3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bhi3",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qlo3",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "qhi3",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sclk3",
-                        float,
-                        70,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _COMPONENTHYBRIDIIIJOINTLEFTKNEE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _COMPONENTHYBRIDIIIJOINTLEFTKNEE_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _COMPONENTHYBRIDIIIJOINTLEFTKNEE_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _COMPONENTHYBRIDIIIJOINTLEFTKNEE_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def did(self) -> typing.Optional[int]:
         """Get or set the Dummy ID, see *COMPONENT_HYBRIDIII.

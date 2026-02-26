@@ -23,7 +23,19 @@
 """Module providing the ControlImplicitGeneralDyn class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITGENERALDYN_CARD0 = (
+    FieldSchema("imflag", int, 0, 10, 0),
+    FieldSchema("dt0", float, 10, 10, None),
+    FieldSchema("imform", int, 20, 10, 2),
+    FieldSchema("nsbs", int, 30, 10, 1),
+    FieldSchema("igs", int, 40, 10, 2),
+    FieldSchema("cnstn", int, 50, 10, 0),
+    FieldSchema("form", int, 60, 10, 0),
+    FieldSchema("zero_v", int, 70, 10, 0),
+)
 
 class ControlImplicitGeneralDyn(KeywordBase):
     """DYNA CONTROL_IMPLICIT_GENERAL_DYN keyword"""
@@ -35,75 +47,10 @@ class ControlImplicitGeneralDyn(KeywordBase):
         """Initialize the ControlImplicitGeneralDyn class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "imflag",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt0",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "imform",
-                        int,
-                        20,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsbs",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "igs",
-                        int,
-                        40,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cnstn",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "form",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zero_v",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITGENERALDYN_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def imflag(self) -> int:
         """Get or set the Implicit/Explicit switching flag

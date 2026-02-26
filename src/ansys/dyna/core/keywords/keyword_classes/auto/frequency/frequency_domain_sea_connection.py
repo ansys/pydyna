@@ -23,7 +23,46 @@
 """Module providing the FrequencyDomainSeaConnection class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINSEACONNECTION_CARD0 = (
+    FieldSchema("conid", int, 0, 10, None),
+    FieldSchema("ctype", int, 10, 10, 1),
+    FieldSchema("nsub", int, 20, 10, None),
+    FieldSchema("ibeam", int, 30, 10, 0),
+)
+
+_FREQUENCYDOMAINSEACONNECTION_CARD1 = (
+    FieldSchema("sub1", int, 0, 10, None),
+    FieldSchema("sub2", int, 10, 10, None),
+    FieldSchema("sub3", int, 20, 10, None),
+    FieldSchema("sub4", int, 30, 10, None),
+    FieldSchema("sub5", int, 40, 10, None),
+    FieldSchema("sub6", int, 50, 10, None),
+    FieldSchema("sub7", int, 60, 10, None),
+    FieldSchema("sub8", int, 70, 10, None),
+)
+
+_FREQUENCYDOMAINSEACONNECTION_CARD2 = (
+    FieldSchema("ang1", float, 0, 10, None),
+    FieldSchema("ang2", float, 10, 10, None),
+    FieldSchema("ang3", float, 20, 10, None),
+    FieldSchema("ang4", float, 30, 10, None),
+    FieldSchema("ang5", float, 40, 10, None),
+    FieldSchema("ang6", float, 50, 10, None),
+    FieldSchema("ang7", float, 60, 10, None),
+    FieldSchema("ang8", float, 70, 10, None),
+)
+
+_FREQUENCYDOMAINSEACONNECTION_CARD3 = (
+    FieldSchema("length", float, 0, 10, 0.0),
+)
+
+_FREQUENCYDOMAINSEACONNECTION_CARD4 = (
+    FieldSchema("absorb", float, 0, 10, 0.0),
+    FieldSchema("thick", float, 10, 10, 0.0),
+)
 
 class FrequencyDomainSeaConnection(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_SEA_CONNECTION keyword"""
@@ -35,194 +74,22 @@ class FrequencyDomainSeaConnection(KeywordBase):
         """Initialize the FrequencyDomainSeaConnection class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "conid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ctype",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nsub",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ibeam",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "sub1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sub2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sub3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sub4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sub5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sub6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sub7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sub8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "ang1",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ang2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ang3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ang4",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ang5",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ang6",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ang7",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ang8",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "length",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "absorb",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "thick",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINSEACONNECTION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINSEACONNECTION_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINSEACONNECTION_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINSEACONNECTION_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINSEACONNECTION_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def conid(self) -> typing.Optional[int]:
         """Get or set the Connection ID.

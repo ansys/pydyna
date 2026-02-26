@@ -23,7 +23,28 @@
 """Module providing the DatabaseExtentIntfor class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEEXTENTINTFOR_CARD0 = (
+    FieldSchema("nglbv", int, 0, 10, 1),
+    FieldSchema("nvelo", int, 10, 10, 1),
+    FieldSchema("npresu", int, 20, 10, 1),
+    FieldSchema("nshear", int, 30, 10, 1),
+    FieldSchema("nforce", int, 40, 10, 1),
+    FieldSchema("ngapc", int, 50, 10, 1),
+    FieldSchema("nfail", int, 60, 10, 0),
+    FieldSchema("ieverf", int, 70, 10, 0),
+)
+
+_DATABASEEXTENTINTFOR_CARD1 = (
+    FieldSchema("nwear", int, 0, 10, 0),
+    FieldSchema("nwusr", int, 10, 10, 0),
+    FieldSchema("nhuf", int, 20, 10, 0),
+    FieldSchema("ntied", int, 30, 10, 0),
+    FieldSchema("neng", int, 40, 10, 0),
+    FieldSchema("npen", int, 50, 10, 0),
+)
 
 class DatabaseExtentIntfor(KeywordBase):
     """DYNA DATABASE_EXTENT_INTFOR keyword"""
@@ -35,128 +56,13 @@ class DatabaseExtentIntfor(KeywordBase):
         """Initialize the DatabaseExtentIntfor class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nglbv",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nvelo",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npresu",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nshear",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nforce",
-                        int,
-                        40,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ngapc",
-                        int,
-                        50,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nfail",
-                        int,
-                        60,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ieverf",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nwear",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nwusr",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nhuf",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ntied",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "neng",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "npen",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEEXTENTINTFOR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DATABASEEXTENTINTFOR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def nglbv(self) -> int:
         """Get or set the Output option for global variables

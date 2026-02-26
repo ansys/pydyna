@@ -23,7 +23,19 @@
 """Module providing the EosSackTuesday class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_EOSSACKTUESDAY_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("a1", float, 10, 10, None),
+    FieldSchema("a2", float, 20, 10, None),
+    FieldSchema("a3", float, 30, 10, None),
+    FieldSchema("b1", float, 40, 10, None),
+    FieldSchema("b2", float, 50, 10, None),
+    FieldSchema("e0", float, 60, 10, None),
+    FieldSchema("vo", float, 70, 10, None),
+)
 
 class EosSackTuesday(KeywordBase):
     """DYNA EOS_SACK_TUESDAY keyword"""
@@ -35,68 +47,10 @@ class EosSackTuesday(KeywordBase):
         """Initialize the EosSackTuesday class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a3",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "b2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "e0",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vo",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _EOSSACKTUESDAY_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state label

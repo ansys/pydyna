@@ -23,7 +23,39 @@
 """Module providing the InterfaceBlanksizeDevelopment class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INTERFACEBLANKSIZEDEVELOPMENT_CARD0 = (
+    FieldSchema("ioption", int, 0, 10, 1),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("iadapt", int, 20, 10, None),
+    FieldSchema("maxsize", float, 30, 10, 30.0),
+    FieldSchema("referenc", int, 40, 10, 0),
+    FieldSchema("space", float, 50, 10, 2.0),
+    FieldSchema("maxgap", float, 60, 10, 30.0),
+    FieldSchema("orient", float, 70, 10, None),
+)
+
+_INTERFACEBLANKSIZEDEVELOPMENT_CARD1 = (
+    FieldSchema("filename1", str, 0, 80, None),
+)
+
+_INTERFACEBLANKSIZEDEVELOPMENT_CARD2 = (
+    FieldSchema("filename2", str, 0, 80, None),
+)
+
+_INTERFACEBLANKSIZEDEVELOPMENT_CARD3 = (
+    FieldSchema("filename3", str, 0, 80, None),
+)
+
+_INTERFACEBLANKSIZEDEVELOPMENT_CARD4 = (
+    FieldSchema("filename4", str, 0, 80, None),
+)
+
+_INTERFACEBLANKSIZEDEVELOPMENT_CARD5 = (
+    FieldSchema("filename13", str, 0, 80, None),
+)
 
 class InterfaceBlanksizeDevelopment(KeywordBase):
     """DYNA INTERFACE_BLANKSIZE_DEVELOPMENT keyword"""
@@ -35,128 +67,25 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
         """Initialize the InterfaceBlanksizeDevelopment class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ioption",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iadapt",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxsize",
-                        float,
-                        30,
-                        10,
-                        30.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "referenc",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "space",
-                        float,
-                        50,
-                        10,
-                        2.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "maxgap",
-                        float,
-                        60,
-                        10,
-                        30.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "orient",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename1",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename2",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename3",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename4",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "filename13",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INTERFACEBLANKSIZEDEVELOPMENT_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACEBLANKSIZEDEVELOPMENT_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACEBLANKSIZEDEVELOPMENT_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACEBLANKSIZEDEVELOPMENT_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACEBLANKSIZEDEVELOPMENT_CARD4,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INTERFACEBLANKSIZEDEVELOPMENT_CARD5,
+                **kwargs,
+            ),        ]
     @property
     def ioption(self) -> int:
         """Get or set the Target definition input type:

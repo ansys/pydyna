@@ -23,7 +23,19 @@
 """Module providing the CeseEosCavHomogEquilib class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESEEOSCAVHOMOGEQUILIB_CARD0 = (
+    FieldSchema("eosid", int, 0, 10, None),
+    FieldSchema("p_vap", float, 10, 10, 0.8),
+    FieldSchema("p_liq", float, 20, 10, 880.0),
+    FieldSchema("a_vap", float, 30, 10, 334.0),
+    FieldSchema("a_liq", float, 40, 10, 1386.0),
+    FieldSchema("u_vap", float, 50, 10, 1.435e-05),
+    FieldSchema("u_liq", float, 60, 10, 0.0001586),
+    FieldSchema("p_sat_vap", float, 70, 10, 12000.0),
+)
 
 class CeseEosCavHomogEquilib(KeywordBase):
     """DYNA CESE_EOS_CAV_HOMOG_EQUILIB keyword"""
@@ -35,75 +47,10 @@ class CeseEosCavHomogEquilib(KeywordBase):
         """Initialize the CeseEosCavHomogEquilib class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eosid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p_vap",
-                        float,
-                        10,
-                        10,
-                        0.8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p_liq",
-                        float,
-                        20,
-                        10,
-                        880.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a_vap",
-                        float,
-                        30,
-                        10,
-                        334.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "a_liq",
-                        float,
-                        40,
-                        10,
-                        1386.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "u_vap",
-                        float,
-                        50,
-                        10,
-                        1.435e-5,
-                        **kwargs,
-                    ),
-                    Field(
-                        "u_liq",
-                        float,
-                        60,
-                        10,
-                        1.586e-4,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p_sat_vap",
-                        float,
-                        70,
-                        10,
-                        1.2e+4,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESEEOSCAVHOMOGEQUILIB_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state identification.

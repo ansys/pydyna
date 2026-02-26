@@ -53,7 +53,8 @@ def run_coverage_analysis(show_missing: bool = False) -> tuple[int, str]:
     Args:
         show_missing: If True, include missing line numbers in report
 
-    Returns:
+    Returns
+    -------
         Tuple of (return_code, output_text)
     """
     script_dir = Path(__file__).parent
@@ -133,7 +134,8 @@ def generate_html_report() -> bool:
     """
     Generate HTML coverage report.
 
-    Returns:
+    Returns
+    -------
         True if successful, False otherwise
     """
     script_dir = Path(__file__).parent
@@ -166,7 +168,8 @@ def parse_coverage_report(report: str, threshold: int) -> list[dict]:
         report: Coverage report text output
         threshold: Coverage percentage threshold
 
-    Returns:
+    Returns
+    -------
         List of dicts with file info for files below threshold
     """
     low_coverage_files = []

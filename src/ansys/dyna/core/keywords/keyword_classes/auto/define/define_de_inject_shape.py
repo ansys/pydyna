@@ -23,8 +23,27 @@
 """Module providing the DefineDeInjectShape class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEDEINJECTSHAPE_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("nde", int, 10, 10, None),
+    FieldSchema("iauto", int, 20, 10, 0),
+    FieldSchema("itype", int, 30, 10, 1),
+)
+
+_DEFINEDEINJECTSHAPE_CARD1 = (
+    FieldSchema("x", float, 0, 10, None),
+    FieldSchema("y", float, 10, 10, None),
+    FieldSchema("z", float, 20, 10, None),
+    FieldSchema("r", float, 30, 10, None),
+)
+
+_DEFINEDEINJECTSHAPE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineDeInjectShape(KeywordBase):
     """DYNA DEFINE_DE_INJECT_SHAPE keyword"""
@@ -40,91 +59,23 @@ class DefineDeInjectShape(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nde",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iauto",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "itype",
-                        int,
-                        30,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "x",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "r",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDEINJECTSHAPE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEINJECTSHAPE_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineDeInjectShape.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEINJECTSHAPE_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the The ID of the shape pattern

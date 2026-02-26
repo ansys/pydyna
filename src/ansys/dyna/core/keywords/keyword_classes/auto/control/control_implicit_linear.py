@@ -23,7 +23,30 @@
 """Module providing the ControlImplicitLinear class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITLINEAR_CARD0 = (
+    FieldSchema("lsolvr", int, 0, 10, 2),
+    FieldSchema("lprint", int, 10, 10, 0),
+    FieldSchema("negev", int, 20, 10, 2),
+    FieldSchema("order", int, 30, 10, 0),
+    FieldSchema("drcm", int, 40, 10, 4),
+    FieldSchema("drcprm", float, 50, 10, None),
+    FieldSchema("autospc", int, 60, 10, 1),
+    FieldSchema("autotol", float, 70, 10, None),
+)
+
+_CONTROLIMPLICITLINEAR_CARD1 = (
+    FieldSchema("lcpack", int, 0, 10, 2),
+    FieldSchema("mtxdmp", int, 10, 10, 0),
+    FieldSchema("iparm1", int, 20, 10, 500),
+    FieldSchema("rparm1", float, 30, 10, 1e-09),
+    FieldSchema("rparm2", float, 40, 10, 0.001),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("rparm5", float, 70, 10, 0.0),
+)
 
 class ControlImplicitLinear(KeywordBase):
     """DYNA CONTROL_IMPLICIT_LINEAR keyword"""
@@ -35,140 +58,13 @@ class ControlImplicitLinear(KeywordBase):
         """Initialize the ControlImplicitLinear class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lsolvr",
-                        int,
-                        0,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lprint",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "negev",
-                        int,
-                        20,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "order",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "drcm",
-                        int,
-                        40,
-                        10,
-                        4,
-                        **kwargs,
-                    ),
-                    Field(
-                        "drcprm",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "autospc",
-                        int,
-                        60,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "autotol",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "lcpack",
-                        int,
-                        0,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mtxdmp",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "iparm1",
-                        int,
-                        20,
-                        10,
-                        500,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rparm1",
-                        float,
-                        30,
-                        10,
-                        10.0e-10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rparm2",
-                        float,
-                        40,
-                        10,
-                        10.0e-4,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "unused",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rparm5",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITLINEAR_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITLINEAR_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def lsolvr(self) -> int:
         """Get or set the Linear equation solver method (see Remarks below).

@@ -23,7 +23,23 @@
 """Module providing the ComponentGebodFemale class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_COMPONENTGEBODFEMALE_CARD0 = (
+    FieldSchema("did", int, 0, 10, None),
+    FieldSchema("units", int, 10, 10, 1),
+    FieldSchema("size", float, 20, 10, None),
+)
+
+_COMPONENTGEBODFEMALE_CARD1 = (
+    FieldSchema("vx", float, 0, 10, 0.0),
+    FieldSchema("vy", float, 10, 10, 0.0),
+    FieldSchema("vz", float, 20, 10, 0.0),
+    FieldSchema("gx", float, 30, 10, 0.0),
+    FieldSchema("gy", float, 40, 10, 0.0),
+    FieldSchema("gz", float, 50, 10, 0.0),
+)
 
 class ComponentGebodFemale(KeywordBase):
     """DYNA COMPONENT_GEBOD_FEMALE keyword"""
@@ -35,86 +51,13 @@ class ComponentGebodFemale(KeywordBase):
         """Initialize the ComponentGebodFemale class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "did",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "units",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "size",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "gz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _COMPONENTGEBODFEMALE_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _COMPONENTGEBODFEMALE_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def did(self) -> typing.Optional[int]:
         """Get or set the Dummy ID. A unique number must be specified.

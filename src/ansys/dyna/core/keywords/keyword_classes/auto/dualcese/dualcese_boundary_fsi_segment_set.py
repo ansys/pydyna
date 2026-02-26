@@ -23,7 +23,13 @@
 """Module providing the DualceseBoundaryFsiSegmentSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEBOUNDARYFSISEGMENTSET_CARD0 = (
+    FieldSchema("ssid", int, 0, 10, None),
+    FieldSchema("ref_p", float, 10, 10, 0.0),
+)
 
 class DualceseBoundaryFsiSegmentSet(KeywordBase):
     """DYNA DUALCESE_BOUNDARY_FSI_SEGMENT_SET keyword"""
@@ -35,27 +41,10 @@ class DualceseBoundaryFsiSegmentSet(KeywordBase):
         """Initialize the DualceseBoundaryFsiSegmentSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ssid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ref_p",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEBOUNDARYFSISEGMENTSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID created with *DUALCESE_SEGMENTSET

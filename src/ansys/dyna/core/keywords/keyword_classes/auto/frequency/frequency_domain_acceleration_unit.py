@@ -23,7 +23,13 @@
 """Module providing the FrequencyDomainAccelerationUnit class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_FREQUENCYDOMAINACCELERATIONUNIT_CARD0 = (
+    FieldSchema("unit", int, 0, 10, 0),
+    FieldSchema("umlt", float, 10, 10, None),
+)
 
 class FrequencyDomainAccelerationUnit(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_ACCELERATION_UNIT keyword"""
@@ -35,27 +41,10 @@ class FrequencyDomainAccelerationUnit(KeywordBase):
         """Initialize the FrequencyDomainAccelerationUnit class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "unit",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "umlt",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINACCELERATIONUNIT_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def unit(self) -> int:
         """Get or set the Flag for acceleration unit conversion:

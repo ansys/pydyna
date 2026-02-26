@@ -23,7 +23,13 @@
 """Module providing the DatabaseHistoryDiscreteId class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DATABASEHISTORYDISCRETEID_CARD0 = (
+    FieldSchema("id1", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
 
 class DatabaseHistoryDiscreteId(KeywordBase):
     """DYNA DATABASE_HISTORY_DISCRETE_ID keyword"""
@@ -35,26 +41,10 @@ class DatabaseHistoryDiscreteId(KeywordBase):
         """Initialize the DatabaseHistoryDiscreteId class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "id1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "heading",
-                        str,
-                        10,
-                        70,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DATABASEHISTORYDISCRETEID_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the ID of the discrete.

@@ -335,10 +335,10 @@ ConstrainedJointStiffnessCylindrical
     :members:
 
 
-ConstrainedJointStiffnessFlexionTorsion
----------------------------------------
+ConstrainedJointStiffnessFlexion_Torsion
+----------------------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_joint_stiffness_flexion_torsion
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_joint_stiffness_flexion__torsion
     :members:
 
 
@@ -692,10 +692,10 @@ ConstrainedSpr2
     :members:
 
 
-ConstrainedTieBreak
--------------------
+ConstrainedTie_Break
+--------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_tie_break
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_tie__break
     :members:
 
 

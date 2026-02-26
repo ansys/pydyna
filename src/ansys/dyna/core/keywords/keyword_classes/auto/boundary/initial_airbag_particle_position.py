@@ -23,7 +23,19 @@
 """Module providing the InitialAirbagParticlePosition class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_INITIALAIRBAGPARTICLEPOSITION_CARD0 = (
+    FieldSchema("bag_id", int, 0, 10, None),
+)
+
+_INITIALAIRBAGPARTICLEPOSITION_CARD1 = (
+    FieldSchema("unused", float, 0, 10, None),
+    FieldSchema("x", float, 10, 10, None),
+    FieldSchema("y", float, 20, 10, None),
+    FieldSchema("z", float, 30, 10, None),
+)
 
 class InitialAirbagParticlePosition(KeywordBase):
     """DYNA INITIAL_AIRBAG_PARTICLE_POSITION keyword"""
@@ -35,51 +47,13 @@ class InitialAirbagParticlePosition(KeywordBase):
         """Initialize the InitialAirbagParticlePosition class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "bag_id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "unused",
-                        float,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "x",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "y",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "z",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _INITIALAIRBAGPARTICLEPOSITION_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _INITIALAIRBAGPARTICLEPOSITION_CARD1,
+                **kwargs,
+            ),        ]
     @property
     def bag_id(self) -> typing.Optional[int]:
         """Get or set the Airbag ID defined in *AIRBAG_‌PARTICLE_‌ID card

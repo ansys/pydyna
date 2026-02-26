@@ -23,7 +23,15 @@
 """Module providing the CeseControlLimiter class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CESECONTROLLIMITER_CARD0 = (
+    FieldSchema("idlmt", int, 0, 10, 0),
+    FieldSchema("alfa", float, 10, 10, 0.0),
+    FieldSchema("beta_", float, 20, 10, 0.0, "beta "),
+    FieldSchema("epsr", float, 30, 10, 0.0),
+)
 
 class CeseControlLimiter(KeywordBase):
     """DYNA CESE_CONTROL_LIMITER keyword"""
@@ -35,44 +43,10 @@ class CeseControlLimiter(KeywordBase):
         """Initialize the CeseControlLimiter class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "idlmt",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "alfa",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "beta ",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "epsr",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CESECONTROLLIMITER_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def idlmt(self) -> int:
         """Get or set the Set the stability limiter option (See CESE theory manual):
@@ -103,12 +77,12 @@ class CeseControlLimiter(KeywordBase):
     def beta_(self) -> float:
         """Get or set the Numerical viscosity control coefficient (see <theory> Eq.6 for beta ).
         """ # nopep8
-        return self._cards[0].get_value("beta ")
+        return self._cards[0].get_value("beta_")
 
     @beta_.setter
     def beta_(self, value: float) -> None:
         """Set the beta_ property."""
-        self._cards[0].set_value("beta ", value)
+        self._cards[0].set_value("beta_", value)
 
     @property
     def epsr(self) -> float:

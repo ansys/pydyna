@@ -23,7 +23,15 @@
 """Module providing the ControlParallel class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLPARALLEL_CARD0 = (
+    FieldSchema("ncpu", int, 0, 10, 1),
+    FieldSchema("numrhs", int, 10, 10, 0),
+    FieldSchema("const", int, 20, 10, 2),
+    FieldSchema("para", int, 30, 10, 0),
+)
 
 class ControlParallel(KeywordBase):
     """DYNA CONTROL_PARALLEL keyword"""
@@ -35,44 +43,10 @@ class ControlParallel(KeywordBase):
         """Initialize the ControlParallel class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ncpu",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "numrhs",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "const",
-                        int,
-                        20,
-                        10,
-                        2,
-                        **kwargs,
-                    ),
-                    Field(
-                        "para",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLPARALLEL_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ncpu(self) -> int:
         """Get or set the Number of cpus used.

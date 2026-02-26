@@ -23,7 +23,42 @@
 """Module providing the ChemistryControlPyrptechnic class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CHEMISTRYCONTROLPYRPTECHNIC_CARD0 = (
+    FieldSchema("comp1id", int, 0, 10, None),
+    FieldSchema("vol1", float, 10, 10, None),
+    FieldSchema("area1", float, 20, 10, None),
+    FieldSchema("cd1", float, 30, 10, None),
+    FieldSchema("p1", float, 40, 10, None),
+    FieldSchema("t1", float, 50, 10, None),
+    FieldSchema("delp1", float, 60, 10, None),
+    FieldSchema("tflame", float, 70, 10, None),
+)
+
+_CHEMISTRYCONTROLPYRPTECHNIC_CARD1 = (
+    FieldSchema("comp2id", int, 0, 10, None),
+    FieldSchema("vol2", float, 10, 10, None),
+    FieldSchema("area2", float, 20, 10, None),
+    FieldSchema("cd2", float, 30, 10, None),
+    FieldSchema("p2", float, 40, 10, None),
+    FieldSchema("t2", float, 50, 10, None),
+    FieldSchema("delp2", float, 60, 10, None),
+    FieldSchema("truntime", float, 70, 10, None),
+)
+
+_CHEMISTRYCONTROLPYRPTECHNIC_CARD2 = (
+    FieldSchema("comp3id", int, 0, 10, None),
+    FieldSchema("vol3", float, 10, 10, None),
+    FieldSchema("p3", float, 20, 10, None),
+    FieldSchema("t3", float, 30, 10, None),
+    FieldSchema("ptime", float, 40, 10, None),
+)
+
+_CHEMISTRYCONTROLPYRPTECHNIC_CARD3 = (
+    FieldSchema("file", str, 0, 80, None),
+)
 
 class ChemistryControlPyrptechnic(KeywordBase):
     """DYNA CHEMISTRY_CONTROL_PYRPTECHNIC keyword"""
@@ -35,178 +70,19 @@ class ChemistryControlPyrptechnic(KeywordBase):
         """Initialize the ChemistryControlPyrptechnic class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "comp1id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vol1",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "area1",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cd1",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p1",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t1",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "delp1",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tflame",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "comp2id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vol2",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "area2",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cd2",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p2",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t2",
-                        float,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "delp2",
-                        float,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "truntime",
-                        float,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "comp3id",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vol3",
-                        float,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "p3",
-                        float,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "t3",
-                        float,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ptime",
-                        float,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "file",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROLPYRPTECHNIC_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROLPYRPTECHNIC_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROLPYRPTECHNIC_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CHEMISTRYCONTROLPYRPTECHNIC_CARD3,
+                **kwargs,
+            ),        ]
     @property
     def comp1id(self) -> typing.Optional[int]:
         """Get or set the Chemical composition identifier of composition to use in the chamber

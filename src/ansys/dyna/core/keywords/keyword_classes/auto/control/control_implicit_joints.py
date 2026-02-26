@@ -23,7 +23,14 @@
 """Module providing the ControlImplicitJoints class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTROLIMPLICITJOINTS_CARD0 = (
+    FieldSchema("ispher", int, 0, 10, 1),
+    FieldSchema("irevol", int, 10, 10, 1),
+    FieldSchema("icylin", int, 20, 10, 1),
+)
 
 class ControlImplicitJoints(KeywordBase):
     """DYNA CONTROL_IMPLICIT_JOINTS keyword"""
@@ -35,36 +42,10 @@ class ControlImplicitJoints(KeywordBase):
         """Initialize the ControlImplicitJoints class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "ispher",
-                        int,
-                        0,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "irevol",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "icylin",
-                        int,
-                        20,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITJOINTS_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def ispher(self) -> int:
         """Get or set the Treatment of spherical joints

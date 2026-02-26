@@ -23,7 +23,17 @@
 """Module providing the PartMove class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_PARTMOVE_CARD0 = (
+    FieldSchema("pid", int, 0, 8, None),
+    FieldSchema("xmov", float, 8, 16, None),
+    FieldSchema("ymov", float, 24, 16, None),
+    FieldSchema("zmov", float, 40, 16, None),
+    FieldSchema("cid", int, 56, 8, 0),
+    FieldSchema("ifset", int, 64, 8, 0),
+)
 
 class PartMove(KeywordBase):
     """DYNA PART_MOVE keyword"""
@@ -35,56 +45,10 @@ class PartMove(KeywordBase):
         """Initialize the PartMove class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        8,
-                        **kwargs,
-                    ),
-                    Field(
-                        "xmov",
-                        float,
-                        8,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ymov",
-                        float,
-                        24,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zmov",
-                        float,
-                        40,
-                        16,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cid",
-                        int,
-                        56,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ifset",
-                        int,
-                        64,
-                        8,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _PARTMOVE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part id or Part Set id

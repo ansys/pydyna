@@ -23,8 +23,22 @@
 """Module providing the DefineCurveTriaxialLimitFromFld class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINECURVETRIAXIALLIMITFROMFLD_CARD0 = (
+    FieldSchema("lcid", int, 0, 10, None),
+)
+
+_DEFINECURVETRIAXIALLIMITFROMFLD_CARD1 = (
+    FieldSchema("a1", float, 0, 20, 0.0),
+    FieldSchema("o1", float, 20, 20, 0.0),
+)
+
+_DEFINECURVETRIAXIALLIMITFROMFLD_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineCurveTriaxialLimitFromFld(KeywordBase):
     """DYNA DEFINE_CURVE_TRIAXIAL_LIMIT_FROM_FLD keyword"""
@@ -40,56 +54,23 @@ class DefineCurveTriaxialLimitFromFld(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "lcid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "a1",
-                        float,
-                        0,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "o1",
-                        float,
-                        20,
-                        20,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINECURVETRIAXIALLIMITFROMFLD_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINECURVETRIAXIALLIMITFROMFLD_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineCurveTriaxialLimitFromFld.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINECURVETRIAXIALLIMITFROMFLD_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the FLD Load curve ID to be created.

@@ -23,7 +23,28 @@
 """Module providing the LoadSegmentFsilnk class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_LOADSEGMENTFSILNK_CARD0 = (
+    FieldSchema("filename", str, 0, 80, None),
+)
+
+_LOADSEGMENTFSILNK_CARD1 = (
+    FieldSchema("nint", int, 0, 10, None),
+    FieldSchema("lcid", int, 10, 10, 0),
+)
+
+_LOADSEGMENTFSILNK_CARD2 = (
+    FieldSchema("id1", int, 0, 10, None),
+    FieldSchema("id2", int, 10, 10, None),
+    FieldSchema("id3", int, 20, 10, None),
+    FieldSchema("id4", int, 30, 10, None),
+    FieldSchema("id5", int, 40, 10, None),
+    FieldSchema("id6", int, 50, 10, None),
+    FieldSchema("id7", int, 60, 10, None),
+    FieldSchema("id8", int, 70, 10, None),
+)
 
 class LoadSegmentFsilnk(KeywordBase):
     """DYNA LOAD_SEGMENT_FSILNK keyword"""
@@ -35,98 +56,16 @@ class LoadSegmentFsilnk(KeywordBase):
         """Initialize the LoadSegmentFsilnk class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "filename",
-                        str,
-                        0,
-                        80,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "nint",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "lcid",
-                        int,
-                        10,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "id1",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id2",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id3",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id4",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id5",
-                        int,
-                        40,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id6",
-                        int,
-                        50,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id7",
-                        int,
-                        60,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "id8",
-                        int,
-                        70,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTFSILNK_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTFSILNK_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _LOADSEGMENTFSILNK_CARD2,
+                **kwargs,
+            ),        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Filename of the interface linking file

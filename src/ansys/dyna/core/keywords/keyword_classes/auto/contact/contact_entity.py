@@ -23,7 +23,54 @@
 """Module providing the ContactEntity class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_CONTACTENTITY_CARD0 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("geotyp", int, 10, 10, 1),
+    FieldSchema("ssid", int, 20, 10, None),
+    FieldSchema("sstyp", int, 30, 10, 0),
+    FieldSchema("sf", float, 40, 10, 1.0),
+    FieldSchema("df", float, 50, 10, 0.0),
+    FieldSchema("cf", float, 60, 10, 0.0),
+    FieldSchema("intord", int, 70, 10, 0),
+)
+
+_CONTACTENTITY_CARD1 = (
+    FieldSchema("bt", float, 0, 10, 0.0),
+    FieldSchema("dt", float, 10, 10, 1e+20),
+    FieldSchema("so", int, 20, 10, 0),
+    FieldSchema("go", int, 30, 10, 0),
+    FieldSchema("ithk", int, 40, 10, 0),
+    FieldSchema("spr", int, 50, 10, 0),
+)
+
+_CONTACTENTITY_CARD2 = (
+    FieldSchema("xc", float, 0, 10, 0.0),
+    FieldSchema("yc", float, 10, 10, 0.0),
+    FieldSchema("zc", float, 20, 10, 0.0),
+    FieldSchema("ax", float, 30, 10, 0.0),
+    FieldSchema("ay", float, 40, 10, 0.0),
+    FieldSchema("az", float, 50, 10, 0.0),
+)
+
+_CONTACTENTITY_CARD3 = (
+    FieldSchema("bx", float, 0, 10, 0.0),
+    FieldSchema("by", float, 10, 10, 0.0),
+    FieldSchema("bz", float, 20, 10, 0.0),
+)
+
+_CONTACTENTITY_CARD4 = (
+    FieldSchema("inout", int, 0, 10, 0),
+    FieldSchema("g1", float, 10, 10, 0.0),
+    FieldSchema("g2", float, 20, 10, 0.0),
+    FieldSchema("g3", float, 30, 10, 0.0),
+    FieldSchema("g4", float, 40, 10, 0.0),
+    FieldSchema("g5", float, 50, 10, 0.0),
+    FieldSchema("g6", float, 60, 10, 0.0),
+    FieldSchema("g7", float, 70, 10, 0.0),
+)
 
 class ContactEntity(KeywordBase):
     """DYNA CONTACT_ENTITY keyword"""
@@ -35,274 +82,22 @@ class ContactEntity(KeywordBase):
         """Initialize the ContactEntity class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "pid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "geotyp",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ssid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sstyp",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sf",
-                        float,
-                        40,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "df",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "cf",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "intord",
-                        int,
-                        70,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "bt",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dt",
-                        float,
-                        10,
-                        10,
-                        1.0E+20,
-                        **kwargs,
-                    ),
-                    Field(
-                        "so",
-                        int,
-                        20,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "go",
-                        int,
-                        30,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ithk",
-                        int,
-                        40,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "spr",
-                        int,
-                        50,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "xc",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "yc",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "zc",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ax",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "ay",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "az",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "bx",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "by",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "bz",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "inout",
-                        int,
-                        0,
-                        10,
-                        0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g1",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g2",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g3",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g4",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g5",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g6",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "g7",
-                        float,
-                        70,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _CONTACTENTITY_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTENTITY_CARD1,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTENTITY_CARD2,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTENTITY_CARD3,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _CONTACTENTITY_CARD4,
+                **kwargs,
+            ),        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of the rigid body to which the geometric entity is attached, see *PART.

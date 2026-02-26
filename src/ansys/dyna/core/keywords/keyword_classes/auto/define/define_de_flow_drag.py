@@ -23,8 +23,31 @@
 """Module providing the DefineDeFlowDrag class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DEFINEDEFLOWDRAG_CARD0 = (
+    FieldSchema("cd", float, 0, 10, 0.0),
+    FieldSchema("rho", float, 10, 10, 0.0),
+    FieldSchema("mu", float, 20, 10, 0.0),
+    FieldSchema("vx", float, 30, 10, 0.0),
+    FieldSchema("vy", float, 40, 10, 0.0),
+    FieldSchema("vz", float, 50, 10, 0.0),
+    FieldSchema("tbirth", float, 60, 10, 0.0),
+    FieldSchema("tdeath", float, 70, 10, 1e+20),
+)
+
+_DEFINEDEFLOWDRAG_CARD1 = (
+    FieldSchema("vs", float, 0, 10, 0.0),
+    FieldSchema("dflag", int, 10, 10, 1),
+    FieldSchema("sfn", float, 20, 10, 1.0),
+    FieldSchema("sfs", float, 30, 10, 1.0),
+)
+
+_DEFINEDEFLOWDRAG_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
 
 class DefineDeFlowDrag(KeywordBase):
     """DYNA DEFINE_DE_FLOW_DRAG keyword"""
@@ -40,129 +63,23 @@ class DefineDeFlowDrag(KeywordBase):
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "cd",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "rho",
-                        float,
-                        10,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "mu",
-                        float,
-                        20,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vx",
-                        float,
-                        30,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vy",
-                        float,
-                        40,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "vz",
-                        float,
-                        50,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tbirth",
-                        float,
-                        60,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "tdeath",
-                        float,
-                        70,
-                        10,
-                        1E+20,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            Card(
-                [
-                    Field(
-                        "vs",
-                        float,
-                        0,
-                        10,
-                        0.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "dflag",
-                        int,
-                        10,
-                        10,
-                        1,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfn",
-                        float,
-                        20,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                    Field(
-                        "sfs",
-                        float,
-                        30,
-                        10,
-                        1.0,
-                        **kwargs,
-                    ),
-                ],
-            ),
-            OptionCardSet(
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDEFLOWDRAG_CARD0,
+                **kwargs,
+            ),            Card.from_field_schemas_with_defaults(
+                _DEFINEDEFLOWDRAG_CARD1,
+                **kwargs,
+            ),            OptionCardSet(
                 option_spec = DefineDeFlowDrag.option_specs[0],
                 cards = [
-                    Card(
-                        [
-                            Field(
-                                "title",
-                                str,
-                                0,
-                                80,
-                                kwargs.get("title")
-                            ),
-                        ],
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEFLOWDRAG_OPTION0_CARD0,
+                        **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def cd(self) -> float:
         """Get or set the Drag coefficient

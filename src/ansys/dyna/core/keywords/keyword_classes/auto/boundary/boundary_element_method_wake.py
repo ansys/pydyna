@@ -23,7 +23,13 @@
 """Module providing the BoundaryElementMethodWake class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_BOUNDARYELEMENTMETHODWAKE_CARD0 = (
+    FieldSchema("nelem", int, 0, 10, None),
+    FieldSchema("nside", int, 10, 10, None),
+)
 
 class BoundaryElementMethodWake(KeywordBase):
     """DYNA BOUNDARY_ELEMENT_METHOD_WAKE keyword"""
@@ -35,26 +41,10 @@ class BoundaryElementMethodWake(KeywordBase):
         """Initialize the BoundaryElementMethodWake class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "nelem",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "nside",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _BOUNDARYELEMENTMETHODWAKE_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def nelem(self) -> typing.Optional[int]:
         """Get or set the Element number to which a wake is attached.

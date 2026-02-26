@@ -23,7 +23,15 @@
 """Module providing the DualceseEosSet class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+
+_DUALCESEEOSSET_CARD0 = (
+    FieldSchema("eossid", int, 0, 10, None),
+    FieldSchema("eosinid", int, 10, 10, None),
+    FieldSchema("eosrctid", int, 20, 10, None),
+    FieldSchema("eosprdi", int, 30, 10, None),
+)
 
 class DualceseEosSet(KeywordBase):
     """DYNA DUALCESE_EOS_SET keyword"""
@@ -35,40 +43,10 @@ class DualceseEosSet(KeywordBase):
         """Initialize the DualceseEosSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card(
-                [
-                    Field(
-                        "eossid",
-                        int,
-                        0,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eosinid",
-                        int,
-                        10,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eosrctid",
-                        int,
-                        20,
-                        10,
-                        **kwargs,
-                    ),
-                    Field(
-                        "eosprdi",
-                        int,
-                        30,
-                        10,
-                        **kwargs,
-                    ),
-                ],
-            ),
-        ]
-
+            Card.from_field_schemas_with_defaults(
+                _DUALCESEEOSSET_CARD0,
+                **kwargs,
+            ),        ]
     @property
     def eossid(self) -> typing.Optional[int]:
         """Get or set the Set ID of the EOS mixture of a given multiphase fluid
