@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
@@ -72,11 +73,19 @@ _RIGIDWALLPLANARFINITEMOVINGFORCESDISPLAY_CARD4 = (
     FieldSchema("n4", int, 50, 10, 0),
 )
 
+_RIGIDWALLPLANARFINITEMOVINGFORCESDISPLAY_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class RigidwallPlanarFiniteMovingForcesDisplay(KeywordBase):
     """DYNA RIGIDWALL_PLANAR_FINITE_MOVING_FORCES_DISPLAY keyword"""
 
     keyword = "RIGIDWALL"
     subkeyword = "PLANAR_FINITE_MOVING_FORCES_DISPLAY"
+    option_specs = [
+        OptionSpec("ID", -2, 1),
+    ]
     _link_fields = {
         "n1": LinkType.NODE,
         "n2": LinkType.NODE,
@@ -91,6 +100,7 @@ class RigidwallPlanarFiniteMovingForcesDisplay(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the RigidwallPlanarFiniteMovingForcesDisplay class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _RIGIDWALLPLANARFINITEMOVINGFORCESDISPLAY_CARD0,
@@ -107,7 +117,17 @@ class RigidwallPlanarFiniteMovingForcesDisplay(KeywordBase):
             ),            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLPLANARFINITEMOVINGFORCESDISPLAY_CARD4,
                 **kwargs,
-            ),        ]
+            ),            OptionCardSet(
+                option_spec = RigidwallPlanarFiniteMovingForcesDisplay.option_specs[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _RIGIDWALLPLANARFINITEMOVINGFORCESDISPLAY_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID containing tracked nodes, see *SET_NODE_OPTION.
@@ -422,6 +442,34 @@ class RigidwallPlanarFiniteMovingForcesDisplay(KeywordBase):
     def n4(self, value: int) -> None:
         """Set the n4 property."""
         self._cards[4].set_value("n4", value)
+
+    @property
+    def id(self) -> typing.Optional[int]:
+        """Get or set the Optional Rigidwall ID.
+        """ # nopep8
+        return self._cards[5].cards[0].get_value("id")
+
+    @id.setter
+    def id(self, value: int) -> None:
+        """Set the id property."""
+        self._cards[5].cards[0].set_value("id", value)
+
+        if value:
+            self.activate_option("ID")
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Rigidwall id descriptor. It is suggested that unique descriptions be used.
+        """ # nopep8
+        return self._cards[5].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[5].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 
     @property
     def n1_link(self) -> typing.Optional[KeywordBase]:

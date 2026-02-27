@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _MATMODIFIEDJOHNSONCOOK_CARD0 = (
@@ -76,15 +77,23 @@ _MATMODIFIEDJOHNSONCOOK_CARD5 = (
     FieldSchema("tauc", float, 10, 10, None),
 )
 
+_MATMODIFIEDJOHNSONCOOK_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatModifiedJohnsonCook(KeywordBase):
     """DYNA MAT_MODIFIED_JOHNSON_COOK keyword"""
 
     keyword = "MAT"
     subkeyword = "MODIFIED_JOHNSON_COOK"
+    option_specs = [
+        OptionSpec("TITLE", -1, 1),
+    ]
 
     def __init__(self, **kwargs):
         """Initialize the MatModifiedJohnsonCook class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDJOHNSONCOOK_CARD0,
@@ -104,7 +113,17 @@ class MatModifiedJohnsonCook(KeywordBase):
             ),            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDJOHNSONCOOK_CARD5,
                 **kwargs,
-            ),        ]
+            ),            OptionCardSet(
+                option_spec = MatModifiedJohnsonCook.option_specs[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _MATMODIFIEDJOHNSONCOOK_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -471,6 +490,20 @@ class MatModifiedJohnsonCook(KeywordBase):
     def tauc(self, value: float) -> None:
         """Set the tauc property."""
         self._cards[5].set_value("tauc", value)
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[6].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[6].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 
 
 class Mat107(MatModifiedJohnsonCook):

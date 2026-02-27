@@ -23,7 +23,6 @@
 """This script generates the keyword classes for the LSPP.  It uses the kwd.json file to get the keyword"""
 
 import argparse
-import copy
 import logging
 import os
 import typing
@@ -36,7 +35,7 @@ from jinja2 import Environment, FileSystemLoader
 import keyword_generation.data_model as data_model
 from keyword_generation.generators import generate_class, generate_entrypoints
 from keyword_generation.generators.template_context import DocTemplateContext
-from keyword_generation.utils import get_this_folder, handle_single_word_keyword
+from keyword_generation.utils import get_this_folder, handle_single_word_keyword, merge_options
 from keyword_generation.utils.keyword_utils import KeywordNames, filter_keywords_by_domain
 from output_manager import OutputManager
 
@@ -132,29 +131,6 @@ def get_undefined_alias_keywords(
     return undefined_aliases
 
 
-def merge_options(keyword_options: typing.Dict, generation_settings: typing.Dict) -> None:
-    generation_settings = copy.deepcopy(generation_settings)
-    logger.debug(f"Merging generation settings: {list(generation_settings.keys())}")
-    if keyword_options == {}:
-        keyword_options.update({"generation-options": generation_settings})
-    else:
-        generation_options: typing.Dict = keyword_options.get("generation-options", {})
-        if generation_options == {}:
-            generation_options.update(generation_settings)
-        else:
-            generation_option_keys = set(generation_options.keys())
-            generation_setting_keys = set(generation_settings.keys())
-            intersecting_keys = generation_option_keys & generation_setting_keys
-            num_new_keys = len(generation_setting_keys - generation_option_keys)
-            logger.debug(f"Merging {len(intersecting_keys)} intersecting keys, adding {num_new_keys} new keys")
-            for intersecting_key in intersecting_keys:
-                generation_optinon: typing.List = generation_options[intersecting_key]
-                generation_optinon.extend(generation_settings[intersecting_key])
-            difference_keys = generation_setting_keys - generation_option_keys
-            for difference_key in difference_keys:
-                generation_options[difference_key] = generation_settings[difference_key]
-
-
 def handle_wildcards(keyword_options: typing.Dict, keyword: str) -> None:
     if skip_generate_keyword_class(keyword):
         return
@@ -212,12 +188,10 @@ def get_keyword_item(keyword: str) -> typing.Dict[str, typing.Any]:
 
 
 def get_generations(keyword: str) -> typing.List[typing.Tuple]:
+    """Return [(keyword, options)] for the given keyword. After manifest normalization,
+    multiple-type entries are flattened, so this always returns a single-item list."""
     keyword_options = get_keyword_options(keyword)
-    if keyword_options.get("type") != "multiple":
-        return [(keyword, keyword_options)]
-    generations = keyword_options.get("generations", [])
-    result = [(gen["keyword"], gen) for gen in generations]
-    return result
+    return [(keyword, keyword_options)]
 
 
 def _are_keyword_definitions_identical(keyword1: str, keyword2: str) -> bool:
@@ -379,23 +353,48 @@ def get_keywords_to_generate(
     config = data_model.get_config()
     keywords = []
     kwd_list = config.keyword_data.get_keywords_list()
+    kwd_set = set(kwd_list)
+    manifest_keys = set(config.manifest.get_keyword_keys())
 
     # first get all aliases
     add_aliases(kwd_list)
 
-    # then get keywords to generate
-    for keyword in kwd_list:
-        if kwd_name != None and keyword != kwd_name:
-            continue
-
-        # Filter by subset domains if specified
+    def should_generate(keyword: str, effective: str) -> bool:
+        if kwd_name is not None and keyword != kwd_name and effective != kwd_name:
+            return False
         if subset_domains and not filter_keywords_by_domain([keyword], subset_domains):
-            continue
+            return False
+        return True
 
-        for keyword, keyword_options in get_generations(keyword):
-            item = get_keyword_item(keyword)
-            item["options"] = keyword_options
-            keywords.append(item)
+    seen = set()
+
+    # 1) Keywords in kwd_list (have definitions in kwd.json)
+    for keyword in kwd_list:
+        if keyword in seen:
+            continue
+        if not should_generate(keyword, keyword):
+            continue
+        seen.add(keyword)
+        keyword_options = get_keyword_options(keyword)
+        item = get_keyword_item(keyword)
+        item["options"] = keyword_options
+        keywords.append(item)
+
+    # 2) Manifest-only keywords (source-keyword in kwd, e.g. RIGIDWALL_PLANAR_ID, MAT_009)
+    for keyword in manifest_keys:
+        if keyword in seen:
+            continue
+        opts = config.manifest.get(keyword, {})
+        effective = opts.get("source-keyword", keyword)
+        if effective not in kwd_set:
+            continue
+        if not should_generate(keyword, effective):
+            continue
+        seen.add(keyword)
+        keyword_options = get_keyword_options(keyword)
+        item = get_keyword_item(keyword)
+        item["options"] = keyword_options
+        keywords.append(item)
 
     return keywords
 

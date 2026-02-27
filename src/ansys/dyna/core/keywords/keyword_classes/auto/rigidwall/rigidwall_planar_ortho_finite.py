@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
@@ -75,11 +76,19 @@ _RIGIDWALLPLANARORTHOFINITE_CARD4 = (
     FieldSchema("lenm", float, 40, 10, 0.0),
 )
 
+_RIGIDWALLPLANARORTHOFINITE_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class RigidwallPlanarOrthoFinite(KeywordBase):
     """DYNA RIGIDWALL_PLANAR_ORTHO_FINITE keyword"""
 
     keyword = "RIGIDWALL"
     subkeyword = "PLANAR_ORTHO_FINITE"
+    option_specs = [
+        OptionSpec("ID", -2, 1),
+    ]
     _link_fields = {
         "node1": LinkType.NODE,
         "node2": LinkType.NODE,
@@ -91,6 +100,7 @@ class RigidwallPlanarOrthoFinite(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the RigidwallPlanarOrthoFinite class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _RIGIDWALLPLANARORTHOFINITE_CARD0,
@@ -107,7 +117,17 @@ class RigidwallPlanarOrthoFinite(KeywordBase):
             ),            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLPLANARORTHOFINITE_CARD4,
                 **kwargs,
-            ),        ]
+            ),            OptionCardSet(
+                option_spec = RigidwallPlanarOrthoFinite.option_specs[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _RIGIDWALLPLANARORTHOFINITE_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID containing tracked nodes, see *SET_NODE_OPTION.
@@ -455,6 +475,34 @@ class RigidwallPlanarOrthoFinite(KeywordBase):
     def lenm(self, value: float) -> None:
         """Set the lenm property."""
         self._cards[4].set_value("lenm", value)
+
+    @property
+    def id(self) -> typing.Optional[int]:
+        """Get or set the Optional Rigidwall ID.
+        """ # nopep8
+        return self._cards[5].cards[0].get_value("id")
+
+    @id.setter
+    def id(self, value: int) -> None:
+        """Set the id property."""
+        self._cards[5].cards[0].set_value("id", value)
+
+        if value:
+            self.activate_option("ID")
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Rigidwall id descriptor. It is suggested that unique descriptions be used.
+        """ # nopep8
+        return self._cards[5].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[5].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 
     @property
     def node1_link(self) -> typing.Optional[KeywordBase]:

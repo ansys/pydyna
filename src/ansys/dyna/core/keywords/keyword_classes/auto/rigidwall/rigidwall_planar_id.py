@@ -24,16 +24,12 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
 
 _RIGIDWALLPLANARID_CARD0 = (
-    FieldSchema("id", int, 0, 10, None),
-    FieldSchema("title", str, 10, 70, None),
-)
-
-_RIGIDWALLPLANARID_CARD1 = (
     FieldSchema("nsid", int, 0, 10, None),
     FieldSchema("nsidex", int, 10, 10, 0),
     FieldSchema("boxid", int, 20, 10, 0),
@@ -43,7 +39,7 @@ _RIGIDWALLPLANARID_CARD1 = (
     FieldSchema("rwksf", float, 60, 10, 1.0),
 )
 
-_RIGIDWALLPLANARID_CARD2 = (
+_RIGIDWALLPLANARID_CARD1 = (
     FieldSchema("xt", float, 0, 10, 0.0),
     FieldSchema("yt", float, 10, 10, 0.0),
     FieldSchema("zt", float, 20, 10, 0.0),
@@ -54,11 +50,19 @@ _RIGIDWALLPLANARID_CARD2 = (
     FieldSchema("wvel", float, 70, 10, 0.0),
 )
 
+_RIGIDWALLPLANARID_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class RigidwallPlanarId(KeywordBase):
     """DYNA RIGIDWALL_PLANAR_ID keyword"""
 
     keyword = "RIGIDWALL"
     subkeyword = "PLANAR_ID"
+    option_specs = [
+        OptionSpec("ID", -2, 1),
+    ]
     _link_fields = {
         "boxid": LinkType.DEFINE_BOX,
         "nsid": LinkType.SET_NODE,
@@ -68,6 +72,7 @@ class RigidwallPlanarId(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the RigidwallPlanarId class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _RIGIDWALLPLANARID_CARD0,
@@ -75,175 +80,160 @@ class RigidwallPlanarId(KeywordBase):
             ),            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLPLANARID_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
-                _RIGIDWALLPLANARID_CARD2,
-                **kwargs,
-            ),        ]
-    @property
-    def id(self) -> typing.Optional[int]:
-        """Get or set the Optional Rigidwall ID.
-        """ # nopep8
-        return self._cards[0].get_value("id")
-
-    @id.setter
-    def id(self, value: int) -> None:
-        """Set the id property."""
-        self._cards[0].set_value("id", value)
-
-    @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the Ridigwall id descriptor. It is suggested that unique descriptions be used.
-        """ # nopep8
-        return self._cards[0].get_value("title")
-
-    @title.setter
-    def title(self, value: str) -> None:
-        """Set the title property."""
-        self._cards[0].set_value("title", value)
-
+            ),            OptionCardSet(
+                option_spec = RigidwallPlanarId.option_specs[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _RIGIDWALLPLANARID_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID containing tracked nodes, see *SET_NODE_OPTION.
         EQ.0: All nodes are tracked for interacting with the rigid wall.
         """ # nopep8
-        return self._cards[1].get_value("nsid")
+        return self._cards[0].get_value("nsid")
 
     @nsid.setter
     def nsid(self, value: int) -> None:
         """Set the nsid property."""
-        self._cards[1].set_value("nsid", value)
+        self._cards[0].set_value("nsid", value)
 
     @property
     def nsidex(self) -> int:
         """Get or set the Node set ID containing nodes that exempted as tracked nodes, see *SET_NODE_OPTION.
         """ # nopep8
-        return self._cards[1].get_value("nsidex")
+        return self._cards[0].get_value("nsidex")
 
     @nsidex.setter
     def nsidex(self, value: int) -> None:
         """Set the nsidex property."""
-        self._cards[1].set_value("nsidex", value)
+        self._cards[0].set_value("nsidex", value)
 
     @property
     def boxid(self) -> int:
         """Get or set the All nodes in box are included as tracked nodes for the interacting with ther rigid wall, see *DEFINE_BOX. If options NSID or NSIDEX are active then only the subset of nodes activated by these options are checked to see if they are within the box.
         """ # nopep8
-        return self._cards[1].get_value("boxid")
+        return self._cards[0].get_value("boxid")
 
     @boxid.setter
     def boxid(self, value: int) -> None:
         """Set the boxid property."""
-        self._cards[1].set_value("boxid", value)
+        self._cards[0].set_value("boxid", value)
 
     @property
     def offset(self) -> float:
         """Get or set the All nodes within a normal offset distance, OFFSET, to the rigid wall are included as tracked nodes for the rigid wall. If options NSID, NSIDEX, or BOXID are active then only the subset of nodes activated by these options are checked to see if they are within the offset distance.
         """ # nopep8
-        return self._cards[1].get_value("offset")
+        return self._cards[0].get_value("offset")
 
     @offset.setter
     def offset(self, value: float) -> None:
         """Set the offset property."""
-        self._cards[1].set_value("offset", value)
+        self._cards[0].set_value("offset", value)
 
     @property
     def birth(self) -> float:
         """Get or set the Birth time of rigid wall.  The time values of the load curves that control the motion of the wall are offset by the birth time.
         """ # nopep8
-        return self._cards[1].get_value("birth")
+        return self._cards[0].get_value("birth")
 
     @birth.setter
     def birth(self, value: float) -> None:
         """Set the birth property."""
-        self._cards[1].set_value("birth", value)
+        self._cards[0].set_value("birth", value)
 
     @property
     def death(self) -> float:
         """Get or set the Death time of rigid wall.  At this time the wall is deleted from the calculation
         """ # nopep8
-        return self._cards[1].get_value("death")
+        return self._cards[0].get_value("death")
 
     @death.setter
     def death(self, value: float) -> None:
         """Set the death property."""
-        self._cards[1].set_value("death", value)
+        self._cards[0].set_value("death", value)
 
     @property
     def rwksf(self) -> float:
         """Get or set the Stiffness scaling factor. If RWKSF is also specified in *CONTROL_ CONTACT, the stiffness is scaled by the product of the two values.
         """ # nopep8
-        return self._cards[1].get_value("rwksf")
+        return self._cards[0].get_value("rwksf")
 
     @rwksf.setter
     def rwksf(self, value: float) -> None:
         """Set the rwksf property."""
-        self._cards[1].set_value("rwksf", value)
+        self._cards[0].set_value("rwksf", value)
 
     @property
     def xt(self) -> float:
         """Get or set the x-coordinate of tail of any outward drawn normal vector, n, originating on wall (tail) and terminating in space (head).
         """ # nopep8
-        return self._cards[2].get_value("xt")
+        return self._cards[1].get_value("xt")
 
     @xt.setter
     def xt(self, value: float) -> None:
         """Set the xt property."""
-        self._cards[2].set_value("xt", value)
+        self._cards[1].set_value("xt", value)
 
     @property
     def yt(self) -> float:
         """Get or set the y-coordinate of tail of normal vector n.
         """ # nopep8
-        return self._cards[2].get_value("yt")
+        return self._cards[1].get_value("yt")
 
     @yt.setter
     def yt(self, value: float) -> None:
         """Set the yt property."""
-        self._cards[2].set_value("yt", value)
+        self._cards[1].set_value("yt", value)
 
     @property
     def zt(self) -> float:
         """Get or set the z-coordinate of tail of normal vector n
         """ # nopep8
-        return self._cards[2].get_value("zt")
+        return self._cards[1].get_value("zt")
 
     @zt.setter
     def zt(self, value: float) -> None:
         """Set the zt property."""
-        self._cards[2].set_value("zt", value)
+        self._cards[1].set_value("zt", value)
 
     @property
     def xh(self) -> float:
         """Get or set the x-coordinate of head of normal vector n
         """ # nopep8
-        return self._cards[2].get_value("xh")
+        return self._cards[1].get_value("xh")
 
     @xh.setter
     def xh(self, value: float) -> None:
         """Set the xh property."""
-        self._cards[2].set_value("xh", value)
+        self._cards[1].set_value("xh", value)
 
     @property
     def yh(self) -> float:
         """Get or set the y-coordinate of head of normal vector n.
         """ # nopep8
-        return self._cards[2].get_value("yh")
+        return self._cards[1].get_value("yh")
 
     @yh.setter
     def yh(self, value: float) -> None:
         """Set the yh property."""
-        self._cards[2].set_value("yh", value)
+        self._cards[1].set_value("yh", value)
 
     @property
     def zh(self) -> float:
         """Get or set the z-coordinate of head of normal vector n.
         """ # nopep8
-        return self._cards[2].get_value("zh")
+        return self._cards[1].get_value("zh")
 
     @zh.setter
     def zh(self, value: float) -> None:
         """Set the zh property."""
-        self._cards[2].set_value("zh", value)
+        self._cards[1].set_value("zh", value)
 
     @property
     def fric(self) -> float:
@@ -253,23 +243,51 @@ class RigidwallPlanarId(KeywordBase):
         EQ.2.0: node is welded after contact with frictionless sliding. Welding occurs if and only if the normal value of the impact velocity exceeds the critical value specified by WVEL,
         EQ.3.0: node is welded after contact with no sliding. Welding occurs if and only if the normal value of the impact velocity exceeds the critical value specified by WVEL.
         """ # nopep8
-        return self._cards[2].get_value("fric")
+        return self._cards[1].get_value("fric")
 
     @fric.setter
     def fric(self, value: float) -> None:
         """Set the fric property."""
-        self._cards[2].set_value("fric", value)
+        self._cards[1].set_value("fric", value)
 
     @property
     def wvel(self) -> float:
         """Get or set the Critical normal velocity at which nodes weld to wall (FRIC = 2.0 or 3.0).
         """ # nopep8
-        return self._cards[2].get_value("wvel")
+        return self._cards[1].get_value("wvel")
 
     @wvel.setter
     def wvel(self, value: float) -> None:
         """Set the wvel property."""
-        self._cards[2].set_value("wvel", value)
+        self._cards[1].set_value("wvel", value)
+
+    @property
+    def id(self) -> typing.Optional[int]:
+        """Get or set the Optional Rigidwall ID.
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("id")
+
+    @id.setter
+    def id(self, value: int) -> None:
+        """Set the id property."""
+        self._cards[2].cards[0].set_value("id", value)
+
+        if value:
+            self.activate_option("ID")
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Rigidwall id descriptor. It is suggested that unique descriptions be used.
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 
     @property
     def boxid_link(self) -> typing.Optional[DefineBox]:
