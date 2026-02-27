@@ -130,7 +130,7 @@ jobs:
         os: [windows-latest, ubuntu-latest]
         python-version: ['3.10', '3.11', '3.12', '3.13']
     steps:
-      - uses: ansys/actions/build-wheelhouse@571fb2b8c7d6ad8c8b18e50bd20fb00f125dcfb6 # v9.0.15
+      - uses: ansys/actions/build-wheelhouse@1f4f0896a8e49d3aec2f02ced215b04a32c85f28 # v9.0.15
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
@@ -199,7 +199,7 @@ jobs:
       contents: write # Needed to push documentation to gh-pages branch
       pages: write # Needed to deploy to GitHub Pages
     steps:
-      - uses: ansys/actions/doc-deploy-dev@571fb2b8c7d6ad8c8b18e50bd20fb00f125dcfb6 # v9.0.15
+      - uses: ansys/actions/doc-deploy-dev@1f4f0896a8e49d3aec2f02ced215b04a32c85f28 # v9.0.15
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ env.BOT_TOKEN }}
