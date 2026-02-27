@@ -437,6 +437,12 @@ class ParameterHandler(ImportHandler):
             logger.debug(f"Processing {'PARAMETER_EXPRESSION_LOCAL' if is_local else 'PARAMETER_EXPRESSION'} keyword")
             _load_parameter_expressions(context.deck, keyword, local=is_local)
 
-    def on_error(self, error):
+    def on_error(self, error, context=None):
         """Emit a warning when parameter processing fails."""
-        warnings.warn(f"Error processing parameter: {error}")
+        location = ""
+        if context is not None:
+            if context.path is not None:
+                location += f" in file '{context.path}'"
+            if context.line_number is not None:
+                location += f" for keyword beginning on line {context.line_number}"
+        warnings.warn(f"Error processing parameter: {error}{location}")

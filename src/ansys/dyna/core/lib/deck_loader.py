@@ -160,9 +160,9 @@ def _update_deck_title(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck
     deck.title = block[1]
 
 
-def _on_error(error, import_handlers: typing.List[ImportHandler]):
+def _on_error(error, import_handlers: typing.List[ImportHandler], context: typing.Optional[ImportContext] = None):
     for handler in import_handlers:
-        handler.on_error(error)
+        handler.on_error(error, context)
 
 
 def _after_import(keyword, import_handlers: typing.List[ImportHandler], context: ImportContext):
@@ -170,7 +170,7 @@ def _after_import(keyword, import_handlers: typing.List[ImportHandler], context:
         try:
             handler.after_import(context, keyword)
         except Exception as e:
-            handler.on_error(e)
+            handler.on_error(e, context)
 
 
 def _get_format_from_keyword_suffix(keyword: str) -> format_type:
@@ -244,7 +244,7 @@ def _load_keyword(
     except Exception as e:
         if context is not None and context.strict:
             raise
-        _on_error(e, import_handlers)
+        _on_error(e, import_handlers, context)
         result.add_unprocessed_keyword(keyword)
         deck.append(keyword_data)
         _after_import(keyword_data, import_handlers, context)
@@ -314,6 +314,7 @@ def _try_load_deck_from_buffer(
     iterstate = IterState.USERCOMMENT
     block = []
     encrypted_section = None
+    current_line_number = 0
     while True:
         close_previous_block = False
         try:
@@ -321,6 +322,7 @@ def _try_load_deck_from_buffer(
             if len(line) == 0:
                 _handle_block(iterstate, deck, block, import_handlers, result, context)
                 return
+            current_line_number += 1
             line = line.rstrip("\n")
             if line.startswith("*"):
                 close_previous_block = True
@@ -342,6 +344,10 @@ def _try_load_deck_from_buffer(
                 # set the new iterstate, start building the next block
                 iterstate = _update_iterstate(line)
                 block = [line]
+                # Record which line this keyword block started on so that
+                # error messages can include precise location information.
+                if context is not None:
+                    context.line_number = current_line_number
             else:
                 if iterstate == IterState.ENCRYPTED:
                     encrypted_section.write(line)
