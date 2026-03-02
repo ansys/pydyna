@@ -21,7 +21,9 @@ Handlers are executed in registration order (see `handlers/registry.py`). Order 
 | 11 | `rename-property` | Renames property accessors |
 | 12 | `table-card-group` | Groups cards into repeating units |
 | 13 | `external-card-implementation` | Links to external cards |
-| 14 | `shared-field` | Creates shared field definitions |
+| 14 | `add-mixin` | Adds mixin class inheritance |
+| 15 | `additional-imports` | Injects extra top-level imports |
+| 16 | `shared-field` | Creates shared field definitions |
 
 ## Reference Semantics (Critical)
 
@@ -152,6 +154,19 @@ Creates fields shared across multiple cards.
 ```
 
 **Critical**: Search option cards FIRST regardless of index value. See [README.md](README.md#common-pitfalls).
+
+### additional-imports
+
+Injects extra top-level `import` statements into the generated module. Use this when an inline expression (e.g. `length-func`, `active-func`) references a symbol not imported by default.
+
+```json
+"additional-imports": [
+  {"name": "math"}
+]
+```
+
+Produces `import math` in the generated `.py` file, placed after `import typing`.
+Duplicates are silently ignored.
 
 ## Handler Settings Base Classes
 

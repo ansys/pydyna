@@ -22,8 +22,12 @@
 
 """Module providing the Iga1DNurbsXyz class."""
 import typing
+import math
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _IGA1DNURBSXYZ_CARD0 = (
@@ -36,23 +40,9 @@ _IGA1DNURBSXYZ_CARD1 = (
     FieldSchema("unir", int, 0, 10, 0),
 )
 
-_IGA1DNURBSXYZ_CARD2 = (
-    FieldSchema("r1", float, 0, 20, None),
-    FieldSchema("r2", float, 20, 20, None),
-    FieldSchema("r3", float, 40, 20, None),
-    FieldSchema("r4", float, 60, 20, None),
-)
-
 _IGA1DNURBSXYZ_CARD3 = (
     FieldSchema("rfirst", float, 0, 20, None),
     FieldSchema("rlast", float, 20, 20, None),
-)
-
-_IGA1DNURBSXYZ_CARD4 = (
-    FieldSchema("x", float, 0, 20, None),
-    FieldSchema("y", float, 20, 20, None),
-    FieldSchema("z", float, 40, 20, None),
-    FieldSchema("wgt", float, 60, 20, 1.0),
 )
 
 class Iga1DNurbsXyz(KeywordBase):
@@ -73,16 +63,32 @@ class Iga1DNurbsXyz(KeywordBase):
                 _IGA1DNURBSXYZ_CARD1,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _IGA1DNURBSXYZ_CARD2,
+            TableCard(
+                [
+                    Field("r1", float, 0, 20, None),
+                    Field("r2", float, 20, 20, None),
+                    Field("r3", float, 40, 20, None),
+                    Field("r4", float, 60, 20, None),
+                ],
+                lambda: math.ceil((self.nr+self.pr+1)/4),
+                lambda: self.unir==0,
+                name="knots",
                 **kwargs,
             ),
             Card.from_field_schemas_with_defaults(
                 _IGA1DNURBSXYZ_CARD3,
+                active_func=lambda: self.unir!=0,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _IGA1DNURBSXYZ_CARD4,
+            TableCard(
+                [
+                    Field("x", float, 0, 20, None),
+                    Field("y", float, 20, 20, None),
+                    Field("z", float, 40, 20, None),
+                    Field("wgt", float, 60, 20, 1.0),
+                ],
+                lambda: self.nr,
+                name="points",
                 **kwargs,
             ),
         ]
@@ -136,48 +142,14 @@ class Iga1DNurbsXyz(KeywordBase):
         self._cards[1].set_value("unir", value)
 
     @property
-    def r1(self) -> typing.Optional[float]:
-        """Get or set the Knot values in the local r-direction with i = 1, NR+PR+1.
-        """ # nopep8
-        return self._cards[2].get_value("r1")
+    def knots(self) -> pd.DataFrame:
+        """Get the table of knots."""
+        return self._cards[2].table
 
-    @r1.setter
-    def r1(self, value: float) -> None:
-        """Set the r1 property."""
-        self._cards[2].set_value("r1", value)
-
-    @property
-    def r2(self) -> typing.Optional[float]:
-        """Get or set the Knot values in the local r-direction with i = 1, NR+PR+1.
-        """ # nopep8
-        return self._cards[2].get_value("r2")
-
-    @r2.setter
-    def r2(self, value: float) -> None:
-        """Set the r2 property."""
-        self._cards[2].set_value("r2", value)
-
-    @property
-    def r3(self) -> typing.Optional[float]:
-        """Get or set the Knot values in the local r-direction with i = 1, NR+PR+1.
-        """ # nopep8
-        return self._cards[2].get_value("r3")
-
-    @r3.setter
-    def r3(self, value: float) -> None:
-        """Set the r3 property."""
-        self._cards[2].set_value("r3", value)
-
-    @property
-    def r4(self) -> typing.Optional[float]:
-        """Get or set the Knot values in the local r-direction with i = 1, NR+PR+1.
-        """ # nopep8
-        return self._cards[2].get_value("r4")
-
-    @r4.setter
-    def r4(self, value: float) -> None:
-        """Set the r4 property."""
-        self._cards[2].set_value("r4", value)
+    @knots.setter
+    def knots(self, df: pd.DataFrame):
+        """Set knots from the dataframe df"""
+        self._cards[2].table = df
 
     @property
     def rfirst(self) -> typing.Optional[float]:
@@ -202,46 +174,12 @@ class Iga1DNurbsXyz(KeywordBase):
         self._cards[3].set_value("rlast", value)
 
     @property
-    def x(self) -> typing.Optional[float]:
-        """Get or set the Non-homogeneous control point coordinates in the global x-direction with j = 1, NR.
-        """ # nopep8
-        return self._cards[4].get_value("x")
+    def points(self) -> pd.DataFrame:
+        """Get the table of points."""
+        return self._cards[4].table
 
-    @x.setter
-    def x(self, value: float) -> None:
-        """Set the x property."""
-        self._cards[4].set_value("x", value)
-
-    @property
-    def y(self) -> typing.Optional[float]:
-        """Get or set the Non-homogeneous control point coordinates in the global y-direction with j = 1, NR.
-        """ # nopep8
-        return self._cards[4].get_value("y")
-
-    @y.setter
-    def y(self, value: float) -> None:
-        """Set the y property."""
-        self._cards[4].set_value("y", value)
-
-    @property
-    def z(self) -> typing.Optional[float]:
-        """Get or set the Non-homogeneous control point coordinates in the global z-direction with j = 1, NR.
-        """ # nopep8
-        return self._cards[4].get_value("z")
-
-    @z.setter
-    def z(self, value: float) -> None:
-        """Set the z property."""
-        self._cards[4].set_value("z", value)
-
-    @property
-    def wgt(self) -> float:
-        """Get or set the Control weights with j = 1, NR, see Remark 2.
-        """ # nopep8
-        return self._cards[4].get_value("wgt")
-
-    @wgt.setter
-    def wgt(self, value: float) -> None:
-        """Set the wgt property."""
-        self._cards[4].set_value("wgt", value)
+    @points.setter
+    def points(self, df: pd.DataFrame):
+        """Set points from the dataframe df"""
+        self._cards[4].table = df
 

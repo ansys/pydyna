@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
@@ -34,17 +35,6 @@ _SETIGAPOINTUVW_CARD0 = (
     FieldSchema("da3", float, 30, 10, 0.0),
     FieldSchema("da4", float, 40, 10, 0.0),
     FieldSchema("solver", str, 50, 10, "MECH"),
-)
-
-_SETIGAPOINTUVW_CARD1 = (
-    FieldSchema("pid1", int, 0, 10, None),
-    FieldSchema("pid2", int, 10, 10, None),
-    FieldSchema("pid3", int, 20, 10, None),
-    FieldSchema("pid4", int, 30, 10, None),
-    FieldSchema("pid5", int, 40, 10, None),
-    FieldSchema("pid6", int, 50, 10, None),
-    FieldSchema("pid7", int, 60, 10, None),
-    FieldSchema("pid8", int, 70, 10, None),
 )
 
 _SETIGAPOINTUVW_OPTION0_CARD0 = (
@@ -69,10 +59,13 @@ class SetIgaPointUvw(KeywordBase):
                 _SETIGAPOINTUVW_CARD0,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _SETIGAPOINTUVW_CARD1,
-                **kwargs,
-            ),
+            SeriesCard(
+                "points",
+                8,
+                10,
+                int,
+                None,
+                data = kwargs.get("points")),
             OptionCardSet(
                 option_spec = SetIgaPointUvw.option_specs[0],
                 cards = [
@@ -153,92 +146,13 @@ class SetIgaPointUvw(KeywordBase):
         self._cards[0].set_value("solver", value)
 
     @property
-    def pid1(self) -> typing.Optional[int]:
-        """Get or set the ith parametric point ID.
-        """ # nopep8
-        return self._cards[1].get_value("pid1")
+    def points(self) -> SeriesCard:
+        """Parametric point IDs.."""
+        return self._cards[1]
 
-    @pid1.setter
-    def pid1(self, value: int) -> None:
-        """Set the pid1 property."""
-        self._cards[1].set_value("pid1", value)
-
-    @property
-    def pid2(self) -> typing.Optional[int]:
-        """Get or set the ith parametric point ID.
-        """ # nopep8
-        return self._cards[1].get_value("pid2")
-
-    @pid2.setter
-    def pid2(self, value: int) -> None:
-        """Set the pid2 property."""
-        self._cards[1].set_value("pid2", value)
-
-    @property
-    def pid3(self) -> typing.Optional[int]:
-        """Get or set the ith parametric point ID.
-        """ # nopep8
-        return self._cards[1].get_value("pid3")
-
-    @pid3.setter
-    def pid3(self, value: int) -> None:
-        """Set the pid3 property."""
-        self._cards[1].set_value("pid3", value)
-
-    @property
-    def pid4(self) -> typing.Optional[int]:
-        """Get or set the ith parametric point ID.
-        """ # nopep8
-        return self._cards[1].get_value("pid4")
-
-    @pid4.setter
-    def pid4(self, value: int) -> None:
-        """Set the pid4 property."""
-        self._cards[1].set_value("pid4", value)
-
-    @property
-    def pid5(self) -> typing.Optional[int]:
-        """Get or set the ith parametric point ID.
-        """ # nopep8
-        return self._cards[1].get_value("pid5")
-
-    @pid5.setter
-    def pid5(self, value: int) -> None:
-        """Set the pid5 property."""
-        self._cards[1].set_value("pid5", value)
-
-    @property
-    def pid6(self) -> typing.Optional[int]:
-        """Get or set the ith parametric point ID.
-        """ # nopep8
-        return self._cards[1].get_value("pid6")
-
-    @pid6.setter
-    def pid6(self, value: int) -> None:
-        """Set the pid6 property."""
-        self._cards[1].set_value("pid6", value)
-
-    @property
-    def pid7(self) -> typing.Optional[int]:
-        """Get or set the ith parametric point ID.
-        """ # nopep8
-        return self._cards[1].get_value("pid7")
-
-    @pid7.setter
-    def pid7(self, value: int) -> None:
-        """Set the pid7 property."""
-        self._cards[1].set_value("pid7", value)
-
-    @property
-    def pid8(self) -> typing.Optional[int]:
-        """Get or set the ith parametric point ID.
-        """ # nopep8
-        return self._cards[1].get_value("pid8")
-
-    @pid8.setter
-    def pid8(self, value: int) -> None:
-        """Set the pid8 property."""
-        self._cards[1].set_value("pid8", value)
+    @points.setter
+    def points(self, value: typing.List) -> None:
+        self._cards[1].data = value
 
     @property
     def title(self) -> typing.Optional[str]:

@@ -24,21 +24,11 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _IGA1DBREP_CARD0 = (
     FieldSchema("brid", int, 0, 10, None),
-)
-
-_IGA1DBREP_CARD1 = (
-    FieldSchema("eid1", int, 0, 10, None),
-    FieldSchema("eid2", int, 10, 10, None),
-    FieldSchema("eid3", int, 20, 10, None),
-    FieldSchema("eid4", int, 30, 10, None),
-    FieldSchema("eid5", int, 40, 10, None),
-    FieldSchema("eid6", int, 50, 10, None),
-    FieldSchema("eid7", int, 60, 10, None),
-    FieldSchema("eid8", int, 70, 10, None),
 )
 
 class Iga1DBrep(KeywordBase):
@@ -55,10 +45,13 @@ class Iga1DBrep(KeywordBase):
                 _IGA1DBREP_CARD0,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _IGA1DBREP_CARD1,
-                **kwargs,
-            ),
+            SeriesCard(
+                "eid",
+                8,
+                10,
+                int,
+                None,
+                data = kwargs.get("eid")),
         ]
     @property
     def brid(self) -> typing.Optional[int]:
@@ -72,90 +65,11 @@ class Iga1DBrep(KeywordBase):
         self._cards[0].set_value("brid", value)
 
     @property
-    def eid1(self) -> typing.Optional[int]:
-        """Get or set the Parametric edge IDs, see *IGA_EDGE_UVW.
-        """ # nopep8
-        return self._cards[1].get_value("eid1")
+    def eid(self) -> SeriesCard:
+        """Parametric Edge IDs.."""
+        return self._cards[1]
 
-    @eid1.setter
-    def eid1(self, value: int) -> None:
-        """Set the eid1 property."""
-        self._cards[1].set_value("eid1", value)
-
-    @property
-    def eid2(self) -> typing.Optional[int]:
-        """Get or set the Parametric edge IDs, see *IGA_EDGE_UVW.
-        """ # nopep8
-        return self._cards[1].get_value("eid2")
-
-    @eid2.setter
-    def eid2(self, value: int) -> None:
-        """Set the eid2 property."""
-        self._cards[1].set_value("eid2", value)
-
-    @property
-    def eid3(self) -> typing.Optional[int]:
-        """Get or set the Parametric edge IDs, see *IGA_EDGE_UVW.
-        """ # nopep8
-        return self._cards[1].get_value("eid3")
-
-    @eid3.setter
-    def eid3(self, value: int) -> None:
-        """Set the eid3 property."""
-        self._cards[1].set_value("eid3", value)
-
-    @property
-    def eid4(self) -> typing.Optional[int]:
-        """Get or set the Parametric edge IDs, see *IGA_EDGE_UVW.
-        """ # nopep8
-        return self._cards[1].get_value("eid4")
-
-    @eid4.setter
-    def eid4(self, value: int) -> None:
-        """Set the eid4 property."""
-        self._cards[1].set_value("eid4", value)
-
-    @property
-    def eid5(self) -> typing.Optional[int]:
-        """Get or set the Parametric edge IDs, see *IGA_EDGE_UVW.
-        """ # nopep8
-        return self._cards[1].get_value("eid5")
-
-    @eid5.setter
-    def eid5(self, value: int) -> None:
-        """Set the eid5 property."""
-        self._cards[1].set_value("eid5", value)
-
-    @property
-    def eid6(self) -> typing.Optional[int]:
-        """Get or set the Parametric edge IDs, see *IGA_EDGE_UVW.
-        """ # nopep8
-        return self._cards[1].get_value("eid6")
-
-    @eid6.setter
-    def eid6(self, value: int) -> None:
-        """Set the eid6 property."""
-        self._cards[1].set_value("eid6", value)
-
-    @property
-    def eid7(self) -> typing.Optional[int]:
-        """Get or set the Parametric edge IDs, see *IGA_EDGE_UVW.
-        """ # nopep8
-        return self._cards[1].get_value("eid7")
-
-    @eid7.setter
-    def eid7(self, value: int) -> None:
-        """Set the eid7 property."""
-        self._cards[1].set_value("eid7", value)
-
-    @property
-    def eid8(self) -> typing.Optional[int]:
-        """Get or set the Parametric edge IDs, see *IGA_EDGE_UVW.
-        """ # nopep8
-        return self._cards[1].get_value("eid8")
-
-    @eid8.setter
-    def eid8(self, value: int) -> None:
-        """Set the eid8 property."""
-        self._cards[1].set_value("eid8", value)
+    @eid.setter
+    def eid(self, value: typing.List) -> None:
+        self._cards[1].data = value
 

@@ -5,6 +5,9 @@
 import dataclasses
 {% endif %}
 import typing
+{% for additional_import in keyword_data.additional_imports %}
+import {{additional_import}}
+{% endfor %}
 {% if keyword_data.table or keyword_data.table_group %}
 import pandas as pd
 
