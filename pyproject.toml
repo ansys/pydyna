@@ -40,19 +40,17 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-all = ['ansys-dyna-core[graphics,pim,codegen,tests,dev,doc]']
+all = ['ansys-dyna-core[graphics,codegen,tests,dev,doc]']
 
 graphics = [
     "matplotlib>=3.0",
     "pyvista>=0.43.4",
 ]
-pim = [
-    "ansys-platform-instancemanagement~=1.0",
-]
 codegen = [
     "Jinja2==3.1.6",
     "beartype==0.22.9",
     "jsonschema==4.26.0",
+    "pytest==9.0.2",
 ]
 tests = [
     "matplotlib==3.10.8",

@@ -88,9 +88,9 @@ def parse_settings_list(settings_class, settings: List[Dict[str, Any]]) -> List[
     return [settings_class.from_dict(s) for s in settings]
 
 
-def find_field_in_card(card: Any, field_name: str, case_sensitive: bool = False) -> Optional[Any]:
+def find_field_in_card(card: Any, field_name: str) -> Optional[Any]:
     """
-    Find a field in a card by name.
+    Find a field in a card by name (case-insensitive).
 
     During codegen, cards are dicts with "fields" containing Field dataclass instances.
     Searches through all fields and returns the first matching field.
@@ -98,7 +98,6 @@ def find_field_in_card(card: Any, field_name: str, case_sensitive: bool = False)
     Args:
         card: Card dict containing fields
         field_name: Name of the field to find
-        case_sensitive: Whether to use case-sensitive matching (default: False)
 
     Returns
     -------
@@ -107,45 +106,11 @@ def find_field_in_card(card: Any, field_name: str, case_sensitive: bool = False)
     # During codegen, cards are dicts with "fields" key
     fields = card.get("fields", [])
 
-    # Search with appropriate case sensitivity
     # Fields during codegen are Field dataclass instances with .name attribute
-    if case_sensitive:
-        for field in fields:
-            field_name_attr = getattr(field, "name", field.get("name") if isinstance(field, dict) else None)
-            if field_name_attr == field_name:
-                return field
-    else:
-        target = field_name.lower()
-        for field in fields:
-            field_name_attr = getattr(field, "name", field.get("name") if isinstance(field, dict) else None)
-            if field_name_attr and field_name_attr.lower() == target:
-                return field
+    target = field_name.lower()
+    for field in fields:
+        field_name_attr = getattr(field, "name", field.get("name") if isinstance(field, dict) else None)
+        if field_name_attr and field_name_attr.lower() == target:
+            return field
 
     return None
-
-
-def modify_field_in_cards(kwd_data: Any, card_index: int, field_name: str, modifications: Dict[str, Any]) -> bool:
-    """
-    Find and modify a field in a specific card.
-
-    Args:
-        kwd_data: KeywordData instance
-        card_index: Index of the card containing the field
-        field_name: Name of the field to modify
-        modifications: Dict of field properties to update
-
-    Returns
-    -------
-        True if field was found and modified, False otherwise
-    """
-    card = kwd_data.cards[card_index]
-    field = find_field_in_card(card, field_name)
-
-    if field is None:
-        return False
-
-    # Apply modifications
-    for key, value in modifications.items():
-        field[key] = value
-
-    return True
