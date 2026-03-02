@@ -187,13 +187,6 @@ def get_keyword_item(keyword: str) -> typing.Dict[str, typing.Any]:
     return keyword_item
 
 
-def get_generations(keyword: str) -> typing.List[typing.Tuple]:
-    """Return [(keyword, options)] for the given keyword. After manifest normalization,
-    multiple-type entries are flattened, so this always returns a single-item list."""
-    keyword_options = get_keyword_options(keyword)
-    return [(keyword, keyword_options)]
-
-
 def _are_keyword_definitions_identical(keyword1: str, keyword2: str) -> bool:
     """Check if two keyword definitions in kwd.json are identical.
 

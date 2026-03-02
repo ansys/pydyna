@@ -90,7 +90,7 @@ doc = [
 [tool.flit.module]
 name = "ansys.dyna.core"
 
-# todo - propose standardization in pypa/interoperability-peps or discuss.python.org/c/packaging 
+# todo - propose standardization in pypa/interoperability-peps or discuss.python.org/c/packaging
 [project.entry-points."agent.instructions"]
 "ansys.dyna.core" = "ansys.dyna.core:AGENT_INSTRUCTIONS"
 
@@ -146,6 +146,7 @@ force-sort-within-sections = true
 minversion = "7.1"
 addopts = "-ra -vv"
 testpaths = ["tests"]
+norecursedirs = ["tests/test_codegen"]
 pythonpath = ["codegen"]
 markers = """
     run: tests that exercise the `run` subpackage
