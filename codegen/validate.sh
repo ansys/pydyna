@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Codegen Validation Script
-# 
+#
 # Encapsulates the complete validation workflow for the codegen system.
 # Used by both developers and CI to ensure consistency.
 
@@ -154,13 +154,13 @@ print_info "Checking: src/ansys/dyna/core/keywords/keyword_classes/auto/"
 if ! git -C src/ansys/dyna/core/keywords/keyword_classes/auto diff --relative --exit-code >/dev/null 2>&1; then
     HAS_CHANGES=true
     print_warning "Auto-generated keyword classes have changes"
-    
+
     # Show diff stat
     if [ "$VERBOSE" = true ] || [ "$IN_CI" = true ]; then
         echo ""
         git -C src/ansys/dyna/core/keywords/keyword_classes/auto diff --relative --stat
     fi
-    
+
     # In CI, show actual diff (limited to avoid overwhelming output)
     if [ "$IN_CI" = true ]; then
         echo ""
@@ -175,13 +175,13 @@ print_info "Checking: doc/source/_autosummary/"
 if ! git -C doc/source/_autosummary/ diff --relative --exit-code >/dev/null 2>&1; then
     HAS_CHANGES=true
     print_warning "Auto-generated documentation has changes"
-    
+
     # Show diff stat
     if [ "$VERBOSE" = true ] || [ "$IN_CI" = true ]; then
         echo ""
         git -C doc/source/_autosummary/ diff --relative --stat
     fi
-    
+
     # In CI, show actual diff (limited to avoid overwhelming output)
     if [ "$IN_CI" = true ]; then
         echo ""
@@ -196,14 +196,14 @@ if [ "$HAS_CHANGES" = true ]; then
     print_info "This means either:"
     print_info "  1. The codegen logic has a bug that needs fixing, OR"
     print_info "  2. The changes are intentional and should be committed"
-    
+
     if [ "$IN_CI" = false ]; then
         print_info ""
         print_info "To see the full diff locally, run:"
         print_info "  git diff src/ansys/dyna/core/keywords/keyword_classes/auto/"
         print_info "  git diff doc/source/_autosummary/"
     fi
-    
+
     FAILED_STEPS+=("Git diff check")
     EXIT_CODE=1
 else
@@ -214,7 +214,7 @@ fi
 if [ "$SKIP_PRECOMMIT" = false ]; then
     print_header "Step 3: Run Pre-commit Hooks"
     print_info "Running: pre-commit run --all-files"
-    
+
     if pre-commit run --all-files; then
         print_success "Pre-commit checks passed"
     else
@@ -231,7 +231,7 @@ fi
 if [ "$SKIP_DEADCODE" = false ]; then
     print_header "Step 4: Dead Code Detection"
     print_info "Running: python codegen/find_dead_code.py --threshold $COVERAGE_THRESHOLD"
-    
+
     if python codegen/find_dead_code.py --threshold "$COVERAGE_THRESHOLD"; then
         print_success "Dead code detection passed (threshold: ${COVERAGE_THRESHOLD}%)"
     else
@@ -247,9 +247,9 @@ fi
 # Step 5: Unit tests
 if [ "$SKIP_TESTS" = false ]; then
     print_header "Step 5: Unit Tests"
-    print_info "Running: pytest -m codegen"
-    
-    if pytest -m codegen; then
+    print_info "Running: pytest tests/test_codegen/"
+
+    if pytest tests/test_codegen/; then
         print_success "Unit tests passed"
     else
         print_error "Unit tests failed"

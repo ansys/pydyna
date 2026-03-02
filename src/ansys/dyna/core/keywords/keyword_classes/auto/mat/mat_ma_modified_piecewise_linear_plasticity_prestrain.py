@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module providing the MatModifiedPiecewiseLinearPlasticityPrestrain class."""
+"""Module providing the MatMaModifiedPiecewiseLinearPlasticityPrestrain class."""
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
-_MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD0 = (
+_MATMAMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
     FieldSchema("ro", float, 10, 10, None),
     FieldSchema("e", float, 20, 10, None),
@@ -40,7 +40,7 @@ _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD0 = (
     FieldSchema("tdel", float, 70, 10, None),
 )
 
-_MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD1 = (
+_MATMAMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD1 = (
     FieldSchema("c", float, 0, 10, None),
     FieldSchema("p", float, 10, 10, None),
     FieldSchema("lcss", int, 20, 10, 0),
@@ -51,7 +51,7 @@ _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD1 = (
     FieldSchema("numint", float, 70, 10, 0.0),
 )
 
-_MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD2 = (
+_MATMAMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD2 = (
     FieldSchema("eps1", float, 0, 10, None),
     FieldSchema("eps2", float, 10, 10, None),
     FieldSchema("eps3", float, 20, 10, None),
@@ -62,7 +62,7 @@ _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD2 = (
     FieldSchema("eps8", float, 70, 10, None),
 )
 
-_MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD3 = (
+_MATMAMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD3 = (
     FieldSchema("es1", float, 0, 10, None),
     FieldSchema("es2", float, 10, 10, None),
     FieldSchema("es3", float, 20, 10, None),
@@ -73,7 +73,7 @@ _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD3 = (
     FieldSchema("es8", float, 70, 10, None),
 )
 
-_MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD4 = (
+_MATMAMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD4 = (
     FieldSchema("lctsrf", int, 0, 10, 0),
     FieldSchema("eps0", float, 10, 10, 0.0),
     FieldSchema("triax", float, 20, 10, 0.0),
@@ -83,15 +83,15 @@ _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD4 = (
     FieldSchema("rfiltf", float, 60, 10, 0.0),
 )
 
-_MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_OPTION0_CARD0 = (
+_MATMAMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
 
-class MatModifiedPiecewiseLinearPlasticityPrestrain(KeywordBase):
-    """DYNA MAT_MODIFIED_PIECEWISE_LINEAR_PLASTICITY_PRESTRAIN keyword"""
+class MatMaModifiedPiecewiseLinearPlasticityPrestrain(KeywordBase):
+    """DYNA MAT_MA_MODIFIED_PIECEWISE_LINEAR_PLASTICITY_PRESTRAIN keyword"""
 
     keyword = "MAT"
-    subkeyword = "MODIFIED_PIECEWISE_LINEAR_PLASTICITY_PRESTRAIN"
+    subkeyword = "MA_MODIFIED_PIECEWISE_LINEAR_PLASTICITY_PRESTRAIN"
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
@@ -103,30 +103,30 @@ class MatModifiedPiecewiseLinearPlasticityPrestrain(KeywordBase):
     }
 
     def __init__(self, **kwargs):
-        """Initialize the MatModifiedPiecewiseLinearPlasticityPrestrain class."""
+        """Initialize the MatMaModifiedPiecewiseLinearPlasticityPrestrain class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
-                _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD0,
+                _MATMAMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD0,
                 **kwargs,
             ),            Card.from_field_schemas_with_defaults(
-                _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD1,
+                _MATMAMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD1,
                 **kwargs,
             ),            Card.from_field_schemas_with_defaults(
-                _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD2,
+                _MATMAMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD2,
                 **kwargs,
             ),            Card.from_field_schemas_with_defaults(
-                _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD3,
+                _MATMAMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD3,
                 **kwargs,
             ),            Card.from_field_schemas_with_defaults(
-                _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD4,
+                _MATMAMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD4,
                 **kwargs,
             ),            OptionCardSet(
-                option_spec = MatModifiedPiecewiseLinearPlasticityPrestrain.option_specs[0],
+                option_spec = MatMaModifiedPiecewiseLinearPlasticityPrestrain.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
-                        _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_OPTION0_CARD0,
+                        _MATMAMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_OPTION0_CARD0,
                         **kwargs,
                     ),
                 ],
