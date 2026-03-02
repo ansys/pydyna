@@ -63,6 +63,10 @@ class ImportContext:
         strings and a warning is emitted. Default is False for backward
         compatibility.
         TODO: Consider making strict=True the default in a future version.
+    line_number : int, optional
+        The 1-based line number in ``path`` where the current keyword block
+        starts.  Set by the deck loader as it reads through the file so that
+        error messages can include precise location information.
     """
 
     xform: typing.Any = None
@@ -70,6 +74,7 @@ class ImportContext:
     path: str = None
     keyword_overrides: typing.Dict[str, type] = dataclasses.field(default_factory=dict)
     strict: bool = False
+    line_number: int = None
 
 
 class ImportHandler:
@@ -96,10 +101,18 @@ class ImportHandler:
         """
         pass
 
-    def on_error(self, error):
+    def on_error(self, error, context: typing.Optional["ImportContext"] = None):
         """Called when an error occurs in this handler's `after_import` method.
 
         Handlers can override this to handle or log errors as needed.
         The default implementation does nothing.
+
+        Parameters
+        ----------
+        error : Exception
+            The exception that was raised.
+        context : ImportContext, optional
+            The import context at the time of the error, which may include
+            ``path`` and ``line_number`` for location information.
         """
         pass
