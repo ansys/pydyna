@@ -56,8 +56,10 @@ class ParameterSet:
         parent : ParameterSet, optional
             Parent scope for parameter lookup. If None, this is a root scope.
         """
-        self._params = dict()  # Global parameters in this scope
-        self._local_params = dict()  # Local-only parameters in this scope
+        self._params = dict()  # Global parameters in this scope (original names)
+        self._params_lower = dict()  # Lowercase name -> original name mapping for case-insensitive lookup
+        self._local_params = dict()  # Local-only parameters in this scope (original names)
+        self._local_params_lower = dict()  # Lowercase name -> original name mapping for locals
         self._parent = parent  # Parent scope for lookup
         self._uri_stack: typing.List[str] = []  # Stack for building current URI path
         self._refs: typing.Dict[str, str] = {}  # URI -> parameter reference string (e.g., "&myvar")
@@ -65,6 +67,9 @@ class ParameterSet:
 
     def get(self, param: str) -> typing.Any:
         """Get a parameter by name, checking local then parent scopes.
+
+        Parameter lookup is case-insensitive, matching LS-DYNA behaviour.
+        Parameters are stored with their original casing; lookup is case-insensitive.
 
         Parameters
         ----------
@@ -81,14 +86,21 @@ class ParameterSet:
         KeyError
             If parameter is not found in this scope or any parent scope.
         """
-        # Check local scope first (both global and local params)
-        if param in self._params:
-            logger.debug(f"Found parameter '{param}' in global params: {self._params[param]}")
-            return self._params[param]
+        # Normalize for case-insensitive lookup
+        param_lower = param.lower()
 
-        if param in self._local_params:
-            logger.debug(f"Found parameter '{param}' in local params: {self._local_params[param]}")
-            return self._local_params[param]
+        # Check local scope first (both global and local params)
+        if param_lower in self._params_lower:
+            original_name = self._params_lower[param_lower]
+            value = self._params[original_name]
+            logger.debug(f"Found parameter '{param}' (stored as '{original_name}') in global params: {value}")
+            return value
+
+        if param_lower in self._local_params_lower:
+            original_name = self._local_params_lower[param_lower]
+            value = self._local_params[original_name]
+            logger.debug(f"Found parameter '{param}' (stored as '{original_name}') in local params: {value}")
+            return value
 
         # Check parent scope
         if self._parent is not None:
@@ -104,6 +116,7 @@ class ParameterSet:
 
         This method is for global parameters (PARAMETER keyword).
         They are added to the local scope but will be visible to child scopes.
+        Parameters are stored with their original casing; lookup is case-insensitive.
 
         Parameters
         ----------
@@ -113,13 +126,24 @@ class ParameterSet:
             Parameter value.
         """
         logger.debug(f"Adding global parameter '{param}' = {value} to local scope")
+        param_lower = param.lower()
+
+        # Remove any existing parameter with different casing
+        if param_lower in self._params_lower:
+            old_name = self._params_lower[param_lower]
+            if old_name != param:
+                logger.debug(f"Removing old parameter '{old_name}' (case variant of '{param}')")
+                del self._params[old_name]
+
         self._params[param] = value
+        self._params_lower[param_lower] = param
 
     def add_local(self, param: str, value: typing.Any) -> None:
         """Add a parameter to local scope only (PARAMETER_LOCAL).
 
         Local parameters are only visible within the current scope and child scopes
         created from it, but won't leak to parent or sibling scopes.
+        Parameters are stored with their original casing; lookup is case-insensitive.
 
         Parameters
         ----------
@@ -129,7 +153,17 @@ class ParameterSet:
             Parameter value.
         """
         logger.debug(f"Adding local parameter '{param}' = {value} to local scope")
+        param_lower = param.lower()
+
+        # Remove any existing parameter with different casing
+        if param_lower in self._local_params_lower:
+            old_name = self._local_params_lower[param_lower]
+            if old_name != param:
+                logger.debug(f"Removing old local parameter '{old_name}' (case variant of '{param}')")
+                del self._local_params[old_name]
+
         self._local_params[param] = value
+        self._local_params_lower[param_lower] = param
 
     def copy_with_child_scope(self) -> "ParameterSet":
         """Create a new ParameterSet with this as the parent scope.
