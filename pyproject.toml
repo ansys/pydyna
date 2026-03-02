@@ -11,7 +11,7 @@ requires-python = ">=3.10,<4"
 license = { file = "LICENSE" }
 authors = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
 maintainers = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
-keywords = ["Ansys", "LS-DYNA", "gRPC"]
+keywords = ["Ansys", "LS-DYNA", "keywords"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
@@ -62,8 +62,6 @@ tests = [
     "pytest-cov==7.0.0",
     "joblib==1.5.3",
     "pandas==2.3.3",
-    "openpyxl==3.1.5",
-    "scikit-learn==1.7.2",
     "pytest-xdist==3.8.0",
     "ipython==8.38.0",
     "pyvista==0.47.0",
