@@ -126,5 +126,5 @@ from .load_thermal_variable_shell import LoadThermalVariableShell
 from .load_thermal_variable_shell_set import LoadThermalVariableShellSet
 from .load_vibro_acoustic import LoadVibroAcoustic
 from .load_volume_loss import LoadVolumeLoss
-from .load_segment_id import LoadSegmentId
 from .load_segment_set_id import LoadSegmentSetId
+from .load_segment_id import LoadSegmentId
