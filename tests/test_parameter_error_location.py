@@ -90,7 +90,7 @@ class TestParameterErrorLocation:
         assert len(warning_list) > 0
         warning_message = str(warning_list[0].message)
         assert "in file '" not in warning_message
-        assert "beginningon line 4" in warning_message
+        assert "beginning on line 4" in warning_message
         assert "Error processing parameter" in warning_message
 
     def test_error_warning_backwards_compatible_no_context(self):
