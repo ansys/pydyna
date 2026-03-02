@@ -48,7 +48,8 @@ class IgaTiedEdgeToEdge(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _IGATIEDEDGETOEDGE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Apply coupling to entities referenced by the ID field along topologically connected edges. The next field, TYPE, specifies the type of entity to which ID refers because entities of different kinds, such as parts and part sets, are not uniquely numbered.  Currently (as of June 2020), Currently, no types requiring an ID are supported. This field is reserved for future enhancements

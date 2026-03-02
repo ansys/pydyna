@@ -55,7 +55,8 @@ class ConstrainedAdaptivity(KeywordBase):
                 None,
                 name="constrains",
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def constrains(self) -> pd.DataFrame:
         """Get the table of constrains."""

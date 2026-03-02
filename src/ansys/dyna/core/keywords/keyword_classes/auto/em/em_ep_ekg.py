@@ -44,7 +44,8 @@ class EmEpEkg(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMEPEKG_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ekgid(self) -> typing.Optional[int]:
         """Get or set the Id of the EKG computation.

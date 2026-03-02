@@ -56,10 +56,12 @@ class LoadShellSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADSHELLSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSHELLSET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the loading ID

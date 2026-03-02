@@ -70,16 +70,20 @@ class EmEpCellmodelFentonkarma(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELFENTONKARMA_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELFENTONKARMA_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELFENTONKARMA_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELFENTONKARMA_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def matid(self) -> typing.Optional[int]:
         """Get or set the Material ID defined in *MAT_.

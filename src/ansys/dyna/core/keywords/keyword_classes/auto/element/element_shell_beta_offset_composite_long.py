@@ -93,19 +93,24 @@ class ElementShellBetaOffsetCompositeLong(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLBETAOFFSETCOMPOSITELONG_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLBETAOFFSETCOMPOSITELONG_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLBETAOFFSETCOMPOSITELONG_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLBETAOFFSETCOMPOSITELONG_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLBETAOFFSETCOMPOSITELONG_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number has to be used.

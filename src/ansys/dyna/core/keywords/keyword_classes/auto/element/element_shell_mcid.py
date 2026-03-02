@@ -89,7 +89,8 @@ class ElementShellMcid(KeywordBase):
                     lambda: self.elements['n5'].any(),
                 ],
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def elements(self) -> pd.DataFrame:
         """Gets the full table of elements."""

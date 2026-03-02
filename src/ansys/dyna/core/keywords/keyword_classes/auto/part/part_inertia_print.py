@@ -106,25 +106,32 @@ class PartInertiaPrint(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARTINERTIAPRINT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIAPRINT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIAPRINT_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIAPRINT_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIAPRINT_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIAPRINT_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIAPRINT_CARD6,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Heading for the part.

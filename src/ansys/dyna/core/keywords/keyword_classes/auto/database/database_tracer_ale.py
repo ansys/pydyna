@@ -53,7 +53,8 @@ class DatabaseTracerAle(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASETRACERALE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nid(self) -> int:
         """Get or set the Node ID defining the initial position of a tracer particle. See Remark 1

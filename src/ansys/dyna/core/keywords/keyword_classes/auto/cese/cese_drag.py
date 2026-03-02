@@ -43,7 +43,8 @@ class CeseDrag(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEDRAG_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def press(self) -> typing.Optional[float]:
         """Get or set the Value of the free-stream fluid pressure (in units used by the current problem).

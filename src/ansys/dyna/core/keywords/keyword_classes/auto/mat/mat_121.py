@@ -78,13 +78,16 @@ class Mat121(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT121_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT121_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT121_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = Mat121.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

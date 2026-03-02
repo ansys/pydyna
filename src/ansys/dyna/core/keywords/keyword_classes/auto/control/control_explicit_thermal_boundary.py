@@ -48,7 +48,8 @@ class ControlExplicitThermalBoundary(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLEXPLICITTHERMALBOUNDARY_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def partset(self) -> typing.Optional[int]:
         """Get or set the Part set ID (See *SET_PART).

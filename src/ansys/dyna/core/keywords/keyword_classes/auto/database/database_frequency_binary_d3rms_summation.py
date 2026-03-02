@@ -43,7 +43,8 @@ class DatabaseFrequencyBinaryD3RmsSummation(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEFREQUENCYBINARYD3RMSSUMMATION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Path and file name of precomputed PSD or RMS binary databases (See Remark 3)

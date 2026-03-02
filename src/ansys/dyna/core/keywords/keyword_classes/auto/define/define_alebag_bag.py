@@ -76,13 +76,16 @@ class DefineAlebagBag(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEALEBAGBAG_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEALEBAGBAG_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEALEBAGBAG_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineAlebagBag.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

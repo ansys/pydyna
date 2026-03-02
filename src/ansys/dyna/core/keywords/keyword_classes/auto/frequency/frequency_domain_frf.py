@@ -86,16 +86,20 @@ class FrequencyDomainFrf(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINFRF_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINFRF_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINFRF_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINFRF_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def n1(self) -> typing.Optional[int]:
         """Get or set the Node / Node set/Segment set ID for excitation input.When VAD1,the excitation type, is set to 1, which is acceleration, this field is ignored.

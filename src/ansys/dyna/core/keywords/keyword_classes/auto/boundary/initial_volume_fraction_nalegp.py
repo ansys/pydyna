@@ -69,13 +69,16 @@ class InitialVolumeFractionNalegp(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALVOLUMEFRACTIONNALEGP_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALVOLUMEFRACTIONNALEGP_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALVOLUMEFRACTIONNALEGP_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nalegp(self) -> typing.Optional[int]:
         """Get or set the Count of volume fractions for each element.

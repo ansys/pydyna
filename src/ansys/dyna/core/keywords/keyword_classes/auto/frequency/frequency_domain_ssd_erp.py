@@ -103,22 +103,28 @@ class FrequencyDomainSsdErp(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSSDERP_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSSDERP_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSSDERP_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSSDERP_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSSDERP_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSSDERP_CARD5,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mdmin(self) -> int:
         """Get or set the The first mode in modal superposition method (optional).

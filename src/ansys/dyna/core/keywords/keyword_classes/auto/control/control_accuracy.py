@@ -51,7 +51,8 @@ class ControlAccuracy(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLACCURACY_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def osu(self) -> int:
         """Get or set the Global flag for 2nd order objective stress update:

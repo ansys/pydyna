@@ -50,7 +50,8 @@ class ControlImplicitModalDynamicModeGenerate(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITMODALDYNAMICMODEGENERATE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def m1beg(self) -> typing.Optional[int]:
         """Get or set the First mode ID in block n.

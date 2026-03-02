@@ -56,7 +56,8 @@ class AleSmoothing(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALESMOOTHING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dnid(self) -> typing.Optional[int]:
         """Get or set the Dependent node or node set ID:

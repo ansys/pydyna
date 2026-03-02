@@ -50,7 +50,8 @@ class ControlImplicitModalDynamicDampingSpecific(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITMODALDYNAMICDAMPINGSPECIFIC_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mid1(self) -> typing.Optional[int]:
         """Get or set the Mode ID.

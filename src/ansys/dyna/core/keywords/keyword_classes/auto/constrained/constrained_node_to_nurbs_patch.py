@@ -55,7 +55,8 @@ class ConstrainedNodeToNurbsPatch(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODETONURBSPATCH_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def patchid(self) -> typing.Optional[int]:
         """Get or set the Patch ID.

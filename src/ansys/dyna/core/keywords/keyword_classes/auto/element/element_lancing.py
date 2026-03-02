@@ -55,7 +55,8 @@ class ElementLancing(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTLANCING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def idpt(self) -> typing.Optional[int]:
         """Get or set the PID of the sheet blank to be lanced, see *PART.

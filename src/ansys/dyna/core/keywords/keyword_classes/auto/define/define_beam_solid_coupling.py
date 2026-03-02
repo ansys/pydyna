@@ -57,7 +57,8 @@ class DefineBeamSolidCoupling(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEBEAMSOLIDCOUPLING_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineBeamSolidCoupling.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

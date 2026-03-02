@@ -57,7 +57,8 @@ class ControlFormingAutopositionParameterPositive(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGAUTOPOSITIONPARAMETERPOSITIVE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID. This part will be moved based on the following controlling parameters.

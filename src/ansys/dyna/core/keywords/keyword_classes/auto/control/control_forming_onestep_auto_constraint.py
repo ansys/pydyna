@@ -46,7 +46,8 @@ class ControlFormingOnestepAutoConstraint(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGONESTEPAUTOCONSTRAINT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def icon(self) -> typing.Optional[int]:
         """Get or set the Automatic nodal constraining option to eliminate the rigid body motion:EQ. 1: Apply.

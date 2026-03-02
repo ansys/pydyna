@@ -64,10 +64,12 @@ class BoundarySphFlow(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYSPHFLOW_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYSPHFLOW_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID (NSID), SEE *SET_NODE, or part ID (PID), see *PART.

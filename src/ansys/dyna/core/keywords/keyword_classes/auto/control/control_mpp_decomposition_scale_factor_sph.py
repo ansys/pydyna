@@ -43,7 +43,8 @@ class ControlMppDecompositionScaleFactorSph(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPDECOMPOSITIONSCALEFACTORSPH_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sf(self) -> typing.Optional[float]:
         """Get or set the Scale factor for SPH elements.

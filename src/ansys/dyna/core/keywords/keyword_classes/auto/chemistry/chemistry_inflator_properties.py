@@ -106,25 +106,32 @@ class ChemistryInflatorProperties(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHEMISTRYINFLATORPROPERTIES_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYINFLATORPROPERTIES_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYINFLATORPROPERTIES_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYINFLATORPROPERTIES_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYINFLATORPROPERTIES_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYINFLATORPROPERTIES_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYINFLATORPROPERTIES_CARD6,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def comp_id(self) -> int:
         """Get or set the Chemical composition identifier of the composition for the steady-state propellant combustion.

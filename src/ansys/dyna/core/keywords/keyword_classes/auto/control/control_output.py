@@ -90,19 +90,24 @@ class ControlOutput(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLOUTPUT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLOUTPUT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLOUTPUT_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLOUTPUT_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLOUTPUT_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def npopt(self) -> int:
         """Get or set the Print suppression during input phase flag for the printed output file:

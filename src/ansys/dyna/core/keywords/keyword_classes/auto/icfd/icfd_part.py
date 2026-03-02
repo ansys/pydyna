@@ -57,7 +57,8 @@ class IcfdPart(KeywordBase):
                 None,
                 name="nodes",
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = IcfdPart.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

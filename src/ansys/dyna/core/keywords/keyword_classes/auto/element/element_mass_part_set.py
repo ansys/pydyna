@@ -49,7 +49,8 @@ class ElementMassPartSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTMASSPARTSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set id, a unique number must be used.

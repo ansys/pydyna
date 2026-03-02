@@ -73,13 +73,16 @@ class DefineCurveTrimNew(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINECURVETRIMNEW_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINECURVETRIMNEW_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINECURVETRIMNEW_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineCurveTrimNew.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

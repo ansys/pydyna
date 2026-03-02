@@ -48,7 +48,8 @@ class EmSolverBem(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMSOLVERBEM_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def reltol(self) -> float:
         """Get or set the Relative tolerance for the iterative solvers (PCG or GMRES). The user should try to decrease this tolerance if the results are not accurate enough. More iterations will then be needed.

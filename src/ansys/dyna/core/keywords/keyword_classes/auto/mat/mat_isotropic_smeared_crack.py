@@ -59,7 +59,8 @@ class MatIsotropicSmearedCrack(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATISOTROPICSMEAREDCRACK_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatIsotropicSmearedCrack.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

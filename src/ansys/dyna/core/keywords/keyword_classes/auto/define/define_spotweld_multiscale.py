@@ -66,7 +66,8 @@ class DefineSpotweldMultiscale(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINESPOTWELDMULTISCALE_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineSpotweldMultiscale.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

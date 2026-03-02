@@ -58,7 +58,8 @@ class MatSpringMaxwell(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATSPRINGMAXWELL_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatSpringMaxwell.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

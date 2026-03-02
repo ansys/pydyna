@@ -44,7 +44,8 @@ class ControlHourglass936(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLHOURGLASS936_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ihq(self) -> typing.Optional[int]:
         """Get or set the Default hourglass viscosity type:

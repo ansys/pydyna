@@ -47,7 +47,8 @@ class AleMulti_MaterialGroupSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALEMULTI_MATERIALGROUPSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part Set ID.

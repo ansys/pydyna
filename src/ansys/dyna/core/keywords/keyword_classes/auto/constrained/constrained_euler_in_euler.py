@@ -50,7 +50,8 @@ class ConstrainedEulerInEuler(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDEULERINEULER_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def psid1(self) -> int:
         """Get or set the Part set ID of the 1st ALE or Eulerian set of mesh(es.

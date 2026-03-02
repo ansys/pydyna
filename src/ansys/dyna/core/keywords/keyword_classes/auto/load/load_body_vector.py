@@ -63,10 +63,12 @@ class LoadBodyVector(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADBODYVECTOR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADBODYVECTOR_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID, see *DEFINE_CURVE.

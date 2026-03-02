@@ -52,7 +52,8 @@ class DatabaseFrequencyAsciiEloutSsd(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEFREQUENCYASCIIELOUTSSD_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def fmin(self) -> float:
         """Get or set the Minimum frequency for output (cycles/time).

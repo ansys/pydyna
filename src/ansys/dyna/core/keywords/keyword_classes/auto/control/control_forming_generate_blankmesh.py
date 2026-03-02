@@ -70,13 +70,16 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGGENERATEBLANKMESH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGGENERATEBLANKMESH_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGGENERATEBLANKMESH_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def gentyp(self) -> typing.Optional[int]:
         """Get or set the EQ.1: Rectangle shape.

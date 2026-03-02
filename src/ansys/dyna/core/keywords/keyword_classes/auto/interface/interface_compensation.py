@@ -60,13 +60,16 @@ class InterfaceCompensation(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATION_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def stage(self) -> int:
         """Get or set the Stage of this simulation in overall process. Stamping and springback must be finished before compensation can be performed.

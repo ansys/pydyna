@@ -48,7 +48,8 @@ class DualceseEle2D(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEELE2D_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID.  Chose a unique number with respect to other elements

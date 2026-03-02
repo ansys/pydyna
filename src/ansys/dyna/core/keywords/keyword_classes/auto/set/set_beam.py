@@ -57,13 +57,15 @@ class SetBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETBEAM_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "element",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("element")),            OptionCardSet(
+                data = kwargs.get("element")),
+            OptionCardSet(
                 option_spec = SetBeam.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

@@ -48,7 +48,8 @@ class BoundarySphNonReflecting(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYSPHNONREFLECTING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def vtx(self) -> typing.Optional[float]:
         """Get or set the x-coordinate of tail of a normal vector originating on the wall

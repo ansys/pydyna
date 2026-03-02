@@ -55,13 +55,15 @@ class DefineTable(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINETABLE_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "points",
                 1,
                 20,
                 float,
                 None,
-                data = kwargs.get("points")),            OptionCardSet(
+                data = kwargs.get("points")),
+            OptionCardSet(
                 option_spec = DefineTable.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

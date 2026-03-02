@@ -72,15 +72,18 @@ class ControlTimestep(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLTIMESTEP_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLTIMESTEP_CARD1,
                 active_func=lambda: self._cards[1].has_nondefault_values() or self._cards[2].active,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLTIMESTEP_CARD2,
                 active_func=lambda: self._cards[2].has_nondefault_values(),
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dtinit(self) -> float:
         """Get or set the Initial time step size:

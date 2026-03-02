@@ -46,7 +46,8 @@ class CeseControlLimiter(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESECONTROLLIMITER_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def idlmt(self) -> int:
         """Get or set the Set the stability limiter option (See CESE theory manual):

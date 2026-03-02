@@ -65,7 +65,8 @@ class DefineElementDeathThickShell(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEELEMENTDEATHTHICKSHELL_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineElementDeathThickShell.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

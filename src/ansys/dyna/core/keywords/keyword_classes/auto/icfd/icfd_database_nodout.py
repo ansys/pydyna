@@ -55,10 +55,12 @@ class IcfdDatabaseNodout(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDATABASENODOUT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDDATABASENODOUT_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def outlv(self) -> int:
         """Get or set the Determines if the output file should be dumped.

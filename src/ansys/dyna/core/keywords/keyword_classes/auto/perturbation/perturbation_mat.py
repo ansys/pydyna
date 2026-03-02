@@ -91,25 +91,32 @@ class PerturbationMat(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PERTURBATIONMAT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PERTURBATIONMAT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PERTURBATIONMAT_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PERTURBATIONMAT_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PERTURBATIONMAT_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PERTURBATIONMAT_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PERTURBATIONMAT_CARD6,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def type(self) -> int:
         """Get or set the Type of perturbation.

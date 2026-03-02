@@ -57,13 +57,15 @@ class SetBeamIntersect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETBEAMINTERSECT_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "beams",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("beams")),            OptionCardSet(
+                data = kwargs.get("beams")),
+            OptionCardSet(
                 option_spec = SetBeamIntersect.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

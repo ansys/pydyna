@@ -72,11 +72,13 @@ class SectionSolid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SECTIONSOLID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONSOLID_CARD1,
                 active_func=lambda: self.elform in [101, 102, 103, 104, 105],
                 **kwargs,
-            ),            TableCard(
+            ),
+            TableCard(
                 [
                     Field("xi", float, 0, 10, None),
                     Field("eta", float, 10, 10, None),
@@ -87,14 +89,16 @@ class SectionSolid(KeywordBase):
                 lambda: self.nip and self.elform in [101, 102, 103, 104, 105],
                 name="integration_points",
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "pi",
                 8,
                 10,
                 float,
                 lambda: self.lmc,
                 lambda: self.elform in [101, 102, 103, 104, 105],
-                data = kwargs.get("pi")),            OptionCardSet(
+                data = kwargs.get("pi")),
+            OptionCardSet(
                 option_spec = SectionSolid.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

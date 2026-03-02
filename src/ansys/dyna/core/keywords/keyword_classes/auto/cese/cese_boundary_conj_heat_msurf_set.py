@@ -43,7 +43,8 @@ class CeseBoundaryConjHeatMsurfSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYCONJHEATMSURFSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def msurf_s(self) -> typing.Optional[int]:
         """Get or set the Identifier of a set of mesh surface part IDs created with an *LSO_ID_SET card.

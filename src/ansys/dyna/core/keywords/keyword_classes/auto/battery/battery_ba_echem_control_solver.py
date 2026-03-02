@@ -58,10 +58,12 @@ class BatteryBaEchemControlSolver(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BATTERYBAECHEMCONTROLSOLVER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BATTERYBAECHEMCONTROLSOLVER_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def imodel(self) -> typing.Optional[int]:
         """Get or set the Sets the battery model.

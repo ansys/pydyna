@@ -96,19 +96,24 @@ class ControlImplicitNonlinear(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITNONLINEAR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITNONLINEAR_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITNONLINEAR_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITNONLINEAR_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITNONLINEAR_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsolvr(self) -> int:
         """Get or set the Solution method for implicit analysis:

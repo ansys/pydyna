@@ -130,25 +130,32 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATLOU_YOONANISOTROPICPLASTICTIY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLOU_YOONANISOTROPICPLASTICTIY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLOU_YOONANISOTROPICPLASTICTIY_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLOU_YOONANISOTROPICPLASTICTIY_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLOU_YOONANISOTROPICPLASTICTIY_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLOU_YOONANISOTROPICPLASTICTIY_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLOU_YOONANISOTROPICPLASTICTIY_CARD6,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatLou_YoonAnisotropicPlastictiy.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

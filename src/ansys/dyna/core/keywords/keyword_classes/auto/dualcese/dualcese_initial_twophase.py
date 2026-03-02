@@ -54,10 +54,12 @@ class DualceseInitialTwophase(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEINITIALTWOPHASE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DUALCESEINITIALTWOPHASE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def z1(self) -> typing.Optional[float]:
         """Get or set the Volume fraction of material 1 (or color function).This is usually a value of 0 or 1. For numerical stability, however, use a very small value instead of zero

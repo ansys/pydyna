@@ -96,16 +96,20 @@ class MatSimplifiedRubberFoamLogLogInterpolationWithFailure(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_CARD3,
                 **kwargs,
-            ),            TableCard(
+            ),
+            TableCard(
                 [
                     Field("gi", float, 0, 10, None),
                     Field("betai", float, 10, 10, None),
@@ -114,7 +118,8 @@ class MatSimplifiedRubberFoamLogLogInterpolationWithFailure(KeywordBase):
                 None,
                 name="constants",
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatSimplifiedRubberFoamLogLogInterpolationWithFailure.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

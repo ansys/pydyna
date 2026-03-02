@@ -55,10 +55,12 @@ class InitialFoamReferenceGeometryRamp(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALFOAMREFERENCEGEOMETRYRAMP_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALFOAMREFERENCEGEOMETRYRAMP_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ndtrrg(self) -> typing.Optional[int]:
         """Get or set the Number of time steps taken for an element to restore its reference geometry.  Definition of NDTRRG allows an element to ramp up to its reference shape in NDTRRG time steps.  Currently ls-dynauses only one NDTRRG and applies it to all foam materials with reference geometries. If more than one NDTRRG is defined, the latter defined one will replace the previously define one.

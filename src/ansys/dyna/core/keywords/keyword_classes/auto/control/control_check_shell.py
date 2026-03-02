@@ -49,7 +49,8 @@ class ControlCheckShell(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLCHECKSHELL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> int:
         """Get or set the Part ID to be checked:

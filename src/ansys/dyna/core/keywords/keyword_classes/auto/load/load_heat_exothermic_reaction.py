@@ -95,19 +95,24 @@ class LoadHeatExothermicReaction(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADHEATEXOTHERMICREACTION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADHEATEXOTHERMICREACTION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADHEATEXOTHERMICREACTION_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADHEATEXOTHERMICREACTION_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADHEATEXOTHERMICREACTION_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def hsid(self) -> typing.Optional[int]:
         """Get or set the Heat Source ID.

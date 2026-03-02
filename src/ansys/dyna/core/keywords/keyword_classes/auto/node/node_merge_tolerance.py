@@ -43,7 +43,8 @@ class NodeMergeTolerance(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _NODEMERGETOLERANCE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def tolr(self) -> typing.Optional[float]:
         """Get or set the Physical distance used to determine whether to merge a nodal pair of	nearby nodes.

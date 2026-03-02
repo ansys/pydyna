@@ -45,7 +45,8 @@ class ControlFormingUnflangingOutput(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGUNFLANGINGOUTPUT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def thmx(self) -> float:
         """Get or set the Maximum thickness beyond which elements are deleted; this is

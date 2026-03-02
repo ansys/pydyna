@@ -59,7 +59,8 @@ class SensorSwitchCalc_Logic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SENSORSWITCHCALC_LOGIC_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = SensorSwitchCalc_Logic.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

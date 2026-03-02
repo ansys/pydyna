@@ -43,7 +43,8 @@ class InterfaceCompensationNewPartChange(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATIONNEWPARTCHANGE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def maxgap(self) -> typing.Optional[float]:
         """Get or set the Maximum gap between the original part and changed part

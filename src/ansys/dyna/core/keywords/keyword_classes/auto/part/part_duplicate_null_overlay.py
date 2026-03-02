@@ -49,7 +49,8 @@ class PartDuplicateNullOverlay(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARTDUPLICATENULLOVERLAY_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ptype(self) -> str:
         """Get or set the Set to "PART" to duplicate a single part or "PSET" to duplicate a part set.

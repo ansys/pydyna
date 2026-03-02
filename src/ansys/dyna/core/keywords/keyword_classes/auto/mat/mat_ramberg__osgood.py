@@ -58,7 +58,8 @@ class MatRamberg_Osgood(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATRAMBERG_OSGOOD_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatRamberg_Osgood.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

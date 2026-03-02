@@ -49,7 +49,8 @@ class ControlThermalNonlinear(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLTHERMALNONLINEAR_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def refmax(self) -> int:
         """Get or set the Maximum number of matrix reformations per time step (default = 10)

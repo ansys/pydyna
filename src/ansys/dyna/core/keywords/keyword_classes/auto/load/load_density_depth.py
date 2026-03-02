@@ -52,7 +52,8 @@ class LoadDensityDepth(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADDENSITYDEPTH_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def psid(self) -> int:
         """Get or set the Part set ID, see *SET_PART.

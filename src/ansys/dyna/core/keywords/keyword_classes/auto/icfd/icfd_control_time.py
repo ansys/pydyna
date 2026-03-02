@@ -63,13 +63,16 @@ class IcfdControlTime(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLTIME_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLTIME_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLTIME_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ttm(self) -> float:
         """Get or set the Total time of simulation for the fluid problem.

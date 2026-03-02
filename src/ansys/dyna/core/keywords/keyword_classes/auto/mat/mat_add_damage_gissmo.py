@@ -85,13 +85,16 @@ class MatAddDamageGissmo(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATADDDAMAGEGISSMO_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDDAMAGEGISSMO_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDDAMAGEGISSMO_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatAddDamageGissmo.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

@@ -43,7 +43,8 @@ class IcfdControlPartition(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLPARTITION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ptech(self) -> int:
         """Get or set the Indicates the type of partition.

@@ -68,19 +68,24 @@ class Iga1DNurbsUvw(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _IGA1DNURBSUVW_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _IGA1DNURBSUVW_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _IGA1DNURBSUVW_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _IGA1DNURBSUVW_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _IGA1DNURBSUVW_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Parametric univariate NURBS ID. A unique number must be chosen.

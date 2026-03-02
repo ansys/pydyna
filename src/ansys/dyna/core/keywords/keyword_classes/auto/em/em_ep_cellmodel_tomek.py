@@ -45,7 +45,8 @@ class EmEpCellmodelTomek(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELTOMEK_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def matid(self) -> typing.Optional[int]:
         """Get or set the Material ID: refers to MID in the *PART card

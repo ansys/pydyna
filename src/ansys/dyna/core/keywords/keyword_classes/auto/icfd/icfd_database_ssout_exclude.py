@@ -47,7 +47,8 @@ class IcfdDatabaseSsoutExclude(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDATABASESSOUTEXCLUDE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssoutid(self) -> typing.Optional[int]:
         """Get or set the Segment Set ID of the solid mechanics problem which is to be excluded from the output of the fluid forces on the solid boundaries.

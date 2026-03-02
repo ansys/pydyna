@@ -44,7 +44,8 @@ class DatabaseHistorySeatbeltId(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEHISTORYSEATBELTID_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the ID of the SEATBELT.

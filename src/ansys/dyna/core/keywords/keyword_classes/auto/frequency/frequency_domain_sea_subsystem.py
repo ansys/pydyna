@@ -138,28 +138,36 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSEASUBSYSTEM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSEASUBSYSTEM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSEASUBSYSTEM_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSEASUBSYSTEM_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSEASUBSYSTEM_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSEASUBSYSTEM_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSEASUBSYSTEM_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSEASUBSYSTEM_CARD7,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def fmin(self) -> typing.Optional[float]:
         """Get or set the Minimum frequency for SEA output (cycles/time).

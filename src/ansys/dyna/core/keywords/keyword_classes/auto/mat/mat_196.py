@@ -69,7 +69,8 @@ class Mat196(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT196_CARD0,
                 **kwargs,
-            ),            TableCardGroup(
+            ),
+            TableCardGroup(
                 [
                     (
                         FieldSchema("dof", int, 0, 10, None),
@@ -92,7 +93,8 @@ class Mat196(KeywordBase):
                 None,
                 "springs",
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = Mat196.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

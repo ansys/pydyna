@@ -42,4 +42,5 @@ class ChangeRigidwallGeometric(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHANGERIGIDWALLGEOMETRIC_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

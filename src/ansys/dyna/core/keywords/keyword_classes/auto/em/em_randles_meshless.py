@@ -90,22 +90,28 @@ class EmRandlesMeshless(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMRANDLESMESHLESS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMRANDLESMESHLESS_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMRANDLESMESHLESS_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMRANDLESMESHLESS_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMRANDLESMESHLESS_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMRANDLESMESHLESS_CARD5,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def rdlid(self) -> typing.Optional[int]:
         """Get or set the Id of the Randles Cell.

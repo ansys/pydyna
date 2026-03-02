@@ -81,19 +81,24 @@ class AleMapping(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALEMAPPING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEMAPPING_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEMAPPING_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEMAPPING_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEMAPPING_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ammsid(self) -> typing.Optional[int]:
         """Get or set the Set ID of ALE multi-material groups defined in *SET_‌MULTI-MATERIAL_‌GROUP. See Remark 3.

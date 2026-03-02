@@ -86,13 +86,16 @@ class DefineConnectionProperties(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINECONNECTIONPROPERTIES_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINECONNECTIONPROPERTIES_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINECONNECTIONPROPERTIES_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineConnectionProperties.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

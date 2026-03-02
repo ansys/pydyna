@@ -44,7 +44,8 @@ class ParameterExpressionNoecho(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARAMETEREXPRESSIONNOECHO_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def prmr(self) -> typing.Optional[str]:
         """Get or set the Define the nth parameter in a field of 10.  Within this field the first character must be either an R for a real number or an I for an integer.  Lower or upper case for I or R is okay.  Following the type designation, define the name of the parameter using up to, but not exceeding seven characters.  For example, when defining a shell thickness named, SHLTHK, both inputs RSHLTHK or R   SHLTHK can be used and placed anywhere in the field of 10

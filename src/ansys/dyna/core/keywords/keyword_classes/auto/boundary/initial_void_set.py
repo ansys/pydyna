@@ -47,7 +47,8 @@ class InitialVoidSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALVOIDSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set ID, see also *SET_PART.

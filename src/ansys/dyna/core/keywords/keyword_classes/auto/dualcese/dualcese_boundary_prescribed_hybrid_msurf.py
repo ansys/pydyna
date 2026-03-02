@@ -79,19 +79,24 @@ class DualceseBoundaryPrescribedHybridMsurf(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYPRESCRIBEDHYBRIDMSURF_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYPRESCRIBEDHYBRIDMSURF_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYPRESCRIBEDHYBRIDMSURF_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYPRESCRIBEDHYBRIDMSURF_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYPRESCRIBEDHYBRIDMSURF_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mspid(self) -> typing.Optional[int]:
         """Get or set the Mesh surface part ID that is referenced by *MESH_SURFACE_ELEMENT cards

@@ -55,10 +55,12 @@ class ControlSegmentsInAleCoupling(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLSEGMENTSINALECOUPLING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLSEGMENTSINALECOUPLING_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def rankey(self) -> int:
         """Get or set the Rank of *CONSTRAINED_LAGRANGE_IN_SOLID in the input deck. (see Remark 2).

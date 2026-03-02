@@ -49,10 +49,12 @@ class IgaIncludeBezier(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _IGAINCLUDEBEZIER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _IGAINCLUDEBEZIER_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Name of the file to be included;

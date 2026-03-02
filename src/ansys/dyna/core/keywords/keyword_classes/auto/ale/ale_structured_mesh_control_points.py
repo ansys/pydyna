@@ -51,7 +51,8 @@ class AleStructuredMeshControlPoints(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALESTRUCTUREDMESHCONTROLPOINTS_CARD0,
                 **kwargs,
-            ),            TableCard(
+            ),
+            TableCard(
                 [
                     Field("n", int, 0, 20, 0),
                     Field("x", float, 20, 20, None),
@@ -60,7 +61,8 @@ class AleStructuredMeshControlPoints(KeywordBase):
                 None,
                 name="control_points",
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cpid(self) -> int:
         """Get or set the Control Points ID. A unique number must be specified. This ID is to be

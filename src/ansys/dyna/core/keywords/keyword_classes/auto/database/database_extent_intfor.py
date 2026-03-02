@@ -59,10 +59,12 @@ class DatabaseExtentIntfor(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEEXTENTINTFOR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASEEXTENTINTFOR_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nglbv(self) -> int:
         """Get or set the Output option for global variables

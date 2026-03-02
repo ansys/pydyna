@@ -54,10 +54,12 @@ class Iga2DBrep(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _IGA2DBREP_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _IGA2DBREP_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def brid(self) -> typing.Optional[int]:
         """Get or set the Two-dimensional boundary representation ID. A unique number must be chosen.

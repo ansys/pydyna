@@ -131,28 +131,36 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATLAMINATEDFRACTUREDAIMLERCAMANHO_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLAMINATEDFRACTUREDAIMLERCAMANHO_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLAMINATEDFRACTUREDAIMLERCAMANHO_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLAMINATEDFRACTUREDAIMLERCAMANHO_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLAMINATEDFRACTUREDAIMLERCAMANHO_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLAMINATEDFRACTUREDAIMLERCAMANHO_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLAMINATEDFRACTUREDAIMLERCAMANHO_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLAMINATEDFRACTUREDAIMLERCAMANHO_CARD7,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatLaminatedFractureDaimlerCamanho.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

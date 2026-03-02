@@ -43,7 +43,8 @@ class FrequencyDomainPathNojobid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINPATHNOJOBID_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Path and name of the file which contains modal information.

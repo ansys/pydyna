@@ -72,16 +72,20 @@ class PartRepositionAttachmentNodes(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARTREPOSITIONATTACHMENTNODES_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTREPOSITIONATTACHMENTNODES_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTREPOSITIONATTACHMENTNODES_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTREPOSITIONATTACHMENTNODES_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Heading for the part.

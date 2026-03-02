@@ -84,16 +84,20 @@ class ElementShellThicknessMcidOffset(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLTHICKNESSMCIDOFFSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLTHICKNESSMCIDOFFSET_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLTHICKNESSMCIDOFFSET_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLTHICKNESSMCIDOFFSET_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number has to be used.

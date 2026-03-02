@@ -61,7 +61,8 @@ class DefineControlVolumeFlowArea(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINECONTROLVOLUMEFLOWAREA_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineControlVolumeFlowArea.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

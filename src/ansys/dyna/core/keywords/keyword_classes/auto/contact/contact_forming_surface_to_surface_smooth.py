@@ -182,13 +182,16 @@ class ContactFormingSurfaceToSurfaceSmooth(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACTFORMINGSURFACETOSURFACESMOOTH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTFORMINGSURFACETOSURFACESMOOTH_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTFORMINGSURFACETOSURFACESMOOTH_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = ContactFormingSurfaceToSurfaceSmooth.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
