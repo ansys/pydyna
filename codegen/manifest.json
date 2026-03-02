@@ -847,7 +847,7 @@
                     "name": "angle",
                     "card-size": 8,
                     "element-width": 10,
-                    "length-func": "self.nip",
+                    "length-func": "2 if self.nip == 0 else self.nip",
                     "active-func": "self.icomp == 1",
                     "type": "float",
                     "help": "dynamic array of beta-i: material angle at ith-integration point.",

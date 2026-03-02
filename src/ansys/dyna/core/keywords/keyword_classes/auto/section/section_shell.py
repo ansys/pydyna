@@ -86,7 +86,7 @@ class SectionShellCardSet(Cards):
                 8,
                 10,
                 float,
-                lambda: self.nip,
+                lambda: 2 if self.nip == 0 else self.nip,
                 lambda: self.icomp == 1,
                 data = kwargs.get("angle")),            Card.from_field_schemas_with_defaults(
                 _SECTIONSHELLCARDSET_CARD3,
