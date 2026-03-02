@@ -45,6 +45,9 @@ LSDYNA_FUNCTIONS = {
     "sin": math.sin,
     "cos": math.cos,
     "tan": math.tan,
+    "csc": lambda x: 1.0 / math.sin(x),  # cosecant = 1/sin(x)
+    "sec": lambda x: 1.0 / math.cos(x),  # secant = 1/cos(x)
+    "ctn": lambda x: math.cos(x) / math.sin(x),  # cotangent = cos(x)/sin(x)
     "asin": math.asin,
     "acos": math.acos,
     "atan": math.atan,
@@ -59,19 +62,21 @@ LSDYNA_FUNCTIONS = {
     # Other math functions
     "sqrt": math.sqrt,
     "abs": abs,
-    "sign": lambda x: 1 if x > 0 else (-1 if x < 0 else 0),
+    "sign": lambda x, y: abs(x) * (1 if y >= 0 else -1),  # sign(x,y): abs(x) with sign of y
     "exp": math.exp,
     "log": math.log,
     "log10": math.log10,
     "min": min,
     "max": max,
-    "mod": lambda x, y: x % y,
+    "mod": lambda x, y: int(round(x)) % int(round(y)),  # mod rounds real arguments
     # Type conversion functions
+    "int": int,  # Truncate toward zero, return integer
+    "float": float,  # Convert to real
     "LS_INTEGER": int,
     "LS_REAL": float,
     "aint": lambda x: float(int(x)),  # Truncate to integer, return as float
-    "nint": lambda x: float(round(x)),  # Round to nearest integer, return as float
-    "anint": lambda x: float(round(x)),  # Same as nint
+    "nint": lambda x: int(round(x)),  # Round to nearest integer, return as integer
+    "anint": lambda x: float(round(x)),  # Round to nearest integer, return as float
 }
 
 
@@ -105,7 +110,8 @@ class ExpressionEvaluator:
         Returns
         -------
         int or float
-            Evaluated result with type matching param_type.
+            Evaluated result with type matching param_type, unless overridden by
+            type-preserving functions like int() or nint().
 
         Raises
         ------
@@ -129,18 +135,28 @@ class ExpressionEvaluator:
         try:
             tree = ast.parse(expression_with_values, mode="eval")
             result = self._eval_node(tree.body)
-            logger.debug(f"Evaluation result: {result}")
+            logger.debug(f"Evaluation result: {result} (type: {type(result).__name__})")
         except Exception as e:
             logger.error(f"Failed to evaluate expression '{expression}': {e}", exc_info=True)
             raise ValueError(f"Invalid expression '{expression}': {e}") from e
 
-        # Convert to appropriate type
+        # Respect the type of the result if it came from a type-preserving function
+        # int() and nint() return int, aint() and anint() return float
+        # These should not be overridden by the param_type prefix
+        actual_type = type(result)
+
+        # Only convert if the result type doesn't already match or exceed param_type precision
         if param_type == "I":
-            result = int(result)
-            logger.debug(f"Converted to integer: {result}")
+            # For integer type, respect if already int
+            if actual_type is not int:
+                result = int(result)
+                logger.debug(f"Converted to integer: {result}")
         elif param_type == "R":
-            result = float(result)
-            logger.debug(f"Converted to float: {result}")
+            # For real type, respect if already int (from int() or nint())
+            # Only convert if it's something else like bool
+            if actual_type is not int and actual_type is not float:
+                result = float(result)
+                logger.debug(f"Converted to float: {result}")
         else:
             raise ValueError(f"Unknown parameter type: {param_type}")
 
@@ -149,7 +165,7 @@ class ExpressionEvaluator:
     def _replace_parameter_references(self, expression: str) -> str:
         """Replace parameter references with numeric values.
 
-        Handles: 'param', '&param', '-&param'. Preserves function names.
+        Handles: 'param', '&param', '-&param'. Preserves function names and pi constant.
 
         Parameters
         ----------
@@ -177,6 +193,15 @@ class ExpressionEvaluator:
             minus = match.group(1)
             ampersand = match.group(2)  # noqa: F841
             param_name = match.group(3)
+
+            # Check if this is the pi constant
+            if param_name.lower() == "pi":
+                # Replace pi with math.pi
+                logger.debug(f"Replacing 'pi' constant with {math.pi}")
+                if minus:
+                    return f"(-{math.pi})"
+                else:
+                    return str(math.pi)
 
             # Check if this is actually a function name
             if param_name in LSDYNA_FUNCTIONS:
