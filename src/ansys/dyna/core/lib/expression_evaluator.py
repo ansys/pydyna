@@ -196,12 +196,10 @@ class ExpressionEvaluator:
 
             # Check if this is the pi constant
             if param_name.lower() == "pi":
-                # Replace pi with math.pi
-                logger.debug(f"Replacing 'pi' constant with {math.pi}")
-                if minus:
-                    return f"(-{math.pi})"
-                else:
-                    return str(math.pi)
+                # Replace 'pi' with its numeric value
+                value = -math.pi if minus else math.pi
+                logger.debug(f"Replacing 'pi' constant with {value}")
+                return str(value)
 
             # Check if this is actually a function name
             if param_name in LSDYNA_FUNCTIONS:
