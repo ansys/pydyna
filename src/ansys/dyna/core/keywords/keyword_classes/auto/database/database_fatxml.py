@@ -43,7 +43,8 @@ class DatabaseFatxml(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEFATXML_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def xml(self) -> typing.Optional[str]:
         """Get or set the xml data.

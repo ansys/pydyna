@@ -52,10 +52,12 @@ class LoadSegmentFile(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADSEGMENTFILE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSEGMENTFILE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Filename of the interface linking file

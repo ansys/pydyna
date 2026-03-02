@@ -122,31 +122,40 @@ class MatRateSensitiveCompositeFabric(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATRATESENSITIVECOMPOSITEFABRIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATRATESENSITIVECOMPOSITEFABRIC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATRATESENSITIVECOMPOSITEFABRIC_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATRATESENSITIVECOMPOSITEFABRIC_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATRATESENSITIVECOMPOSITEFABRIC_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATRATESENSITIVECOMPOSITEFABRIC_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATRATESENSITIVECOMPOSITEFABRIC_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATRATESENSITIVECOMPOSITEFABRIC_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATRATESENSITIVECOMPOSITEFABRIC_CARD8,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatRateSensitiveCompositeFabric.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

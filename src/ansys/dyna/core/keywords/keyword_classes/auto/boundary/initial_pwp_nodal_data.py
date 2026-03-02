@@ -59,10 +59,12 @@ class InitialPwpNodalData(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALPWPNODALDATA_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALPWPNODALDATA_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID.

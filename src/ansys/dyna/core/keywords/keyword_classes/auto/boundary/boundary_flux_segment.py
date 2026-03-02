@@ -76,13 +76,16 @@ class BoundaryFluxSegment(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYFLUXSEGMENT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYFLUXSEGMENT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYFLUXSEGMENT_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def n1(self) -> typing.Optional[int]:
         """Get or set the First node ID defining the segment.

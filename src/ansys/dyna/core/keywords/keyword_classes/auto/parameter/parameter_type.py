@@ -45,7 +45,8 @@ class ParameterType(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARAMETERTYPE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def prmr(self) -> typing.Optional[str]:
         """Get or set the Define the nth parameter in a field of 10.

@@ -62,10 +62,12 @@ class BoundaryRadiationSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYRADIATIONSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYRADIATIONSET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see also *SET_SEGMENT.

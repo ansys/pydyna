@@ -61,11 +61,13 @@ class ControlImplicitAuto(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITAUTO_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITAUTO_CARD1,
                 active_func=lambda: self.iauto == 3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def iauto(self) -> int:
         """Get or set the Automatic time step control flag

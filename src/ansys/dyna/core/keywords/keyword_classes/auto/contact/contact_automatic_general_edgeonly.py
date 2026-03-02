@@ -182,13 +182,16 @@ class ContactAutomaticGeneralEdgeonly(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACTAUTOMATICGENERALEDGEONLY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTAUTOMATICGENERALEDGEONLY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTAUTOMATICGENERALEDGEONLY_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = ContactAutomaticGeneralEdgeonly.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

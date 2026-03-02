@@ -69,13 +69,16 @@ class ControlThermalSolver(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLTHERMALSOLVER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLTHERMALSOLVER_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLTHERMALSOLVER_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def atype(self) -> int:
         """Get or set the Thermal analysis type:

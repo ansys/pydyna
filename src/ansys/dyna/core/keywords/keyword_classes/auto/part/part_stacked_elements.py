@@ -68,13 +68,16 @@ class PartStackedElements(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARTSTACKEDELEMENTS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTSTACKEDELEMENTS_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTSTACKEDELEMENTS_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Enter title for the datacard.

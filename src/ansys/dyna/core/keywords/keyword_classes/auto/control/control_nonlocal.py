@@ -43,7 +43,8 @@ class ControlNonlocal(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLNONLOCAL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mem(self) -> typing.Optional[int]:
         """Get or set the Percentage increase of memory allocated for MAT_NONLOCAL option over that required initially. This is for additional storage that may be required due to geometry changes as the calculation proceeds. Generally, a value of 10 should be sufficient.

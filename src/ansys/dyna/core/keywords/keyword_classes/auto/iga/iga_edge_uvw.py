@@ -48,7 +48,8 @@ class IgaEdgeUvw(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _IGAEDGEUVW_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Parametric edge ID. A unique number must be chosen.

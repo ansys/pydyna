@@ -50,7 +50,8 @@ class InterfaceCompensation3DFlange(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATION3DFLANGE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the The part ID of the flanging steel to be compensated

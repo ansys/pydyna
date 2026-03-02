@@ -68,13 +68,16 @@ class Eos002Afterburn(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EOS002AFTERBURN_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOS002AFTERBURN_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOS002AFTERBURN_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state ID.

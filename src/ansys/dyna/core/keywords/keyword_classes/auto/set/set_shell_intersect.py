@@ -53,13 +53,15 @@ class SetShellIntersect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETSHELLINTERSECT_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "shells",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("shells")),            OptionCardSet(
+                data = kwargs.get("shells")),
+            OptionCardSet(
                 option_spec = SetShellIntersect.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

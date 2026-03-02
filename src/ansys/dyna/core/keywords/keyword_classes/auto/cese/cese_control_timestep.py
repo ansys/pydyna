@@ -45,7 +45,8 @@ class CeseControlTimestep(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESECONTROLTIMESTEP_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def iddt(self) -> int:
         """Get or set the Set the time step option:

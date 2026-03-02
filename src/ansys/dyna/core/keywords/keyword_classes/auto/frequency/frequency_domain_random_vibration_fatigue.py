@@ -137,31 +137,40 @@ class FrequencyDomainRandomVibrationFatigue(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRANDOMVIBRATIONFATIGUE_CARD8,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mdmin(self) -> int:
         """Get or set the The first mode in modal superposition method (optional).

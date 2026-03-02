@@ -55,7 +55,8 @@ class EmContact(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCONTACT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def contid(self) -> typing.Optional[int]:
         """Get or set the Electromagnetic contact ID.

@@ -65,13 +65,16 @@ class PartPrint(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARTPRINT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTPRINT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTPRINT_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Heading for the part.

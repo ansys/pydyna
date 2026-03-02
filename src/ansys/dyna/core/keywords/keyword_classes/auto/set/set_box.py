@@ -58,13 +58,15 @@ class SetBox(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETBOX_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "box",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("box")),            OptionCardSet(
+                data = kwargs.get("box")),
+            OptionCardSet(
                 option_spec = SetBox.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

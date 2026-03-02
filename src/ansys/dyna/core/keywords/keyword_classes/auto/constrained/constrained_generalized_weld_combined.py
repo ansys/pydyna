@@ -58,10 +58,12 @@ class ConstrainedGeneralizedWeldCombined(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDGENERALIZEDWELDCOMBINED_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDGENERALIZEDWELDCOMBINED_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def wid(self) -> typing.Optional[int]:
         """Get or set the Optional weld ID

@@ -60,10 +60,12 @@ class LoadExpansionPressure(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADEXPANSIONPRESSURE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADEXPANSIONPRESSURE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID which specifies the interior of the chamber. As the edge moves, the pressure is applied or could be applied to these segments.

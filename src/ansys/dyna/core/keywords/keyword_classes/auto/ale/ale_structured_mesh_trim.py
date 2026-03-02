@@ -54,7 +54,8 @@ class AleStructuredMeshTrim(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALESTRUCTUREDMESHTRIM_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mshid(self) -> int:
         """Get or set the S-ALE Mesh ID. The ID of the Structured ALE mesh to be trimed/un-trimed.

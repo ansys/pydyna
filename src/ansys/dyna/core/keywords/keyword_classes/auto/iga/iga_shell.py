@@ -54,7 +54,8 @@ class IgaShell(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _IGASHELL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Isogeometric shell (patch) ID, see Remark 1 and Remark 2. A unique number must be chosen.

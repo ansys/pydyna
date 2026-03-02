@@ -54,10 +54,12 @@ class ConstrainedLinearGlobal(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLINEARGLOBAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLINEARGLOBAL_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def licd(self) -> typing.Optional[int]:
         """Get or set the Linear constraint definition ID. This ID can be used to identify a set to which this constraint is a member.

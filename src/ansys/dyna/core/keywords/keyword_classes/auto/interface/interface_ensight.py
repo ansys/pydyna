@@ -53,10 +53,12 @@ class InterfaceEnsight(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACEENSIGHT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACEENSIGHT_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nset(self) -> typing.Optional[int]:
         """Get or set the Set of node in ls-dyna input deck, which contains all nodes to be subject to transient loading mapped from the following Ensight-formatted geometry file and loading files.

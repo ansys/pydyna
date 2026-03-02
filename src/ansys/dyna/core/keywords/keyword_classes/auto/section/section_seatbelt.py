@@ -54,7 +54,8 @@ class SectionSeatbelt(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SECTIONSEATBELT_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = SectionSeatbelt.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

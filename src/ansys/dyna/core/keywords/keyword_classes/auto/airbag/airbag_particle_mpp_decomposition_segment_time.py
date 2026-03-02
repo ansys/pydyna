@@ -196,52 +196,68 @@ class AirbagParticleMppDecompositionSegmentTime(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENTTIME_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENTTIME_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENTTIME_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENTTIME_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENTTIME_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENTTIME_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENTTIME_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENTTIME_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENTTIME_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENTTIME_CARD9,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENTTIME_CARD10,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENTTIME_CARD11,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENTTIME_CARD12,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENTTIME_CARD13,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENTTIME_CARD14,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONSEGMENTTIME_CARD15,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sx(self) -> typing.Optional[float]:
         """Get or set the Scale factor for X direction use for MPP decomposition of particle domain.

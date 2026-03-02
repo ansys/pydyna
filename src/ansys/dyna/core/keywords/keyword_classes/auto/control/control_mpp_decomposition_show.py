@@ -42,4 +42,5 @@ class ControlMppDecompositionShow(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPDECOMPOSITIONSHOW_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

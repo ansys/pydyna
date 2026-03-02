@@ -58,10 +58,12 @@ class LoadBlastClearing(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADBLASTCLEARING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADBLASTCLEARING_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def bid(self) -> typing.Optional[int]:
         """Get or set the Blast source ID .

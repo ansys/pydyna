@@ -61,10 +61,12 @@ class LoadSuperplasticForming(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADSUPERPLASTICFORMING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSUPERPLASTICFORMING_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def lcp1(self) -> typing.Optional[int]:
         """Get or set the Load curve number for Phase I pressure loading, see *DEFINE_CURVE.

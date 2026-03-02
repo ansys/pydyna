@@ -51,7 +51,8 @@ class LoadFaceUvwSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADFACEUVWSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def fid(self) -> typing.Optional[int]:
         """Get or set the Parametric face set ID for the SET keyword option; see *SET_IGA_FACE_UVW (see Remark 1)

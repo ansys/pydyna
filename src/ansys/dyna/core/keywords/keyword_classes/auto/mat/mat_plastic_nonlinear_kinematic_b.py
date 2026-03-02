@@ -67,10 +67,12 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATPLASTICNONLINEARKINEMATICB_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPLASTICNONLINEARKINEMATICB_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatPlasticNonlinearKinematicB.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

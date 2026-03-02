@@ -43,7 +43,8 @@ class ControlCrMppDecompositionDeformedGeometry(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLCRMPPDECOMPOSITIONDEFORMEDGEOMETRY_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sph(self) -> typing.Optional[int]:
         """Get or set the Flag for inclusion of inactive SPH elements:

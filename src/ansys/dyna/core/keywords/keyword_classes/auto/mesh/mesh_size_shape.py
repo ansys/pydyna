@@ -76,16 +76,20 @@ class MeshSizeShape(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MESHSIZESHAPE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MESHSIZESHAPE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MESHSIZESHAPE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MESHSIZESHAPE_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sname(self) -> str:
         """Get or set the Shape name. Possibilities include  box,  cylinder,  pol and  sphere

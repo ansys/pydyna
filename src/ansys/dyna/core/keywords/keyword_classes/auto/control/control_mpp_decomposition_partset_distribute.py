@@ -61,7 +61,8 @@ class ControlMppDecompositionPartsetDistribute(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPDECOMPOSITIONPARTSETDISTRIBUTE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the Part set ID to be distributed.. All parts in ID1 will be shared across all

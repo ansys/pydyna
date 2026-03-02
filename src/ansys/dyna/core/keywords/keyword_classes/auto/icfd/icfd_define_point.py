@@ -71,13 +71,16 @@ class IcfdDefinePoint(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDEFINEPOINT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDDEFINEPOINT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDDEFINEPOINT_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def poid(self) -> typing.Optional[int]:
         """Get or set the Point ID.

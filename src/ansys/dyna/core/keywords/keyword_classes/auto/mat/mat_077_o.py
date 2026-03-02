@@ -105,23 +105,28 @@ class Mat077O(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT077O_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT077O_CARD1,
                 active_func=lambda: self.pr and self.pr < 0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT077O_CARD2,
                 active_func=lambda: self.n > 0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT077O_CARD3,
                 active_func=lambda: self.n == 0 or self.n == -1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT077O_CARD4,
                 active_func=lambda: self.n == 0 or self.n == -1,
                 **kwargs,
-            ),            TableCard(
+            ),
+            TableCard(
                 [
                     Field("gi", float, 0, 10, None),
                     Field("betai", float, 10, 10, None),
@@ -130,7 +135,8 @@ class Mat077O(KeywordBase):
                 None,
                 name="constants",
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = Mat077O.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

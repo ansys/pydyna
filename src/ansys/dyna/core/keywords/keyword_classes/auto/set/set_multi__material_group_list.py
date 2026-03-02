@@ -63,10 +63,12 @@ class SetMulti_MaterialGroupList(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETMULTI_MATERIALGROUPLIST_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETMULTI_MATERIALGROUPLIST_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = SetMulti_MaterialGroupList.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

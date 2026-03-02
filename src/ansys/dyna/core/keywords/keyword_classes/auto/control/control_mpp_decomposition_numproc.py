@@ -43,7 +43,8 @@ class ControlMppDecompositionNumproc(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPDECOMPOSITIONNUMPROC_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def i(self) -> typing.Optional[int]:
         """Get or set the The number of processors for decomposition.

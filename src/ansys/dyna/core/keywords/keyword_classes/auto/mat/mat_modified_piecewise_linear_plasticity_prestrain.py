@@ -110,19 +110,24 @@ class MatModifiedPiecewiseLinearPlasticityPrestrain(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatModifiedPiecewiseLinearPlasticityPrestrain.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

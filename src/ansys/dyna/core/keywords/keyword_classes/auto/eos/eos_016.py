@@ -56,10 +56,12 @@ class Eos016(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EOS016_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOS016_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state ID, a unique number or label must be specified.

@@ -45,7 +45,8 @@ class ControlImplicitJoints(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITJOINTS_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ispher(self) -> int:
         """Get or set the Treatment of spherical joints

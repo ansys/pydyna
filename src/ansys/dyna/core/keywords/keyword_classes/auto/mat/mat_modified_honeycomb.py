@@ -128,25 +128,32 @@ class MatModifiedHoneycomb(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDHONEYCOMB_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDHONEYCOMB_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDHONEYCOMB_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDHONEYCOMB_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDHONEYCOMB_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDHONEYCOMB_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDHONEYCOMB_CARD6,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatModifiedHoneycomb.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

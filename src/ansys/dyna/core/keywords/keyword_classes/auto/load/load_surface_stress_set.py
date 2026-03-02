@@ -69,13 +69,16 @@ class LoadSurfaceStressSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADSURFACESTRESSSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSURFACESTRESSSET_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSURFACESTRESSSET_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the part set id

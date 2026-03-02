@@ -44,7 +44,8 @@ class ControlFormingToleranc(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGTOLERANC_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dt_cycle(self) -> typing.Optional[float]:
         """Get or set the Flag for output option (time interval or cycle number).

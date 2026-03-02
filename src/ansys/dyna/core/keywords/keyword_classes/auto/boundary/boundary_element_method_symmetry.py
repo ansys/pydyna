@@ -43,7 +43,8 @@ class BoundaryElementMethodSymmetry(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYELEMENTMETHODSYMMETRY_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def bemsym(self) -> int:
         """Get or set the Defines a symmetry plane for boundary element method.

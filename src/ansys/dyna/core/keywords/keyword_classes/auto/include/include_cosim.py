@@ -43,7 +43,8 @@ class IncludeCosim(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INCLUDECOSIM_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Name of a keyword input file that contains the coupling information, which  includes sets of segments in the global scale model and sets of nodes in the local scale one. See Remark 1

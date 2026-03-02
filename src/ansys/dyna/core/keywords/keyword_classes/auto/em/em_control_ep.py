@@ -45,7 +45,8 @@ class EmControlEp(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCONTROLEP_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def solvetype(self) -> typing.Optional[int]:
         """Get or set the ElectroPhysiology solver sector: eq. 11: monodomain, eq. 12: bidomain, eq.13 mono+bidomain

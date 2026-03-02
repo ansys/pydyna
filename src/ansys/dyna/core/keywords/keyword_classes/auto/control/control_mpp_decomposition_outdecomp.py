@@ -43,7 +43,8 @@ class ControlMppDecompositionOutdecomp(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPDECOMPOSITIONOUTDECOMP_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def itype(self) -> int:
         """Get or set the 1: database in ls-prepost format to file decomp_parts.lsprepost.

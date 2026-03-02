@@ -75,14 +75,17 @@ class BoundaryPrescribedMotionSetLine(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONSETLINE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONSETLINE_CARD1,
                 active_func=lambda: abs(self.dof) in [9, 10, 11] or self.vad==4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONSETLINE_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def typeid(self) -> typing.Optional[int]:
         """Get or set the nodal set ID (SID in *SET_NODE)

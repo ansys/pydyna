@@ -70,16 +70,20 @@ class ControlDynamicRelaxation(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLDYNAMICRELAXATION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLDYNAMICRELAXATION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLDYNAMICRELAXATION_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLDYNAMICRELAXATION_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nrcyck(self) -> int:
         """Get or set the Number of iterations between convergence checks, for dynamic relaxation option (default=250).

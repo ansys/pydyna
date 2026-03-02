@@ -96,28 +96,36 @@ class ConstrainedJointCoorPulley(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORPULLEY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORPULLEY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORPULLEY_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORPULLEY_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORPULLEY_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORPULLEY_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORPULLEY_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORPULLEY_CARD7,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def rbid_a(self) -> typing.Optional[int]:
         """Get or set the Part ID of rigid body A

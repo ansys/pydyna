@@ -62,7 +62,8 @@ class MatAddPermeability(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATADDPERMEABILITY_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatAddPermeability.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

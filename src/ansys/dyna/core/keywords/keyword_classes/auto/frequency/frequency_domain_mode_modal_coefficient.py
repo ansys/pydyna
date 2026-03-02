@@ -43,7 +43,8 @@ class FrequencyDomainModeModalCoefficient(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINMODEMODALCOEFFICIENT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dskip(self) -> typing.Optional[float]:
         """Get or set the The threshold modal coefficient ratio. All modes with the ratio of its modal coefficient over the largest modal coefficient less than this value will be skipped.

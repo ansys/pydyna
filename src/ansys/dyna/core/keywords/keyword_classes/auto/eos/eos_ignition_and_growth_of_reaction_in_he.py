@@ -81,16 +81,20 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EOSIGNITIONANDGROWTHOFREACTIONINHE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOSIGNITIONANDGROWTHOFREACTIONINHE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOSIGNITIONANDGROWTHOFREACTIONINHE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOSIGNITIONANDGROWTHOFREACTIONINHE_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state label.

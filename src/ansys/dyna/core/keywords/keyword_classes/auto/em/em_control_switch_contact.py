@@ -50,7 +50,8 @@ class EmControlSwitchContact(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCONTROLSWITCHCONTACT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def lcid(self) -> int:
         """Get or set the Load Curve ID.Negative values switch the contact detection off, positive values switch it back on.

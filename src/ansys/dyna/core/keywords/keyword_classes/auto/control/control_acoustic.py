@@ -43,7 +43,8 @@ class ControlAcoustic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLACOUSTIC_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def macdvp(self) -> int:
         """Get or set the Calculate the nodal displacements and velocities of *MAT_‌ACOUSTIC volume elements for inclusion in d3plot and time-history files.

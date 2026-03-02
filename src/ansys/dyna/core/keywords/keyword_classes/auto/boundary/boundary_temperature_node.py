@@ -53,7 +53,8 @@ class BoundaryTemperatureNode(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYTEMPERATURENODE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID.

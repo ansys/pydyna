@@ -72,10 +72,12 @@ class MatT10(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATT10_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT10_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatT10.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

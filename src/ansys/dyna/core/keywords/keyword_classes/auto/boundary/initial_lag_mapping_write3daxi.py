@@ -58,10 +58,12 @@ class InitialLagMappingWrite3Daxi(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALLAGMAPPINGWRITE3DAXI_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALLAGMAPPINGWRITE3DAXI_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def setid(self) -> typing.Optional[int]:
         """Get or set the part set ID

@@ -55,7 +55,8 @@ class EmControlTimestep(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCONTROLTIMESTEP_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def tstype(self) -> int:
         """Get or set the Time Step type

@@ -74,10 +74,12 @@ class DefineHexSpotweldAssembly8(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEHEXSPOTWELDASSEMBLY8_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEHEXSPOTWELDASSEMBLY8_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineHexSpotweldAssembly8.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

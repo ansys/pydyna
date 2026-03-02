@@ -69,10 +69,12 @@ class LoadBodyGeneralizedSetPart(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADBODYGENERALIZEDSETPART_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADBODYGENERALIZEDSETPART_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set ID for body force load.

@@ -43,7 +43,8 @@ class InitialVelocityGenerationStartTime(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALVELOCITYGENERATIONSTARTTIME_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def stime(self) -> float:
         """Get or set the Start time.

@@ -72,13 +72,16 @@ class ConstrainedInterpolationLocal(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDINTERPOLATIONLOCAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDINTERPOLATIONLOCAL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDINTERPOLATIONLOCAL_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def icid(self) -> typing.Optional[int]:
         """Get or set the Interpolation constraint ID.

@@ -64,13 +64,16 @@ class AirbagReferenceGeometryBirthId(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGREFERENCEGEOMETRYBIRTHID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGREFERENCEGEOMETRYBIRTHID_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGREFERENCEGEOMETRYBIRTHID_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Card ID.

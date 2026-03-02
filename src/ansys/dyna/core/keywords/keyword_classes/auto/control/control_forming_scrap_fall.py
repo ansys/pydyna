@@ -73,13 +73,16 @@ class ControlFormingScrapFall(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGSCRAPFALL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGSCRAPFALL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGSCRAPFALL_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of a scrap piece.  This part ID becomes a dummy ID if all trimmed scrap pieces are defined by NEWID. See definition for NEWID and Figure 0-3.

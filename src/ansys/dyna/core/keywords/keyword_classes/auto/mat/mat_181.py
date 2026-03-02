@@ -89,13 +89,16 @@ class Mat181(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT181_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT181_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT181_CARD2,
                 **kwargs,
-            ),            TableCard(
+            ),
+            TableCard(
                 [
                     Field("gi", float, 0, 10, None),
                     Field("betai", float, 10, 10, None),
@@ -104,7 +107,8 @@ class Mat181(KeywordBase):
                 None,
                 name="constants",
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = Mat181.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

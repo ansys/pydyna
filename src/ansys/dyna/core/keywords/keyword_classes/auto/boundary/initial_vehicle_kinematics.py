@@ -72,13 +72,16 @@ class InitialVehicleKinematics(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALVEHICLEKINEMATICS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALVEHICLEKINEMATICS_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALVEHICLEKINEMATICS_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def grav(self) -> int:
         """Get or set the Gravity direction code:

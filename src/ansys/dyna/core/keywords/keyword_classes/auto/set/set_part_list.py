@@ -62,13 +62,15 @@ class SetPartList(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETPARTLIST_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "parts",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("parts")),            OptionCardSet(
+                data = kwargs.get("parts")),
+            OptionCardSet(
                 option_spec = SetPartList.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

@@ -50,7 +50,8 @@ class EmControlSwitch(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCONTROLSWITCH_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def lcid(self) -> int:
         """Get or set the Load Curve ID.Negative values switch the solver off, positive values switch it back on.

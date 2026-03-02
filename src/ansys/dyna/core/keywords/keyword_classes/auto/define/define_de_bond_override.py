@@ -62,10 +62,12 @@ class DefineDeBondOverride(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEDEBONDOVERRIDE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEDEBONDOVERRIDE_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineDeBondOverride.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

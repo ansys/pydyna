@@ -47,7 +47,8 @@ class ControlBulkViscosity(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLBULKVISCOSITY_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def q1(self) -> float:
         """Get or set the Default quadratic viscosity coefficient (default = 1.5).

@@ -68,7 +68,8 @@ class MatElastic6DofSpringDiscreteBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATELASTIC6DOFSPRINGDISCRETEBEAM_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatElastic6DofSpringDiscreteBeam.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

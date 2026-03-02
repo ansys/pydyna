@@ -96,28 +96,36 @@ class ConstrainedJointCoorGears(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORGEARS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORGEARS_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORGEARS_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORGEARS_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORGEARS_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORGEARS_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORGEARS_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORGEARS_CARD7,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def rbid_a(self) -> typing.Optional[int]:
         """Get or set the Part ID of rigid body A

@@ -53,10 +53,12 @@ class BatteryEchemThermal(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BATTERYECHEMTHERMAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BATTERYECHEMTHERMAL_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def thame(self) -> typing.Optional[str]:
         """Get or set the Thermal material identifier

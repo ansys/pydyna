@@ -43,7 +43,8 @@ class IcfdDatabaseResiduals(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDATABASERESIDUALS_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def rlvl(self) -> int:
         """Get or set the Residual output level :

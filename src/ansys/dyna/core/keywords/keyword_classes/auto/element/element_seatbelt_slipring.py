@@ -66,10 +66,12 @@ class ElementSeatbeltSlipring(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTSEATBELTSLIPRING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSEATBELTSLIPRING_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sbsrid(self) -> int:
         """Get or set the Slipring ID. A unique number has to be used.

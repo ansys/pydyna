@@ -86,16 +86,20 @@ class IcfdControlImposedMove(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLIMPOSEDMOVE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLIMPOSEDMOVE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLIMPOSEDMOVE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLIMPOSEDMOVE_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the This can be any part ID referenced in *ICFD_PART or *ICFD_PART_VOL. If PID = 0,then the whole volume mesh will be used.

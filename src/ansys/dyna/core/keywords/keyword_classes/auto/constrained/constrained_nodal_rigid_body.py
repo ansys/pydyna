@@ -69,7 +69,8 @@ class ConstrainedNodalRigidBody(KeywordBase):
                 None,
                 name="constrained_nodal_rigid_bodies",
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = ConstrainedNodalRigidBody.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

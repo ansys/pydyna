@@ -55,7 +55,8 @@ class IcfdDefineNoninertial(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDEFINENONINERTIAL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def w1(self) -> typing.Optional[float]:
         """Get or set the Rotational Velocity along the X,Y,Z axes

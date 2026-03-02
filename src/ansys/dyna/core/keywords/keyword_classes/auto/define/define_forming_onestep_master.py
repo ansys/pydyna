@@ -56,7 +56,8 @@ class DefineFormingOnestepMaster(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEFORMINGONESTEPMASTER_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineFormingOnestepMaster.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

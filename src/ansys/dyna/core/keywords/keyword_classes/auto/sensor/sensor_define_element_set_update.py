@@ -69,13 +69,16 @@ class SensorDefineElementSetUpdate(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SENSORDEFINEELEMENTSETUPDATE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SENSORDEFINEELEMENTSETUPDATE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SENSORDEFINEELEMENTSETUPDATE_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = SensorDefineElementSetUpdate.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

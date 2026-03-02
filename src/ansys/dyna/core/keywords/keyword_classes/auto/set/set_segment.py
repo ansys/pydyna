@@ -70,7 +70,8 @@ class SetSegment(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETSEGMENT_CARD0,
                 **kwargs,
-            ),            TableCard(
+            ),
+            TableCard(
                 [
                     Field("n1", int, 0, 10, None),
                     Field("n2", int, 10, 10, None),
@@ -84,7 +85,8 @@ class SetSegment(KeywordBase):
                 None,
                 name="segments",
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = SetSegment.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

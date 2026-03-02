@@ -52,7 +52,8 @@ class ControlFormingProjection(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGPROJECTION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pidb(self) -> typing.Optional[int]:
         """Get or set the Part ID for the blank.

@@ -52,7 +52,8 @@ class InitialAxialForceBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALAXIALFORCEBEAM_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def bsid(self) -> typing.Optional[int]:
         """Get or set the Beam set ID

@@ -78,16 +78,20 @@ class FrequencyDomainAcousticFemEigenvalue(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICFEMEIGENVALUE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICFEMEIGENVALUE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICFEMEIGENVALUE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICFEMEIGENVALUE_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ro(self) -> typing.Optional[float]:
         """Get or set the Fluid density.

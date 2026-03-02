@@ -58,10 +58,12 @@ class ControlFormingBestfitVector(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGBESTFITVECTOR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGBESTFITVECTOR_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ifit(self) -> int:
         """Get or set the Best fit program activation flag:

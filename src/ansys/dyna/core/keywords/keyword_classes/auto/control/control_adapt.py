@@ -66,10 +66,12 @@ class ControlAdapt(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLADAPT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLADAPT_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def adpfreq(self) -> typing.Optional[float]:
         """Get or set the Time interval between adaptive refinements.

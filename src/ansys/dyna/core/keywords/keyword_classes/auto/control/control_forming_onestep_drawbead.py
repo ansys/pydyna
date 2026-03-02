@@ -52,7 +52,8 @@ class ControlFormingOnestepDrawbead(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGONESTEPDRAWBEAD_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ndset(self) -> typing.Optional[int]:
         """Get or set the Node set ID along the periphery of the part, as defined by keyword *SET_NODE_LIST.

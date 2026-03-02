@@ -65,10 +65,12 @@ class ControlLsda(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLLSDA_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLLSDA_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def npexcl(self) -> typing.Optional[int]:
         """Get or set the Number of parts to exclude from the dynain.lsda files.

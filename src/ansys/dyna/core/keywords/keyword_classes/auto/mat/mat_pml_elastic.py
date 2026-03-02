@@ -55,7 +55,8 @@ class MatPmlElastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATPMLELASTIC_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatPmlElastic.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

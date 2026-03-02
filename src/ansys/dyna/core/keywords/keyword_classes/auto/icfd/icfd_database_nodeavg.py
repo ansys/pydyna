@@ -43,7 +43,8 @@ class IcfdDatabaseNodeavg(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDATABASENODEAVG_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def on(self) -> int:
         """Get or set the If equal to 1, the average quantities will be computed.

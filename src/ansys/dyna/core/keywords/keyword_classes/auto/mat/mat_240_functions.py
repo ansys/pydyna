@@ -91,16 +91,20 @@ class Mat240Functions(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT240FUNCTIONS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT240FUNCTIONS_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT240FUNCTIONS_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT240FUNCTIONS_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = Mat240Functions.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

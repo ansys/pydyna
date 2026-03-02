@@ -55,7 +55,8 @@ class DefineDeMassflowPlane(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEDEMASSFLOWPLANE_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineDeMassflowPlane.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

@@ -133,28 +133,36 @@ class ElementNurbsPatch2DTrimmed(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTNURBSPATCH2DTRIMMED_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTNURBSPATCH2DTRIMMED_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTNURBSPATCH2DTRIMMED_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTNURBSPATCH2DTRIMMED_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTNURBSPATCH2DTRIMMED_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTNURBSPATCH2DTRIMMED_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTNURBSPATCH2DTRIMMED_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTNURBSPATCH2DTRIMMED_CARD7,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def npid(self) -> typing.Optional[int]:
         """Get or set the Nurbs-Patch Element ID.  A unique number has to be chosen.

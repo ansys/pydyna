@@ -47,7 +47,8 @@ class InterfaceJoy(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACEJOY_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Node set ID, see *SET_NODE.

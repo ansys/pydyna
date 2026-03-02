@@ -54,10 +54,12 @@ class DualceseElementset(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEELEMENTSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DUALCESEELEMENTSET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def esid(self) -> typing.Optional[int]:
         """Get or set the Set ID.  All dual CESE element sets should have a unique set ID

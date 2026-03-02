@@ -80,16 +80,20 @@ class ComponentGebodJointLeftKnee(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _COMPONENTGEBODJOINTLEFTKNEE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _COMPONENTGEBODJOINTLEFTKNEE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _COMPONENTGEBODJOINTLEFTKNEE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _COMPONENTGEBODJOINTLEFTKNEE_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def did(self) -> typing.Optional[int]:
         """Get or set the Dummy ID, see *COMPONENT_GEBOD_MALE, *COMPONENT_GEBOD_FEMALE, *COMPONENT_GEBOD_CHILD.

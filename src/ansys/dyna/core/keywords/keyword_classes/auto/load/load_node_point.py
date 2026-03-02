@@ -63,7 +63,8 @@ class LoadNodePoint(KeywordBase):
                 None,
                 name="nodes",
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nodes(self) -> pd.DataFrame:
         """Get the table of nodes."""

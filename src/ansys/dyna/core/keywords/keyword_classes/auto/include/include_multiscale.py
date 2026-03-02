@@ -47,10 +47,12 @@ class IncludeMultiscale(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INCLUDEMULTISCALE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDEMULTISCALE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the ID for this multiscale local model.  This ID is used in the keyword *DEFINE_‌MULTISCALE.  Any unique integer will do

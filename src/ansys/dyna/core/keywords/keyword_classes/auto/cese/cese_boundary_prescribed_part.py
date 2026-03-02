@@ -72,13 +72,16 @@ class CeseBoundaryPrescribedPart(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYPRESCRIBEDPART_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYPRESCRIBEDPART_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYPRESCRIBEDPART_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def surfprt(self) -> typing.Optional[int]:
         """Get or set the A surface part ID referenced in *MESH_SURFACE_ELEMENT cards

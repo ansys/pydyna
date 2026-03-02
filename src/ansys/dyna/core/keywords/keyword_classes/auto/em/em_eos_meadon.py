@@ -56,10 +56,12 @@ class EmEosMeadon(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMEOSMEADON_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEOSMEADON_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Id of the EM_EOS.

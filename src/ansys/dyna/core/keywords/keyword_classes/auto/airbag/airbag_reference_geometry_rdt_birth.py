@@ -55,10 +55,12 @@ class AirbagReferenceGeometryRdtBirth(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGREFERENCEGEOMETRYRDTBIRTH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGREFERENCEGEOMETRYRDTBIRTH_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def birth(self) -> float:
         """Get or set the Time at which the reference geometry activates (default=0.0).

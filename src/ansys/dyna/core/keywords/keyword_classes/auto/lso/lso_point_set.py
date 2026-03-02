@@ -50,10 +50,12 @@ class LsoPointSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LSOPOINTSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LSOPOINTSET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def setid(self) -> typing.Optional[int]:
         """Get or set the Identifier for this point set. Called by *LSO_DOMAIN.

@@ -50,7 +50,8 @@ class DatabaseNodalForceGroup(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASENODALFORCEGROUP_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID, see *SET_NODE.

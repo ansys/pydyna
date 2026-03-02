@@ -44,7 +44,8 @@ class IcfdBoundaryNavierslip(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDBOUNDARYNAVIERSLIP_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the PID of the fluid surface where non-slip boundary condition is applied.
