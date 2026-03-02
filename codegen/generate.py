@@ -354,7 +354,7 @@ def get_keywords_to_generate(
     keywords = []
     kwd_list = config.keyword_data.get_keywords_list()
     kwd_set = set(kwd_list)
-    manifest_keys = set(config.manifest.get_keyword_keys())
+    manifest_keys = sorted(config.manifest.get_keyword_keys())
 
     # first get all aliases
     add_aliases(kwd_list)

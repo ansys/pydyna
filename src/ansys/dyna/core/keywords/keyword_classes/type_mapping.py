@@ -3191,9 +3191,9 @@ TypeMapping = {
     "*SET_SOLID_GENERATE_INCREMENT": "SetSolidGenerateIncrement",
     "*SET_SOLID_GENERATE_INCREMENT_COLLECT": "SetSolidGenerateIncrementCollect",
     "*CONTROL_REFERENCE_CONFIGURATION": "ControlReferenceConfiguration",
-    "*LOAD_SEGMENT_SET_ID": "LoadSegmentSetId",
-    "*MAT_MODIFIED_PIECEWISE_LINEAR_PLASTICITY_PRESTRAIN": "MatModifiedPiecewiseLinearPlasticityPrestrain",
     "*LOAD_SEGMENT_ID": "LoadSegmentId",
+    "*LOAD_SEGMENT_SET_ID": "LoadSegmentSetId",
     "*MAT_009": "Mat009",
+    "*MAT_MODIFIED_PIECEWISE_LINEAR_PLASTICITY_PRESTRAIN": "MatModifiedPiecewiseLinearPlasticityPrestrain",
     "*SET_NODE": "SetNode",
 }
