@@ -390,7 +390,7 @@ def _is_comma_delimited(line_data: str, num_fields: int = None) -> bool:
 
 def _parse_csv_value(
     text_block: str,
-    item_type: type,
+    item_type: type | Flag,
     parameter_set: typing.Optional[ParameterSet],
     get_none_value: typing.Callable,
     get_parameter: typing.Callable,
