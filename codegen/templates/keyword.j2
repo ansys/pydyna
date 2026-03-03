@@ -71,6 +71,12 @@ _{{keyword_data.classname | upper}}_OPTION{{option_loop.index0}}_CARD{{loop.inde
 {% for card in card_set.source_cards %}
 {% include 'keyword/card_set_property_passthrough.j2' %}
 {% endfor %}
+{# CardSet option field passthroughs (for source-options placed inside the card set) #}
+{% if card_set.options %}
+{% for option in card_set.options %}
+{% include 'keyword/card_set_option_passthrough.j2' %}
+{% endfor %}
+{% endif %}
 {% endif %}
 {% endfor %}
 {% endif %}

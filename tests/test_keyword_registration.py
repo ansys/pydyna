@@ -208,11 +208,11 @@ class TestLegacyInitialStrainShell:
             kwd = InitialStrainShellLegacy()
             # Sets should initially be empty (unbounded length)
             assert len(kwd.sets) == 0
-            
+
             # Use add_set() to add a CardSet
             kwd.add_set(eid=1, nplane=1, nthick=5, large=0)
             assert len(kwd.sets) == 1
-            
+
             # The CardSet should be InitialStrainShellLegacyCardSet
             assert kwd.sets[0].__class__.__name__ == "InitialStrainShellLegacyCardSet"
             # The CardSet should have the TableCard API with strains property
@@ -251,11 +251,11 @@ class TestLegacyInitialStressShell:
             kwd = InitialStressShellLegacy()
             # Sets should initially be empty (unbounded length)
             assert len(kwd.sets) == 0
-            
+
             # Use add_set() to add a CardSet
             kwd.add_set(eid=1, nplane=1, nthick=1, nhisv=19, large=0)
             assert len(kwd.sets) == 1
-            
+
             # The CardSet should be InitialStressShellLegacyCardSet
             assert kwd.sets[0].__class__.__name__ == "InitialStressShellLegacyCardSet"
             # The CardSet should have nested sets (stress layers)
@@ -266,7 +266,7 @@ class TestLegacyInitialStressShell:
 
     def test_legacy_thickness_large_cardset_instantiation(self):
         """Test that InitialStressShellLegacyThicknessLargeCardSet can be instantiated properly.
-        
+
         This tests card_set.py functionality using a real keyword CardSet class.
         """
         from ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1 import (
@@ -278,13 +278,13 @@ class TestLegacyInitialStressShell:
             warnings.simplefilter("ignore", DeprecationWarning)
             # Create a parent keyword to pass as context
             parent_kwd = InitialStressShellLegacy()
-            
+
             # Properly instantiate the CardSet with required kwargs
             cardset = InitialStressShellLegacyThicknessLargeCardSet(
                 keyword=parent_kwd,
                 parent=parent_kwd
             )
-            
+
             # Verify it has the expected structure
             assert hasattr(cardset, "t")
             assert hasattr(cardset, "sigxx")
@@ -296,6 +296,200 @@ class TestLegacyInitialStressShell:
             assert hasattr(cardset, "eps")
             assert hasattr(cardset, "hisv")
 
+
+
+class TestLegacySectionSolid:
+    """Tests for legacy SectionSolid (0.11.0) implementation."""
+
+    SECTION_SOLID_DATA = """*SECTION_SOLID
+$#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
+         1         1         0                                                  """
+
+    def test_legacy_class_emits_deprecation_warning(self):
+        """SectionSolidLegacy must emit a DeprecationWarning on construction."""
+        from ansys.dyna.core.keywords.keyword_classes.manual.section_solid_version_0_11_0 import (
+            SectionSolidLegacy,
+        )
+
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            _ = SectionSolidLegacy()
+            assert len(w) == 1
+            assert issubclass(w[0].category, DeprecationWarning)
+            assert "SectionSolidLegacy is deprecated" in str(w[0].message)
+            assert "CardSet" in str(w[0].message)
+
+    def test_legacy_class_has_flat_api(self):
+        """Legacy class exposes properties directly (no sets[0] indirection)."""
+        from ansys.dyna.core.keywords.keyword_classes.manual.section_solid_version_0_11_0 import (
+            SectionSolidLegacy,
+        )
+
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", DeprecationWarning)
+            kw = SectionSolidLegacy()
+            assert kw.elform == 1  # flat keyword default
+            kw.secid = 42
+            assert kw.secid == 42
+
+    def test_load_with_keyword_override(self):
+        """Keyword override causes legacy class to be used during deck loading."""
+        from ansys.dyna.core.keywords.keyword_classes.manual.section_solid_version_0_11_0 import (
+            SectionSolidLegacy,
+        )
+
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", DeprecationWarning)
+            deck = Deck()
+            context = ImportContext(deck=deck, keyword_overrides={"*SECTION_SOLID": SectionSolidLegacy})
+            deck.loads(self.SECTION_SOLID_DATA, context=context)
+            assert len(deck.keywords) == 1
+            kw = deck.keywords[0]
+            assert isinstance(kw, SectionSolidLegacy)
+            assert kw.secid == 1
+            assert kw.elform == 1
+
+    def test_load_without_override_uses_current_class(self):
+        """Default loading uses the current (CardSet-based) SectionSolid."""
+        from ansys.dyna.core.keywords.keyword_classes.auto.section.section_solid import SectionSolid
+
+        deck = Deck()
+        deck.loads(self.SECTION_SOLID_DATA)
+        assert len(deck.keywords) == 1
+        kw = deck.keywords[0]
+        assert isinstance(kw, SectionSolid)
+        assert not type(kw).__name__ == "SectionSolidLegacy"
+        assert kw.sets[0].secid == 1
+
+
+class TestLegacySectionBeam:
+    """Tests for legacy SectionBeam (0.11.0) implementation."""
+
+    SECTION_BEAM_DATA = """*SECTION_BEAM
+$#   secid    elform      shrf   qr/irid       cst     scoor       nsm     naupd
+         5         1       1.0         2         0       0.0       0.0         0
+$#     ts1       ts2       tt1       tt2     nsloc     ntloc
+       0.5       0.5       0.0       0.0       0.0       0.0"""
+
+    def test_legacy_class_emits_deprecation_warning(self):
+        """SectionBeamLegacy must emit a DeprecationWarning on construction."""
+        from ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0 import (
+            SectionBeamLegacy,
+        )
+
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            _ = SectionBeamLegacy()
+            assert len(w) == 1
+            assert issubclass(w[0].category, DeprecationWarning)
+            assert "SectionBeamLegacy is deprecated" in str(w[0].message)
+            assert "CardSet" in str(w[0].message)
+
+    def test_legacy_class_has_flat_api(self):
+        """Legacy class exposes properties directly (no sets[0] indirection)."""
+        from ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0 import (
+            SectionBeamLegacy,
+        )
+
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", DeprecationWarning)
+            kw = SectionBeamLegacy()
+            assert kw.elform == 1  # flat keyword default
+            kw.secid = 7
+            assert kw.secid == 7
+
+    def test_load_with_keyword_override(self):
+        """Keyword override causes legacy class to be used during deck loading."""
+        from ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0 import (
+            SectionBeamLegacy,
+        )
+
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", DeprecationWarning)
+            deck = Deck()
+            context = ImportContext(deck=deck, keyword_overrides={"*SECTION_BEAM": SectionBeamLegacy})
+            deck.loads(self.SECTION_BEAM_DATA, context=context)
+            assert len(deck.keywords) == 1
+            kw = deck.keywords[0]
+            assert isinstance(kw, SectionBeamLegacy)
+            assert kw.secid == 5
+            assert kw.elform == 1
+
+    def test_load_without_override_uses_current_class(self):
+        """Default loading uses the current (CardSet-based) SectionBeam."""
+        from ansys.dyna.core.keywords.keyword_classes.auto.section.section_beam import SectionBeam
+
+        deck = Deck()
+        deck.loads(self.SECTION_BEAM_DATA)
+        assert len(deck.keywords) == 1
+        kw = deck.keywords[0]
+        assert isinstance(kw, SectionBeam)
+        assert not type(kw).__name__ == "SectionBeamLegacy"
+        assert kw.sets[0].secid == 5
+
+
+class TestLegacySectionTShell:
+    """Tests for legacy SectionTShell (0.11.0) implementation."""
+
+    SECTION_TSHELL_DATA = """*SECTION_TSHELL
+$#   secid    elform      shrf       nip     propt        qr     icomp    tshear
+         3         1       1.0         2       1.0         0         0         0"""
+
+    def test_legacy_class_emits_deprecation_warning(self):
+        """SectionTShellLegacy must emit a DeprecationWarning on construction."""
+        from ansys.dyna.core.keywords.keyword_classes.manual.section_tshell_version_0_11_0 import (
+            SectionTShellLegacy,
+        )
+
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            _ = SectionTShellLegacy()
+            assert len(w) == 1
+            assert issubclass(w[0].category, DeprecationWarning)
+            assert "SectionTShellLegacy is deprecated" in str(w[0].message)
+            assert "CardSet" in str(w[0].message)
+
+    def test_legacy_class_has_flat_api(self):
+        """Legacy class exposes properties directly (no sets[0] indirection)."""
+        from ansys.dyna.core.keywords.keyword_classes.manual.section_tshell_version_0_11_0 import (
+            SectionTShellLegacy,
+        )
+
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", DeprecationWarning)
+            kw = SectionTShellLegacy()
+            assert kw.elform == 1  # flat keyword default
+            kw.secid = 9
+            assert kw.secid == 9
+
+    def test_load_with_keyword_override(self):
+        """Keyword override causes legacy class to be used during deck loading."""
+        from ansys.dyna.core.keywords.keyword_classes.manual.section_tshell_version_0_11_0 import (
+            SectionTShellLegacy,
+        )
+
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", DeprecationWarning)
+            deck = Deck()
+            context = ImportContext(deck=deck, keyword_overrides={"*SECTION_TSHELL": SectionTShellLegacy})
+            deck.loads(self.SECTION_TSHELL_DATA, context=context)
+            assert len(deck.keywords) == 1
+            kw = deck.keywords[0]
+            assert isinstance(kw, SectionTShellLegacy)
+            assert kw.secid == 3
+            assert kw.elform == 1
+
+    def test_load_without_override_uses_current_class(self):
+        """Default loading uses the current (CardSet-based) SectionTShell."""
+        from ansys.dyna.core.keywords.keyword_classes.auto.section.section_tshell import SectionTShell
+
+        deck = Deck()
+        deck.loads(self.SECTION_TSHELL_DATA)
+        assert len(deck.keywords) == 1
+        kw = deck.keywords[0]
+        assert isinstance(kw, SectionTShell)
+        assert not type(kw).__name__ == "SectionTShellLegacy"
+        assert kw.sets[0].secid == 3
 
 
 class TestInitialStrainStressLegacyLoading:
@@ -341,7 +535,7 @@ class TestInitialStrainStressLegacyLoading:
             assert len(deck.keywords) == 1
             kwd = deck.keywords[0]
             assert isinstance(kwd, InitialStrainShellLegacy)
-            
+
             # Test that legacy API works - same expectations as test_initial_strain_shell
             assert len(kwd.sets) == 3
             assert kwd.sets[1].eid == 2
@@ -365,7 +559,7 @@ class TestInitialStrainStressLegacyLoading:
         kwd = deck.keywords[0]
         # Should be the current (non-legacy) InitialStrainShell
         assert isinstance(kwd, InitialStrainShell)
-        
+
         # Test that new API works - same expectations as test_initial_strain_shell
         assert len(kwd.sets) == 3
         assert kwd.sets[1].eid == 2
