@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -21,14 +21,15 @@
 # SOFTWARE.
 
 """Legacy SectionBeam implementation preserved from pydyna 0.11.0."""
+
 import typing
 import warnings
-from ansys.dyna.core.lib.card import Card, Field, Flag
-from ansys.dyna.core.lib.field_schema import FieldSchema
-from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
-from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.keyword_base import LinkType
+
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+from ansys.dyna.core.lib.card import Card
+from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.keyword_base import KeywordBase, LinkType
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 
 _SECTIONBEAM_CARD0 = (
     FieldSchema("secid", int, 0, 10, None),
@@ -93,9 +94,8 @@ _SECTIONBEAM_CARD6 = (
     FieldSchema("itoff", float, 60, 10, None),
 )
 
-_SECTIONBEAM_OPTION0_CARD0 = (
-    FieldSchema("title", str, 0, 80, None),
-)
+_SECTIONBEAM_OPTION0_CARD0 = (FieldSchema("title", str, 0, 80, None),)
+
 
 class SectionBeamLegacy(KeywordBase):
     """Legacy DYNA SECTION_BEAM keyword (pydyna 0.11.0 API)."""
@@ -127,12 +127,12 @@ class SectionBeamLegacy(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _SECTIONBEAM_CARD1,
-                active_func=lambda: self.elform in [1,11],
+                active_func=lambda: self.elform in [1, 11],
                 **kwargs,
             ),
             Card.from_field_schemas_with_defaults(
                 _SECTIONBEAM_CARD2,
-                active_func=lambda: self.elform in [2,12,13],
+                active_func=lambda: self.elform in [2, 12, 13],
                 **kwargs,
             ),
             Card.from_field_schemas_with_defaults(
@@ -142,7 +142,7 @@ class SectionBeamLegacy(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _SECTIONBEAM_CARD4,
-                active_func=lambda: self.elform in [4,5],
+                active_func=lambda: self.elform in [4, 5],
                 **kwargs,
             ),
             Card.from_field_schemas_with_defaults(
@@ -156,20 +156,20 @@ class SectionBeamLegacy(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SectionBeamLegacy.option_specs[0],
-                cards = [
+                option_spec=SectionBeamLegacy.option_specs[0],
+                cards=[
                     Card.from_field_schemas_with_defaults(
                         _SECTIONBEAM_OPTION0_CARD0,
                         **kwargs,
                     ),
                 ],
-                **kwargs
+                **kwargs,
             ),
         ]
+
     @property
     def secid(self) -> typing.Optional[int]:
-        """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.
-        """ # nopep8
+        """Get or set the Section ID. SECID is referenced on the *PART card and must be unique."""  # nopep8
         return self._cards[0].get_value("secid")
 
     @secid.setter
@@ -194,7 +194,7 @@ class SectionBeamLegacy(KeywordBase):
         EQ.12: resultant warped beam
         EQ.13: Small displacement, linear Timoshenko beam with exact stiffness.
         EQ.14: Integrated tubular Elbow element. User defined integration rule with tubular cross section (9) must be used.
-        """ # nopep8
+        """  # nopep8
         return self._cards[0].get_value("elform")
 
     @elform.setter
@@ -206,8 +206,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def shrf(self) -> float:
-        """Get or set the Shear factor. This factor is not needed for truss, resultant beam, discrete beam, and cable elements. The recommended value for rectangular sections is 5/6, the default is 1.0.
-        """ # nopep8
+        """Get or set the Shear factor. This factor is not needed for truss, resultant beam, discrete beam, and cable elements. The recommended value for rectangular sections is 5/6, the default is 1.0."""  # nopep8
         return self._cards[0].get_value("shrf")
 
     @shrf.setter
@@ -224,7 +223,7 @@ class SectionBeamLegacy(KeywordBase):
         EQ.4: 3x3 Lobatto quadrature,
         EQ.5: 4x4 Gauss quadrature,
         EQ.-n: where |n| is the number of the user defined rule. IRID integration rule n is defined using *INTEGRATION_BEAM card.
-        """ # nopep8
+        """  # nopep8
         return self._cards[0].get_value("qr_irid")
 
     @qr_irid.setter
@@ -238,7 +237,7 @@ class SectionBeamLegacy(KeywordBase):
         EQ.0: rectangular (default),
         EQ.1: tubular,
         EQ.2: arbitrary (user defined integration rule).
-        """ # nopep8
+        """  # nopep8
         return self._cards[0].get_value("cst")
 
     @cst.setter
@@ -254,20 +253,21 @@ class SectionBeamLegacy(KeywordBase):
         EQ.-1.0: beam node 1, the angular velocity of node 1 rotates triad,
         EQ. 0.0: centered between beam nodes 1 and 2, the average angular velocity of nodes 1 and 2 is used to rotate the triad (default),
         EQ.+1.0: beam node 2, the angular velocity of node 2 rotates triad.
-        """ # nopep8
+        """  # nopep8
         return self._cards[0].get_value("scoor")
 
     @scoor.setter
     def scoor(self, value: float) -> None:
         """Set the scoor property."""
         if value not in [0.0, 1.0, 2.0, 3.0, 12.0, 13.0, -13.0, -12.0, -3.0, -2.0, -1.0, None]:
-            raise Exception("""scoor must be `None` or one of {0.0,1.0,2.0,3.0,12.0,13.0,-13.0,-12.0,-3.0,-2.0,-1.0}.""")
+            raise Exception(
+                """scoor must be `None` or one of {0.0,1.0,2.0,3.0,12.0,13.0,-13.0,-12.0,-3.0,-2.0,-1.0}."""
+            )
         self._cards[0].set_value("scoor", value)
 
     @property
     def nsm(self) -> float:
-        """Get or set the Nonstructural mass per unit length.  This option applies to beam types 1-5 and does not apply to discrete, 2D, and spotweld beams, respectively.
-        """ # nopep8
+        """Get or set the Nonstructural mass per unit length.  This option applies to beam types 1-5 and does not apply to discrete, 2D, and spotweld beams, respectively."""  # nopep8
         return self._cards[0].get_value("nsm")
 
     @nsm.setter
@@ -280,7 +280,7 @@ class SectionBeamLegacy(KeywordBase):
         """Get or set the Neutral axis update option.  See Remark 11.
         EQ. 0:	Not used
         EQ.1.0: 	Update the neutral axis when damage or failure occurs at  one or more integration points.
-        """ # nopep8
+        """  # nopep8
         return self._cards[0].get_value("naupd")
 
     @naupd.setter
@@ -292,8 +292,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def ts1(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s-direction at node n1. Note that the thickness defined on the *ELEMENT_BEAM_THICKNESS card overrides the definition give here.
-        """ # nopep8
+        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s-direction at node n1. Note that the thickness defined on the *ELEMENT_BEAM_THICKNESS card overrides the definition give here."""  # nopep8
         return self._cards[1].get_value("ts1")
 
     @ts1.setter
@@ -303,8 +302,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def ts2(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s-direction at node n2 .
-        """ # nopep8
+        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s-direction at node n2 ."""  # nopep8
         return self._cards[1].get_value("ts2")
 
     @ts2.setter
@@ -314,8 +312,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def tt1(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t-direction at node n1.
-        """ # nopep8
+        """Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t-direction at node n1."""  # nopep8
         return self._cards[1].get_value("tt1")
 
     @tt1.setter
@@ -325,8 +322,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def tt2(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t-direction at node n2 .
-        """ # nopep8
+        """Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t-direction at node n2 ."""  # nopep8
         return self._cards[1].get_value("tt2")
 
     @tt2.setter
@@ -340,7 +336,7 @@ class SectionBeamLegacy(KeywordBase):
         EQ.1.0: side at s=1,
         EQ.0.0: center (default),
         EQ.-1.0: side at s=-1.
-        """ # nopep8
+        """  # nopep8
         return self._cards[1].get_value("nsloc")
 
     @nsloc.setter
@@ -354,7 +350,7 @@ class SectionBeamLegacy(KeywordBase):
         EQ.1.0: side at t=,
         EQ.0.0: center (default),
         EQ.-1: side at t=-1.
-        """ # nopep8
+        """  # nopep8
         return self._cards[1].get_value("ntloc")
 
     @ntloc.setter
@@ -364,8 +360,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def a(self) -> typing.Optional[float]:
-        """Get or set the Cross-sectional area. The definition on *ELEMENT_BEAM_THICKNESS overrides the value defined here.
-        """ # nopep8
+        """Get or set the Cross-sectional area. The definition on *ELEMENT_BEAM_THICKNESS overrides the value defined here."""  # nopep8
         return self._cards[2].get_value("a")
 
     @a.setter
@@ -375,8 +370,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def iss(self) -> typing.Optional[float]:
-        """Get or set the Iss . The definition on *ELEMENT_BEAM_THICKNESS overrides the value defined here.
-        """ # nopep8
+        """Get or set the Iss . The definition on *ELEMENT_BEAM_THICKNESS overrides the value defined here."""  # nopep8
         return self._cards[2].get_value("iss")
 
     @iss.setter
@@ -386,8 +380,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def itt(self) -> typing.Optional[float]:
-        """Get or set the Itt . The definition on *ELEMENT_BEAM_THICKNESS overrides the value defined here.
-        """ # nopep8
+        """Get or set the Itt . The definition on *ELEMENT_BEAM_THICKNESS overrides the value defined here."""  # nopep8
         return self._cards[2].get_value("itt")
 
     @itt.setter
@@ -397,8 +390,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def j(self) -> typing.Optional[float]:
-        """Get or set the J, torsional constant. The definition on *ELEMENT_BEAM_THICKNESS overrides the value defined here. If J is zero, then J is reset to the sum of ISS+ITT as an approximation.
-        """ # nopep8
+        """Get or set the J, torsional constant. The definition on *ELEMENT_BEAM_THICKNESS overrides the value defined here. If J is zero, then J is reset to the sum of ISS+ITT as an approximation."""  # nopep8
         return self._cards[2].get_value("j")
 
     @j.setter
@@ -408,8 +400,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def sa(self) -> typing.Optional[float]:
-        """Get or set the Shear area. The definition on *ELEMENT_BEAM_THICKNESS overrides the value defined here.
-        """ # nopep8
+        """Get or set the Shear area. The definition on *ELEMENT_BEAM_THICKNESS overrides the value defined here."""  # nopep8
         return self._cards[2].get_value("sa")
 
     @sa.setter
@@ -419,8 +410,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def ist(self) -> typing.Optional[float]:
-        """Get or set the Ist, product moment of inertia w.r.t. local s- and t-axis. This is only nonzero for unsymmetric cross sections and it can take positive and negative values, e.g. it is negative for SECTION_03.
-        """ # nopep8
+        """Get or set the Ist, product moment of inertia w.r.t. local s- and t-axis. This is only nonzero for unsymmetric cross sections and it can take positive and negative values, e.g. it is negative for SECTION_03."""  # nopep8
         return self._cards[2].get_value("ist")
 
     @ist.setter
@@ -430,8 +420,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def a(self) -> typing.Optional[float]:
-        """Get or set the Cross-sectional area. The definition on *ELEMENT_BEAM_THICKNESS overrides the value defined here.
-        """ # nopep8
+        """Get or set the Cross-sectional area. The definition on *ELEMENT_BEAM_THICKNESS overrides the value defined here."""  # nopep8
         return self._cards[3].get_value("a")
 
     @a.setter
@@ -441,8 +430,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def rampt(self) -> typing.Optional[float]:
-        """Get or set the Optional ramp-up time for dynamic relaxation.
-        """ # nopep8
+        """Get or set the Optional ramp-up time for dynamic relaxation."""  # nopep8
         return self._cards[3].get_value("rampt")
 
     @rampt.setter
@@ -452,8 +440,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def stress(self) -> typing.Optional[float]:
-        """Get or set the Optional initial stress for dynamic relaxation
-        """ # nopep8
+        """Get or set the Optional initial stress for dynamic relaxation"""  # nopep8
         return self._cards[3].get_value("stress")
 
     @stress.setter
@@ -463,8 +450,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def ts1(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s direction at node n1 . Note that the thickness defined on the *ELEMENT_ BEAM_THICKNESS card overrides the definition give here.
-        """ # nopep8
+        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s direction at node n1 . Note that the thickness defined on the *ELEMENT_ BEAM_THICKNESS card overrides the definition give here."""  # nopep8
         return self._cards[4].get_value("ts1")
 
     @ts1.setter
@@ -474,8 +460,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def ts2(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s direction at node n2 .
-        """ # nopep8
+        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s direction at node n2 ."""  # nopep8
         return self._cards[4].get_value("ts2")
 
     @ts2.setter
@@ -485,8 +470,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def tt1(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t direction at node n1 .
-        """ # nopep8
+        """Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t direction at node n1 ."""  # nopep8
         return self._cards[4].get_value("tt1")
 
     @tt1.setter
@@ -496,8 +480,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def tt2(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t direction at node n2 .
-        """ # nopep8
+        """Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t direction at node n2 ."""  # nopep8
         return self._cards[4].get_value("tt2")
 
     @tt2.setter
@@ -507,8 +490,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def vol(self) -> typing.Optional[float]:
-        """Get or set the Volume of discrete beam. If the mass density of the material model for the discrete beam is set to unity, the magnitude of the lumped mass can be defined here instead. This lumped mass is partitioned to the two nodes of the beam element. The translational time step size for the type 6 beam is dependent on the volume, mass density, and the translational stiffness values, so it is important to define this parameter. Defining the volume is also essential for mass scaling if the type 6 beam controls the time step size.
-        """ # nopep8
+        """Get or set the Volume of discrete beam. If the mass density of the material model for the discrete beam is set to unity, the magnitude of the lumped mass can be defined here instead. This lumped mass is partitioned to the two nodes of the beam element. The translational time step size for the type 6 beam is dependent on the volume, mass density, and the translational stiffness values, so it is important to define this parameter. Defining the volume is also essential for mass scaling if the type 6 beam controls the time step size."""  # nopep8
         return self._cards[5].get_value("vol")
 
     @vol.setter
@@ -518,8 +500,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def iner(self) -> typing.Optional[float]:
-        """Get or set the I, lumped inertia of discrete beam which have six degrees of freedom. This lumped inertia is partitioned to the two nodes of the beam element. The rotational time step size for the type 6 beam is dependent on the lumped inertia and the rotational stiffness values, so it is important to define this parameter if the rotational springs are active. Defining the rotational inertia is also essential for mass scaling if the type 6 beam rotational stiffness controls the time step size.
-        """ # nopep8
+        """Get or set the I, lumped inertia of discrete beam which have six degrees of freedom. This lumped inertia is partitioned to the two nodes of the beam element. The rotational time step size for the type 6 beam is dependent on the lumped inertia and the rotational stiffness values, so it is important to define this parameter if the rotational springs are active. Defining the rotational inertia is also essential for mass scaling if the type 6 beam rotational stiffness controls the time step size."""  # nopep8
         return self._cards[5].get_value("iner")
 
     @iner.setter
@@ -529,8 +510,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def cid(self) -> typing.Optional[int]:
-        """Get or set the Coordinate system ID for orientation, materials type ID (66-69, 93 and 95), see *DEFINE_COORDINATE. If CID=0, a default coordinate system is defined in the global system or on the third node of the beam, which is used for orientation. This is not defined for cable elements. The coordinate system rotates with the discrete beam, see SCOOR above.
-        """ # nopep8
+        """Get or set the Coordinate system ID for orientation, materials type ID (66-69, 93 and 95), see *DEFINE_COORDINATE. If CID=0, a default coordinate system is defined in the global system or on the third node of the beam, which is used for orientation. This is not defined for cable elements. The coordinate system rotates with the discrete beam, see SCOOR above."""  # nopep8
         return self._cards[5].get_value("cid")
 
     @cid.setter
@@ -540,8 +520,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def ca(self) -> typing.Optional[float]:
-        """Get or set the Cable area, materials type ID 71, *MAT_CABLE.
-        """ # nopep8
+        """Get or set the Cable area, materials type ID 71, *MAT_CABLE."""  # nopep8
         return self._cards[5].get_value("ca")
 
     @ca.setter
@@ -551,8 +530,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def offset(self) -> typing.Optional[float]:
-        """Get or set the Offset for cable. For a definition see materials type ID 71, *MAT_CABLE.
-        """ # nopep8
+        """Get or set the Offset for cable. For a definition see materials type ID 71, *MAT_CABLE."""  # nopep8
         return self._cards[5].get_value("offset")
 
     @offset.setter
@@ -565,7 +543,7 @@ class SectionBeamLegacy(KeywordBase):
         """Get or set the r-rotational constraint for local coordinate system:
         EQ.0.0: Coordinate ID rotates about r axis with nodes (default),
         EQ.1.0: Rotation is constrained about the r-axis
-        """ # nopep8
+        """  # nopep8
         return self._cards[5].get_value("rrcon")
 
     @rrcon.setter
@@ -580,7 +558,7 @@ class SectionBeamLegacy(KeywordBase):
         """Get or set the s-rotational constraint for local coordinate system:
         EQ.0.0: Coordinate ID rotates about s axis with nodes (default),
         EQ.1.0: Rotation is constrained about the s-axis
-        """ # nopep8
+        """  # nopep8
         return self._cards[5].get_value("srcon")
 
     @srcon.setter
@@ -595,7 +573,7 @@ class SectionBeamLegacy(KeywordBase):
         """Get or set the t-rotational constraint for local coordinate system:
         EQ.0.0: Coordinate ID rotates about t axis with nodes (default),
         EQ.1.0: Rotation is constrained about the t-axis
-        """ # nopep8
+        """  # nopep8
         return self._cards[5].get_value("trcon")
 
     @trcon.setter
@@ -607,8 +585,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def ts1(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s direction at node n1 . Note that the thickness defined on the *ELEMENT_ BEAM_THICKNESS card overrides the definition give here.
-        """ # nopep8
+        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s direction at node n1 . Note that the thickness defined on the *ELEMENT_ BEAM_THICKNESS card overrides the definition give here."""  # nopep8
         return self._cards[6].get_value("ts1")
 
     @ts1.setter
@@ -618,8 +595,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def ts2(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s direction at node n2 .
-        """ # nopep8
+        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s direction at node n2 ."""  # nopep8
         return self._cards[6].get_value("ts2")
 
     @ts2.setter
@@ -629,8 +605,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def tt1(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t direction at node n1 .
-        """ # nopep8
+        """Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t direction at node n1 ."""  # nopep8
         return self._cards[6].get_value("tt1")
 
     @tt1.setter
@@ -640,8 +615,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def tt2(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t direction at node n2 .
-        """ # nopep8
+        """Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t direction at node n2 ."""  # nopep8
         return self._cards[6].get_value("tt2")
 
     @tt2.setter
@@ -653,8 +627,8 @@ class SectionBeamLegacy(KeywordBase):
     def print(self) -> typing.Optional[float]:
         """Get or set the Output spot force resultant from spotwelds.
         EQ.0.0: Data is output to SWFORC file.
-        EQ.1.0: Output is surpressed.
-        """ # nopep8
+        EQ.1.0: Output is suppressed.
+        """  # nopep8
         return self._cards[6].get_value("print")
 
     @print.setter
@@ -667,7 +641,7 @@ class SectionBeamLegacy(KeywordBase):
         """Get or set the Option to specify torsional behavior for spot weld beams.
         EQ.0.0:	Torsional stiffness is active.
         EQ.1.0 : Torsional stiffness is zero(free to twist).
-        """ # nopep8
+        """  # nopep8
         return self._cards[6].get_value("itoff")
 
     @itoff.setter
@@ -677,8 +651,7 @@ class SectionBeamLegacy(KeywordBase):
 
     @property
     def title(self) -> typing.Optional[str]:
-        """Get or set the Additional title line
-        """ # nopep8
+        """Get or set the Additional title line"""  # nopep8
         return self._cards[7].cards[0].get_value("title")
 
     @title.setter
@@ -703,4 +676,3 @@ class SectionBeamLegacy(KeywordBase):
     def cid_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for cid."""
         self.cid = value.cid
-

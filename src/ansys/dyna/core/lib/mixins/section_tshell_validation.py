@@ -44,8 +44,10 @@ class SectionTShellValidationMixin:
     """
 
     if TYPE_CHECKING:
+
         @property
         def sets(self) -> typing.List["SectionTshellCardSet"]:
+            """List of card set items belonging to this keyword."""
             ...
 
     def _is_valid(self) -> typing.Tuple[bool, str]:

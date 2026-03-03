@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -21,16 +21,18 @@
 # SOFTWARE.
 
 """Legacy SectionSolid implementation preserved from pydyna 0.11.0."""
+
 import typing
 import warnings
+
 import pandas as pd
 
-from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.card import Card, Field
 from ansys.dyna.core.lib.field_schema import FieldSchema
-from ansys.dyna.core.lib.table_card import TableCard
-from ansys.dyna.core.lib.series_card import SeriesCard
-from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
+from ansys.dyna.core.lib.series_card import SeriesCard
+from ansys.dyna.core.lib.table_card import TableCard
 
 _SECTIONSOLID_CARD0 = (
     FieldSchema("secid", int, 0, 10, None),
@@ -52,9 +54,8 @@ _SECTIONSOLID_CARD1 = (
     FieldSchema("nhsv", int, 50, 10, 0),
 )
 
-_SECTIONSOLID_OPTION0_CARD0 = (
-    FieldSchema("title", str, 0, 80, None),
-)
+_SECTIONSOLID_OPTION0_CARD0 = (FieldSchema("title", str, 0, 80, None),)
+
 
 class SectionSolidLegacy(KeywordBase):
     """Legacy DYNA SECTION_SOLID keyword (pydyna 0.11.0 API)."""
@@ -105,22 +106,23 @@ class SectionSolidLegacy(KeywordBase):
                 float,
                 lambda: self.lmc,
                 lambda: self.elform in [101, 102, 103, 104, 105],
-                data = kwargs.get("pi")),
+                data=kwargs.get("pi"),
+            ),
             OptionCardSet(
-                option_spec = SectionSolidLegacy.option_specs[0],
-                cards = [
+                option_spec=SectionSolidLegacy.option_specs[0],
+                cards=[
                     Card.from_field_schemas_with_defaults(
                         _SECTIONSOLID_OPTION0_CARD0,
                         **kwargs,
                     ),
                 ],
-                **kwargs
+                **kwargs,
             ),
         ]
+
     @property
     def secid(self) -> typing.Optional[int]:
-        """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.
-        """ # nopep8
+        """Get or set the Section ID. SECID is referenced on the *PART card and must be unique."""  # nopep8
         return self._cards[0].get_value("secid")
 
     @secid.setter
@@ -181,14 +183,68 @@ class SectionSolidLegacy(KeywordBase):
         EQ.115 : 1 point pentahedron element with hourglass control
         GE.201 : Isogeometric solids with NURBS. (see *ELEMENT_SOLID_NURBS_PATCH)
         GE.1000 : Generalized user - defined solid element formulation(see *DEFINE_ELEMENT_GENERALIZED_SOLID)
-        """ # nopep8
+        """  # nopep8
         return self._cards[0].get_value("elform")
 
     @elform.setter
     def elform(self, value: int) -> None:
         """Set the elform property."""
-        if value not in [1, -1, -2, -18, 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 41, 42, 43, 45, 47, 60, 62, 98, 99, 101, 102, 103, 104, 105, 115, 201, 1000, None]:
-            raise Exception("""elform must be `None` or one of {1,-1,-2,-18,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,41,42,43,45,47,60,62,98,99,101,102,103,104,105,115,201,1000}.""")
+        if value not in [
+            1,
+            -1,
+            -2,
+            -18,
+            0,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            41,
+            42,
+            43,
+            45,
+            47,
+            60,
+            62,
+            98,
+            99,
+            101,
+            102,
+            103,
+            104,
+            105,
+            115,
+            201,
+            1000,
+            None,
+        ]:
+            raise Exception(
+                """elform must be `None` or one of {1,-1,-2,-18,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,41,42,43,45,47,60,62,98,99,101,102,103,104,105,115,201,1000}."""
+            )
         self._cards[0].set_value("elform", value)
 
     @property
@@ -199,7 +255,7 @@ class SectionSolidLegacy(KeywordBase):
         EQ.3: pressure outflow,
         EQ.4: pressure inflow (default for ELFORM 7).
         EQ.5: receptor for blast load (see *LOAD_BLAST_ENHANCED, available only for ELFORM=11).
-        """ # nopep8
+        """  # nopep8
         return self._cards[0].get_value("aet")
 
     @aet.setter
@@ -211,8 +267,7 @@ class SectionSolidLegacy(KeywordBase):
 
     @property
     def cohoff(self) -> typing.Optional[float]:
-        """Get or set the Applies to cohesive solid elements 20 and 22. COHOFF specifies the relative location of the cohesive layer. It must be a number between -1 and 1. A value of -1 will place it on the bottom face of the cohesive element, while a value of +1 will place it on the top face. This parameter is preferably used when the cohesive element is used for connecting shells with different thicknesses. In this case the cohesive layer should not be located exactly between the bottom and top layer which is the default location
-        """ # nopep8
+        """Get or set the Applies to cohesive solid elements 20 and 22. COHOFF specifies the relative location of the cohesive layer. It must be a number between -1 and 1. A value of -1 will place it on the bottom face of the cohesive element, while a value of +1 will place it on the top face. This parameter is preferably used when the cohesive element is used for connecting shells with different thicknesses. In this case the cohesive layer should not be located exactly between the bottom and top layer which is the default location"""  # nopep8
         return self._cards[0].get_value("cohoff")
 
     @cohoff.setter
@@ -222,8 +277,7 @@ class SectionSolidLegacy(KeywordBase):
 
     @property
     def gaskeit(self) -> typing.Optional[float]:
-        """Get or set the Gasket thickness for converting ELFORM 19, 20, 21 and 22 to gasket elements and use with *MAT_COHESIVE_GASKET
-        """ # nopep8
+        """Get or set the Gasket thickness for converting ELFORM 19, 20, 21 and 22 to gasket elements and use with *MAT_COHESIVE_GASKET"""  # nopep8
         return self._cards[0].get_value("gaskeit")
 
     @gaskeit.setter
@@ -233,8 +287,7 @@ class SectionSolidLegacy(KeywordBase):
 
     @property
     def nip(self) -> int:
-        """Get or set the Number of integration points for user-defined solid (0 if resultant/discrete element).
-        """ # nopep8
+        """Get or set the Number of integration points for user-defined solid (0 if resultant/discrete element)."""  # nopep8
         return self._cards[1].get_value("nip")
 
     @nip.setter
@@ -244,8 +297,7 @@ class SectionSolidLegacy(KeywordBase):
 
     @property
     def nxdof(self) -> int:
-        """Get or set the Number of extra degrees of freedom per node for user-defined solid.
-        """ # nopep8
+        """Get or set the Number of extra degrees of freedom per node for user-defined solid."""  # nopep8
         return self._cards[1].get_value("nxdof")
 
     @nxdof.setter
@@ -255,8 +307,7 @@ class SectionSolidLegacy(KeywordBase):
 
     @property
     def ihgf(self) -> int:
-        """Get or set the Flag for using hourglass stabilization (NIP.GT.0).
-        """ # nopep8
+        """Get or set the Flag for using hourglass stabilization (NIP.GT.0)."""  # nopep8
         return self._cards[1].get_value("ihgf")
 
     @ihgf.setter
@@ -268,8 +319,7 @@ class SectionSolidLegacy(KeywordBase):
 
     @property
     def itaj(self) -> int:
-        """Get or set the Flag for setting up finite element matrices (NIP.GT.0).
-        """ # nopep8
+        """Get or set the Flag for setting up finite element matrices (NIP.GT.0)."""  # nopep8
         return self._cards[1].get_value("itaj")
 
     @itaj.setter
@@ -281,8 +331,7 @@ class SectionSolidLegacy(KeywordBase):
 
     @property
     def lmc(self) -> int:
-        """Get or set the Number of property parameters.
-        """ # nopep8
+        """Get or set the Number of property parameters."""  # nopep8
         return self._cards[1].get_value("lmc")
 
     @lmc.setter
@@ -292,8 +341,7 @@ class SectionSolidLegacy(KeywordBase):
 
     @property
     def nhsv(self) -> int:
-        """Get or set the Number of history variables.
-        """ # nopep8
+        """Get or set the Number of history variables."""  # nopep8
         return self._cards[1].get_value("nhsv")
 
     @nhsv.setter
@@ -313,7 +361,7 @@ class SectionSolidLegacy(KeywordBase):
 
     @property
     def pi(self) -> SeriesCard:
-        """dynamic array of LMC property parameters.."""
+        """Dynamic array of LMC property parameters.."""
         return self._cards[3]
 
     @pi.setter
@@ -322,8 +370,7 @@ class SectionSolidLegacy(KeywordBase):
 
     @property
     def title(self) -> typing.Optional[str]:
-        """Get or set the Additional title line
-        """ # nopep8
+        """Get or set the Additional title line"""  # nopep8
         return self._cards[4].cards[0].get_value("title")
 
     @title.setter
@@ -333,4 +380,3 @@ class SectionSolidLegacy(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
-

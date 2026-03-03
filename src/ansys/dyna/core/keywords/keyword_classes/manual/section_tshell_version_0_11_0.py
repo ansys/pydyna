@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -21,13 +21,15 @@
 # SOFTWARE.
 
 """Legacy SectionTShell implementation preserved from pydyna 0.11.0."""
+
 import typing
 import warnings
-from ansys.dyna.core.lib.card import Card, Field, Flag
+
+from ansys.dyna.core.lib.card import Card
 from ansys.dyna.core.lib.field_schema import FieldSchema
-from ansys.dyna.core.lib.series_card import SeriesCard
-from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
+from ansys.dyna.core.lib.series_card import SeriesCard
 
 _SECTIONTSHELL_CARD0 = (
     FieldSchema("secid", int, 0, 10, None),
@@ -40,9 +42,8 @@ _SECTIONTSHELL_CARD0 = (
     FieldSchema("tshear", int, 70, 10, 0),
 )
 
-_SECTIONTSHELL_OPTION0_CARD0 = (
-    FieldSchema("title", str, 0, 80, None),
-)
+_SECTIONTSHELL_OPTION0_CARD0 = (FieldSchema("title", str, 0, 80, None),)
+
 
 class SectionTShellLegacy(KeywordBase):
     """Legacy DYNA SECTION_TSHELL keyword (pydyna 0.11.0 API)."""
@@ -69,29 +70,22 @@ class SectionTShellLegacy(KeywordBase):
                 _SECTIONTSHELL_CARD0,
                 **kwargs,
             ),
-            SeriesCard(
-                "bi",
-                8,
-                10,
-                float,
-                lambda: self.nip,
-                lambda: self.icomp == 1,
-                data = kwargs.get("bi")),
+            SeriesCard("bi", 8, 10, float, lambda: self.nip, lambda: self.icomp == 1, data=kwargs.get("bi")),
             OptionCardSet(
-                option_spec = SectionTShellLegacy.option_specs[0],
-                cards = [
+                option_spec=SectionTShellLegacy.option_specs[0],
+                cards=[
                     Card.from_field_schemas_with_defaults(
                         _SECTIONTSHELL_OPTION0_CARD0,
                         **kwargs,
                     ),
                 ],
-                **kwargs
+                **kwargs,
             ),
         ]
+
     @property
     def secid(self) -> typing.Optional[int]:
-        """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.
-        """ # nopep8
+        """Get or set the Section ID. SECID is referenced on the *PART card and must be unique."""  # nopep8
         return self._cards[0].get_value("secid")
 
     @secid.setter
@@ -108,7 +102,7 @@ class SectionTShellLegacy(KeywordBase):
         EQ.5:  assumed strain reduced integration.
         EQ.6: assumed strain reduced integration with shell materials
         EQ.7:	assumed strain  2×2 in plane integration
-        """ # nopep8
+        """  # nopep8
         return self._cards[0].get_value("elform")
 
     @elform.setter
@@ -120,8 +114,7 @@ class SectionTShellLegacy(KeywordBase):
 
     @property
     def shrf(self) -> float:
-        """Get or set the Shear factor (default =1.0). A value of 5/6 is recommended.
-        """ # nopep8
+        """Get or set the Shear factor (default =1.0). A value of 5/6 is recommended."""  # nopep8
         return self._cards[0].get_value("shrf")
 
     @shrf.setter
@@ -131,8 +124,7 @@ class SectionTShellLegacy(KeywordBase):
 
     @property
     def nip(self) -> int:
-        """Get or set the Number of through shell thickness integration points (default = 2).
-        """ # nopep8
+        """Get or set the Number of through shell thickness integration points (default = 2)."""  # nopep8
         return self._cards[0].get_value("nip")
 
     @nip.setter
@@ -146,7 +138,7 @@ class SectionTShellLegacy(KeywordBase):
         EQ.1.0: average resultants and fiber lengths (default),
         EQ.2.0: resultants at plan points and fiber lengths,
         EQ.3.0: resultants, stresses at all points, fiber lengths.
-        """ # nopep8
+        """  # nopep8
         return self._cards[0].get_value("propt")
 
     @propt.setter
@@ -162,7 +154,7 @@ class SectionTShellLegacy(KeywordBase):
         LT.0: absolute value is specified rule number,
         EQ.0: Gauss (up to five points are permitted),
         EQ.1: trapezoidal, not recommended for accuracy reasons.
-        """ # nopep8
+        """  # nopep8
         return self._cards[0].get_value("qr")
 
     @qr.setter
@@ -175,7 +167,7 @@ class SectionTShellLegacy(KeywordBase):
         """Get or set the Flag for layered composite material mode:
         EQ.0: Flag turned off (default),
         EQ.1: a material angle is defined for each through thickness integration point . For each layer one integration point is used.
-        """ # nopep8
+        """  # nopep8
         return self._cards[0].get_value("icomp")
 
     @icomp.setter
@@ -190,7 +182,7 @@ class SectionTShellLegacy(KeywordBase):
         """Get or set the Flag for transverse shear strain or stress distribution (see Remarks 4 and 5):
         EQ.0.0: Parabolic,
         EQ.1.0: Constant through thickness.
-        """ # nopep8
+        """  # nopep8
         return self._cards[0].get_value("tshear")
 
     @tshear.setter
@@ -202,7 +194,7 @@ class SectionTShellLegacy(KeywordBase):
 
     @property
     def bi(self) -> SeriesCard:
-        """dynamic array of beta-i: material angle at ith-integration point.."""
+        """Dynamic array of beta-i: material angle at ith-integration point.."""
         return self._cards[1]
 
     @bi.setter
@@ -211,8 +203,7 @@ class SectionTShellLegacy(KeywordBase):
 
     @property
     def title(self) -> typing.Optional[str]:
-        """Get or set the Additional title line
-        """ # nopep8
+        """Get or set the Additional title line"""  # nopep8
         return self._cards[2].cards[0].get_value("title")
 
     @title.setter
@@ -222,4 +213,3 @@ class SectionTShellLegacy(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
-
