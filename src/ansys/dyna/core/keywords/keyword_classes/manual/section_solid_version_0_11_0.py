@@ -20,20 +20,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module providing the SectionSolid class."""
+"""Legacy SectionSolid implementation preserved from pydyna 0.11.0."""
 import typing
+import warnings
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
-from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
-from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
-_SECTIONSOLIDCARDSET_CARD0 = (
+_SECTIONSOLID_CARD0 = (
     FieldSchema("secid", int, 0, 10, None),
     FieldSchema("elform", int, 10, 10, 1),
     FieldSchema("aet", int, 20, 10, 0),
@@ -44,7 +43,7 @@ _SECTIONSOLIDCARDSET_CARD0 = (
     FieldSchema("gaskeit", float, 70, 10, None),
 )
 
-_SECTIONSOLIDCARDSET_CARD1 = (
+_SECTIONSOLID_CARD1 = (
     FieldSchema("nip", int, 0, 10, 0),
     FieldSchema("nxdof", int, 10, 10, 0),
     FieldSchema("ihgf", int, 20, 10, 0),
@@ -53,29 +52,37 @@ _SECTIONSOLIDCARDSET_CARD1 = (
     FieldSchema("nhsv", int, 50, 10, 0),
 )
 
-_SECTIONSOLIDCARDSET_OPTION0_CARD0 = (
+_SECTIONSOLID_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
 
-class SectionSolidCardSet(Cards):
-    """ CardSet."""
+class SectionSolidLegacy(KeywordBase):
+    """Legacy DYNA SECTION_SOLID keyword (pydyna 0.11.0 API)."""
 
+    keyword = "SECTION"
+    subkeyword = "SOLID"
     option_specs = [
         OptionSpec("TITLE", -1, 1),
     ]
 
     def __init__(self, **kwargs):
-        """Initialize the SectionSolidCardSet CardSet."""
-        super().__init__(kwargs["keyword"])
-        self._parent = kwargs["parent"]
+        """Initialize the SectionSolidLegacy class."""
+        warnings.warn(
+            "SectionSolidLegacy is deprecated and will be removed in a future version. "
+            "This legacy class uses the pre-0.12.0 flat keyword API. "
+            "Use SectionSolid instead, which supports multiple section definitions via the CardSet API.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        super().__init__(**kwargs)
         kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
-                _SECTIONSOLIDCARDSET_CARD0,
+                _SECTIONSOLID_CARD0,
                 **kwargs,
             ),
             Card.from_field_schemas_with_defaults(
-                _SECTIONSOLIDCARDSET_CARD1,
+                _SECTIONSOLID_CARD1,
                 active_func=lambda: self.elform in [101, 102, 103, 104, 105],
                 **kwargs,
             ),
@@ -100,17 +107,16 @@ class SectionSolidCardSet(Cards):
                 lambda: self.elform in [101, 102, 103, 104, 105],
                 data = kwargs.get("pi")),
             OptionCardSet(
-                option_spec = SectionSolidCardSet.option_specs[0],
+                option_spec = SectionSolidLegacy.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
-                        _SECTIONSOLIDCARDSET_OPTION0_CARD0,
+                        _SECTIONSOLID_OPTION0_CARD0,
                         **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
-
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.
@@ -327,202 +333,4 @@ class SectionSolidCardSet(Cards):
 
         if value:
             self.activate_option("TITLE")
-
-    @property
-    def parent(self) -> KeywordBase:
-        """Get the parent keyword."""
-        return self._parent
-
-class SectionSolid(KeywordBase):
-    """DYNA SECTION_SOLID keyword"""
-
-    keyword = "SECTION"
-    subkeyword = "SOLID"
-
-    def __init__(self, **kwargs):
-        """Initialize the SectionSolid class."""
-        super().__init__(**kwargs)
-        kwargs["parent"] = self
-        kwargs["keyword"] = self
-        self._cards = [
-            CardSet(
-                SectionSolidCardSet,
-                option_specs = SectionSolidCardSet.option_specs,
-                **kwargs
-            ),
-        ]
-    @property
-    def secid(self) -> typing.Optional[int]:
-        """Get or set the secid
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].secid
-
-    @secid.setter
-    def secid(self, value: int) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].secid = value
-
-    @property
-    def elform(self) -> int:
-        """Get or set the elform
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].elform
-
-    @elform.setter
-    def elform(self, value: int) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].elform = value
-
-    @property
-    def aet(self) -> int:
-        """Get or set the aet
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].aet
-
-    @aet.setter
-    def aet(self, value: int) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].aet = value
-
-    @property
-    def cohoff(self) -> typing.Optional[float]:
-        """Get or set the cohoff
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].cohoff
-
-    @cohoff.setter
-    def cohoff(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].cohoff = value
-
-    @property
-    def gaskeit(self) -> typing.Optional[float]:
-        """Get or set the gaskeit
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].gaskeit
-
-    @gaskeit.setter
-    def gaskeit(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].gaskeit = value
-
-    @property
-    def nip(self) -> int:
-        """Get or set the nip
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].nip
-
-    @nip.setter
-    def nip(self, value: int) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].nip = value
-
-    @property
-    def nxdof(self) -> int:
-        """Get or set the nxdof
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].nxdof
-
-    @nxdof.setter
-    def nxdof(self, value: int) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].nxdof = value
-
-    @property
-    def ihgf(self) -> int:
-        """Get or set the ihgf
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].ihgf
-
-    @ihgf.setter
-    def ihgf(self, value: int) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].ihgf = value
-
-    @property
-    def itaj(self) -> int:
-        """Get or set the itaj
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].itaj
-
-    @itaj.setter
-    def itaj(self, value: int) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].itaj = value
-
-    @property
-    def lmc(self) -> int:
-        """Get or set the lmc
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].lmc
-
-    @lmc.setter
-    def lmc(self, value: int) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].lmc = value
-
-    @property
-    def nhsv(self) -> int:
-        """Get or set the nhsv
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].nhsv
-
-    @nhsv.setter
-    def nhsv(self, value: int) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].nhsv = value
-
-    @property
-    def integration_points(self) -> pd.DataFrame:
-        """Get the integration_points."""
-        ensure_card_set_properties(self, False)
-        return self.sets[0].integration_points
-
-    @integration_points.setter
-    def integration_points(self, df: pd.DataFrame):
-        ensure_card_set_properties(self, True)
-        self.sets[0].integration_points = df
-
-    @property
-    def pi(self) -> SeriesCard:
-        """Gets the pi."""
-        ensure_card_set_properties(self, False)
-        return self.sets[0].pi
-
-    @pi.setter
-    def pi(self, value: typing.List) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].pi = value
-
-    @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the Additional title line
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].title
-
-    @title.setter
-    def title(self, value: str) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].title = value
-
-    @property
-    def sets(self) -> typing.List[SectionSolidCardSet]:
-        """Gets the list of sets."""
-        return self._cards[0].items()
-
-    def add_set(self, **kwargs):
-        """Adds a set."""
-        self._cards[0].add_item(**kwargs)
 

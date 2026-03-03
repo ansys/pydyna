@@ -54,11 +54,24 @@ class CardSet(CardInterface):
         self._bounded = length_func != None
         self._parent = kwargs.pop("parent", None)
         self._keyword = kwargs.pop("keyword", None)
+        card_set_count = kwargs.pop("card_set_count", None)
         if option_specs == None:
             option_specs = []
         self._option_specs = option_specs
         self._initialized: bool = False
-        if len(kwargs) > 0 and not self._bounded:
+        if card_set_count is not None:
+            if not self._bounded:
+                _infrastructure_keys = {"format", "user_comment"}
+                field_kwargs = {k: v for k, v in kwargs.items() if k not in _infrastructure_keys}
+                if field_kwargs:
+                    raise ValueError(
+                        "card_set_count is incompatible with field keyword arguments. "
+                        "Use either card_set_count=N to create N empty sets, "
+                        "or field kwargs to initialise the first set with specific values, not both."
+                    )
+                self._initialize_data(card_set_count)
+                self._initialized = True
+        elif len(kwargs) > 0 and not self._bounded:
             # implicit unbounded initializer!
             self._initialize(**kwargs)
         kwargs["parent"] = self._parent

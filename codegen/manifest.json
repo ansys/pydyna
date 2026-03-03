@@ -775,6 +775,22 @@
             "duplicate_inertia_card": 9
         },
         "generation-options": {
+            "card-set": [
+                {
+                    "source-refs": [
+                        "main_card",
+                        "dimensions_card",
+                        "inertia_card",
+                        "truss_card",
+                        "integrated_thickness_card",
+                        "discrete_beam_card",
+                        "spotweld_thickness_card"
+                    ],
+                    "source-options": [0],
+                    "target-ref": "main_card",
+                    "name": "SectionBeamCardSet"
+                }
+            ],
             "skip-card": [
                 {
                     "ref": "mat146_discrete_card"
@@ -1154,6 +1170,17 @@
     "SECTION_TSHELL": {
         "classname": "SectionTShell",
         "generation-options": {
+            "card-set": [
+                {
+                    "source-refs": [
+                        "main_card",
+                        "bi_card"
+                    ],
+                    "source-options": [0],
+                    "target-ref": "main_card",
+                    "name": "SectionTshellCardSet"
+                }
+            ],
             "series-card": [
                 {
                     "name": "bi",
@@ -1165,10 +1192,16 @@
                     "help": "dynamic array of beta-i: material angle at ith-integration point.",
                     "ref": "bi_card"
                 }
+            ],
+            "add-mixin": [
+                {
+                    "source": "ansys.dyna.core.lib.mixins.section_tshell_validation",
+                    "name": "SectionTShellValidationMixin"
+                }
             ]
         },
-        "comment": "error handling in subclass",
         "labels": {
+            "main_card": 0,
             "bi_card": 1
         }
     },
@@ -1233,6 +1266,19 @@
     },
     "SECTION_SOLID": {
         "generation-options": {
+            "card-set": [
+                {
+                    "source-refs": [
+                        "main_card",
+                        "user_element_card",
+                        "integration_points_card",
+                        "pi_card"
+                    ],
+                    "source-options": [0],
+                    "target-ref": "main_card",
+                    "name": "SectionSolidCardSet"
+                }
+            ],
             "table-card": [
                 {
                     "property-name": "integration_points",
@@ -1283,6 +1329,7 @@
             ]
         },
         "labels": {
+            "main_card": 0,
             "user_element_card": 1,
             "integration_points_card": 2,
             "pi_card": 3
