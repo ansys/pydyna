@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
@@ -46,11 +47,18 @@ _EOS015_CARD1 = (
     FieldSchema("ivs", float, 60, 10, None),
 )
 
+_EOS015_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Eos015(KeywordBase):
     """DYNA EOS_015 keyword"""
 
     keyword = "EOS"
     subkeyword = "015"
+    option_specs = [
+        OptionSpec("TITLE", -1, 1),
+    ]
     _link_fields = {
         "lcid1": LinkType.DEFINE_CURVE,
         "lcid2": LinkType.DEFINE_CURVE,
@@ -61,6 +69,7 @@ class Eos015(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the Eos015 class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _EOS015_CARD0,
@@ -69,6 +78,16 @@ class Eos015(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EOS015_CARD1,
                 **kwargs,
+            ),
+            OptionCardSet(
+                option_spec = Eos015.option_specs[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _EOS015_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
             ),
         ]
     @property
@@ -209,6 +228,20 @@ class Eos015(KeywordBase):
     def ivs(self, value: float) -> None:
         """Set the ivs property."""
         self._cards[1].set_value("ivs", value)
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 
     @property
     def lcid1_link(self) -> typing.Optional[DefineCurve]:

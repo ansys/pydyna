@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _EOSGRUNEISEN_CARD0 = (
@@ -43,15 +44,23 @@ _EOSGRUNEISEN_CARD1 = (
     FieldSchema("lcid", int, 20, 10, None),
 )
 
+_EOSGRUNEISEN_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class EosGruneisen(KeywordBase):
     """DYNA EOS_GRUNEISEN keyword"""
 
     keyword = "EOS"
     subkeyword = "GRUNEISEN"
+    option_specs = [
+        OptionSpec("TITLE", -1, 1),
+    ]
 
     def __init__(self, **kwargs):
         """Initialize the EosGruneisen class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _EOSGRUNEISEN_CARD0,
@@ -60,6 +69,16 @@ class EosGruneisen(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EOSGRUNEISEN_CARD1,
                 **kwargs,
+            ),
+            OptionCardSet(
+                option_spec = EosGruneisen.option_specs[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _EOSGRUNEISEN_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
             ),
         ]
     @property
@@ -175,4 +194,18 @@ class EosGruneisen(KeywordBase):
     def lcid(self, value: int) -> None:
         """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

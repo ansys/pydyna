@@ -8,7 +8,8 @@
                 "HOURGLASS",
                 "SENSOR",
                 "SET",
-                "MAT"
+                "MAT",
+                "EOS"
             ],
             "generation-options": {
                 "add-option": [

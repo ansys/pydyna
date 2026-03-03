@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _EOS010_CARD0 = (
@@ -71,15 +72,23 @@ _EOS010_CARD4 = (
     FieldSchema("fmngr", float, 50, 10, 0.0),
 )
 
+_EOS010_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Eos010(KeywordBase):
     """DYNA EOS_010 keyword"""
 
     keyword = "EOS"
     subkeyword = "010"
+    option_specs = [
+        OptionSpec("TITLE", -1, 1),
+    ]
 
     def __init__(self, **kwargs):
         """Initialize the Eos010 class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _EOS010_CARD0,
@@ -100,6 +109,16 @@ class Eos010(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EOS010_CARD4,
                 **kwargs,
+            ),
+            OptionCardSet(
+                option_spec = Eos010.option_specs[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _EOS010_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
             ),
         ]
     @property
@@ -431,4 +450,18 @@ class Eos010(KeywordBase):
     def fmngr(self, value: float) -> None:
         """Set the fmngr property."""
         self._cards[4].set_value("fmngr", value)
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[5].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[5].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 
