@@ -55,7 +55,8 @@ class ControlFormingOutput(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGOUTPUT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the ID of a tooling kinematics curve, as defined by *DEFINE_CURVE and used by *BOUNDARY_PRESCRIBED_MOTION_RIGID.

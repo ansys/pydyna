@@ -90,16 +90,20 @@ class ContactSpg(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACTSPG_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTSPG_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTSPG_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTSPG_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid1(self) -> typing.Optional[int]:
         """Get or set the Part IDs of SPG parts involved in particle contact

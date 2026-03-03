@@ -119,22 +119,28 @@ class Mat166(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT166_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT166_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT166_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT166_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT166_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT166_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = Mat166.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

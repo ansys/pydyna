@@ -58,10 +58,12 @@ class ContactGuidedCableSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACTGUIDEDCABLESET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTGUIDEDCABLESET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Contact interface ID. This must be a unique number.

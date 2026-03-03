@@ -44,7 +44,8 @@ class ControlCpu(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLCPU_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cputim(self) -> float:
         """Get or set the Seconds of cpu time:

@@ -85,13 +85,16 @@ class MatAddDamageGissmoStochastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATADDDAMAGEGISSMOSTOCHASTIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDDAMAGEGISSMOSTOCHASTIC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDDAMAGEGISSMOSTOCHASTIC_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatAddDamageGissmoStochastic.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

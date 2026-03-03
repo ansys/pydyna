@@ -50,7 +50,8 @@ class EmSolverBemmat(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMSOLVERBEMMAT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def matid(self) -> int:
         """Get or set the Defines which BEM matrix the card refers to:

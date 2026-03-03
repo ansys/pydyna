@@ -67,7 +67,8 @@ class DefineSdOrientation(KeywordBase):
                 None,
                 name="vectors",
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineSdOrientation.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

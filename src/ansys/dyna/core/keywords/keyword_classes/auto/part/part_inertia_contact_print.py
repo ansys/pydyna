@@ -117,28 +117,36 @@ class PartInertiaContactPrint(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINT_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINT_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINT_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINT_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINT_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINT_CARD7,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Heading for the part.

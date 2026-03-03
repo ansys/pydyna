@@ -42,4 +42,5 @@ class ControlMppIoBinoutonly(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPIOBINOUTONLY_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

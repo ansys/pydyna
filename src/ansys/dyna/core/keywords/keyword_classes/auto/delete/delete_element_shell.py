@@ -43,7 +43,8 @@ class DeleteElementShell(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DELETEELEMENTSHELL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def esid(self) -> typing.Optional[int]:
         """Get or set the Shell element set ID, see *SET_SHELL.

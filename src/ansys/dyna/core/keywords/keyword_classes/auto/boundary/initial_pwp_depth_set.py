@@ -48,7 +48,8 @@ class InitialPwpDepthSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALPWPDEPTHSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part set ID, see also *PART.

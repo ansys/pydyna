@@ -57,7 +57,8 @@ class ElementBeamPulley(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTBEAMPULLEY_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def puid(self) -> int:
         """Get or set the Pulley ID. A unique number has to be used.

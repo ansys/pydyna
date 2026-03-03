@@ -50,7 +50,8 @@ class ConstrainedRigidBodiesSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDRIGIDBODIESSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pidl(self) -> typing.Optional[int]:
         """Get or set the Lead rigid body part ID, see *PART.

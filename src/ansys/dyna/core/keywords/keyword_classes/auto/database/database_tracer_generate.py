@@ -56,10 +56,12 @@ class DatabaseTracerGenerate(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASETRACERGENERATE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASETRACERGENERATE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the Interval time between each tracer generation and position update (See Remark 1).

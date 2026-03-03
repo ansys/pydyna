@@ -42,4 +42,5 @@ class ControlDebug(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLDEBUG_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

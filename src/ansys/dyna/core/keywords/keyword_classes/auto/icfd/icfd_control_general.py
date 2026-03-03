@@ -51,7 +51,8 @@ class IcfdControlGeneral(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLGENERAL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def atype(self) -> int:
         """Get or set the Analysis type:

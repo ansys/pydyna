@@ -47,7 +47,8 @@ class ControlFormingHomeGap(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGHOMEGAP_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def psidu(self) -> typing.Optional[int]:
         """Get or set the Part set ID of the tools above the blank (upper tools)

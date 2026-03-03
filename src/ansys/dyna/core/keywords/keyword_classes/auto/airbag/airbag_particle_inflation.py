@@ -175,40 +175,52 @@ class AirbagParticleInflation(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATION_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATION_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATION_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATION_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATION_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATION_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATION_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATION_CARD9,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATION_CARD10,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATION_CARD11,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid1(self) -> typing.Optional[int]:
         """Get or set the Part or part set ID defining the complete airbag.

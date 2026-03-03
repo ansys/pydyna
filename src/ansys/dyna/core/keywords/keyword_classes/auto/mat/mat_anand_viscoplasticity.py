@@ -75,10 +75,12 @@ class MatAnandViscoplasticity(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATANANDVISCOPLASTICITY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANANDVISCOPLASTICITY_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatAnandViscoplasticity.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

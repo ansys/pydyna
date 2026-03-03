@@ -59,7 +59,8 @@ class SectionSphInteraction(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SECTIONSPHINTERACTION_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = SectionSphInteraction.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

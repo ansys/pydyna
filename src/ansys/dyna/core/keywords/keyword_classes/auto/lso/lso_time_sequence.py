@@ -72,16 +72,20 @@ class LsoTimeSequence(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LSOTIMESEQUENCE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LSOTIMESEQUENCE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LSOTIMESEQUENCE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LSOTIMESEQUENCE_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def solver_name(self) -> str:
         """Get or set the Selects the solver from which data is output in this time sequence.

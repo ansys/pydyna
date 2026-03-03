@@ -43,7 +43,8 @@ class EmControlErosion(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCONTROLEROSION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ectrl(self) -> int:
         """Get or set the Erosion search:

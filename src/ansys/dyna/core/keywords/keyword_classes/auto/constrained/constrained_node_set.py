@@ -53,10 +53,12 @@ class ConstrainedNodeSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODESET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODESET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cnsid(self) -> typing.Optional[int]:
         """Get or set the Optional constrained node set ID

@@ -57,7 +57,8 @@ class IcfdPartVol(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDPARTVOL_CARD0,
                 **kwargs,
-            ),            TableCard(
+            ),
+            TableCard(
                 [
                     Field("spid1", int, 0, 10, None),
                     Field("spid2", int, 10, 10, None),
@@ -71,7 +72,8 @@ class IcfdPartVol(KeywordBase):
                 None,
                 name="nodes",
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = IcfdPartVol.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

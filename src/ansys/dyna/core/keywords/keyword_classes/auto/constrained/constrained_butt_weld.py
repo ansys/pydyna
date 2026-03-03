@@ -47,7 +47,8 @@ class ConstrainedButtWeld(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDBUTTWELD_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsid1(self) -> typing.Optional[int]:
         """Get or set the Node set ID for one side of the butt weld, See *SET_NODE_option.

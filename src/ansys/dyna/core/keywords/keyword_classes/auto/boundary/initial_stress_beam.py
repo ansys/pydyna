@@ -134,37 +134,48 @@ class InitialStressBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSBEAM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSBEAM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSBEAM_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSBEAM_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSBEAM_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSBEAM_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSBEAM_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSBEAM_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSBEAM_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSBEAM_CARD9,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSBEAM_CARD10,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Beam element ID.

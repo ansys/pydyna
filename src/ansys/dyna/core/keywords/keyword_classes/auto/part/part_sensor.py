@@ -49,7 +49,8 @@ class PartSensor(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARTSENSOR_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> int:
         """Get or set the Part ID, which is controlled by sensor.

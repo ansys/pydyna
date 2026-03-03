@@ -52,7 +52,8 @@ class InitialTemperatureSet(KeywordBase):
                 None,
                 name="sets",
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sets(self) -> pd.DataFrame:
         """Get the table of sets."""

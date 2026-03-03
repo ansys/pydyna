@@ -57,11 +57,13 @@ class DatabaseBinaryD3Dump(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYD3DUMP_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYD3DUMP_CARD1,
                 active_func=lambda: self._cards[1].has_nondefault_values(),
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cycl(self) -> typing.Optional[float]:
         """Get or set the For D3DUMP and RUNRSF options this field is the number of time steps between output states.  For the D3DLF option, the value, n, inputted in this field causes an output state to be written every nth convergence check during the explicit dynamic relaxation phase

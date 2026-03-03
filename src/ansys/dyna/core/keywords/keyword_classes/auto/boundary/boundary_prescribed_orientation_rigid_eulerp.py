@@ -63,10 +63,12 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDORIENTATIONRIGIDEULERP_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDORIENTATIONRIGIDEULERP_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pidb(self) -> typing.Optional[int]:
         """Get or set the Part ID for rigid body B whose orientation is prescribed

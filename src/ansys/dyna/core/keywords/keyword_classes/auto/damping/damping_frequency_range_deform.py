@@ -54,7 +54,8 @@ class DampingFrequencyRangeDeform(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DAMPINGFREQUENCYRANGEDEFORM_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cdamp(self) -> float:
         """Get or set the Damping in fraction of critical.  Accurate application of this damping depends on the time step being small compared to the period of interest.

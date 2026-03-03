@@ -78,16 +78,20 @@ class PartRepositionContact(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARTREPOSITIONCONTACT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTREPOSITIONCONTACT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTREPOSITIONCONTACT_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTREPOSITIONCONTACT_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Heading for the part.

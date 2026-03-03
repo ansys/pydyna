@@ -118,22 +118,28 @@ class ElementShellNurbsPatch(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLNURBSPATCH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLNURBSPATCH_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLNURBSPATCH_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLNURBSPATCH_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLNURBSPATCH_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLNURBSPATCH_CARD5,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def npid(self) -> typing.Optional[int]:
         """Get or set the Nurbs-Patch Element ID.  A unique number has to be chosen.

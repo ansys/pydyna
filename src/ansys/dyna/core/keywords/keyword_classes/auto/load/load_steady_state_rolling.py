@@ -83,16 +83,20 @@ class LoadSteadyStateRolling(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADSTEADYSTATEROLLING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSTEADYSTATEROLLING_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSTEADYSTATEROLLING_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSTEADYSTATEROLLING_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Load steady state rolling ID

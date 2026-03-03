@@ -191,49 +191,64 @@ class AirbagParticleMppDecompositionJetId(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONJETID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONJETID_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONJETID_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONJETID_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONJETID_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONJETID_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONJETID_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONJETID_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONJETID_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONJETID_CARD9,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONJETID_CARD10,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONJETID_CARD11,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONJETID_CARD12,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONJETID_CARD13,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPPDECOMPOSITIONJETID_CARD14,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sx(self) -> typing.Optional[float]:
         """Get or set the Scale factor for X direction use for MPP decomposition of particle domain.

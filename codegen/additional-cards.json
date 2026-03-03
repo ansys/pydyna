@@ -44,6 +44,12 @@
             {"name": "HEADING", "type": "string", "default": null, "position": 10, "width": 70, "help": "Interface descriptor. We suggest using unique descriptions."}
         ]
     },
+    "CROSS_SECTION_ID": {
+        "fields": [
+            {"name": "CSID", "type": "integer", "default": null, "position": 0, "width": 10, "help": "Cross Section ID"},
+            {"name": "HEADING", "type": "string", "default": null, "position": 10, "width": 70, "help": "Cross Section descriptor. It is suggested that unique descriptions be used."}
+        ]
+    },
     "CONTACT_MPP_1": {
         "fields": [
             {"name": "IGNORE", "type": "integer", "default": 0, "position": 0, "width": 10, "help": "By setting this variable to 1, the \"ignore initial penetrations\" option is turned on for this contact.  Alternatively, this option may be turned on by setting IGNORE = 1 on Card 4 of *CONTROL_CONTACT or on Optional Card C of *CONTACT.  In other words, if IGNORE is set to 1 in any of three places, initial penetrations are tracked.  "},

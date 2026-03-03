@@ -51,7 +51,8 @@ class DatabaseBinaryRunrsf(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYRUNRSF_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cycl(self) -> typing.Optional[float]:
         """Get or set the Output interval in time steps (a time step is a cycle). For the D3DRFL

@@ -182,13 +182,16 @@ class ContactSingleEdge(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACTSINGLEEDGE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTSINGLEEDGE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTSINGLEEDGE_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = ContactSingleEdge.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

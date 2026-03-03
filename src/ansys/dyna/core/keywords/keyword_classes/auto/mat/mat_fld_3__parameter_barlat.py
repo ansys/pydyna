@@ -106,19 +106,24 @@ class MatFld3_ParameterBarlat(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATFLD3_PARAMETERBARLAT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATFLD3_PARAMETERBARLAT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATFLD3_PARAMETERBARLAT_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATFLD3_PARAMETERBARLAT_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATFLD3_PARAMETERBARLAT_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatFld3_ParameterBarlat.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

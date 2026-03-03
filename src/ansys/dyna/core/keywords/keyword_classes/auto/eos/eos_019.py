@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _EOS019_CARD0 = (
@@ -33,20 +34,39 @@ _EOS019_CARD0 = (
     FieldSchema("v0", float, 30, 10, None),
 )
 
+_EOS019_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Eos019(KeywordBase):
     """DYNA EOS_019 keyword"""
 
     keyword = "EOS"
     subkeyword = "019"
+    option_specs = [
+        OptionSpec("TITLE", -1, 1),
+    ]
 
     def __init__(self, **kwargs):
         """Initialize the Eos019 class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _EOS019_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+            OptionCardSet(
+                option_spec = Eos019.option_specs[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _EOS019_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state ID, a unique number or label must be specified.
@@ -90,4 +110,18 @@ class Eos019(KeywordBase):
     def v0(self, value: float) -> None:
         """Set the v0 property."""
         self._cards[0].set_value("v0", value)
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

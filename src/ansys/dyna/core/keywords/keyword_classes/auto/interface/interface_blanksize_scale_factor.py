@@ -47,7 +47,8 @@ class InterfaceBlanksizeScaleFactor(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACEBLANKSIZESCALEFACTOR_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def idcrv(self) -> int:
         """Get or set the Curve ID in the order of appearance as in FILENAME1 in the target card, as defined by *DEFINE_TARGET_BOUNDARY.

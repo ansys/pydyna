@@ -55,7 +55,8 @@ class LoadHeatGenerationSetShell(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADHEATGENERATIONSETSHELL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Shell element set ID, *SET_SHELL.

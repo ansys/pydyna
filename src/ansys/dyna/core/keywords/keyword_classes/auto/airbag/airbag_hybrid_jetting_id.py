@@ -135,31 +135,40 @@ class AirbagHybridJettingId(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDJETTINGID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDJETTINGID_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDJETTINGID_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDJETTINGID_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDJETTINGID_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDJETTINGID_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDJETTINGID_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDJETTINGID_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDJETTINGID_CARD8,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Optional Airbag ID.

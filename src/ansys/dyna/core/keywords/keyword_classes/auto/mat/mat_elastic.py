@@ -58,7 +58,8 @@ class MatElastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATELASTIC_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatElastic.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

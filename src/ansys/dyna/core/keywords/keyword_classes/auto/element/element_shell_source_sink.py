@@ -51,7 +51,8 @@ class ElementShellSourceSink(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLSOURCESINK_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nssr(self) -> typing.Optional[int]:
         """Get or set the Node set at source. Provide an ordered set of nodes between corner nodes, which include the corner nodes

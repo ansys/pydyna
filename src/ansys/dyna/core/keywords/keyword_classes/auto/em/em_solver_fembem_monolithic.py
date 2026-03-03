@@ -47,7 +47,8 @@ class EmSolverFembemMonolithic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMSOLVERFEMBEMMONOLITHIC_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mtype(self) -> int:
         """Get or set the Monolithic solver type (See Remark 1):

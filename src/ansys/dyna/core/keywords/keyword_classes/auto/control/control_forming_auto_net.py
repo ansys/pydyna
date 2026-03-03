@@ -62,10 +62,12 @@ class ControlFormingAutoNet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGAUTONET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGAUTONET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def idnet(self) -> typing.Optional[int]:
         """Get or set the ID of the net; must be unique.

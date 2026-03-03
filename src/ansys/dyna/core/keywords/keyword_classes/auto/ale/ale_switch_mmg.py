@@ -65,10 +65,12 @@ class AleSwitchMmg(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALESWITCHMMG_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALESWITCHMMG_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def fr_mmg(self) -> typing.Optional[int]:
         """Get or set the This is the AMMG-SID before the switch. The AMMG-SID

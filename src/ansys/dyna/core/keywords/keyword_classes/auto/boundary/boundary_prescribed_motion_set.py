@@ -77,11 +77,13 @@ class BoundaryPrescribedMotionSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONSET_CARD1,
                 active_func=lambda: abs(self.dof) in [9, 10, 11] or self.vad==4,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = BoundaryPrescribedMotionSet.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

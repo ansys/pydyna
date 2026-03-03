@@ -65,7 +65,8 @@ class ElementSolidH8Toh64(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTSOLIDH8TOH64_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number has to be used.

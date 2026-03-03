@@ -50,7 +50,8 @@ class ControlImplicitDynamic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITDYNAMIC_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def imass(self) -> int:
         """Get or set the Implicit analysis type:

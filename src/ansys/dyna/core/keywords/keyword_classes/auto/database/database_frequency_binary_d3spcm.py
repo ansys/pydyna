@@ -48,10 +48,12 @@ class DatabaseFrequencyBinaryD3Spcm(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEFREQUENCYBINARYD3SPCM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASEFREQUENCYBINARYD3SPCM_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def binary(self) -> int:
         """Get or set the Flag for writing the binary plot file.

@@ -78,13 +78,16 @@ class Mat023(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT023_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT023_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT023_CARD2,
                 **kwargs,
-            ),            TableCardGroup(
+            ),
+            TableCardGroup(
                 [
                     (
                         FieldSchema("eai", float, 0, 10, None),
@@ -108,7 +111,8 @@ class Mat023(KeywordBase):
                 None,
                 "temperature_points",
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = Mat023.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

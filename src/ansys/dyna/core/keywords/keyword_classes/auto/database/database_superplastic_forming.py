@@ -43,7 +43,8 @@ class DatabaseSuperplasticForming(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASESUPERPLASTICFORMING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dtout(self) -> typing.Optional[float]:
         """Get or set the Output time interval for output to PRESSURE, CURVE1 and CURVE2 files. The PRESSURE file contains general information from the analysis and the files CURVE1 and CURVE2 contain pressure versus time from phases 1 and 2 of the analysis. The pressure file may be plotted in Phase 3 of LS-TAURUS using the SUPERPL option.

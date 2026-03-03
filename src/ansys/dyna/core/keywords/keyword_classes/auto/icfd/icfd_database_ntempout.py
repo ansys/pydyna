@@ -49,7 +49,8 @@ class IcfdDatabaseNtempout(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDATABASENTEMPOUT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Internal ICFD node ID.

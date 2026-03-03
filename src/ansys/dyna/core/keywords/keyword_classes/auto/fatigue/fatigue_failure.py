@@ -44,7 +44,8 @@ class FatigueFailure(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FATIGUEFAILURE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ifailure(self) -> int:
         """Get or set the Treatment of elements failed due to fatigue:

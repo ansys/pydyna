@@ -182,13 +182,16 @@ class ContactTiedShellEdgeToSolid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACTTIEDSHELLEDGETOSOLID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTTIEDSHELLEDGETOSOLID_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTTIEDSHELLEDGETOSOLID_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = ContactTiedShellEdgeToSolid.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

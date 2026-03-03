@@ -51,7 +51,8 @@ class LoadPze(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADPZE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def setid(self) -> typing.Optional[int]:
         """Get or set the Set ID for the SET keyword option: Set noe, set segment.

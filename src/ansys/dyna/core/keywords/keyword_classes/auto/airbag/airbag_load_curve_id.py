@@ -70,13 +70,16 @@ class AirbagLoadCurveId(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGLOADCURVEID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGLOADCURVEID_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGLOADCURVEID_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Optional Airbag ID.

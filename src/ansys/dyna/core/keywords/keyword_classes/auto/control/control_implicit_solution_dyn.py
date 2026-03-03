@@ -96,19 +96,24 @@ class ControlImplicitSolutionDyn(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSOLUTIONDYN_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSOLUTIONDYN_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSOLUTIONDYN_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSOLUTIONDYN_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSOLUTIONDYN_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsolvr(self) -> int:
         """Get or set the Solution method for implicit analysis:

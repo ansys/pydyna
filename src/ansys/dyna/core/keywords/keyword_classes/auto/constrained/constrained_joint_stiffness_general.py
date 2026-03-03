@@ -90,16 +90,20 @@ class ConstrainedJointStiffnessGeneral(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTSTIFFNESSGENERAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTSTIFFNESSGENERAL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTSTIFFNESSGENERAL_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTSTIFFNESSGENERAL_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def jsid(self) -> typing.Optional[int]:
         """Get or set the Joint stiffness ID.

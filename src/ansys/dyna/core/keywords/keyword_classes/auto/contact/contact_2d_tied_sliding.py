@@ -57,10 +57,12 @@ class Contact2DTiedSliding(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACT2DTIEDSLIDING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACT2DTIEDSLIDING_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def surfa(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID for the SURFA nodes, see *SET_‌NODE.  The surface specified with SURFA must be to the left of the surface specified with SURFB. For nonsymmetric contact, this surface is the tracked surface (all contacts in this section except PENALTY and PENALTY_FRICTION).

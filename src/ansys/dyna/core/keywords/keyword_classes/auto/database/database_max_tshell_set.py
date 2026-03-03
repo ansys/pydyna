@@ -50,7 +50,8 @@ class DatabaseMaxTshellSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEMAXTSHELLSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the TShell set ID.

@@ -43,7 +43,8 @@ class IcfdDatabaseUindex(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDATABASEUINDEX_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def out(self) -> int:
         """Get or set the Determines if the solver should calculate the uniformity index.

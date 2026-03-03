@@ -48,7 +48,8 @@ class ChangeCurveDefinition(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHANGECURVEDEFINITION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID.

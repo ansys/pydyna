@@ -109,22 +109,28 @@ class ConstrainedSoilPileConstants(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDSOILPILECONSTANTS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDSOILPILECONSTANTS_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDSOILPILECONSTANTS_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDSOILPILECONSTANTS_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDSOILPILECONSTANTS_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDSOILPILECONSTANTS_CARD5,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pbsid(self) -> typing.Optional[int]:
         """Get or set the Part set ID containing beam elements for coupling (the piles).

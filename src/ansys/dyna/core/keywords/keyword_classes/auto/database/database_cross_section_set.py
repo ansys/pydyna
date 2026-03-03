@@ -24,15 +24,11 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DATABASECROSSSECTIONSET_CARD0 = (
-    FieldSchema("csid", int, 0, 10, None),
-    FieldSchema("title", str, 10, 70, None),
-)
-
-_DATABASECROSSSECTIONSET_CARD1 = (
     FieldSchema("nsid", int, 0, 10, 0),
     FieldSchema("hsid", int, 10, 10, 0),
     FieldSchema("bsid", int, 20, 10, 0),
@@ -43,11 +39,19 @@ _DATABASECROSSSECTIONSET_CARD1 = (
     FieldSchema("itype", int, 70, 10, 0),
 )
 
+_DATABASECROSSSECTIONSET_OPTION0_CARD0 = (
+    FieldSchema("csid", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
 class DatabaseCrossSectionSet(KeywordBase):
     """DYNA DATABASE_CROSS_SECTION_SET keyword"""
 
     keyword = "DATABASE"
     subkeyword = "CROSS_SECTION_SET"
+    option_specs = [
+        OptionSpec("ID", -1, 1),
+    ]
     _link_fields = {
         "bsid": LinkType.SET_BEAM,
         "dsid": LinkType.SET_DISCRETE,
@@ -58,112 +62,99 @@ class DatabaseCrossSectionSet(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the DatabaseCrossSectionSet class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _DATABASECROSSSECTIONSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
-                _DATABASECROSSSECTIONSET_CARD1,
-                **kwargs,
-            ),        ]
-    @property
-    def csid(self) -> typing.Optional[int]:
-        """Get or set the Optional ID for cross section. If not specified cross section ID is taken to be the cross section order in the input deck.
-        """ # nopep8
-        return self._cards[0].get_value("csid")
-
-    @csid.setter
-    def csid(self, value: int) -> None:
-        """Set the csid property."""
-        self._cards[0].set_value("csid", value)
-
-    @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the Crowss section descriptor. It is suggested that unique descriptions be used.
-        """ # nopep8
-        return self._cards[0].get_value("title")
-
-    @title.setter
-    def title(self, value: str) -> None:
-        """Set the title property."""
-        self._cards[0].set_value("title", value)
-
+            ),
+            OptionCardSet(
+                option_spec = DatabaseCrossSectionSet.option_specs[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _DATABASECROSSSECTIONSET_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
     @property
     def nsid(self) -> int:
         """Get or set the Nodal set ID, see *SET_NODE_option.
         """ # nopep8
-        return self._cards[1].get_value("nsid")
+        return self._cards[0].get_value("nsid")
 
     @nsid.setter
     def nsid(self, value: int) -> None:
         """Set the nsid property."""
-        self._cards[1].set_value("nsid", value)
+        self._cards[0].set_value("nsid", value)
 
     @property
     def hsid(self) -> int:
         """Get or set the Solid element set ID, see *SET_SOLID.
         """ # nopep8
-        return self._cards[1].get_value("hsid")
+        return self._cards[0].get_value("hsid")
 
     @hsid.setter
     def hsid(self, value: int) -> None:
         """Set the hsid property."""
-        self._cards[1].set_value("hsid", value)
+        self._cards[0].set_value("hsid", value)
 
     @property
     def bsid(self) -> int:
         """Get or set the Beam element set ID, see *SET_BEAM.
         """ # nopep8
-        return self._cards[1].get_value("bsid")
+        return self._cards[0].get_value("bsid")
 
     @bsid.setter
     def bsid(self, value: int) -> None:
         """Set the bsid property."""
-        self._cards[1].set_value("bsid", value)
+        self._cards[0].set_value("bsid", value)
 
     @property
     def ssid(self) -> int:
         """Get or set the Shell element set ID, see *SET_SHELL_option.
         """ # nopep8
-        return self._cards[1].get_value("ssid")
+        return self._cards[0].get_value("ssid")
 
     @ssid.setter
     def ssid(self, value: int) -> None:
         """Set the ssid property."""
-        self._cards[1].set_value("ssid", value)
+        self._cards[0].set_value("ssid", value)
 
     @property
     def tsid(self) -> int:
         """Get or set the Thick shell element set ID, see *SET_TSHELL.
         """ # nopep8
-        return self._cards[1].get_value("tsid")
+        return self._cards[0].get_value("tsid")
 
     @tsid.setter
     def tsid(self, value: int) -> None:
         """Set the tsid property."""
-        self._cards[1].set_value("tsid", value)
+        self._cards[0].set_value("tsid", value)
 
     @property
     def dsid(self) -> int:
         """Get or set the Discrete element set ID, see *SET_DISCRETE.
         """ # nopep8
-        return self._cards[1].get_value("dsid")
+        return self._cards[0].get_value("dsid")
 
     @dsid.setter
     def dsid(self, value: int) -> None:
         """Set the dsid property."""
-        self._cards[1].set_value("dsid", value)
+        self._cards[0].set_value("dsid", value)
 
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Rigid body (see *MAT_RIGID, type 20) or accelerometer ID (see *ELEMENT_ SEATBELT_ACCELEROMETER). The force resultants are output in the updated local system of the rigid body or accelerometer.
         """ # nopep8
-        return self._cards[1].get_value("id")
+        return self._cards[0].get_value("id")
 
     @id.setter
     def id(self, value: int) -> None:
         """Set the id property."""
-        self._cards[1].set_value("id", value)
+        self._cards[0].set_value("id", value)
 
     @property
     def itype(self) -> int:
@@ -172,14 +163,42 @@ class DatabaseCrossSectionSet(KeywordBase):
         EQ. 1: accelerometer.
         EQ. 2: coordinate ID.
         """ # nopep8
-        return self._cards[1].get_value("itype")
+        return self._cards[0].get_value("itype")
 
     @itype.setter
     def itype(self, value: int) -> None:
         """Set the itype property."""
         if value not in [0, 1, 2, None]:
             raise Exception("""itype must be `None` or one of {0,1,2}.""")
-        self._cards[1].set_value("itype", value)
+        self._cards[0].set_value("itype", value)
+
+    @property
+    def csid(self) -> typing.Optional[int]:
+        """Get or set the Cross Section ID
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("csid")
+
+    @csid.setter
+    def csid(self, value: int) -> None:
+        """Set the csid property."""
+        self._cards[1].cards[0].set_value("csid", value)
+
+        if value:
+            self.activate_option("CSID")
+
+    @property
+    def heading(self) -> typing.Optional[str]:
+        """Get or set the Cross Section descriptor. It is suggested that unique descriptions be used.
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("heading")
+
+    @heading.setter
+    def heading(self, value: str) -> None:
+        """Set the heading property."""
+        self._cards[1].cards[0].set_value("heading", value)
+
+        if value:
+            self.activate_option("HEADING")
 
     @property
     def bsid_link(self) -> typing.Optional[KeywordBase]:

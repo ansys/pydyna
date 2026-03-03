@@ -60,7 +60,8 @@ class MatAddPropertyDependenceFreq(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATADDPROPERTYDEPENDENCEFREQ_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatAddPropertyDependenceFreq.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

@@ -55,10 +55,12 @@ class AleTankTest(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALETANKTEST_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALETANKTEST_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mdotlc(self) -> int:
         """Get or set the LCID for mass flow rate as a function of time. This may be obtained directly from the control-volume type input data.

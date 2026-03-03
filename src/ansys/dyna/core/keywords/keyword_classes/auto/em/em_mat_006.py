@@ -53,7 +53,8 @@ class EmMat006(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMMAT006_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID: refers to MID in the *PART card.

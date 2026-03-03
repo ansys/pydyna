@@ -54,7 +54,8 @@ class BoundaryCyclic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYCYCLIC_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def xc(self) -> typing.Optional[float]:
         """Get or set the x-component axis vector of axis of rotation.

@@ -55,7 +55,8 @@ class ControlThermalTimestep(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLTHERMALTIMESTEP_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ts(self) -> int:
         """Get or set the Time step control:

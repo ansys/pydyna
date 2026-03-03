@@ -78,21 +78,25 @@ class SectionShellCardSet(Cards):
             Card.from_field_schemas_with_defaults(
                 _SECTIONSHELLCARDSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONSHELLCARDSET_CARD1,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "angle",
                 8,
                 10,
                 float,
-                lambda: self.nip,
+                lambda: 2 if self.nip == 0 else self.nip,
                 lambda: self.icomp == 1,
-                data = kwargs.get("angle")),            Card.from_field_schemas_with_defaults(
+                data = kwargs.get("angle")),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONSHELLCARDSET_CARD3,
                 active_func=lambda: self.elform in [101, 102, 103, 104, 105],
                 **kwargs,
-            ),            TableCard(
+            ),
+            TableCard(
                 [
                     Field("xi", float, 0, 10, None),
                     Field("eta", float, 10, 10, None),
@@ -102,14 +106,16 @@ class SectionShellCardSet(Cards):
                 lambda: self.elform in [101, 102, 103, 104, 105],
                 name="integration_points",
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "pi",
                 8,
                 10,
                 float,
                 lambda: self.lmc,
                 lambda: self.elform in [101, 102, 103, 104, 105],
-                data = kwargs.get("pi")),        ]
+                data = kwargs.get("pi")),
+        ]
 
     @property
     def secid(self) -> typing.Optional[int]:
@@ -525,7 +531,8 @@ class SectionShell(KeywordBase):
             CardSet(
                 SectionShellCardSet,
                 **kwargs
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = SectionShell.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

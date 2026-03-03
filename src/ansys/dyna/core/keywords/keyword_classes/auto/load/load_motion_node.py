@@ -59,7 +59,8 @@ class LoadMotionNode(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADMOTIONNODE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def node1(self) -> typing.Optional[int]:
         """Get or set the Node ID for the concentrated force

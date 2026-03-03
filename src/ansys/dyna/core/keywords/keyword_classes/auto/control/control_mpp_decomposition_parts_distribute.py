@@ -61,10 +61,12 @@ class ControlMppDecompositionPartsDistribute(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPDECOMPOSITIONPARTSDISTRIBUTE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLMPPDECOMPOSITIONPARTSDISTRIBUTE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the Part ID to be distributed. If ID1,ID2,.. < 0, abs(ID1) will be used as part set ID.  All parts defined in this card will be treated as a single region to be decomposed

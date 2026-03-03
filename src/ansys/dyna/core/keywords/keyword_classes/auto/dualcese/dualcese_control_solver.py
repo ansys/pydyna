@@ -48,7 +48,8 @@ class DualceseControlSolver(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESECONTROLSOLVER_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eqns(self) -> str:
         """Get or set the Select the equations being solved with the dual CESE solver.

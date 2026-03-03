@@ -66,10 +66,12 @@ class LoadVibroAcoustic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADVIBROACOUSTIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADVIBROACOUSTIC_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nmode(self) -> typing.Optional[float]:
         """Get or set the Number of normal vibration modes employed for coupling with excitation pressure field

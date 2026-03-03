@@ -182,13 +182,16 @@ class ContactFormingNodesToSurface(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACTFORMINGNODESTOSURFACE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTFORMINGNODESTOSURFACE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTFORMINGNODESTOSURFACE_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = ContactFormingNodesToSurface.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

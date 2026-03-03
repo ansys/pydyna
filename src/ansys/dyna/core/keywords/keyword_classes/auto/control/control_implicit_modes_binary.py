@@ -59,10 +59,12 @@ class ControlImplicitModesBinary(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITMODESBINARY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITMODESBINARY_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsidc(self) -> int:
         """Get or set the Node set ID for constraint modes:

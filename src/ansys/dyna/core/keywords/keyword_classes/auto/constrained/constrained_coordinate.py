@@ -48,7 +48,8 @@ class ConstrainedCoordinate(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDCOORDINATE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Identification number of a constraint.

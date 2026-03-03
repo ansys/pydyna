@@ -84,19 +84,23 @@ class DefineContactVolume(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINECONTACTVOLUME_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINECONTACTVOLUME_CARD1,
                 active_func=lambda: self.type==0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINECONTACTVOLUME_CARD2,
                 active_func=lambda: self.type==1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINECONTACTVOLUME_CARD3,
                 active_func=lambda: self.type==2,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineContactVolume.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

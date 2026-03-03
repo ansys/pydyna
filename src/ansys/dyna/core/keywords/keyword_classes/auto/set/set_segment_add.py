@@ -57,13 +57,15 @@ class SetSegmentAdd(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETSEGMENTADD_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "sets",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("sets")),            OptionCardSet(
+                data = kwargs.get("sets")),
+            OptionCardSet(
                 option_spec = SetSegmentAdd.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

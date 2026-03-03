@@ -109,25 +109,32 @@ class ConstrainedLagrangeInSolidEdge(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLIDEDGE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLIDEDGE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLIDEDGE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLIDEDGE_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLIDEDGE_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLIDEDGE_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLIDEDGE_CARD6,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def coupid(self) -> typing.Optional[int]:
         """Get or set the ID.

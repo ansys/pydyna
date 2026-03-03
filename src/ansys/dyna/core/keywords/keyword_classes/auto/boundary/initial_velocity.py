@@ -74,14 +74,17 @@ class InitialVelocity(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALVELOCITY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALVELOCITY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALVELOCITY_CARD2,
                 active_func=lambda: self.nsidex > 0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID, see *SET_NODE, containing nodes for initial velocity:

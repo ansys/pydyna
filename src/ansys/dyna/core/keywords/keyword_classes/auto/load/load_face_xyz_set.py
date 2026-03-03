@@ -51,7 +51,8 @@ class LoadFaceXyzSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADFACEXYZSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def fxyzsid(self) -> typing.Optional[int]:
         """Get or set the Physical face set ID; see *SET_IGA_FACE_XYZ

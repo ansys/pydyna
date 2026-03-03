@@ -57,10 +57,12 @@ class IgaFaceUvw(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _IGAFACEUVW_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _IGAFACEUVW_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def fid(self) -> typing.Optional[int]:
         """Get or set the Parametric face ID. A unique number must be chosen.

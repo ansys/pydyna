@@ -56,7 +56,8 @@ class LoadGravityPartSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADGRAVITYPARTSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part Set ID for application of gravity load

@@ -59,7 +59,8 @@ class MatBrainLinearViscoelastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATBRAINLINEARVISCOELASTIC_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatBrainLinearViscoelastic.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

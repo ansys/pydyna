@@ -55,7 +55,8 @@ class LoadAcousticSource(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADACOUSTICSOURCE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nid_ssid(self) -> typing.Optional[int]:
         """Get or set the Node ID of the acoustic point source for SRCTYP = 1 and 5.

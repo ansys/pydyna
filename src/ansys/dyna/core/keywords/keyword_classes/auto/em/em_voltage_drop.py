@@ -47,7 +47,8 @@ class EmVoltageDrop(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMVOLTAGEDROP_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def vdid(self) -> typing.Optional[int]:
         """Get or set the Voltage Drop ID

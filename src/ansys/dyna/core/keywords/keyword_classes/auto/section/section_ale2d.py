@@ -55,7 +55,8 @@ class SectionAle2D(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SECTIONALE2D_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = SectionAle2D.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

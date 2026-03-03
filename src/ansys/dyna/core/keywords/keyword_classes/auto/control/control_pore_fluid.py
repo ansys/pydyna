@@ -65,13 +65,16 @@ class ControlPoreFluid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLPOREFLUID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLPOREFLUID_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLPOREFLUID_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def atype(self) -> int:
         """Get or set the Analysis type for pore water pressure calculations:

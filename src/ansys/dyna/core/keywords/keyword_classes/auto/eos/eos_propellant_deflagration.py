@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _EOSPROPELLANTDEFLAGRATION_CARD0 = (
@@ -71,32 +72,55 @@ _EOSPROPELLANTDEFLAGRATION_CARD4 = (
     FieldSchema("fmngr", float, 50, 10, 0.0),
 )
 
+_EOSPROPELLANTDEFLAGRATION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class EosPropellantDeflagration(KeywordBase):
     """DYNA EOS_PROPELLANT_DEFLAGRATION keyword"""
 
     keyword = "EOS"
     subkeyword = "PROPELLANT_DEFLAGRATION"
+    option_specs = [
+        OptionSpec("TITLE", -1, 1),
+    ]
 
     def __init__(self, **kwargs):
         """Initialize the EosPropellantDeflagration class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _EOSPROPELLANTDEFLAGRATION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOSPROPELLANTDEFLAGRATION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOSPROPELLANTDEFLAGRATION_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOSPROPELLANTDEFLAGRATION_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOSPROPELLANTDEFLAGRATION_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+            OptionCardSet(
+                option_spec = EosPropellantDeflagration.option_specs[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _EOSPROPELLANTDEFLAGRATION_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state label.
@@ -426,4 +450,18 @@ class EosPropellantDeflagration(KeywordBase):
     def fmngr(self, value: float) -> None:
         """Set the fmngr property."""
         self._cards[4].set_value("fmngr", value)
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[5].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[5].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

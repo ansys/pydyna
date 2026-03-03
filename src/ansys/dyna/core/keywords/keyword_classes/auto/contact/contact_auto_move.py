@@ -55,7 +55,8 @@ class ContactAutoMove(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACTAUTOMOVE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the ID for this auto positioning input

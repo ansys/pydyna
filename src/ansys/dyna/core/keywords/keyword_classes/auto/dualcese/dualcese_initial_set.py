@@ -53,10 +53,12 @@ class DualceseInitialSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEINITIALSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DUALCESEINITIALSET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def esid(self) -> typing.Optional[int]:
         """Get or set the Element set ID (see *DUALCESE_ELEMENTSET)

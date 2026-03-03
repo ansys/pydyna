@@ -63,13 +63,16 @@ class AleMappingFromLagrangian(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALEMAPPINGFROMLAGRANGIAN_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEMAPPINGFROMLAGRANGIAN_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEMAPPINGFROMLAGRANGIAN_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def lagpid(self) -> typing.Optional[int]:
         """Get or set the Part or part set ID for Lagrangian parts involved in the mapping

@@ -97,19 +97,24 @@ class MatHill3RTabulated(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATHILL3RTABULATED_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATHILL3RTABULATED_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATHILL3RTABULATED_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATHILL3RTABULATED_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATHILL3RTABULATED_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatHill3RTabulated.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

@@ -50,7 +50,8 @@ class IcfdControlConj(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLCONJ_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ctype(self) -> int:
         """Get or set the Indicates the thermal coupling type.

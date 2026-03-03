@@ -55,7 +55,8 @@ class MatBlatz_KoFoam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATBLATZ_KOFOAM_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatBlatz_KoFoam.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

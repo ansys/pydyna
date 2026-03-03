@@ -45,7 +45,8 @@ class DatabaseMassout(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEMASSOUT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def setid(self) -> typing.Optional[int]:
         """Get or set the Optional set ID.

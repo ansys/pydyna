@@ -46,7 +46,8 @@ class ControlAcousticSpectral(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLACOUSTICSPECTRAL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def maseord(self) -> typing.Optional[int]:
         """Get or set the Spectral element integration order (2 <= MASEORD <=15). See Remark 2.

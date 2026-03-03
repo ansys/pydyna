@@ -45,7 +45,8 @@ class BatteryEchemPart(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BATTERYECHEMPART_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part identifier (must be different from any PID on a *PART card)

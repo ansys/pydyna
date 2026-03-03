@@ -62,13 +62,16 @@ class AleUpSwitch(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALEUPSWITCH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEUPSWITCH_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEUPSWITCH_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def upid(self) -> int:
         """Get or set the An ID defines a corresponding *AIRBAG_HYBRID_ID card for use in

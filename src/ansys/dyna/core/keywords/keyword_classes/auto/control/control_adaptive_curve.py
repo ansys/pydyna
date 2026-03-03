@@ -47,7 +47,8 @@ class ControlAdaptiveCurve(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLADAPTIVECURVE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def idset(self) -> typing.Optional[int]:
         """Get or set the Set id

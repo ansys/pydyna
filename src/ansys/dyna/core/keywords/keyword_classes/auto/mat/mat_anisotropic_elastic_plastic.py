@@ -150,31 +150,40 @@ class MatAnisotropicElasticPlastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICELASTICPLASTIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICELASTICPLASTIC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICELASTICPLASTIC_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICELASTICPLASTIC_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICELASTICPLASTIC_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICELASTICPLASTIC_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICELASTICPLASTIC_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICELASTICPLASTIC_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICELASTICPLASTIC_CARD8,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatAnisotropicElasticPlastic.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

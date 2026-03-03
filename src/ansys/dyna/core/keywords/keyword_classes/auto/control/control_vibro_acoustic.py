@@ -60,10 +60,12 @@ class ControlVibroAcoustic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLVIBROACOUSTIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLVIBROACOUSTIC_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def vaflag(self) -> int:
         """Get or set the Loading type:

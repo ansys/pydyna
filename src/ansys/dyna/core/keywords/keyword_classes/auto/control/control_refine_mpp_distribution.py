@@ -49,7 +49,8 @@ class ControlRefineMppDistribution(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLREFINEMPPDISTRIBUTION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> int:
         """Get or set the ID = -NTOTRF in *CONTROL_REFINE_ALE.

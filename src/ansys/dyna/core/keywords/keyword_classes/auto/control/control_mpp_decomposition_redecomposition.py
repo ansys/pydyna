@@ -48,7 +48,8 @@ class ControlMppDecompositionRedecomposition(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPDECOMPOSITIONREDECOMPOSITION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def freq(self) -> typing.Optional[float]:
         """Get or set the Determines the number of redecompositions during the solution.

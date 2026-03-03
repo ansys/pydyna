@@ -67,10 +67,12 @@ class ElementBeamPid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTBEAMPID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTBEAMPID_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number must be used.

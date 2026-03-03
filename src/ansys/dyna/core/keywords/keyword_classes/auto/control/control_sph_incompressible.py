@@ -48,7 +48,8 @@ class ControlSphIncompressible(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLSPHINCOMPRESSIBLE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ibndp(self) -> int:
         """Get or set the Pressure treatment of boundary particles:

@@ -90,19 +90,24 @@ class EmBatteryRandles(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMBATTERYRANDLES_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMBATTERYRANDLES_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMBATTERYRANDLES_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMBATTERYRANDLES_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMBATTERYRANDLES_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def rdlid(self) -> typing.Optional[int]:
         """Get or set the Id of the Randle Cell

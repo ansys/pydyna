@@ -45,7 +45,8 @@ class MeshVolumePart(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MESHVOLUMEPART_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def volprt(self) -> typing.Optional[int]:
         """Get or set the Part ID of a volume part created by a *MESH_VOLUME card.

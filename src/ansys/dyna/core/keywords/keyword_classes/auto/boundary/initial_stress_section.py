@@ -58,7 +58,8 @@ class InitialStressSection(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSSECTION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def issid(self) -> typing.Optional[int]:
         """Get or set the Section stress initialization ID.

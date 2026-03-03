@@ -53,7 +53,8 @@ class IcfdDefineHeatsource(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDEFINEHEATSOURCE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def hsid(self) -> typing.Optional[int]:
         """Get or set the Heat source ID

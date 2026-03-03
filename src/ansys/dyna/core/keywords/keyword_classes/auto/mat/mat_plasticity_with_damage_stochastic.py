@@ -99,16 +99,20 @@ class MatPlasticityWithDamageStochastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATPLASTICITYWITHDAMAGESTOCHASTIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPLASTICITYWITHDAMAGESTOCHASTIC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPLASTICITYWITHDAMAGESTOCHASTIC_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPLASTICITYWITHDAMAGESTOCHASTIC_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatPlasticityWithDamageStochastic.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

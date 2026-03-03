@@ -62,7 +62,8 @@ class DefineTable2D(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINETABLE2D_CARD0,
                 **kwargs,
-            ),            TableCard(
+            ),
+            TableCard(
                 [
                     Field("value", float, 0, 20, 0.0),
                     Field("lcid", int, 20, 20, None),
@@ -70,7 +71,8 @@ class DefineTable2D(KeywordBase):
                 None,
                 name="table",
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineTable2D.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

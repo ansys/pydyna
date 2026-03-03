@@ -44,7 +44,8 @@ class FatigueMultiaxial(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FATIGUEMULTIAXIAL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def maxial(self) -> int:
         """Get or set the Multiaxial fatigue analysis criterion:

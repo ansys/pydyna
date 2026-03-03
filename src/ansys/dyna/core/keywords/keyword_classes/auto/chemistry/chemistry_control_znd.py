@@ -52,10 +52,12 @@ class ChemistryControlZnd(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHEMISTRYCONTROLZND_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYCONTROLZND_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Identifier for this full chemistry calculation.

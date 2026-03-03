@@ -190,49 +190,64 @@ class AirbagParticleInflationSegmentTime(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATIONSEGMENTTIME_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATIONSEGMENTTIME_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATIONSEGMENTTIME_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATIONSEGMENTTIME_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATIONSEGMENTTIME_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATIONSEGMENTTIME_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATIONSEGMENTTIME_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATIONSEGMENTTIME_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATIONSEGMENTTIME_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATIONSEGMENTTIME_CARD9,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATIONSEGMENTTIME_CARD10,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATIONSEGMENTTIME_CARD11,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATIONSEGMENTTIME_CARD12,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATIONSEGMENTTIME_CARD13,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEINFLATIONSEGMENTTIME_CARD14,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Optional Airbag ID.
