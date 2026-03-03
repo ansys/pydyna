@@ -1,0 +1,16 @@
+[build-system]
+requires = ["flit_core>=3.2"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "pydyna-lsp"
+version = "0.1.0"
+description = "PyDyna Language Server Protocol server for LS-DYNA keyword files"
+requires-python = ">=3.10"
+dependencies = [
+    "pygls>=2.0",
+    "lsprotocol>=2023.0",
+]
+
+[project.scripts]
+pydyna-lsp = "server:server.start_io"

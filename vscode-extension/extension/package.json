@@ -1,0 +1,62 @@
+{
+  "name": "pydyna-lsdyna",
+  "displayName": "PyDyna LS-DYNA",
+  "description": "LS-DYNA keyword file support powered by PyDyna",
+  "version": "0.1.0",
+  "publisher": "ansys",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "lsdyna",
+        "aliases": [
+          "LS-DYNA",
+          "lsdyna"
+        ],
+        "extensions": [
+          ".k",
+          ".key",
+          ".dyn",
+          ".dyna"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "lsdyna",
+        "scopeName": "source.lsdyna",
+        "path": "./syntaxes/lsdyna.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run fetch-python && npm run bundle",
+    "fetch-python": "node fetch-python.js",
+    "bundle": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --minify",
+    "compile": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --sourcemap",
+    "watch": "npm run compile -- --watch",
+    "package": "vsce package --allow-missing-repository",
+    "package:win32-x64": "vsce package --allow-missing-repository --target win32-x64",
+    "package:darwin-arm64": "vsce package --allow-missing-repository --target darwin-arm64",
+    "package:linux-x64": "vsce package --allow-missing-repository --target linux-x64",
+    "reinstall": "npm run compile && npm run package && code --uninstall-extension ansys.pydyna-lsdyna & code --install-extension pydyna-lsdyna-0.1.0.vsix"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.27.3",
+    "typescript": "^5.3.0"
+  }
+}
