@@ -46,7 +46,8 @@ class ControlUnits(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLUNITS_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def length(self) -> str:
         """Get or set the Length unit.

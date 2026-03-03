@@ -133,28 +133,36 @@ class MatThermalOrthotropicTd(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATTHERMALORTHOTROPICTD_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTHERMALORTHOTROPICTD_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTHERMALORTHOTROPICTD_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTHERMALORTHOTROPICTD_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTHERMALORTHOTROPICTD_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTHERMALORTHOTROPICTD_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTHERMALORTHOTROPICTD_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTHERMALORTHOTROPICTD_CARD7,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatThermalOrthotropicTd.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

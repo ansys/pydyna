@@ -71,13 +71,16 @@ class ControlSolid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLSOLID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLSOLID_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLSOLID_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def esort(self) -> int:
         """Get or set the Automatic sorting of tetrahedron and pentahedron elements to treat degenerate tetrahedron and pentahedron elements as tetrahedron (formulation 10)  and pentahedron (formulation 15) solids, respective. See *SECTION_SOLID.

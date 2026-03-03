@@ -44,7 +44,8 @@ class ControlFrequencyDomain(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFREQUENCYDOMAIN_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def refgeo(self) -> int:
         """Get or set the Flag for reference geometry in acoustic eigenvalue analysis:

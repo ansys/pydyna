@@ -83,16 +83,20 @@ class LoadThermalRsw(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADTHERMALRSW_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADTHERMALRSW_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADTHERMALRSW_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADTHERMALRSW_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def deftemp(self) -> typing.Optional[int]:
         """Get or set the Default temperature outside the nuggets and heat affected zones

@@ -58,10 +58,12 @@ class ControlDamping(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLDAMPING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLDAMPING_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nrcyck(self) -> int:
         """Get or set the Number of iterations between convergence checks, for dynamic relaxation option (default=250).

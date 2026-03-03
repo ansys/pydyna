@@ -61,7 +61,8 @@ class DefineControlVolumeInteraction(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINECONTROLVOLUMEINTERACTION_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineControlVolumeInteraction.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

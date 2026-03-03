@@ -61,7 +61,8 @@ class DatabaseHistoryBeamSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEHISTORYBEAMSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the Set ID of the first beam element set.

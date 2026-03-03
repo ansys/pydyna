@@ -49,7 +49,8 @@ class ControlImplicitFormingSpr(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITFORMINGSPR_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ioption(self) -> int:
         """Get or set the Solution type:

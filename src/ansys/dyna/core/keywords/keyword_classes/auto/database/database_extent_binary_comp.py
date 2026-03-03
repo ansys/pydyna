@@ -49,7 +49,8 @@ class DatabaseExtentBinaryComp(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEEXTENTBINARYCOMP_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def iglb(self) -> int:
         """Get or set the Output flag for global data

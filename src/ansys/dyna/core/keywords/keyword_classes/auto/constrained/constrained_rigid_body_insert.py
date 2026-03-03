@@ -68,13 +68,16 @@ class ConstrainedRigidBodyInsert(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDRIGIDBODYINSERT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDRIGIDBODYINSERT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDRIGIDBODYINSERT_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Insert ID.

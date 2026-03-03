@@ -57,7 +57,8 @@ class MatIsotropicElasticPlastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATISOTROPICELASTICPLASTIC_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatIsotropicElasticPlastic.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

@@ -54,7 +54,8 @@ class AleStructuredMulti_MaterialGroupPlneps(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALESTRUCTUREDMULTI_MATERIALGROUPPLNEPS_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ammg_name(self) -> typing.Optional[str]:
         """Get or set the AMMG name. Required to identify the AMMG (S-ALE fluid); Not case sensitive and need to be unique; See remark 2.

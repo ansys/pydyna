@@ -81,13 +81,16 @@ class MatFrazer_NashRubber(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATFRAZER_NASHRUBBER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATFRAZER_NASHRUBBER_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATFRAZER_NASHRUBBER_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatFrazer_NashRubber.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

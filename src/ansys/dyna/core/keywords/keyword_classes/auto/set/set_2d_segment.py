@@ -64,10 +64,12 @@ class Set2DSegment(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SET2DSEGMENT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SET2DSEGMENT_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = Set2DSegment.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

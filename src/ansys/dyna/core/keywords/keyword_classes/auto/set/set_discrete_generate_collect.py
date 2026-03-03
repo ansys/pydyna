@@ -63,10 +63,12 @@ class SetDiscreteGenerateCollect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETDISCRETEGENERATECOLLECT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETDISCRETEGENERATECOLLECT_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = SetDiscreteGenerateCollect.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

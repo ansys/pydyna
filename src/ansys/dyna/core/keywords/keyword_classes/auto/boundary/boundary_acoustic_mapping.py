@@ -44,7 +44,8 @@ class BoundaryAcousticMapping(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYACOUSTICMAPPING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Set or part ID

@@ -88,22 +88,28 @@ class IncludeUnitcell(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INCLUDEUNITCELL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDEUNITCELL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDEUNITCELL_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDEUNITCELL_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDEUNITCELL_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDEUNITCELL_CARD5,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Name of the keyword file containing X, Y, Z coordinates as defined using keyword *DEFINE_CURVE_TRIM_3D..

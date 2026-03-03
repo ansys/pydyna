@@ -46,7 +46,8 @@ class DatabasePowerSpectralDensity(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEPOWERSPECTRALDENSITY_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def fbeg(self) -> float:
         """Get or set the Beginning frequency for PSD database output.

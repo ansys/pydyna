@@ -66,7 +66,8 @@ class Part(KeywordBase):
                 None,
                 "parts",
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def parts(self) -> pd.DataFrame:
         """Gets the full table of parts."""

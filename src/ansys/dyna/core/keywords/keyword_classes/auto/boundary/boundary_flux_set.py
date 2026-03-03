@@ -71,13 +71,16 @@ class BoundaryFluxSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYFLUXSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYFLUXSET_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYFLUXSET_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see *SET_SEGMENT.

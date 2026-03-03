@@ -72,14 +72,17 @@ class BoundaryPrescribedMotionSetFaceXyz(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONSETFACEXYZ_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONSETFACEXYZ_CARD1,
                 active_func=lambda: abs(self.dof) in [9, 10, 11] or self.vad==4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONSETFACEXYZ_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def typeid(self) -> typing.Optional[int]:
         """Get or set the physical face set ID (SID in *SET_IGA_FACE_XYZ).

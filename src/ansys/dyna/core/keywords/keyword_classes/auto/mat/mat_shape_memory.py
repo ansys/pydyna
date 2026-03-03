@@ -71,13 +71,16 @@ class MatShapeMemory(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATSHAPEMEMORY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSHAPEMEMORY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSHAPEMEMORY_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatShapeMemory.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

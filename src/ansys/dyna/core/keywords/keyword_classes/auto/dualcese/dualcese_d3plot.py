@@ -43,7 +43,8 @@ class DualceseD3Plot(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESED3PLOT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def flow_var(self) -> typing.Optional[str]:
         """Get or set the Name of a flow variable to output to the d3plot file. The currently supported variables are:

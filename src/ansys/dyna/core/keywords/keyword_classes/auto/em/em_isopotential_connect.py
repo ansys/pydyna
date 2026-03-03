@@ -61,11 +61,13 @@ class EmIsopotentialConnect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMISOPOTENTIALCONNECT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMISOPOTENTIALCONNECT_CARD1,
                 active_func=lambda: self.contype == 6,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def conid(self) -> typing.Optional[int]:
         """Get or set the Connection ID.

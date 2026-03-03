@@ -57,7 +57,8 @@ class SectionSpring_Damper(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SECTIONSPRING_DAMPER_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = SectionSpring_Damper.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

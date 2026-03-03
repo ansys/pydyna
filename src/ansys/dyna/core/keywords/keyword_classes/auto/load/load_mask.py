@@ -66,10 +66,12 @@ class LoadMask(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADMASK_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADMASK_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID. This part must consist of 3D shell elements. To use this option with solid element the surface of the solid elements must be covered with null shells, see *MAT_NULL.

@@ -47,7 +47,8 @@ class DualcesePart(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEPART_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID (must be different from any other *DUALCESE_PART part ID or from a *DUALCESE_PART_MULTIPHASE PID

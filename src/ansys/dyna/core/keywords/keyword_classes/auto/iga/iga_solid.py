@@ -51,7 +51,8 @@ class IgaSolid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _IGASOLID_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Isogeometric solid (patch) ID, see Remark 1 and Remark 2. A unique number must be chosen.

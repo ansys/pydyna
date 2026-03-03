@@ -60,7 +60,8 @@ class LoadNodeSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADNODESET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID, see also *SET_NODE.

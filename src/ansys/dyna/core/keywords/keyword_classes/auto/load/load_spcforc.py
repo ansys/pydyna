@@ -42,4 +42,5 @@ class LoadSpcforc(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADSPCFORC_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

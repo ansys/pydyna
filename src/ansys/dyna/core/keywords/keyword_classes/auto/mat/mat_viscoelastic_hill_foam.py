@@ -98,19 +98,24 @@ class MatViscoelasticHillFoam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATVISCOELASTICHILLFOAM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATVISCOELASTICHILLFOAM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATVISCOELASTICHILLFOAM_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATVISCOELASTICHILLFOAM_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATVISCOELASTICHILLFOAM_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatViscoelasticHillFoam.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

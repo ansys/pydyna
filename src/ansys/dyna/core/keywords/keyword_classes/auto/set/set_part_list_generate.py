@@ -65,13 +65,15 @@ class SetPartListGenerate(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETPARTLISTGENERATE_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "block_ranges",
                 8,
                 10,
                 self.BlockRange,
                 None,
-                data = kwargs.get("block_ranges")),            OptionCardSet(
+                data = kwargs.get("block_ranges")),
+            OptionCardSet(
                 option_spec = SetPartListGenerate.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

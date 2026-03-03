@@ -44,7 +44,8 @@ class ControlSubcycle(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLSUBCYCLE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def k(self) -> int:
         """Get or set the Ratio between the largest and smallest time step

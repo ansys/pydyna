@@ -55,16 +55,20 @@ class InterfaceBlanksizeInitialAdaptive(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACEBLANKSIZEINITIALADAPTIVE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACEBLANKSIZEINITIALADAPTIVE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACEBLANKSIZEINITIALADAPTIVE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACEBLANKSIZEINITIALADAPTIVE_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename9(self) -> typing.Optional[str]:
         """Get or set the The following file names, FILENAME8~11 are for the option INITIAL_ADAPTIVE:

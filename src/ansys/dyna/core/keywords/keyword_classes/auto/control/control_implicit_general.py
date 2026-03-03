@@ -50,7 +50,8 @@ class ControlImplicitGeneral(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITGENERAL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def imflag(self) -> int:
         """Get or set the Implicit/Explicit switching flag

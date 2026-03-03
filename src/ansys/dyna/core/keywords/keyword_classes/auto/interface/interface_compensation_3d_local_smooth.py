@@ -54,7 +54,8 @@ class InterfaceCompensation3DLocalSmooth(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATION3DLOCALSMOOTH_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def method(self) -> int:
         """Get or set the There are several extrapolation methods for the addendum and binder outside of trim lines, see Remarks.

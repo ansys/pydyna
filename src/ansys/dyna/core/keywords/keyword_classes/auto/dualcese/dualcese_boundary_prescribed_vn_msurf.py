@@ -72,13 +72,16 @@ class DualceseBoundaryPrescribedVnMsurf(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYPRESCRIBEDVNMSURF_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYPRESCRIBEDVNMSURF_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYPRESCRIBEDVNMSURF_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mspid(self) -> typing.Optional[int]:
         """Get or set the Mesh surface part ID that is referenced by *MESH_SURFACE_ELEMENT cards

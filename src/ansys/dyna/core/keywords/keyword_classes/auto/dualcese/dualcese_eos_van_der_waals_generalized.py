@@ -47,7 +47,8 @@ class DualceseEosVanDerWaalsGeneralized(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEEOSVANDERWAALSGENERALIZED_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state ID

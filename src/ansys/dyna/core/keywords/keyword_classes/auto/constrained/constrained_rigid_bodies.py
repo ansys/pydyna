@@ -53,7 +53,8 @@ class ConstrainedRigidBodies(KeywordBase):
                 None,
                 name="pairs",
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pairs(self) -> pd.DataFrame:
         """Get the table of pairs."""

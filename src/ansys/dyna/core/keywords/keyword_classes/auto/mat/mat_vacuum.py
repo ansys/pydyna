@@ -53,7 +53,8 @@ class MatVacuum(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATVACUUM_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatVacuum.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

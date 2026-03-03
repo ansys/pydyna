@@ -46,7 +46,8 @@ class ControlExplicitThermalOutput(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLEXPLICITTHERMALOUTPUT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dtout(self) -> typing.Optional[float]:
         """Get or set the Time interval between outputs.

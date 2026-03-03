@@ -65,10 +65,12 @@ class EmEpPurkinjeNetwork(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMEPPURKINJENETWORK_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPPURKINJENETWORK_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def purkid(self) -> typing.Optional[int]:
         """Get or set the Material ID: refers to MID in the *PART card

@@ -47,7 +47,8 @@ class InterfaceCompensationNewAccelerator(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATIONNEWACCELERATOR_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def isteps(self) -> int:
         """Get or set the Steps in accelerated compensation procedure, see Remarks.

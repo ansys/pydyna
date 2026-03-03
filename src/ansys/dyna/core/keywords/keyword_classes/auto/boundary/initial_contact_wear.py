@@ -55,7 +55,8 @@ class InitialContactWear(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALCONTACTWEAR_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the contact Interface ID.

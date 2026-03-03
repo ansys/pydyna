@@ -58,10 +58,12 @@ class InterfaceCompensation3D(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATION3D_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATION3D_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def method(self) -> int:
         """Get or set the There are several extrapolation methods for the addendum and binder outside of trim lines, see Remarks.

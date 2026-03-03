@@ -52,7 +52,8 @@ class BoundaryAmbientEos(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYAMBIENTEOS_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the The ambient Part ID for which the thermodynamic state is being defined.

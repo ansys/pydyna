@@ -43,7 +43,8 @@ class IncludeWdWeldlineCurve(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INCLUDEWDWELDLINECURVE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name of the welding curve in keyword format (see *DEFINE_CURVE_TRIM_3D). If IOPTION = 1 on *INTERFACE_WELDLINE_DEVELOPMENT, it should define the final welding curve. If IOPTION = -1, it should define the initial welding curve

@@ -42,4 +42,5 @@ class ControlMppIoSwapbytes(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPIOSWAPBYTES_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

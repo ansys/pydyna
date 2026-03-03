@@ -57,7 +57,8 @@ class ElementShellShl4ToShl8(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTSHELLSHL4TOSHL8_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number has to be used.

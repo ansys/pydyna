@@ -49,7 +49,8 @@ class ControlSolution(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLSOLUTION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def soln(self) -> int:
         """Get or set the Analysis solution procedure:

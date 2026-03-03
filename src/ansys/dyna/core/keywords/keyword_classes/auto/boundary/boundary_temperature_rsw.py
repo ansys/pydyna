@@ -77,13 +77,16 @@ class BoundaryTemperatureRsw(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYTEMPERATURERSW_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYTEMPERATURERSW_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYTEMPERATURERSW_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Node Set ID; see *SET_‌NODE_‌OPTION. Nodes in the set will be checked to see if they are in the nugget or heat affected zone. If they are, the boundary condition will be applied. The boundary condition will not be applied to nodes in these regions if they are not included in the set..

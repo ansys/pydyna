@@ -77,13 +77,16 @@ class AleReferenceSystemNode(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALEREFERENCESYSTEMNODE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEREFERENCESYSTEMNODE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEREFERENCESYSTEMNODE_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Node group ID for PRTYPE 3 or 7, see *ALE_REFERENCE_SYSTEM_GROUP.

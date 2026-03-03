@@ -60,7 +60,8 @@ class DefineFormingContact(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEFORMINGCONTACT_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineFormingContact.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

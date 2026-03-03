@@ -49,7 +49,8 @@ class BoundaryAcousticFreeSurface(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYACOUSTICFREESURFACE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssids(self) -> typing.Optional[int]:
         """Get or set the Segment set ID for the structural faces.

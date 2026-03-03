@@ -116,31 +116,38 @@ class SectionBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SECTIONBEAM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONBEAM_CARD1,
                 active_func=lambda: self.elform in [1,11],
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONBEAM_CARD2,
                 active_func=lambda: self.elform in [2,12,13],
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONBEAM_CARD3,
                 active_func=lambda: self.elform == 3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONBEAM_CARD4,
                 active_func=lambda: self.elform in [4,5],
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONBEAM_CARD5,
                 active_func=lambda: self.elform == 6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONBEAM_CARD6,
                 active_func=lambda: self.elform == 9,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = SectionBeam.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

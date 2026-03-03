@@ -56,10 +56,12 @@ class ChangeVelocity(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHANGEVELOCITY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHANGEVELOCITY_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID containing nodes for initial velocity.

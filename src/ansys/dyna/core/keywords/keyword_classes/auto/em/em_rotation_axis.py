@@ -49,7 +49,8 @@ class EmRotationAxis(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMROTATIONAXIS_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def xp(self) -> typing.Optional[float]:
         """Get or set the x coordinate of the point

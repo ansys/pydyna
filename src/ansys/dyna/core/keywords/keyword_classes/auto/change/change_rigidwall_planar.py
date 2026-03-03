@@ -42,4 +42,5 @@ class ChangeRigidwallPlanar(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHANGERIGIDWALLPLANAR_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

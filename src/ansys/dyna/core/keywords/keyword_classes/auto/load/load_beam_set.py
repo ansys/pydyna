@@ -50,7 +50,8 @@ class LoadBeamSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADBEAMSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def esid(self) -> typing.Optional[int]:
         """Get or set the Beam element set ID, see *SET_BEAM.

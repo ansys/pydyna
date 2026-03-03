@@ -60,14 +60,16 @@ class SectionTShell(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SECTIONTSHELL_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "bi",
                 8,
                 10,
                 float,
                 lambda: self.nip,
                 lambda: self.icomp == 1,
-                data = kwargs.get("bi")),            OptionCardSet(
+                data = kwargs.get("bi")),
+            OptionCardSet(
                 option_spec = SectionTShell.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

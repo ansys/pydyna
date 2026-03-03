@@ -45,7 +45,8 @@ class DatabaseBinaryD3Prop(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYD3PROP_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ifile(self) -> int:
         """Get or set the Specify file for D3PROP output.  (This can also be defined on the command line by adding d3prop = 1 or d3prop = 2 which also sets IMATL =  IWALL = 1)

@@ -57,10 +57,12 @@ class LoadThermalConstant(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADTHERMALCONSTANT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADTHERMALCONSTANT_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID containing nodes for initial temperature, see *SET_NODE:

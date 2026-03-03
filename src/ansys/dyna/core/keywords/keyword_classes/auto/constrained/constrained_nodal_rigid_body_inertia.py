@@ -105,20 +105,25 @@ class ConstrainedNodalRigidBodyInertia(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYINERTIA_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYINERTIA_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYINERTIA_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYINERTIA_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYINERTIA_CARD4,
                 active_func=lambda: self.ircs and self.ircs == 1,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = ConstrainedNodalRigidBodyInertia.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

@@ -67,13 +67,16 @@ class ControlImplicitSolverDyn(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSOLVERDYN_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSOLVERDYN_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSOLVERDYN_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def lsolvr(self) -> int:
         """Get or set the Linear equation solver method (see Remarks below).

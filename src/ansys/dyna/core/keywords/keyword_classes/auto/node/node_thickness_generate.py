@@ -52,7 +52,8 @@ class NodeThicknessGenerate(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _NODETHICKNESSGENERATE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the Node ID. If GENERATE option is active, ID1 serves as the starting node.

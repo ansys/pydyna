@@ -56,10 +56,12 @@ class InterfaceSsiStatic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACESSISTATIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACESSISTATIC_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Soil-structure interface ID. This is required and must be unique amongst all the contact interface IDs in the model.

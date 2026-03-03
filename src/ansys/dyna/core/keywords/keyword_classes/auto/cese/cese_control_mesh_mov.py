@@ -46,7 +46,8 @@ class CeseControlMeshMov(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESECONTROLMESHMOV_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mmsh(self) -> int:
         """Get or set the Mesh motion selector:

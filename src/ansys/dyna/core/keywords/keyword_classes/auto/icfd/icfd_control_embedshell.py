@@ -45,7 +45,8 @@ class IcfdControlEmbedshell(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLEMBEDSHELL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def gtype(self) -> int:
         """Get or set the Gap type. Defines the criteria for selecting a distance to build the gap between the embedded nodes and the newly generated :

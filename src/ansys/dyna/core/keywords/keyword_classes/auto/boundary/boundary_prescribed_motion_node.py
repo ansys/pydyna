@@ -78,11 +78,13 @@ class BoundaryPrescribedMotionNode(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONNODE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONNODE_CARD1,
                 active_func=lambda: abs(self.dof) in [9, 10, 11] or self.vad==4,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = BoundaryPrescribedMotionNode.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

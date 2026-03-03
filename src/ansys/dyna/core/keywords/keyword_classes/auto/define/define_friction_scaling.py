@@ -62,7 +62,8 @@ class DefineFrictionScaling(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEFRICTIONSCALING_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineFrictionScaling.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

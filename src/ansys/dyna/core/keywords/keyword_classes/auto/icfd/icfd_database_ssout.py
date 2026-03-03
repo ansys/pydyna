@@ -55,7 +55,8 @@ class IcfdDatabaseSsout(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDATABASESSOUT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def out(self) -> int:
         """Get or set the Determines if the solver should retrieve the pressure loads and how to output it:

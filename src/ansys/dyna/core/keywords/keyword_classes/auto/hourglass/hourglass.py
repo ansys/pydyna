@@ -60,7 +60,8 @@ class HourglassCardSet(Cards):
             Card.from_field_schemas_with_defaults(
                 _HOURGLASSCARDSET_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = HourglassCardSet.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
@@ -209,7 +210,8 @@ class Hourglass(KeywordBase):
                 HourglassCardSet,
                 option_specs = HourglassCardSet.option_specs,
                 **kwargs
-            ),        ]
+            ),
+        ]
     @property
     def hgid(self) -> int:
         """Get or set the hgid

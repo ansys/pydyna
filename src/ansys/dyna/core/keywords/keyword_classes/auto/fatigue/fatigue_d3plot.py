@@ -51,10 +51,12 @@ class FatigueD3Plot(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FATIGUED3PLOT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FATIGUED3PLOT_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def strsn(self) -> int:
         """Get or set the Type of fatigue analysis variable:

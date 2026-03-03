@@ -52,7 +52,8 @@ class BoundaryPzepot(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPZEPOT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the ID of this boundary condition, which can be referred to by *SENSOR _CONTROL with TYPE='PZBC' or *DEFINE_CURVE_FUNCTION with FUNCTION='ECHGBC'.

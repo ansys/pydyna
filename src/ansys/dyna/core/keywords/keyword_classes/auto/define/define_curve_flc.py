@@ -54,7 +54,8 @@ class DefineCurveFlc(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINECURVEFLC_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineCurveFlc.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

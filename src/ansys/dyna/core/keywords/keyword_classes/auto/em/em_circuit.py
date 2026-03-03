@@ -66,10 +66,12 @@ class EmCircuit(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCIRCUIT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMCIRCUIT_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def circid(self) -> typing.Optional[int]:
         """Get or set the Circuit ID.

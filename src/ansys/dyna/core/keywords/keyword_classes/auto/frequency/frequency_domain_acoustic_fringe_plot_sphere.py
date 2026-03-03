@@ -50,7 +50,8 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICFRINGEPLOTSPHERE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def center(self) -> int:
         """Get or set the Flag for defining the center point for the sphere.

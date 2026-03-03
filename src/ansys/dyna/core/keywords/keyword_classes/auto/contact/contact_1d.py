@@ -54,7 +54,8 @@ class Contact1D(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACT1D_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsidr(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID for the rebar nodes that slide along the concrete; see* SET_NODE

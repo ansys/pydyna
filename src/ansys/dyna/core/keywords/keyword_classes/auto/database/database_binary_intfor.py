@@ -57,11 +57,13 @@ class DatabaseBinaryIntfor(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYINTFOR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYINTFOR_CARD1,
                 active_func=lambda: self._cards[1].has_nondefault_values(),
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the This field defines the time interval between output states, DT, for all options except D3DUMP, RUNRSF, and D3DRLF.

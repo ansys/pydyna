@@ -70,6 +70,7 @@ R endtime  tramp1+(abs(diemv)-0.5*clsv*tramp)/clsv
 - Followed by underscore or name characters
 - Field width: 10 characters total
 - Recommended: ≤7 chars total (including prefix) for safe field usage
+- Case insensitive
 
 Examples: `Rgbl`, `I_count`, `R_density`
 
@@ -79,23 +80,16 @@ Examples: `Rgbl`, `I_count`, `R_density`
 
 Manages parameters with hierarchical scoping:
 
-```python
-class ParameterSet:
-    def __init__(self, parent: Optional['ParameterSet'] = None):
-        self._params = dict()  # Local scope
-        self._parent = parent  # Parent scope
-```
-
 Key methods:
 - `add(param, value)`: Add global parameter
 - `add_local(param, value)`: Add local-only parameter
-- `get(param)`: Lookup (local → parent chain)
+- `get(param)`: Case-insensitive lookup (local → parent chain)
 - `copy_with_child_scope()`: Create child scope
 
 ### Scope Resolution
 
 `get(param)` search order:
-1. Check local `_params`
+1. Check local `_params_lower`
 2. Recursively check `_parent.get()` if not found
 3. Raise `KeyError` if not found anywhere
 

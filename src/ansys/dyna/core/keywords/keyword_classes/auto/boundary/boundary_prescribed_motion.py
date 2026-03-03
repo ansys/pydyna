@@ -68,11 +68,13 @@ class BoundaryPrescribedMotion(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTION_CARD1,
                 active_func=lambda: abs(self.dof) in [9, 10, 11] or self.vad==4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID. NID in *NODE

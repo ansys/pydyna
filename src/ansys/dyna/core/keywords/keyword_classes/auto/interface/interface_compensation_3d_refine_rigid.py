@@ -47,10 +47,12 @@ class InterfaceCompensation3DRefineRigid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATION3DREFINERIGID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATION3DREFINERIGID_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename1(self) -> typing.Optional[str]:
         """Get or set the A keyword file name of rigid tool mesh to be refined.  This should be the tooling mesh used in the forming or flanging simulation, before any compensation is done.  The refined rigid tool mesh will be in the file rigid_refined.tmp.  See keyword example.

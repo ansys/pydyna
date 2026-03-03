@@ -69,13 +69,16 @@ class ControlFormingTipping(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGTIPPING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGTIPPING_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGTIPPING_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the PID or part set ID that requires tipping and/or translation

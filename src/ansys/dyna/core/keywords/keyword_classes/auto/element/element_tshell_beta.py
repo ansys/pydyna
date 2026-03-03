@@ -73,10 +73,12 @@ class ElementTshellBeta(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTTSHELLBETA_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTTSHELLBETA_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number has to be used.

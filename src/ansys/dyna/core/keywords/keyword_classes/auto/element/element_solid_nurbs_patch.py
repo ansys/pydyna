@@ -129,25 +129,32 @@ class ElementSolidNurbsPatch(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTSOLIDNURBSPATCH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSOLIDNURBSPATCH_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSOLIDNURBSPATCH_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSOLIDNURBSPATCH_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSOLIDNURBSPATCH_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSOLIDNURBSPATCH_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSOLIDNURBSPATCH_CARD6,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def npeid(self) -> typing.Optional[int]:
         """Get or set the Nurbs-Patch Element ID.  A unique number has to be chosen.

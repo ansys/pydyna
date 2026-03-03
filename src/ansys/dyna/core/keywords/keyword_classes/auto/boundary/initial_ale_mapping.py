@@ -60,10 +60,12 @@ class InitialAleMapping(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALALEMAPPING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALALEMAPPING_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID or part set ID

@@ -58,10 +58,12 @@ class InitialStressTshellSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSTSHELLSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSTSHELLSET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the thick shell set ID, see *SET_T‌SHELL

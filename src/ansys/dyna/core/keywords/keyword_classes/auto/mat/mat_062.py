@@ -59,7 +59,8 @@ class Mat062(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT062_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = Mat062.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

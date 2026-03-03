@@ -145,22 +145,28 @@ class MatAnisotropicThermoelastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICTHERMOELASTIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICTHERMOELASTIC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICTHERMOELASTIC_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICTHERMOELASTIC_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICTHERMOELASTIC_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICTHERMOELASTIC_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatAnisotropicThermoelastic.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

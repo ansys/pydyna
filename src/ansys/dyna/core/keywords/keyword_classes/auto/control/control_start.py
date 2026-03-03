@@ -43,7 +43,8 @@ class ControlStart(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLSTART_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def begtim(self) -> float:
         """Get or set the Start time of analysis (default=0.0).

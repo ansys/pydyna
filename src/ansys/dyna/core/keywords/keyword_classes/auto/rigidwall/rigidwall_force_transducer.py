@@ -56,13 +56,16 @@ class RigidwallForceTransducer(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _RIGIDWALLFORCETRANSDUCER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLFORCETRANSDUCER_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLFORCETRANSDUCER_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def tid(self) -> int:
         """Get or set the Transducer ID.

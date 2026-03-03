@@ -81,13 +81,16 @@ class ControlThermalForming(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLTHERMALFORMING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLTHERMALFORMING_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLTHERMALFORMING_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def its(self) -> typing.Optional[float]:
         """Get or set the Initial thermal time step size.

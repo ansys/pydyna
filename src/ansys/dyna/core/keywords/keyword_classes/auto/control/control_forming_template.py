@@ -94,19 +94,24 @@ class ControlFormingTemplate(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGTEMPLATE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGTEMPLATE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGTEMPLATE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGTEMPLATE_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGTEMPLATE_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def idtemp(self) -> int:
         """Get or set the Type of forming process (Detailed descriptions can be found in the Remark section)

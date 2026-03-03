@@ -847,7 +847,7 @@
                     "name": "angle",
                     "card-size": 8,
                     "element-width": 10,
-                    "length-func": "self.nip",
+                    "length-func": "2 if self.nip == 0 else self.nip",
                     "active-func": "self.icomp == 1",
                     "type": "float",
                     "help": "dynamic array of beta-i: material angle at ith-integration point.",
@@ -941,6 +941,213 @@
                 "source-keyword": "CONTROL_REFERENCE_CONFIGURAION"
             }
         ]
+    },
+    "IGA_FACE_XYZ": {
+        "generation-options": {
+            "series-card": [
+                {
+                    "name": "brid",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "boundary representation IDs.",
+                    "ref": "brep_card"
+                }
+            ]
+        },
+        "labels": {
+            "brep_card": 1
+        }
+    },
+    "IGA_1D_BREP": {
+        "generation-options": {
+            "series-card": [
+                {
+                    "name": "eid",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "Parametric Edge IDs.",
+                    "ref": "edge_card"
+                }
+            ]
+        },
+        "labels": {
+            "edge_card": 1
+        }
+    },
+    "IGA_1D_NURBS_UVW": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "knots",
+                    "length-func": "math.ceil((self.nr+self.pr+1)/4)",
+                    "active-func": "self.unir==0",
+                    "ref": "knot_vector_unir_eq_0_card"
+                },
+                {
+                    "property-name": "points",
+                    "length-func": "self.nr",
+                    "ref": "control_point_weight_card"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "func": "self.unir!=0",
+                    "ref": "knot_vector_unir_ne_0_card"
+                }
+            ],
+            "additional-imports": [
+                {
+                    "name": "math"
+                }
+            ]
+        },
+        "labels": {
+            "knot_vector_unir_eq_0_card": 2,
+            "knot_vector_unir_ne_0_card": 3,
+            "control_point_weight_card": 4
+        }
+    },
+    "IGA_1D_NURBS_XYZ": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "knots",
+                    "length-func": "math.ceil((self.nr+self.pr+1)/4)",
+                    "active-func": "self.unir==0",
+                    "ref": "knot_vector_unir_eq_0_card"
+                },
+                {
+                    "property-name": "points",
+                    "length-func": "self.nr",
+                    "ref": "control_point_weight_card"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "func": "self.unir!=0",
+                    "ref": "knot_vector_unir_ne_0_card"
+                }
+            ],
+            "additional-imports": [
+                {
+                    "name": "math"
+                }
+            ]
+        },
+        "labels": {
+            "knot_vector_unir_eq_0_card": 2,
+            "knot_vector_unir_ne_0_card": 3,
+            "control_point_weight_card": 4
+        }
+    },
+    "IGA_2D_NURBS_UVW": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "r_knots",
+                    "length-func": "math.ceil((self.nr+self.pr+1)/4)",
+                    "active-func": "self.unir==0",
+                    "ref": "r_knot_vector_unir_eq_0_card"
+                },
+                {
+                    "property-name": "s_knots",
+                    "length-func": "math.ceil((self.ns+self.ps+1)/4)",
+                    "active-func": "self.unis==0",
+                    "ref": "s_knot_vector_unis_eq_0_card"
+                },
+                {
+                    "property-name": "points",
+                    "length-func": "self.nr*self.ns",
+                    "ref": "control_point_weight_card"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "func": "self.unir!=0",
+                    "ref": "r_knot_vector_unir_ne_0_card"
+                },
+                {
+                    "func": "self.unis!=0",
+                    "ref": "s_knot_vector_unis_ne_0_card"
+                }
+            ],
+            "additional-imports": [
+                {
+                    "name": "math"
+                }
+            ]
+        },
+        "labels": {
+            "r_knot_vector_unir_eq_0_card": 2,
+            "r_knot_vector_unir_ne_0_card": 3,
+            "s_knot_vector_unis_eq_0_card": 4,
+            "s_knot_vector_unis_ne_0_card": 5,
+            "control_point_weight_card": 6
+        }
+    },
+    "IGA_2D_NURBS_XYZ": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "r_knots",
+                    "length-func": "math.ceil((self.nr+self.pr+1)/4)",
+                    "active-func": "self.unir==0",
+                    "ref": "r_knot_vector_unir_eq_0_card"
+                },
+                {
+                    "property-name": "s_knots",
+                    "length-func": "math.ceil((self.ns+self.ps+1)/4)",
+                    "active-func": "self.unis==0",
+                    "ref": "s_knot_vector_unis_eq_0_card"
+                },
+                {
+                    "property-name": "points",
+                    "length-func": "self.nr*self.ns",
+                    "ref": "control_point_weight_card"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "func": "self.unir!=0",
+                    "ref": "r_knot_vector_unir_ne_0_card"
+                },
+                {
+                    "func": "self.unis!=0",
+                    "ref": "s_knot_vector_unis_ne_0_card"
+                }
+            ],
+            "additional-imports": [
+                {
+                    "name": "math"
+                }
+            ]
+        },
+        "labels": {
+            "r_knot_vector_unir_eq_0_card": 2,
+            "r_knot_vector_unir_ne_0_card": 3,
+            "s_knot_vector_unis_eq_0_card": 4,
+            "s_knot_vector_unis_ne_0_card": 5,
+            "control_point_weight_card": 6
+        }
+    },
+    "SET_IGA_POINT_UVW": {
+        "generation-options": {
+            "series-card": [
+                {
+                    "name": "points",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "Parametric point IDs.",
+                    "ref": "point_ids_card"
+                }
+            ]
+        },
+        "labels": {
+            "point_ids_card": 1
+        }
     },
     "SECTION_TSHELL": {
         "classname": "SectionTShell",

@@ -53,7 +53,8 @@ class ControlSteadyStateRolling(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLSTEADYSTATEROLLING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def imass(self) -> int:
         """Get or set the Inertia switching flag

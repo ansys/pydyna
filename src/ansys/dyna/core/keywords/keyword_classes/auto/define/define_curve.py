@@ -66,7 +66,8 @@ class DefineCurve(
             Card.from_field_schemas_with_defaults(
                 _DEFINECURVE_CARD0,
                 **kwargs,
-            ),            TableCard(
+            ),
+            TableCard(
                 [
                     Field("a1", float, 0, 20, 0.0),
                     Field("o1", float, 20, 20, 0.0),
@@ -74,7 +75,8 @@ class DefineCurve(
                 None,
                 name="curves",
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = DefineCurve.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

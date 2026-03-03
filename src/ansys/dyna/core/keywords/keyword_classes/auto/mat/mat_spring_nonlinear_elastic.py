@@ -60,7 +60,8 @@ class MatSpringNonlinearElastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATSPRINGNONLINEARELASTIC_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = MatSpringNonlinearElastic.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

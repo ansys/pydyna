@@ -71,13 +71,16 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDPARTSOLIDTOSOLID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDPARTSOLIDTOSOLID_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDPARTSOLIDTOSOLID_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name of the dynain file to be included to map the results from, with maximum of 80 characters.

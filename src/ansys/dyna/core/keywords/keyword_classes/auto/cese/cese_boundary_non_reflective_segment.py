@@ -54,7 +54,8 @@ class CeseBoundaryNonReflectiveSegment(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYNONREFLECTIVESEGMENT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def n1(self) -> typing.Optional[int]:
         """Get or set the Node IDs defining a segment.

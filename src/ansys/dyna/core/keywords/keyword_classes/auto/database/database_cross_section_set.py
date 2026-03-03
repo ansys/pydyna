@@ -62,10 +62,12 @@ class DatabaseCrossSectionSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASECROSSSECTIONSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASECROSSSECTIONSET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def csid(self) -> typing.Optional[int]:
         """Get or set the Optional ID for cross section. If not specified cross section ID is taken to be the cross section order in the input deck.

@@ -53,10 +53,12 @@ class LoadSeismicSsiAux(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADSEISMICSSIAUX_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSEISMICSSIAUX_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Name of binary file containing recorded motions

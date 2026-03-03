@@ -81,14 +81,17 @@ class BoundaryPrescribedMotionRigidBndout2Dynain(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONRIGIDBNDOUT2DYNAIN_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONRIGIDBNDOUT2DYNAIN_CARD1,
                 active_func=lambda: abs(self.dof) in [9, 10, 11] or self.vad==4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONRIGIDBNDOUT2DYNAIN_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
+            ),
+            OptionCardSet(
                 option_spec = BoundaryPrescribedMotionRigidBndout2Dynain.option_specs[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(

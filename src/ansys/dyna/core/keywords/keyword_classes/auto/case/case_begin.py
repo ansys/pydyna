@@ -42,4 +42,5 @@ class CaseBegin(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CASEBEGIN_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
