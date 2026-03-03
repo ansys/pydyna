@@ -309,6 +309,18 @@ class Hourglass(KeywordBase):
         self.sets[0].qw = value
 
     @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].title
+
+    @title.setter
+    def title(self, value: str) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].title = value
+
+    @property
     def sets(self) -> typing.List[HourglassCardSet]:
         """Gets the list of sets."""
         return self._cards[0].items()

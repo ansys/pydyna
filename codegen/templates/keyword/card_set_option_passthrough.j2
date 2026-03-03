@@ -1,0 +1,25 @@
+{% for card in option.cards %}
+{% set card_loop = loop %}
+{% for field in card.fields %}
+{% if field.used %}
+{% if not field.redundant %}
+    @property
+    def {{field.property_name}}(self) -> {%- if field.default is none %} typing.Optional[
+                {%- else %} {% endif %}{{field.property_type}}{%- if field.default is none %}]{%- endif %}:
+        """Get or set the {% filter indent(width=8) %}{{field.help}}
+        {% endfilter %}
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].{{field.property_name}}
+
+{% if not field.readonly %}
+    @{{field.property_name}}.setter
+    def {{field.property_name}}(self, value: {{field.property_type}}) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].{{field.property_name}} = value
+
+{% endif %}{# not field.readonly #}
+{% endif %}{# not field.redundant #}
+{% endif %}{# field.used #}
+{% endfor %}{# field in card.fields #}
+{% endfor %}{# card in option.cards #}

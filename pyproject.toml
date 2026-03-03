@@ -107,6 +107,7 @@ extend-exclude = [
     "src/ansys/dyna/core/keywords/keyword_classes/auto/",
     "src/ansys/dyna/core/keywords/keyword_classes/type_mapping.py",
     "src/ansys/dyna/core/keywords/keyword_classes/auto_keywords.py",
+    "src/ansys/dyna/core/keywords/keyword_classes/manual/*_version_*.py",
 ]
 
 lint.select = [

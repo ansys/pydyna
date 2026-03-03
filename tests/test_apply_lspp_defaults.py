@@ -137,7 +137,7 @@ class TestOptionCardSetHandling:
     def test_option_card_children_filled_when_active(self):
         """Real keyword with OptionCardSet: children should be filled."""
         with disable_lspp_defaults():
-            kw = kwd.SectionSolid()
+            kw = kwd.SectionSolid(card_set_count=1)
             kw.activate_option("TITLE")
         # Before applying defaults, TITLE field should be None
         assert kw.title is None
@@ -152,6 +152,7 @@ class TestOptionCardSetHandling:
         with disable_lspp_defaults():
             kw = kwd.SectionSolid()
             kw.activate_option("TITLE")
+            kw.add_set()
 
         assert kw.elform is None
         assert kw.aet is None
@@ -244,6 +245,7 @@ class TestKeywordLevelIntegration:
         with disable_lspp_defaults():
             kw = kwd.SectionSolid()
             kw.activate_option("TITLE")
+            kw.add_set()
 
         assert kw.elform is None
         assert kw.aet is None
