@@ -2628,6 +2628,56 @@
             "ioopt_card": 1
         }
     },
+    "DATABASE_CROSS_SECTION_SET": {
+        "generation-options": {
+             "add-option": [
+                {
+                    "card-order": -1,
+                    "title-order": 1,
+                    "cards": [
+                        {
+                            "source": "additional-cards",
+                            "card-name": "CROSS_SECTION_ID"
+                        }
+                    ],
+                    "option-name": "ID"
+                }
+            ],
+            "skip-card": [
+                {
+                    "ref": "heading_card"
+                }
+            ]
+        },
+        "labels": {
+            "heading_card": 0
+        }
+    },
+    "DATABASE_CROSS_SECTION_PLANE": {
+        "generation-options": {
+             "add-option": [
+                {
+                    "card-order": -1,
+                    "title-order": 1,
+                    "cards": [
+                        {
+                            "source": "additional-cards",
+                            "card-name": "CROSS_SECTION_ID"
+                        }
+                    ],
+                    "option-name": "ID"
+                }
+            ],
+            "skip-card": [
+                {
+                    "ref": "heading_card"
+                }
+            ]
+        },
+        "labels": {
+            "heading_card": 0
+        }
+    },
     "SET_NODE_ADD": {
         "generation-options": {
             "series-card": [
