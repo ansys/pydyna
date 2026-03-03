@@ -66,8 +66,16 @@ _SECTIONSHELLCARDSET_CARD3 = (
     FieldSchema("iloc", int, 70, 10, 0),
 )
 
+_SECTIONSHELLCARDSET_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionShellCardSet(Cards):
     """ CardSet."""
+
+    option_specs = [
+        OptionSpec("TITLE", -1, 1),
+    ]
 
     def __init__(self, **kwargs):
         """Initialize the SectionShellCardSet CardSet."""
@@ -115,6 +123,16 @@ class SectionShellCardSet(Cards):
                 lambda: self.lmc,
                 lambda: self.elform in [101, 102, 103, 104, 105],
                 data = kwargs.get("pi")),
+            OptionCardSet(
+                option_spec = SectionShellCardSet.option_specs[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONSHELLCARDSET_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
         ]
 
     @property
@@ -504,42 +522,39 @@ class SectionShellCardSet(Cards):
         self._cards[5].data = value
 
     @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[6].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[6].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
+
+    @property
     def parent(self) -> KeywordBase:
         """Get the parent keyword."""
         return self._parent
-
-_SECTIONSHELL_OPTION0_CARD0 = (
-    FieldSchema("title", str, 0, 80, None),
-)
 
 class SectionShell(KeywordBase):
     """DYNA SECTION_SHELL keyword"""
 
     keyword = "SECTION"
     subkeyword = "SHELL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
-    ]
 
     def __init__(self, **kwargs):
         """Initialize the SectionShell class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         kwargs["keyword"] = self
-        kwargs["parent"] = self
         self._cards = [
             CardSet(
                 SectionShellCardSet,
-                **kwargs
-            ),
-            OptionCardSet(
-                option_spec = SectionShell.option_specs[0],
-                cards = [
-                    Card.from_field_schemas_with_defaults(
-                        _SECTIONSHELL_OPTION0_CARD0,
-                        **kwargs,
-                    ),
-                ],
+                option_specs = SectionShellCardSet.option_specs,
                 **kwargs
             ),
         ]
@@ -865,6 +880,18 @@ class SectionShell(KeywordBase):
         self.sets[0].pi = value
 
     @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].title
+
+    @title.setter
+    def title(self, value: str) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].title = value
+
+    @property
     def sets(self) -> typing.List[SectionShellCardSet]:
         """Gets the list of sets."""
         return self._cards[0].items()
@@ -872,18 +899,4 @@ class SectionShell(KeywordBase):
     def add_set(self, **kwargs):
         """Adds a set."""
         self._cards[0].add_item(**kwargs)
-
-    @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the Additional title line
-        """ # nopep8
-        return self._cards[1].cards[0].get_value("title")
-
-    @title.setter
-    def title(self, value: str) -> None:
-        """Set the title property."""
-        self._cards[1].cards[0].set_value("title", value)
-
-        if value:
-            self.activate_option("TITLE")
 

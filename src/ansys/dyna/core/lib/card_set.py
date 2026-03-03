@@ -177,6 +177,14 @@ class CardSet(CardInterface):
         """
         item = self._items[index]
 
+        # Propagate the CardSet's format to all cards in the item before reading.
+        # This is needed when the keyword was written in long format (+): the
+        # KeywordBase.format setter propagates to the CardSet, but items are created
+        # lazily during read (after format is already set), so they don't inherit it.
+        if self._format_type != format_type.default:
+            for card in item._cards:
+                card.format = self._format_type
+
         # Check if item has custom read logic
         if hasattr(item, "_read_data"):
             return item._read_data(buf, parameter_set)

@@ -827,6 +827,7 @@
                         "integration_points_card",
                         "pi_card"
                     ],
+                    "source-options": [0],
                     "target-ref": "shell_card_1",
                     "name": "SectionShellCardSet"
                 }
