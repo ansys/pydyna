@@ -149,26 +149,9 @@ jobs:
           github-actor: ${{ github.actor }}
           use_cache_examples: ${{ github.ref != 'refs/heads/main' }} # Use cache for PRs but not for main branch to avoid cache issues
 
-  smoke-tests:
-    name: "Build wheelhouse for ${{ matrix.os }} and Python ${{ matrix.python-version }}"
-    runs-on: ${{ matrix.os }}
-    needs: [code-style, codegen-testing]
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [windows-latest, ubuntu-latest]
-        python-version: ['3.10', '3.13']  # Min and max versions only for PR/push; full matrix runs nightly
-    steps:
-      - uses: ansys/actions/build-wheelhouse@571fb2b8c7d6ad8c8b18e50bd20fb00f125dcfb6 # v9.0.15
-        with:
-          library-name: ${{ env.PACKAGE_NAME }}
-          operating-system: ${{ matrix.os }}
-          python-version: ${{ matrix.python-version }}
-
   run-tests:
     name: Test the "run" subpackage
     runs-on: ubuntu-latest
-    needs: [smoke-tests]
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -187,7 +170,6 @@ jobs:
   unit-tests:
     name: "Unit testing for matrix"
     runs-on: ${{ matrix.os }}
-    needs: [smoke-tests]
     strategy:
       fail-fast: false
       matrix:
