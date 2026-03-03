@@ -24,7 +24,6 @@
 import enum
 import io
 import typing
-import warnings
 
 from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.cards import Cards
@@ -339,6 +338,8 @@ class KeywordBase(Cards):
 
     def dumps(self) -> str:
         """Return the string representation of the keyword."""
+        import warnings
+
         warnings.warn("dumps is deprecated - use write instead")
         return self.write()
 
