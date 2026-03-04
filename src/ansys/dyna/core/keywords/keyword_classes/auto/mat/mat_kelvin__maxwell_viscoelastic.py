@@ -48,7 +48,7 @@ class MatKelvin_MaxwellViscoelastic(KeywordBase):
     keyword = "MAT"
     subkeyword = "KELVIN-MAXWELL_VISCOELASTIC"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

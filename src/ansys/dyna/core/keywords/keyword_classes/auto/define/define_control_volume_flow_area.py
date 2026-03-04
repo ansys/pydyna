@@ -47,7 +47,7 @@ class DefineControlVolumeFlowArea(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "CONTROL_VOLUME_FLOW_AREA"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "pid_": LinkType.PART,

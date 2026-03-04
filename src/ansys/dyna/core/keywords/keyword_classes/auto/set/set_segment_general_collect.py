@@ -59,7 +59,7 @@ class SetSegmentGeneralCollect(KeywordBase):
     keyword = "SET"
     subkeyword = "SEGMENT_GENERAL_COLLECT"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

@@ -57,7 +57,7 @@ class MatPitzerCrushableFoam(KeywordBase):
     keyword = "MAT"
     subkeyword = "PITZER_CRUSHABLE_FOAM"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcpy": LinkType.DEFINE_CURVE,

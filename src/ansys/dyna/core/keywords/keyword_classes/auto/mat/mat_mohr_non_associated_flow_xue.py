@@ -109,7 +109,7 @@ class MatMohrNonAssociatedFlowXue(KeywordBase):
     keyword = "MAT"
     subkeyword = "MOHR_NON_ASSOCIATED_FLOW_XUE"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcids": LinkType.DEFINE_CURVE,

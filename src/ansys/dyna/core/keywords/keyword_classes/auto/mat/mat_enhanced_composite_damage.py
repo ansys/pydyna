@@ -129,7 +129,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
     keyword = "MAT"
     subkeyword = "ENHANCED_COMPOSITE_DAMAGE"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcxc": LinkType.DEFINE_CURVE,

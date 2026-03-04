@@ -48,7 +48,7 @@ class SensorCpmAirbag(KeywordBase):
     keyword = "SENSOR"
     subkeyword = "CPM_AIRBAG"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "defps": LinkType.SET_PART,

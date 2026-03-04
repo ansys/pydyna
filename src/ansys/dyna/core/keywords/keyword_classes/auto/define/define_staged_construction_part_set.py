@@ -44,7 +44,7 @@ class DefineStagedConstructionPartSet(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "STAGED_CONSTRUCTION_PART_SET"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "psid": LinkType.SET_PART,

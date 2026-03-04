@@ -76,7 +76,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "SPOTWELD_RUPTURE_PARAMETER"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcdpa": LinkType.DEFINE_CURVE,

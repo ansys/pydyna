@@ -47,7 +47,7 @@ class SensorDefineForce(KeywordBase):
     keyword = "SENSOR"
     subkeyword = "DEFINE_FORCE"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "vid": LinkType.DEFINE_COORDINATE_SYSTEM,

@@ -48,7 +48,7 @@ class MatIsotropicSmearedCrack(KeywordBase):
     keyword = "MAT"
     subkeyword = "ISOTROPIC_SMEARED_CRACK"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

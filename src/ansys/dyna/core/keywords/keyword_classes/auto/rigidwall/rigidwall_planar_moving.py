@@ -66,7 +66,7 @@ class RigidwallPlanarMoving(KeywordBase):
     keyword = "RIGIDWALL"
     subkeyword = "PLANAR_MOVING"
     option_specs = [
-        OptionSpec("ID", -2, 1),
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "boxid": LinkType.DEFINE_BOX,

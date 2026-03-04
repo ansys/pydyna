@@ -101,7 +101,7 @@ class RigidwallGeometricCylinderDeformInteriorMotionDisplay(KeywordBase):
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_CYLINDER_DEFORM_INTERIOR_MOTION_DISPLAY"
     option_specs = [
-        OptionSpec("ID", -2, 1),
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "lcidr": LinkType.DEFINE_CURVE,

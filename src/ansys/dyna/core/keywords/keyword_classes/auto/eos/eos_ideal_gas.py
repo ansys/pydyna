@@ -52,7 +52,7 @@ class EosIdealGas(KeywordBase):
     keyword = "EOS"
     subkeyword = "IDEAL_GAS"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

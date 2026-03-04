@@ -116,7 +116,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
     keyword = "MAT"
     subkeyword = "LOU-YOON_ANISOTROPIC_PLASTICTIY"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,

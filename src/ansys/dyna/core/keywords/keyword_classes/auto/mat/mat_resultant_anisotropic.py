@@ -91,7 +91,7 @@ class MatResultantAnisotropic(KeywordBase):
     keyword = "MAT"
     subkeyword = "RESULTANT_ANISOTROPIC"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

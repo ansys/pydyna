@@ -79,7 +79,7 @@ class MatLayeredLinearPlasticity(KeywordBase):
     keyword = "MAT"
     subkeyword = "LAYERED_LINEAR_PLASTICITY"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcss": LinkType.DEFINE_CURVE,

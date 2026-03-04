@@ -88,7 +88,7 @@ class MatFuChangFoamLogLogInterpolation(KeywordBase):
     keyword = "MAT"
     subkeyword = "FU_CHANG_FOAM_LOG_LOG_INTERPOLATION"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "pvid": LinkType.DEFINE_CURVE,

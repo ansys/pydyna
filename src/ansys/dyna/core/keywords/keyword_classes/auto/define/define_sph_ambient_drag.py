@@ -47,7 +47,7 @@ class DefineSphAmbientDrag(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "SPH_AMBIENT_DRAG"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

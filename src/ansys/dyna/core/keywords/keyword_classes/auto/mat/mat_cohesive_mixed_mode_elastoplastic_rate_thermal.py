@@ -76,7 +76,7 @@ class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
     keyword = "MAT"
     subkeyword = "COHESIVE_MIXED_MODE_ELASTOPLASTIC_RATE_THERMAL"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcg1c": LinkType.DEFINE_CURVE,

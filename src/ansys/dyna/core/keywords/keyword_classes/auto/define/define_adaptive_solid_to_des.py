@@ -63,7 +63,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "ADAPTIVE_SOLID_TO_DES"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "isdes": LinkType.SECTION,

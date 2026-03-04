@@ -65,8 +65,8 @@ class ConstrainedBeamInSolid(KeywordBase):
     keyword = "CONSTRAINED"
     subkeyword = "BEAM_IN_SOLID"
     option_specs = [
-        OptionSpec("ID", -1, 1),
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("ID", "pre/1", 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

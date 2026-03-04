@@ -92,7 +92,7 @@ class MatCorusVegter(KeywordBase):
     keyword = "MAT"
     subkeyword = "CORUS_VEGTER"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,

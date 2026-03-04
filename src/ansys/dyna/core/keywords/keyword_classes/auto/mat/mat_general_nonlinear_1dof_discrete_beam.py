@@ -61,7 +61,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
     keyword = "MAT"
     subkeyword = "GENERAL_NONLINEAR_1DOF_DISCRETE_BEAM"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcidt": LinkType.DEFINE_CURVE,

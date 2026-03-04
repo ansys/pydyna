@@ -51,7 +51,7 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
     keyword = "BOUNDARY"
     subkeyword = "PRESCRIBED_MOTION_SET_SEGMENT"
     option_specs = [
-        OptionSpec("ID", -2, 1),
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "vid": LinkType.DEFINE_VECTOR,

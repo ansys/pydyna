@@ -48,7 +48,7 @@ class DefineSphMeshSurface(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "SPH_MESH_SURFACE"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "sphxid": LinkType.SECTION,

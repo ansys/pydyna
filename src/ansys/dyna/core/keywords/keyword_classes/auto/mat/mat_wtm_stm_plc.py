@@ -100,7 +100,7 @@ class MatWtmStmPlc(KeywordBase):
     keyword = "MAT"
     subkeyword = "WTM_STM_PLC"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

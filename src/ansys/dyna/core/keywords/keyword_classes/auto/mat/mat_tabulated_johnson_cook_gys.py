@@ -69,7 +69,7 @@ class MatTabulatedJohnsonCookGys(KeywordBase):
     keyword = "MAT"
     subkeyword = "TABULATED_JOHNSON_COOK_GYS"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcg": LinkType.DEFINE_CURVE,

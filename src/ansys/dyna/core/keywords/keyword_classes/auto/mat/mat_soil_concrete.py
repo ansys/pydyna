@@ -57,7 +57,7 @@ class MatSoilConcrete(KeywordBase):
     keyword = "MAT"
     subkeyword = "SOIL_CONCRETE"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcpv": LinkType.DEFINE_CURVE,

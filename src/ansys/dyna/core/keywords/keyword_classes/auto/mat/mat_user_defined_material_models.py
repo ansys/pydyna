@@ -103,7 +103,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
     keyword = "MAT"
     subkeyword = "USER_DEFINED_MATERIAL_MODELS"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

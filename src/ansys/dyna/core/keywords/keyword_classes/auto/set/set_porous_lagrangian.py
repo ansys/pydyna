@@ -75,7 +75,7 @@ class SetPorousLagrangian(KeywordBase):
     keyword = "SET"
     subkeyword = "POROUS_LAGRANGIAN"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "veccid1": LinkType.DEFINE_VECTOR,

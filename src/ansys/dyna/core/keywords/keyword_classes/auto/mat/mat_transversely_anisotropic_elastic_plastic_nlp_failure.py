@@ -59,7 +59,7 @@ class MatTransverselyAnisotropicElasticPlasticNlpFailure(KeywordBase):
     keyword = "MAT"
     subkeyword = "TRANSVERSELY_ANISOTROPIC_ELASTIC_PLASTIC_NLP_FAILURE"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "hlcid": LinkType.DEFINE_CURVE,

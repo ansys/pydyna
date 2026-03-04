@@ -45,7 +45,7 @@ class MatSphImplicitStructure(KeywordBase):
     keyword = "MAT"
     subkeyword = "SPH_IMPLICIT_STRUCTURE"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

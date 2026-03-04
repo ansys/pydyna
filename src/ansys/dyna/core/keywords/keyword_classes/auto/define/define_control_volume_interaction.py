@@ -47,7 +47,7 @@ class DefineControlVolumeInteraction(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "CONTROL_VOLUME_INTERACTION"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid_": LinkType.DEFINE_CURVE,

@@ -111,7 +111,7 @@ class Mat120Rcdc(KeywordBase):
     keyword = "MAT"
     subkeyword = "120_RCDC"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcss": LinkType.DEFINE_CURVE,

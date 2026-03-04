@@ -56,7 +56,7 @@ class DefineCpmChambers(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "CPM_CHAMBERS"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "sid1": LinkType.SET_PART,

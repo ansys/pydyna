@@ -78,7 +78,7 @@ class RigidwallGeometricCylinderInteriorMotion(KeywordBase):
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_CYLINDER_INTERIOR_MOTION"
     option_specs = [
-        OptionSpec("ID", -2, 1),
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,

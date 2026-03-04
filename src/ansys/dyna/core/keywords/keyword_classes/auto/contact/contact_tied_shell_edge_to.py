@@ -159,15 +159,15 @@ class ContactTiedShellEdgeTo(KeywordBase):
     keyword = "CONTACT"
     subkeyword = "TIED_SHELL_EDGE_TO"
     option_specs = [
-        OptionSpec("ID", -2, 1),
-        OptionSpec("MPP", -1, 2),
-        OptionSpec("A", 1, 0),
-        OptionSpec("B", 2, 0),
-        OptionSpec("C", 3, 0),
-        OptionSpec("D", 4, 0),
-        OptionSpec("E", 5, 0),
-        OptionSpec("F", 6, 0),
-        OptionSpec("G", 7, 0),
+        OptionSpec("ID", "pre/2", 1),
+        OptionSpec("MPP", "pre/1", 2),
+        OptionSpec("A", "post/1", 0),
+        OptionSpec("B", "post/2", 0),
+        OptionSpec("C", "post/3", 0),
+        OptionSpec("D", "post/4", 0),
+        OptionSpec("E", "post/5", 0),
+        OptionSpec("F", "post/6", 0),
+        OptionSpec("G", "post/7", 0),
     ]
     _link_fields = {
         "saboxid": LinkType.DEFINE_BOX,

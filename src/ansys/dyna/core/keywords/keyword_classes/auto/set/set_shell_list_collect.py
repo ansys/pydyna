@@ -57,7 +57,7 @@ class SetShellListCollect(KeywordBase):
     keyword = "SET"
     subkeyword = "SHELL_LIST_COLLECT"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "eid1": LinkType.ELEMENT_SHELL,

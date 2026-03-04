@@ -52,7 +52,7 @@ class SetShellListGenerateIncrementCollect(KeywordBase):
     keyword = "SET"
     subkeyword = "SHELL_LIST_GENERATE_INCREMENT_COLLECT"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "bbeg": LinkType.ELEMENT_SHELL,

@@ -91,7 +91,7 @@ class Mat059Solid(KeywordBase):
     keyword = "MAT"
     subkeyword = "059_SOLID"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

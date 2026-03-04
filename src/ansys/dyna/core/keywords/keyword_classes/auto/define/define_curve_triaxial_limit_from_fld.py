@@ -46,7 +46,7 @@ class DefineCurveTriaxialLimitFromFld(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "CURVE_TRIAXIAL_LIMIT_FROM_FLD"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

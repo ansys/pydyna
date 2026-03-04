@@ -96,7 +96,7 @@ class MatForceLimited(KeywordBase):
     keyword = "MAT"
     subkeyword = "FORCE_LIMITED"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lc1": LinkType.DEFINE_CURVE,

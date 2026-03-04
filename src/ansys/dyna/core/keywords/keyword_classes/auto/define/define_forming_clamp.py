@@ -47,7 +47,7 @@ class DefineFormingClamp(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "FORMING_CLAMP"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "clp1": LinkType.PART,

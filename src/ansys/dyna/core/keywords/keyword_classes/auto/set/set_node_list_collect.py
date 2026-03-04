@@ -61,7 +61,7 @@ class SetNodeListCollect(KeywordBase):
     keyword = "SET"
     subkeyword = "NODE_LIST_COLLECT"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nid1": LinkType.NODE,

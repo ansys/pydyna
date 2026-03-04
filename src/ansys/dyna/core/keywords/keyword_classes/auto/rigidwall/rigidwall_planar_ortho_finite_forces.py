@@ -96,7 +96,7 @@ class RigidwallPlanarOrthoFiniteForces(KeywordBase):
     keyword = "RIGIDWALL"
     subkeyword = "PLANAR_ORTHO_FINITE_FORCES"
     option_specs = [
-        OptionSpec("ID", -2, 1),
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "node1": LinkType.NODE,

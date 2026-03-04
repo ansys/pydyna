@@ -52,7 +52,7 @@ class MatViscoplasticMixedHardening(KeywordBase):
     keyword = "MAT"
     subkeyword = "VISCOPLASTIC_MIXED_HARDENING"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcss": LinkType.DEFINE_CURVE,

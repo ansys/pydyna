@@ -56,7 +56,7 @@ class Mat102T(KeywordBase):
     keyword = "MAT"
     subkeyword = "102_T"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lce": LinkType.DEFINE_CURVE,

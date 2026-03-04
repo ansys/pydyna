@@ -87,7 +87,7 @@ class MatThermoElastoViscoplasticCreep(KeywordBase):
     keyword = "MAT"
     subkeyword = "THERMO_ELASTO_VISCOPLASTIC_CREEP"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcss": LinkType.DEFINE_CURVE,

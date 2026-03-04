@@ -69,7 +69,7 @@ class SectionPointSourceMixture(KeywordBase):
     keyword = "SECTION"
     subkeyword = "POINT_SOURCE_MIXTURE"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nidlc001": LinkType.NODE,

@@ -54,7 +54,7 @@ class Eos004(KeywordBase):
     keyword = "EOS"
     subkeyword = "004"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

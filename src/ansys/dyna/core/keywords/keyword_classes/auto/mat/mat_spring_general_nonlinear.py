@@ -47,7 +47,7 @@ class MatSpringGeneralNonlinear(KeywordBase):
     keyword = "MAT"
     subkeyword = "SPRING_GENERAL_NONLINEAR"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcdl": LinkType.DEFINE_CURVE_OR_TABLE,

@@ -92,7 +92,7 @@ class MatElasticPlasticHydroStochastic(KeywordBase):
     keyword = "MAT"
     subkeyword = "ELASTIC_PLASTIC_HYDRO_STOCHASTIC"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

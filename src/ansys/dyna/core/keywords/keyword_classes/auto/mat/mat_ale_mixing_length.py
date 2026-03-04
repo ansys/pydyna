@@ -69,7 +69,7 @@ class MatAleMixingLength(KeywordBase):
     keyword = "MAT"
     subkeyword = "ALE_MIXING_LENGTH"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

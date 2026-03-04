@@ -48,7 +48,7 @@ class DefineCurveCompensationConstraintBegin(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "CURVE_COMPENSATION_CONSTRAINT_BEGIN"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

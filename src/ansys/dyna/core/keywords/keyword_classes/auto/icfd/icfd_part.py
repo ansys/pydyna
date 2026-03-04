@@ -40,7 +40,7 @@ class IcfdPart(KeywordBase):
     keyword = "ICFD"
     subkeyword = "PART"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

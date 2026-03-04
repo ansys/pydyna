@@ -47,7 +47,7 @@ class DefinePartFromLayer(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "PART_FROM_LAYER"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "mid": LinkType.MAT,

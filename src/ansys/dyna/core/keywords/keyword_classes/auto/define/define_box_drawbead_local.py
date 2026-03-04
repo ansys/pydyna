@@ -64,7 +64,7 @@ class DefineBoxDrawbeadLocal(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "BOX_DRAWBEAD_LOCAL"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,

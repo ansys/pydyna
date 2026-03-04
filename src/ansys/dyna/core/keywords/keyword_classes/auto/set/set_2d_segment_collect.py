@@ -50,7 +50,7 @@ class Set2DSegmentCollect(KeywordBase):
     keyword = "SET"
     subkeyword = "2D_SEGMENT_COLLECT"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "pid": LinkType.PART,

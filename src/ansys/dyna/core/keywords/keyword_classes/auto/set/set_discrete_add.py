@@ -53,7 +53,7 @@ class SetDiscreteAdd(KeywordBase):
     keyword = "SET"
     subkeyword = "DISCRETE_ADD"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "dsid1": LinkType.SET_DISCRETE,

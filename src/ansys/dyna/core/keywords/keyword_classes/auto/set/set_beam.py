@@ -43,7 +43,7 @@ class SetBeam(KeywordBase):
     keyword = "SET"
     subkeyword = "BEAM"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "element": LinkType.ELEMENT_BEAM,

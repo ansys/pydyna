@@ -42,7 +42,7 @@ class AddOptionSettings:
     """Configuration for adding keyword options."""
 
     name: str
-    card_order: int
+    card_order: str
     title_order: int
     cards: List[Dict[str, Any]]
     func: Optional[str] = None
@@ -67,7 +67,7 @@ class AddOptionSettings:
             "type": "object",
             "properties": {
                 "option-name": {"type": "string", "description": "Name of the option (e.g., 'ID')"},
-                "card-order": {"type": "integer", "description": "Card ordering priority"},
+                "card-order": {"type": "string", "description": "Card position URI: 'pre/N' (before main cards) or 'post/N' (after main cards)"},
                 "title-order": {"type": "integer", "description": "Order in keyword title"},
                 "cards": {
                     "type": "array",

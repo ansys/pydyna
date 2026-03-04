@@ -46,7 +46,7 @@ class DefineHazTailorWeldedBlank(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "HAZ_TAILOR_WELDED_BLANK"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "idns": LinkType.SET_NODE,

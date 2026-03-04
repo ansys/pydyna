@@ -72,7 +72,7 @@ class Mat113(KeywordBase):
     keyword = "MAT"
     subkeyword = "113"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "vm0": LinkType.DEFINE_CURVE,

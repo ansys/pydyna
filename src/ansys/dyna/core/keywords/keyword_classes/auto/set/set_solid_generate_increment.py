@@ -49,7 +49,7 @@ class SetSolidGenerateIncrement(KeywordBase):
     keyword = "SET"
     subkeyword = "SOLID_GENERATE_INCREMENT"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "bbeg": LinkType.ELEMENT_SOLID,

@@ -55,7 +55,7 @@ class MatModifiedCrushableFoam(KeywordBase):
     keyword = "MAT"
     subkeyword = "MODIFIED_CRUSHABLE_FOAM"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "tid": LinkType.DEFINE_CURVE,

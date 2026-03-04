@@ -76,7 +76,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
     keyword = "RIGIDWALL"
     subkeyword = "PLANAR_MOVING_FORCES_DISPLAY"
     option_specs = [
-        OptionSpec("ID", -2, 1),
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "n1": LinkType.NODE,

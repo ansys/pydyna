@@ -70,7 +70,7 @@ class MatBoltBeam(KeywordBase):
     keyword = "MAT"
     subkeyword = "BOLT_BEAM"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcax": LinkType.DEFINE_CURVE,

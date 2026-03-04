@@ -140,7 +140,7 @@ class MatThermalChemicalReactionOrthotropic(KeywordBase):
     keyword = "MAT"
     subkeyword = "THERMAL_CHEMICAL_REACTION_ORTHOTROPIC"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lccf": LinkType.DEFINE_CURVE,

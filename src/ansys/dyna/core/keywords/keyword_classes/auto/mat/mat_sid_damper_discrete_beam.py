@@ -68,7 +68,7 @@ class MatSidDamperDiscreteBeam(KeywordBase):
     keyword = "MAT"
     subkeyword = "SID_DAMPER_DISCRETE_BEAM"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcidf": LinkType.DEFINE_CURVE,

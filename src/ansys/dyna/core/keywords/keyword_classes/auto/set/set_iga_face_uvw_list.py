@@ -57,7 +57,7 @@ class SetIgaFaceUvwList(KeywordBase):
     keyword = "SET"
     subkeyword = "IGA_FACE_UVW_LIST"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

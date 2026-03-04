@@ -58,7 +58,7 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
     keyword = "MAT"
     subkeyword = "ELASTIC_SPRING_DISCRETE_BEAM"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "flcid": LinkType.DEFINE_CURVE,

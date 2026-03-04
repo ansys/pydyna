@@ -59,7 +59,7 @@ class DefineCurveTrimNew(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "CURVE_TRIM_NEW"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "tdir": LinkType.DEFINE_VECTOR,

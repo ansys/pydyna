@@ -54,7 +54,7 @@ class MatRateSensitivePowerlawPlasticity(KeywordBase):
     keyword = "MAT"
     subkeyword = "RATE_SENSITIVE_POWERLAW_PLASTICITY"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

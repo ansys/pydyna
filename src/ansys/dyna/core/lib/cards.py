@@ -27,6 +27,7 @@ import warnings
 
 from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.card_writer import write_cards
+from ansys.dyna.core.lib.card_position import CardPlacement
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.kwd_line_formatter import read_line
 from ansys.dyna.core.lib.option_card import OptionCardSet, Options, OptionsInterface, OptionSpec
@@ -114,8 +115,8 @@ class Cards(OptionsInterface):
     def _get_post_options_with_no_title_order(self):
         option_cards = [card for card in self._get_sorted_option_cards() if card.title_order == 0]
         for option_card in option_cards:
-            if option_card.card_order < 0:
-                raise ValueError("Cards with a title order of 0 must have a positive card order")
+            if option_card.position.placement == CardPlacement.PRE:
+                raise ValueError("Cards with a title order of 0 must not have 'pre' placement")
         return option_cards
 
     def _get_active_options(self) -> typing.List[OptionCardSet]:
@@ -142,13 +143,17 @@ class Cards(OptionsInterface):
     def _get_pre_option_cards(self) -> typing.List[CardInterface]:
         """Get the option cards that go before the non-optional cards."""
         active_option_sets = self._get_active_options()
-        pre_option_cards = self._unwrap_option_sets(active_option_sets, lambda o: o.card_order < 0)
+        pre_option_cards = self._unwrap_option_sets(
+            active_option_sets, lambda o: o.position.placement == CardPlacement.PRE
+        )
         return self._flatten_2d_card_list(pre_option_cards)
 
     def _get_post_option_cards(self) -> typing.List[CardInterface]:
         """Get the option cards that go after the non-optional cards."""
         active_option_sets = self._get_active_options()
-        post_option_cards = self._unwrap_option_sets(active_option_sets, lambda o: o.card_order > 0)
+        post_option_cards = self._unwrap_option_sets(
+            active_option_sets, lambda o: o.position.placement == CardPlacement.POST
+        )
         return self._flatten_2d_card_list(post_option_cards)
 
     def _get_all_cards(self) -> typing.List[CardInterface]:

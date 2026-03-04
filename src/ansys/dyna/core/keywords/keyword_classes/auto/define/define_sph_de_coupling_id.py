@@ -53,7 +53,7 @@ class DefineSphDeCouplingId(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "SPH_DE_COUPLING_ID"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "pfact": LinkType.SECTION,

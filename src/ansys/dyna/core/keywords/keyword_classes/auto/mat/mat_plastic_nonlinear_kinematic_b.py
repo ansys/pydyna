@@ -56,7 +56,7 @@ class MatPlasticNonlinearKinematicB(KeywordBase):
     keyword = "MAT"
     subkeyword = "PLASTIC_NONLINEAR_KINEMATIC_B"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

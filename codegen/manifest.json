@@ -14,7 +14,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -1,
+                        "card-order": "pre/1",
                         "title-order": 1,
                         "cards": [
                             {
@@ -98,7 +98,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -2,
+                        "card-order": "pre/2",
                         "title-order": 1,
                         "cards": [
                             {
@@ -120,7 +120,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -2,
+                        "card-order": "pre/2",
                         "title-order": 1,
                         "cards": [
                             {
@@ -141,7 +141,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -1,
+                        "card-order": "pre/1",
                         "title-order": 1,
                         "cards": [
                             {
@@ -190,7 +190,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -2,
+                        "card-order": "pre/2",
                         "title-order": 1,
                         "cards": [
                             {
@@ -226,7 +226,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -2,
+                        "card-order": "pre/2",
                         "title-order": 1,
                         "cards": [
                             {
@@ -237,7 +237,7 @@
                         "option-name": "ID"
                     },
                     {
-                        "card-order": -1,
+                        "card-order": "pre/1",
                         "title-order": 2,
                         "cards": [
                             {
@@ -252,7 +252,7 @@
                         "option-name": "MPP"
                     },
                     {
-                        "card-order": 1,
+                        "card-order": "post/1",
                         "title-order": 0,
                         "cards": [
                             {
@@ -263,7 +263,7 @@
                         "option-name": "A"
                     },
                     {
-                        "card-order": 2,
+                        "card-order": "post/2",
                         "title-order": 0,
                         "cards": [
                             {
@@ -274,7 +274,7 @@
                         "option-name": "B"
                     },
                     {
-                        "card-order": 3,
+                        "card-order": "post/3",
                         "title-order": 0,
                         "cards": [
                             {
@@ -285,7 +285,7 @@
                         "option-name": "C"
                     },
                     {
-                        "card-order": 4,
+                        "card-order": "post/4",
                         "title-order": 0,
                         "cards": [
                             {
@@ -296,7 +296,7 @@
                         "option-name": "D"
                     },
                     {
-                        "card-order": 5,
+                        "card-order": "post/5",
                         "title-order": 0,
                         "cards": [
                             {
@@ -307,7 +307,7 @@
                         "option-name": "E"
                     },
                     {
-                        "card-order": 6,
+                        "card-order": "post/6",
                         "title-order": 0,
                         "cards": [
                             {
@@ -318,7 +318,7 @@
                         "option-name": "F"
                     },
                     {
-                        "card-order": 7,
+                        "card-order": "post/7",
                         "title-order": 0,
                         "cards": [
                             {
@@ -345,7 +345,7 @@
                 ],
                 "add-option": [
                     {
-                        "card-order": -2,
+                        "card-order": "pre/2",
                         "title-order": 1,
                         "cards": [
                             {
@@ -366,7 +366,7 @@
         "generation-options": {
             "add-option": [
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -378,7 +378,7 @@
                     "option-name": "ID"
                 },
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -863,6 +863,19 @@
         "comment": "card 6 (mat146_discrete_card) is skipped because of the condition for mat 146 - which we cannot easily check here. Maybe that can be handled in a subclass. card 7 (discrete_dof_card) is skipped because its a duplicate of card 4. card 9 (duplicate_inertia_card) is skipped because its a duplicate of card 2"
     },
     "SECTION_SHELL": {
+        "add-option-disabled": [
+                {
+                    "card-order": "pre/1",
+                    "title-order": 1,
+                    "cards": [
+                        {
+                            "source": "additional-cards",
+                            "card-name": "CROSS_SECTION_ID"
+                        }
+                    ],
+                    "option-name": "ID"
+                }
+            ],
         "generation-options": {
             "card-set": [
                 {
@@ -928,7 +941,7 @@
                 }
             ]
         },
-        "comment": "a mix of conditional, variable length, and table cards",
+        "comment": "a mix of conditional, variable length, and table cards, all in a card set",
         "labels": {
             "shell_card_1": 0,
             "shell_card_2": 1,
@@ -2749,7 +2762,7 @@
         "generation-options": {
              "add-option": [
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -2774,7 +2787,7 @@
         "generation-options": {
              "add-option": [
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -3215,7 +3228,7 @@
         "generation-options": {
             "add-option": [
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -3241,7 +3254,7 @@
         "generation-options": {
             "add-option": [
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -3319,7 +3332,7 @@
         "generation-options": {
             "add-option": [
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {

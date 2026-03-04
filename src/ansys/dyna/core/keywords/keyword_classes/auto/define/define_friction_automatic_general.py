@@ -58,7 +58,7 @@ class DefineFrictionAutomaticGeneral(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "FRICTION_AUTOMATIC_GENERAL"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "pid_i": LinkType.PART,

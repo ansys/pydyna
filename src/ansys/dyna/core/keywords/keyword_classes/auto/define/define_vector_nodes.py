@@ -45,7 +45,7 @@ class DefineVectorNodes(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "VECTOR_NODES"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nodet": LinkType.NODE,

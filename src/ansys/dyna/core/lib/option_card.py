@@ -27,6 +27,7 @@ import io
 import typing
 
 from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.card_position import CardPosition
 from ansys.dyna.core.lib.card_writer import write_cards
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
@@ -36,10 +37,21 @@ from ansys.dyna.core.lib.parameters import ParameterSet
 class OptionSpec:
     """Represents the specification of an option card."""
 
-    def __init__(self, name: str, card_order: int, title_order: int):
-        """Initialize an OptionSpec with name, card order, and title order."""
+    def __init__(self, name: str, card_order: "str | int", title_order: int):
+        """Initialize an OptionSpec with name, card order, and title order.
+
+        Parameters
+        ----------
+        name : str
+            Name of the option (e.g. ``"ID"``, ``"MPP"``).
+        card_order : str or int
+            Position URI string (``"pre/N"`` or ``"post/N"``) or a legacy
+            integer (negative → ``pre``, positive → ``post``).
+        title_order : int
+            Order of this option in the keyword title.
+        """
         self._name = name
-        self._card_order = card_order
+        self._position = CardPosition.parse(card_order)
         self._title_order = title_order
 
     @property
@@ -53,14 +65,17 @@ class OptionSpec:
         self._name = value
 
     @property
-    def card_order(self) -> int:
-        """Get the card order of the option."""
-        return self._card_order
+    def position(self) -> CardPosition:
+        """Get the card position of the option."""
+        return self._position
 
-    @card_order.setter
-    def card_order(self, value: int) -> None:
-        """Set the card order of the option."""
-        self._card_order = value
+    @position.setter
+    def position(self, value: "CardPosition | str | int") -> None:
+        """Set the card position of the option."""
+        if isinstance(value, CardPosition):
+            self._position = value
+        else:
+            self._position = CardPosition.parse(value)
 
     @property
     def title_order(self) -> int:
@@ -73,7 +88,7 @@ class OptionSpec:
         self._title_order = value
 
     def __repr__(self) -> str:
-        return f"OptionSpec(name={self.name}, card_order={self.card_order}, title_order={self.title_order})"
+        return f"OptionSpec(name={self.name}, position={self.position!r}, title_order={self.title_order})"
 
 
 class OptionCardSet(CardInterface):
@@ -112,9 +127,9 @@ class OptionCardSet(CardInterface):
         return self._option_spec.title_order
 
     @property
-    def card_order(self) -> int:
-        """Get the card order of the option."""
-        return self._option_spec.card_order
+    def position(self) -> CardPosition:
+        """Get the card position of the option."""
+        return self._option_spec.position
 
     @property
     def active(self) -> bool:
@@ -140,10 +155,10 @@ class OptionCardSet(CardInterface):
         self._format_type = value
 
     def __hash__(self):
-        return hash(self.card_order)
+        return hash(self.position)
 
     def __lt__(self, other: "OptionCardSet"):
-        return self.card_order < other.card_order
+        return self.position < other.position
 
     def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
         """Read from buf."""
@@ -222,7 +237,7 @@ class OptionAPI:
 
             # Determine if we should use cascading activation based on card order
             # If title_order exists (not None/0), use title-based mutual exclusion
-            # If only card_order exists, use card_order-based logic
+            # If only card_order exists, use position-based logic
             if option_spec.title_order:
                 # Title-based behavior: deactivate mutually exclusive options
                 for any_option_spec in self._options_api.option_specs:
@@ -230,21 +245,21 @@ class OptionAPI:
                         continue
                     if (
                         any_option_spec.title_order == option_spec.title_order
-                        and any_option_spec.card_order == option_spec.card_order
+                        and any_option_spec.position == option_spec.position
                     ):
                         self._options_api.deactivate_option(any_option_spec.name)
             else:
-                # Card order-based logic
-                current_card_order = option_spec.card_order
+                # Position-based logic
+                current_position = option_spec.position
                 for any_option_spec in self._options_api.option_specs:
                     if any_option_spec.name == self._name:
                         continue
                     if any_option_spec.title_order == 0:  # Only affect options without title_order
-                        if any_option_spec.card_order == current_card_order:
-                            # Same card_order: mutually exclusive
+                        if any_option_spec.position == current_position:
+                            # Same position: mutually exclusive
                             self._options_api.deactivate_option(any_option_spec.name)
-                        elif any_option_spec.card_order < current_card_order:
-                            # Lower card_order: cascading activation (prerequisite)
+                        elif any_option_spec.position < current_position:
+                            # Earlier position: cascading activation (prerequisite)
                             self._options_api.activate_option(any_option_spec.name)
         else:
             self._options_api.deactivate_option(self._name)

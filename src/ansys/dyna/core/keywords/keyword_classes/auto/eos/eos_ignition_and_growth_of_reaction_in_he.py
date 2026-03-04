@@ -79,7 +79,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
     keyword = "EOS"
     subkeyword = "IGNITION_AND_GROWTH_OF_REACTION_IN_HE"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

@@ -45,7 +45,7 @@ class ConstrainedRivet(KeywordBase):
     keyword = "CONSTRAINED"
     subkeyword = "RIVET"
     option_specs = [
-        OptionSpec("ID", -1, 1),
+        OptionSpec("ID", "pre/1", 1),
     ]
     _link_fields = {
         "n1": LinkType.NODE,

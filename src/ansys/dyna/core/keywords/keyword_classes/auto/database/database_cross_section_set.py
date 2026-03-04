@@ -50,7 +50,7 @@ class DatabaseCrossSectionSet(KeywordBase):
     keyword = "DATABASE"
     subkeyword = "CROSS_SECTION_SET"
     option_specs = [
-        OptionSpec("ID", -1, 1),
+        OptionSpec("ID", "pre/1", 1),
     ]
     _link_fields = {
         "bsid": LinkType.SET_BEAM,

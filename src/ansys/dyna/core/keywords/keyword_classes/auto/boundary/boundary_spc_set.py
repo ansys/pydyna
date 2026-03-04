@@ -51,7 +51,7 @@ class BoundarySpcSet(KeywordBase):
     keyword = "BOUNDARY"
     subkeyword = "SPC_SET"
     option_specs = [
-        OptionSpec("ID", -2, 1),
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,

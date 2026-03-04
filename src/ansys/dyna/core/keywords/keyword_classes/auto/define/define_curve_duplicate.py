@@ -49,7 +49,7 @@ class DefineCurveDuplicate(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "CURVE_DUPLICATE"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "rlcid": LinkType.DEFINE_CURVE,

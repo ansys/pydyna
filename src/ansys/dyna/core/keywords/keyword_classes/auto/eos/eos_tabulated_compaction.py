@@ -114,7 +114,7 @@ class EosTabulatedCompaction(KeywordBase):
     keyword = "EOS"
     subkeyword = "TABULATED_COMPACTION"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcc": LinkType.DEFINE_CURVE,

@@ -49,7 +49,7 @@ class {{card_set.name}}(Cards):
 
     option_specs = [
 {% for option in card_set.options %}
-        OptionSpec("{{option.name}}", {{option.card_order}}, {{option.title_order}}),
+        OptionSpec("{{option.name}}", "{{option.card_order}}", {{option.title_order}}),
 {% endfor %}
     ]
 {% endif %}

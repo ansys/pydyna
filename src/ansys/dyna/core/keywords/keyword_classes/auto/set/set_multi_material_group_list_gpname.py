@@ -52,7 +52,7 @@ class SetMultiMaterialGroupListGpname(KeywordBase):
     keyword = "SET"
     subkeyword = "MULTI_MATERIAL_GROUP_LIST_GPNAME"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

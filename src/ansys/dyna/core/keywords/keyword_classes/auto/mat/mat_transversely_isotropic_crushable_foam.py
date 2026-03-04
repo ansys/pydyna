@@ -86,7 +86,7 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
     keyword = "MAT"
     subkeyword = "TRANSVERSELY_ISOTROPIC_CRUSHABLE_FOAM"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "i11": LinkType.DEFINE_CURVE,

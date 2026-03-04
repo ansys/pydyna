@@ -58,7 +58,7 @@ class MatCohesiveGeneral(KeywordBase):
     keyword = "MAT"
     subkeyword = "COHESIVE_GENERAL"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "tslc": LinkType.DEFINE_CURVE,

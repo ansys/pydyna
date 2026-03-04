@@ -63,7 +63,7 @@ class DefineDeByPart(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "DE_BY_PART"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lnorm": LinkType.DEFINE_CURVE,

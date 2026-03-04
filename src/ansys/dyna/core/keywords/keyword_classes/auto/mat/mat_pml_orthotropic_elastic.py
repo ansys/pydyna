@@ -78,7 +78,7 @@ class MatPmlOrthotropicElastic(KeywordBase):
     keyword = "MAT"
     subkeyword = "PML_ORTHOTROPIC_ELASTIC"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):

@@ -26,7 +26,7 @@ class {{keyword_data.classname}}(KeywordBase):
 {% if keyword_data.options %}
     option_specs = [
 {% for option in keyword_data.options %}
-        OptionSpec("{{option.name}}", {{option.card_order}}, {{option.title_order}}),
+        OptionSpec("{{option.name}}", "{{option.card_order}}", {{option.title_order}}),
 {% endfor %}
     ]
 {% endif %}

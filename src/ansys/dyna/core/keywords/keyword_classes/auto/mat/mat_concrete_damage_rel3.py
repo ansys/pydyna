@@ -110,7 +110,7 @@ class MatConcreteDamageRel3(KeywordBase):
     keyword = "MAT"
     subkeyword = "CONCRETE_DAMAGE_REL3"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcrate": LinkType.DEFINE_CURVE,

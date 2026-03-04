@@ -100,7 +100,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
     keyword = "MAT"
     subkeyword = "ORTHOTROPIC_THERMAL_CURING"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lccha": LinkType.DEFINE_CURVE,

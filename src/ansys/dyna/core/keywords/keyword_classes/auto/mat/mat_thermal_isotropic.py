@@ -53,7 +53,7 @@ class MatThermalIsotropic(KeywordBase):
     keyword = "MAT"
     subkeyword = "THERMAL_ISOTROPIC"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "tgrlc": LinkType.DEFINE_CURVE,

@@ -60,7 +60,7 @@ class DatabaseCrossSectionPlane(KeywordBase):
     keyword = "DATABASE"
     subkeyword = "CROSS_SECTION_PLANE"
     option_specs = [
-        OptionSpec("ID", -1, 1),
+        OptionSpec("ID", "pre/1", 1),
     ]
     _link_fields = {
         "psid": LinkType.SET_PART,

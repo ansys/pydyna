@@ -50,7 +50,7 @@ class DefineCoordinateVector(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "COORDINATE_VECTOR"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nid": LinkType.NODE,

@@ -49,7 +49,7 @@ class DefineFabricAssemblies(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "FABRIC_ASSEMBLIES"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "spid1": LinkType.SET_PART,

@@ -91,7 +91,7 @@ class Mat2403Modes(KeywordBase):
     keyword = "MAT"
     subkeyword = "240_3MODES"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcg1c": LinkType.DEFINE_CURVE,

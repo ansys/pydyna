@@ -86,7 +86,7 @@ class MatNonlinearElasticDiscreteBeam(KeywordBase):
     keyword = "MAT"
     subkeyword = "NONLINEAR_ELASTIC_DISCRETE_BEAM"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcidtr": LinkType.DEFINE_CURVE,

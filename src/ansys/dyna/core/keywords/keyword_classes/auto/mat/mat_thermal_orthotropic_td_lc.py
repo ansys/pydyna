@@ -74,7 +74,7 @@ class MatThermalOrthotropicTdLc(KeywordBase):
     keyword = "MAT"
     subkeyword = "THERMAL_ORTHOTROPIC_TD_LC"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "tgrlc": LinkType.DEFINE_CURVE,

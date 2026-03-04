@@ -57,7 +57,7 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
     keyword = "BOUNDARY"
     subkeyword = "SPC_NODE_BIRTH_DEATH"
     option_specs = [
-        OptionSpec("ID", -2, 1),
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "nid": LinkType.NODE,

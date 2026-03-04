@@ -64,7 +64,7 @@ class DefineHexSpotweldAssembly16(KeywordBase):
     keyword = "DEFINE"
     subkeyword = "HEX_SPOTWELD_ASSEMBLY_16"
     option_specs = [
-        OptionSpec("TITLE", -1, 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "eid1": LinkType.ELEMENT_SOLID,
