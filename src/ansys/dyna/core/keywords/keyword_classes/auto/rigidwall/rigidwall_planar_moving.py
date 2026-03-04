@@ -65,8 +65,8 @@ class RigidwallPlanarMoving(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "PLANAR_MOVING"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "boxid": LinkType.DEFINE_BOX,
@@ -92,7 +92,7 @@ class RigidwallPlanarMoving(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = RigidwallPlanarMoving.option_specs[0],
+                option_spec = RigidwallPlanarMoving._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLPLANARMOVING_OPTION0_CARD0,

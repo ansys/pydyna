@@ -93,8 +93,8 @@ class MatSeismicBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "SEISMIC_BEAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcpms": LinkType.DEFINE_CURVE,
@@ -129,7 +129,7 @@ class MatSeismicBeam(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatSeismicBeam.option_specs[0],
+                option_spec = MatSeismicBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSEISMICBEAM_OPTION0_CARD0,

@@ -14,7 +14,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -1,
+                        "card-order": "pre/1",
                         "title-order": 1,
                         "cards": [
                             {
@@ -98,7 +98,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -2,
+                        "card-order": "pre/2",
                         "title-order": 1,
                         "cards": [
                             {
@@ -120,7 +120,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -2,
+                        "card-order": "pre/2",
                         "title-order": 1,
                         "cards": [
                             {
@@ -141,7 +141,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -1,
+                        "card-order": "pre/1",
                         "title-order": 1,
                         "cards": [
                             {
@@ -190,7 +190,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -2,
+                        "card-order": "pre/2",
                         "title-order": 1,
                         "cards": [
                             {
@@ -226,7 +226,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -2,
+                        "card-order": "pre/2",
                         "title-order": 1,
                         "cards": [
                             {
@@ -237,7 +237,7 @@
                         "option-name": "ID"
                     },
                     {
-                        "card-order": -1,
+                        "card-order": "pre/1",
                         "title-order": 2,
                         "cards": [
                             {
@@ -252,7 +252,7 @@
                         "option-name": "MPP"
                     },
                     {
-                        "card-order": 1,
+                        "card-order": "post/1",
                         "title-order": 0,
                         "cards": [
                             {
@@ -263,7 +263,7 @@
                         "option-name": "A"
                     },
                     {
-                        "card-order": 2,
+                        "card-order": "post/2",
                         "title-order": 0,
                         "cards": [
                             {
@@ -274,7 +274,7 @@
                         "option-name": "B"
                     },
                     {
-                        "card-order": 3,
+                        "card-order": "post/3",
                         "title-order": 0,
                         "cards": [
                             {
@@ -285,7 +285,7 @@
                         "option-name": "C"
                     },
                     {
-                        "card-order": 4,
+                        "card-order": "post/4",
                         "title-order": 0,
                         "cards": [
                             {
@@ -296,7 +296,7 @@
                         "option-name": "D"
                     },
                     {
-                        "card-order": 5,
+                        "card-order": "post/5",
                         "title-order": 0,
                         "cards": [
                             {
@@ -307,7 +307,7 @@
                         "option-name": "E"
                     },
                     {
-                        "card-order": 6,
+                        "card-order": "post/6",
                         "title-order": 0,
                         "cards": [
                             {
@@ -318,7 +318,7 @@
                         "option-name": "F"
                     },
                     {
-                        "card-order": 7,
+                        "card-order": "post/7",
                         "title-order": 0,
                         "cards": [
                             {
@@ -345,7 +345,7 @@
                 ],
                 "add-option": [
                     {
-                        "card-order": -2,
+                        "card-order": "pre/2",
                         "title-order": 1,
                         "cards": [
                             {
@@ -366,7 +366,7 @@
         "generation-options": {
             "add-option": [
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -378,7 +378,7 @@
                     "option-name": "ID"
                 },
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -439,6 +439,37 @@
         },
         "labels": {
             "points_card": 1
+        }
+    },
+    "DEFINE_SENSOR_FORCE": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "sensors",
+                    "ref": "sensor_card"
+                }
+            ]
+        },
+        "labels": {
+            "sensor_card": 0
+        }
+    },
+    "DEFINE_SENSOR_FORCE_UPDATE": {
+        "generation-options": {
+            "table-card-group": [
+                {
+                    "refs": [
+                        "sensor_card",
+                        "update_card"
+                    ],
+                    "overall-name": "sensors",
+                    "key-field": "sensid"
+                }
+            ]
+        },
+        "labels": {
+            "sensor_card": 0,
+            "update_card": 1
         }
     },
     "DEFINE_TABLE_2D": {
@@ -833,6 +864,21 @@
     },
     "SECTION_SHELL": {
         "generation-options": {
+            "add-option": [
+                {
+                    "card-order": {"position": "main", "after": "shell_card_2"},
+                    "title-order": 1,
+                    "cards": [
+                        {
+                            "source": "kwd-data",
+                            "keyword-name": "SECTION_SHELL_MISC",
+                            "card-index": 2,
+                            "target_ref": "misc_card"
+                        }
+                    ],
+                    "option-name": "MISC"
+                }
+            ],
             "card-set": [
                 {
                     "source-refs": [
@@ -897,7 +943,7 @@
                 }
             ]
         },
-        "comment": "a mix of conditional, variable length, and table cards",
+        "comment": "a mix of conditional, variable length, and table cards, all in a card set",
         "labels": {
             "shell_card_1": 0,
             "shell_card_2": 1,
@@ -1387,6 +1433,44 @@
                 "source-keyword": "MAT_NULL"
             }
         ]
+    },
+    "MAT_034": {
+        "alias": "MAT_FABRIC",
+        "generation-options": {
+            "insert-card": [
+                {
+                    "after": "card_3",
+                    "card": {
+                        "source": "additional-cards",
+                        "card-name": "MAT_FABRIC_CARD_4"
+                    },
+                    "label": "card_4"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "func": "self.fvopt<0",
+                    "ref": "card_4"
+                },
+                {
+                    "func": "self.form in [4,14,-14]",
+                    "ref": "card_7"
+                },
+                {
+                    "func": "self.form==-14",
+                    "ref": "card_8"
+                }
+            ]
+        },
+        "labels": {
+            "card_1": 0,
+            "card_2": 1,
+            "card_3": 2,
+            "card_5": 3,
+            "card_6": 4,
+            "card_7": 5,
+            "card_8": 6
+        }
     },
     "MAT_058": {
         "alias": "MAT_LAMINATED_COMPOSITE_FABRIC",
@@ -2680,7 +2764,7 @@
         "generation-options": {
              "add-option": [
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -2705,7 +2789,7 @@
         "generation-options": {
              "add-option": [
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -3146,7 +3230,7 @@
         "generation-options": {
             "add-option": [
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -3172,7 +3256,7 @@
         "generation-options": {
             "add-option": [
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -3250,7 +3334,7 @@
         "generation-options": {
             "add-option": [
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {

@@ -144,8 +144,8 @@ class MatEightChainRubber(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "EIGHT_CHAIN_RUBBER"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -210,7 +210,7 @@ class MatEightChainRubber(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatEightChainRubber.option_specs[0],
+                option_spec = MatEightChainRubber._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATEIGHTCHAINRUBBER_OPTION0_CARD0,

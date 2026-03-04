@@ -55,8 +55,8 @@ class DefineStochasticVariationProperties(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "STOCHASTIC_VARIATION_PROPERTIES"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -73,7 +73,7 @@ class DefineStochasticVariationProperties(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineStochasticVariationProperties.option_specs[0],
+                option_spec = DefineStochasticVariationProperties._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINESTOCHASTICVARIATIONPROPERTIES_OPTION0_CARD0,

@@ -47,8 +47,8 @@ class DefineCurveCompensationConstraintEnd(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CURVE_COMPENSATION_CONSTRAINT_END"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -65,7 +65,7 @@ class DefineCurveCompensationConstraintEnd(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineCurveCompensationConstraintEnd.option_specs[0],
+                option_spec = DefineCurveCompensationConstraintEnd._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECURVECOMPENSATIONCONSTRAINTEND_OPTION0_CARD0,

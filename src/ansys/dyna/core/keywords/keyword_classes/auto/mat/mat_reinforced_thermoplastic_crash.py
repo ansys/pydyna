@@ -139,8 +139,8 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "REINFORCED_THERMOPLASTIC_CRASH"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcsigy": LinkType.DEFINE_CURVE,
@@ -205,7 +205,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatReinforcedThermoplasticCrash.option_specs[0],
+                option_spec = MatReinforcedThermoplasticCrash._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATREINFORCEDTHERMOPLASTICCRASH_OPTION0_CARD0,

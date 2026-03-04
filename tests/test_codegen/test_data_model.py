@@ -209,7 +209,7 @@ class TestKeywordData:
             "subkeyword": "AUTOMATIC",
             "title": "*CONTACT_AUTOMATIC",
             "cards": [],
-            "options": [{"name": "ID", "card_order": 1, "title_order": 1, "cards": []}],
+            "options": [{"name": "ID", "card_order": "post/1", "title_order": 1, "cards": []}],
         }
         kwd = KeywordData.from_dict(kwd_dict)
         assert len(kwd.options) == 1

@@ -38,8 +38,8 @@ class OptionAPIImplementation:
     def __init__(self, **kwargs):
         self._active_options = set(["FOO"])
         self._option_specs = {
-                "FOO": OptionSpec("FOO", 1, 0),
-                "BAR": OptionSpec("BAR", 1, 0)
+                "FOO": OptionSpec("FOO", "post/1", 0),
+                "BAR": OptionSpec("BAR", "post/1", 0)
         }
         _cards = [
             OptionCardSet(

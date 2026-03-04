@@ -89,8 +89,8 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "STOUGHTON_NON_ASSOCIATED_FLOW_XUE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcids": LinkType.DEFINE_CURVE,
@@ -127,7 +127,7 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatStoughtonNonAssociatedFlowXue.option_specs[0],
+                option_spec = MatStoughtonNonAssociatedFlowXue._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSTOUGHTONNONASSOCIATEDFLOWXUE_OPTION0_CARD0,

@@ -61,8 +61,8 @@ class Mat129(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "129"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -86,7 +86,7 @@ class Mat129(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = Mat129.option_specs[0],
+                option_spec = Mat129._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT129_OPTION0_CARD0,

@@ -66,8 +66,8 @@ class MatFrazer_NashRubber(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "FRAZER-NASH_RUBBER"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -91,7 +91,7 @@ class MatFrazer_NashRubber(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatFrazer_NashRubber.option_specs[0],
+                option_spec = MatFrazer_NashRubber._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATFRAZER_NASHRUBBER_OPTION0_CARD0,

@@ -69,8 +69,8 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "CONCRETE_DAMAGE_PLASTIC_MODEL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -91,7 +91,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatConcreteDamagePlasticModel.option_specs[0],
+                option_spec = MatConcreteDamagePlasticModel._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCONCRETEDAMAGEPLASTICMODEL_OPTION0_CARD0,

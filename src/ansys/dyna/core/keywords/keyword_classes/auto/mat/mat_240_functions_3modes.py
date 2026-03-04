@@ -90,8 +90,8 @@ class Mat240Functions3Modes(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "240_FUNCTIONS_3MODES"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcg1c": LinkType.DEFINE_CURVE,
@@ -128,7 +128,7 @@ class Mat240Functions3Modes(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = Mat240Functions3Modes.option_specs[0],
+                option_spec = Mat240Functions3Modes._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT240FUNCTIONS3MODES_OPTION0_CARD0,

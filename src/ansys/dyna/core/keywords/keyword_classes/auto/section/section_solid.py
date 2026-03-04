@@ -60,8 +60,8 @@ _SECTIONSOLIDCARDSET_OPTION0_CARD0 = (
 class SectionSolidCardSet(Cards):
     """ CardSet."""
 
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -100,7 +100,7 @@ class SectionSolidCardSet(Cards):
                 lambda: self.elform in [101, 102, 103, 104, 105],
                 data = kwargs.get("pi")),
             OptionCardSet(
-                option_spec = SectionSolidCardSet.option_specs[0],
+                option_spec = SectionSolidCardSet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SECTIONSOLIDCARDSET_OPTION0_CARD0,
@@ -347,7 +347,7 @@ class SectionSolid(KeywordBase):
         self._cards = [
             CardSet(
                 SectionSolidCardSet,
-                option_specs = SectionSolidCardSet.option_specs,
+                option_specs = SectionSolidCardSet._option_spec_list,
                 **kwargs
             ),
         ]

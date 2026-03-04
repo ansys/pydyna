@@ -64,9 +64,9 @@ class ConstrainedBeamInSolid(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "BEAM_IN_SOLID"
-    option_specs = [
-        OptionSpec("ID", -1, 1),
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/1", 1),
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -83,7 +83,7 @@ class ConstrainedBeamInSolid(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = ConstrainedBeamInSolid.option_specs[0],
+                option_spec = ConstrainedBeamInSolid._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONSTRAINEDBEAMINSOLID_OPTION0_CARD0,
@@ -93,7 +93,7 @@ class ConstrainedBeamInSolid(KeywordBase):
                 **kwargs
             ),
             OptionCardSet(
-                option_spec = ConstrainedBeamInSolid.option_specs[1],
+                option_spec = ConstrainedBeamInSolid._option_spec_list[1],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONSTRAINEDBEAMINSOLID_OPTION1_CARD0,

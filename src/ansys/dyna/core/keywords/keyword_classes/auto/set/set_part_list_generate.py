@@ -47,8 +47,8 @@ class SetPartListGenerate(KeywordBase):
 
     keyword = "SET"
     subkeyword = "PART_LIST_GENERATE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     @dataclasses.dataclass
@@ -74,7 +74,7 @@ class SetPartListGenerate(KeywordBase):
                 None,
                 data = kwargs.get("block_ranges")),
             OptionCardSet(
-                option_spec = SetPartListGenerate.option_specs[0],
+                option_spec = SetPartListGenerate._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETPARTLISTGENERATE_OPTION0_CARD0,

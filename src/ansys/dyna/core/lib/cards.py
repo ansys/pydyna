@@ -26,6 +26,7 @@ import typing
 import warnings
 
 from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.card_position import CardPlacement
 from ansys.dyna.core.lib.card_writer import write_cards
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.kwd_line_formatter import read_line
@@ -114,9 +115,9 @@ class Cards(OptionsInterface):
     def _get_post_options_with_no_title_order(self):
         option_cards = [card for card in self._get_sorted_option_cards() if card.title_order == 0]
         for option_card in option_cards:
-            if option_card.card_order < 0:
-                raise ValueError("Cards with a title order of 0 must have a positive card order")
-        return option_cards
+            if option_card.position.placement == CardPlacement.PRE:
+                raise ValueError("Cards with a title order of 0 must not have 'pre' placement")
+        return [o for o in option_cards if o.position.placement == CardPlacement.POST]
 
     def _get_active_options(self) -> typing.List[OptionCardSet]:
         """Return all active option card sets, sorted by card order."""
@@ -142,18 +143,43 @@ class Cards(OptionsInterface):
     def _get_pre_option_cards(self) -> typing.List[CardInterface]:
         """Get the option cards that go before the non-optional cards."""
         active_option_sets = self._get_active_options()
-        pre_option_cards = self._unwrap_option_sets(active_option_sets, lambda o: o.card_order < 0)
+        pre_option_cards = self._unwrap_option_sets(
+            active_option_sets, lambda o: o.position.placement == CardPlacement.PRE
+        )
         return self._flatten_2d_card_list(pre_option_cards)
 
     def _get_post_option_cards(self) -> typing.List[CardInterface]:
         """Get the option cards that go after the non-optional cards."""
         active_option_sets = self._get_active_options()
-        post_option_cards = self._unwrap_option_sets(active_option_sets, lambda o: o.card_order > 0)
+        post_option_cards = self._unwrap_option_sets(
+            active_option_sets, lambda o: o.position.placement == CardPlacement.POST
+        )
         return self._flatten_2d_card_list(post_option_cards)
 
+    def _get_main_option_cards_by_index(self) -> typing.Dict[int, typing.List[CardInterface]]:
+        """Return active MAIN option cards grouped by their insertion index.
+
+        The key N is the 0-based index of the non-option card *after which* the option
+        cards are inserted (i.e. ``"main/N"`` means "place immediately after non-option
+        card N"). Multiple option sets at the same index are inserted in ascending order
+        of their position index.
+        """
+        active_option_sets = self._get_active_options()
+        by_index: typing.Dict[int, typing.List[CardInterface]] = {}
+        for option_set in active_option_sets:
+            if option_set.position.placement == CardPlacement.MAIN:
+                idx = option_set.position.index
+                by_index.setdefault(idx, []).extend(option_set.cards)
+        return by_index
+
     def _get_all_cards(self) -> typing.List[CardInterface]:
+        main_by_index = self._get_main_option_cards_by_index()
         cards = self._get_pre_option_cards()
-        cards.extend(self._get_non_option_cards())
+        non_option = self._get_non_option_cards()
+        for i, card in enumerate(non_option):
+            cards.append(card)
+            # Insert any MAIN option cards positioned *after* non-option card i
+            cards.extend(main_by_index.get(i, []))
         cards.extend(self._get_post_option_cards())
         return cards
 
@@ -227,21 +253,7 @@ class Cards(OptionsInterface):
 
     def _read_data(self, buf: typing.TextIO, parameters: ParameterSet) -> None:
         card_index = 0
-        for card in self._get_pre_option_cards():
-            if parameters is not None:
-                with parameters.scope(f"card{card_index}"):
-                    self._read_card(card, buf, parameters)
-            else:
-                self._read_card(card, buf, parameters)
-            card_index += 1
-        for card in self._get_non_option_cards():
-            if parameters is not None:
-                with parameters.scope(f"card{card_index}"):
-                    self._read_card(card, buf, parameters)
-            else:
-                self._read_card(card, buf, parameters)
-            card_index += 1
-        for card in self._get_post_option_cards():
+        for card in self._get_all_cards():
             if parameters is not None:
                 with parameters.scope(f"card{card_index}"):
                     self._read_card(card, buf, parameters)

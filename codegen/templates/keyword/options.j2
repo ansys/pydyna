@@ -1,7 +1,7 @@
 {% for option in options %}
 {% set option_loop = loop %}
             OptionCardSet(
-                option_spec = {{parent_name}}.option_specs[{{option_loop.index-1}}],
+                option_spec = {{parent_name}}._option_spec_list[{{option_loop.index-1}}],
                 cards = [
 {% for card in option.cards %}
                     Card.from_field_schemas_with_defaults(

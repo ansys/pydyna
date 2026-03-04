@@ -43,8 +43,8 @@ class MatRigidDiscrete(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "RIGID_DISCRETE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -57,7 +57,7 @@ class MatRigidDiscrete(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatRigidDiscrete.option_specs[0],
+                option_spec = MatRigidDiscrete._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATRIGIDDISCRETE_OPTION0_CARD0,

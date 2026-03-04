@@ -49,8 +49,8 @@ class Set2DSegmentSet(KeywordBase):
 
     keyword = "SET"
     subkeyword = "2D_SEGMENT_SET"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "psid": LinkType.SET_PART,
@@ -70,7 +70,7 @@ class Set2DSegmentSet(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = Set2DSegmentSet.option_specs[0],
+                option_spec = Set2DSegmentSet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SET2DSEGMENTSET_OPTION0_CARD0,

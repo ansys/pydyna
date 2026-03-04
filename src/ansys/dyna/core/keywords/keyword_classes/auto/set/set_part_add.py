@@ -47,8 +47,8 @@ class SetPartAdd(KeywordBase):
 
     keyword = "SET"
     subkeyword = "PART_ADD"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "parts": LinkType.SET_PART,
@@ -71,7 +71,7 @@ class SetPartAdd(KeywordBase):
                 None,
                 data = kwargs.get("parts")),
             OptionCardSet(
-                option_spec = SetPartAdd.option_specs[0],
+                option_spec = SetPartAdd._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETPARTADD_OPTION0_CARD0,

@@ -54,8 +54,8 @@ class DefineSpotweldFailureAdd(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "SPOTWELD_FAILURE_ADD"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "mid": LinkType.MAT,
@@ -75,7 +75,7 @@ class DefineSpotweldFailureAdd(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineSpotweldFailureAdd.option_specs[0],
+                option_spec = DefineSpotweldFailureAdd._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINESPOTWELDFAILUREADD_OPTION0_CARD0,

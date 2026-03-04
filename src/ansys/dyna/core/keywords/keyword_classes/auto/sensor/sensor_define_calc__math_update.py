@@ -53,8 +53,8 @@ class SensorDefineCalc_MathUpdate(KeywordBase):
 
     keyword = "SENSOR"
     subkeyword = "DEFINE_CALC-MATH_UPDATE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -71,7 +71,7 @@ class SensorDefineCalc_MathUpdate(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SensorDefineCalc_MathUpdate.option_specs[0],
+                option_spec = SensorDefineCalc_MathUpdate._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SENSORDEFINECALC_MATHUPDATE_OPTION0_CARD0,

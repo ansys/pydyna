@@ -46,8 +46,8 @@ class MatSpringGeneralNonlinear(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "SPRING_GENERAL_NONLINEAR"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcdl": LinkType.DEFINE_CURVE_OR_TABLE,
@@ -64,7 +64,7 @@ class MatSpringGeneralNonlinear(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatSpringGeneralNonlinear.option_specs[0],
+                option_spec = MatSpringGeneralNonlinear._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSPRINGGENERALNONLINEAR_OPTION0_CARD0,

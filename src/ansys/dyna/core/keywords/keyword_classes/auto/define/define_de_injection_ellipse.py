@@ -82,8 +82,8 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DE_INJECTION_ELLIPSE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nid": LinkType.NODE,
@@ -117,7 +117,7 @@ class DefineDeInjectionEllipse(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineDeInjectionEllipse.option_specs[0],
+                option_spec = DefineDeInjectionEllipse._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDEINJECTIONELLIPSE_OPTION0_CARD0,

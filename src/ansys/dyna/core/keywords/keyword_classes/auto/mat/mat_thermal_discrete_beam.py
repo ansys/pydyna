@@ -46,8 +46,8 @@ class MatThermalDiscreteBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "THERMAL_DISCRETE_BEAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -64,7 +64,7 @@ class MatThermalDiscreteBeam(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatThermalDiscreteBeam.option_specs[0],
+                option_spec = MatThermalDiscreteBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATTHERMALDISCRETEBEAM_OPTION0_CARD0,

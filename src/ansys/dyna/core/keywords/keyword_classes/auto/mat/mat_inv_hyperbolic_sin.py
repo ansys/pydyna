@@ -56,8 +56,8 @@ class MatInvHyperbolicSin(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "INV_HYPERBOLIC_SIN"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -74,7 +74,7 @@ class MatInvHyperbolicSin(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatInvHyperbolicSin.option_specs[0],
+                option_spec = MatInvHyperbolicSin._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATINVHYPERBOLICSIN_OPTION0_CARD0,

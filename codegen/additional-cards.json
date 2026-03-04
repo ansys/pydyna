@@ -38,6 +38,15 @@
             {"name": "__blank8", "type": "integer", "default": null, "position": 70, "used": false,"width": 10, "help": ""}
         ]
     },
+    "MAT_FABRIC_CARD_4": {
+        "fields": [
+            {"name": "L", "type": "real", "default": null, "position": 0, "width": 10, "help": "Dimension of unit cell (length)"},
+            {"name": "R", "type": "real", "default": null, "position": 10, "width": 10, "help": "Radius of yarn (length)"},
+            {"name": "C1", "type": "real", "default": null, "position": 20, "width": 10, "help": "Pressure coefficient (dependent on unit system)"},
+            {"name": "C2", "type": "real", "default": null, "position": 30, "width": 10, "help": "Pressure exponent "},
+            {"name": "C3", "type": "real", "default": null, "position": 40, "width": 10, "help": "Strain coefficient"}
+        ]
+    },
     "CONTACT_ID": {
         "fields": [
             {"name": "CID", "type": "integer", "default": null, "position": 0, "width": 10, "help": "ID keyword option"},
