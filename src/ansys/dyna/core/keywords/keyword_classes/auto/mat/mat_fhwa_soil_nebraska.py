@@ -43,8 +43,8 @@ class MatFhwaSoilNebraska(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "FHWA_SOIL_NEBRASKA"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -57,7 +57,7 @@ class MatFhwaSoilNebraska(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatFhwaSoilNebraska.option_specs[0],
+                option_spec = MatFhwaSoilNebraska._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATFHWASOILNEBRASKA_OPTION0_CARD0,

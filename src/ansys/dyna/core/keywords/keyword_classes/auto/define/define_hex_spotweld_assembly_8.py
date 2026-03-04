@@ -52,8 +52,8 @@ class DefineHexSpotweldAssembly8(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "HEX_SPOTWELD_ASSEMBLY_8"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "eid1": LinkType.ELEMENT_SOLID,
@@ -80,7 +80,7 @@ class DefineHexSpotweldAssembly8(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineHexSpotweldAssembly8.option_specs[0],
+                option_spec = DefineHexSpotweldAssembly8._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEHEXSPOTWELDASSEMBLY8_OPTION0_CARD0,

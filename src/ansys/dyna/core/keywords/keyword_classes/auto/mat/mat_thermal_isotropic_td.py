@@ -80,8 +80,8 @@ class MatThermalIsotropicTd(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "THERMAL_ISOTROPIC_TD"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "tgrlc": LinkType.DEFINE_CURVE,
@@ -109,7 +109,7 @@ class MatThermalIsotropicTd(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatThermalIsotropicTd.option_specs[0],
+                option_spec = MatThermalIsotropicTd._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATTHERMALISOTROPICTD_OPTION0_CARD0,

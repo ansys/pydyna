@@ -50,8 +50,8 @@ class DefineCurveFunction(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CURVE_FUNCTION"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -68,7 +68,7 @@ class DefineCurveFunction(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineCurveFunction.option_specs[0],
+                option_spec = DefineCurveFunction._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECURVEFUNCTION_OPTION0_CARD0,

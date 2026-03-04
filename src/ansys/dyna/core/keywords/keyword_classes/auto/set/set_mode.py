@@ -51,8 +51,8 @@ class SetMode(KeywordBase):
 
     keyword = "SET"
     subkeyword = "MODE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -69,7 +69,7 @@ class SetMode(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetMode.option_specs[0],
+                option_spec = SetMode._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETMODE_OPTION0_CARD0,

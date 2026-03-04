@@ -75,8 +75,8 @@ class DefineCpmVent(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CPM_VENT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nid1": LinkType.NODE,
@@ -114,7 +114,7 @@ class DefineCpmVent(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineCpmVent.option_specs[0],
+                option_spec = DefineCpmVent._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECPMVENT_OPTION0_CARD0,

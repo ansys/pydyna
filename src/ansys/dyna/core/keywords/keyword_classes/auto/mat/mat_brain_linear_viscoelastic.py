@@ -47,8 +47,8 @@ class MatBrainLinearViscoelastic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "BRAIN_LINEAR_VISCOELASTIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -61,7 +61,7 @@ class MatBrainLinearViscoelastic(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatBrainLinearViscoelastic.option_specs[0],
+                option_spec = MatBrainLinearViscoelastic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATBRAINLINEARVISCOELASTIC_OPTION0_CARD0,

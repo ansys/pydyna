@@ -75,8 +75,8 @@ class MatCohesiveMixedModeElastoplasticRate(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "COHESIVE_MIXED_MODE_ELASTOPLASTIC_RATE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcg1c": LinkType.DEFINE_CURVE,
@@ -105,7 +105,7 @@ class MatCohesiveMixedModeElastoplasticRate(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatCohesiveMixedModeElastoplasticRate.option_specs[0],
+                option_spec = MatCohesiveMixedModeElastoplasticRate._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCOHESIVEMIXEDMODEELASTOPLASTICRATE_OPTION0_CARD0,

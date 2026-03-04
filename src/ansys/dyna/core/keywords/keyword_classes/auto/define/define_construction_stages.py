@@ -47,8 +47,8 @@ class DefineConstructionStages(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CONSTRUCTION_STAGES"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -61,7 +61,7 @@ class DefineConstructionStages(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineConstructionStages.option_specs[0],
+                option_spec = DefineConstructionStages._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECONSTRUCTIONSTAGES_OPTION0_CARD0,

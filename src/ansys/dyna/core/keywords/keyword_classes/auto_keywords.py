@@ -3021,7 +3021,6 @@ from ansys.dyna.core.keywords.keyword_classes.auto import SectionPointSourceMixt
 from ansys.dyna.core.keywords.keyword_classes.auto import SectionSeatbelt
 from ansys.dyna.core.keywords.keyword_classes.auto import SectionShell
 from ansys.dyna.core.keywords.keyword_classes.auto import SectionShellEfg
-from ansys.dyna.core.keywords.keyword_classes.auto import SectionShellMisc
 from ansys.dyna.core.keywords.keyword_classes.auto import SectionShellThermal
 from ansys.dyna.core.keywords.keyword_classes.auto import SectionShellXfem
 from ansys.dyna.core.keywords.keyword_classes.auto import SectionSolid

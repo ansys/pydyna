@@ -94,8 +94,8 @@ class MatCompositeFailureSunil(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "COMPOSITE_FAILURE_SUNIL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -128,7 +128,7 @@ class MatCompositeFailureSunil(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatCompositeFailureSunil.option_specs[0],
+                option_spec = MatCompositeFailureSunil._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCOMPOSITEFAILURESUNIL_OPTION0_CARD0,

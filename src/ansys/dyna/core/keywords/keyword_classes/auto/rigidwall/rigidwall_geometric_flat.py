@@ -65,8 +65,8 @@ class RigidwallGeometricFlat(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_FLAT"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "boxid": LinkType.DEFINE_BOX,
@@ -92,7 +92,7 @@ class RigidwallGeometricFlat(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = RigidwallGeometricFlat.option_specs[0],
+                option_spec = RigidwallGeometricFlat._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLGEOMETRICFLAT_OPTION0_CARD0,

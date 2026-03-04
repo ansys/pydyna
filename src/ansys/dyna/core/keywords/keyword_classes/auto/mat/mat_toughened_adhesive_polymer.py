@@ -80,8 +80,8 @@ class MatToughenedAdhesivePolymer(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "TOUGHENED_ADHESIVE_POLYMER"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcss": LinkType.DEFINE_CURVE_OR_TABLE,
@@ -109,7 +109,7 @@ class MatToughenedAdhesivePolymer(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatToughenedAdhesivePolymer.option_specs[0],
+                option_spec = MatToughenedAdhesivePolymer._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATTOUGHENEDADHESIVEPOLYMER_OPTION0_CARD0,

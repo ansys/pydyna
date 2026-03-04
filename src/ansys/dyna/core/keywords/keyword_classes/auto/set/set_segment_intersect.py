@@ -52,8 +52,8 @@ class SetSegmentIntersect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "SEGMENT_INTERSECT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "ssid1": LinkType.SET_SEGMENT,
@@ -80,7 +80,7 @@ class SetSegmentIntersect(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetSegmentIntersect.option_specs[0],
+                option_spec = SetSegmentIntersect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETSEGMENTINTERSECT_OPTION0_CARD0,

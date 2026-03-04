@@ -67,8 +67,8 @@ class MatGeneralViscoelastic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "GENERAL_VISCOELASTIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -93,7 +93,7 @@ class MatGeneralViscoelastic(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatGeneralViscoelastic.option_specs[0],
+                option_spec = MatGeneralViscoelastic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATGENERALVISCOELASTIC_OPTION0_CARD0,

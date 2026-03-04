@@ -62,8 +62,8 @@ class MatCohesiveTh(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "COHESIVE_TH"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -84,7 +84,7 @@ class MatCohesiveTh(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatCohesiveTh.option_specs[0],
+                option_spec = MatCohesiveTh._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCOHESIVETH_OPTION0_CARD0,

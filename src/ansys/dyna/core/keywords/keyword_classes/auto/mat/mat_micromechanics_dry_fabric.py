@@ -84,8 +84,8 @@ class MatMicromechanicsDryFabric(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "MICROMECHANICS_DRY_FABRIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -114,7 +114,7 @@ class MatMicromechanicsDryFabric(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatMicromechanicsDryFabric.option_specs[0],
+                option_spec = MatMicromechanicsDryFabric._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATMICROMECHANICSDRYFABRIC_OPTION0_CARD0,

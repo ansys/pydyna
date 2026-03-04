@@ -3054,7 +3054,7 @@ MatExtended3_ParameterBarlat
 MatFabric
 ---------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_fabric
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_034
     :members:
 
 

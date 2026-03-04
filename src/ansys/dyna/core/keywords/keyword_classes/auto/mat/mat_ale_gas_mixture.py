@@ -108,8 +108,8 @@ class MatAleGasMixture(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ALE_GAS_MIXTURE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -146,7 +146,7 @@ class MatAleGasMixture(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatAleGasMixture.option_specs[0],
+                option_spec = MatAleGasMixture._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATALEGASMIXTURE_OPTION0_CARD0,

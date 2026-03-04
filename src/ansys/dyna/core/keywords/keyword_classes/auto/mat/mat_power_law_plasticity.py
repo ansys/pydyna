@@ -53,8 +53,8 @@ class MatPowerLawPlasticity(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "POWER_LAW_PLASTICITY"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -71,7 +71,7 @@ class MatPowerLawPlasticity(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatPowerLawPlasticity.option_specs[0],
+                option_spec = MatPowerLawPlasticity._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATPOWERLAWPLASTICITY_OPTION0_CARD0,

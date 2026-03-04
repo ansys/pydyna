@@ -87,8 +87,8 @@ class MatReinforcedThermoplasticUdfiber(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "REINFORCED_THERMOPLASTIC_UDFIBER"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -121,7 +121,7 @@ class MatReinforcedThermoplasticUdfiber(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatReinforcedThermoplasticUdfiber.option_specs[0],
+                option_spec = MatReinforcedThermoplasticUdfiber._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATREINFORCEDTHERMOPLASTICUDFIBER_OPTION0_CARD0,

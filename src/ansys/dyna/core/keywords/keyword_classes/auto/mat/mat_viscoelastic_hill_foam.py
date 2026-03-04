@@ -82,8 +82,8 @@ class MatViscoelasticHillFoam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "VISCOELASTIC_HILL_FOAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -116,7 +116,7 @@ class MatViscoelasticHillFoam(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatViscoelasticHillFoam.option_specs[0],
+                option_spec = MatViscoelasticHillFoam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATVISCOELASTICHILLFOAM_OPTION0_CARD0,

@@ -64,8 +64,8 @@ class SensorDefineFunctionUpdate(KeywordBase):
 
     keyword = "SENSOR"
     subkeyword = "DEFINE_FUNCTION_UPDATE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -86,7 +86,7 @@ class SensorDefineFunctionUpdate(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SensorDefineFunctionUpdate.option_specs[0],
+                option_spec = SensorDefineFunctionUpdate._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SENSORDEFINEFUNCTIONUPDATE_OPTION0_CARD0,
