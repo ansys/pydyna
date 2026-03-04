@@ -70,3 +70,46 @@ npm run reinstall
 This compiles, packages, uninstalls the old version, and installs the new one. Then reload VS Code with **Ctrl+Shift+P** → `Developer: Reload Window`.
 
 Then open any `.k` file and hover over a word to verify the **Hello, World! 👋** popup.
+
+## Unit testing
+
+There are two ways to run the server unit tests.
+
+### 1. Dev environment (fast)
+
+Runs against your current Python. Good for quick iteration.
+
+```bash
+cd /c/AnsysDev/code/pyansys/pydyna
+python -m pytest vscode-extension/extension/server/tests/ -v
+```
+
+### 2. Bundled Python (authoritative)
+
+Installs all server dependencies into the standalone CPython at
+`extension/python/python/python.exe`, then runs the tests there.
+This is the meaningful validation — it proves the extension's hermetic
+environment actually works, with no contamination from your dev Python.
+
+Requires the bundled Python to already be present (`npm run fetch-python` first).
+
+**PyPI mode** (tests against the published `ansys-dyna-core` package):
+
+```bash
+cd vscode-extension/extension
+npm run test-bundled
+```
+
+**Dev mode** (tests against a local editable checkout of pydyna):
+
+```bash
+cd vscode-extension/extension
+PYDYNA_DEV_PATH=/c/AnsysDev/code/pyansys/pydyna npm run test-bundled
+```
+
+### What the tests cover
+
+| File | What it tests |
+|---|---|
+| `test_pydyna_env.py` | All required packages importable; `Deck.loads()` parses keywords; `FieldSchema` attributes accessible; property docstrings accessible |
+| `test_documents.py` | `extract_keyword_block()` isolates correct block text and start-line; `DocumentStore` open/change/close lifecycle |
