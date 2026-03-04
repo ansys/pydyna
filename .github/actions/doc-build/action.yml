@@ -34,6 +34,7 @@ inputs:
   license-server:
     description: License server address
     required: true
+
   bot-token:
     description: Bot token for authentication
     required: true
