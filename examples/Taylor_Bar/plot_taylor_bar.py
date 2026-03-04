@@ -228,15 +228,11 @@ for index, initial_velocity in enumerate(initial_velocities):
     # Create LS-Dyna input deck
     write_input_deck(initial_velocity=initial_velocity, wd=wd)
     # Run Solver
-    try:
-        run(wd)
-        # Run PyDPF Post
-        time_data, ke_data = get_global_ke(wd)
-        # Add series to the plot
-        plt.plot(time_data, ke_data, color[index], label="KE at vel. %s mm/s" % initial_velocity)
-
-    except Exception as e:
-        print(e)
+    run(wd)
+    # Run PyDPF Post
+    time_data, ke_data = get_global_ke(wd)
+    # Add series to the plot
+    plt.plot(time_data, ke_data, color[index], label="KE at vel. %s mm/s" % initial_velocity)
     # sphinx_gallery_defer_figures
 
 plt.xlabel("Time (s)")

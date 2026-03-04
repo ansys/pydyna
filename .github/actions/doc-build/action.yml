@@ -10,12 +10,15 @@ inputs:
 
   pdf-pool-size:
     required: false
+    default: 15000000
 
   pdf-string-vacancies:
     required: false
+    default: 90000
 
   pdf-max-strings:
     required: false
+    default: 600000
 
   pydyna-run-container:
     description: Run container name
@@ -30,9 +33,11 @@ inputs:
   github-token:
     description: GitHub token for authentication
     required: true
+
   license-server:
     description: License server address
     required: true
+
   bot-token:
     description: Bot token for authentication
     required: true
@@ -45,6 +50,27 @@ inputs:
       Whether to use the examples cache. Default is "true".
     required: false
     default: true
+    type: boolean
+
+  build-examples:
+    description: |
+      Whether to build examples. Default is "true".
+    required: false
+    default: true
+    type: boolean
+
+  build-api:
+    description: |
+      Whether to build API docs. Default is "true".
+    required: false
+    default: true
+    type: boolean
+
+  skip-pdf-build:
+    description: |
+      Whether to skip PDF build. Default is "false".
+    required: false
+    default: false
     type: boolean
 
 
@@ -69,6 +95,7 @@ runs:
       shell: bash
 
     - name: Install system dependencies
+      if : ${{ inputs.skip-pdf-build != 'true' }}
       run: |
         sudo apt-get update
         sudo apt-get install xvfb pandoc texlive-latex-extra latexmk
@@ -93,17 +120,20 @@ runs:
       shell: bash
 
     - name: Set Licensing
+      if: ${{ inputs.build-examples == 'true' }}
       run: |
         echo "ANSYS_DPF_ACCEPT_LA=Y" >> $GITHUB_ENV
       shell: bash
 
     - name: Install DPF
       uses: ansys/pydpf-actions/install-dpf-server@v2.3 # zizmor: ignore[unpinned-uses]
+      if: ${{ inputs.build-examples == 'true' }}
       with:
         dpf-standalone-TOKEN: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
         ANSYS_VERSION : "252"
 
     - name: Set DPF environment
+      if: ${{ inputs.build-examples == 'true' }}
       run: |
         DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v252/ansys/dpf/server_2025_2_pre0"
         echo "Setting DPF server path to: ${DPF_PATH}"
@@ -113,8 +143,9 @@ runs:
           echo "ANSYS_DPF_SERVER_ROOT=${DPF_PATH}"
         } >> "$GITHUB_ENV"
       shell: bash
+
     - name: Login to GitHub container registry
-      if: ${{ inputs.pydyna-run-container != '' }}
+      if: ${{ inputs.pydyna-run-container != '' && inputs.build_examples != 'false' }}
       uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
       with:
         registry: ghcr.io
@@ -122,7 +153,7 @@ runs:
         password: ${{ inputs.github-token }}
 
     - name: Pull PyDyna-run image
-      if: ${{ inputs.pydyna-run-container != '' }}
+      if: ${{ inputs.pydyna-run-container != '' && inputs.build_examples != 'false' }}
       env:
         DOCKER_IMAGE: ${{ inputs.pydyna-run-container }}
       run: |
@@ -137,6 +168,8 @@ runs:
         PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
         BUILD_AUTOKEYWORDS_API: ${{ inputs.build-autokeywords-api }}
         LSTC_LICENSE: ansys
+        BUILD_EXAMPLES: ${{ inputs.build-examples }}
+        BUILD_API: ${{ inputs.build-api }}
       run: |
         source .venv/bin/activate
         timeout 7200 xvfb-run uv run --no-sync -- make -C doc html SPHINXOPTS="-j auto"
@@ -150,6 +183,7 @@ runs:
         retention-days: 7
 
     - name: "Build the pdf documentation"
+      if: ${{ inputs.skip-pdf-build != 'true' }}
       shell: bash
       run: |
         source .venv/bin/activate
@@ -167,6 +201,7 @@ runs:
         max_strings: ${{ inputs.pdf-max-strings }}
 
     - name: Upload pdf documentation
+      if: ${{ inputs.skip-pdf-build != 'true' }}
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       with:
         name: documentation-pdf
