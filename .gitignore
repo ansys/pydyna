@@ -19,9 +19,6 @@ manuals/
 # uv
 uv.lock
 
-# vscode extension (temporary)
-vscode-extension/
-
 # Distribution / packaging
 .Python
 build/
