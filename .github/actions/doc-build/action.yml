@@ -54,7 +54,7 @@ inputs:
     default: true
     type: boolean
 
-  build_api_docs:
+  build_api:
     description: |
       Whether to build API docs. Default is "true".
     required: false
@@ -160,6 +160,8 @@ runs:
         PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
         BUILD_AUTOKEYWORDS_API: ${{ inputs.build-autokeywords-api }}
         LSTC_LICENSE: ansys
+        BUILD_EXAMPLES: ${{ inputs.build_examples }}
+        BUILD_API: ${{ inputs.build_api }}
       run: |
         source .venv/bin/activate
         timeout 7200 xvfb-run uv run --no-sync -- make -C doc html SPHINXOPTS="-j auto"

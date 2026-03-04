@@ -78,3 +78,7 @@
 - name: 'docs:api:skip'
   description: Skip documentation API runs in CI/CD
   color: 0677ba
+
+- name: 'docs:pdf:skip'
+  description: Skip documentation PDF runs in CI/CD
+  color: 0677ba
