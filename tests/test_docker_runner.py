@@ -73,6 +73,7 @@ def _make_runner(image="test-image:latest", **kwargs):
 # ---------------------------------------------------------------------------
 
 
+@pytest.mark.run
 class TestDockerRunnerUnit:
     """Unit tests for DockerRunner using mocked Docker SDK."""
 

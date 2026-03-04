@@ -595,7 +595,9 @@ def _has_parameter(text_block: str) -> bool:
     return "&" in text_block
 
 
-def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: ParameterSet = None) -> typing.List:
+def load_dataline(
+    spec: typing.List[tuple], line_data: str, parameter_set: ParameterSet = None
+) -> typing.Tuple[typing.Tuple, typing.List[str]]:
     """
     Loads a keyword card line from string, auto-detecting fixed-width or comma-delimited format.
 
@@ -615,21 +617,24 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
 
     Returns
     -------
-    list
-        Parsed values from the keyword card line.
+    tuple
+        A tuple of (parsed_values, warnings). Parsed values are the field values;
+        warnings is a list of diagnostic messages to be emitted by the caller.
 
     Examples
     --------
-    >>> load_dataline([(0,10, int),(10,10, str)], '         1     hello')
+    >>> values, warnings = load_dataline([(0,10, int),(10,10, str)], '         1     hello')
+    >>> values
     (1, 'hello')
-    >>> load_dataline([(0,10, int),(10,10, str)], '1,hello')
+    >>> values, warnings = load_dataline([(0,10, int),(10,10, str)], '1,hello')
+    >>> values
     (1, 'hello')
     """
     # Auto-detect comma-delimited format, passing field count as hint
     num_fields = len(spec)
     if _is_comma_delimited(line_data, num_fields):
         logger.debug("Detected comma-delimited format for line")
-        return _load_dataline_csv(spec, line_data, parameter_set)
+        return _load_dataline_csv(spec, line_data, parameter_set), []
 
     # Fixed-width format parsing (original implementation)
     logger.debug("Using fixed-width format for line")
@@ -695,28 +700,28 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
             raise Exception(f"Unexpected type in load_dataline spec: {item_type}")
         data.append(value)
 
+    warnings_list: typing.List[str] = []
     if end_position < len(line_data):
-        warning_message = f'Detected out of bound card characters:\n"{line_data[end_position:]}"\n"Ignoring.'
-        warnings.warn(warning_message)
+        warnings_list.append(f'Detected out of bound card characters:\n"{line_data[end_position:]}"\n"Ignoring.')
     data = list(_contract_data(spec, data))
-    return tuple(data)
+    return tuple(data), warnings_list
 
 
 def load_dataline_with_format(
     spec: typing.List[tuple], line_data: str, parameter_set: ParameterSet = None
-) -> typing.Tuple[typing.List, str]:
+) -> typing.Tuple[typing.Tuple, str, typing.List[str]]:
     """
     Like load_dataline, but also returns the detected format.
 
     Returns
     -------
     tuple
-        A tuple of (values, format) where format is 'csv' or 'fixed'.
+        A tuple of (values, format, warnings) where format is 'csv' or 'fixed'.
     """
     from ansys.dyna.core.lib.format_type import card_format
 
     num_fields = len(spec)
     is_csv = _is_comma_delimited(line_data, num_fields)
-    values = load_dataline(spec, line_data, parameter_set)
+    values, warnings = load_dataline(spec, line_data, parameter_set)
     detected_format = card_format.csv if is_csv else card_format.fixed
-    return values, detected_format
+    return values, detected_format, warnings

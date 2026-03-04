@@ -188,7 +188,7 @@ class TestLoadDatalineRefRecording:
 
         with ps.scope("kwd"):
             with ps.scope("card0"):
-                values = load_dataline(spec, line, ps)
+                values, _ = load_dataline(spec, line, ps)
 
         # Values should be substituted
         assert values[0] == 100.0
@@ -209,7 +209,7 @@ class TestLoadDatalineRefRecording:
 
         with ps.scope("kwd"):
             with ps.scope("card0"):
-                values = load_dataline(spec, line, ps)
+                values, _ = load_dataline(spec, line, ps)
 
         assert values[0] == -50.0
         assert ps.get_ref("kwd", "card0", "0") == "-&val"
@@ -227,7 +227,7 @@ class TestLoadDatalineRefRecording:
 
         with ps.scope("kwd"):
             with ps.scope("card0"):
-                values = load_dataline(spec, line, ps)
+                values, _ = load_dataline(spec, line, ps)
 
         assert values == (1.0, 2.0, 10.0, 3.0)
         assert ps.get_ref("kwd", "card0", "0") == "&a"

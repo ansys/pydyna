@@ -25,7 +25,7 @@ import io
 import typing
 import warnings
 
-from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.card_interface import CardInterface, ReadResult
 from ansys.dyna.core.lib.field import Field, Flag, to_long  # noqa: F401
 from ansys.dyna.core.lib.field_schema import CardSchema, FieldSchema
 from ansys.dyna.core.lib.field_writer import write_comment_line, write_fields, write_fields_csv
@@ -290,30 +290,46 @@ class Card(CardInterface):
             fields.append(new_field)
         return fields
 
-    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
-        """Reads the card from the given buffer."""
+    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> ReadResult:
+        """Reads the card from the given buffer.
+
+        Returns
+        -------
+        ReadResult
+            Result containing warnings generated during parsing.
+        """
+        result = ReadResult()
         if not self.active:
-            return False
+            return result
         line, to_exit = read_line(buf)
         if to_exit:
-            return True
-        self._load(line, parameter_set)
-        return False
+            result.reached_end = True
+            return result
+        line_warnings = self._load(line, parameter_set)
+        result.warnings.extend(line_warnings)
+        return result
 
-    def _load(self, data_line: str, parameter_set: ParameterSet) -> None:
+    def _load(self, data_line: str, parameter_set: ParameterSet) -> typing.List[str]:
         """Load card data from a string line.
 
         Uses cached FormatSpec for efficient parsing.
+
+        Returns
+        -------
+        list of str
+            Warning messages generated during parsing.
         """
         current_format = self.format
         format_spec = _get_cached_format_spec(self._signature, self._schema, current_format)
 
-        values, detected_format = load_dataline_with_format(format_spec, data_line, parameter_set)
+        values, detected_format, line_warnings = load_dataline_with_format(format_spec, data_line, parameter_set)
         self._card_format = detected_format
 
         # Update values directly (no Field objects needed)
         for i in range(len(self._schema)):
             self._values[i] = values[i]
+
+        return line_warnings
 
     def write(
         self,

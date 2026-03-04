@@ -46,6 +46,9 @@ from ansys.dyna.core.keywords.keyword_classes.auto.parameter.parameter_expressio
 )
 from ansys.dyna.core.lib.parameters import ParameterSet
 
+if typing.TYPE_CHECKING:
+    from ansys.dyna.core.lib.import_handler import ImportContext
+
 
 class ParameterExpression(BaseParameterExpression):
     """PARAMETER_EXPRESSION with custom loads() that preserves expression text.
@@ -53,10 +56,15 @@ class ParameterExpression(BaseParameterExpression):
     Prevents parameter substitution during loading. Expressions evaluated later.
     """
 
-    def loads(self, data: str, parameters: typing.Optional[ParameterSet] = None) -> None:
+    def loads(
+        self,
+        data: str,
+        parameters: typing.Optional[ParameterSet] = None,
+        import_context: typing.Optional["ImportContext"] = None,
+    ) -> None:
         """Load keyword data without parameter substitution."""
         # Call parent loads() but with parameters=None to disable substitution
-        super().loads(data, parameters=None)
+        super().loads(data, parameters=None, import_context=import_context)
 
 
 class ParameterExpressionLocal(BaseParameterExpressionLocal):
@@ -65,9 +73,14 @@ class ParameterExpressionLocal(BaseParameterExpressionLocal):
     Overrides loads() to prevent parameter substitution in expression strings.
     """
 
-    def loads(self, data: str, parameters: typing.Optional[ParameterSet] = None) -> None:
+    def loads(
+        self,
+        data: str,
+        parameters: typing.Optional[ParameterSet] = None,
+        import_context: typing.Optional["ImportContext"] = None,
+    ) -> None:
         """Load keyword data without parameter substitution."""
-        super().loads(data, parameters=None)
+        super().loads(data, parameters=None, import_context=import_context)
 
 
 class ParameterExpressionNoecho(BaseParameterExpressionNoecho):
@@ -76,6 +89,11 @@ class ParameterExpressionNoecho(BaseParameterExpressionNoecho):
     Overrides loads() to prevent parameter substitution in expression strings.
     """
 
-    def loads(self, data: str, parameters: typing.Optional[ParameterSet] = None) -> None:
+    def loads(
+        self,
+        data: str,
+        parameters: typing.Optional[ParameterSet] = None,
+        import_context: typing.Optional["ImportContext"] = None,
+    ) -> None:
         """Load keyword data without parameter substitution."""
-        super().loads(data, parameters=None)
+        super().loads(data, parameters=None, import_context=import_context)
