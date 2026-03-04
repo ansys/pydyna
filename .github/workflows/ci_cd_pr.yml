@@ -149,7 +149,8 @@ jobs:
           license-server: ${{ secrets.LICENSE_SERVER }}
           bot-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           github-actor: ${{ github.actor }}
-          use_cache_examples: ${{ github.ref != 'refs/heads/main' }} # Use cache for PRs but not for main branch to avoid cache issues
+          # use_cache_examples: ${{ github.ref != 'refs/heads/main' }} # Use cache for PRs but not for main branch to avoid cache issues
+          use_cache_examples: false # Disable example caching for now due to cache instability; can be re-enabled once caching is stable
           build-examples: ${{ !contains(github.event.pull_request.labels.*.name, 'docs:example:skip') }}
           build-api: ${{ !contains(github.event.pull_request.labels.*.name, 'docs:api:skip') }}
           skip-pdf-build: ${{ contains(github.event.pull_request.labels.*.name, 'docs:pdf:skip') }}
