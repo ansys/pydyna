@@ -92,14 +92,85 @@ function extractTarGz(tarPath, destDir) {
 }
 
 function installPackages(pythonExe) {
-  const packages = ["pygls>=2.0", "lsprotocol>=2023.0"];
-  console.log(`  Installing ${packages.join(", ")} into bundled Python ...`);
+  // LSP framework
+  const lspPackages = ["pygls>=2.0", "lsprotocol>=2023.0"];
+
+  // ansys-dyna-core and its minimal transitive dependencies needed at import
+  // time.  We use --no-deps to avoid pulling in heavy optional deps (ansys-dpf,
+  // pyvista, docker, requests, …) that the LSP server never uses.
+  const pydynaDeps = [
+    "numpy>=1",
+    "pandas>=2.0",
+    "python-dateutil>=2.8",
+    "pytz>=2020",
+    "tzdata",
+    "six",
+    "appdirs>=1.4.4",
+    "charset-normalizer>=3.1",
+    "hollerith>=0.6.0",
+    "transformations>=2025.1.1",
+  ];
+
+  console.log(`  Installing LSP framework: ${lspPackages.join(", ")} ...`);
   execFileSync(
     pythonExe,
-    ["-m", "pip", "install", "--quiet", "--disable-pip-version-check", ...packages],
+    ["-m", "pip", "install", "--quiet", "--disable-pip-version-check", ...lspPackages],
     { stdio: "inherit" }
   );
+
+  // Check for dev-mode override: if PYDYNA_DEV_PATH is set, install an editable
+  // copy of the local pydyna source tree instead of the PyPI release.
+  // Convert MSYS/Git-Bash style paths (/c/foo) to Windows paths (C:\foo) so
+  // that the bundled Python's pip accepts them on Windows.
+  const rawDevPath = process.env.PYDYNA_DEV_PATH;
+  let devPath = rawDevPath || null;
+  if (devPath && os.platform() === "win32" && devPath.startsWith("/")) {
+    // /c/foo/bar  →  C:\foo\bar
+    devPath = devPath.replace(/^\/([a-zA-Z])\//, "$1:\\").replace(/\//g, "\\");
+  }
+  if (devPath) {
+    console.log(`  PYDYNA_DEV_PATH set — installing pydyna deps from ${devPath} (editable, --no-deps) ...`);
+    console.log(`  Installing transitive deps: ${pydynaDeps.join(", ")} ...`);
+    execFileSync(
+      pythonExe,
+      ["-m", "pip", "install", "--quiet", "--disable-pip-version-check", ...pydynaDeps],
+      { stdio: "inherit" }
+    );
+    execFileSync(
+      pythonExe,
+      ["-m", "pip", "install", "--quiet", "--disable-pip-version-check", "--no-deps", "-e", devPath],
+      { stdio: "inherit" }
+    );
+  } else {
+    console.log(`  Installing ansys-dyna-core deps: ${pydynaDeps.join(", ")} ...`);
+    execFileSync(
+      pythonExe,
+      ["-m", "pip", "install", "--quiet", "--disable-pip-version-check", ...pydynaDeps],
+      { stdio: "inherit" }
+    );
+    console.log("  Installing ansys-dyna-core (--no-deps) ...");
+    execFileSync(
+      pythonExe,
+      ["-m", "pip", "install", "--quiet", "--disable-pip-version-check", "--no-deps", "ansys-dyna-core"],
+      { stdio: "inherit" }
+    );
+  }
 }
+
+// ── Exports (used by test-bundled.js) ───────────────────────────────────────
+
+/**
+ * Return the absolute path to the bundled Python executable for the current
+ * platform, or null if the bundled runtime has not been downloaded yet.
+ */
+function bundledPythonExe() {
+  const key = platformKey();
+  const { pythonBin } = PLATFORM_MAP[key];
+  const exe = path.join(DEST_DIR, pythonBin);
+  return fs.existsSync(exe) ? exe : null;
+}
+
+module.exports = { installPackages, bundledPythonExe };
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 
@@ -109,8 +180,19 @@ async function main() {
   const filename = `cpython-${PYTHON_VERSION}+${PBS_RELEASE}-${suffix}`;
   const url = `https://github.com/astral-sh/python-build-standalone/releases/download/${PBS_RELEASE}/${encodeURIComponent(filename)}`;
 
-  // Skip if already set up (check for python executable)
+  // --install-only: skip download, just (re-)install packages into existing runtime
   const pythonExe = path.join(DEST_DIR, pythonBin);
+  if (process.argv.includes("--install-only")) {
+    if (!fs.existsSync(pythonExe)) {
+      throw new Error(`--install-only requires bundled Python at ${pythonExe}. Run without --install-only first.`);
+    }
+    console.log(`\nRe-installing packages into existing bundled Python at ${pythonExe}`);
+    installPackages(pythonExe);
+    console.log("\nDone.");
+    return;
+  }
+
+  // Skip download if already set up (check for python executable)
   if (fs.existsSync(pythonExe)) {
     console.log(`Bundled Python already present at ${pythonExe}, skipping download.`);
     console.log("Run `npm run fetch-python -- --force` to re-download.");

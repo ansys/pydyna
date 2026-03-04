@@ -40,6 +40,8 @@
   "scripts": {
     "vscode:prepublish": "npm run fetch-python && npm run bundle",
     "fetch-python": "node fetch-python.js",
+    "fetch-python:install-only": "node fetch-python.js --install-only",
+    "test-bundled": "node test-bundled.js",
     "bundle": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --minify",
     "compile": "esbuild src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --sourcemap",
     "watch": "npm run compile -- --watch",
