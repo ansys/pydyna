@@ -69,25 +69,25 @@ class TestCommaDelimitedParsing:
     def test_parse_simple_csv(self):
         """Parse a simple comma-delimited line with int and string."""
         spec = [(0, 10, int), (10, 10, str)]
-        result = load_dataline(spec, "1,hello")
+        result, _ = load_dataline(spec, "1,hello")
         assert result == (1, "hello")
 
     def test_parse_csv_with_floats(self):
         """Parse comma-delimited line with float values."""
         spec = [(0, 10, float), (10, 10, float), (20, 10, float)]
-        result = load_dataline(spec, "1.5,2.5,3.5")
+        result, _ = load_dataline(spec, "1.5,2.5,3.5")
         assert result == (1.5, 2.5, 3.5)
 
     def test_parse_csv_with_whitespace(self):
         """Parse comma-delimited line with whitespace around values."""
         spec = [(0, 10, int), (10, 10, str), (20, 10, float)]
-        result = load_dataline(spec, "  1  ,  hello  ,  3.14  ")
+        result, _ = load_dataline(spec, "  1  ,  hello  ,  3.14  ")
         assert result == (1, "hello", 3.14)
 
     def test_parse_csv_empty_fields(self):
         """Empty fields between commas should produce None/nan values."""
         spec = [(0, 10, int), (10, 10, str), (20, 10, float)]
-        result = load_dataline(spec, "1,,3.14")
+        result, _ = load_dataline(spec, "1,,3.14")
         assert result[0] == 1
         assert result[1] is None
         assert result[2] == 3.14
@@ -95,7 +95,7 @@ class TestCommaDelimitedParsing:
     def test_parse_csv_trailing_empty_fields(self):
         """Trailing empty fields should produce None/nan values."""
         spec = [(0, 10, int), (10, 10, str), (20, 10, float)]
-        result = load_dataline(spec, "1,hello,")
+        result, _ = load_dataline(spec, "1,hello,")
         assert result[0] == 1
         assert result[1] == "hello"
         assert math.isnan(result[2])
@@ -103,7 +103,7 @@ class TestCommaDelimitedParsing:
     def test_parse_csv_fewer_fields_than_spec(self):
         """Missing fields should use default values."""
         spec = [(0, 10, int), (10, 10, str), (20, 10, float)]
-        result = load_dataline(spec, "1")
+        result, _ = load_dataline(spec, "1")
         assert result[0] == 1
         assert result[1] is None
         assert math.isnan(result[2])
@@ -114,7 +114,7 @@ class TestCommaDelimitedParsing:
         params = ParameterSet()
         params.add("myval", 42)
         params.add("myfloat", 3.14)
-        result = load_dataline(spec, "&myval,&myfloat", params)
+        result, _ = load_dataline(spec, "&myval,&myfloat", params)
         assert result == (42, 3.14)
 
     def test_parse_csv_negative_parameter(self):
@@ -122,13 +122,13 @@ class TestCommaDelimitedParsing:
         spec = [(0, 10, float)]
         params = ParameterSet()
         params.add("val", 10.0)
-        result = load_dataline(spec, "-&val", params)
+        result, _ = load_dataline(spec, "-&val", params)
         assert result == (-10.0,)
 
     def test_parse_csv_integer_as_float_string(self):
         """Integer values written as floats (e.g., '1.0') should parse as int."""
         spec = [(0, 10, int)]
-        result = load_dataline(spec, "1.0")
+        result, _ = load_dataline(spec, "1.0")
         assert result == (1,)
 
 
@@ -138,13 +138,13 @@ class TestFixedWidthStillWorks:
     def test_fixed_width_unchanged(self):
         """Fixed-width parsing should be unchanged."""
         spec = [(0, 10, int), (10, 10, str)]
-        result = load_dataline(spec, "         1     hello")
+        result, _ = load_dataline(spec, "         1     hello")
         assert result == (1, "hello")
 
     def test_fixed_width_with_floats(self):
         """Fixed-width float parsing should be unchanged."""
         spec = [(0, 10, float), (10, 10, float)]
-        result = load_dataline(spec, "       1.5       2.5")
+        result, _ = load_dataline(spec, "       1.5       2.5")
         assert result == (1.5, 2.5)
 
 
@@ -193,13 +193,13 @@ class TestRoundTrip:
         spec = [(0, 10, int), (10, 10, str), (20, 10, float)]
 
         # Parse fixed-width
-        fixed_result = load_dataline(spec, "         1     hello      3.14")
+        fixed_result, _ = load_dataline(spec, "         1     hello      3.14")
 
         # Create CSV from values
         csv_line = f"{fixed_result[0]},{fixed_result[1]},{fixed_result[2]}"
 
         # Parse CSV
-        csv_result = load_dataline(spec, csv_line)
+        csv_result, _ = load_dataline(spec, csv_line)
 
         assert csv_result[0] == fixed_result[0]
         assert csv_result[1] == fixed_result[1]
@@ -214,11 +214,11 @@ class TestMixedFormatDeck:
         spec = [(0, 10, int), (10, 10, str)]
 
         # Fixed-width line
-        fixed_result = load_dataline(spec, "         1     hello")
+        fixed_result, _ = load_dataline(spec, "         1     hello")
         assert fixed_result == (1, "hello")
 
         # CSV line
-        csv_result = load_dataline(spec, "2,world")
+        csv_result, _ = load_dataline(spec, "2,world")
         assert csv_result == (2, "world")
 
 
@@ -308,7 +308,7 @@ class TestGlobalCsvOptOut:
         spec = [(0, 10, int), (10, 10, int), (20, 10, int), (30, 10, int)]
 
         # With CSV enabled (default), parse as CSV
-        result = load_dataline(spec, "1,2,3,4")
+        result, _ = load_dataline(spec, "1,2,3,4")
         assert result == (1, 2, 3, 4)
 
         # With CSV disabled via context manager, parse as fixed-width
@@ -319,7 +319,7 @@ class TestGlobalCsvOptOut:
                 load_dataline(spec, "1,2,3,4")
 
         # After context manager, CSV parsing works again
-        result = load_dataline(spec, "1,2,3,4")
+        result, _ = load_dataline(spec, "1,2,3,4")
         assert result == (1, 2, 3, 4)
 
     def test_disable_csv_autodetect_affects_deck_loads(self):

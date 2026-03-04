@@ -237,18 +237,16 @@ class Cards(OptionsInterface):
 
     def _read_card(self, card: CardInterface, buf: typing.TextIO, parameters: ParameterSet) -> bool:
         pos = buf.tell()
-        with warnings.catch_warnings(record=True) as w:
-            card.read(buf, parameters)
-            caught = list(w)
+        read_result = card.read(buf, parameters)
 
         # the card is not active after reading it. THat means we should *not* read it. Rewinding back to the buffer
         # start position. In this case any warnings caused by reading the card can be ignored.
         if not card.active:
             buf.seek(pos)
         else:
-            # emit warnings caught while reading the card
-            for caught_warning in caught:
-                warnings.warn(caught_warning.message)
+            # emit warnings from reading the card
+            for msg in read_result.warnings:
+                warnings.warn(msg)
         return True
 
     def _read_data(self, buf: typing.TextIO, parameters: ParameterSet) -> None:

@@ -45,10 +45,11 @@ def test_load_card_errors(string_utils):
         # cards can only load a readable buffer
         card.read("")
 
-    with pytest.warns(UserWarning, match="Detected out of bound card characters"):
-        # error if the line that is too long
-        buf = "                                           "
-        card.read(string_utils.as_buffer(buf))
+    # error if the line that is too long
+    buf = "                                           "
+    result = card.read(string_utils.as_buffer(buf))
+    assert len(result.warnings) > 0
+    assert "Detected out of bound card characters" in result.warnings[0]
 
 def test_load_card_parameters(string_utils):
     """Error test for loading a card."""

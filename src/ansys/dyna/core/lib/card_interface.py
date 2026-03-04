@@ -22,10 +22,27 @@
 """Module for card interface."""
 
 import abc
+import dataclasses
 import typing
 
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.parameters import ParameterSet
+
+
+@dataclasses.dataclass
+class ReadResult:
+    """Result of reading a card from a buffer.
+
+    Attributes
+    ----------
+    warnings : list of str
+        Warning messages generated during card parsing.
+    reached_end : bool
+        Whether reading reached the end of the keyword (for unbounded reads).
+    """
+
+    warnings: typing.List[str] = dataclasses.field(default_factory=list)
+    reached_end: bool = False
 
 
 class CardInterface(metaclass=abc.ABCMeta):
@@ -43,8 +60,14 @@ class CardInterface(metaclass=abc.ABCMeta):
         )
 
     @abc.abstractmethod
-    def read(self, buf: typing.TextIO, parameter_set: typing.Optional[ParameterSet]) -> None:
-        """Reads the card data from an input text buffer."""
+    def read(self, buf: typing.TextIO, parameter_set: typing.Optional[ParameterSet]) -> ReadResult:
+        """Reads the card data from an input text buffer.
+
+        Returns
+        -------
+        ReadResult
+            Result containing warnings and other diagnostic information.
+        """
         raise NotImplementedError
 
     @abc.abstractmethod

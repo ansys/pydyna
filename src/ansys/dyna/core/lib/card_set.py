@@ -28,7 +28,7 @@ That type is used for each card, and behaves like a keyword.
 
 import typing
 
-from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.card_interface import CardInterface, ReadResult
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
@@ -204,8 +204,8 @@ class CardSet(CardInterface):
 
         # Default: iterate through all cards
         for card in item._get_all_cards():
-            ret = card.read(buf, parameter_set)
-            if ret:
+            result = card.read(buf, parameter_set)
+            if result.reached_end:
                 # according to the card, we are at the end of the keyword, so
                 # we can break out of the card reading loop.
                 return True
@@ -226,17 +226,25 @@ class CardSet(CardInterface):
             if at_end_of_keyword(buf):
                 return
 
-    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
-        """Reads the card set from the given buffer."""
+    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> ReadResult:
+        """Reads the card set from the given buffer.
+
+        Returns
+        -------
+        ReadResult
+            Result containing warnings and end-of-reading signal.
+        """
+        result = ReadResult()
         if not self.active:
-            return False
+            return result
         self._initialize()
         if self.bounded:
             self._load_bounded_from_buffer(buf, parameter_set)
-            return False
+            result.reached_end = False
         else:
             self._load_unbounded_from_buffer(buf, parameter_set)
-            return True
+            result.reached_end = True
+        return result
 
 
 def read_cards_with_discriminator(

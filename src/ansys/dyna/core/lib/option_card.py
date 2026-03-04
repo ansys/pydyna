@@ -26,7 +26,7 @@ import abc
 import io
 import typing
 
-from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.card_interface import CardInterface, ReadResult
 from ansys.dyna.core.lib.card_position import CardPosition
 from ansys.dyna.core.lib.card_writer import write_cards
 from ansys.dyna.core.lib.format_type import format_type
@@ -160,10 +160,19 @@ class OptionCardSet(CardInterface):
     def __lt__(self, other: "OptionCardSet"):
         return self.position < other.position
 
-    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
-        """Read from buf."""
+    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> ReadResult:
+        """Read from buf.
+
+        Returns
+        -------
+        ReadResult
+            Result containing warnings from all cards.
+        """
+        result = ReadResult()
         for card in self._cards:
-            card.read(buf, parameter_set)
+            card_result = card.read(buf, parameter_set)
+            result.warnings.extend(card_result.warnings)
+        return result
 
     def write(
         self,
