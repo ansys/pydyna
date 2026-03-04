@@ -30,6 +30,7 @@ inputs:
   github-token:
     description: GitHub token for authentication
     required: true
+
   license-server:
     description: License server address
     required: true
