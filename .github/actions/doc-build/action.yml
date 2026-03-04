@@ -47,6 +47,27 @@ inputs:
     default: true
     type: boolean
 
+  build_examples:
+    description: |
+      Whether to build examples. Default is "true".
+    required: false
+    default: true
+    type: boolean
+
+  build_api_docs:
+    description: |
+      Whether to build API docs. Default is "true".
+    required: false
+    default: true
+    type: boolean
+
+  skip-pdf-build:
+    description: |
+      Whether to skip PDF build. Default is "false".
+    required: false
+    default: false
+    type: boolean
+
 
 runs:
   using: "composite"
@@ -69,6 +90,7 @@ runs:
       shell: bash
 
     - name: Install system dependencies
+      if : ${{ inputs.skip-pdf-build != 'true' }}
       run: |
         sudo apt-get update
         sudo apt-get install xvfb pandoc texlive-latex-extra latexmk
@@ -93,6 +115,7 @@ runs:
       shell: bash
 
     - name: Set Licensing
+      if: ${{ inputs.build_examples == 'true' }}
       run: |
         echo "ANSYS_DPF_ACCEPT_LA=Y" >> $GITHUB_ENV
       shell: bash
