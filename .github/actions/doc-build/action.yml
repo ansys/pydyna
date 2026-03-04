@@ -10,12 +10,15 @@ inputs:
 
   pdf-pool-size:
     required: false
+    default: 15000000
 
   pdf-string-vacancies:
     required: false
+    default: 90000
 
   pdf-max-strings:
     required: false
+    default: 600000
 
   pydyna-run-container:
     description: Run container name
