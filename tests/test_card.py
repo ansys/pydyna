@@ -22,6 +22,7 @@
 
 import pytest
 
+from ansys.dyna.core import Deck, keywords as kwd
 from ansys.dyna.core.lib.card import (
     Card,
     Field,
@@ -31,6 +32,7 @@ from ansys.dyna.core.lib.card import (
 from ansys.dyna.core.lib.field import Flag
 from ansys.dyna.core.lib.field_schema import CardSchema, FieldSchema
 from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.import_handler import ImportContext
 from ansys.dyna.core.lib.parameters import ParameterSet
 
 def test_load_card_errors(string_utils):
@@ -45,8 +47,8 @@ def test_load_card_errors(string_utils):
         # cards can only load a readable buffer
         card.read("")
 
-    # error if the line that is too long
-    buf = "                                           "
+    # warning if the line has out-of-bound characters (use non-whitespace)
+    buf = "                    X"
     result = card.read(string_utils.as_buffer(buf))
     assert len(result.warnings) > 0
     assert "Detected out of bound card characters" in result.warnings[0]
@@ -506,3 +508,74 @@ class TestFormatSpecCaching:
         # Same format type should return cached spec
         spec_default_again = _get_cached_format_spec(signature, schema, format_type.default)
         assert spec_default is spec_default_again
+
+
+class TestCardWarningLocation:
+    """Test that card parsing warnings include location information."""
+
+    def test_out_of_bound_warning_includes_file_and_line(self):
+        """Test that out-of-bound card character warnings include file path and line number."""
+        deck = Deck()
+        # Keyword starts on line 3, out-of-bound characters should trigger warning with [test.k:3]
+        data = """$ Comment line 1
+$ Comment line 2
+*CONTROL_TERMINATION
+       1.0                                                                   extra characters"""
+
+        context = ImportContext(path="test.k")
+
+        with pytest.warns(UserWarning, match=r"\[test\.k:3\].*Detected out of bound card characters"):
+            deck.loads(data, context=context)
+
+    def test_out_of_bound_warning_with_loads_no_file_path(self):
+        """Test that warnings from loads() include line number but no file path."""
+        deck = Deck()
+        # When loading from string without explicit context, only line number is available
+        data = """*CONTROL_TERMINATION
+       1.0                                                                   extra"""
+
+        with pytest.warns(UserWarning) as warning_list:
+            deck.loads(data)
+
+        assert len(warning_list) > 0
+        warning_message = str(warning_list[0].message)
+        # Format is [1] when only line number (no file path)
+        assert "[1]" in warning_message
+        assert "Detected out of bound card characters" in warning_message
+
+    def test_out_of_bound_warning_tracks_multiple_keywords(self):
+        """Test that line numbers update correctly across multiple keywords."""
+        deck = Deck()
+        # First keyword on line 1 (no warning), second on line 5 (triggers warning)
+        # Use only spaces for out-of-bound characters to avoid parameter parsing issues
+        data = """*CONTROL_TERMINATION
+       1.0
+$ Comment
+$ Comment
+*CONTROL_TIMESTEP
+       0.0       0.9                                                                             """
+
+        context = ImportContext(path="multi.k")
+
+        with pytest.warns(UserWarning, match=r"\[multi\.k:5\].*Detected out of bound card characters"):
+            deck.loads(data, context=context)
+
+    def test_out_of_bound_warning_without_context(self):
+        """Test that warnings work even without import context (backwards compatibility)."""
+        # Direct loads on keyword without context should still emit warning (no location prefix)
+        data = """*CONTROL_TERMINATION
+       1.0                                                                   extra"""
+
+        keyword = kwd.ControlTermination()
+
+        with pytest.warns(UserWarning, match=r"Detected out of bound card characters"):
+            keyword.loads(data)
+
+        # Verify warning doesn't have location prefix when no context
+        with pytest.warns(UserWarning) as warning_list:
+            keyword2 = kwd.ControlTermination()
+            keyword2.loads(data)
+
+        warning_message = str(warning_list[0].message)
+        assert not warning_message.startswith("[")
+        assert "Detected out of bound card characters" in warning_message

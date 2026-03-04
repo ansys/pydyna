@@ -33,6 +33,7 @@ from ansys.dyna.core.lib.parameters import ParameterSet
 # protected due to circular import
 if typing.TYPE_CHECKING:
     from ansys.dyna.core.lib.deck import Deck
+    from ansys.dyna.core.lib.import_handler import ImportContext
 
 
 class LinkType(enum.Enum):
@@ -366,8 +367,23 @@ class KeywordBase(Cards):
             return title_line[:-1]
         return title_line
 
-    def read(self, buf: typing.TextIO, parameters: ParameterSet = None) -> None:
-        """Read the keyword from a buffer."""
+    def read(
+        self,
+        buf: typing.TextIO,
+        parameters: ParameterSet = None,
+        import_context: typing.Optional["ImportContext"] = None,
+    ) -> None:
+        """Read the keyword from a buffer.
+
+        Parameters
+        ----------
+        buf : typing.TextIO
+            Buffer to read from.
+        parameters : ParameterSet, optional
+            Parameter set for substitution.
+        import_context : ImportContext, optional
+            Import context with file path and line number for warnings/errors.
+        """
         title_line = buf.readline()
         title_line = self._process_title(title_line)
         self.before_read(buf)
@@ -382,11 +398,13 @@ class KeywordBase(Cards):
         # Scope the parameter references by this keyword's identity
         if parameters is not None:
             with parameters.scope(str(id(self))):
-                self._read_data(buf, parameters)
+                self._read_data(buf, parameters, import_context)
         else:
-            self._read_data(buf, parameters)
+            self._read_data(buf, parameters, import_context)
 
-    def loads(self, value: str, parameters: ParameterSet = None) -> typing.Any:
+    def loads(
+        self, value: str, parameters: ParameterSet = None, import_context: typing.Optional["ImportContext"] = None
+    ) -> typing.Any:
         """Load the keyword from string.
 
         Return `self` to support chaining
@@ -395,7 +413,7 @@ class KeywordBase(Cards):
         s = io.StringIO()
         s.write(value)
         s.seek(0)
-        self.read(s, parameters)
+        self.read(s, parameters, import_context)
         return self
 
     # Class attribute to be overridden by subclasses with link field metadata.

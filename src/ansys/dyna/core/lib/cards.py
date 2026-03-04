@@ -33,6 +33,9 @@ from ansys.dyna.core.lib.kwd_line_formatter import read_line
 from ansys.dyna.core.lib.option_card import OptionCardSet, Options, OptionsInterface, OptionSpec
 from ansys.dyna.core.lib.parameters import ParameterSet
 
+if typing.TYPE_CHECKING:
+    from ansys.dyna.core.lib.import_handler import ImportContext
+
 
 class Cards(OptionsInterface):
     def __init__(self, keyword):
@@ -43,6 +46,36 @@ class Cards(OptionsInterface):
         # The keyword if it is a card set. # TODO - can this be improved?
         self._options = Options(keyword)
         self._active_options: typing.Set[str] = set()
+
+    @staticmethod
+    def _enrich_warning_with_context(message: str, import_context: typing.Optional["ImportContext"] = None) -> str:
+        """Enrich a warning message with location information from import context.
+
+        Parameters
+        ----------
+        message : str
+            The original warning message.
+        import_context : ImportContext, optional
+            Import context with file path and line number.
+
+        Returns
+        -------
+        str
+            Enriched message with location prepended if context is available.
+        """
+        if import_context is None:
+            return message
+
+        location_parts = []
+        if import_context.path is not None:
+            location_parts.append(import_context.path)
+        if import_context.line_number is not None:
+            location_parts.append(str(import_context.line_number))
+
+        if location_parts:
+            location = ":".join(location_parts)
+            return f"[{location}] {message}"
+        return message
 
     # options API interface implementation
 
@@ -235,7 +268,13 @@ class Cards(OptionsInterface):
         if not any_options_read:
             buf.seek(pos)
 
-    def _read_card(self, card: CardInterface, buf: typing.TextIO, parameters: ParameterSet) -> bool:
+    def _read_card(
+        self,
+        card: CardInterface,
+        buf: typing.TextIO,
+        parameters: ParameterSet,
+        import_context: typing.Optional["ImportContext"] = None,
+    ) -> bool:
         pos = buf.tell()
         read_result = card.read(buf, parameters)
 
@@ -244,19 +283,22 @@ class Cards(OptionsInterface):
         if not card.active:
             buf.seek(pos)
         else:
-            # emit warnings from reading the card
+            # emit warnings from reading the card, enriched with location context
             for msg in read_result.warnings:
-                warnings.warn(msg)
+                enriched_msg = self._enrich_warning_with_context(msg, import_context)
+                warnings.warn(enriched_msg)
         return True
 
-    def _read_data(self, buf: typing.TextIO, parameters: ParameterSet) -> None:
+    def _read_data(
+        self, buf: typing.TextIO, parameters: ParameterSet, import_context: typing.Optional["ImportContext"] = None
+    ) -> None:
         card_index = 0
         for card in self._get_all_cards():
             if parameters is not None:
                 with parameters.scope(f"card{card_index}"):
-                    self._read_card(card, buf, parameters)
+                    self._read_card(card, buf, parameters, import_context)
             else:
-                self._read_card(card, buf, parameters)
+                self._read_card(card, buf, parameters, import_context)
             card_index += 1
 
         self._try_read_options_with_no_title(buf, parameters)
