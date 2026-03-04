@@ -53,3 +53,28 @@
 - name: 'Run'
   description: Anything related to run subpackage
   color: 25c1ea
+
+# skips labels for cicd pipelines for smarter testing and documentation runs
+- name: 'docs:skip'
+  description: Skip documentation runs in CI/CD
+  color: 0677ba
+
+- name: 'ci:skip'
+  description: Skip CI/CD runs
+  color: a9a9a9
+
+- name: 'tests:skip'
+  description: Skip tests runs in CI/CD
+  color: ffd8b1
+
+- name: 'test:run:skip'
+  description: Skip run testing runs in CI/CD
+  color: 5802B8
+
+- name: 'docs:example:skip'
+  description: Skip documentation example runs in CI/CD
+  color: 0677ba
+
+- name: 'docs:api:skip'
+  description: Skip documentation API runs in CI/CD
+  color: 0677ba
