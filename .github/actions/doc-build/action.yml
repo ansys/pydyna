@@ -122,11 +122,13 @@ runs:
 
     - name: Install DPF
       uses: ansys/pydpf-actions/install-dpf-server@v2.3 # zizmor: ignore[unpinned-uses]
+      if: ${{ inputs.build_examples == 'true' }}
       with:
         dpf-standalone-TOKEN: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
         ANSYS_VERSION : "252"
 
     - name: Set DPF environment
+      if: ${{ inputs.build_examples == 'true' }}
       run: |
         DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v252/ansys/dpf/server_2025_2_pre0"
         echo "Setting DPF server path to: ${DPF_PATH}"
@@ -137,7 +139,7 @@ runs:
         } >> "$GITHUB_ENV"
       shell: bash
     - name: Login to GitHub container registry
-      if: ${{ inputs.pydyna-run-container != '' }}
+      if: ${{ inputs.pydyna-run-container != '' && inputs.build_examples != 'false' }}
       uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
       with:
         registry: ghcr.io
@@ -145,7 +147,7 @@ runs:
         password: ${{ inputs.github-token }}
 
     - name: Pull PyDyna-run image
-      if: ${{ inputs.pydyna-run-container != '' }}
+      if: ${{ inputs.pydyna-run-container != '' && inputs.build_examples != 'false' }}
       env:
         DOCKER_IMAGE: ${{ inputs.pydyna-run-container }}
       run: |
@@ -175,6 +177,7 @@ runs:
         retention-days: 7
 
     - name: "Build the pdf documentation"
+      if: ${{ inputs.skip-pdf-build != 'true' }}
       shell: bash
       run: |
         source .venv/bin/activate
@@ -192,6 +195,7 @@ runs:
         max_strings: ${{ inputs.pdf-max-strings }}
 
     - name: Upload pdf documentation
+      if: ${{ inputs.skip-pdf-build != 'true' }}
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       with:
         name: documentation-pdf
