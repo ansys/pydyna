@@ -1,0 +1,17 @@
+Only link id's are not sufficiently detailed to cover all linking situations. Some links reference to different keywords depending on another field "conditional links". This branch contains the "agent_reference_revised_manual_json". It holds for each field of a keyword that represents a link the keywords which it is linking to including linking conditions if they apply.
+
+The json is partially generated with the copilot together with the indexed manual. Additonally I crosschecked for inconsistencies and resolved most of them. However there are still inconsistent link, by crosschecking with the manual it seems this is actually the case. There is a helper script check_link_dict.py in the branch that lists inconsistent links.
+
+We should update to the most recent kwd.json as soon as possible before finalizing this link map. Some fields name changed.
+
+Some comments on the inconsistent links below:
+
+-11/-12 --> links are indeed inconsistent (checked with manual)
+-2 --> some keywords still use the old master / slave convention. Probably a newer kwd.json will solve this. However those links will need to be updated manually
+-3 --> are indeed inconsistent (checked with manual)
+-7168 CONTROL_IMPLICIT_GENERAL_DYN / CONTROL_IMPLICIT_GENERAL_SPR CNSTN is not a link according to the manual…
+137 consistent an SET_IGA_FACE but with different sub keywords _XYZ or _UVW
+22 could probably be unified by using GT.0 --> DEFINE_VECTOR and LT.0 --> DEFINE_COORIDNATE
+83 inconsistent in case of INITIAL_VOLUME_FRACTION_GEOMETRY
+85 inconsistent in DEFINE_CPM_BAG_INTERACTION in fact very special as NSPEC does not reference 1 card 1 field but a certain line in a certain card of AIRBAG_PARTICLE
+97 inconsistent link (checked with manual)
