@@ -84,7 +84,7 @@ class RigidwallGeometricCylinderInteriorMotionDisplay(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_CYLINDER_INTERIOR_MOTION_DISPLAY"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
@@ -125,7 +125,7 @@ class RigidwallGeometricCylinderInteriorMotionDisplay(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = RigidwallGeometricCylinderInteriorMotionDisplay.option_specs[0],
+                option_spec = RigidwallGeometricCylinderInteriorMotionDisplay._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLGEOMETRICCYLINDERINTERIORMOTIONDISPLAY_OPTION0_CARD0,

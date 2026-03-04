@@ -45,7 +45,7 @@ class MatWinfrithConcreteReinforcement(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "WINFRITH_CONCRETE_REINFORCEMENT"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -59,7 +59,7 @@ class MatWinfrithConcreteReinforcement(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatWinfrithConcreteReinforcement.option_specs[0],
+                option_spec = MatWinfrithConcreteReinforcement._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATWINFRITHCONCRETEREINFORCEMENT_OPTION0_CARD0,

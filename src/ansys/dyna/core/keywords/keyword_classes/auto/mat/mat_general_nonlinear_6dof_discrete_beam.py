@@ -113,7 +113,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "GENERAL_NONLINEAR_6DOF_DISCRETE_BEAM"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -181,7 +181,7 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatGeneralNonlinear6DofDiscreteBeam.option_specs[0],
+                option_spec = MatGeneralNonlinear6DofDiscreteBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATGENERALNONLINEAR6DOFDISCRETEBEAM_OPTION0_CARD0,

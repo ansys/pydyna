@@ -52,7 +52,7 @@ class SetSolidGeneralCollect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "SOLID_GENERAL_COLLECT"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -70,7 +70,7 @@ class SetSolidGeneralCollect(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetSolidGeneralCollect.option_specs[0],
+                option_spec = SetSolidGeneralCollect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETSOLIDGENERALCOLLECT_OPTION0_CARD0,

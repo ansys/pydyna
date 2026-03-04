@@ -54,7 +54,7 @@ class MatClosedCellFoam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "CLOSED_CELL_FOAM"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -75,7 +75,7 @@ class MatClosedCellFoam(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatClosedCellFoam.option_specs[0],
+                option_spec = MatClosedCellFoam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCLOSEDCELLFOAM_OPTION0_CARD0,

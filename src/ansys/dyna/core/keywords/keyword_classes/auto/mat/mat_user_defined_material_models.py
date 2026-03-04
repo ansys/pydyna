@@ -102,7 +102,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "USER_DEFINED_MATERIAL_MODELS"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -136,7 +136,7 @@ class MatUserDefinedMaterialModels(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatUserDefinedMaterialModels.option_specs[0],
+                option_spec = MatUserDefinedMaterialModels._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATUSERDEFINEDMATERIALMODELS_OPTION0_CARD0,

@@ -51,7 +51,7 @@ class SetMulti_MaterialGroupList(KeywordBase):
 
     keyword = "SET"
     subkeyword = "MULTI-MATERIAL_GROUP_LIST"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -69,7 +69,7 @@ class SetMulti_MaterialGroupList(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetMulti_MaterialGroupList.option_specs[0],
+                option_spec = SetMulti_MaterialGroupList._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETMULTI_MATERIALGROUPLIST_OPTION0_CARD0,

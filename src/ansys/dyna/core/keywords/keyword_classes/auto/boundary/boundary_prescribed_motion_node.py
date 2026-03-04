@@ -59,7 +59,7 @@ class BoundaryPrescribedMotionNode(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "PRESCRIBED_MOTION_NODE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
@@ -85,7 +85,7 @@ class BoundaryPrescribedMotionNode(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = BoundaryPrescribedMotionNode.option_specs[0],
+                option_spec = BoundaryPrescribedMotionNode._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _BOUNDARYPRESCRIBEDMOTIONNODE_OPTION0_CARD0,

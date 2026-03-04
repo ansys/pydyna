@@ -57,7 +57,7 @@ class SensorDefineElementSetUpdate(KeywordBase):
 
     keyword = "SENSOR"
     subkeyword = "DEFINE_ELEMENT_SET_UPDATE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -79,7 +79,7 @@ class SensorDefineElementSetUpdate(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SensorDefineElementSetUpdate.option_specs[0],
+                option_spec = SensorDefineElementSetUpdate._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SENSORDEFINEELEMENTSETUPDATE_OPTION0_CARD0,

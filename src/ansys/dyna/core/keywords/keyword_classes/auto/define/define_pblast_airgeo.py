@@ -69,7 +69,7 @@ class DefinePblastAirgeo(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "PBLAST_AIRGEO"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -95,7 +95,7 @@ class DefinePblastAirgeo(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefinePblastAirgeo.option_specs[0],
+                option_spec = DefinePblastAirgeo._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEPBLASTAIRGEO_OPTION0_CARD0,

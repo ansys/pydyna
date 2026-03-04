@@ -50,6 +50,8 @@ SKIPPED_KEYWORDS = set(
         "ELEMENT_SOLID",
         "ELEMENT_SOLID_ORTHO (ten nodes format)",
         "ELEMENT_SOLID_ORTHO",
+        # SECTION_SHELL_MISC is handled as the MISC option on SECTION_SHELL
+        "SECTION_SHELL_MISC",
         # issue #184 - this is not documented in the manual
         # "CONTROL_TIMESTEP",CONTROL_TIMESTEP is in the kwd.json now and should be generated issue #629
     ]

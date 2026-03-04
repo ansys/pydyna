@@ -53,7 +53,7 @@ class DefineCurveEntity(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CURVE_ENTITY"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -71,7 +71,7 @@ class DefineCurveEntity(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineCurveEntity.option_specs[0],
+                option_spec = DefineCurveEntity._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECURVEENTITY_OPTION0_CARD0,

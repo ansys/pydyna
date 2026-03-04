@@ -92,7 +92,7 @@ class ConstrainedNodalRigidBodyInertiaSpc(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "NODAL_RIGID_BODY_INERTIA_SPC"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -133,7 +133,7 @@ class ConstrainedNodalRigidBodyInertiaSpc(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = ConstrainedNodalRigidBodyInertiaSpc.option_specs[0],
+                option_spec = ConstrainedNodalRigidBodyInertiaSpc._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONSTRAINEDNODALRIGIDBODYINERTIASPC_OPTION0_CARD0,

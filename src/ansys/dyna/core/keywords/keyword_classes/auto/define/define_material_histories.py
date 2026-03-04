@@ -44,7 +44,7 @@ class DefineMaterialHistories(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "MATERIAL_HISTORIES"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -58,7 +58,7 @@ class DefineMaterialHistories(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineMaterialHistories.option_specs[0],
+                option_spec = DefineMaterialHistories._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEMATERIALHISTORIES_OPTION0_CARD0,

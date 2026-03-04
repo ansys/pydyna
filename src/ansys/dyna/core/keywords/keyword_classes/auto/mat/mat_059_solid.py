@@ -90,7 +90,7 @@ class Mat059Solid(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "059_SOLID"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -124,7 +124,7 @@ class Mat059Solid(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = Mat059Solid.option_specs[0],
+                option_spec = Mat059Solid._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT059SOLID_OPTION0_CARD0,

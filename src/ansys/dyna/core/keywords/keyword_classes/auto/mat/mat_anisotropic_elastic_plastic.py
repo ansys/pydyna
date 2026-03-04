@@ -135,7 +135,7 @@ class MatAnisotropicElasticPlastic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ANISOTROPIC_ELASTIC_PLASTIC"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -184,7 +184,7 @@ class MatAnisotropicElasticPlastic(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatAnisotropicElasticPlastic.option_specs[0],
+                option_spec = MatAnisotropicElasticPlastic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATANISOTROPICELASTICPLASTIC_OPTION0_CARD0,

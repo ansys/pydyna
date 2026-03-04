@@ -63,7 +63,7 @@ class DefineNurbsCurve(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "NURBS_CURVE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -85,7 +85,7 @@ class DefineNurbsCurve(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineNurbsCurve.option_specs[0],
+                option_spec = DefineNurbsCurve._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINENURBSCURVE_OPTION0_CARD0,

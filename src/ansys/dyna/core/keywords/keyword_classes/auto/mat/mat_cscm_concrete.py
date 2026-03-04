@@ -57,7 +57,7 @@ class MatCscmConcrete(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "CSCM_CONCRETE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -79,7 +79,7 @@ class MatCscmConcrete(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatCscmConcrete.option_specs[0],
+                option_spec = MatCscmConcrete._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCSCMCONCRETE_OPTION0_CARD0,

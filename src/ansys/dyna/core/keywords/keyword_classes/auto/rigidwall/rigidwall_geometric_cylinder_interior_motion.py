@@ -77,7 +77,7 @@ class RigidwallGeometricCylinderInteriorMotion(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_CYLINDER_INTERIOR_MOTION"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
@@ -113,7 +113,7 @@ class RigidwallGeometricCylinderInteriorMotion(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = RigidwallGeometricCylinderInteriorMotion.option_specs[0],
+                option_spec = RigidwallGeometricCylinderInteriorMotion._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLGEOMETRICCYLINDERINTERIORMOTION_OPTION0_CARD0,

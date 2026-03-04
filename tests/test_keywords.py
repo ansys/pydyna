@@ -348,6 +348,23 @@ def test_section_shell(ref_string):
         x = shell.secid
 
 
+def test_section_shell_misc(ref_string):
+    shell = kwd.SectionShell(secid=1, elform=2, t1=1.0, t2=1.0, t3=1.0, t4=1.0, nip=5)
+    s = shell.sets[0]
+    s.options["MISC"].active = True
+    s.thkscl = 2.5
+    assert shell.write() == ref_string.test_section_shell_misc
+
+    # Verify MISC card appears between shell_card_2 (t1-t4) and CARD3 (nipp/nxdof)
+    # by checking that thkscl line precedes any CARD3 content in the output
+    output = shell.write()
+    lines = output.splitlines()
+    thkscl_line = next(i for i, l in enumerate(lines) if "2.5" in l)
+    # CARD3 (nipp/nxdof) is only active for elform in [101..105], so with elform=2
+    # the output ends at the thkscl card - confirm no card follows it
+    assert lines[-1].strip() == "2.5"
+
+
 
 def test_section_tshell(ref_string):
     tshell = kwd.SectionTShell(format=format_type.long)

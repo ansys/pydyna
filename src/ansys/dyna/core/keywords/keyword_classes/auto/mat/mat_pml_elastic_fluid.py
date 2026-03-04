@@ -43,7 +43,7 @@ class MatPmlElasticFluid(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "PML_ELASTIC_FLUID"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -57,7 +57,7 @@ class MatPmlElasticFluid(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatPmlElasticFluid.option_specs[0],
+                option_spec = MatPmlElasticFluid._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATPMLELASTICFLUID_OPTION0_CARD0,

@@ -95,7 +95,7 @@ class MatNonlinearOrthotropic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "NONLINEAR_ORTHOTROPIC"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -137,7 +137,7 @@ class MatNonlinearOrthotropic(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatNonlinearOrthotropic.option_specs[0],
+                option_spec = MatNonlinearOrthotropic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATNONLINEARORTHOTROPIC_OPTION0_CARD0,

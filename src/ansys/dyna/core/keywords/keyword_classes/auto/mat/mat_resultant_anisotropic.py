@@ -90,7 +90,7 @@ class MatResultantAnisotropic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "RESULTANT_ANISOTROPIC"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -124,7 +124,7 @@ class MatResultantAnisotropic(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatResultantAnisotropic.option_specs[0],
+                option_spec = MatResultantAnisotropic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATRESULTANTANISOTROPIC_OPTION0_CARD0,

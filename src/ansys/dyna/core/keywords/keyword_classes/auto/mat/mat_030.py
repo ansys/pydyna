@@ -59,7 +59,7 @@ class Mat030(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "030"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -81,7 +81,7 @@ class Mat030(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = Mat030.option_specs[0],
+                option_spec = Mat030._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT030_OPTION0_CARD0,

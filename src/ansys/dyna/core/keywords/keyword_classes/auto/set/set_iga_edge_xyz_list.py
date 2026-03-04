@@ -56,7 +56,7 @@ class SetIgaEdgeXyzList(KeywordBase):
 
     keyword = "SET"
     subkeyword = "IGA_EDGE_XYZ_LIST"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -74,7 +74,7 @@ class SetIgaEdgeXyzList(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetIgaEdgeXyzList.option_specs[0],
+                option_spec = SetIgaEdgeXyzList._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETIGAEDGEXYZLIST_OPTION0_CARD0,

@@ -50,7 +50,7 @@ class SectionDiscrete(KeywordBase):
 
     keyword = "SECTION"
     subkeyword = "DISCRETE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -68,7 +68,7 @@ class SectionDiscrete(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SectionDiscrete.option_specs[0],
+                option_spec = SectionDiscrete._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SECTIONDISCRETE_OPTION0_CARD0,

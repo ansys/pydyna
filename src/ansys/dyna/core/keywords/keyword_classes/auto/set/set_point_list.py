@@ -46,7 +46,7 @@ class SetPointList(KeywordBase):
 
     keyword = "SET"
     subkeyword = "POINT_LIST"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -64,7 +64,7 @@ class SetPointList(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetPointList.option_specs[0],
+                option_spec = SetPointList._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETPOINTLIST_OPTION0_CARD0,

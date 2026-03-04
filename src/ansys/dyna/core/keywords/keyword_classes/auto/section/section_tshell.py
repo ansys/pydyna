@@ -49,7 +49,7 @@ _SECTIONTSHELLCARDSET_OPTION0_CARD0 = (
 class SectionTshellCardSet(Cards):
     """ CardSet."""
 
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -72,7 +72,7 @@ class SectionTshellCardSet(Cards):
                 lambda: self.icomp == 1,
                 data = kwargs.get("bi")),
             OptionCardSet(
-                option_spec = SectionTshellCardSet.option_specs[0],
+                option_spec = SectionTshellCardSet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SECTIONTSHELLCARDSET_OPTION0_CARD0,
@@ -240,7 +240,7 @@ class SectionTShell(
         self._cards = [
             CardSet(
                 SectionTshellCardSet,
-                option_specs = SectionTshellCardSet.option_specs,
+                option_specs = SectionTshellCardSet._option_spec_list,
                 **kwargs
             ),
         ]

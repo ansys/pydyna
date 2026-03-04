@@ -72,7 +72,7 @@ class ContactForceTransducer(KeywordBase):
 
     keyword = "CONTACT"
     subkeyword = "FORCE_TRANSDUCER"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
@@ -98,7 +98,7 @@ class ContactForceTransducer(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = ContactForceTransducer.option_specs[0],
+                option_spec = ContactForceTransducer._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONTACTFORCETRANSDUCER_OPTION0_CARD0,

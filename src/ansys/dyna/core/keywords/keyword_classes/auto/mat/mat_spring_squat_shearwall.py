@@ -49,7 +49,7 @@ class MatSpringSquatShearwall(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "SPRING_SQUAT_SHEARWALL"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -66,7 +66,7 @@ class MatSpringSquatShearwall(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatSpringSquatShearwall.option_specs[0],
+                option_spec = MatSpringSquatShearwall._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSPRINGSQUATSHEARWALL_OPTION0_CARD0,

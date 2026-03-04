@@ -52,7 +52,7 @@ class DefineTableMatrix(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "TABLE_MATRIX"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -70,7 +70,7 @@ class DefineTableMatrix(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineTableMatrix.option_specs[0],
+                option_spec = DefineTableMatrix._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINETABLEMATRIX_OPTION0_CARD0,

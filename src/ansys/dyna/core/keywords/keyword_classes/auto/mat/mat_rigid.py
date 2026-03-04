@@ -62,7 +62,7 @@ class MatRigid(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "RIGID"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -84,7 +84,7 @@ class MatRigid(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatRigid.option_specs[0],
+                option_spec = MatRigid._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATRIGID_OPTION0_CARD0,

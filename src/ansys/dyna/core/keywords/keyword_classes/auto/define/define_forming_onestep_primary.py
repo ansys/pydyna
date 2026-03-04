@@ -41,7 +41,7 @@ class DefineFormingOnestepPrimary(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "FORMING_ONESTEP_PRIMARY"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -58,7 +58,7 @@ class DefineFormingOnestepPrimary(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineFormingOnestepPrimary.option_specs[0],
+                option_spec = DefineFormingOnestepPrimary._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEFORMINGONESTEPPRIMARY_OPTION0_CARD0,

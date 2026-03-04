@@ -109,7 +109,7 @@ class MatGursonJc(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "GURSON_JC"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -156,7 +156,7 @@ class MatGursonJc(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatGursonJc.option_specs[0],
+                option_spec = MatGursonJc._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATGURSONJC_OPTION0_CARD0,

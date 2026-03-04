@@ -99,7 +99,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ORTHOTROPIC_THERMAL_CURING"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -141,7 +141,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatOrthotropicThermalCuring.option_specs[0],
+                option_spec = MatOrthotropicThermalCuring._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATORTHOTROPICTHERMALCURING_OPTION0_CARD0,

@@ -72,7 +72,7 @@ class ContactForceTransducerPenalty(KeywordBase):
 
     keyword = "CONTACT"
     subkeyword = "FORCE_TRANSDUCER_PENALTY"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
@@ -98,7 +98,7 @@ class ContactForceTransducerPenalty(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = ContactForceTransducerPenalty.option_specs[0],
+                option_spec = ContactForceTransducerPenalty._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONTACTFORCETRANSDUCERPENALTY_OPTION0_CARD0,

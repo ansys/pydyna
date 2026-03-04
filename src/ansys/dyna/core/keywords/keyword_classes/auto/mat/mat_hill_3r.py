@@ -79,7 +79,7 @@ class MatHill3R(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "HILL_3R"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -112,7 +112,7 @@ class MatHill3R(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatHill3R.option_specs[0],
+                option_spec = MatHill3R._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATHILL3R_OPTION0_CARD0,

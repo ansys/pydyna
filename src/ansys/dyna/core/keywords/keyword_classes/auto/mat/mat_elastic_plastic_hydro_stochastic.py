@@ -91,7 +91,7 @@ class MatElasticPlasticHydroStochastic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ELASTIC_PLASTIC_HYDRO_STOCHASTIC"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -121,7 +121,7 @@ class MatElasticPlasticHydroStochastic(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatElasticPlasticHydroStochastic.option_specs[0],
+                option_spec = MatElasticPlasticHydroStochastic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATELASTICPLASTICHYDROSTOCHASTIC_OPTION0_CARD0,

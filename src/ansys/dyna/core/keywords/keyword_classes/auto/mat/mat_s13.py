@@ -47,7 +47,7 @@ class MatS13(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "S13"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -61,7 +61,7 @@ class MatS13(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatS13.option_specs[0],
+                option_spec = MatS13._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATS13_OPTION0_CARD0,

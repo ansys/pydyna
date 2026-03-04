@@ -115,7 +115,7 @@ class MatWood(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "WOOD"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -161,7 +161,7 @@ class MatWood(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatWood.option_specs[0],
+                option_spec = MatWood._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATWOOD_OPTION0_CARD0,

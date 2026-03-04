@@ -103,7 +103,7 @@ class MatElasticWithViscosity(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ELASTIC_WITH_VISCOSITY"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -140,7 +140,7 @@ class MatElasticWithViscosity(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatElasticWithViscosity.option_specs[0],
+                option_spec = MatElasticWithViscosity._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATELASTICWITHVISCOSITY_OPTION0_CARD0,

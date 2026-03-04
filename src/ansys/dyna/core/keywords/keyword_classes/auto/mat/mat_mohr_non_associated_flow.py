@@ -100,7 +100,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "MOHR_NON_ASSOCIATED_FLOW"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -145,7 +145,7 @@ class MatMohrNonAssociatedFlow(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatMohrNonAssociatedFlow.option_specs[0],
+                option_spec = MatMohrNonAssociatedFlow._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATMOHRNONASSOCIATEDFLOW_OPTION0_CARD0,

@@ -97,7 +97,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ELASTIC_PLASTIC_HYDRO_SPALL"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -131,7 +131,7 @@ class MatElasticPlasticHydroSpall(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatElasticPlasticHydroSpall.option_specs[0],
+                option_spec = MatElasticPlasticHydroSpall._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATELASTICPLASTICHYDROSPALL_OPTION0_CARD0,

@@ -106,7 +106,7 @@ class MatModifiedHoneycomb(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "MODIFIED_HONEYCOMB"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -154,7 +154,7 @@ class MatModifiedHoneycomb(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatModifiedHoneycomb.option_specs[0],
+                option_spec = MatModifiedHoneycomb._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATMODIFIEDHONEYCOMB_OPTION0_CARD0,

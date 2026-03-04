@@ -62,7 +62,7 @@ class MatDruckerPrager(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "DRUCKER_PRAGER"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -84,7 +84,7 @@ class MatDruckerPrager(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatDruckerPrager.option_specs[0],
+                option_spec = MatDruckerPrager._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATDRUCKERPRAGER_OPTION0_CARD0,

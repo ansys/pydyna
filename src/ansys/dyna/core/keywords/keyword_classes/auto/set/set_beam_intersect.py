@@ -42,7 +42,7 @@ class SetBeamIntersect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "BEAM_INTERSECT"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -66,7 +66,7 @@ class SetBeamIntersect(KeywordBase):
                 None,
                 data = kwargs.get("beams")),
             OptionCardSet(
-                option_spec = SetBeamIntersect.option_specs[0],
+                option_spec = SetBeamIntersect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETBEAMINTERSECT_OPTION0_CARD0,

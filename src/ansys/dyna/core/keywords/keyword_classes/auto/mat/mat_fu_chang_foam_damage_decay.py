@@ -73,7 +73,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "FU_CHANG_FOAM_DAMAGE_DECAY"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -102,7 +102,7 @@ class MatFuChangFoamDamageDecay(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatFuChangFoamDamageDecay.option_specs[0],
+                option_spec = MatFuChangFoamDamageDecay._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATFUCHANGFOAMDAMAGEDECAY_OPTION0_CARD0,

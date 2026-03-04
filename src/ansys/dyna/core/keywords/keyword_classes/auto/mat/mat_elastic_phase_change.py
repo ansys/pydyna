@@ -60,7 +60,7 @@ class MatElasticPhaseChange(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ELASTIC_PHASE_CHANGE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -82,7 +82,7 @@ class MatElasticPhaseChange(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatElasticPhaseChange.option_specs[0],
+                option_spec = MatElasticPhaseChange._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATELASTICPHASECHANGE_OPTION0_CARD0,

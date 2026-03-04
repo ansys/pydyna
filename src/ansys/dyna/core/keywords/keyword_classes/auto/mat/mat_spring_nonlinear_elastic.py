@@ -44,7 +44,7 @@ class MatSpringNonlinearElastic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "SPRING_NONLINEAR_ELASTIC"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -62,7 +62,7 @@ class MatSpringNonlinearElastic(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatSpringNonlinearElastic.option_specs[0],
+                option_spec = MatSpringNonlinearElastic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSPRINGNONLINEARELASTIC_OPTION0_CARD0,

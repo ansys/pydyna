@@ -57,7 +57,7 @@ class MatBrittleDamage(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "BRITTLE_DAMAGE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -75,7 +75,7 @@ class MatBrittleDamage(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatBrittleDamage.option_specs[0],
+                option_spec = MatBrittleDamage._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATBRITTLEDAMAGE_OPTION0_CARD0,

@@ -56,7 +56,7 @@ class SetIgaFaceXyz(KeywordBase):
 
     keyword = "SET"
     subkeyword = "IGA_FACE_XYZ"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -74,7 +74,7 @@ class SetIgaFaceXyz(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetIgaFaceXyz.option_specs[0],
+                option_spec = SetIgaFaceXyz._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETIGAFACEXYZ_OPTION0_CARD0,

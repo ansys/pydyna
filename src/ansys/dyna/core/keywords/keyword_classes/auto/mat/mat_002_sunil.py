@@ -94,7 +94,7 @@ class Mat002Sunil(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "002_SUNIL"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -128,7 +128,7 @@ class Mat002Sunil(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = Mat002Sunil.option_specs[0],
+                option_spec = Mat002Sunil._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT002SUNIL_OPTION0_CARD0,

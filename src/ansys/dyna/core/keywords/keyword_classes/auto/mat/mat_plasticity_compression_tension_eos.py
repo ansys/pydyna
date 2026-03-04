@@ -76,7 +76,7 @@ class MatPlasticityCompressionTensionEos(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "PLASTICITY_COMPRESSION_TENSION_EOS"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -112,7 +112,7 @@ class MatPlasticityCompressionTensionEos(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatPlasticityCompressionTensionEos.option_specs[0],
+                option_spec = MatPlasticityCompressionTensionEos._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATPLASTICITYCOMPRESSIONTENSIONEOS_OPTION0_CARD0,

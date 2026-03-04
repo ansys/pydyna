@@ -83,7 +83,7 @@ class DefineDeInjectBonded(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DE_INJECT_BONDED"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -118,7 +118,7 @@ class DefineDeInjectBonded(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineDeInjectBonded.option_specs[0],
+                option_spec = DefineDeInjectBonded._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDEINJECTBONDED_OPTION0_CARD0,

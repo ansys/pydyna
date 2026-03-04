@@ -55,7 +55,7 @@ class MatSccOnRcc(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "SCC_ON_RCC"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -73,7 +73,7 @@ class MatSccOnRcc(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatSccOnRcc.option_specs[0],
+                option_spec = MatSccOnRcc._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSCCONRCC_OPTION0_CARD0,

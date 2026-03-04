@@ -47,7 +47,7 @@ class MatNull(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "NULL"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -61,7 +61,7 @@ class MatNull(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatNull.option_specs[0],
+                option_spec = MatNull._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATNULL_OPTION0_CARD0,

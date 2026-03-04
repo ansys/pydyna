@@ -51,7 +51,7 @@ class SetBeamGenerate(KeywordBase):
 
     keyword = "SET"
     subkeyword = "BEAM_GENERATE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -69,7 +69,7 @@ class SetBeamGenerate(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetBeamGenerate.option_specs[0],
+                option_spec = SetBeamGenerate._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETBEAMGENERATE_OPTION0_CARD0,

@@ -45,7 +45,7 @@ class DefineBeamSolidCoupling(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "BEAM_SOLID_COUPLING"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -59,7 +59,7 @@ class DefineBeamSolidCoupling(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineBeamSolidCoupling.option_specs[0],
+                option_spec = DefineBeamSolidCoupling._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEBEAMSOLIDCOUPLING_OPTION0_CARD0,

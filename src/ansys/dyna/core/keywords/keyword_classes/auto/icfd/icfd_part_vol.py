@@ -45,7 +45,7 @@ class IcfdPartVol(KeywordBase):
 
     keyword = "ICFD"
     subkeyword = "PART_VOL"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -74,7 +74,7 @@ class IcfdPartVol(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = IcfdPartVol.option_specs[0],
+                option_spec = IcfdPartVol._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _ICFDPARTVOL_OPTION0_CARD0,

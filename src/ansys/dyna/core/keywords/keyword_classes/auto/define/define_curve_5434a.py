@@ -52,7 +52,7 @@ class DefineCurve5434A(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CURVE_5434A"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -70,7 +70,7 @@ class DefineCurve5434A(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineCurve5434A.option_specs[0],
+                option_spec = DefineCurve5434A._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECURVE5434A_OPTION0_CARD0,

@@ -52,7 +52,7 @@ class DefineFilter(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "FILTER"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -70,7 +70,7 @@ class DefineFilter(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineFilter.option_specs[0],
+                option_spec = DefineFilter._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEFILTER_OPTION0_CARD0,

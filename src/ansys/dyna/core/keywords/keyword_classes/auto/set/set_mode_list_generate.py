@@ -51,7 +51,7 @@ class SetModeListGenerate(KeywordBase):
 
     keyword = "SET"
     subkeyword = "MODE_LIST_GENERATE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -69,7 +69,7 @@ class SetModeListGenerate(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetModeListGenerate.option_specs[0],
+                option_spec = SetModeListGenerate._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETMODELISTGENERATE_OPTION0_CARD0,

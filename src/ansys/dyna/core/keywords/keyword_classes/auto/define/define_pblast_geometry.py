@@ -62,7 +62,7 @@ class DefinePblastGeometry(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "PBLAST_GEOMETRY"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -88,7 +88,7 @@ class DefinePblastGeometry(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefinePblastGeometry.option_specs[0],
+                option_spec = DefinePblastGeometry._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEPBLASTGEOMETRY_OPTION0_CARD0,

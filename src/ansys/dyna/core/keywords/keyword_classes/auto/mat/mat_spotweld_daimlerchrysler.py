@@ -68,7 +68,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "SPOTWELD_DAIMLERCHRYSLER"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -90,7 +90,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatSpotweldDaimlerchrysler.option_specs[0],
+                option_spec = MatSpotweldDaimlerchrysler._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSPOTWELDDAIMLERCHRYSLER_OPTION0_CARD0,

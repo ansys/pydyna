@@ -60,7 +60,7 @@ class MatPlasticityPolymer(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "PLASTICITY_POLYMER"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -87,7 +87,7 @@ class MatPlasticityPolymer(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatPlasticityPolymer.option_specs[0],
+                option_spec = MatPlasticityPolymer._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATPLASTICITYPOLYMER_OPTION0_CARD0,

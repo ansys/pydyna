@@ -126,7 +126,7 @@ class Mat4AMicromec(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "4A_MICROMEC"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -176,7 +176,7 @@ class Mat4AMicromec(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = Mat4AMicromec.option_specs[0],
+                option_spec = Mat4AMicromec._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT4AMICROMEC_OPTION0_CARD0,

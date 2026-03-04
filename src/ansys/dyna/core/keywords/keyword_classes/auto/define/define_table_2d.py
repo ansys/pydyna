@@ -47,7 +47,7 @@ class DefineTable2D(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "TABLE_2D"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -73,7 +73,7 @@ class DefineTable2D(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineTable2D.option_specs[0],
+                option_spec = DefineTable2D._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINETABLE2D_OPTION0_CARD0,

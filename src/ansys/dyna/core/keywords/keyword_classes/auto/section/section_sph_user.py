@@ -47,7 +47,7 @@ class SectionSphUser(KeywordBase):
 
     keyword = "SECTION"
     subkeyword = "SPH_USER"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -61,7 +61,7 @@ class SectionSphUser(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SectionSphUser.option_specs[0],
+                option_spec = SectionSphUser._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SECTIONSPHUSER_OPTION0_CARD0,

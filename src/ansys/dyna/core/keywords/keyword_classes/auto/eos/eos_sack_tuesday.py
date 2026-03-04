@@ -47,7 +47,7 @@ class EosSackTuesday(KeywordBase):
 
     keyword = "EOS"
     subkeyword = "SACK_TUESDAY"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -61,7 +61,7 @@ class EosSackTuesday(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = EosSackTuesday.option_specs[0],
+                option_spec = EosSackTuesday._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _EOSSACKTUESDAY_OPTION0_CARD0,

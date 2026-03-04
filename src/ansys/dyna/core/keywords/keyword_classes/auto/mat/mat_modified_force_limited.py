@@ -221,7 +221,7 @@ class MatModifiedForceLimited(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "MODIFIED_FORCE_LIMITED"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -363,7 +363,7 @@ class MatModifiedForceLimited(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatModifiedForceLimited.option_specs[0],
+                option_spec = MatModifiedForceLimited._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATMODIFIEDFORCELIMITED_OPTION0_CARD0,

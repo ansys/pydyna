@@ -45,7 +45,7 @@ class MatS08(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "S08"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -62,7 +62,7 @@ class MatS08(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatS08.option_specs[0],
+                option_spec = MatS08._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATS08_OPTION0_CARD0,

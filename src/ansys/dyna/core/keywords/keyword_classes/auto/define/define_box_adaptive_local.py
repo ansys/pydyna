@@ -73,7 +73,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "BOX_ADAPTIVE_LOCAL"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -105,7 +105,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineBoxAdaptiveLocal.option_specs[0],
+                option_spec = DefineBoxAdaptiveLocal._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEBOXADAPTIVELOCAL_OPTION0_CARD0,

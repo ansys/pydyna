@@ -89,7 +89,7 @@ class MatKinematicHardeningBarlat89Nlp(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "KINEMATIC_HARDENING_BARLAT89_NLP"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -123,7 +123,7 @@ class MatKinematicHardeningBarlat89Nlp(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatKinematicHardeningBarlat89Nlp.option_specs[0],
+                option_spec = MatKinematicHardeningBarlat89Nlp._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATKINEMATICHARDENINGBARLAT89NLP_OPTION0_CARD0,

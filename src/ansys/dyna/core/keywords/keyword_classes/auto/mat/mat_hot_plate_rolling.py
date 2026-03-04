@@ -91,7 +91,7 @@ class MatHotPlateRolling(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "HOT_PLATE_ROLLING"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -121,7 +121,7 @@ class MatHotPlateRolling(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatHotPlateRolling.option_specs[0],
+                option_spec = MatHotPlateRolling._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATHOTPLATEROLLING_OPTION0_CARD0,

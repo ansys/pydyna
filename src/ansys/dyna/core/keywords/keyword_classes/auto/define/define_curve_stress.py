@@ -58,7 +58,7 @@ class DefineCurveStress(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CURVE_STRESS"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -76,7 +76,7 @@ class DefineCurveStress(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineCurveStress.option_specs[0],
+                option_spec = DefineCurveStress._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECURVESTRESS_OPTION0_CARD0,

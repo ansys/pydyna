@@ -53,7 +53,7 @@ class MatBergstromBoyceRubber(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "BERGSTROM_BOYCE_RUBBER"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -71,7 +71,7 @@ class MatBergstromBoyceRubber(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatBergstromBoyceRubber.option_specs[0],
+                option_spec = MatBergstromBoyceRubber._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATBERGSTROMBOYCERUBBER_OPTION0_CARD0,

@@ -56,7 +56,7 @@ class SetIgaEdgeUvwListGenerate(KeywordBase):
 
     keyword = "SET"
     subkeyword = "IGA_EDGE_UVW_LIST_GENERATE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -74,7 +74,7 @@ class SetIgaEdgeUvwListGenerate(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetIgaEdgeUvwListGenerate.option_specs[0],
+                option_spec = SetIgaEdgeUvwListGenerate._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETIGAEDGEUVWLISTGENERATE_OPTION0_CARD0,

@@ -44,7 +44,7 @@ class MatSphImplicitStructure(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "SPH_IMPLICIT_STRUCTURE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -58,7 +58,7 @@ class MatSphImplicitStructure(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatSphImplicitStructure.option_specs[0],
+                option_spec = MatSphImplicitStructure._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSPHIMPLICITSTRUCTURE_OPTION0_CARD0,

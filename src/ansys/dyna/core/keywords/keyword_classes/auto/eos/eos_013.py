@@ -47,7 +47,7 @@ class Eos013(KeywordBase):
 
     keyword = "EOS"
     subkeyword = "013"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -61,7 +61,7 @@ class Eos013(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = Eos013.option_specs[0],
+                option_spec = Eos013._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _EOS013_OPTION0_CARD0,

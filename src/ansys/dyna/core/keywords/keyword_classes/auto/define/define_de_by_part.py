@@ -62,7 +62,7 @@ class DefineDeByPart(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DE_BY_PART"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -89,7 +89,7 @@ class DefineDeByPart(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineDeByPart.option_specs[0],
+                option_spec = DefineDeByPart._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDEBYPART_OPTION0_CARD0,

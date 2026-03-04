@@ -61,7 +61,7 @@ class DefineDeHbond(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DE_HBOND"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -83,7 +83,7 @@ class DefineDeHbond(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineDeHbond.option_specs[0],
+                option_spec = DefineDeHbond._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDEHBOND_OPTION0_CARD0,

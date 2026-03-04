@@ -158,7 +158,7 @@ class MatBarlatYld2000(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "BARLAT_YLD2000"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -222,7 +222,7 @@ class MatBarlatYld2000(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatBarlatYld2000.option_specs[0],
+                option_spec = MatBarlatYld2000._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATBARLATYLD2000_OPTION0_CARD0,

@@ -863,20 +863,22 @@
         "comment": "card 6 (mat146_discrete_card) is skipped because of the condition for mat 146 - which we cannot easily check here. Maybe that can be handled in a subclass. card 7 (discrete_dof_card) is skipped because its a duplicate of card 4. card 9 (duplicate_inertia_card) is skipped because its a duplicate of card 2"
     },
     "SECTION_SHELL": {
-        "add-option-disabled": [
+        "generation-options": {
+            "add-option": [
                 {
-                    "card-order": "pre/1",
+                    "card-order": {"position": "main", "after": "shell_card_2"},
                     "title-order": 1,
                     "cards": [
                         {
-                            "source": "additional-cards",
-                            "card-name": "CROSS_SECTION_ID"
+                            "source": "kwd-data",
+                            "keyword-name": "SECTION_SHELL_MISC",
+                            "card-index": 2,
+                            "target_ref": "misc_card"
                         }
                     ],
-                    "option-name": "ID"
+                    "option-name": "MISC"
                 }
             ],
-        "generation-options": {
             "card-set": [
                 {
                     "source-refs": [

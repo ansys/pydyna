@@ -84,7 +84,7 @@ class MatBammanDamage(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "BAMMAN_DAMAGE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -114,7 +114,7 @@ class MatBammanDamage(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatBammanDamage.option_specs[0],
+                option_spec = MatBammanDamage._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATBAMMANDAMAGE_OPTION0_CARD0,

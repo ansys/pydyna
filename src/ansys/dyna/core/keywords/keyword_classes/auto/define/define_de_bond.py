@@ -53,7 +53,7 @@ class DefineDeBond(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DE_BOND"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -71,7 +71,7 @@ class DefineDeBond(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineDeBond.option_specs[0],
+                option_spec = DefineDeBond._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDEBOND_OPTION0_CARD0,

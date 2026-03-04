@@ -107,7 +107,7 @@ class SectionShellXfem(KeywordBase):
 
     keyword = "SECTION"
     subkeyword = "SHELL_XFEM"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -148,7 +148,7 @@ class SectionShellXfem(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SectionShellXfem.option_specs[0],
+                option_spec = SectionShellXfem._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SECTIONSHELLXFEM_OPTION0_CARD0,

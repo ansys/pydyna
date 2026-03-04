@@ -46,7 +46,7 @@ class MatRamberg_Osgood(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "RAMBERG-OSGOOD"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -60,7 +60,7 @@ class MatRamberg_Osgood(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatRamberg_Osgood.option_specs[0],
+                option_spec = MatRamberg_Osgood._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATRAMBERG_OSGOOD_OPTION0_CARD0,

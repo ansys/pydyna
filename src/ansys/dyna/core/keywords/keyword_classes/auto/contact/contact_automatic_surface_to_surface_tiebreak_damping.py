@@ -197,7 +197,7 @@ class ContactAutomaticSurfaceToSurfaceTiebreakDamping(KeywordBase):
 
     keyword = "CONTACT"
     subkeyword = "AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK_DAMPING"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("ID", "pre/2", 1),
         OptionSpec("MPP", "pre/1", 2),
         OptionSpec("A", "post/1", 0),
@@ -247,7 +247,7 @@ class ContactAutomaticSurfaceToSurfaceTiebreakDamping(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping.option_specs[0],
+                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONTACTAUTOMATICSURFACETOSURFACETIEBREAKDAMPING_OPTION0_CARD0,
@@ -257,7 +257,7 @@ class ContactAutomaticSurfaceToSurfaceTiebreakDamping(KeywordBase):
                 **kwargs
             ),
             OptionCardSet(
-                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping.option_specs[1],
+                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping._option_spec_list[1],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONTACTAUTOMATICSURFACETOSURFACETIEBREAKDAMPING_OPTION1_CARD0,
@@ -272,7 +272,7 @@ class ContactAutomaticSurfaceToSurfaceTiebreakDamping(KeywordBase):
                 **kwargs
             ),
             OptionCardSet(
-                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping.option_specs[2],
+                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping._option_spec_list[2],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONTACTAUTOMATICSURFACETOSURFACETIEBREAKDAMPING_OPTION2_CARD0,
@@ -282,7 +282,7 @@ class ContactAutomaticSurfaceToSurfaceTiebreakDamping(KeywordBase):
                 **kwargs
             ),
             OptionCardSet(
-                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping.option_specs[3],
+                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping._option_spec_list[3],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONTACTAUTOMATICSURFACETOSURFACETIEBREAKDAMPING_OPTION3_CARD0,
@@ -292,7 +292,7 @@ class ContactAutomaticSurfaceToSurfaceTiebreakDamping(KeywordBase):
                 **kwargs
             ),
             OptionCardSet(
-                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping.option_specs[4],
+                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping._option_spec_list[4],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONTACTAUTOMATICSURFACETOSURFACETIEBREAKDAMPING_OPTION4_CARD0,
@@ -302,7 +302,7 @@ class ContactAutomaticSurfaceToSurfaceTiebreakDamping(KeywordBase):
                 **kwargs
             ),
             OptionCardSet(
-                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping.option_specs[5],
+                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping._option_spec_list[5],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONTACTAUTOMATICSURFACETOSURFACETIEBREAKDAMPING_OPTION5_CARD0,
@@ -312,7 +312,7 @@ class ContactAutomaticSurfaceToSurfaceTiebreakDamping(KeywordBase):
                 **kwargs
             ),
             OptionCardSet(
-                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping.option_specs[6],
+                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping._option_spec_list[6],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONTACTAUTOMATICSURFACETOSURFACETIEBREAKDAMPING_OPTION6_CARD0,
@@ -322,7 +322,7 @@ class ContactAutomaticSurfaceToSurfaceTiebreakDamping(KeywordBase):
                 **kwargs
             ),
             OptionCardSet(
-                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping.option_specs[7],
+                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping._option_spec_list[7],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONTACTAUTOMATICSURFACETOSURFACETIEBREAKDAMPING_OPTION7_CARD0,
@@ -332,7 +332,7 @@ class ContactAutomaticSurfaceToSurfaceTiebreakDamping(KeywordBase):
                 **kwargs
             ),
             OptionCardSet(
-                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping.option_specs[8],
+                option_spec = ContactAutomaticSurfaceToSurfaceTiebreakDamping._option_spec_list[8],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONTACTAUTOMATICSURFACETOSURFACETIEBREAKDAMPING_OPTION8_CARD0,

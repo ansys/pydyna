@@ -63,7 +63,7 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "PRESCRIBED_MOTION_RIGID_LOCAL_BNDOUT2DYNAIN"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
@@ -91,7 +91,7 @@ class BoundaryPrescribedMotionRigidLocalBndout2Dynain(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = BoundaryPrescribedMotionRigidLocalBndout2Dynain.option_specs[0],
+                option_spec = BoundaryPrescribedMotionRigidLocalBndout2Dynain._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _BOUNDARYPRESCRIBEDMOTIONRIGIDLOCALBNDOUT2DYNAIN_OPTION0_CARD0,

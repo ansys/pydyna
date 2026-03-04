@@ -71,7 +71,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "NON_QUADRATIC_FAILURE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -97,7 +97,7 @@ class MatNonQuadraticFailure(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatNonQuadraticFailure.option_specs[0],
+                option_spec = MatNonQuadraticFailure._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATNONQUADRATICFAILURE_OPTION0_CARD0,

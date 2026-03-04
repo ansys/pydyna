@@ -96,7 +96,7 @@ class Mat136Std(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "136_STD"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -134,7 +134,7 @@ class Mat136Std(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = Mat136Std.option_specs[0],
+                option_spec = Mat136Std._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT136STD_OPTION0_CARD0,

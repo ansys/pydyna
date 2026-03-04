@@ -68,7 +68,7 @@ class SectionPointSourceMixture(KeywordBase):
 
     keyword = "SECTION"
     subkeyword = "POINT_SOURCE_MIXTURE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -108,7 +108,7 @@ class SectionPointSourceMixture(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SectionPointSourceMixture.option_specs[0],
+                option_spec = SectionPointSourceMixture._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SECTIONPOINTSOURCEMIXTURE_OPTION0_CARD0,

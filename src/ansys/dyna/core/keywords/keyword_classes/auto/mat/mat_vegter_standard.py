@@ -96,7 +96,7 @@ class MatVegterStandard(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "VEGTER_STANDARD"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -134,7 +134,7 @@ class MatVegterStandard(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatVegterStandard.option_specs[0],
+                option_spec = MatVegterStandard._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATVEGTERSTANDARD_OPTION0_CARD0,

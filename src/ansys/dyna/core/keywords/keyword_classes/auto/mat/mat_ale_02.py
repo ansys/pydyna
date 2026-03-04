@@ -47,7 +47,7 @@ class MatAle02(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ALE_02"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -61,7 +61,7 @@ class MatAle02(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatAle02.option_specs[0],
+                option_spec = MatAle02._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATALE02_OPTION0_CARD0,

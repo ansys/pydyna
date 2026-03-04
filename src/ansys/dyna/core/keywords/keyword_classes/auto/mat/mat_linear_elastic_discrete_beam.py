@@ -65,7 +65,7 @@ class MatLinearElasticDiscreteBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "LINEAR_ELASTIC_DISCRETE_BEAM"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -87,7 +87,7 @@ class MatLinearElasticDiscreteBeam(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatLinearElasticDiscreteBeam.option_specs[0],
+                option_spec = MatLinearElasticDiscreteBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATLINEARELASTICDISCRETEBEAM_OPTION0_CARD0,

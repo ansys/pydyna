@@ -78,7 +78,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     keyword = "EOS"
     subkeyword = "IGNITION_AND_GROWTH_OF_REACTION_IN_HE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -104,7 +104,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = EosIgnitionAndGrowthOfReactionInHe.option_specs[0],
+                option_spec = EosIgnitionAndGrowthOfReactionInHe._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _EOSIGNITIONANDGROWTHOFREACTIONINHE_OPTION0_CARD0,

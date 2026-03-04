@@ -103,7 +103,7 @@ class MatCscm(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "CSCM"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -141,7 +141,7 @@ class MatCscm(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatCscm.option_specs[0],
+                option_spec = MatCscm._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCSCM_OPTION0_CARD0,

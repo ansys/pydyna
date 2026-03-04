@@ -89,7 +89,7 @@ class Mat011Lund(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "011_LUND"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -119,7 +119,7 @@ class Mat011Lund(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = Mat011Lund.option_specs[0],
+                option_spec = Mat011Lund._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT011LUND_OPTION0_CARD0,

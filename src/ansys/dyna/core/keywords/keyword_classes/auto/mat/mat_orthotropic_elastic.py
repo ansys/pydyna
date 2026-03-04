@@ -78,7 +78,7 @@ class MatOrthotropicElastic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ORTHOTROPIC_ELASTIC"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -104,7 +104,7 @@ class MatOrthotropicElastic(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatOrthotropicElastic.option_specs[0],
+                option_spec = MatOrthotropicElastic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATORTHOTROPICELASTIC_OPTION0_CARD0,

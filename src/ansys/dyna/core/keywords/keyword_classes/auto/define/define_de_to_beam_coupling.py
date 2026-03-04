@@ -50,7 +50,7 @@ class DefineDeToBeamCoupling(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DE_TO_BEAM_COUPLING"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -68,7 +68,7 @@ class DefineDeToBeamCoupling(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineDeToBeamCoupling.option_specs[0],
+                option_spec = DefineDeToBeamCoupling._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDETOBEAMCOUPLING_OPTION0_CARD0,

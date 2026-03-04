@@ -50,7 +50,7 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "PRESCRIBED_MOTION_SET_SEGMENT"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
@@ -68,7 +68,7 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = BoundaryPrescribedMotionSetSegment.option_specs[0],
+                option_spec = BoundaryPrescribedMotionSetSegment._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _BOUNDARYPRESCRIBEDMOTIONSETSEGMENT_OPTION0_CARD0,

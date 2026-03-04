@@ -43,7 +43,7 @@ class SectionAle2D(KeywordBase):
 
     keyword = "SECTION"
     subkeyword = "ALE2D"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -57,7 +57,7 @@ class SectionAle2D(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SectionAle2D.option_specs[0],
+                option_spec = SectionAle2D._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SECTIONALE2D_OPTION0_CARD0,

@@ -88,7 +88,7 @@ class Mat1222D(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "122_2D"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -122,7 +122,7 @@ class Mat1222D(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = Mat1222D.option_specs[0],
+                option_spec = Mat1222D._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT1222D_OPTION0_CARD0,

@@ -54,7 +54,7 @@ class DefineCurve(
 
     keyword = "DEFINE"
     subkeyword = "CURVE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -77,7 +77,7 @@ class DefineCurve(
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineCurve.option_specs[0],
+                option_spec = DefineCurve._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECURVE_OPTION0_CARD0,

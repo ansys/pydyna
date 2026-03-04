@@ -45,7 +45,7 @@ class DefineCurveFldFromTriaxialLimit(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CURVE_FLD_FROM_TRIAXIAL_LIMIT"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -63,7 +63,7 @@ class DefineCurveFldFromTriaxialLimit(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineCurveFldFromTriaxialLimit.option_specs[0],
+                option_spec = DefineCurveFldFromTriaxialLimit._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECURVEFLDFROMTRIAXIALLIMIT_OPTION0_CARD0,

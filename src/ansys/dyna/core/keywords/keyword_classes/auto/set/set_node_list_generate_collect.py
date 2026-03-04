@@ -58,7 +58,7 @@ class SetNodeListGenerateCollect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "NODE_LIST_GENERATE_COLLECT"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -76,7 +76,7 @@ class SetNodeListGenerateCollect(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetNodeListGenerateCollect.option_specs[0],
+                option_spec = SetNodeListGenerateCollect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETNODELISTGENERATECOLLECT_OPTION0_CARD0,

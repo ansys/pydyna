@@ -42,7 +42,7 @@ class AddOptionSettings:
     """Configuration for adding keyword options."""
 
     name: str
-    card_order: str
+    card_order: "str | dict"
     title_order: int
     cards: List[Dict[str, Any]]
     func: Optional[str] = None
@@ -67,7 +67,23 @@ class AddOptionSettings:
             "type": "object",
             "properties": {
                 "option-name": {"type": "string", "description": "Name of the option (e.g., 'ID')"},
-                "card-order": {"type": "string", "description": "Card position URI: 'pre/N' (before main cards) or 'post/N' (after main cards)"},
+                "card-order": {
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "description": "Card position URI: 'pre/N' (before main cards) or 'post/N' (after main cards)",
+                        },
+                        {
+                            "type": "object",
+                            "description": "Main-card insertion: {\"position\": \"main\", \"after\": \"<label>\"} inserts after the labeled card",
+                            "properties": {
+                                "position": {"type": "string", "enum": ["main"]},
+                                "after": {"type": "string", "description": "Label of the card after which to insert"},
+                            },
+                            "required": ["position", "after"],
+                        },
+                    ]
+                },
                 "title-order": {"type": "integer", "description": "Order in keyword title"},
                 "cards": {
                     "type": "array",
@@ -144,12 +160,32 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
                 card["func"] = card["active"]
             return card
 
+        def resolve_card_order(raw_order) -> str:
+            """Resolve card-order to a position URI string.
+
+            Accepts:
+            - A plain string URI like ``'pre/N'`` or ``'post/N'`` (passed through).
+            - A dict ``{"position": "main", "after": "<label>"}`` which resolves the
+              label to its current index in ``kwd_data.cards`` and returns ``'main/<int>'``.
+            """
+            if isinstance(raw_order, dict):
+                position = raw_order["position"]
+                if position == "main":
+                    label = raw_order["after"]
+                    registry = kwd_data.label_registry
+                    idx = registry.resolve_index(label, kwd_data.cards)
+                    return f"main/{idx}"
+                raise ValueError(f"Unknown dict card-order position: '{position}'")
+            # Plain string URI — pass through as-is
+            return raw_order
+
         new_options = []
         for option_settings in typed_settings:
             cards = [get_card(card) for card in option_settings["cards"]]
             cards = [expand(card) for card in cards]
+            card_order = resolve_card_order(option_settings["card-order"])
             new_option = {
-                "card_order": option_settings["card-order"],
+                "card_order": card_order,
                 "title_order": option_settings["title-order"],
                 "name": option_settings["option-name"],
                 "cards": cards,

@@ -60,7 +60,7 @@ class DefineFormingBlankmesh(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "FORMING_BLANKMESH"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -83,7 +83,7 @@ class DefineFormingBlankmesh(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineFormingBlankmesh.option_specs[0],
+                option_spec = DefineFormingBlankmesh._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEFORMINGBLANKMESH_OPTION0_CARD0,

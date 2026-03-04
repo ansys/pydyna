@@ -104,7 +104,7 @@ class Mat3ParameterBarlat(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "3PARAMETER_BARLAT"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -144,7 +144,7 @@ class Mat3ParameterBarlat(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = Mat3ParameterBarlat.option_specs[0],
+                option_spec = Mat3ParameterBarlat._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT3PARAMETERBARLAT_OPTION0_CARD0,

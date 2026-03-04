@@ -91,7 +91,7 @@ class DefineParticleBlast(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "PARTICLE_BLAST"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -128,7 +128,7 @@ class DefineParticleBlast(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineParticleBlast.option_specs[0],
+                option_spec = DefineParticleBlast._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEPARTICLEBLAST_OPTION0_CARD0,

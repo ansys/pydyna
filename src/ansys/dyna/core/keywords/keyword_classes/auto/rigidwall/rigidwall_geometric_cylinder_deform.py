@@ -85,7 +85,7 @@ class RigidwallGeometricCylinderDeform(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_CYLINDER_DEFORM"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
@@ -128,7 +128,7 @@ class RigidwallGeometricCylinderDeform(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = RigidwallGeometricCylinderDeform.option_specs[0],
+                option_spec = RigidwallGeometricCylinderDeform._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLGEOMETRICCYLINDERDEFORM_OPTION0_CARD0,

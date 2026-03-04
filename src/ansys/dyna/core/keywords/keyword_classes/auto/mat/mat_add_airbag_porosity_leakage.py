@@ -48,7 +48,7 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ADD_AIRBAG_POROSITY_LEAKAGE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -65,7 +65,7 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatAddAirbagPorosityLeakage.option_specs[0],
+                option_spec = MatAddAirbagPorosityLeakage._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATADDAIRBAGPOROSITYLEAKAGE_OPTION0_CARD0,

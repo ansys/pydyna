@@ -47,7 +47,7 @@ _HOURGLASSCARDSET_OPTION0_CARD0 = (
 class HourglassCardSet(Cards):
     """ CardSet."""
 
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -62,7 +62,7 @@ class HourglassCardSet(Cards):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = HourglassCardSet.option_specs[0],
+                option_spec = HourglassCardSet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _HOURGLASSCARDSET_OPTION0_CARD0,
@@ -208,7 +208,7 @@ class Hourglass(KeywordBase):
         self._cards = [
             CardSet(
                 HourglassCardSet,
-                option_specs = HourglassCardSet.option_specs,
+                option_specs = HourglassCardSet._option_spec_list,
                 **kwargs
             ),
         ]

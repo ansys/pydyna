@@ -58,7 +58,7 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "SEGMENT_GENERAL_COLLECT"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -76,7 +76,7 @@ class SetSegmentGeneralCollect(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetSegmentGeneralCollect.option_specs[0],
+                option_spec = SetSegmentGeneralCollect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETSEGMENTGENERALCOLLECT_OPTION0_CARD0,

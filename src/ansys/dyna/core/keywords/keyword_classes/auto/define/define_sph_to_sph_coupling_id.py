@@ -52,7 +52,7 @@ class DefineSphToSphCouplingId(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "SPH_TO_SPH_COUPLING_ID"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -70,7 +70,7 @@ class DefineSphToSphCouplingId(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineSphToSphCouplingId.option_specs[0],
+                option_spec = DefineSphToSphCouplingId._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINESPHTOSPHCOUPLINGID_OPTION0_CARD0,

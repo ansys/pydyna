@@ -57,7 +57,7 @@ class MatArrudaBoyceRubber(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ARRUDA_BOYCE_RUBBER"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -82,7 +82,7 @@ class MatArrudaBoyceRubber(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatArrudaBoyceRubber.option_specs[0],
+                option_spec = MatArrudaBoyceRubber._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATARRUDABOYCERUBBER_OPTION0_CARD0,

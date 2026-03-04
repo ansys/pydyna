@@ -52,7 +52,7 @@ class SetPartListGenerateIncrement(KeywordBase):
 
     keyword = "SET"
     subkeyword = "PART_LIST_GENERATE_INCREMENT"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -74,7 +74,7 @@ class SetPartListGenerateIncrement(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetPartListGenerateIncrement.option_specs[0],
+                option_spec = SetPartListGenerateIncrement._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETPARTLISTGENERATEINCREMENT_OPTION0_CARD0,

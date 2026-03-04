@@ -63,7 +63,7 @@ class DefineHexSpotweldAssembly16(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "HEX_SPOTWELD_ASSEMBLY_16"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -103,7 +103,7 @@ class DefineHexSpotweldAssembly16(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineHexSpotweldAssembly16.option_specs[0],
+                option_spec = DefineHexSpotweldAssembly16._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEHEXSPOTWELDASSEMBLY16_OPTION0_CARD0,

@@ -55,7 +55,7 @@ class MatTransverselyAnisotropicElasticPlasticEchange(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "TRANSVERSELY_ANISOTROPIC_ELASTIC_PLASTIC_ECHANGE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -77,7 +77,7 @@ class MatTransverselyAnisotropicElasticPlasticEchange(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatTransverselyAnisotropicElasticPlasticEchange.option_specs[0],
+                option_spec = MatTransverselyAnisotropicElasticPlasticEchange._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATTRANSVERSELYANISOTROPICELASTICPLASTICECHANGE_OPTION0_CARD0,

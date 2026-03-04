@@ -63,7 +63,7 @@ class DefineBoxDrawbeadLocal(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "BOX_DRAWBEAD_LOCAL"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -89,7 +89,7 @@ class DefineBoxDrawbeadLocal(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineBoxDrawbeadLocal.option_specs[0],
+                option_spec = DefineBoxDrawbeadLocal._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEBOXDRAWBEADLOCAL_OPTION0_CARD0,

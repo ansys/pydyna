@@ -55,7 +55,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     keyword = "SET"
     subkeyword = "NODE_ADD_ADVANCED"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -73,7 +73,7 @@ class SetNodeAddAdvanced(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetNodeAddAdvanced.option_specs[0],
+                option_spec = SetNodeAddAdvanced._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETNODEADDADVANCED_OPTION0_CARD0,

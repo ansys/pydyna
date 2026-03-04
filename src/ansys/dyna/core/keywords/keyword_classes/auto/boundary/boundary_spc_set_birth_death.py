@@ -55,7 +55,7 @@ class BoundarySpcSetBirthDeath(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "SPC_SET_BIRTH_DEATH"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
@@ -77,7 +77,7 @@ class BoundarySpcSetBirthDeath(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = BoundarySpcSetBirthDeath.option_specs[0],
+                option_spec = BoundarySpcSetBirthDeath._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _BOUNDARYSPCSETBIRTHDEATH_OPTION0_CARD0,

@@ -91,7 +91,7 @@ class MatCazacuBarlat(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "CAZACU_BARLAT"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -124,7 +124,7 @@ class MatCazacuBarlat(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatCazacuBarlat.option_specs[0],
+                option_spec = MatCazacuBarlat._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCAZACUBARLAT_OPTION0_CARD0,

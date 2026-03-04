@@ -43,7 +43,7 @@ class EosMurnaghan(KeywordBase):
 
     keyword = "EOS"
     subkeyword = "MURNAGHAN"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -57,7 +57,7 @@ class EosMurnaghan(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = EosMurnaghan.option_specs[0],
+                option_spec = EosMurnaghan._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _EOSMURNAGHAN_OPTION0_CARD0,

@@ -49,7 +49,7 @@ class DefineVector(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "VECTOR"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -66,7 +66,7 @@ class DefineVector(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineVector.option_specs[0],
+                option_spec = DefineVector._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEVECTOR_OPTION0_CARD0,

@@ -75,7 +75,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "SPOTWELD_RUPTURE_PARAMETER"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -110,7 +110,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineSpotweldRuptureParameter.option_specs[0],
+                option_spec = DefineSpotweldRuptureParameter._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINESPOTWELDRUPTUREPARAMETER_OPTION0_CARD0,

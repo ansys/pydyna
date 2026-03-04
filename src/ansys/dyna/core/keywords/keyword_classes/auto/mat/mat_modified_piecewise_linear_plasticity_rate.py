@@ -92,7 +92,7 @@ class MatModifiedPiecewiseLinearPlasticityRate(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "MODIFIED_PIECEWISE_LINEAR_PLASTICITY_RATE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -128,7 +128,7 @@ class MatModifiedPiecewiseLinearPlasticityRate(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatModifiedPiecewiseLinearPlasticityRate.option_specs[0],
+                option_spec = MatModifiedPiecewiseLinearPlasticityRate._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATMODIFIEDPIECEWISELINEARPLASTICITYRATE_OPTION0_CARD0,

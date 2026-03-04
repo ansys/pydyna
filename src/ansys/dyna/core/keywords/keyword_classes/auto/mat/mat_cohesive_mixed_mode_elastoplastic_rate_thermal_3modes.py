@@ -90,7 +90,7 @@ class MatCohesiveMixedModeElastoplasticRateThermal3Modes(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "COHESIVE_MIXED_MODE_ELASTOPLASTIC_RATE_THERMAL_3MODES"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -128,7 +128,7 @@ class MatCohesiveMixedModeElastoplasticRateThermal3Modes(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatCohesiveMixedModeElastoplasticRateThermal3Modes.option_specs[0],
+                option_spec = MatCohesiveMixedModeElastoplasticRateThermal3Modes._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCOHESIVEMIXEDMODEELASTOPLASTICRATETHERMAL3MODES_OPTION0_CARD0,

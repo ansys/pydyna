@@ -93,7 +93,7 @@ class MatPowder(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "POWDER"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -138,7 +138,7 @@ class MatPowder(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatPowder.option_specs[0],
+                option_spec = MatPowder._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATPOWDER_OPTION0_CARD0,

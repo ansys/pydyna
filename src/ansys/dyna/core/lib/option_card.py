@@ -276,7 +276,7 @@ class Options:
         return OptionAPI(self._api, name)
 
     def __repr__(self) -> str:
-        option_specs = self._api.option_specs
+        option_specs = list(self._api.option_specs)
         if len(option_specs) == 0:
             return ""
         sio = io.StringIO()

@@ -53,7 +53,7 @@ class SensorDefineNodeSetUpdate(KeywordBase):
 
     keyword = "SENSOR"
     subkeyword = "DEFINE_NODE_SET_UPDATE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -75,7 +75,7 @@ class SensorDefineNodeSetUpdate(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SensorDefineNodeSetUpdate.option_specs[0],
+                option_spec = SensorDefineNodeSetUpdate._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SENSORDEFINENODESETUPDATE_OPTION0_CARD0,

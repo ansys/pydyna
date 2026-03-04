@@ -30,21 +30,22 @@ class CardPlacement(Enum):
     """Placement of an option card set relative to the keyword's main cards."""
 
     PRE = "pre"
+    MAIN = "main"
     POST = "post"
 
     @property
     def _sort_key(self) -> int:
-        """Numeric key for ordering: PRE sorts before POST."""
-        return {"pre": 0, "post": 1}[self.value]
+        """Numeric key for ordering: PRE < MAIN < POST."""
+        return {"pre": 0, "main": 1, "post": 2}[self.value]
 
     @property
     def _index_ascending(self) -> bool:
         """Whether index sorts ascending (True) or descending (False) within this placement.
 
-        For ``post``, higher index means later → ascending order.
+        For ``post`` and ``main``, higher index means later → ascending order.
         For ``pre``,  higher index means earlier (further before main cards) → descending order.
         """
-        return self.value == "post"
+        return self.value in ("post", "main")
 
 
 @dataclass(frozen=True)
@@ -58,23 +59,27 @@ class CardPosition:
 
     Ordering rules
     --------------
-    - ``post`` options sort by ascending index: ``post/1`` comes before ``post/2``.
     - ``pre`` options sort by **descending** index: ``pre/2`` comes before ``pre/1``,
       because a higher N means the card set sits further before the main cards.
       This matches the legacy convention where ``-2`` sorted before ``-1``.
-    - All ``pre`` option sets appear before all main cards, and all ``post`` option
-      sets appear after all main cards.
+    - ``main/N`` options are interleaved *within* the main cards: the option card set
+      is inserted immediately after the main card at 0-based position N.
+      Multiple ``main`` options at the same index are sorted by ascending N (i.e.
+      insertion order follows ascending index within the same slot).
+    - ``post`` options sort by ascending index: ``post/1`` comes before ``post/2``.
 
     Examples
     --------
-    - ``"pre/2"``  -- placed before ``"pre/1"`` (further before main cards)
-    - ``"pre/1"``  -- placed immediately before main cards
-    - ``"post/1"`` -- placed immediately after main cards
-    - ``"post/3"`` -- placed after ``"post/1"`` and ``"post/2"``
+    - ``"pre/2"``   -- placed before ``"pre/1"`` (further before main cards)
+    - ``"pre/1"``   -- placed immediately before main cards
+    - ``"main/2"``  -- inserted after the 3rd main card (0-based index 2)
+    - ``"post/1"``  -- placed immediately after all main cards
+    - ``"post/3"``  -- placed after ``"post/1"`` and ``"post/2"``
 
     Legacy integer values are accepted for backward compatibility:
     negative integers map to ``pre`` (e.g. ``-2`` → ``"pre/2"``),
     positive integers map to ``post`` (e.g. ``1`` → ``"post/1"``).
+    There is no legacy integer form for ``main``.
     """
 
     placement: CardPlacement
@@ -92,7 +97,7 @@ class CardPosition:
             return cls(CardPlacement(placement_str), int(index_str))
         except (ValueError, KeyError) as exc:
             raise ValueError(
-                f"Invalid card position URI '{s}'. Expected 'pre/<n>' or 'post/<n>'."
+                f"Invalid card position URI '{s}'. Expected 'pre/<n>', 'main/<n>', or 'post/<n>'."
             ) from exc
 
     @classmethod

@@ -52,7 +52,7 @@ class SetSegment(KeywordBase):
 
     keyword = "SET"
     subkeyword = "SEGMENT"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -87,7 +87,7 @@ class SetSegment(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetSegment.option_specs[0],
+                option_spec = SetSegment._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETSEGMENT_OPTION0_CARD0,

@@ -47,7 +47,7 @@ class {{card_set.name}}(Cards):
     """{{card_set.title}} CardSet."""
 {% if card_set.options %}
 
-    option_specs = [
+    _option_spec_list = [
 {% for option in card_set.options %}
         OptionSpec("{{option.name}}", "{{option.card_order}}", {{option.title_order}}),
 {% endfor %}

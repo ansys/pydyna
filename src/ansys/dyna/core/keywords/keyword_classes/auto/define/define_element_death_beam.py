@@ -49,7 +49,7 @@ class DefineElementDeathBeam(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "ELEMENT_DEATH_BEAM"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -68,7 +68,7 @@ class DefineElementDeathBeam(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineElementDeathBeam.option_specs[0],
+                option_spec = DefineElementDeathBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEELEMENTDEATHBEAM_OPTION0_CARD0,

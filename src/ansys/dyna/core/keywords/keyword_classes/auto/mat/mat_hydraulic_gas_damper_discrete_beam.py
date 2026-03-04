@@ -56,7 +56,7 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "HYDRAULIC_GAS_DAMPER_DISCRETE_BEAM"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -77,7 +77,7 @@ class MatHydraulicGasDamperDiscreteBeam(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatHydraulicGasDamperDiscreteBeam.option_specs[0],
+                option_spec = MatHydraulicGasDamperDiscreteBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATHYDRAULICGASDAMPERDISCRETEBEAM_OPTION0_CARD0,

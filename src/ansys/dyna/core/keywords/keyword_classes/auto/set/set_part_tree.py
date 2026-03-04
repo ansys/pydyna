@@ -55,7 +55,7 @@ class SetPartTree(KeywordBase):
 
     keyword = "SET"
     subkeyword = "PART_TREE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -77,7 +77,7 @@ class SetPartTree(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetPartTree.option_specs[0],
+                option_spec = SetPartTree._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETPARTTREE_OPTION0_CARD0,

@@ -128,7 +128,7 @@ class MatOrthotropicSimplifiedDamage(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ORTHOTROPIC_SIMPLIFIED_DAMAGE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -174,7 +174,7 @@ class MatOrthotropicSimplifiedDamage(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatOrthotropicSimplifiedDamage.option_specs[0],
+                option_spec = MatOrthotropicSimplifiedDamage._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATORTHOTROPICSIMPLIFIEDDAMAGE_OPTION0_CARD0,

@@ -91,7 +91,7 @@ class MatArupAdhesive(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ARUP_ADHESIVE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -125,7 +125,7 @@ class MatArupAdhesive(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatArupAdhesive.option_specs[0],
+                option_spec = MatArupAdhesive._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATARUPADHESIVE_OPTION0_CARD0,

@@ -51,7 +51,7 @@ class MatViscoplasticMixedHardening(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "VISCOPLASTIC_MIXED_HARDENING"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -72,7 +72,7 @@ class MatViscoplasticMixedHardening(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatViscoplasticMixedHardening.option_specs[0],
+                option_spec = MatViscoplasticMixedHardening._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATVISCOPLASTICMIXEDHARDENING_OPTION0_CARD0,

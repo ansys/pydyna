@@ -62,7 +62,7 @@ class DefineDePatternOutput(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DE_PATTERN_OUTPUT"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -84,7 +84,7 @@ class DefineDePatternOutput(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineDePatternOutput.option_specs[0],
+                option_spec = DefineDePatternOutput._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDEPATTERNOUTPUT_OPTION0_CARD0,

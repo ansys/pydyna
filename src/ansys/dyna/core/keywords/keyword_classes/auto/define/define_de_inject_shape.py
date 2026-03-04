@@ -50,7 +50,7 @@ class DefineDeInjectShape(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DE_INJECT_SHAPE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -68,7 +68,7 @@ class DefineDeInjectShape(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineDeInjectShape.option_specs[0],
+                option_spec = DefineDeInjectShape._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDEINJECTSHAPE_OPTION0_CARD0,

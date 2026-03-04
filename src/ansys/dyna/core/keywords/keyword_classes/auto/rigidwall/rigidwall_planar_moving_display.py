@@ -65,7 +65,7 @@ class RigidwallPlanarMovingDisplay(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "PLANAR_MOVING_DISPLAY"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
@@ -92,7 +92,7 @@ class RigidwallPlanarMovingDisplay(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = RigidwallPlanarMovingDisplay.option_specs[0],
+                option_spec = RigidwallPlanarMovingDisplay._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLPLANARMOVINGDISPLAY_OPTION0_CARD0,

@@ -58,7 +58,7 @@ class DefineCurveTrimNew(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CURVE_TRIM_NEW"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -83,7 +83,7 @@ class DefineCurveTrimNew(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineCurveTrimNew.option_specs[0],
+                option_spec = DefineCurveTrimNew._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECURVETRIMNEW_OPTION0_CARD0,

@@ -65,7 +65,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "STEEL_CONCENTRIC_BRACE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -90,7 +90,7 @@ class MatSteelConcentricBrace(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatSteelConcentricBrace.option_specs[0],
+                option_spec = MatSteelConcentricBrace._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSTEELCONCENTRICBRACE_OPTION0_CARD0,

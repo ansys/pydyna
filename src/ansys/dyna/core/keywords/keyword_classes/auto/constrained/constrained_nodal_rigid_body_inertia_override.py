@@ -92,7 +92,7 @@ class ConstrainedNodalRigidBodyInertiaOverride(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "NODAL_RIGID_BODY_INERTIA_OVERRIDE"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -133,7 +133,7 @@ class ConstrainedNodalRigidBodyInertiaOverride(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = ConstrainedNodalRigidBodyInertiaOverride.option_specs[0],
+                option_spec = ConstrainedNodalRigidBodyInertiaOverride._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONSTRAINEDNODALRIGIDBODYINERTIAOVERRIDE_OPTION0_CARD0,

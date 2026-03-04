@@ -56,7 +56,7 @@ class SetIgaFaceXyzListGenerateCollect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "IGA_FACE_XYZ_LIST_GENERATE_COLLECT"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -74,7 +74,7 @@ class SetIgaFaceXyzListGenerateCollect(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetIgaFaceXyzListGenerateCollect.option_specs[0],
+                option_spec = SetIgaFaceXyzListGenerateCollect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETIGAFACEXYZLISTGENERATECOLLECT_OPTION0_CARD0,

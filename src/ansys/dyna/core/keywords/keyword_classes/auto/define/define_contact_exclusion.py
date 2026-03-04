@@ -63,7 +63,7 @@ class DefineContactExclusion(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CONTACT_EXCLUSION"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -85,7 +85,7 @@ class DefineContactExclusion(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineContactExclusion.option_specs[0],
+                option_spec = DefineContactExclusion._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECONTACTEXCLUSION_OPTION0_CARD0,

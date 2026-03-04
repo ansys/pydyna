@@ -48,7 +48,7 @@ class DefineFabricAssemblies(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "FABRIC_ASSEMBLIES"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -72,7 +72,7 @@ class DefineFabricAssemblies(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineFabricAssemblies.option_specs[0],
+                option_spec = DefineFabricAssemblies._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEFABRICASSEMBLIES_OPTION0_CARD0,

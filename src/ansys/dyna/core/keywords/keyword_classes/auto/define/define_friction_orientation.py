@@ -47,7 +47,7 @@ class DefineFrictionOrientation(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "FRICTION_ORIENTATION"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -66,7 +66,7 @@ class DefineFrictionOrientation(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineFrictionOrientation.option_specs[0],
+                option_spec = DefineFrictionOrientation._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEFRICTIONORIENTATION_OPTION0_CARD0,

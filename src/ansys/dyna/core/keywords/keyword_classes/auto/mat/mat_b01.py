@@ -74,7 +74,7 @@ class MatB01(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "B01"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -104,7 +104,7 @@ class MatB01(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatB01.option_specs[0],
+                option_spec = MatB01._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATB01_OPTION0_CARD0,

@@ -56,7 +56,7 @@ class SetIgaPointUvwListGenerateCollect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "IGA_POINT_UVW_LIST_GENERATE_COLLECT"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -74,7 +74,7 @@ class SetIgaPointUvwListGenerateCollect(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetIgaPointUvwListGenerateCollect.option_specs[0],
+                option_spec = SetIgaPointUvwListGenerateCollect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETIGAPOINTUVWLISTGENERATECOLLECT_OPTION0_CARD0,

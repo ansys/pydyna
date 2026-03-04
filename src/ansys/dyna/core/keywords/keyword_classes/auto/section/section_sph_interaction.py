@@ -47,7 +47,7 @@ class SectionSphInteraction(KeywordBase):
 
     keyword = "SECTION"
     subkeyword = "SPH_INTERACTION"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -61,7 +61,7 @@ class SectionSphInteraction(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SectionSphInteraction.option_specs[0],
+                option_spec = SectionSphInteraction._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SECTIONSPHINTERACTION_OPTION0_CARD0,

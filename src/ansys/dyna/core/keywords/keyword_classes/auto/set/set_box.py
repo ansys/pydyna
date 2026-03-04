@@ -43,7 +43,7 @@ class SetBox(KeywordBase):
 
     keyword = "SET"
     subkeyword = "BOX"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -67,7 +67,7 @@ class SetBox(KeywordBase):
                 None,
                 data = kwargs.get("box")),
             OptionCardSet(
-                option_spec = SetBox.option_specs[0],
+                option_spec = SetBox._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETBOX_OPTION0_CARD0,

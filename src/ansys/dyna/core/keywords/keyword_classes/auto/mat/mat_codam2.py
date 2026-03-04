@@ -118,7 +118,7 @@ class MatCodam2(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "CODAM2"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -160,7 +160,7 @@ class MatCodam2(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatCodam2.option_specs[0],
+                option_spec = MatCodam2._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCODAM2_OPTION0_CARD0,

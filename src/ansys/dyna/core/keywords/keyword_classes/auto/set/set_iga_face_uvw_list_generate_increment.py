@@ -51,7 +51,7 @@ class SetIgaFaceUvwListGenerateIncrement(KeywordBase):
 
     keyword = "SET"
     subkeyword = "IGA_FACE_UVW_LIST_GENERATE_INCREMENT"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -69,7 +69,7 @@ class SetIgaFaceUvwListGenerateIncrement(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetIgaFaceUvwListGenerateIncrement.option_specs[0],
+                option_spec = SetIgaFaceUvwListGenerateIncrement._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETIGAFACEUVWLISTGENERATEINCREMENT_OPTION0_CARD0,

@@ -45,7 +45,7 @@ class MatIsotropicElasticPlastic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ISOTROPIC_ELASTIC_PLASTIC"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -59,7 +59,7 @@ class MatIsotropicElasticPlastic(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatIsotropicElasticPlastic.option_specs[0],
+                option_spec = MatIsotropicElasticPlastic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATISOTROPICELASTICPLASTIC_OPTION0_CARD0,

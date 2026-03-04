@@ -48,7 +48,7 @@ class SetSolidGenerateIncrement(KeywordBase):
 
     keyword = "SET"
     subkeyword = "SOLID_GENERATE_INCREMENT"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -70,7 +70,7 @@ class SetSolidGenerateIncrement(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetSolidGenerateIncrement.option_specs[0],
+                option_spec = SetSolidGenerateIncrement._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETSOLIDGENERATEINCREMENT_OPTION0_CARD0,

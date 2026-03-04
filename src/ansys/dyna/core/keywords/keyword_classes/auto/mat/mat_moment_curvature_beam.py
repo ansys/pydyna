@@ -104,7 +104,7 @@ class MatMomentCurvatureBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "MOMENT_CURVATURE_BEAM"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
@@ -141,7 +141,7 @@ class MatMomentCurvatureBeam(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatMomentCurvatureBeam.option_specs[0],
+                option_spec = MatMomentCurvatureBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATMOMENTCURVATUREBEAM_OPTION0_CARD0,

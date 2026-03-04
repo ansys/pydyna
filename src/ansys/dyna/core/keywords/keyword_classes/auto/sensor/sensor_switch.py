@@ -47,7 +47,7 @@ class SensorSwitch(KeywordBase):
 
     keyword = "SENSOR"
     subkeyword = "SWITCH"
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -61,7 +61,7 @@ class SensorSwitch(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SensorSwitch.option_specs[0],
+                option_spec = SensorSwitch._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SENSORSWITCH_OPTION0_CARD0,

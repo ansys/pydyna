@@ -99,7 +99,7 @@ _SECTIONBEAMCARDSET_OPTION0_CARD0 = (
 class SectionBeamCardSet(Cards):
     """ CardSet."""
 
-    option_specs = [
+    _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -144,7 +144,7 @@ class SectionBeamCardSet(Cards):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SectionBeamCardSet.option_specs[0],
+                option_spec = SectionBeamCardSet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SECTIONBEAMCARDSET_OPTION0_CARD0,
@@ -697,7 +697,7 @@ class SectionBeam(KeywordBase):
         self._cards = [
             CardSet(
                 SectionBeamCardSet,
-                option_specs = SectionBeamCardSet.option_specs,
+                option_specs = SectionBeamCardSet._option_spec_list,
                 **kwargs
             ),
         ]
