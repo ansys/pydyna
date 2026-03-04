@@ -10,6 +10,19 @@ requires-python = ">=3.10"
 dependencies = [
     "pygls>=2.0",
     "lsprotocol>=2023.0",
+    # ansys-dyna-core is installed --no-deps by fetch-python.js; the transitive
+    # deps below are cherry-picked to cover actual import-time requirements.
+    "ansys-dyna-core",
+    "numpy>=1",
+    "pandas>=2.0",
+    "python-dateutil>=2.8",
+    "pytz>=2020",
+    "tzdata",
+    "six",
+    "appdirs>=1.4.4",
+    "charset-normalizer>=3.1",
+    "hollerith>=0.6.0",
+    "transformations>=2025.1.1",
 ]
 
 [project.scripts]
