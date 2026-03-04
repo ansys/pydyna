@@ -121,7 +121,7 @@ jobs:
   doc-style:
     name: "Documentation style"
     runs-on: ubuntu-latest
-    needs: [vulnerabilities]
+    needs: []
     steps:
       - name: PyAnsys documentation style checks
         uses: ansys/actions/doc-style@571fb2b8c7d6ad8c8b18e50bd20fb00f125dcfb6 # v9.0.15
