@@ -16,6 +16,9 @@ manuals/
 # cursor
 .cursor/user
 
+# uv
+uv.lock
+
 # vscode extension (temporary)
 vscode-extension/
 
