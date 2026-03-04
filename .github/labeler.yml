@@ -29,3 +29,23 @@
   - any:
       - changed-files:
           - any-glob-to-any-file: ['.github/workflows/**']
+
+# HACK: the following labels are declared with the only purpose of avoiding the
+# GitHub labeler bot to remove those. This is a known issue reported in the
+# official action/labeler repo https://github.com/actions/labeler/issues/763
+
+'ci:skip':
+  - all:
+      - changed-files:
+          - all-globs-to-all-files: ['THIS-NEVER-MATCHES-A-FILE']
+
+'docs:skip':
+  - all:
+      - changed-files:
+          - all-globs-to-all-files: ['THIS-NEVER-MATCHES-A-FILE']
+
+'tests:skip':
+  - all:
+      - changed-files:
+          - all-globs-to-all-files: ['THIS-NEVER-MATCHES-A-FILE']
+
