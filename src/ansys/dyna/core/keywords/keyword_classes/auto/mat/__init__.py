@@ -456,7 +456,7 @@ from .mat_emmi import MatEmmi
 from .mat_enhanced_composite_damage import MatEnhancedCompositeDamage
 from .mat_enhanced_composite_damage_model import MatEnhancedCompositeDamageModel
 from .mat_extended_3__parameter_barlat import MatExtended3_ParameterBarlat
-from .mat_fabric import MatFabric
+from .mat_034 import MatFabric
 from .mat_fabric_map import MatFabricMap
 from .mat_fhwa_soil import MatFhwaSoil
 from .mat_fhwa_soil_nebraska import MatFhwaSoilNebraska

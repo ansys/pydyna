@@ -441,6 +441,37 @@
             "points_card": 1
         }
     },
+    "DEFINE_SENSOR_FORCE": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "sensors",
+                    "ref": "sensor_card"
+                }
+            ]
+        },
+        "labels": {
+            "sensor_card": 0
+        }
+    },
+    "DEFINE_SENSOR_FORCE_UPDATE": {
+        "generation-options": {
+            "table-card-group": [
+                {
+                    "refs": [
+                        "sensor_card",
+                        "update_card"
+                    ],
+                    "overall-name": "sensors",
+                    "key-field": "sensid"
+                }
+            ]
+        },
+        "labels": {
+            "sensor_card": 0,
+            "update_card": 1
+        }
+    },
     "DEFINE_TABLE_2D": {
         "generation-options": {
             "table-card": [
@@ -1387,6 +1418,44 @@
                 "source-keyword": "MAT_NULL"
             }
         ]
+    },
+    "MAT_034": {
+        "alias": "MAT_FABRIC",
+        "generation-options": {
+            "insert-card": [
+                {
+                    "after": "card_3",
+                    "card": {
+                        "source": "additional-cards",
+                        "card-name": "MAT_FABRIC_CARD_4"
+                    },
+                    "label": "card_4"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "func": "self.fvopt<0",
+                    "ref": "card_4"
+                },
+                {
+                    "func": "self.form in [4,14,-14]",
+                    "ref": "card_7"
+                },
+                {
+                    "func": "self.form==-14",
+                    "ref": "card_8"
+                }
+            ]
+        },
+        "labels": {
+            "card_1": 0,
+            "card_2": 1,
+            "card_3": 2,
+            "card_5": 3,
+            "card_6": 4,
+            "card_7": 5,
+            "card_8": 6
+        }
     },
     "MAT_058": {
         "alias": "MAT_LAMINATED_COMPOSITE_FABRIC",
