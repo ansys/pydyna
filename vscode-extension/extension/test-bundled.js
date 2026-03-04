@@ -22,7 +22,7 @@ const path = require("path");
 const { execFileSync } = require("child_process");
 const { installPackages, bundledPythonExe } = require("./fetch-python.js");
 
-const TEST_FILE = path.join(__dirname, "server", "tests", "test_pydyna_env.py");
+const TEST_DIR = path.join(__dirname, "server", "tests");
 
 function main() {
   // 1. Locate the bundled Python executable
@@ -50,10 +50,10 @@ function main() {
 
   // 4. Run the tests
   console.log("\n── Step 3: Run tests ─────────────────────────────────────────");
-  console.log(`   ${pythonExe} -m pytest ${TEST_FILE} -v\n`);
+  console.log(`   ${pythonExe} -m pytest ${TEST_DIR} -v\n`);
   execFileSync(
     pythonExe,
-    ["-m", "pytest", TEST_FILE, "-v"],
+    ["-m", "pytest", TEST_DIR, "-v"],
     { stdio: "inherit" }
   );
 
