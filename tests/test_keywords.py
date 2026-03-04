@@ -363,6 +363,24 @@ def test_section_shell_misc(ref_string):
     # CARD3 (nipp/nxdof) is only active for elform in [101..105], so with elform=2
     # the output ends at the thkscl card - confirm no card follows it
     assert lines[-1].strip() == "2.5"
+    
+    # Issue #1153: Test deck loading via type_mapping resolves correctly
+    # SECTION_SHELL_MISC should resolve to SectionShell (not a non-existent SectionShellMisc class)
+    from ansys.dyna.core.lib.deck import Deck
+    
+    deck_str = """*KEYWORD
+*SECTION_SHELL_MISC_TITLE
+Test Section
+         1         2       0.0         5       0.0         0         0         0
+       1.0       1.0       1.0       1.0
+       1.5
+*END"""
+    
+    deck = Deck()
+    deck.loads(deck_str)
+    loaded_shell = deck.keywords[0]
+    assert isinstance(loaded_shell, kwd.SectionShell)
+    assert loaded_shell.thkscl == 1.5
 
 
 

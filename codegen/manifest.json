@@ -862,6 +862,16 @@
         },
         "comment": "card 6 (mat146_discrete_card) is skipped because of the condition for mat 146 - which we cannot easily check here. Maybe that can be handled in a subclass. card 7 (discrete_dof_card) is skipped because its a duplicate of card 4. card 9 (duplicate_inertia_card) is skipped because its a duplicate of card 2"
     },
+    "DEFINE_FUNCTION": {
+        "action": "manual"
+    },
+    "ELEMENT_SOLID_ORTHO (ten nodes format)": {
+        "action": "skip"
+    },
+    "SECTION_SHELL_MISC": {
+        "action": "skip",
+        "comment": "SECTION_SHELL_MISC is handled as an option for SECTION_SHELL"
+    },
     "SECTION_SHELL": {
         "generation-options": {
             "add-option": [
@@ -1292,6 +1302,7 @@
         }
     },
     "ELEMENT_SOLID_ORTHO": {
+        "action": "manual",
         "generation-options": {
             "table-card-group": [
                 {
@@ -2618,6 +2629,7 @@
         }
     },
     "ELEMENT_SOLID": {
+        "action": "manual",
         "generation-options": {
             "table-card": [
                 {
@@ -3432,21 +3444,7 @@
         }
     },
     "ELEMENT_SOLID (ten nodes format)": {
-        "generation-options": {
-            "table-card-group": [
-                {
-                    "refs": [
-                        "element_base_card",
-                        "element_nodes_card"
-                    ],
-                    "overall-name": "elements"
-                }
-            ]
-        },
-        "labels": {
-            "element_base_card": 0,
-            "element_nodes_card": 1
-        }
+        "action": "skip"
     },
     "LOAD_NODE_POINT": {
         "generation-options": {
