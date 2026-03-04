@@ -26,8 +26,8 @@ import typing
 import warnings
 
 from ansys.dyna.core.lib.card_interface import CardInterface
-from ansys.dyna.core.lib.card_writer import write_cards
 from ansys.dyna.core.lib.card_position import CardPlacement
+from ansys.dyna.core.lib.card_writer import write_cards
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.kwd_line_formatter import read_line
 from ansys.dyna.core.lib.option_card import OptionCardSet, Options, OptionsInterface, OptionSpec
