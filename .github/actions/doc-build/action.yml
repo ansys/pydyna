@@ -48,14 +48,14 @@ inputs:
     default: true
     type: boolean
 
-  build_examples:
+  build-examples:
     description: |
       Whether to build examples. Default is "true".
     required: false
     default: true
     type: boolean
 
-  build_api:
+  build-api:
     description: |
       Whether to build API docs. Default is "true".
     required: false
@@ -116,20 +116,20 @@ runs:
       shell: bash
 
     - name: Set Licensing
-      if: ${{ inputs.build_examples == 'true' }}
+      if: ${{ inputs.build-examples == 'true' }}
       run: |
         echo "ANSYS_DPF_ACCEPT_LA=Y" >> $GITHUB_ENV
       shell: bash
 
     - name: Install DPF
       uses: ansys/pydpf-actions/install-dpf-server@v2.3 # zizmor: ignore[unpinned-uses]
-      if: ${{ inputs.build_examples == 'true' }}
+      if: ${{ inputs.build-examples == 'true' }}
       with:
         dpf-standalone-TOKEN: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
         ANSYS_VERSION : "252"
 
     - name: Set DPF environment
-      if: ${{ inputs.build_examples == 'true' }}
+      if: ${{ inputs.build-examples == 'true' }}
       run: |
         DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v252/ansys/dpf/server_2025_2_pre0"
         echo "Setting DPF server path to: ${DPF_PATH}"
@@ -163,8 +163,8 @@ runs:
         PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
         BUILD_AUTOKEYWORDS_API: ${{ inputs.build-autokeywords-api }}
         LSTC_LICENSE: ansys
-        BUILD_EXAMPLES: ${{ inputs.build_examples }}
-        BUILD_API: ${{ inputs.build_api }}
+        BUILD_EXAMPLES: ${{ inputs.build-examples }}
+        BUILD_API: ${{ inputs.build-api }}
       run: |
         source .venv/bin/activate
         timeout 7200 xvfb-run uv run --no-sync -- make -C doc html SPHINXOPTS="-j auto"

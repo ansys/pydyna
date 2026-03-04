@@ -152,7 +152,7 @@ jobs:
           use_cache_examples: ${{ github.ref != 'refs/heads/main' }} # Use cache for PRs but not for main branch to avoid cache issues
           build-examples: ${{ !contains(github.event.pull_request.labels.*.name, 'docs:example:skip') }}
           build-api: ${{ !contains(github.event.pull_request.labels.*.name, 'docs:api:skip') }}
-          build-pdf: ${{ !contains(github.event.pull_request.labels.*.name, 'docs:pdf:skip') }}
+          skip-pdf-build: ${{ contains(github.event.pull_request.labels.*.name, 'docs:pdf:skip') }}
 
   run-tests:
     name: Test the "run" subpackage
