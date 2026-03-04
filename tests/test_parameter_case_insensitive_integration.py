@@ -120,11 +120,11 @@ class TestCaseInsensitiveLoadDataline:
         spec = [(0, 10, float)]
 
         # Load with different casing
-        result = load_dataline(spec, "     &rho", params)
+        result, _ = load_dataline(spec, "     &rho", params)
         assert result[0] == 10.0
 
         # Also test uppercase
-        result2 = load_dataline(spec, "     &RHO", params)
+        result2, _ = load_dataline(spec, "     &RHO", params)
         assert result2[0] == 10.0
 
     def test_load_dataline_with_multiple_case_variants(self):
@@ -139,7 +139,7 @@ class TestCaseInsensitiveLoadDataline:
 
         # Load with lowercase and uppercase (fixed-width format)
         # Fixed-width fields are 10 chars each
-        result = load_dataline(spec, "      &rho       &h", params)
+        result, _ = load_dataline(spec, "      &rho       &h", params)
         assert result[0] == 7850.0
         assert result[1] == 0.1
 
@@ -154,7 +154,7 @@ class TestCaseInsensitiveLoadDataline:
         spec = [(0, 10, float), (10, 10, float)]
 
         # CSV format with comma-separated values
-        result = load_dataline(spec, "&value1,&value2", params)
+        result, _ = load_dataline(spec, "&value1,&value2", params)
         assert result[0] == 100.0
         assert result[1] == 200.0
 

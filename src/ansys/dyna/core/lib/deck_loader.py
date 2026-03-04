@@ -240,7 +240,7 @@ def _load_keyword(
     is emitted.
     """
     try:
-        keyword_object.loads(keyword_data, deck.parameters)
+        keyword_object.loads(keyword_data, deck.parameters, context)
     except Exception as e:
         if context is not None and context.strict:
             raise
