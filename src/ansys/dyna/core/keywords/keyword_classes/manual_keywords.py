@@ -53,7 +53,7 @@ except ImportError:
     pass
 
 try:
-    from .parameter_expression_custom import (  # noqa: F401
+    from .manual.parameter_expression import (  # noqa: F401
         ParameterExpression,
         ParameterExpressionLocal,
         ParameterExpressionNoecho,

@@ -120,6 +120,7 @@ expanded_deck = deck.expand(recurse=True, cwd=cwd)
 - Creates new deck sharing parent parameters
 - Processes includes via `_expand_helper()`
 - Returns flattened deck
+- Local parameters are substituted to affected keywords, global parameters are shared
 
 **3. Processing Includes** (`_expand_helper()`):
 ```python
@@ -369,17 +370,31 @@ See `tests/test_parameter_substitution.py` for comprehensive test coverage inclu
 - Bounded and unbounded modes for all card types
 - Negative parameters (`-&param`)
 - Type conversion and validation
-- Error handling for missing/mismatched parameters
+- Unresolved parameters (default values, round-trip with `retain_parameters=True`)
+- Standalone keyword loading without `ParameterSet`
 - Mixed parameters and literal values
 - Regression testing for non-parameter cases
+
+### Deck Assignment and Parameter Ownership
+
+When a keyword is assigned to a deck (`kwd.deck = deck` or `deck.append(kwd)`):
+
+- The keyword's recorded refs are merged into `deck.parameters`
+- The keyword no longer retains an independent `ParameterSet`; it uses `deck.parameters`
+- At write time, parameter refs are resolved from `deck.parameters` so values stay current
+- The keyword does not own values that reference parameters—the deck does. If `deck.parameters`
+  changes after assignment, the next write reflects the new values.
+
+When a keyword is removed from a deck (`kwd.deck = None`), its refs are extracted from
+`deck.parameters` and restored to an independent `ParameterSet`.
 
 ### Error Handling
 
 The parameter substitution system provides clear error messages:
 
-- **Missing parameter**: `KeyError` with parameter name
-- **Type mismatch**: `TypeError` explaining the conversion failure
-- **No parameter set**: `ValueError` when `&` found but no `parameter_set` provided
+- **Missing parameter**: When a parameter is referenced but not defined, the field receives a type-appropriate default (`None` for int/str, `NaN` for float). Refs are recorded for write-back with `retain_parameters=True`.
+- **Type mismatch**: `TypeError` explaining the conversion failure (when parameter is defined but value cannot be converted)
+- **No parameter set**: Loading succeeds without a `ParameterSet`; refs are recorded in a bare `ParameterSet` and unresolved fields get defaults. Use `retain_parameters=True` on write to round-trip `&param` references.
 
 ## Implementation Checklist (Extended)
 
