@@ -14,8 +14,12 @@ import math
 import pytest
 
 from ansys.dyna.core.lib.card import Card, Field
-from ansys.dyna.core.lib.format_type import card_format, format_type
-from ansys.dyna.core.lib.kwd_line_formatter import _is_comma_delimited, _load_dataline_csv, load_dataline
+from ansys.dyna.core.lib.format_type import card_format
+from ansys.dyna.core.lib.kwd_line_formatter import (
+    _is_comma_delimited,
+    load_dataline,
+    parse_dataline,
+)
 from ansys.dyna.core.lib.parameters import ParameterSet
 
 
@@ -130,6 +134,27 @@ class TestCommaDelimitedParsing:
         spec = [(0, 10, int)]
         result, _ = load_dataline(spec, "1.0")
         assert result == (1,)
+
+
+class TestParseDatalineRawModeCSV:
+    """Tests for parse_dataline and load_dataline(spec, line, None) in CSV format.
+
+    Raw mode treats '&' as literal; used by parameter-defining keywords.
+    """
+
+    def test_parse_dataline_csv_treats_ampersand_as_literal(self):
+        """parse_dataline treats & as literal in CSV (no parameter substitution)."""
+        spec = [(0, 10, int), (10, 10, str), (20, 10, str)]
+        result, _ = parse_dataline(spec, "1,hello,cos(&x)")
+        assert result == (1, "hello", "cos(&x)")
+
+    def test_load_dataline_none_csv_same_as_parse_dataline(self):
+        """load_dataline(spec, line, None) matches parse_dataline for CSV."""
+        spec = [(0, 10, int), (10, 10, int), (20, 10, int), (30, 10, int)]
+        line = "1,2,3,4"
+        parse_result, _ = parse_dataline(spec, line)
+        load_result, _ = load_dataline(spec, line, None)
+        assert parse_result == load_result == (1, 2, 3, 4)
 
 
 class TestFixedWidthStillWorks:
@@ -341,7 +366,8 @@ class TestGlobalCsvOptOut:
         # With CSV disabled via context manager
         with disable_csv_autodetect():
             deck2 = Deck()
-            deck2.loads(csv_deck)
+            with pytest.warns(UserWarning, match=r"Error processing parameter: Unable to parse string"):
+                deck2.loads(csv_deck)
             nodes2 = list(deck2.get_kwds_by_type("NODE"))
             # Fixed-width parsing of "1,0.0,0.0,0.0" won't work correctly
             # The nid field would be "1,0.0,0.0," which can't parse as int

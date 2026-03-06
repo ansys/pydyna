@@ -37,6 +37,7 @@ def write_cards(
     retain_parameters: bool = False,
     parameter_set: typing.Optional[ParameterSet] = None,
     keyword_id: typing.Optional[str] = None,
+    uri_prefix: typing.Optional[str] = None,
 ):
     """Write the cards.
 
@@ -52,10 +53,14 @@ def write_cards(
         Whether to write field name comments. Default True.
     retain_parameters : bool, optional
         If True, write original parameter references instead of values.
+        If False and parameter_set is provided (keyword on deck), resolve refs to
+        current values at write time.
     parameter_set : ParameterSet, optional
-        The parameter set containing stored refs (when retain_parameters=True).
+        Set containing refs and values. When retain_parameters=True, used to look up
+        ref strings for write-back. When retain_parameters=False, used to resolve
+        refs to current values.
     keyword_id : str, optional
-        The keyword's ID for building URI paths (when retain_parameters=True).
+        The keyword's ID for building URI paths when parameter_set is provided.
     """
     # this code tries its best to avoid adding superfluous trailing newlines, but
     # is not always successful. If one or more empty cards exist at the end of the
@@ -75,10 +80,15 @@ def write_cards(
             buf.write("\n")
             pos = buf.tell()
 
-        # Build URI prefix for this card if retaining parameters
-        uri_prefix = None
-        if retain_parameters and keyword_id is not None:
-            uri_prefix = f"{keyword_id}/card{card_index}"
+        # Build URI prefix for this card when parameter_set is provided
+        card_uri_prefix = None
+        if parameter_set is not None:
+            if uri_prefix is not None:
+                # Nested CardSet - extend parent's prefix
+                card_uri_prefix = f"{uri_prefix}/card{card_index}"
+            elif keyword_id is not None:
+                # Top-level keyword - start from keyword_id
+                card_uri_prefix = f"{keyword_id}/card{card_index}"
 
         card.write(
             write_format,
@@ -86,7 +96,7 @@ def write_cards(
             comment,
             retain_parameters=retain_parameters,
             parameter_set=parameter_set,
-            uri_prefix=uri_prefix,
+            uri_prefix=card_uri_prefix,
         )
     superfluous_newline = pos == buf.tell()
     if superfluous_newline:

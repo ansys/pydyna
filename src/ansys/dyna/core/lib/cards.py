@@ -44,6 +44,7 @@ class Cards(OptionsInterface):
         # The instance of "Cards" may be part of a card set or it may be the keyword itself
         # Though OptionsInterface is implemented here, the API for options should come from
         # The keyword if it is a card set. # TODO - can this be improved?
+        self._keyword = keyword  # Reference to parent keyword (for CardSet items) or self (for KeywordBase)
         self._options = Options(keyword)
         self._active_options: typing.Set[str] = set()
 
@@ -78,6 +79,19 @@ class Cards(OptionsInterface):
         return message
 
     # options API interface implementation
+
+    @property
+    def parameter_set(self) -> typing.Optional[ParameterSet]:
+        """Get the parameter set for this Cards instance.
+
+        For KeywordBase (where self has _parameter_set): returns self._parameter_set.
+        For CardSet items (where self._keyword exists): returns self._keyword._parameter_set.
+        """
+        if hasattr(self, "_parameter_set"):
+            return self._parameter_set
+        if hasattr(self._keyword, "_parameter_set"):
+            return self._keyword._parameter_set
+        return None
 
     @property
     def options(self) -> Options:
@@ -225,12 +239,20 @@ class Cards(OptionsInterface):
         **kwargs,
     ):
         """Writes the cards to `buf` using `format`."""
-        # When retain_parameters is True, we pass the keyword's parameter set and ID
-        # so cards can look up stored parameter references
-        # Note: kwargs may contain parameter_set/keyword_id from parent CardSet, but we
-        # use our own parameter_set for this keyword's cards
-        parameter_set = getattr(self, "_parameter_set", None) if retain_parameters else None
-        keyword_id = str(id(self)) if retain_parameters else None
+        # Use provided parameter_set/keyword_id from kwargs (for nested CardSets)
+        # or compute from self (for top-level keyword)
+        parameter_set = kwargs.get("parameter_set")
+        keyword_id = kwargs.get("keyword_id")
+        uri_prefix = kwargs.get("uri_prefix")
+
+        if parameter_set is None and keyword_id is None:
+            if retain_parameters or (
+                self.parameter_set is not None and getattr(self._keyword, "deck", None) is not None
+            ):
+                parameter_set = self.parameter_set
+                if parameter_set is not None:
+                    keyword_id = str(id(self._keyword))
+
         write_cards(
             self._get_all_cards(),
             buf,
@@ -239,6 +261,7 @@ class Cards(OptionsInterface):
             retain_parameters=retain_parameters,
             parameter_set=parameter_set,
             keyword_id=keyword_id,
+            uri_prefix=uri_prefix,
         )
 
     def _try_read_options_with_no_title(self, buf: typing.TextIO, parameters: ParameterSet = None) -> None:

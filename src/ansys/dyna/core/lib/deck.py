@@ -35,7 +35,12 @@ from ansys.dyna.core.lib.import_handlers.define_table_processor import DefineTab
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_collection import KeywordCollection
-from ansys.dyna.core.lib.parameters import ParameterHandler, ParameterSet
+from ansys.dyna.core.lib.parameters import (
+    ParameterHandler,
+    ParameterSet,
+    _raise_unresolved_parameters,
+    _warn_unresolved_parameters,
+)
 from ansys.dyna.core.lib.transform import TransformHandler
 from ansys.dyna.core.lib.validation_mixin import ValidationMixin
 
@@ -338,6 +343,8 @@ class Deck(ValidationMixin):
         new_deck.parameters = self.parameters
         search_paths = [cwd]
         new_deck.extend(self._expand_helper(search_paths, recurse, strict))
+
+        _warn_unresolved_parameters(new_deck.parameters.get_all_unresolved_param_names())
         return new_deck
 
     def _get_title_lines(self) -> typing.List[str]:
@@ -432,8 +439,12 @@ class Deck(ValidationMixin):
             Validation uses registered validators and raises ValidationError if errors are found.
         retain_parameters : bool, optional
             If True, write original parameter references (e.g., &myvar) instead of
-            substituted values for fields that were read from parameters. Default is False.
+            substituted values for fields that were read from parameters. If False,
+            the parameters must be defined. Default is False.
         """
+        if not retain_parameters:
+            _raise_unresolved_parameters(self.parameters.get_all_unresolved_param_names())
+
         if validate:
             result = self.validate()
             result.raise_if_errors()
@@ -623,13 +634,15 @@ class Deck(ValidationMixin):
 
         Parameters
         ----------
-        path : str
-            Full path for the keyword file.
+        path : str or path-like
+            Full path for the keyword file. Path-like objects (e.g. pathlib.Path)
+            are converted to string for ImportContext to avoid type errors in
+            downstream code. The original value is preserved for keyword.included_from.
         encoding: str
             String encoding used to read the keyword file.
         """
-        context = ImportContext(None, self, path)
-        self._import_file(path, encoding, context)
+        context = ImportContext(None, self, str(path))
+        return self._import_file(path, encoding, context)
 
     def export_file(self, path: str, encoding="utf-8", validate: bool = False, retain_parameters: bool = False) -> None:
         """Export the keyword file to a new keyword file.

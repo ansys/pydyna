@@ -215,6 +215,8 @@ class SeriesCard(CardInterface):
         return [self.__get_value(i) for i in range(start, end)]
 
     def _wrap_value(self, value):
+        if self._check_null_by_type(value, self._type):
+            return self.__get_null_value()
         if isinstance(value, self._type):
             return value
         else:
@@ -315,8 +317,11 @@ class SeriesCard(CardInterface):
         if len(values) == 0:
             raise ValueError(f"Failed to read any values from line: {line}")
         last_real_index = -1
+        uri_prefix = parameter_set.get_current_uri() if parameter_set is not None else None
         for loc, val in enumerate(values):
-            if self._check_null(val):
+            global_index = element_offset + loc
+            has_ref = uri_prefix is not None and parameter_set.get_ref(uri_prefix, str(global_index)) is not None
+            if self._check_null(val) and not has_ref:
                 continue
             last_real_index = max(loc, last_real_index)
         if last_real_index == -1:
