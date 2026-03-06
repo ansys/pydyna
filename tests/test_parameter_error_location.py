@@ -92,7 +92,8 @@ class TestParameterErrorLocation:
         """
         deck_file = file_utils.get_asset_file_path("parameter_error_location/test_param_format_error.k")
         deck = Deck()
-        result = deck.import_file(deck_file)
+        with pytest.warns(UserWarning, match=r"Error processing parameter"):
+            result = deck.import_file(deck_file)
         assert len(result.warnings) >= 1
         warning = result.warnings[0]
         assert "Error processing parameter" in warning
@@ -107,7 +108,8 @@ class TestParameterErrorLocation:
         """
         deck_content = (file_utils.assets_folder / "parameter_error_location" / "test_param_format_error.k").read_text()
         deck = Deck()
-        result = deck.loads(deck_content)
+        with pytest.warns(UserWarning, match=r"Error processing parameter"):
+            result = deck.loads(deck_content)
         assert len(result.warnings) >= 1
         warning = result.warnings[0]
         assert "Error processing parameter" in warning
@@ -129,7 +131,8 @@ $ Another comment line
          1  &x_coord       0.0       0.0
 *END"""
         deck = Deck()
-        result = deck.loads(deck_content)
+        with pytest.warns(UserWarning, match=r"Error processing parameter"):
+            result = deck.loads(deck_content)
         assert len(result.warnings) >= 1
         warning = result.warnings[0]
         assert "Error processing parameter" in warning
