@@ -91,6 +91,19 @@ class Cards:
         return None
 
     @property
+    def parameter_set(self) -> typing.Optional[ParameterSet]:
+        """Get the parameter set for this Cards instance.
+
+        For KeywordBase (where self has _parameter_set): returns self._parameter_set.
+        For CardSet items (where self._keyword exists): returns self._keyword._parameter_set.
+        """
+        if hasattr(self, "_parameter_set"):
+            return self._parameter_set
+        if hasattr(self._keyword, "_parameter_set"):
+            return self._keyword._parameter_set
+        return None
+
+    @property
     def options(self) -> Options:
         """Gets the options_api of this keyword, if any"""
         return self._options
