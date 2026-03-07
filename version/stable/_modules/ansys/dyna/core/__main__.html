@@ -1,0 +1,1304 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ansys.dyna.core.__main__ &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../../../_static/documentation_options.js?v=1a9b1e2b"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ansys/dyna/core/__main__';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.11';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.11.0" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="Structures" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/_modules/ansys/dyna/core/__main__.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are removed in version v0.11.0.</div>
+</aside>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../index.html" class="nav-link">Module code</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../core.html" class="nav-link">ansys.dyna.core</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ansys.dyna.core.__main__</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ansys.dyna.core.__main__</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.</span>
+<span class="c1"># SPDX-License-Identifier: MIT</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction, including without limitation the rights</span>
+<span class="c1"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c1"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c1"># furnished to do so, subject to the following conditions:</span>
+<span class="c1">#</span>
+<span class="c1"># The above copyright notice and this permission notice shall be included in all</span>
+<span class="c1"># copies or substantial portions of the Software.</span>
+<span class="c1">#</span>
+<span class="c1"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c1"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c1"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
+<span class="c1"># SOFTWARE.</span>
+<span class="sd">&quot;&quot;&quot;CLI for PyDyna.</span>
+
+<span class="sd">Usage:</span>
+<span class="sd">    python -m ansys.dyna.core agent --env cursor</span>
+<span class="sd">    python -m ansys.dyna.core agent --env vscode --copy</span>
+<span class="sd">    python -m ansys.dyna.core agent --env vscode --pointer</span>
+<span class="sd">    python -m ansys.dyna.core agent --print</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="c1"># Package metadata</span>
+<div class="viewcode-block" id="PACKAGE_NAMESPACE">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.PACKAGE_NAMESPACE">[docs]</a>
+<span class="n">PACKAGE_NAMESPACE</span> <span class="o">=</span> <span class="s2">&quot;ansys.dyna.core&quot;</span></div>
+
+<div class="viewcode-block" id="PACKAGE_NAME">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.PACKAGE_NAME">[docs]</a>
+<span class="n">PACKAGE_NAME</span> <span class="o">=</span> <span class="s2">&quot;ansys-dyna-core&quot;</span></div>
+
+<div class="viewcode-block" id="PACKAGE_ECOSYSTEM">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.PACKAGE_ECOSYSTEM">[docs]</a>
+<span class="n">PACKAGE_ECOSYSTEM</span> <span class="o">=</span> <span class="s2">&quot;pypi&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="find_workspace_root">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.find_workspace_root">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">find_workspace_root</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find workspace root by walking up from cwd.&quot;&quot;&quot;</span>
+    <span class="n">cwd</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">parent</span> <span class="ow">in</span> <span class="p">[</span><span class="n">cwd</span><span class="p">,</span> <span class="o">*</span><span class="n">cwd</span><span class="o">.</span><span class="n">parents</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;.git&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">parent</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;pyproject.toml&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">parent</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="get_package_dir">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.get_package_dir">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_package_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the package directory containing agent instructions.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span></div>
+
+
+
+<div class="viewcode-block" id="get_instructions_path">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.get_instructions_path">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_instructions_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get path to agent instructions file.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_package_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;AGENT.md&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="get_extended_docs_dir">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.get_extended_docs_dir">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_extended_docs_dir</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get path to extended agent documentation directory.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_package_dir</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;agent&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="get_instructions_content">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.get_instructions_content">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_instructions_content</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read the agent instructions from installed package.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_instructions_path</span><span class="p">()</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="rewrite_links_for_copy">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.rewrite_links_for_copy">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">rewrite_links_for_copy</span><span class="p">(</span><span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">subdir_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Rewrite relative links in content to work from copied location.&quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\]\(agent/&quot;</span>
+    <span class="n">replacement</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;](</span><span class="si">{</span><span class="n">subdir_name</span><span class="si">}</span><span class="s2">/&quot;</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">replacement</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="format_for_cursor">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.format_for_cursor">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">format_for_cursor</span><span class="p">(</span><span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrap content in Cursor rules MDC format.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;---</span>
+<span class="s2">description: PyDyna usage instructions for AI assistants</span>
+<span class="s2">globs: [&quot;**/*.py&quot;, &quot;**/*.k&quot;, &quot;**/*.key&quot;]</span>
+<span class="s2">alwaysApply: false</span>
+<span class="s2">---</span>
+
+<span class="s2">&lt;!-- Auto-generated from: </span><span class="si">{</span><span class="n">source_path</span><span class="si">}</span><span class="s2"> --&gt;</span>
+
+<span class="si">{</span><span class="n">content</span><span class="si">}</span>
+<span class="s2">&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ensure_gitignore">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.ensure_gitignore">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">ensure_gitignore</span><span class="p">(</span><span class="n">workspace</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add .agent/ to .gitignore.&quot;&quot;&quot;</span>
+    <span class="n">gitignore</span> <span class="o">=</span> <span class="n">workspace</span> <span class="o">/</span> <span class="s2">&quot;.gitignore&quot;</span>
+    <span class="n">marker</span> <span class="o">=</span> <span class="s2">&quot;.agent/&quot;</span>
+    <span class="k">if</span> <span class="n">gitignore</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">gitignore</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">marker</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">gitignore</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"># Agent instructions (auto-generated)</span><span class="se">\n</span><span class="si">{</span><span class="n">marker</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">gitignore</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# Agent instructions (auto-generated)</span><span class="se">\n</span><span class="si">{</span><span class="n">marker</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Manifest Management</span>
+<span class="c1"># =============================================================================</span>
+
+
+<div class="viewcode-block" id="load_manifest">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.load_manifest">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_manifest</span><span class="p">(</span><span class="n">agent_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load the manifest.json file, or return empty manifest.&quot;&quot;&quot;</span>
+    <span class="n">manifest_file</span> <span class="o">=</span> <span class="n">agent_dir</span> <span class="o">/</span> <span class="s2">&quot;manifest.json&quot;</span>
+    <span class="k">if</span> <span class="n">manifest_file</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">manifest_file</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">):</span>
+            <span class="k">pass</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;packages&quot;</span><span class="p">:</span> <span class="p">[]}</span></div>
+
+
+
+<div class="viewcode-block" id="save_manifest">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.save_manifest">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_manifest</span><span class="p">(</span><span class="n">agent_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">manifest</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Save the manifest.json file.&quot;&quot;&quot;</span>
+    <span class="n">manifest_file</span> <span class="o">=</span> <span class="n">agent_dir</span> <span class="o">/</span> <span class="s2">&quot;manifest.json&quot;</span>
+    <span class="n">manifest_file</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">manifest</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="update_manifest_entry">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.update_manifest_entry">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_manifest_entry</span><span class="p">(</span>
+    <span class="n">manifest</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">namespace</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">ecosystem</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">package_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">entry_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">extended_docs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">source_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add or update a package entry in the manifest.&quot;&quot;&quot;</span>
+    <span class="c1"># Find existing entry</span>
+    <span class="n">packages</span> <span class="o">=</span> <span class="n">manifest</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;packages&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">entry</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">pkg</span> <span class="ow">in</span> <span class="n">packages</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pkg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;namespace&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">namespace</span><span class="p">:</span>
+            <span class="n">entry</span> <span class="o">=</span> <span class="n">pkg</span>
+            <span class="k">break</span>
+
+    <span class="k">if</span> <span class="n">entry</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;namespace&quot;</span><span class="p">:</span> <span class="n">namespace</span><span class="p">}</span>
+        <span class="n">packages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+
+    <span class="c1"># Update entry</span>
+    <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;ecosystem&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ecosystem</span>
+    <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;package_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">package_name</span>
+    <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;entry_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry_file</span>
+    <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;extended_docs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">extended_docs</span>
+    <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;mode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mode</span>
+    <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">source_path</span>
+    <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;installed_at&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+
+    <span class="n">manifest</span><span class="p">[</span><span class="s2">&quot;packages&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">packages</span>
+    <span class="k">return</span> <span class="n">manifest</span></div>
+
+
+
+<div class="viewcode-block" id="generate_readme">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.generate_readme">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_readme</span><span class="p">(</span><span class="n">agent_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">manifest</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate README.md from manifest.&quot;&quot;&quot;</span>
+    <span class="n">packages</span> <span class="o">=</span> <span class="n">manifest</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;packages&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;# Agent Instructions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;This directory contains agent instructions from installed packages.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Agents can read these files for context about how to use the packages.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;## Installed Packages&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">packages</span><span class="p">:</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;| Namespace | Ecosystem | Package | Entry File |&quot;</span><span class="p">)</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;|-----------|-----------|---------|------------|&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">pkg</span> <span class="ow">in</span> <span class="n">packages</span><span class="p">:</span>
+            <span class="n">namespace</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;namespace&quot;</span><span class="p">,</span> <span class="s2">&quot;?&quot;</span><span class="p">)</span>
+            <span class="n">ecosystem</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ecosystem&quot;</span><span class="p">,</span> <span class="s2">&quot;?&quot;</span><span class="p">)</span>
+            <span class="n">package_name</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;package_name&quot;</span><span class="p">,</span> <span class="s2">&quot;?&quot;</span><span class="p">)</span>
+            <span class="n">entry_file</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;entry_file&quot;</span><span class="p">,</span> <span class="s2">&quot;?&quot;</span><span class="p">)</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| `</span><span class="si">{</span><span class="n">namespace</span><span class="si">}</span><span class="s2">` | </span><span class="si">{</span><span class="n">ecosystem</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">package_name</span><span class="si">}</span><span class="s2"> | [</span><span class="si">{</span><span class="n">entry_file</span><span class="si">}</span><span class="s2">](</span><span class="si">{</span><span class="n">entry_file</span><span class="si">}</span><span class="s2">) |&quot;</span><span class="p">)</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;*No packages installed yet.*&quot;</span><span class="p">)</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">lines</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;## Usage&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Each package provides its own installation command. For Python packages with&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;agent instructions, you can typically run:&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;```bash&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;python -m &lt;package&gt; agent --copy&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;```&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;## Scanning Dependencies&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;To install agent instructions from all packages in your requirements:&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;```bash&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;# Future: python -m agent_instructions scan requirements.txt&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;# For now, run each package&#39;s agent command individually&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;```&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;---&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;*Auto-generated manifest. Regenerate by running package agent commands.*&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="n">readme_file</span> <span class="o">=</span> <span class="n">agent_dir</span> <span class="o">/</span> <span class="s2">&quot;README.md&quot;</span>
+    <span class="n">readme_file</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># File Copy Operations</span>
+<span class="c1"># =============================================================================</span>
+
+
+<div class="viewcode-block" id="copy_all_instructions">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.copy_all_instructions">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">copy_all_instructions</span><span class="p">(</span><span class="n">workspace</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;copy&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Copy all agent instruction files to workspace with working links.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple[Path, list[str]]</span>
+<span class="sd">        Main file path and list of extended doc relative paths.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">agent_dir</span> <span class="o">=</span> <span class="n">workspace</span> <span class="o">/</span> <span class="s2">&quot;.agent&quot;</span>
+    <span class="n">agent_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Main file with rewritten links</span>
+    <span class="n">main_content</span> <span class="o">=</span> <span class="n">get_instructions_content</span><span class="p">()</span>
+    <span class="n">main_content</span> <span class="o">=</span> <span class="n">rewrite_links_for_copy</span><span class="p">(</span><span class="n">main_content</span><span class="p">,</span> <span class="n">PACKAGE_NAMESPACE</span><span class="p">)</span>
+    <span class="n">main_file</span> <span class="o">=</span> <span class="n">agent_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">PACKAGE_NAMESPACE</span><span class="si">}</span><span class="s2">.md&quot;</span>
+    <span class="n">main_file</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">main_content</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Extended docs</span>
+    <span class="n">extended_dir</span> <span class="o">=</span> <span class="n">agent_dir</span> <span class="o">/</span> <span class="n">PACKAGE_NAMESPACE</span>
+    <span class="n">extended_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">source_dir</span> <span class="o">=</span> <span class="n">get_extended_docs_dir</span><span class="p">()</span>
+    <span class="n">extended_docs</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">source_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">src_file</span> <span class="ow">in</span> <span class="n">source_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.md&quot;</span><span class="p">):</span>
+            <span class="n">dst_file</span> <span class="o">=</span> <span class="n">extended_dir</span> <span class="o">/</span> <span class="n">src_file</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span><span class="n">src_file</span><span class="p">,</span> <span class="n">dst_file</span><span class="p">)</span>
+            <span class="n">extended_docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">PACKAGE_NAMESPACE</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">src_file</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Update manifest</span>
+    <span class="n">manifest</span> <span class="o">=</span> <span class="n">load_manifest</span><span class="p">(</span><span class="n">agent_dir</span><span class="p">)</span>
+    <span class="n">manifest</span> <span class="o">=</span> <span class="n">update_manifest_entry</span><span class="p">(</span>
+        <span class="n">manifest</span><span class="o">=</span><span class="n">manifest</span><span class="p">,</span>
+        <span class="n">namespace</span><span class="o">=</span><span class="n">PACKAGE_NAMESPACE</span><span class="p">,</span>
+        <span class="n">ecosystem</span><span class="o">=</span><span class="n">PACKAGE_ECOSYSTEM</span><span class="p">,</span>
+        <span class="n">package_name</span><span class="o">=</span><span class="n">PACKAGE_NAME</span><span class="p">,</span>
+        <span class="n">entry_file</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">PACKAGE_NAMESPACE</span><span class="si">}</span><span class="s2">.md&quot;</span><span class="p">,</span>
+        <span class="n">extended_docs</span><span class="o">=</span><span class="n">extended_docs</span><span class="p">,</span>
+        <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+        <span class="n">source_path</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">get_instructions_path</span><span class="p">()),</span>
+    <span class="p">)</span>
+    <span class="n">save_manifest</span><span class="p">(</span><span class="n">agent_dir</span><span class="p">,</span> <span class="n">manifest</span><span class="p">)</span>
+    <span class="n">generate_readme</span><span class="p">(</span><span class="n">agent_dir</span><span class="p">,</span> <span class="n">manifest</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">main_file</span><span class="p">,</span> <span class="n">extended_docs</span></div>
+
+
+
+<div class="viewcode-block" id="register_pointer_in_manifest">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.register_pointer_in_manifest">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">register_pointer_in_manifest</span><span class="p">(</span><span class="n">workspace</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pointer&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Register a pointer-mode entry in the manifest.&quot;&quot;&quot;</span>
+    <span class="n">agent_dir</span> <span class="o">=</span> <span class="n">workspace</span> <span class="o">/</span> <span class="s2">&quot;.agent&quot;</span>
+    <span class="n">agent_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">source_path</span> <span class="o">=</span> <span class="n">get_instructions_path</span><span class="p">()</span>
+    <span class="n">extended_dir</span> <span class="o">=</span> <span class="n">get_extended_docs_dir</span><span class="p">()</span>
+    <span class="n">extended_docs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">extended_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">extended_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.md&quot;</span><span class="p">):</span>
+            <span class="n">extended_docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;agent/</span><span class="si">{</span><span class="n">doc</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">manifest</span> <span class="o">=</span> <span class="n">load_manifest</span><span class="p">(</span><span class="n">agent_dir</span><span class="p">)</span>
+    <span class="n">manifest</span> <span class="o">=</span> <span class="n">update_manifest_entry</span><span class="p">(</span>
+        <span class="n">manifest</span><span class="o">=</span><span class="n">manifest</span><span class="p">,</span>
+        <span class="n">namespace</span><span class="o">=</span><span class="n">PACKAGE_NAMESPACE</span><span class="p">,</span>
+        <span class="n">ecosystem</span><span class="o">=</span><span class="n">PACKAGE_ECOSYSTEM</span><span class="p">,</span>
+        <span class="n">package_name</span><span class="o">=</span><span class="n">PACKAGE_NAME</span><span class="p">,</span>
+        <span class="n">entry_file</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">source_path</span><span class="p">),</span>
+        <span class="n">extended_docs</span><span class="o">=</span><span class="n">extended_docs</span><span class="p">,</span>
+        <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+        <span class="n">source_path</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">source_path</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">save_manifest</span><span class="p">(</span><span class="n">agent_dir</span><span class="p">,</span> <span class="n">manifest</span><span class="p">)</span>
+    <span class="n">generate_readme</span><span class="p">(</span><span class="n">agent_dir</span><span class="p">,</span> <span class="n">manifest</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Pointer Block Management</span>
+<span class="c1"># =============================================================================</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_make_pointer_block</span><span class="p">(</span>
+    <span class="n">pydyna_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">regenerate_cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">extended_docs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a pointer block for single-file instruction tools.&quot;&quot;&quot;</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="s2">&quot;&lt;!-- pydyna-agent-instructions:start --&gt;&quot;</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="s2">&quot;&lt;!-- pydyna-agent-instructions:end --&gt;&quot;</span>
+
+    <span class="n">extended_hint</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">extended_docs</span><span class="p">:</span>
+        <span class="n">extended_hint</span> <span class="o">=</span> <span class="s2">&quot; (links to extended topics)&quot;</span>
+
+    <span class="n">block</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="si">{</span><span class="n">start</span><span class="si">}</span>
+<span class="s2">## PyDyna (ansys-dyna-core)</span>
+
+<span class="s2">**IMPORTANT:** Before writing any code using `ansys.dyna.core`, you MUST:</span>
+
+<span class="s2">1. **Read** the file `</span><span class="si">{</span><span class="n">pydyna_ref</span><span class="si">}</span><span class="s2">` in this workspace</span>
+<span class="s2">2. **Read linked files** as needed for your task</span><span class="si">{</span><span class="n">extended_hint</span><span class="si">}</span>
+<span class="s2">3. **Search** docs before assuming patterns (NODE/PART use DataFrames, not simple attributes)</span>
+<span class="s2">4. **Do not guess** - if uncertain, use `help(keywords.KeywordName)` or ask for clarification</span>
+
+<span class="s2">Regenerate: `</span><span class="si">{</span><span class="n">regenerate_cmd</span><span class="si">}</span><span class="s2">`</span>
+<span class="si">{</span><span class="n">end</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">block</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_update_single_file_instructions</span><span class="p">(</span>
+    <span class="n">workspace</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">pydyna_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">target_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">regenerate_cmd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">default_header</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">extended_docs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Append/refresh a pointer section in a single-file instructions file.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">rel</span> <span class="o">=</span> <span class="n">pydyna_path</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">workspace</span><span class="p">)</span>
+        <span class="n">pydyna_ref</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rel</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="n">pydyna_ref</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">pydyna_path</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>
+
+    <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">block</span> <span class="o">=</span> <span class="n">_make_pointer_block</span><span class="p">(</span><span class="n">pydyna_ref</span><span class="p">,</span> <span class="n">regenerate_cmd</span><span class="p">,</span> <span class="n">extended_docs</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">target_file</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">target_file</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;replace&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">start</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">and</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">text</span> <span class="ow">and</span> <span class="n">text</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">text</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">end</span><span class="p">):</span>
+            <span class="n">pre</span> <span class="o">=</span> <span class="n">text</span><span class="p">[:</span> <span class="n">text</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">start</span><span class="p">)]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+            <span class="n">post</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="n">text</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">end</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">end</span><span class="p">)</span> <span class="p">:]</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">pre</span><span class="p">:</span>
+                <span class="n">new_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pre</span><span class="si">}</span><span class="se">\n\n</span><span class="si">{</span><span class="n">block</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">block</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="n">post</span><span class="p">:</span>
+                <span class="n">new_text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">post</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">new_text</span> <span class="o">=</span> <span class="n">new_text</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">block</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">target_file</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">new_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">default_header</span><span class="si">}</span><span class="se">\n\n</span><span class="si">{</span><span class="n">block</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="n">target_file</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">new_text</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">target_file</span>
+
+
+<div class="viewcode-block" id="update_copilot_instructions">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.update_copilot_instructions">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_copilot_instructions</span><span class="p">(</span>
+    <span class="n">workspace</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">pydyna_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">extended_docs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update .github/copilot-instructions.md with a pointer.&quot;&quot;&quot;</span>
+    <span class="n">github_dir</span> <span class="o">=</span> <span class="n">workspace</span> <span class="o">/</span> <span class="s2">&quot;.github&quot;</span>
+    <span class="n">github_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">copilot_file</span> <span class="o">=</span> <span class="n">github_dir</span> <span class="o">/</span> <span class="s2">&quot;copilot-instructions.md&quot;</span>
+
+    <span class="k">return</span> <span class="n">_update_single_file_instructions</span><span class="p">(</span>
+        <span class="n">workspace</span><span class="o">=</span><span class="n">workspace</span><span class="p">,</span>
+        <span class="n">pydyna_path</span><span class="o">=</span><span class="n">pydyna_path</span><span class="p">,</span>
+        <span class="n">target_file</span><span class="o">=</span><span class="n">copilot_file</span><span class="p">,</span>
+        <span class="n">regenerate_cmd</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;python -m ansys.dyna.core agent --env vscode --</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">default_header</span><span class="o">=</span><span class="s2">&quot;# Copilot Instructions&quot;</span><span class="p">,</span>
+        <span class="n">extended_docs</span><span class="o">=</span><span class="n">extended_docs</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="update_claude_instructions">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.update_claude_instructions">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_claude_instructions</span><span class="p">(</span>
+    <span class="n">workspace</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">pydyna_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">extended_docs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update CLAUDE.md with a pointer.&quot;&quot;&quot;</span>
+    <span class="n">claude_file</span> <span class="o">=</span> <span class="n">workspace</span> <span class="o">/</span> <span class="s2">&quot;CLAUDE.md&quot;</span>
+
+    <span class="k">return</span> <span class="n">_update_single_file_instructions</span><span class="p">(</span>
+        <span class="n">workspace</span><span class="o">=</span><span class="n">workspace</span><span class="p">,</span>
+        <span class="n">pydyna_path</span><span class="o">=</span><span class="n">pydyna_path</span><span class="p">,</span>
+        <span class="n">target_file</span><span class="o">=</span><span class="n">claude_file</span><span class="p">,</span>
+        <span class="n">regenerate_cmd</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;python -m ansys.dyna.core agent --env claude --</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">default_header</span><span class="o">=</span><span class="s2">&quot;# Claude Code Instructions&quot;</span><span class="p">,</span>
+        <span class="n">extended_docs</span><span class="o">=</span><span class="n">extended_docs</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Command Handlers</span>
+<span class="c1"># =============================================================================</span>
+
+
+<div class="viewcode-block" id="cmd_agent_copy">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.cmd_agent_copy">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">cmd_agent_copy</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">,</span> <span class="n">workspace</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle --copy mode: copy all files with working links.&quot;&quot;&quot;</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">env</span>
+
+    <span class="k">if</span> <span class="n">env</span> <span class="o">==</span> <span class="s2">&quot;cursor&quot;</span><span class="p">:</span>
+        <span class="c1"># Cursor: single self-contained MDC file</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">get_instructions_content</span><span class="p">()</span>
+        <span class="n">formatted</span> <span class="o">=</span> <span class="n">format_for_cursor</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">get_instructions_path</span><span class="p">())</span>
+        <span class="n">cursor_dir</span> <span class="o">=</span> <span class="n">workspace</span> <span class="o">/</span> <span class="s2">&quot;.cursor&quot;</span> <span class="o">/</span> <span class="s2">&quot;rules&quot;</span>
+        <span class="n">cursor_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">output_path</span> <span class="o">=</span> <span class="n">cursor_dir</span> <span class="o">/</span> <span class="s2">&quot;pydyna.mdc&quot;</span>
+        <span class="n">output_path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">formatted</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[OK] PyDyna instructions written to: </span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="c1"># All other environments: copy to .agent/ with extended docs</span>
+    <span class="n">main_file</span><span class="p">,</span> <span class="n">extended_docs</span> <span class="o">=</span> <span class="n">copy_all_instructions</span><span class="p">(</span><span class="n">workspace</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;copy&quot;</span><span class="p">)</span>
+    <span class="n">ensure_gitignore</span><span class="p">(</span><span class="n">workspace</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[OK] PyDyna instructions copied to: </span><span class="si">{</span><span class="n">main_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">extended_docs</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     Extended docs: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">extended_docs</span><span class="p">)</span><span class="si">}</span><span class="s2"> files&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     Manifest updated: </span><span class="si">{</span><span class="n">workspace</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;.agent&#39;</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;manifest.json&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># For single-file tools, also add pointer</span>
+    <span class="k">if</span> <span class="n">env</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;vscode&quot;</span><span class="p">,</span> <span class="s2">&quot;copilot&quot;</span><span class="p">):</span>
+        <span class="n">pointer_file</span> <span class="o">=</span> <span class="n">update_copilot_instructions</span><span class="p">(</span><span class="n">workspace</span><span class="p">,</span> <span class="n">main_file</span><span class="p">,</span> <span class="s2">&quot;copy&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[OK] Added pointer to: </span><span class="si">{</span><span class="n">pointer_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     (Your existing instructions were preserved)&quot;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">env</span> <span class="o">==</span> <span class="s2">&quot;claude&quot;</span><span class="p">:</span>
+        <span class="n">pointer_file</span> <span class="o">=</span> <span class="n">update_claude_instructions</span><span class="p">(</span><span class="n">workspace</span><span class="p">,</span> <span class="n">main_file</span><span class="p">,</span> <span class="s2">&quot;copy&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[OK] Added pointer to: </span><span class="si">{</span><span class="n">pointer_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     (Your existing instructions were preserved)&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="mi">0</span></div>
+
+
+
+<div class="viewcode-block" id="cmd_agent_pointer">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.cmd_agent_pointer">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">cmd_agent_pointer</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">,</span> <span class="n">workspace</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle --pointer mode: just add pointer to installed package.&quot;&quot;&quot;</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">env</span>
+    <span class="n">source_path</span> <span class="o">=</span> <span class="n">get_instructions_path</span><span class="p">()</span>
+
+    <span class="c1"># Get extended doc paths relative to main file</span>
+    <span class="n">extended_dir</span> <span class="o">=</span> <span class="n">get_extended_docs_dir</span><span class="p">()</span>
+    <span class="n">extended_docs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">extended_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">extended_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.md&quot;</span><span class="p">):</span>
+            <span class="n">extended_docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;agent/</span><span class="si">{</span><span class="n">doc</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">env</span> <span class="o">==</span> <span class="s2">&quot;cursor&quot;</span><span class="p">:</span>
+        <span class="c1"># Cursor doesn&#39;t support pointer mode well - use copy instead</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Note: Cursor works best with --copy mode. Using --copy.&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cmd_agent_copy</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">workspace</span><span class="p">)</span>
+
+    <span class="c1"># Register in manifest even for pointer mode</span>
+    <span class="n">register_pointer_in_manifest</span><span class="p">(</span><span class="n">workspace</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;pointer&quot;</span><span class="p">)</span>
+    <span class="n">ensure_gitignore</span><span class="p">(</span><span class="n">workspace</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">env</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;vscode&quot;</span><span class="p">,</span> <span class="s2">&quot;copilot&quot;</span><span class="p">):</span>
+        <span class="n">pointer_file</span> <span class="o">=</span> <span class="n">update_copilot_instructions</span><span class="p">(</span><span class="n">workspace</span><span class="p">,</span> <span class="n">source_path</span><span class="p">,</span> <span class="s2">&quot;pointer&quot;</span><span class="p">,</span> <span class="n">extended_docs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[OK] Added pointer to installed package in: </span><span class="si">{</span><span class="n">pointer_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     Points to: </span><span class="si">{</span><span class="n">source_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     Manifest updated: </span><span class="si">{</span><span class="n">workspace</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;.agent&#39;</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;manifest.json&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     (Your existing instructions were preserved)&quot;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">env</span> <span class="o">==</span> <span class="s2">&quot;claude&quot;</span><span class="p">:</span>
+        <span class="n">pointer_file</span> <span class="o">=</span> <span class="n">update_claude_instructions</span><span class="p">(</span><span class="n">workspace</span><span class="p">,</span> <span class="n">source_path</span><span class="p">,</span> <span class="s2">&quot;pointer&quot;</span><span class="p">,</span> <span class="n">extended_docs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[OK] Added pointer to installed package in: </span><span class="si">{</span><span class="n">pointer_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     Points to: </span><span class="si">{</span><span class="n">source_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     Manifest updated: </span><span class="si">{</span><span class="n">workspace</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;.agent&#39;</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;manifest.json&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     (Your existing instructions were preserved)&quot;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">env</span> <span class="o">==</span> <span class="s2">&quot;generic&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PyDyna agent instructions are installed at:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">source_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">extended_docs</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Extended documentation:&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">extended_docs</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">source_path</span><span class="o">.</span><span class="n">parent</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">doc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Manifest updated: </span><span class="si">{</span><span class="n">workspace</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;.agent&#39;</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;manifest.json&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="mi">0</span></div>
+
+
+
+<div class="viewcode-block" id="cmd_agent">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.cmd_agent">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">cmd_agent</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle &#39;agent&#39; subcommand.&quot;&quot;&quot;</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">get_instructions_content</span><span class="p">()</span>
+
+    <span class="c1"># Print mode</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">print</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">UnicodeEncodeError</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="c1"># Find workspace</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">workspace</span><span class="p">:</span>
+        <span class="n">workspace</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">workspace</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">workspace</span> <span class="o">=</span> <span class="n">find_workspace_root</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">workspace</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Could not detect workspace root.&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Run from a git repo or specify --workspace PATH&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">1</span>
+
+    <span class="c1"># Determine mode</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">pointer</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">cmd_agent_pointer</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">workspace</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Default to copy mode</span>
+        <span class="k">return</span> <span class="n">cmd_agent_copy</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">workspace</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../../../api/ansys/dyna/core/__main__/index.html#ansys.dyna.core.__main__.main">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main entry point for CLI.&quot;&quot;&quot;</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">prog</span><span class="o">=</span><span class="s2">&quot;python -m ansys.dyna.core&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;PyDyna CLI utilities&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">subparsers</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_subparsers</span><span class="p">(</span><span class="n">dest</span><span class="o">=</span><span class="s2">&quot;command&quot;</span><span class="p">)</span>
+
+    <span class="c1"># agent subcommand</span>
+    <span class="n">agent_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+        <span class="s2">&quot;agent&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Install agent instructions for AI assistants&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">agent_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--env&quot;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cursor&quot;</span><span class="p">,</span> <span class="s2">&quot;vscode&quot;</span><span class="p">,</span> <span class="s2">&quot;copilot&quot;</span><span class="p">,</span> <span class="s2">&quot;claude&quot;</span><span class="p">,</span> <span class="s2">&quot;generic&quot;</span><span class="p">],</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;generic&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Target environment (default: generic)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Mode selection (mutually exclusive)</span>
+    <span class="n">mode_group</span> <span class="o">=</span> <span class="n">agent_parser</span><span class="o">.</span><span class="n">add_mutually_exclusive_group</span><span class="p">()</span>
+    <span class="n">mode_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--copy&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Copy instruction files to workspace (default). Works with sandboxed agents.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">mode_group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--pointer&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Just add pointer to installed package. Requires agent has file system access.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">agent_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--print&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Print to stdout instead of writing file&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">agent_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--workspace&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Workspace root (auto-detected if not specified)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;agent&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">cmd_agent</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<!-- If there is no fix edit button function, use the PyData edit-this-button-->
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.6.4. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

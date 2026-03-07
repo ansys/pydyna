@@ -1,0 +1,227 @@
+ansys.dyna.core.pre.dynabase.BoundaryCondition
+==============================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.BoundaryCondition
+
+   
+   Provides a way of defining imposed motions on boundary nodes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: spclist
+      :value: []
+
+
+
+   .. py:attribute:: imposedmotionlist
+      :value: []
+
+
+
+   .. py:attribute:: templist
+      :value: []
+
+
+
+   .. py:attribute:: convectionlist
+      :value: []
+
+
+
+   .. py:method:: assign_model(model)
+
+
+   .. py:method:: create_spc(nodeset, tx=True, ty=True, tz=True, rx=True, ry=True, rz=True, cid=0, birth=0, death=1e+20)
+
+      
+      Define nodal single point constraints.
+
+
+      :Parameters:
+
+          **nodeset** : NodeSet.
+              Node set.
+
+          **contraint_x/y/z_direction** : :class:`python:int`
+              Translational constraint in local x/y/z-direction.
+
+          **contraint_x/y/zaxis_rotate** : :class:`python:int`
+              Rotational constraint about local x/y/z-axis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_imposed_motion(set, curve, motion=Motion.DISPLACEMENT, dof=DOF.X_TRANSLATIONAL, scalefactor=1, birthtime=0)
+
+      
+      Create an imposed nodal motion on a node or set of nodes.
+
+      An imposed nodal motion can be a velocity, acceleration, or displacement.
+
+      :Parameters:
+
+          **partset** : PartSet.
+              Part set.
+
+          **curve** : :obj:`Curve`
+              Curve ID or function ID to describe the motion value as a function of time.
+
+          **motion** : :obj:`enum`
+              Velocity/Acceleration/Displacement flag.
+
+          **dof** : :obj:`enum`
+              Applicable degrees of freedom.
+
+          **scalefactor** : :class:`python:int`, :obj:`optional`
+              Load curve scale factor. The default is ``1``.
+
+          **birthtime** : :class:`python:int`, :obj:`optional`
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_temperature(nodeset, curve=None, scalefactor=1)
+
+      
+      Create temperature boundary conditions for a thermal or coupled thermal/structural analysis.
+
+
+      :Parameters:
+
+          **nodeset** : NodeSet.
+              Node set.
+
+          **curve** : :obj:`Curve`, :obj:`optional`
+              Temperature, T, specification. The default is ``None``.
+
+          **scalefactor** : :class:`python:float`, :obj:`optional`
+              Temperature, T, curve multiplier. The default is ``1``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_convection(segmentset=None, convection_heat_transfer_coefficient=None, convection_heat_transfer_coefficient_multiplier=0.0, environment_temperature=None, environment_temperature_multiplier=0.0)
+
+      
+      Apply a convection boundary condition on SEGMENT_SET for a thermal analysis.
+
+
+      :Parameters:
+
+          **segmentset** : SegmentSet.
+              Segment set.
+
+          **convection_heat_transfer_coefficient** : :obj:`Curve`
+              Convection heat transfer coefficient.
+
+          **convection_heat_transfer_coefficient_multiplier** : :class:`python:float`
+              Curve multiplier for convection heat transfer coefficient.
+
+          **environment_temperature** : :obj:`Curve`
+              Environment temperature.
+
+          **environment_temperature_multiplier** : :class:`python:float`
+              Curve multiplier for environment temperature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create a boundary condition.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

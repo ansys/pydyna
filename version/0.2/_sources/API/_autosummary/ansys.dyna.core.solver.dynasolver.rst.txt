@@ -1,0 +1,6 @@
+﻿dynasolver
+==========
+
+.. currentmodule:: ansys.dyna.core.solver
+
+.. automodule:: dynasolver

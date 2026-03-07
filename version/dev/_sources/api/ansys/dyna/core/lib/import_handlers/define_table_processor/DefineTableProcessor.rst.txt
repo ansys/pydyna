@@ -1,0 +1,57 @@
+ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor
+===============================================================================
+
+.. py:class:: ansys.dyna.core.lib.import_handlers.define_table_processor.DefineTableProcessor
+
+   Bases: :py:obj:`ansys.dyna.core.lib.import_handler.ImportHandler`
+
+
+   
+   Import handler that links `DefineCurve` keywords to their parent `DefineTable`.
+
+   Behavior:
+   - When a `DefineCurve` is imported immediately after a `DefineTable`,
+     it is appended to the table's _linked_curves list.
+   - The linking is based on deck import order, not ID matching, which allows
+     users to customize the behavior or use pydyna to validate/fix keyword files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: after_import(context, keyword)
+
+      
+      Track tables and link curves to the most recent table.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

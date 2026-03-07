@@ -1,0 +1,40 @@
+ansys.dyna.core.keywords.keyword_classes.parameter_expression_custom
+====================================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.parameter_expression_custom
+
+.. autoapi-nested-parse::
+
+   Custom ParameterExpression classes that prevent premature parameter substitution.
+
+   Expression strings contain &param references that are expression operands, not
+   parameter substitutions. These custom classes override loads() to pass parameters=None,
+   preventing substitution during keyword parsing. Expressions are evaluated later by
+   ParameterHandler.after_import().
+
+   Import Strategy:
+   - Imported in manual_keywords.py (not auto/parameter/__init__.py)
+   - Import order: auto_keywords.py → manual_keywords.py (custom classes win)
+   - Never modify auto-generated files (codegen overwrites them)
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/keywords/keyword_classes/parameter_expression_custom/ParameterExpression
+   /api/ansys/dyna/core/keywords/keyword_classes/parameter_expression_custom/ParameterExpressionLocal
+   /api/ansys/dyna/core/keywords/keyword_classes/parameter_expression_custom/ParameterExpressionNoecho
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.keyword_classes.parameter_expression_custom.ParameterExpression
+   ansys.dyna.core.keywords.keyword_classes.parameter_expression_custom.ParameterExpressionLocal
+   ansys.dyna.core.keywords.keyword_classes.parameter_expression_custom.ParameterExpressionNoecho
+
+

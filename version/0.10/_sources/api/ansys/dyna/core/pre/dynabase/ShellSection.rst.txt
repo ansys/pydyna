@@ -1,0 +1,28 @@
+ansys.dyna.core.pre.dynabase.ShellSection
+=========================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.ShellSection(element_formulation, shear_factor=1, integration_points=5, printout=0, thickness1=0, thickness2=0, thickness3=0, thickness4=0)
+
+   
+   Defines section properties for shell elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: id
+
