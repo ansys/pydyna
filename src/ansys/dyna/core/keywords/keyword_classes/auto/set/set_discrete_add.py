@@ -52,8 +52,8 @@ class SetDiscreteAdd(KeywordBase):
 
     keyword = "SET"
     subkeyword = "DISCRETE_ADD"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "dsid1": LinkType.SET_DISCRETE,
@@ -80,7 +80,7 @@ class SetDiscreteAdd(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetDiscreteAdd.option_specs[0],
+                option_spec = SetDiscreteAdd._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETDISCRETEADD_OPTION0_CARD0,

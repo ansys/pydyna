@@ -78,8 +78,8 @@ class Mat143Fir(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "143_FIR"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -108,7 +108,7 @@ class Mat143Fir(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = Mat143Fir.option_specs[0],
+                option_spec = Mat143Fir._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT143FIR_OPTION0_CARD0,

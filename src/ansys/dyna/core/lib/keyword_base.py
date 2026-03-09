@@ -21,6 +21,7 @@
 # SOFTWARE.
 """Keyword base class and related functionality."""
 
+import contextlib
 import enum
 import io
 import typing
@@ -33,6 +34,7 @@ from ansys.dyna.core.lib.parameters import ParameterSet
 # protected due to circular import
 if typing.TYPE_CHECKING:
     from ansys.dyna.core.lib.deck import Deck
+    from ansys.dyna.core.lib.import_handler import ImportContext
 
 
 class LinkType(enum.Enum):
@@ -132,12 +134,31 @@ class KeywordBase(Cards):
     def deck(self, deck: "Deck") -> None:
         """Get the deck that this keyword is associated to."""
         if deck is None:
-            self._deck = None
-            return
+            if self._deck is not None:
+                self._detach_from_deck()
+        else:
+            self._attach_to_deck(deck)
 
+    def _detach_from_deck(self) -> None:
+        """Restore independent parameter set when removed from deck."""
+        if self._parameter_set is self._deck.parameters:
+            keyword_prefix = str(id(self))
+            exclude_local = self._deck.parameters.get_local_param_names()
+            extracted_refs, extracted_locations = self._deck.parameters.extract_refs_for_prefix(
+                keyword_prefix, exclude_params=exclude_local
+            )
+            self._parameter_set = ParameterSet()
+            self._parameter_set.add_refs(extracted_refs, extracted_locations)
+        self._deck = None
+
+    def _attach_to_deck(self, deck: "Deck") -> None:
+        """Merge refs into deck and share its parameter set."""
         if self._deck is not None:
             raise Exception("This keyword is already associated with a deck!")
         self._deck = deck
+        if self._parameter_set is not None and self._parameter_set is not deck.parameters:
+            deck.parameters.merge_refs_from(self._parameter_set)
+        self._parameter_set = deck.parameters
 
     @property
     def format(self) -> format_type:
@@ -366,8 +387,46 @@ class KeywordBase(Cards):
             return title_line[:-1]
         return title_line
 
-    def read(self, buf: typing.TextIO, parameters: ParameterSet = None) -> None:
-        """Read the keyword from a buffer."""
+    @contextlib.contextmanager
+    def _parameter_scope(
+        self,
+        parameters: typing.Optional[ParameterSet],
+        import_context: typing.Optional["ImportContext"],
+    ) -> typing.Iterator[ParameterSet]:
+        """Set up parameter context for reading, validate after."""
+        # Store parameter set for write-time reference lookup
+        # Always create a ParameterSet so refs can be recorded even when parameters=None
+        effective_params = parameters if parameters is not None else ParameterSet()
+        self._parameter_set = effective_params
+        effective_params.set_context(import_context)
+
+        # Scope the parameter references by this keyword's identity
+        with effective_params.scope(str(id(self))):
+            yield effective_params
+
+        # After loading: if strict mode, raise on unresolved parameters
+        if import_context is not None and import_context.strict:
+            unresolved = effective_params.get_unresolved_param_names(str(id(self)))
+            if unresolved:
+                raise ValueError(f"Undefined parameter(s) in keyword: {', '.join(sorted(set(unresolved)))}")
+
+    def read(
+        self,
+        buf: typing.TextIO,
+        parameters: ParameterSet = None,
+        import_context: typing.Optional["ImportContext"] = None,
+    ) -> None:
+        """Read the keyword from a buffer.
+
+        Parameters
+        ----------
+        buf : typing.TextIO
+            Buffer to read from.
+        parameters : ParameterSet, optional
+            Parameter set for substitution.
+        import_context : ImportContext, optional
+            Import context with file path and line number for warnings/errors.
+        """
         title_line = buf.readline()
         title_line = self._process_title(title_line)
         self.before_read(buf)
@@ -376,17 +435,12 @@ class KeywordBase(Cards):
         # TODO: self.user_comment should come from somewhere.
         # maybe after the keyword but before any $#
 
-        # Store parameter set for write-time reference lookup
-        self._parameter_set = parameters
+        with self._parameter_scope(parameters, import_context) as effective_params:
+            self._read_data(buf, effective_params, import_context)
 
-        # Scope the parameter references by this keyword's identity
-        if parameters is not None:
-            with parameters.scope(str(id(self))):
-                self._read_data(buf, parameters)
-        else:
-            self._read_data(buf, parameters)
-
-    def loads(self, value: str, parameters: ParameterSet = None) -> typing.Any:
+    def loads(
+        self, value: str, parameters: ParameterSet = None, import_context: typing.Optional["ImportContext"] = None
+    ) -> typing.Any:
         """Load the keyword from string.
 
         Return `self` to support chaining
@@ -395,7 +449,7 @@ class KeywordBase(Cards):
         s = io.StringIO()
         s.write(value)
         s.seek(0)
-        self.read(s, parameters)
+        self.read(s, parameters, import_context)
         return self
 
     # Class attribute to be overridden by subclasses with link field metadata.

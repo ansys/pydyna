@@ -52,8 +52,8 @@ class SensorDefineForceUpdate(KeywordBase):
 
     keyword = "SENSOR"
     subkeyword = "DEFINE_FORCE_UPDATE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "vid": LinkType.DEFINE_COORDINATE_SYSTEM,
@@ -74,7 +74,7 @@ class SensorDefineForceUpdate(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SensorDefineForceUpdate.option_specs[0],
+                option_spec = SensorDefineForceUpdate._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SENSORDEFINEFORCEUPDATE_OPTION0_CARD0,

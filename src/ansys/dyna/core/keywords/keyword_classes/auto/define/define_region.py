@@ -58,8 +58,8 @@ class DefineRegion(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "REGION"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
@@ -83,7 +83,7 @@ class DefineRegion(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineRegion.option_specs[0],
+                option_spec = DefineRegion._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEREGION_OPTION0_CARD0,

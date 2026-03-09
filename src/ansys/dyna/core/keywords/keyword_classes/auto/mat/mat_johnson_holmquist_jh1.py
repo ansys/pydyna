@@ -66,8 +66,8 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "JOHNSON_HOLMQUIST_JH1"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -88,7 +88,7 @@ class MatJohnsonHolmquistJh1(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatJohnsonHolmquistJh1.option_specs[0],
+                option_spec = MatJohnsonHolmquistJh1._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATJOHNSONHOLMQUISTJH1_OPTION0_CARD0,

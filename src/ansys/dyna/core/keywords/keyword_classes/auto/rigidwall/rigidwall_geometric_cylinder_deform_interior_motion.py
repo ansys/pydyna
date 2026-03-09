@@ -93,8 +93,8 @@ class RigidwallGeometricCylinderDeformInteriorMotion(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_CYLINDER_DEFORM_INTERIOR_MOTION"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "lcidr": LinkType.DEFINE_CURVE,
@@ -141,7 +141,7 @@ class RigidwallGeometricCylinderDeformInteriorMotion(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = RigidwallGeometricCylinderDeformInteriorMotion.option_specs[0],
+                option_spec = RigidwallGeometricCylinderDeformInteriorMotion._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORMOTION_OPTION0_CARD0,

@@ -74,8 +74,8 @@ class SetPorousAle(KeywordBase):
 
     keyword = "SET"
     subkeyword = "POROUS_ALE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "veccid1": LinkType.DEFINE_VECTOR,
@@ -104,7 +104,7 @@ class SetPorousAle(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetPorousAle.option_specs[0],
+                option_spec = SetPorousAle._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETPOROUSALE_OPTION0_CARD0,

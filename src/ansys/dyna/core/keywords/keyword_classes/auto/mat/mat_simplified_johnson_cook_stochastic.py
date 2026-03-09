@@ -55,8 +55,8 @@ class MatSimplifiedJohnsonCookStochastic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "SIMPLIFIED_JOHNSON_COOK_STOCHASTIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -73,7 +73,7 @@ class MatSimplifiedJohnsonCookStochastic(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatSimplifiedJohnsonCookStochastic.option_specs[0],
+                option_spec = MatSimplifiedJohnsonCookStochastic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSIMPLIFIEDJOHNSONCOOKSTOCHASTIC_OPTION0_CARD0,

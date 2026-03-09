@@ -56,8 +56,8 @@ class SetIgaEdgeXyzListCollect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "IGA_EDGE_XYZ_LIST_COLLECT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -74,7 +74,7 @@ class SetIgaEdgeXyzListCollect(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetIgaEdgeXyzListCollect.option_specs[0],
+                option_spec = SetIgaEdgeXyzListCollect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETIGAEDGEXYZLISTCOLLECT_OPTION0_CARD0,

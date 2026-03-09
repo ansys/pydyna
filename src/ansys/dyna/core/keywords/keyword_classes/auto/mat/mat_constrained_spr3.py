@@ -71,8 +71,8 @@ class MatConstrainedSpr3(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "CONSTRAINED_SPR3"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcf": LinkType.DEFINE_CURVE,
@@ -102,7 +102,7 @@ class MatConstrainedSpr3(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatConstrainedSpr3.option_specs[0],
+                option_spec = MatConstrainedSpr3._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCONSTRAINEDSPR3_OPTION0_CARD0,

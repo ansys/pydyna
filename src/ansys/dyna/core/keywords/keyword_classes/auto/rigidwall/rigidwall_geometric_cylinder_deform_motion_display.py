@@ -100,8 +100,8 @@ class RigidwallGeometricCylinderDeformMotionDisplay(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_CYLINDER_DEFORM_MOTION_DISPLAY"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "lcidr": LinkType.DEFINE_CURVE,
@@ -153,7 +153,7 @@ class RigidwallGeometricCylinderDeformMotionDisplay(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = RigidwallGeometricCylinderDeformMotionDisplay.option_specs[0],
+                option_spec = RigidwallGeometricCylinderDeformMotionDisplay._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLGEOMETRICCYLINDERDEFORMMOTIONDISPLAY_OPTION0_CARD0,

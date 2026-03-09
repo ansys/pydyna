@@ -69,8 +69,8 @@ class MatRcBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "RC_BEAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -91,7 +91,7 @@ class MatRcBeam(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatRcBeam.option_specs[0],
+                option_spec = MatRcBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATRCBEAM_OPTION0_CARD0,

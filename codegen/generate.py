@@ -41,20 +41,6 @@ from output_manager import OutputManager
 
 logger = logging.getLogger(__name__)
 
-SKIPPED_KEYWORDS = set(
-    [
-        # defined manually because of the variable length text card
-        "DEFINE_FUNCTION",
-        # element_solid (10 nodes format) - merging the element solids
-        "ELEMENT_SOLID (ten nodes format)",
-        "ELEMENT_SOLID",
-        "ELEMENT_SOLID_ORTHO (ten nodes format)",
-        "ELEMENT_SOLID_ORTHO",
-        # issue #184 - this is not documented in the manual
-        # "CONTROL_TIMESTEP",CONTROL_TIMESTEP is in the kwd.json now and should be generated issue #629
-    ]
-)
-
 
 def get_loader():
     template_folder = get_this_folder() / "templates"
@@ -92,12 +78,37 @@ def match_wildcard(keyword, wildcard):
     return False
 
 
+def get_keyword_action(keyword_name: str) -> str:
+    """Get the action for a keyword from manifest.
+    
+    Returns:
+        "generate": Generate class and include in type_mapping (default)
+        "skip": Skip class generation and type_mapping
+        "manual": Skip class generation but include in type_mapping
+    """
+    config = data_model.get_config()
+    manifest_entry = config.manifest.get_keyword_options(keyword_name)
+    return manifest_entry.get("action", "generate")
+
+
 def skip_generate_keyword_class(keyword: str) -> bool:
-    global SKIPPED_KEYWORDS
-    if keyword in SKIPPED_KEYWORDS:
-        logger.debug(f"Skipping keyword: {keyword} (in SKIPPED_KEYWORDS)")
+    """Check if keyword class generation should be skipped."""
+    action = get_keyword_action(keyword)
+    if action in ["skip", "manual"]:
+        logger.debug(f"Skipping class generation for keyword: {keyword} (action={action})")
         return True
     return False
+
+
+def include_in_type_mapping(keyword: str) -> bool:
+    """Check if keyword should be included in type_mapping.py."""
+    action = get_keyword_action(keyword)
+    # Only skip type_mapping for action="skip"
+    # action="manual" means it has a manual implementation that needs type_mapping
+    if action == "skip":
+        logger.debug(f"Excluding from type_mapping: {keyword} (action={action})")
+        return False
+    return True
 
 
 def get_undefined_alias_keywords(
@@ -437,7 +448,11 @@ def generate_classes(
         generate_autodoc_file(autodoc_output_path, all_keywords, env)
     keywords_list.extend(get_undefined_alias_keywords(keywords_list, subset_domains))
     if kwd_name == None:
-        generate_entrypoints(env, output_manager, keywords_list)
+        # Filter keywords for type_mapping: exclude action="skip" only
+        type_mapping_keywords = [
+            kwd for kwd in keywords_list if include_in_type_mapping(kwd["name"])
+        ]
+        generate_entrypoints(env, output_manager, type_mapping_keywords)
 
 
 def clean(output):
@@ -461,6 +476,9 @@ def run_codegen(args):
     autodoc_path = args.autodoc_path
     if not autodoc_path:
         autodoc_path = this_folder.parent / "doc" / "source" / "_autosummary"
+    else:
+        from pathlib import Path
+        autodoc_path = Path(autodoc_path)
     if not os.path.exists(autodoc_path):
         os.makedirs(autodoc_path)
         logger.debug(f"Created autodoc directory: {autodoc_path}")

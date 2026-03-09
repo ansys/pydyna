@@ -128,8 +128,8 @@ class MatEnhancedCompositeDamage(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ENHANCED_COMPOSITE_DAMAGE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcxc": LinkType.DEFINE_CURVE,
@@ -181,7 +181,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatEnhancedCompositeDamage.option_specs[0],
+                option_spec = MatEnhancedCompositeDamage._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATENHANCEDCOMPOSITEDAMAGE_OPTION0_CARD0,

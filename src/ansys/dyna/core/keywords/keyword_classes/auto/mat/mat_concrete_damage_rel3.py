@@ -109,8 +109,8 @@ class MatConcreteDamageRel3(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "CONCRETE_DAMAGE_REL3"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcrate": LinkType.DEFINE_CURVE,
@@ -150,7 +150,7 @@ class MatConcreteDamageRel3(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatConcreteDamageRel3.option_specs[0],
+                option_spec = MatConcreteDamageRel3._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCONCRETEDAMAGEREL3_OPTION0_CARD0,

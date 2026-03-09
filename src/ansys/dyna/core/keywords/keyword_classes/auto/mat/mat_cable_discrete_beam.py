@@ -57,8 +57,8 @@ class MatCableDiscreteBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "CABLE_DISCRETE_BEAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -78,7 +78,7 @@ class MatCableDiscreteBeam(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatCableDiscreteBeam.option_specs[0],
+                option_spec = MatCableDiscreteBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCABLEDISCRETEBEAM_OPTION0_CARD0,

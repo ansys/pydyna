@@ -35,7 +35,6 @@ from .section_point_source_mixture import SectionPointSourceMixture
 from .section_seatbelt import SectionSeatbelt
 from .section_shell import SectionShell
 from .section_shell_efg import SectionShellEfg
-from .section_shell_misc import SectionShellMisc
 from .section_shell_thermal import SectionShellThermal
 from .section_shell_xfem import SectionShellXfem
 from .section_solid import SectionSolid

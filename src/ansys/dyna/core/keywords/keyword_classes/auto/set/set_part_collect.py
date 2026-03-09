@@ -57,8 +57,8 @@ class SetPartCollect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "PART_COLLECT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "pid1": LinkType.PART,
@@ -85,7 +85,7 @@ class SetPartCollect(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SetPartCollect.option_specs[0],
+                option_spec = SetPartCollect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETPARTCOLLECT_OPTION0_CARD0,

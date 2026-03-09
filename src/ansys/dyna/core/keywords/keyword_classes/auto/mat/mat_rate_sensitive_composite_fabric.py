@@ -110,8 +110,8 @@ class MatRateSensitiveCompositeFabric(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "RATE_SENSITIVE_COMPOSITE_FABRIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -156,7 +156,7 @@ class MatRateSensitiveCompositeFabric(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatRateSensitiveCompositeFabric.option_specs[0],
+                option_spec = MatRateSensitiveCompositeFabric._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATRATESENSITIVECOMPOSITEFABRIC_OPTION0_CARD0,

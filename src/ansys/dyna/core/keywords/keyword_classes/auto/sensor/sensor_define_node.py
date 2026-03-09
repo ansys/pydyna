@@ -47,8 +47,8 @@ class SensorDefineNode(KeywordBase):
 
     keyword = "SENSOR"
     subkeyword = "DEFINE_NODE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "node1": LinkType.NODE,
@@ -65,7 +65,7 @@ class SensorDefineNode(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = SensorDefineNode.option_specs[0],
+                option_spec = SensorDefineNode._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SENSORDEFINENODE_OPTION0_CARD0,

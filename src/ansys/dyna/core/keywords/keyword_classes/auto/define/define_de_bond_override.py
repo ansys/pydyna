@@ -50,8 +50,8 @@ class DefineDeBondOverride(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DE_BOND_OVERRIDE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -68,7 +68,7 @@ class DefineDeBondOverride(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineDeBondOverride.option_specs[0],
+                option_spec = DefineDeBondOverride._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDEBONDOVERRIDE_OPTION0_CARD0,

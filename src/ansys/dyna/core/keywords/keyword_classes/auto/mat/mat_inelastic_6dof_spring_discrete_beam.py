@@ -48,8 +48,8 @@ class MatInelastic6DofSpringDiscreteBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "INELASTIC_6DOF_SPRING_DISCRETE_BEAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "tpidr": LinkType.PART,
@@ -70,7 +70,7 @@ class MatInelastic6DofSpringDiscreteBeam(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatInelastic6DofSpringDiscreteBeam.option_specs[0],
+                option_spec = MatInelastic6DofSpringDiscreteBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATINELASTIC6DOFSPRINGDISCRETEBEAM_OPTION0_CARD0,

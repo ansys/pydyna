@@ -98,8 +98,8 @@ class MatAddPzelectric(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ADD_PZELECTRIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "mid": LinkType.MAT,
@@ -139,7 +139,7 @@ class MatAddPzelectric(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatAddPzelectric.option_specs[0],
+                option_spec = MatAddPzelectric._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATADDPZELECTRIC_OPTION0_CARD0,

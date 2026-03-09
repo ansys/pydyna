@@ -60,8 +60,8 @@ class MatLowDensitySyntheticFoamOrtho(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "LOW_DENSITY_SYNTHETIC_FOAM_ORTHO"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid1": LinkType.DEFINE_CURVE,
@@ -82,7 +82,7 @@ class MatLowDensitySyntheticFoamOrtho(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatLowDensitySyntheticFoamOrtho.option_specs[0],
+                option_spec = MatLowDensitySyntheticFoamOrtho._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATLOWDENSITYSYNTHETICFOAMORTHO_OPTION0_CARD0,

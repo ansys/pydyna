@@ -44,8 +44,8 @@ class MatAddCohesive(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ADD_COHESIVE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "pid": LinkType.PART,
@@ -61,7 +61,7 @@ class MatAddCohesive(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatAddCohesive.option_specs[0],
+                option_spec = MatAddCohesive._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATADDCOHESIVE_OPTION0_CARD0,

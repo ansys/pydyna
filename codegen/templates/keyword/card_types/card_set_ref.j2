@@ -8,7 +8,7 @@
 {% endif %}
 {% if keyword_data.card_sets %}
 {% if keyword_data.card_sets.options %}
-                option_specs = {{card.set.name}}.option_specs,
+                option_specs = {{card.set.name}}._option_spec_list,
 {% endif %}
 {% endif %}
                 **kwargs

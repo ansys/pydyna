@@ -53,8 +53,8 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "ADAPTIVE_SOLID_TO_SPH"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "issph": LinkType.SECTION,
@@ -75,7 +75,7 @@ class DefineAdaptiveSolidToSph(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = DefineAdaptiveSolidToSph.option_specs[0],
+                option_spec = DefineAdaptiveSolidToSph._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEADAPTIVESOLIDTOSPH_OPTION0_CARD0,

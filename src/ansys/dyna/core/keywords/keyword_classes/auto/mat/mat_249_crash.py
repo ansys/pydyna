@@ -139,8 +139,8 @@ class Mat249Crash(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "249_CRASH"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcsigy": LinkType.DEFINE_CURVE,
@@ -205,7 +205,7 @@ class Mat249Crash(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = Mat249Crash.option_specs[0],
+                option_spec = Mat249Crash._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT249CRASH_OPTION0_CARD0,

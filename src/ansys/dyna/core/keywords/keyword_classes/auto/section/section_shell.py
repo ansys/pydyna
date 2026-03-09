@@ -67,14 +67,14 @@ _SECTIONSHELLCARDSET_CARD3 = (
 )
 
 _SECTIONSHELLCARDSET_OPTION0_CARD0 = (
-    FieldSchema("title", str, 0, 80, None),
+    FieldSchema("thkscl", float, 0, 10, 1.0),
 )
 
 class SectionShellCardSet(Cards):
     """ CardSet."""
 
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("MISC", "main/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -124,7 +124,7 @@ class SectionShellCardSet(Cards):
                 lambda: self.elform in [101, 102, 103, 104, 105],
                 data = kwargs.get("pi")),
             OptionCardSet(
-                option_spec = SectionShellCardSet.option_specs[0],
+                option_spec = SectionShellCardSet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SECTIONSHELLCARDSET_OPTION0_CARD0,
@@ -522,39 +522,57 @@ class SectionShellCardSet(Cards):
         self._cards[5].data = value
 
     @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the Additional title line
+    def thkscl(self) -> float:
+        """Get or set the Thickness scale factor. Shell thicknesses for all elements of this section including those with thickness specified using *ELEMENT_SHELL_THICKNESS are scaled by THKSCL
         """ # nopep8
-        return self._cards[6].cards[0].get_value("title")
+        return self._cards[6].cards[0].get_value("thkscl")
 
-    @title.setter
-    def title(self, value: str) -> None:
-        """Set the title property."""
-        self._cards[6].cards[0].set_value("title", value)
+    @thkscl.setter
+    def thkscl(self, value: float) -> None:
+        """Set the thkscl property."""
+        self._cards[6].cards[0].set_value("thkscl", value)
 
         if value:
-            self.activate_option("TITLE")
+            self.activate_option("THKSCL")
 
     @property
     def parent(self) -> KeywordBase:
         """Get the parent keyword."""
         return self._parent
 
+_SECTIONSHELL_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class SectionShell(KeywordBase):
     """DYNA SECTION_SHELL keyword"""
 
     keyword = "SECTION"
     subkeyword = "SHELL"
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
+    ]
 
     def __init__(self, **kwargs):
         """Initialize the SectionShell class."""
         super().__init__(**kwargs)
         kwargs["parent"] = self
         kwargs["keyword"] = self
+        kwargs["parent"] = self
         self._cards = [
             CardSet(
                 SectionShellCardSet,
-                option_specs = SectionShellCardSet.option_specs,
+                option_specs = SectionShellCardSet._option_spec_list,
+                **kwargs
+            ),
+            OptionCardSet(
+                option_spec = SectionShell._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONSHELL_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
                 **kwargs
             ),
         ]
@@ -880,16 +898,16 @@ class SectionShell(KeywordBase):
         self.sets[0].pi = value
 
     @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the Additional title line
+    def thkscl(self) -> float:
+        """Get or set the Thickness scale factor. Shell thicknesses for all elements of this section including those with thickness specified using *ELEMENT_SHELL_THICKNESS are scaled by THKSCL
         """ # nopep8
         ensure_card_set_properties(self, False)
-        return self.sets[0].title
+        return self.sets[0].thkscl
 
-    @title.setter
-    def title(self, value: str) -> None:
+    @thkscl.setter
+    def thkscl(self, value: float) -> None:
         ensure_card_set_properties(self, True)
-        self.sets[0].title = value
+        self.sets[0].thkscl = value
 
     @property
     def sets(self) -> typing.List[SectionShellCardSet]:
@@ -899,4 +917,18 @@ class SectionShell(KeywordBase):
     def add_set(self, **kwargs):
         """Adds a set."""
         self._cards[0].add_item(**kwargs)
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

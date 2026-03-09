@@ -75,8 +75,8 @@ class RigidwallPlanarMovingForces(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "PLANAR_MOVING_FORCES"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "n1": LinkType.NODE,
@@ -111,7 +111,7 @@ class RigidwallPlanarMovingForces(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = RigidwallPlanarMovingForces.option_specs[0],
+                option_spec = RigidwallPlanarMovingForces._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLPLANARMOVINGFORCES_OPTION0_CARD0,

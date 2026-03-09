@@ -119,8 +119,8 @@ class MatThermalChemicalReaction(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "THERMAL_CHEMICAL_REACTION"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lccf": LinkType.DEFINE_CURVE,
@@ -167,7 +167,7 @@ class MatThermalChemicalReaction(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = MatThermalChemicalReaction.option_specs[0],
+                option_spec = MatThermalChemicalReaction._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATTHERMALCHEMICALREACTION_OPTION0_CARD0,

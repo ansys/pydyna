@@ -93,8 +93,8 @@ class Mat271(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "271"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lck": LinkType.DEFINE_CURVE,
@@ -138,7 +138,7 @@ class Mat271(KeywordBase):
                 **kwargs,
             ),
             OptionCardSet(
-                option_spec = Mat271.option_specs[0],
+                option_spec = Mat271._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT271_OPTION0_CARD0,
