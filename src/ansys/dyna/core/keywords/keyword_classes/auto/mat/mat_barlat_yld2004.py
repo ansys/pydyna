@@ -97,8 +97,8 @@ class MatBarlatYld2004(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "BARLAT_YLD2004"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcss": LinkType.DEFINE_CURVE_OR_TABLE,
@@ -112,26 +112,33 @@ class MatBarlatYld2004(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2004_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2004_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2004_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2004_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2004_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2004_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2004_CARD6,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatBarlatYld2004.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatBarlatYld2004._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATBARLATYLD2004_OPTION0_CARD0,

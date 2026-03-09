@@ -43,8 +43,8 @@ class DefineControlVolume(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CONTROL_VOLUME"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "sid": LinkType.SET_SEGMENT,
@@ -58,8 +58,9 @@ class DefineControlVolume(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINECONTROLVOLUME_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineControlVolume.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineControlVolume._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECONTROLVOLUME_OPTION0_CARD0,

@@ -109,8 +109,8 @@ class Mat072R3(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "072R3"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcrate": LinkType.DEFINE_CURVE,
@@ -124,26 +124,33 @@ class Mat072R3(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT072R3_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT072R3_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT072R3_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT072R3_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT072R3_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT072R3_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT072R3_CARD6,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat072R3.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat072R3._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT072R3_OPTION0_CARD0,

@@ -50,7 +50,8 @@ class AleEssentialBoundary(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALEESSENTIALBOUNDARY_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Set ID defining a part, part set or segment set ID of the ALE mesh boundary.

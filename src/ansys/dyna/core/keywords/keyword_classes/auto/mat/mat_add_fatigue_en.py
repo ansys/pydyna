@@ -52,8 +52,8 @@ class MatAddFatigueEn(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ADD_FATIGUE_EN"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "mid": LinkType.MAT,
@@ -67,11 +67,13 @@ class MatAddFatigueEn(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATADDFATIGUEEN_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDFATIGUEEN_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatAddFatigueEn.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatAddFatigueEn._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATADDFATIGUEEN_OPTION0_CARD0,

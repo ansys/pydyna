@@ -60,8 +60,8 @@ class SetNodeListSmooth(KeywordBase):
 
     keyword = "SET"
     subkeyword = "NODE_LIST_SMOOTH"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nid1": LinkType.NODE,
@@ -82,11 +82,13 @@ class SetNodeListSmooth(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETNODELISTSMOOTH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETNODELISTSMOOTH_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SetNodeListSmooth.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SetNodeListSmooth._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETNODELISTSMOOTH_OPTION0_CARD0,

@@ -59,8 +59,8 @@ class Mat187L(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "187L"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcemod": LinkType.DEFINE_CURVE,
@@ -77,11 +77,13 @@ class Mat187L(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT187L_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT187L_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat187L.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat187L._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT187L_OPTION0_CARD0,

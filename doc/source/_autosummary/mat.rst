@@ -3054,7 +3054,7 @@ MatExtended3_ParameterBarlat
 MatFabric
 ---------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_fabric
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_034
     :members:
 
 
@@ -3566,6 +3566,13 @@ MatLungTissue
 -------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_lung_tissue
+    :members:
+
+
+MatMaModifiedPiecewiseLinearPlasticityPrestrain
+-----------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ma_modified_piecewise_linear_plasticity_prestrain
     :members:
 
 

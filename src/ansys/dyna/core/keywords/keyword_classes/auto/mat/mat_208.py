@@ -66,8 +66,8 @@ class Mat208(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "208"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcax": LinkType.DEFINE_CURVE,
@@ -82,14 +82,17 @@ class Mat208(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT208_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT208_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT208_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat208.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat208._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT208_OPTION0_CARD0,

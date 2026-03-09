@@ -74,8 +74,8 @@ class RigidwallGeometricFlatMotion(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_FLAT_MOTION"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -92,17 +92,21 @@ class RigidwallGeometricFlatMotion(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICFLATMOTION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICFLATMOTION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICFLATMOTION_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICFLATMOTION_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = RigidwallGeometricFlatMotion.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = RigidwallGeometricFlatMotion._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLGEOMETRICFLATMOTION_OPTION0_CARD0,

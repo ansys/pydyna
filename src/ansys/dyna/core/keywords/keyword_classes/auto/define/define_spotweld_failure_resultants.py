@@ -55,8 +55,8 @@ class DefineSpotweldFailureResultants(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "SPOTWELD_FAILURE_RESULTANTS"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "dlcidsn": LinkType.DEFINE_CURVE,
@@ -75,11 +75,13 @@ class DefineSpotweldFailureResultants(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINESPOTWELDFAILURERESULTANTS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINESPOTWELDFAILURERESULTANTS_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineSpotweldFailureResultants.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineSpotweldFailureResultants._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINESPOTWELDFAILURERESULTANTS_OPTION0_CARD0,

@@ -24,6 +24,7 @@
 
 import contextlib
 import logging
+import re
 import typing
 import warnings
 
@@ -34,12 +35,64 @@ if typing.TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
+# Regex to extract parameter names from ref strings (e.g. "&param", "-&density", "&base+5")
+_PARAM_NAME_PATTERN = re.compile(r"&([a-zA-Z_][a-zA-Z0-9_]*)")
+
+# Opaque context for ref location. Caller provides and interprets; ParameterSet stores as-is.
+_RefContext = typing.Any
+
 
 def _evaluate_expressions_if_needed():
     """Lazy import to avoid circular dependency."""
     from ansys.dyna.core.lib.expression_evaluator import evaluate_parameter_expressions
 
     return evaluate_parameter_expressions
+
+
+def _format_context_location(ctx: typing.Any) -> str:
+    """Format opaque context as location string for warnings.
+
+    Calls ctx.format_location() if available (e.g. ImportContext), otherwise
+    returns empty string. This keeps parameters.py decoupled from context internals.
+    """
+    if ctx is None:
+        return ""
+    format_loc = getattr(ctx, "format_location", None)
+    if callable(format_loc):
+        return format_loc()
+    return ""
+
+
+def _format_unresolved_param_parts(
+    unresolved: typing.List[typing.Tuple[str, typing.Any]],
+) -> typing.List[str]:
+    """Format unresolved (name, ctx) tuples for display."""
+    parts = []
+    for name, ctx in sorted(
+        unresolved,
+        key=lambda x: (x[0], getattr(x[1], "path", None) or "", getattr(x[1], "line_number", None) or 0),
+    ):
+        loc = _format_context_location(ctx)
+        parts.append(f"&{name}{loc}" if loc else f"&{name}")
+    return parts
+
+
+def _warn_unresolved_parameters(unresolved: typing.List[typing.Tuple[str, typing.Any]]) -> None:
+    """Emit warning for unresolved parameter references."""
+    if not unresolved:
+        return
+    parts = _format_unresolved_param_parts(unresolved)
+    warnings.warn(f"Unresolved parameter(s) after expand: {', '.join(parts)}")
+
+
+def _raise_unresolved_parameters(unresolved: typing.List[typing.Tuple[str, typing.Any]]) -> None:
+    """Raise ValueError for unresolved parameter references."""
+    if not unresolved:
+        return
+    parts = _format_unresolved_param_parts(unresolved)
+    raise ValueError(
+        f"Cannot write undefined parameter(s): {', '.join(parts)}. Use retain_parameters=True to preserve references."
+    )
 
 
 class ParameterSet:
@@ -56,15 +109,22 @@ class ParameterSet:
         parent : ParameterSet, optional
             Parent scope for parameter lookup. If None, this is a root scope.
         """
-        self._params = dict()  # Global parameters in this scope
-        self._local_params = dict()  # Local-only parameters in this scope
+        self._params = dict()  # Global parameters in this scope (original names)
+        self._params_lower = dict()  # Lowercase name -> original name mapping for case-insensitive lookup
+        self._local_params = dict()  # Local-only parameters in this scope (original names)
+        self._local_params_lower = dict()  # Lowercase name -> original name mapping for locals
         self._parent = parent  # Parent scope for lookup
         self._uri_stack: typing.List[str] = []  # Stack for building current URI path
         self._refs: typing.Dict[str, str] = {}  # URI -> parameter reference string (e.g., "&myvar")
+        self._ref_locations: typing.Dict[str, _RefContext] = {}  # URI -> opaque context from caller
+        self._current_context: typing.Optional[_RefContext] = None
         logger.debug(f"Created ParameterSet with parent={parent is not None}")
 
     def get(self, param: str) -> typing.Any:
         """Get a parameter by name, checking local then parent scopes.
+
+        Parameter lookup is case-insensitive, matching LS-DYNA behaviour.
+        Parameters are stored with their original casing; lookup is case-insensitive.
 
         Parameters
         ----------
@@ -81,14 +141,21 @@ class ParameterSet:
         KeyError
             If parameter is not found in this scope or any parent scope.
         """
-        # Check local scope first (both global and local params)
-        if param in self._params:
-            logger.debug(f"Found parameter '{param}' in global params: {self._params[param]}")
-            return self._params[param]
+        # Normalize for case-insensitive lookup
+        param_lower = param.lower()
 
-        if param in self._local_params:
-            logger.debug(f"Found parameter '{param}' in local params: {self._local_params[param]}")
-            return self._local_params[param]
+        # Check local scope first (both global and local params)
+        if param_lower in self._params_lower:
+            original_name = self._params_lower[param_lower]
+            value = self._params[original_name]
+            logger.debug(f"Found parameter '{param}' (stored as '{original_name}') in global params: {value}")
+            return value
+
+        if param_lower in self._local_params_lower:
+            original_name = self._local_params_lower[param_lower]
+            value = self._local_params[original_name]
+            logger.debug(f"Found parameter '{param}' (stored as '{original_name}') in local params: {value}")
+            return value
 
         # Check parent scope
         if self._parent is not None:
@@ -104,6 +171,7 @@ class ParameterSet:
 
         This method is for global parameters (PARAMETER keyword).
         They are added to the local scope but will be visible to child scopes.
+        Parameters are stored with their original casing; lookup is case-insensitive.
 
         Parameters
         ----------
@@ -113,13 +181,24 @@ class ParameterSet:
             Parameter value.
         """
         logger.debug(f"Adding global parameter '{param}' = {value} to local scope")
+        param_lower = param.lower()
+
+        # Remove any existing parameter with different casing
+        if param_lower in self._params_lower:
+            old_name = self._params_lower[param_lower]
+            if old_name != param:
+                logger.debug(f"Removing old parameter '{old_name}' (case variant of '{param}')")
+                del self._params[old_name]
+
         self._params[param] = value
+        self._params_lower[param_lower] = param
 
     def add_local(self, param: str, value: typing.Any) -> None:
         """Add a parameter to local scope only (PARAMETER_LOCAL).
 
         Local parameters are only visible within the current scope and child scopes
         created from it, but won't leak to parent or sibling scopes.
+        Parameters are stored with their original casing; lookup is case-insensitive.
 
         Parameters
         ----------
@@ -129,7 +208,17 @@ class ParameterSet:
             Parameter value.
         """
         logger.debug(f"Adding local parameter '{param}' = {value} to local scope")
+        param_lower = param.lower()
+
+        # Remove any existing parameter with different casing
+        if param_lower in self._local_params_lower:
+            old_name = self._local_params_lower[param_lower]
+            if old_name != param:
+                logger.debug(f"Removing old local parameter '{old_name}' (case variant of '{param}')")
+                del self._local_params[old_name]
+
         self._local_params[param] = value
+        self._local_params_lower[param_lower] = param
 
     def copy_with_child_scope(self) -> "ParameterSet":
         """Create a new ParameterSet with this as the parent scope.
@@ -177,6 +266,14 @@ class ParameterSet:
             popped = self._uri_stack.pop()
             logger.debug(f"Popped URI segment '{popped}', stack: {self._uri_stack}")
 
+    def set_context(self, context: typing.Optional[_RefContext]) -> None:
+        """Set the current context for subsequent record_ref calls.
+
+        The context is stored opaquely; the caller decides the convention
+        (e.g. ImportContext with path/line_number for deck loading).
+        """
+        self._current_context = context
+
     def record_ref(self, field: str, ref: str) -> None:
         """Record a parameter reference at the current URI path.
 
@@ -193,6 +290,7 @@ class ParameterSet:
         """
         uri = "/".join(self._uri_stack + [field])
         self._refs[uri] = ref
+        self._ref_locations[uri] = self._current_context
         logger.debug(f"Recorded parameter ref at URI '{uri}': {ref}")
 
     def get_ref(self, *path_segments: str) -> typing.Optional[str]:
@@ -227,6 +325,151 @@ class ParameterSet:
             The current URI path joined with '/'.
         """
         return "/".join(self._uri_stack)
+
+    def merge_refs_from(self, other: "ParameterSet") -> None:
+        """Copy parameter reference recordings from another ParameterSet.
+
+        Used when a keyword is assigned to a deck: the keyword's refs are merged
+        into the deck's parameters so the deck owns both values and refs.
+        """
+        self.add_refs(other._refs, other._ref_locations)
+
+    def _iter_refs_for_prefix(self, prefix: str) -> typing.Iterator[typing.Tuple[str, str]]:
+        """Yield (uri, ref) for refs whose URI is under the given prefix."""
+        prefix_slash = prefix if prefix.endswith("/") else prefix + "/"
+        prefix_base = prefix.rstrip("/")
+        for uri, ref in self._refs.items():
+            if uri.startswith(prefix_slash) or uri == prefix_base:
+                yield uri, ref
+
+    def extract_refs_for_prefix(
+        self,
+        prefix: str,
+        exclude_params: typing.Optional[typing.Set[str]] = None,
+    ) -> typing.Tuple[typing.Dict[str, str], typing.Dict[str, _RefContext]]:
+        """Extract and remove refs whose URI starts with the given prefix.
+
+        Used when a keyword is removed from a deck: extract its refs so they
+        can be restored to an independent ParameterSet.
+
+        When exclude_params is provided (e.g. local param names from an include),
+        refs to those params are removed but not returned. This bakes in local
+        parameter values during deck expansion.
+
+        Parameters
+        ----------
+        prefix : str
+            URI prefix to match.
+        exclude_params : set of str, optional
+            Param names to exclude. Refs to these are dropped (not extracted).
+
+        Returns
+        -------
+        tuple of (dict, dict)
+            Extracted refs (uri -> ref string) and locations (uri -> opaque context).
+        """
+        exclude_lower = {p.lower() for p in exclude_params} if exclude_params else set()
+        extracted_refs = {}
+        extracted_locations = {}
+        to_remove = []
+        for uri, ref in self._iter_refs_for_prefix(prefix):
+            # Skip refs to excluded (local) params - values are baked in
+            ref_params = {m.group(1).lower() for m in _PARAM_NAME_PATTERN.finditer(ref)}
+            if ref_params & exclude_lower:
+                to_remove.append(uri)
+                continue
+            extracted_refs[uri] = ref
+            if uri in self._ref_locations:
+                extracted_locations[uri] = self._ref_locations[uri]
+            to_remove.append(uri)
+        for uri in to_remove:
+            del self._refs[uri]
+            if uri in self._ref_locations:
+                del self._ref_locations[uri]
+        return extracted_refs, extracted_locations
+
+    def add_refs(
+        self,
+        refs: typing.Dict[str, str],
+        locations: typing.Optional[typing.Dict[str, _RefContext]] = None,
+    ) -> None:
+        """Add refs from a dict (uri -> ref string). Used when restoring refs to an independent set."""
+        self._refs.update(refs)
+        if locations is not None:
+            self._ref_locations.update(locations)
+
+    def get_unresolved_param_names(self, uri_prefix: str) -> typing.List[str]:
+        """Get parameter names for refs under uri_prefix that are not defined in this set.
+
+        Used after loading to check if any parameter references could not be resolved.
+        Extracts param names from ref strings (e.g. &base, &base+5, -&density) and
+        returns those that are not in the parameter set.
+
+        Parameters
+        ----------
+        uri_prefix : str
+            URI prefix to filter refs (e.g. keyword id from scope).
+
+        Returns
+        -------
+        list of str
+            Parameter names that were referenced but not defined.
+        """
+        unresolved: typing.List[str] = []
+        seen: typing.Set[str] = set()
+        for uri, ref in self._iter_refs_for_prefix(uri_prefix):
+            for match in _PARAM_NAME_PATTERN.finditer(ref):
+                name = match.group(1)
+                if name in seen:
+                    continue
+                seen.add(name)
+                try:
+                    self.get(name)
+                except KeyError:
+                    unresolved.append(name)
+        return unresolved
+
+    def get_all_unresolved_param_names(
+        self,
+    ) -> typing.List[typing.Tuple[str, _RefContext]]:
+        """Get all parameter names referenced in this set that are not defined.
+
+        Unlike get_unresolved_param_names(), this checks all refs without filtering by prefix.
+        Used at the end of deck.expand() to warn about any unresolved parameters.
+
+        Returns
+        -------
+        list of tuple
+            Each tuple is (param_name, context). Context is opaque; caller interprets it
+            (e.g. ImportContext with path/line_number for deck loading).
+        """
+        unresolved: typing.List[typing.Tuple[str, _RefContext]] = []
+        seen: typing.Set[str] = set()
+        for uri, ref in self._refs.items():
+            for match in _PARAM_NAME_PATTERN.finditer(ref):
+                name = match.group(1)
+                if name in seen:
+                    continue
+                seen.add(name)
+                try:
+                    self.get(name)
+                except KeyError:
+                    ctx = self._ref_locations.get(uri, None)
+                    unresolved.append((name, ctx))
+        return unresolved
+
+    def get_local_param_names(self) -> typing.Set[str]:
+        """Get names of local parameters defined in this scope only.
+
+        Used when extracting refs during deck expansion: refs to local params
+        should not be carried to the expanded deck (values are baked in).
+
+        Returns
+        -------
+        set of str
+            Local parameter names in this scope.
+        """
+        return set(self._local_params.keys())
 
     def get_global_params(self) -> typing.Dict[str, typing.Any]:
         """Get only the global parameters defined in this scope.
@@ -437,6 +680,15 @@ class ParameterHandler(ImportHandler):
             logger.debug(f"Processing {'PARAMETER_EXPRESSION_LOCAL' if is_local else 'PARAMETER_EXPRESSION'} keyword")
             _load_parameter_expressions(context.deck, keyword, local=is_local)
 
-    def on_error(self, error):
+    def on_error(self, error, context=None, result=None):
         """Emit a warning when parameter processing fails."""
-        warnings.warn(f"Error processing parameter: {error}")
+        location = ""
+        if context is not None:
+            if context.path is not None:
+                location += f" in file '{context.path}'"
+            if context.line_number is not None:
+                location += f" for keyword beginning on line {context.line_number}"
+        message = f"Error processing parameter: {error}{location}"
+        if result is not None:
+            result.add_warning(message)
+        warnings.warn(message)

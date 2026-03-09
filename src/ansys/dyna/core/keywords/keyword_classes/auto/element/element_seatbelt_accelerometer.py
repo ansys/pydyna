@@ -56,7 +56,8 @@ class ElementSeatbeltAccelerometer(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTSEATBELTACCELEROMETER_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sbacid(self) -> int:
         """Get or set the Accelerometer ID. A unique number has to be used.

@@ -69,13 +69,16 @@ class LoadSurfaceStress(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADSURFACESTRESS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSURFACESTRESS_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSURFACESTRESS_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the part id

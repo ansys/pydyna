@@ -43,8 +43,8 @@ class MatS05(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "S05"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcdr": LinkType.DEFINE_CURVE,
@@ -58,8 +58,9 @@ class MatS05(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATS05_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatS05.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatS05._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATS05_OPTION0_CARD0,

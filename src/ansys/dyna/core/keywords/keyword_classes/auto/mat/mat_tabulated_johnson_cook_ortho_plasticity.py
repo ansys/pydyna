@@ -107,8 +107,8 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "TABULATED_JOHNSON_COOK_ORTHO_PLASTICITY"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lct00r": LinkType.DEFINE_CURVE,
@@ -139,26 +139,33 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_CARD6,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatTabulatedJohnsonCookOrthoPlasticity.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatTabulatedJohnsonCookOrthoPlasticity._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_OPTION0_CARD0,

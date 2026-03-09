@@ -88,8 +88,8 @@ class MatOrthotropicThermalFailure(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ORTHOTROPIC_THERMAL_FAILURE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -100,20 +100,25 @@ class MatOrthotropicThermalFailure(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALFAILURE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALFAILURE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALFAILURE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALFAILURE_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALFAILURE_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatOrthotropicThermalFailure.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatOrthotropicThermalFailure._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATORTHOTROPICTHERMALFAILURE_OPTION0_CARD0,

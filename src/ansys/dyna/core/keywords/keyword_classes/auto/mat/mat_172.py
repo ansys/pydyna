@@ -119,8 +119,8 @@ class Mat172(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "172"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcrsu": LinkType.DEFINE_CURVE,
@@ -136,29 +136,37 @@ class Mat172(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT172_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT172_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT172_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT172_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT172_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT172_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT172_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT172_CARD7,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat172.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat172._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT172_OPTION0_CARD0,

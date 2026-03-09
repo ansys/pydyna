@@ -48,7 +48,8 @@ class ControlTermination(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLTERMINATION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def endtim(self) -> float:
         """Get or set the Termination time. Mandatory.

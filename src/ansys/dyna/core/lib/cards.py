@@ -26,11 +26,15 @@ import typing
 import warnings
 
 from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.card_position import CardPlacement
 from ansys.dyna.core.lib.card_writer import write_cards
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.kwd_line_formatter import read_line
 from ansys.dyna.core.lib.option_card import OptionCardSet, Options, OptionsInterface, OptionSpec
 from ansys.dyna.core.lib.parameters import ParameterSet
+
+if typing.TYPE_CHECKING:
+    from ansys.dyna.core.lib.import_handler import ImportContext
 
 
 class Cards(OptionsInterface):
@@ -40,10 +44,54 @@ class Cards(OptionsInterface):
         # The instance of "Cards" may be part of a card set or it may be the keyword itself
         # Though OptionsInterface is implemented here, the API for options should come from
         # The keyword if it is a card set. # TODO - can this be improved?
+        self._keyword = keyword  # Reference to parent keyword (for CardSet items) or self (for KeywordBase)
         self._options = Options(keyword)
         self._active_options: typing.Set[str] = set()
 
+    @staticmethod
+    def _enrich_warning_with_context(message: str, import_context: typing.Optional["ImportContext"] = None) -> str:
+        """Enrich a warning message with location information from import context.
+
+        Parameters
+        ----------
+        message : str
+            The original warning message.
+        import_context : ImportContext, optional
+            Import context with file path and line number.
+
+        Returns
+        -------
+        str
+            Enriched message with location prepended if context is available.
+        """
+        if import_context is None:
+            return message
+
+        location_parts = []
+        if import_context.path is not None:
+            location_parts.append(import_context.path)
+        if import_context.line_number is not None:
+            location_parts.append(str(import_context.line_number))
+
+        if location_parts:
+            location = ":".join(location_parts)
+            return f"[{location}] {message}"
+        return message
+
     # options API interface implementation
+
+    @property
+    def parameter_set(self) -> typing.Optional[ParameterSet]:
+        """Get the parameter set for this Cards instance.
+
+        For KeywordBase (where self has _parameter_set): returns self._parameter_set.
+        For CardSet items (where self._keyword exists): returns self._keyword._parameter_set.
+        """
+        if hasattr(self, "_parameter_set"):
+            return self._parameter_set
+        if hasattr(self._keyword, "_parameter_set"):
+            return self._keyword._parameter_set
+        return None
 
     @property
     def options(self) -> Options:
@@ -114,9 +162,9 @@ class Cards(OptionsInterface):
     def _get_post_options_with_no_title_order(self):
         option_cards = [card for card in self._get_sorted_option_cards() if card.title_order == 0]
         for option_card in option_cards:
-            if option_card.card_order < 0:
-                raise ValueError("Cards with a title order of 0 must have a positive card order")
-        return option_cards
+            if option_card.position.placement == CardPlacement.PRE:
+                raise ValueError("Cards with a title order of 0 must not have 'pre' placement")
+        return [o for o in option_cards if o.position.placement == CardPlacement.POST]
 
     def _get_active_options(self) -> typing.List[OptionCardSet]:
         """Return all active option card sets, sorted by card order."""
@@ -142,18 +190,43 @@ class Cards(OptionsInterface):
     def _get_pre_option_cards(self) -> typing.List[CardInterface]:
         """Get the option cards that go before the non-optional cards."""
         active_option_sets = self._get_active_options()
-        pre_option_cards = self._unwrap_option_sets(active_option_sets, lambda o: o.card_order < 0)
+        pre_option_cards = self._unwrap_option_sets(
+            active_option_sets, lambda o: o.position.placement == CardPlacement.PRE
+        )
         return self._flatten_2d_card_list(pre_option_cards)
 
     def _get_post_option_cards(self) -> typing.List[CardInterface]:
         """Get the option cards that go after the non-optional cards."""
         active_option_sets = self._get_active_options()
-        post_option_cards = self._unwrap_option_sets(active_option_sets, lambda o: o.card_order > 0)
+        post_option_cards = self._unwrap_option_sets(
+            active_option_sets, lambda o: o.position.placement == CardPlacement.POST
+        )
         return self._flatten_2d_card_list(post_option_cards)
 
+    def _get_main_option_cards_by_index(self) -> typing.Dict[int, typing.List[CardInterface]]:
+        """Return active MAIN option cards grouped by their insertion index.
+
+        The key N is the 0-based index of the non-option card *after which* the option
+        cards are inserted (i.e. ``"main/N"`` means "place immediately after non-option
+        card N"). Multiple option sets at the same index are inserted in ascending order
+        of their position index.
+        """
+        active_option_sets = self._get_active_options()
+        by_index: typing.Dict[int, typing.List[CardInterface]] = {}
+        for option_set in active_option_sets:
+            if option_set.position.placement == CardPlacement.MAIN:
+                idx = option_set.position.index
+                by_index.setdefault(idx, []).extend(option_set.cards)
+        return by_index
+
     def _get_all_cards(self) -> typing.List[CardInterface]:
+        main_by_index = self._get_main_option_cards_by_index()
         cards = self._get_pre_option_cards()
-        cards.extend(self._get_non_option_cards())
+        non_option = self._get_non_option_cards()
+        for i, card in enumerate(non_option):
+            cards.append(card)
+            # Insert any MAIN option cards positioned *after* non-option card i
+            cards.extend(main_by_index.get(i, []))
         cards.extend(self._get_post_option_cards())
         return cards
 
@@ -166,12 +239,20 @@ class Cards(OptionsInterface):
         **kwargs,
     ):
         """Writes the cards to `buf` using `format`."""
-        # When retain_parameters is True, we pass the keyword's parameter set and ID
-        # so cards can look up stored parameter references
-        # Note: kwargs may contain parameter_set/keyword_id from parent CardSet, but we
-        # use our own parameter_set for this keyword's cards
-        parameter_set = getattr(self, "_parameter_set", None) if retain_parameters else None
-        keyword_id = str(id(self)) if retain_parameters else None
+        # Use provided parameter_set/keyword_id from kwargs (for nested CardSets)
+        # or compute from self (for top-level keyword)
+        parameter_set = kwargs.get("parameter_set")
+        keyword_id = kwargs.get("keyword_id")
+        uri_prefix = kwargs.get("uri_prefix")
+
+        if parameter_set is None and keyword_id is None:
+            if retain_parameters or (
+                self.parameter_set is not None and getattr(self._keyword, "deck", None) is not None
+            ):
+                parameter_set = self.parameter_set
+                if parameter_set is not None:
+                    keyword_id = str(id(self._keyword))
+
         write_cards(
             self._get_all_cards(),
             buf,
@@ -180,6 +261,7 @@ class Cards(OptionsInterface):
             retain_parameters=retain_parameters,
             parameter_set=parameter_set,
             keyword_id=keyword_id,
+            uri_prefix=uri_prefix,
         )
 
     def _try_read_options_with_no_title(self, buf: typing.TextIO, parameters: ParameterSet = None) -> None:
@@ -209,44 +291,37 @@ class Cards(OptionsInterface):
         if not any_options_read:
             buf.seek(pos)
 
-    def _read_card(self, card: CardInterface, buf: typing.TextIO, parameters: ParameterSet) -> bool:
+    def _read_card(
+        self,
+        card: CardInterface,
+        buf: typing.TextIO,
+        parameters: ParameterSet,
+        import_context: typing.Optional["ImportContext"] = None,
+    ) -> bool:
         pos = buf.tell()
-        with warnings.catch_warnings(record=True) as w:
-            card.read(buf, parameters)
-            caught = list(w)
+        read_result = card.read(buf, parameters)
 
         # the card is not active after reading it. THat means we should *not* read it. Rewinding back to the buffer
         # start position. In this case any warnings caused by reading the card can be ignored.
         if not card.active:
             buf.seek(pos)
         else:
-            # emit warnings caught while reading the card
-            for caught_warning in caught:
-                warnings.warn(caught_warning.message)
+            # emit warnings from reading the card, enriched with location context
+            for msg in read_result.warnings:
+                enriched_msg = self._enrich_warning_with_context(msg, import_context)
+                warnings.warn(enriched_msg)
         return True
 
-    def _read_data(self, buf: typing.TextIO, parameters: ParameterSet) -> None:
+    def _read_data(
+        self, buf: typing.TextIO, parameters: ParameterSet, import_context: typing.Optional["ImportContext"] = None
+    ) -> None:
         card_index = 0
-        for card in self._get_pre_option_cards():
+        for card in self._get_all_cards():
             if parameters is not None:
                 with parameters.scope(f"card{card_index}"):
-                    self._read_card(card, buf, parameters)
+                    self._read_card(card, buf, parameters, import_context)
             else:
-                self._read_card(card, buf, parameters)
-            card_index += 1
-        for card in self._get_non_option_cards():
-            if parameters is not None:
-                with parameters.scope(f"card{card_index}"):
-                    self._read_card(card, buf, parameters)
-            else:
-                self._read_card(card, buf, parameters)
-            card_index += 1
-        for card in self._get_post_option_cards():
-            if parameters is not None:
-                with parameters.scope(f"card{card_index}"):
-                    self._read_card(card, buf, parameters)
-            else:
-                self._read_card(card, buf, parameters)
+                self._read_card(card, buf, parameters, import_context)
             card_index += 1
 
         self._try_read_options_with_no_title(buf, parameters)

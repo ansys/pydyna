@@ -158,8 +158,8 @@ class MatBarlatYld2000(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "BARLAT_YLD2000"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "hta": LinkType.DEFINE_CURVE,
@@ -176,41 +176,53 @@ class MatBarlatYld2000(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2000_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2000_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2000_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2000_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2000_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2000_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2000_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2000_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2000_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2000_CARD9,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2000_CARD10,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATBARLATYLD2000_CARD11,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatBarlatYld2000.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatBarlatYld2000._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATBARLATYLD2000_OPTION0_CARD0,

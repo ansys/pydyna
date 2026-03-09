@@ -54,10 +54,12 @@ class InitialHistoryNodeSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALHISTORYNODESET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALHISTORYNODESET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node id.

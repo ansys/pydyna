@@ -42,4 +42,5 @@ class ControlMppIoNobeamout(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPIONOBEAMOUT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

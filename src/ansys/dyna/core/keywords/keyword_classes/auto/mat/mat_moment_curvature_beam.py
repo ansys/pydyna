@@ -104,8 +104,8 @@ class MatMomentCurvatureBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "MOMENT_CURVATURE_BEAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "elaf": LinkType.DEFINE_CURVE,
@@ -119,23 +119,29 @@ class MatMomentCurvatureBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATMOMENTCURVATUREBEAM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOMENTCURVATUREBEAM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOMENTCURVATUREBEAM_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOMENTCURVATUREBEAM_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOMENTCURVATUREBEAM_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOMENTCURVATUREBEAM_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatMomentCurvatureBeam.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatMomentCurvatureBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATMOMENTCURVATUREBEAM_OPTION0_CARD0,

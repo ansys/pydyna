@@ -50,8 +50,8 @@ class SetNodeList(KeywordBase):
 
     keyword = "SET"
     subkeyword = "NODE_LIST"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nodes": LinkType.NODE,
@@ -65,14 +65,16 @@ class SetNodeList(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETNODELIST_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "nodes",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("nodes")),            OptionCardSet(
-                option_spec = SetNodeList.option_specs[0],
+                data = kwargs.get("nodes")),
+            OptionCardSet(
+                option_spec = SetNodeList._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETNODELIST_OPTION0_CARD0,

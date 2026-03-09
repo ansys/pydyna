@@ -49,8 +49,8 @@ class Set2DSegmentSetCollect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "2D_SEGMENT_SET_COLLECT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "psid": LinkType.SET_PART,
@@ -64,11 +64,13 @@ class Set2DSegmentSetCollect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SET2DSEGMENTSETCOLLECT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SET2DSEGMENTSETCOLLECT_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Set2DSegmentSetCollect.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Set2DSegmentSetCollect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SET2DSEGMENTSETCOLLECT_OPTION0_CARD0,

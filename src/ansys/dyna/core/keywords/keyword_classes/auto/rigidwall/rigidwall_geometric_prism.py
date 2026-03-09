@@ -66,8 +66,8 @@ class RigidwallGeometricPrism(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_PRISM"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "boxid": LinkType.DEFINE_BOX,
@@ -83,14 +83,17 @@ class RigidwallGeometricPrism(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICPRISM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICPRISM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICPRISM_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = RigidwallGeometricPrism.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = RigidwallGeometricPrism._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLGEOMETRICPRISM_OPTION0_CARD0,

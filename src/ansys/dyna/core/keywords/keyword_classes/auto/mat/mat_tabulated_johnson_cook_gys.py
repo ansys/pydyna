@@ -68,8 +68,8 @@ class MatTabulatedJohnsonCookGys(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "TABULATED_JOHNSON_COOK_GYS"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcg": LinkType.DEFINE_CURVE,
@@ -88,14 +88,17 @@ class MatTabulatedJohnsonCookGys(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKGYS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKGYS_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKGYS_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatTabulatedJohnsonCookGys.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatTabulatedJohnsonCookGys._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATTABULATEDJOHNSONCOOKGYS_OPTION0_CARD0,

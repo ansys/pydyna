@@ -246,6 +246,7 @@ def create_default_registry() -> HandlerRegistry:
         "table-card-group",
         "external-card-implementation",
         "add-mixin",  # Can run late as it doesn't modify cards
+        "additional-imports",  # Can run late as it doesn't modify cards
         "shared-field",
     ]
 

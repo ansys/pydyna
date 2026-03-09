@@ -98,8 +98,8 @@ class SectionSolidSpg(KeywordBase):
 
     keyword = "SECTION"
     subkeyword = "SOLID_SPG"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "boxid": LinkType.DEFINE_BOX,
@@ -113,23 +113,29 @@ class SectionSolidSpg(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SECTIONSOLIDSPG_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONSOLIDSPG_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONSOLIDSPG_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONSOLIDSPG_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONSOLIDSPG_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONSOLIDSPG_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SectionSolidSpg.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SectionSolidSpg._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SECTIONSOLIDSPG_OPTION0_CARD0,

@@ -58,7 +58,8 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYTEMPERATUREPERIODICSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid1(self) -> typing.Optional[int]:
         """Get or set the First Segment set on which the periodic temperature boundary condition will be applied.

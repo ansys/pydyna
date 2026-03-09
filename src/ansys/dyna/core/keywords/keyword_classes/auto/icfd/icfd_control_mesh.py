@@ -51,10 +51,12 @@ class IcfdControlMesh(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLMESH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLMESH_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mgsf(self) -> float:
         """Get or set the Mesh Growth Scale Factor : Specifies the maximum mesh size that the volume mesher is allowed to use when generating the volume mesh based on the mesh surface element sizes defined in *MESH_SURFACE_ELEMENT. Values between 1 and 2 are allowed. Values closer to 1 will result in a finer volume mesh (1 means the volume mesh is not allowed to be coarser than the element size from the closest surface meshes) and val# ues closer to 2 will result in a coarser volume mesh (2 means the volume can use elements as much as twice as coarse as those from the closest surface mesh).

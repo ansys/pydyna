@@ -8,12 +8,13 @@
                 "HOURGLASS",
                 "SENSOR",
                 "SET",
-                "MAT"
+                "MAT",
+                "EOS"
             ],
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -1,
+                        "card-order": "pre/1",
                         "title-order": 1,
                         "cards": [
                             {
@@ -97,7 +98,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -2,
+                        "card-order": "pre/2",
                         "title-order": 1,
                         "cards": [
                             {
@@ -119,7 +120,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -2,
+                        "card-order": "pre/2",
                         "title-order": 1,
                         "cards": [
                             {
@@ -140,7 +141,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -1,
+                        "card-order": "pre/1",
                         "title-order": 1,
                         "cards": [
                             {
@@ -189,7 +190,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -2,
+                        "card-order": "pre/2",
                         "title-order": 1,
                         "cards": [
                             {
@@ -225,7 +226,7 @@
             "generation-options": {
                 "add-option": [
                     {
-                        "card-order": -2,
+                        "card-order": "pre/2",
                         "title-order": 1,
                         "cards": [
                             {
@@ -236,7 +237,7 @@
                         "option-name": "ID"
                     },
                     {
-                        "card-order": -1,
+                        "card-order": "pre/1",
                         "title-order": 2,
                         "cards": [
                             {
@@ -251,7 +252,7 @@
                         "option-name": "MPP"
                     },
                     {
-                        "card-order": 1,
+                        "card-order": "post/1",
                         "title-order": 0,
                         "cards": [
                             {
@@ -262,7 +263,7 @@
                         "option-name": "A"
                     },
                     {
-                        "card-order": 2,
+                        "card-order": "post/2",
                         "title-order": 0,
                         "cards": [
                             {
@@ -273,7 +274,7 @@
                         "option-name": "B"
                     },
                     {
-                        "card-order": 3,
+                        "card-order": "post/3",
                         "title-order": 0,
                         "cards": [
                             {
@@ -284,7 +285,7 @@
                         "option-name": "C"
                     },
                     {
-                        "card-order": 4,
+                        "card-order": "post/4",
                         "title-order": 0,
                         "cards": [
                             {
@@ -295,7 +296,7 @@
                         "option-name": "D"
                     },
                     {
-                        "card-order": 5,
+                        "card-order": "post/5",
                         "title-order": 0,
                         "cards": [
                             {
@@ -306,7 +307,7 @@
                         "option-name": "E"
                     },
                     {
-                        "card-order": 6,
+                        "card-order": "post/6",
                         "title-order": 0,
                         "cards": [
                             {
@@ -317,7 +318,7 @@
                         "option-name": "F"
                     },
                     {
-                        "card-order": 7,
+                        "card-order": "post/7",
                         "title-order": 0,
                         "cards": [
                             {
@@ -344,7 +345,7 @@
                 ],
                 "add-option": [
                     {
-                        "card-order": -2,
+                        "card-order": "pre/2",
                         "title-order": 1,
                         "cards": [
                             {
@@ -365,7 +366,7 @@
         "generation-options": {
             "add-option": [
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -377,7 +378,7 @@
                     "option-name": "ID"
                 },
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -438,6 +439,37 @@
         },
         "labels": {
             "points_card": 1
+        }
+    },
+    "DEFINE_SENSOR_FORCE": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "sensors",
+                    "ref": "sensor_card"
+                }
+            ]
+        },
+        "labels": {
+            "sensor_card": 0
+        }
+    },
+    "DEFINE_SENSOR_FORCE_UPDATE": {
+        "generation-options": {
+            "table-card-group": [
+                {
+                    "refs": [
+                        "sensor_card",
+                        "update_card"
+                    ],
+                    "overall-name": "sensors",
+                    "key-field": "sensid"
+                }
+            ]
+        },
+        "labels": {
+            "sensor_card": 0,
+            "update_card": 1
         }
     },
     "DEFINE_TABLE_2D": {
@@ -774,6 +806,22 @@
             "duplicate_inertia_card": 9
         },
         "generation-options": {
+            "card-set": [
+                {
+                    "source-refs": [
+                        "main_card",
+                        "dimensions_card",
+                        "inertia_card",
+                        "truss_card",
+                        "integrated_thickness_card",
+                        "discrete_beam_card",
+                        "spotweld_thickness_card"
+                    ],
+                    "source-options": [0],
+                    "target-ref": "main_card",
+                    "name": "SectionBeamCardSet"
+                }
+            ],
             "skip-card": [
                 {
                     "ref": "mat146_discrete_card"
@@ -814,8 +862,33 @@
         },
         "comment": "card 6 (mat146_discrete_card) is skipped because of the condition for mat 146 - which we cannot easily check here. Maybe that can be handled in a subclass. card 7 (discrete_dof_card) is skipped because its a duplicate of card 4. card 9 (duplicate_inertia_card) is skipped because its a duplicate of card 2"
     },
+    "DEFINE_FUNCTION": {
+        "action": "manual"
+    },
+    "ELEMENT_SOLID_ORTHO (ten nodes format)": {
+        "action": "skip"
+    },
+    "SECTION_SHELL_MISC": {
+        "action": "skip",
+        "comment": "SECTION_SHELL_MISC is handled as an option for SECTION_SHELL"
+    },
     "SECTION_SHELL": {
         "generation-options": {
+            "add-option": [
+                {
+                    "card-order": {"position": "main", "after": "shell_card_2"},
+                    "title-order": 1,
+                    "cards": [
+                        {
+                            "source": "kwd-data",
+                            "keyword-name": "SECTION_SHELL_MISC",
+                            "card-index": 2,
+                            "target_ref": "misc_card"
+                        }
+                    ],
+                    "option-name": "MISC"
+                }
+            ],
             "card-set": [
                 {
                     "source-refs": [
@@ -826,6 +899,7 @@
                         "integration_points_card",
                         "pi_card"
                     ],
+                    "source-options": [0],
                     "target-ref": "shell_card_1",
                     "name": "SectionShellCardSet"
                 }
@@ -847,7 +921,7 @@
                     "name": "angle",
                     "card-size": 8,
                     "element-width": 10,
-                    "length-func": "self.nip",
+                    "length-func": "2 if self.nip == 0 else self.nip",
                     "active-func": "self.icomp == 1",
                     "type": "float",
                     "help": "dynamic array of beta-i: material angle at ith-integration point.",
@@ -879,7 +953,7 @@
                 }
             ]
         },
-        "comment": "a mix of conditional, variable length, and table cards",
+        "comment": "a mix of conditional, variable length, and table cards, all in a card set",
         "labels": {
             "shell_card_1": 0,
             "shell_card_2": 1,
@@ -942,9 +1016,227 @@
             }
         ]
     },
+    "IGA_FACE_XYZ": {
+        "generation-options": {
+            "series-card": [
+                {
+                    "name": "brid",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "boundary representation IDs.",
+                    "ref": "brep_card"
+                }
+            ]
+        },
+        "labels": {
+            "brep_card": 1
+        }
+    },
+    "IGA_1D_BREP": {
+        "generation-options": {
+            "series-card": [
+                {
+                    "name": "eid",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "Parametric Edge IDs.",
+                    "ref": "edge_card"
+                }
+            ]
+        },
+        "labels": {
+            "edge_card": 1
+        }
+    },
+    "IGA_1D_NURBS_UVW": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "knots",
+                    "length-func": "math.ceil((self.nr+self.pr+1)/4)",
+                    "active-func": "self.unir==0",
+                    "ref": "knot_vector_unir_eq_0_card"
+                },
+                {
+                    "property-name": "points",
+                    "length-func": "self.nr",
+                    "ref": "control_point_weight_card"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "func": "self.unir!=0",
+                    "ref": "knot_vector_unir_ne_0_card"
+                }
+            ],
+            "additional-imports": [
+                {
+                    "name": "math"
+                }
+            ]
+        },
+        "labels": {
+            "knot_vector_unir_eq_0_card": 2,
+            "knot_vector_unir_ne_0_card": 3,
+            "control_point_weight_card": 4
+        }
+    },
+    "IGA_1D_NURBS_XYZ": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "knots",
+                    "length-func": "math.ceil((self.nr+self.pr+1)/4)",
+                    "active-func": "self.unir==0",
+                    "ref": "knot_vector_unir_eq_0_card"
+                },
+                {
+                    "property-name": "points",
+                    "length-func": "self.nr",
+                    "ref": "control_point_weight_card"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "func": "self.unir!=0",
+                    "ref": "knot_vector_unir_ne_0_card"
+                }
+            ],
+            "additional-imports": [
+                {
+                    "name": "math"
+                }
+            ]
+        },
+        "labels": {
+            "knot_vector_unir_eq_0_card": 2,
+            "knot_vector_unir_ne_0_card": 3,
+            "control_point_weight_card": 4
+        }
+    },
+    "IGA_2D_NURBS_UVW": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "r_knots",
+                    "length-func": "math.ceil((self.nr+self.pr+1)/4)",
+                    "active-func": "self.unir==0",
+                    "ref": "r_knot_vector_unir_eq_0_card"
+                },
+                {
+                    "property-name": "s_knots",
+                    "length-func": "math.ceil((self.ns+self.ps+1)/4)",
+                    "active-func": "self.unis==0",
+                    "ref": "s_knot_vector_unis_eq_0_card"
+                },
+                {
+                    "property-name": "points",
+                    "length-func": "self.nr*self.ns",
+                    "ref": "control_point_weight_card"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "func": "self.unir!=0",
+                    "ref": "r_knot_vector_unir_ne_0_card"
+                },
+                {
+                    "func": "self.unis!=0",
+                    "ref": "s_knot_vector_unis_ne_0_card"
+                }
+            ],
+            "additional-imports": [
+                {
+                    "name": "math"
+                }
+            ]
+        },
+        "labels": {
+            "r_knot_vector_unir_eq_0_card": 2,
+            "r_knot_vector_unir_ne_0_card": 3,
+            "s_knot_vector_unis_eq_0_card": 4,
+            "s_knot_vector_unis_ne_0_card": 5,
+            "control_point_weight_card": 6
+        }
+    },
+    "IGA_2D_NURBS_XYZ": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "r_knots",
+                    "length-func": "math.ceil((self.nr+self.pr+1)/4)",
+                    "active-func": "self.unir==0",
+                    "ref": "r_knot_vector_unir_eq_0_card"
+                },
+                {
+                    "property-name": "s_knots",
+                    "length-func": "math.ceil((self.ns+self.ps+1)/4)",
+                    "active-func": "self.unis==0",
+                    "ref": "s_knot_vector_unis_eq_0_card"
+                },
+                {
+                    "property-name": "points",
+                    "length-func": "self.nr*self.ns",
+                    "ref": "control_point_weight_card"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "func": "self.unir!=0",
+                    "ref": "r_knot_vector_unir_ne_0_card"
+                },
+                {
+                    "func": "self.unis!=0",
+                    "ref": "s_knot_vector_unis_ne_0_card"
+                }
+            ],
+            "additional-imports": [
+                {
+                    "name": "math"
+                }
+            ]
+        },
+        "labels": {
+            "r_knot_vector_unir_eq_0_card": 2,
+            "r_knot_vector_unir_ne_0_card": 3,
+            "s_knot_vector_unis_eq_0_card": 4,
+            "s_knot_vector_unis_ne_0_card": 5,
+            "control_point_weight_card": 6
+        }
+    },
+    "SET_IGA_POINT_UVW": {
+        "generation-options": {
+            "series-card": [
+                {
+                    "name": "points",
+                    "card-size": 8,
+                    "element-width": 10,
+                    "type": "int",
+                    "help": "Parametric point IDs.",
+                    "ref": "point_ids_card"
+                }
+            ]
+        },
+        "labels": {
+            "point_ids_card": 1
+        }
+    },
     "SECTION_TSHELL": {
         "classname": "SectionTShell",
         "generation-options": {
+            "card-set": [
+                {
+                    "source-refs": [
+                        "main_card",
+                        "bi_card"
+                    ],
+                    "source-options": [0],
+                    "target-ref": "main_card",
+                    "name": "SectionTshellCardSet"
+                }
+            ],
             "series-card": [
                 {
                     "name": "bi",
@@ -956,10 +1248,16 @@
                     "help": "dynamic array of beta-i: material angle at ith-integration point.",
                     "ref": "bi_card"
                 }
+            ],
+            "add-mixin": [
+                {
+                    "source": "ansys.dyna.core.lib.mixins.section_tshell_validation",
+                    "name": "SectionTShellValidationMixin"
+                }
             ]
         },
-        "comment": "error handling in subclass",
         "labels": {
+            "main_card": 0,
             "bi_card": 1
         }
     },
@@ -1004,6 +1302,7 @@
         }
     },
     "ELEMENT_SOLID_ORTHO": {
+        "action": "manual",
         "generation-options": {
             "table-card-group": [
                 {
@@ -1024,6 +1323,19 @@
     },
     "SECTION_SOLID": {
         "generation-options": {
+            "card-set": [
+                {
+                    "source-refs": [
+                        "main_card",
+                        "user_element_card",
+                        "integration_points_card",
+                        "pi_card"
+                    ],
+                    "source-options": [0],
+                    "target-ref": "main_card",
+                    "name": "SectionSolidCardSet"
+                }
+            ],
             "table-card": [
                 {
                     "property-name": "integration_points",
@@ -1074,6 +1386,7 @@
             ]
         },
         "labels": {
+            "main_card": 0,
             "user_element_card": 1,
             "integration_points_card": 2,
             "pi_card": 3
@@ -1131,6 +1444,44 @@
                 "source-keyword": "MAT_NULL"
             }
         ]
+    },
+    "MAT_034": {
+        "alias": "MAT_FABRIC",
+        "generation-options": {
+            "insert-card": [
+                {
+                    "after": "card_3",
+                    "card": {
+                        "source": "additional-cards",
+                        "card-name": "MAT_FABRIC_CARD_4"
+                    },
+                    "label": "card_4"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "func": "self.fvopt<0",
+                    "ref": "card_4"
+                },
+                {
+                    "func": "self.form in [4,14,-14]",
+                    "ref": "card_7"
+                },
+                {
+                    "func": "self.form==-14",
+                    "ref": "card_8"
+                }
+            ]
+        },
+        "labels": {
+            "card_1": 0,
+            "card_2": 1,
+            "card_3": 2,
+            "card_5": 3,
+            "card_6": 4,
+            "card_7": 5,
+            "card_8": 6
+        }
     },
     "MAT_058": {
         "alias": "MAT_LAMINATED_COMPOSITE_FABRIC",
@@ -1668,380 +2019,6 @@
         "labels": {
             "control_points_card": 1
         }
-    },
-    "RIGIDWALL_PLANAR": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_ID",
-                "source-keyword": "RIGIDWALL_PLANAR"
-            }
-        ]
-    },
-    "RIGIDWALL_PLANAR_FINITE": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR_FINITE",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_FINITE_ID",
-                "source-keyword": "RIGIDWALL_PLANAR_FINITE"
-            }
-        ]
-    },
-    "RIGIDWALL_PLANAR_FINITE_DISPLAY": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR_FINITE_DISPLAY",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_FINITE_DISPLAY_ID",
-                "source-keyword": "RIGIDWALL_PLANAR_FINITE_DISPLAY"
-            }
-        ]
-    },
-    "RIGIDWALL_PLANAR_FINITE_FORCES": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR_FINITE_FORCES",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_FINITE_FORCES_ID",
-                "source-keyword": "RIGIDWALL_PLANAR_FINITE_FORCES"
-            }
-        ]
-    },
-    "RIGIDWALL_PLANAR_FINITE_MOVING": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR_FINITE_MOVING",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_ID",
-                "source-keyword": "RIGIDWALL_PLANAR_FINITE_MOVING"
-            }
-        ]
-    },
-    "RIGIDWALL_PLANAR_FINITE_MOVING_DISPLAY": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_DISPLAY",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_DISPLAY_ID",
-                "source-keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_DISPLAY"
-            }
-        ]
-    },
-    "RIGIDWALL_PLANAR_FINITE_MOVING_FORCES": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_FORCES",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_FORCES_ID",
-                "source-keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_FORCES"
-            }
-        ]
-    },
-    "RIGIDWALL_PLANAR_FINITE_MOVING_FORCES_DISPLAY": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_FORCES_DISPLAY",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_FORCES_DISPLAY_ID",
-                "source-keyword": "RIGIDWALL_PLANAR_FINITE_MOVING_FORCES_DISPLAY"
-            }
-        ]
-    },
-    "RIGIDWALL_PLANAR_FORCES": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR_FORCES",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_FORCES_ID",
-                "source-keyword": "RIGIDWALL_PLANAR_FORCES"
-            }
-        ]
-    },
-    "RIGIDWALL_PLANAR_MOVING": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR_MOVING",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_MOVING_ID",
-                "source-keyword": "RIGIDWALL_PLANAR_MOVING"
-            }
-        ]
-    },
-    "RIGIDWALL_PLANAR_MOVING_DISPLAY": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR_MOVING_DISPLAY",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_MOVING_DISPLAY_ID",
-                "source-keyword": "RIGIDWALL_PLANAR_MOVING_DISPLAY"
-            }
-        ]
-    },
-    "RIGIDWALL_PLANAR_MOVING_FORCES": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR_MOVING_FORCES",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_MOVING_FORCES_ID",
-                "source-keyword": "RIGIDWALL_PLANAR_MOVING_FORCES"
-            }
-        ]
-    },
-    "RIGIDWALL_PLANAR_MOVING_FORCES_DISPLAY": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR_MOVING_FORCES_DISPLAY",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_MOVING_FORCES_DISPLAY_ID",
-                "source-keyword": "RIGIDWALL_PLANAR_MOVING_FORCES_DISPLAY"
-            }
-        ]
-    },
-    "RIGIDWALL_PLANAR_ORTHO": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR_ORTHO",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_ORTHO_ID",
-                "source-keyword": "RIGIDWALL_PLANAR_ORTHO"
-            }
-        ]
-    },
-    "RIGIDWALL_PLANAR_ORTHO_FINITE": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR_ORTHO_FINITE",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_ORTHO_FINITE_ID",
-                "source-keyword": "RIGIDWALL_PLANAR_ORTHO_FINITE"
-            }
-        ]
-    },
-    "RIGIDWALL_PLANAR_ORTHO_FINITE_FORCES": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR_ORTHO_FINITE_FORCES",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_ORTHO_FINITE_FORCES_ID",
-                "source-keyword": "RIGIDWALL_PLANAR_ORTHO_FINITE_FORCES"
-            }
-        ]
-    },
-    "RIGIDWALL_PLANAR_ORTHO_FORCES": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "RIGIDWALL_PLANAR_ORTHO_FORCES",
-                "generation-options": {
-                    "skip-card": [
-                        {
-                            "ref": "id_title_card"
-                        }
-                    ]
-                },
-                "labels": {
-                    "id_title_card": 0
-                }
-            },
-            {
-                "keyword": "RIGIDWALL_PLANAR_ORTHO_FORCES_ID",
-                "source-keyword": "RIGIDWALL_PLANAR_ORTHO_FORCES"
-            }
-        ]
     },
     "LOAD_SEGMENT": {
         "type": "multiple",
@@ -2652,6 +2629,7 @@
         }
     },
     "ELEMENT_SOLID": {
+        "action": "manual",
         "generation-options": {
             "table-card": [
                 {
@@ -2792,6 +2770,56 @@
         },
         "labels": {
             "ioopt_card": 1
+        }
+    },
+    "DATABASE_CROSS_SECTION_SET": {
+        "generation-options": {
+             "add-option": [
+                {
+                    "card-order": "pre/1",
+                    "title-order": 1,
+                    "cards": [
+                        {
+                            "source": "additional-cards",
+                            "card-name": "CROSS_SECTION_ID"
+                        }
+                    ],
+                    "option-name": "ID"
+                }
+            ],
+            "skip-card": [
+                {
+                    "ref": "heading_card"
+                }
+            ]
+        },
+        "labels": {
+            "heading_card": 0
+        }
+    },
+    "DATABASE_CROSS_SECTION_PLANE": {
+        "generation-options": {
+             "add-option": [
+                {
+                    "card-order": "pre/1",
+                    "title-order": 1,
+                    "cards": [
+                        {
+                            "source": "additional-cards",
+                            "card-name": "CROSS_SECTION_ID"
+                        }
+                    ],
+                    "option-name": "ID"
+                }
+            ],
+            "skip-card": [
+                {
+                    "ref": "heading_card"
+                }
+            ]
+        },
+        "labels": {
+            "heading_card": 0
         }
     },
     "SET_NODE_ADD": {
@@ -3214,7 +3242,7 @@
         "generation-options": {
             "add-option": [
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -3240,7 +3268,7 @@
         "generation-options": {
             "add-option": [
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -3318,7 +3346,7 @@
         "generation-options": {
             "add-option": [
                 {
-                    "card-order": -1,
+                    "card-order": "pre/1",
                     "title-order": 1,
                     "cards": [
                         {
@@ -3416,21 +3444,7 @@
         }
     },
     "ELEMENT_SOLID (ten nodes format)": {
-        "generation-options": {
-            "table-card-group": [
-                {
-                    "refs": [
-                        "element_base_card",
-                        "element_nodes_card"
-                    ],
-                    "overall-name": "elements"
-                }
-            ]
-        },
-        "labels": {
-            "element_base_card": 0,
-            "element_nodes_card": 1
-        }
+        "action": "skip"
     },
     "LOAD_NODE_POINT": {
         "generation-options": {

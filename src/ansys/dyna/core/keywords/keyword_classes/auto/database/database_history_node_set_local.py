@@ -52,7 +52,8 @@ class DatabaseHistoryNodeSetLocal(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEHISTORYNODESETLOCAL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Node set ID. The contents of the files are given in Table 9.1 in the Keyword Manual section 9.14 for nodes.

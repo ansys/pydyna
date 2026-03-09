@@ -43,8 +43,8 @@ class DefineTable(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "TABLE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -55,14 +55,16 @@ class DefineTable(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINETABLE_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "points",
                 1,
                 20,
                 float,
                 None,
-                data = kwargs.get("points")),            OptionCardSet(
-                option_spec = DefineTable.option_specs[0],
+                data = kwargs.get("points")),
+            OptionCardSet(
+                option_spec = DefineTable._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINETABLE_OPTION0_CARD0,

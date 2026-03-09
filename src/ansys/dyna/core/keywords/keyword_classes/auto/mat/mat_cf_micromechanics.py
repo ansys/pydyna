@@ -129,8 +129,8 @@ class MatCfMicromechanics(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "CF_MICROMECHANICS"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcchexp": LinkType.DEFINE_CURVE,
@@ -147,35 +147,45 @@ class MatCfMicromechanics(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATCFMICROMECHANICS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCFMICROMECHANICS_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCFMICROMECHANICS_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCFMICROMECHANICS_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCFMICROMECHANICS_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCFMICROMECHANICS_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCFMICROMECHANICS_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCFMICROMECHANICS_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCFMICROMECHANICS_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCFMICROMECHANICS_CARD9,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatCfMicromechanics.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatCfMicromechanics._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCFMICROMECHANICS_OPTION0_CARD0,

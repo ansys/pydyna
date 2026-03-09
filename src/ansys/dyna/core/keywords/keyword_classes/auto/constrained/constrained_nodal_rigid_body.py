@@ -42,8 +42,8 @@ class ConstrainedNodalRigidBody(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "NODAL_RIGID_BODY"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "pnode": LinkType.NODE,
@@ -69,8 +69,9 @@ class ConstrainedNodalRigidBody(KeywordBase):
                 None,
                 name="constrained_nodal_rigid_bodies",
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = ConstrainedNodalRigidBody.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = ConstrainedNodalRigidBody._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONSTRAINEDNODALRIGIDBODY_OPTION0_CARD0,

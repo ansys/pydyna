@@ -75,16 +75,20 @@ class DeformableToRigidAutomatic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFORMABLETORIGIDAUTOMATIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFORMABLETORIGIDAUTOMATIC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFORMABLETORIGIDAUTOMATIC_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFORMABLETORIGIDAUTOMATIC_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def swset(self) -> typing.Optional[int]:
         """Get or set the Set number for this automatic switch set. Must be unique.

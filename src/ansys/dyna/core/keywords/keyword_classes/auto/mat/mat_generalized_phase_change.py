@@ -122,8 +122,8 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "GENERALIZED_PHASE_CHANGE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "mix": LinkType.DEFINE_CURVE,
@@ -149,29 +149,37 @@ class MatGeneralizedPhaseChange(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATGENERALIZEDPHASECHANGE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALIZEDPHASECHANGE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALIZEDPHASECHANGE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALIZEDPHASECHANGE_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALIZEDPHASECHANGE_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALIZEDPHASECHANGE_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALIZEDPHASECHANGE_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALIZEDPHASECHANGE_CARD7,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatGeneralizedPhaseChange.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatGeneralizedPhaseChange._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATGENERALIZEDPHASECHANGE_OPTION0_CARD0,

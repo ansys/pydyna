@@ -56,8 +56,8 @@ class DefineSphMeshBox(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "SPH_MESH_BOX"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "idseg": LinkType.SET_SEGMENT,
@@ -72,11 +72,13 @@ class DefineSphMeshBox(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINESPHMESHBOX_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINESPHMESHBOX_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineSphMeshBox.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineSphMeshBox._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINESPHMESHBOX_OPTION0_CARD0,

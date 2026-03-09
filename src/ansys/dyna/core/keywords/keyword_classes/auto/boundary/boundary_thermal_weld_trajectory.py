@@ -87,16 +87,20 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYTHERMALWELDTRAJECTORY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYTHERMALWELDTRAJECTORY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYTHERMALWELDTRAJECTORY_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYTHERMALWELDTRAJECTORY_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID or Part Set ID of solids or shells to which weld source is applied.

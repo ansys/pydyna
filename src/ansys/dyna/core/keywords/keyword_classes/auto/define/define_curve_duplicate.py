@@ -48,8 +48,8 @@ class DefineCurveDuplicate(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CURVE_DUPLICATE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "rlcid": LinkType.DEFINE_CURVE,
@@ -63,8 +63,9 @@ class DefineCurveDuplicate(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINECURVEDUPLICATE_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineCurveDuplicate.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineCurveDuplicate._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECURVEDUPLICATE_OPTION0_CARD0,

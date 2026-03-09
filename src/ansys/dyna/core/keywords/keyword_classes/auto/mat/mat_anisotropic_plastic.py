@@ -87,8 +87,8 @@ class MatAnisotropicPlastic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ANISOTROPIC_PLASTIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcss": LinkType.DEFINE_CURVE,
@@ -102,23 +102,29 @@ class MatAnisotropicPlastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICPLASTIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICPLASTIC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICPLASTIC_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICPLASTIC_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICPLASTIC_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICPLASTIC_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatAnisotropicPlastic.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatAnisotropicPlastic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATANISOTROPICPLASTIC_OPTION0_CARD0,

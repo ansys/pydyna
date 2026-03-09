@@ -45,8 +45,8 @@ class MatViscoelastic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "VISCOELASTIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -57,8 +57,9 @@ class MatViscoelastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATVISCOELASTIC_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatViscoelastic.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatViscoelastic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATVISCOELASTIC_OPTION0_CARD0,

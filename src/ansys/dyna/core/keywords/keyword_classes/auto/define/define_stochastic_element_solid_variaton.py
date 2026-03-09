@@ -45,8 +45,8 @@ class DefineStochasticElementSolidVariaton(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "STOCHASTIC_ELEMENT_SOLID_VARIATON"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "ide": LinkType.ELEMENT_SOLID,
@@ -60,8 +60,9 @@ class DefineStochasticElementSolidVariaton(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINESTOCHASTICELEMENTSOLIDVARIATON_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineStochasticElementSolidVariaton.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineStochasticElementSolidVariaton._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINESTOCHASTICELEMENTSOLIDVARIATON_OPTION0_CARD0,

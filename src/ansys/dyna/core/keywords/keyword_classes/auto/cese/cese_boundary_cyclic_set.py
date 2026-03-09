@@ -66,13 +66,16 @@ class CeseBoundaryCyclicSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYCYCLICSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYCYCLICSET_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYCYCLICSET_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid1(self) -> typing.Optional[int]:
         """Get or set the Segment set  ID.

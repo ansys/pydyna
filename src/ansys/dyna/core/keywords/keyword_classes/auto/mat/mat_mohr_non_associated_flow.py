@@ -100,8 +100,8 @@ class MatMohrNonAssociatedFlow(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "MOHR_NON_ASSOCIATED_FLOW"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcids": LinkType.DEFINE_CURVE,
@@ -119,26 +119,33 @@ class MatMohrNonAssociatedFlow(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATMOHRNONASSOCIATEDFLOW_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOHRNONASSOCIATEDFLOW_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOHRNONASSOCIATEDFLOW_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOHRNONASSOCIATEDFLOW_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOHRNONASSOCIATEDFLOW_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOHRNONASSOCIATEDFLOW_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOHRNONASSOCIATEDFLOW_CARD6,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatMohrNonAssociatedFlow.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatMohrNonAssociatedFlow._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATMOHRNONASSOCIATEDFLOW_OPTION0_CARD0,

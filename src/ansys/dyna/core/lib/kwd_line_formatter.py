@@ -309,6 +309,50 @@ def _convert_type(raw_value, item_type):
     return item_type(raw_value)
 
 
+def resolve_ref_to_value(
+    ref: str,
+    parameter_set: ParameterSet,
+    target_type: type,
+) -> typing.Optional[typing.Any]:
+    """Resolve a parameter reference string (e.g. "&param", "-&param") to its value.
+
+    Shared by read path (get_parameter) and write path (_resolve_refs_from_deck).
+
+    Returns
+    -------
+    The resolved value, or None if ref is invalid, param not found, or target_type
+    is Flag (not handled by _convert_type). Raises TypeError/ValueError on
+    conversion failure (caller may catch to use fallback).
+    """
+    if not ref or not isinstance(ref, str):
+        return None
+    ref = ref.strip()
+    negative = ref.startswith("-")
+    param_ref = ref[1:] if negative else ref
+    if not param_ref.startswith("&"):
+        return None
+    param_name = param_ref[1:]
+
+    if target_type is Flag:
+        return None
+
+    try:
+        raw_value = parameter_set.get(param_name)
+    except KeyError:
+        return None
+
+    try:
+        value = _convert_type(raw_value, target_type)
+    except (TypeError, ValueError) as e:
+        raise TypeError(
+            f"Expected parameter '{param_name}' with value {raw_value} not convertible to type {target_type}."
+        ) from e
+
+    if negative and isinstance(value, (int, float)):
+        value = -value
+    return value
+
+
 def _contract_data(spec: typing.List[tuple], data: typing.List) -> typing.Iterable:
     """Contract expanded data back, packing dataclass fields.
 
@@ -390,10 +434,9 @@ def _is_comma_delimited(line_data: str, num_fields: int = None) -> bool:
 
 def _parse_csv_value(
     text_block: str,
-    item_type: type,
-    parameter_set: typing.Optional[ParameterSet],
+    item_type: type | Flag,
     get_none_value: typing.Callable,
-    get_parameter: typing.Callable,
+    resolve_parameter: typing.Optional[typing.Callable[[str, type, int], typing.Any]] = None,
     field_index: int = 0,
 ) -> typing.Any:
     """Parse a single CSV field value.
@@ -404,12 +447,12 @@ def _parse_csv_value(
         The text value from the CSV field (already stripped of surrounding whitespace).
     item_type : type
         The expected type for this field (int, float, str, or Flag).
-    parameter_set : ParameterSet, optional
-        Parameter set for resolving parameter references.
     get_none_value : callable
         Function to get the appropriate None/default value for the type.
-    get_parameter : callable
+    resolve_parameter : callable, optional
         Function to resolve parameter references. Signature: (text_block, item_type, field_index) -> value.
+        When None (raw mode), fields containing '&' are returned as literal strings for str type,
+        or as default values for numeric types. Used by parameter-defining keywords.
     field_index : int, optional
         The index of this field in the spec, used for recording parameter references.
 
@@ -424,13 +467,8 @@ def _parse_csv_value(
 
     text_block = text_block.strip()
 
-    # Check for parameter reference
-    if "&" in text_block:
-        if parameter_set is None:
-            raise ValueError("Parameter set must be provided when using parameters in keyword data.")
-        return get_parameter(text_block, item_type, field_index)
-
-    # Handle Flag type
+    # Handle Flag type FIRST (before parameter check)
+    # Some flags use "&" as true_value, e.g. Flag(True, "&", "")
     if _is_flag(item_type):
         flag: Flag = item_type
         if flag.true_value and flag.true_value in text_block:
@@ -441,6 +479,15 @@ def _parse_csv_value(
             warnings.warn("value detected in field where false value was an empty string")
             return False
         raise Exception("Failed to find true or false value in flag")
+
+    # Check for parameter reference SECOND
+    if "&" in text_block:
+        if resolve_parameter is None:
+            # Raw mode: parameter-defining keywords treat & as literal
+            if item_type is str:
+                return text_block
+            return get_none_value(item_type)
+        return resolve_parameter(text_block, item_type, field_index)
 
     # Parse by type
     if item_type is int:
@@ -453,13 +500,50 @@ def _parse_csv_value(
         raise Exception(f"Unexpected type in CSV field: {item_type}")
 
 
+def _make_resolve_parameter(
+    parameter_set: ParameterSet,
+    get_none_value: typing.Callable,
+) -> typing.Callable[[str, type, int], typing.Any]:
+    """Build a parameter resolver for parameter-using keywords."""
+
+    def get_parameter(text_block: str, item_type: type, field_index: int) -> typing.Any:
+        original_ref = text_block.strip()
+        text_block = original_ref
+        if text_block.startswith("-&"):
+            text_block = text_block[1:]
+
+        # Expressions like "cos(&x)+sin(&x)" contain & but don't start with & - preserve for eval
+        if item_type is str and not text_block.startswith("&"):
+            return original_ref
+
+        if not text_block.startswith("&"):
+            raise ValueError(f"Expected parameter to start with '&', got '{text_block}' instead.")
+
+        parameter_set.record_ref(str(field_index), original_ref)
+
+        value = resolve_ref_to_value(original_ref, parameter_set, item_type)
+        if value is None:
+            if item_type is str:
+                return original_ref
+            return get_none_value(item_type)
+        return value
+
+    return get_parameter
+
+
 def _load_dataline_csv(
-    spec: typing.List[tuple], line_data: str, parameter_set: typing.Optional[ParameterSet] = None
+    spec: typing.List[tuple],
+    line_data: str,
+    parameter_set: typing.Optional[ParameterSet] = None,
 ) -> typing.Tuple:
     """Load a comma-delimited (free format) keyword card line.
 
     LS-DYNA allows comma-separated values as an alternative to fixed-width format.
     Field positions/widths from the spec are ignored; fields are matched by order.
+
+    When parameter_set is None (parameter-defining keywords), fields containing '&'
+    are treated as literal strings. When parameter_set is provided, parameter
+    substitution and ref recording are performed.
 
     Parameters
     ----------
@@ -468,7 +552,7 @@ def _load_dataline_csv(
     line_data : str
         Comma-separated string with keyword data.
     parameter_set : ParameterSet, optional
-        Optional parameter set for resolving parameter references.
+        Optional parameter set for resolving parameter references. None = raw mode.
 
     Returns
     -------
@@ -490,32 +574,7 @@ def _load_dataline_csv(
             )
         return None
 
-    def get_parameter(text_block: str, item_type: type, field_index: int) -> typing.Any:
-        original_ref = text_block.strip()  # Preserve original reference string
-        text_block = original_ref
-        negative = False
-        if text_block.startswith("-&"):
-            negative = True
-            text_block = text_block[1:]
-
-        if not text_block.startswith("&"):
-            raise ValueError(f"Expected parameter to start with '&', got '{text_block}' instead.")
-        param_name = text_block[1:]
-        raw_value = parameter_set.get(param_name)
-
-        try:
-            value = _convert_type(raw_value, item_type)
-        except Exception:
-            raise TypeError(
-                f"Expected parameter '{param_name}' with value {raw_value} not convertible to type {item_type}."
-            )
-        if negative:
-            value *= -1.0
-
-        # Record the parameter reference for potential write-back
-        parameter_set.record_ref(str(field_index), original_ref)
-
-        return value
+    resolve_parameter = _make_resolve_parameter(parameter_set, get_none_value) if parameter_set is not None else None
 
     expanded_spec = _expand_spec(spec)
     csv_fields = line_data.split(",")
@@ -540,7 +599,7 @@ def _load_dataline_csv(
         _, _, item_type = item_spec
         if i < num_csv_fields:
             text_block = csv_fields[i]
-            value = _parse_csv_value(text_block, item_type, parameter_set, get_none_value, get_parameter, i)
+            value = _parse_csv_value(text_block, item_type, get_none_value, resolve_parameter, i)
         else:
             value = get_none_value(item_type)
         data.append(value)
@@ -595,71 +654,50 @@ def _has_parameter(text_block: str) -> bool:
     return "&" in text_block
 
 
-def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: ParameterSet = None) -> typing.List:
-    """
-    Loads a keyword card line from string, auto-detecting fixed-width or comma-delimited format.
+def parse_dataline(
+    spec: typing.List[tuple],
+    line_data: str,
+) -> typing.Tuple[typing.Tuple, typing.List[str]]:
+    """Parse a keyword card line without parameter substitution (raw mode).
 
-    LS-DYNA supports both fixed-width format and comma-delimited (free) format. This function
-    automatically detects which format is used based on the presence of commas in the line.
-    Per the LS-DYNA manual, formats can be mixed within a deck but not within a single card.
+    Used by parameter-defining keywords (e.g. PARAMETER_EXPRESSION) where fields
+    containing '&' are literal expression text, not parameter references.
 
     Parameters
     ----------
     spec : list of tuple
-        List of tuples representing the (offset, width, type) of each field.
-        Type can be a Flag which represents the True and False value.
+        List of (offset, width, type) tuples for each field.
     line_data : str
         String with keyword data (fixed-width or comma-delimited).
-    parameter_set : ParameterSet, optional
-        Optional parameter set.
 
     Returns
     -------
-    list
-        Parsed values from the keyword card line.
-
-    Examples
-    --------
-    >>> load_dataline([(0,10, int),(10,10, str)], '         1     hello')
-    (1, 'hello')
-    >>> load_dataline([(0,10, int),(10,10, str)], '1,hello')
-    (1, 'hello')
+    tuple
+        (parsed_values, warnings). Values are raw; '&' in str fields is literal.
     """
-    # Auto-detect comma-delimited format, passing field count as hint
     num_fields = len(spec)
     if _is_comma_delimited(line_data, num_fields):
-        logger.debug("Detected comma-delimited format for line")
-        return _load_dataline_csv(spec, line_data, parameter_set)
+        logger.debug("parse_dataline: comma-delimited format")
+        values = _load_dataline_csv(spec, line_data, parameter_set=None)
+        return values, []
 
-    # Fixed-width format parsing (original implementation)
-    logger.debug("Using fixed-width format for line")
+    logger.debug("parse_dataline: fixed-width format")
+    return _load_dataline_fixed(spec, line_data, parameter_set=None)
 
-    def get_parameter(text_block: str, item_type: type, field_index: int) -> typing.Any:
-        original_ref = text_block.strip()  # Preserve original reference string
-        text_block = original_ref
-        negative = False
-        if text_block.startswith("-&"):
-            negative = True
-            text_block = text_block[1:]
 
-        if not text_block.startswith("&"):
-            raise ValueError(f"Expected parameter to start with '&', got '{text_block}' instead.")
-        param_name = text_block[1:]
-        raw_value = parameter_set.get(param_name)
+def _load_dataline_fixed(
+    spec: typing.List[tuple],
+    line_data: str,
+    parameter_set: typing.Optional[ParameterSet] = None,
+) -> typing.Tuple[typing.Tuple, typing.List[str]]:
+    """Load a fixed-width keyword card line.
 
-        try:
-            value = _convert_type(raw_value, item_type)
-        except Exception:
-            raise TypeError(
-                f"Expected parameter '{param_name}' with value {raw_value} not convertible to type {item_type}."
-            )
-        if negative:
-            value *= -1.0
-
-        # Record the parameter reference for potential write-back
-        parameter_set.record_ref(str(field_index), original_ref)
-
-        return value
+    When parameter_set is None, treats '&' as literal (raw mode).
+    When parameter_set is provided, performs parameter substitution.
+    """
+    resolve_parameter = None
+    if parameter_set is not None:
+        resolve_parameter = _make_resolve_parameter(parameter_set, _get_none_value)
 
     expanded_spec = _expand_spec(spec)
     data = []
@@ -671,20 +709,17 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
             value = _get_none_value(item_type)
         elif _is_flag(item_type):
             flag: Flag = item_type
-            true_value = flag.true_value
-            false_value = flag.false_value
-            # check the true value first, empty text may be false but not true
-            if true_value in text_block:
+            if flag.true_value in text_block:
                 value = True
-            elif len(false_value) == 0 or false_value in text_block:
-                # If false_value is empty, any non-true value is considered False
+            elif len(flag.false_value) == 0 or flag.false_value in text_block:
                 value = False
             else:
                 raise Exception("Failed to find true or false value in flag")
         elif _has_parameter(text_block):
-            if parameter_set is None:
-                raise ValueError("Parameter set must be provided when using parameters in keyword data.")
-            value = get_parameter(text_block, item_type, field_index)
+            if resolve_parameter is None:
+                value = text_block.strip() if item_type is str else _get_none_value(item_type)
+            else:
+                value = resolve_parameter(text_block.strip(), item_type, field_index)
         elif item_type is int:
             value = int(float(_normalize_dyna_float(text_block)))
         elif item_type is str:
@@ -695,28 +730,82 @@ def load_dataline(spec: typing.List[tuple], line_data: str, parameter_set: Param
             raise Exception(f"Unexpected type in load_dataline spec: {item_type}")
         data.append(value)
 
+    warnings_list: typing.List[str] = []
     if end_position < len(line_data):
-        warning_message = f'Detected out of bound card characters:\n"{line_data[end_position:]}"\n"Ignoring.'
-        warnings.warn(warning_message)
+        warnings_list.append(f'Detected out of bound card characters:\n"{line_data[end_position:]}"\n"Ignoring.')
     data = list(_contract_data(spec, data))
-    return tuple(data)
+    return tuple(data), warnings_list
+
+
+def load_dataline(
+    spec: typing.List[tuple],
+    line_data: str,
+    parameter_set: ParameterSet = None,
+) -> typing.Tuple[typing.Tuple, typing.List[str]]:
+    """
+    Loads a keyword card line from string, auto-detecting fixed-width or comma-delimited format.
+
+    LS-DYNA supports both fixed-width format and comma-delimited (free) format. This function
+    automatically detects which format is used based on the presence of commas in the line.
+    Per the LS-DYNA manual, formats can be mixed within a deck but not within a single card.
+
+    When parameter_set is None (parameter-defining keywords), uses parse_dataline and treats
+    '&' as literal. When parameter_set is provided, performs parameter substitution.
+
+    Parameters
+    ----------
+    spec : list of tuple
+        List of tuples representing the (offset, width, type) of each field.
+        Type can be a Flag which represents the True and False value.
+    line_data : str
+        String with keyword data (fixed-width or comma-delimited).
+    parameter_set : ParameterSet, optional
+        Optional parameter set. None = raw mode (no substitution).
+
+    Returns
+    -------
+    tuple
+        A tuple of (parsed_values, warnings). Parsed values are the field values;
+        warnings is a list of diagnostic messages to be emitted by the caller.
+
+    Examples
+    --------
+    >>> values, warnings = load_dataline([(0,10, int),(10,10, str)], '         1     hello')
+    >>> values
+    (1, 'hello')
+    >>> values, warnings = load_dataline([(0,10, int),(10,10, str)], '1,hello')
+    >>> values
+    (1, 'hello')
+    """
+    if parameter_set is None:
+        return parse_dataline(spec, line_data)
+
+    num_fields = len(spec)
+    if _is_comma_delimited(line_data, num_fields):
+        logger.debug("Detected comma-delimited format for line")
+        return _load_dataline_csv(spec, line_data, parameter_set), []
+
+    logger.debug("Using fixed-width format for line")
+    return _load_dataline_fixed(spec, line_data, parameter_set)
 
 
 def load_dataline_with_format(
-    spec: typing.List[tuple], line_data: str, parameter_set: ParameterSet = None
-) -> typing.Tuple[typing.List, str]:
+    spec: typing.List[tuple],
+    line_data: str,
+    parameter_set: ParameterSet = None,
+) -> typing.Tuple[typing.Tuple, str, typing.List[str]]:
     """
     Like load_dataline, but also returns the detected format.
 
     Returns
     -------
     tuple
-        A tuple of (values, format) where format is 'csv' or 'fixed'.
+        A tuple of (values, format, warnings) where format is 'csv' or 'fixed'.
     """
     from ansys.dyna.core.lib.format_type import card_format
 
     num_fields = len(spec)
     is_csv = _is_comma_delimited(line_data, num_fields)
-    values = load_dataline(spec, line_data, parameter_set)
+    values, warnings = load_dataline(spec, line_data, parameter_set)
     detected_format = card_format.csv if is_csv else card_format.fixed
-    return values, detected_format
+    return values, detected_format, warnings

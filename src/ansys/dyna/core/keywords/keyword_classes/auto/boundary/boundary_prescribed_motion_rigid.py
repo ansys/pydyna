@@ -59,8 +59,8 @@ class BoundaryPrescribedMotionRigid(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "PRESCRIBED_MOTION_RIGID"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "node1": LinkType.NODE,
@@ -77,12 +77,14 @@ class BoundaryPrescribedMotionRigid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONRIGID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONRIGID_CARD1,
                 active_func=lambda: abs(self.dof) in [9, 10, 11] or self.vad==4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = BoundaryPrescribedMotionRigid.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = BoundaryPrescribedMotionRigid._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _BOUNDARYPRESCRIBEDMOTIONRIGID_OPTION0_CARD0,

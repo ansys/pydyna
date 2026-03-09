@@ -57,8 +57,8 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ELASTIC_SPRING_DISCRETE_BEAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "flcid": LinkType.DEFINE_CURVE,
@@ -74,11 +74,13 @@ class MatElasticSpringDiscreteBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATELASTICSPRINGDISCRETEBEAM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATELASTICSPRINGDISCRETEBEAM_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatElasticSpringDiscreteBeam.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatElasticSpringDiscreteBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATELASTICSPRINGDISCRETEBEAM_OPTION0_CARD0,

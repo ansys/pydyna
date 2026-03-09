@@ -91,8 +91,8 @@ class Mat126(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "126"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lca": LinkType.DEFINE_CURVE,
@@ -113,20 +113,25 @@ class Mat126(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT126_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT126_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT126_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT126_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT126_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat126.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat126._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT126_OPTION0_CARD0,

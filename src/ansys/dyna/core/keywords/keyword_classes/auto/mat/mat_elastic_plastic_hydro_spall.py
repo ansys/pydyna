@@ -97,8 +97,8 @@ class MatElasticPlasticHydroSpall(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ELASTIC_PLASTIC_HYDRO_SPALL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -109,23 +109,29 @@ class MatElasticPlasticHydroSpall(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATELASTICPLASTICHYDROSPALL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATELASTICPLASTICHYDROSPALL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATELASTICPLASTICHYDROSPALL_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATELASTICPLASTICHYDROSPALL_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATELASTICPLASTICHYDROSPALL_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATELASTICPLASTICHYDROSPALL_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatElasticPlasticHydroSpall.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatElasticPlasticHydroSpall._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATELASTICPLASTICHYDROSPALL_OPTION0_CARD0,

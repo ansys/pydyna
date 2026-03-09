@@ -51,7 +51,8 @@ class LoadFaceUvw(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADFACEUVW_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def luid(self) -> typing.Optional[int]:
         """Get or set the Parametric face ID; see *IGA_FACE_UVW

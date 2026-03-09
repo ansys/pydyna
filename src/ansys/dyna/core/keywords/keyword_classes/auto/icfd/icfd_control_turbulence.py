@@ -99,30 +99,37 @@ class IcfdControlTurbulence(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLTURBULENCE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLTURBULENCE_CARD1,
                 active_func=lambda: self.tmod==1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLTURBULENCE_CARD2,
                 active_func=lambda: self.tmod==2 or self.tmod==3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLTURBULENCE_CARD3,
                 active_func=lambda: self.tmod==4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLTURBULENCE_CARD4,
                 active_func=lambda: self.tmod==4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLTURBULENCE_CARD5,
                 active_func=lambda: self.tmod==5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLTURBULENCE_CARD6,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def tmod(self) -> int:
         """Get or set the Indicates what turbulence model will be used.

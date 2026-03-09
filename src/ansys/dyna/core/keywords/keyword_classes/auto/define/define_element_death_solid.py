@@ -49,8 +49,8 @@ class DefineElementDeathSolid(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "ELEMENT_DEATH_SOLID"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "eid": LinkType.ELEMENT_SOLID,
@@ -66,8 +66,9 @@ class DefineElementDeathSolid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEELEMENTDEATHSOLID_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineElementDeathSolid.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineElementDeathSolid._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEELEMENTDEATHSOLID_OPTION0_CARD0,

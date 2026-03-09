@@ -43,7 +43,8 @@ class Comment(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _COMMENT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def comment(self) -> typing.Optional[str]:
         """Get or set the Any comment line.

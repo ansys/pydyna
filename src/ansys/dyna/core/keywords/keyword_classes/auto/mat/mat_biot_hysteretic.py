@@ -45,8 +45,8 @@ class MatBiotHysteretic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "BIOT_HYSTERETIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -57,8 +57,9 @@ class MatBiotHysteretic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATBIOTHYSTERETIC_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatBiotHysteretic.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatBiotHysteretic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATBIOTHYSTERETIC_OPTION0_CARD0,

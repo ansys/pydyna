@@ -55,7 +55,8 @@ class DampingRelative(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DAMPINGRELATIVE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cdamp(self) -> float:
         """Get or set the Fraction of critical damping.

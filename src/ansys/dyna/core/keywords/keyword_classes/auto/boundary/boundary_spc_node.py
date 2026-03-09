@@ -43,8 +43,8 @@ class BoundarySpcNode(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "SPC_NODE"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "nid": LinkType.NODE,
@@ -70,8 +70,9 @@ class BoundarySpcNode(KeywordBase):
                 None,
                 name="nodes",
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = BoundarySpcNode.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = BoundarySpcNode._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _BOUNDARYSPCNODE_OPTION0_CARD0,

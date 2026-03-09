@@ -42,8 +42,8 @@ class SetBeamAdd(KeywordBase):
 
     keyword = "SET"
     subkeyword = "BEAM_ADD"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "beams": LinkType.SET_BEAM,
@@ -57,14 +57,16 @@ class SetBeamAdd(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETBEAMADD_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "beams",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("beams")),            OptionCardSet(
-                option_spec = SetBeamAdd.option_specs[0],
+                data = kwargs.get("beams")),
+            OptionCardSet(
+                option_spec = SetBeamAdd._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETBEAMADD_OPTION0_CARD0,

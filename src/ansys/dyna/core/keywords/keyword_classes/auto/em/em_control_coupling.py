@@ -64,10 +64,12 @@ class EmControlCoupling(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCONTROLCOUPLING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMCONTROLCOUPLING_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def thcoupl(self) -> int:
         """Get or set the Coupling to the thermal solver. When turned on, the EM solver will transfer the Joule heating terms to the solid mechanics thermal solver.

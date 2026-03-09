@@ -45,7 +45,8 @@ class DualceseControlTimestep(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESECONTROLTIMESTEP_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def iddt(self) -> int:
         """Get or set the Sets the time step option:

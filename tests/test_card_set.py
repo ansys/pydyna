@@ -35,6 +35,50 @@ from ansys.dyna.core.keywords.keyword_classes.auto.boundary.initial_stress_shell
 
 import pytest
 
+import ansys.dyna.core.keywords as kwd
+from ansys.dyna.core.keywords.keyword_classes.auto.section.section_solid import SectionSolidCardSet
+
+
+class TestCardSetCount:
+    """Tests for the card_set_count initialisation kwarg."""
+
+    def test_card_set_count_zero(self):
+        """card_set_count=0 initialises with no items."""
+        kw = kwd.SectionSolid(card_set_count=0)
+        assert len(kw.sets) == 0
+
+    def test_card_set_count_one(self):
+        """card_set_count=1 produces a single default-filled set."""
+        kw = kwd.SectionSolid(card_set_count=1)
+        assert len(kw.sets) == 1
+        assert kw.sets[0].elform == 1  # LSPP default
+
+    def test_card_set_count_three(self):
+        """card_set_count=N produces exactly N sets."""
+        kw = kwd.SectionSolid(card_set_count=3)
+        assert len(kw.sets) == 3
+
+    def test_card_set_count_incompatible_with_field_kwargs(self):
+        """card_set_count combined with field kwargs must raise ValueError."""
+        with pytest.raises(ValueError, match="card_set_count is incompatible"):
+            kwd.SectionSolid(card_set_count=1, elform=2)
+
+    def test_card_set_count_compatible_with_format_kwarg(self):
+        """card_set_count should not conflict with the format kwarg."""
+        from ansys.dyna.core.lib.format_type import format_type
+        kw = kwd.SectionSolid(card_set_count=1, format=format_type.long)
+        assert len(kw.sets) == 1
+        assert kw.format == format_type.long
+
+    def test_card_set_count_independent_items(self):
+        """Sets created by card_set_count should be independent objects."""
+        kw = kwd.SectionSolid(card_set_count=2)
+        kw.sets[0].secid = 10
+        kw.sets[1].secid = 20
+        assert kw.sets[0].secid == 10
+        assert kw.sets[1].secid == 20
+
+
 class Parent(KeywordBase):
     """Mock keyword to use as the parent for the card sets under test."""
 

@@ -97,28 +97,36 @@ class BatteryEchemControlSolver(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BATTERYECHEMCONTROLSOLVER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BATTERYECHEMCONTROLSOLVER_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BATTERYECHEMCONTROLSOLVER_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BATTERYECHEMCONTROLSOLVER_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BATTERYECHEMCONTROLSOLVER_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BATTERYECHEMCONTROLSOLVER_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BATTERYECHEMCONTROLSOLVER_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BATTERYECHEMCONTROLSOLVER_CARD7,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def imodel(self) -> typing.Optional[int]:
         """Get or set the Sets the battery model.

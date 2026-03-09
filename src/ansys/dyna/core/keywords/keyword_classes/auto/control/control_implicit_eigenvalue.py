@@ -95,23 +95,28 @@ class ControlImplicitEigenvalue(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUE_CARD1,
                 active_func=lambda: (self.eigmth in [101, 102, 111]) or (self.isolid != 0 or self.ibeam != 0 or self.ishell != 0 or self.itshell != 0 or self.mstres != 0 or self.evdump != None or self.mstrscl != 0.001),
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUE_CARD2,
                 active_func=lambda: self.eigmth == 101,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUE_CARD3,
                 active_func=lambda: self.eigmth == 102,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUE_CARD4,
                 active_func=lambda: self.eigmth == 111,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def neig(self) -> int:
         """Get or set the Number of eigenvalues to extract. This must be specified. The other parameters below are optional.

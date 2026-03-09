@@ -56,8 +56,8 @@ class SetIgaFaceUvwListGenerate(KeywordBase):
 
     keyword = "SET"
     subkeyword = "IGA_FACE_UVW_LIST_GENERATE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -68,11 +68,13 @@ class SetIgaFaceUvwListGenerate(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETIGAFACEUVWLISTGENERATE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETIGAFACEUVWLISTGENERATE_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SetIgaFaceUvwListGenerate.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SetIgaFaceUvwListGenerate._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETIGAFACEUVWLISTGENERATE_OPTION0_CARD0,

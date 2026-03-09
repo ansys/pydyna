@@ -64,15 +64,18 @@ class FiberFamily(Cards):
             Card.from_field_schemas_with_defaults(
                 _FIBERFAMILY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FIBERFAMILY_CARD1,
                 active_func=lambda: self.ftype == 1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FIBERFAMILY_CARD2,
                 active_func=lambda: self.ftype == 2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
 
     def _read_data(self, buf: typing.TextIO, parameters) -> bool:
         """Custom read logic to handle ftype-dependent cards."""
@@ -384,8 +387,8 @@ class Mat295(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "295"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "flid": LinkType.DEFINE_CURVE,
@@ -403,80 +406,99 @@ class Mat295(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT295_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD2,
                 active_func=lambda: self.itype and abs(self.itype) == 1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD3,
                 active_func=lambda: self.itype and abs(self.itype) == 1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD4,
                 active_func=lambda: self.itype and abs(self.itype) == 2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD5,
                 active_func=lambda: self.itype and abs(self.itype) == 3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD6,
                 active_func=lambda: self.atype and abs(self.atype) == 1,
                 **kwargs,
-            ),            CardSet(
+            ),
+            CardSet(
                 FiberFamily,
                 length_func = lambda: self.nf or 0,
                 active_func = lambda: self.atype and abs(self.atype) == 1,
                 **kwargs
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD8,
                 active_func=lambda: self.atype and abs(self.atype) == 1 and self.intype == 1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD9,
                 active_func=lambda: self.atype and abs(self.atype) == 1 and self.actype in [1,2,3,4,5],
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD10,
                 active_func=lambda: self.atype and abs(self.atype) == 1 and self.actype in [1,2],
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD11,
                 active_func=lambda: self.atype and abs(self.atype) == 1 and self.actype == 1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD12,
                 active_func=lambda: self.atype and abs(self.atype) == 1 and self.actype == 2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD13,
                 active_func=lambda: self.atype and abs(self.atype) == 1 and self.actype == 3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD14,
                 active_func=lambda: self.atype and abs(self.atype) == 1 and self.actype == 4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD15,
                 active_func=lambda: self.atype and abs(self.atype) == 1 and self.actype == 4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD16,
                 active_func=lambda: self.atype and abs(self.atype) == 1 and self.actype == 5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD17,
                 active_func=lambda: self.atype and abs(self.atype) == 1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT295_CARD18,
                 active_func=lambda: self.atype and abs(self.atype) == 1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat295.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat295._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT295_OPTION0_CARD0,

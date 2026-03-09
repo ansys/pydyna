@@ -61,8 +61,8 @@ class DefineDeHbond(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DE_HBOND"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -73,14 +73,17 @@ class DefineDeHbond(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEDEHBOND_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEDEHBOND_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEDEHBOND_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineDeHbond.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineDeHbond._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDEHBOND_OPTION0_CARD0,

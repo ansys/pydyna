@@ -62,10 +62,12 @@ class AleAmbientHydrostatic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALEAMBIENTHYDROSTATIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEAMBIENTHYDROSTATIC_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def alesid(self) -> typing.Optional[int]:
         """Get or set the ALESID defines the reservoir-type. ALE domain/mesh whose hydrostatic pressure field due to gravity is being initialized by this keyword. See Remark 4.

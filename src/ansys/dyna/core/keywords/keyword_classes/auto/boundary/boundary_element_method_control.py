@@ -46,7 +46,8 @@ class BoundaryElementMethodControl(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYELEMENTMETHODCONTROL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def lwake(self) -> int:
         """Get or set the Number of elements in the wake of lifting surfaces. Wakes must be defined for all lifting surfaces.

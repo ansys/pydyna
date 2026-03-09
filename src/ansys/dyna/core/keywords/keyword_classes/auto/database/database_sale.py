@@ -43,7 +43,8 @@ class DatabaseSale(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASESALE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def on_off(self) -> int:
         """Get or set the Output d3sale option flag.

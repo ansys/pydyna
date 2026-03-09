@@ -44,7 +44,8 @@ class FrequencyDomainAccelerationUnit(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACCELERATIONUNIT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def unit(self) -> int:
         """Get or set the Flag for acceleration unit conversion:

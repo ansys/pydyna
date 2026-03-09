@@ -74,8 +74,8 @@ class SetPorousLagrangian(KeywordBase):
 
     keyword = "SET"
     subkeyword = "POROUS_LAGRANGIAN"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "veccid1": LinkType.DEFINE_VECTOR,
@@ -90,17 +90,21 @@ class SetPorousLagrangian(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETPOROUSLAGRANGIAN_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETPOROUSLAGRANGIAN_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETPOROUSLAGRANGIAN_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETPOROUSLAGRANGIAN_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SetPorousLagrangian.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SetPorousLagrangian._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETPOROUSLAGRANGIAN_OPTION0_CARD0,

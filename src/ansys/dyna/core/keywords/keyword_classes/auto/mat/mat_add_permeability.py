@@ -47,8 +47,8 @@ class MatAddPermeability(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ADD_PERMEABILITY"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "mid": LinkType.MAT,
@@ -62,8 +62,9 @@ class MatAddPermeability(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATADDPERMEABILITY_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatAddPermeability.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatAddPermeability._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATADDPERMEABILITY_OPTION0_CARD0,

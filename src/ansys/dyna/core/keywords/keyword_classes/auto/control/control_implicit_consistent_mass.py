@@ -43,7 +43,8 @@ class ControlImplicitConsistentMass(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITCONSISTENTMASS_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def iflag(self) -> int:
         """Get or set the Consistent mass matrix flag

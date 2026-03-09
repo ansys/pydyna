@@ -52,10 +52,12 @@ class ControlReferenceControlVolumeCoordinates(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLREFERENCECONTROLVOLUMECOORDINATES_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLREFERENCECONTROLVOLUMECOORDINATES_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the The file name contains the *INITIAL_FOAM_REFERENCE_GEOMETRY, *INITIAL_STRESS_SOLID, and *INITIAL_STRESS_SHELL to be read or written.

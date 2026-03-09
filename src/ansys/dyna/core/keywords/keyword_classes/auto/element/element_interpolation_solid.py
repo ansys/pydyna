@@ -65,10 +65,12 @@ class ElementInterpolationSolid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTINTERPOLATIONSOLID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTINTERPOLATIONSOLID_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eids(self) -> typing.Optional[int]:
         """Get or set the Element ID of the interpolation solid. This needs to coincide with a

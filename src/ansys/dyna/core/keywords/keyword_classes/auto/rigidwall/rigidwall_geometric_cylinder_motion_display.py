@@ -84,8 +84,8 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_CYLINDER_MOTION_DISPLAY"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -103,23 +103,29 @@ class RigidwallGeometricCylinderMotionDisplay(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERMOTIONDISPLAY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERMOTIONDISPLAY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERMOTIONDISPLAY_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERMOTIONDISPLAY_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERMOTIONDISPLAY_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERMOTIONDISPLAY_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = RigidwallGeometricCylinderMotionDisplay.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = RigidwallGeometricCylinderMotionDisplay._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLGEOMETRICCYLINDERMOTIONDISPLAY_OPTION0_CARD0,

@@ -55,7 +55,8 @@ class ElementBeamSource(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTBEAMSOURCE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def bsid(self) -> int:
         """Get or set the Beam Source ID.  A unique number has to be used.

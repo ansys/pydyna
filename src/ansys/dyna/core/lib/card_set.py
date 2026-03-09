@@ -28,7 +28,7 @@ That type is used for each card, and behaves like a keyword.
 
 import typing
 
-from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.card_interface import CardInterface, ReadResult
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
@@ -54,11 +54,24 @@ class CardSet(CardInterface):
         self._bounded = length_func != None
         self._parent = kwargs.pop("parent", None)
         self._keyword = kwargs.pop("keyword", None)
+        card_set_count = kwargs.pop("card_set_count", None)
         if option_specs == None:
             option_specs = []
         self._option_specs = option_specs
         self._initialized: bool = False
-        if len(kwargs) > 0 and not self._bounded:
+        if card_set_count is not None:
+            if not self._bounded:
+                _infrastructure_keys = {"format", "user_comment"}
+                field_kwargs = {k: v for k, v in kwargs.items() if k not in _infrastructure_keys}
+                if field_kwargs:
+                    raise ValueError(
+                        "card_set_count is incompatible with field keyword arguments. "
+                        "Use either card_set_count=N to create N empty sets, "
+                        "or field kwargs to initialise the first set with specific values, not both."
+                    )
+                self._initialize_data(card_set_count)
+                self._initialized = True
+        elif len(kwargs) > 0 and not self._bounded:
             # implicit unbounded initializer!
             self._initialize(**kwargs)
         kwargs["parent"] = self._parent
@@ -177,14 +190,22 @@ class CardSet(CardInterface):
         """
         item = self._items[index]
 
+        # Propagate the CardSet's format to all cards in the item before reading.
+        # This is needed when the keyword was written in long format (+): the
+        # KeywordBase.format setter propagates to the CardSet, but items are created
+        # lazily during read (after format is already set), so they don't inherit it.
+        if self._format_type != format_type.default:
+            for card in item._cards:
+                card.format = self._format_type
+
         # Check if item has custom read logic
         if hasattr(item, "_read_data"):
             return item._read_data(buf, parameter_set)
 
         # Default: iterate through all cards
         for card in item._get_all_cards():
-            ret = card.read(buf, parameter_set)
-            if ret:
+            result = card.read(buf, parameter_set)
+            if result.reached_end:
                 # according to the card, we are at the end of the keyword, so
                 # we can break out of the card reading loop.
                 return True
@@ -205,17 +226,25 @@ class CardSet(CardInterface):
             if at_end_of_keyword(buf):
                 return
 
-    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
-        """Reads the card set from the given buffer."""
+    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> ReadResult:
+        """Reads the card set from the given buffer.
+
+        Returns
+        -------
+        ReadResult
+            Result containing warnings and end-of-reading signal.
+        """
+        result = ReadResult()
         if not self.active:
-            return False
+            return result
         self._initialize()
         if self.bounded:
             self._load_bounded_from_buffer(buf, parameter_set)
-            return False
+            result.reached_end = False
         else:
             self._load_unbounded_from_buffer(buf, parameter_set)
-            return True
+            result.reached_end = True
+        return result
 
 
 def read_cards_with_discriminator(

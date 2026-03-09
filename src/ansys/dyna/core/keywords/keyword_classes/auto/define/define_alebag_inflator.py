@@ -68,8 +68,8 @@ class DefineAlebagInflator(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "ALEBAG_INFLATOR"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nodeid": LinkType.NODE,
@@ -87,14 +87,17 @@ class DefineAlebagInflator(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEALEBAGINFLATOR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEALEBAGINFLATOR_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEALEBAGINFLATOR_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineAlebagInflator.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineAlebagInflator._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEALEBAGINFLATOR_OPTION0_CARD0,

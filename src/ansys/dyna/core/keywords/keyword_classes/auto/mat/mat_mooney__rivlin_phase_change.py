@@ -79,8 +79,8 @@ class MatMooney_RivlinPhaseChange(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "MOONEY-RIVLIN_PHASE_CHANGE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid1": LinkType.DEFINE_CURVE,
@@ -95,20 +95,25 @@ class MatMooney_RivlinPhaseChange(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATMOONEY_RIVLINPHASECHANGE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOONEY_RIVLINPHASECHANGE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOONEY_RIVLINPHASECHANGE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOONEY_RIVLINPHASECHANGE_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOONEY_RIVLINPHASECHANGE_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatMooney_RivlinPhaseChange.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatMooney_RivlinPhaseChange._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATMOONEY_RIVLINPHASECHANGE_OPTION0_CARD0,

@@ -87,16 +87,20 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDINTERPOLATIONSPOTWELD_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDINTERPOLATIONSPOTWELD_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDINTERPOLATIONSPOTWELD_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDINTERPOLATIONSPOTWELD_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid1(self) -> typing.Optional[int]:
         """Get or set the Part ID or part set ID of first sheet

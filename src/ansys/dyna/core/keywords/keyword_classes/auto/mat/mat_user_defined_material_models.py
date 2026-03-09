@@ -102,8 +102,8 @@ class MatUserDefinedMaterialModels(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "USER_DEFINED_MATERIAL_MODELS"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -114,23 +114,29 @@ class MatUserDefinedMaterialModels(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATUSERDEFINEDMATERIALMODELS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATUSERDEFINEDMATERIALMODELS_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATUSERDEFINEDMATERIALMODELS_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATUSERDEFINEDMATERIALMODELS_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATUSERDEFINEDMATERIALMODELS_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATUSERDEFINEDMATERIALMODELS_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatUserDefinedMaterialModels.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatUserDefinedMaterialModels._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATUSERDEFINEDMATERIALMODELS_OPTION0_CARD0,

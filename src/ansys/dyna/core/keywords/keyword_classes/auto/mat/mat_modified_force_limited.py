@@ -221,8 +221,8 @@ class MatModifiedForceLimited(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "MODIFIED_FORCE_LIMITED"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lc1": LinkType.DEFINE_CURVE,
@@ -293,59 +293,77 @@ class MatModifiedForceLimited(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD9,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD10,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD11,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD12,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD13,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD14,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD15,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD16,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD17,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatModifiedForceLimited.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatModifiedForceLimited._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATMODIFIEDFORCELIMITED_OPTION0_CARD0,

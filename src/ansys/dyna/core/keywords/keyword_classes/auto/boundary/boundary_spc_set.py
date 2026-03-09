@@ -50,8 +50,8 @@ class BoundarySpcSet(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "SPC_SET"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
@@ -66,8 +66,9 @@ class BoundarySpcSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYSPCSET_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = BoundarySpcSet.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = BoundarySpcSet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _BOUNDARYSPCSET_OPTION0_CARD0,

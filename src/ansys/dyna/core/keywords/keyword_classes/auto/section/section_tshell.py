@@ -22,13 +22,16 @@
 
 """Module providing the SectionTShell class."""
 import typing
+from ansys.dyna.core.lib.mixins.section_tshell_validation import SectionTShellValidationMixin
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
+from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
-_SECTIONTSHELL_CARD0 = (
+_SECTIONTSHELLCARDSET_CARD0 = (
     FieldSchema("secid", int, 0, 10, None),
     FieldSchema("elform", int, 10, 10, 1),
     FieldSchema("shrf", float, 20, 10, 1.0),
@@ -39,45 +42,47 @@ _SECTIONTSHELL_CARD0 = (
     FieldSchema("tshear", int, 70, 10, 0),
 )
 
-_SECTIONTSHELL_OPTION0_CARD0 = (
+_SECTIONTSHELLCARDSET_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
 
-class SectionTShell(KeywordBase):
-    """DYNA SECTION_TSHELL keyword"""
+class SectionTshellCardSet(Cards):
+    """ CardSet."""
 
-    keyword = "SECTION"
-    subkeyword = "TSHELL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
-        """Initialize the SectionTShell class."""
-        super().__init__(**kwargs)
+        """Initialize the SectionTshellCardSet CardSet."""
+        super().__init__(kwargs["keyword"])
+        self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
-                _SECTIONTSHELL_CARD0,
+                _SECTIONTSHELLCARDSET_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "bi",
                 8,
                 10,
                 float,
                 lambda: self.nip,
                 lambda: self.icomp == 1,
-                data = kwargs.get("bi")),            OptionCardSet(
-                option_spec = SectionTShell.option_specs[0],
+                data = kwargs.get("bi")),
+            OptionCardSet(
+                option_spec = SectionTshellCardSet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
-                        _SECTIONTSHELL_OPTION0_CARD0,
+                        _SECTIONTSHELLCARDSET_OPTION0_CARD0,
                         **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
+
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.
@@ -212,4 +217,158 @@ class SectionTShell(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def parent(self) -> KeywordBase:
+        """Get the parent keyword."""
+        return self._parent
+
+class SectionTShell(
+    KeywordBase
+    , SectionTShellValidationMixin
+    ):
+    """DYNA SECTION_TSHELL keyword"""
+
+    keyword = "SECTION"
+    subkeyword = "TSHELL"
+
+    def __init__(self, **kwargs):
+        """Initialize the SectionTShell class."""
+        super().__init__(**kwargs)
+        kwargs["parent"] = self
+        kwargs["keyword"] = self
+        self._cards = [
+            CardSet(
+                SectionTshellCardSet,
+                option_specs = SectionTshellCardSet._option_spec_list,
+                **kwargs
+            ),
+        ]
+    @property
+    def secid(self) -> typing.Optional[int]:
+        """Get or set the secid
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].secid
+
+    @secid.setter
+    def secid(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].secid = value
+
+    @property
+    def elform(self) -> int:
+        """Get or set the elform
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].elform
+
+    @elform.setter
+    def elform(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].elform = value
+
+    @property
+    def shrf(self) -> float:
+        """Get or set the shrf
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].shrf
+
+    @shrf.setter
+    def shrf(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].shrf = value
+
+    @property
+    def nip(self) -> int:
+        """Get or set the nip
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].nip
+
+    @nip.setter
+    def nip(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].nip = value
+
+    @property
+    def propt(self) -> float:
+        """Get or set the propt
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].propt
+
+    @propt.setter
+    def propt(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].propt = value
+
+    @property
+    def qr(self) -> int:
+        """Get or set the qr
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].qr
+
+    @qr.setter
+    def qr(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].qr = value
+
+    @property
+    def icomp(self) -> int:
+        """Get or set the icomp
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].icomp
+
+    @icomp.setter
+    def icomp(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].icomp = value
+
+    @property
+    def tshear(self) -> int:
+        """Get or set the tshear
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].tshear
+
+    @tshear.setter
+    def tshear(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].tshear = value
+
+    @property
+    def bi(self) -> SeriesCard:
+        """Gets the bi."""
+        ensure_card_set_properties(self, False)
+        return self.sets[0].bi
+
+    @bi.setter
+    def bi(self, value: typing.List) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].bi = value
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].title
+
+    @title.setter
+    def title(self, value: str) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].title = value
+
+    @property
+    def sets(self) -> typing.List[SectionTshellCardSet]:
+        """Gets the list of sets."""
+        return self._cards[0].items()
+
+    def add_set(self, **kwargs):
+        """Adds a set."""
+        self._cards[0].add_item(**kwargs)
 

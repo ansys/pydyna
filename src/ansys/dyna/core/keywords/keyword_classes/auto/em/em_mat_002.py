@@ -58,10 +58,12 @@ class EmMat002(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMMAT002_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMMAT002_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified (see *PART)

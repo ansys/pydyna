@@ -156,43 +156,56 @@ class EmEpCellmodelTentusscher(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELTENTUSSCHER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELTENTUSSCHER_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELTENTUSSCHER_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELTENTUSSCHER_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELTENTUSSCHER_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELTENTUSSCHER_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELTENTUSSCHER_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELTENTUSSCHER_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELTENTUSSCHER_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELTENTUSSCHER_CARD9,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELTENTUSSCHER_CARD10,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELTENTUSSCHER_CARD11,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELTENTUSSCHER_CARD12,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID defined in *MAT_.

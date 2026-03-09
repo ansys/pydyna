@@ -99,8 +99,8 @@ class MatOrthotropicThermalCuring(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ORTHOTROPIC_THERMAL_CURING"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lccha": LinkType.DEFINE_CURVE,
@@ -119,23 +119,29 @@ class MatOrthotropicThermalCuring(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALCURING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALCURING_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALCURING_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALCURING_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALCURING_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALCURING_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatOrthotropicThermalCuring.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatOrthotropicThermalCuring._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATORTHOTROPICTHERMALCURING_OPTION0_CARD0,

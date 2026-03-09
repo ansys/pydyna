@@ -48,8 +48,8 @@ class DefineSpotweldMultiscale(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "SPOTWELD_MULTISCALE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "bset": LinkType.SET_BEAM,
@@ -66,8 +66,9 @@ class DefineSpotweldMultiscale(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINESPOTWELDMULTISCALE_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineSpotweldMultiscale.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineSpotweldMultiscale._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINESPOTWELDMULTISCALE_OPTION0_CARD0,

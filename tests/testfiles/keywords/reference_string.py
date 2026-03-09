@@ -210,6 +210,14 @@ $#      t1        t2        t3        t4      nloc     marea      idof    edgset
          2         3       1.0         5       1.0         0         0         1
        0.0       0.0       0.0       0.0       0.0       1.0       0.0         0"""
 
+test_section_shell_misc = """*SECTION_SHELL_MISC
+$#   secid    elform      shrf       nip     propt   qr/irid     icomp     setyp
+         1         2       1.0         5       1.0         0         0         1
+$#      t1        t2        t3        t4      nloc     marea      idof    edgset
+       1.0       1.0       1.0       1.0       0.0       0.0       0.0         0
+$#  thkscl
+       2.5"""
+
 test_section_solid_title_deck_string = """$
 *KEYWORD
 *SECTION_SOLID_TITLE

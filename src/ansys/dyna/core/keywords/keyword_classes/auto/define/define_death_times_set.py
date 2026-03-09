@@ -67,8 +67,8 @@ class DefineDeathTimesSet(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DEATH_TIMES_SET"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "n1": LinkType.NODE,
@@ -92,14 +92,17 @@ class DefineDeathTimesSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEDEATHTIMESSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEDEATHTIMESSET_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEDEATHTIMESSET_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineDeathTimesSet.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineDeathTimesSet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDEATHTIMESSET_OPTION0_CARD0,

@@ -49,8 +49,8 @@ class MatTransverselyAnisotropicElasticPlasticNlp2(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "TRANSVERSELY_ANISOTROPIC_ELASTIC_PLASTIC_NLP2"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "hlcid": LinkType.DEFINE_CURVE,
@@ -64,8 +64,9 @@ class MatTransverselyAnisotropicElasticPlasticNlp2(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATTRANSVERSELYANISOTROPICELASTICPLASTICNLP2_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatTransverselyAnisotropicElasticPlasticNlp2.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatTransverselyAnisotropicElasticPlasticNlp2._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATTRANSVERSELYANISOTROPICELASTICPLASTICNLP2_OPTION0_CARD0,

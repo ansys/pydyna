@@ -87,8 +87,8 @@ class MatFuChangFoamLogLogInterpolation(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "FU_CHANG_FOAM_LOG_LOG_INTERPOLATION"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "pvid": LinkType.DEFINE_CURVE,
@@ -102,20 +102,25 @@ class MatFuChangFoamLogLogInterpolation(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATFUCHANGFOAMLOGLOGINTERPOLATION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATFUCHANGFOAMLOGLOGINTERPOLATION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATFUCHANGFOAMLOGLOGINTERPOLATION_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATFUCHANGFOAMLOGLOGINTERPOLATION_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATFUCHANGFOAMLOGLOGINTERPOLATION_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatFuChangFoamLogLogInterpolation.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatFuChangFoamLogLogInterpolation._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATFUCHANGFOAMLOGLOGINTERPOLATION_OPTION0_CARD0,

@@ -50,7 +50,8 @@ class LoadThermalLoadCurve(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADTHERMALLOADCURVE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID, see *DEFINE_CURVE to define temperature versus time.

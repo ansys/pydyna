@@ -50,7 +50,8 @@ class FrequencyDomainAcousticFringePlotPlate(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICFRINGEPLOTPLATE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def norm(self) -> int:
         """Get or set the Norm direction of the plate.

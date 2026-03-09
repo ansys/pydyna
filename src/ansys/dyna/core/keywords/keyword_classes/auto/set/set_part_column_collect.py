@@ -54,8 +54,8 @@ class SetPartColumnCollect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "PART_COLUMN_COLLECT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "pid": LinkType.PART,
@@ -69,11 +69,13 @@ class SetPartColumnCollect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETPARTCOLUMNCOLLECT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETPARTCOLUMNCOLLECT_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SetPartColumnCollect.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SetPartColumnCollect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETPARTCOLUMNCOLLECT_OPTION0_CARD0,

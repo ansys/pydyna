@@ -60,16 +60,20 @@ class Fatigue(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FATIGUE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FATIGUE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FATIGUE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FATIGUE_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID, Part Set ID, or Element (solid, shell, beam, thick shell) Set ID.

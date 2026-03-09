@@ -52,8 +52,8 @@ class Mat196(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "196"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "flcid": LinkType.DEFINE_CURVE,
@@ -69,7 +69,8 @@ class Mat196(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT196_CARD0,
                 **kwargs,
-            ),            TableCardGroup(
+            ),
+            TableCardGroup(
                 [
                     (
                         FieldSchema("dof", int, 0, 10, None),
@@ -92,8 +93,9 @@ class Mat196(KeywordBase):
                 None,
                 "springs",
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat196.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat196._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT196_OPTION0_CARD0,

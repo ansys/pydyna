@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
@@ -82,11 +83,18 @@ _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD4 = (
     FieldSchema("rfiltf", float, 60, 10, 0.0),
 )
 
+_MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class MatModifiedPiecewiseLinearPlasticityPrestrain(KeywordBase):
     """DYNA MAT_MODIFIED_PIECEWISE_LINEAR_PLASTICITY_PRESTRAIN keyword"""
 
     keyword = "MAT"
     subkeyword = "MODIFIED_PIECEWISE_LINEAR_PLASTICITY_PRESTRAIN"
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
+    ]
     _link_fields = {
         "lcss": LinkType.DEFINE_CURVE,
         "lcsr": LinkType.DEFINE_CURVE,
@@ -97,23 +105,39 @@ class MatModifiedPiecewiseLinearPlasticityPrestrain(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the MatModifiedPiecewiseLinearPlasticityPrestrain class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+            OptionCardSet(
+                option_spec = MatModifiedPiecewiseLinearPlasticityPrestrain._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _MATMODIFIEDPIECEWISELINEARPLASTICITYPRESTRAIN_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -559,6 +583,20 @@ class MatModifiedPiecewiseLinearPlasticityPrestrain(KeywordBase):
     def rfiltf(self, value: float) -> None:
         """Set the rfiltf property."""
         self._cards[4].set_value("rfiltf", value)
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[5].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[5].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 
     @property
     def lcss_link(self) -> typing.Optional[DefineCurve]:

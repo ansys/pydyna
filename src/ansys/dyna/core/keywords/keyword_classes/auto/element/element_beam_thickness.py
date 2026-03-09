@@ -68,10 +68,12 @@ class ElementBeamThickness(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTBEAMTHICKNESS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTBEAMTHICKNESS_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number must be used.

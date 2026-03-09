@@ -63,6 +63,14 @@ _MAT034_CARD2 = (
 )
 
 _MAT034_CARD3 = (
+    FieldSchema("l", float, 0, 10, None),
+    FieldSchema("r", float, 10, 10, None),
+    FieldSchema("c1", float, 20, 10, None),
+    FieldSchema("c2", float, 30, 10, None),
+    FieldSchema("c3", float, 40, 10, None),
+)
+
+_MAT034_CARD4 = (
     FieldSchema("unused", int, 0, 10, None),
     FieldSchema("rgbrth", float, 10, 10, None),
     FieldSchema("a0ref", int, 20, 10, 0),
@@ -73,7 +81,7 @@ _MAT034_CARD3 = (
     FieldSchema("x1", float, 70, 10, None),
 )
 
-_MAT034_CARD4 = (
+_MAT034_CARD5 = (
     FieldSchema("v1", float, 0, 10, None),
     FieldSchema("v2", float, 10, 10, None),
     FieldSchema("v3", float, 20, 10, None),
@@ -84,7 +92,7 @@ _MAT034_CARD4 = (
     FieldSchema("isrefg", int, 70, 10, 0),
 )
 
-_MAT034_CARD5 = (
+_MAT034_CARD6 = (
     FieldSchema("lca", int, 0, 10, 0),
     FieldSchema("lcb", int, 10, 10, 0),
     FieldSchema("lcab", int, 20, 10, 0),
@@ -94,7 +102,7 @@ _MAT034_CARD5 = (
     FieldSchema("rl", float, 60, 10, None),
 )
 
-_MAT034_CARD6 = (
+_MAT034_CARD7 = (
     FieldSchema("lcaa", int, 0, 10, None),
     FieldSchema("lcbb", int, 10, 10, None),
     FieldSchema("h", float, 20, 10, None),
@@ -114,8 +122,8 @@ class Mat034(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "034"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lca": LinkType.DEFINE_CURVE,
@@ -136,26 +144,40 @@ class Mat034(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT034_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT034_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT034_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT034_CARD3,
+                active_func=lambda: self.fvopt<0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT034_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT034_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT034_CARD6,
+                active_func=lambda: self.form in [4,14,-14],
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat034.option_specs[0],
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MAT034_CARD7,
+                active_func=lambda: self.form==-14,
+                **kwargs,
+            ),
+            OptionCardSet(
+                option_spec = Mat034._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT034_OPTION0_CARD0,
@@ -426,17 +448,72 @@ class Mat034(KeywordBase):
         self._cards[2].set_value("tsrfac", value)
 
     @property
+    def l(self) -> typing.Optional[float]:
+        """Get or set the Dimension of unit cell (length)
+        """ # nopep8
+        return self._cards[3].get_value("l")
+
+    @l.setter
+    def l(self, value: float) -> None:
+        """Set the l property."""
+        self._cards[3].set_value("l", value)
+
+    @property
+    def r(self) -> typing.Optional[float]:
+        """Get or set the Radius of yarn (length)
+        """ # nopep8
+        return self._cards[3].get_value("r")
+
+    @r.setter
+    def r(self, value: float) -> None:
+        """Set the r property."""
+        self._cards[3].set_value("r", value)
+
+    @property
+    def c1(self) -> typing.Optional[float]:
+        """Get or set the Pressure coefficient (dependent on unit system)
+        """ # nopep8
+        return self._cards[3].get_value("c1")
+
+    @c1.setter
+    def c1(self, value: float) -> None:
+        """Set the c1 property."""
+        self._cards[3].set_value("c1", value)
+
+    @property
+    def c2(self) -> typing.Optional[float]:
+        """Get or set the Pressure exponent
+        """ # nopep8
+        return self._cards[3].get_value("c2")
+
+    @c2.setter
+    def c2(self, value: float) -> None:
+        """Set the c2 property."""
+        self._cards[3].set_value("c2", value)
+
+    @property
+    def c3(self) -> typing.Optional[float]:
+        """Get or set the Strain coefficient
+        """ # nopep8
+        return self._cards[3].get_value("c3")
+
+    @c3.setter
+    def c3(self, value: float) -> None:
+        """Set the c3 property."""
+        self._cards[3].set_value("c3", value)
+
+    @property
     def rgbrth(self) -> typing.Optional[float]:
         """Get or set the Material dependent birth time of airbag reference geometry. Nonzero
         RGBRTH overwrites the birth time defined in the *AIRBAG_REFERENCE_GEOMETRY_BIRTH section. RGBRTH also applies to
         reference geometry defined by *AIRBAG_SHELL_REFERENCE_GEOMETRY
         """ # nopep8
-        return self._cards[3].get_value("rgbrth")
+        return self._cards[4].get_value("rgbrth")
 
     @rgbrth.setter
     def rgbrth(self, value: float) -> None:
         """Set the rgbrth property."""
-        self._cards[3].set_value("rgbrth", value)
+        self._cards[4].set_value("rgbrth", value)
 
     @property
     def a0ref(self) -> int:
@@ -444,113 +521,113 @@ class Mat034(KeywordBase):
         EQ.0.:	default.  Use the initial geometry defined in *NODE.
         EQ.1.:	Use the reference geometry defined in *AIRBAG_REFERENCE_GEOMETRY or *AIRBAG_SHELL_REFERENCE_GEOMETRY.
         """ # nopep8
-        return self._cards[3].get_value("a0ref")
+        return self._cards[4].get_value("a0ref")
 
     @a0ref.setter
     def a0ref(self, value: int) -> None:
         """Set the a0ref property."""
         if value not in [0, 1, None]:
             raise Exception("""a0ref must be `None` or one of {0,1}.""")
-        self._cards[3].set_value("a0ref", value)
+        self._cards[4].set_value("a0ref", value)
 
     @property
     def a1(self) -> typing.Optional[float]:
         """Get or set the Component of vector a for AOPT = 2.
         """ # nopep8
-        return self._cards[3].get_value("a1")
+        return self._cards[4].get_value("a1")
 
     @a1.setter
     def a1(self, value: float) -> None:
         """Set the a1 property."""
-        self._cards[3].set_value("a1", value)
+        self._cards[4].set_value("a1", value)
 
     @property
     def a2(self) -> typing.Optional[float]:
         """Get or set the Component of vector a for AOPT = 2.
         """ # nopep8
-        return self._cards[3].get_value("a2")
+        return self._cards[4].get_value("a2")
 
     @a2.setter
     def a2(self, value: float) -> None:
         """Set the a2 property."""
-        self._cards[3].set_value("a2", value)
+        self._cards[4].set_value("a2", value)
 
     @property
     def a3(self) -> typing.Optional[float]:
         """Get or set the Component of vector a for AOPT = 2.
         """ # nopep8
-        return self._cards[3].get_value("a3")
+        return self._cards[4].get_value("a3")
 
     @a3.setter
     def a3(self, value: float) -> None:
         """Set the a3 property."""
-        self._cards[3].set_value("a3", value)
+        self._cards[4].set_value("a3", value)
 
     @property
     def x0(self) -> typing.Optional[float]:
         """Get or set the Coefficients of Anagonye and Wang [1999] porosity equation for the leakage area:
         """ # nopep8
-        return self._cards[3].get_value("x0")
+        return self._cards[4].get_value("x0")
 
     @x0.setter
     def x0(self, value: float) -> None:
         """Set the x0 property."""
-        self._cards[3].set_value("x0", value)
+        self._cards[4].set_value("x0", value)
 
     @property
     def x1(self) -> typing.Optional[float]:
         """Get or set the Coefficients of Anagonye and Wang [1999] porosity equation for the leakage area:
         """ # nopep8
-        return self._cards[3].get_value("x1")
+        return self._cards[4].get_value("x1")
 
     @x1.setter
     def x1(self, value: float) -> None:
         """Set the x1 property."""
-        self._cards[3].set_value("x1", value)
+        self._cards[4].set_value("x1", value)
 
     @property
     def v1(self) -> typing.Optional[float]:
         """Get or set the Component of vector v for AOPT = 3.
         """ # nopep8
-        return self._cards[4].get_value("v1")
+        return self._cards[5].get_value("v1")
 
     @v1.setter
     def v1(self, value: float) -> None:
         """Set the v1 property."""
-        self._cards[4].set_value("v1", value)
+        self._cards[5].set_value("v1", value)
 
     @property
     def v2(self) -> typing.Optional[float]:
         """Get or set the Component of vector v for AOPT = 3.
         """ # nopep8
-        return self._cards[4].get_value("v2")
+        return self._cards[5].get_value("v2")
 
     @v2.setter
     def v2(self, value: float) -> None:
         """Set the v2 property."""
-        self._cards[4].set_value("v2", value)
+        self._cards[5].set_value("v2", value)
 
     @property
     def v3(self) -> typing.Optional[float]:
         """Get or set the Component of vector v for AOPT = 3.
         """ # nopep8
-        return self._cards[4].get_value("v3")
+        return self._cards[5].get_value("v3")
 
     @v3.setter
     def v3(self, value: float) -> None:
         """Set the v3 property."""
-        self._cards[4].set_value("v3", value)
+        self._cards[5].set_value("v3", value)
 
     @property
     def beta(self) -> typing.Optional[float]:
         """Get or set the Material angle in degrees for AOPT=3, may be overridden on the element card, see *ELEMENT_SHELL_BETA.
         """ # nopep8
-        return self._cards[4].get_value("beta")
+        return self._cards[5].get_value("beta")
 
     @beta.setter
     def beta(self, value: float) -> None:
         """Set the beta property."""
-        self._cards[4].set_value("beta", value)
+        self._cards[5].set_value("beta", value)
 
     @property
     def isrefg(self) -> int:
@@ -558,124 +635,124 @@ class Mat034(KeywordBase):
         EQ.0.0:  default.  Not active.
         EQ.1.0:  active
         """ # nopep8
-        return self._cards[4].get_value("isrefg")
+        return self._cards[5].get_value("isrefg")
 
     @isrefg.setter
     def isrefg(self, value: int) -> None:
         """Set the isrefg property."""
         if value not in [0, 1, None]:
             raise Exception("""isrefg must be `None` or one of {0,1}.""")
-        self._cards[4].set_value("isrefg", value)
+        self._cards[5].set_value("isrefg", value)
 
     @property
     def lca(self) -> int:
         """Get or set the Load curve ID for stress versus strain along the a-axis fiber; available when FORM=4 only. If zero, EA is used.
         """ # nopep8
-        return self._cards[5].get_value("lca")
+        return self._cards[6].get_value("lca")
 
     @lca.setter
     def lca(self, value: int) -> None:
         """Set the lca property."""
-        self._cards[5].set_value("lca", value)
+        self._cards[6].set_value("lca", value)
 
     @property
     def lcb(self) -> int:
         """Get or set the Load curve ID for stress versus strain along the b-axis fiber; available when FORM=4 only. If zero, EB is used.
         """ # nopep8
-        return self._cards[5].get_value("lcb")
+        return self._cards[6].get_value("lcb")
 
     @lcb.setter
     def lcb(self, value: int) -> None:
         """Set the lcb property."""
-        self._cards[5].set_value("lcb", value)
+        self._cards[6].set_value("lcb", value)
 
     @property
     def lcab(self) -> int:
         """Get or set the Load curve ID for stress versus strain in the ab-plane; available when FORM=4 only. If zero, GAB is used.
         """ # nopep8
-        return self._cards[5].get_value("lcab")
+        return self._cards[6].get_value("lcab")
 
     @lcab.setter
     def lcab(self, value: int) -> None:
         """Set the lcab property."""
-        self._cards[5].set_value("lcab", value)
+        self._cards[6].set_value("lcab", value)
 
     @property
     def lcua(self) -> int:
         """Get or set the Unload/reload curve ID for stress versus strain along the a-axis fiber; available when FORM=4 only. If zero, LCA is used.
         """ # nopep8
-        return self._cards[5].get_value("lcua")
+        return self._cards[6].get_value("lcua")
 
     @lcua.setter
     def lcua(self, value: int) -> None:
         """Set the lcua property."""
-        self._cards[5].set_value("lcua", value)
+        self._cards[6].set_value("lcua", value)
 
     @property
     def lcub(self) -> int:
         """Get or set the Load curve ID for stress versus strain along the b-axis fiber; available when FORM=4 only. If zero, LCB is used.
         """ # nopep8
-        return self._cards[5].get_value("lcub")
+        return self._cards[6].get_value("lcub")
 
     @lcub.setter
     def lcub(self, value: int) -> None:
         """Set the lcub property."""
-        self._cards[5].set_value("lcub", value)
+        self._cards[6].set_value("lcub", value)
 
     @property
     def lcuab(self) -> int:
         """Get or set the Load curve ID for stress versus strain in the ab-plane; available when FORM=4 only. If zero, LCAB is used.
         """ # nopep8
-        return self._cards[5].get_value("lcuab")
+        return self._cards[6].get_value("lcuab")
 
     @lcuab.setter
     def lcuab(self, value: int) -> None:
         """Set the lcuab property."""
-        self._cards[5].set_value("lcuab", value)
+        self._cards[6].set_value("lcuab", value)
 
     @property
     def rl(self) -> typing.Optional[float]:
         """Get or set the Optional reloading parameter for FORM=14.  Values between 0.0 (reloading on unloading curve-default) and 1.0 (reloading on a minimum linear slope between unloading curve and loading curve) are possible.
         """ # nopep8
-        return self._cards[5].get_value("rl")
+        return self._cards[6].get_value("rl")
 
     @rl.setter
     def rl(self, value: float) -> None:
         """Set the rl property."""
-        self._cards[5].set_value("rl", value)
+        self._cards[6].set_value("rl", value)
 
     @property
     def lcaa(self) -> typing.Optional[int]:
         """Get or set the Load curve or table ID. Load curve ID defines the stress along the a-axis fiber versus biaxial strain. Table ID defines for each directional strain rate a load curve representing stress along the a-axis fiber versus biaxial strain. Available for FORM=-14 only, if zero, LCA is used.
         """ # nopep8
-        return self._cards[6].get_value("lcaa")
+        return self._cards[7].get_value("lcaa")
 
     @lcaa.setter
     def lcaa(self, value: int) -> None:
         """Set the lcaa property."""
-        self._cards[6].set_value("lcaa", value)
+        self._cards[7].set_value("lcaa", value)
 
     @property
     def lcbb(self) -> typing.Optional[int]:
         """Get or set the Load curve or table ID. Load curve ID defines the stress along the b-axis fiber versus biaxial strain. Table ID defines for each directional strain rate a load curve representing stress along the b-axis fiber versus biaxial strain. Available for FORM=-14 only, if zero, LCB is used.
         """ # nopep8
-        return self._cards[6].get_value("lcbb")
+        return self._cards[7].get_value("lcbb")
 
     @lcbb.setter
     def lcbb(self, value: int) -> None:
         """Set the lcbb property."""
-        self._cards[6].set_value("lcbb", value)
+        self._cards[7].set_value("lcbb", value)
 
     @property
     def h(self) -> typing.Optional[float]:
         """Get or set the Normalized hysteresis parameter between 0 and 1.
         """ # nopep8
-        return self._cards[6].get_value("h")
+        return self._cards[7].get_value("h")
 
     @h.setter
     def h(self, value: float) -> None:
         """Set the h property."""
-        self._cards[6].set_value("h", value)
+        self._cards[7].set_value("h", value)
 
     @property
     def dt(self) -> typing.Optional[int]:
@@ -684,56 +761,56 @@ class Mat034(KeywordBase):
         LT.0.0: Strain rate is evaluated using average of last 11 time steps.
         GT.0.0: Strain rate is averaged over the last DT time units.
         """ # nopep8
-        return self._cards[6].get_value("dt")
+        return self._cards[7].get_value("dt")
 
     @dt.setter
     def dt(self, value: int) -> None:
         """Set the dt property."""
-        self._cards[6].set_value("dt", value)
+        self._cards[7].set_value("dt", value)
 
     @property
     def ecoat(self) -> typing.Optional[float]:
         """Get or set the Young's modulus of coat material, see remark 14.
         """ # nopep8
-        return self._cards[6].get_value("ecoat")
+        return self._cards[7].get_value("ecoat")
 
     @ecoat.setter
     def ecoat(self, value: float) -> None:
         """Set the ecoat property."""
-        self._cards[6].set_value("ecoat", value)
+        self._cards[7].set_value("ecoat", value)
 
     @property
     def scoat(self) -> typing.Optional[float]:
         """Get or set the Yield stress of coat material, see remark 14.
         """ # nopep8
-        return self._cards[6].get_value("scoat")
+        return self._cards[7].get_value("scoat")
 
     @scoat.setter
     def scoat(self, value: float) -> None:
         """Set the scoat property."""
-        self._cards[6].set_value("scoat", value)
+        self._cards[7].set_value("scoat", value)
 
     @property
     def tcoat(self) -> typing.Optional[float]:
         """Get or set the Thickness of coat material, see remark 14.
         """ # nopep8
-        return self._cards[6].get_value("tcoat")
+        return self._cards[7].get_value("tcoat")
 
     @tcoat.setter
     def tcoat(self, value: float) -> None:
         """Set the tcoat property."""
-        self._cards[6].set_value("tcoat", value)
+        self._cards[7].set_value("tcoat", value)
 
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[7].cards[0].get_value("title")
+        return self._cards[8].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[7].cards[0].set_value("title", value)
+        self._cards[8].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
@@ -858,3 +935,7 @@ class Mat034(KeywordBase):
         """Set the DefineCurve object for lcbb."""
         self.lcbb = value.lcid
 
+
+class MatFabric(Mat034):
+    """Alias for MAT keyword."""
+    subkeyword = "FABRIC"

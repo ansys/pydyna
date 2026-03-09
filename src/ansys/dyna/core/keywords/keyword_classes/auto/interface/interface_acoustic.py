@@ -43,7 +43,8 @@ class InterfaceAcoustic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACEACOUSTIC_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ifid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID of structural faces for this interface.  This structural IFID can be used by *BOUNDARY_ACOUSTIC_INTERFACE.

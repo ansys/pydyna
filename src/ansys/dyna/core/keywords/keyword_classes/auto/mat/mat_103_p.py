@@ -87,8 +87,8 @@ class Mat103P(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "103_P"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcss": LinkType.DEFINE_CURVE,
@@ -102,23 +102,29 @@ class Mat103P(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT103P_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT103P_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT103P_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT103P_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT103P_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT103P_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat103P.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat103P._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT103P_OPTION0_CARD0,

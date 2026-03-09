@@ -54,10 +54,12 @@ class ConstrainedSpline(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDSPLINE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDSPLINE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def splid(self) -> typing.Optional[int]:
         """Get or set the spline constrained ID.

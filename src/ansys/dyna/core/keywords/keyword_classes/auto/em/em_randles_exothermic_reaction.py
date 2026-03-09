@@ -44,7 +44,8 @@ class EmRandlesExothermicReaction(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMRANDLESEXOTHERMICREACTION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def areatype(self) -> int:
         """Get or set the Works the same way as RDLAREA in *EM_RANDLES_SOLID or in *EM_RANDLES_TSHELL:

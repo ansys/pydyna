@@ -44,7 +44,8 @@ class FrequencyDomainModeLoadProjectionExclude(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINMODELOADPROJECTIONEXCLUDE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nmsort(self) -> typing.Optional[int]:
         """Get or set the Number of modes to be retained which have the largest load projection ratios.

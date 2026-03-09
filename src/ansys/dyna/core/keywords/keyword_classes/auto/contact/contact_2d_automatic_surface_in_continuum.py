@@ -83,16 +83,20 @@ class Contact2DAutomaticSurfaceInContinuum(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACT2DAUTOMATICSURFACEINCONTINUUM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACT2DAUTOMATICSURFACEINCONTINUUM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACT2DAUTOMATICSURFACEINCONTINUUM_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACT2DAUTOMATICSURFACEINCONTINUUM_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def surfa(self) -> typing.Optional[int]:
         """Get or set the Set ID for SURFA.  If SURFA > 0, a part set is assumed; see *SET_‌PART.  If SURFA < 0, a node set with ID equal to the absolute value of SURFA is assumed; see *SET_‌NODE. For nonsymmetric contact, this surface is the tracked surface.

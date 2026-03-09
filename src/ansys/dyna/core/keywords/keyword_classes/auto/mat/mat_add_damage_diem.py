@@ -63,8 +63,8 @@ class MatAddDamageDiem(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ADD_DAMAGE_DIEM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "mid": LinkType.MAT,
@@ -79,14 +79,17 @@ class MatAddDamageDiem(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATADDDAMAGEDIEM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDDAMAGEDIEM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDDAMAGEDIEM_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatAddDamageDiem.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatAddDamageDiem._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATADDDAMAGEDIEM_OPTION0_CARD0,

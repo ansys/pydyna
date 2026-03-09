@@ -48,8 +48,8 @@ class Mat095(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "095"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "tpidr": LinkType.PART,
@@ -68,8 +68,9 @@ class Mat095(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT095_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat095.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat095._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT095_OPTION0_CARD0,

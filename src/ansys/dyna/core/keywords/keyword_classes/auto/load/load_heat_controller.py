@@ -55,7 +55,8 @@ class LoadHeatController(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADHEATCONTROLLER_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def node(self) -> typing.Optional[int]:
         """Get or set the Sensor is located at this node number.

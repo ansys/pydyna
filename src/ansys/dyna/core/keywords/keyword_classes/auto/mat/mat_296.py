@@ -60,8 +60,8 @@ class Mat296(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "296"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcym": LinkType.DEFINE_CURVE,
@@ -75,11 +75,13 @@ class Mat296(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT296_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT296_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat296.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat296._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT296_OPTION0_CARD0,

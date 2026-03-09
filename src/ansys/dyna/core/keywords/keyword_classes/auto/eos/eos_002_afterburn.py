@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _EOS002AFTERBURN_CARD0 = (
@@ -55,26 +56,47 @@ _EOS002AFTERBURN_CARD2 = (
     FieldSchema("cont", float, 70, 10, 1.0),
 )
 
+_EOS002AFTERBURN_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Eos002Afterburn(KeywordBase):
     """DYNA EOS_002_AFTERBURN keyword"""
 
     keyword = "EOS"
     subkeyword = "002_AFTERBURN"
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
+    ]
 
     def __init__(self, **kwargs):
         """Initialize the Eos002Afterburn class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _EOS002AFTERBURN_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOS002AFTERBURN_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOS002AFTERBURN_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+            OptionCardSet(
+                option_spec = Eos002Afterburn._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _EOS002AFTERBURN_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state ID.
@@ -315,4 +337,18 @@ class Eos002Afterburn(KeywordBase):
     def cont(self, value: float) -> None:
         """Set the cont property."""
         self._cards[2].set_value("cont", value)
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[3].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[3].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

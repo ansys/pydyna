@@ -51,10 +51,12 @@ class ContactExcludeInteraction(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACTEXCLUDEINTERACTION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTEXCLUDEINTERACTION_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ceid(self) -> typing.Optional[int]:
         """Get or set the Contact exclusion ID for output only

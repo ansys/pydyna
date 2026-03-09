@@ -62,10 +62,12 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDFINALGEOMETRY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDFINALGEOMETRY_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def bpfgid(self) -> int:
         """Get or set the ID for this set of imposed boundary conditions.

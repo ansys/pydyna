@@ -60,7 +60,8 @@ class ElementDiscrete(KeywordBase):
                 None,
                 name="elements",
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def elements(self) -> pd.DataFrame:
         """Get the table of elements."""

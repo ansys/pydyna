@@ -55,7 +55,8 @@ class AirbagInteraction(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGINTERACTION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ab1(self) -> typing.Optional[int]:
         """Get or set the First airbag ID, as defined on *AIRBAG card.

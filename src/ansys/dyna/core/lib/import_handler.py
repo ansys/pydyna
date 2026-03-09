@@ -63,6 +63,10 @@ class ImportContext:
         strings and a warning is emitted. Default is False for backward
         compatibility.
         TODO: Consider making strict=True the default in a future version.
+    line_number : int, optional
+        The 1-based line number in ``path`` where the current keyword block
+        starts.  Set by the deck loader as it reads through the file so that
+        error messages can include precise location information.
     """
 
     xform: typing.Any = None
@@ -70,6 +74,20 @@ class ImportContext:
     path: str = None
     keyword_overrides: typing.Dict[str, type] = dataclasses.field(default_factory=dict)
     strict: bool = False
+    line_number: int = None
+
+    def format_location(self) -> str:
+        """Format location info (path and line number) as a string for messages.
+
+        Returns a string like " in 'path/to/file.k' line 42" or "" if no
+        location info is available.
+        """
+        loc = ""
+        if self.path is not None:
+            loc = f" in '{self.path}'"
+        if self.line_number is not None:
+            loc += f" line {self.line_number}"
+        return loc
 
 
 class ImportHandler:
@@ -96,10 +114,26 @@ class ImportHandler:
         """
         pass
 
-    def on_error(self, error):
-        """Called when an error occurs in this handler's `after_import` method.
+    def on_error(
+        self,
+        error: BaseException,
+        context: typing.Optional["ImportContext"] = None,
+        result: typing.Any = None,
+    ) -> None:
+        """Called when an error occurs during keyword import.
 
         Handlers can override this to handle or log errors as needed.
         The default implementation does nothing.
+
+        Parameters
+        ----------
+        error : BaseException
+            The exception that was raised.
+        context : ImportContext, optional
+            The import context at the time of the error, which may include
+            ``path`` and ``line_number`` for location information.
+        result : DeckLoaderResult, optional
+            If provided, handlers may add warning messages via
+            ``result.add_warning(message)`` for programmatic inspection.
         """
         pass

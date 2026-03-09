@@ -92,8 +92,8 @@ class ConstrainedNodalRigidBodyInertiaSpc(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "NODAL_RIGID_BODY_INERTIA_SPC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "pnode": LinkType.NODE,
@@ -111,23 +111,29 @@ class ConstrainedNodalRigidBodyInertiaSpc(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYINERTIASPC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYINERTIASPC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYINERTIASPC_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYINERTIASPC_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYINERTIASPC_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYINERTIASPC_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = ConstrainedNodalRigidBodyInertiaSpc.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = ConstrainedNodalRigidBodyInertiaSpc._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONSTRAINEDNODALRIGIDBODYINERTIASPC_OPTION0_CARD0,

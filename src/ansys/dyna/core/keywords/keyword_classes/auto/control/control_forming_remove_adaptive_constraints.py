@@ -47,7 +47,8 @@ class ControlFormingRemoveAdaptiveConstraints(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGREMOVEADAPTIVECONSTRAINTS_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID (see *PART) of the part whose adaptive mesh constraints are to be removed and its mesh converted into connected meshes.

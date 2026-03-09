@@ -11,7 +11,7 @@ requires-python = ">=3.10,<4"
 license = { file = "LICENSE" }
 authors = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
 maintainers = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
-keywords = ["Ansys", "LS-DYNA", "gRPC"]
+keywords = ["Ansys", "LS-DYNA", "keywords"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
@@ -27,7 +27,6 @@ classifiers = [
 
 dependencies = [
     "ansys-dpf-core>=0.14.1",
-    "ansys-api-dyna==0.4.2",
     "ansys-tools-common>=0.2,<1",
     "hollerith>=0.6.0",
     "numpy>=1",
@@ -40,45 +39,37 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-all = ['ansys-dyna-core[graphics,pim,codegen,tests,dev,doc]']
+all = ['ansys-dyna-core[graphics,codegen,tests,dev,doc]']
 
 graphics = [
     "matplotlib>=3.0",
     "pyvista>=0.43.4",
 ]
-pim = [
-    "ansys-platform-instancemanagement~=1.0",
-]
 codegen = [
     "Jinja2==3.1.6",
     "beartype==0.22.9",
     "jsonschema==4.26.0",
+    "pytest==9.0.2",
 ]
 tests = [
     "matplotlib==3.10.8",
-    "numpy==2.2.6",
+    "numpy<=2.2.6 ; python_version < '3.11'",
+    "numpy==2.4.0 ; python_version >= '3.11'",
     "pytest==9.0.2",
     "pytest-cov==7.0.0",
     "joblib==1.5.3",
     "pandas==2.3.3",
-    "openpyxl==3.1.5",
-    "scikit-learn==1.7.2",
     "pytest-xdist==3.8.0",
     "ipython==8.38.0",
-    "pyvista==0.47.0",
+    "pyvista==0.47.1",
 ]
 dev = [
     "ansys-dyna-core[tests,codegen,graphics]",
 ]
 doc = [
-    "recommonmark==0.7.1",
     "matplotlib==3.10.8",
-    "imageio==2.37.2",
-    "imageio-ffmpeg==0.6.0",
     "numpydoc==1.10.0",
     "Sphinx==8.2.3",
-    "sphinx-autobuild==2024.10.3",
-    "sphinxcontrib-websupport==2.0.0",
     "pytest-sphinx==0.7.1",
     "sphinx-notfound-page==1.1.0",
     "sphinx-copybutton==0.5.2",
@@ -87,18 +78,16 @@ doc = [
     "ansys-sphinx-theme[autoapi]==1.7.1",
     "pypandoc==1.16.2",
     "nbsphinx==0.9.8",
-    "ipywidgets==8.1.8",
     "joblib==1.5.3",
-    "scikit-learn==1.7.2",
     "ipython==8.38.0",
     "jupyterlab==4.5.4",
-    "pyvista==0.47.0",
+    "pyvista==0.47.1",
 ]
 
 [tool.flit.module]
 name = "ansys.dyna.core"
 
-# todo - propose standardization in pypa/interoperability-peps or discuss.python.org/c/packaging 
+# todo - propose standardization in pypa/interoperability-peps or discuss.python.org/c/packaging
 [project.entry-points."agent.instructions"]
 "ansys.dyna.core" = "ansys.dyna.core:AGENT_INSTRUCTIONS"
 
@@ -118,6 +107,7 @@ extend-exclude = [
     "src/ansys/dyna/core/keywords/keyword_classes/auto/",
     "src/ansys/dyna/core/keywords/keyword_classes/type_mapping.py",
     "src/ansys/dyna/core/keywords/keyword_classes/auto_keywords.py",
+    "src/ansys/dyna/core/keywords/keyword_classes/manual/*_version_*.py",
 ]
 
 lint.select = [
@@ -154,6 +144,7 @@ force-sort-within-sections = true
 minversion = "7.1"
 addopts = "-ra -vv"
 testpaths = ["tests"]
+norecursedirs = ["tests/test_codegen"]
 pythonpath = ["codegen"]
 markers = """
     run: tests that exercise the `run` subpackage

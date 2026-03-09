@@ -43,7 +43,8 @@ class CeseSurfaceMechvarsD3Plot(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESESURFACEMECHVARSD3PLOT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def output_quantity(self) -> typing.Optional[str]:
         """Get or set the Descriptive phrase for the mechanics surface variable to output for the LSPP user.

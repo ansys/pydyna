@@ -44,8 +44,8 @@ class MatAddPropertyDependenceFreq(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ADD_PROPERTY_DEPENDENCE_FREQ"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "mid": LinkType.MAT,
@@ -60,8 +60,9 @@ class MatAddPropertyDependenceFreq(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATADDPROPERTYDEPENDENCEFREQ_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatAddPropertyDependenceFreq.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatAddPropertyDependenceFreq._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATADDPROPERTYDEPENDENCEFREQ_OPTION0_CARD0,

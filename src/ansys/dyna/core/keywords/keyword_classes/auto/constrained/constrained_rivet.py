@@ -44,8 +44,8 @@ class ConstrainedRivet(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "RIVET"
-    option_specs = [
-        OptionSpec("ID", -1, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/1", 1),
     ]
     _link_fields = {
         "n1": LinkType.NODE,
@@ -60,8 +60,9 @@ class ConstrainedRivet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDRIVET_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = ConstrainedRivet.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = ConstrainedRivet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONSTRAINEDRIVET_OPTION0_CARD0,

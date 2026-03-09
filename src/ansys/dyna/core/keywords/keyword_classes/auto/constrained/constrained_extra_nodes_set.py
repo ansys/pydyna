@@ -50,7 +50,8 @@ class ConstrainedExtraNodesSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDEXTRANODESSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of rigid body to which the nodes will be added, see *PART.

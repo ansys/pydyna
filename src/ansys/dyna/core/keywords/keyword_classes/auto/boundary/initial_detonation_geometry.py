@@ -67,13 +67,16 @@ class InitialDetonationGeometry(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALDETONATIONGEOMETRY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALDETONATIONGEOMETRY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALDETONATIONGEOMETRY_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def heid(self) -> typing.Optional[int]:
         """Get or set the ID specifying the high explosives to be lit

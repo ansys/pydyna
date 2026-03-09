@@ -46,8 +46,8 @@ class SetNodeIntersect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "NODE_INTERSECT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nodes": LinkType.SET_NODE,
@@ -61,14 +61,16 @@ class SetNodeIntersect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETNODEINTERSECT_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "nodes",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("nodes")),            OptionCardSet(
-                option_spec = SetNodeIntersect.option_specs[0],
+                data = kwargs.get("nodes")),
+            OptionCardSet(
+                option_spec = SetNodeIntersect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETNODEINTERSECT_OPTION0_CARD0,

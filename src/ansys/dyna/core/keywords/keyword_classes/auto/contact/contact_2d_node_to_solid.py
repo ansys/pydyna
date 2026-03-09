@@ -57,10 +57,12 @@ class Contact2DNodeToSolid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACT2DNODETOSOLID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACT2DNODETOSOLID_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sph(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID or part set ID for SPH nodes. If SPH>0, a node set ID is assumed, if SPH<0 a part set ID is assumed

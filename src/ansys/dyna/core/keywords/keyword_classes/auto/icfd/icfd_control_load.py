@@ -43,7 +43,8 @@ class IcfdControlLoad(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLLOAD_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def abl(self) -> int:
         """Get or set the EQ.0: the body load provided in *LOAD_BODY is reset to zero only for the fluid analysis.

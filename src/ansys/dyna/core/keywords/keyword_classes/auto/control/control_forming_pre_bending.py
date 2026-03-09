@@ -54,7 +54,8 @@ class ControlFormingPreBending(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGPREBENDING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pset(self) -> typing.Optional[int]:
         """Get or set the Part set ID to be included in the pre-bending.

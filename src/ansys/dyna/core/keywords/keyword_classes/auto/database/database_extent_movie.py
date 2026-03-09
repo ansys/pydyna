@@ -44,7 +44,8 @@ class DatabaseExtentMovie(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEEXTENTMOVIE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def vtype(self) -> int:
         """Get or set the Variable type:

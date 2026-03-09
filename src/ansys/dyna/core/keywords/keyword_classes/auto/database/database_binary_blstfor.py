@@ -53,7 +53,8 @@ class DatabaseBinaryBlstfor(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYBLSTFOR_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the This field defines the time interval between output states, DT, for all options except D3DUMP, RUNRSF, and D3DRLF.

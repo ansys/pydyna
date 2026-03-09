@@ -48,7 +48,8 @@ class BoundaryAcousticInterface(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYACOUSTICINTERFACE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see *SET_SEGMENT.  This set defines the structural segments being coupled to the acoustic elements.

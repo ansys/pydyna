@@ -58,10 +58,12 @@ class DatabaseSecforcFilter(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASESECFORCFILTER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASESECFORCFILTER_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dt(self) -> float:
         """Get or set the Time interval between outputs. If DT is zero, no output is printed, This field will be used for all selected ASCII_options that have no unique DT value specified

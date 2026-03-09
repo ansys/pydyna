@@ -44,7 +44,8 @@ class InterfaceThicknessChangeCompensation(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACETHICKNESSCHANGECOMPENSATION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def iflg(self) -> typing.Optional[int]:
         """Get or set the Activation flag; set to �1� to invoke the option.

@@ -44,8 +44,8 @@ class DefineVectorNodes(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "VECTOR_NODES"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nodet": LinkType.NODE,
@@ -60,8 +60,9 @@ class DefineVectorNodes(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEVECTORNODES_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineVectorNodes.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineVectorNodes._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEVECTORNODES_OPTION0_CARD0,

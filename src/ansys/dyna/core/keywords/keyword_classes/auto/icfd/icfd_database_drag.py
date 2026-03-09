@@ -49,7 +49,8 @@ class IcfdDatabaseDrag(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDATABASEDRAG_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of the surface where the drag force will be computed

@@ -89,8 +89,8 @@ class MatAddErosion(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ADD_EROSION"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "mid": LinkType.MAT,
@@ -109,20 +109,25 @@ class MatAddErosion(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATADDEROSION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDEROSION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDEROSION_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDEROSION_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDEROSION_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatAddErosion.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatAddErosion._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATADDEROSION_OPTION0_CARD0,

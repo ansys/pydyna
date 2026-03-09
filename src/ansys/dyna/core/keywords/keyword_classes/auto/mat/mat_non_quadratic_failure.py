@@ -71,8 +71,8 @@ class MatNonQuadraticFailure(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "NON_QUADRATIC_FAILURE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -83,17 +83,21 @@ class MatNonQuadraticFailure(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATNONQUADRATICFAILURE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATNONQUADRATICFAILURE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATNONQUADRATICFAILURE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATNONQUADRATICFAILURE_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatNonQuadraticFailure.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatNonQuadraticFailure._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATNONQUADRATICFAILURE_OPTION0_CARD0,

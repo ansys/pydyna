@@ -134,8 +134,8 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "SHAPE_MEMORY_ALLOY"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -146,35 +146,45 @@ class MatShapeMemoryAlloy(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATSHAPEMEMORYALLOY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSHAPEMEMORYALLOY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSHAPEMEMORYALLOY_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSHAPEMEMORYALLOY_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSHAPEMEMORYALLOY_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSHAPEMEMORYALLOY_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSHAPEMEMORYALLOY_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSHAPEMEMORYALLOY_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSHAPEMEMORYALLOY_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSHAPEMEMORYALLOY_CARD9,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatShapeMemoryAlloy.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatShapeMemoryAlloy._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSHAPEMEMORYALLOY_OPTION0_CARD0,

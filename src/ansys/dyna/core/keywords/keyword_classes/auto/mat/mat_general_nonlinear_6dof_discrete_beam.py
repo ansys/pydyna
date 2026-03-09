@@ -113,8 +113,8 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "GENERAL_NONLINEAR_6DOF_DISCRETE_BEAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcidtr": LinkType.DEFINE_CURVE,
@@ -151,29 +151,37 @@ class MatGeneralNonlinear6DofDiscreteBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATGENERALNONLINEAR6DOFDISCRETEBEAM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALNONLINEAR6DOFDISCRETEBEAM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALNONLINEAR6DOFDISCRETEBEAM_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALNONLINEAR6DOFDISCRETEBEAM_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALNONLINEAR6DOFDISCRETEBEAM_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALNONLINEAR6DOFDISCRETEBEAM_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALNONLINEAR6DOFDISCRETEBEAM_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALNONLINEAR6DOFDISCRETEBEAM_CARD7,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatGeneralNonlinear6DofDiscreteBeam.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatGeneralNonlinear6DofDiscreteBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATGENERALNONLINEAR6DOFDISCRETEBEAM_OPTION0_CARD0,

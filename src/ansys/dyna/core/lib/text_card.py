@@ -23,7 +23,7 @@
 
 import typing
 
-from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.card_interface import CardInterface, ReadResult
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.kwd_line_formatter import read_line
 from ansys.dyna.core.lib.parameters import ParameterSet
@@ -65,14 +65,21 @@ class TextCard(CardInterface):
         else:
             return "$#" + f"{{0:>{158}}}".format(self._name)
 
-    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> None:
-        """Read the text card content from a buffer."""
+    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> ReadResult:
+        """Read the text card content from a buffer.
+
+        Returns
+        -------
+        ReadResult
+            Result (text cards don't generate warnings).
+        """
         self._content_lines = []
         while True:
             line, exit_loop = read_line(buf)
             if exit_loop:
                 break
             self._content_lines.append(line)
+        return ReadResult()
 
     def write(
         self,

@@ -82,22 +82,28 @@ class ElementSeatbeltSensor(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTSEATBELTSENSOR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSEATBELTSENSOR_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSEATBELTSENSOR_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSEATBELTSENSOR_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSEATBELTSENSOR_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSEATBELTSENSOR_CARD5,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sbsid(self) -> int:
         """Get or set the Sensor ID. A unique number has to be used.

@@ -56,8 +56,8 @@ class SetShellListCollect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "SHELL_LIST_COLLECT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "eid1": LinkType.ELEMENT_SHELL,
@@ -78,11 +78,13 @@ class SetShellListCollect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETSHELLLISTCOLLECT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETSHELLLISTCOLLECT_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SetShellListCollect.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SetShellListCollect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETSHELLLISTCOLLECT_OPTION0_CARD0,

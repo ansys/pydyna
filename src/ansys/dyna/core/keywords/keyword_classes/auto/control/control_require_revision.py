@@ -45,7 +45,8 @@ class ControlRequireRevision(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLREQUIREREVISION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def release(self) -> typing.Optional[str]:
         """Get or set the The release of code required. This should be a string such as "R6.1.0" or "R7.0".

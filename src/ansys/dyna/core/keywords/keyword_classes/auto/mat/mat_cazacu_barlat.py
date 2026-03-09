@@ -91,8 +91,8 @@ class MatCazacuBarlat(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "CAZACU_BARLAT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -106,20 +106,25 @@ class MatCazacuBarlat(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATCAZACUBARLAT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCAZACUBARLAT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCAZACUBARLAT_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCAZACUBARLAT_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCAZACUBARLAT_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatCazacuBarlat.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatCazacuBarlat._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCAZACUBARLAT_OPTION0_CARD0,

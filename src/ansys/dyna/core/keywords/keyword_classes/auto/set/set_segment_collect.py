@@ -60,8 +60,8 @@ class SetSegmentCollect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "SEGMENT_COLLECT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "n1": LinkType.NODE,
@@ -78,11 +78,13 @@ class SetSegmentCollect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETSEGMENTCOLLECT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETSEGMENTCOLLECT_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SetSegmentCollect.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SetSegmentCollect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETSEGMENTCOLLECT_OPTION0_CARD0,

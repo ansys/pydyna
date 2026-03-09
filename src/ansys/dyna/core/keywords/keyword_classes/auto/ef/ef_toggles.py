@@ -49,7 +49,8 @@ class EfToggles(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EFTOGGLES_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def iprint1(self) -> int:
         """Get or set the Controls output of exchange fractions to the d3hsp file. In almost all situations this should be set to 0 because the “exchange factors” are written to the file exchfl.

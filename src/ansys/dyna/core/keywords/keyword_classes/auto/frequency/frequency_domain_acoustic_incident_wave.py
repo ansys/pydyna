@@ -47,7 +47,8 @@ class FrequencyDomainAcousticIncidentWave(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICINCIDENTWAVE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def type(self) -> int:
         """Get or set the Type of incident sound wave:

@@ -66,10 +66,12 @@ class ControlFormingBlankmesh(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGBLANKMESH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGBLANKMESH_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def idmesh(self) -> typing.Optional[int]:
         """Get or set the ID of the blankmesh (not the blank PID); must be unique

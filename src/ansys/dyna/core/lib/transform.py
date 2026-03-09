@@ -66,6 +66,6 @@ class TransformHandler(ImportHandler):
         # and transform the keyword with it
         handler(context.xform).transform(keyword)
 
-    def on_error(self, error):
+    def on_error(self, error, context=None, result=None):
         """Handle errors during import."""
         pass

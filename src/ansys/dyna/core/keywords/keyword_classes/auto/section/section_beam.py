@@ -24,12 +24,12 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
+from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.keyword_base import LinkType
-from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
-_SECTIONBEAM_CARD0 = (
+_SECTIONBEAMCARDSET_CARD0 = (
     FieldSchema("secid", int, 0, 10, None),
     FieldSchema("elform", int, 10, 10, 1),
     FieldSchema("shrf", float, 20, 10, 1.0),
@@ -40,7 +40,7 @@ _SECTIONBEAM_CARD0 = (
     FieldSchema("naupd", int, 70, 10, 0),
 )
 
-_SECTIONBEAM_CARD1 = (
+_SECTIONBEAMCARDSET_CARD1 = (
     FieldSchema("ts1", float, 0, 10, None),
     FieldSchema("ts2", float, 10, 10, None),
     FieldSchema("tt1", float, 20, 10, None),
@@ -49,7 +49,7 @@ _SECTIONBEAM_CARD1 = (
     FieldSchema("ntloc", float, 50, 10, None),
 )
 
-_SECTIONBEAM_CARD2 = (
+_SECTIONBEAMCARDSET_CARD2 = (
     FieldSchema("a", float, 0, 10, None),
     FieldSchema("iss", float, 10, 10, None),
     FieldSchema("itt", float, 20, 10, None),
@@ -58,20 +58,20 @@ _SECTIONBEAM_CARD2 = (
     FieldSchema("ist", float, 50, 10, None),
 )
 
-_SECTIONBEAM_CARD3 = (
+_SECTIONBEAMCARDSET_CARD3 = (
     FieldSchema("a", float, 0, 10, None),
     FieldSchema("rampt", float, 10, 10, None),
     FieldSchema("stress", float, 20, 10, None),
 )
 
-_SECTIONBEAM_CARD4 = (
+_SECTIONBEAMCARDSET_CARD4 = (
     FieldSchema("ts1", float, 0, 10, None),
     FieldSchema("ts2", float, 10, 10, None),
     FieldSchema("tt1", float, 20, 10, None),
     FieldSchema("tt2", float, 30, 10, None),
 )
 
-_SECTIONBEAM_CARD5 = (
+_SECTIONBEAMCARDSET_CARD5 = (
     FieldSchema("vol", float, 0, 10, None),
     FieldSchema("iner", float, 10, 10, None),
     FieldSchema("cid", int, 20, 10, None),
@@ -82,7 +82,7 @@ _SECTIONBEAM_CARD5 = (
     FieldSchema("trcon", float, 70, 10, 0.0),
 )
 
-_SECTIONBEAM_CARD6 = (
+_SECTIONBEAMCARDSET_CARD6 = (
     FieldSchema("ts1", float, 0, 10, None),
     FieldSchema("ts2", float, 10, 10, None),
     FieldSchema("tt1", float, 20, 10, None),
@@ -92,65 +92,69 @@ _SECTIONBEAM_CARD6 = (
     FieldSchema("itoff", float, 60, 10, None),
 )
 
-_SECTIONBEAM_OPTION0_CARD0 = (
+_SECTIONBEAMCARDSET_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
 
-class SectionBeam(KeywordBase):
-    """DYNA SECTION_BEAM keyword"""
+class SectionBeamCardSet(Cards):
+    """ CardSet."""
 
-    keyword = "SECTION"
-    subkeyword = "BEAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
-    _link_fields = {
-        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
-    }
 
     def __init__(self, **kwargs):
-        """Initialize the SectionBeam class."""
-        super().__init__(**kwargs)
+        """Initialize the SectionBeamCardSet CardSet."""
+        super().__init__(kwargs["keyword"])
+        self._parent = kwargs["parent"]
         kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
-                _SECTIONBEAM_CARD0,
+                _SECTIONBEAMCARDSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
-                _SECTIONBEAM_CARD1,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAMCARDSET_CARD1,
                 active_func=lambda: self.elform in [1,11],
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
-                _SECTIONBEAM_CARD2,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAMCARDSET_CARD2,
                 active_func=lambda: self.elform in [2,12,13],
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
-                _SECTIONBEAM_CARD3,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAMCARDSET_CARD3,
                 active_func=lambda: self.elform == 3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
-                _SECTIONBEAM_CARD4,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAMCARDSET_CARD4,
                 active_func=lambda: self.elform in [4,5],
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
-                _SECTIONBEAM_CARD5,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAMCARDSET_CARD5,
                 active_func=lambda: self.elform == 6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
-                _SECTIONBEAM_CARD6,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _SECTIONBEAMCARDSET_CARD6,
                 active_func=lambda: self.elform == 9,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SectionBeam.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SectionBeamCardSet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
-                        _SECTIONBEAM_OPTION0_CARD0,
+                        _SECTIONBEAMCARDSET_OPTION0_CARD0,
                         **kwargs,
                     ),
                 ],
                 **kwargs
             ),
         ]
+
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.
@@ -675,17 +679,538 @@ class SectionBeam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
-        """Get the DefineCoordinateSystem object for cid."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
-            if kwd.cid == self.cid:
-                return kwd
-        return None
+    def parent(self) -> KeywordBase:
+        """Get the parent keyword."""
+        return self._parent
 
-    @cid_link.setter
-    def cid_link(self, value: DefineCoordinateSystem) -> None:
-        """Set the DefineCoordinateSystem object for cid."""
-        self.cid = value.cid
+class SectionBeam(KeywordBase):
+    """DYNA SECTION_BEAM keyword"""
+
+    keyword = "SECTION"
+    subkeyword = "BEAM"
+
+    def __init__(self, **kwargs):
+        """Initialize the SectionBeam class."""
+        super().__init__(**kwargs)
+        kwargs["parent"] = self
+        kwargs["keyword"] = self
+        self._cards = [
+            CardSet(
+                SectionBeamCardSet,
+                option_specs = SectionBeamCardSet._option_spec_list,
+                **kwargs
+            ),
+        ]
+    @property
+    def secid(self) -> typing.Optional[int]:
+        """Get or set the secid
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].secid
+
+    @secid.setter
+    def secid(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].secid = value
+
+    @property
+    def elform(self) -> int:
+        """Get or set the elform
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].elform
+
+    @elform.setter
+    def elform(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].elform = value
+
+    @property
+    def shrf(self) -> float:
+        """Get or set the shrf
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].shrf
+
+    @shrf.setter
+    def shrf(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].shrf = value
+
+    @property
+    def qr_irid(self) -> int:
+        """Get or set the qr_irid
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].qr_irid
+
+    @qr_irid.setter
+    def qr_irid(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].qr_irid = value
+
+    @property
+    def cst(self) -> int:
+        """Get or set the cst
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].cst
+
+    @cst.setter
+    def cst(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].cst = value
+
+    @property
+    def scoor(self) -> float:
+        """Get or set the scoor
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].scoor
+
+    @scoor.setter
+    def scoor(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].scoor = value
+
+    @property
+    def nsm(self) -> float:
+        """Get or set the nsm
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].nsm
+
+    @nsm.setter
+    def nsm(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].nsm = value
+
+    @property
+    def naupd(self) -> int:
+        """Get or set the naupd
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].naupd
+
+    @naupd.setter
+    def naupd(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].naupd = value
+
+    @property
+    def ts1(self) -> typing.Optional[float]:
+        """Get or set the ts1
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ts1
+
+    @ts1.setter
+    def ts1(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ts1 = value
+
+    @property
+    def ts2(self) -> typing.Optional[float]:
+        """Get or set the ts2
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ts2
+
+    @ts2.setter
+    def ts2(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ts2 = value
+
+    @property
+    def tt1(self) -> typing.Optional[float]:
+        """Get or set the tt1
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].tt1
+
+    @tt1.setter
+    def tt1(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].tt1 = value
+
+    @property
+    def tt2(self) -> typing.Optional[float]:
+        """Get or set the tt2
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].tt2
+
+    @tt2.setter
+    def tt2(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].tt2 = value
+
+    @property
+    def nsloc(self) -> typing.Optional[float]:
+        """Get or set the nsloc
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].nsloc
+
+    @nsloc.setter
+    def nsloc(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].nsloc = value
+
+    @property
+    def ntloc(self) -> typing.Optional[float]:
+        """Get or set the ntloc
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ntloc
+
+    @ntloc.setter
+    def ntloc(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ntloc = value
+
+    @property
+    def a(self) -> typing.Optional[float]:
+        """Get or set the a
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].a
+
+    @a.setter
+    def a(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].a = value
+
+    @property
+    def iss(self) -> typing.Optional[float]:
+        """Get or set the iss
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].iss
+
+    @iss.setter
+    def iss(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].iss = value
+
+    @property
+    def itt(self) -> typing.Optional[float]:
+        """Get or set the itt
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].itt
+
+    @itt.setter
+    def itt(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].itt = value
+
+    @property
+    def j(self) -> typing.Optional[float]:
+        """Get or set the j
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].j
+
+    @j.setter
+    def j(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].j = value
+
+    @property
+    def sa(self) -> typing.Optional[float]:
+        """Get or set the sa
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].sa
+
+    @sa.setter
+    def sa(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].sa = value
+
+    @property
+    def ist(self) -> typing.Optional[float]:
+        """Get or set the ist
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ist
+
+    @ist.setter
+    def ist(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ist = value
+
+    @property
+    def a(self) -> typing.Optional[float]:
+        """Get or set the a
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].a
+
+    @a.setter
+    def a(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].a = value
+
+    @property
+    def rampt(self) -> typing.Optional[float]:
+        """Get or set the rampt
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].rampt
+
+    @rampt.setter
+    def rampt(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].rampt = value
+
+    @property
+    def stress(self) -> typing.Optional[float]:
+        """Get or set the stress
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].stress
+
+    @stress.setter
+    def stress(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].stress = value
+
+    @property
+    def ts1(self) -> typing.Optional[float]:
+        """Get or set the ts1
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ts1
+
+    @ts1.setter
+    def ts1(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ts1 = value
+
+    @property
+    def ts2(self) -> typing.Optional[float]:
+        """Get or set the ts2
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ts2
+
+    @ts2.setter
+    def ts2(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ts2 = value
+
+    @property
+    def tt1(self) -> typing.Optional[float]:
+        """Get or set the tt1
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].tt1
+
+    @tt1.setter
+    def tt1(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].tt1 = value
+
+    @property
+    def tt2(self) -> typing.Optional[float]:
+        """Get or set the tt2
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].tt2
+
+    @tt2.setter
+    def tt2(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].tt2 = value
+
+    @property
+    def vol(self) -> typing.Optional[float]:
+        """Get or set the vol
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].vol
+
+    @vol.setter
+    def vol(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].vol = value
+
+    @property
+    def iner(self) -> typing.Optional[float]:
+        """Get or set the iner
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].iner
+
+    @iner.setter
+    def iner(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].iner = value
+
+    @property
+    def cid(self) -> typing.Optional[int]:
+        """Get or set the cid
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].cid
+
+    @cid.setter
+    def cid(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].cid = value
+
+    @property
+    def ca(self) -> typing.Optional[float]:
+        """Get or set the ca
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ca
+
+    @ca.setter
+    def ca(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ca = value
+
+    @property
+    def offset(self) -> typing.Optional[float]:
+        """Get or set the offset
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].offset
+
+    @offset.setter
+    def offset(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].offset = value
+
+    @property
+    def rrcon(self) -> float:
+        """Get or set the rrcon
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].rrcon
+
+    @rrcon.setter
+    def rrcon(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].rrcon = value
+
+    @property
+    def srcon(self) -> float:
+        """Get or set the srcon
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].srcon
+
+    @srcon.setter
+    def srcon(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].srcon = value
+
+    @property
+    def trcon(self) -> float:
+        """Get or set the trcon
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].trcon
+
+    @trcon.setter
+    def trcon(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].trcon = value
+
+    @property
+    def ts1(self) -> typing.Optional[float]:
+        """Get or set the ts1
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ts1
+
+    @ts1.setter
+    def ts1(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ts1 = value
+
+    @property
+    def ts2(self) -> typing.Optional[float]:
+        """Get or set the ts2
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ts2
+
+    @ts2.setter
+    def ts2(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ts2 = value
+
+    @property
+    def tt1(self) -> typing.Optional[float]:
+        """Get or set the tt1
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].tt1
+
+    @tt1.setter
+    def tt1(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].tt1 = value
+
+    @property
+    def tt2(self) -> typing.Optional[float]:
+        """Get or set the tt2
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].tt2
+
+    @tt2.setter
+    def tt2(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].tt2 = value
+
+    @property
+    def print(self) -> typing.Optional[float]:
+        """Get or set the print
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].print
+
+    @print.setter
+    def print(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].print = value
+
+    @property
+    def itoff(self) -> typing.Optional[float]:
+        """Get or set the itoff
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].itoff
+
+    @itoff.setter
+    def itoff(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].itoff = value
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].title
+
+    @title.setter
+    def title(self, value: str) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].title = value
+
+    @property
+    def sets(self) -> typing.List[SectionBeamCardSet]:
+        """Gets the list of sets."""
+        return self._cards[0].items()
+
+    def add_set(self, **kwargs):
+        """Adds a set."""
+        self._cards[0].add_item(**kwargs)
 

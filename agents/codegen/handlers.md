@@ -21,7 +21,9 @@ Handlers are executed in registration order (see `handlers/registry.py`). Order 
 | 11 | `rename-property` | Renames property accessors |
 | 12 | `table-card-group` | Groups cards into repeating units |
 | 13 | `external-card-implementation` | Links to external cards |
-| 14 | `shared-field` | Creates shared field definitions |
+| 14 | `add-mixin` | Adds mixin class inheritance |
+| 15 | `additional-imports` | Injects extra top-level imports |
+| 16 | `shared-field` | Creates shared field definitions |
 
 ## Reference Semantics (Critical)
 
@@ -118,6 +120,20 @@ Adds keyword options (e.g., `_ID`, `_TITLE` suffixes).
 }]
 ```
 
+#### How `title-order` Affects the Keyword Title
+
+Each option is represented at runtime as an `OptionSpec(name, card_order, title_order)`. The keyword title is affected by the option's title order:
+
+```python
+# OptionSpec("ID", card_order=-2, title_order=1)
+# When inactive:  writes *RIGIDWALL_PLANAR
+# When active:    writes *RIGIDWALL_PLANAR_ID
+```
+
+A single class handles both the plain and option-aware forms depending on whether the option is activated. When a Deck is read from a file the existing of an option name in the title in the appropriate location activates the option automatically.
+
+There is some redundancy in kwd.json where keywords are defined in situations where an option would be sufficient. This is inherited (we can't change kwd.json), and in those cases it is preferable to remove the redundant keyword and use the option only. Example: *RIGIDWALL_PLANAR_ID
+
 ### table-card-group
 
 Groups adjacent cards that repeat together as 2D tables.
@@ -138,6 +154,19 @@ Creates fields shared across multiple cards.
 ```
 
 **Critical**: Search option cards FIRST regardless of index value. See [README.md](README.md#common-pitfalls).
+
+### additional-imports
+
+Injects extra top-level `import` statements into the generated module. Use this when an inline expression (e.g. `length-func`, `active-func`) references a symbol not imported by default.
+
+```json
+"additional-imports": [
+  {"name": "math"}
+]
+```
+
+Produces `import math` in the generated `.py` file, placed after `import typing`.
+Duplicates are silently ignored.
 
 ## Handler Settings Base Classes
 

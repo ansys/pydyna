@@ -103,22 +103,28 @@ class ControlContact(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLCONTACT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLCONTACT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLCONTACT_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLCONTACT_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLCONTACT_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLCONTACT_CARD5,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def slsfac(self) -> float:
         """Get or set the Scale factor for sliding interface penalties (default = 0.1)

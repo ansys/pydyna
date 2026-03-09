@@ -57,8 +57,8 @@ class DefineFrictionAutomaticSurfaceToSurfaceMortar(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "FRICTION_AUTOMATIC_SURFACE_TO_SURFACE_MORTAR"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "pid_i": LinkType.PART,
@@ -73,11 +73,13 @@ class DefineFrictionAutomaticSurfaceToSurfaceMortar(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEFRICTIONAUTOMATICSURFACETOSURFACEMORTAR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEFRICTIONAUTOMATICSURFACETOSURFACEMORTAR_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineFrictionAutomaticSurfaceToSurfaceMortar.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineFrictionAutomaticSurfaceToSurfaceMortar._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEFRICTIONAUTOMATICSURFACETOSURFACEMORTAR_OPTION0_CARD0,

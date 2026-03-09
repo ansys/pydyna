@@ -41,8 +41,8 @@ class MatAleVacuum(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ALE_VACUUM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -53,8 +53,9 @@ class MatAleVacuum(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATALEVACUUM_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatAleVacuum.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatAleVacuum._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATALEVACUUM_OPTION0_CARD0,

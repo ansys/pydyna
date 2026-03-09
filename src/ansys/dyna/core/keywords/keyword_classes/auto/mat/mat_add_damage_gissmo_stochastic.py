@@ -67,8 +67,8 @@ class MatAddDamageGissmoStochastic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ADD_DAMAGE_GISSMO_STOCHASTIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "mid": LinkType.MAT,
@@ -85,14 +85,17 @@ class MatAddDamageGissmoStochastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATADDDAMAGEGISSMOSTOCHASTIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDDAMAGEGISSMOSTOCHASTIC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDDAMAGEGISSMOSTOCHASTIC_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatAddDamageGissmoStochastic.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatAddDamageGissmoStochastic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATADDDAMAGEGISSMOSTOCHASTIC_OPTION0_CARD0,

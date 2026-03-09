@@ -48,7 +48,8 @@ class InterfaceSsiAux(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACESSIAUX_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def gmset(self) -> typing.Optional[int]:
         """Get or set the Identifier for this set of recorded motions to be referred to in *INTERFACE_SSI. Must be unique.

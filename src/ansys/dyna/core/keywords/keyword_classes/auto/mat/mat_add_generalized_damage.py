@@ -94,8 +94,8 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ADD_GENERALIZED_DAMAGE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "mid": LinkType.MAT,
@@ -113,23 +113,29 @@ class MatAddGeneralizedDamage(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATADDGENERALIZEDDAMAGE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDGENERALIZEDDAMAGE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDGENERALIZEDDAMAGE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDGENERALIZEDDAMAGE_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDGENERALIZEDDAMAGE_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDGENERALIZEDDAMAGE_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatAddGeneralizedDamage.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatAddGeneralizedDamage._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATADDGENERALIZEDDAMAGE_OPTION0_CARD0,

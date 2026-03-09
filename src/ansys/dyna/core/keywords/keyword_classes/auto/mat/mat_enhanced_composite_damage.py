@@ -128,8 +128,8 @@ class MatEnhancedCompositeDamage(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ENHANCED_COMPOSITE_DAMAGE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcxc": LinkType.DEFINE_CURVE,
@@ -147,32 +147,41 @@ class MatEnhancedCompositeDamage(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATENHANCEDCOMPOSITEDAMAGE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATENHANCEDCOMPOSITEDAMAGE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATENHANCEDCOMPOSITEDAMAGE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATENHANCEDCOMPOSITEDAMAGE_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATENHANCEDCOMPOSITEDAMAGE_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATENHANCEDCOMPOSITEDAMAGE_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATENHANCEDCOMPOSITEDAMAGE_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATENHANCEDCOMPOSITEDAMAGE_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATENHANCEDCOMPOSITEDAMAGE_CARD8,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatEnhancedCompositeDamage.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatEnhancedCompositeDamage._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATENHANCEDCOMPOSITEDAMAGE_OPTION0_CARD0,

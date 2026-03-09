@@ -42,8 +42,8 @@ class DefineCpmBagInteraction(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CPM_BAG_INTERACTION"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -54,8 +54,9 @@ class DefineCpmBagInteraction(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINECPMBAGINTERACTION_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineCpmBagInteraction.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineCpmBagInteraction._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECPMBAGINTERACTION_OPTION0_CARD0,

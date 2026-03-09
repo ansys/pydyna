@@ -91,8 +91,8 @@ class DefineParticleBlast(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "PARTICLE_BLAST"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nid": LinkType.NODE,
@@ -106,23 +106,29 @@ class DefineParticleBlast(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEPARTICLEBLAST_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEPARTICLEBLAST_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEPARTICLEBLAST_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEPARTICLEBLAST_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEPARTICLEBLAST_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEPARTICLEBLAST_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineParticleBlast.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineParticleBlast._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEPARTICLEBLAST_OPTION0_CARD0,

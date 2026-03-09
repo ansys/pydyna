@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
@@ -38,11 +39,18 @@ _EOSTENSORPORECOLLAPSE_CARD0 = (
     FieldSchema("ec0", float, 60, 10, 0.0),
 )
 
+_EOSTENSORPORECOLLAPSE_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class EosTensorPoreCollapse(KeywordBase):
     """DYNA EOS_TENSOR_PORE_COLLAPSE keyword"""
 
     keyword = "EOS"
     subkeyword = "TENSOR_PORE_COLLAPSE"
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
+    ]
     _link_fields = {
         "nld": LinkType.DEFINE_CURVE,
         "ncr": LinkType.DEFINE_CURVE,
@@ -51,11 +59,23 @@ class EosTensorPoreCollapse(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the EosTensorPoreCollapse class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _EOSTENSORPORECOLLAPSE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+            OptionCardSet(
+                option_spec = EosTensorPoreCollapse._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _EOSTENSORPORECOLLAPSE_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state label.
@@ -132,6 +152,20 @@ class EosTensorPoreCollapse(KeywordBase):
     def ec0(self, value: float) -> None:
         """Set the ec0 property."""
         self._cards[0].set_value("ec0", value)
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 
     @property
     def nld_link(self) -> typing.Optional[DefineCurve]:

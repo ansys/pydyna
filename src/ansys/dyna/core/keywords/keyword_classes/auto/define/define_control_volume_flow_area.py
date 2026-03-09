@@ -46,8 +46,8 @@ class DefineControlVolumeFlowArea(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CONTROL_VOLUME_FLOW_AREA"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "pid_": LinkType.PART,
@@ -61,8 +61,9 @@ class DefineControlVolumeFlowArea(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINECONTROLVOLUMEFLOWAREA_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineControlVolumeFlowArea.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineControlVolumeFlowArea._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECONTROLVOLUMEFLOWAREA_OPTION0_CARD0,

@@ -91,8 +91,8 @@ class MatAnisotropicElastic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ANISOTROPIC_ELASTIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -103,20 +103,25 @@ class MatAnisotropicElastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICELASTIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICELASTIC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICELASTIC_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICELASTIC_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICELASTIC_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatAnisotropicElastic.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatAnisotropicElastic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATANISOTROPICELASTIC_OPTION0_CARD0,

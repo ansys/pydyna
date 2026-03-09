@@ -50,7 +50,8 @@ class DualceseInitial(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEINITIAL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def u(self) -> float:
         """Get or set the x-, y-, z-velocity components respectively

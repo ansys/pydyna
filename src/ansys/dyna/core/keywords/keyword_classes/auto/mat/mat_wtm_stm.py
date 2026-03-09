@@ -121,8 +121,8 @@ class MatWtmStm(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "WTM_STM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -133,32 +133,41 @@ class MatWtmStm(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATWTMSTM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATWTMSTM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATWTMSTM_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATWTMSTM_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATWTMSTM_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATWTMSTM_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATWTMSTM_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATWTMSTM_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATWTMSTM_CARD8,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatWtmStm.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatWtmStm._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATWTMSTM_OPTION0_CARD0,

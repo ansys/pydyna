@@ -85,8 +85,8 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "TRANSVERSELY_ISOTROPIC_CRUSHABLE_FOAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "i11": LinkType.DEFINE_CURVE,
@@ -104,20 +104,25 @@ class MatTransverselyIsotropicCrushableFoam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatTransverselyIsotropicCrushableFoam.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatTransverselyIsotropicCrushableFoam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATTRANSVERSELYISOTROPICCRUSHABLEFOAM_OPTION0_CARD0,

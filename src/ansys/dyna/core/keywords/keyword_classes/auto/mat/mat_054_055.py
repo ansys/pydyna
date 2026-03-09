@@ -128,8 +128,8 @@ class Mat054055(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "054/055"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcxc": LinkType.DEFINE_CURVE,
@@ -147,32 +147,41 @@ class Mat054055(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT054055_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT054055_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT054055_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT054055_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT054055_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT054055_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT054055_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT054055_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT054055_CARD8,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat054055.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat054055._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT054055_OPTION0_CARD0,

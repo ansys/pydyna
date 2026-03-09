@@ -75,8 +75,8 @@ class RigidwallGeometricPrismMotionDisplay(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_PRISM_MOTION_DISPLAY"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -93,17 +93,21 @@ class RigidwallGeometricPrismMotionDisplay(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = RigidwallGeometricPrismMotionDisplay.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = RigidwallGeometricPrismMotionDisplay._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLGEOMETRICPRISMMOTIONDISPLAY_OPTION0_CARD0,

@@ -93,8 +93,8 @@ class RigidwallGeometricCylinderDeformInteriorMotion(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_CYLINDER_DEFORM_INTERIOR_MOTION"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "lcidr": LinkType.DEFINE_CURVE,
@@ -115,26 +115,33 @@ class RigidwallGeometricCylinderDeformInteriorMotion(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORMOTION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORMOTION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORMOTION_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORMOTION_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORMOTION_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORMOTION_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORMOTION_CARD6,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = RigidwallGeometricCylinderDeformInteriorMotion.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = RigidwallGeometricCylinderDeformInteriorMotion._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLGEOMETRICCYLINDERDEFORMINTERIORMOTION_OPTION0_CARD0,

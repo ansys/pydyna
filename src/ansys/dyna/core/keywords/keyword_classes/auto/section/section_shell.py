@@ -66,8 +66,16 @@ _SECTIONSHELLCARDSET_CARD3 = (
     FieldSchema("iloc", int, 70, 10, 0),
 )
 
+_SECTIONSHELLCARDSET_OPTION0_CARD0 = (
+    FieldSchema("thkscl", float, 0, 10, 1.0),
+)
+
 class SectionShellCardSet(Cards):
     """ CardSet."""
+
+    _option_spec_list = [
+        OptionSpec("MISC", "main/1", 1),
+    ]
 
     def __init__(self, **kwargs):
         """Initialize the SectionShellCardSet CardSet."""
@@ -78,21 +86,25 @@ class SectionShellCardSet(Cards):
             Card.from_field_schemas_with_defaults(
                 _SECTIONSHELLCARDSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONSHELLCARDSET_CARD1,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "angle",
                 8,
                 10,
                 float,
-                lambda: self.nip,
+                lambda: 2 if self.nip == 0 else self.nip,
                 lambda: self.icomp == 1,
-                data = kwargs.get("angle")),            Card.from_field_schemas_with_defaults(
+                data = kwargs.get("angle")),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONSHELLCARDSET_CARD3,
                 active_func=lambda: self.elform in [101, 102, 103, 104, 105],
                 **kwargs,
-            ),            TableCard(
+            ),
+            TableCard(
                 [
                     Field("xi", float, 0, 10, None),
                     Field("eta", float, 10, 10, None),
@@ -102,14 +114,26 @@ class SectionShellCardSet(Cards):
                 lambda: self.elform in [101, 102, 103, 104, 105],
                 name="integration_points",
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "pi",
                 8,
                 10,
                 float,
                 lambda: self.lmc,
                 lambda: self.elform in [101, 102, 103, 104, 105],
-                data = kwargs.get("pi")),        ]
+                data = kwargs.get("pi")),
+            OptionCardSet(
+                option_spec = SectionShellCardSet._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _SECTIONSHELLCARDSET_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
 
     @property
     def secid(self) -> typing.Optional[int]:
@@ -498,6 +522,20 @@ class SectionShellCardSet(Cards):
         self._cards[5].data = value
 
     @property
+    def thkscl(self) -> float:
+        """Get or set the Thickness scale factor. Shell thicknesses for all elements of this section including those with thickness specified using *ELEMENT_SHELL_THICKNESS are scaled by THKSCL
+        """ # nopep8
+        return self._cards[6].cards[0].get_value("thkscl")
+
+    @thkscl.setter
+    def thkscl(self, value: float) -> None:
+        """Set the thkscl property."""
+        self._cards[6].cards[0].set_value("thkscl", value)
+
+        if value:
+            self.activate_option("THKSCL")
+
+    @property
     def parent(self) -> KeywordBase:
         """Get the parent keyword."""
         return self._parent
@@ -511,8 +549,8 @@ class SectionShell(KeywordBase):
 
     keyword = "SECTION"
     subkeyword = "SHELL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -524,9 +562,11 @@ class SectionShell(KeywordBase):
         self._cards = [
             CardSet(
                 SectionShellCardSet,
+                option_specs = SectionShellCardSet._option_spec_list,
                 **kwargs
-            ),            OptionCardSet(
-                option_spec = SectionShell.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SectionShell._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SECTIONSHELL_OPTION0_CARD0,
@@ -856,6 +896,18 @@ class SectionShell(KeywordBase):
     def pi(self, value: typing.List) -> None:
         ensure_card_set_properties(self, True)
         self.sets[0].pi = value
+
+    @property
+    def thkscl(self) -> float:
+        """Get or set the Thickness scale factor. Shell thicknesses for all elements of this section including those with thickness specified using *ELEMENT_SHELL_THICKNESS are scaled by THKSCL
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].thkscl
+
+    @thkscl.setter
+    def thkscl(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].thkscl = value
 
     @property
     def sets(self) -> typing.List[SectionShellCardSet]:

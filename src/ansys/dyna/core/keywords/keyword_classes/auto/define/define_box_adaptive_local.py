@@ -73,8 +73,8 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "BOX_ADAPTIVE_LOCAL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lidx_ndid": LinkType.DEFINE_CURVE,
@@ -91,17 +91,21 @@ class DefineBoxAdaptiveLocal(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEBOXADAPTIVELOCAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEBOXADAPTIVELOCAL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEBOXADAPTIVELOCAL_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEBOXADAPTIVELOCAL_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineBoxAdaptiveLocal.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineBoxAdaptiveLocal._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEBOXADAPTIVELOCAL_OPTION0_CARD0,

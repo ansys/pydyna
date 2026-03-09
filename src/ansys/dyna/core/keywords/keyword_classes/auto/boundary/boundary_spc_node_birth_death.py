@@ -56,8 +56,8 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "SPC_NODE_BIRTH_DEATH"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "nid": LinkType.NODE,
@@ -72,11 +72,13 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYSPCNODEBIRTHDEATH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYSPCNODEBIRTHDEATH_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = BoundarySpcNodeBirthDeath.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = BoundarySpcNodeBirthDeath._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _BOUNDARYSPCNODEBIRTHDEATH_OPTION0_CARD0,

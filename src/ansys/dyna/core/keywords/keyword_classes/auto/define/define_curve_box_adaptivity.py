@@ -50,8 +50,8 @@ class DefineCurveBoxAdaptivity(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CURVE_BOX_ADAPTIVITY"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "pid": LinkType.PART,
@@ -65,11 +65,13 @@ class DefineCurveBoxAdaptivity(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINECURVEBOXADAPTIVITY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINECURVEBOXADAPTIVITY_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineCurveBoxAdaptivity.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineCurveBoxAdaptivity._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECURVEBOXADAPTIVITY_OPTION0_CARD0,

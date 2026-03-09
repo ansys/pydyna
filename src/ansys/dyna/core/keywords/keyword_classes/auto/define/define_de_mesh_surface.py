@@ -48,8 +48,8 @@ class DefineDeMeshSurface(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DE_MESH_SURFACE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "descid": LinkType.SECTION,
@@ -64,8 +64,9 @@ class DefineDeMeshSurface(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEDEMESHSURFACE_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineDeMeshSurface.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineDeMeshSurface._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDEMESHSURFACE_OPTION0_CARD0,

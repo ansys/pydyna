@@ -47,7 +47,8 @@ class DeleteElementSolid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DELETEELEMENTSOLID_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def esid(self) -> typing.Optional[int]:
         """Get or set the Solid element set ID, see *SET_SOLID.

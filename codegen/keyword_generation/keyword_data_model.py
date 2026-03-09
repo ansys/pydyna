@@ -34,6 +34,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from keyword_generation.data_model.keyword_data import Card
+from keyword_generation.utils import merge_generation_options, merge_labels
 
 logger = logging.getLogger(__name__)
 
@@ -90,6 +91,50 @@ class AdditionalCardsLoader:
         return Card.from_dict(self._cards[name])
 
 
+def _normalize_multiple_entries(data: Dict[str, Any]) -> None:
+    """Flatten multiple-type manifest entries into first-class top-level keys.
+
+    For each entry with type "multiple", deep-merges top-level generation-options
+    and labels into each generation dict, then registers each gen under gen["keyword"]
+    as its own top-level manifest key. Removes the original multiple-type keys.
+    """
+    to_remove: List[str] = []
+    to_add: Dict[str, Dict[str, Any]] = {}
+
+    for key, entry in list(data.items()):
+        if key == "WILDCARDS" or entry.get("type") != "multiple":
+            continue
+
+        generations = entry.get("generations", [])
+        top_opts = copy.deepcopy(entry.get("generation-options", {}))
+        top_labels = copy.deepcopy(entry.get("labels", {}))
+
+        for gen in generations:
+            gen_keyword = gen["keyword"]
+            gen_dict = copy.deepcopy(gen)
+            gen_dict.pop("keyword", None)
+            gen_dict.pop("type", None)
+            gen_dict.pop("generations", None)
+
+            result_opts = copy.deepcopy(top_opts)
+            merge_generation_options(result_opts, gen_dict.get("generation-options", {}))
+            gen_dict["generation-options"] = result_opts
+
+            result_labels = copy.deepcopy(gen_dict.get("labels", {}))
+            merge_labels(result_labels, top_labels)
+            gen_dict["labels"] = result_labels
+
+            to_add[gen_keyword] = gen_dict
+
+        to_remove.append(key)
+
+    for key in to_remove:
+        del data[key]
+    data.update(to_add)
+    if to_add:
+        logger.debug(f"Normalized {len(to_remove)} multiple-type entries into {len(to_add)} top-level keys")
+
+
 class ManifestLoader:
     """Loads and provides access to manifest configuration."""
 
@@ -103,6 +148,7 @@ class ManifestLoader:
         self._filepath = filepath
         with open(filepath) as f:
             self._data: Dict[str, Any] = json.load(f)
+        _normalize_multiple_entries(self._data)
         logger.info(f"Loaded manifest from: {filepath}")
 
     def get_keyword_options(self, keyword: str) -> Dict[str, Any]:
@@ -120,6 +166,10 @@ class ManifestLoader:
     def get(self, key: str, default: Any = None) -> Any:
         """Get manifest value with optional default."""
         return self._data.get(key, default)
+
+    def get_keyword_keys(self) -> List[str]:
+        """Get all manifest keys that are keyword entries (excludes WILDCARDS etc.)."""
+        return [k for k in self._data.keys() if k != "WILDCARDS"]
 
 
 class KeywordDataModel:

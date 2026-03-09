@@ -129,28 +129,36 @@ class InitialVolumeFractionGeometry(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALVOLUMEFRACTIONGEOMETRY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALVOLUMEFRACTIONGEOMETRY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALVOLUMEFRACTIONGEOMETRY_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALVOLUMEFRACTIONGEOMETRY_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALVOLUMEFRACTIONGEOMETRY_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALVOLUMEFRACTIONGEOMETRY_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALVOLUMEFRACTIONGEOMETRY_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALVOLUMEFRACTIONGEOMETRY_CARD7,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def fmsid(self) -> typing.Optional[int]:
         """Get or set the Background ALE (fluid) mesh SID to be initialized or filled with various AMMGs.  This set ID refers to one or more ALE parts

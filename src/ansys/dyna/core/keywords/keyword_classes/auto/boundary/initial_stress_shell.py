@@ -52,14 +52,16 @@ class InitialStressShellThicknessLargeCardSet(Cards):
             Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSSHELLTHICKNESSLARGECARDSET_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "hisv",
                 8,
                 10,
                 float,
                 lambda: self.parent.nhisv,
                 lambda: self.parent.large == None or self.parent.large == 0,
-                data = kwargs.get("hisv")),        ]
+                data = kwargs.get("hisv")),
+        ]
 
     @property
     def t(self) -> typing.Optional[float]:
@@ -189,17 +191,20 @@ class InitialStressShellThicknessLargeCardSetLarge(Cards):
             Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSSHELLTHICKNESSLARGECARDSETLARGE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSSHELLTHICKNESSLARGECARDSETLARGE_CARD1,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "hisv",
                 5,
                 20,
                 float,
                 lambda: self.parent.nhisv,
                 lambda: self.parent.large == 1,
-                data = kwargs.get("hisv")),        ]
+                data = kwargs.get("hisv")),
+        ]
 
     @property
     def t(self) -> typing.Optional[float]:
@@ -326,17 +331,20 @@ class InitialStressShellCardSet(Cards):
             Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSSHELLCARDSET_CARD0,
                 **kwargs,
-            ),            CardSet(
+            ),
+            CardSet(
                 InitialStressShellThicknessLargeCardSet,
                 length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
                 active_func = lambda: self.large == None or self.large == 0,
                 **kwargs
-            ),            CardSet(
+            ),
+            CardSet(
                 InitialStressShellThicknessLargeCardSetLarge,
                 length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
                 active_func = lambda: self.large == 1,
                 **kwargs
-            ),        ]
+            ),
+        ]
 
     @property
     def eid(self) -> typing.Optional[int]:
@@ -458,7 +466,8 @@ class InitialStressShell(KeywordBase):
             CardSet(
                 InitialStressShellCardSet,
                 **kwargs
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the eid

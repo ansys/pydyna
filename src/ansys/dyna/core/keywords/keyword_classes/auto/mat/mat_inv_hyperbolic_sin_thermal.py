@@ -55,8 +55,8 @@ class MatInvHyperbolicSinThermal(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "INV_HYPERBOLIC_SIN_THERMAL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lce": LinkType.DEFINE_CURVE,
@@ -72,11 +72,13 @@ class MatInvHyperbolicSinThermal(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATINVHYPERBOLICSINTHERMAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATINVHYPERBOLICSINTHERMAL_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatInvHyperbolicSinThermal.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatInvHyperbolicSinThermal._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATINVHYPERBOLICSINTHERMAL_OPTION0_CARD0,

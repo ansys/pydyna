@@ -41,8 +41,8 @@ class DefineSdOrientation(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "SD_ORIENTATION"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nid1": LinkType.NODE,
@@ -67,8 +67,9 @@ class DefineSdOrientation(KeywordBase):
                 None,
                 name="vectors",
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineSdOrientation.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineSdOrientation._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINESDORIENTATION_OPTION0_CARD0,

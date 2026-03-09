@@ -53,8 +53,8 @@ class SetSolidCollect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "SOLID_COLLECT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "k1": LinkType.ELEMENT_SOLID,
@@ -75,11 +75,13 @@ class SetSolidCollect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETSOLIDCOLLECT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETSOLIDCOLLECT_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SetSolidCollect.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SetSolidCollect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETSOLIDCOLLECT_OPTION0_CARD0,

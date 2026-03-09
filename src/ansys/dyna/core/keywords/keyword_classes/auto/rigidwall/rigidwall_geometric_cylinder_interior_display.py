@@ -75,8 +75,8 @@ class RigidwallGeometricCylinderInteriorDisplay(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_CYLINDER_INTERIOR_DISPLAY"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "boxid": LinkType.DEFINE_BOX,
@@ -93,20 +93,25 @@ class RigidwallGeometricCylinderInteriorDisplay(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERINTERIORDISPLAY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERINTERIORDISPLAY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERINTERIORDISPLAY_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERINTERIORDISPLAY_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERINTERIORDISPLAY_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = RigidwallGeometricCylinderInteriorDisplay.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = RigidwallGeometricCylinderInteriorDisplay._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLGEOMETRICCYLINDERINTERIORDISPLAY_OPTION0_CARD0,

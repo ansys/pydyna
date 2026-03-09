@@ -70,22 +70,28 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACEBLANKSIZEDEVELOPMENT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACEBLANKSIZEDEVELOPMENT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACEBLANKSIZEDEVELOPMENT_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACEBLANKSIZEDEVELOPMENT_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACEBLANKSIZEDEVELOPMENT_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACEBLANKSIZEDEVELOPMENT_CARD5,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ioption(self) -> int:
         """Get or set the Target definition input type:

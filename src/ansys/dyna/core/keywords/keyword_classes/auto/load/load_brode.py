@@ -62,10 +62,12 @@ class LoadBrode(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADBRODE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADBRODE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def yld(self) -> float:
         """Get or set the Yield (Kt, equivalent tons of TNT).

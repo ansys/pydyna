@@ -115,8 +115,8 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "LOU-YOON_ANISOTROPIC_PLASTICTIY"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -130,26 +130,33 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATLOU_YOONANISOTROPICPLASTICTIY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLOU_YOONANISOTROPICPLASTICTIY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLOU_YOONANISOTROPICPLASTICTIY_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLOU_YOONANISOTROPICPLASTICTIY_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLOU_YOONANISOTROPICPLASTICTIY_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLOU_YOONANISOTROPICPLASTICTIY_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATLOU_YOONANISOTROPICPLASTICTIY_CARD6,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatLou_YoonAnisotropicPlastictiy.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatLou_YoonAnisotropicPlastictiy._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATLOU_YOONANISOTROPICPLASTICTIY_OPTION0_CARD0,

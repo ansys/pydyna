@@ -56,8 +56,8 @@ class DefineHazProperties(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "HAZ_PROPERTIES"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "iss": LinkType.DEFINE_CURVE,
@@ -78,11 +78,13 @@ class DefineHazProperties(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEHAZPROPERTIES_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEHAZPROPERTIES_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineHazProperties.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineHazProperties._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEHAZPROPERTIES_OPTION0_CARD0,

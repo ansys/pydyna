@@ -48,7 +48,8 @@ class DatabaseExtentSsstatId(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEEXTENTSSSTATID_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def psidn(self) -> typing.Optional[int]:
         """Get or set the Part set ID for subsystem n, see *SET_PART.

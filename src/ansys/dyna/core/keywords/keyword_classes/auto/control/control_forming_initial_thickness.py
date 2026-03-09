@@ -56,7 +56,8 @@ class ControlFormingInitialThickness(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGINITIALTHICKNESS_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of the sheet blank to be defined with varying thickness, as in *PART.  Currently only 1 PID is allowed.

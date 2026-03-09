@@ -44,11 +44,21 @@ class DeckLoaderResult:
     """A class containing the result of an attempted deck load."""
 
     def __init__(self):
-        self._unprocessed_keywords = []
+        self._unprocessed_keywords: typing.List[str] = []
+        self._warnings: typing.List[str] = []
 
-    def add_unprocessed_keyword(self, name):
+    def add_unprocessed_keyword(self, name: str) -> None:
         """Add a keyword that was not processed during the deck load."""
         self._unprocessed_keywords.append(name)
+
+    def add_warning(self, message: str) -> None:
+        """Add a warning message (e.g. from parameter processing errors)."""
+        self._warnings.append(message)
+
+    @property
+    def warnings(self) -> typing.List[str]:
+        """Warnings collected during the load (parameter errors, etc.)."""
+        return self._warnings
 
     def get_summary(self) -> str:
         """Get a summary of unprocessed keywords."""
@@ -160,17 +170,27 @@ def _update_deck_title(block: typing.List[str], deck: "ansys.dyna.core.deck.Deck
     deck.title = block[1]
 
 
-def _on_error(error, import_handlers: typing.List[ImportHandler]):
+def _on_error(
+    error: BaseException,
+    import_handlers: typing.List[ImportHandler],
+    context: typing.Optional[ImportContext] = None,
+    result: typing.Optional[DeckLoaderResult] = None,
+) -> None:
     for handler in import_handlers:
-        handler.on_error(error)
+        handler.on_error(error, context, result=result)
 
 
-def _after_import(keyword, import_handlers: typing.List[ImportHandler], context: ImportContext):
+def _after_import(
+    keyword,
+    import_handlers: typing.List[ImportHandler],
+    context: ImportContext,
+    result: typing.Optional[DeckLoaderResult] = None,
+) -> None:
     for handler in import_handlers:
         try:
             handler.after_import(context, keyword)
         except Exception as e:
-            handler.on_error(e)
+            handler.on_error(e, context, result=result)
 
 
 def _get_format_from_keyword_suffix(keyword: str) -> format_type:
@@ -240,17 +260,17 @@ def _load_keyword(
     is emitted.
     """
     try:
-        keyword_object.loads(keyword_data, deck.parameters)
+        keyword_object.loads(keyword_data, deck.parameters, context)
     except Exception as e:
         if context is not None and context.strict:
             raise
-        _on_error(e, import_handlers)
+        _on_error(e, import_handlers, context, result)
         result.add_unprocessed_keyword(keyword)
         deck.append(keyword_data)
-        _after_import(keyword_data, import_handlers, context)
+        _after_import(keyword_data, import_handlers, context, result)
         return
     deck.append(keyword_object)
-    _after_import(keyword_object, import_handlers, context)
+    _after_import(keyword_object, import_handlers, context, result)
 
 
 def _handle_keyword(
@@ -273,7 +293,7 @@ def _handle_keyword(
     if keyword_object is None:
         result.add_unprocessed_keyword(keyword)
         deck.append(keyword_data)
-        _after_import(keyword_data, import_handlers, context)
+        _after_import(keyword_data, import_handlers, context, result)
         return
 
     if format == format_type.default:
@@ -314,6 +334,7 @@ def _try_load_deck_from_buffer(
     iterstate = IterState.USERCOMMENT
     block = []
     encrypted_section = None
+    current_line_number = 0
     while True:
         close_previous_block = False
         try:
@@ -321,6 +342,7 @@ def _try_load_deck_from_buffer(
             if len(line) == 0:
                 _handle_block(iterstate, deck, block, import_handlers, result, context)
                 return
+            current_line_number += 1
             line = line.rstrip("\n")
             if line.startswith("*"):
                 close_previous_block = True
@@ -332,7 +354,7 @@ def _try_load_deck_from_buffer(
                 kwd.data = encrypted_section.getvalue()
                 encrypted_section = None
                 deck.append(kwd)
-                _after_import(kwd, import_handlers, context)
+                _after_import(kwd, import_handlers, context, result)
                 break
             if close_previous_block:
                 # handle the previous block
@@ -342,6 +364,10 @@ def _try_load_deck_from_buffer(
                 # set the new iterstate, start building the next block
                 iterstate = _update_iterstate(line)
                 block = [line]
+                # Record which line this keyword block started on so that
+                # error messages can include precise location information.
+                if context is not None:
+                    context.line_number = current_line_number
             else:
                 if iterstate == IterState.ENCRYPTED:
                     encrypted_section.write(line)

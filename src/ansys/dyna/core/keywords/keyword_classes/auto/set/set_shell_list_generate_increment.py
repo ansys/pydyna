@@ -51,8 +51,8 @@ class SetShellListGenerateIncrement(KeywordBase):
 
     keyword = "SET"
     subkeyword = "SHELL_LIST_GENERATE_INCREMENT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "bbeg": LinkType.ELEMENT_SHELL,
@@ -67,11 +67,13 @@ class SetShellListGenerateIncrement(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETSHELLLISTGENERATEINCREMENT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETSHELLLISTGENERATEINCREMENT_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SetShellListGenerateIncrement.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SetShellListGenerateIncrement._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETSHELLLISTGENERATEINCREMENT_OPTION0_CARD0,

@@ -41,8 +41,8 @@ class DefineFormingOnestepMaster(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "FORMING_ONESTEP_MASTER"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "slpid": LinkType.PART,
@@ -56,8 +56,9 @@ class DefineFormingOnestepMaster(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEFORMINGONESTEPMASTER_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineFormingOnestepMaster.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineFormingOnestepMaster._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEFORMINGONESTEPMASTER_OPTION0_CARD0,

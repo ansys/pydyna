@@ -27,7 +27,7 @@ import math
 import typing
 
 import ansys.dyna.core.lib.array as arr
-from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.card_interface import CardInterface, ReadResult
 from ansys.dyna.core.lib.field import Field
 from ansys.dyna.core.lib.field_writer import write_comment_line, write_fields
 from ansys.dyna.core.lib.format_type import format_type
@@ -215,6 +215,8 @@ class SeriesCard(CardInterface):
         return [self.__get_value(i) for i in range(start, end)]
 
     def _wrap_value(self, value):
+        if self._check_null_by_type(value, self._type):
+            return self.__get_null_value()
         if isinstance(value, self._type):
             return value
         else:
@@ -276,7 +278,7 @@ class SeriesCard(CardInterface):
         line: str,
         parameter_set: ParameterSet = None,
         element_offset: int = 0,
-    ):
+    ) -> typing.Tuple[typing.List, typing.List[str]]:
         """Read a single line of series data.
 
         Parameters
@@ -290,11 +292,17 @@ class SeriesCard(CardInterface):
         element_offset : int, optional
             The starting element index for this line in the overall series.
             Used to record parameter refs with global element indices.
+
+        Returns
+        -------
+        tuple
+            (values, warnings) where values is the list of parsed values
+            and warnings is a list of warning messages.
         """
         num_fields = self._num_fields()
         width = self._get_width()
         read_format = [(i * width * num_fields, width, self._type) for i in range(size)]
-        values = load_dataline(read_format, line, parameter_set)
+        values, line_warnings = load_dataline(read_format, line, parameter_set)
 
         # Remap any recorded refs from line-relative indices to global element indices
         if parameter_set is not None:
@@ -309,16 +317,27 @@ class SeriesCard(CardInterface):
         if len(values) == 0:
             raise ValueError(f"Failed to read any values from line: {line}")
         last_real_index = -1
+        uri_prefix = parameter_set.get_current_uri() if parameter_set is not None else None
         for loc, val in enumerate(values):
-            if self._check_null(val):
+            global_index = element_offset + loc
+            has_ref = uri_prefix is not None and parameter_set.get_ref(uri_prefix, str(global_index)) is not None
+            if self._check_null(val) and not has_ref:
                 continue
             last_real_index = max(loc, last_real_index)
         if last_real_index == -1:
-            return []
+            return [], line_warnings
         values = values[: last_real_index + 1]
-        return values
+        return values, line_warnings
 
-    def _load_bounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> None:
+    def _load_bounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> typing.List[str]:
+        """Load bounded series data from buffer.
+
+        Returns
+        -------
+        list of str
+            Warning messages generated during parsing.
+        """
+        all_warnings = []
         num_lines = self._num_rows()
         for index in range(num_lines):
             line, exit_loop = read_line(buf)
@@ -326,11 +345,21 @@ class SeriesCard(CardInterface):
                 break
             start, end = self._get_card_range(index)
             size = end - start
-            values = self._read_line(size, line, parameter_set, element_offset=start)
+            values, line_warnings = self._read_line(size, line, parameter_set, element_offset=start)
+            all_warnings.extend(line_warnings)
             for j, value in zip(range(start, end), values):
                 self[j] = value
+        return all_warnings
 
-    def _load_unbounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> None:
+    def _load_unbounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> typing.List[str]:
+        """Load unbounded series data from buffer.
+
+        Returns
+        -------
+        list of str
+            Warning messages generated during parsing.
+        """
+        all_warnings = []
         width = self._get_width()
         self._initialize_data(0)
         element_offset = 0
@@ -348,18 +377,30 @@ class SeriesCard(CardInterface):
                 print("Trailing spaces, TODO - write a test!")
                 line = line + " " * trailing_spaces
             max_amount = min(size, self._get_fields_per_card())
-            values = self._read_line(max_amount, line, parameter_set, element_offset=element_offset)
+            values, line_warnings = self._read_line(max_amount, line, parameter_set, element_offset=element_offset)
+            all_warnings.extend(line_warnings)
             self.extend(values)
             element_offset += len(values)
+        return all_warnings
 
-    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
-        """Read the series card content from a buffer."""
+    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> ReadResult:
+        """Read the series card content from a buffer.
+
+        Returns
+        -------
+        ReadResult
+            Result containing warnings generated during parsing.
+        """
+        result = ReadResult()
         if self.bounded:
-            self._load_bounded_from_buffer(buf, parameter_set)
-            return False
+            warnings_list = self._load_bounded_from_buffer(buf, parameter_set)
+            result.warnings.extend(warnings_list)
+            result.reached_end = False
         else:
-            self._load_unbounded_from_buffer(buf, parameter_set)
-            return True
+            warnings_list = self._load_unbounded_from_buffer(buf, parameter_set)
+            result.warnings.extend(warnings_list)
+            result.reached_end = True
+        return result
 
     def _get_lines(
         self,

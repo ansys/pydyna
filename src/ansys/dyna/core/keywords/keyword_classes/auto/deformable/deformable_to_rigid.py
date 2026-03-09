@@ -49,7 +49,8 @@ class DeformableToRigid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFORMABLETORIGID_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID for the part that will switched to a rigid material, also see *PART.

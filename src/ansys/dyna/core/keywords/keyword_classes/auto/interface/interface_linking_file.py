@@ -43,7 +43,8 @@ class InterfaceLinkingFile(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACELINKINGFILE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Name of the file from which the component data will be read.
