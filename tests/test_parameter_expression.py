@@ -734,24 +734,20 @@ Rlocalval,&localexp"""
     def test_sibling_includes_cannot_see_each_others_local_expressions(self, tmp_path):
         """Test that sibling includes cannot see each other's local expressions.
 
-        When a keyword references an undefined parameter, it cannot be parsed into
-        a keyword object. Instead, it is retained as a raw string in the deck with
-        the unresolved parameter reference (e.g., &locexp1) still present. A warning
-        is emitted.
+        Include1 defines locexp1=50 as local. Include2 references &locexp1 in
+        SET_NODE_LIST. Since locexp1 is local to include1, it is not visible to
+        include2. The keyword loads gracefully with default value (None) for the
+        unresolved parameter.
 
-        This test verifies LOCAL scoping works (locexp1 is not visible to include2)
-        by checking that no parsed SET_NODE_LIST keyword object exists.
-
-        Use strict=True to raise an error instead of retaining unparsed keywords.
+        Use strict=True to raise an error instead of loading with defaults.
         """
         # First include defines a local expression
-        # PARAMETER_EXPRESSION_LOCAL format: prmr (10 chars), expression (70 chars)
         include1_content = "*PARAMETER_EXPRESSION_LOCAL\n" "Rlocexp1            50\n"
 
         include1_path = tmp_path / "include1.k"
         include1_path.write_text(include1_content)
 
-        # Second include tries to use it (should fail because locexp1 is local to include1)
+        # Second include tries to use it (locexp1 is local to include1, so undefined here)
         include2_content = (
             "*SET_NODE_LIST\n" "         1       0.0       0.0       0.0       0.0    MECH         1\n" "  &locexp1\n"
         )
@@ -769,28 +765,28 @@ Rlocalval,&localexp"""
         deck = Deck()
         deck.loads(deck_text)
 
-        # Expand - keyword with undefined param is retained as string, not parsed
-        # A warning is expected because 'locexp1' is a local parameter not visible to include2
-        with pytest.warns(UserWarning, match="Error processing parameter.*locexp1"):
+        # Expand - a warning is expected because 'locexp1' is local to include1, not visible to include2
+        # Warning includes file path and exact line number (line 1 = *SET_NODE_LIST in include2.k)
+        with pytest.warns(UserWarning, match=r"Unresolved parameter.*locexp1.*line 1\b"):
             expanded = deck.expand(cwd=str(tmp_path))
 
-        # Verify the local parameter scoping worked - no parsed SET_NODE_LIST object
-        # because &locexp1 is local to include1 and not visible to include2.
-        # The keyword is retained as a raw string in expanded.all_keywords.
+        # SET_NODE_LIST is parsed; locexp1 is undefined so we get default (None), not 50
         set_node = None
         for kw in expanded.keywords:
             if hasattr(kw, "nodes"):
                 set_node = kw
                 break
 
-        # No parsed SET_NODE_LIST object - it's retained as a string with &locexp1
-        assert set_node is None, "SET_NODE_LIST should not be parsed because &locexp1 is undefined"
+        assert set_node is not None, "SET_NODE_LIST should be parsed"
+        # locexp1 was not resolved (local to include1); node id got default (None filtered out)
+        # so nodes may be empty or not contain 50
+        assert 50 not in set_node.nodes, "locexp1 should not be visible from include1"
 
     def test_sibling_includes_strict_mode_raises_on_undefined_parameter(self, tmp_path):
         """Test that strict mode raises an error for undefined parameter references.
 
         When strict=True is passed to expand(), undefined parameter references
-        raise a KeyError instead of retaining the keyword as an unparsed string.
+        raise ValueError instead of retaining the keyword as an unparsed string.
         """
         # First include defines a local expression
         include1_content = "*PARAMETER_EXPRESSION_LOCAL\n" "Rlocexp1            50\n"
@@ -816,8 +812,8 @@ Rlocalval,&localexp"""
         deck = Deck()
         deck.loads(deck_text)
 
-        # With strict=True, expand should raise KeyError for undefined parameter
-        with pytest.raises(KeyError, match="locexp1"):
+        # With strict=True, expand should raise for undefined parameter
+        with pytest.raises(ValueError, match="locexp1"):
             deck.expand(cwd=str(tmp_path), strict=True)
 
     def test_global_expression_visible_to_includes(self, tmp_path):

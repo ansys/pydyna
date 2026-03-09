@@ -505,8 +505,8 @@ class TestCSVFormatParameterSubstitution:
         assert table.table["x"][0] == 100.0
 
     
-    def test_table_card_csv_format_missing_parameter_raises_error(self):
-        """Test TableCard CSV format with missing parameter raises KeyError."""
+    def test_table_card_csv_format_missing_parameter_uses_default(self):
+        """Test TableCard CSV format with missing parameter uses type-appropriate default."""
         parameter_set = ParameterSet()
         # Don't add the parameter
 
@@ -521,16 +521,18 @@ class TestCSVFormatParameterSubstitution:
         card_text = """1,&missing"""
         buf = io.StringIO(card_text)
 
-        with pytest.raises(KeyError):
-            table.read(buf, parameter_set)
+        table.read(buf, parameter_set)
+        assert len(table.table) == 1
+        assert table.table["id"][0] == 1
+        assert math.isnan(table.table["val"][0])
 
 
 class TestParameterSubstitutionEdgeCases:
     """Test edge cases and error conditions."""
 
     
-    def test_series_card_missing_parameter_raises_error(self):
-        """Test that missing parameter raises KeyError."""
+    def test_series_card_missing_parameter_uses_default(self):
+        """Test that missing parameter uses type-appropriate default (NaN for float)."""
         parameter_set = ParameterSet()
         # Don't add the parameter
 
@@ -545,12 +547,15 @@ class TestParameterSubstitutionEdgeCases:
         card_text = """       1.0  &missing       3.0"""
         buf = io.StringIO(card_text)
 
-        with pytest.raises(KeyError):
-            series.read(buf, parameter_set)
+        series.read(buf, parameter_set)
+        assert len(series.data) == 3
+        assert series.data[0] == 1.0
+        assert math.isnan(series.data[1])
+        assert series.data[2] == 3.0
 
     
-    def test_table_card_missing_parameter_raises_error(self):
-        """Test that TableCard with missing parameter raises KeyError."""
+    def test_table_card_missing_parameter_uses_default(self):
+        """Test that TableCard with missing parameter uses type-appropriate default."""
         parameter_set = ParameterSet()
         # Don't add the parameter
 
@@ -562,8 +567,10 @@ class TestParameterSubstitutionEdgeCases:
         card_text = """       1  &missing"""
         buf = io.StringIO(card_text)
 
-        with pytest.raises(KeyError):
-            table.read(buf, parameter_set)
+        table.read(buf, parameter_set)
+        assert len(table.table) == 1
+        assert table.table["id"][0] == 1
+        assert math.isnan(table.table["val"][0])
 
     
     def test_series_card_type_mismatch_raises_error(self):
@@ -586,8 +593,8 @@ class TestParameterSubstitutionEdgeCases:
             series.read(buf, parameter_set)
 
     
-    def test_table_card_parameter_none_set_raises_error(self):
-        """Test that parameter reference without parameter_set raises error."""
+    def test_table_card_parameter_none_set_succeeds_with_defaults(self):
+        """Test that parameter reference without parameter_set succeeds with default values."""
         table = TableCard(
             [Field("id", int, 0, 8), Field("val", float, 8, 16)],
             None,
@@ -596,5 +603,77 @@ class TestParameterSubstitutionEdgeCases:
         card_text = """       1     &param"""
         buf = io.StringIO(card_text)
 
-        with pytest.raises(ValueError):
-            table.read(buf, None)  # No parameter set provided
+        table.read(buf, None)  # No parameter set provided - should succeed
+        assert len(table.table) == 1
+        assert table.table["id"][0] == 1
+        assert math.isnan(table.table["val"][0])
+
+
+class TestStandaloneKeywordWithUnresolvedParameters:
+    """Test loading keywords standalone with unresolved parameter references."""
+
+    def test_control_timestep_loads_without_parameter_set(self):
+        """Test that ControlTimestep.loads() succeeds with &param when no ParameterSet provided."""
+        from ansys.dyna.core import keywords as kwd
+
+        ts = """*CONTROL_TIMESTEP
+$#  dtinit    tssfac      isdo    tslimt     dt2ms      lctm     erode     ms1st
+     0.000  1.000000         0     0.000 &dt_struc         0         0         0
+$#  dt2msf   dt2mslc     imscl    unused    unused     rmscl
+     0.000         0         0         0         0     0.000"""
+        c = kwd.ControlTimestep()
+        c.loads(ts)
+        # lctm (index 4) should be NaN for unresolved float param
+        assert math.isnan(c.cards[0]._values[4])
+
+    def test_control_timestep_write_retain_parameters_roundtrips(self):
+        """Test that write(retain_parameters=True) round-trips &param references."""
+        from ansys.dyna.core import keywords as kwd
+
+        ts = """*CONTROL_TIMESTEP
+$#  dtinit    tssfac      isdo    tslimt     dt2ms      lctm     erode     ms1st
+     0.000  1.000000         0     0.000 &dt_struc         0         0         0
+$#  dt2msf   dt2mslc     imscl    unused    unused     rmscl
+     0.000         0         0         0         0     0.000"""
+        c = kwd.ControlTimestep()
+        c.loads(ts)
+        out = c.write(retain_parameters=True)
+        assert "&dt_struc" in out
+
+    def test_keyword_with_deck_resolves_params_at_write(self):
+        """Test that assigning a deck resolves parameter refs at write time."""
+        from ansys.dyna.core import keywords as kwd
+        from ansys.dyna.core import Deck
+
+        ts = """*CONTROL_TIMESTEP
+$#  dtinit    tssfac      isdo    tslimt     dt2ms      lctm     erode     ms1st
+     0.000  1.000000         0     0.000 &dt_struc         0         0         0
+$#  dt2msf   dt2mslc     imscl    unused    unused     rmscl
+     0.000         0         0         0         0     0.000"""
+        c = kwd.ControlTimestep()
+        c.loads(ts)
+        deck = Deck()
+        deck.parameters.add("dt_struc", 1.5)
+        c.deck = deck
+        out = c.write()
+        assert "1.5" in out
+        assert c._parameter_set is deck.parameters
+
+    def test_keyword_param_value_updates_when_deck_params_change(self):
+        """Test that write reflects current deck.parameters (keyword does not own the value)."""
+        from ansys.dyna.core import keywords as kwd
+        from ansys.dyna.core import Deck
+
+        ts = """*CONTROL_TIMESTEP
+$#  dtinit    tssfac      isdo    tslimt     dt2ms      lctm     erode     ms1st
+     0.000  1.000000         0     0.000 &dt_struc         0         0         0
+$#  dt2msf   dt2mslc     imscl    unused    unused     rmscl
+     0.000         0         0         0         0     0.000"""
+        c = kwd.ControlTimestep()
+        c.loads(ts)
+        deck = Deck()
+        deck.parameters.add("dt_struc", 1.0)
+        c.deck = deck
+        assert "1.0" in c.write()
+        deck.parameters.add("dt_struc", 2.5)
+        assert "2.5" in c.write()

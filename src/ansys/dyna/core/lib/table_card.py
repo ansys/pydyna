@@ -341,6 +341,8 @@ class TableCard(Card):
         ReadResult
             Result containing warnings generated during parsing.
         """
+        if parameter_set is None:
+            parameter_set = ParameterSet()
         result = ReadResult()
         if self.bounded:
             self._initialized = True
@@ -370,18 +372,13 @@ class TableCard(Card):
         return any(_is_comma_delimited(line, num_fields) for line in data_lines)
 
     def _load_lines_with_parameters(
-        self, data_lines: typing.List[str], parameter_set: ParameterSet
+        self,
+        data_lines: typing.List[str],
+        parameter_set: ParameterSet,
     ) -> typing.List[str]:
-        """Load lines using load_dataline for parameter support.
+        """Load lines using load_dataline for parameter substitution.
 
-        This method processes each line individually using load_dataline(),
-        which handles parameter substitution. It's used when parameters are
-        detected in the data.
-
-        Returns
-        -------
-        list of str
-            Warning messages generated during parsing.
+        Used when a ParameterSet is provided and data contains parameter refs or CSV format.
         """
         from ansys.dyna.core.lib.kwd_line_formatter import load_dataline
 
@@ -391,11 +388,7 @@ class TableCard(Card):
         rows = []
         all_warnings = []
         for row_index, line in enumerate(data_lines):
-            # Use scope to record parameter refs with row context
-            if parameter_set is not None:
-                with parameter_set.scope(f"row{row_index}"):
-                    values, line_warnings = load_dataline(format_spec, line, parameter_set)
-            else:
+            with parameter_set.scope(f"row{row_index}"):
                 values, line_warnings = load_dataline(format_spec, line, parameter_set)
             all_warnings.extend(line_warnings)
             row_dict = {field.name: value for field, value in zip(fields, values)}
@@ -405,29 +398,26 @@ class TableCard(Card):
         self._initialized = True
         return all_warnings
 
-    def _load_lines(self, data_lines: typing.List[str], parameter_set: ParameterSet) -> typing.List[str]:
-        """Load data lines into the table.
-
-        Returns
-        -------
-        list of str
-            Warning messages generated during parsing.
-        """
-        # Use parameter-aware loading if parameters or CSV format is present
-        # CSV format must go through load_dataline since pd.read_fwf doesn't support it
-        has_params = parameter_set is not None and self._has_parameters(data_lines)
+    def _load_lines(
+        self,
+        data_lines: typing.List[str],
+        parameter_set: ParameterSet,
+    ) -> typing.List[str]:
+        """Load data lines into the table with parameter substitution."""
+        has_params = self._has_parameters(data_lines)
         has_csv = self._has_csv_format(data_lines)
+
         if has_params or has_csv:
             return self._load_lines_with_parameters(data_lines, parameter_set)
-        else:
-            # Use fast pandas path when no parameters present and all lines are fixed-width
-            fields = self._get_fields()
-            buffer = io.StringIO()
-            [(buffer.write(line), buffer.write("\n")) for line in data_lines]
-            buffer.seek(0)
-            self._table = self._read_buffer_as_dataframe(buffer, fields, parameter_set)
-            self._initialized = True
-            return []
+
+        # Fast pandas path for fixed-width, parameter-using but no refs in this data
+        fields = self._get_fields()
+        buffer = io.StringIO()
+        [(buffer.write(line), buffer.write("\n")) for line in data_lines]
+        buffer.seek(0)
+        self._table = self._read_buffer_as_dataframe(buffer, fields, parameter_set)
+        self._initialized = True
+        return []
 
     def write(
         self,

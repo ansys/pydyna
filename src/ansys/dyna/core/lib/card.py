@@ -356,8 +356,9 @@ class Card(CardInterface):
             If None (default), uses fixed unless the card was originally read as csv.
         retain_parameters : bool, optional
             If True, write original parameter references instead of values.
+            If False and parameter_set provided, resolve refs to current values.
         parameter_set : ParameterSet, optional
-            The parameter set to use for looking up stored refs.
+            Set containing refs and values. Behavior depends on retain_parameters.
         uri_prefix : str, optional
             The URI prefix for this card (e.g., "12345/card0") for ref lookup.
 
@@ -381,6 +382,9 @@ class Card(CardInterface):
                 # If retaining parameters, substitute any refs we have stored
                 if retain_parameters and parameter_set is not None and uri_prefix is not None:
                     fields = self._substitute_parameter_refs(fields, parameter_set, uri_prefix)
+                # If resolving at write time (keyword on deck), substitute refs with current values
+                elif not retain_parameters and parameter_set is not None and uri_prefix is not None:
+                    fields = self._resolve_refs_from_deck(fields, parameter_set, uri_prefix)
 
                 if output_format == card_format.csv:
                     # CSV format: no comment line, comma-separated values
@@ -415,6 +419,41 @@ class Card(CardInterface):
                 result.append(new_field)
             else:
                 result.append(field)
+        return result
+
+    def _resolve_refs_from_deck(
+        self,
+        fields: typing.List[Field],
+        parameter_set: ParameterSet,
+        uri_prefix: str,
+    ) -> typing.List[Field]:
+        """Resolve parameter references from deck.parameters for fields with recorded refs.
+
+        For each field that has a recorded ref, resolve from parameter_set (deck.parameters)
+        at write time. The keyword does not own the value—the deck does—so we always
+        resolve fresh so values stay current if deck.parameters changes.
+        """
+        from ansys.dyna.core.lib.kwd_line_formatter import resolve_ref_to_value
+
+        result = []
+        for i, field in enumerate(fields):
+            ref = parameter_set.get_ref(uri_prefix, str(i))
+            if ref is None:
+                result.append(field)
+                continue
+
+            try:
+                value = resolve_ref_to_value(ref, parameter_set, field.type)
+            except (TypeError, ValueError):
+                result.append(field)
+                continue
+
+            if value is None:
+                result.append(field)
+                continue
+
+            new_field = Field(field.name, field.type, field.offset, field.width, value)
+            result.append(new_field)
         return result
 
     @property

@@ -547,33 +547,22 @@ Rn2,103
         related table cards (e.g., element ID + thickness values).
         """
         from ansys.dyna.core.lib.deck import Deck
-        from ansys.dyna.core.lib.parameters import ParameterSet
-        import ansys.dyna.core.keywords as kwd
 
-        # Build parameter set with the parameter value
-        parameter_set = ParameterSet()
-        parameter_set.add("t1", 1.98)
-
-        # Create ELEMENT_SHELL_THICKNESS with a parameter reference
-        # Note: thic1 field is 16 chars wide, so &t1 fits perfectly
-        elements = kwd.ElementShellThickness()
-        elements.loads(
-            """*ELEMENT_SHELL_THICKNESS
+        deck_string = """*ELEMENT_SHELL_THICKNESS
        1       1       1     105       2       2
              &t1 1.97992622E+000 1.97992622E+000 1.97992622E+000 1.49965326E+002
        2       1     136     133    2834    2834
- 1.98166233E+000 1.98166233E+000 1.98296441E+000 1.98296441E+000 1.46006557E+002""",
-            parameters=parameter_set,
-        )
+ 1.98166233E+000 1.98166233E+000 1.98296441E+000 1.98296441E+000 1.46006557E+002"""
+
+        deck = Deck()
+        deck.parameters.add("t1", 1.98)
+        deck.loads(deck_string)
 
         # Verify parameters were resolved correctly
+        elements = deck.keywords[0]
         assert len(elements.elements) == 2
         assert elements.elements["eid"].iloc[0] == 1
         assert elements.elements["thic1"].iloc[0] == pytest.approx(1.98, rel=1e-3)  # &t1 resolved
-
-        # Add to deck
-        deck = Deck()
-        deck.extend([elements])
 
         # Write without retain_parameters - should show resolved value
         output = deck.write()
@@ -879,3 +868,40 @@ Rn1,100
         assert "&sid" in output
         assert "&da1" in output
         assert "&n1" in output
+
+    def test_cardset_with_parameters(self):
+        """Test keyword with CardSet retains parameter refs correctly."""
+        from ansys.dyna.core.lib.deck import Deck
+
+        deck_string = """*PARAMETER
+Rstress_xx 100.0
+Rstress_yy 200.0
+*INITIAL_STRESS_SHELL
+$#     eid       nip     large     nhisv
+         1         2         1         0
+$#       t     sigxx     sigyy     sigzz     sigxy     sigyz     sigzx       eps
+      -0.5&stress_xx&stress_yy       0.0       0.0       0.0       0.0       0.0
+$#       t     sigxx     sigyy     sigzz     sigxy     sigyz     sigzx       eps
+       0.5       0.0       0.0       0.0       0.0       0.0       0.0       0.0
+*END"""
+        deck = Deck()
+        deck.loads(deck_string)
+
+        # Verify parameters were substituted during load
+        stress_kwd = deck.keywords[1]
+        assert len(stress_kwd.sets) == 1
+        assert len(stress_kwd.sets[0].sets) == 2  # 2 layers/stress points
+        assert stress_kwd.sets[0].sets[0].sigxx == 100.0  # &stress_xx substituted
+        assert stress_kwd.sets[0].sets[0].sigyy == 200.0  # &stress_yy substituted
+
+        # Write without retain_parameters - should have substituted values
+        output = deck.write()
+        assert "*INITIAL_STRESS_SHELL" in output
+        assert "100.0" in output or "100." in output
+        assert "&stress_xx" not in output
+        assert "&stress_yy" not in output
+
+        # Write with retain_parameters - should have parameter references
+        output_retain = deck.write(retain_parameters=True)
+        assert "&stress_xx" in output_retain
+        assert "&stress_yy" in output_retain

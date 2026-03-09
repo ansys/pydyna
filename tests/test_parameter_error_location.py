@@ -20,15 +20,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Test that parameter error warnings include file path and line number information.
+"""Test parameter loading behavior and error location.
 
-The deck loader tracks the 1-based line number of the start of each keyword block
-and stores it on the ImportContext.  When a keyword fails to parse due to an
-undefined parameter reference, ParameterHandler.on_error builds a warning message
-that includes the file path (when available) and the keyword-block start line.
+Undefined parameter references are now handled gracefully: loading succeeds with
+type-appropriate defaults (None/NaN), and refs are recorded for write-back with
+retain_parameters=True. No warning is emitted for undefined params.
 
-Line numbers reported are always the line on which the *KEYWORD_NAME header appears,
-not the individual field line inside the keyword block.
+For other error types (e.g. type mismatch in PARAMETER_EXPRESSION), the deck loader
+tracks the 1-based line number and file path on ImportContext for warning messages.
+
+Each test validates both load and write: decks are written to string with
+retain_parameters=True. Output is checked for expected structure and preserved
+parameter refs (e.g. &undef, &x_coord), including in SeriesCard (SET_NODE_LIST)
+where undefined params resolve to None.
 """
 
 import pytest
@@ -37,61 +41,40 @@ from ansys.dyna.core import Deck
 
 
 class TestParameterErrorLocation:
-    """Test that parameter processing errors include location information."""
+    """Test parameter loading and error location for non-undefined-param errors."""
 
-    def test_error_warning_includes_file_path(self, file_utils):
-        """Test that error warnings include the source file path."""
+    def test_undefined_param_loads_successfully(self, file_utils):
+        """Test that undefined parameter references load successfully with defaults."""
         deck_file = file_utils.get_asset_file_path("parameter_error_location/test_undefined_param.k")
         deck = Deck()
-        with pytest.warns(UserWarning, match=r"Error processing parameter.*in file '.*test_undefined_param\.k'"):
-            deck.import_file(deck_file)
+        result = deck.import_file(deck_file)
+        # Should load without raising; undefined params get type-appropriate defaults
+        assert len(deck.keywords) > 0
+        assert len(result.warnings) == 0
+        output = deck.write(retain_parameters=True)
+        assert "*SET_NODE_LIST" in output
+        assert "&undef" in output
 
-    def test_error_warning_includes_line_number(self, file_utils):
-        """Test that error warnings include the keyword-block start line number.
-
-        In test_undefined_param.k the *SET_NODE_LIST header is on line 4.
-        """
-        deck_file = file_utils.get_asset_file_path("parameter_error_location/test_undefined_param.k")
-        deck = Deck()
-        with pytest.warns(UserWarning, match=r"Error processing parameter.*on line 4"):
-            deck.import_file(deck_file)
-
-    def test_error_warning_includes_both_file_and_line(self, file_utils):
-        """Test that error warnings include both file path and line number."""
-        deck_file = file_utils.get_asset_file_path("parameter_error_location/test_undefined_param.k")
-        deck = Deck()
-        with pytest.warns(
-            UserWarning,
-            match=r"Error processing parameter.*in file '.*test_undefined_param\.k'.*on line 4",
-        ):
-            deck.import_file(deck_file)
-
-    def test_error_warning_with_multiple_keywords_tracks_correct_line(self, file_utils):
-        """Test that line numbers are updated correctly as multiple keywords are read.
-
-        In test_multiple.k the first *SET_NODE_LIST (line 6) parses cleanly because
-        it has no parameter references.  The second *SET_NODE_LIST header is on line 8
-        and references the undefined parameter &undef, so the warning should cite line 8.
-        """
+    def test_undefined_param_multiple_keywords_loads_successfully(self, file_utils):
+        """Test that multiple keywords with undefined params all load successfully."""
         deck_file = file_utils.get_asset_file_path("parameter_error_location/test_multiple.k")
         deck = Deck()
-        with pytest.warns(UserWarning, match=r"Error processing parameter.*on line 8"):
-            deck.import_file(deck_file)
+        result = deck.import_file(deck_file)
+        assert len(deck.keywords) > 0
+        output = deck.write(retain_parameters=True)
+        assert "*SET_NODE_LIST" in output
+        assert "*PARAMETER" in output
+        assert "&undef" in output
 
-    def test_error_warning_with_loads_no_file_path(self, file_utils):
-        """Test warnings when loading from a string: line number present, no file path."""
+    def test_undefined_param_loads_from_string_succeeds(self, file_utils):
+        """Test that loading from string with undefined param succeeds."""
         deck_content = (file_utils.assets_folder / "parameter_error_location" / "test_undefined_param.k").read_text()
-
         deck = Deck()
-        # loads() creates an ImportContext with path=None, so file path is omitted.
-        with pytest.warns(UserWarning) as warning_list:
-            deck.loads(deck_content)
-
-        assert len(warning_list) > 0
-        warning_message = str(warning_list[0].message)
-        assert "in file '" not in warning_message
-        assert "beginning on line 4" in warning_message
-        assert "Error processing parameter" in warning_message
+        result = deck.loads(deck_content)
+        assert len(deck.keywords) > 0
+        output = deck.write(retain_parameters=True)
+        assert "*SET_NODE_LIST" in output
+        assert "&undef" in output
 
     def test_error_warning_backwards_compatible_no_context(self):
         """Test that on_error does not raise when called without a context."""
@@ -102,27 +85,148 @@ class TestParameterErrorLocation:
         with pytest.warns(UserWarning, match=r"Error processing parameter"):
             handler.on_error(KeyError("test_param"))
 
-    def test_error_warning_line_number_with_comments(self, file_utils):
+    def test_param_format_error_warning_includes_file_and_line(self, file_utils):
+        """Test that parameter format errors include file path and line number.
+
+        In test_param_format_error.k, the *NODE header is on line 4.
+        """
+        deck_file = file_utils.get_asset_file_path("parameter_error_location/test_param_format_error.k")
+        deck = Deck()
+        with pytest.warns(UserWarning, match=r"Error processing parameter"):
+            result = deck.import_file(deck_file)
+        assert len(result.warnings) >= 1
+        warning = result.warnings[0]
+        assert "Error processing parameter" in warning
+        assert "test_param_format_error.k" in warning
+        assert "line 4" in warning
+
+    def test_param_format_error_loads_no_file_path(self, file_utils):
+        """Test that loads() warnings include line number but not file path.
+
+        When loading from a string, ImportContext has path=None, so the file
+        path is omitted from warnings, but the line number is still included.
+        """
+        deck_content = (file_utils.assets_folder / "parameter_error_location" / "test_param_format_error.k").read_text()
+        deck = Deck()
+        with pytest.warns(UserWarning, match=r"Error processing parameter"):
+            result = deck.loads(deck_content)
+        assert len(result.warnings) >= 1
+        warning = result.warnings[0]
+        assert "Error processing parameter" in warning
+        assert "in file '" not in warning
+        assert "line 4" in warning
+
+    def test_param_format_error_line_number_with_comments(self):
         """Test that comment lines are counted correctly so line numbers stay accurate.
 
-        In test_comments.k there are comment lines ($...) between *KEYWORD and
-        *SET_NODE_LIST.  The *SET_NODE_LIST header is on line 6.
+        The *NODE header is on line 6 (after comment lines). Comments should be
+        counted in line numbers since they're part of the file.
         """
+        deck_content = """*KEYWORD
+$ This is a comment
+*TITLE
+Test Deck
+$ Another comment line
+*NODE
+         1  &x_coord       0.0       0.0
+*END"""
+        deck = Deck()
+        with pytest.warns(UserWarning, match=r"Error processing parameter"):
+            result = deck.loads(deck_content)
+        assert len(result.warnings) >= 1
+        warning = result.warnings[0]
+        assert "Error processing parameter" in warning
+        assert "line 6" in warning
+
+    def test_undefined_param_with_comments_loads_successfully(self, file_utils):
+        """Test that loading with undefined param and comment lines succeeds."""
         deck_file = file_utils.get_asset_file_path("parameter_error_location/test_comments.k")
         deck = Deck()
-        with pytest.warns(UserWarning, match=r"Error processing parameter.*on line 6"):
-            deck.import_file(deck_file)
+        result = deck.import_file(deck_file)
+        assert len(deck.keywords) > 0
+        output = deck.write(retain_parameters=True)
+        assert "*SET_NODE_LIST" in output
+        assert "&undef" in output
 
-    def test_error_warning_with_node_keyword(self, file_utils):
-        """Test that location info is emitted for keywords other than *SET_NODE_LIST.
-
-        In test_node_param.k the *NODE header is on line 4 and references the
-        undefined parameter &x_coord.
-        """
+    def test_undefined_param_node_keyword_import_succeeds(self, file_utils):
+        """Test that NODE keyword with undefined param can be imported and written."""
         deck_file = file_utils.get_asset_file_path("parameter_error_location/test_node_param.k")
         deck = Deck()
-        with pytest.warns(
-            UserWarning,
-            match=r"Error processing parameter.*in file '.*test_node_param\.k'.*on line 4",
-        ):
-            deck.import_file(deck_file)
+        result = deck.import_file(deck_file)
+        assert len(deck.all_keywords) > 0
+        output = deck.write(retain_parameters=True)
+        assert "&x_coord" in output
+
+    def test_write_retain_parameters_false_raises_on_undefined_param(self, file_utils):
+        """Test that write(retain_parameters=False) raises when undefined params exist.
+
+        The error should include the parameter name, file path, line number,
+        and a hint to use retain_parameters=True.
+        """
+        deck_file = file_utils.get_asset_file_path("parameter_error_location/test_undefined_param.k")
+        deck = Deck()
+        deck.import_file(deck_file)
+        with pytest.raises(ValueError, match=r"Cannot write undefined parameter"):
+            deck.write(retain_parameters=False)
+        with pytest.raises(ValueError, match=r"&undef"):
+            deck.write(retain_parameters=False)
+        with pytest.raises(ValueError, match=r"test_undefined_param\.k"):
+            deck.write(retain_parameters=False)
+        with pytest.raises(ValueError, match=r"line \d+"):
+            deck.write(retain_parameters=False)
+        with pytest.raises(ValueError, match=r"retain_parameters=True"):
+            deck.write(retain_parameters=False)
+
+    def test_write_retain_parameters_false_raises_with_line_number_no_file(self):
+        """Test that write error includes line number even when loaded from string.
+
+        When loading from a string, there's no file path, but the line number
+        should still be included in the error message.
+        """
+        deck_content = """*KEYWORD
+*TITLE
+Test
+*SET_NODE_LIST
+         1       0.0       0.0       0.0       0.0    MECH         1
+  &undef
+*END"""
+        deck = Deck()
+        deck.loads(deck_content)
+        with pytest.raises(ValueError, match=r"Cannot write undefined parameter"):
+            deck.write(retain_parameters=False)
+        with pytest.raises(ValueError, match=r"&undef"):
+            deck.write(retain_parameters=False)
+        with pytest.raises(ValueError, match=r"line \d+"):
+            deck.write(retain_parameters=False)
+        # Should NOT have file path when loaded from string
+        try:
+            deck.write(retain_parameters=False)
+        except ValueError as e:
+            assert "in '" not in str(e) or "in 'None'" not in str(e)
+
+    def test_write_retain_parameters_false_succeeds_when_all_params_defined(self, file_utils):
+        """Test that write(retain_parameters=False) succeeds when all params are defined."""
+        deck_file = file_utils.get_asset_file_path("parameter_error_location/test_undefined_param.k")
+        deck = Deck()
+        deck.import_file(deck_file)
+        deck.parameters.add("undef", 1)  # Define the param so write can substitute
+        output = deck.write(retain_parameters=False)
+        assert "*SET_NODE_LIST" in output
+        assert "1" in output  # substituted value, not &undef
+
+    def test_expand_warns_on_unresolved_parameters(self, tmp_path):
+        """Test that expand() warns about unresolved parameters with location info."""
+        include_content = """*SET_NODE_LIST
+         1       0.0       0.0       0.0       0.0    MECH         1
+  &undef"""
+        include_path = tmp_path / "include_undef.k"
+        include_path.write_text(include_content)
+
+        deck_string = f"""*INCLUDE
+{include_path}"""
+
+        deck = Deck()
+        deck.loads(deck_string)
+
+        with pytest.warns(UserWarning, match=r"Unresolved parameter.*&undef"):
+            deck.expand(cwd=str(tmp_path))
