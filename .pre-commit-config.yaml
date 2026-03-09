@@ -19,20 +19,20 @@ exclude: |
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: a27a2e47c7751b639d2b5badf0ef6ff11fee893f #0.15.4
+  rev: v0.15.5 #0.15.4
   hooks:
     - id: ruff-check
       args: [--fix]
     - id: ruff-format
 
 - repo: https://github.com/codespell-project/codespell
-  rev: 63c8f8312b7559622c0d82815639671ae42132ac # v2.4.1
+  rev: v2.4.2 # v2.4.1
   hooks:
   - id: codespell
     args: ["--ignore-words", "doc/styles/config/vocabularies/ANSYS/accept.txt", "-w"]
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # v6.0.0
+  rev: v6.0.0 # v6.0.0
   hooks:
   - id: check-merge-conflict
   - id: debug-statements
@@ -40,12 +40,12 @@ repos:
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: f761d025eb06bcd6a45bf152ba3593c9b8ad9a9b # v0.37.0
+  rev: 0.37.0 # v0.37.0
   hooks:
     - id: check-github-workflows
 
 - repo: https://github.com/ansys/pre-commit-hooks
-  rev: fd1d6b0b4baeb08e32d4de0909999576695c0433 # v0.5.2
+  rev: v0.5.2 # v0.5.2
   hooks:
     - id: add-license-headers
       files: '(src|tests|doc)/.*\.(py)'
@@ -53,6 +53,6 @@ repos:
       - --start_year=2023
 
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
-  rev: b546b77c44c466a54a42af5499dcc0dcc1a3193f # v0.22.0
+  rev: v1.23.1 # v0.22.0
   hooks:
     - id: zizmor
