@@ -8,8 +8,6 @@
 
 ## Individual Contributors
 
-* [Srikanth Adya](https://github.com/kanthadya)
-* [Zhanqun Zhang](https://github.com/zhangzhanqun)
 * [0x4257](https://github.com/0x4257)
 * [Alex Drinkwater](https://github.com/alexDrinkwater)
 * [Alex Kaszynski](https://github.com/akaszynski)
