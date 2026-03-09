@@ -53,7 +53,7 @@ def merge_keywords(
     Merge mesh keywords.
 
     Given a deck, merges specific keywords (NODE, ELEMENT_SHELL, ELEMENT_BEAM, ELEMENT_SOLID)
-    and returns tham as data frames.
+    and returns than as data frames.
     """
     nodes_temp = [kwd.nodes for kwd in deck.get_kwds_by_type("NODE")]
     nodes = pd.concat(nodes_temp) if len(nodes_temp) else pd.DataFrame()
