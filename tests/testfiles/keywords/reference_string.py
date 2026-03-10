@@ -1206,6 +1206,20 @@ $#      xp        yp        zp        a1        a2        a3      macf    unused
 $#      v1        v2        v3        d1        d2        d3      beta       ref
                                      0.0       1.0       0.0                    """
 
+test_element_beam_orientation_ref = """*ELEMENT_BEAM_ORIENTATION
+$#   eid     pid      n1      n2      n3     rt1     rr1     rt2     rr2   local
+       1       2       3       4       0       0       0       0       0       2
+$#      vx        vy        vz
+       1.0       0.0       0.0
+$#   eid     pid      n1      n2      n3     rt1     rr1     rt2     rr2   local
+       5       2       6       7       0       0       0       0       0       2
+$#      vx        vy        vz
+       0.0       1.0       0.0
+$#   eid     pid      n1      n2      n3     rt1     rr1     rt2     rr2   local
+       8       2       9      10       0       0       0       0       0       1
+$#      vx        vy        vz
+       0.0       0.0       1.0"""
+
 test_element_beam_assign_ref = """*ELEMENT_BEAM
 $#   eid     pid      n1      n2      n3     rt1     rr1     rt2     rr2   local
                1       1       0               0       0       0       0       1"""
