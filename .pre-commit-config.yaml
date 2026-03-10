@@ -53,6 +53,7 @@ repos:
       - --start_year=2023
 
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
-  rev: v1.23.1 # v0.22.0
+  rev: b546b77c44c466a54a42af5499dcc0dcc1a3193f # v0.22.0
   hooks:
     - id: zizmor
+      args: ["--pedantic"]
