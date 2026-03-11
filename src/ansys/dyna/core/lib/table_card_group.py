@@ -261,11 +261,26 @@ class TableCardGroup(CardInterface):
         return write_or_return(buf, _write)
 
     def _divide_data_lines(self, data_lines: typing.List[str]) -> typing.List:
-        """Divides the data lines into a set of lines, one for each sub-card"""
+        """Divides the data lines into a set of lines, one for each sub-card.
+        Conditional card predicates may depend on data not yet loaded
+        (e.g. ``self.elements['n5'].any()``).  When the data does not
+        divide evenly by the active set but does by all cards, the
+        conditional data must be present, so we distribute among all cards.
+        """
+        active_cards = self._get_active_cards()
+        if (
+            active_cards
+            and len(active_cards) != len(self._cards)
+            and len(data_lines) % len(active_cards) != 0
+            and len(data_lines) % len(self._cards) == 0
+        ):
+            cards = list(self._cards)
+        else:
+            cards = active_cards
+        indices = [self._cards.index(c) for c in cards]
         card_lines = [[] for i in range(len(self._cards))]
         for index, line in enumerate(data_lines):
-            card_index = self._get_index_of_which_card(index)
-            card_lines[card_index].append(line)
+            card_lines[indices[index % len(cards)]].append(line)
         return card_lines
 
     def _get_index_of_which_card(self, overall_index: int) -> int:
