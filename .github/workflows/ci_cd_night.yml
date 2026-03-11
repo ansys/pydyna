@@ -95,7 +95,7 @@ jobs:
           python -m pytest -m 'run' -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
 
       - name: Login to ghcr.io
-        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3.7.0
+        uses: docker/login-action@b45d80f862d83dbcd57f89517bcf500b2ab88fb2 # v4.0.0
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -181,7 +181,7 @@ jobs:
       contents: write # Needed to push documentation to gh-pages branch
       pages: write # Needed to deploy to GitHub Pages
     steps:
-      - uses: ansys/actions/doc-deploy-dev@1f4f0896a8e49d3aec2f02ced215b04a32c85f28 # v9.0.15
+      - uses: ansys/actions/doc-deploy-dev@22d03f365874cc55ffb84705f5f635f055b6f2b8 # v9.0.15
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ env.BOT_TOKEN }}
