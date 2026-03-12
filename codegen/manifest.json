@@ -1301,6 +1301,23 @@
             "sphere_type_card": 3
         }
     },
+    "ELEMENT_BEAM_ORIENTATION": {
+        "generation-options": {
+            "table-card-group": [
+                {
+                    "refs": [
+                        "beam_card",
+                        "orientation_card"
+                    ],
+                    "overall-name": "elements"
+                }
+            ]
+        },
+        "labels": {
+            "beam_card": 0,
+            "orientation_card": 1
+        }
+    },
     "ELEMENT_SOLID_ORTHO": {
         "action": "manual",
         "generation-options": {

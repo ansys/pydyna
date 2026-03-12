@@ -1335,6 +1335,30 @@ def test_set_part_list(ref_string):
 #    assert test == ref
 
 
+def test_element_beam_orientation(ref_string):
+    """Test ELEMENT_BEAM_ORIENTATION stores multiple definitions in a DataFrame."""
+    b = kwd.ElementBeamOrientation()
+    b.loads(ref_string.test_element_beam_orientation_ref)
+
+    assert len(b.elements) == 3
+    assert list(b.elements["eid"]) == [1, 5, 8]
+    assert list(b.elements["pid"]) == [2, 2, 2]
+    assert list(b.elements["n1"]) == [3, 6, 9]
+    assert list(b.elements["n2"]) == [4, 7, 10]
+    assert list(b.elements["vx"]) == [1.0, 0.0, 0.0]
+    assert list(b.elements["vy"]) == [0.0, 1.0, 0.0]
+    assert list(b.elements["vz"]) == [0.0, 0.0, 1.0]
+    assert list(b.elements["local"]) == [2, 2, 1]
+
+    # Round-trip test
+    output = b.write()
+    b2 = kwd.ElementBeamOrientation()
+    b2.loads(output)
+    assert len(b2.elements) == 3
+    assert list(b2.elements["eid"]) == [1, 5, 8]
+    assert list(b2.elements["vx"]) == [1.0, 0.0, 0.0]
+
+
 def test_element_beam_assign(ref_string):
     """Test formatting of set part list (uses series card with ints)."""
     beam = kwd.ElementBeam(pid=1, n1=1, n2=0, local=1)
