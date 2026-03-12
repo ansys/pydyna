@@ -708,6 +708,52 @@ def test_element_shell_thickness(ref_string):
     assert elements.write() == ref_string.element_shell_thickness_string
 
 
+def test_element_shell_thickness_offset(ref_string):
+    """Test ELEMENT_SHELL_THICKNESS_OFFSET stores multiple elements in a DataFrame."""
+    e = kwd.ElementShellThicknessOffset()
+    e.loads(ref_string.element_shell_thickness_offset_string)
+    assert len(e.elements) == 2
+    assert list(e.elements["eid"]) == [1, 2]
+    assert list(e.elements["pid"]) == [1, 1]
+    assert list(e.elements["n1"]) == [3, 7]
+    assert list(e.elements["n2"]) == [4, 8]
+    assert e.elements.loc[0, "thic1"] == 3.99747
+    assert e.elements.loc[1, "thic3"] == 3.90057
+    assert list(e.elements["offset"]) == [-0.5, -0.5]
+
+    # Round-trip test
+    output = e.write()
+    e2 = kwd.ElementShellThicknessOffset()
+    e2.loads(output)
+    assert len(e2.elements) == 2
+    assert list(e2.elements["eid"]) == [1, 2]
+    assert list(e2.elements["offset"]) == [-0.5, -0.5]
+
+
+def test_element_shell_thickness_offset_with_n5(ref_string):
+    """Test ELEMENT_SHELL_THICKNESS_OFFSET with N5-N8 midside nodes (4 cards per element)."""
+    e = kwd.ElementShellThicknessOffset()
+    e.loads(ref_string.element_shell_thickness_offset_n5_string)
+    assert len(e.elements) == 2
+    assert list(e.elements["eid"]) == [1, 2]
+    assert list(e.elements["pid"]) == [1, 1]
+    assert list(e.elements["n5"]) == [21, 25]
+    assert list(e.elements["n6"]) == [22, 26]
+    assert list(e.elements["n7"]) == [23, 27]
+    assert list(e.elements["n8"]) == [24, 28]
+    assert e.elements.loc[0, "thic1"] == 3.99747
+    assert e.elements.loc[1, "thic3"] == 3.90057
+    assert list(e.elements["offset"]) == [-0.5, -0.5]
+
+    # Round-trip test
+    output = e.write()
+    e2 = kwd.ElementShellThicknessOffset()
+    e2.loads(output)
+    assert len(e2.elements) == 2
+    assert list(e2.elements["eid"]) == [1, 2]
+    assert list(e2.elements["n5"]) == [21, 25]
+    assert list(e2.elements["offset"]) == [-0.5, -0.5]
+
 
 def test_element_solid_ortho(ref_string):
     # assign with one dataframe for all cards

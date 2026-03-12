@@ -518,6 +518,31 @@ $#         thic1           thic2           thic3           thic4            beta
        3       1     141     146     135     135                                
       1.98187934      1.97949219      1.98280165      1.98280165      90.0245614"""
 
+element_shell_thickness_offset_string = """*ELEMENT_SHELL_THICKNESS_OFFSET
+$#   eid     pid      n1      n2      n3      n4      n5      n6      n7      n8
+       1       1       3       4       5       6                                
+$#         thic1           thic2           thic3           thic4            beta
+         3.99747         3.99724         3.99919         3.99814             0.0
+$#        offset
+            -0.5
+       2       1       7       8       9      10                                
+         3.99814         3.99919         3.90057         3.99861             0.0
+            -0.5"""
+
+element_shell_thickness_offset_n5_string = """*ELEMENT_SHELL_THICKNESS_OFFSET
+$#   eid     pid      n1      n2      n3      n4      n5      n6      n7      n8
+       1       1       3       4       5       6      21      22      23      24
+$#         thic1           thic2           thic3           thic4            beta
+         3.99747         3.99724         3.99919         3.99814             0.0
+$#         thic5           thic6           thic7           thic8
+           1.500           1.600           1.700           1.800
+$#        offset
+            -0.5
+       2       1       7       8       9      10      25      26      27      28
+         3.99814         3.99919         3.90057         3.99861             0.0
+           2.500           2.600           2.700           2.800
+            -0.5"""
+
 element_solid_ortho_legacy = """*ELEMENT_SOLID_ORTHO
 $#   eid     pid      n1      n2      n3      n4      n5      n6      n7      n8
        1       1     100     101     105     104     106     107     108     109
