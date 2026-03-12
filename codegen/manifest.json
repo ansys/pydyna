@@ -1301,6 +1301,33 @@
             "sphere_type_card": 3
         }
     },
+    "ELEMENT_SHELL_THICKNESS_OFFSET": {
+        "generation-options": {
+            "table-card-group": [
+                {
+                    "refs": [
+                        "elements_card",
+                        "thickness_card_1",
+                        "thickness_card_2",
+                        "offset_card"
+                    ],
+                    "overall-name": "elements"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "func": "self.elements['n5'].any()",
+                    "ref": "thickness_card_2"
+                }
+            ]
+        },
+        "labels": {
+            "elements_card": 0,
+            "thickness_card_1": 1,
+            "thickness_card_2": 2,
+            "offset_card": 3
+        }
+    },
     "ELEMENT_SOLID_ORTHO": {
         "action": "manual",
         "generation-options": {
