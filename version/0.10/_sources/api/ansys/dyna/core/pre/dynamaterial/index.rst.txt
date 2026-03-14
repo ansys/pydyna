@@ -1,0 +1,78 @@
+ansys.dyna.core.pre.dynamaterial
+================================
+
+.. py:module:: ansys.dyna.core.pre.dynamaterial
+
+.. autoapi-nested-parse::
+
+   Module for creating a material.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/pre/dynamaterial/Air
+   /api/ansys/dyna/core/pre/dynamaterial/Liner
+   /api/ansys/dyna/core/pre/dynamaterial/HighExplosive
+   /api/ansys/dyna/core/pre/dynamaterial/Vacuum
+   /api/ansys/dyna/core/pre/dynamaterial/MatNull
+   /api/ansys/dyna/core/pre/dynamaterial/EMEOSTabulated1
+   /api/ansys/dyna/core/pre/dynamaterial/EMMATTYPE
+   /api/ansys/dyna/core/pre/dynamaterial/MatAdditional
+   /api/ansys/dyna/core/pre/dynamaterial/MatElastic
+   /api/ansys/dyna/core/pre/dynamaterial/MatPlasticKinematic
+   /api/ansys/dyna/core/pre/dynamaterial/MatElasticPlasticThermal
+   /api/ansys/dyna/core/pre/dynamaterial/MatRigid
+   /api/ansys/dyna/core/pre/dynamaterial/MatShapeMemory
+   /api/ansys/dyna/core/pre/dynamaterial/MatCrushableFoam
+   /api/ansys/dyna/core/pre/dynamaterial/MatOgdenRubber
+   /api/ansys/dyna/core/pre/dynamaterial/MatThermalIsotropic
+   /api/ansys/dyna/core/pre/dynamaterial/MatThermalOrthotropic
+   /api/ansys/dyna/core/pre/dynamaterial/MatRigidDiscrete
+   /api/ansys/dyna/core/pre/dynamaterial/MatPiecewiseLinearPlasticity
+   /api/ansys/dyna/core/pre/dynamaterial/MatModifiedPiecewiseLinearPlasticity
+   /api/ansys/dyna/core/pre/dynamaterial/MatSpotweld
+   /api/ansys/dyna/core/pre/dynamaterial/MatFabric
+   /api/ansys/dyna/core/pre/dynamaterial/MatSpringNonlinearElastic
+   /api/ansys/dyna/core/pre/dynamaterial/MatDamperViscous
+   /api/ansys/dyna/core/pre/dynamaterial/MatDamperNonlinearViscous
+   /api/ansys/dyna/core/pre/dynamaterial/MatSPHIncompressibleFluid
+   /api/ansys/dyna/core/pre/dynamaterial/MatSPHIncompressibleStructure
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynamaterial.Air
+   ansys.dyna.core.pre.dynamaterial.Liner
+   ansys.dyna.core.pre.dynamaterial.HighExplosive
+   ansys.dyna.core.pre.dynamaterial.Vacuum
+   ansys.dyna.core.pre.dynamaterial.MatNull
+   ansys.dyna.core.pre.dynamaterial.EMEOSTabulated1
+   ansys.dyna.core.pre.dynamaterial.EMMATTYPE
+   ansys.dyna.core.pre.dynamaterial.MatAdditional
+   ansys.dyna.core.pre.dynamaterial.MatElastic
+   ansys.dyna.core.pre.dynamaterial.MatPlasticKinematic
+   ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal
+   ansys.dyna.core.pre.dynamaterial.MatRigid
+   ansys.dyna.core.pre.dynamaterial.MatShapeMemory
+   ansys.dyna.core.pre.dynamaterial.MatCrushableFoam
+   ansys.dyna.core.pre.dynamaterial.MatOgdenRubber
+   ansys.dyna.core.pre.dynamaterial.MatThermalIsotropic
+   ansys.dyna.core.pre.dynamaterial.MatThermalOrthotropic
+   ansys.dyna.core.pre.dynamaterial.MatRigidDiscrete
+   ansys.dyna.core.pre.dynamaterial.MatPiecewiseLinearPlasticity
+   ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity
+   ansys.dyna.core.pre.dynamaterial.MatSpotweld
+   ansys.dyna.core.pre.dynamaterial.MatFabric
+   ansys.dyna.core.pre.dynamaterial.MatSpringNonlinearElastic
+   ansys.dyna.core.pre.dynamaterial.MatDamperViscous
+   ansys.dyna.core.pre.dynamaterial.MatDamperNonlinearViscous
+   ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleFluid
+   ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleStructure
+
+

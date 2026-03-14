@@ -1,0 +1,39 @@
+ansys.dyna.core.lib.mixins.section_tshell_validation
+====================================================
+
+.. py:module:: ansys.dyna.core.lib.mixins.section_tshell_validation
+
+.. autoapi-nested-parse::
+
+   Mixin providing validation for SECTION_TSHELL keywords.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.mixins.section_tshell_validation.logger
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/mixins/section_tshell_validation/SectionTShellValidationMixin
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.mixins.section_tshell_validation.SectionTShellValidationMixin
+
+
+Module Contents
+---------------
+
+.. py:data:: logger
+

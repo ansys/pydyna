@@ -1,0 +1,38 @@
+ansys.dyna.core.pre.dynabase.ThermalAnalysisType
+================================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.ThermalAnalysisType(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Thermal analysis type (steady-state or transient).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: STEADY_STATE
+      :value: 0
+
+
+
+   .. py:attribute:: TRANSIENT
+      :value: 1
+
+

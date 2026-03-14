@@ -1,0 +1,38 @@
+ansys.dyna.core.utils.errors.ValidationError
+============================================
+
+.. py:exception:: ansys.dyna.core.utils.errors.ValidationError(msg='', keyword=None, severity='error')
+
+   Bases: :py:obj:`Exception`
+
+
+   
+   Base class for validation errors in PyDYNA.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: keyword
+      :value: None
+
+
+
+   .. py:attribute:: severity
+      :value: 'error'
+
+
