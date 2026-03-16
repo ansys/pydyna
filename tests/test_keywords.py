@@ -1683,3 +1683,12 @@ def test_element_mass_part_set(ref_string):
     assert len(kw.elements) == 1
     assert list(kw.elements["psid"]) == [10501]
     assert not any("out of bound" in str(w.message).lower() for w in caught)
+    
+def test_element_mass_part_set_with_lcid(ref_string):
+    """Regression: second row used to trigger 'out of bound card characters'."""
+    deck = kwd.ElementMassPartSet()
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        deck.loads(ref_string.test_element_mass_part_set_with_lcid)
+    oob = [w for w in caught if "out of bound" in str(w.message).lower()]
+    assert oob == [], f"Unexpected 'out of bound' warning(s): {oob}"
