@@ -1322,26 +1322,26 @@
         "generation-options": {
             "table-card": [
                 {
-                    "property-name": "parts",
-                    "ref": "data_card"
+                    "property-name": "elements",
+                    "ref": "elements_card"
                 }
             ]
         },
         "labels": {
-            "data_card": 0
+            "elements_card": 0
         }
     },
     "ELEMENT_MASS_PART_SET": {
         "generation-options": {
             "table-card": [
                 {
-                    "property-name": "parts",
-                    "ref": "data_card"
+                    "property-name": "elements",
+                    "ref": "elements_card"
                 }
             ]
         },
         "labels": {
-            "data_card": 0
+            "elements_card": 0
         }
     },
     "ELEMENT_SOLID_ORTHO": {

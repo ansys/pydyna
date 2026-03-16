@@ -53,18 +53,18 @@ class ElementMassPart(KeywordBase):
                     Field("lcid", int, 40, 8, None),
                 ],
                 None,
-                name="parts",
+                name="elements",
                 **kwargs,
             ),
         ]
     @property
-    def parts(self) -> pd.DataFrame:
-        """Get the table of parts."""
+    def elements(self) -> pd.DataFrame:
+        """Get the table of elements."""
         return self._cards[0].table
 
-    @parts.setter
-    def parts(self, df: pd.DataFrame):
-        """Set parts from the dataframe df"""
+    @elements.setter
+    def elements(self, df: pd.DataFrame):
+        """Set elements from the dataframe df"""
         self._cards[0].table = df
 
     @property
@@ -85,7 +85,7 @@ class ElementMassPart(KeywordBase):
     @property
     def pid_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all PART keywords for pid, keyed by pid value."""
-        return self._get_links_from_table("PART", "pid", "parts", "pid", "parts")
+        return self._get_links_from_table("PART", "pid", "elements", "pid", "parts")
 
     def get_pid_link(self, pid: int) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""

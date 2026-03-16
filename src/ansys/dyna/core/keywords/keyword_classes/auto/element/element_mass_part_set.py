@@ -50,18 +50,18 @@ class ElementMassPartSet(KeywordBase):
                     Field("finmass", float, 24, 16, 0.0),
                 ],
                 None,
-                name="parts",
+                name="elements",
                 **kwargs,
             ),
         ]
     @property
-    def parts(self) -> pd.DataFrame:
-        """Get the table of parts."""
+    def elements(self) -> pd.DataFrame:
+        """Get the table of elements."""
         return self._cards[0].table
 
-    @parts.setter
-    def parts(self, df: pd.DataFrame):
-        """Set parts from the dataframe df"""
+    @elements.setter
+    def elements(self, df: pd.DataFrame):
+        """Set elements from the dataframe df"""
         self._cards[0].table = df
 
     @property
