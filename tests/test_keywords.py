@@ -28,6 +28,7 @@ import math
 
 import numpy as np
 import pandas as pd
+import warnings
 
 from ansys.dyna.core.lib.config import disable_lspp_defaults
 from ansys.dyna.core.lib.format_type import format_type
@@ -1653,3 +1654,22 @@ def test_control_shell(ref_string):
     s = kwd.ControlShell()
     s.loads(control_shell_string)
     print(s)
+    
+def test_element_mass_part_multirow(ref_string):
+    """Regression #1120: multiple rows are all read without out-of-bound warnings."""
+    kw = kwd.ElementMassPart()
+
+    kw.loads(ref_string.test_element_mass_part_multirow)
+    assert len(kw.elements) == 2
+    assert list(kw.elements["pid"]) == [101, 102]
+    
+
+def test_element_mass_part_set_multirow(ref_string):
+    """Regression #1120: multiple rows are all read without out-of-bound warnings."""
+    kw = kwd.ElementMassPartSet()
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        kw.loads(ref_string.test_element_mass_part_set_multirow)
+    assert len(kw.elements) == 2
+    assert list(kw.elements["psid"]) == [10501, 10502]
+    assert not any("out of bound" in str(w.message).lower() for w in caught)

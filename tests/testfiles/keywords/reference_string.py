@@ -1722,3 +1722,12 @@ $#               value                lcid
                  1.0                 101
                  2.0                 102
                  3.0                 103"""
+
+# ELEMENT_MASS_PART / ELEMENT_MASS_PART_SET multi-row regression test strings
+test_element_mass_part_multirow = """*ELEMENT_MASS_PART
+     101         500.000           0.000       1
+     102         200.000           0.000       2"""
+
+test_element_mass_part_set_multirow = """*ELEMENT_MASS_PART_SET
+   10501       69.248175           0.000
+   10502       46.582768           0.000"""
