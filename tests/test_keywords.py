@@ -1660,8 +1660,8 @@ def test_element_mass_part_multirow(ref_string):
     kw = kwd.ElementMassPart()
 
     kw.loads(ref_string.test_element_mass_part_multirow)
-    assert len(kw.elements) == 2
-    assert list(kw.elements["pid"]) == [101, 102]
+    assert len(kw.elements) == 5
+    assert list(kw.elements["pid"]) == [1463, 1464, 415, 520, 405]
     
 
 def test_element_mass_part_set_multirow(ref_string):
