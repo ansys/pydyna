@@ -1735,3 +1735,7 @@ $#   pid         addmass         finmass    lcid
 test_element_mass_part_set_multirow = """*ELEMENT_MASS_PART_SET
    10501       69.248175           0.000
    10502       46.582768           0.000"""
+
+test_element_mass_part_set = """*ELEMENT_MASS_PART_SET
+$#   pid         addmass         finmass    lcid
+   10501       69.248175           0.000"""

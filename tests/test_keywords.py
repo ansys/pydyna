@@ -1673,3 +1673,13 @@ def test_element_mass_part_set_multirow(ref_string):
     assert len(kw.elements) == 2
     assert list(kw.elements["psid"]) == [10501, 10502]
     assert not any("out of bound" in str(w.message).lower() for w in caught)
+    
+def test_element_mass_part_set(ref_string):
+    """Regression #1120: single row is read without out-of-bound warnings."""
+    kw = kwd.ElementMassPartSet()
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        kw.loads(ref_string.test_element_mass_part_set)
+    assert len(kw.elements) == 1
+    assert list(kw.elements["psid"]) == [10501]
+    assert not any("out of bound" in str(w.message).lower() for w in caught)
