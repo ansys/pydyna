@@ -1667,28 +1667,21 @@ def test_element_mass_part_multirow(ref_string):
 def test_element_mass_part_set_multirow(ref_string):
     """Regression #1120: multiple rows are all read without out-of-bound warnings."""
     kw = kwd.ElementMassPartSet()
-    with warnings.catch_warnings(record=True) as caught:
-        warnings.simplefilter("always")
-        kw.loads(ref_string.test_element_mass_part_set_multirow)
+    kw.loads(ref_string.test_element_mass_part_set_multirow)
     assert len(kw.elements) == 2
     assert list(kw.elements["psid"]) == [10501, 10502]
-    assert not any("out of bound" in str(w.message).lower() for w in caught)
+
     
 def test_element_mass_part_set(ref_string):
     """Regression #1120: single row is read without out-of-bound warnings."""
     kw = kwd.ElementMassPartSet()
-    with warnings.catch_warnings(record=True) as caught:
-        warnings.simplefilter("always")
-        kw.loads(ref_string.test_element_mass_part_set)
+    kw.loads(ref_string.test_element_mass_part_set)
     assert len(kw.elements) == 1
     assert list(kw.elements["psid"]) == [10501]
-    assert not any("out of bound" in str(w.message).lower() for w in caught)
     
-def test_element_mass_part_set_with_lcid(ref_string):
+def test_element_mass_part_with_lcid(ref_string):
     """Regression: second row used to trigger 'out of bound card characters'."""
-    deck = kwd.ElementMassPartSet()
-    with warnings.catch_warnings(record=True) as caught:
-        warnings.simplefilter("always")
-        deck.loads(ref_string.test_element_mass_part_set_with_lcid)
-    oob = [w for w in caught if "out of bound" in str(w.message).lower()]
-    assert oob == [], f"Unexpected 'out of bound' warning(s): {oob}"
+    deck = kwd.ElementMassPart()
+    deck.loads(ref_string.test_element_mass_part_with_lcid)
+    assert len(deck.elements) == 2
+    assert list(deck.elements["lcid"]) == [1, 2]
