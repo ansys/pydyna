@@ -241,5 +241,13 @@
             {"name": "HISV4", "type": "real", "default": null, "position": 60, "width": 20, "help": "Define the nth history variable. The stresses are defined in the GLOBAL cartesian system"},
             {"name": "HISV5", "type": "real", "default": null, "position": 80, "width": 20, "help": "Define the nth history variable. The stresses are defined in the GLOBAL cartesian system"}
         ]
+    },
+    "ELEMENT_MASS_PART_SET_CARD": {
+        "fields": [
+            {"name": "PSID", "type": "integer", "default": null, "position": 0, "width": 8, "link": 28, "help": "Part set id, a unique number must be used."},
+            {"name": "ADDMASS", "type": "real", "default": "0.0", "position": 8, "width": 16, "help": "Added translational mass to be distributed to nodes of PSID."},
+            {"name": "FINMASS", "type": "real", "default": "0.0", "position": 24, "width": 16, "help": "Final translational mass of the part set ID. Set FINMASS to zero if ADDMASS is nonzero."},
+            {"name": "LCID", "type": "integer", "default": null, "position": 40, "width": 8, "link": 19, "help": "Load curve id"}
+        ]
     }
 }

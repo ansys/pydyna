@@ -22,18 +22,14 @@
 
 """Module providing the ElementMassPart class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
-
-_ELEMENTMASSPART_CARD0 = (
-    FieldSchema("pid", int, 0, 8, None),
-    FieldSchema("addmass", float, 8, 16, 0.0),
-    FieldSchema("finmass", float, 24, 16, 0.0),
-    FieldSchema("lcid", int, 40, 8, None),
-)
 
 class ElementMassPart(KeywordBase):
     """DYNA ELEMENT_MASS_PART keyword"""
@@ -49,54 +45,27 @@ class ElementMassPart(KeywordBase):
         """Initialize the ElementMassPart class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card.from_field_schemas_with_defaults(
-                _ELEMENTMASSPART_CARD0,
+            TableCard(
+                [
+                    Field("pid", int, 0, 8, None),
+                    Field("addmass", float, 8, 16, 0.0),
+                    Field("finmass", float, 24, 16, 0.0),
+                    Field("lcid", int, 40, 8, None),
+                ],
+                None,
+                name="parts",
                 **kwargs,
             ),
         ]
     @property
-    def pid(self) -> typing.Optional[int]:
-        """Get or set the Part id, a unique number must be used.
-        """ # nopep8
-        return self._cards[0].get_value("pid")
+    def parts(self) -> pd.DataFrame:
+        """Get the table of parts."""
+        return self._cards[0].table
 
-    @pid.setter
-    def pid(self, value: int) -> None:
-        """Set the pid property."""
-        self._cards[0].set_value("pid", value)
-
-    @property
-    def addmass(self) -> float:
-        """Get or set the Added translational mass to be distributed to nodes of PID.
-        """ # nopep8
-        return self._cards[0].get_value("addmass")
-
-    @addmass.setter
-    def addmass(self, value: float) -> None:
-        """Set the addmass property."""
-        self._cards[0].set_value("addmass", value)
-
-    @property
-    def finmass(self) -> float:
-        """Get or set the Final translational mass of the part ID or part set ID.  The total mass of the PID or SID is computed and subtracted from the final mass of the part or part set to obtain the added translational mass, which must exceed zero.  Set FINMASS to zero if ADDMASS is nonzero.  FINMASS is available in the R3 release of version 971.
-        """ # nopep8
-        return self._cards[0].get_value("finmass")
-
-    @finmass.setter
-    def finmass(self, value: float) -> None:
-        """Set the finmass property."""
-        self._cards[0].set_value("finmass", value)
-
-    @property
-    def lcid(self) -> typing.Optional[int]:
-        """Get or set the load curve id
-        """ # nopep8
-        return self._cards[0].get_value("lcid")
-
-    @lcid.setter
-    def lcid(self, value: int) -> None:
-        """Set the lcid property."""
-        self._cards[0].set_value("lcid", value)
+    @parts.setter
+    def parts(self, df: pd.DataFrame):
+        """Set parts from the dataframe df"""
+        self._cards[0].table = df
 
     @property
     def lcid_link(self) -> typing.Optional[DefineCurve]:
@@ -114,7 +83,11 @@ class ElementMassPart(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def pid_link(self) -> typing.Optional[KeywordBase]:
+    def pid_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all PART keywords for pid, keyed by pid value."""
+        return self._get_links_from_table("PART", "pid", "parts", "pid", "parts")
+
+    def get_pid_link(self, pid: int) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
-        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
+        return self._get_link_by_attr("PART", "pid", pid, "parts")
 
