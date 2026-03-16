@@ -1333,19 +1333,6 @@
     },
     "ELEMENT_MASS_PART_SET": {
         "generation-options": {
-            "skip-card": [
-                {"ref": "old_card"}
-            ],
-            "insert-card": [
-                {
-                    "before": "old_card",
-                    "card": {
-                        "source": "additional-cards",
-                        "card-name": "ELEMENT_MASS_PART_SET_CARD"
-                    },
-                    "label": "data_card"
-                }
-            ],
             "table-card": [
                 {
                     "property-name": "parts",
@@ -1354,7 +1341,7 @@
             ]
         },
         "labels": {
-            "old_card": 0
+            "data_card": 0
         }
     },
     "ELEMENT_SOLID_ORTHO": {
