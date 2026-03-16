@@ -1725,6 +1725,7 @@ $#               value                lcid
 
 # ELEMENT_MASS_PART / ELEMENT_MASS_PART_SET multi-row regression test strings
 test_element_mass_part_multirow = """*ELEMENT_MASS_PART
+$#   pid         addmass         finmass    lcid   
      101         500.000           0.000       1
      102         200.000           0.000       2"""
 
