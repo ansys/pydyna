@@ -1318,6 +1318,32 @@
             "orientation_card": 1
         }
     },
+    "ELEMENT_MASS_PART": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "elements",
+                    "ref": "elements_card"
+                }
+            ]
+        },
+        "labels": {
+            "elements_card": 0
+        }
+    },
+    "ELEMENT_MASS_PART_SET": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "elements",
+                    "ref": "elements_card"
+                }
+            ]
+        },
+        "labels": {
+            "elements_card": 0
+        }
+    },
     "ELEMENT_SOLID_ORTHO": {
         "action": "manual",
         "generation-options": {

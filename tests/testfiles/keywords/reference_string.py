@@ -1722,3 +1722,25 @@ $#               value                lcid
                  1.0                 101
                  2.0                 102
                  3.0                 103"""
+
+# ELEMENT_MASS_PART / ELEMENT_MASS_PART_SET multi-row regression test strings
+test_element_mass_part_multirow = """*ELEMENT_MASS_PART
+$#   pid         addmass         finmass    lcid    
+    1463         0.00491             0.0       0
+    1464         0.00491             0.0       0
+     415         0.00382             0.0       0
+     520         0.00382             0.0       0
+     405         0.00482             0.0       0"""
+
+test_element_mass_part_set_multirow = """*ELEMENT_MASS_PART_SET
+   10501       69.248175           0.000
+   10502       46.582768           0.000"""
+
+test_element_mass_part_set = """*ELEMENT_MASS_PART_SET
+$#   pid         addmass         finmass    lcid
+   10501       69.248175           0.000"""
+   
+test_element_mass_part_with_lcid = """*ELEMENT_MASS_PART
+$#   pid         addmass         finmass    lcid    
+    1463         0.00491             0.0       1
+    1464         0.00491             0.0       2"""
