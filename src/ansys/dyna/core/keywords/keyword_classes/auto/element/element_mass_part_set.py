@@ -48,6 +48,7 @@ class ElementMassPartSet(KeywordBase):
                     Field("psid", int, 0, 8, None),
                     Field("addmass", float, 8, 16, 0.0),
                     Field("finmass", float, 24, 16, 0.0),
+                    Field("mwd", int, 48, 8, None),
                 ],
                 None,
                 name="elements",

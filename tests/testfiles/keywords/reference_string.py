@@ -1744,3 +1744,7 @@ test_element_mass_part_with_lcid = """*ELEMENT_MASS_PART
 $#   pid         addmass         finmass    lcid    
     1463         0.00491             0.0       1
     1464         0.00491             0.0       2"""
+
+test_element_mass_part_set_with_mwd = """*ELEMENT_MASS_PART_SET
+$#   pid         addmass         finmass    lcid     mwd
+    1463         0.00491             0.0       0       1"""

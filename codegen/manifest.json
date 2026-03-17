@@ -1338,6 +1338,21 @@
                     "property-name": "elements",
                     "ref": "elements_card"
                 }
+            ],
+            "add-field": [
+                {
+                    "ref": "elements_card",
+                    "fields": [
+                        {
+                            "name": "MWD",
+                            "type": "integer",
+                            "position": 48,
+                            "width": 8,
+                            "default": null,
+                            "help": "Optional flag for mass-weighted distribution. EQ.0: distributed by area (shell) / volume (solid). EQ.1: distributed by mass weighted area x density x thickness (shell) / volume x density (solid)."
+                        }
+                    ]
+                }
             ]
         },
         "labels": {

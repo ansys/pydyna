@@ -13,17 +13,18 @@ Handlers are executed in registration order (see `handlers/registry.py`). Order 
 | 3 | `insert-card` | Inserts new cards |
 | 4 | `table-card` | Transforms cards into repeatable tables |
 | 5 | `override-field` | Modifies field properties |
-| 6 | `replace-card` | Replaces entire cards |
-| 7 | `series-card` | Transforms cards into variable-length series |
-| 8 | `add-option` | Adds keyword options |
-| 9 | `card-set` | Groups cards into reusable sets |
-| 10 | `conditional-card` | Adds conditional logic |
-| 11 | `rename-property` | Renames property accessors |
-| 12 | `table-card-group` | Groups cards into repeating units |
-| 13 | `external-card-implementation` | Links to external cards |
-| 14 | `add-mixin` | Adds mixin class inheritance |
-| 15 | `additional-imports` | Injects extra top-level imports |
-| 16 | `shared-field` | Creates shared field definitions |
+| 6 | `add-field` | Appends new fields missing from kwd.json |
+| 7 | `replace-card` | Replaces entire cards |
+| 8 | `series-card` | Transforms cards into variable-length series |
+| 9 | `add-option` | Adds keyword options |
+| 10 | `card-set` | Groups cards into reusable sets |
+| 11 | `conditional-card` | Adds conditional logic |
+| 12 | `rename-property` | Renames property accessors |
+| 13 | `table-card-group` | Groups cards into repeating units |
+| 14 | `external-card-implementation` | Links to external cards |
+| 15 | `add-mixin` | Adds mixin class inheritance |
+| 16 | `additional-imports` | Injects extra top-level imports |
+| 17 | `shared-field` | Creates shared field definitions |
 
 ## Reference Semantics (Critical)
 
@@ -78,6 +79,31 @@ Transforms cards into repeatable tables (2D data).
 ```json
 "table-card": [{"ref": "data_card", "length_func": "num_rows"}]
 ```
+
+### add-field
+
+Appends new fields to an existing card. Use this when a field is missing from `kwd.json` and cannot be added there. Unlike `override-field`, this handler **creates** fields that do not yet exist.
+
+```json
+"add-field": [
+  {
+    "ref": "elements_card",
+    "fields": [
+      {
+        "name": "MWD",
+        "type": "integer",
+        "position": 48,
+        "width": 8,
+        "default": null,
+        "help": "Optional flag for mass-weighted distribution."
+      }
+    ]
+  }
+]
+```
+
+Required field properties: `name`, `type`, `position`, `width`. Optional: `default`, `help`, `link`.
+Duplicate field names (case-insensitive) are silently skipped.
 
 ### series-card
 
