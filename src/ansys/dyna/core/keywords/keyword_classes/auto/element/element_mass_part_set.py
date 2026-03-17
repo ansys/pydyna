@@ -22,16 +22,13 @@
 
 """Module providing the ElementMassPartSet class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
-
-_ELEMENTMASSPARTSET_CARD0 = (
-    FieldSchema("psid", int, 0, 8, None),
-    FieldSchema("addmass", float, 8, 16, 0.0),
-    FieldSchema("finmass", float, 24, 16, 0.0),
-)
 
 class ElementMassPartSet(KeywordBase):
     """DYNA ELEMENT_MASS_PART_SET keyword"""
@@ -46,43 +43,26 @@ class ElementMassPartSet(KeywordBase):
         """Initialize the ElementMassPartSet class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card.from_field_schemas_with_defaults(
-                _ELEMENTMASSPARTSET_CARD0,
+            TableCard(
+                [
+                    Field("psid", int, 0, 8, None),
+                    Field("addmass", float, 8, 16, 0.0),
+                    Field("finmass", float, 24, 16, 0.0),
+                ],
+                None,
+                name="elements",
                 **kwargs,
             ),
         ]
     @property
-    def psid(self) -> typing.Optional[int]:
-        """Get or set the Part set id, a unique number must be used.
-        """ # nopep8
-        return self._cards[0].get_value("psid")
+    def elements(self) -> pd.DataFrame:
+        """Get the table of elements."""
+        return self._cards[0].table
 
-    @psid.setter
-    def psid(self, value: int) -> None:
-        """Set the psid property."""
-        self._cards[0].set_value("psid", value)
-
-    @property
-    def addmass(self) -> float:
-        """Get or set the Added translational mass to be distributed to nodes of PID.
-        """ # nopep8
-        return self._cards[0].get_value("addmass")
-
-    @addmass.setter
-    def addmass(self, value: float) -> None:
-        """Set the addmass property."""
-        self._cards[0].set_value("addmass", value)
-
-    @property
-    def finmass(self) -> float:
-        """Get or set the Final translational mass of the part set ID.  The total mass of PSID is computed and subtracted from the final mass of the part or part set to obtain the added translational mass, which must exceed zero.  Set FINMASS to zero if ADDMASS is nonzero.  FINMASS is available in the R3 release of version 971.
-        """ # nopep8
-        return self._cards[0].get_value("finmass")
-
-    @finmass.setter
-    def finmass(self, value: float) -> None:
-        """Set the finmass property."""
-        self._cards[0].set_value("finmass", value)
+    @elements.setter
+    def elements(self, df: pd.DataFrame):
+        """Set elements from the dataframe df"""
+        self._cards[0].table = df
 
     @property
     def psid_link(self) -> typing.Optional[KeywordBase]:
