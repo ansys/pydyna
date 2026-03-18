@@ -1338,7 +1338,15 @@
                     "property-name": "elements",
                     "ref": "elements_card"
                 }
+            ],
+            "override-field": [
+                {
+                    "name": "mvd",
+                    "default": 0,
+                    "ref": "elements_card"
+                }
             ]
+
         },
         "labels": {
             "elements_card": 0
