@@ -1344,6 +1344,15 @@
                     "ref": "elements_card",
                     "fields": [
                         {
+                            "name": "LCID",
+                            "type": "integer",
+                            "position": 40,
+                            "width": 8,
+                            "default": null,
+                            "link": 19,
+                            "help": "Optional load curve ID to scale the added mass at time = 0. The curve defines the scale factor as a function versus time and must start at unity at t=0. Applies to deformable bodies only."
+                        },
+                        {
                             "name": "MWD",
                             "type": "integer",
                             "position": 48,
