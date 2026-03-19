@@ -94,6 +94,43 @@ def check_field_type(field_type: type):
         raise TypeError(f"Unexpected field type: {field_type}. Expected str, int, or float.")
 
 
+def _py_format_float(value: float, width: int) -> str:
+    """Format a float value to fit within ``width`` characters, right-justified.
+
+    This is a Python-level replacement for hollerith's ``write_float_value``,
+    which contains a C-level ``sprintf`` buffer overflow that causes
+    ``libc``'s ``__sprintf_chk`` to call ``abort()`` on Linux with Python 3.14.
+    Because SIGABRT cannot be caught by Python's ``try/except``, the only safe
+    fix is to bypass ``holler.write_float`` entirely and format here instead.
+
+    The output reproduces hollerith's behaviour: 6 significant figures (like C's
+    ``%g``), trailing zeros suppressed, but always preserving at least one
+    decimal digit so that ``1.0`` is written as ``"1.0"`` not ``"1"``.
+    """
+    import math
+
+    if math.isnan(value) or math.isinf(value):
+        return f"{value!s:>{width}}"
+
+    # C's %g uses 6 significant digits and strips trailing zeros.
+    s = f"{value:.6g}"
+    # %g removes the decimal point for integer-valued results like 1.0 → "1".
+    # Hollerith preserves at least one decimal digit, so append ".0".
+    if "." not in s and "e" not in s.lower():
+        s = s + ".0"
+    if len(s) <= width:
+        return f"{s:>{width}}"
+    # Reduce precision until the string fits.
+    for precision in range(5, 0, -1):
+        s = f"{value:.{precision}g}"
+        if "." not in s and "e" not in s.lower():
+            s = s + ".0"
+        if len(s) <= width:
+            return f"{s:>{width}}"
+    # Absolute last resort – truncate (should not happen for width >= 6).
+    return f"{value:.1g}"[:width].rjust(width)
+
+
 def write_field_c(buf: typing.IO[typing.AnyStr], field_type: type, value: typing.Any, width: int) -> None:
     """Write a single field to the buffer."""
     if libmissing.checknull(value):
@@ -112,7 +149,9 @@ def write_field_c(buf: typing.IO[typing.AnyStr], field_type: type, value: typing
             )
             holler.write_string(buf, str(value), width)
     elif field_type == float:
-        holler.write_float(buf, value, width)
+        # Use the Python-level formatter to avoid a C buffer overflow in
+        # hollerith's write_float_value (__sprintf_chk → abort) on Linux/Python 3.14.
+        buf.write(_py_format_float(value, width))
 
 
 def write_field(buf: typing.IO[typing.AnyStr], field_type: type, value: typing.Any, width: int) -> None:
