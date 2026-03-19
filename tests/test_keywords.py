@@ -1686,6 +1686,13 @@ def test_element_mass_part_with_lcid(ref_string):
     assert len(deck.elements) == 2
     assert list(deck.elements["lcid"]) == [1, 2]
 
+def test_element_mass_part_set_with_lcid(ref_string):
+    """LCID field is correctly read for ELEMENT_MASS_PART_SET."""
+    kw = kwd.ElementMassPartSet()
+    kw.loads(ref_string.test_element_mass_part_set_with_lcid)
+    assert len(kw.elements) == 2
+    assert list(kw.elements["lcid"]) == [5, 7]
+
 def test_element_mass_part_set_with_mwd(ref_string):
     """MWD field is correctly read for ELEMENT_MASS_PART_SET."""
     kw = kwd.ElementMassPartSet()
