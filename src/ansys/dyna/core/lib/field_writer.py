@@ -103,32 +103,34 @@ def _py_format_float(value: float, width: int) -> str:
     Because SIGABRT cannot be caught by Python's ``try/except``, the only safe
     fix is to bypass ``holler.write_float`` entirely and format here instead.
 
-    The output reproduces hollerith's behaviour: 6 significant figures (like C's
-    ``%g``), trailing zeros suppressed, but always preserving at least one
-    decimal digit so that ``1.0`` is written as ``"1.0"`` not ``"1"``.
+    Hollerith derives precision from field width (approximately ``width - 4``),
+    so narrow fields (width=10) use ~6 significant digits and wide fields
+    (width=20, large format) use ~16, preserving full double precision.
+    A decimal point is always preserved for integer-valued results (e.g. ``1.0``
+    not ``1``) to match hollerith's established output format.
     """
     import math
 
     if math.isnan(value) or math.isinf(value):
         return f"{value!s:>{width}}"
 
-    # C's %g uses 6 significant digits and strips trailing zeros.
-    s = f"{value:.6g}"
-    # %g removes the decimal point for integer-valued results like 1.0 → "1".
-    # Hollerith preserves at least one decimal digit, so append ".0".
-    if "." not in s and "e" not in s.lower():
-        s = s + ".0"
-    if len(s) <= width:
-        return f"{s:>{width}}"
-    # Reduce precision until the string fits.
-    for precision in range(5, 0, -1):
-        s = f"{value:.{precision}g}"
+    # Mirror hollerith: precision ≈ width - 4, but at least 6 sig figs.
+    precision = max(6, width - 4)
+
+    for p in range(precision, 0, -1):
+        s = f"{value:.{p}g}"
+        # %g removes the decimal point for integer-valued results like 1.0 → "1".
+        # Hollerith preserves at least one decimal digit, so append ".0".
         if "." not in s and "e" not in s.lower():
             s = s + ".0"
         if len(s) <= width:
             return f"{s:>{width}}"
-    # Absolute last resort – truncate (should not happen for width >= 6).
-    return f"{value:.1g}"[:width].rjust(width)
+
+    # Absolute last resort – should not happen for width >= 6.
+    s = f"{value:.1g}"
+    if "." not in s and "e" not in s.lower():
+        s = s + ".0"
+    return s[:width].rjust(width)
 
 
 def write_field_c(buf: typing.IO[typing.AnyStr], field_type: type, value: typing.Any, width: int) -> None:
