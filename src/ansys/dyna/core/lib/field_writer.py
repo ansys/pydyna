@@ -150,6 +150,13 @@ def write_c_dataframe(
                 values = table[field.name]
             full_table[field.name] = values
         table = full_table
+    # Cast integer columns to nullable Int64 to avoid a crash in numpy.argsort
+    # triggered by pandas block consolidation on Python 3.14 when mixing
+    # numpy int64 and float64 column blocks in the same DataFrame.
+    table = table.copy()
+    for field in converted_fields:
+        if field.type is int and field.name in table.columns:
+            table[field.name] = table[field.name].astype("Int64")
     holler.write_table(buf, table, num_defined_rows, spec)
 
 
