@@ -41,6 +41,25 @@ _format_spec_cache: typing.Dict[typing.Tuple, FormatSpec] = {}
 _field_schemas_cache: typing.Dict[int, typing.Tuple[CardSchema, tuple]] = {}
 
 
+def _make_legacy_schema_signature(schema: CardSchema) -> tuple:
+    """Build a content-based, hashable signature for a legacy Card schema.
+
+    Using ``id(schema)`` as a cache key is unsafe because Python may reuse
+    memory addresses after GC, causing stale ``FormatSpec`` entries to be
+    returned for unrelated schemas.  This function derives the key from the
+    actual field structure so that logically different schemas always produce
+    different keys and logically identical schemas correctly share an entry.
+    """
+    items = []
+    for fs in schema.fields:
+        if isinstance(fs.default, Flag):
+            default_repr = ("Flag", fs.default.true_value, fs.default.false_value)
+        else:
+            default_repr = None
+        items.append((fs.name, fs.type, fs.offset, fs.width, default_repr))
+    return tuple(items)
+
+
 def _get_cached_format_spec(signature: tuple, schema: CardSchema, fmt: format_type) -> FormatSpec:
     """Get or create a cached FormatSpec from schema and format type.
 
@@ -131,8 +150,10 @@ class Card(CardInterface):
         field_schemas = tuple(FieldSchema.from_field(f) for f in fields)
         name_to_index = {f.name: i for i, f in enumerate(fields)}
         self._schema = CardSchema(field_schemas, name_to_index)
-        # Use object id as signature - no cross-instance caching for legacy path
-        self._signature = id(self._schema)
+        # Use a content-based signature so that the module-level FormatSpec
+        # cache cannot return a stale entry due to Python reusing object ids
+        # after garbage collection.
+        self._signature = _make_legacy_schema_signature(self._schema)
         self._values = [f.value for f in fields]
         self._fields_set: bool = False  # Track whether fields were ever explicitly set
         self._active_func = active_func
