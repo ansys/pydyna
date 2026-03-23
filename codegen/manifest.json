@@ -1338,6 +1338,30 @@
                     "property-name": "elements",
                     "ref": "elements_card"
                 }
+            ],
+            "add-field": [
+                {
+                    "ref": "elements_card",
+                    "fields": [
+                        {
+                            "name": "LCID",
+                            "type": "integer",
+                            "position": 40,
+                            "width": 8,
+                            "default": null,
+                            "link": 19,
+                            "help": "Optional load curve ID to scale the added mass at time = 0. The curve defines the scale factor as a function versus time and must start at unity at t=0. Applies to deformable bodies only."
+                        },
+                        {
+                            "name": "MWD",
+                            "type": "integer",
+                            "position": 48,
+                            "width": 8,
+                            "default": null,
+                            "help": "Optional flag for mass-weighted distribution. EQ.0: distributed by area (shell) / volume (solid). EQ.1: distributed by mass weighted area x density x thickness (shell) / volume x density (solid)."
+                        }
+                    ]
+                }
             ]
         },
         "labels": {

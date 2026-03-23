@@ -29,6 +29,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 class ElementMassPartSet(KeywordBase):
     """DYNA ELEMENT_MASS_PART_SET keyword"""
@@ -36,6 +37,7 @@ class ElementMassPartSet(KeywordBase):
     keyword = "ELEMENT"
     subkeyword = "MASS_PART_SET"
     _link_fields = {
+        "lcid": LinkType.DEFINE_CURVE,
         "psid": LinkType.SET_PART,
     }
 
@@ -48,6 +50,8 @@ class ElementMassPartSet(KeywordBase):
                     Field("psid", int, 0, 8, None),
                     Field("addmass", float, 8, 16, 0.0),
                     Field("finmass", float, 24, 16, 0.0),
+                    Field("lcid", int, 40, 8, None),
+                    Field("mwd", int, 48, 8, None),
                 ],
                 None,
                 name="elements",
@@ -63,6 +67,21 @@ class ElementMassPartSet(KeywordBase):
     def elements(self, df: pd.DataFrame):
         """Set elements from the dataframe df"""
         self._cards[0].table = df
+
+    @property
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid:
+                return kwd
+        return None
+
+    @lcid_link.setter
+    def lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid."""
+        self.lcid = value.lcid
 
     @property
     def psid_link(self) -> typing.Optional[KeywordBase]:
