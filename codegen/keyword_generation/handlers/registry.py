@@ -236,6 +236,7 @@ def create_default_registry() -> HandlerRegistry:
         "insert-card",  # Moved before table-card so inserted cards can be referenced
         "table-card",
         "override-field",
+        "add-field",
         "replace-card",
         "series-card",
         "add-option",
