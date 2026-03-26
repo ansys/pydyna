@@ -115,9 +115,9 @@ class Cards(OptionsInterface):
         # In LS-DYNA, '_TITLE' in the keyword name activates the 'ID' option
         # (which adds the CID + heading card) when no explicit 'TITLE' option spec
         # is defined for this keyword.
-        has_title_option = any(o.name == "TITLE" for o in self.option_specs)
-        if "TITLE" in names and not has_title_option:
-            names = list(names) + ["ID"]
+        # has_title_option = any(o.name == "TITLE" for o in self.option_specs)
+        # if "TITLE" in names and not has_title_option:
+        #     names = list(names) + ["ID"]
         for option in self.option_specs:
             if option.name in names:
                 self.activate_option(option.name)
