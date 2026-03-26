@@ -44,7 +44,6 @@ import tempfile
 import pandas as pd
 
 from ansys.dyna.core import Deck, keywords as kwd
-from ansys.dyna.core.run import run_dyna
 from ansys.dyna.core.utils.download_utilities import EXAMPLES_PATH, DownloadManager
 
 mesh_file_name = "nodes.k"
@@ -177,5 +176,5 @@ deck.plot(cwd=rundir.name)
 # ~~~~~~~~~~~~~~~~~~~
 #
 
-filepath = run_dyna(dynafile, working_directory=rundir.name)
-run_post(rundir.name)
+# filepath = run_dyna(dynafile, working_directory=rundir.name)
+# run_post(rundir.name)

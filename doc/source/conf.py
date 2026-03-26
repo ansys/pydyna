@@ -151,8 +151,12 @@ html_theme_options = {
            "*core/keywords/keyword_classes/auto*",
         ],
         "output": "api",
+        "examples_dirs": [
+            "../../examples/",
+        ],
     },
     "announcement": "<style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are removed in version v0.11.0.",
+            # Minigallery: scan these directories for .py and .ipynb examples
 }
 
 # static path
@@ -172,6 +176,11 @@ BUILD_AUTOKEYWORDS_API = os.environ.get("BUILD_AUTOKEYWORDS_API", "false").lower
 
 if BUILD_AUTOKEYWORDS_API:
     html_theme_options["ansys_sphinx_theme_autoapi"]["templates"] = "autoapi/"
+    html_theme_options["ansys_sphinx_theme_autoapi"]["examples_dirs"] = [
+            "doc/source/examples/sphinx-gallery",
+            "doc/source/examples/nbsphinx",
+        ]
+    html_theme_options["ansys_sphinx_theme_autoapi"]["gallery_default_thumbnail"] = "_static/pyansys_light_square.png"
     # # Remove the auto-generated keywords from the ignore list
     # html_theme_options["ansys_sphinx_theme_autoapi"]["ignore"] = []
 

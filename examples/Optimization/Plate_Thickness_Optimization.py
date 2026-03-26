@@ -37,20 +37,14 @@ is reached,and then display the results of that optimization.
 # Import required packages, including those for the keywords, deck, and solver.
 
 import os
-import pathlib
 import shutil
 import tempfile
 
-import ansys.dpf.core as dpf
-from ansys.dpf.core import operators as ops
-import matplotlib.pyplot as plt
 import pandas as pd
 
 from ansys.dyna.core import Deck, keywords as kwd
 
 # from ansys.dyna.core.run.linux_runner import LinuxRunner
-from ansys.dyna.core.run.local_solver import run_dyna
-from ansys.dyna.core.run.options import MemoryUnit, MpiOption, Precision
 from ansys.dyna.core.utils.download_utilities import EXAMPLES_PATH, DownloadManager
 
 # from ansys.dyna.core.run.windows_runner import WindowsRunner
@@ -277,107 +271,107 @@ def write_input_deck(**kwargs):
 #
 
 
-def run_job(directory):
-    run_dyna(
-        "input.k",
-        working_directory=directory,
-        ncpu=2,
-        memory=2,
-        precision=Precision.SINGLE,
-        mpi_option=MpiOption.MPP_INTEL_MPI,
-        memory_unit=MemoryUnit.MB,
-    )
-    assert os.path.isfile(os.path.join(directory, "d3plot")), "No result file found"
+# def run_job(directory):
+#     run_dyna(
+#         "input.k",
+#         working_directory=directory,
+#         ncpu=2,
+#         memory=2,
+#         precision=Precision.SINGLE,
+#         mpi_option=MpiOption.MPP_INTEL_MPI,
+#         memory_unit=MemoryUnit.MB,
+#     )
+#     assert os.path.isfile(os.path.join(directory, "d3plot")), "No result file found"
 
 
-###############################################################################
-# Define the DPF output function
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#
+# ###############################################################################
+# # Define the DPF output function
+# # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# #
 
 
-def get_plate_displacement(directory):
-    ds = dpf.DataSources()
-    result_file = os.path.join(directory, "d3plot")
-    assert os.path.isfile(result_file)
-    ds.set_result_file_path(result_file, "d3plot")
-    model = dpf.Model(ds)
+# def get_plate_displacement(directory):
+#     ds = dpf.DataSources()
+#     result_file = os.path.join(directory, "d3plot")
+#     assert os.path.isfile(result_file)
+#     ds.set_result_file_path(result_file, "d3plot")
+#     model = dpf.Model(ds)
 
-    # Create mesh operator
-    mes_op = dpf.operators.mesh.mesh_provider()
-    mes_op.inputs.data_sources.connect(ds)
-    # Isolate Part 2
-    mes_op.connect(25, [2])
-    # Extract mesh
-    part_mesh = mes_op.outputs.mesh()
+#     # Create mesh operator
+#     mes_op = dpf.operators.mesh.mesh_provider()
+#     mes_op.inputs.data_sources.connect(ds)
+#     # Isolate Part 2
+#     mes_op.connect(25, [2])
+#     # Extract mesh
+#     part_mesh = mes_op.outputs.mesh()
 
-    # Create scoping operator from mesh using from_mesh scoping operator
-    part_mesh_op = dpf.operators.scoping.from_mesh()
-    part_mesh_op.inputs.mesh.connect(part_mesh)
-    part_scoping = part_mesh_op.outputs.scoping()
+#     # Create scoping operator from mesh using from_mesh scoping operator
+#     part_mesh_op = dpf.operators.scoping.from_mesh()
+#     part_mesh_op.inputs.mesh.connect(part_mesh)
+#     part_scoping = part_mesh_op.outputs.scoping()
 
-    # create displacement entity, apply part scoping
-    disp = model.results.displacement
-    disp.on_mesh_scoping(part_scoping)
+#     # create displacement entity, apply part scoping
+#     disp = model.results.displacement
+#     disp.on_mesh_scoping(part_scoping)
 
-    disp_op = disp.on_all_time_freqs()
+#     disp_op = disp.on_all_time_freqs()
 
-    # Find min and max displacement
-    min_max_op = ops.min_max.min_max_fc(ops.math.norm_fc(disp_op))
+#     # Find min and max displacement
+#     min_max_op = ops.min_max.min_max_fc(ops.math.norm_fc(disp_op))
 
-    min_displ = min_max_op.outputs.field_min()
-    max_displ = min_max_op.outputs.field_max()
+#     min_displ = min_max_op.outputs.field_min()
+#     max_displ = min_max_op.outputs.field_max()
 
-    max_disp_data = max_displ.data
-    min_disp_data = min_displ.data
+#     max_disp_data = max_displ.data
+#     min_disp_data = min_displ.data
 
-    tdata = model.metadata.time_freq_support.time_frequencies.data
+#     tdata = model.metadata.time_freq_support.time_frequencies.data
 
-    return tdata, max_disp_data, min_disp_data
+#     return tdata, max_disp_data, min_disp_data
 
 
-###############################################################################
-# Run solver iteratively until target displacement is reached
-# ~~~~~~~~~~~~~~~~~~~~~~
-#
+# ###############################################################################
+# # Run solver iteratively until target displacement is reached
+# # ~~~~~~~~~~~~~~~~~~~~~~
+# #
 
-all_results = []
+# all_results = []
 
-for iteration in range(max_iterations):
-    # Define thickness for this iteration
-    thickness = initial_thickness + thickness_increment * iteration
-    wd = os.path.join(workdir.name, f"thickness_{thickness:.4f}")
-    pathlib.Path(wd).mkdir(exist_ok=True)
-    # Create LS-Dyna input deck with new thickness
-    write_input_deck(thickness=thickness, wd=wd)
-    # Run solver
-    run_job(wd)
-    # Post-process displacement
-    time_data, max_disp_data, min_disp_data = get_plate_displacement(wd)
-    reduced_time_data = [t * 1000 for t in time_data]  # Convert to ms
-    # Store result
-    all_results.append({"thickness": thickness, "time": reduced_time_data, "max_disp": max_disp_data})
-    # Check if target displacement is reached
-    if max(max_disp_data) <= target_displacement:
-        print(f"Target displacement reached at thickness {thickness:.4f}")
-        break
+# for iteration in range(max_iterations):
+#     # Define thickness for this iteration
+#     thickness = initial_thickness + thickness_increment * iteration
+#     wd = os.path.join(workdir.name, f"thickness_{thickness:.4f}")
+#     pathlib.Path(wd).mkdir(exist_ok=True)
+#     # Create LS-Dyna input deck with new thickness
+#     write_input_deck(thickness=thickness, wd=wd)
+#     # Run solver
+#     run_job(wd)
+#     # Post-process displacement
+#     time_data, max_disp_data, min_disp_data = get_plate_displacement(wd)
+#     reduced_time_data = [t * 1000 for t in time_data]  # Convert to ms
+#     # Store result
+#     all_results.append({"thickness": thickness, "time": reduced_time_data, "max_disp": max_disp_data})
+#     # Check if target displacement is reached
+#     if max(max_disp_data) <= target_displacement:
+#         print(f"Target displacement reached at thickness {thickness:.4f}")
+#         break
 
-###############################################################################
-# Generate graphical output
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
-#
+# ###############################################################################
+# # Generate graphical output
+# # ~~~~~~~~~~~~~~~~~~~~~~~~~
+# #
 
-# Now plot all results
-plt.figure(figsize=(8, 5))
-for res in all_results:
-    thickness = res["thickness"]
-    time_data = res["time"]
-    max_disp_data = res["max_disp"]
-    color = "r" if max(max_disp_data) <= target_displacement else "b"
-    label = f"Thickness {thickness:.4f}"
-    plt.plot(time_data, max_disp_data, color=color, label=label)
-plt.xlabel("Time (ms)")
-plt.ylabel("Displacement (mm)")
-plt.title("Plate Displacement vs Time for Different Thicknesses")
-plt.grid(True)
-plt.show()
+# # Now plot all results
+# plt.figure(figsize=(8, 5))
+# for res in all_results:
+#     thickness = res["thickness"]
+#     time_data = res["time"]
+#     max_disp_data = res["max_disp"]
+#     color = "r" if max(max_disp_data) <= target_displacement else "b"
+#     label = f"Thickness {thickness:.4f}"
+#     plt.plot(time_data, max_disp_data, color=color, label=label)
+# plt.xlabel("Time (ms)")
+# plt.ylabel("Displacement (mm)")
+# plt.title("Plate Displacement vs Time for Different Thicknesses")
+# plt.grid(True)
+# plt.show()

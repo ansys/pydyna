@@ -41,14 +41,12 @@ import os
 import shutil
 
 # subprocess is used to run LS-DYNA commands, excluding bandit warning
-import subprocess  # nosec: B404
 import tempfile
 
 import numpy as np
 import pandas as pd
 
 from ansys.dyna.core import Deck, keywords as kwd
-from ansys.dyna.core.run import MemoryUnit, MpiOption, run_dyna
 from ansys.dyna.core.utils.download_utilities import EXAMPLES_PATH, DownloadManager
 
 rundir = tempfile.TemporaryDirectory()
@@ -587,17 +585,17 @@ deck.plot(cwd=rundir.name)
 #
 
 
-try:
-    run_dyna(
-        dynafile,
-        working_directory=rundir.name,
-        ncpu=2,
-        mpi_option=MpiOption.MPP_INTEL_MPI,
-        memory=20,
-        memory_unit=MemoryUnit.MB,
-    )
-except subprocess.CalledProcessError:
-    # this example doesn't run to completion because it is a highly nonlinear buckling
-    pass
+# try:
+#     run_dyna(
+#         dynafile,
+#         working_directory=rundir.name,
+#         ncpu=2,
+#         mpi_option=MpiOption.MPP_INTEL_MPI,
+#         memory=20,
+#         memory_unit=MemoryUnit.MB,
+#     )
+# except subprocess.CalledProcessError:
+#     # this example doesn't run to completion because it is a highly nonlinear buckling
+#     pass
 
-run_post(rundir.name)
+# run_post(rundir.name)
