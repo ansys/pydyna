@@ -1,0 +1,2010 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Taylor bar example &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../_static/documentation_options.js?v=142dd74e"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/Taylor_Bar/plot_taylor_bar';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Contribute" href="../../contributing.html" />
+    <link rel="prev" title="Taylor bar impact" href="index.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.12.dev0" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="Structures" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/examples/Taylor_Bar/plot_taylor_bar.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are removed in version v0.11.0.</div>
+</aside>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    
+<!--
+  Announcement Version Loader
+  Dynamically loads the announcement.html content into the announcement_msg div.
+-->
+<div id="announcement_msg" aria-live="polite"></div>
+<script>
+  // Fetch and inject the announcement HTML content
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status} Announcement.html file not found, Please ignore this, if you are in dev/stable documentation`);
+      }
+      return response.text();
+    })
+    .then((text) => {
+      var msgDiv = document.getElementById("announcement_msg");
+      if (msgDiv) {
+        msgDiv.innerHTML = text;
+      }
+    })
+    .catch((error) => {
+      // Log only unexpected fetch errors
+      if (!(error.message && error.message.startsWith("HTTP error: 404"))) {
+        console.error(`Fetch problem: ${error.message} Announcement.html could not be loaded.`);
+      }
+    });
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../jupyter_plotting_demo.html">Jupyter notebook plotting</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Buckling_Beer_Can/index.html">Beer can buckling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../John_Reid_Pendulum/index.html">Pendulum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../John_Reid_Pipe/index.html">Pipe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Optimization/index.html">Optimization</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Taylor bar impact</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Taylor bar example</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../index.html" class="nav-link">Examples</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">Taylor bar impact</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Taylor bar example</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-taylor-bar-plot-taylor-bar-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="taylor-bar-example">
+<span id="sphx-glr-examples-taylor-bar-plot-taylor-bar-py"></span><h1>Taylor bar example<a class="headerlink" href="#taylor-bar-example" title="Link to this heading">#</a></h1>
+<p>This example is inspired by the “Taylor Bar” example on the
+<a class="reference external" href="_ls_dyna_knowledge_base">LS-DYNA Knowledge Base</a> site. It shows how
+to use PyDyna to create a keyword file for LS-DYNA and solve it within
+a Pythonic environment.</p>
+<section id="perform-required-imports">
+<h2>Perform required imports<a class="headerlink" href="#perform-required-imports" title="Link to this heading">#</a></h2>
+<p>Import required packages, including those for the keywords, deck, and solver.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">ansys.dpf.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dpf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Deck</span><span class="p">,</span> <span class="n">keywords</span> <span class="k">as</span> <span class="n">kwd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.run</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_dyna</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.utils.download_utilities</span><span class="w"> </span><span class="kn">import</span> <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">EXAMPLES_PATH</span></a><span class="p">,</span> <span class="n">DownloadManager</span>
+
+<a href="https://docs.python.org/3/library/tempfile.html#tempfile.TemporaryDirectory" title="tempfile.TemporaryDirectory" class="sphx-glr-backref-module-tempfile sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">workdir</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/tempfile.html#tempfile.TemporaryDirectory" title="tempfile.TemporaryDirectory" class="sphx-glr-backref-module-tempfile sphx-glr-backref-type-py-class"><span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span></a><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_name</span></a> <span class="o">=</span> <span class="s2">&quot;taylor_bar_mesh.k&quot;</span>
+<a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a> <span class="o">=</span> <span class="n">DownloadManager</span><span class="p">()</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span>
+    <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_name</span></a><span class="p">,</span> <span class="s2">&quot;ls-dyna&quot;</span><span class="p">,</span> <span class="s2">&quot;Taylor_Bar&quot;</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><a href="https://docs.python.org/3/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">EXAMPLES_PATH</span></a><span class="p">,</span> <span class="s2">&quot;Taylor_Bar&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="create-a-deck-and-keywords">
+<h2>Create a deck and keywords<a class="headerlink" href="#create-a-deck-and-keywords" title="Link to this heading">#</a></h2>
+<p>Create a deck, which is the container for all the keywords.
+Then, create and append individual keywords to the deck.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_input_deck</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">initial_velocity</span></a><span class="p">):</span>
+    <span class="n">deck</span> <span class="o">=</span> <span class="n">Deck</span><span class="p">()</span>
+    <span class="n">deck</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Taylor-Bar Velocity - </span><span class="si">%s</span><span class="s2"> - Unit: t-mm-s&quot;</span> <span class="o">%</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">initial_velocity</span></a>
+
+    <span class="c1"># Define material</span>
+    <span class="n">mat_1</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">Mat003</span><span class="p">(</span><span class="n">mid</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">mat_1</span><span class="o">.</span><span class="n">ro</span> <span class="o">=</span> <span class="mf">7.85000e-9</span>
+    <span class="n">mat_1</span><span class="o">.</span><span class="n">e</span> <span class="o">=</span> <span class="mf">150000.0</span>
+    <span class="n">mat_1</span><span class="o">.</span><span class="n">pr</span> <span class="o">=</span> <span class="mf">0.34</span>
+    <span class="n">mat_1</span><span class="o">.</span><span class="n">sigy</span> <span class="o">=</span> <span class="mf">390.0</span>
+    <span class="n">mat_1</span><span class="o">.</span><span class="n">etan</span> <span class="o">=</span> <span class="mf">90.0</span>
+
+    <span class="c1"># Define section</span>
+    <span class="n">sec_1</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">SectionSolid</span><span class="p">(</span><span class="n">secid</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">sec_1</span><span class="o">.</span><span class="n">elform</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># Define part</span>
+    <span class="n">part_1</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">Part</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">mid</span><span class="o">=</span><span class="n">mat_1</span><span class="o">.</span><span class="n">mid</span><span class="p">,</span> <span class="n">secid</span><span class="o">=</span><span class="n">sec_1</span><span class="o">.</span><span class="n">secid</span><span class="p">)</span>
+
+    <span class="c1"># Define coordinate system</span>
+    <span class="n">cs_1</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DefineCoordinateSystem</span><span class="p">(</span><span class="n">cid</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">cs_1</span><span class="o">.</span><span class="n">xl</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">cs_1</span><span class="o">.</span><span class="n">yp</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="c1"># Define initial velocity</span>
+    <span class="n">init_vel</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">InitialVelocityGeneration</span><span class="p">()</span>
+    <span class="n">init_vel</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">part_1</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="s2">&quot;pid&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">init_vel</span><span class="o">.</span><span class="n">styp</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">init_vel</span><span class="o">.</span><span class="n">vy</span> <span class="o">=</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">initial_velocity</span></a>
+    <span class="n">init_vel</span><span class="o">.</span><span class="n">icid</span> <span class="o">=</span> <span class="n">cs_1</span><span class="o">.</span><span class="n">cid</span>
+
+    <span class="c1"># Define box for node set</span>
+    <span class="n">box_1</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DefineBox</span><span class="p">(</span><span class="n">boxid</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">xmn</span><span class="o">=-</span><span class="mi">500</span><span class="p">,</span> <span class="n">xmx</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">ymn</span><span class="o">=</span><span class="mf">39.0</span><span class="p">,</span> <span class="n">ymx</span><span class="o">=</span><span class="mf">40.1</span><span class="p">,</span> <span class="n">zmn</span><span class="o">=-</span><span class="mi">500</span><span class="p">,</span> <span class="n">zmx</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+    <span class="c1"># Create node set</span>
+    <span class="n">set_node_1</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">SetNodeGeneral</span><span class="p">()</span>
+    <span class="n">set_node_1</span><span class="o">.</span><span class="n">sid</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">set_node_1</span><span class="o">.</span><span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;BOX&quot;</span>
+    <span class="n">set_node_1</span><span class="o">.</span><span class="n">e1</span> <span class="o">=</span> <span class="n">box_1</span><span class="o">.</span><span class="n">boxid</span>
+
+    <span class="c1"># Define rigid wall</span>
+    <span class="n">rw</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">RigidwallPlanar</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">rw</span><span class="o">.</span><span class="n">nsid</span> <span class="o">=</span> <span class="n">set_node_1</span><span class="o">.</span><span class="n">sid</span>
+    <span class="n">rw</span><span class="o">.</span><span class="n">yt</span> <span class="o">=</span> <span class="n">box_1</span><span class="o">.</span><span class="n">ymx</span>
+    <span class="n">rw</span><span class="o">.</span><span class="n">yh</span> <span class="o">=</span> <span class="n">box_1</span><span class="o">.</span><span class="n">ymn</span>
+
+    <span class="c1"># Define control termination</span>
+    <span class="n">control_term</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">ControlTermination</span><span class="p">(</span><span class="n">endtim</span><span class="o">=</span><span class="mf">8.00000e-5</span><span class="p">,</span> <span class="n">dtmin</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+
+    <span class="c1"># Define database cards</span>
+    <span class="n">deck_dt_out</span> <span class="o">=</span> <span class="mf">8.00000e-8</span>
+    <span class="n">deck_glstat</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseGlstat</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="n">deck_dt_out</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">deck_matsum</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseMatsum</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="n">deck_dt_out</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">deck_nodout</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseNodout</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="n">deck_dt_out</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">deck_elout</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseElout</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="n">deck_dt_out</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">deck_rwforc</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseRwforc</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="n">deck_dt_out</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">deck_d3plot</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseBinaryD3Plot</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">4.00000e-6</span><span class="p">)</span>
+
+    <span class="c1"># Define deck history node</span>
+    <span class="n">deck_hist_node_1</span> <span class="o">=</span> <span class="n">kwd</span><span class="o">.</span><span class="n">DatabaseHistoryNodeSet</span><span class="p">()</span>
+    <span class="n">deck_hist_node_1</span><span class="o">.</span><span class="n">id1</span> <span class="o">=</span> <span class="n">set_node_1</span><span class="o">.</span><span class="n">sid</span>
+
+    <span class="c1"># Append all cards to input deck</span>
+    <span class="n">deck</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">deck_glstat</span><span class="p">,</span>
+            <span class="n">deck_matsum</span><span class="p">,</span>
+            <span class="n">deck_nodout</span><span class="p">,</span>
+            <span class="n">deck_elout</span><span class="p">,</span>
+            <span class="n">deck_rwforc</span><span class="p">,</span>
+            <span class="n">deck_d3plot</span><span class="p">,</span>
+            <span class="n">set_node_1</span><span class="p">,</span>
+            <span class="n">control_term</span><span class="p">,</span>
+            <span class="n">rw</span><span class="p">,</span>
+            <span class="n">box_1</span><span class="p">,</span>
+            <span class="n">init_vel</span><span class="p">,</span>
+            <span class="n">cs_1</span><span class="p">,</span>
+            <span class="n">part_1</span><span class="p">,</span>
+            <span class="n">mat_1</span><span class="p">,</span>
+            <span class="n">sec_1</span><span class="p">,</span>
+            <span class="n">deck_hist_node_1</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">deck</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">write_input_deck</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">initial_velocity</span></a> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;initial_velocity&quot;</span><span class="p">)</span>
+    <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wd</span></a> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;wd&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">((</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">initial_velocity</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wd</span></a><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Missing input!&quot;</span><span class="p">)</span>
+    <span class="n">deck</span> <span class="o">=</span> <span class="n">create_input_deck</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">initial_velocity</span></a><span class="p">)</span>
+    <span class="c1"># Import mesh</span>
+    <span class="n">deck</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kwd</span><span class="o">.</span><span class="n">Include</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_name</span></a><span class="p">))</span>
+
+    <span class="c1"># Write LS-DYNA input deck</span>
+    <a href="https://docs.python.org/3/library/os.html#os.makedirs" title="os.makedirs" class="sphx-glr-backref-module-os sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">makedirs</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wd</span></a><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">deck</span><span class="o">.</span><span class="n">export_file</span><span class="p">(</span><a href="https://docs.python.org/3/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wd</span></a><span class="p">,</span> <span class="s2">&quot;input.k&quot;</span><span class="p">))</span>
+    <a href="https://docs.python.org/3/library/shutil.html#shutil.copyfile" title="shutil.copyfile" class="sphx-glr-backref-module-shutil sphx-glr-backref-type-py-function"><span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wd</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file_name</span></a><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="define-the-dyna-solver-function">
+<h2>Define the Dyna solver function<a class="headerlink" href="#define-the-dyna-solver-function" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+    <span class="n">run_dyna</span><span class="p">(</span><span class="s2">&quot;input.k&quot;</span><span class="p">,</span> <span class="n">working_directory</span><span class="o">=</span><span class="n">directory</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">assert</span> <a href="https://docs.python.org/3/library/os.path.html#os.path.isfile" title="os.path.isfile" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="s2">&quot;d3plot&quot;</span><span class="p">)),</span> <span class="s2">&quot;No result file found&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="define-the-dpf-output-function">
+<h2>Define the DPF output function<a class="headerlink" href="#define-the-dpf-output-function" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_global_ke</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">DataSources</span><span class="p">()</span>
+    <span class="n">result_file</span> <span class="o">=</span> <a href="https://docs.python.org/3/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="s2">&quot;d3plot&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <a href="https://docs.python.org/3/library/os.path.html#os.path.isfile" title="os.path.isfile" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span></a><span class="p">(</span><span class="n">result_file</span><span class="p">)</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">set_result_file_path</span><span class="p">(</span><span class="n">result_file</span><span class="p">,</span> <span class="s2">&quot;d3plot&quot;</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+
+    <span class="n">gke_op</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">global_kinetic_energy</span><span class="p">()</span>
+    <span class="n">gke_op</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">data_sources</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+    <span class="n">gke</span> <span class="o">=</span> <span class="n">gke_op</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">field</span> <span class="o">=</span> <span class="n">gke</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">ke_data</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">data</span>
+
+    <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">time_data</span></a> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">time_freq_support</span><span class="o">.</span><span class="n">time_frequencies</span><span class="o">.</span><span class="n">data_as_list</span>
+    <span class="k">return</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">time_data</span></a><span class="p">,</span> <span class="n">ke_data</span>
+</pre></div>
+</div>
+</section>
+<section id="view-the-model">
+<h2>View the model<a class="headerlink" href="#view-the-model" title="Link to this heading">#</a></h2>
+<p>etc etc</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">deck_for_graphic</span> <span class="o">=</span> <span class="n">create_input_deck</span><span class="p">(</span><span class="mf">300e3</span><span class="p">)</span>
+<span class="n">deck_for_graphic</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kwd</span><span class="o">.</span><span class="n">Include</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mesh_file</span></a><span class="p">))</span>
+<span class="n">deck_for_graphic</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_taylor_bar_001.png" srcset="../../_images/sphx_glr_plot_taylor_bar_001.png" alt="plot taylor bar" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/runner/work/pydyna/pydyna/.venv/lib/python3.13/site-packages/ansys/dyna/core/lib/deck_plotter.py:567: PyVistaFutureWarning: The default value of `algorithm` for the filter
+`UnstructuredGrid.extract_surface` will change in the future. It currently defaults to
+`&#39;dataset_surface&#39;`, but will change to `None`. Explicitly set the `algorithm` keyword to
+silence this warning.
+  plot_data = plot_data.extract_surface()
+</pre></div>
+</div>
+</section>
+<section id="run-a-parametric-solve">
+<h2>Run a parametric solve<a class="headerlink" href="#run-a-parametric-solve" title="Link to this heading">#</a></h2>
+<p>etc etc</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define base working directory</span>
+
+<a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">color</span></a> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">]</span>
+<span class="c1"># Specify different velocities in mm/s</span>
+<a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">initial_velocities</span></a> <span class="o">=</span> <span class="p">[</span><span class="mf">275.0e3</span><span class="p">,</span> <span class="mf">300.0e3</span><span class="p">,</span> <span class="mf">325.0e3</span><span class="p">,</span> <span class="mf">350.0e3</span><span class="p">]</span>
+
+<span class="k">for</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">index</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">initial_velocity</span></a> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">initial_velocities</span></a><span class="p">):</span>
+    <span class="c1"># Create a folder for each parameter</span>
+    <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wd</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/os.path.html#os.path.join" title="os.path.join" class="sphx-glr-backref-module-os-path sphx-glr-backref-type-py-function"><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">workdir</span><span class="o">.</span><span class="n">name</span></a><span class="p">,</span> <span class="s2">&quot;tb_vel_</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">initial_velocity</span></a><span class="p">)</span>
+    <a href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="pathlib.Path" class="sphx-glr-backref-module-pathlib sphx-glr-backref-type-py-class"><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wd</span></a><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># Create LS-Dyna input deck</span>
+    <span class="n">write_input_deck</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">initial_velocity</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">initial_velocity</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wd</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wd</span></a><span class="p">)</span>
+    <span class="c1"># Run Solver</span>
+    <span class="n">run</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wd</span></a><span class="p">)</span>
+    <span class="c1"># Run PyDPF Post</span>
+    <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">time_data</span></a><span class="p">,</span> <span class="n">ke_data</span> <span class="o">=</span> <span class="n">get_global_ke</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">wd</span></a><span class="p">)</span>
+    <span class="c1"># Add series to the plot</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">time_data</span></a><span class="p">,</span> <span class="n">ke_data</span><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">color</span></a><span class="p">[</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">index</span></a><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;KE at vel. </span><span class="si">%s</span><span class="s2"> mm/s&quot;</span> <span class="o">%</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">initial_velocity</span></a><span class="p">)</span>
+
+<a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.xlabel.html#matplotlib.pyplot.xlabel" title="matplotlib.pyplot.xlabel" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span></a><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+<a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.ylabel.html#matplotlib.pyplot.ylabel" title="matplotlib.pyplot.ylabel" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span></a><span class="p">(</span><span class="s2">&quot;Energy (mJ)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span> License option : check ansys licenses only
+
+
+ ***************************************************************
+ *            ANSYS LEGAL NOTICES                              *
+ ***************************************************************
+ *                                                             *
+ * Copyright 1971-2025 ANSYS, Inc.  All rights reserved.       *
+ * Unauthorized use, distribution or duplication is            *
+ * prohibited.                                                 *
+ *                                                             *
+ * Ansys is a registered trademark of ANSYS, Inc. or its       *
+ * subsidiaries in the United States or other countries.       *
+ * See the ANSYS, Inc. online documentation or the ANSYS, Inc. *
+ * documentation CD or online help for the complete Legal      *
+ * Notice.                                                     *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * THIS ANSYS SOFTWARE PRODUCT AND PROGRAM DOCUMENTATION       *
+ * INCLUDE TRADE SECRETS AND CONFIDENTIAL AND PROPRIETARY      *
+ * PRODUCTS OF ANSYS, INC., ITS SUBSIDIARIES, OR LICENSORS.    *
+ * The software products and documentation are furnished by    *
+ * ANSYS, Inc. or its subsidiaries under a software license    *
+ * agreement that contains provisions concerning               *
+ * non-disclosure, copying, length and nature of use,          *
+ * compliance with exporting laws, warranties, disclaimers,    *
+ * limitations of liability, and remedies, and other           *
+ * provisions.  The software products and documentation may be *
+ * used, disclosed, transferred, or copied only in accordance  *
+ * with the terms and conditions of that software license      *
+ * agreement.                                                  *
+ *                                                             *
+ * ANSYS, Inc. is a UL registered                              *
+ * ISO 9001:2015 company.                                      *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * This product is subject to U.S. laws governing export and   *
+ * re-export.                                                  *
+ *                                                             *
+ * For U.S. Government users, except as specifically granted   *
+ * by the ANSYS, Inc. software license agreement, the use,     *
+ * duplication, or disclosure by the United States Government  *
+ * is subject to restrictions stated in the ANSYS, Inc.        *
+ * software license agreement and FAR 12.212 (for non-DOD      *
+ * licenses).                                                  *
+ *                                                             *
+ ***************************************************************
+
+      Date: 03/27/2026      Time: 00:29:49
+      ___________________________________________________
+     |                                                   |
+     |  LS-DYNA, A Program for Nonlinear Dynamic         |
+     |  Analysis of Structures in Three Dimensions       |
+     |  Date    : 10/01/2025    Time: 13:03:42           |
+     |  Version : smp d R16                              |
+     |  Revision: R16.1.1-20-g0c90cad538                 |
+     |  AnLicVer: 2025 R2 (20250506+dl-73-g4dde854)      |
+     |                                                   |
+     |  Features enabled in this version:                |
+     |    Shared Memory Parallel                         |
+     |    CESE CHEMISTRY EM ICFD STOCHASTIC_PARTICLES    |
+     |    FFTW (multi-dimensional FFTW Library)          |
+     |    ARPACK (nonsymmetric eigensolver library)      |
+     |    ANSYSLIC enabled                               |
+     |                                                   |
+     |  Platform   : Xeon64 System                       |
+     |  OS Level   : Linux 3.10.0 uum                    |
+     |  Compiler   : Intel Fortran Compiler 19.0 SSE2    |
+     |  Hostname   : 2a9539fc42ac                        |
+     |  Precision  : Double precision (I8R8)             |
+     |                                                   |
+     |  Unauthorized use infringes Ansys Inc. copyrights |
+     |___________________________________________________|
+
+ &gt; i=input.k memory=20m
+Messages file /ansys_inc/v252/licensingclient/language/en-us/ansysli_msgs.xml does not exist.
+[license/info] Successfully checked out 1 of &quot;dyna_solver_core&quot;.
+[license/info] --&gt; Checkout ID: 2a9539fc42ac-root-13-000003 (days left: 298)
+[license/info] --&gt; Customer ID: 0
+[license/info] Successfully started &quot;LSDYNA (Core-based License)&quot;.
+
+ Executing with ANSYS license
+
+ Command line options: i=input.k
+                       memory=20m
+
+ Input file: input.k
+
+ The native file format       : 64-bit small endian
+ Memory size from command line:    20000000
+
+ on UNIX computers note the following change:
+
+ ctrl-c interrupts ls-dyna and prompts for a sense  switch.
+ type the desired sense switch: sw1., sw2., etc. to continue
+ the execution.  ls-dyna will respond as explained in the users manual
+
+    type                      response
+   -----   ------------------------------------------------------------
+   quit    ls-dyna terminates.
+   stop    ls-dyna terminates.
+   sw1.    a restart file is written and ls-dyna terminates.
+   sw2.    ls-dyna responds with time and cycle numbers.
+   sw3.    a restart file is written and ls-dyna continues calculations.
+   sw4.    a plot state is written and ls-dyna continues calculations.
+   sw5.    ls-dyna enters interactive graphics phase.
+   swa.    ls-dyna flushes all output i/o buffers.
+   swb.    a dynain is written and ls-dyna continues calculations.
+   swc.    a restart and dynain are written and ls-dyna continues calculations.
+   swd.    a restart and dynain are written and ls-dyna terminates.
+   swe.    stop dynamic relaxation just as though convergence
+   endtime=time change the termination time
+   lpri    toggle implicit lin. alg. solver output on/off.
+   nlpr    toggle implicit nonlinear solver output on/off.
+   iter    toggle implicit output to d3iter database on/off.
+   prof    output timing data to messag and continue.
+   conv    force implicit nonlinear convergence for current time step.
+   ttrm    terminate implicit time step, reduce time step, retry time step.
+   rtrm    terminate implicit at end of current time step.
+
+
+ ********  notice  ********  notice  ********  notice  ********
+ *                                                            *
+ * This is the LS-DYNA Finite Element code.                   *
+ *                                                            *
+ * Neither LST nor the authors assume any responsibility for  *
+ * the validity, accuracy, or applicability of any results    *
+ * obtained from this system. Users must verify their own     *
+ * results.                                                   *
+ *                                                            *
+ * LST endeavors to make the LS-DYNA code as complete,        *
+ * accurate and easy to use as possible.                      *
+ * Suggestions and comments are welcomed.  Please report any  *
+ * errors encountered in either the documentation or results  *
+ * immediately to LST through your site focus.                *
+ *                                                            *
+ * Copyright (C) 1990-2021                                    *
+ * by Livermore Software Technology, LLC                      *
+ * All rights reserved                                        *
+ *                                                            *
+ ********  notice  ********  notice  ********  notice  ********
+
+ Beginning of keyword reader                                   03/27/26 00:29:55
+
+                                                               03/27/26 00:29:55
+ Open include file: taylor_bar_mesh.k
+
+ Memory required to process keyword     :     195795
+ Additional dynamic memory required     :    2200515
+
+
+ input of data is completed
+
+ initial kinetic energy = 0.11118392E+06
+
+ Memory required to begin solution      :     196K
+ Additional dynamically allocated memory:    2257K
+                                   Total:    2453K
+
+ initialization completed
+       1 t 0.0000E+00 dt 6.72E-08 flush i/o buffers            03/27/26 00:29:55
+       1 t 0.0000E+00 dt 6.72E-08 write d3plot file            03/27/26 00:29:55
+ cpu time per zone cycle............       854 nanoseconds
+ average cpu time per zone cycle....       921 nanoseconds
+ average clock time per zone cycle..      1260 nanoseconds
+
+ estimated total cpu time          =         0 sec (       0 hrs  0 mins)
+ estimated cpu time to complete    =         0 sec (       0 hrs  0 mins)
+ estimated total clock time        =         7 sec (       0 hrs  0 mins)
+ estimated clock time to complete  =         1 sec (       0 hrs  0 mins)
+ termination time                  = 8.000E-05
+      60 t 3.9547E-06 dt 6.71E-08 write d3plot file            03/27/26 00:29:55
+     136 t 7.9703E-06 dt 3.83E-08 write d3plot file            03/27/26 00:29:55
+     272 t 1.1990E-05 dt 2.37E-08 write d3plot file            03/27/26 00:29:55
+     493 t 1.5998E-05 dt 1.53E-08 write d3plot file            03/27/26 00:29:55
+     812 t 1.9999E-05 dt 1.10E-08 write d3plot file            03/27/26 00:29:55
+    1234 t 2.3997E-05 dt 8.71E-09 write d3plot file            03/27/26 00:29:55
+    1734 t 2.7997E-05 dt 7.45E-09 write d3plot file            03/27/26 00:29:55
+    2302 t 3.1995E-05 dt 6.80E-09 write d3plot file            03/27/26 00:29:55
+    2905 t 3.5998E-05 dt 6.54E-09 write d3plot file            03/27/26 00:29:55
+    3526 t 3.9999E-05 dt 6.52E-09 write d3plot file            03/27/26 00:29:56
+    4157 t 4.4000E-05 dt 6.15E-09 write d3plot file            03/27/26 00:29:56
+    4807 t 4.7995E-05 dt 6.15E-09 write d3plot file            03/27/26 00:29:56
+    5000 t 4.9198E-05 dt 6.53E-09 flush i/o buffers            03/27/26 00:29:56
+    5450 t 5.1999E-05 dt 6.15E-09 write d3plot file            03/27/26 00:29:56
+    6095 t 5.5999E-05 dt 6.15E-09 write d3plot file            03/27/26 00:29:56
+    6722 t 5.9997E-05 dt 6.15E-09 write d3plot file            03/27/26 00:29:57
+    7340 t 6.3996E-05 dt 6.53E-09 write d3plot file            03/27/26 00:29:57
+    7963 t 6.7995E-05 dt 6.53E-09 write d3plot file            03/27/26 00:29:57
+    8579 t 7.1994E-05 dt 6.16E-09 write d3plot file            03/27/26 00:29:57
+    9223 t 7.5998E-05 dt 6.57E-09 write d3plot file            03/27/26 00:29:57
+    9835 t 7.9994E-05 dt 6.57E-09 write d3plot file            03/27/26 00:29:57
+
+ *** termination time reached ***
+    9835 t 8.0001E-05 dt 6.57E-09 write d3dump01 file          03/27/26 00:29:57
+    9835 t 8.0001E-05 dt 6.57E-09 write d3plot file            03/27/26 00:29:57
+
+ N o r m a l    t e r m i n a t i o n                          03/27/26 00:29:57
+
+ Memory required to complete solution   :     196K
+ Additional dynamically allocated memory:    2689K
+                                   Total:    2884K
+
+ T i m i n g   i n f o r m a t i o n
+                        CPU(seconds)   %CPU  Clock(seconds) %Clock
+  ----------------------------------------------------------------
+  Keyword Processing ... 1.4523E-02    0.50     1.4524E-02    0.16
+    KW Reading ......... 5.7592E-03    0.20     5.7600E-03    0.07
+    KW Writing ......... 2.6972E-03    0.09     2.6970E-03    0.03
+  Initialization ....... 1.1594E-01    4.00     6.0465E+00   68.42
+    Init Proc Phase 1 .. 5.4626E-02    1.89     5.5653E-02    0.63
+    Init Proc Phase 2 .. 1.0386E-03    0.04     2.0270E-03    0.02
+  Init solver .......... 5.4582E-05    0.00     5.4000E-05    0.00
+  Element processing ... 1.8236E+00   62.97     1.8237E+00   20.64
+    Solids ............. 1.7310E+00   59.77     1.7289E+00   19.56
+    Shells ............. 2.6290E-02    0.91     2.8419E-02    0.32
+    ISO Shells ......... 9.6595E-03    0.33     9.7340E-03    0.11
+    E Other ............ 4.2248E-02    1.46     4.2030E-02    0.48
+  Binary databases ..... 1.6023E-02    0.55     1.6187E-02    0.18
+  ASCII database ....... 4.0189E-01   13.88     4.0198E-01    4.55
+  Contact algorithm .... 2.3304E-02    0.80     2.3639E-02    0.27
+  Rigid Bodies ......... 4.5073E-02    1.56     4.5157E-02    0.51
+    Mass Scaling ....... 1.1272E-02    0.39     1.1393E-02    0.13
+    Update nodes ....... 1.0164E-02    0.35     1.0241E-02    0.12
+  Time step size ....... 1.2567E-02    0.43     1.2351E-02    0.14
+  Rigid wall ........... 3.7995E-02    1.31     3.7185E-02    0.42
+  Group force file ..... 1.0817E-02    0.37     1.0813E-02    0.12
+  Others ............... 2.6365E-02    0.91     2.6157E-02    0.30
+  Misc. 1 .............. 1.9397E-01    6.70     2.0426E-01    2.31
+    Scale Masses ....... 9.9587E-03    0.34     1.0008E-02    0.11
+    Force Constraints .. 1.0109E-02    0.35     9.9720E-03    0.11
+    Force to Accel ..... 3.8907E-02    1.34     3.8736E-02    0.44
+  Misc. 2 .............. 9.0399E-02    3.12     9.0383E-02    1.02
+    Geometry Update .... 5.5295E-02    1.91     5.4586E-02    0.62
+  Misc. 3 .............. 1.9377E-02    0.67     1.9785E-02    0.22
+  Misc. 4 .............. 6.3990E-02    2.21     6.4107E-02    0.73
+    Timestep Init ...... 2.6476E-02    0.91     2.6138E-02    0.30
+    Apply Loads ........ 1.6024E-02    0.55     1.5899E-02    0.18
+  ----------------------------------------------------------------
+  T o t a l s            2.8959E+00  100.00     8.8368E+00  100.00
+
+ Problem time       =    8.0001E-05
+ Problem cycle      =      9835
+ Total CPU time     =         3 seconds (   0 hours  0 minutes  3 seconds)
+ CPU time per zone cycle  =        365.644 nanoseconds
+ Clock time per zone cycle=        367.008 nanoseconds
+
+ Number of CPU&#39;s    1
+ NLQ used/max     192/  192
+ Start time   03/27/2026 00:29:55
+ End time     03/27/2026 00:29:57
+ Elapsed time       2 seconds for    9835 cycles using  1 SMP thread
+             (      0 hour   0 minute   2 seconds)
+
+ N o r m a l    t e r m i n a t i o n                          03/27/26 00:29:57
+ License option : check ansys licenses only
+
+
+ ***************************************************************
+ *            ANSYS LEGAL NOTICES                              *
+ ***************************************************************
+ *                                                             *
+ * Copyright 1971-2025 ANSYS, Inc.  All rights reserved.       *
+ * Unauthorized use, distribution or duplication is            *
+ * prohibited.                                                 *
+ *                                                             *
+ * Ansys is a registered trademark of ANSYS, Inc. or its       *
+ * subsidiaries in the United States or other countries.       *
+ * See the ANSYS, Inc. online documentation or the ANSYS, Inc. *
+ * documentation CD or online help for the complete Legal      *
+ * Notice.                                                     *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * THIS ANSYS SOFTWARE PRODUCT AND PROGRAM DOCUMENTATION       *
+ * INCLUDE TRADE SECRETS AND CONFIDENTIAL AND PROPRIETARY      *
+ * PRODUCTS OF ANSYS, INC., ITS SUBSIDIARIES, OR LICENSORS.    *
+ * The software products and documentation are furnished by    *
+ * ANSYS, Inc. or its subsidiaries under a software license    *
+ * agreement that contains provisions concerning               *
+ * non-disclosure, copying, length and nature of use,          *
+ * compliance with exporting laws, warranties, disclaimers,    *
+ * limitations of liability, and remedies, and other           *
+ * provisions.  The software products and documentation may be *
+ * used, disclosed, transferred, or copied only in accordance  *
+ * with the terms and conditions of that software license      *
+ * agreement.                                                  *
+ *                                                             *
+ * ANSYS, Inc. is a UL registered                              *
+ * ISO 9001:2015 company.                                      *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * This product is subject to U.S. laws governing export and   *
+ * re-export.                                                  *
+ *                                                             *
+ * For U.S. Government users, except as specifically granted   *
+ * by the ANSYS, Inc. software license agreement, the use,     *
+ * duplication, or disclosure by the United States Government  *
+ * is subject to restrictions stated in the ANSYS, Inc.        *
+ * software license agreement and FAR 12.212 (for non-DOD      *
+ * licenses).                                                  *
+ *                                                             *
+ ***************************************************************
+
+      Date: 03/27/2026      Time: 00:30:20
+      ___________________________________________________
+     |                                                   |
+     |  LS-DYNA, A Program for Nonlinear Dynamic         |
+     |  Analysis of Structures in Three Dimensions       |
+     |  Date    : 10/01/2025    Time: 13:03:42           |
+     |  Version : smp d R16                              |
+     |  Revision: R16.1.1-20-g0c90cad538                 |
+     |  AnLicVer: 2025 R2 (20250506+dl-73-g4dde854)      |
+     |                                                   |
+     |  Features enabled in this version:                |
+     |    Shared Memory Parallel                         |
+     |    CESE CHEMISTRY EM ICFD STOCHASTIC_PARTICLES    |
+     |    FFTW (multi-dimensional FFTW Library)          |
+     |    ARPACK (nonsymmetric eigensolver library)      |
+     |    ANSYSLIC enabled                               |
+     |                                                   |
+     |  Platform   : Xeon64 System                       |
+     |  OS Level   : Linux 3.10.0 uum                    |
+     |  Compiler   : Intel Fortran Compiler 19.0 SSE2    |
+     |  Hostname   : 44a150de72d1                        |
+     |  Precision  : Double precision (I8R8)             |
+     |                                                   |
+     |  Unauthorized use infringes Ansys Inc. copyrights |
+     |___________________________________________________|
+
+ &gt; i=input.k memory=20m
+Messages file /ansys_inc/v252/licensingclient/language/en-us/ansysli_msgs.xml does not exist.
+[license/info] Successfully checked out 1 of &quot;dyna_solver_core&quot;.
+[license/info] --&gt; Checkout ID: 44a150de72d1-root-13-000003 (days left: 298)
+[license/info] --&gt; Customer ID: 0
+[license/info] Successfully started &quot;LSDYNA (Core-based License)&quot;.
+
+ Executing with ANSYS license
+
+ Command line options: i=input.k
+                       memory=20m
+
+ Input file: input.k
+
+ The native file format       : 64-bit small endian
+ Memory size from command line:    20000000
+
+ on UNIX computers note the following change:
+
+ ctrl-c interrupts ls-dyna and prompts for a sense  switch.
+ type the desired sense switch: sw1., sw2., etc. to continue
+ the execution.  ls-dyna will respond as explained in the users manual
+
+    type                      response
+   -----   ------------------------------------------------------------
+   quit    ls-dyna terminates.
+   stop    ls-dyna terminates.
+   sw1.    a restart file is written and ls-dyna terminates.
+   sw2.    ls-dyna responds with time and cycle numbers.
+   sw3.    a restart file is written and ls-dyna continues calculations.
+   sw4.    a plot state is written and ls-dyna continues calculations.
+   sw5.    ls-dyna enters interactive graphics phase.
+   swa.    ls-dyna flushes all output i/o buffers.
+   swb.    a dynain is written and ls-dyna continues calculations.
+   swc.    a restart and dynain are written and ls-dyna continues calculations.
+   swd.    a restart and dynain are written and ls-dyna terminates.
+   swe.    stop dynamic relaxation just as though convergence
+   endtime=time change the termination time
+   lpri    toggle implicit lin. alg. solver output on/off.
+   nlpr    toggle implicit nonlinear solver output on/off.
+   iter    toggle implicit output to d3iter database on/off.
+   prof    output timing data to messag and continue.
+   conv    force implicit nonlinear convergence for current time step.
+   ttrm    terminate implicit time step, reduce time step, retry time step.
+   rtrm    terminate implicit at end of current time step.
+
+
+ ********  notice  ********  notice  ********  notice  ********
+ *                                                            *
+ * This is the LS-DYNA Finite Element code.                   *
+ *                                                            *
+ * Neither LST nor the authors assume any responsibility for  *
+ * the validity, accuracy, or applicability of any results    *
+ * obtained from this system. Users must verify their own     *
+ * results.                                                   *
+ *                                                            *
+ * LST endeavors to make the LS-DYNA code as complete,        *
+ * accurate and easy to use as possible.                      *
+ * Suggestions and comments are welcomed.  Please report any  *
+ * errors encountered in either the documentation or results  *
+ * immediately to LST through your site focus.                *
+ *                                                            *
+ * Copyright (C) 1990-2021                                    *
+ * by Livermore Software Technology, LLC                      *
+ * All rights reserved                                        *
+ *                                                            *
+ ********  notice  ********  notice  ********  notice  ********
+
+ Beginning of keyword reader                                   03/27/26 00:30:26
+
+                                                               03/27/26 00:30:26
+ Open include file: taylor_bar_mesh.k
+
+ Memory required to process keyword     :     195795
+ Additional dynamic memory required     :    2200515
+
+
+ input of data is completed
+
+ initial kinetic energy = 0.13231805E+06
+
+ Memory required to begin solution      :     196K
+ Additional dynamically allocated memory:    2257K
+                                   Total:    2453K
+
+ initialization completed
+       1 t 0.0000E+00 dt 6.72E-08 flush i/o buffers            03/27/26 00:30:26
+       1 t 0.0000E+00 dt 6.72E-08 write d3plot file            03/27/26 00:30:26
+ cpu time per zone cycle............       886 nanoseconds
+ average cpu time per zone cycle....       945 nanoseconds
+ average clock time per zone cycle..      1199 nanoseconds
+
+ estimated total cpu time          =         0 sec (       0 hrs  0 mins)
+ estimated cpu time to complete    =         0 sec (       0 hrs  0 mins)
+ estimated total clock time        =         7 sec (       0 hrs  0 mins)
+ estimated clock time to complete  =         1 sec (       0 hrs  0 mins)
+ termination time                  = 8.000E-05
+      60 t 3.9564E-06 dt 6.71E-08 write d3plot file            03/27/26 00:30:26
+     145 t 7.9823E-06 dt 3.30E-08 write d3plot file            03/27/26 00:30:26
+     308 t 1.1998E-05 dt 1.92E-08 write d3plot file            03/27/26 00:30:26
+     587 t 1.6000E-05 dt 1.18E-08 write d3plot file            03/27/26 00:30:26
+    1009 t 1.9996E-05 dt 7.72E-09 write d3plot file            03/27/26 00:30:26
+    1582 t 2.3999E-05 dt 6.32E-09 write d3plot file            03/27/26 00:30:26
+    2293 t 2.7997E-05 dt 5.27E-09 write d3plot file            03/27/26 00:30:27
+    3109 t 3.1998E-05 dt 4.69E-09 write d3plot file            03/27/26 00:30:27
+    3996 t 3.5997E-05 dt 4.39E-09 write d3plot file            03/27/26 00:30:27
+    4921 t 3.9998E-05 dt 4.29E-09 write d3plot file            03/27/26 00:30:27
+    5000 t 4.0337E-05 dt 4.29E-09 flush i/o buffers            03/27/26 00:30:27
+    5855 t 4.3996E-05 dt 4.29E-09 write d3plot file            03/27/26 00:30:28
+    6806 t 4.7998E-05 dt 4.29E-09 write d3plot file            03/27/26 00:30:28
+    7782 t 5.1998E-05 dt 4.04E-09 write d3plot file            03/27/26 00:30:28
+    8766 t 5.5998E-05 dt 4.04E-09 write d3plot file            03/27/26 00:30:28
+    9747 t 5.9999E-05 dt 4.05E-09 write d3plot file            03/27/26 00:30:29
+   10000 t 6.1023E-05 dt 4.05E-09 flush i/o buffers            03/27/26 00:30:29
+   10699 t 6.3996E-05 dt 4.30E-09 write d3plot file            03/27/26 00:30:29
+   11643 t 6.7999E-05 dt 4.30E-09 write d3plot file            03/27/26 00:30:29
+   12579 t 7.1996E-05 dt 4.30E-09 write d3plot file            03/27/26 00:30:29
+   13556 t 7.6000E-05 dt 4.06E-09 write d3plot file            03/27/26 00:30:29
+   14494 t 7.9998E-05 dt 4.32E-09 write d3plot file            03/27/26 00:30:30
+
+ *** termination time reached ***
+   14494 t 8.0002E-05 dt 4.32E-09 write d3dump01 file          03/27/26 00:30:30
+   14494 t 8.0002E-05 dt 4.32E-09 write d3plot file            03/27/26 00:30:30
+
+ N o r m a l    t e r m i n a t i o n                          03/27/26 00:30:30
+
+ Memory required to complete solution   :     196K
+ Additional dynamically allocated memory:    2689K
+                                   Total:    2884K
+
+ T i m i n g   i n f o r m a t i o n
+                        CPU(seconds)   %CPU  Clock(seconds) %Clock
+  ----------------------------------------------------------------
+  Keyword Processing ... 1.4921E-02    0.38     1.4921E-02    0.15
+    KW Reading ......... 5.8089E-03    0.15     5.8090E-03    0.06
+    KW Writing ......... 2.6898E-03    0.07     2.6900E-03    0.03
+  Initialization ....... 1.1661E-01    2.95     6.0016E+00   60.90
+    Init Proc Phase 1 .. 5.5577E-02    1.41     5.6813E-02    0.58
+    Init Proc Phase 2 .. 1.1557E-03    0.03     1.8180E-03    0.02
+  Init solver .......... 5.5954E-05    0.00     5.6000E-05    0.00
+  Element processing ... 2.6579E+00   67.21     2.6580E+00   26.97
+    Solids ............. 2.5242E+00   63.83     2.5210E+00   25.58
+    Shells ............. 3.7593E-02    0.95     4.0715E-02    0.41
+    ISO Shells ......... 1.4201E-02    0.36     1.4225E-02    0.14
+    E Other ............ 6.1325E-02    1.55     6.1050E-02    0.62
+  Binary databases ..... 2.1920E-02    0.55     2.2059E-02    0.22
+  ASCII database ....... 4.1066E-01   10.38     4.1068E-01    4.17
+  Contact algorithm .... 3.3946E-02    0.86     3.4291E-02    0.35
+  Rigid Bodies ......... 6.4874E-02    1.64     6.4860E-02    0.66
+    Mass Scaling ....... 1.5999E-02    0.40     1.6067E-02    0.16
+    Update nodes ....... 1.5203E-02    0.38     1.5190E-02    0.15
+  Time step size ....... 1.8006E-02    0.46     1.7907E-02    0.18
+  Rigid wall ........... 5.4284E-02    1.37     5.3270E-02    0.54
+  Group force file ..... 1.5330E-02    0.39     1.5489E-02    0.16
+  Others ............... 3.7906E-02    0.96     3.7680E-02    0.38
+  Misc. 1 .............. 2.6069E-01    6.59     2.7663E-01    2.81
+    Scale Masses ....... 1.4622E-02    0.37     1.4672E-02    0.15
+    Force Constraints .. 1.4565E-02    0.37     1.4569E-02    0.15
+    Force to Accel ..... 5.6453E-02    1.43     5.6205E-02    0.57
+  Misc. 2 .............. 1.2998E-01    3.29     1.2976E-01    1.32
+    Geometry Update .... 7.9650E-02    2.01     7.8605E-02    0.80
+  Misc. 3 .............. 2.5659E-02    0.65     2.5456E-02    0.26
+  Misc. 4 .............. 9.1928E-02    2.32     9.2136E-02    0.93
+    Timestep Init ...... 3.8463E-02    0.97     3.8298E-02    0.39
+    Apply Loads ........ 2.2602E-02    0.57     2.2449E-02    0.23
+  ----------------------------------------------------------------
+  T o t a l s            3.9547E+00  100.00     9.8547E+00  100.00
+
+ Problem time       =    8.0002E-05
+ Problem cycle      =     14494
+ Total CPU time     =         4 seconds (   0 hours  0 minutes  4 seconds)
+ CPU time per zone cycle  =        343.008 nanoseconds
+ Clock time per zone cycle=        344.366 nanoseconds
+
+ Number of CPU&#39;s    1
+ NLQ used/max     192/  192
+ Start time   03/27/2026 00:30:26
+ End time     03/27/2026 00:30:30
+ Elapsed time       4 seconds for   14494 cycles using  1 SMP thread
+             (      0 hour   0 minute   4 seconds)
+
+ N o r m a l    t e r m i n a t i o n                          03/27/26 00:30:30
+ License option : check ansys licenses only
+
+
+ ***************************************************************
+ *            ANSYS LEGAL NOTICES                              *
+ ***************************************************************
+ *                                                             *
+ * Copyright 1971-2025 ANSYS, Inc.  All rights reserved.       *
+ * Unauthorized use, distribution or duplication is            *
+ * prohibited.                                                 *
+ *                                                             *
+ * Ansys is a registered trademark of ANSYS, Inc. or its       *
+ * subsidiaries in the United States or other countries.       *
+ * See the ANSYS, Inc. online documentation or the ANSYS, Inc. *
+ * documentation CD or online help for the complete Legal      *
+ * Notice.                                                     *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * THIS ANSYS SOFTWARE PRODUCT AND PROGRAM DOCUMENTATION       *
+ * INCLUDE TRADE SECRETS AND CONFIDENTIAL AND PROPRIETARY      *
+ * PRODUCTS OF ANSYS, INC., ITS SUBSIDIARIES, OR LICENSORS.    *
+ * The software products and documentation are furnished by    *
+ * ANSYS, Inc. or its subsidiaries under a software license    *
+ * agreement that contains provisions concerning               *
+ * non-disclosure, copying, length and nature of use,          *
+ * compliance with exporting laws, warranties, disclaimers,    *
+ * limitations of liability, and remedies, and other           *
+ * provisions.  The software products and documentation may be *
+ * used, disclosed, transferred, or copied only in accordance  *
+ * with the terms and conditions of that software license      *
+ * agreement.                                                  *
+ *                                                             *
+ * ANSYS, Inc. is a UL registered                              *
+ * ISO 9001:2015 company.                                      *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * This product is subject to U.S. laws governing export and   *
+ * re-export.                                                  *
+ *                                                             *
+ * For U.S. Government users, except as specifically granted   *
+ * by the ANSYS, Inc. software license agreement, the use,     *
+ * duplication, or disclosure by the United States Government  *
+ * is subject to restrictions stated in the ANSYS, Inc.        *
+ * software license agreement and FAR 12.212 (for non-DOD      *
+ * licenses).                                                  *
+ *                                                             *
+ ***************************************************************
+
+      Date: 03/27/2026      Time: 00:30:52
+      ___________________________________________________
+     |                                                   |
+     |  LS-DYNA, A Program for Nonlinear Dynamic         |
+     |  Analysis of Structures in Three Dimensions       |
+     |  Date    : 10/01/2025    Time: 13:03:42           |
+     |  Version : smp d R16                              |
+     |  Revision: R16.1.1-20-g0c90cad538                 |
+     |  AnLicVer: 2025 R2 (20250506+dl-73-g4dde854)      |
+     |                                                   |
+     |  Features enabled in this version:                |
+     |    Shared Memory Parallel                         |
+     |    CESE CHEMISTRY EM ICFD STOCHASTIC_PARTICLES    |
+     |    FFTW (multi-dimensional FFTW Library)          |
+     |    ARPACK (nonsymmetric eigensolver library)      |
+     |    ANSYSLIC enabled                               |
+     |                                                   |
+     |  Platform   : Xeon64 System                       |
+     |  OS Level   : Linux 3.10.0 uum                    |
+     |  Compiler   : Intel Fortran Compiler 19.0 SSE2    |
+     |  Hostname   : 89a3b71b8e9a                        |
+     |  Precision  : Double precision (I8R8)             |
+     |                                                   |
+     |  Unauthorized use infringes Ansys Inc. copyrights |
+     |___________________________________________________|
+
+ &gt; i=input.k memory=20m
+Messages file /ansys_inc/v252/licensingclient/language/en-us/ansysli_msgs.xml does not exist.
+[license/info] Successfully checked out 1 of &quot;dyna_solver_core&quot;.
+[license/info] --&gt; Checkout ID: 89a3b71b8e9a-root-13-000003 (days left: 298)
+[license/info] --&gt; Customer ID: 0
+[license/info] Successfully started &quot;LSDYNA (Core-based License)&quot;.
+
+ Executing with ANSYS license
+
+ Command line options: i=input.k
+                       memory=20m
+
+ Input file: input.k
+
+ The native file format       : 64-bit small endian
+ Memory size from command line:    20000000
+
+ on UNIX computers note the following change:
+
+ ctrl-c interrupts ls-dyna and prompts for a sense  switch.
+ type the desired sense switch: sw1., sw2., etc. to continue
+ the execution.  ls-dyna will respond as explained in the users manual
+
+    type                      response
+   -----   ------------------------------------------------------------
+   quit    ls-dyna terminates.
+   stop    ls-dyna terminates.
+   sw1.    a restart file is written and ls-dyna terminates.
+   sw2.    ls-dyna responds with time and cycle numbers.
+   sw3.    a restart file is written and ls-dyna continues calculations.
+   sw4.    a plot state is written and ls-dyna continues calculations.
+   sw5.    ls-dyna enters interactive graphics phase.
+   swa.    ls-dyna flushes all output i/o buffers.
+   swb.    a dynain is written and ls-dyna continues calculations.
+   swc.    a restart and dynain are written and ls-dyna continues calculations.
+   swd.    a restart and dynain are written and ls-dyna terminates.
+   swe.    stop dynamic relaxation just as though convergence
+   endtime=time change the termination time
+   lpri    toggle implicit lin. alg. solver output on/off.
+   nlpr    toggle implicit nonlinear solver output on/off.
+   iter    toggle implicit output to d3iter database on/off.
+   prof    output timing data to messag and continue.
+   conv    force implicit nonlinear convergence for current time step.
+   ttrm    terminate implicit time step, reduce time step, retry time step.
+   rtrm    terminate implicit at end of current time step.
+
+
+ ********  notice  ********  notice  ********  notice  ********
+ *                                                            *
+ * This is the LS-DYNA Finite Element code.                   *
+ *                                                            *
+ * Neither LST nor the authors assume any responsibility for  *
+ * the validity, accuracy, or applicability of any results    *
+ * obtained from this system. Users must verify their own     *
+ * results.                                                   *
+ *                                                            *
+ * LST endeavors to make the LS-DYNA code as complete,        *
+ * accurate and easy to use as possible.                      *
+ * Suggestions and comments are welcomed.  Please report any  *
+ * errors encountered in either the documentation or results  *
+ * immediately to LST through your site focus.                *
+ *                                                            *
+ * Copyright (C) 1990-2021                                    *
+ * by Livermore Software Technology, LLC                      *
+ * All rights reserved                                        *
+ *                                                            *
+ ********  notice  ********  notice  ********  notice  ********
+
+ Beginning of keyword reader                                   03/27/26 00:30:58
+
+                                                               03/27/26 00:30:58
+ Open include file: taylor_bar_mesh.k
+
+ Memory required to process keyword     :     195795
+ Additional dynamic memory required     :    2200515
+
+
+ input of data is completed
+
+ initial kinetic energy = 0.15528993E+06
+
+ Memory required to begin solution      :     196K
+ Additional dynamically allocated memory:    2257K
+                                   Total:    2453K
+
+ initialization completed
+       1 t 0.0000E+00 dt 6.72E-08 flush i/o buffers            03/27/26 00:30:58
+       1 t 0.0000E+00 dt 6.72E-08 write d3plot file            03/27/26 00:30:58
+ cpu time per zone cycle............       841 nanoseconds
+ average cpu time per zone cycle....       918 nanoseconds
+ average clock time per zone cycle..      1162 nanoseconds
+
+ estimated total cpu time          =         0 sec (       0 hrs  0 mins)
+ estimated cpu time to complete    =         0 sec (       0 hrs  0 mins)
+ estimated total clock time        =         7 sec (       0 hrs  0 mins)
+ estimated clock time to complete  =         1 sec (       0 hrs  0 mins)
+ termination time                  = 8.000E-05
+      60 t 3.9415E-06 dt 6.22E-08 write d3plot file            03/27/26 00:30:58
+     155 t 7.9752E-06 dt 2.87E-08 write d3plot file            03/27/26 00:30:58
+     349 t 1.1998E-05 dt 1.58E-08 write d3plot file            03/27/26 00:30:58
+     697 t 1.5994E-05 dt 9.29E-09 write d3plot file            03/27/26 00:30:59
+    1238 t 1.9994E-05 dt 6.27E-09 write d3plot file            03/27/26 00:30:59
+    1998 t 2.3998E-05 dt 4.74E-09 write d3plot file            03/27/26 00:30:59
+    2943 t 2.7998E-05 dt 3.88E-09 write d3plot file            03/27/26 00:30:59
+    4058 t 3.1998E-05 dt 3.18E-09 write d3plot file            03/27/26 00:30:59
+    5000 t 3.5037E-05 dt 2.96E-09 flush i/o buffers            03/27/26 00:31:00
+    5313 t 3.5998E-05 dt 3.09E-09 write d3plot file            03/27/26 00:31:00
+    6657 t 3.9998E-05 dt 2.95E-09 write d3plot file            03/27/26 00:31:00
+    8032 t 4.3999E-05 dt 2.91E-09 write d3plot file            03/27/26 00:31:00
+    9438 t 4.7999E-05 dt 2.91E-09 write d3plot file            03/27/26 00:31:01
+   10000 t 4.9634E-05 dt 2.91E-09 flush i/o buffers            03/27/26 00:31:01
+   10861 t 5.1999E-05 dt 2.74E-09 write d3plot file            03/27/26 00:31:01
+   12312 t 5.5999E-05 dt 2.74E-09 write d3plot file            03/27/26 00:31:02
+   13771 t 5.9998E-05 dt 2.74E-09 write d3plot file            03/27/26 00:31:02
+   15000 t 6.3551E-05 dt 2.74E-09 flush i/o buffers            03/27/26 00:31:02
+   15163 t 6.3998E-05 dt 2.74E-09 write d3plot file            03/27/26 00:31:02
+   16550 t 6.7998E-05 dt 2.91E-09 write d3plot file            03/27/26 00:31:03
+   17924 t 7.1999E-05 dt 2.91E-09 write d3plot file            03/27/26 00:31:03
+   19360 t 7.6000E-05 dt 2.75E-09 write d3plot file            03/27/26 00:31:03
+   20000 t 7.7767E-05 dt 2.76E-09 flush i/o buffers            03/27/26 00:31:03
+   20766 t 7.9998E-05 dt 2.93E-09 write d3plot file            03/27/26 00:31:04
+
+ *** termination time reached ***
+   20766 t 8.0001E-05 dt 2.93E-09 write d3dump01 file          03/27/26 00:31:04
+   20766 t 8.0001E-05 dt 2.93E-09 write d3plot file            03/27/26 00:31:04
+
+ N o r m a l    t e r m i n a t i o n                          03/27/26 00:31:04
+
+ Memory required to complete solution   :     196K
+ Additional dynamically allocated memory:    2689K
+                                   Total:    2884K
+
+ T i m i n g   i n f o r m a t i o n
+                        CPU(seconds)   %CPU  Clock(seconds) %Clock
+  ----------------------------------------------------------------
+  Keyword Processing ... 1.5139E-02    0.28     1.5140E-02    0.13
+    KW Reading ......... 5.8789E-03    0.11     5.8790E-03    0.05
+    KW Writing ......... 2.7188E-03    0.05     2.7190E-03    0.02
+  Initialization ....... 1.1834E-01    2.17     6.0068E+00   52.81
+    Init Proc Phase 1 .. 5.6215E-02    1.03     5.7299E-02    0.50
+    Init Proc Phase 2 .. 1.0937E-03    0.02     2.4660E-03    0.02
+  Init solver .......... 6.4471E-05    0.00     6.4000E-05    0.00
+  Element processing ... 3.8292E+00   70.10     3.8294E+00   33.67
+    Solids ............. 3.6381E+00   66.60     3.6334E+00   31.95
+    Shells ............. 5.3838E-02    0.99     5.8601E-02    0.52
+    ISO Shells ......... 2.0364E-02    0.37     2.0510E-02    0.18
+    E Other ............ 8.7173E-02    1.60     8.6468E-02    0.76
+  Binary databases ..... 2.9098E-02    0.53     2.9248E-02    0.26
+  ASCII database ....... 4.3640E-01    7.99     4.3605E-01    3.83
+  Contact algorithm .... 4.9131E-02    0.90     4.9480E-02    0.44
+  Rigid Bodies ......... 9.2934E-02    1.70     9.3148E-02    0.82
+    Mass Scaling ....... 2.3079E-02    0.42     2.3139E-02    0.20
+    Update nodes ....... 2.1413E-02    0.39     2.1419E-02    0.19
+  Time step size ....... 2.5674E-02    0.47     2.5554E-02    0.22
+  Rigid wall ........... 7.7777E-02    1.42     7.6286E-02    0.67
+  Group force file ..... 2.1978E-02    0.40     2.2098E-02    0.19
+  Others ............... 5.4692E-02    1.00     5.4542E-02    0.48
+  Misc. 1 .............. 3.5569E-01    6.51     3.7951E-01    3.34
+    Scale Masses ....... 2.0756E-02    0.38     2.0824E-02    0.18
+    Force Constraints .. 2.1030E-02    0.38     2.0968E-02    0.18
+    Force to Accel ..... 8.1337E-02    1.49     8.0890E-02    0.71
+  Misc. 2 .............. 1.8901E-01    3.46     1.8881E-01    1.66
+    Geometry Update .... 1.1661E-01    2.13     1.1505E-01    1.01
+  Misc. 3 .............. 3.5047E-02    0.64     3.4769E-02    0.31
+  Misc. 4 .............. 1.3233E-01    2.42     1.3267E-01    1.17
+    Timestep Init ...... 5.5147E-02    1.01     5.4948E-02    0.48
+    Apply Loads ........ 3.2388E-02    0.59     3.2034E-02    0.28
+  ----------------------------------------------------------------
+  T o t a l s            5.4625E+00  100.00     1.1374E+01  100.00
+
+ Problem time       =    8.0001E-05
+ Problem cycle      =     20766
+ Total CPU time     =         5 seconds (   0 hours  0 minutes  5 seconds)
+ CPU time per zone cycle  =        333.712 nanoseconds
+ Clock time per zone cycle=        335.127 nanoseconds
+
+ Number of CPU&#39;s    1
+ NLQ used/max     192/  192
+ Start time   03/27/2026 00:30:58
+ End time     03/27/2026 00:31:04
+ Elapsed time       6 seconds for   20766 cycles using  1 SMP thread
+             (      0 hour   0 minute   6 seconds)
+
+ N o r m a l    t e r m i n a t i o n                          03/27/26 00:31:04
+ License option : check ansys licenses only
+
+
+ ***************************************************************
+ *            ANSYS LEGAL NOTICES                              *
+ ***************************************************************
+ *                                                             *
+ * Copyright 1971-2025 ANSYS, Inc.  All rights reserved.       *
+ * Unauthorized use, distribution or duplication is            *
+ * prohibited.                                                 *
+ *                                                             *
+ * Ansys is a registered trademark of ANSYS, Inc. or its       *
+ * subsidiaries in the United States or other countries.       *
+ * See the ANSYS, Inc. online documentation or the ANSYS, Inc. *
+ * documentation CD or online help for the complete Legal      *
+ * Notice.                                                     *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * THIS ANSYS SOFTWARE PRODUCT AND PROGRAM DOCUMENTATION       *
+ * INCLUDE TRADE SECRETS AND CONFIDENTIAL AND PROPRIETARY      *
+ * PRODUCTS OF ANSYS, INC., ITS SUBSIDIARIES, OR LICENSORS.    *
+ * The software products and documentation are furnished by    *
+ * ANSYS, Inc. or its subsidiaries under a software license    *
+ * agreement that contains provisions concerning               *
+ * non-disclosure, copying, length and nature of use,          *
+ * compliance with exporting laws, warranties, disclaimers,    *
+ * limitations of liability, and remedies, and other           *
+ * provisions.  The software products and documentation may be *
+ * used, disclosed, transferred, or copied only in accordance  *
+ * with the terms and conditions of that software license      *
+ * agreement.                                                  *
+ *                                                             *
+ * ANSYS, Inc. is a UL registered                              *
+ * ISO 9001:2015 company.                                      *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * This product is subject to U.S. laws governing export and   *
+ * re-export.                                                  *
+ *                                                             *
+ * For U.S. Government users, except as specifically granted   *
+ * by the ANSYS, Inc. software license agreement, the use,     *
+ * duplication, or disclosure by the United States Government  *
+ * is subject to restrictions stated in the ANSYS, Inc.        *
+ * software license agreement and FAR 12.212 (for non-DOD      *
+ * licenses).                                                  *
+ *                                                             *
+ ***************************************************************
+
+      Date: 03/27/2026      Time: 00:31:26
+      ___________________________________________________
+     |                                                   |
+     |  LS-DYNA, A Program for Nonlinear Dynamic         |
+     |  Analysis of Structures in Three Dimensions       |
+     |  Date    : 10/01/2025    Time: 13:03:42           |
+     |  Version : smp d R16                              |
+     |  Revision: R16.1.1-20-g0c90cad538                 |
+     |  AnLicVer: 2025 R2 (20250506+dl-73-g4dde854)      |
+     |                                                   |
+     |  Features enabled in this version:                |
+     |    Shared Memory Parallel                         |
+     |    CESE CHEMISTRY EM ICFD STOCHASTIC_PARTICLES    |
+     |    FFTW (multi-dimensional FFTW Library)          |
+     |    ARPACK (nonsymmetric eigensolver library)      |
+     |    ANSYSLIC enabled                               |
+     |                                                   |
+     |  Platform   : Xeon64 System                       |
+     |  OS Level   : Linux 3.10.0 uum                    |
+     |  Compiler   : Intel Fortran Compiler 19.0 SSE2    |
+     |  Hostname   : eb89b044a692                        |
+     |  Precision  : Double precision (I8R8)             |
+     |                                                   |
+     |  Unauthorized use infringes Ansys Inc. copyrights |
+     |___________________________________________________|
+
+ &gt; i=input.k memory=20m
+Messages file /ansys_inc/v252/licensingclient/language/en-us/ansysli_msgs.xml does not exist.
+[license/info] Successfully checked out 1 of &quot;dyna_solver_core&quot;.
+[license/info] --&gt; Checkout ID: eb89b044a692-root-13-000003 (days left: 298)
+[license/info] --&gt; Customer ID: 0
+[license/info] Successfully started &quot;LSDYNA (Core-based License)&quot;.
+
+ Executing with ANSYS license
+
+ Command line options: i=input.k
+                       memory=20m
+
+ Input file: input.k
+
+ The native file format       : 64-bit small endian
+ Memory size from command line:    20000000
+
+ on UNIX computers note the following change:
+
+ ctrl-c interrupts ls-dyna and prompts for a sense  switch.
+ type the desired sense switch: sw1., sw2., etc. to continue
+ the execution.  ls-dyna will respond as explained in the users manual
+
+    type                      response
+   -----   ------------------------------------------------------------
+   quit    ls-dyna terminates.
+   stop    ls-dyna terminates.
+   sw1.    a restart file is written and ls-dyna terminates.
+   sw2.    ls-dyna responds with time and cycle numbers.
+   sw3.    a restart file is written and ls-dyna continues calculations.
+   sw4.    a plot state is written and ls-dyna continues calculations.
+   sw5.    ls-dyna enters interactive graphics phase.
+   swa.    ls-dyna flushes all output i/o buffers.
+   swb.    a dynain is written and ls-dyna continues calculations.
+   swc.    a restart and dynain are written and ls-dyna continues calculations.
+   swd.    a restart and dynain are written and ls-dyna terminates.
+   swe.    stop dynamic relaxation just as though convergence
+   endtime=time change the termination time
+   lpri    toggle implicit lin. alg. solver output on/off.
+   nlpr    toggle implicit nonlinear solver output on/off.
+   iter    toggle implicit output to d3iter database on/off.
+   prof    output timing data to messag and continue.
+   conv    force implicit nonlinear convergence for current time step.
+   ttrm    terminate implicit time step, reduce time step, retry time step.
+   rtrm    terminate implicit at end of current time step.
+
+
+ ********  notice  ********  notice  ********  notice  ********
+ *                                                            *
+ * This is the LS-DYNA Finite Element code.                   *
+ *                                                            *
+ * Neither LST nor the authors assume any responsibility for  *
+ * the validity, accuracy, or applicability of any results    *
+ * obtained from this system. Users must verify their own     *
+ * results.                                                   *
+ *                                                            *
+ * LST endeavors to make the LS-DYNA code as complete,        *
+ * accurate and easy to use as possible.                      *
+ * Suggestions and comments are welcomed.  Please report any  *
+ * errors encountered in either the documentation or results  *
+ * immediately to LST through your site focus.                *
+ *                                                            *
+ * Copyright (C) 1990-2021                                    *
+ * by Livermore Software Technology, LLC                      *
+ * All rights reserved                                        *
+ *                                                            *
+ ********  notice  ********  notice  ********  notice  ********
+
+ Beginning of keyword reader                                   03/27/26 00:31:32
+
+                                                               03/27/26 00:31:32
+ Open include file: taylor_bar_mesh.k
+
+ Memory required to process keyword     :     195795
+ Additional dynamic memory required     :    2200515
+
+
+ input of data is completed
+
+ initial kinetic energy = 0.18009957E+06
+
+ Memory required to begin solution      :     196K
+ Additional dynamically allocated memory:    2257K
+                                   Total:    2453K
+
+ initialization completed
+       1 t 0.0000E+00 dt 6.72E-08 flush i/o buffers            03/27/26 00:31:32
+       1 t 0.0000E+00 dt 6.72E-08 write d3plot file            03/27/26 00:31:32
+ cpu time per zone cycle............       844 nanoseconds
+ average cpu time per zone cycle....       916 nanoseconds
+ average clock time per zone cycle..      1114 nanoseconds
+
+ estimated total cpu time          =         0 sec (       0 hrs  0 mins)
+ estimated cpu time to complete    =         0 sec (       0 hrs  0 mins)
+ estimated total clock time        =         7 sec (       0 hrs  0 mins)
+ estimated clock time to complete  =         1 sec (       0 hrs  0 mins)
+ termination time                  = 8.000E-05
+      61 t 3.9737E-06 dt 5.73E-08 write d3plot file            03/27/26 00:31:32
+     168 t 7.9894E-06 dt 2.48E-08 write d3plot file            03/27/26 00:31:32
+     398 t 1.1989E-05 dt 1.29E-08 write d3plot file            03/27/26 00:31:32
+     831 t 1.5993E-05 dt 6.92E-09 write d3plot file            03/27/26 00:31:32
+    1528 t 1.9999E-05 dt 4.87E-09 write d3plot file            03/27/26 00:31:33
+    2504 t 2.3998E-05 dt 3.41E-09 write d3plot file            03/27/26 00:31:33
+    3765 t 2.7999E-05 dt 2.92E-09 write d3plot file            03/27/26 00:31:33
+    5000 t 3.1350E-05 dt 2.55E-09 flush i/o buffers            03/27/26 00:31:34
+    5259 t 3.2000E-05 dt 2.50E-09 write d3plot file            03/27/26 00:31:34
+    7020 t 3.5999E-05 dt 2.12E-09 write d3plot file            03/27/26 00:31:34
+    8909 t 3.9998E-05 dt 2.11E-09 write d3plot file            03/27/26 00:31:34
+   10000 t 4.2229E-05 dt 2.06E-09 flush i/o buffers            03/27/26 00:31:35
+   10865 t 4.3998E-05 dt 2.03E-09 write d3plot file            03/27/26 00:31:35
+   12851 t 4.8000E-05 dt 2.01E-09 write d3plot file            03/27/26 00:31:35
+   14898 t 5.1999E-05 dt 2.02E-09 write d3plot file            03/27/26 00:31:36
+   15000 t 5.2205E-05 dt 2.02E-09 flush i/o buffers            03/27/26 00:31:36
+   16946 t 5.5999E-05 dt 2.02E-09 write d3plot file            03/27/26 00:31:36
+   19018 t 6.0000E-05 dt 2.02E-09 write d3plot file            03/27/26 00:31:37
+   20000 t 6.1904E-05 dt 1.90E-09 flush i/o buffers            03/27/26 00:31:37
+   21101 t 6.3999E-05 dt 1.90E-09 write d3plot file            03/27/26 00:31:37
+   23112 t 6.7999E-05 dt 2.02E-09 write d3plot file            03/27/26 00:31:38
+   25000 t 7.1737E-05 dt 1.90E-09 flush i/o buffers            03/27/26 00:31:38
+   25130 t 7.1999E-05 dt 2.02E-09 write d3plot file            03/27/26 00:31:38
+   27207 t 7.5999E-05 dt 2.02E-09 write d3plot file            03/27/26 00:31:39
+   29235 t 8.0000E-05 dt 2.03E-09 write d3plot file            03/27/26 00:31:39
+
+ *** termination time reached ***
+   29235 t 8.0002E-05 dt 2.03E-09 write d3dump01 file          03/27/26 00:31:39
+   29235 t 8.0002E-05 dt 2.03E-09 write d3plot file            03/27/26 00:31:39
+
+ N o r m a l    t e r m i n a t i o n                          03/27/26 00:31:39
+
+ Memory required to complete solution   :     196K
+ Additional dynamically allocated memory:    2689K
+                                   Total:    2884K
+
+ T i m i n g   i n f o r m a t i o n
+                        CPU(seconds)   %CPU  Clock(seconds) %Clock
+  ----------------------------------------------------------------
+  Keyword Processing ... 1.4715E-02    0.20     1.4716E-02    0.11
+    KW Reading ......... 5.8290E-03    0.08     5.8300E-03    0.04
+    KW Writing ......... 2.7398E-03    0.04     2.7400E-03    0.02
+  Initialization ....... 1.1676E-01    1.59     6.0044E+00   45.30
+    Init Proc Phase 1 .. 5.4604E-02    0.74     5.5803E-02    0.42
+    Init Proc Phase 2 .. 1.0493E-03    0.01     1.6710E-03    0.01
+  Element processing ... 5.3087E+00   72.29     5.3090E+00   40.05
+    Solids ............. 5.0438E+00   68.69     5.0374E+00   38.00
+    Shells ............. 7.5261E-02    1.02     8.1529E-02    0.62
+    ISO Shells ......... 2.8345E-02    0.39     2.8385E-02    0.21
+    E Other ............ 1.2064E-01    1.64     1.2025E-01    0.91
+  Binary databases ..... 3.7918E-02    0.52     3.8085E-02    0.29
+  ASCII database ....... 4.5233E-01    6.16     4.5226E-01    3.41
+  Contact algorithm .... 6.7453E-02    0.92     6.7737E-02    0.51
+  Rigid Bodies ......... 1.2922E-01    1.76     1.2958E-01    0.98
+    Mass Scaling ....... 3.2042E-02    0.44     3.2475E-02    0.25
+    Update nodes ....... 3.0054E-02    0.41     3.0272E-02    0.23
+  Time step size ....... 3.5402E-02    0.48     3.5309E-02    0.27
+  Rigid wall ........... 1.0782E-01    1.47     1.0576E-01    0.80
+  Group force file ..... 3.0500E-02    0.42     3.0676E-02    0.23
+  Others ............... 7.4622E-02    1.02     7.4434E-02    0.56
+  Misc. 1 .............. 4.7742E-01    6.50     5.0281E-01    3.79
+    Scale Masses ....... 2.9351E-02    0.40     2.9385E-02    0.22
+    Force Constraints .. 2.9288E-02    0.40     2.9254E-02    0.22
+    Force to Accel ..... 1.1296E-01    1.54     1.1235E-01    0.85
+  Misc. 2 .............. 2.6114E-01    3.56     2.6085E-01    1.97
+    Geometry Update .... 1.6121E-01    2.20     1.5924E-01    1.20
+  Misc. 3 .............. 4.6387E-02    0.63     4.5986E-02    0.35
+  Misc. 4 .............. 1.8273E-01    2.49     1.8310E-01    1.38
+    Timestep Init ...... 7.6671E-02    1.04     7.6371E-02    0.58
+    Apply Loads ........ 4.3574E-02    0.59     4.3056E-02    0.32
+  ----------------------------------------------------------------
+  T o t a l s            7.3431E+00  100.00     1.3255E+01  100.00
+
+ Problem time       =    8.0002E-05
+ Problem cycle      =     29235
+ Total CPU time     =         7 seconds (   0 hours  0 minutes  7 seconds)
+ CPU time per zone cycle  =        320.778 nanoseconds
+ Clock time per zone cycle=        321.843 nanoseconds
+
+ Number of CPU&#39;s    1
+ NLQ used/max     192/  192
+ Start time   03/27/2026 00:31:32
+ End time     03/27/2026 00:31:39
+ Elapsed time       7 seconds for   29235 cycles using  1 SMP thread
+             (      0 hour   0 minute   7 seconds)
+
+ N o r m a l    t e r m i n a t i o n                          03/27/26 00:31:39
+
+Text(0, 0.5, &#39;Energy (mJ)&#39;)
+</pre></div>
+</div>
+</section>
+<section id="generate-graphical-output">
+<h2>Generate graphical output<a class="headerlink" href="#generate-graphical-output" title="Link to this heading">#</a></h2>
+<p>etc etc</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="matplotlib.pyplot.show" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_taylor_bar_002.png" srcset="../../_images/sphx_glr_plot_taylor_bar_002.png" alt="plot taylor bar" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (2 minutes 13.915 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-taylor-bar-plot-taylor-bar-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/5b3a42d02dbec0becdc85a52c97525ce/plot_taylor_bar.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_taylor_bar.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/6601b79ce84d0cdf858d4e5b1c71dda0/plot_taylor_bar.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_taylor_bar.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/54fc6cfa75d7d2fb192151bb7cf06a87/plot_taylor_bar.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">plot_taylor_bar.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-required-imports">Perform required imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-deck-and-keywords">Create a deck and keywords</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-dyna-solver-function">Define the Dyna solver function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-dpf-output-function">Define the DPF output function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#view-the-model">View the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-a-parametric-solve">Run a parametric solve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-graphical-output">Generate graphical output</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+
+  
+  <nav class="tocsection editthispage" aria-label="Edit this page">
+    <a href="https://github.com/ansys/pydyna/edit/main/doc/source/examples/Taylor_Bar/plot_taylor_bar.rst" rel="noopener noreferrer">
+      <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </nav>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/examples/Taylor_Bar/plot_taylor_bar.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<!--
+  Theme Version Footer
+  Displays the Sphinx theme version and the last updated date.
+  Accessibility and semantic improvements included.
+-->
+<footer class="theme-version" aria-label="Theme version and last update">
+  <span>
+    
+      Built with the
+      <a href="https://sphinxdocs.ansys.com/version/stable/index.html" target="_blank" rel="noopener noreferrer">
+        Ansys Sphinx Theme
+      </a>
+      1.7.2.
+    
+  </span>
+  <br />
+  <span>Last updated on <time id="ast_build_date"></time></span>
+</footer>
+<script>
+  // Set the last updated date in a readable format
+  (function() {
+    var options = { day: "numeric", month: "long", year: "numeric" };
+    var ast_lastModifiedDate = new Date(document.lastModified);
+    var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+    var dateElem = document.getElementById("ast_build_date");
+    if (dateElem) {
+      dateElem.textContent = ast_build_date;
+    }
+  })();
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

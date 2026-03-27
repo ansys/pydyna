@@ -1,0 +1,176 @@
+ansys.dyna.core.lib.kwd_line_formatter.FormatSpec
+=================================================
+
+.. py:class:: ansys.dyna.core.lib.kwd_line_formatter.FormatSpec(items: Tuple[Tuple[int, int, type], Ellipsis], _precomputed_hash: Optional[int] = None)
+
+   
+   Immutable, hashable specification for parsing fixed-width data lines.
+
+   This class wraps the format specification (list of offset, width, type tuples)
+   and caches computed properties like expanded spec and dataclass detection.
+
+   Using a class instead of raw tuples allows functools.lru_cache to work
+   efficiently on functions that take specs as arguments.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: __slots__
+      :value: ('_items', '_hash', '_expanded', '_has_dataclass')
+
+
+
+   .. py:method:: from_list(spec_list: List[tuple]) -> FormatSpec
+      :classmethod:
+
+
+      
+      Create FormatSpec from a list of (offset, width, type) tuples.
+
+      Results are cached by hash to avoid creating duplicate FormatSpec objects.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: from_fields(fields) -> FormatSpec
+      :classmethod:
+
+
+      
+      Create FormatSpec from a list of Field objects.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __hash__() -> int
+
+
+   .. py:method:: __eq__(other) -> bool
+
+
+   .. py:method:: __iter__()
+
+
+   .. py:method:: __len__() -> int
+
+
+   .. py:property:: expanded
+      :type: Tuple
+
+
+      
+      Get expanded spec, unpacking any dataclass fields.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: has_dataclass
+      :type: bool
+
+
+      
+      Check if any field type is a dataclass.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: contract_data(data: List) -> Tuple
+
+      
+      Contract expanded data back, packing dataclass fields into instances.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

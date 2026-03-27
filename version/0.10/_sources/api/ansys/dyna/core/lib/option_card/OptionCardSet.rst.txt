@@ -1,0 +1,266 @@
+ansys.dyna.core.lib.option_card.OptionCardSet
+=============================================
+
+.. py:class:: ansys.dyna.core.lib.option_card.OptionCardSet(option_spec: OptionSpec, cards: List[ansys.dyna.core.lib.card_interface.CardInterface], **kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.card_interface.CardInterface`
+
+
+   
+   Represents a set of option cards associated with an OptionSpec.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: cards
+      :type: List[ansys.dyna.core.lib.card_interface.CardInterface]
+
+
+      
+      Get the list of cards in this OptionCardSet.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: option_spec
+      :type: OptionSpec
+
+
+      
+      Get the OptionSpec associated with this OptionCardSet.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: name
+      :type: str
+
+
+      
+      Get the name of the option.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: title_order
+      :type: int
+
+
+      
+      Get the title order of the option.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: card_order
+      :type: int
+
+
+      
+      Get the card order of the option.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: active
+      :type: bool
+
+
+      
+      Indicates whether the option is active.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: format
+      :type: ansys.dyna.core.lib.format_type.format_type
+
+
+      
+      Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __hash__()
+
+
+   .. py:method:: __lt__(other: OptionCardSet)
+
+
+   .. py:method:: read(buf: TextIO, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet = None) -> bool
+
+      
+      Read from buf.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(format: Optional[ansys.dyna.core.lib.format_type.format_type] = None, buf: Optional[TextIO] = None, comment: Optional[bool] = True, **kwargs) -> Union[str, None]
+
+      
+      Renders the card in the dyna keyword format.
+      :param buf: Buffer to write to. If None, the output is returned as a string
+      :param format: format_type to use. Default to standard.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

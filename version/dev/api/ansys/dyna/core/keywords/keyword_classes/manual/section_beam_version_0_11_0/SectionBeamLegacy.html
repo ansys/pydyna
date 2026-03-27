@@ -1,0 +1,1065 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../../../../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../../../../../../../_static/documentation_options.js?v=142dd74e"></script>
+    <script src="../../../../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../../../../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/ansys/dyna/core/keywords/keyword_classes/manual/section_beam_version_0_11_0/SectionBeamLegacy';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../../../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../../../search.html" />
+    <link rel="next" title="ansys.dyna.core.keywords.keyword_classes.manual.section_solid_version_0_11_0" href="../section_solid_version_0_11_0/index.html" />
+    <link rel="prev" title="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0" href="index.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.12.dev0" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="Structures" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/api/ansys/dyna/core/keywords/keyword_classes/manual/section_beam_version_0_11_0/SectionBeamLegacy.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are removed in version v0.11.0.</div>
+</aside>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../../../../../../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../../../../../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    
+<!--
+  Announcement Version Loader
+  Dynamically loads the announcement.html content into the announcement_msg div.
+-->
+<div id="announcement_msg" aria-live="polite"></div>
+<script>
+  // Fetch and inject the announcement HTML content
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status} Announcement.html file not found, Please ignore this, if you are in dev/stable documentation`);
+      }
+      return response.text();
+    })
+    .then((text) => {
+      var msgDiv = document.getElementById("announcement_msg");
+      if (msgDiv) {
+        msgDiv.innerHTML = text;
+      }
+    })
+    .catch((error) => {
+      // Log only unexpected fetch errors
+      if (!(error.message && error.message.startsWith("HTTP error: 404"))) {
+        console.error(`Fetch problem: ${error.message} Announcement.html could not be loaded.`);
+      }
+    });
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../../../../../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../../../index.html"><span class="nf nf-md-package"></span> ansys.dyna.core</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../__main__/index.html">ansys.dyna.core.__main__</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../../../index.html">ansys.dyna.core.keywords</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="../../index.html">ansys.dyna.core.keywords.keyword_classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4 current active"><a class="reference internal" href="../index.html">ansys.dyna.core.keywords.keyword_classes.manual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../manual_keywords/index.html">ansys.dyna.core.keywords.keyword_classes.manual_keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../type_mapping/index.html">ansys.dyna.core.keywords.keyword_classes.type_mapping</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../lib/index.html">ansys.dyna.core.lib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../run/index.html">ansys.dyna.core.run</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../../_autosummary/index.html"><span class="nf nf-md-package"></span> Auto Keyword classes</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../../../../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../../../../../index.html" class="nav-link">API reference</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../../index.html" class="nav-link">ansys.dyna.core</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../index.html" class="nav-link">ansys.dyna.core.keywords</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../index.html" class="nav-link">ansys.dyna.core.keywords.keyword_classes</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../index.html" class="nav-link">ansys.dyna.core.keywords.keyword_classes.manual</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="ansys-dyna-core-keywords-keyword-classes-manual-section-beam-version-0-11-0-sectionbeamlegacy">
+<h1>ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy<a class="headerlink" href="#ansys-dyna-core-keywords-keyword-classes-manual-section-beam-version-0-11-0-sectionbeamlegacy" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.</span></span><span class="sig-name descname"><span class="pre">SectionBeamLegacy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../../../../lib/keyword_base/KeywordBase.html#ansys.dyna.core.lib.keyword_base.KeywordBase" title="ansys.dyna.core.lib.keyword_base.KeywordBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.keyword_base.KeywordBase</span></code></a></p>
+<p>Legacy DYNA SECTION_BEAM keyword (pydyna 0.11.0 API).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.keyword">
+<span class="sig-name descname"><span class="pre">keyword</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SECTION'</span></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.keyword" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.subkeyword">
+<span class="sig-name descname"><span class="pre">subkeyword</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'BEAM'</span></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.subkeyword" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.option_specs">
+<span class="sig-name descname"><span class="pre">option_specs</span></span><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.option_specs" title="Link to this definition">#</a></dt>
+<dd><p>Gets all option specs for this keyword.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.secid">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">secid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.secid" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Section ID. SECID is referenced on the <a href="#id1"><span class="problematic" id="id2">*</span></a>PART card and must be unique.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.elform">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">elform</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.elform" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Element formulation options:
+EQ.1: Hughes-Liu with cross section integration (default),
+EQ.2: Belytschko-Schwer resultant beam (resultant),
+EQ.3: truss (resultant),
+EQ.4: Belytschko-Schwer full cross-section integration,
+EQ.5: Belytschko-Schwer tubular beam with cross-section integration,
+EQ.6: discrete beam/cable,
+EQ.7: 2D plane strain shell element (xy plane),
+EQ.8: 2D axisymmetric volume weighted shell element (xy plane),
+EQ.9: spotweld beam, see <a href="#id3"><span class="problematic" id="id4">*</span></a>MAT_SPOTWELD (Type 100).
+Note that the 2D and 3D element types must bot be mixed and different types of 2D elements must not be used together. For example, the plane strain element type must not be used with the axisymmetric element type. In 3D the different beam elements types, i.e., 1-6 and 9 can be freely mixed together.
+EQ.11: Integrated warped beam.
+EQ.12: resultant warped beam
+EQ.13: Small displacement, linear Timoshenko beam with exact stiffness.
+EQ.14: Integrated tubular Elbow element. User defined integration rule with tubular cross section (9) must be used.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.shrf">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shrf</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.shrf" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Shear factor. This factor is not needed for truss, resultant beam, discrete beam, and cable elements. The recommended value for rectangular sections is 5/6, the default is 1.0.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.qr_irid">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">qr_irid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.qr_irid" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Quadrature rule or rule number for user defined rule for integrated beams:
+EQ.1: one integration point,
+EQ.2: 2x2 Gauss quadrature (default beam),
+EQ.3: 3x3 Gauss quadrature,
+EQ.4: 3x3 Lobatto quadrature,
+EQ.5: 4x4 Gauss quadrature,
+EQ.-n: where <a href="#id25"><span class="problematic" id="id26">|n|</span></a> is the number of the user defined rule. IRID integration rule n is defined using <a href="#id5"><span class="problematic" id="id6">*</span></a>INTEGRATION_BEAM card.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.cst">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cst</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.cst" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Cross section type, not needed for truss, resultant beam, discrete beam, and cable elements:
+EQ.0: rectangular (default),
+EQ.1: tubular,
+EQ.2: arbitrary (user defined integration rule).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.scoor">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scoor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.scoor" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Location of triad for tracking the rotation of the discrete beam element. The force and moment resultants in the output databases are referenced to this triad:
+EQ.-1.0: beam node 1, the angular velocity of node 1 rotates triad,
+EQ. 0.0: centered between beam nodes 1 and 2, the average angular velocity of nodes 1 and 2 is used to rotate the triad (default),
+EQ.+1.0: beam node 2, the angular velocity of node 2 rotates triad.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.nsm">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nsm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.nsm" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Nonstructural mass per unit length.  This option applies to beam types 1-5 and does not apply to discrete, 2D, and spotweld beams, respectively.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.naupd">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">naupd</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.naupd" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Neutral axis update option.  See Remark 11.
+EQ. 0:  Not used
+EQ.1.0:         Update the neutral axis when damage or failure occurs at  one or more integration points.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ts1">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ts1</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ts1" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s-direction at node n1. Note that the thickness defined on the <a href="#id7"><span class="problematic" id="id8">*</span></a>ELEMENT_BEAM_THICKNESS card overrides the definition give here.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ts2">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ts2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ts2" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s-direction at node n2 .</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.tt1">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tt1</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.tt1" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t-direction at node n1.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.tt2">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tt2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.tt2" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t-direction at node n2 .</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.nsloc">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nsloc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.nsloc" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Location of reference surface normal to s axis for Hughes-Liu beam elements only:
+EQ.1.0: side at s=1,
+EQ.0.0: center (default),
+EQ.-1.0: side at s=-1.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ntloc">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ntloc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ntloc" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Location of reference surface normal to t axis for Hughes-Liu beam elements only:
+EQ.1.0: side at t=,
+EQ.0.0: center (default),
+EQ.-1: side at t=-1.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.a">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">a</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.a" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Cross-sectional area. The definition on <a href="#id9"><span class="problematic" id="id10">*</span></a>ELEMENT_BEAM_THICKNESS overrides the value defined here.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.iss">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iss</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.iss" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Iss . The definition on <a href="#id11"><span class="problematic" id="id12">*</span></a>ELEMENT_BEAM_THICKNESS overrides the value defined here.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.itt">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">itt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.itt" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Itt . The definition on <a href="#id13"><span class="problematic" id="id14">*</span></a>ELEMENT_BEAM_THICKNESS overrides the value defined here.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.j">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">j</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.j" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the J, torsional constant. The definition on <a href="#id15"><span class="problematic" id="id16">*</span></a>ELEMENT_BEAM_THICKNESS overrides the value defined here. If J is zero, then J is reset to the sum of ISS+ITT as an approximation.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.sa">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sa</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.sa" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Shear area. The definition on <a href="#id17"><span class="problematic" id="id18">*</span></a>ELEMENT_BEAM_THICKNESS overrides the value defined here.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ist">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ist</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ist" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ist, product moment of inertia w.r.t. local s- and t-axis. This is only nonzero for unsymmetric cross sections and it can take positive and negative values, e.g. it is negative for SECTION_03.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.rampt">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rampt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.rampt" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Optional ramp-up time for dynamic relaxation.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.stress">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stress</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.stress" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Optional initial stress for dynamic relaxation</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.vol">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vol</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.vol" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Volume of discrete beam. If the mass density of the material model for the discrete beam is set to unity, the magnitude of the lumped mass can be defined here instead. This lumped mass is partitioned to the two nodes of the beam element. The translational time step size for the type 6 beam is dependent on the volume, mass density, and the translational stiffness values, so it is important to define this parameter. Defining the volume is also essential for mass scaling if the type 6 beam controls the time step size.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.iner">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iner</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.iner" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the I, lumped inertia of discrete beam which have six degrees of freedom. This lumped inertia is partitioned to the two nodes of the beam element. The rotational time step size for the type 6 beam is dependent on the lumped inertia and the rotational stiffness values, so it is important to define this parameter if the rotational springs are active. Defining the rotational inertia is also essential for mass scaling if the type 6 beam rotational stiffness controls the time step size.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.cid">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.cid" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Coordinate system ID for orientation, materials type ID (66-69, 93 and 95), see <a href="#id19"><span class="problematic" id="id20">*</span></a>DEFINE_COORDINATE. If CID=0, a default coordinate system is defined in the global system or on the third node of the beam, which is used for orientation. This is not defined for cable elements. The coordinate system rotates with the discrete beam, see SCOOR above.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ca">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ca</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ca" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Cable area, materials type ID 71, <a href="#id21"><span class="problematic" id="id22">*</span></a>MAT_CABLE.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.offset">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">offset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.offset" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Offset for cable. For a definition see materials type ID 71, <a href="#id23"><span class="problematic" id="id24">*</span></a>MAT_CABLE.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.rrcon">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rrcon</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.rrcon" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the r-rotational constraint for local coordinate system:
+EQ.0.0: Coordinate ID rotates about r axis with nodes (default),
+EQ.1.0: Rotation is constrained about the r-axis</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.srcon">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">srcon</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.srcon" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the s-rotational constraint for local coordinate system:
+EQ.0.0: Coordinate ID rotates about s axis with nodes (default),
+EQ.1.0: Rotation is constrained about the s-axis</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.trcon">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">trcon</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.trcon" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the t-rotational constraint for local coordinate system:
+EQ.0.0: Coordinate ID rotates about t axis with nodes (default),
+EQ.1.0: Rotation is constrained about the t-axis</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.print">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.print" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Output spot force resultant from spotwelds.
+EQ.0.0: Data is output to SWFORC file.
+EQ.1.0: Output is suppressed.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.itoff">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">itoff</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.itoff" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Option to specify torsional behavior for spot weld beams.
+EQ.0.0: Torsional stiffness is active.
+EQ.1.0 : Torsional stiffness is zero(free to twist).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.title">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.title" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Additional title line</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.cid_link">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cid_link</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system.DefineCoordinateSystem</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.cid_link" title="Link to this definition">#</a></dt>
+<dd><p>Get the DefineCoordinateSystem object for cid.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.keyword"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.keyword</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.subkeyword"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.subkeyword</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.option_specs"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.option_specs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.secid"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.secid</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.elform"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.elform</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.shrf"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.shrf</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.qr_irid"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.qr_irid</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.cst"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.cst</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.scoor"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.scoor</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.nsm"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.nsm</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.naupd"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.naupd</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ts1"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ts1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ts2"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ts2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.tt1"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.tt1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.tt2"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.tt2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.nsloc"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.nsloc</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ntloc"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ntloc</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.a"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.a</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.iss"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.iss</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.itt"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.itt</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.j"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.j</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.sa"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.sa</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ist"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ist</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.rampt"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.rampt</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.stress"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.stress</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.vol"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.vol</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.iner"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.iner</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.cid"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.cid</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ca"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.ca</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.offset"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.offset</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.rrcon"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.rrcon</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.srcon"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.srcon</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.trcon"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.trcon</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.print"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.print</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.itoff"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.itoff</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.title"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.title</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.cid_link"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy.cid_link</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+
+  
+  <nav class="tocsection editthispage" aria-label="Edit this page">
+    <a href="http://github.com/ansys/pydyna/edit/main/ansys/dyna/core/keywords/keyword_classes/manual/section_beam_version_0_11_0/SectionBeamLegacy.py" rel="noopener noreferrer">
+      <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </nav>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../../../../../../../_sources/api/ansys/dyna/core/keywords/keyword_classes/manual/section_beam_version_0_11_0/SectionBeamLegacy.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../../../../../../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../../../../../../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../../../../../../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<!--
+  Theme Version Footer
+  Displays the Sphinx theme version and the last updated date.
+  Accessibility and semantic improvements included.
+-->
+<footer class="theme-version" aria-label="Theme version and last update">
+  <span>
+    
+      Built with the
+      <a href="https://sphinxdocs.ansys.com/version/stable/index.html" target="_blank" rel="noopener noreferrer">
+        Ansys Sphinx Theme
+      </a>
+      1.7.2.
+    
+  </span>
+  <br />
+  <span>Last updated on <time id="ast_build_date"></time></span>
+</footer>
+<script>
+  // Set the last updated date in a readable format
+  (function() {
+    var options = { day: "numeric", month: "long", year: "numeric" };
+    var ast_lastModifiedDate = new Date(document.lastModified);
+    var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+    var dateElem = document.getElementById("ast_build_date");
+    if (dateElem) {
+      dateElem.textContent = ast_build_date;
+    }
+  })();
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

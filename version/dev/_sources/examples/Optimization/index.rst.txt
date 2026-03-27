@@ -1,0 +1,47 @@
+
+
+.. _sphx_glr_examples_Optimization:
+
+Optimization
+=================
+
+This example demonstrates how to optimize the thickness of a plate using PyDYNA.
+
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Plate Thickness Optimization">
+
+.. only:: html
+
+  .. image:: /examples/Optimization/images/thumb/sphx_glr_Plate_Thickness_Optimization_thumb.png
+    :alt:
+
+  :doc:`/examples/Optimization/Plate_Thickness_Optimization`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Plate Thickness Optimization</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/Optimization/Plate_Thickness_Optimization
+
