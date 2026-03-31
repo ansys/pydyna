@@ -3577,5 +3577,149 @@
         "labels": {
             "temperature_coefficients_card": 3
         }
+    },
+    "CONTACT_AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g1c_card"
+                },
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g2c_card"
+                }
+            ]
+        },
+        "labels": {
+            "g1c_card": 4,
+            "g2c_card": 5
+        }
+    },
+    "CONTACT_AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g1c_card"
+                },
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g2c_card"
+                }
+            ]
+        },
+        "labels": {
+            "g1c_card": 4,
+            "g2c_card": 5
+        }
+    },
+    "CONTACT_AUTOMATIC_SINGLE_SURFACE_TIEBREAK": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g1c_card"
+                },
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g2c_card"
+                }
+            ]
+        },
+        "labels": {
+            "g1c_card": 4,
+            "g2c_card": 5
+        }
+    },
+    "CONTACT_AUTOMATIC_SINGLE_SURFACE_TIEBREAK_BEAM_OFFSET": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g1c_card"
+                },
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g2c_card"
+                }
+            ]
+        },
+        "labels": {
+            "g1c_card": 4,
+            "g2c_card": 5
+        }
+    },
+    "CONTACT_AUTOMATIC_GENERAL_TIEBREAK": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g1c_card"
+                },
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g2c_card"
+                }
+            ]
+        },
+        "labels": {
+            "g1c_card": 4,
+            "g2c_card": 5
+        }
+    },
+    "CONTACT_AUTOMATIC_GENERAL_TIEBREAK_BEAM_OFFSET": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g1c_card"
+                },
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g2c_card"
+                }
+            ]
+        },
+        "labels": {
+            "g1c_card": 4,
+            "g2c_card": 5
+        }
+    },
+    "CONTACT_AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK_DAMPING": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g1c_card"
+                },
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g2c_card"
+                }
+            ]
+        },
+        "labels": {
+            "g1c_card": 5,
+            "g2c_card": 6
+        }
+    },
+    "CONTACT_AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK_DAMPING": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g1c_card"
+                },
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g2c_card"
+                }
+            ]
+        },
+        "labels": {
+            "g1c_card": 5,
+            "g2c_card": 6
+        }
     }
 }
