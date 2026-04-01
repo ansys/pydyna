@@ -87,6 +87,7 @@ _{{keyword_data.classname | upper}}_OPTION{{option_loop.index0}}_CARD{{loop.inde
 {% endfor %}
 {# Option card properties #}
 {% if keyword_data.options %}
+{% set activate_target = "self" %}
 {% for option in keyword_data.options %}
 {% include 'keyword/option_card_properties.j2' %}
 {% endfor %}

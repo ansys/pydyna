@@ -29,7 +29,7 @@ import typing
 from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.format_type import format_type
-from ansys.dyna.core.lib.option_card import OptionsInterface
+from ansys.dyna.core.lib.option_card import OptionsInterface, OptionSpec
 from ansys.dyna.core.lib.parameters import ParameterSet
 
 # protected due to circular import
@@ -209,6 +209,22 @@ class KeywordBase(Cards, OptionsInterface):
             return
         title_list = title.split("_")
         self._try_activate_options(title_list)
+
+    def get_option_spec(self, name: str) -> OptionSpec:
+        """Gets the option spec for the given name."""
+        for option_spec in self.option_specs:
+            if option_spec.name == name:
+                return option_spec
+        raise Exception(f"No option spec with name `{name}` found")
+
+    @property
+    def option_specs(self) -> typing.Iterable[OptionSpec]:
+        """Gets all option specs by scanning the card list."""
+        for card in self._cards:
+            if hasattr(card, "option_spec"):
+                yield card.option_spec
+            elif hasattr(card, "option_specs"):
+                yield from card.option_specs
 
     # -- end OptionsInterface implementation --
 
