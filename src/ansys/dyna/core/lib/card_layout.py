@@ -60,9 +60,7 @@ def get_post_options_with_no_title_order(cards: typing.List[CardInterface]) -> t
     return [o for o in option_cards if o.position.placement == CardPlacement.POST]
 
 
-def get_active_options(
-    cards: typing.List[CardInterface], options_api: OptionsInterface
-) -> typing.List[OptionCardSet]:
+def get_active_options(cards: typing.List[CardInterface], options_api: OptionsInterface) -> typing.List[OptionCardSet]:
     """Return active option card sets, sorted by position."""
     option_cards = get_sorted_option_cards(cards)
     return [o for o in option_cards if options_api.is_option_active(o.name)]
@@ -103,9 +101,7 @@ def get_main_option_cards_by_index(
     return by_index
 
 
-def get_all_cards(
-    cards: typing.List[CardInterface], options_api: OptionsInterface
-) -> typing.List[CardInterface]:
+def get_all_cards(cards: typing.List[CardInterface], options_api: OptionsInterface) -> typing.List[CardInterface]:
     """Assemble the full card sequence with active option cards interleaved.
 
     Layout order: PRE options, then non-option cards with MAIN options
