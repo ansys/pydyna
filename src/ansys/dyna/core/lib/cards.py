@@ -30,23 +30,20 @@ from ansys.dyna.core.lib.card_position import CardPlacement
 from ansys.dyna.core.lib.card_writer import write_cards
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.kwd_line_formatter import read_line
-from ansys.dyna.core.lib.option_card import OptionCardSet, Options, OptionsInterface, OptionSpec
+from ansys.dyna.core.lib.option_card import OptionCardSet, Options, OptionSpec
 from ansys.dyna.core.lib.parameters import ParameterSet
 
 if typing.TYPE_CHECKING:
     from ansys.dyna.core.lib.import_handler import ImportContext
 
 
-class Cards(OptionsInterface):
+class Cards:
+    """Base class for card containers with I/O."""
+
     def __init__(self, keyword):
         self._cards = []
-
-        # The instance of "Cards" may be part of a card set or it may be the keyword itself
-        # Though OptionsInterface is implemented here, the API for options should come from
-        # The keyword if it is a card set. # TODO - can this be improved?
-        self._keyword = keyword  # Reference to parent keyword (for CardSet items) or self (for KeywordBase)
+        self._keyword = keyword
         self._options = Options(keyword)
-        self._active_options: typing.Set[str] = set()
 
     @staticmethod
     def _enrich_warning_with_context(message: str, import_context: typing.Optional["ImportContext"] = None) -> str:
@@ -78,7 +75,7 @@ class Cards(OptionsInterface):
             return f"[{location}] {message}"
         return message
 
-    # options API interface implementation
+    # -- option helpers (state is owned by KeywordBase) --
 
     @property
     def parameter_set(self) -> typing.Optional[ParameterSet]:
@@ -99,28 +96,16 @@ class Cards(OptionsInterface):
         return self._options
 
     def is_option_active(self, option: str) -> bool:
-        """Returns True if the given option is active."""
-        return option in self._active_options
+        """Delegate to the keyword that owns option state."""
+        return self._keyword.is_option_active(option)
 
     def activate_option(self, option: str) -> None:
-        """Activate the given option."""
-        self._active_options.add(option)
+        """Delegate to the keyword that owns option state."""
+        self._keyword.activate_option(option)
 
     def deactivate_option(self, option: str) -> None:
-        """Deactivate the given option."""
-        if option in self._active_options:
-            self._active_options.remove(option)
-
-    def _try_activate_options(self, names: typing.List[str]) -> None:
-        for option in self.option_specs:
-            if option.name in names:
-                self.activate_option(option.name)
-
-    def _activate_options(self, title: str) -> None:
-        if self.options is None:
-            return
-        title_list = title.split("_")
-        self._try_activate_options(title_list)
+        """Delegate to the keyword that owns option state."""
+        self._keyword.deactivate_option(option)
 
     def get_option_spec(self, name: str) -> OptionSpec:
         """Gets the option spec for the given name."""
@@ -140,7 +125,7 @@ class Cards(OptionsInterface):
                 for option_spec in card.option_specs:
                     yield option_spec
 
-    # end options API interface implementation
+    # -- end option helpers --
 
     @property
     def _cards(self) -> typing.List[CardInterface]:

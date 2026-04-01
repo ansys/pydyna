@@ -101,7 +101,7 @@ class OptionCardSet(CardInterface):
         **kwargs,
     ):
         """Initialize an OptionCardSet with the given OptionSpec and cards."""
-        self._keyword: typing.Any = kwargs.get("keyword", None)
+        self._keyword: typing.Optional["OptionsInterface"] = kwargs.get("keyword", None)
         self._option_spec = option_spec
         self._cards: typing.List[CardInterface] = cards
         self._format_type: format_type = kwargs.get("format", format_type.default)
@@ -134,11 +134,15 @@ class OptionCardSet(CardInterface):
     @property
     def active(self) -> bool:
         """Indicates whether the option is active."""
+        if self._keyword is None:
+            return False
         return self._keyword.is_option_active(self.name)
 
     @active.setter
     def active(self, value: bool) -> None:
         """Set the option active or inactive."""
+        if self._keyword is None:
+            raise RuntimeError("Cannot set option active state without a keyword reference")
         if value:
             self._keyword.activate_option(self.name)
         else:
