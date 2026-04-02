@@ -216,7 +216,7 @@ class SectionTshellCardSet(Cards):
         self._cards[2].cards[0].set_value("title", value)
 
         if value:
-            self.activate_option("TITLE")
+            self._keyword.activate_option("TITLE")
 
     @property
     def parent(self) -> KeywordBase:

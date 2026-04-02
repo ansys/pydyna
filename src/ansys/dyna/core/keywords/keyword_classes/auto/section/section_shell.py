@@ -533,7 +533,7 @@ class SectionShellCardSet(Cards):
         self._cards[6].cards[0].set_value("thkscl", value)
 
         if value:
-            self.activate_option("THKSCL")
+            self._keyword.activate_option("THKSCL")
 
     @property
     def parent(self) -> KeywordBase:
