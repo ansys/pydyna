@@ -33,7 +33,7 @@ dependencies = [
     "pandas>=2.0",
     "appdirs>=1.4.4",
     "transformations==2025.1.1",
-    "chardet==7.3.0",
+    "chardet==7.4.0.post1",
     "requests==2.33.0",
     "docker==7.1.0",
 ]
