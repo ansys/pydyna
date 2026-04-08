@@ -230,10 +230,12 @@ class ContactAutomaticOneWaySurfaceToSurfaceTiebreak(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _CONTACTAUTOMATICONEWAYSURFACETOSURFACETIEBREAK_CARD4,
+                active_func=lambda: self.option in [13, 14],
                 **kwargs,
             ),
             Card.from_field_schemas_with_defaults(
                 _CONTACTAUTOMATICONEWAYSURFACETOSURFACETIEBREAK_CARD5,
+                active_func=lambda: self.option in [13, 14],
                 **kwargs,
             ),
             OptionCardSet(

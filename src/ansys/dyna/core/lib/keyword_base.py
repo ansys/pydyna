@@ -29,6 +29,7 @@ import typing
 from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.format_type import format_type
+from ansys.dyna.core.lib.option_card import OptionsInterface, OptionSpec
 from ansys.dyna.core.lib.parameters import ParameterSet
 
 # protected due to circular import
@@ -108,8 +109,12 @@ class LinkType(enum.Enum):
     """Reference to either DEFINE_CURVE or DEFINE_TABLE (polymorphic)."""
 
 
-class KeywordBase(Cards):
+class KeywordBase(Cards, OptionsInterface):
     """Base class for all keywords.
+
+    ``KeywordBase`` is the sole owner of option activation state
+    (``_active_options``).  Card-set items that inherit from ``Cards``
+    delegate option queries back to the keyword through ``_keyword``.
 
     Derived class must provide::
         - _cards
@@ -118,12 +123,13 @@ class KeywordBase(Cards):
     """
 
     def __init__(self, **kwargs):
+        self._active_options: typing.Set[str] = set()
         super().__init__(self)
         self.user_comment = kwargs.get("user_comment", "")
         self._format_type: format_type = kwargs.get("format", format_type.default)
         self._deck = None
         self._included_from = None
-        self._parameter_set: typing.Optional[ParameterSet] = None  # Stored for write-time ref lookup
+        self._parameter_set: typing.Optional[ParameterSet] = None
 
     @property
     def deck(self) -> typing.Optional["Deck"]:
@@ -177,6 +183,50 @@ class KeywordBase(Cards):
         if kwd == subkwd:
             return f"{kwd}"
         return f"{kwd}_{subkwd}"
+
+    # -- OptionsInterface implementation (option state lives here) --
+
+    def is_option_active(self, option: str) -> bool:
+        """Returns True if the given option is active."""
+        return option in self._active_options
+
+    def activate_option(self, option: str) -> None:
+        """Activate the given option."""
+        self._active_options.add(option)
+
+    def deactivate_option(self, option: str) -> None:
+        """Deactivate the given option."""
+        if option in self._active_options:
+            self._active_options.remove(option)
+
+    def _try_activate_options(self, names: typing.List[str]) -> None:
+        for option in self.option_specs:
+            if option.name in names:
+                self.activate_option(option.name)
+
+    def _activate_options(self, title: str) -> None:
+        if self.options is None:
+            return
+        title_list = title.split("_")
+        self._try_activate_options(title_list)
+
+    def get_option_spec(self, name: str) -> OptionSpec:
+        """Gets the option spec for the given name."""
+        for option_spec in self.option_specs:
+            if option_spec.name == name:
+                return option_spec
+        raise Exception(f"No option spec with name `{name}` found")
+
+    @property
+    def option_specs(self) -> typing.Iterable[OptionSpec]:
+        """Gets all option specs by scanning the card list."""
+        for card in self._cards:
+            if hasattr(card, "option_spec"):
+                yield card.option_spec
+            elif hasattr(card, "option_specs"):
+                yield from card.option_specs
+
+    # -- end OptionsInterface implementation --
 
     def get_title(self, format_symbol: str = "") -> str:
         """Get the title of this keyword."""

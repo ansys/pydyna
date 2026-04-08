@@ -108,6 +108,7 @@ class {{card_set.name}}(Cards):
 {% endfor %}{# shared in card_set.shared_fields #}
 {% endif %}{# card_set.shared_fields #}
 {% if card_set.options %}
+{% set activate_target = "self._keyword" %}
 {% for option in card_set.options %}
 {% include 'keyword/option_card_properties.j2' %}
 {% endfor %}{# option in card_set.options #}
