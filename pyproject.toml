@@ -34,8 +34,8 @@ dependencies = [
     "pandas>=2.0",
     "appdirs>=1.4.4",
     "transformations==2025.1.1",
-    "chardet==7.1.0",
-    "requests==2.32.5",
+    "chardet==7.3.0",
+    "requests==2.33.0",
     "docker==7.1.0",
 ]
 
@@ -57,11 +57,11 @@ tests = [
     "numpy<=2.2.6 ; python_version < '3.11'",
     "numpy==2.4.2 ; python_version >= '3.11'",
     "pytest==9.0.2",
-    "pytest-cov==7.0.0",
+    "pytest-cov==7.1.0",
     "joblib==1.5.3",
     "pandas==2.3.3",
     "pytest-xdist==3.8.0",
-    "ipython==8.38.0",
+    "ipython==8.39.0",
     "pyvista==0.47.1",
 ]
 dev = [
@@ -80,7 +80,7 @@ doc = [
     "pypandoc==1.17",
     "nbsphinx==0.9.8",
     "joblib==1.5.3",
-    "ipython==8.38.0",
+    "ipython==8.39.0",
     "jupyterlab==4.5.6",
     "pyvista==0.47.1",
 ]
