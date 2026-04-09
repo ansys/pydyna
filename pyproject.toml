@@ -34,7 +34,7 @@ dependencies = [
     "appdirs>=1.4.4",
     "transformations==2025.1.1",
     "chardet==7.3.0",
-    "requests==2.33.0",
+    "requests==2.33.1",
     "docker==7.1.0",
 ]
 
