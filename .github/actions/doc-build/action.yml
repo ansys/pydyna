@@ -41,6 +41,7 @@ inputs:
   bot-token:
     description: Bot token for authentication
     required: true
+
   github-actor:
     description: GitHub actor for authentication
     required: true
@@ -129,7 +130,7 @@ runs:
       uses: ansys/pydpf-actions/install-dpf-server@v2.3 # zizmor: ignore[unpinned-uses]
       if: ${{ inputs.build-examples == 'true' }}
       with:
-        dpf-standalone-TOKEN: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+        dpf-standalone-TOKEN: ${{ inputs.bot-token }}
         ANSYS_VERSION : "252"
 
     - name: Set DPF environment

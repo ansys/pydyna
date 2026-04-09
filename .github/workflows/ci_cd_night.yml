@@ -181,7 +181,7 @@ jobs:
       contents: write # Needed to push documentation to gh-pages branch
       pages: write # Needed to deploy to GitHub Pages
     steps:
-      - uses: ansys/actions/doc-deploy-dev@2a2b198b65c63adb69c0d032d180e4dc728d4809 # v9.0.15
+      - uses: ansys/actions/doc-deploy-dev@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ env.BOT_TOKEN }}

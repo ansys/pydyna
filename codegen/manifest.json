@@ -1338,6 +1338,30 @@
                     "property-name": "elements",
                     "ref": "elements_card"
                 }
+            ],
+            "add-field": [
+                {
+                    "ref": "elements_card",
+                    "fields": [
+                        {
+                            "name": "LCID",
+                            "type": "integer",
+                            "position": 40,
+                            "width": 8,
+                            "default": null,
+                            "link": 19,
+                            "help": "Optional load curve ID to scale the added mass at time = 0. The curve defines the scale factor as a function versus time and must start at unity at t=0. Applies to deformable bodies only."
+                        },
+                        {
+                            "name": "MWD",
+                            "type": "integer",
+                            "position": 48,
+                            "width": 8,
+                            "default": null,
+                            "help": "Optional flag for mass-weighted distribution. EQ.0: distributed by area (shell) / volume (solid). EQ.1: distributed by mass weighted area x density x thickness (shell) / volume x density (solid)."
+                        }
+                    ]
+                }
             ]
         },
         "labels": {
@@ -3552,6 +3576,150 @@
         },
         "labels": {
             "temperature_coefficients_card": 3
+        }
+    },
+    "CONTACT_AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g1c_card"
+                },
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g2c_card"
+                }
+            ]
+        },
+        "labels": {
+            "g1c_card": 4,
+            "g2c_card": 5
+        }
+    },
+    "CONTACT_AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g1c_card"
+                },
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g2c_card"
+                }
+            ]
+        },
+        "labels": {
+            "g1c_card": 4,
+            "g2c_card": 5
+        }
+    },
+    "CONTACT_AUTOMATIC_SINGLE_SURFACE_TIEBREAK": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g1c_card"
+                },
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g2c_card"
+                }
+            ]
+        },
+        "labels": {
+            "g1c_card": 4,
+            "g2c_card": 5
+        }
+    },
+    "CONTACT_AUTOMATIC_SINGLE_SURFACE_TIEBREAK_BEAM_OFFSET": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g1c_card"
+                },
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g2c_card"
+                }
+            ]
+        },
+        "labels": {
+            "g1c_card": 4,
+            "g2c_card": 5
+        }
+    },
+    "CONTACT_AUTOMATIC_GENERAL_TIEBREAK": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g1c_card"
+                },
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g2c_card"
+                }
+            ]
+        },
+        "labels": {
+            "g1c_card": 4,
+            "g2c_card": 5
+        }
+    },
+    "CONTACT_AUTOMATIC_GENERAL_TIEBREAK_BEAM_OFFSET": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g1c_card"
+                },
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g2c_card"
+                }
+            ]
+        },
+        "labels": {
+            "g1c_card": 4,
+            "g2c_card": 5
+        }
+    },
+    "CONTACT_AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK_DAMPING": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g1c_card"
+                },
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g2c_card"
+                }
+            ]
+        },
+        "labels": {
+            "g1c_card": 5,
+            "g2c_card": 6
+        }
+    },
+    "CONTACT_AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK_DAMPING": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g1c_card"
+                },
+                {
+                    "func": "self.option in [13, 14]",
+                    "ref": "g2c_card"
+                }
+            ]
+        },
+        "labels": {
+            "g1c_card": 5,
+            "g2c_card": 6
         }
     }
 }
