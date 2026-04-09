@@ -94,6 +94,45 @@ def check_field_type(field_type: type):
         raise TypeError(f"Unexpected field type: {field_type}. Expected str, int, or float.")
 
 
+def _py_format_float(value: float, width: int) -> str:
+    """Format a float value to fit within ``width`` characters, right-justified.
+
+    This is a Python-level replacement for hollerith's ``write_float_value``,
+    which contains a C-level ``sprintf`` buffer overflow that causes
+    ``libc``'s ``__sprintf_chk`` to call ``abort()`` on Linux with Python 3.14.
+    Because SIGABRT cannot be caught by Python's ``try/except``, the only safe
+    fix is to bypass ``holler.write_float`` entirely and format here instead.
+
+    Hollerith derives precision from field width (approximately ``width - 4``),
+    so narrow fields (width=10) use ~6 significant digits and wide fields
+    (width=20, large format) use ~16, preserving full double precision.
+    A decimal point is always preserved for integer-valued results (e.g. ``1.0``
+    not ``1``) to match hollerith's established output format.
+    """
+    import math
+
+    if math.isnan(value) or math.isinf(value):
+        return f"{value!s:>{width}}"
+
+    # Mirror hollerith: precision ≈ width - 4, but at least 6 sig figs.
+    precision = max(6, width - 4)
+
+    for p in range(precision, 0, -1):
+        s = f"{value:.{p}g}"
+        # %g removes the decimal point for integer-valued results like 1.0 → "1".
+        # Hollerith preserves at least one decimal digit, so append ".0".
+        if "." not in s and "e" not in s.lower():
+            s = s + ".0"
+        if len(s) <= width:
+            return f"{s:>{width}}"
+
+    # Absolute last resort – should not happen for width >= 6.
+    s = f"{value:.1g}"
+    if "." not in s and "e" not in s.lower():
+        s = s + ".0"
+    return s[:width].rjust(width)
+
+
 def write_field_c(buf: typing.IO[typing.AnyStr], field_type: type, value: typing.Any, width: int) -> None:
     """Write a single field to the buffer."""
     if libmissing.checknull(value):
@@ -112,7 +151,9 @@ def write_field_c(buf: typing.IO[typing.AnyStr], field_type: type, value: typing
             )
             holler.write_string(buf, str(value), width)
     elif field_type == float:
-        holler.write_float(buf, value, width)
+        # Use the Python-level formatter to avoid a C buffer overflow in
+        # hollerith's write_float_value (__sprintf_chk → abort) on Linux/Python 3.14.
+        buf.write(_py_format_float(value, width))
 
 
 def write_field(buf: typing.IO[typing.AnyStr], field_type: type, value: typing.Any, width: int) -> None:
@@ -150,6 +191,13 @@ def write_c_dataframe(
                 values = table[field.name]
             full_table[field.name] = values
         table = full_table
+    # Cast integer columns to nullable Int64 to avoid a crash in numpy.argsort
+    # triggered by pandas block consolidation on Python 3.14 when mixing
+    # numpy int64 and float64 column blocks in the same DataFrame.
+    table = table.copy()
+    for field in converted_fields:
+        if field.type is int and field.name in table.columns:
+            table[field.name] = table[field.name].astype("Int64")
     holler.write_table(buf, table, num_defined_rows, spec)
 
 
