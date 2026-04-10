@@ -95,6 +95,55 @@ class Cards:
         """Gets the options_api of this keyword, if any"""
         return self._options
 
+    def is_option_active(self, option: str) -> bool:
+        """Returns True if the given option is active."""
+        return option in self._active_options
+
+    def activate_option(self, option: str) -> None:
+        """Activate the given option."""
+        self._active_options.add(option)
+
+    def deactivate_option(self, option: str) -> None:
+        """Deactivate the given option."""
+        if option in self._active_options:
+            self._active_options.remove(option)
+
+    def _try_activate_options(self, names: typing.List[str]) -> None:
+        # In LS-DYNA, '_TITLE' in the keyword name activates the 'ID' option
+        # (which adds the CID + heading card) when no explicit 'TITLE' option spec
+        # is defined for this keyword.
+        has_title_option = any(o.name == "TITLE" for o in self.option_specs)
+        if "TITLE" in names and not has_title_option:
+            names = list(names) + ["ID"]
+        for option in self.option_specs:
+            if option.name in names:
+                self.activate_option(option.name)
+
+    def _activate_options(self, title: str) -> None:
+        if self.options is None:
+            return
+        title_list = title.split("_")
+        self._try_activate_options(title_list)
+
+    def get_option_spec(self, name: str) -> OptionSpec:
+        """Gets the option spec for the given name."""
+        for option_spec in self.option_specs:
+            if option_spec.name == name:
+                return option_spec
+        raise Exception(f"No option spec with name `{name}` found")
+
+    @property
+    def option_specs(self) -> typing.Iterable[OptionSpec]:
+        """Gets all option specs for this keyword."""
+        for card in self._cards:
+            if hasattr(card, "option_spec"):
+                option_spec = card.option_spec
+                yield option_spec
+            elif hasattr(card, "option_specs"):
+                for option_spec in card.option_specs:
+                    yield option_spec
+
+    # end options API interface implementation
     # -- end option helpers --
 
     @property
