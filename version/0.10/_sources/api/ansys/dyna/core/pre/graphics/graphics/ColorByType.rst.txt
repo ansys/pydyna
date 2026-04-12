@@ -1,0 +1,43 @@
+ansys.dyna.core.pre.graphics.graphics.ColorByType
+=================================================
+
+.. py:class:: ansys.dyna.core.pre.graphics.graphics.ColorByType
+
+   Bases: :py:obj:`enum.IntEnum`
+
+
+   
+   Contains the zone types to display.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ZONE
+      :value: 0
+
+
+
+   .. py:attribute:: ZONELET
+      :value: 1
+
+
+
+   .. py:attribute:: PART
+      :value: 2
+
+

@@ -1,0 +1,34 @@
+ansys.dyna.core.lib.deck_loader.IterState
+=========================================
+
+.. py:class:: ansys.dyna.core.lib.deck_loader.IterState
+
+   .. py:attribute:: USERCOMMENT
+      :value: 0
+
+
+
+   .. py:attribute:: KEYWORD_BLOCK
+      :value: 1
+
+
+
+   .. py:attribute:: TITLE
+      :value: 2
+
+
+
+   .. py:attribute:: KEYWORDS
+      :value: 3
+
+
+
+   .. py:attribute:: END
+      :value: 4
+
+
+
+   .. py:attribute:: ENCRYPTED
+      :value: 5
+
+

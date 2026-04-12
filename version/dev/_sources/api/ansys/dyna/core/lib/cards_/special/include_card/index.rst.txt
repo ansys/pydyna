@@ -1,0 +1,28 @@
+ansys.dyna.core.lib.cards_.special.include_card
+===============================================
+
+.. py:module:: ansys.dyna.core.lib.cards_.special.include_card
+
+.. autoapi-nested-parse::
+
+   Module for handling the *INCLUDE card.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/cards_/special/include_card/IncludeCard
+   /api/ansys/dyna/core/lib/cards_/special/include_card/IncludeCardMixin
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.cards_.special.include_card.IncludeCard
+   ansys.dyna.core.lib.cards_.special.include_card.IncludeCardMixin
+
+

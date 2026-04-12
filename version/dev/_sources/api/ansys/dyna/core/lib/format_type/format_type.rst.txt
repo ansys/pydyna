@@ -1,0 +1,41 @@
+ansys.dyna.core.lib.format_type.format_type
+===========================================
+
+.. py:class:: ansys.dyna.core.lib.format_type.format_type
+
+   
+   Field width format for LS-DYNA keywords.
+
+   Controls whether fields use standard (10-char), long (20-char), or default width.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: default
+      :value: 's'
+
+
+
+   .. py:attribute:: standard
+      :value: 'k'
+
+
+
+   .. py:attribute:: long
+      :value: 'y'
+
+

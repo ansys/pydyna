@@ -1,0 +1,326 @@
+ansys.dyna.core.lib.kwd_line_formatter
+======================================
+
+.. py:module:: ansys.dyna.core.lib.kwd_line_formatter
+
+.. autoapi-nested-parse::
+
+   Keyword line formatter.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.kwd_line_formatter.logger
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/kwd_line_formatter/FormatSpec
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.kwd_line_formatter.FormatSpec
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.kwd_line_formatter.read_line
+   ansys.dyna.core.lib.kwd_line_formatter.at_end_of_keyword
+   ansys.dyna.core.lib.kwd_line_formatter.buffer_to_lines
+   ansys.dyna.core.lib.kwd_line_formatter.resolve_ref_to_value
+   ansys.dyna.core.lib.kwd_line_formatter.seek_text_block
+   ansys.dyna.core.lib.kwd_line_formatter.has_value
+   ansys.dyna.core.lib.kwd_line_formatter.parse_dataline
+   ansys.dyna.core.lib.kwd_line_formatter.load_dataline
+   ansys.dyna.core.lib.kwd_line_formatter.load_dataline_with_format
+
+
+Module Contents
+---------------
+
+.. py:data:: logger
+
+.. py:function:: read_line(buf: TextIO, skip_comment=True) -> Tuple[str, bool]
+
+   
+   Read and return the line, and a flag on whether to stop reading.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: at_end_of_keyword(buf: TextIO) -> bool
+
+   
+   Return whether the buffer is at the end of the keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: buffer_to_lines(buf: TextIO, max_num_lines: int = -1) -> List[str]
+
+   
+   Read from the buffer into a list of string.
+   buf: buffer to read from
+   max_num_lines: number of lines to read. -1 means no limit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: resolve_ref_to_value(ref: str, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet, target_type: type) -> Optional[Any]
+
+   
+   Resolve a parameter reference string (e.g. "&param", "-&param") to its value.
+
+   Shared by read path (get_parameter) and write path (_resolve_refs_from_deck).
+
+
+
+
+   :Returns:
+
+       :obj:`The` :obj:`resolved` :obj:`value`, :obj:`or` :data:`python:None` :obj:`if` :obj:`ref` :obj:`is` :obj:`invalid`, :obj:`param` :obj:`not` :obj:`found`, :obj:`or` :obj:`target_type`
+           ..
+
+       :obj:`is` :obj:`Flag` (:obj:`not` :obj:`handled` :obj:`by` :obj:`_convert_type`). :obj:`Raises` TypeError/ValueError :obj:`on`
+           ..
+
+       :obj:`conversion` :obj:`failure` (:obj:`caller` :obj:`may` :obj:`catch` :obj:`to` :obj:`use` :obj:`fallback`).
+           ..
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: seek_text_block(line_data: str, position: int, width: int) -> Tuple[int, str]
+
+   
+   Returns the text block from the line at the given position and width.
+
+   If the position is past the end, it will return an empty string.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: has_value(text_block: str) -> bool
+
+   
+   Given a text block - determine if a keyword value exists.
+
+   If its an empty string (i.e. the seek_text_block returned an empty
+   string) then there is no value. If its just whitespace, then
+   the keyword file did not include data for that field.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: parse_dataline(spec: List[tuple], line_data: str) -> Tuple[Tuple, List[str]]
+
+   
+   Parse a keyword card line without parameter substitution (raw mode).
+
+   Used by parameter-defining keywords (e.g. PARAMETER_EXPRESSION) where fields
+   containing '&' are literal expression text, not parameter references.
+
+   :Parameters:
+
+       **spec** : :class:`python:list` :obj:`of` :class:`python:tuple`
+           List of (offset, width, type) tuples for each field.
+
+       **line_data** : :class:`python:str`
+           String with keyword data (fixed-width or comma-delimited).
+
+
+
+   :Returns:
+
+       :class:`python:tuple`
+           (parsed_values, warnings). Values are raw; '&' in str fields is literal.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: load_dataline(spec: List[tuple], line_data: str, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet = None) -> Tuple[Tuple, List[str]]
+
+   
+   Loads a keyword card line from string, auto-detecting fixed-width or comma-delimited format.
+
+   LS-DYNA supports both fixed-width format and comma-delimited (free) format. This function
+   automatically detects which format is used based on the presence of commas in the line.
+   Per the LS-DYNA manual, formats can be mixed within a deck but not within a single card.
+
+   When parameter_set is None (parameter-defining keywords), uses parse_dataline and treats
+   '&' as literal. When parameter_set is provided, performs parameter substitution.
+
+   :Parameters:
+
+       **spec** : :class:`python:list` :obj:`of` :class:`python:tuple`
+           List of tuples representing the (offset, width, type) of each field.
+           Type can be a Flag which represents the True and False value.
+
+       **line_data** : :class:`python:str`
+           String with keyword data (fixed-width or comma-delimited).
+
+       **parameter_set** : :obj:`ParameterSet`, :obj:`optional`
+           Optional parameter set. None = raw mode (no substitution).
+
+
+
+   :Returns:
+
+       :class:`python:tuple`
+           A tuple of (parsed_values, warnings). Parsed values are the field values;
+           warnings is a list of diagnostic messages to be emitted by the caller.
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   >>> values, warnings = load_dataline([(0,10, int),(10,10, str)], '         1     hello')
+   >>> values
+   (1, 'hello')
+   >>> values, warnings = load_dataline([(0,10, int),(10,10, str)], '1,hello')
+   >>> values
+   (1, 'hello')
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: load_dataline_with_format(spec: List[tuple], line_data: str, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet = None) -> Tuple[Tuple, str, List[str]]
+
+   
+   Like load_dataline, but also returns the detected format.
+
+
+
+
+
+   :Returns:
+
+       :class:`python:tuple`
+           A tuple of (values, format, warnings) where format is 'csv' or 'fixed'.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

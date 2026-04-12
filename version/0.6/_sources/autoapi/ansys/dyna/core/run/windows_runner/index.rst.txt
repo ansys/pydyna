@@ -1,0 +1,100 @@
+ansys.dyna.core.run.windows_runner
+==================================
+
+.. py:module:: ansys.dyna.core.run.windows_runner
+
+.. autoapi-nested-parse::
+
+   Windows implementation of LS-DYNA runner.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.run.windows_runner.WindowsRunner
+
+
+Module Contents
+---------------
+
+.. py:class:: WindowsRunner(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.run.base_runner.BaseRunner`
+
+
+   
+   Windows implementation to Run LS-DYNA.
+
+   Tested when LS-DYNA is installed as part of the
+   unified Ansys installation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: set_input(input_file: str, working_directory: str) -> None
+
+      
+      Set input file and working directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: run() -> None
+
+      
+      Run LS-DYNA.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

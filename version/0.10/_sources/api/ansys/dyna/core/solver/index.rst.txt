@@ -1,0 +1,41 @@
+ansys.dyna.core.solver
+======================
+
+.. py:module:: ansys.dyna.core.solver
+
+.. autoapi-nested-parse::
+
+   
+   Module for defining the PyDyna ``solver`` service.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /api/ansys/dyna/core/solver/dynalogging/index
+   /api/ansys/dyna/core/solver/dynasolver/index
+   /api/ansys/dyna/core/solver/grpc_tags/index
+   /api/ansys/dyna/core/solver/launcher/index
+
+
