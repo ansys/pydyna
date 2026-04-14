@@ -19,7 +19,7 @@ exclude: |
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: c60c980e561ed3e73101667fe8365c609d19a438  # frozen: v0.15.9
+  rev: b831c3dc5d27d9da294ae4e915773b99aa24a7c5  # frozen: v0.15.10
   hooks:
     - id: ruff-check
       args: [--fix]
@@ -53,7 +53,7 @@ repos:
       - --start_year=2023
 
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
-  rev: ea2eb407b4cbce87cf0d502f36578950494f5ac9  # frozen: v1.23.1
+  rev: a4727cbbcd26d7098e96b9cb738169b59711ae51  # frozen: v1.24.1
   hooks:
     - id: zizmor
       args: ["--pedantic"]
