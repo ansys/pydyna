@@ -134,14 +134,7 @@ class Card(CardInterface):
         # Use content-based signature (not id-based) so the FormatSpec cache key
         # remains valid across GC cycles. Using id(schema) is unsafe because Python
         # reuses memory addresses after GC, causing stale cache hits with wrong layouts.
-        self._signature = tuple(
-            (
-                (fs.name, fs.type, fs.offset, fs.width, fs.default.true_value, fs.default.false_value)
-                if fs.is_flag()
-                else (fs.name, fs.type, fs.offset, fs.width)
-            )
-            for fs in field_schemas
-        )
+        self._signature = tuple(fs.signature() for fs in field_schemas)
         self._values = [f.value for f in fields]
         self._fields_set: bool = False  # Track whether fields were ever explicitly set
         self._active_func = active_func
@@ -188,14 +181,7 @@ class Card(CardInterface):
         else:
             name_to_index = {fs.name: i for i, fs in enumerate(field_schemas)}
             schema = CardSchema(field_schemas, name_to_index)
-            signature = tuple(
-                (
-                    (fs.name, fs.type, fs.offset, fs.width, fs.default.true_value, fs.default.false_value)
-                    if fs.is_flag()
-                    else (fs.name, fs.type, fs.offset, fs.width)
-                )
-                for fs in field_schemas
-            )
+            signature = tuple(fs.signature() for fs in field_schemas)
             _field_schemas_cache[cache_key] = (schema, signature)
 
         instance._schema = schema
