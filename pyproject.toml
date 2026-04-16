@@ -50,13 +50,13 @@ codegen = [
     "Jinja2==3.1.6",
     "beartype==0.22.9",
     "jsonschema==4.26.0",
-    "pytest==9.0.2",
+    "pytest==9.0.3",
 ]
 tests = [
     "matplotlib==3.10.8",
     "numpy<=2.2.6 ; python_version < '3.11'",
     "numpy==2.4.4 ; python_version >= '3.11'",
-    "pytest==9.0.2",
+    "pytest==9.0.3",
     "pytest-cov==7.1.0",
     "joblib==1.5.3",
     "pandas==2.3.3",
