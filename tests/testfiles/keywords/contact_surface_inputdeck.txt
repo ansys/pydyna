@@ -1,0 +1,26 @@
+*KEYWORD long=s
+*CONTACT_AUTOMATIC_SURFACE_TO_SURFACE_TITLE
+$      CID|     NAME|
+   970000010ZERO000000FO00:Barriere_vs_Fahrzeug
+$    SSID|     MSID|    SSTYP|    MSTYP|   SBOXID|   MBOXID|      SPR|      MPR|
+   9700101       101         2         2         0   9700101         0         0
+$      FS|       FD|       DC|       VC|      VDC|   PENCHK|       BT|       DT|
+        -2   9700000                            30         0
+$     SFS|      SFM|      SST|      MST|     SFST|     SFMT|      FSF|      VSF|
+       1.0       1.0         2         1
+$ optional Card A
+$    SOFT|   SOFSCL|   LCIDAB|   MAXPAR|    SBOPT|    DEPTH|    BSORT|   FRCFRQ|
+         2                                       3         5
+$ optional Card B
+$  PENMAX|   THKOPT|   SHLTHK|    SNLOG|     ISYM|    I2D3D|
+
+$ optional Card C
+$        |   IGNORE|   DPRFAC|   DTSTIF|
+                   2            0.252e-3
+$ optional Card D
+$   Q2TRI|
+         3
+$
+$-------------------------------------------------------------------------------
+$
+*END
