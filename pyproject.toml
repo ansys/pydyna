@@ -8,7 +8,8 @@ version = "0.12.dev0"
 description = "Python interface to LS-DYNA Service"
 readme = "README.rst"
 requires-python = ">=3.10,<4"
-license = { file = "LICENSE" }
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
 maintainers = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
 keywords = ["Ansys", "LS-DYNA", "keywords"]
@@ -16,14 +17,13 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering :: Information Analysis",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.14"
 ]
 
 dependencies = [
@@ -36,7 +36,7 @@ dependencies = [
     "transformations==2025.1.1",
     "chardet==7.4.3",
     "requests==2.33.1",
-    "docker==7.1.0",
+    "docker==7.1.0"
 ]
 
 [project.optional-dependencies]
@@ -44,13 +44,13 @@ all = ['ansys-dyna-core[graphics,codegen,tests,dev,doc]']
 
 graphics = [
     "matplotlib>=3.0",
-    "pyvista>=0.43.4",
+    "pyvista>=0.43.4"
 ]
 codegen = [
     "Jinja2==3.1.6",
     "beartype==0.22.9",
     "jsonschema==4.26.0",
-    "pytest==9.0.3",
+    "pytest==9.0.3"
 ]
 tests = [
     "matplotlib==3.10.8",
@@ -62,10 +62,10 @@ tests = [
     "pandas==2.3.3",
     "pytest-xdist==3.8.0",
     "ipython==8.39.0",
-    "pyvista==0.47.1",
+    "pyvista==0.47.1"
 ]
 dev = [
-    "ansys-dyna-core[tests,codegen,graphics]",
+    "ansys-dyna-core[tests,codegen,graphics]"
 ]
 doc = [
     "matplotlib==3.10.8",
@@ -82,7 +82,7 @@ doc = [
     "joblib==1.5.3",
     "ipython==8.39.0",
     "jupyterlab==4.5.6",
-    "pyvista==0.47.1",
+    "pyvista==0.47.1"
 ]
 
 [tool.flit.module]
@@ -108,7 +108,7 @@ extend-exclude = [
     "src/ansys/dyna/core/keywords/keyword_classes/auto/",
     "src/ansys/dyna/core/keywords/keyword_classes/type_mapping.py",
     "src/ansys/dyna/core/keywords/keyword_classes/auto_keywords.py",
-    "src/ansys/dyna/core/keywords/keyword_classes/manual/*_version_*.py",
+    "src/ansys/dyna/core/keywords/keyword_classes/manual/*_version_*.py"
 ]
 
 lint.select = [
