@@ -62,7 +62,7 @@ tests = [
     "pandas==2.3.3",
     "pytest-xdist==3.8.0",
     "ipython==8.39.0",
-    "pyvista==0.47.1"
+    "pyvista==0.47.3",
 ]
 dev = [
     "ansys-dyna-core[tests,codegen,graphics]"
@@ -82,7 +82,7 @@ doc = [
     "joblib==1.5.3",
     "ipython==8.39.0",
     "jupyterlab==4.5.6",
-    "pyvista==0.47.1"
+    "pyvista==0.47.3",
 ]
 
 [tool.flit.module]
