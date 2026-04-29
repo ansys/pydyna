@@ -46,7 +46,26 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and export to Docker
+      - name: Build and load image locally
+        uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
+        with:
+          context: docker/run
+          file: docker/run/Dockerfile
+          load: true
+          push: false
+          tags: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ env.IMAGE_TAG }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/ansys/pydyna-run:latest
+          build-args: |
+            FTP_USER=${{ env.FTP_USER }}
+            FTP_LOGIN=${{ env.FTP_LOGIN }}
+
+      - name: Run doc build inside image
+        run: |
+          docker run --rm \
+            ${{ env.REGISTRY }}/ansys/pydyna-run:${{ env.IMAGE_TAG }} \
+            bash -c "BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=false make -C /doc html"
+
+      - name: Push image to registry
         uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
         with:
           context: docker/run
