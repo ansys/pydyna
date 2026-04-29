@@ -60,9 +60,12 @@ jobs:
             FTP_LOGIN=${{ env.FTP_LOGIN }}
 
       - name: Run doc build inside image
+        env:
+          REGISTRY: ${{ env.REGISTRY }}
+          IMAGE_TAG: ${{ env.IMAGE_TAG }}
         run: |
           docker run --rm \
-            ${{ env.REGISTRY }}/ansys/pydyna-run:${{ env.IMAGE_TAG }} \
+            "$REGISTRY/ansys/pydyna-run:$IMAGE_TAG" \
             bash -c "BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=false make -C /doc html"
 
       - name: Push image to registry
