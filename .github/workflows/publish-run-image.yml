@@ -59,14 +59,23 @@ jobs:
             FTP_USER=${{ env.FTP_USER }}
             FTP_LOGIN=${{ env.FTP_LOGIN }}
 
-      - name: Run doc build inside image
-        env:
-          REGISTRY: ${{ env.REGISTRY }}
-          IMAGE_TAG: ${{ env.IMAGE_TAG }}
-        run: |
-          docker run --rm \
-            "$REGISTRY/ansys/pydyna-run:$IMAGE_TAG" \
-            bash -c "BUILD_EXAMPLES=false BUILD_AUTOKEYWORDS_API=false make -C /doc html"
+
+      - name: "Build documentation"
+        uses: ./.github/actions/doc-build
+        with:
+          build-autokeywords-api: "True"
+          pdf-pool-size: 15000000
+          pdf-string-vacancies: 90000
+          pdf-max-strings: 600000
+          pydyna-run-container: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ env.IMAGE_TAG }}
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          license-server: ${{ env.LICENSE_SERVER }}
+          bot-token: ${{ env.BOT_TOKEN }}
+          github-actor: ${{ github.actor }}
+          persist-credentials: true
+          use_cache_examples: false
+
 
       # - name: Push image to registry
       #   uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
