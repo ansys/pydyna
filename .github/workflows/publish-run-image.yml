@@ -1,8 +1,7 @@
 name: Docker images publishing
 
 permissions:
-  contents: read  # Needed to checkout code
-  packages: read  # Needed for pulling container images from GHCR
+  contents: read  # default; overridden per-job as needed
 
 on:
   workflow_dispatch:
@@ -30,6 +29,9 @@ jobs:
   pydyna-run-containers:
     name: Build the pydyna-run docker image
     runs-on: ubuntu-latest
+    permissions:
+      contents: read   # Needed to checkout code
+      packages: write  # Needed for pushing Docker image to GHCR
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
