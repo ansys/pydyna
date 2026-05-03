@@ -1,0 +1,229 @@
+ansys.dyna.core.lib.visitors.keyword_card_visitor.KeywordCardVisitor
+====================================================================
+
+.. py:class:: ansys.dyna.core.lib.visitors.keyword_card_visitor.KeywordCardVisitor
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   
+   Base class for visiting the cards of a keyword.
+
+   Provides a traversal skeleton (dispatch on card type, recursion into
+   containers) shared by all subclasses.  Each card type is routed to a
+   dedicated ``visit_*`` hook; all hooks default to no-ops so subclasses
+   only override what they need.
+
+   The visitor never touches :class:`~ansys.dyna.core.lib.card_interface.CardInterface`,
+   allowing algorithms to be added without modifying the card hierarchy.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   >>> class CardCounter(KeywordCardVisitor):
+   ...     def __init__(self):
+   ...         self.count = 0
+   ...     def visit_card(self, card):
+   ...         self.count += 1
+   >>> counter = CardCounter()
+   >>> counter.visit_keyword(my_keyword)
+   >>> print(f"Plain cards: {counter.count}")
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: visit_keyword(keyword: ansys.dyna.core.lib.keyword_base.KeywordBase) -> None
+
+      
+      Traverse all cards in the keyword.
+
+      The keyword being visited is available to all hooks via
+      ``self.keyword`` for the duration of this call.
+
+      :Parameters:
+
+          **keyword** : :obj:`KeywordBase`
+              The keyword to traverse.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: visit_card(card: ansys.dyna.core.lib.card.Card) -> None
+
+      
+      Called for every plain :class:`~ansys.dyna.core.lib.card.Card`.
+
+      Never called for :class:`~ansys.dyna.core.lib.table_card.TableCard` or
+      :class:`~ansys.dyna.core.lib.table_card_group.TableCardGroup` — those
+      are routed to :meth:`visit_table_card` and
+      :meth:`visit_table_card_group` respectively.
+
+      The default implementation does nothing.
+
+      :Parameters:
+
+          **card** : :obj:`Card`
+              The plain card to visit.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: visit_table_card(card: ansys.dyna.core.lib.table_card.TableCard) -> None
+
+      
+      Called when a TableCard is encountered. Override to handle custom logic.
+
+      :class:`~ansys.dyna.core.lib.table_card.TableCard` stores all data in a
+      pandas DataFrame (``card.table``).  ``card._values`` is stale and must not
+      be read or written.  The default implementation does nothing.
+
+      :Parameters:
+
+          **card** : :obj:`TableCard`
+              The table card.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: visit_table_card_group(card: ansys.dyna.core.lib.table_card_group.TableCardGroup) -> None
+
+      
+      Called when a TableCardGroup is encountered. Override to handle custom logic.
+
+      :class:`~ansys.dyna.core.lib.table_card_group.TableCardGroup` stores data in
+      a shared pandas DataFrame (``card.table``).  The default implementation does
+      nothing.
+
+      :Parameters:
+
+          **card** : :obj:`TableCardGroup`
+              The table card group.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: visit_series_card(card: ansys.dyna.core.lib.series_card.SeriesCard) -> None
+
+      
+      Called when a SeriesCard is encountered. Override to handle custom logic.
+
+      The default implementation emits a debug log and does nothing.
+
+      :Parameters:
+
+          **card** : :obj:`SeriesCard`
+              The series card.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: visit_unknown_card(card: ansys.dyna.core.lib.card_interface.CardInterface) -> None
+
+      
+      Called when an unknown CardInterface subclass is encountered.
+
+      The default implementation emits a warning and does nothing.
+
+      :Parameters:
+
+          **card** : :obj:`CardInterface`
+              The unknown card.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

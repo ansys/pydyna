@@ -1,0 +1,28 @@
+ansys.dyna.core.keywords.keyword_classes.manual.parameter_expression.ParameterExpressionLocal
+=============================================================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.parameter_expression.ParameterExpressionLocal(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.keywords.keyword_classes.auto.parameter.parameter_expression_local.ParameterExpressionLocal`
+
+
+   
+   PARAMETER_EXPRESSION_LOCAL with raw parsing that preserves expression text.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!

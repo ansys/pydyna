@@ -1,0 +1,33 @@
+ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.MatAnisotropicHyperelasticLegacy
+======================================================================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.MatAnisotropicHyperelasticLegacy(**kwargs)
+
+   Bases: :py:obj:`Mat295Legacy`
+
+
+   
+   Legacy MAT_ANISOTROPIC_HYPERELASTIC keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: subkeyword
+      :value: 'ANISOTROPIC_HYPERELASTIC'
+
+

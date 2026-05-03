@@ -1,0 +1,43 @@
+ansys.dyna.core.lib.validators.ValidationSeverity
+=================================================
+
+.. py:class:: ansys.dyna.core.lib.validators.ValidationSeverity(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Severity levels for validation rules.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ERROR
+      :value: 'error'
+
+
+
+   .. py:attribute:: WARNING
+      :value: 'warning'
+
+
+
+   .. py:attribute:: INFO
+      :value: 'info'
+
+

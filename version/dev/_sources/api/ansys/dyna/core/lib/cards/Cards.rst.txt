@@ -1,0 +1,103 @@
+ansys.dyna.core.lib.cards.Cards
+===============================
+
+.. py:class:: ansys.dyna.core.lib.cards.Cards(keyword)
+
+   
+   Base class for card containers with I/O.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: parameter_set
+      :type: Optional[ansys.dyna.core.lib.parameters.ParameterSet]
+
+
+      
+      Get the parameter set for this Cards instance.
+
+      For KeywordBase (where self has _parameter_set): returns self._parameter_set.
+      For CardSet items (where self._keyword exists): returns self._keyword._parameter_set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: options
+      :type: ansys.dyna.core.lib.option_card.Options
+
+
+      
+      Gets the options_api of this keyword, if any
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(buf: TextIO, format: ansys.dyna.core.lib.format_type.format_type, comment: Optional[bool] = True, retain_parameters: bool = False, **kwargs)
+
+      
+      Writes the cards to `buf` using `format`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
