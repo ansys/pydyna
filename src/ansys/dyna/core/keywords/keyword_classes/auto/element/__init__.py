@@ -145,7 +145,6 @@ from .element_solid_tet4totet10_ortho import ElementSolidTet4Totet10Ortho
 from .element_solid_tet4totet10_ortho_dof import ElementSolidTet4Totet10OrthoDof
 from .element_sph import ElementSph
 from .element_trim import ElementTrim
-from .element_tshell import ElementTshell
 from .element_tshell_beta import ElementTshellBeta
 from .element_tshell_beta_composite import ElementTshellBetaComposite
 from .element_tshell_composite import ElementTshellComposite
