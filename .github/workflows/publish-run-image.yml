@@ -9,10 +9,10 @@ on:
       tagVersion:
         description: 'Tag'
         required: false
-        default: test
+        default: latest
   push:
-    # tags:
-    #   - "v*.*.*"
+    tags:
+      - "v*.*.*"
 
 env:
   REGISTRY: ghcr.io
