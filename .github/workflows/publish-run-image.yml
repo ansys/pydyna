@@ -20,6 +20,7 @@ env:
   IMAGE_TAG: ${{ github.event.inputs.tagVersion || 'latest'}}
   FTP_USER: ${{ secrets.FTP_USER }}
   FTP_LOGIN: ${{ secrets.FTP_PASSWORD }}
+  LICENSE_SERVER: ${{ secrets.LICENSE_SERVER }}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -28,7 +29,7 @@ concurrency:
 jobs:
   pydyna-run-containers:
     name: Build the pydyna-run docker image
-    runs-on: ubuntu-latest
+    runs-on: [public-ubuntu-latest-16-cores]
     permissions:
       contents: read   # Needed to checkout code
       packages: write  # Needed for pushing Docker image to GHCR
@@ -61,21 +62,16 @@ jobs:
             FTP_USER=${{ env.FTP_USER }}
             FTP_LOGIN=${{ env.FTP_LOGIN }}
 
-
       - name: "Build documentation"
         uses: ./.github/actions/doc-build
         with:
           build-autokeywords-api: "True"
-          pdf-pool-size: 15000000
-          pdf-string-vacancies: 90000
-          pdf-max-strings: 600000
           pydyna-run-container: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ env.IMAGE_TAG }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           license-server: ${{ env.LICENSE_SERVER }}
-          bot-token: ${{ env.BOT_TOKEN }}
+          bot-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           github-actor: ${{ github.actor }}
-          persist-credentials: true
           use_cache_examples: false
 
 
