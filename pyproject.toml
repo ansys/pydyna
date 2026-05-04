@@ -53,7 +53,7 @@ codegen = [
     "pytest==9.0.3"
 ]
 tests = [
-    "matplotlib==3.10.8",
+    "matplotlib==3.10.9",
     "numpy<=2.2.6 ; python_version < '3.11'",
     "numpy==2.4.4 ; python_version >= '3.11'",
     "pytest==9.0.3",
@@ -68,7 +68,7 @@ dev = [
     "ansys-dyna-core[tests,codegen,graphics]"
 ]
 doc = [
-    "matplotlib==3.10.8",
+    "matplotlib==3.10.9",
     "numpydoc==1.10.0",
     "Sphinx==8.2.3",
     "pytest-sphinx==0.7.1",
