@@ -72,6 +72,7 @@ jobs:
           bot-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           github-actor: ${{ github.actor }}
           use_cache_examples: false
+          skip-pull: true  # image was loaded locally by the build step above; not yet pushed to registry
 
 
       # - name: Push image to registry
