@@ -57,7 +57,6 @@ jobs:
           load: true
           push: false
           tags: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ env.IMAGE_TAG }}
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/ansys/pydyna-run:latest
           build-args: |
             FTP_USER=${{ env.FTP_USER }}
             FTP_LOGIN=${{ env.FTP_LOGIN }}
