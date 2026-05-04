@@ -2696,7 +2696,17 @@
         }
     },
     "ELEMENT_TSHELL": {
-        "action": "manual"
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "elements",
+                    "ref": "elements_card"
+                }
+            ]
+        },
+        "labels": {
+            "elements_card": 0
+        }
     },
     "ELEMENT_SOLID": {
         "action": "manual",

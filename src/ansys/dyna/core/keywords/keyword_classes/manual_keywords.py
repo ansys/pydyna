@@ -38,11 +38,6 @@ except ImportError:
     pass
 
 try:
-    from .manual.element_tshell import ElementTshell  # noqa: F401
-except ImportError:
-    pass
-
-try:
     from .manual.element_solid_ortho import ElementSolidOrtho  # noqa: F401
 except ImportError:
     pass

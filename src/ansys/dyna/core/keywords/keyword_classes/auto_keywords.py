@@ -1568,6 +1568,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto import ElementSolidTet4Totet1
 from ansys.dyna.core.keywords.keyword_classes.auto import ElementSolidTet4Totet10OrthoDof
 from ansys.dyna.core.keywords.keyword_classes.auto import ElementSph
 from ansys.dyna.core.keywords.keyword_classes.auto import ElementTrim
+from ansys.dyna.core.keywords.keyword_classes.auto import ElementTshell
 from ansys.dyna.core.keywords.keyword_classes.auto import ElementTshellBeta
 from ansys.dyna.core.keywords.keyword_classes.auto import ElementTshellBetaComposite
 from ansys.dyna.core.keywords.keyword_classes.auto import ElementTshellComposite
