@@ -133,6 +133,63 @@ def test_element_solid_read_single_element():
     assert elements.elements["n8"].tolist() == [8]
 
 
+def test_element_tshell_read_multiple_elements():
+    """Test reading ElementTshell with multiple element rows (issue #1202)."""
+    tshell_string = """*ELEMENT_TSHELL
+$#   eid     pid      n1      n2      n3      n4      n5      n6      n7      n8
+     201       1       1       2       5       4       7       8      11      10
+     202       1       2       3       6       5       8       9      12      11"""
+
+    elements = kwd.ElementTshell()
+    elements.loads(tshell_string)
+
+    assert len(elements.elements) == 2, f"Expected 2 elements, got {len(elements.elements)}"
+    assert elements.elements["eid"].tolist() == [201, 202]
+    assert elements.elements["pid"].tolist() == [1, 1]
+    assert elements.elements["n1"].tolist() == [1, 2]
+    assert elements.elements["n8"].tolist() == [10, 11]
+
+
+def test_element_tshell_read_single_element():
+    """Test reading ElementTshell with a single element row."""
+    tshell_string = """*ELEMENT_TSHELL
+     201       1       1       2       5       4       7       8      11      10"""
+
+    elements = kwd.ElementTshell()
+    elements.loads(tshell_string)
+
+    assert len(elements.elements) == 1, f"Expected 1 element, got {len(elements.elements)}"
+    assert elements.elements["eid"].tolist() == [201]
+    assert elements.elements["pid"].tolist() == [1]
+    assert elements.elements["n1"].tolist() == [1]
+    assert elements.elements["n8"].tolist() == [10]
+
+
+def test_element_tshell_write_multiple_elements():
+    """Test writing ElementTshell with multiple elements via DataFrame."""
+    ref_string = """*ELEMENT_TSHELL
+$#   eid     pid      n1      n2      n3      n4      n5      n6      n7      n8
+     201       1       1       2       5       4       7       8      11      10
+     202       1       2       3       6       5       8       9      12      11"""
+
+    elements = kwd.ElementTshell()
+    elements.elements = pd.DataFrame(
+        {
+            "eid": [201, 202],
+            "pid": [1, 1],
+            "n1": [1, 2],
+            "n2": [2, 3],
+            "n3": [5, 6],
+            "n4": [4, 5],
+            "n5": [7, 8],
+            "n6": [8, 9],
+            "n7": [11, 12],
+            "n8": [10, 11],
+        }
+    )
+    assert elements.write() == ref_string, "element tshell block does not match"
+
+
 def test_element_solid_read_legacy_format_no_spaces():
     """Test reading ElementSolid from legacy format with no spaces between node IDs.
     

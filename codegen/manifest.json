@@ -2695,6 +2695,9 @@
             "elements_card": 0
         }
     },
+    "ELEMENT_TSHELL": {
+        "action": "manual"
+    },
     "ELEMENT_SOLID": {
         "action": "manual",
         "generation-options": {
