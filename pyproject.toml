@@ -33,10 +33,10 @@ dependencies = [
     "numpy>=1",
     "pandas>=2.0",
     "appdirs>=1.4.4",
-    "transformations==2025.1.1",
-    "chardet==7.4.3",
-    "requests==2.33.1",
-    "docker==7.1.0"
+    "transformations>=2025.1.1",
+    "chardet>=7.4.3",
+    "requests>=2.33.1",
+    "docker>=7.1.0"
 ]
 
 [project.optional-dependencies]
