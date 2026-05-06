@@ -46,6 +46,15 @@ inputs:
     description: GitHub actor for authentication
     required: true
 
+  skip-pull:
+    description: |
+      Skip pulling the pydyna-run container image (e.g. when it was already loaded
+      into the local Docker daemon by a prior build step and has not been pushed to
+      the registry yet).
+    required: false
+    default: false
+    type: boolean
+
   use_cache_examples:
     description: |
       Whether to use the examples cache. Default is "true".
@@ -154,7 +163,7 @@ runs:
         password: ${{ inputs.github-token }}
 
     - name: Pull PyDyna-run image
-      if: ${{ inputs.pydyna-run-container != '' && inputs.build_examples != 'false' }}
+      if: ${{ inputs.pydyna-run-container != '' && inputs.build_examples != 'false' && inputs.skip-pull != 'true' }}
       env:
         DOCKER_IMAGE: ${{ inputs.pydyna-run-container }}
       run: |
