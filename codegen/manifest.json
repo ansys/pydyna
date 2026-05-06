@@ -2236,6 +2236,14 @@
             ],
             "conditional-card": [
                 {
+                    "func": "self._cards[2].has_nondefault_values()",
+                    "ref": "tstop_card"
+                },
+                {
+                    "func": "self._cards[3].has_nondefault_values()",
+                    "ref": "sfiair4_card"
+                },
+                {
                     "func": "self.unit == 3",
                     "ref": "unit_conversion_card"
                 }
@@ -2247,29 +2255,31 @@
                         "part_data_card"
                     ],
                     "overall-name": "parts_data",
-                    "length-func": "self.npdata"
+                    "length-func": "self.npdata or 0"
                 }
             ],
             "table-card": [
                 {
                     "property-name": "vents",
-                    "length-func": "self.nvent",
+                    "length-func": "self.nvent or 0",
                     "ref": "vent_card"
                 },
                 {
                     "property-name": "gas_components",
-                    "length-func": "self.ngas",
+                    "length-func": "self.ngas or 0",
                     "ref": "gas_component_card"
                 },
                 {
                     "property-name": "orifices",
-                    "length-func": "self.norif",
+                    "length-func": "self.norif or 0",
                     "ref": "orifice_card"
                 }
             ]
         },
         "labels": {
             "id_title_card": 0,
+            "tstop_card": 3,
+            "sfiair4_card": 4,
             "unit_conversion_card": 5,
             "uniform_pressure_card": 7,
             "part_data_card": 8,
