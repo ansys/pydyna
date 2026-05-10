@@ -243,20 +243,34 @@ def test_unit_conversion_card_absent_for_unit_0():
     ab = kwd.AirbagParticle()
     ab.loads(_AIRBAG_CPM_BLOCK)
     output = ab.write()
-    # The unit-conversion card fields are 'mass', 'time', 'length' (unused cols too)
-    # A simple proxy: writing with unit=0 must produce fewer lines than unit=3
+    # The unit-conversion card writes the mass/time/length values explicitly.
+    # When unit=0 that card is suppressed; none of its field values appear.
+    data_lines = _data_lines(output)
+    # mass=1.0 / time=0.001 / length=0.001 are the sentinel values used in the
+    # unit=3 variant below — they must not appear in the unit=0 output.
+    assert not any("     1.0" in line and "   0.001" in line for line in data_lines), (
+        "Unit-conversion card values found in unit=0 output. "
+        "The active_func guard may be missing (old code)."
+    )
+
+    # Complementary: setting unit=3 must add exactly one extra data line that
+    # contains the mass/time/length values.
     ab3 = kwd.AirbagParticle()
     ab3.loads(_AIRBAG_CPM_BLOCK)
     ab3.unit = 3
     ab3.mass = 1.0
     ab3.time = 0.001
     ab3.length = 0.001
-    lines_unit0 = len(_data_lines(output))
-    lines_unit3 = len(_data_lines(ab3.write()))
+    output3 = ab3.write()
+    lines_unit0 = len(data_lines)
+    lines_unit3 = len(_data_lines(output3))
     assert lines_unit3 == lines_unit0 + 1, (
         f"UNIT=3 should produce exactly 1 more data line than UNIT=0. "
         f"Got UNIT=0: {lines_unit0}, UNIT=3: {lines_unit3}. "
         "If equal, the unit-conversion card has no active_func (old code)."
+    )
+    assert any("     1.0" in line or "   0.001" in line for line in _data_lines(output3)), (
+        "Unit-conversion card line not found in unit=3 output."
     )
 
 
@@ -363,4 +377,30 @@ def test_ngas_drives_output_line_count():
 
     assert n1 == n0 + 1, f"ngas=1 should add 1 line vs ngas=0. Got {n0} vs {n1}."
     assert n2 == n0 + 2, f"ngas=2 should add 2 lines vs ngas=0. Got {n0} vs {n2}."
+
+
+def test_two_vents_round_trip():
+    """NVENT=2 must produce and read back two vent rows."""
+    ab = kwd.AirbagParticle()
+    ab.loads(_AIRBAG_CPM_BLOCK)
+    ab.nvent = 2
+    ab.vents = pd.DataFrame({
+        "sid3": [501, 502],
+        "stype3": [0, 0],
+        "c23": [0.5, 0.6],
+        "lctc23": [0, 0],
+        "lcpc23": [0, 0],
+        "enh_v": [0, 0],
+        "ppop": [0.0, 0.0],
+    })
+    output = ab.write()
+    ab2 = kwd.AirbagParticle()
+    ab2.loads(output)
+
+    assert ab2.nvent == 2, f"Expected nvent=2, got {ab2.nvent}"
+    assert len(ab2.vents) == 2, (
+        f"Expected 2 vent rows, got {len(ab2.vents)}"
+    )
+    assert ab2.vents["sid3"].tolist() == [501, 502]
+    assert ab2.vents["c23"].tolist() == [0.5, 0.6]
 
