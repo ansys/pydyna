@@ -21,39 +21,26 @@
 # SOFTWARE.
 
 """
-Tests for *AIRBAG_PARTICLE card structure (issue #1205).
+Tests for *AIRBAG_PARTICLE card structure.
 
-The reference input is the CPM airbag deck supplied in the issue report.
-That keyword block has exactly 4 data lines (TSTOP/SFIAIR4 cards are absent
-because their values are all defaults, which is legal in LS-DYNA):
+The reference input is a CPM airbag deck. That keyword block has exactly
+4 data lines (TSTOP/SFIAIR4 cards are absent because their values are all
+defaults, which is legal in LS-DYNA):
 
     Card 1 → SID1, STYPE1, SID2, STYPE2, BLOCK, NPDATA, FRIC, IRDP
     Card 2 → NP, UNIT, VISFLG, TATM, PATM, NVENT, TEND, TSW
     Card 3 → IAIR, NGAS, NORIF, NID1, NID2, NID3, CHM, CD_EXT
     Card 4 → PAIR, TAIR, XMAIR, AAIR, BAIR, CAIR, NPAIR, NPRLX
 
-Root cause of issue #1205
---------------------------
-Before the manifest.json fix, AirbagParticle had 12 sequential plain Cards
-(one per kwd.json entry after skipping ID/TITLE).  Cards 3–4 in that list
-are the TSTOP and SFIAIR4 cards.  When pydyna read the 4-line deck above it
-assigned:
+Background
+----------
+AirbagParticle has optional TSTOP and SFIAIR4 cards (Cards 3–4 in the
+card list). When those cards are absent from the input, the reader must
+skip them and assign data lines to the correct subsequent cards (IAIR
+and PAIR). These tests verify that card ordering and field assignment
+behave correctly when optional cards are omitted.
 
-    data line 3  →  _cards[2]  (TSTOP card)   ← should go to IAIR card
-    data line 4  →  _cards[3]  (SFIAIR4 card) ← should go to PAIR card
-
-So  ab.tstop  got the value 2.0   (correct IAIR value)
-    ab.iair   stayed at None/0    (never received its line)
-    ab.pair   got 1.0e-4 in sfiair4 and None in pair
-
-After the manifest.json fix + re-running codegen:
-
-    Cards 3 (TSTOP) and 4 (SFIAIR4) are always-present but not in the file,
-    so they silently use defaults.
-    Data line 3 is correctly consumed by the IAIR card.
-    Data line 4 is correctly consumed by the PAIR card.
-
-All tests FAIL on the un-regenerated class and PASS after running:
+To regenerate the keyword class after a manifest change, run:
     python codegen/generate.py -k AIRBAG_PARTICLE
 """
 
@@ -64,8 +51,7 @@ from ansys.dyna.core import keywords as kwd
 
 
 # ---------------------------------------------------------------------------
-# Reference input — the exact AIRBAG_PARTICLE block from the issue report
-# (test_airbag_cpm.txt).  This is the simplest real-world case:
+# Reference input — a minimal CPM airbag block (the simplest real-world case):
 #   ngas=0, norif=0, nvent=0, npdata=0, unit=0 (no repeating rows,
 #   no unit-conversion card).  Only 4 data lines are present; the
 #   TSTOP and SFIAIR4 cards are intentionally absent (all-default).
@@ -95,53 +81,42 @@ def _data_lines(output: str) -> list:
 
 
 # ---------------------------------------------------------------------------
-# 1. Core regression: Card 3 of the input goes to IAIR, not TSTOP
+# 1. Card ordering: data line 3 must be consumed by IAIR, not TSTOP.
 #
-#    OLD behaviour: _cards[2] is the TSTOP card.  It consumed data line 3
-#    (the IAIR line), so ab.tstop == 2.0 and ab.iair was never populated.
-#
-#    NEW behaviour: _cards[2] (TSTOP) and _cards[3] (SFIAIR4) are skipped
-#    by the reader because they are absent from the input, and data line 3
-#    is correctly consumed by the IAIR card.
+#    When TSTOP and SFIAIR4 cards are absent from the input, the reader
+#    must skip them so that data line 3 goes to the IAIR card and data
+#    line 4 goes to the PAIR card.
 # ---------------------------------------------------------------------------
 
 def test_iair_reads_correctly_from_cpm_file():
-    """iair must be 2 after reading the CPM file — fails on old code."""
+    """iair must be 2 after reading the CPM file."""
     ab = kwd.AirbagParticle()
     ab.loads(_AIRBAG_CPM_BLOCK)
-    assert ab.iair == 2, (
-        f"iair should be 2, got {ab.iair}. "
-        "If this is None/0 the codegen has not been updated yet."
-    )
+    assert ab.iair == 2, f"iair should be 2, got {ab.iair}"
 
 
 def test_tstop_is_default_when_absent_from_input():
-    """tstop must keep its default (1e11) — fails on old code where it got 2.0."""
+    """tstop must keep its default (1e11) when the TSTOP card is absent from the input."""
     ab = kwd.AirbagParticle()
     ab.loads(_AIRBAG_CPM_BLOCK)
     assert ab.tstop == pytest.approx(1e11), (
-        f"tstop should be 1e11 (default, card absent from input), got {ab.tstop}. "
-        "If this is 2.0 the TSTOP card is wrongly consuming the IAIR data line."
+        f"tstop should be 1e11 (default, card absent from input), got {ab.tstop}"
     )
 
 
 def test_pair_reads_correctly_from_cpm_file():
-    """pair must be 1e-4 after reading the CPM file — fails on old code."""
+    """pair must be 1e-4 after reading the CPM file."""
     ab = kwd.AirbagParticle()
     ab.loads(_AIRBAG_CPM_BLOCK)
-    assert ab.pair == pytest.approx(1.0e-4), (
-        f"pair should be 1e-4, got {ab.pair}. "
-        "If this is None the PAIR card line was consumed by SFIAIR4."
-    )
+    assert ab.pair == pytest.approx(1.0e-4), f"pair should be 1e-4, got {ab.pair}"
 
 
 def test_sfiair4_is_default_when_absent_from_input():
-    """sfiair4 must keep its default (1.0) — fails on old code where it got 1e-4."""
+    """sfiair4 must keep its default (1.0) when the SFIAIR4 card is absent from the input."""
     ab = kwd.AirbagParticle()
     ab.loads(_AIRBAG_CPM_BLOCK)
     assert ab.sfiair4 == pytest.approx(1.0), (
-        f"sfiair4 should be 1.0 (default, card absent from input), got {ab.sfiair4}. "
-        "If this is 1e-4 the SFIAIR4 card is wrongly consuming the PAIR data line."
+        f"sfiair4 should be 1.0 (default, card absent from input), got {ab.sfiair4}"
     )
 
 
@@ -233,9 +208,8 @@ def test_cpm_table_properties_are_empty():
 # ---------------------------------------------------------------------------
 # 4. Unit-conversion card absent (unit=0)
 #
-#    OLD code: always wrote the MASS/TIME/LENGTH card regardless of UNIT.
-#    NEW code: the card has active_func=lambda: self.unit == 3, so it is
-#    suppressed here (unit=0).
+#    The unit-conversion card has active_func=lambda: self.unit == 3, so it
+#    is suppressed when unit=0.
 # ---------------------------------------------------------------------------
 
 def test_unit_conversion_card_absent_for_unit_0():
@@ -249,8 +223,7 @@ def test_unit_conversion_card_absent_for_unit_0():
     # mass=1.0 / time=0.001 / length=0.001 are the sentinel values used in the
     # unit=3 variant below — they must not appear in the unit=0 output.
     assert not any("     1.0" in line and "   0.001" in line for line in data_lines), (
-        "Unit-conversion card values found in unit=0 output. "
-        "The active_func guard may be missing (old code)."
+        "Unit-conversion card values found in unit=0 output; the active_func guard may be missing."
     )
 
     # Complementary: setting unit=3 must add exactly one extra data line that
@@ -266,8 +239,7 @@ def test_unit_conversion_card_absent_for_unit_0():
     lines_unit3 = len(_data_lines(output3))
     assert lines_unit3 == lines_unit0 + 1, (
         f"UNIT=3 should produce exactly 1 more data line than UNIT=0. "
-        f"Got UNIT=0: {lines_unit0}, UNIT=3: {lines_unit3}. "
-        "If equal, the unit-conversion card has no active_func (old code)."
+        f"Got UNIT=0: {lines_unit0}, UNIT=3: {lines_unit3}."
     )
     assert any("     1.0" in line or "   0.001" in line for line in _data_lines(output3)), (
         "Unit-conversion card line not found in unit=3 output."
