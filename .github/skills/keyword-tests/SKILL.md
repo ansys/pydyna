@@ -23,18 +23,31 @@ argument-hint: "keyword or test file to target (e.g. ContactAutomatic, test_card
 
 ## Running Tests
 
+Use whichever Python environment has PyDyna installed. The commands below use
+`python` as a placeholder — substitute your actual interpreter or prefix as needed.
+
+> **Tip:** Create `.github/copilot-instructions.md` (already gitignored) to tell
+> the agent which Python environment to use. For example:
+> ```
+> Use `uv run --no-project python` when running Python commands in this repo.
+> ```
+> or
+> ```
+> Use `/path/to/my/venv/bin/python` when running Python commands in this repo.
+> ```
+
 ```bash
 # Run all non-run tests (standard)
-uv run --no-project python -m pytest tests/ -v
+python -m pytest tests/ -v
 
 # Run a specific file
-uv run --no-project python -m pytest tests/test_keywords.py -v
+python -m pytest tests/test_keywords.py -v
 
 # Run a specific test
-uv run --no-project python -m pytest tests/test_card.py::test_load_card_errors -v
+python -m pytest tests/test_card.py::test_load_card_errors -v
 
 # Run with -m run (requires LS-DYNA environment)
-uv run --no-project python -m pytest tests/ -v -m run
+python -m pytest tests/ -v -m run
 ```
 
 ## Key Fixtures (from `tests/conftest.py`)
@@ -80,6 +93,10 @@ def test_my_keyword_renders(file_utils):
 
 Then create `tests/testfiles/keywords/my_keyword_reference.k` with the expected output.
 
+> **Trailing whitespace:** LS-DYNA fixed-width fields are padded to their full column width,
+> so reference `.k` files **will contain trailing spaces** on data lines. Do not strip or
+> trim whitespace in these files — doing so will cause tests to fail.
+
 ## Writing a Keyword Parsing Test
 
 Pattern: use `string_utils.as_buffer()` or load a `.k` file via `file_utils`, call `deck.loads()` or card `.read()`.
@@ -123,6 +140,10 @@ For tests using `ref_string`, add the expected value as an attribute in `tests/t
 test_my_keyword_output = "*MY_KEYWORD\n        42\n"
 ```
 
+> **Trailing whitespace:** String values in `reference_string.py` may contain trailing
+> spaces within lines — this is intentional. LS-DYNA fixed-width fields are padded to
+> their full column width and the output reflects that exactly. Do not strip these strings.
+
 Then in the test:
 ```python
 def test_my_keyword(ref_string):
@@ -134,6 +155,7 @@ def test_my_keyword(ref_string):
 ## Common Pitfalls
 
 - **Do not collect `tests/test_codegen/`** — these are for the codegen validation system only, not for testing PyDyna behavior
+- **Trailing whitespace is intentional** — reference `.k` files and strings in `reference_string.py` contain trailing spaces on data lines because LS-DYNA fields are fixed-width padded. Never strip or auto-trim whitespace in these files.
 - **Line endings**: `file_utils` normalizes `\r\n` → `\n`; always use `\n` in reference files
 - **`write()` output includes trailing newline** — include it in reference strings
 - **Import**: use `from ansys.dyna.core import keywords as kwd`, not direct module imports
