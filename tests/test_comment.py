@@ -19,7 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-"""Tests for *COMMENT multiline support.""
+"""Tests for *COMMENT multiline support."""
 
 import pytest
 
@@ -32,7 +32,6 @@ from ansys.dyna.core import keywords as kwd
 def test_comment_import_multiline_all_lines_present():
     """Importing a deck with a 3-line *COMMENT must preserve all three lines.
 
-    Reproduces: https://github.com/ansys/pydyna/issues/1211
     Bug: only Line1 was stored; Line2 and Line3 were silently dropped.
     """
     deck_string = "*KEYWORD\n*COMMENT\nLine1\nLine2\nLine3\n*END"
@@ -49,10 +48,7 @@ def test_comment_import_multiline_all_lines_present():
 
 
 def test_comment_import_multiline_round_trip(ref_string):
-    """A round-trip (load -> write) must reproduce all comment lines.
-
-    Reproduces: https://github.com/ansys/pydyna/issues/1211
-    """
+    """A round-trip (load -> write) must reproduce all comment lines."""
     deck_string = "*KEYWORD\n*COMMENT\nLine1\nLine2\nLine3\n*END"
     deck = Deck()
     deck.loads(deck_string)
@@ -68,7 +64,6 @@ def test_comment_import_multiline_round_trip(ref_string):
 def test_comment_write_multiline_not_truncated(ref_string):
     """Setting a multiline comment must not truncate at 170 characters.
 
-    Reproduces: https://github.com/ansys/pydyna/issues/1211
     Bug: the 20-line string "\\n".join(["0123456789"]*20) was cropped to ~170 chars
     (8 full lines + a partial "012" line).
     """

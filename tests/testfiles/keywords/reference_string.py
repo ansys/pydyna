@@ -1754,7 +1754,7 @@ test_element_mass_part_set_with_mwd = """*ELEMENT_MASS_PART_SET
 $#   pid         addmass         finmass    lcid     mwd
     1463         0.00491             0.0       0       1"""
 
-# Reference strings for *COMMENT multiline tests (issue #1211)
+# Reference strings for *COMMENT multiline tests
 test_comment_multiline_write = """*COMMENT
 $#                                                                       comment
 Line1
