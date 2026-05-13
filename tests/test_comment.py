@@ -41,13 +41,46 @@ def test_comment_import_multiline_all_lines_present():
 
 
 def test_comment_import_from_file():
-    """Importing a *COMMENT from a .k file preserves all lines."""
+    """Importing *COMMENT blocks from a .k file preserves all lines of each block."""
     deck = Deck()
     deck.import_file(str(_ASSETS / "test_multiline_comment.k"))
 
     comments = [kw for kw in deck.keywords if isinstance(kw, kwd.Comment)]
-    assert len(comments) == 1
-    assert comments[0].comment == "Line1\nLine2\nLine3"
+    assert len(comments) == 3
+    assert comments[0].comment == (
+        "DISABLED: self-contact removed for this load case\n"
+        "Re-enable if buckling is observed"
+    )
+    assert comments[1].comment == (
+        "Contact definition: impactor vs plate\n"
+        "Automatic surface-to-surface, friction 0.2"
+    )
+    assert comments[2].comment == (
+        "Segment sets for contact surfaces\n"
+        "Surface 1: impactor face (nodes 2842-2846)\n"
+        "Surface 2: plate top face (nodes 626-3242)"
+    )
+
+
+def test_comment_disabled_contact_keyword_order():
+    """A *COMMENT immediately before a contact keyword does not consume it.
+
+    The keyword following a *COMMENT must appear in the deck as a parsed keyword,
+    not as part of the comment text.
+    """
+    deck = Deck()
+    deck.import_file(str(_ASSETS / "test_multiline_comment.k"))
+
+    types = [type(kw).__name__ for kw in deck.keywords]
+    assert "Comment" in types
+    # Both contacts are parsed — the *COMMENT before each did not swallow them
+    assert types.count("ContactAutomaticSingleSurface") == 1
+    assert types.count("ContactAutomaticSurfaceToSurface") == 1
+    # Keyword order: disabled comment → single-surface contact → annotation comment → s2s contact
+    comment_idx = [i for i, t in enumerate(types) if t == "Comment"]
+    single_surface_idx = types.index("ContactAutomaticSingleSurface")
+    s2s_idx = types.index("ContactAutomaticSurfaceToSurface")
+    assert comment_idx[0] < single_surface_idx < comment_idx[1] < s2s_idx
 
 
 def test_comment_import_multiline_round_trip(ref_string):
