@@ -30,7 +30,7 @@ import numpy as np
 import pandas as pd
 
 from ansys.dyna.core import Deck, keywords as kwd
-from ansys.dyna.core.utils.download_utilities import DownloadManager
+from ansys.dyna.core.utils.download_utilities import download_manager
 
 
 def _gen_nodes(count):
@@ -111,15 +111,14 @@ def perf_002() -> io.StringIO:
 
 def perf_003() -> None:
     """Test loading the yaris deck - this takes about 7 seconds now."""
-    path = ("ls-dyna", "yaris_stat_shock_absorber_loading")
+    path = "ls-dyna/yaris_stat_shock_absorber_loading"
 
-    downloader = DownloadManager()
-    downloader.download_file("fixed_ground.k", *path)
-    downloader.download_file("implicit_control_cards_R9.k", *path)
-    downloader.download_file("YarisD_V2g_shock_abs_load_01.k", *path)
-    downloader.download_file("YarisD_V2g_shock_abs_load_01_nodes.k", *path)
+    download_manager.download_file("fixed_ground.k", path)
+    download_manager.download_file("implicit_control_cards_R9.k", path)
+    download_manager.download_file("YarisD_V2g_shock_abs_load_01.k", path)
+    download_manager.download_file("YarisD_V2g_shock_abs_load_01_nodes.k", path)
     main_filename = "000_yaris_stat_shock_absorber_loading_01.k"
-    output = downloader.download_file(main_filename, *path)
+    output = download_manager.download_file(main_filename, path)
     folder = os.path.dirname(output)
     deck = Deck()
     fname = os.path.join(folder, main_filename)
