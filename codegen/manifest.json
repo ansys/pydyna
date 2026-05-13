@@ -862,6 +862,9 @@
         },
         "comment": "card 6 (mat146_discrete_card) is skipped because of the condition for mat 146 - which we cannot easily check here. Maybe that can be handled in a subclass. card 7 (discrete_dof_card) is skipped because its a duplicate of card 4. card 9 (duplicate_inertia_card) is skipped because its a duplicate of card 2"
     },
+    "COMMENT": {
+        "action": "manual"
+    },
     "DEFINE_FUNCTION": {
         "action": "manual"
     },
