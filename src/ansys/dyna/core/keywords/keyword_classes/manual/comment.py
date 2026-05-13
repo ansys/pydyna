@@ -19,49 +19,39 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-"""Module for manual keyword overrides."""
+"""Module to define *COMMENT keyword with multiline support."""
 
-# Manual keyword overrides - wrapped in try/except to support subset generation
-try:
-    from .manual.comment import Comment  # noqa: F401
-except ImportError:
-    pass
+import typing
 
-try:
-    from .manual.define_function import DefineFunction  # noqa: F401
-except ImportError:
-    pass
+from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.text_card import TextCard
 
-try:
-    from .manual.define_table import DefineTable  # noqa: F401
-except ImportError:
-    pass
 
-try:
-    from .manual.element_solid import ElementSolid  # noqa: F401
-except ImportError:
-    pass
+class Comment(KeywordBase):
+    """DYNA COMMENT keyword.
 
-try:
-    from .manual.element_solid_ortho import ElementSolidOrtho  # noqa: F401
-except ImportError:
-    pass
+    Supports multiline free-form text comments.
+    """
 
-try:
-    from .manual.mat_295 import Mat295, MatAnisotropicHyperelastic  # noqa: F401
-except ImportError:
-    pass
+    keyword = "COMMENT"
+    subkeyword = "COMMENT"
 
-try:
-    from .manual.section_tshell import SectionTShell  # noqa: F401
-except ImportError:
-    pass
+    def __init__(self, **kwargs):
+        """Initialize Comment keyword."""
+        super().__init__(**kwargs)
+        self._cards = [
+            TextCard("comment", kwargs.get("comment")),
+        ]
 
-try:
-    from .manual.parameter_expression import (  # noqa: F401
-        ParameterExpression,
-        ParameterExpressionLocal,
-        ParameterExpressionNoecho,
-    )
-except ImportError:
-    pass
+    @property
+    def comment(self) -> typing.Optional[str]:
+        """Get or set the comment text.
+
+        The comment can span multiple lines. Lines are separated by newline characters.
+        """
+        return self._cards[0].value
+
+    @comment.setter
+    def comment(self, value: str) -> None:
+        """Set the comment text."""
+        self._cards[0].value = value
