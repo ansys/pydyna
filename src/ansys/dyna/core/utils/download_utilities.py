@@ -38,11 +38,6 @@ except ModuleNotFoundError:
     USER_NAME = os.getenv("USERNAME", os.getenv("USER", "pydyna"))
     USER_DATA_PATH = os.getenv("PYDYNA_USER_DATA", os.path.join(tempfile.gettempdir(), USER_NAME))
 
-if not os.path.exists(USER_DATA_PATH):  # pragma: no cover
-    os.makedirs(USER_DATA_PATH)
-
 EXAMPLES_PATH = os.path.join(USER_DATA_PATH, "examples")
-if not os.path.exists(EXAMPLES_PATH):  # pragma: no cover
-    os.makedirs(EXAMPLES_PATH)
 
 __all__ = ["download_manager", "EXAMPLES_PATH", "USER_DATA_PATH"]

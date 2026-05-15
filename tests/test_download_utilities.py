@@ -77,12 +77,6 @@ class TestModuleExports:
     def test_examples_path_is_examples_subdir_of_user_data_path(self):
         assert Path(EXAMPLES_PATH) == Path(USER_DATA_PATH) / "examples"
 
-    def test_examples_path_directory_exists(self):
-        assert os.path.isdir(EXAMPLES_PATH)
-
-    def test_user_data_path_directory_exists(self):
-        assert os.path.isdir(USER_DATA_PATH)
-
 
 
 # Unit tests – network calls mocked at the private-method boundary
