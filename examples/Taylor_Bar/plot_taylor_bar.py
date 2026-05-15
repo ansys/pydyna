@@ -49,13 +49,13 @@ import matplotlib.pyplot as plt
 
 from ansys.dyna.core import Deck, keywords as kwd
 from ansys.dyna.core.run import run_dyna
-from ansys.dyna.core.utils.download_utilities import EXAMPLES_PATH, DownloadManager
+from ansys.dyna.core.utils.download_utilities import EXAMPLES_PATH, download_manager
 
 workdir = tempfile.TemporaryDirectory()
 
 mesh_file_name = "taylor_bar_mesh.k"
-mesh_file = DownloadManager().download_file(
-    mesh_file_name, "ls-dyna", "Taylor_Bar", destination=os.path.join(EXAMPLES_PATH, "Taylor_Bar")
+mesh_file = download_manager.download_file(
+    mesh_file_name, "ls-dyna/Taylor_Bar", destination=os.path.join(EXAMPLES_PATH, "Taylor_Bar")
 )
 
 ###############################################################################

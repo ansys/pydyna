@@ -49,12 +49,12 @@ import pandas as pd
 
 from ansys.dyna.core import Deck, keywords as kwd
 from ansys.dyna.core.run import MemoryUnit, MpiOption, run_dyna
-from ansys.dyna.core.utils.download_utilities import EXAMPLES_PATH, DownloadManager
+from ansys.dyna.core.utils.download_utilities import EXAMPLES_PATH, download_manager
 
 rundir = tempfile.TemporaryDirectory()
 mesh_file_name = "mesh.k"
-mesh_file = DownloadManager().download_file(
-    mesh_file_name, "ls-dyna", "Buckling_Beer_Can", destination=os.path.join(EXAMPLES_PATH, "Buckling_Beer_Can")
+mesh_file = download_manager.download_file(
+    mesh_file_name, "ls-dyna/Buckling_Beer_Can", destination=os.path.join(EXAMPLES_PATH, "Buckling_Beer_Can")
 )
 
 dynafile = "beer_can.k"
