@@ -1753,3 +1753,24 @@ $#   pid         addmass         finmass    lcid
 test_element_mass_part_set_with_mwd = """*ELEMENT_MASS_PART_SET
 $#   pid         addmass         finmass    lcid     mwd
     1463         0.00491             0.0       0       1"""
+
+# Reference strings for *COMMENT multiline tests
+test_comment_multiline_write = """*COMMENT
+$#                                                                       comment
+Line1
+Line2
+Line3"""
+
+test_comment_multiline_20_write = (
+    "*COMMENT\n$#                                                                       comment\n"
+    + "\n".join(["0123456789"] * 20)
+)
+
+test_comment_deck_roundtrip = """$
+*KEYWORD
+*COMMENT
+$#                                                                       comment
+Line1
+Line2
+Line3
+*END"""
