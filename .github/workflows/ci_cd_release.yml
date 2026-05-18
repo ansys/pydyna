@@ -160,10 +160,11 @@ jobs:
           skip-existing: false
 
       - name: "Release to GitHub"
-        uses: ansys/actions/release-github@12ca08fd7f0caa52076cca15c5621482646f8560 # v10.3.1
+        uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda # v3.0.0 # zizmor: ignore[superfluous-actions]
         with:
-          library-name: ${{ env.PACKAGE_NAME }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          files: 
+            ./**/*.whl
+            ./**/*.tar.gz
 
   doc-deploy-stable:
     name: "Deploy stable documentation"
