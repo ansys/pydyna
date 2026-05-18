@@ -19,7 +19,7 @@ exclude: |
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: 6fec9b7edb08fd9989088709d864a7826dc74e80  # frozen: v0.15.12
+  rev: 5e2fb545eba1ea9dc051f6f962d52fe8f76a9794  # frozen: v0.15.13
   hooks:
     - id: ruff-check
       args: [--fix]
@@ -40,7 +40,7 @@ repos:
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: f805888065fdb6162e1f800e50bb9460cbd223d6  # frozen: 0.37.2
+  rev: 943377262562a12b57292fc98fabd7dbf81451fe  # frozen: 0.37.2
   hooks:
     - id: check-github-workflows
 
@@ -53,7 +53,7 @@ repos:
       - --start_year=2023
 
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
-  rev: a4727cbbcd26d7098e96b9cb738169b59711ae51  # frozen: v1.24.1
+  rev: 9257c6050c0261b8c57e712f632dc4a8010109a9  # frozen: v1.25.2
   hooks:
     - id: zizmor
       args: ["--pedantic"]
