@@ -125,22 +125,6 @@ jobs:
           coverage-file: unittests
           pytest-markers: "not codegen and not run"
 
-  smoke-tests:
-    name: "Build wheelhouse for ${{ matrix.os }} and Python ${{ matrix.python-version }}"
-    runs-on: ${{ matrix.os }}
-    needs: [code-style]
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [windows-latest, ubuntu-latest]
-        python-version: ['3.10', '3.11', '3.12', '3.13', '3.14']
-    steps:
-      - uses: ansys/actions/build-wheelhouse@571fb2b8c7d6ad8c8b18e50bd20fb00f125dcfb6 # v9.0.15
-        with:
-          library-name: ${{ env.PACKAGE_NAME }}
-          operating-system: ${{ matrix.os }}
-          python-version: ${{ matrix.python-version }}
-
 
   build-library:
     name: "Build library"
@@ -176,10 +160,11 @@ jobs:
           skip-existing: false
 
       - name: "Release to GitHub"
-        uses: ansys/actions/release-github@12ca08fd7f0caa52076cca15c5621482646f8560 # v10.3.1
+        uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda # v3.0.0 # zizmor: ignore[superfluous-actions]
         with:
-          library-name: ${{ env.PACKAGE_NAME }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          files: 
+            ./**/*.whl
+            ./**/*.tar.gz
 
   doc-deploy-stable:
     name: "Deploy stable documentation"
