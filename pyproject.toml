@@ -76,7 +76,7 @@ doc = [
     "sphinx-copybutton==0.5.2",
     "sphinx-gallery==0.21.0",
     "sphinx-autodoc-typehints==3.1.0",
-    "ansys-sphinx-theme[autoapi]==1.8.1",
+    "ansys-sphinx-theme[autoapi]==1.8.2",
     "pypandoc==1.17",
     "nbsphinx==0.9.8",
     "joblib==1.5.3",
