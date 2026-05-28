@@ -862,6 +862,9 @@
         },
         "comment": "card 6 (mat146_discrete_card) is skipped because of the condition for mat 146 - which we cannot easily check here. Maybe that can be handled in a subclass. card 7 (discrete_dof_card) is skipped because its a duplicate of card 4. card 9 (duplicate_inertia_card) is skipped because its a duplicate of card 2"
     },
+    "COMMENT": {
+        "action": "manual"
+    },
     "DEFINE_FUNCTION": {
         "action": "manual"
     },
@@ -2233,10 +2236,59 @@
                 {
                     "ref": "id_title_card"
                 }
+            ],
+            "conditional-card": [
+                {
+                    "func": "self._cards[2].has_nondefault_values()",
+                    "ref": "tstop_card"
+                },
+                {
+                    "func": "self._cards[3].has_nondefault_values()",
+                    "ref": "sfiair4_card"
+                },
+                {
+                    "func": "self.unit == 3",
+                    "ref": "unit_conversion_card"
+                }
+            ],
+            "table-card-group": [
+                {
+                    "refs": [
+                        "uniform_pressure_card",
+                        "part_data_card"
+                    ],
+                    "overall-name": "parts_data",
+                    "length-func": "self.npdata or 0"
+                }
+            ],
+            "table-card": [
+                {
+                    "property-name": "vents",
+                    "length-func": "self.nvent or 0",
+                    "ref": "vent_card"
+                },
+                {
+                    "property-name": "gas_components",
+                    "length-func": "self.ngas or 0",
+                    "ref": "gas_component_card"
+                },
+                {
+                    "property-name": "orifices",
+                    "length-func": "self.norif or 0",
+                    "ref": "orifice_card"
+                }
             ]
         },
         "labels": {
-            "id_title_card": 0
+            "id_title_card": 0,
+            "tstop_card": 3,
+            "sfiair4_card": 4,
+            "unit_conversion_card": 5,
+            "uniform_pressure_card": 7,
+            "part_data_card": 8,
+            "vent_card": 9,
+            "gas_component_card": 11,
+            "orifice_card": 12
         }
     },
     "AIRBAG_PARTICLE_DECOMPOSITION": {
@@ -2683,6 +2735,19 @@
         }
     },
     "ELEMENT_SHELL": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "elements",
+                    "ref": "elements_card"
+                }
+            ]
+        },
+        "labels": {
+            "elements_card": 0
+        }
+    },
+    "ELEMENT_TSHELL": {
         "generation-options": {
             "table-card": [
                 {

@@ -1,8 +1,7 @@
 name: Docker images publishing
 
 permissions:
-  contents: read  # Needed to checkout code
-  packages: read  # Needed for pulling container images from GHCR
+  contents: read  # default; overridden per-job as needed
 
 on:
   workflow_dispatch:
@@ -21,6 +20,7 @@ env:
   IMAGE_TAG: ${{ github.event.inputs.tagVersion || 'latest'}}
   FTP_USER: ${{ secrets.FTP_USER }}
   FTP_LOGIN: ${{ secrets.FTP_PASSWORD }}
+  LICENSE_SERVER: ${{ secrets.LICENSE_SERVER }}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -29,7 +29,10 @@ concurrency:
 jobs:
   pydyna-run-containers:
     name: Build the pydyna-run docker image
-    runs-on: ubuntu-latest
+    runs-on: [public-ubuntu-latest-16-cores]
+    permissions:
+      contents: read   # Needed to checkout code
+      packages: write  # Needed for pushing Docker image to GHCR
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
@@ -46,8 +49,33 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and export to Docker
-        uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294 # v7.0.0
+      - name: Build and load image locally
+        uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
+        with:
+          context: docker/run
+          file: docker/run/Dockerfile
+          load: true
+          push: false
+          tags: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ env.IMAGE_TAG }}
+          build-args: |
+            FTP_USER=${{ env.FTP_USER }}
+            FTP_LOGIN=${{ env.FTP_LOGIN }}
+
+      - name: "Build documentation"
+        uses: ./.github/actions/doc-build
+        with:
+          build-autokeywords-api: "True"
+          pydyna-run-container: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ env.IMAGE_TAG }}
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          license-server: ${{ env.LICENSE_SERVER }}
+          bot-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          github-actor: ${{ github.actor }}
+          use_cache_examples: false
+          skip-pull: true  # image was loaded locally by the build step above; not yet pushed to registry
+
+      - name: Push image to registry
+        uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
         with:
           context: docker/run
           file: docker/run/Dockerfile

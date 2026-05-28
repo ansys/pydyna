@@ -19,7 +19,7 @@ exclude: |
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: b831c3dc5d27d9da294ae4e915773b99aa24a7c5  # frozen: v0.15.10
+  rev: 0c7b6c989466a93942def1f84baf36ddfcd60c83  # frozen: v0.15.14
   hooks:
     - id: ruff-check
       args: [--fix]
@@ -40,12 +40,12 @@ repos:
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: ed81924a8b1cecdaa570b072528fa80c9c4d6ccd  # frozen: 0.37.1
+  rev: f805888065fdb6162e1f800e50bb9460cbd223d6  # frozen: 0.37.2
   hooks:
     - id: check-github-workflows
 
 - repo: https://github.com/ansys/pre-commit-hooks
-  rev: 680b297da7584a07eb7c92b6b4e9baf88ece3e0e  # frozen: v0.6.0
+  rev: ad4e7598809ad98cde5aaf52d80040c7ac56e7cf  # frozen: v0.7.2
   hooks:
     - id: add-license-headers
       files: '(src|tests|doc)/.*\.(py)'
@@ -53,7 +53,7 @@ repos:
       - --start_year=2023
 
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
-  rev: a4727cbbcd26d7098e96b9cb738169b59711ae51  # frozen: v1.24.1
+  rev: 9257c6050c0261b8c57e712f632dc4a8010109a9  # frozen: v1.25.2
   hooks:
     - id: zizmor
       args: ["--pedantic"]

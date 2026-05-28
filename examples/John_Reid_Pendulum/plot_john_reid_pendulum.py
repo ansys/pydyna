@@ -45,11 +45,11 @@ import pandas as pd
 
 from ansys.dyna.core import Deck, keywords as kwd
 from ansys.dyna.core.run import run_dyna
-from ansys.dyna.core.utils.download_utilities import EXAMPLES_PATH, DownloadManager
+from ansys.dyna.core.utils.download_utilities import EXAMPLES_PATH, download_manager
 
 mesh_file_name = "nodes.k"
-mesh_file = DownloadManager().download_file(
-    mesh_file_name, "ls-dyna", "John_Reid_Pendulum", destination=os.path.join(EXAMPLES_PATH, "John_Reid_Pendulum")
+mesh_file = download_manager.download_file(
+    mesh_file_name, "ls-dyna/John_Reid_Pendulum", destination=os.path.join(EXAMPLES_PATH, "John_Reid_Pendulum")
 )
 
 rundir = tempfile.TemporaryDirectory()

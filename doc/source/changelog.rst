@@ -7,6 +7,317 @@ This document contains the release notes for the PyDyna project.
 
 .. towncrier release notes start
 
+`0.12.1 <https://github.com/ansys/pydyna/releases/tag/v0.12.1>`_ - May 18, 2026
+===============================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Add custom release actions
+          - `#1235 <https://github.com/ansys/pydyna/pull/1235>`_
+
+
+`0.12.0 <https://github.com/ansys/pydyna/releases/tag/v0.12.0>`_ - May 18, 2026
+===============================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Docker image for \`\`run\`\`
+          - `#1069 <https://github.com/ansys/pydyna/pull/1069>`_
+
+        * - Apply_lspp_defaults algorithm
+          - `#1145 <https://github.com/ansys/pydyna/pull/1145>`_
+
+        * - Add field variable
+          - `#1173 <https://github.com/ansys/pydyna/pull/1173>`_
+
+        * - Update python to 3.14
+          - `#1201 <https://github.com/ansys/pydyna/pull/1201>`_
+
+        * - Add airbag manifest
+          - `#1223 <https://github.com/ansys/pydyna/pull/1223>`_
+
+        * - Replace custom \`DownloadManager\` implementation
+          - `#1229 <https://github.com/ansys/pydyna/pull/1229>`_
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Handle DEFINE_TABLE_2D as table-card
+          - `#1125 <https://github.com/ansys/pydyna/pull/1125>`_
+
+        * - General cleanup
+          - `#1128 <https://github.com/ansys/pydyna/pull/1128>`_
+
+        * - Give information about error location
+          - `#1132 <https://github.com/ansys/pydyna/pull/1132>`_
+
+        * - Create \`\`changelog\`\` fragment only on PR and unwanted \`\`deps\`\`
+          - `#1134 <https://github.com/ansys/pydyna/pull/1134>`_
+
+        * - Codegen for option handling with multiple generations
+          - `#1135 <https://github.com/ansys/pydyna/pull/1135>`_
+
+        * - Remove deprecated package
+          - `#1137 <https://github.com/ansys/pydyna/pull/1137>`_
+
+        * - Case insensitive params and correct expression parser
+          - `#1138 <https://github.com/ansys/pydyna/pull/1138>`_
+
+        * - Section shell NIP calculation
+          - `#1141 <https://github.com/ansys/pydyna/pull/1141>`_
+
+        * - Some basic IGA keywords
+          - `#1142 <https://github.com/ansys/pydyna/pull/1142>`_
+
+        * - EOS and DATABASE_CROSS_SECTION title options
+          - `#1147 <https://github.com/ansys/pydyna/pull/1147>`_
+
+        * - *SECTION card sets and TITLE option
+          - `#1151 <https://github.com/ansys/pydyna/pull/1151>`_
+
+        * - Raise errors on \`\`run_dyna\`\` fails
+          - `#1154 <https://github.com/ansys/pydyna/pull/1154>`_
+
+        * - Warning location
+          - `#1157 <https://github.com/ansys/pydyna/pull/1157>`_
+
+        * - Type mapping codegen
+          - `#1158 <https://github.com/ansys/pydyna/pull/1158>`_
+
+        * - Solid format check
+          - `#1159 <https://github.com/ansys/pydyna/pull/1159>`_
+
+        * - Improve parameter  handling
+          - `#1160 <https://github.com/ansys/pydyna/pull/1160>`_
+
+        * - ELEMENT_BEAM_ORIENTATION allow multi-row style input
+          - `#1165 <https://github.com/ansys/pydyna/pull/1165>`_
+
+        * - Support \`ELEMENT_MASS_PART\` and \`ELEMENT_MASS_PART_SET\` with table cards
+          - `#1170 <https://github.com/ansys/pydyna/pull/1170>`_
+
+        * - Contact tiebreak condition
+          - `#1189 <https://github.com/ansys/pydyna/pull/1189>`_
+
+        * - Pinned requirements incompatible with the rest of the ecosystem
+          - `#1218 <https://github.com/ansys/pydyna/pull/1218>`_
+
+        * - Allow \`ELEMENT TSHELL\`  to table cards
+          - `#1220 <https://github.com/ansys/pydyna/pull/1220>`_
+
+        * - Support multiline \`*COMMENT\` keyword
+          - `#1226 <https://github.com/ansys/pydyna/pull/1226>`_
+
+
+  .. tab-item:: Documentation
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Update \`\`CONTRIBUTORS.md\`\` with the latest contributors
+          - `#1123 <https://github.com/ansys/pydyna/pull/1123>`_, `#1161 <https://github.com/ansys/pydyna/pull/1161>`_
+
+        * - Remove duplicated contributors entry
+          - `#1162 <https://github.com/ansys/pydyna/pull/1162>`_
+
+
+  .. tab-item:: Dependencies
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Bump numpy from 2.2.6 to 2.4.0
+          - `#1010 <https://github.com/ansys/pydyna/pull/1010>`_
+
+        * - Bump pytest-sphinx from 0.6.3 to 0.7.1 in the tests group
+          - `#1080 <https://github.com/ansys/pydyna/pull/1080>`_
+
+        * - Bump the doc group across 1 directory with 2 updates
+          - `#1096 <https://github.com/ansys/pydyna/pull/1096>`_, `#1163 <https://github.com/ansys/pydyna/pull/1163>`_
+
+        * - Bump pyvista from 0.46.5 to 0.47.0
+          - `#1115 <https://github.com/ansys/pydyna/pull/1115>`_
+
+        * - Bump the actions group across 1 directory with 6 updates
+          - `#1122 <https://github.com/ansys/pydyna/pull/1122>`_
+
+        * - Bump the actions group with 3 updates
+          - `#1127 <https://github.com/ansys/pydyna/pull/1127>`_
+
+        * - Bump jupyterlab from 4.5.3 to 4.5.4 in the doc group
+          - `#1129 <https://github.com/ansys/pydyna/pull/1129>`_
+
+        * - Bump pyvista from 0.47.0 to 0.47.1
+          - `#1140 <https://github.com/ansys/pydyna/pull/1140>`_
+
+        * - Bump the actions group across 1 directory with 2 updates
+          - `#1149 <https://github.com/ansys/pydyna/pull/1149>`_
+
+        * - Bump the actions group across 1 directory with 3 updates
+          - `#1168 <https://github.com/ansys/pydyna/pull/1168>`_
+
+        * - Bump docker/build-push-action from 6.19.2 to 7.0.0 in the actions group
+          - `#1169 <https://github.com/ansys/pydyna/pull/1169>`_
+
+        * - Bump ansys/actions from 10.2.8 to 10.2.9 in the actions group
+          - `#1172 <https://github.com/ansys/pydyna/pull/1172>`_
+
+        * - Bump jupyterlab from 4.5.5 to 4.5.6 in the doc group
+          - `#1174 <https://github.com/ansys/pydyna/pull/1174>`_
+
+        * - Bump actions/download-artifact from 8.0.0 to 8.0.1 in the actions group
+          - `#1175 <https://github.com/ansys/pydyna/pull/1175>`_
+
+        * - Bump pypandoc from 1.16.2 to 1.17
+          - `#1177 <https://github.com/ansys/pydyna/pull/1177>`_
+
+        * - Bump chardet from 5.2.0 to 7.1.0
+          - `#1180 <https://github.com/ansys/pydyna/pull/1180>`_
+
+        * - Bump ansys/actions from 10.2.9 to 10.2.10 in the actions group
+          - `#1181 <https://github.com/ansys/pydyna/pull/1181>`_
+
+        * - Bump chardet from 7.1.0 to 7.2.0
+          - `#1182 <https://github.com/ansys/pydyna/pull/1182>`_
+
+        * - Bump ansys/actions from 10.2.10 to 10.2.11 in the actions group
+          - `#1184 <https://github.com/ansys/pydyna/pull/1184>`_
+
+        * - Bump pytest-cov from 7.0.0 to 7.1.0 in the tests group
+          - `#1185 <https://github.com/ansys/pydyna/pull/1185>`_
+
+        * - Bump chardet from 7.2.0 to 7.3.0
+          - `#1187 <https://github.com/ansys/pydyna/pull/1187>`_
+
+        * - Bump ansys/actions from 10.2.11 to 10.2.12 in the actions group
+          - `#1188 <https://github.com/ansys/pydyna/pull/1188>`_
+
+        * - Bump requests from 2.32.5 to 2.33.0
+          - `#1191 <https://github.com/ansys/pydyna/pull/1191>`_
+
+        * - Bump ipython from 8.38.0 to 8.39.0 in the doc group
+          - `#1192 <https://github.com/ansys/pydyna/pull/1192>`_
+
+        * - Bump requests from 2.33.0 to 2.33.1
+          - `#1196 <https://github.com/ansys/pydyna/pull/1196>`_
+
+        * - Bump pypa/gh-action-pypi-publish from 1.13.0 to 1.14.0 in the actions group
+          - `#1197 <https://github.com/ansys/pydyna/pull/1197>`_
+
+        * - Bump docker/login-action from 4.0.0 to 4.1.0 in the actions group
+          - `#1199 <https://github.com/ansys/pydyna/pull/1199>`_
+
+        * - Bump pytest from 9.0.2 to 9.0.3 in the tests group
+          - `#1203 <https://github.com/ansys/pydyna/pull/1203>`_
+
+        * - Bump chardet from 7.3.0 to 7.4.1
+          - `#1204 <https://github.com/ansys/pydyna/pull/1204>`_
+
+        * - Bump docker/build-push-action from 7.0.0 to 7.1.0 in the actions group across 1 directory
+          - `#1206 <https://github.com/ansys/pydyna/pull/1206>`_
+
+        * - Bump pyvista from 0.47.1 to 0.47.3
+          - `#1208 <https://github.com/ansys/pydyna/pull/1208>`_
+
+        * - Bump chardet from 7.4.1 to 7.4.3
+          - `#1212 <https://github.com/ansys/pydyna/pull/1212>`_
+
+        * - Bump ansys/actions from 10.2.12 to 10.3.0 in the actions group
+          - `#1215 <https://github.com/ansys/pydyna/pull/1215>`_
+
+        * - Bump sphinx-gallery from 0.20.0 to 0.21.0 in the doc group
+          - `#1216 <https://github.com/ansys/pydyna/pull/1216>`_
+
+        * - Bump matplotlib from 3.10.8 to 3.10.9
+          - `#1217 <https://github.com/ansys/pydyna/pull/1217>`_
+
+        * - Bump pyvista from 0.47.3 to 0.48.0
+          - `#1225 <https://github.com/ansys/pydyna/pull/1225>`_
+
+        * - Bump actions/labeler from 6.0.1 to 6.1.0 in the actions group
+          - `#1228 <https://github.com/ansys/pydyna/pull/1228>`_
+
+        * - Bump ansys/actions from 10.3.0 to 10.3.1 in the actions group
+          - `#1231 <https://github.com/ansys/pydyna/pull/1231>`_
+
+        * - Bump pyvista from 0.48.0 to 0.48.1
+          - `#1232 <https://github.com/ansys/pydyna/pull/1232>`_
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Update CHANGELOG for v0.11.0
+          - `#1110 <https://github.com/ansys/pydyna/pull/1110>`_
+
+        * - Fix \`\`dpf\`\` path for  build \`\`docs\`\`
+          - `#1111 <https://github.com/ansys/pydyna/pull/1111>`_
+
+        * - Bump version 0.12.dev0
+          - `#1113 <https://github.com/ansys/pydyna/pull/1113>`_
+
+        * - Pre-commit automatic update
+          - `#1116 <https://github.com/ansys/pydyna/pull/1116>`_, `#1126 <https://github.com/ansys/pydyna/pull/1126>`_, `#1144 <https://github.com/ansys/pydyna/pull/1144>`_, `#1164 <https://github.com/ansys/pydyna/pull/1164>`_, `#1171 <https://github.com/ansys/pydyna/pull/1171>`_, `#1179 <https://github.com/ansys/pydyna/pull/1179>`_, `#1186 <https://github.com/ansys/pydyna/pull/1186>`_, `#1195 <https://github.com/ansys/pydyna/pull/1195>`_, `#1200 <https://github.com/ansys/pydyna/pull/1200>`_, `#1210 <https://github.com/ansys/pydyna/pull/1210>`_, `#1213 <https://github.com/ansys/pydyna/pull/1213>`_, `#1221 <https://github.com/ansys/pydyna/pull/1221>`_, `#1224 <https://github.com/ansys/pydyna/pull/1224>`_
+
+        * - Change project leads
+          - `#1136 <https://github.com/ansys/pydyna/pull/1136>`_
+
+        * - Remove smoke tests
+          - `#1146 <https://github.com/ansys/pydyna/pull/1146>`_
+
+        * - Update license metadata in pyproject.toml
+          - `#1207 <https://github.com/ansys/pydyna/pull/1207>`_
+
+        * - Build and test docker image before pushing
+          - `#1214 <https://github.com/ansys/pydyna/pull/1214>`_
+
+        * - Update dependency
+          - `#1222 <https://github.com/ansys/pydyna/pull/1222>`_
+
+
+  .. tab-item:: Miscellaneous
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Cleanup options
+          - `#1190 <https://github.com/ansys/pydyna/pull/1190>`_
+
+
+  .. tab-item:: Test
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Upgrade hollerith
+          - `#1198 <https://github.com/ansys/pydyna/pull/1198>`_
+
+
 `0.11.0 <https://github.com/ansys/pydyna/releases/tag/v0.11.0>`_ - February 13, 2026
 ====================================================================================
 
