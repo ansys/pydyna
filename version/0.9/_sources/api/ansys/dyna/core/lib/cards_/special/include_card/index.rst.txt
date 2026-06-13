@@ -1,0 +1,21 @@
+ansys.dyna.core.lib.cards_.special.include_card
+===============================================
+
+.. py:module:: ansys.dyna.core.lib.cards_.special.include_card
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/cards_/special/include_card/IncludeCard
+   /api/ansys/dyna/core/lib/cards_/special/include_card/IncludeCardMixin
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.cards_.special.include_card.IncludeCard
+   ansys.dyna.core.lib.cards_.special.include_card.IncludeCardMixin
+
+

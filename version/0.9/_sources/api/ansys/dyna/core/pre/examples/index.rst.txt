@@ -1,0 +1,16 @@
+ansys.dyna.core.pre.examples
+============================
+
+.. py:module:: ansys.dyna.core.pre.examples
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /api/ansys/dyna/core/pre/examples/download_utilities/index
+   /api/ansys/dyna/core/pre/examples/examples/index
+
+

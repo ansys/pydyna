@@ -1,0 +1,40 @@
+ansys.dyna.core.run.options.MpiOption
+=====================================
+
+.. py:class:: ansys.dyna.core.run.options.MpiOption
+
+   
+   MPI option to configure the LS-DYNA execution command line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: SMP
+      :value: 0
+
+
+
+   .. py:attribute:: MPP_INTEL_MPI
+      :value: 1
+
+
+
+   .. py:attribute:: MPP_MS_MPI
+      :value: 2
+
+

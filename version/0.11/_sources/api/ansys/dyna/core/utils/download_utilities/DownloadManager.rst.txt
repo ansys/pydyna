@@ -1,0 +1,133 @@
+ansys.dyna.core.utils.download_utilities.DownloadManager
+========================================================
+
+.. py:class:: ansys.dyna.core.utils.download_utilities.DownloadManager
+
+   
+   Manages downloads of example files.
+
+   Local paths are saved in this class so that a global cleanup
+   of example files can be performed when the client is closed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: downloads_list
+      :value: []
+
+
+
+   .. py:method:: add_file(file_path: str)
+
+      
+      Add the path for a downloaded example file to a list.
+
+      This list keeps track of where example files are
+      downloaded so that a global cleanup of these files can be
+      performed when the client is closed.
+
+      :Parameters:
+
+          **file_path** : :class:`python:str`
+              Local path of the downloaded example file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: clear_download_cache()
+
+      
+      Remove downloaded example files from the local path.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: download_file(filename: str, *directory: str, destination: Optional[str] = None, force: bool = False) -> str
+
+      
+      Download an example file from the PyAnsys Github examples repository.
+
+
+      :Parameters:
+
+          **filename** : :class:`python:str`
+              Name of the example file to download.
+
+          **destination** : :class:`python:str`, :obj:`optional`
+              Path to download the example file to. The default
+              is ``None``, in which case the default path for app data
+              is used.
+
+          **force** : :ref:`bool <python:bltin-boolean-values>`, :obj:`optional`
+              Whether to always download the example file. The default is
+              ``False``, in which case if the example file is cached, it
+              is reused.
+
+          **directory** : :class:`python:tuple`\[:class:`python:str`]
+              Path under the PyAnsys Github examples repository.
+
+
+
+      :Returns:
+
+          :class:`python:tuple`\[:class:`python:str`, :class:`python:str`]
+              Tuple containing the filepath to use and the local filepath of the downloaded
+              directory. The two are different in case of containers.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

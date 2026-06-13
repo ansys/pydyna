@@ -1,0 +1,31 @@
+ansys.dyna.core.pre.dynadem
+===========================
+
+.. py:module:: ansys.dyna.core.pre.dynadem
+
+.. autoapi-nested-parse::
+
+   DEM API
+   =======
+
+   Module for creating a DEM DYNA input deck.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/pre/dynadem/DynaDEM
+   /api/ansys/dyna/core/pre/dynadem/DEMAnalysis
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynadem.DynaDEM
+   ansys.dyna.core.pre.dynadem.DEMAnalysis
+
+

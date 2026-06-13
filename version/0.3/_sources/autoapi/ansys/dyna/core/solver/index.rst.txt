@@ -1,0 +1,16 @@
+:py:mod:`ansys.dyna.core.solver`
+================================
+
+.. py:module:: ansys.dyna.core.solver
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   dynasolver/index.rst
+   grpc_tags/index.rst
+
+

@@ -1,0 +1,807 @@
+ansys.dyna.core.lib.deck
+========================
+
+.. py:module:: ansys.dyna.core.lib.deck
+
+.. autoapi-nested-parse::
+
+   Module provides a collection of keywords that can read and write to a keyword file.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.deck.Deck
+
+
+Module Contents
+---------------
+
+.. py:class:: Deck(title: str = None, **kwargs)
+
+   
+   Provides a collection of keywords that can read and write to a keyword file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: comment_header
+      :type: Optional[str]
+
+
+      
+      Comment header of the keyword database.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: title
+      :type: Optional[str]
+
+
+      
+      Title of the keyword database.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: format
+      :type: ansys.dyna.core.lib.format_type.format_type
+
+
+      
+      Format type of the deck.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __add__(other)
+
+      
+      Add two decks together.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: clear()
+
+      
+      Clear all keywords from the deck.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: transform_handler
+      :type: ansys.dyna.core.lib.transform.TransformHandler
+
+
+
+   .. py:method:: register_import_handler(import_handler: ansys.dyna.core.lib.import_handler.ImportHandler) -> None
+
+      
+      Registers an ImportHandler object
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: parameters
+      :type: ansys.dyna.core.lib.parameters.ParameterSet
+
+
+
+   .. py:method:: append(keyword: Union[ansys.dyna.core.lib.keyword_base.KeywordBase, str], check=False) -> None
+
+      
+      Add a keyword to the collection.
+
+
+      :Parameters:
+
+          **keyword** : :obj:`Union`\[:obj:`KeywordBase`, :obj:`EncryptedKeyword`, :class:`python:str`]
+              Keyword. The keyword can be ``KeywordBase``, ``EncryptedKeyword``,
+              or a string.
+
+          **check** : :ref:`bool <python:bltin-boolean-values>`, :obj:`optional`
+              The default is ``False``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: remove(index: int | list[int]) -> None
+
+      
+      Remove a keyword from the collection by index.
+
+
+      :Parameters:
+
+          **index** : :class:`python:int` or :class:`python:list` :obj:`of` :class:`python:int`, :obj:`mandatory`
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: all_keywords
+      :type: List[Union[str, ansys.dyna.core.lib.keyword_base.KeywordBase, ansys.dyna.core.lib.encrypted_keyword.EncryptedKeyword]]
+
+
+      
+      List of all keywords.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: string_keywords
+      :type: List[str]
+
+
+      
+      List of keywords as a raw string.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: encrypted_keywords
+      :type: List[str]
+
+
+      
+      List of keywords as a raw string.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: keywords
+
+      
+      List of processed keywords.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: extend(kwlist: list) -> None
+
+      
+      Add a list of keywords to the deck.
+
+
+      :Parameters:
+
+          **kwlist** : :class:`python:list`
+              List of keywords.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: expand(cwd=None, recurse=True)
+
+      
+      Get a new deck that is flattened copy of `self`.
+
+      A flattened deck is one where the *INCLUDE keywords are replaced
+      by the contents of the file that is included.
+      `cwd` is a working directory used to resolve the filename
+      If `recurse` is true, *INCLUDE keywords within included decks
+      are expanded, recursively.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: dumps() -> str
+
+      
+      Get the keyword file representation of all keywords as a string.
+
+
+
+
+
+      :Returns:
+
+          :class:`python:str`
+              Keyword file representation of all keywords as a string.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(buf: Optional[TextIO] = None, format: Optional[ansys.dyna.core.lib.format_type.format_type] = None)
+
+      
+      Write the card in the dyna keyword format.
+
+
+      :Parameters:
+
+          **buf** : :obj:`optional`
+              Buffer to write to. The default is ``None``,
+              in which case the output is returned as a string.
+
+          **format** : :obj:`optional`
+              Format to write in. The default is ``None``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: loads(value: str, context: Optional[ansys.dyna.core.lib.import_handler.ImportContext] = None) -> ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult
+
+      
+      Load all keywords from the keyword file as a string.
+
+      When adding all keywords from the file, this method
+      overwrites the title and user comment, if any.
+
+      :Parameters:
+
+          **value** : :class:`python:str`
+              ..
+
+          **context: ImportContext**
+              the context
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: validate() -> None
+
+      
+      Validate the collection of keywords.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_kwds_by_type(str_type: str) -> Iterator[ansys.dyna.core.lib.keyword_base.KeywordBase]
+
+      
+      Get all keywords for a given type.
+
+
+      :Parameters:
+
+          **str_type** : :class:`python:str`
+              Keyword type.
+
+
+
+      :Returns:
+
+          :obj:`typing.Iterator`\[:obj:`KeywordBase`]
+              ..
+
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      Get all *SECTION_* keywords in the deck.
+
+      >>>deck.get_kwds_by_type("SECTION")
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_kwds_by_full_type(str_type: str, str_subtype: str) -> Iterator[ansys.dyna.core.lib.keyword_base.KeywordBase]
+
+      
+      Get all keywords for a given full type.
+
+
+      :Parameters:
+
+          **str_type** : :class:`python:str`
+              Keyword type.
+
+          **str_subtype** : :class:`python:str`
+              Keyword subtype.
+
+
+
+      :Returns:
+
+          :obj:`typing.Iterator`\[:obj:`KeywordBase`]
+              ..
+
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      Get all *SECTION_SHELL keyword instances in the deck.
+
+      >>>deck.get_kwds_by_full_type("SECTION", "SHELL")
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_section_by_id(id: int) -> Optional[ansys.dyna.core.lib.keyword_base.KeywordBase]
+
+      
+      Get the SECTION keyword in the collection for a given section ID.
+
+
+      :Parameters:
+
+          **id** : :class:`python:int`
+              Section ID.
+
+
+
+      :Returns:
+
+          :obj:`SECTION` :obj:`keyword` or ``None`` :obj:`if` :obj:`there` :obj:`is` :obj:`no` :obj:`SECTION` :obj:`keyword` :obj:`that` :obj:`matches` :obj:`the` :obj:`section` ID.
+              ..
+
+
+
+
+      :Raises:
+
+          :obj:`Exception`
+              If multiple SECTION keywords use the given section ID.
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get(**kwargs) -> List[ansys.dyna.core.lib.keyword_base.KeywordBase]
+
+      
+      Get a list of keywords.
+
+
+      :Parameters:
+
+          **:Keyword Arguments:**
+              ..
+
+          **\* *type* (``str``) --**
+              The type of keyword to get. For example, "SECTION" returns all section keywords.
+
+          **\* *filter* (``callable``) --**
+              The filter to apply to the result. Only keywords which pass the filter will be returned.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: import_file(path: str, encoding: str = 'utf-8') -> ansys.dyna.keywords.lib.deck_loader.DeckLoaderResult
+
+      
+      Import a keyword file.
+
+
+      :Parameters:
+
+          **path** : :class:`python:str`
+              Full path for the keyword file.
+
+          **encoding: str**
+              String encoding used to read the keyword file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: export_file(path: str, encoding='utf-8') -> None
+
+      
+      Export the keyword file to a new keyword file.
+
+
+      :Parameters:
+
+          **path** : :class:`python:str`
+              Full path for the new keyword file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: keyword_names
+      :type: List[str]
+
+
+
+   .. py:method:: __repr__() -> str
+
+      
+      Get a console-friendly representation of a list of all keywords in the deck.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: plot(**args)
+
+      
+      Plot the node and element of the mesh using PyVista.
+
+
+      :Parameters:
+
+          **\*\*args**
+              Keyword arguments. Use * *cwd* (``int``) if the deck and include files are in
+              a separate directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

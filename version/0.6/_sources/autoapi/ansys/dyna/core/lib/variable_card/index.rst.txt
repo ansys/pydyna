@@ -1,0 +1,187 @@
+ansys.dyna.core.lib.variable_card
+=================================
+
+.. py:module:: ansys.dyna.core.lib.variable_card
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.variable_card.VariableCard
+
+
+Module Contents
+---------------
+
+.. py:class:: VariableCard(name: str, card_size: int, element_width: int, type: VariableCard.__init__.type, length_func: Callable = None, active_fn: Callable = None, data=None, format: ansys.dyna.core.lib.format_type.format_type = format_type.default)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.card_interface.CardInterface`
+
+
+   
+   Variable length card
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: format
+      :type: ansys.dyna.core.lib.format_type.format_type
+
+
+      
+      Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __getitem__(index)
+
+
+   .. py:method:: __setitem__(index: int, value)
+
+
+   .. py:method:: append(value) -> None
+
+
+   .. py:method:: extend(valuelist) -> None
+
+
+   .. py:method:: read(buf: TextIO) -> bool
+
+      
+      Reads the card data from an input text buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(format: Optional[ansys.dyna.core.lib.format_type.format_type] = None, buf: Optional[TextIO] = None, comment: Optional[bool] = True) -> str
+
+      
+      Renders the card in the dyna keyword format.
+      :param buf: Buffer to write to. If None, the output is returned as a string
+      :param format: format_type to use. Default to standard.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __len__() -> int
+
+
+   .. py:property:: bounded
+      :type: bool
+
+
+
+   .. py:method:: __repr__() -> str
+
+      
+      Returns a console-friendly representation of the desired parameters for the card
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: data
+
+      
+      Gets or sets the data list of parameter values
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

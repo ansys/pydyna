@@ -1,0 +1,37 @@
+ansys.dyna.core.lib.format_type.card_format
+===========================================
+
+.. py:class:: ansys.dyna.core.lib.format_type.card_format
+
+   
+   Card serialization format for LS-DYNA keywords.
+
+   Controls whether cards are written in fixed-width or comma-delimited format.
+   LS-DYNA supports both formats, and they can be mixed within a deck (but not within a card).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: fixed
+      :value: 'fixed'
+
+
+
+   .. py:attribute:: csv
+      :value: 'csv'
+
+

@@ -1,0 +1,43 @@
+ansys.dyna.core.solver.dynasolver
+=================================
+
+.. py:module:: ansys.dyna.core.solver.dynasolver
+
+.. autoapi-nested-parse::
+
+   Module for defining the PyDNYA ``solver`` service.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Exceptions
+----------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/solver/dynasolver/RunningError
+   /api/ansys/dyna/core/solver/dynasolver/NotFound
+   /api/ansys/dyna/core/solver/dynasolver/UnexpectedResponse
+
+.. autoapisummary::
+
+   ansys.dyna.core.solver.dynasolver.RunningError
+   ansys.dyna.core.solver.dynasolver.NotFound
+   ansys.dyna.core.solver.dynasolver.UnexpectedResponse
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/solver/dynasolver/DynaSolver
+
+.. autoapisummary::
+
+   ansys.dyna.core.solver.dynasolver.DynaSolver
+
+

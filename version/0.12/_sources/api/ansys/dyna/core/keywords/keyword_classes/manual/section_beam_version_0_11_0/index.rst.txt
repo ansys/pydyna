@@ -1,0 +1,26 @@
+ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0
+===========================================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0
+
+.. autoapi-nested-parse::
+
+   Legacy SectionBeam implementation preserved from pydyna 0.11.0.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/section_beam_version_0_11_0/SectionBeamLegacy
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.keyword_classes.manual.section_beam_version_0_11_0.SectionBeamLegacy
+
+

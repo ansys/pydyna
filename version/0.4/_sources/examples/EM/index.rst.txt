@@ -1,0 +1,133 @@
+
+
+.. _sphx_glr_examples_EM:
+
+EM examples
+~~~~~~~~~~~~
+
+These examples show how to create and use electromagnetic models.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows the minimum number of keywords required to turn on the EM resistive heating ...">
+
+.. only:: html
+
+  .. image:: /examples/EM/images/thumb/sphx_glr_em_resistive_heating_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_EM_em_resistive_heating.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Resistive heating</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Resistive heating 2D">
+
+.. only:: html
+
+  .. image:: /examples/EM/images/thumb/sphx_glr_em_resistive_heating_2d_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_EM_em_resistive_heating_2d.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Resistive heating 2D</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to use the connect_isopotential() method to connect two parts. The execu...">
+
+.. only:: html
+
+  .. image:: /examples/EM/images/thumb/sphx_glr_em_resistive_heating_2d_isopots_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_EM_em_resistive_heating_2d_isopots.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Resistive heating 2D connect isopotential</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Resistive heating 2D multiple-connect isopotential">
+
+.. only:: html
+
+  .. image:: /examples/EM/images/thumb/sphx_glr_em_resistive_heating_2d_multi_isopots_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_EM_em_resistive_heating_2d_multi_isopots.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Resistive heating 2D multiple-connect isopotential</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="RLC circuit by function">
+
+.. only:: html
+
+  .. image:: /examples/EM/images/thumb/sphx_glr_em_rlc_define_func_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_EM_em_rlc_define_func.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">RLC circuit by function</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="RLC circuit by isopotential">
+
+.. only:: html
+
+  .. image:: /examples/EM/images/thumb/sphx_glr_em_rlc_isopotential_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_EM_em_rlc_isopotential.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">RLC circuit by isopotential</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/EM/em_resistive_heating
+   /examples/EM/em_resistive_heating_2d
+   /examples/EM/em_resistive_heating_2d_isopots
+   /examples/EM/em_resistive_heating_2d_multi_isopots
+   /examples/EM/em_rlc_define_func
+   /examples/EM/em_rlc_isopotential
+

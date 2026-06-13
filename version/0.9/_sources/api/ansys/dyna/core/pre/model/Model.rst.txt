@@ -1,0 +1,318 @@
+ansys.dyna.core.pre.model.Model
+===============================
+
+.. py:class:: ansys.dyna.core.pre.model.Model(stub)
+
+   
+   Contains all information about Ansys PyDYNA Model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:method:: add_bdy_spc(nodes)
+
+      
+      Add boundary spc nodes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_init_velocity(nodes)
+
+      
+      Add initial velocity nodes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_rigidwall(data: List)
+
+      
+      Add rigidwall data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_solid_elements() -> List
+
+      
+      Get the solid elements.
+
+
+
+
+
+      :Returns:
+
+          :obj:`List`
+              solid element connectivity,list = [[n1,n2,n3,n4,n5,n6,n7,n8],[...],...]
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_shell_elements() -> List
+
+      
+      Get the shell elements.
+
+
+
+
+
+      :Returns:
+
+          :class:`python:list`
+              list[0],solid element connectivity,list[0] = [[n1,n2,n3,n4,n5,n6,n7,n8],[...],...]
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_nodes() -> List
+
+      
+      Get nodes.
+
+
+
+
+
+      :Returns:
+
+          :class:`python:list`
+              node coordinates,list = [[x1,y1,z1],[x2,y2,z2],...]
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_part(id: int) -> ansys.dyna.core.pre.part.Part
+
+      
+      Get the part by ID.
+
+
+      :Parameters:
+
+          **id** : :class:`python:int`
+              ID of the part.
+
+
+
+      :Returns:
+
+          :obj:`Part`
+              Part or ``None`` if the given part ID doesn't exist.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_init_velocity() -> List
+
+      
+      Get initial velocity data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_bdy_spc() -> List
+
+      
+      Get boundary spc data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_rigidwall(id)
+
+      
+      Get rigidwall data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: parts
+      :type: List[ansys.dyna.core.pre.part.Part]
+
+
+      
+      Get the list of parts for the model.
+
+
+
+
+
+      :Returns:
+
+          :obj:`List`\[:obj:`Part`]
+              List of parts for the model.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

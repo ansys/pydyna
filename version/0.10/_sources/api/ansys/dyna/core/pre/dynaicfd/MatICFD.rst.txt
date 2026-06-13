@@ -1,0 +1,105 @@
+ansys.dyna.core.pre.dynaicfd.MatICFD
+====================================
+
+.. py:class:: ansys.dyna.core.pre.dynaicfd.MatICFD(flag=Compressible.FULLY_INCOMPRESSIBLE_FLUID, flow_density=0, dynamic_viscosity=0, heat_capacity=0, thermal_conductivity=0, thermal_expansion_coefficient=0)
+
+   
+   Defines physical properties for the fluid material.
+
+
+   :Parameters:
+
+       **flag** : :class:`python:int`
+           Flag for chooseing between fully incompressible, slightly compressible, or barotropic flows.
+           The default is ``FULLY_INCOMPRESSIBLE_FLUID``. Options are:
+           
+           - EQ.0: Vacuum (free surface problems only)
+           - EQ.1: Fully incompressible fluid
+
+       **flow_density** : :class:`python:float`, :obj:`optional`
+           Flow density. The default is ``0``.
+
+       **dynamic_viscosity** : :class:`python:float`, :obj:`optional`
+           Dynamic viscosity. The default is ``0``.
+
+       **heat_capacity**
+           ..
+
+       **thermal_conductivity**
+           ..
+
+       **thremal_expansion_coefficent**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: flag
+      :value: 1
+
+
+
+   .. py:attribute:: flow_density
+      :value: 0
+
+
+
+   .. py:attribute:: dynamic_viscosity
+      :value: 0
+
+
+
+   .. py:attribute:: hc
+      :value: 0
+
+
+
+   .. py:attribute:: tc
+      :value: 0
+
+
+
+   .. py:attribute:: beta
+      :value: 0
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create an ICFD material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

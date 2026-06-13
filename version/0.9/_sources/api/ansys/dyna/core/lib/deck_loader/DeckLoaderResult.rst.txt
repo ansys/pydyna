@@ -1,0 +1,31 @@
+ansys.dyna.core.lib.deck_loader.DeckLoaderResult
+================================================
+
+.. py:class:: ansys.dyna.core.lib.deck_loader.DeckLoaderResult
+
+   
+   A class containing the result of an attempted deck load.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: add_unprocessed_keyword(name)
+
+
+   .. py:method:: get_summary() -> str
+

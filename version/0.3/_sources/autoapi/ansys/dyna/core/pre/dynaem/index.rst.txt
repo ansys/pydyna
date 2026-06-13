@@ -1,0 +1,1582 @@
+:py:mod:`ansys.dyna.core.pre.dynaem`
+====================================
+
+.. py:module:: ansys.dyna.core.pre.dynaem
+
+.. autoapi-nested-parse::
+
+   EM API
+   ======
+
+   Module for creating an electromagnetism (EM) input deck.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynaem.Isopotential_ConnType
+   ansys.dyna.core.pre.dynaem.DynaEM
+   ansys.dyna.core.pre.dynaem.EMType
+   ansys.dyna.core.pre.dynaem.EMDimension
+   ansys.dyna.core.pre.dynaem.BEMSOLVER
+   ansys.dyna.core.pre.dynaem.FEMSOLVER
+   ansys.dyna.core.pre.dynaem.EMAnalysis
+   ansys.dyna.core.pre.dynaem.CircuitType
+   ansys.dyna.core.pre.dynaem.Circuit
+   ansys.dyna.core.pre.dynaem.EMContactType
+   ansys.dyna.core.pre.dynaem.EMContact
+   ansys.dyna.core.pre.dynaem.EMRandlesLayer
+   ansys.dyna.core.pre.dynaem.Isopotential
+   ansys.dyna.core.pre.dynaem.RogoCoil
+   ansys.dyna.core.pre.dynaem.RandlesCellType
+   ansys.dyna.core.pre.dynaem.RandlesCell
+
+
+
+
+.. py:class:: Isopotential_ConnType
+
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: SHORT_CIRCUIT
+      :value: 1
+
+      
+
+   .. py:attribute:: RESISTANCE
+      :value: 2
+
+      
+
+   .. py:attribute:: VOLTAGE_SOURCE
+      :value: 3
+
+      
+
+   .. py:attribute:: CURRENT_SOURCE
+      :value: 4
+
+      
+
+   .. py:attribute:: RLC_CIRCUIT
+      :value: 6
+
+      
+
+
+.. py:class:: DynaEM
+
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.DynaBase`
+
+   
+   Contains methods for creating keywords related to EM.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: create_em_control(emsol=0, numls=100, macrodt=0, ncylfem=5000, ncylbem=5000)
+
+      
+      Enable the EM solver and set its options.
+
+
+      :Parameters:
+
+          **emsol** : :class:`python:int`, :obj:`optional`
+              EM solver. The default is ``0``. Options are:
+              
+              - EQ.-1: Turn off the EM solver after reading the EM keywords.
+              - EQ.1: Eddy current solver.
+              - EQ.2: Induced heating solver.
+              - EQ.3: Resistive heating solver.
+              - EQ.11: Electrophysiology monodomain.
+              - EQ.12: Electrophysiology bidomain.
+              - EQ.13: Electrophysiology monodomain coupled with bidomain.
+
+          **numls** : :class:`python:int`, :obj:`optional`
+              Number of local EM steps in a whole period for when ``emsol = 2``.
+              The default is ``100``.
+
+          **macrodt** : :class:`python:int`, :obj:`optional`
+              Macro time step for when ``emsol = 2``. The default is ``0``.
+
+          **ncylfem** : :class:`python:int`, :obj:`optional`
+              Number of electromagnetism cycles between the recalculation of FEM matrices.
+              The default is ``5000``.
+
+          **ncylbem** : :class:`python:int`, :obj:`optional`
+              Number of electromagnetism cycles between the recalculation of BEM matrices.
+              The default is ``5000``.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_em_timestep(tstype, dtconst)
+
+      
+      Control the EM time step and its evolution.
+
+
+      :Parameters:
+
+          **tstype** : :class:`python:int`
+              Time step type. Options are:
+              
+              - EQ.1: Constant time step given in DTCONST
+              - EQ.2: Time step as a function of time given by a load curve specified in LCID
+              - EQ.3: Automatic time step computation, depending on the solver type
+              
+              This time step is then multiplied by FACTOR.
+
+          **dtconst** : :class:`python:float`
+              Constant value for the time step for when ``tstype = 1``.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_em_contact(contid=0, dtype=0, psidm=0, psids=0, eps1=0.3, eps2=0.3, eps3=0.3, d0=0)
+
+      
+      Create an optional card for defining options on electromagnetic contacts between two sets of parts.
+
+
+      :Parameters:
+
+          **contid** : :class:`python:int`, :obj:`optional`
+              Electromagnetic contact ID. The default is ``0``.
+
+          **dtype** : :class:`python:int`, :obj:`optional`
+              Detection type.  The default is ``0``. Options are:
+              
+              - EQ.0: Contact type 0
+              - EQ.1: Contact type 1
+
+          **psidm** : :class:`python:int`, :obj:`optional`
+              Master part set ID. The default is ``0``.
+
+          **psids** : :class:`python:int`
+              Slave part set ID.  The default is ``0``.
+
+          **eps1** : :class:`python:float`, :obj:`optional`
+              First contact coefficient for contact detection conditions.
+              The default is ``0.3``.
+
+          **eps2** : :class:`python:float`, :obj:`optional`
+              Second contact coefficient for contact detection conditions.
+              The default is ``0.3``.
+
+          **eps3** : :class:`python:float`, :obj:`optional`
+              Third contact coefficient for contact detection conditions.
+              The default is ``0.3``.
+
+          **d0** : :class:`python:float`, :obj:`optional`
+              Contact condition 3 when ``dtype = 1``.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_rogowsky_coil_to_output_current(segmentset=SegmentSet([[]]), settype=1, curtyp=1)
+
+      
+      Define Rogowsky coils to measure a global current versus time through a segment set or a node set.
+
+
+      :Parameters:
+
+          **rogid** : :class:`python:int`
+              Rogowsky coil ID.
+
+          **setid** : :class:`python:int`
+              Segment or node set ID.
+
+          **settype** : :class:`python:int`, :obj:`optional`
+              Type of set. The default is ``1``. Options are:
+              
+              - EQ.1: Segment set
+              - EQ.2: Node set
+
+          **curtyp** : :class:`python:int`
+              Type of current measured. The default is ``1``. Options are:
+              
+              - EQ.1: Volume current
+              - EQ.2: Surface current (not available yet}
+              - EQ.3: Magnetic field flow (B field times area)
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_em_mat001(mid, mtype, sigma)
+
+      
+      Create an electromagnetic material type and set properties
+      for a material whose permeability equals the free space permeability.
+
+
+      :Parameters:
+
+          **mid** : :class:`python:int`
+              Material ID.
+
+          **mtype** : :class:`python:int`
+              Electromagnetism type of the material. Options are:
+              
+              - EQ.0: Air or vacuum
+              - EQ.1: Insulator material (These materials have the same electromagnetism behavior as EQ.0.)
+              - EQ.2: Conductor carrying a source
+              - EQ.3: Fluid conductor
+              - EQ.4: Conductor not connected to any current or voltage source, where the eddy current problem is solved
+
+          **sigma** : :class:`python:float`
+              Initial electrical conductivity of the material.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_em_mat002(mid, mtype, sigma, eosid, murel)
+
+      
+      Create an electromagnetic material type and set properties
+      whose permeability is different than the free space permeability.
+
+
+      :Parameters:
+
+          **mid** : :class:`python:int`
+              Material ID.
+
+          **mtype** : :class:`python:int`
+              Electromagnetism type of the material. Options are:
+              
+              - EQ.0: Air or vacuum
+              - EQ.1: Insulator material (These materials have the same electromagnetism behavior as EQ.0.)
+              - EQ.2: Conductor carrying a source
+              - EQ.4: Conductor not connected to any current or voltage source, where the wddy current problem is solved
+
+          **sigma** : :class:`python:float`
+              Initial electrical conductivity of the material.
+
+          **eosid** : :class:`python:int`
+              ID of the EOS to use for the electrical conductivity.
+
+          **murel** : :class:`python:float`
+              Relative permeability, which is the ratio of the permeability of a specific
+              medium to the permeability of the free space.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_em_solver_fembem_monolithic(mtype=0, stype=0, abstol=1e-06, reltol=0.0001, maxit=500)
+
+      
+      Turn on the monolithic FEM-BEM solver.
+
+
+      :Parameters:
+
+          **mtype** : :class:`python:int`, :obj:`optional`
+              Monolithic solver type. The default is ``0``. The only option is EQ.0: Direct symmetric solver.
+
+          **stype** : :class:`python:int`
+              Solver type. The default is ``0``. Options are:
+              
+              - EQ.0: MINRES iterative solver
+              - EQ.1: GMRES iterative solver
+
+          **abstol** : :class:`python:float`, :obj:`optional`
+              Absolute tolerance. The default is ``1e-6``.
+
+          **reltol** : :class:`python:float`, :obj:`optional`
+              Relative tolerance. The default is ``1e-4``.
+
+          **maxit** : :class:`python:int`, optional.
+              Maximum number of iterations. The default is 500.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_em_output(mats=0, matf=0, sols=0, solf=0)
+
+      
+      Define the level of EM-related output on the screen and in the message file.
+
+
+      :Parameters:
+
+          **mats** : :class:`python:int`, :obj:`optional`
+              Level of matrix assembly output to show on the screen. The default is ``0``.
+              Options are:
+              
+              - EQ.0: No output
+              - EQ.1: Basic assembly steps
+              - EQ.2: Basic assembly steps + percentage completed + final statistics
+              - EQ.3: Basic assembly steps + percentage completed + statistics at each percentage of completion
+
+          **matf** : :class:`python:int`, :obj:`optional`
+              Level of matrix assembly output to write to the message file. The default
+              is ``0``. Options are:
+              
+              - EQ.0: No output
+              - EQ.1: Basic assembly steps
+              - EQ.2: Basic assembly steps + percentage completed + final statistics
+              - EQ.3: Vasic assembly steps + percentage completed + statistics at each percentage of completion
+
+          **sols** : :class:`python:int`
+              Level of solver output to show on the screen. The default is ``0``. Options are:
+              
+              - EQ.0: No output
+              - EQ.1: Global information at each FEM iteration
+              - EQ.2: Detailed information at each FEM iteration
+
+          **solf** : :class:`python:int`, :obj:`optional`
+              Level of solver output to write to the message file. The default is ``0``.
+              Options are:
+              
+              - EQ.0: No output
+              - EQ.1: Global information at each FEM iteration
+              0 EQ.2: Detailed information at each FEM iteration
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: connect_isopotential(contype=Isopotential_ConnType.SHORT_CIRCUIT, isopotential1=None, isopotential2=None, value=0, func=None, curve=None, inductance=0, capacity=0, initial_voltage=0)
+
+      
+      Define a connection between two isopotentials or between an isopotential and the ground.
+
+
+      :Parameters:
+
+          **contype** : :obj:`Isopotential_ConnType`
+              Isopotential connection type. The default is ``SHORT_CIRCUIT``.
+
+          **isopotential1** : :obj:`Isopotential`
+              First isopotential to connect.
+
+          **isopotential2** : :obj:`Isopotential`
+              Second isopotential to connect.
+
+          **value** : :class:`python:float`, :obj:`optional`
+              Value of the resistance, voltage, or current depending on the isopotential
+              connection type. The default is ``0``.
+
+          **func**
+              ..
+
+          **curve**
+              ..
+
+          **inductance**
+              ..
+
+          **capacity**
+              ..
+
+          **initial voltage**
+              ..
+
+      :Returns:
+
+          :class:`python:int`
+              Connection ID.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_em_database_globalenergy(outlv=0)
+
+      
+      Enable the output of global EM.
+
+
+      :Parameters:
+
+          **outlv** : :class:`python:int`, :obj:`optional`
+              Flag for whether to generate the output file. The default is ``0``.
+              Options are:
+              
+              - EQ.0: No output file is generated.
+              - EQ.1: The output file is generated.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_Permanent_magnet(id, partid, mtype, north, sourth, hc)
+
+      
+      Create a permanent magnet.
+
+
+      :Parameters:
+
+          **id** : :class:`python:int`
+              ID of the magnet.
+
+          **partid** : :class:`python:int`
+              Part ID.
+
+          **mtype** : :class:`python:int`, :obj:`optional`
+              Magnet definition type. Options are:
+              
+              - EQ.0: Magnet defined by two node set for the north and south poles
+              - EQ.1: Magnet defined by two segments set for the north and south poles
+              - EQ.3: Magnet defined by a global vector orientation
+              - EQ.4: Magnet defined by a global vector orientation given by two node IDs
+
+          **north** : :class:`python:int`
+              ID of the magnet's north face for ``mtype = 0`` and ``mtype = 1``.
+
+          **sourth** : :class:`python:int`
+              ID of the magnet's south face for ``mtype = 0`` and ``mtype = 1``.
+
+          **hc** : :class:`python:int`
+              Coercive force.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create_em_eos_permeability(eosid, eostype, lcid)
+
+      
+      Define the parameters for the behavior of a material's permeability.
+
+
+      :Parameters:
+
+          **eosid** : :class:`python:int`
+              EM EOS ID.
+
+          **eostype** : :class:`python:int`
+              Define the type of EOS. Options are:
+              
+              - EQ.1: Permeability defined by a B function of the H curve
+              - EQ.2: Permeability defined by an H function of the B curve
+
+          **lcid** : :class:`python:int`
+              Load curve ID.
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: save_file()
+
+      
+      Save keyword files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: EMType
+
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: EDDY_CURRENT
+      :value: 1
+
+      
+
+   .. py:attribute:: INDUCTIVE_HEATING
+      :value: 2
+
+      
+
+   .. py:attribute:: RESISTIVE_HEATING
+      :value: 3
+
+      
+
+   .. py:attribute:: ELECTROPHYSIOLOGY
+      :value: 11
+
+      
+
+
+.. py:class:: EMDimension
+
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: SOLVER_3D
+      :value: 0
+
+      
+
+   .. py:attribute:: PLANAR_2D
+      :value: 1
+
+      
+
+   .. py:attribute:: AXISYMMETRIC_2D
+      :value: 3
+
+      
+
+
+.. py:class:: BEMSOLVER
+
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: DIRECT_SOLVER
+      :value: 1
+
+      
+
+   .. py:attribute:: PCG
+      :value: 2
+
+      
+
+
+.. py:class:: FEMSOLVER
+
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: DIRECT_SOLVER
+      :value: 1
+
+      
+
+   .. py:attribute:: PCG
+      :value: 2
+
+      
+
+
+.. py:class:: EMAnalysis(type=EMType.EDDY_CURRENT)
+
+
+   
+   Enables the EM solver and sets its options.
+
+
+   :Parameters:
+
+       **type** : :class:`python:int`
+           Electromagnetism solver. The default is ``EDDY_CURRENT``. Options are:
+           
+           - EQ.1: Eddy current solver
+           - EQ.2: Induced heating solver
+           - EQ.3: Resistive heating solver
+           - EQ.11: Electrophysiology monodomain
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: p_matrix_tol
+      :value: 1e-06
+
+      
+
+   .. py:attribute:: q_matrix_tol
+      :value: 1e-06
+
+      
+
+   .. py:attribute:: w_matrix_tol
+      :value: 1e-06
+
+      
+
+   .. py:method:: set_timestep(timestep)
+
+      
+      Set the EM time step and its evolution.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_em_solver(type=EMType.EDDY_CURRENT, dimtype=EMDimension.SOLVER_3D)
+
+      
+      Set the EM solver.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_solver_bem(solver=BEMSOLVER.PCG, relative_tol=1e-06, max_iteration=1000)
+
+      
+      Set the type of linear solver, pre-conditioner, and tolerance for the EM BEM solver.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_solver_fem(solver=FEMSOLVER.DIRECT_SOLVER, relative_tol=1e-06, max_iteration=1000)
+
+      
+      Set some parameters for the EM FEM solver.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: set_bem_matrix_tol(p_matrix_tol=1e-06, q_matrix_tol=1e-06, w_matrix_tol=1e-06)
+
+      
+      Set the type of BEM matrices and the way that they are assembled.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create()
+
+      
+      Create an EM analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: CircuitType
+
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: IMPOSED_CURRENT_VS_TIME
+      :value: 1
+
+      
+
+   .. py:attribute:: IMPOSED_VOLTAGE_VS_TIME
+      :value: 2
+
+      
+
+
+.. py:class:: Circuit(loadcurve, circuit_type=CircuitType.IMPOSED_CURRENT_VS_TIME)
+
+
+   
+   Defines an electrical circuit.
+
+
+   :Parameters:
+
+       **circtyp** : :class:`python:int`
+           Circuit type. Options are:
+           
+           - EQ.1: Imposed current vs time defined by a load curve
+           - EQ.2: Imposed voltage vs time defined by a load curve
+
+       **loadcurve** : :obj:`Curve`
+           Load curve for when the ``circtyp`` parameter is set to ``1``,
+           ``2``, ``21`` or ``22``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: set_current(current, current_inlet, current_outlet)
+
+      
+      Define the segment set for the current.
+
+
+      :Parameters:
+
+          **current** : :obj:`SegmentSet`
+              Segment set for the current.
+
+          **current_inlet** : :obj:`SegmentSet`
+              Segment set for input voltage or input current
+              for CIRCTYP.EQ.2/3/12/22 and CIRCTYP.EQ 1/11/21 respectively.
+
+          **current_outlet** : :obj:`SegmentSet`
+              Segment set for the output voltage or output current for
+              CIRCTYP = 2/3/12/22 and CIRCTYP = 1/11/21 respectively.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create()
+
+      
+      Create a circuit.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: EMContactType
+
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: NODE_TO_NODE_BASED_ON_CONSTRAINTS
+
+      
+
+   .. py:attribute:: NODE_TO_NODE_PENALTY_BASED_CONTACT
+      :value: 0
+
+      
+
+   .. py:attribute:: DISCRETE_MORTAR_PENALTY_CONTACT
+      :value: 1
+
+      
+
+
+.. py:class:: EMContact(contact_type=EMContactType.NODE_TO_NODE_PENALTY_BASED_CONTACT)
+
+
+   
+   Detects contact between conductors.
+
+   If no contact parts are defined, this method detects contact between
+   all active parts associated with a conducting material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: create()
+
+      
+      Create an EM contact.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: EMRandlesLayer
+
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: DEFAULT
+      :value: 0
+
+      
+
+   .. py:attribute:: CURRENT_COLLECTOR_POSITIVE
+      :value: 1
+
+      
+
+   .. py:attribute:: POSITIVE_ELECTRODE
+      :value: 2
+
+      
+
+   .. py:attribute:: SEPARATOR
+      :value: 3
+
+      
+
+   .. py:attribute:: NEGATIVE_ELECTRODE
+      :value: 4
+
+      
+
+   .. py:attribute:: CURRENT_COLLECTOR_NEGATIVE
+      :value: 5
+
+      
+
+
+.. py:class:: Isopotential(set=None, layer=EMRandlesLayer.DEFAULT)
+
+
+   
+   Defines an isopotential.
+
+   This method constrain nodes so that they have the same scalar potential value.
+
+   :Parameters:
+
+       **set** : :obj:`Set`
+           Segment set or node set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: isopotlist
+      :value: []
+
+      
+
+   .. py:method:: create()
+
+      
+      Create an isopotential.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: RogoCoil(set=None)
+
+
+   
+   Measures the total current flowing through a given section of the conductor.
+
+
+   :Parameters:
+
+       **set** : :obj:`Set`
+           Segment set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: create()
+
+      
+      Create a Rogowsky coil.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: RandlesCellType
+
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: USER_DEFINED_EQUIVALENT_CIRCUIT_MODEL
+
+      
+
+   .. py:attribute:: RANDLES_CELL_0_ORDER
+      :value: 0
+
+      
+
+   .. py:attribute:: RANDLES_CELL_1_ORDER
+      :value: 1
+
+      
+
+   .. py:attribute:: RANDLES_CELL_2_ORDER
+      :value: 2
+
+      
+
+   .. py:attribute:: RANDLES_CELL_3_ORDER
+      :value: 3
+
+      
+
+
+.. py:class:: RandlesCell(set=None)
+
+
+   
+   Define parameters for a Randles Cell.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: set_batmac_model(cell_type=RandlesCellType.RANDLES_CELL_1_ORDER, cell_parts=None, area=2, cell_capacity=0, soc_conversion_factor=0, charge_init_state=0, circuit_parameter=None, constant_temperature=0, temperature_from_thermal_solver=False, add_heating_to_thermal_solver=False)
+
+      
+      define the distributed Randles circuit parameters for a Randles cell when using the batmac model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: create()
+
+      
+      Set parameter for Randles Cell.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

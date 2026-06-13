@@ -1,0 +1,1710 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ansys.dyna.core.keywords.keyword_classes.auto.mat_general_nonlinear_6dof_discrete_beam &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/styles/ansys-sphinx-theme.css?v=300e4a82" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/styles/ansys-sphinx-theme.css?v=300e4a82" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../../../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../../../../../../_static/documentation_options.js?v=016a97bc"></script>
+    <script src="../../../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../../../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ansys/dyna/core/keywords/keyword_classes/auto/mat_general_nonlinear_6dof_discrete_beam';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.9';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../../search.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.9.1" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/_modules/ansys/dyna/core/keywords/keyword_classes/auto/mat_general_nonlinear_6dof_discrete_beam.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../../../../../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../../../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../../../../index.html" class="nav-link">Module code</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../../core.html" class="nav-link">ansys.dyna.core</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../keywords.html" class="nav-link">ansys.dyna.core.keywords</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ansys.dyna.core.keywords.keyword_classes.auto.mat_general_nonlinear_6dof_discrete_beam</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ansys.dyna.core.keywords.keyword_classes.auto.mat_general_nonlinear_6dof_discrete_beam</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.</span>
+<span class="c1"># SPDX-License-Identifier: MIT</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction, including without limitation the rights</span>
+<span class="c1"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c1"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c1"># furnished to do so, subject to the following conditions:</span>
+<span class="c1">#</span>
+<span class="c1"># The above copyright notice and this permission notice shall be included in all</span>
+<span class="c1"># copies or substantial portions of the Software.</span>
+<span class="c1">#</span>
+<span class="c1"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c1"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c1"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
+<span class="c1"># SOFTWARE.</span>
+
+<span class="sd">&quot;&quot;&quot;Module providing the MatGeneralNonlinear6DofDiscreteBeam class.&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">typing</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.lib.card</span><span class="w"> </span><span class="kn">import</span> <span class="n">Card</span><span class="p">,</span> <span class="n">Field</span><span class="p">,</span> <span class="n">Flag</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.lib.option_card</span><span class="w"> </span><span class="kn">import</span> <span class="n">OptionCardSet</span><span class="p">,</span> <span class="n">OptionSpec</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.lib.keyword_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">KeywordBase</span>
+
+<div class="viewcode-block" id="MatGeneralNonlinear6DofDiscreteBeam">
+<a class="viewcode-back" href="../../../../../../../_autosummary/index.html#ansys.dyna.core.keywords.keyword_classes.auto.mat_general_nonlinear_6dof_discrete_beam.MatGeneralNonlinear6DofDiscreteBeam">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MatGeneralNonlinear6DofDiscreteBeam</span><span class="p">(</span><span class="n">KeywordBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;DYNA MAT_GENERAL_NONLINEAR_6DOF_DISCRETE_BEAM keyword&quot;&quot;&quot;</span>
+
+    <span class="n">keyword</span> <span class="o">=</span> <span class="s2">&quot;MAT&quot;</span>
+    <span class="n">subkeyword</span> <span class="o">=</span> <span class="s2">&quot;GENERAL_NONLINEAR_6DOF_DISCRETE_BEAM&quot;</span>
+    <span class="n">option_specs</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">OptionSpec</span><span class="p">(</span><span class="s2">&quot;TITLE&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the MatGeneralNonlinear6DofDiscreteBeam class.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;parent&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">Card</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;mid&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;ro&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;kt&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">20</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;kr&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">30</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;iunld&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">40</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;offset&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">50</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;dampf&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">60</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;iflag&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">70</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                <span class="p">],</span>
+            <span class="p">),</span>
+            <span class="n">Card</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidtr&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidts&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidtt&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">20</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidrr&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">30</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidrs&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">40</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidrt&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">50</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                <span class="p">],</span>
+            <span class="p">),</span>
+            <span class="n">Card</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidtur&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidtus&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidtut&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">20</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidrur&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">30</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidrus&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">40</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidrut&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">50</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                <span class="p">],</span>
+            <span class="p">),</span>
+            <span class="n">Card</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidtdr&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidtds&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidtdt&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">20</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidrdr&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">30</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidrds&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">40</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidrdt&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">50</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                <span class="p">],</span>
+            <span class="p">),</span>
+            <span class="n">Card</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidter&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidtes&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidtet&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">20</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidrer&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">30</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidres&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">40</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;lcidret&quot;</span><span class="p">,</span>
+                        <span class="nb">int</span><span class="p">,</span>
+                        <span class="mi">50</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                <span class="p">],</span>
+            <span class="p">),</span>
+            <span class="n">Card</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;utfailr&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;utfails&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;utfailt&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">20</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;wtfailr&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">30</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;wtfails&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">40</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;wtfailt&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">50</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;fcrit&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">60</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                <span class="p">],</span>
+            <span class="p">),</span>
+            <span class="n">Card</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;ucfailr&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;ucfails&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;ucfailt&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">20</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;wcfailr&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">30</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;wcfails&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">40</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;wcfailt&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">50</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                <span class="p">],</span>
+            <span class="p">),</span>
+            <span class="n">Card</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;iur&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;ius&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;iut&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">20</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;iwr&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">30</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;iws&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">40</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">Field</span><span class="p">(</span>
+                        <span class="s2">&quot;iwt&quot;</span><span class="p">,</span>
+                        <span class="nb">float</span><span class="p">,</span>
+                        <span class="mi">50</span><span class="p">,</span>
+                        <span class="mi">10</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+                    <span class="p">),</span>
+                <span class="p">],</span>
+            <span class="p">),</span>
+            <span class="n">OptionCardSet</span><span class="p">(</span>
+                <span class="n">option_spec</span> <span class="o">=</span> <span class="n">MatGeneralNonlinear6DofDiscreteBeam</span><span class="o">.</span><span class="n">option_specs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">cards</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">Card</span><span class="p">(</span>
+                        <span class="p">[</span>
+                            <span class="n">Field</span><span class="p">(</span>
+                                <span class="s2">&quot;title&quot;</span><span class="p">,</span>
+                                <span class="nb">str</span><span class="p">,</span>
+                                <span class="mi">0</span><span class="p">,</span>
+                                <span class="mi">80</span><span class="p">,</span>
+                                <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">)</span>
+                            <span class="p">),</span>
+                        <span class="p">],</span>
+                    <span class="p">),</span>
+                <span class="p">],</span>
+                <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">),</span>
+        <span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Material identification. A unique number has to be used.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;mid&quot;</span><span class="p">)</span>
+
+    <span class="nd">@mid</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the mid property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;mid&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ro</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Mass density, see also volume in *SECTION_BEAM definition.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;ro&quot;</span><span class="p">)</span>
+
+    <span class="nd">@ro</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the ro property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;ro&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">kt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Translational stiffness for IUNLD = 2.0.  However, if IFLAG = 2, then it is the translational stiffness for unloading along the local r-axis.</span>
+<span class="sd">        If left blank, a value calculated by LS-DYNA will be used.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;kt&quot;</span><span class="p">)</span>
+
+    <span class="nd">@kt</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">kt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the kt property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;kt&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">kr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Rotational stiffness for IUNLD = 2.0.  However, if IFLAG =‌ 2, then KR is the rotational stiffness for unloading along the local r-axis.</span>
+<span class="sd">        If left blank, a value calculated by LS-DYNA will be used</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;kr&quot;</span><span class="p">)</span>
+
+    <span class="nd">@kr</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">kr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the kr property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;kr&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iunld</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Unloading option (see Figure 0-1):</span>
+<span class="sd">        EQ.0.0:	loading and unloading follow loading curve</span>
+<span class="sd">        EQ.1.0:	loading follows loading curve, unloading follows unloading curve. The unloading curve ID if undefined is taken as the loading curve.</span>
+<span class="sd">        EQ.2.0:	loading follows loading curve, unloading follows unloading stiffness, KT or KR, to the unloading curve.</span>
+<span class="sd">        The loading and unloading curves may only intersect at the origin of the axes.</span>
+<span class="sd">        EQ.3.0:	quadratic unloading from peak displacement value to a permanent offset.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;iunld&quot;</span><span class="p">)</span>
+
+    <span class="nd">@iunld</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iunld</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the iunld property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;iunld&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">offset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Offset factor between 0 and 1.0 to determine permanent set upon unloading if the UNLDOPT=3.0. The permanent sets in compression and tension are equal to the product of this offset value and the maximum compressive and tensile displacements, respectively.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;offset&quot;</span><span class="p">)</span>
+
+    <span class="nd">@offset</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the offset property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;offset&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dampf</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Damping factor for stability.  Values in the neighborhood of unity are recommended. This damping factor is properly scaled to eliminate time step size dependency. Also, it is active if and only if the local stiffness is defined.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;dampf&quot;</span><span class="p">)</span>
+
+    <span class="nd">@dampf</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dampf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the dampf property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;dampf&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iflag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Formulation flag:</span>
+<span class="sd">        EQ.0:	displacement formulation which is used in all other models</span>
+<span class="sd">        EQ.1:	linear strain formulation.  The displacements and velocities are divided by the initial length of the beam.</span>
+<span class="sd">        EQ.2:	a displacement formulation to simulate the buckling behavior of crushable frames.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;iflag&quot;</span><span class="p">)</span>
+
+    <span class="nd">@iflag</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iflag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the iflag property.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;iflag must be `None` or one of {0,1,2}.&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;iflag&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining translational force resultant along local r-axis versus relative translational displacement.</span>
+<span class="sd">        If zero, no stiffness related forces are generated for this degree of freedom. The loading curves must be defined from the most negative displacement to the most positive displacement.  The force does not need to increase montonically. The curves in this input are linearly extrapolated when the displacement range falls outside the curve definition.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidtr&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidtr</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidtr property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidtr&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining translational force resultant along local s-axis versus relative translational displacement.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidts&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidts</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidts property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidts&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining translational force resultant along local t-axis versus relative translational displacement.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidtt&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidtt</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidtt property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidtt&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve for rotational moment resultant about the local r-axis:</span>
+<span class="sd">        IFLAG.NE.2:	load curve ID defining rotational moment resultant about local r-axis as a function of relative rotational displacement</span>
+<span class="sd">        IFLAG.EQ.2:	load curve ID defining rotational moment resultant about local r-axis as a function of relative rotational displacement at node 2.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidrr&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidrr</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidrr property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidrr&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve for rotational moment resultant about local r-axis:</span>
+<span class="sd">        IFLAG.NE.2:	load curve ID defining rotational moment resultant about local r-axis as a function of relative rotational displacement</span>
+<span class="sd">        IFLAG.EQ.2:	load curve ID defining rotational moment resultant about local r-axis as a function of relative rotational displacement at node 2.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidrs&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidrs</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidrs property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidrs&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve for rotational moment resultant about local -axis:</span>
+<span class="sd">        IFLAG.NE.2:	load curve ID defining rotational moment resultant about local s-axis as a function of relative rotational displacement</span>
+<span class="sd">        IFLAG.EQ.2:	load curve ID defining rotational moment resultant about local s-axis as a function of relative rotational displacement at node 2.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidrt&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidrt</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidrt property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidrt&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtur</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining translational force resultant along local r-axis as a function of relative translational displacement during unloading.</span>
+<span class="sd">        The force values defined by this curve must increase monotonically from the most negative displacement to the most positive displacement.</span>
+<span class="sd">        For IUNLD = 1.0, the slope of this curve must equal or exceed the loading curve for stability reasons.  This is not the case for IUNLD = 2.0.</span>
+<span class="sd">        For loading and unloading to follow the same path simply set LCIDTUR = LCIDTR.  For options IUNLD = 0.0 or 3.0 the unloading curve is not required.</span>
+<span class="sd">        For IUNLD = 2.0, if LCIDTUR is left blank or zero, the default is to use the same curve for unloading as for loading.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidtur&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidtur</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidtur property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidtur&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtus</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining translational force resultant along local s-axis as a function of relative translational displacement during unloading (IFLAG = 0 or 1 only).</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidtus&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidtus</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidtus property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidtus&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtut</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining translational force resultant along local t-axis as a function of relative translational displacement during unloading (IFLAG = 0 or 1 only).</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidtut&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidtut</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidtut property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidtut&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrur</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining rotational moment resultant about local r-axis as a function of relative rotational displacement during unloading.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidrur&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidrur</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidrur property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidrur&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrus</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve for rotational moment resultant about local s-axis:</span>
+<span class="sd">        IFLAG.NE.2:	load curve ID defining rotational moment resultant about local s-axis as a function of relative rotational displacement during unloading</span>
+<span class="sd">        IFLAG.EQ.2:	load curve ID defining rotational moment resultant about local s-axis as a function of relative rotational displacement during unloading at node 2.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidrus&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidrus</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidrus property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidrus&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrut</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining rotational moment resultant about local -axis:</span>
+<span class="sd">        IFLAG.NE.2:	load curve ID defining rotational moment resultant about local -axis as a function of relative rotational displacement during unloading.  If zero, no viscous forces are generated for this degree of freedom</span>
+<span class="sd">        IFLAG.EQ.2:	load curve ID defining rotational moment resultant about local -axis as a function of relative rotational displacement during unloading at node 2.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidrut&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidrut</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidrut property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidrut&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtdr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining translational damping force resultant along local r-</span>
+<span class="sd">        axis as a function of relative translational velocity.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidtdr&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidtdr</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtdr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidtdr property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidtdr&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining translational damping force resultant along local </span>
+<span class="sd">        s-axis as a function relative translational velocity.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidtds&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidtds</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidtds property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidtds&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtdt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining translational damping force resultant along local </span>
+<span class="sd">        t-axis as a function of relative translational velocity.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidtdt&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidtdt</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtdt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidtdt property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidtdt&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrdr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining rotational damping moment resultant about local </span>
+<span class="sd">        r-axis as a function of relative rotational velocity.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidrdr&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidrdr</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrdr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidrdr property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidrdr&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining rotational damping moment resultant about local </span>
+<span class="sd">        s-axis as a function of relative rotational velocity.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidrds&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidrds</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidrds property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidrds&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrdt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining rotational damping moment resultant about local </span>
+<span class="sd">        t-axis as a function of relative rotational velocity.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidrdt&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidrdt</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrdt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidrdt property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidrdt&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining translational damping force scale factor as a function of relative displacement in local r-direction.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidter&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidter</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidter property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidter&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining translational damping force scale factor as a function of relative displacement in local s-direction.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidtes&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidtes</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidtes property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidtes&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtet</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining translational damping force scale factor as a function of relative displacement in local t-direction.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidtet&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidtet</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidtet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidtet property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidtet&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining rotational damping moment resultant scale factor as a function of relative displacement in local r-rotation.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidrer&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidrer</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidrer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidrer property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidrer&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidres</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining rotational damping moment resultant scale factor as a function of relative displacement in local s-rotation.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidres&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidres</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidres</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidres property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidres&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidret</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Load curve ID defining rotational damping moment resultant scale factor as a function of relative displacement in local t-rotation.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;lcidret&quot;</span><span class="p">)</span>
+
+    <span class="nd">@lcidret</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lcidret</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the lcidret property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;lcidret&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">utfailr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Optional, translational displacement at failure in tension. If zero, the corresponding displacement, Ur, is not considered in the failure calculation.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;utfailr&quot;</span><span class="p">)</span>
+
+    <span class="nd">@utfailr</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">utfailr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the utfailr property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;utfailr&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">utfails</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Optional, translational displacement at failure in tension. If zero, the corresponding displacement, Us, is not considered in the failure calculation.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;utfails&quot;</span><span class="p">)</span>
+
+    <span class="nd">@utfails</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">utfails</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the utfails property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;utfails&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">utfailt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Optional, translational displacement at failure in tension. If zero, the corresponding displacement, Ut, is not considered in the failure calculation.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;utfailt&quot;</span><span class="p">)</span>
+
+    <span class="nd">@utfailt</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">utfailt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the utfailt property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;utfailt&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wtfailr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Optional, rotational displacement at failure in tension. If zero, the corresponding rotation, theta-r, is not considered in the failure calculation.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;wtfailr&quot;</span><span class="p">)</span>
+
+    <span class="nd">@wtfailr</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wtfailr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the wtfailr property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;wtfailr&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wtfails</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Optional, rotational displacement at failure in tension. If zero, the corresponding rotation, theta-s, is not considered in the failure calculation.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;wtfails&quot;</span><span class="p">)</span>
+
+    <span class="nd">@wtfails</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wtfails</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the wtfails property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;wtfails&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wtfailt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Optional, rotational displacement at failure in tension. If zero, the corresponding rotation, theta-t, is not considered in the failure calculation.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;wtfailt&quot;</span><span class="p">)</span>
+
+    <span class="nd">@wtfailt</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wtfailt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the wtfailt property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;wtfailt&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fcrit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Failure criterion (see Remark 1):</span>
+<span class="sd">        EQ.0.0:	two separate criteria, one for negative displacements and rotations, another for positive displacements and rotations</span>
+<span class="sd">        EQ.1.0:	one criterion that considers both positive and negative displacements and rotations.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;fcrit&quot;</span><span class="p">)</span>
+
+    <span class="nd">@fcrit</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fcrit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the fcrit property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;fcrit&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ucfailr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Optional, translational displacement at failure in compression. If zero, the corresponding displacement, Ur, is not considered in the failure calculation.</span>
+<span class="sd">        Define as a positive number.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;ucfailr&quot;</span><span class="p">)</span>
+
+    <span class="nd">@ucfailr</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ucfailr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the ucfailr property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;ucfailr&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ucfails</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Optional, translational displacement at failure in compression. If zero, the corresponding displacement, Us, is not considered in the failure calculation.</span>
+<span class="sd">        Define as a positive number.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;ucfails&quot;</span><span class="p">)</span>
+
+    <span class="nd">@ucfails</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ucfails</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the ucfails property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;ucfails&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ucfailt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Optional, translational displacement at failure in compression. If zero, the corresponding displacement, Ut, is not considered in the failure calculation.</span>
+<span class="sd">        Define as a positive number.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;ucfailt&quot;</span><span class="p">)</span>
+
+    <span class="nd">@ucfailt</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ucfailt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the ucfailt property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;ucfailt&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wcfailr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Optional, rotational displacement at failure in compression. If zero, the corresponding rotation, theta-r, is not considered in the failure calculation.</span>
+<span class="sd">        Define as a positive number.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;wcfailr&quot;</span><span class="p">)</span>
+
+    <span class="nd">@wcfailr</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wcfailr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the wcfailr property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;wcfailr&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wcfails</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Optional, rotational displacement at failure in compression. If zero, the corresponding rotation, theta-s, is not considered in the failure calculation.</span>
+<span class="sd">        Define as a positive number.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;wcfails&quot;</span><span class="p">)</span>
+
+    <span class="nd">@wcfails</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wcfails</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the wcfails property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;wcfails&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wcfailt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Optional, rotational displacement at failure in compression. If zero, the corresponding rotation, theta-t, is not considered in the failure calculation.</span>
+<span class="sd">        Define as a positive number.</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;wcfailt&quot;</span><span class="p">)</span>
+
+    <span class="nd">@wcfailt</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wcfailt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the wcfailt property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;wcfailt&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iur</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Initial translational displacement along local r-axis</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;iur&quot;</span><span class="p">)</span>
+
+    <span class="nd">@iur</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the iur property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;iur&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ius</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Initial translational displacement along local s-axis</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;ius&quot;</span><span class="p">)</span>
+
+    <span class="nd">@ius</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the ius property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;ius&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iut</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Initial translational displacement along local t-axis</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;iut&quot;</span><span class="p">)</span>
+
+    <span class="nd">@iut</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the iut property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;iut&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iwr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Initial rotational displacement along local r-axis</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;iwr&quot;</span><span class="p">)</span>
+
+    <span class="nd">@iwr</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iwr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the iwr property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;iwr&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iws</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Initial rotational displacement along local s-axis</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;iws&quot;</span><span class="p">)</span>
+
+    <span class="nd">@iws</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iws</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the iws property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;iws&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iwt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Initial rotational displacement along local t-axis</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;iwt&quot;</span><span class="p">)</span>
+
+    <span class="nd">@iwt</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">iwt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the iwt property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;iwt&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">title</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or set the Additional title line</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="c1"># nopep8</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">)</span>
+
+    <span class="nd">@title</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the title property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">cards</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activate_option</span><span class="p">(</span><span class="s2">&quot;TITLE&quot;</span><span class="p">)</span></div>
+
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<!-- If there is no fix edit button function, use the PyData edit-this-button-->
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../../../../../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../../../../../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../../../../../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2025 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.6.1. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

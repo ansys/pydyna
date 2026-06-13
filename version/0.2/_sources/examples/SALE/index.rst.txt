@@ -1,0 +1,43 @@
+
+
+.. _sphx_glr_examples_SALE:
+
+SALE examples
+~~~~~~~~~~~~~~
+
+These examples show how to create SALE model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to create a SALE input deck. ">
+
+.. only:: html
+
+  .. image:: /examples/SALE/images/thumb/sphx_glr_sale_efp_thumb.png
+    :alt: EFP Concrete Target
+
+  :ref:`sphx_glr_examples_SALE_sale_efp.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">EFP Concrete Target</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/SALE/sale_efp
+

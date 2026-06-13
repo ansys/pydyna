@@ -1,0 +1,126 @@
+ansys.dyna.core.pre.dynaiga
+===========================
+
+.. py:module:: ansys.dyna.core.pre.dynaiga
+
+.. autoapi-nested-parse::
+
+   IGA API
+   ==========
+
+   Module for creating an IGA DYNA input deck.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynaiga.DynaIGA
+
+
+Module Contents
+---------------
+
+.. py:class:: DynaIGA
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.DynaBase`
+
+
+   
+   Contains methods for creating a keyword related to IGA.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: casetype
+
+
+   .. py:method:: create_section_igashell(secid, elform, shrf, thickness)
+
+      
+      Define section properties for isogeometric shell elements.
+
+
+      :Parameters:
+
+          **secid** : :class:`python:int`
+              Section ID. ``SECID`` is referenced on the ``\*PART`` card.
+              A unique number or label must be specified.
+
+          **elform** : :class:`python:int`
+              Element formulation.
+
+          **shrf** : :class:`python:float`
+              Shear correction factor, which scales the transverse shear stress.
+
+          **thickness** : :class:`python:float`
+              Shell thickness.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: save_file()
+
+      
+      Save keyword files.
+
+
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
