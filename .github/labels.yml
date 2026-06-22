@@ -82,3 +82,7 @@
 - name: 'docs:pdf:skip'
   description: Skip documentation PDF runs in CI/CD
   color: 0677ba
+
+- name: 'LS-DYNA Manual'
+  description: Issues related to LS-DYNA manual
+  color: 5802B8

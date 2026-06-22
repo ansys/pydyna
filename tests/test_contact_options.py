@@ -2,6 +2,8 @@ from ansys.dyna.core.keywords.keyword_classes.auto.contact.contact_automatic_sin
 from ansys.dyna.core.keywords.keyword_classes.auto.contact.contact_automatic_single_surface_mortar import ContactAutomaticSingleSurfaceMortar
 from ansys.dyna.core.keywords.keyword_classes.auto.contact.contact_automatic_single_surface_tiebreak import ContactAutomaticSingleSurfaceTiebreak
 import pytest
+import warnings
+from ansys.dyna.core import Deck
 from ansys.dyna.core.lib.option_card import Options
 
 def test_contact_automatic_single_surface_option_dependencies():
@@ -158,3 +160,64 @@ def test_contact_card_with_parameters_and_options():
 
     output = keyword.write()
     assert "*CONTACT_AUTOMATIC_SINGLE_SURFACE" in output
+
+
+def test_contact_automatic_surface_to_surface_title_loads_without_warning(file_utils):
+    """Regression test: *CONTACT_AUTOMATIC_SURFACE_TO_SURFACE_TITLE should load
+    without warnings.  Previously, the '_TITLE' suffix was not mapped to the 'ID'
+    option, causing the CID+heading line to be parsed as the SSID/MSID card, which
+    raised 'could not convert string to float' for the NAME field value.
+    """
+    deck = Deck()
+    input_deck = file_utils.get_asset_file_path("contact_surface_inputdeck.txt")
+    with open(input_deck) as f:
+        content = f.read()
+
+    with warnings.catch_warnings():
+        warnings.simplefilter("error", UserWarning)
+        deck.loads(content)
+
+    assert len(list(deck.keywords)) == 1
+    kw = list(deck.keywords)[0]
+    # ID option is activated via the TITLE suffix → CID + heading card is read
+    assert kw.is_option_active("ID")
+    assert kw.surfa == 9700101
+    assert kw.surfb == 101
+    assert kw.surfatyp == 2
+
+
+def test_title_suffix_does_not_alias_to_id_when_explicit_title_option_exists():
+    """When a keyword has its own explicit 'TITLE' option spec, '_TITLE' in the
+    keyword name must activate that 'TITLE' option directly and must NOT also
+    inject a spurious 'ID' activation.
+
+    SectionSolidLegacy is the canonical example: it declares
+        OptionSpec("TITLE", -1, 1)
+    so 'TITLE' → 'ID' aliasing must be skipped entirely.
+    """
+    import warnings
+    from ansys.dyna.core.keywords.keyword_classes.manual.section_solid_version_0_11_0 import SectionSolidLegacy
+
+    SECTION_SOLID_TITLE_DECK = """\
+*SECTION_SOLID_TITLE
+My solid section title
+         1         1
+"""
+    with warnings.catch_warnings():
+        # Suppress the DeprecationWarning raised by SectionSolidLegacy.__init__
+        warnings.simplefilter("ignore", DeprecationWarning)
+        # No other UserWarning should be raised
+        warnings.simplefilter("error", UserWarning)
+
+        kw = SectionSolidLegacy()
+        kw.loads(SECTION_SOLID_TITLE_DECK)
+
+    # The explicit TITLE option must be active
+    assert kw.is_option_active("TITLE")
+    # ID must NOT have been spuriously activated (no ID option spec exists)
+    assert not kw.is_option_active("ID")
+    # Data card parsed correctly
+    assert kw.secid == 1
+    assert kw.elform == 1
+    # Title text was read
+    assert kw.title == "My solid section title"
