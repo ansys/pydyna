@@ -94,19 +94,24 @@ class ControlFormingTemplate(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGTEMPLATE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGTEMPLATE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGTEMPLATE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGTEMPLATE_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGTEMPLATE_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def idtemp(self) -> int:
         """Get or set the Type of forming process (Detailed descriptions can be found in the Remark section)
@@ -489,7 +494,7 @@ class ControlFormingTemplate(KeywordBase):
         self._cards[4].set_value("d3plt", value)
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -504,7 +509,7 @@ class ControlFormingTemplate(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None

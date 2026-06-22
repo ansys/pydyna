@@ -42,4 +42,5 @@ class InterfaceSpg2(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACESPG2_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

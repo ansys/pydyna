@@ -55,8 +55,8 @@ class MatInvHyperbolicSinThermal(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "INV_HYPERBOLIC_SIN_THERMAL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lce": LinkType.DEFINE_CURVE,
@@ -72,11 +72,13 @@ class MatInvHyperbolicSinThermal(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATINVHYPERBOLICSINTHERMAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATINVHYPERBOLICSINTHERMAL_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatInvHyperbolicSinThermal.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatInvHyperbolicSinThermal._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATINVHYPERBOLICSINTHERMAL_OPTION0_CARD0,
@@ -222,7 +224,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lce_link(self) -> DefineCurve:
+    def lce_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lce."""
         if self.deck is None:
             return None
@@ -237,7 +239,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
         self.lce = value.lcid
 
     @property
-    def lcpr_link(self) -> DefineCurve:
+    def lcpr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpr."""
         if self.deck is None:
             return None
@@ -252,7 +254,7 @@ class MatInvHyperbolicSinThermal(KeywordBase):
         self.lcpr = value.lcid
 
     @property
-    def lccte_link(self) -> DefineCurve:
+    def lccte_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccte."""
         if self.deck is None:
             return None

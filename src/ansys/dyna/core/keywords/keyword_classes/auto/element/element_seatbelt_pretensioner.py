@@ -60,10 +60,12 @@ class ElementSeatbeltPretensioner(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTSEATBELTPRETENSIONER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSEATBELTPRETENSIONER_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sbprid(self) -> int:
         """Get or set the Pretensioner ID. A unique number has to be used.
@@ -186,7 +188,7 @@ class ElementSeatbeltPretensioner(KeywordBase):
         self._cards[1].set_value("lmtfrc", value)
 
     @property
-    def ptlcid_link(self) -> DefineCurve:
+    def ptlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ptlcid."""
         if self.deck is None:
             return None

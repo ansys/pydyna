@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
@@ -46,11 +47,18 @@ _EOSGASKET_CARD1 = (
     FieldSchema("ivs", float, 60, 10, None),
 )
 
+_EOSGASKET_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class EosGasket(KeywordBase):
     """DYNA EOS_GASKET keyword"""
 
     keyword = "EOS"
     subkeyword = "GASKET"
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
+    ]
     _link_fields = {
         "lcid1": LinkType.DEFINE_CURVE,
         "lcid2": LinkType.DEFINE_CURVE,
@@ -61,14 +69,27 @@ class EosGasket(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the EosGasket class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _EOSGASKET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOSGASKET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+            OptionCardSet(
+                option_spec = EosGasket._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _EOSGASKET_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state ID.
@@ -209,7 +230,21 @@ class EosGasket(KeywordBase):
         self._cards[1].set_value("ivs", value)
 
     @property
-    def lcid1_link(self) -> DefineCurve:
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
+
+    @property
+    def lcid1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid1."""
         if self.deck is None:
             return None
@@ -224,7 +259,7 @@ class EosGasket(KeywordBase):
         self.lcid1 = value.lcid
 
     @property
-    def lcid2_link(self) -> DefineCurve:
+    def lcid2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid2."""
         if self.deck is None:
             return None
@@ -239,7 +274,7 @@ class EosGasket(KeywordBase):
         self.lcid2 = value.lcid
 
     @property
-    def lcid3_link(self) -> DefineCurve:
+    def lcid3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid3."""
         if self.deck is None:
             return None
@@ -254,7 +289,7 @@ class EosGasket(KeywordBase):
         self.lcid3 = value.lcid
 
     @property
-    def lcid4_link(self) -> DefineCurve:
+    def lcid4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid4."""
         if self.deck is None:
             return None

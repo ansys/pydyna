@@ -79,16 +79,20 @@ class ConstrainedGeneralizedWeldCrossFillet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDGENERALIZEDWELDCROSSFILLET_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def wid(self) -> typing.Optional[int]:
         """Get or set the Optional weld ID
@@ -296,17 +300,17 @@ class ConstrainedGeneralizedWeldCrossFillet(KeywordBase):
         self._cards[3].set_value("ncid", value)
 
     @property
-    def nodea_link(self) -> KeywordBase:
+    def nodea_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nodea."""
         return self._get_link_by_attr("NODE", "nid", self.nodea, "parts")
 
     @property
-    def nodeb_link(self) -> KeywordBase:
+    def nodeb_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nodeb."""
         return self._get_link_by_attr("NODE", "nid", self.nodeb, "parts")
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -321,7 +325,7 @@ class ConstrainedGeneralizedWeldCrossFillet(KeywordBase):
         self.cid = value.cid
 
     @property
-    def ncid_link(self) -> DefineCoordinateSystem:
+    def ncid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for ncid."""
         if self.deck is None:
             return None
@@ -336,7 +340,7 @@ class ConstrainedGeneralizedWeldCrossFillet(KeywordBase):
         self.ncid = value.cid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 

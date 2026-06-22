@@ -51,7 +51,8 @@ class LoadFaceUvw(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADFACEUVW_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def luid(self) -> typing.Optional[int]:
         """Get or set the Parametric face ID; see *IGA_FACE_UVW
@@ -97,7 +98,7 @@ class LoadFaceUvw(KeywordBase):
         self._cards[0].set_value("at", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

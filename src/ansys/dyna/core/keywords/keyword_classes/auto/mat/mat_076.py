@@ -75,8 +75,8 @@ class Mat076(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "076"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -91,17 +91,21 @@ class Mat076(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT076_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT076_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT076_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT076_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat076.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat076._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT076_OPTION0_CARD0,
@@ -411,7 +415,7 @@ class Mat076(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -426,7 +430,7 @@ class Mat076(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def lcidk_link(self) -> DefineCurve:
+    def lcidk_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidk."""
         if self.deck is None:
             return None

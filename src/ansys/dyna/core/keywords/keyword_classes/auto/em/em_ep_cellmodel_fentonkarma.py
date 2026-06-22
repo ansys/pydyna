@@ -70,16 +70,20 @@ class EmEpCellmodelFentonkarma(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELFENTONKARMA_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELFENTONKARMA_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELFENTONKARMA_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELFENTONKARMA_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def matid(self) -> typing.Optional[int]:
         """Get or set the Material ID defined in *MAT_.
@@ -247,7 +251,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
         self._cards[3].set_value("w0", value)
 
     @property
-    def matid_link(self) -> KeywordBase:
+    def matid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for matid."""
         if self.deck is None:
             return None

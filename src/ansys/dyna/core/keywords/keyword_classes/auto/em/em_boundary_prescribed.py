@@ -58,10 +58,12 @@ class EmBoundaryPrescribed(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMBOUNDARYPRESCRIBED_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMBOUNDARYPRESCRIBED_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def bpid(self) -> typing.Optional[int]:
         """Get or set the ID of the Prescribed boundary.
@@ -168,7 +170,7 @@ class EmBoundaryPrescribed(KeywordBase):
         self._cards[1].set_value("deatht", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

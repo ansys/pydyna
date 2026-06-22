@@ -78,16 +78,20 @@ class FrequencyDomainAcousticFemEigenvalue(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICFEMEIGENVALUE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICFEMEIGENVALUE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICFEMEIGENVALUE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICFEMEIGENVALUE_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ro(self) -> typing.Optional[float]:
         """Get or set the Fluid density.
@@ -355,7 +359,7 @@ class FrequencyDomainAcousticFemEigenvalue(KeywordBase):
         self._cards[3].set_value("vid", value)
 
     @property
-    def lcid1_link(self) -> DefineCurve:
+    def lcid1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid1."""
         if self.deck is None:
             return None
@@ -370,7 +374,7 @@ class FrequencyDomainAcousticFemEigenvalue(KeywordBase):
         self.lcid1 = value.lcid
 
     @property
-    def lcid2_link(self) -> DefineCurve:
+    def lcid2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid2."""
         if self.deck is None:
             return None

@@ -43,7 +43,8 @@ class ChangeOutput(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHANGEOUTPUT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def iascii(self) -> int:
         """Get or set the If iascii=1, all ascii output will be appended to the result of previous run.

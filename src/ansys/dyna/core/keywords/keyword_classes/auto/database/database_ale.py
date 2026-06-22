@@ -55,10 +55,12 @@ class DatabaseAle(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEALE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASEALE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dtout(self) -> typing.Optional[float]:
         """Get or set the Time interval between the outputs.

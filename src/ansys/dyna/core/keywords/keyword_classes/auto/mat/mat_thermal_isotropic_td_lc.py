@@ -55,8 +55,8 @@ class MatThermalIsotropicTdLc(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "THERMAL_ISOTROPIC_TD_LC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "tgrlc": LinkType.DEFINE_CURVE,
@@ -72,11 +72,13 @@ class MatThermalIsotropicTdLc(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATTHERMALISOTROPICTDLC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTHERMALISOTROPICTDLC_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatThermalIsotropicTdLc.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatThermalIsotropicTdLc._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATTHERMALISOTROPICTDLC_OPTION0_CARD0,
@@ -237,7 +239,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def tgrlc_link(self) -> DefineCurve:
+    def tgrlc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tgrlc."""
         if self.deck is None:
             return None
@@ -252,7 +254,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
         self.tgrlc = value.lcid
 
     @property
-    def hclc_link(self) -> DefineCurve:
+    def hclc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hclc."""
         if self.deck is None:
             return None
@@ -267,7 +269,7 @@ class MatThermalIsotropicTdLc(KeywordBase):
         self.hclc = value.lcid
 
     @property
-    def tclc_link(self) -> DefineCurve:
+    def tclc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tclc."""
         if self.deck is None:
             return None

@@ -63,13 +63,16 @@ class AleMappingFromLagrangian(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALEMAPPINGFROMLAGRANGIAN_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEMAPPINGFROMLAGRANGIAN_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEMAPPINGFROMLAGRANGIAN_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def lagpid(self) -> typing.Optional[int]:
         """Get or set the Part or part set ID for Lagrangian parts involved in the mapping
@@ -199,7 +202,7 @@ class AleMappingFromLagrangian(KeywordBase):
         self._cards[2].set_value("div", value)
 
     @property
-    def aleid_link(self) -> KeywordBase:
+    def aleid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given aleid."""
         return self._get_link_by_attr("PART", "pid", self.aleid, "parts")
 

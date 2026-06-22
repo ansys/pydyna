@@ -56,10 +56,12 @@ class DatabaseFrequencyBinaryD3Ssd(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEFREQUENCYBINARYD3SSD_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASEFREQUENCYBINARYD3SSD_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def binary(self) -> int:
         """Get or set the Flag for writing the binary plot file.
@@ -140,7 +142,7 @@ class DatabaseFrequencyBinaryD3Ssd(KeywordBase):
         self._cards[1].set_value("lcfreq", value)
 
     @property
-    def lcfreq_link(self) -> DefineCurve:
+    def lcfreq_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfreq."""
         if self.deck is None:
             return None

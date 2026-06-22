@@ -48,8 +48,8 @@ class SetSolidGenerateIncrement(KeywordBase):
 
     keyword = "SET"
     subkeyword = "SOLID_GENERATE_INCREMENT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "bbeg": LinkType.ELEMENT_SOLID,
@@ -64,11 +64,13 @@ class SetSolidGenerateIncrement(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETSOLIDGENERATEINCREMENT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETSOLIDGENERATEINCREMENT_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SetSolidGenerateIncrement.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SetSolidGenerateIncrement._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETSOLIDGENERATEINCREMENT_OPTION0_CARD0,
@@ -152,12 +154,12 @@ class SetSolidGenerateIncrement(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def bbeg_link(self) -> KeywordBase:
+    def bbeg_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given bbeg."""
         return self._get_link_by_attr("ELEMENT", "eid", self.bbeg, "parts")
 
     @property
-    def bend_link(self) -> KeywordBase:
+    def bend_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given bend."""
         return self._get_link_by_attr("ELEMENT", "eid", self.bend, "parts")
 

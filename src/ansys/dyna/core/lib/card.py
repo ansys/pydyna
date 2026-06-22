@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -19,13 +19,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
 """Module for card handling."""
 
 import io
 import typing
 import warnings
 
-from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.card_interface import CardInterface, ReadResult
 from ansys.dyna.core.lib.field import Field, Flag, to_long  # noqa: F401
 from ansys.dyna.core.lib.field_schema import CardSchema, FieldSchema
 from ansys.dyna.core.lib.field_writer import write_comment_line, write_fields, write_fields_csv
@@ -101,7 +102,7 @@ class Card(CardInterface):
     def __init__(
         self,
         fields: typing.List[Field],
-        active_func: typing.Callable = None,
+        active_func: typing.Optional[typing.Callable] = None,
         format: format_type = format_type.default,
     ):
         """Initialize a Card from Field objects.
@@ -131,8 +132,10 @@ class Card(CardInterface):
         field_schemas = tuple(FieldSchema.from_field(f) for f in fields)
         name_to_index = {f.name: i for i, f in enumerate(fields)}
         self._schema = CardSchema(field_schemas, name_to_index)
-        # Use object id as signature - no cross-instance caching for legacy path
-        self._signature = id(self._schema)
+        # Use content-based signature (not id-based) so the FormatSpec cache key
+        # remains valid across GC cycles. Using id(schema) is unsafe because Python
+        # reuses memory addresses after GC, causing stale cache hits with wrong layouts.
+        self._signature = tuple(fs.signature() for fs in field_schemas)
         self._values = [f.value for f in fields]
         self._fields_set: bool = False  # Track whether fields were ever explicitly set
         self._active_func = active_func
@@ -179,14 +182,7 @@ class Card(CardInterface):
         else:
             name_to_index = {fs.name: i for i, fs in enumerate(field_schemas)}
             schema = CardSchema(field_schemas, name_to_index)
-            signature = tuple(
-                (
-                    (fs.name, fs.type, fs.offset, fs.width, fs.default.true_value, fs.default.false_value)
-                    if fs.is_flag()
-                    else (fs.name, fs.type, fs.offset, fs.width)
-                )
-                for fs in field_schemas
-            )
+            signature = tuple(fs.signature() for fs in field_schemas)
             _field_schemas_cache[cache_key] = (schema, signature)
 
         instance._schema = schema
@@ -290,30 +286,46 @@ class Card(CardInterface):
             fields.append(new_field)
         return fields
 
-    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> bool:
-        """Reads the card from the given buffer."""
+    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> ReadResult:
+        """Reads the card from the given buffer.
+
+        Returns
+        -------
+        ReadResult
+            Result containing warnings generated during parsing.
+        """
+        result = ReadResult()
         if not self.active:
-            return False
+            return result
         line, to_exit = read_line(buf)
         if to_exit:
-            return True
-        self._load(line, parameter_set)
-        return False
+            result.reached_end = True
+            return result
+        line_warnings = self._load(line, parameter_set)
+        result.warnings.extend(line_warnings)
+        return result
 
-    def _load(self, data_line: str, parameter_set: ParameterSet) -> None:
+    def _load(self, data_line: str, parameter_set: ParameterSet) -> typing.List[str]:
         """Load card data from a string line.
 
         Uses cached FormatSpec for efficient parsing.
+
+        Returns
+        -------
+        list of str
+            Warning messages generated during parsing.
         """
         current_format = self.format
         format_spec = _get_cached_format_spec(self._signature, self._schema, current_format)
 
-        values, detected_format = load_dataline_with_format(format_spec, data_line, parameter_set)
+        values, detected_format, line_warnings = load_dataline_with_format(format_spec, data_line, parameter_set)
         self._card_format = detected_format
 
         # Update values directly (no Field objects needed)
         for i in range(len(self._schema)):
             self._values[i] = values[i]
+
+        return line_warnings
 
     def write(
         self,
@@ -340,8 +352,9 @@ class Card(CardInterface):
             If None (default), uses fixed unless the card was originally read as csv.
         retain_parameters : bool, optional
             If True, write original parameter references instead of values.
+            If False and parameter_set provided, resolve refs to current values.
         parameter_set : ParameterSet, optional
-            The parameter set to use for looking up stored refs.
+            Set containing refs and values. Behavior depends on retain_parameters.
         uri_prefix : str, optional
             The URI prefix for this card (e.g., "12345/card0") for ref lookup.
 
@@ -365,6 +378,9 @@ class Card(CardInterface):
                 # If retaining parameters, substitute any refs we have stored
                 if retain_parameters and parameter_set is not None and uri_prefix is not None:
                     fields = self._substitute_parameter_refs(fields, parameter_set, uri_prefix)
+                # If resolving at write time (keyword on deck), substitute refs with current values
+                elif not retain_parameters and parameter_set is not None and uri_prefix is not None:
+                    fields = self._resolve_refs_from_deck(fields, parameter_set, uri_prefix)
 
                 if output_format == card_format.csv:
                     # CSV format: no comment line, comma-separated values
@@ -399,6 +415,41 @@ class Card(CardInterface):
                 result.append(new_field)
             else:
                 result.append(field)
+        return result
+
+    def _resolve_refs_from_deck(
+        self,
+        fields: typing.List[Field],
+        parameter_set: ParameterSet,
+        uri_prefix: str,
+    ) -> typing.List[Field]:
+        """Resolve parameter references from deck.parameters for fields with recorded refs.
+
+        For each field that has a recorded ref, resolve from parameter_set (deck.parameters)
+        at write time. The keyword does not own the value—the deck does—so we always
+        resolve fresh so values stay current if deck.parameters changes.
+        """
+        from ansys.dyna.core.lib.kwd_line_formatter import resolve_ref_to_value
+
+        result = []
+        for i, field in enumerate(fields):
+            ref = parameter_set.get_ref(uri_prefix, str(i))
+            if ref is None:
+                result.append(field)
+                continue
+
+            try:
+                value = resolve_ref_to_value(ref, parameter_set, field.type)
+            except (TypeError, ValueError):
+                result.append(field)
+                continue
+
+            if value is None:
+                result.append(field)
+                continue
+
+            new_field = Field(field.name, field.type, field.offset, field.width, value)
+            result.append(new_field)
         return result
 
     @property

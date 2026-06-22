@@ -63,10 +63,12 @@ class EmContactSubdom(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCONTACTSUBDOM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMCONTACTSUBDOM_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sdtype(self) -> int:
         """Get or set the Subdomain definition type:
@@ -222,7 +224,7 @@ class EmContactSubdom(KeywordBase):
         self._cards[1].set_value("pmaxz", value)
 
     @property
-    def lcidy_link(self) -> DefineCurve:
+    def lcidy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidy."""
         if self.deck is None:
             return None
@@ -237,7 +239,7 @@ class EmContactSubdom(KeywordBase):
         self.lcidy = value.lcid
 
     @property
-    def lcidz_link(self) -> DefineCurve:
+    def lcidz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidz."""
         if self.deck is None:
             return None

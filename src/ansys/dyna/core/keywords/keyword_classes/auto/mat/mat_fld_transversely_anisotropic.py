@@ -53,8 +53,8 @@ class MatFldTransverselyAnisotropic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "FLD_TRANSVERSELY_ANISOTROPIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "hlcid": LinkType.DEFINE_CURVE,
@@ -69,11 +69,13 @@ class MatFldTransverselyAnisotropic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATFLDTRANSVERSELYANISOTROPIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATFLDTRANSVERSELYANISOTROPIC_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatFldTransverselyAnisotropic.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatFldTransverselyAnisotropic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATFLDTRANSVERSELYANISOTROPIC_OPTION0_CARD0,
@@ -197,7 +199,7 @@ class MatFldTransverselyAnisotropic(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def hlcid_link(self) -> DefineCurve:
+    def hlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hlcid."""
         if self.deck is None:
             return None
@@ -212,7 +214,7 @@ class MatFldTransverselyAnisotropic(KeywordBase):
         self.hlcid = value.lcid
 
     @property
-    def lcfld_link(self) -> DefineCurve:
+    def lcfld_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfld."""
         if self.deck is None:
             return None

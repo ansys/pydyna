@@ -42,4 +42,5 @@ class ControlCrMppDecompositionFlagStressStrainCurve(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLCRMPPDECOMPOSITIONFLAGSTRESSSTRAINCURVE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

@@ -52,7 +52,8 @@ class InitialAxialForceBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALAXIALFORCEBEAM_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def bsid(self) -> typing.Optional[int]:
         """Get or set the Beam set ID
@@ -103,7 +104,7 @@ class InitialAxialForceBeam(KeywordBase):
         self._cards[0].set_value("kbend", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -118,7 +119,7 @@ class InitialAxialForceBeam(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def bsid_link(self) -> KeywordBase:
+    def bsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_BEAM_* keyword for bsid."""
         return self._get_set_link("BEAM", self.bsid)
 

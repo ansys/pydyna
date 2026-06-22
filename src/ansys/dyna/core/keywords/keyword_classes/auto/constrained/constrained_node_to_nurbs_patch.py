@@ -55,7 +55,8 @@ class ConstrainedNodeToNurbsPatch(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODETONURBSPATCH_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def patchid(self) -> typing.Optional[int]:
         """Get or set the Patch ID.
@@ -126,12 +127,12 @@ class ConstrainedNodeToNurbsPatch(KeywordBase):
         self._cards[0].set_value("dbflg", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

@@ -50,7 +50,8 @@ class Parameter(KeywordBase):
                 10,
                 self.Parameter,
                 None,
-                data = kwargs.get("parameters")),        ]
+                data = kwargs.get("parameters")),
+        ]
     @property
     def parameters(self) -> SeriesCard:
         """Parameters.."""

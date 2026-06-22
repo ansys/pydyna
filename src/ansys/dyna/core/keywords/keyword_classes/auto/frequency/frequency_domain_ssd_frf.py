@@ -90,16 +90,20 @@ class FrequencyDomainSsdFrf(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSSDFRF_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSSDFRF_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSSDFRF_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSSDFRF_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mdmin(self) -> int:
         """Get or set the The first mode in modal superposition method (optional).
@@ -491,7 +495,7 @@ class FrequencyDomainSsdFrf(KeywordBase):
         self._cards[3].set_value("vid", value)
 
     @property
-    def lcdam_link(self) -> DefineCurve:
+    def lcdam_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdam."""
         if self.deck is None:
             return None
@@ -506,7 +510,7 @@ class FrequencyDomainSsdFrf(KeywordBase):
         self.lcdam = value.lcid
 
     @property
-    def lc1_link(self) -> DefineCurve:
+    def lc1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc1."""
         if self.deck is None:
             return None
@@ -521,7 +525,7 @@ class FrequencyDomainSsdFrf(KeywordBase):
         self.lc1 = value.lcid
 
     @property
-    def lc2_link(self) -> DefineCurve:
+    def lc2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc2."""
         if self.deck is None:
             return None
@@ -536,7 +540,7 @@ class FrequencyDomainSsdFrf(KeywordBase):
         self.lc2 = value.lcid
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None

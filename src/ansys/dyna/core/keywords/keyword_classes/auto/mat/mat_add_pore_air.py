@@ -57,8 +57,8 @@ class MatAddPoreAir(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ADD_PORE_AIR"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "mid": LinkType.MAT,
@@ -75,11 +75,13 @@ class MatAddPoreAir(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATADDPOREAIR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDPOREAIR_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatAddPoreAir.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatAddPoreAir._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATADDPOREAIR_OPTION0_CARD0,
@@ -247,7 +249,7 @@ class MatAddPoreAir(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None
@@ -262,7 +264,7 @@ class MatAddPoreAir(KeywordBase):
         self.mid = value.mid
 
     @property
-    def lcpgd1_link(self) -> DefineCurve:
+    def lcpgd1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpgd1."""
         if self.deck is None:
             return None
@@ -277,7 +279,7 @@ class MatAddPoreAir(KeywordBase):
         self.lcpgd1 = value.lcid
 
     @property
-    def lcpgd2_link(self) -> DefineCurve:
+    def lcpgd2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpgd2."""
         if self.deck is None:
             return None
@@ -292,7 +294,7 @@ class MatAddPoreAir(KeywordBase):
         self.lcpgd2 = value.lcid
 
     @property
-    def lcpgd3_link(self) -> DefineCurve:
+    def lcpgd3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpgd3."""
         if self.deck is None:
             return None

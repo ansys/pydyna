@@ -68,13 +68,16 @@ class ConstrainedRigidBodyInsert(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDRIGIDBODYINSERT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDRIGIDBODYINSERT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDRIGIDBODYINSERT_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Insert ID.
@@ -197,7 +200,7 @@ class ConstrainedRigidBodyInsert(KeywordBase):
         self._cards[2].set_value("deathb", value)
 
     @property
-    def mcid_link(self) -> DefineCurve:
+    def mcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for mcid."""
         if self.deck is None:
             return None
@@ -212,7 +215,7 @@ class ConstrainedRigidBodyInsert(KeywordBase):
         self.mcid = value.lcid
 
     @property
-    def coordid_link(self) -> DefineCoordinateSystem:
+    def coordid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for coordid."""
         if self.deck is None:
             return None
@@ -227,17 +230,17 @@ class ConstrainedRigidBodyInsert(KeywordBase):
         self.coordid = value.cid
 
     @property
-    def pidl_link(self) -> KeywordBase:
+    def pidl_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pidl."""
         return self._get_link_by_attr("PART", "pid", self.pidl, "parts")
 
     @property
-    def pidc_link(self) -> KeywordBase:
+    def pidc_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pidc."""
         return self._get_link_by_attr("PART", "pid", self.pidc, "parts")
 
     @property
-    def partb_link(self) -> KeywordBase:
+    def partb_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given partb."""
         return self._get_link_by_attr("PART", "pid", self.partb, "parts")
 

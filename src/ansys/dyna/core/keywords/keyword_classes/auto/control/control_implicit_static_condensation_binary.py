@@ -57,10 +57,12 @@ class ControlImplicitStaticCondensationBinary(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSTATICCONDENSATIONBINARY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSTATICCONDENSATIONBINARY_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sc_flag(self) -> int:
         """Get or set the Static Condensation Control Flag
@@ -144,7 +146,7 @@ class ControlImplicitStaticCondensationBinary(KeywordBase):
         self._cards[1].set_value("filename", value)
 
     @property
-    def sc_nsid_link(self) -> KeywordBase:
+    def sc_nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for sc_nsid."""
         return self._get_set_link("NODE", self.sc_nsid)
 
@@ -154,7 +156,7 @@ class ControlImplicitStaticCondensationBinary(KeywordBase):
         self.sc_nsid = value.sid
 
     @property
-    def sc_psid_link(self) -> KeywordBase:
+    def sc_psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for sc_psid."""
         return self._get_set_link("PART", self.sc_psid)
 

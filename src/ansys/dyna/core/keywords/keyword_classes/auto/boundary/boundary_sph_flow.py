@@ -64,10 +64,12 @@ class BoundarySphFlow(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYSPHFLOW_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYSPHFLOW_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID (NSID), SEE *SET_NODE, or part ID (PID), see *PART.
@@ -197,12 +199,12 @@ class BoundarySphFlow(KeywordBase):
         self._cards[1].set_value("vid", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -217,7 +219,7 @@ class BoundarySphFlow(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None

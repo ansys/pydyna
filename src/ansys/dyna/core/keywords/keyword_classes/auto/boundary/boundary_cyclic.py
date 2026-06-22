@@ -54,7 +54,8 @@ class BoundaryCyclic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYCYCLIC_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def xc(self) -> typing.Optional[float]:
         """Get or set the x-component axis vector of axis of rotation.
@@ -143,7 +144,7 @@ class BoundaryCyclic(KeywordBase):
         self._cards[0].set_value("isort", value)
 
     @property
-    def nsid1_link(self) -> KeywordBase:
+    def nsid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid1."""
         return self._get_set_link("NODE", self.nsid1)
 
@@ -153,7 +154,7 @@ class BoundaryCyclic(KeywordBase):
         self.nsid1 = value.sid
 
     @property
-    def nsid2_link(self) -> KeywordBase:
+    def nsid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid2."""
         return self._get_set_link("NODE", self.nsid2)
 

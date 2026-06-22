@@ -77,13 +77,16 @@ class BoundaryTemperatureRsw(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYTEMPERATURERSW_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYTEMPERATURERSW_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYTEMPERATURERSW_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Node Set ID; see *SET_‌NODE_‌OPTION. Nodes in the set will be checked to see if they are in the nugget or heat affected zone. If they are, the boundary condition will be applied. The boundary condition will not be applied to nodes in these regions if they are not included in the set..
@@ -306,27 +309,27 @@ class BoundaryTemperatureRsw(KeywordBase):
         self._cards[2].set_value("tempzb", value)
 
     @property
-    def nid1_link(self) -> KeywordBase:
+    def nid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid1."""
         return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
 
     @property
-    def nid2_link(self) -> KeywordBase:
+    def nid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid2."""
         return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
 
     @property
-    def h2_link(self) -> KeywordBase:
+    def h2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given h2."""
         return self._get_link_by_attr("NODE", "nid", self.h2, "parts")
 
     @property
-    def r_link(self) -> KeywordBase:
+    def r_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given r."""
         return self._get_link_by_attr("NODE", "nid", self.r, "parts")
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None
@@ -341,7 +344,7 @@ class BoundaryTemperatureRsw(KeywordBase):
         self.lcidt = value.lcid
 
     @property
-    def sid_link(self) -> KeywordBase:
+    def sid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for sid."""
         return self._get_set_link("NODE", self.sid)
 

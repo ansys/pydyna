@@ -89,22 +89,28 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRESPONSESPECTRUM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRESPONSESPECTRUM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRESPONSESPECTRUM_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRESPONSESPECTRUM_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRESPONSESPECTRUM_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRESPONSESPECTRUM_CARD5,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mdmin(self) -> int:
         """Get or set the The first mode in modal superposition method (optional).
@@ -452,7 +458,7 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
         self._cards[5].set_value("inflag", value)
 
     @property
-    def lcdamp_link(self) -> DefineCurve:
+    def lcdamp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdamp."""
         if self.deck is None:
             return None
@@ -467,7 +473,7 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
         self.lcdamp = value.lcid
 
     @property
-    def lc_tbid_link(self) -> KeywordBase:
+    def lc_tbid_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lc_tbid."""
         if self.deck is None:
             return None

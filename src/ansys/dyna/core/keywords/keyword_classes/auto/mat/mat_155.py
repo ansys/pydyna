@@ -76,8 +76,8 @@ class Mat155(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "155"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcidc": LinkType.DEFINE_CURVE,
@@ -94,20 +94,25 @@ class Mat155(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT155_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT155_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT155_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT155_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT155_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat155.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat155._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT155_OPTION0_CARD0,
@@ -394,7 +399,7 @@ class Mat155(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcidc_link(self) -> DefineCurve:
+    def lcidc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidc."""
         if self.deck is None:
             return None
@@ -409,7 +414,7 @@ class Mat155(KeywordBase):
         self.lcidc = value.lcid
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None
@@ -424,7 +429,7 @@ class Mat155(KeywordBase):
         self.lcidt = value.lcid
 
     @property
-    def lcsrc_link(self) -> DefineCurve:
+    def lcsrc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsrc."""
         if self.deck is None:
             return None
@@ -439,7 +444,7 @@ class Mat155(KeywordBase):
         self.lcsrc = value.lcid
 
     @property
-    def lcsrt_link(self) -> DefineCurve:
+    def lcsrt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsrt."""
         if self.deck is None:
             return None

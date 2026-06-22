@@ -93,8 +93,8 @@ class RigidwallGeometricCylinderDeformMotion(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_CYLINDER_DEFORM_MOTION"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "lcidr": LinkType.DEFINE_CURVE,
@@ -115,26 +115,33 @@ class RigidwallGeometricCylinderDeformMotion(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERDEFORMMOTION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERDEFORMMOTION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERDEFORMMOTION_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERDEFORMMOTION_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERDEFORMMOTION_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERDEFORMMOTION_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICCYLINDERDEFORMMOTION_CARD6,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = RigidwallGeometricCylinderDeformMotion.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = RigidwallGeometricCylinderDeformMotion._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLGEOMETRICCYLINDERDEFORMMOTION_OPTION0_CARD0,
@@ -533,7 +540,7 @@ class RigidwallGeometricCylinderDeformMotion(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcidr_link(self) -> DefineCurve:
+    def lcidr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidr."""
         if self.deck is None:
             return None
@@ -548,7 +555,7 @@ class RigidwallGeometricCylinderDeformMotion(KeywordBase):
         self.lcidr = value.lcid
 
     @property
-    def lcida_link(self) -> DefineCurve:
+    def lcida_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcida."""
         if self.deck is None:
             return None
@@ -563,7 +570,7 @@ class RigidwallGeometricCylinderDeformMotion(KeywordBase):
         self.lcida = value.lcid
 
     @property
-    def lcidb_link(self) -> DefineCurve:
+    def lcidb_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidb."""
         if self.deck is None:
             return None
@@ -578,7 +585,7 @@ class RigidwallGeometricCylinderDeformMotion(KeywordBase):
         self.lcidb = value.lcid
 
     @property
-    def lcidg_link(self) -> DefineCurve:
+    def lcidg_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidg."""
         if self.deck is None:
             return None
@@ -593,7 +600,7 @@ class RigidwallGeometricCylinderDeformMotion(KeywordBase):
         self.lcidg = value.lcid
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -608,7 +615,7 @@ class RigidwallGeometricCylinderDeformMotion(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None
@@ -623,7 +630,7 @@ class RigidwallGeometricCylinderDeformMotion(KeywordBase):
         self.boxid = value.boxid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 
@@ -633,7 +640,7 @@ class RigidwallGeometricCylinderDeformMotion(KeywordBase):
         self.nsid = value.sid
 
     @property
-    def nsidex_link(self) -> KeywordBase:
+    def nsidex_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsidex."""
         return self._get_set_link("NODE", self.nsidex)
 

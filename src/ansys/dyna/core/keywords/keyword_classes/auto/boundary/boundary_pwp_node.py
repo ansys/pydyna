@@ -67,10 +67,12 @@ class BoundaryPwpNode(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPWPNODE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPWPNODE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the NODE ID.
@@ -215,12 +217,12 @@ class BoundaryPwpNode(KeywordBase):
         self._cards[1].set_value("lcpum", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def lcdr_link(self) -> DefineCurve:
+    def lcdr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdr."""
         if self.deck is None:
             return None
@@ -235,7 +237,7 @@ class BoundaryPwpNode(KeywordBase):
         self.lcdr = value.lcid
 
     @property
-    def lcleak_link(self) -> DefineCurve:
+    def lcleak_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcleak."""
         if self.deck is None:
             return None
@@ -250,7 +252,7 @@ class BoundaryPwpNode(KeywordBase):
         self.lcleak = value.lcid
 
     @property
-    def lcpum_link(self) -> DefineCurve:
+    def lcpum_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpum."""
         if self.deck is None:
             return None

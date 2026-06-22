@@ -47,18 +47,11 @@ class SetPartListCollect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "PART_LIST_COLLECT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
-        "pid1": LinkType.PART,
-        "pid2": LinkType.PART,
-        "pid3": LinkType.PART,
-        "pid4": LinkType.PART,
-        "pid5": LinkType.PART,
-        "pid6": LinkType.PART,
-        "pid7": LinkType.PART,
-        "pid8": LinkType.PART,
+        "parts": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -69,14 +62,16 @@ class SetPartListCollect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETPARTLISTCOLLECT_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "parts",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("parts")),            OptionCardSet(
-                option_spec = SetPartListCollect.option_specs[0],
+                data = kwargs.get("parts")),
+            OptionCardSet(
+                option_spec = SetPartListCollect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETPARTLISTCOLLECT_OPTION0_CARD0,
@@ -180,42 +175,11 @@ class SetPartListCollect(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def pid1_link(self) -> KeywordBase:
-        """Get the PART keyword containing the given pid1."""
-        return self._get_link_by_attr("PART", "pid", self.pid1, "parts")
+    def parts_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all PART keywords for parts, keyed by element ID."""
+        return self._get_links_from_series("PART", "pid", "parts", "parts")
 
-    @property
-    def pid2_link(self) -> KeywordBase:
-        """Get the PART keyword containing the given pid2."""
-        return self._get_link_by_attr("PART", "pid", self.pid2, "parts")
-
-    @property
-    def pid3_link(self) -> KeywordBase:
-        """Get the PART keyword containing the given pid3."""
-        return self._get_link_by_attr("PART", "pid", self.pid3, "parts")
-
-    @property
-    def pid4_link(self) -> KeywordBase:
-        """Get the PART keyword containing the given pid4."""
-        return self._get_link_by_attr("PART", "pid", self.pid4, "parts")
-
-    @property
-    def pid5_link(self) -> KeywordBase:
-        """Get the PART keyword containing the given pid5."""
-        return self._get_link_by_attr("PART", "pid", self.pid5, "parts")
-
-    @property
-    def pid6_link(self) -> KeywordBase:
-        """Get the PART keyword containing the given pid6."""
-        return self._get_link_by_attr("PART", "pid", self.pid6, "parts")
-
-    @property
-    def pid7_link(self) -> KeywordBase:
-        """Get the PART keyword containing the given pid7."""
-        return self._get_link_by_attr("PART", "pid", self.pid7, "parts")
-
-    @property
-    def pid8_link(self) -> KeywordBase:
-        """Get the PART keyword containing the given pid8."""
-        return self._get_link_by_attr("PART", "pid", self.pid8, "parts")
+    def get_parts_link(self, element_id: int) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given element_id."""
+        return self._get_link_by_attr("PART", "pid", element_id, "parts")
 

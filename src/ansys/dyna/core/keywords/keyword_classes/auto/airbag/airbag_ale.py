@@ -154,37 +154,48 @@ class AirbagAle(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGALE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGALE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGALE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGALE_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGALE_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGALE_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGALE_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGALE_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGALE_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGALE_CARD9,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGALE_CARD10,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set ID.  This set ID contains the Lagrangian elements (segments) which make up the airbag and possibly the airbag canister/compartment and/or a simple representation of the inflator.
@@ -870,12 +881,12 @@ class AirbagAle(KeywordBase):
         self._cards[10].set_value("orifare", value)
 
     @property
-    def nodeid_link(self) -> KeywordBase:
+    def nodeid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nodeid."""
         return self._get_link_by_attr("NODE", "nid", self.nodeid, "parts")
 
     @property
-    def lcvel_link(self) -> DefineCurve:
+    def lcvel_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvel."""
         if self.deck is None:
             return None
@@ -890,7 +901,7 @@ class AirbagAle(KeywordBase):
         self.lcvel = value.lcid
 
     @property
-    def lct_link(self) -> DefineCurve:
+    def lct_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lct."""
         if self.deck is None:
             return None
@@ -905,7 +916,7 @@ class AirbagAle(KeywordBase):
         self.lct = value.lcid
 
     @property
-    def lcmf_link(self) -> DefineCurve:
+    def lcmf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcmf."""
         if self.deck is None:
             return None
@@ -920,7 +931,7 @@ class AirbagAle(KeywordBase):
         self.lcmf = value.lcid
 
     @property
-    def vecid_link(self) -> DefineVector:
+    def vecid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid."""
         if self.deck is None:
             return None

@@ -74,8 +74,8 @@ class MatB01(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "B01"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "llcid": LinkType.DEFINE_CURVE,
@@ -90,17 +90,21 @@ class MatB01(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATB01_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATB01_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATB01_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATB01_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatB01.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatB01._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATB01_OPTION0_CARD0,
@@ -410,7 +414,7 @@ class MatB01(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def llcid_link(self) -> DefineCurve:
+    def llcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for llcid."""
         if self.deck is None:
             return None
@@ -425,7 +429,7 @@ class MatB01(KeywordBase):
         self.llcid = value.lcid
 
     @property
-    def ulcid_link(self) -> DefineCurve:
+    def ulcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ulcid."""
         if self.deck is None:
             return None

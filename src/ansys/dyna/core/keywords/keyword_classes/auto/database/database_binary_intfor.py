@@ -57,11 +57,13 @@ class DatabaseBinaryIntfor(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYINTFOR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYINTFOR_CARD1,
                 active_func=lambda: self._cards[1].has_nondefault_values(),
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the This field defines the time interval between output states, DT, for all options except D3DUMP, RUNRSF, and D3DRLF.
@@ -141,7 +143,7 @@ class DatabaseBinaryIntfor(KeywordBase):
         self._cards[1].set_value("ioopt", value)
 
     @property
-    def lcdt_link(self) -> DefineCurve:
+    def lcdt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdt."""
         if self.deck is None:
             return None
@@ -156,7 +158,7 @@ class DatabaseBinaryIntfor(KeywordBase):
         self.lcdt = value.lcid
 
     @property
-    def psetid_link(self) -> KeywordBase:
+    def psetid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psetid."""
         return self._get_set_link("PART", self.psetid)
 

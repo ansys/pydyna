@@ -43,7 +43,8 @@ class ChangeStatusReportFrequency(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHANGESTATUSREPORTFREQUENCY_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ikedit(self) -> int:
         """Get or set the Problem status report interval steps in the D3HSP output file:

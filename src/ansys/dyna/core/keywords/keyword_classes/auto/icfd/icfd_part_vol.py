@@ -45,8 +45,8 @@ class IcfdPartVol(KeywordBase):
 
     keyword = "ICFD"
     subkeyword = "PART_VOL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -57,7 +57,8 @@ class IcfdPartVol(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDPARTVOL_CARD0,
                 **kwargs,
-            ),            TableCard(
+            ),
+            TableCard(
                 [
                     Field("spid1", int, 0, 10, None),
                     Field("spid2", int, 10, 10, None),
@@ -71,8 +72,9 @@ class IcfdPartVol(KeywordBase):
                 None,
                 name="nodes",
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = IcfdPartVol.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = IcfdPartVol._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _ICFDPARTVOL_OPTION0_CARD0,

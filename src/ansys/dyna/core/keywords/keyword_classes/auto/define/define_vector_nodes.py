@@ -44,8 +44,8 @@ class DefineVectorNodes(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "VECTOR_NODES"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nodet": LinkType.NODE,
@@ -60,8 +60,9 @@ class DefineVectorNodes(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEVECTORNODES_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineVectorNodes.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineVectorNodes._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEVECTORNODES_OPTION0_CARD0,
@@ -119,12 +120,12 @@ class DefineVectorNodes(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def nodet_link(self) -> KeywordBase:
+    def nodet_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nodet."""
         return self._get_link_by_attr("NODE", "nid", self.nodet, "parts")
 
     @property
-    def nodeh_link(self) -> KeywordBase:
+    def nodeh_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nodeh."""
         return self._get_link_by_attr("NODE", "nid", self.nodeh, "parts")
 

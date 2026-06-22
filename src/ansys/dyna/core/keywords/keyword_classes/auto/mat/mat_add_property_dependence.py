@@ -44,8 +44,8 @@ class MatAddPropertyDependence(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ADD_PROPERTY_DEPENDENCE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "mid": LinkType.MAT,
@@ -60,8 +60,9 @@ class MatAddPropertyDependence(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATADDPROPERTYDEPENDENCE_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatAddPropertyDependence.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatAddPropertyDependence._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATADDPROPERTYDEPENDENCE_OPTION0_CARD0,
@@ -119,7 +120,7 @@ class MatAddPropertyDependence(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None
@@ -134,7 +135,7 @@ class MatAddPropertyDependence(KeywordBase):
         self.mid = value.mid
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

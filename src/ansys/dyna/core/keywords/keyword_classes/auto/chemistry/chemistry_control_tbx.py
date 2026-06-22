@@ -44,7 +44,8 @@ class ChemistryControlTbx(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHEMISTRYCONTROLTBX_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def idchem(self) -> typing.Optional[int]:
         """Get or set the Identifier for this chemistry solver.

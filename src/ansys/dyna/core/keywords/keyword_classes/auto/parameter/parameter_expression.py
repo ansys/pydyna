@@ -47,7 +47,8 @@ class ParameterExpression(KeywordBase):
                 None,
                 name="parameters",
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def parameters(self) -> pd.DataFrame:
         """Get the table of parameters."""

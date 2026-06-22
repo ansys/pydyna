@@ -53,10 +53,12 @@ class InterfaceEnsight(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACEENSIGHT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACEENSIGHT_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nset(self) -> typing.Optional[int]:
         """Get or set the Set of node in ls-dyna input deck, which contains all nodes to be subject to transient loading mapped from the following Ensight-formatted geometry file and loading files.
@@ -91,7 +93,7 @@ class InterfaceEnsight(KeywordBase):
         self._cards[1].set_value("gfile", value)
 
     @property
-    def nset_link(self) -> KeywordBase:
+    def nset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nset."""
         return self._get_set_link("NODE", self.nset)
 

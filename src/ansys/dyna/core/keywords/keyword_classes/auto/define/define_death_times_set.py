@@ -67,8 +67,8 @@ class DefineDeathTimesSet(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DEATH_TIMES_SET"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "n1": LinkType.NODE,
@@ -92,14 +92,17 @@ class DefineDeathTimesSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEDEATHTIMESSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEDEATHTIMESSET_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEDEATHTIMESSET_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineDeathTimesSet.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineDeathTimesSet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDEATHTIMESSET_OPTION0_CARD0,
@@ -344,22 +347,22 @@ class DefineDeathTimesSet(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n2_link(self) -> KeywordBase:
+    def n2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
         return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 
     @property
-    def n3_link(self) -> KeywordBase:
+    def n3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n3."""
         return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
 
     @property
-    def sid1_link(self) -> KeywordBase:
+    def sid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for sid1."""
         return self._get_set_link("NODE", self.sid1)
 
@@ -369,7 +372,7 @@ class DefineDeathTimesSet(KeywordBase):
         self.sid1 = value.sid
 
     @property
-    def sid2_link(self) -> KeywordBase:
+    def sid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for sid2."""
         return self._get_set_link("NODE", self.sid2)
 
@@ -379,7 +382,7 @@ class DefineDeathTimesSet(KeywordBase):
         self.sid2 = value.sid
 
     @property
-    def sid3_link(self) -> KeywordBase:
+    def sid3_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for sid3."""
         return self._get_set_link("NODE", self.sid3)
 
@@ -389,7 +392,7 @@ class DefineDeathTimesSet(KeywordBase):
         self.sid3 = value.sid
 
     @property
-    def sid4_link(self) -> KeywordBase:
+    def sid4_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for sid4."""
         return self._get_set_link("NODE", self.sid4)
 
@@ -399,7 +402,7 @@ class DefineDeathTimesSet(KeywordBase):
         self.sid4 = value.sid
 
     @property
-    def sid5_link(self) -> KeywordBase:
+    def sid5_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for sid5."""
         return self._get_set_link("NODE", self.sid5)
 
@@ -409,7 +412,7 @@ class DefineDeathTimesSet(KeywordBase):
         self.sid5 = value.sid
 
     @property
-    def sid6_link(self) -> KeywordBase:
+    def sid6_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for sid6."""
         return self._get_set_link("NODE", self.sid6)
 
@@ -419,7 +422,7 @@ class DefineDeathTimesSet(KeywordBase):
         self.sid6 = value.sid
 
     @property
-    def sid7_link(self) -> KeywordBase:
+    def sid7_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for sid7."""
         return self._get_set_link("NODE", self.sid7)
 
@@ -429,7 +432,7 @@ class DefineDeathTimesSet(KeywordBase):
         self.sid7 = value.sid
 
     @property
-    def sid8_link(self) -> KeywordBase:
+    def sid8_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for sid8."""
         return self._get_set_link("NODE", self.sid8)
 

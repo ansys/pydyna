@@ -65,13 +65,16 @@ class DatabaseTracerGeneral(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASETRACERGENERAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASETRACERGENERAL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASETRACERGENERAL_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def node(self) -> int:
         """Get or set the Node ID that locates the tracer (see Remark 1)
@@ -247,7 +250,7 @@ class DatabaseTracerGeneral(KeywordBase):
         self._cards[2].set_value("varepl", value)
 
     @property
-    def node_link(self) -> KeywordBase:
+    def node_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node."""
         return self._get_link_by_attr("NODE", "nid", self.node, "parts")
 

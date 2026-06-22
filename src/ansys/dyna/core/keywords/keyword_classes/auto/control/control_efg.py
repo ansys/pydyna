@@ -50,10 +50,12 @@ class ControlEfg(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLEFG_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLEFG_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def isplane(self) -> int:
         """Get or set the Optional choice for the mesh-free kernal functions:

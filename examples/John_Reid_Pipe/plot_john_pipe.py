@@ -44,12 +44,12 @@ import tempfile
 import pandas as pd
 
 from ansys.dyna.core import Deck, keywords as kwd
-from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
 from ansys.dyna.core.run import run_dyna
+from ansys.dyna.core.utils.download_utilities import EXAMPLES_PATH, download_manager
 
 mesh_file_name = "nodes.k"
-mesh_file = DownloadManager().download_file(
-    mesh_file_name, "ls-dyna", "John_Reid_Pipe", destination=os.path.join(EXAMPLES_PATH, "John_Reid_Pipe")
+mesh_file = download_manager.download_file(
+    mesh_file_name, "ls-dyna/John_Reid_Pipe", destination=os.path.join(EXAMPLES_PATH, "John_Reid_Pipe")
 )
 
 rundir = tempfile.TemporaryDirectory()
@@ -166,7 +166,6 @@ deck.plot(cwd=rundir.name, show_edges=True)
 ###############################################################################
 # Run the Dyna solver
 # ~~~~~~~~~~~~~~~~~~~
-# Run the Dyna solver.
 
 run_dyna(dynafile, working_directory=rundir.name)
 run_post(rundir.name)

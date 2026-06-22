@@ -90,8 +90,8 @@ class Mat240Functions3Modes(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "240_FUNCTIONS_3MODES"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcg1c": LinkType.DEFINE_CURVE,
@@ -106,23 +106,29 @@ class Mat240Functions3Modes(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT240FUNCTIONS3MODES_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT240FUNCTIONS3MODES_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT240FUNCTIONS3MODES_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT240FUNCTIONS3MODES_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT240FUNCTIONS3MODES_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT240FUNCTIONS3MODES_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat240Functions3Modes.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat240Functions3Modes._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT240FUNCTIONS3MODES_OPTION0_CARD0,
@@ -542,7 +548,7 @@ class Mat240Functions3Modes(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcg1c_link(self) -> DefineCurve:
+    def lcg1c_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcg1c."""
         if self.deck is None:
             return None
@@ -557,7 +563,7 @@ class Mat240Functions3Modes(KeywordBase):
         self.lcg1c = value.lcid
 
     @property
-    def lcg2c_link(self) -> DefineCurve:
+    def lcg2c_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcg2c."""
         if self.deck is None:
             return None

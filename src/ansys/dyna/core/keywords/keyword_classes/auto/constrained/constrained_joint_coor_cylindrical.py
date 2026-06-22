@@ -84,25 +84,32 @@ class ConstrainedJointCoorCylindrical(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORCYLINDRICAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORCYLINDRICAL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORCYLINDRICAL_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORCYLINDRICAL_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORCYLINDRICAL_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORCYLINDRICAL_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTCOORCYLINDRICAL_CARD6,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def rbid_a(self) -> typing.Optional[int]:
         """Get or set the Part ID of rigid body A

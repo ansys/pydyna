@@ -46,7 +46,8 @@ class ControlFormingAutocheck(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGAUTOCHECK_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def icheck(self) -> int:
         """Get or set the Tool mesh checking/fixing flag:

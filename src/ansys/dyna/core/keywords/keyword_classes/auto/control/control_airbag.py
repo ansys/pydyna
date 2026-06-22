@@ -43,7 +43,8 @@ class ControlAirbag(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLAIRBAG_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ckerr(self) -> int:
         """Get or set the Flag to check and report of CV airbag segments for the input

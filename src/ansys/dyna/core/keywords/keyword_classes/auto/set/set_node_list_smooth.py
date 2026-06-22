@@ -60,8 +60,8 @@ class SetNodeListSmooth(KeywordBase):
 
     keyword = "SET"
     subkeyword = "NODE_LIST_SMOOTH"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nid1": LinkType.NODE,
@@ -82,11 +82,13 @@ class SetNodeListSmooth(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETNODELISTSMOOTH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETNODELISTSMOOTH_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SetNodeListSmooth.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SetNodeListSmooth._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETNODELISTSMOOTH_OPTION0_CARD0,
@@ -284,42 +286,42 @@ class SetNodeListSmooth(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def nid1_link(self) -> KeywordBase:
+    def nid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid1."""
         return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
 
     @property
-    def nid2_link(self) -> KeywordBase:
+    def nid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid2."""
         return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
 
     @property
-    def nid3_link(self) -> KeywordBase:
+    def nid3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid3."""
         return self._get_link_by_attr("NODE", "nid", self.nid3, "parts")
 
     @property
-    def nid4_link(self) -> KeywordBase:
+    def nid4_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid4."""
         return self._get_link_by_attr("NODE", "nid", self.nid4, "parts")
 
     @property
-    def nid5_link(self) -> KeywordBase:
+    def nid5_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid5."""
         return self._get_link_by_attr("NODE", "nid", self.nid5, "parts")
 
     @property
-    def nid6_link(self) -> KeywordBase:
+    def nid6_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid6."""
         return self._get_link_by_attr("NODE", "nid", self.nid6, "parts")
 
     @property
-    def nid7_link(self) -> KeywordBase:
+    def nid7_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid7."""
         return self._get_link_by_attr("NODE", "nid", self.nid7, "parts")
 
     @property
-    def nid8_link(self) -> KeywordBase:
+    def nid8_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid8."""
         return self._get_link_by_attr("NODE", "nid", self.nid8, "parts")
 

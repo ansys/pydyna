@@ -54,10 +54,12 @@ class ControlFormingOnestepQuad(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGONESTEPQUAD_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGONESTEPQUAD_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def option(self) -> int:
         """Get or set the One-step solution method: EQ.7: Invokes a one-step solution with blank unfolding that accounts for part undercut.

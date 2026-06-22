@@ -51,7 +51,8 @@ class LoadPointUvw(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADPOINTUVW_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Parametric point ID; see *IGA_POINT_UVW
@@ -103,7 +104,7 @@ class LoadPointUvw(KeywordBase):
         self._cards[0].set_value("sf", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

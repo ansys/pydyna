@@ -46,8 +46,8 @@ class DefineFrictionScaling(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "FRICTION_SCALING"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "cid": LinkType.DEFINE_CURVE,
@@ -62,8 +62,9 @@ class DefineFrictionScaling(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEFRICTIONSCALING_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineFrictionScaling.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineFrictionScaling._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEFRICTIONSCALING_OPTION0_CARD0,
@@ -143,7 +144,7 @@ class DefineFrictionScaling(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def cid_link(self) -> DefineCurve:
+    def cid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for cid."""
         if self.deck is None:
             return None
@@ -158,7 +159,7 @@ class DefineFrictionScaling(KeywordBase):
         self.cid = value.lcid
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

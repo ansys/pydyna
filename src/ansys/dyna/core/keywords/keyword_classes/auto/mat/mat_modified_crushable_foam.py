@@ -54,8 +54,8 @@ class MatModifiedCrushableFoam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "MODIFIED_CRUSHABLE_FOAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "tid": LinkType.DEFINE_CURVE,
@@ -69,11 +69,13 @@ class MatModifiedCrushableFoam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDCRUSHABLEFOAM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDCRUSHABLEFOAM_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatModifiedCrushableFoam.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatModifiedCrushableFoam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATMODIFIEDCRUSHABLEFOAM_OPTION0_CARD0,
@@ -208,7 +210,7 @@ class MatModifiedCrushableFoam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def tid_link(self) -> DefineCurve:
+    def tid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tid."""
         if self.deck is None:
             return None

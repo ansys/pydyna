@@ -43,7 +43,8 @@ class IncludeWdFinialPart(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INCLUDEWDFINIALPART_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name of the final formed blank in keyword format, consisting of *NODE, and *ELEMENT_SHELL information

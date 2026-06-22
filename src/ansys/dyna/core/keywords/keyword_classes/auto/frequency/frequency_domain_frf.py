@@ -86,16 +86,20 @@ class FrequencyDomainFrf(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINFRF_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINFRF_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINFRF_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINFRF_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def n1(self) -> typing.Optional[int]:
         """Get or set the Node / Node set/Segment set ID for excitation input.When VAD1,the excitation type, is set to 1, which is acceleration, this field is ignored.
@@ -454,7 +458,7 @@ class FrequencyDomainFrf(KeywordBase):
         self._cards[3].set_value("output", value)
 
     @property
-    def lcdam_link(self) -> DefineCurve:
+    def lcdam_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdam."""
         if self.deck is None:
             return None
@@ -469,7 +473,7 @@ class FrequencyDomainFrf(KeywordBase):
         self.lcdam = value.lcid
 
     @property
-    def lcfreq_link(self) -> DefineCurve:
+    def lcfreq_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfreq."""
         if self.deck is None:
             return None
@@ -484,7 +488,7 @@ class FrequencyDomainFrf(KeywordBase):
         self.lcfreq = value.lcid
 
     @property
-    def vid1_link(self) -> DefineVector:
+    def vid1_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid1."""
         if self.deck is None:
             return None
@@ -499,7 +503,7 @@ class FrequencyDomainFrf(KeywordBase):
         self.vid1 = value.vid
 
     @property
-    def vid2_link(self) -> DefineVector:
+    def vid2_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid2."""
         if self.deck is None:
             return None

@@ -42,4 +42,5 @@ class LoadThermalTopaz(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADTHERMALTOPAZ_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

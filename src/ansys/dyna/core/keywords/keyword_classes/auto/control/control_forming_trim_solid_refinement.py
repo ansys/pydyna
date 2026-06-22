@@ -44,7 +44,8 @@ class ControlFormingTrimSolidRefinement(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGTRIMSOLIDREFINEMENT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def irefine(self) -> int:
         """Get or set the A flag to activate the adaptive trimming of a multi-layer sandwiched part. Currently setting this to either 0 or 1 will turn on the adaptive trimming.

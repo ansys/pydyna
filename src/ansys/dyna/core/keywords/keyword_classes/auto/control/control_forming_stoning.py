@@ -62,10 +62,12 @@ class ControlFormingStoning(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGSTONING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGSTONING_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def istone(self) -> typing.Optional[int]:
         """Get or set the activate this capability.
@@ -195,12 +197,12 @@ class ControlFormingStoning(KeywordBase):
         self._cards[1].set_value("itype", value)
 
     @property
-    def node1_link(self) -> KeywordBase:
+    def node1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node1."""
         return self._get_link_by_attr("NODE", "nid", self.node1, "parts")
 
     @property
-    def node2_link(self) -> KeywordBase:
+    def node2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node2."""
         return self._get_link_by_attr("NODE", "nid", self.node2, "parts")
 

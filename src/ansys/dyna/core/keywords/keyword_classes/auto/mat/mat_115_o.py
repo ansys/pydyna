@@ -77,8 +77,8 @@ class Mat115O(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "115_o"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -89,17 +89,21 @@ class Mat115O(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT115O_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT115O_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT115O_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT115O_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat115O.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat115O._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT115O_OPTION0_CARD0,

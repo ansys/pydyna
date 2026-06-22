@@ -61,13 +61,16 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELFITZHUGHNAGUMO_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELFITZHUGHNAGUMO_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELFITZHUGHNAGUMO_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def matid(self) -> typing.Optional[int]:
         """Get or set the Material ID defined in *MAT_.
@@ -169,7 +172,7 @@ class EmEpCellmodelFitzhughnagumo(KeywordBase):
         self._cards[2].set_value("r", value)
 
     @property
-    def matid_link(self) -> KeywordBase:
+    def matid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for matid."""
         if self.deck is None:
             return None

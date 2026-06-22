@@ -56,10 +56,12 @@ class DatabaseCpmSensor(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASECPMSENSOR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASECPMSENSOR_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the Output interval
@@ -143,7 +145,7 @@ class DatabaseCpmSensor(KeywordBase):
         self._cards[1].set_value("lz", value)
 
     @property
-    def segsid_link(self) -> KeywordBase:
+    def segsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for segsid."""
         return self._get_set_link("SEGMENT", self.segsid)
 

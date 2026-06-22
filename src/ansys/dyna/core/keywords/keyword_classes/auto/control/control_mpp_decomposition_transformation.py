@@ -64,7 +64,8 @@ class ControlMppDecompositionTransformation(KeywordBase):
                     lambda: not self.transformation.empty and self.transformation['type'].iloc[-1] in ['VEC3', 'C2R', 'S2R', 'MAT'],
                 ],
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def transformation(self) -> pd.DataFrame:
         """Gets the full table of transformation."""

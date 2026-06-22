@@ -93,8 +93,8 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ELASTIC_VISCOPLASTIC_THERMAL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcss": LinkType.DEFINE_CURVE,
@@ -116,20 +116,25 @@ class MatElasticViscoplasticThermal(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATELASTICVISCOPLASTICTHERMAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATELASTICVISCOPLASTICTHERMAL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATELASTICVISCOPLASTICTHERMAL_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATELASTICVISCOPLASTICTHERMAL_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATELASTICVISCOPLASTICTHERMAL_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatElasticViscoplasticThermal.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatElasticViscoplasticThermal._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATELASTICVISCOPLASTICTHERMAL_OPTION0_CARD0,
@@ -599,7 +604,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -614,7 +619,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lce_link(self) -> DefineCurve:
+    def lce_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lce."""
         if self.deck is None:
             return None
@@ -629,7 +634,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
         self.lce = value.lcid
 
     @property
-    def lcpr_link(self) -> DefineCurve:
+    def lcpr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpr."""
         if self.deck is None:
             return None
@@ -644,7 +649,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
         self.lcpr = value.lcid
 
     @property
-    def lcsigy_link(self) -> DefineCurve:
+    def lcsigy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsigy."""
         if self.deck is None:
             return None
@@ -659,7 +664,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
         self.lcsigy = value.lcid
 
     @property
-    def lcr_link(self) -> DefineCurve:
+    def lcr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcr."""
         if self.deck is None:
             return None
@@ -674,7 +679,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
         self.lcr = value.lcid
 
     @property
-    def lcx_link(self) -> DefineCurve:
+    def lcx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcx."""
         if self.deck is None:
             return None
@@ -689,7 +694,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
         self.lcx = value.lcid
 
     @property
-    def lcalph_link(self) -> DefineCurve:
+    def lcalph_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcalph."""
         if self.deck is None:
             return None
@@ -704,7 +709,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
         self.lcalph = value.lcid
 
     @property
-    def lcc_link(self) -> DefineCurve:
+    def lcc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc."""
         if self.deck is None:
             return None
@@ -719,7 +724,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
         self.lcc = value.lcid
 
     @property
-    def lcp_link(self) -> DefineCurve:
+    def lcp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcp."""
         if self.deck is None:
             return None

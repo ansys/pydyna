@@ -62,11 +62,13 @@ class DatabaseBinaryD3Part(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYD3PART_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYD3PART_CARD1,
                 active_func=lambda: self._cards[1].has_nondefault_values(),
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the This field defines the time interval between output states, DT, for all options except D3DUMP, RUNRSF, and D3DRLF.
@@ -173,7 +175,7 @@ class DatabaseBinaryD3Part(KeywordBase):
         self._cards[1].set_value("tsetid", value)
 
     @property
-    def lcdt_link(self) -> DefineCurve:
+    def lcdt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdt."""
         if self.deck is None:
             return None
@@ -188,7 +190,7 @@ class DatabaseBinaryD3Part(KeywordBase):
         self.lcdt = value.lcid
 
     @property
-    def bsetid_link(self) -> KeywordBase:
+    def bsetid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_BEAM_* keyword for bsetid."""
         return self._get_set_link("BEAM", self.bsetid)
 
@@ -198,7 +200,7 @@ class DatabaseBinaryD3Part(KeywordBase):
         self.bsetid = value.sid
 
     @property
-    def psetid_link(self) -> KeywordBase:
+    def psetid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psetid."""
         return self._get_set_link("PART", self.psetid)
 
@@ -208,7 +210,7 @@ class DatabaseBinaryD3Part(KeywordBase):
         self.psetid = value.sid
 
     @property
-    def hsetid_link(self) -> KeywordBase:
+    def hsetid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for hsetid."""
         return self._get_set_link("SOLID", self.hsetid)
 

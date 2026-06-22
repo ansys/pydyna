@@ -58,10 +58,12 @@ class ControlRigid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLRIGID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLRIGID_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def lmf(self) -> int:
         """Get or set the Joint formulation flag for explicit analysis.  This flag can be used to switch to an implicit formulation for joints (*CONSTRAINED_JOINT_Option) which uses Lagrange multipliers to impose prescribed kinematic boundary conditions and joint constraints.  There is a slight cost overhead due to the assembly of sparse matrix equations which are solved using standard procedures for nonlinear problems in rigid multi-body dynamics.

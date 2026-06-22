@@ -54,10 +54,12 @@ class MeshSize(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MESHSIZE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MESHSIZE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def volid(self) -> typing.Optional[int]:
         """Get or set the ID assigned to the new volume in the keyword *MESH_VOLUME. The size meshes will be applied to this volume

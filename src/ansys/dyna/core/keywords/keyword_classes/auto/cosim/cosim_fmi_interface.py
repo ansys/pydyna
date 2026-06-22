@@ -54,10 +54,12 @@ class CosimFmiInterface(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _COSIMFMIINTERFACE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _COSIMFMIINTERFACE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def appid(self) -> typing.Optional[str]:
         """Get or set the FMU (functional mock-up unit) identification. Each FMU must have a unique APPID

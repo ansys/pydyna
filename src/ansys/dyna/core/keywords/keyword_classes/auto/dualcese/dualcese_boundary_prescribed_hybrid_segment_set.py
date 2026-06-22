@@ -79,19 +79,24 @@ class DualceseBoundaryPrescribedHybridSegmentSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYPRESCRIBEDHYBRIDSEGMENTSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYPRESCRIBEDHYBRIDSEGMENTSET_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYPRESCRIBEDHYBRIDSEGMENTSET_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYPRESCRIBEDHYBRIDSEGMENTSET_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYPRESCRIBEDHYBRIDSEGMENTSET_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID created with *DUALCESE_SEGMENTSET

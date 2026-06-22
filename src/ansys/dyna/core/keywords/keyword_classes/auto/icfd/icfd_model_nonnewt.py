@@ -53,10 +53,12 @@ class IcfdModelNonnewt(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDMODELNONNEWT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDMODELNONNEWT_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nnmoid(self) -> typing.Optional[int]:
         """Get or set the Non-Newtonian Model ID.

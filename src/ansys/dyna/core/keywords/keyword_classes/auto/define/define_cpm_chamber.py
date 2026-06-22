@@ -55,8 +55,8 @@ class DefineCpmChamber(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CPM_CHAMBER"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "sid1": LinkType.SET_PART,
@@ -71,14 +71,17 @@ class DefineCpmChamber(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINECPMCHAMBER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINECPMCHAMBER_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINECPMCHAMBER_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineCpmChamber.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineCpmChamber._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECPMCHAMBER_OPTION0_CARD0,
@@ -205,7 +208,7 @@ class DefineCpmChamber(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def sid1_link(self) -> KeywordBase:
+    def sid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for sid1."""
         return self._get_set_link("PART", self.sid1)
 
@@ -215,7 +218,7 @@ class DefineCpmChamber(KeywordBase):
         self.sid1 = value.sid
 
     @property
-    def sid2_link(self) -> KeywordBase:
+    def sid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for sid2."""
         return self._get_set_link("PART", self.sid2)
 

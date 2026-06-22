@@ -46,7 +46,8 @@ class ChemistryControlFull(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHEMISTRYCONTROLFULL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Identifier for this full chemistry calculation.

@@ -90,19 +90,24 @@ class EmBatteryRandles(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMBATTERYRANDLES_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMBATTERYRANDLES_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMBATTERYRANDLES_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMBATTERYRANDLES_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMBATTERYRANDLES_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def rdlid(self) -> typing.Optional[int]:
         """Get or set the Id of the Randle Cell
@@ -423,7 +428,7 @@ class EmBatteryRandles(KeywordBase):
         self._cards[4].set_value("sicslcid", value)
 
     @property
-    def sicslcid_link(self) -> DefineCurve:
+    def sicslcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for sicslcid."""
         if self.deck is None:
             return None
@@ -438,27 +443,27 @@ class EmBatteryRandles(KeywordBase):
         self.sicslcid = value.lcid
 
     @property
-    def ccppart_link(self) -> KeywordBase:
+    def ccppart_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ccppart."""
         return self._get_link_by_attr("PART", "pid", self.ccppart, "parts")
 
     @property
-    def ccnpart_link(self) -> KeywordBase:
+    def ccnpart_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ccnpart."""
         return self._get_link_by_attr("PART", "pid", self.ccnpart, "parts")
 
     @property
-    def seppart_link(self) -> KeywordBase:
+    def seppart_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given seppart."""
         return self._get_link_by_attr("PART", "pid", self.seppart, "parts")
 
     @property
-    def poselpart_link(self) -> KeywordBase:
+    def poselpart_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given poselpart."""
         return self._get_link_by_attr("PART", "pid", self.poselpart, "parts")
 
     @property
-    def negelpart_link(self) -> KeywordBase:
+    def negelpart_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given negelpart."""
         return self._get_link_by_attr("PART", "pid", self.negelpart, "parts")
 

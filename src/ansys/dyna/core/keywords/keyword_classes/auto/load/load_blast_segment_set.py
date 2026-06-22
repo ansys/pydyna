@@ -52,7 +52,8 @@ class LoadBlastSegmentSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADBLASTSEGMENTSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def bid(self) -> typing.Optional[int]:
         """Get or set the Blast source ID (see *LOAD_BLAST_ENHANCED).
@@ -109,7 +110,7 @@ class LoadBlastSegmentSet(KeywordBase):
         self._cards[0].set_value("scalep", value)
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 
@@ -119,7 +120,7 @@ class LoadBlastSegmentSet(KeywordBase):
         self.ssid = value.sid
 
     @property
-    def alepid_link(self) -> KeywordBase:
+    def alepid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given alepid."""
         return self._get_link_by_attr("PART", "pid", self.alepid, "parts")
 

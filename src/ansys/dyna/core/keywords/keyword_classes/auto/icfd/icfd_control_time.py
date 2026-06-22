@@ -63,13 +63,16 @@ class IcfdControlTime(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLTIME_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLTIME_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLTIME_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ttm(self) -> float:
         """Get or set the Total time of simulation for the fluid problem.
@@ -185,7 +188,7 @@ class IcfdControlTime(KeywordBase):
         self._cards[2].set_value("btbl", value)
 
     @property
-    def lcidsf_link(self) -> DefineCurve:
+    def lcidsf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidsf."""
         if self.deck is None:
             return None

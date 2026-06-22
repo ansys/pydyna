@@ -46,7 +46,8 @@ class RigidDeformableControl(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _RIGIDDEFORMABLECONTROL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nrbf(self) -> int:
         """Get or set the Flag to delete or activate nodal rigid bodies. If nodal rigid bodies or generalized, weld definitions are active in the deformable bodies that are switched to rigid, then the definitions should be deleted to avoid instabilities:

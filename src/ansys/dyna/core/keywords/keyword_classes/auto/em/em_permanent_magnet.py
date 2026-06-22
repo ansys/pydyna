@@ -58,10 +58,12 @@ class EmPermanentMagnet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMPERMANENTMAGNET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMPERMANENTMAGNET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the MID
@@ -170,7 +172,7 @@ class EmPermanentMagnet(KeywordBase):
         self._cards[1].set_value("z", value)
 
     @property
-    def partid_link(self) -> KeywordBase:
+    def partid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given partid."""
         return self._get_link_by_attr("PART", "pid", self.partid, "parts")
 

@@ -57,8 +57,8 @@ class MatInelasticSpringDiscreteBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "INELASTIC_SPRING_DISCRETE_BEAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "flcid": LinkType.DEFINE_CURVE,
@@ -74,11 +74,13 @@ class MatInelasticSpringDiscreteBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATINELASTICSPRINGDISCRETEBEAM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATINELASTICSPRINGDISCRETEBEAM_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatInelasticSpringDiscreteBeam.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatInelasticSpringDiscreteBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATINELASTICSPRINGDISCRETEBEAM_OPTION0_CARD0,
@@ -251,7 +253,7 @@ class MatInelasticSpringDiscreteBeam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def flcid_link(self) -> DefineCurve:
+    def flcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for flcid."""
         if self.deck is None:
             return None
@@ -266,7 +268,7 @@ class MatInelasticSpringDiscreteBeam(KeywordBase):
         self.flcid = value.lcid
 
     @property
-    def hlcid_link(self) -> DefineCurve:
+    def hlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hlcid."""
         if self.deck is None:
             return None
@@ -281,7 +283,7 @@ class MatInelasticSpringDiscreteBeam(KeywordBase):
         self.hlcid = value.lcid
 
     @property
-    def glcid_link(self) -> DefineCurve:
+    def glcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for glcid."""
         if self.deck is None:
             return None

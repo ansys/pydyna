@@ -48,7 +48,8 @@ class DatabaseMaxSolidId(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEMAXSOLIDID_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the Solid element ID.
@@ -72,7 +73,7 @@ class DatabaseMaxSolidId(KeywordBase):
         self._cards[0].set_value("heading", value)
 
     @property
-    def id1_link(self) -> KeywordBase:
+    def id1_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given id1."""
         return self._get_link_by_attr("ELEMENT", "eid", self.id1, "parts")
 

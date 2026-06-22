@@ -81,19 +81,24 @@ class AleMapping(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALEMAPPING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEMAPPING_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEMAPPING_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEMAPPING_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEMAPPING_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ammsid(self) -> typing.Optional[int]:
         """Get or set the Set ID of ALE multi-material groups defined in *SET_‌MULTI-MATERIAL_‌GROUP. See Remark 3.
@@ -370,7 +375,7 @@ class AleMapping(KeywordBase):
         self._cards[4].set_value("dv2", value)
 
     @property
-    def vecid_link(self) -> DefineVector:
+    def vecid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid."""
         if self.deck is None:
             return None
@@ -385,7 +390,7 @@ class AleMapping(KeywordBase):
         self.vecid = value.vid
 
     @property
-    def vecid1_link(self) -> DefineVector:
+    def vecid1_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid1."""
         if self.deck is None:
             return None

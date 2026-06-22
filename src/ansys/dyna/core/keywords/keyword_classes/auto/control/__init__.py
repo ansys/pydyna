@@ -200,7 +200,7 @@ from .control_parallel import ControlParallel
 from .control_pore_air import ControlPoreAir
 from .control_pore_fluid import ControlPoreFluid
 from .control_pzelectric import ControlPzelectric
-from .control_reference_configuration import ControlReferenceConfiguration
+from .control_reference_configuraion import ControlReferenceConfiguraion
 from .control_reference_configuraion_iter import ControlReferenceConfiguraionIter
 from .control_reference_control_volume_coordinates import ControlReferenceControlVolumeCoordinates
 from .control_refine_ale import ControlRefineAle
@@ -237,3 +237,4 @@ from .control_timestep import ControlTimestep
 from .control_timestep import ControlTimeStep
 from .control_units import ControlUnits
 from .control_vibro_acoustic import ControlVibroAcoustic
+from .control_reference_configuration import ControlReferenceConfiguration

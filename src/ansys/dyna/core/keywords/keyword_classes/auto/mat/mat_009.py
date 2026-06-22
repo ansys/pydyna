@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _MAT009_CARD0 = (
@@ -37,20 +38,39 @@ _MAT009_CARD0 = (
     FieldSchema("pr", float, 70, 10, None),
 )
 
+_MAT009_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Mat009(KeywordBase):
     """DYNA MAT_009 keyword"""
 
     keyword = "MAT"
     subkeyword = "009"
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
+    ]
 
     def __init__(self, **kwargs):
         """Initialize the Mat009 class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _MAT009_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+            OptionCardSet(
+                option_spec = Mat009._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _MAT009_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number has to be used.
@@ -138,4 +158,18 @@ class Mat009(KeywordBase):
     def pr(self, value: float) -> None:
         """Set the pr property."""
         self._cards[0].set_value("pr", value)
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

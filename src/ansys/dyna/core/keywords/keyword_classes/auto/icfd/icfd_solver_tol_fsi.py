@@ -46,7 +46,8 @@ class IcfdSolverTolFsi(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDSOLVERTOLFSI_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def atol(self) -> float:
         """Get or set the Absolute convergence criteria. Convergence is achieved when Residual_(i+1)- Residual_i≤ATOL . If a negative integer is entered, then that value will be used as a load curve ID for ATOL.

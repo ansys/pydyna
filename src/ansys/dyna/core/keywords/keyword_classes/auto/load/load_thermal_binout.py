@@ -52,13 +52,16 @@ class LoadThermalBinout(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADTHERMALBINOUT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADTHERMALBINOUT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADTHERMALBINOUT_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def deftemp(self) -> float:
         """Get or set the Default temperature that is applied to nodes no temperature information is provided in the binout file(s) for.

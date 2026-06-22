@@ -42,4 +42,5 @@ class ControlMppDecompositionDistributeAleElements(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPDECOMPOSITIONDISTRIBUTEALEELEMENTS_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

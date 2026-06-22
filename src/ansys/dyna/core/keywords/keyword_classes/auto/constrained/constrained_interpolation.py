@@ -65,10 +65,12 @@ class ConstrainedInterpolation(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDINTERPOLATION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDINTERPOLATION_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def icid(self) -> typing.Optional[int]:
         """Get or set the Interpolation constraint ID.
@@ -255,7 +257,7 @@ class ConstrainedInterpolation(KeywordBase):
         self._cards[1].set_value("rwghtz", value)
 
     @property
-    def dnid_link(self) -> KeywordBase:
+    def dnid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given dnid."""
         return self._get_link_by_attr("NODE", "nid", self.dnid, "parts")
 

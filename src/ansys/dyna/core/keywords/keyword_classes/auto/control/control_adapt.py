@@ -66,10 +66,12 @@ class ControlAdapt(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLADAPT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLADAPT_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def adpfreq(self) -> typing.Optional[float]:
         """Get or set the Time interval between adaptive refinements.
@@ -277,7 +279,7 @@ class ControlAdapt(KeywordBase):
         self._cards[1].set_value("maxel", value)
 
     @property
-    def lcadp_link(self) -> DefineCurve:
+    def lcadp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcadp."""
         if self.deck is None:
             return None

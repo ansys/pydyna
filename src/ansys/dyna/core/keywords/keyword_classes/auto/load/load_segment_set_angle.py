@@ -64,10 +64,12 @@ class LoadSegmentSetAngle(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADSEGMENTSETANGLE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSEGMENTSETANGLE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Loading ID
@@ -183,27 +185,27 @@ class LoadSegmentSetAngle(KeywordBase):
         self._cards[1].set_value("ni", value)
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n2_link(self) -> KeywordBase:
+    def n2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
         return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 
     @property
-    def na_link(self) -> KeywordBase:
+    def na_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given na."""
         return self._get_link_by_attr("NODE", "nid", self.na, "parts")
 
     @property
-    def ni_link(self) -> KeywordBase:
+    def ni_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given ni."""
         return self._get_link_by_attr("NODE", "nid", self.ni, "parts")
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

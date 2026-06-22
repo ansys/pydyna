@@ -70,13 +70,16 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGGENERATEBLANKMESH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGGENERATEBLANKMESH_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGGENERATEBLANKMESH_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def gentyp(self) -> typing.Optional[int]:
         """Get or set the EQ.1: Rectangle shape.
@@ -277,7 +280,7 @@ class ControlFormingGenerateBlankmesh(KeywordBase):
         self._cards[2].set_value("filename", value)
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

@@ -89,8 +89,8 @@ class MatKinematicHardeningBarlat89Nlp(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "KINEMATIC_HARDENING_BARLAT89_NLP"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "hlcid": LinkType.DEFINE_CURVE,
@@ -105,20 +105,25 @@ class MatKinematicHardeningBarlat89Nlp(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATKINEMATICHARDENINGBARLAT89NLP_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATKINEMATICHARDENINGBARLAT89NLP_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATKINEMATICHARDENINGBARLAT89NLP_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATKINEMATICHARDENINGBARLAT89NLP_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATKINEMATICHARDENINGBARLAT89NLP_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatKinematicHardeningBarlat89Nlp.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatKinematicHardeningBarlat89Nlp._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATKINEMATICHARDENINGBARLAT89NLP_OPTION0_CARD0,
@@ -550,7 +555,7 @@ class MatKinematicHardeningBarlat89Nlp(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def hlcid_link(self) -> DefineCurve:
+    def hlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hlcid."""
         if self.deck is None:
             return None
@@ -565,7 +570,7 @@ class MatKinematicHardeningBarlat89Nlp(KeywordBase):
         self.hlcid = value.lcid
 
     @property
-    def ifld_link(self) -> DefineCurve:
+    def ifld_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ifld."""
         if self.deck is None:
             return None

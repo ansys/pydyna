@@ -52,10 +52,12 @@ class EmDatabaseElout(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMDATABASEELOUT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMDATABASEELOUT_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def outlv(self) -> int:
         """Get or set the Determines if the output file should be dumped.
@@ -94,7 +96,7 @@ class EmDatabaseElout(KeywordBase):
         self._cards[1].set_value("elsid", value)
 
     @property
-    def elsid_link(self) -> KeywordBase:
+    def elsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for elsid."""
         return self._get_set_link("SOLID", self.elsid)
 

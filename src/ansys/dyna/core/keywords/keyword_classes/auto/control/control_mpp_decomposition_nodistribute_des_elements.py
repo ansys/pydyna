@@ -42,4 +42,5 @@ class ControlMppDecompositionNodistributeDesElements(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPDECOMPOSITIONNODISTRIBUTEDESELEMENTS_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

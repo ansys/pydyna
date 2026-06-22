@@ -92,8 +92,8 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "NODAL_RIGID_BODY_SPC_INERTIA_MASTER"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "pnode": LinkType.NODE,
@@ -111,23 +111,29 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYSPCINERTIAMASTER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYSPCINERTIAMASTER_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYSPCINERTIAMASTER_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYSPCINERTIAMASTER_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYSPCINERTIAMASTER_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODALRIGIDBODYSPCINERTIAMASTER_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = ConstrainedNodalRigidBodySpcInertiaMaster.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = ConstrainedNodalRigidBodySpcInertiaMaster._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONSTRAINEDNODALRIGIDBODYSPCINERTIAMASTER_OPTION0_CARD0,
@@ -610,17 +616,17 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def pnode_link(self) -> KeywordBase:
+    def pnode_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given pnode."""
         return self._get_link_by_attr("NODE", "nid", self.pnode, "parts")
 
     @property
-    def nodeid_link(self) -> KeywordBase:
+    def nodeid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nodeid."""
         return self._get_link_by_attr("NODE", "nid", self.nodeid, "parts")
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -635,7 +641,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
         self.cid = value.cid
 
     @property
-    def cid2_link(self) -> DefineCoordinateSystem:
+    def cid2_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid2."""
         if self.deck is None:
             return None
@@ -650,7 +656,7 @@ class ConstrainedNodalRigidBodySpcInertiaMaster(KeywordBase):
         self.cid2 = value.cid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 

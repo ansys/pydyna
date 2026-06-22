@@ -43,7 +43,8 @@ class DualceseBoundaryAxisymmetricSegmentSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYAXISYMMETRICSEGMENTSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID created with *DUALCESE_SEGMENTSET

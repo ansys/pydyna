@@ -43,7 +43,8 @@ class InterfaceSpringbackExclude(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACESPRINGBACKEXCLUDE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def kwdname(self) -> typing.Optional[str]:
         """Get or set the Exclude cards and their associated data will not be output.

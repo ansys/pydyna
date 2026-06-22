@@ -48,7 +48,8 @@ class ControlImplicitTermination(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITTERMINATION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def deltau(self) -> float:
         """Get or set the Alternate termination criteria for implicit transient simulation.

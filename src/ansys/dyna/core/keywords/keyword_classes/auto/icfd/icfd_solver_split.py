@@ -44,7 +44,8 @@ class IcfdSolverSplit(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDSOLVERSPLIT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nit(self) -> int:
         """Get or set the Maximum Number of iterations of the system for each fluid time step. If TOL criteria is not reached after NIT iterations, the run will proceed.

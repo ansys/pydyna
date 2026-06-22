@@ -5,7 +5,12 @@
 {% if not card.variable and not card.set and not card.table and not card.table_group and not card.external %}
 _{{card_set.name | upper}}_CARD{{loop.index0}} = (
 {% for field in card.fields %}
-    FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}),
+{% set lookup_name = field.property_name if field.property_name else field.name %}
+{% if lookup_name != field.name %}
+    FieldSchema("{{lookup_name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}, "{{field.name}}"),
+{% else %}
+    FieldSchema("{{lookup_name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}),
+{% endif %}
 {% endfor %}
 )
 
@@ -18,10 +23,19 @@ _{{card_set.name | upper}}_CARD{{loop.index0}} = (
 {% for card in option.cards %}
 _{{card_set.name | upper}}_OPTION{{option_loop.index0}}_CARD{{loop.index0}} = (
 {% for field in card.fields %}
+{% set lookup_name = field.property_name if field.property_name else field.name %}
 {% if field.flag %}
-    FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, Flag({% if field.default is not none %}{{field.default}}{% else %}None{% endif %}, "{{field.on}}", "{{field.off}}")),
+{% if lookup_name != field.name %}
+    FieldSchema("{{lookup_name}}", {{field.type}}, {{field.position}}, {{field.width}}, Flag({% if field.default is not none %}{{field.default}}{% else %}None{% endif %}, "{{field.on}}", "{{field.off}}"), "{{field.name}}"),
 {% else %}
-    FieldSchema("{{field.name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}),
+    FieldSchema("{{lookup_name}}", {{field.type}}, {{field.position}}, {{field.width}}, Flag({% if field.default is not none %}{{field.default}}{% else %}None{% endif %}, "{{field.on}}", "{{field.off}}")),
+{% endif %}
+{% else %}
+{% if lookup_name != field.name %}
+    FieldSchema("{{lookup_name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}, "{{field.name}}"),
+{% else %}
+    FieldSchema("{{lookup_name}}", {{field.type}}, {{field.position}}, {{field.width}}, {% if field.default is not none %}{{field.default}}{% else %}None{% endif %}),
+{% endif %}
 {% endif %}
 {% endfor %}
 )
@@ -33,9 +47,9 @@ class {{card_set.name}}(Cards):
     """{{card_set.title}} CardSet."""
 {% if card_set.options %}
 
-    option_specs = [
+    _option_spec_list = [
 {% for option in card_set.options %}
-        OptionSpec("{{option.name}}", {{option.card_order}}, {{option.title_order}}),
+        OptionSpec("{{option.name}}", "{{option.card_order}}", {{option.title_order}}),
 {% endfor %}
     ]
 {% endif %}
@@ -94,6 +108,7 @@ class {{card_set.name}}(Cards):
 {% endfor %}{# shared in card_set.shared_fields #}
 {% endif %}{# card_set.shared_fields #}
 {% if card_set.options %}
+{% set activate_target = "self._keyword" %}
 {% for option in card_set.options %}
 {% include 'keyword/option_card_properties.j2' %}
 {% endfor %}{# option in card_set.options #}

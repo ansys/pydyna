@@ -72,8 +72,8 @@ class DefineQuasarCoupling(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "QUASAR_COUPLING"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "cid": LinkType.DEFINE_CURVE,
@@ -88,20 +88,25 @@ class DefineQuasarCoupling(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEQUASARCOUPLING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEQUASARCOUPLING_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEQUASARCOUPLING_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEQUASARCOUPLING_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEQUASARCOUPLING_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineQuasarCoupling.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineQuasarCoupling._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEQUASARCOUPLING_OPTION0_CARD0,
@@ -349,7 +354,7 @@ class DefineQuasarCoupling(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def cid_link(self) -> DefineCurve:
+    def cid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for cid."""
         if self.deck is None:
             return None
@@ -364,7 +369,7 @@ class DefineQuasarCoupling(KeywordBase):
         self.cid = value.lcid
 
     @property
-    def ex_id_link(self) -> KeywordBase:
+    def ex_id_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for ex_id."""
         return self._get_set_link("NODE", self.ex_id)
 

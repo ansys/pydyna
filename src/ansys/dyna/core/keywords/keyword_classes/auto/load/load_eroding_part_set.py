@@ -66,10 +66,12 @@ class LoadErodingPartSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADERODINGPARTSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADERODINGPARTSET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the ID number.
@@ -214,7 +216,7 @@ class LoadErodingPartSet(KeywordBase):
         self._cards[1].set_value("beta", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -229,7 +231,7 @@ class LoadErodingPartSet(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None
@@ -244,7 +246,7 @@ class LoadErodingPartSet(KeywordBase):
         self.boxid = value.boxid
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

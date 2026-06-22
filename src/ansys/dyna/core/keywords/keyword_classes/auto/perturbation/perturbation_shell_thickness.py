@@ -90,25 +90,32 @@ class PerturbationShellThickness(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PERTURBATIONSHELLTHICKNESS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PERTURBATIONSHELLTHICKNESS_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PERTURBATIONSHELLTHICKNESS_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PERTURBATIONSHELLTHICKNESS_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PERTURBATIONSHELLTHICKNESS_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PERTURBATIONSHELLTHICKNESS_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PERTURBATIONSHELLTHICKNESS_CARD6,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def type(self) -> int:
         """Get or set the Type of perturbation
@@ -432,7 +439,7 @@ class PerturbationShellThickness(KeywordBase):
         self._cards[6].set_value("dtype", value)
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

@@ -53,7 +53,8 @@ class CeseInitialElement(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEINITIALELEMENT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Solid element ID.
@@ -132,7 +133,7 @@ class CeseInitialElement(KeywordBase):
         self._cards[0].set_value("t", value)
 
     @property
-    def eid_link(self) -> KeywordBase:
+    def eid_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 

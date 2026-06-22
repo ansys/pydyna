@@ -54,7 +54,8 @@ class Contact1D(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACT1D_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsidr(self) -> typing.Optional[int]:
         """Get or set the Nodal set ID for the rebar nodes that slide along the concrete; see* SET_NODE
@@ -133,7 +134,7 @@ class Contact1D(KeywordBase):
         self._cards[0].set_value("exp", value)
 
     @property
-    def nsidr_link(self) -> KeywordBase:
+    def nsidr_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsidr."""
         return self._get_set_link("NODE", self.nsidr)
 
@@ -143,7 +144,7 @@ class Contact1D(KeywordBase):
         self.nsidr = value.sid
 
     @property
-    def nsidc_link(self) -> KeywordBase:
+    def nsidc_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsidc."""
         return self._get_set_link("NODE", self.nsidc)
 

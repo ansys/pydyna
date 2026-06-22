@@ -56,8 +56,8 @@ class Mat078(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "078"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcpv": LinkType.DEFINE_CURVE,
@@ -74,11 +74,13 @@ class Mat078(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT078_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT078_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat078.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat078._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT078_OPTION0_CARD0,
@@ -246,7 +248,7 @@ class Mat078(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcpv_link(self) -> DefineCurve:
+    def lcpv_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpv."""
         if self.deck is None:
             return None
@@ -261,7 +263,7 @@ class Mat078(KeywordBase):
         self.lcpv = value.lcid
 
     @property
-    def lcyp_link(self) -> DefineCurve:
+    def lcyp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcyp."""
         if self.deck is None:
             return None
@@ -276,7 +278,7 @@ class Mat078(KeywordBase):
         self.lcyp = value.lcid
 
     @property
-    def lcfp_link(self) -> DefineCurve:
+    def lcfp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfp."""
         if self.deck is None:
             return None
@@ -291,7 +293,7 @@ class Mat078(KeywordBase):
         self.lcfp = value.lcid
 
     @property
-    def lcrp_link(self) -> DefineCurve:
+    def lcrp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcrp."""
         if self.deck is None:
             return None

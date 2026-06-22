@@ -77,8 +77,8 @@ class RigidwallGeometricSphereMotionDisplay(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_SPHERE_MOTION_DISPLAY"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -96,20 +96,25 @@ class RigidwallGeometricSphereMotionDisplay(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICSPHEREMOTIONDISPLAY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICSPHEREMOTIONDISPLAY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICSPHEREMOTIONDISPLAY_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICSPHEREMOTIONDISPLAY_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICSPHEREMOTIONDISPLAY_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = RigidwallGeometricSphereMotionDisplay.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = RigidwallGeometricSphereMotionDisplay._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLGEOMETRICSPHEREMOTIONDISPLAY_OPTION0_CARD0,
@@ -397,7 +402,7 @@ class RigidwallGeometricSphereMotionDisplay(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -412,7 +417,7 @@ class RigidwallGeometricSphereMotionDisplay(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None
@@ -427,7 +432,7 @@ class RigidwallGeometricSphereMotionDisplay(KeywordBase):
         self.boxid = value.boxid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 
@@ -437,7 +442,7 @@ class RigidwallGeometricSphereMotionDisplay(KeywordBase):
         self.nsid = value.sid
 
     @property
-    def nsidex_link(self) -> KeywordBase:
+    def nsidex_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsidex."""
         return self._get_set_link("NODE", self.nsidex)
 
@@ -447,7 +452,7 @@ class RigidwallGeometricSphereMotionDisplay(KeywordBase):
         self.nsidex = value.sid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

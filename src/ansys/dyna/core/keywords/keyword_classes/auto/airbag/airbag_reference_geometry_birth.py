@@ -55,10 +55,12 @@ class AirbagReferenceGeometryBirth(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGREFERENCEGEOMETRYBIRTH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGREFERENCEGEOMETRYBIRTH_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def birth(self) -> float:
         """Get or set the Time at which the reference geometry activates (default=0.0).
@@ -115,7 +117,7 @@ class AirbagReferenceGeometryBirth(KeywordBase):
         self._cards[1].set_value("z", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

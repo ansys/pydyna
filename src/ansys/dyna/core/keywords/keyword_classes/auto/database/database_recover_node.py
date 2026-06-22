@@ -54,7 +54,8 @@ class DatabaseRecoverNode(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASERECOVERNODE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set ID of solid elements whose nodal stress will be recovered.
@@ -256,7 +257,7 @@ class DatabaseRecoverNode(KeywordBase):
         self._cards[0].set_value("ivz", value)
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

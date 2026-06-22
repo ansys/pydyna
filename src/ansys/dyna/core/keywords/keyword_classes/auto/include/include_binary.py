@@ -43,7 +43,8 @@ class IncludeBinary(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INCLUDEBINARY_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name of file to be included in this keyword file.

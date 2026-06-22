@@ -45,7 +45,8 @@ class DualcesePartSurface(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEPARTSURFACE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part Surface ID (from *MESH_SURFACE_ELEMENT) LS-PrePost use only

@@ -58,13 +58,16 @@ class ConstrainedMultipleGlobal(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDMULTIPLEGLOBAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDMULTIPLEGLOBAL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDMULTIPLEGLOBAL_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Constraint set identification. All constraint sets should have a unique set ID.
@@ -126,7 +129,7 @@ class ConstrainedMultipleGlobal(KeywordBase):
         self._cards[2].set_value("coef", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

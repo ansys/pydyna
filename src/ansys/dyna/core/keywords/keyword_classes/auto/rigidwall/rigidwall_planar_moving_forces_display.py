@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
@@ -64,11 +65,19 @@ _RIGIDWALLPLANARMOVINGFORCESDISPLAY_CARD3 = (
     FieldSchema("n4", int, 50, 10, 0),
 )
 
+_RIGIDWALLPLANARMOVINGFORCESDISPLAY_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class RigidwallPlanarMovingForcesDisplay(KeywordBase):
     """DYNA RIGIDWALL_PLANAR_MOVING_FORCES_DISPLAY keyword"""
 
     keyword = "RIGIDWALL"
     subkeyword = "PLANAR_MOVING_FORCES_DISPLAY"
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
+    ]
     _link_fields = {
         "n1": LinkType.NODE,
         "n2": LinkType.NODE,
@@ -83,20 +92,35 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the RigidwallPlanarMovingForcesDisplay class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _RIGIDWALLPLANARMOVINGFORCESDISPLAY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLPLANARMOVINGFORCESDISPLAY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLPLANARMOVINGFORCESDISPLAY_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLPLANARMOVINGFORCESDISPLAY_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+            OptionCardSet(
+                option_spec = RigidwallPlanarMovingForcesDisplay._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _RIGIDWALLPLANARMOVINGFORCESDISPLAY_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID containing tracked nodes, see *SET_NODE_OPTION.
@@ -356,27 +380,55 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
         self._cards[3].set_value("n4", value)
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def id(self) -> typing.Optional[int]:
+        """Get or set the Optional Rigidwall ID.
+        """ # nopep8
+        return self._cards[4].cards[0].get_value("id")
+
+    @id.setter
+    def id(self, value: int) -> None:
+        """Set the id property."""
+        self._cards[4].cards[0].set_value("id", value)
+
+        if value:
+            self.activate_option("ID")
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Rigidwall id descriptor. It is suggested that unique descriptions be used.
+        """ # nopep8
+        return self._cards[4].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[4].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
+
+    @property
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n2_link(self) -> KeywordBase:
+    def n2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
         return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 
     @property
-    def n3_link(self) -> KeywordBase:
+    def n3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n3."""
         return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
 
     @property
-    def n4_link(self) -> KeywordBase:
+    def n4_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n4."""
         return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None
@@ -391,7 +443,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
         self.boxid = value.boxid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 
@@ -401,7 +453,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
         self.nsid = value.sid
 
     @property
-    def nsidex_link(self) -> KeywordBase:
+    def nsidex_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsidex."""
         return self._get_set_link("NODE", self.nsidex)
 
@@ -411,7 +463,7 @@ class RigidwallPlanarMovingForcesDisplay(KeywordBase):
         self.nsidex = value.sid
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

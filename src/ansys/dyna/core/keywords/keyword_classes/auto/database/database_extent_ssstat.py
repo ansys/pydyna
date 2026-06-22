@@ -61,7 +61,8 @@ class DatabaseExtentSsstat(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEEXTENTSSSTAT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def psid1(self) -> typing.Optional[int]:
         """Get or set the Part set ID for subsystem 1, see *SET_PART.
@@ -151,7 +152,7 @@ class DatabaseExtentSsstat(KeywordBase):
         self._cards[0].set_value("psid8", value)
 
     @property
-    def psid1_link(self) -> KeywordBase:
+    def psid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid1."""
         return self._get_set_link("PART", self.psid1)
 
@@ -161,7 +162,7 @@ class DatabaseExtentSsstat(KeywordBase):
         self.psid1 = value.sid
 
     @property
-    def psid2_link(self) -> KeywordBase:
+    def psid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid2."""
         return self._get_set_link("PART", self.psid2)
 
@@ -171,7 +172,7 @@ class DatabaseExtentSsstat(KeywordBase):
         self.psid2 = value.sid
 
     @property
-    def psid3_link(self) -> KeywordBase:
+    def psid3_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid3."""
         return self._get_set_link("PART", self.psid3)
 
@@ -181,7 +182,7 @@ class DatabaseExtentSsstat(KeywordBase):
         self.psid3 = value.sid
 
     @property
-    def psid4_link(self) -> KeywordBase:
+    def psid4_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid4."""
         return self._get_set_link("PART", self.psid4)
 
@@ -191,7 +192,7 @@ class DatabaseExtentSsstat(KeywordBase):
         self.psid4 = value.sid
 
     @property
-    def psid5_link(self) -> KeywordBase:
+    def psid5_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid5."""
         return self._get_set_link("PART", self.psid5)
 
@@ -201,7 +202,7 @@ class DatabaseExtentSsstat(KeywordBase):
         self.psid5 = value.sid
 
     @property
-    def psid6_link(self) -> KeywordBase:
+    def psid6_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid6."""
         return self._get_set_link("PART", self.psid6)
 
@@ -211,7 +212,7 @@ class DatabaseExtentSsstat(KeywordBase):
         self.psid6 = value.sid
 
     @property
-    def psid7_link(self) -> KeywordBase:
+    def psid7_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid7."""
         return self._get_set_link("PART", self.psid7)
 
@@ -221,7 +222,7 @@ class DatabaseExtentSsstat(KeywordBase):
         self.psid7 = value.sid
 
     @property
-    def psid8_link(self) -> KeywordBase:
+    def psid8_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid8."""
         return self._get_set_link("PART", self.psid8)
 

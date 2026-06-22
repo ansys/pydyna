@@ -139,8 +139,8 @@ class MatT17(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "T17"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lccf": LinkType.DEFINE_CURVE,
@@ -159,35 +159,45 @@ class MatT17(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATT17_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT17_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT17_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT17_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT17_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT17_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT17_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT17_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT17_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT17_CARD9,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatT17.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatT17._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATT17_OPTION0_CARD0,
@@ -1003,7 +1013,7 @@ class MatT17(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lccf_link(self) -> DefineCurve:
+    def lccf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccf."""
         if self.deck is None:
             return None
@@ -1018,7 +1028,7 @@ class MatT17(KeywordBase):
         self.lccf = value.lcid
 
     @property
-    def lck1f_link(self) -> DefineCurve:
+    def lck1f_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lck1f."""
         if self.deck is None:
             return None
@@ -1033,7 +1043,7 @@ class MatT17(KeywordBase):
         self.lck1f = value.lcid
 
     @property
-    def lcci_link(self) -> DefineCurve:
+    def lcci_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcci."""
         if self.deck is None:
             return None
@@ -1048,7 +1058,7 @@ class MatT17(KeywordBase):
         self.lcci = value.lcid
 
     @property
-    def lck1i_link(self) -> DefineCurve:
+    def lck1i_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lck1i."""
         if self.deck is None:
             return None
@@ -1063,7 +1073,7 @@ class MatT17(KeywordBase):
         self.lck1i = value.lcid
 
     @property
-    def lck2i_link(self) -> DefineCurve:
+    def lck2i_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lck2i."""
         if self.deck is None:
             return None
@@ -1078,7 +1088,7 @@ class MatT17(KeywordBase):
         self.lck2i = value.lcid
 
     @property
-    def lck3i_link(self) -> DefineCurve:
+    def lck3i_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lck3i."""
         if self.deck is None:
             return None

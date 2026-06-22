@@ -48,7 +48,8 @@ class CeseInitial(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEINITIAL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def u(self) -> float:
         """Get or set the x- velocity components respectively.

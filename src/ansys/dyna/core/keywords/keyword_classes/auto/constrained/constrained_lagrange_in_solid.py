@@ -111,25 +111,32 @@ class ConstrainedLagrangeInSolid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLID_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLID_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLID_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLID_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLID_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLID_CARD6,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def coupid(self) -> typing.Optional[int]:
         """Get or set the ID.
@@ -701,7 +708,7 @@ class ConstrainedLagrangeInSolid(KeywordBase):
         self._cards[6].set_value("coeflc", value)
 
     @property
-    def lcidpor_link(self) -> DefineCurve:
+    def lcidpor_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidpor."""
         if self.deck is None:
             return None

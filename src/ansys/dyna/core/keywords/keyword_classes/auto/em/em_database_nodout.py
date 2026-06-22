@@ -52,10 +52,12 @@ class EmDatabaseNodout(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMDATABASENODOUT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMDATABASENODOUT_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def outlv(self) -> int:
         """Get or set the Determines if the output file should be dumped.
@@ -94,7 +96,7 @@ class EmDatabaseNodout(KeywordBase):
         self._cards[1].set_value("nsid", value)
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 

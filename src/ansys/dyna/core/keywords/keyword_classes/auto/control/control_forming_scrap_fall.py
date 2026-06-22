@@ -73,13 +73,16 @@ class ControlFormingScrapFall(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGSCRAPFALL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGSCRAPFALL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGSCRAPFALL_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of a scrap piece.  This part ID becomes a dummy ID if all trimmed scrap pieces are defined by NEWID. See definition for NEWID and Figure 0-3.
@@ -274,7 +277,7 @@ class ControlFormingScrapFall(KeywordBase):
         self._cards[2].set_value("newid", value)
 
     @property
-    def vectid_link(self) -> DefineVector:
+    def vectid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vectid."""
         if self.deck is None:
             return None
@@ -289,7 +292,7 @@ class ControlFormingScrapFall(KeywordBase):
         self.vectid = value.vid
 
     @property
-    def ndset_link(self) -> KeywordBase:
+    def ndset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for ndset."""
         return self._get_set_link("NODE", self.ndset)
 
@@ -299,12 +302,12 @@ class ControlFormingScrapFall(KeywordBase):
         self.ndset = value.sid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 
     @property
-    def idrgd_link(self) -> KeywordBase:
+    def idrgd_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given idrgd."""
         return self._get_link_by_attr("PART", "pid", self.idrgd, "parts")
 

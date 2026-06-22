@@ -44,7 +44,8 @@ class DatabaseExtentAvs(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEEXTENTAVS_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def vtype(self) -> int:
         """Get or set the Variable type:

@@ -55,7 +55,8 @@ class LoadHeatController(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADHEATCONTROLLER_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def node(self) -> typing.Optional[int]:
         """Get or set the Sensor is located at this node number.
@@ -136,12 +137,12 @@ class LoadHeatController(KeywordBase):
         self._cards[0].set_value("gi", value)
 
     @property
-    def node_link(self) -> KeywordBase:
+    def node_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node."""
         return self._get_link_by_attr("NODE", "nid", self.node, "parts")
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

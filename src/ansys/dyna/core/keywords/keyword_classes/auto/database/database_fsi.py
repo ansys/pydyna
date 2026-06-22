@@ -54,10 +54,12 @@ class DatabaseFsi(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEFSI_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASEFSI_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dtout(self) -> typing.Optional[float]:
         """Get or set the Output interval

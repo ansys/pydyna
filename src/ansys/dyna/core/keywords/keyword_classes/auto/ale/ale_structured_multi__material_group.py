@@ -54,7 +54,8 @@ class AleStructuredMulti_MaterialGroup(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALESTRUCTUREDMULTI_MATERIALGROUP_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ammg_name(self) -> typing.Optional[str]:
         """Get or set the AMMG name. Required to identify the AMMG (S-ALE fluid); Not case sensitive and need to be unique; See remark 2.
@@ -100,7 +101,7 @@ class AleStructuredMulti_MaterialGroup(KeywordBase):
         self._cards[0].set_value("pref", value)
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None

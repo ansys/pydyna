@@ -99,8 +99,8 @@ class MatOrthotropicThermalCuring(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ORTHOTROPIC_THERMAL_CURING"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lccha": LinkType.DEFINE_CURVE,
@@ -119,23 +119,29 @@ class MatOrthotropicThermalCuring(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALCURING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALCURING_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALCURING_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALCURING_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALCURING_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATORTHOTROPICTHERMALCURING_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatOrthotropicThermalCuring.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatOrthotropicThermalCuring._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATORTHOTROPICTHERMALCURING_OPTION0_CARD0,
@@ -653,7 +659,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lccha_link(self) -> DefineCurve:
+    def lccha_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccha."""
         if self.deck is None:
             return None
@@ -668,7 +674,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
         self.lccha = value.lcid
 
     @property
-    def lcchb_link(self) -> DefineCurve:
+    def lcchb_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcchb."""
         if self.deck is None:
             return None
@@ -683,7 +689,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
         self.lcchb = value.lcid
 
     @property
-    def lcchc_link(self) -> DefineCurve:
+    def lcchc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcchc."""
         if self.deck is None:
             return None
@@ -698,7 +704,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
         self.lcchc = value.lcid
 
     @property
-    def lcab_link(self) -> DefineCurve:
+    def lcab_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcab."""
         if self.deck is None:
             return None
@@ -713,7 +719,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
         self.lcab = value.lcid
 
     @property
-    def lcac_link(self) -> DefineCurve:
+    def lcac_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcac."""
         if self.deck is None:
             return None
@@ -728,7 +734,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
         self.lcac = value.lcid
 
     @property
-    def lcaa_link(self) -> KeywordBase:
+    def lcaa_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcaa."""
         if self.deck is None:
             return None

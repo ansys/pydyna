@@ -53,8 +53,8 @@ class SetSolid(KeywordBase):
 
     keyword = "SET"
     subkeyword = "SOLID"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "k1": LinkType.ELEMENT_SOLID,
@@ -75,11 +75,13 @@ class SetSolid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETSOLID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETSOLID_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SetSolid.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SetSolid._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETSOLID_OPTION0_CARD0,
@@ -218,42 +220,42 @@ class SetSolid(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def k1_link(self) -> KeywordBase:
+    def k1_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given k1."""
         return self._get_link_by_attr("ELEMENT", "eid", self.k1, "parts")
 
     @property
-    def k2_link(self) -> KeywordBase:
+    def k2_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given k2."""
         return self._get_link_by_attr("ELEMENT", "eid", self.k2, "parts")
 
     @property
-    def k3_link(self) -> KeywordBase:
+    def k3_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given k3."""
         return self._get_link_by_attr("ELEMENT", "eid", self.k3, "parts")
 
     @property
-    def k4_link(self) -> KeywordBase:
+    def k4_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given k4."""
         return self._get_link_by_attr("ELEMENT", "eid", self.k4, "parts")
 
     @property
-    def k5_link(self) -> KeywordBase:
+    def k5_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given k5."""
         return self._get_link_by_attr("ELEMENT", "eid", self.k5, "parts")
 
     @property
-    def k6_link(self) -> KeywordBase:
+    def k6_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given k6."""
         return self._get_link_by_attr("ELEMENT", "eid", self.k6, "parts")
 
     @property
-    def k7_link(self) -> KeywordBase:
+    def k7_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given k7."""
         return self._get_link_by_attr("ELEMENT", "eid", self.k7, "parts")
 
     @property
-    def k8_link(self) -> KeywordBase:
+    def k8_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given k8."""
         return self._get_link_by_attr("ELEMENT", "eid", self.k8, "parts")
 

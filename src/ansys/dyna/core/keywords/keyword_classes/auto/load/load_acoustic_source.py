@@ -55,7 +55,8 @@ class LoadAcousticSource(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADACOUSTICSOURCE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nid_ssid(self) -> typing.Optional[int]:
         """Get or set the Node ID of the acoustic point source for SRCTYP = 1 and 5.
@@ -163,7 +164,7 @@ class LoadAcousticSource(KeywordBase):
         self._cards[0].set_value("data5", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

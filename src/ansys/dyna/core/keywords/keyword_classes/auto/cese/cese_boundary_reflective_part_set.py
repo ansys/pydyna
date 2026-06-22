@@ -43,7 +43,8 @@ class CeseBoundaryReflectivePartSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYREFLECTIVEPARTSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def surfsid(self) -> typing.Optional[int]:
         """Get or set the Identifier of a set of surface part IDs created with a *LSO_ID_SET card, where each surface part ID in the set is referenced in *MESH_SURFACE_ELEMENT cards.

@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
 """Module for plotting decks."""
 
 import typing
@@ -53,7 +54,7 @@ def merge_keywords(
     Merge mesh keywords.
 
     Given a deck, merges specific keywords (NODE, ELEMENT_SHELL, ELEMENT_BEAM, ELEMENT_SOLID)
-    and returns tham as data frames.
+    and return as data frames.
     """
     nodes_temp = [kwd.nodes for kwd in deck.get_kwds_by_type("NODE")]
     nodes = pd.concat(nodes_temp) if len(nodes_temp) else pd.DataFrame()

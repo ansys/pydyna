@@ -45,7 +45,8 @@ class InitialFatigueDamageRatio(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALFATIGUEDAMAGERATIO_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid_sid(self) -> typing.Optional[int]:
         """Get or set the Part ID or part set ID for which the initial damage ratio is defined.

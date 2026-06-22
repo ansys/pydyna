@@ -68,13 +68,16 @@ class ElementInertiaOffset(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTINERTIAOFFSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTINERTIAOFFSET_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTINERTIAOFFSET_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number must be used.
@@ -221,12 +224,12 @@ class ElementInertiaOffset(KeywordBase):
         self._cards[2].set_value("z_off", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def csid_link(self) -> DefineCoordinateSystem:
+    def csid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for csid."""
         if self.deck is None:
             return None

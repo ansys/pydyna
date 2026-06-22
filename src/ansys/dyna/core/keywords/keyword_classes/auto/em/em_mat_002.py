@@ -58,10 +58,12 @@ class EmMat002(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMMAT002_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMMAT002_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material identification. A unique number or label must be specified (see *PART)
@@ -158,7 +160,7 @@ class EmMat002(KeywordBase):
         self._cards[1].set_value("eosid2", value)
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None

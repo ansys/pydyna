@@ -60,8 +60,8 @@ class DefineDeInjection(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DE_INJECTION"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
@@ -77,11 +77,13 @@ class DefineDeInjection(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEDEINJECTION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEDEINJECTION_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineDeInjection.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineDeInjection._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDEINJECTION_OPTION0_CARD0,
@@ -282,7 +284,7 @@ class DefineDeInjection(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -297,7 +299,7 @@ class DefineDeInjection(KeywordBase):
         self.cid = value.cid
 
     @property
-    def sid_link(self) -> KeywordBase:
+    def sid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for sid."""
         return self._get_set_link("NODE", self.sid)
 
@@ -307,7 +309,7 @@ class DefineDeInjection(KeywordBase):
         self.sid = value.sid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

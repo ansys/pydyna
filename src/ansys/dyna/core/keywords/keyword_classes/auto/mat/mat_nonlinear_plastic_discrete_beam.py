@@ -93,8 +93,8 @@ class MatNonlinearPlasticDiscreteBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "NONLINEAR_PLASTIC_DISCRETE_BEAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcpdr": LinkType.DEFINE_CURVE_OR_TABLE,
@@ -113,23 +113,29 @@ class MatNonlinearPlasticDiscreteBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATNONLINEARPLASTICDISCRETEBEAM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATNONLINEARPLASTICDISCRETEBEAM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATNONLINEARPLASTICDISCRETEBEAM_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATNONLINEARPLASTICDISCRETEBEAM_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATNONLINEARPLASTICDISCRETEBEAM_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATNONLINEARPLASTICDISCRETEBEAM_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatNonlinearPlasticDiscreteBeam.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatNonlinearPlasticDiscreteBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATNONLINEARPLASTICDISCRETEBEAM_OPTION0_CARD0,
@@ -587,7 +593,7 @@ class MatNonlinearPlasticDiscreteBeam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcpdr_link(self) -> KeywordBase:
+    def lcpdr_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpdr."""
         if self.deck is None:
             return None
@@ -611,7 +617,7 @@ class MatNonlinearPlasticDiscreteBeam(KeywordBase):
             self.lcpdr = value.tbid
 
     @property
-    def lcpds_link(self) -> KeywordBase:
+    def lcpds_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpds."""
         if self.deck is None:
             return None
@@ -635,7 +641,7 @@ class MatNonlinearPlasticDiscreteBeam(KeywordBase):
             self.lcpds = value.tbid
 
     @property
-    def lcpdt_link(self) -> KeywordBase:
+    def lcpdt_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpdt."""
         if self.deck is None:
             return None
@@ -659,7 +665,7 @@ class MatNonlinearPlasticDiscreteBeam(KeywordBase):
             self.lcpdt = value.tbid
 
     @property
-    def lcpmr_link(self) -> KeywordBase:
+    def lcpmr_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpmr."""
         if self.deck is None:
             return None
@@ -683,7 +689,7 @@ class MatNonlinearPlasticDiscreteBeam(KeywordBase):
             self.lcpmr = value.tbid
 
     @property
-    def lcpms_link(self) -> KeywordBase:
+    def lcpms_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpms."""
         if self.deck is None:
             return None
@@ -707,7 +713,7 @@ class MatNonlinearPlasticDiscreteBeam(KeywordBase):
             self.lcpms = value.tbid
 
     @property
-    def lcpmt_link(self) -> KeywordBase:
+    def lcpmt_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcpmt."""
         if self.deck is None:
             return None

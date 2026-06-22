@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -66,6 +66,6 @@ class TransformHandler(ImportHandler):
         # and transform the keyword with it
         handler(context.xform).transform(keyword)
 
-    def on_error(self, error):
+    def on_error(self, error, context=None, result=None):
         """Handle errors during import."""
         pass

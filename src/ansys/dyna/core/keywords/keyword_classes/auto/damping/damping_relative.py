@@ -55,7 +55,8 @@ class DampingRelative(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DAMPINGRELATIVE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cdamp(self) -> float:
         """Get or set the Fraction of critical damping.
@@ -123,7 +124,7 @@ class DampingRelative(KeywordBase):
         self._cards[0].set_value("lcid", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -138,7 +139,7 @@ class DampingRelative(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 
@@ -148,7 +149,7 @@ class DampingRelative(KeywordBase):
         self.psid = value.sid
 
     @property
-    def pidrb_link(self) -> KeywordBase:
+    def pidrb_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pidrb."""
         return self._get_link_by_attr("PART", "pid", self.pidrb, "parts")
 

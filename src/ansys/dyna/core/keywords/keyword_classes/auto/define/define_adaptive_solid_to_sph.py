@@ -53,8 +53,8 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "ADAPTIVE_SOLID_TO_SPH"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "issph": LinkType.SECTION,
@@ -69,11 +69,13 @@ class DefineAdaptiveSolidToSph(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEADAPTIVESOLIDTOSPH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEADAPTIVESOLIDTOSPH_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineAdaptiveSolidToSph.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineAdaptiveSolidToSph._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEADAPTIVESOLIDTOSPH_OPTION0_CARD0,
@@ -228,7 +230,7 @@ class DefineAdaptiveSolidToSph(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def issph_link(self) -> KeywordBase:
+    def issph_link(self) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for issph."""
         if self.deck is None:
             return None
@@ -243,7 +245,7 @@ class DefineAdaptiveSolidToSph(KeywordBase):
         self.issph = value.secid
 
     @property
-    def ipsph_link(self) -> KeywordBase:
+    def ipsph_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ipsph."""
         return self._get_link_by_attr("PART", "pid", self.ipsph, "parts")
 

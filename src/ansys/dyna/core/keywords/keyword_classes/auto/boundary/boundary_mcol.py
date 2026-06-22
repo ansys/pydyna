@@ -52,10 +52,12 @@ class BoundaryMcol(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYMCOL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYMCOL_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nmcol(self) -> int:
         """Get or set the Number of ships in MCOL coupling.

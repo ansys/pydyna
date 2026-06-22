@@ -58,10 +58,12 @@ class ControlFormingBestfitVector(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGBESTFITVECTOR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGBESTFITVECTOR_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ifit(self) -> int:
         """Get or set the Best fit program activation flag:
@@ -167,7 +169,7 @@ class ControlFormingBestfitVector(KeywordBase):
         self._cards[1].set_value("filename", value)
 
     @property
-    def nsets_link(self) -> KeywordBase:
+    def nsets_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsets."""
         return self._get_set_link("NODE", self.nsets)
 
@@ -177,7 +179,7 @@ class ControlFormingBestfitVector(KeywordBase):
         self.nsets = value.sid
 
     @property
-    def nsett_link(self) -> KeywordBase:
+    def nsett_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsett."""
         return self._get_set_link("NODE", self.nsett)
 

@@ -54,10 +54,12 @@ class InterfaceDeHbond(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACEDEHBOND_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACEDEHBOND_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Interface ID. All interfaces should have a unique ID.

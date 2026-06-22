@@ -48,7 +48,8 @@ class ElementSolidT4Tot10Format2(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTSOLIDT4TOT10FORMAT2_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID. A unique number has to be used.
@@ -72,7 +73,7 @@ class ElementSolidT4Tot10Format2(KeywordBase):
         self._cards[0].set_value("pid", value)
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

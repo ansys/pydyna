@@ -87,16 +87,20 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDINTERPOLATIONSPOTWELD_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDINTERPOLATIONSPOTWELD_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDINTERPOLATIONSPOTWELD_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDINTERPOLATIONSPOTWELD_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid1(self) -> typing.Optional[int]:
         """Get or set the Part ID or part set ID of first sheet
@@ -403,7 +407,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
         self._cards[3].set_value("mrs", value)
 
     @property
-    def lcf_link(self) -> DefineCurve:
+    def lcf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcf."""
         if self.deck is None:
             return None
@@ -418,7 +422,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
         self.lcf = value.lcid
 
     @property
-    def lcupf_link(self) -> DefineCurve:
+    def lcupf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcupf."""
         if self.deck is None:
             return None
@@ -433,7 +437,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
         self.lcupf = value.lcid
 
     @property
-    def lcupr_link(self) -> DefineCurve:
+    def lcupr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcupr."""
         if self.deck is None:
             return None
@@ -448,7 +452,7 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
         self.lcupr = value.lcid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 
@@ -458,12 +462,12 @@ class ConstrainedInterpolationSpotweld(KeywordBase):
         self.nsid = value.sid
 
     @property
-    def pid1_link(self) -> KeywordBase:
+    def pid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid1."""
         return self._get_link_by_attr("PART", "pid", self.pid1, "parts")
 
     @property
-    def pid2_link(self) -> KeywordBase:
+    def pid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid2."""
         return self._get_link_by_attr("PART", "pid", self.pid2, "parts")
 

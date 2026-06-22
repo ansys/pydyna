@@ -66,10 +66,12 @@ class BoundaryPwpSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPWPSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPWPSET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Node SET ID.
@@ -214,7 +216,7 @@ class BoundaryPwpSet(KeywordBase):
         self._cards[1].set_value("lcpum", value)
 
     @property
-    def lcdr_link(self) -> DefineCurve:
+    def lcdr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdr."""
         if self.deck is None:
             return None
@@ -229,7 +231,7 @@ class BoundaryPwpSet(KeywordBase):
         self.lcdr = value.lcid
 
     @property
-    def lcleak_link(self) -> DefineCurve:
+    def lcleak_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcleak."""
         if self.deck is None:
             return None
@@ -244,7 +246,7 @@ class BoundaryPwpSet(KeywordBase):
         self.lcleak = value.lcid
 
     @property
-    def lcpum_link(self) -> DefineCurve:
+    def lcpum_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpum."""
         if self.deck is None:
             return None
@@ -259,7 +261,7 @@ class BoundaryPwpSet(KeywordBase):
         self.lcpum = value.lcid
 
     @property
-    def sid_link(self) -> KeywordBase:
+    def sid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for sid."""
         return self._get_set_link("NODE", self.sid)
 

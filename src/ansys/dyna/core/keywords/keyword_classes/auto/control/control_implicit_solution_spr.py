@@ -96,19 +96,24 @@ class ControlImplicitSolutionSpr(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSOLUTIONSPR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSOLUTIONSPR_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSOLUTIONSPR_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSOLUTIONSPR_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSOLUTIONSPR_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsolvr(self) -> int:
         """Get or set the Solution method for implicit analysis:
@@ -583,7 +588,7 @@ class ControlImplicitSolutionSpr(KeywordBase):
         self._cards[4].set_value("sred", value)
 
     @property
-    def arcctl_link(self) -> KeywordBase:
+    def arcctl_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given arcctl."""
         return self._get_link_by_attr("NODE", "nid", self.arcctl, "parts")
 

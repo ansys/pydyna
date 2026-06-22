@@ -44,7 +44,8 @@ class IcfdControlSurfmesh(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLSURFMESH_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def rsrf(self) -> int:
         """Get or set the Indicates whether or not to perform a surface re-meshing.

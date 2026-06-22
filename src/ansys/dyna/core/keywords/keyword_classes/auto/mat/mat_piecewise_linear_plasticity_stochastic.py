@@ -79,8 +79,8 @@ class MatPiecewiseLinearPlasticityStochastic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "PIECEWISE_LINEAR_PLASTICITY_STOCHASTIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcsr": LinkType.DEFINE_CURVE,
@@ -95,17 +95,21 @@ class MatPiecewiseLinearPlasticityStochastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATPIECEWISELINEARPLASTICITYSTOCHASTIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPIECEWISELINEARPLASTICITYSTOCHASTIC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPIECEWISELINEARPLASTICITYSTOCHASTIC_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPIECEWISELINEARPLASTICITYSTOCHASTIC_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatPiecewiseLinearPlasticityStochastic.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatPiecewiseLinearPlasticityStochastic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATPIECEWISELINEARPLASTICITYSTOCHASTIC_OPTION0_CARD0,
@@ -461,7 +465,7 @@ class MatPiecewiseLinearPlasticityStochastic(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcsr_link(self) -> DefineCurve:
+    def lcsr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsr."""
         if self.deck is None:
             return None
@@ -476,7 +480,7 @@ class MatPiecewiseLinearPlasticityStochastic(KeywordBase):
         self.lcsr = value.lcid
 
     @property
-    def lcss_link(self) -> KeywordBase:
+    def lcss_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcss."""
         if self.deck is None:
             return None

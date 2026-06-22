@@ -56,8 +56,8 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "SPC_NODE_BIRTH_DEATH"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "nid": LinkType.NODE,
@@ -72,11 +72,13 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYSPCNODEBIRTHDEATH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYSPCNODEBIRTHDEATH_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = BoundarySpcNodeBirthDeath.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = BoundarySpcNodeBirthDeath._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _BOUNDARYSPCNODEBIRTHDEATH_OPTION0_CARD0,
@@ -243,12 +245,12 @@ class BoundarySpcNodeBirthDeath(KeywordBase):
             self.activate_option("HEADING")
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

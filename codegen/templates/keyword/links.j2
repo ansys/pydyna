@@ -1,15 +1,26 @@
 {% for link in links %}
 {% for field in link.fields %}
-{% if field.is_table and link.is_table_lookup %}
+{% if field.is_series and link.is_table_lookup %}
+{# SeriesCard field with table lookup (e.g., element -> ELEMENT_BEAM) #}
+    @property
+    def {{field.name}}_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all {{link.keyword_type}} keywords for {{field.name}}, keyed by element ID."""
+        return self._get_links_from_series("{{link.keyword_type}}", "{{link.linkid}}", "{{field.name}}", "{{link.target_table_attr}}")
+
+    def get_{{field.name}}_link(self, element_id: int) -> typing.Optional[KeywordBase]:
+        """Get the {{link.keyword_type}} keyword containing the given element_id."""
+        return self._get_link_by_attr("{{link.keyword_type}}", "{{link.linkid}}", element_id, "{{link.target_table_attr}}")
+
+{% elif field.is_table and link.is_table_lookup %}
 {# TableCard field with table lookup (e.g., pid -> PART): use helper methods #}
     @property
     def {{field.name}}_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all {{link.keyword_type}} keywords for {{field.name}}, keyed by {{field.name}} value."""
-        return self._get_links_from_table("{{link.keyword_type}}", "{{link.linkid}}", "{{field.table_name}}", "{{field.name}}", "parts")
+        return self._get_links_from_table("{{link.keyword_type}}", "{{link.linkid}}", "{{field.table_name}}", "{{field.name}}", "{{link.target_table_attr}}")
 
     def get_{{field.name}}_link(self, {{field.name}}: int) -> typing.Optional[KeywordBase]:
         """Get the {{link.keyword_type}} keyword containing the given {{field.name}}."""
-        return self._get_link_by_attr("{{link.keyword_type}}", "{{link.linkid}}", {{field.name}}, "parts")
+        return self._get_link_by_attr("{{link.keyword_type}}", "{{link.linkid}}", {{field.name}}, "{{link.target_table_attr}}")
 
 {% elif field.is_table_group and field.key_field %}
 {# Table-group field: generate *_links dict property and get_*_link(key) method #}
@@ -24,7 +35,7 @@
 
 {% elif link.is_multi_target %}
     @property
-    def {{field.name}}_link(self) -> KeywordBase:
+    def {{field.name}}_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for {{field.name}}."""
         if self.deck is None:
             return None
@@ -46,16 +57,16 @@
         elif hasattr(value, "tbid"):
             self.{{field.name}} = value.tbid
 
-{% elif link.is_table_lookup and not field.is_table %}
+{% elif link.is_table_lookup and not field.is_table and not field.is_series %}
 {# Scalar PART link: use helper method #}
     @property
-    def {{field.name}}_link(self) -> KeywordBase:
+    def {{field.name}}_link(self) -> typing.Optional[KeywordBase]:
         """Get the {{link.keyword_type}} keyword containing the given {{field.name}}."""
         return self._get_link_by_attr("{{link.keyword_type}}", "{{link.linkid}}", self.{{field.name}}, "parts")
 
 {% elif link.is_polymorphic %}
     @property
-    def {{field.name}}_link(self) -> KeywordBase:
+    def {{field.name}}_link(self) -> typing.Optional[KeywordBase]:
         """Get the {{link.keyword_type}}_* keyword for {{field.name}}."""
         if self.deck is None:
             return None
@@ -71,7 +82,7 @@
 
 {% elif link.is_subtype_prefix %}
     @property
-    def {{field.name}}_link(self) -> KeywordBase:
+    def {{field.name}}_link(self) -> typing.Optional[KeywordBase]:
         """Get the {{link.keyword_type}}_{{link.keyword_subtype}}_* keyword for {{field.name}}."""
         return self._get_set_link("{{link.keyword_subtype}}", self.{{field.name}})
 
@@ -82,7 +93,7 @@
 
 {% else %}
     @property
-    def {{field.name}}_link(self) -> {{link.classname}}:
+    def {{field.name}}_link(self) -> typing.Optional[{{link.classname}}]:
         """Get the {{link.classname}} object for {{field.name}}."""
         if self.deck is None:
             return None

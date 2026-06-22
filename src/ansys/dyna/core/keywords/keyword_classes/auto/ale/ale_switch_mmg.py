@@ -65,10 +65,12 @@ class AleSwitchMmg(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALESWITCHMMG_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALESWITCHMMG_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def fr_mmg(self) -> typing.Optional[int]:
         """Get or set the This is the AMMG-SID before the switch. The AMMG-SID
@@ -680,7 +682,7 @@ class AleSwitchMmg(KeywordBase):
         self._cards[1].set_value("var8", value)
 
     @property
-    def idsegset_link(self) -> KeywordBase:
+    def idsegset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for idsegset."""
         return self._get_set_link("SEGMENT", self.idsegset)
 
@@ -690,7 +692,7 @@ class AleSwitchMmg(KeywordBase):
         self.idsegset = value.sid
 
     @property
-    def idsldset_link(self) -> KeywordBase:
+    def idsldset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for idsldset."""
         return self._get_set_link("SOLID", self.idsldset)
 

@@ -53,8 +53,8 @@ class Mat090Complex(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "090_COMPLEX"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcidrr": LinkType.DEFINE_CURVE,
@@ -71,11 +71,13 @@ class Mat090Complex(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT090COMPLEX_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT090COMPLEX_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat090Complex.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat090Complex._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT090COMPLEX_OPTION0_CARD0,
@@ -199,7 +201,7 @@ class Mat090Complex(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcidrr_link(self) -> DefineCurve:
+    def lcidrr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidrr."""
         if self.deck is None:
             return None
@@ -214,7 +216,7 @@ class Mat090Complex(KeywordBase):
         self.lcidrr = value.lcid
 
     @property
-    def lcidkr_link(self) -> DefineCurve:
+    def lcidkr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidkr."""
         if self.deck is None:
             return None
@@ -229,7 +231,7 @@ class Mat090Complex(KeywordBase):
         self.lcidkr = value.lcid
 
     @property
-    def lcidri_link(self) -> DefineCurve:
+    def lcidri_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidri."""
         if self.deck is None:
             return None
@@ -244,7 +246,7 @@ class Mat090Complex(KeywordBase):
         self.lcidri = value.lcid
 
     @property
-    def lcidki_link(self) -> DefineCurve:
+    def lcidki_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidki."""
         if self.deck is None:
             return None

@@ -160,8 +160,14 @@ class ExternalCardHandler(keyword_generation.handlers.handler_base.KeywordHandle
                 setting.mixin_name,
             )
             kwd_data.mixins.append(setting.mixin_name)
+
+            # Normalize source to full module path for consistent template handling
+            source = setting.card_source
+            if "." not in source:
+                source = f"ansys.dyna.core.lib.cards_.special.{source}"
+
             kwd_data.mixin_imports.append(
-                MixinImport(source=setting.card_source, names=[setting.card_name, setting.mixin_name])
+                MixinImport(source=source, names=[setting.card_name, setting.mixin_name])
             )
             external_card = kwd_data.cards[card_index]
             external_card["external"] = ExternalCardMetadata(name=setting.card_name)

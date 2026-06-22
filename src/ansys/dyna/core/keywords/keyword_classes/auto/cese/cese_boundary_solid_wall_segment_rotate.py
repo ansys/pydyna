@@ -66,10 +66,12 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYSOLIDWALLSEGMENTROTATE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYSOLIDWALLSEGMENTROTATE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def n1(self) -> typing.Optional[int]:
         """Get or set the Node IDs defining segment.
@@ -192,27 +194,27 @@ class CeseBoundarySolidWallSegmentRotate(KeywordBase):
         self._cards[1].set_value("nz", value)
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

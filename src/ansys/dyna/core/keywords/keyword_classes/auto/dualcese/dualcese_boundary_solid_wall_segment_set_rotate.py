@@ -55,7 +55,8 @@ class DualceseBoundarySolidWallSegmentSetRotate(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYSOLIDWALLSEGMENTSETROTATE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID created with *DUALCESE_SEGMENTSET
@@ -145,7 +146,7 @@ class DualceseBoundarySolidWallSegmentSetRotate(KeywordBase):
         self._cards[0].set_value("nz", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

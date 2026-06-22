@@ -44,8 +44,8 @@ class DefineFormingContact(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "FORMING_CONTACT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "ips": LinkType.PART,
@@ -60,8 +60,9 @@ class DefineFormingContact(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEFORMINGCONTACT_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineFormingContact.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineFormingContact._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEFORMINGCONTACT_OPTION0_CARD0,
@@ -134,12 +135,12 @@ class DefineFormingContact(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def ips_link(self) -> KeywordBase:
+    def ips_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ips."""
         return self._get_link_by_attr("PART", "pid", self.ips, "parts")
 
     @property
-    def ipm_link(self) -> KeywordBase:
+    def ipm_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ipm."""
         return self._get_link_by_attr("PART", "pid", self.ipm, "parts")
 

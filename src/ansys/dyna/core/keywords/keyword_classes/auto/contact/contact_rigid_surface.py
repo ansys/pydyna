@@ -80,13 +80,16 @@ class ContactRigidSurface(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACTRIGIDSURFACE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTRIGIDSURFACE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTRIGIDSURFACE_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Contact interface ID. This must be a unique number.
@@ -307,7 +310,7 @@ class ContactRigidSurface(KeywordBase):
         self._cards[2].set_value("ctype", value)
 
     @property
-    def lcidx_link(self) -> DefineCurve:
+    def lcidx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidx."""
         if self.deck is None:
             return None
@@ -322,7 +325,7 @@ class ContactRigidSurface(KeywordBase):
         self.lcidx = value.lcid
 
     @property
-    def lcidy_link(self) -> DefineCurve:
+    def lcidy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidy."""
         if self.deck is None:
             return None
@@ -337,7 +340,7 @@ class ContactRigidSurface(KeywordBase):
         self.lcidy = value.lcid
 
     @property
-    def lcidz_link(self) -> DefineCurve:
+    def lcidz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidz."""
         if self.deck is None:
             return None
@@ -352,7 +355,7 @@ class ContactRigidSurface(KeywordBase):
         self.lcidz = value.lcid
 
     @property
-    def fslcid_link(self) -> DefineCurve:
+    def fslcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for fslcid."""
         if self.deck is None:
             return None
@@ -367,7 +370,7 @@ class ContactRigidSurface(KeywordBase):
         self.fslcid = value.lcid
 
     @property
-    def fdlcid_link(self) -> DefineCurve:
+    def fdlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for fdlcid."""
         if self.deck is None:
             return None
@@ -382,7 +385,7 @@ class ContactRigidSurface(KeywordBase):
         self.fdlcid = value.lcid
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None
@@ -397,7 +400,7 @@ class ContactRigidSurface(KeywordBase):
         self.boxid = value.boxid
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 
@@ -407,7 +410,7 @@ class ContactRigidSurface(KeywordBase):
         self.psid = value.sid
 
     @property
-    def segid_link(self) -> KeywordBase:
+    def segid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for segid."""
         return self._get_set_link("SEGMENT", self.segid)
 

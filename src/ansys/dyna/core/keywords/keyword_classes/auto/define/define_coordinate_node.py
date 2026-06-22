@@ -47,8 +47,8 @@ class DefineCoordinateNode(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "COORDINATE_NODE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "n1": LinkType.NODE,
@@ -64,8 +64,9 @@ class DefineCoordinateNode(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINECOORDINATENODE_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineCoordinateNode.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineCoordinateNode._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECOORDINATENODE_OPTION0_CARD0,
@@ -158,17 +159,17 @@ class DefineCoordinateNode(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n2_link(self) -> KeywordBase:
+    def n2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
         return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 
     @property
-    def n3_link(self) -> KeywordBase:
+    def n3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n3."""
         return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
 

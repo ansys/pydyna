@@ -66,10 +66,12 @@ class InitialVelocityGeneration(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALVELOCITYGENERATION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALVELOCITYGENERATION_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Part ID, part set ID, or node set ID.If zero, STYP is ignored,and all velocities are set.
@@ -262,7 +264,7 @@ class InitialVelocityGeneration(KeywordBase):
         self._cards[1].set_value("irigid", value)
 
     @property
-    def icid_link(self) -> DefineCoordinateSystem:
+    def icid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for icid."""
         if self.deck is None:
             return None

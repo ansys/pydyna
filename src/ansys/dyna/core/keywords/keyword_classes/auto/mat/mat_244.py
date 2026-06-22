@@ -115,8 +115,8 @@ class Mat244(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "244"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcy2": LinkType.DEFINE_CURVE,
@@ -137,26 +137,33 @@ class Mat244(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT244_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT244_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT244_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT244_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT244_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT244_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT244_CARD6,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat244.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat244._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT244_OPTION0_CARD0,
@@ -848,7 +855,7 @@ class Mat244(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcy2_link(self) -> DefineCurve:
+    def lcy2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy2."""
         if self.deck is None:
             return None
@@ -863,7 +870,7 @@ class Mat244(KeywordBase):
         self.lcy2 = value.lcid
 
     @property
-    def lcy3_link(self) -> DefineCurve:
+    def lcy3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy3."""
         if self.deck is None:
             return None
@@ -878,7 +885,7 @@ class Mat244(KeywordBase):
         self.lcy3 = value.lcid
 
     @property
-    def lcy4_link(self) -> DefineCurve:
+    def lcy4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy4."""
         if self.deck is None:
             return None
@@ -893,7 +900,7 @@ class Mat244(KeywordBase):
         self.lcy4 = value.lcid
 
     @property
-    def lcy5_link(self) -> DefineCurve:
+    def lcy5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy5."""
         if self.deck is None:
             return None
@@ -908,7 +915,7 @@ class Mat244(KeywordBase):
         self.lcy5 = value.lcid
 
     @property
-    def lctre_link(self) -> DefineCurve:
+    def lctre_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctre."""
         if self.deck is None:
             return None
@@ -923,7 +930,7 @@ class Mat244(KeywordBase):
         self.lctre = value.lcid
 
     @property
-    def lcth1_link(self) -> DefineCurve:
+    def lcth1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcth1."""
         if self.deck is None:
             return None
@@ -938,7 +945,7 @@ class Mat244(KeywordBase):
         self.lcth1 = value.lcid
 
     @property
-    def lcth5_link(self) -> DefineCurve:
+    def lcth5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcth5."""
         if self.deck is None:
             return None
@@ -953,7 +960,7 @@ class Mat244(KeywordBase):
         self.lcth5 = value.lcid
 
     @property
-    def lcy1_link(self) -> KeywordBase:
+    def lcy1_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcy1."""
         if self.deck is None:
             return None

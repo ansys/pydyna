@@ -60,8 +60,8 @@ class MatThermalCwm(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "THERMAL_CWM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "tgrlc": LinkType.DEFINE_CURVE,
@@ -77,11 +77,13 @@ class MatThermalCwm(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATTHERMALCWM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTHERMALCWM_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatThermalCwm.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatThermalCwm._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATTHERMALCWM_OPTION0_CARD0,
@@ -286,7 +288,7 @@ class MatThermalCwm(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def tgrlc_link(self) -> DefineCurve:
+    def tgrlc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tgrlc."""
         if self.deck is None:
             return None
@@ -301,7 +303,7 @@ class MatThermalCwm(KeywordBase):
         self.tgrlc = value.lcid
 
     @property
-    def lchc_link(self) -> DefineCurve:
+    def lchc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lchc."""
         if self.deck is None:
             return None
@@ -316,7 +318,7 @@ class MatThermalCwm(KeywordBase):
         self.lchc = value.lcid
 
     @property
-    def lctc_link(self) -> DefineCurve:
+    def lctc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctc."""
         if self.deck is None:
             return None

@@ -42,4 +42,5 @@ class ChangeVelocityZero(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHANGEVELOCITYZERO_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

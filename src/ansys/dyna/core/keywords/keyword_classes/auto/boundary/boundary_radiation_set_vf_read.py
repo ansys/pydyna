@@ -59,10 +59,12 @@ class BoundaryRadiationSetVfRead(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYRADIATIONSETVFREAD_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYRADIATIONSETVFREAD_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see also *SET_SEGMENT.
@@ -164,7 +166,7 @@ class BoundaryRadiationSetVfRead(KeywordBase):
         self._cards[1].set_value("semult", value)
 
     @property
-    def selcid_link(self) -> DefineCurve:
+    def selcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for selcid."""
         if self.deck is None:
             return None
@@ -179,7 +181,7 @@ class BoundaryRadiationSetVfRead(KeywordBase):
         self.selcid = value.lcid
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

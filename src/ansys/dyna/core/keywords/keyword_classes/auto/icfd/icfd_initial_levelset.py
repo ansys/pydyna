@@ -50,7 +50,8 @@ class IcfdInitialLevelset(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDINITIALLEVELSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def stype(self) -> int:
         """Get or set the Initial surface type :

@@ -55,10 +55,12 @@ class ControlSegmentsInAleCoupling(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLSEGMENTSINALECOUPLING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLSEGMENTSINALECOUPLING_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def rankey(self) -> int:
         """Get or set the Rank of *CONSTRAINED_LAGRANGE_IN_SOLID in the input deck. (see Remark 2).
@@ -130,7 +132,7 @@ class ControlSegmentsInAleCoupling(KeywordBase):
         self._cards[1].set_value("conthk", value)
 
     @property
-    def segset_link(self) -> KeywordBase:
+    def segset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for segset."""
         return self._get_set_link("SEGMENT", self.segset)
 

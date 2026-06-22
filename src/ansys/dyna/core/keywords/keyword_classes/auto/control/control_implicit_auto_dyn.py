@@ -61,10 +61,12 @@ class ControlImplicitAutoDyn(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITAUTODYN_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITAUTODYN_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def iauto(self) -> int:
         """Get or set the Automatic time step control flag

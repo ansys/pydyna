@@ -72,8 +72,8 @@ class ContactForceTransducer(KeywordBase):
 
     keyword = "CONTACT"
     subkeyword = "FORCE_TRANSDUCER"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "saboxid": LinkType.DEFINE_BOX,
@@ -88,14 +88,17 @@ class ContactForceTransducer(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACTFORCETRANSDUCER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTFORCETRANSDUCER_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTFORCETRANSDUCER_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = ContactForceTransducer.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = ContactForceTransducer._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONTACTFORCETRANSDUCER_OPTION0_CARD0,
@@ -253,7 +256,7 @@ class ContactForceTransducer(KeywordBase):
             self.activate_option("HEADING")
 
     @property
-    def saboxid_link(self) -> DefineBox:
+    def saboxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for saboxid."""
         if self.deck is None:
             return None
@@ -268,7 +271,7 @@ class ContactForceTransducer(KeywordBase):
         self.saboxid = value.boxid
 
     @property
-    def sbboxid_link(self) -> DefineBox:
+    def sbboxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for sbboxid."""
         if self.deck is None:
             return None

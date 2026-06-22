@@ -43,7 +43,8 @@ class DatabaseSpringForward(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASESPRINGFORWARD_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def iflag(self) -> int:
         """Get or set the Output type:

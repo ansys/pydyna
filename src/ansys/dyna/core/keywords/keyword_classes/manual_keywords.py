@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -19,9 +19,15 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
 """Module for manual keyword overrides."""
 
 # Manual keyword overrides - wrapped in try/except to support subset generation
+try:
+    from .manual.comment import Comment  # noqa: F401
+except ImportError:
+    pass
+
 try:
     from .manual.define_function import DefineFunction  # noqa: F401
 except ImportError:
@@ -53,7 +59,7 @@ except ImportError:
     pass
 
 try:
-    from .parameter_expression_custom import (  # noqa: F401
+    from .manual.parameter_expression import (  # noqa: F401
         ParameterExpression,
         ParameterExpressionLocal,
         ParameterExpressionNoecho,

@@ -53,7 +53,8 @@ class IcfdBoundaryPrescribedTurbulence(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDBOUNDARYPRESCRIBEDTURBULENCE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the PID for a fluid surface.
@@ -132,7 +133,7 @@ class IcfdBoundaryPrescribedTurbulence(KeywordBase):
         self._cards[0].set_value("cs", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

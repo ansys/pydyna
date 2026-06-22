@@ -108,7 +108,7 @@ class OptionGroup:
     """
 
     name: str
-    card_order: int
+    card_order: str
     title_order: int
     cards: List[Dict[str, Any]]  # List of card dicts, will be typed later
     func: Optional[str] = None

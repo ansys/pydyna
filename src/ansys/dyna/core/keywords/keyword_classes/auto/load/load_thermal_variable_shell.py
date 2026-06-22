@@ -59,10 +59,12 @@ class LoadThermalVariableShell(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADTHERMALVARIABLESHELL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADTHERMALVARIABLESHELL_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the load ID.
@@ -141,12 +143,12 @@ class LoadThermalVariableShell(KeywordBase):
         self._cards[1].set_value("zco", value)
 
     @property
-    def eid_link(self) -> KeywordBase:
+    def eid_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 
     @property
-    def tcurve_link(self) -> DefineCurve:
+    def tcurve_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tcurve."""
         if self.deck is None:
             return None
@@ -161,7 +163,7 @@ class LoadThermalVariableShell(KeywordBase):
         self.tcurve = value.lcid
 
     @property
-    def tcurdr_link(self) -> DefineCurve:
+    def tcurdr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tcurdr."""
         if self.deck is None:
             return None

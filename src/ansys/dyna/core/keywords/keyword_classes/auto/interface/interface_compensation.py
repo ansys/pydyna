@@ -60,13 +60,16 @@ class InterfaceCompensation(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATION_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def stage(self) -> int:
         """Get or set the Stage of this simulation in overall process. Stamping and springback must be finished before compensation can be performed.
@@ -157,7 +160,7 @@ class InterfaceCompensation(KeywordBase):
         self._cards[2].set_value("outname", value)
 
     @property
-    def psidt_link(self) -> KeywordBase:
+    def psidt_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psidt."""
         return self._get_set_link("PART", self.psidt)
 
@@ -167,7 +170,7 @@ class InterfaceCompensation(KeywordBase):
         self.psidt = value.sid
 
     @property
-    def psidb_link(self) -> KeywordBase:
+    def psidb_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psidb."""
         return self._get_set_link("PART", self.psidb)
 

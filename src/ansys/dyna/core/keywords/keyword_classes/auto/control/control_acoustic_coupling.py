@@ -47,7 +47,8 @@ class ControlAcousticCoupling(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLACOUSTICCOUPLING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def maccpl(self) -> int:
         """Get or set the Coupling method:

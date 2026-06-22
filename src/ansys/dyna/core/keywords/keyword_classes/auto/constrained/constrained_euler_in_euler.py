@@ -50,7 +50,8 @@ class ConstrainedEulerInEuler(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDEULERINEULER_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def psid1(self) -> int:
         """Get or set the Part set ID of the 1st ALE or Eulerian set of mesh(es.
@@ -85,7 +86,7 @@ class ConstrainedEulerInEuler(KeywordBase):
         self._cards[0].set_value("pfac", value)
 
     @property
-    def psid1_link(self) -> KeywordBase:
+    def psid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid1."""
         return self._get_set_link("PART", self.psid1)
 
@@ -95,7 +96,7 @@ class ConstrainedEulerInEuler(KeywordBase):
         self.psid1 = value.sid
 
     @property
-    def psid2_link(self) -> KeywordBase:
+    def psid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid2."""
         return self._get_set_link("PART", self.psid2)
 

@@ -149,37 +149,48 @@ class AirbagParticleMpp(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPP_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPP_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPP_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPP_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPP_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPP_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPP_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPP_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPP_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPP_CARD9,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEMPP_CARD10,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sx(self) -> typing.Optional[float]:
         """Get or set the Scale factor for X direction use for MPP decomposition of particle domain.
@@ -945,22 +956,22 @@ class AirbagParticleMpp(KeywordBase):
         self._cards[10].set_value("ppop", value)
 
     @property
-    def nid1_link(self) -> KeywordBase:
+    def nid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid1."""
         return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
 
     @property
-    def nid2_link(self) -> KeywordBase:
+    def nid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid2."""
         return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
 
     @property
-    def nid3_link(self) -> KeywordBase:
+    def nid3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid3."""
         return self._get_link_by_attr("NODE", "nid", self.nid3, "parts")
 
     @property
-    def hconv_link(self) -> DefineCurve:
+    def hconv_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hconv."""
         if self.deck is None:
             return None
@@ -975,7 +986,7 @@ class AirbagParticleMpp(KeywordBase):
         self.hconv = value.lcid
 
     @property
-    def lctc23_link(self) -> DefineCurve:
+    def lctc23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctc23."""
         if self.deck is None:
             return None
@@ -990,7 +1001,7 @@ class AirbagParticleMpp(KeywordBase):
         self.lctc23 = value.lcid
 
     @property
-    def lcpc23_link(self) -> DefineCurve:
+    def lcpc23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpc23."""
         if self.deck is None:
             return None
@@ -1005,7 +1016,7 @@ class AirbagParticleMpp(KeywordBase):
         self.lcpc23 = value.lcid
 
     @property
-    def sidsv_link(self) -> KeywordBase:
+    def sidsv_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for sidsv."""
         return self._get_set_link("PART", self.sidsv)
 
@@ -1015,7 +1026,7 @@ class AirbagParticleMpp(KeywordBase):
         self.sidsv = value.sid
 
     @property
-    def psid1_link(self) -> KeywordBase:
+    def psid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid1."""
         return self._get_set_link("PART", self.psid1)
 

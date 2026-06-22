@@ -53,10 +53,12 @@ class ChemistryControlHgiPart(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHEMISTRYCONTROLHGIPART_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYCONTROLHGIPART_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Identifier for this chemistry solver.
@@ -102,7 +104,7 @@ class ChemistryControlHgiPart(KeywordBase):
         self._cards[1].set_value("file", value)
 
     @property
-    def exit_bc_link(self) -> KeywordBase:
+    def exit_bc_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given exit_bc."""
         return self._get_link_by_attr("PART", "pid", self.exit_bc, "parts")
 

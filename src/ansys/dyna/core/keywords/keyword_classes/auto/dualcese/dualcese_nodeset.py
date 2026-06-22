@@ -54,10 +54,12 @@ class DualceseNodeset(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESENODESET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DUALCESENODESET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Set ID of new node set.  All dual CESE node sets should have a unique set ID

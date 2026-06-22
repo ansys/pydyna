@@ -42,4 +42,5 @@ class CaseEnd(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CASEEND_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

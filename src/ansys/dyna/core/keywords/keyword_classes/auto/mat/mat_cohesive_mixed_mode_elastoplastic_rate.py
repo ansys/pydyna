@@ -75,8 +75,8 @@ class MatCohesiveMixedModeElastoplasticRate(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "COHESIVE_MIXED_MODE_ELASTOPLASTIC_RATE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcg1c": LinkType.DEFINE_CURVE,
@@ -91,17 +91,21 @@ class MatCohesiveMixedModeElastoplasticRate(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATCOHESIVEMIXEDMODEELASTOPLASTICRATE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCOHESIVEMIXEDMODEELASTOPLASTICRATE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCOHESIVEMIXEDMODEELASTOPLASTICRATE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCOHESIVEMIXEDMODEELASTOPLASTICRATE_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatCohesiveMixedModeElastoplasticRate.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatCohesiveMixedModeElastoplasticRate._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCOHESIVEMIXEDMODEELASTOPLASTICRATE_OPTION0_CARD0,
@@ -420,7 +424,7 @@ class MatCohesiveMixedModeElastoplasticRate(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcg1c_link(self) -> DefineCurve:
+    def lcg1c_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcg1c."""
         if self.deck is None:
             return None
@@ -435,7 +439,7 @@ class MatCohesiveMixedModeElastoplasticRate(KeywordBase):
         self.lcg1c = value.lcid
 
     @property
-    def lcg2c_link(self) -> DefineCurve:
+    def lcg2c_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcg2c."""
         if self.deck is None:
             return None

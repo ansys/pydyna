@@ -61,10 +61,12 @@ class LoadThermalVariableBeamSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADTHERMALVARIABLEBEAMSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADTHERMALVARIABLEBEAMSET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Load case ID.
@@ -165,7 +167,7 @@ class LoadThermalVariableBeamSet(KeywordBase):
         self._cards[1].set_value("tcoor", value)
 
     @property
-    def tcurve_link(self) -> DefineCurve:
+    def tcurve_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tcurve."""
         if self.deck is None:
             return None
@@ -180,7 +182,7 @@ class LoadThermalVariableBeamSet(KeywordBase):
         self.tcurve = value.lcid
 
     @property
-    def tcurdr_link(self) -> DefineCurve:
+    def tcurdr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tcurdr."""
         if self.deck is None:
             return None
@@ -195,7 +197,7 @@ class LoadThermalVariableBeamSet(KeywordBase):
         self.tcurdr = value.lcid
 
     @property
-    def sid_link(self) -> KeywordBase:
+    def sid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_BEAM_* keyword for sid."""
         return self._get_set_link("BEAM", self.sid)
 

@@ -48,7 +48,8 @@ class IcfdControlDemCoupling(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLDEMCOUPLING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ctype(self) -> int:
         """Get or set the Indicates the coupling direction to the solver.

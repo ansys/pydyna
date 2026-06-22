@@ -57,8 +57,8 @@ class SetNodeColumnCollect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "NODE_COLUMN_COLLECT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nid": LinkType.NODE,
@@ -72,11 +72,13 @@ class SetNodeColumnCollect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETNODECOLUMNCOLLECT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETNODECOLUMNCOLLECT_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SetNodeColumnCollect.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SetNodeColumnCollect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETNODECOLUMNCOLLECT_OPTION0_CARD0,
@@ -241,7 +243,7 @@ class SetNodeColumnCollect(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

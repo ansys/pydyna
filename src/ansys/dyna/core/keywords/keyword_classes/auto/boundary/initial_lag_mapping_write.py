@@ -47,7 +47,8 @@ class InitialLagMappingWrite(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALLAGMAPPINGWRITE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def setid(self) -> typing.Optional[int]:
         """Get or set the part set ID
@@ -60,7 +61,7 @@ class InitialLagMappingWrite(KeywordBase):
         self._cards[0].set_value("setid", value)
 
     @property
-    def setid_link(self) -> KeywordBase:
+    def setid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for setid."""
         return self._get_set_link("PART", self.setid)
 

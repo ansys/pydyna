@@ -60,13 +60,16 @@ class EfMaterial(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EFMATERIAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EFMATERIAL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EFMATERIAL_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nmat(self) -> typing.Optional[int]:
         """Get or set the Specifies the material ID, of the exchange factor material.

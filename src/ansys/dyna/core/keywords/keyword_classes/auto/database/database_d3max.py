@@ -49,7 +49,8 @@ class DatabaseD3Max(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASED3MAX_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dtcheck(self) -> typing.Optional[float]:
         """Get or set the Time step for checking and updating maximum values. For instance, if DTCHECK = 10-6, LS-DYNA will check and update the maximum values every 10-6 seconds (assuming for this example the time units are seconds). It will compare the current values (stress or strain) with the maximum values up to now. If the current values are larger, the maximum values will be replaced by the current values. Otherwise, the maximum values will remain unchanged

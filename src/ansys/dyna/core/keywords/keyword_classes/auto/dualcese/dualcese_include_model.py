@@ -43,7 +43,8 @@ class DualceseIncludeModel(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEINCLUDEMODEL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Filename of the keyword file containing more of the dual CESE model. This card is only allowed inside a file that is given in one instance of a *DUALCESE_MODEL keyword card

@@ -75,13 +75,16 @@ class ControlSph(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLSPH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLSPH_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLSPH_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ncbs(self) -> int:
         """Get or set the Number of time steps between particle sorting.
@@ -380,7 +383,7 @@ class ControlSph(KeywordBase):
         self._cards[2].set_value("ishift", value)
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None

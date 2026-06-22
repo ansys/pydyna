@@ -58,10 +58,12 @@ class ContactGuidedCableSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACTGUIDEDCABLESET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACTGUIDEDCABLESET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Contact interface ID. This must be a unique number.
@@ -151,7 +153,7 @@ class ContactGuidedCableSet(KeywordBase):
         self._cards[1].set_value("endtol", value)
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 
@@ -161,7 +163,7 @@ class ContactGuidedCableSet(KeywordBase):
         self.nsid = value.sid
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

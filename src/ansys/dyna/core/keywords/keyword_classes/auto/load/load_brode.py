@@ -62,10 +62,12 @@ class LoadBrode(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADBRODE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADBRODE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def yld(self) -> float:
         """Get or set the Yield (Kt, equivalent tons of TNT).
@@ -188,7 +190,7 @@ class LoadBrode(KeywordBase):
         self._cards[1].set_value("cfp", value)
 
     @property
-    def talc_link(self) -> DefineCurve:
+    def talc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for talc."""
         if self.deck is None:
             return None
@@ -203,7 +205,7 @@ class LoadBrode(KeywordBase):
         self.talc = value.lcid
 
     @property
-    def sflc_link(self) -> DefineCurve:
+    def sflc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for sflc."""
         if self.deck is None:
             return None

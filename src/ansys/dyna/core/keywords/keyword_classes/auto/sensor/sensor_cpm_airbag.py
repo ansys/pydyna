@@ -47,8 +47,8 @@ class SensorCpmAirbag(KeywordBase):
 
     keyword = "SENSOR"
     subkeyword = "CPM_AIRBAG"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "defps": LinkType.SET_PART,
@@ -63,8 +63,9 @@ class SensorCpmAirbag(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SENSORCPMAIRBAG_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SensorCpmAirbag.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SensorCpmAirbag._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SENSORCPMAIRBAG_OPTION0_CARD0,
@@ -169,7 +170,7 @@ class SensorCpmAirbag(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def defps_link(self) -> KeywordBase:
+    def defps_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for defps."""
         return self._get_set_link("PART", self.defps)
 
@@ -179,7 +180,7 @@ class SensorCpmAirbag(KeywordBase):
         self.defps = value.sid
 
     @property
-    def rbpid_link(self) -> KeywordBase:
+    def rbpid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given rbpid."""
         return self._get_link_by_attr("PART", "pid", self.rbpid, "parts")
 

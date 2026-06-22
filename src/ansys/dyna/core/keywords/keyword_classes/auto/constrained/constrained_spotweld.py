@@ -60,10 +60,12 @@ class ConstrainedSpotweld(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDSPOTWELD_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDSPOTWELD_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def wid(self) -> typing.Optional[int]:
         """Get or set the Optional weld ID
@@ -170,12 +172,12 @@ class ConstrainedSpotweld(KeywordBase):
         self._cards[1].set_value("ep", value)
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n2_link(self) -> KeywordBase:
+    def n2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
         return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 

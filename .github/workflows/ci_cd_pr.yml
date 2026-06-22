@@ -2,15 +2,9 @@ name: CI
 
 on:
   pull_request:
-  workflow_dispatch:
-    inputs:
-      PyDynaRunContainer:
-        description: 'Run container name'
-        required: false
-        default: ghcr.io/ansys/pydyna-run:latest
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
   push:
-    tags:
-      - "*"
     branches:
       - main
 
@@ -19,11 +13,11 @@ permissions:
   packages: read  # Needed for pulling container images from GHCR
 
 env:
-  MAIN_PYTHON_VERSION: '3.13'
+  MAIN_PYTHON_VERSION: '3.14'
   PACKAGE_NAME: 'ansys-dyna-core'
   PACKAGE_NAMESPACE: 'ansys.dyna.core'
   DOCUMENTATION_CNAME: "dyna.docs.pyansys.com"
-  PYDYNA_RUN_CONTAINER: ${{ github.event.inputs.PyDynaRunContainer || 'ghcr.io/ansys/pydyna-run:latest'}}
+  PYDYNA_RUN_CONTAINER: 'ghcr.io/ansys/pydyna-run:dev'
   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 concurrency:
@@ -31,15 +25,44 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  actions-security:
-    name: Actions Security
+
+  labeler:
+    name: "Labels"
+    permissions:
+      contents: read # Read access to modified files in pull-request
+      pull-requests: write # Write access to add or remove new tags
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/check-actions-security@eb7d0fc873deeee6d4740774675ce1741cb6f154 # v10.2.2
+      - name: "Checkout repository"
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
-          generate-summary: true
-          token: ${{ secrets.GITHUB_TOKEN }}
-          auditing-level: 'high'
+          persist-credentials: false
+
+      - name: "Update labels"
+        uses: micnncim/action-label-syncer@3abd5ab72fda571e69fffd97bd4e0033dd5f495c # v1.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "Label pull-request"
+        uses: actions/labeler@f27b608878404679385c85cfa523b85ccb86e213 # v6.1.0
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+  changelog-fragment:
+    name: "Create changelog fragment"
+    needs: [labeler]
+    permissions:
+      contents: write  # Required to commit changelog fragment files
+      pull-requests: write  # Required to update pull request with changelog fragment
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+    - uses: ansys/actions/doc-changelog@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
+      with:
+        token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+        use-conventional-commits: true
+        bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+        bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
 
   pr-name:
     if: github.event_name == 'pull_request'
@@ -47,34 +70,47 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check commit name
-        uses: ansys/actions/check-pr-title@eb7d0fc873deeee6d4740774675ce1741cb6f154 # v9.0.15
+        uses: ansys/actions/check-pr-title@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-
-  code-style:
-    name: "Code style"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ansys/actions/code-style@eb7d0fc873deeee6d4740774675ce1741cb6f154 # v9.0.15
-        with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
   vulnerabilities:
     name: Vulnerabilities
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/check-vulnerabilities@eb7d0fc873deeee6d4740774675ce1741cb6f154 # v10.2.2
+      - uses: ansys/actions/check-vulnerabilities@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           python-package-name: ${{ env.PACKAGE_NAME }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           dev-mode: ${{ github.ref != 'refs/heads/main' }}
 
+  code-style:
+    name: "Code style"
+    runs-on: ubuntu-latest
+    needs: [vulnerabilities]
+    steps:
+      - uses: ansys/actions/code-style@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
+  actions-security:
+    name: Actions Security
+    runs-on: ubuntu-latest
+    needs: [vulnerabilities]
+    steps:
+      - uses: ansys/actions/check-actions-security@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
+        with:
+          generate-summary: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          auditing-level: 'high'
+
   codegen-testing:
     name: Build and Testing for codegen
     runs-on: ubuntu-latest
+    needs: [vulnerabilities]
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
 
@@ -87,7 +123,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys documentation style checks
-        uses: ansys/actions/doc-style@eb7d0fc873deeee6d4740774675ce1741cb6f154 # v9.0.15
+        uses: ansys/actions/doc-style@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -95,65 +131,35 @@ jobs:
     name: "Documentation build"
     runs-on: ubuntu-latest
     needs: [doc-style]
+    if: |
+      !contains(github.event.pull_request.labels.*.name, 'docs:skip')
     steps:
       - name: "Checkout project"
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: true
 
       - name: "Build documentation"
         uses: ./.github/actions/doc-build
         with:
-          PyDynaRunContainer: ${{ env.PYDYNA_RUN_CONTAINER }}
+          pydyna-run-container: ${{ env.PYDYNA_RUN_CONTAINER }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           license-server: ${{ secrets.LICENSE_SERVER }}
           bot-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           github-actor: ${{ github.actor }}
+          use_cache_examples: ${{ github.ref != 'refs/heads/main' }} # Use cache for PRs but not for main branch to avoid cache issues
+          build-examples: ${{ !contains(github.event.pull_request.labels.*.name, 'docs:example:skip') }}
+          build-api: ${{ !contains(github.event.pull_request.labels.*.name, 'docs:api:skip') }}
+          skip-pdf-build: ${{ contains(github.event.pull_request.labels.*.name, 'docs:pdf:skip') }}
 
-  smoke-tests:
-    name: "Build wheelhouse for ${{ matrix.os }} and Python ${{ matrix.python-version }}"
-    runs-on: ${{ matrix.os }}
-    needs: [code-style]
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [windows-latest, ubuntu-latest]
-        python-version: ['3.10', '3.13']  # Min and max versions only for PR/push; full matrix runs nightly
-    steps:
-      - uses: ansys/actions/build-wheelhouse@eb7d0fc873deeee6d4740774675ce1741cb6f154 # v9.0.15
-        with:
-          library-name: ${{ env.PACKAGE_NAME }}
-          operating-system: ${{ matrix.os }}
-          python-version: ${{ matrix.python-version }}
-
-
-  keyword-testing:
-    name: "Keyword testing for matrix"
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        python-version: ['3.10', '3.13']  # Min and max versions only for PR/push; full matrix runs nightly
-    steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-        with:
-          persist-credentials: false
-
-      - name: Run test with "keywords" marker
-        uses: ./.github/actions/unit-test
-        with:
-          python-version: ${{ matrix.python-version }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          pytest-markers: keywords
-          coverage-file: keywords
-
-  run-testing:
+  run-tests:
     name: Test the "run" subpackage
     runs-on: ubuntu-latest
+    if: |
+      !contains(github.event.pull_request.labels.*.name, 'test:run:skip')
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
 
@@ -161,35 +167,41 @@ jobs:
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          docker-image: ${{ env.PYDYNA_RUN_CONTAINER }}
+          pydyna-run-container: ${{ env.PYDYNA_RUN_CONTAINER }}
           pytest-markers: run
           license-server: ${{ secrets.LICENSE_SERVER }}
           coverage-file: run
 
+
   unit-tests:
-    name: "Testing"
-    runs-on: ubuntu-latest
-    needs: [smoke-tests, codegen-testing]
+    name: "Unit testing for matrix"
+    runs-on: ${{ matrix.os }}
+    if: |
+      !contains(github.event.pull_request.labels.*.name, 'tests:skip')
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.10', '3.14']  # Min and max versions only for PR/push; full matrix runs nightly
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
-      - name: Run test without marker
+
+      - name: Run tests
         uses: ./.github/actions/unit-test
         with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          python-version: ${{ matrix.python-version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          server-logs: true
-          codecov-token: ${{ env.CODECOV_TOKEN }}
           coverage-file: unittests
-          pytest-markers: "not codegen and not keywords and not run"
+          pytest-markers: "not codegen and not run"
 
   build-library:
     name: "Build library"
-    needs: [doc, unit-tests]
+    needs: [doc, run-tests, unit-tests]
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/build-library@eb7d0fc873deeee6d4740774675ce1741cb6f154 # v9.0.15
+      - uses: ansys/actions/build-library@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}

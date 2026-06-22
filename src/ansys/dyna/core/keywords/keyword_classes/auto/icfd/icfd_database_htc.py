@@ -50,7 +50,8 @@ class IcfdDatabaseHtc(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDATABASEHTC_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def out(self) -> int:
         """Get or set the Determines if the solver should calculate the heat transfer coefficient and how to output it:

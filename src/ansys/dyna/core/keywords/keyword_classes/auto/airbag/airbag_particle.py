@@ -22,8 +22,12 @@
 
 """Module providing the AirbagParticle class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.table_card import TableCard
+from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
@@ -88,35 +92,7 @@ _AIRBAGPARTICLE_CARD5 = (
     FieldSchema("cd_ext", float, 70, 10, 0.0),
 )
 
-_AIRBAGPARTICLE_CARD6 = (
-    FieldSchema("sidup", int, 0, 10, None),
-    FieldSchema("styup", int, 10, 10, 0),
-    FieldSchema("pfrac", float, 20, 10, 0.0),
-    FieldSchema("linking", int, 30, 10, None),
-)
-
-_AIRBAGPARTICLE_CARD7 = (
-    FieldSchema("sidh", int, 0, 10, None),
-    FieldSchema("stypeh", int, 10, 10, 0),
-    FieldSchema("hconv", float, 20, 10, None),
-    FieldSchema("pfric", float, 30, 10, 0.0),
-    FieldSchema("sdfblk", float, 40, 10, 1.0),
-    FieldSchema("kp", float, 50, 10, 0.0),
-    FieldSchema("inip", int, 60, 10, 0),
-    FieldSchema("cp", float, 70, 10, None),
-)
-
 _AIRBAGPARTICLE_CARD8 = (
-    FieldSchema("sid3", int, 0, 10, None),
-    FieldSchema("stype3", int, 10, 10, 0),
-    FieldSchema("c23", float, 20, 10, 1.0),
-    FieldSchema("lctc23", int, 30, 10, None),
-    FieldSchema("lcpc23", int, 40, 10, None),
-    FieldSchema("enh_v", int, 50, 10, 0),
-    FieldSchema("ppop", float, 60, 10, 0.0),
-)
-
-_AIRBAGPARTICLE_CARD9 = (
     FieldSchema("pair", float, 0, 10, None),
     FieldSchema("tair", float, 10, 10, 0.0),
     FieldSchema("xmair", float, 20, 10, None),
@@ -125,27 +101,6 @@ _AIRBAGPARTICLE_CARD9 = (
     FieldSchema("cair", float, 50, 10, 0.0),
     FieldSchema("npair", int, 60, 10, 0),
     FieldSchema("nprlx", str, 70, 10, "0"),
-)
-
-_AIRBAGPARTICLE_CARD10 = (
-    FieldSchema("lcmi", int, 0, 10, None),
-    FieldSchema("lcti", int, 10, 10, None),
-    FieldSchema("xmi", float, 20, 10, None),
-    FieldSchema("ai", float, 30, 10, None),
-    FieldSchema("bi", float, 40, 10, 0.0),
-    FieldSchema("ci", float, 50, 10, 0.0),
-    FieldSchema("infgi", int, 60, 10, 1),
-)
-
-_AIRBAGPARTICLE_CARD11 = (
-    FieldSchema("nidi", int, 0, 10, None),
-    FieldSchema("ani", float, 10, 10, None),
-    FieldSchema("vdi", int, 20, 10, None),
-    FieldSchema("cai", float, 30, 10, 30.0),
-    FieldSchema("infoi", int, 40, 10, 1),
-    FieldSchema("imom", int, 50, 10, 0),
-    FieldSchema("iang", int, 60, 10, 0),
-    FieldSchema("chm_id", int, 70, 10, None),
 )
 
 class AirbagParticle(KeywordBase):
@@ -175,40 +130,102 @@ class AirbagParticle(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLE_CARD2,
+                active_func=lambda: self._cards[2].has_nondefault_values(),
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLE_CARD3,
+                active_func=lambda: self._cards[3].has_nondefault_values(),
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLE_CARD4,
+                active_func=lambda: self.unit == 3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLE_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
-                _AIRBAGPARTICLE_CARD6,
+            ),
+            TableCardGroup(
+                [
+                    (
+                        FieldSchema("sidup", int, 0, 10, None),
+                        FieldSchema("styup", int, 10, 10, 0),
+                        FieldSchema("pfrac", float, 20, 10, 0.0),
+                        FieldSchema("linking", int, 30, 10, None),
+                    ),
+                    (
+                        FieldSchema("sidh", int, 0, 10, None),
+                        FieldSchema("stypeh", int, 10, 10, 0),
+                        FieldSchema("hconv", float, 20, 10, None),
+                        FieldSchema("pfric", float, 30, 10, 0.0),
+                        FieldSchema("sdfblk", float, 40, 10, 1.0),
+                        FieldSchema("kp", float, 50, 10, 0.0),
+                        FieldSchema("inip", int, 60, 10, 0),
+                        FieldSchema("cp", float, 70, 10, None),
+                    ),
+                ],
+                lambda: self.npdata or 0,
+                None,
+                "parts_data",
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
-                _AIRBAGPARTICLE_CARD7,
+            ),
+            TableCard(
+                [
+                    Field("sid3", int, 0, 10, None),
+                    Field("stype3", int, 10, 10, 0),
+                    Field("c23", float, 20, 10, 1.0),
+                    Field("lctc23", int, 30, 10, None),
+                    Field("lcpc23", int, 40, 10, None),
+                    Field("enh_v", int, 50, 10, 0),
+                    Field("ppop", float, 60, 10, 0.0),
+                ],
+                lambda: self.nvent or 0,
+                name="vents",
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLE_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
-                _AIRBAGPARTICLE_CARD9,
+            ),
+            TableCard(
+                [
+                    Field("lcmi", int, 0, 10, None),
+                    Field("lcti", int, 10, 10, None),
+                    Field("xmi", float, 20, 10, None),
+                    Field("ai", float, 30, 10, None),
+                    Field("bi", float, 40, 10, 0.0),
+                    Field("ci", float, 50, 10, 0.0),
+                    Field("infgi", int, 60, 10, 1),
+                ],
+                lambda: self.ngas or 0,
+                name="gas_components",
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
-                _AIRBAGPARTICLE_CARD10,
+            ),
+            TableCard(
+                [
+                    Field("nidi", int, 0, 10, None),
+                    Field("ani", float, 10, 10, None),
+                    Field("vdi", int, 20, 10, None),
+                    Field("cai", float, 30, 10, 30.0),
+                    Field("infoi", int, 40, 10, 1),
+                    Field("imom", int, 50, 10, 0),
+                    Field("iang", int, 60, 10, 0),
+                    Field("chm_id", int, 70, 10, None),
+                ],
+                lambda: self.norif or 0,
+                name="orifices",
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
-                _AIRBAGPARTICLE_CARD11,
-                **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid1(self) -> typing.Optional[int]:
         """Get or set the Part or part set ID defining the complete airbag.
@@ -677,268 +694,46 @@ class AirbagParticle(KeywordBase):
         self._cards[5].set_value("cd_ext", value)
 
     @property
-    def sidup(self) -> typing.Optional[int]:
-        """Get or set the Part or part set ID defining the internal parts that pressure will be applied to.
-        This internal structure acts as a valve to control the external vent hole area.
-        Pressure will be applied only after switch to UP (uniform pressure) using TSW.
-        """ # nopep8
-        return self._cards[6].get_value("sidup")
+    def parts_data(self) -> pd.DataFrame:
+        """Gets the full table of parts_data."""
+        return self._cards[6].table
 
-    @sidup.setter
-    def sidup(self, value: int) -> None:
-        """Set the sidup property."""
-        self._cards[6].set_value("sidup", value)
+    @parts_data.setter
+    def parts_data(self, df: pd.DataFrame):
+        """sets parts_data from the dataframe df."""
+        self._cards[6].table = df
 
     @property
-    def styup(self) -> int:
-        """Get or set the Set defining internal parts will be applied pressure
-        Set type EQ.0: Part
-        EQ.1: Part set.
-        """ # nopep8
-        return self._cards[6].get_value("styup")
+    def vents(self) -> pd.DataFrame:
+        """Get the table of vents."""
+        return self._cards[7].table
 
-    @styup.setter
-    def styup(self, value: int) -> None:
-        """Set the styup property."""
-        if value not in [0, 1, None]:
-            raise Exception("""styup must be `None` or one of {0,1}.""")
-        self._cards[6].set_value("styup", value)
-
-    @property
-    def pfrac(self) -> float:
-        """Get or set the Part or part set ID defining the internal parts that pressure will be applied to.
-        This internal structure acts as a valve to control the external vent hole area.
-        Pressure will be applied only after switch to UP (uniform pressure) using TSW.
-        """ # nopep8
-        return self._cards[6].get_value("pfrac")
-
-    @pfrac.setter
-    def pfrac(self, value: float) -> None:
-        """Set the pfrac property."""
-        self._cards[6].set_value("pfrac", value)
-
-    @property
-    def linking(self) -> typing.Optional[int]:
-        """Get or set the Part ID of an internal part that is coupled to the external vent definition.
-        The minimum area of this part or the vent hole will be used for actual venting area.
-        """ # nopep8
-        return self._cards[6].get_value("linking")
-
-    @linking.setter
-    def linking(self, value: int) -> None:
-        """Set the linking property."""
-        self._cards[6].set_value("linking", value)
-
-    @property
-    def sidh(self) -> typing.Optional[int]:
-        """Get or set the Part or part set ID defining part data.
-        """ # nopep8
-        return self._cards[7].get_value("sidh")
-
-    @sidh.setter
-    def sidh(self, value: int) -> None:
-        """Set the sidh property."""
-        self._cards[7].set_value("sidh", value)
-
-    @property
-    def stypeh(self) -> int:
-        """Get or set the Set type EQ.0: Part
-        EQ.1: Part set.
-        EQ.2: part and HCONV is the *DEFINE_CPM_NPDATA ID
-        EQ.3: part set and HCONV is the * DEFINE_CPM_NPDATA ID
-        """ # nopep8
-        return self._cards[7].get_value("stypeh")
-
-    @stypeh.setter
-    def stypeh(self, value: int) -> None:
-        """Set the stypeh property."""
-        if value not in [0, 1, 2, 3, None]:
-            raise Exception("""stypeh must be `None` or one of {0,1,2,3}.""")
-        self._cards[7].set_value("stypeh", value)
-
-    @property
-    def hconv(self) -> typing.Optional[float]:
-        """Get or set the Heat convection coefficient used to calculate heat loss from the airbag external surface to ambient (W/K/m2).
-        See *AIRBAG_HYBRID developments (Resp. P.O. Marklund).
-        LT.0:	|HCONV | is a load curve ID defines heat convection coefficient as a function of time.
-        When STYPEH is greater than 1, HCONV is an integer of *DEFINE_CPM_NPDATA ID.
-        """ # nopep8
-        return self._cards[7].get_value("hconv")
-
-    @hconv.setter
-    def hconv(self, value: float) -> None:
-        """Set the hconv property."""
-        self._cards[7].set_value("hconv", value)
-
-    @property
-    def pfric(self) -> float:
-        """Get or set the Friction factor.
-        """ # nopep8
-        return self._cards[7].get_value("pfric")
-
-    @pfric.setter
-    def pfric(self, value: float) -> None:
-        """Set the pfric property."""
-        self._cards[7].set_value("pfric", value)
-
-    @property
-    def sdfblk(self) -> float:
-        """Get or set the Scale down factor for blockage factor (Default=1, no scale down). The val-id factor will be (0,1]. If 0, it will set to 1.
-        """ # nopep8
-        return self._cards[7].get_value("sdfblk")
-
-    @sdfblk.setter
-    def sdfblk(self, value: float) -> None:
-        """Set the sdfblk property."""
-        self._cards[7].set_value("sdfblk", value)
-
-    @property
-    def kp(self) -> float:
-        """Get or set the Thermal conductivity of the part.
-        """ # nopep8
-        return self._cards[7].get_value("kp")
-
-    @kp.setter
-    def kp(self, value: float) -> None:
-        """Set the kp property."""
-        self._cards[7].set_value("kp", value)
-
-    @property
-    def inip(self) -> int:
-        """Get or set the Place initial air particles on surface.
-        EQ.0:	yes (default)
-        EQ.1:	no
-        This feature exclude surfaces from initial particle placement.  This option is useful for preventing particles from being trapped between adjacent fabric layers..
-        """ # nopep8
-        return self._cards[7].get_value("inip")
-
-    @inip.setter
-    def inip(self, value: int) -> None:
-        """Set the inip property."""
-        if value not in [0, 1, None]:
-            raise Exception("""inip must be `None` or one of {0,1}.""")
-        self._cards[7].set_value("inip", value)
-
-    @property
-    def cp(self) -> typing.Optional[float]:
-        """Get or set the Specific heat (see Remark 16).
-        """ # nopep8
-        return self._cards[7].get_value("cp")
-
-    @cp.setter
-    def cp(self, value: float) -> None:
-        """Set the cp property."""
-        self._cards[7].set_value("cp", value)
-
-    @property
-    def sid3(self) -> typing.Optional[int]:
-        """Get or set the Part or part set ID defining vent holes.
-        """ # nopep8
-        return self._cards[8].get_value("sid3")
-
-    @sid3.setter
-    def sid3(self, value: int) -> None:
-        """Set the sid3 property."""
-        self._cards[8].set_value("sid3", value)
-
-    @property
-    def stype3(self) -> int:
-        """Get or set the Set type:
-        EQ.0: Part
-        EQ.1: Part set which each part being treated separately.
-        EQ.2:	Part set and all parts are treated as one vent.  See Remark 13
-        """ # nopep8
-        return self._cards[8].get_value("stype3")
-
-    @stype3.setter
-    def stype3(self, value: int) -> None:
-        """Set the stype3 property."""
-        if value not in [0, 1, 2, None]:
-            raise Exception("""stype3 must be `None` or one of {0,1,2}.""")
-        self._cards[8].set_value("stype3", value)
-
-    @property
-    def c23(self) -> float:
-        """Get or set the GE.0:	Vent hole coefficient, a parameter of Wang-Nefske leakage.  A value between 0.0 and 1.0 can be input.  See Remark 1.
-        LT.0:	ID for *DEFINE_CPM_VENT.
-        """ # nopep8
-        return self._cards[8].get_value("c23")
-
-    @c23.setter
-    def c23(self, value: float) -> None:
-        """Set the c23 property."""
-        self._cards[8].set_value("c23", value)
-
-    @property
-    def lctc23(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining vent hole coefficient as a function of time.  LCTC23 can be defined through *DEFINE_CURVE_FUNCTION.  If omitted, a curve equal to 1.0 used.
-        """ # nopep8
-        return self._cards[8].get_value("lctc23")
-
-    @lctc23.setter
-    def lctc23(self, value: int) -> None:
-        """Set the lctc23 property."""
-        self._cards[8].set_value("lctc23", value)
-
-    @property
-    def lcpc23(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining vent hole coefficient as a function of pressure.  If omitted a curve equal to 1.0 is used..
-        """ # nopep8
-        return self._cards[8].get_value("lcpc23")
-
-    @lcpc23.setter
-    def lcpc23(self, value: int) -> None:
-        """Set the lcpc23 property."""
-        self._cards[8].set_value("lcpc23", value)
-
-    @property
-    def enh_v(self) -> int:
-        """Get or set the Enhanced venting option. See Remark 8.
-        EQ.0:	Off (default)
-        EQ.1:	On
-        EQ.2:	Two way flow for internal vent; treated as hole for external vent .
-        """ # nopep8
-        return self._cards[8].get_value("enh_v")
-
-    @enh_v.setter
-    def enh_v(self, value: int) -> None:
-        """Set the enh_v property."""
-        if value not in [0, 1, 2, None]:
-            raise Exception("""enh_v must be `None` or one of {0,1,2}.""")
-        self._cards[8].set_value("enh_v", value)
-
-    @property
-    def ppop(self) -> float:
-        """Get or set the Pressure difference between interior and ambient pressure (PATM) to open the vent holes.  Once the vents are open, they will stay open.
-        """ # nopep8
-        return self._cards[8].get_value("ppop")
-
-    @ppop.setter
-    def ppop(self, value: float) -> None:
-        """Set the ppop property."""
-        self._cards[8].set_value("ppop", value)
+    @vents.setter
+    def vents(self, df: pd.DataFrame):
+        """Set vents from the dataframe df"""
+        self._cards[7].table = df
 
     @property
     def pair(self) -> typing.Optional[float]:
         """Get or set the Initial pressure inside bag .
         """ # nopep8
-        return self._cards[9].get_value("pair")
+        return self._cards[8].get_value("pair")
 
     @pair.setter
     def pair(self, value: float) -> None:
         """Set the pair property."""
-        self._cards[9].set_value("pair", value)
+        self._cards[8].set_value("pair", value)
 
     @property
     def tair(self) -> float:
         """Get or set the Initial temperature inside bag .
         """ # nopep8
-        return self._cards[9].get_value("tair")
+        return self._cards[8].get_value("tair")
 
     @tair.setter
     def tair(self, value: float) -> None:
         """Set the tair property."""
-        self._cards[9].set_value("tair", value)
+        self._cards[8].set_value("tair", value)
 
     @property
     def xmair(self) -> typing.Optional[float]:
@@ -946,56 +741,56 @@ class AirbagParticle(KeywordBase):
         LT.0:	-XMAIR references the ID of a *DEFINE_CPM_GAS_PROPERTIES keyword that defines the gas thermodynamic properties.
         Note that AAIR, BAIR, and CAIR are ignored
         """ # nopep8
-        return self._cards[9].get_value("xmair")
+        return self._cards[8].get_value("xmair")
 
     @xmair.setter
     def xmair(self, value: float) -> None:
         """Set the xmair property."""
-        self._cards[9].set_value("xmair", value)
+        self._cards[8].set_value("xmair", value)
 
     @property
     def aair(self) -> typing.Optional[float]:
         """Get or set the Constant, linear, and quadratic heat capacity parameters.
         """ # nopep8
-        return self._cards[9].get_value("aair")
+        return self._cards[8].get_value("aair")
 
     @aair.setter
     def aair(self, value: float) -> None:
         """Set the aair property."""
-        self._cards[9].set_value("aair", value)
+        self._cards[8].set_value("aair", value)
 
     @property
     def bair(self) -> float:
         """Get or set the Constant, linear, and quadratic heat capacity parameters.
         """ # nopep8
-        return self._cards[9].get_value("bair")
+        return self._cards[8].get_value("bair")
 
     @bair.setter
     def bair(self, value: float) -> None:
         """Set the bair property."""
-        self._cards[9].set_value("bair", value)
+        self._cards[8].set_value("bair", value)
 
     @property
     def cair(self) -> float:
         """Get or set the Constant, linear, and quadratic heat capacity parameters.
         """ # nopep8
-        return self._cards[9].get_value("cair")
+        return self._cards[8].get_value("cair")
 
     @cair.setter
     def cair(self, value: float) -> None:
         """Set the cair property."""
-        self._cards[9].set_value("cair", value)
+        self._cards[8].set_value("cair", value)
 
     @property
     def npair(self) -> int:
         """Get or set the Number of particle for air.
         """ # nopep8
-        return self._cards[9].get_value("npair")
+        return self._cards[8].get_value("npair")
 
     @npair.setter
     def npair(self, value: int) -> None:
         """Set the npair property."""
-        self._cards[9].set_value("npair", value)
+        self._cards[8].set_value("npair", value)
 
     @property
     def nprlx(self) -> str:
@@ -1003,214 +798,59 @@ class AirbagParticle(KeywordBase):
         LT.0:	If more than 50% of the collision to fabric is from initial air particles, the contact force will not apply to the fabric segment in order to keep its original shape.
         If the number contains “.”, “e” or “E”, NPRLX will treated as an end time rather than as a cycle count.
         """ # nopep8
-        return self._cards[9].get_value("nprlx")
+        return self._cards[8].get_value("nprlx")
 
     @nprlx.setter
     def nprlx(self, value: str) -> None:
         """Set the nprlx property."""
-        self._cards[9].set_value("nprlx", value)
+        self._cards[8].set_value("nprlx", value)
 
     @property
-    def lcmi(self) -> typing.Optional[int]:
-        """Get or set the Mass flow rate curve for gas component i, unless the MOLEFRACTION option is used.
-        If the MOLEFRACTION option is used, then it is the time dependent molar fraction of the total flow for gas component i.
-        """ # nopep8
-        return self._cards[10].get_value("lcmi")
+    def gas_components(self) -> pd.DataFrame:
+        """Get the table of gas_components."""
+        return self._cards[9].table
 
-    @lcmi.setter
-    def lcmi(self, value: int) -> None:
-        """Set the lcmi property."""
-        self._cards[10].set_value("lcmi", value)
+    @gas_components.setter
+    def gas_components(self, df: pd.DataFrame):
+        """Set gas_components from the dataframe df"""
+        self._cards[9].table = df
 
     @property
-    def lcti(self) -> typing.Optional[int]:
-        """Get or set the Temperature curve for gas component i.
-        """ # nopep8
-        return self._cards[10].get_value("lcti")
+    def orifices(self) -> pd.DataFrame:
+        """Get the table of orifices."""
+        return self._cards[10].table
 
-    @lcti.setter
-    def lcti(self, value: int) -> None:
-        """Set the lcti property."""
-        self._cards[10].set_value("lcti", value)
-
-    @property
-    def xmi(self) -> typing.Optional[float]:
-        """Get or set the Molar mass of gas component i.
-        LT.0:	the absolute value of XMi references the ID of a *DEFINE_‌CPM_‌GAS_‌PROPERTIES keyword that defines the gas thermodynamic properties.
-        Note that Ai, Bi, and Ci are ignored
-        """ # nopep8
-        return self._cards[10].get_value("xmi")
-
-    @xmi.setter
-    def xmi(self, value: float) -> None:
-        """Set the xmi property."""
-        self._cards[10].set_value("xmi", value)
+    @orifices.setter
+    def orifices(self, df: pd.DataFrame):
+        """Set orifices from the dataframe df"""
+        self._cards[10].table = df
 
     @property
-    def ai(self) -> typing.Optional[float]:
-        """Get or set the Constant, linear, and quadratic heat capacity parameters for gas component i.
-        """ # nopep8
-        return self._cards[10].get_value("ai")
-
-    @ai.setter
-    def ai(self, value: float) -> None:
-        """Set the ai property."""
-        self._cards[10].set_value("ai", value)
-
-    @property
-    def bi(self) -> float:
-        """Get or set the Constant, linear, and quadratic heat capacity parameters for gas component i.
-        """ # nopep8
-        return self._cards[10].get_value("bi")
-
-    @bi.setter
-    def bi(self, value: float) -> None:
-        """Set the bi property."""
-        self._cards[10].set_value("bi", value)
-
-    @property
-    def ci(self) -> float:
-        """Get or set the Constant, linear, and quadratic heat capacity parameters for gas component i.
-        """ # nopep8
-        return self._cards[10].get_value("ci")
-
-    @ci.setter
-    def ci(self, value: float) -> None:
-        """Set the ci property."""
-        self._cards[10].set_value("ci", value)
-
-    @property
-    def infgi(self) -> int:
-        """Get or set the Inflator ID that this gas component belongs to (Default 1).
-        """ # nopep8
-        return self._cards[10].get_value("infgi")
-
-    @infgi.setter
-    def infgi(self, value: int) -> None:
-        """Set the infgi property."""
-        self._cards[10].set_value("infgi", value)
-
-    @property
-    def nidi(self) -> typing.Optional[int]:
-        """Get or set the Node ID/Shell ID defining the location of nozzle i.
-        """ # nopep8
-        return self._cards[11].get_value("nidi")
-
-    @nidi.setter
-    def nidi(self, value: int) -> None:
-        """Set the nidi property."""
-        self._cards[11].set_value("nidi", value)
-
-    @property
-    def ani(self) -> typing.Optional[float]:
-        """Get or set the Area of nozzle i (Default all nozzles are given the same area).
-        """ # nopep8
-        return self._cards[11].get_value("ani")
-
-    @ani.setter
-    def ani(self, value: float) -> None:
-        """Set the ani property."""
-        self._cards[11].set_value("ani", value)
-
-    @property
-    def vdi(self) -> typing.Optional[int]:
-        """Get or set the GT.0:	Vector ID.  Initial direction of gas inflow at nozzle i.
-        LT.0:	Values in the NIDi fields are interpreted as shell IDs.  See Remark 12.
-        EQ.-1:	direction of gas inflow is using shell normal
-        EQ.-2:	direction of gas inflow is in reversed shell normal.
-        """ # nopep8
-        return self._cards[11].get_value("vdi")
-
-    @vdi.setter
-    def vdi(self, value: int) -> None:
-        """Set the vdi property."""
-        self._cards[11].set_value("vdi", value)
-
-    @property
-    def cai(self) -> float:
-        """Get or set the Cone angle in degrees (defaults to30°). This option is used only when IANG is equal to 1.
-        """ # nopep8
-        return self._cards[11].get_value("cai")
-
-    @cai.setter
-    def cai(self, value: float) -> None:
-        """Set the cai property."""
-        self._cards[11].set_value("cai", value)
-
-    @property
-    def infoi(self) -> int:
-        """Get or set the Inflator ID for this orifice.  (default = 1).
-        """ # nopep8
-        return self._cards[11].get_value("infoi")
-
-    @infoi.setter
-    def infoi(self, value: int) -> None:
-        """Set the infoi property."""
-        self._cards[11].set_value("infoi", value)
-
-    @property
-    def imom(self) -> int:
-        """Get or set the Inflator reaction forces
-        EQ.0: Off
-        EQ.1: On
-        """ # nopep8
-        return self._cards[11].get_value("imom")
-
-    @imom.setter
-    def imom(self, value: int) -> None:
-        """Set the imom property."""
-        if value not in [0, 1, None]:
-            raise Exception("""imom must be `None` or one of {0,1}.""")
-        self._cards[11].set_value("imom", value)
-
-    @property
-    def iang(self) -> int:
-        """Get or set the Activation for cone angle to use for friction calibration(should not use in the normal runs)
-        EQ.0: Off(Default)
-        EQ.1: On.
-        """ # nopep8
-        return self._cards[11].get_value("iang")
-
-    @iang.setter
-    def iang(self, value: int) -> None:
-        """Set the iang property."""
-        if value not in [0, 1, None]:
-            raise Exception("""iang must be `None` or one of {0,1}.""")
-        self._cards[11].set_value("iang", value)
-
-    @property
-    def chm_id(self) -> typing.Optional[int]:
-        """Get or set the Chamber ID where the inflator node resides.  Chambers are defined using the *DEFINE_CPM_CHAMBER keyword.
-        """ # nopep8
-        return self._cards[11].get_value("chm_id")
-
-    @chm_id.setter
-    def chm_id(self, value: int) -> None:
-        """Set the chm_id property."""
-        self._cards[11].set_value("chm_id", value)
-
-    @property
-    def nid1_link(self) -> KeywordBase:
+    def nid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid1."""
         return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
 
     @property
-    def nid2_link(self) -> KeywordBase:
+    def nid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid2."""
         return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
 
     @property
-    def nid3_link(self) -> KeywordBase:
+    def nid3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid3."""
         return self._get_link_by_attr("NODE", "nid", self.nid3, "parts")
 
     @property
-    def nidi_link(self) -> KeywordBase:
+    def nidi_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for nidi, keyed by nidi value."""
+        return self._get_links_from_table("NODE", "nid", "orifices", "nidi", "")
+
+    def get_nidi_link(self, nidi: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nidi."""
-        return self._get_link_by_attr("NODE", "nid", self.nidi, "parts")
+        return self._get_link_by_attr("NODE", "nid", nidi, "")
 
     @property
-    def hconv_link(self) -> DefineCurve:
+    def hconv_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hconv."""
         if self.deck is None:
             return None
@@ -1225,7 +865,7 @@ class AirbagParticle(KeywordBase):
         self.hconv = value.lcid
 
     @property
-    def lctc23_link(self) -> DefineCurve:
+    def lctc23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctc23."""
         if self.deck is None:
             return None
@@ -1240,7 +880,7 @@ class AirbagParticle(KeywordBase):
         self.lctc23 = value.lcid
 
     @property
-    def lcpc23_link(self) -> DefineCurve:
+    def lcpc23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpc23."""
         if self.deck is None:
             return None
@@ -1255,7 +895,7 @@ class AirbagParticle(KeywordBase):
         self.lcpc23 = value.lcid
 
     @property
-    def lcmi_link(self) -> DefineCurve:
+    def lcmi_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcmi."""
         if self.deck is None:
             return None
@@ -1270,7 +910,7 @@ class AirbagParticle(KeywordBase):
         self.lcmi = value.lcid
 
     @property
-    def lcti_link(self) -> DefineCurve:
+    def lcti_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcti."""
         if self.deck is None:
             return None
@@ -1285,7 +925,7 @@ class AirbagParticle(KeywordBase):
         self.lcti = value.lcid
 
     @property
-    def vdi_link(self) -> DefineVector:
+    def vdi_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vdi."""
         if self.deck is None:
             return None
@@ -1300,7 +940,7 @@ class AirbagParticle(KeywordBase):
         self.vdi = value.vid
 
     @property
-    def sidsv_link(self) -> KeywordBase:
+    def sidsv_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for sidsv."""
         return self._get_set_link("PART", self.sidsv)
 
@@ -1310,7 +950,7 @@ class AirbagParticle(KeywordBase):
         self.sidsv = value.sid
 
     @property
-    def psid1_link(self) -> KeywordBase:
+    def psid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid1."""
         return self._get_set_link("PART", self.psid1)
 

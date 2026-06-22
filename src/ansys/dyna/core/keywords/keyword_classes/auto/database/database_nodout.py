@@ -53,7 +53,8 @@ class DatabaseNodout(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASENODOUT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dt(self) -> float:
         """Get or set the Time interval between outputs. If DT is zero, no output is printed, This field will be used for all selected ASCII_options that have no unique DT value specified
@@ -131,7 +132,7 @@ class DatabaseNodout(KeywordBase):
         self._cards[0].set_value("option2", value)
 
     @property
-    def lcur_link(self) -> DefineCurve:
+    def lcur_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcur."""
         if self.deck is None:
             return None

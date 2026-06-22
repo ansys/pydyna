@@ -43,7 +43,8 @@ class ControlMppContactGroupable(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPCONTACTGROUPABLE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def grp(self) -> int:
         """Get or set the The sum of these available options (in any combination that makes sense):

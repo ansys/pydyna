@@ -103,28 +103,36 @@ class IncludeStampedSetMatrixInverse(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDSETMATRIXINVERSE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDSETMATRIXINVERSE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDSETMATRIXINVERSE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDSETMATRIXINVERSE_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDSETMATRIXINVERSE_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDSETMATRIXINVERSE_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDSETMATRIXINVERSE_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDSETMATRIXINVERSE_CARD7,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name of file to be included in this keyword file.
@@ -540,7 +548,7 @@ class IncludeStampedSetMatrixInverse(KeywordBase):
         self._cards[7].set_value("z03", value)
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

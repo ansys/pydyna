@@ -72,13 +72,16 @@ class CeseBoundaryPrescribedPartSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYPRESCRIBEDPARTSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYPRESCRIBEDPARTSET_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYPRESCRIBEDPARTSET_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def surfsid(self) -> typing.Optional[int]:
         """Get or set the Identifier of a set of surface part IDs created with a *LSO_ID_SET card, where each surface part ID in the set is referenced in *MESH_SURFACE_ELEMENT cards.
@@ -234,7 +237,7 @@ class CeseBoundaryPrescribedPartSet(KeywordBase):
         self._cards[2].set_value("sf_t", value)
 
     @property
-    def lc_u_link(self) -> DefineCurve:
+    def lc_u_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_u."""
         if self.deck is None:
             return None
@@ -249,7 +252,7 @@ class CeseBoundaryPrescribedPartSet(KeywordBase):
         self.lc_u = value.lcid
 
     @property
-    def lc_v__link(self) -> DefineCurve:
+    def lc_v__link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_v_."""
         if self.deck is None:
             return None
@@ -264,7 +267,7 @@ class CeseBoundaryPrescribedPartSet(KeywordBase):
         self.lc_v_ = value.lcid
 
     @property
-    def lc_w_link(self) -> DefineCurve:
+    def lc_w_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_w."""
         if self.deck is None:
             return None
@@ -279,7 +282,7 @@ class CeseBoundaryPrescribedPartSet(KeywordBase):
         self.lc_w = value.lcid
 
     @property
-    def lc_rho_link(self) -> DefineCurve:
+    def lc_rho_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_rho."""
         if self.deck is None:
             return None
@@ -294,7 +297,7 @@ class CeseBoundaryPrescribedPartSet(KeywordBase):
         self.lc_rho = value.lcid
 
     @property
-    def lc_p__link(self) -> DefineCurve:
+    def lc_p__link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_p_."""
         if self.deck is None:
             return None
@@ -309,7 +312,7 @@ class CeseBoundaryPrescribedPartSet(KeywordBase):
         self.lc_p_ = value.lcid
 
     @property
-    def lc_t_link(self) -> DefineCurve:
+    def lc_t_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_t."""
         if self.deck is None:
             return None

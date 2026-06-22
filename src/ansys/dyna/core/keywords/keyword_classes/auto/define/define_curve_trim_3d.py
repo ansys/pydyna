@@ -59,8 +59,8 @@ class DefineCurveTrim3D(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CURVE_TRIM_3D"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "tdir": LinkType.DEFINE_VECTOR,
@@ -74,14 +74,17 @@ class DefineCurveTrim3D(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINECURVETRIM3D_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINECURVETRIM3D_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINECURVETRIM3D_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineCurveTrim3D.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineCurveTrim3D._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECURVETRIM3D_OPTION0_CARD0,
@@ -236,7 +239,7 @@ class DefineCurveTrim3D(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def tdir_link(self) -> DefineVector:
+    def tdir_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for tdir."""
         if self.deck is None:
             return None

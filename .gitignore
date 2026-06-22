@@ -13,6 +13,15 @@ __pycache__/
 # keyword manual
 manuals/
 
+# cursor
+.cursor/user
+
+# uv
+uv.lock
+
+# vscode extension (temporary)
+vscode-extension/
+
 # Distribution / packaging
 .Python
 build/
@@ -173,3 +182,6 @@ doc/source/examples/
 doc/source/API/_autosummary/
 doc/source/api
 doc/source/sg_execution_times.rst
+
+# Agent instructions (auto-generated)
+.agent/

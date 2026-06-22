@@ -47,7 +47,8 @@ class DatabasePapOutput(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEPAPOUTPUT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ivel(self) -> int:
         """Get or set the Meaning of "velocity" in d3plot and d3thdt output files

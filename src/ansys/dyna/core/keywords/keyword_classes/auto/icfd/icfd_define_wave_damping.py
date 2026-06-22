@@ -54,7 +54,8 @@ class IcfdDefineWaveDamping(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDEFINEWAVEDAMPING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Point ID defining the start of the damping layer.
@@ -133,7 +134,7 @@ class IcfdDefineWaveDamping(KeywordBase):
         self._cards[0].set_value("lcid", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

@@ -56,10 +56,12 @@ class LoadShellSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADSHELLSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSHELLSET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the loading ID
@@ -127,7 +129,7 @@ class LoadShellSet(KeywordBase):
         self._cards[1].set_value("at", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

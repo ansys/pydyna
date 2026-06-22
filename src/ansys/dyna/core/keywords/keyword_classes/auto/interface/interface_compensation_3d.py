@@ -58,10 +58,12 @@ class InterfaceCompensation3D(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATION3D_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATION3D_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def method(self) -> int:
         """Get or set the There are several extrapolation methods for the addendum and binder outside of trim lines, see Remarks.
@@ -193,7 +195,7 @@ class InterfaceCompensation3D(KeywordBase):
         self._cards[1].set_value("tangent", value)
 
     @property
-    def psidp_link(self) -> KeywordBase:
+    def psidp_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psidp."""
         return self._get_set_link("PART", self.psidp)
 

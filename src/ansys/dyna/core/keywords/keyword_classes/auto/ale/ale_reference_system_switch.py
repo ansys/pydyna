@@ -75,16 +75,20 @@ class AleReferenceSystemSwitch(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALEREFERENCESYSTEMSWITCH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEREFERENCESYSTEMSWITCH_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEREFERENCESYSTEMSWITCH_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEREFERENCESYSTEMSWITCH_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Switch list ID, see *ALE_REFERENCE_SYSTEM_GROUP.

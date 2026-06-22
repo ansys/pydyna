@@ -75,13 +75,16 @@ class BoundaryThermalWeld(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYTHERMALWELD_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYTHERMALWELD_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYTHERMALWELD_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID or part set ID to which weld source is applied.
@@ -312,17 +315,17 @@ class BoundaryThermalWeld(KeywordBase):
         self._cards[2].set_value("tz", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def n2id_link(self) -> KeywordBase:
+    def n2id_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2id."""
         return self._get_link_by_attr("NODE", "nid", self.n2id, "parts")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

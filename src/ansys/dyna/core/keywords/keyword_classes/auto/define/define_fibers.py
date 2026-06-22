@@ -64,8 +64,8 @@ class DefineFibers(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "FIBERS"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "n1": LinkType.NODE,
@@ -81,14 +81,17 @@ class DefineFibers(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEFIBERS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEFIBERS_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEFIBERS_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineFibers.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineFibers._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEFIBERS_OPTION0_CARD0,
@@ -319,17 +322,17 @@ class DefineFibers(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n2_link(self) -> KeywordBase:
+    def n2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
         return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 
     @property
-    def idp_link(self) -> KeywordBase:
+    def idp_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given idp."""
         return self._get_link_by_attr("PART", "pid", self.idp, "parts")
 

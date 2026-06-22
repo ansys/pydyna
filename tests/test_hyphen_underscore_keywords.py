@@ -144,7 +144,7 @@ class TestDeckLoading:
         deck_content = """\
 *KEYWORD
 *MAT_RAMBERG-OSGOOD
-         1       0.0       0.0       0.0       0.0       0.0       0.0       0.0
+         1       0.0       0.0       0.0       0.0       0.0       0.0
 *END
 """
         deck = Deck()
@@ -163,7 +163,7 @@ class TestDeckLoading:
         deck_content = """\
 *KEYWORD
 *MAT_RAMBERG_OSGOOD
-         1       0.0       0.0       0.0       0.0       0.0       0.0       0.0
+         1       0.0       0.0       0.0       0.0       0.0       0.0
 *END
 """
         deck = Deck()
@@ -186,7 +186,7 @@ class TestRoundTrip:
         deck_content = """\
 *KEYWORD
 *MAT_RAMBERG-OSGOOD
-         1       0.0       0.0       0.0       0.0       0.0       0.0       0.0
+         1       0.0       0.0       0.0       0.0       0.0       0.0
 *END
 """
         deck = Deck()
@@ -204,7 +204,7 @@ class TestRoundTrip:
         deck_content = """\
 *KEYWORD
 *MAT_RAMBERG_OSGOOD
-         1       0.0       0.0       0.0       0.0       0.0       0.0       0.0
+         1       0.0       0.0       0.0       0.0       0.0       0.0
 *END
 """
         deck = Deck()
@@ -222,9 +222,9 @@ class TestRoundTrip:
         deck_content = """\
 *KEYWORD
 *MAT_RAMBERG-OSGOOD
-         1       0.0       0.0       0.0       0.0       0.0       0.0       0.0
+         1       0.0       0.0       0.0       0.0       0.0       0.0
 *MAT_RAMBERG_OSGOOD
-         2       0.0       0.0       0.0       0.0       0.0       0.0       0.0
+         2       0.0       0.0       0.0       0.0       0.0       0.0
 *END
 """
         deck = Deck()

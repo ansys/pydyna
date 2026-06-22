@@ -63,8 +63,8 @@ class BoundaryPrescribedMotionRigidBndout2Dynain(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "PRESCRIBED_MOTION_RIGID_BNDOUT2DYNAIN"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "node1": LinkType.NODE,
@@ -81,15 +81,18 @@ class BoundaryPrescribedMotionRigidBndout2Dynain(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONRIGIDBNDOUT2DYNAIN_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONRIGIDBNDOUT2DYNAIN_CARD1,
                 active_func=lambda: abs(self.dof) in [9, 10, 11] or self.vad==4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONRIGIDBNDOUT2DYNAIN_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = BoundaryPrescribedMotionRigidBndout2Dynain.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = BoundaryPrescribedMotionRigidBndout2Dynain._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _BOUNDARYPRESCRIBEDMOTIONRIGIDBNDOUT2DYNAIN_OPTION0_CARD0,
@@ -312,17 +315,17 @@ class BoundaryPrescribedMotionRigidBndout2Dynain(KeywordBase):
             self.activate_option("HEADING")
 
     @property
-    def node1_link(self) -> KeywordBase:
+    def node1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node1."""
         return self._get_link_by_attr("NODE", "nid", self.node1, "parts")
 
     @property
-    def node2_link(self) -> KeywordBase:
+    def node2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node2."""
         return self._get_link_by_attr("NODE", "nid", self.node2, "parts")
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None
@@ -337,7 +340,7 @@ class BoundaryPrescribedMotionRigidBndout2Dynain(KeywordBase):
         self.vid = value.vid
 
     @property
-    def lrb_link(self) -> KeywordBase:
+    def lrb_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given lrb."""
         return self._get_link_by_attr("PART", "pid", self.lrb, "parts")
 

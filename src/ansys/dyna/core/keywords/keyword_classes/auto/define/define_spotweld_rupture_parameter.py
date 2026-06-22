@@ -75,8 +75,8 @@ class DefineSpotweldRuptureParameter(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "SPOTWELD_RUPTURE_PARAMETER"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcdpa": LinkType.DEFINE_CURVE,
@@ -96,17 +96,21 @@ class DefineSpotweldRuptureParameter(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINESPOTWELDRUPTUREPARAMETER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINESPOTWELDRUPTUREPARAMETER_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINESPOTWELDRUPTUREPARAMETER_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINESPOTWELDRUPTUREPARAMETER_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineSpotweldRuptureParameter.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineSpotweldRuptureParameter._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINESPOTWELDRUPTUREPARAMETER_OPTION0_CARD0,
@@ -357,7 +361,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcdpa_link(self) -> DefineCurve:
+    def lcdpa_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdpa."""
         if self.deck is None:
             return None
@@ -372,7 +376,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
         self.lcdpa = value.lcid
 
     @property
-    def lcdpm_link(self) -> DefineCurve:
+    def lcdpm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdpm."""
         if self.deck is None:
             return None
@@ -387,7 +391,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
         self.lcdpm = value.lcid
 
     @property
-    def lcdps_link(self) -> DefineCurve:
+    def lcdps_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdps."""
         if self.deck is None:
             return None
@@ -402,7 +406,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
         self.lcdps = value.lcid
 
     @property
-    def lcdna_link(self) -> DefineCurve:
+    def lcdna_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdna."""
         if self.deck is None:
             return None
@@ -417,7 +421,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
         self.lcdna = value.lcid
 
     @property
-    def lcdnm_link(self) -> DefineCurve:
+    def lcdnm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdnm."""
         if self.deck is None:
             return None
@@ -432,7 +436,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
         self.lcdnm = value.lcid
 
     @property
-    def lcdns_link(self) -> DefineCurve:
+    def lcdns_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdns."""
         if self.deck is None:
             return None
@@ -447,7 +451,7 @@ class DefineSpotweldRuptureParameter(KeywordBase):
         self.lcdns = value.lcid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

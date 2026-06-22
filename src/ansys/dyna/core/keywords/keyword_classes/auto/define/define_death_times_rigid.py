@@ -56,8 +56,8 @@ class DefineDeathTimesRigid(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DEATH_TIMES_RIGID"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "n1": LinkType.NODE,
@@ -73,11 +73,13 @@ class DefineDeathTimesRigid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEDEATHTIMESRIGID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEDEATHTIMESRIGID_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineDeathTimesRigid.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineDeathTimesRigid._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDEATHTIMESRIGID_OPTION0_CARD0,
@@ -234,17 +236,17 @@ class DefineDeathTimesRigid(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n2_link(self) -> KeywordBase:
+    def n2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
         return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 
     @property
-    def n3_link(self) -> KeywordBase:
+    def n3_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n3."""
         return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
 

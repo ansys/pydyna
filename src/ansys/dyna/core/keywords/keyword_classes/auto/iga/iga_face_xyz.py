@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.series_card import SeriesCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _IGAFACEXYZ_CARD0 = (
@@ -32,17 +33,6 @@ _IGAFACEXYZ_CARD0 = (
     FieldSchema("ori", int, 20, 10, 0),
     FieldSchema("psid", int, 30, 10, None),
     FieldSchema("esid", int, 40, 10, None),
-)
-
-_IGAFACEXYZ_CARD1 = (
-    FieldSchema("brid1", int, 0, 10, None),
-    FieldSchema("brid2", int, 10, 10, None),
-    FieldSchema("brid3", int, 20, 10, None),
-    FieldSchema("brid4", int, 30, 10, None),
-    FieldSchema("brid5", int, 40, 10, None),
-    FieldSchema("brid6", int, 50, 10, None),
-    FieldSchema("brid7", int, 60, 10, None),
-    FieldSchema("brid8", int, 70, 10, None),
 )
 
 class IgaFaceXyz(KeywordBase):
@@ -58,10 +48,15 @@ class IgaFaceXyz(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _IGAFACEXYZ_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
-                _IGAFACEXYZ_CARD1,
-                **kwargs,
-            ),        ]
+            ),
+            SeriesCard(
+                "brid",
+                8,
+                10,
+                int,
+                None,
+                data = kwargs.get("brid")),
+        ]
     @property
     def fid(self) -> typing.Optional[int]:
         """Get or set the Physical face ID. A unique number must be chosen.
@@ -122,90 +117,11 @@ class IgaFaceXyz(KeywordBase):
         self._cards[0].set_value("esid", value)
 
     @property
-    def brid1(self) -> typing.Optional[int]:
-        """Get or set the One-dimensional boundary representation IDs, see *IGA_1D_BREP, with i= 1, nand n > 0.
-        """ # nopep8
-        return self._cards[1].get_value("brid1")
+    def brid(self) -> SeriesCard:
+        """boundary representation IDs.."""
+        return self._cards[1]
 
-    @brid1.setter
-    def brid1(self, value: int) -> None:
-        """Set the brid1 property."""
-        self._cards[1].set_value("brid1", value)
-
-    @property
-    def brid2(self) -> typing.Optional[int]:
-        """Get or set the One-dimensional boundary representation IDs, see *IGA_1D_BREP, with i= 1, nand n > 0.
-        """ # nopep8
-        return self._cards[1].get_value("brid2")
-
-    @brid2.setter
-    def brid2(self, value: int) -> None:
-        """Set the brid2 property."""
-        self._cards[1].set_value("brid2", value)
-
-    @property
-    def brid3(self) -> typing.Optional[int]:
-        """Get or set the One-dimensional boundary representation IDs, see *IGA_1D_BREP, with i= 1, nand n > 0.
-        """ # nopep8
-        return self._cards[1].get_value("brid3")
-
-    @brid3.setter
-    def brid3(self, value: int) -> None:
-        """Set the brid3 property."""
-        self._cards[1].set_value("brid3", value)
-
-    @property
-    def brid4(self) -> typing.Optional[int]:
-        """Get or set the One-dimensional boundary representation IDs, see *IGA_1D_BREP, with i= 1, nand n > 0.
-        """ # nopep8
-        return self._cards[1].get_value("brid4")
-
-    @brid4.setter
-    def brid4(self, value: int) -> None:
-        """Set the brid4 property."""
-        self._cards[1].set_value("brid4", value)
-
-    @property
-    def brid5(self) -> typing.Optional[int]:
-        """Get or set the One-dimensional boundary representation IDs, see *IGA_1D_BREP, with i= 1, nand n > 0.
-        """ # nopep8
-        return self._cards[1].get_value("brid5")
-
-    @brid5.setter
-    def brid5(self, value: int) -> None:
-        """Set the brid5 property."""
-        self._cards[1].set_value("brid5", value)
-
-    @property
-    def brid6(self) -> typing.Optional[int]:
-        """Get or set the One-dimensional boundary representation IDs, see *IGA_1D_BREP, with i= 1, nand n > 0.
-        """ # nopep8
-        return self._cards[1].get_value("brid6")
-
-    @brid6.setter
-    def brid6(self, value: int) -> None:
-        """Set the brid6 property."""
-        self._cards[1].set_value("brid6", value)
-
-    @property
-    def brid7(self) -> typing.Optional[int]:
-        """Get or set the One-dimensional boundary representation IDs, see *IGA_1D_BREP, with i= 1, nand n > 0.
-        """ # nopep8
-        return self._cards[1].get_value("brid7")
-
-    @brid7.setter
-    def brid7(self, value: int) -> None:
-        """Set the brid7 property."""
-        self._cards[1].set_value("brid7", value)
-
-    @property
-    def brid8(self) -> typing.Optional[int]:
-        """Get or set the One-dimensional boundary representation IDs, see *IGA_1D_BREP, with i= 1, nand n > 0.
-        """ # nopep8
-        return self._cards[1].get_value("brid8")
-
-    @brid8.setter
-    def brid8(self, value: int) -> None:
-        """Set the brid8 property."""
-        self._cards[1].set_value("brid8", value)
+    @brid.setter
+    def brid(self, value: typing.List) -> None:
+        self._cards[1].data = value
 

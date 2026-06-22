@@ -49,8 +49,8 @@ class DefineElementDeathShellSet(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "ELEMENT_DEATH_SHELL_SET"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "boxid": LinkType.DEFINE_BOX,
@@ -65,8 +65,9 @@ class DefineElementDeathShellSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEELEMENTDEATHSHELLSET_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineElementDeathShellSet.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineElementDeathShellSet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEELEMENTDEATHSHELLSET_OPTION0_CARD0,
@@ -184,7 +185,7 @@ class DefineElementDeathShellSet(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None
@@ -199,7 +200,7 @@ class DefineElementDeathShellSet(KeywordBase):
         self.boxid = value.boxid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

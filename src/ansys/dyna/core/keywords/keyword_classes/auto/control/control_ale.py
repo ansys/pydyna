@@ -83,16 +83,20 @@ class ControlAle(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLALE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLALE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLALE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLALE_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dct(self) -> int:
         """Get or set the Flag to invoke alternate advection logic for ALE (see Remark 2):
@@ -450,7 +454,7 @@ class ControlAle(KeywordBase):
         self._cards[3].set_value("minmas", value)
 
     @property
-    def nsidebc_link(self) -> KeywordBase:
+    def nsidebc_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsidebc."""
         return self._get_set_link("NODE", self.nsidebc)
 

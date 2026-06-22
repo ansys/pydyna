@@ -65,19 +65,24 @@ class LsoDomain(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LSODOMAIN_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LSODOMAIN_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LSODOMAIN_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LSODOMAIN_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LSODOMAIN_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def domain_type(self) -> str:
         """Get or set the The type of domain for which LSO output may be generated.Accepted entries so far are 'thist_point'

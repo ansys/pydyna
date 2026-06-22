@@ -42,18 +42,11 @@ class SetBeam(KeywordBase):
 
     keyword = "SET"
     subkeyword = "BEAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
-        "k1": LinkType.ELEMENT_BEAM,
-        "k2": LinkType.ELEMENT_BEAM,
-        "k3": LinkType.ELEMENT_BEAM,
-        "k4": LinkType.ELEMENT_BEAM,
-        "k5": LinkType.ELEMENT_BEAM,
-        "k6": LinkType.ELEMENT_BEAM,
-        "k7": LinkType.ELEMENT_BEAM,
-        "k8": LinkType.ELEMENT_BEAM,
+        "element": LinkType.ELEMENT_BEAM,
     }
 
     def __init__(self, **kwargs):
@@ -64,14 +57,16 @@ class SetBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETBEAM_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "element",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("element")),            OptionCardSet(
-                option_spec = SetBeam.option_specs[0],
+                data = kwargs.get("element")),
+            OptionCardSet(
+                option_spec = SetBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETBEAM_OPTION0_CARD0,
@@ -116,42 +111,11 @@ class SetBeam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def k1_link(self) -> KeywordBase:
-        """Get the ELEMENT keyword containing the given k1."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.k1, "parts")
+    def element_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all ELEMENT keywords for element, keyed by element ID."""
+        return self._get_links_from_series("ELEMENT", "eid", "element", "elements")
 
-    @property
-    def k2_link(self) -> KeywordBase:
-        """Get the ELEMENT keyword containing the given k2."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.k2, "parts")
-
-    @property
-    def k3_link(self) -> KeywordBase:
-        """Get the ELEMENT keyword containing the given k3."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.k3, "parts")
-
-    @property
-    def k4_link(self) -> KeywordBase:
-        """Get the ELEMENT keyword containing the given k4."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.k4, "parts")
-
-    @property
-    def k5_link(self) -> KeywordBase:
-        """Get the ELEMENT keyword containing the given k5."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.k5, "parts")
-
-    @property
-    def k6_link(self) -> KeywordBase:
-        """Get the ELEMENT keyword containing the given k6."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.k6, "parts")
-
-    @property
-    def k7_link(self) -> KeywordBase:
-        """Get the ELEMENT keyword containing the given k7."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.k7, "parts")
-
-    @property
-    def k8_link(self) -> KeywordBase:
-        """Get the ELEMENT keyword containing the given k8."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.k8, "parts")
+    def get_element_link(self, element_id: int) -> typing.Optional[KeywordBase]:
+        """Get the ELEMENT keyword containing the given element_id."""
+        return self._get_link_by_attr("ELEMENT", "eid", element_id, "elements")
 

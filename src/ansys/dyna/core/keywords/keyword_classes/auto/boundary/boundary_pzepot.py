@@ -52,7 +52,8 @@ class BoundaryPzepot(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPZEPOT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the ID of this boundary condition, which can be referred to by *SENSOR _CONTROL with TYPE='PZBC' or *DEFINE_CURVE_FUNCTION with FUNCTION='ECHGBC'.
@@ -98,7 +99,7 @@ class BoundaryPzepot(KeywordBase):
         self._cards[0].set_value("sf", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -113,7 +114,7 @@ class BoundaryPzepot(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 

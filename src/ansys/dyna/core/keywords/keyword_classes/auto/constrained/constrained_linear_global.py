@@ -54,10 +54,12 @@ class ConstrainedLinearGlobal(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLINEARGLOBAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLINEARGLOBAL_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def licd(self) -> typing.Optional[int]:
         """Get or set the Linear constraint definition ID. This ID can be used to identify a set to which this constraint is a member.
@@ -113,7 +115,7 @@ class ConstrainedLinearGlobal(KeywordBase):
         self._cards[1].set_value("coef", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

@@ -57,10 +57,12 @@ class BoundaryAmbient(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYAMBIENT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYAMBIENT_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def setid(self) -> typing.Optional[int]:
         """Get or set the The ambient element set ID for which the thermodynamic state is being defined. The element set can be *SET_SOLID for a 3D ALE model, *SET_SHELL for a 2D ALE model or *SET_BEAM for a 1D ALE model.
@@ -135,7 +137,7 @@ class BoundaryAmbient(KeywordBase):
         self._cards[1].set_value("lcid2", value)
 
     @property
-    def lcid1_link(self) -> DefineCurve:
+    def lcid1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid1."""
         if self.deck is None:
             return None
@@ -150,7 +152,7 @@ class BoundaryAmbient(KeywordBase):
         self.lcid1 = value.lcid
 
     @property
-    def lcid2_link(self) -> DefineCurve:
+    def lcid2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid2."""
         if self.deck is None:
             return None

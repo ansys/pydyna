@@ -43,7 +43,8 @@ class ChemistryPath(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHEMISTRYPATH_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dir(self) -> typing.Optional[str]:
         """Get or set the Directory path to add to the search set.

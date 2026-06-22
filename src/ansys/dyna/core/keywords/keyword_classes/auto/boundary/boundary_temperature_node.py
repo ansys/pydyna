@@ -53,7 +53,8 @@ class BoundaryTemperatureNode(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYTEMPERATURENODE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID.
@@ -126,7 +127,7 @@ class BoundaryTemperatureNode(KeywordBase):
         self._cards[0].set_value("tbirth", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

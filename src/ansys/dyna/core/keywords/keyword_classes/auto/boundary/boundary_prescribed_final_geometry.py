@@ -62,10 +62,12 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDFINALGEOMETRY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDFINALGEOMETRY_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def bpfgid(self) -> int:
         """Get or set the ID for this set of imposed boundary conditions.
@@ -166,12 +168,12 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
         self._cards[1].set_value("death", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def lcidf_link(self) -> DefineCurve:
+    def lcidf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidf."""
         if self.deck is None:
             return None
@@ -186,7 +188,7 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
         self.lcidf = value.lcid
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

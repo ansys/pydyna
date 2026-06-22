@@ -45,7 +45,8 @@ class AleFragmentation(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALEFRAGMENTATION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def fr_mmg(self) -> typing.Optional[int]:
         """Get or set the This is the AMMGID of the failed material

@@ -44,7 +44,8 @@ class CeseBoundaryBlastLoadMsurf(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYBLASTLOADMSURF_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def bid(self) -> typing.Optional[int]:
         """Get or set the Blast source ID.

@@ -50,7 +50,8 @@ class ControlExplicitThermalContact(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLEXPLICITTHERMALCONTACT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def partset(self) -> typing.Optional[int]:
         """Get or set the Part set ID (See *SET_PART).
@@ -74,7 +75,7 @@ class ControlExplicitThermalContact(KeywordBase):
         self._cards[0].set_value("ncycle", value)
 
     @property
-    def ncycle_link(self) -> DefineCurve:
+    def ncycle_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ncycle."""
         if self.deck is None:
             return None
@@ -89,7 +90,7 @@ class ControlExplicitThermalContact(KeywordBase):
         self.ncycle = value.lcid
 
     @property
-    def partset_link(self) -> KeywordBase:
+    def partset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for partset."""
         return self._get_set_link("PART", self.partset)
 

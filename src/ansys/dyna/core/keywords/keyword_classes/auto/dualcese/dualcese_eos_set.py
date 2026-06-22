@@ -46,7 +46,8 @@ class DualceseEosSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEEOSSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eossid(self) -> typing.Optional[int]:
         """Get or set the Set ID of the EOS mixture of a given multiphase fluid

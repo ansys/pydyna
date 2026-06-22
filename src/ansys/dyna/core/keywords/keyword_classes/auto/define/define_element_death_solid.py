@@ -49,8 +49,8 @@ class DefineElementDeathSolid(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "ELEMENT_DEATH_SOLID"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "eid": LinkType.ELEMENT_SOLID,
@@ -66,8 +66,9 @@ class DefineElementDeathSolid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEELEMENTDEATHSOLID_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineElementDeathSolid.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineElementDeathSolid._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEELEMENTDEATHSOLID_OPTION0_CARD0,
@@ -185,12 +186,12 @@ class DefineElementDeathSolid(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def eid_link(self) -> KeywordBase:
+    def eid_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None
@@ -205,7 +206,7 @@ class DefineElementDeathSolid(KeywordBase):
         self.boxid = value.boxid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

@@ -66,10 +66,12 @@ class EmCircuit(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCIRCUIT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMCIRCUIT_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def circid(self) -> typing.Optional[int]:
         """Get or set the Circuit ID.
@@ -221,7 +223,7 @@ class EmCircuit(KeywordBase):
         self._cards[1].set_value("partid", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -236,7 +238,7 @@ class EmCircuit(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def sidcurr_link(self) -> KeywordBase:
+    def sidcurr_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for sidcurr."""
         return self._get_set_link("SEGMENT", self.sidcurr)
 
@@ -246,7 +248,7 @@ class EmCircuit(KeywordBase):
         self.sidcurr = value.sid
 
     @property
-    def sidvin_link(self) -> KeywordBase:
+    def sidvin_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for sidvin."""
         return self._get_set_link("SEGMENT", self.sidvin)
 
@@ -256,7 +258,7 @@ class EmCircuit(KeywordBase):
         self.sidvin = value.sid
 
     @property
-    def sidvout_link(self) -> KeywordBase:
+    def sidvout_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for sidvout."""
         return self._get_set_link("SEGMENT", self.sidvout)
 
@@ -266,7 +268,7 @@ class EmCircuit(KeywordBase):
         self.sidvout = value.sid
 
     @property
-    def partid_link(self) -> KeywordBase:
+    def partid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given partid."""
         return self._get_link_by_attr("PART", "pid", self.partid, "parts")
 

@@ -58,10 +58,12 @@ class BoundarySpcSymmetryPlaneSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYSPCSYMMETRYPLANESET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYSPCSYMMETRYPLANESET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def idsp(self) -> typing.Optional[int]:
         """Get or set the Identification number of the constraint. Must be unique.
@@ -162,7 +164,7 @@ class BoundarySpcSymmetryPlaneSet(KeywordBase):
         self._cards[1].set_value("tol", value)
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

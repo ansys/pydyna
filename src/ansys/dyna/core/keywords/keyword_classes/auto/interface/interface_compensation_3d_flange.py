@@ -50,7 +50,8 @@ class InterfaceCompensation3DFlange(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATION3DFLANGE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the The part ID of the flanging steel to be compensated
@@ -96,7 +97,7 @@ class InterfaceCompensation3DFlange(KeywordBase):
         self._cards[0].set_value("vz", value)
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

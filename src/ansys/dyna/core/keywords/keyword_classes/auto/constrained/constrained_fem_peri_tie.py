@@ -50,7 +50,8 @@ class ConstrainedFemPeriTie(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDFEMPERITIE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Contact ID.
@@ -85,12 +86,12 @@ class ConstrainedFemPeriTie(KeywordBase):
         self._cards[0].set_value("ssid", value)
 
     @property
-    def msid_link(self) -> KeywordBase:
+    def msid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given msid."""
         return self._get_link_by_attr("PART", "pid", self.msid, "parts")
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ssid."""
         return self._get_link_by_attr("PART", "pid", self.ssid, "parts")
 

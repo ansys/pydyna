@@ -47,10 +47,12 @@ class IncludeMultiscaleSpotweld(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INCLUDEMULTISCALESPOTWELD_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDEMULTISCALESPOTWELD_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def type(self) -> typing.Optional[int]:
         """Get or set the TYPE for this multiscale spot weld. This type is used in the keyword

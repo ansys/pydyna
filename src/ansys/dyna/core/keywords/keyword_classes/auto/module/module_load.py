@@ -48,10 +48,12 @@ class ModuleLoad(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MODULELOAD_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MODULELOAD_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mdlid(self) -> typing.Optional[int]:
         """Get or set the Module identification. A unique string label must be specified.

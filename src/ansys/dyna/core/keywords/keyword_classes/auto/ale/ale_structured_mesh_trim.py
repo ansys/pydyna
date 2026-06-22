@@ -54,7 +54,8 @@ class AleStructuredMeshTrim(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALESTRUCTUREDMESHTRIM_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mshid(self) -> int:
         """Get or set the S-ALE Mesh ID. The ID of the Structured ALE mesh to be trimed/un-trimed.
@@ -158,7 +159,7 @@ class AleStructuredMeshTrim(KeywordBase):
         self._cards[0].set_value("e4", value)
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

@@ -47,11 +47,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 from ansys.dyna.core import Deck, keywords as kwd
-from ansys.dyna.core.pre.examples.download_utilities import EXAMPLES_PATH, DownloadManager
 
 # from ansys.dyna.core.run.linux_runner import LinuxRunner
 from ansys.dyna.core.run.local_solver import run_dyna
 from ansys.dyna.core.run.options import MemoryUnit, MpiOption, Precision
+from ansys.dyna.core.utils.download_utilities import EXAMPLES_PATH, download_manager
 
 # from ansys.dyna.core.run.windows_runner import WindowsRunner
 
@@ -62,8 +62,8 @@ workdir = tempfile.TemporaryDirectory()
 
 mesh_file_name = "bar_impact_mesh.k"
 
-mesh_file = DownloadManager().download_file(
-    mesh_file_name, "ls-dyna", "Bar_Impact", destination=os.path.join(EXAMPLES_PATH, "Bar_Impact")
+mesh_file = download_manager.download_file(
+    mesh_file_name, "ls-dyna/Bar_Impact", destination=os.path.join(EXAMPLES_PATH, "Bar_Impact")
 )
 
 # If you'd like to insert your own path to a local mesh file you can do so by replacing the line
@@ -350,21 +350,17 @@ for iteration in range(max_iterations):
     pathlib.Path(wd).mkdir(exist_ok=True)
     # Create LS-Dyna input deck with new thickness
     write_input_deck(thickness=thickness, wd=wd)
-    try:
-        # Run solver
-        run_job(wd)
-        # Post-process displacement
-        time_data, max_disp_data, min_disp_data = get_plate_displacement(wd)
-        reduced_time_data = [t * 1000 for t in time_data]  # Convert to ms
-        # Store result
-        all_results.append({"thickness": thickness, "time": reduced_time_data, "max_disp": max_disp_data})
-        # Check if target displacement is reached
-        if max(max_disp_data) <= target_displacement:
-            print(f"Target displacement reached at thickness {thickness:.4f}")
-            break
-
-    except Exception as e:
-        print(f"Iteration {iteration} failed:", e)
+    # Run solver
+    run_job(wd)
+    # Post-process displacement
+    time_data, max_disp_data, min_disp_data = get_plate_displacement(wd)
+    reduced_time_data = [t * 1000 for t in time_data]  # Convert to ms
+    # Store result
+    all_results.append({"thickness": thickness, "time": reduced_time_data, "max_disp": max_disp_data})
+    # Check if target displacement is reached
+    if max(max_disp_data) <= target_displacement:
+        print(f"Target displacement reached at thickness {thickness:.4f}")
+        break
 
 ###############################################################################
 # Generate graphical output

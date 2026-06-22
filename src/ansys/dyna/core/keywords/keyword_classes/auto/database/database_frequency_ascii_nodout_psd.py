@@ -52,7 +52,8 @@ class DatabaseFrequencyAsciiNodoutPsd(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEFREQUENCYASCIINODOUTPSD_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def fmin(self) -> float:
         """Get or set the Minimum frequency for output (cycles/time).
@@ -115,7 +116,7 @@ class DatabaseFrequencyAsciiNodoutPsd(KeywordBase):
         self._cards[0].set_value("lcfreq", value)
 
     @property
-    def lcfreq_link(self) -> DefineCurve:
+    def lcfreq_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfreq."""
         if self.deck is None:
             return None

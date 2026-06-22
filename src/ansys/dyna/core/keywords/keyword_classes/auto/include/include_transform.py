@@ -78,19 +78,24 @@ class IncludeTransform(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INCLUDETRANSFORM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDETRANSFORM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDETRANSFORM_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDETRANSFORM_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDETRANSFORM_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name of file to be included in this keyword file.
@@ -291,7 +296,7 @@ class IncludeTransform(KeywordBase):
     @property
     def tranid(self) -> int:
         """Get or set the Transformation ID.
-        EQ.0: no tranformation will be applied.  See the input *DEFINE_TRANSFORM.
+        EQ.0: no transformation will be applied.  See the input *DEFINE_TRANSFORM.
         """ # nopep8
         return self._cards[4].get_value("tranid")
 
@@ -301,7 +306,7 @@ class IncludeTransform(KeywordBase):
         self._cards[4].set_value("tranid", value)
 
     @property
-    def tranid_link(self) -> DefineTransformation:
+    def tranid_link(self) -> typing.Optional[DefineTransformation]:
         """Get the DefineTransformation object for tranid."""
         if self.deck is None:
             return None

@@ -49,8 +49,8 @@ class Set2DSegmentSet(KeywordBase):
 
     keyword = "SET"
     subkeyword = "2D_SEGMENT_SET"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "psid": LinkType.SET_PART,
@@ -64,11 +64,13 @@ class Set2DSegmentSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SET2DSEGMENTSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SET2DSEGMENTSET_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Set2DSegmentSet.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Set2DSegmentSet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SET2DSEGMENTSET_OPTION0_CARD0,
@@ -159,7 +161,7 @@ class Set2DSegmentSet(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

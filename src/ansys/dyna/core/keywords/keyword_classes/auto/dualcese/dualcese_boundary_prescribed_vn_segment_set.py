@@ -72,13 +72,16 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYPRESCRIBEDVNSEGMENTSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYPRESCRIBEDVNSEGMENTSET_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYPRESCRIBEDVNSEGMENTSET_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID created with *DUALCESE_SEGMENTSET
@@ -225,7 +228,7 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
         self._cards[2].set_value("sf_t", value)
 
     @property
-    def lc_rho_link(self) -> DefineCurve:
+    def lc_rho_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_rho."""
         if self.deck is None:
             return None
@@ -240,7 +243,7 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
         self.lc_rho = value.lcid
 
     @property
-    def lc_p_link(self) -> DefineCurve:
+    def lc_p_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_p."""
         if self.deck is None:
             return None
@@ -255,7 +258,7 @@ class DualceseBoundaryPrescribedVnSegmentSet(KeywordBase):
         self.lc_p = value.lcid
 
     @property
-    def lc_t_link(self) -> DefineCurve:
+    def lc_t_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_t."""
         if self.deck is None:
             return None

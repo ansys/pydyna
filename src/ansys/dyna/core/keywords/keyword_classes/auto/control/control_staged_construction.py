@@ -56,10 +56,12 @@ class ControlStagedConstruction(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLSTAGEDCONSTRUCTION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLSTAGEDCONSTRUCTION_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def tstart(self) -> float:
         """Get or set the Time at start of analysis (normally leave blank)

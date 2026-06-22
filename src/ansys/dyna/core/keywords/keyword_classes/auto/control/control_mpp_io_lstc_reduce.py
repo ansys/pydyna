@@ -42,4 +42,5 @@ class ControlMppIoLstcReduce(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPIOLSTCREDUCE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

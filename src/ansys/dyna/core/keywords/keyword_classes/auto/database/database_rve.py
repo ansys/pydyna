@@ -44,7 +44,8 @@ class DatabaseRve(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASERVE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dt(self) -> float:
         """Get or set the Time interval for the output of RVE homogenization results to the rveout file.

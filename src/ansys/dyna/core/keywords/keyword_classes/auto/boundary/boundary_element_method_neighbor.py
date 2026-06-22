@@ -47,7 +47,8 @@ class BoundaryElementMethodNeighbor(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYELEMENTMETHODNEIGHBOR_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nelem(self) -> typing.Optional[int]:
         """Get or set the Element number.

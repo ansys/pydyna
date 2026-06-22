@@ -90,33 +90,33 @@ class KeywordNames:
         )
 
 
-def filter_keywords_by_domain(keywords: List[Dict], subset_domains: Optional[List[str]] = None) -> List[Dict]:
+def filter_keywords_by_domain(keywords: List[str], subset_domains: Optional[List[str]] = None) -> List[str]:
     """
-    Filter keywords by domain membership.
+    Filter keyword name strings by domain membership.
 
     This eliminates the duplicated domain filtering logic that appears in multiple
     places in generate.py.
 
     Args:
-        keywords: List of keyword dicts (each must have 'name' key)
+        keywords: List of keyword name strings (e.g., ["CONTACT_AUTOMATIC_SINGLE_SURFACE"])
         subset_domains: Optional list of domain names to include (e.g., ["contact", "section"])
                        If None, all keywords are returned.
 
     Returns
     -------
-        Filtered list of keywords
+        Filtered list of keyword name strings
 
     Example:
-        >>> keywords = [{"name": "CONTACT_..."}, {"name": "SECTION_..."}]
+        >>> keywords = ["CONTACT_AUTOMATIC_SINGLE_SURFACE", "SECTION_SHELL"]
         >>> filtered = filter_keywords_by_domain(keywords, ["contact"])
-        >>> # Returns only CONTACT_ keywords
+        >>> # Returns ["CONTACT_AUTOMATIC_SINGLE_SURFACE"]
     """
     if subset_domains is None:
         return keywords
 
     filtered = []
     for kwd in keywords:
-        domain = get_keyword_domain(kwd["name"])
+        domain = get_keyword_domain(kwd)
         if domain in subset_domains:
             filtered.append(kwd)
 

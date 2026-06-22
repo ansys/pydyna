@@ -73,16 +73,20 @@ class AlePrescribedMotion(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALEPRESCRIBEDMOTION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEPRESCRIBEDMOTION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEPRESCRIBEDMOTION_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEPRESCRIBEDMOTION_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mmsid(self) -> typing.Optional[int]:
         """Get or set the Multi-Material Set ID (see *SET_‌MULTI-MATERIAL_‌GROUP_‌LIST).
@@ -226,7 +230,7 @@ class AlePrescribedMotion(KeywordBase):
         self._cards[3].set_value("zg", value)
 
     @property
-    def lcvtx_link(self) -> DefineCurve:
+    def lcvtx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvtx."""
         if self.deck is None:
             return None
@@ -241,7 +245,7 @@ class AlePrescribedMotion(KeywordBase):
         self.lcvtx = value.lcid
 
     @property
-    def lcvty_link(self) -> DefineCurve:
+    def lcvty_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvty."""
         if self.deck is None:
             return None
@@ -256,7 +260,7 @@ class AlePrescribedMotion(KeywordBase):
         self.lcvty = value.lcid
 
     @property
-    def lcvtz_link(self) -> DefineCurve:
+    def lcvtz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvtz."""
         if self.deck is None:
             return None
@@ -271,7 +275,7 @@ class AlePrescribedMotion(KeywordBase):
         self.lcvtz = value.lcid
 
     @property
-    def lcvrx_link(self) -> DefineCurve:
+    def lcvrx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvrx."""
         if self.deck is None:
             return None
@@ -286,7 +290,7 @@ class AlePrescribedMotion(KeywordBase):
         self.lcvrx = value.lcid
 
     @property
-    def lcvry_link(self) -> DefineCurve:
+    def lcvry_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvry."""
         if self.deck is None:
             return None
@@ -301,7 +305,7 @@ class AlePrescribedMotion(KeywordBase):
         self.lcvry = value.lcid
 
     @property
-    def lcvrz_link(self) -> DefineCurve:
+    def lcvrz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvrz."""
         if self.deck is None:
             return None

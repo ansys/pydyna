@@ -50,7 +50,8 @@ class ControlCoupling(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLCOUPLING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def unleng(self) -> float:
         """Get or set the Unit conversion factor for length.

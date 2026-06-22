@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
@@ -103,11 +104,18 @@ _EOSTABULATEDCOMPACTION_CARD8 = (
     FieldSchema("k10", float, 64, 16, None),
 )
 
+_EOSTABULATEDCOMPACTION_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class EosTabulatedCompaction(KeywordBase):
     """DYNA EOS_TABULATED_COMPACTION keyword"""
 
     keyword = "EOS"
     subkeyword = "TABULATED_COMPACTION"
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
+    ]
     _link_fields = {
         "lcc": LinkType.DEFINE_CURVE,
         "lct": LinkType.DEFINE_CURVE,
@@ -117,35 +125,55 @@ class EosTabulatedCompaction(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the EosTabulatedCompaction class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _EOSTABULATEDCOMPACTION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOSTABULATEDCOMPACTION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOSTABULATEDCOMPACTION_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOSTABULATEDCOMPACTION_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOSTABULATEDCOMPACTION_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOSTABULATEDCOMPACTION_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOSTABULATEDCOMPACTION_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOSTABULATEDCOMPACTION_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOSTABULATEDCOMPACTION_CARD8,
                 **kwargs,
-            ),        ]
+            ),
+            OptionCardSet(
+                option_spec = EosTabulatedCompaction._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _EOSTABULATEDCOMPACTION_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state label.
@@ -679,7 +707,21 @@ class EosTabulatedCompaction(KeywordBase):
         self._cards[8].set_value("k10", value)
 
     @property
-    def lcc_link(self) -> DefineCurve:
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[9].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[9].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
+
+    @property
+    def lcc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc."""
         if self.deck is None:
             return None
@@ -694,7 +736,7 @@ class EosTabulatedCompaction(KeywordBase):
         self.lcc = value.lcid
 
     @property
-    def lct_link(self) -> DefineCurve:
+    def lct_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lct."""
         if self.deck is None:
             return None
@@ -709,7 +751,7 @@ class EosTabulatedCompaction(KeywordBase):
         self.lct = value.lcid
 
     @property
-    def lck_link(self) -> DefineCurve:
+    def lck_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lck."""
         if self.deck is None:
             return None

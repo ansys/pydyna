@@ -109,8 +109,8 @@ class MatPseudoTensor(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "PSEUDO_TENSOR"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcp": LinkType.DEFINE_CURVE,
@@ -125,26 +125,33 @@ class MatPseudoTensor(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATPSEUDOTENSOR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPSEUDOTENSOR_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPSEUDOTENSOR_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPSEUDOTENSOR_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPSEUDOTENSOR_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPSEUDOTENSOR_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPSEUDOTENSOR_CARD6,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatPseudoTensor.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatPseudoTensor._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATPSEUDOTENSOR_OPTION0_CARD0,
@@ -719,7 +726,7 @@ class MatPseudoTensor(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcp_link(self) -> DefineCurve:
+    def lcp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcp."""
         if self.deck is None:
             return None
@@ -734,7 +741,7 @@ class MatPseudoTensor(KeywordBase):
         self.lcp = value.lcid
 
     @property
-    def lcr_link(self) -> DefineCurve:
+    def lcr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcr."""
         if self.deck is None:
             return None

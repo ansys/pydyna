@@ -49,7 +49,8 @@ class ConstrainedTiedNodesFailure(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDTIEDNODESFAILURE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID, see *SET_NODE.
@@ -88,7 +89,7 @@ class ConstrainedTiedNodesFailure(KeywordBase):
         self._cards[0].set_value("etype", value)
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 

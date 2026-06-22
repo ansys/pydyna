@@ -49,7 +49,8 @@ class ControlImplicitSsdDirect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSSDDIRECT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def issflg(self) -> int:
         """Get or set the Complex steady state vibration flag:

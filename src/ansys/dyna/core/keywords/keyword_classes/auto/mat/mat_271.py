@@ -93,8 +93,8 @@ class Mat271(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "271"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lck": LinkType.DEFINE_CURVE,
@@ -120,20 +120,25 @@ class Mat271(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT271_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT271_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT271_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT271_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT271_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat271.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat271._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT271_OPTION0_CARD0,
@@ -602,7 +607,7 @@ class Mat271(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lck_link(self) -> DefineCurve:
+    def lck_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lck."""
         if self.deck is None:
             return None
@@ -617,7 +622,7 @@ class Mat271(KeywordBase):
         self.lck = value.lcid
 
     @property
-    def lcx_link(self) -> DefineCurve:
+    def lcx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcx."""
         if self.deck is None:
             return None
@@ -632,7 +637,7 @@ class Mat271(KeywordBase):
         self.lcx = value.lcid
 
     @property
-    def lcy_link(self) -> DefineCurve:
+    def lcy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy."""
         if self.deck is None:
             return None
@@ -647,7 +652,7 @@ class Mat271(KeywordBase):
         self.lcy = value.lcid
 
     @property
-    def lcc_link(self) -> DefineCurve:
+    def lcc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc."""
         if self.deck is None:
             return None
@@ -662,7 +667,7 @@ class Mat271(KeywordBase):
         self.lcc = value.lcid
 
     @property
-    def lch_link(self) -> DefineCurve:
+    def lch_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lch."""
         if self.deck is None:
             return None
@@ -677,7 +682,7 @@ class Mat271(KeywordBase):
         self.lch = value.lcid
 
     @property
-    def lcfi_link(self) -> DefineCurve:
+    def lcfi_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfi."""
         if self.deck is None:
             return None
@@ -692,7 +697,7 @@ class Mat271(KeywordBase):
         self.lcfi = value.lcid
 
     @property
-    def lcfk_link(self) -> DefineCurve:
+    def lcfk_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfk."""
         if self.deck is None:
             return None
@@ -707,7 +712,7 @@ class Mat271(KeywordBase):
         self.lcfk = value.lcid
 
     @property
-    def lcfs2_link(self) -> DefineCurve:
+    def lcfs2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfs2."""
         if self.deck is None:
             return None
@@ -722,7 +727,7 @@ class Mat271(KeywordBase):
         self.lcfs2 = value.lcid
 
     @property
-    def lcpr_link(self) -> DefineCurve:
+    def lcpr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpr."""
         if self.deck is None:
             return None
@@ -737,7 +742,7 @@ class Mat271(KeywordBase):
         self.lcpr = value.lcid
 
     @property
-    def lcfs3_link(self) -> DefineCurve:
+    def lcfs3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfs3."""
         if self.deck is None:
             return None
@@ -752,7 +757,7 @@ class Mat271(KeywordBase):
         self.lcfs3 = value.lcid
 
     @property
-    def lctau_link(self) -> DefineCurve:
+    def lctau_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctau."""
         if self.deck is None:
             return None
@@ -767,7 +772,7 @@ class Mat271(KeywordBase):
         self.lctau = value.lcid
 
     @property
-    def lcfs1_link(self) -> DefineCurve:
+    def lcfs1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfs1."""
         if self.deck is None:
             return None
@@ -782,7 +787,7 @@ class Mat271(KeywordBase):
         self.lcfs1 = value.lcid
 
     @property
-    def lcfks_link(self) -> DefineCurve:
+    def lcfks_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfks."""
         if self.deck is None:
             return None

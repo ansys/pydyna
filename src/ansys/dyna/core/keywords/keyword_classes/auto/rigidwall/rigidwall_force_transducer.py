@@ -56,13 +56,16 @@ class RigidwallForceTransducer(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _RIGIDWALLFORCETRANSDUCER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLFORCETRANSDUCER_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLFORCETRANSDUCER_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def tid(self) -> int:
         """Get or set the Transducer ID.
@@ -108,7 +111,7 @@ class RigidwallForceTransducer(KeywordBase):
         self._cards[2].set_value("nsid", value)
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 

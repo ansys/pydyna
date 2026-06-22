@@ -60,10 +60,12 @@ class ConstrainedLocal(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLOCAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLOCAL_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Optional ID which can be referred to by *SENSOR_CONTROL.
@@ -199,7 +201,7 @@ class ConstrainedLocal(KeywordBase):
         self._cards[1].set_value("tol", value)
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

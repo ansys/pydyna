@@ -50,7 +50,8 @@ class ControlRemeshing(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLREMESHING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def rmin(self) -> typing.Optional[float]:
         """Get or set the Minimum edge length for the surface mesh surrounding the parts which should be remeshed.

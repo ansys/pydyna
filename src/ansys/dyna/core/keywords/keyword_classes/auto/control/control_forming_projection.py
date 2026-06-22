@@ -52,7 +52,8 @@ class ControlFormingProjection(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGPROJECTION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pidb(self) -> typing.Optional[int]:
         """Get or set the Part ID for the blank.
@@ -118,12 +119,12 @@ class ControlFormingProjection(KeywordBase):
         self._cards[0].set_value("nrtst", value)
 
     @property
-    def pidb_link(self) -> KeywordBase:
+    def pidb_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pidb."""
         return self._get_link_by_attr("PART", "pid", self.pidb, "parts")
 
     @property
-    def pidt_link(self) -> KeywordBase:
+    def pidt_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pidt."""
         return self._get_link_by_attr("PART", "pid", self.pidt, "parts")
 

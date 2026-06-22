@@ -50,7 +50,8 @@ class EmControlContact(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCONTROLCONTACT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def emct(self) -> int:
         """Get or set the EM contact activation flag:

@@ -8,6 +8,8 @@ from ansys.dyna.core.run.windows_runner import WindowsRunner
 
 from unittest.mock import MagicMock
 
+from tests.conftest import runner
+
 pytestmark = pytest.mark.run
 
 @pytest.fixture
@@ -71,9 +73,16 @@ def test_linuxrunner_case_command(patch_ansys_paths, always_isfile, activate_cas
     runner.activate_case = activate_case
     runner.case_ids = case_ids
 
-    with mock_patch("subprocess.run") as mock_subproc:
-        mock_subproc.return_value = MagicMock()
+    with mock_patch("os.system", return_value=0) as mock_sys:
         runner.run()
+        assert mock_sys.called
+        called_cmd = mock_sys.call_args[0][0]
+        if not activate_case:
+            assert "CASE" not in called_cmd
+        elif case_ids and isinstance(case_ids, list) and case_ids:
+            assert f"CASE={','.join(str(cid) for cid in case_ids)}" in called_cmd
+        else:
+            assert "CASE" in called_cmd
 
 
 # pytest mark for MSMPI, INTELMPI, OPENMPI

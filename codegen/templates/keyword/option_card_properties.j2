@@ -29,7 +29,7 @@
 {% endif %}{# card.indices #}
 
         if value:
-            self.activate_option("{{field.property_name.upper()}}")
+            {{ activate_target }}.activate_option("{{field.property_name.upper()}}")
 
 {% endif %}{# not field.readonly #}
 {% endif %}{# not field.redundant #}

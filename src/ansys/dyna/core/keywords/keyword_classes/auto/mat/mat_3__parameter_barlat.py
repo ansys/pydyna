@@ -110,8 +110,8 @@ class Mat3_ParameterBarlat(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "3-PARAMETER_BARLAT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -128,26 +128,33 @@ class Mat3_ParameterBarlat(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT3_PARAMETERBARLAT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT3_PARAMETERBARLAT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT3_PARAMETERBARLAT_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT3_PARAMETERBARLAT_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT3_PARAMETERBARLAT_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT3_PARAMETERBARLAT_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT3_PARAMETERBARLAT_CARD6,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat3_ParameterBarlat.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat3_ParameterBarlat._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT3_PARAMETERBARLAT_OPTION0_CARD0,
@@ -763,7 +770,7 @@ class Mat3_ParameterBarlat(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -778,7 +785,7 @@ class Mat3_ParameterBarlat(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def vlcid_link(self) -> DefineCurve:
+    def vlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for vlcid."""
         if self.deck is None:
             return None
@@ -793,7 +800,7 @@ class Mat3_ParameterBarlat(KeywordBase):
         self.vlcid = value.lcid
 
     @property
-    def hta_link(self) -> KeywordBase:
+    def hta_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for hta."""
         if self.deck is None:
             return None
@@ -817,7 +824,7 @@ class Mat3_ParameterBarlat(KeywordBase):
             self.hta = value.tbid
 
     @property
-    def htb_link(self) -> KeywordBase:
+    def htb_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for htb."""
         if self.deck is None:
             return None

@@ -43,7 +43,8 @@ class CeseBoundaryNonReflectivePart(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYNONREFLECTIVEPART_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def surfprt(self) -> typing.Optional[int]:
         """Get or set the Surface part ID referenced in *MESH_SURFACE_ELEMENT cards.

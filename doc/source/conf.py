@@ -1,5 +1,3 @@
-#import ansys.dyna.solver as solver
-
 import datetime
 import os
 
@@ -15,8 +13,7 @@ LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
 
 # Project information
 project = 'ansys-dyna-core'
-copyright = f"(c) {datetime.datetime.now().year} ANSYS, Inc. All rights reserved"
-author = 'ANSYS Inc.'
+author = 'Synopsys, Inc. and ANSYS, Inc.'
 release = version = __version__
 cname = os.getenv("DOCUMENTATION_CNAME", default="dyna.docs.pyansys.com")
 
@@ -154,7 +151,7 @@ html_theme_options = {
         ],
         "output": "api",
     },
-    "announcement": "<style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are deprecated and will be removed starting version v0.11.0.",
+    "announcement": "<style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are removed in version v0.11.0.",
 }
 
 # static path

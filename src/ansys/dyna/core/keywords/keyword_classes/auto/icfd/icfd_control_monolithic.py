@@ -43,7 +43,8 @@ class IcfdControlMonolithic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLMONOLITHIC_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid(self) -> int:
         """Get or set the Solver ID:

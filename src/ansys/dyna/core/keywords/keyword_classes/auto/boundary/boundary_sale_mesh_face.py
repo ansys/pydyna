@@ -50,7 +50,8 @@ class BoundarySaleMeshFace(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYSALEMESHFACE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def option(self) -> str:
         """Get or set the There are 3 options.

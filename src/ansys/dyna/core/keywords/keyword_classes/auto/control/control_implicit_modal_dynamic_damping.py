@@ -43,7 +43,8 @@ class ControlImplicitModalDynamicDamping(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITMODALDYNAMICDAMPING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def zeta1(self) -> typing.Optional[float]:
         """Get or set the Modal Dynamic damping coefficient.

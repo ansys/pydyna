@@ -46,7 +46,8 @@ class CeseControlSolver(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESECONTROLSOLVER_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def icese(self) -> int:
         """Get or set the Sets the framework of the CESE solver:   EQ.0: Fixed Eulerian

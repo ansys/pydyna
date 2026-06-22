@@ -122,31 +122,40 @@ class PartInertiaContactPrintAttachmentNodes(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINTATTACHMENTNODES_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINTATTACHMENTNODES_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINTATTACHMENTNODES_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINTATTACHMENTNODES_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINTATTACHMENTNODES_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINTATTACHMENTNODES_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINTATTACHMENTNODES_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINTATTACHMENTNODES_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINTATTACHMENTNODES_CARD8,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Heading for the part.
@@ -659,12 +668,12 @@ class PartInertiaContactPrintAttachmentNodes(KeywordBase):
         self._cards[8].set_value("ansid", value)
 
     @property
-    def nodeid_link(self) -> KeywordBase:
+    def nodeid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nodeid."""
         return self._get_link_by_attr("NODE", "nid", self.nodeid, "parts")
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None
@@ -679,7 +688,7 @@ class PartInertiaContactPrintAttachmentNodes(KeywordBase):
         self.mid = value.mid
 
     @property
-    def secid_link(self) -> KeywordBase:
+    def secid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for secid."""
         if self.deck is None:
             return None
@@ -694,7 +703,7 @@ class PartInertiaContactPrintAttachmentNodes(KeywordBase):
         self.secid = value.secid
 
     @property
-    def hgid_link(self) -> Hourglass:
+    def hgid_link(self) -> typing.Optional[Hourglass]:
         """Get the Hourglass object for hgid."""
         if self.deck is None:
             return None
@@ -709,7 +718,7 @@ class PartInertiaContactPrintAttachmentNodes(KeywordBase):
         self.hgid = value.hgid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -724,7 +733,7 @@ class PartInertiaContactPrintAttachmentNodes(KeywordBase):
         self.cid = value.cid
 
     @property
-    def ansid_link(self) -> KeywordBase:
+    def ansid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for ansid."""
         return self._get_set_link("NODE", self.ansid)
 

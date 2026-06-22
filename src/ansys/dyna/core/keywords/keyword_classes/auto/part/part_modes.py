@@ -75,16 +75,20 @@ class PartModes(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARTMODES_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTMODES_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTMODES_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTMODES_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part identification. This part must be a rigid body.
@@ -333,7 +337,7 @@ class PartModes(KeywordBase):
         self._cards[3].set_value("dampf", value)
 
     @property
-    def ansid_link(self) -> KeywordBase:
+    def ansid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for ansid."""
         return self._get_set_link("NODE", self.ansid)
 

@@ -61,8 +61,8 @@ class RigidwallGeometricSphere(KeywordBase):
 
     keyword = "RIGIDWALL"
     subkeyword = "GEOMETRIC_SPHERE"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "boxid": LinkType.DEFINE_BOX,
@@ -78,14 +78,17 @@ class RigidwallGeometricSphere(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICSPHERE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICSPHERE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RIGIDWALLGEOMETRICSPHERE_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = RigidwallGeometricSphere.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = RigidwallGeometricSphere._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _RIGIDWALLGEOMETRICSPHERE_OPTION0_CARD0,
@@ -270,7 +273,7 @@ class RigidwallGeometricSphere(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def boxid_link(self) -> DefineBox:
+    def boxid_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for boxid."""
         if self.deck is None:
             return None
@@ -285,7 +288,7 @@ class RigidwallGeometricSphere(KeywordBase):
         self.boxid = value.boxid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 
@@ -295,7 +298,7 @@ class RigidwallGeometricSphere(KeywordBase):
         self.nsid = value.sid
 
     @property
-    def nsidex_link(self) -> KeywordBase:
+    def nsidex_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsidex."""
         return self._get_set_link("NODE", self.nsidex)
 

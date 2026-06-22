@@ -43,7 +43,8 @@ class ParameterDuplication(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARAMETERDUPLICATION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dflag(self) -> int:
         """Get or set the Flag to control treatment of duplicate parameter definitions:

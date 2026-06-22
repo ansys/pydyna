@@ -83,8 +83,8 @@ class Mat211(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "211"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcaxh": LinkType.DEFINE_CURVE,
@@ -103,20 +103,25 @@ class Mat211(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT211_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT211_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT211_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT211_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT211_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat211.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat211._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT211_OPTION0_CARD0,
@@ -482,7 +487,7 @@ class Mat211(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcaxh_link(self) -> DefineCurve:
+    def lcaxh_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcaxh."""
         if self.deck is None:
             return None
@@ -497,7 +502,7 @@ class Mat211(KeywordBase):
         self.lcaxh = value.lcid
 
     @property
-    def lcshh_link(self) -> DefineCurve:
+    def lcshh_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcshh."""
         if self.deck is None:
             return None
@@ -512,7 +517,7 @@ class Mat211(KeywordBase):
         self.lcshh = value.lcid
 
     @property
-    def lcbmh_link(self) -> DefineCurve:
+    def lcbmh_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcbmh."""
         if self.deck is None:
             return None
@@ -527,7 +532,7 @@ class Mat211(KeywordBase):
         self.lcbmh = value.lcid
 
     @property
-    def lcaxt_link(self) -> DefineCurve:
+    def lcaxt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcaxt."""
         if self.deck is None:
             return None
@@ -542,7 +547,7 @@ class Mat211(KeywordBase):
         self.lcaxt = value.lcid
 
     @property
-    def lcsht_link(self) -> DefineCurve:
+    def lcsht_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsht."""
         if self.deck is None:
             return None
@@ -557,7 +562,7 @@ class Mat211(KeywordBase):
         self.lcsht = value.lcid
 
     @property
-    def lcbmt_link(self) -> DefineCurve:
+    def lcbmt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcbmt."""
         if self.deck is None:
             return None

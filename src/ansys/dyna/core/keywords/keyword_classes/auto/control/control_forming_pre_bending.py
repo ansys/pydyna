@@ -54,7 +54,8 @@ class ControlFormingPreBending(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGPREBENDING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pset(self) -> typing.Optional[int]:
         """Get or set the Part set ID to be included in the pre-bending.
@@ -147,7 +148,7 @@ class ControlFormingPreBending(KeywordBase):
         self._cards[0].set_value("zc", value)
 
     @property
-    def pset_link(self) -> KeywordBase:
+    def pset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for pset."""
         return self._get_set_link("PART", self.pset)
 

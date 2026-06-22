@@ -81,16 +81,20 @@ class ControlFrequencyResponseFunction(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFREQUENCYRESPONSEFUNCTION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFREQUENCYRESPONSEFUNCTION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFREQUENCYRESPONSEFUNCTION_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFREQUENCYRESPONSEFUNCTION_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def n1(self) -> typing.Optional[int]:
         """Get or set the Node / Node set/Segment set ID for excitation input
@@ -392,7 +396,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
         self._cards[3].set_value("restrt", value)
 
     @property
-    def lcfreq_link(self) -> DefineCurve:
+    def lcfreq_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfreq."""
         if self.deck is None:
             return None
@@ -407,7 +411,7 @@ class ControlFrequencyResponseFunction(KeywordBase):
         self.lcfreq = value.lcid
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None

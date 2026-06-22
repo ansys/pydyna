@@ -71,8 +71,8 @@ class MatTrip(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "TRIP"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "vm0": LinkType.DEFINE_CURVE,
@@ -87,14 +87,17 @@ class MatTrip(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATTRIP_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTRIP_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTRIP_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatTrip.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatTrip._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATTRIP_OPTION0_CARD0,
@@ -387,7 +390,7 @@ class MatTrip(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def vm0_link(self) -> DefineCurve:
+    def vm0_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for vm0."""
         if self.deck is None:
             return None
@@ -402,7 +405,7 @@ class MatTrip(KeywordBase):
         self.vm0 = value.lcid
 
     @property
-    def k2_link(self) -> DefineCurve:
+    def k2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for k2."""
         if self.deck is None:
             return None

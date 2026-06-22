@@ -53,10 +53,12 @@ class ConstrainedNodeSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODESET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDNODESET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cnsid(self) -> typing.Optional[int]:
         """Get or set the Optional constrained node set ID
@@ -112,7 +114,7 @@ class ConstrainedNodeSet(KeywordBase):
         self._cards[1].set_value("tf", value)
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 

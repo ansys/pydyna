@@ -53,7 +53,8 @@ class IcfdDefineHeatsource(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDEFINEHEATSOURCE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def hsid(self) -> typing.Optional[int]:
         """Get or set the Heat source ID
@@ -124,7 +125,7 @@ class IcfdDefineHeatsource(KeywordBase):
         self._cards[0].set_value("ptid2", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

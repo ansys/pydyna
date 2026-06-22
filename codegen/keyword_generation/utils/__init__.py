@@ -20,8 +20,50 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import copy
+import logging
 import pathlib
 import typing
+
+logger = logging.getLogger(__name__)
+
+
+def merge_generation_options(base: typing.Dict, overlay: typing.Dict) -> None:
+    """Merge overlay generation-options into base in place.
+
+    For intersecting keys: extends base's list with overlay's items.
+    For keys only in overlay: adds them to base.
+    Used by manifest normalization and wildcard handling.
+    """
+    if not overlay:
+        return
+    base_keys = set(base.keys())
+    overlay_keys = set(overlay.keys())
+    intersecting = base_keys & overlay_keys
+    new_keys = overlay_keys - base_keys
+    logger.debug(f"Merging {len(intersecting)} intersecting keys, adding {len(new_keys)} new keys")
+    for key in intersecting:
+        base[key].extend(overlay[key])
+    for key in new_keys:
+        base[key] = overlay[key]
+
+
+def merge_labels(base: typing.Dict, overlay: typing.Dict) -> None:
+    """Merge overlay labels into base in place. Overlay does not override existing labels."""
+    for label, index in overlay.items():
+        if label not in base:
+            base[label] = index
+
+
+def merge_options(keyword_options: typing.Dict, generation_settings: typing.Dict) -> None:
+    """Merge generation_settings into keyword_options['generation-options'] in place."""
+    generation_settings = copy.deepcopy(generation_settings)
+    logger.debug(f"Merging generation settings: {list(generation_settings.keys())}")
+    base = keyword_options.setdefault("generation-options", {})
+    if not base:
+        keyword_options["generation-options"] = generation_settings
+    else:
+        merge_generation_options(base, generation_settings)
 
 
 def handle_single_word_keyword(keyword: str) -> str:

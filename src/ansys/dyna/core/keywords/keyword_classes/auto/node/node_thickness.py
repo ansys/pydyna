@@ -52,7 +52,8 @@ class NodeThickness(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _NODETHICKNESS_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the Node ID. If GENERATE option is active, ID1 serves as the starting node.
@@ -98,12 +99,12 @@ class NodeThickness(KeywordBase):
         self._cards[0].set_value("inc", value)
 
     @property
-    def id1_link(self) -> KeywordBase:
+    def id1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given id1."""
         return self._get_link_by_attr("NODE", "nid", self.id1, "parts")
 
     @property
-    def id2_link(self) -> KeywordBase:
+    def id2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given id2."""
         return self._get_link_by_attr("NODE", "nid", self.id2, "parts")
 

@@ -51,10 +51,12 @@ class AleMeshInterface(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALEMESHINTERFACE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEMESHINTERFACE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mmgset(self) -> typing.Optional[int]:
         """Get or set the Multi-Material Set ID (see *SET_MULTI-MATERIAL_GROUP_LIST).

@@ -47,8 +47,8 @@ class SensorDefineNodeSet(KeywordBase):
 
     keyword = "SENSOR"
     subkeyword = "DEFINE_NODE_SET"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "node1": LinkType.SET_NODE,
@@ -63,8 +63,9 @@ class SensorDefineNodeSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SENSORDEFINENODESET_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SensorDefineNodeSet.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SensorDefineNodeSet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SENSORDEFINENODESET_OPTION0_CARD0,
@@ -171,7 +172,7 @@ class SensorDefineNodeSet(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def node1_link(self) -> KeywordBase:
+    def node1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for node1."""
         return self._get_set_link("NODE", self.node1)
 
@@ -181,7 +182,7 @@ class SensorDefineNodeSet(KeywordBase):
         self.node1 = value.sid
 
     @property
-    def node2_link(self) -> KeywordBase:
+    def node2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for node2."""
         return self._get_set_link("NODE", self.node2)
 

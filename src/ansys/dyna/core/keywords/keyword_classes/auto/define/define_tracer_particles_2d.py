@@ -42,8 +42,8 @@ class DefineTracerParticles2D(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "TRACER_PARTICLES_2D"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nset": LinkType.SET_NODE,
@@ -58,8 +58,9 @@ class DefineTracerParticles2D(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINETRACERPARTICLES2D_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineTracerParticles2D.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineTracerParticles2D._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINETRACERPARTICLES2D_OPTION0_CARD0,
@@ -108,7 +109,7 @@ class DefineTracerParticles2D(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def nset_link(self) -> KeywordBase:
+    def nset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nset."""
         return self._get_set_link("NODE", self.nset)
 
@@ -118,7 +119,7 @@ class DefineTracerParticles2D(KeywordBase):
         self.nset = value.sid
 
     @property
-    def pset_link(self) -> KeywordBase:
+    def pset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for pset."""
         return self._get_set_link("PART", self.pset)
 

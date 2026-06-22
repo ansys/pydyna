@@ -64,8 +64,8 @@ class MatCwm(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "CWM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcem": LinkType.DEFINE_CURVE,
@@ -83,14 +83,17 @@ class MatCwm(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATCWM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCWM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCWM_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatCwm.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatCwm._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCWM_OPTION0_CARD0,
@@ -304,7 +307,7 @@ class MatCwm(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcem_link(self) -> DefineCurve:
+    def lcem_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcem."""
         if self.deck is None:
             return None
@@ -319,7 +322,7 @@ class MatCwm(KeywordBase):
         self.lcem = value.lcid
 
     @property
-    def lcpr_link(self) -> DefineCurve:
+    def lcpr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpr."""
         if self.deck is None:
             return None
@@ -334,7 +337,7 @@ class MatCwm(KeywordBase):
         self.lcpr = value.lcid
 
     @property
-    def lcsy_link(self) -> DefineCurve:
+    def lcsy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsy."""
         if self.deck is None:
             return None
@@ -349,7 +352,7 @@ class MatCwm(KeywordBase):
         self.lcsy = value.lcid
 
     @property
-    def lchr_link(self) -> DefineCurve:
+    def lchr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lchr."""
         if self.deck is None:
             return None
@@ -364,7 +367,7 @@ class MatCwm(KeywordBase):
         self.lchr = value.lcid
 
     @property
-    def lcat_link(self) -> DefineCurve:
+    def lcat_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcat."""
         if self.deck is None:
             return None

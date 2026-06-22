@@ -45,7 +45,8 @@ class FatigueLoadstep(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FATIGUELOADSTEP_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def tstart(self) -> typing.Optional[float]:
         """Get or set the Start time of current load step

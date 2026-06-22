@@ -68,13 +68,16 @@ class AirbagSimplePressureVolumeId(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGSIMPLEPRESSUREVOLUMEID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGSIMPLEPRESSUREVOLUMEID_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGSIMPLEPRESSUREVOLUMEID_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Optional Airbag ID.
@@ -238,7 +241,7 @@ class AirbagSimplePressureVolumeId(KeywordBase):
         self._cards[2].set_value("lciddr", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -253,7 +256,7 @@ class AirbagSimplePressureVolumeId(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def lciddr_link(self) -> DefineCurve:
+    def lciddr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lciddr."""
         if self.deck is None:
             return None

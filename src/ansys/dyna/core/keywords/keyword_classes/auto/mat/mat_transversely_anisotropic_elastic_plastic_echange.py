@@ -55,8 +55,8 @@ class MatTransverselyAnisotropicElasticPlasticEchange(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "TRANSVERSELY_ANISOTROPIC_ELASTIC_PLASTIC_ECHANGE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "hlcid": LinkType.DEFINE_CURVE,
@@ -71,11 +71,13 @@ class MatTransverselyAnisotropicElasticPlasticEchange(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATTRANSVERSELYANISOTROPICELASTICPLASTICECHANGE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTRANSVERSELYANISOTROPICELASTICPLASTICECHANGE_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatTransverselyAnisotropicElasticPlasticEchange.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatTransverselyAnisotropicElasticPlasticEchange._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATTRANSVERSELYANISOTROPICELASTICPLASTICECHANGE_OPTION0_CARD0,
@@ -221,7 +223,7 @@ class MatTransverselyAnisotropicElasticPlasticEchange(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def hlcid_link(self) -> DefineCurve:
+    def hlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hlcid."""
         if self.deck is None:
             return None
@@ -236,7 +238,7 @@ class MatTransverselyAnisotropicElasticPlasticEchange(KeywordBase):
         self.hlcid = value.lcid
 
     @property
-    def idscale_link(self) -> DefineCurve:
+    def idscale_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for idscale."""
         if self.deck is None:
             return None

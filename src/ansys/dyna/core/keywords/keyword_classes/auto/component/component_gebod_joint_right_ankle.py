@@ -80,16 +80,20 @@ class ComponentGebodJointRightAnkle(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _COMPONENTGEBODJOINTRIGHTANKLE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _COMPONENTGEBODJOINTRIGHTANKLE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _COMPONENTGEBODJOINTRIGHTANKLE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _COMPONENTGEBODJOINTRIGHTANKLE_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def did(self) -> typing.Optional[int]:
         """Get or set the Dummy ID, see *COMPONENT_GEBOD_MALE, *COMPONENT_GEBOD_FEMALE, *COMPONENT_GEBOD_CHILD.
@@ -333,7 +337,7 @@ class ComponentGebodJointRightAnkle(KeywordBase):
         self._cards[3].set_value("unk3", value)
 
     @property
-    def lc1_link(self) -> DefineCurve:
+    def lc1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc1."""
         if self.deck is None:
             return None
@@ -348,7 +352,7 @@ class ComponentGebodJointRightAnkle(KeywordBase):
         self.lc1 = value.lcid
 
     @property
-    def lc2_link(self) -> DefineCurve:
+    def lc2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc2."""
         if self.deck is None:
             return None
@@ -363,7 +367,7 @@ class ComponentGebodJointRightAnkle(KeywordBase):
         self.lc2 = value.lcid
 
     @property
-    def lc3_link(self) -> DefineCurve:
+    def lc3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc3."""
         if self.deck is None:
             return None

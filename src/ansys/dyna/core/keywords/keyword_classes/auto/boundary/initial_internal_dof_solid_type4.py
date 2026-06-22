@@ -53,10 +53,12 @@ class InitialInternalDofSolidType4(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALINTERNALDOFSOLIDTYPE4_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALINTERNALDOFSOLIDTYPE4_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def lid(self) -> typing.Optional[int]:
         """Get or set the Element ID.
@@ -102,7 +104,7 @@ class InitialInternalDofSolidType4(KeywordBase):
         self._cards[1].set_value("valz", value)
 
     @property
-    def lid_link(self) -> KeywordBase:
+    def lid_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given lid."""
         return self._get_link_by_attr("ELEMENT", "eid", self.lid, "parts")
 

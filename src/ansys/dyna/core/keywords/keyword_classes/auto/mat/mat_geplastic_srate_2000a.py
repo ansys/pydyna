@@ -55,8 +55,8 @@ class MatGeplasticSrate2000A(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "GEPLASTIC_SRATE_2000A"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcss": LinkType.DEFINE_CURVE,
@@ -73,11 +73,13 @@ class MatGeplasticSrate2000A(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATGEPLASTICSRATE2000A_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGEPLASTICSRATE2000A_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatGeplasticSrate2000A.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatGeplasticSrate2000A._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATGEPLASTICSRATE2000A_OPTION0_CARD0,
@@ -224,7 +226,7 @@ class MatGeplasticSrate2000A(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -239,7 +241,7 @@ class MatGeplasticSrate2000A(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lcfeps_link(self) -> DefineCurve:
+    def lcfeps_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfeps."""
         if self.deck is None:
             return None
@@ -254,7 +256,7 @@ class MatGeplasticSrate2000A(KeywordBase):
         self.lcfeps = value.lcid
 
     @property
-    def lcfsig_link(self) -> DefineCurve:
+    def lcfsig_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfsig."""
         if self.deck is None:
             return None
@@ -269,7 +271,7 @@ class MatGeplasticSrate2000A(KeywordBase):
         self.lcfsig = value.lcid
 
     @property
-    def lce_link(self) -> DefineCurve:
+    def lce_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lce."""
         if self.deck is None:
             return None

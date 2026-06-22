@@ -50,7 +50,8 @@ class CeseFsiExclude(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEFSIEXCLUDE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid1(self) -> typing.Optional[int]:
         """Get or set the IDs of mechanics parts that will be excluded from the FSI interaction calculation with the CESE solver.

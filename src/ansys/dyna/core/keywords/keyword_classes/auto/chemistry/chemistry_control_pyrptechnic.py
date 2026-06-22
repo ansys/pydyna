@@ -73,16 +73,20 @@ class ChemistryControlPyrptechnic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHEMISTRYCONTROLPYRPTECHNIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYCONTROLPYRPTECHNIC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYCONTROLPYRPTECHNIC_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYCONTROLPYRPTECHNIC_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def comp1id(self) -> typing.Optional[int]:
         """Get or set the Chemical composition identifier of composition to use in the chamber

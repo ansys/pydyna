@@ -50,7 +50,8 @@ class InitialStrainShellLargeCardSet(Cards):
             Card.from_field_schemas_with_defaults(
                 _INITIALSTRAINSHELLLARGECARDSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
 
     @property
     def epsxx(self) -> float:
@@ -159,10 +160,12 @@ class InitialStrainShellLargeCardSetLarge(Cards):
             Card.from_field_schemas_with_defaults(
                 _INITIALSTRAINSHELLLARGECARDSETLARGE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALSTRAINSHELLLARGECARDSETLARGE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
 
     @property
     def epsxx(self) -> float:
@@ -269,17 +272,20 @@ class InitialStrainShellCardSet(Cards):
             Card.from_field_schemas_with_defaults(
                 _INITIALSTRAINSHELLCARDSET_CARD0,
                 **kwargs,
-            ),            CardSet(
+            ),
+            CardSet(
                 InitialStrainShellLargeCardSet,
                 length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
                 active_func = lambda: self.large == None or self.large == 0,
                 **kwargs
-            ),            CardSet(
+            ),
+            CardSet(
                 InitialStrainShellLargeCardSetLarge,
                 length_func = lambda: self.nplane * self.nthick if (self.nplane and self.nthick) else 2,
                 active_func = lambda: self.large == 1,
                 **kwargs
-            ),        ]
+            ),
+        ]
 
     @property
     def eid(self) -> typing.Optional[int]:
@@ -374,7 +380,8 @@ class InitialStrainShell(KeywordBase):
             CardSet(
                 InitialStrainShellCardSet,
                 **kwargs
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the eid

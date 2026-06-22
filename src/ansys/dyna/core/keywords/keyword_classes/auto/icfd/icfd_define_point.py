@@ -71,13 +71,16 @@ class IcfdDefinePoint(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDEFINEPOINT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDDEFINEPOINT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDDEFINEPOINT_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def poid(self) -> typing.Optional[int]:
         """Get or set the Point ID.
@@ -244,7 +247,7 @@ class IcfdDefinePoint(KeywordBase):
         self._cards[2].set_value("zh", value)
 
     @property
-    def lcidx_link(self) -> DefineCurve:
+    def lcidx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidx."""
         if self.deck is None:
             return None
@@ -259,7 +262,7 @@ class IcfdDefinePoint(KeywordBase):
         self.lcidx = value.lcid
 
     @property
-    def lcidy_link(self) -> DefineCurve:
+    def lcidy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidy."""
         if self.deck is None:
             return None
@@ -274,7 +277,7 @@ class IcfdDefinePoint(KeywordBase):
         self.lcidy = value.lcid
 
     @property
-    def lcidz_link(self) -> DefineCurve:
+    def lcidz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidz."""
         if self.deck is None:
             return None
@@ -289,7 +292,7 @@ class IcfdDefinePoint(KeywordBase):
         self.lcidz = value.lcid
 
     @property
-    def lcidw_link(self) -> DefineCurve:
+    def lcidw_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidw."""
         if self.deck is None:
             return None

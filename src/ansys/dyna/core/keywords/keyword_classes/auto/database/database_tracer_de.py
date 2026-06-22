@@ -55,7 +55,8 @@ class DatabaseTracerDe(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASETRACERDE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def time(self) -> float:
         """Get or set the Start time for tracer particle
@@ -155,7 +156,7 @@ class DatabaseTracerDe(KeywordBase):
         self._cards[0].set_value("radius", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 

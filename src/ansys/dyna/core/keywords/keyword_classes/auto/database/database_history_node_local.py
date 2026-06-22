@@ -53,7 +53,8 @@ class DatabaseHistoryNodeLocal(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEHISTORYNODELOCAL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Node ID. The contents of the files are given in Table 9.1 in the Keyword Manual section 9.14 for nodes.
@@ -108,12 +109,12 @@ class DatabaseHistoryNodeLocal(KeywordBase):
         self._cards[0].set_value("hfo", value)
 
     @property
-    def id_link(self) -> KeywordBase:
+    def id_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given id."""
         return self._get_link_by_attr("NODE", "nid", self.id, "parts")
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

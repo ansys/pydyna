@@ -119,8 +119,8 @@ class MatT06(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "T06"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lccf": LinkType.DEFINE_CURVE,
@@ -137,29 +137,37 @@ class MatT06(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATT06_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT06_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT06_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT06_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT06_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT06_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT06_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATT06_CARD7,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatT06.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatT06._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATT06_OPTION0_CARD0,
@@ -815,7 +823,7 @@ class MatT06(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lccf_link(self) -> DefineCurve:
+    def lccf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccf."""
         if self.deck is None:
             return None
@@ -830,7 +838,7 @@ class MatT06(KeywordBase):
         self.lccf = value.lcid
 
     @property
-    def lckf_link(self) -> DefineCurve:
+    def lckf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lckf."""
         if self.deck is None:
             return None
@@ -845,7 +853,7 @@ class MatT06(KeywordBase):
         self.lckf = value.lcid
 
     @property
-    def lcci_link(self) -> DefineCurve:
+    def lcci_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcci."""
         if self.deck is None:
             return None
@@ -860,7 +868,7 @@ class MatT06(KeywordBase):
         self.lcci = value.lcid
 
     @property
-    def lcki_link(self) -> DefineCurve:
+    def lcki_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcki."""
         if self.deck is None:
             return None

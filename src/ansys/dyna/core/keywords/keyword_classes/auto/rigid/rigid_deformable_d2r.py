@@ -49,7 +49,8 @@ class RigidDeformableD2R(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _RIGIDDEFORMABLED2R_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of the part which is switched to a rigid material.
@@ -74,12 +75,12 @@ class RigidDeformableD2R(KeywordBase):
         self._cards[0].set_value("lrb", value)
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 
     @property
-    def lrb_link(self) -> KeywordBase:
+    def lrb_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given lrb."""
         return self._get_link_by_attr("PART", "pid", self.lrb, "parts")
 

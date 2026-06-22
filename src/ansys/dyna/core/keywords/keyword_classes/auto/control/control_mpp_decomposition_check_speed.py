@@ -42,4 +42,5 @@ class ControlMppDecompositionCheckSpeed(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPDECOMPOSITIONCHECKSPEED_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

@@ -54,7 +54,8 @@ class EmMat004(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMMAT004_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID: refers to MID in the *PART card.
@@ -154,7 +155,7 @@ class EmMat004(KeywordBase):
         self._cards[0].set_value("deatht", value)
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None

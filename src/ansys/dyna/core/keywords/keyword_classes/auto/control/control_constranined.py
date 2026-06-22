@@ -43,7 +43,8 @@ class ControlConstranined(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLCONSTRANINED_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sprchk(self) -> int:
         """Get or set the SPR2/SPR3 initialization check:

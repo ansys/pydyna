@@ -61,11 +61,13 @@ class EmIsopotentialConnect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMISOPOTENTIALCONNECT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMISOPOTENTIALCONNECT_CARD1,
                 active_func=lambda: self.contype == 6,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def conid(self) -> typing.Optional[int]:
         """Get or set the Connection ID.
@@ -186,7 +188,7 @@ class EmIsopotentialConnect(KeywordBase):
         self._cards[1].set_value("v0", value)
 
     @property
-    def lcid_rdlid_link(self) -> DefineCurve:
+    def lcid_rdlid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid_rdlid."""
         if self.deck is None:
             return None
@@ -201,7 +203,7 @@ class EmIsopotentialConnect(KeywordBase):
         self.lcid_rdlid = value.lcid
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

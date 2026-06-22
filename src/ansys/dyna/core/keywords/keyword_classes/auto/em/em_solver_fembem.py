@@ -45,7 +45,8 @@ class EmSolverFembem(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMSOLVERFEMBEM_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def reltol(self) -> float:
         """Get or set the Relative tolerance for the FEM/BEM system solve. If the results are not accurate enough, try decreasing this tolerance. A smaller tolerance will, however, require more iterations.

@@ -46,7 +46,8 @@ class DualceseBoundaryNonReflectiveMsurf(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYNONREFLECTIVEMSURF_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mspid(self) -> typing.Optional[int]:
         """Get or set the Mesh surface part ID that is referenced by *MESH_SURFACE_ELEMENT cards

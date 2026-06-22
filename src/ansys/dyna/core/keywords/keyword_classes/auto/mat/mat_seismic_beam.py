@@ -93,8 +93,8 @@ class MatSeismicBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "SEISMIC_BEAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcpms": LinkType.DEFINE_CURVE,
@@ -111,20 +111,25 @@ class MatSeismicBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATSEISMICBEAM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSEISMICBEAM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSEISMICBEAM_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSEISMICBEAM_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSEISMICBEAM_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatSeismicBeam.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatSeismicBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSEISMICBEAM_OPTION0_CARD0,
@@ -526,7 +531,7 @@ class MatSeismicBeam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcpms_link(self) -> DefineCurve:
+    def lcpms_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpms."""
         if self.deck is None:
             return None
@@ -541,7 +546,7 @@ class MatSeismicBeam(KeywordBase):
         self.lcpms = value.lcid
 
     @property
-    def lcpmt_link(self) -> DefineCurve:
+    def lcpmt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcpmt."""
         if self.deck is None:
             return None
@@ -556,7 +561,7 @@ class MatSeismicBeam(KeywordBase):
         self.lcpmt = value.lcid
 
     @property
-    def lcat_link(self) -> DefineCurve:
+    def lcat_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcat."""
         if self.deck is None:
             return None
@@ -571,7 +576,7 @@ class MatSeismicBeam(KeywordBase):
         self.lcat = value.lcid
 
     @property
-    def lcac_link(self) -> DefineCurve:
+    def lcac_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcac."""
         if self.deck is None:
             return None

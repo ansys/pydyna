@@ -56,8 +56,8 @@ class DefineSphMeshBox(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "SPH_MESH_BOX"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "idseg": LinkType.SET_SEGMENT,
@@ -72,11 +72,13 @@ class DefineSphMeshBox(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINESPHMESHBOX_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINESPHMESHBOX_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineSphMeshBox.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineSphMeshBox._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINESPHMESHBOX_OPTION0_CARD0,
@@ -237,7 +239,7 @@ class DefineSphMeshBox(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def idseg_link(self) -> KeywordBase:
+    def idseg_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for idseg."""
         return self._get_set_link("SEGMENT", self.idseg)
 
@@ -247,7 +249,7 @@ class DefineSphMeshBox(KeywordBase):
         self.idseg = value.sid
 
     @property
-    def ipid_link(self) -> KeywordBase:
+    def ipid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ipid."""
         return self._get_link_by_attr("PART", "pid", self.ipid, "parts")
 

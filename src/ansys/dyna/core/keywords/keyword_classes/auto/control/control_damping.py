@@ -58,10 +58,12 @@ class ControlDamping(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLDAMPING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLDAMPING_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nrcyck(self) -> int:
         """Get or set the Number of iterations between convergence checks, for dynamic relaxation option (default=250).
@@ -179,7 +181,7 @@ class ControlDamping(KeywordBase):
         self._cards[1].set_value("drpset", value)
 
     @property
-    def drpset_link(self) -> KeywordBase:
+    def drpset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for drpset."""
         return self._get_set_link("PART", self.drpset)
 

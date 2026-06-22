@@ -60,10 +60,12 @@ class ControlVibroAcoustic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLVIBROACOUSTIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLVIBROACOUSTIC_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def vaflag(self) -> int:
         """Get or set the Loading type:
@@ -214,7 +216,7 @@ class ControlVibroAcoustic(KeywordBase):
         self._cards[1].set_value("nmodstr", value)
 
     @property
-    def nmodstr_link(self) -> DefineCurve:
+    def nmodstr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for nmodstr."""
         if self.deck is None:
             return None

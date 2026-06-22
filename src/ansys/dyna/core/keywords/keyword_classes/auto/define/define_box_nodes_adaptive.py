@@ -55,8 +55,8 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "BOX_NODES_ADAPTIVE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "node": LinkType.NODE,
@@ -74,11 +74,13 @@ class DefineBoxNodesAdaptive(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEBOXNODESADAPTIVE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEBOXNODESADAPTIVE_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineBoxNodesAdaptive.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineBoxNodesAdaptive._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEBOXNODESADAPTIVE_OPTION0_CARD0,
@@ -217,12 +219,12 @@ class DefineBoxNodesAdaptive(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def node_link(self) -> KeywordBase:
+    def node_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node."""
         return self._get_link_by_attr("NODE", "nid", self.node, "parts")
 
     @property
-    def lcx_link(self) -> DefineCurve:
+    def lcx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcx."""
         if self.deck is None:
             return None
@@ -237,7 +239,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
         self.lcx = value.lcid
 
     @property
-    def lcy_link(self) -> DefineCurve:
+    def lcy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy."""
         if self.deck is None:
             return None
@@ -252,7 +254,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
         self.lcy = value.lcid
 
     @property
-    def lcz_link(self) -> DefineCurve:
+    def lcz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcz."""
         if self.deck is None:
             return None
@@ -267,7 +269,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
         self.lcz = value.lcid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

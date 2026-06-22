@@ -56,8 +56,8 @@ class DefineCurveDrawbead(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "CURVE_DRAWBEAD"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "vid": LinkType.DEFINE_VECTOR,
@@ -73,14 +73,17 @@ class DefineCurveDrawbead(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINECURVEDRAWBEAD_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINECURVEDRAWBEAD_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINECURVEDRAWBEAD_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineCurveDrawbead.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineCurveDrawbead._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECURVEDRAWBEAD_OPTION0_CARD0,
@@ -208,7 +211,7 @@ class DefineCurveDrawbead(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None
@@ -223,12 +226,12 @@ class DefineCurveDrawbead(KeywordBase):
         self.vid = value.vid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 
     @property
-    def blkid_link(self) -> KeywordBase:
+    def blkid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given blkid."""
         return self._get_link_by_attr("PART", "pid", self.blkid, "parts")
 

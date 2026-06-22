@@ -43,8 +43,8 @@ class MatAddChemShrinkage(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ADD_CHEM_SHRINKAGE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -59,8 +59,9 @@ class MatAddChemShrinkage(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATADDCHEMSHRINKAGE_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatAddChemShrinkage.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatAddChemShrinkage._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATADDCHEMSHRINKAGE_OPTION0_CARD0,
@@ -107,7 +108,7 @@ class MatAddChemShrinkage(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -122,7 +123,7 @@ class MatAddChemShrinkage(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

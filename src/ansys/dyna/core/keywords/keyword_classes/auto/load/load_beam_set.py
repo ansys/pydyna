@@ -50,7 +50,8 @@ class LoadBeamSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADBEAMSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def esid(self) -> typing.Optional[int]:
         """Get or set the Beam element set ID, see *SET_BEAM.
@@ -101,7 +102,7 @@ class LoadBeamSet(KeywordBase):
         self._cards[0].set_value("sf", value)
 
     @property
-    def esid_link(self) -> KeywordBase:
+    def esid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_BEAM_* keyword for esid."""
         return self._get_set_link("BEAM", self.esid)
 

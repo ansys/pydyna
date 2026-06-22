@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
 """Module for handling groups of table cards."""
 
 import io
@@ -27,7 +28,7 @@ import typing
 
 import pandas as pd
 
-from ansys.dyna.core.lib.card_interface import CardInterface
+from ansys.dyna.core.lib.card_interface import CardInterface, ReadResult
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.format_type import format_type
 from ansys.dyna.core.lib.io_utils import write_or_return
@@ -41,10 +42,10 @@ class TableCardGroup(CardInterface):
         self,
         card_schemas: typing.List[typing.Tuple[FieldSchema, ...]],
         length_func: typing.Callable,
-        active_func: typing.Callable = None,
+        active_func: typing.Optional[typing.Callable] = None,
         name: str = None,
         format: format_type = format_type.default,
-        card_active_funcs: typing.List[typing.Callable] = None,
+        card_active_funcs: typing.Optional[typing.List[typing.Callable]] = None,
         **kwargs,
     ):
         """Initialize a TableCardGroup from field schemas.
@@ -138,36 +139,67 @@ class TableCardGroup(CardInterface):
         for card in self._cards:
             card.format = value
 
-    def _load_unbounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet) -> None:
+    def _load_unbounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet) -> typing.List[str]:
+        """Load unbounded data from buffer.
+
+        Returns
+        -------
+        list of str
+            Warning messages.
+        """
         data_lines = buffer_to_lines(buf)
-        self._load_lines(data_lines, parameter_set)
+        return self._load_lines(data_lines, parameter_set)
 
-    def _load_bounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet) -> None:
+    def _load_bounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet) -> typing.List[str]:
+        """Load bounded data from buffer.
+
+        Returns
+        -------
+        list of str
+            Warning messages.
+        """
         data_lines = buffer_to_lines(buf, self._num_rows())
-        self._load_lines(data_lines, parameter_set)
+        return self._load_lines(data_lines, parameter_set)
 
-    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> None:
-        """Read the table card group from a buffer."""
+    def read(self, buf: typing.TextIO, parameter_set: ParameterSet = None) -> ReadResult:
+        """Read the table card group from a buffer.
+
+        Returns
+        -------
+        ReadResult
+            Result containing warnings.
+        """
+        result = ReadResult()
         if self.bounded:
-            self._load_bounded_from_buffer(buf, parameter_set)
+            warnings_list = self._load_bounded_from_buffer(buf, parameter_set)
         else:
-            self._load_unbounded_from_buffer(buf, parameter_set)
+            warnings_list = self._load_unbounded_from_buffer(buf, parameter_set)
+        result.warnings.extend(warnings_list)
+        return result
 
-    def _load_lines(self, data_lines: typing.List[str], parameter_set: ParameterSet) -> None:
+    def _load_lines(self, data_lines: typing.List[str], parameter_set: ParameterSet) -> typing.List[str]:
         """Load the card data from a list of strings.
 
         For parameter retention, each sub-card's refs are scoped with `subcard{index}`
         so URIs are: uri_prefix/subcard{subcard_index}/row{row_index}/{field_index}
+
+        Returns
+        -------
+        list of str
+            Warning messages.
         """
+        all_warnings = []
         card_lines = self._divide_data_lines(data_lines)
         for index, lines in enumerate(card_lines):
             # Scope by subcard index so refs from different sub-cards don't overlap
             if parameter_set is not None:
                 with parameter_set.scope(f"subcard{index}"):
-                    self._cards[index]._load_lines(lines, parameter_set)
+                    warnings_list = self._cards[index]._load_lines(lines, parameter_set)
             else:
-                self._cards[index]._load_lines(lines, parameter_set)
+                warnings_list = self._cards[index]._load_lines(lines, parameter_set)
+            all_warnings.extend(warnings_list)
         self.table = pd.concat([card.table for card in self._cards], axis=1)
+        return all_warnings
 
     def write(
         self,

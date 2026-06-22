@@ -66,13 +66,16 @@ class RveAnalysisFem(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _RVEANALYSISFEM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RVEANALYSISFEM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _RVEANALYSISFEM_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Name of an input file that contains the mesh information (nodal coordinates, element connectivity) of the RVE model.
@@ -246,7 +249,7 @@ class RveAnalysisFem(KeywordBase):
         self._cards[2].set_value("h13", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

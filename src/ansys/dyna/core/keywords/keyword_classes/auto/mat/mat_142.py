@@ -85,8 +85,8 @@ class Mat142(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "142"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "i11": LinkType.DEFINE_CURVE,
@@ -104,20 +104,25 @@ class Mat142(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT142_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT142_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT142_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT142_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT142_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat142.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat142._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT142_OPTION0_CARD0,
@@ -512,7 +517,7 @@ class Mat142(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def i11_link(self) -> DefineCurve:
+    def i11_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for i11."""
         if self.deck is None:
             return None
@@ -527,7 +532,7 @@ class Mat142(KeywordBase):
         self.i11 = value.lcid
 
     @property
-    def i22_link(self) -> DefineCurve:
+    def i22_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for i22."""
         if self.deck is None:
             return None
@@ -542,7 +547,7 @@ class Mat142(KeywordBase):
         self.i22 = value.lcid
 
     @property
-    def i12_link(self) -> DefineCurve:
+    def i12_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for i12."""
         if self.deck is None:
             return None
@@ -557,7 +562,7 @@ class Mat142(KeywordBase):
         self.i12 = value.lcid
 
     @property
-    def i23_link(self) -> DefineCurve:
+    def i23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for i23."""
         if self.deck is None:
             return None
@@ -572,7 +577,7 @@ class Mat142(KeywordBase):
         self.i23 = value.lcid
 
     @property
-    def iaa_link(self) -> DefineCurve:
+    def iaa_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for iaa."""
         if self.deck is None:
             return None

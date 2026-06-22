@@ -42,4 +42,5 @@ class ControlMppDecompositionDisableUnrefCurves(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPDECOMPOSITIONDISABLEUNREFCURVES_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

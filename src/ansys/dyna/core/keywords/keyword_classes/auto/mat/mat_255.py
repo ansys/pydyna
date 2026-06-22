@@ -60,8 +60,8 @@ class Mat255(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "255"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "tabidc": LinkType.DEFINE_CURVE,
@@ -77,14 +77,17 @@ class Mat255(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT255_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT255_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT255_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat255.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat255._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT255_OPTION0_CARD0,
@@ -252,7 +255,7 @@ class Mat255(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def tabidc_link(self) -> DefineCurve:
+    def tabidc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tabidc."""
         if self.deck is None:
             return None
@@ -267,7 +270,7 @@ class Mat255(KeywordBase):
         self.tabidc = value.lcid
 
     @property
-    def tabidt_link(self) -> DefineCurve:
+    def tabidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tabidt."""
         if self.deck is None:
             return None
@@ -282,7 +285,7 @@ class Mat255(KeywordBase):
         self.tabidt = value.lcid
 
     @property
-    def lalpha_link(self) -> DefineCurve:
+    def lalpha_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lalpha."""
         if self.deck is None:
             return None

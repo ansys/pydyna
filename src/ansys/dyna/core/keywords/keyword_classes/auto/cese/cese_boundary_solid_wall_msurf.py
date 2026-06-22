@@ -52,7 +52,8 @@ class CeseBoundarySolidWallMsurf(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYSOLIDWALLMSURF_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def surfprt(self) -> typing.Optional[int]:
         """Get or set the Surface part ID referenced in *MESH_SURFACE_ELEMENT cards.
@@ -115,7 +116,7 @@ class CeseBoundarySolidWallMsurf(KeywordBase):
         self._cards[0].set_value("vz", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

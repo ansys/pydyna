@@ -59,10 +59,12 @@ class ControlImplicitModesBinary(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITMODESBINARY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITMODESBINARY_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsidc(self) -> int:
         """Get or set the Node set ID for constraint modes:
@@ -165,7 +167,7 @@ class ControlImplicitModesBinary(KeywordBase):
         self._cards[1].set_value("filename", value)
 
     @property
-    def nsidc_link(self) -> KeywordBase:
+    def nsidc_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsidc."""
         return self._get_set_link("NODE", self.nsidc)
 
@@ -175,7 +177,7 @@ class ControlImplicitModesBinary(KeywordBase):
         self.nsidc = value.sid
 
     @property
-    def nsida_link(self) -> KeywordBase:
+    def nsida_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsida."""
         return self._get_set_link("NODE", self.nsida)
 

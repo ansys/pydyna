@@ -48,7 +48,8 @@ class InterfaceSsiAuxNode(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACESSIAUXNODE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def gmset(self) -> typing.Optional[int]:
         """Get or set the Identifier for this set of recorded motions to be referred to in *INTERFACE_SSI. Must be unique.
@@ -72,7 +73,7 @@ class InterfaceSsiAuxNode(KeywordBase):
         self._cards[0].set_value("setid", value)
 
     @property
-    def setid_link(self) -> KeywordBase:
+    def setid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for setid."""
         return self._get_set_link("NODE", self.setid)
 

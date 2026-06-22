@@ -389,6 +389,7 @@ class KeywordData:
         links: Linked keyword relationships
         negative_shared_fields: Shared fields in option cards (used by SharedFieldHandler)
         card_insertions: Pending card insertions (used by InsertCardHandler and others)
+        additional_imports: Extra top-level imports for the generated module (e.g. ["math"])
     """
 
     keyword: str
@@ -411,6 +412,7 @@ class KeywordData:
     links: Union[List[LinkData], List[Dict[str, Any]]] = field(default_factory=list)  # Empty list for templates
     negative_shared_fields: List[Any] = field(default_factory=list)  # Empty list for templates
     card_insertions: List[Any] = field(default_factory=list)
+    additional_imports: List[str] = field(default_factory=list)  # Extra stdlib/third-party imports (e.g. ["math"])
     label_registry: Optional["LabelRegistry"] = None  # Initialized before handlers run
     renamed_properties: List["RenamedProperty"] = field(default_factory=list)  # Tracks renamed fields for docs
     property_collisions: Dict[str, str] = field(default_factory=dict)  # Maps property_name -> collision note
@@ -483,6 +485,7 @@ class KeywordData:
             links=links,
             negative_shared_fields=data.get("negative_shared_fields", []),
             card_insertions=data.get("card_insertions", []),
+            additional_imports=data.get("additional_imports", []),
             renamed_properties=data.get("renamed_properties", []),
         )
 

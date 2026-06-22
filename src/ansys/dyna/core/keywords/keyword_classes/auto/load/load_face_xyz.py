@@ -51,7 +51,8 @@ class LoadFaceXyz(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADFACEXYZ_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def fxyzid(self) -> typing.Optional[int]:
         """Get or set the Physical face ID for the SET keyword option ; see *IGA_FACE_XYZ
@@ -97,7 +98,7 @@ class LoadFaceXyz(KeywordBase):
         self._cards[0].set_value("at", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

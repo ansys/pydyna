@@ -75,8 +75,8 @@ class MatGeneralViscoelasticMoisture(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "GENERAL_VISCOELASTIC_MOISTURE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -91,17 +91,21 @@ class MatGeneralViscoelasticMoisture(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATGENERALVISCOELASTICMOISTURE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALVISCOELASTICMOISTURE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALVISCOELASTICMOISTURE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALVISCOELASTICMOISTURE_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatGeneralViscoelasticMoisture.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatGeneralViscoelasticMoisture._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATGENERALVISCOELASTICMOISTURE_OPTION0_CARD0,
@@ -411,7 +415,7 @@ class MatGeneralViscoelasticMoisture(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -426,7 +430,7 @@ class MatGeneralViscoelasticMoisture(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def lcidk_link(self) -> DefineCurve:
+    def lcidk_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidk."""
         if self.deck is None:
             return None

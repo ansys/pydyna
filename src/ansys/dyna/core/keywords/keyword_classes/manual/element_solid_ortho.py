@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
 """Module for ELEMENT_SOLID_ORTHO keyword."""
 
 import typing
@@ -102,7 +103,7 @@ class ElementSolidOrtho(KeywordBase):
         lines = buffer_to_lines(buf)
         if len(lines) < 2:
             return
-        if len(lines[0].strip().split()) > 2:
+        if len(lines[0].strip()) > 16:
             self.set_legacy_format()
 
         buf.seek(pos)

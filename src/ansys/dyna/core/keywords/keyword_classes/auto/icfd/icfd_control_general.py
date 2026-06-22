@@ -51,7 +51,8 @@ class IcfdControlGeneral(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLGENERAL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def atype(self) -> int:
         """Get or set the Analysis type:
@@ -117,7 +118,7 @@ class IcfdControlGeneral(KeywordBase):
         self._cards[0].set_value("rdvcl", value)
 
     @property
-    def rdvcl_link(self) -> DefineCurve:
+    def rdvcl_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for rdvcl."""
         if self.deck is None:
             return None

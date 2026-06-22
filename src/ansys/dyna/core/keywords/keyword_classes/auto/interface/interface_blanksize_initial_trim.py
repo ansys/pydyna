@@ -55,16 +55,20 @@ class InterfaceBlanksizeInitialTrim(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACEBLANKSIZEINITIALTRIM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACEBLANKSIZEINITIALTRIM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACEBLANKSIZEINITIALTRIM_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACEBLANKSIZEINITIALTRIM_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename5(self) -> typing.Optional[str]:
         """Get or set the The following file names, FILENAME4~7 are for the option INITIAL_TRIM:

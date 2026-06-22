@@ -97,13 +97,6 @@ SectionShellEfg
     :members:
 
 
-SectionShellMisc
-----------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.section_shell_misc
-    :members:
-
-
 SectionShellThermal
 -------------------
 

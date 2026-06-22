@@ -48,7 +48,8 @@ class BoundarySphSymmetryPlane(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYSPHSYMMETRYPLANE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def vtx(self) -> float:
         """Get or set the x-coordinate of tail of a normal vector originating on the wall (tail) and terminating in the body (head) (i.e., vector points from the symmetry plane into the body).

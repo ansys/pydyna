@@ -95,8 +95,8 @@ class Mat040(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "040"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcida": LinkType.DEFINE_CURVE,
@@ -115,23 +115,29 @@ class Mat040(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT040_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT040_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT040_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT040_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT040_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT040_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat040.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat040._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT040_OPTION0_CARD0,
@@ -603,7 +609,7 @@ class Mat040(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcida_link(self) -> DefineCurve:
+    def lcida_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcida."""
         if self.deck is None:
             return None
@@ -618,7 +624,7 @@ class Mat040(KeywordBase):
         self.lcida = value.lcid
 
     @property
-    def lcidb_link(self) -> DefineCurve:
+    def lcidb_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidb."""
         if self.deck is None:
             return None
@@ -633,7 +639,7 @@ class Mat040(KeywordBase):
         self.lcidb = value.lcid
 
     @property
-    def lcidc_link(self) -> DefineCurve:
+    def lcidc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidc."""
         if self.deck is None:
             return None
@@ -648,7 +654,7 @@ class Mat040(KeywordBase):
         self.lcidc = value.lcid
 
     @property
-    def lcidab_link(self) -> DefineCurve:
+    def lcidab_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidab."""
         if self.deck is None:
             return None
@@ -663,7 +669,7 @@ class Mat040(KeywordBase):
         self.lcidab = value.lcid
 
     @property
-    def lcidbc_link(self) -> DefineCurve:
+    def lcidbc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidbc."""
         if self.deck is None:
             return None
@@ -678,7 +684,7 @@ class Mat040(KeywordBase):
         self.lcidbc = value.lcid
 
     @property
-    def lcidca_link(self) -> DefineCurve:
+    def lcidca_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidca."""
         if self.deck is None:
             return None

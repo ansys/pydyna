@@ -83,16 +83,20 @@ class AirbagLinearFluidId(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGLINEARFLUIDID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGLINEARFLUIDID_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGLINEARFLUIDID_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGLINEARFLUIDID_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Optional Airbag ID.
@@ -338,7 +342,7 @@ class AirbagLinearFluidId(KeywordBase):
         self._cards[3].set_value("nonull", value)
 
     @property
-    def lcint_link(self) -> DefineCurve:
+    def lcint_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcint."""
         if self.deck is None:
             return None
@@ -353,7 +357,7 @@ class AirbagLinearFluidId(KeywordBase):
         self.lcint = value.lcid
 
     @property
-    def lcoutt_link(self) -> DefineCurve:
+    def lcoutt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcoutt."""
         if self.deck is None:
             return None
@@ -368,7 +372,7 @@ class AirbagLinearFluidId(KeywordBase):
         self.lcoutt = value.lcid
 
     @property
-    def lcoutp_link(self) -> DefineCurve:
+    def lcoutp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcoutp."""
         if self.deck is None:
             return None
@@ -383,7 +387,7 @@ class AirbagLinearFluidId(KeywordBase):
         self.lcoutp = value.lcid
 
     @property
-    def lcfit_link(self) -> DefineCurve:
+    def lcfit_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfit."""
         if self.deck is None:
             return None
@@ -398,7 +402,7 @@ class AirbagLinearFluidId(KeywordBase):
         self.lcfit = value.lcid
 
     @property
-    def lcbulk_link(self) -> DefineCurve:
+    def lcbulk_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcbulk."""
         if self.deck is None:
             return None
@@ -413,7 +417,7 @@ class AirbagLinearFluidId(KeywordBase):
         self.lcbulk = value.lcid
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -428,7 +432,7 @@ class AirbagLinearFluidId(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def p_limlc_link(self) -> DefineCurve:
+    def p_limlc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for p_limlc."""
         if self.deck is None:
             return None

@@ -53,7 +53,8 @@ class DatabaseBinaryD3Drlf(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYD3DRLF_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cycl(self) -> typing.Optional[float]:
         """Get or set the For D3DUMP and RUNRSF options this field is the number of time steps between output states.  For the D3DLF option, the value, n, inputted in this field causes an output state to be written every nth convergence check during the explicit dynamic relaxation phase
@@ -116,7 +117,7 @@ class DatabaseBinaryD3Drlf(KeywordBase):
         self._cards[0].set_value("psetid", value)
 
     @property
-    def lcdt_link(self) -> DefineCurve:
+    def lcdt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdt."""
         if self.deck is None:
             return None
@@ -131,7 +132,7 @@ class DatabaseBinaryD3Drlf(KeywordBase):
         self.lcdt = value.lcid
 
     @property
-    def psetid_link(self) -> KeywordBase:
+    def psetid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psetid."""
         return self._get_set_link("PART", self.psetid)
 

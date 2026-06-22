@@ -57,16 +57,20 @@ class ChemistryModel(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHEMISTRYMODEL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYMODEL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYMODEL_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYMODEL_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def modelid(self) -> typing.Optional[int]:
         """Get or set the Identifier for this chemkin-based chemistry model.

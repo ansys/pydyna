@@ -50,7 +50,8 @@ class EmControlSwitch(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCONTROLSWITCH_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def lcid(self) -> int:
         """Get or set the Load Curve ID.Negative values switch the solver off, positive values switch it back on.
@@ -93,7 +94,7 @@ class EmControlSwitch(KeywordBase):
         self._cards[0].set_value("bemcomp", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

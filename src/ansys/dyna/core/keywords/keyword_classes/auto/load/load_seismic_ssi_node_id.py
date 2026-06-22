@@ -72,13 +72,16 @@ class LoadSeismicSsiNodeId(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADSEISMICSSINODEID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSEISMICSSINODEID_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSEISMICSSINODEID_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the loading ID
@@ -232,12 +235,12 @@ class LoadSeismicSsiNodeId(KeywordBase):
         self._cards[2].set_value("igm", value)
 
     @property
-    def typeid_link(self) -> KeywordBase:
+    def typeid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given typeid."""
         return self._get_link_by_attr("NODE", "nid", self.typeid, "parts")
 
     @property
-    def gmx_link(self) -> DefineCurve:
+    def gmx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for gmx."""
         if self.deck is None:
             return None
@@ -252,7 +255,7 @@ class LoadSeismicSsiNodeId(KeywordBase):
         self.gmx = value.lcid
 
     @property
-    def gmy_link(self) -> DefineCurve:
+    def gmy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for gmy."""
         if self.deck is None:
             return None
@@ -267,7 +270,7 @@ class LoadSeismicSsiNodeId(KeywordBase):
         self.gmy = value.lcid
 
     @property
-    def gmz_link(self) -> DefineCurve:
+    def gmz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for gmz."""
         if self.deck is None:
             return None
@@ -282,7 +285,7 @@ class LoadSeismicSsiNodeId(KeywordBase):
         self.gmz = value.lcid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

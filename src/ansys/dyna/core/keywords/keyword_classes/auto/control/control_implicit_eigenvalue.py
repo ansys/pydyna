@@ -95,23 +95,28 @@ class ControlImplicitEigenvalue(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUE_CARD1,
                 active_func=lambda: (self.eigmth in [101, 102, 111]) or (self.isolid != 0 or self.ibeam != 0 or self.ishell != 0 or self.itshell != 0 or self.mstres != 0 or self.evdump != None or self.mstrscl != 0.001),
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUE_CARD2,
                 active_func=lambda: self.eigmth == 101,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUE_CARD3,
                 active_func=lambda: self.eigmth == 102,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUE_CARD4,
                 active_func=lambda: self.eigmth == 111,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def neig(self) -> int:
         """Get or set the Number of eigenvalues to extract. This must be specified. The other parameters below are optional.
@@ -470,7 +475,7 @@ class ControlImplicitEigenvalue(KeywordBase):
         self._cards[4].set_value("rparm6", value)
 
     @property
-    def rparm6_link(self) -> DefineVector:
+    def rparm6_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for rparm6."""
         if self.deck is None:
             return None
@@ -485,7 +490,7 @@ class ControlImplicitEigenvalue(KeywordBase):
         self.rparm6 = value.vid
 
     @property
-    def iparm3_link(self) -> KeywordBase:
+    def iparm3_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for iparm3."""
         return self._get_set_link("NODE", self.iparm3)
 
@@ -495,7 +500,7 @@ class ControlImplicitEigenvalue(KeywordBase):
         self.iparm3 = value.sid
 
     @property
-    def iparm1_link(self) -> KeywordBase:
+    def iparm1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for iparm1."""
         return self._get_set_link("NODE", self.iparm1)
 
@@ -505,7 +510,7 @@ class ControlImplicitEigenvalue(KeywordBase):
         self.iparm1 = value.sid
 
     @property
-    def iparm2_link(self) -> KeywordBase:
+    def iparm2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for iparm2."""
         return self._get_set_link("NODE", self.iparm2)
 
@@ -515,7 +520,7 @@ class ControlImplicitEigenvalue(KeywordBase):
         self.iparm2 = value.sid
 
     @property
-    def iparm3_link(self) -> KeywordBase:
+    def iparm3_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for iparm3."""
         return self._get_set_link("NODE", self.iparm3)
 

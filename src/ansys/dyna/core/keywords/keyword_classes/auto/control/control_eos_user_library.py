@@ -50,10 +50,12 @@ class ControlEosUserLibrary(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLEOSUSERLIBRARY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLEOSUSERLIBRARY_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def path(self) -> typing.Optional[str]:
         """Get or set the Path to the library seslib. The default path is the current working directory

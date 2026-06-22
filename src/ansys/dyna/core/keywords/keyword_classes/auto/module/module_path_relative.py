@@ -43,7 +43,8 @@ class ModulePathRelative(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MODULEPATHRELATIVE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def path(self) -> typing.Optional[str]:
         """Get or set the Path of module files.

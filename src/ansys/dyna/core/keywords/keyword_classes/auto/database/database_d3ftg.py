@@ -44,7 +44,8 @@ class DatabaseD3Ftg(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASED3FTG_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def binary(self) -> int:
         """Get or set the Flag for writing the binary plot file

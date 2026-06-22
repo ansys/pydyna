@@ -67,8 +67,8 @@ class MatGeneralViscoelastic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "GENERAL_VISCOELASTIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -83,14 +83,17 @@ class MatGeneralViscoelastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATGENERALVISCOELASTIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALVISCOELASTIC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALVISCOELASTIC_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatGeneralViscoelastic.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatGeneralViscoelastic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATGENERALVISCOELASTIC_OPTION0_CARD0,
@@ -337,7 +340,7 @@ class MatGeneralViscoelastic(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -352,7 +355,7 @@ class MatGeneralViscoelastic(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def lcidk_link(self) -> DefineCurve:
+    def lcidk_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidk."""
         if self.deck is None:
             return None

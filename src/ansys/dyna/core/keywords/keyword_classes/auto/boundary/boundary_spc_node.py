@@ -43,8 +43,8 @@ class BoundarySpcNode(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "SPC_NODE"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "nid": LinkType.NODE,
@@ -70,8 +70,9 @@ class BoundarySpcNode(KeywordBase):
                 None,
                 name="nodes",
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = BoundarySpcNode.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = BoundarySpcNode._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _BOUNDARYSPCNODE_OPTION0_CARD0,
@@ -122,14 +123,14 @@ class BoundarySpcNode(KeywordBase):
     @property
     def nid_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for nid, keyed by nid value."""
-        return self._get_links_from_table("NODE", "nid", "nodes", "nid", "parts")
+        return self._get_links_from_table("NODE", "nid", "nodes", "nid", "")
 
     def get_nid_link(self, nid: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
-        return self._get_link_by_attr("NODE", "nid", nid, "parts")
+        return self._get_link_by_attr("NODE", "nid", nid, "")
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

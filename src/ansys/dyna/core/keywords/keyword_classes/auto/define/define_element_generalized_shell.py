@@ -65,8 +65,8 @@ class DefineElementGeneralizedShell(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "ELEMENT_GENERALIZED_SHELL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -77,20 +77,25 @@ class DefineElementGeneralizedShell(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEELEMENTGENERALIZEDSHELL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEELEMENTGENERALIZEDSHELL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEELEMENTGENERALIZEDSHELL_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEELEMENTGENERALIZEDSHELL_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEELEMENTGENERALIZEDSHELL_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineElementGeneralizedShell.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineElementGeneralizedShell._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEELEMENTGENERALIZEDSHELL_OPTION0_CARD0,

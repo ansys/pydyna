@@ -52,8 +52,8 @@ class SetSegmentIntersect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "SEGMENT_INTERSECT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "ssid1": LinkType.SET_SEGMENT,
@@ -74,11 +74,13 @@ class SetSegmentIntersect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETSEGMENTINTERSECT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETSEGMENTINTERSECT_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SetSegmentIntersect.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SetSegmentIntersect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETSEGMENTINTERSECT_OPTION0_CARD0,
@@ -202,7 +204,7 @@ class SetSegmentIntersect(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def ssid1_link(self) -> KeywordBase:
+    def ssid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid1."""
         return self._get_set_link("SEGMENT", self.ssid1)
 
@@ -212,7 +214,7 @@ class SetSegmentIntersect(KeywordBase):
         self.ssid1 = value.sid
 
     @property
-    def ssid2_link(self) -> KeywordBase:
+    def ssid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid2."""
         return self._get_set_link("SEGMENT", self.ssid2)
 
@@ -222,7 +224,7 @@ class SetSegmentIntersect(KeywordBase):
         self.ssid2 = value.sid
 
     @property
-    def ssid3_link(self) -> KeywordBase:
+    def ssid3_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid3."""
         return self._get_set_link("SEGMENT", self.ssid3)
 
@@ -232,7 +234,7 @@ class SetSegmentIntersect(KeywordBase):
         self.ssid3 = value.sid
 
     @property
-    def ssid4_link(self) -> KeywordBase:
+    def ssid4_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid4."""
         return self._get_set_link("SEGMENT", self.ssid4)
 
@@ -242,7 +244,7 @@ class SetSegmentIntersect(KeywordBase):
         self.ssid4 = value.sid
 
     @property
-    def ssid5_link(self) -> KeywordBase:
+    def ssid5_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid5."""
         return self._get_set_link("SEGMENT", self.ssid5)
 
@@ -252,7 +254,7 @@ class SetSegmentIntersect(KeywordBase):
         self.ssid5 = value.sid
 
     @property
-    def ssid6_link(self) -> KeywordBase:
+    def ssid6_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid6."""
         return self._get_set_link("SEGMENT", self.ssid6)
 
@@ -262,7 +264,7 @@ class SetSegmentIntersect(KeywordBase):
         self.ssid6 = value.sid
 
     @property
-    def ssid7_link(self) -> KeywordBase:
+    def ssid7_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid7."""
         return self._get_set_link("SEGMENT", self.ssid7)
 
@@ -272,7 +274,7 @@ class SetSegmentIntersect(KeywordBase):
         self.ssid7 = value.sid
 
     @property
-    def ssid8_link(self) -> KeywordBase:
+    def ssid8_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid8."""
         return self._get_set_link("SEGMENT", self.ssid8)
 

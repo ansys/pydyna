@@ -55,7 +55,8 @@ class ContactAutoMove(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACTAUTOMOVE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the ID for this auto positioning input
@@ -127,7 +128,7 @@ class ContactAutoMove(KeywordBase):
         self._cards[0].set_value("offset", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -142,7 +143,7 @@ class ContactAutoMove(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None

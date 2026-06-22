@@ -86,16 +86,20 @@ class IcfdControlImposedMove(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLIMPOSEDMOVE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLIMPOSEDMOVE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLIMPOSEDMOVE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLIMPOSEDMOVE_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the This can be any part ID referenced in *ICFD_PART or *ICFD_PART_VOL. If PID = 0,then the whole volume mesh will be used.
@@ -343,7 +347,7 @@ class IcfdControlImposedMove(KeywordBase):
         self._cards[3].set_value("ptidv", value)
 
     @property
-    def lcvx_link(self) -> DefineCurve:
+    def lcvx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvx."""
         if self.deck is None:
             return None
@@ -358,7 +362,7 @@ class IcfdControlImposedMove(KeywordBase):
         self.lcvx = value.lcid
 
     @property
-    def lcvy_link(self) -> DefineCurve:
+    def lcvy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvy."""
         if self.deck is None:
             return None
@@ -373,7 +377,7 @@ class IcfdControlImposedMove(KeywordBase):
         self.lcvy = value.lcid
 
     @property
-    def lcvz_link(self) -> DefineCurve:
+    def lcvz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvz."""
         if self.deck is None:
             return None
@@ -388,7 +392,7 @@ class IcfdControlImposedMove(KeywordBase):
         self.lcvz = value.lcid
 
     @property
-    def alphal_link(self) -> DefineCurve:
+    def alphal_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for alphal."""
         if self.deck is None:
             return None
@@ -403,7 +407,7 @@ class IcfdControlImposedMove(KeywordBase):
         self.alphal = value.lcid
 
     @property
-    def betal_link(self) -> DefineCurve:
+    def betal_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for betal."""
         if self.deck is None:
             return None
@@ -418,7 +422,7 @@ class IcfdControlImposedMove(KeywordBase):
         self.betal = value.lcid
 
     @property
-    def gammal_link(self) -> DefineCurve:
+    def gammal_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for gammal."""
         if self.deck is None:
             return None
@@ -433,7 +437,7 @@ class IcfdControlImposedMove(KeywordBase):
         self.gammal = value.lcid
 
     @property
-    def alphag_link(self) -> DefineCurve:
+    def alphag_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for alphag."""
         if self.deck is None:
             return None
@@ -448,7 +452,7 @@ class IcfdControlImposedMove(KeywordBase):
         self.alphag = value.lcid
 
     @property
-    def betag_link(self) -> DefineCurve:
+    def betag_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for betag."""
         if self.deck is None:
             return None
@@ -463,7 +467,7 @@ class IcfdControlImposedMove(KeywordBase):
         self.betag = value.lcid
 
     @property
-    def gammag_link(self) -> DefineCurve:
+    def gammag_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for gammag."""
         if self.deck is None:
             return None

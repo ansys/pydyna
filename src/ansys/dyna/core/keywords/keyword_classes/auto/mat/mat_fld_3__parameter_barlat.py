@@ -90,8 +90,8 @@ class MatFld3_ParameterBarlat(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "FLD_3-PARAMETER_BARLAT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -106,20 +106,25 @@ class MatFld3_ParameterBarlat(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATFLD3_PARAMETERBARLAT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATFLD3_PARAMETERBARLAT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATFLD3_PARAMETERBARLAT_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATFLD3_PARAMETERBARLAT_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATFLD3_PARAMETERBARLAT_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatFld3_ParameterBarlat.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatFld3_ParameterBarlat._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATFLD3_PARAMETERBARLAT_OPTION0_CARD0,
@@ -547,7 +552,7 @@ class MatFld3_ParameterBarlat(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -562,7 +567,7 @@ class MatFld3_ParameterBarlat(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def fldcid_link(self) -> DefineCurve:
+    def fldcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for fldcid."""
         if self.deck is None:
             return None

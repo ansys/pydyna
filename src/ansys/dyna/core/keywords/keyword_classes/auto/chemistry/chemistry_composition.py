@@ -49,10 +49,12 @@ class ChemistryComposition(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHEMISTRYCOMPOSITION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYCOMPOSITION_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the A unique identifier among all chemistry compositions.

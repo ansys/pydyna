@@ -54,8 +54,8 @@ class DefineDeMeshBeam(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DE_MESH_BEAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "desxid": LinkType.SECTION,
@@ -70,11 +70,13 @@ class DefineDeMeshBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEDEMESHBEAM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEDEMESHBEAM_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineDeMeshBeam.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineDeMeshBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDEMESHBEAM_OPTION0_CARD0,
@@ -229,7 +231,7 @@ class DefineDeMeshBeam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def desxid_link(self) -> KeywordBase:
+    def desxid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for desxid."""
         if self.deck is None:
             return None
@@ -244,7 +246,7 @@ class DefineDeMeshBeam(KeywordBase):
         self.desxid = value.secid
 
     @property
-    def despid_link(self) -> KeywordBase:
+    def despid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given despid."""
         return self._get_link_by_attr("PART", "pid", self.despid, "parts")
 

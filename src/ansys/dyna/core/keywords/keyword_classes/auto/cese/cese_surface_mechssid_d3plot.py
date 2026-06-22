@@ -44,7 +44,8 @@ class CeseSurfaceMechssidD3Plot(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESESURFACEMECHSSIDD3PLOT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Mechanics solver segment set ID that is in contact with the fluid CESE mesh.

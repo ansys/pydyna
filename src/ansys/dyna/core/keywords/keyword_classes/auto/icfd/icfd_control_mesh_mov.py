@@ -45,7 +45,8 @@ class IcfdControlMeshMov(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLMESHMOV_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mmsh(self) -> int:
         """Get or set the Mesh motion selector:

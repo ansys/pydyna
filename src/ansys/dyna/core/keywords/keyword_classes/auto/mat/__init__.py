@@ -456,7 +456,7 @@ from .mat_emmi import MatEmmi
 from .mat_enhanced_composite_damage import MatEnhancedCompositeDamage
 from .mat_enhanced_composite_damage_model import MatEnhancedCompositeDamageModel
 from .mat_extended_3__parameter_barlat import MatExtended3_ParameterBarlat
-from .mat_fabric import MatFabric
+from .mat_034 import MatFabric
 from .mat_fabric_map import MatFabricMap
 from .mat_fhwa_soil import MatFhwaSoil
 from .mat_fhwa_soil_nebraska import MatFhwaSoilNebraska
@@ -530,7 +530,7 @@ from .mat_low_density_synthetic_foam import MatLowDensitySyntheticFoam
 from .mat_low_density_synthetic_foam_ortho import MatLowDensitySyntheticFoamOrtho
 from .mat_low_density_viscous_foam import MatLowDensityViscousFoam
 from .mat_lung_tissue import MatLungTissue
-from .mat_modified_piecewise_linear_plasticity_prestrain import MatModifiedPiecewiseLinearPlasticityPrestrain
+from .mat_ma_modified_piecewise_linear_plasticity_prestrain import MatMaModifiedPiecewiseLinearPlasticityPrestrain
 from .mat_mccormick import MatMccormick
 from .mat_micromechanics_dry_fabric import MatMicromechanicsDryFabric
 from .mat_modified_crushable_foam import MatModifiedCrushableFoam
@@ -558,7 +558,6 @@ from .mat_nonlinear_plastic_discrete_beam import MatNonlinearPlasticDiscreteBeam
 from .mat_nonlocal import MatNonlocal
 from .mat_non_quadratic_failure import MatNonQuadraticFailure
 from .mat_null import MatNull
-from .mat_009 import Mat009
 from .mat_077_o import MatOgdenRubber
 from .mat_oriented_crack import MatOrientedCrack
 from .mat_orthotropic_elastic import MatOrthotropicElastic
@@ -760,3 +759,5 @@ from .mat_wood_fir import MatWoodFir
 from .mat_wood_pine import MatWoodPine
 from .mat_wtm_stm import MatWtmStm
 from .mat_wtm_stm_plc import MatWtmStmPlc
+from .mat_009 import Mat009
+from .mat_modified_piecewise_linear_plasticity_prestrain import MatModifiedPiecewiseLinearPlasticityPrestrain

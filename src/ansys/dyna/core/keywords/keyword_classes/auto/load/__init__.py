@@ -76,13 +76,11 @@ from .load_remove_part import LoadRemovePart
 from .load_remove_part_set import LoadRemovePartSet
 from .load_rigid_body import LoadRigidBody
 from .load_segment import LoadSegment
-from .load_segment_id import LoadSegmentId
 from .load_segment_contact_mask import LoadSegmentContactMask
 from .load_segment_file import LoadSegmentFile
 from .load_segment_fsilnk import LoadSegmentFsilnk
 from .load_segment_nonuniform import LoadSegmentNonuniform
 from .load_segment_set import LoadSegmentSet
-from .load_segment_set_id import LoadSegmentSetId
 from .load_segment_set_angle import LoadSegmentSetAngle
 from .load_segment_set_nonuniform import LoadSegmentSetNonuniform
 from .load_seismic_ssi_aux import LoadSeismicSsiAux
@@ -128,3 +126,5 @@ from .load_thermal_variable_shell import LoadThermalVariableShell
 from .load_thermal_variable_shell_set import LoadThermalVariableShellSet
 from .load_vibro_acoustic import LoadVibroAcoustic
 from .load_volume_loss import LoadVolumeLoss
+from .load_segment_id import LoadSegmentId
+from .load_segment_set_id import LoadSegmentSetId

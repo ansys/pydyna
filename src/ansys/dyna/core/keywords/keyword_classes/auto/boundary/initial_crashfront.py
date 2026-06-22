@@ -49,7 +49,8 @@ class InitialCrashfront(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALCRASHFRONT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set ID from which the initial crashfront nodes are defined
@@ -78,7 +79,7 @@ class InitialCrashfront(KeywordBase):
         self._cards[0].set_value("stype", value)
 
     @property
-    def stype_link(self) -> KeywordBase:
+    def stype_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given stype."""
         return self._get_link_by_attr("NODE", "nid", self.stype, "parts")
 

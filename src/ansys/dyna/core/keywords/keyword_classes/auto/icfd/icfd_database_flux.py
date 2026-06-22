@@ -47,7 +47,8 @@ class IcfdDatabaseFlux(KeywordBase):
                 None,
                 name="boundaries",
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def boundaries(self) -> pd.DataFrame:
         """Get the table of boundaries."""

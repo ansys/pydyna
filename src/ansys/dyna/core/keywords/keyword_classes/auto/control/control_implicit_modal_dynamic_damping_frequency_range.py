@@ -50,7 +50,8 @@ class ControlImplicitModalDynamicDampingFrequencyRange(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITMODALDYNAMICDAMPINGFREQUENCYRANGE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def freq1(self) -> typing.Optional[float]:
         """Get or set the Frequency value.

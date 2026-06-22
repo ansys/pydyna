@@ -129,8 +129,8 @@ class Mat278(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "278"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcchexp": LinkType.DEFINE_CURVE,
@@ -147,35 +147,45 @@ class Mat278(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT278_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT278_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT278_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT278_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT278_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT278_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT278_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT278_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT278_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT278_CARD9,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat278.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat278._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT278_OPTION0_CARD0,
@@ -895,7 +905,7 @@ class Mat278(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcchexp_link(self) -> DefineCurve:
+    def lcchexp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcchexp."""
         if self.deck is None:
             return None
@@ -910,7 +920,7 @@ class Mat278(KeywordBase):
         self.lcchexp = value.lcid
 
     @property
-    def lcthexp_link(self) -> DefineCurve:
+    def lcthexp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcthexp."""
         if self.deck is None:
             return None
@@ -925,7 +935,7 @@ class Mat278(KeywordBase):
         self.lcthexp = value.lcid
 
     @property
-    def lcg0_link(self) -> DefineCurve:
+    def lcg0_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcg0."""
         if self.deck is None:
             return None
@@ -940,7 +950,7 @@ class Mat278(KeywordBase):
         self.lcg0 = value.lcid
 
     @property
-    def lck0_link(self) -> DefineCurve:
+    def lck0_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lck0."""
         if self.deck is None:
             return None

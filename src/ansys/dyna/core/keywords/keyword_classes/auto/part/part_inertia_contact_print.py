@@ -117,28 +117,36 @@ class PartInertiaContactPrint(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINT_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINT_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINT_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINT_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINT_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTINERTIACONTACTPRINT_CARD7,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Heading for the part.
@@ -639,12 +647,12 @@ class PartInertiaContactPrint(KeywordBase):
         self._cards[7].set_value("prbf", value)
 
     @property
-    def nodeid_link(self) -> KeywordBase:
+    def nodeid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nodeid."""
         return self._get_link_by_attr("NODE", "nid", self.nodeid, "parts")
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None
@@ -659,7 +667,7 @@ class PartInertiaContactPrint(KeywordBase):
         self.mid = value.mid
 
     @property
-    def secid_link(self) -> KeywordBase:
+    def secid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for secid."""
         if self.deck is None:
             return None
@@ -674,7 +682,7 @@ class PartInertiaContactPrint(KeywordBase):
         self.secid = value.secid
 
     @property
-    def hgid_link(self) -> Hourglass:
+    def hgid_link(self) -> typing.Optional[Hourglass]:
         """Get the Hourglass object for hgid."""
         if self.deck is None:
             return None
@@ -689,7 +697,7 @@ class PartInertiaContactPrint(KeywordBase):
         self.hgid = value.hgid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

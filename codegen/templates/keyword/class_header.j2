@@ -24,9 +24,9 @@ class {{keyword_data.classname}}(KeywordBase):
     keyword = "{{keyword_data.keyword}}"
     subkeyword = "{{keyword_data.subkeyword}}"
 {% if keyword_data.options %}
-    option_specs = [
+    _option_spec_list = [
 {% for option in keyword_data.options %}
-        OptionSpec("{{option.name}}", {{option.card_order}}, {{option.title_order}}),
+        OptionSpec("{{option.name}}", "{{option.card_order}}", {{option.title_order}}),
 {% endfor %}
     ]
 {% endif %}

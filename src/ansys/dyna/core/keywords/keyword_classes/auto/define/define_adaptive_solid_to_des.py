@@ -62,8 +62,8 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "ADAPTIVE_SOLID_TO_DES"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "isdes": LinkType.SECTION,
@@ -78,14 +78,17 @@ class DefineAdaptiveSolidToDes(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEADAPTIVESOLIDTODES_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEADAPTIVESOLIDTODES_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEADAPTIVESOLIDTODES_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineAdaptiveSolidToDes.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineAdaptiveSolidToDes._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEADAPTIVESOLIDTODES_OPTION0_CARD0,
@@ -304,7 +307,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def isdes_link(self) -> KeywordBase:
+    def isdes_link(self) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for isdes."""
         if self.deck is None:
             return None
@@ -319,7 +322,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
         self.isdes = value.secid
 
     @property
-    def ipdes_link(self) -> KeywordBase:
+    def ipdes_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given ipdes."""
         return self._get_link_by_attr("PART", "pid", self.ipdes, "parts")
 

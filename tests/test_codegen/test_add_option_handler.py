@@ -37,10 +37,10 @@ class TestAddOptionSettings:
         """Test creating settings with all required fields."""
         cards = [{"name": "card1"}]
         settings = AddOptionSettings(
-            name="ID", card_order=1, title_order=1, cards=cards, func=None
+            name="ID", card_order="post/1", title_order=1, cards=cards, func=None
         )
         assert settings.name == "ID"
-        assert settings.card_order == 1
+        assert settings.card_order == "post/1"
         assert settings.title_order == 1
         assert settings.cards == cards
         assert settings.func is None
@@ -49,7 +49,7 @@ class TestAddOptionSettings:
         """Test creating settings with optional func."""
         cards = [{"name": "card1"}]
         settings = AddOptionSettings(
-            name="MPP", card_order=2, title_order=2, cards=cards, func="self.use_mpp"
+            name="MPP", card_order="post/2", title_order=2, cards=cards, func="self.use_mpp"
         )
         assert settings.func == "self.use_mpp"
 
@@ -57,13 +57,13 @@ class TestAddOptionSettings:
         """Test from_dict parsing."""
         data = {
             "name": "ID",
-            "card-order": 1,
+            "card-order": "post/1",
             "title-order": 2,
             "cards": [{"source": "cards", "card-name": "ID_CARD"}],
         }
         settings = AddOptionSettings.from_dict(data)
         assert settings.name == "ID"
-        assert settings.card_order == 1
+        assert settings.card_order == "post/1"
         assert settings.title_order == 2
         assert len(settings.cards) == 1
         assert settings.func is None
@@ -72,7 +72,7 @@ class TestAddOptionSettings:
         """Test from_dict with optional func field."""
         data = {
             "name": "TITLE",
-            "card-order": 3,
+            "card-order": "post/3",
             "title-order": 1,
             "cards": [],
             "func": "self.has_title",
@@ -121,7 +121,7 @@ class TestAddOptionHandler:
             settings = [
                 {
                     "option-name": "ID",
-                    "card-order": 1,
+                    "card-order": "post/1",
                     "title-order": 1,
                     "cards": [{"source": "cards", "card-name": "ID_CARD"}],
                 }
@@ -132,7 +132,7 @@ class TestAddOptionHandler:
             assert len(sample_kwd_data.options) == 1
             option = sample_kwd_data.options[0]
             assert option["name"] == "ID"
-            assert option["card_order"] == 1
+            assert option["card_order"] == "post/1"
             assert option["title_order"] == 1
             assert len(option["cards"]) == 1
             assert option["cards"][0] is mock_option_card
@@ -155,13 +155,13 @@ class TestAddOptionHandler:
             settings = [
                 {
                     "option-name": "ID",
-                    "card-order": 1,
+                    "card-order": "post/1",
                     "title-order": 1,
                     "cards": [{"source": "cards", "card-name": "ID_CARD"}],
                 },
                 {
                     "option-name": "MPP",
-                    "card-order": 2,
+                    "card-order": "post/2",
                     "title-order": 2,
                     "cards": [{"source": "cards", "card-name": "MPP_CARD"}],
                 },
@@ -190,7 +190,7 @@ class TestAddOptionHandler:
             settings = [
                 {
                     "option-name": "ID",
-                    "card-order": 1,
+                    "card-order": "post/1",
                     "title-order": 1,
                     "cards": [{"source": "cards", "card-name": "ID_CARD"}],
                 }
@@ -212,7 +212,7 @@ class TestAddOptionHandler:
             settings = [
                 {
                     "option-name": "OPTION3",
-                    "card-order": 5,
+                    "card-order": "post/5",
                     "title-order": 3,
                     "cards": [{"source": "cards", "card-name": "CARD"}],
                 }
@@ -221,7 +221,7 @@ class TestAddOptionHandler:
             handler.handle(sample_kwd_data, settings)
 
             option = sample_kwd_data.options[0]
-            assert option["card_order"] == 5
+            assert option["card_order"] == "post/5"
             assert option["title_order"] == 3
 
     def test_handle_empty_cards_list(self, handler, sample_kwd_data):
@@ -229,7 +229,7 @@ class TestAddOptionHandler:
         settings = [
             {
                 "option-name": "EMPTY",
-                "card-order": 1,
+                "card-order": "post/1",
                 "title-order": 1,
                 "cards": [],
             }
@@ -260,7 +260,7 @@ class TestAddOptionHandler:
             settings = [
                 {
                     "option-name": "COMPLEX",
-                    "card-order": 1,
+                    "card-order": "post/1",
                     "title-order": 1,
                     "cards": [
                         {"source": "cards", "card-name": "CARD1"},
@@ -288,7 +288,7 @@ class TestAddOptionHandler:
             settings = [
                 {
                     "option-name": "NEW",
-                    "card-order": 1,
+                    "card-order": "post/1",
                     "title-order": 1,
                     "cards": [{"source": "cards", "card-name": "CARD"}],
                 }

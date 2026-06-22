@@ -58,10 +58,12 @@ class IgaVolumeXyz(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _IGAVOLUMEXYZ_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _IGAVOLUMEXYZ_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def vid(self) -> typing.Optional[int]:
         """Get or set the Parametric volume ID. A unique number must be chosen.

@@ -52,7 +52,8 @@ class BoundaryAcousticPressureSpectral(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYACOUSTICPRESSURESPECTRAL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID for the fluid boundary faces.
@@ -98,7 +99,7 @@ class BoundaryAcousticPressureSpectral(KeywordBase):
         self._cards[0].set_value("tdeath", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -113,7 +114,7 @@ class BoundaryAcousticPressureSpectral(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

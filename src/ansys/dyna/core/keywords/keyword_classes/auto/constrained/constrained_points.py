@@ -69,16 +69,20 @@ class ConstrainedPoints(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDPOINTS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDPOINTS_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDPOINTS_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDPOINTS_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Constrained points ID.
@@ -223,12 +227,12 @@ class ConstrainedPoints(KeywordBase):
         self._cards[3].set_value("failm", value)
 
     @property
-    def eid1_link(self) -> KeywordBase:
+    def eid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid1."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid1, "parts")
 
     @property
-    def eid2_link(self) -> KeywordBase:
+    def eid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid2."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid2, "parts")
 

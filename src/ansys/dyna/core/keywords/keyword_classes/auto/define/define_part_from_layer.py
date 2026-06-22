@@ -46,8 +46,8 @@ class DefinePartFromLayer(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "PART_FROM_LAYER"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "mid": LinkType.MAT,
@@ -65,8 +65,9 @@ class DefinePartFromLayer(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEPARTFROMLAYER_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefinePartFromLayer.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefinePartFromLayer._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEPARTFROMLAYER_OPTION0_CARD0,
@@ -157,7 +158,7 @@ class DefinePartFromLayer(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None
@@ -172,22 +173,22 @@ class DefinePartFromLayer(KeywordBase):
         self.mid = value.mid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 
     @property
-    def layer_link(self) -> KeywordBase:
+    def layer_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given layer."""
         return self._get_link_by_attr("PART", "pid", self.layer, "parts")
 
     @property
-    def pidsrc_link(self) -> KeywordBase:
+    def pidsrc_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pidsrc."""
         return self._get_link_by_attr("PART", "pid", self.pidsrc, "parts")
 
     @property
-    def layold_link(self) -> KeywordBase:
+    def layold_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given layold."""
         return self._get_link_by_attr("PART", "pid", self.layold, "parts")
 

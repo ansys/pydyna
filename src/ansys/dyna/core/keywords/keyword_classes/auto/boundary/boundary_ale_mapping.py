@@ -73,13 +73,16 @@ class BoundaryAleMapping(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYALEMAPPING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYALEMAPPING_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYALEMAPPING_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Part ID or part set ID or element set ID
@@ -342,7 +345,7 @@ class BoundaryAleMapping(KeywordBase):
         self._cards[2].set_value("vecid", value)
 
     @property
-    def vecid_link(self) -> DefineVector:
+    def vecid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid."""
         if self.deck is None:
             return None

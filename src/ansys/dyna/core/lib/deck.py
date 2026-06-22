@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -19,12 +19,15 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
 """Module provides a collection of keywords that can read and write to a keyword file."""
 
 import os
 import typing
 from typing import Union
 import warnings
+
+from charset_normalizer import from_path
 
 from ansys.dyna.core.lib.encrypted_keyword import EncryptedKeyword
 from ansys.dyna.core.lib.format_type import format_type
@@ -33,7 +36,12 @@ from ansys.dyna.core.lib.import_handlers.define_table_processor import DefineTab
 from ansys.dyna.core.lib.io_utils import write_or_return
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_collection import KeywordCollection
-from ansys.dyna.core.lib.parameters import ParameterHandler, ParameterSet
+from ansys.dyna.core.lib.parameters import (
+    ParameterHandler,
+    ParameterSet,
+    _raise_unresolved_parameters,
+    _warn_unresolved_parameters,
+)
 from ansys.dyna.core.lib.transform import TransformHandler
 from ansys.dyna.core.lib.validation_mixin import ValidationMixin
 
@@ -227,11 +235,9 @@ class Deck(ValidationMixin):
             self.append(kw)
 
     def _detect_encoding(self, path: str) -> str:
-        import chardet
-
         try:
-            with open(path, "rb") as f:
-                return chardet.detect(f.read())["encoding"]
+            encoding = from_path(path).best().encoding
+            return encoding
         except Exception as e:
             raise Exception("Failed to detect encoding of deck in `expand`: " + str(e))
 
@@ -294,6 +300,12 @@ class Deck(ValidationMixin):
                 include_deck = self._prepare_deck_for_expand(keyword)
                 context = ImportContext(xform, include_deck, expand_include_file, strict=strict)
                 include_deck._import_file(expand_include_file, encoding, context)
+
+            # Propagate global parameters from include back to parent (fix for issue #1081)
+            # This allows subsequent sibling includes to see parameters defined in earlier includes
+            for param_name, param_value in include_deck.parameters.get_global_params().items():
+                self.parameters.add(param_name, param_value)
+
             if recurse:
                 expanded = include_deck._expand_helper(search_paths, True, strict)
                 keywords.extend(expanded)
@@ -332,6 +344,8 @@ class Deck(ValidationMixin):
         new_deck.parameters = self.parameters
         search_paths = [cwd]
         new_deck.extend(self._expand_helper(search_paths, recurse, strict))
+
+        _warn_unresolved_parameters(new_deck.parameters.get_all_unresolved_param_names())
         return new_deck
 
     def _get_title_lines(self) -> typing.List[str]:
@@ -426,8 +440,12 @@ class Deck(ValidationMixin):
             Validation uses registered validators and raises ValidationError if errors are found.
         retain_parameters : bool, optional
             If True, write original parameter references (e.g., &myvar) instead of
-            substituted values for fields that were read from parameters. Default is False.
+            substituted values for fields that were read from parameters. If False,
+            the parameters must be defined. Default is False.
         """
+        if not retain_parameters:
+            _raise_unresolved_parameters(self.parameters.get_all_unresolved_param_names())
+
         if validate:
             result = self.validate()
             result.raise_if_errors()
@@ -519,10 +537,12 @@ class Deck(ValidationMixin):
         >>>deck.get_kwds_by_full_type("SET", "NODE")
         """
         return filter(
-            lambda kwd: isinstance(kwd, KeywordBase)
-            and kwd.keyword == str_type
-            and kwd.subkeyword is not None
-            and kwd.subkeyword.startswith(str_subtype),
+            lambda kwd: (
+                isinstance(kwd, KeywordBase)
+                and kwd.keyword == str_type
+                and kwd.subkeyword is not None
+                and kwd.subkeyword.startswith(str_subtype)
+            ),
             self._keywords,
         )
 
@@ -615,13 +635,15 @@ class Deck(ValidationMixin):
 
         Parameters
         ----------
-        path : str
-            Full path for the keyword file.
+        path : str or path-like
+            Full path for the keyword file. Path-like objects (e.g. pathlib.Path)
+            are converted to string for ImportContext to avoid type errors in
+            downstream code. The original value is preserved for keyword.included_from.
         encoding: str
             String encoding used to read the keyword file.
         """
-        context = ImportContext(None, self, path)
-        self._import_file(path, encoding, context)
+        context = ImportContext(None, self, str(path))
+        return self._import_file(path, encoding, context)
 
     def export_file(self, path: str, encoding="utf-8", validate: bool = False, retain_parameters: bool = False) -> None:
         """Export the keyword file to a new keyword file.

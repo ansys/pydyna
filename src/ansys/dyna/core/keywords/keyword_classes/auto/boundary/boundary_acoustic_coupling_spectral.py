@@ -49,7 +49,8 @@ class BoundaryAcousticCouplingSpectral(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYACOUSTICCOUPLINGSPECTRAL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssids(self) -> typing.Optional[int]:
         """Get or set the Segment set ID for the structural faces.
@@ -73,7 +74,7 @@ class BoundaryAcousticCouplingSpectral(KeywordBase):
         self._cards[0].set_value("ssidf", value)
 
     @property
-    def ssids_link(self) -> KeywordBase:
+    def ssids_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssids."""
         return self._get_set_link("SEGMENT", self.ssids)
 
@@ -83,7 +84,7 @@ class BoundaryAcousticCouplingSpectral(KeywordBase):
         self.ssids = value.sid
 
     @property
-    def ssidf_link(self) -> KeywordBase:
+    def ssidf_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssidf."""
         return self._get_set_link("SEGMENT", self.ssidf)
 

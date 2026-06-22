@@ -62,10 +62,12 @@ class BoundaryRadiationSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYRADIATIONSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYRADIATIONSET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see also *SET_SEGMENT.
@@ -164,7 +166,7 @@ class BoundaryRadiationSet(KeywordBase):
         self._cards[1].set_value("loc", value)
 
     @property
-    def pserod_link(self) -> KeywordBase:
+    def pserod_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for pserod."""
         return self._get_set_link("PART", self.pserod)
 
@@ -174,7 +176,7 @@ class BoundaryRadiationSet(KeywordBase):
         self.pserod = value.sid
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

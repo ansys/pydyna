@@ -51,7 +51,8 @@ class DatabaseBinaryRunrsf(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYRUNRSF_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cycl(self) -> typing.Optional[float]:
         """Get or set the Output interval in time steps (a time step is a cycle). For the D3DRFL
@@ -112,7 +113,7 @@ class DatabaseBinaryRunrsf(KeywordBase):
         self._cards[0].set_value("psetid", value)
 
     @property
-    def psetid_link(self) -> KeywordBase:
+    def psetid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psetid."""
         return self._get_set_link("PART", self.psetid)
 

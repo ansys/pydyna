@@ -47,8 +47,8 @@ class SetBeamGenerateIncrementCollect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "BEAM_GENERATE_INCREMENT_COLLECT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "bbeg": LinkType.ELEMENT_BEAM,
@@ -63,11 +63,13 @@ class SetBeamGenerateIncrementCollect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETBEAMGENERATEINCREMENTCOLLECT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETBEAMGENERATEINCREMENTCOLLECT_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SetBeamGenerateIncrementCollect.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SetBeamGenerateIncrementCollect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETBEAMGENERATEINCREMENTCOLLECT_OPTION0_CARD0,
@@ -136,12 +138,12 @@ class SetBeamGenerateIncrementCollect(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def bbeg_link(self) -> KeywordBase:
+    def bbeg_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given bbeg."""
         return self._get_link_by_attr("ELEMENT", "eid", self.bbeg, "parts")
 
     @property
-    def bend_link(self) -> KeywordBase:
+    def bend_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given bend."""
         return self._get_link_by_attr("ELEMENT", "eid", self.bend, "parts")
 

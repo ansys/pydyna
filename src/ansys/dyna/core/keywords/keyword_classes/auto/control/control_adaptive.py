@@ -89,16 +89,20 @@ class ControlAdaptive(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLADAPTIVE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLADAPTIVE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLADAPTIVE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLADAPTIVE_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def adpfreq(self) -> typing.Optional[float]:
         """Get or set the Time interval between adaptive refinements.
@@ -493,7 +497,7 @@ class ControlAdaptive(KeywordBase):
         self._cards[3].set_value("ifsand", value)
 
     @property
-    def lcadp_link(self) -> DefineCurve:
+    def lcadp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcadp."""
         if self.deck is None:
             return None
@@ -508,7 +512,7 @@ class ControlAdaptive(KeywordBase):
         self.lcadp = value.lcid
 
     @property
-    def lclvl_link(self) -> DefineCurve:
+    def lclvl_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lclvl."""
         if self.deck is None:
             return None

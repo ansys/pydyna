@@ -73,8 +73,8 @@ class DefineBoxAdaptiveLocal(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "BOX_ADAPTIVE_LOCAL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lidx_ndid": LinkType.DEFINE_CURVE,
@@ -91,17 +91,21 @@ class DefineBoxAdaptiveLocal(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEBOXADAPTIVELOCAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEBOXADAPTIVELOCAL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEBOXADAPTIVELOCAL_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEBOXADAPTIVELOCAL_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineBoxAdaptiveLocal.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineBoxAdaptiveLocal._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEBOXADAPTIVELOCAL_OPTION0_CARD0,
@@ -391,7 +395,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lidx_ndid_link(self) -> DefineCurve:
+    def lidx_ndid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lidx_ndid."""
         if self.deck is None:
             return None
@@ -406,7 +410,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
         self.lidx_ndid = value.lcid
 
     @property
-    def lidy_link(self) -> DefineCurve:
+    def lidy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lidy."""
         if self.deck is None:
             return None
@@ -421,7 +425,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
         self.lidy = value.lcid
 
     @property
-    def lidz_link(self) -> DefineCurve:
+    def lidz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lidz."""
         if self.deck is None:
             return None
@@ -436,7 +440,7 @@ class DefineBoxAdaptiveLocal(KeywordBase):
         self.lidz = value.lcid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

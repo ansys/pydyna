@@ -44,7 +44,8 @@ class ControlFormingTrimMerge(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGTRIMMERGE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def imerge(self) -> int:
         """Get or set the Activation flag.  Set to '1' (default) to activate this feature.

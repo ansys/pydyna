@@ -60,8 +60,8 @@ class MatSoilBrick(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "SOIL_BRICK"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "rlcid": LinkType.DEFINE_CURVE,
@@ -75,11 +75,13 @@ class MatSoilBrick(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATSOILBRICK_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSOILBRICK_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatSoilBrick.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatSoilBrick._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSOILBRICK_OPTION0_CARD0,
@@ -293,7 +295,7 @@ class MatSoilBrick(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def rlcid_link(self) -> DefineCurve:
+    def rlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for rlcid."""
         if self.deck is None:
             return None

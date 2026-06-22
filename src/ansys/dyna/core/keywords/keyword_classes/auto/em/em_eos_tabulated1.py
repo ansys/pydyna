@@ -49,7 +49,8 @@ class EmEosTabulated1(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMEOSTABULATED1_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Id of the EM_EOS.
@@ -73,7 +74,7 @@ class EmEosTabulated1(KeywordBase):
         self._cards[0].set_value("lcid", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

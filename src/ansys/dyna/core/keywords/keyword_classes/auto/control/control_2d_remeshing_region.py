@@ -50,7 +50,8 @@ class Control2DRemeshingRegion(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROL2DREMESHINGREGION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ltyp(self) -> typing.Optional[int]:
         """Get or set the Type of regions defined by the parameters PARi:

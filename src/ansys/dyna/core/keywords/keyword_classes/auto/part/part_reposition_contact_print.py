@@ -82,19 +82,24 @@ class PartRepositionContactPrint(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARTREPOSITIONCONTACTPRINT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTREPOSITIONCONTACTPRINT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTREPOSITIONCONTACTPRINT_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTREPOSITIONCONTACTPRINT_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTREPOSITIONCONTACTPRINT_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Heading for the part.
@@ -355,7 +360,7 @@ class PartRepositionContactPrint(KeywordBase):
         self._cards[4].set_value("prbf", value)
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None
@@ -370,7 +375,7 @@ class PartRepositionContactPrint(KeywordBase):
         self.mid = value.mid
 
     @property
-    def secid_link(self) -> KeywordBase:
+    def secid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for secid."""
         if self.deck is None:
             return None
@@ -385,7 +390,7 @@ class PartRepositionContactPrint(KeywordBase):
         self.secid = value.secid
 
     @property
-    def hgid_link(self) -> Hourglass:
+    def hgid_link(self) -> typing.Optional[Hourglass]:
         """Get the Hourglass object for hgid."""
         if self.deck is None:
             return None

@@ -66,13 +66,16 @@ class CeseBoundaryCyclicSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYCYCLICSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYCYCLICSET_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYCYCLICSET_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid1(self) -> typing.Optional[int]:
         """Get or set the Segment set  ID.
@@ -221,7 +224,7 @@ class CeseBoundaryCyclicSet(KeywordBase):
         self._cards[2].set_value("transz", value)
 
     @property
-    def ssid1_link(self) -> KeywordBase:
+    def ssid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid1."""
         return self._get_set_link("SEGMENT", self.ssid1)
 
@@ -231,7 +234,7 @@ class CeseBoundaryCyclicSet(KeywordBase):
         self.ssid1 = value.sid
 
     @property
-    def ssid2_link(self) -> KeywordBase:
+    def ssid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid2."""
         return self._get_set_link("SEGMENT", self.ssid2)
 

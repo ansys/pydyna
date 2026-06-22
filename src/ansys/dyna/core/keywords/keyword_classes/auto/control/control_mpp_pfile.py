@@ -43,7 +43,8 @@ class ControlMppPfile(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPPFILE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def info(self) -> typing.Optional[str]:
         """Get or set the Information of PFILE.

@@ -49,7 +49,8 @@ class ControlCpm(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLCPM_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cpmout(self) -> int:
         """Get or set the Control CPM output database to d3plot

@@ -158,8 +158,8 @@ class Mat133(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "133"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "hta": LinkType.DEFINE_CURVE,
@@ -176,41 +176,53 @@ class Mat133(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT133_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT133_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT133_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT133_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT133_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT133_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT133_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT133_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT133_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT133_CARD9,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT133_CARD10,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT133_CARD11,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat133.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat133._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT133_OPTION0_CARD0,
@@ -1179,7 +1191,7 @@ class Mat133(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def hta_link(self) -> DefineCurve:
+    def hta_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hta."""
         if self.deck is None:
             return None
@@ -1194,7 +1206,7 @@ class Mat133(KeywordBase):
         self.hta = value.lcid
 
     @property
-    def htb_link(self) -> DefineCurve:
+    def htb_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for htb."""
         if self.deck is None:
             return None
@@ -1209,7 +1221,7 @@ class Mat133(KeywordBase):
         self.htb = value.lcid
 
     @property
-    def htc_link(self) -> DefineCurve:
+    def htc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for htc."""
         if self.deck is None:
             return None
@@ -1224,7 +1236,7 @@ class Mat133(KeywordBase):
         self.htc = value.lcid
 
     @property
-    def htd_link(self) -> DefineCurve:
+    def htd_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for htd."""
         if self.deck is None:
             return None

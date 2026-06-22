@@ -109,8 +109,8 @@ class MatGursonJc(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "GURSON_JC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcdam": LinkType.DEFINE_CURVE,
@@ -130,26 +130,33 @@ class MatGursonJc(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATGURSONJC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGURSONJC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGURSONJC_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGURSONJC_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGURSONJC_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGURSONJC_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGURSONJC_CARD6,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatGursonJc.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatGursonJc._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATGURSONJC_OPTION0_CARD0,
@@ -736,7 +743,7 @@ class MatGursonJc(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcdam_link(self) -> DefineCurve:
+    def lcdam_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdam."""
         if self.deck is None:
             return None
@@ -751,7 +758,7 @@ class MatGursonJc(KeywordBase):
         self.lcdam = value.lcid
 
     @property
-    def lcjc_link(self) -> DefineCurve:
+    def lcjc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcjc."""
         if self.deck is None:
             return None
@@ -766,7 +773,7 @@ class MatGursonJc(KeywordBase):
         self.lcjc = value.lcid
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -781,7 +788,7 @@ class MatGursonJc(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lclf_link(self) -> DefineCurve:
+    def lclf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lclf."""
         if self.deck is None:
             return None
@@ -796,7 +803,7 @@ class MatGursonJc(KeywordBase):
         self.lclf = value.lcid
 
     @property
-    def lcf0_link(self) -> DefineCurve:
+    def lcf0_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcf0."""
         if self.deck is None:
             return None
@@ -811,7 +818,7 @@ class MatGursonJc(KeywordBase):
         self.lcf0 = value.lcid
 
     @property
-    def lcfc_link(self) -> DefineCurve:
+    def lcfc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfc."""
         if self.deck is None:
             return None
@@ -826,7 +833,7 @@ class MatGursonJc(KeywordBase):
         self.lcfc = value.lcid
 
     @property
-    def lcfn_link(self) -> DefineCurve:
+    def lcfn_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfn."""
         if self.deck is None:
             return None

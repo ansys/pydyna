@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _EOS006_CARD0 = (
@@ -43,23 +44,43 @@ _EOS006_CARD1 = (
     FieldSchema("lcid", int, 20, 10, None),
 )
 
+_EOS006_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
 class Eos006(KeywordBase):
     """DYNA EOS_006 keyword"""
 
     keyword = "EOS"
     subkeyword = "006"
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
+    ]
 
     def __init__(self, **kwargs):
         """Initialize the Eos006 class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _EOS006_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EOS006_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+            OptionCardSet(
+                option_spec = Eos006._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _EOS006_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
     @property
     def eosid(self) -> typing.Optional[int]:
         """Get or set the Equation of state label.
@@ -184,4 +205,18 @@ class Eos006(KeywordBase):
     def lcid(self, value: int) -> None:
         """Set the lcid property."""
         self._cards[1].set_value("lcid", value)
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

@@ -48,7 +48,8 @@ class EmBoundary(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMBOUNDARY_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID
@@ -74,7 +75,7 @@ class EmBoundary(KeywordBase):
         self._cards[0].set_value("btype", value)
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

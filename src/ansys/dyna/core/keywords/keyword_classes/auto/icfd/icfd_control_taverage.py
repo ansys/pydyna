@@ -43,7 +43,8 @@ class IcfdControlTaverage(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLTAVERAGE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the Over each DT time interval, the average quantities are reset.

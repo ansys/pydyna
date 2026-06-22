@@ -57,10 +57,12 @@ class AleCouplingNodalConstraint(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALECOUPLINGNODALCONSTRAINT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALECOUPLINGNODALCONSTRAINT_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def strsid(self) -> typing.Optional[int]:
         """Get or set the Set ID defining a part, part set or segment set ID of the structure (see *PART, *SET_‌PART or *SET_‌SEGMENT). The structure may include Lagrangian solid, shell, beam, thick shell, or discrete sphere elements. EFG, SPH, or EFG nodes may be used, but the boundary conditions may not be satisfied

@@ -44,7 +44,8 @@ class EmDatabaseCircuit0D(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMDATABASECIRCUIT0D_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def outlv(self) -> int:
         """Get or set the Determines if the output file should be dumped.

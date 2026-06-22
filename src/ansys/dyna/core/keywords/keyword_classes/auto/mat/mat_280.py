@@ -75,8 +75,8 @@ class Mat280(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "280"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -87,17 +87,21 @@ class Mat280(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT280_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT280_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT280_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT280_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat280.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat280._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT280_OPTION0_CARD0,

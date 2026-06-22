@@ -13,15 +13,18 @@ Handlers are executed in registration order (see `handlers/registry.py`). Order 
 | 3 | `insert-card` | Inserts new cards |
 | 4 | `table-card` | Transforms cards into repeatable tables |
 | 5 | `override-field` | Modifies field properties |
-| 6 | `replace-card` | Replaces entire cards |
-| 7 | `series-card` | Transforms cards into variable-length series |
-| 8 | `add-option` | Adds keyword options |
-| 9 | `card-set` | Groups cards into reusable sets |
-| 10 | `conditional-card` | Adds conditional logic |
-| 11 | `rename-property` | Renames property accessors |
-| 12 | `table-card-group` | Groups cards into repeating units |
-| 13 | `external-card-implementation` | Links to external cards |
-| 14 | `shared-field` | Creates shared field definitions |
+| 6 | `add-field` | Appends new fields missing from kwd.json |
+| 7 | `replace-card` | Replaces entire cards |
+| 8 | `series-card` | Transforms cards into variable-length series |
+| 9 | `add-option` | Adds keyword options |
+| 10 | `card-set` | Groups cards into reusable sets |
+| 11 | `conditional-card` | Adds conditional logic |
+| 12 | `rename-property` | Renames property accessors |
+| 13 | `table-card-group` | Groups cards into repeating units |
+| 14 | `external-card-implementation` | Links to external cards |
+| 15 | `add-mixin` | Adds mixin class inheritance |
+| 16 | `additional-imports` | Injects extra top-level imports |
+| 17 | `shared-field` | Creates shared field definitions |
 
 ## Reference Semantics (Critical)
 
@@ -77,6 +80,31 @@ Transforms cards into repeatable tables (2D data).
 "table-card": [{"ref": "data_card", "length_func": "num_rows"}]
 ```
 
+### add-field
+
+Appends new fields to an existing card. Use this when a field is missing from `kwd.json` and cannot be added there. Unlike `override-field`, this handler **creates** fields that do not yet exist.
+
+```json
+"add-field": [
+  {
+    "ref": "elements_card",
+    "fields": [
+      {
+        "name": "MWD",
+        "type": "integer",
+        "position": 48,
+        "width": 8,
+        "default": null,
+        "help": "Optional flag for mass-weighted distribution."
+      }
+    ]
+  }
+]
+```
+
+Required field properties: `name`, `type`, `position`, `width`. Optional: `default`, `help`, `link`.
+Duplicate field names (case-insensitive) are silently skipped.
+
 ### series-card
 
 Transforms fields into 1D arrays across cards.
@@ -118,6 +146,20 @@ Adds keyword options (e.g., `_ID`, `_TITLE` suffixes).
 }]
 ```
 
+#### How `title-order` Affects the Keyword Title
+
+Each option is represented at runtime as an `OptionSpec(name, card_order, title_order)`. The keyword title is affected by the option's title order:
+
+```python
+# OptionSpec("ID", card_order=-2, title_order=1)
+# When inactive:  writes *RIGIDWALL_PLANAR
+# When active:    writes *RIGIDWALL_PLANAR_ID
+```
+
+A single class handles both the plain and option-aware forms depending on whether the option is activated. When a Deck is read from a file the existing of an option name in the title in the appropriate location activates the option automatically.
+
+There is some redundancy in kwd.json where keywords are defined in situations where an option would be sufficient. This is inherited (we can't change kwd.json), and in those cases it is preferable to remove the redundant keyword and use the option only. Example: *RIGIDWALL_PLANAR_ID
+
 ### table-card-group
 
 Groups adjacent cards that repeat together as 2D tables.
@@ -138,6 +180,19 @@ Creates fields shared across multiple cards.
 ```
 
 **Critical**: Search option cards FIRST regardless of index value. See [README.md](README.md#common-pitfalls).
+
+### additional-imports
+
+Injects extra top-level `import` statements into the generated module. Use this when an inline expression (e.g. `length-func`, `active-func`) references a symbol not imported by default.
+
+```json
+"additional-imports": [
+  {"name": "math"}
+]
+```
+
+Produces `import math` in the generated `.py` file, placed after `import typing`.
+Duplicates are silently ignored.
 
 ## Handler Settings Base Classes
 

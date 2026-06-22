@@ -65,13 +65,16 @@ class IntegrationBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTEGRATIONBEAM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTEGRATIONBEAM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTEGRATIONBEAM_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def irid(self) -> typing.Optional[int]:
         """Get or set the Integration rule ID. (IRID refers to IRID on *SECTION_BEAM card).

@@ -44,7 +44,8 @@ class ControlAdapstep(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLADAPSTEP_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def factin(self) -> float:
         """Get or set the Initial relaxation factor for contact force during each adaptive remesh. Unless stability problems occur in the contact, FACTIN=1.0 is recommended since this option can create some numerical noise in the resultant tooling forces. A typical value for this parameter is 0.10.

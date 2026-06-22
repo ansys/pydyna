@@ -70,8 +70,8 @@ class MatThermalOrthotropic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "THERMAL_ORTHOTROPIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "tgrlc": LinkType.DEFINE_CURVE,
@@ -85,17 +85,21 @@ class MatThermalOrthotropic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATTHERMALORTHOTROPIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTHERMALORTHOTROPIC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTHERMALORTHOTROPIC_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTHERMALORTHOTROPIC_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatThermalOrthotropic.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatThermalOrthotropic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATTHERMALORTHOTROPIC_OPTION0_CARD0,
@@ -352,7 +356,7 @@ class MatThermalOrthotropic(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def tgrlc_link(self) -> DefineCurve:
+    def tgrlc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tgrlc."""
         if self.deck is None:
             return None

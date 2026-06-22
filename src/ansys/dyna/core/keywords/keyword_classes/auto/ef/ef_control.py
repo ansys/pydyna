@@ -56,10 +56,12 @@ class EfControl(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EFCONTROL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EFCONTROL_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nphton(self) -> typing.Optional[int]:
         """Get or set the The base number of photons emitted per band per surface per convergence loop.  Note that NPHT from *BOUNDARY_‌RADIATION_‌SET_‌EF_‌CALCULATE also effects the number of photons emitted per surface per band per convergence loop

@@ -236,6 +236,7 @@ def create_default_registry() -> HandlerRegistry:
         "insert-card",  # Moved before table-card so inserted cards can be referenced
         "table-card",
         "override-field",
+        "add-field",
         "replace-card",
         "series-card",
         "add-option",
@@ -245,6 +246,8 @@ def create_default_registry() -> HandlerRegistry:
         "rename-property",
         "table-card-group",
         "external-card-implementation",
+        "add-mixin",  # Can run late as it doesn't modify cards
+        "additional-imports",  # Can run late as it doesn't modify cards
         "shared-field",
     ]
 

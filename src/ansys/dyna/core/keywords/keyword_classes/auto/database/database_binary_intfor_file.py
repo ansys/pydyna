@@ -61,13 +61,16 @@ class DatabaseBinaryIntforFile(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYINTFORFILE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYINTFORFILE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASEBINARYINTFORFILE_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Name of the database for the INTFOR data.  S=filename on the execution line will override FNAME.
@@ -158,7 +161,7 @@ class DatabaseBinaryIntforFile(KeywordBase):
         self._cards[2].set_value("ioopt", value)
 
     @property
-    def lcdt_link(self) -> DefineCurve:
+    def lcdt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdt."""
         if self.deck is None:
             return None
@@ -173,7 +176,7 @@ class DatabaseBinaryIntforFile(KeywordBase):
         self.lcdt = value.lcid
 
     @property
-    def psetid_link(self) -> KeywordBase:
+    def psetid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psetid."""
         return self._get_set_link("PART", self.psetid)
 

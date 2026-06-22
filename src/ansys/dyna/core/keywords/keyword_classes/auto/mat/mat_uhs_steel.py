@@ -165,8 +165,8 @@ class MatUhsSteel(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "UHS_STEEL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcy2": LinkType.DEFINE_CURVE,
@@ -193,41 +193,53 @@ class MatUhsSteel(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATUHSSTEEL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATUHSSTEEL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATUHSSTEEL_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATUHSSTEEL_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATUHSSTEEL_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATUHSSTEEL_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATUHSSTEEL_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATUHSSTEEL_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATUHSSTEEL_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATUHSSTEEL_CARD9,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATUHSSTEEL_CARD10,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATUHSSTEEL_CARD11,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatUhsSteel.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatUhsSteel._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATUHSSTEEL_OPTION0_CARD0,
@@ -1318,7 +1330,7 @@ class MatUhsSteel(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcy2_link(self) -> DefineCurve:
+    def lcy2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy2."""
         if self.deck is None:
             return None
@@ -1333,7 +1345,7 @@ class MatUhsSteel(KeywordBase):
         self.lcy2 = value.lcid
 
     @property
-    def lcy3_link(self) -> DefineCurve:
+    def lcy3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy3."""
         if self.deck is None:
             return None
@@ -1348,7 +1360,7 @@ class MatUhsSteel(KeywordBase):
         self.lcy3 = value.lcid
 
     @property
-    def lcy4_link(self) -> DefineCurve:
+    def lcy4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy4."""
         if self.deck is None:
             return None
@@ -1363,7 +1375,7 @@ class MatUhsSteel(KeywordBase):
         self.lcy4 = value.lcid
 
     @property
-    def lcy5_link(self) -> DefineCurve:
+    def lcy5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy5."""
         if self.deck is None:
             return None
@@ -1378,7 +1390,7 @@ class MatUhsSteel(KeywordBase):
         self.lcy5 = value.lcid
 
     @property
-    def lctre_link(self) -> DefineCurve:
+    def lctre_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctre."""
         if self.deck is None:
             return None
@@ -1393,7 +1405,7 @@ class MatUhsSteel(KeywordBase):
         self.lctre = value.lcid
 
     @property
-    def lcth1_link(self) -> DefineCurve:
+    def lcth1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcth1."""
         if self.deck is None:
             return None
@@ -1408,7 +1420,7 @@ class MatUhsSteel(KeywordBase):
         self.lcth1 = value.lcid
 
     @property
-    def lcth5_link(self) -> DefineCurve:
+    def lcth5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcth5."""
         if self.deck is None:
             return None
@@ -1423,7 +1435,7 @@ class MatUhsSteel(KeywordBase):
         self.lcth5 = value.lcid
 
     @property
-    def msig_link(self) -> DefineCurve:
+    def msig_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for msig."""
         if self.deck is None:
             return None
@@ -1438,7 +1450,7 @@ class MatUhsSteel(KeywordBase):
         self.msig = value.lcid
 
     @property
-    def lceps23_link(self) -> DefineCurve:
+    def lceps23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lceps23."""
         if self.deck is None:
             return None
@@ -1453,7 +1465,7 @@ class MatUhsSteel(KeywordBase):
         self.lceps23 = value.lcid
 
     @property
-    def lceps4_link(self) -> DefineCurve:
+    def lceps4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lceps4."""
         if self.deck is None:
             return None
@@ -1468,7 +1480,7 @@ class MatUhsSteel(KeywordBase):
         self.lceps4 = value.lcid
 
     @property
-    def lceps5_link(self) -> DefineCurve:
+    def lceps5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lceps5."""
         if self.deck is None:
             return None
@@ -1483,7 +1495,7 @@ class MatUhsSteel(KeywordBase):
         self.lceps5 = value.lcid
 
     @property
-    def lch4_link(self) -> DefineCurve:
+    def lch4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lch4."""
         if self.deck is None:
             return None
@@ -1498,7 +1510,7 @@ class MatUhsSteel(KeywordBase):
         self.lch4 = value.lcid
 
     @property
-    def lch5_link(self) -> DefineCurve:
+    def lch5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lch5."""
         if self.deck is None:
             return None
@@ -1513,7 +1525,7 @@ class MatUhsSteel(KeywordBase):
         self.lch5 = value.lcid
 
     @property
-    def lcy1_link(self) -> KeywordBase:
+    def lcy1_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcy1."""
         if self.deck is None:
             return None

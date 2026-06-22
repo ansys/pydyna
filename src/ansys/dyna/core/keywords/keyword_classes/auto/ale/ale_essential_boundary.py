@@ -50,7 +50,8 @@ class AleEssentialBoundary(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALEESSENTIALBOUNDARY_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Set ID defining a part, part set or segment set ID of the ALE mesh boundary.
@@ -105,7 +106,7 @@ class AleEssentialBoundary(KeywordBase):
         self._cards[0].set_value("iexcl", value)
 
     @property
-    def iexcl_link(self) -> KeywordBase:
+    def iexcl_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for iexcl."""
         return self._get_set_link("SEGMENT", self.iexcl)
 

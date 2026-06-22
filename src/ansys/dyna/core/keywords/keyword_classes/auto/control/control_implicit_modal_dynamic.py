@@ -60,13 +60,16 @@ class ControlImplicitModalDynamic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITMODALDYNAMIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITMODALDYNAMIC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITMODALDYNAMIC_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mdflag(self) -> int:
         """Get or set the Modal Dynamic flag
@@ -168,7 +171,7 @@ class ControlImplicitModalDynamic(KeywordBase):
         self._cards[2].set_value("filename2", value)
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 

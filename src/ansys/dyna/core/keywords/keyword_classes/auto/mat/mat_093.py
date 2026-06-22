@@ -48,8 +48,8 @@ class Mat093(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "093"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "tpidr": LinkType.PART,
@@ -68,8 +68,9 @@ class Mat093(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT093_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat093.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat093._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT093_OPTION0_CARD0,
@@ -182,32 +183,32 @@ class Mat093(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def tpidr_link(self) -> KeywordBase:
+    def tpidr_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given tpidr."""
         return self._get_link_by_attr("PART", "pid", self.tpidr, "parts")
 
     @property
-    def tpids_link(self) -> KeywordBase:
+    def tpids_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given tpids."""
         return self._get_link_by_attr("PART", "pid", self.tpids, "parts")
 
     @property
-    def tpidt_link(self) -> KeywordBase:
+    def tpidt_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given tpidt."""
         return self._get_link_by_attr("PART", "pid", self.tpidt, "parts")
 
     @property
-    def rpidr_link(self) -> KeywordBase:
+    def rpidr_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given rpidr."""
         return self._get_link_by_attr("PART", "pid", self.rpidr, "parts")
 
     @property
-    def rpids_link(self) -> KeywordBase:
+    def rpids_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given rpids."""
         return self._get_link_by_attr("PART", "pid", self.rpids, "parts")
 
     @property
-    def rpidt_link(self) -> KeywordBase:
+    def rpidt_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given rpidt."""
         return self._get_link_by_attr("PART", "pid", self.rpidt, "parts")
 

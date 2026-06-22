@@ -64,10 +64,12 @@ class InterfaceSpringbackDyna3DNothickness(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACESPRINGBACKDYNA3DNOTHICKNESS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACESPRINGBACKDYNA3DNOTHICKNESS_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part set ID for springback, see * SET_PART.
@@ -258,7 +260,7 @@ class InterfaceSpringbackDyna3DNothickness(KeywordBase):
         self._cards[1].set_value("hflag", value)
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

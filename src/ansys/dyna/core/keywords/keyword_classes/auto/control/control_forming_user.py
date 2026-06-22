@@ -77,13 +77,16 @@ class ControlFormingUser(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGUSER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGUSER_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGUSER_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def blank(self) -> typing.Optional[int]:
         """Get or set the Blank ID
@@ -358,7 +361,7 @@ class ControlFormingUser(KeywordBase):
         self._cards[2].set_value("gap", value)
 
     @property
-    def lcss_link(self) -> DefineVector:
+    def lcss_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for lcss."""
         if self.deck is None:
             return None

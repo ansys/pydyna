@@ -61,13 +61,16 @@ class DatabaseAleOperation(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEALEOPERATION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASEALEOPERATION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASEALEOPERATION_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def fct(self) -> typing.Optional[int]:
         """Get or set the *DEFINE_FUNCTION ID;

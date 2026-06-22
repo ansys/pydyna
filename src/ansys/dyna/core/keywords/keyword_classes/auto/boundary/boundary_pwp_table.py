@@ -61,10 +61,12 @@ class BoundaryPwpTable(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPWPTABLE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPWPTABLE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID.
@@ -126,7 +128,7 @@ class BoundaryPwpTable(KeywordBase):
         self._cards[1].set_value("table", value)
 
     @property
-    def table_link(self) -> DefineCurve:
+    def table_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for table."""
         if self.deck is None:
             return None
@@ -141,7 +143,7 @@ class BoundaryPwpTable(KeywordBase):
         self.table = value.lcid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

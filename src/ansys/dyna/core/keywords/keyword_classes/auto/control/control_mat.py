@@ -45,7 +45,8 @@ class ControlMat(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMAT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def maef(self) -> int:
         """Get or set the EQ.0:	failure of  *MAT_ADD_EROSION definitions are active.

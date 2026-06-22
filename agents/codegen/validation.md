@@ -6,7 +6,7 @@ How to validate codegen changes at different stages of development.
 
 **If generated code doesn't change, tests don't need to run.**
 
-The metric: `python codegen/generate.py` + `git diff src/.../auto/` shows no changes.
+The metric: `python codegen/generate.py -c && python codegen/generate.py` + `git diff src/.../auto/` shows no changes.
 
 ## Validation Commands
 
@@ -34,14 +34,6 @@ bash codegen/validate.sh --skip-precommit   # Skip pre-commit hooks
 bash codegen/validate.sh --skip-deadcode    # Skip dead code detection
 bash codegen/validate.sh --coverage-threshold 90  # Adjust coverage
 bash codegen/validate.sh --verbose          # Verbose output
-```
-
-### Manual Output Check
-
-```bash
-python codegen/generate.py -c
-python codegen/generate.py
-git diff src/ansys/dyna/core/keywords/keyword_classes/auto/
 ```
 
 If `git diff` shows changes:

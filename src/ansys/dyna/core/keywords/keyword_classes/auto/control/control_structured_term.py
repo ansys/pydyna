@@ -42,4 +42,5 @@ class ControlStructuredTerm(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLSTRUCTUREDTERM_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]

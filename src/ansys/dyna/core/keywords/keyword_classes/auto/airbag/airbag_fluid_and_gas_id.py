@@ -81,16 +81,20 @@ class AirbagFluidAndGasId(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGFLUIDANDGASID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGFLUIDANDGASID_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGFLUIDANDGASID_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGFLUIDANDGASID_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Optional Airbag ID.
@@ -366,7 +370,7 @@ class AirbagFluidAndGasId(KeywordBase):
         self._cards[3].set_value("kbm", value)
 
     @property
-    def lcxw_link(self) -> DefineCurve:
+    def lcxw_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcxw."""
         if self.deck is None:
             return None
@@ -381,7 +385,7 @@ class AirbagFluidAndGasId(KeywordBase):
         self.lcxw = value.lcid
 
     @property
-    def lcp_link(self) -> DefineCurve:
+    def lcp_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcp."""
         if self.deck is None:
             return None

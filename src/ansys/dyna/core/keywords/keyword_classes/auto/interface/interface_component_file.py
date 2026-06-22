@@ -47,10 +47,12 @@ class InterfaceComponentFile(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPONENTFILE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPONENTFILE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Name of the file where the component data will be written.

@@ -65,10 +65,12 @@ class LoadBlastEnhanced(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADBLASTENHANCED_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADBLASTENHANCED_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def bid(self) -> typing.Optional[int]:
         """Get or set the Blast ID.  A unique number must be defined for each blast source (charge).  Multiple charges may be defined, however, interaction of the waves in air is not considered.
@@ -243,7 +245,7 @@ class LoadBlastEnhanced(KeywordBase):
         self._cards[1].set_value("negphs", value)
 
     @property
-    def nidbo_link(self) -> KeywordBase:
+    def nidbo_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nidbo."""
         return self._get_link_by_attr("NODE", "nid", self.nidbo, "parts")
 

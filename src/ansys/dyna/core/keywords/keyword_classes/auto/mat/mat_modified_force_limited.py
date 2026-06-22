@@ -221,8 +221,8 @@ class MatModifiedForceLimited(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "MODIFIED_FORCE_LIMITED"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lc1": LinkType.DEFINE_CURVE,
@@ -293,59 +293,77 @@ class MatModifiedForceLimited(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD9,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD10,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD11,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD12,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD13,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD14,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD15,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD16,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMODIFIEDFORCELIMITED_CARD17,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatModifiedForceLimited.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatModifiedForceLimited._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATMODIFIEDFORCELIMITED_OPTION0_CARD0,
@@ -1797,7 +1815,7 @@ class MatModifiedForceLimited(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lc1_link(self) -> DefineCurve:
+    def lc1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc1."""
         if self.deck is None:
             return None
@@ -1812,7 +1830,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lc1 = value.lcid
 
     @property
-    def lc2_link(self) -> DefineCurve:
+    def lc2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc2."""
         if self.deck is None:
             return None
@@ -1827,7 +1845,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lc2 = value.lcid
 
     @property
-    def lc3_link(self) -> DefineCurve:
+    def lc3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc3."""
         if self.deck is None:
             return None
@@ -1842,7 +1860,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lc3 = value.lcid
 
     @property
-    def lc4_link(self) -> DefineCurve:
+    def lc4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc4."""
         if self.deck is None:
             return None
@@ -1857,7 +1875,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lc4 = value.lcid
 
     @property
-    def lc5_link(self) -> DefineCurve:
+    def lc5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc5."""
         if self.deck is None:
             return None
@@ -1872,7 +1890,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lc5 = value.lcid
 
     @property
-    def lc6_link(self) -> DefineCurve:
+    def lc6_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc6."""
         if self.deck is None:
             return None
@@ -1887,7 +1905,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lc6 = value.lcid
 
     @property
-    def lc7_link(self) -> DefineCurve:
+    def lc7_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc7."""
         if self.deck is None:
             return None
@@ -1902,7 +1920,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lc7 = value.lcid
 
     @property
-    def lc8_link(self) -> DefineCurve:
+    def lc8_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc8."""
         if self.deck is None:
             return None
@@ -1917,7 +1935,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lc8 = value.lcid
 
     @property
-    def lps1_link(self) -> DefineCurve:
+    def lps1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lps1."""
         if self.deck is None:
             return None
@@ -1932,7 +1950,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lps1 = value.lcid
 
     @property
-    def lps2_link(self) -> DefineCurve:
+    def lps2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lps2."""
         if self.deck is None:
             return None
@@ -1947,7 +1965,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lps2 = value.lcid
 
     @property
-    def lpt1_link(self) -> DefineCurve:
+    def lpt1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpt1."""
         if self.deck is None:
             return None
@@ -1962,7 +1980,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpt1 = value.lcid
 
     @property
-    def lpt2_link(self) -> DefineCurve:
+    def lpt2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpt2."""
         if self.deck is None:
             return None
@@ -1977,7 +1995,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpt2 = value.lcid
 
     @property
-    def lpr_link(self) -> DefineCurve:
+    def lpr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpr."""
         if self.deck is None:
             return None
@@ -1992,7 +2010,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpr = value.lcid
 
     @property
-    def lys1_link(self) -> DefineCurve:
+    def lys1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lys1."""
         if self.deck is None:
             return None
@@ -2007,7 +2025,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lys1 = value.lcid
 
     @property
-    def lys2_link(self) -> DefineCurve:
+    def lys2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lys2."""
         if self.deck is None:
             return None
@@ -2022,7 +2040,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lys2 = value.lcid
 
     @property
-    def lyt1_link(self) -> DefineCurve:
+    def lyt1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lyt1."""
         if self.deck is None:
             return None
@@ -2037,7 +2055,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lyt1 = value.lcid
 
     @property
-    def lyt2_link(self) -> DefineCurve:
+    def lyt2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lyt2."""
         if self.deck is None:
             return None
@@ -2052,7 +2070,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lyt2 = value.lcid
 
     @property
-    def lyr_link(self) -> DefineCurve:
+    def lyr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lyr."""
         if self.deck is None:
             return None
@@ -2067,7 +2085,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lyr = value.lcid
 
     @property
-    def lpms1_1_link(self) -> DefineCurve:
+    def lpms1_1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpms1_1."""
         if self.deck is None:
             return None
@@ -2082,7 +2100,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpms1_1 = value.lcid
 
     @property
-    def lpms1_2_link(self) -> DefineCurve:
+    def lpms1_2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpms1_2."""
         if self.deck is None:
             return None
@@ -2097,7 +2115,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpms1_2 = value.lcid
 
     @property
-    def lpms1_3_link(self) -> DefineCurve:
+    def lpms1_3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpms1_3."""
         if self.deck is None:
             return None
@@ -2112,7 +2130,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpms1_3 = value.lcid
 
     @property
-    def lpms1_4_link(self) -> DefineCurve:
+    def lpms1_4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpms1_4."""
         if self.deck is None:
             return None
@@ -2127,7 +2145,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpms1_4 = value.lcid
 
     @property
-    def lpms1_5_link(self) -> DefineCurve:
+    def lpms1_5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpms1_5."""
         if self.deck is None:
             return None
@@ -2142,7 +2160,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpms1_5 = value.lcid
 
     @property
-    def lpms1_6_link(self) -> DefineCurve:
+    def lpms1_6_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpms1_6."""
         if self.deck is None:
             return None
@@ -2157,7 +2175,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpms1_6 = value.lcid
 
     @property
-    def lpms1_7_link(self) -> DefineCurve:
+    def lpms1_7_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpms1_7."""
         if self.deck is None:
             return None
@@ -2172,7 +2190,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpms1_7 = value.lcid
 
     @property
-    def lpms1_8_link(self) -> DefineCurve:
+    def lpms1_8_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpms1_8."""
         if self.deck is None:
             return None
@@ -2187,7 +2205,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpms1_8 = value.lcid
 
     @property
-    def lpms2_1_link(self) -> DefineCurve:
+    def lpms2_1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpms2_1."""
         if self.deck is None:
             return None
@@ -2202,7 +2220,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpms2_1 = value.lcid
 
     @property
-    def lpms2_2_link(self) -> DefineCurve:
+    def lpms2_2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpms2_2."""
         if self.deck is None:
             return None
@@ -2217,7 +2235,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpms2_2 = value.lcid
 
     @property
-    def lpms2_3_link(self) -> DefineCurve:
+    def lpms2_3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpms2_3."""
         if self.deck is None:
             return None
@@ -2232,7 +2250,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpms2_3 = value.lcid
 
     @property
-    def lpms2_4_link(self) -> DefineCurve:
+    def lpms2_4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpms2_4."""
         if self.deck is None:
             return None
@@ -2247,7 +2265,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpms2_4 = value.lcid
 
     @property
-    def lpms2_5_link(self) -> DefineCurve:
+    def lpms2_5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpms2_5."""
         if self.deck is None:
             return None
@@ -2262,7 +2280,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpms2_5 = value.lcid
 
     @property
-    def lpms2_6_link(self) -> DefineCurve:
+    def lpms2_6_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpms2_6."""
         if self.deck is None:
             return None
@@ -2277,7 +2295,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpms2_6 = value.lcid
 
     @property
-    def lpms2_7_link(self) -> DefineCurve:
+    def lpms2_7_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpms2_7."""
         if self.deck is None:
             return None
@@ -2292,7 +2310,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpms2_7 = value.lcid
 
     @property
-    def lpms2_8_link(self) -> DefineCurve:
+    def lpms2_8_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpms2_8."""
         if self.deck is None:
             return None
@@ -2307,7 +2325,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpms2_8 = value.lcid
 
     @property
-    def lpmt1_1_link(self) -> DefineCurve:
+    def lpmt1_1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmt1_1."""
         if self.deck is None:
             return None
@@ -2322,7 +2340,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmt1_1 = value.lcid
 
     @property
-    def lpmt1_2_link(self) -> DefineCurve:
+    def lpmt1_2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmt1_2."""
         if self.deck is None:
             return None
@@ -2337,7 +2355,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmt1_2 = value.lcid
 
     @property
-    def lpmt1_3_link(self) -> DefineCurve:
+    def lpmt1_3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmt1_3."""
         if self.deck is None:
             return None
@@ -2352,7 +2370,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmt1_3 = value.lcid
 
     @property
-    def lpmt1_4_link(self) -> DefineCurve:
+    def lpmt1_4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmt1_4."""
         if self.deck is None:
             return None
@@ -2367,7 +2385,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmt1_4 = value.lcid
 
     @property
-    def lpmt1_5_link(self) -> DefineCurve:
+    def lpmt1_5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmt1_5."""
         if self.deck is None:
             return None
@@ -2382,7 +2400,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmt1_5 = value.lcid
 
     @property
-    def lpmt1_6_link(self) -> DefineCurve:
+    def lpmt1_6_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmt1_6."""
         if self.deck is None:
             return None
@@ -2397,7 +2415,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmt1_6 = value.lcid
 
     @property
-    def lpmt1_7_link(self) -> DefineCurve:
+    def lpmt1_7_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmt1_7."""
         if self.deck is None:
             return None
@@ -2412,7 +2430,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmt1_7 = value.lcid
 
     @property
-    def lpmt1_8_link(self) -> DefineCurve:
+    def lpmt1_8_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmt1_8."""
         if self.deck is None:
             return None
@@ -2427,7 +2445,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmt1_8 = value.lcid
 
     @property
-    def lpmt2_1_link(self) -> DefineCurve:
+    def lpmt2_1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmt2_1."""
         if self.deck is None:
             return None
@@ -2442,7 +2460,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmt2_1 = value.lcid
 
     @property
-    def lpmt2_2_link(self) -> DefineCurve:
+    def lpmt2_2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmt2_2."""
         if self.deck is None:
             return None
@@ -2457,7 +2475,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmt2_2 = value.lcid
 
     @property
-    def lpmt2_3_link(self) -> DefineCurve:
+    def lpmt2_3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmt2_3."""
         if self.deck is None:
             return None
@@ -2472,7 +2490,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmt2_3 = value.lcid
 
     @property
-    def lpmt2_4_link(self) -> DefineCurve:
+    def lpmt2_4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmt2_4."""
         if self.deck is None:
             return None
@@ -2487,7 +2505,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmt2_4 = value.lcid
 
     @property
-    def lpmt2_5_link(self) -> DefineCurve:
+    def lpmt2_5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmt2_5."""
         if self.deck is None:
             return None
@@ -2502,7 +2520,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmt2_5 = value.lcid
 
     @property
-    def lpmt2_6_link(self) -> DefineCurve:
+    def lpmt2_6_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmt2_6."""
         if self.deck is None:
             return None
@@ -2517,7 +2535,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmt2_6 = value.lcid
 
     @property
-    def lpmt2_7_link(self) -> DefineCurve:
+    def lpmt2_7_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmt2_7."""
         if self.deck is None:
             return None
@@ -2532,7 +2550,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmt2_7 = value.lcid
 
     @property
-    def lpmt2_8_link(self) -> DefineCurve:
+    def lpmt2_8_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmt2_8."""
         if self.deck is None:
             return None
@@ -2547,7 +2565,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmt2_8 = value.lcid
 
     @property
-    def lpmr_1_link(self) -> DefineCurve:
+    def lpmr_1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmr_1."""
         if self.deck is None:
             return None
@@ -2562,7 +2580,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmr_1 = value.lcid
 
     @property
-    def lpmr_2_link(self) -> DefineCurve:
+    def lpmr_2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmr_2."""
         if self.deck is None:
             return None
@@ -2577,7 +2595,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmr_2 = value.lcid
 
     @property
-    def lpmr_3_link(self) -> DefineCurve:
+    def lpmr_3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmr_3."""
         if self.deck is None:
             return None
@@ -2592,7 +2610,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmr_3 = value.lcid
 
     @property
-    def lpmr_4_link(self) -> DefineCurve:
+    def lpmr_4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmr_4."""
         if self.deck is None:
             return None
@@ -2607,7 +2625,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmr_4 = value.lcid
 
     @property
-    def lpmr_5_link(self) -> DefineCurve:
+    def lpmr_5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmr_5."""
         if self.deck is None:
             return None
@@ -2622,7 +2640,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmr_5 = value.lcid
 
     @property
-    def lpmr_6_link(self) -> DefineCurve:
+    def lpmr_6_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmr_6."""
         if self.deck is None:
             return None
@@ -2637,7 +2655,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmr_6 = value.lcid
 
     @property
-    def lpmr_7_link(self) -> DefineCurve:
+    def lpmr_7_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmr_7."""
         if self.deck is None:
             return None
@@ -2652,7 +2670,7 @@ class MatModifiedForceLimited(KeywordBase):
         self.lpmr_7 = value.lcid
 
     @property
-    def lpmr_8_link(self) -> DefineCurve:
+    def lpmr_8_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lpmr_8."""
         if self.deck is None:
             return None

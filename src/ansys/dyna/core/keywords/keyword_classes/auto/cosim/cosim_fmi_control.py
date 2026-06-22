@@ -50,10 +50,12 @@ class CosimFmiControl(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _COSIMFMICONTROL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _COSIMFMICONTROL_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def appid(self) -> typing.Optional[str]:
         """Get or set the FMU identification. Each FMU must have a unique APPID

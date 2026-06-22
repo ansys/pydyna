@@ -66,10 +66,12 @@ class ControlFormingBlankmesh(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGBLANKMESH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGBLANKMESH_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def idmesh(self) -> typing.Optional[int]:
         """Get or set the ID of the blankmesh (not the blank PID); must be unique
@@ -241,7 +243,7 @@ class ControlFormingBlankmesh(KeywordBase):
         self._cards[1].set_value("yshift", value)
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -256,7 +258,7 @@ class ControlFormingBlankmesh(KeywordBase):
         self.cid = value.cid
 
     @property
-    def pidbk_link(self) -> KeywordBase:
+    def pidbk_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pidbk."""
         return self._get_link_by_attr("PART", "pid", self.pidbk, "parts")
 

@@ -72,13 +72,16 @@ class InitialStressSolidSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSSOLIDSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSSOLIDSET_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALSTRESSSOLIDSET_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the solid set ID.
@@ -315,7 +318,7 @@ class InitialStressSolidSet(KeywordBase):
         self._cards[2].set_value("sigyz", value)
 
     @property
-    def sid_link(self) -> KeywordBase:
+    def sid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for sid."""
         return self._get_set_link("SOLID", self.sid)
 

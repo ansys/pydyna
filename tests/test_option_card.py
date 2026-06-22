@@ -38,8 +38,8 @@ class OptionAPIImplementation:
     def __init__(self, **kwargs):
         self._active_options = set(["FOO"])
         self._option_specs = {
-                "FOO": OptionSpec("FOO", 1, 0),
-                "BAR": OptionSpec("BAR", 1, 0)
+                "FOO": OptionSpec("FOO", "post/1", 0),
+                "BAR": OptionSpec("BAR", "post/1", 0)
         }
         _cards = [
             OptionCardSet(
@@ -76,7 +76,6 @@ class OptionAPIImplementation:
         return [self._option_specs["FOO"], self._option_specs["BAR"]]
 
 
-@pytest.mark.keywords
 def test_options_basic():
     impl = OptionAPIImplementation()
     options = Options(impl)
@@ -86,7 +85,6 @@ def test_options_basic():
     assert options["BAR"].active is True
 
 
-@pytest.mark.keywords
 def test_options_union():
     impl = OptionAPIImplementation()
     options = Options(impl)

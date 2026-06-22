@@ -103,8 +103,8 @@ class MatAnisotropicThermoelastic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ANISOTROPIC_THERMOELASTIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "ta1": LinkType.DEFINE_CURVE,
@@ -145,23 +145,29 @@ class MatAnisotropicThermoelastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICTHERMOELASTIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICTHERMOELASTIC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICTHERMOELASTIC_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICTHERMOELASTIC_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICTHERMOELASTIC_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATANISOTROPICTHERMOELASTIC_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatAnisotropicThermoelastic.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatAnisotropicThermoelastic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATANISOTROPICTHERMOELASTIC_OPTION0_CARD0,
@@ -719,7 +725,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def ta1_link(self) -> DefineCurve:
+    def ta1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ta1."""
         if self.deck is None:
             return None
@@ -734,7 +740,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.ta1 = value.lcid
 
     @property
-    def ta2_link(self) -> DefineCurve:
+    def ta2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ta2."""
         if self.deck is None:
             return None
@@ -749,7 +755,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.ta2 = value.lcid
 
     @property
-    def ta3_link(self) -> DefineCurve:
+    def ta3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ta3."""
         if self.deck is None:
             return None
@@ -764,7 +770,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.ta3 = value.lcid
 
     @property
-    def ta4_link(self) -> DefineCurve:
+    def ta4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ta4."""
         if self.deck is None:
             return None
@@ -779,7 +785,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.ta4 = value.lcid
 
     @property
-    def ta5_link(self) -> DefineCurve:
+    def ta5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ta5."""
         if self.deck is None:
             return None
@@ -794,7 +800,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.ta5 = value.lcid
 
     @property
-    def ta6_link(self) -> DefineCurve:
+    def ta6_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ta6."""
         if self.deck is None:
             return None
@@ -809,7 +815,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.ta6 = value.lcid
 
     @property
-    def c11_link(self) -> DefineCurve:
+    def c11_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c11."""
         if self.deck is None:
             return None
@@ -824,7 +830,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c11 = value.lcid
 
     @property
-    def c12_link(self) -> DefineCurve:
+    def c12_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c12."""
         if self.deck is None:
             return None
@@ -839,7 +845,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c12 = value.lcid
 
     @property
-    def c13_link(self) -> DefineCurve:
+    def c13_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c13."""
         if self.deck is None:
             return None
@@ -854,7 +860,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c13 = value.lcid
 
     @property
-    def c14_link(self) -> DefineCurve:
+    def c14_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c14."""
         if self.deck is None:
             return None
@@ -869,7 +875,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c14 = value.lcid
 
     @property
-    def c15_link(self) -> DefineCurve:
+    def c15_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c15."""
         if self.deck is None:
             return None
@@ -884,7 +890,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c15 = value.lcid
 
     @property
-    def c16_link(self) -> DefineCurve:
+    def c16_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c16."""
         if self.deck is None:
             return None
@@ -899,7 +905,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c16 = value.lcid
 
     @property
-    def c22_link(self) -> DefineCurve:
+    def c22_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c22."""
         if self.deck is None:
             return None
@@ -914,7 +920,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c22 = value.lcid
 
     @property
-    def c23_link(self) -> DefineCurve:
+    def c23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c23."""
         if self.deck is None:
             return None
@@ -929,7 +935,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c23 = value.lcid
 
     @property
-    def c24_link(self) -> DefineCurve:
+    def c24_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c24."""
         if self.deck is None:
             return None
@@ -944,7 +950,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c24 = value.lcid
 
     @property
-    def c25_link(self) -> DefineCurve:
+    def c25_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c25."""
         if self.deck is None:
             return None
@@ -959,7 +965,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c25 = value.lcid
 
     @property
-    def c26_link(self) -> DefineCurve:
+    def c26_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c26."""
         if self.deck is None:
             return None
@@ -974,7 +980,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c26 = value.lcid
 
     @property
-    def c33_link(self) -> DefineCurve:
+    def c33_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c33."""
         if self.deck is None:
             return None
@@ -989,7 +995,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c33 = value.lcid
 
     @property
-    def c34_link(self) -> DefineCurve:
+    def c34_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c34."""
         if self.deck is None:
             return None
@@ -1004,7 +1010,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c34 = value.lcid
 
     @property
-    def c35_link(self) -> DefineCurve:
+    def c35_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c35."""
         if self.deck is None:
             return None
@@ -1019,7 +1025,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c35 = value.lcid
 
     @property
-    def c36_link(self) -> DefineCurve:
+    def c36_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c36."""
         if self.deck is None:
             return None
@@ -1034,7 +1040,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c36 = value.lcid
 
     @property
-    def c44_link(self) -> DefineCurve:
+    def c44_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c44."""
         if self.deck is None:
             return None
@@ -1049,7 +1055,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c44 = value.lcid
 
     @property
-    def c45_link(self) -> DefineCurve:
+    def c45_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c45."""
         if self.deck is None:
             return None
@@ -1064,7 +1070,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c45 = value.lcid
 
     @property
-    def c46_link(self) -> DefineCurve:
+    def c46_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c46."""
         if self.deck is None:
             return None
@@ -1079,7 +1085,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c46 = value.lcid
 
     @property
-    def c55_link(self) -> DefineCurve:
+    def c55_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c55."""
         if self.deck is None:
             return None
@@ -1094,7 +1100,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c55 = value.lcid
 
     @property
-    def c56_link(self) -> DefineCurve:
+    def c56_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c56."""
         if self.deck is None:
             return None
@@ -1109,7 +1115,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c56 = value.lcid
 
     @property
-    def c66_link(self) -> DefineCurve:
+    def c66_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for c66."""
         if self.deck is None:
             return None
@@ -1124,7 +1130,7 @@ class MatAnisotropicThermoelastic(KeywordBase):
         self.c66 = value.lcid
 
     @property
-    def tge_link(self) -> DefineCurve:
+    def tge_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tge."""
         if self.deck is None:
             return None

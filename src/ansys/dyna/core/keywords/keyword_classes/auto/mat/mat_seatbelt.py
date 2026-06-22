@@ -59,8 +59,8 @@ class MatSeatbelt(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "SEATBELT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "llcid": LinkType.DEFINE_CURVE,
@@ -75,11 +75,13 @@ class MatSeatbelt(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATSEATBELT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSEATBELT_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatSeatbelt.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatSeatbelt._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSEATBELT_OPTION0_CARD0,
@@ -274,7 +276,7 @@ class MatSeatbelt(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def llcid_link(self) -> DefineCurve:
+    def llcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for llcid."""
         if self.deck is None:
             return None
@@ -289,7 +291,7 @@ class MatSeatbelt(KeywordBase):
         self.llcid = value.lcid
 
     @property
-    def ulcid_link(self) -> DefineCurve:
+    def ulcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ulcid."""
         if self.deck is None:
             return None

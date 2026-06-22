@@ -50,18 +50,11 @@ class SetNodeList(KeywordBase):
 
     keyword = "SET"
     subkeyword = "NODE_LIST"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
-        "nid1": LinkType.NODE,
-        "nid2": LinkType.NODE,
-        "nid3": LinkType.NODE,
-        "nid4": LinkType.NODE,
-        "nid5": LinkType.NODE,
-        "nid6": LinkType.NODE,
-        "nid7": LinkType.NODE,
-        "nid8": LinkType.NODE,
+        "nodes": LinkType.NODE,
     }
 
     def __init__(self, **kwargs):
@@ -72,14 +65,16 @@ class SetNodeList(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETNODELIST_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "nodes",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("nodes")),            OptionCardSet(
-                option_spec = SetNodeList.option_specs[0],
+                data = kwargs.get("nodes")),
+            OptionCardSet(
+                option_spec = SetNodeList._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETNODELIST_OPTION0_CARD0,
@@ -198,44 +193,13 @@ class SetNodeList(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def nid1_link(self) -> KeywordBase:
-        """Get the NODE keyword containing the given nid1."""
-        return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
+    def nodes_links(self) -> typing.Dict[int, KeywordBase]:
+        """Get all NODE keywords for nodes, keyed by element ID."""
+        return self._get_links_from_series("NODE", "nid", "nodes", "")
 
-    @property
-    def nid2_link(self) -> KeywordBase:
-        """Get the NODE keyword containing the given nid2."""
-        return self._get_link_by_attr("NODE", "nid", self.nid2, "parts")
-
-    @property
-    def nid3_link(self) -> KeywordBase:
-        """Get the NODE keyword containing the given nid3."""
-        return self._get_link_by_attr("NODE", "nid", self.nid3, "parts")
-
-    @property
-    def nid4_link(self) -> KeywordBase:
-        """Get the NODE keyword containing the given nid4."""
-        return self._get_link_by_attr("NODE", "nid", self.nid4, "parts")
-
-    @property
-    def nid5_link(self) -> KeywordBase:
-        """Get the NODE keyword containing the given nid5."""
-        return self._get_link_by_attr("NODE", "nid", self.nid5, "parts")
-
-    @property
-    def nid6_link(self) -> KeywordBase:
-        """Get the NODE keyword containing the given nid6."""
-        return self._get_link_by_attr("NODE", "nid", self.nid6, "parts")
-
-    @property
-    def nid7_link(self) -> KeywordBase:
-        """Get the NODE keyword containing the given nid7."""
-        return self._get_link_by_attr("NODE", "nid", self.nid7, "parts")
-
-    @property
-    def nid8_link(self) -> KeywordBase:
-        """Get the NODE keyword containing the given nid8."""
-        return self._get_link_by_attr("NODE", "nid", self.nid8, "parts")
+    def get_nodes_link(self, element_id: int) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given element_id."""
+        return self._get_link_by_attr("NODE", "nid", element_id, "")
 
 
 class SetNode(SetNodeList):

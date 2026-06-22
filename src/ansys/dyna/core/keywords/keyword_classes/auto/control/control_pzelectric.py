@@ -49,7 +49,8 @@ class ControlPzelectric(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLPZELECTRIC_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def solver(self) -> int:
         """Get or set the Piezoelectric solver type:

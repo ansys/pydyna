@@ -53,7 +53,8 @@ class ControlSteadyStateRolling(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLSTEADYSTATEROLLING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def imass(self) -> int:
         """Get or set the Inertia switching flag
@@ -116,7 +117,7 @@ class ControlSteadyStateRolling(KeywordBase):
         self._cards[0].set_value("scl_k", value)
 
     @property
-    def lcdmu_link(self) -> DefineCurve:
+    def lcdmu_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdmu."""
         if self.deck is None:
             return None
@@ -131,7 +132,7 @@ class ControlSteadyStateRolling(KeywordBase):
         self.lcdmu = value.lcid
 
     @property
-    def lcdmur_link(self) -> DefineCurve:
+    def lcdmur_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdmur."""
         if self.deck is None:
             return None

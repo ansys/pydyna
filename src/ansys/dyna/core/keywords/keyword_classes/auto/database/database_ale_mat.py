@@ -46,7 +46,8 @@ class DatabaseAleMat(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEALEMAT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dtout(self) -> typing.Optional[float]:
         """Get or set the Time interval between the outputs.

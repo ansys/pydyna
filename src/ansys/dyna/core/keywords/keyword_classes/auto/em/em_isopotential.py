@@ -46,7 +46,8 @@ class EmIsopotential(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMISOPOTENTIAL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def isoid(self) -> typing.Optional[int]:
         """Get or set the ID of the Isopotential.

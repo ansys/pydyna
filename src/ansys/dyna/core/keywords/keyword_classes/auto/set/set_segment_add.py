@@ -42,18 +42,11 @@ class SetSegmentAdd(KeywordBase):
 
     keyword = "SET"
     subkeyword = "SEGMENT_ADD"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
-        "ssid1": LinkType.SET_SEGMENT,
-        "ssid2": LinkType.SET_SEGMENT,
-        "ssid3": LinkType.SET_SEGMENT,
-        "ssid4": LinkType.SET_SEGMENT,
-        "ssid5": LinkType.SET_SEGMENT,
-        "ssid6": LinkType.SET_SEGMENT,
-        "ssid7": LinkType.SET_SEGMENT,
-        "ssid8": LinkType.SET_SEGMENT,
+        "sets": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -64,14 +57,16 @@ class SetSegmentAdd(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETSEGMENTADD_CARD0,
                 **kwargs,
-            ),            SeriesCard(
+            ),
+            SeriesCard(
                 "sets",
                 8,
                 10,
                 int,
                 None,
-                data = kwargs.get("sets")),            OptionCardSet(
-                option_spec = SetSegmentAdd.option_specs[0],
+                data = kwargs.get("sets")),
+            OptionCardSet(
+                option_spec = SetSegmentAdd._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETSEGMENTADD_OPTION0_CARD0,
@@ -116,82 +111,12 @@ class SetSegmentAdd(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def ssid1_link(self) -> KeywordBase:
-        """Get the SET_SEGMENT_* keyword for ssid1."""
-        return self._get_set_link("SEGMENT", self.ssid1)
+    def sets_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SET_SEGMENT_* keyword for sets."""
+        return self._get_set_link("SEGMENT", self.sets)
 
-    @ssid1_link.setter
-    def ssid1_link(self, value: KeywordBase) -> None:
-        """Set the SET_SEGMENT_* keyword for ssid1."""
-        self.ssid1 = value.sid
-
-    @property
-    def ssid2_link(self) -> KeywordBase:
-        """Get the SET_SEGMENT_* keyword for ssid2."""
-        return self._get_set_link("SEGMENT", self.ssid2)
-
-    @ssid2_link.setter
-    def ssid2_link(self, value: KeywordBase) -> None:
-        """Set the SET_SEGMENT_* keyword for ssid2."""
-        self.ssid2 = value.sid
-
-    @property
-    def ssid3_link(self) -> KeywordBase:
-        """Get the SET_SEGMENT_* keyword for ssid3."""
-        return self._get_set_link("SEGMENT", self.ssid3)
-
-    @ssid3_link.setter
-    def ssid3_link(self, value: KeywordBase) -> None:
-        """Set the SET_SEGMENT_* keyword for ssid3."""
-        self.ssid3 = value.sid
-
-    @property
-    def ssid4_link(self) -> KeywordBase:
-        """Get the SET_SEGMENT_* keyword for ssid4."""
-        return self._get_set_link("SEGMENT", self.ssid4)
-
-    @ssid4_link.setter
-    def ssid4_link(self, value: KeywordBase) -> None:
-        """Set the SET_SEGMENT_* keyword for ssid4."""
-        self.ssid4 = value.sid
-
-    @property
-    def ssid5_link(self) -> KeywordBase:
-        """Get the SET_SEGMENT_* keyword for ssid5."""
-        return self._get_set_link("SEGMENT", self.ssid5)
-
-    @ssid5_link.setter
-    def ssid5_link(self, value: KeywordBase) -> None:
-        """Set the SET_SEGMENT_* keyword for ssid5."""
-        self.ssid5 = value.sid
-
-    @property
-    def ssid6_link(self) -> KeywordBase:
-        """Get the SET_SEGMENT_* keyword for ssid6."""
-        return self._get_set_link("SEGMENT", self.ssid6)
-
-    @ssid6_link.setter
-    def ssid6_link(self, value: KeywordBase) -> None:
-        """Set the SET_SEGMENT_* keyword for ssid6."""
-        self.ssid6 = value.sid
-
-    @property
-    def ssid7_link(self) -> KeywordBase:
-        """Get the SET_SEGMENT_* keyword for ssid7."""
-        return self._get_set_link("SEGMENT", self.ssid7)
-
-    @ssid7_link.setter
-    def ssid7_link(self, value: KeywordBase) -> None:
-        """Set the SET_SEGMENT_* keyword for ssid7."""
-        self.ssid7 = value.sid
-
-    @property
-    def ssid8_link(self) -> KeywordBase:
-        """Get the SET_SEGMENT_* keyword for ssid8."""
-        return self._get_set_link("SEGMENT", self.ssid8)
-
-    @ssid8_link.setter
-    def ssid8_link(self, value: KeywordBase) -> None:
-        """Set the SET_SEGMENT_* keyword for ssid8."""
-        self.ssid8 = value.sid
+    @sets_link.setter
+    def sets_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for sets."""
+        self.sets = value.sid
 

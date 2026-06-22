@@ -55,7 +55,8 @@ class ControlFormingOutput(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGOUTPUT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the ID of a tooling kinematics curve, as defined by *DEFINE_CURVE and used by *BOUNDARY_PRESCRIBED_MOTION_RIGID.
@@ -156,7 +157,7 @@ class ControlFormingOutput(KeywordBase):
         self._cards[0].set_value("y4", value)
 
     @property
-    def cid_link(self) -> DefineCurve:
+    def cid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for cid."""
         if self.deck is None:
             return None

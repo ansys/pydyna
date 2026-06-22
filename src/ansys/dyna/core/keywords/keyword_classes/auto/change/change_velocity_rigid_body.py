@@ -53,7 +53,8 @@ class ChangeVelocityRigidBody(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHANGEVELOCITYRIGIDBODY_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID of rigid body.
@@ -132,7 +133,7 @@ class ChangeVelocityRigidBody(KeywordBase):
         self._cards[0].set_value("vzr", value)
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

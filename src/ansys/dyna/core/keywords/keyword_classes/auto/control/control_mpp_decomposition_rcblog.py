@@ -43,7 +43,8 @@ class ControlMppDecompositionRcblog(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPDECOMPOSITIONRCBLOG_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def name(self) -> typing.Optional[str]:
         """Get or set the Name of a file containing (or to contain ) a decomposition record.

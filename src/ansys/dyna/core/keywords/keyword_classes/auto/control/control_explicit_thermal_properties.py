@@ -82,16 +82,20 @@ class ControlExplicitThermalProperties(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLEXPLICITTHERMALPROPERTIES_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLEXPLICITTHERMALPROPERTIES_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLEXPLICITTHERMALPROPERTIES_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLEXPLICITTHERMALPROPERTIES_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def partset(self) -> typing.Optional[int]:
         """Get or set the Part set ID (See *SET_PART).
@@ -412,7 +416,7 @@ class ControlExplicitThermalProperties(KeywordBase):
         self._cards[3].set_value("kzztyp", value)
 
     @property
-    def vecid1_link(self) -> DefineVector:
+    def vecid1_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid1."""
         if self.deck is None:
             return None
@@ -427,7 +431,7 @@ class ControlExplicitThermalProperties(KeywordBase):
         self.vecid1 = value.vid
 
     @property
-    def vecid2_link(self) -> DefineVector:
+    def vecid2_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid2."""
         if self.deck is None:
             return None
@@ -442,7 +446,7 @@ class ControlExplicitThermalProperties(KeywordBase):
         self.vecid2 = value.vid
 
     @property
-    def partset_link(self) -> KeywordBase:
+    def partset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for partset."""
         return self._get_set_link("PART", self.partset)
 

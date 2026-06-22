@@ -49,10 +49,12 @@ class ControlImplicitResidualVector(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITRESIDUALVECTOR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITRESIDUALVECTOR_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def iresvec(self) -> int:
         """Get or set the Residual vector control flag:

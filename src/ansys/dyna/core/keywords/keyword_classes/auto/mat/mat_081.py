@@ -82,8 +82,8 @@ class Mat081(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "081"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcss": LinkType.DEFINE_CURVE,
@@ -99,17 +99,21 @@ class Mat081(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT081_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT081_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT081_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT081_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat081.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat081._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT081_OPTION0_CARD0,
@@ -489,7 +493,7 @@ class Mat081(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -504,7 +508,7 @@ class Mat081(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lcsr_link(self) -> DefineCurve:
+    def lcsr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsr."""
         if self.deck is None:
             return None
@@ -519,7 +523,7 @@ class Mat081(KeywordBase):
         self.lcsr = value.lcid
 
     @property
-    def lcdm_link(self) -> DefineCurve:
+    def lcdm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdm."""
         if self.deck is None:
             return None

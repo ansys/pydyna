@@ -92,19 +92,24 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLIDEDGES_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLIDEDGES_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLIDEDGES_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLIDEDGES_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLAGRANGEINSOLIDEDGES_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def coupid(self) -> typing.Optional[int]:
         """Get or set the ID.
@@ -518,7 +523,7 @@ class ConstrainedLagrangeInSolidEdges(KeywordBase):
         self._cards[4].set_value("thkf", value)
 
     @property
-    def lcidpor_link(self) -> DefineCurve:
+    def lcidpor_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidpor."""
         if self.deck is None:
             return None

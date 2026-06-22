@@ -57,8 +57,8 @@ class MatSteelEc3(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "STEEL_EC3"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lc_e": LinkType.DEFINE_CURVE,
@@ -76,14 +76,17 @@ class MatSteelEc3(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATSTEELEC3_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSTEELEC3_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSTEELEC3_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatSteelEc3.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatSteelEc3._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSTEELEC3_OPTION0_CARD0,
@@ -218,7 +221,7 @@ class MatSteelEc3(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lc_e_link(self) -> DefineCurve:
+    def lc_e_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_e."""
         if self.deck is None:
             return None
@@ -233,7 +236,7 @@ class MatSteelEc3(KeywordBase):
         self.lc_e = value.lcid
 
     @property
-    def lc_pr_link(self) -> DefineCurve:
+    def lc_pr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_pr."""
         if self.deck is None:
             return None
@@ -248,7 +251,7 @@ class MatSteelEc3(KeywordBase):
         self.lc_pr = value.lcid
 
     @property
-    def lc_al_link(self) -> DefineCurve:
+    def lc_al_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_al."""
         if self.deck is None:
             return None
@@ -263,7 +266,7 @@ class MatSteelEc3(KeywordBase):
         self.lc_al = value.lcid
 
     @property
-    def tbl_ss_link(self) -> DefineCurve:
+    def tbl_ss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tbl_ss."""
         if self.deck is None:
             return None
@@ -278,7 +281,7 @@ class MatSteelEc3(KeywordBase):
         self.tbl_ss = value.lcid
 
     @property
-    def lc_fs_link(self) -> DefineCurve:
+    def lc_fs_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc_fs."""
         if self.deck is None:
             return None

@@ -50,7 +50,8 @@ class EmControlSolution(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCONTROLSOLUTION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ncylfem(self) -> int:
         """Get or set the Number of electromagnetism cycles between the recalculation of FEM matrices.If a negative value is entered, then the absolute value will refer to a load curve giving NCYCLFEM function of time.

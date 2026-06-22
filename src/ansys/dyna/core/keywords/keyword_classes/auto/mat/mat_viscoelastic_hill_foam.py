@@ -82,8 +82,8 @@ class MatViscoelasticHillFoam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "VISCOELASTIC_HILL_FOAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
@@ -98,20 +98,25 @@ class MatViscoelasticHillFoam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATVISCOELASTICHILLFOAM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATVISCOELASTICHILLFOAM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATVISCOELASTICHILLFOAM_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATVISCOELASTICHILLFOAM_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATVISCOELASTICHILLFOAM_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatViscoelasticHillFoam.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatViscoelasticHillFoam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATVISCOELASTICHILLFOAM_OPTION0_CARD0,
@@ -461,7 +466,7 @@ class MatViscoelasticHillFoam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -476,7 +481,7 @@ class MatViscoelasticHillFoam(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def lcsr_link(self) -> DefineCurve:
+    def lcsr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsr."""
         if self.deck is None:
             return None

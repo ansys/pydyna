@@ -49,10 +49,12 @@ class KeywordKeywordJobid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _KEYWORDKEYWORDJOBID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _KEYWORDKEYWORDJOBID_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def memory(self) -> typing.Optional[str]:
         """Get or set the Memory size in units of words to be allocated.

@@ -62,8 +62,8 @@ class DefineDeByPart(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DE_BY_PART"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lnorm": LinkType.DEFINE_CURVE,
@@ -79,14 +79,17 @@ class DefineDeByPart(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEDEBYPART_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEDEBYPART_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEDEBYPART_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineDeByPart.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineDeByPart._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDEBYPART_OPTION0_CARD0,
@@ -267,7 +270,7 @@ class DefineDeByPart(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lnorm_link(self) -> DefineCurve:
+    def lnorm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lnorm."""
         if self.deck is None:
             return None
@@ -282,7 +285,7 @@ class DefineDeByPart(KeywordBase):
         self.lnorm = value.lcid
 
     @property
-    def lshear_link(self) -> DefineCurve:
+    def lshear_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lshear."""
         if self.deck is None:
             return None
@@ -297,7 +300,7 @@ class DefineDeByPart(KeywordBase):
         self.lshear = value.lcid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

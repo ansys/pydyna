@@ -45,7 +45,8 @@ class FrequencyDomainPathPartition(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINPATHPARTITION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def fbeg(self) -> typing.Optional[float]:
         """Get or set the Beginning frequency for using this database.

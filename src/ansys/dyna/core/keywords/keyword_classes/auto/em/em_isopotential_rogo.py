@@ -49,7 +49,8 @@ class EmIsopotentialRogo(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMISOPOTENTIALROGO_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def isoid(self) -> typing.Optional[int]:
         """Get or set the ID of the Rogo coil.
@@ -85,7 +86,7 @@ class EmIsopotentialRogo(KeywordBase):
         self._cards[0].set_value("setid", value)
 
     @property
-    def setid_link(self) -> KeywordBase:
+    def setid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for setid."""
         return self._get_set_link("SEGMENT", self.setid)
 

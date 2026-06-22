@@ -60,10 +60,12 @@ class ControlImplicitEigenvalues(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUES_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUES_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def neig(self) -> int:
         """Get or set the Number of eigenvalues to extract. This must be specified. The other parameters below are optional.

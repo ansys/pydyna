@@ -60,8 +60,8 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "GENERAL_NONLINEAR_1DOF_DISCRETE_BEAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcidt": LinkType.DEFINE_CURVE,
@@ -78,14 +78,17 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATGENERALNONLINEAR1DOFDISCRETEBEAM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALNONLINEAR1DOFDISCRETEBEAM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALNONLINEAR1DOFDISCRETEBEAM_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatGeneralNonlinear1DofDiscreteBeam.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatGeneralNonlinear1DofDiscreteBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATGENERALNONLINEAR1DOFDISCRETEBEAM_OPTION0_CARD0,
@@ -257,7 +260,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None
@@ -272,7 +275,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
         self.lcidt = value.lcid
 
     @property
-    def lcidtu_link(self) -> DefineCurve:
+    def lcidtu_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtu."""
         if self.deck is None:
             return None
@@ -287,7 +290,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
         self.lcidtu = value.lcid
 
     @property
-    def lcidtd_link(self) -> DefineCurve:
+    def lcidtd_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidtd."""
         if self.deck is None:
             return None
@@ -302,7 +305,7 @@ class MatGeneralNonlinear1DofDiscreteBeam(KeywordBase):
         self.lcidtd = value.lcid
 
     @property
-    def lcidte_link(self) -> DefineCurve:
+    def lcidte_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidte."""
         if self.deck is None:
             return None

@@ -93,23 +93,28 @@ class ControlShell(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLSHELL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLSHELL_CARD1,
                 active_func=lambda: self._cards[1].has_nondefault_values() or self._cards[2].active,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLSHELL_CARD2,
                 active_func=lambda: self._cards[2].has_nondefault_values() or self._cards[3].active,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLSHELL_CARD3,
                 active_func=lambda: self._cards[3].has_nondefault_values() or self._cards[4].active,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLSHELL_CARD4,
                 active_func=lambda: self._cards[4].has_nondefault_values(),
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def wrpang(self) -> float:
         """Get or set the Shell element warpage angle in degrees. If a warpage greater than this angle is found, a warning message is printed. (Default is 20 degrees).
@@ -598,7 +603,7 @@ class ControlShell(KeywordBase):
         self._cards[4].set_value("nlocdt", value)
 
     @property
-    def sidt4tu_link(self) -> KeywordBase:
+    def sidt4tu_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for sidt4tu."""
         return self._get_set_link("PART", self.sidt4tu)
 
@@ -608,7 +613,7 @@ class ControlShell(KeywordBase):
         self.sidt4tu = value.sid
 
     @property
-    def psnfail_link(self) -> KeywordBase:
+    def psnfail_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psnfail."""
         return self._get_set_link("PART", self.psnfail)
 
@@ -618,7 +623,7 @@ class ControlShell(KeywordBase):
         self.psnfail = value.sid
 
     @property
-    def drcpsid_link(self) -> KeywordBase:
+    def drcpsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for drcpsid."""
         return self._get_set_link("PART", self.drcpsid)
 
@@ -628,7 +633,7 @@ class ControlShell(KeywordBase):
         self.drcpsid = value.sid
 
     @property
-    def lispsid_link(self) -> KeywordBase:
+    def lispsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for lispsid."""
         return self._get_set_link("PART", self.lispsid)
 

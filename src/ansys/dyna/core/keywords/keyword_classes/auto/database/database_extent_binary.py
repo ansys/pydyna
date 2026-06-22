@@ -81,16 +81,20 @@ class DatabaseExtentBinary(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEEXTENTBINARY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASEEXTENTBINARY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASEEXTENTBINARY_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DATABASEEXTENTBINARY_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def neiph(self) -> int:
         """Get or set the Number of additional integration point history variables written to the binary database for solid elements. The integration point data is written in the same order that it is stored in memory-each material modal has its own history variables that are stored. For user defined materials it is important to store the history data that is needed for plotting before the data which is not of interest.

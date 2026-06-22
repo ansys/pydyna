@@ -50,7 +50,8 @@ class LoadSegmentSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADSEGMENTSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Segment set ID, see *SET_SEGMENT.
@@ -96,7 +97,7 @@ class LoadSegmentSet(KeywordBase):
         self._cards[0].set_value("at", value)
 
     @property
-    def ssid_link(self) -> KeywordBase:
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid."""
         return self._get_set_link("SEGMENT", self.ssid)
 

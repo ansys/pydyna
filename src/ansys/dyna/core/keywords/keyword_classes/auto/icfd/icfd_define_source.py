@@ -53,7 +53,8 @@ class IcfdDefineSource(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDEFINESOURCE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the source ID
@@ -126,7 +127,7 @@ class IcfdDefineSource(KeywordBase):
         self._cards[0].set_value("pid2", value)
 
     @property
-    def lcidk_link(self) -> DefineCurve:
+    def lcidk_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidk."""
         if self.deck is None:
             return None

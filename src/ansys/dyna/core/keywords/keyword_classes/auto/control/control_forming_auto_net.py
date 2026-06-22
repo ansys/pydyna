@@ -62,10 +62,12 @@ class ControlFormingAutoNet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGAUTONET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLFORMINGAUTONET_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def idnet(self) -> typing.Optional[int]:
         """Get or set the ID of the net; must be unique.
@@ -179,7 +181,7 @@ class ControlFormingAutoNet(KeywordBase):
         self._cards[1].set_value("offset", value)
 
     @property
-    def idv_link(self) -> DefineVector:
+    def idv_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for idv."""
         if self.deck is None:
             return None
@@ -194,12 +196,12 @@ class ControlFormingAutoNet(KeywordBase):
         self.idv = value.vid
 
     @property
-    def idp_link(self) -> KeywordBase:
+    def idp_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given idp."""
         return self._get_link_by_attr("PART", "pid", self.idp, "parts")
 
     @property
-    def sx_link(self) -> KeywordBase:
+    def sx_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given sx."""
         return self._get_link_by_attr("PART", "pid", self.sx, "parts")
 

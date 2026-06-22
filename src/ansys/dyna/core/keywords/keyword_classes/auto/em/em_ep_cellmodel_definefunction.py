@@ -71,13 +71,16 @@ class EmEpCellmodelDefinefunction(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELDEFINEFUNCTION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELDEFINEFUNCTION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMEPCELLMODELDEFINEFUNCTION_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID defined in *MAT_.
@@ -294,7 +297,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
         self._cards[2].set_value("u7", value)
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None

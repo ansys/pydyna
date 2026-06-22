@@ -89,8 +89,8 @@ class MatMohrCoulomb(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "MOHR_COULOMB"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lccpdr": LinkType.DEFINE_CURVE,
@@ -108,20 +108,25 @@ class MatMohrCoulomb(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATMOHRCOULOMB_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOHRCOULOMB_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOHRCOULOMB_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOHRCOULOMB_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMOHRCOULOMB_CARD4,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatMohrCoulomb.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatMohrCoulomb._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATMOHRCOULOMB_OPTION0_CARD0,
@@ -534,7 +539,7 @@ class MatMohrCoulomb(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lccpdr_link(self) -> DefineCurve:
+    def lccpdr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccpdr."""
         if self.deck is None:
             return None
@@ -549,7 +554,7 @@ class MatMohrCoulomb(KeywordBase):
         self.lccpdr = value.lcid
 
     @property
-    def lccpt_link(self) -> DefineCurve:
+    def lccpt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccpt."""
         if self.deck is None:
             return None
@@ -564,7 +569,7 @@ class MatMohrCoulomb(KeywordBase):
         self.lccpt = value.lcid
 
     @property
-    def lccjdr_link(self) -> DefineCurve:
+    def lccjdr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccjdr."""
         if self.deck is None:
             return None
@@ -579,7 +584,7 @@ class MatMohrCoulomb(KeywordBase):
         self.lccjdr = value.lcid
 
     @property
-    def lccjt_link(self) -> DefineCurve:
+    def lccjt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccjt."""
         if self.deck is None:
             return None
@@ -594,7 +599,7 @@ class MatMohrCoulomb(KeywordBase):
         self.lccjt = value.lcid
 
     @property
-    def lcsfac_link(self) -> DefineCurve:
+    def lcsfac_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsfac."""
         if self.deck is None:
             return None

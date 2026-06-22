@@ -91,19 +91,24 @@ class ControlDiscreteElement(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLDISCRETEELEMENT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLDISCRETEELEMENT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLDISCRETEELEMENT_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLDISCRETEELEMENT_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLDISCRETEELEMENT_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ndamp(self) -> float:
         """Get or set the Normal damping coefficient.
@@ -444,7 +449,7 @@ class ControlDiscreteElement(KeywordBase):
         self._cards[4].set_value("maxnei", value)
 
     @property
-    def lnorm_link(self) -> DefineCurve:
+    def lnorm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lnorm."""
         if self.deck is None:
             return None

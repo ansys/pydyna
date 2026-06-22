@@ -62,10 +62,12 @@ class AleAmbientHydrostatic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALEAMBIENTHYDROSTATIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALEAMBIENTHYDROSTATIC_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def alesid(self) -> typing.Optional[int]:
         """Get or set the ALESID defines the reservoir-type. ALE domain/mesh whose hydrostatic pressure field due to gravity is being initialized by this keyword. See Remark 4.
@@ -158,12 +160,12 @@ class AleAmbientHydrostatic(KeywordBase):
         self._cards[1].set_value("mmgbl", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def ramptlc_link(self) -> DefineCurve:
+    def ramptlc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ramptlc."""
         if self.deck is None:
             return None
@@ -178,7 +180,7 @@ class AleAmbientHydrostatic(KeywordBase):
         self.ramptlc = value.lcid
 
     @property
-    def vecid_link(self) -> DefineVector:
+    def vecid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid."""
         if self.deck is None:
             return None

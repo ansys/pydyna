@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
 """Module for writing fields to buffers."""
 
 import copy
@@ -101,7 +102,16 @@ def write_field_c(buf: typing.IO[typing.AnyStr], field_type: type, value: typing
     elif field_type == str:
         holler.write_string(buf, value, width)
     elif field_type == int:
-        holler.write_int(buf, value, width)
+        try:
+            holler.write_int(buf, value, width)
+        except OverflowError:
+            # Integer is too large for C long, write as string instead
+            logger.warning(
+                "Integer value %d is too large for C long (max: %d). Writing as string.",
+                value,
+                2147483647,
+            )
+            holler.write_string(buf, str(value), width)
     elif field_type == float:
         holler.write_float(buf, value, width)
 

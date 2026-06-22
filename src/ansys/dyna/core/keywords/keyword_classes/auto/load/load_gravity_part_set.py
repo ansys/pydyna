@@ -56,7 +56,8 @@ class LoadGravityPartSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADGRAVITYPARTSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part Set ID for application of gravity load
@@ -135,7 +136,7 @@ class LoadGravityPartSet(KeywordBase):
         self._cards[0].set_value("stgr", value)
 
     @property
-    def lc_link(self) -> DefineCurve:
+    def lc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc."""
         if self.deck is None:
             return None
@@ -150,7 +151,7 @@ class LoadGravityPartSet(KeywordBase):
         self.lc = value.lcid
 
     @property
-    def lcdr_link(self) -> DefineCurve:
+    def lcdr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdr."""
         if self.deck is None:
             return None
@@ -165,7 +166,7 @@ class LoadGravityPartSet(KeywordBase):
         self.lcdr = value.lcid
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for pid."""
         return self._get_set_link("PART", self.pid)
 

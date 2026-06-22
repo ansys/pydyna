@@ -50,7 +50,8 @@ class EmControl(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCONTROL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def emsol(self) -> int:
         """Get or set the Electromagnetism solver selector:

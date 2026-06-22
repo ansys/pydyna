@@ -63,10 +63,12 @@ class LoadBodyVector(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADBODYVECTOR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADBODYVECTOR_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID, see *DEFINE_CURVE.
@@ -178,7 +180,7 @@ class LoadBodyVector(KeywordBase):
         self._cards[1].set_value("v3", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None
@@ -193,7 +195,7 @@ class LoadBodyVector(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def lciddr_link(self) -> DefineCurve:
+    def lciddr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lciddr."""
         if self.deck is None:
             return None
@@ -208,7 +210,7 @@ class LoadBodyVector(KeywordBase):
         self.lciddr = value.lcid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

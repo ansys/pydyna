@@ -46,7 +46,8 @@ class DualceseReactionRatePDepend(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEREACTIONRATEPDEPEND_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def react_id(self) -> typing.Optional[int]:
         """Get or set the ID of reaction rate law

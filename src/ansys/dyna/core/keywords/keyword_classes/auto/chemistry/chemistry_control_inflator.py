@@ -56,13 +56,16 @@ class ChemistryControlInflator(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHEMISTRYCONTROLINFLATOR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYCONTROLINFLATOR_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHEMISTRYCONTROLINFLATOR_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def model(self) -> int:
         """Get or set the Type of inflator model to compute.

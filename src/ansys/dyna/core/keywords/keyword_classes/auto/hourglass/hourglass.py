@@ -36,7 +36,7 @@ _HOURGLASSCARDSET_CARD0 = (
     FieldSchema("ibq", int, 30, 10, None),
     FieldSchema("q1", float, 40, 10, 1.5),
     FieldSchema("q2", float, 50, 10, 0.06),
-    FieldSchema("qb/vdc", float, 60, 10, 0.1),
+    FieldSchema("qb_vdc", float, 60, 10, 0.1, "qb/vdc"),
     FieldSchema("qw", float, 70, 10, 0.1),
 )
 
@@ -47,8 +47,8 @@ _HOURGLASSCARDSET_OPTION0_CARD0 = (
 class HourglassCardSet(Cards):
     """ CardSet."""
 
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -60,8 +60,9 @@ class HourglassCardSet(Cards):
             Card.from_field_schemas_with_defaults(
                 _HOURGLASSCARDSET_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = HourglassCardSet.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = HourglassCardSet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _HOURGLASSCARDSET_OPTION0_CARD0,
@@ -186,7 +187,7 @@ class HourglassCardSet(Cards):
         self._cards[1].cards[0].set_value("title", value)
 
         if value:
-            self.activate_option("TITLE")
+            self._keyword.activate_option("TITLE")
 
     @property
     def parent(self) -> KeywordBase:
@@ -207,9 +208,10 @@ class Hourglass(KeywordBase):
         self._cards = [
             CardSet(
                 HourglassCardSet,
-                option_specs = HourglassCardSet.option_specs,
+                option_specs = HourglassCardSet._option_spec_list,
                 **kwargs
-            ),        ]
+            ),
+        ]
     @property
     def hgid(self) -> int:
         """Get or set the hgid
@@ -305,6 +307,18 @@ class Hourglass(KeywordBase):
     def qw(self, value: float) -> None:
         ensure_card_set_properties(self, True)
         self.sets[0].qw = value
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].title
+
+    @title.setter
+    def title(self, value: str) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].title = value
 
     @property
     def sets(self) -> typing.List[HourglassCardSet]:

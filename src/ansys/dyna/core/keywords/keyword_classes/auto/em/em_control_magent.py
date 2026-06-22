@@ -43,7 +43,8 @@ class EmControlMagent(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCONTROLMAGENT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mcomp(self) -> int:
         """Get or set the Magnetization vector recomputation:

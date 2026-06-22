@@ -70,16 +70,20 @@ class ControlDynamicRelaxation(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLDYNAMICRELAXATION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLDYNAMICRELAXATION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLDYNAMICRELAXATION_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLDYNAMICRELAXATION_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nrcyck(self) -> int:
         """Get or set the Number of iterations between convergence checks, for dynamic relaxation option (default=250).
@@ -241,7 +245,7 @@ class ControlDynamicRelaxation(KeywordBase):
         self._cards[3].set_value("vecid", value)
 
     @property
-    def vecid_link(self) -> DefineVector:
+    def vecid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid."""
         if self.deck is None:
             return None
@@ -256,7 +260,7 @@ class ControlDynamicRelaxation(KeywordBase):
         self.vecid = value.vid
 
     @property
-    def drpset_link(self) -> KeywordBase:
+    def drpset_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for drpset."""
         return self._get_set_link("PART", self.drpset)
 

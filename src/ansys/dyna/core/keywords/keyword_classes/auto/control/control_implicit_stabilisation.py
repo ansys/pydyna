@@ -46,7 +46,8 @@ class ControlImplicitStabilisation(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITSTABILISATION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ias(self) -> int:
         """Get or set the Artificial Stabilization flag

@@ -66,10 +66,12 @@ class ElementSeatbeltSlipring(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTSEATBELTSLIPRING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ELEMENTSEATBELTSLIPRING_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sbsrid(self) -> int:
         """Get or set the Slipring ID. A unique number has to be used.
@@ -233,12 +235,12 @@ class ElementSeatbeltSlipring(KeywordBase):
         self._cards[1].set_value("lcnffs", value)
 
     @property
-    def sbrnid_link(self) -> KeywordBase:
+    def sbrnid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given sbrnid."""
         return self._get_link_by_attr("NODE", "nid", self.sbrnid, "parts")
 
     @property
-    def onid_link(self) -> KeywordBase:
+    def onid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given onid."""
         return self._get_link_by_attr("NODE", "nid", self.onid, "parts")
 

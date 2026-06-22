@@ -70,13 +70,16 @@ class ControlRefineShell(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLREFINESHELL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLREFINESHELL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLREFINESHELL_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Set ID.LT.0: parent elements can be hidden in lsprepost as they are replaced by their children
@@ -298,7 +301,7 @@ class ControlRefineShell(KeywordBase):
         self._cards[2].set_value("endrm", value)
 
     @property
-    def ibox_link(self) -> DefineBox:
+    def ibox_link(self) -> typing.Optional[DefineBox]:
         """Get the DefineBox object for ibox."""
         if self.deck is None:
             return None

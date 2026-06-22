@@ -1252,6 +1252,13 @@ ControlPzelectric
     :members:
 
 
+ControlReferenceConfiguraion
+----------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_reference_configuraion
+    :members:
+
+
 ControlReferenceConfiguraionIter
 --------------------------------
 

@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -19,11 +19,13 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
 """Module for handling the *INCLUDE card."""
 
 import typing
 
 from ansys.dyna.core.lib.card import Card, Field
+from ansys.dyna.core.lib.card_interface import ReadResult
 from ansys.dyna.core.lib.field_schema import CardSchema, FieldSchema
 from ansys.dyna.core.lib.field_writer import write_comment_line
 from ansys.dyna.core.lib.format_type import card_format, format_type
@@ -53,8 +55,14 @@ class IncludeCard(Card):
             raise RuntimeError("*INCLUDE card missing filename")
         return line
 
-    def read(self, buf: typing.TextIO, parameter_set) -> None:
-        """Reads the card data from an input text buffer."""
+    def read(self, buf: typing.TextIO, parameter_set) -> ReadResult:
+        """Reads the card data from an input text buffer.
+
+        Returns
+        -------
+        ReadResult
+            Result (includes don't generate warnings).
+        """
         line = self._read_line(buf)
         filename = line
         if filename.endswith(" +"):
@@ -68,7 +76,7 @@ class IncludeCard(Card):
         else:
             filename = filename.strip()
         self.set_value("filename", filename)
-        return False
+        return ReadResult()
 
     def write(
         self,

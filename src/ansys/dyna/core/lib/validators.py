@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -28,7 +28,7 @@ from enum import Enum
 import logging
 from typing import TYPE_CHECKING, Callable, List
 
-from ansys.dyna.core.pre.errors import (
+from ansys.dyna.core.utils.errors import (
     DuplicateIDError,
     DuplicateKeywordError,
     RequiredFieldError,

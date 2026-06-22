@@ -69,13 +69,16 @@ class IcfdMat(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDMAT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDMAT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDMAT_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID.
@@ -244,7 +247,7 @@ class IcfdMat(KeywordBase):
         self._cards[2].set_value("pmmoid", value)
 
     @property
-    def hcsflcid_link(self) -> DefineCurve:
+    def hcsflcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for hcsflcid."""
         if self.deck is None:
             return None
@@ -259,7 +262,7 @@ class IcfdMat(KeywordBase):
         self.hcsflcid = value.lcid
 
     @property
-    def tcsflcid_link(self) -> DefineCurve:
+    def tcsflcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tcsflcid."""
         if self.deck is None:
             return None

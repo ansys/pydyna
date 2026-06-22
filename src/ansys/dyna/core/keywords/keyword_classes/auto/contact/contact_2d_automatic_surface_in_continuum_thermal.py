@@ -93,19 +93,24 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTACT2DAUTOMATICSURFACEINCONTINUUMTHERMAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACT2DAUTOMATICSURFACEINCONTINUUMTHERMAL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACT2DAUTOMATICSURFACEINCONTINUUMTHERMAL_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACT2DAUTOMATICSURFACEINCONTINUUMTHERMAL_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTACT2DAUTOMATICSURFACEINCONTINUUMTHERMAL_CARD4,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def surfa(self) -> typing.Optional[int]:
         """Get or set the Set ID for SURFA.  If SURFA > 0, a part set is assumed; see *SET_‌PART.  If SURFA < 0, a node set with ID equal to the absolute value of SURFA is assumed; see *SET_‌NODE. For nonsymmetric contact, this surface is the tracked surface.
@@ -530,7 +535,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
         self._cards[4].set_value("tdpen", value)
 
     @property
-    def surfa_link(self) -> KeywordBase:
+    def surfa_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for surfa."""
         return self._get_set_link("PART", self.surfa)
 
@@ -540,7 +545,7 @@ class Contact2DAutomaticSurfaceInContinuumThermal(KeywordBase):
         self.surfa = value.sid
 
     @property
-    def surfb_link(self) -> KeywordBase:
+    def surfb_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for surfb."""
         return self._get_set_link("PART", self.surfb)
 

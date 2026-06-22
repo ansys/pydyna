@@ -50,8 +50,8 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
 
     keyword = "BOUNDARY"
     subkeyword = "PRESCRIBED_MOTION_SET_SEGMENT"
-    option_specs = [
-        OptionSpec("ID", -2, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/2", 1),
     ]
     _link_fields = {
         "vid": LinkType.DEFINE_VECTOR,
@@ -66,8 +66,9 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDMOTIONSETSEGMENT_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = BoundaryPrescribedMotionSetSegment.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = BoundaryPrescribedMotionSetSegment._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _BOUNDARYPRESCRIBEDMOTIONSETSEGMENT_OPTION0_CARD0,
@@ -221,7 +222,7 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
             self.activate_option("HEADING")
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None
@@ -236,7 +237,7 @@ class BoundaryPrescribedMotionSetSegment(KeywordBase):
         self.vid = value.vid
 
     @property
-    def sid_link(self) -> KeywordBase:
+    def sid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for sid."""
         return self._get_set_link("SEGMENT", self.sid)
 

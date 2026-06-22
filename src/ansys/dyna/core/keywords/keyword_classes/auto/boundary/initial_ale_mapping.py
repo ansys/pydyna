@@ -60,10 +60,12 @@ class InitialAleMapping(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALALEMAPPING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALALEMAPPING_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part ID or part set ID
@@ -195,7 +197,7 @@ class InitialAleMapping(KeywordBase):
         self._cards[1].set_value("tbeg", value)
 
     @property
-    def vecid_link(self) -> DefineVector:
+    def vecid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid."""
         if self.deck is None:
             return None

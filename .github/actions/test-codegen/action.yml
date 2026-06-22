@@ -24,14 +24,12 @@ runs:
       uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
       with:
         python-version: ${{ inputs.python-version }}
-        cache: 'pip'
-        cache-dependency-path: 'pyproject.toml'
 
     - name: "Create a virtual environment"
       shell: bash
       run: |
         python -m venv .venv
-  
+
     - name: Install library
       shell: bash
       run: |
@@ -42,4 +40,4 @@ runs:
       shell: bash
       run: |
         source .venv/bin/activate
-        bash codegen/validate.sh --skip-precommit --skip-deadcode --skip-tests
+        bash codegen/validate.sh --skip-precommit --skip-deadcode

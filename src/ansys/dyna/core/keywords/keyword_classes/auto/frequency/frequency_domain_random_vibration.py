@@ -112,22 +112,28 @@ class FrequencyDomainRandomVibration(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRANDOMVIBRATION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRANDOMVIBRATION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRANDOMVIBRATION_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRANDOMVIBRATION_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRANDOMVIBRATION_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRANDOMVIBRATION_CARD5,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mdmin(self) -> int:
         """Get or set the The first mode in modal superposition method (optional).
@@ -641,7 +647,7 @@ class FrequencyDomainRandomVibration(KeywordBase):
         self._cards[5].set_value("ldpsd2", value)
 
     @property
-    def lcdam_link(self) -> DefineCurve:
+    def lcdam_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdam."""
         if self.deck is None:
             return None
@@ -656,7 +662,7 @@ class FrequencyDomainRandomVibration(KeywordBase):
         self.lcdam = value.lcid
 
     @property
-    def ldpsd_link(self) -> DefineCurve:
+    def ldpsd_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ldpsd."""
         if self.deck is None:
             return None
@@ -671,7 +677,7 @@ class FrequencyDomainRandomVibration(KeywordBase):
         self.ldpsd = value.lcid
 
     @property
-    def ldvel_link(self) -> DefineCurve:
+    def ldvel_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ldvel."""
         if self.deck is None:
             return None
@@ -686,7 +692,7 @@ class FrequencyDomainRandomVibration(KeywordBase):
         self.ldvel = value.lcid
 
     @property
-    def ldflw_link(self) -> DefineCurve:
+    def ldflw_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ldflw."""
         if self.deck is None:
             return None
@@ -701,7 +707,7 @@ class FrequencyDomainRandomVibration(KeywordBase):
         self.ldflw = value.lcid
 
     @property
-    def ldspn_link(self) -> DefineCurve:
+    def ldspn_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ldspn."""
         if self.deck is None:
             return None
@@ -716,7 +722,7 @@ class FrequencyDomainRandomVibration(KeywordBase):
         self.ldspn = value.lcid
 
     @property
-    def ldpsd1_link(self) -> DefineCurve:
+    def ldpsd1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ldpsd1."""
         if self.deck is None:
             return None
@@ -731,7 +737,7 @@ class FrequencyDomainRandomVibration(KeywordBase):
         self.ldpsd1 = value.lcid
 
     @property
-    def ldpsd2_link(self) -> DefineCurve:
+    def ldpsd2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for ldpsd2."""
         if self.deck is None:
             return None
@@ -746,7 +752,7 @@ class FrequencyDomainRandomVibration(KeywordBase):
         self.ldpsd2 = value.lcid
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None

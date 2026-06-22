@@ -51,10 +51,12 @@ class EmContactResistance(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCONTACTRESISTANCE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMCONTACTRESISTANCE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def crid(self) -> typing.Optional[int]:
         """Get or set the Resistive contact ID.

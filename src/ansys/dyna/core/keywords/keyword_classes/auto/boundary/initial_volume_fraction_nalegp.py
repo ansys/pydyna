@@ -69,13 +69,16 @@ class InitialVolumeFractionNalegp(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALVOLUMEFRACTIONNALEGP_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALVOLUMEFRACTIONNALEGP_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALVOLUMEFRACTIONNALEGP_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nalegp(self) -> typing.Optional[int]:
         """Get or set the Count of volume fractions for each element.
@@ -266,7 +269,7 @@ class InitialVolumeFractionNalegp(KeywordBase):
         self._cards[2].set_value("vf", value)
 
     @property
-    def eid_link(self) -> KeywordBase:
+    def eid_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 

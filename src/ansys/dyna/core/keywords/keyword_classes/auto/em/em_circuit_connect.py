@@ -48,7 +48,8 @@ class EmCircuitConnect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCIRCUITCONNECT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def conid(self) -> typing.Optional[int]:
         """Get or set the Id of the Circuit Connect

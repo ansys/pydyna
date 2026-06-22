@@ -64,10 +64,12 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDORIENTATIONRIGIDANGLES_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDORIENTATIONRIGIDANGLES_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pidb(self) -> typing.Optional[int]:
         """Get or set the Part ID for rigid body B whose orientation is prescribed
@@ -231,7 +233,7 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
         self._cards[1].set_value("body", value)
 
     @property
-    def lcidq1_link(self) -> DefineCurve:
+    def lcidq1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidq1."""
         if self.deck is None:
             return None
@@ -246,7 +248,7 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
         self.lcidq1 = value.lcid
 
     @property
-    def lcidq2_link(self) -> DefineCurve:
+    def lcidq2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidq2."""
         if self.deck is None:
             return None
@@ -261,7 +263,7 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
         self.lcidq2 = value.lcid
 
     @property
-    def lcidq3_link(self) -> DefineCurve:
+    def lcidq3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidq3."""
         if self.deck is None:
             return None

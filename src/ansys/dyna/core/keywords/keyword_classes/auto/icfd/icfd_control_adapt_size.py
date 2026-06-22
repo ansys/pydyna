@@ -44,7 +44,8 @@ class IcfdControlAdaptSize(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLADAPTSIZE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def asize(self) -> int:
         """Get or set the EQ. 0:only re-mesh in cases where elements invert..

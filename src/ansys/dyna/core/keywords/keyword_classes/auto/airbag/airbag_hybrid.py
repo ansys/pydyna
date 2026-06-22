@@ -105,22 +105,28 @@ class AirbagHybrid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRID_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRID_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRID_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRID_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRID_CARD5,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Set ID.
@@ -545,7 +551,7 @@ class AirbagHybrid(KeywordBase):
         self._cards[5].set_value("fmass", value)
 
     @property
-    def lcc23_link(self) -> DefineCurve:
+    def lcc23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc23."""
         if self.deck is None:
             return None
@@ -560,7 +566,7 @@ class AirbagHybrid(KeywordBase):
         self.lcc23 = value.lcid
 
     @property
-    def lca23_link(self) -> DefineCurve:
+    def lca23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lca23."""
         if self.deck is None:
             return None
@@ -575,7 +581,7 @@ class AirbagHybrid(KeywordBase):
         self.lca23 = value.lcid
 
     @property
-    def lcp23_link(self) -> DefineCurve:
+    def lcp23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcp23."""
         if self.deck is None:
             return None
@@ -590,7 +596,7 @@ class AirbagHybrid(KeywordBase):
         self.lcp23 = value.lcid
 
     @property
-    def lcap23_link(self) -> DefineCurve:
+    def lcap23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcap23."""
         if self.deck is None:
             return None
@@ -605,7 +611,7 @@ class AirbagHybrid(KeywordBase):
         self.lcap23 = value.lcid
 
     @property
-    def lcidm0_link(self) -> DefineCurve:
+    def lcidm0_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidm0."""
         if self.deck is None:
             return None
@@ -620,7 +626,7 @@ class AirbagHybrid(KeywordBase):
         self.lcidm0 = value.lcid
 
     @property
-    def lcidm_link(self) -> DefineCurve:
+    def lcidm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidm."""
         if self.deck is None:
             return None
@@ -635,7 +641,7 @@ class AirbagHybrid(KeywordBase):
         self.lcidm = value.lcid
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None

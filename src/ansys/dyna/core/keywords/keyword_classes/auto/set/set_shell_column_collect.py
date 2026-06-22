@@ -53,8 +53,8 @@ class SetShellColumnCollect(KeywordBase):
 
     keyword = "SET"
     subkeyword = "SHELL_COLUMN_COLLECT"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "eid": LinkType.ELEMENT_SHELL,
@@ -68,11 +68,13 @@ class SetShellColumnCollect(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SETSHELLCOLUMNCOLLECT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SETSHELLCOLUMNCOLLECT_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SetShellColumnCollect.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SetShellColumnCollect._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SETSHELLCOLUMNCOLLECT_OPTION0_CARD0,
@@ -207,7 +209,7 @@ class SetShellColumnCollect(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def eid_link(self) -> KeywordBase:
+    def eid_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 

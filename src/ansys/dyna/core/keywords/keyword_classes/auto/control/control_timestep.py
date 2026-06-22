@@ -72,15 +72,18 @@ class ControlTimestep(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLTIMESTEP_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLTIMESTEP_CARD1,
                 active_func=lambda: self._cards[1].has_nondefault_values() or self._cards[2].active,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLTIMESTEP_CARD2,
                 active_func=lambda: self._cards[2].has_nondefault_values(),
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dtinit(self) -> float:
         """Get or set the Initial time step size:
@@ -279,7 +282,7 @@ class ControlTimestep(KeywordBase):
         self._cards[2].set_value("igado", value)
 
     @property
-    def lctm_link(self) -> DefineCurve:
+    def lctm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctm."""
         if self.deck is None:
             return None
@@ -294,7 +297,7 @@ class ControlTimestep(KeywordBase):
         self.lctm = value.lcid
 
     @property
-    def dt2mslc_link(self) -> DefineCurve:
+    def dt2mslc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dt2mslc."""
         if self.deck is None:
             return None

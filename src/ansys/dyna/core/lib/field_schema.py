@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -70,6 +70,17 @@ class FieldSchema(NamedTuple):
     def is_flag(self) -> bool:
         """Check if this field is a Flag type."""
         return isinstance(self.default, Flag)
+
+    def signature(self) -> tuple:
+        """Return a stable, content-based cache key for this field.
+
+        Captures all attributes that affect parsing layout and semantics,
+        ensuring cache correctness across garbage collection cycles (safe
+        alternative to using id() as a cache key).
+        """
+        if self.is_flag():
+            return (self.name, self.type, self.offset, self.width, self.default.true_value, self.default.false_value)
+        return (self.name, self.type, self.offset, self.width)
 
     def to_field(self, value: Any = None) -> Field:
         """Create a Field instance from this schema with the given value.

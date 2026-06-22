@@ -44,7 +44,8 @@ class ControlImplicitBuckle(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITBUCKLE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nmode(self) -> int:
         """Get or set the Number of buckling modes to compute:

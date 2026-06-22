@@ -55,8 +55,8 @@ class DefineSpotweldFailureResultants(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "SPOTWELD_FAILURE_RESULTANTS"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "dlcidsn": LinkType.DEFINE_CURVE,
@@ -75,11 +75,13 @@ class DefineSpotweldFailureResultants(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINESPOTWELDFAILURERESULTANTS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINESPOTWELDFAILURERESULTANTS_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineSpotweldFailureResultants.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineSpotweldFailureResultants._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINESPOTWELDFAILURERESULTANTS_OPTION0_CARD0,
@@ -225,7 +227,7 @@ class DefineSpotweldFailureResultants(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def dlcidsn_link(self) -> DefineCurve:
+    def dlcidsn_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dlcidsn."""
         if self.deck is None:
             return None
@@ -240,7 +242,7 @@ class DefineSpotweldFailureResultants(KeywordBase):
         self.dlcidsn = value.lcid
 
     @property
-    def dlcidss_link(self) -> DefineCurve:
+    def dlcidss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dlcidss."""
         if self.deck is None:
             return None
@@ -255,7 +257,7 @@ class DefineSpotweldFailureResultants(KeywordBase):
         self.dlcidss = value.lcid
 
     @property
-    def lcidsnij_link(self) -> DefineCurve:
+    def lcidsnij_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidsnij."""
         if self.deck is None:
             return None
@@ -270,7 +272,7 @@ class DefineSpotweldFailureResultants(KeywordBase):
         self.lcidsnij = value.lcid
 
     @property
-    def lcidssij_link(self) -> DefineCurve:
+    def lcidssij_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidssij."""
         if self.deck is None:
             return None
@@ -285,12 +287,12 @@ class DefineSpotweldFailureResultants(KeywordBase):
         self.lcidssij = value.lcid
 
     @property
-    def pid_i_link(self) -> KeywordBase:
+    def pid_i_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid_i."""
         return self._get_link_by_attr("PART", "pid", self.pid_i, "parts")
 
     @property
-    def pid_j_link(self) -> KeywordBase:
+    def pid_j_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid_j."""
         return self._get_link_by_attr("PART", "pid", self.pid_j, "parts")
 

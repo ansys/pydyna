@@ -1,11 +1,10 @@
 Installation
 ============
 
-PyDYNA consists of four modules, ``ansys.dyna.core.pre``, ``ansys.dyna.core.solver``,
-``ansys.dyna.core.run``, and ``ansys.dyna.core.keywords``.
+PyDYNA consists of two main packages:
 
-``ansys.dyna.core.pre`` and ``ansys.dyna.core.solver`` use gRPC and hence need to be run
-using server-client connection.
+- ``ansys.dyna.core.keywords``: This package provides the ability to create keyword files for LS-DYNA without using gRPC.
+- ``ansys.dyna.core.run``: This package provides the ability to start the LS-DYNA solver. This does not require any client-server library or Docker container.
 
 Install the client
 ------------------

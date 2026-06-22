@@ -53,7 +53,8 @@ class EmEpCreatefiberorientation(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMEPCREATEFIBERORIENTATION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def parstld(self) -> typing.Optional[int]:
         """Get or set the Part set on which the system is solved
@@ -136,7 +137,7 @@ class EmEpCreatefiberorientation(KeywordBase):
         self._cards[0].set_value("prerun", value)
 
     @property
-    def parstld_link(self) -> KeywordBase:
+    def parstld_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given parstld."""
         return self._get_link_by_attr("PART", "pid", self.parstld, "parts")
 

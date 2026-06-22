@@ -47,10 +47,12 @@ class CeseChemistryD3Plot(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESECHEMISTRYD3PLOT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CESECHEMISTRYD3PLOT_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def modelid(self) -> typing.Optional[int]:
         """Get or set the Identifier of a Chemkin-compatible chemistry model.

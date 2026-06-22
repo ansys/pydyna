@@ -123,34 +123,44 @@ class AirbagHybridChemkinId(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDCHEMKINID_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDCHEMKINID_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDCHEMKINID_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDCHEMKINID_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDCHEMKINID_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDCHEMKINID_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDCHEMKINID_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDCHEMKINID_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDCHEMKINID_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _AIRBAGHYBRIDCHEMKINID_CARD9,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Optional Airbag ID.
@@ -691,7 +701,7 @@ class AirbagHybridChemkinId(KeywordBase):
         self._cards[9].set_value("e", value)
 
     @property
-    def lcidm_link(self) -> DefineCurve:
+    def lcidm_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidm."""
         if self.deck is None:
             return None
@@ -706,7 +716,7 @@ class AirbagHybridChemkinId(KeywordBase):
         self.lcidm = value.lcid
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None
@@ -721,7 +731,7 @@ class AirbagHybridChemkinId(KeywordBase):
         self.lcidt = value.lcid
 
     @property
-    def lcidn_link(self) -> DefineCurve:
+    def lcidn_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidn."""
         if self.deck is None:
             return None

@@ -79,8 +79,8 @@ class MatSimplifiedRubberFoamLogLogInterpolationWithFailure(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "SIMPLIFIED_RUBBER/FOAM_LOG_LOG_INTERPOLATION_WITH_FAILURE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcunld": LinkType.DEFINE_CURVE,
@@ -96,16 +96,20 @@ class MatSimplifiedRubberFoamLogLogInterpolationWithFailure(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_CARD3,
                 **kwargs,
-            ),            TableCard(
+            ),
+            TableCard(
                 [
                     Field("gi", float, 0, 10, None),
                     Field("betai", float, 10, 10, None),
@@ -114,8 +118,9 @@ class MatSimplifiedRubberFoamLogLogInterpolationWithFailure(KeywordBase):
                 None,
                 name="constants",
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatSimplifiedRubberFoamLogLogInterpolationWithFailure.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatSimplifiedRubberFoamLogLogInterpolationWithFailure._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSIMPLIFIEDRUBBERFOAMLOGLOGINTERPOLATIONWITHFAILURE_OPTION0_CARD0,
@@ -471,7 +476,7 @@ class MatSimplifiedRubberFoamLogLogInterpolationWithFailure(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcunld_link(self) -> DefineCurve:
+    def lcunld_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcunld."""
         if self.deck is None:
             return None
@@ -486,7 +491,7 @@ class MatSimplifiedRubberFoamLogLogInterpolationWithFailure(KeywordBase):
         self.lcunld = value.lcid
 
     @property
-    def stol_link(self) -> DefineCurve:
+    def stol_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for stol."""
         if self.deck is None:
             return None
@@ -501,7 +506,7 @@ class MatSimplifiedRubberFoamLogLogInterpolationWithFailure(KeywordBase):
         self.stol = value.lcid
 
     @property
-    def lc_tbid_link(self) -> KeywordBase:
+    def lc_tbid_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lc_tbid."""
         if self.deck is None:
             return None

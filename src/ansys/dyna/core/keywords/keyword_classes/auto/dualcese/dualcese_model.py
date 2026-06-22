@@ -44,7 +44,8 @@ class DualceseModel(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEMODEL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def unitsys(self) -> typing.Optional[str]:
         """Get or set the Name of the unit system of this dual CESE model (defined with *UNIT_SYSTEM).

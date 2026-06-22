@@ -43,7 +43,8 @@ class IcfdDatabaseAverage(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDDATABASEAVERAGE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the Over each DT time interval, an average of the different fluid variables will be calculated and then reset when moving to the next DT interval.

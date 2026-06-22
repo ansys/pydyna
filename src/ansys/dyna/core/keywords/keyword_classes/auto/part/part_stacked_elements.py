@@ -68,13 +68,16 @@ class PartStackedElements(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARTSTACKEDELEMENTS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTSTACKEDELEMENTS_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTSTACKEDELEMENTS_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Enter title for the datacard.
@@ -212,7 +215,7 @@ class PartStackedElements(KeywordBase):
         self._cards[2].set_value("nsldi", value)
 
     @property
-    def midi_link(self) -> KeywordBase:
+    def midi_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for midi."""
         if self.deck is None:
             return None
@@ -227,7 +230,7 @@ class PartStackedElements(KeywordBase):
         self.midi = value.mid
 
     @property
-    def sidi_link(self) -> KeywordBase:
+    def sidi_link(self) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for sidi."""
         if self.deck is None:
             return None
@@ -242,7 +245,7 @@ class PartStackedElements(KeywordBase):
         self.sidi = value.secid
 
     @property
-    def hgidi_link(self) -> Hourglass:
+    def hgidi_link(self) -> typing.Optional[Hourglass]:
         """Get the Hourglass object for hgidi."""
         if self.deck is None:
             return None
@@ -257,7 +260,7 @@ class PartStackedElements(KeywordBase):
         self.hgidi = value.hgid
 
     @property
-    def pidref_link(self) -> KeywordBase:
+    def pidref_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pidref."""
         return self._get_link_by_attr("PART", "pid", self.pidref, "parts")
 

@@ -43,7 +43,8 @@ class IncludeAutoOffset(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INCLUDEAUTOOFFSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name to be included.

@@ -72,13 +72,16 @@ class LoadSsa(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADSSA_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSSA_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSSA_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def vs(self) -> typing.Optional[float]:
         """Get or set the Sound speed in fluid.
@@ -302,7 +305,7 @@ class LoadSsa(KeywordBase):
         self._cards[2].set_value("cz", value)
 
     @property
-    def fpsid_link(self) -> KeywordBase:
+    def fpsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for fpsid."""
         return self._get_set_link("PART", self.fpsid)
 
@@ -312,7 +315,7 @@ class LoadSsa(KeywordBase):
         self.fpsid = value.sid
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

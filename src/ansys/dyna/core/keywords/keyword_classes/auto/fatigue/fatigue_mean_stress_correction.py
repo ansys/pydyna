@@ -52,10 +52,12 @@ class FatigueMeanStressCorrection(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FATIGUEMEANSTRESSCORRECTION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FATIGUEMEANSTRESSCORRECTION_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def method(self) -> int:
         """Get or set the Mean stress correction method:
@@ -101,7 +103,7 @@ class FatigueMeanStressCorrection(KeywordBase):
         self._cards[1].set_value("sigma", value)
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None

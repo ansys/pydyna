@@ -108,25 +108,32 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICBEMPANELCONTRIBUTION_CARD6,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ro(self) -> typing.Optional[float]:
         """Get or set the Fluid Density.
@@ -680,7 +687,7 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
         self._cards[6].set_value("decay", value)
 
     @property
-    def lc1_link(self) -> DefineCurve:
+    def lc1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc1."""
         if self.deck is None:
             return None
@@ -695,7 +702,7 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
         self.lc1 = value.lcid
 
     @property
-    def lc2_link(self) -> DefineCurve:
+    def lc2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc2."""
         if self.deck is None:
             return None
@@ -710,7 +717,7 @@ class FrequencyDomainAcousticBemPanelContribution(KeywordBase):
         self.lc2 = value.lcid
 
     @property
-    def nsidpc_link(self) -> KeywordBase:
+    def nsidpc_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsidpc."""
         return self._get_set_link("NODE", self.nsidpc)
 

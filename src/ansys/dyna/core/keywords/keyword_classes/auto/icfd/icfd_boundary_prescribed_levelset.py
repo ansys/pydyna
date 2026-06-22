@@ -45,7 +45,8 @@ class IcfdBoundaryPrescribedLevelset(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDBOUNDARYPRESCRIBEDLEVELSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the PID of the fluid surface where a fluid height will be imposed.

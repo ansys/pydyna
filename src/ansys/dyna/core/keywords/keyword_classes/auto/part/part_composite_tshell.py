@@ -72,13 +72,16 @@ class PartCompositeTshell(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _PARTCOMPOSITETSHELL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTCOMPOSITETSHELL_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _PARTCOMPOSITETSHELL_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Heading for the part.
@@ -245,7 +248,7 @@ class PartCompositeTshell(KeywordBase):
         self._cards[2].set_value("tmid2", value)
 
     @property
-    def mid1_link(self) -> KeywordBase:
+    def mid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid1."""
         if self.deck is None:
             return None
@@ -260,7 +263,7 @@ class PartCompositeTshell(KeywordBase):
         self.mid1 = value.mid
 
     @property
-    def mid2_link(self) -> KeywordBase:
+    def mid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid2."""
         if self.deck is None:
             return None
@@ -275,7 +278,7 @@ class PartCompositeTshell(KeywordBase):
         self.mid2 = value.mid
 
     @property
-    def hgid_link(self) -> Hourglass:
+    def hgid_link(self) -> typing.Optional[Hourglass]:
         """Get the Hourglass object for hgid."""
         if self.deck is None:
             return None

@@ -24,6 +24,7 @@
 import typing
 import pandas as pd
 
+from ansys.dyna.core.lib.mixins.curve_plotting import CurvePlottingMixin
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card import TableCard
@@ -45,13 +46,16 @@ _DEFINECURVE_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
 
-class DefineCurve(KeywordBase):
+class DefineCurve(
+    KeywordBase
+    , CurvePlottingMixin
+    ):
     """DYNA DEFINE_CURVE keyword"""
 
     keyword = "DEFINE"
     subkeyword = "CURVE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -62,7 +66,8 @@ class DefineCurve(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINECURVE_CARD0,
                 **kwargs,
-            ),            TableCard(
+            ),
+            TableCard(
                 [
                     Field("a1", float, 0, 20, 0.0),
                     Field("o1", float, 20, 20, 0.0),
@@ -70,8 +75,9 @@ class DefineCurve(KeywordBase):
                 None,
                 name="curves",
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineCurve.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineCurve._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINECURVE_OPTION0_CARD0,

@@ -65,10 +65,12 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALESTRUCTUREDMESHVOLUMEFILLING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ALESTRUCTUREDMESHVOLUMEFILLING_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mshid(self) -> int:
         """Get or set the S-ALE Mesh ID. A unique number must be specified.
@@ -211,7 +213,7 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
         self._cards[1].set_value("e5", value)
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None

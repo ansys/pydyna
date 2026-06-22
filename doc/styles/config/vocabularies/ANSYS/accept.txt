@@ -1,6 +1,8 @@
 ANSYS
 Ansys
 ansys
+Synopsys
+synopsys
 CPython
 DPF's
 docstring
@@ -53,3 +55,5 @@ toctree
 weakref
 ControllerPlant
 ParticleBlast
+[Gg]it[Hh]ub
+astroid

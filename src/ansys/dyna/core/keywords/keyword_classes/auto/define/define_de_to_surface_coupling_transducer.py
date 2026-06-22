@@ -79,8 +79,8 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "DE_TO_SURFACE_COUPLING_TRANSDUCER"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcvx": LinkType.DEFINE_CURVE,
@@ -97,17 +97,21 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD3,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineDeToSurfaceCouplingTransducer.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineDeToSurfaceCouplingTransducer._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEDETOSURFACECOUPLINGTRANSDUCER_OPTION0_CARD0,
@@ -417,7 +421,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcvx_link(self) -> DefineCurve:
+    def lcvx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvx."""
         if self.deck is None:
             return None
@@ -432,7 +436,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
         self.lcvx = value.lcid
 
     @property
-    def lcvy_link(self) -> DefineCurve:
+    def lcvy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvy."""
         if self.deck is None:
             return None
@@ -447,7 +451,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
         self.lcvy = value.lcid
 
     @property
-    def lcvz_link(self) -> DefineCurve:
+    def lcvz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcvz."""
         if self.deck is None:
             return None
@@ -462,7 +466,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
         self.lcvz = value.lcid
 
     @property
-    def cid_rcf_link(self) -> DefineCoordinateSystem:
+    def cid_rcf_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid_rcf."""
         if self.deck is None:
             return None

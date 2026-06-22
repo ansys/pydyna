@@ -138,28 +138,36 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSEASUBSYSTEM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSEASUBSYSTEM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSEASUBSYSTEM_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSEASUBSYSTEM_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSEASUBSYSTEM_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSEASUBSYSTEM_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSEASUBSYSTEM_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSEASUBSYSTEM_CARD7,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def fmin(self) -> typing.Optional[float]:
         """Get or set the Minimum frequency for SEA output (cycles/time).
@@ -663,7 +671,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
         self._cards[7].set_value("lc4", value)
 
     @property
-    def lcfreq_link(self) -> DefineCurve:
+    def lcfreq_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfreq."""
         if self.deck is None:
             return None
@@ -678,7 +686,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
         self.lcfreq = value.lcid
 
     @property
-    def lc1_link(self) -> DefineCurve:
+    def lc1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc1."""
         if self.deck is None:
             return None
@@ -693,7 +701,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
         self.lc1 = value.lcid
 
     @property
-    def lc2_link(self) -> DefineCurve:
+    def lc2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc2."""
         if self.deck is None:
             return None
@@ -708,7 +716,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
         self.lc2 = value.lcid
 
     @property
-    def lc3_link(self) -> DefineCurve:
+    def lc3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc3."""
         if self.deck is None:
             return None
@@ -723,7 +731,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
         self.lc3 = value.lcid
 
     @property
-    def lc1_link(self) -> DefineCurve:
+    def lc1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc1."""
         if self.deck is None:
             return None
@@ -738,7 +746,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
         self.lc1 = value.lcid
 
     @property
-    def lc1_link(self) -> DefineCurve:
+    def lc1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc1."""
         if self.deck is None:
             return None
@@ -753,7 +761,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
         self.lc1 = value.lcid
 
     @property
-    def lc2_link(self) -> DefineCurve:
+    def lc2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc2."""
         if self.deck is None:
             return None
@@ -768,7 +776,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
         self.lc2 = value.lcid
 
     @property
-    def lc3_link(self) -> DefineCurve:
+    def lc3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc3."""
         if self.deck is None:
             return None
@@ -783,7 +791,7 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
         self.lc3 = value.lcid
 
     @property
-    def lc4_link(self) -> DefineCurve:
+    def lc4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc4."""
         if self.deck is None:
             return None

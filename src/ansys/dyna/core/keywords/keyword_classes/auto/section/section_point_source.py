@@ -56,8 +56,8 @@ class SectionPointSource(KeywordBase):
 
     keyword = "SECTION"
     subkeyword = "POINT_SOURCE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nlc001": LinkType.NODE,
@@ -78,11 +78,13 @@ class SectionPointSource(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SECTIONPOINTSOURCE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SECTIONPOINTSOURCE_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SectionPointSource.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SectionPointSource._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SECTIONPOINTSOURCE_OPTION0_CARD0,
@@ -217,27 +219,27 @@ class SectionPointSource(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def nlc001_link(self) -> KeywordBase:
+    def nlc001_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nlc001."""
         return self._get_link_by_attr("NODE", "nid", self.nlc001, "parts")
 
     @property
-    def nlc002_link(self) -> KeywordBase:
+    def nlc002_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nlc002."""
         return self._get_link_by_attr("NODE", "nid", self.nlc002, "parts")
 
     @property
-    def nlc003_link(self) -> KeywordBase:
+    def nlc003_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nlc003."""
         return self._get_link_by_attr("NODE", "nid", self.nlc003, "parts")
 
     @property
-    def nodeid_link(self) -> KeywordBase:
+    def nodeid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nodeid."""
         return self._get_link_by_attr("NODE", "nid", self.nodeid, "parts")
 
     @property
-    def lcidt_link(self) -> DefineCurve:
+    def lcidt_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidt."""
         if self.deck is None:
             return None
@@ -252,7 +254,7 @@ class SectionPointSource(KeywordBase):
         self.lcidt = value.lcid
 
     @property
-    def lcidvolr_link(self) -> DefineCurve:
+    def lcidvolr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidvolr."""
         if self.deck is None:
             return None
@@ -267,7 +269,7 @@ class SectionPointSource(KeywordBase):
         self.lcidvolr = value.lcid
 
     @property
-    def lcidvel_link(self) -> DefineCurve:
+    def lcidvel_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidvel."""
         if self.deck is None:
             return None
@@ -282,7 +284,7 @@ class SectionPointSource(KeywordBase):
         self.lcidvel = value.lcid
 
     @property
-    def vecid_link(self) -> DefineVector:
+    def vecid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vecid."""
         if self.deck is None:
             return None

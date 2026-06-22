@@ -55,7 +55,8 @@ class EmExternalField(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMEXTERNALFIELD_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def fieldid(self) -> typing.Optional[int]:
         """Get or set the External Field ID.
@@ -132,7 +133,7 @@ class EmExternalField(KeywordBase):
         self._cards[0].set_value("lcidz", value)
 
     @property
-    def lcidx_link(self) -> DefineCurve:
+    def lcidx_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidx."""
         if self.deck is None:
             return None
@@ -147,7 +148,7 @@ class EmExternalField(KeywordBase):
         self.lcidx = value.lcid
 
     @property
-    def lcidy_link(self) -> DefineCurve:
+    def lcidy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidy."""
         if self.deck is None:
             return None
@@ -162,7 +163,7 @@ class EmExternalField(KeywordBase):
         self.lcidy = value.lcid
 
     @property
-    def lcidz_link(self) -> DefineCurve:
+    def lcidz_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidz."""
         if self.deck is None:
             return None

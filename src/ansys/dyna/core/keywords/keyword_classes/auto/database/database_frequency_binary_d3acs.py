@@ -43,7 +43,8 @@ class DatabaseFrequencyBinaryD3Acs(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEFREQUENCYBINARYD3ACS_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def binary(self) -> typing.Optional[int]:
         """Get or set the Flag for writing the binary plot file.  See Remark 1.

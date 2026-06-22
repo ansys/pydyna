@@ -139,8 +139,8 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "REINFORCED_THERMOPLASTIC_CRASH"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcsigy": LinkType.DEFINE_CURVE,
@@ -167,35 +167,45 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATREINFORCEDTHERMOPLASTICCRASH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATREINFORCEDTHERMOPLASTICCRASH_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATREINFORCEDTHERMOPLASTICCRASH_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATREINFORCEDTHERMOPLASTICCRASH_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATREINFORCEDTHERMOPLASTICCRASH_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATREINFORCEDTHERMOPLASTICCRASH_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATREINFORCEDTHERMOPLASTICCRASH_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATREINFORCEDTHERMOPLASTICCRASH_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATREINFORCEDTHERMOPLASTICCRASH_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATREINFORCEDTHERMOPLASTICCRASH_CARD9,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatReinforcedThermoplasticCrash.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatReinforcedThermoplasticCrash._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATREINFORCEDTHERMOPLASTICCRASH_OPTION0_CARD0,
@@ -1001,7 +1011,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcsigy_link(self) -> DefineCurve:
+    def lcsigy_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsigy."""
         if self.deck is None:
             return None
@@ -1016,7 +1026,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
         self.lcsigy = value.lcid
 
     @property
-    def lcef1_link(self) -> DefineCurve:
+    def lcef1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcef1."""
         if self.deck is None:
             return None
@@ -1031,7 +1041,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
         self.lcef1 = value.lcid
 
     @property
-    def daf1_link(self) -> DefineCurve:
+    def daf1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for daf1."""
         if self.deck is None:
             return None
@@ -1046,7 +1056,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
         self.daf1 = value.lcid
 
     @property
-    def dam1_link(self) -> DefineCurve:
+    def dam1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dam1."""
         if self.deck is None:
             return None
@@ -1061,7 +1071,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
         self.dam1 = value.lcid
 
     @property
-    def lcg12_link(self) -> DefineCurve:
+    def lcg12_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcg12."""
         if self.deck is None:
             return None
@@ -1076,7 +1086,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
         self.lcg12 = value.lcid
 
     @property
-    def dam12_link(self) -> DefineCurve:
+    def dam12_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dam12."""
         if self.deck is None:
             return None
@@ -1091,7 +1101,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
         self.dam12 = value.lcid
 
     @property
-    def lcef2_link(self) -> DefineCurve:
+    def lcef2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcef2."""
         if self.deck is None:
             return None
@@ -1106,7 +1116,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
         self.lcef2 = value.lcid
 
     @property
-    def daf2_link(self) -> DefineCurve:
+    def daf2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for daf2."""
         if self.deck is None:
             return None
@@ -1121,7 +1131,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
         self.daf2 = value.lcid
 
     @property
-    def dam2_link(self) -> DefineCurve:
+    def dam2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dam2."""
         if self.deck is None:
             return None
@@ -1136,7 +1146,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
         self.dam2 = value.lcid
 
     @property
-    def lcg23_link(self) -> DefineCurve:
+    def lcg23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcg23."""
         if self.deck is None:
             return None
@@ -1151,7 +1161,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
         self.lcg23 = value.lcid
 
     @property
-    def dam23_link(self) -> DefineCurve:
+    def dam23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dam23."""
         if self.deck is None:
             return None
@@ -1166,7 +1176,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
         self.dam23 = value.lcid
 
     @property
-    def lcef3_link(self) -> DefineCurve:
+    def lcef3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcef3."""
         if self.deck is None:
             return None
@@ -1181,7 +1191,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
         self.lcef3 = value.lcid
 
     @property
-    def daf3_link(self) -> DefineCurve:
+    def daf3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for daf3."""
         if self.deck is None:
             return None
@@ -1196,7 +1206,7 @@ class MatReinforcedThermoplasticCrash(KeywordBase):
         self.daf3 = value.lcid
 
     @property
-    def dam3_link(self) -> DefineCurve:
+    def dam3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for dam3."""
         if self.deck is None:
             return None

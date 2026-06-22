@@ -44,8 +44,8 @@ class ConstrainedRivet(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "RIVET"
-    option_specs = [
-        OptionSpec("ID", -1, 1),
+    _option_spec_list = [
+        OptionSpec("ID", "pre/1", 1),
     ]
     _link_fields = {
         "n1": LinkType.NODE,
@@ -60,8 +60,9 @@ class ConstrainedRivet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDRIVET_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = ConstrainedRivet.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = ConstrainedRivet._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONSTRAINEDRIVET_OPTION0_CARD0,
@@ -119,12 +120,12 @@ class ConstrainedRivet(KeywordBase):
             self.activate_option("ID")
 
     @property
-    def n1_link(self) -> KeywordBase:
+    def n1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1."""
         return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
 
     @property
-    def n2_link(self) -> KeywordBase:
+    def n2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2."""
         return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
 

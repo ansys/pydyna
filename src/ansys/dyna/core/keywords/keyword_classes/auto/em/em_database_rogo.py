@@ -44,7 +44,8 @@ class EmDatabaseRogo(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMDATABASEROGO_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def outlv(self) -> int:
         """Get or set the Determines if the output file should be dumped.

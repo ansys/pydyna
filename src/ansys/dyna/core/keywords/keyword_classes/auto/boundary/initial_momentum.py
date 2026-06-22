@@ -51,7 +51,8 @@ class InitialMomentum(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALMOMENTUM_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID.
@@ -108,7 +109,7 @@ class InitialMomentum(KeywordBase):
         self._cards[0].set_value("dept", value)
 
     @property
-    def eid_link(self) -> KeywordBase:
+    def eid_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 

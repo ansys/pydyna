@@ -50,7 +50,8 @@ class DatabaseHistoryDiscrete(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEHISTORYDISCRETE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the discrete ID of the first element.

@@ -51,7 +51,8 @@ class DatabaseRcforcMoment(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASERCFORCMOMENT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Contact ID.
@@ -86,12 +87,12 @@ class DatabaseRcforcMoment(KeywordBase):
         self._cards[0].set_value("nodem", value)
 
     @property
-    def nodes_link(self) -> KeywordBase:
+    def nodes_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nodes."""
         return self._get_link_by_attr("NODE", "nid", self.nodes, "parts")
 
     @property
-    def nodem_link(self) -> KeywordBase:
+    def nodem_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nodem."""
         return self._get_link_by_attr("NODE", "nid", self.nodem, "parts")
 

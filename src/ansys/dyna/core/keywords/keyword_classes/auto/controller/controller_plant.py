@@ -101,22 +101,28 @@ class ControllerPlant(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLLERPLANT_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLLERPLANT_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLLERPLANT_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLLERPLANT_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLLERPLANT_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLLERPLANT_CARD5,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def plntid(self) -> typing.Optional[int]:
         """Get or set the Plant ID

@@ -43,7 +43,8 @@ class ControlThermalEigenvalue(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLTHERMALEIGENVALUE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def neig(self) -> int:
         """Get or set the Number of eigenvalues to compute:

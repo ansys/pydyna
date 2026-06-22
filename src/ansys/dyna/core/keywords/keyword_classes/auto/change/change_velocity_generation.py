@@ -66,10 +66,12 @@ class ChangeVelocityGeneration(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHANGEVELOCITYGENERATION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHANGEVELOCITYGENERATION_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsid_pid(self) -> typing.Optional[int]:
         """Get or set the Node set ID or part set ID.
@@ -261,7 +263,7 @@ class ChangeVelocityGeneration(KeywordBase):
         self._cards[1].set_value("irigid", value)
 
     @property
-    def icid_link(self) -> DefineCoordinateSystem:
+    def icid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for icid."""
         if self.deck is None:
             return None

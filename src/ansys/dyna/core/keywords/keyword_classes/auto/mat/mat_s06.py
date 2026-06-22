@@ -46,8 +46,8 @@ class MatS06(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "S06"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcdl": LinkType.DEFINE_CURVE_OR_TABLE,
@@ -62,8 +62,9 @@ class MatS06(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATS06_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatS06.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatS06._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATS06_OPTION0_CARD0,
@@ -157,7 +158,7 @@ class MatS06(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcdl_link(self) -> KeywordBase:
+    def lcdl_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcdl."""
         if self.deck is None:
             return None
@@ -181,7 +182,7 @@ class MatS06(KeywordBase):
             self.lcdl = value.tbid
 
     @property
-    def lcdu_link(self) -> KeywordBase:
+    def lcdu_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcdu."""
         if self.deck is None:
             return None

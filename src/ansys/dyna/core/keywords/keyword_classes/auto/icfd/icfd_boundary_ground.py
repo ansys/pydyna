@@ -43,7 +43,8 @@ class IcfdBoundaryGround(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDBOUNDARYGROUND_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the PID of the fluid surface where a ground boundary condition is applied.

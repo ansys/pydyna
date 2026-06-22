@@ -50,7 +50,8 @@ class MeshBlSym(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MESHBLSYM_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid1(self) -> typing.Optional[int]:
         """Get or set the Part identifiers for the surface element. This is the surface with symmetry.

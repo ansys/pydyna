@@ -59,13 +59,16 @@ class Case(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CASE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CASE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CASE_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def caseid(self) -> typing.Optional[int]:
         """Get or set the Identification number for case.

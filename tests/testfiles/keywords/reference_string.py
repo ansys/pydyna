@@ -210,6 +210,14 @@ $#      t1        t2        t3        t4      nloc     marea      idof    edgset
          2         3       1.0         5       1.0         0         0         1
        0.0       0.0       0.0       0.0       0.0       1.0       0.0         0"""
 
+test_section_shell_misc = """*SECTION_SHELL_MISC
+$#   secid    elform      shrf       nip     propt   qr/irid     icomp     setyp
+         1         2       1.0         5       1.0         0         0         1
+$#      t1        t2        t3        t4      nloc     marea      idof    edgset
+       1.0       1.0       1.0       1.0       0.0       0.0       0.0         0
+$#  thkscl
+       2.5"""
+
 test_section_solid_title_deck_string = """$
 *KEYWORD
 *SECTION_SOLID_TITLE
@@ -1198,6 +1206,20 @@ $#      xp        yp        zp        a1        a2        a3      macf    unused
 $#      v1        v2        v3        d1        d2        d3      beta       ref
                                      0.0       1.0       0.0                    """
 
+test_element_beam_orientation_ref = """*ELEMENT_BEAM_ORIENTATION
+$#   eid     pid      n1      n2      n3     rt1     rr1     rt2     rr2   local
+       1       2       3       4       0       0       0       0       0       2
+$#      vx        vy        vz
+       1.0       0.0       0.0
+$#   eid     pid      n1      n2      n3     rt1     rr1     rt2     rr2   local
+       5       2       6       7       0       0       0       0       0       2
+$#      vx        vy        vz
+       0.0       1.0       0.0
+$#   eid     pid      n1      n2      n3     rt1     rr1     rt2     rr2   local
+       8       2       9      10       0       0       0       0       0       1
+$#      vx        vy        vz
+       0.0       0.0       1.0"""
+
 test_element_beam_assign_ref = """*ELEMENT_BEAM
 $#   eid     pid      n1      n2      n3     rt1     rr1     rt2     rr2   local
                1       1       0               0       0       0       0       1"""
@@ -1690,3 +1712,65 @@ $#     aai       abi       aci      gabi      gbci      gcai        ti
   180000.0  180000.0  180000.0       0.3       0.3       0.3
    1.6e-05   1.6e-05   1.6e-05   69230.8   69230.8   69230.8     200.0"""
 
+# DEFINE_TABLE_2D test strings
+test_define_table_2d_ref = """*DEFINE_TABLE_2D_TITLE
+$# title
+test table
+$#    tbid       sfa      offa
+       101       1.0       1.0
+$#               value                lcid
+                 1.0                 101
+                 2.0                 102
+                 3.0                 103"""
+
+# ELEMENT_MASS_PART / ELEMENT_MASS_PART_SET multi-row regression test strings
+test_element_mass_part_multirow = """*ELEMENT_MASS_PART
+$#   pid         addmass         finmass    lcid    
+    1463         0.00491             0.0       0
+    1464         0.00491             0.0       0
+     415         0.00382             0.0       0
+     520         0.00382             0.0       0
+     405         0.00482             0.0       0"""
+
+test_element_mass_part_set_multirow = """*ELEMENT_MASS_PART_SET
+   10501       69.248175           0.000
+   10502       46.582768           0.000"""
+
+test_element_mass_part_set = """*ELEMENT_MASS_PART_SET
+$#   pid         addmass         finmass    lcid
+   10501       69.248175           0.000"""
+   
+test_element_mass_part_with_lcid = """*ELEMENT_MASS_PART
+$#   pid         addmass         finmass    lcid    
+    1463         0.00491             0.0       1
+    1464         0.00491             0.0       2"""
+
+test_element_mass_part_set_with_lcid = """*ELEMENT_MASS_PART_SET
+$#   pid         addmass         finmass    lcid
+    1463         0.00491             0.0       5
+    1464         0.00491             0.0       7"""
+
+test_element_mass_part_set_with_mwd = """*ELEMENT_MASS_PART_SET
+$#   pid         addmass         finmass    lcid     mwd
+    1463         0.00491             0.0       0       1"""
+
+# Reference strings for *COMMENT multiline tests
+test_comment_multiline_write = """*COMMENT
+$#                                                                       comment
+Line1
+Line2
+Line3"""
+
+test_comment_multiline_20_write = (
+    "*COMMENT\n$#                                                                       comment\n"
+    + "\n".join(["0123456789"] * 20)
+)
+
+test_comment_deck_roundtrip = """$
+*KEYWORD
+*COMMENT
+$#                                                                       comment
+Line1
+Line2
+Line3
+*END"""

@@ -60,8 +60,8 @@ class MatMccormick(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "MCCORMICK"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -72,14 +72,17 @@ class MatMccormick(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATMCCORMICK_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMCCORMICK_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATMCCORMICK_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatMccormick.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatMccormick._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATMCCORMICK_OPTION0_CARD0,

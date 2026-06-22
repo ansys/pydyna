@@ -61,10 +61,12 @@ class LoadSuperplasticForming(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADSUPERPLASTICFORMING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _LOADSUPERPLASTICFORMING_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def lcp1(self) -> typing.Optional[int]:
         """Get or set the Load curve number for Phase I pressure loading, see *DEFINE_CURVE.
@@ -176,7 +178,7 @@ class LoadSuperplasticForming(KeywordBase):
         self._cards[1].set_value("ncyl", value)
 
     @property
-    def lcp1_link(self) -> DefineCurve:
+    def lcp1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcp1."""
         if self.deck is None:
             return None
@@ -191,7 +193,7 @@ class LoadSuperplasticForming(KeywordBase):
         self.lcp1 = value.lcid
 
     @property
-    def lcp2_link(self) -> DefineCurve:
+    def lcp2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcp2."""
         if self.deck is None:
             return None

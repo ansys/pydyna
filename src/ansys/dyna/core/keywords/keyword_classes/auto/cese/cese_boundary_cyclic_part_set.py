@@ -61,13 +61,16 @@ class CeseBoundaryCyclicPartSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYCYCLICPARTSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYCYCLICPARTSET_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYCYCLICPARTSET_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def surfsid1(self) -> typing.Optional[int]:
         """Get or set the Identifiers of two sets of surface part IDs, each created with a *LSO_ID_SET card, where each surface part ID in each set is referenced in *MESH_SURFACE_ELEMENT cards.

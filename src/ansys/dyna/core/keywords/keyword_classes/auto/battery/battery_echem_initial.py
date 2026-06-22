@@ -53,10 +53,12 @@ class BatteryEchemInitial(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BATTERYECHEMINITIAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BATTERYECHEMINITIAL_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def echemid(self) -> typing.Optional[int]:
         """Get or set the Identifier of the electrochemistry control card to use

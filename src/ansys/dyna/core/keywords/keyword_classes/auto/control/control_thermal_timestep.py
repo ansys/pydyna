@@ -55,7 +55,8 @@ class ControlThermalTimestep(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLTHERMALTIMESTEP_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ts(self) -> int:
         """Get or set the Time step control:
@@ -156,7 +157,7 @@ class ControlThermalTimestep(KeywordBase):
         self._cards[0].set_value("lcts", value)
 
     @property
-    def lcts_link(self) -> DefineCurve:
+    def lcts_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcts."""
         if self.deck is None:
             return None

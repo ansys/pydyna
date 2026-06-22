@@ -42,8 +42,8 @@ class ConstrainedNodalRigidBody(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "NODAL_RIGID_BODY"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "pnode": LinkType.NODE,
@@ -69,8 +69,9 @@ class ConstrainedNodalRigidBody(KeywordBase):
                 None,
                 name="constrained_nodal_rigid_bodies",
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = ConstrainedNodalRigidBody.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = ConstrainedNodalRigidBody._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONSTRAINEDNODALRIGIDBODY_OPTION0_CARD0,
@@ -107,14 +108,14 @@ class ConstrainedNodalRigidBody(KeywordBase):
     @property
     def pnode_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for pnode, keyed by pnode value."""
-        return self._get_links_from_table("NODE", "nid", "constrained_nodal_rigid_bodies", "pnode", "parts")
+        return self._get_links_from_table("NODE", "nid", "constrained_nodal_rigid_bodies", "pnode", "")
 
     def get_pnode_link(self, pnode: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given pnode."""
-        return self._get_link_by_attr("NODE", "nid", pnode, "parts")
+        return self._get_link_by_attr("NODE", "nid", pnode, "")
 
     @property
-    def cid_link(self) -> DefineCoordinateSystem:
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid."""
         if self.deck is None:
             return None
@@ -129,7 +130,7 @@ class ConstrainedNodalRigidBody(KeywordBase):
         self.cid = value.cid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 

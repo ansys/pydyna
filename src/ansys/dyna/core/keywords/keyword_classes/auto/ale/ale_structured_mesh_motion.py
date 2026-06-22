@@ -50,7 +50,8 @@ class AleStructuredMeshMotion(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ALESTRUCTUREDMESHMOTION_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mshid(self) -> typing.Optional[int]:
         """Get or set the S-ALE Mesh ID.  A unique number must be specified.

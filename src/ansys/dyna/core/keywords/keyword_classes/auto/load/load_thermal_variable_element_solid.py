@@ -52,7 +52,8 @@ class LoadThermalVariableElementSolid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADTHERMALVARIABLEELEMENTSOLID_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Element ID.
@@ -98,12 +99,12 @@ class LoadThermalVariableElementSolid(KeywordBase):
         self._cards[0].set_value("lcid", value)
 
     @property
-    def eid_link(self) -> KeywordBase:
+    def eid_link(self) -> typing.Optional[KeywordBase]:
         """Get the ELEMENT keyword containing the given eid."""
         return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

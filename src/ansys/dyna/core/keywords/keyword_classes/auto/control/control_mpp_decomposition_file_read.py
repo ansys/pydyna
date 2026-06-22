@@ -43,7 +43,8 @@ class ControlMppDecompositionFileRead(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPDECOMPOSITIONFILEREAD_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the Name of a file containing (or to contain ) a decomposition record.

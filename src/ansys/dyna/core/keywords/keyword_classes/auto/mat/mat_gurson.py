@@ -103,8 +103,8 @@ class MatGurson(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "GURSON"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcss": LinkType.DEFINE_CURVE,
@@ -122,23 +122,29 @@ class MatGurson(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATGURSON_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGURSON_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGURSON_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGURSON_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGURSON_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGURSON_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatGurson.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatGurson._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATGURSON_OPTION0_CARD0,
@@ -692,7 +698,7 @@ class MatGurson(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -707,7 +713,7 @@ class MatGurson(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lclf_link(self) -> DefineCurve:
+    def lclf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lclf."""
         if self.deck is None:
             return None
@@ -722,7 +728,7 @@ class MatGurson(KeywordBase):
         self.lclf = value.lcid
 
     @property
-    def lcf0_link(self) -> DefineCurve:
+    def lcf0_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcf0."""
         if self.deck is None:
             return None
@@ -737,7 +743,7 @@ class MatGurson(KeywordBase):
         self.lcf0 = value.lcid
 
     @property
-    def lcfc_link(self) -> DefineCurve:
+    def lcfc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfc."""
         if self.deck is None:
             return None
@@ -752,7 +758,7 @@ class MatGurson(KeywordBase):
         self.lcfc = value.lcid
 
     @property
-    def lcfn_link(self) -> DefineCurve:
+    def lcfn_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcfn."""
         if self.deck is None:
             return None

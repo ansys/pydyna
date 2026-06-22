@@ -56,7 +56,8 @@ class LoadHeatGenerationSetSolid(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADHEATGENERATIONSETSOLID_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the Solid element set ID, *SET_SOLID.
@@ -127,7 +128,7 @@ class LoadHeatGenerationSetSolid(KeywordBase):
         self._cards[0].set_value("tblcid", value)
 
     @property
-    def wblcid_link(self) -> DefineCurve:
+    def wblcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for wblcid."""
         if self.deck is None:
             return None
@@ -142,7 +143,7 @@ class LoadHeatGenerationSetSolid(KeywordBase):
         self.wblcid = value.lcid
 
     @property
-    def cblcid_link(self) -> DefineCurve:
+    def cblcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for cblcid."""
         if self.deck is None:
             return None
@@ -157,7 +158,7 @@ class LoadHeatGenerationSetSolid(KeywordBase):
         self.cblcid = value.lcid
 
     @property
-    def tblcid_link(self) -> DefineCurve:
+    def tblcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tblcid."""
         if self.deck is None:
             return None
@@ -172,7 +173,7 @@ class LoadHeatGenerationSetSolid(KeywordBase):
         self.tblcid = value.lcid
 
     @property
-    def sid_link(self) -> KeywordBase:
+    def sid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for sid."""
         return self._get_set_link("SOLID", self.sid)
 

@@ -44,8 +44,8 @@ class MatSpringNonlinearElastic(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "SPRING_NONLINEAR_ELASTIC"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcd": LinkType.DEFINE_CURVE,
@@ -60,8 +60,9 @@ class MatSpringNonlinearElastic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATSPRINGNONLINEARELASTIC_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatSpringNonlinearElastic.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatSpringNonlinearElastic._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATSPRINGNONLINEARELASTIC_OPTION0_CARD0,
@@ -120,7 +121,7 @@ class MatSpringNonlinearElastic(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcd_link(self) -> DefineCurve:
+    def lcd_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcd."""
         if self.deck is None:
             return None
@@ -135,7 +136,7 @@ class MatSpringNonlinearElastic(KeywordBase):
         self.lcd = value.lcid
 
     @property
-    def lcr_link(self) -> DefineCurve:
+    def lcr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcr."""
         if self.deck is None:
             return None

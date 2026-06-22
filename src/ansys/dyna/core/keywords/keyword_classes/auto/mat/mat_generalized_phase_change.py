@@ -122,8 +122,8 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "GENERALIZED_PHASE_CHANGE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "mix": LinkType.DEFINE_CURVE,
@@ -149,29 +149,37 @@ class MatGeneralizedPhaseChange(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATGENERALIZEDPHASECHANGE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALIZEDPHASECHANGE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALIZEDPHASECHANGE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALIZEDPHASECHANGE_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALIZEDPHASECHANGE_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALIZEDPHASECHANGE_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALIZEDPHASECHANGE_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATGENERALIZEDPHASECHANGE_CARD7,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatGeneralizedPhaseChange.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatGeneralizedPhaseChange._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATGENERALIZEDPHASECHANGE_OPTION0_CARD0,
@@ -959,7 +967,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def mix_link(self) -> DefineCurve:
+    def mix_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for mix."""
         if self.deck is None:
             return None
@@ -974,7 +982,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
         self.mix = value.lcid
 
     @property
-    def mixr_link(self) -> KeywordBase:
+    def mixr_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for mixr."""
         if self.deck is None:
             return None
@@ -998,7 +1006,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
             self.mixr = value.tbid
 
     @property
-    def xa1pa1_link(self) -> KeywordBase:
+    def xa1pa1_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for xa1pa1."""
         if self.deck is None:
             return None
@@ -1022,7 +1030,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
             self.xa1pa1 = value.tbid
 
     @property
-    def xa1pa2_link(self) -> KeywordBase:
+    def xa1pa2_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for xa1pa2."""
         if self.deck is None:
             return None
@@ -1046,7 +1054,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
             self.xa1pa2 = value.tbid
 
     @property
-    def xa1pa3_link(self) -> KeywordBase:
+    def xa1pa3_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for xa1pa3."""
         if self.deck is None:
             return None
@@ -1070,7 +1078,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
             self.xa1pa3 = value.tbid
 
     @property
-    def sigy1_link(self) -> KeywordBase:
+    def sigy1_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy1."""
         if self.deck is None:
             return None
@@ -1094,7 +1102,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
             self.sigy1 = value.tbid
 
     @property
-    def sigy2_link(self) -> KeywordBase:
+    def sigy2_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy2."""
         if self.deck is None:
             return None
@@ -1118,7 +1126,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
             self.sigy2 = value.tbid
 
     @property
-    def sigy3_link(self) -> KeywordBase:
+    def sigy3_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy3."""
         if self.deck is None:
             return None
@@ -1142,7 +1150,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
             self.sigy3 = value.tbid
 
     @property
-    def sigy4_link(self) -> KeywordBase:
+    def sigy4_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy4."""
         if self.deck is None:
             return None
@@ -1166,7 +1174,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
             self.sigy4 = value.tbid
 
     @property
-    def sigy5_link(self) -> KeywordBase:
+    def sigy5_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy5."""
         if self.deck is None:
             return None
@@ -1190,7 +1198,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
             self.sigy5 = value.tbid
 
     @property
-    def sigy6_link(self) -> KeywordBase:
+    def sigy6_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy6."""
         if self.deck is None:
             return None
@@ -1214,7 +1222,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
             self.sigy6 = value.tbid
 
     @property
-    def sigy7_link(self) -> KeywordBase:
+    def sigy7_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy7."""
         if self.deck is None:
             return None
@@ -1238,7 +1246,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
             self.sigy7 = value.tbid
 
     @property
-    def sigy8_link(self) -> KeywordBase:
+    def sigy8_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for sigy8."""
         if self.deck is None:
             return None

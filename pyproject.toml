@@ -4,98 +4,93 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "ansys-dyna-core"
-version = "0.11.dev0"
+version = "0.13.dev0"
 description = "Python interface to LS-DYNA Service"
 readme = "README.rst"
 requires-python = ">=3.10,<4"
-license = { file = "LICENSE" }
-authors = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
-maintainers = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
-keywords = ["Ansys", "LS-DYNA", "gRPC"]
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Synopsys, Inc. and ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
+maintainers = [{ name = "Synopsys, Inc. and ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
+keywords = ["Ansys", "LS-DYNA", "keywords"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering :: Information Analysis",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14"
 ]
 
 dependencies = [
-    "ansys-dpf-core>=0.7.2",
-    "ansys-api-dyna==0.4.2",
+    "ansys-dpf-core>=0.14.1",
     "ansys-tools-common>=0.2,<1",
-    "hollerith>=0.6.0",
+    "hollerith>=0.7.1",
     "numpy>=1",
     "pandas>=2.0",
     "appdirs>=1.4.4",
-    "transformations==2025.1.1",
-    "chardet==5.2.0",
-    "requests==2.32.5",
+    "transformations>=2025.1.1",
+    "chardet>=7.4.3",
+    "requests>=2.33.1",
+    "docker>=7.1.0"
 ]
 
 [project.optional-dependencies]
-all = ['ansys-dyna-core[graphics,pim,codegen,tests,dev,doc]']
+all = ['ansys-dyna-core[graphics,codegen,tests,dev,doc]']
 
 graphics = [
-    "pyvista>=0.43.4",
-]
-pim = [
-    "ansys-platform-instancemanagement~=1.0",
+    "matplotlib>=3.0",
+    "pyvista>=0.43.4"
 ]
 codegen = [
     "Jinja2==3.1.6",
     "beartype==0.22.9",
     "jsonschema==4.26.0",
+    "pytest==9.0.3"
 ]
 tests = [
-    "matplotlib==3.10.8",
-    "numpy==2.2.6",
-    "pytest==9.0.2",
-    "pytest-cov==7.0.0",
+    "matplotlib==3.10.9",
+    "numpy<=2.2.6 ; python_version < '3.11'",
+    "numpy==2.4.4 ; python_version >= '3.11'",
+    "pytest==9.0.3",
+    "pytest-cov==7.1.0",
     "joblib==1.5.3",
     "pandas==2.3.3",
-    "openpyxl==3.1.5",
-    "scikit-learn==1.7.2",
     "pytest-xdist==3.8.0",
-    "ipython==8.38.0",
-    "pyvista==0.46.5",
+    "ipython==8.39.0",
+    "pyvista==0.48.4",
 ]
 dev = [
-    "ansys-dyna-core[tests,codegen,graphics]",
+    "ansys-dyna-core[tests,codegen,graphics]"
 ]
 doc = [
-    "recommonmark==0.7.1",
-    "matplotlib==3.10.8",
-    "imageio==2.37.2",
-    "imageio-ffmpeg==0.6.0",
+    "matplotlib==3.10.9",
     "numpydoc==1.10.0",
     "Sphinx==8.2.3",
-    "sphinx-autobuild==2024.10.3",
-    "sphinx-design==0.6.1",
-    "sphinxcontrib-websupport==2.0.0",
-    "pytest-sphinx==0.6.3",
+    "pytest-sphinx==0.7.1",
     "sphinx-notfound-page==1.1.0",
     "sphinx-copybutton==0.5.2",
-    "sphinx-gallery==0.20.0",
+    "sphinx-gallery==0.21.0",
     "sphinx-autodoc-typehints==3.1.0",
-    "ansys-sphinx-theme[autoapi]==1.6.4",
-    "pypandoc==1.16.2",
+    "ansys-sphinx-theme[autoapi]==1.9.0",
+    "pypandoc==1.17",
     "nbsphinx==0.9.8",
-    "ipywidgets==8.1.8",
     "joblib==1.5.3",
-    "scikit-learn==1.7.2",
-    "ipython==8.38.0",
-    "jupyterlab==4.5.2",
-    "pyvista==0.46.5",
+    "ipython==8.39.0",
+    "jupyterlab==4.5.8",
+    "pyvista==0.48.4",
 ]
 
 [tool.flit.module]
 name = "ansys.dyna.core"
+
+# todo - propose standardization in pypa/interoperability-peps or discuss.python.org/c/packaging
+[project.entry-points."agent.instructions"]
+"ansys.dyna.core" = "ansys.dyna.core:AGENT_INSTRUCTIONS"
 
 [project.urls]
 Source = "https://github.com/ansys/pydyna"
@@ -110,15 +105,10 @@ extend-exclude = [
     "tests/**/*.py",
     "codegen/kwd.json",
     "codegen/",
-    "src/ansys/dyna/core/pre/Server/",
-    "src/ansys/dyna/core/pre/doc/",
-    "src/ansys/dyna/core/pre/",
-    "src/ansys/dyna/core/solver/",
-    "src/ansys/dyna/core/pre/kwprocess_pb2.py",
-    "src/ansys/dyna/core/pre/kwprocess_pb2_grpc.py",
     "src/ansys/dyna/core/keywords/keyword_classes/auto/",
     "src/ansys/dyna/core/keywords/keyword_classes/type_mapping.py",
     "src/ansys/dyna/core/keywords/keyword_classes/auto_keywords.py",
+    "src/ansys/dyna/core/keywords/keyword_classes/manual/*_version_*.py"
 ]
 
 lint.select = [
@@ -131,13 +121,7 @@ lint.select = [
   "PYI", # flake8-pyi, see https://docs.astral.sh/ruff/rules/#flake8-pyi-pyi
 ]
 lint.ignore = [
-  #"D102",  # Missing docstring in public method
-  "D212",  # Multi-line docstring summary should start at the first line
   "D400",  # First line should end with a period
-  "E501",  # Line too long. Ignoring this so "ruff.formatter" manages line length.
-  "E743",  # Ambiguous function name. N802 and Python naming restrictions ensure unambiguous names.
-  "E722",  # Do not use bare 'except' clauses
-  "E402",  # Module level import not at top of file
   "E711",  # Comparison to None should be 'if cond is None:'
   "E712",  # Comparison to True should be 'if cond is True:' or 'if cond:'
   "E721",  # Do not compare types, use 'isinstance()'
@@ -161,10 +145,11 @@ force-sort-within-sections = true
 minversion = "7.1"
 addopts = "-ra -vv"
 testpaths = ["tests"]
+norecursedirs = ["tests/test_codegen"]
 pythonpath = ["codegen"]
 markers = """
     run: tests that exercise the `run` subpackage
-    keywords: tests that exercies the `keyword` subpackage
+    keywords: tests that exercise the `keyword` subpackage
     codegen: tests that exercise the codegen system
     """
 
@@ -184,6 +169,11 @@ template = "doc/changelog/template"
 start_string = ".. towncrier release notes start\n"
 title_format = "`{version} <https://github.com/ansys/pydyna/releases/tag/v{version}>`_ - {project_date}"
 issue_format = "`#{issue} <https://github.com/ansys/pydyna/pull/{issue}>`_"
+
+[[tool.towncrier.type]]
+directory = "breaking"
+name = "Breaking"
+showcontent = true
 
 [[tool.towncrier.type]]
 directory = "breaking"

@@ -67,13 +67,16 @@ class InitialDetonationGeometry(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALDETONATIONGEOMETRY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALDETONATIONGEOMETRY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INITIALDETONATIONGEOMETRY_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def heid(self) -> typing.Optional[int]:
         """Get or set the ID specifying the high explosives to be lit
@@ -191,7 +194,7 @@ class InitialDetonationGeometry(KeywordBase):
         self._cards[2].set_value("v4", value)
 
     @property
-    def v1_link(self) -> DefineVector:
+    def v1_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for v1."""
         if self.deck is None:
             return None
@@ -206,7 +209,7 @@ class InitialDetonationGeometry(KeywordBase):
         self.v1 = value.vid
 
     @property
-    def v2_link(self) -> DefineVector:
+    def v2_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for v2."""
         if self.deck is None:
             return None
@@ -221,7 +224,7 @@ class InitialDetonationGeometry(KeywordBase):
         self.v2 = value.vid
 
     @property
-    def v3_link(self) -> DefineVector:
+    def v3_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for v3."""
         if self.deck is None:
             return None
@@ -236,7 +239,7 @@ class InitialDetonationGeometry(KeywordBase):
         self.v3 = value.vid
 
     @property
-    def v4_link(self) -> DefineVector:
+    def v4_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for v4."""
         if self.deck is None:
             return None
@@ -251,7 +254,7 @@ class InitialDetonationGeometry(KeywordBase):
         self.v4 = value.vid
 
     @property
-    def heid_link(self) -> KeywordBase:
+    def heid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for heid."""
         return self._get_set_link("NODE", self.heid)
 

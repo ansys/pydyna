@@ -49,7 +49,8 @@ class BoundaryElementMethodFlow(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYELEMENTMETHODFLOW_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Shell set ID for the set of shell elements which define the surface of the bodies of interest (see *SET_SHELL). The nodes of these shells should be ordered so that the shell normals point into the fluid.

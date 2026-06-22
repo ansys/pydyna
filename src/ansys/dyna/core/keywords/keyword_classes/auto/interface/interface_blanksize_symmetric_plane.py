@@ -48,7 +48,8 @@ class InterfaceBlanksizeSymmetricPlane(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACEBLANKSIZESYMMETRICPLANE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def x0(self) -> float:
         """Get or set the x, y, z coordinates of a point on the symmetric plane.  See example in  Scale Factor and Symmetric Plane.

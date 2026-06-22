@@ -107,8 +107,8 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "TABULATED_JOHNSON_COOK_ORTHO_PLASTICITY"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lct00r": LinkType.DEFINE_CURVE,
@@ -139,26 +139,33 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_CARD6,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatTabulatedJohnsonCookOrthoPlasticity.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatTabulatedJohnsonCookOrthoPlasticity._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATTABULATEDJOHNSONCOOKORTHOPLASTICITY_OPTION0_CARD0,
@@ -730,7 +737,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lct00r_link(self) -> DefineCurve:
+    def lct00r_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lct00r."""
         if self.deck is None:
             return None
@@ -745,7 +752,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lct00r = value.lcid
 
     @property
-    def lct00t_link(self) -> DefineCurve:
+    def lct00t_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lct00t."""
         if self.deck is None:
             return None
@@ -760,7 +767,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lct00t = value.lcid
 
     @property
-    def lcf_link(self) -> DefineCurve:
+    def lcf_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcf."""
         if self.deck is None:
             return None
@@ -775,7 +782,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lcf = value.lcid
 
     @property
-    def lcg_link(self) -> DefineCurve:
+    def lcg_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcg."""
         if self.deck is None:
             return None
@@ -790,7 +797,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lcg = value.lcid
 
     @property
-    def lch_link(self) -> DefineCurve:
+    def lch_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lch."""
         if self.deck is None:
             return None
@@ -805,7 +812,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lch = value.lcid
 
     @property
-    def lci_link(self) -> DefineCurve:
+    def lci_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lci."""
         if self.deck is None:
             return None
@@ -820,7 +827,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lci = value.lcid
 
     @property
-    def lct90r_link(self) -> DefineCurve:
+    def lct90r_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lct90r."""
         if self.deck is None:
             return None
@@ -835,7 +842,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lct90r = value.lcid
 
     @property
-    def lct45r_link(self) -> DefineCurve:
+    def lct45r_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lct45r."""
         if self.deck is None:
             return None
@@ -850,7 +857,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lct45r = value.lcid
 
     @property
-    def lctthr_link(self) -> DefineCurve:
+    def lctthr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lctthr."""
         if self.deck is None:
             return None
@@ -865,7 +872,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lctthr = value.lcid
 
     @property
-    def lcc90r_link(self) -> DefineCurve:
+    def lcc90r_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc90r."""
         if self.deck is None:
             return None
@@ -880,7 +887,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lcc90r = value.lcid
 
     @property
-    def lcc45r_link(self) -> DefineCurve:
+    def lcc45r_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc45r."""
         if self.deck is None:
             return None
@@ -895,7 +902,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lcc45r = value.lcid
 
     @property
-    def lccth_link(self) -> DefineCurve:
+    def lccth_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lccth."""
         if self.deck is None:
             return None
@@ -910,7 +917,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lccth = value.lcid
 
     @property
-    def lct90t_link(self) -> DefineCurve:
+    def lct90t_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lct90t."""
         if self.deck is None:
             return None
@@ -925,7 +932,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lct90t = value.lcid
 
     @property
-    def lct45t_link(self) -> DefineCurve:
+    def lct45t_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lct45t."""
         if self.deck is None:
             return None
@@ -940,7 +947,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lct45t = value.lcid
 
     @property
-    def lcttht_link(self) -> DefineCurve:
+    def lcttht_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcttht."""
         if self.deck is None:
             return None
@@ -955,7 +962,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lcttht = value.lcid
 
     @property
-    def lcc90t_link(self) -> DefineCurve:
+    def lcc90t_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc90t."""
         if self.deck is None:
             return None
@@ -970,7 +977,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lcc90t = value.lcid
 
     @property
-    def lcc45t_link(self) -> DefineCurve:
+    def lcc45t_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcc45t."""
         if self.deck is None:
             return None
@@ -985,7 +992,7 @@ class MatTabulatedJohnsonCookOrthoPlasticity(KeywordBase):
         self.lcc45t = value.lcid
 
     @property
-    def lcctht_link(self) -> DefineCurve:
+    def lcctht_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcctht."""
         if self.deck is None:
             return None

@@ -57,8 +57,8 @@ class MatCohesiveGeneral(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "COHESIVE_GENERAL"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "tslc": LinkType.DEFINE_CURVE,
@@ -73,11 +73,13 @@ class MatCohesiveGeneral(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATCOHESIVEGENERAL_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCOHESIVEGENERAL_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatCohesiveGeneral.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatCohesiveGeneral._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCOHESIVEGENERAL_OPTION0_CARD0,
@@ -252,7 +254,7 @@ class MatCohesiveGeneral(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def tslc_link(self) -> DefineCurve:
+    def tslc_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tslc."""
         if self.deck is None:
             return None
@@ -267,7 +269,7 @@ class MatCohesiveGeneral(KeywordBase):
         self.tslc = value.lcid
 
     @property
-    def tslc2_link(self) -> DefineCurve:
+    def tslc2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tslc2."""
         if self.deck is None:
             return None

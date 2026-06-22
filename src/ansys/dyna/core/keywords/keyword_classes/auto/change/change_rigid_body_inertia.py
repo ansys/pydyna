@@ -58,10 +58,12 @@ class ChangeRigidBodyInertia(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CHANGERIGIDBODYINERTIA_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CHANGERIGIDBODYINERTIA_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the ID for this change inertia input.
@@ -162,7 +164,7 @@ class ChangeRigidBodyInertia(KeywordBase):
         self._cards[1].set_value("izz", value)
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given pid."""
         return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

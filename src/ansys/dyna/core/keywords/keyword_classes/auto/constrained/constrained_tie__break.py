@@ -50,7 +50,8 @@ class ConstrainedTie_Break(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDTIE_BREAK_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def nsid1(self) -> typing.Optional[int]:
         """Get or set the Node set ID for nodes on one side of the tied shell edge to shell edge interface; , see *SET_NODE_OPTION.
@@ -85,7 +86,7 @@ class ConstrainedTie_Break(KeywordBase):
         self._cards[0].set_value("eppf", value)
 
     @property
-    def nsid1_link(self) -> KeywordBase:
+    def nsid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid1."""
         return self._get_set_link("NODE", self.nsid1)
 
@@ -95,7 +96,7 @@ class ConstrainedTie_Break(KeywordBase):
         self.nsid1 = value.sid
 
     @property
-    def nsid2_link(self) -> KeywordBase:
+    def nsid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid2."""
         return self._get_set_link("NODE", self.nsid2)
 

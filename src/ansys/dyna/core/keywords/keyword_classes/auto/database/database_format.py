@@ -44,7 +44,8 @@ class DatabaseFormat(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEFORMAT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def iform(self) -> int:
         """Get or set the Output format for D3PLOT and D3THDT files

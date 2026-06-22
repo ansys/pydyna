@@ -196,8 +196,8 @@ class MatPhsBmw(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "PHS_BMW"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcy1": LinkType.DEFINE_CURVE,
@@ -220,50 +220,65 @@ class MatPhsBmw(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATPHSBMW_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPHSBMW_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPHSBMW_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPHSBMW_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPHSBMW_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPHSBMW_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPHSBMW_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPHSBMW_CARD7,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPHSBMW_CARD8,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPHSBMW_CARD9,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPHSBMW_CARD10,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPHSBMW_CARD11,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPHSBMW_CARD12,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPHSBMW_CARD13,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATPHSBMW_CARD14,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatPhsBmw.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatPhsBmw._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATPHSBMW_OPTION0_CARD0,
@@ -1485,7 +1500,7 @@ class MatPhsBmw(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcy1_link(self) -> DefineCurve:
+    def lcy1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy1."""
         if self.deck is None:
             return None
@@ -1500,7 +1515,7 @@ class MatPhsBmw(KeywordBase):
         self.lcy1 = value.lcid
 
     @property
-    def lcy2_link(self) -> DefineCurve:
+    def lcy2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy2."""
         if self.deck is None:
             return None
@@ -1515,7 +1530,7 @@ class MatPhsBmw(KeywordBase):
         self.lcy2 = value.lcid
 
     @property
-    def lcy3_link(self) -> DefineCurve:
+    def lcy3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy3."""
         if self.deck is None:
             return None
@@ -1530,7 +1545,7 @@ class MatPhsBmw(KeywordBase):
         self.lcy3 = value.lcid
 
     @property
-    def lcy4_link(self) -> DefineCurve:
+    def lcy4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy4."""
         if self.deck is None:
             return None
@@ -1545,7 +1560,7 @@ class MatPhsBmw(KeywordBase):
         self.lcy4 = value.lcid
 
     @property
-    def lcy5_link(self) -> DefineCurve:
+    def lcy5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcy5."""
         if self.deck is None:
             return None
@@ -1560,7 +1575,7 @@ class MatPhsBmw(KeywordBase):
         self.lcy5 = value.lcid
 
     @property
-    def lceps23_link(self) -> DefineCurve:
+    def lceps23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lceps23."""
         if self.deck is None:
             return None
@@ -1575,7 +1590,7 @@ class MatPhsBmw(KeywordBase):
         self.lceps23 = value.lcid
 
     @property
-    def lceps4_link(self) -> DefineCurve:
+    def lceps4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lceps4."""
         if self.deck is None:
             return None
@@ -1590,7 +1605,7 @@ class MatPhsBmw(KeywordBase):
         self.lceps4 = value.lcid
 
     @property
-    def lceps5_link(self) -> DefineCurve:
+    def lceps5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lceps5."""
         if self.deck is None:
             return None
@@ -1605,7 +1620,7 @@ class MatPhsBmw(KeywordBase):
         self.lceps5 = value.lcid
 
     @property
-    def lch4_link(self) -> DefineCurve:
+    def lch4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lch4."""
         if self.deck is None:
             return None
@@ -1620,7 +1635,7 @@ class MatPhsBmw(KeywordBase):
         self.lch4 = value.lcid
 
     @property
-    def lch5_link(self) -> DefineCurve:
+    def lch5_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lch5."""
         if self.deck is None:
             return None

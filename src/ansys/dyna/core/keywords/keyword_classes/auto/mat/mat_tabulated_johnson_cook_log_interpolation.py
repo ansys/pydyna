@@ -66,8 +66,8 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "TABULATED_JOHNSON_COOK_LOG_INTERPOLATION"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcg": LinkType.DEFINE_CURVE,
@@ -85,14 +85,17 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKLOGINTERPOLATION_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKLOGINTERPOLATION_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATTABULATEDJOHNSONCOOKLOGINTERPOLATION_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatTabulatedJohnsonCookLogInterpolation.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatTabulatedJohnsonCookLogInterpolation._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATTABULATEDJOHNSONCOOKLOGINTERPOLATION_OPTION0_CARD0,
@@ -342,7 +345,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcg_link(self) -> DefineCurve:
+    def lcg_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcg."""
         if self.deck is None:
             return None
@@ -357,7 +360,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
         self.lcg = value.lcid
 
     @property
-    def lch_link(self) -> DefineCurve:
+    def lch_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lch."""
         if self.deck is None:
             return None
@@ -372,7 +375,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
         self.lch = value.lcid
 
     @property
-    def tabk1_link(self) -> KeywordBase:
+    def tabk1_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for tabk1."""
         if self.deck is None:
             return None
@@ -396,7 +399,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
             self.tabk1 = value.tbid
 
     @property
-    def lcf_link(self) -> KeywordBase:
+    def lcf_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcf."""
         if self.deck is None:
             return None
@@ -420,7 +423,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
             self.lcf = value.tbid
 
     @property
-    def lci_link(self) -> KeywordBase:
+    def lci_link(self) -> typing.Optional[KeywordBase]:
         """Get the linked DEFINE_CURVE or DEFINE_TABLE for lci."""
         if self.deck is None:
             return None

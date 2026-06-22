@@ -44,7 +44,8 @@ class ControlImplicitOrdering(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITORDERING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def order(self) -> int:
         """Get or set the Ordering option (see Remark 1):

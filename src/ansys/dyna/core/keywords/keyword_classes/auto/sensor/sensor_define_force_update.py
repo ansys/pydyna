@@ -52,8 +52,8 @@ class SensorDefineForceUpdate(KeywordBase):
 
     keyword = "SENSOR"
     subkeyword = "DEFINE_FORCE_UPDATE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "vid": LinkType.DEFINE_COORDINATE_SYSTEM,
@@ -68,11 +68,13 @@ class SensorDefineForceUpdate(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _SENSORDEFINEFORCEUPDATE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _SENSORDEFINEFORCEUPDATE_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = SensorDefineForceUpdate.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = SensorDefineForceUpdate._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _SENSORDEFINEFORCEUPDATE_OPTION0_CARD0,
@@ -202,7 +204,7 @@ class SensorDefineForceUpdate(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def vid_link(self) -> DefineCoordinateSystem:
+    def vid_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for vid."""
         if self.deck is None:
             return None
@@ -217,7 +219,7 @@ class SensorDefineForceUpdate(KeywordBase):
         self.vid = value.cid
 
     @property
-    def crd_link(self) -> DefineCoordinateSystem:
+    def crd_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for crd."""
         if self.deck is None:
             return None

@@ -59,7 +59,8 @@ class LoadMotionNode(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _LOADMOTIONNODE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def node1(self) -> typing.Optional[int]:
         """Get or set the Node ID for the concentrated force
@@ -175,17 +176,17 @@ class LoadMotionNode(KeywordBase):
         self._cards[0].set_value("cid2", value)
 
     @property
-    def node1_link(self) -> KeywordBase:
+    def node1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node1."""
         return self._get_link_by_attr("NODE", "nid", self.node1, "parts")
 
     @property
-    def node2_link(self) -> KeywordBase:
+    def node2_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given node2."""
         return self._get_link_by_attr("NODE", "nid", self.node2, "parts")
 
     @property
-    def cid1_link(self) -> DefineCoordinateSystem:
+    def cid1_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid1."""
         if self.deck is None:
             return None
@@ -200,7 +201,7 @@ class LoadMotionNode(KeywordBase):
         self.cid1 = value.cid
 
     @property
-    def cid2_link(self) -> DefineCoordinateSystem:
+    def cid2_link(self) -> typing.Optional[DefineCoordinateSystem]:
         """Get the DefineCoordinateSystem object for cid2."""
         if self.deck is None:
             return None

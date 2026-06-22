@@ -47,8 +47,8 @@ class DefineSphMeshSurface(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "SPH_MESH_SURFACE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "sphxid": LinkType.SECTION,
@@ -64,8 +64,9 @@ class DefineSphMeshSurface(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINESPHMESHSURFACE_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineSphMeshSurface.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineSphMeshSurface._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINESPHMESHSURFACE_OPTION0_CARD0,
@@ -175,7 +176,7 @@ class DefineSphMeshSurface(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def sphxid_link(self) -> KeywordBase:
+    def sphxid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SECTION_* keyword for sphxid."""
         if self.deck is None:
             return None
@@ -190,7 +191,7 @@ class DefineSphMeshSurface(KeywordBase):
         self.sphxid = value.secid
 
     @property
-    def nsid_link(self) -> KeywordBase:
+    def nsid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_NODE_* keyword for nsid."""
         return self._get_set_link("NODE", self.nsid)
 
@@ -200,7 +201,7 @@ class DefineSphMeshSurface(KeywordBase):
         self.nsid = value.sid
 
     @property
-    def sphpid_link(self) -> KeywordBase:
+    def sphpid_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given sphpid."""
         return self._get_link_by_attr("PART", "pid", self.sphpid, "parts")
 

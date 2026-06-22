@@ -73,16 +73,20 @@ class BoundaryElementMethodAcoustic(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYELEMENTMETHODACOUSTIC_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYELEMENTMETHODACOUSTIC_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYELEMENTMETHODACOUSTIC_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYELEMENTMETHODACOUSTIC_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ro(self) -> typing.Optional[float]:
         """Get or set the Fluid Density

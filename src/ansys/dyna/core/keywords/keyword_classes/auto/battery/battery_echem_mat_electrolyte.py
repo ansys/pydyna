@@ -55,10 +55,12 @@ class BatteryEchemMatElectrolyte(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BATTERYECHEMMATELECTROLYTE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BATTERYECHEMMATELECTROLYTE_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part number identifier

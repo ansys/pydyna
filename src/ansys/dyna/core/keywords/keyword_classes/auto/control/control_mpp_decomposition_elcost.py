@@ -43,7 +43,8 @@ class ControlMppDecompositionElcost(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPDECOMPOSITIONELCOST_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def itype(self) -> int:
         """Get or set the Hardware specific cost profile.

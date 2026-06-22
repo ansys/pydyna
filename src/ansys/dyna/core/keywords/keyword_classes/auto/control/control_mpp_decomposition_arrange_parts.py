@@ -46,7 +46,8 @@ class ControlMppDecompositionArrangeParts(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLMPPDECOMPOSITIONARRANGEPARTS_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Part ID/Part set ID

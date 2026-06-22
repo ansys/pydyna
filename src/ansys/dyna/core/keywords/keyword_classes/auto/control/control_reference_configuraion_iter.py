@@ -54,13 +54,16 @@ class ControlReferenceConfiguraionIter(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLREFERENCECONFIGURAIONITER_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLREFERENCECONFIGURAIONITER_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _CONTROLREFERENCECONFIGURAIONITER_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def maxiter(self) -> typing.Optional[int]:
         """Get or set the The maximum number of iterations in the iterative method

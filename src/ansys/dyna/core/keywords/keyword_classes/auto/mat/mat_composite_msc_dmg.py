@@ -112,8 +112,8 @@ class MatCompositeMscDmg(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "COMPOSITE_MSC_DMG"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -124,29 +124,37 @@ class MatCompositeMscDmg(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATCOMPOSITEMSCDMG_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCOMPOSITEMSCDMG_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCOMPOSITEMSCDMG_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCOMPOSITEMSCDMG_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCOMPOSITEMSCDMG_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCOMPOSITEMSCDMG_CARD5,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCOMPOSITEMSCDMG_CARD6,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCOMPOSITEMSCDMG_CARD7,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatCompositeMscDmg.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatCompositeMscDmg._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCOMPOSITEMSCDMG_OPTION0_CARD0,

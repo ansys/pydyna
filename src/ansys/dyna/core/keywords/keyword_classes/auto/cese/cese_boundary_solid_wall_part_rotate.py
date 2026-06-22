@@ -55,7 +55,8 @@ class CeseBoundarySolidWallPartRotate(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CESEBOUNDARYSOLIDWALLPARTROTATE_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def surfprt(self) -> typing.Optional[int]:
         """Get or set the Surface part ID referenced in *MESH_SURFACE_ELEMENT cards.
@@ -145,7 +146,7 @@ class CeseBoundarySolidWallPartRotate(KeywordBase):
         self._cards[0].set_value("nz", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

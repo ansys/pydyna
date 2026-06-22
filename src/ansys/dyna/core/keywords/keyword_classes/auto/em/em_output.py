@@ -49,7 +49,8 @@ class EmOutput(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMOUTPUT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mats(self) -> int:
         """Get or set the Level of matrix assembly output to the screen:

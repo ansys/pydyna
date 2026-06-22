@@ -76,13 +76,16 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDORIENTATIONRIGIDDIRCOS_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDORIENTATIONRIGIDDIRCOS_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _BOUNDARYPRESCRIBEDORIENTATIONRIGIDDIRCOS_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pidb(self) -> typing.Optional[int]:
         """Get or set the Part ID for rigid body B whose orientation is prescribed
@@ -255,7 +258,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
         self._cards[2].set_value("lcidc33", value)
 
     @property
-    def lcidc11_link(self) -> DefineCurve:
+    def lcidc11_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidc11."""
         if self.deck is None:
             return None
@@ -270,7 +273,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
         self.lcidc11 = value.lcid
 
     @property
-    def lcidc12_link(self) -> DefineCurve:
+    def lcidc12_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidc12."""
         if self.deck is None:
             return None
@@ -285,7 +288,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
         self.lcidc12 = value.lcid
 
     @property
-    def lcidc13_link(self) -> DefineCurve:
+    def lcidc13_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidc13."""
         if self.deck is None:
             return None
@@ -300,7 +303,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
         self.lcidc13 = value.lcid
 
     @property
-    def lcidc21_link(self) -> DefineCurve:
+    def lcidc21_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidc21."""
         if self.deck is None:
             return None
@@ -315,7 +318,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
         self.lcidc21 = value.lcid
 
     @property
-    def lcidc22_link(self) -> DefineCurve:
+    def lcidc22_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidc22."""
         if self.deck is None:
             return None
@@ -330,7 +333,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
         self.lcidc22 = value.lcid
 
     @property
-    def lcidc23_link(self) -> DefineCurve:
+    def lcidc23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidc23."""
         if self.deck is None:
             return None
@@ -345,7 +348,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
         self.lcidc23 = value.lcid
 
     @property
-    def lcidc31_link(self) -> DefineCurve:
+    def lcidc31_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidc31."""
         if self.deck is None:
             return None
@@ -360,7 +363,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
         self.lcidc31 = value.lcid
 
     @property
-    def lcidc32_link(self) -> DefineCurve:
+    def lcidc32_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidc32."""
         if self.deck is None:
             return None
@@ -375,7 +378,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
         self.lcidc32 = value.lcid
 
     @property
-    def lcidc33_link(self) -> DefineCurve:
+    def lcidc33_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcidc33."""
         if self.deck is None:
             return None

@@ -66,16 +66,20 @@ class IcfdControlOutputVar(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLOUTPUTVAR_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLOUTPUTVAR_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLOUTPUTVAR_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLOUTPUTVAR_CARD3,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def vel(self) -> int:
         """Get or set the Velocity :

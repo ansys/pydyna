@@ -54,10 +54,12 @@ class FrequencyDomainAcousticSoundSpeed(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICSOUNDSPEED_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINACOUSTICSOUNDSPEED_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Complex sound speed ID.
@@ -92,7 +94,7 @@ class FrequencyDomainAcousticSoundSpeed(KeywordBase):
         self._cards[1].set_value("lcid2", value)
 
     @property
-    def lcid1_link(self) -> DefineCurve:
+    def lcid1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid1."""
         if self.deck is None:
             return None
@@ -107,7 +109,7 @@ class FrequencyDomainAcousticSoundSpeed(KeywordBase):
         self.lcid1 = value.lcid
 
     @property
-    def lcid2_link(self) -> DefineCurve:
+    def lcid2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid2."""
         if self.deck is None:
             return None

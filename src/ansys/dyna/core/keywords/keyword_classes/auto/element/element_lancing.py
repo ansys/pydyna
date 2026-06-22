@@ -55,7 +55,8 @@ class ElementLancing(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ELEMENTLANCING_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def idpt(self) -> typing.Optional[int]:
         """Get or set the PID of the sheet blank to be lanced, see *PART.
@@ -141,7 +142,7 @@ class ElementLancing(KeywordBase):
         self._cards[0].set_value("ntimes", value)
 
     @property
-    def idcv_link(self) -> DefineCurve:
+    def idcv_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for idcv."""
         if self.deck is None:
             return None
@@ -156,7 +157,7 @@ class ElementLancing(KeywordBase):
         self.idcv = value.lcid
 
     @property
-    def idpt_link(self) -> KeywordBase:
+    def idpt_link(self) -> typing.Optional[KeywordBase]:
         """Get the PART keyword containing the given idpt."""
         return self._get_link_by_attr("PART", "pid", self.idpt, "parts")
 

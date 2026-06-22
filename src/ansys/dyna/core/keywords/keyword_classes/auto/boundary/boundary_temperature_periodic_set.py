@@ -58,7 +58,8 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _BOUNDARYTEMPERATUREPERIODICSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ssid1(self) -> typing.Optional[int]:
         """Get or set the First Segment set on which the periodic temperature boundary condition will be applied.
@@ -145,12 +146,12 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
         self._cards[0].set_value("angle", value)
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def tdlcid_link(self) -> DefineCurve:
+    def tdlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for tdlcid."""
         if self.deck is None:
             return None
@@ -165,7 +166,7 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
         self.tdlcid = value.lcid
 
     @property
-    def ssid1_link(self) -> KeywordBase:
+    def ssid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid1."""
         return self._get_set_link("SEGMENT", self.ssid1)
 
@@ -175,7 +176,7 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
         self.ssid1 = value.sid
 
     @property
-    def ssid2_link(self) -> KeywordBase:
+    def ssid2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for ssid2."""
         return self._get_set_link("SEGMENT", self.ssid2)
 

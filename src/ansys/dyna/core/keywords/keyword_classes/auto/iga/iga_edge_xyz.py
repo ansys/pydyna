@@ -48,7 +48,8 @@ class IgaEdgeXyz(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _IGAEDGEXYZ_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def eid(self) -> typing.Optional[int]:
         """Get or set the Physical edge ID. A unique number must be chosen.

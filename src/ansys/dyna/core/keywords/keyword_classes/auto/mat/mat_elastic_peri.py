@@ -44,8 +44,8 @@ class MatElasticPeri(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ELASTIC_PERI"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
 
     def __init__(self, **kwargs):
@@ -56,8 +56,9 @@ class MatElasticPeri(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATELASTICPERI_CARD0,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatElasticPeri.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatElasticPeri._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATELASTICPERI_OPTION0_CARD0,

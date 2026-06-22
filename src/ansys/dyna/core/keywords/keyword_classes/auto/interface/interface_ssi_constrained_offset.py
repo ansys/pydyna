@@ -64,13 +64,16 @@ class InterfaceSsiConstrainedOffset(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACESSICONSTRAINEDOFFSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACESSICONSTRAINEDOFFSET_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INTERFACESSICONSTRAINEDOFFSET_CARD2,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Soil-structure interface ID. This is required and must be unique amongst all the contact interface IDs in the model.
@@ -197,7 +200,7 @@ class InterfaceSsiConstrainedOffset(KeywordBase):
         self._cards[2].set_value("memgm", value)
 
     @property
-    def strid_link(self) -> KeywordBase:
+    def strid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for strid."""
         return self._get_set_link("SEGMENT", self.strid)
 
@@ -207,7 +210,7 @@ class InterfaceSsiConstrainedOffset(KeywordBase):
         self.strid = value.sid
 
     @property
-    def soilid_link(self) -> KeywordBase:
+    def soilid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SEGMENT_* keyword for soilid."""
         return self._get_set_link("SEGMENT", self.soilid)
 

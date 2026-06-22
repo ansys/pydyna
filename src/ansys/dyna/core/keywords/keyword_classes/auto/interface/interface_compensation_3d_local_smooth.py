@@ -54,7 +54,8 @@ class InterfaceCompensation3DLocalSmooth(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPENSATION3DLOCALSMOOTH_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def method(self) -> int:
         """Get or set the There are several extrapolation methods for the addendum and binder outside of trim lines, see Remarks.
@@ -175,7 +176,7 @@ class InterfaceCompensation3DLocalSmooth(KeywordBase):
         self._cards[0].set_value("nlinear", value)
 
     @property
-    def psidp_link(self) -> KeywordBase:
+    def psidp_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psidp."""
         return self._get_set_link("PART", self.psidp)
 

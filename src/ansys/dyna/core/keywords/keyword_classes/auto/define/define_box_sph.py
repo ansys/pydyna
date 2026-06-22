@@ -60,8 +60,8 @@ class DefineBoxSph(KeywordBase):
 
     keyword = "DEFINE"
     subkeyword = "BOX_SPH"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "nid": LinkType.NODE,
@@ -76,11 +76,13 @@ class DefineBoxSph(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DEFINEBOXSPH_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _DEFINEBOXSPH_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = DefineBoxSph.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = DefineBoxSph._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEBOXSPH_OPTION0_CARD0,
@@ -290,12 +292,12 @@ class DefineBoxSph(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def nid_link(self) -> KeywordBase:
+    def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
-    def vid_link(self) -> DefineVector:
+    def vid_link(self) -> typing.Optional[DefineVector]:
         """Get the DefineVector object for vid."""
         if self.deck is None:
             return None

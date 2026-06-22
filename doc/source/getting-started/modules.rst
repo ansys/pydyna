@@ -1,8 +1,8 @@
 Modules
 =======
-PyDYNA consists of four modules, ``ansys.dyna.core.pre``, ``ansys.dyna.core.solver``,
-``ansys.dyna.core.run``, and ``ansys.dyna.core.keywords``.
-learn about the different modules in PyDYNA.
+PyDYNA consists of two main modules: ``ansys.dyna.core.run`` and ``ansys.dyna.core.keywords``.
+
+Learn more about these modules in the sections below.
 
 .. grid:: 2 2 3 3
    :gutter: 3 3 4 4
@@ -19,16 +19,9 @@ learn about the different modules in PyDYNA.
 
         Run LS-DYNA using the ``run`` module.
 
-   .. grid-item-card:: PyDYNA server
-        :link: modules/server
-        :link-type: doc
-    
-        Run the LS-DYNA server locally or in a Docker container.
-
 .. toctree::
     :hidden:
     :maxdepth: 2
 
     modules/keywords
     modules/run
-    modules/server

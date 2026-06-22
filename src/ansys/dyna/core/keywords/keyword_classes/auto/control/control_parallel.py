@@ -46,7 +46,8 @@ class ControlParallel(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _CONTROLPARALLEL_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def ncpu(self) -> int:
         """Get or set the Number of cpus used.

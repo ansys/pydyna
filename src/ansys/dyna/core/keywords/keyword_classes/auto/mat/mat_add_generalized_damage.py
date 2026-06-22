@@ -94,8 +94,8 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "ADD_GENERALIZED_DAMAGE"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "mid": LinkType.MAT,
@@ -113,23 +113,29 @@ class MatAddGeneralizedDamage(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATADDGENERALIZEDDAMAGE_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDGENERALIZEDDAMAGE_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDGENERALIZEDDAMAGE_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDGENERALIZEDDAMAGE_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDGENERALIZEDDAMAGE_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATADDGENERALIZEDDAMAGE_CARD5,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatAddGeneralizedDamage.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatAddGeneralizedDamage._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATADDGENERALIZEDDAMAGE_OPTION0_CARD0,
@@ -636,7 +642,7 @@ class MatAddGeneralizedDamage(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def mid_link(self) -> KeywordBase:
+    def mid_link(self) -> typing.Optional[KeywordBase]:
         """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None
@@ -651,7 +657,7 @@ class MatAddGeneralizedDamage(KeywordBase):
         self.mid = value.mid
 
     @property
-    def lcsdg_link(self) -> DefineCurve:
+    def lcsdg_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsdg."""
         if self.deck is None:
             return None
@@ -666,7 +672,7 @@ class MatAddGeneralizedDamage(KeywordBase):
         self.lcsdg = value.lcid
 
     @property
-    def lcreg_link(self) -> DefineCurve:
+    def lcreg_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcreg."""
         if self.deck is None:
             return None
@@ -681,7 +687,7 @@ class MatAddGeneralizedDamage(KeywordBase):
         self.lcreg = value.lcid
 
     @property
-    def lcsrs_link(self) -> DefineCurve:
+    def lcsrs_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsrs."""
         if self.deck is None:
             return None
@@ -696,7 +702,7 @@ class MatAddGeneralizedDamage(KeywordBase):
         self.lcsrs = value.lcid
 
     @property
-    def lcdlim_link(self) -> DefineCurve:
+    def lcdlim_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdlim."""
         if self.deck is None:
             return None

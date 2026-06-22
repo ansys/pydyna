@@ -62,8 +62,8 @@ class MatConcreteBeam(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "CONCRETE_BEAM"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lcss": LinkType.DEFINE_CURVE,
@@ -78,14 +78,17 @@ class MatConcreteBeam(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MATCONCRETEBEAM_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCONCRETEBEAM_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MATCONCRETEBEAM_CARD2,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = MatConcreteBeam.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = MatConcreteBeam._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MATCONCRETEBEAM_OPTION0_CARD0,
@@ -286,7 +289,7 @@ class MatConcreteBeam(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcss_link(self) -> DefineCurve:
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcss."""
         if self.deck is None:
             return None
@@ -301,7 +304,7 @@ class MatConcreteBeam(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lcsr_link(self) -> DefineCurve:
+    def lcsr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcsr."""
         if self.deck is None:
             return None

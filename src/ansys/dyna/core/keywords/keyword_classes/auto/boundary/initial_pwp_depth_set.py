@@ -48,7 +48,8 @@ class InitialPwpDepthSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INITIALPWPDEPTHSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the Part set ID, see also *PART.
@@ -72,7 +73,7 @@ class InitialPwpDepthSet(KeywordBase):
         self._cards[0].set_value("lc", value)
 
     @property
-    def pid_link(self) -> KeywordBase:
+    def pid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for pid."""
         return self._get_set_link("PART", self.pid)
 

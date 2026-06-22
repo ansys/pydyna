@@ -56,8 +56,8 @@ class Mat019(KeywordBase):
 
     keyword = "MAT"
     subkeyword = "019"
-    option_specs = [
-        OptionSpec("TITLE", -1, 1),
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
         "lc1": LinkType.DEFINE_CURVE,
@@ -74,11 +74,13 @@ class Mat019(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _MAT019_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _MAT019_CARD1,
                 **kwargs,
-            ),            OptionCardSet(
-                option_spec = Mat019.option_specs[0],
+            ),
+            OptionCardSet(
+                option_spec = Mat019._option_spec_list[0],
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _MAT019_OPTION0_CARD0,
@@ -244,7 +246,7 @@ class Mat019(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lc1_link(self) -> DefineCurve:
+    def lc1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc1."""
         if self.deck is None:
             return None
@@ -259,7 +261,7 @@ class Mat019(KeywordBase):
         self.lc1 = value.lcid
 
     @property
-    def lc2_link(self) -> DefineCurve:
+    def lc2_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc2."""
         if self.deck is None:
             return None
@@ -274,7 +276,7 @@ class Mat019(KeywordBase):
         self.lc2 = value.lcid
 
     @property
-    def lc3_link(self) -> DefineCurve:
+    def lc3_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc3."""
         if self.deck is None:
             return None
@@ -289,7 +291,7 @@ class Mat019(KeywordBase):
         self.lc3 = value.lcid
 
     @property
-    def lc4_link(self) -> DefineCurve:
+    def lc4_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lc4."""
         if self.deck is None:
             return None

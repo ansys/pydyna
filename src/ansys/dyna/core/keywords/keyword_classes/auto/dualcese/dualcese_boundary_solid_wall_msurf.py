@@ -52,7 +52,8 @@ class DualceseBoundarySolidWallMsurf(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DUALCESEBOUNDARYSOLIDWALLMSURF_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def mspid(self) -> typing.Optional[int]:
         """Get or set the Mesh surface part ID that is referenced by *MESH_SURFACE_ELEMENT cards
@@ -115,7 +116,7 @@ class DualceseBoundarySolidWallMsurf(KeywordBase):
         self._cards[0].set_value("vz", value)
 
     @property
-    def lcid_link(self) -> DefineCurve:
+    def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
             return None

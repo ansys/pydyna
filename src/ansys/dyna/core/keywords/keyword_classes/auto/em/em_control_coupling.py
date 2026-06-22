@@ -64,10 +64,12 @@ class EmControlCoupling(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _EMCONTROLCOUPLING_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _EMCONTROLCOUPLING_CARD1,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def thcoupl(self) -> int:
         """Get or set the Coupling to the thermal solver. When turned on, the EM solver will transfer the Joule heating terms to the solid mechanics thermal solver.
@@ -222,7 +224,7 @@ class EmControlCoupling(KeywordBase):
         self._cards[1].set_value("dfz", value)
 
     @property
-    def thlcid_link(self) -> DefineCurve:
+    def thlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for thlcid."""
         if self.deck is None:
             return None
@@ -237,7 +239,7 @@ class EmControlCoupling(KeywordBase):
         self.thlcid = value.lcid
 
     @property
-    def smlcid_link(self) -> DefineCurve:
+    def smlcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for smlcid."""
         if self.deck is None:
             return None
@@ -252,7 +254,7 @@ class EmControlCoupling(KeywordBase):
         self.smlcid = value.lcid
 
     @property
-    def thcplfl_link(self) -> DefineCurve:
+    def thcplfl_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for thcplfl."""
         if self.deck is None:
             return None

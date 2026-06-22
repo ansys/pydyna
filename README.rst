@@ -3,7 +3,7 @@ PyDYNA
 
 .. readme_start
 
-|pyansys| |python| |pypi| |GH-CI| |codecov| |MIT| |black| |Ask DeepWiki|
+|pyansys| |python| |pypi| |GH-CI| |codecov| |MIT| |ruff| |Ask DeepWiki|
 
 .. |pyansys| image:: https://img.shields.io/badge/Py-Ansys-ffc107.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABDklEQVQ4jWNgoDfg5mD8vE7q/3bpVyskbW0sMRUwofHD7Dh5OBkZGBgW7/3W2tZpa2tLQEOyOzeEsfumlK2tbVpaGj4N6jIs1lpsDAwMJ278sveMY2BgCA0NFRISwqkhyQ1q/Nyd3zg4OBgYGNjZ2ePi4rB5loGBhZnhxTLJ/9ulv26Q4uVk1NXV/f///////69du4Zdg78lx//t0v+3S88rFISInD59GqIH2esIJ8G9O2/XVwhjzpw5EAam1xkkBJn/bJX+v1365hxxuCAfH9+3b9/+////48cPuNehNsS7cDEzMTAwMMzb+Q2u4dOnT2vWrMHu9ZtzxP9vl/69RVpCkBlZ3N7enoDXBwEAAA+YYitOilMVAAAAAElFTkSuQmCC
    :target: https://docs.pyansys.com/
@@ -29,9 +29,9 @@ PyDYNA
    :target: https://opensource.org/licenses/MIT
    :alt: MIT
 
-.. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg?style=flat
-   :target: https://github.com/psf/black
-   :alt: Black
+.. |ruff| image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
+   :target: https://github.com/astral-sh/ruff
+   :alt: Ruff
 
 .. |Ask DeepWiki| image:: https://deepwiki.com/badge.svg
    :target: https://deepwiki.com/ansys/pydyna
@@ -42,22 +42,11 @@ Overview
 PyDYNA is a Pythonic package for providing a more convenient and complete way to
 build an Ansys DYNA input deck, submit it to the Ansys LS-DYNA solver, and
 finally postprocess the results.
+ 
+Pydyna contains two modules:
 
-PyDYNA contains three submodules, ``ansys.dyna.core.pre``, ``ansys.dyna.core.solver``, and ``ansys.dyna.core.run``.
-
-- ``pre``: This module provides highly abstracted APIs for creating and
-  setting up DYNA input decks. There are many classes supported, namely,
-  DynaMech, DynaIGA, DynaICFD, DynaSALE, DynaEM,DynaNVH, DynaMaterial,
-  DynaISPH, DynaICFD and DynaAirbag. Each of these classes can be used to generate
-  LS-DYNA keywords. Since these classes have high-level abstraction, each function call
-  generates groups of keywords needed to define an input in LS-DYNA.
-- ``solver``: This API provides features to interact directly with the Ansys LS-DYNA solver.
-  LS-DYNA is primarily a batch solver with very limited interactive capabilities, the
-  ``solver`` service provides a way to push input files to the LS-DYNA solver, monitor the state
-  of the running job, change the value of a load curve and finally retrieve result files back from
-  the server
-- ``run``: This module provides the ability to start the LS-DYNA solver. This does not require any
-  client-server library or Docker container.
+- ``keywords``: This module provides the ability to create keyword files for LS-DYNA without using gRPC.
+- ``run``: This module provides the ability to start the LS-DYNA solver. This does not require any client-server library or Docker container.
 
 Once you have results, you can use the Ansys Data Processing Framework (DPF),
 which is designed to provide numerical simulation users and engineers

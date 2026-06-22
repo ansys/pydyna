@@ -100,22 +100,28 @@ class IncludeStampedSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDSET_CARD0,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDSET_CARD1,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDSET_CARD2,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDSET_CARD3,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDSET_CARD4,
                 **kwargs,
-            ),            Card.from_field_schemas_with_defaults(
+            ),
+            Card.from_field_schemas_with_defaults(
                 _INCLUDESTAMPEDSET_CARD5,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def filename(self) -> typing.Optional[str]:
         """Get or set the File name of file to be included in this keyword file.
@@ -491,37 +497,37 @@ class IncludeStampedSet(KeywordBase):
         self._cards[5].set_value("z03", value)
 
     @property
-    def n1s_link(self) -> KeywordBase:
+    def n1s_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1s."""
         return self._get_link_by_attr("NODE", "nid", self.n1s, "parts")
 
     @property
-    def n2s_link(self) -> KeywordBase:
+    def n2s_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2s."""
         return self._get_link_by_attr("NODE", "nid", self.n2s, "parts")
 
     @property
-    def n3s_link(self) -> KeywordBase:
+    def n3s_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n3s."""
         return self._get_link_by_attr("NODE", "nid", self.n3s, "parts")
 
     @property
-    def n1c_link(self) -> KeywordBase:
+    def n1c_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n1c."""
         return self._get_link_by_attr("NODE", "nid", self.n1c, "parts")
 
     @property
-    def n2c_link(self) -> KeywordBase:
+    def n2c_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n2c."""
         return self._get_link_by_attr("NODE", "nid", self.n2c, "parts")
 
     @property
-    def n3c_link(self) -> KeywordBase:
+    def n3c_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n3c."""
         return self._get_link_by_attr("NODE", "nid", self.n3c, "parts")
 
     @property
-    def psid_link(self) -> KeywordBase:
+    def psid_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_PART_* keyword for psid."""
         return self._get_set_link("PART", self.psid)
 

@@ -50,7 +50,8 @@ class IcfdControlAdapt(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _ICFDCONTROLADAPT_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def minh(self) -> typing.Optional[float]:
         """Get or set the Minimum mesh size allowed to the mesh generator. The resulting mesh will not have an element smaller than MINH even if the minimum size does not satisfy the maximum error.

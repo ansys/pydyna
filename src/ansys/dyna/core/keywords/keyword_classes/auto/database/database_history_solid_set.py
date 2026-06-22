@@ -61,7 +61,8 @@ class DatabaseHistorySolidSet(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _DATABASEHISTORYSOLIDSET_CARD0,
                 **kwargs,
-            ),        ]
+            ),
+        ]
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the Set ID of the first solid element set.
@@ -151,7 +152,7 @@ class DatabaseHistorySolidSet(KeywordBase):
         self._cards[0].set_value("id8", value)
 
     @property
-    def id1_link(self) -> KeywordBase:
+    def id1_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for id1."""
         return self._get_set_link("SOLID", self.id1)
 
@@ -161,7 +162,7 @@ class DatabaseHistorySolidSet(KeywordBase):
         self.id1 = value.sid
 
     @property
-    def id2_link(self) -> KeywordBase:
+    def id2_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for id2."""
         return self._get_set_link("SOLID", self.id2)
 
@@ -171,7 +172,7 @@ class DatabaseHistorySolidSet(KeywordBase):
         self.id2 = value.sid
 
     @property
-    def id3_link(self) -> KeywordBase:
+    def id3_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for id3."""
         return self._get_set_link("SOLID", self.id3)
 
@@ -181,7 +182,7 @@ class DatabaseHistorySolidSet(KeywordBase):
         self.id3 = value.sid
 
     @property
-    def id4_link(self) -> KeywordBase:
+    def id4_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for id4."""
         return self._get_set_link("SOLID", self.id4)
 
@@ -191,7 +192,7 @@ class DatabaseHistorySolidSet(KeywordBase):
         self.id4 = value.sid
 
     @property
-    def id5_link(self) -> KeywordBase:
+    def id5_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for id5."""
         return self._get_set_link("SOLID", self.id5)
 
@@ -201,7 +202,7 @@ class DatabaseHistorySolidSet(KeywordBase):
         self.id5 = value.sid
 
     @property
-    def id6_link(self) -> KeywordBase:
+    def id6_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for id6."""
         return self._get_set_link("SOLID", self.id6)
 
@@ -211,7 +212,7 @@ class DatabaseHistorySolidSet(KeywordBase):
         self.id6 = value.sid
 
     @property
-    def id7_link(self) -> KeywordBase:
+    def id7_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for id7."""
         return self._get_set_link("SOLID", self.id7)
 
@@ -221,7 +222,7 @@ class DatabaseHistorySolidSet(KeywordBase):
         self.id7 = value.sid
 
     @property
-    def id8_link(self) -> KeywordBase:
+    def id8_link(self) -> typing.Optional[KeywordBase]:
         """Get the SET_SOLID_* keyword for id8."""
         return self._get_set_link("SOLID", self.id8)
 
