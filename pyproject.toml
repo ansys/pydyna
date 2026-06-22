@@ -10,8 +10,8 @@ readme = "README.rst"
 requires-python = ">=3.10,<4"
 license = "MIT"
 license-files = ["LICENSE"]
-authors = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
-maintainers = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
+authors = [{ name = "Synopsys, Inc. and ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
+maintainers = [{ name = "Synopsys, Inc. and ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
 keywords = ["Ansys", "LS-DYNA", "keywords"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -169,6 +169,11 @@ template = "doc/changelog/template"
 start_string = ".. towncrier release notes start\n"
 title_format = "`{version} <https://github.com/ansys/pydyna/releases/tag/v{version}>`_ - {project_date}"
 issue_format = "`#{issue} <https://github.com/ansys/pydyna/pull/{issue}>`_"
+
+[[tool.towncrier.type]]
+directory = "breaking"
+name = "Breaking"
+showcontent = true
 
 [[tool.towncrier.type]]
 directory = "breaking"

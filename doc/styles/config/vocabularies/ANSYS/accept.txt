@@ -1,6 +1,8 @@
 ANSYS
 Ansys
 ansys
+Synopsys
+synopsys
 CPython
 DPF's
 docstring
