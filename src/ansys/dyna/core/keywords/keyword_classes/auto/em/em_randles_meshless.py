@@ -101,6 +101,7 @@ class EmRandlesMeshless(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _EMRANDLESMESHLESS_CARD3,
+                active_func=lambda: self.rdltype > 1,
                 **kwargs,
             ),
             Card.from_field_schemas_with_defaults(
