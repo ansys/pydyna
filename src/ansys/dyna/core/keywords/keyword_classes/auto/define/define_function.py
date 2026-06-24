@@ -37,17 +37,12 @@ _DEFINEFUNCTION_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
 
-_DEFINEFUNCTION_OPTION1_CARD0 = (
-    FieldSchema("title", str, 0, 80, None),
-)
-
 class DefineFunction(KeywordBase):
     """DYNA DEFINE_FUNCTION keyword"""
 
     keyword = "DEFINE"
     subkeyword = "FUNCTION"
     _option_spec_list = [
-        OptionSpec("TITLE", "pre/1", 1),
         OptionSpec("TITLE", "pre/1", 1),
     ]
 
@@ -66,16 +61,6 @@ class DefineFunction(KeywordBase):
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _DEFINEFUNCTION_OPTION0_CARD0,
-                        **kwargs,
-                    ),
-                ],
-                **kwargs
-            ),
-            OptionCardSet(
-                option_spec = DefineFunction._option_spec_list[1],
-                cards = [
-                    Card.from_field_schemas_with_defaults(
-                        _DEFINEFUNCTION_OPTION1_CARD0,
                         **kwargs,
                     ),
                 ],
@@ -123,20 +108,6 @@ class DefineFunction(KeywordBase):
     def title(self, value: str) -> None:
         """Set the title property."""
         self._cards[2].cards[0].set_value("title", value)
-
-        if value:
-            self.activate_option("TITLE")
-
-    @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the Additional title line
-        """ # nopep8
-        return self._cards[3].cards[0].get_value("title")
-
-    @title.setter
-    def title(self, value: str) -> None:
-        """Set the title property."""
-        self._cards[3].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
