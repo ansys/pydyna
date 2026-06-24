@@ -24,16 +24,6 @@
 
 # Manual keyword overrides - wrapped in try/except to support subset generation
 try:
-    from .manual.comment import Comment  # noqa: F401
-except ImportError:
-    pass
-
-try:
-    from .manual.define_function import DefineFunction  # noqa: F401
-except ImportError:
-    pass
-
-try:
     from .manual.define_table import DefineTable  # noqa: F401
 except ImportError:
     pass
