@@ -1300,6 +1300,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto import DefineFrictionErodingS
 from ansys.dyna.core.keywords.keyword_classes.auto import DefineFrictionOrientation
 from ansys.dyna.core.keywords.keyword_classes.auto import DefineFrictionScaling
 from ansys.dyna.core.keywords.keyword_classes.auto import DefineFrictionSingleSurface
+from ansys.dyna.core.keywords.keyword_classes.auto import DefineFunction
 from ansys.dyna.core.keywords.keyword_classes.auto import DefineFunctionTabulated
 from ansys.dyna.core.keywords.keyword_classes.auto import DefineGroundMotion
 from ansys.dyna.core.keywords.keyword_classes.auto import DefineHazProperties
