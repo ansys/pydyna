@@ -884,6 +884,19 @@
                     "ref": "function_card",
                     "name": "function"
                 }
+            ],
+            "add-option": [
+                {
+                    "card-order": "pre/1",
+                    "title-order": 1,
+                    "cards": [
+                        {
+                            "source": "additional-cards",
+                            "card-name": "TITLE"
+                        }
+                    ],
+                    "option-name": "TITLE"
+                }
             ]
         },
         "labels": {
