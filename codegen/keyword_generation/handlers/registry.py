@@ -239,7 +239,6 @@ def create_default_registry() -> HandlerRegistry:
         "add-field",
         "replace-card",
         "series-card",
-        "text-card",
         "add-option",
         "card-set",
         "conditional-card",

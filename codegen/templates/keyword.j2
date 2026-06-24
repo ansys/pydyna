@@ -18,7 +18,7 @@
 {% endif %}
 {# Generate schema definitions for regular Cards in the main keyword class #}
 {% for card in keyword_data.cards %}
-{% if not card.variable and not card.set and not card.table and not card.table_group and not card.external and not card.text %}
+{% if not card.variable and not card.set and not card.table and not card.table_group and not card.external %}
 _{{keyword_data.classname | upper}}_CARD{{loop.index0}} = (
 {% for field in card.fields %}
 {% set lookup_name = field.property_name if field.property_name else field.name %}
