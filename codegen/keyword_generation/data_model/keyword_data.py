@@ -41,7 +41,6 @@ from .metadata import (
     MixinImport,
     OptionGroup,
     TableCardMetadata,
-    TextCardMetadata,
     VariableCardMetadata,
 )
 
@@ -256,7 +255,6 @@ class Card:
     func: Optional[str] = None
     table: Optional[Union[TableCardMetadata, Dict[str, Any]]] = None
     variable: Optional[Union[VariableCardMetadata, Dict[str, Any]]] = None
-    text: Optional[Union[TextCardMetadata, Dict[str, Any]]] = None
     set: Optional[Dict[str, Any]] = None
     table_group: bool = False
     sub_cards: Optional[List["Card"]] = None
@@ -282,8 +280,6 @@ class Card:
         table = TableCardMetadata.from_dict(table_data) if isinstance(table_data, dict) else table_data
         variable_data = data.get("variable")
         variable = VariableCardMetadata.from_dict(variable_data) if isinstance(variable_data, dict) else variable_data
-        text_data = data.get("text")
-        text = TextCardMetadata.from_dict(text_data) if isinstance(text_data, dict) else text_data
         external_data = data.get("external")
         external = ExternalCardMetadata.from_dict(external_data) if isinstance(external_data, dict) else external_data
         # Convert sub_cards from dicts to Card instances
@@ -299,7 +295,6 @@ class Card:
             func=data.get("func"),
             table=table,
             variable=variable,
-            text=text,
             set=data.get("set"),
             table_group=data.get("table_group", False),
             sub_cards=sub_cards,
@@ -388,7 +383,6 @@ class KeywordData:
         table: Table card flag (added by TableCardHandler)
         table_group: Table card group flag (added by TableCardGroupHandler)
         variable: Series card flag (added by SeriesCardHandler)
-        text_card: Text card flag (added by TextCardHandler)
         dataclasses: Custom dataclass definitions (added by SeriesCardHandler)
         mixins: Mixin class names (added by ExternalCardHandler)
         mixin_imports: Mixin import specifications (added by ExternalCardHandler)
@@ -408,7 +402,6 @@ class KeywordData:
     table: bool = False
     table_group: bool = False
     variable: bool = False
-    text_card: bool = False
     dataclasses: Union[List[DataclassDefinition], List[Dict[str, Any]]] = field(
         default_factory=list
     )  # Empty list for templates

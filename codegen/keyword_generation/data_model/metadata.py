@@ -84,22 +84,6 @@ class VariableCardMetadata:
 
 
 @dataclass
-class TextCardMetadata:
-    """
-    Metadata for text cards (card['text']).
-
-    Used by text-card handler to create free-form text card properties.
-    """
-
-    name: str
-
-    @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "TextCardMetadata":
-        """Create from dictionary."""
-        return cls(name=data["name"])
-
-
-@dataclass
 class ExternalCardMetadata:
     """
     Metadata for external card implementation (card['external']).
