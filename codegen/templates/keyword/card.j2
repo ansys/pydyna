@@ -22,6 +22,9 @@
 {% elif card.table_group %}
 {% include 'keyword/card_types/table_card_group.j2' %}
 
+{% elif card.text %}
+{% include 'keyword/card_types/text_card.j2' %}
+
 {% elif card.external %}
             {{card.external.name}}(**kwargs)
 {% elif parent_name is defined and card_index is defined %}

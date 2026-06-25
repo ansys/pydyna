@@ -9,6 +9,16 @@
         """Set {{card.table.name}} from the dataframe df"""
         self._cards[{{card.index}}].table = df
 
+{% elif card.text %}
+    @property
+    def {{card.text.name}}(self) -> typing.Optional[str]:
+        """Get or set the {{card.text.name}} text."""
+        return self._cards[{{card.index}}].value
+
+    @{{card.text.name}}.setter
+    def {{card.text.name}}(self, value: str) -> None:
+        self._cards[{{card.index}}].value = value
+
 {% elif card.variable %}
     @property
     def {{card.variable.name}}(self) -> SeriesCard:

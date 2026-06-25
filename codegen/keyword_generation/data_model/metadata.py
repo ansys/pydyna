@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -81,6 +81,22 @@ class VariableCardMetadata:
             length_func=data.get("length_func"),
             active_func=data.get("active_func"),
         )
+
+
+@dataclass
+class TextCardMetadata:
+    """
+    Metadata for text cards (card['text']).
+
+    Used by text-card handler to create free-form text card properties.
+    """
+
+    name: str
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "TextCardMetadata":
+        """Create from dictionary."""
+        return cls(name=data["name"])
 
 
 @dataclass
