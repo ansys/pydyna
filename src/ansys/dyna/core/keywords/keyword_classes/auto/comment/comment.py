@@ -24,11 +24,8 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.text_card import TextCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-
-_COMMENT_CARD0 = (
-    FieldSchema("comment", str, 0, 80, None),
-)
 
 class Comment(KeywordBase):
     """DYNA COMMENT keyword"""
@@ -40,19 +37,14 @@ class Comment(KeywordBase):
         """Initialize the Comment class."""
         super().__init__(**kwargs)
         self._cards = [
-            Card.from_field_schemas_with_defaults(
-                _COMMENT_CARD0,
-                **kwargs,
-            ),
+            TextCard("comment", kwargs.get("comment")),
         ]
     @property
     def comment(self) -> typing.Optional[str]:
-        """Get or set the Any comment line.
-        """ # nopep8
-        return self._cards[0].get_value("comment")
+        """Get or set the comment text."""
+        return self._cards[0].value
 
     @comment.setter
     def comment(self, value: str) -> None:
-        """Set the comment property."""
-        self._cards[0].set_value("comment", value)
+        self._cards[0].value = value
 
