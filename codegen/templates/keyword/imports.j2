@@ -33,6 +33,9 @@ from ansys.dyna.core.lib.table_card_group import TableCardGroup
 {% if keyword_data.variable %}
 from ansys.dyna.core.lib.series_card import SeriesCard
 {% endif %}
+{% if keyword_data.text_card %}
+from ansys.dyna.core.lib.text_card import TextCard
+{% endif %}
 {% if keyword_data.options or (keyword_data.card_sets and keyword_data.card_sets.options) %}
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 {% endif %}

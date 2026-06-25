@@ -141,6 +141,7 @@ from .define_friction_eroding_single_surface import DefineFrictionErodingSingleS
 from .define_friction_orientation import DefineFrictionOrientation
 from .define_friction_scaling import DefineFrictionScaling
 from .define_friction_single_surface import DefineFrictionSingleSurface
+from .define_function import DefineFunction
 from .define_function_tabulated import DefineFunctionTabulated
 from .define_ground_motion import DefineGroundMotion
 from .define_haz_properties import DefineHazProperties
