@@ -81,7 +81,7 @@ doc = [
     "nbsphinx==0.9.8",
     "joblib==1.5.3",
     "ipython==8.39.0",
-    "jupyterlab==4.5.8",
+    "jupyterlab==4.5.9",
     "pyvista==0.48.4",
 ]
 
