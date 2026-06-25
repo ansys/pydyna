@@ -618,6 +618,14 @@
             "include_card": 0
         }
     },
+    "PART_COMPOSITE": {
+        "generation-options": {
+            "table-card": [
+                { "property-name": "layers", "ref": "layers_card" }
+            ]
+        },
+        "labels": { "layers_card": 2 }
+    },
     "PART_PART": {
         "generation-options": {
             "replace-card": [
