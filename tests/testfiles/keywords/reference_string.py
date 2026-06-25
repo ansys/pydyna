@@ -1621,6 +1621,32 @@ $#    temp    frther    r0toth      dudt     tempu
 $# usesocs       tau     flcid
          0                    """
 
+test_em_randles_meshless_rdltype_0_1 = """*EM_RANDLES_MESHLESS
+$#   rdlid   rdltype
+                   1
+$#       q        cq   socinit    soctou
+                                        
+$#   r0cha     r0dis    r10cha    r10dis    c10cha    c10dis
+                                                            
+$#    temp    unused    unused      dudt     tempu
+                                                 0
+$# usesocs       tau     flcid
+         0                    """
+
+test_em_randles_meshless_rdltype_2_3 = """*EM_RANDLES_MESHLESS
+$#   rdlid   rdltype
+                   3
+$#       q        cq   socinit    soctou
+                                        
+$#   r0cha     r0dis    r10cha    r10dis    c10cha    c10dis
+                                                            
+$#  r20cha    r20dis    c20cha    c20dis    r30cha    r30dis    c30cha    c30dis
+                                                                                
+$#    temp    unused    unused      dudt     tempu
+                                                 0
+$# usesocs       tau     flcid
+         0                    """
+
 test_em_randles_solid_rdltype_0_1 = """*EM_RANDLES_SOLID
 $#   rdlid   rdltype   rdlarea   ccppart   ccnpart   seppart   pelpart   nelpart
                    1         2                                                  

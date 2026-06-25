@@ -1688,6 +1688,12 @@ def test_multiline_include_keyword(ref_string):
         i.write()
 
 
+def test_em_randles_meshless_rdltype(ref_string):
+    s = kwd.EmRandlesMeshless(rdltype=1)
+    assert s.write() == ref_string.test_em_randles_meshless_rdltype_0_1
+    s = kwd.EmRandlesMeshless(rdltype=3)
+    assert s.write() == ref_string.test_em_randles_meshless_rdltype_2_3
+
 
 def test_em_randles_solid_rdltype(ref_string):
     s = kwd.EmRandlesSolid(rdltype=1)

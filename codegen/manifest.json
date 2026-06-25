@@ -3639,6 +3639,19 @@
             "temperature_coefficients_card": 3
         }
     },
+    "EM_RANDLES_MESHLESS": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.rdltype > 1",
+                    "ref": "temperature_coefficients_card"
+                }
+            ]
+        },
+        "labels": {
+            "temperature_coefficients_card": 3
+        }
+    },
     "EM_RANDLES_SOLID": {
         "generation-options": {
             "conditional-card": [
