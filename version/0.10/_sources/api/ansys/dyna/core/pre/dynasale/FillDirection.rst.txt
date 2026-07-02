@@ -1,0 +1,38 @@
+ansys.dyna.core.pre.dynasale.FillDirection
+==========================================
+
+.. py:class:: ansys.dyna.core.pre.dynasale.FillDirection(*args, **kwds)
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+
+   
+   Enumeration for fill direction in the S-ALE mesh.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: INSIDE_THE_GEOMETRY
+      :value: 0
+
+
+
+   .. py:attribute:: OUTSIDE_THE_GEOMETRY
+      :value: 1
+
+

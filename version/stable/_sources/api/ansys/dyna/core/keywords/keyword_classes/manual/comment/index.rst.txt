@@ -1,0 +1,26 @@
+ansys.dyna.core.keywords.keyword_classes.manual.comment
+=======================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.comment
+
+.. autoapi-nested-parse::
+
+   Module to define *COMMENT keyword with multiline support.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/comment/Comment
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.keyword_classes.manual.comment.Comment
+
+

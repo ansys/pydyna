@@ -1,0 +1,77 @@
+ansys.dyna.core.pre.dynaem.Isopotential
+=======================================
+
+.. py:class:: ansys.dyna.core.pre.dynaem.Isopotential(set=None, layer=EMRandlesLayer.DEFAULT)
+
+   
+   Defines an isopotential.
+
+   This method constrain nodes so that they have the same scalar potential value.
+
+   :Parameters:
+
+       **set** : :obj:`Set`
+           Segment set or node set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: isopotlist
+      :value: []
+
+
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: set
+      :value: None
+
+
+
+   .. py:attribute:: id
+      :value: 0
+
+
+
+   .. py:attribute:: rdltype
+      :value: 0
+
+
+
+   .. py:method:: create()
+
+      
+      Create an isopotential.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

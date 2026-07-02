@@ -1,0 +1,28 @@
+ansys.dyna.core.pre.errors.PydynaInvalidRoutineError
+====================================================
+
+.. py:exception:: ansys.dyna.core.pre.errors.PydynaInvalidRoutineError(msg='')
+
+   Bases: :py:obj:`RuntimeError`
+
+
+   
+   Provides the error raised when MAPDL is in the wrong routine.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!

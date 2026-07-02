@@ -1,0 +1,200 @@
+ansys.dyna.core.lib.cards.Cards
+===============================
+
+.. py:class:: ansys.dyna.core.lib.cards.Cards(keyword)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.option_card.OptionsInterface`
+
+
+   
+   Abstract base class for option card api interface.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: options
+      :type: ansys.dyna.core.lib.option_card.Options
+
+
+      
+      Gets the options_api of this keyword, if any
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: is_option_active(option: str) -> bool
+
+      
+      Returns True if the given option is active.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: activate_option(option: str) -> None
+
+      
+      Activate the given option.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: deactivate_option(option: str) -> None
+
+      
+      Deactivate the given option.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_option_spec(name: str) -> ansys.dyna.core.lib.option_card.OptionSpec
+
+      
+      Gets the option spec for the given name.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: option_specs
+      :type: Iterable[ansys.dyna.core.lib.option_card.OptionSpec]
+
+
+      
+      Gets all option specs for this keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(buf: TextIO, format: ansys.dyna.core.lib.format_type.format_type, comment: Optional[bool] = True, retain_parameters: bool = False, **kwargs)
+
+      
+      Writes the cards to `buf` using `format`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

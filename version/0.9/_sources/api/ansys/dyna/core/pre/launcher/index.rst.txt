@@ -1,0 +1,282 @@
+ansys.dyna.core.pre.launcher
+============================
+
+.. py:module:: ansys.dyna.core.pre.launcher
+
+.. autoapi-nested-parse::
+
+   Module for launching the pre service locally.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.launcher.LOCALHOST
+   ansys.dyna.core.pre.launcher.DYNAPRE_DEFAULT_PORT
+   ansys.dyna.core.pre.launcher.SERVER_PRE_VERSION
+   ansys.dyna.core.pre.launcher.MAX_MESSAGE_LENGTH
+   ansys.dyna.core.pre.launcher.server_path
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/pre/launcher/ServerThread
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.launcher.ServerThread
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.launcher.check_ports
+   ansys.dyna.core.pre.launcher.port_in_use
+   ansys.dyna.core.pre.launcher.get_virtualenv_path
+   ansys.dyna.core.pre.launcher.launch_grpc
+   ansys.dyna.core.pre.launcher.launch_remote_dynapre
+   ansys.dyna.core.pre.launcher.launch_dynapre
+
+
+Module Contents
+---------------
+
+.. py:data:: LOCALHOST
+   :value: '127.0.0.1'
+
+
+.. py:data:: DYNAPRE_DEFAULT_PORT
+   :value: 50051
+
+
+.. py:data:: SERVER_PRE_VERSION
+   :value: 'v0.4.6'
+
+
+.. py:data:: MAX_MESSAGE_LENGTH
+   :value: 8388608
+
+
+.. py:function:: check_ports(port_range, ip='localhost')
+
+   
+   Check the state of ports in a port range.
+
+
+   :Parameters:
+
+       **port_range**
+           ..
+
+       **ip** : :class:`python:str`, :obj:`optional`
+           IP address. The default is ``"localhost"``, in which case
+           ``"127.0.0.1"``is used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: port_in_use(port, host=LOCALHOST)
+
+   
+   Determine if a port is in use at a given host.
+
+
+   :Parameters:
+
+       **port** : :class:`python:int`
+           Port.
+
+       **host**
+           Host. The default is ``LOCALHOST``, in which case ``"127.0.0.1"``
+            is used.
+
+
+
+   :Returns:
+
+       ``True`` :obj:`when` :obj:`a` :obj:`port` :obj:`is` :obj:`in` :obj:`use` :obj:`at` :obj:`the` :obj:`given` :obj:`host`, ``False`` otherwise.
+           ..
+
+
+
+
+
+
+
+
+   .. rubric:: Notes
+
+   The port must "bind" the address. Just checking if a socket can be created
+   is insufficient because it is possible to run into permission
+   errors like this one:
+
+   "An attempt was made to access a socket in a way forbidden by its
+   access permissions."
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_virtualenv_path()
+
+   
+   Get the virtual environment path.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: launch_grpc(port=DYNAPRE_DEFAULT_PORT, ip=LOCALHOST, server_path='') -> tuple
+
+   
+   Launch the pre service locally in gRPC mode.
+
+
+   :Parameters:
+
+       **port** : :class:`python:int`, :obj:`optional`
+           Port to launch the pre service on. The default is ``DYNAPRE_DEFAULT_PORT``.
+           The final port is the first port available after (or including) this
+           port.
+
+       **ip** : :class:`python:str`, :obj:`optional`
+           IP address. The default is ``LOCALHOST``, in which case ``"127.0.0.1"``
+           is used.
+
+       **server_path** : :class:`python:str`, :obj:`optional`
+           Path to the pre service. The default is ``None``.
+
+
+
+   :Returns:
+
+       :class:`python:int`
+           Port number that the gRPC instance started on.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: launch_remote_dynapre(version=None, cleanup_on_exit=True) -> ansys.dyna.core.pre.dynasolution.DynaSolution
+
+   
+   Start DYNA PRE remotely using the product instance management API.
+
+   When calling this method, you need to ensure that you are in an environment where PyPIM is configured.
+   This can be verified with :func:`pypim.is_configured <ansys.platform.instancemanagement.is_configured>`.
+
+   :Parameters:
+
+       **version** : :class:`python:str`, :obj:`optional`
+           The DYNA version to run, in the 3 digits format, such as "212".
+           
+           If unspecified, the version will be chosen by the server.
+
+       **cleanup_on_exit** : :ref:`bool <python:bltin-boolean-values>`, :obj:`optional`
+           Exit DYNA when python exits or the dyna Python instance is
+           garbage collected.
+           
+           If unspecified, it will be cleaned up.
+
+
+
+   :Returns:
+
+       :obj:`ansys.dyna.core.pre.DynaSolution`
+           An instance of DynaSolution.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: launch_dynapre(port=50051, ip='localhost') -> ansys.dyna.core.pre.dynasolution.DynaSolution
+
+   
+   Start the pre service locally.
+
+
+   :Parameters:
+
+       **port** : :class:`python:int`, :obj:`optional`
+           Port to launch MAPDL gRPC on. The default is ``50051``.
+
+       **ip** : :ref:`bool <python:bltin-boolean-values>`, :obj:`optional`
+           IP address or host name of the PyDYNA instance to connect to.
+           The default is ``"localhost"``, in which case ``"127.0.0.1"``
+           is used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: server_path
+

@@ -1,0 +1,55 @@
+ansys.dyna.core.pre.dynaicfd
+============================
+
+.. py:module:: ansys.dyna.core.pre.dynaicfd
+
+.. autoapi-nested-parse::
+
+   ICFD API
+   ========
+
+   Module for creating an ICFD (incompressible computational fluid dynamics) DYNA input deck.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/pre/dynaicfd/DynaICFD
+   /api/ansys/dyna/core/pre/dynaicfd/ICFD_SurfRemeshMethod
+   /api/ansys/dyna/core/pre/dynaicfd/ICFD_AnalysisType
+   /api/ansys/dyna/core/pre/dynaicfd/ICFD_MessageLevel
+   /api/ansys/dyna/core/pre/dynaicfd/ICFD_CouplingForm
+   /api/ansys/dyna/core/pre/dynaicfd/ICFD_CouplingDirection
+   /api/ansys/dyna/core/pre/dynaicfd/ICFDAnalysis
+   /api/ansys/dyna/core/pre/dynaicfd/Compressible
+   /api/ansys/dyna/core/pre/dynaicfd/MatICFD
+   /api/ansys/dyna/core/pre/dynaicfd/ICFDDOF
+   /api/ansys/dyna/core/pre/dynaicfd/Vel
+   /api/ansys/dyna/core/pre/dynaicfd/ICFDPart
+   /api/ansys/dyna/core/pre/dynaicfd/ICFDVolumePart
+   /api/ansys/dyna/core/pre/dynaicfd/MeshedVolume
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynaicfd.DynaICFD
+   ansys.dyna.core.pre.dynaicfd.ICFD_SurfRemeshMethod
+   ansys.dyna.core.pre.dynaicfd.ICFD_AnalysisType
+   ansys.dyna.core.pre.dynaicfd.ICFD_MessageLevel
+   ansys.dyna.core.pre.dynaicfd.ICFD_CouplingForm
+   ansys.dyna.core.pre.dynaicfd.ICFD_CouplingDirection
+   ansys.dyna.core.pre.dynaicfd.ICFDAnalysis
+   ansys.dyna.core.pre.dynaicfd.Compressible
+   ansys.dyna.core.pre.dynaicfd.MatICFD
+   ansys.dyna.core.pre.dynaicfd.ICFDDOF
+   ansys.dyna.core.pre.dynaicfd.Vel
+   ansys.dyna.core.pre.dynaicfd.ICFDPart
+   ansys.dyna.core.pre.dynaicfd.ICFDVolumePart
+   ansys.dyna.core.pre.dynaicfd.MeshedVolume
+
+

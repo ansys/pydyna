@@ -1,0 +1,323 @@
+ansys.dyna.core.lib.deck_plotter
+================================
+
+.. py:module:: ansys.dyna.core.lib.deck_plotter
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.deck_plotter.get_nid_to_index_mapping
+   ansys.dyna.core.lib.deck_plotter.merge_keywords
+   ansys.dyna.core.lib.deck_plotter.process_nodes
+   ansys.dyna.core.lib.deck_plotter.shell_facet_array
+   ansys.dyna.core.lib.deck_plotter.solid_array
+   ansys.dyna.core.lib.deck_plotter.line_array
+   ansys.dyna.core.lib.deck_plotter.map_facet_nid_to_index
+   ansys.dyna.core.lib.deck_plotter.extract_shell_facets
+   ansys.dyna.core.lib.deck_plotter.extract_lines
+   ansys.dyna.core.lib.deck_plotter.extract_solids
+   ansys.dyna.core.lib.deck_plotter.get_pyvista
+   ansys.dyna.core.lib.deck_plotter.get_polydata
+   ansys.dyna.core.lib.deck_plotter.plot_deck
+
+
+Module Contents
+---------------
+
+.. py:function:: get_nid_to_index_mapping(nodes) -> Dict
+
+   
+   Given a node id, output the node index as a dict
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: merge_keywords(deck: ansys.dyna.core.Deck) -> Tuple[pandas.DataFrame, Dict]
+
+   
+   Merge mesh keywords.
+
+   Given a deck, merges specific keywords (NODE, ELEMENT_SHELL, ELEMENT_BEAM, ELEMENT_SOLID)
+   and returns tham as data frames.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: process_nodes(nodes_df)
+
+.. py:function:: shell_facet_array(facets: pandas.DataFrame) -> numpy.array
+
+   
+   Get the shell facet array from the DataFrame.
+
+   Facets are a pandas frame that is a sequence of integers
+   or NAs with max length of 8.
+   valid rows contain 3,4,6, or 8 items consecutive from the
+   left.  we don't plot quadratic edges so 6/8 collapse to 3/4
+   invalid rows are ignored, meaning they return an empty array
+   return an array of length 4 or 5 using the pyvista spec
+   for facets which includes a length prefix
+   [1,2,3]=>[3,1,2,3]
+   [1,2,3,0]=>[3,1,2,3]
+   [1,2,3,NA]=>[3,1,2,3]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: solid_array(solids: pandas.DataFrame)
+
+   
+   Get the solid array from the DataFrame.
+
+   Solids are a pandas frame that is a sequence of integers
+   or NAs with max length of 28.
+   valid rows contain 3, 4, 6, or 8 items consecutive from the
+   left.  We don't plot quadratic edges so 6/8 collapse to 3/4
+   invalid rows are ignored, meaning they return an empty array
+   return an array of length 4 or 5 using the pyvista spec
+   for facets which includes a length prefix
+   [1,2,3]=>[3,1,2,3]
+   [1,2,3,0]=>[3,1,2,3]
+   [1,2,3,NA]=>[3,1,2,3]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: line_array(lines: pandas.DataFrame) -> numpy.array
+
+   
+   Convert DataFrame to lines array.
+
+   `lines` is a pandas frame that is a sequence of integers
+   or NAs with max length of 2.
+   valid rows contain 2 items consecutive from the
+   left.
+   invalid rows are ignored, meaning they return an empty array
+   return an array of length 3 using the pyvista spec
+   for facets which includes a length prefix
+   [1,2,]=>[2,1,2]
+   [1,2,3,0]=>[]
+   [1,2,3,NA]=>[]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: map_facet_nid_to_index(flat_facets: numpy.array, mapping: Dict) -> numpy.array
+
+   
+   Convert mapping to numpy array.
+
+   Given a flat list of facets or lines, use the mapping from nid to python index
+   to output the numbering system for pyvista from the numbering from dyna
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: extract_shell_facets(shells: pandas.DataFrame, mapping)
+
+   
+   Extract shell faces from DataFrame.
+
+   Shells table comes in with the form
+   |  eid  | nid1 | nid2 | nid3 | nid4
+   |  1    | 10   | 11   | 12   |
+   |  20   | 21   | 22   | 23   | 24
+
+   but the array needed for pyvista polydata is
+   of the form where each element is prefixed by the length of the element node list
+   [3,10,11,12,4,21,22,23,24]
+
+   Take individual rows, extract the appropriate nid's and output a flat list of
+   facets for pyvista
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: extract_lines(beams: pandas.DataFrame, mapping: Dict[int, int]) -> numpy.ndarray
+
+   
+   Extract lines from DataFrame.
+
+   Beams table comes in with the form with extra information not supported,
+   |  eid  | nid1 | nid2
+   |  1    | 10   | 11
+   |  20   | 21   | 22
+
+     we only care about nid 1 and 2
+
+   but the array needed for pyvista polydata is the same as in extract facets
+   of the form where each element is prefixed by the length of the element node list
+   [2,10,11,2,21,22]
+
+   Take individual rows, extract the appropriate nid's and output a flat list of
+   facets for pyvista
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: extract_solids(solids: pandas.DataFrame, mapping: Dict[int, int])
+
+.. py:function:: get_pyvista()
+
+.. py:function:: get_polydata(deck: ansys.dyna.core.Deck, cwd=None)
+
+   
+   Create the PolyData Object for plotting from a given deck with nodes and elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: plot_deck(deck, **args)
+
+   
+   Plot the deck.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

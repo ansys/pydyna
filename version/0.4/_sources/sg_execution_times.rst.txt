@@ -1,0 +1,127 @@
+
+:orphan:
+
+.. _sphx_glr_sg_execution_times:
+
+
+Computation times
+=================
+**00:19.184** total execution time for 31 files **from all galleries**:
+
+.. container::
+
+  .. raw:: html
+
+    <style scoped>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" class="init">
+    $(document).ready( function () {
+        $('table.sg-datatable').DataTable({order: [[1, 'desc']]});
+    } );
+    </script>
+
+  .. list-table::
+   :header-rows: 1
+   :class: table table-striped sg-datatable
+
+   * - Example
+     - Time
+     - Mem (MB)
+   * - :ref:`sphx_glr_examples_Implicit_camry_rc.py` (``../../examples/Implicit/camry_rc.py``)
+     - 00:14.372
+     - 0.0
+   * - :ref:`sphx_glr_examples_Explicit_ball_plate.py` (``../../examples/Explicit/ball_plate.py``)
+     - 00:01.393
+     - 0.0
+   * - :ref:`sphx_glr_examples_Airbag_airbag_post.py` (``../../examples/Airbag/airbag_post.py``)
+     - 00:00.709
+     - 0.0
+   * - :ref:`sphx_glr_examples_ISPH_rigidtest.py` (``../../examples/ISPH/rigidtest.py``)
+     - 00:00.708
+     - 0.0
+   * - :ref:`sphx_glr_examples_Explicit_belted_dummy.py` (``../../examples/Explicit/belted_dummy.py``)
+     - 00:00.502
+     - 0.0
+   * - :ref:`sphx_glr_examples_SALE_sale_efp.py` (``../../examples/SALE/sale_efp.py``)
+     - 00:00.234
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_sloshing.py` (``../../examples/ICFD/icfd_sloshing.py``)
+     - 00:00.221
+     - 0.0
+   * - :ref:`sphx_glr_examples_EM_em_resistive_heating.py` (``../../examples/EM/em_resistive_heating.py``)
+     - 00:00.122
+     - 0.0
+   * - :ref:`sphx_glr_examples_Airbag_airbag_deploy.py` (``../../examples/Airbag/airbag_deploy.py``)
+     - 00:00.105
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_dem_coupling.py` (``../../examples/ICFD/icfd_dem_coupling.py``)
+     - 00:00.089
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_strong_fsi.py` (``../../examples/ICFD/icfd_strong_fsi.py``)
+     - 00:00.044
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_weak_fsi.py` (``../../examples/ICFD/icfd_weak_fsi.py``)
+     - 00:00.042
+     - 0.0
+   * - :ref:`sphx_glr_examples_EM_em_resistive_heating_2d_multi_isopots.py` (``../../examples/EM/em_resistive_heating_2d_multi_isopots.py``)
+     - 00:00.042
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_mesh_morphing.py` (``../../examples/ICFD/icfd_mesh_morphing.py``)
+     - 00:00.040
+     - 0.0
+   * - :ref:`sphx_glr_examples_Thermal_thermal_stress.py` (``../../examples/Thermal/thermal_stress.py``)
+     - 00:00.039
+     - 0.0
+   * - :ref:`sphx_glr_examples_EM_em_resistive_heating_2d_isopots.py` (``../../examples/EM/em_resistive_heating_2d_isopots.py``)
+     - 00:00.039
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_internal_3d_flow.py` (``../../examples/ICFD/icfd_internal_3d_flow.py``)
+     - 00:00.037
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_thermal_flow.py` (``../../examples/ICFD/icfd_thermal_flow.py``)
+     - 00:00.036
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_mesh_size.py` (``../../examples/ICFD/icfd_mesh_size.py``)
+     - 00:00.036
+     - 0.0
+   * - :ref:`sphx_glr_examples_EM_em_rlc_isopotential.py` (``../../examples/EM/em_rlc_isopotential.py``)
+     - 00:00.035
+     - 0.0
+   * - :ref:`sphx_glr_examples_EM_em_resistive_heating_2d.py` (``../../examples/EM/em_resistive_heating_2d.py``)
+     - 00:00.034
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_free_convection_flow.py` (``../../examples/ICFD/icfd_free_convection_flow.py``)
+     - 00:00.034
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_mesh_adaptivity.py` (``../../examples/ICFD/icfd_mesh_adaptivity.py``)
+     - 00:00.033
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_imposed_move.py` (``../../examples/ICFD/icfd_imposed_move.py``)
+     - 00:00.033
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_plate_flow.py` (``../../examples/ICFD/icfd_plate_flow.py``)
+     - 00:00.033
+     - 0.0
+   * - :ref:`sphx_glr_examples_EM_em_rlc_define_func.py` (``../../examples/EM/em_rlc_define_func.py``)
+     - 00:00.032
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_cylinderflow.py` (``../../examples/ICFD/icfd_cylinderflow.py``)
+     - 00:00.031
+     - 0.0
+   * - :ref:`sphx_glr_examples_NVH_nvh_frf_solid.py` (``../../examples/NVH/nvh_frf_solid.py``)
+     - 00:00.030
+     - 0.0
+   * - :ref:`sphx_glr_examples_NVH_frf_plate_damping.py` (``../../examples/NVH/frf_plate_damping.py``)
+     - 00:00.029
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_dam_break.py` (``../../examples/ICFD/icfd_dam_break.py``)
+     - 00:00.027
+     - 0.0
+   * - :ref:`sphx_glr_examples_ICFD_icfd_driven_cavity.py` (``../../examples/ICFD/icfd_driven_cavity.py``)
+     - 00:00.024
+     - 0.0

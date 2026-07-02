@@ -1,0 +1,59 @@
+ansys.dyna.core.pre.dynamaterial.MatDamperNonlinearViscous
+==========================================================
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.MatDamperNonlinearViscous(curve)
+
+   
+   Provides a viscous translational damper with an arbitrary force.
+
+   The arbitrary force is defined as a function of velocity dependency or a rotational
+   damper with an arbitrary moment as a function of rotational velocity dependency.
+
+   :Parameters:
+
+       **curve** : :obj:`Curve`
+           Load curve defining force as a function of rate-of-displacement
+           relationship or a moment as a function of rate-of-rotation relationship.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: curve
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a material damper nonlinear viscous.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

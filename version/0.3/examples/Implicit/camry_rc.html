@@ -1,0 +1,958 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Implicit model &#8212; PyDYNA</title>
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=e5fbc548" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/ansys_sphinx_theme.css?v=068850c2" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+ 
+<link href="../../_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=e83b937b"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/Implicit/camry_rc';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.3';
+        </script>
+    <link rel="icon" href="../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="NVH examples" href="../NVH/index.html" />
+    <link rel="prev" title="Implicit examples" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/examples/Implicit/camry_rc.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+
+<!-- If there is no MiliSearch enabled, use the PyData search -->
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+   
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../getting-started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user-guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../autoapi/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../contributing.html">
+                        Contribute
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.3  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyansys/pydyna" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>   <div class="container-xl">
+  <div class="row">
+    <div class="col-12 col-md-3" id="breadcrumbs-spacer"></div>
+    <div class="col-12 col-md-11 col-xl-9" id="breadcrumbs">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul> 
+<li class="nav-item nav-item-additional-breadcrumb">
+  <a href="https://docs.pyansys.com/">PyAnsys</a> » 
+</li>
+ 
+<li class="nav-item nav-item-0">
+  <a href="../../index.html">PyDYNA</a> » 
+</li>
+ 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Examples</a> » </li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Implicit examples</a> » </li>
+        <li class="nav-item nav-item-this"><a href="">Implicit model</a></li> 
+      </ul>
+    </div></div>
+  </div>
+</div>
+ 
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../getting-started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user-guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../autoapi/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../contributing.html">
+                        Contribute
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.3  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyansys/pydyna" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Airbag/index.html">Airbag examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../EM/index.html">EM examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Explicit/index.html">Explicit examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ICFD/index.html">ICFD examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ISPH/index.html">ISPH examples</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Implicit examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Implicit model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../NVH/index.html">NVH examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SALE/index.html">S-ALE examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Thermal/index.html">Thermal examples</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-implicit-camry-rc-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="implicit-model">
+<span id="sphx-glr-examples-implicit-camry-rc-py"></span><h1>Implicit model<a class="headerlink" href="#implicit-model" title="Permalink to this heading">#</a></h1>
+<p>This example shows how to create and use an implicit dynamic roof crush model.</p>
+<section id="perform-required-imports">
+<h2>Perform required imports<a class="headerlink" href="#perform-required-imports" title="Permalink to this heading">#</a></h2>
+<p>Peform required imports.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="kn">from</span> <span class="nn">ansys.dyna.core.pre.dynasolution</span> <span class="kn">import</span> <span class="n">DynaSolution</span>
+<span class="kn">from</span> <span class="nn">ansys.dyna.core.pre.dynamech</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DynaMech</span><span class="p">,</span>
+    <span class="n">Curve</span><span class="p">,</span>
+    <span class="n">BeamPart</span><span class="p">,</span>
+    <span class="n">ShellPart</span><span class="p">,</span>
+    <span class="n">NodeSet</span><span class="p">,</span>
+    <span class="n">PartSet</span><span class="p">,</span>
+    <span class="n">TimestepCtrol</span><span class="p">,</span>
+    <span class="n">Contact</span><span class="p">,</span>
+    <span class="n">ContactType</span><span class="p">,</span>
+    <span class="n">ContactCategory</span><span class="p">,</span>
+    <span class="n">ContactSurface</span><span class="p">,</span>
+    <span class="n">DOF</span><span class="p">,</span>
+    <span class="n">OffsetType</span><span class="p">,</span>
+    <span class="n">AnalysisType</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">ansys.dyna.core.pre.dynamaterial</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">MatNull</span><span class="p">,</span>
+    <span class="n">MatRigid</span><span class="p">,</span>
+    <span class="n">MatSpotweld</span><span class="p">,</span>
+    <span class="n">MatModifiedPiecewiseLinearPlasticity</span><span class="p">,</span>
+    <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">camry_rc_data</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">ansys.dyna.core.pre</span> <span class="kn">import</span> <span class="n">examples</span>
+</pre></div>
+</div>
+</section>
+<section id="manually-start-the-pre-service">
+<h2>Manually start the <code class="docutils literal notranslate"><span class="pre">pre</span></code> service<a class="headerlink" href="#manually-start-the-pre-service" title="Permalink to this heading">#</a></h2>
+<p>Copy the <code class="docutils literal notranslate"><span class="pre">pyDyna/src/ansys/dyna/core/pre/Server``folder</span> <span class="pre">to</span> <span class="pre">a</span> <span class="pre">desired</span> <span class="pre">location.</span>
+<span class="pre">Start</span> <span class="pre">the</span> <span class="pre">``pre</span></code> service at this location by running this command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">kwserver.py</span></code></p>
+<p>Once the <code class="docutils literal notranslate"><span class="pre">pre</span></code> servic is running, you can connect a client to it using
+the hostname and the port. This example uses the default local host and port
+(<code class="docutils literal notranslate"><span class="pre">&quot;localhost&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;50051&quot;</span></code> respectively).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">hostname</span></a> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sys</span><span class="o">.</span><span class="n">argv</span></a><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+    <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">hostname</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sys</span><span class="o">.</span><span class="n">argv</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">camry_solution</span> <span class="o">=</span> <span class="n">DynaSolution</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">hostname</span></a><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="import-initial-mesh-data">
+<h2>Import initial mesh data<a class="headerlink" href="#import-initial-mesh-data" title="Permalink to this heading">#</a></h2>
+<p>Import the initial mesh data (nodes and elements), which includes the
+vehicle data, weld data, and platen data.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fns</span></a> <span class="o">=</span> <span class="p">[]</span>
+<a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">path</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">examples</span><span class="o">.</span><span class="n">camry_rc</span></a> <span class="o">+</span> <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">os</span><span class="o">.</span><span class="n">sep</span></a>
+<a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fns</span></a><span class="o">.</span><span class="n">append</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">path</span></a> <span class="o">+</span> <span class="s2">&quot;Camry_RC_main.k&quot;</span><span class="p">)</span>
+<a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fns</span></a><span class="o">.</span><span class="n">append</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">path</span></a> <span class="o">+</span> <span class="s2">&quot;501_RIG_BAR_roof_crush_platen5.key&quot;</span><span class="p">)</span>
+<a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fns</span></a><span class="o">.</span><span class="n">append</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">path</span></a> <span class="o">+</span> <span class="s2">&quot;Camry_V1_NoSusAndPowerTrain_impl7.k&quot;</span><span class="p">)</span>
+<a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fns</span></a><span class="o">.</span><span class="n">append</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">path</span></a> <span class="o">+</span> <span class="s2">&quot;Camry_V1_NoSusAndPowerTrain_impl7_nodes.k&quot;</span><span class="p">)</span>
+<a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fns</span></a><span class="o">.</span><span class="n">append</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">path</span></a> <span class="o">+</span> <span class="s2">&quot;roof_welds.k&quot;</span><span class="p">)</span>
+<a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fns</span></a><span class="o">.</span><span class="n">append</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">path</span></a> <span class="o">+</span> <span class="s2">&quot;weld7.k&quot;</span><span class="p">)</span>
+<a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fns</span></a><span class="o">.</span><span class="n">append</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">path</span></a> <span class="o">+</span> <span class="s2">&quot;xtra_sw.k&quot;</span><span class="p">)</span>
+<span class="n">camry_solution</span><span class="o">.</span><span class="n">open_files</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fns</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>ret: true
+</pre></div>
+</div>
+</section>
+<section id="define-global-control-cards">
+<h2>Define global control cards<a class="headerlink" href="#define-global-control-cards" title="Permalink to this heading">#</a></h2>
+<p>Because roof crush is a quasi-static loading case, you must run this model
+as an implicit dynamic solution. Define the global control cards. From
+the <code class="docutils literal notranslate"><span class="pre">dynasolution</span></code> class, set the termination time and the frequency for
+the database ASCII options.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">camry_solution</span><span class="o">.</span><span class="n">set_termination</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use the implicit analysis methods in the <code class="docutils literal notranslate"><span class="pre">dynamech</span></code> class to define
+the IMPLICIT control cards.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">camry</span> <span class="o">=</span> <span class="n">DynaMech</span><span class="p">(</span><span class="n">analysis</span><span class="o">=</span><span class="n">AnalysisType</span><span class="o">.</span><span class="n">EXPLICIT</span><span class="p">)</span>
+<span class="n">camry_solution</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">camry</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Set the automatic timestep control flag
+and the optimal equilibrium iteration count per timestep.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">camry</span><span class="o">.</span><span class="n">implicitanalysis</span><span class="o">.</span><span class="n">set_initial_timestep_size</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">camry</span><span class="o">.</span><span class="n">implicitanalysis</span><span class="o">.</span><span class="n">set_timestep</span><span class="p">(</span>
+    <span class="n">control_flag</span><span class="o">=</span><span class="n">TimestepCtrol</span><span class="o">.</span><span class="n">AUTOMATICALLY_ADJUST_TIMESTEP_SIZE</span><span class="p">,</span>
+    <span class="n">Optimum_equilibrium_iteration_count</span><span class="o">=</span><span class="mi">511</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">set_dynamic()</span></code> method to set the IMASS value to 1 and assign the
+gamma and beta values.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">camry</span><span class="o">.</span><span class="n">implicitanalysis</span><span class="o">.</span><span class="n">set_dynamic</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.38</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If normal modes must be extracted, use the <code class="docutils literal notranslate"><span class="pre">set_eigenvalue()</span></code> method.
+The <code class="docutils literal notranslate"><span class="pre">set_solution()</span></code> method defines NSOLVR as 12 (Nolinear with BFGS update).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">camry</span><span class="o">.</span><span class="n">implicitanalysis</span><span class="o">.</span><span class="n">set_eigenvalue</span><span class="p">()</span>
+<span class="n">camry</span><span class="o">.</span><span class="n">implicitanalysis</span><span class="o">.</span><span class="n">set_solution</span><span class="p">(</span><span class="n">iteration_limit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">stiffness_reformation_limit</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">absolute_convergence_tolerance</span><span class="o">=-</span><span class="mi">100</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="define-materials">
+<h2>Define materials<a class="headerlink" href="#define-materials" title="Permalink to this heading">#</a></h2>
+<p>This model uses four classes of material: <code class="docutils literal notranslate"><span class="pre">MAT_NULL</span></code>, <code class="docutils literal notranslate"><span class="pre">MAT_RIGID,</span></code>
+<code class="docutils literal notranslate"><span class="pre">MAT_SPOTWELD</span></code>, and <code class="docutils literal notranslate"><span class="pre">MAT_PIECEWISE_LINEAR_PLASTICITY</span></code>. Use the <code class="docutils literal notranslate"><span class="pre">dynamaterial</span></code>
+class to define these materials.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">matnull</span> <span class="o">=</span> <span class="n">MatNull</span><span class="p">(</span><span class="n">mass_density</span><span class="o">=</span><span class="mf">6e-11</span><span class="p">)</span>
+<span class="n">matrigid</span> <span class="o">=</span> <span class="n">MatRigid</span><span class="p">(</span><span class="n">mass_density</span><span class="o">=</span><span class="mf">7.890e-09</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mf">2.100e05</span><span class="p">,</span> <span class="n">poisson_ratio</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">matplaten</span> <span class="o">=</span> <span class="n">MatRigid</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">7.80e-09</span><span class="p">,</span>
+    <span class="n">young_modulus</span><span class="o">=</span><span class="mf">2.00e05</span><span class="p">,</span>
+    <span class="n">poisson_ratio</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">center_of_mass_constraint</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">rotational_constraint</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">spotweldharden2100</span> <span class="o">=</span> <span class="n">MatSpotweld</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">7.850e-09</span><span class="p">,</span>
+    <span class="n">young_modulus</span><span class="o">=</span><span class="mf">2.100e05</span><span class="p">,</span>
+    <span class="n">poisson_ratio</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">yield_stress</span><span class="o">=</span><span class="mi">510</span><span class="p">,</span>
+    <span class="n">plastic_hardening_modulus</span><span class="o">=</span><span class="mi">2100</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">spotweldharden2200</span> <span class="o">=</span> <span class="n">MatSpotweld</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">7.850e-09</span><span class="p">,</span>
+    <span class="n">young_modulus</span><span class="o">=</span><span class="mf">2.100e05</span><span class="p">,</span>
+    <span class="n">poisson_ratio</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">yield_stress</span><span class="o">=</span><span class="mi">510</span><span class="p">,</span>
+    <span class="n">plastic_hardening_modulus</span><span class="o">=</span><span class="mi">2200</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">windowshield</span> <span class="o">=</span> <span class="n">MatModifiedPiecewiseLinearPlasticity</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">2.355e-09</span><span class="p">,</span>
+    <span class="n">young_modulus</span><span class="o">=</span><span class="mf">7.000e04</span><span class="p">,</span>
+    <span class="n">poisson_ratio</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span>
+    <span class="n">yield_stress</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">tangent_modulus</span><span class="o">=</span><span class="mi">1400</span><span class="p">,</span>
+    <span class="n">plastic_strain_to_failure</span><span class="o">=</span><span class="mf">0.015</span><span class="p">,</span>
+    <span class="n">integration_points_number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">windowsrear</span> <span class="o">=</span> <span class="n">MatModifiedPiecewiseLinearPlasticity</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">2.425e-09</span><span class="p">,</span>
+    <span class="n">young_modulus</span><span class="o">=</span><span class="mf">7.000e04</span><span class="p">,</span>
+    <span class="n">poisson_ratio</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span>
+    <span class="n">yield_stress</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">tangent_modulus</span><span class="o">=</span><span class="mi">1400</span><span class="p">,</span>
+    <span class="n">plastic_strain_to_failure</span><span class="o">=</span><span class="mf">0.015</span><span class="p">,</span>
+    <span class="n">integration_points_number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plastic300</span> <span class="o">=</span> <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">7.890e-09</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mi">210000</span><span class="p">,</span> <span class="n">yield_stress</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">tangent_modulus</span><span class="o">=</span><span class="mi">5000</span>
+<span class="p">)</span>
+<span class="n">plastic250</span> <span class="o">=</span> <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">7.890e-09</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mi">210000</span><span class="p">,</span> <span class="n">yield_stress</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">tangent_modulus</span><span class="o">=</span><span class="mi">5000</span>
+<span class="p">)</span>
+<span class="n">plastic360</span> <span class="o">=</span> <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">7.890e-09</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mi">210000</span><span class="p">,</span> <span class="n">yield_stress</span><span class="o">=</span><span class="mi">360</span><span class="p">,</span> <span class="n">tangent_modulus</span><span class="o">=</span><span class="mi">5000</span>
+<span class="p">)</span>
+<span class="n">plastic180</span> <span class="o">=</span> <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">7.850e-09</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mi">210000</span><span class="p">,</span> <span class="n">yield_stress</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="n">tangent_modulus</span><span class="o">=</span><span class="mi">5000</span>
+<span class="p">)</span>
+<span class="n">plastic450</span> <span class="o">=</span> <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">7.850e-09</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mi">210000</span><span class="p">,</span> <span class="n">yield_stress</span><span class="o">=</span><span class="mi">450</span><span class="p">,</span> <span class="n">tangent_modulus</span><span class="o">=</span><span class="mi">5000</span>
+<span class="p">)</span>
+<span class="n">plastic1300</span> <span class="o">=</span> <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">7.850e-09</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mi">210000</span><span class="p">,</span> <span class="n">yield_stress</span><span class="o">=</span><span class="mi">1300</span><span class="p">,</span> <span class="n">tangent_modulus</span><span class="o">=</span><span class="mi">5000</span>
+<span class="p">)</span>
+<span class="n">plastic400</span> <span class="o">=</span> <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">7.890e-09</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mi">210000</span><span class="p">,</span> <span class="n">yield_stress</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">tangent_modulus</span><span class="o">=</span><span class="mi">5000</span>
+<span class="p">)</span>
+<span class="n">plastic500</span> <span class="o">=</span> <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">7.890e-09</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mi">210000</span><span class="p">,</span> <span class="n">yield_stress</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">tangent_modulus</span><span class="o">=</span><span class="mi">5000</span>
+<span class="p">)</span>
+<span class="n">plastic675</span> <span class="o">=</span> <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">7.850e-09</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mi">210000</span><span class="p">,</span> <span class="n">yield_stress</span><span class="o">=</span><span class="mi">675</span><span class="p">,</span> <span class="n">tangent_modulus</span><span class="o">=</span><span class="mi">5000</span>
+<span class="p">)</span>
+<span class="n">plastic310</span> <span class="o">=</span> <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">2.255e-09</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mi">70000</span><span class="p">,</span> <span class="n">yield_stress</span><span class="o">=</span><span class="mi">310</span><span class="p">,</span> <span class="n">tangent_modulus</span><span class="o">=</span><span class="mi">5000</span>
+<span class="p">)</span>
+<span class="n">plastic220</span> <span class="o">=</span> <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">7.890e-09</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mi">210000</span><span class="p">,</span> <span class="n">yield_stress</span><span class="o">=</span><span class="mi">220</span><span class="p">,</span> <span class="n">tangent_modulus</span><span class="o">=</span><span class="mi">5000</span>
+<span class="p">)</span>
+<span class="n">plastic220_410</span> <span class="o">=</span> <span class="n">MatPiecewiseLinearPlasticity</span><span class="p">(</span>
+    <span class="n">mass_density</span><span class="o">=</span><span class="mf">7.890e-09</span><span class="p">,</span> <span class="n">young_modulus</span><span class="o">=</span><span class="mi">210000</span><span class="p">,</span> <span class="n">yield_stress</span><span class="o">=</span><span class="mi">220</span><span class="p">,</span> <span class="n">tangent_modulus</span><span class="o">=</span><span class="mi">410</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="assign-section-and-material-properties">
+<h2>Assign section and material properties<a class="headerlink" href="#assign-section-and-material-properties" title="Permalink to this heading">#</a></h2>
+<p>Once all materials are explicitly defined, these material IDs must be cross-referenced
+in the <em>PART</em> card. You use the <code class="docutils literal notranslate"><span class="pre">set_material()</span></code> method for this. Because many parts
+share common materials, the assignment happens within a loop. Within the loop, the
+<code class="docutils literal notranslate"><span class="pre">set_element_formulation()</span></code> method is called to assign the elform for the beam and
+shell elements. Accordingly, either the beam diameter or the shell thickness is also
+defined. To identify the part ID that has a particular material type, a predefined
+list is made available in the <code class="docutils literal notranslate"><span class="pre">camry_rc_data.py</span></code> file, which is read in this script.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">bpart</span></a> <span class="ow">in</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">beamparts</span></a><span class="p">:</span>
+    <span class="n">part</span> <span class="o">=</span> <span class="n">BeamPart</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">bpart</span></a><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <span class="p">[</span><span class="mi">50000002</span><span class="p">]:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">spotweldharden2200</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">spotweldharden2100</span><span class="p">)</span>
+    <span class="n">part</span><span class="o">.</span><span class="n">set_element_formulation</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">bpart</span></a><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">part</span><span class="o">.</span><span class="n">set_diameter</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">bpart</span></a><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">camry</span><span class="o">.</span><span class="n">parts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+
+<span class="k">for</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">spart</span></a> <span class="ow">in</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">shellparts</span></a><span class="p">:</span>
+    <span class="n">part</span> <span class="o">=</span> <span class="n">ShellPart</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">spart</span></a><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <span class="p">[</span><span class="mi">1463</span><span class="p">,</span> <span class="mi">1464</span><span class="p">]:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">matnull</span><span class="p">)</span>
+    <span class="k">elif</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <span class="p">[</span><span class="mi">417</span><span class="p">,</span> <span class="mi">419</span><span class="p">,</span> <span class="mi">530</span><span class="p">,</span> <span class="mi">532</span><span class="p">,</span> <span class="mi">585</span><span class="p">,</span> <span class="mi">586</span><span class="p">,</span> <span class="mi">587</span><span class="p">,</span> <span class="mi">588</span><span class="p">]:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">matrigid</span><span class="p">)</span>
+    <span class="k">elif</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <span class="p">[</span><span class="mi">50000001</span><span class="p">]:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">matplaten</span><span class="p">)</span>
+    <span class="k">elif</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <span class="p">[</span><span class="mi">290</span><span class="p">]:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">windowshield</span><span class="p">)</span>
+    <span class="k">elif</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <span class="p">[</span><span class="mi">291</span><span class="p">]:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">windowsrear</span><span class="p">)</span>
+    <span class="k">elif</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">partswithmat300</span></a><span class="p">:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">plastic300</span><span class="p">)</span>
+    <span class="k">elif</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">partswithmat250</span></a><span class="p">:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">plastic250</span><span class="p">)</span>
+    <span class="k">elif</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">partswithmat360</span></a><span class="p">:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">plastic360</span><span class="p">)</span>
+    <span class="k">elif</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">partswithmat180</span></a><span class="p">:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">plastic180</span><span class="p">)</span>
+    <span class="k">elif</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">partswithmat450</span></a><span class="p">:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">plastic450</span><span class="p">)</span>
+    <span class="k">elif</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">partswithmat400</span></a><span class="p">:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">plastic400</span><span class="p">)</span>
+    <span class="k">elif</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">partswithmat500</span></a><span class="p">:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">plastic500</span><span class="p">)</span>
+    <span class="k">elif</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <span class="p">[</span><span class="mi">57</span><span class="p">]:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">plastic1300</span><span class="p">)</span>
+    <span class="k">elif</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <span class="p">[</span><span class="mi">286</span><span class="p">]:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">plastic675</span><span class="p">)</span>
+    <span class="k">elif</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <span class="p">[</span><span class="mi">5000000</span><span class="p">]:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">plastic310</span><span class="p">)</span>
+    <span class="k">elif</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <span class="p">[</span><span class="mi">5000006</span><span class="p">]:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">plastic220</span><span class="p">)</span>
+    <span class="k">elif</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">part</span><span class="o">.</span><span class="n">id</span></a> <span class="ow">in</span> <span class="p">[</span><span class="mi">5000007</span><span class="p">]:</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_material</span><span class="p">(</span><span class="n">plastic220_410</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="n">part</span><span class="o">.</span><span class="n">set_element_formulation</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">spart</span></a><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">part</span><span class="o">.</span><span class="n">set_thickness</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">spart</span></a><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">camry</span><span class="o">.</span><span class="n">parts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="generate-keywords-for-spotwelds-and-nodal-rigid-bodies">
+<h2>Generate keywords for spotwelds and nodal rigid bodies<a class="headerlink" href="#generate-keywords-for-spotwelds-and-nodal-rigid-bodies" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">camry_rc_data.py</span></code> contains the predefined node pairs and node sets
+required for the <em>CONSTRAINED_SPOTWELD</em> and <em>CONSTRAINED_NODAL_RIGID_BODY</em>
+definitions. Loop through these lists to generate the appropriate keywords.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sw</span></a> <span class="ow">in</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">spotweld</span></a><span class="p">:</span>
+    <span class="n">camry</span><span class="o">.</span><span class="n">constraints</span><span class="o">.</span><span class="n">create_spotweld</span><span class="p">(</span><span class="n">nodeid1</span><span class="o">=</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sw</span></a><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nodeid2</span><span class="o">=</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sw</span></a><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="k">for</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">cnrb</span></a> <span class="ow">in</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">cnrbs</span></a><span class="p">:</span>
+    <span class="n">camry</span><span class="o">.</span><span class="n">constraints</span><span class="o">.</span><span class="n">create_cnrb</span><span class="p">(</span><span class="n">nodeset</span><span class="o">=</span><span class="n">NodeSet</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">cnrb</span></a><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="define-contacts">
+<h2>Define contacts<a class="headerlink" href="#define-contacts" title="Permalink to this heading">#</a></h2>
+<p>There are three contacts defined in this model:</p>
+<ul class="simple">
+<li><p>Automatic single surface contact for the BIW self contact</p></li>
+<li><p>Surface-to-surface contact between the platen and the BIW</p></li>
+<li><p>Tied contact for the spotweld beams</p></li>
+</ul>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">ContactSurface()</span></code> method to set the SSTYPE and MSTYPE.
+The <code class="docutils literal notranslate"><span class="pre">PartSet()</span></code> method accepts the name of a list and converts it to
+<em>PART_SET_LIST</em>. Notice how the contact type and category can be used
+to create the three different type of contacts for this model.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">selfcontact</span> <span class="o">=</span> <span class="n">Contact</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">ContactType</span><span class="o">.</span><span class="n">AUTOMATIC</span><span class="p">)</span>
+<span class="n">selfcontact</span><span class="o">.</span><span class="n">set_mortar</span><span class="p">()</span>
+<span class="n">selfcontact</span><span class="o">.</span><span class="n">set_friction_coefficient</span><span class="p">(</span><span class="n">static</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">surf1</span> <span class="o">=</span> <span class="n">ContactSurface</span><span class="p">(</span><span class="n">PartSet</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">vehicle</span></a><span class="p">))</span>
+<span class="n">selfcontact</span><span class="o">.</span><span class="n">set_slave_surface</span><span class="p">(</span><span class="n">surf1</span><span class="p">)</span>
+<span class="n">camry</span><span class="o">.</span><span class="n">contacts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">selfcontact</span><span class="p">)</span>
+
+<span class="n">platebiw</span> <span class="o">=</span> <span class="n">Contact</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">ContactType</span><span class="o">.</span><span class="n">AUTOMATIC</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">ContactCategory</span><span class="o">.</span><span class="n">SURFACE_TO_SURFACE_CONTACT</span><span class="p">)</span>
+<span class="n">platebiw</span><span class="o">.</span><span class="n">set_mortar</span><span class="p">()</span>
+<span class="n">platebiw</span><span class="o">.</span><span class="n">set_friction_coefficient</span><span class="p">(</span><span class="n">static</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">dynamic</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">surf1</span> <span class="o">=</span> <span class="n">ContactSurface</span><span class="p">(</span><span class="n">PartSet</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">biw</span></a><span class="p">))</span>
+<span class="n">surf2</span> <span class="o">=</span> <span class="n">ContactSurface</span><span class="p">(</span><span class="n">PartSet</span><span class="p">(</span><span class="n">platen</span><span class="p">))</span>
+<span class="n">platebiw</span><span class="o">.</span><span class="n">set_slave_surface</span><span class="p">(</span><span class="n">surf1</span><span class="p">)</span>
+<span class="n">platebiw</span><span class="o">.</span><span class="n">set_master_surface</span><span class="p">(</span><span class="n">surf2</span><span class="p">)</span>
+<span class="n">camry</span><span class="o">.</span><span class="n">contacts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">platebiw</span><span class="p">)</span>
+
+<span class="n">swcontact</span> <span class="o">=</span> <span class="n">Contact</span><span class="p">(</span>
+    <span class="nb">type</span><span class="o">=</span><span class="n">ContactType</span><span class="o">.</span><span class="n">TIED</span><span class="p">,</span>
+    <span class="n">category</span><span class="o">=</span><span class="n">ContactCategory</span><span class="o">.</span><span class="n">SHELL_EDGE_TO_SURFACE_CONTACT</span><span class="p">,</span>
+    <span class="n">offset</span><span class="o">=</span><span class="n">OffsetType</span><span class="o">.</span><span class="n">CONSTRAINED_OFFSET</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">spotweldbeam</span> <span class="o">=</span> <span class="n">ContactSurface</span><span class="p">(</span><span class="n">PartSet</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">spotweldbeams</span></a><span class="p">))</span>
+<span class="n">spotweldbeam</span><span class="o">.</span><span class="n">set_contact_thickness</span><span class="p">(</span><span class="n">thickness</span><span class="o">=-</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="n">spotweldsurface</span> <span class="o">=</span> <span class="n">ContactSurface</span><span class="p">(</span><span class="n">PartSet</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">spotweldsurfaces</span></a><span class="p">))</span>
+<span class="n">spotweldsurface</span><span class="o">.</span><span class="n">set_contact_thickness</span><span class="p">(</span><span class="n">thickness</span><span class="o">=-</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="n">swcontact</span><span class="o">.</span><span class="n">set_slave_surface</span><span class="p">(</span><span class="n">spotweldbeam</span><span class="p">)</span>
+<span class="n">swcontact</span><span class="o">.</span><span class="n">set_master_surface</span><span class="p">(</span><span class="n">spotweldsurface</span><span class="p">)</span>
+<span class="n">camry</span><span class="o">.</span><span class="n">contacts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">swcontact</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="define-spc">
+<h2>Define SPC<a class="headerlink" href="#define-spc" title="Permalink to this heading">#</a></h2>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">boundaryconditions</span></code> class to define both SPCs and
+prescribed motions. The bottom of the BIW is SPCed by selecting a few nodes.
+The prescribed motion is then assigned to the platen.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">camry</span><span class="o">.</span><span class="n">boundaryconditions</span><span class="o">.</span><span class="n">create_spc</span><span class="p">(</span><span class="n">NodeSet</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">spc</span></a><span class="p">))</span>
+
+<span class="n">crv</span> <span class="o">=</span> <span class="n">Curve</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mf">9.77</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+    <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="n">platen</span> <span class="o">=</span> <span class="n">PartSet</span><span class="p">([</span><span class="mi">50000001</span><span class="p">])</span>
+<span class="n">camry</span><span class="o">.</span><span class="n">boundaryconditions</span><span class="o">.</span><span class="n">create_imposed_motion</span><span class="p">(</span>
+    <span class="n">platen</span><span class="p">,</span> <span class="n">crv</span><span class="p">,</span> <span class="n">dof</span><span class="o">=</span><span class="n">DOF</span><span class="o">.</span><span class="n">X_TRANSLATIONAL</span><span class="p">,</span> <span class="n">scalefactor</span><span class="o">=-</span><span class="mf">0.0802216</span>
+<span class="p">)</span>
+<span class="n">camry</span><span class="o">.</span><span class="n">boundaryconditions</span><span class="o">.</span><span class="n">create_imposed_motion</span><span class="p">(</span>
+    <span class="n">platen</span><span class="p">,</span> <span class="n">crv</span><span class="p">,</span> <span class="n">dof</span><span class="o">=</span><span class="n">DOF</span><span class="o">.</span><span class="n">Y_TRANSLATIONAL</span><span class="p">,</span> <span class="n">scalefactor</span><span class="o">=-</span><span class="mf">0.0802216</span>
+<span class="p">)</span>
+<span class="n">camry</span><span class="o">.</span><span class="n">boundaryconditions</span><span class="o">.</span><span class="n">create_imposed_motion</span><span class="p">(</span>
+    <span class="n">platen</span><span class="p">,</span> <span class="n">crv</span><span class="p">,</span> <span class="n">dof</span><span class="o">=</span><span class="n">DOF</span><span class="o">.</span><span class="n">Z_TRANSLATIONAL</span><span class="p">,</span> <span class="n">scalefactor</span><span class="o">=-</span><span class="mf">0.0802216</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="define-database-cards-and-save-input-file">
+<h2>Define database cards and save input file<a class="headerlink" href="#define-database-cards-and-save-input-file" title="Permalink to this heading">#</a></h2>
+<p>Define the frequency of output for the binary and ASCII database outputs
+and save the input file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">camry_solution</span><span class="o">.</span><span class="n">create_database_binary</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+<span class="n">camry_solution</span><span class="o">.</span><span class="n">set_output_database</span><span class="p">(</span>
+    <span class="n">elout</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span>
+    <span class="n">glstat</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span>
+    <span class="n">matsum</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span>
+    <span class="n">nodout</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span>
+    <span class="n">rbdout</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span>
+    <span class="n">rcforc</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span>
+    <span class="n">secforc</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">camry_solution</span><span class="o">.</span><span class="n">save_file</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;/server/output&#39;
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  22.425 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-implicit-camry-rc-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/c04899840c098784ca12117d664f304c/camry_rc.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">camry_rc.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/16cf40ce4d4ac8d2cbca5d523cf7639b/camry_rc.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">camry_rc.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-required-imports">Perform required imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manually-start-the-pre-service">Manually start the <code class="docutils literal notranslate"><span class="pre">pre</span></code> service</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-initial-mesh-data">Import initial mesh data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-global-control-cards">Define global control cards</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-materials">Define materials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assign-section-and-material-properties">Assign section and material properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-keywords-for-spotwelds-and-nodal-rigid-bodies">Generate keywords for spotwelds and nodal rigid bodies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-contacts">Define contacts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-spc">Define SPC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-database-cards-and-save-input-file">Define database cards and save input file</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/pyansys/pydyna/edit/main/doc/source/examples/Implicit/camry_rc.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/examples/Implicit/camry_rc.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright (c) 2023 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  0.10.2. <br />Last updated on
+  <span id="date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("date").innerHTML = date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

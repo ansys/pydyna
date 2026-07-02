@@ -1,0 +1,288 @@
+ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1.InitialStressShellLegacyCardSet
+==================================================================================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1.InitialStressShellLegacyCardSet(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.cards.Cards`
+
+
+   
+   CardSet.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: eid
+      :type: Optional[int]
+
+
+      
+      Get or set the Shell element ID.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: nplane
+      :type: int
+
+
+      
+      Get or set the Number of in plane integration points being output.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: nthick
+      :type: int
+
+
+      
+      Get or set the Number of through thickness integration points.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: nhisv
+      :type: int
+
+
+      
+      Get or set the Number of additional history variables.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: ntensr
+      :type: int
+
+
+      
+      Get or set the Number of components of tensor data taken from the element history variables.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: large
+      :type: int
+
+
+      
+      Get or set the Format size (0:off or 1:on).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: nthint
+      :type: int
+
+
+      
+      Get or set the Number of thermal integration points.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: nthhsv
+      :type: int
+
+
+      
+      Get or set the Number of thermal history variables per thermal integration point..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: sets
+      :type: List[InitialStressShellLegacyThicknessLargeCardSet]
+
+
+      
+      Gets the list of sets.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: parent
+      :type: ansys.dyna.core.lib.keyword_base.KeywordBase
+
+
+      
+      Get the parent keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

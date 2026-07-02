@@ -1,0 +1,535 @@
+ansys.dyna.core.__main__
+========================
+
+.. py:module:: ansys.dyna.core.__main__
+
+.. autoapi-nested-parse::
+
+   CLI for PyDyna.
+
+   Usage:
+       python -m ansys.dyna.core agent --env cursor
+       python -m ansys.dyna.core agent --env vscode --copy
+       python -m ansys.dyna.core agent --env vscode --pointer
+       python -m ansys.dyna.core agent --print
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.__main__.PACKAGE_NAMESPACE
+   ansys.dyna.core.__main__.PACKAGE_NAME
+   ansys.dyna.core.__main__.PACKAGE_ECOSYSTEM
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.__main__.find_workspace_root
+   ansys.dyna.core.__main__.get_package_dir
+   ansys.dyna.core.__main__.get_instructions_path
+   ansys.dyna.core.__main__.get_extended_docs_dir
+   ansys.dyna.core.__main__.get_instructions_content
+   ansys.dyna.core.__main__.rewrite_links_for_copy
+   ansys.dyna.core.__main__.format_for_cursor
+   ansys.dyna.core.__main__.ensure_gitignore
+   ansys.dyna.core.__main__.load_manifest
+   ansys.dyna.core.__main__.save_manifest
+   ansys.dyna.core.__main__.update_manifest_entry
+   ansys.dyna.core.__main__.generate_readme
+   ansys.dyna.core.__main__.copy_all_instructions
+   ansys.dyna.core.__main__.register_pointer_in_manifest
+   ansys.dyna.core.__main__.update_copilot_instructions
+   ansys.dyna.core.__main__.update_claude_instructions
+   ansys.dyna.core.__main__.cmd_agent_copy
+   ansys.dyna.core.__main__.cmd_agent_pointer
+   ansys.dyna.core.__main__.cmd_agent
+   ansys.dyna.core.__main__.main
+
+
+Module Contents
+---------------
+
+.. py:data:: PACKAGE_NAMESPACE
+   :value: 'ansys.dyna.core'
+
+
+.. py:data:: PACKAGE_NAME
+   :value: 'ansys-dyna-core'
+
+
+.. py:data:: PACKAGE_ECOSYSTEM
+   :value: 'pypi'
+
+
+.. py:function:: find_workspace_root() -> pathlib.Path | None
+
+   
+   Find workspace root by walking up from cwd.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_package_dir() -> pathlib.Path
+
+   
+   Get the package directory containing agent instructions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_instructions_path() -> pathlib.Path
+
+   
+   Get path to agent instructions file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_extended_docs_dir() -> pathlib.Path
+
+   
+   Get path to extended agent documentation directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_instructions_content() -> str
+
+   
+   Read the agent instructions from installed package.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: rewrite_links_for_copy(content: str, subdir_name: str) -> str
+
+   
+   Rewrite relative links in content to work from copied location.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: format_for_cursor(content: str, source_path: pathlib.Path) -> str
+
+   
+   Wrap content in Cursor rules MDC format.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: ensure_gitignore(workspace: pathlib.Path) -> None
+
+   
+   Add .agent/ to .gitignore.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: load_manifest(agent_dir: pathlib.Path) -> dict
+
+   
+   Load the manifest.json file, or return empty manifest.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: save_manifest(agent_dir: pathlib.Path, manifest: dict) -> None
+
+   
+   Save the manifest.json file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: update_manifest_entry(manifest: dict, namespace: str, ecosystem: str, package_name: str, entry_file: str, extended_docs: list[str], mode: str, source_path: str) -> dict
+
+   
+   Add or update a package entry in the manifest.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: generate_readme(agent_dir: pathlib.Path, manifest: dict) -> None
+
+   
+   Generate README.md from manifest.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: copy_all_instructions(workspace: pathlib.Path, mode: str = 'copy') -> tuple[pathlib.Path, list[str]]
+
+   
+   Copy all agent instruction files to workspace with working links.
+
+
+
+
+
+   :Returns:
+
+       :class:`python:tuple`\[:obj:`Path`, :class:`python:list`\[:class:`python:str`]]
+           Main file path and list of extended doc relative paths.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: register_pointer_in_manifest(workspace: pathlib.Path, mode: str = 'pointer') -> None
+
+   
+   Register a pointer-mode entry in the manifest.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: update_copilot_instructions(workspace: pathlib.Path, pydyna_path: pathlib.Path, mode: str, extended_docs: list[str] | None = None) -> pathlib.Path
+
+   
+   Update .github/copilot-instructions.md with a pointer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: update_claude_instructions(workspace: pathlib.Path, pydyna_path: pathlib.Path, mode: str, extended_docs: list[str] | None = None) -> pathlib.Path
+
+   
+   Update CLAUDE.md with a pointer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: cmd_agent_copy(args: argparse.Namespace, workspace: pathlib.Path) -> int
+
+   
+   Handle --copy mode: copy all files with working links.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: cmd_agent_pointer(args: argparse.Namespace, workspace: pathlib.Path) -> int
+
+   
+   Handle --pointer mode: just add pointer to installed package.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: cmd_agent(args: argparse.Namespace) -> int
+
+   
+   Handle 'agent' subcommand.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: main() -> int
+
+   
+   Main entry point for CLI.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

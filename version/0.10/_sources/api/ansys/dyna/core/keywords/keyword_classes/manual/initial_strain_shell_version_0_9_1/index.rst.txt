@@ -1,0 +1,28 @@
+ansys.dyna.core.keywords.keyword_classes.manual.initial_strain_shell_version_0_9_1
+==================================================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.initial_strain_shell_version_0_9_1
+
+.. autoapi-nested-parse::
+
+   Legacy INITIAL_STRAIN_SHELL implementation (version 0.9.1).
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/initial_strain_shell_version_0_9_1/InitialStrainShellLegacyCardSet
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/initial_strain_shell_version_0_9_1/InitialStrainShellLegacy
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.keyword_classes.manual.initial_strain_shell_version_0_9_1.InitialStrainShellLegacyCardSet
+   ansys.dyna.core.keywords.keyword_classes.manual.initial_strain_shell_version_0_9_1.InitialStrainShellLegacy
+
+

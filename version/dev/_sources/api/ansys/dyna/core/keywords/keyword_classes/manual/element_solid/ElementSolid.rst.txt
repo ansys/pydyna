@@ -1,0 +1,110 @@
+ansys.dyna.core.keywords.keyword_classes.manual.element_solid.ElementSolid
+==========================================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.element_solid.ElementSolid(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA ELEMENT_SOLID (ten nodes format) keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: keyword
+      :value: 'ELEMENT'
+
+
+
+   .. py:attribute:: subkeyword
+      :value: 'SOLID'
+
+
+
+   .. py:method:: before_read(buf: TextIO) -> None
+
+      
+      Reads the first line of the buffer to determine the format.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_legacy_format()
+
+      
+      Sets the legacy format.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: elements
+
+      
+      Gets the full table of elements
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

@@ -1,0 +1,26 @@
+ansys.dyna.core.lib.text_card
+=============================
+
+.. py:module:: ansys.dyna.core.lib.text_card
+
+.. autoapi-nested-parse::
+
+   Module for handling text cards.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/text_card/TextCard
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.text_card.TextCard
+
+

@@ -1,0 +1,768 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Examples &#8212; PyDYNA</title>
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/ansys_sphinx_theme.css?v=d2ac875c" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+ 
+<link href="../_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script src="../_static/documentation_options.js?v=70f82a29"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/index';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.5';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Airbag examples" href="Airbag/index.html" />
+    <link rel="prev" title="ansys.dyna.core.solver.launcher" href="../autoapi/ansys/dyna/core/solver/launcher/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/examples/index.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+
+  <!-- If there is no MeiliSearch enabled, use the PyData search -->
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+   
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <script>document.write(`<img src="../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark" alt="PyDYNA - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting-started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../autoapi/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting-started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../autoapi/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Airbag/index.html">Airbag examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EM/index.html">EM examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Explicit/index.html">Explicit examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ICFD/index.html">ICFD examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ISPH/index.html">ISPH examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Implicit/index.html">Implicit examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NVH/index.html">NVH examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SALE/index.html">S-ALE examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Thermal/index.html">Thermal examples</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page">Examples</li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="examples">
+<span id="ref-examples"></span><h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h1>
+<p>These examples use LS-DYNA with PyDYNA.</p>
+<div class="sphx-glr-thumbnails"></div><section id="airbag-examples">
+<h2>Airbag examples<a class="headerlink" href="#airbag-examples" title="Link to this heading">#</a></h2>
+<p>These examples show how to create and use airbag models.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Airbag deploy"><img alt="" src="../_images/sphx_glr_airbag_deploy_thumb.png" />
+<p><a class="reference internal" href="Airbag/airbag_deploy.html#sphx-glr-examples-airbag-airbag-deploy-py"><span class="std std-ref">Airbag deploy</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Airbag deploy</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Airbag deploy postprocessing"><img alt="" src="../_images/sphx_glr_airbag_post_thumb.png" />
+<p><a class="reference internal" href="Airbag/airbag_post.html#sphx-glr-examples-airbag-airbag-post-py"><span class="std std-ref">Airbag deploy postprocessing</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Airbag deploy postprocessing</div>
+</div></div></section>
+<section id="em-examples">
+<h2>EM examples<a class="headerlink" href="#em-examples" title="Link to this heading">#</a></h2>
+<p>These examples show how to create and use electromagnetic models.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This example shows the minimum number of keywords required to turn on the EM resistive heating solver. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_em_resistive_heating_thumb.png" />
+<p><a class="reference internal" href="EM/em_resistive_heating.html#sphx-glr-examples-em-em-resistive-heating-py"><span class="std std-ref">Resistive heating</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Resistive heating</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Resistive heating 2D"><img alt="" src="../_images/sphx_glr_em_resistive_heating_2d_thumb.png" />
+<p><a class="reference internal" href="EM/em_resistive_heating_2d.html#sphx-glr-examples-em-em-resistive-heating-2d-py"><span class="std std-ref">Resistive heating 2D</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Resistive heating 2D</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows how to use the connect_isopotential() method to connect two parts. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_em_resistive_heating_2d_isopots_thumb.png" />
+<p><a class="reference internal" href="EM/em_resistive_heating_2d_isopots.html#sphx-glr-examples-em-em-resistive-heating-2d-isopots-py"><span class="std std-ref">Resistive heating 2D connect isopotential</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Resistive heating 2D connect isopotential</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Resistive heating 2D multiple-connect isopotential"><img alt="" src="../_images/sphx_glr_em_resistive_heating_2d_multi_isopots_thumb.png" />
+<p><a class="reference internal" href="EM/em_resistive_heating_2d_multi_isopots.html#sphx-glr-examples-em-em-resistive-heating-2d-multi-isopots-py"><span class="std std-ref">Resistive heating 2D multiple-connect isopotential</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Resistive heating 2D multiple-connect isopotential</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="RLC circuit by function"><img alt="" src="../_images/sphx_glr_em_rlc_define_func_thumb.png" />
+<p><a class="reference internal" href="EM/em_rlc_define_func.html#sphx-glr-examples-em-em-rlc-define-func-py"><span class="std std-ref">RLC circuit by function</span></a></p>
+  <div class="sphx-glr-thumbnail-title">RLC circuit by function</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="RLC circuit by isopotential"><img alt="" src="../_images/sphx_glr_em_rlc_isopotential_thumb.png" />
+<p><a class="reference internal" href="EM/em_rlc_isopotential.html#sphx-glr-examples-em-em-rlc-isopotential-py"><span class="std std-ref">RLC circuit by isopotential</span></a></p>
+  <div class="sphx-glr-thumbnail-title">RLC circuit by isopotential</div>
+</div></div></section>
+<section id="explicit-examples">
+<h2>Explicit examples<a class="headerlink" href="#explicit-examples" title="Link to this heading">#</a></h2>
+<p>These examples show how to create and use explicit models.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Ball plate"><img alt="" src="../_images/sphx_glr_ball_plate_thumb.png" />
+<p><a class="reference internal" href="Explicit/ball_plate.html#sphx-glr-examples-explicit-ball-plate-py"><span class="std std-ref">Ball plate</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Ball plate</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Belted dummy"><img alt="" src="../_images/sphx_glr_belted_dummy_thumb.png" />
+<p><a class="reference internal" href="Explicit/belted_dummy.html#sphx-glr-examples-explicit-belted-dummy-py"><span class="std std-ref">Belted dummy</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Belted dummy</div>
+</div></div></section>
+<section id="icfd-examples">
+<h2>ICFD examples<a class="headerlink" href="#icfd-examples" title="Link to this heading">#</a></h2>
+<p>These examples show how to create and use ICFD
+incompressible computational fluid dynamics) models.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This example shows how to create a simple ICFD cylinder flow input deck. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_icfd_cylinderflow_thumb.png" />
+<p><a class="reference internal" href="ICFD/icfd_cylinderflow.html#sphx-glr-examples-icfd-icfd-cylinderflow-py"><span class="std std-ref">Cylinder flow</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Cylinder flow</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows how to use the ICFD solver on a simple free surface. A column of water collapses under the load of gravity. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_icfd_dam_break_thumb.png" />
+<p><a class="reference internal" href="ICFD/icfd_dam_break.html#sphx-glr-examples-icfd-icfd-dam-break-py"><span class="std std-ref">Dam break</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Dam break</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows how to couple the ICFD fluid solver with DEM particles. The executable file for LS-DYNA is ls-dyna_smp_d_R101_winx64_ifort131.exe."><img alt="" src="../_images/sphx_glr_icfd_dem_coupling_thumb.png" />
+<p><a class="reference internal" href="ICFD/icfd_dem_coupling.html#sphx-glr-examples-icfd-icfd-dem-coupling-py"><span class="std std-ref">DEM coupling</span></a></p>
+  <div class="sphx-glr-thumbnail-title">DEM coupling</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows the universally famous driven-cavity case tested with the second-order steady solver and for Re=1000. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_icfd_driven_cavity_thumb.png" />
+<p><a class="reference internal" href="ICFD/icfd_driven_cavity.html#sphx-glr-examples-icfd-icfd-driven-cavity-py"><span class="std std-ref">Driven cavity</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Driven cavity</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD forced-convection input deck with a coarse mesh. The executable file for LS-DYNA is  ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_icfd_free_convection_flow_thumb.png" />
+<p><a class="reference internal" href="ICFD/icfd_free_convection_flow.html#sphx-glr-examples-icfd-icfd-free-convection-flow-py"><span class="std std-ref">Free convection flow</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Free convection flow</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows how to impose displacements on fluid nodes through the use of the ICFD_CONTROL_IMPOSED_MOVE keyword. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_icfd_imposed_move_thumb.png" />
+<p><a class="reference internal" href="ICFD/icfd_imposed_move.html#sphx-glr-examples-icfd-icfd-imposed-move-py"><span class="std std-ref">Imposed move</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Imposed move</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple 3D ICFD problem.  The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_icfd_internal_3d_flow_thumb.png" />
+<p><a class="reference internal" href="ICFD/icfd_internal_3d_flow.html#sphx-glr-examples-icfd-icfd-internal-3d-flow-py"><span class="std std-ref">Internal 3D flow</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Internal 3D flow</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD problem with adaptivity. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_icfd_mesh_adaptivity_thumb.png" />
+<p><a class="reference internal" href="ICFD/icfd_mesh_adaptivity.html#sphx-glr-examples-icfd-icfd-mesh-adaptivity-py"><span class="std std-ref">Mesh adaptivity</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Mesh adaptivity</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD problem with mesh morphing. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_icfd_mesh_morphing_thumb.png" />
+<p><a class="reference internal" href="ICFD/icfd_mesh_morphing.html#sphx-glr-examples-icfd-icfd-mesh-morphing-py"><span class="std std-ref">Mesh morphing</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Mesh morphing</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD input deck with a coarse mesh. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_icfd_mesh_size_thumb.png" />
+<p><a class="reference internal" href="ICFD/icfd_mesh_size.html#sphx-glr-examples-icfd-icfd-mesh-size-py"><span class="std std-ref">Mesh size</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Mesh size</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD input deck with a coarse mesh. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_icfd_plate_flow_thumb.png" />
+<p><a class="reference internal" href="ICFD/icfd_plate_flow.html#sphx-glr-examples-icfd-icfd-plate-flow-py"><span class="std std-ref">Plate flow</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Plate flow</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows how to directly impose a displacement of the entire volume mesh through the use of the ICFD_CONTROL_IMPOSED_MOVE keyword. The executable file for LS-DYNA is ls-dyna_smp_d_R13.0_365-gf8a97bda2a_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_icfd_sloshing_thumb.png" />
+<p><a class="reference internal" href="ICFD/icfd_sloshing.html#sphx-glr-examples-icfd-icfd-sloshing-py"><span class="std std-ref">Sloshing</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Sloshing</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple FSI (fluid-structure interaction) coupling problem using strong FSI. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_icfd_strong_fsi_thumb.png" />
+<p><a class="reference internal" href="ICFD/icfd_strong_fsi.html#sphx-glr-examples-icfd-icfd-strong-fsi-py"><span class="std std-ref">Strong FSI</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Strong FSI</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple ICFD forced-convection input deck with a coarse mesh. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_icfd_thermal_flow_thumb.png" />
+<p><a class="reference internal" href="ICFD/icfd_thermal_flow.html#sphx-glr-examples-icfd-icfd-thermal-flow-py"><span class="std std-ref">Thermal flow</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Thermal flow</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows a simple FSI (fluid-structure interaction) coupling problem using weak/loose/explicit FSI. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_icfd_weak_fsi_thumb.png" />
+<p><a class="reference internal" href="ICFD/icfd_weak_fsi.html#sphx-glr-examples-icfd-icfd-weak-fsi-py"><span class="std std-ref">Weak FSI</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Weak FSI</div>
+</div></div></section>
+<section id="isph-examples">
+<h2>ISPH examples<a class="headerlink" href="#isph-examples" title="Link to this heading">#</a></h2>
+<p>These examples show how to create and use ISPH (incompressible
+smooth particle hydrodynamics) models.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This example shows how to use the PyDYNA pre service to create an ISPH model. The executable file for LS-DYNA is ls-dyna_mpp_d_R13.0_365-gf8a97bda2a_winx64_ifort190_msmpi.exe."><img alt="" src="../_images/sphx_glr_rigidtest_thumb.png" />
+<p><a class="reference internal" href="ISPH/rigidtest.html#sphx-glr-examples-isph-rigidtest-py"><span class="std std-ref">Rigid test</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Rigid test</div>
+</div></div></section>
+<section id="implicit-examples">
+<h2>Implicit examples<a class="headerlink" href="#implicit-examples" title="Link to this heading">#</a></h2>
+<p>These examples show how to create and use implicit models.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Implicit model"><img alt="" src="../_images/sphx_glr_camry_rc_thumb.png" />
+<p><a class="reference internal" href="Implicit/camry_rc.html#sphx-glr-examples-implicit-camry-rc-py"><span class="std std-ref">Implicit model</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Implicit model</div>
+</div></div></section>
+<section id="nvh-examples">
+<h2>NVH examples<a class="headerlink" href="#nvh-examples" title="Link to this heading">#</a></h2>
+<p>These examples show how to create and use NVH (noise, vibration, and harshness) models.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This example shows how to set up the keywords for computation of a FRF (frequency response function). The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_frf_plate_damping_thumb.png" />
+<p><a class="reference internal" href="NVH/frf_plate_damping.html#sphx-glr-examples-nvh-frf-plate-damping-py"><span class="std std-ref">FRF for a rectangular plate</span></a></p>
+  <div class="sphx-glr-thumbnail-title">FRF for a rectangular plate</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This example shows a column with a hole using solid elements. The executable file for LS-DYNA is ls-dyna_smp_d_R13.1_138-g8429c8a10f_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_nvh_frf_solid_thumb.png" />
+<p><a class="reference internal" href="NVH/nvh_frf_solid.html#sphx-glr-examples-nvh-nvh-frf-solid-py"><span class="std std-ref">FRF for a colume model with a hole</span></a></p>
+  <div class="sphx-glr-thumbnail-title">FRF for a colume model with a hole</div>
+</div></div></section>
+<section id="s-ale-examples">
+<h2>S-ALE examples<a class="headerlink" href="#s-ale-examples" title="Link to this heading">#</a></h2>
+<p>These examples show how to create and use S-ALE (Structured ALE) models.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This example shows how to create a S-ALE input deck. The executable file for LS-DYNA is ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_sale_efp_thumb.png" />
+<p><a class="reference internal" href="SALE/sale_efp.html#sphx-glr-examples-sale-sale-efp-py"><span class="std std-ref">EFP concrete target</span></a></p>
+  <div class="sphx-glr-thumbnail-title">EFP concrete target</div>
+</div></div></section>
+<section id="thermal-examples">
+<h2>Thermal examples<a class="headerlink" href="#thermal-examples" title="Link to this heading">#</a></h2>
+<p>These examples show how to create and use thermal models.</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="This example shows how to create a thermal stress model with the PyDYNA pre service. The executable file for LS-DYNA is ls-dyna_smp_s_R13.0_365-gf8a97bda2a_winx64_ifort190.exe."><img alt="" src="../_images/sphx_glr_thermal_stress_thumb.png" />
+<p><a class="reference internal" href="Thermal/thermal_stress.html#sphx-glr-examples-thermal-thermal-stress-py"><span class="std std-ref">Thermal stress example</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Thermal stress example</div>
+</div></div><div class="toctree-wrapper compound">
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#airbag-examples">Airbag examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#em-examples">EM examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-examples">Explicit examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#icfd-examples">ICFD examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#isph-examples">ISPH examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-examples">Implicit examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nvh-examples">NVH examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#s-ale-examples">S-ALE examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-examples">Thermal examples</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/pyansys/pydyna/edit/main/doc/source/examples/index.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/examples/index.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2024 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.0.7. <br />Last updated on
+  <span id="date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("date").innerHTML = date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
