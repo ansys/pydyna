@@ -52,7 +52,7 @@ jobs:
         uses: docker/setup-buildx-action@d7f5e7f509e45cec5c76c4d5afdd7de93d0b3df5 # v4.1.0
 
       - name: Set up Python
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
@@ -181,7 +181,7 @@ jobs:
       contents: write # Needed to push documentation to gh-pages branch
       pages: write # Needed to deploy to GitHub Pages
     steps:
-      - uses: ansys/actions/doc-deploy-dev@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
+      - uses: ansys/actions/doc-deploy-dev@a5b0351dc277d68c2dc1beca2d2674c7dfa4fc55 # v10.3.3
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ env.BOT_TOKEN }}
