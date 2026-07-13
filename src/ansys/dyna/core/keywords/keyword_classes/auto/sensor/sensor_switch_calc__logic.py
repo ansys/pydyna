@@ -38,6 +38,17 @@ _SENSORSWITCHCALC_LOGIC_CARD0 = (
     FieldSchema("swit7", int, 70, 10, None),
 )
 
+_SENSORSWITCHCALC_LOGIC_CARD1 = (
+    FieldSchema("_", str, 0, 10, "+", "+"),
+    FieldSchema("swit8", int, 10, 10, None),
+    FieldSchema("swit9", int, 20, 10, None),
+    FieldSchema("swit10", int, 30, 10, None),
+    FieldSchema("swit11", int, 40, 10, None),
+    FieldSchema("swit12", int, 50, 10, None),
+    FieldSchema("swit13", int, 60, 10, None),
+    FieldSchema("swit14", int, 70, 10, None),
+)
+
 _SENSORSWITCHCALC_LOGIC_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
@@ -58,6 +69,10 @@ class SensorSwitchCalc_Logic(KeywordBase):
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _SENSORSWITCHCALC_LOGIC_CARD0,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _SENSORSWITCHCALC_LOGIC_CARD1,
                 **kwargs,
             ),
             OptionCardSet(
@@ -160,15 +175,103 @@ class SensorSwitchCalc_Logic(KeywordBase):
         self._cards[0].set_value("swit7", value)
 
     @property
+    def _(self) -> str:
+        """Get or set the Input a positive sensor ID for AND and negative ID for OR.
+        """ # nopep8
+        return self._cards[1].get_value("_")
+
+    @_.setter
+    def _(self, value: str) -> None:
+        """Set the _ property."""
+        self._cards[1].set_value("_", value)
+
+    @property
+    def swit8(self) -> typing.Optional[int]:
+        """Get or set the Input a positive sensor ID for AND and negative ID for OR
+        """ # nopep8
+        return self._cards[1].get_value("swit8")
+
+    @swit8.setter
+    def swit8(self, value: int) -> None:
+        """Set the swit8 property."""
+        self._cards[1].set_value("swit8", value)
+
+    @property
+    def swit9(self) -> typing.Optional[int]:
+        """Get or set the Input a positive sensor ID for AND and negative ID for OR
+        """ # nopep8
+        return self._cards[1].get_value("swit9")
+
+    @swit9.setter
+    def swit9(self, value: int) -> None:
+        """Set the swit9 property."""
+        self._cards[1].set_value("swit9", value)
+
+    @property
+    def swit10(self) -> typing.Optional[int]:
+        """Get or set the Input a positive sensor ID for AND and negative ID for OR
+        """ # nopep8
+        return self._cards[1].get_value("swit10")
+
+    @swit10.setter
+    def swit10(self, value: int) -> None:
+        """Set the swit10 property."""
+        self._cards[1].set_value("swit10", value)
+
+    @property
+    def swit11(self) -> typing.Optional[int]:
+        """Get or set the Input a positive sensor ID for AND and negative ID for OR
+        """ # nopep8
+        return self._cards[1].get_value("swit11")
+
+    @swit11.setter
+    def swit11(self, value: int) -> None:
+        """Set the swit11 property."""
+        self._cards[1].set_value("swit11", value)
+
+    @property
+    def swit12(self) -> typing.Optional[int]:
+        """Get or set the Input a positive sensor ID for AND and negative ID for OR
+        """ # nopep8
+        return self._cards[1].get_value("swit12")
+
+    @swit12.setter
+    def swit12(self, value: int) -> None:
+        """Set the swit12 property."""
+        self._cards[1].set_value("swit12", value)
+
+    @property
+    def swit13(self) -> typing.Optional[int]:
+        """Get or set the Input a positive sensor ID for AND and negative ID for OR
+        """ # nopep8
+        return self._cards[1].get_value("swit13")
+
+    @swit13.setter
+    def swit13(self, value: int) -> None:
+        """Set the swit13 property."""
+        self._cards[1].set_value("swit13", value)
+
+    @property
+    def swit14(self) -> typing.Optional[int]:
+        """Get or set the Input a positive sensor ID for AND and negative ID for OR
+        """ # nopep8
+        return self._cards[1].get_value("swit14")
+
+    @swit14.setter
+    def swit14(self, value: int) -> None:
+        """Set the swit14 property."""
+        self._cards[1].set_value("swit14", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[1].cards[0].get_value("title")
+        return self._cards[2].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[1].cards[0].set_value("title", value)
+        self._cards[2].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

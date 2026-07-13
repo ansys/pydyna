@@ -75,7 +75,7 @@ class InitialVelocityGeneration(KeywordBase):
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Part ID, part set ID, or node set ID.If zero, STYP is ignored,and all velocities are set.
-        WARNING for if IVATN = 0: If a part ID of a rigid body is specified, only the nodes that belong to elements of the rigid body are initialized.Nodes added with* CONSTRAINED_EXTRA_NODES are not initialized.Set IVATN = 1 to initialize velocities of constrained nodes and parts..
+        WARNING for if IVATN = 0: If a part ID of a rigid body is specified, only the nodes that belong to elements of the rigid body are initialized.Nodes added with *CONSTRAINED_EXTRA_NODES are not initialized.Set IVATN = 1 to initialize velocities of constrained nodes and parts..
         """ # nopep8
         return self._cards[0].get_value("id")
 
@@ -147,8 +147,8 @@ class InitialVelocityGeneration(KeywordBase):
     @property
     def ivatn(self) -> int:
         """Get or set the Flag for setting the initial velocities of constrained nodes and parts:
-        EQ.0 : Constrained parts are ignored.
-        EQ.1 : Constrained parts and nodes constrained to parts will be assigned initial velocities like the part to which they are constrained..
+        EQ.0: Constrained parts are ignored.
+        EQ.1: Constrained parts and nodes constrained to parts will be assigned initial velocities like the part to which they are constrained..
         """ # nopep8
         return self._cards[0].get_value("ivatn")
 
@@ -239,8 +239,8 @@ class InitialVelocityGeneration(KeywordBase):
     @property
     def phase(self) -> int:
         """Get or set the Flag determining basis for initialization of velocity.
-        EQ.0:	Initial velocities are applied at t = 0 of the regular transient phase of the analysis and are based on the undeformed geometry.Rigid bodies whose velocities are initialized using this keyword should always use PHASE = 0.
-        EQ.1 : Initial velocities of deformable bodies are based on geometry that includes deformation incurred prior to the application of the initial velocities.That deformation could be due to a dynamic relaxation phase or due to a nonzero start time specified with *INITIAL_VELOCITY_GENERATION_START_TIME.
+        EQ.0: Initial velocities are applied at t = 0 of the regular transient phase of the analysis and are based on the undeformed geometry.Rigid bodies whose velocities are initialized using this keyword should always use PHASE = 0.
+        EQ.1: Initial velocities of deformable bodies are based on geometry that includes deformation incurred prior to the application of the initial velocities.That deformation could be due to a dynamic relaxation phase or due to a nonzero start time specified with *INITIAL_VELOCITY_GENERATION_START_TIME.
         """ # nopep8
         return self._cards[1].get_value("phase")
 
@@ -254,7 +254,7 @@ class InitialVelocityGeneration(KeywordBase):
     @property
     def irigid(self) -> int:
         """Get or set the Option to overwrite or automatically set rigid body velocities defined on the *PART_INERTIA and *CONSTRAINED_NODAL_RIGID_BODY _INERTIA cards.
-        EQ.1:  Reset the rigid body velocites for *PART ID or all parts in *SET_PART ID.    This option does not apply for STYP=3.
+        EQ.1: Reset the rigid body velocites for *PART ID or all parts in *SET_PART ID.    This option does not apply for STYP=3.
         """ # nopep8
         return self._cards[1].get_value("irigid")
 

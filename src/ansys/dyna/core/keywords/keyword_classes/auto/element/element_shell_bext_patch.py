@@ -197,8 +197,8 @@ class ElementShellBextPatch(KeywordBase):
     @property
     def wfl(self) -> typing.Optional[int]:
         """Get or set the Flag for weighting factors of the control points.
-        WFL = 0 : All weights at the control points are set to 1 and no optional	cards D are allowed.
-        WFL != 0 : The weights at the control points are de
+        WFL = 0: All weights at the control points are set to 1 and no optional cards D are allowed.
+        WFL != 0: The weights at the control points are de
         ned in optional cards
         D which must be de
         ned after cards C..
@@ -213,10 +213,10 @@ class ElementShellBextPatch(KeywordBase):
     @property
     def form(self) -> int:
         """Get or set the Shell formulation to be used.
-        FORM = 0 : Shear deformable shell theory with rotational DOFs.
-        FORM = 1 : Shear deformable shell theory without rotational DOFs.
-        FORM = 2 : Thin shell theory without rotational DOFs.
-        FORM = 4 : Combination of FORM = 0 and FORM = 1.
+        FORM = 0: Shear deformable shell theory with rotational DOFs.
+        FORM = 1: Shear deformable shell theory without rotational DOFs.
+        FORM = 2: Thin shell theory without rotational DOFs.
+        FORM = 4: Combination of FORM = 0 and FORM = 1.
         """ # nopep8
         return self._cards[1].get_value("form")
 
@@ -230,10 +230,10 @@ class ElementShellBextPatch(KeywordBase):
     @property
     def int_(self) -> int:
         """Get or set the In-plane numerical integration rule.
-        INT = 0 : Uniformly reduced Gauss integration, NIP = PR  PS. Note
+        INT = 0: Uniformly reduced Gauss integration, NIP = PR  PS. Note
         that the number of integration points may change from element
         to element depending on local element degree.
-        INT = 1 : Full Gauss integration, NIP = (PR + 1)  (PS + 1). Note that
+        INT = 1: Full Gauss integration, NIP = (PR + 1)  (PS + 1). Note that
         the number of integration points may change from element to
         element depending on local element degree.
         """ # nopep8
@@ -271,8 +271,8 @@ class ElementShellBextPatch(KeywordBase):
     @property
     def imass(self) -> int:
         """Get or set the Option for lumping of mass matrix.
-        IMASS = 0 : Row sum.
-        IMASS = 1 : Diagonal weighting.
+        IMASS = 0: Row sum.
+        IMASS = 1: Diagonal weighting.
         """ # nopep8
         return self._cards[1].get_value("imass")
 
@@ -286,8 +286,8 @@ class ElementShellBextPatch(KeywordBase):
     @property
     def nl(self) -> typing.Optional[int]:
         """Get or set the Number of trimming loops
-        NL = 0 : No trimming loops (i.e., untrimmed U-spline).
-        NL > 0 : Trimmed U-spline with NL trimming loops.
+        NL = 0: No trimming loops (i.e., untrimmed U-spline).
+        NL > 0: Trimmed U-spline with NL trimming loops.
         """ # nopep8
         return self._cards[1].get_value("nl")
 
@@ -299,8 +299,8 @@ class ElementShellBextPatch(KeywordBase):
     @property
     def shpe(self) -> int:
         """Get or set the The Bezier element shape
-        SHPE = 0 : Quadrilateral Bezier element.
-        SHPE = 1 : Triangular Bezier element.
+        SHPE = 0: Quadrilateral Bezier element.
+        SHPE = 1: Triangular Bezier element.
         """ # nopep8
         return self._cards[2].get_value("shpe")
 
@@ -546,7 +546,7 @@ class ElementShellBextPatch(KeywordBase):
     def n1(self) -> int:
         """Get or set the Control points i (de
         ned via *NODE) which de
-        ne the Bezier element (format	A)..
+        ne the Bezier element (format A)..
         """ # nopep8
         return self._cards[5].get_value("n1")
 
@@ -559,7 +559,7 @@ class ElementShellBextPatch(KeywordBase):
     def n2(self) -> int:
         """Get or set the Control points i (de
         ned via *NODE) which de
-        ne the Bezier element (format	A).
+        ne the Bezier element (format A).
         """ # nopep8
         return self._cards[5].get_value("n2")
 
@@ -572,7 +572,7 @@ class ElementShellBextPatch(KeywordBase):
     def n3(self) -> int:
         """Get or set the Control points i (de
         ned via *NODE) which de
-        ne the Bezier element (format	A)
+        ne the Bezier element (format A)
         """ # nopep8
         return self._cards[5].get_value("n3")
 
@@ -585,7 +585,7 @@ class ElementShellBextPatch(KeywordBase):
     def n4(self) -> int:
         """Get or set the Control points i (de
         ned via *NODE) which de
-        ne the Bezier element (format	A).
+        ne the Bezier element (format A).
         """ # nopep8
         return self._cards[5].get_value("n4")
 
@@ -598,7 +598,7 @@ class ElementShellBextPatch(KeywordBase):
     def n5(self) -> int:
         """Get or set the Control points i (de
         ned via *NODE) which de
-        ne the Bezier element (format	A).
+        ne the Bezier element (format A).
         """ # nopep8
         return self._cards[5].get_value("n5")
 
@@ -611,7 +611,7 @@ class ElementShellBextPatch(KeywordBase):
     def n6(self) -> int:
         """Get or set the Control points i (de
         ned via *NODE) which de
-        ne the Bezier element (format	A)
+        ne the Bezier element (format A)
         """ # nopep8
         return self._cards[5].get_value("n6")
 
@@ -624,7 +624,7 @@ class ElementShellBextPatch(KeywordBase):
     def n7(self) -> int:
         """Get or set the Control points i (de
         ned via *NODE) which de
-        ne the Bezier element (format	A)
+        ne the Bezier element (format A)
         """ # nopep8
         return self._cards[5].get_value("n7")
 
@@ -637,7 +637,7 @@ class ElementShellBextPatch(KeywordBase):
     def n8(self) -> int:
         """Get or set the Control points i (de
         ned via *NODE) which de
-        ne the Bezier element (format	A)
+        ne the Bezier element (format A)
         """ # nopep8
         return self._cards[5].get_value("n8")
 

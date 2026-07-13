@@ -41,9 +41,9 @@ _MAT037_CARD0 = (
 )
 
 _MAT037_CARD1 = (
-    FieldSchema("idscale", int, 0, 10, None),
-    FieldSchema("ea", float, 10, 10, None),
-    FieldSchema("coe", float, 20, 10, None),
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
     FieldSchema("icfld", int, 30, 10, None),
     FieldSchema("unused", int, 40, 10, None),
     FieldSchema("strainlt", float, 50, 10, None),
@@ -63,7 +63,6 @@ class Mat037(KeywordBase):
     ]
     _link_fields = {
         "hlcid": LinkType.DEFINE_CURVE,
-        "idscale": LinkType.DEFINE_CURVE,
         "icfld": LinkType.DEFINE_CURVE,
     }
 
@@ -148,7 +147,8 @@ class Mat037(KeywordBase):
 
     @property
     def etan(self) -> typing.Optional[float]:
-        """Get or set the Plastic hardening modulus.
+        """Get or set the Plastic hardening modulus. When this value is negative, normal stresses (either from contact or applied pressure) are considered and *LOAD_SURFACE_STRESS must be used to capture the stresses. This feature is applicable to both shell element types 2 and 16. It is found in some cases this inclusion can improve accuracy.
+        The negative local z - stresses caused by the contact pressure can be viewed from d3plot files..
         """ # nopep8
         return self._cards[0].get_value("etan")
 
@@ -178,39 +178,6 @@ class Mat037(KeywordBase):
     def hlcid(self, value: int) -> None:
         """Set the hlcid property."""
         self._cards[0].set_value("hlcid", value)
-
-    @property
-    def idscale(self) -> typing.Optional[int]:
-        """Get or set the load curve ID defining the scale factor for the Young's modulus change with respect to effective strain (if EA and COE are defined), this curve is not necessary).
-        """ # nopep8
-        return self._cards[1].get_value("idscale")
-
-    @idscale.setter
-    def idscale(self, value: int) -> None:
-        """Set the idscale property."""
-        self._cards[1].set_value("idscale", value)
-
-    @property
-    def ea(self) -> typing.Optional[float]:
-        """Get or set the coefficients defining the Young's modulus with respect to the effective strain, EA is   and Coe is  (if IDSCALE is defined, these two parameters are not necessary).
-        """ # nopep8
-        return self._cards[1].get_value("ea")
-
-    @ea.setter
-    def ea(self, value: float) -> None:
-        """Set the ea property."""
-        self._cards[1].set_value("ea", value)
-
-    @property
-    def coe(self) -> typing.Optional[float]:
-        """Get or set the coefficients defining the Young's modulus with respect to the effective strain, EA is   and Coe is  (if IDSCALE is defined, these two parameters are not necessary).
-        """ # nopep8
-        return self._cards[1].get_value("coe")
-
-    @coe.setter
-    def coe(self, value: float) -> None:
-        """Set the coe property."""
-        self._cards[1].set_value("coe", value)
 
     @property
     def icfld(self) -> typing.Optional[int]:
@@ -262,21 +229,6 @@ class Mat037(KeywordBase):
     def hlcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for hlcid."""
         self.hlcid = value.lcid
-
-    @property
-    def idscale_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for idscale."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.idscale:
-                return kwd
-        return None
-
-    @idscale_link.setter
-    def idscale_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for idscale."""
-        self.idscale = value.lcid
 
     @property
     def icfld_link(self) -> typing.Optional[DefineCurve]:

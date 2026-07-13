@@ -28,7 +28,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EMEPCELLMODELFENTONKARMA_CARD0 = (
-    FieldSchema("matid", int, 0, 10, None),
+    FieldSchema("mid", int, 0, 10, None),
 )
 
 _EMEPCELLMODELFENTONKARMA_CARD1 = (
@@ -60,7 +60,7 @@ class EmEpCellmodelFentonkarma(KeywordBase):
     keyword = "EM"
     subkeyword = "EP_CELLMODEL_FENTONKARMA"
     _link_fields = {
-        "matid": LinkType.MAT,
+        "mid": LinkType.MAT,
     }
 
     def __init__(self, **kwargs):
@@ -85,16 +85,16 @@ class EmEpCellmodelFentonkarma(KeywordBase):
             ),
         ]
     @property
-    def matid(self) -> typing.Optional[int]:
-        """Get or set the Material ID defined in *MAT_.
+    def mid(self) -> typing.Optional[int]:
+        """Get or set the Material ID defined in the *MAT section. If a negative value is entered,  the cell model is defined on a node set instead of a part, and -MID is the node set where the cell model is defined.
 
         """ # nopep8
-        return self._cards[0].get_value("matid")
+        return self._cards[0].get_value("mid")
 
-    @matid.setter
-    def matid(self, value: int) -> None:
-        """Set the matid property."""
-        self._cards[0].set_value("matid", value)
+    @mid.setter
+    def mid(self, value: int) -> None:
+        """Set the mid property."""
+        self._cards[0].set_value("mid", value)
 
     @property
     def taud(self) -> typing.Optional[float]:
@@ -251,17 +251,17 @@ class EmEpCellmodelFentonkarma(KeywordBase):
         self._cards[3].set_value("w0", value)
 
     @property
-    def matid_link(self) -> typing.Optional[KeywordBase]:
-        """Get the MAT_* keyword for matid."""
+    def mid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the MAT_* keyword for mid."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_type("MAT"):
-            if kwd.mid == self.matid:
+            if kwd.mid == self.mid:
                 return kwd
         return None
 
-    @matid_link.setter
-    def matid_link(self, value: KeywordBase) -> None:
-        """Set the MAT_* keyword for matid."""
-        self.matid = value.mid
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
 

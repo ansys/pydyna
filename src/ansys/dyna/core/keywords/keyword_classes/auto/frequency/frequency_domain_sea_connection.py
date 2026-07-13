@@ -109,10 +109,10 @@ class FrequencyDomainSeaConnection(KeywordBase):
     @property
     def ctype(self) -> int:
         """Get or set the Type of connection
-        EQ.1: plate-plate
-        EQ.2: plate-cavity
-        EQ.3: plate-cavity-cavity
-        EQ.4: plate-beam
+        EQ.1: Plate-plate
+        EQ.2: Plate-cavity
+        EQ.3: Plate-cavity-cavity
+        EQ.4: Plate-beam
         .
         """ # nopep8
         return self._cards[0].get_value("ctype")
@@ -138,8 +138,8 @@ class FrequencyDomainSeaConnection(KeywordBase):
     @property
     def ibeam(self) -> int:
         """Get or set the Flag for plate connected to plate
-        EQ.0:	plate - plate connection.
-        EQ.1 : plate - plate - beam connection.
+        EQ.0: Plate - plate connection.
+        EQ.1: Plate - plate - beam connection.
         """ # nopep8
         return self._cards[0].get_value("ibeam")
 

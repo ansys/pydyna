@@ -27,6 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _INTERFACESPG1_CARD0 = (
+    FieldSchema("ispghis", int, 0, 10, 0),
 )
 
 class InterfaceSpg1(KeywordBase):
@@ -44,3 +45,18 @@ class InterfaceSpg1(KeywordBase):
                 **kwargs,
             ),
         ]
+    @property
+    def ispghis(self) -> int:
+        """Get or set the Option to transfer more internal variables required by the material model other than the stresses and effective plastic strain:
+        EQ.0: Only transfer the stresses and effective plastic strain.
+        EQ.1: Include all other internal variables required by the material model.
+        """ # nopep8
+        return self._cards[0].get_value("ispghis")
+
+    @ispghis.setter
+    def ispghis(self, value: int) -> None:
+        """Set the ispghis property."""
+        if value not in [0, 1, None]:
+            raise Exception("""ispghis must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("ispghis", value)
+

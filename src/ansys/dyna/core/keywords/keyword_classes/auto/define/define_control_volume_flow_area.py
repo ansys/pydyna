@@ -26,15 +26,12 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINECONTROLVOLUMEFLOWAREA_CARD0 = (
-    FieldSchema("id", int, 0, 10, None),
-    FieldSchema("sid", int, 10, 10, None),
+    FieldSchema("faid", int, 0, 10, None),
+    FieldSchema("fcisid", int, 10, 10, None),
+    FieldSchema("fasid", int, 10, 10, None),
     FieldSchema("stype", int, 20, 10, 1),
-    FieldSchema("pid_", int, 30, 10, 0, "pid "),
-    FieldSchema("area_", float, 40, 10, None, "area "),
-    FieldSchema("cviid_", float, 50, 10, None, "cviid "),
 )
 
 _DEFINECONTROLVOLUMEFLOWAREA_OPTION0_CARD0 = (
@@ -49,9 +46,6 @@ class DefineControlVolumeFlowArea(KeywordBase):
     _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
-    _link_fields = {
-        "pid_": LinkType.PART,
-    }
 
     def __init__(self, **kwargs):
         """Initialize the DefineControlVolumeFlowArea class."""
@@ -74,32 +68,43 @@ class DefineControlVolumeFlowArea(KeywordBase):
             ),
         ]
     @property
-    def id(self) -> typing.Optional[int]:
+    def faid(self) -> typing.Optional[int]:
         """Get or set the Flow area ID.
         """ # nopep8
-        return self._cards[0].get_value("id")
+        return self._cards[0].get_value("faid")
 
-    @id.setter
-    def id(self, value: int) -> None:
-        """Set the id property."""
-        self._cards[0].set_value("id", value)
+    @faid.setter
+    def faid(self, value: int) -> None:
+        """Set the faid property."""
+        self._cards[0].set_value("faid", value)
 
     @property
-    def sid(self) -> typing.Optional[int]:
-        """Get or set the SET ID defining the flow area
+    def fcisid(self) -> typing.Optional[int]:
+        """Get or set the Fluid cavity interaction ID referencing the *DEFINE_CONTROL_VOLUME_INTERACTION for which this area is used
         """ # nopep8
-        return self._cards[0].get_value("sid")
+        return self._cards[0].get_value("fcisid")
 
-    @sid.setter
-    def sid(self, value: int) -> None:
-        """Set the sid property."""
-        self._cards[0].set_value("sid", value)
+    @fcisid.setter
+    def fcisid(self, value: int) -> None:
+        """Set the fcisid property."""
+        self._cards[0].set_value("fcisid", value)
+
+    @property
+    def fasid(self) -> typing.Optional[int]:
+        """Get or set the Set ID giving the flow area
+        """ # nopep8
+        return self._cards[0].get_value("fasid")
+
+    @fasid.setter
+    def fasid(self, value: int) -> None:
+        """Set the fasid property."""
+        self._cards[0].set_value("fasid", value)
 
     @property
     def stype(self) -> int:
-        """Get or set the Type of set defining the flow area.
-        A value of 1 indicates a node set for the perimeter which will be automatically mesh,
-        and 2 indicates a segment set covering the flow area
+        """Get or set the Type of set specifying flow area (see Remark 2):
+        EQ.1:	Node set giving the perimeter of the area.The flow area will be automatically meshed.
+        EQ.2 : Segment set covering the flow area
         """ # nopep8
         return self._cards[0].get_value("stype")
 
@@ -109,39 +114,6 @@ class DefineControlVolumeFlowArea(KeywordBase):
         if value not in [1, 2, None]:
             raise Exception("""stype must be `None` or one of {1,2}.""")
         self._cards[0].set_value("stype", value)
-
-    @property
-    def pid_(self) -> int:
-        """Get or set the PART ID for null shells for visualizing the flow area. It defaults to 0, in which case the area will not be visualized.
-        """ # nopep8
-        return self._cards[0].get_value("pid_")
-
-    @pid_.setter
-    def pid_(self, value: int) -> None:
-        """Set the pid_ property."""
-        self._cards[0].set_value("pid_", value)
-
-    @property
-    def area_(self) -> typing.Optional[float]:
-        """Get or set the This is a constant area for the case when a flow area definition is not defined
-        """ # nopep8
-        return self._cards[0].get_value("area_")
-
-    @area_.setter
-    def area_(self, value: float) -> None:
-        """Set the area_ property."""
-        self._cards[0].set_value("area_", value)
-
-    @property
-    def cviid_(self) -> typing.Optional[float]:
-        """Get or set the CONTROL_VOLUME_INTERACTION ID that uses the flow area
-        """ # nopep8
-        return self._cards[0].get_value("cviid_")
-
-    @cviid_.setter
-    def cviid_(self, value: float) -> None:
-        """Set the cviid_ property."""
-        self._cards[0].set_value("cviid_", value)
 
     @property
     def title(self) -> typing.Optional[str]:
@@ -156,9 +128,4 @@ class DefineControlVolumeFlowArea(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
-
-    @property
-    def pid__link(self) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given pid_."""
-        return self._get_link_by_attr("PART", "pid", self.pid_, "parts")
 

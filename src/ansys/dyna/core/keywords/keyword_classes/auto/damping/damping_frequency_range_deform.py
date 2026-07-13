@@ -32,9 +32,10 @@ _DAMPINGFREQUENCYRANGEDEFORM_CARD0 = (
     FieldSchema("flow", float, 10, 10, 0.0),
     FieldSchema("fhigh", float, 20, 10, 0.0),
     FieldSchema("psid", int, 30, 10, 0),
-    FieldSchema("blank", int, 40, 10, 0),
+    FieldSchema("unused", int, 40, 10, None),
     FieldSchema("pidrel", int, 50, 10, 0),
     FieldSchema("iflg", int, 60, 10, 0),
+    FieldSchema("icard2", int, 70, 10, 0),
 )
 
 class DampingFrequencyRangeDeform(KeywordBase):
@@ -69,7 +70,7 @@ class DampingFrequencyRangeDeform(KeywordBase):
 
     @property
     def flow(self) -> float:
-        """Get or set the Lowest frequency in range of interest (cycles per unit time, e.g. Hz if time unit is seconds)
+        """Get or set the Lowest frequency in range of interest (cycles per unit time, e.g. Hz if the time unit is seconds.Must be greater than zero)
         """ # nopep8
         return self._cards[0].get_value("flow")
 
@@ -80,7 +81,7 @@ class DampingFrequencyRangeDeform(KeywordBase):
 
     @property
     def fhigh(self) -> float:
-        """Get or set the Highest frequency in range of interest (cycles per unit time, e.g. Hz if time unit is seconds)
+        """Get or set the Highest frequency in the range of interest (cycles per unit time, e.g. Hz if time unit is seconds.Must be greater than FLOW.)
         """ # nopep8
         return self._cards[0].get_value("fhigh")
 
@@ -91,7 +92,8 @@ class DampingFrequencyRangeDeform(KeywordBase):
 
     @property
     def psid(self) -> int:
-        """Get or set the Part set ID. The requested damping is applied only to the parts in the set. If PSID = 0, the damping is applied to all parts except those referred to by other *DAMPING_FREQUENCY_RANGE cards.
+        """Get or set the Meaning depends on OPTION and OPTION2. If OPTION and/or OPTION2 is blank, PSID is a part set ID (see *SET_PART). The requested damping is applied only to the parts in the set. If PSID = 0, the damping is applied to all parts except those referred to by other *DAMPING_FREQUENCY_RANGE cards.
+        If OPTION is DEFORMand OPTION2 is DMIG, PSID is the ID of a superelement(see EID on* ELEMENT_DIRECT_MATRIX_INPUT).If PSID = 0, the damping is applied to all superelements.
         """ # nopep8
         return self._cards[0].get_value("psid")
 
@@ -101,19 +103,8 @@ class DampingFrequencyRangeDeform(KeywordBase):
         self._cards[0].set_value("psid", value)
 
     @property
-    def blank(self) -> int:
-        """Get or set the Damping in fraction of critical.
-        """ # nopep8
-        return self._cards[0].get_value("blank")
-
-    @blank.setter
-    def blank(self, value: int) -> None:
-        """Set the blank property."""
-        self._cards[0].set_value("blank", value)
-
-    @property
     def pidrel(self) -> int:
-        """Get or set the Optional part ID of rigid body. Damping is then applied to the motion relative to the rigid body motion.  This input does not apply to the DEFORM option.
+        """Get or set the Optional part ID of a rigid body. Damping is then applied to the motion relative to the rigid body motion.  This input does not apply to the DEFORM keyword option.
         """ # nopep8
         return self._cards[0].get_value("pidrel")
 
@@ -125,8 +116,8 @@ class DampingFrequencyRangeDeform(KeywordBase):
     @property
     def iflg(self) -> int:
         """Get or set the Method used for internal calculation of damping constants:
-        EQ.0:	iterative(more accurate)
-        EQ.1 : approximate(same as R9 and previous versions)
+        EQ.0: iterative(more accurate)
+        EQ.1: approximate(same as R9 and previous versions)
         """ # nopep8
         return self._cards[0].get_value("iflg")
 
@@ -136,6 +127,19 @@ class DampingFrequencyRangeDeform(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""iflg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iflg", value)
+
+    @property
+    def icard2(self) -> int:
+        """Get or set the 
+        """ # nopep8
+        return self._cards[0].get_value("icard2")
+
+    @icard2.setter
+    def icard2(self, value: int) -> None:
+        """Set the icard2 property."""
+        if value not in [0, 1, None]:
+            raise Exception("""icard2 must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("icard2", value)
 
     @property
     def psid_link(self) -> typing.Optional[KeywordBase]:

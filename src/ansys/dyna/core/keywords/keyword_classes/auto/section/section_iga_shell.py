@@ -112,11 +112,11 @@ class SectionIgaShell(KeywordBase):
     def elform(self) -> int:
         """Get or set the Element formulation
         EQ.0: Reissner - Mindlin with fibers at the control points
-        EQ.1 : Kirchhoff - Love with fibers at the control points
-        EQ.2 : Kirchhoff - Love with fibers at the integration points
-        EQ.3 : Reissner - Mindlin with fibers at the integration points.
-        EQ.5:	Thick shell with thickness stretch based on the ELFORM = 0. See Remark 1.
-        EQ.6:	Thick shell with thickness stretch based on ELFORM = 3. See Remark 1
+        EQ.1: Kirchhoff - Love with fibers at the control points
+        EQ.2: Kirchhoff - Love with fibers at the integration points
+        EQ.3: Reissner - Mindlin with fibers at the integration points.
+        EQ.5: Thick shell with thickness stretch based on the ELFORM = 0. See Remark 1.
+        EQ.6: Thick shell with thickness stretch based on ELFORM = 3. See Remark 1
         """ # nopep8
         return self._cards[0].get_value("elform")
 
@@ -154,8 +154,8 @@ class SectionIgaShell(KeywordBase):
     def irl(self) -> int:
         """Get or set the Lamina integration rule
         EQ.0: Reduced Gauss - Legendre
-        EQ.1 : Gauss - Legendre
-        EQ.2 : Patchwise reduced Gauss - Legendre(for biquadratic NURBS only).
+        EQ.1: Gauss - Legendre
+        EQ.2: Patchwise reduced Gauss - Legendre(for biquadratic NURBS only).
         """ # nopep8
         return self._cards[0].get_value("irl")
 
@@ -170,8 +170,8 @@ class SectionIgaShell(KeywordBase):
     def qr_irid(self) -> float:
         """Get or set the Fiber quadrature rule or fiber integration rule ID, see *INTEGRATION_SHELL.
         LT.0.0: Absolute value is specified rule number.
-        EQ.0.0 : Gauss - Legendre / Gauss - Lobatto(up to 10 points)
-        EQ.1.0 : Trapezoidal, not recommended for accuracy reasons.
+        EQ.0.0: Gauss - Legendre / Gauss - Lobatto(up to 10 points)
+        EQ.1.0: Trapezoidal, not recommended for accuracy reasons.
         """ # nopep8
         return self._cards[0].get_value("qr_irid")
 

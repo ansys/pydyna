@@ -49,12 +49,12 @@ class FrequencyDomainAccelerationUnit(KeywordBase):
     @property
     def unit(self) -> int:
         """Get or set the Flag for acceleration unit conversion:
-        EQ.0: use [length unit]/[time unit]2 as unit of acceleration.
-        EQ.1: use g as unit for acceleration, and SI units (Newton, kg, meter, second, etc.) elsewhere.
-        EQ.2: use g as unit for acceleration, and Engineering units (lbf,lbf*second2/inch, inch, second, etc.) elsewhere.
-        EQ.3: use g as unit for acceleration, and units (kN, kg, mm, ms, GPa, etc.) elsewhere.
-        EQ4:use g as unit for acceleration, and units (Newton, ton, mm, second, MPa, etc.) elsewhere.
-        EQ.-1: use g as unit for acceleration and provide the multiplier for converting g to [length unit]/[time unit]2.
+        EQ.0: Use [length unit]/[time unit]2 as unit of acceleration.
+        EQ.1: Use g as unit for acceleration, and SI units (Newton, kg, meter, second, etc.) elsewhere.
+        EQ.2: Use g as unit for acceleration, and Engineering units (lbf,lbf*second2/inch, inch, second, etc.) elsewhere.
+        EQ.3: Use g as unit for acceleration, and units (kN, kg, mm, ms, GPa, etc.) elsewhere.
+        EQ4: Use g as unit for acceleration, and units (Newton, ton, mm, second, MPa, etc.) elsewhere.
+        EQ.-1: Use g as unit for acceleration and provide the multiplier for converting g to [length unit]/[time unit]2.
         """ # nopep8
         return self._cards[0].get_value("unit")
 

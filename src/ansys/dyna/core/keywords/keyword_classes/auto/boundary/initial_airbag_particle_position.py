@@ -58,7 +58,7 @@ class InitialAirbagParticlePosition(KeywordBase):
         ]
     @property
     def bag_id(self) -> typing.Optional[int]:
-        """Get or set the Airbag ID defined in *AIRBAG_‌PARTICLE_‌ID card
+        """Get or set the Airbag ID defined in *AIRBAG_PARTICLE_ID card
         """ # nopep8
         return self._cards[0].get_value("bag_id")
 

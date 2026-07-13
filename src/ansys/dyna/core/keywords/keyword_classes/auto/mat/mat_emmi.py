@@ -954,9 +954,9 @@ class MatEmmi(KeywordBase):
     @property
     def dmgopt(self) -> typing.Optional[float]:
         """Get or set the damage model option parameter
-        1.0	pressure independent Cocks/Ashby 1980
-        2.0	pressure dependent Cocks/Ashby 1980
-        3.0	pressure dependent Cocks 1989
+        1.0 pressure independent Cocks/Ashby 1980
+        2.0 pressure dependent Cocks/Ashby 1980
+        3.0 pressure dependent Cocks 1989
         """ # nopep8
         return self._cards[8].get_value("dmgopt")
 
@@ -968,8 +968,8 @@ class MatEmmi(KeywordBase):
     @property
     def delaso(self) -> typing.Optional[float]:
         """Get or set the Temperature option:
-        EQ.0.0:	Driven externally
-        EQ.1.0 : Adiabatic
+        EQ.0.0: Driven externally
+        EQ.1.0: Adiabatic
         """ # nopep8
         return self._cards[9].get_value("delaso")
 
@@ -981,8 +981,8 @@ class MatEmmi(KeywordBase):
     @property
     def dimplo(self) -> typing.Optional[float]:
         """Get or set the implementation option flag
-        1.0	combined viscous drag and thermally activated dislocation motion
-        2.0	separate viscous drag and thermally activated dislocation motion.
+        1.0 combined viscous drag and thermally activated dislocation motion
+        2.0 separate viscous drag and thermally activated dislocation motion.
         """ # nopep8
         return self._cards[9].get_value("dimplo")
 

@@ -41,7 +41,7 @@ _MAT187L_CARD0 = (
 )
 
 _MAT187L_CARD1 = (
-    FieldSchema("lcid_t", int, 0, 10, None),
+    FieldSchema("lcid_t", int, 0, 10, None, "lcid-t"),
     FieldSchema("lcid_c", int, 10, 10, 0),
     FieldSchema("ctflg", int, 20, 10, 0),
     FieldSchema("rateop", int, 30, 10, 0),
@@ -139,7 +139,7 @@ class Mat187L(KeywordBase):
 
     @property
     def lcemod(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining Young’s modulus as function of effective strain rate.. LCEMOD ≠ 0 activates viscoelasticity, see remark 3. The parameters BETA and RFILTF have to be defined too
+        """Get or set the Load curve ID defining Young's modulus as a function of effective strain rate.. LCEMOD.NE.0 activates viscoelasticity, see remark 3. The parameters BETA and RFILTF have to be defined too. If the first strain rate is negative, all values are expected to represent the natural logarithm of a strain rate.
         """ # nopep8
         return self._cards[0].get_value("lcemod")
 
@@ -151,7 +151,7 @@ class Mat187L(KeywordBase):
     @property
     def beta(self) -> typing.Optional[float]:
         """Get or set the Decay constant in viscoelastic law. See remark 3. BETA has the unit[1/time].
-        If LCEMOD > >0 is used, a non-zero value for BETA is mandatory
+        If LCEMOD > 0 is used, a non-zero value for BETA is mandatory
         """ # nopep8
         return self._cards[0].get_value("beta")
 
@@ -162,13 +162,7 @@ class Mat187L(KeywordBase):
 
     @property
     def lcid_t(self) -> typing.Optional[int]:
-        """Get or set the Load curve or table ID giving the yield stress as a function of plastic strain.
-        These curves should be obtained from quasi-static and (optionally) dynamic uniaxial tensile tests.
-        This input is mandatory.  If LCID-T is a table ID, the table values are effective strain rates
-        , and a curve of yield stress versus plastic strain must be given for each of those strain rates.
-        If the first value in the table is negative, LS-DYNA assumes that all the table values represent the natural logarithm of effective strain rate.
-        When the highest effective strain rate is several orders of magnitude greater than the lowest strain rate,
-        it is recommended that the natural log of strain rate be input in the table.
+        """Get or set the Load curve or table ID giving the yield stress as a function of plastic strain.   These curves should be obtained from quasi-static and (optionally) dynamic uniaxial tensile tests.  This input is mandatory, and the material model will not work unless at least one tensile stress-strain curve is given.  If LCID-T is a table ID, the table values are plastic strain rates, and a curve of yield stress versus plastic strain must be given for each of those strain rates.  If the first value in the table is negative, LS-DYNA assumes that all the table values represent the natural logarithm of plastic strain rate. When the highest plastic strain rate is several orders of magnitude greater than the lowest, it is recommended that the natural log of plastic strain rate be input in the table.  See Remark 4.
         """ # nopep8
         return self._cards[1].get_value("lcid_t")
 
@@ -193,8 +187,8 @@ class Mat187L(KeywordBase):
     @property
     def ctflg(self) -> int:
         """Get or set the Curve treatment flag (for LCID-T, LCID-C, and LCID-
-        EQ.0:	Rediscretized curves are used(default).We recommend usingIt is recommended to use this option together with an appropriate value of LCINT for accurate resolution of the curves(see * DEFINE_CURVE and *CONTROL_SOLUTION).
-        EQ.1 : Original curve values from the input are used.
+        EQ.0: Rediscretized curves (default).We recommend usingIt is recommended this option with an appropriate value of LCINT for accurate resolution of the curves(see *DEFINE_CURVE and *CONTROL_SOLUTION).
+        EQ.1: Original curve values from the input
         """ # nopep8
         return self._cards[1].get_value("ctflg")
 
@@ -208,21 +202,22 @@ class Mat187L(KeywordBase):
     @property
     def rateop(self) -> int:
         """Get or set the Calculation of effective strain rate option:
-        EQ.0:	Original method for calculating the effective strain rate
-        EQ.2 : Improved method for calculating the effective strain rate.This method gives a slightly closer match to* MAT_SAMP - 1 and is thus recommended
+        EQ.0: Original method for calculating the effective total strain rate.
+        EQ.1: Viscoplastic formulation, meaning using effective plastic strain rate.Recommended option to achieve the best match with *MAT_SAMP - 1.
+        EQ.2: Improved method for calculating the effective total strain rate.This method gives a slightly closer match(compared to RATEOP = 0) to *MAT_SAMP-1.
         """ # nopep8
         return self._cards[1].get_value("rateop")
 
     @rateop.setter
     def rateop(self, value: int) -> None:
         """Set the rateop property."""
-        if value not in [0, 2, None]:
-            raise Exception("""rateop must be `None` or one of {0,2}.""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""rateop must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("rateop", value)
 
     @property
     def nuep(self) -> typing.Optional[float]:
-        """Get or set the Plastic Poisson’s ratio: an estimated ratio of transversal to longitudinal plastic rate of deformation under uniaxial loading should be given.
+        """Get or set the Plastic Poisson's ratio: an estimated ratio of transversal to longitudinal plastic rate of deformation under uniaxial loading should be given.
         """ # nopep8
         return self._cards[1].get_value("nuep")
 
@@ -234,7 +229,7 @@ class Mat187L(KeywordBase):
     @property
     def lcid_p(self) -> int:
         """Get or set the Load curve ID giving the plastic Poisson's ratio as a function of an equivalent plastic strain measure during uniaxial tensile and uniaxial compressive testing.The plastic strain measure on the abscissa is negative for compression and positive for tension.
-        It is important to cover both tension and compression.  If LCID-P is given, NUEP is ignored
+        It is important to cover both tension and compression. If LCID-P is given, NUEP is ignored
         """ # nopep8
         return self._cards[1].get_value("lcid_p")
 

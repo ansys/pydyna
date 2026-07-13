@@ -102,9 +102,9 @@ class ConstrainedSpotweld(KeywordBase):
     @property
     def sn(self) -> typing.Optional[float]:
         """Get or set the Normal force at spotweld failure (optional, see Remark 2 in user's manual).
-        EQ.0.0:	the failure criteria is disabled
-        GT.0.0:	normal force at spot weld failure
-        LT.0.0:	curve ID which specifies the normal force at spot weld failure         as a function of the nodal temperature
+        EQ.0.0: The failure criterion is disabled
+        GT.0.0: Normal force at spot weld failure
+        LT.0.0: Curve ID which specifies the normal force at spot weld failure         as a function of the nodal temperature
         """ # nopep8
         return self._cards[1].get_value("sn")
 
@@ -116,9 +116,9 @@ class ConstrainedSpotweld(KeywordBase):
     @property
     def ss(self) -> typing.Optional[float]:
         """Get or set the Shear force at spotweld failure (optional, see Remark 2 in user's manual).
-        EQ.0.0:	the failure criteria is disabled
-        GT.0.0:	shear force at spot weld failure
-        LT.0.0:	curve ID which specifies the shear force at spot weld failure         as a function of the nodal temperature
+        EQ.0.0: The failure criterion is disabled
+        GT.0.0: Shear force at spot weld failure
+        LT.0.0: Curve ID which specifies the shear force at spot weld failure         as a function of the nodal temperature
         """ # nopep8
         return self._cards[1].get_value("ss")
 

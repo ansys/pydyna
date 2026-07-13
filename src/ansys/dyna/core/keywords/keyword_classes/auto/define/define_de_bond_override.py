@@ -30,6 +30,8 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _DEFINEDEBONDOVERRIDE_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
     FieldSchema("stype", int, 10, 10, 0),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("irand", int, 30, 10, 0),
 )
 
 _DEFINEDEBONDOVERRIDE_CARD1 = (
@@ -39,6 +41,14 @@ _DEFINEDEBONDOVERRIDE_CARD1 = (
     FieldSchema("pbs_s", float, 30, 10, None),
     FieldSchema("sfa", float, 40, 10, 1.0),
     FieldSchema("alpha", float, 50, 10, 0.0),
+    FieldSchema("bendsf", float, 60, 10, 1.0),
+)
+
+_DEFINEDEBONDOVERRIDE_CARD2 = (
+    FieldSchema("pbn", float, 0, 10, None),
+    FieldSchema("pbs", float, 10, 10, None),
+    FieldSchema("pbn_s", float, 20, 10, None),
+    FieldSchema("pbs_s", float, 30, 10, None),
 )
 
 _DEFINEDEBONDOVERRIDE_OPTION0_CARD0 = (
@@ -65,6 +75,10 @@ class DefineDeBondOverride(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _DEFINEDEBONDOVERRIDE_CARD1,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDEBONDOVERRIDE_CARD2,
                 **kwargs,
             ),
             OptionCardSet(
@@ -106,8 +120,23 @@ class DefineDeBondOverride(KeywordBase):
         self._cards[0].set_value("stype", value)
 
     @property
+    def irand(self) -> int:
+        """Get or set the Random distribution of bond properties:E
+        Q.0: Single property(default)
+        EQ.1: Uniform distribution
+        """ # nopep8
+        return self._cards[0].get_value("irand")
+
+    @irand.setter
+    def irand(self, value: int) -> None:
+        """Set the irand property."""
+        if value not in [0, 1, None]:
+            raise Exception("""irand must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("irand", value)
+
+    @property
     def pbn(self) -> typing.Optional[float]:
-        """Get or set the Parallel-bond modulus [Pa]. See Remarks 1 and 2
+        """Get or set the Parallel-bond modulus [Pa].For IRAND = 1, this is the minimum value in the distribution.  See Remarks 1 and 2
         """ # nopep8
         return self._cards[1].get_value("pbn")
 
@@ -118,7 +147,7 @@ class DefineDeBondOverride(KeywordBase):
 
     @property
     def pbs(self) -> typing.Optional[float]:
-        """Get or set the Parallel-bond stiffness ratio. shear stiffness/normal stiffness. See Remark 2
+        """Get or set the Parallel-bond stiffness ratio. shear stiffness/normal stiffness.For IRAND = 1, PBS is the minimum value of the parallel-bond stiffness ratio in the distribution.   See Remark 2
         """ # nopep8
         return self._cards[1].get_value("pbs")
 
@@ -129,7 +158,7 @@ class DefineDeBondOverride(KeywordBase):
 
     @property
     def pbn_s(self) -> typing.Optional[float]:
-        """Get or set the Parallel-bond maximum normal stress. A zero value defines an infinite maximum normal stress.
+        """Get or set the Parallel-bond maximum normal stress. A zero value defines an infinite maximum normal stress.For IRAND = 1, PBN_S is the minimum value used for the parallel-bond maximum normal stress in the distribution.
         """ # nopep8
         return self._cards[1].get_value("pbn_s")
 
@@ -140,7 +169,7 @@ class DefineDeBondOverride(KeywordBase):
 
     @property
     def pbs_s(self) -> typing.Optional[float]:
-        """Get or set the Parallel-bond maximum shear stress. A zero value defines an infinite maximum shear stress.
+        """Get or set the Parallel-bond maximum shear stress. A zero value defines an infinite maximum shear stress.For IRAND = 1, PBN_S is the minimum value used for the parallel-bond maximum normal stress in the distribution.
         """ # nopep8
         return self._cards[1].get_value("pbs_s")
 
@@ -172,15 +201,73 @@ class DefineDeBondOverride(KeywordBase):
         self._cards[1].set_value("alpha", value)
 
     @property
+    def bendsf(self) -> float:
+        """Get or set the Influence of bending/twisting on bond failure criteria (see Remark 6).
+        EQ. - 1.0: No bending / twisting is considered in bond failure criteria.
+        EQ.0.0: Defaults to 1.0.
+        GT.0.0: Scale factor for the bending / twisting component in bond failure criteria.
+        """ # nopep8
+        return self._cards[1].get_value("bendsf")
+
+    @bendsf.setter
+    def bendsf(self, value: float) -> None:
+        """Set the bendsf property."""
+        self._cards[1].set_value("bendsf", value)
+
+    @property
+    def pbn(self) -> typing.Optional[float]:
+        """Get or set the Parallel-bond modulus [Pa].For IRAND = 1, this is the minimum value in the distribution.  See Remarks 1 and 2
+        """ # nopep8
+        return self._cards[2].get_value("pbn")
+
+    @pbn.setter
+    def pbn(self, value: float) -> None:
+        """Set the pbn property."""
+        self._cards[2].set_value("pbn", value)
+
+    @property
+    def pbs(self) -> typing.Optional[float]:
+        """Get or set the Parallel-bond stiffness ratio. shear stiffness/normal stiffness.For IRAND = 1, PBS is the minimum value of the parallel-bond stiffness ratio in the distribution.   See Remark 2
+        """ # nopep8
+        return self._cards[2].get_value("pbs")
+
+    @pbs.setter
+    def pbs(self, value: float) -> None:
+        """Set the pbs property."""
+        self._cards[2].set_value("pbs", value)
+
+    @property
+    def pbn_s(self) -> typing.Optional[float]:
+        """Get or set the Parallel-bond maximum normal stress. A zero value defines an infinite maximum normal stress.For IRAND = 1, PBN_S is the minimum value used for the parallel-bond maximum normal stress in the distribution.
+        """ # nopep8
+        return self._cards[2].get_value("pbn_s")
+
+    @pbn_s.setter
+    def pbn_s(self, value: float) -> None:
+        """Set the pbn_s property."""
+        self._cards[2].set_value("pbn_s", value)
+
+    @property
+    def pbs_s(self) -> typing.Optional[float]:
+        """Get or set the Parallel-bond maximum shear stress. A zero value defines an infinite maximum shear stress.For IRAND = 1, PBN_S is the minimum value used for the parallel-bond maximum normal stress in the distribution.
+        """ # nopep8
+        return self._cards[2].get_value("pbs_s")
+
+    @pbs_s.setter
+    def pbs_s(self, value: float) -> None:
+        """Set the pbs_s property."""
+        self._cards[2].set_value("pbs_s", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[2].cards[0].get_value("title")
+        return self._cards[3].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[2].cards[0].set_value("title", value)
+        self._cards[3].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

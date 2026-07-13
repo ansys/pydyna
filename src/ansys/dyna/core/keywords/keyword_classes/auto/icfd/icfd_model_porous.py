@@ -30,32 +30,20 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import De
 
 _ICFDMODELPOROUS_CARD0 = (
     FieldSchema("pmmoid", int, 0, 10, None),
-    FieldSchema("pmid", int, 10, 10, 1),
+    FieldSchema("pmmtype", int, 10, 10, 1),
+    FieldSchema("form", int, 20, 10, 0),
+    FieldSchema("rhocp", float, 30, 10, 0.0),
+    FieldSchema("kappa", float, 40, 10, 0.0),
 )
 
 _ICFDMODELPOROUS_CARD1 = (
     FieldSchema("por", float, 0, 10, 0.0),
-    FieldSchema("per_thx", float, 10, 10, 0.0, "per/thx"),
-    FieldSchema("ff_thy", float, 20, 10, 0.0, "ff/thy"),
-    FieldSchema("thz", float, 30, 10, 0.0),
-    FieldSchema("pvlcidx", int, 40, 10, None),
-    FieldSchema("pvlcidy", int, 50, 10, None),
-    FieldSchema("pvlcidz", int, 60, 10, None),
-)
-
-_ICFDMODELPOROUS_CARD2 = (
-    FieldSchema("kxp_", float, 0, 10, 0.0, "kxp'"),
-    FieldSchema("kyp_", float, 10, 10, 0.0, "kyp'"),
-    FieldSchema("kzp_", float, 20, 10, 0.0, "kzp'"),
-)
-
-_ICFDMODELPOROUS_CARD3 = (
-    FieldSchema("p_x_pid1r", float, 0, 10, 0.0, "p-x/pid1r"),
-    FieldSchema("p_y_pid2r", float, 10, 10, 0.0, "p-y/pid2r"),
-    FieldSchema("projxp_z", float, 20, 10, 0.0, "projxp-z"),
-    FieldSchema("projyp_x", float, 30, 10, 0.0, "projyp-x"),
-    FieldSchema("projyp_y", float, 40, 10, 0.0, "projyp-y"),
-    FieldSchema("projyp_z", float, 50, 10, 0.0, "projyp-z"),
+    FieldSchema("per", float, 10, 10, 0.0),
+    FieldSchema("ff", float, 20, 10, 0.0),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("psflcid", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
 )
 
 class IcfdModelPorous(KeywordBase):
@@ -64,9 +52,7 @@ class IcfdModelPorous(KeywordBase):
     keyword = "ICFD"
     subkeyword = "MODEL_POROUS"
     _link_fields = {
-        "pvlcidx": LinkType.DEFINE_CURVE,
-        "pvlcidy": LinkType.DEFINE_CURVE,
-        "pvlcidz": LinkType.DEFINE_CURVE,
+        "psflcid": LinkType.DEFINE_CURVE,
     }
 
     def __init__(self, **kwargs):
@@ -79,14 +65,6 @@ class IcfdModelPorous(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _ICFDMODELPOROUS_CARD1,
-                **kwargs,
-            ),
-            Card.from_field_schemas_with_defaults(
-                _ICFDMODELPOROUS_CARD2,
-                **kwargs,
-            ),
-            Card.from_field_schemas_with_defaults(
-                _ICFDMODELPOROUS_CARD3,
                 **kwargs,
             ),
         ]
@@ -102,30 +80,67 @@ class IcfdModelPorous(KeywordBase):
         self._cards[0].set_value("pmmoid", value)
 
     @property
-    def pmid(self) -> int:
-        """Get or set the Porous media model type :
-        EQ.1 : Isotropic porous media - Ergun Correlation.
-        EQ.2 : Isotropic porous media - Darcy-Forchheimer model.
-        EQ.3 : Isotropic porous media - Permeability defined through Pressure-Velocity Data.
-        EQ.4 : Anisotropic porous media - Fixed local reference frame (See Figure 5-3).
-        EQ.5 : Anisotropic porous media model - Moving local reference
-        frame and permeability vector in local reference frame	(𝑥’, 𝑦’, 𝑧’) defined by three Pressure-Velocity curves.
-        EQ.6 : Anisotropic porous media model - Moving local reference frame and permeability vector constant.
+    def pmmtype(self) -> int:
+        """Get or set the Porous media model type:
+        EQ.1: Isotropic porous media - Ergun Correlation.
+        EQ.2: Isotropic porous media - Darcy-Forchheimer model.
+        EQ.3: Isotropic porous media - Permeability defined through Pressure-Velocity Data.
+        EQ.4: Anisotropic porous media - Fixed local reference frame (See Figure 5-3).
+        EQ.5: Anisotropic porous media model - Moving local reference
+        frame and permeability vector in local reference frame (, , ) defined by three Pressure-Velocity curves.
+        EQ.6: Anisotropic porous media model - Moving local reference frame and permeability vector constant.
         EQ.7: Anisotropic porous media model - Moving local reference
         frame and permeability vector constant. This model differs
         from PMID = 6 in the way the local reference frame is moved.
-        EQ.8:	Main parachute model to be used jointly with *MESH_EMBEDSHELL for the parachute surface. Similar to PMID=2.
-        EQ.10:	Parachute model to be used jointly with * MESH_EMBEDSHELL where the fabric permeability and Forchheimer factor are computed from the Pressure - Velocity curves of experimental data given by a LOAD_CURVE.Similar to PMID = 3.
-        EQ.11 : Parachute model similar to PMID = 8 but pressure gradient is directly defined by coefficients α and β as
+        EQ.8: Main parachute model to be used jointly with *MESH_EMBEDSHELL for the parachute surface. Similar to PMID=2.
+        EQ.10: Parachute model to be used jointly with *MESH_EMBEDSHELL where the fabric permeability and Forchheimer factor are computed from the Pressure - Velocity curves of experimental data given by a LOAD_CURVE.Similar to PMID = 3.
+        EQ.11: Parachute model similar to PMID = 8 but pressure gradient is directly defined by coefficients  and  as
         """ # nopep8
-        return self._cards[0].get_value("pmid")
+        return self._cards[0].get_value("pmmtype")
 
-    @pmid.setter
-    def pmid(self, value: int) -> None:
-        """Set the pmid property."""
+    @pmmtype.setter
+    def pmmtype(self, value: int) -> None:
+        """Set the pmmtype property."""
         if value not in [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, None]:
-            raise Exception("""pmid must be `None` or one of {1,2,3,4,5,6,7,8,10,11}.""")
-        self._cards[0].set_value("pmid", value)
+            raise Exception("""pmmtype must be `None` or one of {1,2,3,4,5,6,7,8,10,11}.""")
+        self._cards[0].set_value("pmmtype", value)
+
+    @property
+    def form(self) -> int:
+        """Get or set the Porous media formulation:
+        EQ.0: Classical(default)
+        EQ.2: Interstitial velocity
+        """ # nopep8
+        return self._cards[0].get_value("form")
+
+    @form.setter
+    def form(self, value: int) -> None:
+        """Set the form property."""
+        if value not in [0, 2, None]:
+            raise Exception("""form must be `None` or one of {0,2}.""")
+        self._cards[0].set_value("form", value)
+
+    @property
+    def rhocp(self) -> float:
+        """Get or set the Density of the structure multiplied by the specific heat of the structure
+        """ # nopep8
+        return self._cards[0].get_value("rhocp")
+
+    @rhocp.setter
+    def rhocp(self, value: float) -> None:
+        """Set the rhocp property."""
+        self._cards[0].set_value("rhocp", value)
+
+    @property
+    def kappa(self) -> float:
+        """Get or set the Thermal conductivity of the structure
+        """ # nopep8
+        return self._cards[0].get_value("kappa")
+
+    @kappa.setter
+    def kappa(self, value: float) -> None:
+        """Set the kappa property."""
+        self._cards[0].set_value("kappa", value)
 
     @property
     def por(self) -> float:
@@ -139,212 +154,50 @@ class IcfdModelPorous(KeywordBase):
         self._cards[1].set_value("por", value)
 
     @property
-    def per_thx(self) -> float:
-        """Get or set the Permeability k if PMID = 1 or 2. Probe Thickness delta x if PMID = 3 or PMID = 5.
+    def per(self) -> float:
+        """Get or set the PER:Permeability x
         """ # nopep8
-        return self._cards[1].get_value("per_thx")
+        return self._cards[1].get_value("per")
 
-    @per_thx.setter
-    def per_thx(self, value: float) -> None:
-        """Set the per_thx property."""
-        self._cards[1].set_value("per_thx", value)
+    @per.setter
+    def per(self, value: float) -> None:
+        """Set the per property."""
+        self._cards[1].set_value("per", value)
 
     @property
-    def ff_thy(self) -> float:
-        """Get or set the Forchheimer factor. To Be defined if PMID = 2. Probe Thickness delta y if PMID = 5.
+    def ff(self) -> float:
+        """Get or set the FF:Forchheimer factor to be defined if if PMMTYPE = 2 or 8
         """ # nopep8
-        return self._cards[1].get_value("ff_thy")
+        return self._cards[1].get_value("ff")
 
-    @ff_thy.setter
-    def ff_thy(self, value: float) -> None:
-        """Set the ff_thy property."""
-        self._cards[1].set_value("ff_thy", value)
+    @ff.setter
+    def ff(self, value: float) -> None:
+        """Set the ff property."""
+        self._cards[1].set_value("ff", value)
 
     @property
-    def thz(self) -> float:
-        """Get or set the Probe Thickness delta z if PMID = 5.
+    def psflcid(self) -> typing.Optional[int]:
+        """Get or set the PSFLCID:Optional permeability scale factor load curve ID, *DEFINE_CURVE_FUNCTION ID or *DEFINE_FUNCTION ID. If a *DEFINE_FUNCTION is used, the following parameters are allowed: f( x, y, z, vx, vy, vz, temp, pres, time).
         """ # nopep8
-        return self._cards[1].get_value("thz")
+        return self._cards[1].get_value("psflcid")
 
-    @thz.setter
-    def thz(self, value: float) -> None:
-        """Set the thz property."""
-        self._cards[1].set_value("thz", value)
+    @psflcid.setter
+    def psflcid(self, value: int) -> None:
+        """Set the psflcid property."""
+        self._cards[1].set_value("psflcid", value)
 
     @property
-    def pvlcidx(self) -> typing.Optional[int]:
-        """Get or set the Pressure function of Velocity Load Curve ID. To be defined if PMID = 3 and PMID = 5. If PMID = 5, this refers to P-V curve in global X direction..
-        """ # nopep8
-        return self._cards[1].get_value("pvlcidx")
-
-    @pvlcidx.setter
-    def pvlcidx(self, value: int) -> None:
-        """Set the pvlcidx property."""
-        self._cards[1].set_value("pvlcidx", value)
-
-    @property
-    def pvlcidy(self) -> typing.Optional[int]:
-        """Get or set the Pressure function of Velocity Load Curve ID. To be defined if PMID = 5. This refers to P-V curve in global Y direction.
-        """ # nopep8
-        return self._cards[1].get_value("pvlcidy")
-
-    @pvlcidy.setter
-    def pvlcidy(self, value: int) -> None:
-        """Set the pvlcidy property."""
-        self._cards[1].set_value("pvlcidy", value)
-
-    @property
-    def pvlcidz(self) -> typing.Optional[int]:
-        """Get or set the Pressure function of Velocity Load Curve ID. To be defined if PMID = 5. This refers to P-V curve in global Z direction.
-        """ # nopep8
-        return self._cards[1].get_value("pvlcidz")
-
-    @pvlcidz.setter
-    def pvlcidz(self, value: int) -> None:
-        """Set the pvlcidz property."""
-        self._cards[1].set_value("pvlcidz", value)
-
-    @property
-    def kxp_(self) -> float:
-        """Get or set the Permeability vector in local reference frame (x', y', z'). To be defined in PMID = 4, 5, 6 or 7. Those values become scale factors if	PMID = 5.
-        """ # nopep8
-        return self._cards[2].get_value("kxp_")
-
-    @kxp_.setter
-    def kxp_(self, value: float) -> None:
-        """Set the kxp_ property."""
-        self._cards[2].set_value("kxp_", value)
-
-    @property
-    def kyp_(self) -> float:
-        """Get or set the Permeability vector in local reference frame (x', y', z'). To be defined in PMID = 4, 5, 6 or 7. Those values become scale factors if	PMID = 5.
-        """ # nopep8
-        return self._cards[2].get_value("kyp_")
-
-    @kyp_.setter
-    def kyp_(self, value: float) -> None:
-        """Set the kyp_ property."""
-        self._cards[2].set_value("kyp_", value)
-
-    @property
-    def kzp_(self) -> float:
-        """Get or set the Permeability vector in local reference frame (x', y', z'. To be defined in PMID = 4, 5, 6 or 7. Those values become scale factors if	PMID = 5.
-        """ # nopep8
-        return self._cards[2].get_value("kzp_")
-
-    @kzp_.setter
-    def kzp_(self, value: float) -> None:
-        """Set the kzp_ property."""
-        self._cards[2].set_value("kzp_", value)
-
-    @property
-    def p_x_pid1r(self) -> float:
-        """Get or set the Projection of local permeability vector x' in global reference frame(x, y, z).
-        """ # nopep8
-        return self._cards[3].get_value("p_x_pid1r")
-
-    @p_x_pid1r.setter
-    def p_x_pid1r(self, value: float) -> None:
-        """Set the p_x_pid1r property."""
-        self._cards[3].set_value("p_x_pid1r", value)
-
-    @property
-    def p_y_pid2r(self) -> float:
-        """Get or set the Projection of local permeability vector x' in global reference frame(x, y, z).
-        """ # nopep8
-        return self._cards[3].get_value("p_y_pid2r")
-
-    @p_y_pid2r.setter
-    def p_y_pid2r(self, value: float) -> None:
-        """Set the p_y_pid2r property."""
-        self._cards[3].set_value("p_y_pid2r", value)
-
-    @property
-    def projxp_z(self) -> float:
-        """Get or set the Projection of local permeability vector x' in global reference frame(x, y, z).
-        """ # nopep8
-        return self._cards[3].get_value("projxp_z")
-
-    @projxp_z.setter
-    def projxp_z(self, value: float) -> None:
-        """Set the projxp_z property."""
-        self._cards[3].set_value("projxp_z", value)
-
-    @property
-    def projyp_x(self) -> float:
-        """Get or set the Projection of local permeability vector y' in global reference frame(x, y, z).
-        """ # nopep8
-        return self._cards[3].get_value("projyp_x")
-
-    @projyp_x.setter
-    def projyp_x(self, value: float) -> None:
-        """Set the projyp_x property."""
-        self._cards[3].set_value("projyp_x", value)
-
-    @property
-    def projyp_y(self) -> float:
-        """Get or set the Projection of local permeability vector y' in global reference frame(x, y, z).
-        """ # nopep8
-        return self._cards[3].get_value("projyp_y")
-
-    @projyp_y.setter
-    def projyp_y(self, value: float) -> None:
-        """Set the projyp_y property."""
-        self._cards[3].set_value("projyp_y", value)
-
-    @property
-    def projyp_z(self) -> float:
-        """Get or set the Projection of local permeability vector y' in global reference frame(x, y, z).
-        """ # nopep8
-        return self._cards[3].get_value("projyp_z")
-
-    @projyp_z.setter
-    def projyp_z(self, value: float) -> None:
-        """Set the projyp_z property."""
-        self._cards[3].set_value("projyp_z", value)
-
-    @property
-    def pvlcidx_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for pvlcidx."""
+    def psflcid_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for psflcid."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.pvlcidx:
+            if kwd.lcid == self.psflcid:
                 return kwd
         return None
 
-    @pvlcidx_link.setter
-    def pvlcidx_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for pvlcidx."""
-        self.pvlcidx = value.lcid
-
-    @property
-    def pvlcidy_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for pvlcidy."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.pvlcidy:
-                return kwd
-        return None
-
-    @pvlcidy_link.setter
-    def pvlcidy_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for pvlcidy."""
-        self.pvlcidy = value.lcid
-
-    @property
-    def pvlcidz_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for pvlcidz."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.pvlcidz:
-                return kwd
-        return None
-
-    @pvlcidz_link.setter
-    def pvlcidz_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for pvlcidz."""
-        self.pvlcidz = value.lcid
+    @psflcid_link.setter
+    def psflcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for psflcid."""
+        self.psflcid = value.lcid
 

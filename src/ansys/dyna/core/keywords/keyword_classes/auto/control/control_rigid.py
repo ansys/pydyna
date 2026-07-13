@@ -41,8 +41,9 @@ _CONTROLRIGID_CARD1 = (
     FieldSchema("norbic", int, 0, 10, 0),
     FieldSchema("gjadstf", float, 10, 10, 0.0),
     FieldSchema("gjadvsc", float, 20, 10, 0.0),
-    FieldSchema("tjastf", float, 30, 10, 0.0),
+    FieldSchema("tjadstf", float, 30, 10, 0.0),
     FieldSchema("tjadvsc", float, 40, 10, 0.0),
+    FieldSchema("rcvlr2d", int, 50, 10, 0),
 )
 
 class ControlRigid(KeywordBase):
@@ -67,8 +68,8 @@ class ControlRigid(KeywordBase):
     @property
     def lmf(self) -> int:
         """Get or set the Joint formulation flag for explicit analysis.  This flag can be used to switch to an implicit formulation for joints (*CONSTRAINED_JOINT_Option) which uses Lagrange multipliers to impose prescribed kinematic boundary conditions and joint constraints.  There is a slight cost overhead due to the assembly of sparse matrix equations which are solved using standard procedures for nonlinear problems in rigid multi-body dynamics.
-        EQ.0:	penalty formulation for joints(default)
-        EQ.1 : Lagrange - multiplier - based formulation for joints
+        EQ.0: penalty formulation for joints(default)
+        EQ.1: Lagrange - multiplier - based formulation for joints
         """ # nopep8
         return self._cards[0].get_value("lmf")
 
@@ -159,8 +160,8 @@ class ControlRigid(KeywordBase):
     def plotel(self) -> int:
         """Get or set the Automatic generation of *ELEMENT_PLOTEL for *CONSTRAINED_NODAL_RIGID_BODY.
         EQ.0: no generation
-        EQ.1: one part is generated for all nodal rigid bodies with the PID set to 1000000.
-        EQ.2: one part is generated for each nodal rigid body in the problem with a part ID of 1000000+PID, where PID is the nodal rigid body ID.
+        EQ.1: one part is generated for all nodal rigid bodies with the PID set to 10000000.
+        EQ.2: one part is generated for each nodal rigid body in the problem with a part ID of 10000000+PID, where PID is the nodal rigid body ID.
         """ # nopep8
         return self._cards[0].get_value("plotel")
 
@@ -189,8 +190,8 @@ class ControlRigid(KeywordBase):
     @property
     def norbic(self) -> int:
         """Get or set the Circumvent rigid body inertia check, see Remark 5.
-        EQ.0:	Off
-        EQ.1:	On.
+        EQ.0: Off
+        EQ.1: On.
         """ # nopep8
         return self._cards[1].get_value("norbic")
 
@@ -203,7 +204,7 @@ class ControlRigid(KeywordBase):
 
     @property
     def gjadstf(self) -> float:
-        """Get or set the Rotational stiffness is added to all joints in the model as a mean to model a small resistance, such as joint friction, or to avoid zero energy modes in implicit. This is equivalent to defining a *CONSTRAINED_‌JOINT_‌STIFFNESS_‌GENERALIZED to the free rotational degrees of freedom of all joints, using a slope in LCIDPH, LCIDT, LCIDPS that equal to GJADSTF.  For models with many joints this field is advantageous since it only has to be defined once for all joints, whereas the equivalent keyword must be defined for each joint
+        """Get or set the Rotational stiffness is added to all joints in the model as a mean to model a small resistance, such as joint friction, or to avoid zero energy modes in implicit. This is equivalent to defining a *CONSTRAINED_JOINT_STIFFNESS_GENERALIZED to the free rotational degrees of freedom of all joints, using a slope in LCIDPH, LCIDT, LCIDPS that equal to GJADSTF.  For models with many joints this field is advantageous since it only has to be defined once for all joints, whereas the equivalent keyword must be defined for each joint
         """ # nopep8
         return self._cards[1].get_value("gjadstf")
 
@@ -214,7 +215,7 @@ class ControlRigid(KeywordBase):
 
     @property
     def gjadvsc(self) -> float:
-        """Get or set the Rotational damping is added to all joints in the model as a mean to model a small resistance, such as joint friction, or to avoid zero energy modes in implicit. This is equivalent to defining a *CONSTRAINED_‌JOINT_‌STIFFNESS_‌GENERALIZED to the free rotational degrees of freedom of all joints, using a slope in DLCIDPH, DLCIDT, DLCIDPS that equal to GJADVSC.  Like GJADSTF, for models many joints this field is advantageous since it only has to be defined once for all joints, whereas the equivalent keyword must be defined for each joint.
+        """Get or set the Rotational damping is added to all joints in the model as a mean to model a small resistance, such as joint friction, or to avoid zero energy modes in implicit. This is equivalent to defining a *CONSTRAINED_JOINT_STIFFNESS_GENERALIZED to the free rotational degrees of freedom of all joints, using a slope in DLCIDPH, DLCIDT, DLCIDPS that equal to GJADVSC.  Like GJADSTF, for models many joints this field is advantageous since it only has to be defined once for all joints, whereas the equivalent keyword must be defined for each joint.
         """ # nopep8
         return self._cards[1].get_value("gjadvsc")
 
@@ -224,19 +225,19 @@ class ControlRigid(KeywordBase):
         self._cards[1].set_value("gjadvsc", value)
 
     @property
-    def tjastf(self) -> float:
-        """Get or set the Translational stiffness is added to all joints in the model as a mean to model a small resistance, such as joint friction, or to avoid zero energy modes in implicit. This is equivalent to defining a *CONSTRAINED_‌JOINT_‌STIFFNESS_‌TRANSLATIONAL to the free translational degrees of freedom of all joints, using a slope in LCIDX, LCIDY, LCIDZ that equal to TJADSTF.  Like GJADSTF, for models many joints this field is advantageous since it only has to be defined once for all joints, whereas the equivalent keyword must be defined for each joint
+    def tjadstf(self) -> float:
+        """Get or set the Translational stiffness is added to all joints in the model as a mean to model a small resistance, such as joint friction, or to avoid zero energy modes in implicit. This is equivalent to defining a *CONSTRAINED_JOINT_STIFFNESS_TRANSLATIONAL to the free translational degrees of freedom of all joints, using a slope in LCIDX, LCIDY, LCIDZ that equal to TJADSTF.  Like GJADSTF, for models many joints this field is advantageous since it only has to be defined once for all joints, whereas the equivalent keyword must be defined for each joint
         """ # nopep8
-        return self._cards[1].get_value("tjastf")
+        return self._cards[1].get_value("tjadstf")
 
-    @tjastf.setter
-    def tjastf(self, value: float) -> None:
-        """Set the tjastf property."""
-        self._cards[1].set_value("tjastf", value)
+    @tjadstf.setter
+    def tjadstf(self, value: float) -> None:
+        """Set the tjadstf property."""
+        self._cards[1].set_value("tjadstf", value)
 
     @property
     def tjadvsc(self) -> float:
-        """Get or set the Translational damping is added to all joints in the model as a mean to model a small resistance, such as joint friction, or to avoid zero energy modes in implicit. This is equivalent to defining a *CONSTRAINED_‌JOINT_‌STIFFNESS_‌TRANSLATIONAL to the free translational degrees of freedom of all joints, using a slope in DLCIDX, DLCIDY, DLCIDZ that equal to TJADVSC.  Like GJADSTF, for models many joints this field is advantageous since it only has to be defined once for all joints, whereas the equivalent keyword must be defined for each joint
+        """Get or set the Translational damping is added to all joints in the model as a mean to model a small resistance, such as joint friction, or to avoid zero energy modes in implicit. This is equivalent to defining a *CONSTRAINED_JOINT_STIFFNESS_TRANSLATIONAL to the free translational degrees of freedom of all joints, using a slope in DLCIDX, DLCIDY, DLCIDZ that equal to TJADVSC.  Like GJADSTF, for models many joints this field is advantageous since it only has to be defined once for all joints, whereas the equivalent keyword must be defined for each joint
         """ # nopep8
         return self._cards[1].get_value("tjadvsc")
 
@@ -244,4 +245,19 @@ class ControlRigid(KeywordBase):
     def tjadvsc(self, value: float) -> None:
         """Set the tjadvsc property."""
         self._cards[1].set_value("tjadvsc", value)
+
+    @property
+    def rcvlr2d(self) -> int:
+        """Get or set the Recover the lead rigid body of constrained rigid bodies, which was changed due to *DEFORMABLE_TO_RIGID_AUTOMATIC, see Remark 6.
+        EQ.0: Off
+        EQ.1: On
+        """ # nopep8
+        return self._cards[1].get_value("rcvlr2d")
+
+    @rcvlr2d.setter
+    def rcvlr2d(self, value: int) -> None:
+        """Set the rcvlr2d property."""
+        if value not in [0, 1, None]:
+            raise Exception("""rcvlr2d must be `None` or one of {0,1}.""")
+        self._cards[1].set_value("rcvlr2d", value)
 

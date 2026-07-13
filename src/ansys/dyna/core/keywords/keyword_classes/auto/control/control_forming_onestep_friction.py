@@ -64,7 +64,7 @@ class ControlFormingOnestepFriction(KeywordBase):
 
     @property
     def bdton(self) -> float:
-        """Get or set the Binder tonnage used to calculate friction force.
+        """Get or set the Binder tonnage used to calculate the friction force.
         """ # nopep8
         return self._cards[0].get_value("bdton")
 

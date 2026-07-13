@@ -53,10 +53,10 @@ _DEFINECONNECTIONPROPERTIES_CARD2 = (
     FieldSchema("dexsn", float, 0, 10, 1.0),
     FieldSchema("dexsb", float, 10, 10, 1.0),
     FieldSchema("dexss", float, 20, 10, 1.0),
-    FieldSchema("dcsn", int, 30, 10, None),
-    FieldSchema("dlcsb", int, 40, 10, None),
-    FieldSchema("dlcss", int, 50, 10, None),
-    FieldSchema("dgfad", int, 60, 10, None),
+    FieldSchema("dlcsn", int, 30, 10, 0),
+    FieldSchema("dlcsb", int, 40, 10, 0),
+    FieldSchema("dlcss", int, 50, 10, 0),
+    FieldSchema("dgfad", float, 60, 10, None),
     FieldSchema("dsclmrr", float, 70, 10, 1.0),
 )
 
@@ -73,7 +73,7 @@ class DefineConnectionProperties(KeywordBase):
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
-        "dcsn": LinkType.DEFINE_CURVE,
+        "dlcsn": LinkType.DEFINE_CURVE,
         "dlcsb": LinkType.DEFINE_CURVE,
         "dlcss": LinkType.DEFINE_CURVE,
     }
@@ -119,7 +119,10 @@ class DefineConnectionProperties(KeywordBase):
 
     @property
     def proprul(self) -> int:
-        """Get or set the The failure rule number for this connection
+        """Get or set the The failure rule number for this connection:
+        EQ.1: Use data of weld partner with lower RANK (default).
+        GE.2: Use *DEFINE_FUNCTION expressions to determine weld data depending on several values of both weld partners.
+        Variables DSIGY, DETAN, DDGPR, DSN, DSB, DSS, DEXSN, DEXSB, DEXSS, and DGFAD must be defined as function IDs, see Remark 5.
         """ # nopep8
         return self._cards[0].get_value("proprul")
 
@@ -131,9 +134,9 @@ class DefineConnectionProperties(KeywordBase):
     @property
     def areaeq(self) -> int:
         """Get or set the Area equation number for the connection area calculation.
-        EQ.0:	(default) area_true=area_modeled
-        EQ.1: 	millimeter form;
-        EQ.-1:	meter form;
+        EQ.0: (default) area_true=area_modeled
+        EQ.1: Millimeter form; see Remark 4
+        EQ.-1: Meter form; see Remark 4
         """ # nopep8
         return self._cards[0].get_value("areaeq")
 
@@ -147,11 +150,11 @@ class DefineConnectionProperties(KeywordBase):
     @property
     def dgtyp(self) -> int:
         """Get or set the Damage type
-        EQ.0:  no damage function is used
-        EQ.1:  strain based damage
-        EQ.2:  failure function based damage
-        EQ.3 or 4:  fading energy based damage
-        EQ.5:	Improved version of DGTYP=4; see Remark 4
+        EQ.0: No damage function is used
+        EQ.1: Strain based damage
+        EQ.2: Failure function based damage
+        EQ.3 or 4: Fading energy based damage(see Remark 4)
+        EQ.5: Improved version of DGTYP=4(see Remark 4)
         """ # nopep8
         return self._cards[0].get_value("dgtyp")
 
@@ -165,8 +168,8 @@ class DefineConnectionProperties(KeywordBase):
     @property
     def moarfl(self) -> int:
         """Get or set the Modeled area flag
-        EQ.0: Areamodelled goes down with shear (default)
-        EQ.1: Areamodelled stays constant
+        EQ.0: Area_modelled goes down with shear (default)
+        EQ.1: Area_modelled stays constant
         """ # nopep8
         return self._cards[0].get_value("moarfl")
 
@@ -180,6 +183,8 @@ class DefineConnectionProperties(KeywordBase):
     @property
     def dsigy(self) -> typing.Optional[float]:
         """Get or set the Default yield stress for the spot weld element
+        GT.0: Constant value
+        LT.0: |"DSIGY"| references a yield curve or table; see Remark 6
         """ # nopep8
         return self._cards[1].get_value("dsigy")
 
@@ -288,19 +293,19 @@ class DefineConnectionProperties(KeywordBase):
         self._cards[2].set_value("dexss", value)
 
     @property
-    def dcsn(self) -> typing.Optional[int]:
-        """Get or set the Default curve ID for normal strength scale factor as a function of strain rate.
+    def dlcsn(self) -> int:
+        """Get or set the Default curve ID for normal strength scale factor as a function of strain rate. If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as a natural logarithm of the strain rate.
         """ # nopep8
-        return self._cards[2].get_value("dcsn")
+        return self._cards[2].get_value("dlcsn")
 
-    @dcsn.setter
-    def dcsn(self, value: int) -> None:
-        """Set the dcsn property."""
-        self._cards[2].set_value("dcsn", value)
+    @dlcsn.setter
+    def dlcsn(self, value: int) -> None:
+        """Set the dlcsn property."""
+        self._cards[2].set_value("dlcsn", value)
 
     @property
-    def dlcsb(self) -> typing.Optional[int]:
-        """Get or set the Default curve ID for bending strength scale factor as a function of strain rate.
+    def dlcsb(self) -> int:
+        """Get or set the Default curve ID for bending strength scale factor as a function of strain rate. If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as a natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[2].get_value("dlcsb")
 
@@ -310,8 +315,8 @@ class DefineConnectionProperties(KeywordBase):
         self._cards[2].set_value("dlcsb", value)
 
     @property
-    def dlcss(self) -> typing.Optional[int]:
-        """Get or set the Default curve ID for shear strength scale factor as a function of strain rate.
+    def dlcss(self) -> int:
+        """Get or set the Default curve ID for shear strength scale factor as a function of strain rate. If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as a natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[2].get_value("dlcss")
 
@@ -321,13 +326,13 @@ class DefineConnectionProperties(KeywordBase):
         self._cards[2].set_value("dlcss", value)
 
     @property
-    def dgfad(self) -> typing.Optional[int]:
-        """Get or set the Default fading energy for damage type 3.
+    def dgfad(self) -> typing.Optional[float]:
+        """Get or set the Default fading energy for damage type 3 and type 4.
         """ # nopep8
         return self._cards[2].get_value("dgfad")
 
     @dgfad.setter
-    def dgfad(self, value: int) -> None:
+    def dgfad(self, value: float) -> None:
         """Set the dgfad property."""
         self._cards[2].set_value("dgfad", value)
 
@@ -357,19 +362,19 @@ class DefineConnectionProperties(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def dcsn_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for dcsn."""
+    def dlcsn_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for dlcsn."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.dcsn:
+            if kwd.lcid == self.dlcsn:
                 return kwd
         return None
 
-    @dcsn_link.setter
-    def dcsn_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for dcsn."""
-        self.dcsn = value.lcid
+    @dlcsn_link.setter
+    def dlcsn_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for dlcsn."""
+        self.dlcsn = value.lcid
 
     @property
     def dlcsb_link(self) -> typing.Optional[DefineCurve]:

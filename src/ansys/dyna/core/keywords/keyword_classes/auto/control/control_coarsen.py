@@ -81,8 +81,8 @@ class ControlCoarsen(KeywordBase):
     def icoarse(self) -> int:
         """Get or set the Coarsening flag:
         EQ.0: Do not coarsen (default),
-        EQ.1: Coarsen mesh at beginning of simulation.
-        EQ.2: Coarsen mesh at beginning of simulation for forming model
+        EQ.1: Coarsen mesh at beginning of simulation for forming model.
+        EQ.2: Coarsen mesh at beginning of simulation for crash model
         """ # nopep8
         return self._cards[0].get_value("icoarse")
 

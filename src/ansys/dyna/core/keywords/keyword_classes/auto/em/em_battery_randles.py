@@ -133,9 +133,9 @@ class EmBatteryRandles(KeywordBase):
     @property
     def rdlarea(self) -> int:
         """Get or set the Randle Area:
-        EQ.0:	Default.The parameters are not scaled by area factors.
-        EQ.1:	The parameters are per unit area and will be scaled in each Randle circuit by a factor depending on the local area of the circuit.
-        EQ.2:	The parameters are defined for the whole unit cell and will be scaled in each Randle circuit by a factor depending on the local area of the circuit and the global area of the cell.
+        EQ.0: Default.The parameters are not scaled by area factors.
+        EQ.1: The parameters are per unit area and will be scaled in each Randle circuit by a factor depending on the local area of the circuit.
+        EQ.2: The parameters are defined for the whole unit cell and will be scaled in each Randle circuit by a factor depending on the local area of the circuit and the global area of the cell.
         """ # nopep8
         return self._cards[0].get_value("rdlarea")
 
@@ -336,9 +336,9 @@ class EmBatteryRandles(KeywordBase):
 
     @property
     def frtherm(self) -> int:
-        """Get or set the From Thermal :
-        EQ.0:	The temperature used in the Randle circuit parameters is TEMP
-        EQ.1:	The temperature used in the Randle circuit parameter is the temperature from the thermal solver.
+        """Get or set the From Thermal:
+        EQ.0: The temperature used in the Randle circuit parameters is TEMP
+        EQ.1: The temperature used in the Randle circuit parameter is the temperature from the thermal solver.
         """ # nopep8
         return self._cards[3].get_value("frtherm")
 
@@ -351,9 +351,9 @@ class EmBatteryRandles(KeywordBase):
 
     @property
     def r0toth(self) -> int:
-        """Get or set the R0 to Thermal :
-        EQ.0:	The joule heating in the resistance r0 is not added to the thermal solver
-        EQ.1:	The joule heating in the resistance r0 is added to the thermal solver
+        """Get or set the R0 to Thermal:
+        EQ.0: The joule heating in the resistance r0 is not added to the thermal solver
+        EQ.1: The joule heating in the resistance r0 is added to the thermal solver
         """ # nopep8
         return self._cards[3].get_value("r0toth")
 
@@ -377,9 +377,9 @@ class EmBatteryRandles(KeywordBase):
 
     @property
     def tempu(self) -> int:
-        """Get or set the Temperature Unit :
-        EQ.0:	The temperature is in Celsius
-        EQ.1:	The Temperature is in Kelvin
+        """Get or set the Temperature Unit:
+        EQ.0: The temperature is in Celsius
+        EQ.1: The Temperature is in Kelvin
         """ # nopep8
         return self._cards[3].get_value("tempu")
 
@@ -392,9 +392,9 @@ class EmBatteryRandles(KeywordBase):
 
     @property
     def usesocs(self) -> int:
-        """Get or set the Use SOC shift  :
-        EQ.0:	Don't use the added SOCshift
-        EQ.1:	Use the added SOCshift
+        """Get or set the Use SOC shift:
+        EQ.0: Don't use the added SOCshift
+        EQ.1: Use the added SOCshift
         """ # nopep8
         return self._cards[4].get_value("usesocs")
 

@@ -52,8 +52,8 @@ class DatabasePapOutput(KeywordBase):
     @property
     def ivel(self) -> int:
         """Get or set the Meaning of "velocity" in d3plot and d3thdt output files
-        0:  Nodal velocity vector
-        1:  Seepage velocity vector
+        0: Nodal velocity vector
+        1: Seepage velocity vector
         """ # nopep8
         return self._cards[0].get_value("ivel")
 
@@ -67,7 +67,7 @@ class DatabasePapOutput(KeywordBase):
     @property
     def iaccx(self) -> int:
         """Get or set the Meaning of "X-Acceleration" in d3plot and d3thdt output files
-        0:  Not written
+        0: Not written
         21: Nodal air density
         22: Nodal pore air pressure
         24: Nodal air mass
@@ -85,7 +85,7 @@ class DatabasePapOutput(KeywordBase):
     @property
     def iaccy(self) -> int:
         """Get or set the Meaning of "X-Acceleration" in d3plot and d3thdt output files
-        0:  Not written
+        0: Not written
         21: Nodal air density
         22: Nodal pore air pressure
         24: Nodal air mass
@@ -103,7 +103,7 @@ class DatabasePapOutput(KeywordBase):
     @property
     def iaccz(self) -> int:
         """Get or set the Meaning of "X-Acceleration" in d3plot and d3thdt output files
-        0:  Not written
+        0: Not written
         21: Nodal air density
         22: Nodal pore air pressure
         24: Nodal air mass

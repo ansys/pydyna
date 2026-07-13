@@ -81,8 +81,8 @@ class EmControlSwitch(KeywordBase):
     @property
     def bemcomp(self) -> int:
         """Get or set the Determines if BEM matrices are recomputed each time the EM solver is turned back on:
-        EQ.0 : BEM matrices are recomputed
-        EQ.1 : BEM matrices are not recomputed
+        EQ.0: BEM matrices are recomputed
+        EQ.1: BEM matrices are not recomputed
         """ # nopep8
         return self._cards[0].get_value("bemcomp")
 

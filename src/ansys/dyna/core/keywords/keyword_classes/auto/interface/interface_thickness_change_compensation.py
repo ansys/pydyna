@@ -48,7 +48,7 @@ class InterfaceThicknessChangeCompensation(KeywordBase):
         ]
     @property
     def iflg(self) -> typing.Optional[int]:
-        """Get or set the Activation flag; set to �1� to invoke the option.
+        """Get or set the Activation flag; set to 1 to invoke the option.
         """ # nopep8
         return self._cards[0].get_value("iflg")
 

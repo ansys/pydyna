@@ -31,7 +31,7 @@ from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _IGA1DNURBSUVW_CARD0 = (
-    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("patchid", int, 0, 10, None),
     FieldSchema("nr", int, 10, 10, None),
     FieldSchema("pr", int, 20, 10, None),
 )
@@ -93,15 +93,15 @@ class Iga1DNurbsUvw(KeywordBase):
             ),
         ]
     @property
-    def nid(self) -> typing.Optional[int]:
-        """Get or set the Parametric univariate NURBS ID. A unique number must be chosen.
+    def patchid(self) -> typing.Optional[int]:
+        """Get or set the Parametric univariate NURBS patch ID. A unique number must be chosen.
         """ # nopep8
-        return self._cards[0].get_value("nid")
+        return self._cards[0].get_value("patchid")
 
-    @nid.setter
-    def nid(self, value: int) -> None:
-        """Set the nid property."""
-        self._cards[0].set_value("nid", value)
+    @patchid.setter
+    def patchid(self, value: int) -> None:
+        """Set the patchid property."""
+        self._cards[0].set_value("patchid", value)
 
     @property
     def nr(self) -> typing.Optional[int]:
@@ -129,8 +129,8 @@ class Iga1DNurbsUvw(KeywordBase):
     def unir(self) -> int:
         """Get or set the Knot vector type in the local r-direction.
         EQ.0: Specify the entire knot vector in the local r - direction.
-        EQ.1 : Uniform open knot vector in the local r - direction.
-        EQ.2 : Uniform period vector in the local r - direction.
+        EQ.1: Uniform open knot vector in the local r - direction.
+        EQ.2: Uniform period vector in the local r - direction.
         """ # nopep8
         return self._cards[1].get_value("unir")
 

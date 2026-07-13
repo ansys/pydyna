@@ -50,9 +50,9 @@ class ControlAirbag(KeywordBase):
         """Get or set the Flag to check and report of CV airbag segments for the input
         a.open(free) edge
         b.segment should come from SHELL / SOLID element
-        EQ.0:	Do not check(default).
-        EQ.1 : Check for free edges,and if there is a free edge in the airbag surface, output nodes of the free edge to d3hsp, issue a warning,and continue the run.Check for segment,and if there is a segment not from an element, output the segment to d3hsp, issue a error messageand terminate the run.
-        EQ.2 : Check for free edgesand if there is a free edge in the airbag surface, output nodes of the free edge to d3hsp, issue an error,and terminate the run.Check for segment,and if there is a segment not from an element, output the segment to d3hsp, issue a error messageand terminate the run.
+        EQ.0: Do not check(default).
+        EQ.1: Check for free edges,and if there is a free edge in the airbag surface, output nodes of the free edge to d3hsp, issue a warning,and continue the run.Check for segment,and if there is a segment not from an element, output the segment to d3hsp, issue a error messageand terminate the run.
+        EQ.2: Check for free edgesand if there is a free edge in the airbag surface, output nodes of the free edge to d3hsp, issue an error,and terminate the run.Check for segment,and if there is a segment not from an element, output the segment to d3hsp, issue a error messageand terminate the run.
         """ # nopep8
         return self._cards[0].get_value("ckerr")
 

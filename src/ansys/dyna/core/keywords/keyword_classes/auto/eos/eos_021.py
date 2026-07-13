@@ -33,8 +33,8 @@ _EOS021_CARD0 = (
     FieldSchema("lmc", int, 20, 10, None),
     FieldSchema("nhv", int, 30, 10, None),
     FieldSchema("ivect", int, 40, 10, None),
-    FieldSchema("eo", float, 50, 10, None),
-    FieldSchema("vo", float, 60, 10, None),
+    FieldSchema("e0", float, 50, 10, None),
+    FieldSchema("v0", float, 60, 10, None),
     FieldSchema("bulk", float, 70, 10, None),
 )
 
@@ -110,7 +110,7 @@ class Eos021(KeywordBase):
 
     @property
     def lmc(self) -> typing.Optional[int]:
-        """Get or set the Length of material constant array which is equal to the number of material constants to be input. (LMC ≤ 48)
+        """Get or set the Length of material constant array which is equal to the number of material constants to be input. (LMC  48)
         """ # nopep8
         return self._cards[0].get_value("lmc")
 
@@ -142,26 +142,26 @@ class Eos021(KeywordBase):
         self._cards[0].set_value("ivect", value)
 
     @property
-    def eo(self) -> typing.Optional[float]:
+    def e0(self) -> typing.Optional[float]:
         """Get or set the Initial internal energy.
         """ # nopep8
-        return self._cards[0].get_value("eo")
+        return self._cards[0].get_value("e0")
 
-    @eo.setter
-    def eo(self, value: float) -> None:
-        """Set the eo property."""
-        self._cards[0].set_value("eo", value)
+    @e0.setter
+    def e0(self, value: float) -> None:
+        """Set the e0 property."""
+        self._cards[0].set_value("e0", value)
 
     @property
-    def vo(self) -> typing.Optional[float]:
+    def v0(self) -> typing.Optional[float]:
         """Get or set the Initial relative volume.
         """ # nopep8
-        return self._cards[0].get_value("vo")
+        return self._cards[0].get_value("v0")
 
-    @vo.setter
-    def vo(self, value: float) -> None:
-        """Set the vo property."""
-        self._cards[0].set_value("vo", value)
+    @v0.setter
+    def v0(self, value: float) -> None:
+        """Set the v0 property."""
+        self._cards[0].set_value("v0", value)
 
     @property
     def bulk(self) -> typing.Optional[float]:

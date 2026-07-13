@@ -65,8 +65,8 @@ _MATMODIFIEDJOHNSONCOOK_CARD3 = (
 _MATMODIFIEDJOHNSONCOOK_CARD4 = (
     FieldSchema("dc_dc", float, 0, 10, None, "dc/dc"),
     FieldSchema("pd_wc", float, 10, 10, None, "pd/wc"),
-    FieldSchema("d1_na", float, 20, 10, None, "d1/na"),
-    FieldSchema("d2_na", float, 30, 10, None, "d2/na"),
+    FieldSchema("d1_phi", float, 20, 10, None, "d1/phi"),
+    FieldSchema("d2_gamma", float, 30, 10, None, "d2/gamma"),
     FieldSchema("d3_na", float, 40, 10, None, "d3/na"),
     FieldSchema("d4_na", float, 50, 10, None, "d4/na"),
     FieldSchema("d5_na", float, 60, 10, None, "d5/na"),
@@ -293,7 +293,7 @@ class MatModifiedJohnsonCook(KeywordBase):
     @property
     def a_siga(self) -> typing.Optional[float]:
         """Get or set the If FLAG1=0: Johnson-Cook yield stress A.
-        If FLAG1=1 :Zerilli-Armstrong parameter alfa_a.
+        If FLAG1=1:Zerilli-Armstrong parameter alfa_a.
         """ # nopep8
         return self._cards[2].get_value("a_siga")
 
@@ -352,7 +352,7 @@ class MatModifiedJohnsonCook(KeywordBase):
     @property
     def q1_a(self) -> typing.Optional[float]:
         """Get or set the If FLAG1=0: Voce hardening parameter Q1.
-        If FLAG1=1 :Zerilli-Armstrong parameter alfa_a.
+        If FLAG1=1:Zerilli-Armstrong parameter alfa_a.
         """ # nopep8
         return self._cards[3].get_value("q1_a")
 
@@ -421,26 +421,28 @@ class MatModifiedJohnsonCook(KeywordBase):
         self._cards[4].set_value("pd_wc", value)
 
     @property
-    def d1_na(self) -> typing.Optional[float]:
+    def d1_phi(self) -> typing.Optional[float]:
         """Get or set the Define only if FLAG2=0: Fracture parameters in the Johnson-Cook fracture criterion.
+        PHI: Extended Cockcroft-Latham parameter phi, see Equation (107.19b)
         """ # nopep8
-        return self._cards[4].get_value("d1_na")
+        return self._cards[4].get_value("d1_phi")
 
-    @d1_na.setter
-    def d1_na(self, value: float) -> None:
-        """Set the d1_na property."""
-        self._cards[4].set_value("d1_na", value)
+    @d1_phi.setter
+    def d1_phi(self, value: float) -> None:
+        """Set the d1_phi property."""
+        self._cards[4].set_value("d1_phi", value)
 
     @property
-    def d2_na(self) -> typing.Optional[float]:
+    def d2_gamma(self) -> typing.Optional[float]:
         """Get or set the Define only if FLAG2=0: Fracture parameters in the Johnson-Cook fracture criterion.
+        GAMMA:Extended Cockcroft-Latham parameter gamma, see Equation (107.19b).
         """ # nopep8
-        return self._cards[4].get_value("d2_na")
+        return self._cards[4].get_value("d2_gamma")
 
-    @d2_na.setter
-    def d2_na(self, value: float) -> None:
-        """Set the d2_na property."""
-        self._cards[4].set_value("d2_na", value)
+    @d2_gamma.setter
+    def d2_gamma(self, value: float) -> None:
+        """Set the d2_gamma property."""
+        self._cards[4].set_value("d2_gamma", value)
 
     @property
     def d3_na(self) -> typing.Optional[float]:

@@ -176,7 +176,7 @@ class ConstrainedJointScrew(KeywordBase):
 
     @property
     def lcid(self) -> int:
-        """Get or set the Not to be defined.
+        """Get or set the curve ID for MOTOR joints
         """ # nopep8
         return self._cards[1].get_value("lcid")
 
@@ -187,18 +187,23 @@ class ConstrainedJointScrew(KeywordBase):
 
     @property
     def type(self) -> int:
-        """Get or set the Not to be defined.
+        """Get or set the Flagfor MOTOR joints as follows:
+        EQ.0:	Translational / rotational velocity
+        EQ.1 : Translational / rotational acceleration
+        EQ.2 : Translational / rotational displacement
         """ # nopep8
         return self._cards[1].get_value("type")
 
     @type.setter
     def type(self, value: int) -> None:
         """Set the type property."""
+        if value not in [0, 1, 2, None]:
+            raise Exception("""type must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("type", value)
 
     @property
     def r1(self) -> typing.Optional[float]:
-        """Get or set the Not to be defined.
+        """Get or set the Radius, R_1, for the gear, pulley, and harmonic joint types.  If undefined, nodal points 5 and 6 are assumed to be on the outer radius. The values of R1 and R2 affect the output reaction forces. The forces are calculated from the moments by dividing them by the radii. For harmonic joints, R2 does not correspond to the actual radius.
         """ # nopep8
         return self._cards[1].get_value("r1")
 

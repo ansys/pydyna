@@ -116,11 +116,11 @@ class Mat159(KeywordBase):
         """Get or set the Plotting options:
         EQ. 1: Maximum of brittle and ductile damage (default).
         EQ. 2: Maximum of brittle and ductile damage, with recovery of  brittle damage.
-        EQ. 3:  Brittle damage.
-        EQ. 4:  Ductile damage.
-        EQ. 5:    (intersection of cap with shear surface).
+        EQ. 3: Brittle damage.
+        EQ. 4: Ductile damage.
+        EQ. 5: (intersection of cap with shear surface).
         EQ. 6: X0 (intersection of cap with pressure axis).
-        EQ. 7:   (plastic volume strain).
+        EQ. 7: (plastic volume strain).
         """ # nopep8
         return self._cards[0].get_value("nplot")
 
@@ -133,7 +133,7 @@ class Mat159(KeywordBase):
 
     @property
     def incre(self) -> typing.Optional[float]:
-        """Get or set the Maximum strain increment for subincrementation.  If left blank, a default value is set during initialization based upon the shear strength and stiffness
+        """Get or set the Maximum strain increment for subincrementation. If left blank, a default value is set during initialization based upon the shear strength and stiffness
         """ # nopep8
         return self._cards[0].get_value("incre")
 
@@ -145,8 +145,8 @@ class Mat159(KeywordBase):
     @property
     def irate(self) -> int:
         """Get or set the Rate effects options:
-        EQ.   0: Rate effects model turned off (default).
-        EQ.   1: Rate effects model turned on.
+        EQ.  0: Rate effects model turned off (default).
+        EQ.  1: Rate effects model turned on.
         """ # nopep8
         return self._cards[0].get_value("irate")
 
@@ -159,7 +159,7 @@ class Mat159(KeywordBase):
 
     @property
     def erode(self) -> typing.Optional[float]:
-        """Get or set the Elements erode when damage exceeds 0.99 and the maximum principal strain exceeds 1.-ERODE.   For erosion that is independent of strain, set ERODE equal to 1.0.   Erosion does not occur if ERODE is less than 1.0.
+        """Get or set the Elements erode when damage exceeds 0.99 and the maximum principal strain exceeds 1.-ERODE.  For erosion that is independent of strain, set ERODE equal to 1.0.  Erosion does not occur if ERODE is less than 1.0.
         """ # nopep8
         return self._cards[0].get_value("erode")
 
@@ -170,9 +170,9 @@ class Mat159(KeywordBase):
 
     @property
     def recov(self) -> float:
-        """Get or set the The modulus is recovered in compression when RECOV is equal to 0 (default).  The modulus remains at the brittle damage level when RECOV is equal to 1.  Partial recovery is modeled for values of RECOV between 0 and 1.  Two options are available:
-        Option 1:  Input a value between 0 and 1.  Recovery is based upon the sign of the pressure invariant only.
-        Option 2:  Input a value between 10 and 11.  Recovery is based upon the sign of both the pressure and volumetric strain.    In this case, RECOV=RECOV-10, and a flag is set to request the volumetric strain check.
+        """Get or set the The modulus is recovered in compression when RECOV is equal to 0 (default). The modulus remains at the brittle damage level when RECOV is equal to 1. Partial recovery is modeled for values of RECOV between 0 and 1. Two options are available:
+        Option 1: Input a value between 0 and 1. Recovery is based upon the sign of the pressure invariant only.
+        Option 2: Input a value between 10 and 11. Recovery is based upon the sign of both the pressure and volumetric strain.   In this case, RECOV=RECOV-10, and a flag is set to request the volumetric strain check.
         """ # nopep8
         return self._cards[0].get_value("recov")
 
@@ -198,7 +198,7 @@ class Mat159(KeywordBase):
 
     @property
     def pred(self) -> typing.Optional[float]:
-        """Get or set the Pre-existing damage (0   PreD < 1).  If left blank, the default is zero (no pre-existing damage).
+        """Get or set the Pre-existing damage (0   PreD < 1). If left blank, the default is zero (no pre-existing damage).
         """ # nopep8
         return self._cards[1].get_value("pred")
 
@@ -209,7 +209,7 @@ class Mat159(KeywordBase):
 
     @property
     def fpc(self) -> typing.Optional[float]:
-        """Get or set the Unconfined compression strength, f 'C.  If left blank, default is 30 MPa.
+        """Get or set the Unconfined compression strength, f 'C. If left blank, default is 30 MPa.
         """ # nopep8
         return self._cards[2].get_value("fpc")
 
@@ -220,7 +220,7 @@ class Mat159(KeywordBase):
 
     @property
     def dagg(self) -> typing.Optional[float]:
-        """Get or set the Maximum aggregate size, Dagg.   If left blank, default is 19 mm (3/4 inch).
+        """Get or set the Maximum aggregate size, Dagg.  If left blank, default is 19 mm (3/4 inch).
         """ # nopep8
         return self._cards[2].get_value("dagg")
 

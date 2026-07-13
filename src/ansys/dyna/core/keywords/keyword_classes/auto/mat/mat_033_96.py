@@ -346,9 +346,9 @@ class Mat03396(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option:
-        EQ.  0.0: locally orthotropic with material axes determined by element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
+        EQ. 0.0: locally orthotropic with material axes determined by element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
-        EQ.3.0:  locally orthotropic material axes determined by offsetting
+        EQ.3.0: locally orthotropic material axes determined by offsetting
         the material axes by an angle, BETA, from a line determined by taking the cross product of the element.
         LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
         *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR).

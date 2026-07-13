@@ -215,7 +215,7 @@ class Mat119(KeywordBase):
 
     @property
     def kt(self) -> typing.Optional[float]:
-        """Get or set the Translational stiffness for IUNLD = 2.0.  However, if IFLAG = 2, then it is the translational stiffness for unloading along the local r-axis.
+        """Get or set the Translational stiffness for IUNLD = 2.0. However, if IFLAG = 2, then it is the translational stiffness for unloading along the local r-axis.
         If left blank, a value calculated by LS-DYNA will be used.
         """ # nopep8
         return self._cards[0].get_value("kt")
@@ -227,7 +227,7 @@ class Mat119(KeywordBase):
 
     @property
     def kr(self) -> typing.Optional[float]:
-        """Get or set the Rotational stiffness for IUNLD = 2.0.  However, if IFLAG =‌ 2, then KR is the rotational stiffness for unloading along the local r-axis.
+        """Get or set the Rotational stiffness for IUNLD = 2.0. However, if IFLAG = 2, then KR is the rotational stiffness for unloading along the local r-axis.
         If left blank, a value calculated by LS-DYNA will be used
         """ # nopep8
         return self._cards[0].get_value("kr")
@@ -240,11 +240,11 @@ class Mat119(KeywordBase):
     @property
     def iunld(self) -> typing.Optional[int]:
         """Get or set the Unloading option (see Figure 0-1):
-        EQ.0.0:	loading and unloading follow loading curve
-        EQ.1.0:	loading follows loading curve, unloading follows unloading curve. The unloading curve ID if undefined is taken as the loading curve.
-        EQ.2.0:	loading follows loading curve, unloading follows unloading stiffness, KT or KR, to the unloading curve.
+        EQ.0.0: loading and unloading follow loading curve
+        EQ.1.0: loading follows loading curve, unloading follows unloading curve. The unloading curve ID if undefined is taken as the loading curve.
+        EQ.2.0: loading follows loading curve, unloading follows unloading stiffness, KT or KR, to the unloading curve.
         The loading and unloading curves may only intersect at the origin of the axes.
-        EQ.3.0:	quadratic unloading from peak displacement value to a permanent offset.
+        EQ.3.0: quadratic unloading from peak displacement value to a permanent offset.
         """ # nopep8
         return self._cards[0].get_value("iunld")
 
@@ -266,7 +266,7 @@ class Mat119(KeywordBase):
 
     @property
     def dampf(self) -> typing.Optional[float]:
-        """Get or set the Damping factor for stability.  Values in the neighborhood of unity are recommended. This damping factor is properly scaled to eliminate time step size dependency. Also, it is active if and only if the local stiffness is defined.
+        """Get or set the Damping factor for stability. Values in the neighborhood of unity are recommended. This damping factor is properly scaled to eliminate time step size dependency. Also, it is active if and only if the local stiffness is defined.
         """ # nopep8
         return self._cards[0].get_value("dampf")
 
@@ -278,9 +278,9 @@ class Mat119(KeywordBase):
     @property
     def iflag(self) -> int:
         """Get or set the Formulation flag:
-        EQ.0:	displacement formulation which is used in all other models
-        EQ.1:	linear strain formulation.  The displacements and velocities are divided by the initial length of the beam.
-        EQ.2:	a displacement formulation to simulate the buckling behavior of crushable frames.
+        EQ.0: displacement formulation which is used in all other models
+        EQ.1: linear strain formulation. The displacements and velocities are divided by the initial length of the beam.
+        EQ.2: a displacement formulation to simulate the buckling behavior of crushable frames.
         """ # nopep8
         return self._cards[0].get_value("iflag")
 
@@ -294,7 +294,7 @@ class Mat119(KeywordBase):
     @property
     def lcidtr(self) -> typing.Optional[int]:
         """Get or set the Load curve ID defining translational force resultant along local r-axis versus relative translational displacement.
-        If zero, no stiffness related forces are generated for this degree of freedom. The loading curves must be defined from the most negative displacement to the most positive displacement.  The force does not need to increase montonically. The curves in this input are linearly extrapolated when the displacement range falls outside the curve definition.
+        If zero, no stiffness related forces are generated for this degree of freedom. The loading curves must be defined from the most negative displacement to the most positive displacement. The force does not need to increase montonically. The curves in this input are linearly extrapolated when the displacement range falls outside the curve definition.
         """ # nopep8
         return self._cards[1].get_value("lcidtr")
 
@@ -328,8 +328,8 @@ class Mat119(KeywordBase):
     @property
     def lcidrr(self) -> typing.Optional[int]:
         """Get or set the Load curve for rotational moment resultant about the local r-axis:
-        IFLAG.NE.2:	load curve ID defining rotational moment resultant about local r-axis as a function of relative rotational displacement
-        IFLAG.EQ.2:	load curve ID defining rotational moment resultant about local r-axis as a function of relative rotational displacement at node 2.
+        IFLAG.NE.2: load curve ID defining rotational moment resultant about local r-axis as a function of relative rotational displacement
+        IFLAG.EQ.2: load curve ID defining rotational moment resultant about local r-axis as a function of relative rotational displacement at node 2.
         """ # nopep8
         return self._cards[1].get_value("lcidrr")
 
@@ -341,8 +341,8 @@ class Mat119(KeywordBase):
     @property
     def lcidrs(self) -> typing.Optional[int]:
         """Get or set the Load curve for rotational moment resultant about local r-axis:
-        IFLAG.NE.2:	load curve ID defining rotational moment resultant about local r-axis as a function of relative rotational displacement
-        IFLAG.EQ.2:	load curve ID defining rotational moment resultant about local r-axis as a function of relative rotational displacement at node 2.
+        IFLAG.NE.2: load curve ID defining rotational moment resultant about local r-axis as a function of relative rotational displacement
+        IFLAG.EQ.2: load curve ID defining rotational moment resultant about local r-axis as a function of relative rotational displacement at node 2.
         """ # nopep8
         return self._cards[1].get_value("lcidrs")
 
@@ -354,8 +354,8 @@ class Mat119(KeywordBase):
     @property
     def lcidrt(self) -> typing.Optional[int]:
         """Get or set the Load curve for rotational moment resultant about local -axis:
-        IFLAG.NE.2:	load curve ID defining rotational moment resultant about local s-axis as a function of relative rotational displacement
-        IFLAG.EQ.2:	load curve ID defining rotational moment resultant about local s-axis as a function of relative rotational displacement at node 2.
+        IFLAG.NE.2: load curve ID defining rotational moment resultant about local s-axis as a function of relative rotational displacement
+        IFLAG.EQ.2: load curve ID defining rotational moment resultant about local s-axis as a function of relative rotational displacement at node 2.
         """ # nopep8
         return self._cards[1].get_value("lcidrt")
 
@@ -368,9 +368,9 @@ class Mat119(KeywordBase):
     def lcidtur(self) -> typing.Optional[int]:
         """Get or set the Load curve ID defining translational force resultant along local r-axis as a function of relative translational displacement during unloading.
         The force values defined by this curve must increase monotonically from the most negative displacement to the most positive displacement.
-        For IUNLD = 1.0, the slope of this curve must equal or exceed the loading curve for stability reasons.  This is not the case for IUNLD = 2.0.
-        For loading and unloading to follow the same path simply set LCIDTUR = LCIDTR.  For options IUNLD = 0.0 or 3.0 the unloading curve is not required.
-        For IUNLD = 2.0, if LCIDTUR is left blank or zero, the default is to use the same curve for unloading as for loading.
+        For IUNLD = 1.0, the slope of this curve must equal or exceed the loading curve for stability reasons. This is not the case for IUNLD = 2.0.
+        For loading and unloading to follow the same path simply set LCIDTUR = LCIDTR. For options IUNLD = 0.0 or 3.0 the unloading curve is not required.
+        For IUNLD = 2.0, if LCIDTUR is left blank or zero, the default is to use the same curve for unloading as for loading.
         """ # nopep8
         return self._cards[2].get_value("lcidtur")
 
@@ -381,7 +381,7 @@ class Mat119(KeywordBase):
 
     @property
     def lcidtus(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining translational force resultant along local s-axis as a function of relative translational displacement during unloading (IFLAG = 0 or 1 only).
+        """Get or set the Load curve ID defining translational force resultant along local s-axis as a function of relative translational displacement during unloading (IFLAG = 0 or 1 only).
         """ # nopep8
         return self._cards[2].get_value("lcidtus")
 
@@ -392,7 +392,7 @@ class Mat119(KeywordBase):
 
     @property
     def lcidtut(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining translational force resultant along local t-axis as a function of relative translational displacement during unloading (IFLAG = 0 or 1 only).
+        """Get or set the Load curve ID defining translational force resultant along local t-axis as a function of relative translational displacement during unloading (IFLAG = 0 or 1 only).
         """ # nopep8
         return self._cards[2].get_value("lcidtut")
 
@@ -415,8 +415,8 @@ class Mat119(KeywordBase):
     @property
     def lcidrus(self) -> typing.Optional[int]:
         """Get or set the Load curve for rotational moment resultant about local s-axis:
-        IFLAG.NE.2:	load curve ID defining rotational moment resultant about local s-axis as a function of relative rotational displacement during unloading
-        IFLAG.EQ.2:	load curve ID defining rotational moment resultant about local s-axis as a function of relative rotational displacement during unloading at node 2.
+        IFLAG.NE.2: load curve ID defining rotational moment resultant about local s-axis as a function of relative rotational displacement during unloading
+        IFLAG.EQ.2: load curve ID defining rotational moment resultant about local s-axis as a function of relative rotational displacement during unloading at node 2.
         """ # nopep8
         return self._cards[2].get_value("lcidrus")
 
@@ -428,8 +428,8 @@ class Mat119(KeywordBase):
     @property
     def lcidrut(self) -> typing.Optional[int]:
         """Get or set the Load curve ID defining rotational moment resultant about local -axis:
-        IFLAG.NE.2:	load curve ID defining rotational moment resultant about local -axis as a function of relative rotational displacement during unloading.  If zero, no viscous forces are generated for this degree of freedom
-        IFLAG.EQ.2:	load curve ID defining rotational moment resultant about local -axis as a function of relative rotational displacement during unloading at node 2.
+        IFLAG.NE.2: load curve ID defining rotational moment resultant about local -axis as a function of relative rotational displacement during unloading. If zero, no viscous forces are generated for this degree of freedom
+        IFLAG.EQ.2: load curve ID defining rotational moment resultant about local -axis as a function of relative rotational displacement during unloading at node 2.
         """ # nopep8
         return self._cards[2].get_value("lcidrut")
 
@@ -440,8 +440,7 @@ class Mat119(KeywordBase):
 
     @property
     def lcidtdr(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining translational damping force resultant along local r-
-        axis as a function of relative translational velocity.
+        """Get or set the Load curve ID defining translational damping force resultant along local r-axis as a function of relative translational velocity.
         """ # nopep8
         return self._cards[3].get_value("lcidtdr")
 
@@ -452,8 +451,7 @@ class Mat119(KeywordBase):
 
     @property
     def lcidtds(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining translational damping force resultant along local 
-        s-axis as a function relative translational velocity.
+        """Get or set the Load curve ID defining translational damping force resultant along local s-axis as a function relative translational velocity.
         """ # nopep8
         return self._cards[3].get_value("lcidtds")
 
@@ -464,8 +462,7 @@ class Mat119(KeywordBase):
 
     @property
     def lcidtdt(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining translational damping force resultant along local 
-        t-axis as a function of relative translational velocity.
+        """Get or set the Load curve ID defining translational damping force resultant along local t-axis as a function of relative translational velocity.
         """ # nopep8
         return self._cards[3].get_value("lcidtdt")
 
@@ -476,8 +473,7 @@ class Mat119(KeywordBase):
 
     @property
     def lcidrdr(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining rotational damping moment resultant about local 
-        r-axis as a function of relative rotational velocity.
+        """Get or set the Load curve ID defining rotational damping moment resultant about local r-axis as a function of relative rotational velocity.
         """ # nopep8
         return self._cards[3].get_value("lcidrdr")
 
@@ -488,8 +484,7 @@ class Mat119(KeywordBase):
 
     @property
     def lcidrds(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining rotational damping moment resultant about local 
-        s-axis as a function of relative rotational velocity.
+        """Get or set the Load curve ID defining rotational damping moment resultant about local s-axis as a function of relative rotational velocity.
         """ # nopep8
         return self._cards[3].get_value("lcidrds")
 
@@ -500,8 +495,7 @@ class Mat119(KeywordBase):
 
     @property
     def lcidrdt(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining rotational damping moment resultant about local 
-        t-axis as a function of relative rotational velocity.
+        """Get or set the Load curve ID defining rotational damping moment resultant about local t-axis as a function of relative rotational velocity.
         """ # nopep8
         return self._cards[3].get_value("lcidrdt")
 
@@ -645,8 +639,8 @@ class Mat119(KeywordBase):
     @property
     def fcrit(self) -> typing.Optional[float]:
         """Get or set the Failure criterion (see Remark 1):
-        EQ.0.0:	two separate criteria, one for negative displacements and rotations, another for positive displacements and rotations
-        EQ.1.0:	one criterion that considers both positive and negative displacements and rotations.
+        EQ.0.0: two separate criteria, one for negative displacements and rotations, another for positive displacements and rotations
+        EQ.1.0: one criterion that considers both positive and negative displacements and rotations.
         """ # nopep8
         return self._cards[5].get_value("fcrit")
 

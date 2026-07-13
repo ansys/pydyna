@@ -86,9 +86,9 @@ class AleFsiToLoadNode(KeywordBase):
         """Get or set the Options to create the keyword file alefsiloadnode.k
         EQ.0: The keyword is created at the end of the run by LS-DYNA.
         EQ.1: The database of coupling forces is dumped without the conversion in keyword file at the end of the run. The database is then treated by a program (alefsiloadnode.exe) to write alefsiloadnode.k.
-        EQ.2: The database of coupling forces is read back from the temporary files created by IOPT = 1 to directly apply the nodal forces without using *LOAD_NODE. The parameters DT and NSID are not read.
-        EQ.3:	A database of coupling accelerations is dumped at the end of the run (see Remark 3).
-        EQ.4:	The database of coupling accelerations created by IOPT = 3 (see Remark 3) is read back. The structure meshes can be different.
+        EQ.2: The database of coupling forces is read back from the temporary files created by IOPT = 1 to directly apply the nodal forces without using *LOAD_NODE. The parameter DT is not read.
+        EQ.3: A database of coupling accelerations is dumped at the end of the run (see Remark 3).
+        EQ.4: The database of coupling accelerations created by IOPT = 3 (see Remark 3) is read back. The structure meshes can be different.
         The accelerations are interpolated at the nodes provided by NSID. The parameters DT and NSID are read
         """ # nopep8
         return self._cards[0].get_value("iopt")

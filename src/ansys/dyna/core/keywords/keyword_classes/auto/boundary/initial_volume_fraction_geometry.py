@@ -31,12 +31,12 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_syst
 _INITIALVOLUMEFRACTIONGEOMETRY_CARD0 = (
     FieldSchema("fmsid", int, 0, 10, None),
     FieldSchema("fmidtyp", int, 10, 10, 0),
-    FieldSchema("bammg", int, 20, 10, 0),
+    FieldSchema("bammg", int, 20, 10, None),
     FieldSchema("ntrace", int, 30, 10, 3),
 )
 
 _INITIALVOLUMEFRACTIONGEOMETRY_CARD1 = (
-    FieldSchema("conttyp", int, 0, 10, 1),
+    FieldSchema("conttyp", int, 0, 10, 0),
     FieldSchema("fillopt", int, 10, 10, 0),
     FieldSchema("fammg", int, 20, 10, None),
     FieldSchema("vx", float, 30, 10, None),
@@ -51,7 +51,7 @@ _INITIALVOLUMEFRACTIONGEOMETRY_CARD2 = (
     FieldSchema("stype", int, 10, 10, 0),
     FieldSchema("normdir", int, 20, 10, None),
     FieldSchema("xoffset", float, 30, 10, 0.0),
-    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("icut", int, 40, 10, 0),
     FieldSchema("unused", int, 50, 10, None),
     FieldSchema("unused", int, 60, 10, None),
     FieldSchema("unused", int, 70, 10, None),
@@ -60,8 +60,8 @@ _INITIALVOLUMEFRACTIONGEOMETRY_CARD2 = (
 _INITIALVOLUMEFRACTIONGEOMETRY_CARD3 = (
     FieldSchema("sgsid_", int, 0, 10, None, "sgsid "),
     FieldSchema("normdir", int, 10, 10, None),
-    FieldSchema("xoffset", float, 30, 10, 0.0),
-    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("xoffset", float, 20, 10, 0.0),
+    FieldSchema("icut", int, 30, 10, 0),
     FieldSchema("unused", int, 40, 10, None),
     FieldSchema("unused", int, 50, 10, None),
     FieldSchema("unused", int, 60, 10, None),
@@ -173,8 +173,8 @@ class InitialVolumeFractionGeometry(KeywordBase):
     @property
     def fmidtyp(self) -> int:
         """Get or set the ALE mesh set ID type:
-        EQ.0:  FMSID is an ALE part set ID (PSID).
-        EQ.1:  FMSID is an ALE part ID (PID).
+        EQ.0: FMSID is an ALE part set ID.
+        EQ.1: FMSID is an ALE part ID.
         """ # nopep8
         return self._cards[0].get_value("fmidtyp")
 
@@ -186,7 +186,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
         self._cards[0].set_value("fmidtyp", value)
 
     @property
-    def bammg(self) -> int:
+    def bammg(self) -> typing.Optional[int]:
         """Get or set the The background fluid group ID or ALE Multi-Material group ID (AMMGID) that initially fills the entire ALE mesh region defined by FMSID.For S-ALE, AMMG name (AMMGNM) could be also used in place of AMMGID
         """ # nopep8
         return self._cards[0].get_value("bammg")
@@ -210,13 +210,14 @@ class InitialVolumeFractionGeometry(KeywordBase):
     @property
     def conttyp(self) -> int:
         """Get or set the A "container" defines a Lagrangian surface boundary of a spatial region, inside (or outside) of which, an AMMG would fill up.  CONTTYP defines the container geometry type of this surface boundary (or shell structure).
-        EQ.1: The container geometry is defined by a part ID (PID) or a part set ID (PSID), where the parts should be defined by shell elements (see *PART or *SET_PART).
-        EQ.2: The container geometry is defined by a segment set (SGSID).
+        EQ.0: none (deault)
+        EQ.1: The container geometry is defined by a part, a part set, or an element set (a solid, shell, or beam set). The parts (see *PART or *SET_PART) should be defined by shell elements in 3D (beam elements in 2D). If the parts are meshed with solids in 3D (shells in 2D), their boundaries define the container geometry (see Remark 7).
+        EQ.2: The container geometry is defined by a segment set.
         EQ.3: The container geometry is defined by a plane: a point and a normal vector.
         EQ.4: The container geometry is defined by a conical surface: 2 end points and 2 corresponding radii.
         EQ.5: The container geometry is defined by a cuboid or rectangular box: 2 opposing end points, minimum to maximum coordinates.
         EQ.6: The container geometry is defined by a sphere: 1 center point, and a radius
-        EQ.7:	The container geometry is defined by a user-defined function implemented in *DEFINE_FUNCTION.
+        EQ.7: The container geometry is defined by a user-defined function implemented in *DEFINE_FUNCTION.
         The arguments of the function should be the coordinates of a point (x,y,z).
         The function should return 1.0 if the point is inside the geometry
         """ # nopep8
@@ -225,15 +226,15 @@ class InitialVolumeFractionGeometry(KeywordBase):
     @conttyp.setter
     def conttyp(self, value: int) -> None:
         """Set the conttyp property."""
-        if value not in [1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""conttyp must be `None` or one of {1,2,3,4,5,6,7}.""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""conttyp must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[1].set_value("conttyp", value)
 
     @property
     def fillopt(self) -> int:
-        """Get or set the A flag to indicate which side of the container surface the AMMG is supposed to fill.  CNTTYP = 1, 2, and 3, the “head” side of a container surface/segment is defined as the side pointed to by the heads of the normal vectors of the segments (“tail” side refers to opposite direction to “head”).  See Remark 5. Note that for CNTTYP = 1 and 2, the fluid interface can be offset from the container walls with XOFFST. XOFFST does not apply to the other container geometries.
-        EQ.0:	The “head” side of the geometry defined above will be filled with fluid(default).For CNTTYP = 4, 5, 6,and 7, the inside of the container is filled.
-        EQ.1 : The “tail” side of the geometry defined above will be filled with fluid.For CNTTYP = 4, 5, 6,and 7, the outside of the container is filled.
+        """Get or set the A flag to indicate which side of the container surface the AMMG is supposed to fill.  CNTTYP = 1, 2, and 3, the head side of a container surface/segment is defined as the side pointed to by the heads of the normal vectors of the segments (tail side refers to opposite direction to head).  See Remark 5. Note that for CNTTYP = 1 and 2, the fluid interface can be offset from the container walls with XOFFST. XOFFST does not apply to the other container geometries.
+        EQ.0: The head side of the geometry defined above will be filled with fluid(default).For CNTTYP = 4, 5, 6,and 7, the inside of the container is filled.
+        EQ.1: The tail side of the geometry defined above will be filled with fluid.For CNTTYP = 4, 5, 6,and 7, the outside of the container is filled.
         """ # nopep8
         return self._cards[1].get_value("fillopt")
 
@@ -246,8 +247,8 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @property
     def fammg(self) -> typing.Optional[int]:
-        """Get or set the This defines the fluid group ID or ALE Multi-Material group ID (AMMGID) which will fill up the interior (or exterior) of the space defined by the “container”. The order of AMMGIDs is determined by the order in which they are listed under *ALE_MULTI-MATERIAL_GROUP card.  For example, the first data card under the *ALE_MULTI-MATERIAL_GROUP keyword defines the multi-material group with ID (AMMGID) 1, the second data card defined AMMGID = 2, and so on. In case of S-ALE, AMMG name (AMMGNM) could be also used in place of AMMGID. See Remark 8.
-        LT.0: | FAMMG | is a * SET_MULTI - MATERIAL_GROUP_LIST ID listing pairs of group IDs.For each pair, the 2nd group replaces the first one in the “container”.
+        """Get or set the This defines the fluid group ID or ALE Multi-Material group ID (AMMGID) which will fill up the interior (or exterior) of the space defined by the container. The order of AMMGIDs is determined by the order in which they are listed under *ALE_MULTI-MATERIAL_GROUP card.  For example, the first data card under the *ALE_MULTI-MATERIAL_GROUP keyword defines the multi-material group with ID (AMMGID) 1, the second data card defined AMMGID = 2, and so on. In case of S-ALE, AMMG name (AMMGNM) could be also used in place of AMMGID. See Remark 8.
+        LT.0: | FAMMG | is a *SET_MULTI - MATERIAL_GROUP_LIST ID listing pairs of group IDs.For each pair, the 2nd group replaces the first one in the container.
         """ # nopep8
         return self._cards[1].get_value("fammg")
 
@@ -291,7 +292,7 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @property
     def sid(self) -> typing.Optional[int]:
-        """Get or set the A Set ID pointing to a part ID (PID) or part set ID (PSID) of the Lagrangian shell element structure defining the "container" geometry to be filled (see *PART or *SET_PART)
+        """Get or set the A set ID pointing to a part ID, part set ID, solid element set ID, shell element set ID, or beam set ID of the Lagrangian structure defining the �container� geometry to be filled
         """ # nopep8
         return self._cards[2].get_value("sid")
 
@@ -303,16 +304,18 @@ class InitialVolumeFractionGeometry(KeywordBase):
     @property
     def stype(self) -> int:
         """Get or set the Set ID type:
-        EQ.0:  Container SID is a Lagrangian part set ID (PSID).
-        EQ.1:  Container SID is a Lagrangian part ID (PID).
+        EQ.0: Container SID is a Lagrangian part set ID.
+        EQ.1: Container SID is a Lagrangian part ID.
+        EQ.2:	Container SID is a Lagrangian solid set in 3D (*SET_SOLID) or a Lagrangian shell set in 2D (*SET_SHELL).
+        EQ.3:	Container SID is a Lagrangian shell set in 3D(*SET_SHELL) or a Lagrangian beam set in 2D(*SET_BEAM).
         """ # nopep8
         return self._cards[2].get_value("stype")
 
     @stype.setter
     def stype(self, value: int) -> None:
         """Set the stype property."""
-        if value not in [0, 1, None]:
-            raise Exception("""stype must be `None` or one of {0,1}.""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""stype must be `None` or one of {0,1,2,3}.""")
         self._cards[2].set_value("stype", value)
 
     @property
@@ -328,10 +331,10 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @property
     def xoffset(self) -> float:
-        """Get or set the |XOFFST| is the absolute length for offsetting the fluid interface from the nominal fluid interface LS-DYNA would otherwise define by default.  The sign of XOFFST determines which direction the interface is offset. It is based on the normal vectors of the segments associated with the container.
-        XOFFST.GT.0:	Interface is offset along the positive direction of the segments of the container.
-        XOFFST.LT.0 : Interface is offset in the negative direction of the normal vectors of the segments of the container.
-        This is applicable to cases in which high pressure fluid is contained within a container.The offset allows LS - DYNA time to prevent leakage.In general, this may be set to roughly 5 - 10 % of the ALE element width.It may be important only for when ILEAK is turned ON to give the code time to catch the leakage(see * CONSTRAINED_LAGRANGE_IN_SOLID).If ILEAK is not ON, this may not be necessary
+        """Get or set the |XOFFST| is the absolute length for offsetting the fluid interface from the default nominal fluid interface.  The sign of XOFFST determines which direction the interface is offset. It is based on the normal vectors of the segments associated with the container.
+        GT.0:	Interface is offset along the positive direction of the segments of the container.
+        LT.0:	Interface is offset in the negative direction of the normal vectors of the segments of the container.
+        This field is applicable to cases in which a container contains high - pressure fluid.The offset gives time to prevent leakage.In general, this may be set to roughly 5 - 10 % of the ALE element width.It may be important only for when ILEAK is turned ON to give the code time to catch the leakage(see * CONSTRAINED_LAGRANGE_IN_SOLID).If ILEAK is not ON, this may not be necessary.
         """ # nopep8
         return self._cards[2].get_value("xoffset")
 
@@ -341,8 +344,23 @@ class InitialVolumeFractionGeometry(KeywordBase):
         self._cards[2].set_value("xoffset", value)
 
     @property
+    def icut(self) -> int:
+        """Get or set the Flag to activate computing the exact volume instead of an estimate when filling ALE elements cut by the Lagrangian structure:
+        EQ.0:	Inactive
+        EQ.1 : Active
+        """ # nopep8
+        return self._cards[2].get_value("icut")
+
+    @icut.setter
+    def icut(self, value: int) -> None:
+        """Set the icut property."""
+        if value not in [0, 1, None]:
+            raise Exception("""icut must be `None` or one of {0,1}.""")
+        self._cards[2].set_value("icut", value)
+
+    @property
     def sgsid_(self) -> typing.Optional[int]:
-        """Get or set the Segment Set ID defining the "container", see *SET_SEGMENT
+        """Get or set the Segment Set ID defining the the "container", see *SET_SEGMENT
         """ # nopep8
         return self._cards[3].get_value("sgsid_")
 
@@ -364,10 +382,10 @@ class InitialVolumeFractionGeometry(KeywordBase):
 
     @property
     def xoffset(self) -> float:
-        """Get or set the |XOFFST| is the absolute length for offsetting the fluid interface from the nominal fluid interface LS-DYNA would otherwise define by default.  The sign of XOFFST determines which direction the interface is offset. It is based on the normal vectors of the segments associated with the container.
-        XOFFST.GT.0:	Interface is offset along the positive direction of the segments of the container.
-        XOFFST.LT.0 : Interface is offset in the negative direction of the normal vectors of the segments of the container.
-        This is applicable to cases in which high pressure fluid is contained within a container.The offset allows LS - DYNA time to prevent leakage.In general, this may be set to roughly 5 - 10 % of the ALE element width.It may be important only for when ILEAK is turned ON to give the code time to catch the leakage(see * CONSTRAINED_LAGRANGE_IN_SOLID).If ILEAK is not ON, this may not be necessary
+        """Get or set the |XOFFST| is the absolute length for offsetting the fluid interface from the default nominal fluid interface.  The sign of XOFFST determines the direction in which the interface is offset. It is based on the normal vectors of the segments associated with the container.
+        XOFFST.GT.0: The interface is offset along the positive direction of the segments of the container.
+        XOFFST.LT.0: The interface is offset in the negative direction of the normal vectors of the segments of the container.
+        This is applies to cases where high pressure fluid is contained within a container.The offset allows time to prevent leakage.In general, this may be set to roughly 5 - 10 % of the ALE element width.It may be important only for when ILEAK is turned ON to give the code time to catch the leakage(see *CONSTRAINED_LAGRANGE_IN_SOLID).If ILEAK is not ON, this may not be necessary
         """ # nopep8
         return self._cards[3].get_value("xoffset")
 
@@ -375,6 +393,21 @@ class InitialVolumeFractionGeometry(KeywordBase):
     def xoffset(self, value: float) -> None:
         """Set the xoffset property."""
         self._cards[3].set_value("xoffset", value)
+
+    @property
+    def icut(self) -> int:
+        """Get or set the Flag to activate computing the exact volume instead of an estimate when filling ALE elements cut by the Lagrangian structure :
+        EQ.0:	Inactive
+        EQ.1 : Active
+        """ # nopep8
+        return self._cards[3].get_value("icut")
+
+    @icut.setter
+    def icut(self, value: int) -> None:
+        """Set the icut property."""
+        if value not in [0, 1, None]:
+            raise Exception("""icut must be `None` or one of {0,1}.""")
+        self._cards[3].set_value("icut", value)
 
     @property
     def x0(self) -> typing.Optional[float]:

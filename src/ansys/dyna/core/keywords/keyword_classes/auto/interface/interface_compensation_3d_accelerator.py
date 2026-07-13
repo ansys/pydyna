@@ -51,7 +51,7 @@ class InterfaceCompensation3DAccelerator(KeywordBase):
         ]
     @property
     def isteps(self) -> int:
-        """Get or set the Steps in accelerated compensation procedure, see Remarks.
+        """Get or set the Number of compensation iterations for an accelerated compensation calculation. See Remark 7
         """ # nopep8
         return self._cards[0].get_value("isteps")
 
@@ -73,7 +73,7 @@ class InterfaceCompensation3DAccelerator(KeywordBase):
 
     @property
     def toly(self) -> float:
-        """Get or set the Part deviation tolerance between current blank and target blank	shape in global y-direction.
+        """Get or set the Part deviation tolerance between current blank and target blank shape in global y-direction.
         """ # nopep8
         return self._cards[0].get_value("toly")
 
@@ -84,7 +84,7 @@ class InterfaceCompensation3DAccelerator(KeywordBase):
 
     @property
     def tolz(self) -> float:
-        """Get or set the Part deviation tolerance between current blank and target blank	shape in global z-direction.
+        """Get or set the Part deviation tolerance between current blank and target blank shape in global z-direction.
         """ # nopep8
         return self._cards[0].get_value("tolz")
 

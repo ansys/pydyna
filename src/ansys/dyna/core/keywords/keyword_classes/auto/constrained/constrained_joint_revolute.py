@@ -140,7 +140,7 @@ class ConstrainedJointRevolute(KeywordBase):
     @property
     def damp(self) -> float:
         """Get or set the Damping scale factor on default damping value (default=1.0).
-        LE.0.01 and GT.0.0: no damping is used.
+        GT.0.0.AND.LE.0.01: no damping is used.
         """ # nopep8
         return self._cards[0].get_value("damp")
 

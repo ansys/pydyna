@@ -55,6 +55,7 @@ _MATJOHNSONHOLMQUISTJH1_CARD2 = (
     FieldSchema("k2", float, 30, 10, None),
     FieldSchema("k3", float, 40, 10, None),
     FieldSchema("fs", float, 50, 10, None),
+    FieldSchema("fdam", float, 60, 10, None),
 )
 
 _MATJOHNSONHOLMQUISTJH1_OPTION0_CARD0 = (
@@ -309,10 +310,10 @@ class MatJohnsonHolmquistJh1(KeywordBase):
 
     @property
     def fs(self) -> typing.Optional[float]:
-        """Get or set the Element deletion criteria.
-        FS < 0 delete if P < FS (tensile failure).
-        FS = 0 no element deletion (default)..
-        FS> 0 delete element if the strain > FS.
+        """Get or set the Element deletion due to hydrostatic pressure or equivalent plastic strain.
+        LT.0.0: delete if P < FS (tensile failure).
+        EQ.0.0: no element deletion (default)..
+        GT,0.0: delete element if the strain > FS.
         """ # nopep8
         return self._cards[2].get_value("fs")
 
@@ -320,6 +321,18 @@ class MatJohnsonHolmquistJh1(KeywordBase):
     def fs(self, value: float) -> None:
         """Set the fs property."""
         self._cards[2].set_value("fs", value)
+
+    @property
+    def fdam(self) -> typing.Optional[float]:
+        """Get or set the Failure damage value. If this damage value is reached, the element gets deleted. A meaningful value would be FDAM=1.0, for instance.
+        EQ.0.0: No element deletion due to damage  (default)
+        """ # nopep8
+        return self._cards[2].get_value("fdam")
+
+    @fdam.setter
+    def fdam(self, value: float) -> None:
+        """Set the fdam property."""
+        self._cards[2].set_value("fdam", value)
 
     @property
     def title(self) -> typing.Optional[str]:

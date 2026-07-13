@@ -152,9 +152,9 @@ class DefineFormingBlankmesh(KeywordBase):
     @property
     def nplane(self) -> int:
         """Get or set the Plane in which a flat blank to be generated, in reference to the coordinate system defined (CID):
-        EQ.0 or 1:	XY-plane (default)
-        EQ.2:	XZ-plane
-        EQ.3:	YZ-plan.
+        EQ.0 or 1: XY-plane (default)
+        EQ.2: XZ-plane
+        EQ.3: YZ-plan.
         """ # nopep8
         return self._cards[0].get_value("nplane")
 

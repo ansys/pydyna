@@ -178,12 +178,12 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
         EQ.2: Complete Quadratic Combination method (CQC),
         EQ.3: Double Sum method,
         EQ.4: NRL-SUM method,
-        EQ.-4:	NRL-SUM method with CSM (Closely Spaced Modes) treatment.  The CSM pairs are automatically identified.
-        EQ. - 14:	NRL - SUM method with CSM(Closely Spaced Modes) treatment, where the CSM pairs are defined by SID(Mode set ID, see * SET_MODE) in Card 5
+        EQ.-4: NRL-SUM method with CSM (Closely Spaced Modes) treatment.  The CSM pairs are automatically identified.
+        EQ. - 14: NRL - SUM method with CSM(Closely Spaced Modes) treatment, where the CSM pairs are defined by SID(Mode set ID, see *SET_MODE) in Card 5
         EQ.5: Double Sum method based on Gupta-Cordero coefficient,
         EQ.6: Double Sum method based on modified Gupta-Cordero coefficient,
         EQ.7: Rosenblueth method.
-        EQ.8: 	Absolute value method (ABS)
+        EQ.8: Absolute value method (ABS)
         EQ.99:combining results provided by two mode combination methods defined in Card 1.1 with corresponding weights defined in Card 1.2
         """ # nopep8
         return self._cards[0].get_value("mcomb")
@@ -209,9 +209,9 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
     @property
     def mprs(self) -> int:
         """Get or set the Multi-point or multidirectional response combination method:
-        EQ.0:	SRSS.
-        EQ.1 : 100 - 40 - 40 rule(Newmark method).
-        EQ.2:	100-40-40 rule (Newmark method) with coefficient 0.4 replaced by R40 in Card 1a
+        EQ.0: SRSS.
+        EQ.1: 100 - 40 - 40 rule(Newmark method).
+        EQ.2: 100-40-40 rule (Newmark method) with coefficient 0.4 replaced by R40 in Card 1a
         """ # nopep8
         return self._cards[0].get_value("mprs")
 
@@ -279,7 +279,7 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
 
     @property
     def dampf(self) -> typing.Optional[float]:
-        """Get or set the Modal damping ratio, ζ.
+        """Get or set the Modal damping ratio, .
         """ # nopep8
         return self._cards[4].get_value("dampf")
 
@@ -290,7 +290,7 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
 
     @property
     def lcdamp(self) -> typing.Optional[int]:
-        """Get or set the Load Curve ID for defining frequency dependent modal damping ratio ζ.
+        """Get or set the Load Curve ID for defining frequency dependent modal damping ratio .
         """ # nopep8
         return self._cards[4].get_value("lcdamp")
 
@@ -316,7 +316,7 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
 
     @property
     def dmpmas(self) -> float:
-        """Get or set the Mass proportional damping constant α, in Rayleigh damping.
+        """Get or set the Mass proportional damping constant , in Rayleigh damping.
         """ # nopep8
         return self._cards[4].get_value("dmpmas")
 
@@ -327,7 +327,7 @@ class FrequencyDomainResponseSpectrum(KeywordBase):
 
     @property
     def dmpstf(self) -> float:
-        """Get or set the Stiffness proportional damping constant β, in Rayleigh damping.
+        """Get or set the Stiffness proportional damping constant , in Rayleigh damping.
         """ # nopep8
         return self._cards[4].get_value("dmpstf")
 

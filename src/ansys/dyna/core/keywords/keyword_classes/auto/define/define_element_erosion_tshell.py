@@ -81,10 +81,10 @@ class DefineElementErosionTshell(KeywordBase):
     @property
     def styp(self) -> int:
         """Get or set the ID type of SID:
-        EQ.1:	tshell element ID
-        EQ.2:	tshell element set ID
-        EQ.3:	part ID
-        EQ.4:	part set ID.
+        EQ.1: tshell element ID
+        EQ.2: tshell element set ID
+        EQ.3: part ID
+        EQ.4: part set ID.
         """ # nopep8
         return self._cards[0].get_value("styp")
 
@@ -98,7 +98,7 @@ class DefineElementErosionTshell(KeywordBase):
     @property
     def numfip(self) -> float:
         """Get or set the Number of layers which must fail prior to element deletion.
-        LT.0.0:	 is the percentage of layers which must fail prior to element deletion.
+        LT.0.0: is the percentage of layers which must fail prior to element deletion.
         """ # nopep8
         return self._cards[0].get_value("numfip")
 

@@ -154,7 +154,7 @@ class SetIgaFaceXyzList(KeywordBase):
 
     @property
     def eid1(self) -> typing.Optional[int]:
-        """Get or set the ith physical face ID.
+        """Get or set the ith physical face ID. See Remark 3
         """ # nopep8
         return self._cards[1].get_value("eid1")
 
@@ -165,7 +165,7 @@ class SetIgaFaceXyzList(KeywordBase):
 
     @property
     def eid2(self) -> typing.Optional[int]:
-        """Get or set the ith physical face ID.
+        """Get or set the ith physical face ID. See Remark 3
         """ # nopep8
         return self._cards[1].get_value("eid2")
 
@@ -176,7 +176,7 @@ class SetIgaFaceXyzList(KeywordBase):
 
     @property
     def eid3(self) -> typing.Optional[int]:
-        """Get or set the ith physical face ID.
+        """Get or set the ith physical face ID. See Remark 3
         """ # nopep8
         return self._cards[1].get_value("eid3")
 
@@ -187,7 +187,7 @@ class SetIgaFaceXyzList(KeywordBase):
 
     @property
     def eid4(self) -> typing.Optional[int]:
-        """Get or set the ith physical face ID.
+        """Get or set the ith physical face ID. See Remark 3
         """ # nopep8
         return self._cards[1].get_value("eid4")
 
@@ -198,7 +198,7 @@ class SetIgaFaceXyzList(KeywordBase):
 
     @property
     def eid5(self) -> typing.Optional[int]:
-        """Get or set the ith physical face ID.
+        """Get or set the ith physical face ID. See Remark 3
         """ # nopep8
         return self._cards[1].get_value("eid5")
 
@@ -209,7 +209,7 @@ class SetIgaFaceXyzList(KeywordBase):
 
     @property
     def eid6(self) -> typing.Optional[int]:
-        """Get or set the ith physical face ID.
+        """Get or set the ith physical face ID. See Remark 3
         """ # nopep8
         return self._cards[1].get_value("eid6")
 
@@ -220,7 +220,7 @@ class SetIgaFaceXyzList(KeywordBase):
 
     @property
     def eid7(self) -> typing.Optional[int]:
-        """Get or set the ith physical face ID.
+        """Get or set the ith physical face ID. See Remark 3
         """ # nopep8
         return self._cards[1].get_value("eid7")
 
@@ -231,7 +231,7 @@ class SetIgaFaceXyzList(KeywordBase):
 
     @property
     def eid8(self) -> typing.Optional[int]:
-        """Get or set the ith physical face ID.
+        """Get or set the ith physical face ID. See Remark 3
         """ # nopep8
         return self._cards[1].get_value("eid8")
 

@@ -31,7 +31,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import De
 _EMRANDLESBATMAC_CARD0 = (
     FieldSchema("rdlid", int, 0, 10, None),
     FieldSchema("rdltype", int, 10, 10, 0),
-    FieldSchema("rdlarea", int, 20, 10, 1),
+    FieldSchema("rdlarea", int, 20, 10, 2),
     FieldSchema("psid", int, 30, 10, None),
 )
 
@@ -118,7 +118,7 @@ class EmRandlesBatmac(KeywordBase):
         ]
     @property
     def rdlid(self) -> typing.Optional[int]:
-        """Get or set the Id of the Randles Cell.
+        """Get or set the ID of the Randles Cell.
         """ # nopep8
         return self._cards[0].get_value("rdlid")
 
@@ -148,17 +148,18 @@ class EmRandlesBatmac(KeywordBase):
     @property
     def rdlarea(self) -> int:
         """Get or set the Randle Area:
-        EQ.1: The parameters are per unit area and will be scaled in each Randle circuit by a factor depending on the local area of the circuit.
-        EQ.2: Default. The parameters are defined for the whole cell and will be scaled in each Randle circuit by a factor depending on the local area of the circuit and the global area of the cell.
+        EQ.1: The parameters are per unit area and are scaled in each Randle circuit by a factor depending on the local area of the circuit.
+        EQ.2: Default. The parameters are defined for the whole cell and are scaled in each Randle circuit by a factor depending on the local area of the circuit and the global area of the cell.
         EQ.3:The parameters are not scaled by area factors.
+        EQ.11/22: Same as 1 and 2 respectfully except the parameters are defined for the whole cell and are scaled in each Randle circuit by a factor depending on the local volume of the circuit and the global volume of the cell.
         """ # nopep8
         return self._cards[0].get_value("rdlarea")
 
     @rdlarea.setter
     def rdlarea(self, value: int) -> None:
         """Set the rdlarea property."""
-        if value not in [1, 2, 3, None]:
-            raise Exception("""rdlarea must be `None` or one of {1,2,3}.""")
+        if value not in [2, 1, 3, 11, 22, None]:
+            raise Exception("""rdlarea must be `None` or one of {2,1,3,11,22}.""")
         self._cards[0].set_value("rdlarea", value)
 
     @property
@@ -185,7 +186,7 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def cq(self) -> typing.Optional[float]:
-        """Get or set the SOC conversion factor (%/s), known to be equal to 1/36 in S.I units.
+        """Get or set the SOC conversion factor (%/s), It is known to be equal to 1/36 in S.I units.
         """ # nopep8
         return self._cards[1].get_value("cq")
 
@@ -220,7 +221,9 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def r0cha(self) -> typing.Optional[float]:
-        """Get or set the Constant if positive value, or load curve(if negative integer) defining r0/r10/c10 when the current flows in the charge direction as a function of SOC.
+        """Get or set the r_0/r_10/c_10 when the current flows in the charge direction:
+        GE.0.0: Constant value
+        LT.0.0: Absolute value is a *DEFINE_FUNCTION or table ID.See Remark 4 for the accepted *DEFINE_FUNCTION arguments.For a table, the circuit parameters can be made a function of the SOCand temperature.
         """ # nopep8
         return self._cards[2].get_value("r0cha")
 
@@ -231,7 +234,9 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def r0dis(self) -> typing.Optional[float]:
-        """Get or set the Constant if positive value, or load curve (if negative integer) defining r0/r10/c10 when the current flows in the discharge direction as a function of SOC.
+        """Get or set the r_0/r_10/c_10 when the current flows in the discharge direction:
+        GE.0.0: Constant value
+        LT.0.0: absolute value is a *DEFINE_FUNCTION or table ID.See Remark 4 for the accepted *DEFINE_FUNCTION arguments.For a table, the circuit parameters can be made a function of the SOCand temperature.
         """ # nopep8
         return self._cards[2].get_value("r0dis")
 
@@ -242,7 +247,9 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def r10cha(self) -> typing.Optional[float]:
-        """Get or set the Constant if positive value, or load curve(if negative integer) defining r0/r10/c10 when the current flows in the charge direction as a function of SOC.
+        """Get or set the r_0/r_10/c_10 when the current flows in the charge direction:
+        GE.0.0: Constant value
+        LT.0.0: Absolute value is a *DEFINE_FUNCTION or table ID.See Remark 4 for the accepted *DEFINE_FUNCTION arguments.For a table, the circuit parameters can be made a function of the SOCand temperature.
         """ # nopep8
         return self._cards[2].get_value("r10cha")
 
@@ -253,7 +260,9 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def r10dis(self) -> typing.Optional[float]:
-        """Get or set the Constant if positive value, or load curve (if negative integer) defining r0/r10/c10 when the current flows in the discharge direction as a function of SOC.
+        """Get or set the r_0/r_10/c_10 when the current flows in the discharge direction:
+        GE.0.0: Constant value
+        LT.0.0: absolute value is a *DEFINE_FUNCTION or table ID.See Remark 4 for the accepted *DEFINE_FUNCTION arguments.For a table, the circuit parameters can be made a function of the SOCand temperature.
         """ # nopep8
         return self._cards[2].get_value("r10dis")
 
@@ -264,7 +273,9 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def c10cha(self) -> typing.Optional[float]:
-        """Get or set the Constant if positive value, or load curve(if negative integer) defining r0/r10/c10 when the current flows in the charge direction as a function of SOC.
+        """Get or set the r_0/r_10/c_10 when the current flows in the charge direction:
+        GE.0.0: Constant value
+        LT.0.0: Absolute value is a *DEFINE_FUNCTION or table ID.See Remark 4 for the accepted *DEFINE_FUNCTION arguments.For a table, the circuit parameters can be made a function of the SOCand temperature.
         """ # nopep8
         return self._cards[2].get_value("c10cha")
 
@@ -275,7 +286,9 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def c10dis(self) -> typing.Optional[float]:
-        """Get or set the Constant if positive value, or load curve (if negative integer) defining r0/r10/c10 when the current flows in the discharge direction as a function of SOC.
+        """Get or set the r_0/r_10/c_10 when the current flows in the discharge direction:
+        GE.0.0: Constant value
+        LT.0.0: absolute value is a *DEFINE_FUNCTION or table ID.See Remark 4 for the accepted *DEFINE_FUNCTION arguments.For a table, the circuit parameters can be made a function of the SOCand temperature.
         """ # nopep8
         return self._cards[2].get_value("c10dis")
 
@@ -286,9 +299,9 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def r20cha(self) -> typing.Optional[float]:
-        """Get or set the r20 when the current flows in the charge direction:
-        GE.0.0:constant value.
-        LT.0.0:absolute value is a define function or table ID.
+        """Get or set the r_20/r_30/c_20/c_30 when the current flows in the charge direction:
+        GE.0.0: Constant value
+        LT.0.0: Absolute value is a *DEFINE_FUNCTION or table ID.See Remark 4 for the accepted *DEFINE_FUNCTION arguments.For a table, the circuit parameters can be made a function of the SOCand temperature.
         """ # nopep8
         return self._cards[3].get_value("r20cha")
 
@@ -299,9 +312,9 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def r20dis(self) -> typing.Optional[float]:
-        """Get or set the r20 when the current flows in the discharge direction:
-        GE.0.0:constant value.
-        LT.0.0:absolute value is a define function or table ID.
+        """Get or set the r_20/r_30/c_20/c_30 when the current flows in the discharge direction:
+        GE.0.0: Constant value
+        LT.0.0: Absolute value is a *DEFINE_FUNCTION or table ID.See Remark 4 for the accepted define function arguments.For a table, the circuit parameters can be made a function of the SOCand temperature.
         """ # nopep8
         return self._cards[3].get_value("r20dis")
 
@@ -312,9 +325,9 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def c20cha(self) -> typing.Optional[float]:
-        """Get or set the c20 when the current flows in the charge direction:
-        GE.0.0:constant value.
-        LT.0.0:absolute value is a define function or table ID.
+        """Get or set the r_20/r_30/c_20/c_30 when the current flows in the charge direction:
+        GE.0.0: Constant value
+        LT.0.0: Absolute value is a *DEFINE_FUNCTION or table ID.See Remark 4 for the accepted *DEFINE_FUNCTION arguments.For a table, the circuit parameters can be made a function of the SOCand temperature.
         """ # nopep8
         return self._cards[3].get_value("c20cha")
 
@@ -325,9 +338,9 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def c20dis(self) -> typing.Optional[float]:
-        """Get or set the c20 when the current flows in the discharge direction:
-        GE.0.0:constant value.
-        LT.0.0:absolute value is a define function or table ID.
+        """Get or set the r_20/r_30/c_20/c_30 when the current flows in the discharge direction:
+        GE.0.0: Constant value
+        LT.0.0: Absolute value is a *DEFINE_FUNCTION or table ID.See Remark 4 for the accepted define function arguments.For a table, the circuit parameters can be made a function of the SOCand temperature.
         """ # nopep8
         return self._cards[3].get_value("c20dis")
 
@@ -338,9 +351,9 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def r30cha(self) -> typing.Optional[float]:
-        """Get or set the r30 when the current flows in the charge direction:
-        GE.0.0:constant value.
-        LT.0.0:absolute value is a define function or table ID.
+        """Get or set the r_20/r_30/c_20/c_30 when the current flows in the charge direction:
+        GE.0.0: Constant value
+        LT.0.0: Absolute value is a *DEFINE_FUNCTION or table ID.See Remark 4 for the accepted *DEFINE_FUNCTION arguments.For a table, the circuit parameters can be made a function of the SOCand temperature.
         """ # nopep8
         return self._cards[3].get_value("r30cha")
 
@@ -351,9 +364,9 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def r30dis(self) -> typing.Optional[float]:
-        """Get or set the r30 when the current flows in the discharge direction:
-        GE.0.0:constant value.
-        LT.0.0:absolute value is a define function or table ID.
+        """Get or set the r_20/r_30/c_20/c_30 when the current flows in the discharge direction:
+        GE.0.0: Constant value
+        LT.0.0: Absolute value is a *DEFINE_FUNCTION or table ID.See Remark 4 for the accepted define function arguments.For a table, the circuit parameters can be made a function of the SOCand temperature.
         """ # nopep8
         return self._cards[3].get_value("r30dis")
 
@@ -364,9 +377,9 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def c30cha(self) -> typing.Optional[float]:
-        """Get or set the c30 when the current flows in the charge direction:
-        GE.0.0:constant value.
-        LT.0.0:absolute value is a define function or table ID.
+        """Get or set the r_20/r_30/c_20/c_30 when the current flows in the charge direction:
+        GE.0.0: Constant value
+        LT.0.0: Absolute value is a *DEFINE_FUNCTION or table ID.See Remark 4 for the accepted *DEFINE_FUNCTION arguments.For a table, the circuit parameters can be made a function of the SOCand temperature.
         """ # nopep8
         return self._cards[3].get_value("c30cha")
 
@@ -377,9 +390,9 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def c30dis(self) -> typing.Optional[float]:
-        """Get or set the c30 when the current flows in the discharge direction:
-        GE.0.0:constant value.
-        LT.0.0:absolute value is a define function or table ID.
+        """Get or set the r_20/r_30/c_20/c_30 when the current flows in the discharge direction:
+        GE.0.0: Constant value
+        LT.0.0: Absolute value is a *DEFINE_FUNCTION or table ID.See Remark 4 for the accepted define function arguments.For a table, the circuit parameters can be made a function of the SOCand temperature.
         """ # nopep8
         return self._cards[3].get_value("c30dis")
 
@@ -401,7 +414,7 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def frther(self) -> int:
-        """Get or set the From Thermal:
+        """Get or set the Flag setting where the temperature is coming from:
         EQ.0:The temperature used in the Randles circuit parameters is TEMP.
         EQ.1: The temperature used in the Randles circuit parameter is the temperature from the thermal solver.
         """ # nopep8
@@ -442,9 +455,9 @@ class EmRandlesBatmac(KeywordBase):
 
     @property
     def tempu(self) -> int:
-        """Get or set the Temperature Unit :
+        """Get or set the Temperature nnit:
         EQ.0:The temperature is in Celsius
-        EQ.1:The Temperature is in Kelvin.
+        EQ.1:The temperature is in Kelvin.
         """ # nopep8
         return self._cards[4].get_value("tempu")
 

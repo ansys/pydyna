@@ -43,10 +43,12 @@ _MAT264_CARD0 = (
 _MAT264_CARD1 = (
     FieldSchema("lct00r", int, 0, 10, 0),
     FieldSchema("lct00t", int, 10, 10, 0),
-    FieldSchema("lcf", int, 20, 10, 0),
-    FieldSchema("lcg", int, 30, 10, 0),
-    FieldSchema("lch", int, 40, 10, 0),
-    FieldSchema("lci", int, 50, 10, 0),
+    FieldSchema("lcf00", int, 20, 10, 0),
+    FieldSchema("lcg00", int, 30, 10, 0),
+    FieldSchema("lch00", int, 40, 10, 0),
+    FieldSchema("lci00", int, 50, 10, 0),
+    FieldSchema("iftra", int, 60, 10, 0),
+    FieldSchema("unused", int, 70, 10, None),
 )
 
 _MAT264_CARD2 = (
@@ -66,7 +68,9 @@ _MAT264_CARD3 = (
     FieldSchema("lctthr", int, 20, 10, 0),
     FieldSchema("lcc90r", int, 30, 10, 0),
     FieldSchema("lcc45r", int, 40, 10, 0),
-    FieldSchema("lccth", int, 50, 10, 0),
+    FieldSchema("lccthr", int, 50, 10, 0),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
 )
 
 _MAT264_CARD4 = (
@@ -76,6 +80,8 @@ _MAT264_CARD4 = (
     FieldSchema("lcc90t", int, 30, 10, 0),
     FieldSchema("lcc45t", int, 40, 10, 0),
     FieldSchema("lcctht", int, 50, 10, 0),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
 )
 
 _MAT264_CARD5 = (
@@ -86,6 +92,7 @@ _MAT264_CARD5 = (
     FieldSchema("a2", float, 40, 10, None),
     FieldSchema("a3", float, 50, 10, None),
     FieldSchema("macf", float, 60, 10, 1.0),
+    FieldSchema("unused", int, 70, 10, None),
 )
 
 _MAT264_CARD6 = (
@@ -95,7 +102,37 @@ _MAT264_CARD6 = (
     FieldSchema("d1", float, 30, 10, None),
     FieldSchema("d2", float, 40, 10, None),
     FieldSchema("d3", float, 50, 10, None),
-    FieldSchema("beta", float, 60, 10, None),
+    FieldSchema("mangle", float, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_MAT264_CARD7 = (
+    FieldSchema("lcf90", int, 0, 10, None),
+    FieldSchema("lcg90", int, 10, 10, None),
+    FieldSchema("lch90", int, 20, 10, None),
+    FieldSchema("lci90", int, 30, 10, None),
+    FieldSchema("lcf45ab", int, 40, 10, None),
+    FieldSchema("lcg45ab", int, 50, 10, None),
+    FieldSchema("lch45ab", int, 60, 10, None),
+    FieldSchema("lci45ab", int, 70, 10, None),
+)
+
+_MAT264_CARD8 = (
+    FieldSchema("lcfth", int, 0, 10, None),
+    FieldSchema("lcgth", int, 10, 10, None),
+    FieldSchema("lchth", int, 20, 10, None),
+    FieldSchema("lcith", int, 30, 10, None),
+    FieldSchema("lcf45bc", int, 40, 10, None),
+    FieldSchema("lcg45bc", int, 50, 10, None),
+    FieldSchema("lch45bc", int, 60, 10, None),
+    FieldSchema("lci45bc", int, 70, 10, None),
+)
+
+_MAT264_CARD9 = (
+    FieldSchema("lcf45ca", int, 0, 10, None),
+    FieldSchema("lcg45ca", int, 10, 10, None),
+    FieldSchema("lch45ca", int, 20, 10, None),
+    FieldSchema("lci45ca", int, 30, 10, None),
 )
 
 _MAT264_OPTION0_CARD0 = (
@@ -112,23 +149,30 @@ class Mat264(KeywordBase):
     ]
     _link_fields = {
         "lct00r": LinkType.DEFINE_CURVE,
-        "lct00t": LinkType.DEFINE_CURVE,
-        "lcf": LinkType.DEFINE_CURVE,
-        "lcg": LinkType.DEFINE_CURVE,
-        "lch": LinkType.DEFINE_CURVE,
-        "lci": LinkType.DEFINE_CURVE,
-        "lct90r": LinkType.DEFINE_CURVE,
-        "lct45r": LinkType.DEFINE_CURVE,
-        "lctthr": LinkType.DEFINE_CURVE,
-        "lcc90r": LinkType.DEFINE_CURVE,
-        "lcc45r": LinkType.DEFINE_CURVE,
-        "lccth": LinkType.DEFINE_CURVE,
-        "lct90t": LinkType.DEFINE_CURVE,
-        "lct45t": LinkType.DEFINE_CURVE,
-        "lcttht": LinkType.DEFINE_CURVE,
-        "lcc90t": LinkType.DEFINE_CURVE,
-        "lcc45t": LinkType.DEFINE_CURVE,
-        "lcctht": LinkType.DEFINE_CURVE,
+        "lcf00": LinkType.DEFINE_CURVE,
+        "lcg00": LinkType.DEFINE_CURVE,
+        "lch00": LinkType.DEFINE_CURVE,
+        "lci00": LinkType.DEFINE_CURVE,
+        "lcf90": LinkType.DEFINE_CURVE,
+        "lcg90": LinkType.DEFINE_CURVE,
+        "lch90": LinkType.DEFINE_CURVE,
+        "lci90": LinkType.DEFINE_CURVE,
+        "lcf45ab": LinkType.DEFINE_CURVE,
+        "lcg45ab": LinkType.DEFINE_CURVE,
+        "lch45ab": LinkType.DEFINE_CURVE,
+        "lci45ab": LinkType.DEFINE_CURVE,
+        "lcfth": LinkType.DEFINE_CURVE,
+        "lcgth": LinkType.DEFINE_CURVE,
+        "lchth": LinkType.DEFINE_CURVE,
+        "lcith": LinkType.DEFINE_CURVE,
+        "lcf45bc": LinkType.DEFINE_CURVE,
+        "lcg45bc": LinkType.DEFINE_CURVE,
+        "lch45bc": LinkType.DEFINE_CURVE,
+        "lci45bc": LinkType.DEFINE_CURVE,
+        "lcf45ca": LinkType.DEFINE_CURVE,
+        "lcg45ca": LinkType.DEFINE_CURVE,
+        "lch45ca": LinkType.DEFINE_CURVE,
+        "lci45ca": LinkType.DEFINE_CURVE,
     }
 
     def __init__(self, **kwargs):
@@ -162,6 +206,18 @@ class Mat264(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _MAT264_CARD6,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MAT264_CARD7,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MAT264_CARD8,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MAT264_CARD9,
                 **kwargs,
             ),
             OptionCardSet(
@@ -243,7 +299,9 @@ class Mat264(KeywordBase):
 
     @property
     def beta(self) -> float:
-        """Get or set the Amount of plastic work converted into heat
+        """Get or set the Fraction of plastic work converted into heat:
+        GT.0.0: Constant value is used.
+        LT.0.0 : -BETA gives a load curve ID for strain rate dependence, a table ID for temperature(TABLE) and strain rate(CURVE) dependence, a 3 - dimensional table ID for temperature(TABLE_3D), strain rate(TABLE) and plastic strain(CURVE) dependence, or a 4 - dimensional table ID for triaxiality(TABLE_4D), temperature(TABLE_3D), strain rate(TABLE), and plastic strain(CURVE) dependence.
         """ # nopep8
         return self._cards[0].get_value("beta")
 
@@ -254,8 +312,8 @@ class Mat264(KeywordBase):
 
     @property
     def numint(self) -> float:
-        """Get or set the Number of integration points which must fail before the element is deleted. Available for shells and solids.
-        LT.0.0: |NUMINT| is percentage of integration points/layers which must fail before element fails. For fully integrated shells, a methodology is used where a layer fails if one integrationpoint fails and then the given percentage of layers must fail before the element fails.
+        """Get or set the Number of failed integration points before element deletion.
+        EQ.-200: Turns off erosion for solids. Not recommended unless used with *CONSTRAINED_TIED_NODES_FAILURE
         """ # nopep8
         return self._cards[0].get_value("numint")
 
@@ -266,7 +324,7 @@ class Mat264(KeywordBase):
 
     @property
     def lct00r(self) -> int:
-        """Get or set the Load curve ID or Table ID. The load curve ID defines effective stress as a function of effective plastic strain. The table ID defines for each plastic strain rate value a load curve ID giving the (isothermal) effective stress versus effective plastic strain for that rate.
+        """Get or set the Load curve ID or Table ID. The load curve ID defines effective stress as a function of effective plastic strain. The table ID defines for each plastic strain rate value a load curve ID giving the (isothermal) effective stress versus effective plastic strain for that rate in the 0 direction.
         """ # nopep8
         return self._cards[1].get_value("lct00r")
 
@@ -277,7 +335,7 @@ class Mat264(KeywordBase):
 
     @property
     def lct00t(self) -> int:
-        """Get or set the Table ID defining for each temperature value a load curve ID giving the (quasi-static) effective stress versus effective plastic strain for that temperature.
+        """Get or set the Table ID defining for each temperature value a load curve ID giving the (quasi-static) tensile yield stress as a function of plastic strain for that temperature in the 0° direction.
         """ # nopep8
         return self._cards[1].get_value("lct00t")
 
@@ -287,52 +345,66 @@ class Mat264(KeywordBase):
         self._cards[1].set_value("lct00t", value)
 
     @property
-    def lcf(self) -> int:
-        """Get or set the Load curve ID or Table ID. The load curve ID defines plastic failure strain as a function of triaxiality. The table ID defines for each Lode angle a load curve ID giving the plastic failure strain versus triaxiality for that Lode angle. (Table option only for solids and not yet generally supported).
+    def lcf00(self) -> int:
+        """Get or set the Load curve or table ID giving plastic failure strain in the 0° direction. The load curve ID defines plastic failure strain as a function of triaxiality. The table ID specifies a load curve ID for each Lode parameter, giving the plastic failure strain as a function of triaxiality for that Lode parameter.
         """ # nopep8
-        return self._cards[1].get_value("lcf")
+        return self._cards[1].get_value("lcf00")
 
-    @lcf.setter
-    def lcf(self, value: int) -> None:
-        """Set the lcf property."""
-        self._cards[1].set_value("lcf", value)
+    @lcf00.setter
+    def lcf00(self, value: int) -> None:
+        """Set the lcf00 property."""
+        self._cards[1].set_value("lcf00", value)
 
     @property
-    def lcg(self) -> int:
-        """Get or set the Load curve ID defining plastic failure strain as a function of strain rate.
+    def lcg00(self) -> int:
+        """Get or set the Load curve ID defining plastic failure strain (or a scale factor for determining the plastic failure strain) as a function of plastic strain rate in the 0° direction. The curve should not extrapolate to zero; otherwise, failure may occur at low strain. If the first abscissa value in the curve corresponds to a negative strain rate, the natural logarithm of the strain rate value is assumed to be used for all abscissa values
         """ # nopep8
-        return self._cards[1].get_value("lcg")
+        return self._cards[1].get_value("lcg00")
 
-    @lcg.setter
-    def lcg(self, value: int) -> None:
-        """Set the lcg property."""
-        self._cards[1].set_value("lcg", value)
+    @lcg00.setter
+    def lcg00(self, value: int) -> None:
+        """Set the lcg00 property."""
+        self._cards[1].set_value("lcg00", value)
 
     @property
-    def lch(self) -> int:
-        """Get or set the Load curve ID defining plastic failure strain as a function of temperature
+    def lch00(self) -> int:
+        """Get or set the Load curve ID defining plastic failure strain (or a scale factor for determining the plastic failure strain) as a function of temperature in the 0° direction.
         """ # nopep8
-        return self._cards[1].get_value("lch")
+        return self._cards[1].get_value("lch00")
 
-    @lch.setter
-    def lch(self, value: int) -> None:
-        """Set the lch property."""
-        self._cards[1].set_value("lch", value)
+    @lch00.setter
+    def lch00(self, value: int) -> None:
+        """Set the lch00 property."""
+        self._cards[1].set_value("lch00", value)
 
     @property
-    def lci(self) -> int:
-        """Get or set the Load curve ID defining plastic failure strain as a function of element size..
+    def lci00(self) -> int:
+        """Get or set the Load curve ID, table ID, or 3D table ID giving the plastic failure strain (or a scale factor for determining the plastic failure strain) in the 0° direction. The load curve gives plastic failure strain as a function of element size. The table defines a load curve ID for each triaxiality, giving the plastic failure strain as a function of element size for that triaxiality. If referring to a three-dimensional table ID, plastic failure strain can be a function of the Lode parameter (TABLE_3D), triaxiality (TABLE), and element size (CURVE).
         """ # nopep8
-        return self._cards[1].get_value("lci")
+        return self._cards[1].get_value("lci00")
 
-    @lci.setter
-    def lci(self, value: int) -> None:
-        """Set the lci property."""
-        self._cards[1].set_value("lci", value)
+    @lci00.setter
+    def lci00(self, value: int) -> None:
+        """Set the lci00 property."""
+        self._cards[1].set_value("lci00", value)
+
+    @property
+    def iftra(self) -> int:
+        """Get or set the Failure option:
+        EQ.0.0: Isotropic failure : In this case, LCF00, LCG00, LCH00 and LCI00 define failure in any direction and Cards 8, 9 and 10 are not defined.
+        EQ.1.0: Orthotropic failure with original formulation. The plastic strain rate tensor is expressed in the current material system(updated for material rotation).
+        EQ.2.0 : Orthotropic failure with alternative formulation. The plastic strain rate tensor is expressed in the initial material system(not updated for material rotation).
+        """ # nopep8
+        return self._cards[1].get_value("iftra")
+
+    @iftra.setter
+    def iftra(self, value: int) -> None:
+        """Set the iftra property."""
+        self._cards[1].set_value("iftra", value)
 
     @property
     def lcc00r(self) -> typing.Optional[float]:
-        """Get or set the Table ID. The curves in this table define compressive yield stress as a function of plastic strain or effective plastic strain (see IFLAG). The table ID defines for each plastic strain rate value or effective plastic strain rate value a load curve ID giving the (isothermal) compressive yield stress versus plastic strain or effective plastic strain for that rate.
+        """Get or set the Table ID. The curves in this table define compressive yield stress as a function of plastic strain. The table specifies a load curve ID for each plastic strain rate value, giving the (isothermal) compressive yield stress as a function of plastic strain for that rate in the 00-degree direction.
         """ # nopep8
         return self._cards[2].get_value("lcc00r")
 
@@ -354,7 +426,7 @@ class Mat264(KeywordBase):
 
     @property
     def lcs45r(self) -> typing.Optional[float]:
-        """Get or set the Table ID. The load curves define shear yield stress in function of plastic strain or effective plastic strain (see IFLAG).The table ID defines for each plastic strain rate value or effective plastic strain rate value a load curve ID giving the (isothermal) shear yield stress versus plastic strain or effective plastic strain for that rate.
+        """Get or set the Table ID. The table defines a load curve ID for each plastic strain rate value, giving the (isothermal) shear yield stress as a function of plastic strain for that rate in the 45-degree direction.
         """ # nopep8
         return self._cards[2].get_value("lcs45r")
 
@@ -365,7 +437,7 @@ class Mat264(KeywordBase):
 
     @property
     def lcs45t(self) -> typing.Optional[float]:
-        """Get or set the Table ID defining for each temperature value a load curve ID giving the (quasi-static) shear yield stress versus strain for that temperature. The load curves define shear yield stress as a function of plastic strain or effective plastic strain (see IFLAG).
+        """Get or set the Table ID. The table defines a load curve ID for each temperature value, giving the (quasi-static) shear yield stress versus strain for that temperature. The load curves define shear yield stress as a function of plastic strain or effective plastic strain (see IFLAG) in the 45-degree direction.
         """ # nopep8
         return self._cards[2].get_value("lcs45t")
 
@@ -377,8 +449,8 @@ class Mat264(KeywordBase):
     @property
     def iflag(self) -> int:
         """Get or set the Flag to specify abscissa for LCCR, LCCT, LCSR, LCST:
-        EQ.0.0:	Compressive and shear yields are given in a function of plastic strain (default).
-        EQ.1.0:	Compressive and shear strain are given in function of effective plastic strain.
+        EQ.0.0: Compressive and shear yields are given in a function of plastic strain (default).
+        EQ.1.0: Compressive and shear strain are given in function of effective plastic strain.
         """ # nopep8
         return self._cards[2].get_value("iflag")
 
@@ -412,12 +484,12 @@ class Mat264(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC, particularly the Material Directions section, for details):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES.
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.
-        EQ.2.0:	Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle.The angle may be set in the keyword input for the element or in the input for this keyword(see MANGLE).Note that the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying the angle depending on the value of MACF.
-        EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.
-        LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_OPTION).
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with *DEFINE_COORDINATE_NODES.
+        EQ.1.0: Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle.The angle may be set in the keyword input for the element or in the input for this keyword(see MANGLE).Note that the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying the angle depending on the value of MACF.
+        EQ.4.0: Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number(CID on *DEFINE_COORDINATE_OPTION).
         """ # nopep8
         return self._cards[2].get_value("aopt")
 
@@ -450,7 +522,7 @@ class Mat264(KeywordBase):
 
     @property
     def lctthr(self) -> int:
-        """Get or set the Table ID defining for each plastic strain rate value a load curve ID giving the (isothermal) tensile yield stress versus plastic strain for that rate in the thickness degree direction.
+        """Get or set the Table ID defining for each plastic strain rate value a load curve ID giving the (isothermal) tensile yield stress versus plastic strain for that rate in the thickness direction.
         """ # nopep8
         return self._cards[3].get_value("lctthr")
 
@@ -482,15 +554,15 @@ class Mat264(KeywordBase):
         self._cards[3].set_value("lcc45r", value)
 
     @property
-    def lccth(self) -> int:
-        """Get or set the Table ID defining for each plastic strain rate value a load curve ID giving the (isothermal) compressive yield stress versus plastic strain for that rate in the thickness degree direction.
+    def lccthr(self) -> int:
+        """Get or set the Table ID defining for each plastic strain rate value a load curve ID giving the (isothermal) compressive yield stress versus plastic strain for that rate in the thickness direction.
         """ # nopep8
-        return self._cards[3].get_value("lccth")
+        return self._cards[3].get_value("lccthr")
 
-    @lccth.setter
-    def lccth(self, value: int) -> None:
-        """Set the lccth property."""
-        self._cards[3].set_value("lccth", value)
+    @lccthr.setter
+    def lccthr(self, value: int) -> None:
+        """Set the lccthr property."""
+        self._cards[3].set_value("lccthr", value)
 
     @property
     def lct90t(self) -> int:
@@ -516,7 +588,7 @@ class Mat264(KeywordBase):
 
     @property
     def lcttht(self) -> int:
-        """Get or set the Table ID defining for each temperature value a load curve ID giving the (quasistatic) tensile yield stress versus plastic strain for that rate in the thickness degree direction.
+        """Get or set the Table ID defining for each temperature value a load curve ID giving the (quasistatic) tensile yield stress versus plastic strain for that rate in the through-thickness direction.
         """ # nopep8
         return self._cards[4].get_value("lcttht")
 
@@ -549,7 +621,7 @@ class Mat264(KeywordBase):
 
     @property
     def lcctht(self) -> int:
-        """Get or set the Table ID defining for each temperature value a load curve ID giving the (quasistatic) compressive yield stress versus plastic strain for that rate in the thickness degree direction.
+        """Get or set the Table ID defining for each temperature value a load curve ID giving the (quasistatic) compressive yield stress versus plastic strain for that rate in the through-thickness direction.
         """ # nopep8
         return self._cards[4].get_value("lcctht")
 
@@ -560,7 +632,7 @@ class Mat264(KeywordBase):
 
     @property
     def xp(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Coordinates of point P for AOPT = 1 and 4
         """ # nopep8
         return self._cards[5].get_value("xp")
 
@@ -571,7 +643,7 @@ class Mat264(KeywordBase):
 
     @property
     def yp(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Coordinates of point P for AOPT = 1 and 4
         """ # nopep8
         return self._cards[5].get_value("yp")
 
@@ -582,7 +654,7 @@ class Mat264(KeywordBase):
 
     @property
     def zp(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Coordinates of point P for AOPT = 1 and 4
         """ # nopep8
         return self._cards[5].get_value("zp")
 
@@ -627,14 +699,14 @@ class Mat264(KeywordBase):
     @property
     def macf(self) -> float:
         """Get or set the Material axes change flag for solid elements:
-        EQ. - 4:	Switch material axes b and c before BETA or MANGLE rotation
-        EQ. - 3 : Switch material axes a and c before BETA or MANGLE rotation
-        EQ. - 2 : Switch material axes a and b before BETA or MANGLE rotation
-        EQ.1 : No change, default
-        EQ.2 : Switch material axes a and b after BETA or MANGLE rotation
-        EQ.3 : Switch material axes a and c after BETA or MANGLE rotation
-        EQ.4 : Switch material axes b and c after BETA or MANGLE rotation
-        Figure Error!Reference source not found.indicates when LS - DYNA applies MACF during the process to obtain the final material axes.If BETA on * ELEMENT_SOLID_{OPTION} is defined, then BETA is used for the rotation for all AOPT options.Otherwise, for AOPT = 3, MANGLE input on Card 3 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no rotation will be performed.
+        EQ. - 4: Switch material axes b and c before BETA or MANGLE rotation
+        EQ. - 3: Switch material axes a and c before BETA or MANGLE rotation
+        EQ. - 2: Switch material axes a and b before BETA or MANGLE rotation
+        EQ.1: No change, default
+        EQ.2: Switch material axes a and b after BETA or MANGLE rotation
+        EQ.3: Switch material axes a and c after BETA or MANGLE rotation
+        EQ.4: Switch material axes b and c after BETA or MANGLE rotation
+        If BETA on *ELEMENT_SOLID_{OPTION} is defined, then BETA is used for the rotation for all AOPT options.Otherwise, for AOPT = 3, MANGLE input on Card 3 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no rotation will be performed.
         """ # nopep8
         return self._cards[5].get_value("macf")
 
@@ -712,26 +784,246 @@ class Mat264(KeywordBase):
         self._cards[6].set_value("d3", value)
 
     @property
-    def beta(self) -> typing.Optional[float]:
-        """Get or set the Material angle in degrees for AOPT=0 and 3, may be overridden on the element card, see *ELEMENT_SHELL_BETA.
+    def mangle(self) -> typing.Optional[float]:
+        """Get or set the Material angle in degrees for AOPT = 3.  It may be overridden on the element card; see *ELEMENT_SOLID_ORTHO.
         """ # nopep8
-        return self._cards[6].get_value("beta")
+        return self._cards[6].get_value("mangle")
 
-    @beta.setter
-    def beta(self, value: float) -> None:
-        """Set the beta property."""
-        self._cards[6].set_value("beta", value)
+    @mangle.setter
+    def mangle(self, value: float) -> None:
+        """Set the mangle property."""
+        self._cards[6].set_value("mangle", value)
+
+    @property
+    def lcf90(self) -> typing.Optional[int]:
+        """Get or set the Load curve or table ID specifying the plastic failure strain in the 90° direction. The load curve gives the plastic failure strain as a function of triaxiality. For the table, the Lode parameter indexes plastic failure strain as a function of triaxiality curves.
+        """ # nopep8
+        return self._cards[7].get_value("lcf90")
+
+    @lcf90.setter
+    def lcf90(self, value: int) -> None:
+        """Set the lcf90 property."""
+        self._cards[7].set_value("lcf90", value)
+
+    @property
+    def lcg90(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID giving plastic failure strain (or a scale factor for determining the plastic failure strain) as a function of plastic strain rate in the 90° direction. The curve should not extrapolate to zero; otherwise, failure may occur at low strain. If the first abscissa value in the curve corresponds to a negative strain rate, the natural logarithm of the strain rate value is assumed to be used for all abscissa valu
+        """ # nopep8
+        return self._cards[7].get_value("lcg90")
+
+    @lcg90.setter
+    def lcg90(self, value: int) -> None:
+        """Set the lcg90 property."""
+        self._cards[7].set_value("lcg90", value)
+
+    @property
+    def lch90(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID defining plastic failure strain (or a scale factor for determining the plastic failure strain) in the 90° direction as a function of temperature.
+        """ # nopep8
+        return self._cards[7].get_value("lch90")
+
+    @lch90.setter
+    def lch90(self, value: int) -> None:
+        """Set the lch90 property."""
+        self._cards[7].set_value("lch90", value)
+
+    @property
+    def lci90(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID, table ID, or 3D table ID specifying the plastic failure strain (or scale factor or a scale factor for determining the plastic failure strain) in the 90° direction. The load curve gives plastic failure strain as a function of element size. For a table, the plastic failure strain depends on triaxiality (TABLE) and element size (CURVE). For a three-dimensional table, plastic failure strain depends on the Lode parameter (TABLE_3D), triaxiality (TABLE), and element size (CURVE). See Remark 2.
+        """ # nopep8
+        return self._cards[7].get_value("lci90")
+
+    @lci90.setter
+    def lci90(self, value: int) -> None:
+        """Set the lci90 property."""
+        self._cards[7].set_value("lci90", value)
+
+    @property
+    def lcf45ab(self) -> typing.Optional[int]:
+        """Get or set the Load curve or table ID specifying plastic failure strain in the 45° direction on the rolling (A) - transverse (B) plane. The load curve gives plastic failure strain as a function of triaxiality. For the table, the plastic failure strain in this direction depends on the Lode parameter (TABLE) and triaxiality (CURVE).
+        """ # nopep8
+        return self._cards[7].get_value("lcf45ab")
+
+    @lcf45ab.setter
+    def lcf45ab(self, value: int) -> None:
+        """Set the lcf45ab property."""
+        self._cards[7].set_value("lcf45ab", value)
+
+    @property
+    def lcg45ab(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID defining plastic failure strain (or a scale factor for determining the plastic failure strain) as a function of plastic strain rate in the 45° direction on the rolling (A) – transverse (B) plane. The curve should not extrapolate to zero; otherwise, failure may occur at low strain. If the first abscissa value in the curve corresponds to a negative strain rate, the natural logarithm of the strain rate value is assumed to be used for all abscissa values. See Remark 2.
+        """ # nopep8
+        return self._cards[7].get_value("lcg45ab")
+
+    @lcg45ab.setter
+    def lcg45ab(self, value: int) -> None:
+        """Set the lcg45ab property."""
+        self._cards[7].set_value("lcg45ab", value)
+
+    @property
+    def lch45ab(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID defining plastic failure strain (or scale factor for determining the plastic failure strain) as a function of temperature in the 45° direction on the rolling (A) - transverse (B) plane.
+        """ # nopep8
+        return self._cards[7].get_value("lch45ab")
+
+    @lch45ab.setter
+    def lch45ab(self, value: int) -> None:
+        """Set the lch45ab property."""
+        self._cards[7].set_value("lch45ab", value)
+
+    @property
+    def lci45ab(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID, table ID, or 3D table ID giving the plastic failure strain (or a scale factor for determining the plastic failure strain) in the 45° direction on the rolling (A) - transverse (B) plane. The load curve gives plastic failure strain as a function of element size. For a table, the plastic failure strain depends on triaxiality (TABLE) and element size (CURVE). For a three-dimensional table, plastic failure strain depends on the Lode parameter (TABLE_3D), triaxiality (TABLE), and element size (CURVE).
+        """ # nopep8
+        return self._cards[7].get_value("lci45ab")
+
+    @lci45ab.setter
+    def lci45ab(self, value: int) -> None:
+        """Set the lci45ab property."""
+        self._cards[7].set_value("lci45ab", value)
+
+    @property
+    def lcfth(self) -> typing.Optional[int]:
+        """Get or set the Load curve or table ID giving the plastic failure strain in the through-thickness direction. The load curve defines plastic failure strain as a function of triaxiality. For the table, the Lode parameter indexes plastic failure strain as a function of triaxiality curves
+        """ # nopep8
+        return self._cards[8].get_value("lcfth")
+
+    @lcfth.setter
+    def lcfth(self, value: int) -> None:
+        """Set the lcfth property."""
+        self._cards[8].set_value("lcfth", value)
+
+    @property
+    def lcgth(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID defining plastic failure strain (or a scale factor for determining the plastic failure strain) as a function of plastic strain rate in the through-thickness direction. The curve should not extrapolate to zero; otherwise, failure may occur at low strain. If the first abscissa value in the curve corresponds to a negative strain rate, the natural logarithm of the strain rate value is assumed to be used for all abscissa values.
+        """ # nopep8
+        return self._cards[8].get_value("lcgth")
+
+    @lcgth.setter
+    def lcgth(self, value: int) -> None:
+        """Set the lcgth property."""
+        self._cards[8].set_value("lcgth", value)
+
+    @property
+    def lchth(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID defining plastic failure strain (or a scale factor for determining the plastic failure strain) as a function of temperature in the through-thickness direction.
+        """ # nopep8
+        return self._cards[8].get_value("lchth")
+
+    @lchth.setter
+    def lchth(self, value: int) -> None:
+        """Set the lchth property."""
+        self._cards[8].set_value("lchth", value)
+
+    @property
+    def lcith(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID, table ID, or 3D table ID defining plastic failure strain (or a scale factor for determining the plastic failure strain) in the through-thickness direction. The load curve gives plastic failure strain as a function of element size. For a table, the plastic failure strains depend upon triaxiality (TABLE) and element size (CURVE). For a three-dimensional table, plastic failure strain is a function of the Lode parameter (TABLE_3D), triaxiality (TABLE), and element size (CURVE).
+        """ # nopep8
+        return self._cards[8].get_value("lcith")
+
+    @lcith.setter
+    def lcith(self, value: int) -> None:
+        """Set the lcith property."""
+        self._cards[8].set_value("lcith", value)
+
+    @property
+    def lcf45bc(self) -> typing.Optional[int]:
+        """Get or set the Load curve or table ID giving plastic failure strain in the 45° direction on the transverse (B) - normal (C) plane. The load curve defines plastic failure strain as a function of triaxiality.  For the table, the Lode parameter indexes each plastic failure strain as a function of triaxiality curve.
+        """ # nopep8
+        return self._cards[8].get_value("lcf45bc")
+
+    @lcf45bc.setter
+    def lcf45bc(self, value: int) -> None:
+        """Set the lcf45bc property."""
+        self._cards[8].set_value("lcf45bc", value)
+
+    @property
+    def lcg45bc(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID defining plastic failure strain (or a scale factor for determining plastic failure strain) as a function of plastic strain rate in the 45° direction on the transverse (B) - normal (C) plane. The curve should not extrapolate to zero; otherwise, failure may occur at low strain. If the first abscissa value in the curve corresponds to a negative strain rate, the natural logarithm of the strain rate value is assumed to be used for all abscissa values.
+        """ # nopep8
+        return self._cards[8].get_value("lcg45bc")
+
+    @lcg45bc.setter
+    def lcg45bc(self, value: int) -> None:
+        """Set the lcg45bc property."""
+        self._cards[8].set_value("lcg45bc", value)
+
+    @property
+    def lch45bc(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID defining plastic failure strain (or a scale factor for determining plastic failure strain) as a function of temperature in the 45° direction on the transverse (B) - normal (C) plane.
+        """ # nopep8
+        return self._cards[8].get_value("lch45bc")
+
+    @lch45bc.setter
+    def lch45bc(self, value: int) -> None:
+        """Set the lch45bc property."""
+        self._cards[8].set_value("lch45bc", value)
+
+    @property
+    def lci45bc(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID, table ID, or 3D table ID giving plastic failure strain (or a scale factor for determining plastic failure strain) in the 45° direction on the transverse (B) - normal (C) plane. The load curve gives plastic failure strain as a function of element size. For a table, the plastic failure strains depend upon triaxiality (TABLE) and element size (CURVE). For a three-dimensional table, plastic failure strain is a function of the Lode parameter (TABLE_3D), triaxiality (TABLE), and element size (CURVE).
+        """ # nopep8
+        return self._cards[8].get_value("lci45bc")
+
+    @lci45bc.setter
+    def lci45bc(self, value: int) -> None:
+        """Set the lci45bc property."""
+        self._cards[8].set_value("lci45bc", value)
+
+    @property
+    def lcf45ca(self) -> typing.Optional[int]:
+        """Get or set the Load curve or table ID defining plastic failure strain in the 45° direction on the normal (C) - rolling (A) plane. The load curve defines plastic failure strain as a function of triaxiality. For a table, the Lode parameter indexes each plastic failure strain as a function of triaxiality curve.
+        """ # nopep8
+        return self._cards[9].get_value("lcf45ca")
+
+    @lcf45ca.setter
+    def lcf45ca(self, value: int) -> None:
+        """Set the lcf45ca property."""
+        self._cards[9].set_value("lcf45ca", value)
+
+    @property
+    def lcg45ca(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID defining plastic failure strain (or a scale factor for determining plastic failure strain) as a function of plastic strain rate in the 45° direction on the normal (C) - rolling (A) plane. The curve should not extrapolate to zero; otherwise, failure may occur at low strain. If the first abscissa value in the curve corresponds to a negative strain rate, the natural logarithm of the strain rate value is assumed to be used for all abscissa values.
+        """ # nopep8
+        return self._cards[9].get_value("lcg45ca")
+
+    @lcg45ca.setter
+    def lcg45ca(self, value: int) -> None:
+        """Set the lcg45ca property."""
+        self._cards[9].set_value("lcg45ca", value)
+
+    @property
+    def lch45ca(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID defining plastic failure strain (or a scale factor for determining plastic failure strain) as a function of temperature in the 45° direction on the normal (C) - rolling (A) plane
+        """ # nopep8
+        return self._cards[9].get_value("lch45ca")
+
+    @lch45ca.setter
+    def lch45ca(self, value: int) -> None:
+        """Set the lch45ca property."""
+        self._cards[9].set_value("lch45ca", value)
+
+    @property
+    def lci45ca(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID, table ID, or 3D table ID giving plastic failure strain (or a scale factor for determining plastic failure strain) in the 45° direction on the normal (C) - rolling (A) plane. The load curve gives plastic failure strain as a function of element size. For a table, the plastic failure strains depend upon triaxiality (TABLE) and element size (CURVE). For a three-dimensional table, plastic failure strain is a function of the Lode parameter (TABLE_3D), triaxiality (TABLE), and element size (CURVE)
+        """ # nopep8
+        return self._cards[9].get_value("lci45ca")
+
+    @lci45ca.setter
+    def lci45ca(self, value: int) -> None:
+        """Set the lci45ca property."""
+        self._cards[9].set_value("lci45ca", value)
 
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[7].cards[0].get_value("title")
+        return self._cards[10].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[7].cards[0].set_value("title", value)
+        self._cards[10].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
@@ -752,257 +1044,362 @@ class Mat264(KeywordBase):
         self.lct00r = value.lcid
 
     @property
-    def lct00t_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lct00t."""
+    def lcf00_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcf00."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lct00t:
+            if kwd.lcid == self.lcf00:
                 return kwd
         return None
 
-    @lct00t_link.setter
-    def lct00t_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lct00t."""
-        self.lct00t = value.lcid
+    @lcf00_link.setter
+    def lcf00_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcf00."""
+        self.lcf00 = value.lcid
 
     @property
-    def lcf_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcf."""
+    def lcg00_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcg00."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcf:
+            if kwd.lcid == self.lcg00:
                 return kwd
         return None
 
-    @lcf_link.setter
-    def lcf_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcf."""
-        self.lcf = value.lcid
+    @lcg00_link.setter
+    def lcg00_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcg00."""
+        self.lcg00 = value.lcid
 
     @property
-    def lcg_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcg."""
+    def lch00_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lch00."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcg:
+            if kwd.lcid == self.lch00:
                 return kwd
         return None
 
-    @lcg_link.setter
-    def lcg_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcg."""
-        self.lcg = value.lcid
+    @lch00_link.setter
+    def lch00_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lch00."""
+        self.lch00 = value.lcid
 
     @property
-    def lch_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lch."""
+    def lci00_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lci00."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lch:
+            if kwd.lcid == self.lci00:
                 return kwd
         return None
 
-    @lch_link.setter
-    def lch_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lch."""
-        self.lch = value.lcid
+    @lci00_link.setter
+    def lci00_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lci00."""
+        self.lci00 = value.lcid
 
     @property
-    def lci_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lci."""
+    def lcf90_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcf90."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lci:
+            if kwd.lcid == self.lcf90:
                 return kwd
         return None
 
-    @lci_link.setter
-    def lci_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lci."""
-        self.lci = value.lcid
+    @lcf90_link.setter
+    def lcf90_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcf90."""
+        self.lcf90 = value.lcid
 
     @property
-    def lct90r_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lct90r."""
+    def lcg90_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcg90."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lct90r:
+            if kwd.lcid == self.lcg90:
                 return kwd
         return None
 
-    @lct90r_link.setter
-    def lct90r_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lct90r."""
-        self.lct90r = value.lcid
+    @lcg90_link.setter
+    def lcg90_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcg90."""
+        self.lcg90 = value.lcid
 
     @property
-    def lct45r_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lct45r."""
+    def lch90_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lch90."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lct45r:
+            if kwd.lcid == self.lch90:
                 return kwd
         return None
 
-    @lct45r_link.setter
-    def lct45r_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lct45r."""
-        self.lct45r = value.lcid
+    @lch90_link.setter
+    def lch90_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lch90."""
+        self.lch90 = value.lcid
 
     @property
-    def lctthr_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lctthr."""
+    def lci90_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lci90."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lctthr:
+            if kwd.lcid == self.lci90:
                 return kwd
         return None
 
-    @lctthr_link.setter
-    def lctthr_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lctthr."""
-        self.lctthr = value.lcid
+    @lci90_link.setter
+    def lci90_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lci90."""
+        self.lci90 = value.lcid
 
     @property
-    def lcc90r_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcc90r."""
+    def lcf45ab_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcf45ab."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcc90r:
+            if kwd.lcid == self.lcf45ab:
                 return kwd
         return None
 
-    @lcc90r_link.setter
-    def lcc90r_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcc90r."""
-        self.lcc90r = value.lcid
+    @lcf45ab_link.setter
+    def lcf45ab_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcf45ab."""
+        self.lcf45ab = value.lcid
 
     @property
-    def lcc45r_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcc45r."""
+    def lcg45ab_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcg45ab."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcc45r:
+            if kwd.lcid == self.lcg45ab:
                 return kwd
         return None
 
-    @lcc45r_link.setter
-    def lcc45r_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcc45r."""
-        self.lcc45r = value.lcid
+    @lcg45ab_link.setter
+    def lcg45ab_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcg45ab."""
+        self.lcg45ab = value.lcid
 
     @property
-    def lccth_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lccth."""
+    def lch45ab_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lch45ab."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lccth:
+            if kwd.lcid == self.lch45ab:
                 return kwd
         return None
 
-    @lccth_link.setter
-    def lccth_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lccth."""
-        self.lccth = value.lcid
+    @lch45ab_link.setter
+    def lch45ab_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lch45ab."""
+        self.lch45ab = value.lcid
 
     @property
-    def lct90t_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lct90t."""
+    def lci45ab_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lci45ab."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lct90t:
+            if kwd.lcid == self.lci45ab:
                 return kwd
         return None
 
-    @lct90t_link.setter
-    def lct90t_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lct90t."""
-        self.lct90t = value.lcid
+    @lci45ab_link.setter
+    def lci45ab_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lci45ab."""
+        self.lci45ab = value.lcid
 
     @property
-    def lct45t_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lct45t."""
+    def lcfth_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcfth."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lct45t:
+            if kwd.lcid == self.lcfth:
                 return kwd
         return None
 
-    @lct45t_link.setter
-    def lct45t_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lct45t."""
-        self.lct45t = value.lcid
+    @lcfth_link.setter
+    def lcfth_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcfth."""
+        self.lcfth = value.lcid
 
     @property
-    def lcttht_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcttht."""
+    def lcgth_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcgth."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcttht:
+            if kwd.lcid == self.lcgth:
                 return kwd
         return None
 
-    @lcttht_link.setter
-    def lcttht_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcttht."""
-        self.lcttht = value.lcid
+    @lcgth_link.setter
+    def lcgth_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcgth."""
+        self.lcgth = value.lcid
 
     @property
-    def lcc90t_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcc90t."""
+    def lchth_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lchth."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcc90t:
+            if kwd.lcid == self.lchth:
                 return kwd
         return None
 
-    @lcc90t_link.setter
-    def lcc90t_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcc90t."""
-        self.lcc90t = value.lcid
+    @lchth_link.setter
+    def lchth_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lchth."""
+        self.lchth = value.lcid
 
     @property
-    def lcc45t_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcc45t."""
+    def lcith_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcith."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcc45t:
+            if kwd.lcid == self.lcith:
                 return kwd
         return None
 
-    @lcc45t_link.setter
-    def lcc45t_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcc45t."""
-        self.lcc45t = value.lcid
+    @lcith_link.setter
+    def lcith_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcith."""
+        self.lcith = value.lcid
 
     @property
-    def lcctht_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcctht."""
+    def lcf45bc_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcf45bc."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcctht:
+            if kwd.lcid == self.lcf45bc:
                 return kwd
         return None
 
-    @lcctht_link.setter
-    def lcctht_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcctht."""
-        self.lcctht = value.lcid
+    @lcf45bc_link.setter
+    def lcf45bc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcf45bc."""
+        self.lcf45bc = value.lcid
+
+    @property
+    def lcg45bc_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcg45bc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcg45bc:
+                return kwd
+        return None
+
+    @lcg45bc_link.setter
+    def lcg45bc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcg45bc."""
+        self.lcg45bc = value.lcid
+
+    @property
+    def lch45bc_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lch45bc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lch45bc:
+                return kwd
+        return None
+
+    @lch45bc_link.setter
+    def lch45bc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lch45bc."""
+        self.lch45bc = value.lcid
+
+    @property
+    def lci45bc_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lci45bc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lci45bc:
+                return kwd
+        return None
+
+    @lci45bc_link.setter
+    def lci45bc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lci45bc."""
+        self.lci45bc = value.lcid
+
+    @property
+    def lcf45ca_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcf45ca."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcf45ca:
+                return kwd
+        return None
+
+    @lcf45ca_link.setter
+    def lcf45ca_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcf45ca."""
+        self.lcf45ca = value.lcid
+
+    @property
+    def lcg45ca_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcg45ca."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcg45ca:
+                return kwd
+        return None
+
+    @lcg45ca_link.setter
+    def lcg45ca_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcg45ca."""
+        self.lcg45ca = value.lcid
+
+    @property
+    def lch45ca_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lch45ca."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lch45ca:
+                return kwd
+        return None
+
+    @lch45ca_link.setter
+    def lch45ca_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lch45ca."""
+        self.lch45ca = value.lcid
+
+    @property
+    def lci45ca_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lci45ca."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lci45ca:
+                return kwd
+        return None
+
+    @lci45ca_link.setter
+    def lci45ca_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lci45ca."""
+        self.lci45ca = value.lcid
 

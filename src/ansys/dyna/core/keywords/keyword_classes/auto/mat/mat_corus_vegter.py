@@ -43,8 +43,8 @@ _MATCORUSVEGTER_CARD0 = (
 _MATCORUSVEGTER_CARD1 = (
     FieldSchema("sys", float, 0, 10, None),
     FieldSchema("sip", float, 10, 10, None),
-    FieldSchema("shs", float, 20, 10, None),
-    FieldSchema("shl", float, 30, 10, None),
+    FieldSchema("shb", float, 20, 10, None),
+    FieldSchema("sho", float, 30, 10, None),
     FieldSchema("esh", float, 40, 10, None),
     FieldSchema("e0", float, 50, 10, None),
     FieldSchema("alpha", float, 60, 10, None),
@@ -141,7 +141,7 @@ class MatCorusVegter(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.  A unique number or label must be specified
+        """Get or set the Material identification. A unique number or label must be specified
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -185,7 +185,7 @@ class MatCorusVegter(KeywordBase):
 
     @property
     def n(self) -> typing.Optional[int]:
-        """Get or set the Order of Fourier series (i.e., number of test groups minus one).  The minimum number for N is 2, and the maximum is 12
+        """Get or set the Order of Fourier series (i.e., number of test groups minus one). The minimum number for N is 2, and the maximum is 12
         """ # nopep8
         return self._cards[0].get_value("n")
 
@@ -218,7 +218,7 @@ class MatCorusVegter(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[float]:
-        """Get or set the Stress-strain curve ID.  If defined, SYS, SIP, SHS, and SHL are ignored
+        """Get or set the Stress-strain curve ID. If defined, SYS, SIP, SHB, and SHO are ignored
         """ # nopep8
         return self._cards[0].get_value("lcid")
 
@@ -250,26 +250,26 @@ class MatCorusVegter(KeywordBase):
         self._cards[1].set_value("sip", value)
 
     @property
-    def shs(self) -> typing.Optional[float]:
-        """Get or set the Strain hardening parameter for small strain
-        """ # nopep8
-        return self._cards[1].get_value("shs")
-
-    @shs.setter
-    def shs(self, value: float) -> None:
-        """Set the shs property."""
-        self._cards[1].set_value("shs", value)
-
-    @property
-    def shl(self) -> typing.Optional[float]:
+    def shb(self) -> typing.Optional[float]:
         """Get or set the Strain hardening parameter for larger strain
         """ # nopep8
-        return self._cards[1].get_value("shl")
+        return self._cards[1].get_value("shb")
 
-    @shl.setter
-    def shl(self, value: float) -> None:
-        """Set the shl property."""
-        self._cards[1].set_value("shl", value)
+    @shb.setter
+    def shb(self, value: float) -> None:
+        """Set the shb property."""
+        self._cards[1].set_value("shb", value)
+
+    @property
+    def sho(self) -> typing.Optional[float]:
+        """Get or set the Strain hardening parameter for small strain
+        """ # nopep8
+        return self._cards[1].get_value("sho")
+
+    @sho.setter
+    def sho(self, value: float) -> None:
+        """Set the sho property."""
+        self._cards[1].set_value("sho", value)
 
     @property
     def esh(self) -> typing.Optional[float]:
@@ -295,7 +295,7 @@ class MatCorusVegter(KeywordBase):
 
     @property
     def alpha(self) -> typing.Optional[float]:
-        """Get or set the distribution of hardening used in the curve-fitting.    pure kinematic hardening and   provides pure isotropic hardening
+        """Get or set the distribution of hardening used in the curve-fitting.   pure kinematic hardening and   provides pure isotropic hardening
         """ # nopep8
         return self._cards[1].get_value("alpha")
 
@@ -306,7 +306,7 @@ class MatCorusVegter(KeywordBase):
 
     @property
     def lcid2(self) -> typing.Optional[float]:
-        """Get or set the Curve ID.  The curve defines Young's modulus change with respect to the plastic strain.  By default it is assumed that Young's modulus remains constant.  Effective value is between 0-1
+        """Get or set the Curve ID. The curve defines Young's modulus change with respect to the plastic strain. By default it is assumed that Young's modulus remains constant. Effective value is between 0-1
         """ # nopep8
         return self._cards[1].get_value("lcid2")
 
@@ -322,7 +322,7 @@ class MatCorusVegter(KeywordBase):
         element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
         EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
         *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
         """ # nopep8

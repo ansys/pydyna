@@ -32,7 +32,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import De
 _MATTHERMALISOTROPIC_CARD0 = (
     FieldSchema("tmid", int, 0, 10, None),
     FieldSchema("ro", float, 10, 10, None),
-    FieldSchema("tgrlc", float, 20, 10, None),
+    FieldSchema("tgrlc", int, 20, 10, None),
     FieldSchema("tgmult", float, 30, 10, None),
     FieldSchema("tlat", float, 40, 10, None),
     FieldSchema("hlat", float, 50, 10, None),
@@ -107,16 +107,16 @@ class MatThermalIsotropic(KeywordBase):
         self._cards[0].set_value("ro", value)
 
     @property
-    def tgrlc(self) -> typing.Optional[float]:
+    def tgrlc(self) -> typing.Optional[int]:
         """Get or set the Thermal generation rate (see *DEFINE_CURVE).
-        GT.0:	Load curve ID giving thermal generation rate as a function of time
-        EQ.0 : Thermal generation rate is the constant multiplier, TGMULT.
-        LT.0 : | TGRLC | is a load curve ID defining thermal generation rate as a function of temperature.
+        GT.0: Load curve ID giving thermal generation rate as a function of time
+        EQ.0: Thermal generation rate is the constant multiplier, TGMULT.
+        LT.0: | TGRLC | is a load curve ID defining thermal generation rate as a function of temperature.
         """ # nopep8
         return self._cards[0].get_value("tgrlc")
 
     @tgrlc.setter
-    def tgrlc(self, value: float) -> None:
+    def tgrlc(self, value: int) -> None:
         """Set the tgrlc property."""
         self._cards[0].set_value("tgrlc", value)
 

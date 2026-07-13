@@ -67,7 +67,7 @@ _FREQUENCYDOMAINSSDDIRECT_CARD3 = (
     FieldSchema("vad", int, 30, 10, 0),
     FieldSchema("lc1", int, 40, 10, None),
     FieldSchema("lc2", int, 50, 10, None),
-    FieldSchema("sf", float, 60, 10, 0.0),
+    FieldSchema("sf", float, 60, 10, 1.0),
     FieldSchema("vid", int, 70, 10, 0),
 )
 
@@ -167,16 +167,18 @@ class FrequencyDomainSsdDirect(KeywordBase):
     @property
     def restdp(self) -> int:
         """Get or set the Restart option.
-        EQ.0: A new run without dumpssd,
-        EQ.1: Restart with dumpssd.
+        EQ.-1: A new run with writing dumpssd for future restart,
+        EQ.0: A new run without writing dumpssd,
+        EQ.1: Restart with dumpssd with writing new dumpssd for future restart,
+        EQ.2: Restart with dumpssd without writing new dumpssd.
         """ # nopep8
         return self._cards[0].get_value("restdp")
 
     @restdp.setter
     def restdp(self, value: int) -> None:
         """Set the restdp property."""
-        if value not in [0, 1, None]:
-            raise Exception("""restdp must be `None` or one of {0,1}.""")
+        if value not in [0, 1, -1, 2, None]:
+            raise Exception("""restdp must be `None` or one of {0,1,-1,2}.""")
         self._cards[0].set_value("restdp", value)
 
     @property
@@ -211,7 +213,7 @@ class FrequencyDomainSsdDirect(KeywordBase):
 
     @property
     def dampf(self) -> float:
-        """Get or set the Modal damping coefficient, ζ.
+        """Get or set the Modal damping coefficient
         """ # nopep8
         return self._cards[1].get_value("dampf")
 
@@ -222,7 +224,7 @@ class FrequencyDomainSsdDirect(KeywordBase):
 
     @property
     def lcdam(self) -> int:
-        """Get or set the Load Curve ID defining mode dependent modal damping coefficient ζ.
+        """Get or set the Load Curve ID defining mode dependent modal damping coefficient .
         """ # nopep8
         return self._cards[1].get_value("lcdam")
 
@@ -246,7 +248,7 @@ class FrequencyDomainSsdDirect(KeywordBase):
 
     @property
     def dmpmas(self) -> float:
-        """Get or set the Mass proportional damping constant α, in Rayleigh damping..
+        """Get or set the Mass proportional damping constant , in Rayleigh damping.
         """ # nopep8
         return self._cards[1].get_value("dmpmas")
 
@@ -257,7 +259,7 @@ class FrequencyDomainSsdDirect(KeywordBase):
 
     @property
     def dmpstf(self) -> float:
-        """Get or set the Stiffness proportional damping constant β, in Rayleigh damping.
+        """Get or set the Stiffness proportional damping constant , in Rayleigh damping.
         """ # nopep8
         return self._cards[1].get_value("dmpstf")
 
@@ -269,8 +271,8 @@ class FrequencyDomainSsdDirect(KeywordBase):
     @property
     def dmpflg(self) -> int:
         """Get or set the Damping flag:
-        EQ.0: use modal damping coefficient ζ,defined by DAMPF, or LCDAM, or Rayleigh damping defined by DMPMAS and DMPSTF in this card.
-        EQ.1: use damping defined by *DAMPING_PART_MASS and *DAMPING_PART_STIFFNESS.
+        EQ.0: use modal damping coefficient ,defined by DAMPF, or LCDAM, or Rayleigh damping defined by DMPMAS and DMPSTF in this card.
+        EQ.1:	Use damping defined by *DAMPING_PART_MASS, and *DAMPING_PART_STIFFNESS, or a material model like *MAT_LINEAR_ELASTIC_DISCRETE_BEAM.
         """ # nopep8
         return self._cards[1].get_value("dmpflg")
 
@@ -366,8 +368,8 @@ class FrequencyDomainSsdDirect(KeywordBase):
     @property
     def nova(self) -> int:
         """Get or set the Response output type:
-        EQ.0: velocity,
-        EQ.1: acceleration.
+        EQ.0: Velocity,
+        EQ.1: Acceleration.
         """ # nopep8
         return self._cards[2].get_value("nova")
 
@@ -391,24 +393,32 @@ class FrequencyDomainSsdDirect(KeywordBase):
 
     @property
     def ntyp(self) -> int:
-        """Get or set the Type of NID:
+        """Get or set the Type of N1:
         EQ.0: node ID,
         EQ.1: node set ID,
         EQ.2: segment set ID.
+        EQ.3:	Parametric point ID (see *IGA_POINT_UVW)
+        EQ.4:	Parametric point set ID(see * SET_IGA_POINT_UVW)
+        EQ.5 : Parametric edge ID(see * IGA_EDGE_UVW)
+        EQ.6 : Parametric edge set ID(see * SET_IGA_EDGE_UVW)
+        EQ.7 : Physical face ID(see * IGA_FACE_XYZ)
+        EQ.8 : Physical face set ID(see * SET_IGA_FACE_XYZ)
+        EQ.9 : Parametric face ID(see * IGA_FACE_UVW)). This option is only supported for VAD = 2.
+        EQ.10 : Parametric face set ID(see * SET_IGA_FACE_UVW)). This option is only supported for VAD = 2.
         """ # nopep8
         return self._cards[3].get_value("ntyp")
 
     @ntyp.setter
     def ntyp(self, value: int) -> None:
         """Set the ntyp property."""
-        if value not in [0, 1, 2, None]:
-            raise Exception("""ntyp must be `None` or one of {0,1,2}.""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, None]:
+            raise Exception("""ntyp must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10}.""")
         self._cards[3].set_value("ntyp", value)
 
     @property
     def dof(self) -> int:
         """Get or set the Applicable degrees-of-freedom for excitation input(ignored if VAD=1).
-        EQ. 1: x-translational degree-of-freedom x-rotational degree-of-freedom (for torque excitation, VAD=8),
+        EQ. 1: x-translational degree-of-freedom or x-rotational degree-of-freedom (for torque excitation, VAD=8),
         EQ. 2: y-translational degree-of-freedom or y-rotational degree-of-freedom (for torque excitation, VAD=8),
         EQ. 3: z-translational degree-of-freedom or z-rotational degree-of-freedom (for torque excitation, VAD=8),
         EQ. 4: translational movement in direction given by vector VID or rotational movement with axis given by vector VID (for torque excitation, VAD=8).

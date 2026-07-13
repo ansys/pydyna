@@ -112,7 +112,7 @@ class Mat102T(KeywordBase):
 
     @property
     def alpha(self) -> typing.Optional[float]:
-        """Get or set the Not to be confused with coefficient of thermal expansion.
+        """Get or set the a See manual Remark 1. This a is not the coefficient of thermal expansion
         """ # nopep8
         return self._cards[0].get_value("alpha")
 
@@ -123,7 +123,7 @@ class Mat102T(KeywordBase):
 
     @property
     def n(self) -> typing.Optional[float]:
-        """Get or set the See Remarks for detail.
+        """Get or set the See manual Remarks for detail.
         """ # nopep8
         return self._cards[0].get_value("n")
 
@@ -134,7 +134,7 @@ class Mat102T(KeywordBase):
 
     @property
     def a(self) -> typing.Optional[float]:
-        """Get or set the See Remarks for detail.
+        """Get or set the See manual Remarks for detail.
         """ # nopep8
         return self._cards[0].get_value("a")
 
@@ -145,7 +145,7 @@ class Mat102T(KeywordBase):
 
     @property
     def q(self) -> typing.Optional[float]:
-        """Get or set the See Remarks for detail.
+        """Get or set the See manual Remarks for detail.
         """ # nopep8
         return self._cards[0].get_value("q")
 
@@ -156,7 +156,7 @@ class Mat102T(KeywordBase):
 
     @property
     def g(self) -> typing.Optional[float]:
-        """Get or set the See Remarks for detail
+        """Get or set the See manual Remarks for detail
         """ # nopep8
         return self._cards[0].get_value("g")
 
@@ -178,7 +178,7 @@ class Mat102T(KeywordBase):
 
     @property
     def lce(self) -> typing.Optional[float]:
-        """Get or set the ID of curve defining Young’s Modulus as a function of temperature
+        """Get or set the ID of curve defining the Young's modulus as a function of temperature
         """ # nopep8
         return self._cards[1].get_value("lce")
 
@@ -189,7 +189,7 @@ class Mat102T(KeywordBase):
 
     @property
     def lcpr(self) -> typing.Optional[float]:
-        """Get or set the ID of curve defining Poisson’s ratio as a function of temperature
+        """Get or set the ID of curve defining Poisson's ratio as a function of temperature
         """ # nopep8
         return self._cards[1].get_value("lcpr")
 
@@ -200,7 +200,7 @@ class Mat102T(KeywordBase):
 
     @property
     def lccte(self) -> typing.Optional[float]:
-        """Get or set the ID of curve defining coefficient of thermal expansion as a function of temperature
+        """Get or set the ID of curve defining the coefficient of thermal expansion as a function of temperature
         """ # nopep8
         return self._cards[1].get_value("lccte")
 

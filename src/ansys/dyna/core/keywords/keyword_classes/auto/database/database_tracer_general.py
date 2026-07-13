@@ -35,6 +35,8 @@ _DATABASETRACERGENERAL_CARD0 = (
     FieldSchema("move", int, 30, 10, 0),
     FieldSchema("set", int, 40, 10, 0),
     FieldSchema("typs", int, 50, 10, 0),
+    FieldSchema("cor", int, 60, 10, 0),
+    FieldSchema("unused", int, 70, 10, None),
 )
 
 _DATABASETRACERGENERAL_CARD1 = (
@@ -89,8 +91,8 @@ class DatabaseTracerGeneral(KeywordBase):
     @property
     def elem(self) -> int:
         """Get or set the Element ID that controls the tracer motion (see Remarks 1 and 2)
-        GT.0: Data are output for ELEM
-        LT.0: Data are not output for ELEM.
+        GT.0: Data are output for ELEM if the tracer is located inside ELEM
+        LT.0: Data are not output for ELEM if the tracer is located inside ELEM
         """ # nopep8
         return self._cards[0].get_value("elem")
 
@@ -102,10 +104,10 @@ class DatabaseTracerGeneral(KeywordBase):
     @property
     def typm(self) -> int:
         """Get or set the ELEM type:
-        EQ.1: solid
-        EQ.2: beam
-        EQ.3: shell
-        EQ.4: tshell
+        EQ.1: Solid
+        EQ.2: Beam
+        EQ.3: Shell
+        EQ.4: Tshell
         """ # nopep8
         return self._cards[0].get_value("typm")
 
@@ -119,9 +121,9 @@ class DatabaseTracerGeneral(KeywordBase):
     @property
     def move(self) -> int:
         """Get or set the Flag to define how the tracer moves (see Remark 1):
-        EQ.0: the tracer does not move with ELEM
-        EQ.1: the tracer velocity is interpolated from ELEM nodal velocities
-        EQ.2: the tracer position is interpolated from ELEM nodal positions.
+        EQ.0: The tracer does not move with ELEM
+        EQ.1: The tracer velocity is interpolated from ELEM nodal velocities
+        EQ.2: The tracer position is interpolated from ELEM nodal positions.
         """ # nopep8
         return self._cards[0].get_value("move")
 
@@ -146,11 +148,11 @@ class DatabaseTracerGeneral(KeywordBase):
     @property
     def typs(self) -> int:
         """Get or set the SET type:
-        EQ.0: part
-        EQ.1: solid
-        EQ.2: beam
-        EQ.3: shell
-        EQ.4: tshell .
+        EQ.0: Part
+        EQ.1: Solid
+        EQ.2: Beam
+        EQ.3: Shell
+        EQ.4: Tshell .
         """ # nopep8
         return self._cards[0].get_value("typs")
 
@@ -160,6 +162,22 @@ class DatabaseTracerGeneral(KeywordBase):
         if value not in [0, 1, 2, 3, 4, None]:
             raise Exception("""typs must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("typs", value)
+
+    @property
+    def cor(self) -> int:
+        """Get or set the Flag to correct the tracer position if found outside the tracked mesh during the initialization:
+        EQ.0: No correction
+        EQ.1: The tracer is moved to the center of the closest element
+        EQ.2: The tracer is moved to the nearest face center or node of the closest element
+        """ # nopep8
+        return self._cards[0].get_value("cor")
+
+    @cor.setter
+    def cor(self, value: int) -> None:
+        """Set the cor property."""
+        if value not in [0, 1, 2, None]:
+            raise Exception("""cor must be `None` or one of {0,1,2}.""")
+        self._cards[0].set_value("cor", value)
 
     @property
     def dt(self) -> float:
@@ -208,19 +226,19 @@ class DatabaseTracerGeneral(KeywordBase):
     @property
     def varloc(self) -> int:
         """Get or set the Variable location in trcrgal_binout to be replaced with the variable specified in the VAREPL field:
-        EQ.4:	-velocity
-        EQ.5:	-velocity
-        EQ.6:	-velocity
-        EQ.7:	-stress
-        EQ.8:	-stress
-        EQ.9:	-stress
-        EQ.10:	-stress
-        EQ.11:	-stress
-        EQ.12:	-stress
-        EQ.13:	plastic strain
-        EQ.14:	nodal mass
-        EQ.15:	undefined
-        GE.16 and LE.30:	other auxiliary variables
+        EQ.4: -velocity
+        EQ.5: -velocity
+        EQ.6: -velocity
+        EQ.7: -stress
+        EQ.8: -stress
+        EQ.9: -stress
+        EQ.10: -stress
+        EQ.11: -stress
+        EQ.12: -stress
+        EQ.13: Plastic strain
+        EQ.14: Nodal mass
+        EQ.15: Undefined
+        GE.16 and LE.30: Other auxiliary variables
         """ # nopep8
         return self._cards[2].get_value("varloc")
 
@@ -232,13 +250,13 @@ class DatabaseTracerGeneral(KeywordBase):
     @property
     def varepl(self) -> int:
         """Get or set the Data to be output to the trcrgal_binout file instead of the variable located at VARLOC.  The interpretation of VAREPL is enumerated in the following list:
-        EQ.1:	-acceleration
-        EQ.2:	- acceleration
-        EQ.3:	- acceleration
-        EQ.4:	nodal temperature
-        EQ.5:	density
-        EQ.6:	compression ratio
-        EQ.7:	pressure.
+        EQ.1: -acceleration
+        EQ.2: - acceleration
+        EQ.3: - acceleration
+        EQ.4: Nodal temperature
+        EQ.5: Density
+        EQ.6: Compression ratio
+        EQ.7: Pressure.
         """ # nopep8
         return self._cards[2].get_value("varepl")
 

@@ -167,6 +167,20 @@ IncludeCosim
     :members:
 
 
+IncludeEfv
+----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.include_efv
+    :members:
+
+
+IncludeIspg
+-----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.include_ispg
+    :members:
+
+
 IncludeMultiscale
 -----------------
 
@@ -234,6 +248,20 @@ IncludeStampedPartSolidToSolid
 ------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.include_stamped_part_solid_to_solid
+    :members:
+
+
+IncludeStampedPartSolidToSolidGeneral
+-------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.include_stamped_part_solid_to_solid_general
+    :members:
+
+
+IncludeStampedPartSolidToSolidSetList
+-------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.include_stamped_part_solid_to_solid_set_list
     :members:
 
 

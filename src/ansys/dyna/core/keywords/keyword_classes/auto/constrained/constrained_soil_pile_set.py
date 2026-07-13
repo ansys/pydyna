@@ -83,6 +83,15 @@ _CONSTRAINEDSOILPILESET_CARD4 = (
     FieldSchema("hlc", int, 70, 10, None),
 )
 
+_CONSTRAINEDSOILPILESET_CARD5 = (
+    FieldSchema("khgcon", float, 0, 10, None),
+    FieldSchema("khfcu", float, 10, 10, None),
+    FieldSchema("khgsx", float, 20, 10, None),
+    FieldSchema("khfsy", float, 30, 10, None),
+    FieldSchema("khgsz", float, 40, 10, None),
+    FieldSchema("fratio", float, 50, 10, None),
+)
+
 class ConstrainedSoilPileSet(KeywordBase):
     """DYNA CONSTRAINED_SOIL_PILE_SET keyword"""
 
@@ -119,6 +128,10 @@ class ConstrainedSoilPileSet(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDSOILPILESET_CARD4,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _CONSTRAINEDSOILPILESET_CARD5,
                 **kwargs,
             ),
         ]
@@ -171,8 +184,8 @@ class ConstrainedSoilPileSet(KeywordBase):
     @property
     def error(self) -> int:
         """Get or set the Action taken if any coupling point is not constrained within a soil element:
-        EQ.0:	Stop with an error message.
-        EQ.1 : Warn and continue..
+        EQ.0: Stop with an error message.
+        EQ.1: Warn and continue..
         """ # nopep8
         return self._cards[0].get_value("error")
 
@@ -186,8 +199,8 @@ class ConstrainedSoilPileSet(KeywordBase):
     @property
     def nring(self) -> int:
         """Get or set the Number of coupling points around circumference at each pile node:
-        EQ.1:	One coupling point coincident with pile node
-        GT.1 : NRING coupling points equally spaced around the circumference of the pile.
+        EQ.1: One coupling point coincident with pile node
+        GT.1: NRING coupling points equally spaced around the circumference of the pile.
         """ # nopep8
         return self._cards[0].get_value("nring")
 
@@ -242,7 +255,7 @@ class ConstrainedSoilPileSet(KeywordBase):
 
     @property
     def lccu(self) -> typing.Optional[int]:
-        """Get or set the Optional load curve ID giving stress (stress units) as a function of relative Z-coordinate (length units). If defined, LCCU overrides ACU and BCU. Note that “increasing depth” corresponds to “increasingly negative relative Z-coordinate”..
+        """Get or set the Optional load curve ID giving stress (stress units) as a function of relative Z-coordinate (length units). If defined, LCCU overrides ACU and BCU. Note that increasing depth corresponds to increasingly negative relative Z-coordinate..
         """ # nopep8
         return self._cards[1].get_value("lccu")
 
@@ -286,7 +299,7 @@ class ConstrainedSoilPileSet(KeywordBase):
 
     @property
     def zref(self) -> typing.Optional[float]:
-        """Get or set the Reference Z-coordinate to calculate “relative Z-coordinate”.
+        """Get or set the Reference Z-coordinate to calculate relative Z-coordinate.
         """ # nopep8
         return self._cards[1].get_value("zref")
 
@@ -558,6 +571,72 @@ class ConstrainedSoilPileSet(KeywordBase):
     def hlc(self, value: int) -> None:
         """Set the hlc property."""
         self._cards[4].set_value("hlc", value)
+
+    @property
+    def khgcon(self) -> typing.Optional[float]:
+        """Get or set the Perpendicular coupling friction stress, constant term (stress units)
+        """ # nopep8
+        return self._cards[5].get_value("khgcon")
+
+    @khgcon.setter
+    def khgcon(self, value: float) -> None:
+        """Set the khgcon property."""
+        self._cards[5].set_value("khgcon", value)
+
+    @property
+    def khfcu(self) -> typing.Optional[float]:
+        """Get or set the Perpendicular coupling friction stress, coefficient for Cu  (dimensionless)
+        """ # nopep8
+        return self._cards[5].get_value("khfcu")
+
+    @khfcu.setter
+    def khfcu(self, value: float) -> None:
+        """Set the khfcu property."""
+        self._cards[5].set_value("khfcu", value)
+
+    @property
+    def khgsx(self) -> typing.Optional[float]:
+        """Get or set the Perpendicular coupling friction stress, coefficient for effective global X-stress (dimensionless)
+        """ # nopep8
+        return self._cards[5].get_value("khgsx")
+
+    @khgsx.setter
+    def khgsx(self, value: float) -> None:
+        """Set the khgsx property."""
+        self._cards[5].set_value("khgsx", value)
+
+    @property
+    def khfsy(self) -> typing.Optional[float]:
+        """Get or set the Perpendicular coupling friction stress, coefficient for effective global Y-stress (dimensionless)
+        """ # nopep8
+        return self._cards[5].get_value("khfsy")
+
+    @khfsy.setter
+    def khfsy(self, value: float) -> None:
+        """Set the khfsy property."""
+        self._cards[5].set_value("khfsy", value)
+
+    @property
+    def khgsz(self) -> typing.Optional[float]:
+        """Get or set the Perpendicular coupling friction stress, coefficient for effective global Z-stress (dimensionless)
+        """ # nopep8
+        return self._cards[5].get_value("khgsz")
+
+    @khgsz.setter
+    def khgsz(self, value: float) -> None:
+        """Set the khgsz property."""
+        self._cards[5].set_value("khgsz", value)
+
+    @property
+    def fratio(self) -> typing.Optional[float]:
+        """Get or set the Perpendicular coupling friction stress as a ratio of the perpendicular coupling stress defined on Card 6a. If defined, FRATIO overrides KHFCON through KHFSZ above.
+        """ # nopep8
+        return self._cards[5].get_value("fratio")
+
+    @fratio.setter
+    def fratio(self, value: float) -> None:
+        """Set the fratio property."""
+        self._cards[5].set_value("fratio", value)
 
     @property
     def vlc_link(self) -> typing.Optional[DefineCurve]:

@@ -51,8 +51,10 @@ _CONTROLTIMESTEP_CARD1 = (
 )
 
 _CONTROLTIMESTEP_CARD2 = (
-    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("rmavg", float, 0, 10, None),
     FieldSchema("igado", int, 10, 10, 0),
+    FieldSchema("dtusr", float, 20, 10, None),
+    FieldSchema("dtdynv", int, 30, 10, None),
 )
 
 class ControlTimestep(KeywordBase):
@@ -99,7 +101,7 @@ class ControlTimestep(KeywordBase):
     @property
     def tssfac(self) -> float:
         """Get or set the Scale factor for computed time step.
-        LT.0:	|TSSFAC| is the load curve or function defining the scale factor as a function of time.
+        LT.0: |TSSFAC| is the load curve or function defining the scale factor as a function of time.
         """ # nopep8
         return self._cards[0].get_value("tssfac")
 
@@ -158,14 +160,14 @@ class ControlTimestep(KeywordBase):
     @property
     def erode(self) -> int:
         """Get or set the Erosion flag for elements with small time step.  See Remark 5.
-        EQ.0:	calculation will terminate if the solution time step drops to  (see *CONTROL_‌TERMINATION).
-        EQ.1:	solid elements or thick shell elements that cause the time step to drop to  will erode; similarly, SPH particles that cause the time step to drop will be deactivated.
-        EQ.10:	shell elements with time step below  will erode.
-        EQ.11:	same as ERODE = 1 but shell elements will also erode
-        EQ.100:	beam elements with time step below  will erode.
-        EQ.101:	same as ERODE = 1 but beam elements will also erode
-        EQ.110:	beam and shell elements will erode.
-        EQ.111:	same as ERODE = 1 but beam and shell elements will also erode
+        EQ.0: calculation will terminate if the solution time step drops to  (see *CONTROL_TERMINATION).
+        EQ.1: solid elements or thick shell elements that cause the time step to drop to  will erode; similarly, SPH particles that cause the time step to drop will be deactivated.
+        EQ.10: shell elements with time step below  will erode.
+        EQ.11: same as ERODE = 1 but shell elements will also erode
+        EQ.100: beam elements with time step below  will erode.
+        EQ.101: same as ERODE=1 but beam elements will also erode
+        EQ.110: beam and shell elements will erode.
+        EQ.111: same as ERODE=1 but beam and shell elements will also erode
         """ # nopep8
         return self._cards[0].get_value("erode")
 
@@ -193,7 +195,7 @@ class ControlTimestep(KeywordBase):
 
     @property
     def dt2msf(self) -> typing.Optional[float]:
-        """Get or set the Reduction factor for initial time step size to determine the minimum time step size permitted.
+        """Get or set the Reduction (or scale) factor for initial time step size to determine the minimum time step size permitted.  Mass scaling is done if it is necessary to meet the Courant time step size criterion.  If this option is used, DT2MS effectively becomes DT2MSF multiplied by the initial time step size, t, before scaling t by TSSFAC.  This option is active only if DT2MS = 0 above.
         """ # nopep8
         return self._cards[1].get_value("dt2msf")
 
@@ -254,8 +256,8 @@ class ControlTimestep(KeywordBase):
     @property
     def ihdo(self) -> int:
         """Get or set the Method for calculating solid element time steps:
-        EQ.0:	default method
-        EQ.1:	modified method to improve time step continuity.
+        EQ.0: default method
+        EQ.1: modified method to improve time step continuity.
         """ # nopep8
         return self._cards[1].get_value("ihdo")
 
@@ -267,10 +269,21 @@ class ControlTimestep(KeywordBase):
         self._cards[1].set_value("ihdo", value)
 
     @property
+    def rmavg(self) -> typing.Optional[float]:
+        """Get or set the Global value for the average rotational mass. For finite element nodes without rotational mass (such as those belonging to solid elements), an average value is calculated internally (using the existing rotational masses of all shells and beams in the model) and assigned to each of these nodes, such as for penalty tied contacts. This value is written to the d3hsp file during initialization (�... get an average value of RMAVG = ...�). Sometimes this value is too small, leading to instabilities in the tied contact. In these cases, the value should be chosen accordingly higher. Alternatively, RINRT = 1 can be used on *CONTROL_SOLID.
+        """ # nopep8
+        return self._cards[2].get_value("rmavg")
+
+    @rmavg.setter
+    def rmavg(self, value: float) -> None:
+        """Set the rmavg property."""
+        self._cards[2].set_value("rmavg", value)
+
+    @property
     def igado(self) -> int:
         """Get or set the Method for calculating time steps for IGA elements:
-        EQ.0:	Default method(conservative)
-        EQ.1 : account for interelement continuity(usually leads to larger time steps)
+        EQ.0: Default method(conservative)
+        EQ.1: account for interelement continuity(usually leads to larger time steps)
         """ # nopep8
         return self._cards[2].get_value("igado")
 
@@ -280,6 +293,30 @@ class ControlTimestep(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""igado must be `None` or one of {0,1}.""")
         self._cards[2].set_value("igado", value)
+
+    @property
+    def dtusr(self) -> typing.Optional[float]:
+        """Get or set the User-defined time step for explicit analysis. A nonzero value invokes a call to user subroutine utimestep in dyn21.F. This feature can be used to synchronize time steps between coupled codes.
+        """ # nopep8
+        return self._cards[2].get_value("dtusr")
+
+    @dtusr.setter
+    def dtusr(self, value: float) -> None:
+        """Set the dtusr property."""
+        self._cards[2].set_value("dtusr", value)
+
+    @property
+    def dtdynv(self) -> typing.Optional[int]:
+        """Get or set the Flag to consider the effects of dynamic viscosity on the critical time step. Like bulk viscosity, dynamic viscosity affects the critical time step. This flag applies only to solid elements with *MAT_NULL.
+        EQ.0: Do not account for the effect of dynamic viscosity.This setting can lead to instabilities.
+        EQ.1: Account for the effect of dynamic viscosity
+        """ # nopep8
+        return self._cards[2].get_value("dtdynv")
+
+    @dtdynv.setter
+    def dtdynv(self, value: int) -> None:
+        """Set the dtdynv property."""
+        self._cards[2].set_value("dtdynv", value)
 
     @property
     def lctm_link(self) -> typing.Optional[DefineCurve]:

@@ -29,8 +29,8 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _CONTACTGEBODLOWERTORSO_CARD0 = (
     FieldSchema("did", int, 0, 10, None),
-    FieldSchema("ssid", int, 10, 10, None),
-    FieldSchema("sstyp", int, 20, 10, 0),
+    FieldSchema("surfa", int, 10, 10, None),
+    FieldSchema("surfatyp", int, 20, 10, 0),
     FieldSchema("sf", float, 30, 10, 1.0),
     FieldSchema("df", float, 40, 10, 20.0),
     FieldSchema("cf", float, 50, 10, 0.5),
@@ -272,31 +272,31 @@ class ContactGebodLowerTorso(KeywordBase):
         self._cards[0].set_value("did", value)
 
     @property
-    def ssid(self) -> typing.Optional[int]:
-        """Get or set the Slave set ID, see *SET_NODE_OPTION, *PART, or *SET_PART.
+    def surfa(self) -> typing.Optional[int]:
+        """Get or set the Tracked surface set ID, see *SET_NODE_OPTION, *PART, or *SET_PART.
         """ # nopep8
-        return self._cards[0].get_value("ssid")
+        return self._cards[0].get_value("surfa")
 
-    @ssid.setter
-    def ssid(self, value: int) -> None:
-        """Set the ssid property."""
-        self._cards[0].set_value("ssid", value)
+    @surfa.setter
+    def surfa(self, value: int) -> None:
+        """Set the surfa property."""
+        self._cards[0].set_value("surfa", value)
 
     @property
-    def sstyp(self) -> int:
-        """Get or set the Slave set type:
+    def surfatyp(self) -> int:
+        """Get or set the SURFA set type:
         EQ.0: node set (default),
         EQ.1: part ID,
         EQ.2: part set ID.
         """ # nopep8
-        return self._cards[0].get_value("sstyp")
+        return self._cards[0].get_value("surfatyp")
 
-    @sstyp.setter
-    def sstyp(self, value: int) -> None:
-        """Set the sstyp property."""
+    @surfatyp.setter
+    def surfatyp(self, value: int) -> None:
+        """Set the surfatyp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sstyp must be `None` or one of {0,1,2}.""")
-        self._cards[0].set_value("sstyp", value)
+            raise Exception("""surfatyp must be `None` or one of {0,1,2}.""")
+        self._cards[0].set_value("surfatyp", value)
 
     @property
     def sf(self) -> float:
@@ -336,7 +336,7 @@ class ContactGebodLowerTorso(KeywordBase):
 
     @property
     def intord(self) -> int:
-        """Get or set the Integration order (slaved materials only).
+        """Get or set the Integration order (tracked materials only).
         EQ.0: check nodes only (default),
         EQ.1: 1 point integration over segments,
         EQ.2: 2x2 integration,

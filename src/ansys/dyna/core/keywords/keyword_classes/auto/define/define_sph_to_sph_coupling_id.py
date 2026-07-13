@@ -28,12 +28,12 @@ from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _DEFINESPHTOSPHCOUPLINGID_CARD0 = (
-    FieldSchema("ssid", int, 0, 10, None),
-    FieldSchema("msid", int, 10, 10, None),
-    FieldSchema("sstyp", int, 20, 10, 0),
-    FieldSchema("mstyp", int, 30, 10, 0),
-    FieldSchema("ibox1", int, 40, 10, None),
-    FieldSchema("ibox2", int, 50, 10, None),
+    FieldSchema("sida", int, 0, 10, None),
+    FieldSchema("sidb", int, 10, 10, None),
+    FieldSchema("satyp", int, 20, 10, 0),
+    FieldSchema("sbtyp", int, 30, 10, 0),
+    FieldSchema("iboxa", int, 40, 10, None),
+    FieldSchema("iboxb", int, 50, 10, None),
     FieldSchema("pfact", float, 60, 10, 1.0),
     FieldSchema("srad", float, 70, 10, 1.0),
 )
@@ -81,80 +81,80 @@ class DefineSphToSphCouplingId(KeywordBase):
             ),
         ]
     @property
-    def ssid(self) -> typing.Optional[int]:
-        """Get or set the Slave part or part set ID.
+    def sida(self) -> typing.Optional[int]:
+        """Get or set the Part or part set ID for one set of particles in the contact.
         """ # nopep8
-        return self._cards[0].get_value("ssid")
+        return self._cards[0].get_value("sida")
 
-    @ssid.setter
-    def ssid(self, value: int) -> None:
-        """Set the ssid property."""
-        self._cards[0].set_value("ssid", value)
+    @sida.setter
+    def sida(self, value: int) -> None:
+        """Set the sida property."""
+        self._cards[0].set_value("sida", value)
 
     @property
-    def msid(self) -> typing.Optional[int]:
-        """Get or set the Master part or part set ID
+    def sidb(self) -> typing.Optional[int]:
+        """Get or set the Part or part set ID for the other set of particles in the contact
         """ # nopep8
-        return self._cards[0].get_value("msid")
+        return self._cards[0].get_value("sidb")
 
-    @msid.setter
-    def msid(self, value: int) -> None:
-        """Set the msid property."""
-        self._cards[0].set_value("msid", value)
+    @sidb.setter
+    def sidb(self, value: int) -> None:
+        """Set the sidb property."""
+        self._cards[0].set_value("sidb", value)
 
     @property
-    def sstyp(self) -> int:
-        """Get or set the Slave part type:
-        EQ. 0:	Part set ID,
-        EQ. 1:	Part ID
+    def satyp(self) -> int:
+        """Get or set the SIDA part type:
+        EQ. 0: Part set ID,
+        EQ. 1: Part ID
         ,
         """ # nopep8
-        return self._cards[0].get_value("sstyp")
+        return self._cards[0].get_value("satyp")
 
-    @sstyp.setter
-    def sstyp(self, value: int) -> None:
-        """Set the sstyp property."""
+    @satyp.setter
+    def satyp(self, value: int) -> None:
+        """Set the satyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""sstyp must be `None` or one of {0,1}.""")
-        self._cards[0].set_value("sstyp", value)
+            raise Exception("""satyp must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("satyp", value)
 
     @property
-    def mstyp(self) -> int:
-        """Get or set the Master part type:
-        EQ. 0:	Part set ID,
-        EQ. 1:	Part ID
+    def sbtyp(self) -> int:
+        """Get or set the SIDB part type:
+        EQ. 0: Part set ID,
+        EQ. 1: Part ID
 
         """ # nopep8
-        return self._cards[0].get_value("mstyp")
+        return self._cards[0].get_value("sbtyp")
 
-    @mstyp.setter
-    def mstyp(self, value: int) -> None:
-        """Set the mstyp property."""
+    @sbtyp.setter
+    def sbtyp(self, value: int) -> None:
+        """Set the sbtyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""mstyp must be `None` or one of {0,1}.""")
-        self._cards[0].set_value("mstyp", value)
+            raise Exception("""sbtyp must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("sbtyp", value)
 
     @property
-    def ibox1(self) -> typing.Optional[int]:
-        """Get or set the Box ID for slave parts
+    def iboxa(self) -> typing.Optional[int]:
+        """Get or set the Box ID for the A parts
         """ # nopep8
-        return self._cards[0].get_value("ibox1")
+        return self._cards[0].get_value("iboxa")
 
-    @ibox1.setter
-    def ibox1(self, value: int) -> None:
-        """Set the ibox1 property."""
-        self._cards[0].set_value("ibox1", value)
+    @iboxa.setter
+    def iboxa(self, value: int) -> None:
+        """Set the iboxa property."""
+        self._cards[0].set_value("iboxa", value)
 
     @property
-    def ibox2(self) -> typing.Optional[int]:
-        """Get or set the Box ID for master parts
+    def iboxb(self) -> typing.Optional[int]:
+        """Get or set the Box ID for the B parts
         """ # nopep8
-        return self._cards[0].get_value("ibox2")
+        return self._cards[0].get_value("iboxb")
 
-    @ibox2.setter
-    def ibox2(self, value: int) -> None:
-        """Set the ibox2 property."""
-        self._cards[0].set_value("ibox2", value)
+    @iboxb.setter
+    def iboxb(self, value: int) -> None:
+        """Set the iboxb property."""
+        self._cards[0].set_value("iboxb", value)
 
     @property
     def pfact(self) -> float:

@@ -107,7 +107,9 @@ class DefineHazProperties(KeywordBase):
 
     @property
     def iop(self) -> int:
-        """Get or set the Activity flag. If IOP = 0, then the scaling is not applied, and if IOP = 1, the scaling is active.
+        """Get or set the Activate scaling flag:
+        EQ.0: Scaling not activated.
+        EQ.1: Scaling activated.
         """ # nopep8
         return self._cards[0].get_value("iop")
 
@@ -131,7 +133,9 @@ class DefineHazProperties(KeywordBase):
 
     @property
     def pid_typ(self) -> int:
-        """Get or set the PID type. PID_TYP = 0 indicates that PID is a *PART ID, and PID_TYP = 1, a part set..
+        """Get or set the PID type.E
+        Q.0: Part ID
+        EQ.1: Part set ID
         """ # nopep8
         return self._cards[0].get_value("pid_typ")
 
@@ -144,7 +148,7 @@ class DefineHazProperties(KeywordBase):
 
     @property
     def iss(self) -> int:
-        """Get or set the Curve ID for scaling the yield stress based on the distance to the closest solid element spot weld.Use a negative ID for curves normalized by the spot weld diameter as described in the Remarks below.
+        """Get or set the Curve ID for scaling the yield stress based on the distance to the closest solid element spot weld.
         """ # nopep8
         return self._cards[1].get_value("iss")
 
@@ -155,7 +159,7 @@ class DefineHazProperties(KeywordBase):
 
     @property
     def ifs(self) -> int:
-        """Get or set the Curve ID for scaling the failure strain based on the distance to the	closest solid element spot weld.Use a negative ID for curves normalized by the spot weld diameter as described in the Remarks below.
+        """Get or set the Curve ID for scaling the failure strain based on the distance to the closest solid element spot weld.
         """ # nopep8
         return self._cards[1].get_value("ifs")
 
@@ -166,7 +170,7 @@ class DefineHazProperties(KeywordBase):
 
     @property
     def isb(self) -> int:
-        """Get or set the Curve ID for scaling the yield stress based on the distance to the closest beam element spot weld.Use a negative ID for curves normalized by the spot weld diameter as described in the Remarks below.
+        """Get or set the Curve ID for scaling the yield stress based on the distance to the closest beam element spot weld. Use a negative ID for curves normalized by the spot weld diameter as described in Remark 2.
         """ # nopep8
         return self._cards[1].get_value("isb")
 
@@ -177,7 +181,7 @@ class DefineHazProperties(KeywordBase):
 
     @property
     def ifb(self) -> int:
-        """Get or set the Curve ID for scaling the failure strain based on the distance to the closest beam element spot weld.Use a negative ID for curves normalized by the spot weld diameter as described in the Remarks below.
+        """Get or set the Curve ID for scaling the failure strain based on the distance to the closest beam element spot weld. Use a negative ID for curves normalized by the spot weld diameter as described in Remark 2.
         """ # nopep8
         return self._cards[1].get_value("ifb")
 
@@ -188,7 +192,7 @@ class DefineHazProperties(KeywordBase):
 
     @property
     def isc(self) -> int:
-        """Get or set the Curve ID for scaling the yield stress based on the distance to the closest constrained spot weld.Use a negative ID for curves normalized by the spot weld diameter as described in the Remarks below.
+        """Get or set the Curve ID for scaling the yield stress based on the distance to the closest constrained spot weld.
         """ # nopep8
         return self._cards[1].get_value("isc")
 
@@ -199,7 +203,7 @@ class DefineHazProperties(KeywordBase):
 
     @property
     def ifc(self) -> int:
-        """Get or set the Curve ID for scaling the failure strain based on the distance to the closest constrained spot weld.Use a negative ID for curves normalized by the spot weld diameter as described in the Remarks below.
+        """Get or set the Curve ID for scaling the failure strain based on the distance to the closest constrained spot weld.
         """ # nopep8
         return self._cards[1].get_value("ifc")
 
@@ -210,7 +214,7 @@ class DefineHazProperties(KeywordBase):
 
     @property
     def isw(self) -> int:
-        """Get or set the Curve ID for scaling the yield stress based on the distance to the closest tailor welded blank node.Use a negative ID for curves normalized by the spot weld diameter as described in the Remarks below.
+        """Get or set the Curve ID for scaling the yield stress based on the distance to the closest tailor-welded blank node.
         """ # nopep8
         return self._cards[1].get_value("isw")
 
@@ -221,7 +225,7 @@ class DefineHazProperties(KeywordBase):
 
     @property
     def ifw(self) -> int:
-        """Get or set the Curve ID for scaling the failure strain based on the distance to the tailor welded blank node.Use a negative ID for curves normalized by the spot weld diameter as described in the Remarks below.
+        """Get or set the Curve ID for scaling the failure strain based on the distance to the tailor-welded blank node.
         """ # nopep8
         return self._cards[1].get_value("ifw")
 

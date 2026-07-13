@@ -29,6 +29,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _DATABASEALE_CARD0 = (
     FieldSchema("dtout", float, 0, 10, None),
     FieldSchema("setid", int, 10, 10, None),
+    FieldSchema("iaver", int, 20, 10, 0),
 )
 
 _DATABASEALE_CARD1 = (
@@ -87,9 +88,24 @@ class DatabaseAle(KeywordBase):
         self._cards[0].set_value("setid", value)
 
     @property
+    def iaver(self) -> int:
+        """Get or set the Average flag:
+        EQ.0:	Do not output average plot files
+        EQ.1 : Average the variable values selected by VARi over all the element in SETID and output the results in files with names ending with * average * .xy
+        """ # nopep8
+        return self._cards[0].get_value("iaver")
+
+    @iaver.setter
+    def iaver(self, value: int) -> None:
+        """Set the iaver property."""
+        if value not in [0, 1, None]:
+            raise Exception("""iaver must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("iaver", value)
+
+    @property
     def var1(self) -> typing.Optional[int]:
-        """Get or set the Variable rank in the following list:
-        LT.0:	|VAR| : rank of the auxiliary variable to be replaced in d3plot (see remark 3)
+        """Get or set the Variable to be ouput:
+        LT.0: |VAR|: refers to the auxiliary variable to be replaced in d3plot (see remark 3)
         EQ.1: xx-stress
         EQ.2: yy-stress
         EQ.3: zz-stress
@@ -104,10 +120,10 @@ class DatabaseAle(KeywordBase):
         EQ.12: mass
         EQ.13: volume
         EQ.14: density
-        EQ.15:	kinetic energy
+        EQ.15: kinetic energy
         EQ.16: The 6 stresses are added to the database.
-        EQ.17:	Impulse (pressure integrated over time)
-        If there is a blank column between 2 variable ranks, the list between these 2 ranks is selected.For example, if the card is as follows :
+        EQ.17: Impulse (pressure integrated over time)
+        If there is a blank column between 2 variable ranks, the list between these 2 ranks is selected.For example, if the card is as follows:
         1, ,6
         The 6 stresses are added to the database.
         """ # nopep8
@@ -120,8 +136,8 @@ class DatabaseAle(KeywordBase):
 
     @property
     def var2(self) -> typing.Optional[int]:
-        """Get or set the Variable rank in the following list:
-        LT.0:	|VAR| : rank of the auxiliary variable to be replaced in d3plot (see remark 3)
+        """Get or set the Variable to be ouput:
+        LT.0: |VAR|: refers to the auxiliary variable to be replaced in d3plot (see remark 3)
         EQ.1: xx-stress
         EQ.2: yy-stress
         EQ.3: zz-stress
@@ -136,10 +152,10 @@ class DatabaseAle(KeywordBase):
         EQ.12: mass
         EQ.13: volume
         EQ.14: density
-        EQ.15:	kinetic energy
+        EQ.15: kinetic energy
         EQ.16: The 6 stresses are added to the database.
-        EQ.17:	Impulse (pressure integrated over time)
-        If there is a blank column between 2 variable ranks, the list between these 2 ranks is selected.For example, if the card is as follows :
+        EQ.17: Impulse (pressure integrated over time)
+        If there is a blank column between 2 variable ranks, the list between these 2 ranks is selected.For example, if the card is as follows:
         1, ,6
         The 6 stresses are added to the database.
         """ # nopep8
@@ -152,8 +168,8 @@ class DatabaseAle(KeywordBase):
 
     @property
     def var3(self) -> typing.Optional[int]:
-        """Get or set the Variable rank in the following list:
-        LT.0:	|VAR| : rank of the auxiliary variable to be replaced in d3plot (see remark 3)
+        """Get or set the Variable to be ouput:
+        LT.0: |VAR|: refers to the auxiliary variable to be replaced in d3plot (see remark 3)
         EQ.1: xx-stress
         EQ.2: yy-stress
         EQ.3: zz-stress
@@ -168,10 +184,10 @@ class DatabaseAle(KeywordBase):
         EQ.12: mass
         EQ.13: volume
         EQ.14: density
-        EQ.15:	kinetic energy
+        EQ.15: kinetic energy
         EQ.16: The 6 stresses are added to the database.
-        EQ.17:	Impulse (pressure integrated over time)
-        If there is a blank column between 2 variable ranks, the list between these 2 ranks is selected.For example, if the card is as follows :
+        EQ.17: Impulse (pressure integrated over time)
+        If there is a blank column between 2 variable ranks, the list between these 2 ranks is selected.For example, if the card is as follows:
         1, ,6
         The 6 stresses are added to the database.
         """ # nopep8
@@ -184,8 +200,8 @@ class DatabaseAle(KeywordBase):
 
     @property
     def var4(self) -> typing.Optional[int]:
-        """Get or set the Variable rank in the following list:
-        LT.0:	|VAR| : rank of the auxiliary variable to be replaced in d3plot (see remark 3)
+        """Get or set the Variable to be ouput:
+        LT.0: |VAR|: refers to the auxiliary variable to be replaced in d3plot (see remark 3)
         EQ.1: xx-stress
         EQ.2: yy-stress
         EQ.3: zz-stress
@@ -200,10 +216,10 @@ class DatabaseAle(KeywordBase):
         EQ.12: mass
         EQ.13: volume
         EQ.14: density
-        EQ.15:	kinetic energy
+        EQ.15: kinetic energy
         EQ.16: The 6 stresses are added to the database.
-        EQ.17:	Impulse (pressure integrated over time)
-        If there is a blank column between 2 variable ranks, the list between these 2 ranks is selected.For example, if the card is as follows :
+        EQ.17: Impulse (pressure integrated over time)
+        If there is a blank column between 2 variable ranks, the list between these 2 ranks is selected.For example, if the card is as follows:
         1, ,6
         The 6 stresses are added to the database.
         """ # nopep8
@@ -216,8 +232,8 @@ class DatabaseAle(KeywordBase):
 
     @property
     def var5(self) -> typing.Optional[int]:
-        """Get or set the Variable rank in the following list:
-        LT.0:	|VAR| : rank of the auxiliary variable to be replaced in d3plot (see remark 3)
+        """Get or set the Variable to be ouput:
+        LT.0: |VAR|: refers to the auxiliary variable to be replaced in d3plot (see remark 3)
         EQ.1: xx-stress
         EQ.2: yy-stress
         EQ.3: zz-stress
@@ -232,10 +248,10 @@ class DatabaseAle(KeywordBase):
         EQ.12: mass
         EQ.13: volume
         EQ.14: density
-        EQ.15:	kinetic energy
+        EQ.15: kinetic energy
         EQ.16: The 6 stresses are added to the database.
-        EQ.17:	Impulse (pressure integrated over time)
-        If there is a blank column between 2 variable ranks, the list between these 2 ranks is selected.For example, if the card is as follows :
+        EQ.17: Impulse (pressure integrated over time)
+        If there is a blank column between 2 variable ranks, the list between these 2 ranks is selected.For example, if the card is as follows:
         1, ,6
         The 6 stresses are added to the database.
         """ # nopep8
@@ -248,8 +264,8 @@ class DatabaseAle(KeywordBase):
 
     @property
     def var6(self) -> typing.Optional[int]:
-        """Get or set the Variable rank in the following list:
-        LT.0:	|VAR| : rank of the auxiliary variable to be replaced in d3plot (see remark 3)
+        """Get or set the Variable to be ouput:
+        LT.0: |VAR|: refers to the auxiliary variable to be replaced in d3plot (see remark 3)
         EQ.1: xx-stress
         EQ.2: yy-stress
         EQ.3: zz-stress
@@ -264,10 +280,10 @@ class DatabaseAle(KeywordBase):
         EQ.12: mass
         EQ.13: volume
         EQ.14: density
-        EQ.15:	kinetic energy
+        EQ.15: kinetic energy
         EQ.16: The 6 stresses are added to the database.
-        EQ.17:	Impulse (pressure integrated over time)
-        If there is a blank column between 2 variable ranks, the list between these 2 ranks is selected.For example, if the card is as follows :
+        EQ.17: Impulse (pressure integrated over time)
+        If there is a blank column between 2 variable ranks, the list between these 2 ranks is selected.For example, if the card is as follows:
         1, ,6
         The 6 stresses are added to the database.
         """ # nopep8
@@ -280,8 +296,8 @@ class DatabaseAle(KeywordBase):
 
     @property
     def var7(self) -> typing.Optional[int]:
-        """Get or set the Variable rank in the following list:
-        LT.0:	|VAR| : rank of the auxiliary variable to be replaced in d3plot (see remark 3)
+        """Get or set the Variable to be ouput:
+        LT.0: |VAR|: refers to the auxiliary variable to be replaced in d3plot (see remark 3)
         EQ.1: xx-stress
         EQ.2: yy-stress
         EQ.3: zz-stress
@@ -296,10 +312,10 @@ class DatabaseAle(KeywordBase):
         EQ.12: mass
         EQ.13: volume
         EQ.14: density
-        EQ.15:	kinetic energy
+        EQ.15: kinetic energy
         EQ.16: The 6 stresses are added to the database.
-        EQ.17:	Impulse (pressure integrated over time)
-        If there is a blank column between 2 variable ranks, the list between these 2 ranks is selected.For example, if the card is as follows :
+        EQ.17: Impulse (pressure integrated over time)
+        If there is a blank column between 2 variable ranks, the list between these 2 ranks is selected.For example, if the card is as follows:
         1, ,6
         The 6 stresses are added to the database.
         """ # nopep8
@@ -312,8 +328,8 @@ class DatabaseAle(KeywordBase):
 
     @property
     def var8(self) -> typing.Optional[int]:
-        """Get or set the Variable rank in the following list:
-        LT.0:	|VAR| : rank of the auxiliary variable to be replaced in d3plot (see remark 3)
+        """Get or set the Variable to be ouput:
+        LT.0: |VAR|: refers to the auxiliary variable to be replaced in d3plot (see remark 3)
         EQ.1: xx-stress
         EQ.2: yy-stress
         EQ.3: zz-stress
@@ -328,10 +344,10 @@ class DatabaseAle(KeywordBase):
         EQ.12: mass
         EQ.13: volume
         EQ.14: density
-        EQ.15:	kinetic energy
+        EQ.15: kinetic energy
         EQ.16: The 6 stresses are added to the database.
-        EQ.17:	Impulse (pressure integrated over time)
-        If there is a blank column between 2 variable ranks, the list between these 2 ranks is selected.For example, if the card is as follows :
+        EQ.17: Impulse (pressure integrated over time)
+        If there is a blank column between 2 variable ranks, the list between these 2 ranks is selected.For example, if the card is as follows:
         1, ,6
         The 6 stresses are added to the database.
         """ # nopep8

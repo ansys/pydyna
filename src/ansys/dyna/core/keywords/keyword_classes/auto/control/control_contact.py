@@ -56,6 +56,7 @@ _CONTROLCONTACT_CARD2 = (
     FieldSchema("th", float, 40, 10, 0.0),
     FieldSchema("th_sf", float, 50, 10, 0.0),
     FieldSchema("pen_sf", float, 60, 10, 0.0),
+    FieldSchema("ptscl", float, 70, 10, 1.0),
 )
 
 _CONTROLCONTACT_CARD3 = (
@@ -66,6 +67,7 @@ _CONTROLCONTACT_CARD3 = (
     FieldSchema("spotstp", int, 40, 10, 0),
     FieldSchema("spotdel", int, 50, 10, 0),
     FieldSchema("spothin", float, 60, 10, None),
+    FieldSchema("dir_tie", int, 70, 10, None),
 )
 
 _CONTROLCONTACT_CARD4 = (
@@ -88,6 +90,15 @@ _CONTROLCONTACT_CARD5 = (
     FieldSchema("unused", int, 50, 10, None),
     FieldSchema("shltrw", float, 60, 10, 0.0),
     FieldSchema("igactc", int, 70, 10, 0),
+)
+
+_CONTROLCONTACT_CARD6 = (
+    FieldSchema("irevspt", int, 0, 10, 0),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("cohtiem", int, 20, 10, 0),
+    FieldSchema("tieopt", int, 30, 10, 0),
+    FieldSchema("strobj", int, 40, 10, 0),
+    FieldSchema("befblk", float, 50, 10, 0.0),
 )
 
 class ControlContact(KeywordBase):
@@ -124,6 +135,10 @@ class ControlContact(KeywordBase):
                 _CONTROLCONTACT_CARD5,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _CONTROLCONTACT_CARD6,
+                **kwargs,
+            ),
         ]
     @property
     def slsfac(self) -> float:
@@ -138,11 +153,11 @@ class ControlContact(KeywordBase):
 
     @property
     def rwpnal(self) -> typing.Optional[float]:
-        """Get or set the Scale factor for rigid wall penalties, which treat nodal points interacting with rigid walls, RWPNAL.  The penalties are set so that an absolute value of unity should be optimal; however, this penalty value may be very problem dependent.  If rigid/deformable materials switching is used, this option should be used if the switched materials are interacting with rigid walls.
-        In case you have IGA parts in your model, please see Remark 10.
-        LT.0.0:	All nodes are treated by the penalty method.This is set to - 1.0 for implicit calculations.Since seven(7) variables are stored for each slave node, only the nodes that may interact with the wall should be included in the node list.
-        EQ.0.0 : The constraint method is used and nodal points which belong to rigid bodies are not considered.
-        GT.0.0 : Rigid bodies nodes are treated by the penalty method and all other nodes are treated by the constraint method.
+        """Get or set the Scale factor for rigid wall penalties (see *RIGIDWALL) that treats nodal points interacting with rigid walls.  The penalties are set so that an absolute value of unity should be optimal; however, this penalty value may be very problem-dependent.  If rigid/deformable materials switching is used, this option should be used if the switched materials interact with rigid walls.
+        If you have IGA parts in your model, see Remark 10.
+        LT.0.0:	All nodes are treated by the penalty method.This is set to - 1.0 for implicit calculations.Since seven(7) variables are stored for each possible tracked node(see NSID on * RIGIDWALL_?PLANAR / GEOMETRIC), only the nodes that may interact with the wall should be included in the node list.
+        EQ.0.0 : The constraint method is used, and nodal points that belong to rigid bodies are not considered.
+        GT.0.0 : Rigid body nodes are treated by the penalty method, and all other nodes are treated by the constraint method.
         """ # nopep8
         return self._cards[0].get_value("rwpnal")
 
@@ -184,14 +199,13 @@ class ControlContact(KeywordBase):
 
     @property
     def penopt(self) -> int:
-        """Get or set the Penalty stiffness value option.
-        EQ.0: the default is set to 1,
-        EQ.1: minimum of master segment and slave node (default for most contact types),
-        EQ.2: use master segment stiffness (old way),
-        EQ.3: use slave node value,
-        EQ.4: use slave node value, area or mass weighted,
-        EQ.5: same as 4 but inversely proportional to the shell thickness.
-        Options 4 and 5 are recommended for metalforming calculations..
+        """Get or set the Penalty stiffness value option (applies to the Standard Penalty Formulation and the Soft Constraint Penalty Formulation, that is, SOFT = 0 and 1 on *CONTACT_?OPTION).  For the default calculation of the penalty value, please refer to the LS-DYNA Theory Manual.
+        EQ.1:	Minimum of reference segment and tracked node(default for most contact types)
+        EQ.2 : Use the reference segment stiffness(old way).
+        EQ.3 : Use the tracked node value.
+        EQ.4 : Use the tracked node value, area or mass weighted.
+        EQ.5 : Same as 4 but inversely proportional to the shell thickness.This may require special scaling and is not generally recommended.
+        PENOPT = 4 and 5 can be used for metal forming calculations.In general, PENOPT = 2 - 5 should be avoided if both the tracked nodes and the reference segments belong to deformable parts.
         """ # nopep8
         return self._cards[0].get_value("penopt")
 
@@ -207,14 +221,15 @@ class ControlContact(KeywordBase):
         """Get or set the Shell thickness changes considered in single surface contact:
         EQ.0: no consideration (default),
         EQ.1: shell thickness changes are included.
+        EQ.2: Applies to MPP only. Shell thickness changes are included, but a different algorithm is used than for THKCHG = 1. This method is more consistent with the way the initial contact thickness is computed.
         """ # nopep8
         return self._cards[0].get_value("thkchg")
 
     @thkchg.setter
     def thkchg(self, value: int) -> None:
         """Set the thkchg property."""
-        if value not in [0, 1, None]:
-            raise Exception("""thkchg must be `None` or one of {0,1}.""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""thkchg must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("thkchg", value)
 
     @property
@@ -237,10 +252,10 @@ class ControlContact(KeywordBase):
 
     @property
     def enmass(self) -> int:
-        """Get or set the Treatment of the mass of eroded nodes in contact. This option effects all contact types where nodes are removed after surrounding elements fail. Generally, the removal of eroded nodes makes the calculation more stable; however, in problems where erosion is important the reduction of mass will lead to incorrect results.
-        EQ.0: eroding nodes are removed from the calculation.
-        EQ.1: eroding nodes of solid elements are retained and continue to be active in contact.
-        EQ.2: the eroding nodes of solid and shell elements are retained and continue to be active in contact.
+        """Get or set the Flag for treatment of eroded nodes in contact.  An eroded node is a node that is no longer attached to any element after an element deletion.  ENMASS is not supported by all contact types; it is suggested that the user toggle on �Show Deleted Nodes� in LS-PrePost when postprocessing to display eroded nodes as particles, and in so doing, determine if ENMASS affects the contact behavior.  ENMASS is not supported when SOFT = 2 on Optional Card A of *CONTACT.
+        EQ.0:	Eroded nodes are not considered in the contact algorithm.
+        EQ.1 : Eroded nodes of solid elements remain active in the contact algorithm.
+        EQ.2 : Eroded nodes of solid and shell elements remain active in the contact algorithm.
         """ # nopep8
         return self._cards[0].get_value("enmass")
 
@@ -275,7 +290,7 @@ class ControlContact(KeywordBase):
 
     @property
     def nsbcs(self) -> int:
-        """Get or set the Number of cycles between contact searching. Values between 10-100 recommended.
+        """Get or set the Number of cycles between contact searching using three-dimensional bucket searches.  Using the default value for this field is strongly recommended.  For mortar contact (option MORTAR on the CONTACT card), the default is 100. For MPP, this field is ignored when SOFT = 0 and 1, and only BCKT on MPP 1 of *CONTACT_OPTION_... applies in those cases.
         """ # nopep8
         return self._cards[1].get_value("nsbcs")
 
@@ -434,11 +449,22 @@ class ControlContact(KeywordBase):
         self._cards[2].set_value("pen_sf", value)
 
     @property
+    def ptscl(self) -> float:
+        """Get or set the Scale factor on the contact stress exerted onto shells formulations 25, 26, and 27.  When DOF = 3 the scale factor also applies to shell formulations 2, 4,and 16.
+        """ # nopep8
+        return self._cards[2].get_value("ptscl")
+
+    @ptscl.setter
+    def ptscl(self, value: float) -> None:
+        """Set the ptscl property."""
+        self._cards[2].set_value("ptscl", value)
+
+    @property
     def ignore(self) -> int:
-        """Get or set the Ignore initial penetrations in the *CONTACT_AUTOMATIC options. This option can also be specified for each interface on the third optional card under the keyword, *CONTACT. The value defined here will be the default.
-        EQ.0: Move nodes to eliminate initial penetrations in the model definition.
-        EQ.1: Allow initial penetrations to exist by tracking the initial penetrations.
-        EQ.2: Allow initial penetrations to exist by tracking the initial penetrations. However, penetration warning messages are printed with the original coordinates and the recommended coordinates of each slave node given.
+        """Get or set the Ignore initial penetrations for the *CONTACT_?AUTOMATIC options.  In the SMP contact, this flag is not implemented for the AUTOMATIC_?GENERAL option.  �Initial� in this context refers to the first time step that a penetration is encountered.  This option can also be specified for each interface on Optional Card C of *CONTACT_....  The value defined here will be the default.
+        EQ.0:	Move nodes to eliminate initial penetrations in the model definition.
+        EQ.1 : Allow initial penetrations to exist by tracking the initial penetrations.
+        EQ.2 : Allow initial penetrations to exist by tracking the initial penetrations.However, penetration warning messages are printed with the original coordinates and the recommended coordinates for each penetrating node given.
         """ # nopep8
         return self._cards[3].get_value("ignore")
 
@@ -466,9 +492,9 @@ class ControlContact(KeywordBase):
 
     @property
     def skiprwg(self) -> int:
-        """Get or set the Flag not to display stationary rigid wall by default.
-        EQ.0:  generate 4 extra nodes and 1 shell element to visulize stationary planar rigid wall.
-        EQ.1:  do not generate stationary rigid wall.
+        """Get or set the Flag not to a display stationary rigid wall by default.
+        EQ.0: generate four extra nodes and one shell element to visulize stationary planar rigid wall.
+        EQ.1: do not generate stationary rigid wall.
         """ # nopep8
         return self._cards[3].get_value("skiprwg")
 
@@ -496,7 +522,7 @@ class ControlContact(KeywordBase):
 
     @property
     def spotstp(self) -> int:
-        """Get or set the If a spot weld node (related to a *MAT_SPOTWELD beam) cannot be fouind on a master segment, should an error termination occur?
+        """Get or set the If a spot weld node (related to a *MAT_SPOTWELD beam) cannot be fouind on a master segment, should an error termination occur
         EQ.0: no, print warning message and continue calculation.
         EQ.1: yes, print error message and terminate.
         EQ.2: no, delete the weld, print a message, and continue,
@@ -513,10 +539,11 @@ class ControlContact(KeywordBase):
 
     @property
     def spotdel(self) -> int:
-        """Get or set the If a spot weld node of a spot weld beam is attached to a shell element, which fails and is deleted, then the attached spot weld beam element is deleted if this flag is on. There is a small cost penalty realted to this option on non-vector processors. On vector processors, however, this option can significantly slow down the calculation if many weld elements fail since the vector lengths are reduced.
-        EQ.0: no, do not delete the beam element,
-        EQ.1: yes, delete the beam elements when the attached shell fails.
-        GT.1: delete the SPR when SPOTDEL nodes are attached to failed elements in the search radius.
+        """Get or set the This option controls the behavior of spot welds when the parent element erodes.  When SPOTDEL is set to 1, the beam or solid spot weld is deleted, and the tied constraint is removed when the parent element erodes.  The parent element is the element to which the SURFA node is attached using the TIED interface.  This option also works for SPRs, namely, they automatically fail if at least one of the parent elements fails.  To avoid instabilities, this option should be set to 1 whenever the parent element is expected to erode.
+        EQ.0:	Do not delete the spot weld beam, solid element, or SPR.
+        EQ.1 : Delete the spot weld elements or SPRs when the attached shells on one side of the element fail.
+        GT.1 : Delete the SPR when SPOTDEL nodes are attached to failed elements in the search radius.
+        On vector processors, this option can significantly slow down the calculation if many weld elements fail since the vector lengths are reduced.On non - vector processors, the cost penalty is minimal.
         """ # nopep8
         return self._cards[3].get_value("spotdel")
 
@@ -527,7 +554,12 @@ class ControlContact(KeywordBase):
 
     @property
     def spothin(self) -> typing.Optional[float]:
-        """Get or set the Optional thickness scale factor. If active, define a factor greater than zero, but less than one.
+        """Get or set the Optional thickness scale factor. If active, define a factor greater than zero, but less than one. Premature failure of spot welds can occur
+        due to contact of the spot welded parts in the vicinity of the spot weld. This contact creates tensile forces in the spot weld.
+        Although this may seem physical, the compressive forces generated in the contact are large enough to fail the weld in tension before failure is observed in an
+        experimental test. With this option, the thickness of the parts in the vicinity of the weld is automatically scaled, the contact forces do not develop, and the problem is avoided.
+        We recommend setting the IGNORE option to 1 or 2 if SPOTHIN is active. In MPP, this option applies to all non-Mortar contacts that have SINGLE_SURFACE, AUTOMATIC_GENERAL,
+        SURFACE_TO_SURFACE, or NODES_TO_SURFACE in the name. In SMP it only applies to the AUTOMATIC_SINGLE_SURFACE option. See Remark 5.
         """ # nopep8
         return self._cards[3].get_value("spothin")
 
@@ -537,9 +569,20 @@ class ControlContact(KeywordBase):
         self._cards[3].set_value("spothin", value)
 
     @property
+    def dir_tie(self) -> typing.Optional[int]:
+        """Get or set the Directional tie for MPP non-groupable tied contacts. If this flag is set to 1, then each node in the SURFA side of a tied contact is associated with outward normal vectors. A node belonging to the surface of a shell, solid, or thick shell surface is associated with one or more vectors depending on the angle between adjacent segments. Typically the node of a flat surface will have one normal vector, the node of an edge will have two normal vectors, and the node of a corner will have three normal vectors. Nodes on a cylinder may have one or two normal vectors, depending on the mesh resolution of the faceted surface. When deciding which SURFB segment to tie to, the algorithm gives preference to those segments for which the direction from the SURFA node to the SURFB segment has a positive dot product with at least one of the aforementioned normal vectors. Therefore, a SURFA node will not necessarily tie to the closest SURFB segment, but to the correct segment. This feature avoids nonphysical tie situations or even zero solid element volumes as a result.
+        """ # nopep8
+        return self._cards[3].get_value("dir_tie")
+
+    @dir_tie.setter
+    def dir_tie(self, value: int) -> None:
+        """Set the dir_tie property."""
+        self._cards[3].set_value("dir_tie", value)
+
+    @property
     def isym(self) -> int:
         """Get or set the Symmetry plane default for automatic segment generation when contact is defined by part IDs:
-        LT.0:	 is a node set on the symmetry boundary, supported and recommended for Mortar contact.
+        LT.0: is a node set on the symmetry boundary, supported and recommended for Mortar contact.
         This will allow for a correct treatment of segments close to the symmetry face/edge. See Remark 8
         EQ.0: Off.
         EQ.1: do not include faces whith normal boundary constraints ( e.g. segments of brick elements on a symmetry plane.
@@ -569,8 +612,8 @@ class ControlContact(KeywordBase):
     @property
     def rwgaps(self) -> int:
         """Get or set the Flag to add rigid wall gap stiffness, see parameter RWGDTH below.
-        EQ.1:  add gap stiffness.
-        EQ.2:  do not add gap stiffness
+        EQ.1: add gap stiffness (default).
+        EQ.2: do not add gap stiffness
         """ # nopep8
         return self._cards[4].get_value("rwgaps")
 
@@ -618,7 +661,7 @@ class ControlContact(KeywordBase):
 
     @property
     def swradf(self) -> float:
-        """Get or set the Spot weld radius scale factor for neighbor segment thinning:EQ.0:	Neighbor segments are not thinned(default).GT.0 : The radius of a spot weld is scaled by SWRADF when searching for close neighbor segments to thin.
+        """Get or set the Spot weld radius scale factor for neighbor segment thinning:EQ.0: Neighbor segments are not thinned(default).GT.0: The radius of a spot weld is scaled by SWRADF when searching for close neighbor segments to thin.
         """ # nopep8
         return self._cards[4].get_value("swradf")
 
@@ -644,8 +687,7 @@ class ControlContact(KeywordBase):
 
     @property
     def shledg(self) -> int:
-        """Get or set the Flag for assuming edge shape for shells when measuring penetration.
-        This is available for segment based contact (see SOFT on *CONTACT)
+        """Get or set the Flag for assuming edge shape for shells when measuring penetration. This is available for segment-to-segment contact (see SOFT on *CONTACT)
         EQ.0: Shell edges are assumed round (default),
         EQ.1: Shell edges are assumed square and are flush with the nodes.
         """ # nopep8
@@ -660,10 +702,9 @@ class ControlContact(KeywordBase):
 
     @property
     def pstiff(self) -> int:
-        """Get or set the Flag to choose the method for calculating the penalty stiffness. This is
-        available for segment based contact (see SOFT on *CONTACT)
+        """Get or set the Flag to choose the method for calculating the penalty stiffness. This is available for segment-to-segment contact (see SOFT on *CONTACT)
         EQ.0: Based on material density and segment dimensions (default),
-        EQ.1: Based on nodal masses.
+        EQ.1: Based on nodal masses or on material density and segment dimensions. The segment mass is taken as the larger of the two values calculated..
         """ # nopep8
         return self._cards[5].get_value("pstiff")
 
@@ -693,11 +734,7 @@ class ControlContact(KeywordBase):
     def tdcnof(self) -> int:
         """Get or set the Tied constraint offset contact update option.
         EQ.0: Update velocities and displacements from accelerations
-        EQ.1: Update velocities and acclelerations from displacements. This
-        option is recommended only when there are large angle changes
-        where the default does not maintain a constant offset to a small
-        tolerance. This latter option is not as stable as the default and may
-        require additional damping for stability. See *CONTROL_BULK_VISCOSITY and *DAMPING_PART_STIFFNESS.
+        EQ.1: Update velocities and acclelerations from displacements. This noption is recommended only when there are large angle changes nwhere the default does not maintain a constant offset to a small ntolerance. This latter option is not as stable as the default and may require additional damping for stability. See *CONTROL_BULK_VISCOSITY and *DAMPING_PART_STIFFNESS.
         """ # nopep8
         return self._cards[5].get_value("tdcnof")
 
@@ -738,8 +775,7 @@ class ControlContact(KeywordBase):
 
     @property
     def igactc(self) -> int:
-        """Get or set the Options to use isogeometric shells for contact detection when
-        contact involves isogeometric shells:
+        """Get or set the Options to use isogeometric shells for contact detection when contact involves isogeometric shells:
         EQ.0: contact between interpolated nodes and interpolated shells
         EQ.1: contact between interpolated nodes and isogeometric shells.
         """ # nopep8
@@ -751,4 +787,75 @@ class ControlContact(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""igactc must be `None` or one of {0,1}.""")
         self._cards[5].set_value("igactc", value)
+
+    @property
+    def irevspt(self) -> int:
+        """Get or set the Flag to revert the spot weld thinning behavior where beam and brick spot welds share nodes with shell parts instead of being tied to the shells:
+        EQ.0: Thinning at shared nodes will be done as it has been in all versions after R9.3.1.
+        EQ.1: Behavior reverts to that of R9.3.1.In this version and previous versions, spot weld thinning was not done.
+        """ # nopep8
+        return self._cards[6].get_value("irevspt")
+
+    @irevspt.setter
+    def irevspt(self, value: int) -> None:
+        """Set the irevspt property."""
+        if value not in [0, 1, None]:
+            raise Exception("""irevspt must be `None` or one of {0,1}.""")
+        self._cards[6].set_value("irevspt", value)
+
+    @property
+    def cohtiem(self) -> int:
+        """Get or set the Flag to treat how the mass from SURFB of a tied contact affects the time step estimation of cohesive elements:
+        EQ.0: No treatment
+        EQ.1: Assuming the cohesive element's nodes are on SURFA of a tied contact, LS - DYNA includes the mass from SURFB when estimating the cohesive element's time step. Note that groupable tied contacts are not currently supported with this option.
+        """ # nopep8
+        return self._cards[6].get_value("cohtiem")
+
+    @cohtiem.setter
+    def cohtiem(self, value: int) -> None:
+        """Set the cohtiem property."""
+        if value not in [0, 1, None]:
+            raise Exception("""cohtiem must be `None` or one of {0,1}.""")
+        self._cards[6].set_value("cohtiem", value)
+
+    @property
+    def tieopt(self) -> int:
+        """Get or set the Option for constrained tied contact formulations to circumvent some of the shortcomings present in the standard implementations:
+        EQ.0:	Not active
+        EQ.1 : Active, a), b) and c) in Remark 11 apply.
+        EQ.2:	Active, a), b), c) and d) in Remark 11 apply.
+        """ # nopep8
+        return self._cards[6].get_value("tieopt")
+
+    @tieopt.setter
+    def tieopt(self, value: int) -> None:
+        """Set the tieopt property."""
+        if value not in [0, 1, 2, None]:
+            raise Exception("""tieopt must be `None` or one of {0,1,2}.""")
+        self._cards[6].set_value("tieopt", value)
+
+    @property
+    def strobj(self) -> int:
+        """Get or set the Flag for strong objectivity (frame invariance) in non-groupable single surface contacts with SOFT = 0 or 1.
+        Strong objectivity incurs an extra cost but may improve results.
+        EQ.0: Do not turn on strong objectivity.
+        EQ.1: Turn on strong objectivity.
+        """ # nopep8
+        return self._cards[6].get_value("strobj")
+
+    @strobj.setter
+    def strobj(self, value: int) -> None:
+        """Set the strobj property."""
+        self._cards[6].set_value("strobj", value)
+
+    @property
+    def befblk(self) -> float:
+        """Get or set the Default bulk modulus used for the contact stiffness calculation. This field applies to all penalty-based contacts that use the bulk modulus to calculate the contact stiffness. Thus, it applies when using the standard penalty formulation (SOFT = 0), the soft constraint penalty formulation (SOFT = 1), and Mortar segment-to-segment contact. See Remark 12.
+        """ # nopep8
+        return self._cards[6].get_value("befblk")
+
+    @befblk.setter
+    def befblk(self, value: float) -> None:
+        """Set the befblk property."""
+        self._cards[6].set_value("befblk", value)
 

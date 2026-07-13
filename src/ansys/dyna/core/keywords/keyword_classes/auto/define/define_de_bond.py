@@ -31,17 +31,25 @@ _DEFINEDEBOND_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
     FieldSchema("stype", int, 10, 10, 0),
     FieldSchema("bdform", int, 20, 10, 1),
+    FieldSchema("idist", int, 30, 10, 0),
+    FieldSchema("maxcn", int, 40, 10, 0),
+    FieldSchema("binary", int, 50, 10, 0),
 )
 
 _DEFINEDEBOND_CARD1 = (
     FieldSchema("pbn", float, 0, 10, None),
     FieldSchema("pbs", float, 10, 10, None),
-    FieldSchema("pbn_s", float, 20, 10, None),
-    FieldSchema("pbs_s", float, 30, 10, None),
+    FieldSchema("pbns", float, 20, 10, None),
+    FieldSchema("pbss", float, 30, 10, None),
     FieldSchema("sfa", float, 40, 10, 1.0),
     FieldSchema("alpha", float, 50, 10, 0.0),
-    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("bendsf", float, 60, 10, 1.0),
     FieldSchema("maxgap", float, 70, 10, 0.0001),
+)
+
+_DEFINEDEBOND_CARD2 = (
+    FieldSchema("arsp", float, 0, 10, None),
+    FieldSchema("brsp", float, 10, 10, None),
 )
 
 _DEFINEDEBOND_OPTION0_CARD0 = (
@@ -68,6 +76,10 @@ class DefineDeBond(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _DEFINEDEBOND_CARD1,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDEBOND_CARD2,
                 **kwargs,
             ),
             OptionCardSet(
@@ -110,20 +122,68 @@ class DefineDeBond(KeywordBase):
     @property
     def bdform(self) -> int:
         """Get or set the Bond formulation:
-        EQ.1: Linear bond formulation.
+        EQ.1: Linear bond formulation(default)
+        EQ.3: Bond strengths that increases linearly with deformation rate.See Remark 3.
         """ # nopep8
         return self._cards[0].get_value("bdform")
 
     @bdform.setter
     def bdform(self, value: int) -> None:
         """Set the bdform property."""
-        if value not in [1, 2, None]:
-            raise Exception("""bdform must be `None` or one of {1,2}.""")
+        if value not in [1, 3, None]:
+            raise Exception("""bdform must be `None` or one of {1,3}.""")
         self._cards[0].set_value("bdform", value)
 
     @property
+    def idist(self) -> int:
+        """Get or set the Distribution of bond properties:
+        EQ. - 2: Weibull distribution(non - deterministic).See Remark 5
+        EQ. - 1: Gaussian distribution(non - deterministic).See Remark 4
+        EQ.0: Single property(default)
+        EQ.1: Gaussian distribution(deterministic).See Remark 4
+        EQ.2: Weibull distribution(deterministic).See Remark 5
+        """ # nopep8
+        return self._cards[0].get_value("idist")
+
+    @idist.setter
+    def idist(self, value: int) -> None:
+        """Set the idist property."""
+        if value not in [0, 1, 2, -1, -2, None]:
+            raise Exception("""idist must be `None` or one of {0,1,2,-1,-2}.""")
+        self._cards[0].set_value("idist", value)
+
+    @property
+    def maxcn(self) -> int:
+        """Get or set the Maximum coordination number for outputting the DES particles that belong to a bond. If the coordination number of a DES particle that belongs to a bond is less than or equal to this value, the DES particle is output at the initial time state.
+        EQ.0: Do not print out any bonded DES particles at the initial time state.
+        """ # nopep8
+        return self._cards[0].get_value("maxcn")
+
+    @maxcn.setter
+    def maxcn(self, value: int) -> None:
+        """Set the maxcn property."""
+        self._cards[0].set_value("maxcn", value)
+
+    @property
+    def binary(self) -> int:
+        """Get or set the Output file type for printing the bonded DES particle if the coordination number is less than or equal to MAXCN:
+        EQ.0: Do not write the data to a file.
+        EQ.1: Write an ASCII file.
+        EQ.2: Write the data to binary database binout.
+        EQ.3: Write the data to an ASCII file and to the binary database binout.
+        """ # nopep8
+        return self._cards[0].get_value("binary")
+
+    @binary.setter
+    def binary(self, value: int) -> None:
+        """Set the binary property."""
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""binary must be `None` or one of {0,1,2,3}.""")
+        self._cards[0].set_value("binary", value)
+
+    @property
     def pbn(self) -> typing.Optional[float]:
-        """Get or set the Parallel-bond normal stiffness
+        """Get or set the Parallel-bond modulus [Pa]. See Remarks 1 and 2. For IDIST=-1, and 1, this value is the mean. For IDIST=-2, and 2 with MPBN!=0, this value is the scale parameter
         """ # nopep8
         return self._cards[1].get_value("pbn")
 
@@ -134,7 +194,7 @@ class DefineDeBond(KeywordBase):
 
     @property
     def pbs(self) -> typing.Optional[float]:
-        """Get or set the Parallel-bond shear stiffness
+        """Get or set the Parallel-bond stiffness ratio. shear stiffness/normal stiffness. See Remark 2. For IDIST=-1, and 1, this value is the mean. For IDIST=-2, and 2 and MPBN!=0, this value is the scale parameter.
         """ # nopep8
         return self._cards[1].get_value("pbs")
 
@@ -144,26 +204,26 @@ class DefineDeBond(KeywordBase):
         self._cards[1].set_value("pbs", value)
 
     @property
-    def pbn_s(self) -> typing.Optional[float]:
-        """Get or set the Parallel-bond maximum normal stress.
+    def pbns(self) -> typing.Optional[float]:
+        """Get or set the Parallel-bond maximum normal stress. A zero value defines an infinite maximum normal stress. For IDIST=-1,and 1, this value is the mean. For IDIST=-2, and 2 with MPBN!=0, this value is the scale parameter
         """ # nopep8
-        return self._cards[1].get_value("pbn_s")
+        return self._cards[1].get_value("pbns")
 
-    @pbn_s.setter
-    def pbn_s(self, value: float) -> None:
-        """Set the pbn_s property."""
-        self._cards[1].set_value("pbn_s", value)
+    @pbns.setter
+    def pbns(self, value: float) -> None:
+        """Set the pbns property."""
+        self._cards[1].set_value("pbns", value)
 
     @property
-    def pbs_s(self) -> typing.Optional[float]:
-        """Get or set the Parallel-bond maximum shear stress.
+    def pbss(self) -> typing.Optional[float]:
+        """Get or set the Parallel-bond maximum shear stress. A zero value defines an infinite maximum shear stress. For IDIST=-1, and 1, this value is the mean. For IDIST=-2, and 2 with MPBN!=0, this value is the scale parameter.
         """ # nopep8
-        return self._cards[1].get_value("pbs_s")
+        return self._cards[1].get_value("pbss")
 
-    @pbs_s.setter
-    def pbs_s(self, value: float) -> None:
-        """Set the pbs_s property."""
-        self._cards[1].set_value("pbs_s", value)
+    @pbss.setter
+    def pbss(self, value: float) -> None:
+        """Set the pbss property."""
+        self._cards[1].set_value("pbss", value)
 
     @property
     def sfa(self) -> float:
@@ -178,7 +238,7 @@ class DefineDeBond(KeywordBase):
 
     @property
     def alpha(self) -> float:
-        """Get or set the Numerical damping.
+        """Get or set the Numerical damping, 0.0 <= ALPHA <= 1.0
         """ # nopep8
         return self._cards[1].get_value("alpha")
 
@@ -186,6 +246,20 @@ class DefineDeBond(KeywordBase):
     def alpha(self, value: float) -> None:
         """Set the alpha property."""
         self._cards[1].set_value("alpha", value)
+
+    @property
+    def bendsf(self) -> float:
+        """Get or set the Influence of bending/twisting on bond failure criteria (see Remark 6).
+        EQ. - 1.0: No bending / twisting is considered in bond failure criteria.
+        EQ.0.0: Defaults to 1.0.
+        GT.0.0: Scale factor for the bending / twisting component in bond failure criteria.
+        """ # nopep8
+        return self._cards[1].get_value("bendsf")
+
+    @bendsf.setter
+    def bendsf(self, value: float) -> None:
+        """Set the bendsf property."""
+        self._cards[1].set_value("bendsf", value)
 
     @property
     def maxgap(self) -> float:
@@ -201,15 +275,37 @@ class DefineDeBond(KeywordBase):
         self._cards[1].set_value("maxgap", value)
 
     @property
+    def arsp(self) -> typing.Optional[float]:
+        """Get or set the Deformation rate sensitivity parameter for parallel-bond maximum normal stress. A zero value ignores deformation rate effects on bond strength
+        """ # nopep8
+        return self._cards[2].get_value("arsp")
+
+    @arsp.setter
+    def arsp(self, value: float) -> None:
+        """Set the arsp property."""
+        self._cards[2].set_value("arsp", value)
+
+    @property
+    def brsp(self) -> typing.Optional[float]:
+        """Get or set the Deformation rate sensitivity parameter for parallel-bond maximum shear stress. A zero value ignores deformation rate effects on bond strength. t
+        """ # nopep8
+        return self._cards[2].get_value("brsp")
+
+    @brsp.setter
+    def brsp(self, value: float) -> None:
+        """Set the brsp property."""
+        self._cards[2].set_value("brsp", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[2].cards[0].get_value("title")
+        return self._cards[3].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[2].cards[0].set_value("title", value)
+        self._cards[3].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

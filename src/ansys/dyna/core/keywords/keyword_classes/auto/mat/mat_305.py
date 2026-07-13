@@ -188,7 +188,7 @@ class Mat305(KeywordBase):
 
     @property
     def beta(self) -> float:
-        """Get or set the Mixed hardening parameter, 0≤β≤1. β=0 for isotropic and β=1 for kinematic hardening.
+        """Get or set the Mixed hardening parameter, 0<=beta<=1. beta=0 for isotropic and beta=1 for kinematic hardening.
         """ # nopep8
         return self._cards[0].get_value("beta")
 
@@ -201,7 +201,7 @@ class Mat305(KeywordBase):
     def vp(self) -> float:
         """Get or set the Formulation for rate effects in plasticity update:
         EQ.0.0: No plastic strain rate dependence in yield stress(default)
-        EQ.1.0 : Plastic strain rate dependence in yield stress. Slower but more stable(recommended)
+        EQ.1.0: Plastic strain rate dependence in yield stress. Slower but more stable(recommended)
         """ # nopep8
         return self._cards[0].get_value("vp")
 
@@ -215,9 +215,9 @@ class Mat305(KeywordBase):
     @property
     def tol(self) -> float:
         """Get or set the Multiplication factor(must be >0) on tolerance criteria for plasticity and annealing iterations
-        LT.1.0:	Increases accuracy at greater computational cost
-        EQ.1.0:	Default value
-        GT.1.0 : Decreases accuracy at less computational cost
+        LT.1.0: Increases accuracy at greater computational cost
+        EQ.1.0: Default value
+        GT.1.0: Decreases accuracy at less computational cost
         """ # nopep8
         return self._cards[0].get_value("tol")
 
@@ -283,7 +283,7 @@ class Mat305(KeywordBase):
 
     @property
     def minrt(self) -> typing.Optional[float]:
-        """Get or set the Work hardening minimum (plastic) strain rate ε ̇_min in Zener-Hollomon parameter
+        """Get or set the Work hardening minimum (plastic) strain rate epsdot_min in Zener-Hollomon parameter
         """ # nopep8
         return self._cards[1].get_value("minrt")
 
@@ -306,8 +306,8 @@ class Mat305(KeywordBase):
     @property
     def odesol(self) -> typing.Optional[float]:
         """Get or set the Solver for static recovery stress:
-        EQ.0.0:	Trapezoidal rule(default)
-        EQ.1.0 : Heun’s method.Faster but less stable
+        EQ.0.0: Trapezoidal rule(default)
+        EQ.1.0: Heun's method.Faster but less stable
         """ # nopep8
         return self._cards[1].get_value("odesol")
 
@@ -318,7 +318,7 @@ class Mat305(KeywordBase):
 
     @property
     def asig0(self) -> typing.Optional[float]:
-        """Get or set the Parameters a_i, i=0,s,ss, to calculate σ_0, σ_s, and σ_ss, respectively, from the Zener-Hollomon parameter.  See Work Hardening and Dynamic Softening
+        """Get or set the Parameters a_i, i=0,s,ss, to calculate Sigma_0, Sigma_s, and Sigma_ss, respectively, from the Zener-Hollomon parameter. See Work Hardening and Dynamic Softening
         """ # nopep8
         return self._cards[2].get_value("asig0")
 
@@ -329,7 +329,7 @@ class Mat305(KeywordBase):
 
     @property
     def bsig0(self) -> typing.Optional[float]:
-        """Get or set the Parameters b_i, i=0,s,ss, to calculate σ_0, σ_s, and σ_ss, respectively, from the Zener-Hollomon parameter.  See Work Hardening and Dynamic Softening.
+        """Get or set the Parameters b_i, i=0,s,ss, to calculate Sigma_0, Sigma_s, and Sigma_ss, respectively, from the Zener-Hollomon parameter. See Work Hardening and Dynamic Softening.
         """ # nopep8
         return self._cards[2].get_value("bsig0")
 
@@ -340,7 +340,7 @@ class Mat305(KeywordBase):
 
     @property
     def asigs(self) -> typing.Optional[float]:
-        """Get or set the Parameters a_i, i=0,s,ss, to calculate σ_0, σ_s, and σ_ss, respectively, from the Zener-Hollomon parameter.  See Work Hardening and Dynamic Softening
+        """Get or set the Parameters a_i, i=0,s,ss, to calculate Sigma_0, Sigma_s, and Sigma_ss, respectively, from the Zener-Hollomon parameter. See Work Hardening and Dynamic Softening
         """ # nopep8
         return self._cards[2].get_value("asigs")
 
@@ -351,7 +351,7 @@ class Mat305(KeywordBase):
 
     @property
     def bsigs(self) -> typing.Optional[float]:
-        """Get or set the Parameters b_i, i=0,s,ss, to calculate σ_0, σ_s, and σ_ss, respectively, from the Zener-Hollomon parameter.  See Work Hardening and Dynamic Softening.
+        """Get or set the Parameters b_i, i=0,s,ss, to calculate Sigma_0, Sigma_s, and Sigma_ss, respectively, from the Zener-Hollomon parameter. See Work Hardening and Dynamic Softening.
         """ # nopep8
         return self._cards[2].get_value("bsigs")
 
@@ -362,7 +362,7 @@ class Mat305(KeywordBase):
 
     @property
     def asigss(self) -> typing.Optional[float]:
-        """Get or set the Parameters a_i, i=0,s,ss, to calculate σ_0, σ_s, and σ_ss, respectively, from the Zener-Hollomon parameter.  See Work Hardening and Dynamic Softening
+        """Get or set the Parameters a_i, i=0,s,ss, to calculate Sigma_0, Sigma_s, and Sigma_ss, respectively, from the Zener-Hollomon parameter. See Work Hardening and Dynamic Softening
         """ # nopep8
         return self._cards[2].get_value("asigss")
 
@@ -373,7 +373,7 @@ class Mat305(KeywordBase):
 
     @property
     def bsigss(self) -> typing.Optional[float]:
-        """Get or set the Parameters b_i, i=0,s,ss, to calculate σ_0, σ_s, and σ_ss, respectively, from the Zener-Hollomon parameter.  See Work Hardening and Dynamic Softening.
+        """Get or set the Parameters b_i, i=0,s,ss, to calculate Sigma_0, Sigma_s, and Sigma_ss, respectively, from the Zener-Hollomon parameter. See Work Hardening and Dynamic Softening.
         """ # nopep8
         return self._cards[2].get_value("bsigss")
 
@@ -384,7 +384,7 @@ class Mat305(KeywordBase):
 
     @property
     def aeps(self) -> typing.Optional[float]:
-        """Get or set the Parameter a_(ε_s ) used to calculate the saturation strain, ε_s, for dynamic relaxation from the Zener-Hollomon parameter. See Work Hardening and Dynamic Softening
+        """Get or set the Parameter a_(eps_s ) used to calculate the saturation strain, eps_s, for dynamic relaxation from the Zener-Hollomon parameter. See Work Hardening and Dynamic Softening
         """ # nopep8
         return self._cards[2].get_value("aeps")
 
@@ -395,7 +395,7 @@ class Mat305(KeywordBase):
 
     @property
     def beps(self) -> typing.Optional[float]:
-        """Get or set the Parameter a_(ε_s ) used to calculate the saturation strain, ε_s, for dynamic relaxation from the Zener-Hollomon parameter. See Work Hardening and Dynamic Softening
+        """Get or set the Parameter a_(eps_s ) used to calculate the saturation strain, eps_s, for dynamic relaxation from the Zener-Hollomon parameter. See Work Hardening and Dynamic Softening
         """ # nopep8
         return self._cards[2].get_value("beps")
 
@@ -428,7 +428,7 @@ class Mat305(KeywordBase):
 
     @property
     def alpha(self) -> typing.Optional[float]:
-        """Get or set the α parameter for static recovery stress
+        """Get or set the alpha parameter for static recovery stress
         """ # nopep8
         return self._cards[3].get_value("alpha")
 
@@ -472,7 +472,7 @@ class Mat305(KeywordBase):
 
     @property
     def nu(self) -> typing.Optional[float]:
-        """Get or set the Interaction volume ν for static recovery stress
+        """Get or set the Interaction volume nu for static recovery stress
         """ # nopep8
         return self._cards[3].get_value("nu")
 
@@ -483,7 +483,7 @@ class Mat305(KeywordBase):
 
     @property
     def bnu(self) -> typing.Optional[float]:
-        """Get or set the Burger’s vector b_ν for static recovery stress
+        """Get or set the Burger's vector b_nu for static recovery stress
         """ # nopep8
         return self._cards[3].get_value("bnu")
 
@@ -517,9 +517,9 @@ class Mat305(KeywordBase):
     @property
     def a50(self) -> typing.Optional[float]:
         """Get or set the Scale parameter for strain dependent recrystallization time
-        EQ.0.0:	T50 parameter is used for recrystallization time
-        GT.0.0 : T50 parameter is ignored.Recrystallization time is calculated using A50, D, GSF, P, Q, QREX
-        LT.0.0 : T50 parameter is used.Recrystallization factor and combined recovery stress calculated using A50, D, GSF, P, Q, QREX is added to history variables if POST = 1
+        EQ.0.0: T50 parameter is used for recrystallization time
+        GT.0.0: T50 parameter is ignored.Recrystallization time is calculated using A50, D, GSF, P, Q, QREX
+        LT.0.0: T50 parameter is used.Recrystallization factor and combined recovery stress calculated using A50, D, GSF, P, Q, QREX is added to history variables if POST = 1
         """ # nopep8
         return self._cards[4].get_value("a50")
 

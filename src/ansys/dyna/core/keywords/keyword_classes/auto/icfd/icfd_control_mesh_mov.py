@@ -56,7 +56,7 @@ class IcfdControlMeshMov(KeywordBase):
         EQ.3: mesh uses a Laplacian smoothing with stiffness on edges and from node to opposite faces. Very robust but costly.
         EQ 4: full lagrangian. The mesh moves with the velocity of the flow.
         EQ.11: mesh moves using an implicit ball-vertex spring method
-        EQ.20 : mesh moves by solving a linear elasticity problem using a constant size. This can be useful to avoid large distortions in rotating problems that involve large discrepancies in mesh sizes (typically in cases involving boundary layer mesh).
+        EQ.20: mesh moves by solving a linear elasticity problem using a constant size. This can be useful to avoid large distortions in rotating problems that involve large discrepancies in mesh sizes (typically in cases involving boundary layer mesh).
         """ # nopep8
         return self._cards[0].get_value("mmsh")
 

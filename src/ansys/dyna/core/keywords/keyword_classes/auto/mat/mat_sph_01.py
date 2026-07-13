@@ -109,7 +109,7 @@ class MatSph01(KeywordBase):
         """Get or set the There are 4 possible cases (See Remark 1):
         1. If MULO = 0.0, then inviscid fluid is assumed.
         2. If MULO > 0.0, and MUHI = 0.0 or is not defined, then
-        this is the traditional constant dynamic viscosity coefficient 𝜇.
+        this is the traditional constant dynamic viscosity coefficient mu.
         3. If MULO > 0.0, and MUHI > 0.0, then MULO and MUHI
         are lower and upper viscosity limit values for a powerlaw-like variable viscosity model.
         4. If MULO is negative (for example, MULO = -1), then a
@@ -126,8 +126,7 @@ class MatSph01(KeywordBase):
     @property
     def muhi(self) -> typing.Optional[float]:
         """Get or set the There are 2 possible cases:
-        5. If MUHI < 0.0, then the viscosity can be defined by the
-        user in the file dyn21.F with a routine called f3dm9sph_userdefin.
+        5. If MUHI < 0.0, then the viscosity can be defined by the user in the file dyn21.F with a routine called f3dm9sph_userdefin.
         The file is part of the general usermat package.
         6. If MUHI > 0.0, then this is the upper dynamic viscosity
         limit (default = 0.0). This is defined only if RK and RN
@@ -153,11 +152,9 @@ class MatSph01(KeywordBase):
 
     @property
     def rc(self) -> typing.Optional[float]:
-        """Get or set the Option for Cross viscosity model: See Remark 7.
-        RC > 0.0: Cross viscosity model will be used (overwrite all
-        other options), values of MULO, MUHI, RK and RN
-        will be used in the Cross viscosity model. See Remark 7.
-        RC ≤ 0.0: other viscosity model (decided based on above variables) will be used.
+        """Get or set the Cross viscosity model:
+        RC.GT.0.0: Use the Cross viscosity model which overwrites all other options.The values of MULO, MUHI, RK,and RN are used in the Cross viscosity model.See Remark 7.
+        RC.LE.0.0: Use a viscosity model based on the above fields.See Remark 6.
         """ # nopep8
         return self._cards[0].get_value("rc")
 

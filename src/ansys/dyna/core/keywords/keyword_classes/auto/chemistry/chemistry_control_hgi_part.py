@@ -83,7 +83,7 @@ class ChemistryControlHgiPart(KeywordBase):
 
     @property
     def exit_bc(self) -> typing.Optional[int]:
-        """Get or set the The exit boundary a surface part ID referenced in *MESH_‌SURFACE_‌ELEMENT cards (for the PART option).
+        """Get or set the The exit boundary a surface part ID referenced in *MESH_SURFACE_ELEMENT cards (for the PART option).
         """ # nopep8
         return self._cards[0].get_value("exit_bc")
 

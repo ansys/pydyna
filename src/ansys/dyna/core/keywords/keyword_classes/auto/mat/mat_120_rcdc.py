@@ -86,7 +86,7 @@ _MAT120RCDC_CARD4 = (
 
 _MAT120RCDC_CARD5 = (
     FieldSchema("lcss", int, 0, 10, 0),
-    FieldSchema("lclf", int, 10, 10, 0),
+    FieldSchema("lcff", int, 10, 10, 0),
     FieldSchema("numint", float, 20, 10, 1.0),
 )
 
@@ -115,7 +115,7 @@ class Mat120Rcdc(KeywordBase):
     ]
     _link_fields = {
         "lcss": LinkType.DEFINE_CURVE,
-        "lclf": LinkType.DEFINE_CURVE,
+        "lcff": LinkType.DEFINE_CURVE,
     }
 
     def __init__(self, **kwargs):
@@ -274,9 +274,7 @@ class Mat120Rcdc(KeywordBase):
 
     @property
     def en(self) -> typing.Optional[float]:
-        """Get or set the Mean nucleation strain En .
-        GT.0.0:	Constant value,
-        LT.0.0:	Load curve ID = (-EN) which defines mean nucleation strain ε_N  as a function of element length.
+        """Get or set the Mean nucleation strain E_N.
         """ # nopep8
         return self._cards[1].get_value("en")
 
@@ -287,9 +285,7 @@ class Mat120Rcdc(KeywordBase):
 
     @property
     def sn(self) -> typing.Optional[float]:
-        """Get or set the Standard deviation Sn of the normal distribution of En.
-        GT.0.0:	Constant value,
-        LT.0.0:	Load curve ID = (-SN) which defines standard deviation s_N of the normal distribution of ε_N as a function of element length.
+        """Get or set the Standard deviation S_N of the normal distribution of eps_N.
         """ # nopep8
         return self._cards[1].get_value("sn")
 
@@ -349,7 +345,7 @@ class Mat120Rcdc(KeywordBase):
 
     @property
     def eps1(self) -> typing.Optional[float]:
-        """Get or set the Effective plastic strain values.The first point must be zero corresponding to the initial yield stress. This option is only used if ATYP equal to 3. At least 2 points should be defined.These values are used if ATYP=3 and LCSS=0.
+        """Get or set the Effective plastic strain values.The first point must be zero corresponding to the initial yield stress. This option is only used if ATYP equals 3. At least 2 points should be defined.These values are used if ATYP=3 and LCSS=0.
         """ # nopep8
         return self._cards[2].get_value("eps1")
 
@@ -525,7 +521,7 @@ class Mat120Rcdc(KeywordBase):
 
     @property
     def l1(self) -> typing.Optional[float]:
-        """Get or set the Element length values.These values are only used if LCLF=0.
+        """Get or set the Element length values.These values are only used if LCFF=0.
         """ # nopep8
         return self._cards[4].get_value("l1")
 
@@ -569,7 +565,7 @@ class Mat120Rcdc(KeywordBase):
 
     @property
     def ff1(self) -> typing.Optional[float]:
-        """Get or set the Corresponding failure void volume fraction. These values are only used if LCLF=0.
+        """Get or set the Corresponding failure void volume fraction. These values are only used if LCFF=0.
         """ # nopep8
         return self._cards[4].get_value("ff1")
 
@@ -623,19 +619,19 @@ class Mat120Rcdc(KeywordBase):
         self._cards[5].set_value("lcss", value)
 
     @property
-    def lclf(self) -> int:
+    def lcff(self) -> int:
         """Get or set the Load curve ID defining failure void volume fraction versus element length. The values L1-L4 and FF1-FF4 are ignored with this option.
         """ # nopep8
-        return self._cards[5].get_value("lclf")
+        return self._cards[5].get_value("lcff")
 
-    @lclf.setter
-    def lclf(self, value: int) -> None:
-        """Set the lclf property."""
-        self._cards[5].set_value("lclf", value)
+    @lcff.setter
+    def lcff(self, value: int) -> None:
+        """Set the lcff property."""
+        self._cards[5].set_value("lcff", value)
 
     @property
     def numint(self) -> float:
-        """Get or set the Number of through thickness integration points which must fail before the element is deleted.
+        """Get or set the Number of through thickness integration points that must fail before the element is deleted.
         """ # nopep8
         return self._cards[5].get_value("numint")
 
@@ -762,17 +758,17 @@ class Mat120Rcdc(KeywordBase):
         self.lcss = value.lcid
 
     @property
-    def lclf_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lclf."""
+    def lcff_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcff."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lclf:
+            if kwd.lcid == self.lcff:
                 return kwd
         return None
 
-    @lclf_link.setter
-    def lclf_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lclf."""
-        self.lclf = value.lcid
+    @lcff_link.setter
+    def lcff_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcff."""
+        self.lcff = value.lcid
 

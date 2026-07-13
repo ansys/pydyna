@@ -84,8 +84,8 @@ class LoadPyroActuator(KeywordBase):
 
     @property
     def id1(self) -> typing.Optional[int]:
-        """Get or set the GT.0:	Node ID 1
-        LT.0:	Segment set ID 1.
+        """Get or set the GT.0: Node ID 1
+        LT.0: Segment set ID 1.
         """ # nopep8
         return self._cards[0].get_value("id1")
 
@@ -96,8 +96,8 @@ class LoadPyroActuator(KeywordBase):
 
     @property
     def id2(self) -> typing.Optional[int]:
-        """Get or set the GT.0:	Node ID 2
-        LT.0:	Segment set ID 2.
+        """Get or set the GT.0: Node ID 2
+        LT.0: Segment set ID 2.
         """ # nopep8
         return self._cards[0].get_value("id2")
 
@@ -119,8 +119,8 @@ class LoadPyroActuator(KeywordBase):
 
     @property
     def vol(self) -> typing.Optional[float]:
-        """Get or set the GT.0:	Initial chamber volume
-        EQ.0:	Initial chamber volume given by distance between ID1 and ID2, see Remarks.
+        """Get or set the GT.0: Initial chamber volume
+        EQ.0: Initial chamber volume given by distance between ID1 and ID2, see Remarks.
         """ # nopep8
         return self._cards[0].get_value("vol")
 

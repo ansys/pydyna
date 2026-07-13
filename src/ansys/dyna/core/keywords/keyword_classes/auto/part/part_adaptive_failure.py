@@ -30,7 +30,7 @@ from ansys.dyna.core.lib.keyword_base import LinkType
 _PARTADAPTIVEFAILURE_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
     FieldSchema("t", float, 10, 10, None),
-    FieldSchema("term", int, 0, 10, 0),
+    FieldSchema("term", int, 20, 10, 0),
 )
 
 class PartAdaptiveFailure(KeywordBase):
@@ -76,9 +76,9 @@ class PartAdaptiveFailure(KeywordBase):
     @property
     def term(self) -> int:
         """Get or set the Control adaptivity after the part separates:
-        EQ.0:	continue to adapt part(default)
-        EQ.1 : remove only this part from the adaptivity.Other parts will continue to adapt as normal.If there are no remaining parts to be adapted, adaptivity is disabled
-        EQ.2 : adaptivity is disabled for all parts.
+        EQ.0: continue to adapt part(default)
+        EQ.1: remove only this part from the adaptivity.Other parts will continue to adapt as normal.If there are no remaining parts to be adapted, adaptivity is disabled
+        EQ.2: adaptivity is disabled for all parts.
         """ # nopep8
         return self._cards[0].get_value("term")
 

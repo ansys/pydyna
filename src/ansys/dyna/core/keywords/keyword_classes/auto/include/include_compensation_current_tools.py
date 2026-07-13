@@ -47,7 +47,7 @@ class IncludeCompensationCurrentTools(KeywordBase):
         ]
     @property
     def filename(self) -> typing.Optional[str]:
-        """Get or set the Name of the keyword files containing nodes and elements information, with adaptive constraints if exist. Currently all blanks must have the same numbers of nodes and elements.
+        """Get or set the File that includes the nodes and element information for the last state of the springback simulation.  If the file is named as rigid0.tmp, the elements of the tools get refined along the outline of the part.  Draw bead nodes must be included in this file so that they will be modified together with the rigid tools.
         """ # nopep8
         return self._cards[0].get_value("filename")
 

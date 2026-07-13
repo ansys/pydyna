@@ -83,7 +83,7 @@ class MatBergstromBoyceRubber(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.
+        """Get or set the Material identification.A unique number or label must be specified.
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -182,7 +182,7 @@ class MatBergstromBoyceRubber(KeywordBase):
 
     @property
     def gam0(self) -> typing.Optional[float]:
-        """Get or set the .
+        """Get or set the Reference strain rate.
         """ # nopep8
         return self._cards[1].get_value("gam0")
 

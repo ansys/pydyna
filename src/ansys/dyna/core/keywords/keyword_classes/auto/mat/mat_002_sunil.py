@@ -374,10 +374,10 @@ class Mat002Sunil(KeywordBase):
     @property
     def macf(self) -> int:
         """Get or set the Material axes change flag for brick elements:
-        EQ.1:  No change, default,
-        EQ.2:  switch material axes a and b,
-        EQ.3:  switch material axes a and c,
-        EQ.4:  switch material axes b and c.
+        EQ.1: No change, default,
+        EQ.2: switch material axes a and b,
+        EQ.3: switch material axes a and c,
+        EQ.4: switch material axes b and c.
         """ # nopep8
         return self._cards[2].get_value("macf")
 

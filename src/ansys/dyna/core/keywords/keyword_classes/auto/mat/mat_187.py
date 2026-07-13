@@ -61,7 +61,7 @@ _MAT187_CARD2 = (
 
 _MAT187_CARD3 = (
     FieldSchema("miter", int, 0, 10, None),
-    FieldSchema("mipds", int, 10, 10, None),
+    FieldSchema("mips", int, 10, 10, None),
     FieldSchema("unused", int, 20, 10, None),
     FieldSchema("incfail", int, 30, 10, 0),
     FieldSchema("iconv", int, 40, 10, 0),
@@ -74,6 +74,9 @@ _MAT187_CARD4 = (
     FieldSchema("lcemod", int, 0, 10, None),
     FieldSchema("beta", float, 10, 10, None),
     FieldSchema("filt", float, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("vfast", float, 50, 10, 0.0),
 )
 
 _MAT187_OPTION0_CARD0 = (
@@ -89,7 +92,6 @@ class Mat187(KeywordBase):
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
-        "lcid_t": LinkType.DEFINE_CURVE,
         "lcid_c": LinkType.DEFINE_CURVE,
         "lcid_s": LinkType.DEFINE_CURVE,
         "lcid_b": LinkType.DEFINE_CURVE,
@@ -98,6 +100,7 @@ class Mat187(KeywordBase):
         "lcid_tri": LinkType.DEFINE_CURVE,
         "lcid_lc": LinkType.DEFINE_CURVE,
         "lcemod": LinkType.DEFINE_CURVE,
+        "lcid_t": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -204,7 +207,7 @@ class Mat187(KeywordBase):
 
     @property
     def rbcfac(self) -> typing.Optional[float]:
-        """Get or set the Ratio of yield in biaxial compression vs. yield in uniaxial compression. If nonzero this will activate the use of a multi-linear yield surface. Default is 0.
+        """Get or set the Ratio of yield in biaxial compression as a function of yield in uniaxial compression. A nonzero RBCFAC with all four curves LCID-T, LCID-C, LCID-S, and LCID-B defined activates a piecewise-linear yield surface as shown in Figure 0-1. See Remark 3. The default is 0.
         """ # nopep8
         return self._cards[0].get_value("rbcfac")
 
@@ -215,7 +218,7 @@ class Mat187(KeywordBase):
 
     @property
     def numint(self) -> typing.Optional[int]:
-        """Get or set the 
+        """Get or set the Number of integration points that must fail before the element is deleted. This option is available for shells and solids.LT.0.0: |NUMINT| is the percentage of integration points / layers which must fail before the shell element fails.For fully integrated shells, a layer fails if one integration point in the layer fails,and then the element fails if the given percentage of layers fails.Only available for shells.
         """ # nopep8
         return self._cards[0].get_value("numint")
 
@@ -226,7 +229,7 @@ class Mat187(KeywordBase):
 
     @property
     def lcid_t(self) -> typing.Optional[int]:
-        """Get or set the Load curve or table ID giving the yield stress as a function of plastic strain, these curves should be obtained from quasi-static and (optionally) dynamic uniaxial tensile tests, this input is mandatory and the material model will not work unless at least one tensile stress-strain curve is given.
+        """Get or set the Load curve or table ID giving the yield stress as a function of plastic strain.   These curves should be obtained from quasi-static and (optionally) dynamic uniaxial tensile tests.  This input is mandatory, and the material model will not work unless at least one tensile stress-strain curve is given.  If LCID-T is a table ID, the table values are plastic strain rates, and a curve of yield stress versus plastic strain must be given for each of those strain rates.  If the first value in the table is negative, LS-DYNA assumes that all the table values represent the natural logarithm of plastic strain rate. When the highest plastic strain rate is several orders of magnitude greater than the lowest, it is recommended that the natural log of plastic strain rate be input in the table.  See Remark 4.
         """ # nopep8
         return self._cards[1].get_value("lcid_t")
 
@@ -237,7 +240,7 @@ class Mat187(KeywordBase):
 
     @property
     def lcid_c(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID giving the yield stress as a function of plastic strain, this curve should be obtained from a quasi-static uniaxial compression test, this input is optional.
+        """Get or set the Optional load curve ID giving the yield stress as a function of plastic strain.  This curve should be obtained from a quasi-static uniaxial compression test.
         """ # nopep8
         return self._cards[1].get_value("lcid_c")
 
@@ -248,7 +251,7 @@ class Mat187(KeywordBase):
 
     @property
     def lcid_s(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID giving the yield stress as a function of plastic strain, this curve should be obtained from a quasi-static shear test, this input is optional
+        """Get or set the Optional load curve ID giving the yield stress as a function of plastic strain.  This curve should be obtained from a quasi-static shear test.
         """ # nopep8
         return self._cards[1].get_value("lcid_s")
 
@@ -259,7 +262,7 @@ class Mat187(KeywordBase):
 
     @property
     def lcid_b(self) -> typing.Optional[int]:
-        """Get or set the load curve ID giving the yield stress as a function of plastic strain, this curve should be obtained from a quasi-static biaxial tensile test, this input is optional.
+        """Get or set the Optional load curve ID giving the yield stress as a function of plastic strain, this curve should be obtained from a quasi-static biaxial tensile test.
         """ # nopep8
         return self._cards[1].get_value("lcid_b")
 
@@ -270,7 +273,7 @@ class Mat187(KeywordBase):
 
     @property
     def nuep(self) -> typing.Optional[float]:
-        """Get or set the plastic Poisson's ratio : an estimated ratio of transversal to longitudinal plastic rate of deformation should be given, a value <0 will result in associated plasticity to the yield surface (the associated plasticity option is implemented only for IQUAD=1).
+        """Get or set the plastic Poisson's ratio: an estimated ratio of transversal to longitudinal plastic rate of deformation should be given, a value <0 will result in associated plasticity to the yield surface (the associated plasticity option is implemented only for IQUAD=1).
         """ # nopep8
         return self._cards[1].get_value("nuep")
 
@@ -316,7 +319,7 @@ class Mat187(KeywordBase):
 
     @property
     def epfail(self) -> float:
-        """Get or set the This parameter is the equivalent plastic strain at failure. If EPFAIL is given as a negative integer, a load curve is expected that defines EPFAIL as a function of the plastic strain rate. Default value is 1.0e+5
+        """Get or set the This parameter is the equivalent plastic strain at failure. If EPFAIL is given as a negative integer, a load curve that defines EPFAIL as a function of the plastic strain rate is expected. The default value is 1.0e+5
         """ # nopep8
         return self._cards[2].get_value("epfail")
 
@@ -327,7 +330,8 @@ class Mat187(KeywordBase):
 
     @property
     def deprpt(self) -> typing.Optional[float]:
-        """Get or set the Increment of equivalent plastic strain between failure point and rupture point, stresses will fade out to zero between EPFAIL and EPFAIL+DEPRUPT
+        """Get or set the Increment of equivalent plastic strain between the failure and rupture points, stresses will fade out to zero between EPFAIL and EPFAIL+DEPRUPT.
+        If DEPRPT is given a negative value, a curve definition is expected where DEPRPT is defined as function of the triaxiality.
         """ # nopep8
         return self._cards[2].get_value("deprpt")
 
@@ -370,15 +374,16 @@ class Mat187(KeywordBase):
         self._cards[3].set_value("miter", value)
 
     @property
-    def mipds(self) -> typing.Optional[int]:
-        """Get or set the Maximum number of iterations in the secant iteration performed to enforce plane stress (shell elements only), default set to 10
+    def mips(self) -> typing.Optional[int]:
+        """Get or set the Maximum number of iterations in the secant iteration performed to enforce plane stress (shell elements only).
+        This variable is obsolete, a fixed three step approach is used by default.
         """ # nopep8
-        return self._cards[3].get_value("mipds")
+        return self._cards[3].get_value("mips")
 
-    @mipds.setter
-    def mipds(self, value: int) -> None:
-        """Set the mipds property."""
-        self._cards[3].set_value("mipds", value)
+    @mips.setter
+    def mips(self, value: int) -> None:
+        """Set the mips property."""
+        self._cards[3].set_value("mips", value)
 
     @property
     def incfail(self) -> int:
@@ -395,10 +400,9 @@ class Mat187(KeywordBase):
 
     @property
     def iconv(self) -> int:
-        """Get or set the Formulation flag :
-        ICONV=0 : default
-        ICONV=1 : yield surface is internally modified by increasing the shear yield until a convex yield surface is achieved
-        ICONV=2 : if the plastic Poisson's ratio is smaller than the elastic Poisson's ratio, both are set equal to the smaller value of the two
+        """Get or set the Formulation flag:
+        EQ.0: Default.
+        EQ.1: The yieldYield surface is internally modified by increasing the shear yield until a convex yield surface is achieved.
         """ # nopep8
         return self._cards[3].get_value("iconv")
 
@@ -422,7 +426,7 @@ class Mat187(KeywordBase):
 
     @property
     def nhsv(self) -> typing.Optional[int]:
-        """Get or set the Number of history variables. Default is 22. Set to 28 if the “instability criterion” should be included in the output (see Remark 5). Note that NEIPS or NEIPH must also be set on *DATABASE_EXTENT_BINARY for the history variable data to be output.
+        """Get or set the Number of history variables. The default is 22. Set to 28 if the 'instability criterion' should be included in the output (see Remark 5). Note that NEIPS or NEIPH must also be set on *DATABASE_EXTENT_BINARY for the history variable data to be output.
         """ # nopep8
         return self._cards[3].get_value("nhsv")
 
@@ -433,7 +437,7 @@ class Mat187(KeywordBase):
 
     @property
     def lcemod(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining Young's modulus as function of effective strain rate.
+        """Get or set the Load curve ID defining Young's modulus as function of effective strain rate.. If the first strain rate is negative, all values are expected to represent the natural logarithm of a strain rate.
         """ # nopep8
         return self._cards[4].get_value("lcemod")
 
@@ -465,6 +469,21 @@ class Mat187(KeywordBase):
         self._cards[4].set_value("filt", value)
 
     @property
+    def vfast(self) -> float:
+        """Get or set the Flag to activate a vectorized version of the original implementation, resulting in a reduction of computational effort by up to 30%.
+        EQ.0.0: Original scalar implementation.
+        EQ.1.0 : Vectorized implementation.
+        """ # nopep8
+        return self._cards[4].get_value("vfast")
+
+    @vfast.setter
+    def vfast(self, value: float) -> None:
+        """Set the vfast property."""
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""vfast must be `None` or one of {0.0,1.0}.""")
+        self._cards[4].set_value("vfast", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
@@ -477,21 +496,6 @@ class Mat187(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
-
-    @property
-    def lcid_t_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcid_t."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcid_t:
-                return kwd
-        return None
-
-    @lcid_t_link.setter
-    def lcid_t_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcid_t."""
-        self.lcid_t = value.lcid
 
     @property
     def lcid_c_link(self) -> typing.Optional[DefineCurve]:
@@ -612,4 +616,28 @@ class Mat187(KeywordBase):
     def lcemod_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcemod."""
         self.lcemod = value.lcid
+
+    @property
+    def lcid_t_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcid_t."""
+        if self.deck is None:
+            return None
+        field_value = self.lcid_t
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcid_t_link.setter
+    def lcid_t_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcid_t."""
+        if hasattr(value, "lcid"):
+            self.lcid_t = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcid_t = value.tbid
 

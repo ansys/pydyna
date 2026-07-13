@@ -100,7 +100,7 @@ class LoadSegmentContactMask(KeywordBase):
 
     @property
     def lsid(self) -> typing.Optional[int]:
-        """Get or set the Load set ID to mask, which must match a *LOAD_SEGMENT_SET.	See Remark 2.
+        """Get or set the Load set ID to mask, which must match a *LOAD_SEGMENT_SET. See Remark 2.
         """ # nopep8
         return self._cards[1].get_value("lsid")
 
@@ -138,9 +138,9 @@ class LoadSegmentContactMask(KeywordBase):
     def cid1(self) -> typing.Optional[int]:
         """Get or set the The IDs of contacts that can mask the pressure loads. The specified contact definitions must all be of the same type. Furthermore, only
         SURFACE_TO_SURFACE (two way) or AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK are supported.
-        For TIEBREAK contacts, pressure is masked until the tie fails. Once	the tie fails, the full pressure will be applied for the remainder of the
+        For TIEBREAK contacts, pressure is masked until the tie fails. Once the tie fails, the full pressure will be applied for the remainder of the
         simulation. The values P1 and P2 are ignored. For other contact types, the contact forces, along with the nodal
-        contact surface areas, are used to compute the contact pressure at	each node to determine any masking effect.
+        contact surface areas, are used to compute the contact pressure at each node to determine any masking effect.
         """ # nopep8
         return self._cards[1].get_value("cid1")
 
@@ -153,9 +153,9 @@ class LoadSegmentContactMask(KeywordBase):
     def cid2(self) -> typing.Optional[int]:
         """Get or set the The IDs of contacts that can mask the pressure loads. The specified contact definitions must all be of the same type. Furthermore, only
         SURFACE_TO_SURFACE (two way) or AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK are supported.
-        For TIEBREAK contacts, pressure is masked until the tie fails. Once	the tie fails, the full pressure will be applied for the remainder of the
+        For TIEBREAK contacts, pressure is masked until the tie fails. Once the tie fails, the full pressure will be applied for the remainder of the
         simulation. The values P1 and P2 are ignored. For other contact types, the contact forces, along with the nodal
-        contact surface areas, are used to compute the contact pressure at	each node to determine any masking effect.
+        contact surface areas, are used to compute the contact pressure at each node to determine any masking effect.
         """ # nopep8
         return self._cards[1].get_value("cid2")
 
@@ -168,9 +168,9 @@ class LoadSegmentContactMask(KeywordBase):
     def cid3(self) -> typing.Optional[int]:
         """Get or set the The IDs of contacts that can mask the pressure loads. The specified contact definitions must all be of the same type. Furthermore, only
         SURFACE_TO_SURFACE (two way) or AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK are supported.
-        For TIEBREAK contacts, pressure is masked until the tie fails. Once	the tie fails, the full pressure will be applied for the remainder of the
+        For TIEBREAK contacts, pressure is masked until the tie fails. Once the tie fails, the full pressure will be applied for the remainder of the
         simulation. The values P1 and P2 are ignored. For other contact types, the contact forces, along with the nodal
-        contact surface areas, are used to compute the contact pressure at	each node to determine any masking effect.
+        contact surface areas, are used to compute the contact pressure at each node to determine any masking effect.
         """ # nopep8
         return self._cards[1].get_value("cid3")
 
@@ -183,9 +183,9 @@ class LoadSegmentContactMask(KeywordBase):
     def cid4(self) -> typing.Optional[int]:
         """Get or set the The IDs of contacts that can mask the pressure loads. The specified contact definitions must all be of the same type. Furthermore, only
         SURFACE_TO_SURFACE (two way) or AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK are supported.
-        For TIEBREAK contacts, pressure is masked until the tie fails. Once	the tie fails, the full pressure will be applied for the remainder of the
+        For TIEBREAK contacts, pressure is masked until the tie fails. Once the tie fails, the full pressure will be applied for the remainder of the
         simulation. The values P1 and P2 are ignored. For other contact types, the contact forces, along with the nodal
-        contact surface areas, are used to compute the contact pressure at	each node to determine any masking effect.
+        contact surface areas, are used to compute the contact pressure at each node to determine any masking effect.
         """ # nopep8
         return self._cards[1].get_value("cid4")
 
@@ -198,9 +198,9 @@ class LoadSegmentContactMask(KeywordBase):
     def cid5(self) -> typing.Optional[int]:
         """Get or set the The IDs of contacts that can mask the pressure loads. The specified contact definitions must all be of the same type. Furthermore, only
         SURFACE_TO_SURFACE (two way) or AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK are supported.
-        For TIEBREAK contacts, pressure is masked until the tie fails. Once	the tie fails, the full pressure will be applied for the remainder of the
+        For TIEBREAK contacts, pressure is masked until the tie fails. Once the tie fails, the full pressure will be applied for the remainder of the
         simulation. The values P1 and P2 are ignored. For other contact types, the contact forces, along with the nodal
-        contact surface areas, are used to compute the contact pressure at	each node to determine any masking effect.
+        contact surface areas, are used to compute the contact pressure at each node to determine any masking effect.
         """ # nopep8
         return self._cards[1].get_value("cid5")
 
@@ -213,9 +213,9 @@ class LoadSegmentContactMask(KeywordBase):
     def cid1(self) -> typing.Optional[int]:
         """Get or set the The IDs of contacts that can mask the pressure loads. The specified contact definitions must all be of the same type. Furthermore, only
         SURFACE_TO_SURFACE (two way) or AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK are supported.
-        For TIEBREAK contacts, pressure is masked until the tie fails. Once	the tie fails, the full pressure will be applied for the remainder of the
+        For TIEBREAK contacts, pressure is masked until the tie fails. Once the tie fails, the full pressure will be applied for the remainder of the
         simulation. The values P1 and P2 are ignored. For other contact types, the contact forces, along with the nodal
-        contact surface areas, are used to compute the contact pressure at	each node to determine any masking effect..
+        contact surface areas, are used to compute the contact pressure at each node to determine any masking effect..
         """ # nopep8
         return self._cards[2].get_value("cid1")
 
@@ -228,9 +228,9 @@ class LoadSegmentContactMask(KeywordBase):
     def cid2(self) -> typing.Optional[int]:
         """Get or set the The IDs of contacts that can mask the pressure loads. The specified contact definitions must all be of the same type. Furthermore, only
         SURFACE_TO_SURFACE (two way) or AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK are supported.
-        For TIEBREAK contacts, pressure is masked until the tie fails. Once	the tie fails, the full pressure will be applied for the remainder of the
+        For TIEBREAK contacts, pressure is masked until the tie fails. Once the tie fails, the full pressure will be applied for the remainder of the
         simulation. The values P1 and P2 are ignored. For other contact types, the contact forces, along with the nodal
-        contact surface areas, are used to compute the contact pressure at	each node to determine any masking effect.
+        contact surface areas, are used to compute the contact pressure at each node to determine any masking effect.
         """ # nopep8
         return self._cards[2].get_value("cid2")
 
@@ -243,9 +243,9 @@ class LoadSegmentContactMask(KeywordBase):
     def cid3(self) -> typing.Optional[int]:
         """Get or set the The IDs of contacts that can mask the pressure loads. The specified contact definitions must all be of the same type. Furthermore, only
         SURFACE_TO_SURFACE (two way) or AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK are supported.
-        For TIEBREAK contacts, pressure is masked until the tie fails. Once	the tie fails, the full pressure will be applied for the remainder of the
+        For TIEBREAK contacts, pressure is masked until the tie fails. Once the tie fails, the full pressure will be applied for the remainder of the
         simulation. The values P1 and P2 are ignored. For other contact types, the contact forces, along with the nodal
-        contact surface areas, are used to compute the contact pressure at	each node to determine any masking effect.
+        contact surface areas, are used to compute the contact pressure at each node to determine any masking effect.
         """ # nopep8
         return self._cards[2].get_value("cid3")
 
@@ -258,9 +258,9 @@ class LoadSegmentContactMask(KeywordBase):
     def cid4(self) -> typing.Optional[int]:
         """Get or set the The IDs of contacts that can mask the pressure loads. The specified contact definitions must all be of the same type. Furthermore, only
         SURFACE_TO_SURFACE (two way) or AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK are supported.
-        For TIEBREAK contacts, pressure is masked until the tie fails. Once	the tie fails, the full pressure will be applied for the remainder of the
+        For TIEBREAK contacts, pressure is masked until the tie fails. Once the tie fails, the full pressure will be applied for the remainder of the
         simulation. The values P1 and P2 are ignored. For other contact types, the contact forces, along with the nodal
-        contact surface areas, are used to compute the contact pressure at	each node to determine any masking effect.
+        contact surface areas, are used to compute the contact pressure at each node to determine any masking effect.
         """ # nopep8
         return self._cards[2].get_value("cid4")
 
@@ -273,9 +273,9 @@ class LoadSegmentContactMask(KeywordBase):
     def cid5(self) -> typing.Optional[int]:
         """Get or set the The IDs of contacts that can mask the pressure loads. The specified contact definitions must all be of the same type. Furthermore, only
         SURFACE_TO_SURFACE (two way) or AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK are supported.
-        For TIEBREAK contacts, pressure is masked until the tie fails. Once	the tie fails, the full pressure will be applied for the remainder of the
+        For TIEBREAK contacts, pressure is masked until the tie fails. Once the tie fails, the full pressure will be applied for the remainder of the
         simulation. The values P1 and P2 are ignored. For other contact types, the contact forces, along with the nodal
-        contact surface areas, are used to compute the contact pressure at	each node to determine any masking effect.
+        contact surface areas, are used to compute the contact pressure at each node to determine any masking effect.
         """ # nopep8
         return self._cards[2].get_value("cid5")
 
@@ -288,9 +288,9 @@ class LoadSegmentContactMask(KeywordBase):
     def cid6(self) -> typing.Optional[int]:
         """Get or set the The IDs of contacts that can mask the pressure loads. The specified contact definitions must all be of the same type. Furthermore, only
         SURFACE_TO_SURFACE (two way) or AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK are supported.
-        For TIEBREAK contacts, pressure is masked until the tie fails. Once	the tie fails, the full pressure will be applied for the remainder of the
+        For TIEBREAK contacts, pressure is masked until the tie fails. Once the tie fails, the full pressure will be applied for the remainder of the
         simulation. The values P1 and P2 are ignored. For other contact types, the contact forces, along with the nodal
-        contact surface areas, are used to compute the contact pressure at	each node to determine any masking effect.
+        contact surface areas, are used to compute the contact pressure at each node to determine any masking effect.
         """ # nopep8
         return self._cards[2].get_value("cid6")
 
@@ -303,9 +303,9 @@ class LoadSegmentContactMask(KeywordBase):
     def cid7(self) -> typing.Optional[int]:
         """Get or set the The IDs of contacts that can mask the pressure loads. The specified contact definitions must all be of the same type. Furthermore, only
         SURFACE_TO_SURFACE (two way) or AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK are supported.
-        For TIEBREAK contacts, pressure is masked until the tie fails. Once	the tie fails, the full pressure will be applied for the remainder of the
+        For TIEBREAK contacts, pressure is masked until the tie fails. Once the tie fails, the full pressure will be applied for the remainder of the
         simulation. The values P1 and P2 are ignored. For other contact types, the contact forces, along with the nodal
-        contact surface areas, are used to compute the contact pressure at	each node to determine any masking effect.
+        contact surface areas, are used to compute the contact pressure at each node to determine any masking effect.
         """ # nopep8
         return self._cards[2].get_value("cid7")
 
@@ -318,9 +318,9 @@ class LoadSegmentContactMask(KeywordBase):
     def cid8(self) -> typing.Optional[int]:
         """Get or set the The IDs of contacts that can mask the pressure loads. The specified contact definitions must all be of the same type. Furthermore, only
         SURFACE_TO_SURFACE (two way) or AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK are supported.
-        For TIEBREAK contacts, pressure is masked until the tie fails. Once	the tie fails, the full pressure will be applied for the remainder of the
+        For TIEBREAK contacts, pressure is masked until the tie fails. Once the tie fails, the full pressure will be applied for the remainder of the
         simulation. The values P1 and P2 are ignored. For other contact types, the contact forces, along with the nodal
-        contact surface areas, are used to compute the contact pressure at	each node to determine any masking effect.
+        contact surface areas, are used to compute the contact pressure at each node to determine any masking effect.
         """ # nopep8
         return self._cards[2].get_value("cid8")
 

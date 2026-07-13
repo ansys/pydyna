@@ -174,8 +174,8 @@ class DefineBoxCoarsenLocal(KeywordBase):
     @property
     def iflag(self) -> int:
         """Get or set the Flag for protecting elements inside or outside of box:
-        EQ.0: Elements outside box can not be coarsened,
-        EQ.1: Elements inside box can not be coarsened.
+        EQ.0: Elements inside box can not be coarsened,
+        EQ.1: Elements outside box can not be coarsened.
         """ # nopep8
         return self._cards[0].get_value("iflag")
 

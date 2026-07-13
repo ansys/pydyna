@@ -94,11 +94,11 @@ class HourglassCardSet(Cards):
         EQ.4:Flanagan-Belytschko stiffness form,
         EQ.5:Flanagan-Belytschko stiffness form with exact volume integration for solid elements,
         EQ:6:Belytschko-Bindeman [1993] assumed strain co-rotational stiffness form for 2D and 3D solid elements only. This form is available for explicit and IMPLICIT solution medhods. Type 6 is mandatory for the implicit options,
-        EQ.7:  Linear total strain form of type 6 hourglass control.  This form is available for explicit and implicit solution method (See remark 6 below).
+        EQ.7: Linear total strain form of type 6 hourglass control.  This form is available for explicit and implicit solution method (See remark 6 below).
         EQ:8:Applicable to the type 16 fully integrated shell element.
         IHQ=8 EQ.8:Activates the full projection warping stiffness for shell formulations 16 and -16, and is the default for these formulations.  A speed penalty of 25% is common for this option.
-        EQ.9:	Puso [2000] enhanced assumed strain stiffness form for 3D hexahedral elements.
-        EQ.10:	Cosserat Point Element (CPE) developed by Jabareen and Rubin [2008] and Jabareen et.al. [2013], see *CONTROL_HOURGLASS
+        EQ.9: Puso [2000] enhanced assumed strain stiffness form for 3D hexahedral elements.
+        EQ.10: Cosserat Point Element (CPE) developed by Jabareen and Rubin [2008] and Jabareen et.al. [2013], see *CONTROL_HOURGLASS
         """ # nopep8
         return self._cards[0].get_value("ihq")
 
@@ -122,7 +122,7 @@ class HourglassCardSet(Cards):
 
     @property
     def ibq(self) -> typing.Optional[int]:
-        """Get or set the Not used.  Bulk viscosity is always on for solids.  Bulk viscosity for beams and shells can only be turned on using the variable TYPE in *CONTROL_‌BULK_‌VISCOSITY; however, the coefficients can be set using Q1 and Q2 below.
+        """Get or set the Not used.  Bulk viscosity is always on for solids.  Bulk viscosity for beams and shells can only be turned on using the variable TYPE in *CONTROL_BULK_VISCOSITY; however, the coefficients can be set using Q1 and Q2 below.
         """ # nopep8
         return self._cards[0].get_value("ibq")
 
@@ -156,6 +156,7 @@ class HourglassCardSet(Cards):
     @property
     def qb_vdc(self) -> float:
         """Get or set the Hourglass coefficient for shell bending. The default is QB=QM.
+        VDC: Viscous damping coefficient to help suppress hourglass modes.  VDC only applies to type 1 solids with type 6 or 7 hourglass control and to tshell formulations 5 and 6.  VDC is a unitless coefficient in which VDC = 1.0 corresponds to critical damping.
         """ # nopep8
         return self._cards[0].get_value("qb_vdc")
 

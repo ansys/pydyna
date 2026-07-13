@@ -571,9 +571,7 @@ class Mat233(KeywordBase):
 
     @property
     def lc1id(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID giving equivalent plastic strain to failure as a
-        function of stress triaxiality or a table ID giving plastic strain to
-        failure as a function of Lode parameter and stress triaxiality (solids)
+        """Get or set the Load curve ID giving equivalent plastic strain to failure as a function of stress triaxiality or a table ID giving plastic strain to failure as a function of Lode parameter and stress triaxiality (solids)
         """ # nopep8
         return self._cards[5].get_value("lc1id")
 
@@ -584,9 +582,7 @@ class Mat233(KeywordBase):
 
     @property
     def lc2id(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID giving equivalent plastic strain to failure as a
-        function of equivalent plastic strain rate, the failure strain will be
-        computed as the product of the values on LC1ID and LC2ID
+        """Get or set the Load curve ID giving equivalent plastic strain to failure as a function of equivalent plastic strain rate, the failure strain will be computed as the product of the values on LC1ID and LC2ID
         """ # nopep8
         return self._cards[5].get_value("lc2id")
 
@@ -597,8 +593,7 @@ class Mat233(KeywordBase):
 
     @property
     def numint(self) -> typing.Optional[int]:
-        """Get or set the Number of through thickness integration points which must fail
-        before the element is deleted (inactive for solid elements
+        """Get or set the Number of through thickness integration points which must fail before the element is deleted (inactive for solid elements
         """ # nopep8
         return self._cards[5].get_value("numint")
 
@@ -609,9 +604,7 @@ class Mat233(KeywordBase):
 
     @property
     def lccid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID giving effective stress in function of plastic strain
-        obtained from a compression stress, input of this load curve will
-        activate distortional hardening and is NOT compatible with the use of strain rate effects
+        """Get or set the Load curve ID giving effective stress in function of plastic strain obtained from a compression stress, input of this load curve will activate distortional hardening and is NOT compatible with the use of strain rate effects
         """ # nopep8
         return self._cards[5].get_value("lccid")
 
@@ -623,11 +616,8 @@ class Mat233(KeywordBase):
     @property
     def icflag(self) -> typing.Optional[int]:
         """Get or set the Automated input conversion flag.
-        EQ.0 then the load
-        curves provided under LCID and LCCID contain Cazacu-Barlat
-        effective stress as a function of energy conjugate plastic strain. If
-        EQ.1 then both load curves are given in terms of von
-        Mises stress versus equivalent plastic strain
+        EQ.0 then the load curves provided under LCID and LCCID contain Cazacu-Barlat effective stress as a function of energy conjugate plastic strain.
+        If EQ.1 then both load curves are given in terms of von Mises stress versus equivalent plastic strain
         """ # nopep8
         return self._cards[5].get_value("icflag")
 
@@ -639,10 +629,8 @@ class Mat233(KeywordBase):
     @property
     def idflag(self) -> typing.Optional[int]:
         """Get or set the Damage flag.
-        EQ.0 the failure model is of the Johnson
-        Cook type and requires LC1ID and LC2ID as additional input. If
-        EQ.1 the failure model is of the Gurson type and requires
-        LC3ID and EPSFG as additional input
+        EQ.0 the failure model is of the Johnson Cook type and requires LC1ID and LC2ID as additional input.
+        If EQ.1 the failure model is of the Gurson type and requires LC3ID and EPSFG as additional input
         """ # nopep8
         return self._cards[5].get_value("idflag")
 
@@ -653,8 +641,7 @@ class Mat233(KeywordBase):
 
     @property
     def lc3id(self) -> typing.Optional[int]:
-        """Get or set the Load curve giving the critical void fraction of the Gurson model
-        as a function of the plastic strain to failure measured in the uniaxial tensile test
+        """Get or set the Load curve giving the critical void fraction of the Gurson model as a function of the plastic strain to failure measured in the uniaxial tensile test
         """ # nopep8
         return self._cards[5].get_value("lc3id")
 
@@ -665,8 +652,7 @@ class Mat233(KeywordBase):
 
     @property
     def epsfg(self) -> typing.Optional[float]:
-        """Get or set the Plastic strain to failure measured in the uniaxial tensile test, this
-        value is used by the Gurson type failure model only.
+        """Get or set the Plastic strain to failure measured in the uniaxial tensile test, this value is used by the Gurson type failure model only.
         """ # nopep8
         return self._cards[5].get_value("epsfg")
 

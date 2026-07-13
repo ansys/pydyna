@@ -32,7 +32,7 @@ _EMDATABASEPOINTOUT_CARD0 = (
 )
 
 _EMDATABASEPOINTOUT_CARD1 = (
-    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("ptsid", int, 0, 10, None),
 )
 
 class EmDatabasePointout(KeywordBase):
@@ -56,9 +56,9 @@ class EmDatabasePointout(KeywordBase):
         ]
     @property
     def outlv(self) -> int:
-        """Get or set the Determines if the output file should be dumped.
-        EQ.0: No output file is generated.
-        EQ.1: The output file is generated.
+        """Get or set the Determines if LS-DYNA creates the output file:
+        EQ.0: Do not generate the output file.
+        EQ.1: Generate the output file.
         """ # nopep8
         return self._cards[0].get_value("outlv")
 
@@ -71,7 +71,7 @@ class EmDatabasePointout(KeywordBase):
 
     @property
     def dtout(self) -> float:
-        """Get or set the Time interval to print the output. If DTOUT is equal to 0.0, then the EM timestep will be used.
+        """Get or set the Time interval to print the output. If DTOUT equals 0.0, LS-DYNA uses the ICFD time step.
         """ # nopep8
         return self._cards[0].get_value("dtout")
 
@@ -81,13 +81,13 @@ class EmDatabasePointout(KeywordBase):
         self._cards[0].set_value("dtout", value)
 
     @property
-    def psid(self) -> typing.Optional[int]:
-        """Get or set the Point Set ID (See *EM_POINT_SET card).
+    def ptsid(self) -> typing.Optional[int]:
+        """Get or set the Point set ID (See *EM_POINT_SET card).
         """ # nopep8
-        return self._cards[1].get_value("psid")
+        return self._cards[1].get_value("ptsid")
 
-    @psid.setter
-    def psid(self, value: int) -> None:
-        """Set the psid property."""
-        self._cards[1].set_value("psid", value)
+    @ptsid.setter
+    def ptsid(self, value: int) -> None:
+        """Set the ptsid property."""
+        self._cards[1].set_value("ptsid", value)
 

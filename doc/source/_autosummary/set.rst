@@ -447,10 +447,24 @@ SetMode
     :members:
 
 
+SetModeCollect
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_mode_collect
+    :members:
+
+
 SetModeList
 -----------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_mode_list
+    :members:
+
+
+SetModeListCollect
+------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_mode_list_collect
     :members:
 
 
@@ -461,17 +475,24 @@ SetModeListGenerate
     :members:
 
 
+SetModeListGenerateCollect
+--------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_mode_list_generate_collect
+    :members:
+
+
+SetMultiMaterialGroup
+---------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_multi_material_group
+    :members:
+
+
 SetMultiMaterialGroupListGpname
 -------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_multi_material_group_list_gpname
-    :members:
-
-
-SetMulti_MaterialGroupList
---------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_multi__material_group_list
     :members:
 
 
@@ -615,6 +636,20 @@ SetPartColumnCollect
     :members:
 
 
+SetPartGeneral
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_part_general
+    :members:
+
+
+SetPartGeneralCollect
+---------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_part_general_collect
+    :members:
+
+
 SetPartList
 -----------
 
@@ -731,6 +766,13 @@ SetSegmentIntersect
 -------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_segment_intersect
+    :members:
+
+
+SetSegmentN8
+------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_segment_n8
     :members:
 
 
@@ -871,13 +913,6 @@ SetSolidGenerateIncrement
 -------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_solid_generate_increment
-    :members:
-
-
-SetSolidGenerateIncrementCollect
---------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.set_solid_generate_increment_collect
     :members:
 
 

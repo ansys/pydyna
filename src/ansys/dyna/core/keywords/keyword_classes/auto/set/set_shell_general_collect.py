@@ -46,6 +46,17 @@ _SETSHELLGENERALCOLLECT_CARD1 = (
     FieldSchema("e7", int, 70, 10, None),
 )
 
+_SETSHELLGENERALCOLLECT_CARD2 = (
+    FieldSchema("option", str, 0, 10, "ALL"),
+    FieldSchema("mshid", int, 10, 10, None),
+    FieldSchema("imin", int, 20, 10, None),
+    FieldSchema("imax", int, 30, 10, None),
+    FieldSchema("jmin", int, 40, 10, None),
+    FieldSchema("jmax", int, 50, 10, None),
+    FieldSchema("__", int, 60, 10, None, "--"),
+    FieldSchema("__", int, 70, 10, None, "--"),
+)
+
 _SETSHELLGENERALCOLLECT_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
@@ -70,6 +81,10 @@ class SetShellGeneralCollect(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _SETSHELLGENERALCOLLECT_CARD1,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _SETSHELLGENERALCOLLECT_CARD2,
                 **kwargs,
             ),
             OptionCardSet(
@@ -147,16 +162,21 @@ class SetShellGeneralCollect(KeywordBase):
         OPTION.EQ.DPART: Shell elements from parts E1...E7 previously added will be excluded from the current set,
         OPTION.EQ.BOX: Shell elements inside boxes E1...E7 will be included in the current set,
         OPTION.EQ.DBOX: Shell elements inside boxes E1...E7 previously added will be excluded from the current set.
-        OPTION.EQ.SALECPT:Elements inside a box for a 2D Structured ALE mesh.E1 is the S - ALE mesh ID(MSHID).E2, E3, E4,and E5 correspond to IMIN, IMAX, JMIN,and JMAX, respectively.They are the minimumand the maximum nodal indices along each direction in the S - ALE mesh.This option is only to be used for a Structured ALE mesh.It can be used with SALEFAC to generate a shell set but should not be used with other “_‌GENERAL” options.
-        OPTION.EQ.SALEFAC:Elements on the face of a 2D Structured ALE mesh.E1 is the S - ALE mesh ID(MSHID).E2, E3, E4, and E5 correspond to the - X, +X, -Y, and +Y faces, respectively.Assigning 1 to these 4 values would include all the boundary elements at these faces in the shell element set.This option is only to be used for a Structured ALE mesh.It can be used with SALECPT to generate a shell set but should not be used with other “_GENERAL” options.
+        OPTION.EQ.SALECPT:Elements inside a box for a 2D Structured ALE mesh.E1 is the S - ALE mesh ID(MSHID).E2, E3, E4,and E5 correspond to IMIN, IMAX, JMIN,and JMAX, respectively.They are the minimumand the maximum nodal indices along each direction in the S - ALE mesh. To include all shells in the S-ALE mesh defined by E1, set values E2�E7 to zero or leave them blank. This option is only to be used for a Structured ALE mesh.It can be used with SALEFAC to generate a shell set but should not be used with other "_GENERAL" options.
+        OPTION.EQ.SALEFAC:Elements on the face of a 2D Structured ALE mesh.E1 is the S - ALE mesh ID(MSHID).E2, E3, E4, and E5 correspond to the - X, +X, -Y, and +Y faces, respectively.Assigning 1 to these 4 values would include all the boundary elements at these faces in the shell element set.This option is only to be used for a Structured ALE mesh.It can be used with SALECPT to generate a shell set but should not be used with other "_GENERAL" options.
+        Note on trimmed mesh using *ALE_STRUCTURED_MESH_TRIM: An element is taken as a surface element as long as it has no neighboring element along the specified direction.
+        For trimmed mesh, all those surface elements facing that direction are picked up, at both exterior and interior boundaries.
+        Please refer to *ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details
+        OPTION.EQ.SET:Elements of beam element sets E1, E2, E3, ... will be included
+        OPTION.EQ.DSET: Previously added elements that are members of beam element sets E1, E2, E3, ... will be excluded.
         """ # nopep8
         return self._cards[1].get_value("option")
 
     @option.setter
     def option(self, value: str) -> None:
         """Set the option property."""
-        if value not in ["ALL", "ELEM", "DELEM", "PART", "DPART", "BOX", "DBOX", "SALECPT", "SALEFAC", None]:
-            raise Exception("""option must be `None` or one of {"ALL","ELEM","DELEM","PART","DPART","BOX","DBOX","SALECPT","SALEFAC"}.""")
+        if value not in ["ALL", "ELEM", "DELEM", "PART", "DPART", "BOX", "DBOX", "SALECPT", "SALEFAC", "SALEBOXL", "SET", "DSET", None]:
+            raise Exception("""option must be `None` or one of {"ALL","ELEM","DELEM","PART","DPART","BOX","DBOX","SALECPT","SALEFAC","SALEBOXL","SET","DSET"}.""")
         self._cards[1].set_value("option", value)
 
     @property
@@ -279,15 +299,118 @@ class SetShellGeneralCollect(KeywordBase):
         self._cards[1].set_value("e7", value)
 
     @property
+    def option(self) -> str:
+        """Get or set the OPTION.EQ.ALL: All shell elements will be included in the set,
+        OPTION.EQ.ELEM: Shell elements E1...E7 will be included in the current set,
+        OPTION.EQ.DELEM: Shell elements E1...E7 previously added will be excluded from the current set,
+        OPTION.EQ.PART: Shell elements from parts E1...E7 will be included in the current set,
+        OPTION.EQ.DPART: Shell elements from parts E1...E7 previously added will be excluded from the current set,
+        OPTION.EQ.BOX: Shell elements inside boxes E1...E7 will be included in the current set,
+        OPTION.EQ.DBOX: Shell elements inside boxes E1...E7 previously added will be excluded from the current set.
+        OPTION.EQ.SALECPT:Elements inside a box for a 2D Structured ALE mesh.E1 is the S - ALE mesh ID(MSHID).E2, E3, E4,and E5 correspond to IMIN, IMAX, JMIN,and JMAX, respectively.They are the minimumand the maximum nodal indices along each direction in the S - ALE mesh.This option is only to be used for a Structured ALE mesh.It can be used with SALEFAC to generate a shell set but should not be used with other "_GENERAL" options.
+        OPTION.EQ.SALEFAC:Elements on the face of a 2D Structured ALE mesh.E1 is the S - ALE mesh ID(MSHID).E2, E3, E4, and E5 correspond to the - X, +X, -Y, and +Y faces, respectively.Assigning 1 to these 4 values would include all the boundary elements at these faces in the shell element set.This option is only to be used for a Structured ALE mesh.It can be used with SALECPT to generate a shell set but should not be used with other "_GENERAL" options.
+        Note on trimmed mesh using *ALE_STRUCTURED_MESH_TRIM: An element is taken as a surface element as long as it has no neighboring element along the specified direction.
+        For trimmed mesh, all those surface elements facing that direction are picked up, at both exterior and interior boundaries.
+        Please refer to *ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details
+        OPTION.EQ.SET:Elements of beam element sets E1, E2, E3, ... will be included
+        OPTION.EQ.DSET: Previously added elements that are members of beam element sets E1, E2, E3, ... will be excluded.
+        """ # nopep8
+        return self._cards[2].get_value("option")
+
+    @option.setter
+    def option(self, value: str) -> None:
+        """Set the option property."""
+        if value not in ["ALL", "ELEM", "DELEM", "PART", "DPART", "BOX", "DBOX", "SALECPT", "SALEFAC", "SALEBOXL", "SET", "DSET", None]:
+            raise Exception("""option must be `None` or one of {"ALL","ELEM","DELEM","PART","DPART","BOX","DBOX","SALECPT","SALEFAC","SALEBOXL","SET","DSET"}.""")
+        self._cards[2].set_value("option", value)
+
+    @property
+    def mshid(self) -> typing.Optional[int]:
+        """Get or set the S-ALE mesh ID.
+        """ # nopep8
+        return self._cards[2].get_value("mshid")
+
+    @mshid.setter
+    def mshid(self, value: int) -> None:
+        """Set the mshid property."""
+        self._cards[2].set_value("mshid", value)
+
+    @property
+    def imin(self) -> typing.Optional[int]:
+        """Get or set the The minimum nodal indices along X in S-ALE mesh.
+        """ # nopep8
+        return self._cards[2].get_value("imin")
+
+    @imin.setter
+    def imin(self, value: int) -> None:
+        """Set the imin property."""
+        self._cards[2].set_value("imin", value)
+
+    @property
+    def imax(self) -> typing.Optional[int]:
+        """Get or set the The maximum nodal indices along X in S-ALE mesh.
+        """ # nopep8
+        return self._cards[2].get_value("imax")
+
+    @imax.setter
+    def imax(self, value: int) -> None:
+        """Set the imax property."""
+        self._cards[2].set_value("imax", value)
+
+    @property
+    def jmin(self) -> typing.Optional[int]:
+        """Get or set the The minimum nodal indices along Y in S-ALE mesh.
+        """ # nopep8
+        return self._cards[2].get_value("jmin")
+
+    @jmin.setter
+    def jmin(self, value: int) -> None:
+        """Set the jmin property."""
+        self._cards[2].set_value("jmin", value)
+
+    @property
+    def jmax(self) -> typing.Optional[int]:
+        """Get or set the The maximum nodal indices along Y in S-ALE mesh.
+        """ # nopep8
+        return self._cards[2].get_value("jmax")
+
+    @jmax.setter
+    def jmax(self, value: int) -> None:
+        """Set the jmax property."""
+        self._cards[2].set_value("jmax", value)
+
+    @property
+    def __(self) -> typing.Optional[int]:
+        """Get or set the -.
+        """ # nopep8
+        return self._cards[2].get_value("__")
+
+    @__.setter
+    def __(self, value: int) -> None:
+        """Set the __ property."""
+        self._cards[2].set_value("__", value)
+
+    @property
+    def __(self) -> typing.Optional[int]:
+        """Get or set the -.
+        """ # nopep8
+        return self._cards[2].get_value("__")
+
+    @__.setter
+    def __(self, value: int) -> None:
+        """Set the __ property."""
+        self._cards[2].set_value("__", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[2].cards[0].get_value("title")
+        return self._cards[3].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[2].cards[0].set_value("title", value)
+        self._cards[3].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

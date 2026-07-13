@@ -89,7 +89,7 @@ class BoundaryTemperatureRsw(KeywordBase):
         ]
     @property
     def sid(self) -> typing.Optional[int]:
-        """Get or set the Node Set ID; see *SET_‌NODE_‌OPTION. Nodes in the set will be checked to see if they are in the nugget or heat affected zone. If they are, the boundary condition will be applied. The boundary condition will not be applied to nodes in these regions if they are not included in the set..
+        """Get or set the Node Set ID; see *SET_NODE_OPTION. Nodes in the set will be checked to see if they are in the nugget or heat affected zone. If they are, the boundary condition will be applied. The boundary condition will not be applied to nodes in these regions if they are not included in the set..
         """ # nopep8
         return self._cards[0].get_value("sid")
 
@@ -182,7 +182,7 @@ class BoundaryTemperatureRsw(KeywordBase):
     @property
     def dist(self) -> float:
         """Get or set the Position of center of nugget on the axis of rotation. Parameter
-        defines the distance to NID1 along the orientation vector. See	Remark 1..
+        defines the distance to NID1 along the orientation vector. See Remark 1..
         """ # nopep8
         return self._cards[1].get_value("dist")
 
@@ -193,7 +193,7 @@ class BoundaryTemperatureRsw(KeywordBase):
 
     @property
     def h1(self) -> float:
-        """Get or set the Half width h1 of nugget in the lower half, i.e. in direction to NID1.	See Remark 2.
+        """Get or set the Half width h1 of nugget in the lower half, i.e. in direction to NID1. See Remark 2.
         """ # nopep8
         return self._cards[1].get_value("h1")
 
@@ -249,9 +249,9 @@ class BoundaryTemperatureRsw(KeywordBase):
     @property
     def lcidt(self) -> typing.Optional[int]:
         """Get or set the |LCIDT| refers to the load curve ID prescribing the temperature evolution in the nugget as a function of time. The abscissa of the load curve will be normalized between the birth and death times of the boundary condition.
-        GT.0:	The ordinate values of the load curve scale the respective base temperature of a particular point.
-        EQ.0:	No temperature evolution. Base temperatures are used.
-        LT.0:	The ordinate values of the load curve are used to define a linear combination between the temperature at the birth time and the base temperature of a particular point.Load curve ordinate values should range between 0.0 and 1.0.We recommend LCIDT < 0 to ensure a smooth temperature evolution.
+        GT.0: The ordinate values of the load curve scale the respective base temperature of a particular point.
+        EQ.0: No temperature evolution. Base temperatures are used.
+        LT.0: The ordinate values of the load curve are used to define a linear combination between the temperature at the birth time and the base temperature of a particular point.Load curve ordinate values should range between 0.0 and 1.0.We recommend LCIDT < 0 to ensure a smooth temperature evolution.
         """ # nopep8
         return self._cards[1].get_value("lcidt")
 

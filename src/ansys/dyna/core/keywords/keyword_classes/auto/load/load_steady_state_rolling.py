@@ -154,7 +154,7 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @property
     def lcd1r(self) -> typing.Optional[int]:
-        """Get or set the Optional load curve defining angular velocity around rotational axis for dynamic relaxation. LCD1 is used during dynamic relaxation if LCD1R isn’t defined.
+        """Get or set the Optional load curve defining angular velocity around rotational axis for dynamic relaxation. LCD1 is used during dynamic relaxation if LCD1R isnt defined.
         """ # nopep8
         return self._cards[1].get_value("lcd1r")
 
@@ -198,7 +198,7 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @property
     def lcd2r(self) -> typing.Optional[int]:
-        """Get or set the Optional load curve defining angular velocity around turning axis for dynamic relaxation. LCD2 is used during dynamic relaxation if LCD2R isn’t defined
+        """Get or set the Optional load curve defining angular velocity around turning axis for dynamic relaxation. LCD2 is used during dynamic relaxation if LCD2R isnt defined
         """ # nopep8
         return self._cards[2].get_value("lcd2r")
 
@@ -242,7 +242,7 @@ class LoadSteadyStateRolling(KeywordBase):
 
     @property
     def lcd3r(self) -> typing.Optional[int]:
-        """Get or set the Optional load curve defining translational velocity in translational direction. LCD3 is used during dynamic relaxation if LCD3R isn’t defined.
+        """Get or set the Optional load curve defining translational velocity in translational direction. LCD3 is used during dynamic relaxation if LCD3R isnt defined.
         """ # nopep8
         return self._cards[3].get_value("lcd3r")
 

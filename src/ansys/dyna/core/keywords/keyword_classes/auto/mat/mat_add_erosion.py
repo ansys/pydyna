@@ -78,6 +78,9 @@ _MATADDEROSION_CARD4 = (
     FieldSchema("volfrac", float, 10, 10, None),
     FieldSchema("mxtmp", float, 20, 10, None),
     FieldSchema("dtmin", float, 30, 10, None),
+    FieldSchema("ffunc", int, 40, 10, None),
+    FieldSchema("diagr", float, 50, 10, None),
+    FieldSchema("edger", float, 60, 10, None),
 )
 
 _MATADDEROSION_OPTION0_CARD0 = (
@@ -95,10 +98,10 @@ class MatAddErosion(KeywordBase):
     _link_fields = {
         "mid": LinkType.MAT,
         "lcregd": LinkType.DEFINE_CURVE,
-        "lcfld": LinkType.DEFINE_CURVE,
         "lceps12": LinkType.DEFINE_CURVE,
         "lceps13": LinkType.DEFINE_CURVE,
         "lcepsmx": LinkType.DEFINE_CURVE,
+        "lcfld": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -139,8 +142,7 @@ class MatAddErosion(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification for which this erosion definition applies.
-        A unique number or label must be specified.
+        """Get or set the Material identification for which this erosion definition applies. A unique number or label must be specified.
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -153,8 +155,8 @@ class MatAddErosion(KeywordBase):
     def excl(self) -> typing.Optional[float]:
         """Get or set the The exclusion number, which applies to the failure values defined on Cards 1, 2, and 7.
         When any of the failure values on these cards are set to the exclusion number,
-        the associated failure criterion is not invoked.  Or in other words, only the failure values not set to the exclusion number are invoked.
-        The default value of EXCL is 0.0, which eliminates all failure criteria from consideration that have their constants left blank or set to 0.0.  As an example,
+        the associated failure criterion is not invoked. Or in other words, only the failure values not set to the exclusion number are invoked.
+        The default value of EXCL is 0.0, which eliminates all failure criteria from consideration that have their constants left blank or set to 0.0. As an example,
         to prevent a material from developing tensile pressure, the user could specify an unusual value for
         the exclusion number, e.g., 1234, set MNPRES to 0.0, and set all the remaining failure values to 1234.
         However, use of an exclusion number may be considered nonessential since the same effect
@@ -202,7 +204,7 @@ class MatAddErosion(KeywordBase):
 
     @property
     def voleps(self) -> typing.Optional[float]:
-        """Get or set the Volumetric strain at failure,  .  VOLEPS can be a positive or negative number depending on whether the failure is in tension or compression, respectively.  If the value is exactly zero, it is automatically excluded to maintain compatibility with old input files
+        """Get or set the Volumetric strain at failure,  . VOLEPS can be a positive or negative number depending on whether the failure is in tension or compression, respectively. If the value is exactly zero, it is automatically excluded to maintain compatibility with old input files
         """ # nopep8
         return self._cards[0].get_value("voleps")
 
@@ -213,10 +215,10 @@ class MatAddErosion(KeywordBase):
 
     @property
     def numfip(self) -> float:
-        """Get or set the Number or percentage of failed integration points prior to element deletion (default is 1).  See Remark 2.
+        """Get or set the Number or percentage of failed integration points prior to element deletion (default is 1). See Remark 2.
         NUMFIP does not apply to higher order solid element types 24, 25, 26, 27, 28, and 29, rather see the variable VOLFRAC.
-        GT.0.0:	Number of integration points which must fail before element is deleted.
-        LT.0.0:	Applies only to shells. "|NUMFIP|" is the percentage of integration points which must exceed the failure criterion before the element fails.
+        GT.0.0: Number of integration points which must fail before element is deleted.
+        LT.0.0: Applies only to shells. "|NUMFIP|" is the percentage of integration points which must exceed the failure criterion before the element fails.
         If NUMFIP < -100, then "|NUMFIP|-100"  is the number of failed integration points prior to element deletion.
         """ # nopep8
         return self._cards[0].get_value("numfip")
@@ -228,7 +230,7 @@ class MatAddErosion(KeywordBase):
 
     @property
     def ncs(self) -> float:
-        """Get or set the Number of failure conditions to satisfy before failure occurs.  For example, if SIGP1 and SIGVM are defined and if NCS=2, both failure criteria must be met before element deletion can occur.  The default is set to unity.
+        """Get or set the Number of failure conditions to satisfy before failure occurs. For example, if SIGP1 and SIGVM are defined and if NCS=2, both failure criteria must be met before element deletion can occur. The default is set to unity.
         """ # nopep8
         return self._cards[0].get_value("ncs")
 
@@ -250,7 +252,8 @@ class MatAddErosion(KeywordBase):
 
     @property
     def sigp1(self) -> typing.Optional[float]:
-        """Get or set the Maximum principal stress at failur, Sigma max .
+        """Get or set the Maximum principal stress at failure, Sigma max.
+        LT.0: -SIGP1 is a load curve ID giving the maximum principal stress at failure as a function of the effective strain rate (the curve should not extrapolate to zero or failure may occur at low strain). A filter can be applied to the effective strain rate according to DTEFLT (see Card 5)..
         """ # nopep8
         return self._cards[1].get_value("sigp1")
 
@@ -261,7 +264,8 @@ class MatAddErosion(KeywordBase):
 
     @property
     def sigvm(self) -> typing.Optional[float]:
-        """Get or set the Equivalent stress at failure, The equivalent stress at failure is made a function of the effective strain rate by setting SIGVM to the negative of the appropriate load curve ID, Sigma max
+        """Get or set the Equivalent stress at failure, _max
+        LT.0: -SIGVM is a load curve ID giving the equivalent stress at failure as a function of the effective strain rate(the curve should not extrapolate to zero or failure may occur at low strain).A filter can be applied to the effective strain rate according to DTEFLT(see Card 5).
         """ # nopep8
         return self._cards[1].get_value("sigvm")
 
@@ -273,8 +277,8 @@ class MatAddErosion(KeywordBase):
     @property
     def mxeps(self) -> typing.Optional[float]:
         """Get or set the Variable to invoke a failure criterion based on maximum principal strain.
-        GT.0:    Maximum principal strain at failure, ε_max.
-        LT.0:    -MXEPS is the ID of a curve giving maximum principal strain at failure as a function of effective strain rate.
+        GT.0: Maximum principal strain at failure, eps_max.
+        LT.0: -MXEPS is the ID of a curve giving maximum principal strain at failure as a function of effective strain rate.
         A filter is applied to the effective strain rate according to DTEFLT; see Card 8.
         """ # nopep8
         return self._cards[1].get_value("mxeps")
@@ -320,8 +324,8 @@ class MatAddErosion(KeywordBase):
     @property
     def failtm(self) -> typing.Optional[float]:
         """Get or set the Failure time. When the problem time exceeds the failure time, the material is removed.
-        GT.0:	Failure time is active during any phase of the analysis.
-        LT.0:	Failure time is set to |FAILTM| but this criterion in inactive during the dynamic relaxation phase.
+        GT.0: Failure time is active during any phase of the analysis.
+        LT.0: Failure time is set to |FAILTM| but this criterion in inactive during the dynamic relaxation phase.
         """ # nopep8
         return self._cards[1].get_value("failtm")
 
@@ -334,7 +338,7 @@ class MatAddErosion(KeywordBase):
     def idam(self) -> typing.Optional[int]:
         """Get or set the Flag for damage model.
         EQ.0: no damage model is used.
-        NE.0:	Damage models GISSMO or DIEM, see manuals of R10 and before.
+        NE.0: Damage models GISSMO or DIEM, see manuals of R10 and before.
         Still available here for backward compatibility, but description actually moved to new keywords *MAT_ADD_DAMAGE_DIEM/GISSMO
         ,
         """ # nopep8
@@ -358,7 +362,7 @@ class MatAddErosion(KeywordBase):
 
     @property
     def lcfld(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID or Table ID. Load curve defines the Forming Limit Diagram, where minor engineering strains in percent are defined as abscissa values and major engineering strains in percent are defined as ordinate values. Table defines for each strain rate an associated FLD curve. The forming limit diagram is shown in Figure Error! Reference source not found.. In defining the curve, list pairs of minor and major strains starting with the left most point and ending with the right most point. This criterion is only available for shell elements.
+        """Get or set the Load curve ID, table ID, or 3d table ID. Load curve defines the Forming Limit Diagram, where minor engineering strains in percent are defined as abscissa values and major engineering strains in percent are defined as ordinate values. Table defines for each strain rate (LCFLD > 0) or for each shell thickness (LCFLD < 0) an associated FLD curve. The 3D table defines major strain as a function of temperature (TABLE_3D), strain rate (TABLE), and minor strain (CURVE). The forming limit diagram is shown in Figure Error! Reference source not found.. When defining the curve, list pairs of minor and major strains, starting with the leftmost point and ending with the rightmost point. This criterion is only available for shell elements.
         """ # nopep8
         return self._cards[3].get_value("lcfld")
 
@@ -369,7 +373,7 @@ class MatAddErosion(KeywordBase):
 
     @property
     def nsff(self) -> int:
-        """Get or set the Number of explicit time step cycles for stress fade-out used in the LCFLD criterion. Default is 10.
+        """Get or set the Number of explicit time step cycles for stress fade-out used in the LCFLD criterion. The default is 10.
         """ # nopep8
         return self._cards[3].get_value("nsff")
 
@@ -381,8 +385,8 @@ class MatAddErosion(KeywordBase):
     @property
     def epsthin(self) -> typing.Optional[float]:
         """Get or set the Thinning strain at failure for thin and thick shells.
-        GT.0.0:	individual thinning for each integration point from z-strain
-        LT.0.0:	averaged thinning strain from element thickness change
+        GT.0.0: individual thinning for each integration point from z-strain
+        LT.0.0: averaged thinning strain from element thickness change
         """ # nopep8
         return self._cards[3].get_value("epsthin")
 
@@ -415,7 +419,7 @@ class MatAddErosion(KeywordBase):
 
     @property
     def lceps12(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining in-plane shear strain limit_12^c vs. element size
+        """Get or set the Load curve ID defining in-plane shear strain limit_12**c vs. element size
         """ # nopep8
         return self._cards[3].get_value("lceps12")
 
@@ -426,7 +430,7 @@ class MatAddErosion(KeywordBase):
 
     @property
     def lceps13(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining through-thickness shear strain limit_13^c vs. element size
+        """Get or set the Load curve ID defining through-thickness shear strain limit_13**c vs. element size
         """ # nopep8
         return self._cards[3].get_value("lceps13")
 
@@ -437,7 +441,7 @@ class MatAddErosion(KeywordBase):
 
     @property
     def lcepsmx(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining in-plane major strain limit_1^c vs. element size
+        """Get or set the Load curve ID defining in-plane major strain limit_1**c vs. element size
         """ # nopep8
         return self._cards[3].get_value("lcepsmx")
 
@@ -448,8 +452,8 @@ class MatAddErosion(KeywordBase):
 
     @property
     def dteflt(self) -> typing.Optional[float]:
-        """Get or set the The time period (or inverse of the cutoff frequency) for the low-pass filter applied to the effective strain rate when MXEPS is negative.
-        If DTEFLT is set to zero or left blank, no filtering of the effective strain rate is performed in the determination of the maximum principal strain to failure.
+        """Get or set the The time period (or inverse of the cutoff frequency) for the low-pass filter applied to the effective strain rate when SIGPI,SIGVM, or MXEPS is negative.
+        If DTEFLT is set to zero or left blank, no filtering of the effective strain rate is performed.
         """ # nopep8
         return self._cards[4].get_value("dteflt")
 
@@ -482,7 +486,7 @@ class MatAddErosion(KeywordBase):
 
     @property
     def dtmin(self) -> typing.Optional[float]:
-        """Get or set the -
+        """Get or set the Minimum time step size at failure
         """ # nopep8
         return self._cards[4].get_value("dtmin")
 
@@ -490,6 +494,39 @@ class MatAddErosion(KeywordBase):
     def dtmin(self, value: float) -> None:
         """Set the dtmin property."""
         self._cards[4].set_value("dtmin", value)
+
+    @property
+    def ffunc(self) -> typing.Optional[int]:
+        """Get or set the Function ID (*DEFINE_FUNCTION) for a failure function. See Remark 5.
+        """ # nopep8
+        return self._cards[4].get_value("ffunc")
+
+    @ffunc.setter
+    def ffunc(self, value: int) -> None:
+        """Set the ffunc property."""
+        self._cards[4].set_value("ffunc", value)
+
+    @property
+    def diagr(self) -> typing.Optional[float]:
+        """Get or set the Maximum ratio of the largest to the smallest element diagonal in the current and original configurations. This field is used to detect extreme distortions and eliminate such elements. It is only available for solid elements.
+        """ # nopep8
+        return self._cards[4].get_value("diagr")
+
+    @diagr.setter
+    def diagr(self, value: float) -> None:
+        """Set the diagr property."""
+        self._cards[4].set_value("diagr", value)
+
+    @property
+    def edger(self) -> typing.Optional[float]:
+        """Get or set the Maximum ratio of the largest to the smallest element edge when comparing the current and original configurations. This field is used to detect extreme distortions and eliminate such elements. It is only avaliable for solid elements.
+        """ # nopep8
+        return self._cards[4].get_value("edger")
+
+    @edger.setter
+    def edger(self, value: float) -> None:
+        """Set the edger property."""
+        self._cards[4].set_value("edger", value)
 
     @property
     def title(self) -> typing.Optional[str]:
@@ -536,21 +573,6 @@ class MatAddErosion(KeywordBase):
         self.lcregd = value.lcid
 
     @property
-    def lcfld_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcfld."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcfld:
-                return kwd
-        return None
-
-    @lcfld_link.setter
-    def lcfld_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcfld."""
-        self.lcfld = value.lcid
-
-    @property
     def lceps12_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lceps12."""
         if self.deck is None:
@@ -594,4 +616,28 @@ class MatAddErosion(KeywordBase):
     def lcepsmx_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcepsmx."""
         self.lcepsmx = value.lcid
+
+    @property
+    def lcfld_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcfld."""
+        if self.deck is None:
+            return None
+        field_value = self.lcfld
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcfld_link.setter
+    def lcfld_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcfld."""
+        if hasattr(value, "lcid"):
+            self.lcfld = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcfld = value.tbid
 

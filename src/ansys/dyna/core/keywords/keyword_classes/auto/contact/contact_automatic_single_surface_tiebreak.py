@@ -66,7 +66,7 @@ _CONTACTAUTOMATICSINGLESURFACETIEBREAK_CARD3 = (
     FieldSchema("option", int, 0, 10, 1),
     FieldSchema("nfls", float, 10, 10, None),
     FieldSchema("sfls", float, 20, 10, None),
-    FieldSchema("param", float, 30, 10, None),
+    FieldSchema("param", float, 30, 10, 1.0),
     FieldSchema("eraten", float, 40, 10, None),
     FieldSchema("erates", float, 50, 10, None),
     FieldSchema("ct2cn", float, 60, 10, None),
@@ -93,6 +93,17 @@ _CONTACTAUTOMATICSINGLESURFACETIEBREAK_CARD5 = (
     FieldSchema("edot_s", float, 50, 10, None),
     FieldSchema("fg2", float, 60, 10, None),
     FieldSchema("lcg2c", float, 70, 10, None),
+)
+
+_CONTACTAUTOMATICSINGLESURFACETIEBREAK_CARD6 = (
+    FieldSchema("rfiltf", float, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
 )
 
 _CONTACTAUTOMATICSINGLESURFACETIEBREAK_OPTION0_CARD0 = (
@@ -238,6 +249,10 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
                 active_func=lambda: self.option in [13, 14],
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _CONTACTAUTOMATICSINGLESURFACETIEBREAK_CARD6,
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = ContactAutomaticSingleSurfaceTiebreak._option_spec_list[0],
                 cards = [
@@ -336,8 +351,8 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         ]
     @property
     def surfa(self) -> typing.Optional[int]:
-        """Get or set the Segment set ID, node set ID, part set ID, part ID, or shell element set ID for specifying the SURFA side of the contact interface (see Setting the Contact Interface). See *SET_SEGMENT, *SET_NODE_OPTION, *PART, *SET_PART or *SET_SHELL_OPTION. For ERODING_SINGLE_SURFACE and ERODING_SURFACE_TO_SURFACE contact types, use either a part ID or a part set ID. For ERODING_NODES_TO_SURFACE contact, use a node set which includes all nodes that may be exposed to contact as element erosion occurs.
-        EQ.0:	Includes all parts in the case of single surface contact types
+        """Get or set the Segment set ID, node set ID, part set ID, part ID, shell element set ID,or branch ID for specifying the SURFA side of the contact interface (see Setting the Contact Interface). See *SET_SEGMENT, *SET_NODE_OPTION, *PART, *SET_PART or *SET_SHELL_OPTION. For ERODING_SINGLE_SURFACE and ERODING_SURFACE_TO_SURFACE contact types, use either a part ID or a part set ID. For ERODING_NODES_TO_SURFACE contact, use a node set that includes all nodes that may be exposed to contact as element erosion occurs.
+        EQ.0: Includes all parts in the case of single surface contact types
         """ # nopep8
         return self._cards[0].get_value("surfa")
 
@@ -348,8 +363,8 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def surfb(self) -> typing.Optional[int]:
-        """Get or set the Segment set ID, node set ID, part set ID, part ID, or shell element set ID for the SURFB side of the contact (see Setting the Contact Interface).
-        EQ.0:	SURFB side is not applicable for single surface contact types.
+        """Get or set the Segment set ID, part set ID, part ID, shell element set ID, or branch ID for the SURFB side of the contact (see Setting the Contact Interface).
+        EQ.0: SURFB side is not applicable for single surface contact types.
         """ # nopep8
         return self._cards[0].get_value("surfb")
 
@@ -366,9 +381,9 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.2: part set ID,
         EQ.3: part ID,
         EQ.4: node set ID for node to surface contact,
-        EQ.5: include all (SURFA field) is ignored,
+        EQ.5: include all (SURFA field is ignored),
         EQ.6: part set ID for exempted parts. All non-exempted parts are included in the contact.
-        EQ.7:	Branch ID; see *SET_PART_TREE
+        EQ.7: Branch ID; see *SET_PART_TREE
         """ # nopep8
         return self._cards[0].get_value("surfatyp")
 
@@ -387,8 +402,8 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.2: part set ID,
         EQ.3: part ID,
         EQ.5:Include all ( SURFB Field is ignored).
-        EQ.6:	Part set ID for exempted parts.  All non-exempted parts are included in the contact.
-        EQ.7:	Branch ID; see *SET_PART_TREE
+        EQ.6: Part set ID for exempted parts.  All non-exempted parts are included in the contact.
+        EQ.7: Branch ID; see *SET_PART_TREE
         """ # nopep8
         return self._cards[0].get_value("surfbtyp")
 
@@ -401,7 +416,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def saboxid(self) -> typing.Optional[int]:
-        """Get or set the Include in contact definition only those SURFA nodes/segments within box SABOXID (corresponding to BOXID in *DEFINE_BOX), or if SABOXID is negative, only those SURFA nodes/segments within contact volume |SABOXID | (corresponding to CVID in *DEFINE_CONTACT_VOLUME). SABOXID can be used only if SURFATYP is set to 2, 3, or 6, that is, SURFA is a part ID or part set ID. SABOXID is not available for ERODING contact types
+        """Get or set the Include in the contact definition only those SURFA nodes/segments within box SABOXID (corresponding to BOXID in *DEFINE_BOX), or if SABOXID is negative, only those SURFA nodes/segments within contact volume |SABOXID | (corresponding to CVID in *DEFINE_CONTACT_VOLUME). SABOXID can be used only if SURFATYP is set to 2, 3, 5, or 6, meaning, SURFA is a part ID or part set ID. SABOXID is not available for ERODING contact types
         """ # nopep8
         return self._cards[0].get_value("saboxid")
 
@@ -412,7 +427,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def sbboxid(self) -> typing.Optional[int]:
-        """Get or set the Include in contact definition only those SURFB segments within box SBBOXID (corresponding to BOXID in *DEFINE_BOX), or if SBBOXID is negative, only those SURFB segments within contact volume |SBBOXID | (corresponding to CVID in *DEFINE_CONTACT_VOLUME). SBBOXID can be used only if SURFBTYP is set to 2, 3, or 6, that is, SURFB is a part ID or part set ID.  SBBOXID is not available for ERODING contact types.
+        """Get or set the Include in the contact definition only those SURFB segments within box SBBOXID (corresponding to BOXID in *DEFINE_BOX), or if SBBOXID is negative, only those SURFB segments within contact volume |SBBOXID | (corresponding to CVID in *DEFINE_CONTACT_VOLUME). SBBOXID can be used only if SURFBTYP is set to 2, 3, 5,or 6, meaning, SURFB is a part ID or part set ID.  SBBOXID is not available for ERODING contact types.
         """ # nopep8
         return self._cards[0].get_value("sbboxid")
 
@@ -424,9 +439,9 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     @property
     def sapr(self) -> int:
         """Get or set the Include the SURFA side in the *DATABASE_NCFORC and the *DATABASE_BINARY_INTFOR interface force files, and optionally in the dynain file for wear:
-        EQ.0:	Do not include.
-        EQ.1 : SURFA side forces included.
-        EQ.2 : Same as 1 but also allows for SURFA nodes to be written as* INITIAL_CONTACT_WEAR to dynain; see NCYC on* INTERFACE_SPRINGBACK_LSDYNA.
+        EQ.0: Do not include.
+        EQ.1: SURFA side forces included.
+        EQ.2: Same as 1 but also allows SURFA nodes to be written as *INITIAL_CONTACT_WEAR to dynain; see NCYC on *INTERFACE_SPRINGBACK_LSDYNA.
         """ # nopep8
         return self._cards[0].get_value("sapr")
 
@@ -440,9 +455,9 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     @property
     def sbpr(self) -> int:
         """Get or set the Include the SURFB side in the *DATABASE_NCFORC and the *DATABASE_BINARY_INTFOR interface force files, and optionally in the dynain file for wear:
-        EQ.0:	Do not include.
-        EQ.1 : SURFB side forces included.
-        EQ.2 : Same as 1, but also allows for SURFB nodes to be written as* INITIAL_CONTACT_WEAR to dynain; see NCYC on* INTERFACE_SPRINGBACK_LSDYNA.
+        EQ.0: Do not include.
+        EQ.1: SURFB side forces included.
+        EQ.2: Same as 1, but also allows SURFB nodes to be written as *INITIAL_CONTACT_WEAR to dynain; see NCYC on *INTERFACE_SPRINGBACK_LSDYNA.
         """ # nopep8
         return self._cards[0].get_value("sbpr")
 
@@ -481,7 +496,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def dc(self) -> float:
-        """Get or set the Exponential decay coefficient. The frictional coefficient is assumed to be dependent on the relative velocity v-rel of the surfaces in contact. (default=0.0).
+        """Get or set the Exponential decay coefficient. The frictional coefficient is assumed to depend on the relative velocity v-rel of the surfaces in contact. (default=0.0).
         """ # nopep8
         return self._cards[1].get_value("dc")
 
@@ -503,7 +518,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def vdc(self) -> float:
-        """Get or set the Viscous damping coefficient in percent of critical. In order to avoid undesirable oscillation in contact, e.g., for sheet forming simulation, a contact damping perpendicular to the contacting surfaces is applied.
+        """Get or set the Viscous damping coefficient in percent of critical. To avoid undesirable oscillation in contact, e.g., for sheet forming simulation, a contact damping perpendicular to the contacting surfaces is applied.
         """ # nopep8
         return self._cards[1].get_value("vdc")
 
@@ -514,7 +529,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def penchk(self) -> typing.Optional[int]:
-        """Get or set the Small penetration in contact search option.  If the tracked node penetrates more than the segment thickness times the factor XPENE (see *CONTROL_CONTACT), the penetration is ignored, and the tracked node is set free.  The thickness is taken as the shell thickness if the segment belongs to a shell element or it is taken as 1/20 of its shortest diagonal if the segment belongs to a solid element.  This option applies to the surface-to-surface contact algorithms.  See Table 0-17 for contact types and more details.
+        """Get or set the Small penetration in the contact search option.  If the tracked node penetrates more than the segment thickness times the factor XPENE (see *CONTROL_CONTACT), the penetration is ignored, and the tracked node is set free.  The thickness is taken as the shell thickness if the segment belongs to a shell element or it is taken as 1/20 of its shortest diagonal if the segment belongs to a solid element.  This option applies to the surface-to-surface contact algorithms.  See Table 0-17 for contact types and more details.
         """ # nopep8
         return self._cards[1].get_value("penchk")
 
@@ -525,7 +540,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def bt(self) -> float:
-        """Get or set the Birth time (contact surface becomes active at this time):LT.0:	Birth time is set to | "BT" | .When negative, birth time is followed during the dynamic relaxation phase of the calculation.After dynamic relaxation has completed, contact is activated regardless of the value of BT.EQ.0 : Birth time is inactive, meaning contact is always activeGT.0 : If DT = -9999, BT is interpreted as the curve or table ID defining multiple pairs of birth - time / death - time; see Remark 2 below.Otherwise, if "DT" > 0, birth time applies both duringand after dynamic relaxation.
+        """Get or set the Birth time (contact surface becomes active at this time):LT.0: Birth time is set to | "BT" | .When negative, birth time is followed during the dynamic relaxation phase of the calculation.After the completion of dynamic relaxation, contact is activated regardless of the value of BT.EQ.0: Birth time is inactive, meaning contact is always activeGT.0: If DT = -9999, BT is interpreted as the curve or table ID defining multiple pairs of birth - time / death - time; see Remark 2 below.Otherwise, if "DT" > 0, birth time applies both duringand after dynamic relaxation.
         """ # nopep8
         return self._cards[1].get_value("bt")
 
@@ -536,7 +551,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def dt(self) -> float:
-        """Get or set the Death time (contact surface is deactivated at this time):LT.0:	If DT = -9999, BT is interpreted as the curve or table ID defining multiple pairs of birth - time / death - time.Otherwise, negative DT indicates that contact is inactive during dynamic relaxation.After dynamic relaxation the birth and death times are followed and set to | "BT" | and | "DT" | , respectively.EQ.0 : DT defaults to 10e20.GT.0 : DT sets the time at which the contact is deactivated.
+        """Get or set the Death time (contact surface is deactivated at this time):LT.0: If DT = -9999, BT is interpreted as the curve or table ID defining multiple pairs of birth - time / death - time.Otherwise, negative DT indicates that contact is inactive during dynamic relaxation.After dynamic relaxation the birth and death times are followed and set to | "BT" | and | "DT" | , respectively.EQ.0: DT defaults to 10e20.GT.0: DT sets the time at which the contact is deactivated.
         """ # nopep8
         return self._cards[1].get_value("dt")
 
@@ -548,6 +563,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     @property
     def sfsa(self) -> float:
         """Get or set the Scale factor on default SURFA penalty stiffness when SOFT = 0 or SOFT = 2; see also *CONTROL_CONTACT.For MORTAR frictional contact this is the stiffness scale factor for the entire contact, and SFSB does not apply.
+        LT.0: -SFSA gives the load curve ID for contact pressure as a function of penetration depth. This is supported for Mortar contact only.
         """ # nopep8
         return self._cards[2].get_value("sfsa")
 
@@ -558,7 +574,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def sfsb(self) -> float:
-        """Get or set the Scale factor on default SURFA penalty stiffness when SOFT = 0 or SOFT = 2; see also *CONTROL_CONTACT.For MORTAR tied contact, this is an additional stiffness scale factor, resulting in a total stiffness scale of SFSA*SFSB.
+        """Get or set the Scale factor on default SURFB penalty stiffness when SOFT = 0 or SOFT = 2; see also *CONTROL_CONTACT.For MORTAR tied contact, this is an additional stiffness scale factor, resulting in a total stiffness scale of SFSA*SFSB.
         """ # nopep8
         return self._cards[2].get_value("sfsb")
 
@@ -580,7 +596,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def sbst(self) -> typing.Optional[float]:
-        """Get or set the Optional thickness for SURFA surface (overrides true thickness). This option applies only to contact with shell elements. True thickness is the element thickness of the shell elements. For the TIED options see SAST above.
+        """Get or set the Optional thickness for SURFB surface (overrides true thickness). This option applies only to contact with shell elements. True thickness is the element thickness of the shell elements. For the TIED options see SAST above.
         """ # nopep8
         return self._cards[2].get_value("sbst")
 
@@ -591,9 +607,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def sfsat(self) -> float:
-        """Get or set the Scale factor applied to contact thickness of SURFA surface.  This option applies to contact with shell and beam elements.
-        SFSAT has no bearing on the actual thickness of the elements; it only affects the location of the contact surface.
-        SFSAT is ignored if SAST is nonzero except in the case of MORTAR contact (see Remark 9 in the General Remarks: *Contact section).
+        """Get or set the Scale factor applied to the contact thickness of the SURFA surface.  This option applies to contact with shell and beam elements.  SFSAT has no bearing on the actual thickness of the elements; it only affects the location of the contact surface.  SFSAT is ignored if SAST is nonzero except in the case of MORTAR contact (see Remark 14 in the General Remarks: *Contact section).
         """ # nopep8
         return self._cards[2].get_value("sfsat")
 
@@ -604,9 +618,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def sfsbt(self) -> float:
-        """Get or set the Scale factor applied to contact thickness of SURFA surface.  This option applies only to contact with shell elements.
-        SFSAT has no bearing on the actual thickness of the elements; it only affects the location of the contact surface.
-        SFSAT is ignored if SBST is nonzero except in the case of MORTAR contact (see Remark 9 in the General Remarks: *Contact section).
+        """Get or set the Scale factor applied to the contact thickness of the SURFB surface.  This option applies only to contact with shell elements.  SFSBT has no bearing on the actual thickness of the elements; it only affects the location of the contact surface. SFSBT is ignored if SBST is nonzero except in the case of MORTAR contact (see Remark 14 in the General Remarks: *Contact section).
         """ # nopep8
         return self._cards[2].get_value("sfsbt")
 
@@ -617,7 +629,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def fsf(self) -> float:
-        """Get or set the Coulomb friction scale factor (default=1.0).The Coulomb friction value is scaled as μ_sc=FSF×μ_c; see Mandatory Card 2.
+        """Get or set the Coulomb friction scale factor (default=1.0).The Coulomb friction value is scaled as _sc=FSF_c; see Mandatory Card 2.
         """ # nopep8
         return self._cards[2].get_value("fsf")
 
@@ -628,7 +640,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def vsf(self) -> float:
-        """Get or set the Viscous friction scale factor (default=1.0).If this factor is defined, then the limiting force becomes: F_lim =VSF×VC×A_cont ; see Mandatory Card 2.
+        """Get or set the Viscous friction scale factor (default=1.0).If this factor is defined, the limiting force becomes: F_lim =VSFVCA_cont ; see Mandatory Card 2.
         """ # nopep8
         return self._cards[2].get_value("vsf")
 
@@ -639,36 +651,39 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def option(self) -> int:
-        """Get or set the Response:
-        EQ.-3: see 3, moments are transferred, SMP only.
-        EQ.-2: see 2, moments are transferred, SMP only.
-        EQ.-1: see 1, moments are transferred, SMP only.
-        EQ.1: Tracked nodes in contact and which come into contact will permanently stick. Tangential motion is inhibited.
-        EQ.2: tiebreak is active for nodes which are initally in contact Until failure, tangential motion is inhibited.
+        """Get or set the 
+        Response:
+        EQ. - 11:	See 11. NFLS / SFLS / ERATEN / ERATES are functions of temperature.MORTAR option only.
+        EQ. - 9 : See 9. NFLS / SFLS / ERATEN / ERATES are functions of temperature.MORTAR option only.
+        EQ. - 3 : See 3. Moments are transferred.We recommend using contact type AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK with this option.
+        EQ. - 2 : See 2. Moments are transferred.We recommend using contact type AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK with this option.
+        EQ. - 1 : See 1. Moments are transferred.We recommend using contact type AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK with this option.
+        EQ.1: Tracked nodes in contact and those that come into contact will permanently stick. Tangential motion is inhibited.
+        EQ.2: tiebreak is active for nodes that are initally in contact Until failure, tangential motion is inhibited.
         EQ.3: as 1 above but with failure after sticking.
-        EQ.4: tiebreak is active for nodes which are initially in contact but tangential motion with frictional sliding is permitted.
-        EQ.5: tiebreak is active for nodes which are initally in contact. Damage is a nonlinear function of the crack width opening and is defined by a load curve which starts at unity for a crack width of zero and decays in some way to zero at a given value of the crack opening. This interface can be used to represent deformable glue bonds.
-        EQ.6: This option is for use with solids and thick shells only. Tiebreak is active for nodes which are initally in contact. Damage is a linear function of the (maximum over time) distance C between points initally in contact. When the distance is equal to CCRIT damage is fully developed and interface failure occurs. After failure, this contact option behaves as a surface to surface contact.
-        EQ.7: Dycoss Discrete Crack Model.TYPE_AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK is recommended for this option.
-        EQ.8: This option is similar to option 6 but works with offset shell elements. Type AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK is recommended for this option.
-        EQ.9: Extension of OPTION=7. Discrete Crack Model with power law and B-K damage models. Type AUTOMATI_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK is recommended for this option.
-        EQ.10 This is similar to OPTION=7 but works with offset shell elements. Type AUTOMATI_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK is recommended for this option.
-        EQ.11: This is similar to OPTION=9 but works with offset shell elements. Type AUTOMATI_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK is recommended for this option.
-        EQ.13:	Elastoplastic, rate-dependent damage model based on *MAT_240. Type AUTOMATI_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK is recommended for this option.  See Remarks.
-        EQ.14:	This is similar to OPTION = 13, but it works with offset shell elements.Type AUTOMATI_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK is recommended for this option
+        EQ.4: tiebreak is active for nodes initially in contact but tangential motion with frictional sliding is permitted.
+        EQ.5: tiebreak is active for nodes that are initally in contact. Damage is a nonlinear function of the crack width opening and is defined by a load curve that starts at unity for a crack width of zero and decays in some way to zero at a given value of the crack opening. This interface can be used to represent deformable glue bonds.
+        EQ.6: This option is only for solids and thick shells. Tiebreak is active for nodes that are initally in contact. Damage is a linear function of the (maximum over time) distance C between points initally in contact. When the distance is equals PARAM, damage is fully developed and interface failure occurs. After failure, this contact option behaves as a surface to surface contact.We recommend using type AUTOMATIC_?ONE_?WAY_?SURFACE_?TO_?SURFACE_?TIEBREAK with this option.
+        EQ.7: Dycoss Discrete Crack Model. We recommend using type AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK with this option.  See Remark 3.
+        EQ.8:	Similar to OPTION = 6, but it works with offset shell elements.We recommend using type AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK with this option
+        EQ.9 : Discrete Crack Model with power law and B - K damage models.We recommend using type AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK with this option.See Remark 3.
+        EQ.10 : Similar to OPTION = 7, but it works with offset shell elements.We recommend using type AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK with this option.
+        EQ.11 : Similar to OPTION = 9, but it works with offset shell elements.We recommend using type AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK with this option
+        EQ.13 : Elastoplastic, rate - dependent damage model based on * MAT_240.We recommend using type AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK with this option.See Remark 7.
+        EQ.14 : Similar to OPTION = 13, but it works with offset shell elements.We recommend using type AUTOMATIC_ONE_WAY_SURFACE_TO_SURFACE_TIEBREAK with this option
         """ # nopep8
         return self._cards[3].get_value("option")
 
     @option.setter
     def option(self, value: int) -> None:
         """Set the option property."""
-        if value not in [1, -3, -2, -1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, None]:
-            raise Exception("""option must be `None` or one of {1,-3,-2,-1,2,3,4,5,6,7,8,9,10,11,13,14}.""")
+        if value not in [1, -11, -9, -3, -2, -1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, None]:
+            raise Exception("""option must be `None` or one of {1,-11,-9,-3,-2,-1,2,3,4,5,6,7,8,9,10,11,13,14}.""")
         self._cards[3].set_value("option", value)
 
     @property
     def nfls(self) -> typing.Optional[float]:
-        """Get or set the Normal failure stress for OPTION = 2, 3, 4, 6, 7, 8, ±9, 10 or ±11. For OPTION = 5 NFLS becomes the plastic yield stress as defined in Remark 5.
+        """Get or set the Normal failure stress for OPTION = 2, 3, 4, 6, 7, 8, 9, 10 or 11. For OPTION = 5 NFLS becomes the plastic yield stress as defined in Remark 5.
         For OPTION = 9 or 11 and NFLS < 0, a load curve with ID |"NFLS" | is referenced defining normal failure stress as a function of element size. See Remark 3.
         For OPTION = -9 or -11 and NFLS < 0, |"NFLS" | is the ID of a load curve giving normal failure stress as function of temperature; it applies to the Mortar option only.
         """ # nopep8
@@ -681,12 +696,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def sfls(self) -> typing.Optional[float]:
-        """Get or set the Shear failure stress for OPTION = 2, 3, 6, 7, 8, ±9, 10 or ±11.
-        For OPTION = 4, SFLS is a frictional stress limit if PARAM = 1.
-        This frictional stress limit is independent of the normal force at the tie.
-        For OPTION = 5 SFLS becomes the curve ID which defines normal stress as a function of gap.
-        For OPTION = 9 or 11 and SFLS < 0, |"SFLS" |  references a load curve ID, defining shear failure stress as a function of element size. See Remark 3.
-        For OPTION = -9 or -11 and SFLS < 0, |"SFLS" | is the ID of a load curve giving shear failure stress as function of temperature; it applies to the Mortar option only.
+        """Get or set the Shear failure stress for OPTION = 2, 3, 6, 7, 8, �9, 10, or �11.  For OPTION = 4, SFLS is a frictional stress limit if PARAM = 1.  This frictional stress limit is independent of the normal force at the tie.  For OPTION = 5, SFLS becomes a curve ID that defines normal stress as a function of the gap.  For OPTION = 9 or 11 and SFLS < 0, |"SFLS" |  references a load curve ID, defining shear failure stress as a function of element size. See Remark 3. For OPTION = -9 or -11 and SFLS < 0, |"SFLS" | is the ID of a load curve giving shear failure stress as function of temperature; it applies to the Mortar option only.
         """ # nopep8
         return self._cards[3].get_value("sfls")
 
@@ -696,14 +706,8 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         self._cards[3].set_value("sfls", value)
 
     @property
-    def param(self) -> typing.Optional[float]:
-        """Get or set the For OPTION = 2, setting PARAM = 1 causes the shell thickness offsets to be ignored.
-        For OPTION = 4, setting PARAM =1 causes SFLS to be a frictional stress limit.
-        For OPTION‌‌ = 6 or 8, PARAM is the critical distance, CCRIT, at which the interface failure is complete.
-        For OPTION = 7 or 10 PARAM is the friction angle in degrees.
-        For OPTION = 9 or 11, it is the exponent in the damage model. A positive value invokes the power law, while a negative one, the B-K model.
-        See MAT_138 for additional details. For OPTION = 13 or 14, it is the thickness of the tiebreak layer; a value greater than zero is recommended.
-        Default value is 1.0 for OPTIONs 9 and 11, but otherwise default value is 0.0
+    def param(self) -> float:
+        """Get or set the For OPTION = 2, setting PARAM = 1 causes the shell thickness offsets to be ignored.  For OPTION = 4, setting PARAM =1 causes SFLS to be a frictional stress limit.  For OPTION = 6 or 8, PARAM is the critical distance, CCRIT, at which the interface failure is complete.  For OPTION = 7 or 10, PARAM is the friction angle in degrees. For OPTION = 9 or 11, it is the exponent in the damage model. A positive value invokes the power law, while a negative one invokes, the B-K model. See *MAT_138 for additional details. For OPTION = 13 or 14, it is the thickness of the tiebreak layer; a value greater than zero is recommended. A negative sign in front of the thickness value invokes additional reading of Card4.2c. The default value is 1.0 for OPTIONs 9 and 11 and 0.0, otherwise.
         """ # nopep8
         return self._cards[3].get_value("param")
 
@@ -714,9 +718,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def eraten(self) -> typing.Optional[float]:
-        """Get or set the For OPTION = 7, ±9, 10, ±11 only.  Normal energy release rate (stress × length) used in damage calculation; see Lemmen and Meijer [2001].
-        For OPTION = -9 or -11, this is the ID of a load curve giving normal energy release rate as function of temperature;
-        it applies to the Mortar option only.
+        """Get or set the For OPTION = 7, �9, 10, �11 only.  Normal energy release rate (stress � length) used in the damage calculation; see Lemmen and Meijer [2001]. For OPTION = -9 or -11, this is the ID of a load curve giving normal energy release rate as a function of temperature; it applies to the Mortar option only.
         """ # nopep8
         return self._cards[3].get_value("eraten")
 
@@ -727,9 +729,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
 
     @property
     def erates(self) -> typing.Optional[float]:
-        """Get or set the For OPTION = 7, ±9, 10, ±11 only.  Shear energy release rate (stress × length) used in damage calculation; see Lemmen and Meijer [2001].
-        For OPTION = -9 or -11, this is the ID of a load curve giving shear energy release rate as function of temperature;
-        it applies to the Mortar option only..
+        """Get or set the For OPTION = 7, �9, 10, �11 only.  Shear energy release rate (stress � length) used in the damage calculation; see Lemmen and Meijer [2001]. For OPTION = -9 or -11, this is the ID of a load curve giving shear energy release rate as a function of temperature; it applies to the Mortar option only.
         """ # nopep8
         return self._cards[3].get_value("erates")
 
@@ -753,8 +753,7 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def cn(self) -> typing.Optional[float]:
         """Get or set the Normal stiffness (stress/length) for OPTION = 9, 11, 13, and 14 and for OPTION = 2, 4, 6, 7, and 8 for the MORTAR option only.
         If CN is not given explicitly, penalty stiffness divided by segment area is used (default).
-        This optional stiffness should be used with care, since contact stability can get affected.
-        A warning message with a recommended time step is given initially.
+        This optional stiffness should be used with care, since contact stability can be affected. A warning message with a recommended time step is given initially.
         """ # nopep8
         return self._cards[3].get_value("cn")
 
@@ -940,15 +939,26 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         self._cards[5].set_value("lcg2c", value)
 
     @property
+    def rfiltf(self) -> typing.Optional[float]:
+        """Get or set the All variables on this card are the same as in *MAT_240.
+        """ # nopep8
+        return self._cards[6].get_value("rfiltf")
+
+    @rfiltf.setter
+    def rfiltf(self, value: float) -> None:
+        """Set the rfiltf property."""
+        self._cards[6].set_value("rfiltf", value)
+
+    @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the ID keyword option
         """ # nopep8
-        return self._cards[6].cards[0].get_value("cid")
+        return self._cards[7].cards[0].get_value("cid")
 
     @cid.setter
     def cid(self, value: int) -> None:
         """Set the cid property."""
-        self._cards[6].cards[0].set_value("cid", value)
+        self._cards[7].cards[0].set_value("cid", value)
 
         if value:
             self.activate_option("CID")
@@ -957,12 +967,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def heading(self) -> typing.Optional[str]:
         """Get or set the Interface descriptor. We suggest using unique descriptions.
         """ # nopep8
-        return self._cards[6].cards[0].get_value("heading")
+        return self._cards[7].cards[0].get_value("heading")
 
     @heading.setter
     def heading(self, value: str) -> None:
         """Set the heading property."""
-        self._cards[6].cards[0].set_value("heading", value)
+        self._cards[7].cards[0].set_value("heading", value)
 
         if value:
             self.activate_option("HEADING")
@@ -971,12 +981,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def ignore(self) -> int:
         """Get or set the By setting this variable to 1, the "ignore initial penetrations" option is turned on for this contact.  Alternatively, this option may be turned on by setting IGNORE = 1 on Card 4 of *CONTROL_CONTACT or on Optional Card C of *CONTACT.  In other words, if IGNORE is set to 1 in any of three places, initial penetrations are tracked.
         """ # nopep8
-        return self._cards[7].cards[0].get_value("ignore")
+        return self._cards[8].cards[0].get_value("ignore")
 
     @ignore.setter
     def ignore(self, value: int) -> None:
         """Set the ignore property."""
-        self._cards[7].cards[0].set_value("ignore", value)
+        self._cards[8].cards[0].set_value("ignore", value)
 
         if value:
             self.activate_option("IGNORE")
@@ -985,12 +995,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def bckt(self) -> int:
         """Get or set the Bucket sort frequency. This parameter does not apply when SOFT = 2 on Optional Card A or to Mortar contacts. For these two exceptions, the BSORT option on Optional Card A applies instead.
         """ # nopep8
-        return self._cards[7].cards[0].get_value("bckt")
+        return self._cards[8].cards[0].get_value("bckt")
 
     @bckt.setter
     def bckt(self, value: int) -> None:
         """Set the bckt property."""
-        self._cards[7].cards[0].set_value("bckt", value)
+        self._cards[8].cards[0].set_value("bckt", value)
 
         if value:
             self.activate_option("BCKT")
@@ -999,12 +1009,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def lcbckt(self) -> typing.Optional[int]:
         """Get or set the Load curve for bucket sort frequency. This parameter does not apply when SOFT = 2 on Optional Card A or to Mortar contacts.  For the two exceptions, the negative BSORT option on Optional Card A applies instead.
         """ # nopep8
-        return self._cards[7].cards[0].get_value("lcbckt")
+        return self._cards[8].cards[0].get_value("lcbckt")
 
     @lcbckt.setter
     def lcbckt(self, value: int) -> None:
         """Set the lcbckt property."""
-        self._cards[7].cards[0].set_value("lcbckt", value)
+        self._cards[8].cards[0].set_value("lcbckt", value)
 
         if value:
             self.activate_option("LCBCKT")
@@ -1013,12 +1023,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def ns2trk(self) -> int:
         """Get or set the Number of potential contacts to track for each tracked node.  The normal input for this (DEPTH on Optional Card A) is ignored..
         """ # nopep8
-        return self._cards[7].cards[0].get_value("ns2trk")
+        return self._cards[8].cards[0].get_value("ns2trk")
 
     @ns2trk.setter
     def ns2trk(self, value: int) -> None:
         """Set the ns2trk property."""
-        self._cards[7].cards[0].set_value("ns2trk", value)
+        self._cards[8].cards[0].set_value("ns2trk", value)
 
         if value:
             self.activate_option("NS2TRK")
@@ -1027,12 +1037,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def inititr(self) -> int:
         """Get or set the Number of iterations to perform when trying to eliminate initial penetrations.  Note that an input of 0 means 0, not the default value (which is 2).  Leaving this field blank will set INITITR to 2.
         """ # nopep8
-        return self._cards[7].cards[0].get_value("inititr")
+        return self._cards[8].cards[0].get_value("inititr")
 
     @inititr.setter
     def inititr(self, value: int) -> None:
         """Set the inititr property."""
-        self._cards[7].cards[0].set_value("inititr", value)
+        self._cards[8].cards[0].set_value("inititr", value)
 
         if value:
             self.activate_option("INITITR")
@@ -1041,12 +1051,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def parmax(self) -> float:
         """Get or set the The parametric extension distance for contact segments.  The MAXPAR parameter on Optional Card A is not used for MPP.  For non-tied contacts, the default is 1.0005. For tied contacts the default is 1.035 and, the actual extension used is computed as follows: see the manual
         """ # nopep8
-        return self._cards[7].cards[0].get_value("parmax")
+        return self._cards[8].cards[0].get_value("parmax")
 
     @parmax.setter
     def parmax(self, value: float) -> None:
         """Set the parmax property."""
-        self._cards[7].cards[0].set_value("parmax", value)
+        self._cards[8].cards[0].set_value("parmax", value)
 
         if value:
             self.activate_option("PARMAX")
@@ -1064,14 +1074,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         OPT2.Flag to shift generated beam affecting only shell - edge - to - shell - edge treatment.See also SRNDE in Optional Card E.
         EQ.10:	Beam generated on exterior shell edge will be shifted into the shell by half the shell thickness.Therefore, the shell - edge - to - shell - edge contact starts right at the shell edge and not at an extension of the shell edge.
         """ # nopep8
-        return self._cards[7].cards[0].get_value("cparm8")
+        return self._cards[8].cards[0].get_value("cparm8")
 
     @cparm8.setter
     def cparm8(self, value: int) -> None:
         """Set the cparm8 property."""
         if value not in [0, 1, 2, 10, 11, 12]:
             raise Exception("""cparm8 must be one of {0,1,2,10,11,12}""")
-        self._cards[7].cards[0].set_value("cparm8", value)
+        self._cards[8].cards[0].set_value("cparm8", value)
 
         if value:
             self.activate_option("CPARM8")
@@ -1080,12 +1090,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def mpp2(self) -> bool:
         """Get or set the Flag whether this is the MPP card.
         """ # nopep8
-        return self._cards[7].cards[1].get_value("mpp2")
+        return self._cards[8].cards[1].get_value("mpp2")
 
     @mpp2.setter
     def mpp2(self, value: bool) -> None:
         """Set the mpp2 property."""
-        self._cards[7].cards[1].set_value("mpp2", value)
+        self._cards[8].cards[1].set_value("mpp2", value)
 
         if value:
             self.activate_option("MPP2")
@@ -1094,12 +1104,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def chksegs(self) -> int:
         """Get or set the If this value is non-zero, then for the node-to-surface and surface-to-surface contacts LS-DYNA performs a special check at time 0 for elements that are inverted (or nearly so), These elements are removed from contact.  These poorly formed elements have been known to occur on the tooling in metalforming problems, which allows these problems to run.  It should not normally be needed for reasonable meshes.
         """ # nopep8
-        return self._cards[7].cards[1].get_value("chksegs")
+        return self._cards[8].cards[1].get_value("chksegs")
 
     @chksegs.setter
     def chksegs(self, value: int) -> None:
         """Set the chksegs property."""
-        self._cards[7].cards[1].set_value("chksegs", value)
+        self._cards[8].cards[1].set_value("chksegs", value)
 
         if value:
             self.activate_option("CHKSEGS")
@@ -1108,12 +1118,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def pensf(self) -> float:
         """Get or set the This option is used together with IGNORE for 3D forging problems.  If non-zero, the IGNORE penetration distance is multiplied by this value each cycle, effectively pushing the tracked node back out to the surface.  This is useful for nodes that might get generated below the reference surface during 3D remeshing.  Care should be exercised, as energy may be generated and stability may be effected for values lower than 0.95.  A value in the range of 0.98 to 0.99 or higher (but < 1.0) is recommended
         """ # nopep8
-        return self._cards[7].cards[1].get_value("pensf")
+        return self._cards[8].cards[1].get_value("pensf")
 
     @pensf.setter
     def pensf(self, value: float) -> None:
         """Set the pensf property."""
-        self._cards[7].cards[1].set_value("pensf", value)
+        self._cards[8].cards[1].set_value("pensf", value)
 
         if value:
             self.activate_option("PENSF")
@@ -1122,12 +1132,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def grpable(self) -> int:
         """Get or set the Set to 1 to invoke an alternate MPP communication algorithm for various SINGLE_SURFACE (including AUTOMATIC_GEN-ERAL), NODES_TO_SURFACE, SURFACE_TO_SURFACE, ERODING and SOFT = 2 contacts.  This groupable algorithm does not support all contact options, including MORTAR. It is still under development.  It can be significantly faster and scale better than the normal algorithm when there are more than two or three applicable contact types defined in the model. It is intended for speeding up the contact processing without changing the behavior of the contact.  See also *CONTROL_MPP_-CONTACT_GROUPABLE.
         """ # nopep8
-        return self._cards[7].cards[1].get_value("grpable")
+        return self._cards[8].cards[1].get_value("grpable")
 
     @grpable.setter
     def grpable(self, value: int) -> None:
         """Set the grpable property."""
-        self._cards[7].cards[1].set_value("grpable", value)
+        self._cards[8].cards[1].set_value("grpable", value)
 
         if value:
             self.activate_option("GRPABLE")
@@ -1141,14 +1151,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.4: Constraint approach for FORMING contacts. This formulation only applies to one-way forming contacts. You should use it when the penalty formulations result in large penetrations. The results, however, are sensitive to damping.
         EQ.6:Special contact algorithm to handle sheet blank edge(deformable) to gage pin(rigid shell) contact during implicit gravity loading.This applies to * CONTACT_FORMING_NODES_TO_SURFACE only.See remarks under About SOFT = 6
         """ # nopep8
-        return self._cards[8].cards[0].get_value("soft")
+        return self._cards[9].cards[0].get_value("soft")
 
     @soft.setter
     def soft(self, value: int) -> None:
         """Set the soft property."""
         if value not in [0, 1, 2, 4, 6]:
             raise Exception("""soft must be one of {0,1,2,4,6}""")
-        self._cards[8].cards[0].set_value("soft", value)
+        self._cards[9].cards[0].set_value("soft", value)
 
         if value:
             self.activate_option("SOFT")
@@ -1157,12 +1167,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def sofscl(self) -> float:
         """Get or set the Scale factor for constraint forces of soft constraint option invoked with SOFT = 1(default=.10). Values greater than .5 for single surface contact and 1.0 for a one way treatment are inadmissible.
         """ # nopep8
-        return self._cards[8].cards[0].get_value("sofscl")
+        return self._cards[9].cards[0].get_value("sofscl")
 
     @sofscl.setter
     def sofscl(self, value: float) -> None:
         """Set the sofscl property."""
-        self._cards[8].cards[0].set_value("sofscl", value)
+        self._cards[9].cards[0].set_value("sofscl", value)
 
         if value:
             self.activate_option("SOFSCL")
@@ -1171,12 +1181,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def lcidab(self) -> int:
         """Get or set the Load curve ID defining airbag thickness as a function of time for type a13 contact (*CONTACT_AIRBAG_SINGLE_SURFACE).
         """ # nopep8
-        return self._cards[8].cards[0].get_value("lcidab")
+        return self._cards[9].cards[0].get_value("lcidab")
 
     @lcidab.setter
     def lcidab(self, value: int) -> None:
         """Set the lcidab property."""
-        self._cards[8].cards[0].set_value("lcidab", value)
+        self._cards[9].cards[0].set_value("lcidab", value)
 
         if value:
             self.activate_option("LCIDAB")
@@ -1185,12 +1195,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def maxpar(self) -> float:
         """Get or set the Maximum parametric coordinate in segment search (values 1.025 and 1.20 recommended). Larger values can increase cost. If zero, the default is set to 1.025. This factor allows an increase in the size of the segments . May be useful at sharp corners.
         """ # nopep8
-        return self._cards[8].cards[0].get_value("maxpar")
+        return self._cards[9].cards[0].get_value("maxpar")
 
     @maxpar.setter
     def maxpar(self, value: float) -> None:
         """Set the maxpar property."""
-        self._cards[8].cards[0].set_value("maxpar", value)
+        self._cards[9].cards[0].set_value("maxpar", value)
 
         if value:
             self.activate_option("MAXPAR")
@@ -1205,14 +1215,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.4: sliding option,
         EQ.5: do options 3 and 4.
         """ # nopep8
-        return self._cards[8].cards[0].get_value("sbopt")
+        return self._cards[9].cards[0].get_value("sbopt")
 
     @sbopt.setter
     def sbopt(self, value: int) -> None:
         """Set the sbopt property."""
         if value not in [2, 0, 1, 3, 4, 5]:
             raise Exception("""sbopt must be one of {2,0,1,3,4,5}""")
-        self._cards[8].cards[0].set_value("sbopt", value)
+        self._cards[9].cards[0].set_value("sbopt", value)
 
         if value:
             self.activate_option("SBOPT")
@@ -1222,12 +1232,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         """Get or set the Search depth in automatic contact. Value of 1 is sufficiently accurate for most crash applications and is much less expensive. LS-DYNA for improved accuracy sets this value to 2. If zero, the default is set to 2.
         LT.0: |DEPTH| is the load curve ID defining searching depth versus time.
         """ # nopep8
-        return self._cards[8].cards[0].get_value("depth")
+        return self._cards[9].cards[0].get_value("depth")
 
     @depth.setter
     def depth(self, value: int) -> None:
         """Set the depth property."""
-        self._cards[8].cards[0].set_value("depth", value)
+        self._cards[9].cards[0].set_value("depth", value)
 
         if value:
             self.activate_option("DEPTH")
@@ -1237,12 +1247,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         """Get or set the Number of cycles between bucket sorts.  Values of 25 and 100 are recommended for contact types 4 (SINGLE_SURFACE) and 13 (AUTOMATIC_SINGLE_SURFACE), respectively.  Values of 10-15 are okay for surface-to-surface and node-to-surface contact.  If zero, LS-DYNA determines the interval.  BSORT applies only to SMP (see BCKT on MPP 1 for MPP) except in the case of SOFT = 2 or for Mortar contact, in which case BSORT applies to both SMP and MPP. For Mortar contact the default is the value associated with NSBCS on *CONTROL_CONTACT.
         LT.0: |BSORT| is the load curve ID defining bucket sorting frequency as a function of time.
         """ # nopep8
-        return self._cards[8].cards[0].get_value("bsort")
+        return self._cards[9].cards[0].get_value("bsort")
 
     @bsort.setter
     def bsort(self, value: int) -> None:
         """Set the bsort property."""
-        self._cards[8].cards[0].set_value("bsort", value)
+        self._cards[9].cards[0].set_value("bsort", value)
 
         if value:
             self.activate_option("BSORT")
@@ -1252,12 +1262,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         """Get or set the Number of cycles between contact force updates for penalty contact formulations. This option can provide a significant speed-up of the contact treatment. If used, values exceeding 3 or 4 are dangerous. Considerable care must be exercised when using this option, as this option assumes that contact does not change FRCFRG cycles.
         EQ.0: FRCFRG is set to 1 and force calculations are performed each cycle-strongly recommended.
         """ # nopep8
-        return self._cards[8].cards[0].get_value("frcfrq")
+        return self._cards[9].cards[0].get_value("frcfrq")
 
     @frcfrq.setter
     def frcfrq(self, value: int) -> None:
         """Set the frcfrq property."""
-        self._cards[8].cards[0].set_value("frcfrq", value)
+        self._cards[9].cards[0].set_value("frcfrq", value)
 
         if value:
             self.activate_option("FRCFRQ")
@@ -1269,12 +1279,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.0.0 for contact types a 3, a 5, a10, 13, and 15: Default is 0.4, or 40 percent of the segment thickness
         EQ.0.0 for contact type26: Default is 200.0 times the segment thickness
         """ # nopep8
-        return self._cards[9].cards[0].get_value("penmax")
+        return self._cards[10].cards[0].get_value("penmax")
 
     @penmax.setter
     def penmax(self, value: float) -> None:
         """Set the penmax property."""
-        self._cards[9].cards[0].set_value("penmax", value)
+        self._cards[10].cards[0].set_value("penmax", value)
 
         if value:
             self.activate_option("PENMAX")
@@ -1286,14 +1296,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.1: thickness offsets are included,
         EQ.2: thickness offsets are not included (old way).
         """ # nopep8
-        return self._cards[9].cards[0].get_value("thkopt")
+        return self._cards[10].cards[0].get_value("thkopt")
 
     @thkopt.setter
     def thkopt(self, value: int) -> None:
         """Set the thkopt property."""
         if value not in [0, 1, 2]:
             raise Exception("""thkopt must be one of {0,1,2}""")
-        self._cards[9].cards[0].set_value("thkopt", value)
+        self._cards[10].cards[0].set_value("thkopt", value)
 
         if value:
             self.activate_option("THKOPT")
@@ -1305,14 +1315,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.1: thickness is considered but rigid bodies are excluded,
         EQ.2: thickness is considered including rigid bodies.
         """ # nopep8
-        return self._cards[9].cards[0].get_value("shlthk")
+        return self._cards[10].cards[0].get_value("shlthk")
 
     @shlthk.setter
     def shlthk(self, value: int) -> None:
         """Set the shlthk property."""
         if value not in [0, 1, 2]:
             raise Exception("""shlthk must be one of {0,1,2}""")
-        self._cards[9].cards[0].set_value("shlthk", value)
+        self._cards[10].cards[0].set_value("shlthk", value)
 
         if value:
             self.activate_option("SHLTHK")
@@ -1323,14 +1333,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.0: logic is enabled (default),
         EQ.1: logic is skipped (sometimes recommended for metalforming calculations).
         """ # nopep8
-        return self._cards[9].cards[0].get_value("snlog")
+        return self._cards[10].cards[0].get_value("snlog")
 
     @snlog.setter
     def snlog(self, value: int) -> None:
         """Set the snlog property."""
         if value not in [0, 1]:
             raise Exception("""snlog must be one of {0,1}""")
-        self._cards[9].cards[0].set_value("snlog", value)
+        self._cards[10].cards[0].set_value("snlog", value)
 
         if value:
             self.activate_option("SNLOG")
@@ -1342,14 +1352,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.1: do not include faces with normal boundary constraints (e.g., segments of brick elements on a symmetry plane).
         This option is important to retain the correct boundary conditions in the model with symmetry. For the _ERODING_ contacts this option may also be defined on card 4.
         """ # nopep8
-        return self._cards[9].cards[0].get_value("isym")
+        return self._cards[10].cards[0].get_value("isym")
 
     @isym.setter
     def isym(self, value: int) -> None:
         """Set the isym property."""
         if value not in [0, 1]:
             raise Exception("""isym must be one of {0,1}""")
-        self._cards[9].cards[0].set_value("isym", value)
+        self._cards[10].cards[0].set_value("isym", value)
 
         if value:
             self.activate_option("ISYM")
@@ -1360,14 +1370,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.0: search 2D elements (shells) before 3D elements (solids, thick shells) when locating segments.
         EQ.1: search 3D (solids, thick shells) elements before 2D elements (shells) when locating segments.
         """ # nopep8
-        return self._cards[9].cards[0].get_value("i2d3d")
+        return self._cards[10].cards[0].get_value("i2d3d")
 
     @i2d3d.setter
     def i2d3d(self, value: int) -> None:
         """Set the i2d3d property."""
         if value not in [0, 1]:
             raise Exception("""i2d3d must be one of {0,1}""")
-        self._cards[9].cards[0].set_value("i2d3d", value)
+        self._cards[10].cards[0].set_value("i2d3d", value)
 
         if value:
             self.activate_option("I2D3D")
@@ -1376,12 +1386,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def sldthk(self) -> float:
         """Get or set the Optional solid element thickness. A nonzero positive value will activate the contact thickness offsets in the contact algorithms where offsets apply. The contact treatment with then be equivalent to the case where null shell elements are used to cover the brick elements. The contact stiffness parameter below, SLDSTF, may also be used to override the default value.
         """ # nopep8
-        return self._cards[9].cards[0].get_value("sldthk")
+        return self._cards[10].cards[0].get_value("sldthk")
 
     @sldthk.setter
     def sldthk(self, value: float) -> None:
         """Set the sldthk property."""
-        self._cards[9].cards[0].set_value("sldthk", value)
+        self._cards[10].cards[0].set_value("sldthk", value)
 
         if value:
             self.activate_option("SLDTHK")
@@ -1390,12 +1400,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def sldstf(self) -> float:
         """Get or set the Optional solid element stiffness. A nonzero positive value overrides the bulk modulus taken from the material model referenced by the solid element.
         """ # nopep8
-        return self._cards[9].cards[0].get_value("sldstf")
+        return self._cards[10].cards[0].get_value("sldstf")
 
     @sldstf.setter
     def sldstf(self, value: float) -> None:
         """Set the sldstf property."""
-        self._cards[9].cards[0].set_value("sldstf", value)
+        self._cards[10].cards[0].set_value("sldstf", value)
 
         if value:
             self.activate_option("SLDSTF")
@@ -1412,12 +1422,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.2: Do not apply method
         GT.2: Set IGAP = 1 for first IGAP-2 converged equilibrium states,
         """ # nopep8
-        return self._cards[10].cards[0].get_value("igap")
+        return self._cards[11].cards[0].get_value("igap")
 
     @igap.setter
     def igap(self, value: int) -> None:
         """Set the igap property."""
-        self._cards[10].cards[0].set_value("igap", value)
+        self._cards[11].cards[0].set_value("igap", value)
 
         if value:
             self.activate_option("IGAP")
@@ -1432,12 +1442,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.3 : Applies only to the Mortar contact.With this option initial penetrations are eliminated between time zero and the time specified by MPAR1.Intended for small initial penetrations.See Remark 14 in the General Remarks section.
         EQ.4 : Applies only to the Mortar contact.With this option initial penetrations are eliminated between time zero and the time specified by MPAR1.In addition, a maximum penetration distance can be given as MPAR2, intended for large initial penetrations.See Remark 14 in the General Remarks section.
         """ # nopep8
-        return self._cards[10].cards[0].get_value("ignore")
+        return self._cards[11].cards[0].get_value("ignore")
 
     @ignore.setter
     def ignore(self, value: int) -> None:
         """Set the ignore property."""
-        self._cards[10].cards[0].set_value("ignore", value)
+        self._cards[11].cards[0].set_value("ignore", value)
 
         if value:
             self.activate_option("IGNORE")
@@ -1450,12 +1460,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         LT.0.0:|DPRFAC| is the load curve ID defining DPRFAC versus time.
         For the mortar conatact MPAR1 corresponds to initial contact pressure in interfaces with initial penetrations if IGNORE=2, for IGNORE=3,4 it corresponds to the time of closure of initial penetrations.
         """ # nopep8
-        return self._cards[10].cards[0].get_value("dprfac")
+        return self._cards[11].cards[0].get_value("dprfac")
 
     @dprfac.setter
     def dprfac(self, value: float) -> None:
         """Set the dprfac property."""
-        self._cards[10].cards[0].set_value("dprfac", value)
+        self._cards[11].cards[0].set_value("dprfac", value)
 
         if value:
             self.activate_option("DPRFAC")
@@ -1469,12 +1479,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         LT.-1.0: |DTSTIF| is the load curve ID defining DTSTIF versus time.
         For the mortar contact and IGNORE=4, MPAR2 corresponds a penetration depth that must be at least the penetration occurring in the contact interface.
         """ # nopep8
-        return self._cards[10].cards[0].get_value("dtstif")
+        return self._cards[11].cards[0].get_value("dtstif")
 
     @dtstif.setter
     def dtstif(self, value: float) -> None:
         """Set the dtstif property."""
-        self._cards[10].cards[0].set_value("dtstif", value)
+        self._cards[11].cards[0].set_value("dtstif", value)
 
         if value:
             self.activate_option("DTSTIF")
@@ -1485,12 +1495,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.0.0: Use the default penalty stiffness.
         GT.0.0: Scale the stiffness by EDGEK.
         """ # nopep8
-        return self._cards[10].cards[0].get_value("edgek")
+        return self._cards[11].cards[0].get_value("edgek")
 
     @edgek.setter
     def edgek(self, value: float) -> None:
         """Set the edgek property."""
-        self._cards[10].cards[0].set_value("edgek", value)
+        self._cards[11].cards[0].set_value("edgek", value)
 
         if value:
             self.activate_option("EDGEK")
@@ -1501,12 +1511,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.0.0:No feature line is considered for surface fitting in smooth contact.
         GT.0.0:Any edge with angle between two contact segments bigger than this angle will be treated as feature line during surface fitting in smooth contact.
         """ # nopep8
-        return self._cards[10].cards[0].get_value("flangl")
+        return self._cards[11].cards[0].get_value("flangl")
 
     @flangl.setter
     def flangl(self, value: float) -> None:
         """Set the flangl property."""
-        self._cards[10].cards[0].set_value("flangl", value)
+        self._cards[11].cards[0].set_value("flangl", value)
 
         if value:
             self.activate_option("FLANGL")
@@ -1515,12 +1525,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def cid_rcf(self) -> typing.Optional[int]:
         """Get or set the Coordinate system ID to output RCFORC force resultants in a local system.
         """ # nopep8
-        return self._cards[10].cards[0].get_value("cid_rcf")
+        return self._cards[11].cards[0].get_value("cid_rcf")
 
     @cid_rcf.setter
     def cid_rcf(self, value: int) -> None:
         """Set the cid_rcf property."""
-        self._cards[10].cards[0].set_value("cid_rcf", value)
+        self._cards[11].cards[0].set_value("cid_rcf", value)
 
         if value:
             self.activate_option("CID_RCF")
@@ -1534,14 +1544,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.3:On for all shell segments.
         EQ.4:On for all shell segments of material type 34.
         """ # nopep8
-        return self._cards[11].cards[0].get_value("q2tri")
+        return self._cards[12].cards[0].get_value("q2tri")
 
     @q2tri.setter
     def q2tri(self, value: int) -> None:
         """Set the q2tri property."""
         if value not in [0, 1, 2, 3, 4]:
             raise Exception("""q2tri must be one of {0,1,2,3,4}""")
-        self._cards[11].cards[0].set_value("q2tri", value)
+        self._cards[12].cards[0].set_value("q2tri", value)
 
         if value:
             self.activate_option("Q2TRI")
@@ -1553,12 +1563,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         GT.0.0:  Check and report segment penetrations at time intervals equal to DTPCHK.
         LT.0.0:Check and report segment penetrations at time intervals equal to |DTPCHK|. In addition, calculation stops with an error at t=0 if any intersections are initially present
         """ # nopep8
-        return self._cards[11].cards[0].get_value("dtpchk")
+        return self._cards[12].cards[0].get_value("dtpchk")
 
     @dtpchk.setter
     def dtpchk(self, value: float) -> None:
         """Set the dtpchk property."""
-        self._cards[11].cards[0].set_value("dtpchk", value)
+        self._cards[12].cards[0].set_value("dtpchk", value)
 
         if value:
             self.activate_option("DTPCHK")
@@ -1569,12 +1579,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.0.0:Off (default).
         GT.0.0:  Check neighbor segments for contact
         """ # nopep8
-        return self._cards[11].cards[0].get_value("sfnbr")
+        return self._cards[12].cards[0].get_value("sfnbr")
 
     @sfnbr.setter
     def sfnbr(self, value: float) -> None:
         """Set the sfnbr property."""
-        self._cards[11].cards[0].set_value("sfnbr", value)
+        self._cards[12].cards[0].set_value("sfnbr", value)
 
         if value:
             self.activate_option("SFNBR")
@@ -1583,12 +1593,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def fnlscl(self) -> float:
         """Get or set the Scale factor for nonlinear force scaling
         """ # nopep8
-        return self._cards[11].cards[0].get_value("fnlscl")
+        return self._cards[12].cards[0].get_value("fnlscl")
 
     @fnlscl.setter
     def fnlscl(self, value: float) -> None:
         """Set the fnlscl property."""
-        self._cards[11].cards[0].set_value("fnlscl", value)
+        self._cards[12].cards[0].set_value("fnlscl", value)
 
         if value:
             self.activate_option("FNLSCL")
@@ -1597,12 +1607,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def dnlscl(self) -> float:
         """Get or set the Distance for nonlinear force scaling
         """ # nopep8
-        return self._cards[11].cards[0].get_value("dnlscl")
+        return self._cards[12].cards[0].get_value("dnlscl")
 
     @dnlscl.setter
     def dnlscl(self, value: float) -> None:
         """Set the dnlscl property."""
-        self._cards[11].cards[0].set_value("dnlscl", value)
+        self._cards[12].cards[0].set_value("dnlscl", value)
 
         if value:
             self.activate_option("DNLSCL")
@@ -1614,14 +1624,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.0: Off (default).
         EQ.1: Only consider segments in the contact definition
         """ # nopep8
-        return self._cards[11].cards[0].get_value("tcso")
+        return self._cards[12].cards[0].get_value("tcso")
 
     @tcso.setter
     def tcso(self, value: int) -> None:
         """Set the tcso property."""
         if value not in [0, 1]:
             raise Exception("""tcso must be one of {0,1}""")
-        self._cards[11].cards[0].set_value("tcso", value)
+        self._cards[12].cards[0].set_value("tcso", value)
 
         if value:
             self.activate_option("TCSO")
@@ -1631,14 +1641,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         """Get or set the Incremental displacement update for tied contacts.EQ.0:  Off (default).
         EQ.1:  On.
         """ # nopep8
-        return self._cards[11].cards[0].get_value("tiedid")
+        return self._cards[12].cards[0].get_value("tiedid")
 
     @tiedid.setter
     def tiedid(self, value: int) -> None:
         """Set the tiedid property."""
         if value not in [0, 1]:
             raise Exception("""tiedid must be one of {0,1}""")
-        self._cards[11].cards[0].set_value("tiedid", value)
+        self._cards[12].cards[0].set_value("tiedid", value)
 
         if value:
             self.activate_option("TIEDID")
@@ -1650,14 +1660,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.1 : Shell edges are assumed to be square and are flush with the nodes.
         EQ.2 : Shell edges are assumed to be round with a radius equal to half the shell thickness.The edge centers lie on the lines between the segment nodes and extend outward by the radius.This option is not available for DEPTH values of 23, 33, or 35.
         """ # nopep8
-        return self._cards[11].cards[0].get_value("shledg")
+        return self._cards[12].cards[0].get_value("shledg")
 
     @shledg.setter
     def shledg(self, value: int) -> None:
         """Set the shledg property."""
         if value not in [0, 1, 2]:
             raise Exception("""shledg must be one of {0,1,2}""")
-        self._cards[11].cards[0].set_value("shledg", value)
+        self._cards[12].cards[0].set_value("shledg", value)
 
         if value:
             self.activate_option("SHLEDG")
@@ -1668,14 +1678,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.0: Segments that share constraints not checked for contact.
         EQ.1: Segments that share constraints are checked for contact.
         """ # nopep8
-        return self._cards[12].cards[0].get_value("sharec")
+        return self._cards[13].cards[0].get_value("sharec")
 
     @sharec.setter
     def sharec(self, value: int) -> None:
         """Set the sharec property."""
         if value not in [0, 1]:
             raise Exception("""sharec must be one of {0,1}""")
-        self._cards[12].cards[0].set_value("sharec", value)
+        self._cards[13].cards[0].set_value("sharec", value)
 
         if value:
             self.activate_option("SHAREC")
@@ -1686,14 +1696,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.0:Spot weld(type 9) beams are not considered in the contact even if included in SURFA
         EQ.2:Spot weld(type 9) beams are considered in the contact if included in SURFA
         """ # nopep8
-        return self._cards[12].cards[0].get_value("cparm8")
+        return self._cards[13].cards[0].get_value("cparm8")
 
     @cparm8.setter
     def cparm8(self, value: int) -> None:
         """Set the cparm8 property."""
         if value not in [0, 2]:
             raise Exception("""cparm8 must be one of {0,2}""")
-        self._cards[12].cards[0].set_value("cparm8", value)
+        self._cards[13].cards[0].set_value("cparm8", value)
 
         if value:
             self.activate_option("CPARM8")
@@ -1703,12 +1713,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         """Get or set the If set to a nonzero value, creates a  backup  penalty tied contact for this
         interface. This option applies to constrained tied contacts only. See Remark 2.
         """ # nopep8
-        return self._cards[12].cards[0].get_value("ipback")
+        return self._cards[13].cards[0].get_value("ipback")
 
     @ipback.setter
     def ipback(self, value: int) -> None:
         """Set the ipback property."""
-        self._cards[12].cards[0].set_value("ipback", value)
+        self._cards[13].cards[0].set_value("ipback", value)
 
         if value:
             self.activate_option("IPBACK")
@@ -1719,12 +1729,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.0: free edges have their usual treatement
         EQ.1: free edges are rounded, but without extending them.
         """ # nopep8
-        return self._cards[12].cards[0].get_value("srnde")
+        return self._cards[13].cards[0].get_value("srnde")
 
     @srnde.setter
     def srnde(self, value: int) -> None:
         """Set the srnde property."""
-        self._cards[12].cards[0].set_value("srnde", value)
+        self._cards[13].cards[0].set_value("srnde", value)
 
         if value:
             self.activate_option("SRNDE")
@@ -1733,12 +1743,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def fricsf(self) -> float:
         """Get or set the Scale factor for frictional stiffness (available for SOFT = 2 only).
         """ # nopep8
-        return self._cards[12].cards[0].get_value("fricsf")
+        return self._cards[13].cards[0].get_value("fricsf")
 
     @fricsf.setter
     def fricsf(self, value: float) -> None:
         """Set the fricsf property."""
-        self._cards[12].cards[0].set_value("fricsf", value)
+        self._cards[13].cards[0].set_value("fricsf", value)
 
         if value:
             self.activate_option("FRICSF")
@@ -1750,12 +1760,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         to AUTOMATIC_NODES_TO_SURFACE, AUTOMATIC_SURFACE_TO_SURFACE and AUTOMATIC_SINGLE_SURFACE.
         When SOFT = 2, it applies to all available keywords.
         """ # nopep8
-        return self._cards[12].cards[0].get_value("icor")
+        return self._cards[13].cards[0].get_value("icor")
 
     @icor.setter
     def icor(self, value: int) -> None:
         """Set the icor property."""
-        self._cards[12].cards[0].set_value("icor", value)
+        self._cards[13].cards[0].set_value("icor", value)
 
         if value:
             self.activate_option("ICOR")
@@ -1766,12 +1776,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         of contact type AUTOMATIC_GENERAL, which balances the
         torque produced due to friction. This is currently only available in the MPP version.
         """ # nopep8
-        return self._cards[12].cards[0].get_value("ftorq")
+        return self._cards[13].cards[0].get_value("ftorq")
 
     @ftorq.setter
     def ftorq(self, value: int) -> None:
         """Set the ftorq property."""
-        self._cards[12].cards[0].set_value("ftorq", value)
+        self._cards[13].cards[0].set_value("ftorq", value)
 
         if value:
             self.activate_option("FTORQ")
@@ -1781,12 +1791,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         """Get or set the The ID of a *DEFINE_REGION which will delimit the volume of
         space where this contact is active. See Remark 4 below.
         """ # nopep8
-        return self._cards[12].cards[0].get_value("region")
+        return self._cards[13].cards[0].get_value("region")
 
     @region.setter
     def region(self, value: int) -> None:
         """Set the region property."""
-        self._cards[12].cards[0].set_value("region", value)
+        self._cards[13].cards[0].set_value("region", value)
 
         if value:
             self.activate_option("REGION")
@@ -1798,14 +1808,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.1: Based on nodal masses
         EQ.2: Based on material density and segment dimensions.
         """ # nopep8
-        return self._cards[13].cards[0].get_value("pstiff")
+        return self._cards[14].cards[0].get_value("pstiff")
 
     @pstiff.setter
     def pstiff(self, value: int) -> None:
         """Set the pstiff property."""
         if value not in [0, 1, 2]:
             raise Exception("""pstiff must be one of {0,1,2}""")
-        self._cards[13].cards[0].set_value("pstiff", value)
+        self._cards[14].cards[0].set_value("pstiff", value)
 
         if value:
             self.activate_option("PSTIFF")
@@ -1819,14 +1829,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.2: Ignore the SURFA side thickness.
         EQ.3: Ignore the thickness of both sides..
         """ # nopep8
-        return self._cards[13].cards[0].get_value("ignroff")
+        return self._cards[14].cards[0].get_value("ignroff")
 
     @ignroff.setter
     def ignroff(self, value: int) -> None:
         """Set the ignroff property."""
         if value not in [0, 1, 2, 3]:
             raise Exception("""ignroff must be one of {0,1,2,3}""")
-        self._cards[13].cards[0].set_value("ignroff", value)
+        self._cards[14].cards[0].set_value("ignroff", value)
 
         if value:
             self.activate_option("IGNROFF")
@@ -1835,12 +1845,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def fstol(self) -> float:
         """Get or set the Tolerance used with the SMOOTH option for determining which segments are considered flat.  The value is in degrees and approximately represents half the angle between adjacent segments
         """ # nopep8
-        return self._cards[13].cards[0].get_value("fstol")
+        return self._cards[14].cards[0].get_value("fstol")
 
     @fstol.setter
     def fstol(self, value: float) -> None:
         """Set the fstol property."""
-        self._cards[13].cards[0].set_value("fstol", value)
+        self._cards[14].cards[0].set_value("fstol", value)
 
         if value:
             self.activate_option("FSTOL")
@@ -1851,14 +1861,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.0:No 2D belt initially inside a retractor is involved.
         EQ.1 : 2D belts initially inside retractors are involved
         """ # nopep8
-        return self._cards[13].cards[0].get_value("_2dbinr")
+        return self._cards[14].cards[0].get_value("_2dbinr")
 
     @_2dbinr.setter
     def _2dbinr(self, value: int) -> None:
         """Set the _2dbinr property."""
         if value not in [0, 1]:
             raise Exception("""_2dbinr must be one of {0,1}""")
-        self._cards[13].cards[0].set_value("_2dbinr", value)
+        self._cards[14].cards[0].set_value("_2dbinr", value)
 
         if value:
             self.activate_option("_2DBINR")
@@ -1869,14 +1879,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.0:Use SSF from the tracked segment as determined by the SOFT = 2 algorithm (see Remark 2)
         EQ.1 : Use the larger of the SSF values.
         """ # nopep8
-        return self._cards[13].cards[0].get_value("ssftyp")
+        return self._cards[14].cards[0].get_value("ssftyp")
 
     @ssftyp.setter
     def ssftyp(self, value: int) -> None:
         """Set the ssftyp property."""
         if value not in [0, 1]:
             raise Exception("""ssftyp must be one of {0,1}""")
-        self._cards[13].cards[0].set_value("ssftyp", value)
+        self._cards[14].cards[0].set_value("ssftyp", value)
 
         if value:
             self.activate_option("SSFTYP")
@@ -1887,14 +1897,14 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.0:Use full thickness constant segments.
         EQ.1 : Use tapered segments.
         """ # nopep8
-        return self._cards[13].cards[0].get_value("swtpr")
+        return self._cards[14].cards[0].get_value("swtpr")
 
     @swtpr.setter
     def swtpr(self, value: int) -> None:
         """Set the swtpr property."""
         if value not in [0, 1]:
             raise Exception("""swtpr must be one of {0,1}""")
-        self._cards[13].cards[0].set_value("swtpr", value)
+        self._cards[14].cards[0].set_value("swtpr", value)
 
         if value:
             self.activate_option("SWTPR")
@@ -1903,12 +1913,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
     def tetfac(self) -> float:
         """Get or set the Scale factor for the computed volume of tetrahedral solid elements for the mass calculation in SOFT=2 contact. By default, half the mass of a solid element is considered for the contact segment, which is reasonable for hexahedrons. In contrast, for tetrahedrons, a larger value than 0.5 would be preferrable, because several tets fit into one hex. Therefore, a TETFAC value around 3.0 to 5.0 should make the contact stiffness more comparable with hex meshes.
         """ # nopep8
-        return self._cards[13].cards[0].get_value("tetfac")
+        return self._cards[14].cards[0].get_value("tetfac")
 
     @tetfac.setter
     def tetfac(self, value: float) -> None:
         """Set the tetfac property."""
-        self._cards[13].cards[0].set_value("tetfac", value)
+        self._cards[14].cards[0].set_value("tetfac", value)
 
         if value:
             self.activate_option("TETFAC")
@@ -1919,12 +1929,12 @@ class ContactAutomaticSingleSurfaceTiebreak(KeywordBase):
         EQ.0: The setting of CNTO on *CONTROL_SHELL determines the contact reference plane.
         EQ.1:The contact reference plance coincides with shell reference surface.
         """ # nopep8
-        return self._cards[14].cards[0].get_value("shloff")
+        return self._cards[15].cards[0].get_value("shloff")
 
     @shloff.setter
     def shloff(self, value: float) -> None:
         """Set the shloff property."""
-        self._cards[14].cards[0].set_value("shloff", value)
+        self._cards[15].cards[0].set_value("shloff", value)
 
         if value:
             self.activate_option("SHLOFF")

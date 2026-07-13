@@ -100,7 +100,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
         curve in XYZ format. Blank geometry is located to the left side of the
         looped curve, as shown in Remarks below.
         EQ.2: consecutive position coordinates of blank boundary loop in
-        XYZ format. Blank geometry is located to the right side of the looped	curve, as shown in Remarks below.
+        XYZ format. Blank geometry is located to the right side of the looped curve, as shown in Remarks below.
         """ # nopep8
         return self._cards[0].get_value("ioption")
 
@@ -115,7 +115,7 @@ class InterfaceBlanksizeDevelopment(KeywordBase):
     def iadapt(self) -> typing.Optional[int]:
         """Get or set the Adaptive mesh control flag. If IADAPT=1, number of elements between
         initial (FILENAME2) and simulated blank (FILENAME3) meshes can be
-        different, avoiding using sheet blank from the file �adapt.msh (set IOFLAG=1 in *CONTROL_ADAPTIVE) for the initial blank mesh.
+        different, avoiding using sheet blank from the file adapt.msh (set IOFLAG=1 in *CONTROL_ADAPTIVE) for the initial blank mesh.
         """ # nopep8
         return self._cards[0].get_value("iadapt")
 

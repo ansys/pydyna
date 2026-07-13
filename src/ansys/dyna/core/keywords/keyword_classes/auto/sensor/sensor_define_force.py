@@ -35,6 +35,7 @@ _SENSORDEFINEFORCE_CARD0 = (
     FieldSchema("typeid", int, 20, 10, None),
     FieldSchema("vid", str, 30, 10, None),
     FieldSchema("crd", int, 40, 10, None),
+    FieldSchema("cpmpid", int, 50, 10, None),
 )
 
 _SENSORDEFINEFORCE_OPTION0_CARD0 = (
@@ -52,6 +53,7 @@ class SensorDefineForce(KeywordBase):
     _link_fields = {
         "vid": LinkType.DEFINE_COORDINATE_SYSTEM,
         "crd": LinkType.DEFINE_COORDINATE_SYSTEM,
+        "cpmpid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -94,13 +96,13 @@ class SensorDefineForce(KeywordBase):
     @ftype.setter
     def ftype(self, value: str) -> None:
         """Set the ftype property."""
-        if value not in ["AIRBAG", "CONTACT", "CONTACT2D", "CPM", "JOINT", "JOINTSTIF", "PRESC-MOT", "RWALL", "SPC", "SPOTWELD", "XSECTION", None]:
-            raise Exception("""ftype must be `None` or one of {"AIRBAG","CONTACT","CONTACT2D","CPM","JOINT","JOINTSTIF","PRESC-MOT","RWALL","SPC","SPOTWELD","XSECTION"}.""")
+        if value not in ["AIRBAG", "CONTACT", "CONTACT2D", "CPM", "JOINT", "JOINTSTIF", "PRESC-MOT", "RWALL", "SPC", "SPOTWELD", "X-SECTION", None]:
+            raise Exception("""ftype must be `None` or one of {"AIRBAG","CONTACT","CONTACT2D","CPM","JOINT","JOINTSTIF","PRESC-MOT","RWALL","SPC","SPOTWELD","X-SECTION"}.""")
         self._cards[0].set_value("ftype", value)
 
     @property
     def typeid(self) -> typing.Optional[int]:
-        """Get or set the ID defined in the associated KEYWORD command
+        """Get or set the ID defined in the associated keyword command
         """ # nopep8
         return self._cards[0].get_value("typeid")
 
@@ -112,21 +114,21 @@ class SensorDefineForce(KeywordBase):
     @property
     def vid(self) -> typing.Optional[str]:
         """Get or set the Vector along which the forces is measured.
-        EQ.X:x-direction in coordinate system CRD.
-        EQ.Y:y-direction in coordinate system CRD.
-        EQ.Z:z-direction in coordinate system CRD.
-        EQ.XL:	x-direction in the local coordinate system, in JOINTSTIF only.
-        EQ.YL:	y - direction in the local coordinate system, in JOINTSTIF only.
-        EQ.ZL : z - direction in the local coordinate system, in JOINTSTIF only.
-        EQ.M: Force magnitude.
-        EQ.XMOMENT:	x-direction moment for JOINT.
-        EQ.YMOMENT:	y-direction moment for JOINT.
-        EQ.ZMOMENT:	z-direction moment for JOINT.
-        EQ.XLMOMENT:	x-direction moment for the local coordinate system, in JOINTSTIF only.
-        EQ.YLMOMENT:	y - direction moment for the local coordinate system, in JOINTSTIF only.
-        EQ.ZLMOMENT : z - direction moment for the local coordinate system, in JOINTSTIF only.
-        EQ.MMOMENT: Moment magnitude for JOINT, JOINTSTIF, PRESC-MOT or SPC.
-        EQ.n:		Vector ID n in coordinate system CRD.
+        EQ.X: x - direction in coordinate system CRD
+        EQ.Y: y - direction in coordinate system CRD
+        EQ.Z: z - direction in coordinate system CRD
+        EQ.XL: x - direction in the local coordinate system for JOINTSTIF only
+        EQ.YL: y - direction in the local coordinate system for JOINTSTIF only
+        EQ.ZL: z - direction in the local coordinate system for JOINTSTIF only
+        EQ.M: Force magnitude
+        EQ.XMOMENT: x - direction moment for JOINT, JOINTSTIF, PRESC - MOT, SPC or X - SECTION
+        EQ.YMOMENT: y - direction moment for JOINT, JOINTSTIF, PRESC - MOT, SPC or X - SECTION
+        EQ.ZMOMENT: z - direction moment for JOINT, JOINTSTIF, PRESC - MOT, SPC or X - SECTION
+        EQ.XLMOMENT: x - direction moment in the local coordinate system for JOINTSTIF only
+        EQ.YLMOMENT: y - direction moment in the local coordinate system for JOINTSTIF only
+        EQ.ZLMOMENT: z - direction moment in the local coordinate system for JOINTSTIF only
+        EQ.MMOMENT: Moment magnitude for JOINT, JOINTSTIF, PRESC - MOT or SPC
+        VID {INT}: Vector ID n in coordinate system CRD
         """ # nopep8
         return self._cards[0].get_value("vid")
 
@@ -145,6 +147,17 @@ class SensorDefineForce(KeywordBase):
     def crd(self, value: int) -> None:
         """Set the crd property."""
         self._cards[0].set_value("crd", value)
+
+    @property
+    def cpmpid(self) -> typing.Optional[int]:
+        """Get or set the Part ID of a CPM airbag (see *AIRBAG_PARTICLE). This field is optional and is ignored unless FTYPE = CPM.  If it is unset, the sensor returns airbag pressure. If a part ID is provided, the sensor returns the part pressure.
+        """ # nopep8
+        return self._cards[0].get_value("cpmpid")
+
+    @cpmpid.setter
+    def cpmpid(self, value: int) -> None:
+        """Set the cpmpid property."""
+        self._cards[0].set_value("cpmpid", value)
 
     @property
     def title(self) -> typing.Optional[str]:
@@ -189,4 +202,9 @@ class SensorDefineForce(KeywordBase):
     def crd_link(self, value: DefineCoordinateSystem) -> None:
         """Set the DefineCoordinateSystem object for crd."""
         self.crd = value.cid
+
+    @property
+    def cpmpid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given cpmpid."""
+        return self._get_link_by_attr("PART", "pid", self.cpmpid, "parts")
 

@@ -114,7 +114,7 @@ class LoadSeismicSsiAuxId(KeywordBase):
 
     @property
     def gmset(self) -> typing.Optional[int]:
-        """Get or set the Identifier for set of recorded motions; see *INTERFACE_SSI_AUX or *INTERFACE_SSI_AUX_?EMBEDDED
+        """Get or set the Identifier for set of recorded motions; see *INTERFACE_SSI_AUX or *INTERFACE_SSI_AUX_  EMBEDDED
         """ # nopep8
         return self._cards[2].get_value("gmset")
 

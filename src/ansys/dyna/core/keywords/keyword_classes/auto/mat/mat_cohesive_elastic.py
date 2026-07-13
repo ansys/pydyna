@@ -96,8 +96,8 @@ class MatCohesiveElastic(KeywordBase):
     @property
     def roflg(self) -> int:
         """Get or set the Flag stating whether density is specified per unit area or volume:
-        EQ.0:	Specified density is per unit volume(default).
-        EQ.1 : Specified density is per unit area for controlling the mass of cohesive elements with an initial volume of zero.
+        EQ.0: Specified density is per unit volume(default).
+        EQ.1: Specified density is per unit area for controlling the mass of cohesive elements with an initial volume of zero.
         """ # nopep8
         return self._cards[0].get_value("roflg")
 
@@ -110,10 +110,9 @@ class MatCohesiveElastic(KeywordBase):
 
     @property
     def intfail(self) -> typing.Optional[float]:
-        """Get or set the The number of integration points required for the cohesive element to be deleted. The value of |INTFAIL| may range from 1 to 4 with 1 the recommended value.
-        LT.0.0:	Employs a Newton - Cotes integration scheme and the element will be deleted when | INTFAIL | integration points have failed.
-        EQ.0.0 : Employs a Newton - Cotes integration scheme and the element will not be deleted even if it satisfies the failure criterion.
-        GT.0.0 : Employs a Gauss integration scheme and the element will be deleted when INTFAIL integration points have failed.
+        """Get or set the The number of integration points required for the cohesive element to be deleted.  The value of INTFAIL may range from 1 to 4 with 1 the recommended value.
+        EQ.0.0: Employs a Newton - Cotes integration scheme.The element will not be deleted even if it satisfies the failure criterion.
+        GT.0.0 : Employs a Gauss integration scheme.The element will be deleted when INTFAIL integration points have failed.
         """ # nopep8
         return self._cards[0].get_value("intfail")
 

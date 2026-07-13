@@ -42,6 +42,12 @@ _CONSTRAINEDSOILPILECURVES_CARD0 = (
 _CONSTRAINEDSOILPILECURVES_CARD1 = (
     FieldSchema("damp", float, 0, 10, 0.0),
     FieldSchema("local", int, 10, 10, 1),
+    FieldSchema("instrf", int, 20, 10, 0),
+    FieldSchema("timstr", float, 30, 10, 0.0),
+    FieldSchema("icd7a", int, 30, 10, 0),
+    FieldSchema("damph", float, 40, 10, 0.0),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
 )
 
 _CONSTRAINEDSOILPILECURVES_CARD2 = (
@@ -68,6 +74,10 @@ _CONSTRAINEDSOILPILECURVES_CARD5 = (
     FieldSchema("hlc", int, 10, 10, None),
     FieldSchema("hlcsh", int, 20, 10, None),
     FieldSchema("hlcsv", int, 30, 10, None),
+    FieldSchema("hlcfd", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("fratio", int, 70, 10, None),
 )
 
 class ConstrainedSoilPileCurves(KeywordBase):
@@ -172,8 +182,8 @@ class ConstrainedSoilPileCurves(KeywordBase):
     @property
     def error(self) -> int:
         """Get or set the Action taken if any coupling point is not constrained within a soil element:
-        EQ.0:	Stop with an error message.
-        EQ.1 : Warn and continue..
+        EQ.0: Stop with an error message.
+        EQ.1: Warn and continue..
         """ # nopep8
         return self._cards[0].get_value("error")
 
@@ -187,8 +197,8 @@ class ConstrainedSoilPileCurves(KeywordBase):
     @property
     def nring(self) -> int:
         """Get or set the Number of coupling points around circumference at each pile node:
-        EQ.1:	One coupling point coincident with pile node
-        GT.1 : NRING coupling points equally spaced around the circumference of the pile.
+        EQ.1: One coupling point coincident with pile node
+        GT.1: NRING coupling points equally spaced around the circumference of the pile.
         """ # nopep8
         return self._cards[0].get_value("nring")
 
@@ -210,7 +220,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
 
     @property
     def damp(self) -> float:
-        """Get or set the Optional damping coefficient for Axial coupling (stress/velocity units). An additional axial coupling shear stress equal to DAMP times the axial velocity of the pile relative to the soil will be generated.
+        """Get or set the Optional damping coefficient for axial coupling (stress/velocity units). An additional axial coupling shear stress equal to DAMP times the axial velocity of the pile relative to the soil will be generated.
         """ # nopep8
         return self._cards[1].get_value("damp")
 
@@ -221,9 +231,9 @@ class ConstrainedSoilPileCurves(KeywordBase):
 
     @property
     def local(self) -> int:
-        """Get or set the Flag to identify which free end of a pile is treated as the Base:
-        EQ.1:	End with the most negative global Z - coordinate
-        EQ.2 : End which is Node 1 of the attached beam element topology.
+        """Get or set the Flag to identify which free end of a pile is treated as the base:
+        EQ.1: End with the most negative global Z - coordinate
+        EQ.2: End which is Node 1 of the attached beam element topology.
         """ # nopep8
         return self._cards[1].get_value("local")
 
@@ -233,6 +243,54 @@ class ConstrainedSoilPileCurves(KeywordBase):
         if value not in [1, 2, None]:
             raise Exception("""local must be `None` or one of {1,2}.""")
         self._cards[1].set_value("local", value)
+
+    @property
+    def instrf(self) -> int:
+        """Get or set the Flag to control definition of soil stress for Cards 4a through 6a and Cards 4b through 6b:
+        EQ.0: Use time - varying soil stress.TIMSTR is ignored.
+        EQ.1: Use time - varying soil stress until time TIMSTR.Then use the soil stress that existed at time TIMSTR for the remainder of the analysis.
+        """ # nopep8
+        return self._cards[1].get_value("instrf")
+
+    @instrf.setter
+    def instrf(self, value: int) -> None:
+        """Set the instrf property."""
+        if value not in [0, 1, None]:
+            raise Exception("""instrf must be `None` or one of {0,1}.""")
+        self._cards[1].set_value("instrf", value)
+
+    @property
+    def timstr(self) -> float:
+        """Get or set the Time at which the effect of soil stress is frozen
+        """ # nopep8
+        return self._cards[1].get_value("timstr")
+
+    @timstr.setter
+    def timstr(self, value: float) -> None:
+        """Set the timstr property."""
+        self._cards[1].set_value("timstr", value)
+
+    @property
+    def icd7a(self) -> int:
+        """Get or set the If nonzero and OPTION1 is CONSTANTS, Card 7a will be read.
+        """ # nopep8
+        return self._cards[1].get_value("icd7a")
+
+    @icd7a.setter
+    def icd7a(self, value: int) -> None:
+        """Set the icd7a property."""
+        self._cards[1].set_value("icd7a", value)
+
+    @property
+    def damph(self) -> float:
+        """Get or set the Optional damping coefficient for Perpendicular coupling (stress/velocity units). An additional perpendicular coupling shear stress equal to DAMPH times the perpendicular velocity of the pile relative to the soil will be generated.
+        """ # nopep8
+        return self._cards[1].get_value("damph")
+
+    @damph.setter
+    def damph(self, value: float) -> None:
+        """Set the damph property."""
+        self._cards[1].set_value("damph", value)
 
     @property
     def pid(self) -> typing.Optional[int]:
@@ -247,7 +305,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
 
     @property
     def zref(self) -> typing.Optional[float]:
-        """Get or set the Reference Z-coordinate, used in calculation of “relative z-coordinate”. For example, ZREF may be located at the soil surface.  .
+        """Get or set the Reference Z-coordinate, used in calculation of relative z-coordinate. For example, ZREF may be located at the soil surface.  .
         """ # nopep8
         return self._cards[2].get_value("zref")
 
@@ -280,7 +338,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
 
     @property
     def blcsh(self) -> typing.Optional[int]:
-        """Get or set the For base coupling, optional load curve ID containing coefficient for effective horizontal stress (dimensionless) as a function of relative Z-coordinate .
+        """Get or set the For base coupling, optional load curve ID containing coefficient for initialeffective horizontal stress (dimensionless) as a function of relative Z-coordinate .
         """ # nopep8
         return self._cards[3].get_value("blcsh")
 
@@ -291,7 +349,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
 
     @property
     def blcsv(self) -> typing.Optional[int]:
-        """Get or set the For base coupling, optional load curve ID containing coefficient for effective vertical stress (dimensionless) as a function of relative Z-coordinate .
+        """Get or set the For base coupling, optional load curve ID containing coefficient for initialeffective vertical stress (dimensionless) as a function of relative Z-coordinate .
         """ # nopep8
         return self._cards[3].get_value("blcsv")
 
@@ -324,7 +382,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
 
     @property
     def vlcsh(self) -> typing.Optional[int]:
-        """Get or set the For axial coupling, optional load curve ID containing coefficient for effective horizontal stress (dimensionless) as a function of relative Z-coordinate.
+        """Get or set the For axial coupling, optional load curve ID containing coefficient for initialeffective horizontal stress (dimensionless) as a function of relative Z-coordinate.
         """ # nopep8
         return self._cards[4].get_value("vlcsh")
 
@@ -335,7 +393,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
 
     @property
     def vlcsv(self) -> typing.Optional[int]:
-        """Get or set the For axial coupling, optional load curve ID containing coefficient for effective vertical stress (dimensionless) as a function of relative Z-coordinate.
+        """Get or set the For axial coupling, optional load curve ID containing coefficient for initialeffective vertical stress (dimensionless) as a function of relative Z-coordinate.
         """ # nopep8
         return self._cards[4].get_value("vlcsv")
 
@@ -368,7 +426,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
 
     @property
     def hlcsh(self) -> typing.Optional[int]:
-        """Get or set the For perpendicular coupling, optional load curve ID containing coefficient for effective horizontal stress (dimensionless) as a function of relative Z-coordinate
+        """Get or set the For perpendicular coupling, optional load curve ID containing coefficient for initialeffective horizontal stress (dimensionless) as a function of relative Z-coordinate
         """ # nopep8
         return self._cards[5].get_value("hlcsh")
 
@@ -379,7 +437,7 @@ class ConstrainedSoilPileCurves(KeywordBase):
 
     @property
     def hlcsv(self) -> typing.Optional[int]:
-        """Get or set the For perpendicular coupling, optional load curve ID containing coefficient for effective vertical stress (dimensionless) as a function of relative Z-coordinate.
+        """Get or set the For perpendicular coupling, optional load curve ID containing coefficient for initialeffective vertical stress (dimensionless) as a function of relative Z-coordinate.
         """ # nopep8
         return self._cards[5].get_value("hlcsv")
 
@@ -387,6 +445,28 @@ class ConstrainedSoilPileCurves(KeywordBase):
     def hlcsv(self, value: int) -> None:
         """Set the hlcsv property."""
         self._cards[5].set_value("hlcsv", value)
+
+    @property
+    def hlcfd(self) -> typing.Optional[int]:
+        """Get or set the For perpendicular coupling, optional load curve ID containing frictional resistance (stress units) during 'post-hole' unload/reload as a function of relative Z-coordinate. See Remark 10. With HLCFD there is no way to make the frictional resistance depend on soil stress
+        """ # nopep8
+        return self._cards[5].get_value("hlcfd")
+
+    @hlcfd.setter
+    def hlcfd(self, value: int) -> None:
+        """Set the hlcfd property."""
+        self._cards[5].set_value("hlcfd", value)
+
+    @property
+    def fratio(self) -> typing.Optional[int]:
+        """Get or set the Alternative method of defining frictional resistance for perpendicular coupling during 'post-hole' unload/reload. FRATIO is the stress as a ratio of the maximum perpendicular coupling stress derived from HLCZ, HLCSH and HLCSV. If defined, FRATIO overrides HLCFD.
+        """ # nopep8
+        return self._cards[5].get_value("fratio")
+
+    @fratio.setter
+    def fratio(self, value: int) -> None:
+        """Set the fratio property."""
+        self._cards[5].set_value("fratio", value)
 
     @property
     def blcz_link(self) -> typing.Optional[DefineCurve]:

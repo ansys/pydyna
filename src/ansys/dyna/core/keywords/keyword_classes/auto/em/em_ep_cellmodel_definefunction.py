@@ -83,7 +83,7 @@ class EmEpCellmodelDefinefunction(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material ID defined in *MAT_.
+        """Get or set the Material ID defined in the *MAT section. If a negative value is entered,  the cell model is defined on a node set instead of a part, and -MID is the node set where the cell model is defined.
 
         """ # nopep8
         return self._cards[0].get_value("mid")
@@ -108,8 +108,8 @@ class EmEpCellmodelDefinefunction(KeywordBase):
     @property
     def fswitch(self) -> int:
         """Get or set the Switch for the ODE definition (see Remark 1):
-        EQ.0:	functions
-        EQ.1 : derivatives
+        EQ.0: functions
+        EQ.1: derivatives
         """ # nopep8
         return self._cards[0].get_value("fswitch")
 

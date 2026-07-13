@@ -30,7 +30,7 @@ _CONTROLMPPREBALANCE_CARD0 = (
     FieldSchema("ncycle", int, 0, 10, None),
     FieldSchema("icoor", int, 10, 10, 0),
     FieldSchema("icost", int, 20, 10, 0),
-    FieldSchema("thres", float, 30, 10, 1.0),
+    FieldSchema("thres", int, 30, 10, 1),
 )
 
 class ControlMppRebalance(KeywordBase):
@@ -62,8 +62,8 @@ class ControlMppRebalance(KeywordBase):
     @property
     def icoor(self) -> int:
         """Get or set the Coordinates used in rebalance:
-        EQ.0:	Current coordinates
-        NE.0 : Coordinates at t = 0
+        EQ.0: Current coordinates
+        NE.0: Coordinates at t = 0
         """ # nopep8
         return self._cards[0].get_value("icoor")
 
@@ -75,8 +75,8 @@ class ControlMppRebalance(KeywordBase):
     @property
     def icost(self) -> int:
         """Get or set the Element costs used in rebalance:
-        Q.0:	Time costs
-        EQ.1 : Original
+        Q.0: Time costs
+        EQ.1: Original
         """ # nopep8
         return self._cards[0].get_value("icost")
 
@@ -88,13 +88,13 @@ class ControlMppRebalance(KeywordBase):
         self._cards[0].set_value("icost", value)
 
     @property
-    def thres(self) -> float:
+    def thres(self) -> int:
         """Get or set the Percent threshold for rebalancing when performing in-core adaptivity (see Remark 1). For in-core adaptivity, only include this field
         """ # nopep8
         return self._cards[0].get_value("thres")
 
     @thres.setter
-    def thres(self, value: float) -> None:
+    def thres(self, value: int) -> None:
         """Set the thres property."""
         self._cards[0].set_value("thres", value)
 

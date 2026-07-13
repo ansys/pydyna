@@ -55,7 +55,7 @@ class IncludeMultiscale(KeywordBase):
         ]
     @property
     def id(self) -> typing.Optional[int]:
-        """Get or set the ID for this multiscale local model.  This ID is used in the keyword *DEFINE_‌MULTISCALE.  Any unique integer will do
+        """Get or set the ID for this multiscale local model.  This ID is used in the keyword *DEFINE_MULTISCALE.  Any unique integer will do
         """ # nopep8
         return self._cards[0].get_value("id")
 

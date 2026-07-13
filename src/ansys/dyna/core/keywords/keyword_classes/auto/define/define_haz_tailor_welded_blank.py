@@ -108,8 +108,8 @@ class DefineHazTailorWeldedBlank(KeywordBase):
     @property
     def ipflag(self) -> int:
         """Get or set the IDP type:
-        EQ.0:	part ID(default)
-        EQ.1 : part set ID.
+        EQ.0: Part ID(default)
+        EQ.1: Part set ID.
         """ # nopep8
         return self._cards[0].get_value("ipflag")
 
@@ -123,8 +123,8 @@ class DefineHazTailorWeldedBlank(KeywordBase):
     @property
     def imonflag(self) -> int:
         """Get or set the Monotonicity flag for load curves ISW and IFW on *DEFINE_HAZ_PROPERTIES:
-        EQ.0:	ISW and IFW increase monotonically.
-        EQ.1 : ISW and IFW are allowed to be arbitrary load curves.
+        EQ.0: ISW and IFW increase monotonically.
+        EQ.1: ISW and IFW are allowed to be arbitrary load curves.
         """ # nopep8
         return self._cards[0].get_value("imonflag")
 

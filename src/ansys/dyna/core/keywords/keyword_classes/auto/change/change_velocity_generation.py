@@ -146,8 +146,8 @@ class ChangeVelocityGeneration(KeywordBase):
 
     @property
     def ivatn(self) -> int:
-        """Get or set the EQ.0:  slaved parts are ignored.
-        EQ.1:  slaved parts and slaved nodes of the master parts will be assigned initial velocities like the master part.
+        """Get or set the EQ.0: slaved parts are ignored.
+        EQ.1: slaved parts and slaved nodes of the master parts will be assigned initial velocities like the master part.
         """ # nopep8
         return self._cards[0].get_value("ivatn")
 
@@ -253,7 +253,7 @@ class ChangeVelocityGeneration(KeywordBase):
     @property
     def irigid(self) -> int:
         """Get or set the Option to overwrite or automatically set rigid body velocities defined on the *PART_INERTIA and *CONSTRAINED_NODAL_RIGID_BODY _INERTIA cards.
-        EQ.1:  Reset the rigid body velocites for *PART ID or all parts in *SET_PART ID.    This option does not apply for STYP=3.
+        EQ.1: Reset the rigid body velocites for *PART ID or all parts in *SET_PART ID.    This option does not apply for STYP=3.
         """ # nopep8
         return self._cards[1].get_value("irigid")
 

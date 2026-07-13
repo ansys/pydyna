@@ -6,6 +6,13 @@ Chemistry keywords
 ==================
 
 
+ChemistryBattery
+----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.chemistry_battery
+    :members:
+
+
 ChemistryComposition
 --------------------
 

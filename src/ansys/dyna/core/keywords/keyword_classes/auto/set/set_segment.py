@@ -170,8 +170,8 @@ class SetSegment(KeywordBase):
     @property
     def its(self) -> typing.Optional[int]:
         """Get or set the Define coupling type across different scales in two-scale co-simulation. This flag should only be included for segment sets that provide coupling information in the input file referred to by *INCLUDE_COSIM;
-        EQ.1:	Tied contact coupling
-        EQ.2 : Solid - in - shell immersed coupling
+        EQ.1: Tied contact coupling
+        EQ.2: Solid - in - shell immersed coupling
         """ # nopep8
         return self._cards[0].get_value("its")
 

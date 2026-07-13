@@ -56,7 +56,7 @@ class IcfdControlConj(KeywordBase):
     def ctype(self) -> int:
         """Get or set the Indicates the thermal coupling type.
         EQ.0: Robust and accurate monolithic coupling where the temperature field are solved simultaneously between the fluid and the structure.
-        EQ.1: Weak thermal coupling. The fluid passes the heat flux to the solid at the fluid-structure interface and the solid returns the temperature which is applied as a Dirichlet condition.
+        EQ.1: Weak thermal coupling. The fluid passes the heat flux to the structure at the fluid-structure interface and the structure returns the temperature which is applied as a Dirichlet condition.
         """ # nopep8
         return self._cards[0].get_value("ctype")
 
@@ -69,7 +69,7 @@ class IcfdControlConj(KeywordBase):
 
     @property
     def tsf(self) -> typing.Optional[float]:
-        """Get or set the Thermal Speedup Factor. This factor multiplies all thermal parameters present in the heat equation with  units  of  time  in  the  denominator  (e.g.,  thermal  conductivity,  convection  heat  transfer  coefficients).    It  is  used  to artificially  time  scale  the thermal problem. A negative value will refer to a time dependent load curve.
+        """Get or set the Thermal Speedup Factor. This factor multiplies all thermal parameters present in the heat equation with  units  of  time  in  the  denominator  (e.g.,  thermal  conductivity,  convection  heat  transfer  coefficients).    It  is  used  to artificially  time  scale  the thermal problem. A negative value refers to a time dependent load curve.
         """ # nopep8
         return self._cards[0].get_value("tsf")
 

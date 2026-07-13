@@ -350,7 +350,7 @@ class MatViscoelasticLooseFabric(KeywordBase):
         EQ.0.0: locally orthotropic with material axes determined by
         element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
-        EQ.3.0: locally orthotropic material axes determined by rotating the material axes defined by	the cross product of the vector v with the element normal.
+        EQ.3.0: locally orthotropic material axes determined by rotating the material axes defined by the cross product of the vector v with the element normal.
         LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
         *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
         """ # nopep8

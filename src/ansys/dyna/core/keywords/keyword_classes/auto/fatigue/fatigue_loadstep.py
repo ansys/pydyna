@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _FATIGUELOADSTEP_CARD0 = (
     FieldSchema("tstart", float, 0, 10, None),
     FieldSchema("tend", float, 10, 10, None),
-    FieldSchema("texpos", float, 30, 10, 0.0),
+    FieldSchema("texpos", float, 20, 10, 0.0),
 )
 
 class FatigueLoadstep(KeywordBase):
@@ -72,7 +72,7 @@ class FatigueLoadstep(KeywordBase):
     @property
     def texpos(self) -> float:
         """Get or set the Exposure time of current load step
-        EQ.0.0:	set to TEND-TSTART (default).
+        EQ.0.0: set to TEND-TSTART (default).
         """ # nopep8
         return self._cards[0].get_value("texpos")
 

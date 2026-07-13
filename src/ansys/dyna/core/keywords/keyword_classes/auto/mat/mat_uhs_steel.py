@@ -921,7 +921,7 @@ class MatUhsSteel(KeywordBase):
         """Get or set the If a heating process is initiated at t = 0 this
         parameters sets the initial amount of austenite in the blank. If heating is
         activated at t > 0 during a simulation this value is ignored. Note that,
-        AUST + FERR + PEAR + BAIN + MART	= 1.0.
+        AUST + FERR + PEAR + BAIN + MART = 1.0.
         """ # nopep8
         return self._cards[7].get_value("aust")
 
@@ -976,7 +976,7 @@ class MatUhsSteel(KeywordBase):
 
     @property
     def grk(self) -> typing.Optional[float]:
-        """Get or set the Growth parameter k (μm2/sec).
+        """Get or set the Growth parameter k (mum2/sec).
         """ # nopep8
         return self._cards[7].get_value("grk")
 
@@ -999,7 +999,7 @@ class MatUhsSteel(KeywordBase):
 
     @property
     def tau1(self) -> float:
-        """Get or set the Empirical grain growth parameter 𝑐1 describing the function τ(T).
+        """Get or set the Empirical grain growth parameter C1 describing the function tau(T).
         """ # nopep8
         return self._cards[7].get_value("tau1")
 
@@ -1088,7 +1088,7 @@ class MatUhsSteel(KeywordBase):
 
     @property
     def tau2(self) -> float:
-        """Get or set the Empirical grain growth parameter 𝑐2 describing the function τ(T).
+        """Get or set the Empirical grain growth parameter C2 describing the function tau(T).
         """ # nopep8
         return self._cards[8].get_value("tau2")
 
@@ -1135,7 +1135,7 @@ class MatUhsSteel(KeywordBase):
 
     @property
     def ms(self) -> typing.Optional[float]:
-        """Get or set the Manual start temperature Martensite. See	MS for description.
+        """Get or set the Manual start temperature Martensite. See MS for description.
         """ # nopep8
         return self._cards[9].get_value("ms")
 
@@ -1147,7 +1147,7 @@ class MatUhsSteel(KeywordBase):
     @property
     def msig(self) -> typing.Optional[float]:
         """Get or set the Describes the increase of martensite start temperature for cooling due to applied stress.
-        LT.0: Load Curve ID describes MSIG as a function of triaxiality (pressure /	effective stress).
+        LT.0: Load Curve ID describes MSIG as a function of triaxiality (pressure / effective stress).
         MS* = MS + MSIG x SIGMAeff.
         """ # nopep8
         return self._cards[9].get_value("msig")
@@ -1161,7 +1161,7 @@ class MatUhsSteel(KeywordBase):
     def lceps23(self) -> typing.Optional[int]:
         """Get or set the Load Curve ID dependent on plastic strain
         that scales the activation energy QR2 and QR3.
-        QRx = Qx x CEPS23(𝜀pl) / R
+        QRx = Qx x CEPS23(eps_pl) / R
         """ # nopep8
         return self._cards[9].get_value("lceps23")
 
@@ -1172,7 +1172,7 @@ class MatUhsSteel(KeywordBase):
 
     @property
     def lceps4(self) -> typing.Optional[int]:
-        """Get or set the Load Curve ID dependent on plastic strain that scales the activation energy QR4.n	QR4 = Q4 x LCEPS4(𝜀pl) / R.
+        """Get or set the Load Curve ID dependent on plastic strain that scales the activation energy QR4.n QR4 = Q4 x LCEPS4(eps_pl) / R.
         """ # nopep8
         return self._cards[9].get_value("lceps4")
 
@@ -1185,7 +1185,7 @@ class MatUhsSteel(KeywordBase):
     def lceps5(self) -> typing.Optional[int]:
         """Get or set the Load Curve ID which describe the increase
         of the martensite start temperature for cooling as a function of plastic strain.
-        MS* = MS + MSIG x 𝜎eff + LCEPS5(𝜀pl).
+        MS* = MS + MSIG x Sigma_eff + LCEPS5(eps_pl).
         """ # nopep8
         return self._cards[9].get_value("lceps5")
 

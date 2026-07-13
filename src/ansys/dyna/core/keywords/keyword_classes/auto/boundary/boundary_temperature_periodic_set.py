@@ -74,9 +74,9 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
     @property
     def ptype(self) -> typing.Optional[int]:
         """Get or set the Type of periodic boundary condition:
-        EQ.1:	Rotation boundary condition defined by an axis, an origin pointand a rotation angle.
-        EQ.2 : Reflective boundary condition defined by an axis and origin point.
-        EQ.3 : Sliding boundary condition.
+        EQ.1: Rotation boundary condition defined by an axis, an origin pointand a rotation angle.
+        EQ.2: Reflective boundary condition defined by an axis and origin point.
+        EQ.3: Sliding boundary condition.
         """ # nopep8
         return self._cards[0].get_value("ptype")
 
@@ -99,7 +99,7 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
     @property
     def tdlcid(self) -> typing.Optional[int]:
         """Get or set the Optional load curve specifying the temperature drop, T_drop, between the two surfaces in the periodic boundary condition as a function of time. Note that T_drop =T_1-T_2 where T_1 is the temperature of the surface specified with SSID1 and T_2 is the temperature of the surface specified with SSID2.
-        EQ.0:	No temperature drop between that surfacs, that is, T_drop = 0.0
+        EQ.0: No temperature drop between that surfacs, that is, T_drop = 0.0
         """ # nopep8
         return self._cards[0].get_value("tdlcid")
 
@@ -110,9 +110,9 @@ class BoundaryTemperaturePeriodicSet(KeywordBase):
 
     @property
     def axe(self) -> typing.Optional[int]:
-        """Get or set the Axis for Ptype=1 or 2 EQ.1:	X-axis
-        EQ.2:	Y - axis
-        EQ.3 : Z - axis.
+        """Get or set the Axis for Ptype=1 or 2 EQ.1: X-axis
+        EQ.2: Y - axis
+        EQ.3: Z - axis.
         Flag for meaning of ANGLE for PTYPE = 3. Setting AXE = 1 means that ANGLE is the contact distance. Otherwise, it is a scale factor on the contact distance search
         """ # nopep8
         return self._cards[0].get_value("axe")

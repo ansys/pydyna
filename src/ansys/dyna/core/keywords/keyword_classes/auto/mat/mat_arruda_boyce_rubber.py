@@ -34,7 +34,7 @@ _MATARRUDABOYCERUBBER_CARD0 = (
     FieldSchema("ro", float, 10, 10, None),
     FieldSchema("k", float, 20, 10, None),
     FieldSchema("g", float, 30, 10, None),
-    FieldSchema("n", int, 40, 10, None),
+    FieldSchema("n", float, 40, 10, None),
 )
 
 _MATARRUDABOYCERUBBER_CARD1 = (
@@ -137,13 +137,13 @@ class MatArrudaBoyceRubber(KeywordBase):
         self._cards[0].set_value("g", value)
 
     @property
-    def n(self) -> typing.Optional[int]:
+    def n(self) -> typing.Optional[float]:
         """Get or set the Number of statistical links.
         """ # nopep8
         return self._cards[0].get_value("n")
 
     @n.setter
-    def n(self, value: int) -> None:
+    def n(self, value: float) -> None:
         """Set the n property."""
         self._cards[0].set_value("n", value)
 

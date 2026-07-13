@@ -195,7 +195,7 @@ class BoundarySpcSetBirthDeath(KeywordBase):
 
     @property
     def birth(self) -> float:
-        """Get or set the Activation time for constraint
+        """Get or set the Activation time for SPC constraint. The birth time is ignored during dynamic relaxation.
         """ # nopep8
         return self._cards[1].get_value("birth")
 
@@ -206,7 +206,7 @@ class BoundarySpcSetBirthDeath(KeywordBase):
 
     @property
     def death(self) -> float:
-        """Get or set the Deactivation time for constraint.
+        """Get or set the Deactivation time for the SPC constraint. The death time is ignored during dynamic relaxation.
         """ # nopep8
         return self._cards[1].get_value("death")
 

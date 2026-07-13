@@ -106,12 +106,10 @@ class MatAleViscous(KeywordBase):
 
     @property
     def mulo(self) -> typing.Optional[float]:
-        """Get or set the There are 4 possible cases (See remark 1):
-        1) If MULO=0.0, then inviscid fluid is assumed.
-        2) If MULO > 0.0, and MUHI=0.0 or is not defined, then this is the traditional constant dynamic viscosity coefficient.
-        3) If MULO > 0.0, and MUHI > 0.0, then MULO and MUHI are lower and upper viscosity limit values for a power-law-like variable viscosity model.
-        4) If MULO is negative (for example, MULO = -1), then a user-input data load curve (with LCID=1) defining dynamic viscosity as a function of equivalent strain rate is used
-
+        """Get or set the Dynamic viscosity (see Remark 1):
+        EQ.0.0: Inviscid fluid is assumed.
+        GT.0.0 : If MUHI = 0.0 or is not defined, then this is the traditional constant dynamic viscosity coefficient, μ.Otherwise if MUHI > 0.0, then MULO and MUHI are the lower and upper dynamic viscosity limit values for a power - law - like variable viscosity model.
+        LT.0.0: -MULO is a load curve ID defining dynamic viscosity as a function of equivalent strain rate.
         """ # nopep8
         return self._cards[0].get_value("mulo")
 
@@ -122,7 +120,10 @@ class MatAleViscous(KeywordBase):
 
     @property
     def muhi(self) -> typing.Optional[float]:
-        """Get or set the Upper dynamic viscosity limit (default=0.0).  This is defined only if RK and RN are defined for the variable viscosity case.
+        """Get or set the Dynamic viscosity:
+        EQ.0.0: Only MULO is used to define the dynamic viscosity, default
+        LT.0.0 : The viscosity can be defined by the user in the file dyn21.F with a routine called f3dm9ale_userdef1.The file is part of the general usermat package.Note that in this case MULO is a parameter for the subroutine.
+        GT.0.0: This is the upper dynamic viscosity limit.This is defined only if RK and RN are defined for the variable viscosity case.
         """ # nopep8
         return self._cards[0].get_value("muhi")
 

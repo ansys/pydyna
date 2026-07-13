@@ -69,8 +69,8 @@ class DatabaseTracerAle(KeywordBase):
     @property
     def track(self) -> int:
         """Get or set the Tracking option:
-        EQ.0:	particle follows material
-        EQ.1: particle is fixed in space.
+        EQ.0: Particle follows material
+        EQ.1: Particle is fixed in space.
         """ # nopep8
         return self._cards[0].get_value("track")
 
@@ -83,7 +83,7 @@ class DatabaseTracerAle(KeywordBase):
 
     @property
     def ammgid(self) -> int:
-        """Get or set the The AMMG ID (ALE multi-material group) of the material being tracked in a multi-material ALE element. See Remark 2
+        """Get or set the ALE multi-material referenced with its AMMGID for general ALE or with either its AMMGID or AMMG name (AMMGNM) for S-ALE, of the material being tracked in a multi-material ALE element. See Remark 2
         """ # nopep8
         return self._cards[0].get_value("ammgid")
 

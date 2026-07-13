@@ -115,7 +115,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
     @property
     def pype(self) -> int:
         """Get or set the PID type:
-        EQ.1:	part ID.
+        EQ.1: part ID.
         EQ.2: part set ID.
         """ # nopep8
         return self._cards[0].get_value("pype")
@@ -129,8 +129,8 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @property
     def nsid1(self) -> typing.Optional[int]:
-        """Get or set the Node set defining the path of the moving volume.  The moving volume travels along the path at speed SPD1.
-        The nodes are traversed according to their order in the node set.  See Remark 1.
+        """Get or set the Node set defining the path of the moving volume. The moving volume travels along the path at speed SPD1.
+        The nodes are traversed according to their order in the node set. See Remark 1.
         """ # nopep8
         return self._cards[0].get_value("nsid1")
 
@@ -142,8 +142,8 @@ class BoundaryTemperatureTrajectory(KeywordBase):
     @property
     def spd1(self) -> typing.Optional[float]:
         """Get or set the Speed of the moving volume on the trajectory:
-        GT.0.0:	Constant speed
-        LT.0.0:	 is a load curve ID defining the speed as a function of time.
+        GT.0.0: Constant speed
+        LT.0.0: is a load curve ID defining the speed as a function of time.
         """ # nopep8
         return self._cards[0].get_value("spd1")
 
@@ -155,10 +155,10 @@ class BoundaryTemperatureTrajectory(KeywordBase):
     @property
     def nsid2(self) -> typing.Optional[int]:
         """Get or set the Node or segment set that specifies the orientation of the moving volume's center axis.
-        GT.0:	NSID2 together with SPD2 define a curve in the same way that NSID1 and SPD1 define a curve.
+        GT.0: NSID2 together with SPD2 define a curve in the same way that NSID1 and SPD1 define a curve.
         Orientation of the moving volume's center axis is defined as a vector pointing from the current position on NSID2 to the current position on NSID1.
-        EQ.0:	The moving volume's center axis is oriented as  input on Card?4.
-        LT.0:	 specifies a segment set.  The moving volume's center axis is aligned with normals to segments in this set.
+        EQ.0: The moving volume's center axis is oriented as  input on Card  4.
+        LT.0: specifies a segment set. The moving volume's center axis is aligned with normals to segments in this set.
         To ensure that the axis orientation can be unambiguously determined at each point of the nodal path,
         LS-DYNA requires that each pair of consecutive nodes in NSID1 must both be in at least one segment of.
         When the center of the moving volume is.
@@ -174,8 +174,8 @@ class BoundaryTemperatureTrajectory(KeywordBase):
     @property
     def spd2(self) -> typing.Optional[float]:
         """Get or set the Speed of reference point in NSID2 (ignored unless NSID2 > 0)
-        GT.0:	constant speed
-        LT.0:	 |SPD2| is a load curve ID defining the speed as a function of time..
+        GT.0: constant speed
+        LT.0: |SPD2| is a load curve ID defining the speed as a function of time..
         """ # nopep8
         return self._cards[0].get_value("spd2")
 
@@ -187,8 +187,8 @@ class BoundaryTemperatureTrajectory(KeywordBase):
     @property
     def relvel(self) -> int:
         """Get or set the Defines if SPD1 and SPD2 are relative or absolute speeds in thermo-mechanical coupled analysis.
-        EQ.0:	absolute speeds
-        EQ.1:	relative speeds with respect to underlying structures.
+        EQ.0: absolute speeds
+        EQ.1: relative speeds with respect to underlying structures.
         """ # nopep8
         return self._cards[0].get_value("relvel")
 
@@ -200,8 +200,8 @@ class BoundaryTemperatureTrajectory(KeywordBase):
     @property
     def iform(self) -> int:
         """Get or set the Geometric description of the moving volume:
-        EQ.1:	cylindrical volume
-        EQ.2:	rectangular prism volume.
+        EQ.1: cylindrical volume
+        EQ.2: rectangular prism volume.
         """ # nopep8
         return self._cards[1].get_value("iform")
 
@@ -215,7 +215,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID for temperature as a function of time
-        EQ.0:	temperature is a constant defined by the value TMULT.
+        EQ.0: temperature is a constant defined by the value TMULT.
         """ # nopep8
         return self._cards[1].get_value("lcid")
 
@@ -237,7 +237,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @property
     def lcrot(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining the rotation angle (in degrees) of the moving volume around the trajectory as a function of time.  See Remark 2.
+        """Get or set the Load curve defining the rotation angle (in degrees) of the moving volume around the trajectory as a function of time. See Remark 2.
         """ # nopep8
         return self._cards[1].get_value("lcrot")
 
@@ -248,7 +248,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @property
     def lcmov(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining the offset of the moving volume along its center axis as a function of time.  See Remark 2.
+        """Get or set the Load curve defining the offset of the moving volume along its center axis as a function of time. See Remark 2.
         """ # nopep8
         return self._cards[1].get_value("lcmov")
 
@@ -259,7 +259,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
 
     @property
     def lclat(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining the lateral offset of the moving volume as a function of time.  See Remark 2.
+        """Get or set the Load curve defining the lateral offset of the moving volume as a function of time. See Remark 2.
         """ # nopep8
         return self._cards[1].get_value("lclat")
 
@@ -271,7 +271,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
     @property
     def p1(self) -> typing.Optional[float]:
         """Get or set the Parameters defining the moving volume's geometry.
-        The meaning of each parameter depends on field IFORM.  See Remark 3 for details.
+        The meaning of each parameter depends on field IFORM. See Remark 3 for details.
         """ # nopep8
         return self._cards[2].get_value("p1")
 
@@ -283,7 +283,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
     @property
     def p2(self) -> typing.Optional[float]:
         """Get or set the Parameters defining the moving volume's geometry.
-        The meaning of each parameter depends on field IFORM.  See Remark 3 for details.
+        The meaning of each parameter depends on field IFORM. See Remark 3 for details.
         """ # nopep8
         return self._cards[2].get_value("p2")
 
@@ -295,7 +295,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
     @property
     def p3(self) -> typing.Optional[float]:
         """Get or set the Parameters defining the moving volume's geometry.
-        The meaning of each parameter depends on field IFORM.  See Remark 3 for details.
+        The meaning of each parameter depends on field IFORM. See Remark 3 for details.
         """ # nopep8
         return self._cards[2].get_value("p3")
 
@@ -307,7 +307,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
     @property
     def p4(self) -> typing.Optional[float]:
         """Get or set the Parameters defining the moving volume's geometry.
-        The meaning of each parameter depends on field IFORM.  See Remark 3 for details.
+        The meaning of each parameter depends on field IFORM. See Remark 3 for details.
         """ # nopep8
         return self._cards[2].get_value("p4")
 
@@ -319,7 +319,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
     @property
     def p5(self) -> typing.Optional[float]:
         """Get or set the Parameters defining the moving volume's geometry.
-        The meaning of each parameter depends on field IFORM.  See Remark 3 for details.
+        The meaning of each parameter depends on field IFORM. See Remark 3 for details.
         """ # nopep8
         return self._cards[2].get_value("p5")
 
@@ -331,7 +331,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
     @property
     def p6(self) -> typing.Optional[float]:
         """Get or set the Parameters defining the moving volume's geometry.
-        The meaning of each parameter depends on field IFORM.  See Remark 3 for details.
+        The meaning of each parameter depends on field IFORM. See Remark 3 for details.
         """ # nopep8
         return self._cards[2].get_value("p6")
 
@@ -343,7 +343,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
     @property
     def p7(self) -> typing.Optional[float]:
         """Get or set the Parameters defining the moving volume's geometry.
-        The meaning of each parameter depends on field IFORM.  See Remark 3 for details.
+        The meaning of each parameter depends on field IFORM. See Remark 3 for details.
         """ # nopep8
         return self._cards[2].get_value("p7")
 
@@ -355,7 +355,7 @@ class BoundaryTemperatureTrajectory(KeywordBase):
     @property
     def p8(self) -> typing.Optional[float]:
         """Get or set the Parameters defining the moving volume's geometry.
-        The meaning of each parameter depends on field IFORM.  See Remark 3 for details.
+        The meaning of each parameter depends on field IFORM. See Remark 3 for details.
         """ # nopep8
         return self._cards[2].get_value("p8")
 

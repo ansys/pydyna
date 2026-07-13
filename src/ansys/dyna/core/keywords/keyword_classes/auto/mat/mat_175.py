@@ -105,7 +105,7 @@ class Mat175(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.  A unique number or label must be specified.
+        """Get or set the Material identification. A unique number or label must be specified.
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -138,7 +138,7 @@ class Mat175(KeywordBase):
 
     @property
     def pcf(self) -> typing.Optional[float]:
-        """Get or set the Tensile pressure elimination flag for solid elements only.  If set to unity tensile pressures are set to zero.
+        """Get or set the Tensile pressure elimination flag for solid elements only. If set to unity tensile pressures are set to zero.
         """ # nopep8
         return self._cards[0].get_value("pcf")
 
@@ -149,7 +149,9 @@ class Mat175(KeywordBase):
 
     @property
     def ef(self) -> typing.Optional[float]:
-        """Get or set the Elastic flag (if equal 1, the layer is elastic. If 0 the layer is viscoelastic).
+        """Get or set the Elastic flag:
+        EQ.0: The layer is viscoelastic.
+        EQ.1: The layer is elastic.
         """ # nopep8
         return self._cards[0].get_value("ef")
 
@@ -193,7 +195,7 @@ class Mat175(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID for deviatoric behavior if constants, Gi, and  i are determined via a least squares fit.  This relaxation curve is shown below
+        """Get or set the Load curve ID for deviatoric behavior if constants, Gi, and  i are determined via a least squares fit. This relaxation curve is shown below
         """ # nopep8
         return self._cards[1].get_value("lcid")
 
@@ -204,7 +206,7 @@ class Mat175(KeywordBase):
 
     @property
     def nt(self) -> typing.Optional[int]:
-        """Get or set the Number of terms in shear fit.  If zero the default is 6.  Fewer than NT terms will be used if the fit produces one or more negative shear moduli.  Currently, the maximum number is set to 6.
+        """Get or set the Number of terms in shear fit. If zero the default is 6. Fewer than NT terms will be used if the fit produces one or more negative shear moduli. Currently, the maximum number is set to 6.
         """ # nopep8
         return self._cards[1].get_value("nt")
 
@@ -215,7 +217,7 @@ class Mat175(KeywordBase):
 
     @property
     def bstart(self) -> typing.Optional[float]:
-        """Get or set the In the fit,  1  is set to zero,  2  is set to BSTART,  3  is 10 times  2,  4 is 100 times greater than  3 , and so on.  If zero, BSTART is determined by an iterative trial and error scheme.
+        """Get or set the In the fit,  1  is set to zero,  2  is set to BSTART,  3  is 10 times  2,  4 is 100 times greater than  3 , and so on. If zero, BSTART is determined by an iterative trial and error scheme.
         """ # nopep8
         return self._cards[1].get_value("bstart")
 
@@ -237,7 +239,7 @@ class Mat175(KeywordBase):
 
     @property
     def lcidk(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID for bulk behavior if constants, Ki, and   i  are determined via a least squares fit.  This relaxation curve is shown below
+        """Get or set the Load curve ID for bulk behavior if constants, Ki, and   i  are determined via a least squares fit. This relaxation curve is shown below
         """ # nopep8
         return self._cards[1].get_value("lcidk")
 
@@ -248,7 +250,7 @@ class Mat175(KeywordBase):
 
     @property
     def ntk(self) -> typing.Optional[int]:
-        """Get or set the Number of terms desired in bulk fit.  If zero the default is 6.  Currently, the maximum number is set to 6.
+        """Get or set the Number of terms desired in bulk fit. If zero the default is 6. Currently, the maximum number is set to 6.
         """ # nopep8
         return self._cards[1].get_value("ntk")
 
@@ -259,7 +261,7 @@ class Mat175(KeywordBase):
 
     @property
     def bstartk(self) -> typing.Optional[float]:
-        """Get or set the In the fit,   1  is set to zero,   2  is set to BSTARTK,   3  is 10 times   2,   4 is 100 times greater than   3 , and so on.  If zero, BSTARTK is determined by an iterative trial and error scheme.
+        """Get or set the In the fit,   1  is set to zero,   2  is set to BSTARTK,   3  is 10 times   2,   4 is 100 times greater than   3 , and so on. If zero, BSTARTK is determined by an iterative trial and error scheme.
         """ # nopep8
         return self._cards[1].get_value("bstartk")
 

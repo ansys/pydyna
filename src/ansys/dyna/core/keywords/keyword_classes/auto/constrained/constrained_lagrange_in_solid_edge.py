@@ -475,7 +475,7 @@ class ConstrainedLagrangeInSolidEdge(KeywordBase):
 
     @property
     def ipenchk(self) -> int:
-        """Get or set the Initial penetration check flag (only for CTYPE=4, Remark 13): 	EQ.0: Do not check for initial penetration.EQ.1: Check and save initial ALE material penetration across a Lagrangian surface (d0), but do not activate coupling at t=0.  In subsequent steps (t>0) the actual penetration is computed as follows actual penetration 	= total penetration ¨C initial penetration da=dT ¨C d0
+        """Get or set the Initial penetration check flag (only for CTYPE=4, Remark 13): EQ.0: Do not check for initial penetration.EQ.1: Check and save initial ALE material penetration across a Lagrangian surface (d0), but do not activate coupling at t=0.  In subsequent steps (t>0) the actual penetration is computed as follows actual penetration  = total penetration C initial penetration da=dT C d0
         """ # nopep8
         return self._cards[4].get_value("ipenchk")
 
@@ -488,7 +488,7 @@ class ConstrainedLagrangeInSolidEdge(KeywordBase):
 
     @property
     def intforc(self) -> int:
-        """Get or set the A flag to turn on or off (0=OFF or 1=ON) the output of ALE coupling pressure and forces on the slave Lagrangian segments (or surfaces).  Note that the coupling pressures and forces are computed based on the ALE fluid penetrations and coupling stiffness of the system.  When (1) INTFORC=1 and (2) a *DATABASE_BINARY_FSIFOR (DBF) card is defined, LS-DYNA writes out the segment coupling pressure and forces to the binary interface force file for contour plotting.  This interface force file is activated by executing ls971 as follows (3):	 ls971 i=inputfilename.k   h=interfaceforcefilename The time interval between output is defined by  dt  in the DBF card.  To plot the binary data in this file: lsprepost interfaceforcefilename.
+        """Get or set the A flag to turn on or off (0=OFF or 1=ON) the output of ALE coupling pressure and forces on the slave Lagrangian segments (or surfaces).  Note that the coupling pressures and forces are computed based on the ALE fluid penetrations and coupling stiffness of the system.  When (1) INTFORC=1 and (2) a *DATABASE_BINARY_FSIFOR (DBF) card is defined, LS-DYNA writes out the segment coupling pressure and forces to the binary interface force file for contour plotting.  This interface force file is activated by executing ls971 as follows (3): ls971 i=inputfilename.k   h=interfaceforcefilename The time interval between output is defined by  dt  in the DBF card.  To plot the binary data in this file: lsprepost interfaceforcefilename.
         """ # nopep8
         return self._cards[4].get_value("intforc")
 
@@ -514,7 +514,7 @@ class ConstrainedLagrangeInSolidEdge(KeywordBase):
 
     @property
     def lagmul(self) -> float:
-        """Get or set the A Lagrange multiplier factor with a range between 0.0 and 0.05 may be defined.  A typical value may be 0.01.  This should never be greater than 0.1. 	EQ.0: OFF (default).GT.0: Turn ON the Lagrange-multiplier method and use LAGMUL as a coefficient for scaling the penalty factor
+        """Get or set the A Lagrange multiplier factor with a range between 0.0 and 0.05 may be defined.  A typical value may be 0.01.  This should never be greater than 0.1.  EQ.0: OFF (default).GT.0: Turn ON the Lagrange-multiplier method and use LAGMUL as a coefficient for scaling the penalty factor
         """ # nopep8
         return self._cards[4].get_value("lagmul")
 
@@ -538,7 +538,7 @@ class ConstrainedLagrangeInSolidEdge(KeywordBase):
 
     @property
     def thkf(self) -> float:
-        """Get or set the (For all CTYPE choices except 11) A flag to account for the coupling thickness of the Lagrangian shell (slave) part.  LT.0: Use positive value of |THKF| for coupling segment thickness.EQ.0: Do not consider coupling segment thickness.GT.0: Coupling segment thickness scale factor.		For CTYPE=11 case (see Remark 14):  This thickness is required for volume calculation.GT.0: (Fabric) Thickness scale factor.  The base shell thickness is taken from the *PART definition.LT.0: User-defined (Fabric) thickness.  The fabric thickness is set to |THKF|.
+        """Get or set the (For all CTYPE choices except 11) A flag to account for the coupling thickness of the Lagrangian shell (slave) part.  LT.0: Use positive value of |THKF| for coupling segment thickness.EQ.0: Do not consider coupling segment thickness.GT.0: Coupling segment thickness scale factor.  For CTYPE=11 case (see Remark 14): This thickness is required for volume calculation.GT.0: (Fabric) Thickness scale factor.  The base shell thickness is taken from the *PART definition.LT.0: User-defined (Fabric) thickness.  The fabric thickness is set to |THKF|.
         """ # nopep8
         return self._cards[4].get_value("thkf")
 
@@ -560,7 +560,7 @@ class ConstrainedLagrangeInSolidEdge(KeywordBase):
 
     @property
     def b1(self) -> typing.Optional[float]:
-        """Get or set the Inertial coefficient for the porous flow Ergun equation (see Remark 14).	For CTYPE=11, B1 = Bn = coefficient for normal-to-segment direction.		For CTYPE=12: B1 = Bx = coefficient for global X-direction
+        """Get or set the Inertial coefficient for the porous flow Ergun equation (see Remark 14). For CTYPE=11, B1 = Bn = coefficient for normal-to-segment direction.  For CTYPE=12: B1 = Bx = coefficient for global X-direction
         """ # nopep8
         return self._cards[5].get_value("b1")
 
@@ -604,7 +604,7 @@ class ConstrainedLagrangeInSolidEdge(KeywordBase):
 
     @property
     def b3(self) -> typing.Optional[float]:
-        """Get or set the Inertial coefficient for the porous flow Ergun equation (see Remark 14).	For CTYPE=12: B3 = Bz = coefficient for global Z-direction
+        """Get or set the Inertial coefficient for the porous flow Ergun equation (see Remark 14). For CTYPE=12: B3 = Bz = coefficient for global Z-direction
         """ # nopep8
         return self._cards[5].get_value("b3")
 

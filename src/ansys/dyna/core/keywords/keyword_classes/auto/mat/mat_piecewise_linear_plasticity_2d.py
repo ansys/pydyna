@@ -46,6 +46,8 @@ _MATPIECEWISELINEARPLASTICITY2D_CARD1 = (
     FieldSchema("lcss", int, 20, 10, 0),
     FieldSchema("lcsr", int, 30, 10, 0),
     FieldSchema("vp", float, 40, 10, 0.0),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("rfiltf", float, 60, 10, None),
 )
 
 _MATPIECEWISELINEARPLASTICITY2D_CARD2 = (
@@ -262,16 +264,28 @@ class MatPiecewiseLinearPlasticity2D(KeywordBase):
         EQ-1.0: Cowper-Symonds with effective deviatoric strain rate rather than total.
         EQ.0.0: Scale yield stress (default),
         EQ.1.0: Viscoplastic formulation.
-        EQ.3.0:	same as VP=0, but with filtered effective total strain rates (only available for shells)
+        EQ.3.0: same as VP=0, but with filtered effective total strain rates (only available for shells)
+        EQ.4.0: Same as VP=1, but with filtered effective plastic strain rates
         """ # nopep8
         return self._cards[1].get_value("vp")
 
     @vp.setter
     def vp(self, value: float) -> None:
         """Set the vp property."""
-        if value not in [0.0, 1.0, -1.0, 3.0, None]:
-            raise Exception("""vp must be `None` or one of {0.0,1.0,-1.0,3.0}.""")
+        if value not in [0.0, 1.0, -1.0, 3.0, 4.0, None]:
+            raise Exception("""vp must be `None` or one of {0.0,1.0,-1.0,3.0,4.0}.""")
         self._cards[1].set_value("vp", value)
+
+    @property
+    def rfiltf(self) -> typing.Optional[float]:
+        """Get or set the Smoothing factor on the effective plastic strain rate (default is 0.0) used in the VP = 4 formulation. To include strain rate smoothing, set RFILTF to a value between 0.50 (low filtering) and 0.99 (high filtering).
+        """ # nopep8
+        return self._cards[1].get_value("rfiltf")
+
+    @rfiltf.setter
+    def rfiltf(self, value: float) -> None:
+        """Set the rfiltf property."""
+        self._cards[1].set_value("rfiltf", value)
 
     @property
     def eps1(self) -> typing.Optional[float]:

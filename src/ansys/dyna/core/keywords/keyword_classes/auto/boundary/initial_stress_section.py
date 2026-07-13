@@ -139,11 +139,11 @@ class InitialStressSection(KeywordBase):
     def istiff(self) -> int:
         """Get or set the Artificial stiffness. Simulates additional linearly elastic "ghost" elements in the cross section.
         These elements prevent mesh distortion by stiffening up the structure.
-        GT.0:	load curve ID defining stiffness fraction as a function of time.
+        GT.0: load curve ID defining stiffness fraction as a function of time.
         The stiffness of the ghost elements is the load curve value times the stiffness of the material in the part.
         Since the ghost element stress counteracts the preload stress the fraction should be low(1% or less).
         The total section stress is the preload stress minus the ghost element stress.
-        LT.0 : |ISTIFF| is the load curve ID for the stiffness fraction as a function of time.
+        LT.0: |ISTIFF| is the load curve ID for the stiffness fraction as a function of time.
         The preload stress is here automatically adjusted(-/+10 % of original prestress values) such that the total section stress corresponds to the curve in LCID.
         """ # nopep8
         return self._cards[0].get_value("istiff")

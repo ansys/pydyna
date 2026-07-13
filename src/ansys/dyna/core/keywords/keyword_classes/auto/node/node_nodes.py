@@ -111,8 +111,6 @@ class NodeNodes(KeywordBase):
     @tc.setter
     def tc(self, value: int) -> None:
         """Set the tc property."""
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""tc must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("tc", value)
 
     @property
@@ -132,7 +130,5 @@ class NodeNodes(KeywordBase):
     @rc.setter
     def rc(self, value: int) -> None:
         """Set the rc property."""
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rc must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("rc", value)
 

@@ -65,7 +65,7 @@ class FrequencyDomainModeGenerateExclude(KeywordBase):
 
     @property
     def m1end(self) -> typing.Optional[int]:
-        """Get or set the Last mode ID in block 1. All mode ID’s between and including M1BEG and M1END are added to the list.
+        """Get or set the Last mode ID in block 1. All mode ID's between and including M1BEG and M1END are added to the list.
         """ # nopep8
         return self._cards[0].get_value("m1end")
 
@@ -87,7 +87,7 @@ class FrequencyDomainModeGenerateExclude(KeywordBase):
 
     @property
     def m2end(self) -> typing.Optional[int]:
-        """Get or set the Last mode ID in block 2. All mode ID’s between and including M2BEG and M2END are added to the list.
+        """Get or set the Last mode ID in block 2. All mode ID's between and including M2BEG and M2END are added to the list.
         """ # nopep8
         return self._cards[0].get_value("m2end")
 
@@ -109,7 +109,7 @@ class FrequencyDomainModeGenerateExclude(KeywordBase):
 
     @property
     def m3end(self) -> typing.Optional[int]:
-        """Get or set the Last mode ID in block 3. All mode ID’s between and including M3BEG and M3END are added to the list.
+        """Get or set the Last mode ID in block 3. All mode ID's between and including M3BEG and M3END are added to the list.
         """ # nopep8
         return self._cards[0].get_value("m3end")
 
@@ -131,7 +131,7 @@ class FrequencyDomainModeGenerateExclude(KeywordBase):
 
     @property
     def m4end(self) -> typing.Optional[int]:
-        """Get or set the Last mode ID in block 4. All mode ID’s between and including M4BEG and M4END are added to the list.
+        """Get or set the Last mode ID in block 4. All mode ID's between and including M4BEG and M4END are added to the list.
         """ # nopep8
         return self._cards[0].get_value("m4end")
 

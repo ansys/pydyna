@@ -93,10 +93,10 @@ class DefineCurve5434A(KeywordBase):
 
     @property
     def sidr(self) -> int:
-        """Get or set the Stress initialization by dynamic relaxation:
-        EQ.0: load curve used in transient analysis only or for other applications,
-        EQ.1: load curve used in stress initialization but not transient analysis,
-        EQ.2: load curve applies to both initialization and transient analysis.
+        """Get or set the Flag controlling use of curve during dynamic relaxation. SIDR set to 1 or 2 will activate a dynamic relaxation phase unless IDRFLG = -999 in *CONTROL_DYNAMIC_RELAXATION.
+        EQ.0: Load curve used in the normal analysis phase only or for other applications,
+        EQ.1: Load curve used in the  dynamic relaxation phase but not the normal analysis phase,
+        EQ.2: Load curve applies to both the dynamic relaxation phase and normal analysis phase.
         """ # nopep8
         return self._cards[0].get_value("sidr")
 
@@ -110,7 +110,7 @@ class DefineCurve5434A(KeywordBase):
     @property
     def sfa(self) -> float:
         """Get or set the Scale factor for abcissa value. This is useful for simple modifications.
-        EQ.0.0: default set to 1.0.
+        EQ.0.0: Default set to 1.0.
         """ # nopep8
         return self._cards[0].get_value("sfa")
 
@@ -122,7 +122,7 @@ class DefineCurve5434A(KeywordBase):
     @property
     def sfo(self) -> float:
         """Get or set the Scale factor for ordinate value (function). This is useful for simple modifications.
-        EQ.0.0: default set to 1.0.
+        EQ.0.0: Default set to 1.0.
         """ # nopep8
         return self._cards[0].get_value("sfo")
 
@@ -156,11 +156,11 @@ class DefineCurve5434A(KeywordBase):
     @property
     def dattyp(self) -> int:
         """Get or set the Data type.This affects how offsets are applied.
-        EQ.-2:for fabric stress vs. strain curves(*MAT_FABRIC)as described below.Thickness flag for norminal stress calculation.
-        EQ.0:general case for time dependent curves,force versus displacement curves and stress strain curves.
-        EQ.1:for general (x,y) data curves whose abscissa values do not increase monotonically.
-        EQ.6:for general (r,s) data(coordinates in a 2D parametric space) whose values do not increase momotonically.Use for definition of trimming polygons for trimmed NURBS(*ELEMENT_SHELL_NURBS_PATCH,NL.GT.0).
-        EQ.-100:	for defining the proxy, α, from experiments for the chemical shrinkage coefficient as a function of temperature (see *MAT_ADD_CHEM_SHRINKAGE for details)
+        EQ.-2: For fabric stress vs. strain curves(*MAT_FABRIC)as described below.Thickness flag for norminal stress calculation.
+        EQ.0: General case for time dependent curves,force versus displacement curves and stress strain curves.
+        EQ.1: For general (x,y) data curves whose abscissa values do not increase monotonically.
+        EQ.6: For general (r,s) data(coordinates in a 2D parametric space) whose values do not increase momotonically. Use for definition of trimming polygons for trimmed NURBS(*ELEMENT_SHELL_NURBS_PATCH,NL.GT.0).
+        EQ.-100: For defining the proxy, from experiments for the chemical shrinkage coefficient as a function of temperature (see *MAT_ADD_CHEM_SHRINKAGE for details)
         """ # nopep8
         return self._cards[0].get_value("dattyp")
 
@@ -173,7 +173,8 @@ class DefineCurve5434A(KeywordBase):
 
     @property
     def lcint(self) -> int:
-        """Get or set the The number of discretization intervals to use for this curve. If 0 is input, the value of LCINT from *CONTROL_SOLUTION will be used.
+        """Get or set the The number of discretization intervals to use for this curve. If a model contains multiple curves, then the maximum value of all LCINTs is used to determine the memory requirement of each individual curve. Extremely high values should therefore be avoided if many curves are used.
+        EQ.0: Use value of LCINT from *CONTROL_SOLUTION.
         """ # nopep8
         return self._cards[0].get_value("lcint")
 

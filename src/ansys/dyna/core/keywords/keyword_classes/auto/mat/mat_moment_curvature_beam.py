@@ -175,7 +175,7 @@ class MatMomentCurvatureBeam(KeywordBase):
 
     @property
     def e(self) -> typing.Optional[float]:
-        """Get or set the Young's modulus.  This variable controls the time step size and must be chosen carefully.  Increasing the value of E will decrease the time step size.
+        """Get or set the Young's modulus. This variable controls the time step size and must be chosen carefully. Increasing the value of E will decrease the time step size.
         """ # nopep8
         return self._cards[0].get_value("e")
 
@@ -216,9 +216,9 @@ class MatMomentCurvatureBeam(KeywordBase):
         EQ.0.0: curve is symmetric
         EQ.1.0: curve is asymmetric
         For symmetric curves, all data point must be in the first quadrant and at least three data points need to be given, starting from the origin, ensued by the yield point.
-        For asymmetric curves, at least five data points are needed and exactly one point must be at the origin.  The two points on both sides of the origin record the positive and negative yield points.
+        For asymmetric curves, at least five data points are needed and exactly one point must be at the origin. The two points on both sides of the origin record the positive and negative yield points.
         The last data point(s) has no physical meaning: it serves only as a control point for inter or extrapolation.
-        The curves are input by the user and treated in LS-DYNA as a linearly piecewise function.  The curves must be monotonically increasing, while the slopes must be monotonically decreasing.
+        The curves are input by the user and treated in LS-DYNA as a linearly piecewise function. The curves must be monotonically increasing, while the slopes must be monotonically decreasing.
         """ # nopep8
         return self._cards[0].get_value("cta")
 
@@ -251,7 +251,7 @@ class MatMomentCurvatureBeam(KeywordBase):
 
     @property
     def n1(self) -> typing.Optional[float]:
-        """Get or set the Axial forces at which moment-curvature curves are given	The axial forces must be ordered monotonically increasing.  At least two axial forces must be defined if the curves are symmetric.  At least three axial forces must be defined if the curves are asymmetric.
+        """Get or set the Axial forces at which moment-curvature curves are given The axial forces must be ordered monotonically increasing. At least two axial forces must be defined if the curves are symmetric. At least three axial forces must be defined if the curves are asymmetric.
         """ # nopep8
         return self._cards[1].get_value("n1")
 
@@ -262,7 +262,7 @@ class MatMomentCurvatureBeam(KeywordBase):
 
     @property
     def n2(self) -> typing.Optional[float]:
-        """Get or set the Axial forces at which moment-curvature curves are given	The axial forces must be ordered monotonically increasing.  At least two axial forces must be defined if the curves are symmetric.  At least three axial forces must be defined if the curves are asymmetric.
+        """Get or set the Axial forces at which moment-curvature curves are given The axial forces must be ordered monotonically increasing. At least two axial forces must be defined if the curves are symmetric. At least three axial forces must be defined if the curves are asymmetric.
         """ # nopep8
         return self._cards[1].get_value("n2")
 
@@ -273,7 +273,7 @@ class MatMomentCurvatureBeam(KeywordBase):
 
     @property
     def n3(self) -> typing.Optional[float]:
-        """Get or set the Axial forces at which moment-curvature curves are given	The axial forces must be ordered monotonically increasing.  At least two axial forces must be defined if the curves are symmetric.  At least three axial forces must be defined if the curves are asymmetric.
+        """Get or set the Axial forces at which moment-curvature curves are given The axial forces must be ordered monotonically increasing. At least two axial forces must be defined if the curves are symmetric. At least three axial forces must be defined if the curves are asymmetric.
         """ # nopep8
         return self._cards[1].get_value("n3")
 
@@ -284,7 +284,7 @@ class MatMomentCurvatureBeam(KeywordBase):
 
     @property
     def n4(self) -> typing.Optional[float]:
-        """Get or set the Axial forces at which moment-curvature curves are given	The axial forces must be ordered monotonically increasing.  At least two axial forces must be defined if the curves are symmetric.  At least three axial forces must be defined if the curves are asymmetric..
+        """Get or set the Axial forces at which moment-curvature curves are given The axial forces must be ordered monotonically increasing. At least two axial forces must be defined if the curves are symmetric. At least three axial forces must be defined if the curves are asymmetric..
         """ # nopep8
         return self._cards[1].get_value("n4")
 
@@ -295,7 +295,7 @@ class MatMomentCurvatureBeam(KeywordBase):
 
     @property
     def n5(self) -> typing.Optional[float]:
-        """Get or set the Axial forces at which moment-curvature curves are given	The axial forces must be ordered monotonically increasing.  At least two axial forces must be defined if the curves are symmetric.  At least three axial forces must be defined if the curves are asymmetric.
+        """Get or set the Axial forces at which moment-curvature curves are given The axial forces must be ordered monotonically increasing. At least two axial forces must be defined if the curves are symmetric. At least three axial forces must be defined if the curves are asymmetric.
         """ # nopep8
         return self._cards[1].get_value("n5")
 
@@ -306,7 +306,7 @@ class MatMomentCurvatureBeam(KeywordBase):
 
     @property
     def n6(self) -> typing.Optional[float]:
-        """Get or set the Axial forces at which moment-curvature curves are given	The axial forces must be ordered monotonically increasing.  At least two axial forces must be defined if the curves are symmetric.  At least three axial forces must be defined if the curves are asymmetric.
+        """Get or set the Axial forces at which moment-curvature curves are given The axial forces must be ordered monotonically increasing. At least two axial forces must be defined if the curves are symmetric. At least three axial forces must be defined if the curves are asymmetric.
         """ # nopep8
         return self._cards[1].get_value("n6")
 
@@ -317,7 +317,7 @@ class MatMomentCurvatureBeam(KeywordBase):
 
     @property
     def n7(self) -> typing.Optional[float]:
-        """Get or set the Axial forces at which moment-curvature curves are given	The axial forces must be ordered monotonically increasing.  At least two axial forces must be defined if the curves are symmetric.  At least three axial forces must be defined if the curves are asymmetric.
+        """Get or set the Axial forces at which moment-curvature curves are given The axial forces must be ordered monotonically increasing. At least two axial forces must be defined if the curves are symmetric. At least three axial forces must be defined if the curves are asymmetric.
         """ # nopep8
         return self._cards[1].get_value("n7")
 
@@ -328,7 +328,7 @@ class MatMomentCurvatureBeam(KeywordBase):
 
     @property
     def n8(self) -> typing.Optional[float]:
-        """Get or set the Axial forces at which moment-curvature curves are given	The axial forces must be ordered monotonically increasing.  At least two axial forces must be defined if the curves are symmetric.  At least three axial forces must be defined if the curves are asymmetric.
+        """Get or set the Axial forces at which moment-curvature curves are given The axial forces must be ordered monotonically increasing. At least two axial forces must be defined if the curves are symmetric. At least three axial forces must be defined if the curves are asymmetric.
         """ # nopep8
         return self._cards[1].get_value("n8")
 
@@ -603,7 +603,7 @@ class MatMomentCurvatureBeam(KeywordBase):
 
     @property
     def cfa(self) -> float:
-        """Get or set the For multi-linear plastic analysis only.	Ratio of axial, bending and torsional elastic rigidities to their initial values, no less than 1.0 in value.
+        """Get or set the For multi-linear plastic analysis only. Ratio of axial, bending and torsional elastic rigidities to their initial values, no less than 1.0 in value.
         """ # nopep8
         return self._cards[5].get_value("cfa")
 
@@ -614,7 +614,7 @@ class MatMomentCurvatureBeam(KeywordBase):
 
     @property
     def cfb(self) -> float:
-        """Get or set the For multi-linear plastic analysis only.	Ratio of axial, bending and torsional elastic rigidities to their initial values, no less than 1.0 in value
+        """Get or set the For multi-linear plastic analysis only. Ratio of axial, bending and torsional elastic rigidities to their initial values, no less than 1.0 in value
         """ # nopep8
         return self._cards[5].get_value("cfb")
 
@@ -625,7 +625,7 @@ class MatMomentCurvatureBeam(KeywordBase):
 
     @property
     def cft(self) -> float:
-        """Get or set the For multi-linear plastic analysis only.	Ratio of axial, bending and torsional elastic rigidities to their initial values, no less than 1.0 in value
+        """Get or set the For multi-linear plastic analysis only. Ratio of axial, bending and torsional elastic rigidities to their initial values, no less than 1.0 in value
         """ # nopep8
         return self._cards[5].get_value("cft")
 
@@ -638,8 +638,7 @@ class MatMomentCurvatureBeam(KeywordBase):
     def hrule(self) -> typing.Optional[float]:
         """Get or set the Hardening rule, for multi-linear plastic analysis only.
         EQ.0.0: isotropic hardening
-        EQ.1.0: kinematic hardening
-        In between: mixed hardening.
+        EQ.1.0: kinematic hardening In between: mixed hardening.
         """ # nopep8
         return self._cards[5].get_value("hrule")
 

@@ -156,10 +156,10 @@ class RailTrack(KeywordBase):
 
     @property
     def idir(self) -> int:
-        """Get or set the Contact forces are calculated in local directions relative to the plane containing the two rails at the contact point. IDIR determines which side of the plane is �up�, that is, the direction in which the wheel can lift off the rail. �Up� is either c or -c,where c=a�b.  a is the direction along rail 1 heading away from node NORGN1 and b is the vector from rail 1 to rail 2. Both a and b are determined locally.
-        EQ.0:	Whichever out of c or -c has a positive global Z component is up(default).
-        EQ.1 : -c is up.
-        EQ. - 1 : c is up.
+        """Get or set the Contact forces are calculated in local directions relative to the plane containing the two rails at the contact point. IDIR determines which side of the plane is up, that is, the direction in which the wheel can lift off the rail. Up is either c or -c,where c=ab.  a is the direction along rail 1 heading away from node NORGN1 and b is the vector from rail 1 to rail 2. Both a and b are determined locally.
+        EQ.0: Whichever out of c or -c has a positive global Z component is up(default).
+        EQ.1: -c is up.
+        EQ. - 1: c is up.
         """ # nopep8
         return self._cards[0].get_value("idir")
 

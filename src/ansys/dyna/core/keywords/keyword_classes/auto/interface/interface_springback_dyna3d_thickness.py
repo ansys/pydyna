@@ -26,10 +26,11 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _INTERFACESPRINGBACKDYNA3DTHICKNESS_CARD0 = (
     FieldSchema("psid", int, 0, 10, None),
-    FieldSchema("nshv", int, 10, 10, None),
+    FieldSchema("nhsv", int, 10, 10, None),
     FieldSchema("ftype", int, 20, 10, 0),
     FieldSchema("unused", int, 30, 10, None),
     FieldSchema("ftensr", int, 40, 10, 0),
@@ -39,7 +40,7 @@ _INTERFACESPRINGBACKDYNA3DTHICKNESS_CARD0 = (
 )
 
 _INTERFACESPRINGBACKDYNA3DTHICKNESS_CARD1 = (
-    FieldSchema("optc", str, 0, 10, "OPTCARD"),
+    FieldSchema("optc", str, 0, 10, "0"),
     FieldSchema("sldo", int, 10, 10, 0),
     FieldSchema("ncyc", int, 20, 10, None),
     FieldSchema("fsplit", int, 30, 10, 0),
@@ -48,12 +49,19 @@ _INTERFACESPRINGBACKDYNA3DTHICKNESS_CARD1 = (
     FieldSchema("hflag", int, 60, 10, None),
 )
 
+_INTERFACESPRINGBACKDYNA3DTHICKNESS_CARD2 = (
+    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("tc", int, 10, 10, 0),
+    FieldSchema("rc", int, 20, 10, 0),
+)
+
 class InterfaceSpringbackDyna3DThickness(KeywordBase):
     """DYNA INTERFACE_SPRINGBACK_DYNA3D_THICKNESS keyword"""
 
     keyword = "INTERFACE"
     subkeyword = "SPRINGBACK_DYNA3D_THICKNESS"
     _link_fields = {
+        "nid": LinkType.NODE,
         "psid": LinkType.SET_PART,
     }
 
@@ -69,10 +77,14 @@ class InterfaceSpringbackDyna3DThickness(KeywordBase):
                 _INTERFACESPRINGBACKDYNA3DTHICKNESS_CARD1,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _INTERFACESPRINGBACKDYNA3DTHICKNESS_CARD2,
+                **kwargs,
+            ),
         ]
     @property
     def psid(self) -> typing.Optional[int]:
-        """Get or set the Part set ID for springback, see * SET_PART.
+        """Get or set the Part set ID for springback, see *SET_PART.
         """ # nopep8
         return self._cards[0].get_value("psid")
 
@@ -82,15 +94,15 @@ class InterfaceSpringbackDyna3DThickness(KeywordBase):
         self._cards[0].set_value("psid", value)
 
     @property
-    def nshv(self) -> typing.Optional[int]:
-        """Get or set the Number of additional shell history variables to be initialized. The shell stresses and plastic strains are written to the interface file. If NSHV is nonzero, the shell formulations and constitutive models should not change between runs.
+    def nhsv(self) -> typing.Optional[int]:
+        """Get or set the Number of shell or solid history variables (beyond the six stresses and effective plastic strain) to be initialized in the interface file. For solids, LS-DYNA writes one additional state variable (initial volume).  If NHSV is nonzero, the element formulations, unit system, and constitutive models should not change between runs. If NHSV exceeds the number of integration point history variables required by the constitutive model, LS-DYNA only writes the number required. Thus, if in doubt, set NHSV to a large number, such as 100
         """ # nopep8
-        return self._cards[0].get_value("nshv")
+        return self._cards[0].get_value("nhsv")
 
-    @nshv.setter
-    def nshv(self, value: int) -> None:
-        """Set the nshv property."""
-        self._cards[0].set_value("nshv", value)
+    @nhsv.setter
+    def nhsv(self, value: int) -> None:
+        """Set the nhsv property."""
+        self._cards[0].set_value("nhsv", value)
 
     @property
     def ftype(self) -> int:
@@ -141,8 +153,8 @@ class InterfaceSpringbackDyna3DThickness(KeywordBase):
     @property
     def rflag(self) -> typing.Optional[int]:
         """Get or set the Flag to carry over reference quantities, for hyperelastic materials and such.
-        EQ.0:	default, do not output.
-        EQ.1:	output reference coordinates and nodal masses.
+        EQ.0: default, do not output.
+        EQ.1: output reference coordinates and nodal masses.
         """ # nopep8
         return self._cards[0].get_value("rflag")
 
@@ -171,15 +183,15 @@ class InterfaceSpringbackDyna3DThickness(KeywordBase):
     @optc.setter
     def optc(self, value: str) -> None:
         """Set the optc property."""
-        if value not in ["OPTCARD", None]:
-            raise Exception("""optc must be `None` or one of {"OPTCARD"}.""")
+        if value not in ["0", "OPTCARD", None]:
+            raise Exception("""optc must be `None` or one of {"0","OPTCARD"}.""")
         self._cards[1].set_value("optc", value)
 
     @property
     def sldo(self) -> int:
         """Get or set the Output of solid element data as
-        EQ.0:	*ELEMENT_SOLID, or
-        EQ.1:	*ELEMENT_SOLID_ORTHO(only for anisotropic material).
+        EQ.0: *ELEMENT_SOLID, or
+        EQ.1: *ELEMENT_SOLID_ORTHO(only for anisotropic material).
         """ # nopep8
         return self._cards[1].get_value("sldo")
 
@@ -204,8 +216,8 @@ class InterfaceSpringbackDyna3DThickness(KeywordBase):
     @property
     def fsplit(self) -> int:
         """Get or set the Flag for splitting of the dynain file (only for ASCII format).
-        EQ.0:	dynain file written in one piece.
-        EQ.1:	Output is divided into two files, dynain_geo including the geometry data and dynain_ini including initial stresses and strains.
+        EQ.0: dynain file written in one piece.
+        EQ.1: Output is divided into two files, dynain_geo including the geometry data and dynain_ini including initial stresses and strains.
         """ # nopep8
         return self._cards[1].get_value("fsplit")
 
@@ -249,8 +261,8 @@ class InterfaceSpringbackDyna3DThickness(KeywordBase):
     @property
     def hflag(self) -> typing.Optional[int]:
         """Get or set the Output hourglass state, only valid for FTYPE=3:
-        EQ.0:	default, do not output.
-        EQ.1:	output hourglass stresses for carrying over to next simulation.
+        EQ.0: default, do not output.
+        EQ.1: output hourglass stresses for carrying over to next simulation.
         """ # nopep8
         return self._cards[1].get_value("hflag")
 
@@ -258,6 +270,64 @@ class InterfaceSpringbackDyna3DThickness(KeywordBase):
     def hflag(self, value: int) -> None:
         """Set the hflag property."""
         self._cards[1].set_value("hflag", value)
+
+    @property
+    def nid(self) -> typing.Optional[int]:
+        """Get or set the Node ID, see *NODE.
+        """ # nopep8
+        return self._cards[2].get_value("nid")
+
+    @nid.setter
+    def nid(self, value: int) -> None:
+        """Set the nid property."""
+        self._cards[2].set_value("nid", value)
+
+    @property
+    def tc(self) -> int:
+        """Get or set the Translational constraint:
+        EQ.0: no constraints,
+        EQ.1: constrained x displacement,
+        EQ.2: constrained y displacement,
+        EQ.3: constrained z displacement,
+        EQ.4: constrained x and y displacements,
+        EQ.5: constrained y and z displacements,
+        EQ.6: constrained z and x displacements,
+        EQ.7: constrained x, y, and z displacements.
+        """ # nopep8
+        return self._cards[2].get_value("tc")
+
+    @tc.setter
+    def tc(self, value: int) -> None:
+        """Set the tc property."""
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""tc must be `None` or one of {0,1,2,3,4,5,6,7}.""")
+        self._cards[2].set_value("tc", value)
+
+    @property
+    def rc(self) -> int:
+        """Get or set the Rotational constraint:
+        EQ.0: no constraints,
+        EQ.1: constrained x rotation,
+        EQ.2: constrained y rotation,
+        EQ.3: constrained z rotation,
+        EQ.4: constrained x and y rotations,
+        EQ.5: constrained y and z rotations,
+        EQ.6: constrained z and x rotations,
+        EQ.7: constrained x, y, and z rotations.
+        """ # nopep8
+        return self._cards[2].get_value("rc")
+
+    @rc.setter
+    def rc(self, value: int) -> None:
+        """Set the rc property."""
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""rc must be `None` or one of {0,1,2,3,4,5,6,7}.""")
+        self._cards[2].set_value("rc", value)
+
+    @property
+    def nid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
     def psid_link(self) -> typing.Optional[KeywordBase]:

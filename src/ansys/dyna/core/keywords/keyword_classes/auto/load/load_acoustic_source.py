@@ -72,12 +72,12 @@ class LoadAcousticSource(KeywordBase):
     @property
     def srctyp(self) -> int:
         """Get or set the Acoustic source type:
-        EQ.1:	Harmonic nodal point source.DATA1, DATA2,and LCID define the harmonic nodal source strength Q;
+        EQ.1: Harmonic nodal point source.DATA1, DATA2,and LCID define the harmonic nodal source strength Q;
         the phase angle of the nodal source strengthand frequency variation for a point source at node NID.
-        EQ.5 : Transient nodal point source.DATA1 and LCID define the transient nodal source strength(Q) and temporal variation for a point source at node NID.
-        EQ.11 : Harmonic plane wave : DATA1 and LCID define the magnitude and frequency variation for a harmonic plane wave with direction cosines given in
+        EQ.5: Transient nodal point source.DATA1 and LCID define the transient nodal source strength(Q) and temporal variation for a point source at node NID.
+        EQ.11: Harmonic plane wave: DATA1 and LCID define the magnitude and frequency variation for a harmonic plane wave with direction cosines given in
         DATA2, DATA3,and DATA4.SSID is the segment set ID of the external structural(coupled) surface.
-        EQ.12 : Harmonic spherical wave.DATA1, DATA5,and LCID define the magnitude, reference radiusand frequency variation for
+        EQ.12: Harmonic spherical wave.DATA1, DATA5,and LCID define the magnitude, reference radiusand frequency variation for
         a harmonic spherical wave centered at coordinates x_0, y_0,and z_0 specified with DATA2, DATA3,and DATA4.SSID is the segment set ID of the external structural(coupled) surface
         .
         """ # nopep8
@@ -103,10 +103,10 @@ class LoadAcousticSource(KeywordBase):
 
     @property
     def data1(self) -> float:
-        """Get or set the SRCTYP.EQ.1:	Magnitude of the harmonic nodal source strength
-        SRCTYP.EQ.5:	Magnitude of the transient nodal source strength
-        SRCTYP.EQ.11:	Pressure of the harmonic plane wave
-        SRCTYP.EQ.12:	Pressure of the harmonic spherical wave.
+        """Get or set the SRCTYP.EQ.1: Magnitude of the harmonic nodal source strength
+        SRCTYP.EQ.5: Magnitude of the transient nodal source strength
+        SRCTYP.EQ.11: Pressure of the harmonic plane wave
+        SRCTYP.EQ.12: Pressure of the harmonic spherical wave.
         """ # nopep8
         return self._cards[0].get_value("data1")
 
@@ -117,9 +117,9 @@ class LoadAcousticSource(KeywordBase):
 
     @property
     def data2(self) -> float:
-        """Get or set the SRCTYP.EQ.1:	Phase angle of the nodal source strength in radians
-        SRCTYP.EQ.11:	Direction cosine
-        SRCTYP.EQ.12:	x coordinate of center of spherical wave.
+        """Get or set the SRCTYP.EQ.1: Phase angle of the nodal source strength in radians
+        SRCTYP.EQ.11: Direction cosine
+        SRCTYP.EQ.12: x coordinate of center of spherical wave.
         """ # nopep8
         return self._cards[0].get_value("data2")
 
@@ -130,8 +130,8 @@ class LoadAcousticSource(KeywordBase):
 
     @property
     def data3(self) -> float:
-        """Get or set the SRCTYP.EQ.11:	Direction cosine
-        SRCTYP.EQ.12:	y coordinate of center of spherical wave.
+        """Get or set the SRCTYP.EQ.11: Direction cosine
+        SRCTYP.EQ.12: y coordinate of center of spherical wave.
         """ # nopep8
         return self._cards[0].get_value("data3")
 
@@ -142,8 +142,8 @@ class LoadAcousticSource(KeywordBase):
 
     @property
     def data4(self) -> float:
-        """Get or set the SRCTYP.EQ.11:	Direction cosine
-        SRCTYP.EQ.12:	z coordinate of center of spherical wave.
+        """Get or set the SRCTYP.EQ.11: Direction cosine
+        SRCTYP.EQ.12: z coordinate of center of spherical wave.
         """ # nopep8
         return self._cards[0].get_value("data4")
 

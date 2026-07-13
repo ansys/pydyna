@@ -130,8 +130,8 @@ class DefineQuasarCoupling(KeywordBase):
     @property
     def type(self) -> int:
         """Get or set the Region type:
-        EQ.0:	node ID
-        EQ.1 : node set ID
+        EQ.0: node ID
+        EQ.1: node set ID
         """ # nopep8
         return self._cards[0].get_value("type")
 
@@ -144,7 +144,7 @@ class DefineQuasarCoupling(KeywordBase):
 
     @property
     def romid(self) -> typing.Optional[int]:
-        """Get or set the Cadlm’s ROM ID
+        """Get or set the Cadlms ROM ID
         """ # nopep8
         return self._cards[0].get_value("romid")
 
@@ -167,8 +167,8 @@ class DefineQuasarCoupling(KeywordBase):
     @property
     def ptype(self) -> int:
         """Get or set the Type for PID:
-        EQ.0:	part ID(Default)
-        EQ.1 : part set ID
+        EQ.0: part ID(Default)
+        EQ.1: part set ID
         """ # nopep8
         return self._cards[0].get_value("ptype")
 
@@ -182,10 +182,10 @@ class DefineQuasarCoupling(KeywordBase):
     @property
     def iopt(self) -> int:
         """Get or set the Option for exchanging data between LS-DYNA/Cadlm Quasar
-        EQ.0:	Default.LS - DYNA output nodal translational and rotational coordinates and input nodal translational and rotational forces
-        EQ.1 : LS - DYNA output nodal translational and rotational displacements and input nodal translational and rotational forces
-        EQ.2 : LS - DYNA output nodal translational coordinates and input nodal translational forces
-        EQ.3 : LS - DYNA output nodal translational displacements and input nodal translational forces
+        EQ.0: Default.LS - DYNA output nodal translational and rotational coordinates and input nodal translational and rotational forces
+        EQ.1: LS - DYNA output nodal translational and rotational displacements and input nodal translational and rotational forces
+        EQ.2: LS - DYNA output nodal translational coordinates and input nodal translational forces
+        EQ.3: LS - DYNA output nodal translational displacements and input nodal translational forces
         """ # nopep8
         return self._cards[0].get_value("iopt")
 

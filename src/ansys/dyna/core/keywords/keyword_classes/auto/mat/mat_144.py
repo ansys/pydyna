@@ -91,7 +91,7 @@ class Mat144(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.  A unique number has to be chosen.
+        """Get or set the Material identification. A unique number has to be chosen.
         """ # nopep8
         return self._cards[0].get_value("mid")
 

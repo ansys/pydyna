@@ -94,6 +94,7 @@ class Mat142(KeywordBase):
         "i12": LinkType.DEFINE_CURVE,
         "i23": LinkType.DEFINE_CURVE,
         "iaa": LinkType.DEFINE_CURVE,
+        "iscl": LinkType.DEFINE_CURVE,
     }
 
     def __init__(self, **kwargs):
@@ -311,12 +312,12 @@ class Mat142(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC, particularly the Material Directions section, for details):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
-        EQ.2.0:	Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
-        EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
-        LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_OPTION).
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with *DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
+        EQ.1.0: Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
+        EQ.4.0: Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number(CID on *DEFINE_COORDINATE_OPTION).
         """ # nopep8
         return self._cards[2].get_value("aopt")
 
@@ -352,14 +353,14 @@ class Mat142(KeywordBase):
     @property
     def macf(self) -> int:
         """Get or set the Material axes change flag for solid elements:
-        EQ.1 : No change, default
-        EQ.2 : Switch material axes a and b after BETA rotation
-        EQ.3 : Switch material axes a and c after BETA rotation
-        EQ.4 : Switch material axes b and c after BETA rotation
-        EQ. - 4 : Switch material axes b and c before BETA rotation
-        EQ. - 3 : Switch material axes a and c before BETA rotation
-        EQ. - 2 : Switch material axes a and b before BETA rotation
-        Figure Error!Reference source not found.indicates when LS - DYNA applies MACF during the process to obtain the final material axes.If BETA on * ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT = 3, the BETA input on Card 3 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed.
+        EQ.1: No change, default
+        EQ.2: Switch material axes a and b after BETA rotation
+        EQ.3: Switch material axes a and c after BETA rotation
+        EQ.4: Switch material axes b and c after BETA rotation
+        EQ. - 4: Switch material axes b and c before BETA rotation
+        EQ. - 3: Switch material axes a and c before BETA rotation
+        EQ. - 2: Switch material axes a and b before BETA rotation
+        If BETA on *ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT = 3, the BETA input on Card 3 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed.
         """ # nopep8
         return self._cards[2].get_value("macf")
 
@@ -590,4 +591,19 @@ class Mat142(KeywordBase):
     def iaa_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for iaa."""
         self.iaa = value.lcid
+
+    @property
+    def iscl_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for iscl."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.iscl:
+                return kwd
+        return None
+
+    @iscl_link.setter
+    def iscl_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for iscl."""
+        self.iscl = value.lcid
 

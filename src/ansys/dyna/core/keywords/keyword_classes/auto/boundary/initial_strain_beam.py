@@ -1,0 +1,139 @@
+# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+"""Module providing the InitialStrainBeam class."""
+import typing
+from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_INITIALSTRAINBEAM_CARD0 = (
+    FieldSchema("eid", int, 0, 10, None),
+    FieldSchema("rdisp", float, 10, 10, 0.0),
+    FieldSchema("sdisp", float, 20, 10, 0.0),
+    FieldSchema("tdisp", float, 30, 10, 0.0),
+    FieldSchema("rrot", float, 40, 10, 0.0),
+    FieldSchema("srot", float, 50, 10, 0.0),
+    FieldSchema("trot", float, 60, 10, 0.0),
+)
+
+class InitialStrainBeam(KeywordBase):
+    """DYNA INITIAL_STRAIN_BEAM keyword"""
+
+    keyword = "INITIAL"
+    subkeyword = "STRAIN_BEAM"
+    _link_fields = {
+        "eid": LinkType.ELEMENT_BEAM,
+    }
+
+    def __init__(self, **kwargs):
+        """Initialize the InitialStrainBeam class."""
+        super().__init__(**kwargs)
+        self._cards = [
+            Card.from_field_schemas_with_defaults(
+                _INITIALSTRAINBEAM_CARD0,
+                **kwargs,
+            ),
+        ]
+    @property
+    def eid(self) -> typing.Optional[int]:
+        """Get or set the Element ID (must be a discrete beam, i.e., ELFORM = 6 on *SECTION_BEAM).
+        """ # nopep8
+        return self._cards[0].get_value("eid")
+
+    @eid.setter
+    def eid(self, value: int) -> None:
+        """Set the eid property."""
+        self._cards[0].set_value("eid", value)
+
+    @property
+    def rdisp(self) -> float:
+        """Get or set the The initial displacement along the local r-axis
+        """ # nopep8
+        return self._cards[0].get_value("rdisp")
+
+    @rdisp.setter
+    def rdisp(self, value: float) -> None:
+        """Set the rdisp property."""
+        self._cards[0].set_value("rdisp", value)
+
+    @property
+    def sdisp(self) -> float:
+        """Get or set the The initial displacement along the local s-axis
+        """ # nopep8
+        return self._cards[0].get_value("sdisp")
+
+    @sdisp.setter
+    def sdisp(self, value: float) -> None:
+        """Set the sdisp property."""
+        self._cards[0].set_value("sdisp", value)
+
+    @property
+    def tdisp(self) -> float:
+        """Get or set the The initial displacement along the local t-axis
+        """ # nopep8
+        return self._cards[0].get_value("tdisp")
+
+    @tdisp.setter
+    def tdisp(self, value: float) -> None:
+        """Set the tdisp property."""
+        self._cards[0].set_value("tdisp", value)
+
+    @property
+    def rrot(self) -> float:
+        """Get or set the The initial rotation about the local r-axis
+        """ # nopep8
+        return self._cards[0].get_value("rrot")
+
+    @rrot.setter
+    def rrot(self, value: float) -> None:
+        """Set the rrot property."""
+        self._cards[0].set_value("rrot", value)
+
+    @property
+    def srot(self) -> float:
+        """Get or set the The initial rotation about the local s-axis
+        """ # nopep8
+        return self._cards[0].get_value("srot")
+
+    @srot.setter
+    def srot(self, value: float) -> None:
+        """Set the srot property."""
+        self._cards[0].set_value("srot", value)
+
+    @property
+    def trot(self) -> float:
+        """Get or set the The initial rotation about the local t-axis
+        """ # nopep8
+        return self._cards[0].get_value("trot")
+
+    @trot.setter
+    def trot(self, value: float) -> None:
+        """Set the trot property."""
+        self._cards[0].set_value("trot", value)
+
+    @property
+    def eid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the ELEMENT keyword containing the given eid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.eid, "parts")
+

@@ -188,12 +188,12 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
         EQ.2: Complete Quadratic Combination method (CQC),
         EQ.3: Double Sum method,
         EQ.4: NRL-SUM method,
-        EQ.-4:	NRL-SUM method with CSM (Closely Spaced Modes) treatment.  The CSM pairs are automatically identified.
-        EQ. - 14:	NRL - SUM method with CSM(Closely Spaced Modes) treatment, where the CSM pairs are defined by SID(Mode set ID, see * SET_MODE) in Card 5
+        EQ.-4: NRL-SUM method with CSM (Closely Spaced Modes) treatment.  The CSM pairs are automatically identified.
+        EQ. - 14: NRL - SUM method with CSM(Closely Spaced Modes) treatment, where the CSM pairs are defined by SID(Mode set ID, see *SET_MODE) in Card 5
         EQ.5: Double Sum method based on Gupta-Cordero coefficient,
         EQ.6: Double Sum method based on modified Gupta-Cordero coefficient,
         EQ.7: Rosenblueth method.
-        EQ.8: 	Absolute value method (ABS)
+        EQ.8: Absolute value method (ABS)
         EQ.99:combining results provided by two mode combination methods defined in Card 1.1 with corresponding weights defined in Card 1.2
         """ # nopep8
         return self._cards[0].get_value("mcomb")
@@ -219,9 +219,9 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
     @property
     def mprs(self) -> int:
         """Get or set the Multi-point or multidirectional response combination method:
-        EQ.0:	SRSS.
-        EQ.1 : 100 - 40 - 40 rule(Newmark method).
-        EQ.2:	100-40-40 rule (Newmark method) with coefficient 0.4 replaced by R40 in Card 1a
+        EQ.0: SRSS.
+        EQ.1: 100 - 40 - 40 rule(Newmark method).
+        EQ.2: 100-40-40 rule (Newmark method) with coefficient 0.4 replaced by R40 in Card 1a
         """ # nopep8
         return self._cards[0].get_value("mprs")
 
@@ -289,7 +289,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @property
     def dampf(self) -> typing.Optional[float]:
-        """Get or set the Modal damping ratio, ζ.
+        """Get or set the Modal damping ratio, .
         """ # nopep8
         return self._cards[4].get_value("dampf")
 
@@ -300,7 +300,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @property
     def lcdamp(self) -> typing.Optional[int]:
-        """Get or set the Load Curve ID for defining frequency dependent modal damping ratio ζ.
+        """Get or set the Load Curve ID for defining frequency dependent modal damping ratio .
         """ # nopep8
         return self._cards[4].get_value("lcdamp")
 
@@ -326,7 +326,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @property
     def dmpmas(self) -> float:
-        """Get or set the Mass proportional damping constant α, in Rayleigh damping.
+        """Get or set the Mass proportional damping constant , in Rayleigh damping.
         """ # nopep8
         return self._cards[4].get_value("dmpmas")
 
@@ -337,7 +337,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
 
     @property
     def dmpstf(self) -> float:
-        """Get or set the Stiffness proportional damping constant β, in Rayleigh damping.
+        """Get or set the Stiffness proportional damping constant , in Rayleigh damping.
         """ # nopep8
         return self._cards[4].get_value("dmpstf")
 
@@ -349,7 +349,7 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
     @property
     def std(self) -> int:
         """Get or set the Design spectrum standard for shock load
-        EQ.1:	NRL-1396,
+        EQ.1: NRL-1396,
         EQ.-1:Spectrum constants defined by user in Card 5.
         """ # nopep8
         return self._cards[5].get_value("std")
@@ -364,12 +364,12 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
     @property
     def unit(self) -> int:
         """Get or set the Unit system
-        EQ.1:	MKS (kg, m, s, N, Pa)
-        EQ.2:	GPA (kg, mm, ms, kN, GPa)
-        EQ.3:	MPA (ton, mm, s, N, MPa)
-        EQ.4:	BIN (lb, in, s, lbf, psi)
-        EQ.5	miu_MKS (gm, mm, ms, N, N/mm2)
-        EQ.6:	CGS (gm, cm, s, dyne, dyne/cm2).
+        EQ.1: MKS (kg, m, s, N, Pa)
+        EQ.2: GPA (kg, mm, ms, kN, GPa)
+        EQ.3: MPA (ton, mm, s, N, MPa)
+        EQ.4: BIN (lb, in, s, lbf, psi)
+        EQ.5 miu_MKS (gm, mm, ms, N, N/mm2)
+        EQ.6: CGS (gm, cm, s, dyne, dyne/cm2).
         """ # nopep8
         return self._cards[5].get_value("unit")
 
@@ -394,10 +394,10 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
     @property
     def vid(self) -> int:
         """Get or set the Direction of shock load
-        EQ.1:	x-direction
-        EQ.2:	y-direction
-        EQ.3:	z-direction
-        < 0:	direction is given by vector |VID|.
+        EQ.1: x-direction
+        EQ.2: y-direction
+        EQ.3: z-direction
+        < 0: direction is given by vector |VID|.
         """ # nopep8
         return self._cards[5].get_value("vid")
 
@@ -453,8 +453,8 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
     @property
     def shptyp(self) -> int:
         """Get or set the Ship type
-        EQ.1:	Submarine
-        EQ.2:	Surface ship.
+        EQ.1: Submarine
+        EQ.2: Surface ship.
         """ # nopep8
         return self._cards[6].get_value("shptyp")
 
@@ -468,9 +468,9 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
     @property
     def mount(self) -> int:
         """Get or set the Mount type
-        EQ.1:	Hull Mounted System
-        EQ.2:	Deck Mounted System
-        EQ.3:	Shell Plating Mounted System.
+        EQ.1: Hull Mounted System
+        EQ.2: Deck Mounted System
+        EQ.3: Shell Plating Mounted System.
         """ # nopep8
         return self._cards[6].get_value("mount")
 
@@ -484,9 +484,9 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
     @property
     def movemt(self) -> int:
         """Get or set the Movement type
-        EQ.1:	Vertical
-        EQ.2:	Athwartship
-        EQ.3:	Fore and Aft.
+        EQ.1: Vertical
+        EQ.2: Athwartship
+        EQ.3: Fore and Aft.
         """ # nopep8
         return self._cards[6].get_value("movemt")
 
@@ -500,8 +500,8 @@ class FrequencyDomainResponseSpectrumDdam(KeywordBase):
     @property
     def mattyp(self) -> int:
         """Get or set the Material type
-        EQ.1:	Elastic
-        EQ.2:	Elasto-plastic.
+        EQ.1: Elastic
+        EQ.2: Elasto-plastic.
         """ # nopep8
         return self._cards[6].get_value("mattyp")
 

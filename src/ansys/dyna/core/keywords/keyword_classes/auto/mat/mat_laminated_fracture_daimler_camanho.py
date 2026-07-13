@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATLAMINATEDFRACTUREDAIMLERCAMANHO_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -110,6 +112,24 @@ _MATLAMINATEDFRACTUREDAIMLERCAMANHO_CARD7 = (
     FieldSchema("tsmd31", float, 50, 10, None),
 )
 
+_MATLAMINATEDFRACTUREDAIMLERCAMANHO_CARD8 = (
+    FieldSchema("ef_11t", float, 0, 10, None),
+    FieldSchema("ef_11c", float, 10, 10, None),
+    FieldSchema("ef_22t", float, 20, 10, None),
+    FieldSchema("ef_22c", float, 30, 10, None),
+    FieldSchema("ef_12", float, 40, 10, None),
+    FieldSchema("ef_23", float, 50, 10, None),
+    FieldSchema("ef_31", float, 60, 10, None),
+    FieldSchema("lcss", float, 70, 10, None),
+)
+
+_MATLAMINATEDFRACTUREDAIMLERCAMANHO_CARD9 = (
+    FieldSchema("cf12", float, 0, 10, 1.0),
+    FieldSchema("cf13", float, 10, 10, 1.0),
+    FieldSchema("cf23", float, 20, 10, 1.0),
+    FieldSchema("softc", float, 30, 10, 1.0),
+)
+
 _MATLAMINATEDFRACTUREDAIMLERCAMANHO_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
@@ -122,6 +142,9 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
+    _link_fields = {
+        "lcss": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatLaminatedFractureDaimlerCamanho class."""
@@ -160,6 +183,14 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
                 _MATLAMINATEDFRACTUREDAIMLERCAMANHO_CARD7,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _MATLAMINATEDFRACTUREDAIMLERCAMANHO_CARD8,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MATLAMINATEDFRACTUREDAIMLERCAMANHO_CARD9,
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = MatLaminatedFractureDaimlerCamanho._option_spec_list[0],
                 cards = [
@@ -173,7 +204,7 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.
+        """Get or set the Material identification. A unique number or label must be specified (see *PART).
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -195,7 +226,11 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
 
     @property
     def ea(self) -> typing.Optional[float]:
-        """Get or set the Ea, Young's modulus in a-direction (longitudinal).
+        """Get or set the GT.0.0: E_a, Young's modulus - longitudinal direction
+        LT.0.0: Load curve or table ID = (-EA).It is available for shells only.
+        Load Curve.When - EA refers to a load curve ID, it is taken as defining the uniaxial elastic stress as a function of strain behavior in the longitudinal direction.Negative data points correspond to compressionand positive values to tension.
+        Tabular Data.When - EA refers to a table ID, it defines a load curve for each strain rate value.The load curves give the uniaxial elastic stress as a function of strain behavior in the longitudinal direction.
+        Logarithmically Defined Tables.If the first uniaxial elastic stress as a function of strain curve in the table corresponds to a negative strain rate, LS - DYNA assumes that the natural logarithm of the strain rate value is used for all stress - strain curves.
         """ # nopep8
         return self._cards[0].get_value("ea")
 
@@ -206,7 +241,11 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
 
     @property
     def eb(self) -> typing.Optional[float]:
-        """Get or set the Eb, Young's modulus in b-direction (transverse).
+        """Get or set the GT.0.0: E_b, Young's modulus - transverse direction
+        LT.0.0: Load Curve ID or Table ID = (-EB). (shells only).
+        Load Curve.When - EB refers to a load curve ID, it is taken as defining the uniaxial elastic stress as a function of strain behavior in the transverse direction.Negative data points correspond to compression,and positive values to tension.
+        Tabular Data.When - EB corresponds to a table ID, it specifies a load curve for each strain rate value.The load curves give the uniaxial elastic stress as a function of strain behavior in the transverse direction.
+        Logarithmically Defined Tables.If the first uniaxial elastic stress as a function of strain curve in the table corresponds to a negative strain rate, LS - DYNA assumes that the natural logarithm of the strain rate value is used for all stress - strain curves.
         """ # nopep8
         return self._cards[0].get_value("eb")
 
@@ -261,7 +300,11 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
 
     @property
     def gab(self) -> typing.Optional[float]:
-        """Get or set the Gab, shear modulus ab.
+        """Get or set the GT.0.0: G_ab, shear modulus in the ab-direction
+        LT.0.0: Load Curve ID or Table ID = (-GAB)
+        Load Curve.When - GAB refers to a load curve ID, it is taken as defining the elastic shear stress as a function of shear strain behavior in the ab - direction.
+        Tabular Data.When - GAB corresponds to a table ID, it defines a load curve for each strain rate value.The load curves give the elastic shear stress as a function of shear strain behavior in the ab - direction.
+        Logarithmically Defined Tables.If the first elastic shear stress as a function of shear strain curve in the table corresponds to a negative strain rate, LS - DYNA assumes that the natural logarithm of the strain rate value is used for all shear stress - shear strain curves.
         """ # nopep8
         return self._cards[1].get_value("gab")
 
@@ -303,7 +346,7 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
         This option is for solid elements only.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
         EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         EQ.4.0: locally orthotropic in cylindrical coordinate system with
         the material axes determined by a vector v, and an originating point, p, which define the centerline axis. This option is for solid elements only
         LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
@@ -335,7 +378,7 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     def dkf(self) -> float:
         """Get or set the Flag to control failure of an integration point based on longitudinal (fiber) compressive failure:
         EQ.0.0: integration point fails if any damage variable reaches 1.0.
-        EQ.1.0: no failure of integration point due to fiber compressive failure	(dkink(i)=1.0).
+        EQ.1.0: no failure of integration point due to fiber compressive failure (dkink(i)=1.0).
         """ # nopep8
         return self._cards[1].get_value("dkf")
 
@@ -538,9 +581,9 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     @property
     def msg(self) -> typing.Optional[float]:
         """Get or set the Flag to control the output of warning messages:
-        EQ.0:	Nnly one warning message will be written per part.
-        GT.0 : All warnings are written.
-        LT.0 : No warnings are written.
+        EQ.0: Nnly one warning message will be written per part.
+        GT.0: All warnings are written.
+        LT.0: No warnings are written.
         """ # nopep8
         return self._cards[3].get_value("msg")
 
@@ -552,10 +595,8 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     @property
     def gxc(self) -> typing.Optional[float]:
         """Get or set the Fracture toughness for longitudinal (fiber) compressive failure mode.
-        GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-GXC) which defines the fracture
-        toughness for fiber compressive failure mode as a
-        function of characteristic element length. No further regularization.
+        GT.0.0: The given value is regularized with the characteristic element length.
+        LT.0.0: Load curve or table ID = -GXC.If referring to a load curve, the load curve gives the fracture toughness for fiber compressive failure mode as a function of characteristic element length.If referring to a table, each strain rate value indexes a load curve that defines the fracture toughness for fiber compressive failure mode as a function of characteristic element length.In either case, no further regularization occurs.
         """ # nopep8
         return self._cards[4].get_value("gxc")
 
@@ -566,11 +607,9 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
 
     @property
     def gxt(self) -> typing.Optional[float]:
-        """Get or set the Fracture toughness for longitudinal (fiber) tensile failure mode.
-        GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-GXT) which defines the fracture
-        toughness for fiber tensile failure mode as a function of
-        characteristic element length. No further regularization.
+        """Get or set the Fracture toughness for longitudinal (fiber) tensile failure mode:
+        GT.0.0: The given value is regularized with the characteristic element length.
+        LT.0.0: Load curve or table ID = -GXT.If referring to a load curve, the load curve gives the fracture toughness for fiber tensile failure mode as a function of characteristic element length.If referring to a table, each strain rate value indexes a load curve that defines the fracture toughness for fiber tensile failure mode as a function of characteristic element length.In either case, no further regularization occurs.
         """ # nopep8
         return self._cards[4].get_value("gxt")
 
@@ -582,10 +621,8 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     @property
     def gyc(self) -> typing.Optional[float]:
         """Get or set the Fracture toughness for transverse compressive failure mode.
-        GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-GYC)) which defines the fracture
-        toughness for intralaminar matrix tensile failure as a
-        function of characteristic element length. No further regularization.
+        GT.0.0: The given value is regularized with the characteristic element length.
+        LT.0.0: Load curve or table ID = -GYC.If referring to a load curve, the load curve gives the fracture toughness for transverse compressive failure mode as a function of characteristic element length.If referring to a table, each strain rate value indexes a load curve that defines the fracture toughness for transverse compressive failure mode as a function of characteristic element length.In either case, no further regularization occurs.
         """ # nopep8
         return self._cards[4].get_value("gyc")
 
@@ -597,10 +634,8 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     @property
     def gyt(self) -> typing.Optional[float]:
         """Get or set the Fracture toughness for transverse tensile failure mode.
-        GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-GYT)) which defines the fracture
-        toughness for intralaminar matrix transverse shear failure
-        as a function of characteristic element length. No further      regularization.
+        GT.0.0: The given value is regularized with the characteristic element length.
+        LT.0.0: Load curve or table ID = -GYT.If referring to a load curve,t eh load curve defines the fracture toughness for transverse tensile failure mode as a function of characteristic element length.If referring to a table, each strain rate value indexes a load curve that defines the fracture toughness for transverse tensile failure mode as a function of characteristic element length.In either case, no further regularization occurs.
         """ # nopep8
         return self._cards[4].get_value("gyt")
 
@@ -612,10 +647,8 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     @property
     def gsl(self) -> typing.Optional[float]:
         """Get or set the Fracture toughness for in-plane shear failure mode.
-        GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-GSL)) which defines the fracture
-        toughness for intralaminar matrix longitudinal shear
-        failure as a function of characteristic element length. No further regularization.
+        GT.0.0: The given value is regularized with the characteristic element length.
+        LT.0.0: Load curve or table ID = -GSL.If referring to a load curve, the load curve gives the fracture toughness for in - plane shear failure mode as a function of characteristic element length.If referring to a table, each strain rate value indexes a load curve that defines the fracture toughness for in - plane shear failure mode as a function of characteristic element length.In either case, no further regularization occurs.
         """ # nopep8
         return self._cards[4].get_value("gsl")
 
@@ -626,12 +659,9 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
 
     @property
     def gxco(self) -> typing.Optional[float]:
-        """Get or set the Fracture toughness for longitudinal (fiber) compressive failure mode
-        to define bi-linear damage evolution..
-        GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-GXCO)) which defines the fracture
-        toughness for intralaminar matrix longitudinal shear
-        failure as a function of characteristic element length. No further regularization.
+        """Get or set the Fracture toughness for longitudinal (fiber) compressive failure mode to define bilinear damage evolution.
+        GT.0.0: The given value is regularized with the characteristic element length.
+        LT.0.0: Load curve or table ID = -GXCO.If referring to a load curve, the load curve gives the fracture toughness for fiber compressive failure mode to define bilinear damage evolution as a function of characteristic element length.If referring to a table, each strain rate value indexes a load curve that defines the fracture toughness for fiber compressive failure mode to define bilinear damage evolution as a function of characteristic element length.In either case, no further regularization occurs.
         """ # nopep8
         return self._cards[4].get_value("gxco")
 
@@ -642,12 +672,9 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
 
     @property
     def gxto(self) -> typing.Optional[float]:
-        """Get or set the Fracture toughness for longitudinal (fiber) tensile failure mode to
-        define bi-linear damage evolution.
-        GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-GXTO)) which defines the fracture
-        toughness for intralaminar matrix longitudinal shear
-        failure as a function of characteristic element length. No further regularization.
+        """Get or set the Fracture toughness for longitudinal (fiber) tensile failure mode to define bilinear damage evolution.
+        GT.0.0: The given value is regularized with the characteristic element length.
+        LT.0.0: Load curve or table ID = -GXTO.If referring to a load curve, the load curve defines the fracture toughness for fiber tensile failure mode to define bilinear damage evolution as a function of characteristic element length.If a table, each strain rate value indexes a load curve that defines the fracture toughness for fiber tensile failure mode to define bilinear damage evolution as a function of characteristic element length.In either case, no further regularization occurs.
         """ # nopep8
         return self._cards[4].get_value("gxto")
 
@@ -659,6 +686,8 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     @property
     def xc(self) -> typing.Optional[float]:
         """Get or set the Longitudinal compressive strength, a-axis (positive value).
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-XC) which defines the longitudinal compressive strength as a function of longitudinal strain rate(ε ̇_aa)
         """ # nopep8
         return self._cards[5].get_value("xc")
 
@@ -670,6 +699,8 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     @property
     def xt(self) -> typing.Optional[float]:
         """Get or set the Longitudinal tensile strength, a-axis.
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-XT) which defines the longitudinal tensile strength as a function of longitudinal strain rate(ε ̇_aa)
         """ # nopep8
         return self._cards[5].get_value("xt")
 
@@ -681,6 +712,8 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     @property
     def yc(self) -> typing.Optional[float]:
         """Get or set the Transverse compressive strength, b-axis (positive value).
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-YC) which defines the transverse compressive strength as a function of transverse strain rate(ε ̇_bb)
         """ # nopep8
         return self._cards[5].get_value("yc")
 
@@ -692,6 +725,8 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     @property
     def yt(self) -> typing.Optional[float]:
         """Get or set the Transverse tensile strength, b-axis.
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-YT) which defines the transverse tensile strength as a function of transverse strain rate(ε ̇_bb)
         """ # nopep8
         return self._cards[5].get_value("yt")
 
@@ -703,6 +738,8 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     @property
     def sl(self) -> typing.Optional[float]:
         """Get or set the Shear strength, ab plane.
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-SL) which defines the longitudinal shear strength as a function of in - plane shear strain rate(ε ̇_ab)
         """ # nopep8
         return self._cards[5].get_value("sl")
 
@@ -714,6 +751,8 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     @property
     def xco(self) -> typing.Optional[float]:
         """Get or set the Longitudinal compressive strength at inflection point (positive value).
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-XCO) which defines the longitudinal compressive strength at inflection point as a function of longitudinal strain rate(ε ̇_aa).
         """ # nopep8
         return self._cards[5].get_value("xco")
 
@@ -725,6 +764,8 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     @property
     def xto(self) -> typing.Optional[float]:
         """Get or set the Longitudinal tensile strength at inflection point.
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-XTO) which defines the longitudinal tensile strength at inflection point as a function of longitudinal strain rate(ε ̇_aa)
         """ # nopep8
         return self._cards[5].get_value("xto")
 
@@ -747,6 +788,8 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     @property
     def sigy(self) -> typing.Optional[float]:
         """Get or set the In-plane shear yield stress.
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-SIGY) which defines the in - plane shear yield stress as a function of in - plane shear strain rate(ε ̇_ab)
         """ # nopep8
         return self._cards[6].get_value("sigy")
 
@@ -770,9 +813,9 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Hardening parameter for in-plane shear plasticity (0.0 <= BETA <=	1.0).
+        """Get or set the Hardening parameter for in-plane shear plasticity (0.0 <= BETA <= 1.0).
         EQ.0.0: Pure kinematic hardening
-        EQ.1.0: Pure isotropic hardening	0.0<BETA<1.0: mixed hardening.
+        EQ.1.0: Pure isotropic hardening 0.0<BETA<1.0: mixed hardening.
         """ # nopep8
         return self._cards[6].get_value("beta")
 
@@ -813,7 +856,7 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
 
     @property
     def soft(self) -> float:
-        """Get or set the Softening reduction factor for material strength in crashfront	elements (default = 1.0).
+        """Get or set the Softening reduction factor for material strength in crashfront elements (default = 1.0). If SOFTC is defined as well, SOFTC is used to reduce the longitudinal compressive strength XC
         """ # nopep8
         return self._cards[6].get_value("soft")
 
@@ -825,9 +868,9 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the Strain rate averaging option:
-        EQ.0.0:	strain rate is evaluated using a running average.
-        LT.0.0 : strain rate is evaluated using average of last 11 time steps.
-        GT.0.0 : strain rate is averaged over the last DT time units.
+        EQ.0.0: strain rate is evaluated using a running average.
+        LT.0.0: strain rate is evaluated using average of last 11 time steps.
+        GT.0.0: strain rate is averaged over the last DT time units.
         """ # nopep8
         return self._cards[6].get_value("dt")
 
@@ -860,7 +903,7 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
 
     @property
     def tsmd23(self) -> typing.Optional[float]:
-        """Get or set the Transverse shear maximum damage; default‌ = 0.90 (23-plane).
+        """Get or set the Transverse shear maximum damage; default = 0.90 (23-plane).
         """ # nopep8
         return self._cards[7].get_value("tsmd23")
 
@@ -893,7 +936,7 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
 
     @property
     def tsmd31(self) -> typing.Optional[float]:
-        """Get or set the Transverse shear maximum damage; default‌ = 0.90 (31-plane)
+        """Get or set the Transverse shear maximum damage; default = 0.90 (31-plane)
         """ # nopep8
         return self._cards[7].get_value("tsmd31")
 
@@ -903,16 +946,165 @@ class MatLaminatedFractureDaimlerCamanho(KeywordBase):
         self._cards[7].set_value("tsmd31", value)
 
     @property
+    def ef_11t(self) -> typing.Optional[float]:
+        """Get or set the Tensile failure strain in longitudinal a-direction
+        """ # nopep8
+        return self._cards[8].get_value("ef_11t")
+
+    @ef_11t.setter
+    def ef_11t(self, value: float) -> None:
+        """Set the ef_11t property."""
+        self._cards[8].set_value("ef_11t", value)
+
+    @property
+    def ef_11c(self) -> typing.Optional[float]:
+        """Get or set the Compressive failure strain in longitudinal a-direction
+        """ # nopep8
+        return self._cards[8].get_value("ef_11c")
+
+    @ef_11c.setter
+    def ef_11c(self, value: float) -> None:
+        """Set the ef_11c property."""
+        self._cards[8].set_value("ef_11c", value)
+
+    @property
+    def ef_22t(self) -> typing.Optional[float]:
+        """Get or set the Tensile failure strain in transverse b-direction.
+        """ # nopep8
+        return self._cards[8].get_value("ef_22t")
+
+    @ef_22t.setter
+    def ef_22t(self, value: float) -> None:
+        """Set the ef_22t property."""
+        self._cards[8].set_value("ef_22t", value)
+
+    @property
+    def ef_22c(self) -> typing.Optional[float]:
+        """Get or set the Compressive failure strain in transverse b-direction.
+        """ # nopep8
+        return self._cards[8].get_value("ef_22c")
+
+    @ef_22c.setter
+    def ef_22c(self, value: float) -> None:
+        """Set the ef_22c property."""
+        self._cards[8].set_value("ef_22c", value)
+
+    @property
+    def ef_12(self) -> typing.Optional[float]:
+        """Get or set the In-plane shear failure strain in ab-plane
+        """ # nopep8
+        return self._cards[8].get_value("ef_12")
+
+    @ef_12.setter
+    def ef_12(self, value: float) -> None:
+        """Set the ef_12 property."""
+        self._cards[8].set_value("ef_12", value)
+
+    @property
+    def ef_23(self) -> typing.Optional[float]:
+        """Get or set the Out-of-plane shear failure strain in bc-plane
+        """ # nopep8
+        return self._cards[8].get_value("ef_23")
+
+    @ef_23.setter
+    def ef_23(self, value: float) -> None:
+        """Set the ef_23 property."""
+        self._cards[8].set_value("ef_23", value)
+
+    @property
+    def ef_31(self) -> typing.Optional[float]:
+        """Get or set the Out-of-plane shear failure strain in ca-plane
+        """ # nopep8
+        return self._cards[8].get_value("ef_31")
+
+    @ef_31.setter
+    def ef_31(self, value: float) -> None:
+        """Set the ef_31 property."""
+        self._cards[8].set_value("ef_31", value)
+
+    @property
+    def lcss(self) -> typing.Optional[float]:
+        """Get or set the Load curve ID or table ID. If this is defined, SIGY and ETAN will be ignored.
+        Load Curve.When LCSS is a load curve ID, it defines the nonlinear in - plane shear - stress as a function of in - plane shear - strain(r_ab). Tabular Data.The table maps in - plane strain rate values(r ̇_ab) to a load curve giving the in - plane shear - stress as a function of in - plane shear - strain.For strain rates below the minimum value, the curve for the lowest defined value of strain rate is used.Likewise, when the strain rate exceeds the maximum value, the curve for the highest defined value of strain rate is used.
+        Logarithmically Defined Table.An alternative way to invoke logarithmic interpolation between discrete strain rates is described as follows.If the first value in the table is negative, LS - DYNA assumes that all the table values represent the natural logarithm of a strain rate.Since the tables are internally discretized to equally space the table values, it makes good sense from an accuracy standpoint that the table values represent the natural log of strain rate when the lowest strain rateand highest strain rate differ by several orders of magnitude.There is some additional computational cost associated with invoking logarithmic interpolation.
+        """ # nopep8
+        return self._cards[8].get_value("lcss")
+
+    @lcss.setter
+    def lcss(self, value: float) -> None:
+        """Set the lcss property."""
+        self._cards[8].set_value("lcss", value)
+
+    @property
+    def cf12(self) -> float:
+        """Get or set the Coupling factor for in-plane shear (ab-plane) damage with the fiber damage in tension: d6 = 1 - [1 - d6*(r2+))](1 - d1+ CF12)Here, d6 is the in - plane shear damage, d6* is an intermediate damage variable needed for finding the in - plane shear damage that is a function of r2+, r2+ is internal value of the constituative law representing an elastic domain threshold,and d1+ is the fiber damage in tension.See Maimi, Camanho, Mayugo,and Davila[2007] for more details.
+        """ # nopep8
+        return self._cards[9].get_value("cf12")
+
+    @cf12.setter
+    def cf12(self, value: float) -> None:
+        """Set the cf12 property."""
+        self._cards[9].set_value("cf12", value)
+
+    @property
+    def cf13(self) -> float:
+        """Get or set the Scaling factor on the fiber damage that is used when determining the reduced transverse shear (ca-plane) resulting from the fiber damage:c66 = (1 - d1 CF13) G_caHere, c66 is reduced transverse shear modulus in the ca - plane, G_ca is the ca shear modulus,and d1 is the fiber damage.See Maimi, Camanho, Mayugo,and Davila[2007] for more details.
+        """ # nopep8
+        return self._cards[9].get_value("cf13")
+
+    @cf13.setter
+    def cf13(self, value: float) -> None:
+        """Set the cf13 property."""
+        self._cards[9].set_value("cf13", value)
+
+    @property
+    def cf23(self) -> float:
+        """Get or set the Scaling factor on the in-plane shear damage that is used when determining the reduced transverse shear (bc-plane) resulting from the in-plane shear damage:c55 = (1 - d6 CF23) G_bcHere, c55 is the reduced transverse shear in the bc - plane, G_bc is the bc shear modulus,and d6 is the in - plane shear damage.See Maimi, Camanho, Mayugo,and Davila[2007] for more details.
+        """ # nopep8
+        return self._cards[9].get_value("cf23")
+
+    @cf23.setter
+    def cf23(self, value: float) -> None:
+        """Set the cf23 property."""
+        self._cards[9].set_value("cf23", value)
+
+    @property
+    def softc(self) -> float:
+        """Get or set the Softening reduction factor for XC material strength in crashfront elements. If this is not defined, XC reduces according to SOFT.
+        """ # nopep8
+        return self._cards[9].get_value("softc")
+
+    @softc.setter
+    def softc(self, value: float) -> None:
+        """Set the softc property."""
+        self._cards[9].set_value("softc", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[8].cards[0].get_value("title")
+        return self._cards[10].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[8].cards[0].set_value("title", value)
+        self._cards[10].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcss."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcss:
+                return kwd
+        return None
+
+    @lcss_link.setter
+    def lcss_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcss."""
+        self.lcss = value.lcid
 

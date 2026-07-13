@@ -302,10 +302,10 @@ class MatT17(KeywordBase):
     @property
     def aopt(self) -> int:
         """Get or set the Material axes definition (see *MAT_OPTIONTROPIC_for a more complete description):
-        EQ.0.0:	Locally orthotropic with material axes by element nodes N1, N2 and N4nEQ.1.0:	Locally orthotropic with material axes determined by a point in space and global location of element center
-        EQ.2.0:	Globally orthotropic with material axes determined by vectors
-        EQ.3.0:	Locally orthotropic with first material axis orthogonal to element normal (defined by element nodes N1, N2 and N4) and to a vector d- Third material direction corresponds to element normal.
-        EQ.4.0:	Local orthogonal in cylindrical coordinates with the material axes determined by a vector Image, and an originating point, Image, which define the centerline axis.
+        EQ.0.0: Locally orthotropic with material axes by element nodes N1, N2 and N4nEQ.1.0: Locally orthotropic with material axes determined by a point in space and global location of element center
+        EQ.2.0: Globally orthotropic with material axes determined by vectors
+        EQ.3.0: Locally orthotropic with first material axis orthogonal to element normal (defined by element nodes N1, N2 and N4) and to a vector d- Third material direction corresponds to element normal.
+        EQ.4.0: Local orthogonal in cylindrical coordinates with the material axes determined by a vector Image, and an originating point, Image, which define the centerline axis.
         """ # nopep8
         return self._cards[1].get_value("aopt")
 

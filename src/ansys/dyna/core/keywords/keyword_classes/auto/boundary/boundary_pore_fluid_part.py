@@ -58,7 +58,7 @@ class BoundaryPoreFluidPart(KeywordBase):
         ]
     @property
     def pid(self) -> typing.Optional[int]:
-        """Get or set the Part ID (PID),see *PART.  All elements within the part must lie below the water table..
+        """Get or set the Part ID (PID),see *PART. All elements within the part must lie below the water table..
         """ # nopep8
         return self._cards[0].get_value("pid")
 
@@ -80,7 +80,7 @@ class BoundaryPoreFluidPart(KeywordBase):
 
     @property
     def pf_rho(self) -> typing.Optional[float]:
-        """Get or set the Density of pore water in soil skeleton:	EQ.0:  Default density specified on *CONTROL_PORE_FLUID card is used.
+        """Get or set the Density of pore water in soil skeleton: EQ.0: Default density specified on *CONTROL_PORE_FLUID card is used.
         """ # nopep8
         return self._cards[0].get_value("pf_rho")
 

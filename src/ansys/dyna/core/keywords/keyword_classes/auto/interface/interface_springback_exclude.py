@@ -47,7 +47,27 @@ class InterfaceSpringbackExclude(KeywordBase):
         ]
     @property
     def kwdname(self) -> typing.Optional[str]:
-        """Get or set the Exclude cards and their associated data will not be output.
+        """Get or set the used to limit what data will be output to the LSDYNA dynain file, and consists of any number
+        of keyword cards WITHOUT the leading *.  These cards and their associated data will not be output.
+        The currently recognized keywords that can be excluded are:
+        BOUNDARY_SLIDING_PLANE
+        BOUNDARY_SPC_NODE
+        CONSTRAINED_ADAPTIVITY
+        DEFINE_COORDINATE_NODES
+        DEFINE_COORDINATE_VECTOR
+        ELEMENT_BEAM
+        ELEMENT_SHELL
+        ELEMENT_SOLID
+        INITIAL_STRAIN_SHELL
+        INITIAL_STRAIN_SOLID
+        INITIAL_STRESS_BEAM
+        INITIAL_STRESS_SHELL
+        INITIAL_STRESS_SOLID
+        INITIAL_TEMPERATURE_NODE
+        INITIAL_VELOCITY_NODE
+        NODE
+        REFERENCE_GEOMETRY
+
         """ # nopep8
         return self._cards[0].get_value("kwdname")
 

@@ -37,6 +37,7 @@ _ALEMAPPING_CARD1 = (
     FieldSchema("ntim", int, 0, 10, 1),
     FieldSchema("tbeg", float, 10, 10, 0.0),
     FieldSchema("tend", float, 20, 10, None),
+    FieldSchema("nd", int, 30, 10, None),
 )
 
 _ALEMAPPING_CARD2 = (
@@ -101,7 +102,7 @@ class AleMapping(KeywordBase):
         ]
     @property
     def ammsid(self) -> typing.Optional[int]:
-        """Get or set the Set ID of ALE multi-material groups defined in *SET_‌MULTI-MATERIAL_‌GROUP. See Remark 3.
+        """Get or set the Set ID of ALE multi-material groups defined in *SET_MULTI-MATERIAL_GROUP. See Remark 3.
         """ # nopep8
         return self._cards[0].get_value("ammsid")
 
@@ -113,8 +114,8 @@ class AleMapping(KeywordBase):
     @property
     def rw(self) -> int:
         """Get or set the Flag defining if the keyword reads or writes in the mapping:
-        EQ.-1: write in the mapping file. See Remark 4.
-        GT.0:	read from the mapping file. |RW| defines the rank of *ALE_MAPPING that wrote in the
+        EQ.-1: Write in the mapping file. See Remark 4.
+        GT.0: Read from the mapping file. |RW| defines the rank of *ALE_MAPPING that wrote in the
         mapping file in the previous run if several keywords contributed to the file creation.
         If there was only one keyword (most of the cases), RW=1. See Remark 4..
         """ # nopep8
@@ -127,11 +128,9 @@ class AleMapping(KeywordBase):
 
     @property
     def ntim(self) -> int:
-        """Get or set the For RW = -1:
-        Number of times to write in the mapping file between the times TBEG and TEND. See Remark 5.
-        For RW > 0:
-        Rank of the data to be read if, during the previous run, a keyword *ALE_MAPPING with RW=-1 wrote several times in the mapping file.
-        If there was only one output (most of the cases), NTIM=1. See Remark 5.
+        """Get or set the Number of times to write to the mapping file or data entry for the time selected to be read from the mapping file (see Remark 4):
+        RW.EQ.-1 : Number of times to write to the mapping file between the times TBEG and TEND.
+        RW.GT.0 : Data entry to be read if,during the previous run, a keyword *ALE_MAPPING with RW = -1 wrote several times to the mapping file.In most cases,only one time was output in which case NTIM = 1.
         """ # nopep8
         return self._cards[1].get_value("ntim")
 
@@ -142,10 +141,8 @@ class AleMapping(KeywordBase):
 
     @property
     def tbeg(self) -> float:
-        """Get or set the For RW = -1:
-        Time to start writing in the mapping file (TBEG=ENDTIM by default). See Remark 5.
-        For RW > 0:
-        Time to map the data from the mapping file (TBEG=0.0 by default). See Remark 5.
+        """Get or set the RW.EQ.-1:	Time to start writing to the mapping (TBEG = ENDTIM by default).  See Remark 4.
+        RW.GT.0 : Time to which the read data entry indicated by NTIM will be mapped(TBEG = 0.0 by default).
         """ # nopep8
         return self._cards[1].get_value("tbeg")
 
@@ -156,10 +153,7 @@ class AleMapping(KeywordBase):
 
     @property
     def tend(self) -> typing.Optional[float]:
-        """Get or set the For RW = -1:
-        Time to stop writing in the mapping file. See Remark 5.
-        For RW > 0:
-        Ignored.
+        """Get or set the For RW = -1 only, time to stop writing to the mapping file.  See Remark 4.
         """ # nopep8
         return self._cards[1].get_value("tend")
 
@@ -169,12 +163,19 @@ class AleMapping(KeywordBase):
         self._cards[1].set_value("tend", value)
 
     @property
+    def nd(self) -> typing.Optional[int]:
+        """Get or set the For RW = -1 only, ID of a node for which ALE data is written in the mapping file as soon as the velocity at the specified node is nonzero
+        """ # nopep8
+        return self._cards[1].get_value("nd")
+
+    @nd.setter
+    def nd(self, value: int) -> None:
+        """Set the nd property."""
+        self._cards[1].set_value("nd", value)
+
+    @property
     def vecid(self) -> typing.Optional[int]:
-        """Get or set the For RW = -1:
-        Ignored
-        For RW > 0:
-        ID of the symmetric axis defined by *DEFINE_‌VECTOR.
-        The 3 first parameters in *DEFINE_‌VECTOR defines the location of the origin of the previous run. See Remarks 6 and 7.
+        """Get or set the ID of the symmetric axis defined using *DEFINE_?VECTOR.  The fields XT, YT, and ZT in *DEFINE_VECTOR define the location of the origin in the previous run. See Remarks 5 and 6
         """ # nopep8
         return self._cards[2].get_value("vecid")
 
@@ -185,10 +186,7 @@ class AleMapping(KeywordBase):
 
     @property
     def angle(self) -> float:
-        """Get or set the For RW = -1:
-        Ignored
-        For RW > 0:
-        Angle of rotation in degrees around an axis defined by *DEFINE_‌VECTOR for the 3D to 3D mapping. See Remark 7.
+        """Get or set the Angle of rotation in degrees around an axis defined by *DEFINE_?VECTOR for the 3D to 3D mapping. See Remark 6
         """ # nopep8
         return self._cards[2].get_value("angle")
 
@@ -199,10 +197,7 @@ class AleMapping(KeywordBase):
 
     @property
     def xp(self) -> float:
-        """Get or set the For RW = -1:
-        Ignored
-        For RW > 0:
-        -position of a point on a plane used by specific mappings (only for 2D plain strain to 3D mappings). See Remark 7.
+        """Get or set the x-position of a point on a plane used by specific mappings (only for 2D plane strain to 3D mappings). See Remark 6.
         """ # nopep8
         return self._cards[2].get_value("xp")
 
@@ -213,10 +208,7 @@ class AleMapping(KeywordBase):
 
     @property
     def yp(self) -> float:
-        """Get or set the For RW = -1:
-        Ignored
-        For RW > 0:
-        - position of a point on a plane used by specific mappings (only for 2D plain strain to 3D mappings). See Remark 7.
+        """Get or set the y-position of a point on a plane used by specific mappings (only for 2D plane strain to 3D mappings). See Remark 6
         """ # nopep8
         return self._cards[2].get_value("yp")
 
@@ -227,10 +219,7 @@ class AleMapping(KeywordBase):
 
     @property
     def zp(self) -> float:
-        """Get or set the For RW = -1:
-        Ignored
-        For RW > 0:
-        - position of a point on a plane used by specific mappings (only for 2D plain strain to 3D mappings). See Remark 7.
+        """Get or set the z-position of a point on a plane used by specific mappings (only for 2D plane strain to 3D mappings). See Remark 6
         """ # nopep8
         return self._cards[2].get_value("zp")
 
@@ -252,10 +241,10 @@ class AleMapping(KeywordBase):
 
     @property
     def type(self) -> int:
-        """Get or set the Type of “ID” (see Remark 8):
-        EQ.0:	part set ID.
-        EQ.1:	part ID.
-        EQ.2:	element set ID.
+        """Get or set the Type of ID (see Remark 8):
+        EQ.0: part set ID.
+        EQ.1: part ID.
+        EQ.2: element set ID.
         """ # nopep8
         return self._cards[3].get_value("type")
 
@@ -279,16 +268,10 @@ class AleMapping(KeywordBase):
 
     @property
     def voltyp(self) -> typing.Optional[int]:
-        """Get or set the Type of volume containing the selected elements for the mapping.
-        The absolute value of VOLTYP indicates the type of volume and the sign indicates whether the elements to be selected are in or out of the volume.
-        The volume depends on geometrical lengths in a local coordinate system defined by orthonormal axis called ,  and . See Remarks 9,10,11,12 and 13.
-        Volume Type
-        |VOLTYP|.EQ.1:	Trapezoid 3D (See Figure 0-1).
-        |VOLTYP|.EQ.2:	Elliptic truncated cone (See Figure 0-2).
-        |VOLTYP|.EQ.3:	Ellipsoid (See Figure 0-3).
-        In/Out
-        VOLTYP.LT.0:	elements outside the volume are selected.
-        VOLTYP.GT.0:	elements inside the volume are selected.
+        """Get or set the Type of volume containing the selected elements for the mapping.  The magnitude of VOLTYP indicates the type of volume.  VOLTYP > 0 flags that the elements inside the volume are selected while VOLTYP < 0 indicates that the elements outside the volume are selected.  The volume depends on geometrical lengths in a local coordinate system defined by orthonormal axis called u, v and w (see Remarks 7, 8, and 9).
+        | VOLTYP | .EQ.1: Trapezoidal prism(see Figure 0 - 2)
+        | VOLTYP | .EQ.2: Elliptic truncated cone(see Figure 0 - 3)
+        | VOLTYP | .EQ.3: Ellipsoid(see Figure 0 - 4)
         """ # nopep8
         return self._cards[4].get_value("voltyp")
 
@@ -299,7 +282,8 @@ class AleMapping(KeywordBase):
 
     @property
     def vecid1(self) -> int:
-        """Get or set the ID of the local u-axis defined by *DEFINE_‌VECTOR. See Remark 10.
+        """Get or set the ID of the local u-axis defined by *DEFINE_VECTOR. See Remark 10.
+        LE.0: Axis used to define special case volumes.  See Remark 9.
         """ # nopep8
         return self._cards[4].get_value("vecid1")
 

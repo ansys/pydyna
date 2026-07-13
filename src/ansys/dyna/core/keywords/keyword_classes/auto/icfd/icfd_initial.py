@@ -121,8 +121,8 @@ class IcfdInitial(KeywordBase):
     @property
     def dfunc(self) -> int:
         """Get or set the Option to define initial conditions using *DEFINE_FUNCTION
-        EQ.0:	Turned off.
-        EQ.1:	Turned on. All previous flags for initial velocity, pressure and temperature now refer to *DEFINE_FUNCTION IDs. The following parameters are allowed : f(x,y,z), allowing to define initial profiles function of coordinates.
+        EQ.0: Turned off.
+        EQ.1: Turned on. All previous flags for initial velocity, pressure and temperature now refer to *DEFINE_FUNCTION IDs. The following parameters are allowed: f(x,y,z), allowing to define initial profiles function of coordinates.
         """ # nopep8
         return self._cards[0].get_value("dfunc")
 

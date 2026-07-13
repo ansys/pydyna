@@ -71,7 +71,7 @@ class Em2Daxi(KeywordBase):
 
     @property
     def ssid(self) -> typing.Optional[int]:
-        """Get or set the Segment Set ID : Segment that will define the 2D cross section of the part where the EM field is solved.
+        """Get or set the Segment Set ID: Segment that will define the 2D cross section of the part where the EM field is solved.
         """ # nopep8
         return self._cards[0].get_value("ssid")
 

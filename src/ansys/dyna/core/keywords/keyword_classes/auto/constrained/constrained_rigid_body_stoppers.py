@@ -136,8 +136,8 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
 
     @property
     def lcvmnx(self) -> int:
-        """Get or set the Load curve ID which defines the maximum absolute value of the velocity as a function of time that is allowed for the lead rigid body.  See *DEFINE_‌CURVE:
-        EQ.0:	no limitation on the velocity.
+        """Get or set the Load curve ID which defines the maximum absolute value of the velocity as a function of time that is allowed for the lead rigid body.  See *DEFINE_CURVE:
+        EQ.0: no limitation on the velocity.
         """ # nopep8
         return self._cards[0].get_value("lcvmnx")
 
@@ -191,7 +191,7 @@ class ConstrainedRigidBodyStoppers(KeywordBase):
 
     @property
     def td(self) -> float:
-        """Get or set the Time at which stopper is deactivated (default = 10^21).
+        """Get or set the Time at which stopper is deactivated (default = 10**21).
         """ # nopep8
         return self._cards[1].get_value("td")
 

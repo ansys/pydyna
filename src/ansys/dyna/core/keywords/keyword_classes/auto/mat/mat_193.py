@@ -140,8 +140,7 @@ class Mat193(KeywordBase):
 
     @property
     def rkf(self) -> float:
-        """Get or set the Failure surface shape parameter.
-        Default is set to 1.0.
+        """Get or set the Failure surface shape factor.
         """ # nopep8
         return self._cards[0].get_value("rkf")
 
@@ -175,7 +174,6 @@ class Mat193(KeywordBase):
     @property
     def psi(self) -> typing.Optional[float]:
         """Get or set the Dilation angle (in radians).
-        Default is set to 0.0.
         """ # nopep8
         return self._cards[0].get_value("psi")
 
@@ -187,7 +185,6 @@ class Mat193(KeywordBase):
     @property
     def str_lim(self) -> float:
         """Get or set the Minimum shear strength of material is given by STR_LIM*CVAL.
-        Default is set to 5.0E-03
         """ # nopep8
         return self._cards[1].get_value("str_lim")
 

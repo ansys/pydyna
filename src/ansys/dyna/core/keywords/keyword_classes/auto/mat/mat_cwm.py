@@ -48,11 +48,16 @@ _MATCWM_CARD1 = (
     FieldSchema("eghost", float, 40, 10, None),
     FieldSchema("pghost", float, 50, 10, None),
     FieldSchema("aghost", float, 60, 10, None),
+    FieldSchema("epsini", float, 70, 10, 0.0),
 )
 
 _MATCWM_CARD2 = (
     FieldSchema("t2phase", float, 0, 10, None),
     FieldSchema("t1phase", float, 10, 10, None),
+    FieldSchema("anopt", float, 20, 10, None),
+    FieldSchema("postv", int, 30, 10, None),
+    FieldSchema("dtemp", float, 40, 10, 0.0),
+    FieldSchema("dospot", int, 50, 10, 0),
 )
 
 _MATCWM_OPTION0_CARD0 = (
@@ -70,9 +75,9 @@ class MatCwm(KeywordBase):
     _link_fields = {
         "lcem": LinkType.DEFINE_CURVE,
         "lcpr": LinkType.DEFINE_CURVE,
-        "lcsy": LinkType.DEFINE_CURVE,
         "lchr": LinkType.DEFINE_CURVE,
-        "lcat": LinkType.DEFINE_CURVE,
+        "lcsy": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcat": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -127,7 +132,7 @@ class MatCwm(KeywordBase):
 
     @property
     def lcem(self) -> typing.Optional[int]:
-        """Get or set the Load curve for Young's modulus as function of temperature.
+        """Get or set the Load curve ID giving Young's modulus as function of temperature.
         """ # nopep8
         return self._cards[0].get_value("lcem")
 
@@ -138,7 +143,7 @@ class MatCwm(KeywordBase):
 
     @property
     def lcpr(self) -> typing.Optional[int]:
-        """Get or set the Load curve for Poisson's ratio as function of temperature.
+        """Get or set the Load curve ID giving Poisson's ratio as function of temperature.
         """ # nopep8
         return self._cards[0].get_value("lcpr")
 
@@ -149,7 +154,9 @@ class MatCwm(KeywordBase):
 
     @property
     def lcsy(self) -> typing.Optional[int]:
-        """Get or set the Load curve for yield stress as function of temperature.
+        """Get or set the Load curve or table for yield stress:
+        GT.0: Load curve ID giving yield stress as a function of temperature.
+        LT.0: |LCSY| is a table ID giving yield curves for different temperatures.Each yield curve is a function of plastic strain.
         """ # nopep8
         return self._cards[0].get_value("lcsy")
 
@@ -160,7 +167,7 @@ class MatCwm(KeywordBase):
 
     @property
     def lchr(self) -> typing.Optional[int]:
-        """Get or set the Load curve for hardening modulus as function of temperature.
+        """Get or set the Load curve ID giving the hardening modulus as a function of temperature. LCHR is not used for LCSY < 0. The hardening modulus is then calculated from the yield curve's slope.
         """ # nopep8
         return self._cards[0].get_value("lchr")
 
@@ -171,7 +178,7 @@ class MatCwm(KeywordBase):
 
     @property
     def lcat(self) -> typing.Optional[int]:
-        """Get or set the Load curve for thermal expansion coefficient as function of temperature.
+        """Get or set the Load curve (or table) ID giving the thermal expansion coefficient as a function of temperature (and maximum temperature up to the current time). In the case of a table, load curves are listed according to their maximum temperature. See Remark 1.
         """ # nopep8
         return self._cards[0].get_value("lcat")
 
@@ -183,8 +190,8 @@ class MatCwm(KeywordBase):
     @property
     def beta(self) -> typing.Optional[float]:
         """Get or set the Fraction isotropic hardening between 0 and 1
-        EQ.0: Kinematic hardening
-        EQ.1: Isotropic hardening.
+        EQ.0.0: Kinematic hardening
+        EQ.1.0: Isotropic hardening.
         """ # nopep8
         return self._cards[0].get_value("beta")
 
@@ -271,6 +278,17 @@ class MatCwm(KeywordBase):
         self._cards[1].set_value("aghost", value)
 
     @property
+    def epsini(self) -> float:
+        """Get or set the Initial plastic strains, uniformly distributed within the part.
+        """ # nopep8
+        return self._cards[1].get_value("epsini")
+
+    @epsini.setter
+    def epsini(self, value: float) -> None:
+        """Set the epsini property."""
+        self._cards[1].set_value("epsini", value)
+
+    @property
     def t2phase(self) -> typing.Optional[float]:
         """Get or set the Temperature at which phase change commences.
         """ # nopep8
@@ -291,6 +309,59 @@ class MatCwm(KeywordBase):
     def t1phase(self, value: float) -> None:
         """Set the t1phase property."""
         self._cards[2].set_value("t1phase", value)
+
+    @property
+    def anopt(self) -> typing.Optional[float]:
+        """Get or set the Annealing option for thermal expansion (see Remark 3):
+        EQ.0: No modification for thermal expansion.
+        EQ.1: TAEND defines the upper limit(cut - off temperature) for evaluation of thermal expansion.
+        LT.0: | ANOPT | defines the upper limit(cut - off temperature) for evaluation of thermal expansion.
+        """ # nopep8
+        return self._cards[2].get_value("anopt")
+
+    @anopt.setter
+    def anopt(self, value: float) -> None:
+        """Set the anopt property."""
+        self._cards[2].set_value("anopt", value)
+
+    @property
+    def postv(self) -> typing.Optional[int]:
+        """Get or set the Define additional history variables that might be useful for post-processing. See Remark 5.
+        """ # nopep8
+        return self._cards[2].get_value("postv")
+
+    @postv.setter
+    def postv(self, value: int) -> None:
+        """Set the postv property."""
+        self._cards[2].set_value("postv", value)
+
+    @property
+    def dtemp(self) -> float:
+        """Get or set the Maximum temperature variation within a time step. If exceeded during the analysis at a certain integration, a local (only for the respective integration points) sub-cycling is used for the calculation of the phase transformations.
+        EQ.0.0: Not active(default)
+        GT.0.0: Active
+        """ # nopep8
+        return self._cards[2].get_value("dtemp")
+
+    @dtemp.setter
+    def dtemp(self, value: float) -> None:
+        """Set the dtemp property."""
+        self._cards[2].set_value("dtemp", value)
+
+    @property
+    def dospot(self) -> int:
+        """Get or set the Activate thinning of tied shell elements when SPOTHIN > 0 on *CONTROL_CONTACT.
+        EQ.0: Spot weld thinning is inactive for shells tied to solids that use this material(default).
+        EQ.1: Spot weld thinning is active for shells tied to solids that use this material.
+        """ # nopep8
+        return self._cards[2].get_value("dospot")
+
+    @dospot.setter
+    def dospot(self, value: int) -> None:
+        """Set the dospot property."""
+        if value not in [0, 1, None]:
+            raise Exception("""dospot must be `None` or one of {0,1}.""")
+        self._cards[2].set_value("dospot", value)
 
     @property
     def title(self) -> typing.Optional[str]:
@@ -337,21 +408,6 @@ class MatCwm(KeywordBase):
         self.lcpr = value.lcid
 
     @property
-    def lcsy_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcsy."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcsy:
-                return kwd
-        return None
-
-    @lcsy_link.setter
-    def lcsy_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcsy."""
-        self.lcsy = value.lcid
-
-    @property
     def lchr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lchr."""
         if self.deck is None:
@@ -367,17 +423,50 @@ class MatCwm(KeywordBase):
         self.lchr = value.lcid
 
     @property
-    def lcat_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcat."""
+    def lcsy_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcsy."""
         if self.deck is None:
             return None
+        field_value = self.lcsy
+        if field_value is None or field_value == 0:
+            return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcat:
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcsy_link.setter
+    def lcsy_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcsy."""
+        if hasattr(value, "lcid"):
+            self.lcsy = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcsy = value.tbid
+
+    @property
+    def lcat_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcat."""
+        if self.deck is None:
+            return None
+        field_value = self.lcat
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
                 return kwd
         return None
 
     @lcat_link.setter
-    def lcat_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcat."""
-        self.lcat = value.lcid
+    def lcat_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcat."""
+        if hasattr(value, "lcid"):
+            self.lcat = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcat = value.tbid
 

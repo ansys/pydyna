@@ -78,9 +78,9 @@ class DefineDeInternalSkip(KeywordBase):
 
     @property
     def type(self) -> int:
-        """Get or set the PID type :
-        EQ.0 : Part set
-        EQ.1 : Part
+        """Get or set the PID type:
+        EQ.0: Part set
+        EQ.1: Part
         """ # nopep8
         return self._cards[0].get_value("type")
 

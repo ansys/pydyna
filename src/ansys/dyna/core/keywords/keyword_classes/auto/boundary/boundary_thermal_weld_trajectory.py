@@ -103,7 +103,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
         ]
     @property
     def pid(self) -> typing.Optional[int]:
-        """Get or set the Part ID or Part Set ID of solids or shells to which weld source is applied.
+        """Get or set the Part ID or part set ID of solid and/or shell elements that are heated by the weld source. In the case of shell elements present in the heated structure, the thermal thick element formulation must be activated. See field THSHEL on *CONTROL_SHELL or field ITHELFM on *SECTION_SHELL_THERMAL.
         """ # nopep8
         return self._cards[0].get_value("pid")
 
@@ -129,7 +129,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @property
     def nsid1(self) -> int:
-        """Get or set the Node set ID containing the path (weld trajectory) information for the weld source movement.  A sorted node set is requested. The order defines the weld path and the direction (see Remark 1).
+        """Get or set the Node set ID containing the path (weld trajectory) information for the weld source movement. A sorted node set is requested. The order defines the weld path and the direction (see Remark 1).
         """ # nopep8
         return self._cards[0].get_value("nsid1")
 
@@ -141,8 +141,8 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
     @property
     def spd1(self) -> typing.Optional[float]:
         """Get or set the Speed of the heat source on the weld trajectory
-        GT.0.0:	constant speed
-        LT.0.0 : is a load curve ID defining weld speed as a function of  time.
+        GT.0.0: constant speed
+        LT.0.0: is a load curve ID defining weld speed as a function of  time.
         """ # nopep8
         return self._cards[0].get_value("spd1")
 
@@ -154,9 +154,9 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
     @property
     def nsid2(self) -> typing.Optional[int]:
         """Get or set the ID of second node set or segment setcontaining information for the weld source aiming direction (see Remark 2)
-        GT.0:	SID2 refers to a sorted node set, the order of which defines the direction of the trajectory. The heat source is aimed from current position in SID2to current position in the weld trajectory.
-        EQ.0:	beam aiming direction is (tx, ty, tz) input on optional card4.
-        LT.0: 	|SID2| is a segment set. The heat source is aiming in normal direction to segments in the set.
+        GT.0: SID2 refers to a sorted node set, the order of which defines the direction of the trajectory. The heat source is aimed from current position in SID2to current position in the weld trajectory.
+        EQ.0: beam aiming direction is (tx, ty, tz) input on optional card4.
+        LT.0: |SID2| is a segment set. The heat source is aiming in normal direction to segments in the set.
         """ # nopep8
         return self._cards[0].get_value("nsid2")
 
@@ -168,8 +168,8 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
     @property
     def spd2(self) -> typing.Optional[float]:
         """Get or set the Speed of reference point in NSID2 (ignored unless NSID2 > 0)
-        GT.0:	constant speed
-        LT.0 : is a load curve ID defining weld speed as a function of  time.
+        GT.0: constant speed
+        LT.0: is a load curve ID defining weld speed as a function of  time.
         """ # nopep8
         return self._cards[0].get_value("spd2")
 
@@ -192,8 +192,8 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
     @property
     def relvel(self) -> int:
         """Get or set the Defines if VEL1 and VEL2 are relative or absolute velocities in coupled simulations
-        EQ.0:	absolute velocities
-        EQ.1:	relative velocities with respect to underlying structure.
+        EQ.0: absolute velocities
+        EQ.1: relative velocities with respect to underlying structure.
         """ # nopep8
         return self._cards[0].get_value("relvel")
 
@@ -237,7 +237,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
     @property
     def q(self) -> typing.Optional[float]:
         """Get or set the Curve multiplier for weld energy input rate [energy/time]
-        LT.0:	take absolute value and accurate integration of heat using integration cells with edge length DISC
+        LT.0: take absolute value and accurate integration of heat using integration cells with edge length DISC
         """ # nopep8
         return self._cards[1].get_value("q")
 
@@ -281,7 +281,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @property
     def disc(self) -> typing.Optional[float]:
-        """Get or set the Resolution for accurate integration, parameter defines edge length for integration cubes.  Default is 5% of weld pool depth.
+        """Get or set the Resolution for accurate integration, parameter defines edge length for integration cubes. Default is 5% of weld pool depth.
         """ # nopep8
         return self._cards[1].get_value("disc")
 
@@ -292,7 +292,7 @@ class BoundaryThermalWeldTrajectory(KeywordBase):
 
     @property
     def enfor(self) -> typing.Optional[int]:
-        """Get or set the Flag for heat input enforcement option.  If set, the nodal heat input is scaled
+        """Get or set the Flag for heat input enforcement option. If set, the nodal heat input is scaled
         such that the resulting heat inputs equals the user input as given by Q and LCID.
         """ # nopep8
         return self._cards[1].get_value("enfor")

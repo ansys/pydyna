@@ -62,9 +62,12 @@ _CONTROLDISCRETEELEMENT_CARD2 = (
 )
 
 _CONTROLDISCRETEELEMENT_CARD3 = (
-    FieldSchema("cp", float, 0, 10, 0.0),
-    FieldSchema("tc", float, 10, 10, 0.0),
-    FieldSchema("tfac", float, 20, 10, 0.0),
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("ht_coef", float, 40, 10, 0.0),
+    FieldSchema("atm_tmp", float, 50, 10, 0.0),
 )
 
 _CONTROLDISCRETEELEMENT_CARD4 = (
@@ -82,6 +85,7 @@ class ControlDiscreteElement(KeywordBase):
     subkeyword = "DISCRETE_ELEMENT"
     _link_fields = {
         "lnorm": LinkType.DEFINE_CURVE,
+        "lshear": LinkType.DEFINE_CURVE,
     }
 
     def __init__(self, **kwargs):
@@ -237,8 +241,8 @@ class ControlDiscreteElement(KeywordBase):
     @property
     def gap(self) -> float:
         """Get or set the Optional parameter affecting the spatial limit of the liquid bridge.
-        CAP.EQ.0:	GAP is ignored, if the CAP field is 0 and the simulation is modeling dry particles.
-        CAP.NE.0 : A liquid bridge exists when δ, as illustrated in Figure 0 - 2, is less or equal to min⁡(GAP ,d_rup) where d_rup is the rupture distance of the bridge automatically calculated by LS - DYNA
+        CAP.EQ.0: GAP is ignored, if the CAP field is 0 and the simulation is modeling dry particles.
+        CAP.NE.0: A liquid bridge exists when , as illustrated in Figure 0 - 2, is less or equal to min(GAP ,d_rup) where d_rup is the rupture distance of the bridge automatically calculated by LS - DYNA
         """ # nopep8
         return self._cards[1].get_value("gap")
 
@@ -250,8 +254,8 @@ class ControlDiscreteElement(KeywordBase):
     @property
     def ignore(self) -> int:
         """Get or set the Ignore initial penetration option
-        EQ.0:	Calculate the contact force for DES with initial penetration
-        GT.0 : Ignore the contact force calculation for DES with initial penetration
+        EQ.0: Calculate the contact force for DES with initial penetration
+        GT.0: Ignore the contact force calculation for DES with initial penetration
         """ # nopep8
         return self._cards[1].get_value("ignore")
 
@@ -262,8 +266,8 @@ class ControlDiscreteElement(KeywordBase):
 
     @property
     def nbuf(self) -> int:
-        """Get or set the GE.0:	Factor of memory use for asynchronous message buffer (Default = 6)
-        LT.0:	Disable asynchronous scheme and use minimum memory for data transfer
+        """Get or set the GE.0: Factor of memory use for asynchronous message buffer (Default = 6)
+        LT.0: Disable asynchronous scheme and use minimum memory for data transfer
         """ # nopep8
         return self._cards[1].get_value("nbuf")
 
@@ -275,8 +279,8 @@ class ControlDiscreteElement(KeywordBase):
     @property
     def parallel(self) -> int:
         """Get or set the Flag for calculating contact force between bonded DES:
-        EQ.0:	skip contact force calculation for bonded DES(Default)
-        EQ.1 : consider contact force calculation for bonded DES
+        EQ.0: Skip the contact force calculation for bonded DES(default)
+        EQ.1: Consider the contact force calculation for bonded DES
         """ # nopep8
         return self._cards[1].get_value("parallel")
 
@@ -333,8 +337,8 @@ class ControlDiscreteElement(KeywordBase):
 
     @property
     def ncrb(self) -> int:
-        """Get or set the Rebalancing frequency, that is, the number of cycles between each rebalancing.  This parameter only applies to MPP.
-        EQ.0:	no rebalancing is performed
+        """Get or set the Rebalancing frequency, meaning, the number of cycles between each rebalancing.  This parameter only applies to MPP.
+        EQ.0: no rebalancing is performed
         """ # nopep8
         return self._cards[2].get_value("ncrb")
 
@@ -366,43 +370,32 @@ class ControlDiscreteElement(KeywordBase):
         self._cards[2].set_value("dt", value)
 
     @property
-    def cp(self) -> float:
-        """Get or set the DES thermal properties
+    def ht_coef(self) -> float:
+        """Get or set the Convective heat transfer coefficient in W/(m2K)
         """ # nopep8
-        return self._cards[3].get_value("cp")
+        return self._cards[3].get_value("ht_coef")
 
-    @cp.setter
-    def cp(self, value: float) -> None:
-        """Set the cp property."""
-        self._cards[3].set_value("cp", value)
+    @ht_coef.setter
+    def ht_coef(self, value: float) -> None:
+        """Set the ht_coef property."""
+        self._cards[3].set_value("ht_coef", value)
 
     @property
-    def tc(self) -> float:
-        """Get or set the DES thermal properties
+    def atm_tmp(self) -> float:
+        """Get or set the Atmospheric temperature in K or �C
         """ # nopep8
-        return self._cards[3].get_value("tc")
+        return self._cards[3].get_value("atm_tmp")
 
-    @tc.setter
-    def tc(self, value: float) -> None:
-        """Set the tc property."""
-        self._cards[3].set_value("tc", value)
-
-    @property
-    def tfac(self) -> float:
-        """Get or set the DES thermal properties
-        """ # nopep8
-        return self._cards[3].get_value("tfac")
-
-    @tfac.setter
-    def tfac(self, value: float) -> None:
-        """Set the tfac property."""
-        self._cards[3].set_value("tfac", value)
+    @atm_tmp.setter
+    def atm_tmp(self, value: float) -> None:
+        """Set the atm_tmp property."""
+        self._cards[3].set_value("atm_tmp", value)
 
     @property
     def idesoft(self) -> int:
         """Get or set the Flag for soft constraint formulation:
-        EQ.1:	Soft constraint formulation.The contact stiffness is based on the nodal mass and the global time step size.
-        This input provides a different way for calculating NORMK.NORMK is ignored if IDESOFT = 1. IDESOFT is ignored if LNORM ≠ 0.
+        EQ.1: Soft constraint formulation.The contact stiffness is based on the nodal mass and the global time step size.
+        This input provides a different way for calculating NORMK.NORMK is ignored if IDESOFT = 1. IDESOFT is ignored if LNORM  0.
         """ # nopep8
         return self._cards[4].get_value("idesoft")
 
@@ -425,8 +418,8 @@ class ControlDiscreteElement(KeywordBase):
     @property
     def iskip(self) -> int:
         """Get or set the Flag for skipping the calculation of contact force between DES:
-        EQ.0:	Consider the particle - particle contact calculation(default).
-        EQ.1 : Skip the particle - particle contact calculation.
+        EQ.0: Consider the particle - particle contact calculation(default).
+        EQ.1: Skip the particle - particle contact calculation.
 
         """ # nopep8
         return self._cards[4].get_value("iskip")
@@ -462,4 +455,19 @@ class ControlDiscreteElement(KeywordBase):
     def lnorm_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lnorm."""
         self.lnorm = value.lcid
+
+    @property
+    def lshear_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lshear."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lshear:
+                return kwd
+        return None
+
+    @lshear_link.setter
+    def lshear_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lshear."""
+        self.lshear = value.lcid
 

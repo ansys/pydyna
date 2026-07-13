@@ -54,10 +54,10 @@ _MATJOHNSONCOOK_CARD2 = (
     FieldSchema("pc", float, 10, 10, None),
     FieldSchema("spall", float, 20, 10, 2.0),
     FieldSchema("it", float, 30, 10, 0.0),
-    FieldSchema("d1", float, 40, 10, None),
-    FieldSchema("d2", float, 50, 10, None),
-    FieldSchema("d3", float, 60, 10, None),
-    FieldSchema("d4", float, 70, 10, None),
+    FieldSchema("d1_beta", float, 40, 10, None, "d1/beta"),
+    FieldSchema("d2_wc", float, 50, 10, None, "d2/wc"),
+    FieldSchema("d3_dc", float, 60, 10, None, "d3/dc"),
+    FieldSchema("d4_gamma", float, 70, 10, None, "d4/gamma"),
 )
 
 _MATJOHNSONCOOK_CARD3 = (
@@ -68,6 +68,7 @@ _MATJOHNSONCOOK_CARD3 = (
     FieldSchema("numint", float, 40, 10, None),
     FieldSchema("k", float, 50, 10, None),
     FieldSchema("eps1", float, 60, 10, None),
+    FieldSchema("dmodel", float, 70, 10, 0.0),
 )
 
 _MATJOHNSONCOOK_OPTION0_CARD0 = (
@@ -199,12 +200,12 @@ class MatJohnsonCook(KeywordBase):
     @property
     def rateop(self) -> float:
         """Get or set the Optional forms of strain-rate term:
-        EQ.0.0:  Log-Linear Johnson-Cook (default),
-        EQ.1.0:  Log-Quadratic Huh-Kang (2 parameters),
-        EQ.2.0:  Exponential Allen-Rule-Jones,
-        EQ.3.0:  Exponential Cowper-Symonds (2 parameters).
-        EQ.4.0:	nonlinear rate coefficient (2 parameters)
-        EQ.5.0:	log - exponential Couque(4 parameters)
+        EQ.0.0: Log-Linear Johnson-Cook (default),
+        EQ.1.0: Log-Quadratic Huh-Kang (2 parameters),
+        EQ.2.0: Exponential Allen-Rule-Jones,
+        EQ.3.0: Exponential Cowper-Symonds (2 parameters).
+        EQ.4.0: nonlinear rate coefficient (2 parameters)
+        EQ.5.0: log - exponential Couque(4 parameters)
         """ # nopep8
         return self._cards[0].get_value("rateop")
 
@@ -217,7 +218,9 @@ class MatJohnsonCook(KeywordBase):
 
     @property
     def a(self) -> typing.Optional[float]:
-        """Get or set the See equations in the keyword manual page 62 (volume two).
+        """Get or set the Constant A in the flow stress formula or load curve giving the plastic strain term in the flow stress formula: (see Remark 1):
+        GT.0.0:	Constant A term in the flow stress formula
+        LT.0.0:	|A| refers to a load curve ID for the curve giving the plastic strain term in the flow stress formula. The abscissa for the curve is the effective plastic strain.This curve is only available for solid elements.
         """ # nopep8
         return self._cards[1].get_value("a")
 
@@ -228,7 +231,7 @@ class MatJohnsonCook(KeywordBase):
 
     @property
     def b(self) -> typing.Optional[float]:
-        """Get or set the See equations in the keyword manual page 62 (volume two).
+        """Get or set the Constant B in the flow stress. See equations in Remark 1. This field is ignored if A < 0.0.
         """ # nopep8
         return self._cards[1].get_value("b")
 
@@ -239,7 +242,7 @@ class MatJohnsonCook(KeywordBase):
 
     @property
     def n(self) -> typing.Optional[float]:
-        """Get or set the See equations in the keyword manual page 62 (volume two).
+        """Get or set the Constant n in the flow stress. See equations in Remark 1. This field is ignored if A < 0.0.
         """ # nopep8
         return self._cards[1].get_value("n")
 
@@ -250,7 +253,7 @@ class MatJohnsonCook(KeywordBase):
 
     @property
     def c(self) -> typing.Optional[float]:
-        """Get or set the See equations in the keyword manual page 62 (volume two).
+        """Get or set the Constant C in the flow stress. See equations in Remarks 1 and 5
         """ # nopep8
         return self._cards[1].get_value("c")
 
@@ -261,7 +264,7 @@ class MatJohnsonCook(KeywordBase):
 
     @property
     def m(self) -> typing.Optional[float]:
-        """Get or set the See equations in the keyword manual page 62 (volume two).
+        """Get or set the Constant m in the flow stress. See equations in Remark 1
         """ # nopep8
         return self._cards[1].get_value("m")
 
@@ -294,7 +297,7 @@ class MatJohnsonCook(KeywordBase):
 
     @property
     def epso(self) -> typing.Optional[float]:
-        """Get or set the Effective plastic strain rate. This value depends on the time units.  Typically, input 1 for units of seconds, 0.001 for units of milliseconds, 0.000001 for microseconds, etc.
+        """Get or set the Quasi-static threshold strain rate (see Remark 1).  Ideally, this value represents the highest strain rate for which no rate adjustment to the flow stress is needed and is input in units of [time ]^(-1).  For example, if strain rate effects on the flow stress first become apparent at strain rates greater than 10^(-2)  s^(-1), and the system of units for the model input is {kg, mm, ms}, then EPSO should be set to 10-5.
         """ # nopep8
         return self._cards[1].get_value("epso")
 
@@ -305,7 +308,7 @@ class MatJohnsonCook(KeywordBase):
 
     @property
     def cp(self) -> typing.Optional[float]:
-        """Get or set the Specific heat.
+        """Get or set the Specific heat (superseded by heat capacity in *MAT_THERMAL_OPTION if a coupled thermal/structural analysis)
         """ # nopep8
         return self._cards[2].get_value("cp")
 
@@ -316,7 +319,7 @@ class MatJohnsonCook(KeywordBase):
 
     @property
     def pc(self) -> typing.Optional[float]:
-        """Get or set the Failure stress or pressure cutoff (pmin < 0.0).
+        """Get or set the Tensile failure stress or tensile pressure cutoff (PC < 0.0)
         """ # nopep8
         return self._cards[2].get_value("pc")
 
@@ -327,11 +330,15 @@ class MatJohnsonCook(KeywordBase):
 
     @property
     def spall(self) -> float:
-        """Get or set the Spall type:
-        EQ.0.0: default is set to 2.0,
-        EQ. 1.0: p => pmin ,
-        EQ. 2.0: if sigma-max  => -pmin element spalls and tension, p < 0, is never allowed (default),
-        EQ. 3.0: p < -pmin element spalls and tension, p < 0, is never allowed.
+        """Get or set the Spall type (see Remark 3):
+        EQ.0.0: Set to “2.0”(default).
+        EQ.1.0 : Tensile pressure is limited by PC, that is, p is always >= PC.
+        Shell Element Specific Behavior :
+        EQ.2.0 : Shell elements are deleted when σ_max >= - PC .
+        EQ.3.0 : Shell elements are deleted when p < PC .
+        Solid Element Specific Behavior
+        EQ.2.0 : For solid elements σ_max >= - PC  resets tensile stresses to zero.Compressive stresses are still allowed.
+        EQ.3.0 : For solid elements p < PC  resets the pressure to zero, thereby disallowing tensile pressure.
         """ # nopep8
         return self._cards[2].get_value("spall")
 
@@ -344,7 +351,7 @@ class MatJohnsonCook(KeywordBase):
     def it(self) -> float:
         """Get or set the Plastic strain iteration options. This input applies to solid elements only since it is always necessary to iterate for the shell element plane stress condition.
         EQ. 0.0: no iterations (default),
-        EQ. 1.0: accurate iterative solution for plastic strain. Much more expensive than default.
+        EQ. 1.0: accurate iterative solution for plastic strain. This option is much more expensive than the default.
         """ # nopep8
         return self._cards[2].get_value("it")
 
@@ -356,48 +363,54 @@ class MatJohnsonCook(KeywordBase):
         self._cards[2].set_value("it", value)
 
     @property
-    def d1(self) -> typing.Optional[float]:
+    def d1_beta(self) -> typing.Optional[float]:
         """Get or set the Failure parameter. See equations in the keyword manual page 62 (volume two).
+        Damage coupling parameter; see Equation Error! Reference source not found. in *MAT_107.
+        EQ.0.0: No coupling between ductile damage and the constitutive relation.
+        EQ.1.0 : Full coupling between ductile damage and the constitutive relation.
         """ # nopep8
-        return self._cards[2].get_value("d1")
+        return self._cards[2].get_value("d1_beta")
 
-    @d1.setter
-    def d1(self, value: float) -> None:
-        """Set the d1 property."""
-        self._cards[2].set_value("d1", value)
+    @d1_beta.setter
+    def d1_beta(self, value: float) -> None:
+        """Set the d1_beta property."""
+        self._cards[2].set_value("d1_beta", value)
 
     @property
-    def d2(self) -> typing.Optional[float]:
+    def d2_wc(self) -> typing.Optional[float]:
         """Get or set the Failure parameter. See equations in the keyword manual page 62 (volume two).
+        Critical Cockcroft-Latham parameter W_c; see Equation Error! Reference source not found. in *MAT_107. When the plastic work per volume reaches this value, the element is eroded from the simulation. It defines the overall ductility of the material.
         """ # nopep8
-        return self._cards[2].get_value("d2")
+        return self._cards[2].get_value("d2_wc")
 
-    @d2.setter
-    def d2(self, value: float) -> None:
-        """Set the d2 property."""
-        self._cards[2].set_value("d2", value)
+    @d2_wc.setter
+    def d2_wc(self, value: float) -> None:
+        """Set the d2_wc property."""
+        self._cards[2].set_value("d2_wc", value)
 
     @property
-    def d3(self) -> typing.Optional[float]:
+    def d3_dc(self) -> typing.Optional[float]:
         """Get or set the Failure parameter. See equations in the keyword manual page 62 (volume two).
+        Critical Cockcroft-Latham damage parameter D_c; see Equations Error! Reference source not found. and Error! Reference source not found. in *MAT_107. When the damage reaches this value, the element is eroded from the calculation.
         """ # nopep8
-        return self._cards[2].get_value("d3")
+        return self._cards[2].get_value("d3_dc")
 
-    @d3.setter
-    def d3(self, value: float) -> None:
-        """Set the d3 property."""
-        self._cards[2].set_value("d3", value)
+    @d3_dc.setter
+    def d3_dc(self, value: float) -> None:
+        """Set the d3_dc property."""
+        self._cards[2].set_value("d3_dc", value)
 
     @property
-    def d4(self) -> typing.Optional[float]:
+    def d4_gamma(self) -> typing.Optional[float]:
         """Get or set the Failure parameter. See equations in the keyword manual page 62 (volume two).
+        Extended Cockcroft-Latham parameter γ; see Equation Error! Reference source not found. in *MAT_107. It controls the intensity of the damage's dependence on the stress state.
         """ # nopep8
-        return self._cards[2].get_value("d4")
+        return self._cards[2].get_value("d4_gamma")
 
-    @d4.setter
-    def d4(self, value: float) -> None:
-        """Set the d4 property."""
-        self._cards[2].set_value("d4", value)
+    @d4_gamma.setter
+    def d4_gamma(self, value: float) -> None:
+        """Set the d4_gamma property."""
+        self._cards[2].set_value("d4_gamma", value)
 
     @property
     def d5(self) -> typing.Optional[float]:
@@ -424,8 +437,8 @@ class MatJohnsonCook(KeywordBase):
     @property
     def erod(self) -> typing.Optional[float]:
         """Get or set the Erosion flag:
-        EQ.0.0:	element erosion allowed(default).
-        NE.0.0 : element does not erode; deviatoric stresses set to zero when element fails.
+        EQ.0.0: element erosion allowed(default).
+        NE.0.0: element does not erode; deviatoric stresses set to zero when element fails.
         """ # nopep8
         return self._cards[3].get_value("erod")
 
@@ -470,7 +483,7 @@ class MatJohnsonCook(KeywordBase):
 
     @property
     def eps1(self) -> typing.Optional[float]:
-        """Get or set the Optional reference strain rate for Couque term, characterizing the transition between the thermally activated regime and the viscous regime. Input in units of [time ]^(-1)
+        """Get or set the Optional reference strain rate for Couque term, characterizing the transition between the thermally activated regime and the viscous regime. Input in units of [time ]**(-1)
         """ # nopep8
         return self._cards[3].get_value("eps1")
 
@@ -478,6 +491,22 @@ class MatJohnsonCook(KeywordBase):
     def eps1(self, value: float) -> None:
         """Set the eps1 property."""
         self._cards[3].set_value("eps1", value)
+
+    @property
+    def dmodel(self) -> float:
+        """Get or set the Damage model:
+        EQ.0: Johnson - Cook damage and failure model(default).
+        EQ.1 : Cockcroft - Latham damage model(same as in * MAT_107).
+        EQ.2 : Extended Cockcroft - Latham damage model(same as in * MAT_107).
+        """ # nopep8
+        return self._cards[3].get_value("dmodel")
+
+    @dmodel.setter
+    def dmodel(self, value: float) -> None:
+        """Set the dmodel property."""
+        if value not in [0, 1, 2, None]:
+            raise Exception("""dmodel must be `None` or one of {0,1,2}.""")
+        self._cards[3].set_value("dmodel", value)
 
     @property
     def title(self) -> typing.Optional[str]:

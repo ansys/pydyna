@@ -103,8 +103,8 @@ class ControlFormingOutput(KeywordBase):
 
     @property
     def y1_lcid(self) -> typing.Optional[float]:
-        """Get or set the GT.0:	All four variables (Y1, Y2, Y3, Y4) are taken to be the distances from the punch home, where d3plot files will be output
-        LT.0:	The absolute value of Y1/LCID (must be an integer) is taken as a load curve ID (see *DEFINE_CURVE).
+        """Get or set the GT.0: All four variables (Y1, Y2, Y3, Y4) are taken to be the distances from the punch home, where d3plot files will be output
+        LT.0: The absolute value of Y1/LCID (must be an integer) is taken as a load curve ID (see *DEFINE_CURVE).
         Only the abscissas in the load curve, which are the distances to punch home, are used.
         These distances specify the states that are written to the d3plot files.  Ordinates of the curve are ignored.
         This case accommodates more states than is possible with the four variables Y1, Y2, Y3, Y4.  Furthermore, when Y1/LCID < 0, Y2, Y3, and Y4 are ignored.
@@ -120,8 +120,8 @@ class ControlFormingOutput(KeywordBase):
 
     @property
     def y2_lcid(self) -> typing.Optional[float]:
-        """Get or set the GT.0:	The input is taken as the distance from the punch home, where a d3plot file will be output
-        LT.0:	The absolute value of Y2/CIDT (must be an integer) is taken as a load curve ID (see *DEFINE_CURVE).
+        """Get or set the GT.0: The input is taken as the distance from the punch home, where a d3plot file will be output
+        LT.0: The absolute value of Y2/CIDT (must be an integer) is taken as a load curve ID (see *DEFINE_CURVE).
         Only the abscissas in the load curve, which are the simulation times, are used.
         These times specify the states that are written to the d3plot files.  Ordinates of the curve are ignored.
         Note this time-dependent load curve will output additional d3plot files on top of the d3plot files already written in case Y1/LCID < 0 (if specified).

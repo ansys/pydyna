@@ -28,7 +28,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _IGAVOLUMEXYZ_CARD0 = (
     FieldSchema("vid", int, 0, 10, None),
-    FieldSchema("nid", int, 10, 10, None),
+    FieldSchema("patchid", int, 10, 10, None),
     FieldSchema("psid", int, 20, 10, None),
     FieldSchema("esid", int, 30, 10, None),
     FieldSchema("fsid", int, 40, 10, None),
@@ -76,15 +76,15 @@ class IgaVolumeXyz(KeywordBase):
         self._cards[0].set_value("vid", value)
 
     @property
-    def nid(self) -> typing.Optional[int]:
-        """Get or set the Physical trivariate NURBS IDs, see *IGA_3D_NURBS_XYZ.
+    def patchid(self) -> typing.Optional[int]:
+        """Get or set the Depending on the keyword option either a physical trivariate NURBS patch ID for no keyword option (see *IGA_3D_NURBS_XYZ) or a trivariate basis transform patch ID for the BASIS_TRANSFORM keyword option (see *IGA_3D_BASIS_TRANSFORM_XYZ).
         """ # nopep8
-        return self._cards[0].get_value("nid")
+        return self._cards[0].get_value("patchid")
 
-    @nid.setter
-    def nid(self, value: int) -> None:
-        """Set the nid property."""
-        self._cards[0].set_value("nid", value)
+    @patchid.setter
+    def patchid(self, value: int) -> None:
+        """Set the patchid property."""
+        self._cards[0].set_value("patchid", value)
 
     @property
     def psid(self) -> typing.Optional[int]:

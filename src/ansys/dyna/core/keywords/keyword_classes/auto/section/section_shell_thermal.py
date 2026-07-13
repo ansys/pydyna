@@ -32,7 +32,7 @@ _SECTIONSHELLTHERMAL_CARD0 = (
     FieldSchema("elform", int, 10, 10, 2),
     FieldSchema("shrf", float, 20, 10, 1.0),
     FieldSchema("nip", int, 30, 10, 2),
-    FieldSchema("propt", float, 40, 10, 1.0),
+    FieldSchema("propt", int, 40, 10, 1),
     FieldSchema("qr_irid", int, 50, 10, 0, "qr/irid"),
     FieldSchema("icomp", int, 60, 10, 0),
     FieldSchema("setyp", int, 70, 10, 1),
@@ -190,7 +190,7 @@ class SectionShellThermal(KeywordBase):
         EQ.27: C0 triangular shell with thickness stretch.
         EQ.29: Cohesive shell element for edge-to-edge connection of shells.  See Remark 13.
         EQ.-29:Cohesive shell element for edge-to-edge connection of shells (more suitable for pure shear).  See Remark 13.
-        EQ.30:	Fast fully integrated element with 2 in-plane integration points based on ELFORM 16
+        EQ.30: Fast fully integrated element with 2 in-plane integration points based on ELFORM 16
         EQ.31: 1 point eulerian Navier-Stokes,
         EQ.32: 8 point Eulerian Navier-Stokes,
         EQ.33: CVFEM Eulerian Navier-Stokes.EQ.
@@ -200,17 +200,17 @@ class SectionShellThermal(KeywordBase):
         EQ.44: Mesh-free (EFG) axisymmetric solid formulation (x-y plane, y-axis of symmetry).
         46: Cohesive element for two-dimensional plane strain, plane stress, and area-weighted axisymmetric problems (type 14 shells).
         EQ.47: Cohesive element for two-dimensional volume-weighted axisymmetric problems (use with type 15 shells).
-        EQ.52:	Plane strain (xy-plane) XFEM, base element type 13 with full integration. See Remark 9.EQ.54:	Shell XFEM, base element type defined by BASELM(default 2).See Remark 9.
-        EQ.55 : 8 - node singular plane strain(xy - plane) finite element.See Remark 12.
-        EQ.98 : Interpolation shell
-        EQ.99 : Simplified linear element for time - domain vibration studies.See Remark 5.
-        EQ.101 : User defined shell
-        EQ.102 : User defined shell
-        EQ.103 : User defined shell
-        EQ.104 : User defined shell
-        EQ.105 : User defined shell
-        EQ.201 : Isogeometric shells with NURBS.See * ELEMENT_SHELL_NURBS_PATCH.
-        GE.1000 : Generalized shell element formulation(user defined).See * DEFINE_ELEMENT_GENERALIZED_SHELL.
+        EQ.52: Plane strain (xy-plane) XFEM, base element type 13 with full integration. See Remark 9.EQ.54: Shell XFEM, base element type defined by BASELM(default 2).See Remark 9.
+        EQ.55: 8 - node singular plane strain(xy - plane) finite element.See Remark 12.
+        EQ.98: Interpolation shell
+        EQ.99: Simplified linear element for time - domain vibration studies.See Remark 5.
+        EQ.101: User defined shell
+        EQ.102: User defined shell
+        EQ.103: User defined shell
+        EQ.104: User defined shell
+        EQ.105: User defined shell
+        EQ.201: Isogeometric shells with NURBS.See *ELEMENT_SHELL_NURBS_PATCH.
+        GE.1000: Generalized shell element formulation(user defined).See *DEFINE_ELEMENT_GENERALIZED_SHELL.
         Note that the 2D and 3D element types must not be mixed,and different types of 2D elements must not be used together.For example,
         two - dimensional axisymmetric calculations can use either element types 14 or 15, but these element types must not be mixed together.Likewise,
         the plane strain element type must not be used with either the plane stress element or the axisymmetric element types.
@@ -237,7 +237,7 @@ class SectionShellThermal(KeywordBase):
 
     @property
     def nip(self) -> int:
-        """Get or set the Number of through shell thickness integration points. Default is set to 2.
+        """Get or set the Number of through thickness integration points. Default is set to 2.
         Through thickness integration for the two-dimensional elements (options 11-15 above) is not meaningful; consequently, the default is equal to 1 integration point.  Fully integrated two-dimensional elements are available for options 13 and 15 by setting NIP equal to a value of 4 corresponding to a 2x2 Gaussian quadrature.
         """ # nopep8
         return self._cards[0].get_value("nip")
@@ -248,7 +248,7 @@ class SectionShellThermal(KeywordBase):
         self._cards[0].set_value("nip", value)
 
     @property
-    def propt(self) -> float:
+    def propt(self) -> int:
         """Get or set the Printout option:
         EQ.1: average resultants and fiber lengths (default),
         EQ.2: resultants at plan points and fiber lengths,
@@ -257,7 +257,7 @@ class SectionShellThermal(KeywordBase):
         return self._cards[0].get_value("propt")
 
     @propt.setter
-    def propt(self, value: float) -> None:
+    def propt(self, value: int) -> None:
         """Set the propt property."""
         if value not in [1, 2, 3, None]:
             raise Exception("""propt must be `None` or one of {1,2,3}.""")
