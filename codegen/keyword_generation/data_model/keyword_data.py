@@ -173,7 +173,7 @@ class Field:
         for bad_char in ["/", "-", " ", "(", ")", ",", ".", "'", "*", "|", "+"]:
             fixed_name = fixed_name.replace(bad_char, "_")
         # Deal with reserved keywords
-        if fixed_name.lower() in ["global", "as", "int", "lambda", "for", "try", "if", "in", "is", "or", "and", "not", "del", "pass", "return", "class", "def", "import", "from", "with", "while", "else", "elif", "except", "finally", "raise", "yield", "assert", "break", "continue", "nonlocal", "type"]:
+        if fixed_name.lower() in ["global", "as", "int", "lambda", "for", "try"]:
             fixed_name = fixed_name + "_"
         # Deal with names starting with digits
         if fixed_name and fixed_name[0].isdigit():
