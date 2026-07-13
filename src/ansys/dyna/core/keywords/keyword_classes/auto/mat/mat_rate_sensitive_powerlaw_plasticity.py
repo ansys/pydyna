@@ -189,7 +189,7 @@ class MatRateSensitivePowerlawPlasticity(KeywordBase):
 
     @property
     def eps0(self) -> float:
-        """Get or set the Quasi-static threshold strain rate.  See description under *MAT_‌015.
+        """Get or set the Quasi-static threshold strain rate. See description under *MAT_015.
         """ # nopep8
         return self._cards[1].get_value("eps0")
 

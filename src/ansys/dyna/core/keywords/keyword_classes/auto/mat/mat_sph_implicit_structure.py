@@ -93,7 +93,7 @@ class MatSphImplicitStructure(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Numerical surface adhesion coefficient. For water, a value of β=1000 m/s^2 is recommended. Only used if IMAT=0 in *CONTROL_SPH.
+        """Get or set the Numerical surface adhesion coefficient. For water, a value of beta=1000 m/s**2 is recommended. Only used if IMAT=0 in *CONTROL_SPH.
         """ # nopep8
         return self._cards[0].get_value("beta")
 

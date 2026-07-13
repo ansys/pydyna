@@ -35,6 +35,7 @@ _MATSOFTTISSUE_CARD0 = (
     FieldSchema("c3", float, 40, 10, None),
     FieldSchema("c4", float, 50, 10, None),
     FieldSchema("c5", float, 60, 10, None),
+    FieldSchema("ref", float, 70, 10, 0.0),
 )
 
 _MATSOFTTISSUE_CARD1 = (
@@ -187,6 +188,21 @@ class MatSoftTissue(KeywordBase):
         self._cards[0].set_value("c5", value)
 
     @property
+    def ref(self) -> float:
+        """Get or set the Use reference geometry to initialize the stress tensor. *INITIAL_FOAM_REFERENCE_GEOMETRY defines the reference geometry.
+        EQ.0.0: Off
+        EQ.1.0 : On
+        """ # nopep8
+        return self._cards[0].get_value("ref")
+
+    @ref.setter
+    def ref(self, value: float) -> None:
+        """Set the ref property."""
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""ref must be `None` or one of {0.0,1.0}.""")
+        self._cards[0].set_value("ref", value)
+
+    @property
     def xk(self) -> typing.Optional[float]:
         """Get or set the Bulk Modulus
         """ # nopep8
@@ -210,7 +226,7 @@ class MatSoftTissue(KeywordBase):
 
     @property
     def fang(self) -> typing.Optional[float]:
-        """Get or set the Angle in degrees of a material rotation about the c-axis, available for AOPT = 0 (shells only) and AOPT = 3 (all element types).  This angle may be overridden on the element card; see *ELEMENT_SHELL_BETA and *ELEMENT_SOLID_ORTHO
+        """Get or set the Angle in degrees of a material rotation about the c-axis, available for AOPT = 0 (shells only) and AOPT = 3 (all element types). This angle may be overridden on the element card; see *ELEMENT_SHELL_BETA and *ELEMENT_SOLID_ORTHO
         """ # nopep8
         return self._cards[1].get_value("fang")
 
@@ -232,7 +248,7 @@ class MatSoftTissue(KeywordBase):
 
     @property
     def failsf(self) -> typing.Optional[float]:
-        """Get or set the Stretch ratio for ligament fibers at failure (applies to shell elements only).  If zero, failure is not considered.
+        """Get or set the Stretch ratio for ligament fibers at failure (applies to shell elements only). If zero, failure is not considered.
         """ # nopep8
         return self._cards[1].get_value("failsf")
 
@@ -243,7 +259,7 @@ class MatSoftTissue(KeywordBase):
 
     @property
     def failsm(self) -> typing.Optional[float]:
-        """Get or set the Stretch ratio for surrounding matrix material at failure (applies to shell elements only).  If zero, failure is not considered
+        """Get or set the Stretch ratio for surrounding matrix material at failure (applies to shell elements only). If zero, failure is not considered
         """ # nopep8
         return self._cards[1].get_value("failsm")
 
@@ -254,7 +270,7 @@ class MatSoftTissue(KeywordBase):
 
     @property
     def failshr(self) -> typing.Optional[float]:
-        """Get or set the Shear strain at failure at a material point (applies to shell elements only).  If zero, failure is not considered.  This failure value is independent of FAILSF and FAILSM
+        """Get or set the Shear strain at failure at a material point (applies to shell elements only). If zero, failure is not considered. This failure value is independent of FAILSF and FAILSM
         """ # nopep8
         return self._cards[1].get_value("failshr")
 
@@ -265,13 +281,13 @@ class MatSoftTissue(KeywordBase):
 
     @property
     def aopt(self) -> typing.Optional[float]:
-        """Get or set the Material axes option (see MAT_‌OPTIONTROPIC_‌ELASTIC particularly the Material Directions section, for details). The fiber direction depends on this coordinate system (see Remark 1).
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle FANG on this keyword or BETA on the * ELEMENT_SHELL_{OPTION} input.
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
-        EQ.2.0:	Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or with FANG on this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying the angle rotation depending on the value of MACF.
-        EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
-        LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_OPTION).
+        """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC particularly the Material Directions section, for details). The fiber direction depends on this coordinate system (see Remark 1).
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with *DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle FANG on this keyword or BETA on the *ELEMENT_SHELL_{OPTION} input.
+        EQ.1.0: Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedra. a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or with FANG on this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying the angle rotation depending on the value of MACF.
+        EQ.4.0: Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number(CID on *DEFINE_COORDINATE_OPTION).
         """ # nopep8
         return self._cards[2].get_value("aopt")
 
@@ -382,14 +398,14 @@ class MatSoftTissue(KeywordBase):
     @property
     def macf(self) -> int:
         """Get or set the Material axes change flag for solid elements:
-        EQ.1 : No change, default
-        EQ.2 : Switch material axes a and b after BETA or FANG rotation
-        EQ.3 : Switch material axes a and c after BETA or FANG rotation
-        EQ.4 : Switch material axes b and c after BETA or FANG rotation
-        EQ. -4 : Switch material axes b and c before BETA or FANG rotation
-        EQ. -3 : Switch material axes a and c before BETA or FANG rotation
-        EQ. -2 : Switch material axes a and b before BETA or FANG rotation
-        Figure Error!Reference source not found.indicates when LS - DYNA applies MACF during the process to obtain the final material axes.The BETA on * ELEMENT_SOLID_{OPTION} if defined is used for the rotation for all AOPT options.If BETA is not used for the element, then a rotation only occurs for AOPT = 3 where FANG is applied
+        EQ.1: No change, default
+        EQ.2: Switch material axes a and b after BETA or FANG rotation
+        EQ.3: Switch material axes a and c after BETA or FANG rotation
+        EQ.4: Switch material axes b and c after BETA or FANG rotation
+        EQ. -4: Switch material axes b and c before BETA or FANG rotation
+        EQ. -3: Switch material axes a and c before BETA or FANG rotation
+        EQ. -2: Switch material axes a and b before BETA or FANG rotation
+        The BETA on *ELEMENT_SOLID_{OPTION} if defined is used for the rotation for all AOPT options.If BETA is not used for the element, then a rotation only occurs for AOPT = 3 where FANG is applied
         """ # nopep8
         return self._cards[3].get_value("macf")
 

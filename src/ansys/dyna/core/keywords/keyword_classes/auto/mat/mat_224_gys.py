@@ -133,8 +133,8 @@ class Mat224Gys(KeywordBase):
     @property
     def e(self) -> typing.Optional[float]:
         """Get or set the Young's modulus.
-        GT.0.0:	Constant value is used.
-        LT.0.0:	Temperature dependent Young’s modulus given by load curve ID = -E
+        GT.0.0: Constant value is used.
+        LT.0.0: Temperature dependent Young's modulus given by load curve ID = -E
         """ # nopep8
         return self._cards[0].get_value("e")
 
@@ -179,8 +179,8 @@ class Mat224Gys(KeywordBase):
     @property
     def beta(self) -> float:
         """Get or set the Fraction of plastic work converted into heat (superseded by FWORK in *CONTROL_THERMAL_SOLVER if a coupled thermal/structural analysis):
-        GT.0.0:	Constant value is used
-        LT.0.0 : -BETA gives a load curve ID for strain rate dependence, a table ID for strain rateand temperature dependence, or a 3 - dimensional table ID for temperature(TABLE_3D), strain rate(TABLE) and plastic strain(CURVE) dependence, or a 4 - dimensional table ID for triaxiality(TABLE_4D), temperature(TABLE_3D), strain rate(TABLE) and plastic strain(CURVE) dependence.
+        GT.0.0: Constant value is used
+        LT.0.0: -BETA gives a load curve ID for strain rate dependence, a table ID for strain rateand temperature dependence, or a 3 - dimensional table ID for temperature(TABLE_3D), strain rate(TABLE) and plastic strain(CURVE) dependence, or a 4 - dimensional table ID for triaxiality(TABLE_4D), temperature(TABLE_3D), strain rate(TABLE) and plastic strain(CURVE) dependence.
         """ # nopep8
         return self._cards[0].get_value("beta")
 
@@ -191,8 +191,8 @@ class Mat224Gys(KeywordBase):
 
     @property
     def numint(self) -> float:
-        """Get or set the Number of integration points which must fail before the element is deleted. Available for shells and solids.
-        LT.0.0: |NUMINT| is percentage of integration points/layers which must fail before element fails. For fully integrated shells, a methodology is used where a layer fails if one integrationpoint fails and then the given percentage of layers must fail before the element fails.
+        """Get or set the Number of integration points that must fail before the element is deleted. Available for shells and solids.
+        LT.0.0: |NUMINT| is the percentage of integration points/layers that must fail before element fails. For fully integrated shells, a methodology is used where a layer fails if one integrationpoint fails. Then the given percentage of layers must fail before the element fails.
         """ # nopep8
         return self._cards[0].get_value("numint")
 
@@ -258,7 +258,7 @@ class Mat224Gys(KeywordBase):
 
     @property
     def lci(self) -> int:
-        """Get or set the Load curve ID or table ID. The load curve ID defines plastic failure strain as a function of element size. The table ID defines for each triaxiality a load curve ID giving the plastic failure strain versus element size for that triaxiality.
+        """Get or set the Load curve ID, table ID, or 3D table ID. The load curve ID defines plastic failure strain as a function of element size. The table ID defines for each triaxiality a load curve ID giving the plastic failure strain versus element size for that triaxiality. If referring to a three-dimensional table ID, plastic failure strain can be a function of Lode parameter (TABLE_3D), triaxiality (TABLE), and element size (CURVE).
         """ # nopep8
         return self._cards[1].get_value("lci")
 
@@ -314,8 +314,8 @@ class Mat224Gys(KeywordBase):
     @property
     def iflag(self) -> int:
         """Get or set the Flag to specify abscissa for LCCR, LCCT, LCSR, LCST:
-        EQ.0:	Compressive and shear yields are given as functions of plastic strain as defined in Remark 1 (default).
-        EQ.1 : Compressive and shear yields are given as functions of effective plastic strain
+        EQ.0: Compressive and shear yields are given as functions of plastic strain as defined in Remark 1 (default).
+        EQ.1: Compressive and shear yields are given as functions of effective plastic strain
         """ # nopep8
         return self._cards[2].get_value("iflag")
 

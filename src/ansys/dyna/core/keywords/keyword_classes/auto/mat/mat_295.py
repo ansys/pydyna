@@ -206,8 +206,8 @@ class FiberFamily(Cards):
     @property
     def ftype(self) -> typing.Optional[int]:
         """Get or set the Type of fiber model:
-EQ.1:	Holzapfel-Gasser-Ogden [6]
-EQ.2:	Freed-Doehring [2].
+EQ.1: Holzapfel-Gasser-Ogden [6]
+EQ.2: Freed-Doehring [2].
         """ # nopep8
         return self._cards[1].get_value("ftype")
 
@@ -285,9 +285,9 @@ _MAT295_CARD9 = (
     FieldSchema("acdir", int, 20, 10, 0),
     FieldSchema("acid", int, 30, 10, None),
     FieldSchema("acthr", float, 40, 10, 0.0),
-    FieldSchema("sf", float, 50, 10, 1.0),
-    FieldSchema("ss", float, 60, 10, 0.0),
-    FieldSchema("sn", float, 70, 10, 0.0),
+    FieldSchema("sf", float, 50, 10, None),
+    FieldSchema("ss", float, 60, 10, None),
+    FieldSchema("sn", float, 70, 10, None),
 )
 
 _MAT295_CARD10 = (
@@ -630,7 +630,7 @@ class Mat295(KeywordBase):
 
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.  A unique number or label must be specified.
+        """Get or set the Material identification. A unique number or label must be specified.
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -653,12 +653,12 @@ class Mat295(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option (see *MAT_002 for a more complete description):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes.The a - direction is from node 1 to node 2 of the element.The b - direction is orthogonal to the a - direction and is in the plane formed by nodes 1, 2,and 4. For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
-        EQ.2.0:	Globally orthotropic with material axes determined by vectors a and d input below, as with* DEFINE_COORDINATE_VECTOR
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on MACF.
-        EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
-        LT.0.0 : | AOPT | is a coordinate system ID(see * DEFINE_COORDINATE_OPTION).
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes.The a - direction is from node 1 to node 2 of the element.The b - direction is orthogonal to the a - direction and is in the plane formed by nodes 1, 2,and 4. For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
+        EQ.1.0: Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors a and d input below, as with *DEFINE_COORDINATE_VECTOR
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on MACF.
+        EQ.4.0: Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
+        LT.0.0: | AOPT | is a coordinate system ID(see *DEFINE_COORDINATE_OPTION).
         """ # nopep8
         return self._cards[0].get_value("aopt")
 
@@ -678,9 +678,9 @@ class Mat295(KeywordBase):
     @property
     def itype(self) -> typing.Optional[int]:
         """Get or set the Type of isotropic model (see remarks 1 and 2):
-        EQ.-1/+1:	compressible/nearly-incompressible Ogden [12] (see notes 1-3)
-        EQ.-2:	Yeoh [13]
-        EQ.-3/+3:	compressible/nearly-incompressible Holzapfel-Ogden [1], [7].
+        EQ.-1/+1: compressible/nearly-incompressible Ogden [12] (see notes 1-3)
+        EQ.-2: Yeoh [13]
+        EQ.-3/+3: compressible/nearly-incompressible Holzapfel-Ogden [1], [7].
         """ # nopep8
         return self._cards[1].get_value("itype")
 
@@ -715,7 +715,7 @@ class Mat295(KeywordBase):
 
     @property
     def mu1(self) -> typing.Optional[float]:
-        """Get or set the Ogden moduli, with i = 1,…,8.
+        """Get or set the Ogden moduli, with i = 1,...,8.
         """ # nopep8
         return self._cards[2].get_value("mu1")
 
@@ -726,7 +726,7 @@ class Mat295(KeywordBase):
 
     @property
     def mu2(self) -> typing.Optional[float]:
-        """Get or set the Ogden moduli, with i = 1,…,8.
+        """Get or set the Ogden moduli, with i = 1,...,8.
         """ # nopep8
         return self._cards[2].get_value("mu2")
 
@@ -737,7 +737,7 @@ class Mat295(KeywordBase):
 
     @property
     def mu3(self) -> typing.Optional[float]:
-        """Get or set the Ogden moduli, with i = 1,…,8.
+        """Get or set the Ogden moduli, with i = 1,...,8.
         """ # nopep8
         return self._cards[2].get_value("mu3")
 
@@ -748,7 +748,7 @@ class Mat295(KeywordBase):
 
     @property
     def mu4(self) -> typing.Optional[float]:
-        """Get or set the Ogden moduli, with i = 1,…,8.
+        """Get or set the Ogden moduli, with i = 1,...,8.
         """ # nopep8
         return self._cards[2].get_value("mu4")
 
@@ -759,7 +759,7 @@ class Mat295(KeywordBase):
 
     @property
     def mu5(self) -> typing.Optional[float]:
-        """Get or set the Ogden moduli, with i = 1,…,8.
+        """Get or set the Ogden moduli, with i = 1,...,8.
         """ # nopep8
         return self._cards[2].get_value("mu5")
 
@@ -770,7 +770,7 @@ class Mat295(KeywordBase):
 
     @property
     def mu6(self) -> typing.Optional[float]:
-        """Get or set the Ogden moduli, with i = 1,…,8.
+        """Get or set the Ogden moduli, with i = 1,...,8.
         """ # nopep8
         return self._cards[2].get_value("mu6")
 
@@ -781,7 +781,7 @@ class Mat295(KeywordBase):
 
     @property
     def mu7(self) -> typing.Optional[float]:
-        """Get or set the Ogden moduli, with i = 1,…,8.
+        """Get or set the Ogden moduli, with i = 1,...,8.
         """ # nopep8
         return self._cards[2].get_value("mu7")
 
@@ -792,7 +792,7 @@ class Mat295(KeywordBase):
 
     @property
     def mu8(self) -> typing.Optional[float]:
-        """Get or set the Ogden moduli, with i = 1,…,8.
+        """Get or set the Ogden moduli, with i = 1,...,8.
         """ # nopep8
         return self._cards[2].get_value("mu8")
 
@@ -803,7 +803,7 @@ class Mat295(KeywordBase):
 
     @property
     def alpha1(self) -> typing.Optional[float]:
-        """Get or set the Ogden constants, with i = 1,…,8.
+        """Get or set the Ogden constants, with i = 1,...,8.
         """ # nopep8
         return self._cards[3].get_value("alpha1")
 
@@ -814,7 +814,7 @@ class Mat295(KeywordBase):
 
     @property
     def alpha2(self) -> typing.Optional[float]:
-        """Get or set the Ogden constants, with i = 1,…,8.
+        """Get or set the Ogden constants, with i = 1,...,8.
         """ # nopep8
         return self._cards[3].get_value("alpha2")
 
@@ -825,7 +825,7 @@ class Mat295(KeywordBase):
 
     @property
     def alpha3(self) -> typing.Optional[float]:
-        """Get or set the Ogden constants, with i = 1,…,8.
+        """Get or set the Ogden constants, with i = 1,...,8.
         """ # nopep8
         return self._cards[3].get_value("alpha3")
 
@@ -836,7 +836,7 @@ class Mat295(KeywordBase):
 
     @property
     def alpha4(self) -> typing.Optional[float]:
-        """Get or set the Ogden constants, with i = 1,…,8.
+        """Get or set the Ogden constants, with i = 1,...,8.
         """ # nopep8
         return self._cards[3].get_value("alpha4")
 
@@ -847,7 +847,7 @@ class Mat295(KeywordBase):
 
     @property
     def alpha5(self) -> typing.Optional[float]:
-        """Get or set the Ogden constants, with i = 1,…,8.
+        """Get or set the Ogden constants, with i = 1,...,8.
         """ # nopep8
         return self._cards[3].get_value("alpha5")
 
@@ -858,7 +858,7 @@ class Mat295(KeywordBase):
 
     @property
     def alpha6(self) -> typing.Optional[float]:
-        """Get or set the Ogden constants, with i = 1,…,8.
+        """Get or set the Ogden constants, with i = 1,...,8.
         """ # nopep8
         return self._cards[3].get_value("alpha6")
 
@@ -869,7 +869,7 @@ class Mat295(KeywordBase):
 
     @property
     def alpha7(self) -> typing.Optional[float]:
-        """Get or set the Ogden constants, with i = 1,…,8.
+        """Get or set the Ogden constants, with i = 1,...,8.
         """ # nopep8
         return self._cards[3].get_value("alpha7")
 
@@ -880,7 +880,7 @@ class Mat295(KeywordBase):
 
     @property
     def alpha8(self) -> typing.Optional[float]:
-        """Get or set the Ogden constants, with i = 1,…,8.
+        """Get or set the Ogden constants, with i = 1,...,8.
         """ # nopep8
         return self._cards[3].get_value("alpha8")
 
@@ -959,7 +959,7 @@ class Mat295(KeywordBase):
     @property
     def atype(self) -> typing.Optional[int]:
         """Get or set the Type of anisotropic model:
-        EQ.-1/+1:	general structure tensor-based, see Holzapfel et al. [8] (see remark 4 and note 4)
+        EQ.-1/+1: general structure tensor-based, see Holzapfel et al. [8] (see remark 4 and note 4)
         """ # nopep8
         return self._cards[6].get_value("atype")
 
@@ -971,8 +971,8 @@ class Mat295(KeywordBase):
     @property
     def intype(self) -> typing.Optional[int]:
         """Get or set the Type of interaction between the fiber families (see remarks 5 and 6):
-        EQ.0:	none
-        EQ.1:	Holzapfel-Ogden [1], [5].
+        EQ.0: none
+        EQ.1: Holzapfel-Ogden [1], [5].
         """ # nopep8
         return self._cards[6].get_value("intype")
 
@@ -1034,10 +1034,10 @@ class Mat295(KeywordBase):
     @property
     def actype(self) -> typing.Optional[int]:
         """Get or set the Type of active model:
-        EQ.1:	Guccione-Waldman-McCulloch [4]
-        EQ.2:	Guccione-Waldman-McCulloch [4] and Hunter-Nash-Sands [9]
-        EQ.3:	Hunter-Nash-Sands	[9]
-        EQ.4:	Hunter-Nash-Sands [9] and Hunter-McCulloch-ter Keurs [10].
+        EQ.1: Guccione-Waldman-McCulloch [4]
+        EQ.2: Guccione-Waldman-McCulloch [4] and Hunter-Nash-Sands [9]
+        EQ.3: Hunter-Nash-Sands [9]
+        EQ.4: Hunter-Nash-Sands [9] and Hunter-McCulloch-ter Keurs [10].
         EQ.5: Martins-Pato-Pires [14]
         """ # nopep8
         return self._cards[9].get_value("actype")
@@ -1049,7 +1049,7 @@ class Mat295(KeywordBase):
 
     @property
     def acdir(self) -> int:
-        """Get or set the Direction of active tension: GT.0:	Active tension develops along the mean orientation of the ACDIRth fiber family.
+        """Get or set the Direction of active tension: GT.0: Active tension develops along the mean orientation of the ACDIRth fiber family.
         """ # nopep8
         return self._cards[9].get_value("acdir")
 
@@ -1081,7 +1081,7 @@ class Mat295(KeywordBase):
         self._cards[9].set_value("acthr", value)
 
     @property
-    def sf(self) -> float:
+    def sf(self) -> typing.Optional[float]:
         """Get or set the Active stress scaling factor in the fiber direction (see Remark 9)
         """ # nopep8
         return self._cards[9].get_value("sf")
@@ -1092,7 +1092,7 @@ class Mat295(KeywordBase):
         self._cards[9].set_value("sf", value)
 
     @property
-    def ss(self) -> float:
+    def ss(self) -> typing.Optional[float]:
         """Get or set the Active stress scaling factor in the transverse sheet direction (see Remark 9)
         """ # nopep8
         return self._cards[9].get_value("ss")
@@ -1103,7 +1103,7 @@ class Mat295(KeywordBase):
         self._cards[9].set_value("ss", value)
 
     @property
-    def sn(self) -> float:
+    def sn(self) -> typing.Optional[float]:
         """Get or set the Active stress scaling factor in the transverse normal direction (see Remark 9)
         """ # nopep8
         return self._cards[9].get_value("sn")
@@ -1448,10 +1448,10 @@ class Mat295(KeywordBase):
     @property
     def macf(self) -> int:
         """Get or set the Material axes change flag for brick elements:
-        EQ.1:	no change (default)
-        EQ.2:	switch material axes a and b
-        EQ.3:	switch material axes a and c
-        EQ.4:	switch material axes b and c.
+        EQ.1: no change (default)
+        EQ.2: switch material axes a and b
+        EQ.3: switch material axes a and c
+        EQ.4: switch material axes b and c.
         """ # nopep8
         return self._cards[17].get_value("macf")
 
@@ -1547,8 +1547,8 @@ see *ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BETA, and *ELEMENT_SOLID_ORTHO.
     def ref(self) -> typing.Optional[float]:
         """Get or set the Use reference geometry to initialize the stress tensor. The reference geometry is defined by the keyword:
         *INITIAL_FOAM_REFERENCE_GEOMETRY.
-        EQ.0.0:	off
-        EQ.1.0:	on.
+        EQ.0.0: off
+        EQ.1.0: on.
         """ # nopep8
         return self._cards[18].get_value("ref")
 

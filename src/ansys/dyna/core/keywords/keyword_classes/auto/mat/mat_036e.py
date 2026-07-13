@@ -42,6 +42,8 @@ _MAT036E_CARD1 = (
     FieldSchema("lch90", int, 20, 10, None),
     FieldSchema("lchbi", int, 30, 10, None),
     FieldSchema("lchsh", int, 40, 10, None),
+    FieldSchema("hosf", int, 50, 10, None),
+    FieldSchema("tflg", float, 60, 10, 0.0),
 )
 
 _MAT036E_CARD2 = (
@@ -50,7 +52,7 @@ _MAT036E_CARD2 = (
     FieldSchema("lcr90", int, 20, 10, None),
     FieldSchema("lcrbi", int, 30, 10, None),
     FieldSchema("lcrsh", int, 40, 10, None),
-    FieldSchema("m", float, 50, 10, None),
+    FieldSchema("m", int, 50, 10, None),
 )
 
 _MAT036E_CARD3 = (
@@ -187,9 +189,7 @@ class Mat036E(KeywordBase):
 
     @property
     def lch00(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining uniaxial stress vs. uniaxial strain in the given direction
-        (XX is either 00, 45, 90). The exact definition is discussed in the Remarks
-        below. LCH00 must be defined, the other defaults to LCH00 if not defined.
+        """Get or set the Load curve defining uniaxial stress vs. uniaxial strain in the given direction (XX is either 00, 45 or 90). The exact definition is discussed in the Remarks. LCH00 must be defined, The other default to LCH00 if not defined.
         """ # nopep8
         return self._cards[1].get_value("lch00")
 
@@ -200,9 +200,7 @@ class Mat036E(KeywordBase):
 
     @property
     def lch45(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining uniaxial stress vs. uniaxial strain in the given direction
-        (XX is either 00, 45, 90). The exact definition is discussed in the Remarks
-        below. LCH00 must be defined, the other defaults to LCH00 if not defined.
+        """Get or set the Load curve defining uniaxial stress vs. uniaxial strain in the given direction (XX is either 00, 45 or 90). The exact definition is discussed in the Remarks. LCH00 must be defined, The other default to LCH00 if not defined.
         """ # nopep8
         return self._cards[1].get_value("lch45")
 
@@ -213,9 +211,7 @@ class Mat036E(KeywordBase):
 
     @property
     def lch90(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining uniaxial stress vs. uniaxial strain in the given direction
-        (XX is either 00, 45, 90). The exact definition is discussed in the Remarks
-        below. LCH00 must be defined, the other defaults to LCH00 if not defined.
+        """Get or set the Load curve defining uniaxial stress vs. uniaxial strain in the given direction (XX is either 00, 45 or 90). The exact definition is discussed in the Remarks. LCH00 must be defined, The other default to LCH00 if not defined.
         """ # nopep8
         return self._cards[1].get_value("lch90")
 
@@ -226,9 +222,7 @@ class Mat036E(KeywordBase):
 
     @property
     def lchbi(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining biaxial stress vs. biaxial strain, see discussion in the
-        Remarks below for a definition. If not defined this is determined from
-        LCH00 and the initial R-values to yield a response close to the standard 3-parameter Barlat model.
+        """Get or set the Load curve defining biaxial stress vs. biaxial strain, see discussion in the Remarks below for a definition. If not defined this is determined from LCH00 and the initial R-values to yield a response close to the standard 3-parameter Barlat model.
         """ # nopep8
         return self._cards[1].get_value("lchbi")
 
@@ -239,9 +233,7 @@ class Mat036E(KeywordBase):
 
     @property
     def lchsh(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining shear stress vs. shear strain, see discussion in the
-        Remarks below for a definition. If not defined this is ignored to yield a
-        response close to the standard 3-parameter Barlat model.
+        """Get or set the Load curve defining shear stress vs. shear strain, see discussion in the Remarks below for a definition. If not defined this is ignored to yield a response close to the standard 3-parameter Barlat model.
         """ # nopep8
         return self._cards[1].get_value("lchsh")
 
@@ -251,11 +243,34 @@ class Mat036E(KeywordBase):
         self._cards[1].set_value("lchsh", value)
 
     @property
+    def hosf(self) -> typing.Optional[int]:
+        """Get or set the Hosford option for enhancing the convexity of the yield surface. Set to 1 to activate.
+        """ # nopep8
+        return self._cards[1].get_value("hosf")
+
+    @hosf.setter
+    def hosf(self, value: int) -> None:
+        """Set the hosf property."""
+        self._cards[1].set_value("hosf", value)
+
+    @property
+    def tflg(self) -> float:
+        """Get or set the Table evaluation flag:
+        EQ.0.0: Stresses in tables LCHXX depend on strain and strain rate(default).See description above.
+        EQ.1.0 : Stresses in tables LCHXX depend on strain and history variable #12. Or they can be a TABLE_3D, in which case the stresses depend on strain, strain rate, and history variable #12. History variable #12 is an arbitrary user - defined variable that can be set via * INITIAL_STRESS_SHELL or *INITIAL_HISTORY_NODE..
+        """ # nopep8
+        return self._cards[1].get_value("tflg")
+
+    @tflg.setter
+    def tflg(self, value: float) -> None:
+        """Set the tflg property."""
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""tflg must be `None` or one of {0.0,1.0}.""")
+        self._cards[1].set_value("tflg", value)
+
+    @property
     def lcr00(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining standard R-value vs. uniaxial strain in the given
-        direction (XX is either 00, 45, 90). The exact definition is discussed in the
-        Remarks below. Default is a constant R-value of 1.0, a negative input will
-        result in a constant R-value of –LCRXX.
+        """Get or set the Load curve defining the standard R-value as a function of uniaxial strain in the given direction (XX is 00, 45, or 90). The exact definition is discussed in the Remarks below.The default is a constant R-value of 1.0.  A negative input results in a constant R-value of –LCRXX.
         """ # nopep8
         return self._cards[2].get_value("lcr00")
 
@@ -266,10 +281,7 @@ class Mat036E(KeywordBase):
 
     @property
     def lcr45(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining standard R-value vs. uniaxial strain in the given
-        direction (XX is either 00, 45, 90). The exact definition is discussed in the
-        Remarks below. Default is a constant R-value of 1.0, a negative input will
-        result in a constant R-value of –LCRXX.
+        """Get or set the Load curve defining the standard R-value as a function of uniaxial strain in the given direction (XX is 00, 45, or 90). The exact definition is discussed in the Remarks below.The default is a constant R-value of 1.0.  A negative input results in a constant R-value of –LCRXX.
         """ # nopep8
         return self._cards[2].get_value("lcr45")
 
@@ -280,10 +292,7 @@ class Mat036E(KeywordBase):
 
     @property
     def lcr90(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining standard R-value vs. uniaxial strain in the given
-        direction (XX is either 00, 45, 90). The exact definition is discussed in the
-        Remarks below. Default is a constant R-value of 1.0, a negative input will
-        result in a constant R-value of –LCRXX.
+        """Get or set the Load curve defining the standard R-value as a function of uniaxial strain in the given direction (XX is 00, 45, or 90). The exact definition is discussed in the Remarks below.The default is a constant R-value of 1.0.  A negative input results in a constant R-value of –LCRXX.
         """ # nopep8
         return self._cards[2].get_value("lcr90")
 
@@ -294,9 +303,7 @@ class Mat036E(KeywordBase):
 
     @property
     def lcrbi(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining biaxial R-value vs. biaxial strain, see discussion in the
-        Remarks below for a definition. Default is a constant R-value of 1.0, a
-        negative input will result in a constant R-value of –LCRBI.
+        """Get or set the Load curve defining the biaxial R-value as a function of biaxial strain. See the discussion in the Remarks below for a definition. The default is a constant R-value of 1.0. A negative input results in a constant R-value of –LCRBI.
         """ # nopep8
         return self._cards[2].get_value("lcrbi")
 
@@ -307,9 +314,7 @@ class Mat036E(KeywordBase):
 
     @property
     def lcrsh(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining shear R-value vs. shear strain, see discussion in the
-        Remarks below for a definition. Default is a constant R-value of 1.0, a
-        negative input will result in a constant R-value of –LCRSH.
+        """Get or set the Load curve defining the shear R-value as a function of shear strain. See the discussion in the Remarks below for a definition. The default is a constant R-value of 1.0. A negative input results in a constant R-value of –LCRSH.
         """ # nopep8
         return self._cards[2].get_value("lcrsh")
 
@@ -319,25 +324,23 @@ class Mat036E(KeywordBase):
         self._cards[2].set_value("lcrsh", value)
 
     @property
-    def m(self) -> typing.Optional[float]:
-        """Get or set the Barlat flow exponent, , must be an integer value.
+    def m(self) -> typing.Optional[int]:
+        """Get or set the Barlat flow exponent, m. It must be an integer value.
         """ # nopep8
         return self._cards[2].get_value("m")
 
     @m.setter
-    def m(self, value: float) -> None:
+    def m(self, value: int) -> None:
         """Set the m property."""
         self._cards[2].set_value("m", value)
 
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option:
-        EQ.0.0: locally orthotropic with material axes determined by
-        element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
-        EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
-        EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
-        LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
+        EQ.3.0: Locally orthotropic material axes determined by rotating the material axes about the element normal by an angle, BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
         *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
         """ # nopep8
         return self._cards[3].get_value("aopt")

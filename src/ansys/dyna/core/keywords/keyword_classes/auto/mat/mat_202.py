@@ -64,7 +64,6 @@ class Mat202(KeywordBase):
         "lc_e": LinkType.DEFINE_CURVE,
         "lc_pr": LinkType.DEFINE_CURVE,
         "lc_al": LinkType.DEFINE_CURVE,
-        "tbl_ss": LinkType.DEFINE_CURVE,
         "lc_fs": LinkType.DEFINE_CURVE,
     }
 
@@ -153,7 +152,7 @@ class Mat202(KeywordBase):
 
     @property
     def lc_e(self) -> typing.Optional[int]:
-        """Get or set the Optional Load curve ID: Young's Modulus vs Temperature (overrides E	and factors from EC3).
+        """Get or set the Optional Load curve ID: Young's Modulus vs Temperature (overrides E and factors from EC3).
         """ # nopep8
         return self._cards[1].get_value("lc_e")
 
@@ -264,21 +263,6 @@ class Mat202(KeywordBase):
     def lc_al_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lc_al."""
         self.lc_al = value.lcid
-
-    @property
-    def tbl_ss_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for tbl_ss."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.tbl_ss:
-                return kwd
-        return None
-
-    @tbl_ss_link.setter
-    def tbl_ss_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for tbl_ss."""
-        self.tbl_ss = value.lcid
 
     @property
     def lc_fs_link(self) -> typing.Optional[DefineCurve]:

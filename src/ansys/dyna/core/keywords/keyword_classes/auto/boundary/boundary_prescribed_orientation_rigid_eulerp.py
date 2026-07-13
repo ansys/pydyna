@@ -82,7 +82,7 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
 
     @property
     def pida(self) -> typing.Optional[int]:
-        """Get or set the Part ID for rigid body A.  The orientation of PIDB is measured with respect to the coordinate system of PIDA, as defined by LCO on *MAT_RIGID.  If zero then orientation of PIDB is measured with respect to the global reference frame except for BODY=1 in the ANGLES option
+        """Get or set the Part ID for rigid body A. The orientation of PIDB is measured with respect to the coordinate system of PIDA, as defined by LCO on *MAT_RIGID. If zero then orientation of PIDB is measured with respect to the global reference frame except for BODY=1 in the ANGLES option
         """ # nopep8
         return self._cards[0].get_value("pida")
 
@@ -128,9 +128,9 @@ class BoundaryPrescribedOrientationRigidEulerp(KeywordBase):
     @property
     def toffset(self) -> int:
         """Get or set the Time offset flag:
-        EQ.0:   No time offset is applied.
-        EQ.1:	The time value of all load curves will be offset by the birth time,
-        EQ.0:	no time offset is applied
+        EQ.0: No time offset is applied.
+        EQ.1: The time value of all load curves will be offset by the birth time,
+        EQ.0: no time offset is applied
         """ # nopep8
         return self._cards[0].get_value("toffset")
 

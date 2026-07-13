@@ -36,6 +36,7 @@ _EMISOPOTENTIALCONNECT_CARD0 = (
     FieldSchema("val", float, 40, 10, None),
     FieldSchema("lcid_rdlid", int, 50, 10, None, "lcid/rdlid"),
     FieldSchema("psid", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
 )
 
 _EMISOPOTENTIALCONNECT_CARD1 = (
@@ -88,14 +89,15 @@ class EmIsopotentialConnect(KeywordBase):
         EQ.4:Current Source.
         EQ.5:Meshless Randles circuit (used to represent a cell by one lumped Randles circuit)
         EQ.6:R, L, C circuit
+        EQ.7: Power
         """ # nopep8
         return self._cards[0].get_value("contype")
 
     @contype.setter
     def contype(self, value: int) -> None:
         """Set the contype property."""
-        if value not in [1, 2, 3, 4, 5, 6, None]:
-            raise Exception("""contype must be `None` or one of {1,2,3,4,5,6}.""")
+        if value not in [1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""contype must be `None` or one of {1,2,3,4,5,6,7}.""")
         self._cards[0].set_value("contype", value)
 
     @property
@@ -133,8 +135,9 @@ class EmIsopotentialConnect(KeywordBase):
 
     @property
     def lcid_rdlid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining the value of the resistance,voltage,or current function of time and depending on CONTYPE.
-        If not defined,VAL will be used.
+        """Get or set the LCID: Load curve ID giving the value of the resistance, voltage, or current as a function of time. Only available for CONTYPE = 2 through 4.
+        LT.0: | LCID | is a *DEFINE_FUNCTION ID.The following arguments are allowed: f(time, emdt, curr1, curr2, pot1, pot2, rmesh).pot1 and pot2 are the potential at the previous time step and at two previous time steps.curr1 and curr2 are the current at the previous time step and two previous time steps.rmesh is the mesh resistance calculated by the solver at this isopotential.
+        RDLID: ID of the Randles circuit defined by *EM_RANDLES_MESHLESS
         """ # nopep8
         return self._cards[0].get_value("lcid_rdlid")
 

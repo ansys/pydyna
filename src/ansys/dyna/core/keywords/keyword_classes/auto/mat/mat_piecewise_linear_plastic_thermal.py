@@ -44,10 +44,12 @@ _MATPIECEWISELINEARPLASTICTHERMAL_CARD1 = (
     FieldSchema("tabidc", int, 0, 10, None),
     FieldSchema("tabidt", int, 10, 10, None),
     FieldSchema("lalpha", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("vp", float, 40, 10, None),
 )
 
 _MATPIECEWISELINEARPLASTICTHERMAL_CARD2 = (
-    FieldSchema("alpha	", float, 0, 10, None),
+    FieldSchema("alpha_", float, 0, 10, None, "alpha "),
     FieldSchema("tref", float, 10, 10, None),
 )
 
@@ -64,8 +66,6 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
-        "tabidc": LinkType.DEFINE_CURVE,
-        "tabidt": LinkType.DEFINE_CURVE,
         "lalpha": LinkType.DEFINE_CURVE,
     }
 
@@ -99,7 +99,7 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.  A unique number or label must be specified.
+        """Get or set the Material identification. A unique number or label must be specified.
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -122,6 +122,8 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
     @property
     def e(self) -> typing.Optional[float]:
         """Get or set the Young's modulus.
+        LT.0.0: | E | is a load curve ID where E is given as a function of temperature, T.The curve consists of(T,E) data pairs.
+        GT.0.0: Constant
         """ # nopep8
         return self._cards[0].get_value("e")
 
@@ -133,6 +135,8 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
     @property
     def pr(self) -> typing.Optional[float]:
         """Get or set the Poisson's ratio.
+        LT.0.0: | PR | is a load curve ID for Poisson's ratio as a function of temperature.
+        GT.0.0: Constant
         """ # nopep8
         return self._cards[0].get_value("pr")
 
@@ -210,6 +214,11 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
     @property
     def lalpha(self) -> typing.Optional[int]:
         """Get or set the Load curve ID for thermal expansion coefficient as a function of temperature.
+        GT.0: Thethe instantaneous thermal expansion coefficient based on the following formula:
+        de_ij ** thermal = a(T)dTb_ij
+        LT.0: Thethe thermal coefficient is defined relative a reference temperature TREF, such that the total thermal strain is given by:
+        e_ij ** thermal = a(T)(T - T_ref) b_ij
+        With this option active, ALPHA is ignored.
         """ # nopep8
         return self._cards[1].get_value("lalpha")
 
@@ -219,15 +228,28 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
         self._cards[1].set_value("lalpha", value)
 
     @property
-    def alpha	(self) -> typing.Optional[float]:
+    def vp(self) -> typing.Optional[float]:
+        """Get or set the Formulation for rate effects; see Remarks 1 and 2.
+        EQ.0.0: effective total strain rate(default)
+        NE.0.0: effective plastic strain rate
+        """ # nopep8
+        return self._cards[1].get_value("vp")
+
+    @vp.setter
+    def vp(self, value: float) -> None:
+        """Set the vp property."""
+        self._cards[1].set_value("vp", value)
+
+    @property
+    def alpha_(self) -> typing.Optional[float]:
         """Get or set the Coefficient of thermal expansion.
         """ # nopep8
-        return self._cards[2].get_value("alpha	")
+        return self._cards[2].get_value("alpha_")
 
-    @alpha	.setter
-    def alpha	(self, value: float) -> None:
-        """Set the alpha	 property."""
-        self._cards[2].set_value("alpha	", value)
+    @alpha_.setter
+    def alpha_(self, value: float) -> None:
+        """Set the alpha_ property."""
+        self._cards[2].set_value("alpha_", value)
 
     @property
     def tref(self) -> typing.Optional[float]:
@@ -253,36 +275,6 @@ class MatPiecewiseLinearPlasticThermal(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
-
-    @property
-    def tabidc_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for tabidc."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.tabidc:
-                return kwd
-        return None
-
-    @tabidc_link.setter
-    def tabidc_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for tabidc."""
-        self.tabidc = value.lcid
-
-    @property
-    def tabidt_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for tabidt."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.tabidt:
-                return kwd
-        return None
-
-    @tabidt_link.setter
-    def tabidt_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for tabidt."""
-        self.tabidt = value.lcid
 
     @property
     def lalpha_link(self) -> typing.Optional[DefineCurve]:

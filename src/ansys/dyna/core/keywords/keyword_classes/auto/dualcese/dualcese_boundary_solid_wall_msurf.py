@@ -79,8 +79,8 @@ class DualceseBoundarySolidWallMsurf(KeywordBase):
     @property
     def vx(self) -> typing.Optional[float]:
         """Get or set the Velocity vector of the solid wall boundary condition:
-        LCID.EQ.0:	Constant velocity vector specified with VX, VY,and VZ.
-        LCID.NE.0 : VX, VY,and VZ give the velocity vector that is scaled by LCID.
+        LCID.EQ.0: Constant velocity vector specified with VX, VY,and VZ.
+        LCID.NE.0: VX, VY,and VZ give the velocity vector that is scaled by LCID.
         """ # nopep8
         return self._cards[0].get_value("vx")
 
@@ -92,8 +92,8 @@ class DualceseBoundarySolidWallMsurf(KeywordBase):
     @property
     def vy(self) -> typing.Optional[float]:
         """Get or set the Velocity vector of the solid wall boundary condition:
-        LCID.EQ.0:	Constant velocity vector specified with VX, VY,and VZ.
-        LCID.NE.0 : VX, VY,and VZ give the velocity vector that is scaled by LCID.
+        LCID.EQ.0: Constant velocity vector specified with VX, VY,and VZ.
+        LCID.NE.0: VX, VY,and VZ give the velocity vector that is scaled by LCID.
         """ # nopep8
         return self._cards[0].get_value("vy")
 
@@ -105,8 +105,8 @@ class DualceseBoundarySolidWallMsurf(KeywordBase):
     @property
     def vz(self) -> typing.Optional[float]:
         """Get or set the Velocity vector of the solid wall boundary condition:
-        LCID.EQ.0:	Constant velocity vector specified with VX, VY,and VZ.
-        LCID.NE.0 : VX, VY,and VZ give the velocity vector that is scaled by LCID.
+        LCID.EQ.0: Constant velocity vector specified with VX, VY,and VZ.
+        LCID.NE.0: VX, VY,and VZ give the velocity vector that is scaled by LCID.
         """ # nopep8
         return self._cards[0].get_value("vz")
 

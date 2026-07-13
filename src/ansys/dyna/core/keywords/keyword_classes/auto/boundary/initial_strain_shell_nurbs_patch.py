@@ -97,8 +97,8 @@ class InitialStrainShellNurbsPatch(KeywordBase):
     @property
     def nthk(self) -> int:
         """Get or set the Flag for initialization of thicknesses at in-plane IPs:
-        EQ.0:	o
-        ffEQ.1 : on.
+        EQ.0: o
+        ffEQ.1: on.
         """ # nopep8
         return self._cards[0].get_value("nthk")
 
@@ -112,8 +112,8 @@ class InitialStrainShellNurbsPatch(KeywordBase):
     @property
     def large(self) -> int:
         """Get or set the Large format flag:
-        EQ.0:	off
-        EQ.1 : on.Each strain field is twice as long for higher precision.
+        EQ.0: off
+        EQ.1: on.Each strain field is twice as long for higher precision.
         """ # nopep8
         return self._cards[0].get_value("large")
 

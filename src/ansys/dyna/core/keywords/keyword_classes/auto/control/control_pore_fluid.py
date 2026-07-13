@@ -78,13 +78,13 @@ class ControlPoreFluid(KeywordBase):
     @property
     def atype(self) -> int:
         """Get or set the Analysis type for pore water pressure calculations:
-        EQ.0:  No pore water pressure calculation.
-        EQ.1:  Undrained analysis,
-        EQ.2:  Drained analysis,
-        EQ.3:  Time dependent consolidation (coupled)
-        EQ.4:  Consolidate to steady state (uncoupled)
-        EQ.5:  Drained in dynamic relaxation, undrained in transient.
-        EQ.6:  As 4 but do not check convergence, continue to end time .
+        EQ.0: No pore water pressure calculation.
+        EQ.1: Undrained analysis,
+        EQ.2: Drained analysis,
+        EQ.3: Time dependent consolidation (coupled)
+        EQ.4: Consolidate to steady state (uncoupled)
+        EQ.5: Drained in dynamic relaxation, undrained in transient.
+        EQ.6: As 4 but do not check convergence, continue to end time .
         """ # nopep8
         return self._cards[0].get_value("atype")
 
@@ -141,9 +141,9 @@ class ControlPoreFluid(KeywordBase):
 
     @property
     def output(self) -> int:
-        """Get or set the Output flag controlling stresses to D3PLOT and D3THDT binary files:
-        EQ.0:  total stresses are output
-        EQ.1:  effective stresses are output, see notes
+        """Get or set the Flag controlling stresses output to deplot, dethdt:
+        EQ.0: total stresses are output
+        EQ.1: effective stresses are output, see notes
         """ # nopep8
         return self._cards[0].get_value("output")
 
@@ -157,8 +157,8 @@ class ControlPoreFluid(KeywordBase):
     @property
     def tmf(self) -> float:
         """Get or set the Initial Time Magnification factor on seepage (ATYPE=3,4 only).
-        GT.0:   Factor (can be used with automatic control, see TARG, FMIN, FMAX).
-        LT.0:  Load Curve ID (see *DEFINE_CURVE) giving Time Magnification Factor versus analysis time.
+        GT.0: Factor (can be used with automatic control, see TARG, FMIN, FMAX).
+        LT.0: Load Curve ID (see *DEFINE_CURVE) giving Time Magnification Factor versus analysis time.
         """ # nopep8
         return self._cards[0].get_value("tmf")
 
@@ -203,8 +203,8 @@ class ControlPoreFluid(KeywordBase):
     @property
     def ftied_(self) -> float:
         """Get or set the Analysis type for pore water pressure calculations (see Remark 1):
-        EQ.0.0:	Tied contacts act as impermeable membranes,
-        EQ.1.0 : Fluid may flow freely through tied contacts.
+        EQ.0.0: Tied contacts act as impermeable membranes,
+        EQ.1.0: Fluid may flow freely through tied contacts.
         """ # nopep8
         return self._cards[1].get_value("ftied_")
 
@@ -248,7 +248,7 @@ class ControlPoreFluid(KeywordBase):
 
     @property
     def therm(self) -> float:
-        """Get or set the Thermal expansion:  Volumetric strain per degree increase for undrained soil
+        """Get or set the Thermal expansion: Volumetric strain per degree increase for undrained soil
         """ # nopep8
         return self._cards[1].get_value("therm")
 
@@ -260,8 +260,8 @@ class ControlPoreFluid(KeywordBase):
     @property
     def etfag(self) -> int:
         """Get or set the Flag for interpretation of time (see Time Factoring):
-        EQ.0:	Time means analysis time,
-        EQ.1 : Time means event time..
+        EQ.0: Time means analysis time,
+        EQ.1: Time means event time..
         """ # nopep8
         return self._cards[2].get_value("etfag")
 

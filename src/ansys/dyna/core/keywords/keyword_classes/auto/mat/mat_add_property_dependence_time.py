@@ -85,7 +85,7 @@ class MatAddPropertyDependenceTime(KeywordBase):
 
     @property
     def prop(self) -> typing.Optional[str]:
-        """Get or set the Name of the property (same as the variable for a material model in keyword card). For example, “E” is used for Young’s modulus in *MAT_‌ELASTIC
+        """Get or set the Name of the property (same as the variable for a material model in keyword card). For example, E is used for Young's modulus in *MAT_ELASTIC
         """ # nopep8
         return self._cards[0].get_value("prop")
 
@@ -96,7 +96,7 @@ class MatAddPropertyDependenceTime(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Curve ID to define the property dependence. For the FREQ keyword option, the abscissa values define frequency; for the TIME keyword option, the abscissa values define time. The ordinate values define the property at each frequency or each time
+        """Get or set the Curve ID to define the property dependence, the abscissa values define time. The ordinate values define the property at each time
         """ # nopep8
         return self._cards[0].get_value("lcid")
 

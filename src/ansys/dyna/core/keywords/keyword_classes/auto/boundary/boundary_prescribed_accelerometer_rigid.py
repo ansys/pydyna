@@ -32,6 +32,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_syst
 
 _BOUNDARYPRESCRIBEDACCELEROMETERRIGID_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("solv", int, 10, 10, 1),
 )
 
 _BOUNDARYPRESCRIBEDACCELEROMETERRIGID_CARD1 = (
@@ -79,6 +80,22 @@ class BoundaryPrescribedAccelerometerRigid(KeywordBase):
     def pid(self, value: int) -> None:
         """Set the pid property."""
         self._cards[0].set_value("pid", value)
+
+    @property
+    def solv(self) -> int:
+        """Get or set the Solver type:
+        EQ.1: Gaussian elimination(default)
+        EQ.2: linear regression
+        EQ.3: Reciprocal, inverse explicit time integration
+        """ # nopep8
+        return self._cards[0].get_value("solv")
+
+    @solv.setter
+    def solv(self, value: int) -> None:
+        """Set the solv property."""
+        if value not in [1, 2, 3, None]:
+            raise Exception("""solv must be `None` or one of {1,2,3}.""")
+        self._cards[0].set_value("solv", value)
 
     @property
     def nid(self) -> typing.Optional[int]:

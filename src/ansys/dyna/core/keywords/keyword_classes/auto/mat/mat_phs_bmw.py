@@ -200,16 +200,16 @@ class MatPhsBmw(KeywordBase):
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
-        "lcy1": LinkType.DEFINE_CURVE,
-        "lcy2": LinkType.DEFINE_CURVE,
-        "lcy3": LinkType.DEFINE_CURVE,
-        "lcy4": LinkType.DEFINE_CURVE,
-        "lcy5": LinkType.DEFINE_CURVE,
         "lceps23": LinkType.DEFINE_CURVE,
         "lceps4": LinkType.DEFINE_CURVE,
         "lceps5": LinkType.DEFINE_CURVE,
         "lch4": LinkType.DEFINE_CURVE,
         "lch5": LinkType.DEFINE_CURVE,
+        "lcy1": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcy2": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcy3": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcy4": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcy5": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -313,8 +313,8 @@ class MatPhsBmw(KeywordBase):
     @property
     def e(self) -> typing.Optional[float]:
         """Get or set the Youngs' modulus:
-        GT.0.0:	constant value is used
-        LT.0.0:	LCID or TABID.  Temperature dependent Young's modulus given by load curve or table ID = -E. When using a table to describe the Young's modulus see Remark 10 for more information..
+        GT.0.0: constant value is used
+        LT.0.0: LCID or TABID. Temperature dependent Young's modulus given by load curve or table ID = -E. When using a table to describe the Young's modulus see Remark 10 for more information..
         """ # nopep8
         return self._cards[0].get_value("e")
 
@@ -326,8 +326,8 @@ class MatPhsBmw(KeywordBase):
     @property
     def pr(self) -> typing.Optional[float]:
         """Get or set the Poisson's ratio:
-        GT.0.0:	constant value is used
-        LT.0.0:	LCID or TABID.  Temperature dependent Poisson's ratio given by load curve or table ID = -PR. The table input is described in Remark 10.
+        GT.0.0: constant value is used
+        LT.0.0: LCID or TABID. Temperature dependent Poisson's ratio given by load curve or table ID = -PR. The table input is described in Remark 10.
         """ # nopep8
         return self._cards[0].get_value("pr")
 
@@ -363,12 +363,12 @@ class MatPhsBmw(KeywordBase):
     @property
     def phase(self) -> int:
         """Get or set the Switch to exclude middle phases from the simulation.
-        EQ.0:	all phases active (default)
-        EQ.1:	pearlite and bainite active
-        EQ.2:	bainite active
-        EQ.3:	ferrite and pearlite active
-        EQ.4:	ferrite and bainite active
-        EQ.5:	no active middle phases (only austenite → martensite)
+        EQ.0: all phases active (default)
+        EQ.1: pearlite and bainite active
+        EQ.2: bainite active
+        EQ.3: ferrite and pearlite active
+        EQ.4: ferrite and bainite active
+        EQ.5: no active middle phases (only austenite -> martensite)
         """ # nopep8
         return self._cards[0].get_value("phase")
 
@@ -382,10 +382,10 @@ class MatPhsBmw(KeywordBase):
     @property
     def heat(self) -> int:
         """Get or set the Heat flag as in MAT_244, see there for details.
-        EQ.0:	Heating is not activated.
-        EQ.1:	Heating is activated.
-        EQ.2:	Automatic switching between cooling and heating.
-        LT.0:	Switch between cooling and heating is defined by a time dependent load curve with id ABS(HEAT).
+        EQ.0: Heating is not activated.
+        EQ.1: Heating is activated.
+        EQ.2: Automatic switching between cooling and heating.
+        LT.0: Switch between cooling and heating is defined by a time dependent load curve with id ABS(HEAT).
         """ # nopep8
         return self._cards[0].get_value("heat")
 
@@ -678,8 +678,8 @@ class MatPhsBmw(KeywordBase):
     @property
     def lat1(self) -> typing.Optional[float]:
         """Get or set the Latent heat for the decomposition of austenite into ferrite, pearlite and bainite.
-        GT.0.0:	Constant value
-        LT.0.0:	Curve ID or Table ID: See remark 11 for more information.
+        GT.0.0: Constant value
+        LT.0.0: Curve ID or Table ID: See remark 11 for more information.
         """ # nopep8
         return self._cards[4].get_value("lat1")
 
@@ -691,8 +691,8 @@ class MatPhsBmw(KeywordBase):
     @property
     def lat5(self) -> typing.Optional[float]:
         """Get or set the Latent heat for the decomposition of austenite into martensite.
-        GT.0.0:	Constant value
-        LT.0.0:	Curve ID:	Note that LAT 5 is ignored if a Table ID is used in LAT1.
+        GT.0.0: Constant value
+        LT.0.0: Curve ID: Note that LAT 5 is ignored if a Table ID is used in LAT1.
         """ # nopep8
         return self._cards[4].get_value("lat5")
 
@@ -704,8 +704,8 @@ class MatPhsBmw(KeywordBase):
     @property
     def tabth(self) -> typing.Optional[int]:
         """Get or set the Table definition for thermal expansion coefficient. See remarks for more information how to input this table.
-        GT.0:	A table for instantaneous thermal expansion (TREF is ignored).
-        LT.0:	A table with thermal expansion with reference to TREF.
+        GT.0: A table for instantaneous thermal expansion (TREF is ignored).
+        LT.0: A table with thermal expansion with reference to TREF.
         """ # nopep8
         return self._cards[4].get_value("tabth")
 
@@ -849,9 +849,9 @@ class MatPhsBmw(KeywordBase):
     @property
     def strc(self) -> typing.Optional[float]:
         """Get or set the Cowper and Symonds strain rate parameter .
-        STRC.LT.0.0:	load curve id = -STRC
-        STRC.GT.0.0:	constant value
-        STRC.EQ.0.0:	strain rate NOT active
+        STRC.LT.0.0: load curve id = -STRC
+        STRC.GT.0.0: constant value
+        STRC.EQ.0.0: strain rate NOT active
         """ # nopep8
         return self._cards[6].get_value("strc")
 
@@ -863,9 +863,9 @@ class MatPhsBmw(KeywordBase):
     @property
     def strp(self) -> typing.Optional[float]:
         """Get or set the Cowper and Symonds strain rate parameter P.
-        STRP.LT.0.0:	load curve id = -STRP
-        STRP.GT.0.0:	constant value
-        STRP.EQ.0.0:	strain rate NOT active
+        STRP.LT.0.0: load curve id = -STRP
+        STRP.GT.0.0: constant value
+        STRP.EQ.0.0: strain rate NOT active
         """ # nopep8
         return self._cards[6].get_value("strp")
 
@@ -877,8 +877,8 @@ class MatPhsBmw(KeywordBase):
     @property
     def fs(self) -> typing.Optional[float]:
         """Get or set the Manual start temperature ferrite, .
-        GT.0.0:	Same temperature is used for heating and cooling.
-        LT.0.0:	Curve ID:	Different start temperatures for cooling and heating given by load curve ID= -FS. First ordinate value is used for cooling, last ordinate value for heating..
+        GT.0.0: Same temperature is used for heating and cooling.
+        LT.0.0: Curve ID: Different start temperatures for cooling and heating given by load curve ID= -FS. First ordinate value is used for cooling, last ordinate value for heating..
         """ # nopep8
         return self._cards[7].get_value("fs")
 
@@ -923,7 +923,7 @@ class MatPhsBmw(KeywordBase):
     @property
     def msig(self) -> typing.Optional[float]:
         """Get or set the Describes the increase of martensite start temperature for cooling due to applied stress.
-        LT.0:	Load Curve ID describes MSIG as a function of triaxiality (pressure / effective stress).
+        LT.0: Load Curve ID describes MSIG as a function of triaxiality (pressure / effective stress).
         """ # nopep8
         return self._cards[7].get_value("msig")
 
@@ -956,7 +956,7 @@ class MatPhsBmw(KeywordBase):
 
     @property
     def lceps5(self) -> typing.Optional[int]:
-        """Get or set the Load Curve ID which describe the increase of the martensite start temperature for cooling as a function of plastic strain.	MS*= MS+ MSIG+LCEPS5()
+        """Get or set the Load Curve ID which describe the increase of the martensite start temperature for cooling as a function of plastic strain. MS*= MS+ MSIG+LCEPS5()
         """ # nopep8
         return self._cards[7].get_value("lceps5")
 
@@ -1012,9 +1012,9 @@ class MatPhsBmw(KeywordBase):
     @property
     def islc(self) -> int:
         """Get or set the Flag for definition of evolution parameters on Cards 10 and 11.
-        EQ.0.0:	All 16 fields on Cards 10 and 11 are constant values.
-        EQ.1.0 : PHI_‌F, CR_‌F, PHI_‌P, CR_‌P, PHI_‌B,and CR_‌B are load curves defining values as functions of cooling rate.The remaining 10 fields on Cards 10 and 11 are constant values.
-        EQ.2.0 : QR2, QR3, QR4 from Card 6 and allAll 16 fields on Cards 10 and 11 are load curves defining values as functions of cooling rate.
+        EQ.0.0: All 16 fields on Cards 10 and 11 are constant values.
+        EQ.1.0: PHI_F, CR_F, PHI_P, CR_P, PHI_B,and CR_B are load curves defining values as functions of cooling rate.The remaining 10 fields on Cards 10 and 11 are constant values.
+        EQ.2.0: QR2, QR3, QR4 from Card 6 and allAll 16 fields on Cards 10 and 11 are load curves defining values as functions of cooling rate.
         """ # nopep8
         return self._cards[8].get_value("islc")
 
@@ -1267,7 +1267,7 @@ class MatPhsBmw(KeywordBase):
 
     @property
     def grk(self) -> typing.Optional[float]:
-        """Get or set the Growth parameter k (μm2/sec)
+        """Get or set the Growth parameter k (mum2/sec)
         """ # nopep8
         return self._cards[11].get_value("grk")
 
@@ -1289,7 +1289,7 @@ class MatPhsBmw(KeywordBase):
 
     @property
     def tau1(self) -> float:
-        """Get or set the Empirical grain growth parameter  describing the function τ(T)
+        """Get or set the Empirical grain growth parameter  describing the function tau(T)
         """ # nopep8
         return self._cards[11].get_value("tau1")
 
@@ -1377,7 +1377,7 @@ class MatPhsBmw(KeywordBase):
 
     @property
     def tau2(self) -> float:
-        """Get or set the Empirical grain growth parameter  describing the function τ(T)
+        """Get or set the Empirical grain growth parameter  describing the function tau(T)
         """ # nopep8
         return self._cards[12].get_value("tau2")
 
@@ -1500,81 +1500,6 @@ class MatPhsBmw(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcy1_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcy1."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcy1:
-                return kwd
-        return None
-
-    @lcy1_link.setter
-    def lcy1_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcy1."""
-        self.lcy1 = value.lcid
-
-    @property
-    def lcy2_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcy2."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcy2:
-                return kwd
-        return None
-
-    @lcy2_link.setter
-    def lcy2_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcy2."""
-        self.lcy2 = value.lcid
-
-    @property
-    def lcy3_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcy3."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcy3:
-                return kwd
-        return None
-
-    @lcy3_link.setter
-    def lcy3_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcy3."""
-        self.lcy3 = value.lcid
-
-    @property
-    def lcy4_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcy4."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcy4:
-                return kwd
-        return None
-
-    @lcy4_link.setter
-    def lcy4_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcy4."""
-        self.lcy4 = value.lcid
-
-    @property
-    def lcy5_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcy5."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcy5:
-                return kwd
-        return None
-
-    @lcy5_link.setter
-    def lcy5_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcy5."""
-        self.lcy5 = value.lcid
-
-    @property
     def lceps23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lceps23."""
         if self.deck is None:
@@ -1648,4 +1573,124 @@ class MatPhsBmw(KeywordBase):
     def lch5_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lch5."""
         self.lch5 = value.lcid
+
+    @property
+    def lcy1_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcy1."""
+        if self.deck is None:
+            return None
+        field_value = self.lcy1
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcy1_link.setter
+    def lcy1_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcy1."""
+        if hasattr(value, "lcid"):
+            self.lcy1 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcy1 = value.tbid
+
+    @property
+    def lcy2_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcy2."""
+        if self.deck is None:
+            return None
+        field_value = self.lcy2
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcy2_link.setter
+    def lcy2_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcy2."""
+        if hasattr(value, "lcid"):
+            self.lcy2 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcy2 = value.tbid
+
+    @property
+    def lcy3_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcy3."""
+        if self.deck is None:
+            return None
+        field_value = self.lcy3
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcy3_link.setter
+    def lcy3_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcy3."""
+        if hasattr(value, "lcid"):
+            self.lcy3 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcy3 = value.tbid
+
+    @property
+    def lcy4_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcy4."""
+        if self.deck is None:
+            return None
+        field_value = self.lcy4
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcy4_link.setter
+    def lcy4_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcy4."""
+        if hasattr(value, "lcid"):
+            self.lcy4 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcy4 = value.tbid
+
+    @property
+    def lcy5_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcy5."""
+        if self.deck is None:
+            return None
+        field_value = self.lcy5
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcy5_link.setter
+    def lcy5_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcy5."""
+        if hasattr(value, "lcid"):
+            self.lcy5 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcy5 = value.tbid
 

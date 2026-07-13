@@ -157,7 +157,7 @@ class SetPorousAle(KeywordBase):
     def veccid1(self) -> int:
         """Get or set the *DEFINE_VECTOR IDs to define a specific coordinate system. VECID1 and VECID2 give the x- and y-direction respectively.
         The z-vector is a cross product of VECID1 and VECID2. If this latter is not
-        orthogonal to VECID1, its direction will be corrected with a cross-	product of z- and x-vectors. The vectors are stored as isoparametric.
+        orthogonal to VECID1, its direction will be corrected with a cross- product of z- and x-vectors. The vectors are stored as isoparametric.
         """ # nopep8
         return self._cards[0].get_value("veccid1")
 
@@ -170,7 +170,7 @@ class SetPorousAle(KeywordBase):
     def veccid2(self) -> int:
         """Get or set the *DEFINE_VECTOR IDs to define a specific coordinate system. VECID1 and VECID2 give the x- and y-direction respectively.
         The z-vector is a cross product of VECID1 and VECID2. If this latter is not
-        orthogonal to VECID1, its direction will be corrected with a cross-	product of z- and x-vectors. The vectors are stored as isoparametric.
+        orthogonal to VECID1, its direction will be corrected with a cross- product of z- and x-vectors. The vectors are stored as isoparametric.
         """ # nopep8
         return self._cards[0].get_value("veccid2")
 

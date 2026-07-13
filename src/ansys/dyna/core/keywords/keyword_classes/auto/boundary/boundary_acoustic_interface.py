@@ -52,7 +52,7 @@ class BoundaryAcousticInterface(KeywordBase):
         ]
     @property
     def ssid(self) -> typing.Optional[int]:
-        """Get or set the Segment set ID, see *SET_SEGMENT.  This set defines the structural segments being coupled to the acoustic elements.
+        """Get or set the Segment set ID, see *SET_SEGMENT. This set defines the structural segments being coupled to the acoustic elements.
         """ # nopep8
         return self._cards[0].get_value("ssid")
 

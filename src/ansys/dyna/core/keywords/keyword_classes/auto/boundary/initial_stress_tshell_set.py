@@ -66,7 +66,7 @@ class InitialStressTshellSet(KeywordBase):
         ]
     @property
     def sid(self) -> typing.Optional[int]:
-        """Get or set the thick shell set ID, see *SET_T‌SHELL
+        """Get or set the thick shell set ID, see *SET_TSHELL
         """ # nopep8
         return self._cards[0].get_value("sid")
 

@@ -89,7 +89,7 @@ class AlePrescribedMotion(KeywordBase):
         ]
     @property
     def mmsid(self) -> typing.Optional[int]:
-        """Get or set the Multi-Material Set ID (see *SET_‌MULTI-MATERIAL_‌GROUP_‌LIST).
+        """Get or set the Multi-Material Set ID (see *SET_MULTI-MATERIAL_GROUP_LIST).
         """ # nopep8
         return self._cards[0].get_value("mmsid")
 
@@ -101,9 +101,9 @@ class AlePrescribedMotion(KeywordBase):
     @property
     def inside(self) -> int:
         """Get or set the Flag to define which nodes the motion is prescribed for (see Remark 2):
-        EQ.0:	Nodes connected to at least one ALE element that is at the minimum partially filled by a group of MMSID
-        EQ.1:	Nodes connected to at least one ALE element that is fully filled by a group of MMSID
-        EQ.2:	Nodes only connected to ALE elements that are fully filled by a group of MMSID.
+        EQ.0: Nodes connected to at least one ALE element that is at the minimum partially filled by a group of MMSID
+        EQ.1: Nodes connected to at least one ALE element that is fully filled by a group of MMSID
+        EQ.2: Nodes only connected to ALE elements that are fully filled by a group of MMSID.
         """ # nopep8
         return self._cards[0].get_value("inside")
 
@@ -117,9 +117,9 @@ class AlePrescribedMotion(KeywordBase):
     @property
     def sidr(self) -> int:
         """Get or set the Flag controlling the use of this keyword during dynamic relaxation.
-        EQ.0:	the keyword is applied in normal analysis phase only,
-        EQ.1:	the keyword is applied in dynamic relaxation phase but not the normal analysis phase,
-        EQ.2:	the keyword is applied in both dynamic relaxation phase and normal analysis phase.
+        EQ.0: the keyword is applied in normal analysis phase only,
+        EQ.1: the keyword is applied in dynamic relaxation phase but not the normal analysis phase,
+        EQ.2: the keyword is applied in both dynamic relaxation phase and normal analysis phase.
         """ # nopep8
         return self._cards[0].get_value("sidr")
 
@@ -132,7 +132,7 @@ class AlePrescribedMotion(KeywordBase):
 
     @property
     def lcvtx(self) -> typing.Optional[int]:
-        """Get or set the Curve IDs for the translation in each global direction; see *DEFINE_‌CURVE.  See Remark 3.
+        """Get or set the Curve IDs for the translation in each global direction; see *DEFINE_CURVE.  See Remark 3.
         """ # nopep8
         return self._cards[1].get_value("lcvtx")
 
@@ -143,7 +143,7 @@ class AlePrescribedMotion(KeywordBase):
 
     @property
     def lcvty(self) -> typing.Optional[int]:
-        """Get or set the Curve IDs for the translation in each global direction; see *DEFINE_‌CURVE.  See Remark 3..
+        """Get or set the Curve IDs for the translation in each global direction; see *DEFINE_CURVE.  See Remark 3..
         """ # nopep8
         return self._cards[1].get_value("lcvty")
 
@@ -154,7 +154,7 @@ class AlePrescribedMotion(KeywordBase):
 
     @property
     def lcvtz(self) -> typing.Optional[int]:
-        """Get or set the Curve IDs for the translation in each global direction; see *DEFINE_‌CURVE.  See Remark 3..
+        """Get or set the Curve IDs for the translation in each global direction; see *DEFINE_CURVE.  See Remark 3..
         """ # nopep8
         return self._cards[1].get_value("lcvtz")
 
@@ -165,7 +165,7 @@ class AlePrescribedMotion(KeywordBase):
 
     @property
     def lcvrx(self) -> typing.Optional[int]:
-        """Get or set the Curve IDs for the rotation around each global direction; see *DEFINE_‌CURVE.  See Remark 3.
+        """Get or set the Curve IDs for the rotation around each global direction; see *DEFINE_CURVE.  See Remark 3.
         """ # nopep8
         return self._cards[2].get_value("lcvrx")
 
@@ -176,7 +176,7 @@ class AlePrescribedMotion(KeywordBase):
 
     @property
     def lcvry(self) -> typing.Optional[int]:
-        """Get or set the Curve IDs for the rotation around each global direction; see *DEFINE_‌CURVE.  See Remark 3.
+        """Get or set the Curve IDs for the rotation around each global direction; see *DEFINE_CURVE.  See Remark 3.
         """ # nopep8
         return self._cards[2].get_value("lcvry")
 
@@ -187,7 +187,7 @@ class AlePrescribedMotion(KeywordBase):
 
     @property
     def lcvrz(self) -> typing.Optional[int]:
-        """Get or set the Curve IDs for the rotation around each global direction; see *DEFINE_‌CURVE.  See Remark 3.
+        """Get or set the Curve IDs for the rotation around each global direction; see *DEFINE_CURVE.  See Remark 3.
         """ # nopep8
         return self._cards[2].get_value("lcvrz")
 

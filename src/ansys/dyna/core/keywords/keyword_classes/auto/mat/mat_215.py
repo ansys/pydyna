@@ -130,8 +130,8 @@ class Mat215(KeywordBase):
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
-        "lcidt": LinkType.DEFINE_CURVE,
         "lcdi": LinkType.DEFINE_CURVE,
+        "lcidt": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -227,10 +227,10 @@ class Mat215(KeywordBase):
     def failm(self) -> typing.Optional[float]:
         """Get or set the Option for matrix failure using a ductile DIEM model. See sections Damage Initiation and Damage Evolution in the manual page for *MAT_ADD_DAMAGE_DIEM for a description of ductile damage initialization (DITYP = 0) based on stress triaxiality and a linear damage evolution (DETYP = 0) type. Also see fields LCDI and UPF on Card 9.
         LT.0.0: | FAILM | is effective plastic matrix strain at failure.When the matrix plastic strain reaches this value, the element is deleted from the calculation.
-        EQ.0.0 : Only visualization(triaxiality of matrix stresses)
-        EQ.1.0 : Active DIEM(triaxiality of matrix stresses)
-        EQ.10.0 : Only visualization(triaxiality of composite stresses)
-        EQ.11.0 : Active DIEM(triaxiality of composite stresses)
+        EQ.0.0: Only visualization(triaxiality of matrix stresses)
+        EQ.1.0: Active DIEM(triaxiality of matrix stresses)
+        EQ.10.0: Only visualization(triaxiality of composite stresses)
+        EQ.11.0: Active DIEM(triaxiality of composite stresses)
         """ # nopep8
         return self._cards[0].get_value("failm")
 
@@ -271,13 +271,13 @@ class Mat215(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC for a more complete description):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center.This option is for solid elements only.
-        EQ.2.0 : Globally orthotropic with material axes determined by vectors defined below
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
-        EQ.4.0 : Locally orthotropic in cylindrical coordinate system with the material axes determined by a vector, v,and an originating point, P, defining the centerline axis.This option is for solid elements only.
-        LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM or *DEFINE - _COORDINATE_VECTOR).
-        The fiber orientation information may be overwritten using* INITIAL_STRESS_(T)SHELL / SOLID
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
+        EQ.1.0: Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center.This option is for solid elements only.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
+        EQ.4.0: Locally orthotropic in cylindrical coordinate system with the material axes determined by a vector, v,and an originating point, P, defining the centerline axis.This option is for solid elements only.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number(CID on *DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM or *DEFINE - _COORDINATE_VECTOR).
+        The fiber orientation information may be overwritten using *INITIAL_STRESS_(T)SHELL / SOLID
         """ # nopep8
         return self._cards[1].get_value("aopt")
 
@@ -289,14 +289,14 @@ class Mat215(KeywordBase):
     @property
     def macf(self) -> int:
         """Get or set the Material axes change flag for solid elements:
-        EQ. - 4:	Switch material axes b and c before BETA rotation
-        EQ. - 3 : Switch material axes a and c before BETA rotation
-        EQ. - 2 : Switch material axes a and b before BETA rotation
-        EQ.1 : No change, default
-        EQ.2 : Switch material axes a and b after BETA rotation
-        EQ.3 : Switch material axes a and c after BETA rotation
-        EQ.4 : Switch material axes b and c after BETA rotation
-        Figure Error!Reference source not found.indicates when LS - DYNA applies MACF during the process to obtain the final material axes.If BETA on * ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT = 3, the BETA input on Card 3 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed
+        EQ. - 4: Switch material axes b and c before BETA rotation
+        EQ. - 3: Switch material axes a and c before BETA rotation
+        EQ. - 2: Switch material axes a and b before BETA rotation
+        EQ.1: No change, default
+        EQ.2: Switch material axes a and b after BETA rotation
+        EQ.3: Switch material axes a and c after BETA rotation
+        EQ.4: Switch material axes b and c after BETA rotation
+        If BETA on *ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT = 3, the BETA input on Card 3 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed
         """ # nopep8
         return self._cards[1].get_value("macf")
 
@@ -521,7 +521,7 @@ class Mat215(KeywordBase):
 
     @property
     def el(self) -> typing.Optional[float]:
-        """Get or set the EL, Young's modulus of fiber – longitudinal direction.
+        """Get or set the EL, Young's modulus of fiber in longitudinal direction.
         """ # nopep8
         return self._cards[4].get_value("el")
 
@@ -532,7 +532,7 @@ class Mat215(KeywordBase):
 
     @property
     def et(self) -> typing.Optional[float]:
-        """Get or set the ET, Young's modulus of fiber – transverse direction..
+        """Get or set the ET, Young's modulus of fiber in transverse direction..
         """ # nopep8
         return self._cards[4].get_value("et")
 
@@ -576,7 +576,7 @@ class Mat215(KeywordBase):
 
     @property
     def xt(self) -> typing.Optional[float]:
-        """Get or set the Fiber tensile strength – longitudinal direction.
+        """Get or set the Fiber tensile strength in longitudinal direction.
         """ # nopep8
         return self._cards[5].get_value("xt")
 
@@ -716,8 +716,8 @@ class Mat215(KeywordBase):
     @property
     def upf(self) -> typing.Optional[float]:
         """Get or set the Damage evolution parameter
-        GT.0.0: plastic displacement at failure, 𝑢𝑓	𝑝
-        LT.0.0: |UPF| is a table ID for 𝑢𝑓 𝑝 as a function of triaxiality and	damage.
+        GT.0.0: plastic displacement at failure, u**p_f
+        LT.0.0: |UPF| is a table ID for u**p_f as a function of triaxiality and damage.
         """ # nopep8
         return self._cards[8].get_value("upf")
 
@@ -753,21 +753,6 @@ class Mat215(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcidt_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcidt."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcidt:
-                return kwd
-        return None
-
-    @lcidt_link.setter
-    def lcidt_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcidt."""
-        self.lcidt = value.lcid
-
-    @property
     def lcdi_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcdi."""
         if self.deck is None:
@@ -781,4 +766,28 @@ class Mat215(KeywordBase):
     def lcdi_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcdi."""
         self.lcdi = value.lcid
+
+    @property
+    def lcidt_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcidt."""
+        if self.deck is None:
+            return None
+        field_value = self.lcidt
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcidt_link.setter
+    def lcidt_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcidt."""
+        if hasattr(value, "lcid"):
+            self.lcidt = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcidt = value.tbid
 

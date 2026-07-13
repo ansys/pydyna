@@ -73,17 +73,6 @@ _MAT082_CARD3 = (
     FieldSchema("es8", float, 70, 10, None),
 )
 
-_MAT082_CARD4 = (
-    FieldSchema("alpha", float, 0, 10, None),
-    FieldSchema("beta", float, 10, 10, None),
-    FieldSchema("gamma", float, 20, 10, None),
-    FieldSchema("d0", float, 30, 10, None),
-    FieldSchema("b", float, 40, 10, None),
-    FieldSchema("lambda_", float, 50, 10, None, "lambda"),
-    FieldSchema("ds", float, 60, 10, None),
-    FieldSchema("l", float, 70, 10, None),
-)
-
 _MAT082_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
@@ -121,10 +110,6 @@ class Mat082(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _MAT082_CARD3,
-                **kwargs,
-            ),
-            Card.from_field_schemas_with_defaults(
-                _MAT082_CARD4,
                 **kwargs,
             ),
             OptionCardSet(
@@ -494,103 +479,15 @@ class Mat082(KeywordBase):
         self._cards[3].set_value("es8", value)
 
     @property
-    def alpha(self) -> typing.Optional[float]:
-        """Get or set the Parameter  for the Rc-Dc
-        """ # nopep8
-        return self._cards[4].get_value("alpha")
-
-    @alpha.setter
-    def alpha(self, value: float) -> None:
-        """Set the alpha property."""
-        self._cards[4].set_value("alpha", value)
-
-    @property
-    def beta(self) -> typing.Optional[float]:
-        """Get or set the Parameter for the Rc-Dc Model
-        """ # nopep8
-        return self._cards[4].get_value("beta")
-
-    @beta.setter
-    def beta(self, value: float) -> None:
-        """Set the beta property."""
-        self._cards[4].set_value("beta", value)
-
-    @property
-    def gamma(self) -> typing.Optional[float]:
-        """Get or set the Parameter for the Rc-Dc Model
-        """ # nopep8
-        return self._cards[4].get_value("gamma")
-
-    @gamma.setter
-    def gamma(self, value: float) -> None:
-        """Set the gamma property."""
-        self._cards[4].set_value("gamma", value)
-
-    @property
-    def d0(self) -> typing.Optional[float]:
-        """Get or set the Parameter for the Rc-Dc Model
-        """ # nopep8
-        return self._cards[4].get_value("d0")
-
-    @d0.setter
-    def d0(self, value: float) -> None:
-        """Set the d0 property."""
-        self._cards[4].set_value("d0", value)
-
-    @property
-    def b(self) -> typing.Optional[float]:
-        """Get or set the Parameter for the Rc-Dc Model
-        """ # nopep8
-        return self._cards[4].get_value("b")
-
-    @b.setter
-    def b(self, value: float) -> None:
-        """Set the b property."""
-        self._cards[4].set_value("b", value)
-
-    @property
-    def lambda_(self) -> typing.Optional[float]:
-        """Get or set the Parameter for the Rc-Dc Model
-        """ # nopep8
-        return self._cards[4].get_value("lambda_")
-
-    @lambda_.setter
-    def lambda_(self, value: float) -> None:
-        """Set the lambda_ property."""
-        self._cards[4].set_value("lambda_", value)
-
-    @property
-    def ds(self) -> typing.Optional[float]:
-        """Get or set the Parameter for the Rc-Dc Model
-        """ # nopep8
-        return self._cards[4].get_value("ds")
-
-    @ds.setter
-    def ds(self, value: float) -> None:
-        """Set the ds property."""
-        self._cards[4].set_value("ds", value)
-
-    @property
-    def l(self) -> typing.Optional[float]:
-        """Get or set the Parameter for the Rc-Dc Model
-        """ # nopep8
-        return self._cards[4].get_value("l")
-
-    @l.setter
-    def l(self, value: float) -> None:
-        """Set the l property."""
-        self._cards[4].set_value("l", value)
-
-    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[5].cards[0].get_value("title")
+        return self._cards[4].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[5].cards[0].set_value("title", value)
+        self._cards[4].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

@@ -111,10 +111,10 @@ class DefineSpotweldFailure(KeywordBase):
     @property
     def tflag(self) -> int:
         """Get or set the Thickness flag for nominal stress calculation
-        EQ.0:	Use minimum sheet thickness
-        EQ.1:	Use average sheet thickness
-        EQ.2	Use maximum sheet thickness
-        EQ.3:	Use sum of sheet thicknesses.
+        EQ.0: Use minimum sheet thickness
+        EQ.1: Use average sheet thickness
+        EQ.2 Use maximum sheet thickness
+        EQ.3: Use sum of sheet thicknesses.
         """ # nopep8
         return self._cards[0].get_value("tflag")
 

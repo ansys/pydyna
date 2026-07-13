@@ -99,7 +99,7 @@ class IcfdBoundaryPrescribedVel(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID to describe motion value versus time, see *DEFINE_ CURVE, *DEFINE_CURVE_FUNCTION, or *DEFINE_FUNCTION.  See BIRTH below.
+        """Get or set the Load curve ID used to describe motion value versus time, see *DEFINE_CURVE, *DEFINE_CURVE_FUNCTION, or *DEFINE_FUNCTION.  If a DEFINE_FUNCTION is used, the following parameters are allowed: f(x, y, z, vx, vy, vz, temp, pres, time). For steady state the motion value is a function of the number of iterations instead of time.
         """ # nopep8
         return self._cards[0].get_value("lcid")
 

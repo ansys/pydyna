@@ -37,6 +37,7 @@ _ELEMENTSEATBELTRETRACTOR_CARD0 = (
     FieldSchema("sid2", int, 40, 10, 0),
     FieldSchema("sid3", int, 50, 10, 0),
     FieldSchema("sid4", int, 60, 10, 0),
+    FieldSchema("dsid", int, 70, 10, 0),
 )
 
 _ELEMENTSEATBELTRETRACTOR_CARD1 = (
@@ -45,6 +46,8 @@ _ELEMENTSEATBELTRETRACTOR_CARD1 = (
     FieldSchema("llcid", int, 20, 10, 0),
     FieldSchema("ulcid", int, 30, 10, 0),
     FieldSchema("lfed", float, 40, 10, 0.0),
+    FieldSchema("lcfl", int, 50, 10, 0),
+    FieldSchema("flopt", int, 60, 10, 0),
 )
 
 class ElementSeatbeltRetractor(KeywordBase):
@@ -106,7 +109,7 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @property
     def sid1(self) -> int:
-        """Get or set the Sensor ID 1
+        """Get or set the Sensor ID 1. This ID refers to a *ELEMENT_SEATBELT_SENSOR, not a *SENSOR.
         """ # nopep8
         return self._cards[0].get_value("sid1")
 
@@ -117,7 +120,7 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @property
     def sid2(self) -> int:
-        """Get or set the Sensor ID 2
+        """Get or set the Sensor ID 2. This ID refers to a *ELEMENT_SEATBELT_SENSOR, not a *SENSOR
         """ # nopep8
         return self._cards[0].get_value("sid2")
 
@@ -128,7 +131,7 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @property
     def sid3(self) -> int:
-        """Get or set the Sensor ID 3
+        """Get or set the Sensor ID 3. This ID refers to a *ELEMENT_SEATBELT_SENSOR, not a *SENSOR
         """ # nopep8
         return self._cards[0].get_value("sid3")
 
@@ -139,7 +142,7 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @property
     def sid4(self) -> int:
-        """Get or set the Sensor ID 4
+        """Get or set the Sensor ID 4. This ID refers to a *ELEMENT_SEATBELT_SENSOR, not a *SENSOR
         """ # nopep8
         return self._cards[0].get_value("sid4")
 
@@ -149,8 +152,19 @@ class ElementSeatbeltRetractor(KeywordBase):
         self._cards[0].set_value("sid4", value)
 
     @property
+    def dsid(self) -> int:
+        """Get or set the Retractor deactivation sensor. This ID refers to a *ELEMENT_SEATBELT_SENSOR, not a *SENSOR
+        """ # nopep8
+        return self._cards[0].get_value("dsid")
+
+    @dsid.setter
+    def dsid(self, value: int) -> None:
+        """Set the dsid property."""
+        self._cards[0].set_value("dsid", value)
+
+    @property
     def tdel(self) -> float:
-        """Get or set the Time delay after sensor triggers.
+        """Get or set the Time delay after the sensor triggers.
         """ # nopep8
         return self._cards[1].get_value("tdel")
 
@@ -161,7 +175,7 @@ class ElementSeatbeltRetractor(KeywordBase):
 
     @property
     def pull(self) -> float:
-        """Get or set the Amount of pull-out between time delay ending and retractor locking, a length value.
+        """Get or set the Amount of pull-out between the time delay ending and the retractor locking, a length value.
         """ # nopep8
         return self._cards[1].get_value("pull")
 
@@ -202,6 +216,34 @@ class ElementSeatbeltRetractor(KeywordBase):
     def lfed(self, value: float) -> None:
         """Set the lfed property."""
         self._cards[1].set_value("lfed", value)
+
+    @property
+    def lcfl(self) -> int:
+        """Get or set the Curve representing an adaptive multi-level load limiter (see Remark 10).  The abscissa is the ID of a *SENSOR_SWITCH, and the ordinate is the corresponding force limit when the sensor switch meets the switch condition.  For example, a curve of two data points (100, 4000.) and (200, 3000.) has a load limit of 4000 from switch 100 and a load limit of 3000 from switch 200.  The setting of FLOPT determines how LS-DYNA uses these pairs to determine the load limit.
+        Alternatively, a more general adaptive load limiter can be created using* DEFINE_CURVE_FUNCTION.With this method, LCFL refers to a* DEFINE_CURVE_FUNCTION with the SENSORD option used in the function.The SENSORD function must have the value of n set such that it refers to a* SENSOR_DEFINE_FUNCTION.Then, through the* SENSOR_DEFINE_FUNCTION, the flexible* DEFINE_FUNCTION determines the adaptive load limiter.See Remark 11 for an example.FLOPT is not used in this case and should be left as zero.
+        """ # nopep8
+        return self._cards[1].get_value("lcfl")
+
+    @lcfl.setter
+    def lcfl(self, value: int) -> None:
+        """Set the lcfl property."""
+        self._cards[1].set_value("lcfl", value)
+
+    @property
+    def flopt(self) -> int:
+        """Get or set the Flag giving the algorithm for determining the limiting force from the data points of curve LCFL.
+        EQ.0: Check the status of the sensor switches based on the sequence of data points.For example, this algorithm checks the switch of the 1st data point first.If its switch condition is met, the active force limit is the force of the 1st data point.That force level stays active until the 2nd switch meets the switch condition.
+        EQ.1: Check the status of all unfired switches in curve LCFL.The force of the most recently fired switch gives the active force limit.The algorithm does not check that switch again in the future.That force level remains active until any other switch fires.The input order of the data points is irrelevant.
+        EQ.2: Check the status of all switches of all data points in curve LCFL.The input order of the data points is irrelevant.The active force limit is the minimum of the forces of all fired switches.
+        """ # nopep8
+        return self._cards[1].get_value("flopt")
+
+    @flopt.setter
+    def flopt(self, value: int) -> None:
+        """Set the flopt property."""
+        if value not in [0, 1, 2, None]:
+            raise Exception("""flopt must be `None` or one of {0,1,2}.""")
+        self._cards[1].set_value("flopt", value)
 
     @property
     def sbrnid_link(self) -> typing.Optional[KeywordBase]:

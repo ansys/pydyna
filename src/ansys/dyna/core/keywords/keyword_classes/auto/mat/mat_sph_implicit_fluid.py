@@ -94,6 +94,8 @@ class MatSphImplicitFluid(KeywordBase):
     @property
     def mu(self) -> typing.Optional[float]:
         """Get or set the Dynamic viscosity.
+        LT.0.0: |MU | is a load curve of dynamic viscosity as a function of temperature. See *DEFINE_CURVE.
+        Note that MU must be set to a nonzero value because inviscid flow is not permitted for the incompressible SPH formulation
         """ # nopep8
         return self._cards[0].get_value("mu")
 
@@ -104,7 +106,7 @@ class MatSphImplicitFluid(KeywordBase):
 
     @property
     def gamma1(self) -> typing.Optional[float]:
-        """Get or set the Numerical surface tension coefficient. For water,we recommend a coefficient of γ_1=1000 m/s^2. GAMMA1 is only used if IMAT = 0 in *CONTROL_SPH_INCOMPRESSIBLE.
+        """Get or set the Numerical surface tension coefficient. For water,we recommend a coefficient of gamma_1=1000 m/s**2. GAMMA1 is only used if IMAT = 0 in *CONTROL_SPH_INCOMPRESSIBLE.
         """ # nopep8
         return self._cards[0].get_value("gamma1")
 
@@ -115,7 +117,7 @@ class MatSphImplicitFluid(KeywordBase):
 
     @property
     def gamma2(self) -> typing.Optional[float]:
-        """Get or set the Numerical surface tension coefficient. For water, we recommend a coefficient of γ_2=1 m/s^2. GAMMA2 is only used if IMAT = 0 in *CONTROL_SPH_INCOMPRESSIBLE
+        """Get or set the Numerical surface tension coefficient. For water, we recommend a coefficient of gamma_2=1 m/s**2. GAMMA2 is only used if IMAT = 0 in *CONTROL_SPH_INCOMPRESSIBLE
         """ # nopep8
         return self._cards[0].get_value("gamma2")
 

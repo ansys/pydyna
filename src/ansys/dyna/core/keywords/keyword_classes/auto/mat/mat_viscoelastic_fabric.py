@@ -154,8 +154,8 @@ class MatViscoelasticFabric(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID if constants, Gi, and βi are determined via a least
-        squares fit. This relaxation curve is shown below.
+        """Get or set the Load curve ID if constants, Gi, and beta_i are determined via a least squares fit.
+        This relaxation curve is shown below.
         """ # nopep8
         return self._cards[1].get_value("lcid")
 
@@ -178,8 +178,8 @@ class MatViscoelasticFabric(KeywordBase):
 
     @property
     def bstart(self) -> typing.Optional[float]:
-        """Get or set the In the fit, β1 is set to zero, β2 is set to BSTART, β3 is 10 times β2,
-        β4 is 10 times β3 , and so on. If zero, BSTART = 0.01..
+        """Get or set the In the fit, beta_1 is set to zero, beta_2 is set to BSTART, beta_3 is 10 times beta_2,
+        beta_4 is 10 times beta_3 , and so on. If zero, BSTART = 0.01..
         """ # nopep8
         return self._cards[1].get_value("bstart")
 
@@ -201,7 +201,7 @@ class MatViscoelasticFabric(KeywordBase):
 
     @property
     def lcidk(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID for bulk behavior if constants, Ki, and βki are
+        """Get or set the Load curve ID for bulk behavior if constants, Ki, and beta_ki are
         determined via a least squares fit. This relaxation curve is shown below..
         """ # nopep8
         return self._cards[1].get_value("lcidk")
@@ -225,8 +225,8 @@ class MatViscoelasticFabric(KeywordBase):
 
     @property
     def bstartk(self) -> typing.Optional[float]:
-        """Get or set the In the fit, βk1 is set to zero, βk2 is set to BSTARTK, βk3 is 10
-        times βk2, βk4 is 10 times βk3 , and so on. If zero,
+        """Get or set the In the fit, beta_k1 is set to zero, beta_k2 is set to BSTARTK, beta_k3 is 10
+        times beta_k2, beta_k4 is 10 times beta_k3 , and so on. If zero,
         BSTARTK = 0.01.
         """ # nopep8
         return self._cards[1].get_value("bstartk")

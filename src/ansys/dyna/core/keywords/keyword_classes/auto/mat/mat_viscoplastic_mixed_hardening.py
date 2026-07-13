@@ -27,7 +27,6 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
-from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATVISCOPLASTICMIXEDHARDENING_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -55,7 +54,7 @@ class MatViscoplasticMixedHardening(KeywordBase):
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
-        "lcss": LinkType.DEFINE_CURVE,
+        "lcss": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -154,8 +153,8 @@ class MatViscoplasticMixedHardening(KeywordBase):
     @property
     def beta(self) -> typing.Optional[float]:
         """Get or set the Hardening parameter, 0 < BETA < 1.
-        EQ.0.0:  Pure kinematic hardening
-        EQ.1.0:  Pure isotropic hardening
+        EQ.0.0: Pure kinematic hardening
+        EQ.1.0: Pure isotropic hardening
         0.0 < BETA < 1.0: Mixed hardening.
         """ # nopep8
         return self._cards[0].get_value("beta")
@@ -194,17 +193,26 @@ class MatViscoplasticMixedHardening(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcss_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcss."""
+    def lcss_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcss."""
         if self.deck is None:
             return None
+        field_value = self.lcss
+        if field_value is None or field_value == 0:
+            return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcss:
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
                 return kwd
         return None
 
     @lcss_link.setter
-    def lcss_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcss."""
-        self.lcss = value.lcid
+    def lcss_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcss."""
+        if hasattr(value, "lcid"):
+            self.lcss = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcss = value.tbid
 

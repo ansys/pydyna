@@ -28,13 +28,17 @@ from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _DEFINESPHAMBIENTDRAG_CARD0 = (
-    FieldSchema("icid", int, 0, 10, 0),
+    FieldSchema("icpl", int, 0, 10, 0),
     FieldSchema("vx", float, 10, 10, 0.0),
     FieldSchema("vy", float, 20, 10, 0.0),
     FieldSchema("vz", float, 30, 10, 0.0),
     FieldSchema("rhoa", float, 40, 10, None),
     FieldSchema("mua", float, 50, 10, None),
     FieldSchema("sftens", float, 60, 10, None),
+)
+
+_DEFINESPHAMBIENTDRAG_CARD1 = (
+    FieldSchema("filename", str, 0, 60, None),
 )
 
 _DEFINESPHAMBIENTDRAG_OPTION0_CARD0 = (
@@ -59,6 +63,10 @@ class DefineSphAmbientDrag(KeywordBase):
                 _DEFINESPHAMBIENTDRAG_CARD0,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _DEFINESPHAMBIENTDRAG_CARD1,
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = DefineSphAmbientDrag._option_spec_list[0],
                 cards = [
@@ -71,20 +79,23 @@ class DefineSphAmbientDrag(KeywordBase):
             ),
         ]
     @property
-    def icid(self) -> int:
+    def icpl(self) -> int:
         """Get or set the Coupling with ICFD:
-        EQ.0: No coupling
+        EQ.0: No coupling.
+        EQ.1: Import ambient velocity field from a steady-state CFD analysis in a profile file format. Provide the file name in Card 2. See Example 1 below for a sample profile file.
         """ # nopep8
-        return self._cards[0].get_value("icid")
+        return self._cards[0].get_value("icpl")
 
-    @icid.setter
-    def icid(self, value: int) -> None:
-        """Set the icid property."""
-        self._cards[0].set_value("icid", value)
+    @icpl.setter
+    def icpl(self, value: int) -> None:
+        """Set the icpl property."""
+        if value not in [0, 1, None]:
+            raise Exception("""icpl must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("icpl", value)
 
     @property
     def vx(self) -> float:
-        """Get or set the X-velocity of the inject elements
+        """Get or set the X-velocity of the ambient material
         """ # nopep8
         return self._cards[0].get_value("vx")
 
@@ -95,7 +106,7 @@ class DefineSphAmbientDrag(KeywordBase):
 
     @property
     def vy(self) -> float:
-        """Get or set the Y-velocity of the inject elements
+        """Get or set the Y-velocity of the ambient material
         """ # nopep8
         return self._cards[0].get_value("vy")
 
@@ -106,7 +117,7 @@ class DefineSphAmbientDrag(KeywordBase):
 
     @property
     def vz(self) -> float:
-        """Get or set the Z-velocity of the inject elements
+        """Get or set the Z-velocity of the ambient material
         """ # nopep8
         return self._cards[0].get_value("vz")
 
@@ -149,15 +160,26 @@ class DefineSphAmbientDrag(KeywordBase):
         self._cards[0].set_value("sftens", value)
 
     @property
+    def filename(self) -> typing.Optional[str]:
+        """Get or set the Name of the file containing steady-state CFD data for the ambient air velocity field.
+        """ # nopep8
+        return self._cards[1].get_value("filename")
+
+    @filename.setter
+    def filename(self, value: str) -> None:
+        """Set the filename property."""
+        self._cards[1].set_value("filename", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[1].cards[0].get_value("title")
+        return self._cards[2].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[1].cards[0].set_value("title", value)
+        self._cards[2].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

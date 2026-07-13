@@ -134,9 +134,9 @@ class DatabaseExtentBinary(KeywordBase):
     @property
     def strflg(self) -> int:
         """Get or set the Flag for output of strain tensors.  STRFLG is interpreted digit-wise STRFLG = [NML], STRFLG = 100*N + 10*M + L
-        L.EQ.1: Write strain tensor data to d3plot, elout, and dynain.  For shell and thick shell elements two tensors are written, one at the innermost and one at the outermost integration point.  For solid elements a single strain tensor is written
-        M.EQ.1:	Write plastic strain data to d3plot.
-        N.EQ.1:	Write thermal strain data to d3plot.
+        L.EQ.1: Write strain tensor data to d3plot, elout, dynain, d3rms, and d3psd.  For shell and thick shell elements two tensors are written, one at the innermost and one at the outermost integration point.  For solid elements a single strain tensor is written. . For cohesive elements, the cohesive separations are output in the location of the strain tensor data.
+        M.EQ.1: Write plastic strain data to d3plot.
+        N.EQ.1: Write thermal strain data to d3plot.
         """ # nopep8
         return self._cards[0].get_value("strflg")
 
@@ -149,30 +149,32 @@ class DatabaseExtentBinary(KeywordBase):
     def sigflg(self) -> int:
         """Get or set the Flag for including stress tensor in the shell LS-DYNA database:
         EQ.1: include (default),
-        EQ.2: exclude.
+        EQ.2: exclude for shells, include for solids.
+        EQ.3: exclude for shells and solids.
         """ # nopep8
         return self._cards[0].get_value("sigflg")
 
     @sigflg.setter
     def sigflg(self, value: int) -> None:
         """Set the sigflg property."""
-        if value not in [1, 2, None]:
-            raise Exception("""sigflg must be `None` or one of {1,2}.""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""sigflg must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("sigflg", value)
 
     @property
     def epsflg(self) -> int:
         """Get or set the Flag for including the effective plastic strains in the shell LS-DYNA database:
         EQ.1: include (default),
-        EQ.2: exclude.
+        EQ.2: exclude for shells, include for solids.
+        EQ.3: exclude for shells and solids.
         """ # nopep8
         return self._cards[0].get_value("epsflg")
 
     @epsflg.setter
     def epsflg(self, value: int) -> None:
         """Set the epsflg property."""
-        if value not in [1, 2, None]:
-            raise Exception("""epsflg must be `None` or one of {1,2}.""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""epsflg must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("epsflg", value)
 
     @property
@@ -192,7 +194,7 @@ class DatabaseExtentBinary(KeywordBase):
 
     @property
     def engflg(self) -> int:
-        """Get or set the Flag for including internal energy and thickness in the LS-DYNA database:
+        """Get or set the Flag for including shell, and beam internal energy density and shell thickness:
         EQ.1: include (default),
         EQ.2: exclude.
         """ # nopep8
@@ -207,17 +209,18 @@ class DatabaseExtentBinary(KeywordBase):
 
     @property
     def cmpflg(self) -> int:
-        """Get or set the Orthotropic and anisotropic material stress output in local coordinate system for shells and thick shells.
-        EQ.0: global,
-        EQ.1: local.
+        """Get or set the Flag to indicate the coordinate system for output of stress and strain of solids, shells and thick shells comprised of orthotropic or anisotropic materials. CMPFLG affects d3plot, d3part, eloutdet, and elout, with exceptions as noted below.
+        EQ.-1: Same as 1, but for *MAT_FABRIC(FORM = 14 or -14) and *MAT_FABRIC_MAP the stress and strain are in engineering quantities instead of Green - Lagrange strain and 2nd Piola - Kirchhoff stress.
+        EQ.0: Global coordinate system with exception of elout for shells(see EOCS in *CONTROL_OUTPUT).
+        Q.1: Local material coordinate system(as defined by AOPT and associated parameters in the *MAT input,and if applicable, by angles B1, B2, etc.in *SECTION_SHELL, *SECTION_ - TSHELL, or *PART_COMPOSITE,and by optional input in the *ELEMENT data).The effect of CMPFLG = 1 on shell output in elout is overridden by EOCS = 1 or 2 in *CONTROL_OUTPUT or by OPTION2 > 0 in *DATABASE_ELOUT.These overriding conditions do not apply to eloutdet
         """ # nopep8
         return self._cards[1].get_value("cmpflg")
 
     @cmpflg.setter
     def cmpflg(self, value: int) -> None:
         """Set the cmpflg property."""
-        if value not in [0, 1, None]:
-            raise Exception("""cmpflg must be `None` or one of {0,1}.""")
+        if value not in [0, 1, -1, None]:
+            raise Exception("""cmpflg must be `None` or one of {0,1,-1}.""")
         self._cards[1].set_value("cmpflg", value)
 
     @property
@@ -237,7 +240,7 @@ class DatabaseExtentBinary(KeywordBase):
 
     @property
     def beamip(self) -> int:
-        """Get or set the Number of beam integration points for output. This option does not apply to beams that use a resultant formulation.
+        """Get or set the Number of beam integration points for output. This option applies to integrated beams but also generates certain limited output for resultant beams. See Remark 2.
         """ # nopep8
         return self._cards[1].get_value("beamip")
 
@@ -369,8 +372,7 @@ class DatabaseExtentBinary(KeywordBase):
     @property
     def hydro(self) -> int:
         """Get or set the Either 3 or 5 additional history variables useful to shock physics are
-        output as the last history variables. For HYDRO = 1, the internal energy
-        per reference volume, the reference volume, and the value of the bulk
+        output as the last history variables. For HYDRO = 1, the internal energy nper reference volume, the reference volume, and the value of the bulk
         viscosity are added to the database, and for HYDRO = 2, the relative
         volume and current density are also added
         """ # nopep8
@@ -383,10 +385,19 @@ class DatabaseExtentBinary(KeywordBase):
 
     @property
     def msscl(self) -> int:
-        """Get or set the Output nodal information related to mass scaling into the D3PLOT database.  This option can be activated if and only if DT2MS < 0.0, see control card *CONTROL_TIMESTEP.  This option is available starting with the second release of Version 971.
-        EQ.0: No data is written
-        EQ.1: Output incremental nodal mass
-        EQ.2: Output percentage increase in nodal mass.
+        """Get or set the Output nodal and part information related to mass scaling into the d3plot database. This option can be activated only if DT2MS < 0.0.
+        See Remark 3. Also, see *CONTROL_TIMESTEP.
+        MSSCL is interpreted digit - wise, "MSSCL" = [ML],
+
+        MSSCL = L + M�10
+
+        L sets the nodal mass output:
+        L.EQ.0: No incremental nodal mass data is written.
+        L.EQ.1: Output incremental nodal mass.
+        L.EQ.2: Output percentage increase in nodal mass.
+        M determines what mass is output for each part into d3plot:
+        M.EQ.0: Output original mass for each part.
+        M.EQ.1: Output effective mass for each part.Effective mass is the original mass plus the incremental mass.
         """ # nopep8
         return self._cards[2].get_value("msscl")
 
@@ -399,11 +410,16 @@ class DatabaseExtentBinary(KeywordBase):
 
     @property
     def therm(self) -> int:
-        """Get or set the Output of thermal data to d3plot. The use of this option (THERM>0) may make the database incompatible with other 3rd party software.
-        EQ.0: (default) output temperature
-        EQ.1: output temperature
-        EQ.2: output temperature and flux
-        EQ.3: output temperature, flux, and shell bottom and top surface temperature
+        """Get or set the Output of thermal data (if applicable) to d3plot. The effect of the parameter is different in thermal-only analyses compared to coupled simulations.
+        EQ.0: Default.
+        For coupled simulations:
+        EQ.1: Output temperature(default).
+        EQ.2: Output temperature and flux.
+        EQ.3: Output temperature, flux,and the temperatures at the shell's bottomand top surfaces.
+        For thermal - only simulations:
+        EQ.1: Output temperature and flux.
+        EQ.2: Output temperature and flux(default).
+        EQ.3: Output temperature, flux,and the temperatures at the shell's bottomand top surfaces.
         """ # nopep8
         return self._cards[2].get_value("therm")
 
@@ -426,8 +442,8 @@ class DatabaseExtentBinary(KeywordBase):
     @intout.setter
     def intout(self, value: str) -> None:
         """Set the intout property."""
-        if value not in [" ", "STRESS", "STRAIN", "ALL", None]:
-            raise Exception("""intout must be `None` or one of {" ","STRESS","STRAIN","ALL"}.""")
+        if value not in ["STRESS", "STRAIN", "ALL", None]:
+            raise Exception("""intout must be `None` or one of {"STRESS","STRAIN","ALL"}.""")
         self._cards[2].set_value("intout", value)
 
     @property
@@ -445,8 +461,8 @@ class DatabaseExtentBinary(KeywordBase):
     @nodout.setter
     def nodout(self, value: str) -> None:
         """Set the nodout property."""
-        if value not in [" ", "STRESS", "STRAIN", "ALL", "STRESS_GL", "STRAIN_GL", "ALL_GL", None]:
-            raise Exception("""nodout must be `None` or one of {" ","STRESS","STRAIN","ALL","STRESS_GL","STRAIN_GL","ALL_GL"}.""")
+        if value not in ["STRESS", "STRAIN", "ALL", "STRESS_GL", "STRAIN_GL", "ALL_GL", None]:
+            raise Exception("""nodout must be `None` or one of {"STRESS","STRAIN","ALL","STRESS_GL","STRAIN_GL","ALL_GL"}.""")
         self._cards[2].set_value("nodout", value)
 
     @property
@@ -521,8 +537,8 @@ class DatabaseExtentBinary(KeywordBase):
     @property
     def deleres(self) -> int:
         """Get or set the Output flag for results of deleted elements:
-        EQ.0:	no results output(all zero)
-        EQ.1 : last available results, e.g., stressesand history variables, are written to d3plotand d3part.
+        EQ.0: no results output(all zero)
+        EQ.1: last available results, e.g., stressesand history variables, are written to d3plotand d3part.
         """ # nopep8
         return self._cards[3].get_value("deleres")
 

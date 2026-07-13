@@ -65,7 +65,7 @@ class IcfdControlSteady(KeywordBase):
 
     @property
     def tol1(self) -> float:
-        """Get or set the Tolerance limits for the momentum pressure and temperature equations respectfully.
+        """Get or set the Tolerance limits for the momentum pressure and temperature equations respectively.
         """ # nopep8
         return self._cards[0].get_value("tol1")
 
@@ -76,7 +76,7 @@ class IcfdControlSteady(KeywordBase):
 
     @property
     def tol2(self) -> float:
-        """Get or set the Tolerance limits for the momentum pressure and temperature equations respectfully.
+        """Get or set the Tolerance limits for the momentum pressure and temperature equations respectively.
         """ # nopep8
         return self._cards[0].get_value("tol2")
 
@@ -87,7 +87,7 @@ class IcfdControlSteady(KeywordBase):
 
     @property
     def tol3(self) -> float:
-        """Get or set the Tolerance limits for the momentum pressure and temperature equations respectfully.
+        """Get or set the Tolerance limits for the momentum pressure and temperature equations respectively.
         """ # nopep8
         return self._cards[0].get_value("tol3")
 
@@ -98,7 +98,7 @@ class IcfdControlSteady(KeywordBase):
 
     @property
     def rel1(self) -> float:
-        """Get or set the Relaxation parameters for the velocity and pressure respectfully. Decreasing those values may add stability but more iterations may be needed to reach convergence.
+        """Get or set the Relaxation parameters for the pressure and velocity respectfully. Decreasing these values may add stability but more iterations may be needed to reach convergence.
         """ # nopep8
         return self._cards[0].get_value("rel1")
 
@@ -109,7 +109,7 @@ class IcfdControlSteady(KeywordBase):
 
     @property
     def rel2(self) -> float:
-        """Get or set the Relaxation parameters for the velocity and pressure respectfully. Decreasing those values may add stability but more iterations may be needed to reach convergence.
+        """Get or set the Relaxation parameters for the velocity and pressure respectfully. Decreasing these values may add stability but more iterations may be needed to reach convergence.
         """ # nopep8
         return self._cards[0].get_value("rel2")
 
@@ -131,9 +131,9 @@ class IcfdControlSteady(KeywordBase):
 
     @property
     def order(self) -> int:
-        """Get or set the Analysis order :
-        EQ.0:	Second order. More accurate but more time consuming.
-        EQ.1:	First order: More stable and faster but may be less accurate.
+        """Get or set the Analysis order:
+        EQ.0: Second order. More accurate but more time consuming.
+        EQ.1: First order: More stable and faster but may be less accurate.
         """ # nopep8
         return self._cards[0].get_value("order")
 

@@ -22,6 +22,7 @@
 
 # Auto-generated imports for fatigue domain
 
+from .fatigue_d3part import FatigueD3Part
 from .fatigue_d3plot import FatigueD3Plot
 from .fatigue_elout import FatigueElout
 from .fatigue_failure import FatigueFailure
@@ -29,3 +30,4 @@ from .fatigue import Fatigue
 from .fatigue_loadstep import FatigueLoadstep
 from .fatigue_mean_stress_correction import FatigueMeanStressCorrection
 from .fatigue_multiaxial import FatigueMultiaxial
+from .fatigue_static import FatigueStatic

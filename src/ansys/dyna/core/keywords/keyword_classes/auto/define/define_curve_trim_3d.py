@@ -33,7 +33,7 @@ _DEFINECURVETRIM3D_CARD0 = (
     FieldSchema("tcid", int, 0, 10, None),
     FieldSchema("tctype", int, 10, 10, 1),
     FieldSchema("unused", int, 20, 10, None),
-    FieldSchema("tdir", int, 30, 10, None),
+    FieldSchema("tdir", int, 30, 10, 0),
     FieldSchema("tctol", float, 40, 10, 0.25),
     FieldSchema("toln", float, 50, 10, None),
     FieldSchema("nseed1", int, 60, 10, None),
@@ -121,15 +121,18 @@ class DefineCurveTrim3D(KeywordBase):
         self._cards[0].set_value("tctype", value)
 
     @property
-    def tdir(self) -> typing.Optional[int]:
-        """Get or set the ID of vector (*DEFINE_VECTOR) giving direction of projection for trim curve.
-        EQ. 0: default vector (0,0,1) is used. Curve is defined in the global xy plane, and projected onto mesh in global z-direction to define trim line.
+    def tdir(self) -> int:
+        """Get or set the Indicate whether the trim curve is near the top or bottom surface of the solids or laminates; see 3D (normal) trimming of solid elements.
+        EQ.0:	The trim curve is located near the bottom surface(default).
+        EQ.1 : The trim curve is located near the top surface.
         """ # nopep8
         return self._cards[0].get_value("tdir")
 
     @tdir.setter
     def tdir(self, value: int) -> None:
         """Set the tdir property."""
+        if value not in [0, 1, None]:
+            raise Exception("""tdir must be `None` or one of {0,1}.""")
         self._cards[0].set_value("tdir", value)
 
     @property

@@ -96,6 +96,11 @@ _MATSEISMICISOLATOR_CARD6 = (
 )
 
 _MATSEISMICISOLATOR_CARD7 = (
+    FieldSchema("fyrim", float, 0, 10, 1e+21),
+    FieldSchema("dfrim", float, 10, 10, 1e+21),
+)
+
+_MATSEISMICISOLATOR_CARD8 = (
     FieldSchema("kthx", float, 0, 10, None),
     FieldSchema("kthy", float, 10, 10, None),
     FieldSchema("kthz", float, 20, 10, None),
@@ -149,6 +154,10 @@ class MatSeismicIsolator(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _MATSEISMICISOLATOR_CARD7,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MATSEISMICISOLATOR_CARD8,
                 **kwargs,
             ),
             OptionCardSet(
@@ -242,19 +251,21 @@ class MatSeismicIsolator(KeywordBase):
     @property
     def itype(self) -> int:
         """Get or set the Type:
-        EQ.0:	sliding (spherical or cylindrical)
-        EQ.1:	elastomeric
-        EQ.2:	sliding (two perpendicular curved beams)
-        EQ.3:	lead rubber bearing
+        EQ.0: sliding (spherical or cylindrical)
+        EQ.1: elastomeric
+        EQ.2: sliding (two perpendicular curved beams)
+        EQ.3: lead rubber bearing
         EQ.4: high damping rubber bearing.
+        EQ.4: high damping rubber bearing
+        EQ.5: sliding with rim failure
         """ # nopep8
         return self._cards[0].get_value("itype")
 
     @itype.setter
     def itype(self, value: int) -> None:
         """Set the itype property."""
-        if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""itype must be `None` or one of {0,1,2,3,4}.""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""itype must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("itype", value)
 
     @property
@@ -479,7 +490,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @property
     def fmaxyc(self) -> typing.Optional[float]:
-        """Get or set the Max friction coefficient (dynamic) for local Y-axis (compression).  (ITYPE=2 only).
+        """Get or set the Max friction coefficient (dynamic) for local Y-axis (compression). (ITYPE=2 only).
         """ # nopep8
         return self._cards[3].get_value("fmaxyc")
 
@@ -512,7 +523,7 @@ class MatSeismicIsolator(KeywordBase):
 
     @property
     def ylock(self) -> typing.Optional[float]:
-        """Get or set the Stiffness locking the local Y-displacement (optional -single-axis sliding).  (ITYPE=2 only).
+        """Get or set the Stiffness locking the local Y-displacement (optional -single-axis sliding). (ITYPE=2 only).
         """ # nopep8
         return self._cards[3].get_value("ylock")
 
@@ -687,48 +698,70 @@ class MatSeismicIsolator(KeywordBase):
         self._cards[6].set_value("beta", value)
 
     @property
+    def fyrim(self) -> float:
+        """Get or set the Radial force at failure of rim
+        """ # nopep8
+        return self._cards[7].get_value("fyrim")
+
+    @fyrim.setter
+    def fyrim(self, value: float) -> None:
+        """Set the fyrim property."""
+        self._cards[7].set_value("fyrim", value)
+
+    @property
+    def dfrim(self) -> float:
+        """Get or set the Radial displacement of rim to failure after FYRIM is reached
+        """ # nopep8
+        return self._cards[7].get_value("dfrim")
+
+    @dfrim.setter
+    def dfrim(self, value: float) -> None:
+        """Set the dfrim property."""
+        self._cards[7].set_value("dfrim", value)
+
+    @property
     def kthx(self) -> typing.Optional[float]:
         """Get or set the Rotational stiffness in local x direction (moment per radian)
         """ # nopep8
-        return self._cards[7].get_value("kthx")
+        return self._cards[8].get_value("kthx")
 
     @kthx.setter
     def kthx(self, value: float) -> None:
         """Set the kthx property."""
-        self._cards[7].set_value("kthx", value)
+        self._cards[8].set_value("kthx", value)
 
     @property
     def kthy(self) -> typing.Optional[float]:
         """Get or set the Rotational stiffness in local y direction (moment per radian)
         """ # nopep8
-        return self._cards[7].get_value("kthy")
+        return self._cards[8].get_value("kthy")
 
     @kthy.setter
     def kthy(self, value: float) -> None:
         """Set the kthy property."""
-        self._cards[7].set_value("kthy", value)
+        self._cards[8].set_value("kthy", value)
 
     @property
     def kthz(self) -> typing.Optional[float]:
         """Get or set the Rotational stiffness in local z direction (moment per radian)
         """ # nopep8
-        return self._cards[7].get_value("kthz")
+        return self._cards[8].get_value("kthz")
 
     @kthz.setter
     def kthz(self, value: float) -> None:
         """Set the kthz property."""
-        self._cards[7].set_value("kthz", value)
+        self._cards[8].set_value("kthz", value)
 
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[8].cards[0].get_value("title")
+        return self._cards[9].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[8].cards[0].set_value("title", value)
+        self._cards[9].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

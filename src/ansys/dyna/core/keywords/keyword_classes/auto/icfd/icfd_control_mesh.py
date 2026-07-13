@@ -36,6 +36,7 @@ _ICFDCONTROLMESH_CARD0 = (
 
 _ICFDCONTROLMESH_CARD1 = (
     FieldSchema("aver", int, 0, 10, 14),
+    FieldSchema("sfbl", float, 10, 10, 1.0),
 )
 
 class IcfdControlMesh(KeywordBase):
@@ -59,7 +60,7 @@ class IcfdControlMesh(KeywordBase):
         ]
     @property
     def mgsf(self) -> float:
-        """Get or set the Mesh Growth Scale Factor : Specifies the maximum mesh size that the volume mesher is allowed to use when generating the volume mesh based on the mesh surface element sizes defined in *MESH_SURFACE_ELEMENT. Values between 1 and 2 are allowed. Values closer to 1 will result in a finer volume mesh (1 means the volume mesh is not allowed to be coarser than the element size from the closest surface meshes) and val# ues closer to 2 will result in a coarser volume mesh (2 means the volume can use elements as much as twice as coarse as those from the closest surface mesh).
+        """Get or set the Mesh Growth Scale Factor:It specifies the maximum mesh size that the volume mesher is allowed to use when generating the volume mesh based on the mesh surface element sizes defined in *MESH_SURFACE_ELEMENT. Values between 1 and 2 are allowed. Values closer to 1 will result in a finer volume mesh (1 means the volume mesh is not allowed to be coarser than the element size from the closest surface meshes) and val# ues closer to 2 will result in a coarser volume mesh (2 means the volume can use elements as much as twice as coarse as those from the closest surface mesh).
         """ # nopep8
         return self._cards[0].get_value("mgsf")
 
@@ -85,7 +86,7 @@ class IcfdControlMesh(KeywordBase):
 
     @property
     def _2dstruc(self) -> int:
-        """Get or set the Flag to decide between a unstructured mesh generation strategy in 2D or a structured mesh strategy: EQ.0: Structured mesh.
+        """Get or set the Flag to decide between an unstructured mesh generation strategy in 2D or a structured mesh strategy: EQ.0: Structured mesh.
         EQ.1: Unstructured mesh.
         """ # nopep8
         return self._cards[0].get_value("_2dstruc")
@@ -101,7 +102,7 @@ class IcfdControlMesh(KeywordBase):
     def nrmsh(self) -> int:
         """Get or set the Flag to turn off any remeshing:
         EQ.0:Remeshing possible
-        EQ.1:Remeshing impossible
+        EQ.1:Remeshing not allowed
         """ # nopep8
         return self._cards[0].get_value("nrmsh")
 
@@ -114,9 +115,9 @@ class IcfdControlMesh(KeywordBase):
 
     @property
     def aver(self) -> int:
-        """Get or set the Automatic Volume Mesher version :
-        EQ.14 :	Version 14.
-        EQ.16 : Version 16. (See Remark 4)
+        """Get or set the Automatic Volume Mesher version:
+        EQ.14: Version 14.
+        EQ.16: Version 16. (See Remark 4)
         """ # nopep8
         return self._cards[1].get_value("aver")
 
@@ -124,4 +125,15 @@ class IcfdControlMesh(KeywordBase):
     def aver(self, value: int) -> None:
         """Set the aver property."""
         self._cards[1].set_value("aver", value)
+
+    @property
+    def sfbl(self) -> float:
+        """Get or set the Scale factor that controls the speed of boundary layer inflation. If the boundary layer is much larger in size than the surface mesh, we recommend a value less than one.
+        """ # nopep8
+        return self._cards[1].get_value("sfbl")
+
+    @sfbl.setter
+    def sfbl(self, value: float) -> None:
+        """Set the sfbl property."""
+        self._cards[1].set_value("sfbl", value)
 

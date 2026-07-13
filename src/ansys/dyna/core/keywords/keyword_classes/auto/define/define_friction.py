@@ -91,7 +91,7 @@ class DefineFriction(KeywordBase):
         ]
     @property
     def id(self) -> int:
-        """Get or set the Identification number. Only one table is allowed
+        """Get or set the Identification number.
         """ # nopep8
         return self._cards[0].get_value("id")
 
@@ -147,8 +147,8 @@ class DefineFriction(KeywordBase):
     @property
     def icnep(self) -> int:
         """Get or set the Flag to check for non-existing parts, or part sets (PIDi, PIDj) on Card 2.
-        EQ.0:	Existence of parts or part sets is checked,and an error occurs when any is missing(default).
-        EQ.1 : Existence of parts or part sets is checked and lines with non - existent parts will be ignored..
+        EQ.0: The existence of parts or part sets is checked,and an error occurs when any is missing(default).
+        EQ.1: The existence of parts or part sets is checked and lines with non - existent parts will be ignored..
         """ # nopep8
         return self._cards[0].get_value("icnep")
 

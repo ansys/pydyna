@@ -32,10 +32,10 @@ _CONSTRAINEDSOLIDINSOLIDPENALTY_CARD0 = (
 )
 
 _CONSTRAINEDSOLIDINSOLIDPENALTY_CARD1 = (
-    FieldSchema("ssidb", int, 0, 10, None),
-    FieldSchema("ssida", int, 10, 10, None),
-    FieldSchema("bstypb", int, 20, 10, 0),
-    FieldSchema("sstypa", int, 30, 10, 0),
+    FieldSchema("ssida", int, 0, 10, None),
+    FieldSchema("ssidb", int, 10, 10, None),
+    FieldSchema("bstypa", int, 20, 10, 0),
+    FieldSchema("sstypb", int, 30, 10, 0),
 )
 
 _CONSTRAINEDSOLIDINSOLIDPENALTY_CARD2 = (
@@ -93,19 +93,8 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
         self._cards[0].set_value("title", value)
 
     @property
-    def ssidb(self) -> typing.Optional[int]:
-        """Get or set the Set ID defining a part or part set ID of the Lagrangian solid structure constrained to move with solid or thick shell elementsspecified with SSIDA(see * PART and *SET_PART).
-        """ # nopep8
-        return self._cards[1].get_value("ssidb")
-
-    @ssidb.setter
-    def ssidb(self, value: int) -> None:
-        """Set the ssidb property."""
-        self._cards[1].set_value("ssidb", value)
-
-    @property
     def ssida(self) -> typing.Optional[int]:
-        """Get or set the Set ID defining a part or part set ID of the Lagrangian solid elements or thick shell elements which constrain SSIDB(see * PART and *SET_PART).
+        """Get or set the Set ID defining a part or part set ID of the Lagrangian solid structure constrained to move with solid or thick shell elementsspecified with SSIDB(see *PART and *SET_PART).
         """ # nopep8
         return self._cards[1].get_value("ssida")
 
@@ -115,40 +104,51 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
         self._cards[1].set_value("ssida", value)
 
     @property
-    def bstypb(self) -> int:
-        """Get or set the Set type of SSIDB
-        EQ.0: part set ID (PSID).
-        EQ.1: part ID (PID).
+    def ssidb(self) -> typing.Optional[int]:
+        """Get or set the Set ID defining a part or part set ID of the Lagrangian solid elements or thick shell elements which constrain SSIDA(see *PART and *SET_PART).
         """ # nopep8
-        return self._cards[1].get_value("bstypb")
+        return self._cards[1].get_value("ssidb")
 
-    @bstypb.setter
-    def bstypb(self, value: int) -> None:
-        """Set the bstypb property."""
-        if value not in [0, 1, None]:
-            raise Exception("""bstypb must be `None` or one of {0,1}.""")
-        self._cards[1].set_value("bstypb", value)
+    @ssidb.setter
+    def ssidb(self, value: int) -> None:
+        """Set the ssidb property."""
+        self._cards[1].set_value("ssidb", value)
 
     @property
-    def sstypa(self) -> int:
+    def bstypa(self) -> int:
         """Get or set the Set type of SSIDA
         EQ.0: part set ID (PSID).
         EQ.1: part ID (PID).
         """ # nopep8
-        return self._cards[1].get_value("sstypa")
+        return self._cards[1].get_value("bstypa")
 
-    @sstypa.setter
-    def sstypa(self, value: int) -> None:
-        """Set the sstypa property."""
+    @bstypa.setter
+    def bstypa(self, value: int) -> None:
+        """Set the bstypa property."""
         if value not in [0, 1, None]:
-            raise Exception("""sstypa must be `None` or one of {0,1}.""")
-        self._cards[1].set_value("sstypa", value)
+            raise Exception("""bstypa must be `None` or one of {0,1}.""")
+        self._cards[1].set_value("bstypa", value)
+
+    @property
+    def sstypb(self) -> int:
+        """Get or set the Set type of SSIDB
+        EQ.0: part set ID (PSID).
+        EQ.1: part ID (PID).
+        """ # nopep8
+        return self._cards[1].get_value("sstypb")
+
+    @sstypb.setter
+    def sstypb(self, value: int) -> None:
+        """Set the sstypb property."""
+        if value not in [0, 1, None]:
+            raise Exception("""sstypb must be `None` or one of {0,1}.""")
+        self._cards[1].set_value("sstypb", value)
 
     @property
     def start(self) -> float:
         """Get or set the Start time to activate the coupling
-        LT.0:	Start time is set to |START|.  When negative, start time is followed during the dynamic relaxation phase of the calculation.  After dynamic relaxation has completed, coupling is activated regardless of the value of END.EQ.0:	Start time is inactive, meaning coupling is always active
-        GT.0 : If END = -9999, START is interpreted as the curve or table ID defining multiple pairs of start - time and end - time.Otherwise, if END > 0, start time applies both duringand after dynamic relaxation.
+        LT.0: Start time is set to |START|.  When negative, start time is followed during the dynamic relaxation phase of the calculation.  After dynamic relaxation has completed, coupling is activated regardless of the value of END.EQ.0: Start time is inactive, meaning coupling is always active
+        GT.0: If END = -9999, START is interpreted as the curve or table ID defining multiple pairs of start - time and end - time.Otherwise, if END > 0, start time applies both duringand after dynamic relaxation.
         """ # nopep8
         return self._cards[2].get_value("start")
 
@@ -160,8 +160,8 @@ class ConstrainedSolidInSolidPenalty(KeywordBase):
     @property
     def end(self) -> float:
         """Get or set the End time to deactive the coupling
-        LT.0:	If END = -9999, START is interpreted as the curve or table ID defining multiple pairs of start-time and end-time.  Otherwise, negative END indicates that coupling is inactive during dynamic relaxation.  After dynamic relaxation the start and end times are followed and set to |START| and |END|, respectively.EQ.0:	END defaults to 1020.
-        GT.0 : END sets the time at which the coupling is deactivated.
+        LT.0: If END = -9999, START is interpreted as the curve or table ID defining multiple pairs of start-time and end-time.  Otherwise, negative END indicates that coupling is inactive during dynamic relaxation.  After dynamic relaxation the start and end times are followed and set to |START| and |END|, respectively.EQ.0: END defaults to 1020.
+        GT.0: END sets the time at which the coupling is deactivated.
         """ # nopep8
         return self._cards[2].get_value("end")
 

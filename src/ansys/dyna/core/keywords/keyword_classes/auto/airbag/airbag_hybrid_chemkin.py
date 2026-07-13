@@ -79,7 +79,7 @@ _AIRBAGHYBRIDCHEMKIN_CARD6 = (
     FieldSchema("dlow", float, 30, 10, None),
     FieldSchema("elow", float, 40, 10, None),
     FieldSchema("flow", float, 50, 10, None),
-    FieldSchema("glow", float, 60, 10, None),
+    FieldSchema("hlow", float, 60, 10, None),
 )
 
 _AIRBAGHYBRIDCHEMKIN_CARD7 = (
@@ -89,7 +89,7 @@ _AIRBAGHYBRIDCHEMKIN_CARD7 = (
     FieldSchema("dhigh", float, 30, 10, None),
     FieldSchema("ehigh", float, 40, 10, None),
     FieldSchema("fhigh", float, 50, 10, None),
-    FieldSchema("ghigh", float, 60, 10, None),
+    FieldSchema("hhigh", float, 60, 10, None),
 )
 
 _AIRBAGHYBRIDCHEMKIN_CARD8 = (
@@ -522,15 +522,15 @@ class AirbagHybridChemkin(KeywordBase):
         self._cards[6].set_value("flow", value)
 
     @property
-    def glow(self) -> typing.Optional[float]:
+    def hlow(self) -> typing.Optional[float]:
         """Get or set the Low temperature range NIST polynomial curve fit coefficient.
         """ # nopep8
-        return self._cards[6].get_value("glow")
+        return self._cards[6].get_value("hlow")
 
-    @glow.setter
-    def glow(self, value: float) -> None:
-        """Set the glow property."""
-        self._cards[6].set_value("glow", value)
+    @hlow.setter
+    def hlow(self, value: float) -> None:
+        """Set the hlow property."""
+        self._cards[6].set_value("hlow", value)
 
     @property
     def ahigh(self) -> typing.Optional[float]:
@@ -599,20 +599,20 @@ class AirbagHybridChemkin(KeywordBase):
         self._cards[7].set_value("fhigh", value)
 
     @property
-    def ghigh(self) -> typing.Optional[float]:
+    def hhigh(self) -> typing.Optional[float]:
         """Get or set the High temperature range NIST polynomial curve fit coefficient.
         """ # nopep8
-        return self._cards[7].get_value("ghigh")
+        return self._cards[7].get_value("hhigh")
 
-    @ghigh.setter
-    def ghigh(self, value: float) -> None:
-        """Set the ghigh property."""
-        self._cards[7].set_value("ghigh", value)
+    @hhigh.setter
+    def hhigh(self, value: float) -> None:
+        """Set the hhigh property."""
+        self._cards[7].set_value("hhigh", value)
 
     @property
     def a(self) -> typing.Optional[float]:
         """Get or set the Coefficient A, in the polynomial curve fit for heat capacity given by the equation:
-        c-p = 1/MW (A + BT + CT^2 + DT^3 + ET^4).
+        c-p = 1/MW (A + BT + CT**2 + DT**3 + ET**4).
         """ # nopep8
         return self._cards[8].get_value("a")
 
@@ -624,7 +624,7 @@ class AirbagHybridChemkin(KeywordBase):
     @property
     def b(self) -> float:
         """Get or set the Coefficient B, in the polynomial curve fit for heat capacity given by the equation:
-        c-p = 1/MW (A + BT + CT^2 + DT^3 + ET^4).
+        c-p = 1/MW (A + BT + CT**2 + DT**3 + ET**4).
         """ # nopep8
         return self._cards[8].get_value("b")
 
@@ -636,7 +636,7 @@ class AirbagHybridChemkin(KeywordBase):
     @property
     def c(self) -> float:
         """Get or set the Coefficient C, in the polynomial curve fit for heat capacity given by the equation:
-        c-p = 1/MW (A + BT + CT^2 + DT^3 + ET^4).
+        c-p = 1/MW (A + BT + CT**2 + DT**3 + ET**4).
         """ # nopep8
         return self._cards[8].get_value("c")
 
@@ -648,7 +648,7 @@ class AirbagHybridChemkin(KeywordBase):
     @property
     def d(self) -> float:
         """Get or set the Coefficient D, in the polynomial curve fit for heat capacity given by the equation:
-        c-p = 1/MW (A + BT + CT^2 + DT^3 + ET^4).
+        c-p = 1/MW (A + BT + CT**2 + DT**3 + ET**4).
         """ # nopep8
         return self._cards[8].get_value("d")
 
@@ -660,7 +660,7 @@ class AirbagHybridChemkin(KeywordBase):
     @property
     def e(self) -> float:
         """Get or set the Coefficient E, in the polynomial curve fit for heat capacity given by the equation:
-        c-p = 1/MW (A + BT + CT^2 + DT^3 + ET^4).
+        c-p = 1/MW (A + BT + CT**2 + DT**3 + ET**4).
         """ # nopep8
         return self._cards[8].get_value("e")
 

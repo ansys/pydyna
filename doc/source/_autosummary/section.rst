@@ -41,6 +41,13 @@ SectionDiscrete
     :members:
 
 
+SectionEfv
+----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.section_efv
+    :members:
+
+
 SectionFpd
 ----------
 
@@ -59,6 +66,13 @@ SectionIgaSolid
 ---------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.section_iga_solid
+    :members:
+
+
+SectionIspg
+-----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.section_ispg
     :members:
 
 

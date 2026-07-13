@@ -43,6 +43,7 @@ _DEFINECURVETRIMNEW_CARD0 = (
 _DEFINECURVETRIMNEW_CARD1 = (
     FieldSchema("cx", float, 0, 20, 0.0),
     FieldSchema("cy", float, 20, 20, 0.0),
+    FieldSchema("cz", float, 40, 20, 0.0),
 )
 
 _DEFINECURVETRIMNEW_CARD2 = (
@@ -137,7 +138,7 @@ class DefineCurveTrimNew(KeywordBase):
     @property
     def tdir(self) -> typing.Optional[int]:
         """Get or set the ID of vector (*DEFINE_VECTOR) giving direction of projection for trim curve.
-        EQ. 0: default vector (0,0,1) is used. Curve is defined in the global xy plane, and projected onto mesh in global z-direction to define trim line.
+        EQ. 0: default vector (0,0,1) is used. Curve is defined in the global xy plane, and projected onto mesh in global z-direction to define the trim line.
         """ # nopep8
         return self._cards[0].get_value("tdir")
 
@@ -159,7 +160,7 @@ class DefineCurveTrimNew(KeywordBase):
 
     @property
     def depth(self) -> typing.Optional[float]:
-        """Get or set the The trimming depth is DEPTH – 1. If the distance between the element and the curve is larger than this value, then it will not be cut. This feature prevents trimming through to the opposite side of the part.
+        """Get or set the The trimming depth is DEPTH  1. If the distance between the element and the curve is larger than this value, then it will not be cut. This feature prevents trimming through to the opposite side of the part.
         """ # nopep8
         return self._cards[0].get_value("depth")
 
@@ -213,6 +214,17 @@ class DefineCurveTrimNew(KeywordBase):
     def cy(self, value: float) -> None:
         """Set the cy property."""
         self._cards[1].set_value("cy", value)
+
+    @property
+    def cz(self) -> float:
+        """Get or set the z-coordinate of trim curve Defined if and only if TCTYPE=1.
+        """ # nopep8
+        return self._cards[1].get_value("cz")
+
+    @cz.setter
+    def cz(self, value: float) -> None:
+        """Set the cz property."""
+        self._cards[1].set_value("cz", value)
 
     @property
     def filename(self) -> typing.Optional[str]:

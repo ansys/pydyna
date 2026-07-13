@@ -36,6 +36,7 @@ _DEFINECOORDINATENODES_CARD0 = (
     FieldSchema("n3", int, 30, 10, None),
     FieldSchema("flag", int, 40, 10, None),
     FieldSchema("dir", str, 50, 10, "X"),
+    FieldSchema("type", int, 60, 10, 0),
 )
 
 _DEFINECOORDINATENODES_OPTION0_CARD0 = (
@@ -111,7 +112,7 @@ class DefineCoordinateNodes(KeywordBase):
 
     @property
     def n3(self) -> typing.Optional[int]:
-        """Get or set the ID of node located in local xy plane if DIR=X, the local yz plane if DIR=Y, and the local zx plane if DIR=Z
+        """Get or set the ID of a node located in the local xy-plane if DIR = X, the local yz-plane if DIR = Y, and the local zx-plane if DIR = Z.
         """ # nopep8
         return self._cards[0].get_value("n3")
 
@@ -122,7 +123,7 @@ class DefineCoordinateNodes(KeywordBase):
 
     @property
     def flag(self) -> typing.Optional[int]:
-        """Get or set the Set to unity, 1, if the local system is to be updated each time step for the BOUNDARY_SPC nodal constraints and ELEMENT_BEAM type 6, the discrete beam element. Generally, this option when used with nodal SPC's is not recommended since it can cause excursions in the energy balance because the constraint forces at the node may go through a displacement if the node is partially constrained
+        """Get or set the Set to unity, 1, if the local system is to be updated each time step for the BOUNDARY_SPC nodal constraints and ELEMENT_BEAM type 6, the discrete beam element. Generally, this option is not recommended when used with nodal SPCs. It can cause excursions in the energy balance because the constraint forces at the node may go through a displacement if the node is partially constrained
         """ # nopep8
         return self._cards[0].get_value("flag")
 
@@ -133,7 +134,7 @@ class DefineCoordinateNodes(KeywordBase):
 
     @property
     def dir(self) -> str:
-        """Get or set the Axis defined by node N2 moving from the origin node N1. The default direction is the x-axis.
+        """Get or set the Axis defined by the vector pointing from the origin node N1 to node N2.  The default direction is the x-axis
         """ # nopep8
         return self._cards[0].get_value("dir")
 
@@ -143,6 +144,23 @@ class DefineCoordinateNodes(KeywordBase):
         if value not in ["X", "Y", "Z", None]:
             raise Exception("""dir must be `None` or one of {"X","Y","Z"}.""")
         self._cards[0].set_value("dir", value)
+
+    @property
+    def type(self) -> int:
+        """Get or set the Coordinate system type
+        EQ.0:	Cartesian
+        EQ.1 : Cylindrical
+        EQ.2 : Spherical
+        This field is only supported by *BOUNDARY_PRESCRIBED_MOTION and *LOAD_NODE to flag that the motion or load is in that coordinate system. The spherical and cylindrical coordinate systems are based on the local Cartesian system found with the input nodes. See Figure 0-2.
+        """ # nopep8
+        return self._cards[0].get_value("type")
+
+    @type.setter
+    def type(self, value: int) -> None:
+        """Set the type property."""
+        if value not in [0, 1, 2, None]:
+            raise Exception("""type must be `None` or one of {0,1,2}.""")
+        self._cards[0].set_value("type", value)
 
     @property
     def title(self) -> typing.Optional[str]:

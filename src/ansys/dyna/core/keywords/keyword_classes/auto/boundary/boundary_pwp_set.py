@@ -45,6 +45,7 @@ _BOUNDARYPWPSET_CARD1 = (
     FieldSchema("lcleak", int, 40, 10, None),
     FieldSchema("cleak", float, 50, 10, None),
     FieldSchema("lcpum", int, 60, 10, None),
+    FieldSchema("typpmp", int, 70, 10, 0),
 )
 
 class BoundaryPwpSet(KeywordBase):
@@ -151,11 +152,11 @@ class BoundaryPwpSet(KeywordBase):
 
     @property
     def itotex(self) -> int:
-        """Get or set the Flag for type of pressure boundary condition: (see notes)
-        =0: 	Total head
-        =1: 	Excess head
-        =2:	Hydraulic head
-        =4:	Z-coord where head=0 (piezometric level)
+        """Get or set the Flag for the type of pressure boundary condition: (see notes)
+        =0: Total head
+        =1: Excess head
+        =2: Hydraulic head
+        =4: Z-coord where head=0 (piezometric level)
         """ # nopep8
         return self._cards[1].get_value("itotex")
 
@@ -169,9 +170,9 @@ class BoundaryPwpSet(KeywordBase):
     @property
     def idrflag(self) -> int:
         """Get or set the Active flag:
-        =0:	Active only in transient analysis
-        =1:	Active only in dynamic relaxation
-        =2:	Active in all analysis phases(leave blank for TABLE option)
+        =0: Active only in transient analysis
+        =1: Active only in dynamic relaxation
+        =2: Active in all analysis phases(leave blank for TABLE option)
         """ # nopep8
         return self._cards[1].get_value("idrflag")
 
@@ -184,7 +185,7 @@ class BoundaryPwpSet(KeywordBase):
 
     @property
     def lcleak(self) -> typing.Optional[int]:
-        """Get or set the Optional load curve ID (see *DEFINE_CURVE) applicable to IPHRE = 1 only, giving area of the hole through which pore fluid leaks to the zero pressure boundary condition. See Remark 9.
+        """Get or set the Optional load curve ID (see *DEFINE_CURVE), giving the area of the hole through which pore fluid leaks to the boundary condition. See Remark 9.
         """ # nopep8
         return self._cards[1].get_value("lcleak")
 
@@ -206,7 +207,7 @@ class BoundaryPwpSet(KeywordBase):
 
     @property
     def lcpum(self) -> typing.Optional[int]:
-        """Get or set the Optional load curve ID (see *DEFINE_CURVE) giving volumetric outflow rate per node. The curve x-axis is time while the y-axis is in units of volume per unit time. If defined, LCPUMP overrides all other input fields on Card 2.  See Remark 11
+        """Get or set the Optional load curve ID (see *DEFINE_CURVE) giving the volumetric outflow rate per node or the upper limit on the volume flow rate, depending on the choice of TYPPMP. The curve x-axis is time while the y-axis is in units of volume per unit time. See Remarks 11 and 12
         """ # nopep8
         return self._cards[1].get_value("lcpum")
 
@@ -214,6 +215,22 @@ class BoundaryPwpSet(KeywordBase):
     def lcpum(self, value: int) -> None:
         """Set the lcpum property."""
         self._cards[1].set_value("lcpum", value)
+
+    @property
+    def typpmp(self) -> int:
+        """Get or set the Determines the action of LCPUMP (see Remarks 11 and 12):
+        EQ.0: LCPUMP defines the volume flow rate to the boundary condition.LC, CVALand ITOTEX are ignored.
+        EQ.1: LCPUMP defines an upper limit on volume flow rate to the boundary condition; only outflow is permitted.
+        EQ.2: Same as 1, except that inflow is permitted as well as outflow.
+        """ # nopep8
+        return self._cards[1].get_value("typpmp")
+
+    @typpmp.setter
+    def typpmp(self, value: int) -> None:
+        """Set the typpmp property."""
+        if value not in [0, 1, 2, None]:
+            raise Exception("""typpmp must be `None` or one of {0,1,2}.""")
+        self._cards[1].set_value("typpmp", value)
 
     @property
     def lcdr_link(self) -> typing.Optional[DefineCurve]:

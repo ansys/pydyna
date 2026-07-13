@@ -52,7 +52,7 @@ class EmSolverFem(KeywordBase):
         ]
     @property
     def reltol(self) -> float:
-        """Get or set the Relative tolerance for the solver. The user should try to decrease this tolerance if the results are not accurate enough. More iterations will then be needed.
+        """Get or set the Relative tolerance for the iterative solvers (PCG and Hybrid Direct-PCG). If the results are not accurate enough, try decreasing this tolerance. More iterations will then be needed.
         """ # nopep8
         return self._cards[0].get_value("reltol")
 
@@ -63,7 +63,7 @@ class EmSolverFem(KeywordBase):
 
     @property
     def maxite(self) -> int:
-        """Get or set the Maximal number of iterations.
+        """Get or set the Maximum number of iterations for iterative solvers (PCG and Hybrid Direct-PCG)
         """ # nopep8
         return self._cards[0].get_value("maxite")
 
@@ -76,37 +76,40 @@ class EmSolverFem(KeywordBase):
     def stype(self) -> int:
         """Get or set the Solver type:
         EQ.1: Direct solve
-        EQ.2: Conditioned Gradient Method (PCG)
+        EQ.2: Preconditioned Conjugate Gradient Method (PCG)
+        EQ.3: Hybrid Direct-PCG method. See Remark 4.
         """ # nopep8
         return self._cards[0].get_value("stype")
 
     @stype.setter
     def stype(self, value: int) -> None:
         """Set the stype property."""
-        if value not in [1, 2, None]:
-            raise Exception("""stype must be `None` or one of {1,2}.""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""stype must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("stype", value)
 
     @property
     def precon(self) -> int:
         """Get or set the Preconditioner type for PCG.
-        EQ.0: no preconditioner
-        EQ.1: Diagonal line
-
+        EQ.-1:	No preconditioner
+        EQ.0:	Drop tolerance
+        EQ.1:	Drop tolerance
+        EQ.2:	Diagonal line
+        EQ.5:	 MUMPS factorization
         """ # nopep8
         return self._cards[0].get_value("precon")
 
     @precon.setter
     def precon(self, value: int) -> None:
         """Set the precon property."""
-        if value not in [1, 0, None]:
-            raise Exception("""precon must be `None` or one of {1,0}.""")
+        if value not in [1, -1, 0, 2, 5, None]:
+            raise Exception("""precon must be `None` or one of {1,-1,0,2,5}.""")
         self._cards[0].set_value("precon", value)
 
     @property
     def uselast(self) -> int:
-        """Get or set the This is used only for iterative solvers (PCG).
-        EQ.-1 : starts from 0 as initial solution of the linear system.
+        """Get or set the This is used only for iterative solvers (PCG and Hybrid Direct-PCG).
+        EQ.-1: starts from 0 as initial solution of the linear system.
         EQ.1: starts from previous solution normalized by the rhs change.
 
         """ # nopep8

@@ -211,7 +211,7 @@ class MatDeshpandeFleckFoam(KeywordBase):
 
     @property
     def cfail(self) -> typing.Optional[float]:
-        """Get or set the Tensile volumetric strain at failure.  Default is no failure due to tensile volumetric strain..
+        """Get or set the Tensile volumetric strain at failure. Default is no failure due to tensile volumetric strain..
         """ # nopep8
         return self._cards[1].get_value("cfail")
 
@@ -222,7 +222,7 @@ class MatDeshpandeFleckFoam(KeywordBase):
 
     @property
     def pfail(self) -> typing.Optional[float]:
-        """Get or set the Maximum principal stress at failure.  Must be sustained NUM ( > 0) timesteps to fail element.  Default is no failure due to maximum principal stress
+        """Get or set the Maximum principal stress at failure. Must be sustained NUM ( > 0) timesteps to fail element. Default is no failure due to maximum principal stress
         """ # nopep8
         return self._cards[1].get_value("pfail")
 

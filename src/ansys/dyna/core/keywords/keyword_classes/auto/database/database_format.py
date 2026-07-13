@@ -50,8 +50,8 @@ class DatabaseFormat(KeywordBase):
     def iform(self) -> int:
         """Get or set the Output format for D3PLOT and D3THDT files
         EQ.0: LS-DYNA database format (default),
-        EQ.1: ANSYS database format,
-        EQ.2: Both LS-DYNA and ANSYS database formats.
+        EQ.1: ANSYS database format(generally disabled since R12; see Remark 1),,
+        EQ.2: Both LS-DYNA and ANSYS database formats(generally disabled  since R12; see Remark 1)...
         """ # nopep8
         return self._cards[0].get_value("iform")
 

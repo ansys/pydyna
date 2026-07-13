@@ -238,12 +238,12 @@ class Mat002(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option (see Figure 0-1 and the Material Directions section):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes as shown in Figure 0 - 1.  The a - direction is from node 1 to node 2 of the element.The b - direction is orthogonal to the a - direction and is in the plane formed by nodes 1, 2,and 4. When this option is used in two - dimensional planar and axisymmetric analysis, it is critical that the nodes in the element definition be numbered counterclockwise for this option to work correctly.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
-        EQ.2.0:	Globally orthotropic with material axes determined by vectors a and d input below, as with* DEFINE_COORDINATE_VECTOR
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element(see Figure 0 - 1).The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
-        EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v, and an originating point, P, which define the centerline axis.This option is for solid elements only.
-        LT.0.0 : | AOPT | is a coordinate system ID(see * DEFINE_COORDINATE_OPTION).
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes as shown in Figure 0 - 1. The a - direction is from node 1 to node 2 of the element.The b - direction is orthogonal to the a - direction and is in the plane formed by nodes 1, 2,and 4. When this option is used in two - dimensional planar and axisymmetric analysis, it is critical that the nodes in the element definition be numbered counterclockwise for this option to work correctly.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
+        EQ.1.0: Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors a and d input below, as with *DEFINE_COORDINATE_VECTOR
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element(see Figure 0 - 1).The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
+        EQ.4.0: Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v, and an originating point, P, which define the centerline axis.This option is for solid elements only.
+        LT.0.0: | AOPT | is a coordinate system ID(see *DEFINE_COORDINATE_OPTION).
         """ # nopep8
         return self._cards[1].get_value("aopt")
 
@@ -343,13 +343,13 @@ class Mat002(KeywordBase):
     @property
     def macf(self) -> int:
         """Get or set the Material axes change flag for brick elements:
-        EQ.-4:	Switch material axes b and c before BETA rotation
+        EQ.-4: Switch material axes b and c before BETA rotation
         EQ. - 3: Switch material axes a and c before BETA rotation
         EQ. - 2: Switch material axes a and b before BETA rotation
-        EQ.1:  No change, default,
-        EQ.2:  switch material axes a and b,
-        EQ.3:  switch material axes a and c,
-        EQ.4:  switch material axes b and c.
+        EQ.1: No change, default,
+        EQ.2: switch material axes a and b,
+        EQ.3: switch material axes a and c,
+        EQ.4: switch material axes b and c.
         """ # nopep8
         return self._cards[2].get_value("macf")
 
@@ -363,8 +363,8 @@ class Mat002(KeywordBase):
     @property
     def ihis(self) -> typing.Optional[int]:
         """Get or set the Flag for anisotropic stiffness terms initialization (for solid elements only):
-        EQ.0:	C11, C12, … from Cards 1b.1, 1b.2,and 1.b3 are used.
-        EQ.1 : C11, C12, … are initialized with history data from* INITIAL_‌STRESS_‌SOLID
+        EQ.0: C11, C12, ...from Cards 1b.1, 1b.2,and 1.b3 are used.
+        EQ.1: C11, C12, ... are initialized with history data from *INITIAL_STRESS_SOLID
         """ # nopep8
         return self._cards[2].get_value("ihis")
 
@@ -453,8 +453,8 @@ class Mat002(KeywordBase):
     @property
     def ref(self) -> float:
         """Get or set the Flag to use reference geometry specified with *INITIAL_FOAM_REFERENCE_GEOMETRY to initialize the stress tensor.
-        EQ.0.0:	Off
-        EQ.1.0 : On
+        EQ.0.0: Off
+        EQ.1.0: On
         """ # nopep8
         return self._cards[3].get_value("ref")
 

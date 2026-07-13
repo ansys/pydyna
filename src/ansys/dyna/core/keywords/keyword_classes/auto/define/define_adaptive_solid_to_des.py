@@ -111,7 +111,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
 
     @property
     def heading(self) -> typing.Optional[str]:
-        """Get or set the Definition descriptor. It is suggested that unique descriptions be	used.
+        """Get or set the Definition descriptor. It is suggested that unique descriptions be used.
         """ # nopep8
         return self._cards[0].get_value("heading")
 
@@ -199,8 +199,8 @@ class DefineAdaptiveSolidToDes(KeywordBase):
     @property
     def outdes(self) -> int:
         """Get or set the Allow user output generated discrete element nodes and DES properties toa keyword file.
-        EQ.0:	No output. (Default)
-        EQ.1:	Write data under filename, desvfill.inc.
+        EQ.0: No output. (Default)
+        EQ.1: Write data under filename, desvfill.inc.
         """ # nopep8
         return self._cards[1].get_value("outdes")
 
@@ -214,8 +214,8 @@ class DefineAdaptiveSolidToDes(KeywordBase):
     @property
     def ibond(self) -> int:
         """Get or set the Allow user define bonds between DES generated from the same solid element.
-        EQ.0:	No bonds. (Default)
-        EQ.1:	Bonds generated, need to define Card 2.
+        EQ.0: No bonds. (Default)
+        EQ.1: Bonds generated, need to define Card 2.
         """ # nopep8
         return self._cards[1].get_value("ibond")
 

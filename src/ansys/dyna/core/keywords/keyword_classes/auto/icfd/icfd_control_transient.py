@@ -48,9 +48,9 @@ class IcfdControlTransient(KeywordBase):
         ]
     @property
     def tord(self) -> int:
-        """Get or set the Time integration order :
-        EQ.0:	Second order.
-        EQ.1:	First order.
+        """Get or set the Time integration order:
+        EQ.0: Second order.
+        EQ.1: First order.
         """ # nopep8
         return self._cards[0].get_value("tord")
 
@@ -63,9 +63,9 @@ class IcfdControlTransient(KeywordBase):
 
     @property
     def fsord(self) -> int:
-        """Get or set the Fractional step integration order :
-        EQ.0:	Second order.
-        EQ.1:	First order.
+        """Get or set the Fractional step integration order:
+        EQ.0: Second order.
+        EQ.1: First order.
         """ # nopep8
         return self._cards[0].get_value("fsord")
 

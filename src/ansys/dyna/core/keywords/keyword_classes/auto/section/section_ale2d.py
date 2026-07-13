@@ -81,8 +81,8 @@ class SectionAle2D(KeywordBase):
     @property
     def aleform(self) -> int:
         """Get or set the ALE formulation:
-        EQ.6  : Single material Eulerian formulation
-        EQ.7  : Single material Ambient Eulerian formulation
+        EQ.6: Single material Eulerian formulation
+        EQ.7: Single material Ambient Eulerian formulation
         EQ.11: Multi-Material ALE formulation
 
         """ # nopep8
@@ -113,15 +113,15 @@ class SectionAle2D(KeywordBase):
         """Get or set the Element formulation:
         EQ.13: plane strain (x-y plane)
         EQ.14: axisymmetric solid (y-axis of symmetry) - area weighted
-
+        EQ.15: Axisymmetric solid (xy-plane, y-axis of symmetry) � volume weighted
         """ # nopep8
         return self._cards[0].get_value("elform")
 
     @elform.setter
     def elform(self, value: int) -> None:
         """Set the elform property."""
-        if value not in [13, 14, None]:
-            raise Exception("""elform must be `None` or one of {13,14}.""")
+        if value not in [13, 14, 15, None]:
+            raise Exception("""elform must be `None` or one of {13,14,15}.""")
         self._cards[0].set_value("elform", value)
 
     @property

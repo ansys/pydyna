@@ -33,10 +33,8 @@ _EMCIRCUITSOURCE_CARD0 = (
     FieldSchema("circtyp", int, 10, 10, 1),
     FieldSchema("lcid", int, 20, 10, None),
     FieldSchema("r_f", float, 30, 10, None, "r/f"),
-    FieldSchema("l_a", float, 40, 10, None, "l/a"),
-    FieldSchema("c_t0", float, 50, 10, None, "c/t0"),
-    FieldSchema("v0", float, 60, 10, None),
-    FieldSchema("t0", float, 70, 10, 0.0),
+    FieldSchema("t_a", float, 40, 10, None, "t/a"),
+    FieldSchema("t0", float, 50, 10, 0.0),
 )
 
 _EMCIRCUITSOURCE_CARD1 = (
@@ -44,6 +42,7 @@ _EMCIRCUITSOURCE_CARD1 = (
     FieldSchema("sidvin", int, 10, 10, None),
     FieldSchema("sidvout", int, 20, 10, None),
     FieldSchema("partid", int, 30, 10, None),
+    FieldSchema("ifreqst", int, 40, 10, 1),
 )
 
 class EmCircuitSource(KeywordBase):
@@ -86,26 +85,22 @@ class EmCircuitSource(KeywordBase):
     @property
     def circtyp(self) -> int:
         """Get or set the Circuit type:
-        EQ.1: Imposed current vs time defined by a load curve.
-        EQ.2: Imposed voltage vs time defined by a load curve.
-        EQ.3: R,L,C,V0 circuit.
-        EQ.11: Imposed current defined by an amplitude A, frequency F and initial time t0 : I = Asin[2*PI*F*(t-t0)].
-        EQ.12: Imposed voltage defined by an amplitude A, frequency F and initial time t0 : V = Asin[2*PI*F*(t-t0)].
-        EQ.21: Imposed current defined by a load curve over one period and a frequency F.
-        EQ.22: Imposed voltage defined by a load curve over one period and a frequency F.
+        EQ.1: Imposed current as a function of time specified by a load curve.
+        EQ.2: Imposed voltage as a function of times by a load curve.
+        EQ.11: Imposed current defined by an amplitude A, frequency F and initial time t0: I = Asin[2*PI*F*(t-t0)].
         """ # nopep8
         return self._cards[0].get_value("circtyp")
 
     @circtyp.setter
     def circtyp(self, value: int) -> None:
         """Set the circtyp property."""
-        if value not in [1, 2, 3, 11, 12, 21, 22, None]:
-            raise Exception("""circtyp must be `None` or one of {1,2,3,11,12,21,22}.""")
+        if value not in [1, 2, 11, None]:
+            raise Exception("""circtyp must be `None` or one of {1,2,11}.""")
         self._cards[0].set_value("circtyp", value)
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve Id for CIRCTYP=1,2,21 or 22.
+        """Get or set the Load curve Id for CIRCTYP=1,2
         """ # nopep8
         return self._cards[0].get_value("lcid")
 
@@ -116,8 +111,8 @@ class EmCircuitSource(KeywordBase):
 
     @property
     def r_f(self) -> typing.Optional[float]:
-        """Get or set the Value of the circuit resistance for CIRCTYP.EQ.3.
-        Value of the Frequency for CIRCTYP.EQ.11,12,21 or 22.
+        """Get or set the Value of the frequency for CIRCTYP = 11.To have the frequency specified as a function of time with a load curve, a negative value can be entered with the absolute value corresponding to the load curve ID.
+        Value of the resistance when using an imposed voltage (CIRCTYPE = 2).
         """ # nopep8
         return self._cards[0].get_value("r_f")
 
@@ -127,45 +122,21 @@ class EmCircuitSource(KeywordBase):
         self._cards[0].set_value("r_f", value)
 
     @property
-    def l_a(self) -> typing.Optional[float]:
-        """Get or set the Value of the circuit inductance for CIRCTYP.EQ.3
-        Value of the Amplitude for CIRCTYP.EQ.11 or 12
-
+    def t_a(self) -> typing.Optional[float]:
+        """Get or set the Value of the amplitude for CIRCTYP = 11. To have the amplitude specified as a function of time with a load curve, a negative value can be entered with the absolute value corresponding to the load curve ID.
+        Number of turns when using an imposed voltage (CIRCTYPE = 2).
         """ # nopep8
-        return self._cards[0].get_value("l_a")
+        return self._cards[0].get_value("t_a")
 
-    @l_a.setter
-    def l_a(self, value: float) -> None:
-        """Set the l_a property."""
-        self._cards[0].set_value("l_a", value)
-
-    @property
-    def c_t0(self) -> typing.Optional[float]:
-        """Get or set the Value of the circuit capacity for CIRCTYP.EQ.3
-        Value of the initial time t0 for CIRCTYP.EQ.11 or 12
-
-        """ # nopep8
-        return self._cards[0].get_value("c_t0")
-
-    @c_t0.setter
-    def c_t0(self, value: float) -> None:
-        """Set the c_t0 property."""
-        self._cards[0].set_value("c_t0", value)
-
-    @property
-    def v0(self) -> typing.Optional[float]:
-        """Get or set the Value of the circuit initial voltage for CIRCTYP.EQ.3
-        """ # nopep8
-        return self._cards[0].get_value("v0")
-
-    @v0.setter
-    def v0(self, value: float) -> None:
-        """Set the v0 property."""
-        self._cards[0].set_value("v0", value)
+    @t_a.setter
+    def t_a(self, value: float) -> None:
+        """Set the t_a property."""
+        self._cards[0].set_value("t_a", value)
 
     @property
     def t0(self) -> float:
-        """Get or set the Starting time for CIRCTYPE = 3. Default is at the beginning of the run.
+        """Get or set the Value of the initial time, t_0, for CIRCTYP = 11.
+        Phase time shift for the frequency domain solvers(EMSOL = 4, 7, and 9 * EM_CONTROL) when CIRCTYP = 1 or 2.
         """ # nopep8
         return self._cards[0].get_value("t0")
 
@@ -176,11 +147,7 @@ class EmCircuitSource(KeywordBase):
 
     @property
     def sidcurr(self) -> typing.Optional[int]:
-        """Get or set the Segment set ID for the current. It uses the orientation given by the
-        normal of the segments. To use the opposite orientation, use a '-' (minus) sign in front of the segment set id.
-        CIRCTYP.EQ.1/11/21: The current is imposed through this segment set
-        CIRCTYP.EQ.3: The current needed by the circuit equations is measured  through this segment set
-        .
+        """Get or set the Segment set ID for the current. It uses the orientation given by the normal of the segments. To use the opposite orientation, use a '- ' (minus) sign in front of the segment set ID or reorient the face normals.
         """ # nopep8
         return self._cards[1].get_value("sidcurr")
 
@@ -191,7 +158,7 @@ class EmCircuitSource(KeywordBase):
 
     @property
     def sidvin(self) -> typing.Optional[int]:
-        """Get or set the Segment set ID for input voltage or input current when CIRCTYP.EQ.2/3/12/22 or CIRCTYP.EQ.1/11/21 respectively. It is considered to be oriented as going into the structural mesh, irrespective of the orientation of the segment.
+        """Get or set the Segment set ID for input voltage when CIRCTYP = 2 or for input current when CIRCTYP = 1 or 11. This field must be left blank if the stranded conductor is a torus shape.
         """ # nopep8
         return self._cards[1].get_value("sidvin")
 
@@ -202,7 +169,7 @@ class EmCircuitSource(KeywordBase):
 
     @property
     def sidvout(self) -> typing.Optional[int]:
-        """Get or set the Segment set ID for output voltage or output current when CIRCTYP.EQ.2/3/12/22 or CIRCTYP.EQ.1/11/21 repecitively. It is considered to be oriented as going out of the structural mesh, irrespective of the orientation of the segment
+        """Get or set the Segment set ID for output voltage when CIRCTYP = 2 or for output current when CIRCTYP = 1 or 11. This field must be left blank if the stranded conductor is a torus shape.
         """ # nopep8
         return self._cards[1].get_value("sidvout")
 
@@ -213,7 +180,7 @@ class EmCircuitSource(KeywordBase):
 
     @property
     def partid(self) -> typing.Optional[int]:
-        """Get or set the Part ID associated to the Circuit. It can be any part ID associated to the circuit.
+        """Get or set the Part ID associated with the circuit.
         """ # nopep8
         return self._cards[1].get_value("partid")
 
@@ -221,6 +188,18 @@ class EmCircuitSource(KeywordBase):
     def partid(self, value: int) -> None:
         """Set the partid property."""
         self._cards[1].set_value("partid", value)
+
+    @property
+    def ifreqst(self) -> int:
+        """Get or set the Frequency for recomputing the source terms. The source terms are recalculated every IFREQST time steps. By default, the source terms are recomputed every EM time step.
+        LT.0: | IFREQST | is a load curve ID giving the frequency for recomputing as a function of time.
+        """ # nopep8
+        return self._cards[1].get_value("ifreqst")
+
+    @ifreqst.setter
+    def ifreqst(self, value: int) -> None:
+        """Set the ifreqst property."""
+        self._cards[1].set_value("ifreqst", value)
 
     @property
     def lcid_link(self) -> typing.Optional[DefineCurve]:

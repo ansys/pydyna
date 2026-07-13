@@ -116,7 +116,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
         ]
     @property
     def eosid(self) -> typing.Optional[int]:
-        """Get or set the Equation of state label.
+        """Get or set the Equation of state ID. A unique number or label must be specified (see *PART).
         """ # nopep8
         return self._cards[0].get_value("eosid")
 
@@ -127,7 +127,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def a(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Product JWL constant (see second equation in Remarks)
         """ # nopep8
         return self._cards[0].get_value("a")
 
@@ -138,7 +138,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def b(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Product JWL constant (see second equation in Remarks)
         """ # nopep8
         return self._cards[0].get_value("b")
 
@@ -149,7 +149,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def xp1(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Product JWL constant (see second equation in Remarks)
         """ # nopep8
         return self._cards[0].get_value("xp1")
 
@@ -160,7 +160,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def xp2(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Product JWL constant (see second equation in Remarks)
         """ # nopep8
         return self._cards[0].get_value("xp2")
 
@@ -171,7 +171,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def frer(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Constant in ignition term of reaction equation
         """ # nopep8
         return self._cards[0].get_value("frer")
 
@@ -182,7 +182,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def g(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the wC_v of product
         """ # nopep8
         return self._cards[0].get_value("g")
 
@@ -193,7 +193,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def r1(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Unreacted JWL constant (see first equation in Remarks)
         """ # nopep8
         return self._cards[0].get_value("r1")
 
@@ -204,7 +204,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def r2(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Unreacted JWL constant (see first equation in Remarks)
         """ # nopep8
         return self._cards[1].get_value("r2")
 
@@ -215,7 +215,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def r3(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the wC_v of unreacted explosive
         """ # nopep8
         return self._cards[1].get_value("r3")
 
@@ -226,7 +226,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def r5(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Unreacted JWL constant (see first equation in Remarks)
         """ # nopep8
         return self._cards[1].get_value("r5")
 
@@ -237,7 +237,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def r6(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Unreacted JWL constant (see first equation in Remarks)
         """ # nopep8
         return self._cards[1].get_value("r6")
 
@@ -248,7 +248,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def fmxig(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Maximum F for ignition term
         """ # nopep8
         return self._cards[1].get_value("fmxig")
 
@@ -259,7 +259,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def freq(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Constant in ignition term of reaction equation
         """ # nopep8
         return self._cards[1].get_value("freq")
 
@@ -270,7 +270,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def grow1(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Constant in growth term of reaction equation
         """ # nopep8
         return self._cards[1].get_value("grow1")
 
@@ -281,7 +281,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def em(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Constant in growth term of reaction equation
         """ # nopep8
         return self._cards[1].get_value("em")
 
@@ -292,7 +292,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def ar1(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Constant in growth term of reaction equation
         """ # nopep8
         return self._cards[2].get_value("ar1")
 
@@ -303,7 +303,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def es1(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Constant in growth term of reaction equation
         """ # nopep8
         return self._cards[2].get_value("es1")
 
@@ -336,7 +336,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def eetal(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Constant in ignition term of reaction equation
         """ # nopep8
         return self._cards[2].get_value("eetal")
 
@@ -347,7 +347,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def ccrit(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Constant in ignition term of reaction equation
         """ # nopep8
         return self._cards[2].get_value("ccrit")
 
@@ -369,7 +369,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def tmp0(self) -> typing.Optional[float]:
-        """Get or set the Initial temperature (°K)
+        """Get or set the Initial temperature (K)
         """ # nopep8
         return self._cards[2].get_value("tmp0")
 
@@ -380,7 +380,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def grow2(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Constant in completion term of reaction equation
         """ # nopep8
         return self._cards[3].get_value("grow2")
 
@@ -391,7 +391,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def ar2(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Constant in completion term of reaction equation
         """ # nopep8
         return self._cards[3].get_value("ar2")
 
@@ -402,7 +402,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def es2(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Constant in completion term of reaction equation
         """ # nopep8
         return self._cards[3].get_value("es2")
 
@@ -413,7 +413,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def en(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Constant in completion term of reaction equation
         """ # nopep8
         return self._cards[3].get_value("en")
 
@@ -424,7 +424,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def fmxgr(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Maximum F for growth term
         """ # nopep8
         return self._cards[3].get_value("fmxgr")
 
@@ -435,7 +435,7 @@ class EosIgnitionAndGrowthOfReactionInHe(KeywordBase):
 
     @property
     def fmngr(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Minimum F for completion term
         """ # nopep8
         return self._cards[3].get_value("fmngr")
 

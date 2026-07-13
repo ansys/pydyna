@@ -198,7 +198,7 @@ class ConstrainedJointPulley(KeywordBase):
 
     @property
     def r1(self) -> typing.Optional[float]:
-        """Get or set the Radius, R_1, for the gear and pulley joint type.  If undefined, nodal points 5 and 6 are assumed to be on the outer radius. The values of R1 and R2 affect the outputted reaction forces. The forces are calculated from the moments by dividing them by the radii.
+        """Get or set the Radius, R_1, for the gear, pulley and harmonic joint type.  If undefined, nodal points 5 and 6 are assumed to be on the outer radius. The values of R1 and R2 affect the outputted reaction forces. The forces are calculated from the moments by dividing them by the radii. For harmonic joints, R2 does not correcpond to the actural radius.
         """ # nopep8
         return self._cards[1].get_value("r1")
 

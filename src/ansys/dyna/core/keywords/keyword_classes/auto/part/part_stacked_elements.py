@@ -124,9 +124,9 @@ class PartStackedElements(KeywordBase):
 
     @property
     def inplcmp(self) -> int:
-        """Get or set the Option for in-plane composed parts:
-        EQ.0:	Off
-        EQ.1 : On;
+        """Get or set the Option for in-plane composed parts or to invoke more robust search algorithm::
+        EQ.0: Off
+        EQ.1: On;
         """ # nopep8
         return self._cards[1].get_value("inplcmp")
 

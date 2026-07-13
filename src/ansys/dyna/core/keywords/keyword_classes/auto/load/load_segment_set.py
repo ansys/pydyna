@@ -65,7 +65,9 @@ class LoadSegmentSet(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID, see *DEFINE_CURVE.
+        """Get or set the Load curve ID (see *DEFINE_CURVE) or function ID (see *DEFINE_FUNCTION). For a load curve ID, the load curve must provide pressure as a function of time.
+        For a function ID, the function for pressure has 10 arguments: time, the 3 current coordinates, the 3 reference coordinates,
+        and the 3 velocities; that is, f(t,x,y,z,x0,y0,z0,vx,vy,vz). See Remark 1.
         """ # nopep8
         return self._cards[0].get_value("lcid")
 

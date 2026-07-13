@@ -20,4 +20,18 @@ CosimFmiInterface
     :members:
 
 
+CosimSycControl
+---------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.cosim_syc_control
+    :members:
+
+
+CosimSycInterface
+-----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.cosim_syc_interface
+    :members:
+
+
 .. vale on

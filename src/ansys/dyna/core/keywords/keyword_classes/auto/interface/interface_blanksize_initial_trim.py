@@ -84,7 +84,7 @@ class InterfaceBlanksizeInitialTrim(KeywordBase):
 
     @property
     def filename6(self) -> typing.Optional[str]:
-        """Get or set the OP10 final blank in keyword format. �Dynain file from this OP10 simulation can be used.
+        """Get or set the OP10 final blank in keyword format. Dynain file from this OP10 simulation can be used.
         """ # nopep8
         return self._cards[1].get_value("filename6")
 
@@ -95,7 +95,7 @@ class InterfaceBlanksizeInitialTrim(KeywordBase):
 
     @property
     def filename7(self) -> typing.Optional[str]:
-        """Get or set the OP20 blank in keyword format. �Dynain file from this OP20 simulation can be used. Typically, OP20 is a trimming operation.
+        """Get or set the OP20 blank in keyword format. Dynain file from this OP20 simulation can be used. Typically, OP20 is a trimming operation.
         """ # nopep8
         return self._cards[2].get_value("filename7")
 

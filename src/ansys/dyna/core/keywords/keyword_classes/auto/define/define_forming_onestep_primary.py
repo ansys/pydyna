@@ -70,7 +70,7 @@ class DefineFormingOnestepPrimary(KeywordBase):
         ]
     @property
     def slpid(self) -> typing.Optional[int]:
-        """Get or set the Part ID of the primary blank to which a constrained blank is welded using* CONSTRAINED_SPOTWELD
+        """Get or set the Part ID of the primary blank to which a constrained blank is welded using *CONSTRAINED_SPOTWELD
         """ # nopep8
         return self._cards[0].get_value("slpid")
 

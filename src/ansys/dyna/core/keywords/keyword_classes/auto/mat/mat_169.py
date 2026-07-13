@@ -182,7 +182,7 @@ class Mat169(KeywordBase):
     @property
     def tenmax(self) -> float:
         """Get or set the Maximum through-thickness tensile stress.
-        GT.0.0:	Constant value
+        GT.0.0: Constant value
         LT.0.0: | TENMAX | is a function ID
         """ # nopep8
         return self._cards[0].get_value("tenmax")
@@ -195,7 +195,7 @@ class Mat169(KeywordBase):
     @property
     def gcten(self) -> float:
         """Get or set the Energy per unit area to fail the bond in tension.
-        GT.0.0:	Constant value
+        GT.0.0: Constant value
         LT.0.0: | GCTEN | is a function ID
         """ # nopep8
         return self._cards[0].get_value("gcten")
@@ -208,7 +208,7 @@ class Mat169(KeywordBase):
     @property
     def shrmax(self) -> float:
         """Get or set the Maximum through-thickness shear stress.
-        GT.0.0:	Constant value
+        GT.0.0: Constant value
         LT.0.0: | SHRMAX | is a function ID
         """ # nopep8
         return self._cards[0].get_value("shrmax")
@@ -221,7 +221,7 @@ class Mat169(KeywordBase):
     @property
     def gcshr(self) -> float:
         """Get or set the Energy per unit area to fail the bond in shear.
-        GT.0.0:	Constant value
+        GT.0.0: Constant value
         LT.0.0: | GCSHR | is a function ID
         """ # nopep8
         return self._cards[0].get_value("gcshr")
@@ -256,7 +256,7 @@ class Mat169(KeywordBase):
     @property
     def shrp(self) -> typing.Optional[float]:
         """Get or set the Shear plateau ratio (optional).
-        GT.0.0:	Constant value
+        GT.0.0: Constant value
         LT.0.0: | SHRP | is a function ID
         """ # nopep8
         return self._cards[1].get_value("shrp")
@@ -303,8 +303,7 @@ class Mat169(KeywordBase):
     def thkdir(self) -> float:
         """Get or set the Through-thickness direction flag (See remarks)
         EQ.0.0: smallest element dimension (default)
-        EQ.1.0: direction from nodes 1-2-3-4 to nodes 5-6-7-8
-        .
+        EQ.1.0: direction from nodes 1-2-3-4 to nodes 5-6-7-8.
         """ # nopep8
         return self._cards[1].get_value("thkdir")
 
@@ -464,7 +463,7 @@ class Mat169(KeywordBase):
     @property
     def sdfac(self) -> float:
         """Get or set the Factor on TENMAX and SHRMAX at strain rate EDOT2
-        GT.0.0:	Constant value
+        GT.0.0: Constant value
         LT.0.0: | SDFAC | is a function ID.
         """ # nopep8
         return self._cards[4].get_value("sdfac")
@@ -477,7 +476,7 @@ class Mat169(KeywordBase):
     @property
     def sgfac(self) -> float:
         """Get or set the Factor on GCTEN and GCSHR at strain rate EDOT2.
-        GT.0.0:	Constant valu
+        GT.0.0: Constant valu
         LT.0.0: | SGFAC | is a function ID
         """ # nopep8
         return self._cards[4].get_value("sgfac")
@@ -524,8 +523,8 @@ class Mat169(KeywordBase):
     @property
     def outfail(self) -> float:
         """Get or set the Flag for additional output to messag file: Information about damageinitiation time, failure function terms and forces.
-        EQ.0.0:	off
-        EQ.1.0:	on
+        EQ.0.0: off
+        EQ.1.0: on
         """ # nopep8
         return self._cards[5].get_value("outfail")
 
@@ -539,8 +538,8 @@ class Mat169(KeywordBase):
     @property
     def fsip(self) -> typing.Optional[float]:
         """Get or set the Effective in-plane strain at failure.
-        EQ.0.0:	Off
-        EQ.1.0:	LS - DYNA release R7.1.3
+        EQ.0.0: Off
+        EQ.1.0: LS - DYNA release R7.1.3
         """ # nopep8
         return self._cards[5].get_value("fsip")
 
@@ -563,8 +562,8 @@ class Mat169(KeywordBase):
     @property
     def ele2ns(self) -> float:
         """Get or set the Volumetric smearing option for ELFORM = 2. See Remark 9.
-        EQ.0.0:	Usual ELFORM = 2 behavior with volumetric smearing
-        EQ.1.0 : Volumetric smearing is turned off
+        EQ.0.0: Usual ELFORM = 2 behavior with volumetric smearing
+        EQ.1.0: Volumetric smearing is turned off
         """ # nopep8
         return self._cards[5].get_value("ele2ns")
 

@@ -71,7 +71,7 @@ class DatabasePblastSensor(KeywordBase):
     @property
     def binary(self) -> int:
         """Get or set the Flag for the binary file:
-        EQ.3:	Data is written to the binary file binout.
+        EQ.3: Data is written to the binary file binout.
         """ # nopep8
         return self._cards[0].get_value("binary")
 

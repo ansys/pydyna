@@ -40,12 +40,12 @@ _MAT100DA_CARD0 = (
 
 _MAT100DA_CARD1 = (
     FieldSchema("efail", float, 0, 10, None),
-    FieldSchema("unused", float, 10, 10, None),
-    FieldSchema("unused", float, 20, 10, None),
-    FieldSchema("unused", float, 30, 10, None),
-    FieldSchema("unused", float, 40, 10, None),
-    FieldSchema("unused", float, 50, 10, None),
-    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
     FieldSchema("nf", float, 70, 10, None),
 )
 
@@ -57,6 +57,7 @@ _MAT100DA_CARD2 = (
     FieldSchema("con_id", int, 40, 10, None),
     FieldSchema("rfiltf", float, 50, 10, None),
     FieldSchema("jtol", float, 60, 10, None),
+    FieldSchema("dmgopt", int, 70, 10, None),
 )
 
 _MAT100DA_OPTION0_CARD0 = (
@@ -124,7 +125,7 @@ class Mat100Da(KeywordBase):
 
     @property
     def e(self) -> typing.Optional[float]:
-        """Get or set the Young's modulus: LT.0.0:	|"E"| is the Young's modulus. E < 0 invokes uniaxial stress for solid spot welds with the transverse stresses assumed to be zero. See Remark 1.
+        """Get or set the Young's modulus: LT.0.0: |"E"| is the Young's modulus. E < 0 invokes uniaxial stress for solid spot welds with the transverse stresses assumed to be zero. See Remark 1.
         This is for when the keyword option is unset (<BLANK>) only..
         """ # nopep8
         return self._cards[0].get_value("e")
@@ -169,7 +170,7 @@ class Mat100Da(KeywordBase):
 
     @property
     def efail(self) -> typing.Optional[float]:
-        """Get or set the Effective plastic strain in weld material at failure.  The spot weld element is deleted when the plastic strain at each integration point exceeds EFAIL.  If zero, failure due to effective plastic strain is not considered.
+        """Get or set the Effective plastic strain in weld material at failure. The spot weld element is deleted when the plastic strain at each integration point exceeds EFAIL. If zero, failure due to effective plastic strain is not considered.
         """ # nopep8
         return self._cards[1].get_value("efail")
 
@@ -191,7 +192,7 @@ class Mat100Da(KeywordBase):
 
     @property
     def rs(self) -> typing.Optional[float]:
-        """Get or set the Rupture strain.  See Remark 2
+        """Get or set the Rupture strain. See Remark 2
         """ # nopep8
         return self._cards[2].get_value("rs")
 
@@ -203,8 +204,8 @@ class Mat100Da(KeywordBase):
     @property
     def asff(self) -> typing.Optional[int]:
         """Get or set the Weld assembly simultaneous failure flag (see Remark 4):
-        EQ.0:	Damaged elements fail individually.
-        EQ.1 : Damaged elements fail when first reaches failure criterion.
+        EQ.0: Damaged elements fail individually.
+        EQ.1: Damaged elements fail when first reaches failure criterion.
         """ # nopep8
         return self._cards[2].get_value("asff")
 
@@ -215,7 +216,7 @@ class Mat100Da(KeywordBase):
 
     @property
     def true_t(self) -> typing.Optional[float]:
-        """Get or set the True weld thickness for single hexahedron solid weld elements. See Remark 3
+        """Get or set the True weld thickness for single hexahedron solid weld elements. Note that the behavior of TRUE_T depends on TTOPT. See Remark 8 on *MAT_SPOTWELD.
         """ # nopep8
         return self._cards[2].get_value("true_t")
 
@@ -256,6 +257,18 @@ class Mat100Da(KeywordBase):
     def jtol(self, value: float) -> None:
         """Set the jtol property."""
         self._cards[2].set_value("jtol", value)
+
+    @property
+    def dmgopt(self) -> typing.Optional[int]:
+        """Get or set the Damage option flag:
+        EQ. - 1: Flag to include Card 3.1 for additional damage fields.
+        """ # nopep8
+        return self._cards[2].get_value("dmgopt")
+
+    @dmgopt.setter
+    def dmgopt(self, value: int) -> None:
+        """Set the dmgopt property."""
+        self._cards[2].set_value("dmgopt", value)
 
     @property
     def title(self) -> typing.Optional[str]:

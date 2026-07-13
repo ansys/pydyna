@@ -62,6 +62,7 @@ _MAT0831_CARD2 = (
 _MAT0831_CARD3 = (
     FieldSchema("expon", float, 0, 10, 1.0),
     FieldSchema("riuld", float, 10, 10, 0.0),
+    FieldSchema("pdopt", float, 20, 10, 0.0),
 )
 
 _MAT0831_OPTION0_CARD0 = (
@@ -148,7 +149,9 @@ class Mat0831(KeywordBase):
     @property
     def kcon(self) -> typing.Optional[float]:
         """Get or set the Optional Young's modulus used in the computation of sound speed. This will influence the time step, contact forces, hourglass stabilization forces, and numerical damping(DAMP).
-        EQ.0.0: KCON is set equal to the max(E, current tangent to stress-strain curve) if TBID .ne.0. If TBID.eq.0, KCON is set equal to the maximum slope of the stress-strain curve.
+        If TBID  0, , the time step is based on a stiffness of
+        max(KCON,E,max.current slope of stress-strain curve).
+        The max.current slope is taken from the three principal directions.The tensile(negative) portion of stress - strain curves is included in this evaluation if TFLAG = 1.
         """ # nopep8
         return self._cards[0].get_value("kcon")
 
@@ -173,19 +176,20 @@ class Mat0831(KeywordBase):
         """Get or set the Failure option after cutoff stress is reached:
         EQ.0.0: tensile stress remains at cut-off value (default),
         EQ.1.0: tensile stress is reset to zero.
+        EQ.2.0: The element is eroded.
         """ # nopep8
         return self._cards[0].get_value("fail")
 
     @fail.setter
     def fail(self, value: float) -> None:
         """Set the fail property."""
-        if value not in [0.0, 1.0, None]:
-            raise Exception("""fail must be `None` or one of {0.0,1.0}.""")
+        if value not in [0.0, 1.0, 2.0, None]:
+            raise Exception("""fail must be `None` or one of {0.0,1.0,2.0}.""")
         self._cards[0].set_value("fail", value)
 
     @property
     def damp(self) -> typing.Optional[float]:
-        """Get or set the Viscous coefficient (0.05 < recommended value < 0.50) to model damping effects.
+        """Get or set the Viscous coefficient to model damping effects (0.05 < recommended value < 0.50; default is 0.05).
         """ # nopep8
         return self._cards[0].get_value("damp")
 
@@ -196,7 +200,10 @@ class Mat0831(KeywordBase):
 
     @property
     def tbid(self) -> typing.Optional[int]:
-        """Get or set the Table ID, see *DEFINE_TABLE, for nominal stress strain data as a function of strain rate. If the table ID is provided, cards 3 and 4 may be left blank and the fit will be done internally.
+        """Get or set the Table ID (see *DEFINE_TABLE) for nominal stress as a function of strain data at a given strain rate. If the table ID is provided,
+        Cards 3 and 4 may be left blank and the input curves will be used directly in the model. The Table ID can be positive or negative (see Remark 6 below).
+        If TBID < 0, enter |"TBID" | on the *DEFINE_TABLE keyword. For keyword option PATH_DEPENDENT, TBID defines a
+        3D table for nominal stress, giving it as a function of volumetric change 1-J (TABLE_3D), strain rate (TABLE), and nominal strain (CURVE).
         """ # nopep8
         return self._cards[0].get_value("tbid")
 
@@ -208,8 +215,8 @@ class Mat0831(KeywordBase):
     @property
     def bvflag(self) -> float:
         """Get or set the Toggle to turn bulk viscosity off or on (see Remark 1):
-        LT.1.0:	No bulk viscosity(recommended)
-        GE.1.0 : Bulk viscosity active.
+        LT.1.0: No bulk viscosity(recommended)
+        GE.1.0: Bulk viscosity active.
         """ # nopep8
         return self._cards[1].get_value("bvflag")
 
@@ -277,9 +284,12 @@ class Mat0831(KeywordBase):
 
     @property
     def sraf(self) -> float:
-        """Get or set the Strain rate averaging flag.
-        EQ.0.0: use weighted running average.
-        EQ.1.0: average the last twelve values.
+        """Get or set the Strain rate averaging flag (see Remark 5):
+        LT.0.0: Use exponential moving average.
+        EQ.0.0: Use weighted running average.
+        GT.0.0.AND.LE.0.9999: SRAF is a filter window for averaging strain rates, suppressing the time step dependence of the operation.
+        EQ.1.0: Average the last twelve values.
+        GE.1.0001: SRAF - 1.0 is a filter window for averaging strain rates, suppressing the time step dependence of the operation.
         """ # nopep8
         return self._cards[1].get_value("sraf")
 
@@ -338,7 +348,7 @@ class Mat0831(KeywordBase):
 
     @property
     def shape(self) -> typing.Optional[float]:
-        """Get or set the Shape factor for unloading.  Active for nonzero values of the hysteretic unloading factor HU. Values less than one reduces the energy dissipation and greater than one increases dissipation, see also Figure 57.1.
+        """Get or set the Shape factor for unloading. Active for nonzero values of the hysteretic unloading factor HU. Values less than one reduce energy dissipation and greater than one increase dissipation, see also Figure 57.1.
         """ # nopep8
         return self._cards[2].get_value("shape")
 
@@ -349,7 +359,7 @@ class Mat0831(KeywordBase):
 
     @property
     def betat(self) -> typing.Optional[float]:
-        """Get or set the Decay constant for damage in tension.  The damage decays after loading in ceases according to  .
+        """Get or set the Decay constant for damage in tension. The damage decays after loading in ceases according to  .
         """ # nopep8
         return self._cards[2].get_value("betat")
 
@@ -360,7 +370,7 @@ class Mat0831(KeywordBase):
 
     @property
     def betac(self) -> typing.Optional[float]:
-        """Get or set the Decay constant for damage in compression. .  The damage decays after loading in ceases according to  .
+        """Get or set the Decay constant for damage in compression. . The damage decays after loading in ceases according to  .
         """ # nopep8
         return self._cards[2].get_value("betac")
 
@@ -371,7 +381,7 @@ class Mat0831(KeywordBase):
 
     @property
     def expon(self) -> float:
-        """Get or set the Exponent for unloading.  Active for nonzero values of the hysteretic unloading factor HU.  Default is 1.0.
+        """Get or set the Exponent for unloading. Active for nonzero values of the hysteretic unloading factor HU. Default is 1.0.
         """ # nopep8
         return self._cards[3].get_value("expon")
 
@@ -383,8 +393,8 @@ class Mat0831(KeywordBase):
     @property
     def riuld(self) -> float:
         """Get or set the Flag for rate independent unloading, see Remark 6.
-        EQ.0.0:	off,
-        EQ.1.0:	on.
+        EQ.0.0: off,
+        EQ.1.0: on.
         """ # nopep8
         return self._cards[3].get_value("riuld")
 
@@ -394,6 +404,21 @@ class Mat0831(KeywordBase):
         if value not in [0.0, 1.0, None]:
             raise Exception("""riuld must be `None` or one of {0.0,1.0}.""")
         self._cards[3].set_value("riuld", value)
+
+    @property
+    def pdopt(self) -> float:
+        """Get or set the Flag for choice of third argument in TBID when PATH_DEPENDENT is used
+        EQ.0.0: Volumetric change 1 - J
+        EQ.1.0 : Maximum volumetric change max⁡(1 - J)
+        """ # nopep8
+        return self._cards[3].get_value("pdopt")
+
+    @pdopt.setter
+    def pdopt(self, value: float) -> None:
+        """Set the pdopt property."""
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""pdopt must be `None` or one of {0.0,1.0}.""")
+        self._cards[3].set_value("pdopt", value)
 
     @property
     def title(self) -> typing.Optional[str]:

@@ -171,23 +171,23 @@ class MatSeatbelt2D(KeywordBase):
 
     @property
     def cse(self) -> float:
-        """Get or set the Optional compressive stress elimination option which applies to shell elements only (default 0.0):
-        EQ.0.0:	eliminate compressive stresses in shell fabric
-        EQ.1.0:	don't eliminate compressive stresses.  This option should not be used if retractors and sliprings are present in the model.
-        EQ.2.0:	whether or not compressive stress is eliminated is decided by ls-dyna automatically, recommended for shell belt.
+        """Get or set the Compressive stress elimination option for nonzero FORM that applies to shell elements only (see Remark 6):
+        EQ.0.0: Don't eliminate compressive stresses in the shell fabric.
+        EQ.1.0 : Eliminate compressive stresses in the shell fabric.
+        Note that for FORM = 0, the solver automatically determines whether or not to eliminate the compressive stresses.
         """ # nopep8
         return self._cards[0].get_value("cse")
 
     @cse.setter
     def cse(self, value: float) -> None:
         """Set the cse property."""
-        if value not in [0.0, 1.0, 2.0, None]:
-            raise Exception("""cse must be `None` or one of {0.0,1.0,2.0}.""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""cse must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("cse", value)
 
     @property
     def damp(self) -> typing.Optional[float]:
-        """Get or set the Optional Rayleigh damping coefficient, which applies to shell elements only.  A coefficient value of 0.10 is the default corresponding to 10% of critical damping.  Sometimes smaller or larger values work better.
+        """Get or set the Optional Rayleigh damping coefficient, which applies to shell elements only. A coefficient value of 0.10 is the default corresponding to 10% of critical damping. Sometimes smaller or larger values work better.
         """ # nopep8
         return self._cards[0].get_value("damp")
 
@@ -286,7 +286,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @property
     def p1doff(self) -> typing.Optional[int]:
-        """Get or set the Part ID offset for internally created 1D, bar-type, belt parts for 2D seatbelt of this material, i.e., the IDs of newly created 1d belt parts will be P1DOFF+1, P1DOFF+2, ....  If zero, the maximum ID of user-defined parts is used as the part ID offset.
+        """Get or set the Part ID offset for internally created 1D, bar-type, belt parts for 2D seatbelt of this material, i.e., the IDs of newly created 1d belt parts will be P1DOFF+1, P1DOFF+2, .... If zero, the maximum ID of user-defined parts is used as the part ID offset.
         """ # nopep8
         return self._cards[2].get_value("p1doff")
 
@@ -297,7 +297,7 @@ class MatSeatbelt2D(KeywordBase):
 
     @property
     def form(self) -> int:
-        """Get or set the Formulation of the translated fabric material, see FORM of *MAT_FABRIC for details.  FORM=0 was used since R8 and non-zero FORM is available since r137418/dev
+        """Get or set the Formulation of the translated fabric material, see FORM of *MAT_FABRIC for details. FORM=0 was used since R8 and non-zero FORM is available since r137418/dev
         """ # nopep8
         return self._cards[2].get_value("form")
 
@@ -310,9 +310,9 @@ class MatSeatbelt2D(KeywordBase):
     def ecoat(self) -> typing.Optional[float]:
         """Get or set the Young's modulus of coat material for FORM=-14, see *MAT_FABRIC for details.
         The coat material is assumed to be elastic, therefore there is no need to define its yield stress, see SCOAT of *MAT_FABRIC.
-        EQ.0.0:	ECOAT is the Young's modulus determined by LS-DYNA.
-        GT.0.0:	ECOAT is the Young's modulus to be used for coat material.
-        LT.0.0:	|ECOAT| is the ratio of coat material's Young's modulus to that of the fabric shell which is determined by LS-DYNA.
+        EQ.0.0: ECOAT is the Young's modulus determined by LS-DYNA.
+        GT.0.0: ECOAT is the Young's modulus to be used for coat material.
+        LT.0.0: |ECOAT| is the ratio of coat material's Young's modulus to that of the fabric shell which is determined by LS-DYNA.
         """ # nopep8
         return self._cards[2].get_value("ecoat")
 
@@ -324,8 +324,8 @@ class MatSeatbelt2D(KeywordBase):
     @property
     def tcoat(self) -> typing.Optional[float]:
         """Get or set the Thickness of coat material for FORM=-14, see *MAT_FABRIC for details.
-        GT.0.0:	TCOAT is the thickness of the coat material.
-        LT.0.0:	|TCOAT| is the ratio of coat material's thickness to that of the fabric shell defined in the related *SECTION_SHELL.
+        GT.0.0: TCOAT is the thickness of the coat material.
+        LT.0.0: |TCOAT| is the ratio of coat material's thickness to that of the fabric shell defined in the related *SECTION_SHELL.
         """ # nopep8
         return self._cards[2].get_value("tcoat")
 
@@ -348,12 +348,12 @@ class MatSeatbelt2D(KeywordBase):
 
     @property
     def eb(self) -> float:
-        """Get or set the Young’s modulus along transverse direction, see *MAT_FABRIC for details.
-        EQ.0.0: The Young’s modulus along transverse direction is 10 % of
-        the Young’s determined by LS - DYNA based on the loading curve, LLCID.
-        LT.0.0 : | EB | is the ratio of Young’s modulus along transverse
-        direction to the Young’s determined by LS - DYNA based on the loading curve, LLCID.
-        GT.0.0 : EB is the Young's modulus along the transverse direction
+        """Get or set the Young's modulus along transverse direction, see *MAT_FABRIC for details.
+        EQ.0.0: The Young's modulus along transverse direction is 10 % of
+        the Young's determined by LS - DYNA based on the loading curve, LLCID.
+        LT.0.0: | EB | is the ratio of Young's modulus along transverse
+        direction to the Young's determined by LS - DYNA based on the loading curve, LLCID.
+        GT.0.0: EB is the Young's modulus along the transverse direction
         """ # nopep8
         return self._cards[2].get_value("eb")
 
@@ -387,7 +387,7 @@ class MatSeatbelt2D(KeywordBase):
     @property
     def gab(self) -> typing.Optional[float]:
         """Get or set the Shear modulus in the ab direction. Set to a very small value for an
-        isotropic elastic material, see * MAT_FABRIC.If defined to be zero, a
+        isotropic elastic material, see *MAT_FABRIC.If defined to be zero, a
         default value of EA / (2 * (1 + PRBA)) will be used where EA is the
         Young's modulus along the longitudinal direction and is set to 1 % of the
         Young's modulus determined by LS - DYNA according to the loading curve, LLCID

@@ -262,8 +262,8 @@ class MatPlasticityCompressionTensionEos(KeywordBase):
     @property
     def srflag(self) -> typing.Optional[float]:
         """Get or set the Formulation for rate effects:
-        EQ.0.0:  Total strain rate,
-        EQ.1.0:  Deviatoric strain rate
+        EQ.0.0: Total strain rate,
+        EQ.1.0: Deviatoric strain rate
         """ # nopep8
         return self._cards[1].get_value("srflag")
 
@@ -319,8 +319,8 @@ class MatPlasticityCompressionTensionEos(KeywordBase):
     @property
     def pcutf(self) -> typing.Optional[float]:
         """Get or set the Pressure cut-off flag.
-        EQ.0.0:  Inactive,
-        EQ.1.0:  Active
+        EQ.0.0: Inactive,
+        EQ.1.0: Active
         """ # nopep8
         return self._cards[2].get_value("pcutf")
 
@@ -353,7 +353,7 @@ class MatPlasticityCompressionTensionEos(KeywordBase):
 
     @property
     def k(self) -> typing.Optional[float]:
-        """Get or set the Optional bulk modulus for the viscoelastic material.  If nonzero a Kelvin type behavior will be obtained.  Generally, K is set to zero.
+        """Get or set the Optional bulk modulus for the viscoelastic material. If nonzero a Kelvin type behavior will be obtained. Generally, K is set to zero.
         """ # nopep8
         return self._cards[3].get_value("k")
 

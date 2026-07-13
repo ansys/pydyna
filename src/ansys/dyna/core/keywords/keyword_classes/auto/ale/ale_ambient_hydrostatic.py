@@ -81,7 +81,7 @@ class AleAmbientHydrostatic(KeywordBase):
 
     @property
     def stype(self) -> int:
-        """Get or set the Set type for the SID above:  EQ.0:  SID is a part set ID ; EQ.1:  SID is a part ID.
+        """Get or set the Set type for the SID above: EQ.0: SID is a part set ID ; EQ.1: SID is a part ID.
         EQ.2:Solid set ID (SSID).
         """ # nopep8
         return self._cards[0].get_value("stype")
@@ -117,7 +117,7 @@ class AleAmbientHydrostatic(KeywordBase):
 
     @property
     def pbase(self) -> float:
-        """Get or set the The “base” pressure of each fluid layer.  This is the ambient pressure at the top of each ALE material (fluid) layer to be initialized.  Each layer must be represented by one ALE multi-material group ID (AMMG).
+        """Get or set the The base pressure of each fluid layer.  This is the ambient pressure at the top of each ALE material (fluid) layer to be initialized.  Each layer must be represented by one ALE multi-material group ID (AMMG).
         """ # nopep8
         return self._cards[0].get_value("pbase")
 

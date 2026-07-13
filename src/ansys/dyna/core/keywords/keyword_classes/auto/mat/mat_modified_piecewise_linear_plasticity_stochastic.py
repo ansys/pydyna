@@ -193,7 +193,7 @@ class MatModifiedPiecewiseLinearPlasticityStochastic(KeywordBase):
         """Get or set the Failure flag:
         LT.0.0: User defined failure subroutine is called to determine failure
         EQ.0.0: Failure is not considered. Recommended if failure is not of interest.
-        GT.0.0: Plastic strain to failure. When the plastic strain reaches this value, the element is deleted from the calculation.
+        GT.0.0: Plastic strain to failure.The element is deleted from the calculation when the plastic strain reaches this value.
         """ # nopep8
         return self._cards[0].get_value("fail")
 
@@ -238,8 +238,9 @@ class MatModifiedPiecewiseLinearPlasticityStochastic(KeywordBase):
     @property
     def lcss(self) -> int:
         """Get or set the Load curve ID or Table ID.
-        Load curve ID defining effective stress versus effective plastic strain. If defined EPS1-EPS8 and ES1-ES8 are ignored.
-        The table ID defines for each strain rate value a load curve ID giving the stress versus effective plastic strain for that rate. The stress versus effective plastic strain curve for the lowest value of strain rate is used if the strain rate falls below the minmimum value. Likewise, the stress versus effective plastic strain curve for the highest value of strain rate is used if the strain rate exceeds the maximum value. If defined C, P,curve ID, LCSR, EPS1-EPS8 and ES1-ES8 are ignored.
+        Load Curve.  When LCSS is a load curve ID, it defines effective stress as a function of effective plastic strain. If defined EPS1 - EPS8 and ES1 - ES8 are ignored.
+        Tabular Data.The table ID defines for each strain rate value a load curve ID giving the stress versus effective plastic strain for that rate, See Figure Error!Reference source not found..When the strain rate falls below the minimum value, the stress versus effective plastic strain curve for the lowest value of strain rate is used.Likewise, when the strain rate exceeds the maximum value, the stress versus effective plastic strain curve for the highest value of strain rate is used.Fields C, P, LCSR, EPS1 - EPS8, and ES1 - ES8 are ignored if a Table ID is defined.Linear interpolation between the discrete strain rates is used by default; logarithmic interpolation is used when the LOG_INTERPOLATION option is invoked.
+        Logarithmically Defined Tables.An alternative way to invoke logarithmic interpolation between discrete strain rates is described as follows.If the first value in the table is negative, LS - DYNA assumes that all the table values represent the natural logarithm of a strain rate.Since the tables are internally discretized to equally space the table values, it makes good sense from an accuracy standpoint that the table values represent the natural log of strain rate when the lowest strain rate and highest strain rate differ by several orders of magnitude.There is some additional computational cost associated with invoking logarithmic interpolation.
         """ # nopep8
         return self._cards[1].get_value("lcss")
 
@@ -250,7 +251,7 @@ class MatModifiedPiecewiseLinearPlasticityStochastic(KeywordBase):
 
     @property
     def lcsr(self) -> int:
-        """Get or set the Load curve ID defining strain rate scaling effect on yield stress.
+        """Get or set the Load curve ID defining the strain rate scaling effect on yield stress.
         """ # nopep8
         return self._cards[1].get_value("lcsr")
 
@@ -274,7 +275,9 @@ class MatModifiedPiecewiseLinearPlasticityStochastic(KeywordBase):
 
     @property
     def epsthin(self) -> typing.Optional[float]:
-        """Get or set the Thinning plastic strain at failure. This number should be given as positive number
+        """Get or set the Thinning plastic strain at failure.To specify the thinning strain to failure as a function of plastic strain rate, see LCTSRF.
+        GT.0.0: Total thinning strain(as in ISTUPD = 1; see * CONTROL_SHELL)
+        LT.0.0 : Plastic thinning strain | EPSTHIN | (as in ISTUPD = 4)
         """ # nopep8
         return self._cards[1].get_value("epsthin")
 
@@ -285,7 +288,7 @@ class MatModifiedPiecewiseLinearPlasticityStochastic(KeywordBase):
 
     @property
     def epsmaj(self) -> typing.Optional[float]:
-        """Get or set the Major in plane strain at failure.
+        """Get or set the Major in plane strain at failure for shells (or) major principal strain at failure for solids (see Remark 1).LT.0: EPSMAJ = | EPSMAJ | and filtering is activated.The last twelve values of the major strain are stored at each integration point and the average value is used to determine failure.
         """ # nopep8
         return self._cards[1].get_value("epsmaj")
 
@@ -296,7 +299,7 @@ class MatModifiedPiecewiseLinearPlasticityStochastic(KeywordBase):
 
     @property
     def numint(self) -> float:
-        """Get or set the No. of through thickness integration points which must fail before the element is deleted.(if zero, all points must fail)
+        """Get or set the Number of integration points that must fail before the element is deleted. (If zero, all points must fail.)  For fully integrated shell formulations, each of the 4 x NIP integration points is counted individually in determining a total for failed integration points. NIP is the number of through-thickness integration points. As NUMINT approaches the total number of integration points (NIP for under-integrated shells, 4 x NIP for fully integrated shells), the chance of instability increases.LT.0.0: | NUMINT | is the percentage of integration points / layers which must fail before the shell element fails.For fully integrated shells, a methodology is used where a layer fails if one integration point failsand then the given percentage of layers must fail before the element fails.Only available for shells.
         """ # nopep8
         return self._cards[1].get_value("numint")
 

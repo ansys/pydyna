@@ -112,7 +112,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @property
     def prtype(self) -> int:
-        """Get or set the Reference system type :
+        """Get or set the Reference system type:
         EQ.0: Eulerian,
         EQ.1: Lagrangian,
         EQ.2: Normal ALE mesh smoothing,
@@ -139,12 +139,12 @@ class AleReferenceSystemGroup(KeywordBase):
     @property
     def prid(self) -> typing.Optional[int]:
         """Get or set the A parameter giving additional information depending on the reference system (PRTYPE) choice:
-        PRTYPE.EQ.3:	PRID defines a load curve group ID specifying an * ALE_‌REFERENCE_‌SYSTEM_‌CURVE card for mesh translation.This defines up to 12 curves which prescribe the motion of the system.
-        PRTYPE.EQ.4 : PRID defines a node set ID(*SET_‌NODE), for which a mass average velocity is computed.This velocity controls the mesh motion.
-        PRTYPE.EQ.5 : PRID defines a node group ID specifying an * ALE_‌REFERENCE_‌SYSTEM_‌NODE card, via which, three nodes forming a local coordinate system are defined.
-        PRTYPE.EQ.6 : PRID defines a switch list ID specifying an* ALE_‌REFERENCE_‌SYSTEM_‌SWITCH card.This defines the switch timesand the reference system choices for each time interval between the switches.
-        PRTYPE.EQ.7 : PRID defines a node group ID specifying an * ALE_‌REFERENCE_‌SYSTEM_‌NODE card.Up to 12 nodes in space forming a region to be enveloped by the ALE mesh are defined.
-        PRTYPE.EQ.9 : PRID defines a Lagrangian part set ID(PSID) defining the Lagrangian part(s) whose range of motion is to be enveloped by the ALE mesh(es).This is useful for airbag modeling.
+        PRTYPE.EQ.3: PRID defines a load curve group ID specifying an *ALE_REFERENCE_SYSTEM_CURVE card for mesh translation.This defines up to 12 curves which prescribe the motion of the system.
+        PRTYPE.EQ.4: PRID defines a node set ID(*SET_NODE), for which a mass average velocity is computed.This velocity controls the mesh motion.
+        PRTYPE.EQ.5: PRID defines a node group ID specifying an *ALE_REFERENCE_SYSTEM_NODE card, via which, three nodes forming a local coordinate system are defined.
+        PRTYPE.EQ.6: PRID defines a switch list ID specifying an *ALE_REFERENCE_SYSTEM_SWITCH card.This defines the switch timesand the reference system choices for each time interval between the switches.
+        PRTYPE.EQ.7: PRID defines a node group ID specifying an *ALE_REFERENCE_SYSTEM_NODE card.Up to 12 nodes in space forming a region to be enveloped by the ALE mesh are defined.
+        PRTYPE.EQ.9: PRID defines a Lagrangian part set ID(PSID) defining the Lagrangian part(s) whose range of motion is to be enveloped by the ALE mesh(es).This is useful for airbag modeling.
         """ # nopep8
         return self._cards[0].get_value("prid")
 
@@ -155,7 +155,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @property
     def bctran(self) -> int:
-        """Get or set the For PRTYPE 4 & 5:  BCTRAN is a translational constraint (remark 3).
+        """Get or set the For PRTYPE 4 & 5: BCTRAN is a translational constraint (remark 3).
         EQ.0: no constraints,
         EQ.1: constrained x translation,
         EQ.2: constrained y translation,
@@ -177,7 +177,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @property
     def bcexp(self) -> int:
-        """Get or set the For PRTYPE= 4 & 7:  BCTRAN is an expansion constraint (remark 3).
+        """Get or set the For PRTYPE= 4 & 7: BCTRAN is an expansion constraint (remark 3).
         EQ.0: no constraints,
         EQ.1: constrained x expansion,
         EQ.2: constrained y expansion,
@@ -199,7 +199,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @property
     def bcrot(self) -> int:
-        """Get or set the For PRTYPE= 4:  BCROT is a rotational constraint (remark 3).
+        """Get or set the For PRTYPE= 4: BCROT is a rotational constraint (remark 3).
         EQ.0: no constraints,
         EQ.1: constrained x rotation,
         EQ.2: constrained y rotation,
@@ -222,8 +222,8 @@ class AleReferenceSystemGroup(KeywordBase):
     @property
     def icoord(self) -> int:
         """Get or set the PRTYPE=4: ICR is a center of mesh expansion and rotation flag,
-        EQ.0:  The center is at center of gravity of the ALE mesh.
-        EQ.1:  The center is at (XC, YC, ZC), just a point in space (it does not have to be a defined node)
+        EQ.0: The center is at center of gravity of the ALE mesh.
+        EQ.1: The center is at (XC, YC, ZC), just a point in space (it does not have to be a defined node)
 
         """ # nopep8
         return self._cards[0].get_value("icoord")
@@ -265,7 +265,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @property
     def prtype(self) -> int:
-        """Get or set the Reference system type :
+        """Get or set the Reference system type:
         EQ.0: Eulerian,
         EQ.1: Lagrangian,
         EQ.2: Normal ALE mesh smoothing,
@@ -291,7 +291,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @property
     def prid(self) -> typing.Optional[int]:
-        """Get or set the PRTYPE= 3:  PRID defines a load curve group ID specifying an *ALE_REFERENCE_SYSTEM_CURVE card for mesh translation.  This defines up to 12 curves which prescribe the motion of the system.
+        """Get or set the PRTYPE= 3: PRID defines a load curve group ID specifying an *ALE_REFERENCE_SYSTEM_CURVE card for mesh translation.  This defines up to 12 curves which prescribe the motion of the system.
         """ # nopep8
         return self._cards[1].get_value("prid")
 
@@ -302,7 +302,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @property
     def bctran(self) -> int:
-        """Get or set the For PRTYPE 4 & 5:  BCTRAN is a translational constraint (remark 3).
+        """Get or set the For PRTYPE 4 & 5: BCTRAN is a translational constraint (remark 3).
         EQ.0: no constraints,
         EQ.1: constrained x translation,
         EQ.2: constrained y translation,
@@ -324,7 +324,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @property
     def bcexp(self) -> int:
-        """Get or set the For PRTYPE= 4 & 7:  BCTRAN is an expansion constraint (remark 3).
+        """Get or set the For PRTYPE= 4 & 7: BCTRAN is an expansion constraint (remark 3).
         EQ.0: no constraints,
         EQ.1: constrained x expansion,
         EQ.2: constrained y expansion,
@@ -346,7 +346,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @property
     def bcrot(self) -> int:
-        """Get or set the For PRTYPE= 4:  BCROT is a rotational constraint (remark 3).
+        """Get or set the For PRTYPE= 4: BCROT is a rotational constraint (remark 3).
         EQ.0: no constraints,
         EQ.1: constrained x rotation,
         EQ.2: constrained y rotation,
@@ -369,8 +369,8 @@ class AleReferenceSystemGroup(KeywordBase):
     @property
     def icoord(self) -> int:
         """Get or set the PRTYPE=4: ICR is a center of mesh expansion and rotation flag,
-        EQ.0:  The center is at center of gravity of the ALE mesh.
-        EQ.1:  The center is at (XC, YC, ZC), just a point in space (it does not have to be a defined node)
+        EQ.0: The center is at center of gravity of the ALE mesh.
+        EQ.1: The center is at (XC, YC, ZC), just a point in space (it does not have to be a defined node)
 
         """ # nopep8
         return self._cards[1].get_value("icoord")
@@ -412,7 +412,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @property
     def prtype(self) -> int:
-        """Get or set the Reference system type :
+        """Get or set the Reference system type:
         EQ.0: Eulerian,
         EQ.1: Lagrangian,
         EQ.2: Normal ALE mesh smoothing,
@@ -449,7 +449,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @property
     def bctran(self) -> int:
-        """Get or set the For PRTYPE 4 & 5:  BCTRAN is a translational constraint (remark 3).
+        """Get or set the For PRTYPE 4 & 5: BCTRAN is a translational constraint (remark 3).
         EQ.0: no constraints,
         EQ.1: constrained x translation,
         EQ.2: constrained y translation,
@@ -471,7 +471,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @property
     def bcexp(self) -> int:
-        """Get or set the For PRTYPE= 4 & 7:  BCTRAN is an expansion constraint (remark 3).
+        """Get or set the For PRTYPE= 4 & 7: BCTRAN is an expansion constraint (remark 3).
         EQ.0: no constraints,
         EQ.1: constrained x expansion,
         EQ.2: constrained y expansion,
@@ -493,7 +493,7 @@ class AleReferenceSystemGroup(KeywordBase):
 
     @property
     def bcrot(self) -> int:
-        """Get or set the For PRTYPE= 4:  BCROT is a rotational constraint (remark 3).
+        """Get or set the For PRTYPE= 4: BCROT is a rotational constraint (remark 3).
         EQ.0: no constraints,
         EQ.1: constrained x rotation,
         EQ.2: constrained y rotation,
@@ -516,8 +516,8 @@ class AleReferenceSystemGroup(KeywordBase):
     @property
     def icoord(self) -> int:
         """Get or set the PRTYPE=4: ICR is a center of mesh expansion and rotation flag,
-        EQ.0:  The center is at center of gravity of the ALE mesh.
-        EQ.1:  The center is at (XC, YC, ZC), just a point in space (it does not have to be a defined node)
+        EQ.0: The center is at center of gravity of the ALE mesh.
+        EQ.1: The center is at (XC, YC, ZC), just a point in space (it does not have to be a defined node)
 
         """ # nopep8
         return self._cards[2].get_value("icoord")

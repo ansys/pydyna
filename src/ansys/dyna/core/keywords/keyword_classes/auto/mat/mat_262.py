@@ -173,7 +173,7 @@ class Mat262(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.
+        """Get or set the Material identification. A unique number or label must be specified (see *PART).
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -195,7 +195,11 @@ class Mat262(KeywordBase):
 
     @property
     def ea(self) -> typing.Optional[float]:
-        """Get or set the Ea, Young's modulus in a-direction (longitudinal).
+        """Get or set the GT.0.0: E_a, Young's modulus - longitudinal direction
+        LT.0.0: Load curve or table ID = (-EA).It is available for shells only.
+        Load Curve.When - EA refers to a load curve ID, it is taken as defining the uniaxial elastic stress as a function of strain behavior in the longitudinal direction.Negative data points correspond to compressionand positive values to tension.
+        Tabular Data.When - EA refers to a table ID, it defines a load curve for each strain rate value.The load curves give the uniaxial elastic stress as a function of strain behavior in the longitudinal direction.
+        Logarithmically Defined Tables.If the first uniaxial elastic stress as a function of strain curve in the table corresponds to a negative strain rate, LS - DYNA assumes that the natural logarithm of the strain rate value is used for all stress - strain curves.
         """ # nopep8
         return self._cards[0].get_value("ea")
 
@@ -206,7 +210,11 @@ class Mat262(KeywordBase):
 
     @property
     def eb(self) -> typing.Optional[float]:
-        """Get or set the Eb, Young's modulus in b-direction (transverse).
+        """Get or set the GT.0.0: E_b, Young's modulus - transverse direction
+        LT.0.0: Load Curve ID or Table ID = (-EB). (shells only).
+        Load Curve.When - EB refers to a load curve ID, it is taken as defining the uniaxial elastic stress as a function of strain behavior in the transverse direction.Negative data points correspond to compression,and positive values to tension.
+        Tabular Data.When - EB corresponds to a table ID, it specifies a load curve for each strain rate value.The load curves give the uniaxial elastic stress as a function of strain behavior in the transverse direction.
+        Logarithmically Defined Tables.If the first uniaxial elastic stress as a function of strain curve in the table corresponds to a negative strain rate, LS - DYNA assumes that the natural logarithm of the strain rate value is used for all stress - strain curves.
         """ # nopep8
         return self._cards[0].get_value("eb")
 
@@ -261,7 +269,11 @@ class Mat262(KeywordBase):
 
     @property
     def gab(self) -> typing.Optional[float]:
-        """Get or set the Gab, shear modulus ab.
+        """Get or set the GT.0.0: G_ab, shear modulus in the ab-direction
+        LT.0.0: Load Curve ID or Table ID = (-GAB)
+        Load Curve.When - GAB refers to a load curve ID, it is taken as defining the elastic shear stress as a function of shear strain behavior in the ab - direction.
+        Tabular Data.When - GAB corresponds to a table ID, it defines a load curve for each strain rate value.The load curves give the elastic shear stress as a function of shear strain behavior in the ab - direction.
+        Logarithmically Defined Tables.If the first elastic shear stress as a function of shear strain curve in the table corresponds to a negative strain rate, LS - DYNA assumes that the natural logarithm of the strain rate value is used for all shear stress - shear strain curves.
         """ # nopep8
         return self._cards[1].get_value("gab")
 
@@ -303,7 +315,7 @@ class Mat262(KeywordBase):
         This option is for solid elements only.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
         EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         EQ.4.0: locally orthotropic in cylindrical coordinate system with
         the material axes determined by a vector v, and an originating point, p, which define the centerline axis. This option is for solid elements only
         LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
@@ -335,7 +347,7 @@ class Mat262(KeywordBase):
     def dkf(self) -> float:
         """Get or set the Flag to control failure of an integration point based on longitudinal (fiber) compressive failure:
         EQ.0.0: integration point fails if any damage variable reaches 1.0.
-        EQ.1.0: no failure of integration point due to fiber compressive failure	(dkink(i)=1.0).
+        EQ.1.0: no failure of integration point due to fiber compressive failure (dkink(i)=1.0).
         """ # nopep8
         return self._cards[1].get_value("dkf")
 
@@ -538,9 +550,9 @@ class Mat262(KeywordBase):
     @property
     def msg(self) -> typing.Optional[float]:
         """Get or set the Flag to control the output of warning messages:
-        EQ.0:	Nnly one warning message will be written per part.
-        GT.0 : All warnings are written.
-        LT.0 : No warnings are written.
+        EQ.0: Nnly one warning message will be written per part.
+        GT.0: All warnings are written.
+        LT.0: No warnings are written.
         """ # nopep8
         return self._cards[3].get_value("msg")
 
@@ -552,10 +564,8 @@ class Mat262(KeywordBase):
     @property
     def gxc(self) -> typing.Optional[float]:
         """Get or set the Fracture toughness for longitudinal (fiber) compressive failure mode.
-        GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-GXC) which defines the fracture
-        toughness for fiber compressive failure mode as a
-        function of characteristic element length. No further regularization.
+        GT.0.0: The given value is regularized with the characteristic element length.
+        LT.0.0: Load curve or table ID = -GXC.If referring to a load curve, the load curve gives the fracture toughness for fiber compressive failure mode as a function of characteristic element length.If referring to a table, each strain rate value indexes a load curve that defines the fracture toughness for fiber compressive failure mode as a function of characteristic element length.In either case, no further regularization occurs.
         """ # nopep8
         return self._cards[4].get_value("gxc")
 
@@ -566,11 +576,9 @@ class Mat262(KeywordBase):
 
     @property
     def gxt(self) -> typing.Optional[float]:
-        """Get or set the Fracture toughness for longitudinal (fiber) tensile failure mode.
-        GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-GXT) which defines the fracture
-        toughness for fiber tensile failure mode as a function of
-        characteristic element length. No further regularization.
+        """Get or set the Fracture toughness for longitudinal (fiber) tensile failure mode:
+        GT.0.0: The given value is regularized with the characteristic element length.
+        LT.0.0: Load curve or table ID = -GXT.If referring to a load curve, the load curve gives the fracture toughness for fiber tensile failure mode as a function of characteristic element length.If referring to a table, each strain rate value indexes a load curve that defines the fracture toughness for fiber tensile failure mode as a function of characteristic element length.In either case, no further regularization occurs.
         """ # nopep8
         return self._cards[4].get_value("gxt")
 
@@ -582,10 +590,8 @@ class Mat262(KeywordBase):
     @property
     def gyc(self) -> typing.Optional[float]:
         """Get or set the Fracture toughness for transverse compressive failure mode.
-        GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-GYC)) which defines the fracture
-        toughness for intralaminar matrix tensile failure as a
-        function of characteristic element length. No further regularization.
+        GT.0.0: The given value is regularized with the characteristic element length.
+        LT.0.0: Load curve or table ID = -GYC.If referring to a load curve, the load curve gives the fracture toughness for transverse compressive failure mode as a function of characteristic element length.If referring to a table, each strain rate value indexes a load curve that defines the fracture toughness for transverse compressive failure mode as a function of characteristic element length.In either case, no further regularization occurs.
         """ # nopep8
         return self._cards[4].get_value("gyc")
 
@@ -597,10 +603,8 @@ class Mat262(KeywordBase):
     @property
     def gyt(self) -> typing.Optional[float]:
         """Get or set the Fracture toughness for transverse tensile failure mode.
-        GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-GYT)) which defines the fracture
-        toughness for intralaminar matrix transverse shear failure
-        as a function of characteristic element length. No further      regularization.
+        GT.0.0: The given value is regularized with the characteristic element length.
+        LT.0.0: Load curve or table ID = -GYT.If referring to a load curve,t eh load curve defines the fracture toughness for transverse tensile failure mode as a function of characteristic element length.If referring to a table, each strain rate value indexes a load curve that defines the fracture toughness for transverse tensile failure mode as a function of characteristic element length.In either case, no further regularization occurs.
         """ # nopep8
         return self._cards[4].get_value("gyt")
 
@@ -612,10 +616,8 @@ class Mat262(KeywordBase):
     @property
     def gsl(self) -> typing.Optional[float]:
         """Get or set the Fracture toughness for in-plane shear failure mode.
-        GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-GSL)) which defines the fracture
-        toughness for intralaminar matrix longitudinal shear
-        failure as a function of characteristic element length. No further regularization.
+        GT.0.0: The given value is regularized with the characteristic element length.
+        LT.0.0: Load curve or table ID = -GSL.If referring to a load curve, the load curve gives the fracture toughness for in - plane shear failure mode as a function of characteristic element length.If referring to a table, each strain rate value indexes a load curve that defines the fracture toughness for in - plane shear failure mode as a function of characteristic element length.In either case, no further regularization occurs.
         """ # nopep8
         return self._cards[4].get_value("gsl")
 
@@ -626,12 +628,9 @@ class Mat262(KeywordBase):
 
     @property
     def gxco(self) -> typing.Optional[float]:
-        """Get or set the Fracture toughness for longitudinal (fiber) compressive failure mode
-        to define bi-linear damage evolution..
-        GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-GXCO)) which defines the fracture
-        toughness for intralaminar matrix longitudinal shear
-        failure as a function of characteristic element length. No further regularization.
+        """Get or set the Fracture toughness for longitudinal (fiber) compressive failure mode to define bilinear damage evolution.
+        GT.0.0: The given value is regularized with the characteristic element length.
+        LT.0.0: Load curve or table ID = -GXCO.If referring to a load curve, the load curve gives the fracture toughness for fiber compressive failure mode to define bilinear damage evolution as a function of characteristic element length.If referring to a table, each strain rate value indexes a load curve that defines the fracture toughness for fiber compressive failure mode to define bilinear damage evolution as a function of characteristic element length.In either case, no further regularization occurs.
         """ # nopep8
         return self._cards[4].get_value("gxco")
 
@@ -642,12 +641,9 @@ class Mat262(KeywordBase):
 
     @property
     def gxto(self) -> typing.Optional[float]:
-        """Get or set the Fracture toughness for longitudinal (fiber) tensile failure mode to
-        define bi-linear damage evolution.
-        GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-GXTO)) which defines the fracture
-        toughness for intralaminar matrix longitudinal shear
-        failure as a function of characteristic element length. No further regularization.
+        """Get or set the Fracture toughness for longitudinal (fiber) tensile failure mode to define bilinear damage evolution.
+        GT.0.0: The given value is regularized with the characteristic element length.
+        LT.0.0: Load curve or table ID = -GXTO.If referring to a load curve, the load curve defines the fracture toughness for fiber tensile failure mode to define bilinear damage evolution as a function of characteristic element length.If a table, each strain rate value indexes a load curve that defines the fracture toughness for fiber tensile failure mode to define bilinear damage evolution as a function of characteristic element length.In either case, no further regularization occurs.
         """ # nopep8
         return self._cards[4].get_value("gxto")
 
@@ -659,6 +655,8 @@ class Mat262(KeywordBase):
     @property
     def xc(self) -> typing.Optional[float]:
         """Get or set the Longitudinal compressive strength, a-axis (positive value).
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-XC) which defines the longitudinal compressive strength as a function of longitudinal strain rate(ε ̇_aa)
         """ # nopep8
         return self._cards[5].get_value("xc")
 
@@ -670,6 +668,8 @@ class Mat262(KeywordBase):
     @property
     def xt(self) -> typing.Optional[float]:
         """Get or set the Longitudinal tensile strength, a-axis.
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-XT) which defines the longitudinal tensile strength as a function of longitudinal strain rate(ε ̇_aa)
         """ # nopep8
         return self._cards[5].get_value("xt")
 
@@ -681,6 +681,8 @@ class Mat262(KeywordBase):
     @property
     def yc(self) -> typing.Optional[float]:
         """Get or set the Transverse compressive strength, b-axis (positive value).
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-YC) which defines the transverse compressive strength as a function of transverse strain rate(ε ̇_bb)
         """ # nopep8
         return self._cards[5].get_value("yc")
 
@@ -692,6 +694,8 @@ class Mat262(KeywordBase):
     @property
     def yt(self) -> typing.Optional[float]:
         """Get or set the Transverse tensile strength, b-axis.
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-YT) which defines the transverse tensile strength as a function of transverse strain rate(ε ̇_bb)
         """ # nopep8
         return self._cards[5].get_value("yt")
 
@@ -703,6 +707,8 @@ class Mat262(KeywordBase):
     @property
     def sl(self) -> typing.Optional[float]:
         """Get or set the Shear strength, ab plane.
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-SL) which defines the longitudinal shear strength as a function of in - plane shear strain rate(ε ̇_ab)
         """ # nopep8
         return self._cards[5].get_value("sl")
 
@@ -714,6 +720,8 @@ class Mat262(KeywordBase):
     @property
     def xco(self) -> typing.Optional[float]:
         """Get or set the Longitudinal compressive strength at inflection point (positive value).
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-XCO) which defines the longitudinal compressive strength at inflection point as a function of longitudinal strain rate(ε ̇_aa).
         """ # nopep8
         return self._cards[5].get_value("xco")
 
@@ -725,6 +733,8 @@ class Mat262(KeywordBase):
     @property
     def xto(self) -> typing.Optional[float]:
         """Get or set the Longitudinal tensile strength at inflection point.
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-XTO) which defines the longitudinal tensile strength at inflection point as a function of longitudinal strain rate(ε ̇_aa)
         """ # nopep8
         return self._cards[5].get_value("xto")
 
@@ -747,6 +757,8 @@ class Mat262(KeywordBase):
     @property
     def sigy(self) -> typing.Optional[float]:
         """Get or set the In-plane shear yield stress.
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-SIGY) which defines the in - plane shear yield stress as a function of in - plane shear strain rate(ε ̇_ab)
         """ # nopep8
         return self._cards[6].get_value("sigy")
 
@@ -770,9 +782,9 @@ class Mat262(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Hardening parameter for in-plane shear plasticity (0.0 <= BETA <=	1.0).
+        """Get or set the Hardening parameter for in-plane shear plasticity (0.0 <= BETA <= 1.0).
         EQ.0.0: Pure kinematic hardening
-        EQ.1.0: Pure isotropic hardening	0.0<BETA<1.0: mixed hardening.
+        EQ.1.0: Pure isotropic hardening 0.0<BETA<1.0: mixed hardening.
         """ # nopep8
         return self._cards[6].get_value("beta")
 
@@ -813,7 +825,7 @@ class Mat262(KeywordBase):
 
     @property
     def soft(self) -> float:
-        """Get or set the Softening reduction factor for material strength in crashfront	elements (default = 1.0).
+        """Get or set the Softening reduction factor for material strength in crashfront elements (default = 1.0). If SOFTC is defined as well, SOFTC is used to reduce the longitudinal compressive strength XC
         """ # nopep8
         return self._cards[6].get_value("soft")
 
@@ -825,9 +837,9 @@ class Mat262(KeywordBase):
     @property
     def dt(self) -> typing.Optional[float]:
         """Get or set the Strain rate averaging option:
-        EQ.0.0:	strain rate is evaluated using a running average.
-        LT.0.0 : strain rate is evaluated using average of last 11 time steps.
-        GT.0.0 : strain rate is averaged over the last DT time units.
+        EQ.0.0: strain rate is evaluated using a running average.
+        LT.0.0: strain rate is evaluated using average of last 11 time steps.
+        GT.0.0: strain rate is averaged over the last DT time units.
         """ # nopep8
         return self._cards[6].get_value("dt")
 
@@ -860,7 +872,7 @@ class Mat262(KeywordBase):
 
     @property
     def tsmd23(self) -> typing.Optional[float]:
-        """Get or set the Transverse shear maximum damage; default‌ = 0.90 (23-plane).
+        """Get or set the Transverse shear maximum damage; default = 0.90 (23-plane).
         """ # nopep8
         return self._cards[7].get_value("tsmd23")
 
@@ -893,7 +905,7 @@ class Mat262(KeywordBase):
 
     @property
     def tsmd31(self) -> typing.Optional[float]:
-        """Get or set the Transverse shear maximum damage; default‌ = 0.90 (31-plane)
+        """Get or set the Transverse shear maximum damage; default = 0.90 (31-plane)
         """ # nopep8
         return self._cards[7].get_value("tsmd31")
 

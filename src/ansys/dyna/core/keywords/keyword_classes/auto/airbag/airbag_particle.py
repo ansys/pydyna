@@ -50,7 +50,7 @@ _AIRBAGPARTICLE_CARD1 = (
     FieldSchema("unit", int, 10, 10, 0),
     FieldSchema("visflg", int, 20, 10, 1),
     FieldSchema("tatm", float, 30, 10, 293.0),
-    FieldSchema("patm", float, 40, 10, 1.0),
+    FieldSchema("patm", float, 40, 10, None),
     FieldSchema("nvent", int, 50, 10, 0),
     FieldSchema("tend", float, 60, 10, 10000000000.0),
     FieldSchema("tsw", float, 70, 10, 10000000000.0),
@@ -70,6 +70,12 @@ _AIRBAGPARTICLE_CARD2 = (
 _AIRBAGPARTICLE_CARD3 = (
     FieldSchema("sfiair4", float, 1, 9, 1.0),
     FieldSchema("idfric", int, 10, 10, 0),
+    FieldSchema("iairstat", int, 20, 10, 0),
+    FieldSchema("dpwr", float, 30, 10, 1.0),
+    FieldSchema("vndamp", float, 40, 10, 0.0),
+    FieldSchema("jetlen", float, 50, 10, 0.0),
+    FieldSchema("jetend", float, 60, 10, 0.0),
+    FieldSchema("shloff", int, 70, 10, 0),
 )
 
 _AIRBAGPARTICLE_CARD4 = (
@@ -103,6 +109,10 @@ _AIRBAGPARTICLE_CARD8 = (
     FieldSchema("nprlx", str, 70, 10, "0"),
 )
 
+_AIRBAGPARTICLE_CARD11 = (
+    FieldSchema("xoff", float, 0, 10, 0.0),
+)
+
 class AirbagParticle(KeywordBase):
     """DYNA AIRBAG_PARTICLE keyword"""
 
@@ -113,7 +123,6 @@ class AirbagParticle(KeywordBase):
         "nid2": LinkType.NODE,
         "nid3": LinkType.NODE,
         "nidi": LinkType.NODE,
-        "hconv": LinkType.DEFINE_CURVE,
         "lctc23": LinkType.DEFINE_CURVE,
         "lcpc23": LinkType.DEFINE_CURVE,
         "lcmi": LinkType.DEFINE_CURVE,
@@ -225,6 +234,10 @@ class AirbagParticle(KeywordBase):
                 name="orifices",
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _AIRBAGPARTICLE_CARD11,
+                **kwargs,
+            ),
         ]
     @property
     def sid1(self) -> typing.Optional[int]:
@@ -268,7 +281,7 @@ class AirbagParticle(KeywordBase):
         """Get or set the Set type:
         EQ.0: Part
         EQ.1: Part set.
-        EQ.2:	Number of parts to read (Not recommended for general use)
+        EQ.2: Number of parts to read (Not recommended for general use)
         """ # nopep8
         return self._cards[0].get_value("stype2")
 
@@ -281,16 +294,17 @@ class AirbagParticle(KeywordBase):
 
     @property
     def block(self) -> typing.Optional[int]:
-        """Get or set the Blocking.  Block must be set to a two-digit number "BLOCK"="M"x10+"N",
-        The 10’s digit controls the treatment of particles that escape due to deleted elements (particles are always tracked and marked).
-        M.EQ.0:	Active particle method which causes particles to be put back into the bag.
-        M.EQ.1:	Particles are leaked through vents. See Remark 3.
-        The 1’s digit controls the treatment of leakage.
-        N.EQ.0:	Always consider porosity leakage without considering blockage due to contact.
-        N.EQ.1:	Check if airbag node is in contact or not. If yes, 1/4 (quad) or 1/3 (tri) of the segment surface will not have porosity leakage due to contact.
-        N.EQ.2:	Same as 1 but no blockage for external vents
-        N.EQ.3:	Same as 1 but no blockage for internal vents
-        N.EQ.4:	Same as 1 but no blockage for all vents.
+        """Get or set the Blocking.  Block must be set to a two-digit number BLOCK=Mx10+N,
+        The 10s digit controls the treatment of particles that escape due to deleted elements (particles are always tracked and marked).
+        M.EQ.0: Active particle method which causes particles to be put back into the bag.
+        M.EQ.1: Particles are leaked through unmeshed vents. See Remark 3.
+        M.EQ.2: Blockage logic is turned on when the contact pressure is greater than bag/chamger pressure for external vents.
+        The 1s digit controls the treatment of leakage.
+        N.EQ.0: Always consider porosity leakage without considering blockage due to contact.
+        N.EQ.1: Check if airbag node is in contact or not. If yes, 1/4 (quad) or 1/3 (tri) of the segment surface will not have porosity leakage due to contact.
+        N.EQ.2: Same as 1 but no blockage for external vents
+        N.EQ.3: Same as 1 but no blockage for internal vents
+        N.EQ.4: Same as 1 but no blockage for all vents.
         """ # nopep8
         return self._cards[0].get_value("block")
 
@@ -312,9 +326,9 @@ class AirbagParticle(KeywordBase):
 
     @property
     def fric(self) -> float:
-        """Get or set the Friction factor F_r if -1.0 < FRIC ≤ 1.0.  Otherwise,
-        LE.-1.0:	|"FRIC" | is the curve ID which defines F_r as a function of the part pressure.
-        GT.1.0:	FRIC is the *DEFINE_FUNCTION ID that defines F_r.  See Remark 2
+        """Get or set the Friction factor F_r if -1.0 < FRIC  1.0.  Otherwise,
+        LE.-1.0: |"FRIC" | is the curve ID which defines F_r as a function of the part pressure.
+        GT.1.0: FRIC is the *DEFINE_FUNCTION ID that defines F_r.  See Remark 2
         """ # nopep8
         return self._cards[0].get_value("fric")
 
@@ -355,7 +369,7 @@ class AirbagParticle(KeywordBase):
         EQ.0: kg-mm-ms-K
         EQ.1: SI-units
         EQ.2: tonne-mm-s-K.
-        EQ.3:	User defined units (see Remark 11)
+        EQ.3: User defined units (see Remark 11)
         """ # nopep8
         return self._cards[1].get_value("unit")
 
@@ -396,7 +410,7 @@ class AirbagParticle(KeywordBase):
         self._cards[1].set_value("tatm", value)
 
     @property
-    def patm(self) -> float:
+    def patm(self) -> typing.Optional[float]:
         """Get or set the Atmospheric pressure (Default 1ATM).
         """ # nopep8
         return self._cards[1].get_value("patm")
@@ -465,7 +479,7 @@ class AirbagParticle(KeywordBase):
 
     @property
     def occup(self) -> float:
-        """Get or set the Particles occupy OCCUP percent of the airbag’s volume.  The default value of OCCUP is 10%.
+        """Get or set the Particles occupy OCCUP percent of the airbags volume.  The default value of OCCUP is 10%.
         This field can be used to balance computational cost and signal quality.  OCCUP ranges from 0.001 to 0.1..
         """ # nopep8
         return self._cards[2].get_value("occup")
@@ -479,8 +493,8 @@ class AirbagParticle(KeywordBase):
     def rebl(self) -> int:
         """Get or set the If the option is ON, all energy stored from damping will be evenly distributed as vibrational energy to all particles.
         This improves the pressure calculation in certain applications.
-        EQ.0:	Off (Default)
-        EQ.1:	On.
+        EQ.0: Off (Default)
+        EQ.1: On.
         """ # nopep8
         return self._cards[2].get_value("rebl")
 
@@ -493,7 +507,7 @@ class AirbagParticle(KeywordBase):
 
     @property
     def sidsv(self) -> typing.Optional[int]:
-        """Get or set the Part set ID for internal shell part.  The volume formed by this internal shell part will be excluded from the bag volume.  These internal parts must have consistent orientation to get correct excluded volume.
+        """Get or set the Part set ID for internal shell part.  The volume occupied by this part is excluded from the bag volume.  These internal parts must be consistently oriented for the excluded volume to be correctly calculated.
         """ # nopep8
         return self._cards[2].get_value("sidsv")
 
@@ -504,7 +518,7 @@ class AirbagParticle(KeywordBase):
 
     @property
     def psid1(self) -> typing.Optional[int]:
-        """Get or set the Part set ID for external parts which have normal pointed outward.  This option is usually used with airbag integrity check while there are two CPM bags connected with bag interaction.  Therefore, one of the bag can have the correct shell orientation but the share parts for the second bag will have wrong orientation.  This option will automatically flip the parts defined in this set in the second bag during integrity checking.
+        """Get or set the Part set ID for external parts that have normals pointed outward.  This option is usually used with an airbag integrity check when two CPM bags are connected with bag interaction.  Therefore, one of the bags can have the correct shell orientation, but the shared parts for the second bag will have the wrong orientation.  This option will automatically flip the parts defined in this set in the second bag during integrity checking.
         """ # nopep8
         return self._cards[2].get_value("psid1")
 
@@ -549,9 +563,9 @@ class AirbagParticle(KeywordBase):
 
     @property
     def idfric(self) -> int:
-        """Get or set the Direction of P2F impact force:
-        EQ.0:	No change(default)
-        EQ.1 : The force is applied in the segment normal direction
+        """Get or set the Direction of particle-to-fabric impact force:
+        EQ.0: No change(default)
+        EQ.1: The force is applied in the segment normal direction
         """ # nopep8
         return self._cards[3].get_value("idfric")
 
@@ -561,6 +575,80 @@ class AirbagParticle(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""idfric must be `None` or one of {0,1}.""")
         self._cards[3].set_value("idfric", value)
+
+    @property
+    def iairstat(self) -> int:
+        """Get or set the By default, initial air particles cannot pass through pores and vents when IAIR = 4. This flag can change the treatment:
+        EQ.0: No change(default)
+        EQ.1: Allow passing through pores and vents
+        """ # nopep8
+        return self._cards[3].get_value("iairstat")
+
+    @iairstat.setter
+    def iairstat(self, value: int) -> None:
+        """Set the iairstat property."""
+        if value not in [0, 1, None]:
+            raise Exception("""iairstat must be `None` or one of {0,1}.""")
+        self._cards[3].set_value("iairstat", value)
+
+    @property
+    def dpwr(self) -> float:
+        """Get or set the Exponent for decaying the partial pressure of ambient air inside the airbag for IAIR = 4. See Remark 19.
+        """ # nopep8
+        return self._cards[3].get_value("dpwr")
+
+    @dpwr.setter
+    def dpwr(self, value: float) -> None:
+        """Set the dpwr property."""
+        self._cards[3].set_value("dpwr", value)
+
+    @property
+    def vndamp(self) -> float:
+        """Get or set the Damping coefficient against the motion in the segment's normal direction. 0. <= VNDAMP <= 1.0.
+        """ # nopep8
+        return self._cards[3].get_value("vndamp")
+
+    @vndamp.setter
+    def vndamp(self, value: float) -> None:
+        """Set the vndamp property."""
+        self._cards[3].set_value("vndamp", value)
+
+    @property
+    def jetlen(self) -> float:
+        """Get or set the Estimated particle jet distance. Based on this distance, the particle-to-particle contact evaluation frequency is reduced to preserve the jetting effect from the inflator orifice.
+        """ # nopep8
+        return self._cards[3].get_value("jetlen")
+
+    @jetlen.setter
+    def jetlen(self, value: float) -> None:
+        """Set the jetlen property."""
+        self._cards[3].set_value("jetlen", value)
+
+    @property
+    def jetend(self) -> float:
+        """Get or set the End time for the JETLEN option
+        """ # nopep8
+        return self._cards[3].get_value("jetend")
+
+    @jetend.setter
+    def jetend(self, value: float) -> None:
+        """Set the jetend property."""
+        self._cards[3].set_value("jetend", value)
+
+    @property
+    def shloff(self) -> int:
+        """Get or set the Flag for specifying where the exterior surface of the airbag is when the exterior is made of shell elements. This exterior surface is used to determine the volume of the airbag.
+        EQ.0:	The exterior surface is taken as the mid - plane of the shell(default).
+        EQ.1 : The exterior surface is offset from the mid - plane of the shell by half the shell element�s thickness.
+        """ # nopep8
+        return self._cards[3].get_value("shloff")
+
+    @shloff.setter
+    def shloff(self, value: int) -> None:
+        """Set the shloff property."""
+        if value not in [0, 1, None]:
+            raise Exception("""shloff must be `None` or one of {0,1}.""")
+        self._cards[3].set_value("shloff", value)
 
     @property
     def mass(self) -> typing.Optional[float]:
@@ -598,11 +686,11 @@ class AirbagParticle(KeywordBase):
     @property
     def iair(self) -> int:
         """Get or set the Initial gas inside bag considered:
-        EQ.0:	No
-        EQ.1:	Yes, using control volume method.
-        EQ.-1:	Yes, using control volume method. In this case ambient air enters the bag when PATM is greater than bag pressure.
-        EQ.2:	Yes, using the particle method.
-        EQ.4:	Yes, using the particle method.  Initial air particles are used for the gas front tracking algorithm,
+        EQ.0: No
+        EQ.1: Yes, using control volume method.
+        EQ.-1: Yes, using control volume method. In this case ambient air enters the bag when PATM is greater than bag pressure.
+        EQ.2: Yes, using the particle method.
+        EQ.4: Yes, using the particle method.  Initial air particles are used for the gas front tracking algorithm,
         but they do not apply forces when they collide with a segment.
         Instead, a uniform pressure is applied to the airbag based on the ratio of air and inflator particles.
         In this case NPRLX must be negative so that forces are not applied by the initial air.
@@ -738,7 +826,7 @@ class AirbagParticle(KeywordBase):
     @property
     def xmair(self) -> typing.Optional[float]:
         """Get or set the Molar mass of gas initially inside bag.
-        LT.0:	-XMAIR references the ID of a *DEFINE_CPM_GAS_PROPERTIES keyword that defines the gas thermodynamic properties.
+        LT.0: -XMAIR references the ID of a *DEFINE_CPM_GAS_PROPERTIES keyword that defines the gas thermodynamic properties.
         Note that AAIR, BAIR, and CAIR are ignored
         """ # nopep8
         return self._cards[8].get_value("xmair")
@@ -795,8 +883,8 @@ class AirbagParticle(KeywordBase):
     @property
     def nprlx(self) -> str:
         """Get or set the Number of cycles to reach thermal equilibrium.  See Remark 6.
-        LT.0:	If more than 50% of the collision to fabric is from initial air particles, the contact force will not apply to the fabric segment in order to keep its original shape.
-        If the number contains “.”, “e” or “E”, NPRLX will treated as an end time rather than as a cycle count.
+        LT.0: If more than 50% of the collision to fabric is from initial air particles, the contact force will not apply to the fabric segment in order to keep its original shape.
+        If the number contains ., e or E, NPRLX will treated as an end time rather than as a cycle count.
         """ # nopep8
         return self._cards[8].get_value("nprlx")
 
@@ -826,6 +914,17 @@ class AirbagParticle(KeywordBase):
         self._cards[10].table = df
 
     @property
+    def xoff(self) -> float:
+        """Get or set the Offset distance from the shell center to the inflator position.
+        """ # nopep8
+        return self._cards[11].get_value("xoff")
+
+    @xoff.setter
+    def xoff(self, value: float) -> None:
+        """Set the xoff property."""
+        self._cards[11].set_value("xoff", value)
+
+    @property
     def nid1_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid1."""
         return self._get_link_by_attr("NODE", "nid", self.nid1, "parts")
@@ -848,21 +947,6 @@ class AirbagParticle(KeywordBase):
     def get_nidi_link(self, nidi: int) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nidi."""
         return self._get_link_by_attr("NODE", "nid", nidi, "")
-
-    @property
-    def hconv_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for hconv."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.hconv:
-                return kwd
-        return None
-
-    @hconv_link.setter
-    def hconv_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for hconv."""
-        self.hconv = value.lcid
 
     @property
     def lctc23_link(self) -> typing.Optional[DefineCurve]:

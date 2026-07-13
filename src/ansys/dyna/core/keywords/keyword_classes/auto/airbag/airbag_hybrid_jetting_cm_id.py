@@ -363,7 +363,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @property
     def lcc23(self) -> int:
-        """Get or set the Load curve number defining the vent orifice coefficient which applies to exit hole as a function of time. A nonzero value for C23 overrides LCC23.
+        """Get or set the The absolute value, |LCC23|, is a load curve ID.  If the LCC23 is positive, the load curve defines the vent orifice coefficient which applies to the exit hole as a function of time. If the LCC23 is negative, the vent orifice coefficient is defined as a function of relative pressure, P_air /P_bag ; see [Anagonye and Wang 1999].  In addition, LCC23 can be defined through *DEFINE_CURVE_FUNCTION.  A nonzero value for C23 overrides LCC23.
         """ # nopep8
         return self._cards[3].get_value("lcc23")
 
@@ -374,7 +374,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @property
     def a23(self) -> typing.Optional[float]:
-        """Get or set the Vent orifice area which applies to exit hole. Set to zero if LCA23 is defined below.
+        """Get or set the If defined as a positive number, A23 is the vent orifice area which applies to the exit hole.  If defined as a negative number, with LCA23  -1, the absolute value |A23| is a part ID; see [Anagonye and Wang 1999].  With LCA23 = -1, a negative A23 represents venting holes by a part set |A23|.  The venting leakage through each venting hole represented by a part in part set |A23 | is output to abstat.  The area of this part/set becomes the vent orifice area.  With SIDTYP>0, airbag pressure will not be applied to part/set |A23 | representing venting holes if part/set |A23 | is not included in SID, the part set representing the airbag.  Set A23 to zero if a positive LCA23 is defined below.
         """ # nopep8
         return self._cards[3].get_value("a23")
 
@@ -385,7 +385,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @property
     def lca23(self) -> int:
-        """Get or set the Load curve number defining the vent orifice area which applies to exit hole as a function of absolute pressure. A nonzero value for A23 overrides LCA23.
+        """Get or set the Load curve number defining the vent orifice area which applies to exit hole as a function of absolute pressure or LCA23 can be defined through *DEFINE_CURVE_FUNCTION. A nonzero value for A23 overrides LCA23.
         """ # nopep8
         return self._cards[3].get_value("lca23")
 
@@ -494,7 +494,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @property
     def lcidm0(self) -> int:
-        """Get or set the Optional curve representing inflator’s total mass inflow rate. When
+        """Get or set the Optional curve representing inflators total mass inflow rate. When
         defined, LCIDM in the following 2*NGAS cards defines the molar
         fraction of each gas component as a function of time and INITM
         defines the initial molar ratio of each gas component..
@@ -509,7 +509,7 @@ class AirbagHybridJettingCmId(KeywordBase):
     @property
     def vntopt(self) -> typing.Optional[int]:
         """Get or set the Additional options for venting area definition.
-        For A23 ≥ 0
+        For A23  0
         EQ.1: Vent area is equal to A23.
         EQ.2: Vent area is A23 plus the eroded surface area of the airbag parts.
         EQ.10: Same as VNTOPT = 2
@@ -567,7 +567,7 @@ class AirbagHybridJettingCmId(KeywordBase):
 
     @property
     def initm(self) -> typing.Optional[float]:
-        """Get or set the Initial mass fraction of gas component.
+        """Get or set the Initial mass fraction of gas component present in the airbag, prior to injection of gas by the inflator.  INITM is used to calculate the averaged gas properties and the initial mass of all gas components, assuming that the airbag is initially at ambient temperature and under ambient pressure.  The sum of INITM of all gas components should be 1.0.
         """ # nopep8
         return self._cards[5].get_value("initm")
 

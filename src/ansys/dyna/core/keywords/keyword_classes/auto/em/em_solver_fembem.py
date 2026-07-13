@@ -71,7 +71,7 @@ class EmSolverFembem(KeywordBase):
 
     @property
     def forcon(self) -> int:
-        """Get or set the Force Convergence :
+        """Get or set the Force Convergence:
         EQ.0: The code stops with an error if no convergence
         EQ.1: The code continues to the next time step even if the RELTOL convergence criteria has not been reached.
         """ # nopep8

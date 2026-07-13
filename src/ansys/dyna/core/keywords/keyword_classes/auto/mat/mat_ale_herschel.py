@@ -116,10 +116,10 @@ class MatAleHerschel(KeywordBase):
     @property
     def mulo(self) -> typing.Optional[float]:
         """Get or set the There are 4 possible cases:
-        1.  If MULO = 0.0, then inviscid fluid is assumed.
-        2.  If MULO > 0.0, and MUHI = 0.0 or is not defined, then this is the traditional constant dynamic viscosity coefficient μ.
-        3.  If MULO > 0.0, and MUHI > 0.0, then MULO and MUHI are lower and upper viscosity limit values for a power-law-like variable viscosity model.
-        4.  If MULO is negative (for example, MULO = -1), then a user input data load curve (with LCID = 1) defining dynamic
+        1. If MULO = 0.0, then inviscid fluid is assumed.
+        2. If MULO > 0.0, and MUHI = 0.0 or is not defined, then this is the traditional constant dynamic viscosity coefficient mu.
+        3. If MULO > 0.0, and MUHI > 0.0, then MULO and MUHI are lower and upper viscosity limit values for a power-law-like variable viscosity model.
+        4. If MULO is negative (for example, MULO = -1), then a user input data load curve (with LCID = 1) defining dynamic
         viscosity as a function of equivalent strain rate is used.
         """ # nopep8
         return self._cards[0].get_value("mulo")

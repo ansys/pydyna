@@ -34,6 +34,7 @@ _ICFDPARTVOL_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
     FieldSchema("secid", int, 10, 10, None),
     FieldSchema("mid", int, 20, 10, None),
+    FieldSchema("mid2", int, 30, 10, None),
 )
 
 _ICFDPARTVOL_OPTION0_CARD0 = (
@@ -116,6 +117,17 @@ class IcfdPartVol(KeywordBase):
     def mid(self, value: int) -> None:
         """Set the mid property."""
         self._cards[0].set_value("mid", value)
+
+    @property
+    def mid2(self) -> typing.Optional[int]:
+        """Get or set the Optional material ID to specify a second material in the volume in the case of level sets. The first material (MID) fills the positive level set values.
+        """ # nopep8
+        return self._cards[0].get_value("mid2")
+
+    @mid2.setter
+    def mid2(self, value: int) -> None:
+        """Set the mid2 property."""
+        self._cards[0].set_value("mid2", value)
 
     @property
     def nodes(self) -> pd.DataFrame:

@@ -370,7 +370,7 @@ class Mat271(KeywordBase):
 
     @property
     def lch(self) -> typing.Optional[int]:
-        """Get or set the Load curve giving back stress parameter H as function of hardening	parameter e.
+        """Get or set the Load curve giving back stress parameter H as function of hardening parameter e.
         """ # nopep8
         return self._cards[2].get_value("lch")
 
@@ -381,7 +381,7 @@ class Mat271(KeywordBase):
 
     @property
     def lcfi(self) -> typing.Optional[int]:
-        """Get or set the Load curve giving plastic strain evolution angle  as function of relative volumetric stress.
+        """Get or set the Load curve giving plastic strain evolution angle as function of relative volumetric stress.
         """ # nopep8
         return self._cards[2].get_value("lcfi")
 
@@ -517,7 +517,7 @@ class Mat271(KeywordBase):
 
     @property
     def lcfs3(self) -> typing.Optional[int]:
-        """Get or set the Load curve fS3 for evolution of mobility factor as function of	temperature T.
+        """Get or set the Load curve fS3 for evolution of mobility factor as function of temperature T.
         """ # nopep8
         return self._cards[4].get_value("lcfs3")
 
@@ -550,7 +550,7 @@ class Mat271(KeywordBase):
 
     @property
     def lcfs1(self) -> typing.Optional[int]:
-        """Get or set the Load curve fs1 for sintering stress scaling as function of relative	density d.
+        """Get or set the Load curve fs1 for sintering stress scaling as function of relative density d.
         """ # nopep8
         return self._cards[4].get_value("lcfs1")
 

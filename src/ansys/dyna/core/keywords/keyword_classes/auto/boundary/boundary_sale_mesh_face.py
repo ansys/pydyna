@@ -27,14 +27,14 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _BOUNDARYSALEMESHFACE_CARD0 = (
-    FieldSchema("option", str, 0, 10, "FIXED"),
+    FieldSchema("bctype", str, 0, 10, "FIXED"),
     FieldSchema("mshid", int, 10, 10, None),
-    FieldSchema("_x", int, 20, 10, 0, "-x"),
-    FieldSchema("_x", int, 30, 10, 0, "+x"),
-    FieldSchema("_y", int, 40, 10, 0, "-y"),
-    FieldSchema("_y", int, 50, 10, 0, "+y"),
-    FieldSchema("_z", int, 60, 10, 0, "-z"),
-    FieldSchema("_z", int, 70, 10, 0, "-z"),
+    FieldSchema("negx", int, 20, 10, 0),
+    FieldSchema("posx", int, 30, 10, 0),
+    FieldSchema("negy", int, 40, 10, 0),
+    FieldSchema("posy", int, 50, 10, 0),
+    FieldSchema("negz", int, 60, 10, 0),
+    FieldSchema("posz", int, 70, 10, 0),
 )
 
 class BoundarySaleMeshFace(KeywordBase):
@@ -53,21 +53,24 @@ class BoundarySaleMeshFace(KeywordBase):
             ),
         ]
     @property
-    def option(self) -> str:
-        """Get or set the There are 3 options.
-        FIXED: All nodes at the face are fixed at all directions
-        NOFLOW : No flow allowed through the face
-        SYMM : The face is a symmetric plane(same as NOFLOW)
-        NONREFL : Non - reflective boundary condition.
+    def bctype(self) -> str:
+        """Get or set the Available boundary conditions:
+        EQ.FIXED: All nodes at the face are fixed in all directions. (Applied with with *BOUNDARY_SPC_SET)
+        EQ.NOFLOW: No flow allowed through the face.                     (Applied with * BOUNDARY_SPC_SET)
+        EQ.SYM: The face is a symmetric plane(same as NOFLOW). (Applied with * BOUNDARY_SPC_SET)
+        EQ.NONREFL: Non - reflective boundary condition.                (Applied with * BOUNDARY_NON_REFLECTING)
+        EQ.FLOWVEL: Nodes constrained by time - dependent velocities. (Applied with * BOUNDARY_PRESCRIBED_MOTION)
+        EQ.PRES: Faces loaded by time - dependent pressures.    (Applied with * LOAD_SEGMENT_SET)
+        EQ.AMBIENT: Ambient elements attached to the faces.See Remarks 1 and 2.                                           (Applied with * BOUNDARY_AMBIENT)
         """ # nopep8
-        return self._cards[0].get_value("option")
+        return self._cards[0].get_value("bctype")
 
-    @option.setter
-    def option(self, value: str) -> None:
-        """Set the option property."""
-        if value not in ["FIXED", "NOEFLOW", "SYMM", "NONREFL", None]:
-            raise Exception("""option must be `None` or one of {"FIXED","NOEFLOW","SYMM","NONREFL"}.""")
-        self._cards[0].set_value("option", value)
+    @bctype.setter
+    def bctype(self, value: str) -> None:
+        """Set the bctype property."""
+        if value not in ["FIXED", "NOFLOW", "SYM", "NONREFL", "FLOWVEL", "PRES", "AMBIENT", None]:
+            raise Exception("""bctype must be `None` or one of {"FIXED","NOFLOW","SYM","NONREFL","FLOWVEL","PRES","AMBIENT"}.""")
+        self._cards[0].set_value("bctype", value)
 
     @property
     def mshid(self) -> typing.Optional[int]:
@@ -81,80 +84,122 @@ class BoundarySaleMeshFace(KeywordBase):
         self._cards[0].set_value("mshid", value)
 
     @property
-    def _x(self) -> int:
-        """Get or set the Flags controlling ON/OFF at each S-ALE mesh face.
-        EQ 0: OFF
-        EQ 1 : ON
+    def negx(self) -> int:
+        """Get or set the Determine where the boundary condition is applied to the mesh. NEGX, POSX, NEGY, POSY, NEGZ, or POSZ means the mesh faces with an outward normal vector in the local -x, +x, -y, +y, -z, or +z-directions, respectively.
+        For BCTYPE != PRES, FLOWVEL, or AMBIENT:
+        EQ.0: The boundary condition is not applied to faces with this outward normal.
+        EQ.1: The boundary condition is applied to faces with this outward normal.
+        For BCTYPE = PRES or FLOWVEL :
+        EQ.0: The boundary condition is not applied to faces with this outward normal.
+        GT.0: The boundary condition is applied to faces with this outward normal and is controlled by a time - dependent curve(*DEFINE_CURVE), whose ID is referred to with this
+        For BCTYPE = AMBIENT:
+        EQ.0: The boundary condition is not applied to the elements connected to the faces with this outward normal.
+        GT.0: The boundary condition is applied to the elements connected to the faces with this outward normal.The value sets the reservoir material as described in Remark???? 1.
         """ # nopep8
-        return self._cards[0].get_value("_x")
+        return self._cards[0].get_value("negx")
 
-    @_x.setter
-    def _x(self, value: int) -> None:
-        """Set the _x property."""
-        self._cards[0].set_value("_x", value)
+    @negx.setter
+    def negx(self, value: int) -> None:
+        """Set the negx property."""
+        self._cards[0].set_value("negx", value)
 
     @property
-    def _x(self) -> int:
-        """Get or set the Flags controlling ON/OFF at each S-ALE mesh face.
-        EQ 0: OFF
-        EQ 1 : ON
+    def posx(self) -> int:
+        """Get or set the Determine where the boundary condition is applied to the mesh. NEGX, POSX, NEGY, POSY, NEGZ, or POSZ means the mesh faces with an outward normal vector in the local -x, +x, -y, +y, -z, or +z-directions, respectively.
+        For BCTYPE != PRES, FLOWVEL, or AMBIENT:
+        EQ.0: The boundary condition is not applied to faces with this outward normal.
+        EQ.1: The boundary condition is applied to faces with this outward normal.
+        For BCTYPE = PRES or FLOWVEL :
+        EQ.0: The boundary condition is not applied to faces with this outward normal.
+        GT.0: The boundary condition is applied to faces with this outward normal and is controlled by a time - dependent curve(*DEFINE_CURVE), whose ID is referred to with this
+        For BCTYPE = AMBIENT:
+        EQ.0: The boundary condition is not applied to the elements connected to the faces with this outward normal.
+        GT.0: The boundary condition is applied to the elements connected to the faces with this outward normal.The value sets the reservoir material as described in Remark???? 1.
         """ # nopep8
-        return self._cards[0].get_value("_x")
+        return self._cards[0].get_value("posx")
 
-    @_x.setter
-    def _x(self, value: int) -> None:
-        """Set the _x property."""
-        self._cards[0].set_value("_x", value)
+    @posx.setter
+    def posx(self, value: int) -> None:
+        """Set the posx property."""
+        self._cards[0].set_value("posx", value)
 
     @property
-    def _y(self) -> int:
-        """Get or set the Flags controlling ON/OFF at each S-ALE mesh face.
-        EQ 0: OFF
-        EQ 1 : ON
+    def negy(self) -> int:
+        """Get or set the Determine where the boundary condition is applied to the mesh. NEGX, POSX, NEGY, POSY, NEGZ, or POSZ means the mesh faces with an outward normal vector in the local -x, +x, -y, +y, -z, or +z-directions, respectively.
+        For BCTYPE != PRES, FLOWVEL, or AMBIENT:
+        EQ.0: The boundary condition is not applied to faces with this outward normal.
+        EQ.1: The boundary condition is applied to faces with this outward normal.
+        For BCTYPE = PRES or FLOWVEL :
+        EQ.0: The boundary condition is not applied to faces with this outward normal.
+        GT.0: The boundary condition is applied to faces with this outward normal and is controlled by a time - dependent curve(*DEFINE_CURVE), whose ID is referred to with this
+        For BCTYPE = AMBIENT:
+        EQ.0: The boundary condition is not applied to the elements connected to the faces with this outward normal.
+        GT.0: The boundary condition is applied to the elements connected to the faces with this outward normal.The value sets the reservoir material as described in Remark???? 1.
         """ # nopep8
-        return self._cards[0].get_value("_y")
+        return self._cards[0].get_value("negy")
 
-    @_y.setter
-    def _y(self, value: int) -> None:
-        """Set the _y property."""
-        self._cards[0].set_value("_y", value)
+    @negy.setter
+    def negy(self, value: int) -> None:
+        """Set the negy property."""
+        self._cards[0].set_value("negy", value)
 
     @property
-    def _y(self) -> int:
-        """Get or set the Flags controlling ON/OFF at each S-ALE mesh face.
-        EQ 0: OFF
-        EQ 1 : ON
+    def posy(self) -> int:
+        """Get or set the Determine where the boundary condition is applied to the mesh. NEGX, POSX, NEGY, POSY, NEGZ, or POSZ means the mesh faces with an outward normal vector in the local -x, +x, -y, +y, -z, or +z-directions, respectively.
+        For BCTYPE != PRES, FLOWVEL, or AMBIENT:
+        EQ.0: The boundary condition is not applied to faces with this outward normal.
+        EQ.1: The boundary condition is applied to faces with this outward normal.
+        For BCTYPE = PRES or FLOWVEL :
+        EQ.0: The boundary condition is not applied to faces with this outward normal.
+        GT.0: The boundary condition is applied to faces with this outward normal and is controlled by a time - dependent curve(*DEFINE_CURVE), whose ID is referred to with this
+        For BCTYPE = AMBIENT:
+        EQ.0: The boundary condition is not applied to the elements connected to the faces with this outward normal.
+        GT.0: The boundary condition is applied to the elements connected to the faces with this outward normal.The value sets the reservoir material as described in Remark???? 1.
         """ # nopep8
-        return self._cards[0].get_value("_y")
+        return self._cards[0].get_value("posy")
 
-    @_y.setter
-    def _y(self, value: int) -> None:
-        """Set the _y property."""
-        self._cards[0].set_value("_y", value)
+    @posy.setter
+    def posy(self, value: int) -> None:
+        """Set the posy property."""
+        self._cards[0].set_value("posy", value)
 
     @property
-    def _z(self) -> int:
-        """Get or set the Flags controlling ON/OFF at each S-ALE mesh face.
-        EQ 0: OFF
-        EQ 1 : ON
+    def negz(self) -> int:
+        """Get or set the Determine where the boundary condition is applied to the mesh. NEGX, POSX, NEGY, POSY, NEGZ, or POSZ means the mesh faces with an outward normal vector in the local -x, +x, -y, +y, -z, or +z-directions, respectively.
+        For BCTYPE != PRES, FLOWVEL, or AMBIENT:
+        EQ.0: The boundary condition is not applied to faces with this outward normal.
+        EQ.1: The boundary condition is applied to faces with this outward normal.
+        For BCTYPE = PRES or FLOWVEL :
+        EQ.0: The boundary condition is not applied to faces with this outward normal.
+        GT.0: The boundary condition is applied to faces with this outward normal and is controlled by a time - dependent curve(*DEFINE_CURVE), whose ID is referred to with this
+        For BCTYPE = AMBIENT:
+        EQ.0: The boundary condition is not applied to the elements connected to the faces with this outward normal.
+        GT.0: The boundary condition is applied to the elements connected to the faces with this outward normal.The value sets the reservoir material as described in Remark???? 1.
         """ # nopep8
-        return self._cards[0].get_value("_z")
+        return self._cards[0].get_value("negz")
 
-    @_z.setter
-    def _z(self, value: int) -> None:
-        """Set the _z property."""
-        self._cards[0].set_value("_z", value)
+    @negz.setter
+    def negz(self, value: int) -> None:
+        """Set the negz property."""
+        self._cards[0].set_value("negz", value)
 
     @property
-    def _z(self) -> int:
-        """Get or set the Flags controlling ON/OFF at each S-ALE mesh face.
-        EQ 0: OFF
-        EQ 1 : ON
+    def posz(self) -> int:
+        """Get or set the Determine where the boundary condition is applied to the mesh. NEGX, POSX, NEGY, POSY, NEGZ, or POSZ means the mesh faces with an outward normal vector in the local -x, +x, -y, +y, -z, or +z-directions, respectively.
+        For BCTYPE != PRES, FLOWVEL, or AMBIENT:
+        EQ.0: The boundary condition is not applied to faces with this outward normal.
+        EQ.1: The boundary condition is applied to faces with this outward normal.
+        For BCTYPE = PRES or FLOWVEL :
+        EQ.0: The boundary condition is not applied to faces with this outward normal.
+        GT.0: The boundary condition is applied to faces with this outward normal and is controlled by a time - dependent curve(*DEFINE_CURVE), whose ID is referred to with this
+        For BCTYPE = AMBIENT:
+        EQ.0: The boundary condition is not applied to the elements connected to the faces with this outward normal.
+        GT.0: The boundary condition is applied to the elements connected to the faces with this outward normal.The value sets the reservoir material as described in Remark???? 1.
         """ # nopep8
-        return self._cards[0].get_value("_z")
+        return self._cards[0].get_value("posz")
 
-    @_z.setter
-    def _z(self, value: int) -> None:
-        """Set the _z property."""
-        self._cards[0].set_value("_z", value)
+    @posz.setter
+    def posz(self, value: int) -> None:
+        """Set the posz property."""
+        self._cards[0].set_value("posz", value)
 

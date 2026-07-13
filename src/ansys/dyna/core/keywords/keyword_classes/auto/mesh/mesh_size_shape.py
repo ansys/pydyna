@@ -63,6 +63,32 @@ _MESHSIZESHAPE_CARD3 = (
     FieldSchema("pmaxz", float, 70, 10, None),
 )
 
+_MESHSIZESHAPE_CARD4 = (
+    FieldSchema("msize", float, 0, 10, None),
+    FieldSchema("x", float, 10, 10, None),
+    FieldSchema("y", float, 20, 10, None),
+    FieldSchema("z", float, 30, 10, None),
+    FieldSchema("nx", float, 40, 10, None),
+    FieldSchema("ny", float, 50, 10, None),
+    FieldSchema("nz", float, 60, 10, None),
+)
+
+_MESHSIZESHAPE_CARD5 = (
+    FieldSchema("msize", float, 0, 10, None),
+    FieldSchema("radius", float, 10, 10, None),
+    FieldSchema("ptid1", int, 20, 10, None),
+    FieldSchema("ptid2", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("rmin", float, 50, 10, None),
+)
+
+_MESHSIZESHAPE_CARD6 = (
+    FieldSchema("msize", float, 0, 10, None),
+    FieldSchema("radius", float, 10, 10, None),
+    FieldSchema("nid1", int, 20, 10, None),
+    FieldSchema("nid2", int, 30, 10, None),
+)
+
 class MeshSizeShape(KeywordBase):
     """DYNA MESH_SIZE_SHAPE keyword"""
 
@@ -89,6 +115,18 @@ class MeshSizeShape(KeywordBase):
                 _MESHSIZESHAPE_CARD3,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _MESHSIZESHAPE_CARD4,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MESHSIZESHAPE_CARD5,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MESHSIZESHAPE_CARD6,
+                **kwargs,
+            ),
         ]
     @property
     def sname(self) -> str:
@@ -105,9 +143,9 @@ class MeshSizeShape(KeywordBase):
 
     @property
     def force(self) -> int:
-        """Get or set the Force to keep the mesh size criteria even after a remeshing is done.
-        EQ.0: Off, mesh size shape will be lost if a remeshing occurs.
-        EQ.1: On.
+        """Get or set the Flag to keep the mesh size criteria even after performing remeshing:
+        EQ.0:	Off.The mesh size in the shape will be lost if a remeshing occurs.
+        EQ.1 : On.
         """ # nopep8
         return self._cards[0].get_value("force")
 
@@ -120,24 +158,23 @@ class MeshSizeShape(KeywordBase):
 
     @property
     def method(self) -> int:
-        """Get or set the Force to keep the mesh size criteria even after a remeshing is done.
-        EQ.0: Off, mesh size shape will be lost if a remeshing occurs.
-        EQ.1: On.
+        """Get or set the Specifies which method to use when defining the second card.
+        EQ.0: Default, directly input the coordinates.
+        EQ.1: Define the coordinates via the introduction of ICFD_DEFINE_POINT IDs. (See Remark 1).
+        EQ.2: Define the coordinates by using user node IDs from solid mechanics.Only available when a solid mechanics problem is present. (See Remark 1)
         """ # nopep8
         return self._cards[0].get_value("method")
 
     @method.setter
     def method(self, value: int) -> None:
         """Set the method property."""
-        if value not in [0, 1, None]:
-            raise Exception("""method must be `None` or one of {0,1}.""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""method must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("method", value)
 
     @property
     def bt(self) -> float:
-        """Get or set the Force to keep the mesh size criteria even after a remeshing is done.
-        EQ.0: Off, mesh size shape will be lost if a remeshing occurs.
-        EQ.1: On.
+        """Get or set the Birth time of the mesh size area in cases where remeshing occurs.
         """ # nopep8
         return self._cards[0].get_value("bt")
 
@@ -148,9 +185,7 @@ class MeshSizeShape(KeywordBase):
 
     @property
     def dt(self) -> float:
-        """Get or set the Force to keep the mesh size criteria even after a remeshing is done.
-        EQ.0: Off, mesh size shape will be lost if a remeshing occurs.
-        EQ.1: On.
+        """Get or set the Death time of the mesh size area in cases where remeshing occurs.
         """ # nopep8
         return self._cards[0].get_value("dt")
 
@@ -161,7 +196,7 @@ class MeshSizeShape(KeywordBase):
 
     @property
     def msize(self) -> typing.Optional[float]:
-        """Get or set the Mesh size that needs to be applied in the zone of the shape defined by Sname
+        """Get or set the Mesh size that needs to be applied in the zone of the shape. A negative value points to a *DEFINE_FUNCTION.  If using a *DEFINE_FUNCTION, the following parameters are allowed: f(x, y, z, time).
         """ # nopep8
         return self._cards[1].get_value("msize")
 
@@ -378,4 +413,182 @@ class MeshSizeShape(KeywordBase):
     def pmaxz(self, value: float) -> None:
         """Set the pmaxz property."""
         self._cards[3].set_value("pmaxz", value)
+
+    @property
+    def msize(self) -> typing.Optional[float]:
+        """Get or set the Mesh size that needs to be applied in the zone of the shape defined by Sname
+        """ # nopep8
+        return self._cards[4].get_value("msize")
+
+    @msize.setter
+    def msize(self, value: float) -> None:
+        """Set the msize property."""
+        self._cards[4].set_value("msize", value)
+
+    @property
+    def x(self) -> typing.Optional[float]:
+        """Get or set the Coordinates of starting point in cases where SNAME is pol
+        """ # nopep8
+        return self._cards[4].get_value("x")
+
+    @x.setter
+    def x(self, value: float) -> None:
+        """Set the x property."""
+        self._cards[4].set_value("x", value)
+
+    @property
+    def y(self) -> typing.Optional[float]:
+        """Get or set the Coordinates of starting point in cases where SNAME is pol
+        """ # nopep8
+        return self._cards[4].get_value("y")
+
+    @y.setter
+    def y(self, value: float) -> None:
+        """Set the y property."""
+        self._cards[4].set_value("y", value)
+
+    @property
+    def z(self) -> typing.Optional[float]:
+        """Get or set the Coordinates of starting point in cases where SNAME is pol
+        """ # nopep8
+        return self._cards[4].get_value("z")
+
+    @z.setter
+    def z(self, value: float) -> None:
+        """Set the z property."""
+        self._cards[4].set_value("z", value)
+
+    @property
+    def nx(self) -> typing.Optional[float]:
+        """Get or set the Direction in which mesh size will be applied in cases where SNAME is pol.
+        """ # nopep8
+        return self._cards[4].get_value("nx")
+
+    @nx.setter
+    def nx(self, value: float) -> None:
+        """Set the nx property."""
+        self._cards[4].set_value("nx", value)
+
+    @property
+    def ny(self) -> typing.Optional[float]:
+        """Get or set the Direction in which mesh size will be applied in cases where SNAME is pol
+        """ # nopep8
+        return self._cards[4].get_value("ny")
+
+    @ny.setter
+    def ny(self, value: float) -> None:
+        """Set the ny property."""
+        self._cards[4].set_value("ny", value)
+
+    @property
+    def nz(self) -> typing.Optional[float]:
+        """Get or set the Direction in which mesh size will be applied in cases where SNAME is pol
+        """ # nopep8
+        return self._cards[4].get_value("nz")
+
+    @nz.setter
+    def nz(self, value: float) -> None:
+        """Set the nz property."""
+        self._cards[4].set_value("nz", value)
+
+    @property
+    def msize(self) -> typing.Optional[float]:
+        """Get or set the Mesh size that needs to be applied in the zone of the shape defined by Sname
+        """ # nopep8
+        return self._cards[5].get_value("msize")
+
+    @msize.setter
+    def msize(self, value: float) -> None:
+        """Set the msize property."""
+        self._cards[5].set_value("msize", value)
+
+    @property
+    def radius(self) -> typing.Optional[float]:
+        """Get or set the Radius of the sphere if Sname is Sphere or of the cross section disk if Sname is Cylinder
+        """ # nopep8
+        return self._cards[5].get_value("radius")
+
+    @radius.setter
+    def radius(self, value: float) -> None:
+        """Set the radius property."""
+        self._cards[5].set_value("radius", value)
+
+    @property
+    def ptid1(self) -> typing.Optional[int]:
+        """Get or set the Point ID1 referring to ICFD_DEFINE_POINT. Replaces PMIN,
+        X/Y/Z or CENTER for the various SNAME cases
+        """ # nopep8
+        return self._cards[5].get_value("ptid1")
+
+    @ptid1.setter
+    def ptid1(self, value: int) -> None:
+        """Set the ptid1 property."""
+        self._cards[5].set_value("ptid1", value)
+
+    @property
+    def ptid2(self) -> typing.Optional[int]:
+        """Get or set the Point ID2. Not needed if SNAME is Sphere. Replaces PMAX or
+        NX/NY/NZ for the various SNAME cases
+        """ # nopep8
+        return self._cards[5].get_value("ptid2")
+
+    @ptid2.setter
+    def ptid2(self, value: int) -> None:
+        """Set the ptid2 property."""
+        self._cards[5].set_value("ptid2", value)
+
+    @property
+    def rmin(self) -> typing.Optional[float]:
+        """Get or set the Optional radius available if SNAME is sphere or cylinder to define an internal sphere/cylinder where the *MESH_SIZE_SHAPE does not apply. When defined, RMIN should be smaller than RADIUS.
+        """ # nopep8
+        return self._cards[5].get_value("rmin")
+
+    @rmin.setter
+    def rmin(self, value: float) -> None:
+        """Set the rmin property."""
+        self._cards[5].set_value("rmin", value)
+
+    @property
+    def msize(self) -> typing.Optional[float]:
+        """Get or set the Mesh size that needs to be applied in the zone of the shape defined by Sname
+        """ # nopep8
+        return self._cards[6].get_value("msize")
+
+    @msize.setter
+    def msize(self, value: float) -> None:
+        """Set the msize property."""
+        self._cards[6].set_value("msize", value)
+
+    @property
+    def radius(self) -> typing.Optional[float]:
+        """Get or set the Radius of the sphere if Sname is Sphere or of the cross section disk if Sname is Cylinder
+        """ # nopep8
+        return self._cards[6].get_value("radius")
+
+    @radius.setter
+    def radius(self, value: float) -> None:
+        """Set the radius property."""
+        self._cards[6].set_value("radius", value)
+
+    @property
+    def nid1(self) -> typing.Optional[int]:
+        """Get or set the User node IDs coming from the solid mechanics problem. Equivalent usage to PTID1
+        """ # nopep8
+        return self._cards[6].get_value("nid1")
+
+    @nid1.setter
+    def nid1(self, value: int) -> None:
+        """Set the nid1 property."""
+        self._cards[6].set_value("nid1", value)
+
+    @property
+    def nid2(self) -> typing.Optional[int]:
+        """Get or set the User node IDs coming from the solid mechanics problem. Equivalent usage to PTID2
+        """ # nopep8
+        return self._cards[6].get_value("nid2")
+
+    @nid2.setter
+    def nid2(self, value: int) -> None:
+        """Set the nid2 property."""
+        self._cards[6].set_value("nid2", value)
 

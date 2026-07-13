@@ -33,7 +33,6 @@ _ICFDDATABASEDRAGVOL_CARD0 = (
     FieldSchema("perout", int, 30, 10, 0),
     FieldSchema("divi", int, 40, 10, 10),
     FieldSchema("elout", int, 50, 10, 0),
-    FieldSchema("ssout", int, 60, 10, 0),
 )
 
 class IcfdDatabaseDragVol(KeywordBase):
@@ -116,15 +115,4 @@ class IcfdDatabaseDragVol(KeywordBase):
     def elout(self, value: int) -> None:
         """Set the elout property."""
         self._cards[0].set_value("elout", value)
-
-    @property
-    def ssout(self) -> int:
-        """Get or set the Outputs the pressure loads caused by the fluid on each solid segment set in keyword format. FSI needs to be activated.
-        """ # nopep8
-        return self._cards[0].get_value("ssout")
-
-    @ssout.setter
-    def ssout(self, value: int) -> None:
-        """Set the ssout property."""
-        self._cards[0].set_value("ssout", value)
 

@@ -27,7 +27,10 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _INCLUDECOMPENSATIONSYMMETRICLINES_CARD0 = (
-    FieldSchema("filename", str, 0, 256, None),
+    FieldSchema("symid", int, 0, 10, None),
+    FieldSchema("symxy", int, 10, 10, None),
+    FieldSchema("x0", float, 20, 10, None),
+    FieldSchema("y0", float, 30, 10, None),
 )
 
 class IncludeCompensationSymmetricLines(KeywordBase):
@@ -46,13 +49,48 @@ class IncludeCompensationSymmetricLines(KeywordBase):
             ),
         ]
     @property
-    def filename(self) -> typing.Optional[str]:
-        """Get or set the Name of the keyword files containing nodes and elements information, with adaptive constraints if exist. Currently all blanks must have the same numbers of nodes and elements.
+    def symid(self) -> typing.Optional[int]:
+        """Get or set the ID of the symmetry condition being defined
         """ # nopep8
-        return self._cards[0].get_value("filename")
+        return self._cards[0].get_value("symid")
 
-    @filename.setter
-    def filename(self, value: str) -> None:
-        """Set the filename property."""
-        self._cards[0].set_value("filename", value)
+    @symid.setter
+    def symid(self, value: int) -> None:
+        """Set the symid property."""
+        self._cards[0].set_value("symid", value)
+
+    @property
+    def symxy(self) -> typing.Optional[int]:
+        """Get or set the Symmetry boundary condition:
+        EQ.1:	Symmetrical about the y - axis
+        EQ.2 : Symmetrical about the x - axis
+        """ # nopep8
+        return self._cards[0].get_value("symxy")
+
+    @symxy.setter
+    def symxy(self, value: int) -> None:
+        """Set the symxy property."""
+        self._cards[0].set_value("symxy", value)
+
+    @property
+    def x0(self) -> typing.Optional[float]:
+        """Get or set the Coordinates of a point on the symmetry plane
+        """ # nopep8
+        return self._cards[0].get_value("x0")
+
+    @x0.setter
+    def x0(self, value: float) -> None:
+        """Set the x0 property."""
+        self._cards[0].set_value("x0", value)
+
+    @property
+    def y0(self) -> typing.Optional[float]:
+        """Get or set the Coordinates of a point on the symmetry plane
+        """ # nopep8
+        return self._cards[0].get_value("y0")
+
+    @y0.setter
+    def y0(self, value: float) -> None:
+        """Set the y0 property."""
+        self._cards[0].set_value("y0", value)
 

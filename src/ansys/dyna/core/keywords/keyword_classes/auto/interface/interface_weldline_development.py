@@ -48,8 +48,8 @@ class InterfaceWeldlineDevelopment(KeywordBase):
     @property
     def ioption(self) -> int:
         """Get or set the Welding curve development options:
-        EQ.1:	Calculate initial weld curve from final(given) weld curve, with output file name weldline.ibo, which will be on the initial blank mesh.
-        EQ. - 1 : Calculate final weld curve from initial weld curve, with output file name weldline_f.ibo, which will be on the formed blank mesh.
+        EQ.1: Calculate initial weld curve from final(given) weld curve, with output file name weldline.ibo, which will be on the initial blank mesh.
+        EQ. - 1: Calculate final weld curve from initial weld curve, with output file name weldline_f.ibo, which will be on the formed blank mesh.
         """ # nopep8
         return self._cards[0].get_value("ioption")
 

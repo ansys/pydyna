@@ -126,7 +126,7 @@ class Mat1DofGeneralizedSpring(KeywordBase):
 
     @property
     def scln1(self) -> float:
-        """Get or set the Scale factor on force at node 1.  Default=1.0.
+        """Get or set the Scale factor on force at node 1. Default=1.0.
         """ # nopep8
         return self._cards[0].get_value("scln1")
 
@@ -137,7 +137,7 @@ class Mat1DofGeneralizedSpring(KeywordBase):
 
     @property
     def scln2(self) -> float:
-        """Get or set the Scale factor on force at node 2.  Default=1.0.
+        """Get or set the Scale factor on force at node 2. Default=1.0.
         """ # nopep8
         return self._cards[0].get_value("scln2")
 
@@ -170,7 +170,7 @@ class Mat1DofGeneralizedSpring(KeywordBase):
 
     @property
     def cid1(self) -> typing.Optional[int]:
-        """Get or set the Local coordinate system at node 1.  This coordinate system can be overwritten by a local system specified on the *ELEMENT_BEAM or *SECTION_BEAM keyword input.  If no coordinate system is specified, the global system is used.
+        """Get or set the Local coordinate system at node 1. This coordinate system can be overwritten by a local system specified on the *ELEMENT_BEAM or *SECTION_BEAM keyword input. If no coordinate system is specified, the global system is used.
         """ # nopep8
         return self._cards[1].get_value("cid1")
 
@@ -181,7 +181,7 @@ class Mat1DofGeneralizedSpring(KeywordBase):
 
     @property
     def cid2(self) -> typing.Optional[int]:
-        """Get or set the Local coordinate system at node 2.  If CID2 = 0, CID2 = CID1.
+        """Get or set the Local coordinate system at node 2. If CID2 = 0, CID2 = CID1.
         """ # nopep8
         return self._cards[1].get_value("cid2")
 

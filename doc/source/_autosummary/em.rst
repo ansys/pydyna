@@ -167,6 +167,13 @@ EmDatabaseCircuit0D
     :members:
 
 
+EmDatabaseCircuitsource
+-----------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_database_circuitsource
+    :members:
+
+
 EmDatabaseElout
 ---------------
 
@@ -279,6 +286,13 @@ EmEpCellmodelFitzhughnagumo
     :members:
 
 
+EmEpCellmodelStep
+-----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_step
+    :members:
+
+
 EmEpCellmodelTentusscher
 ------------------------
 
@@ -290,6 +304,20 @@ EmEpCellmodelTomek
 ------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_tomek
+    :members:
+
+
+EmEpCellmodelTorOrd
+-------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_tor_ord
+    :members:
+
+
+EmEpCellmodelTrovato
+--------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_trovato
     :members:
 
 
@@ -307,6 +335,20 @@ EmEpCreatefiberorientation
     :members:
 
 
+EmEpEcg
+-------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_ep_ecg
+    :members:
+
+
+EmEpEikonal
+-----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_ep_eikonal
+    :members:
+
+
 EmEpEkg
 -------
 
@@ -321,10 +363,45 @@ EmEpFiberinitial
     :members:
 
 
+EmEpIsoch
+---------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_ep_isoch
+    :members:
+
+
+EmEpLaplaceDirichlet
+--------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_ep_laplace_dirichlet
+    :members:
+
+
 EmEpPurkinjeNetwork
 -------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_ep_purkinje_network
+    :members:
+
+
+EmEpTentusscherStimulus
+-----------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_ep_tentusscher_stimulus
+    :members:
+
+
+EmEpTentusscherStimulus2
+------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_ep_tentusscher_stimulus2
+    :members:
+
+
+EmExternalEcvel
+---------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_external_ecvel
     :members:
 
 
@@ -405,6 +482,27 @@ EmOutput
     :members:
 
 
+EmOutputBinary
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_output_binary
+    :members:
+
+
+EmOutputForces
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_output_forces
+    :members:
+
+
+EmOutputVtk
+-----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_output_vtk
+    :members:
+
+
 EmPermanentMagnet
 -----------------
 
@@ -479,6 +577,13 @@ EmSolverBem
 -----------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_solver_bem
+    :members:
+
+
+EmSolverBemReassembly
+---------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.em_solver_bem_reassembly
     :members:
 
 

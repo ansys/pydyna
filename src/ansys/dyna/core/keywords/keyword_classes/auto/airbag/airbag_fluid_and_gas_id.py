@@ -62,6 +62,7 @@ _AIRBAGFLUIDANDGASID_CARD3 = (
     FieldSchema("iidir", int, 30, 10, None),
     FieldSchema("kappa", float, 40, 10, 1.0),
     FieldSchema("kbm", float, 50, 10, None),
+    FieldSchema("grav", float, 60, 10, 10.0),
 )
 
 class AirbagFluidAndGasId(KeywordBase):
@@ -269,7 +270,7 @@ class AirbagFluidAndGasId(KeywordBase):
 
     @property
     def rho(self) -> typing.Optional[float]:
-        """Get or set the Density of the fluid (e.g. for water, RHO is about 1.0 kg/m3).
+        """Get or set the Density of the fluid (e.g. for water, RHO is about 1000.0 kg/m3).
         """ # nopep8
         return self._cards[2].get_value("rho")
 
@@ -368,6 +369,17 @@ class AirbagFluidAndGasId(KeywordBase):
     def kbm(self, value: float) -> None:
         """Set the kbm property."""
         self._cards[3].set_value("kbm", value)
+
+    @property
+    def grav(self) -> float:
+        """Get or set the Gravity (default is 10.0 which is only correct when using m/s2)
+        """ # nopep8
+        return self._cards[3].get_value("grav")
+
+    @grav.setter
+    def grav(self, value: float) -> None:
+        """Set the grav property."""
+        self._cards[3].set_value("grav", value)
 
     @property
     def lcxw_link(self) -> typing.Optional[DefineCurve]:

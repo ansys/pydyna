@@ -65,7 +65,7 @@ class BoundaryRadiationSetEfRead(KeywordBase):
 
     @property
     def nmat(self) -> typing.Optional[int]:
-        """Get or set the NMAT specifies the material type for the portion of the boundary specified by SSID.  NMAT must be an exchange factor material ID. See the *EF_MATERIAL keyword.
+        """Get or set the NMAT specifies the material type for the portion of the boundary specified by SSID. NMAT must be an exchange factor material ID. See the *EF_MATERIAL keyword.
         """ # nopep8
         return self._cards[0].get_value("nmat")
 

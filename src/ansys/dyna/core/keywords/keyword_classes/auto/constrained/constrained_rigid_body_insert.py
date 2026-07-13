@@ -125,9 +125,9 @@ class ConstrainedRigidBodyInsert(KeywordBase):
     @property
     def idir(self) -> int:
         """Get or set the Direction in which the insert moves independently of the die:
-        EQ.1:	Local x - direction
-        EQ.2 : Local y - direction
-        EQ.3 : Local z - direction(default)
+        EQ.1: Local x - direction
+        EQ.2: Local y - direction
+        EQ.3: Local z - direction(default)
         """ # nopep8
         return self._cards[0].get_value("idir")
 
@@ -141,10 +141,10 @@ class ConstrainedRigidBodyInsert(KeywordBase):
     @property
     def mflag(self) -> int:
         """Get or set the Motion flag.
-        EQ.0:	Relative motion is unconstrained.
-        EQ.1:	The displacement of the insert relative to the die is imposed.
-        EQ.2:	The velocity of the insert relative to the die is imposed.
-        EQ.3:	The acceleration of the insert relative to the die is imposed..
+        EQ.0: Relative motion is unconstrained.
+        EQ.1: The displacement of the insert relative to the die is imposed.
+        EQ.2: The velocity of the insert relative to the die is imposed.
+        EQ.3: The acceleration of the insert relative to the die is imposed..
         """ # nopep8
         return self._cards[1].get_value("mflag")
 

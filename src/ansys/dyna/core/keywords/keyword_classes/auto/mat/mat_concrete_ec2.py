@@ -93,7 +93,7 @@ _MATCONCRETEEC2_CARD5 = (
 )
 
 _MATCONCRETEEC2_CARD6 = (
-    FieldSchema("typesc", float, 0, 10, 1.0),
+    FieldSchema("typesc", int, 0, 10, 1),
     FieldSchema("p_or_f", float, 10, 10, None),
     FieldSchema("effd_", float, 20, 10, None, "effd "),
     FieldSchema("gamsc", float, 30, 10, None),
@@ -104,18 +104,30 @@ _MATCONCRETEEC2_CARD6 = (
 )
 
 _MATCONCRETEEC2_CARD7 = (
+    FieldSchema("asw1s", float, 0, 10, 0.0),
+    FieldSchema("asw1t", float, 10, 10, 0.0),
+    FieldSchema("asw2s", float, 20, 10, 0.0),
+    FieldSchema("asw2t", float, 30, 10, 0.0),
+    FieldSchema("fck", float, 40, 10, None),
+    FieldSchema("fywd", float, 50, 10, 0.0),
+    FieldSchema("bw", float, 60, 10, 0.0),
+    FieldSchema("theta", float, 70, 10, 0.0),
+)
+
+_MATCONCRETEEC2_CARD8 = (
     FieldSchema("ec1_6", float, 0, 10, None),
     FieldSchema("ecsp69", float, 10, 10, None),
     FieldSchema("gamce9", float, 20, 10, None),
     FieldSchema("phief9", float, 30, 10, None),
 )
 
-_MATCONCRETEEC2_CARD8 = (
+_MATCONCRETEEC2_CARD9 = (
     FieldSchema("ft2", float, 0, 10, None),
     FieldSchema("ftshr", float, 10, 10, None),
     FieldSchema("lcftt", int, 20, 10, None),
     FieldSchema("wro_g", float, 30, 10, None),
     FieldSchema("zsurf", float, 40, 10, None),
+    FieldSchema("lcfib", int, 50, 10, None),
 )
 
 _MATCONCRETEEC2_OPTION0_CARD0 = (
@@ -135,6 +147,7 @@ class MatConcreteEc2(KeywordBase):
         "lcalps": LinkType.DEFINE_CURVE,
         "lcalpc": LinkType.DEFINE_CURVE,
         "lcftt": LinkType.DEFINE_CURVE,
+        "lcfib": LinkType.DEFINE_CURVE,
     }
 
     def __init__(self, **kwargs):
@@ -176,6 +189,10 @@ class MatConcreteEc2(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _MATCONCRETEEC2_CARD8,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MATCONCRETEEC2_CARD9,
                 **kwargs,
             ),
             OptionCardSet(
@@ -244,6 +261,7 @@ class MatConcreteEc2(KeywordBase):
         EQ.7.0: Siliceous, EC2 1-2:2004 (fire engineering)
         EQ.8.0: Calcareous, EC2 1-2:2004 (fire engineering)
         EQ.9.0: EC2 1-1:2004 (general and buildings)
+        To obtain the pre-R10 behavior, that is, a maximum of 2 cracks, add 100 to TYPEC. For example, 109 means two cracks and EC2 1-1:2004 (general and buildings).
         """ # nopep8
         return self._cards[0].get_value("typec")
 
@@ -278,11 +296,11 @@ class MatConcreteEc2(KeywordBase):
 
     @property
     def fcc(self) -> typing.Optional[float]:
-        """Get or set the Relevant only if TYPEC = 6 or 9.
-        TYPEC.EQ.6:	FCC is the compressive strength of confined concrete used in Mander equations. Default: unconfined properties are assumed (FCC‌ = FC).
-        TYPEC.EQ.9:	FCC is the actual compressive strength. If blank, this will be set equal to
+        """Get or set the Relevant only if TYPEC = 6 or 9.
+        TYPEC.EQ.6: FCC is the compressive strength of confined concrete used in Mander equations. Default: unconfined properties are assumed (FCC = FC).
+        TYPEC.EQ.9: FCC is the actual compressive strength. If blank, this will be set equal to
         the mean compressive strength (fcm in EC2 1-1) as required for serviceability calculations (8MPa greater than FC).
-        For ultimate load calculations the user may set FCC to a factored characteristic compressive strength. See remarks below
+        For ultimate load calculations. You can set FCC to a factored characteristic compressive strength. See remarks below
         """ # nopep8
         return self._cards[0].get_value("fcc")
 
@@ -304,7 +322,7 @@ class MatConcreteEc2(KeywordBase):
 
     @property
     def lchar(self) -> typing.Optional[float]:
-        """Get or set the Characteristic length at which ESOFT applies; also used as crack spacing in aggregate-interlock calculation
+        """Get or set the Characteristic length at which ESOFT applies; It is also used as crack spacing in aggregate-interlock calculations
         """ # nopep8
         return self._cards[1].get_value("lchar")
 
@@ -326,7 +344,7 @@ class MatConcreteEc2(KeywordBase):
 
     @property
     def taumxf(self) -> float:
-        """Get or set the Maximum friction shear stress on crack planes (ignored if AGGSZ>0 - see notes)
+        """Get or set the Maximum friction shear stress on crack planes (ignored if AGGSZ > 0.0 - see remarks). For example, if the model unit is meters, UNITL = 1000.
         """ # nopep8
         return self._cards[1].get_value("taumxf")
 
@@ -370,7 +388,7 @@ class MatConcreteEc2(KeywordBase):
 
     @property
     def unitl(self) -> float:
-        """Get or set the Factor to convert length units to millimetres (used only if AGGSZ>0  - see notes)
+        """Get or set the Factor to convert length units to millimetres (used only if AGGSZ>0
         """ # nopep8
         return self._cards[1].get_value("unitl")
 
@@ -476,12 +494,10 @@ class MatConcreteEc2(KeywordBase):
 
     @property
     def aopt(self) -> typing.Optional[float]:
-        """Get or set the Material axes option:
-        EQ.0.0: locally orthotropic with material axes determined by
-        element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
-        EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
-        EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        """Get or set the Material axes option (see *MAT_002 for a more complete description):
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with *DEFINE_COORDINATE_NODES.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR.
+        EQ.3.0: Locally orthotropic material axes determined by rotating the material axes about the element normal by an angle, BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         """ # nopep8
         return self._cards[3].get_value("aopt")
 
@@ -514,7 +530,7 @@ class MatConcreteEc2(KeywordBase):
 
     @property
     def ecut36(self) -> typing.Optional[float]:
-        """Get or set the Strain to failure of concrete in compression cu (TYPEC=3 and 6).See under “Compressive response…” in in section Material Behavior of Concretethe below. Default is 0.02 for TYPEC = 3 and 1.1×EC1_6  for TYPEC = 6..
+        """Get or set the Strain to failure of concrete in compression cu (TYPEC=3 and 6).See under 'Compressive response...' in the section Material Behavior of Concretethe section below. Default is 0.02 for TYPEC = 3 and 1.1*EC1_6  for TYPEC = 6.
         """ # nopep8
         return self._cards[3].get_value("ecut36")
 
@@ -560,7 +576,7 @@ class MatConcreteEc2(KeywordBase):
 
     @property
     def unlfac(self) -> float:
-        """Get or set the Stiffness degradation factor after crushing (0.0 to 1.0 ¨C see notes)
+        """Get or set the Stiffness degradation factor after crushing (0.0 to 1.0 - see notes)
         """ # nopep8
         return self._cards[3].get_value("unlfac")
 
@@ -713,25 +729,31 @@ class MatConcreteEc2(KeywordBase):
         self._cards[5].set_value("beta", value)
 
     @property
-    def typesc(self) -> float:
+    def typesc(self) -> int:
         """Get or set the Type of shear capacity check
-        EQ.1.0:	BS 8110, no failure even if capacity is exceeded
-        EQ.2.0:	ACI 318 - 05M, no failure even if capacity is exceeded
-        EQ.11 : BS 8110, failure occurs if capacity is exceeded
-        EQ.12 : ACI 318 - 05M, failure occurs if capacity is exceeded
+        EQ.1.0: BS 8110, no failure even if capacity is exceeded
+        EQ.2.0: ACI 318 - 05M, no failure even if capacity is exceeded
+        EQ.5: EC2 1-1:2004, for members without shear reinforcement, no failure even if capacity is exceeded
+        EQ.6: EC2 1 - 1 : 2004, for members with shear reinforcement, no failure even if capacity is exceeded
+        EQ.11: BS 8110, failure occurs if capacity is exceeded
+        EQ.12: ACI 318 - 05M, failure occurs if capacity is exceeded
+        EQ.15: EC2 1-1:2004, for members without shear reinforcement, failure occurs if capacity is exceeded
+        EQ.16: EC2 1 - 1 : 2004, for members with shear reinforcement, failure occurs if capacity is exceeded
         """ # nopep8
         return self._cards[6].get_value("typesc")
 
     @typesc.setter
-    def typesc(self, value: float) -> None:
+    def typesc(self, value: int) -> None:
         """Set the typesc property."""
-        if value not in [1, 2, 11, 12, None]:
-            raise Exception("""typesc must be `None` or one of {1,2,11,12}.""")
+        if value not in [1, 2, 5, 6, 11, 12, 15, 16, None]:
+            raise Exception("""typesc must be `None` or one of {1,2,5,6,11,12,15,16}.""")
         self._cards[6].set_value("typesc", value)
 
     @property
     def p_or_f(self) -> typing.Optional[float]:
-        """Get or set the If BS8110 shear check, percent reinforcement - e.g. if 0.5%, input 0.5. If ACI shear check, ratio (cylinder strength/FC) - defaults to 1
+        """Get or set the Meaning depends on the type of shear capacity check (see TYPESC). For TYPESC = 1 and 11, it is the percent reinforcement.
+        For example, input 0.5 for 0.5% reinforcement. For TYPESC = 2 and 12, it is the ratio of cylinder strength to FC. The default
+        value for this case is 1.0. For all other values of TYPESC, this field is not used.
         """ # nopep8
         return self._cards[6].get_value("p_or_f")
 
@@ -742,7 +764,10 @@ class MatConcreteEc2(KeywordBase):
 
     @property
     def effd_(self) -> typing.Optional[float]:
-        """Get or set the Effective section depth (length units), used in shear capacity check. This is usually the section depth excluding the cover concrete
+        """Get or set the If used with shell elements, EFFD is the effective section depth d (length units) used by all the types of shear capacity check.
+        This is usually the section depth excluding the cover concrete. If used with beam elements, the meaning depends on the shear capacity
+        check type. For beam elements with a BS8110 or ACI shear capacity check, EFFD is the product bwd, where bw is the section width.
+        For beam elements with EC2 shear capacity checks, EFFD is the effective depth d, while bw is input separately on Card 7.1.
         """ # nopep8
         return self._cards[6].get_value("effd_")
 
@@ -753,7 +778,8 @@ class MatConcreteEc2(KeywordBase):
 
     @property
     def gamsc(self) -> typing.Optional[float]:
-        """Get or set the Load factor used in BS8110 shear capacity check
+        """Get or set the Meaning depends on the type of shear capacity check (see TYPESC). For TYPESC = 1 and 11, it is a load factor used in the BS8110 shear capacity check.
+        For TYPESC = 5, 6, 15, and 16, it is the material strength factor for concrete, γc. For all other values of TYPESC, this field is not used.
         """ # nopep8
         return self._cards[6].get_value("gamsc")
 
@@ -797,7 +823,7 @@ class MatConcreteEc2(KeywordBase):
 
     @property
     def tmpoff(self) -> typing.Optional[float]:
-        """Get or set the Constant to be added to the model's temperature unit to convert into degrees Celsius, e.g., if the model's temperature unit is degrees Kelvin, set TMPOFF to -273.  Degrees Celsius temperatures are then used throughout the material model, e.g., for LCALPC as well as for the default thermally-sensitive properties.
+        """Get or set the Constant to be added to the model's temperature unit to convert into degrees Celsius, e.g., if the model's temperature unit is degrees Kelvin, set TMPOFF to -273. Degrees Celsius temperatures are then used throughout the material model, e.g., for LCALPC and the default thermally-sensitive properties.
         """ # nopep8
         return self._cards[6].get_value("tmpoff")
 
@@ -807,114 +833,227 @@ class MatConcreteEc2(KeywordBase):
         self._cards[6].set_value("tmpoff", value)
 
     @property
+    def asw1s(self) -> float:
+        """Get or set the The meaning of ASW1S depends on the value of TYPESC.
+        TYPESC.EQ.5: Percent tensile reinforcement, ρl. For example, if input 0.2 for 0.2%. This is the longitudinal reinforcement resisting shear in local
+        s-direction (beams) or local XZ-plane (shells). See Remark 5.
+        TYPESC.EQ.6: Vertical (90°) shear reinforcement parameter Asw ⁄ sh (see Remark 5) resisting shear in the local s-direction (beams) or XZ-plane (shells).
+        """ # nopep8
+        return self._cards[7].get_value("asw1s")
+
+    @asw1s.setter
+    def asw1s(self, value: float) -> None:
+        """Set the asw1s property."""
+        self._cards[7].set_value("asw1s", value)
+
+    @property
+    def asw1t(self) -> float:
+        """Get or set the The meaning of ASW1S depends on the value of TYPESC.
+        TYPESC.EQ.5: Percent tensile reinforcement, ρl. For example, if 0.2% input 0.2. This is the longitudinal reinforcement resisting shear in local
+        y-direction (beams) or local YZ-plane (shells). See Remark 5.
+        TYPESC.EQ.6: Vertical (90°) shear reinforcement parameter Asw ⁄ sh (see Remark 5) resisting shear in the local y-direction (beams) or YZ-plane (shells).
+        """ # nopep8
+        return self._cards[7].get_value("asw1t")
+
+    @asw1t.setter
+    def asw1t(self, value: float) -> None:
+        """Set the asw1t property."""
+        self._cards[7].set_value("asw1t", value)
+
+    @property
+    def asw2s(self) -> float:
+        """Get or set the |ASW2S| is the inclined (45°) shear reinforcement parameter Asw ⁄sh (see Remark 5) resisting shear in the local s-direction (beams) or XZ-plane (shells).
+        It is applicable only for TYPESC = 6 or 16.
+        GT.0.0: Inclined bars work for positive shear force only.
+        LT.0.0: Inclined bars work for negative shear force only.
+        """ # nopep8
+        return self._cards[7].get_value("asw2s")
+
+    @asw2s.setter
+    def asw2s(self, value: float) -> None:
+        """Set the asw2s property."""
+        self._cards[7].set_value("asw2s", value)
+
+    @property
+    def asw2t(self) -> float:
+        """Get or set the |ASW2T| is the inclined (45°) shear reinforcement parameter Asw ⁄sh (see Remark 5) resisting shear in the local t-direction (beams) or YZ-plane (shells).
+        It is applicable only for TYPESC = 6 or 16.
+        GT.0.0: Inclined bars work for positive shear force only.
+        LT.0.0: Inclined bars work for negative shear force only.
+        """ # nopep8
+        return self._cards[7].get_value("asw2t")
+
+    @asw2t.setter
+    def asw2t(self, value: float) -> None:
+        """Set the asw2t property."""
+        self._cards[7].set_value("asw2t", value)
+
+    @property
+    def fck(self) -> typing.Optional[float]:
+        """Get or set the Concrete characteristic cylinder strength fck (stress units) to be used in shear capacity check
+        """ # nopep8
+        return self._cards[7].get_value("fck")
+
+    @fck.setter
+    def fck(self, value: float) -> None:
+        """Set the fck property."""
+        self._cards[7].set_value("fck", value)
+
+    @property
+    def fywd(self) -> float:
+        """Get or set the Design yield strength of stirrups fywd (stress units) (TYPESC = 6 or 16).
+        """ # nopep8
+        return self._cards[7].get_value("fywd")
+
+    @fywd.setter
+    def fywd(self, value: float) -> None:
+        """Set the fywd property."""
+        self._cards[7].set_value("fywd", value)
+
+    @property
+    def bw(self) -> float:
+        """Get or set the Cross-section width bw (length units). Relevant to beam elements only.
+        """ # nopep8
+        return self._cards[7].get_value("bw")
+
+    @bw.setter
+    def bw(self, value: float) -> None:
+        """Set the bw property."""
+        self._cards[7].set_value("bw", value)
+
+    @property
+    def theta(self) -> float:
+        """Get or set the Calculation method for the inclination of concrete compression strut (TYPESC = 6 or 16):
+        EQ.0.0: Fixed inclination method with θ = 45°(default)
+        EQ.1.0: Variable inclination method(see Remark 5)
+        """ # nopep8
+        return self._cards[7].get_value("theta")
+
+    @theta.setter
+    def theta(self, value: float) -> None:
+        """Set the theta property."""
+        self._cards[7].set_value("theta", value)
+
+    @property
     def ec1_6(self) -> typing.Optional[float]:
         """Get or set the Strain at maximum compressive stress for Type 6 concrete
         """ # nopep8
-        return self._cards[7].get_value("ec1_6")
+        return self._cards[8].get_value("ec1_6")
 
     @ec1_6.setter
     def ec1_6(self, value: float) -> None:
         """Set the ec1_6 property."""
-        self._cards[7].set_value("ec1_6", value)
+        self._cards[8].set_value("ec1_6", value)
 
     @property
     def ecsp69(self) -> typing.Optional[float]:
         """Get or set the Spalling strain in compression for Type 6 concrete
         """ # nopep8
-        return self._cards[7].get_value("ecsp69")
+        return self._cards[8].get_value("ecsp69")
 
     @ecsp69.setter
     def ecsp69(self, value: float) -> None:
         """Set the ecsp69 property."""
-        self._cards[7].set_value("ecsp69", value)
+        self._cards[8].set_value("ecsp69", value)
 
     @property
     def gamce9(self) -> typing.Optional[float]:
         """Get or set the Material factor that divides the Youngs Modulus (TYPEC = 9).
         """ # nopep8
-        return self._cards[7].get_value("gamce9")
+        return self._cards[8].get_value("gamce9")
 
     @gamce9.setter
     def gamce9(self, value: float) -> None:
         """Set the gamce9 property."""
-        self._cards[7].set_value("gamce9", value)
+        self._cards[8].set_value("gamce9", value)
 
     @property
     def phief9(self) -> typing.Optional[float]:
         """Get or set the Effective creep ratio (TYPEC = 9).
         """ # nopep8
-        return self._cards[7].get_value("phief9")
+        return self._cards[8].get_value("phief9")
 
     @phief9.setter
     def phief9(self, value: float) -> None:
         """Set the phief9 property."""
-        self._cards[7].set_value("phief9", value)
+        self._cards[8].set_value("phief9", value)
 
     @property
     def ft2(self) -> typing.Optional[float]:
         """Get or set the Tensile strength used for calculating tensile response.
         """ # nopep8
-        return self._cards[8].get_value("ft2")
+        return self._cards[9].get_value("ft2")
 
     @ft2.setter
     def ft2(self, value: float) -> None:
         """Set the ft2 property."""
-        self._cards[8].set_value("ft2", value)
+        self._cards[9].set_value("ft2", value)
 
     @property
     def ftshr(self) -> typing.Optional[float]:
         """Get or set the Tensile strength used for calculating post-crack shear response
         """ # nopep8
-        return self._cards[8].get_value("ftshr")
+        return self._cards[9].get_value("ftshr")
 
     @ftshr.setter
     def ftshr(self, value: float) -> None:
         """Set the ftshr property."""
-        self._cards[8].set_value("ftshr", value)
+        self._cards[9].set_value("ftshr", value)
 
     @property
     def lcftt(self) -> typing.Optional[int]:
         """Get or set the Load curve defining factor on tensile strength versus time.
         """ # nopep8
-        return self._cards[8].get_value("lcftt")
+        return self._cards[9].get_value("lcftt")
 
     @lcftt.setter
     def lcftt(self, value: int) -> None:
         """Set the lcftt property."""
-        self._cards[8].set_value("lcftt", value)
+        self._cards[9].set_value("lcftt", value)
 
     @property
     def wro_g(self) -> typing.Optional[float]:
         """Get or set the Density times gravity for water pressure in cracks.
         """ # nopep8
-        return self._cards[8].get_value("wro_g")
+        return self._cards[9].get_value("wro_g")
 
     @wro_g.setter
     def wro_g(self, value: float) -> None:
         """Set the wro_g property."""
-        self._cards[8].set_value("wro_g", value)
+        self._cards[9].set_value("wro_g", value)
 
     @property
     def zsurf(self) -> typing.Optional[float]:
         """Get or set the -coordinate of water surface (for water pressure in cracks)
         """ # nopep8
-        return self._cards[8].get_value("zsurf")
+        return self._cards[9].get_value("zsurf")
 
     @zsurf.setter
     def zsurf(self, value: float) -> None:
         """Set the zsurf property."""
-        self._cards[8].set_value("zsurf", value)
+        self._cards[9].set_value("zsurf", value)
+
+    @property
+    def lcfib(self) -> typing.Optional[int]:
+        """Get or set the Optional load curve defining the tensile response. It is intended for fiber-reinforced concrete. The x-axis of the curve is tensile strain.The y-axis of the curve is a non-dimensional scale factor on the tensile strength FT2. If defined, this curve overrides ECUTEN.
+        """ # nopep8
+        return self._cards[9].get_value("lcfib")
+
+    @lcfib.setter
+    def lcfib(self, value: int) -> None:
+        """Set the lcfib property."""
+        self._cards[9].set_value("lcfib", value)
 
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[9].cards[0].get_value("title")
+        return self._cards[10].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[9].cards[0].set_value("title", value)
+        self._cards[10].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
@@ -978,4 +1117,19 @@ class MatConcreteEc2(KeywordBase):
     def lcftt_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcftt."""
         self.lcftt = value.lcid
+
+    @property
+    def lcfib_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcfib."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcfib:
+                return kwd
+        return None
+
+    @lcfib_link.setter
+    def lcfib_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcfib."""
+        self.lcfib = value.lcid
 

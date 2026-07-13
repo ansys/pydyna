@@ -25,12 +25,14 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _ICFDBOUNDARYCONJHEAT_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
     FieldSchema("ctype", int, 10, 10, 0),
     FieldSchema("val", float, 20, 10, 0.0),
-    FieldSchema("sflcid", float, 30, 10, None),
+    FieldSchema("sflcid", int, 30, 10, None),
 )
 
 class IcfdBoundaryConjHeat(KeywordBase):
@@ -38,6 +40,9 @@ class IcfdBoundaryConjHeat(KeywordBase):
 
     keyword = "ICFD"
     subkeyword = "BOUNDARY_CONJ_HEAT"
+    _link_fields = {
+        "sflcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdBoundaryConjHeat class."""
@@ -50,7 +55,7 @@ class IcfdBoundaryConjHeat(KeywordBase):
         ]
     @property
     def pid(self) -> typing.Optional[int]:
-        """Get or set the PID of the fluid surface in contact with the solid
+        """Get or set the PID of the fluid surface in contact with the structure
         """ # nopep8
         return self._cards[0].get_value("pid")
 
@@ -62,8 +67,8 @@ class IcfdBoundaryConjHeat(KeywordBase):
     @property
     def ctype(self) -> int:
         """Get or set the Contact type:
-        EQ.0:	Constraint approach.
-        EQ.1 : Mortar contact
+        EQ.0: Constraint approach.
+        EQ.1: Mortar contact
         """ # nopep8
         return self._cards[0].get_value("ctype")
 
@@ -76,7 +81,7 @@ class IcfdBoundaryConjHeat(KeywordBase):
 
     @property
     def val(self) -> float:
-        """Get or set the Optional Temperature drop if CTYPE=0 or Interface Heat Transfer Coefficient if CTYPE=1 (high value by default to insure perfect contact)
+        """Get or set the Optional temperature drop if CTYPE = 0 or interface heat transfer coefficient if CTYPE = 1 (high value by default to ensure perfect contact).
         """ # nopep8
         return self._cards[0].get_value("val")
 
@@ -86,13 +91,28 @@ class IcfdBoundaryConjHeat(KeywordBase):
         self._cards[0].set_value("val", value)
 
     @property
-    def sflcid(self) -> typing.Optional[float]:
-        """Get or set the Load curve ID used to describe scale factor on VAL value versus time, see *DEFINE_CURVE, *DEFINE_CURVE_FUNCTION, or *DEFINE_FUNCTION.  If a DEFINE_FUNCTION is used, the following parameters are allowed: f(x,y,z,vx,vy,vz,temp,pres,time).
+    def sflcid(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID used to describe scale factor on VAL value as a function of time; see *DEFINE_CURVE, *DEFINE_CURVE_FUNCTION, or *DEFINE_FUNCTION.  If a *DEFINE_FUNCTION is used, the following parameters are allowed: f(x, y, z, vx, vy, vz, temp, pres, time).
         """ # nopep8
         return self._cards[0].get_value("sflcid")
 
     @sflcid.setter
-    def sflcid(self, value: float) -> None:
+    def sflcid(self, value: int) -> None:
         """Set the sflcid property."""
         self._cards[0].set_value("sflcid", value)
+
+    @property
+    def sflcid_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for sflcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.sflcid:
+                return kwd
+        return None
+
+    @sflcid_link.setter
+    def sflcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for sflcid."""
+        self.sflcid = value.lcid
 

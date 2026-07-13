@@ -20,6 +20,20 @@ DampingFrequencyRangeDeform
     :members:
 
 
+DampingFrequencyRangeDeformDmig
+-------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_frequency_range_deform_dmig
+    :members:
+
+
+DampingFrequencyRangeDmig
+-------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_frequency_range_dmig
+    :members:
+
+
 DampingGlobal
 -------------
 
@@ -55,6 +69,20 @@ DampingPartStiffnessSet
     :members:
 
 
+DampingPartStructural
+---------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_part_structural
+    :members:
+
+
+DampingPartStructuralSet
+------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_part_structural_set
+    :members:
+
+
 DampingPorosity
 ---------------
 
@@ -66,6 +94,13 @@ DampingRelative
 ---------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_relative
+    :members:
+
+
+DampingStructural
+-----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.damping_structural
     :members:
 
 

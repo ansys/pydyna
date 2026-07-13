@@ -34,20 +34,20 @@ _MATKINEMATICHARDENINGTRANSVERSELYANISOTROPICNLP_CARD0 = (
     FieldSchema("ro", float, 10, 10, None),
     FieldSchema("e", float, 20, 10, None),
     FieldSchema("pr", float, 30, 10, None),
-    FieldSchema("r", float, 40, 10, None),
-    FieldSchema("hclid", int, 50, 10, None),
-    FieldSchema("opt", int, 60, 10, None),
+    FieldSchema("rbar", float, 40, 10, None),
+    FieldSchema("hclid", int, 50, 10, 0),
+    FieldSchema("opt", int, 60, 10, 0),
 )
 
 _MATKINEMATICHARDENINGTRANSVERSELYANISOTROPICNLP_CARD1 = (
     FieldSchema("cb", float, 0, 10, None),
     FieldSchema("y", float, 10, 10, None),
-    FieldSchema("sc", float, 20, 10, None),
+    FieldSchema("sc1", float, 20, 10, None),
     FieldSchema("k", float, 30, 10, None),
     FieldSchema("rsat", float, 40, 10, None),
     FieldSchema("sb", float, 50, 10, None),
     FieldSchema("h", float, 60, 10, None),
-    FieldSchema("sc2", float, 70, 10, None),
+    FieldSchema("sc2", float, 70, 10, 0.0),
 )
 
 _MATKINEMATICHARDENINGTRANSVERSELYANISOTROPICNLP_CARD2 = (
@@ -105,7 +105,7 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.  A unique number or label must be specified.
+        """Get or set the Material identification. A unique number or label must be specified.
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -127,7 +127,7 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
 
     @property
     def e(self) -> typing.Optional[float]:
-        """Get or set the Young's Modulus.
+        """Get or set the Young's modulus.
         """ # nopep8
         return self._cards[0].get_value("e")
 
@@ -148,19 +148,20 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
         self._cards[0].set_value("pr", value)
 
     @property
-    def r(self) -> typing.Optional[float]:
-        """Get or set the Anisotropic hardening parameter.
+    def rbar(self) -> typing.Optional[float]:
+        """Get or set the Plastic anisotropic parameter r(Lankford coefficient), also commonly referred to as "r-bar value" in sheet metal forming literature. For shell elements, r =R00=R45=R90 is assumed in the plane of the shell.
         """ # nopep8
-        return self._cards[0].get_value("r")
+        return self._cards[0].get_value("rbar")
 
-    @r.setter
-    def r(self, value: float) -> None:
-        """Set the r property."""
-        self._cards[0].set_value("r", value)
+    @rbar.setter
+    def rbar(self, value: float) -> None:
+        """Set the rbar property."""
+        self._cards[0].set_value("rbar", value)
 
     @property
-    def hclid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID in keyword *DEFINE_CURVE, where true strain and true stress relationship is characterized. Used in conjunction with variable OPT.
+    def hclid(self) -> int:
+        """Get or set the Load curve ID (see *DEFINE_CURVE) giving true strain as a function of true stress. This curve is used with OPT below and should not be referenced or used in other keywords.
+        Using this parameter is not recommended
         """ # nopep8
         return self._cards[0].get_value("hclid")
 
@@ -170,8 +171,12 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
         self._cards[0].set_value("hclid", value)
 
     @property
-    def opt(self) -> typing.Optional[int]:
-        """Get or set the Error calculation flag. When OPT=2, the load curve ID is the true stress-strain curve from uniaxial tension. LS-DYNA will perform error calculation based on this curve.
+    def opt(self) -> int:
+        """Get or set the Error calculation flag. The default value of "0" is recommended.
+        EQ.2: Perform the error calculation based on the true stress-strain curve from uniaxial tension, specified by HLCID.
+        The corrections will be made to the cyclic load curve, both in the loading and unloading portions. Since, in some cases where loading is more complex,
+        the accumulated plastic strain could be large (say more than 30%), the input uniaxial stress-strain curve must have enough strain range to cover
+        the maximum expected plastic strain. Note that this variable must be set to a value of "2" if HLCID is specified and a stress-strain curve is used.
         """ # nopep8
         return self._cards[0].get_value("opt")
 
@@ -182,7 +187,7 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
 
     @property
     def cb(self) -> typing.Optional[float]:
-        """Get or set the The uppercase B defined in the following equations.
+        """Get or set the Uppercase B defined in Yoshida and Uemori [2002]. It is the initial size of the bounding surface. See Equations 5, 7b, 21, and 43a and section 2.5 in the paper.
         """ # nopep8
         return self._cards[1].get_value("cb")
 
@@ -193,7 +198,7 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
 
     @property
     def y(self) -> typing.Optional[float]:
-        """Get or set the Hardening parameter as defined in the following equations.
+        """Get or set the Hardening parameter appearing in Yoshida and Uemori [2002] and Yoshida and Uemori [2003]. It gives the yield surface's radius in the deviatoric stress space. See Equations 4a, 7b, and 43a and section 2.5 in Yoshida and Uemori [2002].
         """ # nopep8
         return self._cards[1].get_value("y")
 
@@ -203,19 +208,19 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
         self._cards[1].set_value("y", value)
 
     @property
-    def sc(self) -> typing.Optional[float]:
-        """Get or set the The lowercase c defined in the following equations.
+    def sc1(self) -> typing.Optional[float]:
+        """Get or set the C_1 in Equation 43a of Yoshida and Uemori [2002]. Note that SC1 must be greater than SC2.
         """ # nopep8
-        return self._cards[1].get_value("sc")
+        return self._cards[1].get_value("sc1")
 
-    @sc.setter
-    def sc(self, value: float) -> None:
-        """Set the sc property."""
-        self._cards[1].set_value("sc", value)
+    @sc1.setter
+    def sc1(self, value: float) -> None:
+        """Set the sc1 property."""
+        self._cards[1].set_value("sc1", value)
 
     @property
     def k(self) -> typing.Optional[float]:
-        """Get or set the Hardening parameter as defined in the following equations.
+        """Get or set the Isotropic hardening parameter appearing in Equations 11, 12, 13, and 14 and section 2.4 of Yoshida and Uemori [2003]. In Yoshida and Uemori [2002], this parameter is called m and is in Equations 19 and 20 and section 2.5.
         """ # nopep8
         return self._cards[1].get_value("k")
 
@@ -226,7 +231,7 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
 
     @property
     def rsat(self) -> typing.Optional[float]:
-        """Get or set the Hardening parameter as defined in the following equations.
+        """Get or set the Hardening parameter, R_sat , appearing in Yoshida and Uemori [2002] and Yoshida and Uemori [2003]. See Equations 19 and 21 and section 2.5 of Yoshida and Uemori [2002].
         """ # nopep8
         return self._cards[1].get_value("rsat")
 
@@ -237,7 +242,7 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
 
     @property
     def sb(self) -> typing.Optional[float]:
-        """Get or set the Anisotropic parameter associated with work-hardening stagnation
+        """Get or set the The lowercase b material parameter appearing in Yoshida and Uemori [2002] (see Equation 20 and section 2.5 of the paper) and Yoshida and Uemori [2003]
         """ # nopep8
         return self._cards[1].get_value("sb")
 
@@ -248,9 +253,7 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
 
     @property
     def h(self) -> typing.Optional[float]:
-        """Get or set the Formulation option:
-        EQ.0.0: Maxwell (default),
-        EQ.1.0: Kelvin.
+        """Get or set the Anisotropic parameter associated with work-hardening stagnation. See Equations 26a, 27, and 30a and section 2.5 of Yoshida and Uemori [2002].
         """ # nopep8
         return self._cards[1].get_value("h")
 
@@ -260,10 +263,8 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
         self._cards[1].set_value("h", value)
 
     @property
-    def sc2(self) -> typing.Optional[float]:
-        """Get or set the Formulation option:
-        EQ.0.0: Maxwell (default),
-        EQ.1.0: Kelvin.
+    def sc2(self) -> float:
+        """Get or set the C_2 in Equation 43b of Yoshida and Uemori [2002]. See the description of SC1. If SC2 equals 0.0, is left blank, or equals SC1, then it turns into the basic model (the one c model).
         """ # nopep8
         return self._cards[1].get_value("sc2")
 
@@ -274,7 +275,7 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
 
     @property
     def ea(self) -> typing.Optional[float]:
-        """Get or set the Variable controlling the change of Young's modulus,    in the following equations.
+        """Get or set the Parameter controlling the change of Young's modulus, E_a. in Equation 42 of Yoshida and Uemori [2002]
         """ # nopep8
         return self._cards[2].get_value("ea")
 
@@ -285,7 +286,7 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
 
     @property
     def coe(self) -> typing.Optional[float]:
-        """Get or set the Variable controlling the change of Young's modulus,   in the following equations.
+        """Get or set the Parameter controlling the change of Young's modulus, ξ, in Equation 42 of Yoshida and Uemori [2002]
         """ # nopep8
         return self._cards[2].get_value("coe")
 
@@ -297,8 +298,8 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
     @property
     def iopt(self) -> int:
         """Get or set the Modified kinematic hardening rule flag:
-        EQ.0:  Original Yoshida formulation,
-        EQ.1:  Modified formulation.
+        EQ.0: Original Yoshida and Uemori formulation,
+        EQ.1 : Modified formulation.Define C1 and C2 below
         """ # nopep8
         return self._cards[2].get_value("iopt")
 
@@ -311,7 +312,7 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
 
     @property
     def c1(self) -> typing.Optional[float]:
-        """Get or set the Constants used to modify R:
+        """Get or set the Constants used to modify R ̇, so strain hardening will not saturate
         """ # nopep8
         return self._cards[2].get_value("c1")
 
@@ -322,7 +323,7 @@ class MatKinematicHardeningTransverselyAnisotropicNlp(KeywordBase):
 
     @property
     def c2(self) -> typing.Optional[float]:
-        """Get or set the Constants used to modify R:
+        """Get or set the Constants used to modify R ̇, so strain hardening will not saturate
         """ # nopep8
         return self._cards[2].get_value("c2")
 

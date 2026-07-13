@@ -31,6 +31,7 @@ from ansys.dyna.core.lib.keyword_base import LinkType
 _SETSOLIDGENERATEINCREMENT_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
     FieldSchema("solver", str, 10, 10, "MECH"),
+    FieldSchema("its", str, 20, 10, "0"),
 )
 
 _SETSOLIDGENERATEINCREMENT_CARD1 = (
@@ -105,6 +106,18 @@ class SetSolidGenerateIncrement(KeywordBase):
         if value not in ["MECH", "CESE", "ICFD", None]:
             raise Exception("""solver must be `None` or one of {"MECH","CESE","ICFD"}.""")
         self._cards[0].set_value("solver", value)
+
+    @property
+    def its(self) -> str:
+        """Get or set the Define coupling type across different scales in two-scale co-simulation. This flag should only be included for solid sets that provide coupling information in the input file referred to by *INCLUDE_COSIM.
+        EQ.3: Solid - in - solid immersed coupling
+        """ # nopep8
+        return self._cards[0].get_value("its")
+
+    @its.setter
+    def its(self, value: str) -> None:
+        """Set the its property."""
+        self._cards[0].set_value("its", value)
 
     @property
     def bbeg(self) -> typing.Optional[int]:

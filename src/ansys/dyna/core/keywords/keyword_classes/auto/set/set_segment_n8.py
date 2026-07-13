@@ -1,0 +1,246 @@
+# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+"""Module providing the SetSegmentN8 class."""
+import typing
+from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
+from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+
+_SETSEGMENTN8_CARD0 = (
+    FieldSchema("sid", int, 0, 10, None),
+)
+
+_SETSEGMENTN8_CARD1 = (
+    FieldSchema("n1", int, 0, 10, None),
+    FieldSchema("n2", int, 10, 10, None),
+    FieldSchema("n3", int, 20, 10, None),
+    FieldSchema("n4", int, 30, 10, None),
+    FieldSchema("n5", int, 40, 10, None),
+    FieldSchema("n6", int, 50, 10, None),
+    FieldSchema("n7", int, 60, 10, None),
+    FieldSchema("n8", int, 70, 10, None),
+)
+
+_SETSEGMENTN8_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
+class SetSegmentN8(KeywordBase):
+    """DYNA SET_SEGMENT_N8 keyword"""
+
+    keyword = "SET"
+    subkeyword = "SEGMENT_N8"
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
+    ]
+    _link_fields = {
+        "n1": LinkType.NODE,
+        "n2": LinkType.NODE,
+        "n3": LinkType.NODE,
+        "n4": LinkType.NODE,
+        "n5": LinkType.NODE,
+        "n6": LinkType.NODE,
+        "n7": LinkType.NODE,
+        "n8": LinkType.NODE,
+    }
+
+    def __init__(self, **kwargs):
+        """Initialize the SetSegmentN8 class."""
+        super().__init__(**kwargs)
+        kwargs["parent"] = self
+        self._cards = [
+            Card.from_field_schemas_with_defaults(
+                _SETSEGMENTN8_CARD0,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _SETSEGMENTN8_CARD1,
+                **kwargs,
+            ),
+            OptionCardSet(
+                option_spec = SetSegmentN8._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _SETSEGMENTN8_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
+    @property
+    def sid(self) -> typing.Optional[int]:
+        """Get or set the Segment set ID. All segment sets should have a unique set ID.
+        """ # nopep8
+        return self._cards[0].get_value("sid")
+
+    @sid.setter
+    def sid(self, value: int) -> None:
+        """Set the sid property."""
+        self._cards[0].set_value("sid", value)
+
+    @property
+    def n1(self) -> typing.Optional[int]:
+        """Get or set the Nodal point ??, see manual Fig 19.25 of *ELEMENT_SHELL for numbering sequence.
+        """ # nopep8
+        return self._cards[1].get_value("n1")
+
+    @n1.setter
+    def n1(self, value: int) -> None:
+        """Set the n1 property."""
+        self._cards[1].set_value("n1", value)
+
+    @property
+    def n2(self) -> typing.Optional[int]:
+        """Get or set the Nodal point ??, see manual Fig 19.25 of *ELEMENT_SHELL for numbering sequence.
+        """ # nopep8
+        return self._cards[1].get_value("n2")
+
+    @n2.setter
+    def n2(self, value: int) -> None:
+        """Set the n2 property."""
+        self._cards[1].set_value("n2", value)
+
+    @property
+    def n3(self) -> typing.Optional[int]:
+        """Get or set the Nodal point ??, see manual Fig 19.25 of *ELEMENT_SHELL for numbering sequence.
+        """ # nopep8
+        return self._cards[1].get_value("n3")
+
+    @n3.setter
+    def n3(self, value: int) -> None:
+        """Set the n3 property."""
+        self._cards[1].set_value("n3", value)
+
+    @property
+    def n4(self) -> typing.Optional[int]:
+        """Get or set the Nodal point ??, see manual Fig 19.25 of *ELEMENT_SHELL for numbering sequence.
+        """ # nopep8
+        return self._cards[1].get_value("n4")
+
+    @n4.setter
+    def n4(self, value: int) -> None:
+        """Set the n4 property."""
+        self._cards[1].set_value("n4", value)
+
+    @property
+    def n5(self) -> typing.Optional[int]:
+        """Get or set the Nodal point ??, see manual Fig 19.25 of *ELEMENT_SHELL for numbering sequence.
+        """ # nopep8
+        return self._cards[1].get_value("n5")
+
+    @n5.setter
+    def n5(self, value: int) -> None:
+        """Set the n5 property."""
+        self._cards[1].set_value("n5", value)
+
+    @property
+    def n6(self) -> typing.Optional[int]:
+        """Get or set the Nodal point ??, see manual Fig 19.25 of *ELEMENT_SHELL for numbering sequence.
+        """ # nopep8
+        return self._cards[1].get_value("n6")
+
+    @n6.setter
+    def n6(self, value: int) -> None:
+        """Set the n6 property."""
+        self._cards[1].set_value("n6", value)
+
+    @property
+    def n7(self) -> typing.Optional[int]:
+        """Get or set the Nodal point ??, see manual Fig 19.25 of *ELEMENT_SHELL for numbering sequence.
+        """ # nopep8
+        return self._cards[1].get_value("n7")
+
+    @n7.setter
+    def n7(self, value: int) -> None:
+        """Set the n7 property."""
+        self._cards[1].set_value("n7", value)
+
+    @property
+    def n8(self) -> typing.Optional[int]:
+        """Get or set the Nodal point ??, see manual Fig 19.25 of *ELEMENT_SHELL for numbering sequence.
+        """ # nopep8
+        return self._cards[1].get_value("n8")
+
+    @n8.setter
+    def n8(self, value: int) -> None:
+        """Set the n8 property."""
+        self._cards[1].set_value("n8", value)
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
+
+    @property
+    def n1_link(self) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n1."""
+        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+
+    @property
+    def n2_link(self) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n2."""
+        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+
+    @property
+    def n3_link(self) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n3."""
+        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+
+    @property
+    def n4_link(self) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n4."""
+        return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
+
+    @property
+    def n5_link(self) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n5."""
+        return self._get_link_by_attr("NODE", "nid", self.n5, "parts")
+
+    @property
+    def n6_link(self) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n6."""
+        return self._get_link_by_attr("NODE", "nid", self.n6, "parts")
+
+    @property
+    def n7_link(self) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n7."""
+        return self._get_link_by_attr("NODE", "nid", self.n7, "parts")
+
+    @property
+    def n8_link(self) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n8."""
+        return self._get_link_by_attr("NODE", "nid", self.n8, "parts")
+

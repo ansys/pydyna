@@ -216,9 +216,7 @@ class DatabaseExtentIntfor(KeywordBase):
 
     @property
     def nhuf(self) -> int:
-        """Get or set the Number of user friction history variables to output from user
-        defined friction routines; see *USER_INTERFACE_FRICTION
-        (MPP only). See Remark 2.
+        """Get or set the Number of user friction history variables to output from user defined friction routines; see *USER_INTERFACE_FRICTION(MPP only). See Remark 2.
         """ # nopep8
         return self._cards[1].get_value("nhuf")
 
@@ -244,9 +242,9 @@ class DatabaseExtentIntfor(KeywordBase):
 
     @property
     def neng(self) -> int:
-        """Get or set the Output (total) sliding interface energy density for Mortar contact, see also ENGOUT on * CONTROL_OUTPUT.
+        """Get or set the Output (total) sliding interface energy density for Mortar contact, see also ENGOUT on *CONTROL_OUTPUT.
         EQ.0: No output
-        EQ.1 : Output.
+        EQ.1: Output.
         """ # nopep8
         return self._cards[1].get_value("neng")
 
@@ -259,12 +257,12 @@ class DatabaseExtentIntfor(KeywordBase):
 
     @property
     def npen(self) -> int:
-        """Get or set the Output penetration info for Mortar contact. A nodal field gives the
+        """Get or set the Output penetration info for sliding contacts (non-TIED or TIEBREAK) when SOFT not equal 2. A nodal field gives the
         pentration for each node(magnitude and direction) in the sliding interface,
-        see also PENOUT on* CONTROL_OUTPUT.
-        EQ.0 : No output
-        GE.1 : Output absolute penetration
-        GE.2 : Output relative penetration.
+        see also PENOUT on *CONTROL_OUTPUT.
+        EQ.0: No output
+        GE.1: Output absolute penetration
+        GE.2: Output relative penetration.
         """ # nopep8
         return self._cards[1].get_value("npen")
 

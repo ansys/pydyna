@@ -93,7 +93,7 @@ class ControlSpotweldBeam(KeywordBase):
 
     @property
     def prtflg(self) -> int:
-        """Get or set the Set this flag to 1 to print for each spotweld attachment: the beam, node, and shell ID's, the parametric coordinates that define the constraint location, the angle used in the table lookup, and the three scale factors obtained from the load curves and table lookup.
+        """Get or set the Set this flag to 1 to print for each spotweld attachment: the beam, node, and shell IDs, the parametric coordinates that define the constraint location, the angle used in the table lookup, and the three scale factors obtained from the load curves and table lookup.
         """ # nopep8
         return self._cards[0].get_value("prtflg")
 
@@ -115,7 +115,7 @@ class ControlSpotweldBeam(KeywordBase):
 
     @property
     def rpbhx(self) -> int:
-        """Get or set the Replace each spot weld beam element with a cluster of RPBHX solid elements.  RPBHX may be set to 1, 4, or 8.  When RPBHX is set to 4 or 8, a table is generated to output the force and moment resultants into the SWFORC file, if this file is active.  This table is described by the keyword: *DEFINE_HEX_SPOTWELD_ASSEMBLY.   The ID's of the beam elements are used as the cluster spot weld ID's so the ID's in the SWFORC file are unchanged.  The beam elements are automatically deleted from the calculation, and the section and material data is automatically changed to be used with solid elements.
+        """Get or set the Replace each spot weld beam element with a cluster of RPBHX solid elements.  The net cross-section of the cluster of elements is dimensioned to have the same area as the replaced beam.  RPBHX may be set to 1, 4, or 8.  When RPBHX is set to 4 or 8, a table is generated to output the force and moment resultants into the SWFORC file if this file is active.  *DEFINE_HEX_SPOTWELD_ASSEMBLY describes this table.  LS-DYNA uses the IDs of the beam elements as the cluster spot weld IDs, so the IDs in the SWFORC file are unchanged.  The beam elements are automatically deleted from the calculation, and the section and material data are automatically changed to be used with solid elements.  See Figure Error! Reference source not found..
         """ # nopep8
         return self._cards[0].get_value("rpbhx")
 

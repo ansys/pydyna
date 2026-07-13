@@ -171,7 +171,7 @@ class ControlFormingAutoNet(KeywordBase):
     def offset(self) -> float:
         """Get or set the The net will be generated at this offset distance away from the reference point.
         GT.0: the net will be on the global +Z side, or on the vector head side if IDV is defined.
-        LT.0: the net will be on the global ¨CZ side, or on the vector tail side if IDV is defined
+        LT.0: the net will be on the global CZ side, or on the vector tail side if IDV is defined
         """ # nopep8
         return self._cards[1].get_value("offset")
 

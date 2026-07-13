@@ -60,7 +60,7 @@ class DualceseMatGas0(KeywordBase):
 
     @property
     def mu(self) -> typing.Optional[float]:
-        """Get or set the Fluid dynamic viscosity
+        """Get or set the Fluid dynamic viscosity. MU = 1.81x10**(-5) kg/ms for air at 15oC.
         """ # nopep8
         return self._cards[0].get_value("mu")
 

@@ -62,7 +62,7 @@ class IcfdBoundaryConvectionTemp(KeywordBase):
 
     @property
     def hlcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID to describe the heat transfer coefficient value versus time, see *DEFINE_CURVE,*DEFINE_CURVE_FUNCTION or *DEFINE_FUNCTION. If a DEFINE_FUNCTION is used, the following parameters are allowed:  f(x,y,z,vx,vy,vz,temp,pres,time).
+        """Get or set the Load curve ID to describe the heat transfer coefficient value versus time, see *DEFINE_CURVE,*DEFINE_CURVE_FUNCTION or *DEFINE_FUNCTION. If a DEFINE_FUNCTION is used, the following parameters are allowed: f(x,y,z,vx,vy,vz,temp,pres,time).
         """ # nopep8
         return self._cards[0].get_value("hlcid")
 
@@ -84,7 +84,7 @@ class IcfdBoundaryConvectionTemp(KeywordBase):
 
     @property
     def tblcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID to describe the environment (i.e bulk) temperature value versus time, see *DEFINE_CURVE,*DEFINE_CURVE_FUNCTION or *DEFINE_FUNCTION. If a DEFINE_FUNCTION is used, the following parameters are allowed:  f(x,y,z,vx,vy,vz,temp,pres,time).
+        """Get or set the Load curve ID to describe the environment (i.e bulk) temperature value versus time, see *DEFINE_CURVE,*DEFINE_CURVE_FUNCTION or *DEFINE_FUNCTION. If a DEFINE_FUNCTION is used, the following parameters are allowed: f(x,y,z,vx,vy,vz,temp,pres,time).
         """ # nopep8
         return self._cards[0].get_value("tblcid")
 

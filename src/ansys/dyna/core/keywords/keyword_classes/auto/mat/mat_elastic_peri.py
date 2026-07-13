@@ -35,6 +35,11 @@ _MATELASTICPERI_CARD0 = (
     FieldSchema("gs", float, 40, 10, 1e+20),
 )
 
+_MATELASTICPERI_CARD1 = (
+    FieldSchema("gf", int, 0, 10, 0),
+    FieldSchema("alphat", float, 10, 10, 0.0),
+)
+
 _MATELASTICPERI_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
@@ -55,6 +60,10 @@ class MatElasticPeri(KeywordBase):
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _MATELASTICPERI_CARD0,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MATELASTICPERI_CARD1,
                 **kwargs,
             ),
             OptionCardSet(
@@ -124,15 +133,40 @@ class MatElasticPeri(KeywordBase):
         self._cards[0].set_value("gs", value)
 
     @property
+    def gf(self) -> int:
+        """Get or set the Flag to perform a thermal residual stress analysis during dynamic relaxation (see Remark1):
+        EQ.0: No thermal residual stress analysis.
+        GT.0: Perform thermal residual stress analysis. GF is a function ID for the function defining the thermal field: f(x,y,z,t). x, y, and z give the position, and t is time.
+        LT.0: Perform thermal residual stress analysis. Read peritprofile.txt which gives the initial temperature field for the thermal residual stress analysis.
+        """ # nopep8
+        return self._cards[1].get_value("gf")
+
+    @gf.setter
+    def gf(self, value: int) -> None:
+        """Set the gf property."""
+        self._cards[1].set_value("gf", value)
+
+    @property
+    def alphat(self) -> float:
+        """Get or set the Isotropic thermal expansion coefficient for residual stress analysis.
+        """ # nopep8
+        return self._cards[1].get_value("alphat")
+
+    @alphat.setter
+    def alphat(self, value: float) -> None:
+        """Set the alphat property."""
+        self._cards[1].set_value("alphat", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[1].cards[0].get_value("title")
+        return self._cards[2].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[1].cards[0].set_value("title", value)
+        self._cards[2].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

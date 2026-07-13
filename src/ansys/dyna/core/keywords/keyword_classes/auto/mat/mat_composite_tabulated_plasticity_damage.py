@@ -143,6 +143,7 @@ _MATCOMPOSITETABULATEDPLASTICITYDAMAGE_CARD10 = (
     FieldSchema("tqc", float, 20, 10, None),
     FieldSchema("temp", float, 30, 10, None),
     FieldSchema("pmacc", float, 40, 10, None),
+    FieldSchema("slm", float, 50, 10, 1.1),
 )
 
 _MATCOMPOSITETABULATEDPLASTICITYDAMAGE_OPTION0_CARD0 = (
@@ -357,12 +358,12 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
     @property
     def aopt(self) -> float:
         """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC for a more complete description):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center.This option is for solid elements only.
-        EQ.2.0 : Globally orthotropic with material axes determined by vectors defined below
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
-        EQ.4.0 : Locally orthotropic in cylindrical coordinate system with the material axes determined by a vector, v,and an originating point, P, defining the centerline axis.This option is for solid elements only.
-        LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM or *DEFINE - _COORDINATE_VECTOR).
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
+        EQ.1.0: Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center.This option is for solid elements only.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
+        EQ.4.0: Locally orthotropic in cylindrical coordinate system with the material axes determined by a vector, v,and an originating point, P, defining the centerline axis.This option is for solid elements only.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number(CID on *DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM or *DEFINE - _COORDINATE_VECTOR).
         """ # nopep8
         return self._cards[1].get_value("aopt")
 
@@ -374,15 +375,14 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
     @property
     def macf(self) -> int:
         """Get or set the Material axes change flag for brick elements:
-
-        EQ. - 4:	Switch material axes b and c before BETA rotation
-        EQ. - 3 : Switch material axes a and c before BETA rotation
-        EQ. - 2 : Switch material axes a and b before BETA rotation
-        EQ.1 : No change, default
-        EQ.2 : Switch material axes a and b after BETA rotation
-        EQ.3 : Switch material axes a and c after BETA rotation
-        EQ.4 : Switch material axes b and c after BETA rotation
-        Figure Error!Reference source not found.indicates when LS - DYNA applies MACF during the process to obtain the final material axes.If BETA on * ELEMENT_SOLID_{ OPTION } is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT‌ = 3, the BETA input on Card 3 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed.
+        EQ. - 4: Switch material axes b and c before BETA rotation
+        EQ. - 3: Switch material axes a and c before BETA rotation
+        EQ. - 2: Switch material axes a and b before BETA rotation
+        EQ.1: No change, default
+        EQ.2: Switch material axes a and b after BETA rotation
+        EQ.3: Switch material axes a and c after BETA rotation
+        EQ.4: Switch material axes b and c after BETA rotation
+        If BETA on *ELEMENT_SOLID_{ OPTION } is defined, then that BETA is used for the rotation for all AOPT options. Otherwise, if AOPT = 3, the BETA input on Card 3 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed.
         """ # nopep8
         return self._cards[1].get_value("macf")
 
@@ -407,9 +407,9 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
     @property
     def vevp(self) -> int:
         """Get or set the Flag to control viscoelastic, viscoplastic behavior:
-        EQ.0:	Viscoplastic only with no rate effects in elastic region(default)
-        EQ.1 : Viscoelastic, viscoplastic
-        EQ.2 : Viscoelastic only.
+        EQ.0: Viscoplastic only with no rate effects in elastic region(default)
+        EQ.1: Viscoelastic, viscoplastic
+        EQ.2: Viscoelastic only.
         """ # nopep8
         return self._cards[1].get_value("vevp")
 
@@ -554,7 +554,7 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
     @property
     def beta(self) -> float:
-        """Get or set the Angle in degrees of a material rotation about the c-axis, available for AOPT = 0 (shells only) and AOPT = 3 (all element types).  This angle may be overridden on the element card; see *ELEMENT_‌SHELL_‌BETA and *ELEMENT_‌SOLID_‌ORTHO.
+        """Get or set the Angle in degrees of a material rotation about the c-axis, available for AOPT = 0 (shells only) and AOPT = 3 (all element types). This angle may be overridden on the element card; see *ELEMENT_SHELL_BETA and *ELEMENT_SOLID_ORTHO.
         """ # nopep8
         return self._cards[3].get_value("beta")
 
@@ -566,12 +566,12 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
     @property
     def tcsym(self) -> int:
         """Get or set the Flag for handling tension-compression asymmetry in all three material directions:
-        EQ.0:	Do not adjust user - defined data.
-        EQ.1 : Compute and use average of tension and compression elastic moduli in adjusting the stress - strain curve.See Remark 7.
-        EQ.2 : Use compression modulus as user - defined tension modulus in adjusting the stress - strain curve.See Remark 7.
-        EQ.3 : Use tension modulus as user - defined compression modulus in adjusting the stress - strain curve.See Remark 7.
-        EQ.4 : Use user - defined tensile curve as the compressive curve overriding the user - defined compressive curve.This implies that the normal stress - strain curves are symmetric including yield values.
-        EQ.5 : Use user - defined compressive curve as the tensile curve overriding the user - defined tensile curve.This implies that the normal stress - strain curves are symmetric including yield values.
+        EQ.0: Do not adjust user - defined data.
+        EQ.1: Compute and use average of tension and compression elastic moduli in adjusting the stress - strain curve.See Remark 7.
+        EQ.2: Use compression modulus as user - defined tension modulus in adjusting the stress - strain curve.See Remark 7.
+        EQ.3: Use tension modulus as user - defined compression modulus in adjusting the stress - strain curve.See Remark 7.
+        EQ.4: Use user - defined tensile curve as the compressive curve overriding the user - defined compressive curve.This implies that the normal stress - strain curves are symmetric including yield values.
+        EQ.5: Use user - defined compressive curve as the tensile curve overriding the user - defined tensile curve.This implies that the normal stress - strain curves are symmetric including yield values.
         """ # nopep8
         return self._cards[3].get_value("tcsym")
 
@@ -683,8 +683,7 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
     @property
     def lt1(self) -> typing.Optional[int]:
-        """Get or set the TABLE_3D ID's containing temperature and strain rate dependent stress-strain input curves for the 12
-        separate tests (LT: 3D Load Tables). LT1-3: Tension 1,2,3 directions
+        """Get or set the Table ID for a three-dimensional table (see *DEFINE_TABLE_3D) containing temperature and stress-strain input curves for the a-direction tension test. See Remarks 2, 8 and 9.
         """ # nopep8
         return self._cards[5].get_value("lt1")
 
@@ -695,8 +694,7 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
     @property
     def lt2(self) -> typing.Optional[int]:
-        """Get or set the TABLE_3D ID's containing temperature and strain rate dependent stress-strain input curves for the 12
-        separate tests (LT: 3D Load Tables). LT1-3: Tension 1,2,3 directions.
+        """Get or set the Table ID for a three-dimensional table (see *DEFINE_TABLE_3D) containing temperature and stress-strain input curves for the b-direction tension test. See Remarks 2, 8 and 9.
         """ # nopep8
         return self._cards[5].get_value("lt2")
 
@@ -707,8 +705,7 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
     @property
     def lt3(self) -> typing.Optional[int]:
-        """Get or set the TABLE_3D ID's containing temperature and strain rate dependent stress-strain input curves for the 12
-        separate tests (LT: 3D Load Tables). LT1-3: Tension 1,2,3 directions.
+        """Get or set the Table ID for a three-dimensional table (see *DEFINE_TABLE_3D) containing temperature and stress-strain input curves for the c-direction tension test. See Remarks 2, 8 and 9. Not required if used with shell elements.
         """ # nopep8
         return self._cards[5].get_value("lt3")
 
@@ -719,8 +716,7 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
     @property
     def lt4(self) -> typing.Optional[int]:
-        """Get or set the TABLE_3D ID's containing temperature and strain rate dependent stress-strain input curves for the 12
-        separate tests (LT: 3D Load Tables). LT4-6: Compression  1,2,3 directions.
+        """Get or set the Table ID for a three-dimensional table (see *DEFINE_TABLE_3D) containing temperature and stress-strain input curves for the a-direction compression test. See Remarks 2, 8 and 9.
         """ # nopep8
         return self._cards[5].get_value("lt4")
 
@@ -731,8 +727,7 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
     @property
     def lt5(self) -> typing.Optional[int]:
-        """Get or set the TABLE_3D ID's containing temperature and strain rate dependent stress-strain input curves for the 12
-        separate tests (LT: 3D Load Tables). LT4-6: Compression  1,2,3 directions.
+        """Get or set the Table ID for a three-dimensional table (see *DEFINE_TABLE_3D) containing temperature and stress-strain input curves for the b-direction compression test. See Remarks 2, 8 and 9.
         """ # nopep8
         return self._cards[5].get_value("lt5")
 
@@ -743,8 +738,7 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
     @property
     def lt6(self) -> typing.Optional[int]:
-        """Get or set the TABLE_3D ID's containing temperature and strain rate dependent stress-strain input curves for the 12
-        separate tests (LT: 3D Load Tables). LT4-6: Compression  1,2,3 directions.
+        """Get or set the Table ID for a three-dimensional table (see *DEFINE_TABLE_3D) containing temperature and stress-strain input curves for the c-direction compression test. See Remarks 2, 8 and 9. Not required if used with shell elements.
         """ # nopep8
         return self._cards[5].get_value("lt6")
 
@@ -755,8 +749,7 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
     @property
     def lt7(self) -> typing.Optional[int]:
-        """Get or set the TABLE_3D ID's containing temperature and strain rate dependent stress-strain input curves for the 12
-        separate tests (LT: 3D Load Tables). LT7: Shear 1-2 plane.
+        """Get or set the Table ID for a three-dimensional table (see *DEFINE_TABLE_3D) containing temperature and stress-strain input curves for the ab-plane shear test. See Remarks 2, 8 and 9.
         """ # nopep8
         return self._cards[5].get_value("lt7")
 
@@ -767,8 +760,7 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
     @property
     def lt8(self) -> typing.Optional[int]:
-        """Get or set the TABLE_3D ID's containing temperature and strain rate dependent stress-strain input curves for the 12
-        separate tests (LT: 3D Load Tables). LT8: Shear 2-3 plane.
+        """Get or set the Table ID for a three-dimensional table (see *DEFINE_TABLE_3D) containing temperature and stress-strain input curves for the bc-plane shear test. See Remarks 2, 8 and 9. Not required if used with shell elements.
         """ # nopep8
         return self._cards[6].get_value("lt8")
 
@@ -779,8 +771,7 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
     @property
     def lt9(self) -> typing.Optional[int]:
-        """Get or set the TABLE_3D ID's containing temperature and strain rate dependent stress-strain input curves for the 12
-        separate tests (LT: 3D Load Tables). LT9: Shear 1-3 plane.
+        """Get or set the Table ID for a three-dimensional table (see *DEFINE_TABLE_3D) containing temperature and stress-strain input curves for the ac-plane shear test. See Remarks 2, 8 and 9. Not required if used with shell elements.
         """ # nopep8
         return self._cards[6].get_value("lt9")
 
@@ -791,8 +782,7 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
     @property
     def lt10(self) -> typing.Optional[int]:
-        """Get or set the TABLE_3D ID's containing temperature and strain rate dependent stress-strain input curves for the 12
-        separate tests (LT: 3D Load Tables). LT10: 45 degree Off-axis 1-2 plane TensionorCompression.
+        """Get or set the Table ID for a three-dimensional table (see *DEFINE_TABLE_3D) containing temperature and stress-strain input curves for the 45 off axis ab-plane tension or compression test. See Remarks 2, 8 and 9. Optional for all element types.
         """ # nopep8
         return self._cards[6].get_value("lt10")
 
@@ -803,8 +793,7 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
     @property
     def lt11(self) -> typing.Optional[int]:
-        """Get or set the TABLE_3D ID's containing temperature and strain rate dependent stress-strain input curves for the 12
-        separate tests (LT: 3D Load Tables). LT10: 45 degree Off-axis 2-3 plane TensionorCompression.
+        """Get or set the Table ID for a three-dimensional table (see *DEFINE_TABLE_3D) containing temperature and stress-strain input curves for the 45 off axis bc-plane tension or compression test. See Remarks 2, 8 and 9. Not required if used with shell elements. Optional for solid elements.
         """ # nopep8
         return self._cards[6].get_value("lt11")
 
@@ -815,8 +804,7 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
     @property
     def lt12(self) -> typing.Optional[int]:
-        """Get or set the TABLE_3D ID's containing temperature and strain rate dependent stress-strain input curves for the 12
-        separate tests (LT: 3D Load Tables). LT10: 45 degree Off-axis 1-3 plane TensionorCompression.
+        """Get or set the Table ID for a three-dimensional table (see *DEFINE_TABLE_3D) containing temperature and stress-strain input curves for the 45 off axis ac-plane tension or compression test. See Remarks 2, 8 and 9. Not required if used with shell elements. Optional for solid elements.
         """ # nopep8
         return self._cards[6].get_value("lt12")
 
@@ -827,7 +815,7 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
     @property
     def ysc(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID containing the stress-strain curve ID's and associated initial yield strain values. See Remark (3).
+        """Get or set the Load curve ID containing the stress-strain curve IDs and associated initial yield strain values. See Remark 3
         """ # nopep8
         return self._cards[6].get_value("ysc")
 
@@ -838,9 +826,9 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
     @property
     def dflag(self) -> int:
-        """Get or set the Damage formulation flag:
-        EQ.0:	Based on effective stress(default)
-        EQ.1 : Based on corrected plastic strain.
+        """Get or set the Damage formulation flag (see Remark 12):
+        EQ.0: Based on effective stress(default)
+        EQ.1: Based on corrected plastic strain
         """ # nopep8
         return self._cards[6].get_value("dflag")
 
@@ -853,9 +841,7 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
 
     @property
     def dc(self) -> typing.Optional[int]:
-        """Get or set the Curve ID that specifies which components of the damage model are active.
-        It contains the damage parameter ID and the corresponding damage versus total strain ID.
-        Set this value to zero if damage should not be included in the analysis. See Remark (4).
+        """Get or set the Curve ID that specifies which components of the damage model are active. It contains the damage parameter ID and the corresponding damage as a function of total strain curve ID or Table3D ID. Set this value to zero if damage should not be included in the analysis. See Remark 4
         """ # nopep8
         return self._cards[6].get_value("dc")
 
@@ -867,18 +853,19 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
     @property
     def ftype(self) -> int:
         """Get or set the Failure criterion type (see Remarks 5 and 6):
-        EQ.0:	No failure considered(default)
-        EQ.1 : Puck Failure Criterion(PFC) (solid elements only)
-        EQ.2 : Tsai - Wu Failure Criterion(TWFC) (solid elements only)
-        EQ.3 : Generalized Tabulated Failure Criterion(GTFC)
+        EQ.0: No failure considered(default)
+        EQ.1: Puck Failure Criterion(PFC) (solid elements only)
+        EQ.2: Tsai - Wu Failure Criterion(TWFC) (solid elements only)
+        EQ.3: Generalized Tabulated Failure Criterion(GTFC)
+        EQ.4: Point Cloud Failure Criterion (PCFC) (shell element only)
         """ # nopep8
         return self._cards[7].get_value("ftype")
 
     @ftype.setter
     def ftype(self, value: int) -> None:
         """Set the ftype property."""
-        if value not in [0, 1, 2, 3, None]:
-            raise Exception("""ftype must be `None` or one of {0,1,2,3}.""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""ftype must be `None` or one of {0,1,2,3,4}.""")
         self._cards[7].set_value("ftype", value)
 
     @property
@@ -1029,7 +1016,7 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
     def pmacc(self) -> typing.Optional[float]:
         """Get or set the Plastic multiplier computational accuracy
         EQ. 0: Use up to a maximum of 1000 increments(default)
-        EQ.N : Specify a positive value N greater than 1 as the maximum number of increments.An error message is issued if a converged solution cannot be found
+        EQ.N: Specify a positive value N greater than 1 as the maximum number of increments.An error message is issued if a converged solution cannot be found
         """ # nopep8
         return self._cards[10].get_value("pmacc")
 
@@ -1037,6 +1024,17 @@ class MatCompositeTabulatedPlasticityDamage(KeywordBase):
     def pmacc(self, value: float) -> None:
         """Set the pmacc property."""
         self._cards[10].set_value("pmacc", value)
+
+    @property
+    def slm(self) -> float:
+        """Get or set the Step length multiplier used in bounding the plastic multiplier calculations. The default value is 1.1.
+        """ # nopep8
+        return self._cards[10].get_value("slm")
+
+    @slm.setter
+    def slm(self, value: float) -> None:
+        """Set the slm property."""
+        self._cards[10].set_value("slm", value)
 
     @property
     def title(self) -> typing.Optional[str]:

@@ -78,8 +78,8 @@ class EmEpFiberinitial(KeywordBase):
     @property
     def stype(self) -> int:
         """Get or set the Segment type:
-        EQ.1:	node set
-        EQ.2 : segment set
+        EQ.1: segment set
+        EQ.2: node set
         """ # nopep8
         return self._cards[0].get_value("stype")
 

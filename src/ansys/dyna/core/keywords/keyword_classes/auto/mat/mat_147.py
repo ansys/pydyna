@@ -138,7 +138,7 @@ class Mat147(KeywordBase):
         EQ.2: Damage Criterion Threshold.
         EQ.3: Damage (diso).
         EQ.4: Current Damage Criterion.
-        EQ.5: Not used.
+        EQ.5: Pore water pressure.
         EQ.6: Current Friction Angle (phi).
         """ # nopep8
         return self._cards[0].get_value("nplot")

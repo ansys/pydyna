@@ -300,7 +300,7 @@ class Mat226Nlp(KeywordBase):
 
     @property
     def hlcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID in keyword *DEFINE_CURVE, where true strain and true	stress relationship is characterized.
+        """Get or set the Load curve ID in keyword *DEFINE_CURVE, where true strain and true stress relationship is characterized.
         """ # nopep8
         return self._cards[1].get_value("hlcid")
 
@@ -316,7 +316,7 @@ class Mat226Nlp(KeywordBase):
         element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
         EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
         *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
         """ # nopep8
@@ -366,7 +366,7 @@ class Mat226Nlp(KeywordBase):
 
     @property
     def ifld(self) -> typing.Optional[int]:
-        """Get or set the ID of a load curve of the traditional Forming Limit Diagram (FLD) for the linear strain paths.  In the load curve, abscissas represent minor strains while ordinates represent major strains.  Define only when the NLP option is used.
+        """Get or set the ID of a load curve of the traditional Forming Limit Diagram (FLD) for the linear strain paths. In the load curve, abscissas represent minor strains while ordinates represent major strains. Define only when the NLP option is used.
         """ # nopep8
         return self._cards[2].get_value("ifld")
 
@@ -377,7 +377,7 @@ class Mat226Nlp(KeywordBase):
 
     @property
     def ea(self) -> typing.Optional[float]:
-        """Get or set the Variable controlling the change of Young’s modulus, E^A
+        """Get or set the Variable controlling the change of Young's modulus, E**A
         """ # nopep8
         return self._cards[2].get_value("ea")
 
@@ -388,7 +388,7 @@ class Mat226Nlp(KeywordBase):
 
     @property
     def coe(self) -> typing.Optional[float]:
-        """Get or set the Variable controlling the change of Young’s modulus
+        """Get or set the Variable controlling the change of Young's modulus
         """ # nopep8
         return self._cards[2].get_value("coe")
 

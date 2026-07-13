@@ -48,6 +48,7 @@ _MAT270_CARD1 = (
     FieldSchema("eghost", float, 40, 10, None),
     FieldSchema("pghost", float, 50, 10, None),
     FieldSchema("aghost", float, 60, 10, None),
+    FieldSchema("epsini", float, 70, 10, 0.0),
 )
 
 _MAT270_OPTION0_CARD0 = (
@@ -65,9 +66,9 @@ class Mat270(KeywordBase):
     _link_fields = {
         "lcem": LinkType.DEFINE_CURVE,
         "lcpr": LinkType.DEFINE_CURVE,
-        "lcsy": LinkType.DEFINE_CURVE,
         "lchr": LinkType.DEFINE_CURVE,
-        "lcat": LinkType.DEFINE_CURVE,
+        "lcsy": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lcat": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -118,7 +119,7 @@ class Mat270(KeywordBase):
 
     @property
     def lcem(self) -> typing.Optional[int]:
-        """Get or set the Load curve for Young's modulus as function of temperature.
+        """Get or set the Load curve ID giving Young's modulus as function of temperature.
         """ # nopep8
         return self._cards[0].get_value("lcem")
 
@@ -129,7 +130,7 @@ class Mat270(KeywordBase):
 
     @property
     def lcpr(self) -> typing.Optional[int]:
-        """Get or set the Load curve for Poisson's ratio as function of temperature.
+        """Get or set the Load curve ID giving Poisson's ratio as function of temperature.
         """ # nopep8
         return self._cards[0].get_value("lcpr")
 
@@ -140,7 +141,9 @@ class Mat270(KeywordBase):
 
     @property
     def lcsy(self) -> typing.Optional[int]:
-        """Get or set the Load curve for yield stress as function of temperature.
+        """Get or set the Load curve or table for yield stress:
+        GT.0: Load curve ID giving yield stress as a function of temperature.
+        LT.0: |LCSY| is a table ID giving yield curves for different temperatures.Each yield curve is a function of plastic strain.
         """ # nopep8
         return self._cards[0].get_value("lcsy")
 
@@ -151,7 +154,7 @@ class Mat270(KeywordBase):
 
     @property
     def lchr(self) -> typing.Optional[int]:
-        """Get or set the Load curve for hardening modulus as function of temperature.
+        """Get or set the Load curve ID giving the hardening modulus as a function of temperature. LCHR is not used for LCSY < 0. The hardening modulus is then calculated from the yield curve's slope.
         """ # nopep8
         return self._cards[0].get_value("lchr")
 
@@ -162,7 +165,7 @@ class Mat270(KeywordBase):
 
     @property
     def lcat(self) -> typing.Optional[int]:
-        """Get or set the Load curve for thermal expansion coefficient as function of temperature.
+        """Get or set the Load curve (or table) ID giving the thermal expansion coefficient as a function of temperature (and maximum temperature up to the current time). In the case of a table, load curves are listed according to their maximum temperature. See Remark 1.
         """ # nopep8
         return self._cards[0].get_value("lcat")
 
@@ -174,8 +177,8 @@ class Mat270(KeywordBase):
     @property
     def beta(self) -> typing.Optional[float]:
         """Get or set the Fraction isotropic hardening between 0 and 1
-        EQ.0: Kinematic hardening
-        EQ.1: Isotropic hardening.
+        EQ.0.0: Kinematic hardening
+        EQ.1.0: Isotropic hardening.
         """ # nopep8
         return self._cards[0].get_value("beta")
 
@@ -262,6 +265,17 @@ class Mat270(KeywordBase):
         self._cards[1].set_value("aghost", value)
 
     @property
+    def epsini(self) -> float:
+        """Get or set the Initial plastic strains, uniformly distributed within the part.
+        """ # nopep8
+        return self._cards[1].get_value("epsini")
+
+    @epsini.setter
+    def epsini(self, value: float) -> None:
+        """Set the epsini property."""
+        self._cards[1].set_value("epsini", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
@@ -306,21 +320,6 @@ class Mat270(KeywordBase):
         self.lcpr = value.lcid
 
     @property
-    def lcsy_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcsy."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcsy:
-                return kwd
-        return None
-
-    @lcsy_link.setter
-    def lcsy_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcsy."""
-        self.lcsy = value.lcid
-
-    @property
     def lchr_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lchr."""
         if self.deck is None:
@@ -336,17 +335,50 @@ class Mat270(KeywordBase):
         self.lchr = value.lcid
 
     @property
-    def lcat_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcat."""
+    def lcsy_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcsy."""
         if self.deck is None:
             return None
+        field_value = self.lcsy
+        if field_value is None or field_value == 0:
+            return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcat:
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcsy_link.setter
+    def lcsy_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcsy."""
+        if hasattr(value, "lcid"):
+            self.lcsy = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcsy = value.tbid
+
+    @property
+    def lcat_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcat."""
+        if self.deck is None:
+            return None
+        field_value = self.lcat
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
                 return kwd
         return None
 
     @lcat_link.setter
-    def lcat_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcat."""
-        self.lcat = value.lcid
+    def lcat_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcat."""
+        if hasattr(value, "lcid"):
+            self.lcat = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcat = value.tbid
 

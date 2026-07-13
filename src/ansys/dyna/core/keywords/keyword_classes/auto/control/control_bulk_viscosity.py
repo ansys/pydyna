@@ -108,8 +108,8 @@ class ControlBulkViscosity(KeywordBase):
     @property
     def tstype(self) -> int:
         """Get or set the Beam bulk viscosity for thick shells (default = 0):
-        EQ.0:	The bulk viscosity is turned off for thick shells.
-        EQ.1:	The bulk viscosity is turned on for thick shells forms 5, 6 and 7
+        EQ.0: The bulk viscosity is turned off for thick shells.
+        EQ.1: The bulk viscosity is turned on for thick shells forms 5, 6 and 7
         """ # nopep8
         return self._cards[0].get_value("tstype")
 

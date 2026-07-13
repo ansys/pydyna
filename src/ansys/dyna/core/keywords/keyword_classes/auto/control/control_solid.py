@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTROLSOLID_CARD0 = (
     FieldSchema("esort", int, 0, 10, 0),
-    FieldSchema("fmatrix", int, 10, 10, 0),
+    FieldSchema("fmatrx", int, 10, 10, 0),
     FieldSchema("niptets", int, 20, 10, 4),
     FieldSchema("swlocl", int, 30, 10, 1),
     FieldSchema("psfail", int, 40, 10, 0),
@@ -52,7 +52,9 @@ _CONTROLSOLID_CARD1 = (
 )
 
 _CONTROLSOLID_CARD2 = (
-    FieldSchema("tet13v", int, 0, 10, None),
+    FieldSchema("tet13v", int, 0, 10, 0),
+    FieldSchema("rinrt", int, 10, 10, 0),
+    FieldSchema("coheqc", int, 20, 10, 0),
 )
 
 class ControlSolid(KeywordBase):
@@ -83,34 +85,38 @@ class ControlSolid(KeywordBase):
         ]
     @property
     def esort(self) -> int:
-        """Get or set the Automatic sorting of tetrahedron and pentahedron elements to treat degenerate tetrahedron and pentahedron elements as tetrahedron (formulation 10)  and pentahedron (formulation 15) solids, respective. See *SECTION_SOLID.
+        """Get or set the Automatic sorting of tetrahedron and pentahedron elements to avoid using degenerate formulation for thee shapes. See *SECTION_SOLID.
         EQ.0: no sorting(default).
         EQ.1: sort tetrahedron to type 10, pentahedron to type 15.
         EQ.2: sort tetrahedron to type 10, 1-point integrated pentahedron to type 115, fully integrated pentahedron to type 15.
         EQ.3: same as EQ.1 but also print switched elements in message file.
         EQ.4: same as EQ.2 but also print switched elements in message file
+        EQ.11: Same as 1 except sort tetrahedron to type 13.
+        EQ.12: Same as 2 except sort tetrahedron to type 13
+        EQ.13: Same as 3 except sort tetrahedron to type 13
+        EQ.14: Same as 4 except sort tetrahedron to type 13
         """ # nopep8
         return self._cards[0].get_value("esort")
 
     @esort.setter
     def esort(self, value: int) -> None:
         """Set the esort property."""
-        if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""esort must be `None` or one of {0,1,2,3,4}.""")
+        if value not in [0, 1, 2, 3, 4, 11, 12, 13, 14, None]:
+            raise Exception("""esort must be `None` or one of {0,1,2,3,4,11,12,13,14}.""")
         self._cards[0].set_value("esort", value)
 
     @property
-    def fmatrix(self) -> int:
+    def fmatrx(self) -> int:
         """Get or set the Default method used in the calculation of the defomation gradient matrix.
         EQ.1: Update incrementally in time. This is the default for explicit.
         EQ.2: Directly compute F. This is the default for implicit and implicit/explicit switching.
         """ # nopep8
-        return self._cards[0].get_value("fmatrix")
+        return self._cards[0].get_value("fmatrx")
 
-    @fmatrix.setter
-    def fmatrix(self, value: int) -> None:
-        """Set the fmatrix property."""
-        self._cards[0].set_value("fmatrix", value)
+    @fmatrx.setter
+    def fmatrx(self, value: int) -> None:
+        """Set the fmatrx property."""
+        self._cards[0].set_value("fmatrx", value)
 
     @property
     def niptets(self) -> int:
@@ -126,8 +132,8 @@ class ControlSolid(KeywordBase):
     @property
     def swlocl(self) -> int:
         """Get or set the Output option for stresses in solid elements used as spot welds with material *MAT_SPOTWELD.
-        EQ.1: Global (default),
-        EQ.2: Local
+        EQ.1: Stresses in the global coordinate system (default),
+        EQ.2: Stresses in the element coordinate system
         """ # nopep8
         return self._cards[0].get_value("swlocl")
 
@@ -140,7 +146,8 @@ class ControlSolid(KeywordBase):
 
     @property
     def psfail(self) -> int:
-        """Get or set the A nonzero PSFAIL has the same effect as setting ERODE = 1 in *CONTROL_TIMESTEP except that solid element erosion due to negative volume is limited to only the solid elements in part set PSFAIL.In other words, when PSFAIL is nonzero, the time-step-based criterion for erosion (TSMIN) applies to all solid elements (except formulations 11 and 12) while the negative volume criterion for erosion applies only to solids in part set PSFAIL.
+        """Get or set the Solid element erosion from negative volume is limited only to solid elements in the part set indicated by PSFAIL.  This is similar to setting ERODE = 1 in *CONTROL_TIMESTEP, except that it is not global.
+        In other words, when PSFAIL is nonzero, the time - step - based criterion for erosion(TSMIN) applies to all solid elements(except formulations 11 and 12),and the negative volume criterion for erosion applies only to solids in part set PSFAIL.
         """ # nopep8
         return self._cards[0].get_value("psfail")
 
@@ -162,14 +169,19 @@ class ControlSolid(KeywordBase):
 
     @property
     def icoh(self) -> int:
-        """Get or set the Breaking LS-DYNA convention ICOH is interpreted digit-wise, namely as,
-        ICOH = [LK] = K + 10×L .
-        The first digit, in the one’s place, which we shall call K is interpreted as follows:K.EQ.0:	No cohesive element deletion due to neighbor failure.
-        K.EQ.1:	Solid elements having ELFORM = 19 – 22 (or ELFORM = 1, 2, 15 being used with * MAT_169) will be eroded when neighboring shell or solid elements fail.This works for nodewise connected partsand tied contacts.
-        The second digit, in the ten’s place is, which we shall call L is interpreted as stated below.Note that if ICOH is less than 10 (having a single digit) then L defaults to zero.
-        L.EQ.0 : Default stable time step estimate, which is computed from the stiffnessand the nodal masses of the topand bottom as with discrete elements.
-        L.EQ.1 : Most conservative(smallest) stable time step estimate.This method calculates mass by integrating the density.
-        L.EQ.2 : Intermediate stable time step estimate.Same as the default except reduced by a factor of 1 / √2 corresponding to halving the masses.
+        """Get or set the Flag for cohesive elements to control deletion, the time step estimate, and the element type used in implicit and explicit. Breaking LS-DYNA convention, ICOH is interpreted digit-wise, namely as,
+        ICOH = [MLK] = K + 10�L + 100�M .
+        The first digit(in the one�s place), K, is interpreted as follows:
+        K.EQ.0: No cohesive element deletion due to neighbor failure.
+        K.EQ.1: Solid elements having ELFORM = 19 - 22 (or ELFORM = 1, 2, 15 being used with *MAT_169) are eroded when neighboring shell or solid elements fail.This works for nodewise connected partsand tied contacts.
+        The second digit(in the ten�s place), L, controls how the mass used to estimate the element time step is computed.L defaults to zero if ICOH is less than 10 (having a single digit).See Remark 1.
+        L.EQ.0: The mass is the sum of the element nodes.Each node is assumed to be shared between two elements.
+        L.EQ.1: The mass is computed by integrating the cohesive density.
+        L.EQ.2: Same as the default (0), but each node is assumed to be shared by four elements.Compared to the default, the time step is reduced by a factor of 1 / ?2.
+        L.EQ.3: The element connectivity is used to compute how much(nodal) mass is associated with each element, meaning no assumption regarding connectivity is made.This setting is recommended.
+        The third digit(in the hundred�s place), M, is interpreted as follows:
+        M.EQ.0: Explicit element variants used in explicit calculations and higher - accuracy implicit element variants used in implicit calculations.
+        M.EQ.1: Higher - accuracy implicit element variants used in both implicit and explicit calculations.
         """ # nopep8
         return self._cards[0].get_value("icoh")
 
@@ -180,7 +192,7 @@ class ControlSolid(KeywordBase):
 
     @property
     def tet13k(self) -> int:
-        """Get or set the Set to 1 to invoke a consistent tangent stiffness matrix for the pressure averaged tetrahedron (type 13). This is a feature only for implicit analysis and only supported in SMP. This element type averages the volumetric strain over adjacent elements to alleviate volumetric locking, which implies that the corresponding material tangent stiffness should be treated accordingly. Due to the vaste amount of neighbors any given element may have in an arbitrary tetrahedral mesh, the expense for the matrix assembly is at the moment too high for this to pay off in a nonlinear implicit simulation. Whence this is an option that preferably is activated only in linear or eigenvalue analysis to exploit the stiffness characteristics of the type 13 tetrahedron.
+        """Get or set the Set to 1 to invoke a consistent tangent stiffness matrix for the pressure-averaged tetrahedron (type 13).  This feature is available only for the implicit integrator.  This element type averages the volumetric strain over adjacent elements to alleviate volumetric locking; therefore, the corresponding material tangent stiffness should be treated accordingly.  In contrast to a hexahedral mesh, where a node usually connects to fewer than eight elements, tetrahedral meshes offer no such regularity.  Consequently, matrix assembly is computationally expensive for nonlinear implicit analysis, so this option is recommended only for linear or eigenvalue analysis to exploit the stiffness characteristics of the type 13 tetrahedron.
         """ # nopep8
         return self._cards[0].get_value("tet13k")
 
@@ -302,17 +314,54 @@ class ControlSolid(KeywordBase):
         self._cards[1].set_value("pm10", value)
 
     @property
-    def tet13v(self) -> typing.Optional[int]:
-        """Get or set the Choice of type 13 solid implementation:
-        EQ.0:	Efficient version(default).With the single precision version of LS - DYNA, a little noise in the solution for elements that are moving long distances with rigid body motion could be observed.
-        EQ.1 : More accurate version(smoother results) with an additional cost of about 15 % .
+    def tet13v(self) -> int:
+        """Get or set the Choice of implementation for solid element types 10 and 13: If EXACC on *CONTROL_ACCURAY is greater than zero, TET13V is set to one.
+        EQ.0:	Efficient version for type 10 and more accurate version for type 13 (default).With the single precision version, a little noise could be observed in the solution for elements moving long distances with rigid body motion.
+        EQ.1 : More accurate version for both types 10 and 13(smoother results) with an additional cost of about 15 % .
+        EQ.2 : Efficient version for both types 10 and 13
         """ # nopep8
         return self._cards[2].get_value("tet13v")
 
     @tet13v.setter
     def tet13v(self, value: int) -> None:
         """Set the tet13v property."""
+        if value not in [0, 1, 2, None]:
+            raise Exception("""tet13v must be `None` or one of {0,1,2}.""")
         self._cards[2].set_value("tet13v", value)
+
+    @property
+    def rinrt(self) -> int:
+        """Get or set the Option to compute rotational inertia for the nodes of solid elements. This ensures consistent results if the applied constraints assume rotational degrees of freedom, as with tied contacts using the option SHELL_EDGE_TO_SURFACE.
+        EQ.0: By default, an average of the existing rotational inertia from the shelland beam elements in the model is distributed to the nodes of the solid elements.This method is sufficient in most situations but might lead to inconsistencies between different model assemblies in the case of rotational motion.
+        EQ.1: Compute rotational inertia for each solid element based on its dimensionsand mass density to ensure consistency.
+        """ # nopep8
+        return self._cards[2].get_value("rinrt")
+
+    @rinrt.setter
+    def rinrt(self, value: int) -> None:
+        """Set the rinrt property."""
+        if value not in [0, 1, None]:
+            raise Exception("""rinrt must be `None` or one of {0,1}.""")
+        self._cards[2].set_value("rinrt", value)
+
+    @property
+    def coheqc(self) -> int:
+        """Get or set the Flag for cohesive elements quality check. Note that this check is only performed for cohesive elements with materials that have ROFLG = 0.COHEQC is interpreted digit-wise, namely as,
+        COHEQC = [LK] = K + 10xL
+        The first digit, K, controls the behavior of LS - DYNA when cohesive elements with poor quality are detected at t = 0:
+        K.EQ.0: Error termination with a list of elements(default).
+        K.EQ.1: Issue a warning and continue.
+        K.EQ.2: Same as 1 but delete the concerned elements.
+        The second digit, L, controls the behavior of LS - DYNA when inconsistent cohesive elements connectivity is detected.
+        L.EQ.0: Error termination with a list of elements(default).
+        L.EQ.1: Issue a warning and continue.
+        """ # nopep8
+        return self._cards[2].get_value("coheqc")
+
+    @coheqc.setter
+    def coheqc(self, value: int) -> None:
+        """Set the coheqc property."""
+        self._cards[2].set_value("coheqc", value)
 
     @property
     def psfail_link(self) -> typing.Optional[KeywordBase]:

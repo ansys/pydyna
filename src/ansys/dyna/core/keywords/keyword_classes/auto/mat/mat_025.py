@@ -218,7 +218,7 @@ class Mat025(KeywordBase):
 
     @property
     def x0(self) -> typing.Optional[float]:
-        """Get or set the Hardening law exponent.
+        """Get or set the Initial intersection of the cap surface with the J_1 axis, X_0
         """ # nopep8
         return self._cards[1].get_value("x0")
 

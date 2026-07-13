@@ -62,6 +62,20 @@ DefineBeamSolidCoupling
     :members:
 
 
+DefineBirthPart
+---------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_birth_part
+    :members:
+
+
+DefineBoltedJoints
+------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_bolted_joints
+    :members:
+
+
 DefineBox
 ---------
 
@@ -136,6 +150,13 @@ DefineBoxSphLocal
 -----------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_box_sph_local
+    :members:
+
+
+DefineCable
+-----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_cable
     :members:
 
 
@@ -216,10 +237,45 @@ DefineCoordinateSystem
     :members:
 
 
+DefineCoordinateSystemIges
+--------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_coordinate_system_iges
+    :members:
+
+
 DefineCoordinateVector
 ----------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_coordinate_vector
+    :members:
+
+
+DefineCpgAdaptive
+-----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_cpg_adaptive
+    :members:
+
+
+DefineCpgGasProperties
+----------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_cpg_gas_properties
+    :members:
+
+
+DefineCpgRegion
+---------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_cpg_region
+    :members:
+
+
+DefineCpgVent
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_cpg_vent
     :members:
 
 
@@ -255,6 +311,13 @@ DefineCpmNpdata
 ---------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_cpm_npdata
+    :members:
+
+
+DefineCpmSensor
+---------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_cpm_sensor
     :members:
 
 
@@ -531,6 +594,20 @@ DefineDeMeshSurface
     :members:
 
 
+DefineDeMeshVolume
+------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_de_mesh_volume
+    :members:
+
+
+DefineDePartsInteraction
+------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_de_parts_interaction
+    :members:
+
+
 DefineDePatternOutput
 ---------------------
 
@@ -538,10 +615,31 @@ DefineDePatternOutput
     :members:
 
 
+DefineDeTemp
+------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_de_temp
+    :members:
+
+
 DefineDeToBeamCoupling
 ----------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_de_to_beam_coupling
+    :members:
+
+
+DefineDeToCpgCoupling
+---------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_de_to_cpg_coupling
+    :members:
+
+
+DefineDeToCpmCoupling
+---------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_de_to_cpm_coupling
     :members:
 
 
@@ -692,10 +790,24 @@ DefineFibers
     :members:
 
 
+DefineField
+-----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_field
+    :members:
+
+
 DefineFilter
 ------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_filter
+    :members:
+
+
+DefineFormingAdaptivePartInitial
+--------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_forming_adaptive_part_initial
     :members:
 
 
@@ -755,69 +867,6 @@ DefineFriction
     :members:
 
 
-DefineFrictionAirbagSingleSurface
----------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_friction_airbag_single_surface
-    :members:
-
-
-DefineFrictionAutomaticGeneral
-------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_friction_automatic_general
-    :members:
-
-
-DefineFrictionAutomaticNodesToSurface
--------------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_friction_automatic_nodes_to_surface
-    :members:
-
-
-DefineFrictionAutomaticOneWaySurfaceToSurface
----------------------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_friction_automatic_one_way_surface_to_surface
-    :members:
-
-
-DefineFrictionAutomaticSingleSurface
-------------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_friction_automatic_single_surface
-    :members:
-
-
-DefineFrictionAutomaticSingleSurfaceMortar
-------------------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_friction_automatic_single_surface_mortar
-    :members:
-
-
-DefineFrictionAutomaticSurfaceToSurface
----------------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_friction_automatic_surface_to_surface
-    :members:
-
-
-DefineFrictionAutomaticSurfaceToSurfaceMortar
----------------------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_friction_automatic_surface_to_surface_mortar
-    :members:
-
-
-DefineFrictionErodingSingleSurface
-----------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_friction_eroding_single_surface
-    :members:
-
-
 DefineFrictionOrientation
 -------------------------
 
@@ -829,13 +878,6 @@ DefineFrictionScaling
 ---------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_friction_scaling
-    :members:
-
-
-DefineFrictionSingleSurface
----------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_friction_single_surface
     :members:
 
 
@@ -902,6 +944,13 @@ DefineHexSpotweldAssembly8
     :members:
 
 
+DefineIspgToSurfaceCoupling
+---------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_ispg_to_surface_coupling
+    :members:
+
+
 DefineLanceSeedPointCoordinates
 -------------------------------
 
@@ -927,6 +976,13 @@ DefineMultiDrawbeadsIges
 ------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_multi_drawbeads_iges
+    :members:
+
+
+DefineMultiSheetConnectors
+--------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_multi_sheet_connectors
     :members:
 
 
@@ -979,6 +1035,13 @@ DefinePlane
     :members:
 
 
+DefinePointCloud
+----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_point_cloud
+    :members:
+
+
 DefinePorousAle
 ---------------
 
@@ -1014,6 +1077,13 @@ DefineRegion
     :members:
 
 
+DefineSaleabParameters
+----------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_saleab_parameters
+    :members:
+
+
 DefineSdOrientation
 -------------------
 
@@ -1025,6 +1095,27 @@ DefineSetAdaptive
 -----------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_set_adaptive
+    :members:
+
+
+DefineShellSwitch
+-----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_shell_switch
+    :members:
+
+
+DefineSpgToSpgCoupling
+----------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_spg_to_spg_coupling
+    :members:
+
+
+DefineSpgToSurfaceCoupling
+--------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_spg_to_surface_coupling
     :members:
 
 
@@ -1063,6 +1154,20 @@ DefineSphInjection
     :members:
 
 
+DefineSphInjectionSimplified
+----------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_sph_injection_simplified
+    :members:
+
+
+DefineSphInjectionSimplifiedFlowrate
+------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_sph_injection_simplified_flowrate
+    :members:
+
+
 DefineSphMassflowPlane
 ----------------------
 
@@ -1074,6 +1179,13 @@ DefineSphMeshBox
 ----------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_sph_mesh_box
+    :members:
+
+
+DefineSphMeshObj
+----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_sph_mesh_obj
     :members:
 
 
@@ -1217,6 +1329,48 @@ DefineTable3D
     :members:
 
 
+DefineTable4D
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_table_4d
+    :members:
+
+
+DefineTable5D
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_table_5d
+    :members:
+
+
+DefineTable6D
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_table_6d
+    :members:
+
+
+DefineTable7D
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_table_7d
+    :members:
+
+
+DefineTable8D
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_table_8d
+    :members:
+
+
+DefineTable9D
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_table_9d
+    :members:
+
+
 DefineTableCompact
 ------------------
 
@@ -1263,6 +1417,13 @@ DefineTrimSeedPointCoordinates
 ------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_trim_seed_point_coordinates
+    :members:
+
+
+DefineTwinbuilderCoupling
+-------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.define_twinbuilder_coupling
     :members:
 
 

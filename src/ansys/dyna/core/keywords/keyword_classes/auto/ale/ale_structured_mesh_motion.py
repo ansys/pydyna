@@ -34,7 +34,7 @@ _ALESTRUCTUREDMESHMOTION_CARD0 = (
     FieldSchema("unused", int, 40, 10, None),
     FieldSchema("unused", int, 50, 10, None),
     FieldSchema("unused", int, 60, 10, None),
-    FieldSchema("symcod", int, 70, 10, 0),
+    FieldSchema("isym", int, 70, 10, 0),
 )
 
 class AleStructuredMeshMotion(KeywordBase):
@@ -101,13 +101,17 @@ class AleStructuredMeshMotion(KeywordBase):
         self._cards[0].set_value("explim", value)
 
     @property
-    def symcod(self) -> int:
-        """Get or set the A three digit number to define symmetry. Each digit specifies one direction (local x,y,z defined in *ALE_STRUCTURED_MESH) and can be of 0,1 or 2. Code 0 means no symmetry; 1 symmetry defined at minus face; 2 plus face
+    def isym(self) -> int:
+        """Get or set the A three digit number, [X,Y,Z],to define symmetry:ISYM = 100*X+10*Y+Z.Each digit specifies one direction, X for the local x, Y for local y, and Z for local z(local x, y and z are defined in *ALE_STRUCTURED_MESH).Each digit can have the following values:
+        EQ.0:No symmetry.
+        EQ.1:Symmetry plane along the face with a normal vector in the negative direction.
+        EQ.2:Symmetry plane along the face with a normal vector in the positive direction.
+        For example, ISYM = 201 means quarter symmetry with symmetry planes at the faces with normal vectors +x and -z.111 means 1/8 symmetry with symmetry planes at the faces with normal vectors -x,-y and -z.
         """ # nopep8
-        return self._cards[0].get_value("symcod")
+        return self._cards[0].get_value("isym")
 
-    @symcod.setter
-    def symcod(self, value: int) -> None:
-        """Set the symcod property."""
-        self._cards[0].set_value("symcod", value)
+    @isym.setter
+    def isym(self, value: int) -> None:
+        """Set the isym property."""
+        self._cards[0].set_value("isym", value)
 

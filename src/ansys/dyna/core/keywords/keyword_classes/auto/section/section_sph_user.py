@@ -156,14 +156,16 @@ class SectionSphUser(KeywordBase):
         EQ.0: Cubic spline kernel function (default).
         EQ.1: Quintic spline kernel function: higher order smoothing function with bigger support size (recommend to use
         HMAX = 3.0 or bigger value, only available for FORM = 0, 1, 9 and 10).
+        EQ.2: Quadratic spline kernel function: it helps to relieve the problem of compressive instability and aims for HVI problems. It is only available for the 3D case with FORM = 0, 1, 5, and 6
+        EQ.3: Quartic kernel function: this kernel function is very close to cubic spline kernel function but is more stable. It is only available for the 3D case with FORM = 0, 1, 5, and 6
         """ # nopep8
         return self._cards[0].get_value("sphkern")
 
     @sphkern.setter
     def sphkern(self, value: int) -> None:
         """Set the sphkern property."""
-        if value not in [0, 1, None]:
-            raise Exception("""sphkern must be `None` or one of {0,1}.""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""sphkern must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("sphkern", value)
 
     @property

@@ -96,7 +96,8 @@ class LoadMask(KeywordBase):
 
     @property
     def vid1(self) -> int:
-        """Get or set the Vector ID normal to the suface on which the applied pressure acts. Positive pressure acts in a direction that is in the opposite direction. This vector may be used if the surface on which the pressure acts is relatively flat. If zero, the pressure load depends on the orientation of the shell elements.
+        """Get or set the Vector ID normal to the surface on which the applied pressure acts.  Positive pressure acts in a direction that is in the opposite direction.  This vector may be used if the surface on which the pressure acts is relatively flat.
+        EQ.0 : The pressure load depends on the orientation of the shell elements as shown in Figure Error !Reference source not found.
         """ # nopep8
         return self._cards[0].get_value("vid1")
 
@@ -151,8 +152,9 @@ class LoadMask(KeywordBase):
 
     @property
     def inout(self) -> int:
-        """Get or set the EQ.0: Elements whose center falls inside the projected curve are considered (default),
-        EQ.1: Elements whose center falls outside the projected curve are considered.
+        """Get or set the Flag for applying pressure to elements inside or outside of projected curve:
+        EQ.0:	Elements whose center falls inside the projected curve are considered.
+        EQ.1 : Elements whose center falls outside the projected curve are considered
         """ # nopep8
         return self._cards[0].get_value("inout")
 

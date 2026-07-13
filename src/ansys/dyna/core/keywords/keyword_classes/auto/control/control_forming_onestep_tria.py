@@ -25,12 +25,14 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _CONTROLFORMINGONESTEPTRIA_CARD0 = (
     FieldSchema("option", int, 0, 10, 6),
-    FieldSchema("tsclmax", float, 10, 10, 1.0),
-    FieldSchema("autobd", float, 20, 10, 0.3),
-    FieldSchema("tsclmin", float, 30, 10, 1.0),
+    FieldSchema("tsclmax", float, 10, 10, 0.0),
+    FieldSchema("autobd", float, 20, 10, 0.0),
+    FieldSchema("tsclmin", float, 30, 10, 0.0),
     FieldSchema("epsmax", float, 40, 10, 1.0),
     FieldSchema("unused", int, 50, 10, None),
     FieldSchema("lcsdg", int, 60, 10, None),
@@ -46,6 +48,9 @@ class ControlFormingOnestepTria(KeywordBase):
 
     keyword = "CONTROL"
     subkeyword = "FORMING_ONESTEP_TRIA"
+    _link_fields = {
+        "lcsdg": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ControlFormingOnestepTria class."""
@@ -62,7 +67,10 @@ class ControlFormingOnestepTria(KeywordBase):
         ]
     @property
     def option(self) -> int:
-        """Get or set the One-step solution method: EQ.7: Invokes a one-step solution with blank unfolding that accounts for part undercut.
+        """Get or set the Options to invoke the one-step solution methods which account for undercut conditions in the formed part:
+        EQ.6:	One - step solution with unfolded blank(flat) provided by LS - PrePost(see Remark 3).Input in Card 1a.2 is required.
+        EQ.7 : One - step solution with blank automatically unfolded in LS - DYNA.Card 1a.2 must be included as a blank line.This option is recommended.
+        L.T.0 : If a negative sign precedes any of the above OPTIONs, the stress and strain output in the file onestepresult will be in a large format(E20.0), which leads to more accurate stress results.Card 1a.2 must be included as a blank line.
         """ # nopep8
         return self._cards[0].get_value("option")
 
@@ -73,8 +81,7 @@ class ControlFormingOnestepTria(KeywordBase):
 
     @property
     def tsclmax(self) -> float:
-        """Get or set the If not zero, it defines a thickness scale factor limiting the maximum thickness in the part.
-        For example, if the maximum thickness allowed is 0.8mm for a blank with initial thickness of 0.75mm TSCLMAX can be set to 1.0667.  All thicknesses that are computed as more than 0.8mm in the sheet blank will be reset to 0.8mm.  The scale factor is useful in advance feasibility analysis where part design and stamping process have not been finalized and could potentially cause large splits or severe wrinkles during unfolding, rendering the forming results unusable for crash/safety simulation..
+        """Get or set the If nonzero, it defines a thickness scale factor limiting the maximum thickness in the part.  See Remark 12. For example, if the maximum thickness allowed is 0.8 mm for a blank with an initial thickness of 0.75 mm, TSCLMAX can be set to 1.0667.  All thicknesses that are computed as more than 0.8 mm in the sheet blank will be reset to 0.8 mm.  The scale factor is useful in advance feasibility analysis, where part design and stamping process have not been finalized, and could potentially cause large splits or severe wrinkles during unfolding, rendering the forming results unusable for crash/safety simulation.
         """ # nopep8
         return self._cards[0].get_value("tsclmax")
 
@@ -86,9 +93,9 @@ class ControlFormingOnestepTria(KeywordBase):
     @property
     def autobd(self) -> float:
         """Get or set the Apply a fraction of a fully locked bead force along the entire periphery of the blank.  The fully locked bead force is automatically calculated based on a material hardening curve input.  AUTOBD can be increased to easily introduce more thinning and effective plastic strain in the part.
-        LT.0.0:	Turns off the “auto-bead” feature.
-        EQ.0.0:	Automatically applies 30% of fully locked force.
-        GT.0.0:	Fraction input will be used to scale the fully locked force.
+        LT.0.0: Turns off the auto-bead feature.
+        EQ.0.0: Automatically applies 30% of fully locked force.
+        GT.0.0: Fraction input will be used to scale the fully locked force.
         """ # nopep8
         return self._cards[0].get_value("autobd")
 
@@ -99,8 +106,7 @@ class ControlFormingOnestepTria(KeywordBase):
 
     @property
     def tsclmin(self) -> float:
-        """Get or set the If not zero, it defines a thickness scale factor limiting the maximum thickness reduction.
-        For example, if the minimum thickness allowed is 0.6mm for a blank with initial thickness of 0.75mm TSCLMIN can be set to 0.8.  All thicknesses that are computed as less than 0.6mm in the sheet blank will be reset to 0.6mm.  The scale factor is useful in advance feasibility analysis where part design and stamping process have not been finalized and could potentially cause large splits or severe wrinkles during unfolding, rendering the forming results unusable for crash/safety simulation.
+        """Get or set the If not zero, defines a thickness scale factor limiting the maximum thickness reduction.  See Remark 12. For example, if the minimum thickness allowed is 0.6 mm for a blank with an initial thickness of 0.75 mm, TSCLMIN can be set to 0.8.  All thicknesses that are computed as less than 0.6 mm in the sheet blank will be reset to 0.6 mm.  The scale factor is useful in advance feasibility analysis, where part design and stamping process have not been finalized, and could potentially cause large splits or severe wrinkles during unfolding, rendering the forming results unusable for crash/safety simulation.
         """ # nopep8
         return self._cards[0].get_value("tsclmin")
 
@@ -111,7 +117,7 @@ class ControlFormingOnestepTria(KeywordBase):
 
     @property
     def epsmax(self) -> float:
-        """Get or set the If not zero, it defines the maximum effective plastic strain allowed. All computed effective plastic strains that are greater than this value in the blank will be set to this value.
+        """Get or set the If not zero, it defines the maximum effective plastic strain allowed. All computed effective plastic strains that are greater than this value in the blank will be set to this value.  See Remark 12
         """ # nopep8
         return self._cards[0].get_value("epsmax")
 
@@ -152,4 +158,19 @@ class ControlFormingOnestepTria(KeywordBase):
     def flatname(self, value: str) -> None:
         """Set the flatname property."""
         self._cards[1].set_value("flatname", value)
+
+    @property
+    def lcsdg_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcsdg."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsdg:
+                return kwd
+        return None
+
+    @lcsdg_link.setter
+    def lcsdg_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsdg."""
+        self.lcsdg = value.lcid
 

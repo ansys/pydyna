@@ -62,8 +62,8 @@ class ControlExplicitThermalOutput(KeywordBase):
     @property
     def dtoutyp(self) -> int:
         """Get or set the Type of DTOUT:
-        EQ.0:	DTOUT is a constant
-        EQ.1 : DTOUT is the ID of * DEFINE_CURVE defining a table of  time as function of DTOUT
+        EQ.0: DTOUT is a constant
+        EQ.1: DTOUT is the ID of *DEFINE_CURVE defining a table of  time as function of DTOUT
         """ # nopep8
         return self._cards[0].get_value("dtoutyp")
 
@@ -88,10 +88,10 @@ class ControlExplicitThermalOutput(KeywordBase):
     @property
     def setyp(self) -> int:
         """Get or set the Type of set:
-        EQ.1:	solid set(see *SET_SOLID)
-        EQ.2 : shell set(see *SET_SHELL)
-        EQ.3 : beam set(see * SET_BEAM)
-        EQ.4 : thick shell set(see *SET_TSHELL).
+        EQ.1: solid set(see *SET_SOLID)
+        EQ.2: shell set(see *SET_SHELL)
+        EQ.3: beam set(see *SET_BEAM)
+        EQ.4: thick shell set(see *SET_TSHELL).
         """ # nopep8
         return self._cards[0].get_value("setyp")
 

@@ -56,7 +56,7 @@ class AleStructuredMeshControlPoints(KeywordBase):
                 [
                     Field("n", int, 0, 20, 0),
                     Field("x", float, 20, 20, None),
-                    Field("ratio", float, 40, 20, 0.0),
+                    Field("ratio/xl", float, 40, 20, 0.0),
                 ],
                 None,
                 name="control_points",
@@ -65,8 +65,7 @@ class AleStructuredMeshControlPoints(KeywordBase):
         ]
     @property
     def cpid(self) -> int:
-        """Get or set the Control Points ID. A unique number must be specified. This ID is to be
-        referred in the three fields marked up CPIDX, CPIDY, CPIDZ in *ALE_	STRUCTURED_MESH.
+        """Get or set the Control Points ID. A unique number must be specified. This ID is to be referred to in the three fields labeled CPIDX, CPIDY, CPIDZ in *ALE_ STRUCTURED_MESH.
         """ # nopep8
         return self._cards[0].get_value("cpid")
 
@@ -77,7 +76,10 @@ class AleStructuredMeshControlPoints(KeywordBase):
 
     @property
     def icase(self) -> int:
-        """Get or set the A flag to trigger special logic for a more user-friendly input format for progressive mesh spacing. Please see examples sections below on ICASE usage.
+        """Get or set the A flag to trigger special algorithms for a more user-friendly input format for creating progressive mesh spacing.
+        EQ.0: Ratio - based progressive mesh spacing.
+        EQ.1 : Base element size progressive mesh spacing(Remark 4)
+        EQ.2 : Base node progressive mesh spacing(Remark 5)
         """ # nopep8
         return self._cards[0].get_value("icase")
 
@@ -88,7 +90,7 @@ class AleStructuredMeshControlPoints(KeywordBase):
 
     @property
     def sfo(self) -> float:
-        """Get or set the Scale factor for ordinate value. This is useful for simple modifications.	EQ.0.0: default set to 1.0.
+        """Get or set the Scale factor for ordinate value. This is useful for simple modifications. EQ.0.0: default set to 1.0.
         """ # nopep8
         return self._cards[0].get_value("sfo")
 

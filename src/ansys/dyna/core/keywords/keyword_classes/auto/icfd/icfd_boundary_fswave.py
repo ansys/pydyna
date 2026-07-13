@@ -80,12 +80,12 @@ class IcfdBoundaryFswave(KeywordBase):
     def wtype(self) -> typing.Optional[int]:
         """Get or set the Wave Type:
         EQ.1:Stokes wave of first order.
-        EQ.2:	Stokes wave of second order
-        EQ.3:	Stokes wave of fifth order
-        EQ.4 : Solitary wave
-        EQ.5 : Irregular waves using JONSWAP spectrum
-        EQ.6 : Irregular waves using One Parameter Pierson - Moskowitz spectrum
-        EQ.7 : Irregular waves using Two Parameter Pierson - Moskowitz spectrum
+        EQ.2: Stokes wave of second order
+        EQ.3: Stokes wave of fifth order
+        EQ.4: Solitary wave
+        EQ.5: Irregular waves using JONSWAP spectrum
+        EQ.6: Irregular waves using One Parameter Pierson - Moskowitz spectrum
+        EQ.7: Irregular waves using Two Parameter Pierson - Moskowitz spectrum
         """ # nopep8
         return self._cards[0].get_value("wtype")
 

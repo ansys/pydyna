@@ -48,8 +48,8 @@ class ControlThermalEigenvalue(KeywordBase):
     @property
     def neig(self) -> int:
         """Get or set the Number of eigenvalues to compute:
-        EQ.0:	No eigenvalues are computed.
-        GT.0 : Compute NEIG eigenvalues of each thermal conductance matrix.
+        EQ.0: No eigenvalues are computed.
+        GT.0: Compute NEIG eigenvalues of each thermal conductance matrix.
         """ # nopep8
         return self._cards[0].get_value("neig")
 

@@ -30,8 +30,12 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import De
 
 _EMEOSPERMEABILITY_CARD0 = (
     FieldSchema("eosid", int, 0, 10, None),
-    FieldSchema("eostype", int, 10, 10, 1),
+    FieldSchema("eostype", int, 10, 10, None),
     FieldSchema("lcid", int, 20, 10, None),
+    FieldSchema("poly", int, 30, 10, 0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
 )
 
 class EmEosPermeability(KeywordBase):
@@ -54,7 +58,7 @@ class EmEosPermeability(KeywordBase):
         ]
     @property
     def eosid(self) -> typing.Optional[int]:
-        """Get or set the Id of the EM_EOS.
+        """Get or set the Id of the *EM_EOS.
         """ # nopep8
         return self._cards[0].get_value("eosid")
 
@@ -64,24 +68,27 @@ class EmEosPermeability(KeywordBase):
         self._cards[0].set_value("eosid", value)
 
     @property
-    def eostype(self) -> int:
-        """Get or set the Defines the type of EOS:
-        EQ.1: Permeability defined by a B function of H curve (B= uH).
-        EQ.2: Permeability defined by a H function of B curve (H= B/u).
-
+    def eostype(self) -> typing.Optional[int]:
+        """Get or set the Define the type of EOS:
+        EQ.1: Permeability defined by B as a function of H curve (B=?H). The abscissa of the curve is H, and the ordinate is B.
+        EQ.2: Permeability defined by a H function of B curve(H = B / ?).The abscissa of the curve is B, and the ordinate is H.
+        EQ.3 : Permeability defined by a load curve where B - H curves(B = ?H) may be defined as a function of von Mises stress.The abscissa of the curve is von Mises stress, and the ordinate is a load curve ID for the B - H load curves.The abscissa for each B - H load curve is H, and the ordinate is B.
+        EQ.4 : Permeability defined by a load curve where B - H load curves(B = ?H) may be defined as a function of temperature.The abscissa of the curve is temperature, and the ordinate is load curve ID for the B - H load curves.The abscissa for each B - H load curve is H, and the ordinate is B.
+        EQ.5 : Permeability defined by a load curve where B - H curves(B = �H) may be defined as a function of an equivalent stress model calculated from uniaxial stress.The abscissa of the curve is uniaxial stress; the ordinate is a load curve ID for the B - H load curves.The abscissa for each B - H load curve is H, and the ordinate is B.See Remark 4.
+        EQ.7: Permeability given by an analytical arctan law defining B as a function of H and optionally temperature.See Remark 1.
+        EQ.8 : Permeability given by the Froelich law defining B as a function of H and optionally temperature.See Remark 2.
+        EQ.31 : Same as 3, except the signed von Mises stress is used.
         """ # nopep8
         return self._cards[0].get_value("eostype")
 
     @eostype.setter
     def eostype(self, value: int) -> None:
         """Set the eostype property."""
-        if value not in [1, 2, None]:
-            raise Exception("""eostype must be `None` or one of {1,2}.""")
         self._cards[0].set_value("eostype", value)
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve Id.
+        """Get or set the Load curve ID for EOSTYPE = 1, 2, 3, and 4. Ignored if EOSTYPE = 7 or 8.
         """ # nopep8
         return self._cards[0].get_value("lcid")
 
@@ -89,6 +96,21 @@ class EmEosPermeability(KeywordBase):
     def lcid(self, value: int) -> None:
         """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
+
+    @property
+    def poly(self) -> int:
+        """Get or set the Applies a polynomial smoothing on the input load curve for EOSTYPE = 1 and 2. See Remark 3.
+        EQ.0: Off.
+        EQ.1: On.
+        """ # nopep8
+        return self._cards[0].get_value("poly")
+
+    @poly.setter
+    def poly(self, value: int) -> None:
+        """Set the poly property."""
+        if value not in [0, 1, None]:
+            raise Exception("""poly must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("poly", value)
 
     @property
     def lcid_link(self) -> typing.Optional[DefineCurve]:

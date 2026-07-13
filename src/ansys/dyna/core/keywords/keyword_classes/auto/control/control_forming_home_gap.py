@@ -96,8 +96,8 @@ class ControlFormingHomeGap(KeywordBase):
     @property
     def istop(self) -> int:
         """Get or set the How to proceed if the minimum gap found is less than GAP:
-        EQ.0:	Output a warning message.Job continues
-        EQ.1 : Terminate the job.
+        EQ.0: Output a warning message.Job continues
+        EQ.1: Terminate the job.
         """ # nopep8
         return self._cards[0].get_value("istop")
 

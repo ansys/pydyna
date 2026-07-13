@@ -74,6 +74,7 @@ class LoadBlastEnhanced(KeywordBase):
     @property
     def bid(self) -> typing.Optional[int]:
         """Get or set the Blast ID.  A unique number must be defined for each blast source (charge).  Multiple charges may be defined, however, interaction of the waves in air is not considered.
+        LT.-2: Blast ID that can be referenced by LCID in *LOAD_ERODING_PART_SET, allowing the pressure from the blast to be used by *LOAD_ERODING_PART_SET.
         """ # nopep8
         return self._cards[0].get_value("bid")
 
@@ -139,7 +140,7 @@ class LoadBlastEnhanced(KeywordBase):
 
     @property
     def unit(self) -> int:
-        """Get or set the Unit conversion flag.    EQ.1:  feet, pound-mass, seconds, psi    EQ.2:  meters, kilograms, seconds, Pascals (default)    EQ.3:  inch, dozens of slugs, seconds, psi    EQ.4:  centimeters, grams, microseconds, Megabars    EQ.5:  user conversions will be supplied(see Card 2).    EQ.6: kilogram, millimeter, millisecond, GPa    EQ.7: metric ton, millimeter, second, Mpa    EQ.8: gram, millimeter, millisecond, MPa
+        """Get or set the Unit conversion flag.    EQ.1: feet, pound-mass, seconds, psi    EQ.2: meters, kilograms, seconds, Pascals (default)    EQ.3: inch, dozens of slugs, seconds, psi    EQ.4: centimeters, grams, microseconds, Megabars    EQ.5: user conversions will be supplied(see Card 2).    EQ.6: kilogram, millimeter, millisecond, GPa    EQ.7: metric ton, millimeter, second, Mpa    EQ.8: gram, millimeter, millisecond, MPa
         """ # nopep8
         return self._cards[0].get_value("unit")
 
@@ -152,7 +153,7 @@ class LoadBlastEnhanced(KeywordBase):
 
     @property
     def blast(self) -> int:
-        """Get or set the Type of blast source    EQ.1:  hemispherical surface burst - charge is located on or very near the ground surface, initial shock wave is reflected and reinforced by the ground    EQ.2:  spherical free-air burst (default) - no amplification of the initial shock wave due to interaction with the ground surface    EQ.3:  air burst - moving non-sperhical warhead    EQ.4:  air burst with ground reflection - initial shock wave impinges on the ground surface and is reinforced by the reflected wave to produce a Mach stem.
+        """Get or set the Type of blast source    EQ.1: hemispherical surface burst - charge is located on or very near the ground surface, initial shock wave is reflected and reinforced by the ground    EQ.2: spherical free-air burst (default) - no amplification of the initial shock wave due to interaction with the ground surface    EQ.3: air burst - moving non-sperhical warhead    EQ.4: air burst with ground reflection - initial shock wave impinges on the ground surface and is reinforced by the reflected wave to produce a Mach stem.
         """ # nopep8
         return self._cards[0].get_value("blast")
 
@@ -209,7 +210,7 @@ class LoadBlastEnhanced(KeywordBase):
 
     @property
     def nidbo(self) -> typing.Optional[int]:
-        """Get or set the Optional node ID representing the charge center.  If defined then XBO, YBO and XBO are ignored.
+        """Get or set the Optional node ID representing the charge center.  If nonzero, XBO, YBO and XBO are ignored.
         """ # nopep8
         return self._cards[1].get_value("nidbo")
 
@@ -231,17 +232,19 @@ class LoadBlastEnhanced(KeywordBase):
 
     @property
     def negphs(self) -> int:
-        """Get or set the Treament of negative phase.
-        EQ.0:  negative dictated by the Friedlander equation.
-        EQ.1:  negative phase ignored as in ConWep.
+        """Get or set the Treament of negative phase pressure and positive phase duration (see Remark 9)
+        EQ.0: negative dictated by the Friedlander equation.
+        EQ.1: negative phase pressure ignored
+        EQ.10: Positive phase duration as in closer agreement with ConWep results (not recommended).
+        EQ.11: Positive phase duration in closer agreement with ConWep results and negative phase pressure ignored(recommended for comparisons with ConWep).
         """ # nopep8
         return self._cards[1].get_value("negphs")
 
     @negphs.setter
     def negphs(self, value: int) -> None:
         """Set the negphs property."""
-        if value not in [0, 1, None]:
-            raise Exception("""negphs must be `None` or one of {0,1}.""")
+        if value not in [0, 1, 10, 11, None]:
+            raise Exception("""negphs must be `None` or one of {0,1,10,11}.""")
         self._cards[1].set_value("negphs", value)
 
     @property

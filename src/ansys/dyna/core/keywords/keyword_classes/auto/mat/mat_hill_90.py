@@ -42,9 +42,9 @@ _MATHILL90_CARD0 = (
 
 _MATHILL90_CARD1 = (
     FieldSchema("m", float, 0, 10, None),
-    FieldSchema("r00", float, 10, 10, None),
-    FieldSchema("r45", float, 20, 10, None),
-    FieldSchema("r90", float, 30, 10, None),
+    FieldSchema("r00_ah", float, 10, 10, None, "r00/ah"),
+    FieldSchema("r45_bh", float, 20, 10, None, "r45/bh"),
+    FieldSchema("r90_ch", float, 30, 10, None, "r90/ch"),
     FieldSchema("lcid", int, 40, 10, None),
     FieldSchema("e0", float, 50, 10, None),
     FieldSchema("spi", float, 60, 10, None),
@@ -72,9 +72,9 @@ _MATHILL90_CARD3 = (
 )
 
 _MATHILL90_CARD4 = (
-    FieldSchema("xp", float, 0, 10, None),
-    FieldSchema("yp", float, 10, 10, None),
-    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
     FieldSchema("a1", float, 30, 10, None),
     FieldSchema("a2", float, 40, 10, None),
     FieldSchema("a3", float, 50, 10, None),
@@ -179,7 +179,7 @@ class MatHill90(KeywordBase):
 
     @property
     def e(self) -> typing.Optional[float]:
-        """Get or set the Young's modulus.GT.0.0:  Constant value,	LT.0.0:  Load curve ID = (-E) which defines Young's Modulus as a function of plastic strain
+        """Get or set the Young's modulus.GT.0.0: Constant value, LT.0.0: Load curve ID = (-E) which defines Young's Modulus as a function of plastic strain
         """ # nopep8
         return self._cards[0].get_value("e")
 
@@ -224,8 +224,8 @@ class MatHill90(KeywordBase):
     @property
     def p1(self) -> float:
         """Get or set the Material parameter:
-        HR.EQ.1.0:  Tangent modulus,
-        HR.EQ.2.0:  k, strength coefficient for Swift exponential hardening
+        HR.EQ.1.0: Tangent modulus,
+        HR.EQ.2.0: k, strength coefficient for Swift exponential hardening
         HR.EQ.4.0: a, coefficient for Voce exponential hardening
         HR.EQ.5.0: k, strength coefficient for Gosh exponential hardening
         HR.EQ.6.0: a, coefficient for Hocket-Sherby exponential hardening
@@ -284,44 +284,46 @@ class MatHill90(KeywordBase):
         self._cards[1].set_value("m", value)
 
     @property
-    def r00(self) -> typing.Optional[float]:
+    def r00_ah(self) -> typing.Optional[float]:
         """Get or set the R00 , Lankford parameter in 0 degree direction
-        GT.0.0:  Constant value,
-        LT.0.0:  Load curve or Table ID = (-R00) which defines R value as a function of plastic strain (Curve) or as a function of temperature and plastic strain (Table)
-        .
+        GT.0.0: Constant value,
+        LT.0.0: Load curve or Table ID = (-R00) which defines R value as a function of plastic strain (Curve) or as a function of temperature and plastic strain (Table).
+        AH: Hill90 parameter (see Remark 3)
         """ # nopep8
-        return self._cards[1].get_value("r00")
+        return self._cards[1].get_value("r00_ah")
 
-    @r00.setter
-    def r00(self, value: float) -> None:
-        """Set the r00 property."""
-        self._cards[1].set_value("r00", value)
+    @r00_ah.setter
+    def r00_ah(self, value: float) -> None:
+        """Set the r00_ah property."""
+        self._cards[1].set_value("r00_ah", value)
 
     @property
-    def r45(self) -> typing.Optional[float]:
+    def r45_bh(self) -> typing.Optional[float]:
         """Get or set the R45, Lankford parameter in 45 degree direction
-        GT.0.0:  Constant value,
-        LT.0.0:  Load curve or Table ID = (-R45) which defines R value as a function of plastic strain (Curve) or as a function of temperature and plastic strain (Table).
+        GT.0.0: Constant value,
+        LT.0.0: Load curve or Table ID = (-R45) which defines R value as a function of plastic strain (Curve) or as a function of temperature and plastic strain (Table).
+        BH:Hill90 parameter (see Remark 3)
         """ # nopep8
-        return self._cards[1].get_value("r45")
+        return self._cards[1].get_value("r45_bh")
 
-    @r45.setter
-    def r45(self, value: float) -> None:
-        """Set the r45 property."""
-        self._cards[1].set_value("r45", value)
+    @r45_bh.setter
+    def r45_bh(self, value: float) -> None:
+        """Set the r45_bh property."""
+        self._cards[1].set_value("r45_bh", value)
 
     @property
-    def r90(self) -> typing.Optional[float]:
+    def r90_ch(self) -> typing.Optional[float]:
         """Get or set the R90, Lankford parameter in 90 degree direction
-        GT.0.0:  Constant value,
-        LT.0.0:  Load curve or Table ID = (-R90) which defines R value as a function of plastic strain (Curve) or as a function of temperature and plastic strain (Table).
+        GT.0.0: Constant value,
+        LT.0.0: Load curve or Table ID = (-R90) which defines R value as a function of plastic strain (Curve) or as a function of temperature and plastic strain (Table).
+        CH:Hill90 parameter (see Remark 3)
         """ # nopep8
-        return self._cards[1].get_value("r90")
+        return self._cards[1].get_value("r90_ch")
 
-    @r90.setter
-    def r90(self, value: float) -> None:
-        """Set the r90 property."""
-        self._cards[1].set_value("r90", value)
+    @r90_ch.setter
+    def r90_ch(self, value: float) -> None:
+        """Set the r90_ch property."""
+        self._cards[1].set_value("r90_ch", value)
 
     @property
     def lcid(self) -> typing.Optional[int]:
@@ -337,9 +339,9 @@ class MatHill90(KeywordBase):
     @property
     def e0(self) -> typing.Optional[float]:
         """Get or set the Material parameter
-        HR.EQ.2.0:   for determining initial yield stress for Swift exponential hardening. (Default=0.0)
+        HR.EQ.2.0: for determining initial yield stress for Swift exponential hardening. (Default=0.0)
         HR.EQ.4.0: b, coefficient for Voce exponential hardening
-        HR.EQ.5.0:   for determining initial yield stress for Gosh exponential hardening. (Default=0.0)
+        HR.EQ.5.0: for determining initial yield stress for Gosh exponential hardening. (Default=0.0)
         HR.EQ.6.0: b, coefficient for Hocket-Sherby exponential hardening.
         """ # nopep8
         return self._cards[1].get_value("e0")
@@ -471,7 +473,7 @@ class MatHill90(KeywordBase):
         element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
         EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
         *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
         """ # nopep8
@@ -506,7 +508,7 @@ class MatHill90(KeywordBase):
 
     @property
     def vlcid(self) -> typing.Optional[int]:
-        """Get or set the Volume correction curve ID defining the relative volume change (change in volume relative to the initial volume) as a function of the effective plastic strain.  This is only used when nonzero.
+        """Get or set the Volume correction curve ID defining the relative volume change (change in volume relative to the initial volume) as a function of the effective plastic strain. This is only used when nonzero.
         """ # nopep8
         return self._cards[3].get_value("vlcid")
 
@@ -525,39 +527,6 @@ class MatHill90(KeywordBase):
     def flag(self, value: float) -> None:
         """Set the flag property."""
         self._cards[3].set_value("flag", value)
-
-    @property
-    def xp(self) -> typing.Optional[float]:
-        """Get or set the x-coordinates of point p for AOPT = 1.
-        """ # nopep8
-        return self._cards[4].get_value("xp")
-
-    @xp.setter
-    def xp(self, value: float) -> None:
-        """Set the xp property."""
-        self._cards[4].set_value("xp", value)
-
-    @property
-    def yp(self) -> typing.Optional[float]:
-        """Get or set the y-coordinates of point p for AOPT = 1.
-        """ # nopep8
-        return self._cards[4].get_value("yp")
-
-    @yp.setter
-    def yp(self, value: float) -> None:
-        """Set the yp property."""
-        self._cards[4].set_value("yp", value)
-
-    @property
-    def zp(self) -> typing.Optional[float]:
-        """Get or set the z-coordinates of point p for AOPT = 1.
-        """ # nopep8
-        return self._cards[4].get_value("zp")
-
-    @zp.setter
-    def zp(self, value: float) -> None:
-        """Set the zp property."""
-        self._cards[4].set_value("zp", value)
 
     @property
     def a1(self) -> typing.Optional[float]:
@@ -672,8 +641,8 @@ class MatHill90(KeywordBase):
     @property
     def usrfail(self) -> float:
         """Get or set the User defined failure flag
-        USRFAIL.EQ.0:	no user subroutine is called
-        USRFAIL.EQ.1 : user subroutine matusr_‌24 in dyn21.f is called.
+        USRFAIL.EQ.0: no user subroutine is called
+        USRFAIL.EQ.1: user subroutine matusr_24 in dyn21.f is called.
         """ # nopep8
         return self._cards[6].get_value("usrfail")
 

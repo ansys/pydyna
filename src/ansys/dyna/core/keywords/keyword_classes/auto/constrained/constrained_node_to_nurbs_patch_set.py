@@ -80,7 +80,7 @@ class ConstrainedNodeToNurbsPatchSet(KeywordBase):
 
     @property
     def con(self) -> str:
-        """Get or set the Constraint parameter for extra node(s) of NSID.  Its definition is same as that of CON2 when CM0=-1 as described in MAT_RIGID.  For example ‘1110’ means constrained z-translation, x-rotation and y-rotation.
+        """Get or set the Constraint parameter for extra node(s) of NSID.  Its definition is same as that of CON2 when CM0=-1 as described in MAT_RIGID.  For example 1110 means constrained z-translation, x-rotation and y-rotation.
         """ # nopep8
         return self._cards[0].get_value("con")
 

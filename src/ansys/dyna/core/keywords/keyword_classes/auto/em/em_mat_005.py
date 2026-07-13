@@ -59,6 +59,8 @@ _EMMAT005_CARD3 = (
     FieldSchema("sigmayzb", float, 30, 10, None),
     FieldSchema("sigmazxb", float, 40, 10, None),
     FieldSchema("sigmazyb", float, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("lambda_", float, 70, 10, None, "lambda"),
 )
 
 _EMMAT005_CARD4 = (
@@ -121,7 +123,7 @@ class EmMat005(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material ID: refers to MID in the *PART card.
+        """Get or set the Material ID. MID must reference a *MAT material since the electromagnetic properties are added onto the *MAT properties. See Remark 1
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -133,12 +135,11 @@ class EmMat005(KeywordBase):
     @property
     def mtype(self) -> int:
         """Get or set the Defines the electromagnetism type of the material:
-
-        EQ.0:	Air or vacuum
-        EQ.1 : Insulator material : these materials have the same electromagnetism behavior as EQ.0.
-        EQ.2 : In EP, it corresponds to the tissue, where the bidomain equations will be solved for EMSOL = 12 or EMSOL = 13. An * EM_EP_CELLMODEL must be associated to this * EM_MAT_005
-        EQ.4 : In EP, it corresponds to the bath where only the external potential is solved for.No* EM_EP_CELLMODEL should be associated with these materials.
-        EQ.5 : Material associated to * EM_RANDLES_BATMAC
+        EQ.0: Air or vacuum
+        EQ.1: Insulator material.These materials have the same electromagnetism behavior as MTYPE = 0.
+        EQ.2: In electrophysiology, it corresponds to the tissue, where the bidomain equations will be solved for EMSOL = 12 or EMSOL = 13. An *EM_EP_CELLMODEL must be associated with this material.
+        EQ.4: In electrophysiology, it corresponds to the bath where only the external potential is solved for.No *EM_EP_CELLMODEL should be associated with this material.
+        EQ.5: Material associated with *EM_RANDLES_BATMAC. See Remark 2.
         """ # nopep8
         return self._cards[0].get_value("mtype")
 
@@ -151,7 +152,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmaxxa(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters
+        """Get or set the The 1, 1 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities. For the BatMac model, A is for the potential on the positive current collector, and B is for the potential on the negative current collector. For the bidomain model in Electrophysiology, A is for the intracellular potential, and B is for the extracellular potential. Note that 1 corresponds to the a material direction.
+        LT.0.0: | SIGMAXXA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[0].get_value("sigmaxxa")
 
@@ -162,7 +164,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmayya(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters
+        """Get or set the The 1, 2 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities. Note that 2 corresponds to the b material direction.
+        LT.0.0: | SIGMAXYA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[0].get_value("sigmayya")
 
@@ -173,7 +176,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmazza(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters
+        """Get or set the The 3, 3 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities. Note that 3 corresponds to the c material direction.
+        LT.0.0: | SIGMAZZA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[0].get_value("sigmazza")
 
@@ -184,7 +188,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmaxya(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.
+        """Get or set the The 1, 2 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities. Note that 2 corresponds to the b material direction.
+        LT.0.0: | SIGMAXYA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[1].get_value("sigmaxya")
 
@@ -195,7 +200,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmaxza(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.
+        """Get or set the The 1, 2 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities. Note that 2 corresponds to the b material direction.
+        LT.0.0: | SIGMAXYA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[1].get_value("sigmaxza")
 
@@ -206,7 +212,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmayxa(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.
+        """Get or set the The 1, 2 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities. Note that 2 corresponds to the b material direction.
+        LT.0.0: | SIGMAXYA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[1].get_value("sigmayxa")
 
@@ -217,7 +224,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmayza(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.
+        """Get or set the The 1, 2 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities. Note that 2 corresponds to the b material direction.
+        LT.0.0: | SIGMAXYA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[1].get_value("sigmayza")
 
@@ -228,7 +236,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmazxa(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.
+        """Get or set the The 1, 2 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities. Note that 2 corresponds to the b material direction.
+        LT.0.0: | SIGMAXYA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[1].get_value("sigmazxa")
 
@@ -239,7 +248,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmazya(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.
+        """Get or set the The 1, 2 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities. Note that 2 corresponds to the b material direction.
+        LT.0.0: | SIGMAXYA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[1].get_value("sigmazya")
 
@@ -250,7 +260,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmaxxb(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.
+        """Get or set the The 1, 1 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities.For the BatMac model, A is for the potential on the positive current collector,and B is for the potential on the negative current collector.For the bidomain model in Electrophysiology, A is for the intracellular potential,and B is for the extracellular potential.Note that 1 corresponds to the a material direction.
+        LT.0.0: | SIGMAXXA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[2].get_value("sigmaxxb")
 
@@ -261,7 +272,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmayyb(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.
+        """Get or set the The 1, 2 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities.Note that 2 corresponds to the b material direction.
+        LT.0.0: | SIGMAXYA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[2].get_value("sigmayyb")
 
@@ -272,7 +284,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmazzb(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.
+        """Get or set the The 3, 3 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities. Note that 3 corresponds to the c material direction.
+        LT.0.0: | SIGMAZZA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[2].get_value("sigmazzb")
 
@@ -283,7 +296,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmaxyb(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.
+        """Get or set the The 1, 2 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities. Note that 2 corresponds to the b material direction.
+        LT.0.0: | SIGMAXYA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[3].get_value("sigmaxyb")
 
@@ -294,7 +308,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmaxzb(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.
+        """Get or set the The 1, 2 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities. Note that 2 corresponds to the b material direction.
+        LT.0.0: | SIGMAXYA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[3].get_value("sigmaxzb")
 
@@ -305,7 +320,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmayxb(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.
+        """Get or set the The 1, 2 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities. Note that 2 corresponds to the b material direction.
+        LT.0.0: | SIGMAXYA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[3].get_value("sigmayxb")
 
@@ -316,7 +332,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmayzb(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.
+        """Get or set the The 1, 2 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities. Note that 2 corresponds to the b material direction.
+        LT.0.0: | SIGMAXYA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[3].get_value("sigmayzb")
 
@@ -327,7 +344,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmazxb(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.
+        """Get or set the The 1, 2 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities. Note that 2 corresponds to the b material direction.
+        LT.0.0: | SIGMAXYA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[3].get_value("sigmazxb")
 
@@ -338,7 +356,8 @@ class EmMat005(KeywordBase):
 
     @property
     def sigmazyb(self) -> typing.Optional[float]:
-        """Get or set the The term in the 3 x 3 electromagnetic conductivity tensor matrix for the two conductivities.
+        """Get or set the The 1, 2 term in the 3  3 electromagnetic conductivity tensor matrix for the two conductivities. Note that 2 corresponds to the b material direction.
+        LT.0.0: | SIGMAXYA / B | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 3 for available parameters.
         """ # nopep8
         return self._cards[3].get_value("sigmazyb")
 
@@ -348,22 +367,32 @@ class EmMat005(KeywordBase):
         self._cards[3].set_value("sigmazyb", value)
 
     @property
+    def lambda_(self) -> typing.Optional[float]:
+        """Get or set the Intra-to-extracellular conductivity ratio. When non-empty, the elliptic equation is solved to compute extracellular potentials (to be used only when EMSOL = 15 or 16 in *EM_?CONTROL).
+        """ # nopep8
+        return self._cards[3].get_value("lambda_")
+
+    @lambda_.setter
+    def lambda_(self, value: float) -> None:
+        """Set the lambda_ property."""
+        self._cards[3].set_value("lambda_", value)
+
+    @property
     def aopt(self) -> int:
-        """Get or set the Material axes option:
-        EQ.0.0:locally orthotropic with material axes determined by element nodes as shown in part (a) the figure in *MAT_002.The a-direction is from node 1 to node 2 of the element.The b-direction is orthogonal to the adirection and is in the plane formed by nodes 1, 2,and 4.
-        EQ.1.0: locally orthotropic with material axes determined by a point in space and the global location of the element center; this is the a-direction.
-        EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR.
-        EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle, BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.
-        EQ.4.0: locally orthotropic in cylindrical coordinate system with the material axes determined by a vector v, and an originating point, P, which define the centerline axis.This option is for solid elements only.
-        EQ.5.0: globally defined reference frame with(a,b,c)=(X0,Y0,Z0).
+        """Get or set the Material axes option (see *MAT_002 for a more detailed description):
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes.The a - direction is from node 1 to node 2 of the element.The b - direction is orthogonal to the a - direction and is in the plane formed by nodes 1, 2,and 4.
+        EQ.1.0: Locally orthotropic with material axes determined by a point in space, P,and the global location of the element center; this is the a - direction.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR.
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element.
+        EQ.4.0: Locally orthotropic in cylindrical coordinate system with the material axes determined by a vector, v,and an originating point, P, which define the centerline axis.
         """ # nopep8
         return self._cards[4].get_value("aopt")
 
     @aopt.setter
     def aopt(self, value: int) -> None:
         """Set the aopt property."""
-        if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""aopt must be `None` or one of {0,1,2,3,4,5}.""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""aopt must be `None` or one of {0,1,2,3,4}.""")
         self._cards[4].set_value("aopt", value)
 
     @property

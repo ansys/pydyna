@@ -149,7 +149,9 @@ class Mat276(KeywordBase):
 
     @property
     def ef(self) -> typing.Optional[float]:
-        """Get or set the Elastic flag (if equal 1, the layer is elastic. If 0 the layer is viscoelastic).
+        """Get or set the Elastic flag:
+        EQ.0: Layer is viscooelastic.
+        EQ.1: Layer is elastic.
         """ # nopep8
         return self._cards[0].get_value("ef")
 

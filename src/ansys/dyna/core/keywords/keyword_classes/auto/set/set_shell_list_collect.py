@@ -151,7 +151,7 @@ class SetShellListCollect(KeywordBase):
 
     @property
     def eid1(self) -> typing.Optional[int]:
-        """Get or set the First shell element ID of the set.
+        """Get or set the First shell element ID  (see Remark 3)
         """ # nopep8
         return self._cards[1].get_value("eid1")
 
@@ -162,7 +162,7 @@ class SetShellListCollect(KeywordBase):
 
     @property
     def eid2(self) -> typing.Optional[int]:
-        """Get or set the Second shell element ID of the set.
+        """Get or set the Second shell element ID  (see Remark 3)
         """ # nopep8
         return self._cards[1].get_value("eid2")
 
@@ -173,7 +173,7 @@ class SetShellListCollect(KeywordBase):
 
     @property
     def eid3(self) -> typing.Optional[int]:
-        """Get or set the Third shell element ID of the set.
+        """Get or set the Third shell element ID  (see Remark 3)
         """ # nopep8
         return self._cards[1].get_value("eid3")
 
@@ -184,7 +184,7 @@ class SetShellListCollect(KeywordBase):
 
     @property
     def eid4(self) -> typing.Optional[int]:
-        """Get or set the Fourth shell element ID of the set.
+        """Get or set the Fourth shell element ID  (see Remark 3)
         """ # nopep8
         return self._cards[1].get_value("eid4")
 
@@ -195,7 +195,7 @@ class SetShellListCollect(KeywordBase):
 
     @property
     def eid5(self) -> typing.Optional[int]:
-        """Get or set the Fifth shell element ID of the set.
+        """Get or set the Fifth shell element ID  (see Remark 3)
         """ # nopep8
         return self._cards[1].get_value("eid5")
 
@@ -206,7 +206,7 @@ class SetShellListCollect(KeywordBase):
 
     @property
     def eid6(self) -> typing.Optional[int]:
-        """Get or set the Sixth shell element ID of the set.
+        """Get or set the Sixth shell element ID  (see Remark 3)
         """ # nopep8
         return self._cards[1].get_value("eid6")
 
@@ -217,7 +217,7 @@ class SetShellListCollect(KeywordBase):
 
     @property
     def eid7(self) -> typing.Optional[int]:
-        """Get or set the Seventh shell element ID of the set.
+        """Get or set the Seventh shell element ID  (see Remark 3)
         """ # nopep8
         return self._cards[1].get_value("eid7")
 
@@ -228,7 +228,7 @@ class SetShellListCollect(KeywordBase):
 
     @property
     def eid8(self) -> typing.Optional[int]:
-        """Get or set the Eighth shell element ID of the set.
+        """Get or set the Eighth shell element ID  (see Remark 3)
         """ # nopep8
         return self._cards[1].get_value("eid8")
 

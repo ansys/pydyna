@@ -188,9 +188,9 @@ class Mat114(KeywordBase):
     @property
     def fail(self) -> float:
         """Get or set the Failure flag:
-        LT.0.0:	User defined failure subroutine, matusr_24 in dyn21.F, is called to determine failure.
-        EQ.0.0 : Failure is not considered.This option is recommended if failure is not of interest since many calculations will be saved.
-        GT.0.0 : Plastic strain to failure.When the plastic strain reaches this value, the element is deleted from the calculation
+        LT.0.0: User defined failure subroutine, matusr_24 in dyn21.F, is called to determine failure.
+        EQ.0.0: Failure is not considered.This option is recommended if failure is not of interest since many calculations will be saved.
+        GT.0.0: Plastic strain to failure.When the plastic strain reaches this value, the element is deleted from the calculation
         """ # nopep8
         return self._cards[0].get_value("fail")
 

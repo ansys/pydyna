@@ -58,7 +58,7 @@ class CeseDatabaseSsetdrag(KeywordBase):
     def outlv(self) -> int:
         """Get or set the Determines if the output file should be dumped
         EQ.0: No output file is generated.
-        EQ : 1 The output file giving the drag forces is generated.
+        EQ: 1 The output file giving the drag forces is generated.
         """ # nopep8
         return self._cards[0].get_value("outlv")
 

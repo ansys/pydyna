@@ -33,6 +33,7 @@ _BOUNDARYPRESCRIBEDFINALGEOMETRY_CARD0 = (
     FieldSchema("bpfgid", int, 0, 10, 0),
     FieldSchema("lcidf", int, 10, 10, 0),
     FieldSchema("deathd", float, 20, 10, None),
+    FieldSchema("ibrth", int, 30, 10, 0),
 )
 
 _BOUNDARYPRESCRIBEDFINALGEOMETRY_CARD1 = (
@@ -41,7 +42,8 @@ _BOUNDARYPRESCRIBEDFINALGEOMETRY_CARD1 = (
     FieldSchema("y", float, 24, 16, 0.0),
     FieldSchema("z", float, 40, 16, 0.0),
     FieldSchema("lcid", int, 56, 8, None),
-    FieldSchema("death", float, 64, 16, None),
+    FieldSchema("death", float, 64, 8, None),
+    FieldSchema("birth", float, 72, 8, None),
 )
 
 class BoundaryPrescribedFinalGeometry(KeywordBase):
@@ -81,7 +83,7 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
 
     @property
     def lcidf(self) -> int:
-        """Get or set the Default load curve ID.  This curve varies between zero and unity
+        """Get or set the Default load curve ID. This curve varies between zero and unity
         """ # nopep8
         return self._cards[0].get_value("lcidf")
 
@@ -92,7 +94,7 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
 
     @property
     def deathd(self) -> typing.Optional[float]:
-        """Get or set the Default death time.  At this time the prescribed motion is inactive and the nodal point is allowed to move freely
+        """Get or set the Default death time. At this time the prescribed motion is inactive and the nodal point is allowed to move freely
         """ # nopep8
         return self._cards[0].get_value("deathd")
 
@@ -102,8 +104,19 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
         self._cards[0].set_value("deathd", value)
 
     @property
+    def ibrth(self) -> int:
+        """Get or set the Flag to allow node input with death and birth times. Please pay attention to the changed format with IBRTH=1.
+        """ # nopep8
+        return self._cards[0].get_value("ibrth")
+
+    @ibrth.setter
+    def ibrth(self, value: int) -> None:
+        """Set the ibrth property."""
+        self._cards[0].set_value("ibrth", value)
+
+    @property
     def nid(self) -> typing.Optional[int]:
-        """Get or set the Node ID for which the final position is defined.  Nodes defined in this section must also appear under the *NODE input.
+        """Get or set the GT.0: Node ID for which the final position is defined. Nodes defined in this section must also appear under the *NODE input. LT.0: | NID | is a node set ID for which the final projection plane normal to the global z - axis is defined.In this case, only the offset Z value is needed,and all the nodes in this node set are displaced from their initial positions to the projected points on the x - y plane with Z offset.They share the same LCID and DEATH.
         """ # nopep8
         return self._cards[1].get_value("nid")
 
@@ -147,7 +160,7 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID.  If zero the default curve ID, LCIDF, is used.
+        """Get or set the Load curve ID. If zero the default curve ID, LCIDF, is used.
         """ # nopep8
         return self._cards[1].get_value("lcid")
 
@@ -158,7 +171,7 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
 
     @property
     def death(self) -> typing.Optional[float]:
-        """Get or set the Death time.  If zero the default value, DEATHD, is used.
+        """Get or set the Death time. If zero the default value, DEATHD, is used.
         """ # nopep8
         return self._cards[1].get_value("death")
 
@@ -166,6 +179,17 @@ class BoundaryPrescribedFinalGeometry(KeywordBase):
     def death(self, value: float) -> None:
         """Set the death property."""
         self._cards[1].set_value("death", value)
+
+    @property
+    def birth(self) -> typing.Optional[float]:
+        """Get or set the Birth time for NID. The default value is zero. The prescribed motion begins acting at time = BIRTH, but with the motion from the zero abscissa value of the curve LCID. In other words, the abscissa values are shifted by an amount BIRTH, such that it has the same effect as setting OFFA = BIRTH in *DEFINE_CURVE.
+        """ # nopep8
+        return self._cards[1].get_value("birth")
+
+    @birth.setter
+    def birth(self, value: float) -> None:
+        """Set the birth property."""
+        self._cards[1].set_value("birth", value)
 
     @property
     def nid_link(self) -> typing.Optional[KeywordBase]:

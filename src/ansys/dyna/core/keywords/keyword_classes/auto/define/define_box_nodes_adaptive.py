@@ -148,7 +148,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
     @property
     def itype(self) -> int:
         """Get or set the Type of curves LCX, LCY and LCZ.  Currently only time as a function of displacement load curves are supported.
-        EQ.2:	LCX, LCYand LCZ are defined as time as a function of displacement..
+        EQ.2: LCX, LCYand LCZ are defined as time as a function of displacement..
         """ # nopep8
         return self._cards[0].get_value("itype")
 
@@ -159,7 +159,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
     @property
     def radius(self) -> float:
-        """Get or set the The radius of the tube that defines the fission/fusion boundary.
+        """Get or set the Radius of the tube that defines the fission/fusion boundary.
         """ # nopep8
         return self._cards[0].get_value("radius")
 
@@ -170,7 +170,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
     @property
     def npiece(self) -> int:
-        """Get or set the Number of segments used to approximate the tool path in one adaptive step.  Note that the tool’s path is divided into several linear segments for approximation
+        """Get or set the Number of segments used to approximate the tool path in one adaptive step.  Note that the tools path is divided into several linear segments for approximation
         """ # nopep8
         return self._cards[0].get_value("npiece")
 
@@ -182,8 +182,8 @@ class DefineBoxNodesAdaptive(KeywordBase):
     @property
     def pid(self) -> typing.Optional[int]:
         """Get or set the The deformable part or part set ID on which the tube adaptivity is to be applied (see *PART).
-        GT.0:	Part ID
-        LT.0 : | PID | is
+        GT.0: Part ID
+        LT.0: | PID | is
         a part set ID.A part set ID can be useful for simulating the forming of tailor welded blanks.
         """ # nopep8
         return self._cards[1].get_value("pid")
@@ -195,7 +195,7 @@ class DefineBoxNodesAdaptive(KeywordBase):
 
     @property
     def level(self) -> typing.Optional[int]:
-        """Get or set the Desired mesh refinement level. Level set to a value of 1, 2, 3, … allows a maximum of 1, 4, 16, … elements to be created for each original element in the “tube region”.
+        """Get or set the Desired mesh refinement level. Level set to a value of 1, 2, 3,  allows a maximum of 1, 4, 16,  elements to be created for each original element in the tube region.
         """ # nopep8
         return self._cards[1].get_value("level")
 

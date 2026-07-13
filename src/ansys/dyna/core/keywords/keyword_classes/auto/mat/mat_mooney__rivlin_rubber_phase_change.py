@@ -31,7 +31,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import De
 
 _MATMOONEY_RIVLINRUBBERPHASECHANGE_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
-    FieldSchema("ro", float, 10, 10, None),
+    FieldSchema("ro1", float, 10, 10, None),
     FieldSchema("pr1", float, 20, 10, None),
     FieldSchema("a1", float, 30, 10, None),
     FieldSchema("b1", float, 40, 10, None),
@@ -47,17 +47,17 @@ _MATMOONEY_RIVLINRUBBERPHASECHANGE_CARD1 = (
 
 _MATMOONEY_RIVLINRUBBERPHASECHANGE_CARD2 = (
     FieldSchema("unused", float, 0, 10, None),
-    FieldSchema("unused", float, 10, 10, None),
+    FieldSchema("ro2", float, 10, 10, None),
     FieldSchema("pr2", float, 20, 10, None),
     FieldSchema("a2", float, 30, 10, None),
     FieldSchema("b2", float, 40, 10, None),
 )
 
 _MATMOONEY_RIVLINRUBBERPHASECHANGE_CARD3 = (
-    FieldSchema("sgl1", float, 0, 10, None),
-    FieldSchema("sw1", float, 10, 10, None),
-    FieldSchema("st1", float, 20, 10, None),
-    FieldSchema("lcid1", float, 30, 10, None),
+    FieldSchema("sgl2", float, 0, 10, None),
+    FieldSchema("sw2", float, 10, 10, None),
+    FieldSchema("st2", float, 20, 10, None),
+    FieldSchema("lcid2", float, 30, 10, None),
 )
 
 _MATMOONEY_RIVLINRUBBERPHASECHANGE_CARD4 = (
@@ -84,7 +84,7 @@ class MatMooney_RivlinRubberPhaseChange(KeywordBase):
     ]
     _link_fields = {
         "lcid1": LinkType.DEFINE_CURVE,
-        "lcid1": LinkType.DEFINE_CURVE,
+        "lcid2": LinkType.DEFINE_CURVE,
     }
 
     def __init__(self, **kwargs):
@@ -125,7 +125,7 @@ class MatMooney_RivlinRubberPhaseChange(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification. A unique number or label not exceeding 8	characters must be specified.
+        """Get or set the Material identification. A unique number or label must be specified.
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -135,19 +135,19 @@ class MatMooney_RivlinRubberPhaseChange(KeywordBase):
         self._cards[0].set_value("mid", value)
 
     @property
-    def ro(self) -> typing.Optional[float]:
-        """Get or set the Mass density
+    def ro1(self) -> typing.Optional[float]:
+        """Get or set the Mass density for phase 1
         """ # nopep8
-        return self._cards[0].get_value("ro")
+        return self._cards[0].get_value("ro1")
 
-    @ro.setter
-    def ro(self, value: float) -> None:
-        """Set the ro property."""
-        self._cards[0].set_value("ro", value)
+    @ro1.setter
+    def ro1(self, value: float) -> None:
+        """Set the ro1 property."""
+        self._cards[0].set_value("ro1", value)
 
     @property
     def pr1(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio (value between 0.49 and 0.5 is recommended, smaller values may not work) where i indicates the phase.
+        """Get or set the Poisson's ratio where i indicates the phase. A value between 0.49 and 0.5 is recommended. Smaller values may not work.
         """ # nopep8
         return self._cards[0].get_value("pr1")
 
@@ -158,7 +158,7 @@ class MatMooney_RivlinRubberPhaseChange(KeywordBase):
 
     @property
     def a1(self) -> typing.Optional[float]:
-        """Get or set the Constant for the i th phase, see literature and equations defined below.
+        """Get or set the Constant for the i th phase. See the literature and the equations defined in Material Formulation.
         """ # nopep8
         return self._cards[0].get_value("a1")
 
@@ -169,7 +169,7 @@ class MatMooney_RivlinRubberPhaseChange(KeywordBase):
 
     @property
     def b1(self) -> typing.Optional[float]:
-        """Get or set the Constant for the i th phase, see literature and equations defined	below.
+        """Get or set the Constant for the i th phase. See the literature and the equations defined in Material Formulation.
         """ # nopep8
         return self._cards[0].get_value("b1")
 
@@ -180,10 +180,9 @@ class MatMooney_RivlinRubberPhaseChange(KeywordBase):
 
     @property
     def ref(self) -> float:
-        """Get or set the Use reference geometry to initialize the stress tensor. The reference
-        geometry is defined by the keyword:*INITIAL_FOAM_REFERENCE_GEOMETRY (see there for more details).
-        EQ.0.0: off,
-        EQ.1.0: on.
+        """Get or set the Use reference geometry to initialize the stress tensor. The reference geometry is defined by the keyword:*INITIAL_FOAM_REFERENCE_GEOMETRY (see there for more details).
+        EQ.0.0: Off,
+        EQ.1.0: On.
         """ # nopep8
         return self._cards[0].get_value("ref")
 
@@ -239,6 +238,17 @@ class MatMooney_RivlinRubberPhaseChange(KeywordBase):
         self._cards[1].set_value("lcid1", value)
 
     @property
+    def ro2(self) -> typing.Optional[float]:
+        """Get or set the Mass density for phase 2
+        """ # nopep8
+        return self._cards[2].get_value("ro2")
+
+    @ro2.setter
+    def ro2(self, value: float) -> None:
+        """Set the ro2 property."""
+        self._cards[2].set_value("ro2", value)
+
+    @property
     def pr2(self) -> typing.Optional[float]:
         """Get or set the Poisson's ratio (value between 0.49 and 0.5 is recommended, smaller values may not work) where i indicates the phase
         """ # nopep8
@@ -251,7 +261,7 @@ class MatMooney_RivlinRubberPhaseChange(KeywordBase):
 
     @property
     def a2(self) -> typing.Optional[float]:
-        """Get or set the Constant for the i th phase, see literature and equations defined below
+        """Get or set the Constant for the i th phase. See the literature and the equations defined in Material Formulation
         """ # nopep8
         return self._cards[2].get_value("a2")
 
@@ -262,7 +272,7 @@ class MatMooney_RivlinRubberPhaseChange(KeywordBase):
 
     @property
     def b2(self) -> typing.Optional[float]:
-        """Get or set the Constant for the i th phase, see literature and equations defined	below
+        """Get or set the Constant for the i th phase. See the literature and the equations defined in Material Formulation
         """ # nopep8
         return self._cards[2].get_value("b2")
 
@@ -272,48 +282,48 @@ class MatMooney_RivlinRubberPhaseChange(KeywordBase):
         self._cards[2].set_value("b2", value)
 
     @property
-    def sgl1(self) -> typing.Optional[float]:
+    def sgl2(self) -> typing.Optional[float]:
         """Get or set the Specimen gauge length l0 for the i th phase, see Figure M218-1.
         """ # nopep8
-        return self._cards[3].get_value("sgl1")
+        return self._cards[3].get_value("sgl2")
 
-    @sgl1.setter
-    def sgl1(self, value: float) -> None:
-        """Set the sgl1 property."""
-        self._cards[3].set_value("sgl1", value)
+    @sgl2.setter
+    def sgl2(self, value: float) -> None:
+        """Set the sgl2 property."""
+        self._cards[3].set_value("sgl2", value)
 
     @property
-    def sw1(self) -> typing.Optional[float]:
+    def sw2(self) -> typing.Optional[float]:
         """Get or set the Specimen width for the i th phase, see Figure M218-1.
         """ # nopep8
-        return self._cards[3].get_value("sw1")
+        return self._cards[3].get_value("sw2")
 
-    @sw1.setter
-    def sw1(self, value: float) -> None:
-        """Set the sw1 property."""
-        self._cards[3].set_value("sw1", value)
+    @sw2.setter
+    def sw2(self, value: float) -> None:
+        """Set the sw2 property."""
+        self._cards[3].set_value("sw2", value)
 
     @property
-    def st1(self) -> typing.Optional[float]:
+    def st2(self) -> typing.Optional[float]:
         """Get or set the Specimen thickness for the i th phase, see Figure M218-1.
         """ # nopep8
-        return self._cards[3].get_value("st1")
+        return self._cards[3].get_value("st2")
 
-    @st1.setter
-    def st1(self, value: float) -> None:
-        """Set the st1 property."""
-        self._cards[3].set_value("st1", value)
+    @st2.setter
+    def st2(self, value: float) -> None:
+        """Set the st2 property."""
+        self._cards[3].set_value("st2", value)
 
     @property
-    def lcid1(self) -> typing.Optional[float]:
-        """Get or set the Curve ID for the i th phase, see *DEFINE_CURVE, giving the force versus actual change delta L in the gauge length. See also Figure M218-2
+    def lcid2(self) -> typing.Optional[float]:
+        """Get or set the Curve ID for the ith phase, see *DEFINE_CURVE, giving the force versus actual change delta L in the gauge length. See also Figure M218-2
         """ # nopep8
-        return self._cards[3].get_value("lcid1")
+        return self._cards[3].get_value("lcid2")
 
-    @lcid1.setter
-    def lcid1(self, value: float) -> None:
-        """Set the lcid1 property."""
-        self._cards[3].set_value("lcid1", value)
+    @lcid2.setter
+    def lcid2(self, value: float) -> None:
+        """Set the lcid2 property."""
+        self._cards[3].set_value("lcid2", value)
 
     @property
     def x1(self) -> typing.Optional[float]:
@@ -422,17 +432,17 @@ class MatMooney_RivlinRubberPhaseChange(KeywordBase):
         self.lcid1 = value.lcid
 
     @property
-    def lcid1_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcid1."""
+    def lcid2_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcid2."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcid1:
+            if kwd.lcid == self.lcid2:
                 return kwd
         return None
 
-    @lcid1_link.setter
-    def lcid1_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcid1."""
-        self.lcid1 = value.lcid
+    @lcid2_link.setter
+    def lcid2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid2."""
+        self.lcid2 = value.lcid
 

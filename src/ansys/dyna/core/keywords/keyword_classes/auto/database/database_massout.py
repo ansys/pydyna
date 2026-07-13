@@ -64,10 +64,10 @@ class DatabaseMassout(KeywordBase):
     @property
     def ndflg(self) -> int:
         """Get or set the Database extent:
-        EQ.1: output translational mass for deformable nodes identified by	SETID (default),
-        EQ.2: output translational mass and rotary inertias for the deformable	nodes identified by the SETID.
+        EQ.1: output translational mass for deformable nodes identified by SETID (default),
+        EQ.2: output translational mass and rotary inertias for the deformable nodes identified by the SETID.
         EQ.3: output translational mass for deformable and rigid nodes identified by SETID (default),
-        EQ.4: output translational mass and rotary inertias for the deformable	and rigid nodes identified by the SETID.
+        EQ.4: output translational mass and rotary inertias for the deformable and rigid nodes identified by the SETID.
         """ # nopep8
         return self._cards[0].get_value("ndflg")
 

@@ -178,7 +178,7 @@ class ConstrainedNodalRigidBodyInertiaOverride(KeywordBase):
 
     @property
     def pnode(self) -> int:
-        """Get or set the An optional, possibly massless, nodal point located at the mass center of the nodal rigid body. The initial nodal coordinates will be reset if necessary to ensure that they lie at the mass center. In the output files, the coordinates, accelerations, velocites, and displacements of this node will coorespond to the mass center of the nodal rigid body. If CID is defined, the velocities and accelerations of PNODE will be output in the local system in the D3PLOT and D3THDT files unless PNODE is specified as a negative number in which case the global system is used.
+        """Get or set the An optional node (a massless node is allowed) used for post-processing rigid body data. If PNODE is not located at the rigid bodys center of mass, LS-DYNA resets the initial coordinates of PNODE to the center of mass.  If CID is defined, LS-DYNA outputs the velocities and accelerations of PNODE in the local system to the d3plot and d3thdt files unless you specify PNODE as a negative number, in which case the global system is used.
         """ # nopep8
         return self._cards[0].get_value("pnode")
 
@@ -189,10 +189,15 @@ class ConstrainedNodalRigidBodyInertiaOverride(KeywordBase):
 
     @property
     def iprt(self) -> int:
-        """Get or set the Print flag.  For nodal rigid bodies the following values apply:
-        EQ.1:	Write data into rbdout.
-        EQ.2 : Do not write data into rbdout.
-        Except for in the case of two - noded rigid bodies, IPRT(if 0 or unset) defaults to the value of IPRTF in* CONTROL_OUTPUT.For two - noded rigid bodies, printing is suppressed(IPRT = 2) unless IPRT is set to 1.  This is to avoid excessively large rbdout files when the model contains many two - noded welds.
+        """Get or set the Print flag.  For nodal rigid bodies, the following values apply:
+        EQ.-2: Do not write data into rbdout. Output the forces and moments in bndout with respect to the nodal rigid body�s local coordinate system.
+        EQ.-1: Write data into rbdout. Output the forces and moments in bndout with respect to the nodal rigid body�s local coordinate system.
+        EQ.0: Defaults to the value of IPRTF in *CONTROL_OUTPUT for all nodal rigid bodies except two-noded rigid bodies.
+        For two-noded rigid bodies, printing to rbdout is suppressed. This behavior exists to avoid excessively large rbdout files when the model
+        contains many two-noded welds. Note that IPRTF does not change the coordinate system for bndout. Thus, for all nodal rigid bodies, the forces
+        and moments in the bndout file are expressed in the global coordinate system.
+        EQ.1: Write data into rbdout.  Output the forces and moments in bndout with respect to the global coordinate system.
+        EQ.2: Do not write data into rbdout. Output the forces and moments in bndout with respect to the global coordinate system.
         """ # nopep8
         return self._cards[0].get_value("iprt")
 
@@ -539,10 +544,10 @@ class ConstrainedNodalRigidBodyInertiaOverride(KeywordBase):
     @property
     def icnt(self) -> int:
         """Get or set the Flag for contact synchronization:
-        EQ.0:	No synchronization,
-        EQ.1 : Since there exists no contact when both slave and master sides belong to the same rigid body,
-        setting ICNT = 1 will turn off / on all contact definitions of which the slave and master sides belong to
-        the same nodal rigid body PID when PID is turned on / off by * SENSOR_CONTROL.
+        EQ.0: No synchronization,
+        EQ.1: Since there exists no contact when both tracked and reference sides belong to the same rigid body,
+        setting ICNT = 1 will turn off / on all contact definitions of which the tracked and reference sides belong to
+        the same nodal rigid body PID when PID is turned on / off by *SENSOR_CONTROL.With ICNT=1, all related contact definitions need the optional ID, see *CONTACT.
         """ # nopep8
         return self._cards[5].get_value("icnt")
 
@@ -556,11 +561,11 @@ class ConstrainedNodalRigidBodyInertiaOverride(KeywordBase):
     @property
     def ibag(self) -> int:
         """Get or set the Flag for control volume airbag synchronization:
-        EQ.0:	No synchronization,
-        EQ.1 : Since airbag pressure will not change when all segments constituting the airbag belong to
+        EQ.0: No synchronization,
+        EQ.1: Since airbag pressure will not change when all segments constituting the airbag belong to
         the same rigid body, setting IBAG = 1 will skip calculation of control volume airbags of
         which all the segments belong to the same nodal rigid body PID when PID is on.The airbag calculation will be resumed,
-        with time offset to related airbag time - dependent curves, when PID is turned off by* SENSOR_CONTROL.
+        with time offset to related airbag time - dependent curves, when *SENSOR_CONTROL turns off PID.The related airbag time-dependent curves will be offset to not include the time that PID is on.  With IBAG=1, all associated airbags need the optional ID, see *AIRBAG.
         """ # nopep8
         return self._cards[5].get_value("ibag")
 
@@ -574,13 +579,9 @@ class ConstrainedNodalRigidBodyInertiaOverride(KeywordBase):
     @property
     def ipsm(self) -> int:
         """Get or set the Flag for prescribed-motion synchronization:
-        EQ.0:	No synchronization,
-        EQ.1 : Prescribed boundary conditions,* BOUNDARY_PRESCRIBED_MOTION, for PID will be turned off
-        automatically when PID is turned off by* SENSOR_CONTROL.Prescribed boundary condition not for PIDand of
-        which or all related nodes belong to PID will be turned off when PID is active to avoid boundary
-        condition conflict.Those boundary conditions will be turned on, with time
-        offset to related time - dependent curves, when PID is turned off by* SENSOR_CONTROL.
-        EQ.2 : Same as IPSM = 1, however, without time offset when those boundary conditions not for PID are turned on..
+        EQ.0: No synchronization,
+        EQ.1:Prescribed boundary conditions (*BOUNDARY_PRESCRIBED_MOTION) for PID are turned off automatically when *SENSOR_CONTROL turns off PID.  A prescribed boundary condition not for PID and not for all nodes belonging to PID, that is, boundary conditions that only apply to some of the nodes belonging to PID, are turned off when PID is active to avoid boundary condition conflict.  Those boundary conditions are turned on when *SENSOR_CONTROL turns off PID. The related time-dependent curves will be offset to not include the time that PID is on.  With IPSM > 0, all related boundary prescribed motion cards need the optional ID; see *BOUNDARY_PRESCRIBED.
+        EQ.2: Same as IPSM = 1, however, without time offset when those boundary conditions not for PID are turned on.
         """ # nopep8
         return self._cards[5].get_value("ipsm")
 

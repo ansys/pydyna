@@ -77,15 +77,15 @@ class AleStructuredMeshTrim(KeywordBase):
     @option.setter
     def option(self, value: str) -> None:
         """Set the option property."""
-        if value not in ["PARTSET", "SEGSET", "PLANE", "CYLINDER", "BOXCOR", "BOXCPT", "SPHERE", None]:
-            raise Exception("""option must be `None` or one of {"PARTSET","SEGSET","PLANE","CYLINDER","BOXCOR","BOXCPT","SPHERE"}.""")
+        if value not in ["PARTSET", "SEGSET", "SLDSET", "SHLSET", "BEAMSET", "PLANE", "CYLINDER", "BOXCOR", "BOXCPT", "SPHERE", None]:
+            raise Exception("""option must be `None` or one of {"PARTSET","SEGSET","SLDSET","SHLSET","BEAMSET","PLANE","CYLINDER","BOXCOR","BOXCPT","SPHERE"}.""")
         self._cards[0].set_value("option", value)
 
     @property
     def oper(self) -> int:
         """Get or set the To trim or un-trim, that is, to delete the picked elements or keep them.
-        EQ.0:	trim (default)
-        EQ.1:	keep.
+        EQ.0: trim (default)
+        EQ.1: keep.
         """ # nopep8
         return self._cards[0].get_value("oper")
 
@@ -98,10 +98,9 @@ class AleStructuredMeshTrim(KeywordBase):
 
     @property
     def ioutin(self) -> int:
-        """Get or set the Flag to select which elements to trim, that is, "outside" or "inside" the specified object defined with the OPTION and En.
-        For PARTSET and SEGSET options, "outside" is defined as the region to which the segment normal points.
-        EQ.0:	outside (default)
-        EQ.1:	inside.
+        """Get or set the Flag to select which elements to trim, that is, �outside� or �inside� the specified object defined with the OPTION and En.  For PARTSET, SEGSET, SLDSET, SHLSET, and BEAMSET options, �outside� is defined as the region to which the segment normal points.
+        EQ.0: Outside(default)
+        EQ.1 : Inside
         """ # nopep8
         return self._cards[0].get_value("ioutin")
 

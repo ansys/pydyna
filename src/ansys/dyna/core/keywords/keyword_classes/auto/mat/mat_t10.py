@@ -41,9 +41,9 @@ _MATT10_CARD0 = (
 _MATT10_CARD1 = (
     FieldSchema("hclc", int, 0, 10, None),
     FieldSchema("tclc", int, 10, 10, None),
-    FieldSchema("hchsv", float, 20, 10, None),
-    FieldSchema("tchsv", float, 30, 10, None),
-    FieldSchema("tghsv", float, 40, 10, None),
+    FieldSchema("hchsv", int, 20, 10, None),
+    FieldSchema("tchsv", int, 30, 10, None),
+    FieldSchema("tghsv", int, 40, 10, None),
 )
 
 _MATT10_OPTION0_CARD0 = (
@@ -90,7 +90,7 @@ class MatT10(KeywordBase):
         ]
     @property
     def tmid(self) -> typing.Optional[int]:
-        """Get or set the Thermal conductivity at T1al material identification, a unique number has to be used.
+        """Get or set the Thermal material identification, a unique number has to be used.
         """ # nopep8
         return self._cards[0].get_value("tmid")
 
@@ -114,9 +114,9 @@ class MatT10(KeywordBase):
     @property
     def tgrlc(self) -> typing.Optional[int]:
         """Get or set the Thermal generation rate (see *DEFINE_CURVE).
-        GT.0:	Load curve ID defining thermal generation rate as a function of time
-        EQ.0 : Thermal generation rate is the constant multiplier, TGMULT.
-        LT.0 : | TGRLC | is a load curve ID defining thermal generation rate as a function of temperature.
+        GT.0: Load curve ID defining thermal generation rate as a function of time
+        EQ.0: Thermal generation rate is the constant multiplier, TGMULT.
+        LT.0: | TGRLC | is a load curve ID defining thermal generation rate as a function of temperature.
         """ # nopep8
         return self._cards[0].get_value("tgrlc")
 
@@ -127,7 +127,7 @@ class MatT10(KeywordBase):
 
     @property
     def tgmult(self) -> typing.Optional[float]:
-        """Get or set the Thermal generation rate multiplier.Defines a volumetric heat rate (W/m^3 in SI units system).:
+        """Get or set the Thermal generation rate multiplier.Defines a volumetric heat rate (W/m**3 in SI units system).:
         EQ.0.0: no heat generation.
         """ # nopep8
         return self._cards[0].get_value("tgmult")
@@ -161,9 +161,9 @@ class MatT10(KeywordBase):
 
     @property
     def hclc(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID specifying specific heat as a function of temperature, or, if |HCHSV| > 0:
-        GT.0:	Load curve specifying the specific heat as a function of the mechanical history variable specified by HCHSV.
-        LT.0 : Table of load curves for different temperatures.Each curve specifies the specific heat as a function of the mechanical history variable specified by HCHSV
+        """Get or set the Load curve ID specifying specific heat as a function of temperature or external variable, or, if |HCHSV| > 0:
+        GT.0: Load curve specifying the specific heat as a function of the mechanical history variable specified by HCHSV.
+        LT.0: Table of load curves for different temperatures.Each curve specifies the specific heat as a function of the mechanical history variable specified by HCHSV
         """ # nopep8
         return self._cards[1].get_value("hclc")
 
@@ -174,9 +174,9 @@ class MatT10(KeywordBase):
 
     @property
     def tclc(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID specifying thermal conductivity as a function of temperature, or if |TCHSV| > 0:
-        GT.0:	Load curve giving thermal conductivity as a function of the mechanical history variable specified by TCHSV.
-        LT.0 : Table of load curves for different temperatures.Each curve is a function of the mechanical history variable specified by TCHSV
+        """Get or set the Load curve ID specifying thermal conductivity as a function of temperature or external variable , or if |TCHSV| > 0:
+        GT.0: Load curve giving thermal conductivity as a function of the mechanical history variable specified by TCHSV.
+        LT.0: Table of load curves for different temperatures.Each curve is a function of the mechanical history variable specified by TCHSV
         """ # nopep8
         return self._cards[1].get_value("tclc")
 
@@ -186,41 +186,41 @@ class MatT10(KeywordBase):
         self._cards[1].set_value("tclc", value)
 
     @property
-    def hchsv(self) -> typing.Optional[float]:
+    def hchsv(self) -> typing.Optional[int]:
         """Get or set the Optional:
-        GT.0.0:	mechanical history variable # used by HCL
-        LT.0.0:	as above but | HCHSV |= 1 - 6 points to the six stress components, | HCHSV |= 7 to plastic strain,and | HCHSV |= 7 + k points to history variable k
+        GT.0.0: mechanical history variable # used by HCL
+        LT.0.0: as above but | HCHSV |= 1 - 6 points to the six stress components, | HCHSV |= 7 to plastic strain,and | HCHSV |= 7 + k points to history variable k
         """ # nopep8
         return self._cards[1].get_value("hchsv")
 
     @hchsv.setter
-    def hchsv(self, value: float) -> None:
+    def hchsv(self, value: int) -> None:
         """Set the hchsv property."""
         self._cards[1].set_value("hchsv", value)
 
     @property
-    def tchsv(self) -> typing.Optional[float]:
+    def tchsv(self) -> typing.Optional[int]:
         """Get or set the Optional:
-        GT.0.0:	mechanical history variable # used by TCLC
-        LT.0.0:	as above but | TCHSV |= 1 - 6 points to the six stress components, | TCHSV |= 7 to plastic strain,and | TCHSV |= 7 + k points to history variable k
+        GT.0.0: mechanical history variable # used by TCLC
+        LT.0.0: as above but | TCHSV |= 1 - 6 points to the six stress components, | TCHSV |= 7 to plastic strain,and | TCHSV |= 7 + k points to history variable k
         """ # nopep8
         return self._cards[1].get_value("tchsv")
 
     @tchsv.setter
-    def tchsv(self, value: float) -> None:
+    def tchsv(self, value: int) -> None:
         """Set the tchsv property."""
         self._cards[1].set_value("tchsv", value)
 
     @property
-    def tghsv(self) -> typing.Optional[float]:
+    def tghsv(self) -> typing.Optional[int]:
         """Get or set the Optional:
-        GT.0.0:	mechanical history variable # used by TGRLC
-        LT.0.0:	as above but | TGHSV |= 1 - 6 points to the six stress components, | TGHSV |= 7 to plastic strain,and | TGHSV |= 7 + k points to history variable k
+        GT.0.0: mechanical history variable # used by TGRLC
+        LT.0.0: as above but | TGHSV |= 1 - 6 points to the six stress components, | TGHSV |= 7 to plastic strain,and | TGHSV |= 7 + k points to history variable k
         """ # nopep8
         return self._cards[1].get_value("tghsv")
 
     @tghsv.setter
-    def tghsv(self, value: float) -> None:
+    def tghsv(self, value: int) -> None:
         """Set the tghsv property."""
         self._cards[1].set_value("tghsv", value)
 

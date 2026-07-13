@@ -196,7 +196,7 @@ class ContactSpg(KeywordBase):
     def iself1(self) -> typing.Optional[int]:
         """Get or set the Self-contact indicators
         = 0: no self - contact
-        = 1 : self - contact is defined for the corresponding part
+        = 1: self - contact is defined for the corresponding part
         """ # nopep8
         return self._cards[1].get_value("iself1")
 
@@ -209,7 +209,7 @@ class ContactSpg(KeywordBase):
     def iself2(self) -> typing.Optional[int]:
         """Get or set the Self-contact indicators
         = 0: no self - contact
-        = 1 : self - contact is defined for the corresponding part
+        = 1: self - contact is defined for the corresponding part
         """ # nopep8
         return self._cards[1].get_value("iself2")
 
@@ -222,7 +222,7 @@ class ContactSpg(KeywordBase):
     def iself3(self) -> typing.Optional[int]:
         """Get or set the Self-contact indicators
         = 0: no self - contact
-        = 1 : self - contact is defined for the corresponding part
+        = 1: self - contact is defined for the corresponding part
         """ # nopep8
         return self._cards[1].get_value("iself3")
 
@@ -235,7 +235,7 @@ class ContactSpg(KeywordBase):
     def iself4(self) -> typing.Optional[int]:
         """Get or set the Self-contact indicators
         = 0: no self - contact
-        = 1 : self - contact is defined for the corresponding part
+        = 1: self - contact is defined for the corresponding part
         """ # nopep8
         return self._cards[1].get_value("iself4")
 
@@ -248,7 +248,7 @@ class ContactSpg(KeywordBase):
     def iself5(self) -> typing.Optional[int]:
         """Get or set the Self-contact indicators
         = 0: no self - contact
-        = 1 : self - contact is defined for the corresponding part
+        = 1: self - contact is defined for the corresponding part
         """ # nopep8
         return self._cards[1].get_value("iself5")
 
@@ -261,7 +261,7 @@ class ContactSpg(KeywordBase):
     def iself6(self) -> typing.Optional[int]:
         """Get or set the Self-contact indicators
         = 0: no self - contact
-        = 1 : self - contact is defined for the corresponding part
+        = 1: self - contact is defined for the corresponding part
         """ # nopep8
         return self._cards[1].get_value("iself6")
 
@@ -274,7 +274,7 @@ class ContactSpg(KeywordBase):
     def iself7(self) -> typing.Optional[int]:
         """Get or set the Self-contact indicators
         = 0: no self - contact
-        = 1 : self - contact is defined for the corresponding part
+        = 1: self - contact is defined for the corresponding part
         """ # nopep8
         return self._cards[1].get_value("iself7")
 
@@ -287,7 +287,7 @@ class ContactSpg(KeywordBase):
     def iself8(self) -> typing.Optional[int]:
         """Get or set the Self-contact indicators
         = 0: no self - contact
-        = 1 : self - contact is defined for the corresponding part
+        = 1: self - contact is defined for the corresponding part
         """ # nopep8
         return self._cards[1].get_value("iself8")
 

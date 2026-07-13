@@ -47,9 +47,9 @@ class ControlAcoustic(KeywordBase):
         ]
     @property
     def macdvp(self) -> int:
-        """Get or set the Calculate the nodal displacements and velocities of *MAT_‌ACOUSTIC volume elements for inclusion in d3plot and time-history files.
-        EQ.0:	Acoustic nodal motions will not be calculated
-        EQ.1 : Acoustic nodal motions will be calculated
+        """Get or set the Calculate the nodal displacements and velocities of *MAT_ACOUSTIC volume elements for inclusion in d3plot and time-history files.
+        EQ.0: Acoustic nodal motions will not be calculated
+        EQ.1: Acoustic nodal motions will be calculated
         """ # nopep8
         return self._cards[0].get_value("macdvp")
 

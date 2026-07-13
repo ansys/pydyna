@@ -140,8 +140,8 @@ class DefineConstructionStages(KeywordBase):
     @property
     def idynain(self) -> int:
         """Get or set the Flag to control output of dynain file at the end of the stage
-        EQ.0:	write dynain file
-        EQ.1:	do not write dynain file .
+        EQ.0: write dynain file
+        EQ.1: do not write dynain file .
         """ # nopep8
         return self._cards[0].get_value("idynain")
 

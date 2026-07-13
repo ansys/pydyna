@@ -33,6 +33,8 @@ _CONTROLSPHINCOMPRESSIBLE_CARD0 = (
     FieldSchema("rol", float, 30, 10, 1e+20),
     FieldSchema("ihtc", int, 40, 10, 0),
     FieldSchema("imat", int, 50, 10, 0),
+    FieldSchema("irmv", int, 60, 10, 0),
+    FieldSchema("acmp", float, 70, 10, 0.0),
 )
 
 class ControlSphIncompressible(KeywordBase):
@@ -53,8 +55,8 @@ class ControlSphIncompressible(KeywordBase):
     @property
     def ibndp(self) -> int:
         """Get or set the Pressure treatment of boundary particles:
-        EQ.0:	Pressure on boundary particles is extrapolated from fluid particles.
-        EQ.1 : Pressure on boundary particles is explicitly calculated
+        EQ.0: Pressure on boundary particles is extrapolated from fluid particles.
+        EQ.1: Pressure on boundary particles is explicitly calculated
         """ # nopep8
         return self._cards[0].get_value("ibndp")
 
@@ -67,7 +69,7 @@ class ControlSphIncompressible(KeywordBase):
 
     @property
     def tavg(self) -> float:
-        """Get or set the Tolerance criteria for convergence. If the average relative density (ρ/ρ_0) of particles under compression is below TAVG, this condition is satisfied
+        """Get or set the Tolerance criteria for convergence. If the average relative density (/_0) of particles under compression is below TAVG, this condition is satisfied
         """ # nopep8
         return self._cards[0].get_value("tavg")
 
@@ -78,7 +80,7 @@ class ControlSphIncompressible(KeywordBase):
 
     @property
     def tmax(self) -> float:
-        """Get or set the Tolerance criteria for convergence. If the maximum relative density (ρ/ρ_0) of particles under compression is below TMAX, this condition is satisfied
+        """Get or set the Tolerance criteria for convergence. If the maximum relative density (/_0) of particles under compression is below TMAX, this condition is satisfied
         """ # nopep8
         return self._cards[0].get_value("tmax")
 
@@ -89,7 +91,7 @@ class ControlSphIncompressible(KeywordBase):
 
     @property
     def rol(self) -> float:
-        """Get or set the In certain scenarios, some fluid particles can end up stuck between moving structures and as a result accumulate very large pressure values. If a particle’s relative density contribution from boundaries is above ROL, it is deactivated.
+        """Get or set the Stuck particle detection criteria. In certain scenarios, some fluid particles can end up stuck between moving structures and as a result accumulate very large pressure values. If a particles relative density contribution from boundaries is above ROL, it is deactivated. Its displacement is prescribed from the interpolated structure motion until it is sufficiently away from the structure at which point it is activated again.
         """ # nopep8
         return self._cards[0].get_value("rol")
 
@@ -101,23 +103,22 @@ class ControlSphIncompressible(KeywordBase):
     @property
     def ihtc(self) -> int:
         """Get or set the Flag for Heat Transfer Coefficient calculation.
-        EQ.0:	HTCs are not calculated.
-        EQ.1 : HTCs are calculated based on fluid properties given in * MAT_SPH_INCOMPRESSIBLE_FLUID cards.
+        EQ.0: HTCs are not calculated.
+        EQ.1: HTCs are calculated based on fluid properties given in *MAT_SPH_INCOMPRESSIBLE_FLUID cards.
+        LT.0: |IHTC| is a function ID defining HTCs based on seven arguments: heat capacity, thermal conductivity, dynamic viscosity, density, tangential velocity relative to the closest segment, distance traveled along the surface, and the ratio of the distance from the closest segment to particle radius. (see *DEFINE_FUNCTION).
         """ # nopep8
         return self._cards[0].get_value("ihtc")
 
     @ihtc.setter
     def ihtc(self, value: int) -> None:
         """Set the ihtc property."""
-        if value not in [0, 1, None]:
-            raise Exception("""ihtc must be `None` or one of {0,1}.""")
         self._cards[0].set_value("ihtc", value)
 
     @property
     def imat(self) -> int:
         """Get or set the Flag for MAT_SPH_INCOMPRESSIBLE_* formulations.
-        EQ.0:	Surface tension and surface adhesion forces are calculated based on numerical parameters given in the material cards.
-        EQ.1 : Surface tension and surface adhesion forces are calculated based on physical properties given in the material cards.
+        EQ.0: Surface tension and surface adhesion forces are calculated based on numerical parameters given in the material cards.
+        EQ.1: Surface tension and surface adhesion forces are calculated based on the physical properties given in the material cards.
         """ # nopep8
         return self._cards[0].get_value("imat")
 
@@ -127,4 +128,30 @@ class ControlSphIncompressible(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""imat must be `None` or one of {0,1}.""")
         self._cards[0].set_value("imat", value)
+
+    @property
+    def irmv(self) -> int:
+        """Get or set the Remove initially interpenetrated particles. Fluid particles that are too close to structural particles will be deactivated on initialization:
+        EQ.0: Do not remove interpenetrated particles.
+        EQ.1: Remove interpenetrated particles.
+        """ # nopep8
+        return self._cards[0].get_value("irmv")
+
+    @irmv.setter
+    def irmv(self, value: int) -> None:
+        """Set the irmv property."""
+        if value not in [0, 1, None]:
+            raise Exception("""irmv must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("irmv", value)
+
+    @property
+    def acmp(self) -> float:
+        """Get or set the Artificial compressibility term. For an analysis with a time-varying time step, we strongly recommend adding artificial compressibility to avoid oscillations and instabilities. We typically recommend a small value of [1.0x10]**(-8)  Pa**(-1). Note that this parameter is unit sensitive. Thus, the recommended value needs to be converted to the unit system used in the model.
+        """ # nopep8
+        return self._cards[0].get_value("acmp")
+
+    @acmp.setter
+    def acmp(self, value: float) -> None:
+        """Set the acmp property."""
+        self._cards[0].set_value("acmp", value)
 

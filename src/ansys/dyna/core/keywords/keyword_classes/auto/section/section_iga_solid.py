@@ -93,15 +93,17 @@ class SectionIgaSolid(KeywordBase):
     def ir(self) -> int:
         """Get or set the Integration rule
         EQ.0: Reduced Gauss - Legendre
-        EQ.1 : Gauss - Legendre.
+        EQ.1: Gauss - Legendre.
+        EQ.2:	Patchwise reduced Gauss-Legendre (for biquadratic NURBS only)
+        EQ.3: Generalized Gaussian Quadrature rule.It only works with a uniform knot vector with UNIR / S / T = 1 or 2 in * IGA_3D_NURBS_XYZ.
         """ # nopep8
         return self._cards[0].get_value("ir")
 
     @ir.setter
     def ir(self, value: int) -> None:
         """Set the ir property."""
-        if value not in [0, 1, None]:
-            raise Exception("""ir must be `None` or one of {0,1}.""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""ir must be `None` or one of {0,1,2,3}.""")
         self._cards[0].set_value("ir", value)
 
     @property

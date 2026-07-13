@@ -27,9 +27,14 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _EMCONTROLEP_CARD0 = (
-    FieldSchema("solvetype", int, 0, 10, None),
-    FieldSchema("numspliti", int, 10, 10, None),
-    FieldSchema("actusigma", int, 20, 10, None),
+    FieldSchema("epsol", int, 0, 10, None),
+    FieldSchema("nsplitri", int, 10, 10, None),
+    FieldSchema("actusig", float, 20, 10, None),
+)
+
+_EMCONTROLEP_CARD1 = (
+    FieldSchema("spltend", float, 0, 10, 0.0),
+    FieldSchema("spldt", float, 10, 10, 0.0),
 )
 
 class EmControlEp(KeywordBase):
@@ -46,37 +51,69 @@ class EmControlEp(KeywordBase):
                 _EMCONTROLEP_CARD0,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _EMCONTROLEP_CARD1,
+                **kwargs,
+            ),
         ]
     @property
-    def solvetype(self) -> typing.Optional[int]:
-        """Get or set the ElectroPhysiology solver sector: eq. 11: monodomain, eq. 12: bidomain, eq.13 mono+bidomain
+    def epsol(self) -> typing.Optional[int]:
+        """Get or set the Electrophysiology solver selector:
+        EQ.11:	Monodomain
+        EQ.12 : Bidomain
+        EQ.13 : Monodomain coupled with bidomain
+        EQ.14 : Pure eikonal model.Activation times are computed and output in VTK format to the / vtk directory.See * EM_EP_EIKONAL.
+        EQ.15 : Reaction eikonal(RE - ) model based on[1].See * EM_EP_EIKONAL.
+        EQ.16 : Reaction eikonal(RE + ) model based on[1].See * EM_EP_EIKONAL.
         """ # nopep8
-        return self._cards[0].get_value("solvetype")
+        return self._cards[0].get_value("epsol")
 
-    @solvetype.setter
-    def solvetype(self, value: int) -> None:
-        """Set the solvetype property."""
-        self._cards[0].set_value("solvetype", value)
+    @epsol.setter
+    def epsol(self, value: int) -> None:
+        """Set the epsol property."""
+        self._cards[0].set_value("epsol", value)
 
     @property
-    def numspliti(self) -> typing.Optional[int]:
-        """Get or set the Split ratio between the ionic cell model time step and the monodomain time step. (we will do “numplit” cell model time steps for each diffusion time step)
+    def nsplitri(self) -> typing.Optional[int]:
+        """Get or set the Split ratio between the ionic cell model time step and the monodomain time step. In other words, we will do NSPLITRI cell model time steps for each diffusion time step
         """ # nopep8
-        return self._cards[0].get_value("numspliti")
+        return self._cards[0].get_value("nsplitri")
 
-    @numspliti.setter
-    def numspliti(self, value: int) -> None:
-        """Set the numspliti property."""
-        self._cards[0].set_value("numspliti", value)
+    @nsplitri.setter
+    def nsplitri(self, value: int) -> None:
+        """Set the nsplitri property."""
+        self._cards[0].set_value("nsplitri", value)
 
     @property
-    def actusigma(self) -> typing.Optional[int]:
+    def actusig(self) -> typing.Optional[float]:
         """Get or set the Time period at which the electrical conductivity is updated.
         """ # nopep8
-        return self._cards[0].get_value("actusigma")
+        return self._cards[0].get_value("actusig")
 
-    @actusigma.setter
-    def actusigma(self, value: int) -> None:
-        """Set the actusigma property."""
-        self._cards[0].set_value("actusigma", value)
+    @actusig.setter
+    def actusig(self, value: float) -> None:
+        """Set the actusig property."""
+        self._cards[0].set_value("actusig", value)
+
+    @property
+    def spltend(self) -> float:
+        """Get or set the Optional end time for building the spline.
+        """ # nopep8
+        return self._cards[1].get_value("spltend")
+
+    @spltend.setter
+    def spltend(self, value: float) -> None:
+        """Set the spltend property."""
+        self._cards[1].set_value("spltend", value)
+
+    @property
+    def spldt(self) -> float:
+        """Get or set the Time step for building the spline.
+        """ # nopep8
+        return self._cards[1].get_value("spldt")
+
+    @spldt.setter
+    def spldt(self, value: float) -> None:
+        """Set the spldt property."""
+        self._cards[1].set_value("spldt", value)
 

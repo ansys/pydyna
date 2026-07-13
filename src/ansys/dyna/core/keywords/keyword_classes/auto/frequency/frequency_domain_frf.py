@@ -41,6 +41,11 @@ _FREQUENCYDOMAINFRF_CARD0 = (
 )
 
 _FREQUENCYDOMAINFRF_CARD1 = (
+    FieldSchema("n11", int, 0, 10, None),
+    FieldSchema("n11typ", int, 10, 10, 0),
+)
+
+_FREQUENCYDOMAINFRF_CARD2 = (
     FieldSchema("dampf", float, 0, 10, 0.0),
     FieldSchema("lcdam", int, 10, 10, 0),
     FieldSchema("lctyp", int, 20, 10, 0),
@@ -48,7 +53,7 @@ _FREQUENCYDOMAINFRF_CARD1 = (
     FieldSchema("dmpstf", float, 40, 10, 0.0),
 )
 
-_FREQUENCYDOMAINFRF_CARD2 = (
+_FREQUENCYDOMAINFRF_CARD3 = (
     FieldSchema("n2", int, 0, 10, None),
     FieldSchema("n2typ", int, 10, 10, 0),
     FieldSchema("dof2", int, 20, 10, 0),
@@ -57,7 +62,7 @@ _FREQUENCYDOMAINFRF_CARD2 = (
     FieldSchema("relatv", int, 50, 10, 0),
 )
 
-_FREQUENCYDOMAINFRF_CARD3 = (
+_FREQUENCYDOMAINFRF_CARD4 = (
     FieldSchema("fmin", float, 0, 10, None),
     FieldSchema("fmax", float, 10, 10, None),
     FieldSchema("nfreq", int, 20, 10, 2),
@@ -99,10 +104,14 @@ class FrequencyDomainFrf(KeywordBase):
                 _FREQUENCYDOMAINFRF_CARD3,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINFRF_CARD4,
+                **kwargs,
+            ),
         ]
     @property
     def n1(self) -> typing.Optional[int]:
-        """Get or set the Node / Node set/Segment set ID for excitation input.When VAD1,the excitation type, is set to 1, which is acceleration, this field is ignored.
+        """Get or set the ID of the entity specified by N1TYP for excitation input.  When VAD1, the excitation type, is set to 0, 1 or 2 (base velocity, base acceleration, or base displacement, respectively), this field is ignored. In this case, the excitation is applied through node(s) that are under constraints, that is, the node(s) defined in *BOUNDARY_SPC_NODE or *BOUNDARY_SPC_SET
         """ # nopep8
         return self._cards[0].get_value("n1")
 
@@ -117,6 +126,14 @@ class FrequencyDomainFrf(KeywordBase):
         EQ.0: node ID,
         EQ.1: node set ID,
         EQ.2: segment set ID.
+        EQ.3:	Parametric point ID (see *IGA_POINT_UVW)
+        EQ.4:	Parametric point set ID(see * SET_IGA_POINT_UVW)
+        EQ.5 : Parametric edge ID(see * IGA_EDGE_UVW)
+        EQ.6 : Parametric edge set ID(see * SET_IGA_EDGE_UVW)
+        EQ.7 : Physical face ID(see * IGA_FACE_XYZ)
+        EQ.8 : Physical face set ID(see * SET_IGA_FACE_XYZ)
+        EQ.9 : Parametric face ID(see * IGA_FACE_UVW)). This option is only supported for VAD1 = 4.
+        EQ.10 : Parametric face set ID(see * SET_IGA_FACE_UVW)). This option is only supported for VAD1 = 4.
         When VAD1, the excitation type, is set to 1, which is acceleration,this field is ignored.
         """ # nopep8
         return self._cards[0].get_value("n1typ")
@@ -124,8 +141,8 @@ class FrequencyDomainFrf(KeywordBase):
     @n1typ.setter
     def n1typ(self, value: int) -> None:
         """Set the n1typ property."""
-        if value not in [0, 1, 2, None]:
-            raise Exception("""n1typ must be `None` or one of {0,1,2}.""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, None]:
+            raise Exception("""n1typ must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10}.""")
         self._cards[0].set_value("n1typ", value)
 
     @property
@@ -159,15 +176,16 @@ class FrequencyDomainFrf(KeywordBase):
         EQ.8: torque.
         EQ.9: base angular velocity,
         EQ.10: base angular acceleration,
-        EQ.11: base angular displacement
+        EQ.11: base angular displacement,
+        EQ.12: torsion
         """ # nopep8
         return self._cards[0].get_value("vad1")
 
     @vad1.setter
     def vad1(self, value: int) -> None:
         """Set the vad1 property."""
-        if value not in [3, 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, None]:
-            raise Exception("""vad1 must be `None` or one of {3,0,1,2,4,5,6,7,8,9,10,11}.""")
+        if value not in [3, 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, None]:
+            raise Exception("""vad1 must be `None` or one of {3,0,1,2,4,5,6,7,8,9,10,11,12}.""")
         self._cards[0].set_value("vad1", value)
 
     @property
@@ -205,7 +223,7 @@ class FrequencyDomainFrf(KeywordBase):
 
     @property
     def mdmax(self) -> int:
-        """Get or set the The last mode employed in FRF computation (optional).It should be set as a positive integer in a restart run(RESTRT = 1or3) based	on the number of eigenmodes available in the existing d3eigv database.
+        """Get or set the The last mode employed in FRF computation (optional).It should be set as a positive integer in a restart run(RESTRT = 1or3) based on the number of eigenmodes available in the existing d3eigv database.
         """ # nopep8
         return self._cards[0].get_value("mdmax")
 
@@ -215,26 +233,62 @@ class FrequencyDomainFrf(KeywordBase):
         self._cards[0].set_value("mdmax", value)
 
     @property
-    def dampf(self) -> float:
-        """Get or set the Modal damping coefficient ζ.
+    def n11(self) -> typing.Optional[int]:
+        """Get or set the ID of the entity specified by N1TYP for excitation input for torque load (VAD1=12). This combines with N1 to form a torque load.
         """ # nopep8
-        return self._cards[1].get_value("dampf")
+        return self._cards[1].get_value("n11")
+
+    @n11.setter
+    def n11(self, value: int) -> None:
+        """Set the n11 property."""
+        self._cards[1].set_value("n11", value)
+
+    @property
+    def n11typ(self) -> int:
+        """Get or set the Type of N1:
+        EQ.0: node ID,
+        EQ.1: node set ID,
+        EQ.2: segment set ID.
+        EQ.3:	Parametric point ID (see *IGA_POINT_UVW)
+        EQ.4:	Parametric point set ID(see * SET_IGA_POINT_UVW)
+        EQ.5 : Parametric edge ID(see * IGA_EDGE_UVW)
+        EQ.6 : Parametric edge set ID(see * SET_IGA_EDGE_UVW)
+        EQ.7 : Physical face ID(see * IGA_FACE_XYZ)
+        EQ.8 : Physical face set ID(see * SET_IGA_FACE_XYZ)
+        EQ.9 : Parametric face ID(see * IGA_FACE_UVW)
+        EQ.10 : Parametric face set ID(see * SET_IGA_FACE_UVW)
+        When VAD1, the excitation type, is set to 1, which is acceleration,this field is ignored.
+        """ # nopep8
+        return self._cards[1].get_value("n11typ")
+
+    @n11typ.setter
+    def n11typ(self, value: int) -> None:
+        """Set the n11typ property."""
+        if value not in [0, 1, 23, 4, 5, 6, 7, 8, None]:
+            raise Exception("""n11typ must be `None` or one of {0,1,23,4,5,6,7,8}.""")
+        self._cards[1].set_value("n11typ", value)
+
+    @property
+    def dampf(self) -> float:
+        """Get or set the Modal damping coefficient .
+        """ # nopep8
+        return self._cards[2].get_value("dampf")
 
     @dampf.setter
     def dampf(self, value: float) -> None:
         """Set the dampf property."""
-        self._cards[1].set_value("dampf", value)
+        self._cards[2].set_value("dampf", value)
 
     @property
     def lcdam(self) -> int:
-        """Get or set the Load Curve ID defining mode dependent modal damping coefficient ζ.
+        """Get or set the Load Curve ID defining mode dependent modal damping coefficient .
         """ # nopep8
-        return self._cards[1].get_value("lcdam")
+        return self._cards[2].get_value("lcdam")
 
     @lcdam.setter
     def lcdam(self, value: int) -> None:
         """Set the lcdam property."""
-        self._cards[1].set_value("lcdam", value)
+        self._cards[2].set_value("lcdam", value)
 
     @property
     def lctyp(self) -> int:
@@ -242,63 +296,72 @@ class FrequencyDomainFrf(KeywordBase):
         EQ.0: Abscissa value defines frequency,
         EQ.1: Abscissa value defines mode number.
         """ # nopep8
-        return self._cards[1].get_value("lctyp")
+        return self._cards[2].get_value("lctyp")
 
     @lctyp.setter
     def lctyp(self, value: int) -> None:
         """Set the lctyp property."""
         if value not in [0, 1, None]:
             raise Exception("""lctyp must be `None` or one of {0,1}.""")
-        self._cards[1].set_value("lctyp", value)
+        self._cards[2].set_value("lctyp", value)
 
     @property
     def dmpmas(self) -> float:
-        """Get or set the Mass proportional damping constant α, in Rayleigh damping.
+        """Get or set the Mass proportional damping constant , in Rayleigh damping.
         """ # nopep8
-        return self._cards[1].get_value("dmpmas")
+        return self._cards[2].get_value("dmpmas")
 
     @dmpmas.setter
     def dmpmas(self, value: float) -> None:
         """Set the dmpmas property."""
-        self._cards[1].set_value("dmpmas", value)
+        self._cards[2].set_value("dmpmas", value)
 
     @property
     def dmpstf(self) -> float:
-        """Get or set the Stiffness proportional damping constant β, in Rayleigh damping.
+        """Get or set the Stiffness proportional damping constant , in Rayleigh damping.
         """ # nopep8
-        return self._cards[1].get_value("dmpstf")
+        return self._cards[2].get_value("dmpstf")
 
     @dmpstf.setter
     def dmpstf(self, value: float) -> None:
         """Set the dmpstf property."""
-        self._cards[1].set_value("dmpstf", value)
+        self._cards[2].set_value("dmpstf", value)
 
     @property
     def n2(self) -> typing.Optional[int]:
-        """Get or set the Node / Node set/Segment set ID for response output.
+        """Get or set the ID of the entity specified by N1TYP for response output.
         """ # nopep8
-        return self._cards[2].get_value("n2")
+        return self._cards[3].get_value("n2")
 
     @n2.setter
     def n2(self, value: int) -> None:
         """Set the n2 property."""
-        self._cards[2].set_value("n2", value)
+        self._cards[3].set_value("n2", value)
 
     @property
     def n2typ(self) -> int:
-        """Get or set the Type of N2:
+        """Get or set the Type of N1:
         EQ.0: node ID,
         EQ.1: node set ID,
         EQ.2: segment set ID.
+        EQ.3:	Parametric point ID (see *IGA_POINT_UVW)
+        EQ.4:	Parametric point set ID(see * SET_IGA_POINT_UVW)
+        EQ.5 : Parametric edge ID(see * IGA_EDGE_UVW)
+        EQ.6 : Parametric edge set ID(see * SET_IGA_EDGE_UVW)
+        EQ.7 : Physical face ID(see * IGA_FACE_XYZ)
+        EQ.8 : Physical face set ID(see * SET_IGA_FACE_XYZ)
+        EQ.9 : Parametric face ID(see * IGA_FACE_UVW)
+        EQ.10 : Parametric face set ID(see * SET_IGA_FACE_UVW)
+        When VAD1, the excitation type, is set to 1, which is acceleration,this field is ignored.
         """ # nopep8
-        return self._cards[2].get_value("n2typ")
+        return self._cards[3].get_value("n2typ")
 
     @n2typ.setter
     def n2typ(self, value: int) -> None:
         """Set the n2typ property."""
-        if value not in [0, 1, 2, None]:
-            raise Exception("""n2typ must be `None` or one of {0,1,2}.""")
-        self._cards[2].set_value("n2typ", value)
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""n2typ must be `None` or one of {0,1,2,3,4}.""")
+        self._cards[3].set_value("n2typ", value)
 
     @property
     def dof2(self) -> int:
@@ -313,14 +376,14 @@ class FrequencyDomainFrf(KeywordBase):
         EQ.7: x, y and z-translational degrees-of-freedom,
         EQ.8: x, y and z-rotational degrees-of-freedom.
         """ # nopep8
-        return self._cards[2].get_value("dof2")
+        return self._cards[3].get_value("dof2")
 
     @dof2.setter
     def dof2(self, value: int) -> None:
         """Set the dof2 property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, None]:
             raise Exception("""dof2 must be `None` or one of {0,1,2,3,4,5,6,7,8}.""")
-        self._cards[2].set_value("dof2", value)
+        self._cards[3].set_value("dof2", value)
 
     @property
     def vad2(self) -> int:
@@ -330,25 +393,25 @@ class FrequencyDomainFrf(KeywordBase):
         EQ.2: displacement,
         EQ.3: nodal force.
         """ # nopep8
-        return self._cards[2].get_value("vad2")
+        return self._cards[3].get_value("vad2")
 
     @vad2.setter
     def vad2(self, value: int) -> None:
         """Set the vad2 property."""
         if value not in [2, 0, 1, 3, None]:
             raise Exception("""vad2 must be `None` or one of {2,0,1,3}.""")
-        self._cards[2].set_value("vad2", value)
+        self._cards[3].set_value("vad2", value)
 
     @property
     def vid2(self) -> int:
         """Get or set the Vector ID for DOF2 = 0 for response direction, see *DEFINE_VECTOR.
         """ # nopep8
-        return self._cards[2].get_value("vid2")
+        return self._cards[3].get_value("vid2")
 
     @vid2.setter
     def vid2(self, value: int) -> None:
         """Set the vid2 property."""
-        self._cards[2].set_value("vid2", value)
+        self._cards[3].set_value("vid2", value)
 
     @property
     def relatv(self) -> int:
@@ -356,47 +419,47 @@ class FrequencyDomainFrf(KeywordBase):
         EQ.0: absolute values are requested,
         EQ.1: relative values are requested (for VAD1=0,1,2 only).
         """ # nopep8
-        return self._cards[2].get_value("relatv")
+        return self._cards[3].get_value("relatv")
 
     @relatv.setter
     def relatv(self, value: int) -> None:
         """Set the relatv property."""
         if value not in [0, 1, None]:
             raise Exception("""relatv must be `None` or one of {0,1}.""")
-        self._cards[2].set_value("relatv", value)
+        self._cards[3].set_value("relatv", value)
 
     @property
     def fmin(self) -> typing.Optional[float]:
         """Get or set the Minimum frequency for FRF output (cycles/time).
         """ # nopep8
-        return self._cards[3].get_value("fmin")
+        return self._cards[4].get_value("fmin")
 
     @fmin.setter
     def fmin(self, value: float) -> None:
         """Set the fmin property."""
-        self._cards[3].set_value("fmin", value)
+        self._cards[4].set_value("fmin", value)
 
     @property
     def fmax(self) -> typing.Optional[float]:
         """Get or set the Maximum frequency for FRF output (cycles/time).
         """ # nopep8
-        return self._cards[3].get_value("fmax")
+        return self._cards[4].get_value("fmax")
 
     @fmax.setter
     def fmax(self, value: float) -> None:
         """Set the fmax property."""
-        self._cards[3].set_value("fmax", value)
+        self._cards[4].set_value("fmax", value)
 
     @property
     def nfreq(self) -> int:
         """Get or set the Number of frequencies for FRF output.
         """ # nopep8
-        return self._cards[3].get_value("nfreq")
+        return self._cards[4].get_value("nfreq")
 
     @nfreq.setter
     def nfreq(self, value: int) -> None:
         """Set the nfreq property."""
-        self._cards[3].set_value("nfreq", value)
+        self._cards[4].set_value("nfreq", value)
 
     @property
     def fspace(self) -> int:
@@ -405,25 +468,25 @@ class FrequencyDomainFrf(KeywordBase):
         EQ.1: logarithmic,
         EQ.2: biased.
         """ # nopep8
-        return self._cards[3].get_value("fspace")
+        return self._cards[4].get_value("fspace")
 
     @fspace.setter
     def fspace(self, value: int) -> None:
         """Set the fspace property."""
         if value not in [0, 1, 2, None]:
             raise Exception("""fspace must be `None` or one of {0,1,2}.""")
-        self._cards[3].set_value("fspace", value)
+        self._cards[4].set_value("fspace", value)
 
     @property
     def lcfreq(self) -> typing.Optional[int]:
         """Get or set the Load Curve ID defining the frequencies for FRF output.
         """ # nopep8
-        return self._cards[3].get_value("lcfreq")
+        return self._cards[4].get_value("lcfreq")
 
     @lcfreq.setter
     def lcfreq(self, value: int) -> None:
         """Set the lcfreq property."""
-        self._cards[3].set_value("lcfreq", value)
+        self._cards[4].set_value("lcfreq", value)
 
     @property
     def restrt(self) -> int:
@@ -433,14 +496,14 @@ class FrequencyDomainFrf(KeywordBase):
         EQ.2: restart with dumpfrf,
         EQ.3: restart with d3eigv family files and dumpfrf.
         """ # nopep8
-        return self._cards[3].get_value("restrt")
+        return self._cards[4].get_value("restrt")
 
     @restrt.setter
     def restrt(self, value: int) -> None:
         """Set the restrt property."""
         if value not in [0, 1, 2, 3, None]:
             raise Exception("""restrt must be `None` or one of {0,1,2,3}.""")
-        self._cards[3].set_value("restrt", value)
+        self._cards[4].set_value("restrt", value)
 
     @property
     def output(self) -> int:
@@ -448,14 +511,14 @@ class FrequencyDomainFrf(KeywordBase):
         EQ.0: write amplitude and phase angle pairs,
         EQ.1: write real and imaginary pairs.
         """ # nopep8
-        return self._cards[3].get_value("output")
+        return self._cards[4].get_value("output")
 
     @output.setter
     def output(self, value: int) -> None:
         """Set the output property."""
         if value not in [0, 1, None]:
             raise Exception("""output must be `None` or one of {0,1}.""")
-        self._cards[3].set_value("output", value)
+        self._cards[4].set_value("output", value)
 
     @property
     def lcdam_link(self) -> typing.Optional[DefineCurve]:

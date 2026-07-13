@@ -108,7 +108,7 @@ _ELEMENTSOLIDH64_CARD6 = (
     FieldSchema("n57", int, 48, 8, None),
     FieldSchema("n58", int, 56, 8, None),
     FieldSchema("n59", int, 64, 8, None),
-    FieldSchema("n50", int, 72, 8, None),
+    FieldSchema("n60", int, 72, 8, None),
 )
 
 _ELEMENTSOLIDH64_CARD7 = (
@@ -183,7 +183,7 @@ class ElementSolidH64(KeywordBase):
         "n57": LinkType.NODE,
         "n58": LinkType.NODE,
         "n59": LinkType.NODE,
-        "n50": LinkType.NODE,
+        "n60": LinkType.NODE,
         "n61": LinkType.NODE,
         "n62": LinkType.NODE,
         "n63": LinkType.NODE,
@@ -900,15 +900,15 @@ class ElementSolidH64(KeywordBase):
         self._cards[6].set_value("n59", value)
 
     @property
-    def n50(self) -> typing.Optional[int]:
+    def n60(self) -> typing.Optional[int]:
         """Get or set the Nodal point 60.
         """ # nopep8
-        return self._cards[6].get_value("n50")
+        return self._cards[6].get_value("n60")
 
-    @n50.setter
-    def n50(self, value: int) -> None:
-        """Set the n50 property."""
-        self._cards[6].set_value("n50", value)
+    @n60.setter
+    def n60(self, value: int) -> None:
+        """Set the n60 property."""
+        self._cards[6].set_value("n60", value)
 
     @property
     def n61(self) -> typing.Optional[int]:
@@ -1250,9 +1250,9 @@ class ElementSolidH64(KeywordBase):
         return self._get_link_by_attr("NODE", "nid", self.n59, "parts")
 
     @property
-    def n50_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given n50."""
-        return self._get_link_by_attr("NODE", "nid", self.n50, "parts")
+    def n60_link(self) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given n60."""
+        return self._get_link_by_attr("NODE", "nid", self.n60, "parts")
 
     @property
     def n61_link(self) -> typing.Optional[KeywordBase]:

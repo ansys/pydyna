@@ -101,7 +101,7 @@ class ControlFormingUser(KeywordBase):
     @property
     def type(self) -> int:
         """Get or set the 0: Part ID (blank)
-        1:   PART SET Ids (blank).
+        1: PART SET Ids (blank).
         """ # nopep8
         return self._cards[0].get_value("type")
 
@@ -159,8 +159,8 @@ class ControlFormingUser(KeywordBase):
     @property
     def al_fe(self) -> str:
         """Get or set the This parameter is used to define blank Young's Modulus and density. If this parameter is defined, E and Density will be found by using the proper unit, which is specified below.
-        EQ. A:  the blank is aluminum
-        EQ. F:   the blank is steel (default)
+        EQ. A: the blank is aluminum
+        EQ. F: the blank is steel (default)
         """ # nopep8
         return self._cards[0].get_value("al_fe")
 

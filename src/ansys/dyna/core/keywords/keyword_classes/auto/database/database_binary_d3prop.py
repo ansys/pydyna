@@ -30,6 +30,7 @@ _DATABASEBINARYD3PROP_CARD0 = (
     FieldSchema("ifile", int, 0, 10, 1),
     FieldSchema("imatl", int, 10, 10, 0),
     FieldSchema("iwall", int, 20, 10, 0),
+    FieldSchema("isets", int, 30, 10, 0),
 )
 
 class DatabaseBinaryD3Prop(KeywordBase):
@@ -91,4 +92,19 @@ class DatabaseBinaryD3Prop(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""iwall must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iwall", value)
+
+    @property
+    def isets(self) -> int:
+        """Get or set the Output all *SET data:
+        EQ.0:	No
+        EQ.1 : Yes
+        """ # nopep8
+        return self._cards[0].get_value("isets")
+
+    @isets.setter
+    def isets(self, value: int) -> None:
+        """Set the isets property."""
+        if value not in [0, 1, None]:
+            raise Exception("""isets must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("isets", value)
 

@@ -161,7 +161,7 @@ class ControlRefineShell(KeywordBase):
         EQ.1: Pressure (if pressure > VALRF),
         EQ.2: undefined,
         EQ.3: Von Mises criterion
-        EQ.4: Criterion similar to adpopt=4 in *CONTROL_ADAPTIVE	(VALRF=adptol),
+        EQ.4: Criterion similar to adpopt=4 in *CONTROL_ADAPTIVE (VALRF=adptol),
         EQ.5: User defined criterion. The fortran routine al2rfn_criteria5 in the
         file dynrfn_user.f should be used to develop the criterion. The file is
         part of the general package usermat.

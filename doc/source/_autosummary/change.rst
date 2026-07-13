@@ -48,10 +48,10 @@ ChangeRigidBodyInertia
     :members:
 
 
-ChangeRigidBodyStopper
-----------------------
+ChangeRigidBodyStoppers
+-----------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.change_rigid_body_stopper
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.change_rigid_body_stoppers
     :members:
 
 
@@ -108,6 +108,13 @@ ChangeVelocityNodeOnly
 ----------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.change_velocity_node_only
+    :members:
+
+
+ChangeVelocityOnly
+------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.change_velocity_only
     :members:
 
 

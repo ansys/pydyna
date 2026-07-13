@@ -51,7 +51,7 @@ class IcfdInitialTurbulence(KeywordBase):
         ]
     @property
     def pid(self) -> typing.Optional[int]:
-        """Get or set the Part ID for the volume elements or the surface elements where the values are initialized (see *ICFD_PART_VOL and *ICFD_PART).PID = 0 to assign the initial condition to all nodes at once.
+        """Get or set the Part ID for the volume elements or the surface elements where the values are initialized (see *ICFD_PART_VOL and *ICFD_PART). Set PID to = 0 to assign the initial condition to all nodes at once.
         """ # nopep8
         return self._cards[0].get_value("pid")
 
@@ -84,7 +84,8 @@ class IcfdInitialTurbulence(KeywordBase):
 
     @property
     def k(self) -> typing.Optional[float]:
-        """Get or set the Initial kinetic energy. When defined, it replaces the choice of I. A negative integer will point to a *DEFINE_FUNCTION ID. The following parameters are allowed : f(x,y,z), allowing to define initial profiles function of coordinates
+        """Get or set the Initial kinetic energy. When defined, it replaces the choice of I.
+        LT.0.0: | K | refers to a *DEFINE_FUNCTION ID.The following parameters are allowed: f(x,y,z), allowing you to define initial profiles as a function of coordinates
         """ # nopep8
         return self._cards[0].get_value("k")
 
@@ -95,7 +96,8 @@ class IcfdInitialTurbulence(KeywordBase):
 
     @property
     def ew(self) -> typing.Optional[float]:
-        """Get or set the Initial turbulent specific dissipation rate or dissipation rate depending on the choice of turbulence model. When defined, it replaces the choice of R. A negative integer will point to a *DEFINE_FUNCTION ID. The following parameters are allowed : f(x,y,z), allowing to define initial profiles function of coordinates
+        """Get or set the Initial turbulence specific dissipation rate or dissipation rate depending on the choice of turbulence model. When defined, it replaces the choice of R.
+        LT.0.0: | EW | refers to a *DEFINE_FUNCTION ID.The following parameters are allowed: f(x,y,z), allowing you to define initial profiles as a function of coordinates.
         """ # nopep8
         return self._cards[0].get_value("ew")
 

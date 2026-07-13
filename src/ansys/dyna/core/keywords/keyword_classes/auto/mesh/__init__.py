@@ -31,6 +31,7 @@ from .mesh_size import MeshSize
 from .mesh_size_shape import MeshSizeShape
 from .mesh_surface_element import MeshSurfaceElement
 from .mesh_surface_node import MeshSurfaceNode
+from .mesh_surface_null import MeshSurfaceNull
 from .mesh_volume import MeshVolume
 from .mesh_volume_element import MeshVolumeElement
 from .mesh_volume_node import MeshVolumeNode

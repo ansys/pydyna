@@ -30,9 +30,10 @@ from ansys.dyna.core.lib.keyword_base import LinkType
 
 _MATADDCOHESIVE_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
-    FieldSchema("roflg", int, 10, 10, 0),
-    FieldSchema("intfail", float, 20, 10, None),
-    FieldSchema("thick", float, 30, 10, None),
+    FieldSchema("roflg", float, 10, 10, 0.0),
+    FieldSchema("intfail", float, 20, 10, 0.0),
+    FieldSchema("thick", float, 30, 10, 0.0),
+    FieldSchema("uniax", float, 40, 10, 0.0),
 )
 
 _MATADDCOHESIVE_OPTION0_CARD0 = (
@@ -83,26 +84,25 @@ class MatAddCohesive(KeywordBase):
         self._cards[0].set_value("pid", value)
 
     @property
-    def roflg(self) -> int:
+    def roflg(self) -> float:
         """Get or set the Flag for whether density is specified per unit area or volume:
-        EQ.0:	Specified density is per unit volume(default).
-        EQ.1 : Specified density is per unit area for controlling the mass of cohesive elements with an initial volume of zero.
+        EQ.0: Specified density is per unit volume(default).
+        EQ.1: Specified density is per unit area for controlling the mass of cohesive elements with an initial volume of zero.
         """ # nopep8
         return self._cards[0].get_value("roflg")
 
     @roflg.setter
-    def roflg(self, value: int) -> None:
+    def roflg(self, value: float) -> None:
         """Set the roflg property."""
-        if value not in [0, 1, None]:
-            raise Exception("""roflg must be `None` or one of {0,1}.""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""roflg must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("roflg", value)
 
     @property
-    def intfail(self) -> typing.Optional[float]:
-        """Get or set the The number of integration points required for the cohesive element to be deleted. The value of INTFAIL may range from 1 to 4 with 1 the recommended value.
-        LT.0.0:	Employs a Newton - Cotes integration scheme and the element will be deleted when | INTFAIL | integration points have failed.
-        EQ.0.0 : Employs a Newton - Cotes integration scheme and the element will not be deleted even if it satisfies the failure criterion.
-        GT.0.0 : Employs a Gauss integration scheme and the element will be deleted when INTFAIL integration points have failed.
+    def intfail(self) -> float:
+        """Get or set the The number of integration points required for the cohesive element to be deleted.  The value of INTFAIL may range from 1 to 4 with 1 the recommended value.
+        EQ.0.0: Employs a Newton - Cotes integration scheme.The element will not be deleted even if it satisfies the failure criterion.
+        GT.0.0 : Employs a Gauss integration scheme.The element will be deleted when INTFAIL integration points have failed.
         """ # nopep8
         return self._cards[0].get_value("intfail")
 
@@ -112,10 +112,10 @@ class MatAddCohesive(KeywordBase):
         self._cards[0].set_value("intfail", value)
 
     @property
-    def thick(self) -> typing.Optional[float]:
+    def thick(self) -> float:
         """Get or set the Thickness of the adhesive layer.
-        EQ.0.0:	The actual thickness of the cohesive element is used.
-        GT.0.0:	User specified thickness.
+        EQ.0.0: The actual thickness of the cohesive element is used.
+        GT.0.0: User specified thickness.
         """ # nopep8
         return self._cards[0].get_value("thick")
 
@@ -123,6 +123,19 @@ class MatAddCohesive(KeywordBase):
     def thick(self, value: float) -> None:
         """Set the thick property."""
         self._cards[0].set_value("thick", value)
+
+    @property
+    def uniax(self) -> float:
+        """Get or set the Flag for enforcing a uniaxial stress state.
+        EQ.0.0: No modification of the three - dimensional stress state(default).
+        EQ.1.0: Stress components that are not used for the cohesive element are reset to 0.0 after each evaluation of the constitutive model.
+        """ # nopep8
+        return self._cards[0].get_value("uniax")
+
+    @uniax.setter
+    def uniax(self, value: float) -> None:
+        """Set the uniax property."""
+        self._cards[0].set_value("uniax", value)
 
     @property
     def title(self) -> typing.Optional[str]:

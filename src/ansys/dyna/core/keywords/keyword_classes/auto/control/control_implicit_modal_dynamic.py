@@ -29,19 +29,15 @@ from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTROLIMPLICITMODALDYNAMIC_CARD0 = (
     FieldSchema("mdflag", int, 0, 10, 0),
-    FieldSchema("zeta", float, 10, 10, None),
-    FieldSchema("md_strs", int, 20, 10, None),
-    FieldSchema("dtout", float, 30, 10, None),
-    FieldSchema("integ", int, 40, 10, 0),
+    FieldSchema("zeta", float, 10, 10, 0.0),
+    FieldSchema("md_strs", int, 20, 10, 0),
+    FieldSchema("dtout", float, 30, 10, 0.0),
+    FieldSchema("integ", int, 40, 10, 1),
     FieldSchema("nsid", int, 50, 10, None),
 )
 
 _CONTROLIMPLICITMODALDYNAMIC_CARD1 = (
     FieldSchema("filename", str, 0, 80, None),
-)
-
-_CONTROLIMPLICITMODALDYNAMIC_CARD2 = (
-    FieldSchema("filename2", str, 0, 80, None),
 )
 
 class ControlImplicitModalDynamic(KeywordBase):
@@ -65,30 +61,28 @@ class ControlImplicitModalDynamic(KeywordBase):
                 _CONTROLIMPLICITMODALDYNAMIC_CARD1,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _CONTROLIMPLICITMODALDYNAMIC_CARD2,
-                **kwargs,
-            ),
         ]
     @property
     def mdflag(self) -> int:
         """Get or set the Modal Dynamic flag
         EQ.0: no modal dynamic analysis
         EQ.1: perform modal dynamic analysis.
-        EQ.2:	perform modal dynamic analysis with prescribed motion constraints on the constraint modes input with Card 3.  See Remark 7
+        EQ.2: perform modal dynamic analysis with prescribed motion constraints on the constraint modes input with Card 3. See Remark 7
+        EQ.3: Perform modal dynamic analysis with the addition of residual vectors to the eigenvectors.
+        EQ.4: Combine analysis types 2 and 3.
         """ # nopep8
         return self._cards[0].get_value("mdflag")
 
     @mdflag.setter
     def mdflag(self, value: int) -> None:
         """Set the mdflag property."""
-        if value not in [0, 1, 2, None]:
-            raise Exception("""mdflag must be `None` or one of {0,1,2}.""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""mdflag must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("mdflag", value)
 
     @property
-    def zeta(self) -> typing.Optional[float]:
-        """Get or set the Modal Dynamic damping constant.
+    def zeta(self) -> float:
+        """Get or set the Modal Dynamic damping constant. See Remark 4.
         """ # nopep8
         return self._cards[0].get_value("zeta")
 
@@ -98,8 +92,10 @@ class ControlImplicitModalDynamic(KeywordBase):
         self._cards[0].set_value("zeta", value)
 
     @property
-    def md_strs(self) -> typing.Optional[int]:
-        """Get or set the Calculate modal dynamic stress.
+    def md_strs(self) -> int:
+        """Get or set the Modal dynamic stress flag:
+        EQ.0: No modal stress calculated
+        NE.0: Compute modal stresses for output to d3plot using the modal stresses from the d3eigv database.See Remark 3.
         """ # nopep8
         return self._cards[0].get_value("md_strs")
 
@@ -109,8 +105,10 @@ class ControlImplicitModalDynamic(KeywordBase):
         self._cards[0].set_value("md_strs", value)
 
     @property
-    def dtout(self) -> typing.Optional[float]:
+    def dtout(self) -> float:
         """Get or set the Modal dynamics output interval.
+        LE.0: No modal variable output
+        GT.0: Output modal displacement, velocity,and acceleration to file moddynout every DTOUT of simulation time.
         """ # nopep8
         return self._cards[0].get_value("dtout")
 
@@ -122,22 +120,22 @@ class ControlImplicitModalDynamic(KeywordBase):
     @property
     def integ(self) -> int:
         """Get or set the Integration method
-        EQ.0:	defaults to 1.
-        EQ.1:	perform modal dynamic analysis with explicit time integration.
-        EQ.2:	perform modal dynamic analysis with implicit time integration..
+        EQ.1: perform modal dynamic analysis with explicit time integration.
+        EQ.2: perform modal dynamic analysis with implicit time integration. See Remark 6.
         """ # nopep8
         return self._cards[0].get_value("integ")
 
     @integ.setter
     def integ(self, value: int) -> None:
         """Set the integ property."""
-        if value not in [0, 1, 2, None]:
-            raise Exception("""integ must be `None` or one of {0,1,2}.""")
+        if value not in [1, 2, None]:
+            raise Exception("""integ must be `None` or one of {1,2}.""")
         self._cards[0].set_value("integ", value)
 
     @property
     def nsid(self) -> typing.Optional[int]:
-        """Get or set the The node set ID of the nodes in the modal model that are subjected to loads. If the set is not specified, then the forces are summed over all the nodes, and that is usually much more expensive than summing over only those subjected to a load..
+        """Get or set the The node set ID of the nodes subjected to loads in the modal model. If the set is not specified,
+        then the forces are summed over all the nodes, and that is usually much more expensive than summing over only those subjected to a load.
         """ # nopep8
         return self._cards[0].get_value("nsid")
 
@@ -148,8 +146,7 @@ class ControlImplicitModalDynamic(KeywordBase):
 
     @property
     def filename(self) -> typing.Optional[str]:
-        """Get or set the If specified the eigenmodes are read from the specified file. Otherwise
-        the eigenmodes are computed as specified on *CONTROL_IMPLICIT_	EIGENVALUE.
+        """Get or set the If specified, the eigenmodes are read from the specified file. Otherwise the eigenmodes are computed as specified on *CONTROL_IMPLICIT_EIGENVALUE. See Remark 2.
         """ # nopep8
         return self._cards[1].get_value("filename")
 
@@ -157,18 +154,6 @@ class ControlImplicitModalDynamic(KeywordBase):
     def filename(self, value: str) -> None:
         """Set the filename property."""
         self._cards[1].set_value("filename", value)
-
-    @property
-    def filename2(self) -> typing.Optional[str]:
-        """Get or set the If specified the eigenmodes are read from the specified file. Otherwise
-        the eigenmodes are computed as specified on *CONTROL_IMPLICIT_	EIGENVALUE.
-        """ # nopep8
-        return self._cards[2].get_value("filename2")
-
-    @filename2.setter
-    def filename2(self, value: str) -> None:
-        """Set the filename2 property."""
-        self._cards[2].set_value("filename2", value)
 
     @property
     def nsid_link(self) -> typing.Optional[KeywordBase]:

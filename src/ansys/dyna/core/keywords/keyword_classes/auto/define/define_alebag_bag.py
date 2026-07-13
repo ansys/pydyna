@@ -184,7 +184,7 @@ class DefineAlebagBag(KeywordBase):
 
     @property
     def vtype(self) -> int:
-        """Get or set the Type of VSET :
+        """Get or set the Type of VSET:
         EQ:'PSET' or '0' for set of parts
         EQ:'PART' or '1' for part
         EQ:'SEGSET' or '2' for segment set

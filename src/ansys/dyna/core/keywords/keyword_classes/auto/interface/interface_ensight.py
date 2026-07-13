@@ -83,7 +83,7 @@ class InterfaceEnsight(KeywordBase):
 
     @property
     def gfile(self) -> typing.Optional[str]:
-        """Get or set the EnSightGold-formatted geometry file describing part of the mesh, nodal 	coordinates and element connectivity, used by other solver to yield the loading described by the following loading files.  Even the geometry file can contain the whole mesh or just part of the mesh subject to transient loading defined in the following transient loading, the latter is recommended �C including only mesh subject to loading defined in 	loading files �C to  reduce memory requirement and speed up analysis.
+        """Get or set the EnSightGold-formatted geometry file describing part of the mesh, nodal  coordinates and element connectivity, used by other solver to yield the loading described by the following loading files.  Even the geometry file can contain the whole mesh or just part of the mesh subject to transient loading defined in the following transient loading, the latter is recommended C including only mesh subject to loading defined in  loading files C to  reduce memory requirement and speed up analysis.
         """ # nopep8
         return self._cards[1].get_value("gfile")
 

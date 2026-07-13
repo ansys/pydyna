@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _FREQUENCYDOMAINACOUSTICFRINGEPLOTPLATE_CARD0 = (
     FieldSchema("norm", int, 0, 10, 1),
     FieldSchema("len_x", float, 10, 10, None),
-    FieldSchema("len_y", float, 20, 10, None),
+    FieldSchema("len_z", float, 20, 10, None),
     FieldSchema("x", float, 30, 10, None),
     FieldSchema("y", float, 40, 10, None),
     FieldSchema("z", float, 50, 10, None),
@@ -80,15 +80,15 @@ class FrequencyDomainAcousticFringePlotPlate(KeywordBase):
         self._cards[0].set_value("len_x", value)
 
     @property
-    def len_y(self) -> typing.Optional[float]:
+    def len_z(self) -> typing.Optional[float]:
         """Get or set the Length of shorter side of the plate.
         """ # nopep8
-        return self._cards[0].get_value("len_y")
+        return self._cards[0].get_value("len_z")
 
-    @len_y.setter
-    def len_y(self, value: float) -> None:
-        """Set the len_y property."""
-        self._cards[0].set_value("len_y", value)
+    @len_z.setter
+    def len_z(self, value: float) -> None:
+        """Set the len_z property."""
+        self._cards[0].set_value("len_z", value)
 
     @property
     def x(self) -> typing.Optional[float]:

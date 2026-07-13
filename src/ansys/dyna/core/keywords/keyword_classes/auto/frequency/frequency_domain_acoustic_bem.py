@@ -57,7 +57,7 @@ _FREQUENCYDOMAINACOUSTICBEM_CARD2 = (
     FieldSchema("ndd", int, 30, 10, 1),
     FieldSchema("tollr", float, 40, 10, 1e-06),
     FieldSchema("tolfct", float, 50, 10, 1e-06),
-    FieldSchema("ibdim", int, 60, 10, 1000),
+    FieldSchema("ibdim", int, 60, 10, 200),
     FieldSchema("npg", int, 70, 10, 2),
 )
 
@@ -82,8 +82,8 @@ _FREQUENCYDOMAINACOUSTICBEM_CARD4 = (
 )
 
 _FREQUENCYDOMAINACOUSTICBEM_CARD5 = (
-    FieldSchema("t_hold", float, 0, 10, 0.0),
-    FieldSchema("decay", float, 10, 10, 0.02),
+    FieldSchema("t_hold_alpha", float, 0, 10, 0.0, "t_hold/alpha"),
+    FieldSchema("decay__", float, 10, 10, 0.02, "decay/-"),
 )
 
 class FrequencyDomainAcousticBem(KeywordBase):
@@ -185,7 +185,7 @@ class FrequencyDomainAcousticBem(KeywordBase):
     @property
     def dtout(self) -> float:
         """Get or set the Time interval between writing velocity or acceleration, and pressure at boundary
-        elements in the binary file, to be proceeded at the end of LS-DYNA simulation.
+        elements in the binary file, to be processeded at the end of transient simulation.
         """ # nopep8
         return self._cards[0].get_value("dtout")
 
@@ -196,7 +196,7 @@ class FrequencyDomainAcousticBem(KeywordBase):
 
     @property
     def tstart(self) -> float:
-        """Get or set the Start time for recording velocity or acceleration in LS-DYNA simulation.
+        """Get or set the Start time for recording velocity or acceleration in simulation.
         """ # nopep8
         return self._cards[0].get_value("tstart")
 
@@ -207,8 +207,7 @@ class FrequencyDomainAcousticBem(KeywordBase):
 
     @property
     def pref(self) -> float:
-        """Get or set the Reference pressure to be used to output pressure in dB, in file Press_dB. If
-        Ref_Pres=0, Press_dB file will not be generated. A file called Press_Pa is
+        """Get or set the Reference pressure used to output pressure in dB to file Press_dB. If PREF=0.0, Press_dB file is not generated. A file called Press_Pa is
         generated and contains the pressure at output nodes.
         """ # nopep8
         return self._cards[0].get_value("pref")
@@ -220,7 +219,7 @@ class FrequencyDomainAcousticBem(KeywordBase):
 
     @property
     def nsidext(self) -> int:
-        """Get or set the Set ID, or Segment set ID of output exterior field points.
+        """Get or set the Node ID, Node set ID, or Segment set ID of output exterior field points.
         """ # nopep8
         return self._cards[1].get_value("nsidext")
 
@@ -232,7 +231,7 @@ class FrequencyDomainAcousticBem(KeywordBase):
     @property
     def typext(self) -> int:
         """Get or set the Output exterior field point type.
-        EQ.0: node ID.
+        EQ.0: Node ID.
         EQ.1: Node set ID.
         EQ.2: Segment set ID.
         """ # nopep8
@@ -247,7 +246,7 @@ class FrequencyDomainAcousticBem(KeywordBase):
 
     @property
     def nsidint(self) -> int:
-        """Get or set the Node set ID, or Segment set ID of output interior field points.
+        """Get or set the Node ID, Node set ID, or Segment set ID of output interior field points.
         """ # nopep8
         return self._cards[1].get_value("nsidint")
 
@@ -259,7 +258,7 @@ class FrequencyDomainAcousticBem(KeywordBase):
     @property
     def typint(self) -> int:
         """Get or set the Output interior field point type.
-        EQ.0: node ID.
+        EQ.0: Node ID.
         EQ.1: Node set ID.
         EQ.2: Segment set ID.
         """ # nopep8
@@ -281,21 +280,25 @@ class FrequencyDomainAcousticBem(KeywordBase):
         EQ.3: Blackman window
         EQ.4: Raised cosine window
         EQ.5: Exponential window.
+        EQ.6: Triangular window
+        EQ.7: Kaiser window
+        EQ.8: Auto exponential window
         """ # nopep8
         return self._cards[1].get_value("fftwin")
 
     @fftwin.setter
     def fftwin(self, value: int) -> None:
         """Set the fftwin property."""
-        if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""fftwin must be `None` or one of {0,1,2,3,4,5}.""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, None]:
+            raise Exception("""fftwin must be `None` or one of {0,1,2,3,4,5,6,7,8}.""")
         self._cards[1].set_value("fftwin", value)
 
     @property
     def trslt(self) -> int:
-        """Get or set the EQ.0: No time domain results are requested;
-        EQ.1: Time domain results are requested.
-        EQ.2: time domain results are requested (Press_Pa_t gives real value pressure vs. time).
+        """Get or set the Flag to output time domain results (see Remark 4):
+        EQ.0: Do not output time domain results.
+        EQ.1: Request time domain results(Press_Pa_t gives absolute value pressure as a function of time).
+        EQ.2: Requiest time domain results(Press_Pa_t gives real value pressure as a function of time).
         """ # nopep8
         return self._cards[1].get_value("trslt")
 
@@ -315,33 +318,24 @@ class FrequencyDomainAcousticBem(KeywordBase):
         EQ.1: Press_Pa_real (real part of the pressure vs. frequency) and
         Press_Pa_imag (imaginary part of the pressure vs. frequency) are
         included, in addition to Press_Pa, Press_dB and bepres.
-        EQ.10: files for IPFILE = 0, and fringe files for acoustic pressure.
-        EQ.11: files for IPFILE = 1, and fringe files for acoustic pressure.
-        EQ.20: files for IPFILE = 0, and fringe files for sound pressure level.
-        EQ.21: files for IPFILE = 1, and fringe files for sound pressure level.
-        EQ.31: files for IPFILE = 1, and fringe files for acoustic pressure(real part).
-        EQ.41: files for IPFILE = 1, and fringe files for acoustic pressure(imaginary part).
         """ # nopep8
         return self._cards[1].get_value("ipfile")
 
     @ipfile.setter
     def ipfile(self, value: int) -> None:
         """Set the ipfile property."""
-        if value not in [0, 1, 10, 11, 20, 21, 31, 41, None]:
-            raise Exception("""ipfile must be `None` or one of {0,1,10,11,20,21,31,41}.""")
+        if value not in [0, 1, None]:
+            raise Exception("""ipfile must be `None` or one of {0,1}.""")
         self._cards[1].set_value("ipfile", value)
 
     @property
     def iunits(self) -> int:
-        """Get or set the Flag for unit changes
-        EQ.0: No unit change applied;
-        EQ.1: MKS units are used, no change needed;
-        EQ.2: Units (lbfxs2/in, inch, s, lbf, psi, etc.) are used, changed to MKS
-        in BEM Acoustic computation;
-        EQ.3: Units (kg, mm, ms, kN, GPa, etc.) are used, changed to MKS in
-        BEM Acoustic computation;
-        EQ.4: Units (ton, mm, s, N, MPa, etc.) are used, changed to MKS in
-        BEM Acoustic computation.
+        """Get or set the Flag for unit changes (see Remark 5):E
+        Q.0: Do not apply a unit change.
+        EQ.1: Use MKS units; thus, no change is needed.
+        EQ.2: Use units: lbf x s  ** 2 / in , inch, s, lbf, psi, etc.,and change to MKS in the BEM acoustic computation.
+        EQ.3: Use units: kg, mm, ms, kN, GPa, etc.,and change to MKS in the BEM acoustic computation.
+        EQ.4: Use units: ton, mm, s, N, MPa, etc.,and change to MKS in the BEM acoustic computation.
         """ # nopep8
         return self._cards[1].get_value("iunits")
 
@@ -354,11 +348,11 @@ class FrequencyDomainAcousticBem(KeywordBase):
 
     @property
     def method(self) -> int:
-        """Get or set the Method used in acoustic analysis (Default =0)
+        """Get or set the Method used in the acoustic analysis (Default =0)
         EQ.0: Rayleigh method (very fast)
         EQ.1: Kirchhoff method coupled to FEM for acoustics
         (*MAT_ACOUSTIC) (see Remark 4)
-        EQ.2: Variational Indirect BEM
+        EQ.2: Variational indirect BEM
         EQ.3: Collocation BEM
         EQ.4: Collocation BEM with Burton-Miller formulation for exterior
         problems (no irregular frequency phenomenon).
@@ -374,7 +368,7 @@ class FrequencyDomainAcousticBem(KeywordBase):
 
     @property
     def maxit(self) -> int:
-        """Get or set the Maximum number of iterations for iterative solver (Default =100)	(Used only if METHOD>=2).
+        """Get or set the Maximum number of iterations for the iterative solver (Default =100) (Used only if METHOD>=2).
         """ # nopep8
         return self._cards[2].get_value("maxit")
 
@@ -396,10 +390,8 @@ class FrequencyDomainAcousticBem(KeywordBase):
 
     @property
     def ndd(self) -> int:
-        """Get or set the Number of Domain Decomposition, used for memory saving.
-        For large problems, the boundary mesh is decomposed into NDD
-        domains for less memory allocation.
-        This option is only used if METHOD>=2..
+        """Get or set the Number of domain decompositions. It is used for saving memory. For large problems, the boundary mesh is decomposed into NDD domains for less memory allocation.
+        NDD = 0 invokes using an internally-determined, recommended domain decomposition. NDD is only used if METHOD >= 2. See Remark 9.
         """ # nopep8
         return self._cards[2].get_value("ndd")
 
@@ -410,7 +402,7 @@ class FrequencyDomainAcousticBem(KeywordBase):
 
     @property
     def tollr(self) -> float:
-        """Get or set the Tolerance for low rank approximation of dense matrix (Default=1.E-6).
+        """Get or set the Tolerance for low rank approximation of a dense matrix (Default=1.E-6).
         """ # nopep8
         return self._cards[2].get_value("tollr")
 
@@ -421,7 +413,7 @@ class FrequencyDomainAcousticBem(KeywordBase):
 
     @property
     def tolfct(self) -> float:
-        """Get or set the Tolerance in factorization of low rank matrix (Default=1.E-6).
+        """Get or set the Tolerance in the factorization of low rank matrix (Default=1.E-6).
         """ # nopep8
         return self._cards[2].get_value("tolfct")
 
@@ -465,22 +457,24 @@ class FrequencyDomainAcousticBem(KeywordBase):
 
     @property
     def restrt(self) -> int:
-        """Get or set the This flag is used to save an LS-DYNA analysis if the binary output file in the (bem=filename) option has not been changed(default = 0).
-        EQ.0: LS-DYNA time domain analysis is processed and generates a new binary file.
-        EQ.1: LS-DYNA time domain analysis is not processed.The binary files from previous run are used. The files include the binary output file filename, and the binary file bin_velfreq, which saves the boundary velocity from FFT.
-        EQ.2: LS-DYNA restarts from d3dump file by using "R="command line parameter. This is useful when the last run was interrupted by sense switches such as "sw1".
-        EQ.3: LS-DYNA reads in user provided velocity history saved in an ASCII file, bevel.
-        EQ.-3:	LS-DYNA reads in user provided velocity spectrum saved in an ASCII file, bevelf
-        EQ.4: run acoustic computation on a boundary element mesh with velocity information given with a denser finite element mesh in last run. This option requires both "bem = filename" and "lbem = filename2" in the command line, where filename2 is the name of the binary file generated in the last run with denser mesh.
-        EQ.5: LS-DYNA time domain analysis is not processed. The binary file filename from previous run is used. An FFT is performed to get the new frequency domain boundary velocity and the results are saved in bin_velfreq.
+        """Get or set the This flag can save an LS-DYNA transient analysis if the binary output file in the (bem=filename) option has not been changed (default = 0).
+        EQ.-30:	Read in the user-provided velocity spectrum saved in a binary file, bevelf.lsda. This option is supported for METHOD = 0, 2, 3, and 4.
+        EQ.-3:	Read in the user-provided velocity spectrum saved in an ASCII file, bevelf. This option is supported for METHOD = 0, 2, 3, and 4.
+        EQ.0:	Process the LS-DYNA time domain analysis, generating a new binary file.
+        EQ.1:	Do not process the LS-DYNA time domain analysis. Use the binary files from the previous run. The files include the binary output file filename and the binary file bin_velfreq, which saves the boundary velocity from FFT.
+        EQ.2:	Restart from the d3dump file by using the �R=� command line parameter.  This is useful when the last run was interrupted by sense switches such as �sw1�.
+        EQ.3:	Read in user-provided velocity history saved in an ASCII file, bevel.
+        EQ.4:	Run acoustic computation on a boundary element mesh with velocity information given with a denser finite element mesh in the last run. This option requires both �bem=filename� and �lbem=filename2� in the command line, where filename2 is the name of the binary file generated in the last run with denser mesh.
+        EQ.5:	Do not process the LS-DYNA time domain analysis. Use the binary file filename from the previous run. An FFT computes the new frequency domain boundary velocity with results saved in bin_velfreq.
+        EQ.30:	Read in user-provided velocity history saved in a binary file, bevel.lsda.
         """ # nopep8
         return self._cards[3].get_value("restrt")
 
     @restrt.setter
     def restrt(self, value: int) -> None:
         """Set the restrt property."""
-        if value not in [0, 1, 2, 3, -3, 4, 5, None]:
-            raise Exception("""restrt must be `None` or one of {0,1,2,3,-3,4,5}.""")
+        if value not in [0, 1, 2, 3, 4, 5, -30, -3, 30, None]:
+            raise Exception("""restrt must be `None` or one of {0,1,2,3,4,5,-30,-3,30}.""")
         self._cards[3].set_value("restrt", value)
 
     @property
@@ -519,7 +513,7 @@ class FrequencyDomainAcousticBem(KeywordBase):
     def nfrup(self) -> int:
         """Get or set the Preconditioner update option.
         EQ.0: updated at every frequency.
-        EQ.N: updated for every N frequencies.
+        GE.1: Updated for every NFRUP frequencies.
         """ # nopep8
         return self._cards[3].get_value("nfrup")
 
@@ -606,14 +600,15 @@ class FrequencyDomainAcousticBem(KeywordBase):
 
     @property
     def bemtype(self) -> int:
-        """Get or set the Type of input boundary values in BEM analysis.
-        EQ.0: boundary velocity will be processed in BEM analysis.
-        EQ.1: boundary acceleration will be processed in BEM analysis.
-        EQ.2: pressure is prescribed and the real and imaginary parts are given by LC1 and LC2.
-        EQ.3: normal velocity is prescribed and the real and imaginary parts are given by LC1 and LC2.
-        EQ.4: impedance is prescribed and the real and imaginary parts are given by LC1 and LC2.
-        EQ.-n: normal velocity (only real part) is prescribed, through load
-        curve n. An amplitude versus. frequency load curve (with curve ID n) needs to be defined.
+        """Get or set the ype of input boundary values in BEM analysis.
+        EQ.0: The BEM analysis processes the boundary velocity.
+        EQ.1: The BEM analysis processes the boundary acceleration.
+        EQ.2: LC1 and LC2 prescribe the real and imaginary parts of the pressure.
+        EQ.3: LC1 and LC2 prescribed the real and imaginary parts of the normal velocity.
+        EQ.4: LC1 and LC2 prescribe the real and imaginary parts of the impedance.
+        EQ.5: LC1 gives the acoustic absorption coefficient.
+        EQ.6: Specify a symmetry condition(or rigid wall).
+        LT.0: Set the normal velocity(only the real part) through an amplitude as a function of frequency load curve with curve ID | BEMTYP | .
         """ # nopep8
         return self._cards[4].get_value("bemtype")
 
@@ -624,7 +619,7 @@ class FrequencyDomainAcousticBem(KeywordBase):
 
     @property
     def lc1(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID for defining real part of pressure, normal velocity or impedance.
+        """Get or set the Load curve ID for defining the real part of pressure, the real part of normal velocity, the real part of impedance, or the real acoustic absorption coefficient. See BEMTYP = 2, 3, 4, and 5, respectively
         """ # nopep8
         return self._cards[4].get_value("lc1")
 
@@ -635,7 +630,7 @@ class FrequencyDomainAcousticBem(KeywordBase):
 
     @property
     def lc2(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID for defining imaginary part of pressure, normal velocity or impedance.
+        """Get or set the Load curve ID for defining imaginary part of pressure, normal velocity, or impedance. See BEMTYP = 2, 3, and 4, respectively.
         """ # nopep8
         return self._cards[4].get_value("lc2")
 
@@ -645,26 +640,27 @@ class FrequencyDomainAcousticBem(KeywordBase):
         self._cards[4].set_value("lc2", value)
 
     @property
-    def t_hold(self) -> float:
-        """Get or set the Hold-off period before the exponential window. The length of the hold-off period should coincide with the pre-trigger time to reduce the effects of noise in the captured time domain data. It is only used when FFTWIN = 5.
+    def t_hold_alpha(self) -> float:
+        """Get or set the If FFTWIN=5 or 8: T_HOLD: Hold-off period before the exponential window. The length of the hold-off period should coincide with the pre-trigger time to reduce the effects of noise in the captured time domain data.
+        If FFTWIN=7: ALPHA: A non-negative real number that determines the shape of the Kaiser window and, therefore, controls the tradeoff between main-lobe width and side lobe labels of the spectral leakage pattern
         """ # nopep8
-        return self._cards[5].get_value("t_hold")
+        return self._cards[5].get_value("t_hold_alpha")
 
-    @t_hold.setter
-    def t_hold(self, value: float) -> None:
-        """Set the t_hold property."""
-        self._cards[5].set_value("t_hold", value)
+    @t_hold_alpha.setter
+    def t_hold_alpha(self, value: float) -> None:
+        """Set the t_hold_alpha property."""
+        self._cards[5].set_value("t_hold_alpha", value)
 
     @property
-    def decay(self) -> float:
-        """Get or set the Decay ratio at the end of capture duration. For example, if the DECAY = 0.02, it means that the vibration is forced to decay to 2% of its amplitude within the capture duration. This field is only used when FFTWIN = 5.
+    def decay__(self) -> float:
+        """Get or set the If FFTWIN=5 or 8: Decay ratio at the end of capture duration. For example, if the DECAY = 0.02, it means that the vibration is forced to decay to 2% of its amplitude within the capture duration. This field is only used when FFTWIN = 5.
         """ # nopep8
-        return self._cards[5].get_value("decay")
+        return self._cards[5].get_value("decay__")
 
-    @decay.setter
-    def decay(self, value: float) -> None:
-        """Set the decay property."""
-        self._cards[5].set_value("decay", value)
+    @decay__.setter
+    def decay__(self, value: float) -> None:
+        """Set the decay__ property."""
+        self._cards[5].set_value("decay__", value)
 
     @property
     def lc1_link(self) -> typing.Optional[DefineCurve]:

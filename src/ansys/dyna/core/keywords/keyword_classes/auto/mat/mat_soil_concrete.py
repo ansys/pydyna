@@ -125,7 +125,7 @@ class MatSoilConcrete(KeywordBase):
 
     @property
     def k(self) -> typing.Optional[float]:
-        """Get or set the Bulk modulus.
+        """Get or set the Bulk modulus. This value is only used for determining the contact stiffness and the time step. Note that for the time step, the solver compares K to the maximum slope in LCPV and takes the maximum value
         """ # nopep8
         return self._cards[0].get_value("k")
 
@@ -160,7 +160,7 @@ class MatSoilConcrete(KeywordBase):
 
     @property
     def lcfp(self) -> int:
-        """Get or set the Load curve ID for plastic strain at which fracture begins versus pressure.  This load curve ID must be defined if B>0.0.
+        """Get or set the Load curve ID for plastic strain at which fracture begins versus pressure. This load curve ID must be defined if B>0.0.
         """ # nopep8
         return self._cards[0].get_value("lcfp")
 

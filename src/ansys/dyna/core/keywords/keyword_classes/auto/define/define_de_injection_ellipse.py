@@ -60,6 +60,8 @@ _DEFINEDEINJECTIONELLIPSE_CARD2 = (
     FieldSchema("lcvx", int, 30, 10, None),
     FieldSchema("lcvy", int, 40, 10, None),
     FieldSchema("lcvz", int, 50, 10, None),
+    FieldSchema("irand", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
 )
 
 _DEFINEDEINJECTIONELLIPSE_CARD3 = (
@@ -184,7 +186,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @property
     def xl(self) -> float:
-        """Get or set the Length of the rectangular injection plane along X-axis in the coordinate	system(CID) defined.
+        """Get or set the Length of the rectangular injection plane along X-axis in the coordinate system(CID) defined.
         """ # nopep8
         return self._cards[0].get_value("xl")
 
@@ -195,7 +197,7 @@ class DefineDeInjectionEllipse(KeywordBase):
 
     @property
     def yl(self) -> float:
-        """Get or set the Length of the rectangular injection plane along Y-axis in the coordinate	system(CID) defined.
+        """Get or set the Length of the rectangular injection plane along Y-axis in the coordinate system(CID) defined.
         """ # nopep8
         return self._cards[0].get_value("yl")
 
@@ -332,8 +334,8 @@ class DefineDeInjectionEllipse(KeywordBase):
     @property
     def imulti(self) -> typing.Optional[int]:
         """Get or set the Flag for giving a specified mass distribution of injected particles with given radii:
-        EQ.1:	Inject the particles with distribution IFUNC using the radii specified with RMINand RMAX(default).
-        GT.1 : Inject particles with IMULTI different radii, Ri, with each different size having a specified mass distribution, Pi, given in Card 3.1.IMULTI cannot be greater than 4.
+        EQ.1: Inject the particles with distribution IFUNC using the radii specified with RMINand RMAX(default).
+        GT.1: Inject particles with IMULTI different radii, Ri, with each different size having a specified mass distribution, Pi, given in Card 3.1.IMULTI cannot be greater than 4.
         """ # nopep8
         return self._cards[2].get_value("imulti")
 
@@ -374,6 +376,17 @@ class DefineDeInjectionEllipse(KeywordBase):
     def lcvz(self, value: int) -> None:
         """Set the lcvz property."""
         self._cards[2].set_value("lcvz", value)
+
+    @property
+    def irand(self) -> typing.Optional[int]:
+        """Get or set the Enable more randomized injection patten with IRAND = 1.
+        """ # nopep8
+        return self._cards[2].get_value("irand")
+
+    @irand.setter
+    def irand(self, value: int) -> None:
+        """Set the irand property."""
+        self._cards[2].set_value("irand", value)
 
     @property
     def r1(self) -> float:

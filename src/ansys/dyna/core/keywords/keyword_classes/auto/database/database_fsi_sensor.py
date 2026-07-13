@@ -82,11 +82,7 @@ class DatabaseFsiSensor(KeywordBase):
 
     @property
     def binary(self) -> int:
-        """Get or set the Flag for binary output.  See remarks under "Output Files and Post-Processing" in Appendix O, "LS-DYNA MPP User Guide."
-        EQ.1:	ASCII file is written:	This is the default for shared memory parallel (SMP) LS-DYNA executables.
-        EQ.2:	Data written to a binary database binout, which contains data that would otherwise be output to the ASCII file.
-        The ASCII file in this case is not created.  This is the default for MPP LS-DYNA executables.
-        EQ.3:	ASCII file is written, and the data is also written to the binary database (NOTE: MPP LS-DYNA executables will only produce the binary database).
+        """Get or set the 
         """ # nopep8
         return self._cards[0].get_value("binary")
 
@@ -99,7 +95,7 @@ class DatabaseFsiSensor(KeywordBase):
 
     @property
     def dbfsi_id(self) -> typing.Optional[int]:
-        """Get or set the Pressure-Sensor ID
+        """Get or set the Pressure-sensor ID
         """ # nopep8
         return self._cards[1].get_value("dbfsi_id")
 
@@ -110,7 +106,7 @@ class DatabaseFsiSensor(KeywordBase):
 
     @property
     def nid(self) -> typing.Optional[int]:
-        """Get or set the Node ID,If NID=0 or blank, the sensor will be placed in the center of a four-sided segment defined by SEGMID.
+        """Get or set the An optional Lagrangian node ID defining an approximate pressure sensor location with respect to a Lagrangian shell element.  This is not a required input.
         """ # nopep8
         return self._cards[1].get_value("nid")
 
@@ -121,7 +117,8 @@ class DatabaseFsiSensor(KeywordBase):
 
     @property
     def segmid(self) -> typing.Optional[int]:
-        """Get or set the SegmentID (Lagrangian shell element ID) associated with the above node ID.
+        """Get or set the Lagangian element ID for locating the pressure sensor.  If NID = 0 or is blank, the sensor will be automatically placed in the center of this SEGMID, accounting for the offset distance. If the model is three-dimensional, the Lagrangian element can be a shell or solid (for the solid element, ND1 and ND2 are required to define the face). If the model is two-dimensional, the Lagrangian element can be a beam or shell (for the shell element, ND1 and ND2 are required to define the side). If SEGMID=0, ND1, ND2 and ND3 are required for an ALE 3D model and
+        ND1 and ND2 are needed for an ALE 2D model.
         """ # nopep8
         return self._cards[1].get_value("segmid")
 
@@ -143,9 +140,7 @@ class DatabaseFsiSensor(KeywordBase):
 
     @property
     def nd1(self) -> typing.Optional[int]:
-        """Get or set the Nodes defining the solid face for the solid element in the three-dimensional model
-        or shell side for the shell element in the two-dimensional model, from which the sensor is located.
-        In three dimensions, if the solid face has 4 nodes, only the diagonal opposites ND1 and ND2 are required.
+        """Get or set the Nodes defining the solid face for the solid element in the three-dimensional model or the shell side for the shell element in the two-dimensional model, from which the sensor is located. In three dimensions, if the solid face has four nodes, only the diagonal opposites ND1 and ND2 are required.
         If the solid face is triangular, a third node ND3 should be provided. In two dimensions, only ND1 and ND2 are required to define the shell side
         """ # nopep8
         return self._cards[1].get_value("nd1")
@@ -157,9 +152,7 @@ class DatabaseFsiSensor(KeywordBase):
 
     @property
     def nd2(self) -> typing.Optional[int]:
-        """Get or set the Nodes defining the solid face for the solid element in the three-dimensional model
-        or shell side for the shell element in the two-dimensional model, from which the sensor is located.
-        In three dimensions, if the solid face has 4 nodes, only the diagonal opposites ND1 and ND2 are required.
+        """Get or set the Nodes defining the solid face for the solid element in the three-dimensional model or the shell side for the shell element in the two-dimensional model, from which the sensor is located. In three dimensions, if the solid face has four nodes, only the diagonal opposites ND1 and ND2 are required.
         If the solid face is triangular, a third node ND3 should be provided. In two dimensions, only ND1 and ND2 are required to define the shell side
         """ # nopep8
         return self._cards[1].get_value("nd2")
@@ -171,9 +164,7 @@ class DatabaseFsiSensor(KeywordBase):
 
     @property
     def nd3(self) -> typing.Optional[int]:
-        """Get or set the Nodes defining the solid face for the solid element in the three-dimensional model
-        or shell side for the shell element in the two-dimensional model, from which the sensor is located.
-        In three dimensions, if the solid face has 4 nodes, only the diagonal opposites ND1 and ND2 are required.
+        """Get or set the Nodes defining the solid face for the solid element in the three-dimensional model or the shell side for the shell element in the two-dimensional model, from which the sensor is located. In three dimensions, if the solid face has four nodes, only the diagonal opposites ND1 and ND2 are required.
         If the solid face is triangular, a third node ND3 should be provided. In two dimensions, only ND1 and ND2 are required to define the shell side
         """ # nopep8
         return self._cards[1].get_value("nd3")

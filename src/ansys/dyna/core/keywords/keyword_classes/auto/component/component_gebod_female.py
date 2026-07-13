@@ -74,9 +74,9 @@ class ComponentGebodFemale(KeywordBase):
     @property
     def units(self) -> int:
         """Get or set the System of units used in the finite element model.
-        EQ.1: lbf*sec^2/in-inch-sec,
+        EQ.1: lbf*sec**2/in-inch-sec,
         EQ.2: kg-meter-sec,
-        EQ.3: kgf*sec^2/mm-mm-sec,
+        EQ.3: kgf*sec**2/mm-mm-sec,
         EQ.4: metric ton-mm-sec,
         EQ.5: kg-mm-msec.
         """ # nopep8

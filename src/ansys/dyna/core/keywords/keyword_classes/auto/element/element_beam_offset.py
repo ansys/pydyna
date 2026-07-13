@@ -235,7 +235,7 @@ class ElementBeamOffset(KeywordBase):
 
     @property
     def wx1(self) -> float:
-        """Get or set the Offset vector at modal point N1.
+        """Get or set the Offset vector at nodal point N1.
         """ # nopep8
         return self._cards[1].get_value("wx1")
 
@@ -246,7 +246,7 @@ class ElementBeamOffset(KeywordBase):
 
     @property
     def wy1(self) -> float:
-        """Get or set the Offset vector at modal point N1.
+        """Get or set the Offset vector at nodal point N1.
         """ # nopep8
         return self._cards[1].get_value("wy1")
 
@@ -257,7 +257,7 @@ class ElementBeamOffset(KeywordBase):
 
     @property
     def wz1(self) -> float:
-        """Get or set the Offset vector at modal point N1.
+        """Get or set the Offset vector at nodal point N1.
         """ # nopep8
         return self._cards[1].get_value("wz1")
 
@@ -268,7 +268,7 @@ class ElementBeamOffset(KeywordBase):
 
     @property
     def wx2(self) -> float:
-        """Get or set the Offset vector at modal point N2.
+        """Get or set the Offset vector at nodal point N2.
         """ # nopep8
         return self._cards[1].get_value("wx2")
 
@@ -279,7 +279,7 @@ class ElementBeamOffset(KeywordBase):
 
     @property
     def wy2(self) -> float:
-        """Get or set the Offset vector at modal point N2.
+        """Get or set the Offset vector at nodal point N2.
         """ # nopep8
         return self._cards[1].get_value("wy2")
 
@@ -290,7 +290,7 @@ class ElementBeamOffset(KeywordBase):
 
     @property
     def wz2(self) -> float:
-        """Get or set the Offset vector at modal point N2.
+        """Get or set the Offset vector at nodal point N2.
         """ # nopep8
         return self._cards[1].get_value("wz2")
 

@@ -71,7 +71,7 @@ class InitialVelocityRigidBody(KeywordBase):
 
     @property
     def vx(self) -> float:
-        """Get or set the Initial translational velocity in x-direction.
+        """Get or set the Initial translational velocity in global x-direction.
         """ # nopep8
         return self._cards[0].get_value("vx")
 
@@ -82,7 +82,7 @@ class InitialVelocityRigidBody(KeywordBase):
 
     @property
     def vy(self) -> float:
-        """Get or set the Initial translational velocity in y-direction.
+        """Get or set the Initial translational velocity in global y-direction.
         """ # nopep8
         return self._cards[0].get_value("vy")
 
@@ -93,7 +93,7 @@ class InitialVelocityRigidBody(KeywordBase):
 
     @property
     def vz(self) -> float:
-        """Get or set the Initial translational velocity in z-direction.
+        """Get or set the Initial translational velocity in global z-direction.
         """ # nopep8
         return self._cards[0].get_value("vz")
 
@@ -104,7 +104,7 @@ class InitialVelocityRigidBody(KeywordBase):
 
     @property
     def vxr(self) -> float:
-        """Get or set the Initial rotational velocity about the x-axis.
+        """Get or set the Initial rotational velocity about the global x-axis.
         """ # nopep8
         return self._cards[0].get_value("vxr")
 
@@ -115,7 +115,7 @@ class InitialVelocityRigidBody(KeywordBase):
 
     @property
     def vyr(self) -> float:
-        """Get or set the Initial rotational velocity about the y-axis.
+        """Get or set the Initial rotational velocity about the global y-axis.
         """ # nopep8
         return self._cards[0].get_value("vyr")
 
@@ -126,7 +126,7 @@ class InitialVelocityRigidBody(KeywordBase):
 
     @property
     def vzr(self) -> float:
-        """Get or set the Initial rotational velocity about the z-axis.
+        """Get or set the Initial rotational velocity about the global z-axis.
         """ # nopep8
         return self._cards[0].get_value("vzr")
 

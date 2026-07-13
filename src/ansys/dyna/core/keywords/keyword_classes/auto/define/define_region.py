@@ -147,8 +147,8 @@ class DefineRegion(KeywordBase):
     @property
     def move(self) -> int:
         """Get or set the Flag to specify whether the region moves:
-        EQ.0:	Region is stationary.
-        EQ.1 : Region moves to follow the local origin and rotates with the local coordinate system(see CID)..
+        EQ.0: Region is stationary.
+        EQ.1: Region moves to follow the local origin and rotates with the local coordinate system(see CID)..
         """ # nopep8
         return self._cards[1].get_value("move")
 

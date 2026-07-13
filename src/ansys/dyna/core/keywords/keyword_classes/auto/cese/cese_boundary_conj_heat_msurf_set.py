@@ -47,7 +47,7 @@ class CeseBoundaryConjHeatMsurfSet(KeywordBase):
         ]
     @property
     def msurf_s(self) -> typing.Optional[int]:
-        """Get or set the Identifier of a set of mesh surface part IDs created with an *LSO_ID_SET card.
+        """Get or set the Identifier of a set of mesh surface part IDs created with an *LSO_ID_SET card, where each mesh surface part ID in the set is referenced in *MESH_SURFACE_ELEMENT cards.
         """ # nopep8
         return self._cards[0].get_value("msurf_s")
 

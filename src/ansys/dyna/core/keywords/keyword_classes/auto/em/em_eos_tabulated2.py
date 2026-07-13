@@ -65,7 +65,7 @@ class EmEosTabulated2(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve Id, Define Function ID, Table ID or Table 2D ID.
+        """Get or set the Load curve ID (see Remark 1), function ID (see *DEFINE_FUNCTION), table ID or 2D table ID. For the arguments for the *DEFINE_FUNCTION, see Remark 2
         """ # nopep8
         return self._cards[0].get_value("lcid")
 
@@ -76,9 +76,9 @@ class EmEosTabulated2(KeywordBase):
 
     @property
     def iflag(self) -> int:
-        """Get or set the Only used is a Table ID or a Table 2D ID is given in LCID.
-        EQ.0: Gives load curve ID function of temperature. Load curves give conductivity function of material's density.
-        EQ.1: Gives load curve ID function of material's density. Load curves give conductivity function of temperature.
+        """Get or set the If LCID is a table ID or 2D table ID, conductivity / permeability is a function of temperature and material density. This flag dictates how LS-DYNA interprets the table. In other words, it specifies which property (temperature or material density) is the value for the table and which is the ordinate for load curves in the table:
+        EQ.0: Temperature(value) indexes each conductivity / permeability(ordinate) versus material density(abscissa) load curve.
+        EQ.1: Material density indexes each conductivity / permeability(ordinate) versus temperature(abscissa) load curve.
         """ # nopep8
         return self._cards[0].get_value("iflag")
 

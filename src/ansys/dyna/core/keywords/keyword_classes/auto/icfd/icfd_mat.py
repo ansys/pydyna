@@ -30,7 +30,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import De
 
 _ICFDMAT_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
-    FieldSchema("flg", int, 10, 10, 1),
+    FieldSchema("flg", int, 10, 10, None),
     FieldSchema("ro", float, 20, 10, 0.0),
     FieldSchema("vis", float, 30, 10, 0.0),
     FieldSchema("st", float, 40, 10, 0.0),
@@ -50,6 +50,10 @@ _ICFDMAT_CARD1 = (
 _ICFDMAT_CARD2 = (
     FieldSchema("nnmoid", int, 0, 10, None),
     FieldSchema("pmmoid", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("sptrid", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("vid", int, 50, 10, None),
 )
 
 class IcfdMat(KeywordBase):
@@ -91,10 +95,10 @@ class IcfdMat(KeywordBase):
         self._cards[0].set_value("mid", value)
 
     @property
-    def flg(self) -> int:
-        """Get or set the Flag to choose between fully incompressible, slightly compressible,or barotropic flows.
-        EQ.0 : Vacuum (free surface problems only)
-        EQ.1 : Fully incompressible fluid.
+    def flg(self) -> typing.Optional[int]:
+        """Get or set the Flag to choose between fully incompressiblefluid or vaccum.
+        EQ.0: Vacuum (free surface problems only)
+        EQ.1: Fully incompressible fluid.
         """ # nopep8
         return self._cards[0].get_value("flg")
 
@@ -138,7 +142,7 @@ class IcfdMat(KeywordBase):
 
     @property
     def stsflcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID for scale factor applied on ST function of time. See *DEFINE_CURVE, *DEFINE_CURVE_FUNCTION, or *DEFINE_FUNCTION.  If a DEFINE_FUNCTION is used, the following parameters are allowed:  f(x,y,z,vx,vy,vz,temp,pres,time).
+        """Get or set the Load curve ID for scale factor applied on ST function of time. See *DEFINE_CURVE, *DEFINE_CURVE_FUNCTION, or *DEFINE_FUNCTION.  If a DEFINE_FUNCTION is used, the following parameters are allowed: f(x,y,z,vx,vy,vz,temp,pres,time).
         """ # nopep8
         return self._cards[0].get_value("stsflcid")
 
@@ -245,6 +249,28 @@ class IcfdMat(KeywordBase):
     def pmmoid(self, value: int) -> None:
         """Set the pmmoid property."""
         self._cards[2].set_value("pmmoid", value)
+
+    @property
+    def sptrid(self) -> typing.Optional[int]:
+        """Get or set the Species transport model ID. This refers to a species transport model defined using *ICFD_MODEL_SPECIES_TRANSPORT
+        """ # nopep8
+        return self._cards[2].get_value("sptrid")
+
+    @sptrid.setter
+    def sptrid(self, value: int) -> None:
+        """Set the sptrid property."""
+        self._cards[2].set_value("sptrid", value)
+
+    @property
+    def vid(self) -> typing.Optional[int]:
+        """Get or set the Viscoelastic model ID. This refers to a viscoelastic model defined using *ICFD_MODEL_VISCOELASTIC.
+        """ # nopep8
+        return self._cards[2].get_value("vid")
+
+    @vid.setter
+    def vid(self, value: int) -> None:
+        """Set the vid property."""
+        self._cards[2].set_value("vid", value)
 
     @property
     def hcsflcid_link(self) -> typing.Optional[DefineCurve]:

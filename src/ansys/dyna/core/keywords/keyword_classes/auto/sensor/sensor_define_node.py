@@ -33,9 +33,10 @@ _SENSORDEFINENODE_CARD0 = (
     FieldSchema("sensid", int, 0, 10, None),
     FieldSchema("node1", int, 10, 10, None),
     FieldSchema("node2", int, 20, 10, None),
-    FieldSchema("vid", str, 30, 10, None),
+    FieldSchema("vid", int, 30, 10, None),
     FieldSchema("unused", int, 40, 10, None),
     FieldSchema("ctype", str, 50, 10, "ACC"),
+    FieldSchema("setopt", str, 60, 10, "AVG"),
 )
 
 _SENSORDEFINENODE_OPTION0_CARD0 = (
@@ -90,7 +91,7 @@ class SensorDefineNode(KeywordBase):
     def node1(self) -> typing.Optional[int]:
         """Get or set the For an accelerometer sensor, these fields are the nodes defining the accelerometer.  If CTYPE = TEMP, then the temperature at NODE1 will be output. If both NODE1 and NODE2 are defined, then the difference in temperature between these two nodes will be output.
         When the keyword option SET is active, NODE1 is a node set ID.If NODE2 is needed, it must be a node set of the same length as NODE1 with SETOPT defined, but it can be either a node or node set without SETOPT defined.
-        When the SET option is active but SETOPT is not defined, determining the status of a related* SENSOR_SWITCH depends on the sign of NODE1.See Remark 2 for details
+        When the SET option is active but SETOPT is not defined, determining the status of a related *SENSOR_SWITCH depends on the sign of NODE1.See Remark 2 for details
         """ # nopep8
         return self._cards[0].get_value("node1")
 
@@ -103,7 +104,7 @@ class SensorDefineNode(KeywordBase):
     def node2(self) -> typing.Optional[int]:
         """Get or set the For an accelerometer sensor, these fields are the nodes defining the accelerometer.If CTYPE = TEMP, then the temperature at NODE1 will be output.If both NODE1 and NODE2 are defined, then the difference in temperature between these two nodes will be output.
         When the keyword option SET is active, NODE1 is a node set ID.If NODE2 is needed, it must be a node set of the same length as NODE1 with SETOPT defined, but it can be either a node or node set without SETOPT defined.
-        When the SET option is active but SETOPT is not defined, determining the status of a related * SENSOR_SWITCH depends on the sign of NODE1.See Remark 2 for details
+        When the SET option is active but SETOPT is not defined, determining the status of a related *SENSOR_SWITCH depends on the sign of NODE1.See Remark 2 for details
         """ # nopep8
         return self._cards[0].get_value("node2")
 
@@ -113,32 +114,51 @@ class SensorDefineNode(KeywordBase):
         self._cards[0].set_value("node2", value)
 
     @property
-    def vid(self) -> typing.Optional[str]:
-        """Get or set the ID of vector along which the nodal values are measured, see *DEFINE_?VECTOR.  The magnitude of nodal values (coordinate, velocity, or acceleration) will be output if VID is 0 or undefined.
+    def vid(self) -> typing.Optional[int]:
+        """Get or set the ID of vector along which the nodal values are measured, see *DEFINE_  VECTOR.  The magnitude of nodal values (coordinate, velocity, or acceleration) will be output if VID is 0 or undefined.
         """ # nopep8
         return self._cards[0].get_value("vid")
 
     @vid.setter
-    def vid(self, value: str) -> None:
+    def vid(self, value: int) -> None:
         """Set the vid property."""
         self._cards[0].set_value("vid", value)
 
     @property
     def ctype(self) -> str:
         """Get or set the Output component type:
-        EQ.ACC:	acceleration
-        EQ.VEL:	velocity
+        EQ.ACC: acceleration
+        EQ.VEL: velocity
         EQ.COORD: Coordinate
-        EQ.TEMP:	Temperature
+        EQ.EPOT: Electric potential of piezoelectric material
+        EQ.TEMP: Temperature
         """ # nopep8
         return self._cards[0].get_value("ctype")
 
     @ctype.setter
     def ctype(self, value: str) -> None:
         """Set the ctype property."""
-        if value not in ["ACC", "VEL", "COORD", "TEMP", None]:
-            raise Exception("""ctype must be `None` or one of {"ACC","VEL","COORD","TEMP"}.""")
+        if value not in ["ACC", "VEL", "COORD", "EPOT", "TEMP", None]:
+            raise Exception("""ctype must be `None` or one of {"ACC","VEL","COORD","EPOT","TEMP"}.""")
         self._cards[0].set_value("ctype", value)
+
+    @property
+    def setopt(self) -> str:
+        """Get or set the Option to process set of data when SET option is specified. When SETOPT is specified, a single value will be reported. The single reported value could be:
+        EQ.AVG: The average value of the dataset
+        EQ.MAX: The maximum value of the dataset
+        EQ.MIN: The minimum value of the dataset
+        EQ.NS2NSMIND: The minimum distance between two set of nodes. CTYPE is ignored.
+        EQ.SUM: The sum of the dataset
+        """ # nopep8
+        return self._cards[0].get_value("setopt")
+
+    @setopt.setter
+    def setopt(self, value: str) -> None:
+        """Set the setopt property."""
+        if value not in ["AVG", "MAX", "MIN", "NS2NSMIND", "SUM", None]:
+            raise Exception("""setopt must be `None` or one of {"AVG","MAX","MIN","NS2NSMIND","SUM"}.""")
+        self._cards[0].set_value("setopt", value)
 
     @property
     def title(self) -> typing.Optional[str]:

@@ -32,14 +32,14 @@ _SETMULTIMATERIALGROUPLISTGPNAME_CARD0 = (
 )
 
 _SETMULTIMATERIALGROUPLISTGPNAME_CARD1 = (
-    FieldSchema("ammgid1", str, 0, 10, None),
-    FieldSchema("ammgid2", str, 10, 10, None),
-    FieldSchema("ammgid3", str, 20, 10, None),
-    FieldSchema("ammgid4", str, 30, 10, None),
-    FieldSchema("ammgid5", str, 40, 10, None),
-    FieldSchema("ammgid6", str, 50, 10, None),
-    FieldSchema("ammgid7", str, 60, 10, None),
-    FieldSchema("ammgid8", str, 70, 10, None),
+    FieldSchema("ammgid1", int, 0, 10, None),
+    FieldSchema("ammgid2", int, 10, 10, None),
+    FieldSchema("ammgid3", int, 20, 10, None),
+    FieldSchema("ammgid4", int, 30, 10, None),
+    FieldSchema("ammgid5", int, 40, 10, None),
+    FieldSchema("ammgid6", int, 50, 10, None),
+    FieldSchema("ammgid7", int, 60, 10, None),
+    FieldSchema("ammgid8", int, 70, 10, None),
 )
 
 _SETMULTIMATERIALGROUPLISTGPNAME_OPTION0_CARD0 = (
@@ -91,90 +91,90 @@ class SetMultiMaterialGroupListGpname(KeywordBase):
         self._cards[0].set_value("ammsid", value)
 
     @property
-    def ammgid1(self) -> typing.Optional[str]:
+    def ammgid1(self) -> typing.Optional[int]:
         """Get or set the The 1st ALE multi-material group ID (AMMGID=1) defined by the 1st line of the *ALE_MULTI-MATERIAL_GROUP card.
         """ # nopep8
         return self._cards[1].get_value("ammgid1")
 
     @ammgid1.setter
-    def ammgid1(self, value: str) -> None:
+    def ammgid1(self, value: int) -> None:
         """Set the ammgid1 property."""
         self._cards[1].set_value("ammgid1", value)
 
     @property
-    def ammgid2(self) -> typing.Optional[str]:
+    def ammgid2(self) -> typing.Optional[int]:
         """Get or set the The 2nd ALE multi-material group ID (AMMGID=1) defined by the 2nd line of the *ALE_MULTI-MATERIAL_GROUP card.
         """ # nopep8
         return self._cards[1].get_value("ammgid2")
 
     @ammgid2.setter
-    def ammgid2(self, value: str) -> None:
+    def ammgid2(self, value: int) -> None:
         """Set the ammgid2 property."""
         self._cards[1].set_value("ammgid2", value)
 
     @property
-    def ammgid3(self) -> typing.Optional[str]:
+    def ammgid3(self) -> typing.Optional[int]:
         """Get or set the The 3rd ALE multi-material group ID (AMMGID=1) defined by the 3rd line of the *ALE_MULTI-MATERIAL_GROUP card.
         """ # nopep8
         return self._cards[1].get_value("ammgid3")
 
     @ammgid3.setter
-    def ammgid3(self, value: str) -> None:
+    def ammgid3(self, value: int) -> None:
         """Set the ammgid3 property."""
         self._cards[1].set_value("ammgid3", value)
 
     @property
-    def ammgid4(self) -> typing.Optional[str]:
+    def ammgid4(self) -> typing.Optional[int]:
         """Get or set the The 4th ALE multi-material group ID (AMMGID=1) defined by the 4th line of the *ALE_MULTI-MATERIAL_GROUP card.
         """ # nopep8
         return self._cards[1].get_value("ammgid4")
 
     @ammgid4.setter
-    def ammgid4(self, value: str) -> None:
+    def ammgid4(self, value: int) -> None:
         """Set the ammgid4 property."""
         self._cards[1].set_value("ammgid4", value)
 
     @property
-    def ammgid5(self) -> typing.Optional[str]:
+    def ammgid5(self) -> typing.Optional[int]:
         """Get or set the The 5th ALE multi-material group ID (AMMGID=1) defined by the 5th line of the *ALE_MULTI-MATERIAL_GROUP card.
         """ # nopep8
         return self._cards[1].get_value("ammgid5")
 
     @ammgid5.setter
-    def ammgid5(self, value: str) -> None:
+    def ammgid5(self, value: int) -> None:
         """Set the ammgid5 property."""
         self._cards[1].set_value("ammgid5", value)
 
     @property
-    def ammgid6(self) -> typing.Optional[str]:
+    def ammgid6(self) -> typing.Optional[int]:
         """Get or set the The 6th ALE multi-material group ID (AMMGID=1) defined by the 6th line of the *ALE_MULTI-MATERIAL_GROUP card.
         """ # nopep8
         return self._cards[1].get_value("ammgid6")
 
     @ammgid6.setter
-    def ammgid6(self, value: str) -> None:
+    def ammgid6(self, value: int) -> None:
         """Set the ammgid6 property."""
         self._cards[1].set_value("ammgid6", value)
 
     @property
-    def ammgid7(self) -> typing.Optional[str]:
+    def ammgid7(self) -> typing.Optional[int]:
         """Get or set the The 7th ALE multi-material group ID (AMMGID=1) defined by the 7th line of the *ALE_MULTI-MATERIAL_GROUP card.
         """ # nopep8
         return self._cards[1].get_value("ammgid7")
 
     @ammgid7.setter
-    def ammgid7(self, value: str) -> None:
+    def ammgid7(self, value: int) -> None:
         """Set the ammgid7 property."""
         self._cards[1].set_value("ammgid7", value)
 
     @property
-    def ammgid8(self) -> typing.Optional[str]:
+    def ammgid8(self) -> typing.Optional[int]:
         """Get or set the The 8th ALE multi-material group ID (AMMGID=1) defined by the 8th line of the *ALE_MULTI-MATERIAL_GROUP card.
         """ # nopep8
         return self._cards[1].get_value("ammgid8")
 
     @ammgid8.setter
-    def ammgid8(self, value: str) -> None:
+    def ammgid8(self, value: int) -> None:
         """Set the ammgid8 property."""
         self._cards[1].set_value("ammgid8", value)
 

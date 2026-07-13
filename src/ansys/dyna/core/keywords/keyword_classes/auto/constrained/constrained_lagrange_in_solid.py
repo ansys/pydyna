@@ -161,7 +161,7 @@ class ConstrainedLagrangeInSolid(KeywordBase):
 
     @property
     def lstrsid(self) -> typing.Optional[int]:
-        """Get or set the Set ID defining a part, part set, or segment set ID of the Lagrangian structure (see *PART, *SET_‌PART or *SET_‌SEGMENT).  See Remark 1
+        """Get or set the Set ID defining a part, part set, or segment set ID of the Lagrangian structure (see *PART, *SET_PART or *SET_SEGMENT).  See Remark 1
         """ # nopep8
         return self._cards[1].get_value("lstrsid")
 
@@ -172,7 +172,7 @@ class ConstrainedLagrangeInSolid(KeywordBase):
 
     @property
     def alesid(self) -> typing.Optional[int]:
-        """Get or set the Set ID defining a part or part set ID of the ALE solid elements (see *PART or *SET_‌PART). See Remark 1
+        """Get or set the Set ID defining a part or part set ID of the ALE solid elements (see *PART or *SET_PART). See Remark 1
         """ # nopep8
         return self._cards[1].get_value("alesid")
 
@@ -229,24 +229,14 @@ class ConstrainedLagrangeInSolid(KeywordBase):
     @property
     def ctype(self) -> int:
         """Get or set the Fluid-Structure coupling method. CTYPEs(1, and 2) are not supported in MPP.
-        EQ.1:	Constrained acceleration.
-        EQ.2:	Constrained acceleration and velocity (default, see Remark 3).
-        EQ.3:	Constrained acceleration and velocity, normal direction only.
-        EQ.4:	Penalty coupling for shell  and solid elements (without erosion).
-        NOTE:	For RIGID Lagrangian Structure PARTS a penalty coupling method (CTYPE = 4) must be used.
-        EQ.5:	Penalty coupling allowing erosion in the Lagrangian entities.
-        EQ.6:	Penalty coupling designed for airbag modeling which
-        automatically controls the DIREC parameter internally.
-        It is equivalent to setting {CTYPE = 4; DIREC = 1} for unfolded region;
-        and {CTYPE = 4; DIREC = 2} for folded region.
-        For both cases: {ILEAK = 2; FRCMIN = 0.3}.
-        EQ.11:	Coupling designed to couple Lagrangian porous shell to ALE material.
-        When this option is used, THKF, the 7th column parameter of optional Card 4a
-        and the first 2 parameters of optional Card 4b must be defined.
-        See *LOAD_‌BODY_‌POROUS and Remark 13 below.
-        EQ.12:	Coupling designed to couple Lagrangian porous solid to ALE material.
-        When this option is used, Ai & Bi parameters of optional Card 4b must be defined (Card 4a must be defined but can be blank).
-        See *LOAD_‌BODY_‌POROUS and Remark 14 below.
+        EQ.1: Constrained acceleration.
+        EQ.2: Constrained acceleration and velocity (default, see Remark 3).
+        EQ.3: Constrained acceleration and velocity, normal direction only.
+        EQ.4: Penalty coupling for shell and solid elements (without erosion).NOTE: For RIGID Lagrangian Structure PARTS a penalty coupling method (CTYPE=4) must be used.
+        EQ.5: Penalty coupling allowing erosion in the Lagrangian entities.
+        EQ.6: Penalty coupling designed for airbag modeling which automatically controls the DIREC parameter internally. It is equivalent to setting {CTYPE=4; DIREC=1} for unfolded region and {CTYPE=4; DIREC=2} for folded region.For both cases: {ILEAK=2; FRCMIN=0.3}.
+        EQ.11: Coupling designed to couple Lagrangian porous shell to ALE material. When this option is used, THKF, the 7th column parameter of optional Card 4a and the first 2 parameters of optional Card 4b must be defined.See *LOAD_BODY_POROUS and Remark 13 below.
+        EQ.12: Coupling designed to couple Lagrangian porous solid to ALE material.When this option is used, Ai & Bi parameters of optional Card 4b must be defined (Card 4a must be defined but can be blank).See *LOAD_BODY_POROUS and Remark 14 below.
         """ # nopep8
         return self._cards[1].get_value("ctype")
 
@@ -314,8 +304,8 @@ class ConstrainedLagrangeInSolid(KeywordBase):
     @property
     def pfac(self) -> float:
         """Get or set the For Ctype 4,5 or 6.Penalty factor.  PFAC is a scale factor for scaling the estimated stiffness of the interacting (coupling) system.  It is used to compute the coupling forces to be distributed on the Lagrangian and ALE parts
-        GT.0:	Fraction of estimated critical stiffness.
-        LT.0 : PFAC must be an integer,and PFAC is a load curve ID.The curve defines the coupling pressure on the y - axis as a function of the penetration along the x - axis.  (See How to Correct Leakage)
+        GT.0: Fraction of estimated critical stiffness.
+        LT.0: PFAC must be an integer,and PFAC is a load curve ID.The curve defines the coupling pressure on the y - axis as a function of the penetration along the x - axis.  (See How to Correct Leakage)
         For CTYPE = 11 or 12
         Time step factor
         """ # nopep8
@@ -365,7 +355,7 @@ class ConstrainedLagrangeInSolid(KeywordBase):
     def normtyp(self) -> int:
         """Get or set the Penality spring direction(DIREC 1 and 2 ):
         EQ.0:Normal vectors are interpolated from nodal normals. (default).
-        EQ.1:	Normal vectors are interpolated from segment normals.This is sometimes a little more robust for sharp Lagrangian corners,and folds.
+        EQ.1: Normal vectors are interpolated from segment normals.This is sometimes a little more robust for sharp Lagrangian corners,and folds.
         """ # nopep8
         return self._cards[2].get_value("normtyp")
 
@@ -399,8 +389,8 @@ class ConstrainedLagrangeInSolid(KeywordBase):
     @property
     def hmin(self) -> typing.Optional[float]:
         """Get or set the The absolute value is minimum air gap in heat transfer, h_min (See Remark 8).
-        LT.0.0:	Turn on constraint based thermal nodal coupling between LAG structure and ALE fluids.
-        GE.0.0 : Minimum air gap.If zero, default to 10 - 6.
+        LT.0.0: Turn on constraint based thermal nodal coupling between LAG structure and ALE fluids.
+        GE.0.0: Minimum air gap.If zero, default to 10 - 6.
         """ # nopep8
         return self._cards[3].get_value("hmin")
 
@@ -422,7 +412,7 @@ class ConstrainedLagrangeInSolid(KeywordBase):
 
     @property
     def ileak(self) -> int:
-        """Get or set the Coupling leakage control flag :
+        """Get or set the Coupling leakage control flag:
         EQ.0: None(default),
         EQ.1: Weak,leakage control is turned off if penetrating volume fraction > FRCMIN + 0.2
         EQ.2: Strong.with improved energy consideration.  Leakage control is turned off if penetrating volume fraction > FRCMIN + 0.4
@@ -497,7 +487,7 @@ class ConstrainedLagrangeInSolid(KeywordBase):
 
     @property
     def ipenchk(self) -> int:
-        """Get or set the Initial penetration check flag (only for CTYPE=4, Remark 13): 	EQ.0: Do not check for initial penetration.EQ.1: Check and save initial ALE material penetration across a Lagrangian surface (d0), but do not activate coupling at t=0.  In subsequent steps (t>0) the actual penetration is computed as follows actual penetration 	= total penetration ¨C initial penetration da=dT ¨C d0
+        """Get or set the Initial penetration check flag (only for CTYPE=4, Remark 13): EQ.0: Do not check for initial penetration.EQ.1: Check and save initial ALE material penetration across a Lagrangian surface (d0), but do not activate coupling at t=0.  In subsequent steps (t>0) the actual penetration is computed as follows actual penetration  = total penetration C initial penetration da=dT C d0
         """ # nopep8
         return self._cards[4].get_value("ipenchk")
 
@@ -510,7 +500,7 @@ class ConstrainedLagrangeInSolid(KeywordBase):
 
     @property
     def intforc(self) -> int:
-        """Get or set the A flag to turn on or off (0=OFF or 1=ON) the output of ALE coupling pressure and forces on the Lagrangian segments (or surfaces).  Note that the coupling pressures and forces are computed based on the ALE fluid penetrations and coupling stiffness of the system.  When (1) INTFORC=1 and (2) a *DATABASE_BINARY_FSIFOR (DBF) card is defined, LS-DYNA writes out the segment coupling pressure and forces to the binary interface force file for contour plotting.  This interface force file is activated by executing ls971 as follows (3):	 ls971 i=inputfilename.k   h=interfaceforcefilename The time interval between output is defined by  dt  in the DBF card.  To plot the binary data in this file: lsprepost interfaceforcefilename.
+        """Get or set the A flag to turn on or off (0=OFF or 1=ON) the output of ALE coupling pressure and forces on the Lagrangian segments (or surfaces).  Note that the coupling pressures and forces are computed based on the ALE fluid penetrations and coupling stiffness of the system.  When (1) INTFORC=1 and (2) a *DATABASE_BINARY_FSIFOR (DBF) card is defined, LS-DYNA writes out the segment coupling pressure and forces to the binary interface force file for contour plotting.  This interface force file is activated by executing ls971 as follows (3): ls971 i=inputfilename.k   h=interfaceforcefilename The time interval between output is defined by  dt  in the DBF card.  To plot the binary data in this file: lsprepost interfaceforcefilename.
         """ # nopep8
         return self._cards[4].get_value("intforc")
 
@@ -536,7 +526,7 @@ class ConstrainedLagrangeInSolid(KeywordBase):
 
     @property
     def lagmul(self) -> float:
-        """Get or set the A Lagrange multiplier factor with a range between 0.0 and 0.05 may be defined.  A typical value may be 0.01.  This should never be greater than 0.1. 	EQ.0: OFF (default).GT.0: Turn ON the Lagrange-multiplier method and use LAGMUL as a coefficient for scaling the penalty factor
+        """Get or set the A Lagrange multiplier factor with a range between 0.0 and 0.05 may be defined.  A typical value may be 0.01.  This should never be greater than 0.1.  EQ.0: OFF (default).GT.0: Turn ON the Lagrange-multiplier method and use LAGMUL as a coefficient for scaling the penalty factor
         """ # nopep8
         return self._cards[4].get_value("lagmul")
 
@@ -560,7 +550,7 @@ class ConstrainedLagrangeInSolid(KeywordBase):
 
     @property
     def thkf(self) -> float:
-        """Get or set the (For all CTYPE choices except 11) A flag to account for the coupling thickness of the Lagrangian shell part.  LT.0: Use positive value of |THKF| for coupling segment thickness.EQ.0: Do not consider coupling segment thickness.GT.0: Coupling segment thickness scale factor.		For CTYPE=11 case (see Remark 14):  This thickness is required for volume calculation.GT.0: (Fabric) Thickness scale factor.  The base shell thickness is taken from the *PART definition.LT.0: User-defined (Fabric) thickness.  The fabric thickness is set to |THKF|.
+        """Get or set the (For all CTYPE choices except 11) A flag to account for the coupling thickness of the Lagrangian shell part.  LT.0: Use positive value of |THKF| for coupling segment thickness.EQ.0: Do not consider coupling segment thickness.GT.0: Coupling segment thickness scale factor.  For CTYPE=11 case (see Remark 14): This thickness is required for volume calculation.GT.0: (Fabric) Thickness scale factor.  The base shell thickness is taken from the *PART definition.LT.0: User-defined (Fabric) thickness.  The fabric thickness is set to |THKF|.
         """ # nopep8
         return self._cards[4].get_value("thkf")
 
@@ -582,7 +572,7 @@ class ConstrainedLagrangeInSolid(KeywordBase):
 
     @property
     def b1(self) -> typing.Optional[float]:
-        """Get or set the Inertial coefficient for the porous flow Ergun equation (see Remark 14).	For CTYPE=11, B1 = Bn = coefficient for normal-to-segment direction.		For CTYPE=12: B1 = Bx = coefficient for global X-direction
+        """Get or set the Inertial coefficient for the porous flow Ergun equation (see Remark 14). For CTYPE=11, B1 = Bn = coefficient for normal-to-segment direction.  For CTYPE=12: B1 = Bx = coefficient for global X-direction
         """ # nopep8
         return self._cards[5].get_value("b1")
 
@@ -626,7 +616,7 @@ class ConstrainedLagrangeInSolid(KeywordBase):
 
     @property
     def b3(self) -> typing.Optional[float]:
-        """Get or set the Inertial coefficient for the porous flow Ergun equation (see Remark 14).	For CTYPE=12: B3 = Bz = coefficient for global Z-direction
+        """Get or set the Inertial coefficient for the porous flow Ergun equation (see Remark 14). For CTYPE=12: B3 = Bz = coefficient for global Z-direction
         """ # nopep8
         return self._cards[5].get_value("b3")
 

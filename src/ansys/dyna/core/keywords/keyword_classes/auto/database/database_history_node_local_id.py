@@ -102,7 +102,7 @@ class DatabaseHistoryNodeLocalId(KeywordBase):
 
     @property
     def heading(self) -> typing.Optional[str]:
-        """Get or set the a description of the node.
+        """Get or set the a description of the node.Using a unique description is recommended.  This description is written into the d3hsp file and into the ASCII databases nodout and elout.
         """ # nopep8
         return self._cards[1].get_value("heading")
 

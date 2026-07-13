@@ -26,8 +26,6 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.keyword_base import LinkType
-from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MAT113_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -74,10 +72,6 @@ class Mat113(KeywordBase):
     _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
-    _link_fields = {
-        "vm0": LinkType.DEFINE_CURVE,
-        "k2": LinkType.DEFINE_CURVE,
-    }
 
     def __init__(self, **kwargs):
         """Initialize the Mat113 class."""
@@ -388,34 +382,4 @@ class Mat113(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
-
-    @property
-    def vm0_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for vm0."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.vm0:
-                return kwd
-        return None
-
-    @vm0_link.setter
-    def vm0_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for vm0."""
-        self.vm0 = value.lcid
-
-    @property
-    def k2_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for k2."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.k2:
-                return kwd
-        return None
-
-    @k2_link.setter
-    def k2_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for k2."""
-        self.k2 = value.lcid
 

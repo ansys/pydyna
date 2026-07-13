@@ -63,7 +63,7 @@ class InterfaceBlanksizeScaleFactor(KeywordBase):
     @property
     def sf(self) -> float:
         """Get or set the Scale factor for the IDCRV defined above.  It defines a fraction of the changes required for the predicted initial blank shape.
-        For example, if SF is set to 0.0 � the corresponding IDCRV will be excluded from the calculation (although the original initial curve still will be output);
+        For example, if SF is set to 0.0  the corresponding IDCRV will be excluded from the calculation (although the original initial curve still will be output);
         on the other hand, if SF is set to  1.0 , full change will be applied to obtain the modified initial blank that reflects the forming process.
         A SF of 0.5 will apply 50% of the changes required to map the initial blank.  This feature is especially important for inner holes that are small and hole boundary expansions are large,
         so the predicted initial hole can avoid  crisscross  situation.  An example is provided in Scale Factor and Symmetric Plane.

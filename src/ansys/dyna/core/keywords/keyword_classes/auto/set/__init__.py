@@ -85,9 +85,12 @@ from .set_iga_point_uvw_list_generate_collect import SetIgaPointUvwListGenerateC
 from .set_iga_point_uvw_list_generate_increment import SetIgaPointUvwListGenerateIncrement
 from .set_iga_point_uvw_list_generate_increment_collect import SetIgaPointUvwListGenerateIncrementCollect
 from .set_mode import SetMode
+from .set_mode_collect import SetModeCollect
 from .set_mode_list import SetModeList
+from .set_mode_list_collect import SetModeListCollect
 from .set_mode_list_generate import SetModeListGenerate
-from .set_multi__material_group_list import SetMulti_MaterialGroupList
+from .set_mode_list_generate_collect import SetModeListGenerateCollect
+from .set_multi_material_group import SetMultiMaterialGroup
 from .set_multi_material_group_list_gpname import SetMultiMaterialGroupListGpname
 from .set_node_add import SetNodeAdd
 from .set_node_add_advanced import SetNodeAddAdvanced
@@ -108,6 +111,8 @@ from .set_part_add import SetPartAdd
 from .set_part_collect import SetPartCollect
 from .set_part_column import SetPartColumn
 from .set_part_column_collect import SetPartColumnCollect
+from .set_part_general import SetPartGeneral
+from .set_part_general_collect import SetPartGeneralCollect
 from .set_part_list import SetPartList
 from .set_part_list_collect import SetPartListCollect
 from .set_part_list_generate import SetPartListGenerate
@@ -125,6 +130,7 @@ from .set_segment_collect import SetSegmentCollect
 from .set_segment_general import SetSegmentGeneral
 from .set_segment_general_collect import SetSegmentGeneralCollect
 from .set_segment_intersect import SetSegmentIntersect
+from .set_segment_n8 import SetSegmentN8
 from .set_shell_add import SetShellAdd
 from .set_shell_column import SetShellColumn
 from .set_shell_column_collect import SetShellColumnCollect
@@ -145,5 +151,4 @@ from .set_solid_general_collect import SetSolidGeneralCollect
 from .set_solid_generate import SetSolidGenerate
 from .set_solid_generate_collect import SetSolidGenerateCollect
 from .set_solid_generate_increment import SetSolidGenerateIncrement
-from .set_solid_generate_increment_collect import SetSolidGenerateIncrementCollect
 from .set_node_list import SetNode

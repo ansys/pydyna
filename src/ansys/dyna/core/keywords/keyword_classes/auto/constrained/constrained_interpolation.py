@@ -32,9 +32,9 @@ _CONSTRAINEDINTERPOLATION_CARD0 = (
     FieldSchema("icid", int, 0, 10, None),
     FieldSchema("dnid", int, 10, 10, 0),
     FieldSchema("ddof", int, 20, 10, 123456),
-    FieldSchema("cidd", int, 30, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
     FieldSchema("ityp", int, 40, 10, 0),
-    FieldSchema("idnsw", int, 50, 10, 0),
+    FieldSchema("idnsw", int, 50, 10, 1),
     FieldSchema("fgm", int, 60, 10, 0),
 )
 
@@ -42,11 +42,11 @@ _CONSTRAINEDINTERPOLATION_CARD1 = (
     FieldSchema("inid", int, 0, 10, 0),
     FieldSchema("idof", int, 10, 10, 123456),
     FieldSchema("twghtx", float, 20, 10, 1.0),
-    FieldSchema("twghty", float, 30, 10, 1.0),
-    FieldSchema("twghtz", float, 40, 10, 1.0),
-    FieldSchema("rwghtx", float, 50, 10, 1.0),
-    FieldSchema("rwghty", float, 60, 10, 1.0),
-    FieldSchema("rwghtz", float, 70, 10, 1.0),
+    FieldSchema("twghty", float, 30, 10, None),
+    FieldSchema("twghtz", float, 40, 10, None),
+    FieldSchema("rwghtx", float, 50, 10, None),
+    FieldSchema("rwghty", float, 60, 10, None),
+    FieldSchema("rwghtz", float, 70, 10, None),
 )
 
 class ConstrainedInterpolation(KeywordBase):
@@ -112,17 +112,6 @@ class ConstrainedInterpolation(KeywordBase):
         self._cards[0].set_value("ddof", value)
 
     @property
-    def cidd(self) -> typing.Optional[int]:
-        """Get or set the Local coordinate system ID of LOCAL option is active. If blank the global coordinate system is assumed.
-        """ # nopep8
-        return self._cards[0].get_value("cidd")
-
-    @cidd.setter
-    def cidd(self, value: int) -> None:
-        """Set the cidd property."""
-        self._cards[0].set_value("cidd", value)
-
-    @property
     def ityp(self) -> int:
         """Get or set the Specifies the meaning of INID.
         EQ.0: INID is a node ID
@@ -140,24 +129,24 @@ class ConstrainedInterpolation(KeywordBase):
     @property
     def idnsw(self) -> int:
         """Get or set the Switch for controlling the explicit solution  when an independent (or dependent) node is deleted.
-        EQ.0:	default to option 1.
-        EQ.1:	terminate the explicit analysis when an independent node or the dependent node is deleted.
-        EQ.2:	continue the explicit analysis with the constraints unchanged. .
+        EQ.0: default to option 1.
+        EQ.1: terminate the explicit analysis when an independent node or the dependent node is deleted.
+        EQ.2: continue the explicit analysis with the constraints unchanged. .
         """ # nopep8
         return self._cards[0].get_value("idnsw")
 
     @idnsw.setter
     def idnsw(self, value: int) -> None:
         """Set the idnsw property."""
-        if value not in [0, 1, 2, None]:
-            raise Exception("""idnsw must be `None` or one of {0,1,2}.""")
+        if value not in [1, 0, 2, None]:
+            raise Exception("""idnsw must be `None` or one of {1,0,2}.""")
         self._cards[0].set_value("idnsw", value)
 
     @property
     def fgm(self) -> int:
         """Get or set the Flag for special treatment of this constraint for implicit problems only:
-        EQ.0:	use standard constraint processing for implicit.
-        EQ.1 : use special processing for this constraint for implicit only; see Remarks.
+        EQ.0: use standard constraint processing for implicit.
+        EQ.1: use special processing for this constraint for implicit only; see Remarks.
         """ # nopep8
         return self._cards[0].get_value("fgm")
 
@@ -202,7 +191,7 @@ class ConstrainedInterpolation(KeywordBase):
         self._cards[1].set_value("twghtx", value)
 
     @property
-    def twghty(self) -> float:
+    def twghty(self) -> typing.Optional[float]:
         """Get or set the Weighting factor for node INID with active degrees-of-freedom IDOF.  This weight scales the y-translational component.
         """ # nopep8
         return self._cards[1].get_value("twghty")
@@ -213,7 +202,7 @@ class ConstrainedInterpolation(KeywordBase):
         self._cards[1].set_value("twghty", value)
 
     @property
-    def twghtz(self) -> float:
+    def twghtz(self) -> typing.Optional[float]:
         """Get or set the Weighting factor for node INID with active degrees-of-freedom IDOF.  This weight scales the z-translational component.
         """ # nopep8
         return self._cards[1].get_value("twghtz")
@@ -224,7 +213,7 @@ class ConstrainedInterpolation(KeywordBase):
         self._cards[1].set_value("twghtz", value)
 
     @property
-    def rwghtx(self) -> float:
+    def rwghtx(self) -> typing.Optional[float]:
         """Get or set the Weighting factor for node INID with active degrees-of-freedom IDOF.  This weight scales the x-rotational component.
         """ # nopep8
         return self._cards[1].get_value("rwghtx")
@@ -235,7 +224,7 @@ class ConstrainedInterpolation(KeywordBase):
         self._cards[1].set_value("rwghtx", value)
 
     @property
-    def rwghty(self) -> float:
+    def rwghty(self) -> typing.Optional[float]:
         """Get or set the Weighting factor for node INID with active degrees-of-freedom IDOF.  This weight scales the y-rotational component.
         """ # nopep8
         return self._cards[1].get_value("rwghty")
@@ -246,7 +235,7 @@ class ConstrainedInterpolation(KeywordBase):
         self._cards[1].set_value("rwghty", value)
 
     @property
-    def rwghtz(self) -> float:
+    def rwghtz(self) -> typing.Optional[float]:
         """Get or set the Weighting factor for node INID with active degrees-of-freedom IDOF.  This weight scales the z-rotational component.
         """ # nopep8
         return self._cards[1].get_value("rwghtz")

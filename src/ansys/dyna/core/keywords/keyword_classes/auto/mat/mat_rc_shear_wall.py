@@ -31,19 +31,19 @@ _MATRCSHEARWALL_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
     FieldSchema("ro", float, 10, 10, None),
     FieldSchema("e", float, 20, 10, None),
-    FieldSchema("pr", float, 30, 10, None),
-    FieldSchema("tmax", float, 40, 10, None),
+    FieldSchema("pr", float, 30, 10, 0.0),
+    FieldSchema("tmax", float, 40, 10, 0.0),
 )
 
 _MATRCSHEARWALL_CARD1 = (
-    FieldSchema("fc_", float, 0, 10, None, "fc'"),
-    FieldSchema("pref", float, 10, 10, None),
-    FieldSchema("fyield", float, 20, 10, None),
-    FieldSchema("sig0", float, 30, 10, None),
-    FieldSchema("unconv", float, 40, 10, None),
-    FieldSchema("alpha", float, 50, 10, None),
-    FieldSchema("ft", float, 60, 10, None),
-    FieldSchema("erienf", float, 70, 10, None),
+    FieldSchema("fc_", float, 0, 10, 0.0, "fc'"),
+    FieldSchema("pref", float, 10, 10, 0.0),
+    FieldSchema("fyield", float, 20, 10, 0.0),
+    FieldSchema("sig0", float, 30, 10, 0.0),
+    FieldSchema("unconv", float, 40, 10, 0.0),
+    FieldSchema("alpha", float, 50, 10, 0.0),
+    FieldSchema("ft", float, 60, 10, 0.0),
+    FieldSchema("erienf", float, 70, 10, 0.0),
 )
 
 _MATRCSHEARWALL_CARD2 = (
@@ -56,42 +56,42 @@ _MATRCSHEARWALL_CARD2 = (
 )
 
 _MATRCSHEARWALL_CARD3 = (
-    FieldSchema("y1", float, 0, 10, None),
-    FieldSchema("y2", float, 10, 10, None),
-    FieldSchema("y3", float, 20, 10, None),
-    FieldSchema("y4", float, 30, 10, None),
-    FieldSchema("y5", float, 40, 10, None),
+    FieldSchema("y1", float, 0, 10, 0.0),
+    FieldSchema("y2", float, 10, 10, 0.0),
+    FieldSchema("y3", float, 20, 10, 0.0),
+    FieldSchema("y4", float, 30, 10, 0.0),
+    FieldSchema("y5", float, 40, 10, 0.0),
 )
 
 _MATRCSHEARWALL_CARD4 = (
-    FieldSchema("t1", float, 0, 10, None),
-    FieldSchema("t2", float, 10, 10, None),
-    FieldSchema("t3", float, 20, 10, None),
-    FieldSchema("t4", float, 30, 10, None),
-    FieldSchema("t5", float, 40, 10, None),
+    FieldSchema("t1", float, 0, 10, 0.0),
+    FieldSchema("t2", float, 10, 10, 0.0),
+    FieldSchema("t3", float, 20, 10, 0.0),
+    FieldSchema("t4", float, 30, 10, 0.0),
+    FieldSchema("t5", float, 40, 10, 0.0),
 )
 
 _MATRCSHEARWALL_CARD5 = (
-    FieldSchema("aopt", float, 0, 10, None),
+    FieldSchema("aopt", float, 0, 10, 0.0),
 )
 
 _MATRCSHEARWALL_CARD6 = (
-    FieldSchema("xp", float, 0, 10, None),
-    FieldSchema("yp", float, 10, 10, None),
-    FieldSchema("zp", float, 20, 10, None),
-    FieldSchema("a1", float, 30, 10, None),
-    FieldSchema("a2", float, 40, 10, None),
-    FieldSchema("a3", float, 50, 10, None),
+    FieldSchema("xp", float, 0, 10, 0.0),
+    FieldSchema("yp", float, 10, 10, 0.0),
+    FieldSchema("zp", float, 20, 10, 0.0),
+    FieldSchema("a1", float, 30, 10, 0.0),
+    FieldSchema("a2", float, 40, 10, 0.0),
+    FieldSchema("a3", float, 50, 10, 0.0),
 )
 
 _MATRCSHEARWALL_CARD7 = (
-    FieldSchema("v1", float, 0, 10, None),
-    FieldSchema("v2", float, 10, 10, None),
-    FieldSchema("v3", float, 20, 10, None),
-    FieldSchema("d1", float, 30, 10, None),
-    FieldSchema("d2", float, 40, 10, None),
-    FieldSchema("d3", float, 50, 10, None),
-    FieldSchema("beta", float, 60, 10, None),
+    FieldSchema("v1", float, 0, 10, 0.0),
+    FieldSchema("v2", float, 10, 10, 0.0),
+    FieldSchema("v3", float, 20, 10, 0.0),
+    FieldSchema("d1", float, 30, 10, 0.0),
+    FieldSchema("d2", float, 40, 10, 0.0),
+    FieldSchema("d3", float, 50, 10, 0.0),
+    FieldSchema("beta", float, 60, 10, 0.0),
 )
 
 _MATRCSHEARWALL_OPTION0_CARD0 = (
@@ -157,7 +157,7 @@ class MatRcShearWall(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification. A unique number has to be used.
+        """Get or set the Material identification. A unique number or label not must be specified (see *PART).
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -189,7 +189,7 @@ class MatRcShearWall(KeywordBase):
         self._cards[0].set_value("e", value)
 
     @property
-    def pr(self) -> typing.Optional[float]:
+    def pr(self) -> float:
         """Get or set the Poisson's ratio.
         """ # nopep8
         return self._cards[0].get_value("pr")
@@ -200,9 +200,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[0].set_value("pr", value)
 
     @property
-    def tmax(self) -> typing.Optional[float]:
-        """Get or set the Ultimate shear stress.
-        EQ.0.0: LS-DYNA will calculate tmax based on the formular in the Universal Building Code, using the data on card 2 (default).
+    def tmax(self) -> float:
+        """Get or set the Ultimate in-plane shear stress. If set to zero, LS-DYNA calculates TMAX based on the formulae in the Uniform Building Code, using the data on Card 2. See Remark 3.
         """ # nopep8
         return self._cards[0].get_value("tmax")
 
@@ -212,7 +211,7 @@ class MatRcShearWall(KeywordBase):
         self._cards[0].set_value("tmax", value)
 
     @property
-    def fc_(self) -> typing.Optional[float]:
+    def fc_(self) -> float:
         """Get or set the Unconfined Compressive Strength of concrete.
         Used in the calculation of ultimate shear stress; crushing behaviour is not modelled.
         """ # nopep8
@@ -224,9 +223,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[1].set_value("fc_", value)
 
     @property
-    def pref(self) -> typing.Optional[float]:
-        """Get or set the Percent reinforcement, e.g if 1.2% reinforcement, enter 1.2.
-        Default is set to 0.0.
+    def pref(self) -> float:
+        """Get or set the Percent reinforcement, For example, if 1.2% of the material is reinforcement, enter 1.2.
         """ # nopep8
         return self._cards[1].get_value("pref")
 
@@ -236,9 +234,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[1].set_value("pref", value)
 
     @property
-    def fyield(self) -> typing.Optional[float]:
+    def fyield(self) -> float:
         """Get or set the Yield stress of reinforcement.
-        Default is set to 0.0
         """ # nopep8
         return self._cards[1].get_value("fyield")
 
@@ -248,9 +245,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[1].set_value("fyield", value)
 
     @property
-    def sig0(self) -> typing.Optional[float]:
-        """Get or set the Overburden stress (in-plane compressive stress) - used in the calculation of ultimate shear stress.
-        Usually SIG0 is left as zero (default).
+    def sig0(self) -> float:
+        """Get or set the Overburden stress (in-plane compressive stress). It is used in the calculation of ultimate shear stress. Usually, SIG0 is left as zero.
         """ # nopep8
         return self._cards[1].get_value("sig0")
 
@@ -260,13 +256,13 @@ class MatRcShearWall(KeywordBase):
         self._cards[1].set_value("sig0", value)
 
     @property
-    def unconv(self) -> typing.Optional[float]:
-        """Get or set the Unit conversion factor. UCONV = SQRT (1psi in the model stress units).
-        This is needed because the ultimate tensile stress of concrete is expessed as SQRT(fc') where fc' is in psi. Therefore a unit conversion factor of sqrt(psi/stress unit) is required.
-
-        Example:
-        UCONV =0.083 if stress unit is MN/m2 or N/mm2
-        UCONV = 83.3 if stress unit is N/m2
+    def unconv(self) -> float:
+        """Get or set the Unit conversion factor. UCONV = SQRT (1.0 psi in the model stress units).
+        This factor is used to convert the ultimate tensile stress of concrete which is expressed as SQRT(FC) where FC is given in PSI.
+        Therefore a unit conversion factor of sqrt(PSI/STRESS UNIT) is required.
+        Examples:
+        UCONV = 83.3 = sqrt(6894) if the stress unit is N/m2
+        UCONV = 0.083 if the stress unit is MN/m2 or N/mm2
         """ # nopep8
         return self._cards[1].get_value("unconv")
 
@@ -276,8 +272,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[1].set_value("unconv", value)
 
     @property
-    def alpha(self) -> typing.Optional[float]:
-        """Get or set the Shear span factor.
+    def alpha(self) -> float:
+        """Get or set the Shear span factor. See Remark 3.
         """ # nopep8
         return self._cards[1].get_value("alpha")
 
@@ -287,9 +283,9 @@ class MatRcShearWall(KeywordBase):
         self._cards[1].set_value("alpha", value)
 
     @property
-    def ft(self) -> typing.Optional[float]:
+    def ft(self) -> float:
         """Get or set the Cracking stress in direct tension.
-        Default is 8% of the cylinder strength.
+        See Remark 5. Default is 8% of the cylinder strength.
         """ # nopep8
         return self._cards[1].get_value("ft")
 
@@ -299,8 +295,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[1].set_value("ft", value)
 
     @property
-    def erienf(self) -> typing.Optional[float]:
-        """Get or set the Young's modulus of reinforcement. Used in calculation of post-cracked stiffness .
+    def erienf(self) -> float:
+        """Get or set the Young's modulus of the reinforcement. It is used to calculate the post-cracked stiffness. See Remark 5.
         """ # nopep8
         return self._cards[1].get_value("erienf")
 
@@ -383,9 +379,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[2].set_value("f", value)
 
     @property
-    def y1(self) -> typing.Optional[float]:
-        """Get or set the First shear strain point on stress-strain curve.
-        By default these are calculated from the values on card 1.
+    def y1(self) -> float:
+        """Get or set the Engineering shear strain points on stress-strain curve. By default, these are calculated from the values on Card 1. See Remark 3.
         """ # nopep8
         return self._cards[3].get_value("y1")
 
@@ -395,9 +390,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[3].set_value("y1", value)
 
     @property
-    def y2(self) -> typing.Optional[float]:
-        """Get or set the Second shear strain point on stress-strain curve.
-        By default these are calculated from the values on card 1.
+    def y2(self) -> float:
+        """Get or set the Engineering shear strain points on stress-strain curve. By default, these are calculated from the values on Card 1. See Remark 3.
         """ # nopep8
         return self._cards[3].get_value("y2")
 
@@ -407,9 +401,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[3].set_value("y2", value)
 
     @property
-    def y3(self) -> typing.Optional[float]:
-        """Get or set the Third shear strain point on stress-strain curve.
-        By default these are calculated from the values on card 1.
+    def y3(self) -> float:
+        """Get or set the Engineering shear strain points on stress-strain curve. By default, these are calculated from the values on Card 1. See Remark 3.
         """ # nopep8
         return self._cards[3].get_value("y3")
 
@@ -419,9 +412,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[3].set_value("y3", value)
 
     @property
-    def y4(self) -> typing.Optional[float]:
-        """Get or set the Fourth shear strain point on stress-strain curve.
-        By default these are calculated from the values on card 1.
+    def y4(self) -> float:
+        """Get or set the Engineering shear strain points on stress-strain curve. By default, these are calculated from the values on Card 1. See Remark 3.
         """ # nopep8
         return self._cards[3].get_value("y4")
 
@@ -431,9 +423,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[3].set_value("y4", value)
 
     @property
-    def y5(self) -> typing.Optional[float]:
-        """Get or set the Fifth shear strain point on stress-strain curve.
-        By default these are calculated from the values on card 1.
+    def y5(self) -> float:
+        """Get or set the Engineering shear strain points on stress-strain curve. By default, these are calculated from the values on Card 1. See Remark 3.
         """ # nopep8
         return self._cards[3].get_value("y5")
 
@@ -443,9 +434,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[3].set_value("y5", value)
 
     @property
-    def t1(self) -> typing.Optional[float]:
-        """Get or set the Coresponding shear stress point on stress-strain curve.
-        By default these are calculated from the values on card 1.
+    def t1(self) -> float:
+        """Get or set the Shear stress points on stress-strain curve. By default, these are calculated from the values on Card 1. See Remark 3.
         """ # nopep8
         return self._cards[4].get_value("t1")
 
@@ -455,9 +445,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[4].set_value("t1", value)
 
     @property
-    def t2(self) -> typing.Optional[float]:
-        """Get or set the Coresponding shear stress point on stress-strain curve.
-        By default these are calculated from the values on card 1.
+    def t2(self) -> float:
+        """Get or set the Shear stress points on stress-strain curve. By default, these are calculated from the values on Card 1. See Remark 3.
         """ # nopep8
         return self._cards[4].get_value("t2")
 
@@ -467,9 +456,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[4].set_value("t2", value)
 
     @property
-    def t3(self) -> typing.Optional[float]:
-        """Get or set the Coresponding shear stress point on stress-strain curve.
-        By default these are calculated from the values on card 1.
+    def t3(self) -> float:
+        """Get or set the Shear stress points on stress-strain curve. By default, these are calculated from the values on Card 1. See Remark 3.
         """ # nopep8
         return self._cards[4].get_value("t3")
 
@@ -479,9 +467,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[4].set_value("t3", value)
 
     @property
-    def t4(self) -> typing.Optional[float]:
-        """Get or set the Coresponding shear stress point on stress-strain curve.
-        By default these are calculated from the values on card 1.
+    def t4(self) -> float:
+        """Get or set the Shear stress points on stress-strain curve. By default, these are calculated from the values on Card 1. See Remark 3.
         """ # nopep8
         return self._cards[4].get_value("t4")
 
@@ -491,9 +478,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[4].set_value("t4", value)
 
     @property
-    def t5(self) -> typing.Optional[float]:
-        """Get or set the Coresponding shear stress point on stress-strain curve.
-        By default these are calculated from the values on card 1.
+    def t5(self) -> float:
+        """Get or set the Shear stress points on stress-strain curve. By default, these are calculated from the values on Card 1. See Remark 3.
         """ # nopep8
         return self._cards[4].get_value("t5")
 
@@ -503,17 +489,17 @@ class MatRcShearWall(KeywordBase):
         self._cards[4].set_value("t5", value)
 
     @property
-    def aopt(self) -> typing.Optional[float]:
-        """Get or set the Material axes option:
-        EQ.0.0: locally orthotropic with material axes determined by
-        element nodes as shown in Figure M2-1, and then rotated
-        about the shell element normal by the angle BETA., Nodes 1, 2, and 4 of an element are identical to the nodes
-        used for the definition of a coordinate system as by *DEFINE_COORDINATE_NODES.
-        EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
-        EQ.3.0:applicable to shell elements only.  This option determines locally orthotropic material axes by offsetting the material axes by an angle to be specified
-        from a line in the plane of the shell determined by taking the cross product of the vector v defined below with the shell normal vector.
-        LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
-        *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
+    def aopt(self) -> float:
+        """Get or set the Material axes option(see *MAT_OPTIONTROPIC_ELASTIC for more details):
+        EQ.0.0: Locally orthotropic with material axes determined by
+        element nodes as shown in Figure ERRORError! Reference source not found., and then rotated about the shell element normal by the angle BETA.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
+        EQ.3.0:Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element (see
+        Figure Error! Reference source not found.). a is determined by taking the cross product of v with the normal vector, b is
+        determined by taking the cross product of the normal vector with a, and c is the normal vector. Then a and b are rotated
+        about c by an angle BETA. BETA may be set in the keyword input for the element or in the input for this keyword.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
+        *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR).
         """ # nopep8
         return self._cards[5].get_value("aopt")
 
@@ -523,7 +509,7 @@ class MatRcShearWall(KeywordBase):
         self._cards[5].set_value("aopt", value)
 
     @property
-    def xp(self) -> typing.Optional[float]:
+    def xp(self) -> float:
         """Get or set the x-coordinate of point p for AOPT = 1.
         """ # nopep8
         return self._cards[6].get_value("xp")
@@ -534,7 +520,7 @@ class MatRcShearWall(KeywordBase):
         self._cards[6].set_value("xp", value)
 
     @property
-    def yp(self) -> typing.Optional[float]:
+    def yp(self) -> float:
         """Get or set the y-coordinate of point p for AOPT = 1.
         """ # nopep8
         return self._cards[6].get_value("yp")
@@ -545,7 +531,7 @@ class MatRcShearWall(KeywordBase):
         self._cards[6].set_value("yp", value)
 
     @property
-    def zp(self) -> typing.Optional[float]:
+    def zp(self) -> float:
         """Get or set the z-coordinate of point p for AOPT = 1.
         """ # nopep8
         return self._cards[6].get_value("zp")
@@ -556,7 +542,7 @@ class MatRcShearWall(KeywordBase):
         self._cards[6].set_value("zp", value)
 
     @property
-    def a1(self) -> typing.Optional[float]:
+    def a1(self) -> float:
         """Get or set the Component of vector a for AOPT = 2.
         """ # nopep8
         return self._cards[6].get_value("a1")
@@ -567,7 +553,7 @@ class MatRcShearWall(KeywordBase):
         self._cards[6].set_value("a1", value)
 
     @property
-    def a2(self) -> typing.Optional[float]:
+    def a2(self) -> float:
         """Get or set the Component of vector a for AOPT = 2.
         """ # nopep8
         return self._cards[6].get_value("a2")
@@ -578,7 +564,7 @@ class MatRcShearWall(KeywordBase):
         self._cards[6].set_value("a2", value)
 
     @property
-    def a3(self) -> typing.Optional[float]:
+    def a3(self) -> float:
         """Get or set the Component of vector a for AOPT = 2.
         """ # nopep8
         return self._cards[6].get_value("a3")
@@ -589,7 +575,7 @@ class MatRcShearWall(KeywordBase):
         self._cards[6].set_value("a3", value)
 
     @property
-    def v1(self) -> typing.Optional[float]:
+    def v1(self) -> float:
         """Get or set the Component of vector v for AOPT = 3.
         """ # nopep8
         return self._cards[7].get_value("v1")
@@ -600,7 +586,7 @@ class MatRcShearWall(KeywordBase):
         self._cards[7].set_value("v1", value)
 
     @property
-    def v2(self) -> typing.Optional[float]:
+    def v2(self) -> float:
         """Get or set the Component of vector v for AOPT = 3.
         """ # nopep8
         return self._cards[7].get_value("v2")
@@ -611,7 +597,7 @@ class MatRcShearWall(KeywordBase):
         self._cards[7].set_value("v2", value)
 
     @property
-    def v3(self) -> typing.Optional[float]:
+    def v3(self) -> float:
         """Get or set the Component of vector v for AOPT = 3.
         """ # nopep8
         return self._cards[7].get_value("v3")
@@ -622,7 +608,7 @@ class MatRcShearWall(KeywordBase):
         self._cards[7].set_value("v3", value)
 
     @property
-    def d1(self) -> typing.Optional[float]:
+    def d1(self) -> float:
         """Get or set the Component of vector d for AOPT = 2.
         """ # nopep8
         return self._cards[7].get_value("d1")
@@ -633,7 +619,7 @@ class MatRcShearWall(KeywordBase):
         self._cards[7].set_value("d1", value)
 
     @property
-    def d2(self) -> typing.Optional[float]:
+    def d2(self) -> float:
         """Get or set the Component of vector d for AOPT = 2.
         """ # nopep8
         return self._cards[7].get_value("d2")
@@ -644,7 +630,7 @@ class MatRcShearWall(KeywordBase):
         self._cards[7].set_value("d2", value)
 
     @property
-    def d3(self) -> typing.Optional[float]:
+    def d3(self) -> float:
         """Get or set the Component of vector d for AOPT = 2.
         """ # nopep8
         return self._cards[7].get_value("d3")
@@ -655,8 +641,8 @@ class MatRcShearWall(KeywordBase):
         self._cards[7].set_value("d3", value)
 
     @property
-    def beta(self) -> typing.Optional[float]:
-        """Get or set the Material angle in degrees for AOPT = 3, may be overridden on the element card, see *ELEMENT_SHELL_BETA.
+    def beta(self) -> float:
+        """Get or set the Material angle in degrees for AOPT = 0 and 3. It may be overridden on the element card, see *ELEMENT_SHELL_BETA.
         """ # nopep8
         return self._cards[7].get_value("beta")
 

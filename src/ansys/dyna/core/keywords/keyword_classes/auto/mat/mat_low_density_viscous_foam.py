@@ -52,6 +52,13 @@ _MATLOWDENSITYVISCOUSFOAM_CARD1 = (
 )
 
 _MATLOWDENSITYVISCOUSFOAM_CARD2 = (
+    FieldSchema("lcid3", int, 0, 10, None),
+    FieldSchema("lcid4", int, 10, 10, None),
+    FieldSchema("scalew", int, 20, 10, None),
+    FieldSchema("scalea", int, 30, 10, None),
+)
+
+_MATLOWDENSITYVISCOUSFOAM_CARD3 = (
     FieldSchema("gi", float, 0, 10, None),
     FieldSchema("betai", float, 10, 10, None),
     FieldSchema("ref", float, 20, 10, None),
@@ -72,6 +79,8 @@ class MatLowDensityViscousFoam(KeywordBase):
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
         "lcid2": LinkType.DEFINE_CURVE,
+        "lcid3": LinkType.DEFINE_CURVE,
+        "lcid4": LinkType.DEFINE_CURVE,
     }
 
     def __init__(self, **kwargs):
@@ -89,6 +98,10 @@ class MatLowDensityViscousFoam(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _MATLOWDENSITYVISCOUSFOAM_CARD2,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MATLOWDENSITYVISCOUSFOAM_CARD3,
                 **kwargs,
             ),
             OptionCardSet(
@@ -218,8 +231,8 @@ class MatLowDensityViscousFoam(KeywordBase):
     @property
     def bvflag(self) -> typing.Optional[float]:
         """Get or set the Bulk viscosity activation flag:
-        EQ.0.0: no bulk viscosity (default),
-        EQ.1.0: bulk viscosity active.
+        EQ.0.0: No bulk viscosity (default),
+        EQ.1.0: Bulk viscosity active.
         """ # nopep8
         return self._cards[1].get_value("bvflag")
 
@@ -230,7 +243,7 @@ class MatLowDensityViscousFoam(KeywordBase):
 
     @property
     def kcon(self) -> typing.Optional[float]:
-        """Get or set the Stiffness coefficient for contact interface stiffness. Maximum slope in stress vs. strain curve is used. When the maximum slope is taken for the contact, the time step size for this material is reduced for stability. In some cases dt may be significantly smaller, and defining a reasonable stiffness is recommended.
+        """Get or set the Stiffness coefficient for contact interface stiffness.  If undefined, the maximum slope in the stress-strain curve is used.  When the maximum slope is taken for the contact, the time step size for this material is reduced for stability.  In some cases, Δt may be significantly smaller, so defining a reasonable stiffness is recommended.
         """ # nopep8
         return self._cards[1].get_value("kcon")
 
@@ -286,50 +299,98 @@ class MatLowDensityViscousFoam(KeywordBase):
         self._cards[1].set_value("nv", value)
 
     @property
+    def lcid3(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID giving the magnitude of the shear modulus as a function of the frequency. LCID3 must use the same frequencies as LCID4.
+        """ # nopep8
+        return self._cards[2].get_value("lcid3")
+
+    @lcid3.setter
+    def lcid3(self, value: int) -> None:
+        """Set the lcid3 property."""
+        self._cards[2].set_value("lcid3", value)
+
+    @property
+    def lcid4(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID giving the phase angle of the shear modulus as a function of the frequency. LCID4 must use the same frequencies as LCID3.
+        """ # nopep8
+        return self._cards[2].get_value("lcid4")
+
+    @lcid4.setter
+    def lcid4(self, value: int) -> None:
+        """Set the lcid4 property."""
+        self._cards[2].set_value("lcid4", value)
+
+    @property
+    def scalew(self) -> typing.Optional[int]:
+        """Get or set the Flag for the form of the frequency data:
+        EQ.0: Frequency is in cycles per unit time.
+        EQ.1: Circular frequency.
+        """ # nopep8
+        return self._cards[2].get_value("scalew")
+
+    @scalew.setter
+    def scalew(self, value: int) -> None:
+        """Set the scalew property."""
+        self._cards[2].set_value("scalew", value)
+
+    @property
+    def scalea(self) -> typing.Optional[int]:
+        """Get or set the Flag for the units of the phase angle:
+        EQ.0: Degrees
+        EQ.1: Radians
+        """ # nopep8
+        return self._cards[2].get_value("scalea")
+
+    @scalea.setter
+    def scalea(self, value: int) -> None:
+        """Set the scalea property."""
+        self._cards[2].set_value("scalea", value)
+
+    @property
     def gi(self) -> typing.Optional[float]:
         """Get or set the Optional shear relaxation modulus for the i'th term.
         """ # nopep8
-        return self._cards[2].get_value("gi")
+        return self._cards[3].get_value("gi")
 
     @gi.setter
     def gi(self, value: float) -> None:
         """Set the gi property."""
-        self._cards[2].set_value("gi", value)
+        self._cards[3].set_value("gi", value)
 
     @property
     def betai(self) -> typing.Optional[float]:
         """Get or set the Optional decay constant for the i'th term.
         """ # nopep8
-        return self._cards[2].get_value("betai")
+        return self._cards[3].get_value("betai")
 
     @betai.setter
     def betai(self, value: float) -> None:
         """Set the betai property."""
-        self._cards[2].set_value("betai", value)
+        self._cards[3].set_value("betai", value)
 
     @property
     def ref(self) -> typing.Optional[float]:
-        """Get or set the Use reference geometry to initialize the stress tensor. The reference geometry is defined by the keyword: *INITIAL_FOAM_REFERENC_GEOMETRY. This option is currently restricted to 8-noded solid elements with one point integration.
-        EQ.0.0: off (default),
-        EQ.1.0: on.
+        """Get or set the Use reference geometry to initialize the stress tensor.  *INITIAL_FOAM_REFERENCE_GEOMETRY defines the reference geometry.
+        EQ.0.0: Off
+        EQ.1.0 : On
         """ # nopep8
-        return self._cards[2].get_value("ref")
+        return self._cards[3].get_value("ref")
 
     @ref.setter
     def ref(self, value: float) -> None:
         """Set the ref property."""
-        self._cards[2].set_value("ref", value)
+        self._cards[3].set_value("ref", value)
 
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[3].cards[0].get_value("title")
+        return self._cards[4].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[3].cards[0].set_value("title", value)
+        self._cards[4].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
@@ -363,4 +424,34 @@ class MatLowDensityViscousFoam(KeywordBase):
     def lcid2_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid2."""
         self.lcid2 = value.lcid
+
+    @property
+    def lcid3_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcid3."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid3:
+                return kwd
+        return None
+
+    @lcid3_link.setter
+    def lcid3_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid3."""
+        self.lcid3 = value.lcid
+
+    @property
+    def lcid4_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcid4."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid4:
+                return kwd
+        return None
+
+    @lcid4_link.setter
+    def lcid4_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid4."""
+        self.lcid4 = value.lcid
 

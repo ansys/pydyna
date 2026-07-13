@@ -31,6 +31,9 @@ _CONTROLFORMINGONESTEPAUTOCONSTRAINT_CARD0 = (
     FieldSchema("node1", int, 10, 10, None),
     FieldSchema("node2", int, 20, 10, None),
     FieldSchema("node3", int, 30, 10, None),
+    FieldSchema("padid", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("idraw", int, 60, 10, None),
 )
 
 class ControlFormingOnestepAutoConstraint(KeywordBase):
@@ -61,7 +64,7 @@ class ControlFormingOnestepAutoConstraint(KeywordBase):
 
     @property
     def node1(self) -> typing.Optional[int]:
-        """Get or set the Node IDs on the final part which will be used to transform the unfolded blank, so the same node ID on the final part and unfolded blank will be coincident.  Without defining these nodes, the unfolded blank will be in an arbitrary orientation with respect to the final part.
+        """Get or set the Node IDs for which the position is fixed during the unfolding.  The position of these nodes in the calculated unfolded piece will coincide with the corresponding nodes in the input.  The transformed and unfolded blank is written to keyword file repositioned.k.  When these fields are undefined, the orientation of the unfolded blank is arbitrary.  As of R11, the file repositioned.k is always output regardless of whether these fields are defined.
         """ # nopep8
         return self._cards[0].get_value("node1")
 
@@ -72,7 +75,7 @@ class ControlFormingOnestepAutoConstraint(KeywordBase):
 
     @property
     def node2(self) -> typing.Optional[int]:
-        """Get or set the Node IDs on the final part which will be used to transform the unfolded blank, so the same node ID on the final part and unfolded blank will be coincident.  Without defining these nodes, the unfolded blank will be in an arbitrary orientation with respect to the final part.
+        """Get or set the Node IDs for which the position is fixed during the unfolding.  The position of these nodes in the calculated unfolded piece will coincide with the corresponding nodes in the input.  The transformed and unfolded blank is written to keyword file repositioned.k.  When these fields are undefined, the orientation of the unfolded blank is arbitrary.  As of R11, the file repositioned.k is always output regardless of whether these fields are defined.
         """ # nopep8
         return self._cards[0].get_value("node2")
 
@@ -83,7 +86,7 @@ class ControlFormingOnestepAutoConstraint(KeywordBase):
 
     @property
     def node3(self) -> typing.Optional[int]:
-        """Get or set the Node IDs on the final part which will be used to transform the unfolded blank, so the same node ID on the final part and unfolded blank will be coincident.  Without defining these nodes, the unfolded blank will be in an arbitrary orientation with respect to the final part.
+        """Get or set the Node IDs for which the position is fixed during the unfolding.  The position of these nodes in the calculated unfolded piece will coincide with the corresponding nodes in the input.  The transformed and unfolded blank is written to keyword file repositioned.k.  When these fields are undefined, the orientation of the unfolded blank is arbitrary.  As of R11, the file repositioned.k is always output regardless of whether these fields are defined.
         """ # nopep8
         return self._cards[0].get_value("node3")
 
@@ -91,4 +94,29 @@ class ControlFormingOnestepAutoConstraint(KeywordBase):
     def node3(self, value: int) -> None:
         """Set the node3 property."""
         self._cards[0].set_value("node3", value)
+
+    @property
+    def padid(self) -> typing.Optional[int]:
+        """Get or set the Optional shell set ID defining the binder region. If the pad is defined, the final flat blank is positioned using the pad as reference, such that the (x,y) mass centers match. Note that the pad region must be flat and the 3D meshes must be close to each other.
+        """ # nopep8
+        return self._cards[0].get_value("padid")
+
+    @padid.setter
+    def padid(self, value: int) -> None:
+        """Set the padid property."""
+        self._cards[0].set_value("padid", value)
+
+    @property
+    def idraw(self) -> typing.Optional[int]:
+        """Get or set the Draw orientation:
+        EQ. - 1:	Reorient the part based on an approximate draw orientation if possible.This option may improve the consistency of the one - step prediction.
+        EQ.0 : Do not reorient the part based on an approximate draw orientation
+        GT.0:	Vector ID defining the drawing direction
+        """ # nopep8
+        return self._cards[0].get_value("idraw")
+
+    @idraw.setter
+    def idraw(self, value: int) -> None:
+        """Set the idraw property."""
+        self._cards[0].set_value("idraw", value)
 

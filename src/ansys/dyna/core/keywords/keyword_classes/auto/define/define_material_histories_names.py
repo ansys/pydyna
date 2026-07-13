@@ -78,7 +78,7 @@ class DefineMaterialHistoriesNames(KeywordBase):
         ]
     @property
     def label(self) -> typing.Optional[str]:
-        """Get or set the String identifying history variable type.
+        """Get or set the String identifying history variable type.Labels are case-sensitive. See section LABEL below and Remark 4. By prefixing the label with (capital letter) X, the current history variable will not be printed to the binary database.
         """ # nopep8
         return self._cards[0].get_value("label")
 

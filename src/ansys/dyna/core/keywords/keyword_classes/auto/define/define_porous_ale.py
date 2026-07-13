@@ -117,7 +117,7 @@ class DefinePorousAle(KeywordBase):
     @property
     def eidbeg(self) -> typing.Optional[int]:
         """Get or set the EIDBEG, EIDEND > 0: Range of thick porous element IDs. These are solids in 3D and shells in 2D.
-        EIDBEG, EIDEND < 0: Range of thin porous element IDs.	These are shells in 3D and beams in 2D.
+        EIDBEG, EIDEND < 0: Range of thin porous element IDs. These are shells in 3D and beams in 2D.
         The ALE option does not support thin porous elements.
         EIDBEG > 0, EIDEND = 0: EIDBEG is a set of thick porous
         elements
@@ -133,7 +133,7 @@ class DefinePorousAle(KeywordBase):
     @property
     def eidend(self) -> int:
         """Get or set the EIDBEG, EIDEND > 0: Range of thick porous element IDs. These are solids in 3D and shells in 2D.
-        EIDBEG, EIDEND < 0: Range of thin porous element IDs.	These are shells in 3D and beams in 2D.
+        EIDBEG, EIDEND < 0: Range of thin porous element IDs. These are shells in 3D and beams in 2D.
         The ALE option does not support thin porous elements.
         EIDBEG > 0, EIDEND = 0: EIDBEG is a set of thick porous
         elements
@@ -153,8 +153,8 @@ class DefinePorousAle(KeywordBase):
         EQ.1: The forces are applied in a local system attached to the
         element. The system is consistent with DIREC = 1 and
         CTYPE = 12 in *CONSTRAINED_LAGRANGE_IN_SOLID.
-        For CTYPE = 11, LOCAL is always 1 and the 𝑥-axis is
-        aligned with the element normal while the 𝑦-axis passes
+        For CTYPE = 11, LOCAL is always 1 and the -axis is
+        aligned with the element normal while the -axis passes
         through the element center and the first node in the element
         connectivity (*ELEMENT_BEAM in 2D or *ELEMENT_SHELL in 3D).
         """ # nopep8
@@ -170,10 +170,10 @@ class DefinePorousAle(KeywordBase):
     @property
     def vecid1(self) -> int:
         """Get or set the *DEFINE_VECTOR IDs to define a specific coordinate system. VECID1
-        and VECID2 give the 𝑥- and 𝑦-direction respectively. The 𝑧-
+        and VECID2 give the - and -direction respectively. The -
         vector is a cross product of VECID1 and VECID2. If this latter is not
         orthogonal to VECID1, its direction will be corrected with a crossproduct
-        of 𝑧- and 𝑥-vectors. The vectors are stored as isoparametric
+        of - and -vectors. The vectors are stored as isoparametric
         locations to update their directions if the element deforms or rotates.
         """ # nopep8
         return self._cards[0].get_value("vecid1")
@@ -186,10 +186,10 @@ class DefinePorousAle(KeywordBase):
     @property
     def vecid2(self) -> int:
         """Get or set the *DEFINE_VECTOR IDs to define a specific coordinate system. VECID1
-        and VECID2 give the 𝑥- and 𝑦-direction respectively. The 𝑧-
+        and VECID2 give the - and -direction respectively. The -
         vector is a cross product of VECID1 and VECID2. If this latter is not
         orthogonal to VECID1, its direction will be corrected with a crossproduct
-        of 𝑧- and 𝑥-vectors. The vectors are stored as isoparametric
+        of - and -vectors. The vectors are stored as isoparametric
         locations to update their directions if the element deforms or rotates.
         """ # nopep8
         return self._cards[0].get_value("vecid2")

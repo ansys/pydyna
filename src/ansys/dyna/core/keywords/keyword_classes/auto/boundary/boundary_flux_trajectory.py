@@ -180,8 +180,7 @@ class BoundaryFluxTrajectory(KeywordBase):
     def spd2(self) -> float:
         """Get or set the Speed of reference point in NSID2 (ignored unless NSID2 > 0)
         GT.0: constant speed
-        LT.0: |SPD2| is a load curve ID defining weld speed as a
-        function of time.
+        LT.0: |SPD2| is a load curve ID defining weld speed as a function of time.
         """ # nopep8
         return self._cards[0].get_value("spd2")
 
@@ -276,8 +275,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @property
     def lctim(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID for flux energy input rate multiplier q1(t) as a
-        function of time, see Remark 4.
+        """Get or set the Load curve ID for flux energy input rate multiplier q1(t) as a function of time, see Remark 4.
         EQ.0: use constant multiplier value q1(t) = 1.0.
         """ # nopep8
         return self._cards[2].get_value("lctim")
@@ -300,7 +298,7 @@ class BoundaryFluxTrajectory(KeywordBase):
 
     @property
     def lcinc(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID for flux energy input rate multiplier q2(a) as a. The value of the angle α range from 0° (segment normal and heat source point in the same direction) to 180° (segment normal and heat source point in opposite directions).
+        """Get or set the Load curve ID for flux energy input rate multiplier q2(a) as a. The value of the angle  range from 0 (segment normal and heat source point in the same direction) to 180 (segment normal and heat source point in opposite directions).
         function of inclination angle a, see Remark 4
         EQ.0: use constant multiplier value q2(a) = 1.0.
         """ # nopep8

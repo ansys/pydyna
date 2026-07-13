@@ -211,7 +211,7 @@ class MatElasticPlasticHydroStochastic(KeywordBase):
 
     @property
     def charl(self) -> typing.Optional[float]:
-        """Get or set the Characteristic element thickness for deletion.  This applies to 2D solid elements that lie on a boundary of a part.  If the boundary element thins down due to stretching or compression, and if it thins to a value less than CHARL, the element will be deleted.  The primary application of this option is to predict the break-up of axisymmetric shaped charge jets.
+        """Get or set the Characteristic element thickness for deletion. This applies to 2D solid elements that lie on a boundary of a part. If the boundary element thins down due to stretching or compression, and if it thins to a value less than CHARL, the element will be deleted. The primary application of this option is to predict the break-up of axisymmetric shaped charge jets.
         """ # nopep8
         return self._cards[0].get_value("charl")
 

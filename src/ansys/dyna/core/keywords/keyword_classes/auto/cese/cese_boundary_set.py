@@ -68,16 +68,16 @@ class CeseBoundarySet(KeywordBase):
     @property
     def dof_(self) -> int:
         """Get or set the Applicable degrees-of-freedom:
-        EQ.101:  x-velocity,
-        EQ.102:  y-velocity,
-        EQ.103:  z-velocity,
-        EQ.104:  density,
-        EQ.105:  pressure ,
-        EQ.106:  temperature,
-        EQ.201:  x, y & z-velocity,
+        EQ.101: x-velocity,
+        EQ.102: y-velocity,
+        EQ.103: z-velocity,
+        EQ.104: density,
+        EQ.105: pressure ,
+        EQ.106: temperature,
+        EQ.201: x, y & z-velocity,
         EQ.202: x & y-velocity,
-        EQ.203:  x & z-velocity,
-        EQ.204:  y & z-velocity.
+        EQ.203: x & z-velocity,
+        EQ.204: y & z-velocity.
         .
         """ # nopep8
         return self._cards[0].get_value("dof_")

@@ -107,7 +107,7 @@ class DualceseReactionRateIgReduced(KeywordBase):
 
     @property
     def ph10(self) -> typing.Optional[float]:
-        """Get or set the Additional parameter to account for the non-zero amount of reaction when the mass fraction of the products, is zero
+        """Get or set the Additional parameter to account for the nonzero amount of reaction when the mass fraction of the products, is zero
         """ # nopep8
         return self._cards[0].get_value("ph10")
 

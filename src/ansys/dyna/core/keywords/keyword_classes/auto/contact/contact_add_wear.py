@@ -70,8 +70,8 @@ class ContactAddWear(KeywordBase):
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Contact interface ID, see *CONTACT_...
-        LT.0:	Perturb contact surface according to wear values (see Remark 5).
-        GT.0:	Calculate wear properties for post - processing only.
+        LT.0: Perturb contact surface according to wear values (see Remark 5).
+        GT.0: Calculate wear properties for post - processing only.
         """ # nopep8
         return self._cards[0].get_value("cid")
 

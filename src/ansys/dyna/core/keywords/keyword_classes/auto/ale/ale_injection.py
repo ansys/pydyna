@@ -101,8 +101,7 @@ class AleInjection(KeywordBase):
 
     @property
     def segset(self) -> typing.Optional[int]:
-        """Get or set the Segment set ID (see *SET_SEGMENT). A local coordinate system
-        is created for each segment. See Remark 2.
+        """Get or set the Segment set ID (see *SET_SEGMENT). A local coordinate system is created for each segment. See Remark 2.
         """ # nopep8
         return self._cards[0].get_value("segset")
 
@@ -113,22 +112,16 @@ class AleInjection(KeywordBase):
 
     @property
     def global_(self) -> int:
-        """Get or set the Three digit flag to control how to select the elements, how to
-        prescribe the velocities and how to define the geometrical
-        parameters of Cards 2 and 3 (including BOXV):
+        """Get or set the Three digit flag to control how to select the elements, how to prescribe the velocities and how to define the geometrical parameters of Cards 2 and 3 (including BOXV):
         EQ._ _ 0: Geometrical parameters are local to the segments of SEGSET
-        EQ._ _ 1: Geometrical parameters are natural to SEGSET
-        segments (see Remark 3 and Figure 4-1)
+        EQ._ _ 1: Geometrical parameters are natural to SEGSET segments (see Remark 3 and Figure 4-1)
         EQ._ 0 _: Velocities are applied in local coordinate systems
         attached to each segment of SEGSET
         EQ._ 1 _: Velocities are applied in the global coordinate system
-        EQ.0 _ _: Select the elements and nodes in the local volume
-        around each segment of SEGSET
-        EQ.1 _ _: Select the elements in the global volume formed by
-        all the segments of SEGSET
+        EQ.0 _ _: Select the elements and nodes in the local volume around each segment of SEGSET
+        EQ.1 _ _: Select the elements in the global volume formed by all the segments of SEGSET
         EQ.2 _ _: Select the elements and nodes in the global volume
-        formed by all the segments of SEGSET. Velocities are
-        applied in the global coordinate system.
+        formed by all the segments of SEGSET. Velocities are applied in the global coordinate system.
         """ # nopep8
         return self._cards[0].get_value("global_")
 
@@ -141,9 +134,7 @@ class AleInjection(KeywordBase):
     def lce(self) -> int:
         """Get or set the Curve ID for the internal energy (see Remark 6):
         GT.0: Load curve ID; see *DEFINE_CURVE. See Remark 2.
-        LT.0: -LCE is the function ID for the internal energy which
-        depends on 26 arguments: time, number of cycles, and
-        nodal coordinates of the 8 nodes for the ALE element.
+        LT.0: -LCE is the function ID for the internal energy which depends on 26 arguments: time, number of cycles, and nodal coordinates of the 8 nodes for the ALE element.
         See *DEFINE_FUNCTION. See Remark 5.
         """ # nopep8
         return self._cards[0].get_value("lce")
@@ -157,9 +148,7 @@ class AleInjection(KeywordBase):
     def lcrvl(self) -> int:
         """Get or set the Curve ID for the relative volume (see Remark 6):
         GT.0: Load curve ID; see *DEFINE_CURVE. See Remark 2.
-        LT.0: -LCRVL is the function ID for the relative volume which
-        depends on 26 arguments: time, number of cycles, and
-        nodal coordinates of the 8 nodes for the ALE element.
+        LT.0: -LCRVL is the function ID for the relative volume which depends on 26 arguments: time, number of cycles, and nodal coordinates of the 8 nodes for the ALE element.
         See *DEFINE_FUNCTION. See Remark 5.
         """ # nopep8
         return self._cards[0].get_value("lcrvl")
@@ -173,9 +162,7 @@ class AleInjection(KeywordBase):
     def lcvt(self) -> int:
         """Get or set the Curve ID for the translational velocity:
         GT.0: Load curve ID; see *DEFINE_CURVE.
-        LT.0: -LCVT is the function ID for the translational velocity
-        which depends on 5 arguments: time, number of cycles,
-        and nodal coordinates. See *DEFINE_FUNCTION. See Remark 5..
+        LT.0: -LCVT is the function ID for the translational velocity which depends on 5 arguments: time, number of cycles, and nodal coordinates. See *DEFINE_FUNCTION. See Remark 5..
         """ # nopep8
         return self._cards[1].get_value("lcvt")
 
@@ -199,9 +186,7 @@ class AleInjection(KeywordBase):
     def lcvr(self) -> int:
         """Get or set the Curve ID for the rotational velocity:
         GT.0: Load curve ID; see *DEFINE_CURVE.
-        LT.0: -LCVR is the function ID for the rotational velocity which
-        depends on 5 arguments: time, number of cycles, and
-        nodal coordinates. See *DEFINE_FUNCTION. See Remark	5.
+        LT.0: -LCVR is the function ID for the rotational velocity which depends on 5 arguments: time, number of cycles, and nodal coordinates. See *DEFINE_FUNCTION. See Remark 5.
         """ # nopep8
         return self._cards[1].get_value("lcvr")
 
@@ -268,16 +253,13 @@ class AleInjection(KeywordBase):
     @property
     def surfct(self) -> int:
         """Get or set the Flag to define the surface, inside which the nodes and elements are selected:
-        LT.0: -SURFCT is the Function ID (see *DEFINE_FUNCTION)
-        for the rotational velocity with 17 arguments: time, number
-        of cycles, ALE element center coordinates, segment nodal coordinates.
+        LT.0: -SURFCT is the Function ID (see *DEFINE_FUNCTION) for the rotational velocity with 17 arguments: time, number of cycles, ALE element center coordinates, segment nodal coordinates.
         EQ.0: Ellipsoid;
         EQ.1: Ellipse-based cylinder;
         EQ.2: Truncated ellipse-based cone;
         EQ.3: Drop geometry meaning a cone for -ZD < z < 0 and
         half an ellipsoid for 0< z < ZU (see Remark 11 and Figure 4-6);
-        EQ.4: Box with side lengths -XL < x < XL, -YL < y < YL,
-        and -ZD < z < ZU (see Figure 4-7)
+        EQ.4: Box with side lengths -XL < x < XL, -YL < y < YL, and -ZD < z < ZU (see Figure 4-7)
         EQ.5: Segment based cylinder (see Remark 12 and Figure 4-8).
         """ # nopep8
         return self._cards[2].get_value("surfct")
@@ -289,8 +271,7 @@ class AleInjection(KeywordBase):
 
     @property
     def ndiv(self) -> int:
-        """Get or set the Number of divisions of an element cut by the surface SURFCT to
-        compute the volume fractions (see Remark 13 and Figure 4-2).
+        """Get or set the Number of divisions of an element cut by the surface SURFCT to compute the volume fractions (see Remark 13 and Figure 4-2).
         """ # nopep8
         return self._cards[2].get_value("ndiv")
 
@@ -323,8 +304,7 @@ class AleInjection(KeywordBase):
 
     @property
     def zd(self) -> float:
-        """Get or set the Length for the geometry SURFCT in the local 𝑧-direction for z < 0,
-        except for SURFCT = 2 where z > 0. ZD can be input as a negative or positive value.
+        """Get or set the Length for the geometry SURFCT in the local -direction for z < 0, except for SURFCT = 2 where z > 0. ZD can be input as a negative or positive value.
         """ # nopep8
         return self._cards[2].get_value("zd")
 
@@ -335,7 +315,7 @@ class AleInjection(KeywordBase):
 
     @property
     def zu(self) -> float:
-        """Get or set the Length for the geometry SURFCT in the local 𝑧-direction for z > 0.
+        """Get or set the Length for the geometry SURFCT in the local -direction for z > 0.
         """ # nopep8
         return self._cards[2].get_value("zu")
 

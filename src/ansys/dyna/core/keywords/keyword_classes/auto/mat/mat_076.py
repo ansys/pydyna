@@ -52,7 +52,7 @@ _MAT076_CARD1 = (
 )
 
 _MAT076_CARD2 = (
-    FieldSchema("mo", float, 0, 10, None),
+    FieldSchema("mref", float, 0, 10, None),
     FieldSchema("alpha", float, 10, 10, None),
     FieldSchema("beta", float, 20, 10, None),
     FieldSchema("gamma", float, 30, 10, None),
@@ -294,21 +294,21 @@ class Mat076(KeywordBase):
         self._cards[1].set_value("trampk", value)
 
     @property
-    def mo(self) -> typing.Optional[float]:
-        """Get or set the Initial moisture, M_0. Defaults to zero
+    def mref(self) -> typing.Optional[float]:
+        """Get or set the Reference moisture, M_ref, for moisture-induced strains. The default value is zero.
         """ # nopep8
-        return self._cards[2].get_value("mo")
+        return self._cards[2].get_value("mref")
 
-    @mo.setter
-    def mo(self, value: float) -> None:
-        """Set the mo property."""
-        self._cards[2].set_value("mo", value)
+    @mref.setter
+    def mref(self, value: float) -> None:
+        """Set the mref property."""
+        self._cards[2].set_value("mref", value)
 
     @property
     def alpha(self) -> typing.Optional[float]:
-        """Get or set the Specifies α as a function of moisture.
-        GT.0.0:	Specifies a curve ID.
-        LT.0.0 : Specifies the negative of a constant value.
+        """Get or set the Specifies alpha as a function of moisture.
+        GT.0.0: Specifies a curve ID.
+        LT.0.0: Specifies the negative of a constant value.
         """ # nopep8
         return self._cards[2].get_value("alpha")
 
@@ -319,9 +319,9 @@ class Mat076(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Specifies β as a function of moisture.
-        GT.0.0:	Specifies a curve ID.
-        LT.0.0 : Specifies the negative of a constant value.
+        """Get or set the Specifies beta as a function of moisture.
+        GT.0.0: Specifies a curve ID.
+        LT.0.0: Specifies the negative of a constant value.
         """ # nopep8
         return self._cards[2].get_value("beta")
 
@@ -332,9 +332,9 @@ class Mat076(KeywordBase):
 
     @property
     def gamma(self) -> typing.Optional[float]:
-        """Get or set the Specifies γ as a function of moisture.
-        GT.0.0:	Specifies a curve ID.
-        LT.0.0 : Specifies the negative of a constant value
+        """Get or set the Specifies gamma as a function of moisture.
+        GT.0.0: Specifies a curve ID.
+        LT.0.0: Specifies the negative of a constant value
         """ # nopep8
         return self._cards[2].get_value("gamma")
 
@@ -346,8 +346,8 @@ class Mat076(KeywordBase):
     @property
     def mst(self) -> typing.Optional[float]:
         """Get or set the Moisture, M. If the moisture is 0.0, the moisture option is disabled.
-        GT.0.0:	Specifies a curve ID giving moisture as a function of time.
-        LT.0.0 : Specifies the negative of a constant value of moisture
+        GT.0.0: Specifies a curve ID giving moisture as a function of time.
+        LT.0.0: Specifies the negative of a constant value of moisture
         """ # nopep8
         return self._cards[2].get_value("mst")
 

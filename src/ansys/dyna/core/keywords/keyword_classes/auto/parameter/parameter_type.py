@@ -78,7 +78,7 @@ class ParameterType(KeywordBase):
     @prtyp.setter
     def prtyp(self, value: str) -> None:
         """Set the prtyp property."""
-        if value not in ["   ", "SSID", "PSID", "PID", "NSID", "NID", "BEAMID", "SHELLID", "SOLIDID", "TSHELLID", "MID", "BEAMSID", "SHELLSID", "SOLIDSID", "TSHELLSID", "EOSID", "CURVEID", None]:
-            raise Exception("""prtyp must be `None` or one of {"   ","SSID","PSID","PID","NSID","NID","BEAMID","SHELLID","SOLIDID","TSHELLID","MID","BEAMSID","SHELLSID","SOLIDSID","TSHELLSID","EOSID","CURVEID"}.""")
+        if value not in ["SSID", "PSID", "PID", "NSID", "NID", "BEAMID", "SHELLID", "SOLIDID", "TSHELLID", "MID", "BEAMSID", "SHELLSID", "SOLIDSID", "TSHELLSID", "EOSID", "CURVEID", None]:
+            raise Exception("""prtyp must be `None` or one of {"SSID","PSID","PID","NSID","NID","BEAMID","SHELLID","SOLIDID","TSHELLID","MID","BEAMSID","SHELLSID","SOLIDSID","TSHELLSID","EOSID","CURVEID"}.""")
         self._cards[0].set_value("prtyp", value)
 

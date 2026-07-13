@@ -52,7 +52,7 @@ class EmCircuitConnect(KeywordBase):
         ]
     @property
     def conid(self) -> typing.Optional[int]:
-        """Get or set the Id of the Circuit Connect
+        """Get or set the Id of the circuit connect
         """ # nopep8
         return self._cards[0].get_value("conid")
 
@@ -63,7 +63,9 @@ class EmCircuitConnect(KeywordBase):
 
     @property
     def contype(self) -> typing.Optional[int]:
-        """Get or set the Type of connection between circuits. For the moment, it is only possible to combine circuits by imposing a linear constraint on the global current (=1).
+        """Get or set the Connection type between circuits:
+        EQ.1: If CIRC2 already has a global condition on its current i_2(See *EM_CIRCUIT), that global condition takes precedence over the constraint defined by the circuit connect.
+        EQ.2: The condition defined by circuit connect takes precedence in case of conflicting constraints(for example CIRC2 also has an imposed current defined by* EM_CIRCUIT).
         """ # nopep8
         return self._cards[0].get_value("contype")
 
@@ -74,7 +76,7 @@ class EmCircuitConnect(KeywordBase):
 
     @property
     def circ1(self) -> typing.Optional[int]:
-        """Get or set the circuit 1
+        """Get or set the ID of the first circuit
         """ # nopep8
         return self._cards[0].get_value("circ1")
 
@@ -85,7 +87,7 @@ class EmCircuitConnect(KeywordBase):
 
     @property
     def circ2(self) -> typing.Optional[int]:
-        """Get or set the circuit 2
+        """Get or set the ID of the second circuit
         """ # nopep8
         return self._cards[0].get_value("circ2")
 
@@ -96,7 +98,7 @@ class EmCircuitConnect(KeywordBase):
 
     @property
     def c1(self) -> typing.Optional[float]:
-        """Get or set the Values of the linear constraints if CONTYPE = 1.
+        """Get or set the Values of the linear constraints.
         """ # nopep8
         return self._cards[0].get_value("c1")
 
@@ -107,7 +109,7 @@ class EmCircuitConnect(KeywordBase):
 
     @property
     def c2(self) -> typing.Optional[float]:
-        """Get or set the Values of the linear constraints if CONTYPE = 1.
+        """Get or set the Values of the linear constraints.
         """ # nopep8
         return self._cards[0].get_value("c2")
 

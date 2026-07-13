@@ -83,86 +83,68 @@ class BoundarySpc(KeywordBase):
 
     @property
     def dofx(self) -> int:
-        """Get or set the EQ.0: no translational constraint in local x-direction,
-        EQ.1: translational constraint in local x-direction.
+        """Get or set the Insert 1 for a translational constraint in the local x-direction for a Cartesiaon system or the local radial degree of freedom r for a cylindrical or spherical system.
         """ # nopep8
         return self._cards[0].get_value("dofx")
 
     @dofx.setter
     def dofx(self, value: int) -> None:
         """Set the dofx property."""
-        if value not in [0, 1, None]:
-            raise Exception("""dofx must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofx", value)
 
     @property
     def dofy(self) -> int:
-        """Get or set the EQ.0: no translational constraint in local y-direction,
-        EQ.1: translational constraint in local y-direction.
+        """Get or set the Insert 1 for a translational constraint in the local y-direction for a Cartesian system, the direction of the local circumferential degree of freedom ? for a cylindrical system, or the direction of the local latitude degree of freedom  ? for a spherical system.
         """ # nopep8
         return self._cards[0].get_value("dofy")
 
     @dofy.setter
     def dofy(self, value: int) -> None:
         """Set the dofy property."""
-        if value not in [0, 1, None]:
-            raise Exception("""dofy must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofy", value)
 
     @property
     def dofz(self) -> int:
-        """Get or set the EQ.0: no translational constraint in local z-direction,
-        EQ.1: translational constraint in local z-direction.
+        """Get or set the Insert 1 for a translational constraint in the local z-direction for a Cartesian system, the direction of the local z-translational degree of freedom for a cylindrical system, or the direction of the local longitude degree of freedom ? for a spherical system.
         """ # nopep8
         return self._cards[0].get_value("dofz")
 
     @dofz.setter
     def dofz(self, value: int) -> None:
         """Set the dofz property."""
-        if value not in [0, 1, None]:
-            raise Exception("""dofz must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofz", value)
 
     @property
     def dofrx(self) -> int:
-        """Get or set the EQ.0: no rotational constraint about the local x-axis,
-        EQ.1: rotational constraint about local x-axis.
+        """Get or set the Insert 1 for rotational constraint about the local x-axis for a Cartesian system or about the axis of  the local radial degree of freedom r for a cylindrical or spherical system.
         """ # nopep8
         return self._cards[0].get_value("dofrx")
 
     @dofrx.setter
     def dofrx(self, value: int) -> None:
         """Set the dofrx property."""
-        if value not in [0, 1, None]:
-            raise Exception("""dofrx must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofrx", value)
 
     @property
     def dofry(self) -> int:
-        """Get or set the EQ.0: no rotational constraint about the local y-axis,
-        EQ.1: rotational constraint about local y-axis.
+        """Get or set the Insert 1 for rotational constraint about the local y-axis for a Cartesian system, about the axis of the local circumferential degree of freedom ? for a cylindrical system, or about  the axis of the local latitude degree of freedom ? for a spherical system.
         """ # nopep8
         return self._cards[0].get_value("dofry")
 
     @dofry.setter
     def dofry(self, value: int) -> None:
         """Set the dofry property."""
-        if value not in [0, 1, None]:
-            raise Exception("""dofry must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofry", value)
 
     @property
     def dofrz(self) -> int:
-        """Get or set the EQ.0: no rotational constraint about the local z-axiis
-        EQ.1: rotational constraint about local z-axis.
+        """Get or set the Insert 1 for rotational constraint about the local z-axis for a Cartesian system, about the axis of the local z-translational degree of freedom for a cylindrical system, or about the axis of the local longitude degree of freedom ? for a spherical system.
         """ # nopep8
         return self._cards[0].get_value("dofrz")
 
     @dofrz.setter
     def dofrz(self, value: int) -> None:
         """Set the dofrz property."""
-        if value not in [0, 1, None]:
-            raise Exception("""dofrz must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dofrz", value)
 
     @property

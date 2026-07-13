@@ -143,7 +143,7 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @property
     def solver(self) -> str:
-        """Get or set the EQ.MECH: mechanics.
+        """Get or set the EQ.MECH: mechanict.
         EQ.CESE: CE/SE compressible fluid flow solver.
         EQ.ICFD: Incompressible fluid flow solver.
         """ # nopep8
@@ -159,8 +159,8 @@ class SetSegmentGeneralCollect(KeywordBase):
     @property
     def its(self) -> typing.Optional[int]:
         """Get or set the Define coupling type across different scales in two-scale co-simulation. See *INCLUDE_COSIM in Manual Volume IV: Multiscale Solvers.
-        EQ.1:	Tie - contact coupling.
-        EQ.2 : Solid - in - shell immersed coupling
+        EQ.1: Tie - contact coupling.
+        EQ.2: Solid - in - shell immersed coupling
         """ # nopep8
         return self._cards[0].get_value("its")
 
@@ -171,67 +171,55 @@ class SetSegmentGeneralCollect(KeywordBase):
 
     @property
     def option(self) -> str:
-        """Get or set the ALL
-        All exterior segments will be included in the set.
-        BOX
-        Generate segments inside boxes having IDs E1, E2, and E3 with attributes having values E4, E5, E6, and E7.  For shell elements one segment per shell is generated. For solid elements only those segments wrapping the solid part and pointing outward from the part will be generated.
-        BOX_SHELL
-        Generate segments inside boxes having IDs E1, E2, and E3 with attributes having values E4, E5, E6, and E7.  The segments are only generated for shell elements.  One segment per shell is generated.
-        BOX_SLDIO
-        Generate segments inside boxes having IDs E1, E2, and E3 with attributes having values E4, E5, E6, and E7.  Both exterior segments and inter-element segments are generated.
-        BOX_SOLID
-        Generate segments inside boxes having IDs E1, E2, and E3 with attributes having values E4, E5, E6, and E7.  The segments are only generated for exterior solid elements
-        PART
-        Generate segments of parts E1, E2, and E3 with attributes E4, E5, E6, and E7.  For shell elements one segment per shell is generated.  For solid elements only those segments wrapping the solid part and pointing outward from the part will be generated.  PART could refer to beam parts when defining 2D segments for traction application.
-        PART_IO
-        Generate segments from parts E1, E2, E3 with attributes E4, E5, E6, and E7.  Same as the PART option above except that inter-element segments inside parts will be generated as well.  This option is sometimes useful for single surface contact of solid elements to prevent negative volumes.
-        PSLDFi	Generate segments from the i’th face of solid parts E1, E2, E3 with attributes E4, E5, E6, and E7.  See table below for face definition.
-        SEG
-        Create segment with node IDs E1, E2, E3, and E4.
-        VOL	Generate segments inside contact volume IDs E1, E2, and E3 with attributes having values E4, E5, E6, and E7.  See BOX option for other details.
-        VOL_SHELL
-        Generate segments for shells inside contact volume IDs E1, E2, and E3 with attributes having values E4, E5, E6, and E7
-        VOL_SLDIO
-        Generate segments for solid elements inside contact volume IDs E1, E2, and E3 with attributes E4, E5, E6, and E7.  See BOX_SLDIO for other details.
-        VOL_SOLID
-        Generate segments for solid elements inside contact volume IDs E1, E2, and E3 with attributes E4, E5, E6, and E7.  See BOX_SOLID for other details.
-        SET_SHELL
-        Generate segments for shell elements in SET_SHELL_LIST with IDs E1, E2, and E3 with attributes E4, E5, E6, and E7.
-        SET_SOLID
-        Generate segments for solid elements in SET_SOLID_LIST with IDs E1, E2, and E3 with attributes E4, E5, E6, and E7.
-        SET_SLDIO
-        Generate segments for solid elements in SET_SOLID_LIST with IDs E1, E2, and E3 with attributes E4, E5, E6, and E7.  Both exterior & interior segments are generated.
-        SET_SLDFi
-        Generate segments from the ith face of solid elements in SET_SOLID_LIST with IDs E1, E2, and E3 with attributes E4, E5, E6, and E7.  See table below for face definition.
-        SET_TSHELL
-        Generate segments for thick shell elements in SET_TSHELL_LIST with IDs of E1, E2, and E3 with attributes E4, E5, E6, and E7.  Only exterior segments are generated.
-        SET_TSHIO
-        Generate segments for thick shell elements in SET_TSHELL_LIST with IDs of E1, E2, and E3 with attributes E5, E5, E6, and E7.  Both exterior & interior segments are generated.
-        SHELL Generate segments for shell elements with IDs of E1, E2, and E3 with attributes E4, E5, E6, and E7.
-        DBOX	Segments inside boxes with IDs E1, ? E7 will be excluded.
-        DBOX_SHELL
-        Shell related segments inside boxes of IDs E1, ? E7 will be excluded.
-        DBOX_SOLID
-        Solid related segments inside boxes of IDs E1, ? E7 will be excluded.
-        DPART	Segments of parts with IDs E1, ? E7 will be excluded.
-        DSEG	Segment with node IDs  E1, E2, E3, and E4 will be deleted.
-        DVOL	Segments inside contact volumes having IDs E1, ? E7 will be excluded.
-        DVOL_SHELL
-        Shell related segments inside contact volumes having IDs E1, ? E7 will be excluded.
-        DVOL_SOLID
-        Solid related segments inside contact volumes having IDs E1, ? E7 will be excluded.
-        SALECPT	Segments inside a box in Structured ALE mesh. E1 here is the S-ALE mesh ID (MSHID).  E2, E3, E4, E5, E6, E7 correspond to XMIN, XMAX, YMIN, YMAX, ZMIN, ZMAX.  They are the minimum and the maximum nodal indices along each direction in S-ALE mesh.  This option is only to be used for Structured ALE mesh and should not be used in a mixed manner with other “_GENERAL?options.
-        Please refer to *ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH_CONTROL for more details.
-        SALEFAC	Segments on the face of Structured ALE mesh. E1 here is the S-ALE mesh ID (MSHID).  E2, E3, E4, E5, E6, E7 correspond to -X, +X, -Y, +Y, -Z, +Z faces.  Assigning 1 to these 6 values would include all the surface segments at these faces in the segment set.  This option is only to be used for Structured ALE mesh and should not be used in a mixed manner with other “_GENERAL?options.
-        Please refer to *ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH_CONTROL for more details
+        """Get or set the 
+        ALL: All exterior segments will be included in the set.
+        BOX:Generate segments inside boxes having IDs E1, E2, and E3 with attributes having values E4, E5, E6, and E7.  For shell elements, one segment per shell is generated. For solid elements, only those segments wrapping the solid part and pointing outward from the part will be generated.
+        BOX_SHELL:Generate segments inside boxes having IDs E1, E2, and E3 with attributes having values E4, E5, E6, and E7.  The segments are only generated for shell elements.  One segment per shell is generated.
+        BOX_SLDIO:Generate segments inside boxes having IDs E1, E2, and E3 with attributes having values E4, E5, E6, and E7.  Both exterior segments and inter-element segments are generated.
+        BOX_SOLID:Generate segments inside boxes having IDs E1, E2, and E3 with attributes having values E4, E5, E6, and E7.  The segments are only generated for exterior solid elements.
+        BRANCH:Generate segments from tree branches E1, E2, and E3 with attributes E4, E5, E6, and E7.  For shell elementsSET one segment is generated per shell.  For solid elements, only those segments that wrap the solid part and point outward from the part will be generated.  See *SET_PART_TREE.
+        BRANCH_IO:Generate segments from tree branches E1, E2, and E3 with attributes E4, E5, E6, and E7.  Same as the BRANCH option above, except that inter-element segments inside parts will be generated as well.  This option is sometimes useful for preventing negative volumes when using single surface contact between solid elements.
+        BRSLDFi:Generate segments from the ith face of solid tree branches E1, E2, and E3 with attributes E4, E5, E6, and E7.  See Table 0-1 below for the face definition.
+        DBOX: Segments inside boxes with IDs E1, �, E7 will be excluded.
+        DBOX_SHELL: Shell-related segments inside boxes of IDs E1, �, and E7 will be excluded.
+        DBOX_SOLID: Solid-related segments inside boxes of IDs E1, �, and E7 will be excluded.
+        DPART: Segments of parts with IDs E1, �, and E7 will be excluded.
+        DSEG: Segment with node IDs  E1, E2, E3, and E4 will be deleted.
+        DSET: Segments of segment sets (*SET_SEGMENT) with IDs E1, E2, E3� will be excluded.
+        DVOL: Segments inside contact volumes having IDs E1, �, and E7 will be excluded.
+        DVOL_SHELL: Shell-related segments inside contact volumes having IDs E1, �, and E7 will be excluded.
+        DVOL_SOLID: Solid-related segments inside contact volumes having IDs E1, �, and E7 will be excluded.
+        PART: Generate segments from parts E1, E2, and E3 with attributes E4, E5, E6, and E7.  For shell elements, one segment per shell is generated.  For solid elements, only those segments wrapping the solid part and pointing outward from the part will be generated.  PART could refer to beam parts when defining 2D segments for traction application.
+        PART_IO: Generate segments from parts E1, E2, and E3 with attributes E4, E5, E6, and E7.  Same as the PART option above except that inter-element segments inside parts will be generated as well.  This option is sometimes useful for single surface contact of solid elements to prevent negative volumes.
+        PSLDFi: Generate segments from the ith face of solid parts E1, E2, and E3 with attributes E4, E5, E6, and E7.  See Table 0-1 below for face definition.
+        SALEBOXL Segments inside a box in a structured ALE(S - ALE) mesh.E1 is the S - ALE mesh ID(MSHID).E2, E3, E4, E5, E6, and E7 correspond to XMIN, XMAX, YMIN, YMAX, ZMIN, and ZMAX, respectively.They are the minimum and the maximum nodal local coordinates, as defined in* ALE_STRUCTURED_MESH_CONTROL_POINTS, along each direction in S - ALE mesh.This option is only to be used for S - ALE meshes..It can be used with options SALECPT, SALEFAC, and SALEBOXL but should not be used with other GENERAL options.
+        Refer to* ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details.
+        SALECPT Segments inside a box in a structured ALE(S - ALE) mesh.E1 is the S - ALE mesh ID(MSHID).E2, E3, E4, E5, E6, and E7 correspond to IMIN, IMAX, JMIN, JMAX, KMIN, and KMAX.They are the minimum and the maximum nodal indices along each direction in the S - ALE mesh.To include all segments in the S-ALE mesh defined by E1, set values E2�E7 to zero or leave them blank.  This option is only to be used for S - ALE meshes..It can be used with options SALECPT, SALEFAC, and SALEBOXL but should not be used with other GENERAL options.
+        Refer to* ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details.
+        SALEFAC Segments on the face of an S - ALE mesh.E1 is the S - ALE mesh ID(MSHID).E2, E3, E4, E5, E6, E7 correspond to - X, +X, -Y, +Y, -Z, +Z faces.Assigning 1 to these 6 values would include all the surface segments at these faces in the segment set.This option is only to be used for S - ALE meshes..It can be used with options SALECPT, SALEFAC, and SALEBOXL but should not be used with other GENERAL options.
+        For trimmed S - ALE meshes(see * ALE_STRUCTURED_MESH_TRIM), a segment is treated as a surface segment as long as it has no neighboring element along the specified direction.The set thus includes all surface segments facing that direction at the exterior and interior boundaries.
+        Refer to* ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details.
+        SEG : Create a segment with node IDs E1, E2, E3, and E4.
+        SET : Segments of segment sets(*SET_SEGMENT) with IDs E1, E2, E3� will be included.
+        SET_SHELL : Generate segments from shell elements in shell sets created with* SET_SHELL_LIST with IDs E1, E2, and E3.E4, E5, E6, and E7 set the attributes.
+        SET_SOLID : Generate segments from solid elements in solid sets created with* SET_SOLID_LIST with IDs E1, E2, and E3.E4, E5, E6, and E7 set the attributes.
+        SET_SLDIO : Generate segments for solid elements in solid sets created with* SET_SOLID_LIST with IDs E1, E2, and E3.E4, E5, E6, and E7 set the attributes.Both exterior and interior segments are generated.
+        SET_SLDFi : Generate segments from the ith face of solid elements in the solid element sets created with* SET_SOLID_LIST with IDs E1, E2, and E3.E4, E5, E6, and E7 set the attributes.See Table 0 - 1 below for face definitions.
+        SET_TSHELL : Generate segments from thick shell elements in the thick shell sets created with* SET_TSHELL_LIST with IDs of E1, E2, and E3.E4, E5, E6, and E7 set the attributes.Only exterior segments are generated.
+        SET_TSHIO : Generate segments from thick shell elements in the thick shell sets created with* SET_TSHELL_LIST with IDs of E1, E2, and E3.E4, E5, E6, and E7 set the attributes.Both exterior and interior segments are generated.
+        SHELL : Generate segments for shell elements with IDs of E1, E2, and E3 with attributes having values E4, E5, E6, and E7.
+        VOL : Generate segments inside contact volume IDs E1, E2, and E3 with attributes having values E4, E5, E6, and E7.See BOX option for other details.See* DEFINE_CONTACT_VOLUME.
+        VOL_SHELL : Generate segments from shells inside contact volume IDs E1, E2, and E3 with attributes having values E4, E5, E6, and E7
+        VOL_SLDIO : Generate segments from solid elements inside contact volume IDs E1, E2, and E3 with attributes having values E4, E5, E6, and E7.See BOX_SLDIO for other details.
+        VOL_SOLID : Generate segments from solid elements inside contact volume IDs E1, E2, and E3 with attributes having values E4, E5, E6, and E7.See BOX_SOLID for other details.
         """ # nopep8
         return self._cards[1].get_value("option")
 
     @option.setter
     def option(self, value: str) -> None:
         """Set the option property."""
-        if value not in ["ALL", "BOX", "BOX_SHELL", "BOX_SLDIO", "BOX_SOLID", "PART", "PART_IO", "PSLDFi", "SEG", "VOL", "VOL_SHELL", "VOL_SLDIO", "VOL_SOLID", "SET_SHELL", "SET_SOLID", "SET_SLDIO", "SET_SLDFi", "SET_TSHELL", "SET_TSHIO", "SHELL", "DBOX", "DBOX_SHELL", "DBOX_SOLID", "DPART", "DSEG", "DVOL", "DVOL_SHELL", "DVOL_SOLID", "SALECPT", "SALEFAC", None]:
-            raise Exception("""option must be `None` or one of {"ALL","BOX","BOX_SHELL","BOX_SLDIO","BOX_SOLID","PART","PART_IO","PSLDFi","SEG","VOL","VOL_SHELL","VOL_SLDIO","VOL_SOLID","SET_SHELL","SET_SOLID","SET_SLDIO","SET_SLDFi","SET_TSHELL","SET_TSHIO","SHELL","DBOX","DBOX_SHELL","DBOX_SOLID","DPART","DSEG","DVOL","DVOL_SHELL","DVOL_SOLID","SALECPT","SALEFAC"}.""")
+        if value not in ["ALL", "BOX", "BOX_SHELL", "BOX_SLDIO", "BOX_SOLID", "BRANCH", "BRANCHI_IO", "BRSLDFi", "DBOX", "DBOX_SHELL", "DBOX_SOLID", "DPART", "DSET", "DVOL", "DVOL_SHELL", "DVOL_SOLID", "PART", "PART_IO", "PSLDFi", "SALEBOXL", "SALEFAC", "SALECPT", "SEG", "SET", "SET_SHELL", "SET_SOLID", "SET_SLDIO", "SET_SLDFi", "SET_TSHELL", "SET_TSHIO", "SHELL", "VOL", "VOL_SHELL", "VOL_SLDIO", "VOL_SOLID", None]:
+            raise Exception("""option must be `None` or one of {"ALL","BOX","BOX_SHELL","BOX_SLDIO","BOX_SOLID","BRANCH","BRANCHI_IO","BRSLDFi","DBOX","DBOX_SHELL","DBOX_SOLID","DPART","DSET","DVOL","DVOL_SHELL","DVOL_SOLID","PART","PART_IO","PSLDFi","SALEBOXL","SALEFAC","SALECPT","SEG","SET","SET_SHELL","SET_SOLID","SET_SLDIO","SET_SLDFi","SET_TSHELL","SET_TSHIO","SHELL","VOL","VOL_SHELL","VOL_SLDIO","VOL_SOLID"}.""")
         self._cards[1].set_value("option", value)
 
     @property

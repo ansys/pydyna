@@ -127,17 +127,15 @@ class BoundaryRadiationSetVfRead(KeywordBase):
 
     @property
     def nint(self) -> int:
-        """Get or set the Number of integration points for viewfactor calculation.
-        EQ.0: LS-DYNA determines the number of integration points based on the segment size and separation distance
-        1 <= NINT <= 10: User specified number.
+        """Get or set the Number of integration points for view factor calculation
+        EQ.0: LS - DYNA determines the number of integration points based on the segment size and separation distance
+        GE.11: Not allowed
         """ # nopep8
         return self._cards[0].get_value("nint")
 
     @nint.setter
     def nint(self, value: int) -> None:
         """Set the nint property."""
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, None]:
-            raise Exception("""nint must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10}.""")
         self._cards[0].set_value("nint", value)
 
     @property

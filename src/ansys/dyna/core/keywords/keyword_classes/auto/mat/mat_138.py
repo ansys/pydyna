@@ -45,6 +45,7 @@ _MAT138_CARD1 = (
     FieldSchema("und", float, 30, 10, None),
     FieldSchema("utd", float, 40, 10, None),
     FieldSchema("gamma", float, 50, 10, 1.0),
+    FieldSchema("cts", float, 60, 10, 0.1),
 )
 
 _MAT138_OPTION0_CARD0 = (
@@ -109,8 +110,8 @@ class Mat138(KeywordBase):
     @property
     def roflg(self) -> int:
         """Get or set the Flag stating whether density is specified per unit area or volume:
-        EQ.0:	Specified density is per unit volume(default).
-        EQ.1 : Specified density is per unit area for controlling the mass of cohesive elements with an initial volume of zero.
+        EQ.0: Specified density is per unit volume(default).
+        EQ.1: Specified density is per unit area for controlling the mass of cohesive elements with an initial volume of zero.
         """ # nopep8
         return self._cards[0].get_value("roflg")
 
@@ -123,10 +124,9 @@ class Mat138(KeywordBase):
 
     @property
     def intfail(self) -> typing.Optional[float]:
-        """Get or set the The number of integration points required for the cohesive element to be deleted. The value of INTFAIL may range from 1 to 4 with 1 the recommended value.
-        LT.0.0:	Employs a Newton - Cotes integration scheme and the element will be deleted when | INTFAIL | integration points have failed.
-        EQ.0.0 : Employs a Newton - Cotes integration scheme and the element will not be deleted even if it satisfies the failure criterion.
-        GT.0.0 : Employs a Gauss integration scheme and the element will be deleted when INTFAIL integration points have failed.
+        """Get or set the The number of integration points required for the cohesive element to be deleted.  The value of INTFAIL may range from 1 to 4 with 1 the recommended value.
+        EQ.0.0: Employs a Newton - Cotes integration scheme.The element will not be deleted even if it satisfies the failure criterion.
+        GT.0.0 : Employs a Gauss integration scheme.The element will be deleted when INTFAIL integration points have failed.
         """ # nopep8
         return self._cards[0].get_value("intfail")
 
@@ -160,7 +160,7 @@ class Mat138(KeywordBase):
     @property
     def gic(self) -> typing.Optional[float]:
         """Get or set the Energy release rate for mode I.
-        LT.0.0:	Load curve ID = (-GIC) which defines energy release rate for mode I as a function of element size.)
+        LT.0.0: Load curve ID = (-GIC) which defines energy release rate for mode I as a function of element size.)
         """ # nopep8
         return self._cards[0].get_value("gic")
 
@@ -172,7 +172,7 @@ class Mat138(KeywordBase):
     @property
     def giic(self) -> typing.Optional[float]:
         """Get or set the Energy release rate for mode II
-        LT.0.0:	Load curve ID = (-GIIC) which defines energy release rate for mode II as a function of element size.)
+        LT.0.0: Load curve ID = (-GIIC) which defines energy release rate for mode II as a function of element size.)
         """ # nopep8
         return self._cards[0].get_value("giic")
 
@@ -194,7 +194,10 @@ class Mat138(KeywordBase):
 
     @property
     def t(self) -> typing.Optional[float]:
-        """Get or set the Peak traction in normal direction
+        """Get or set the Peak traction (stress units) in the normal direction.
+        LT.0.0: Load curve ID = (-T), which defines peak traction in the normal direction as a function of element size.See Remark 4.
+        EQ.0.0: See Remark 1.
+        GT.0.0: Peak traction in the normal direction, T
         """ # nopep8
         return self._cards[1].get_value("t")
 
@@ -205,7 +208,10 @@ class Mat138(KeywordBase):
 
     @property
     def s(self) -> typing.Optional[float]:
-        """Get or set the Peak traction in tangential direction
+        """Get or set the Peak traction (stress units) in the tangential direction.
+        LT.0.0: Load curve ID = (-S), which defines peak traction in the tangential direction as a function of element size.See Remark 4.
+        EQ.0.0: See Remark 1.
+        GT.0.0: Peak traction in the tangential direction, S
         """ # nopep8
         return self._cards[1].get_value("s")
 
@@ -246,6 +252,23 @@ class Mat138(KeywordBase):
     def gamma(self, value: float) -> None:
         """Set the gamma property."""
         self._cards[1].set_value("gamma", value)
+
+    @property
+    def cts(self) -> float:
+        """Get or set the Flag to use a consistent tangent stiffness and change the cohesive law formulation in implicit simulations:
+        EQ.0.0:	Original cohesive law formulation with an approximate tangent stiffness
+        EQ.1.0:	Original cohesive law formulation with a consistent tangent stiffness
+        EQ.2.0:	Ortiz and Pandolfi cohesive law (Ortiz and Pandolfi [1999]) with a consistent tangent stiffness. See Remark 6.
+        Using a consistent tangent stiffness improves the numerical convergence.
+        """ # nopep8
+        return self._cards[1].get_value("cts")
+
+    @cts.setter
+    def cts(self, value: float) -> None:
+        """Set the cts property."""
+        if value not in [0.1, 1.0, 2.0, None]:
+            raise Exception("""cts must be `None` or one of {0.1,1.0,2.0}.""")
+        self._cards[1].set_value("cts", value)
 
     @property
     def title(self) -> typing.Optional[str]:

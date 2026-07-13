@@ -72,9 +72,9 @@ class DualceseBoundaryCyclicMsurf(KeywordBase):
     @property
     def cyctyp(self) -> int:
         """Get or set the Relationship between the two cyclic boundary condition surfaces:
-        EQ.0:	none assumed(default)
-        EQ.1 : The first surface is rotated about an axis to match the second surface.
-        EQ.2 : The faces of the first surface are translated in a given direction to obtain the corresponding faces on the second surface
+        EQ.0: none assumed(default)
+        EQ.1: The first surface is rotated about an axis to match the second surface.
+        EQ.2: The faces of the first surface are translated in a given direction to obtain the corresponding faces on the second surface
         """ # nopep8
         return self._cards[0].get_value("cyctyp")
 

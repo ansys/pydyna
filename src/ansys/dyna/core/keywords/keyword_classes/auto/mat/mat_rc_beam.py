@@ -41,9 +41,9 @@ _MATRCBEAM_CARD0 = (
 _MATRCBEAM_CARD1 = (
     FieldSchema("ft", float, 0, 10, None),
     FieldSchema("unitc", float, 10, 10, 1.0),
-    FieldSchema("unused", float, 20, 10, None),
-    FieldSchema("unused", float, 30, 10, None),
-    FieldSchema("unused", float, 40, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
     FieldSchema("esoft", float, 50, 10, None),
     FieldSchema("lchar", float, 60, 10, None),
     FieldSchema("output", float, 70, 10, 0.0),
@@ -103,7 +103,7 @@ class MatRcBeam(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.  A unique number or label must be specified.
+        """Get or set the Material identification. A unique number or label must be specified.
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -237,8 +237,7 @@ class MatRcBeam(KeywordBase):
     def output(self) -> float:
         """Get or set the Output flag controlling what is written as  plastic strain
         EQ.0.0: Curvature
-        EQ.1.0:  High-tide  plastic strain in reinforcement
-
+        EQ.1.0: High-tide  plastic strain in reinforcement
         """ # nopep8
         return self._cards[1].get_value("output")
 
@@ -251,7 +250,7 @@ class MatRcBeam(KeywordBase):
 
     @property
     def fracr(self) -> typing.Optional[float]:
-        """Get or set the Fraction of reinforcement (e.g. for 1% reinforcement FRACR=0.01).
+        """Get or set the Fraction of reinforcement (for example for 1% reinforcement FRACR=0.01).
         """ # nopep8
         return self._cards[2].get_value("fracr")
 
@@ -328,7 +327,7 @@ class MatRcBeam(KeywordBase):
 
     @property
     def rreinf(self) -> float:
-        """Get or set the Dimensionless Ramberg-Osgood parameter r. If zero, a default value r=4.0 will be used. If set to -1, parameters will be calculated from Kent & Park formulae
+        """Get or set the Dimensionless Ramberg-Osgood parameter. If zero, a default value of r=4.0 will be used. If set to -1, parameters will be calculated from Kent & Park formulae. see remark 3
         """ # nopep8
         return self._cards[2].get_value("rreinf")
 

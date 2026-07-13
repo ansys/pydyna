@@ -73,8 +73,7 @@ class AleSwitchMmg(KeywordBase):
         ]
     @property
     def fr_mmg(self) -> typing.Optional[int]:
-        """Get or set the This is the AMMG-SID before the switch. The AMMG-SID
-        corresponds to the SID defined on a *SET_MULTI-MATERIAL_GROUP_LIST (SMMGL) card.
+        """Get or set the This is the AMMG-SID before the switch. The AMMG-SID corresponds to the SID defined on a *SET_MULTI-MATERIAL_GROUP_LIST (SMMGL) card.
         This SID refers to one or more AMMGs.
         """ # nopep8
         return self._cards[0].get_value("fr_mmg")
@@ -86,8 +85,7 @@ class AleSwitchMmg(KeywordBase):
 
     @property
     def to_mmg(self) -> typing.Optional[int]:
-        """Get or set the This is the AMMG-SID after the switch. The AMMG-SID
-        corresponds to the SID defined on a *SET_MULTI-MATERIAL_GROUP_LIST (SMMGL) card.
+        """Get or set the This is the AMMG-SID after the switch. The AMMG-SID corresponds to the SID defined on a *SET_MULTI-MATERIAL_GROUP_LIST (SMMGL) card.
         This SID refers to one or more AMMGs.
         """ # nopep8
         return self._cards[0].get_value("to_mmg")
@@ -99,8 +97,7 @@ class AleSwitchMmg(KeywordBase):
 
     @property
     def idfunc(self) -> typing.Optional[int]:
-        """Get or set the ID of a *DEFINE_FUNCTION function. This function determines
-        the material fraction to be switched.
+        """Get or set the ID of a *DEFINE_FUNCTION function. This function determines the material fraction to be switched.
         """ # nopep8
         return self._cards[0].get_value("idfunc")
 
@@ -111,11 +108,8 @@ class AleSwitchMmg(KeywordBase):
 
     @property
     def idsegset(self) -> int:
-        """Get or set the ID of *SEGMENT_SET that is used to pass geometric properties to
-        the function specified by IDFUNC. This field is optional.
-        The segment center positions and normal vectors are computed.
-        For each ALE element, this data is passed to the function
-        IDFUNC for the segment the closest to the element center.
+        """Get or set the ID of *SEGMENT_SET that is used to pass geometric properties to the function specified by IDFUNC. This field is optional.
+        The segment center positions and normal vectors are computed. For each ALE element, this data is passed to the function IDFUNC for the segment the closest to the element center.
         """ # nopep8
         return self._cards[0].get_value("idsegset")
 
@@ -126,11 +120,8 @@ class AleSwitchMmg(KeywordBase):
 
     @property
     def idsldset(self) -> int:
-        """Get or set the The ID of a *SOLID_SET specifying which elements are affected
-        by this particular instance of the *ALE_SWITCH_MMG keyword.
-        This field is optional. If undefined, *ALE_SWITCH_MMG affects
-        all ALE elements. The element centers are computed and can be
-        used as variables in the function IDFUNC.
+        """Get or set the The ID of a *SOLID_SET specifying which elements are affected by this particular instance of the *ALE_SWITCH_MMG keyword.
+        This field is optional. If undefined, *ALE_SWITCH_MMG affects all ALE elements. The element centers are computed and can be used as variables in the function IDFUNC.
         """ # nopep8
         return self._cards[0].get_value("idsldset")
 
@@ -141,11 +132,7 @@ class AleSwitchMmg(KeywordBase):
 
     @property
     def ncycseg(self) -> int:
-        """Get or set the Number of cycles between each update of the segment centers
-        and normal vectors (if a segment set is defined). For each update,
-        a bucket sort is applied to find the closest segment to each ALE
-        element. If the segment nodes are fully constrained, the segment
-        centers and normal vectors are computed only one time.
+        """Get or set the Number of cycles between each update of the segment centers and normal vectors (if a segment set is defined). For each update, a bucket sort is applied to find the closest segment to each ALE element. If the segment nodes are fully constrained, the segment centers and normal vectors are computed only one time.
         """ # nopep8
         return self._cards[0].get_value("ncycseg")
 
@@ -156,11 +143,7 @@ class AleSwitchMmg(KeywordBase):
 
     @property
     def ncycsld(self) -> int:
-        """Get or set the Number of cycles between each update of the ALE element
-        centers. For each update, a bucket sort is applied to find the
-        closest segment to each ALE element. If the element nodes does
-        not move (as with AFAC = -1 in *CONTROL_ALE) the element
-        centers are computed exactly once.
+        """Get or set the Number of cycles between each update of the ALE element centers. For each update, a bucket sort is applied to find the closest segment to each ALE element. If the element nodes does not move (as with AFAC = -1 in *CONTROL_ALE) the element centers are computed exactly once.
         """ # nopep8
         return self._cards[0].get_value("ncycsld")
 
@@ -198,7 +181,7 @@ class AleSwitchMmg(KeywordBase):
         EQ.51: z-position of the ALE element center
         EQ.52: x-position of the segment center
         EQ.53: y-position of the segment center
-        EQ.54: 𝑧-position of the segment center
+        EQ.54: -position of the segment center
         EQ.55: x-component of the segment normal
         EQ.56: y-component of the segment normal
         EQ.57: z-component of the segment normal
@@ -262,7 +245,7 @@ class AleSwitchMmg(KeywordBase):
         EQ.51: z-position of the ALE element center
         EQ.52: x-position of the segment center
         EQ.53: y-position of the segment center
-        EQ.54: 𝑧-position of the segment center
+        EQ.54: -position of the segment center
         EQ.55: x-component of the segment normal
         EQ.56: y-component of the segment normal
         EQ.57: z-component of the segment normal
@@ -326,7 +309,7 @@ class AleSwitchMmg(KeywordBase):
         EQ.51: z-position of the ALE element center
         EQ.52: x-position of the segment center
         EQ.53: y-position of the segment center
-        EQ.54: 𝑧-position of the segment center
+        EQ.54: -position of the segment center
         EQ.55: x-component of the segment normal
         EQ.56: y-component of the segment normal
         EQ.57: z-component of the segment normal
@@ -390,7 +373,7 @@ class AleSwitchMmg(KeywordBase):
         EQ.51: z-position of the ALE element center
         EQ.52: x-position of the segment center
         EQ.53: y-position of the segment center
-        EQ.54: 𝑧-position of the segment center
+        EQ.54: -position of the segment center
         EQ.55: x-component of the segment normal
         EQ.56: y-component of the segment normal
         EQ.57: z-component of the segment normal
@@ -454,7 +437,7 @@ class AleSwitchMmg(KeywordBase):
         EQ.51: z-position of the ALE element center
         EQ.52: x-position of the segment center
         EQ.53: y-position of the segment center
-        EQ.54: 𝑧-position of the segment center
+        EQ.54: -position of the segment center
         EQ.55: x-component of the segment normal
         EQ.56: y-component of the segment normal
         EQ.57: z-component of the segment normal
@@ -518,7 +501,7 @@ class AleSwitchMmg(KeywordBase):
         EQ.51: z-position of the ALE element center
         EQ.52: x-position of the segment center
         EQ.53: y-position of the segment center
-        EQ.54: 𝑧-position of the segment center
+        EQ.54: -position of the segment center
         EQ.55: x-component of the segment normal
         EQ.56: y-component of the segment normal
         EQ.57: z-component of the segment normal
@@ -582,7 +565,7 @@ class AleSwitchMmg(KeywordBase):
         EQ.51: z-position of the ALE element center
         EQ.52: x-position of the segment center
         EQ.53: y-position of the segment center
-        EQ.54: 𝑧-position of the segment center
+        EQ.54: -position of the segment center
         EQ.55: x-component of the segment normal
         EQ.56: y-component of the segment normal
         EQ.57: z-component of the segment normal
@@ -646,7 +629,7 @@ class AleSwitchMmg(KeywordBase):
         EQ.51: z-position of the ALE element center
         EQ.52: x-position of the segment center
         EQ.53: y-position of the segment center
-        EQ.54: 𝑧-position of the segment center
+        EQ.54: -position of the segment center
         EQ.55: x-component of the segment normal
         EQ.56: y-component of the segment normal
         EQ.57: z-component of the segment normal

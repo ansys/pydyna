@@ -30,6 +30,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _DEFINECURVECOMPENSATIONCONSTRAINTEND_CARD0 = (
     FieldSchema("crvid", int, 0, 10, None),
     FieldSchema("in_out", int, 10, 10, None, "in/out"),
+    FieldSchema("type", int, 20, 10, None),
 )
 
 _DEFINECURVECOMPENSATIONCONSTRAINTEND_CARD1 = (
@@ -97,6 +98,17 @@ class DefineCurveCompensationConstraintEnd(KeywordBase):
     def in_out(self, value: int) -> None:
         """Set the in_out property."""
         self._cards[0].set_value("in_out", value)
+
+    @property
+    def type(self) -> typing.Optional[int]:
+        """Get or set the Type code - must be 0.
+        """ # nopep8
+        return self._cards[0].get_value("type")
+
+    @type.setter
+    def type(self, value: int) -> None:
+        """Set the type property."""
+        self._cards[0].set_value("type", value)
 
     @property
     def x(self) -> float:

@@ -26,6 +26,7 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _ICFDCONTROLIMPOSEDMOVE_CARD0 = (
@@ -34,16 +35,18 @@ _ICFDCONTROLIMPOSEDMOVE_CARD0 = (
     FieldSchema("lcvy", int, 20, 10, None),
     FieldSchema("lcvz", int, 30, 10, None),
     FieldSchema("vadt", int, 40, 10, 0),
+    FieldSchema("idr", int, 50, 10, 0),
 )
 
 _ICFDCONTROLIMPOSEDMOVE_CARD1 = (
-    FieldSchema("alphal", int, 0, 10, None),
-    FieldSchema("betal", int, 10, 10, None),
-    FieldSchema("gammal", int, 20, 10, None),
-    FieldSchema("alphag", int, 30, 10, None),
-    FieldSchema("betag", int, 40, 10, None),
-    FieldSchema("gammag", int, 50, 10, None),
+    FieldSchema("alphal", int, 0, 10, 0),
+    FieldSchema("betal", int, 10, 10, 0),
+    FieldSchema("gammal", int, 20, 10, 0),
+    FieldSchema("alphag", int, 30, 10, 0),
+    FieldSchema("betag", int, 40, 10, 0),
+    FieldSchema("gammag", int, 50, 10, 0),
     FieldSchema("vadr", int, 60, 10, 0),
+    FieldSchema("iang", int, 70, 10, 0),
 )
 
 _ICFDCONTROLIMPOSEDMOVE_CARD2 = (
@@ -59,7 +62,7 @@ _ICFDCONTROLIMPOSEDMOVE_CARD2 = (
 _ICFDCONTROLIMPOSEDMOVE_CARD3 = (
     FieldSchema("ptido", int, 0, 10, 0),
     FieldSchema("axe", int, 10, 10, 0),
-    FieldSchema("ptidv", int, 20, 10, 0),
+    FieldSchema("nid", int, 20, 10, 0),
 )
 
 class IcfdControlImposedMove(KeywordBase):
@@ -68,6 +71,7 @@ class IcfdControlImposedMove(KeywordBase):
     keyword = "ICFD"
     subkeyword = "CONTROL_IMPOSED_MOVE"
     _link_fields = {
+        "nid": LinkType.NODE,
         "lcvx": LinkType.DEFINE_CURVE,
         "lcvy": LinkType.DEFINE_CURVE,
         "lcvz": LinkType.DEFINE_CURVE,
@@ -102,7 +106,7 @@ class IcfdControlImposedMove(KeywordBase):
         ]
     @property
     def pid(self) -> typing.Optional[int]:
-        """Get or set the This can be any part ID referenced in *ICFD_PART or *ICFD_PART_VOL. If PID = 0,then the whole volume mesh will be used.
+        """Get or set the Part ID. This can be any part ID referenced in *ICFD_PART or *ICFD_PART_VOL. If PID = 0,then the whole volume mesh will be used.
         """ # nopep8
         return self._cards[0].get_value("pid")
 
@@ -113,7 +117,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @property
     def lcvx(self) -> typing.Optional[int]:
-        """Get or set the LCID for the velocity in the three directions (X,Y,Z).
+        """Get or set the Load curve IDs for the velocity in the three directions (X,Y,Z).To use a *DEFINE_FUNCTION, see Remark 4
         """ # nopep8
         return self._cards[0].get_value("lcvx")
 
@@ -124,7 +128,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @property
     def lcvy(self) -> typing.Optional[int]:
-        """Get or set the LCID for the velocity in the three directions (X,Y,Z).
+        """Get or set the Load curve IDs for the velocity in the three directions (X,Y,Z).To use a *DEFINE_FUNCTION, see Remark 4
         """ # nopep8
         return self._cards[0].get_value("lcvy")
 
@@ -135,7 +139,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @property
     def lcvz(self) -> typing.Optional[int]:
-        """Get or set the LCID for the velocity in the three directions (X,Y,Z).
+        """Get or set the Load curve IDs for the velocity in the three directions (X,Y,Z).To use a *DEFINE_FUNCTION, see Remark 4
         """ # nopep8
         return self._cards[0].get_value("lcvz")
 
@@ -146,7 +150,7 @@ class IcfdControlImposedMove(KeywordBase):
 
     @property
     def vadt(self) -> int:
-        """Get or set the Velocity/Displacements flag for translation components
+        """Get or set the Velocity/displacements flag for translation components
         EQ.0:Prescribe Velocity
         EQ.1:Prescribe Displacements
         """ # nopep8
@@ -158,8 +162,23 @@ class IcfdControlImposedMove(KeywordBase):
         self._cards[0].set_value("vadt", value)
 
     @property
-    def alphal(self) -> typing.Optional[int]:
-        """Get or set the LCID for the three Euler angle rotational velocities in the local reference frame.
+    def idr(self) -> int:
+        """Get or set the Flag determining whether to only impose mesh displacement during dynamic relaxation phase (see IDR of *ICFD_CONTROL_GENERAL):
+        EQ.0: Off.
+        EQ.1: On.Apply imposed mesh movement only during the dynamic relaxation phase.
+        """ # nopep8
+        return self._cards[0].get_value("idr")
+
+    @idr.setter
+    def idr(self, value: int) -> None:
+        """Set the idr property."""
+        if value not in [0, 1, None]:
+            raise Exception("""idr must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("idr", value)
+
+    @property
+    def alphal(self) -> int:
+        """Get or set the Load curve IDs for the three Euler angle rotational velocities in the local reference frame.To use a *DEFINE_FUNCTION, see Remark 4
         """ # nopep8
         return self._cards[1].get_value("alphal")
 
@@ -169,8 +188,8 @@ class IcfdControlImposedMove(KeywordBase):
         self._cards[1].set_value("alphal", value)
 
     @property
-    def betal(self) -> typing.Optional[int]:
-        """Get or set the LCID for the three Euler angle rotational velocities in the local reference frame.
+    def betal(self) -> int:
+        """Get or set the Load curve IDs for the three Euler angle rotational velocities in the local reference frame.To use a *DEFINE_FUNCTION, see Remark 4
         """ # nopep8
         return self._cards[1].get_value("betal")
 
@@ -180,8 +199,8 @@ class IcfdControlImposedMove(KeywordBase):
         self._cards[1].set_value("betal", value)
 
     @property
-    def gammal(self) -> typing.Optional[int]:
-        """Get or set the LCID for the three Euler angle rotational velocities in the local reference frame.
+    def gammal(self) -> int:
+        """Get or set the Load curve IDs for the three Euler angle rotational velocities in the local reference frame.To use a *DEFINE_FUNCTION, see Remark 4
         """ # nopep8
         return self._cards[1].get_value("gammal")
 
@@ -191,8 +210,8 @@ class IcfdControlImposedMove(KeywordBase):
         self._cards[1].set_value("gammal", value)
 
     @property
-    def alphag(self) -> typing.Optional[int]:
-        """Get or set the LCID for the three Euler angle rotational velocities in the global reference frame.
+    def alphag(self) -> int:
+        """Get or set the Load curve IDs for the three Euler angle rotational velocities in the global reference frame.To use a *DEFINE_FUNCTION, see Remark 4
         """ # nopep8
         return self._cards[1].get_value("alphag")
 
@@ -202,8 +221,8 @@ class IcfdControlImposedMove(KeywordBase):
         self._cards[1].set_value("alphag", value)
 
     @property
-    def betag(self) -> typing.Optional[int]:
-        """Get or set the LCID for the three Euler angle rotational velocities in the global reference frame.
+    def betag(self) -> int:
+        """Get or set the Load curve IDs for the three Euler angle rotational velocities in the global reference frame.To use a *DEFINE_FUNCTION, see Remark 4
         """ # nopep8
         return self._cards[1].get_value("betag")
 
@@ -213,8 +232,8 @@ class IcfdControlImposedMove(KeywordBase):
         self._cards[1].set_value("betag", value)
 
     @property
-    def gammag(self) -> typing.Optional[int]:
-        """Get or set the LCID for the three Euler angle rotational velocities in the global reference frame.
+    def gammag(self) -> int:
+        """Get or set the Load curve IDs for the three Euler angle rotational velocities in the global reference frame.To use a *DEFINE_FUNCTION, see Remark 4
         """ # nopep8
         return self._cards[1].get_value("gammag")
 
@@ -225,9 +244,9 @@ class IcfdControlImposedMove(KeywordBase):
 
     @property
     def vadr(self) -> int:
-        """Get or set the Velocity/Displacements flag for rotation components
-        EQ.0:Prescribe Velocity
-        EQ.1:Prescribe Displacements
+        """Get or set the Velocity/displacements flag for rotation components
+        EQ.0:Prescribe velocity
+        EQ.1:Prescribe displacements
         """ # nopep8
         return self._cards[1].get_value("vadr")
 
@@ -235,6 +254,21 @@ class IcfdControlImposedMove(KeywordBase):
     def vadr(self, value: int) -> None:
         """Set the vadr property."""
         self._cards[1].set_value("vadr", value)
+
+    @property
+    def iang(self) -> int:
+        """Get or set the Rotation matrix type:
+        EQ.0: Euler angles using  Z(a)X(b)Z(r) intrinsic rotations.
+        EQ.1: Tait - Bryan angles using Z(a)X(b)Y(r) intrinsic rotations
+        """ # nopep8
+        return self._cards[1].get_value("iang")
+
+    @iang.setter
+    def iang(self, value: int) -> None:
+        """Set the iang property."""
+        if value not in [0, 1, None]:
+            raise Exception("""iang must be `None` or one of {0,1}.""")
+        self._cards[1].set_value("iang", value)
 
     @property
     def ptid(self) -> int:
@@ -326,7 +360,10 @@ class IcfdControlImposedMove(KeywordBase):
 
     @property
     def axe(self) -> int:
-        """Get or set the Rotation axis (X=1, Y=2, Z=3).
+        """Get or set the Rotation axis
+        EQ.1: X-axis
+        EQ.2: Y-axis
+        EQ.3: Z-axis.
         """ # nopep8
         return self._cards[3].get_value("axe")
 
@@ -336,15 +373,20 @@ class IcfdControlImposedMove(KeywordBase):
         self._cards[3].set_value("axe", value)
 
     @property
-    def ptidv(self) -> int:
-        """Get or set the Point ID (See ICFD_DEFINE_POINT) for the rotation velocity. If point is static, no rotation will occur.
+    def nid(self) -> int:
+        """Get or set the ICFD surface node ID for the rotational velocity. If the node is static, no rotation will occur. See Remark 3.
         """ # nopep8
-        return self._cards[3].get_value("ptidv")
+        return self._cards[3].get_value("nid")
 
-    @ptidv.setter
-    def ptidv(self, value: int) -> None:
-        """Set the ptidv property."""
-        self._cards[3].set_value("ptidv", value)
+    @nid.setter
+    def nid(self, value: int) -> None:
+        """Set the nid property."""
+        self._cards[3].set_value("nid", value)
+
+    @property
+    def nid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
 
     @property
     def lcvx_link(self) -> typing.Optional[DefineCurve]:

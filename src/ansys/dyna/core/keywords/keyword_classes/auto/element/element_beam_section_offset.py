@@ -250,17 +250,17 @@ class ElementBeamSectionOffset(KeywordBase):
     @property
     def stype(self) -> str:
         """Get or set the Section type (A format):
-        EQ.SECTION_01: I-shape		EQ.SECTION_12: Cross
-        EQ.SECTION_02: Channel	EQ.SECTION_13: H-shape
-        EQ.SECTION_03: L-shape		EQ.SECTION_14: T-shape2
-        EQ.SECTION_04: T-shape		EQ.SECTION_15: I-shape3
-        EQ.SECTION_05: Tubular box	EQ.SECTION_16: Channel2
-        EQ.SECTION_06: Z-shape		EQ.SECTION_17: Channel3
-        EQ.SECTION_07: Trapezoidal	EQ.SECTION_18: T-shape3
-        EQ.SECTION_08: Circular		EQ.SECTION_19: Box-shape2
-        EQ.SECTION_09: Tubular		EQ.SECTION_20: Hexagon
-        EQ.SECTION_10: I-shape2	EQ.SECTION_21: Hat-shape
-        EQ.SECTION_11: Solid box	EQ.SECTION_22: Hat-shape2
+        EQ.SECTION_01: I-shape  EQ.SECTION_12: Cross
+        EQ.SECTION_02: Channel EQ.SECTION_13: H-shape
+        EQ.SECTION_03: L-shape  EQ.SECTION_14: T-shape2
+        EQ.SECTION_04: T-shape  EQ.SECTION_15: I-shape3
+        EQ.SECTION_05: Tubular box EQ.SECTION_16: Channel2
+        EQ.SECTION_06: Z-shape  EQ.SECTION_17: Channel3
+        EQ.SECTION_07: Trapezoidal EQ.SECTION_18: T-shape3
+        EQ.SECTION_08: Circular  EQ.SECTION_19: Box-shape2
+        EQ.SECTION_09: Tubular  EQ.SECTION_20: Hexagon
+        EQ.SECTION_10: I-shape2 EQ.SECTION_21: Hat-shape
+        EQ.SECTION_11: Solid box EQ.SECTION_22: Hat-shape2
         """ # nopep8
         return self._cards[1].get_value("stype")
 
@@ -339,7 +339,7 @@ class ElementBeamSectionOffset(KeywordBase):
 
     @property
     def wx1(self) -> float:
-        """Get or set the Offset vector at modal point N1.
+        """Get or set the Offset vector at nodal point N1.
         """ # nopep8
         return self._cards[2].get_value("wx1")
 
@@ -350,7 +350,7 @@ class ElementBeamSectionOffset(KeywordBase):
 
     @property
     def wy1(self) -> float:
-        """Get or set the Offset vector at modal point N1.
+        """Get or set the Offset vector at nodal point N1.
         """ # nopep8
         return self._cards[2].get_value("wy1")
 
@@ -361,7 +361,7 @@ class ElementBeamSectionOffset(KeywordBase):
 
     @property
     def wz1(self) -> float:
-        """Get or set the Offset vector at modal point N1.
+        """Get or set the Offset vector at nodal point N1.
         """ # nopep8
         return self._cards[2].get_value("wz1")
 
@@ -372,7 +372,7 @@ class ElementBeamSectionOffset(KeywordBase):
 
     @property
     def wx2(self) -> float:
-        """Get or set the Offset vector at modal point N2.
+        """Get or set the Offset vector at nodal point N2.
         """ # nopep8
         return self._cards[2].get_value("wx2")
 
@@ -383,7 +383,7 @@ class ElementBeamSectionOffset(KeywordBase):
 
     @property
     def wy2(self) -> float:
-        """Get or set the Offset vector at modal point N2.
+        """Get or set the Offset vector at nodal point N2.
         """ # nopep8
         return self._cards[2].get_value("wy2")
 
@@ -394,7 +394,7 @@ class ElementBeamSectionOffset(KeywordBase):
 
     @property
     def wz2(self) -> float:
-        """Get or set the Offset vector at modal point N2.
+        """Get or set the Offset vector at nodal point N2.
         """ # nopep8
         return self._cards[2].get_value("wz2")
 

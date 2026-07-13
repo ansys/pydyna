@@ -84,11 +84,11 @@ class EmControlContact(KeywordBase):
 
     @property
     def ctype(self) -> int:
-        """Get or set the Contact type :
-        EQ. - 1:	Node to node contact based on constraints on the scalar potential.See Remark 1.
-        EQ.0 : Node to node penalty based contact on the scalar potential.
-        EQ.1 : Discrete mortar penalty contact on the scalar potential.
-        EQ.2 : Continuous mortar penalty contact on the scalar potential and the vector potential(when active).
+        """Get or set the Contact type:
+        EQ. - 1: Node to node contact based on constraints on the scalar potential.See Remark 1.
+        EQ.0: Node to node penalty based contact on the scalar potential.
+        EQ.1: Discrete mortar penalty contact on the scalar potential.
+        EQ.2: Continuous mortar penalty contact on the scalar potential and the vector potential(when active).
         """ # nopep8
         return self._cards[0].get_value("ctype")
 

@@ -598,7 +598,7 @@ class Mat133(KeywordBase):
     @property
     def sig00(self) -> typing.Optional[float]:
         """Get or set the Yield stress in 00 direction
-        LT.0.0:	-SIG00 is load curve ID, defining this stress as a function of temperature
+        LT.0.0: -SIG00 is load curve ID, defining this stress as a function of temperature
         """ # nopep8
         return self._cards[4].get_value("sig00")
 
@@ -610,7 +610,7 @@ class Mat133(KeywordBase):
     @property
     def sig45(self) -> typing.Optional[float]:
         """Get or set the Yield stress in 45 direction
-        LT.0.0:	-SIG45 is load curve ID, defining this stress as a function of temperature
+        LT.0.0: -SIG45 is load curve ID, defining this stress as a function of temperature
         """ # nopep8
         return self._cards[4].get_value("sig45")
 
@@ -622,7 +622,7 @@ class Mat133(KeywordBase):
     @property
     def sig90(self) -> typing.Optional[float]:
         """Get or set the Yield stress in 90 direction
-        LT.0.0:	-SIG90 is load curve ID, defining this stress as a function of temperature
+        LT.0.0: -SIG90 is load curve ID, defining this stress as a function of temperature
         """ # nopep8
         return self._cards[4].get_value("sig90")
 
@@ -634,7 +634,7 @@ class Mat133(KeywordBase):
     @property
     def r00(self) -> typing.Optional[float]:
         """Get or set the R-value in 00 direction
-        LT.0.0:	-R00 is load curve ID, defining this value as a function of temperature
+        LT.0.0: -R00 is load curve ID, defining this value as a function of temperature
         """ # nopep8
         return self._cards[4].get_value("r00")
 
@@ -646,7 +646,7 @@ class Mat133(KeywordBase):
     @property
     def r45(self) -> typing.Optional[float]:
         """Get or set the R-value in 45 direction
-        LT.0.0:	-R45 is load curve ID, defining this value as a function of temperature
+        LT.0.0: -R45 is load curve ID, defining this value as a function of temperature
         """ # nopep8
         return self._cards[4].get_value("r45")
 
@@ -658,7 +658,7 @@ class Mat133(KeywordBase):
     @property
     def r90(self) -> typing.Optional[float]:
         """Get or set the R-value in 90 direction
-        LT.0.0:	-R90 is load curve ID, defining this value as a function of temperature.
+        LT.0.0: -R90 is load curve ID, defining this value as a function of temperature.
         """ # nopep8
         return self._cards[4].get_value("r90")
 
@@ -669,7 +669,7 @@ class Mat133(KeywordBase):
 
     @property
     def sigxx(self) -> typing.Optional[float]:
-        """Get or set the xx-component of stress on yield surface (see Remark 2).
+        """Get or set the xx-component of stress on the yield surface (see Remark 2).
         """ # nopep8
         return self._cards[5].get_value("sigxx")
 
@@ -680,7 +680,7 @@ class Mat133(KeywordBase):
 
     @property
     def sigyy(self) -> typing.Optional[float]:
-        """Get or set the yy-component of stress on yield surface (see Remark 2).
+        """Get or set the yy-component of stress on the yield surface (see Remark 2).
         """ # nopep8
         return self._cards[5].get_value("sigyy")
 
@@ -691,7 +691,7 @@ class Mat133(KeywordBase):
 
     @property
     def sigxy(self) -> typing.Optional[float]:
-        """Get or set the xy-component of stress on yield surface (see Remark 2).
+        """Get or set the xy-component of stress on the yield surface (see Remark 2).
         """ # nopep8
         return self._cards[5].get_value("sigxy")
 
@@ -702,7 +702,7 @@ class Mat133(KeywordBase):
 
     @property
     def dxx(self) -> typing.Optional[float]:
-        """Get or set the xx-component of tangent to yield surface (see Remark 2)
+        """Get or set the xx-component of tangent to the yield surface (see Remark 2)
         """ # nopep8
         return self._cards[5].get_value("dxx")
 
@@ -713,7 +713,7 @@ class Mat133(KeywordBase):
 
     @property
     def dyy(self) -> typing.Optional[float]:
-        """Get or set the yy-component of tangent to yield surface (see Remark 2)
+        """Get or set the yy-component of tangent to the yield surface (see Remark 2)
         """ # nopep8
         return self._cards[5].get_value("dyy")
 
@@ -724,7 +724,7 @@ class Mat133(KeywordBase):
 
     @property
     def dxy(self) -> typing.Optional[float]:
-        """Get or set the xy-component of tangent to yield surface (see Remark 2)
+        """Get or set the xy-component of tangent to the yield surface (see Remark 2)
         """ # nopep8
         return self._cards[5].get_value("dxy")
 
@@ -740,7 +740,7 @@ class Mat133(KeywordBase):
         element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
         EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
         *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
         """ # nopep8

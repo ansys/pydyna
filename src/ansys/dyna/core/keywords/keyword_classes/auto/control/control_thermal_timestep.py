@@ -30,7 +30,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import De
 
 _CONTROLTHERMALTIMESTEP_CARD0 = (
     FieldSchema("ts", int, 0, 10, 0),
-    FieldSchema("tip", float, 10, 10, 0.5),
+    FieldSchema("tip", float, 10, 10, 1.0),
     FieldSchema("its", float, 20, 10, None),
     FieldSchema("tmin", float, 30, 10, None),
     FieldSchema("tmax", float, 40, 10, None),
@@ -60,8 +60,8 @@ class ControlThermalTimestep(KeywordBase):
     @property
     def ts(self) -> int:
         """Get or set the Time step control:
-        EQ.0: fixed time step (default),
-        EQ.1: variable time step (may increase or decrease).
+        EQ.0: Fixed time step (default),
+        EQ.1: Variable time step (may increase or decrease).
         """ # nopep8
         return self._cards[0].get_value("ts")
 
@@ -73,8 +73,8 @@ class ControlThermalTimestep(KeywordBase):
     @property
     def tip(self) -> float:
         """Get or set the Time integration parameter:
-        Default is 0.5 - Crank-Nicholson scheme (default),
-        EQ 1.0: fully implicit.
+        0.5 - Crank-Nicholson scheme (default),
+        EQ 1.0: Fully implicit(default).
         """ # nopep8
         return self._cards[0].get_value("tip")
 
@@ -135,8 +135,8 @@ class ControlThermalTimestep(KeywordBase):
 
     @property
     def tscp(self) -> float:
-        """Get or set the Time step control parameter. The thermal time step is decreased by this factor if convergence is not obtained. 0.0 < TSCP < 1.0:
-        Default value is 0.5.
+        """Get or set the Time step control parameter (0. < TSCP < 1.0).  The thermal time step is decreased by this factor, if the temperature change in the time step exceeds DTEMP or if the nonlinear solver fails to reach convergence within the given maximum number of matrix reformations.  If the nonlinear solution algorithm is actually diverging, the thermal time step is decreased by DCP defined in *CONTROL_THERMAL_NONLINEAR.
+        EQ.0.0: Set to a factor of 0.5
         """ # nopep8
         return self._cards[0].get_value("tscp")
 
@@ -147,7 +147,7 @@ class ControlThermalTimestep(KeywordBase):
 
     @property
     def lcts(self) -> typing.Optional[int]:
-        """Get or set the LCTS designates a load curve number which defines the thermal time step as a function of time. If LCTS is defined, then the other time step control parameters on this keyword are ignored.
+        """Get or set the Load curve ID which defines data pairs of (thermal time breakpoint ,new time step). The time step will be adjusted to hit the time breakpoints exactly. After the time breakpoint, the time step will be set to the new time step ordinate value in the load curve.
         """ # nopep8
         return self._cards[0].get_value("lcts")
 

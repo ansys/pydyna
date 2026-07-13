@@ -58,8 +58,8 @@ class ControlSteadyStateRolling(KeywordBase):
     @property
     def imass(self) -> int:
         """Get or set the Inertia switching flag
-        EQ.0:  include inertia during an implicit dynamic simulation.
-        EQ.1:  treat steady state rolling subsystems as quasi-static during implicit dynamic simulations.
+        EQ.0: include inertia during an implicit dynamic simulation.
+        EQ.1: treat steady state rolling subsystems as quasi-static during implicit dynamic simulations.
         """ # nopep8
         return self._cards[0].get_value("imass")
 
@@ -83,7 +83,7 @@ class ControlSteadyStateRolling(KeywordBase):
 
     @property
     def lcdmur(self) -> int:
-        """Get or set the Optional load curve for scaling the friction forces in contact during dynamic relaxation. If  LCDMUR isn’t specified, LCDMU is used.
+        """Get or set the Optional load curve for scaling the friction forces in contact during dynamic relaxation. If  LCDMUR isnt specified, LCDMU is used.
         """ # nopep8
         return self._cards[0].get_value("lcdmur")
 
@@ -95,8 +95,8 @@ class ControlSteadyStateRolling(KeywordBase):
     @property
     def ivel(self) -> int:
         """Get or set the Velocity switching flag.
-        EQ.0:  eliminate the steady state rolling body forces and set the velocities of the nodes after dynamic relaxation.
-        EQ.1:  keep the steady state rolling body forces after dynamic relaxation instead of setting the velocities.
+        EQ.0: eliminate the steady state rolling body forces and set the velocities of the nodes after dynamic relaxation.
+        EQ.1: keep the steady state rolling body forces after dynamic relaxation instead of setting the velocities.
         """ # nopep8
         return self._cards[0].get_value("ivel")
 

@@ -360,7 +360,9 @@ class MatRht(KeywordBase):
 
     @property
     def betac(self) -> typing.Optional[float]:
-        """Get or set the Compressive strain rate dependence exponent (optional).
+        """Get or set the For compressive strain rate dependence F_r^c (optional):
+        GT.0.0: Exponent β_c in the equation in the remarks below.
+        LT.0.0 : Load curve ID = |BETAC|  for the curve that defines F_r^ c as a function of strain rate ε ̇_p.This option supports logarithmic interpolation.When the first abscissa value is negative, LS - DYNA assumes that all the values represent the natural logarithm of a strain rate.
         """ # nopep8
         return self._cards[2].get_value("betac")
 
@@ -371,7 +373,9 @@ class MatRht(KeywordBase):
 
     @property
     def betat(self) -> typing.Optional[float]:
-        """Get or set the Tensile strain rate dependence exponent (optional).
+        """Get or set the For tensile strain rate dependence F_r^t (optional):
+        GT.0.0: Exponent β_t in the equation in the remarks below.
+        LT.0.0 : Load curve ID = | BETAT|  for the curve that defines F_r^ t as a function of strain rate ε ̇_p.This option supports logarithmic interpolation.When the first abscissa value is negative, LS - DYNA assumes that all the values represent the natural logarithm of a strain rate.
         """ # nopep8
         return self._cards[2].get_value("betat")
 

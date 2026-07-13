@@ -186,9 +186,9 @@ class DefineDeFlowDrag(KeywordBase):
     @property
     def dflag(self) -> int:
         """Get or set the Influence of neighbors on drag treatment:
-        EQ.1:	Consider only shadowing effect(default)
-        EQ.2 : See Remark 3.
-        EQ.3 : See Remark 3.
+        EQ.1: Consider only shadowing effect(default)
+        EQ.2: See Remark 3.
+        EQ.3: See Remark 3.
         """ # nopep8
         return self._cards[1].get_value("dflag")
 

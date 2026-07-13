@@ -54,7 +54,7 @@ class InterfaceCompensation3DFlange(KeywordBase):
         ]
     @property
     def pid(self) -> typing.Optional[int]:
-        """Get or set the The part ID of the flanging steel to be compensated
+        """Get or set the Part ID of the flanging steel to be compensated
         """ # nopep8
         return self._cards[0].get_value("pid")
 
@@ -65,7 +65,7 @@ class InterfaceCompensation3DFlange(KeywordBase):
 
     @property
     def vx(self) -> typing.Optional[float]:
-        """Get or set the The vector components of the flanging steel�s (PID) moving direction.
+        """Get or set the Vector components of the flanging steels (PID) moving direction.
         """ # nopep8
         return self._cards[0].get_value("vx")
 
@@ -76,7 +76,7 @@ class InterfaceCompensation3DFlange(KeywordBase):
 
     @property
     def vy(self) -> typing.Optional[float]:
-        """Get or set the The vector components of the flanging steel�s (PID) moving direction.
+        """Get or set the Vector components of the flanging steels (PID) moving direction.
         """ # nopep8
         return self._cards[0].get_value("vy")
 
@@ -87,7 +87,7 @@ class InterfaceCompensation3DFlange(KeywordBase):
 
     @property
     def vz(self) -> typing.Optional[float]:
-        """Get or set the The vector components of the flanging steel�s (PID) moving direction.
+        """Get or set the Vector components of the flanging steels (PID) moving direction.
         """ # nopep8
         return self._cards[0].get_value("vz")
 

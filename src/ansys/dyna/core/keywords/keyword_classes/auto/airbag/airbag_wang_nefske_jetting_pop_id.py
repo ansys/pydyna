@@ -146,6 +146,7 @@ class AirbagWangNefskeJettingPopId(KeywordBase):
         "lccp23": LinkType.DEFINE_CURVE,
         "lcap23": LinkType.DEFINE_CURVE,
         "lcefr": LinkType.DEFINE_CURVE,
+        "knkdn": LinkType.DEFINE_CURVE,
         "lcbf": LinkType.DEFINE_CURVE,
         "psid": LinkType.SET_PART,
         "rbidp": LinkType.PART,
@@ -1125,6 +1126,21 @@ class AirbagWangNefskeJettingPopId(KeywordBase):
     def lcefr_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcefr."""
         self.lcefr = value.lcid
+
+    @property
+    def knkdn_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for knkdn."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.knkdn:
+                return kwd
+        return None
+
+    @knkdn_link.setter
+    def knkdn_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for knkdn."""
+        self.knkdn = value.lcid
 
     @property
     def lcbf_link(self) -> typing.Optional[DefineCurve]:

@@ -30,10 +30,11 @@ from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _AIRBAGREFERENCEGEOMETRYBIRTHID_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
-    FieldSchema("sx", float, 10, 10, None),
-    FieldSchema("sy", float, 20, 10, None),
-    FieldSchema("sz", float, 30, 10, None),
+    FieldSchema("sx", float, 10, 10, 1.0),
+    FieldSchema("sy", float, 20, 10, 1.0),
+    FieldSchema("sz", float, 30, 10, 1.0),
     FieldSchema("nido", int, 40, 10, None),
+    FieldSchema("iout", int, 50, 10, 0),
 )
 
 _AIRBAGREFERENCEGEOMETRYBIRTHID_CARD1 = (
@@ -86,7 +87,7 @@ class AirbagReferenceGeometryBirthId(KeywordBase):
         self._cards[0].set_value("id", value)
 
     @property
-    def sx(self) -> typing.Optional[float]:
+    def sx(self) -> float:
         """Get or set the Scale factor for X direction.
         """ # nopep8
         return self._cards[0].get_value("sx")
@@ -97,7 +98,7 @@ class AirbagReferenceGeometryBirthId(KeywordBase):
         self._cards[0].set_value("sx", value)
 
     @property
-    def sy(self) -> typing.Optional[float]:
+    def sy(self) -> float:
         """Get or set the Scale factor for Y direction.
         """ # nopep8
         return self._cards[0].get_value("sy")
@@ -108,7 +109,7 @@ class AirbagReferenceGeometryBirthId(KeywordBase):
         self._cards[0].set_value("sy", value)
 
     @property
-    def sz(self) -> typing.Optional[float]:
+    def sz(self) -> float:
         """Get or set the Scale factor for Z direction.
         """ # nopep8
         return self._cards[0].get_value("sz")
@@ -128,6 +129,21 @@ class AirbagReferenceGeometryBirthId(KeywordBase):
     def nido(self, value: int) -> None:
         """Set the nido property."""
         self._cards[0].set_value("nido", value)
+
+    @property
+    def iout(self) -> int:
+        """Get or set the Flag for outputting the current reference node coordinates
+        EQ.0: Do not output the current reference node coordinates.
+        EQ.1: Store the current reference node coordinates for output to a keyword file
+        """ # nopep8
+        return self._cards[0].get_value("iout")
+
+    @iout.setter
+    def iout(self, value: int) -> None:
+        """Set the iout property."""
+        if value not in [0, 1, None]:
+            raise Exception("""iout must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("iout", value)
 
     @property
     def birth(self) -> float:

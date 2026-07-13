@@ -196,19 +196,21 @@ class Mat197(KeywordBase):
     @property
     def itype(self) -> int:
         """Get or set the Type:
-        EQ.0:	sliding (spherical or cylindrical)
-        EQ.1:	elastomeric
-        EQ.2:	sliding (two perpendicular curved beams)
-        EQ.3:	lead rubber bearing
+        EQ.0: sliding (spherical or cylindrical)
+        EQ.1: elastomeric
+        EQ.2: sliding (two perpendicular curved beams)
+        EQ.3: lead rubber bearing
         EQ.4: high damping rubber bearing.
+        EQ.4: high damping rubber bearing
+        EQ.5: sliding with rim failure
         """ # nopep8
         return self._cards[0].get_value("itype")
 
     @itype.setter
     def itype(self, value: int) -> None:
         """Set the itype property."""
-        if value not in [0, 1, 2, 3, 4, None]:
-            raise Exception("""itype must be `None` or one of {0,1,2,3,4}.""")
+        if value not in [0, 1, 2, 3, 4, 5, None]:
+            raise Exception("""itype must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("itype", value)
 
     @property
@@ -433,7 +435,7 @@ class Mat197(KeywordBase):
 
     @property
     def fmaxyc(self) -> typing.Optional[float]:
-        """Get or set the Max friction coefficient (dynamic) for local Y-axis (compression).  (ITYPE=2 only).
+        """Get or set the Max friction coefficient (dynamic) for local Y-axis (compression). (ITYPE=2 only).
         """ # nopep8
         return self._cards[3].get_value("fmaxyc")
 
@@ -466,7 +468,7 @@ class Mat197(KeywordBase):
 
     @property
     def ylock(self) -> typing.Optional[float]:
-        """Get or set the Stiffness locking the local Y-displacement (optional -single-axis sliding).  (ITYPE=2 only).
+        """Get or set the Stiffness locking the local Y-displacement (optional -single-axis sliding). (ITYPE=2 only).
         """ # nopep8
         return self._cards[3].get_value("ylock")
 

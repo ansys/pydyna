@@ -84,9 +84,9 @@ class ControlFormingAutopositionParameterSet(KeywordBase):
     @property
     def dir(self) -> int:
         """Get or set the Direction that the part will be moved
-        .EQ.1:  x direction
-        .EQ.2:  y direction
-        .EQ.3:  z direction
+        .EQ.1: x direction
+        .EQ.2: y direction
+        .EQ.3: z direction
         """ # nopep8
         return self._cards[0].get_value("dir")
 
@@ -110,7 +110,7 @@ class ControlFormingAutopositionParameterSet(KeywordBase):
 
     @property
     def position(self) -> int:
-        """Get or set the .EQ1: means that PID is above MPID	.EQ-1: means that PID is below MPID
+        """Get or set the .EQ1: means that PID is above MPID .EQ-1: means that PID is below MPID
         """ # nopep8
         return self._cards[0].get_value("position")
 

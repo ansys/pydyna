@@ -25,6 +25,8 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _ICFDBOUNDARYWINDKESSEL_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
@@ -32,7 +34,15 @@ _ICFDBOUNDARYWINDKESSEL_CARD0 = (
     FieldSchema("r1", float, 20, 10, 0.0),
     FieldSchema("c1", float, 30, 10, 0.0),
     FieldSchema("r2", float, 40, 10, 0.0),
-    FieldSchema("l1", float, 50, 10, 0.0),
+    FieldSchema("unused", int, 50, 10, None),
+)
+
+_ICFDBOUNDARYWINDKESSEL_CARD1 = (
+    FieldSchema("p2lcid", int, 0, 10, None),
+    FieldSchema("c2", float, 10, 10, 0.0),
+    FieldSchema("r3", float, 20, 10, 0.0),
+    FieldSchema("p0", float, 30, 10, 0.0),
+    FieldSchema("p1", float, 40, 10, 0.0),
 )
 
 class IcfdBoundaryWindkessel(KeywordBase):
@@ -40,6 +50,9 @@ class IcfdBoundaryWindkessel(KeywordBase):
 
     keyword = "ICFD"
     subkeyword = "BOUNDARY_WINDKESSEL"
+    _link_fields = {
+        "p2lcid": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the IcfdBoundaryWindkessel class."""
@@ -47,6 +60,10 @@ class IcfdBoundaryWindkessel(KeywordBase):
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _ICFDBOUNDARYWINDKESSEL_CARD0,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _ICFDBOUNDARYWINDKESSEL_CARD1,
                 **kwargs,
             ),
         ]
@@ -63,11 +80,7 @@ class IcfdBoundaryWindkessel(KeywordBase):
 
     @property
     def wtype(self) -> typing.Optional[int]:
-        """Get or set the Circuit type (See Remarks) :
-        EQ.1:	Windkessel circuit
-        EQ.2:	Windkessel circuit with inverted flux
-        EQ.3:	CV type circuit
-        EQ.4:	CV type circuit with inverted flux.
+        """Get or set the Circuit type. See Remarks and Figures.
         """ # nopep8
         return self._cards[0].get_value("wtype")
 
@@ -110,13 +123,72 @@ class IcfdBoundaryWindkessel(KeywordBase):
         self._cards[0].set_value("r2", value)
 
     @property
-    def l1(self) -> float:
+    def p2lcid(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID describing behavior of P2(t) function of time for CV type circuit.
+        """ # nopep8
+        return self._cards[1].get_value("p2lcid")
+
+    @p2lcid.setter
+    def p2lcid(self, value: int) -> None:
+        """Set the p2lcid property."""
+        self._cards[1].set_value("p2lcid", value)
+
+    @property
+    def c2(self) -> float:
         """Get or set the Parameters (Resistances, inductances, capacities) for the different circuits.
         """ # nopep8
-        return self._cards[0].get_value("l1")
+        return self._cards[1].get_value("c2")
 
-    @l1.setter
-    def l1(self, value: float) -> None:
-        """Set the l1 property."""
-        self._cards[0].set_value("l1", value)
+    @c2.setter
+    def c2(self, value: float) -> None:
+        """Set the c2 property."""
+        self._cards[1].set_value("c2", value)
+
+    @property
+    def r3(self) -> float:
+        """Get or set the Parameters (Resistances, inductances, capacities) for the different circuits.
+        """ # nopep8
+        return self._cards[1].get_value("r3")
+
+    @r3.setter
+    def r3(self, value: float) -> None:
+        """Set the r3 property."""
+        self._cards[1].set_value("r3", value)
+
+    @property
+    def p0(self) -> float:
+        """Get or set the Initial pressures at circuit junctions when applicable.
+        """ # nopep8
+        return self._cards[1].get_value("p0")
+
+    @p0.setter
+    def p0(self, value: float) -> None:
+        """Set the p0 property."""
+        self._cards[1].set_value("p0", value)
+
+    @property
+    def p1(self) -> float:
+        """Get or set the Initial pressures at circuit junctions when applicable.
+        """ # nopep8
+        return self._cards[1].get_value("p1")
+
+    @p1.setter
+    def p1(self, value: float) -> None:
+        """Set the p1 property."""
+        self._cards[1].set_value("p1", value)
+
+    @property
+    def p2lcid_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for p2lcid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.p2lcid:
+                return kwd
+        return None
+
+    @p2lcid_link.setter
+    def p2lcid_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for p2lcid."""
+        self.p2lcid = value.lcid
 

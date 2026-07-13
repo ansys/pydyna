@@ -174,13 +174,13 @@ class PartContactPrint(KeywordBase):
 
     @property
     def adpopt(self) -> typing.Optional[int]:
-        """Get or set the Indicate if this part is adapted or not. See also *CONTROL_ADAPTIVITY.
+        """Get or set the Indicate if this part is adapted. See also *CONTROL_ADAPTIVITY.
         LT.0: R-adaptive remeshing for 2-D solids, |ADPOPT| gives the load curve ID that defines the element size as a function of time.
         EQ.0:Adaptive remeshing is inactive for this part ID.
-        EQ.1:	h - adaptive for 3D shells and for shell / solid / shell sandwich composites.
-        EQ.2 : r - adaptive remeshing for 2D solids, 3D tetrahedrons and 3D EFG.
-        EQ.3 : Axisymmetric r - adaptive remeshing for 3D solid(see Remark 6).
-        EQ.9 : Passive h - adaptive for 3D shells.The elements in this part will not be split unless their neighboring elements in other parts need to be split more than one level.
+        EQ.1: h - adaptivity for 3D shells and for shell / solid / shell sandwich composites.
+        EQ.2: r - adaptive remeshing for 2D solids, 3D tetrahedrons and 3D EFG.
+        EQ.3: Axisymmetric r - adaptive remeshing for 3D solid(see Remark 6).
+        EQ.9: Passive h - adaptivity for 3D shells.The elements in this part will not be split unless their neighboring elements in other parts need to be split more than one level.
         """ # nopep8
         return self._cards[1].get_value("adpopt")
 
@@ -191,8 +191,7 @@ class PartContactPrint(KeywordBase):
 
     @property
     def tmid(self) -> int:
-        """Get or set the Thermal material property identication defined in the *MAT_THERMAL section. Thermal properties must be specified for all solid, shell, and thick shell parts if a thermal or coupled thermal structual/analysis is being performed. Beams and discrete elements are not considered in thermal analyses.
-        EQ.0: defaults to MID.
+        """Get or set the Thermal material property identication defined in the *MAT_THERMAL section. Thermal properties must be specified for all solid, shell, and thick shell parts for thermal or coupled thermal-structural analyses. Discrete elements are not considered in thermal analyses. See Remark 7.
         """ # nopep8
         return self._cards[1].get_value("tmid")
 
@@ -247,7 +246,12 @@ class PartContactPrint(KeywordBase):
 
     @property
     def optt(self) -> typing.Optional[float]:
-        """Get or set the Optional contact thickness. For SOFT = 2, it applies to solids, shells and beams. For SOFT = 0 and 1 and for Mortar contacts, it applies to shells and beams only. For SOFT = 0 and 1 with the MPP version, OPTT has a different meaning for solid elements. In this case, OPTT overrides the thickness of solid elements used for the calculation of the contact penetration release (see Table Error! Reference source not found.), but it does not affect the contact thickness
+        """Get or set the Optional contact thickness. For SOFT = 2, it applies to solids, shells, and beams. For SOFT = 0 and 1 and Mortar contacts, it only applies to shells and beams.
+        However, for the MPP version only, OPTT does affect the contact behavior of solid elements for SOFT = 0 and 1 but not by changing the contact thickness.
+        In the case of MPP with SOFT = 0 and 1 for solids, OPTT overrides the thickness of the solid elements used for the calculation of the
+        contact penetration release (see Table Error! Reference source not found.) but does not affect the contact thickness. This is not available in SMP.
+        OPTT does not affect the contact thickness when applied to the parts on the tracked side (SURFA) of an AUTOMATIC_NODES_TO_SURFACE contact.
+        However, it affects the contact thickness of this type of contact�s reference side (SURFB).
         """ # nopep8
         return self._cards[2].get_value("optt")
 
@@ -258,7 +262,7 @@ class PartContactPrint(KeywordBase):
 
     @property
     def sft(self) -> typing.Optional[float]:
-        """Get or set the Optional thickness scale factor for PART ID in automatic contact (scales true thickness). This option applies only to contact with shell elements. True thickness is the element thickness of the shell elements.
+        """Get or set the Optional thickness scale factor in automatic contact (scales the true thickness). This option applies to contact with shell and beam elements.The true thickness is the element thickness.
         """ # nopep8
         return self._cards[2].get_value("sft")
 
@@ -269,7 +273,7 @@ class PartContactPrint(KeywordBase):
 
     @property
     def ssf(self) -> typing.Optional[float]:
-        """Get or set the Scale factor on default slave penalty stiffness for this PART ID whenever it appears in the contact definition. If zero, SSF is taken as unity.
+        """Get or set the Scale factor on default tracked surface penalty stiffness for this part ID whenever it appears in the contact definition. If zero, SSF is taken as unity.
         """ # nopep8
         return self._cards[2].get_value("ssf")
 
@@ -280,10 +284,10 @@ class PartContactPrint(KeywordBase):
 
     @property
     def cparm8(self) -> typing.Optional[float]:
-        """Get or set the Flag to exclude beam-to-beam contact from the same PID for CONTACT_AUTOMATIC_GENERAL.  This applies only to MPP.  Global default may be set using CPARM8 on *CONTACT_..._MPP Optional Card.
-        EQ.0 : Flag is not set(default).
-        EQ.1 : Flag is set.
-        EQ.2 : Flag is set.CPARM8 = 2 has the additional effect of permitting contact treatment of spot weld(type 9) beams in AUTOMATIC_GENERAL contacts; spot weld beams are otherwise disregarded entirely by AUTOMATIC_GENERAL contacts.
+        """Get or set the Flag to exclude beam-to-beam contact from the same PID for CONTACT_AUTOMATIC_GENERAL. The global default may be set using CPARM8 on MPP1 of *CONTACT_�_MPP.
+        EQ.0: Flag is not set(default).
+        EQ.1: Flag is set.
+        EQ.2: Flag is set.CPARM8 = 2 has the additional effect of permitting contact treatment of spot weld(type 9) beams in AUTOMATIC_GENERAL contacts; spot weld beams are otherwise disregarded entirely by AUTOMATIC_GENERAL contacts.
         """ # nopep8
         return self._cards[2].get_value("cparm8")
 
@@ -295,10 +299,10 @@ class PartContactPrint(KeywordBase):
     @property
     def prbf(self) -> int:
         """Get or set the Print flag for RBDOUT and MATSUM files
-        EQ.0: default is taken from the keyword *CONTROL_OUTPUT
-        EQ.1: write data into RDBOUT file only
-        EQ.2: write data into MATSUM file only
-        EQ.3: do not write data into RBDOUT AND MATSUM files
+        EQ.0: default is taken from *CONTROL_OUTPUT
+        EQ.1: write data into the rdbout file only
+        EQ.2: write data into the matsum file only
+        EQ.3: do not write data into rbdout and matsum.
         """ # nopep8
         return self._cards[3].get_value("prbf")
 

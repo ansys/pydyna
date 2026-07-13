@@ -181,12 +181,12 @@ class Mat190(KeywordBase):
     @property
     def hr(self) -> float:
         """Get or set the Hardening rule:
-        EQ.1.0: linear (default),
-        EQ.2.0: exponential.
-        EQ.3.0: load curve.
-        EQ.4.0: exponential (Voce)
-        EQ.5.0: exponential (Gosh)
-        EQ.6.0: exponential (Hocket-Sherby)
+        EQ.1.0: Linear (default),
+        EQ.2.0: Exponential.
+        EQ.3.0: Load curve.
+        EQ.4.0: Exponential (Voce)
+        EQ.5.0: Exponential (Gosh)
+        EQ.6.0: Exponential (Hocket-Sherby)
         """ # nopep8
         return self._cards[0].get_value("hr")
 
@@ -226,8 +226,8 @@ class Mat190(KeywordBase):
     @property
     def iter(self) -> float:
         """Get or set the Iteration flag for speed:
-        ITER.EQ.0.0: fully iterative
-        ITER.EQ.1.0: fixed at three iterations
+        EQ.0.0: Fully iterative
+        EQ.1.0: Fixed at three iterations
         Generally, ITER=0 is recommended. However, ITER=1 is somewhat faster and may give acceptable results in most problems.
         """ # nopep8
         return self._cards[0].get_value("iter")
@@ -285,7 +285,7 @@ class Mat190(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID for the hardening rule.
+        """Get or set the Load curve ID for the load curve hardening rule (HR = 3.0).
         """ # nopep8
         return self._cards[1].get_value("lcid")
 
@@ -296,7 +296,11 @@ class Mat190(KeywordBase):
 
     @property
     def e0(self) -> typing.Optional[float]:
-        """Get or set the epsilon-0 for determining initial yield stress for exponential hardening (default = 0.0).
+        """Get or set the Material parameter
+        HR.EQ.2.0: e_0 for determining initial yield stress for Swift exponential hardening.The default value is 0.0.
+        HR.EQ.4.0: b, coefficient for Voce exponential hardening
+        HR.EQ.5.0: e_0 for determining initial yield stress for Gosh exponential hardening.The default value is 0.0.
+        HR.EQ.6.0: b, coefficient for Hocket - Sherby exponential hardening.
         """ # nopep8
         return self._cards[1].get_value("e0")
 
@@ -307,7 +311,7 @@ class Mat190(KeywordBase):
 
     @property
     def spi(self) -> typing.Optional[float]:
-        """Get or set the spi, if epsilon-0 is zero above (default = 0.0).
+        """Get or set the If epsilon-0 is zero above (default = 0.0).
         EQ.0.0: e0 = (E/k )**[1/(n -1)]
         LT..02: e0 = spi
         GT..02: e0 = (spi/k)**[1/n].
@@ -335,13 +339,12 @@ class Mat190(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option:
-        EQ.0.0: locally orthotropic with material axes determined by
-        element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
-        EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
-        EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
-        LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
-        *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
+        EQ.3.0: Locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
+        *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR).
         """ # nopep8
         return self._cards[2].get_value("aopt")
 
@@ -374,7 +377,8 @@ class Mat190(KeywordBase):
 
     @property
     def fldcid(self) -> typing.Optional[int]:
-        """Get or set the Volume correction curve ID defining the relative volume change (change in volume relative to the initial volume) as a function of the effective plastic strain.  This is only used when nonzero.
+        """Get or set the Load curve ID defining the Forming Limit Diagram. Minor engineering strains in percent are defined as abscissa values and major engineering strains in percent are defined as ordinate values. The forming limit diagram is shown in Figure Error! Reference source not found.
+        In defining the curve, list pairs of minor and major strains starting with the leftmost point and ending with the rightmost point. See *DEFINE_CURVE. See Remark 2.
         """ # nopep8
         return self._cards[2].get_value("fldcid")
 
@@ -385,7 +389,7 @@ class Mat190(KeywordBase):
 
     @property
     def rn(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Hardening exponent equivalent to the n-value in a power law hardening law. If the parameter FLDCID is not defined, this value in combination with the value RT can be used to calculate a forming limit curve to allow for failure. Otherwise it is ignored. See Remark 2.
         """ # nopep8
         return self._cards[2].get_value("rn")
 
@@ -396,7 +400,7 @@ class Mat190(KeywordBase):
 
     @property
     def rt(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the Sheet thickness used for calculating a forming limit curve. This value does not override the sheet thickness in any way. It is only used in conjunction with the parameter RN to calculate a forming limit curve if the parameter FLDCID is not defined. See Remark 2
         """ # nopep8
         return self._cards[2].get_value("rt")
 
@@ -407,7 +411,7 @@ class Mat190(KeywordBase):
 
     @property
     def fldsafe(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the A safety offset of the forming limit curve. This value should be input as a percentage (such as 10, not 0.10). This safety margin will be applied to the forming limit curve defined by FLDCID or the curve calculated by RN and RT
         """ # nopep8
         return self._cards[2].get_value("fldsafe")
 
@@ -418,7 +422,9 @@ class Mat190(KeywordBase):
 
     @property
     def fldnipf(self) -> typing.Optional[int]:
-        """Get or set the 
+        """Get or set the Numerical integration points failure treatment:
+        GT.0.0: The number of element integration points that must fail before the element is deleted.By default, if one integration point has strains above the forming limit curve, the element is flagged for deletion.
+        LT.0.0: The element is deleted when all integration points within a relative distance of - FLDNIPF from the midsurface have failed(value between - 1.0 and 0.0).
         """ # nopep8
         return self._cards[2].get_value("fldnipf")
 
@@ -528,7 +534,7 @@ class Mat190(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Material angle in degrees for AOPT = 3, which may be overridden on the element card, see *ELEMENT_SHELL.
+        """Get or set the Material angle in degrees for AOPT = 3. It may be overridden on the element card. See *ELEMENT_SHELL_BETA.
         """ # nopep8
         return self._cards[4].get_value("beta")
 

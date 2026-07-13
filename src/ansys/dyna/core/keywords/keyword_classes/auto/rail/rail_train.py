@@ -208,9 +208,9 @@ class RailTrain(KeywordBase):
     @property
     def latdir(self) -> float:
         """Get or set the Determines the lateral direction (relative to the track) in which wheel movement is resisted by flange contact. If two wheels are fixed to an axle, lateral force is generally applied to one or other of the two wheels, depending on the direction of lateral movement.
-        EQ.0.0:	Wheel flanges run on inside faces of rails
-        EQ.1.0 : Wheel flanges run on outside faces of rails
-        EQ.2.0 : Wheel flanges on both faces of rails(both wheels resist lateral motion in both directions).
+        EQ.0.0: Wheel flanges run on inside faces of rails
+        EQ.1.0: Wheel flanges run on outside faces of rails
+        EQ.2.0: Wheel flanges on both faces of rails(both wheels resist lateral motion in both directions).
         """ # nopep8
         return self._cards[1].get_value("latdir")
 

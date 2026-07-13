@@ -153,13 +153,13 @@ class MatThermalUserDefined(KeywordBase):
 
     @property
     def aopt(self) -> typing.Optional[float]:
-        """Get or set the Material axes option of orthotropic materials (see MAT_OPTIONTROPIC_ELASTIC for more details). Set if IORTHO = 1.0.
-        EQ.0.0:	Locally orthotropic with material axes by element nodes N1, N2and N4
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, Image, in spaceand global location of element center
-        EQ.2.0 : Globally orthotropic with material axes determined by vectors
-        EQ.3.0 : Locally orthotropic with first material axis orthogonal to element normal(defined by element nodes N1, N2 and N4) and to a vector d - Third material direction corresponds to element normal.
-        EQ.4.0 : Local orthogonal in cylindrical coordinates with the material axes determined by a vector Image,and an originating point, Image, which define the centerline axis.
-        LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM or *DEFINE_COORDINATE_VECTOR)
+        """Get or set the Material axes option of orthotropic materials (see MAT_OPTIONTROPIC_ELASTIC for more details). Set if IORTHO = 1.0.
+        EQ.0.0: Locally orthotropic with material axes by element nodes N1, N2and N4
+        EQ.1.0: Locally orthotropic with material axes determined by a point, Image, in spaceand global location of element center
+        EQ.2.0: Globally orthotropic with material axes determined by vectors
+        EQ.3.0: Locally orthotropic with first material axis orthogonal to element normal(defined by element nodes N1, N2 and N4) and to a vector d - Third material direction corresponds to element normal.
+        EQ.4.0: Local orthogonal in cylindrical coordinates with the material axes determined by a vector Image,and an originating point, Image, which define the centerline axis.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number(CID on *DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM or *DEFINE_COORDINATE_VECTOR)
         """ # nopep8
         return self._cards[0].get_value("aopt")
 

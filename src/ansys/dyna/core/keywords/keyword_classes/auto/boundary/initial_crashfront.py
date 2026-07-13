@@ -65,11 +65,11 @@ class InitialCrashfront(KeywordBase):
     @property
     def stype(self) -> typing.Optional[int]:
         """Get or set the ID type of SID:
-        EQ.0:	segment set ID,
-        EQ.1 : shell element set ID,
-        EQ.2 : part set ID,
-        EQ.3 : part ID,
-        EQ.4 : node set ID..
+        EQ.0: segment set ID,
+        EQ.1: shell element set ID,
+        EQ.2: part set ID,
+        EQ.3: part ID,
+        EQ.4: node set ID..
         """ # nopep8
         return self._cards[0].get_value("stype")
 

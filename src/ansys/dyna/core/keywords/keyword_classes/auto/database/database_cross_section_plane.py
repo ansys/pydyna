@@ -170,9 +170,9 @@ class DatabaseCrossSectionPlane(KeywordBase):
     @property
     def radius(self) -> float:
         """Get or set the Optional radius.
-        EQ.0.0:	Not used.
-        GT.0.0 : A circular cut plane will be created that is centered at(XCT ,YCT ,ZCT) with radius = RADIUS and has a normal vector originating at(XCT ,YCT ,ZCT) and pointing towards(XCH ,YCH ,ZCH).
-        LT.0.0 : The radius will be the absolute value of RADIUS and XCT and XCH will be nodes IDs.The node with ID XCT is the center of the circular cut plane.The normal vector of the plane is the vector pointing from the node with ID XCT to the node with ID XCH.YCT, ZCT, YCH,and ZCH are ignored.
+        EQ.0.0: Not used.
+        GT.0.0: A circular cut plane will be created that is centered at(XCT ,YCT ,ZCT) with radius = RADIUS and has a normal vector originating at(XCT ,YCT ,ZCT) and pointing towards(XCH ,YCH ,ZCH).
+        LT.0.0: The radius will be the absolute value of RADIUS and XCT and XCH will be nodes IDs.The node with ID XCT is the center of the circular cut plane.The normal vector of the plane is the vector pointing from the node with ID XCT to the node with ID XCH.YCT, ZCT, YCH,and ZCH are ignored.
         If RADIUS != 0.0, the variables XHEV, YHEV, ZHEV, LENL,and LENM, which are specified on Card 1a.2, will be ignored.
         """ # nopep8
         return self._cards[0].get_value("radius")

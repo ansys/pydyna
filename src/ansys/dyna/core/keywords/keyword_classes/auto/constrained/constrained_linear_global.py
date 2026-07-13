@@ -91,7 +91,7 @@ class ConstrainedLinearGlobal(KeywordBase):
         EQ.4: global rotation about global x-axis.
         EQ.5: global rotation about global y-axis.
         EQ.6: global rotation about global z-axis.
-        EQ.7:	Nodal electric voltage of piezoelectric material; see *MAT_ADD_PZELECTRIC.
+        EQ.7: Nodal electric voltage of piezoelectric material; see *MAT_ADD_PZELECTRIC.
         The voltage of the 1st node can only be defined as a linear combination of the voltage of other nodes, meaning all DOFs must be 7 for such an application.
         """ # nopep8
         return self._cards[1].get_value("dof")

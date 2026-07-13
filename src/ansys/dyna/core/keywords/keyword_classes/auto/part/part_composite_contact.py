@@ -122,26 +122,43 @@ class PartCompositeContact(KeywordBase):
     @property
     def elform(self) -> int:
         """Get or set the Element formulation options, see Remarks 1 and 2 below:
-        EQ.1:  Hughes-Liu,
-        EQ.2:  Belytschko-Tsay,
-        EQ.3:  BCIZ triangular shell,
-        EQ.4:  C0 triangular shell,
-        EQ.6:  S/R Hughes-Liu,
-        EQ.7:   S/R co-rotational Hughes-Liu,
-        EQ.8:   Belytschko-Leviathan shell,
-        EQ.9:   Fully integrated Belytschko-Tsay membrane,
+        EQ.1: Hughes-Liu,
+        EQ.2: Belytschko-Tsay,
+        EQ.3: BCIZ triangular shell,
+        EQ.4: C0 triangular shell,
+        EQ.6: S/R Hughes-Liu,
+        EQ.7: S/R co-rotational Hughes-Liu,
+        EQ.8: Belytschko-Leviathan shell,
+        EQ.9: Fully integrated Belytschko-Tsay membrane,
         EQ.10: Belytschko-Wong-Chiang,
         EQ.11: Fast (co-rotational) Hughes-Liu,
-        EQ.16:  Fully integrated shell element (very fast)
+        EQ.16: Fully integrated shell element (very fast)
         EQ.-16: Fully integrated shell element modified for higher accuracy
+        EQ.17: Fully integrated DKT, triangular shell element,
+        EQ.18: Fully integrated linear DK quadrilateral / triangular shell,
+        EQ.20: Fully integrated linear assumed strain C0 shell,
+        EQ.21: Fully integrated linear assumed strain C0 shell(5 DOF),
+        EQ.23: 8 - node quadratic quadrilateral shell(see IRQUAD in *CONTROL_SHELL),
+        EQ.24: 6 - node quadratic triangular shell,
+        EQ.25: Belytschko - Tsay shell with thickness stretch,
+        EQ.26: Fully integrated shell with thickness stretch,
+        EQ.27: C0 triangular shell with thickness stretch,
+        EQ.30: Fast fully integrated element with 2 in-plane integration points based on ELFORM 16
+        EQ.41: Mesh - free(EFG) shell local approach(more suitable for crashworthiness analysis),
+        EQ.42: Mesh - free(EFG) shell global approach(more suitable for metal forming analysis),
+        EQ.101: User defined shell,
+        EQ.102: User defined shell,
+        EQ.103: User defined shell,
+        EQ.104: User defined shell,
+        EQ.105: User defined shell.
         """ # nopep8
         return self._cards[1].get_value("elform")
 
     @elform.setter
     def elform(self, value: int) -> None:
         """Set the elform property."""
-        if value not in [2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 16, -16, None]:
-            raise Exception("""elform must be `None` or one of {2,1,3,4,5,6,7,8,9,10,11,16,-16}.""")
+        if value not in [2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 16, -16, 17, 18, 20, 21, 23, 24, 25, 26, 27, 30, 41, 42, 101, 102, 103, 104, 105, None]:
+            raise Exception("""elform must be `None` or one of {2,1,3,4,5,6,7,8,9,10,11,16,-16,17,18,20,21,23,24,25,26,27,30,41,42,101,102,103,104,105}.""")
         self._cards[1].set_value("elform", value)
 
     @property
@@ -157,10 +174,12 @@ class PartCompositeContact(KeywordBase):
 
     @property
     def nloc(self) -> float:
-        """Get or set the Location of reference surface for three dimensional shell elements.  If nonzero, the mid-surface of the shell is offset by a value equal to  .  Alternatively, the offset can be specified by using the OFFSET option in the *ELEMENT_SHELL input section.
-        EQ. 1.0:  top surface,
-        EQ. 0.0:  mid-surface (default),
-        EQ.-1.0:  bottom surface..
+        """Get or set the Location of reference surface, available for thin shells only.  If nonzero, the offset distance from the plane of the nodal points to the reference surface of the shell in the direction of the shell normal vector is a value:
+        offset = -0.50xNLOCx(average  shell  thickness).
+        This offset is not considered in the contact subroutines unless CNTCO is set to 1 or 3 in *CONTROL_SHELL.Alternatively, the offset can be specified by using the OFFSET option in the *ELEMENT_SHELL input section.
+        EQ.1.0: Top surface,
+        EQ.0.0: Mid - surface(default),
+        EQ. - 1.0: Bottom surface.
         """ # nopep8
         return self._cards[1].get_value("nloc")
 
@@ -183,7 +202,7 @@ class PartCompositeContact(KeywordBase):
     @property
     def hgid(self) -> int:
         """Get or set the Hourglass/bulk viscosity identification defined in the *HOURGLASS Section:
-        EQ.0:  default values are used..
+        EQ.0: default values are used..
         """ # nopep8
         return self._cards[1].get_value("hgid")
 
@@ -194,7 +213,7 @@ class PartCompositeContact(KeywordBase):
 
     @property
     def adpopt(self) -> int:
-        """Get or set the Indicate if this part is adapted or not. See also *CONTROL_ADAPTIVITY.
+        """Get or set the Indicate if this part is adapted. See also *CONTROL_ADAPTIVITY.
         EQ.0: no adaptivity (default),
         EQ.1: H-adaptive for 3D shells,
         EQ.2: R-adaptive remeshing for 2D shells.
@@ -269,7 +288,12 @@ class PartCompositeContact(KeywordBase):
 
     @property
     def optt(self) -> typing.Optional[float]:
-        """Get or set the Optional contact thickness. For SOFT = 2, it applies to solids, shells and beams. For SOFT = 0 and 1 and for Mortar contacts, it applies to shells and beams only. For SOFT = 0 and 1 with the MPP version, OPTT has a different meaning for solid elements. In this case, OPTT overrides the thickness of solid elements used for the calculation of the contact penetration release (see Table Error! Reference source not found.), but it does not affect the contact thickness
+        """Get or set the Optional contact thickness. For SOFT = 2, it applies to solids, shells, and beams. For SOFT = 0 and 1 and Mortar contacts, it only applies to shells and beams.
+        However, for the MPP version only, OPTT does affect the contact behavior of solid elements for SOFT = 0 and 1 but not by changing the contact thickness.
+        In the case of MPP with SOFT = 0 and 1 for solids, OPTT overrides the thickness of the solid elements used for the calculation of the
+        contact penetration release (see Table Error! Reference source not found.) but does not affect the contact thickness. This is not available in SMP.
+        OPTT does not affect the contact thickness when applied to the parts on the tracked side (SURFA) of an AUTOMATIC_NODES_TO_SURFACE contact.
+        However, it affects the contact thickness of this type of contact�s reference side (SURFB).
         """ # nopep8
         return self._cards[2].get_value("optt")
 
@@ -280,7 +304,8 @@ class PartCompositeContact(KeywordBase):
 
     @property
     def sft(self) -> typing.Optional[float]:
-        """Get or set the Optional thickness scale factor for PART ID in automatic contact (scales true thickness).  This option applies only to contact with shell elements.  True thickness is the element thickness of the shell elements.
+        """Get or set the Optional thickness scale factor in automatic contact (scales the true thickness). This option applies only
+        to contact with shell elements.The true thickness is the element thickness of the shell elements.
         """ # nopep8
         return self._cards[2].get_value("sft")
 
@@ -291,7 +316,7 @@ class PartCompositeContact(KeywordBase):
 
     @property
     def ssf(self) -> typing.Optional[float]:
-        """Get or set the Scale factor on default slave penalty stiffness for this PART ID whenever it appears in the contact definition.  If zero, SSF is taken as unity.
+        """Get or set the Scale factor on default tracked surface penalty stiffness for this  part ID whenever it appears in the contact definition.If zero, SSF is taken as unity.
         """ # nopep8
         return self._cards[2].get_value("ssf")
 
@@ -302,10 +327,10 @@ class PartCompositeContact(KeywordBase):
 
     @property
     def cparm8(self) -> typing.Optional[float]:
-        """Get or set the Flag to exclude beam-to-beam contact from the same PID for CONTACT_‌AUTOMATIC_‌GENERAL.  This applies only to MPP.  Global default may be set using CPARM8 on *CONTACT_‌…_MPP Optional Card.
-        EQ.0:	Flag is not set(default).
-        EQ.1 : Flag is set.
-        EQ.2 : Flag is set.CPARM8 = 2 has the additional effect of permitting contact treatment of spot weld(type 9) beams in AUTOMATIC_‌GENERAL contacts; spot weld beams are otherwise disregarded entirely by AUTOMATIC_‌GENERAL contacts.
+        """Get or set the Flag to exclude beam-to-beam contact from the same PID for CONTACT_AUTOMATIC_GENERAL.  This applies only to MPP.  Global default may be set using CPARM8 on *CONTACT__MPP Optional Card.
+        EQ.0: Flag is not set(default).
+        EQ.1: Flag is set.
+        EQ.2: Flag is set.CPARM8 = 2 has the additional effect of permitting contact treatment of spot weld(type 9) beams in AUTOMATIC_GENERAL contacts; spot weld beams are otherwise disregarded entirely by AUTOMATIC_GENERAL contacts.
         """ # nopep8
         return self._cards[2].get_value("cparm8")
 
@@ -316,7 +341,7 @@ class PartCompositeContact(KeywordBase):
 
     @property
     def mid1(self) -> typing.Optional[int]:
-        """Get or set the Material ID of integration point i, see *MAT_? Section
+        """Get or set the Material ID of integration point i, see *MAT_   Section
         """ # nopep8
         return self._cards[3].get_value("mid1")
 
@@ -360,7 +385,7 @@ class PartCompositeContact(KeywordBase):
 
     @property
     def mid2(self) -> typing.Optional[int]:
-        """Get or set the Material ID of integration point i, see *MAT_? Section
+        """Get or set the Material ID of integration point i, see *MAT_   Section
         """ # nopep8
         return self._cards[3].get_value("mid2")
 

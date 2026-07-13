@@ -155,8 +155,8 @@ class ControlImplicitDynamicsSpr(KeywordBase):
     def alpha(self) -> float:
         """Get or set the Composite time integration constant (see Remark 2).
         GT.0: Bathe composite scheme is activated
-        LT.0.AND.GT. - 1 : HHT scheme is activated
-        LE. - 1 : Specify part sets for finite rotational dynamics
+        LT.0.AND.GT.-1: HHT scheme is activated
+        LE.-1: Specify part sets for finite rotational dynamics
         """ # nopep8
         return self._cards[0].get_value("alpha")
 

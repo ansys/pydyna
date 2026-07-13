@@ -90,8 +90,8 @@ class DefineDeCohesive(KeywordBase):
     @property
     def styp(self) -> int:
         """Get or set the SID type:
-        EQ.0:	Node set
-        EQ.1:	Part set
+        EQ.0: Node set
+        EQ.1: Part set
         EQ.2: Part.
         """ # nopep8
         return self._cards[0].get_value("styp")

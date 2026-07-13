@@ -31,6 +31,7 @@ _CONTROLMPPDECOMPOSITIONARRANGEPARTS_CARD0 = (
     FieldSchema("type", int, 10, 10, 0),
     FieldSchema("nproc", int, 20, 10, None),
     FieldSchema("frstp", int, 30, 10, None),
+    FieldSchema("nptot", int, 40, 10, None),
 )
 
 class ControlMppDecompositionArrangeParts(KeywordBase):
@@ -61,12 +62,13 @@ class ControlMppDecompositionArrangeParts(KeywordBase):
 
     @property
     def type(self) -> int:
-        """Get or set the EQ. 0: Part ID to be distributed to all processors
-        1: Part Set ID to be distributed to all processors
-        10: Part ID to be lumped into one processor
-        11: Part Set ID to be lumped into one processor.
-        EQ.20: Part ID to be lumped into one processor with MPP load balanced
-        EQ.21: Part Set ID to be lumped into one processor with MPP load balanced
+        """Get or set the Type of distribution:
+        EQ.0:	The part is distributed to all processors.
+        EQ.1:	The part set is distributed to all processors.
+        EQ.10:	The part is lumped onto one processor.
+        EQ.11:	The part set is lumped onto one processor.
+        EQ.20:	The part is lumped onto one processor with MPP load balanced.
+        EQ.21:	The part set is onto one processor with MPP load balanced.
         """ # nopep8
         return self._cards[0].get_value("type")
 
@@ -80,7 +82,7 @@ class ControlMppDecompositionArrangeParts(KeywordBase):
     @property
     def nproc(self) -> typing.Optional[int]:
         """Get or set the Used only for TYPE equal to 0 or 1. Number of processors will
-        be used for decomposition and this Part ID/Part set ID will be
+        be used for decomposition and this Part/Part setwill be
         distributed to NPROC of processors.
         """ # nopep8
         return self._cards[0].get_value("nproc")
@@ -101,4 +103,17 @@ class ControlMppDecompositionArrangeParts(KeywordBase):
     def frstp(self, value: int) -> None:
         """Set the frstp property."""
         self._cards[0].set_value("frstp", value)
+
+    @property
+    def nptot(self) -> typing.Optional[int]:
+        """Get or set the Total number of processors for (NPROC, FRSTP):
+        EQ.0:	Use number of processors currently being used in the run
+        GT.0:	If max(number of processors currently being used, number of processors upon which the job is decomposed)  differs from NPTOT, (NPROC, FRSTP) will be rescaled by NPTOT.  This feature allows the same input to be used with changing computing resources.
+        """ # nopep8
+        return self._cards[0].get_value("nptot")
+
+    @nptot.setter
+    def nptot(self, value: int) -> None:
+        """Set the nptot property."""
+        self._cards[0].set_value("nptot", value)
 

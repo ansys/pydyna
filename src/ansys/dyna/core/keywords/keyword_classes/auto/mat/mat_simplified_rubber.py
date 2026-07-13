@@ -48,7 +48,7 @@ _MATSIMPLIFIEDRUBBER_CARD1 = (
     FieldSchema("tension", float, 40, 10, -1.0),
     FieldSchema("rtype", float, 50, 10, 0.0),
     FieldSchema("avgopt", float, 60, 10, None),
-    FieldSchema("pra", float, 70, 10, None),
+    FieldSchema("pr", float, 70, 10, None),
 )
 
 _MATSIMPLIFIEDRUBBER_CARD2 = (
@@ -184,9 +184,9 @@ class MatSimplifiedRubber(KeywordBase):
 
     @property
     def ref(self) -> float:
-        """Get or set the Use reference geometry to initialize the stress tensor.  The reference geometry is defined by the keyword:*INITIAL_FOAM_REFERENCE_ GEOMETRY (see there for more details).
-        EQ.0.0:  off,
-        EQ.1.0:  on.
+        """Get or set the Use reference geometry to initialize the stress tensor. The reference geometry is defined by the keyword:*INITIAL_FOAM_REFERENCE_ GEOMETRY (see there for more details).
+        EQ.0.0: off,
+        EQ.1.0: on.
         """ # nopep8
         return self._cards[0].get_value("ref")
 
@@ -199,7 +199,7 @@ class MatSimplifiedRubber(KeywordBase):
 
     @property
     def prten(self) -> typing.Optional[float]:
-        """Get or set the The tensile Poisson's ratio for shells (optional).  If PRTEN is zero, PR/BETA will serve as the Poisson's ratio for both tension and compression in shells.  If PRTEN is nonzero, PR/BETA will serve only as the compressive Poisson's ratio for shells.
+        """Get or set the The tensile Poisson's ratio for shells (optional). If PRTEN is zero, PR/BETA will serve as the Poisson's ratio for both tension and compression in shells. If PRTEN is nonzero, PR/BETA will serve only as the compressive Poisson's ratio for shells.
         """ # nopep8
         return self._cards[0].get_value("prten")
 
@@ -286,9 +286,9 @@ class MatSimplifiedRubber(KeywordBase):
     @property
     def avgopt(self) -> typing.Optional[float]:
         """Get or set the Averaging option determine strain rate to reduce numerical noise.
-        LT.0.0:	|AVGOPT| is a time window/interval over which the strain rates are averaged.
-        EQ.0.0:	simple average of twelve time steps,
-        EQ.1.0:	running average of last 12 averages.
+        LT.0.0: |AVGOPT| is a time window/interval over which the strain rates are averaged. This option is recommended because it is time step size independent and generally more stable.
+        EQ.0.0: simple average of twelve time steps,
+        EQ.1.0: running average of last 12 averages.
         """ # nopep8
         return self._cards[1].get_value("avgopt")
 
@@ -298,17 +298,20 @@ class MatSimplifiedRubber(KeywordBase):
         self._cards[1].set_value("avgopt", value)
 
     @property
-    def pra(self) -> typing.Optional[float]:
-        """Get or set the Poisson ratio or viscosity coefficient, If the value is specified between 0 and 0.5 exclusive, i.e.,the number defined here is taken as Poisson's ratio.  If zero, an incompressible rubber like behavior is assumed and a default value of 0.495 is used internally.   If a Poisson's ratio of 0.0 is desired, input a small value for PR such as 0.001.  When fully integrated solid elements are used and when a nonzero Poisson's ratio is specified, a foam material is assumed and selective-reduced integration is not used due to the compressibility.  This is true even if PR approaches 0.500.  If any other value excluding zero is define, then BETA is taken as the absolute value of the given number and a nearly incompressible rubber like behavior is assumed.  An incrementally updated mean viscous stress develops according to the equation:The BETA parameter does not apply to highly compressible foam materials.Material failure parameter that controls the volume enclosed by the failure surface.
-        LE.0.0: ignore failure criterion;
-        GT.0.0: use actual K value for failure criterions..
+    def pr(self) -> typing.Optional[float]:
+        """Get or set the Poisson ratio or viscosity coefficient:
+        LE.0.0: An incompressible rubber material is assumed, using the Ogden strain-energy functional. PR is set to 0.495 internally for computing the time-step
+        only and is not used otherwise. Compressibility is defined using KM. For PR < 0 in solid elements, an incrementally updated mean viscous stress develops according
+        to the following equation with β=|"PR" | and K_m=KM (see Card 1):
+        GT.0.0.AND.LT.0.49: A foam material is assumed, using the Hill strain-energy function. PR gives Poisson's ratio. KM on Card 1 should be give a meaningful value as it is used for critical time step computation contact penalty stiffness, and hourglass control type 6. Selective-reduced integration is not used for fully-integrated elements.
+        GE.0.49.AND.LT.0.5: An incompressible rubber material is assumed, using the Ogden strain-energy functional. PR is used for computing the time-step only.Compressibility is defined using KM on Card 1. Selective-reduced integration is used for fully-integrated elements.
         """ # nopep8
-        return self._cards[1].get_value("pra")
+        return self._cards[1].get_value("pr")
 
-    @pra.setter
-    def pra(self, value: float) -> None:
-        """Set the pra property."""
-        self._cards[1].set_value("pra", value)
+    @pr.setter
+    def pr(self, value: float) -> None:
+        """Set the pr property."""
+        self._cards[1].set_value("pr", value)
 
     @property
     def lcunld(self) -> typing.Optional[int]:
@@ -317,7 +320,7 @@ class MatSimplifiedRubber(KeywordBase):
         the same range as LC or the load curves of TBID and its end points
         should have identical values, i.e., the combination of LC and
         LCUNLD or the first curve of TBID and LCUNLD describes a
-        complete cycle of loading and unloading. See also material *MAT_	083.
+        complete cycle of loading and unloading. See also material *MAT_ 083.
         """ # nopep8
         return self._cards[2].get_value("lcunld")
 
@@ -363,9 +366,9 @@ class MatSimplifiedRubber(KeywordBase):
 
     @property
     def visco(self) -> float:
-        """Get or set the Flag to invoke visco-elastic formulation.  The visco-elastic formulation does not apply to shell elements and will be ignored for shells.
-        EQ.0.0:	purely elastic;
-        EQ.1.0:	visco-elastic formulation (solids only).
+        """Get or set the Flag to invoke visco-elastic formulation. The visco-elastic formulation does not apply to shell elements and will be ignored for shells.
+        EQ.0.0: purely elastic;
+        EQ.1.0: visco-elastic formulation (solids only).
         """ # nopep8
         return self._cards[2].get_value("visco")
 
@@ -379,8 +382,8 @@ class MatSimplifiedRubber(KeywordBase):
     @property
     def hisout(self) -> float:
         """Get or set the History output flag.
-        EQ.0.0:	default;
-        EQ.1.0:	principal strains are written to history variables 25, 26, 27.
+        EQ.0.0: default;
+        EQ.1.0: principal strains are written to history variables 25, 26, 27.
         """ # nopep8
         return self._cards[2].get_value("hisout")
 

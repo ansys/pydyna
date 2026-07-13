@@ -60,7 +60,7 @@ class DatabaseFrequencyBinaryD3Spcm(KeywordBase):
         EQ.0: Off
         EQ.1: write the binary plot file
         EQ.2: include the individual mode response in the binary plot file D3SPCM.
-        EQ.3: 	Write the binary plot file which combines response spectrum analysis results and other structural analysis results provided by Card 2c (OPTION1‌ = D3SPCM).
+        EQ.3: Write the binary plot file which combines response spectrum analysis results and other structural analysis results provided by Card 2c (OPTION1 = D3SPCM).
         """ # nopep8
         return self._cards[0].get_value("binary")
 
@@ -73,7 +73,7 @@ class DatabaseFrequencyBinaryD3Spcm(KeywordBase):
 
     @property
     def istate(self) -> typing.Optional[int]:
-        """Get or set the State number in a binary plot file with name FILENAME. The structural analysis results at this state will be combined with the results from the current run.
+        """Get or set the State number in a binary plot file with name FILENAME. The structural analysis results at this state are combined with the results from the current run.
         """ # nopep8
         return self._cards[1].get_value("istate")
 
@@ -84,7 +84,7 @@ class DatabaseFrequencyBinaryD3Spcm(KeywordBase):
 
     @property
     def filename(self) -> typing.Optional[str]:
-        """Get or set the Path and file name of precomputed structural response binary plot file (see Remark 4).
+        """Get or set the Path and file name of precomputed structural response binary plot file from which the structural response at a specific state will be combined with the current run's spectrum or RMS results (see Remarks 4 and 5
         """ # nopep8
         return self._cards[1].get_value("filename")
 

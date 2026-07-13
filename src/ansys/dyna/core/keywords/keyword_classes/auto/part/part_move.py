@@ -63,7 +63,7 @@ class PartMove(KeywordBase):
 
     @property
     def xmov(self) -> typing.Optional[float]:
-        """Get or set the Move shell part set, in the x-direction by the incremental distance, XMOV.
+        """Get or set the Move shell/solid part ID, PID, in the x-direction by the incremental distance, XMOV. Ignored if CID < 0.
         """ # nopep8
         return self._cards[0].get_value("xmov")
 
@@ -74,7 +74,7 @@ class PartMove(KeywordBase):
 
     @property
     def ymov(self) -> typing.Optional[float]:
-        """Get or set the Move shell part set, in the y-direction by the incremental distance, YMOV.
+        """Get or set the Move shell/solid part ID, PID, in the y-direction by the incremental distance, YMOV. Ignored if CID < 0.
         """ # nopep8
         return self._cards[0].get_value("ymov")
 
@@ -85,7 +85,7 @@ class PartMove(KeywordBase):
 
     @property
     def zmov(self) -> typing.Optional[float]:
-        """Get or set the Move shell part set, in the z-direction by the incremental distance, ZMOV.
+        """Get or set the Move shell/solid part ID, PID, in the z-direction by the incremental distance, ZMOV.CID.LT.0:	ZMOV is the distance the part is translated along CID.
         """ # nopep8
         return self._cards[0].get_value("zmov")
 
@@ -96,8 +96,10 @@ class PartMove(KeywordBase):
 
     @property
     def cid(self) -> int:
-        """Get or set the Coordinate system ID to define incremental displacement in local coordinate system.  All displacements, XMOV, YMOV, and ZMOV, are with respect to CID.
-        EQ.0: global
+        """Get or set the Coordinate system ID to define incremental displacement or vector ID to define the direction for the translation.
+        GT.0:	Local coordinate system ID. All displacements, XMOV, YMOV, and ZMOV, are with respect to CID.
+        EQ.0:	Global coordinate system. All displacements, XMOV, YMOV, and ZMOV, are with respect to the global coordinate system.
+        LT.0:	|CID| is a vector ID for a vector that points in the direction of the part translation. XMOV and YMOV are ignored in this case.
         """ # nopep8
         return self._cards[0].get_value("cid")
 
@@ -108,7 +110,9 @@ class PartMove(KeywordBase):
 
     @property
     def ifset(self) -> int:
-        """Get or set the part move flag: 0: part id; 1: part set id
+        """Get or set the Indicate if a part set ID is used in the PID definition:
+        EQ.0: Part ID is used;
+        EQ.1: Part set ID is used.
         """ # nopep8
         return self._cards[0].get_value("ifset")
 

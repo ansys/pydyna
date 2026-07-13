@@ -67,8 +67,8 @@ class ControlFormingBestfitVector(KeywordBase):
     @property
     def ifit(self) -> int:
         """Get or set the Best fit program activation flag:
-        IFIT.EQ.0:	do not perform best-fit.
-        IFIT.EQ.1:	activate the best-fit program.
+        IFIT.EQ.0: do not perform best-fit.
+        IFIT.EQ.1: activate the best-fit program.
         """ # nopep8
         return self._cards[0].get_value("ifit")
 
@@ -81,7 +81,7 @@ class ControlFormingBestfitVector(KeywordBase):
 
     @property
     def nskip(self) -> int:
-        """Get or set the Number of nodes to skip in bucket searching.  NSKIP of “1” does not skip any nodes in searching therefore computing speed is the slowest but accuracy is the highest.  Higher values of NSKIP speed up the calculation time with slightly deteriorating accuracies.  NSKIP of “2” is recommended with IFAST=1.  See Table 0-1 for the effect of NSKIP on the accuracy of the fitting.
+        """Get or set the Number of nodes to skip in bucket searching.  NSKIP of 1 does not skip any nodes in searching therefore computing speed is the slowest but accuracy is the highest.  Higher values of NSKIP speed up the calculation time with slightly deteriorating accuracies.  NSKIP of 2 is recommended with IFAST=1.  See Table 0-1 for the effect of NSKIP on the accuracy of the fitting.
         """ # nopep8
         return self._cards[0].get_value("nskip")
 
@@ -93,9 +93,9 @@ class ControlFormingBestfitVector(KeywordBase):
     @property
     def gaponly(self) -> int:
         """Get or set the Separation distance calculation flag:
-        GAPONLY.EQ.0:	perform best-fit, calculate separation distances between the two best-fitted mesh parts.
-        GAPONLY.EQ.1:	no best-fit, just calculate separation distances between the two existing mesh parts.
-        GAPONLY.EQ.2:	User is responsible to move the parts closer in distance and orientation, in situation where target and source are not similar in shape.  Also see NSETS and NSETT (recommended method).
+        GAPONLY.EQ.0: perform best-fit, calculate separation distances between the two best-fitted mesh parts.
+        GAPONLY.EQ.1: no best-fit, just calculate separation distances between the two existing mesh parts.
+        GAPONLY.EQ.2: User is responsible to move the parts closer in distance and orientation, in situation where target and source are not similar in shape.  Also see NSETS and NSETT (recommended method).
         """ # nopep8
         return self._cards[0].get_value("gaponly")
 
@@ -109,8 +109,8 @@ class ControlFormingBestfitVector(KeywordBase):
     @property
     def ifast(self) -> int:
         """Get or set the Computing performance optimization flag:
-        IFAST.EQ.0:	no computing speed optimization.
-        IFAST.EQ.1:	activate computing speed optimization, and is recommended.
+        IFAST.EQ.0: no computing speed optimization.
+        IFAST.EQ.1: activate computing speed optimization, and is recommended.
         """ # nopep8
         return self._cards[0].get_value("ifast")
 
@@ -123,10 +123,10 @@ class ControlFormingBestfitVector(KeywordBase):
 
     @property
     def ifset(self) -> int:
-        """Get or set the Optional flag to define a node set to be included or excluded in the best fitting.  The node set can be defined in a file that also includes the part to be best fitted to the target mesh.  Only keyword cards *NODE, *ELEMENT_SHELL and *CONSTRAINED_ADAPTIVITY (if applicable) need to be present in the file. The file can be included in an input deck (Example 1) using *INCLUDE.  A node set can be defined using LS-PrePost via menu options Model→CreEnt→Set Data→*SET_NODE→Cre.
-        IFSET.EQ.0:	all nodes in the included file will be best fitted.
-        IFSET.GT.0:	the input value is a node set ID; only the nodes in the set will be best fitted.
-        IFSET.LT.0:	the absolute value is a node set ID; all nodes excluding those in the set will be best fitted.
+        """Get or set the Optional flag to define a node set to be included or excluded in the best fitting.  The node set can be defined in a file that also includes the part to be best fitted to the target mesh.  Only keyword cards *NODE, *ELEMENT_SHELL and *CONSTRAINED_ADAPTIVITY (if applicable) need to be present in the file. The file can be included in an input deck (Example 1) using *INCLUDE.  A node set can be defined using LS-PrePost via menu options ModelCreEntSet Data*SET_NODECre.
+        IFSET.EQ.0: all nodes in the included file will be best fitted.
+        IFSET.GT.0: the input value is a node set ID; only the nodes in the set will be best fitted.
+        IFSET.LT.0: the absolute value is a node set ID; all nodes excluding those in the set will be best fitted.
         """ # nopep8
         return self._cards[0].get_value("ifset")
 

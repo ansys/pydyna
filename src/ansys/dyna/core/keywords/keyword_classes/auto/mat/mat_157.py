@@ -107,21 +107,21 @@ _MAT157_CARD6 = (
 )
 
 _MAT157_CARD7 = (
-    FieldSchema("xt", float, 0, 10, None),
-    FieldSchema("xc", float, 10, 10, None),
-    FieldSchema("yt", float, 20, 10, None),
-    FieldSchema("yc", float, 30, 10, None),
-    FieldSchema("sxy", float, 40, 10, None),
+    FieldSchema("xt", float, 0, 10, 1e+20),
+    FieldSchema("xc", float, 10, 10, 1e+20),
+    FieldSchema("yt", float, 20, 10, 1e+20),
+    FieldSchema("yc", float, 30, 10, 1e+20),
+    FieldSchema("sxy", float, 40, 10, 1e+20),
     FieldSchema("ff12", float, 50, 10, None),
-    FieldSchema("unused", float, 60, 10, None),
-    FieldSchema("ncfail", float, 70, 10, 10.0),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("ncfail", int, 70, 10, 10),
 )
 
 _MAT157_CARD8 = (
-    FieldSchema("zt", float, 0, 10, None),
-    FieldSchema("zc", float, 10, 10, None),
-    FieldSchema("syz", float, 20, 10, None),
-    FieldSchema("szx", float, 30, 10, None),
+    FieldSchema("zt", float, 0, 10, 1e+20),
+    FieldSchema("zc", float, 10, 10, 1e+20),
+    FieldSchema("syz", float, 20, 10, 1e+20),
+    FieldSchema("szx", float, 30, 10, 1e+20),
     FieldSchema("ff23", float, 40, 10, None),
     FieldSchema("ff31", float, 50, 10, None),
 )
@@ -229,7 +229,10 @@ class Mat157(KeywordBase):
 
     @property
     def lcss(self) -> typing.Optional[int]:
-        """Get or set the 
+        """Get or set the Load curve ID or Table ID:
+        Load Curve.When LCSS is a load curve ID, it is taken as defining effective stress as a function of effective plastic strain.If defined, QR1, CR1, QR2,and CR2 are ignored.
+        Tabular Data.The table ID defines for each strain rate value a load curve ID giving the stress as a function of effective plastic strain for that rate.See Figure Error!Reference source not found..When the strain rate falls below the minimum value, the load curve for the lowest value of strain rate is used.Likewise, when the strain rate exceeds the maximum value, the load curve for the highest value of strain rate is used.
+        Logarithmically Defined Tables.An alternative way to invoke logarithmic interpolation between discrete strain rates is described as follows.If the first value in the table is negative, LS - DYNA assumes that all the table values represent the natural logarithm of a strain rate.Since the tables are internally discretized to equally space the table values, it makes good sense from an accuracy standpoint that the table values represent the natural log of strain rate when the lowest strain rateand highest strain rate differ by several orders of magnitude.Logarithmic interpolation has some additional computational cost.
         """ # nopep8
         return self._cards[0].get_value("lcss")
 
@@ -593,10 +596,10 @@ class Mat157(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC, particularly the Material Directions section, for details):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
-        EQ.2.0 : Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.
-        LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_OPTION).
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with *DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number(CID on *DEFINE_COORDINATE_OPTION).
         """ # nopep8
         return self._cards[4].get_value("aopt")
 
@@ -623,14 +626,14 @@ class Mat157(KeywordBase):
     @property
     def macf(self) -> int:
         """Get or set the Material axes change flag for solid elements:
-        EQ.1 : No change, default
-        EQ.2 : Switch material axes a and b after BETA rotation
-        EQ.3 : Switch material axes a and c after BETA rotation
-        EQ.4 : Switch material axes b and c after BETA rotation
-        EQ. - 4 : Switch material axes b and c before BETA rotation
-        EQ. - 3 : Switch material axes a and c before BETA rotation
-        EQ. - 2 : Switch material axes a and b before BETA rotation
-        Figure Error!Reference source not found.indicates when LS - DYNA applies MACF during the process to obtain the final material axes.If BETA on * ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT = 3, the BETA input on Card 3 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed.
+        EQ.1: No change, default
+        EQ.2: Switch material axes a and b after BETA rotation
+        EQ.3: Switch material axes a and c after BETA rotation
+        EQ.4: Switch material axes b and c after BETA rotation
+        EQ. - 4: Switch material axes b and c before BETA rotation
+        EQ. - 3: Switch material axes a and c before BETA rotation
+        EQ. - 2: Switch material axes a and b before BETA rotation
+        If BETA on *ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT = 3, the BETA input on Card 3 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed.
         """ # nopep8
         return self._cards[4].get_value("macf")
 
@@ -710,8 +713,8 @@ class Mat157(KeywordBase):
     @property
     def id3upd(self) -> typing.Optional[float]:
         """Get or set the Flag for transverse through thickness strain update (thin shells only):
-        EQ.0.0:	reflects R - values by splitting the strain tensor into elastic and plastic components
-        EQ.1.0 : elastic update using total strain tensor
+        EQ.0.0: reflects R - values by splitting the strain tensor into elastic and plastic components
+        EQ.1.0: elastic update using total strain tensor
         """ # nopep8
         return self._cards[5].get_value("id3upd")
 
@@ -722,8 +725,11 @@ class Mat157(KeywordBase):
 
     @property
     def extra(self) -> typing.Optional[float]:
-        """Get or set the Flag to input further data:
-        EQ.1.0:Tsai-Wu failure criterion parameters (cards 8 and 9)
+        """Get or set the Flag to input further data to include failure with card 8 and 9.
+        EQ.1.0: Tsai-Wu(stress - based) parameters. See Remark 3
+        EQ.2.0: Tsai - Hill(stress - based) parameters. See Remark 4.
+        EQ.3.0: Tsai - Wu(strain - based) parameters. See Remark 5
+        EQ.4.0: Tsai - Hill(strain - based) parameters. See Remark 6
         """ # nopep8
         return self._cards[5].get_value("extra")
 
@@ -800,7 +806,7 @@ class Mat157(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Material angle in degrees for AOPT = 3, which may be overridden on the element card, see *ELEMENT_SHELL.
+        """Get or set the Material angle in degrees for AOPT = 0 (shells and tshells only) and AOPT = 3. BETA may be overridden on the element card; see *ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BETA and *ELEMENT_SOLID_ORTHO.
         """ # nopep8
         return self._cards[6].get_value("beta")
 
@@ -811,9 +817,9 @@ class Mat157(KeywordBase):
 
     @property
     def ihis(self) -> typing.Optional[float]:
-        """Get or set the Flag for material properties initialization.
-        EQ.0:	material properties defined in Cards 1-5 are used
-        GE.1:	Use *INITIAL_STRESS_SOLID/SHELL to initialize material properties on an element-by-element basis for solid or shell elements, respectively (see Remarks below).
+        """Get or set the Flag for material properties initialization:
+        EQ.0: Material properties defined in Cards 1 - 5 are used
+        GE.1: Use *INITIAL_STRESS_SOLID/SHELL to initialize material properties on an element - by - element basis for solid or shell elements, respectively(see Remarks 1 and 2 below).
         """ # nopep8
         return self._cards[6].get_value("ihis")
 
@@ -823,8 +829,10 @@ class Mat157(KeywordBase):
         self._cards[6].set_value("ihis", value)
 
     @property
-    def xt(self) -> typing.Optional[float]:
-        """Get or set the Longitudinal tensile strength, a-axis.
+    def xt(self) -> float:
+        """Get or set the Longitudinal tensile strength, a-axis, for EXTRA = 1 and 2 or longitudinal tensile strain at failure, a-axis, for EXTRA = 3 and 4:
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-XT) which defines either the longitudinal tensile strength(EXTRA = 1 and 2) or the longitudinal tensile strain at failure(EXTRA = 3 and 4) as a function of strain rate.If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as a natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[7].get_value("xt")
 
@@ -834,8 +842,11 @@ class Mat157(KeywordBase):
         self._cards[7].set_value("xt", value)
 
     @property
-    def xc(self) -> typing.Optional[float]:
-        """Get or set the Longitudinal compressive strength, a-axis (positive value).
+    def xc(self) -> float:
+        """Get or set the Longitudinal compressive strength, a-axis, for EXTRA = 1 and 2 or longitudinal compressive strain at failure, a-axis, for EXTRA = 3 and 4:
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-XC) which defines either the longitudinal compressive strength(EXTRA = 1 and 2) or the longitudinal compressive strain at failure(EXTRA = 3 and 4) as a function of strain rate.If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as a natural logarithm of the strain rate.
+        Longitudinal compressive strengths and longitudinal compressive strains at failure should be positive.
         """ # nopep8
         return self._cards[7].get_value("xc")
 
@@ -845,8 +856,10 @@ class Mat157(KeywordBase):
         self._cards[7].set_value("xc", value)
 
     @property
-    def yt(self) -> typing.Optional[float]:
-        """Get or set the Transverse tensile strength, b-axis.
+    def yt(self) -> float:
+        """Get or set the Transverse tensile strength, b-axis, for EXTRA = 1 and 2 or transverse tensile strain at failure, b-axis, for EXTRA = 3 and 4:
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-YT) which defines either the transverse tensile strength(EXTRA = 1 and 2) or the transverse tensile strain at failure(EXTRA = 3 and 4) as a function of strain rate.If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as a natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[7].get_value("yt")
 
@@ -856,8 +869,11 @@ class Mat157(KeywordBase):
         self._cards[7].set_value("yt", value)
 
     @property
-    def yc(self) -> typing.Optional[float]:
-        """Get or set the Transverse compressive strength, b-axis (positive value).
+    def yc(self) -> float:
+        """Get or set the Transverse compressive strength, b-axis, for EXTRA = 1 and 2 or transverse compressive strain at failure, b-axis, for EXTRA = 3 and 4:
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-YC) which defines either the transverse compressive strength(EXTRA = 1 and 2) or the transverse compressive strain at failure(EXTRA = 3 and 4) as a function of strain rate.If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as a natural logarithm of the strain rate.
+        Transverse compressive strengths and transverse compressive strains at failure should be positive.
         """ # nopep8
         return self._cards[7].get_value("yc")
 
@@ -867,8 +883,10 @@ class Mat157(KeywordBase):
         self._cards[7].set_value("yc", value)
 
     @property
-    def sxy(self) -> typing.Optional[float]:
-        """Get or set the Shear strength, ab-plane.
+    def sxy(self) -> float:
+        """Get or set the Shear strength, ab-plane, for EXTRA = 1 and 2 or shear strain at failure, ab-plane, for EXTRA = 3 and 4:
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-SXY) which defines the shear strength(EXTRA = 1 and 2) or the shear strain at failure(EXTRA = 3 and 4) as a function of strain rate.If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as a natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[7].get_value("sxy")
 
@@ -879,7 +897,7 @@ class Mat157(KeywordBase):
 
     @property
     def ff12(self) -> typing.Optional[float]:
-        """Get or set the Scale factor between -1 and +1 for interaction term F12, see Remarks.
+        """Get or set the Scale factor between -1 and +1 for interaction term F12. See Remark 3. It applies for EXTRA = 1 and 3.
         """ # nopep8
         return self._cards[7].get_value("ff12")
 
@@ -889,19 +907,21 @@ class Mat157(KeywordBase):
         self._cards[7].set_value("ff12", value)
 
     @property
-    def ncfail(self) -> float:
-        """Get or set the Number of timesteps to reduce stresses until element deletion.The default is NCFAIL=10..
+    def ncfail(self) -> int:
+        """Get or set the Number of time steps to reduce stresses until element deletion.
         """ # nopep8
         return self._cards[7].get_value("ncfail")
 
     @ncfail.setter
-    def ncfail(self, value: float) -> None:
+    def ncfail(self, value: int) -> None:
         """Set the ncfail property."""
         self._cards[7].set_value("ncfail", value)
 
     @property
-    def zt(self) -> typing.Optional[float]:
-        """Get or set the Transverse tensile strength, c-axis (solid elements only).
+    def zt(self) -> float:
+        """Get or set the This field applies to solid elements only. Transverse tensile strength, c-axis, for EXTRA = 1 and 2 or transverse tensile strain at failure, c-axis, for EXTRA = 3 and 4:
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-ZT) which defines either the transverse tensile strength(EXTRA = 1 and 2) or the transverse tensile strain at failure(EXTRA = 3 and 4) as a function of strain rate.If the first strain rate value in the curve is negative, all strain rate values are assumed to be given as a natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[8].get_value("zt")
 
@@ -911,8 +931,11 @@ class Mat157(KeywordBase):
         self._cards[8].set_value("zt", value)
 
     @property
-    def zc(self) -> typing.Optional[float]:
-        """Get or set the Transverse compressive strength, c-axis (positive value) (solid elements only).
+    def zc(self) -> float:
+        """Get or set the This field applies to solid elements only. Transverse compressive strength, c-axis, for EXTRA = 1 and 2 or transverse compressive strain at failure, c-axis, for EXTRA = 3 and 4:
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-ZC) which defines either the transverse compressive strength(EXTRA = 1 and 2) or the transverse compressive strain at failure(EXTRA = 3 and 4) as a function of strain rate.If the first strain rate value in the curve is negative, all strain rate values are assumed to be given as a natural logarithm of the strain rate.
+        Transverse compressive strengths and transverse compressive strains at failure should be positive.
         """ # nopep8
         return self._cards[8].get_value("zc")
 
@@ -922,8 +945,10 @@ class Mat157(KeywordBase):
         self._cards[8].set_value("zc", value)
 
     @property
-    def syz(self) -> typing.Optional[float]:
-        """Get or set the Shear strength, bc-plane (solid elements only).
+    def syz(self) -> float:
+        """Get or set the This field applies to solid elements only. Shear strength, bc-plane, for EXTRA = 1 and 2 or shear strain at failure, bc-plane, for EXTRA = 3 and 4:
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-SYZ) which defines the shear strength(EXTRA = 1 and 2) or the shear strain at failure(EXTRA = 3 and 4) as a function of strain rate.If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as a natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[8].get_value("syz")
 
@@ -933,8 +958,10 @@ class Mat157(KeywordBase):
         self._cards[8].set_value("syz", value)
 
     @property
-    def szx(self) -> typing.Optional[float]:
-        """Get or set the Shear strength, ca-plane (solid elements only).
+    def szx(self) -> float:
+        """Get or set the This field applies to solid elements only. Shear strength, ca-plane, for EXTRA = 1 and 2 or shear strain at failure, ca-plane, for EXTRA = 3 and 4:
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-SZX) which defines the shear strength(EXTRA = 1 and 2) or the shear strain at failure(EXTRA = 3 and 4) as a function of strain rate.If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as a natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[8].get_value("szx")
 
@@ -945,7 +972,7 @@ class Mat157(KeywordBase):
 
     @property
     def ff23(self) -> typing.Optional[float]:
-        """Get or set the Scale factor between -1 and +1 for interaction term F23, see Remarks (solid elements only).
+        """Get or set the Scale factor between -1 and +1 for interaction term F23. See Remark 3. This field applies to solid elements only. It applies for EXTRA = 1 and 3.
         """ # nopep8
         return self._cards[8].get_value("ff23")
 
@@ -956,7 +983,7 @@ class Mat157(KeywordBase):
 
     @property
     def ff31(self) -> typing.Optional[float]:
-        """Get or set the Scale factor between -1 and +1 for interaction term F31, see Remarks (solid elements only).
+        """Get or set the Scale factor between -1 and +1 for interaction term F31. See Remark 3. This field applies to solid elements only. It applies for EXTRA = 1 and 3.
         """ # nopep8
         return self._cards[8].get_value("ff31")
 

@@ -34,6 +34,7 @@ _MATADDDAMAGEDIEM_CARD0 = (
     FieldSchema("dinit", int, 20, 10, 0),
     FieldSchema("deps", float, 30, 10, 0.0),
     FieldSchema("numfip", float, 40, 10, 1.0),
+    FieldSchema("volfrac", float, 50, 10, 0.5),
 )
 
 _MATADDDAMAGEDIEM_CARD1 = (
@@ -124,8 +125,8 @@ class MatAddDamageDiem(KeywordBase):
     @property
     def dinit(self) -> int:
         """Get or set the Damage initialization option.
-        EQ.0:	No action is taken
-        EQ.1:	Damage history is initiated based on values of initial plastic strains and initial strain tensor, this is to be used in multistage analyses.
+        EQ.0: No action is taken
+        EQ.1: Damage history is initiated based on values of initial plastic strains and initial strain tensor, this is to be used in multistage analyses.
         """ # nopep8
         return self._cards[0].get_value("dinit")
 
@@ -149,9 +150,9 @@ class MatAddDamageDiem(KeywordBase):
 
     @property
     def numfip(self) -> float:
-        """Get or set the Number or percentage of failed integration points prior to element deletion (default value is 1).
-        GT.0.0:	Number of integration points which must fail before element is deleted.
-        LT.0.0:	Applies only to shells. |NUMFIP| is the percentage of layers which must fail before element fails.
+        """Get or set the Number or percentage of failed integration points prior to element deletion (default value is 1).NUMFIP does not apply to higher order solid element types 24, 25, 26, 27, 28, and 29, rather see the variable VOLFRAC. Also, when the material is a composite defined with *PART_COMPOSITE with different materials through-the-thickness, do not use NUMFIP; use *DEFINE_ELEMENT_EROSION instead.)
+        GT.0.0: Number of integration points which must fail before element is deleted.
+        LT.0.0: Applies only to shells. |NUMFIP| is the percentage of layers which must fail before element fails.
         For shell formulations with 4 integration points per layer, the layer is considered failed if any of the integration points in the layer fails
         """ # nopep8
         return self._cards[0].get_value("numfip")
@@ -162,13 +163,24 @@ class MatAddDamageDiem(KeywordBase):
         self._cards[0].set_value("numfip", value)
 
     @property
+    def volfrac(self) -> float:
+        """Get or set the Volume fraction required to fail before element deletion. The default is 0.5. It is used for higher-order solid element types 24, 25, 26, 27, 28, and 29, and all isogeometric solids and shell elements. See Remark 3.
+        """ # nopep8
+        return self._cards[0].get_value("volfrac")
+
+    @volfrac.setter
+    def volfrac(self, value: float) -> None:
+        """Set the volfrac property."""
+        self._cards[0].set_value("volfrac", value)
+
+    @property
     def dityp(self) -> float:
-        """Get or set the Damage initiation type
-        EQ.0.0:	Ductile based on stress triaxiality
-        EQ.1.0:	Shear
-        EQ.2.0:	MSFLD
-        EQ.3.0:	FLD
-        EQ.4.0:	Ductile based on normalized principal stress.
+        """Get or set the Damage initiation type(see Damage Initiation section)
+        EQ.0.0: Ductile based on stress triaxiality
+        EQ.1.0: Shear
+        EQ.2.0: MSFLD
+        EQ.3.0: FLD
+        EQ.4.0: Ductile based on normalized principal stress.
         """ # nopep8
         return self._cards[1].get_value("dityp")
 
@@ -182,11 +194,11 @@ class MatAddDamageDiem(KeywordBase):
     @property
     def p1(self) -> typing.Optional[float]:
         """Get or set the Damage initiation parameter
-        DITYP.EQ.0.0:	Load curve/table ID representing plastic strain at onset of damage as function of stress triaxiality and optionally plastic strain rate.
-        DITYP.EQ.1.0:	Load curve/table ID representing plastic strain at onset of damage as function of shear influence and optionally plastic strain rate.
-        DITYP.EQ.2.0:	Load curve/table ID representing plastic strain at onset of damage as function of ratio of principal plastic strain rates and optionally plastic strain rate.
-        DITYP.EQ.3.0:	Load curve/table ID representing plastic strain at onset of damage as function of ratio of principal plastic strain rates and optionally plastic strain rate.
-        DITYP.EQ.4.0:	Load curve/table ID representing plastic strain at onset of damage as function of stress state parameter and optionally plastic strain rate..
+        DITYP.EQ.0.0: Load curve/table ID representing plastic strain at onset of damage as function of stress triaxiality and optionally plastic strain rate.
+        DITYP.EQ.1.0: Load curve/table ID representing plastic strain at onset of damage as function of shear influence and optionally plastic strain rate.
+        DITYP.EQ.2.0: Load curve/table ID representing plastic strain at onset of damage as function of ratio of principal plastic strain rates and optionally plastic strain rate.
+        DITYP.EQ.3.0: Load curve/table ID representing plastic strain at onset of damage as function of ratio of principal plastic strain rates and optionally plastic strain rate.
+        DITYP.EQ.4.0: Load curve/table ID representing plastic strain at onset of damage as function of stress state parameter and optionally plastic strain rate..
         """ # nopep8
         return self._cards[1].get_value("p1")
 
@@ -198,15 +210,15 @@ class MatAddDamageDiem(KeywordBase):
     @property
     def p2(self) -> typing.Optional[float]:
         """Get or set the Damage initiation parameter
-        DITYP.EQ.0.0:	Not used
-        DITYP.EQ.1.0:	Pressure influence parameter k_s
-        DITYP.EQ.2.0:	Layer specification
-        EQ.0:	Mid layer
-        EQ.1:	Outer layer
-        DITYP.EQ.3.0:	Layer specification
-        EQ.0:	Mid layer
-        EQ.1:	Outer layer
-        DITYP.EQ.4.0:	Triaxiality influence parameter k_d.
+        DITYP.EQ.0.0: Not used
+        DITYP.EQ.1.0: Pressure influence parameter k_s
+        DITYP.EQ.2.0: Layer specification
+        EQ.0: Mid layer
+        EQ.1: Outer layer
+        DITYP.EQ.3.0: Layer specification
+        EQ.0: Mid layer
+        EQ.1: Outer layer
+        DITYP.EQ.4.0: Triaxiality influence parameter k_d.
         """ # nopep8
         return self._cards[1].get_value("p2")
 
@@ -218,15 +230,17 @@ class MatAddDamageDiem(KeywordBase):
     @property
     def p3(self) -> typing.Optional[float]:
         """Get or set the Damage initiation parameter
-        DITYP.EQ.0.0:	Not used
-        DITYP.EQ.1.0:	Not used
-        DITYP.EQ.2.0:	Initiation formulation
+        DITYP.EQ.0.0: Not used
+        DITYP.EQ.1.0: Computation of maximum shear stress for shells:
+        EQ.0: 2 - dimensional approach
+        EQ.1: 3 - dimensional approach
+        DITYP.EQ.2.0: Initiation formulation
         EQ.0: Direct
         EQ.1: Incremental
-        DITYP.EQ.3.0:	Initiation formulation
-        EQ.0:	Direct
-        EQ.1:	Incremental
-        DITYP.EQ.4.0:	Not used.
+        DITYP.EQ.3.0: Initiation formulation
+        EQ.0: Direct
+        EQ.1: Incremental
+        DITYP.EQ.4.0: Not used.
         """ # nopep8
         return self._cards[1].get_value("p3")
 
@@ -238,8 +252,8 @@ class MatAddDamageDiem(KeywordBase):
     @property
     def p4(self) -> typing.Optional[float]:
         """Get or set the Plane stress option for shell elements:
-        EQ.0.0:	transverse shear stresses σ_yz and σ_zx are included in the computation of stress invariants, such as the triaxiality.
-        EQ.1.0 : transverse shear stresses σ_yz and σ_zx are not included in the computation of stress invariants, such as the triaxiality.Useful in combination with “plane stress” material models, where the transverse shear stresses are also excluded from the yield condition, e.g.,* MAT_024_2D or *MAT_036.
+        EQ.0.0: transverse shear stresses Sigma_yz and Sigma_zx are included in the computation of stress invariants, such as the triaxiality.
+        EQ.1.0: transverse shear stresses Sigma_yz and Sigma_zx are not included in the computation of stress invariants, such as the triaxiality. Useful in combination with 'plane stress' material models, where the transverse shear stresses are also excluded from the yield condition, e.g., *MAT_024_2D or *MAT_036.
         """ # nopep8
         return self._cards[1].get_value("p4")
 
@@ -250,7 +264,7 @@ class MatAddDamageDiem(KeywordBase):
 
     @property
     def p5(self) -> typing.Optional[float]:
-        """Get or set the Load curve or table ID representing regularization factor as a function of the characteristic element size (curve) or regularization factor as a function of the characteristic element size and abscissa value of the criterion used (table).. This factor scales the plastic strain at the onset of damage defined with P1.
+        """Get or set the Load curve or table ID representing regularization factor as a function of the characteristic element size (curve) or regularization factor as a function of the characteristic element size and abscissa value of the criterion used (table).The criterion is the curve/table specified in P1. For example, for DITYP = 0.0, the regularization factor would depend on stress triaxiality. This factor scales the plastic strain at the onset of damage defined with P1.
         """ # nopep8
         return self._cards[1].get_value("p5")
 
@@ -262,8 +276,8 @@ class MatAddDamageDiem(KeywordBase):
     @property
     def detyp(self) -> float:
         """Get or set the Damage evolution type
-        EQ.0.0:	Linear softening, evolution of damage is a function of the plastic displacement after the initiation of damage.
-        EQ.1.0:	Linear softening, evolution of damage is a function of the fracture energy after the initiation of damage.
+        EQ.0.0: Linear softening, evolution of damage is a function of the plastic displacement after the initiation of damage.
+        EQ.1.0: Linear softening, evolution of damage is a function of the fracture energy after the initiation of damage.
         """ # nopep8
         return self._cards[2].get_value("detyp")
 
@@ -277,9 +291,9 @@ class MatAddDamageDiem(KeywordBase):
     @property
     def dctyp(self) -> float:
         """Get or set the Damage composition option for multiple criteria
-        EQ.-1.0:	Damage not coupled to stress
-        EQ.0.0:	Maximum
-        EQ.1.0:	Multiplicative.
+        EQ.-1.0: Damage not coupled to stress
+        EQ.0.0: Maximum
+        EQ.1.0: Multiplicative.
         """ # nopep8
         return self._cards[2].get_value("dctyp")
 
@@ -293,8 +307,8 @@ class MatAddDamageDiem(KeywordBase):
     @property
     def q1(self) -> typing.Optional[float]:
         """Get or set the Damage evolution parameter
-        DETYP.EQ.0.0:	Plastic displacement at failure,u_f^p, a negative value corresponds to a table ID for u_f^p as a function of triaxiality and damage.
-        DETYP.EQ.1.0:	Fracture energy at failure,G_f.
+        DETYP.EQ.0.0: Plastic displacement at failure,u_f**p, a negative value corresponds to a table ID for u_f**p as a function of triaxiality and damage.
+        DETYP.EQ.1.0: Fracture energy at failure,G_f.
         """ # nopep8
         return self._cards[2].get_value("q1")
 
@@ -317,8 +331,8 @@ class MatAddDamageDiem(KeywordBase):
     @property
     def q3(self) -> typing.Optional[float]:
         """Get or set the Damage evolution parameter:
-        DETYP.EQ.0.0:	Exponent, α, in nonlinear damage evolution law, activated when u_f^ p > 0 and α > 0.
-        DETYP.EQ.1.0:	Not used.
+        DETYP.EQ.0.0: Exponent, alpha, in nonlinear damage evolution law, activated when u_f** p > 0 and alpha > 0.
+        DETYP.EQ.1.0: Not used.
         """ # nopep8
         return self._cards[2].get_value("q3")
 
@@ -329,7 +343,7 @@ class MatAddDamageDiem(KeywordBase):
 
     @property
     def q4(self) -> typing.Optional[float]:
-        """Get or set the Load curve or table ID representing regularization factor as a function of the characteristic element size (curve) or regularization factor as a function of the characteristic element size and plastic strain rate (table). This factor scales the damage evolution parameter Q1
+        """Get or set the Load curve or table ID representing regularization factor as a function of the characteristic element size (curve) or regularization factor as a function of the characteristic element size and abscissa value of the criterion used (table).The criterion is the curve/table specified in P1. For example, for DITYP = 0.0, the regularization factor would depend on stress triaxiality. If Q4 is input with a negative sign, the second table input should be plastic strain rate instead of the abscissa value. This factor scales the damage evolution parameter Q1.
         """ # nopep8
         return self._cards[2].get_value("q4")
 

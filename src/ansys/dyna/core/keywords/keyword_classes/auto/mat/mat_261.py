@@ -280,12 +280,12 @@ class Mat261(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC, particularly the Material Directions section, for details):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by an angle(see MANGLE on Card 4).
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
-        EQ.2.0:	Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle.This angle may be set in the keyword input for the element or in the input for this keyword(see MANGLE on Card 4).
-        EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
-        LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_OPTION).
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with *DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by an angle(see MANGLE on Card 4).
+        EQ.1.0: Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle.This angle may be set in the keyword input for the element or in the input for this keyword(see MANGLE on Card 4).
+        EQ.4.0: Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number(CID on *DEFINE_COORDINATE_OPTION).
         """ # nopep8
         return self._cards[1].get_value("aopt")
 
@@ -296,9 +296,10 @@ class Mat261(KeywordBase):
 
     @property
     def daf(self) -> float:
-        """Get or set the Flag to control failure of an integration point based on longitudinal (fiber) tensile failure:
-        EQ.0.0: IP fails if any damage variable reaches 1.0.
-        EQ.1.0: no failure of IP due to fiber tensile failure (da(i)=1.0).
+        """Get or set the Flag to control failure of an integration point based on longitudinal (fiber) tensile failure (see Remarks 1 and 2):
+        LT. - 0.01: Integration point fails if any damage variable, that has a corresponding flag(DAF, DKF, or DMF) set <= 0.0, reaches 1.0. | DAF | limits the stress reduction due to damage from longitudinal tensile failure.
+        EQ.0.00: Integration point fails if any damage variable, that has a corresponding flag(DAF, DKF, or DMF) set <= 0.0, reaches 1.0.DAF does not limit the stress reduction due to damage from longitudinal tensile failure.
+        GT.0.01: No failure of integration point due to fiber tensile failure.This condition corresponds to history variable 'da(i)" reaching 1.0.The value of DAF limits the stress reduction due to damage from longitudinal tensile failure.
         """ # nopep8
         return self._cards[1].get_value("daf")
 
@@ -311,9 +312,10 @@ class Mat261(KeywordBase):
 
     @property
     def dkf(self) -> float:
-        """Get or set the Flag to control failure of an integration point based on longitudinal (fiber) compressive failure:
-        EQ.0.0: IP fails if any damage variable reaches 1.0.
-        EQ.1.0: no failure of IP due to fiber compressive failure	(dkink(i)=1.0).
+        """Get or set the Flag to control failure of an integration point based on longitudinal (fiber) compressive failure (see Remarks 1 and 2):
+        LT. - 0.01: Integration point fails if any damage variable, that has a corresponding flag(DAF, DKF, or DMF) set <= 0.0, reaches 1.0. | DKF | limits the stress reduction due to damage from longitudinal compressive failure.
+        EQ.0.00: Integration point fails if any damage variable, that has a corresponding flag(DAF, DKF, or DMF) set <= 0.0, reaches 1.0.DKF does not limit the stress reduction due to damage from longitudinal tensile failure.
+        GT.0.01: No failure of integration point due to fiber compressive failure.This condition corresponds to history variable 'dkink(i)" reaching 1.0.The value of DKF limits the stress reduction due to damage from longitudinal compressive failure.
         """ # nopep8
         return self._cards[1].get_value("dkf")
 
@@ -326,9 +328,10 @@ class Mat261(KeywordBase):
 
     @property
     def dmf(self) -> float:
-        """Get or set the Flag to control failure of an integration point based on transverse (matrix) failure:
-        EQ.0.0: IP fails if any damage variable reaches 1.0.
-        EQ.1.0: no failure of IP due to matrix failure (dmat(i)=1.0).
+        """Get or set the Flag to control failure of an integration point based on transverse (matrix) failure (see Remarks 1 and 2):
+        LT. - 0.01: Integration point fails if any damage variable, that has a corresponding flag(DAF, DKF, or DMF) set <= 0.0, reaches 1.0. | DMF | limits the stress reduction due to the damage from the matrix failure.
+        EQ.0.00: Integration point fails if any damage variable, that has a corresponding flag(DAF, DKF, or DMF) set <= 0.0, reaches 1.0.DMF does not limit the stress reduction due to damage from longitudinal tensile failure.
+        GT.0.01: No failure of integration point due to matrix failure.This condition corresponds to history variable 'dmat(i)" reaching 1.0.The value of DMF limits the stress reduction due to  damage from matrix failure.
         """ # nopep8
         return self._cards[1].get_value("dmf")
 
@@ -502,9 +505,7 @@ class Mat261(KeywordBase):
     def enkink(self) -> typing.Optional[float]:
         """Get or set the Fracture toughness for longitudinal (fiber) compressive failure mode.
         GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-ENKINK) which defines the fracture
-        toughness for fiber compressive failure mode as a
-        function of characteristic element length. No further regularization.
+        LT.0.0: Load curve or table ID = (-ENKINK).The load curve defines the fracture toughness for fiber compressive failure mode as a function of characteristic element length.The table defines for each strain rate value a load curve that defines the fracture toughness for fiber compressive failure mode as a function of characteristic element length.Neither case includes further regularization.The table must use the absolute value of the strain rate unless providing a logarithmically defined table. See Remark 5.
         """ # nopep8
         return self._cards[4].get_value("enkink")
 
@@ -517,9 +518,7 @@ class Mat261(KeywordBase):
     def ena(self) -> typing.Optional[float]:
         """Get or set the Fracture toughness for longitudinal (fiber) tensile failure mode.
         GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-ENA) which defines the fracture
-        toughness for fiber tensile failure mode as a function of
-        characteristic element length. No further regularization.
+        LT.0.0: Load curve or table ID = (-ENA) The load curve defines the fracture toughness for fiber tensile failure mode as a function of characteristic element length.The table defines for each strain rate value a load curve that defines the fracture toughness for fiber tensile failure mode as a function of characteristic element length.Neither case includes further regularization. The table definition must use the absolute value of the strain rate unless providing a logarithmically defined table. See Remark 5.
         """ # nopep8
         return self._cards[4].get_value("ena")
 
@@ -532,9 +531,7 @@ class Mat261(KeywordBase):
     def enb(self) -> typing.Optional[float]:
         """Get or set the Fracture toughness for intralaminar matrix tensile failure.
         GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-ENB) which defines the fracture
-        toughness for intralaminar matrix tensile failure as a
-        function of characteristic element length. No further regularization.
+        LT.0.0: Load curve or table ID = (-ENB).The load curve defines the fracture toughness for intralaminar matrix tensile failure as a function of characteristic element length.The table defines for each strain rate value a load curve that defines the fracture toughness for intralaminar matrix tensile failure as a function of characteristic element length.Neither case includes further regularization.The table definition must use the absolute value of the strain rate unless providing a logarithmically defined table. See Remark 5.
         """ # nopep8
         return self._cards[4].get_value("enb")
 
@@ -547,9 +544,7 @@ class Mat261(KeywordBase):
     def ent(self) -> typing.Optional[float]:
         """Get or set the Fracture toughness for intralaminar matrix transverse shear failure.
         GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-ENT) which defines the fracture
-        toughness for intralaminar matrix transverse shear failure
-        as a function of characteristic element length. No further	regularization.
+        LT.0.0: Load curve or table ID = (-ENT).The load curve defines the fracture toughness for intralaminar matrix transverse shear failure as a function of characteristic element length.The table  defines for each strain rate value a load curve that defines the fracture toughness for intralaminar matrix transverse shear failure as a function of characteristic element length.Neither case includes further regularization.The table must use the absolute value of the strain rate unless providing a logarithmically defined table. See Remark 5
         """ # nopep8
         return self._cards[4].get_value("ent")
 
@@ -562,9 +557,7 @@ class Mat261(KeywordBase):
     def enl(self) -> typing.Optional[float]:
         """Get or set the Fracture toughness for intralaminar matrix longitudinal shear failure.
         GT.0.0: The given value will be regularized with the characteristic element length.
-        LT.0.0: Load curve ID=(-ENL) which defines the fracture
-        toughness for intralaminar matrix longitudinal shear
-        failure as a function of characteristic element length. No further regularization.
+        LT.0.0: Load curve or table ID = (-ENL).The load curve defines the fracture toughness for intralaminar matrix longitudinal shear failure as a function of characteristic element length.The table defines for each strain rate value a load curve that defines the fracture toughness for intralaminar matrix longitudinal shear failure as a function of characteristic element length.Neither case includes further regularization.The table must use the absolute value of the strain rate unless providing a logarithmically defined table. See Remark 5.
         """ # nopep8
         return self._cards[4].get_value("enl")
 
@@ -576,6 +569,8 @@ class Mat261(KeywordBase):
     @property
     def xc(self) -> typing.Optional[float]:
         """Get or set the Longitudinal compressive strength, a-axis (positive value).
+        GT.0.0: Constant value
+        LT.0.0 : Load curve ID = (-XC) which defines the longitudinal compressive strength as a function of the absolute value of the  longitudinal strain rate(ϵ ̇_aa), except in the case of logarithmically defined curves.See Remark 5 for a discussion of logarithmically defined curves.
         """ # nopep8
         return self._cards[5].get_value("xc")
 
@@ -587,6 +582,8 @@ class Mat261(KeywordBase):
     @property
     def xt(self) -> typing.Optional[float]:
         """Get or set the Longitudinal tensile strength, a-axis.
+        GT.0.0: Constant value
+        LT.0.0 : Load curve ID = (-XT) which defines the longitudinal tensile strength as a function of the absolute value of the longitudinal strain rate(ϵ ̇_aa), except in the case of logarithmically defined curves.See Remark 5 for a discussion of logarithmically defined curves.
         """ # nopep8
         return self._cards[5].get_value("xt")
 
@@ -598,6 +595,8 @@ class Mat261(KeywordBase):
     @property
     def yc(self) -> typing.Optional[float]:
         """Get or set the Transverse compressive strength, b-axis (positive value).
+        GT.0.0: Constant value
+        LT.0.0 : Load curve ID = (-YC) which defines the transverse compressive strength as a function of the absolute value of the transverse strain rate(ϵ ̇_bb), except in the case of logarithmically defined curves.See Remark 5 for a discussion of logarithmically defined curves.
         """ # nopep8
         return self._cards[5].get_value("yc")
 
@@ -609,6 +608,8 @@ class Mat261(KeywordBase):
     @property
     def yt(self) -> typing.Optional[float]:
         """Get or set the Transverse tensile strength, b-axis.
+        GT.0.0: Constant value
+        LT.0.0 : Load curve ID = (-YT) which defines the transverse tensile strength as a function of the absolute value of the transverse strain rate(ϵ ̇_bb), except in the case of logarithmically defined curves.See Remark 5 for a discussion of logarithmically defined curves.
         """ # nopep8
         return self._cards[5].get_value("yt")
 
@@ -620,6 +621,8 @@ class Mat261(KeywordBase):
     @property
     def sl(self) -> typing.Optional[float]:
         """Get or set the Longitudinal shear strength.
+        GT.0.0: Constant value
+        LT.0.0 : Load curve ID = (-SL) which defines the longitudinal shear strength as a function of the absolute value of the in - plane shear strain rate(ϵ ̇_ab), except in the case of logarithmically defined curves.See Remark 5 for a discussion of logarithmically defined curves.
         """ # nopep8
         return self._cards[5].get_value("sl")
 
@@ -652,7 +655,9 @@ class Mat261(KeywordBase):
 
     @property
     def lcss(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID which defines the non-linear in-plane shear-stress as a function of in-plane shear-strain.
+        """Get or set the Load curve ID or Table ID.
+        Load Curve.When LCSS is a load curve ID, it defines the nonlinear in - plane shear stress as a function of the absolute value of in - plane shear strain(γ_ab), except in the case of logarithmically defined curves.See Remark 5 for a discussion of logarithmically defined curves.
+        Tabular Data.The table maps in - plane strain rate values(γ ̇_ab) to a load curve giving the in - plane shear stress as a function of the absolute value of in - plane shear strain.Note that except for in the case of logarithmically definied tables, the strain ratesand shear strains must be the absolute values(see Remark 5).For strain rates below the minimum value, the curve for the lowest defined value of strain rate is used.Likewise, when the strain rate exceeds the maximum value, the curve for the highest defined value of strain rate is used.
         """ # nopep8
         return self._cards[6].get_value("lcss")
 
@@ -663,9 +668,9 @@ class Mat261(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Hardening parameter for in-plane shear plasticity (0.0 <= BETA <=	1.0).
+        """Get or set the Hardening parameter for in-plane shear plasticity (0.0 <= BETA <= 1.0).
         EQ.0.0: Pure kinematic hardening
-        EQ.1.0: Pure isotropic hardening	0.0<BETA<1.0: mixed hardening.
+        EQ.1.0: Pure isotropic hardening 0.0<BETA<1.0: mixed hardening.
         """ # nopep8
         return self._cards[6].get_value("beta")
 
@@ -706,7 +711,7 @@ class Mat261(KeywordBase):
 
     @property
     def soft(self) -> float:
-        """Get or set the Softening reduction factor for material strength in crashfront	elements (default = 1.0).
+        """Get or set the Softening reduction factor for material strength in crashfront elements (default = 1.0).
         """ # nopep8
         return self._cards[6].get_value("soft")
 

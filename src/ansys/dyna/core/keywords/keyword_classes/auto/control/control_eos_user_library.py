@@ -37,6 +37,13 @@ _CONTROLEOSUSERLIBRARY_CARD1 = (
     FieldSchema("conp", float, 20, 10, 100.0),
 )
 
+_CONTROLEOSUSERLIBRARY_CARD2 = (
+    FieldSchema("sclr", float, 0, 10, 1.0),
+    FieldSchema("sclt", float, 10, 10, 1.0),
+    FieldSchema("scle", float, 20, 10, 1.0),
+    FieldSchema("sclp", float, 30, 10, 1.0),
+)
+
 class ControlEosUserLibrary(KeywordBase):
     """DYNA CONTROL_EOS_USER_LIBRARY keyword"""
 
@@ -55,10 +62,15 @@ class ControlEosUserLibrary(KeywordBase):
                 _CONTROLEOSUSERLIBRARY_CARD1,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _CONTROLEOSUSERLIBRARY_CARD2,
+                **kwargs,
+            ),
         ]
     @property
     def path(self) -> typing.Optional[str]:
-        """Get or set the Path to the library seslib. The default path is the current working directory
+        """Get or set the Path to the library seslib. The default path is the current working directory.
+        For the ASCII keyword option, the path is replaced by the name of an ASCII file containing data tables.The filename should include the path if the file is not in the current directory.
         """ # nopep8
         return self._cards[0].get_value("path")
 
@@ -69,7 +81,7 @@ class ControlEosUserLibrary(KeywordBase):
 
     @property
     def conm(self) -> float:
-        """Get or set the Scaling factors for the mass, length and time conversion from the input deck units to the library units
+        """Get or set the Scaling factors for the mass conversion from the input deck units to the library units
         """ # nopep8
         return self._cards[1].get_value("conm")
 
@@ -80,7 +92,7 @@ class ControlEosUserLibrary(KeywordBase):
 
     @property
     def conl(self) -> float:
-        """Get or set the Scaling factors for the mass, length and time conversion from the input deck units to the library units
+        """Get or set the Scaling factors for length cononversion from the input deck units to the library units
         """ # nopep8
         return self._cards[1].get_value("conl")
 
@@ -91,7 +103,7 @@ class ControlEosUserLibrary(KeywordBase):
 
     @property
     def cont(self) -> float:
-        """Get or set the Scaling factors for the mass, length and time conversion from the input deck units to the library units
+        """Get or set the Scaling factors for time conversion from the input deck units to the library units
         """ # nopep8
         return self._cards[1].get_value("cont")
 
@@ -102,7 +114,7 @@ class ControlEosUserLibrary(KeywordBase):
 
     @property
     def conp(self) -> float:
-        """Get or set the Scaling factors for the mass, length and time conversion from the input deck units to the library units
+        """Get or set the Scaling factors for pressure conversion from the input deck units to the library units
         """ # nopep8
         return self._cards[1].get_value("conp")
 
@@ -110,4 +122,48 @@ class ControlEosUserLibrary(KeywordBase):
     def conp(self, value: float) -> None:
         """Set the conp property."""
         self._cards[1].set_value("conp", value)
+
+    @property
+    def sclr(self) -> float:
+        """Get or set the Plot scaling factor for densities
+        """ # nopep8
+        return self._cards[2].get_value("sclr")
+
+    @sclr.setter
+    def sclr(self, value: float) -> None:
+        """Set the sclr property."""
+        self._cards[2].set_value("sclr", value)
+
+    @property
+    def sclt(self) -> float:
+        """Get or set the Plot scaling factor for temperatures
+        """ # nopep8
+        return self._cards[2].get_value("sclt")
+
+    @sclt.setter
+    def sclt(self, value: float) -> None:
+        """Set the sclt property."""
+        self._cards[2].set_value("sclt", value)
+
+    @property
+    def scle(self) -> float:
+        """Get or set the Plot scaling factor for energies
+        """ # nopep8
+        return self._cards[2].get_value("scle")
+
+    @scle.setter
+    def scle(self, value: float) -> None:
+        """Set the scle property."""
+        self._cards[2].set_value("scle", value)
+
+    @property
+    def sclp(self) -> float:
+        """Get or set the Plot scaling factor for pressures
+        """ # nopep8
+        return self._cards[2].get_value("sclp")
+
+    @sclp.setter
+    def sclp(self, value: float) -> None:
+        """Set the sclp property."""
+        self._cards[2].set_value("sclp", value)
 

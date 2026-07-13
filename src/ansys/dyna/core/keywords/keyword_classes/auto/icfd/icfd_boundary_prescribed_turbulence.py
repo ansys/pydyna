@@ -101,7 +101,7 @@ class IcfdBoundaryPrescribedTurbulence(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID to describe the variable value as a function of time; see *DEFINE_‌CURVE, *DEFINE_‌CURVE_‌FUNCTION or *DEFINE_‌FUNCTION. If a *DEFINE_‌FUNCTION is used, the following parameters are allowed: f(x, y, z, vx, vy, vz, temp, pres, time, k, e, mut).
+        """Get or set the Load curve ID to describe the variable value as a function of time; see *DEFINE_CURVE, *DEFINE_CURVE_FUNCTION or *DEFINE_FUNCTION. If a *DEFINE_FUNCTION is used, the following parameters are allowed: f(x, y, z, vx, vy, vz, temp, pres, time, k, e, mut).
         """ # nopep8
         return self._cards[0].get_value("lcid")
 

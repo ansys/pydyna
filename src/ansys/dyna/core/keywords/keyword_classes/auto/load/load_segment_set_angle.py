@@ -94,7 +94,7 @@ class LoadSegmentSetAngle(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve or function ID defining the traction as a function of the angle.  If IOPT=0 below, define the abscissa between 0 and 2??radians or 0 and 360 degrees if IOPD=1.
+        """Get or set the Load curve or function ID defining the traction as a function of the angle.  If IOPT=0 below, define the abscissa between 0 and 2    radians or 0 and 360 degrees if IOPD=1.
         """ # nopep8
         return self._cards[0].get_value("lcid")
 
@@ -116,7 +116,7 @@ class LoadSegmentSetAngle(KeywordBase):
 
     @property
     def ioptp(self) -> int:
-        """Get or set the Flag for periodicity. The default (IOPTP=0) requires the load curve to be defined between 0 and 2?. This is useful, for example, for modeling an engine that is running at a steady state since each rotation will experience the same loading. To model a transient response, IOPTP=1 uses a load curve defined over the full range of angles, permitting a different response on the second and subsequent revolutions.
+        """Get or set the Flag for periodicity. The default (IOPTP=0) requires the load curve to be defined between 0 and 2  . This is useful, for example, for modeling an engine that is running at a steady state since each rotation will experience the same loading. To model a transient response, IOPTP=1 uses a load curve defined over the full range of angles, permitting a different response on the second and subsequent revolutions.
         """ # nopep8
         return self._cards[0].get_value("ioptp")
 

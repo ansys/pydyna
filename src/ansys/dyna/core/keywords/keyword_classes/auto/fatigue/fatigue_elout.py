@@ -76,25 +76,30 @@ class FatigueElout(KeywordBase):
     def index(self) -> int:
         """Get or set the Stress/strain index for performing fatigue analysis:
         EQ.0: Von-Mises stress/strain
-        EQ.1: Maximum principal stress/strain
-        EQ.2: Maximum shear stress/strain
+        EQ.1: Absolute maximum principal stress/strain
+        EQ.2: Maximum shear stress/strain.
+        EQ.3:Maximum principal stress/strain
+        EQ.-1 : xx - stress / strain component
+        EQ.- 2 : yy - stress / strain component
+        EQ.- 3 : zz - stress / strain component
+        EQ.- 4 : xy - stress / strain component
+        EQ.- 5 : yz - stress / strain component
+        EQ.- 6 : zx - stress / strain component
         """ # nopep8
         return self._cards[0].get_value("index")
 
     @index.setter
     def index(self, value: int) -> None:
         """Set the index property."""
-        if value not in [0, 1, 2, None]:
-            raise Exception("""index must be `None` or one of {0,1,2}.""")
+        if value not in [0, 1, 2, 3, -1, -2, -3, -4, -5, -6, None]:
+            raise Exception("""index must be `None` or one of {0,1,2,3,-1,-2,-3,-4,-5,-6}.""")
         self._cards[0].set_value("index", value)
 
     @property
     def restrt(self) -> int:
-        """Get or set the Restart options. This flag is used to save an LS-DYNA transient
-        analysis if the binary database for stress/strain time history data
-        has been created in last runs. See Remark 3.
-        EQ.0: initial run
-        EQ.1: restart with existing stress/strain binary database
+        """Get or set the Restart options. This flag is used to save an LS-DYNA transient analysis if the binary database for stress/strain time history data has been created in last runs. See Remark 3.
+        EQ.0: Initial run
+        EQ.1: Restart with existing stress/strain binary database
         """ # nopep8
         return self._cards[0].get_value("restrt")
 
@@ -119,9 +124,9 @@ class FatigueElout(KeywordBase):
     @property
     def dmgmin(self) -> float:
         """Get or set the Minimum fatigue damage ratio for parts undergoing fatigue analysis:
-        EQ.0:	no change on computed fatigue damage ratio
-        LT.0 : for each part, the minimum fatigue damage ratio dumped to D3FTG is | DMGMIN | x the computed nonzero minimum fatigue damage ratio computed on the current part.
-        GT.0 : for each part, the minimum fatigue damage ratio dumped to D3FTG is DMGMIN.
+        EQ.0: No change on computed fatigue damage ratio
+        LT.0: For each part, the minimum fatigue damage ratio dumped to D3FTG is | DMGMIN | x the computed nonzero minimum fatigue damage ratio computed on the current part.
+        GT.0: For each part, the minimum fatigue damage ratio dumped to D3FTG is DMGMIN.
         """ # nopep8
         return self._cards[0].get_value("dmgmin")
 

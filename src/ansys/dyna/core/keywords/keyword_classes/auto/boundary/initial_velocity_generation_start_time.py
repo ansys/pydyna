@@ -47,7 +47,9 @@ class InitialVelocityGenerationStartTime(KeywordBase):
         ]
     @property
     def stime(self) -> float:
-        """Get or set the Start time.
+        """Get or set the Start time or switch ID:
+        GT.0.0: Start time at which LS - DYNA initializes the velocities.
+        LT.0.0: |STIME| is a *SENSOR_SWITCH switch ID.When the switch condition is met, LS - DYNA initializes the velocities.
         """ # nopep8
         return self._cards[0].get_value("stime")
 

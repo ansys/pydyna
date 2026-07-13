@@ -27,6 +27,20 @@ Iga1DNurbsXyz
     :members:
 
 
+Iga2DBasisTransformXyz
+----------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_2d_basis_transform_xyz
+    :members:
+
+
+Iga2DBezierXyz
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_2d_bezier_xyz
+    :members:
+
+
 Iga2DBrep
 ---------
 
@@ -48,6 +62,20 @@ Iga2DNurbsXyz
     :members:
 
 
+Iga3DBasisTransformXyz
+----------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_3d_basis_transform_xyz
+    :members:
+
+
+Iga3DBezierXyz
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_3d_bezier_xyz
+    :members:
+
+
 Iga3DNurbsXyz
 -------------
 
@@ -59,6 +87,13 @@ IgaEdgeUvw
 ----------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_edge_uvw
+    :members:
+
+
+IgaEdgeUvwBasisTransform
+------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_edge_uvw_basis_transform
     :members:
 
 
@@ -76,10 +111,24 @@ IgaFaceUvw
     :members:
 
 
+IgaFaceUvwBasisTransform
+------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_face_uvw_basis_transform
+    :members:
+
+
 IgaFaceXyz
 ----------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_face_xyz
+    :members:
+
+
+IgaFaceXyzBasisTransform
+------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_face_xyz_basis_transform
     :members:
 
 
@@ -90,10 +139,87 @@ IgaIncludeBezier
     :members:
 
 
+IgaIntegrationShellReduce
+-------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_integration_shell_reduce
+    :members:
+
+
+IgaIntegrationSolidReduce
+-------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_integration_solid_reduce
+    :members:
+
+
+IgaMassEdgeUvw
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_mass_edge_uvw
+    :members:
+
+
+IgaMassFaceXyz
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_mass_face_xyz
+    :members:
+
+
+IgaMassPointUvw
+---------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_mass_point_uvw
+    :members:
+
+
+IgaMassSetedgeUvw
+-----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_mass_setedge_uvw
+    :members:
+
+
+IgaMassSetfaceXyz
+-----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_mass_setface_xyz
+    :members:
+
+
+IgaMassSetpointUvw
+------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_mass_setpoint_uvw
+    :members:
+
+
 IgaPointUvw
 -----------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_point_uvw
+    :members:
+
+
+IgaPointUvwBasisTransform
+-------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_point_uvw_basis_transform
+    :members:
+
+
+IgaRefineShell
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_refine_shell
+    :members:
+
+
+IgaRefineSolid
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_refine_solid
     :members:
 
 
@@ -122,6 +248,13 @@ IgaVolumeXyz
 ------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_volume_xyz
+    :members:
+
+
+IgaVolumeXyzBasisTransform
+--------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.iga_volume_xyz_basis_transform
     :members:
 
 

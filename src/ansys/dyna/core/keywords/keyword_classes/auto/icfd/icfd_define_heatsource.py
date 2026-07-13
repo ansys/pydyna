@@ -31,7 +31,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import De
 _ICFDDEFINEHEATSOURCE_CARD0 = (
     FieldSchema("hsid", int, 0, 10, None),
     FieldSchema("lcid", int, 10, 10, None),
-    FieldSchema("shape", int, 20, 10, None),
+    FieldSchema("ishape", int, 20, 10, None),
     FieldSchema("r", float, 30, 10, None),
     FieldSchema("ptid1", int, 40, 10, None),
     FieldSchema("ptid2", int, 50, 10, None),
@@ -68,7 +68,7 @@ class IcfdDefineHeatsource(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID specifying the evolution of the heat source term function of time for the X, Y and Z dofs, see *DEFINE_CURVE,*DEFINE_CURVE_FUNCTION or *DEFINE_FUNCTION. If a DEFINE_FUNCTION is used, the following parameters are allowed:  f(x,y,z,vx,vy,vz,temp,pres,time).
+        """Get or set the Load curve ID specifying the evolution of the heat source term function of time for the X, Y, and Z degrees-of-freedom (see *DEFINE_CURVE,*DEFINE_CURVE_FUNCTION, or *DEFINE_FUNCTION). If using a *DEFINE_FUNCTION, the following arguments are allowed: f(x, y, z, vx, vy, vz, temp, pres, time).
         """ # nopep8
         return self._cards[0].get_value("lcid")
 
@@ -78,22 +78,22 @@ class IcfdDefineHeatsource(KeywordBase):
         self._cards[0].set_value("lcid", value)
 
     @property
-    def shape(self) -> typing.Optional[int]:
+    def ishape(self) -> typing.Optional[int]:
         """Get or set the Shape of the volumetric heat source:
-        EQ.1 :	Box shape
-        EQ.2 :	Cylinder shape
-        EQ.3 :	Sphere shape
+        EQ.1: Box shape
+        EQ.2: Cylinder shape
+        EQ.3: Sphere shape
         """ # nopep8
-        return self._cards[0].get_value("shape")
+        return self._cards[0].get_value("ishape")
 
-    @shape.setter
-    def shape(self, value: int) -> None:
-        """Set the shape property."""
-        self._cards[0].set_value("shape", value)
+    @ishape.setter
+    def ishape(self, value: int) -> None:
+        """Set the ishape property."""
+        self._cards[0].set_value("ishape", value)
 
     @property
     def r(self) -> typing.Optional[float]:
-        """Get or set the Radius of the sphere is SHAPE=3
+        """Get or set the Radius of the cylinder if ISHAPE = 2 or radius of the sphere if ISHAPE = 3
         """ # nopep8
         return self._cards[0].get_value("r")
 
@@ -104,7 +104,10 @@ class IcfdDefineHeatsource(KeywordBase):
 
     @property
     def ptid1(self) -> typing.Optional[int]:
-        """Get or set the ID of point (See ICFD_DEFINE_POINT) of minimum coordinates if SHAPE=1, tail point if SHAPE=2, origin if SHAPE=3
+        """Get or set the Point ID (see *ICFD_DEFINE_POINT) whose meaning depends on ISHAPE:
+        ISHAPE.EQ.1: Minimum coordinates of the box
+        ISHAPE.EQ.2: Point in the center of one base of the cylinder
+        ISHAPE.EQ.3: Center of the sphere
         """ # nopep8
         return self._cards[0].get_value("ptid1")
 
@@ -115,7 +118,9 @@ class IcfdDefineHeatsource(KeywordBase):
 
     @property
     def ptid2(self) -> typing.Optional[int]:
-        """Get or set the ID of point of maximum coordinates if SHAPE=2, head point if SHAPE=2.
+        """Get or set the Point ID (see *ICFD_DEFINE_POINT) whose meaning depends on ISHAPE:
+        ISHAPE.EQ.1: Maximum coordinates of the box
+        ISHAPE.EQ.2: Point in the center of the other base of the cylinder
         """ # nopep8
         return self._cards[0].get_value("ptid2")
 
