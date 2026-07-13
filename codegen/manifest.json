@@ -1699,7 +1699,7 @@
         "generations": [
             {
                 "keyword": "MAT_MODIFIED_PIECEWISE_LINEAR_PLASTICITY_PRESTRAIN",
-                "source-keyword": "MAT_MA_MODIFIED_PIECEWISE_LINEAR_PLASTICITY_PRESTRAIN"
+                "source-keyword": "MAT_MODIFIED_PIECEWISE_LINEAR_PLASTICITY_PRESTRAIN"
             }
         ]
     },
@@ -3559,42 +3559,13 @@
         "generation-options": {
             "conditional-card": [
                 {
-                    "func": "self.tmod==1",
-                    "ref": "tmod_1_params_card"
-                },
-                {
                     "func": "self.tmod==2 or self.tmod==3",
                     "ref": "tmod_2_3_params_card"
-                },
-                {
-                    "func": "self.tmod==4",
-                    "ref": "tmod_4_cs_card"
-                },
-                {
-                    "func": "self.tmod==4",
-                    "ref": "tmod_4_coefficients_card"
-                },
-                {
-                    "func": "self.tmod==5",
-                    "ref": "tmod_5_params_card"
-                }
-            ],
-            "shared-field": [
-                {
-                    "name": "Ccut",
-                    "cards": [
-                        1,
-                        4
-                    ]
                 }
             ]
         },
         "labels": {
-            "tmod_1_params_card": 1,
-            "tmod_2_3_params_card": 2,
-            "tmod_4_cs_card": 3,
-            "tmod_4_coefficients_card": 4,
-            "tmod_5_params_card": 5
+            "tmod_2_3_params_card": 1
         }
     },
     "ELEMENT_SOLID (ten nodes format)": {
