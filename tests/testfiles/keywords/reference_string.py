@@ -218,12 +218,13 @@ $#      t1        t2        t3        t4      nloc     marea      idof    edgset
 $#  thkscl
        2.5"""
 
+# !BREAKING CHANGE: with latest keyword, gaskeit --> gaskett
 test_section_solid_title_deck_string = """$
 *KEYWORD
 *SECTION_SOLID_TITLE
 $#                                                                         title
 section3                                                                        
-$#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
+$#   secid    elform       aet    unused    unused    unused    cohoff   gaskett
   69000314        13                                                            
 *END"""
 
@@ -332,30 +333,31 @@ $#    lcid        sf        at        n1        n2        n3        n4        n5
 $#      n6        n7        n8
                               """
 
+# !BREAKING CHANGE: with latest keyword, gaskeit --> gaskett, xnod is mandatory, unused is mandatory for nip.
 test_ss_string = """*SECTION_SOLID
-$#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
+$#   secid    elform       aet    unused    unused    unused    cohoff   gaskett
                    1         0                                                  """
 
 test_ss_elform_101_string = """*SECTION_SOLID
-$#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
+$#   secid    elform       aet    unused    unused    unused    cohoff   gaskett
                  101         0                                                  
-$#     nip     nxdof      ihgf      itaj       lmc      nhsv
-         0         0         0         0         0         0"""
+$#     nip     nxdof      ihgf      itaj       lmc      nhsv      xnod    unused
+         0         0         0         0         0         0         0          """
 
 test_ss_elform_101_nip_2_string = """*SECTION_SOLID
-$#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
+$#   secid    elform       aet    unused    unused    unused    cohoff   gaskett
                  101         0                                                  
-$#     nip     nxdof      ihgf      itaj       lmc      nhsv
-         2         0         0         0         0         0
+$#     nip     nxdof      ihgf      itaj       lmc      nhsv      xnod    unused
+         2         0         0         0         0         0         0          
 $#      xi       eta      zeta       wgt
        1.0       2.0       3.0          
        0.0                 3.0       5.0"""
 
 test_ss_elform_101_nip_2_lmc_9_string = """*SECTION_SOLID
-$#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
+$#   secid    elform       aet    unused    unused    unused    cohoff   gaskett
                  101         0                                                  
-$#     nip     nxdof      ihgf      itaj       lmc      nhsv
-         2         0         0         0         9         0
+$#     nip     nxdof      ihgf      itaj       lmc      nhsv      xnod    unused
+         2         0         0         0         9         0         0          
 $#      xi       eta      zeta       wgt
        1.0       2.0       3.0          
        0.0                 3.0       5.0
