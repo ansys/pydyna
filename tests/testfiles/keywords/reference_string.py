@@ -218,12 +218,13 @@ $#      t1        t2        t3        t4      nloc     marea      idof    edgset
 $#  thkscl
        2.5"""
 
+# !BREAKING CHANGE: with latest keyword, gaskeit --> gaskett
 test_section_solid_title_deck_string = """$
 *KEYWORD
 *SECTION_SOLID_TITLE
 $#                                                                         title
 section3                                                                        
-$#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
+$#   secid    elform       aet    unused    unused    unused    cohoff   gaskett
   69000314        13                                                            
 *END"""
 
