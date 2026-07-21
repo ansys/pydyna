@@ -78,7 +78,7 @@ class CeseBoundaryCyclicSet(KeywordBase):
         ]
     @property
     def ssid1(self) -> typing.Optional[int]:
-        """Get or set the Segment set  ID.
+        """Get or set the Segment set ID.
         """ # nopep8
         return self._cards[0].get_value("ssid1")
 
@@ -89,7 +89,7 @@ class CeseBoundaryCyclicSet(KeywordBase):
 
     @property
     def ssid2(self) -> typing.Optional[int]:
-        """Get or set the Segment set  ID.
+        """Get or set the Segment set ID.
         """ # nopep8
         return self._cards[0].get_value("ssid2")
 

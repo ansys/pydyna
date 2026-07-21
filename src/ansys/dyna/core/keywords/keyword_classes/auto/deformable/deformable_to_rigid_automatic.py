@@ -45,7 +45,7 @@ _DEFORMABLETORIGIDAUTOMATIC_CARD1 = (
     FieldSchema("dtmax", float, 30, 10, 0.0),
     FieldSchema("d2r", int, 40, 10, 0),
     FieldSchema("r2d", int, 50, 10, 0),
-    FieldSchema("offset", int, 60, 10, 0),
+    FieldSchema("offset", float, 60, 10, 0.0),
 )
 
 _DEFORMABLETORIGIDAUTOMATIC_CARD2 = (
@@ -106,8 +106,8 @@ class DeformableToRigidAutomatic(KeywordBase):
         EQ.0: switch takes place at time 1,
         EQ.1: switch takes place between time 1 and time 2 if rigid wall force is zero,
         EQ.2: switch takes place between time 1 and time 2 if contact surface force is zero,
-        EQ.3: switch takes place between time 1 and time 2 if rigid wall force is nonzer,
-        EQ.4: switch takes place between time 1 and time 2 if contact surface force is nonzer.
+        EQ.3: switch takes place between time 1 and time 2 if rigid wall force is nonzero,
+        EQ.4: switch takes place between time 1 and time 2 if contact surface force is nonzero.
         EQ 5, switch is turned on/off by *SENSOR_CONTROL_DEF2RIG.  Variables other than those identified above will be ignored when CODE=5.
         """ # nopep8
         return self._cards[0].get_value("code")
@@ -167,7 +167,7 @@ class DeformableToRigidAutomatic(KeywordBase):
     @property
     def relsw(self) -> int:
         """Get or set the Related switch set.  The related switch set is another automatic switch set paired to this one so the switches can be activated more than once.
-        EQ.0:	No related switch set
+        EQ.0: No related switch set
         """ # nopep8
         return self._cards[0].get_value("relsw")
 
@@ -179,9 +179,9 @@ class DeformableToRigidAutomatic(KeywordBase):
     @property
     def paired(self) -> int:
         """Get or set the Specify how the related switch sets are paired (if there are paired switches):
-        EQ.0:	SWSET is not paired to another switch set.
-        EQ.1 : SWSET is paired with switch set RELSWand is the first switch set to be activated.
-        EQ. - 1 : SWSET is paired with switch set RELSWand is the second switch to be activated.
+        EQ.0: SWSET is not paired to another switch set.
+        EQ.1: SWSET is paired with switch set RELSWand is the first switch set to be activated.
+        EQ. - 1: SWSET is paired with switch set RELSWand is the second switch to be activated.
         """ # nopep8
         return self._cards[0].get_value("paired")
 
@@ -256,7 +256,7 @@ class DeformableToRigidAutomatic(KeywordBase):
     @property
     def d2r(self) -> int:
         """Get or set the Number of deformable parts to be switched to rigid plus number of rigid parts for which new merged (lead/constrained) rigid body combinations will be defined.
-        EQ.0:	No parts defined
+        EQ.0: No parts defined
         """ # nopep8
         return self._cards[1].get_value("d2r")
 
@@ -278,13 +278,13 @@ class DeformableToRigidAutomatic(KeywordBase):
         self._cards[1].set_value("r2d", value)
 
     @property
-    def offset(self) -> int:
+    def offset(self) -> float:
         """Get or set the Optional contact thickness for switch to deformable. For contact, its value should be set to a value greater than the contact thickness offsets to ensure the switching occurs prior to impact. This option applies if and only if CODE is set to 3 or 4.  For CODE=3 all rigid wall options are implemented.  For CODE=4, the implementation works for the contact type CONTACT_AUTOMATIC_ when the options: ONE_WAY_ SURFACE_TO_SURFACE,  NODES_TO_SURFACE, and SUR-FACE_ TO_ SURFACE are specified.
         """ # nopep8
         return self._cards[1].get_value("offset")
 
     @offset.setter
-    def offset(self, value: int) -> None:
+    def offset(self, value: float) -> None:
         """Set the offset property."""
         self._cards[1].set_value("offset", value)
 

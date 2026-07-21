@@ -32,7 +32,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import De
 _MATTHERMALISOTROPICPHASECHANGE_CARD0 = (
     FieldSchema("tmid", int, 0, 10, None),
     FieldSchema("tro", float, 10, 10, None),
-    FieldSchema("tgrlc", float, 20, 10, None),
+    FieldSchema("tgrlc", int, 20, 10, None),
     FieldSchema("tgmult", float, 30, 10, None),
 )
 
@@ -129,7 +129,7 @@ class MatThermalIsotropicPhaseChange(KeywordBase):
         ]
     @property
     def tmid(self) -> typing.Optional[int]:
-        """Get or set the Thermal conductivity at T1al material identification, a unique number has to be used.
+        """Get or set the Thermal material identification, a unique number has to be used.
         """ # nopep8
         return self._cards[0].get_value("tmid")
 
@@ -151,16 +151,16 @@ class MatThermalIsotropicPhaseChange(KeywordBase):
         self._cards[0].set_value("tro", value)
 
     @property
-    def tgrlc(self) -> typing.Optional[float]:
-        """Get or set the Thermal generation rate (see *DEFINE_‌CURVE): See Remark 2.
-        GT.0:	load curve ID defining thermal generation rate as a function of time
-        EQ.0 : thermal generation rate is the constant multiplier, TGMULT.
-        LT.0 : | TGRLC | is a load curve ID defining thermal generation rate as a function of temperature.
+    def tgrlc(self) -> typing.Optional[int]:
+        """Get or set the Thermal generation rate (see *DEFINE_CURVE): See Remark 2.
+        GT.0: load curve ID defining thermal generation rate as a function of time
+        EQ.0: thermal generation rate is the constant multiplier, TGMULT.
+        LT.0: | TGRLC | is a load curve ID defining thermal generation rate as a function of temperature.
         """ # nopep8
         return self._cards[0].get_value("tgrlc")
 
     @tgrlc.setter
-    def tgrlc(self, value: float) -> None:
+    def tgrlc(self, value: int) -> None:
         """Set the tgrlc property."""
         self._cards[0].set_value("tgrlc", value)
 

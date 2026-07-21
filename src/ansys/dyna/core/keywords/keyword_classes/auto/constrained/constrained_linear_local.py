@@ -30,7 +30,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _CONSTRAINEDLINEARLOCAL_CARD0 = (
-    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("lcid", int, 0, 10, None),
 )
 
 _CONSTRAINEDLINEARLOCAL_CARD1 = (
@@ -64,15 +64,15 @@ class ConstrainedLinearLocal(KeywordBase):
             ),
         ]
     @property
-    def id(self) -> typing.Optional[int]:
-        """Get or set the ID for linear constraint definition
+    def lcid(self) -> typing.Optional[int]:
+        """Get or set the LCID for linear constraint definition.  This ID can be used to identify a set to which this constraint is a member
         """ # nopep8
-        return self._cards[0].get_value("id")
+        return self._cards[0].get_value("lcid")
 
-    @id.setter
-    def id(self, value: int) -> None:
-        """Set the id property."""
-        self._cards[0].set_value("id", value)
+    @lcid.setter
+    def lcid(self, value: int) -> None:
+        """Set the lcid property."""
+        self._cards[0].set_value("lcid", value)
 
     @property
     def nid(self) -> typing.Optional[int]:
@@ -88,12 +88,12 @@ class ConstrainedLinearLocal(KeywordBase):
     @property
     def dof(self) -> typing.Optional[int]:
         """Get or set the Degrees of freedom in the local coordinate system;
-        EQ.1: displacement along local x-direction
-        EQ.2: displacement along local y-direction
-        EQ.3: displacement along local z-direction
-        EQ.4: local rotation about local x-axis
-        EQ.5: local rotation about local y-axis
-        EQ.6: local rotation about local z-axis
+        EQ.1: Displacement along local x-direction
+        EQ.2: Displacement along local y-direction
+        EQ.3: Displacement along local z-direction
+        EQ.4: Local rotation about local x-axis
+        EQ.5: Local rotation about local y-axis
+        EQ.6: Local rotation about local z-axis
         """ # nopep8
         return self._cards[1].get_value("dof")
 

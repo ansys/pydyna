@@ -39,7 +39,20 @@ _EMMAT002_CARD0 = (
 
 _EMMAT002_CARD1 = (
     FieldSchema("unused", int, 0, 10, None),
-    FieldSchema("eosid2", int, 10, 10, None),
+    FieldSchema("eosidsf", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("muloss", float, 40, 10, None),
+    FieldSchema("eosloss", int, 50, 10, None),
+)
+
+_EMMAT002_CARD2 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("epsrr", float, 20, 10, None),
+    FieldSchema("eosid2", int, 30, 10, None),
+    FieldSchema("epsri", float, 40, 10, None),
+    FieldSchema("eosid3", int, 50, 10, None),
 )
 
 class EmMat002(KeywordBase):
@@ -63,10 +76,14 @@ class EmMat002(KeywordBase):
                 _EMMAT002_CARD1,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _EMMAT002_CARD2,
+                **kwargs,
+            ),
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification. A unique number or label must be specified (see *PART)
+        """Get or set the Material identification. MID must reference a *MAT material since the electromagnetic properties are added onto the *MAT properties. See Remark 1
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -117,7 +134,7 @@ class EmMat002(KeywordBase):
 
     @property
     def murel(self) -> typing.Optional[float]:
-        """Get or set the Relative permeability which is the ratio of the permeability of a specific medium to the permeability of free space :ur = u/u0.
+        """Get or set the Relative permeability, which is the ratio of the permeability of a specific medium to the permeability of free space (?_r=?/?_0). For frequency-based solvers, this is the real component of the relative permeability. See Remark 2.
         """ # nopep8
         return self._cards[0].get_value("murel")
 
@@ -128,7 +145,7 @@ class EmMat002(KeywordBase):
 
     @property
     def eosmu(self) -> typing.Optional[int]:
-        """Get or set the ID of the EOS to be used to define the nonlinear behavior of by an equation of state.
+        """Get or set the ID of the EOS to be used to define the nonlinear behavior of ?. It is optional and only available for EMSOL = 1 on *EM_CONTROL. Note that if EOSMU is defined, MUREL will be used for the initial value only. See *EM_EOS_PERMEABILITY.
         """ # nopep8
         return self._cards[0].get_value("eosmu")
 
@@ -149,15 +166,82 @@ class EmMat002(KeywordBase):
         self._cards[0].set_value("deatht", value)
 
     @property
-    def eosid2(self) -> typing.Optional[int]:
-        """Get or set the Optional ID of the EOS for specifying the behavior of u by an equation of state. See *EM_EOS_TABULATED1 and *EM_EOS_TABULATED2
+    def eosidsf(self) -> typing.Optional[int]:
+        """Get or set the For EMSOL = 1, this is an optional EOS for specifying a scale factor to the permeability EOS defined in EOSMU. This field only applies if EOSMU is defined, but it is optional. If used, the EOS must be either *EM_EOS_TABULATED1 or *EM_EOS_TABULATED2. See Remark 3.
+        For frequency - based solver(EMSOL = 4 and 7 on * EM_CONTROL), this directly defines how the real component of the relative permeability should behave.See Remark 4.
         """ # nopep8
-        return self._cards[1].get_value("eosid2")
+        return self._cards[1].get_value("eosidsf")
+
+    @eosidsf.setter
+    def eosidsf(self, value: int) -> None:
+        """Set the eosidsf property."""
+        self._cards[1].set_value("eosidsf", value)
+
+    @property
+    def muloss(self) -> typing.Optional[float]:
+        """Get or set the Optional magnetic losses are defined by the loss tangent. The loss tangent can either be a constant (MULOSS) or defined with an EOS (EOSLOSS). Magnetic losses are only present in frequency-based solvers (EMSOL = 4 or 7 on *EM_CONTROL). See Remark 4
+        """ # nopep8
+        return self._cards[1].get_value("muloss")
+
+    @muloss.setter
+    def muloss(self, value: float) -> None:
+        """Set the muloss property."""
+        self._cards[1].set_value("muloss", value)
+
+    @property
+    def eosloss(self) -> typing.Optional[int]:
+        """Get or set the Optional magnetic losses are defined by the loss tangent. The loss tangent can either be a constant (MULOSS) or defined with an EOS (EOSLOSS). Magnetic losses are only present in frequency-based solvers (EMSOL = 4 or 7 on *EM_CONTROL). See Remark 4
+        """ # nopep8
+        return self._cards[1].get_value("eosloss")
+
+    @eosloss.setter
+    def eosloss(self, value: int) -> None:
+        """Set the eosloss property."""
+        self._cards[1].set_value("eosloss", value)
+
+    @property
+    def epsrr(self) -> typing.Optional[float]:
+        """Get or set the Real and imaginary parts of the relative permeability (dielectric constant and dielectric loss terms). Only present in relevant frequency-based solvers (EMSOL = 7 on *EM_CONTROL). See Remark 5
+        """ # nopep8
+        return self._cards[2].get_value("epsrr")
+
+    @epsrr.setter
+    def epsrr(self, value: float) -> None:
+        """Set the epsrr property."""
+        self._cards[2].set_value("epsrr", value)
+
+    @property
+    def eosid2(self) -> typing.Optional[int]:
+        """Get or set the Optional IDs defining equation of states for EPSRR and EPSRI, respectively
+        """ # nopep8
+        return self._cards[2].get_value("eosid2")
 
     @eosid2.setter
     def eosid2(self, value: int) -> None:
         """Set the eosid2 property."""
-        self._cards[1].set_value("eosid2", value)
+        self._cards[2].set_value("eosid2", value)
+
+    @property
+    def epsri(self) -> typing.Optional[float]:
+        """Get or set the Real and imaginary parts of the relative permeability (dielectric constant and dielectric loss terms). Only present in relevant frequency-based solvers (EMSOL = 7 on *EM_CONTROL). See Remark 5
+        """ # nopep8
+        return self._cards[2].get_value("epsri")
+
+    @epsri.setter
+    def epsri(self, value: float) -> None:
+        """Set the epsri property."""
+        self._cards[2].set_value("epsri", value)
+
+    @property
+    def eosid3(self) -> typing.Optional[int]:
+        """Get or set the Optional IDs defining equation of states for EPSRR and EPSRI, respectively
+        """ # nopep8
+        return self._cards[2].get_value("eosid3")
+
+    @eosid3.setter
+    def eosid3(self, value: int) -> None:
+        """Set the eosid3 property."""
+        self._cards[2].set_value("eosid3", value)
 
     @property
     def mid_link(self) -> typing.Optional[KeywordBase]:

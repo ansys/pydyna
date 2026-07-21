@@ -85,8 +85,8 @@ class ChemistryModel(KeywordBase):
     @property
     def jacsel(self) -> int:
         """Get or set the Selects the form of the Jacobian matrix for use in the source term.
-        EQ.1:	Fully implicit(default)
-        EQ.2 : Simplified implicit
+        EQ.1: Fully implicit(default)
+        EQ.2: Simplified implicit
         """ # nopep8
         return self._cards[0].get_value("jacsel")
 

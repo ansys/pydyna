@@ -119,8 +119,8 @@ class ControlFormingScrapFall(KeywordBase):
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID governing the trim steel kinematics, as defined by *DEFINE_CURVE.
-        GT.0:	velocity-controlled kinematics
-        LT.0:	displacement-controlled kinematics
+        GT.0: velocity-controlled kinematics
+        LT.0: displacement-controlled kinematics
         An example input deck is provided below.
         """ # nopep8
         return self._cards[0].get_value("lcid")
@@ -166,9 +166,9 @@ class ControlFormingScrapFall(KeywordBase):
     @property
     def ifseed(self) -> typing.Optional[int]:
         """Get or set the A flag to indicate the location of the scrap piece.
-        EQ.0:	automatically determined.  The trim steel defined will be responsible to trim as well as to push (have contact with) the scrap piece.
-        EQ.1:	automatically determined, however, the trim steel in definition will only be used to trim out the scrap, not to push (have contact with) the scrap piece.
-        EQ.-1:	user specified by defining SEEDX, SEEDY, and SEEDZ.
+        EQ.0: automatically determined.  The trim steel defined will be responsible to trim as well as to push (have contact with) the scrap piece.
+        EQ.1: automatically determined, however, the trim steel in definition will only be used to trim out the scrap, not to push (have contact with) the scrap piece.
+        EQ.-1: user specified by defining SEEDX, SEEDY, and SEEDZ.
         """ # nopep8
         return self._cards[0].get_value("ifseed")
 
@@ -190,7 +190,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @property
     def seedx(self) -> typing.Optional[float]:
-        """Get or set the x, y, z coordinates of the seed node on the scrap side; define only when IFSEED is set to “-1”.  See Figure 0-3.
+        """Get or set the x, y, z coordinates of the seed node on the scrap side; define only when IFSEED is set to -1.  See Figure 0-3.
         """ # nopep8
         return self._cards[1].get_value("seedx")
 
@@ -201,7 +201,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @property
     def seedy(self) -> typing.Optional[float]:
-        """Get or set the x, y, z coordinates of the seed node on the scrap side; define only when IFSEED is set to “-1”.  See Figure 0-3.
+        """Get or set the x, y, z coordinates of the seed node on the scrap side; define only when IFSEED is set to -1.  See Figure 0-3.
         """ # nopep8
         return self._cards[1].get_value("seedy")
 
@@ -212,7 +212,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @property
     def seedz(self) -> typing.Optional[float]:
-        """Get or set the x, y, z coordinates of the seed node on the scrap side; define only when IFSEED is set to “-1”.  See Figure 0-3.
+        """Get or set the x, y, z coordinates of the seed node on the scrap side; define only when IFSEED is set to -1.  See Figure 0-3.
         """ # nopep8
         return self._cards[1].get_value("seedz")
 
@@ -256,7 +256,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @property
     def extend(self) -> typing.Optional[int]:
-        """Get or set the An amount to extend a trim steel’s edge based on the NDSET defined, so it can form a continuous trim line together with a neighboring trim steel, whose edge may also be extended, to trim out the scrap piece.  See Figure 0-3..
+        """Get or set the An amount to extend a trim steels edge based on the NDSET defined, so it can form a continuous trim line together with a neighboring trim steel, whose edge may also be extended, to trim out the scrap piece.  See Figure 0-3..
         """ # nopep8
         return self._cards[1].get_value("extend")
 
@@ -267,7 +267,7 @@ class ControlFormingScrapFall(KeywordBase):
 
     @property
     def newid(self) -> typing.Optional[int]:
-        """Get or set the New part ID of a scrap piece for the scrap area defined by the seed location.  If this is not defined (left blank) or input as “0”, the scrap piece will retain original PID as its part ID.  See Figure 0-3.  This is useful in case where one original scrap is trimmed into multiple smaller pieces, and contacts between these smaller pieces need to be defined..
+        """Get or set the New part ID of a scrap piece for the scrap area defined by the seed location.  If this is not defined (left blank) or input as 0, the scrap piece will retain original PID as its part ID.  See Figure 0-3.  This is useful in case where one original scrap is trimmed into multiple smaller pieces, and contacts between these smaller pieces need to be defined..
         """ # nopep8
         return self._cards[2].get_value("newid")
 

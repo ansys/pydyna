@@ -31,6 +31,7 @@ _ELEMENTSPH_CARD0 = (
     FieldSchema("nid", int, 0, 8, None),
     FieldSchema("pid", int, 8, 8, None),
     FieldSchema("mass", float, 16, 16, 0.0),
+    FieldSchema("nend", int, 32, 10, 0),
 )
 
 class ElementSph(KeywordBase):
@@ -85,6 +86,18 @@ class ElementSph(KeywordBase):
     def mass(self, value: float) -> None:
         """Set the mass property."""
         self._cards[0].set_value("mass", value)
+
+    @property
+    def nend(self) -> int:
+        """Get or set the Optional input:
+        GT.0: *ELEMENT_SPH cards are generated between NID to NEND using current PIDand MASS data
+        """ # nopep8
+        return self._cards[0].get_value("nend")
+
+    @nend.setter
+    def nend(self, value: int) -> None:
+        """Set the nend property."""
+        self._cards[0].set_value("nend", value)
 
     @property
     def pid_link(self) -> typing.Optional[KeywordBase]:

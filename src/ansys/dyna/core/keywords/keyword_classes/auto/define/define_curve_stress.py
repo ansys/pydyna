@@ -119,13 +119,13 @@ class DefineCurveStress(KeywordBase):
 
     @property
     def p1(self) -> float:
-        """Get or set the ITYPE.EQ.1:	P1=K,P2=n,P3=e_0.
-        ITYPE.EQ.2:	P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.3:	P1=A,P2=B,P3=C,
+        """Get or set the ITYPE.EQ.1: P1=K,P2=n,P3=e_0.
+        ITYPE.EQ.2: P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.3: P1=A,P2=B,P3=C,
         P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.4:	P1=A,P2=B,P3=C,P4=H.
+        ITYPE.EQ.4: P1=A,P2=B,P3=C,P4=H.
         P5: hardening curve contributing weighting factor.
-        ITYPE.EQ.11:	P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.11: P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
         """ # nopep8
         return self._cards[0].get_value("p1")
 
@@ -136,13 +136,13 @@ class DefineCurveStress(KeywordBase):
 
     @property
     def p2(self) -> float:
-        """Get or set the ITYPE.EQ.1:	P1=K,P2=n,P3=e_0.
-        ITYPE.EQ.2:	P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.3:	P1=A,P2=B,P3=C,
+        """Get or set the ITYPE.EQ.1: P1=K,P2=n,P3=e_0.
+        ITYPE.EQ.2: P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.3: P1=A,P2=B,P3=C,
         P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.4:	P1=A,P2=B,P3=C,P4=H.
+        ITYPE.EQ.4: P1=A,P2=B,P3=C,P4=H.
         P5: hardening curve contributing weighting factor.
-        ITYPE.EQ.11:	P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.11: P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
         """ # nopep8
         return self._cards[0].get_value("p2")
 
@@ -153,13 +153,13 @@ class DefineCurveStress(KeywordBase):
 
     @property
     def p3(self) -> float:
-        """Get or set the ITYPE.EQ.1:	P1=K,P2=n,P3=e_0.
-        ITYPE.EQ.2:	P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.3:	P1=A,P2=B,P3=C,
+        """Get or set the ITYPE.EQ.1: P1=K,P2=n,P3=e_0.
+        ITYPE.EQ.2: P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.3: P1=A,P2=B,P3=C,
         P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.4:	P1=A,P2=B,P3=C,P4=H.
+        ITYPE.EQ.4: P1=A,P2=B,P3=C,P4=H.
         P5: hardening curve contributing weighting factor.
-        ITYPE.EQ.11:	P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.11: P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
         """ # nopep8
         return self._cards[0].get_value("p3")
 
@@ -170,13 +170,13 @@ class DefineCurveStress(KeywordBase):
 
     @property
     def p4(self) -> float:
-        """Get or set the ITYPE.EQ.1:	P1=K,P2=n,P3=e_0.
-        ITYPE.EQ.2:	P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.3:	P1=A,P2=B,P3=C,
+        """Get or set the ITYPE.EQ.1: P1=K,P2=n,P3=e_0.
+        ITYPE.EQ.2: P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.3: P1=A,P2=B,P3=C,
         P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.4:	P1=A,P2=B,P3=C,P4=H.
+        ITYPE.EQ.4: P1=A,P2=B,P3=C,P4=H.
         P5: hardening curve contributing weighting factor.
-        ITYPE.EQ.11:	P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.11: P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
         """ # nopep8
         return self._cards[0].get_value("p4")
 
@@ -187,13 +187,13 @@ class DefineCurveStress(KeywordBase):
 
     @property
     def p5(self) -> float:
-        """Get or set the ITYPE.EQ.1:	P1=K,P2=n,P3=e_0.
-        ITYPE.EQ.2:	P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.3:	P1=A,P2=B,P3=C,
+        """Get or set the ITYPE.EQ.1: P1=K,P2=n,P3=e_0.
+        ITYPE.EQ.2: P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.3: P1=A,P2=B,P3=C,
         P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.4:	P1=A,P2=B,P3=C,P4=H.
+        ITYPE.EQ.4: P1=A,P2=B,P3=C,P4=H.
         P5: hardening curve contributing weighting factor.
-        ITYPE.EQ.11:	P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.11: P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
         """ # nopep8
         return self._cards[0].get_value("p5")
 
@@ -204,13 +204,13 @@ class DefineCurveStress(KeywordBase):
 
     @property
     def p6(self) -> float:
-        """Get or set the ITYPE.EQ.1:	P1=K,P2=n,P3=e_0.
-        ITYPE.EQ.2:	P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.3:	P1=A,P2=B,P3=C,
+        """Get or set the ITYPE.EQ.1: P1=K,P2=n,P3=e_0.
+        ITYPE.EQ.2: P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.3: P1=A,P2=B,P3=C,
         P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.4:	P1=A,P2=B,P3=C,P4=H.
+        ITYPE.EQ.4: P1=A,P2=B,P3=C,P4=H.
         P5: hardening curve contributing weighting factor.
-        ITYPE.EQ.11:	P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.11: P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
         """ # nopep8
         return self._cards[0].get_value("p6")
 
@@ -238,7 +238,7 @@ class DefineCurveStress(KeywordBase):
         ITYPE.EQ.3: Voce law in different forms, please take a look at the manual.
         ITYPE.EQ.4: Voce law, please take a look at the manual.
         ITYPE.EQ.5: Stoughton-Yoon hardening law.
-        ITYPE.EQ.11:	A weighted combination of ITYPE = 1 and any of the other ITYPEs.
+        ITYPE.EQ.11: A weighted combination of ITYPE = 1 and any of the other ITYPEs.
         Check the manual for detail.
         """ # nopep8
         return self._cards[1].get_value("itype")
@@ -252,13 +252,13 @@ class DefineCurveStress(KeywordBase):
 
     @property
     def p1(self) -> float:
-        """Get or set the ITYPE.EQ.1:	P1=K,P2=n,P3=e_0.
-        ITYPE.EQ.2:	P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.3:	P1=A,P2=B,P3=C,
+        """Get or set the ITYPE.EQ.1: P1=K,P2=n,P3=e_0.
+        ITYPE.EQ.2: P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.3: P1=A,P2=B,P3=C,
         P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.4:	P1=A,P2=B,P3=C,P4=H.
+        ITYPE.EQ.4: P1=A,P2=B,P3=C,P4=H.
         P5: hardening curve contributing weighting factor.
-        ITYPE.EQ.11:	P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.11: P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
         """ # nopep8
         return self._cards[1].get_value("p1")
 
@@ -269,13 +269,13 @@ class DefineCurveStress(KeywordBase):
 
     @property
     def p2(self) -> float:
-        """Get or set the ITYPE.EQ.1:	P1=K,P2=n,P3=e_0.
-        ITYPE.EQ.2:	P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.3:	P1=A,P2=B,P3=C,
+        """Get or set the ITYPE.EQ.1: P1=K,P2=n,P3=e_0.
+        ITYPE.EQ.2: P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.3: P1=A,P2=B,P3=C,
         P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.4:	P1=A,P2=B,P3=C,P4=H.
+        ITYPE.EQ.4: P1=A,P2=B,P3=C,P4=H.
         P5: hardening curve contributing weighting factor.
-        ITYPE.EQ.11:	P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.11: P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
         """ # nopep8
         return self._cards[1].get_value("p2")
 
@@ -286,13 +286,13 @@ class DefineCurveStress(KeywordBase):
 
     @property
     def p3(self) -> float:
-        """Get or set the ITYPE.EQ.1:	P1=K,P2=n,P3=e_0.
-        ITYPE.EQ.2:	P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.3:	P1=A,P2=B,P3=C,
+        """Get or set the ITYPE.EQ.1: P1=K,P2=n,P3=e_0.
+        ITYPE.EQ.2: P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.3: P1=A,P2=B,P3=C,
         P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.4:	P1=A,P2=B,P3=C,P4=H.
+        ITYPE.EQ.4: P1=A,P2=B,P3=C,P4=H.
         P5: hardening curve contributing weighting factor.
-        ITYPE.EQ.11:	P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.11: P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
         """ # nopep8
         return self._cards[1].get_value("p3")
 
@@ -303,13 +303,13 @@ class DefineCurveStress(KeywordBase):
 
     @property
     def p4(self) -> float:
-        """Get or set the ITYPE.EQ.1:	P1=K,P2=n,P3=e_0.
-        ITYPE.EQ.2:	P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.3:	P1=A,P2=B,P3=C,
+        """Get or set the ITYPE.EQ.1: P1=K,P2=n,P3=e_0.
+        ITYPE.EQ.2: P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.3: P1=A,P2=B,P3=C,
         P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.4:	P1=A,P2=B,P3=C,P4=H.
+        ITYPE.EQ.4: P1=A,P2=B,P3=C,P4=H.
         P5: hardening curve contributing weighting factor.
-        ITYPE.EQ.11:	P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.11: P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
         """ # nopep8
         return self._cards[1].get_value("p4")
 
@@ -320,13 +320,13 @@ class DefineCurveStress(KeywordBase):
 
     @property
     def p5(self) -> float:
-        """Get or set the ITYPE.EQ.1:	P1=K,P2=n,P3=e_0.
-        ITYPE.EQ.2:	P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.3:	P1=A,P2=B,P3=C,
+        """Get or set the ITYPE.EQ.1: P1=K,P2=n,P3=e_0.
+        ITYPE.EQ.2: P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.3: P1=A,P2=B,P3=C,
         P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.4:	P1=A,P2=B,P3=C,P4=H.
+        ITYPE.EQ.4: P1=A,P2=B,P3=C,P4=H.
         P5: hardening curve contributing weighting factor.
-        ITYPE.EQ.11:	P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.11: P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
         """ # nopep8
         return self._cards[1].get_value("p5")
 
@@ -337,13 +337,13 @@ class DefineCurveStress(KeywordBase):
 
     @property
     def p6(self) -> float:
-        """Get or set the ITYPE.EQ.1:	P1=K,P2=n,P3=e_0.
-        ITYPE.EQ.2:	P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.3:	P1=A,P2=B,P3=C,
+        """Get or set the ITYPE.EQ.1: P1=K,P2=n,P3=e_0.
+        ITYPE.EQ.2: P1=Sigma_0,P2=R_sat,P3=zeta, P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.3: P1=A,P2=B,P3=C,
         P4: hardening curve contributing weighting factor.
-        ITYPE.EQ.4:	P1=A,P2=B,P3=C,P4=H.
+        ITYPE.EQ.4: P1=A,P2=B,P3=C,P4=H.
         P5: hardening curve contributing weighting factor.
-        ITYPE.EQ.11:	P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
+        ITYPE.EQ.11: P1=K,P2=n,P3=e_0,P4: hardening curve contributing weighting factor.
         """ # nopep8
         return self._cards[1].get_value("p6")
 

@@ -125,8 +125,8 @@ class Mat326(KeywordBase):
     @property
     def roflg(self) -> int:
         """Get or set the Flag for whether density is specified per unit area or volume:
-        EQ.0:	Density is per unit volume(default).
-        EQ.1 : Density is per unit area for controlling the mass of cohesive elements with an initial volume of zero
+        EQ.0: Density is per unit volume(default).
+        EQ.1: Density is per unit area for controlling the mass of cohesive elements with an initial volume of zero
         """ # nopep8
         return self._cards[0].get_value("roflg")
 
@@ -140,8 +140,8 @@ class Mat326(KeywordBase):
     @property
     def intfail(self) -> typing.Optional[int]:
         """Get or set the Quadrature rule. Note that this material has no failure
-        LE.0.0:	2 x 2 Newton - Cotes quadrature.
-        GT.0.0 : 2 x 2 Gaussian quadrature
+        LE.0.0: 2 x 2 Newton - Cotes quadrature.
+        GT.0.0: 2 x 2 Gaussian quadrature
         """ # nopep8
         return self._cards[0].get_value("intfail")
 
@@ -219,8 +219,8 @@ class Mat326(KeywordBase):
     @property
     def ps(self) -> int:
         """Get or set the Membrane plane stress or plain strain assumption:
-        EQ.0:	Plane stress(default)
-        EQ.1 : Plane strain
+        EQ.0: Plane stress(default)
+        EQ.1: Plane strain
         """ # nopep8
         return self._cards[3].get_value("ps")
 

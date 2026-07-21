@@ -30,6 +30,7 @@ _CONTROLIMPLICITINERTIARELIEF_CARD0 = (
     FieldSchema("irflag", int, 0, 10, 0),
     FieldSchema("thresh", float, 10, 10, 0.001),
     FieldSchema("ircnt", int, 20, 10, 0),
+    FieldSchema("mxmodes", int, 30, 10, 100),
 )
 
 _CONTROLIMPLICITINERTIARELIEF_CARD1 = (
@@ -65,9 +66,9 @@ class ControlImplicitInertiaRelief(KeywordBase):
     @property
     def irflag(self) -> int:
         """Get or set the Inertia relief flag
-        EQ.0: do not perform inertia relief.
-        EQ 1: do perform inertia relief and use for both implicit and explicit
-        EQ.2:	do perform inertia relief but only use for implicit time steps
+        EQ.0: Do not perform inertia relief.
+        EQ 1: Do perform inertia relief and use for both implicit and explicit
+        EQ.2: Do perform inertia relief but only use for implicit time steps
         """ # nopep8
         return self._cards[0].get_value("irflag")
 
@@ -99,6 +100,17 @@ class ControlImplicitInertiaRelief(KeywordBase):
     def ircnt(self, value: int) -> None:
         """Set the ircnt property."""
         self._cards[0].set_value("ircnt", value)
+
+    @property
+    def mxmodes(self) -> int:
+        """Get or set the Maximum number of allowed modes that can be stored in memory.
+        """ # nopep8
+        return self._cards[0].get_value("mxmodes")
+
+    @mxmodes.setter
+    def mxmodes(self, value: int) -> None:
+        """Set the mxmodes property."""
+        self._cards[0].set_value("mxmodes", value)
 
     @property
     def mode1(self) -> typing.Optional[int]:

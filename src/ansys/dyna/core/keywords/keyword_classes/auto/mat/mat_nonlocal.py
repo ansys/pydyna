@@ -35,6 +35,7 @@ _MATNONLOCAL_CARD0 = (
     FieldSchema("l", float, 40, 10, None),
     FieldSchema("nfreq", int, 50, 10, None),
     FieldSchema("nhv", int, 60, 10, None),
+    FieldSchema("nhvt", int, 70, 10, None),
 )
 
 _MATNONLOCAL_CARD1 = (
@@ -144,7 +145,7 @@ class MatNonlocal(KeywordBase):
 
     @property
     def l(self) -> typing.Optional[float]:
-        """Get or set the Characteristic length.  This length should span a few elements. See equations in keyword user's manual.
+        """Get or set the Characteristic length. This length should span a few elements. See equations in keyword user's manual.
         """ # nopep8
         return self._cards[0].get_value("l")
 
@@ -174,6 +175,17 @@ class MatNonlocal(KeywordBase):
     def nhv(self, value: int) -> None:
         """Set the nhv property."""
         self._cards[0].set_value("nhv", value)
+
+    @property
+    def nhvt(self) -> typing.Optional[int]:
+        """Get or set the Number of variables with nonlocal treatment of total values. See Remark 1.
+        """ # nopep8
+        return self._cards[0].get_value("nhvt")
+
+    @nhvt.setter
+    def nhvt(self, value: int) -> None:
+        """Set the nhvt property."""
+        self._cards[0].set_value("nhvt", value)
 
     @property
     def nl1(self) -> typing.Optional[int]:

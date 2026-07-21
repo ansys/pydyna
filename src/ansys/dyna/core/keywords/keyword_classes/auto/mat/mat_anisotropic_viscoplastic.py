@@ -203,9 +203,15 @@ class MatAnisotropicViscoplastic(KeywordBase):
     def flag(self) -> int:
         """Get or set the Flag
         EQ.0 Give all material parameters (default),
-        EQ.1 Material parameters are fit in LS-DYNA to Load curve. The parameters Qr1, Cr1, Qr2, and Cr2 for isotropic hardening are determined by the fit and those for kinematic hardening are found by scaling those for isotropic hardening by (1-α) where α is defined.
-        EQ.2: Use load curve directly, i.e., no fitting is required for the parameters Q-r1, C-r1, Q-r2, and C-r2.EQ.4: Use table definition directly, no fitting is required and the values for Qr1, Cr1, Qr2, Cr2, Vk and Vm are ignored. Only
-        isotropic hardening is implemented, and this option is only available for solids
+        EQ.1 Material parameters Qr1, Cr1, Qr2, and Cr2 for pure isotropic hardening (alfa = 1)
+        are determined by a least squares fit to the curve or table specified by the variable LCSS.
+        If alfa is input as less than 1, Qr1 and Qr2 are then modified by multiplying them by the factor alfa,
+        while the factors Qx1 and Qx2 are taken as the product of the factor (1 - alfa) and the original parameters Qr1 and Qr2,
+        respectively, for pure isotropic hardening. Cx1 is set equal to Cr1 and Cx2 is set equal to Cr2. } is input as variable ALPHA on Card 1.
+        EQ.2: Use load curve directly, that is, no fitting is required for the parameters Qr1, Cr1, Qr2, and Cr2.
+        A table is not allowed and only isotropic hardening is implemented.
+        EQ.4: Use table definition directly. No fitting is required and the values for Qr1, Cr1, Qr2, Cr2, Vk,
+        and Vm are ignored. Only isotropic hardening is implemented, and this option is only available for solids.
         """ # nopep8
         return self._cards[0].get_value("flag")
 
@@ -218,7 +224,10 @@ class MatAnisotropicViscoplastic(KeywordBase):
 
     @property
     def lcss(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID or Table ID. The load curve ID defines effective stress versus effective plastic strain. Card 2 is ignored with this option. The table ID, see Figure 20.7, defines for each strain rate value a load curve ID giving the stress versus effectiveplastic strain for that rate. If the load curve only is used, then the coefficients Vk and Vm must be given if viscoplastice behavior is desired. If a Table ID is given these coefficients are determined internally during initialization.
+        """Get or set the Load curve ID or Table ID. The load curve ID defines effective stress versus effective plastic strain.
+        Card 2 is ignored with this option. The table ID, see Figure 20.7, defines for each strain rate value a load curve ID giving the stress versus effectiveplastic
+        strain for that rate. If the load curve only is used, then the coefficients Vk and Vm must be given if viscoplastice behavior is desired.
+        If a Table ID is given these coefficients are determined internally during initialization.
         """ # nopep8
         return self._cards[0].get_value("lcss")
 
@@ -417,12 +426,12 @@ class MatAnisotropicViscoplastic(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC, particularly the Material Directions section, for details):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
-        EQ.2.0:	Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
-        EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
-        LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_OPTION).
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with *DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
+        EQ.1.0: Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
+        EQ.4.0: Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number(CID on *DEFINE_COORDINATE_OPTION).
         """ # nopep8
         return self._cards[3].get_value("aopt")
 
@@ -459,14 +468,14 @@ class MatAnisotropicViscoplastic(KeywordBase):
     @property
     def macf(self) -> int:
         """Get or set the Material axes change flag for solid elements:
-        EQ.1 : No change, default
-        EQ.2 : Switch material axes a and b after BETA rotation
-        EQ.3 : Switch material axes a and c after BETA rotation
-        EQ.4 : Switch material axes b and c after BETA rotation
-        EQ. - 4 : Switch material axes b and c before BETA rotation
-        EQ. - 3 : Switch material axes a and c before BETA rotation
-        EQ. - 2 : Switch material axes a and b before BETA rotation
-        Figure Error!Reference source not found.indicates when LS - DYNA applies MACF during the process to obtain the final material axes.If BETA on * ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT = 3, the BETA input on Card 3 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed.
+        EQ.1: No change, default
+        EQ.2: Switch material axes a and b after BETA rotation
+        EQ.3: Switch material axes a and c after BETA rotation
+        EQ.4: Switch material axes b and c after BETA rotation
+        EQ. - 4: Switch material axes b and c before BETA rotation
+        EQ. - 3: Switch material axes a and c before BETA rotation
+        EQ. - 2: Switch material axes a and b before BETA rotation
+        If BETA on *ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT = 3, the BETA input on Card 3 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed.
         """ # nopep8
         return self._cards[3].get_value("macf")
 

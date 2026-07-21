@@ -51,8 +51,8 @@ class CeseControlLimiter(KeywordBase):
     @property
     def idlmt(self) -> int:
         """Get or set the Set the stability limiter option (See CESE theory manual):
-        EQ.0: limiter format 1 : Re-weighting
-        EQ.1: limiter format 2 : Relaxing.
+        EQ.0: limiter format 1: Re-weighting
+        EQ.1: limiter format 2: Relaxing.
         """ # nopep8
         return self._cards[0].get_value("idlmt")
 

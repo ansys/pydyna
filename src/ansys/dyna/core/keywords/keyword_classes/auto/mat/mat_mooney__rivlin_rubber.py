@@ -109,7 +109,7 @@ class MatMooney_RivlinRubber(KeywordBase):
 
     @property
     def pr(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio (> 0.49 is recommended, smaller values may not work).
+        """Get or set the Poisson's ratio. A value between 0.49 and 0.5 is recommended; smaller values may not work. Setting to 0.5 for solid elements with implicit analysis activates a U-P formulation. See Remark 3 for details
         """ # nopep8
         return self._cards[0].get_value("pr")
 
@@ -190,8 +190,9 @@ class MatMooney_RivlinRubber(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID, see *DEFINE_CURVE, giving the force versus actual change dL in the gauge length.
-        For stress versus strain curve definition set SGL, SW, ST to 1.0..
+        """Get or set the Curve ID, see *DEFINE_CURVE, giving the force versus actual change L in the gauge length. See Remark 2.
+        See also Figure 0-2 for an alternative definition. LS-DYNA computes a least squares fit from this data.
+        A and B are ignored if this field is defined.
         """ # nopep8
         return self._cards[1].get_value("lcid")
 

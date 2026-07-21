@@ -228,7 +228,7 @@ class DefineDeHbond(KeywordBase):
     def dmg(self) -> float:
         """Get or set the Continuous parameter for damage model.EQ.1.0: The bond breaks if the fracture energy in the bond
         reaches the critical value. Microdamage is not calculated.
-        ¦Å (0.5,1): Microdamage effects being once the fracture energy	reaches DMGxFMG[K,S]. Upon the onset of microdamage,
+        (0.5,1): Microdamage effects being once the fracture energy reaches DMGxFMG[K,S]. Upon the onset of microdamage,
         the computed damage ratio will increase (monotonically) as the fracture energy grows. Bond
         weakening from microdamage is modeled by reducing the bond stiffness in proportion to the damage ratio.
         """ # nopep8

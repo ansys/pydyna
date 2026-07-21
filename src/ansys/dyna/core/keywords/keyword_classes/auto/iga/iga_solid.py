@@ -33,6 +33,7 @@ _IGASOLID_CARD0 = (
     FieldSchema("nisr", float, 20, 10, 0.0),
     FieldSchema("niss", float, 30, 10, 0.0),
     FieldSchema("nist", float, 40, 10, 0.0),
+    FieldSchema("rid", int, 50, 10, None),
 )
 
 class IgaSolid(KeywordBase):
@@ -79,9 +80,9 @@ class IgaSolid(KeywordBase):
     def nisr(self) -> float:
         """Get or set the Interpolation elements in the local r-direction, see Remark 3.
         LT.0.: ABS(NISR) is the average edge length of the interpolation elements in the local r - direction.
-        EQ.0. : The number of interpolation elements per isogeometric element
+        EQ.0.: The number of interpolation elements per isogeometric element
         is equal to the polynomial degree in the local r - direction.
-        GT.0. : NINT(NISR) is the number of interpolation elements per isogeometric element in the local r - direction..
+        GT.0.: NINT(NISR) is the number of interpolation elements per isogeometric element in the local r - direction..
         """ # nopep8
         return self._cards[0].get_value("nisr")
 
@@ -94,9 +95,9 @@ class IgaSolid(KeywordBase):
     def niss(self) -> float:
         """Get or set the Interpolation elements in the local s-direction, see Remark 3.
         LT.0.: ABS(NISS) is the average edge length of the interpolation elements in the local s - direction.
-        EQ.0. : The number of interpolation elements per isogeometric element
+        EQ.0.: The number of interpolation elements per isogeometric element
         is equal to the polynomial degree in the local s - direction.
-        GT.0. : NINT(NISS) is the number of interpolation elements per
+        GT.0.: NINT(NISS) is the number of interpolation elements per
         isogeometric element in the local s - direction.
         """ # nopep8
         return self._cards[0].get_value("niss")
@@ -110,9 +111,9 @@ class IgaSolid(KeywordBase):
     def nist(self) -> float:
         """Get or set the Interpolation elements in the local t-direction, see Remark 3.
         LT.0.: ABS(NIST) is the average edge length of the interpolation elements in the local t - direction.
-        EQ.0. : The number of interpolation elements per isogeometric element
+        EQ.0.: The number of interpolation elements per isogeometric element
         is equal to the polynomial degree in the local t - direction.
-        GT.0. : NINT(NIST) is the number of interpolation elements per
+        GT.0.: NINT(NIST) is the number of interpolation elements per
         isogeometric element in the local t - direction.
         """ # nopep8
         return self._cards[0].get_value("nist")
@@ -121,6 +122,17 @@ class IgaSolid(KeywordBase):
     def nist(self, value: float) -> None:
         """Set the nist property."""
         self._cards[0].set_value("nist", value)
+
+    @property
+    def rid(self) -> typing.Optional[int]:
+        """Get or set the Solid refinement ID. See *IGA_REFINE_SOLID
+        """ # nopep8
+        return self._cards[0].get_value("rid")
+
+    @rid.setter
+    def rid(self, value: int) -> None:
+        """Set the rid property."""
+        self._cards[0].set_value("rid", value)
 
     @property
     def pid_link(self) -> typing.Optional[KeywordBase]:

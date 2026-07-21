@@ -100,7 +100,7 @@ class MatCrushableFoam(KeywordBase):
 
     @property
     def e(self) -> typing.Optional[float]:
-        """Get or set the Young’s modulus. For MODEL = 0, E may affect contact stiffness but otherwise is not used.  The final slope of curve LCID determines the elastic stiffness for loading and unloading.  This slope is also used in the time step calculation. For MODEL = 1, E is really used as Young’s modulus in the material law
+        """Get or set the Young's modulus. For MODEL <= 0, E may affect contact stiffness but otherwise is not used. The final slope of the curve LCID determines the elastic stiffness for loading and unloading. The time step calculation also uses this slope. For MODEL = 1 or 2, the material law uses E as the Young's modulus.
         """ # nopep8
         return self._cards[0].get_value("e")
 
@@ -122,10 +122,9 @@ class MatCrushableFoam(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the MODEL.EQ.0:	load curve ID defining yield stress as a function of volumetric strain,  (see Figure 0-1).
-        MODEL.EQ.1:	load curve or table ID.If a load curve ID is specified,
-        then the load curve defines uniaxial yield stress as a function of equivalent plastic strain.If a table ID is specified,
-        then each strain rate references a load curve ID that gives uniaxial yield stress as a function of equivalent plastic strain.
+        """Get or set the Load curve (or table) ID with a meaning that depends on MODEL:
+        MODEL.LE.0: Load curve ID defining yield stress as a function of volumetric strain, r (see Figure 0-1).
+        MODEL.GE.1:Load curve, table ID, or 3D table ID. If specifying a load curve ID, the load curve defines uniaxial yield stress under compression, σ_c, as a function of equivalent plastic strain. If specifying a table ID, each strain rate references a load curve ID that gives uniaxial yield stress as a function of equivalent plastic strain. If specifying a 3D table ID, uniaxial yield stress is given as a function of history variable #8 (3D table), strain rate (table), and equivalent plastic strain (curve).
         """ # nopep8
         return self._cards[0].get_value("lcid")
 
@@ -147,7 +146,7 @@ class MatCrushableFoam(KeywordBase):
 
     @property
     def damp(self) -> typing.Optional[float]:
-        """Get or set the Rate sensitivity via damping coefficient (.05 <  recommended value < .50). Only available for MODEL = 0.
+        """Get or set the Rate sensitivity via damping coefficient (.05 < recommended value < .50). Only available for MODEL = 0.
         """ # nopep8
         return self._cards[0].get_value("damp")
 
@@ -159,16 +158,18 @@ class MatCrushableFoam(KeywordBase):
     @property
     def model(self) -> int:
         """Get or set the Choice of material model formulation:
-        EQ.0:	von Mises yield condition(default),
-        EQ.1 : elliptical yield surface in - space.
+        EQ.0:Original approach (default),
+        EQ.1: Elliptical yield surface in p - q space with symmetric tension - compression behavior(isotropic hardening),
+        EQ.-1: Same as MODEL = 0, but with a potentially wrong stress response in unloading. A bug fix for MODEL = 0 in R17 may change results, so this can be seen as a fallback option for obtaining the old behavior.
+        EQ.2: Elliptical yield surface in p - q space with asymmetric tension - compression behavior(volumetric hardening).
         """ # nopep8
         return self._cards[0].get_value("model")
 
     @model.setter
     def model(self, value: int) -> None:
         """Set the model property."""
-        if value not in [0, 1, None]:
-            raise Exception("""model must be `None` or one of {0,1}.""")
+        if value not in [0, 1, -1, 2, None]:
+            raise Exception("""model must be `None` or one of {0,1,-1,2}.""")
         self._cards[0].set_value("model", value)
 
     @property

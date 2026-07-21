@@ -119,7 +119,7 @@ class DatabaseFrequencyBinaryD3Ssd(KeywordBase):
         EQ.0: linear,
         EQ.1: logarithmic,
         EQ.2: biased.
-        EQ.3:	Eigenfrequencies only
+        EQ.3: Eigenfrequencies only
         """ # nopep8
         return self._cards[1].get_value("fspace")
 

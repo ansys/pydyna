@@ -213,9 +213,7 @@ class Mat260B(KeywordBase):
 
     @property
     def p12(self) -> float:
-        """Get or set the Yield function parameters, defined by Lankford parameters in
-        rolling (0 degree), diagonal (45 degree) and transverse (90 degree) directions,
-        respectively; see Non-associated flow rule.
+        """Get or set the Yield function parameters, defined by Lankford parameters in rolling (0 degree), diagonal (45 degree) and transverse (90 degree) directions, respectively; see Non-associated flow rule.
         """ # nopep8
         return self._cards[0].get_value("p12")
 
@@ -226,9 +224,7 @@ class Mat260B(KeywordBase):
 
     @property
     def p22(self) -> float:
-        """Get or set the Yield function parameters, defined by Lankford parameters in
-        rolling (0 degree), diagonal (45 degree) and transverse (90 degree) directions,
-        respectively; see Non-associated flow rule.
+        """Get or set the Yield function parameters, defined by Lankford parameters in rolling (0 degree), diagonal (45 degree) and transverse (90 degree) directions, respectively; see Non-associated flow rule.
         """ # nopep8
         return self._cards[0].get_value("p22")
 
@@ -239,9 +235,7 @@ class Mat260B(KeywordBase):
 
     @property
     def p33(self) -> float:
-        """Get or set the Yield function parameters, defined by Lankford parameters in
-        rolling (0 degree), diagonal (45 degree) and transverse (90 degree) directions,
-        respectively; see Non-associated flow rule.
+        """Get or set the Yield function parameters, defined by Lankford parameters in rolling (0 degree), diagonal (45 degree) and transverse (90 degree) directions, respectively; see Non-associated flow rule.
         """ # nopep8
         return self._cards[0].get_value("p33")
 
@@ -252,9 +246,7 @@ class Mat260B(KeywordBase):
 
     @property
     def g12(self) -> float:
-        """Get or set the Plastic flow potential parameters, defined by Lankford parameters
-        in rolling (0 degree), diagonal (45 degree) and transverse (90 degree) directions,
-        respectively; see Non-associated flow rule.
+        """Get or set the Plastic flow potential parameters, defined by Lankford parameters in rolling (0 degree), diagonal (45 degree) and transverse (90 degree) directions, respectively; see Non-associated flow rule.
         """ # nopep8
         return self._cards[0].get_value("g12")
 
@@ -265,9 +257,7 @@ class Mat260B(KeywordBase):
 
     @property
     def g22(self) -> float:
-        """Get or set the Plastic flow potential parameters, defined by Lankford parameters
-        in rolling (0 degree), diagonal (45 degree) and transverse (90 degree) directions,
-        respectively; see Non-associated flow rule.
+        """Get or set the Plastic flow potential parameters, defined by Lankford parameters in rolling (0 degree), diagonal (45 degree) and transverse (90 degree) directions, respectively; see Non-associated flow rule.
         """ # nopep8
         return self._cards[1].get_value("g22")
 
@@ -278,9 +268,7 @@ class Mat260B(KeywordBase):
 
     @property
     def g33(self) -> float:
-        """Get or set the Plastic flow potential parameters, defined by Lankford parameters
-        in rolling (0 degree), diagonal (45 degree) and transverse (90 degree) directions,
-        respectively; see Non-associated flow rule.
+        """Get or set the Plastic flow potential parameters, defined by Lankford parameters in rolling (0 degree), diagonal (45 degree) and transverse (90 degree) directions, respectively; see Non-associated flow rule.
         """ # nopep8
         return self._cards[1].get_value("g33")
 
@@ -291,9 +279,7 @@ class Mat260B(KeywordBase):
 
     @property
     def lcids(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining stress vs. strain hardening behavior from a
-        uniaxial tension test; must be along the rolling direction. Also see A
-        modified Johnson-Cook.
+        """Get or set the Load curve ID defining stress vs. strain hardening behavior from a uniaxial tension test; must be along the rolling direction. Also see A modified Johnson-Cook.
         """ # nopep8
         return self._cards[1].get_value("lcids")
 
@@ -304,17 +290,7 @@ class Mat260B(KeywordBase):
 
     @property
     def lcidv(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining stress scale factors vs. strain rates (Figure
-        M260B-1 middle); determined from experiments. Strain rates are
-        stored in history variable #5. Strain rate scale factors are stored in
-        history variable #6. To turn on the variables for viewing in LSPrePost,
-        set NEIPS to at least "6" in *DATABASE_EXTENT_BINARY.
-        It is very useful to know what levels of strain rates, and strain
-        rate scale factors in a particular simulation. Once d3plot files are
-        opened in LS-PrePost, individual element time history can be plotted
-        via menu option Post → History, or a color contour of the entire part
-        can be viewed with the menu option Post → FriComp → Misc. Also
-        see A modified Johnson-Cook.
+        """Get or set the Load curve ID defining stress scale factors vs. strain rates (Figure M260B-1 middle); determined from experiments. Strain rates are stored in history variable #5. Strain rate scale factors are stored in history variable #6. To turn on the variables for viewing in LSPrePost, set NEIPS to at least "6" in *DATABASE_EXTENT_BINARY. It is very useful to know what levels of strain rates, and strain rate scale factors in a particular simulation. Once d3plot files are opened in LS-PrePost, individual element time history can be plotted via menu option Post -> History, or a color contour of the entire part can be viewed with the menu option Post -> FriComp -> Misc. Also see A modified Johnson-Cook.
         """ # nopep8
         return self._cards[1].get_value("lcidv")
 
@@ -325,17 +301,8 @@ class Mat260B(KeywordBase):
 
     @property
     def lcidt(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining stress scale factors vs. temperature in
-        Kelvin (Figure M260B-1 bottom), determined from experiments.
-        Temperatures are stored in history variable #4. Temperature scale
-        factors are stored in history variable #7. To turn on this variable for
-        viewing in LS-PrePost, set NEIPS to at least "7" in
-        *DATABASE_EXTENT_BINARY. It is very useful to know what
-        levels of temperatures and temperature scale factors in a particular
-        simulation. Once d3plot files are opened in LS-PrePost, individual
-        element time history can be plotted via menu option Post → History,
-        or a color contour of the entire part can be viewed with the menu
-        option Post → FriComp → Misc. Also see A modified Johnson-Cook..
+        """Get or set the Load curve ID defining stress scale factors vs. temperature in Kelvin (Figure M260B-1 bottom), determined from experiments.  Temperatures are stored in history variable #4. Temperature scale factors are stored in history variable #7. To turn on this variable for viewing in LS-PrePost, set NEIPS to at least "7" in *DATABASE_EXTENT_BINARY. It is very useful to know what levels of temperatures and temperature scale factors in a particular simulation. Once d3plot files are opened in LS-PrePost, individual element time history can be plotted via menu option Post -> History, or a color contour of the entire part can be viewed with the menu
+        option Post -> FriComp -> Misc. Also see A modified Johnson-Cook..
         """ # nopep8
         return self._cards[1].get_value("lcidt")
 
@@ -357,10 +324,7 @@ class Mat260B(KeywordBase):
 
     @property
     def lfrac(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining a fracture limit curve. Leave this field
-        empty if parameters A, B0, GAMMA, C, N are defined. However, if
-        this field is defined, parameters A, B0, GAMMA, C, N will be
-        ignored even if they are defined.
+        """Get or set the Load curve ID defining a fracture limit curve. Leave this field empty if parameters A, B0, GAMMA, C, N are defined. However, if this field is defined, parameters A, B0, GAMMA, C, N will be ignored even if they are defined.
         """ # nopep8
         return self._cards[1].get_value("lfrac")
 
@@ -382,9 +346,7 @@ class Mat260B(KeywordBase):
 
     @property
     def a(self) -> typing.Optional[float]:
-        """Get or set the Material parameters for the rate-dependent Hosford-Coulomb
-        fracture initiation model, see Rate-dependent Hosford-Coulomb.
-        Ignored if LFRAC is defined.
+        """Get or set the Material parameters for the rate-dependent Hosford-Coulomb fracture initiation model, see Rate-dependent Hosford-Coulomb. Ignored if LFRAC is defined.
         """ # nopep8
         return self._cards[2].get_value("a")
 
@@ -395,9 +357,7 @@ class Mat260B(KeywordBase):
 
     @property
     def b0(self) -> typing.Optional[float]:
-        """Get or set the Material parameters for the rate-dependent Hosford-Coulomb
-        fracture initiation model, see Rate-dependent Hosford-Coulomb.
-        Ignored if LFRAC is defined.
+        """Get or set the Material parameters for the rate-dependent Hosford-Coulomb fracture initiation model, see Rate-dependent Hosford-Coulomb. Ignored if LFRAC is defined.
         """ # nopep8
         return self._cards[2].get_value("b0")
 
@@ -408,9 +368,7 @@ class Mat260B(KeywordBase):
 
     @property
     def gamma(self) -> typing.Optional[float]:
-        """Get or set the Material parameters for the rate-dependent Hosford-Coulomb
-        fracture initiation model, see Rate-dependent Hosford-Coulomb.
-        Ignored if LFRAC is defined.
+        """Get or set the Material parameters for the rate-dependent Hosford-Coulomb fracture initiation model, see Rate-dependent Hosford-Coulomb. Ignored if LFRAC is defined.
         """ # nopep8
         return self._cards[2].get_value("gamma")
 
@@ -421,9 +379,7 @@ class Mat260B(KeywordBase):
 
     @property
     def c(self) -> typing.Optional[float]:
-        """Get or set the Material parameters for the rate-dependent Hosford-Coulomb
-        fracture initiation model, see Rate-dependent Hosford-Coulomb.
-        Ignored if LFRAC is defined.
+        """Get or set the Material parameters for the rate-dependent Hosford-Coulomb fracture initiation model, see Rate-dependent Hosford-Coulomb. Ignored if LFRAC is defined.
         """ # nopep8
         return self._cards[2].get_value("c")
 
@@ -434,9 +390,7 @@ class Mat260B(KeywordBase):
 
     @property
     def n(self) -> typing.Optional[float]:
-        """Get or set the Material parameters for the rate-dependent Hosford-Coulomb
-        fracture initiation model, see Rate-dependent Hosford-Coulomb.
-        Ignored if LFRAC is defined.
+        """Get or set the Material parameters for the rate-dependent Hosford-Coulomb fracture initiation model, see Rate-dependent Hosford-Coulomb. Ignored if LFRAC is defined.
         """ # nopep8
         return self._cards[2].get_value("n")
 
@@ -447,10 +401,7 @@ class Mat260B(KeywordBase):
 
     @property
     def scale(self) -> float:
-        """Get or set the This variable can be used to speed up the simulation while
-        equalizing the strain rate effect, useful especially in cases where the
-        pulling speed or punch speed is slow. For example, if the pulling
-        speed is at 15 mm/s but running the simulation at this speed will
+        """Get or set the This variable can be used to speed up the simulation while equalizing the strain rate effect, useful especially in cases where the pulling speed or punch speed is slow. For example, if the pulling speed is at 15 mm/s but running the simulation at this speed will
         take a long time, the pulling speed can be increased to 500 mm/s
         while "SCALE" can be set to 0.03, giving the same results as those
         from 15 mm/s, but with the benefit of greatly reduced computational
@@ -469,7 +420,7 @@ class Mat260B(KeywordBase):
 
     @property
     def size0(self) -> typing.Optional[float]:
-        """Get or set the Fracture gage length used in an experimental measurement,	typically between 0.2~0.5mm.
+        """Get or set the Fracture gage length used in an experimental measurement, typically between 0.2~0.5mm.
         """ # nopep8
         return self._cards[2].get_value("size0")
 
@@ -481,8 +432,7 @@ class Mat260B(KeywordBase):
     @property
     def tref(self) -> typing.Optional[float]:
         """Get or set the Material parameters for strain softening effect due to temperature.
-        TINI is the initial temperature. See A modified Johnson-Cook for
-        other parameters' definitions..
+        TINI is the initial temperature. See A modified Johnson-Cook for other parameters' definitions..
         """ # nopep8
         return self._cards[3].get_value("tref")
 
@@ -494,8 +444,7 @@ class Mat260B(KeywordBase):
     @property
     def tmelt(self) -> typing.Optional[float]:
         """Get or set the Material parameters for strain softening effect due to temperature.
-        TINI is the initial temperature. See A modified Johnson-Cook for
-        other parameters' definitions.
+        TINI is the initial temperature. See A modified Johnson-Cook for other parameters' definitions.
         """ # nopep8
         return self._cards[3].get_value("tmelt")
 
@@ -507,8 +456,7 @@ class Mat260B(KeywordBase):
     @property
     def m(self) -> typing.Optional[float]:
         """Get or set the Material parameters for strain softening effect due to temperature.
-        TINI is the initial temperature. See A modified Johnson-Cook for
-        other parameters' definitions.
+        TINI is the initial temperature. See A modified Johnson-Cook for other parameters' definitions.
         """ # nopep8
         return self._cards[3].get_value("m")
 
@@ -520,8 +468,7 @@ class Mat260B(KeywordBase):
     @property
     def eta(self) -> typing.Optional[float]:
         """Get or set the Material parameters for strain softening effect due to temperature.
-        TINI is the initial temperature. See A modified Johnson-Cook for
-        other parameters' definitions.
+        TINI is the initial temperature. See A modified Johnson-Cook for other parameters' definitions.
         """ # nopep8
         return self._cards[3].get_value("eta")
 
@@ -533,8 +480,7 @@ class Mat260B(KeywordBase):
     @property
     def cp(self) -> typing.Optional[float]:
         """Get or set the Material parameters for strain softening effect due to temperature.
-        TINI is the initial temperature. See A modified Johnson-Cook for
-        other parameters' definitions.
+        TINI is the initial temperature. See A modified Johnson-Cook for other parameters' definitions.
         """ # nopep8
         return self._cards[3].get_value("cp")
 
@@ -546,8 +492,7 @@ class Mat260B(KeywordBase):
     @property
     def tini(self) -> typing.Optional[float]:
         """Get or set the Material parameters for strain softening effect due to temperature.
-        TINI is the initial temperature. See A modified Johnson-Cook for
-        other parameters' definitions.
+        TINI is the initial temperature. See A modified Johnson-Cook for other parameters' definitions.
         """ # nopep8
         return self._cards[3].get_value("tini")
 
@@ -559,8 +504,7 @@ class Mat260B(KeywordBase):
     @property
     def depso(self) -> typing.Optional[float]:
         """Get or set the Material parameters for strain softening effect due to temperature.
-        TINI is the initial temperature. See A modified Johnson-Cook for
-        other parameters' definitions.
+        TINI is the initial temperature. See A modified Johnson-Cook for other parameters' definitions.
         """ # nopep8
         return self._cards[3].get_value("depso")
 
@@ -572,8 +516,7 @@ class Mat260B(KeywordBase):
     @property
     def depsad(self) -> typing.Optional[float]:
         """Get or set the Material parameters for strain softening effect due to temperature.
-        TINI is the initial temperature. See A modified Johnson-Cook for
-        other parameters' definitions.
+        TINI is the initial temperature. See A modified Johnson-Cook for other parameters' definitions.
         """ # nopep8
         return self._cards[3].get_value("depsad")
 
@@ -584,10 +527,7 @@ class Mat260B(KeywordBase):
 
     @property
     def ef0(self) -> typing.Optional[float]:
-        """Get or set the Material parameters for the option XUE. The parameter k in the
-        original paper is assumed to be 1.0. For details, refer to Xue, L.,
-        Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode
-        transition in ductile plates" in the International Journal of Solids and Structures
+        """Get or set the Material parameters for the option XUE. The parameter k in the original paper is assumed to be 1.0. For details, refer to Xue, L., Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode transition in ductile plates" in the International Journal of Solids and Structures
         """ # nopep8
         return self._cards[4].get_value("ef0")
 
@@ -598,10 +538,7 @@ class Mat260B(KeywordBase):
 
     @property
     def plim(self) -> typing.Optional[float]:
-        """Get or set the Material parameters for the option XUE. The parameter k in the
-        original paper is assumed to be 1.0. For details, refer to Xue, L.,
-        Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode
-        transition in ductile plates" in the International Journal of Solids and Structures
+        """Get or set the Material parameters for the option XUE. The parameter k in the original paper is assumed to be 1.0. For details, refer to Xue, L., Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode transition in ductile plates" in the International Journal of Solids and Structures
         """ # nopep8
         return self._cards[4].get_value("plim")
 
@@ -612,10 +549,7 @@ class Mat260B(KeywordBase):
 
     @property
     def q(self) -> typing.Optional[float]:
-        """Get or set the Material parameters for the option XUE. The parameter k in the
-        original paper is assumed to be 1.0. For details, refer to Xue, L.,
-        Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode
-        transition in ductile plates" in the International Journal of Solids and Structures
+        """Get or set the Material parameters for the option XUE. The parameter k in the original paper is assumed to be 1.0. For details, refer to Xue, L., Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode transition in ductile plates" in the International Journal of Solids and Structures
         """ # nopep8
         return self._cards[4].get_value("q")
 
@@ -626,10 +560,7 @@ class Mat260B(KeywordBase):
 
     @property
     def gama(self) -> typing.Optional[float]:
-        """Get or set the Material parameters for the option XUE. The parameter k in the
-        original paper is assumed to be 1.0. For details, refer to Xue, L.,
-        Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode
-        transition in ductile plates" in the International Journal of Solids and Structures.
+        """Get or set the Material parameters for the option XUE. The parameter k in the original paper is assumed to be 1.0. For details, refer to Xue, L., Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode transition in ductile plates" in the International Journal of Solids and Structures.
         """ # nopep8
         return self._cards[4].get_value("gama")
 
@@ -640,10 +571,7 @@ class Mat260B(KeywordBase):
 
     @property
     def m(self) -> typing.Optional[float]:
-        """Get or set the Material parameters for the option XUE. The parameter k in the
-        original paper is assumed to be 1.0. For details, refer to Xue, L.,
-        Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode
-        transition in ductile plates" in the International Journal of Solids and Structures.
+        """Get or set the Material parameters for the option XUE. The parameter k in the original paper is assumed to be 1.0. For details, refer to Xue, L., Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode transition in ductile plates" in the International Journal of Solids and Structures.
         """ # nopep8
         return self._cards[4].get_value("m")
 
@@ -655,10 +583,10 @@ class Mat260B(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option (see MAT_OPTION TROPIC_ELASTIC for a more complete description):
-        EQ.0.0:	locally orthotropic with material axes determined by element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by theangle BETA.
-        EQ.2.0:	globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR:
-        EQ.3.0:	locally orthotropic material axes determined by rotating the material axes about the element normal by an angle, BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal:
-        LT.0.0:	the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM or *DEFINE__COORDINATE_VECTOR)..
+        EQ.0.0: locally orthotropic with material axes determined by element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by theangle BETA.
+        EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR:
+        EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle, BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal:
+        LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM or *DEFINE__COORDINATE_VECTOR)..
         """ # nopep8
         return self._cards[5].get_value("aopt")
 

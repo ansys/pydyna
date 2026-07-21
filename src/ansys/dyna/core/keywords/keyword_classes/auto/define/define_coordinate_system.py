@@ -42,6 +42,7 @@ _DEFINECOORDINATESYSTEM_CARD1 = (
     FieldSchema("xp", float, 0, 10, 0.0),
     FieldSchema("yp", float, 10, 10, 0.0),
     FieldSchema("zp", float, 20, 10, 0.0),
+    FieldSchema("type", int, 30, 10, 0),
 )
 
 _DEFINECOORDINATESYSTEM_OPTION0_CARD0 = (
@@ -94,7 +95,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @property
     def xo(self) -> float:
-        """Get or set the x-coordinate of origin.
+        """Get or set the x-coordinate of the origin.
         """ # nopep8
         return self._cards[0].get_value("xo")
 
@@ -105,7 +106,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @property
     def yo(self) -> float:
-        """Get or set the y-coordinate of origin.
+        """Get or set the y-coordinate of the origin.
         """ # nopep8
         return self._cards[0].get_value("yo")
 
@@ -116,7 +117,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @property
     def zo(self) -> float:
-        """Get or set the z-coordinate of origin.
+        """Get or set the z-coordinate of the origin.
         """ # nopep8
         return self._cards[0].get_value("zo")
 
@@ -127,7 +128,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @property
     def xl(self) -> float:
-        """Get or set the x-coordinate of point on local x-axis.
+        """Get or set the x-coordinate of a point on the local x-axis.
         """ # nopep8
         return self._cards[0].get_value("xl")
 
@@ -138,7 +139,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @property
     def yl(self) -> float:
-        """Get or set the y-coordinate of point on local x-axis.
+        """Get or set the y-coordinate of a point on the local x-axis.
         """ # nopep8
         return self._cards[0].get_value("yl")
 
@@ -149,7 +150,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @property
     def zl(self) -> float:
-        """Get or set the z-coordinate of point on local x-axis.
+        """Get or set the z-coordinate of a point on the local x-axis.
         """ # nopep8
         return self._cards[0].get_value("zl")
 
@@ -173,7 +174,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @property
     def xp(self) -> float:
-        """Get or set the x-coordinate of point in local x-y plane.
+        """Get or set the x-coordinate of a point in the local x-y plane.
         """ # nopep8
         return self._cards[1].get_value("xp")
 
@@ -184,7 +185,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @property
     def yp(self) -> float:
-        """Get or set the y-coordinate of point in local x-y plane.
+        """Get or set the y-coordinate of a point in the local x-y plane.
         """ # nopep8
         return self._cards[1].get_value("yp")
 
@@ -195,7 +196,7 @@ class DefineCoordinateSystem(KeywordBase):
 
     @property
     def zp(self) -> float:
-        """Get or set the z-coordinate of point in local x-y plane.
+        """Get or set the z-coordinate of a point in the local x-y plane.
         """ # nopep8
         return self._cards[1].get_value("zp")
 
@@ -203,6 +204,23 @@ class DefineCoordinateSystem(KeywordBase):
     def zp(self, value: float) -> None:
         """Set the zp property."""
         self._cards[1].set_value("zp", value)
+
+    @property
+    def type(self) -> int:
+        """Get or set the Coordinate system type
+        EQ.0:	Cartesian
+        EQ.1 : Cylindrical
+        EQ.2 : Spherical
+        This field is only supported by *BOUNDARY_PRESCRIBED_MOTION and *LOAD_NODE to flag that the motion or load is in that coordinate system. The spherical and cylindrical coordinate systems are based on the local Cartesian system found with the points input on this keyword. See Figure Error! Reference source not found..
+        """ # nopep8
+        return self._cards[1].get_value("type")
+
+    @type.setter
+    def type(self, value: int) -> None:
+        """Set the type property."""
+        if value not in [0, 1, 2, None]:
+            raise Exception("""type must be `None` or one of {0,1,2}.""")
+        self._cards[1].set_value("type", value)
 
     @property
     def title(self) -> typing.Optional[str]:

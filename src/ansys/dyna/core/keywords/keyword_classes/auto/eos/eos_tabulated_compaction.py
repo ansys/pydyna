@@ -33,7 +33,7 @@ _EOSTABULATEDCOMPACTION_CARD0 = (
     FieldSchema("eosid", int, 0, 10, None),
     FieldSchema("gama", float, 10, 10, None),
     FieldSchema("e0", float, 20, 10, None),
-    FieldSchema("vo", float, 30, 10, None),
+    FieldSchema("v0", float, 30, 10, None),
     FieldSchema("lcc", int, 40, 10, None),
     FieldSchema("lct", int, 50, 10, None),
     FieldSchema("lck", int, 60, 10, None),
@@ -208,19 +208,19 @@ class EosTabulatedCompaction(KeywordBase):
         self._cards[0].set_value("e0", value)
 
     @property
-    def vo(self) -> typing.Optional[float]:
+    def v0(self) -> typing.Optional[float]:
         """Get or set the Initial relative volume.
         """ # nopep8
-        return self._cards[0].get_value("vo")
+        return self._cards[0].get_value("v0")
 
-    @vo.setter
-    def vo(self, value: float) -> None:
-        """Set the vo property."""
-        self._cards[0].set_value("vo", value)
+    @v0.setter
+    def v0(self, value: float) -> None:
+        """Set the v0 property."""
+        self._cards[0].set_value("v0", value)
 
     @property
     def lcc(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining tabulated function .  See equation in Remarks.
+        """Get or set the Load curve defining tabulated function C.  See equation in Remarks.
         The abscissa values of LCC, LCT and LCK must be negative of the volumetric strain in monotonically increasing order, in contrast to the convention in EOS_9.
         The definition can extend into the tensile regime.
         """ # nopep8
@@ -233,7 +233,7 @@ class EosTabulatedCompaction(KeywordBase):
 
     @property
     def lct(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining tabulated function .  See equation in Remarks
+        """Get or set the Load curve defining tabulated function T.  See equation in Remarks
         """ # nopep8
         return self._cards[0].get_value("lct")
 

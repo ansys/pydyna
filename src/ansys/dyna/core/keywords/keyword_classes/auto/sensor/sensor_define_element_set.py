@@ -31,8 +31,8 @@ _SENSORDEFINEELEMENTSET_CARD0 = (
     FieldSchema("sensid", int, 0, 10, None),
     FieldSchema("etype", str, 10, 10, "BEAM"),
     FieldSchema("elemid", int, 20, 10, None),
-    FieldSchema("comp", str, 30, 10, "XX"),
-    FieldSchema("ctype", str, 40, 10, "STRAIN"),
+    FieldSchema("comp", str, 30, 10, None),
+    FieldSchema("ctype", str, 40, 10, "AREA"),
     FieldSchema("layer", str, 50, 10, "BOT"),
     FieldSchema("sf", float, 60, 10, None),
     FieldSchema("pwr", float, 70, 10, None),
@@ -93,24 +93,25 @@ class SensorDefineElementSet(KeywordBase):
     @property
     def etype(self) -> str:
         """Get or set the Element type:
-        EQ.BEAM	: 	beam element set.
-        EQ.SHELL:	shell element set
-        EQ.SOLID:	solid element set
-        EQ.DISC-ELE:	discrete element set.
+        EQ.BEAM: beam element set.
+        EQ.SHELL: shell element set
+        EQ.SOLID: solid element set
+        EQ.DISC-ELE: discrete element set.
+        EQ.TSHELL: Thick shell element
         """ # nopep8
         return self._cards[0].get_value("etype")
 
     @etype.setter
     def etype(self, value: str) -> None:
         """Set the etype property."""
-        if value not in ["BEAM", "SHELL", "SOLID", "DISC-ELE", None]:
-            raise Exception("""etype must be `None` or one of {"BEAM","SHELL","SOLID","DISC-ELE"}.""")
+        if value not in ["BEAM", "SHELL", "SOLID", "DISC-ELE", "TSHELL", None]:
+            raise Exception("""etype must be `None` or one of {"BEAM","SHELL","SOLID","DISC-ELE","TSHELL"}.""")
         self._cards[0].set_value("etype", value)
 
     @property
     def elemid(self) -> typing.Optional[int]:
         """Get or set the Element ID or element set ID when the SET keyword option is active.
-        In the case of the SET keyword option with SETOPT not defined, determining the status of a related* SENSOR_SWITCH depends on the sign of ELEMID
+        In the case of the SET keyword option with SETOPT not defined, determining the status of a related *SENSOR_SWITCH depends on the sign of ELEMID
         """ # nopep8
         return self._cards[0].get_value("elemid")
 
@@ -120,53 +121,56 @@ class SensorDefineElementSet(KeywordBase):
         self._cards[0].set_value("elemid", value)
 
     @property
-    def comp(self) -> str:
-        """Get or set the Element type:
-        EQ.XX: 		x-normal component for shells and solids
-        EQ.YY:		y-normal component for shells and solids
-        EQ.ZZ:		z-normal component for shells and solids
-        EQ.XY:		xy-shear component for shells and solids
-        EQ.YZ:		yz-shear component for shells and solids
-        EQ.ZX:		zx-shear component for shells and solids
-        EQ:AXIAL:	axial
-        EQ:SHEARS:	local s-direction
-        EQ:SHEART:	local t-direction
-        EQ:               : 	leave blank for discrete elements
+    def comp(self) -> typing.Optional[str]:
+        """Get or set the Component type.  The definition of the component, and its related coordinate system, is consistent with that of elout.  Leave blank for discrete elements.  Available options for elements other than discrete elements include:
+        EQ.F[ID]:	Value of a function, *DEFINE_FUNCTION,*DEFINE_FUNCTION, with all 6 stress/strain components as input. It is available for shells, thick shells, and solids.  The ID of the function must follow right after F. For instance, F1000 means the function with ID of 1000 defines the sensed value.
+        EQ.HYDR: Hydrostatic stress or strain, the average of the three normal components, for shells, thick shells, and solids.
+        EQ.MAXS:	Maximum shear stress or strain for shells, thick shells, and solids
+        EQ.PRIN1:	1st principal stress or strain for shells, thick shells, and solids
+        EQ.PRIN2:	2nd principal stress or strain for shells, thick shells, and solids
+        EQ.PRIN3:	3rd principal stress or strain for shells, thick shells, and solids
+        EQ.SHEARS:	Local s-direction
+        EQ.SHEART:	Local t-direction
+        EQ.VM:	von Mises stress for shells, thick shells, and solids
+        EQ.XX:	x-normal component for shells, thick shells, and solids
+        EQ.XY:	xy-shear component for shells, thick shells, and solids
+        EQ.YY:	y-normal component for shells, thick shells, and solids
+        EQ.YZ:	yz-shear component for shells, thick shells, and solids
+        EQ.ZX:	zx-shear component for shells, thick shells, and solids
         """ # nopep8
         return self._cards[0].get_value("comp")
 
     @comp.setter
     def comp(self, value: str) -> None:
         """Set the comp property."""
-        if value not in ["XX", "YY", "ZZ", "XY", "YZ", "ZX", "AXIAL", "  ", "SHEARS", "SHEART", None]:
-            raise Exception("""comp must be `None` or one of {"XX","YY","ZZ","XY","YZ","ZX","AXIAL","  ","SHEARS","SHEART"}.""")
         self._cards[0].set_value("comp", value)
 
     @property
     def ctype(self) -> str:
-        """Get or set the Component type:
-        EQ.STRAIN: 	strain component for shells and solids
-        EQ.STRESS:	stress component for shells and solids
-        EQ.FORCE:	force resultants for beams
-        EQ.MOMENT:	moment resultants for beams
-        EQ.FORCE:	discrete element force
-        EQ.DLEN:	change in length for discrete element
-        EQ.FAIL:	failure of element, sensor value = 1 when element fails, = 0 otherwise.
+        """Get or set the Sensor type:
+        EQ.AREA:	Area of shell element. COMP is ignored.
+        EQ.DLEN:	Change in length for discrete or seat belt element. COMP is ignored.
+        EQ.FAIL:	Failure of the element, sensor value = 1 when the element fails, = 0 therwise. COMP is ignored.
+        EQ.FORCE:	Force resultants for beams, seat belt, or translational discrete element; oment resultant for rotational discrete element
+        EQ.MOMENT:	Moment resultants for beams
+        EQ.STRAIN:	Strain component for shells, thick shells, and solids
+        EQ.STRESS:	Stress component for shells, thick shells, and solids
         """ # nopep8
         return self._cards[0].get_value("ctype")
 
     @ctype.setter
     def ctype(self, value: str) -> None:
         """Set the ctype property."""
-        if value not in ["STRAIN", "STRESS", "FORCE", "MOMENT", "DLEN", "FAIL", None]:
-            raise Exception("""ctype must be `None` or one of {"STRAIN","STRESS","FORCE","MOMENT","DLEN","FAIL"}.""")
+        if value not in ["AREA", "DLEN", "FAIL", "FORCE", "MOMENT", "STRAIN", "STRESS", None]:
+            raise Exception("""ctype must be `None` or one of {"AREA","DLEN","FAIL","FORCE","MOMENT","STRAIN","STRESS"}.""")
         self._cards[0].set_value("ctype", value)
 
     @property
     def layer(self) -> str:
-        """Get or set the Layer of integration point in shell element
+        """Get or set the Layer of the integration point in a shell element
         EQ.BOT: component at lower surface
-        EQ.TOP: component at upper surface
+        EQ.TOP: component at upper surface.
+        When CTYPE = STRESS, LAYER cancould be an integer i to monitor the stress of the ith integration point.
         """ # nopep8
         return self._cards[0].get_value("layer")
 

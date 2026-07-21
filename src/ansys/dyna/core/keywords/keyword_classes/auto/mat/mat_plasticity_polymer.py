@@ -203,7 +203,7 @@ class MatPlasticityPolymer(KeywordBase):
 
     @property
     def damp(self) -> typing.Optional[float]:
-        """Get or set the Stiffness-propotional damping ratio. Typical values are 1e-3 or 1e-4. If set too high instabilites can result.
+        """Get or set the Viscous damping factor in the units of [stress*time]. Typical values are 10**(-3)  Ns/mm**2 or 10**(-4)  Ns/mm**2. If set too high, instabilities can result.
         """ # nopep8
         return self._cards[2].get_value("damp")
 
@@ -237,7 +237,7 @@ class MatPlasticityPolymer(KeywordBase):
     @property
     def numint(self) -> float:
         """Get or set the Number of integration points which must fail before the element is deleted. This option is available for shells only.
-        LT.0.0:	|NUMINT| is percentage of integration points/layers which must fail before shell element fails.
+        LT.0.0: |NUMINT| is percentage of integration points/layers which must fail before shell element fails.
         """ # nopep8
         return self._cards[2].get_value("numint")
 

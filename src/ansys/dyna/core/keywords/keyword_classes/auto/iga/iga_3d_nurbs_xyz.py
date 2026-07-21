@@ -27,7 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _IGA3DNURBSXYZ_CARD0 = (
-    FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("patchid", int, 0, 10, None),
     FieldSchema("nr", int, 10, 10, None),
     FieldSchema("ns", int, 20, 10, None),
     FieldSchema("nt", int, 30, 10, None),
@@ -40,6 +40,7 @@ _IGA3DNURBSXYZ_CARD1 = (
     FieldSchema("unir", int, 0, 10, 0),
     FieldSchema("unis", int, 10, 10, 0),
     FieldSchema("unit", int, 20, 10, 0),
+    FieldSchema("unused", int, 30, 10, None),
 )
 
 _IGA3DNURBSXYZ_CARD2 = (
@@ -133,15 +134,15 @@ class Iga3DNurbsXyz(KeywordBase):
             ),
         ]
     @property
-    def nid(self) -> typing.Optional[int]:
-        """Get or set the Physical trivariate NURBS ID. A unique number must be chosen.
+    def patchid(self) -> typing.Optional[int]:
+        """Get or set the Physical trivariate NURBS patch ID. A unique number must be chosen.
         """ # nopep8
-        return self._cards[0].get_value("nid")
+        return self._cards[0].get_value("patchid")
 
-    @nid.setter
-    def nid(self, value: int) -> None:
-        """Set the nid property."""
-        self._cards[0].set_value("nid", value)
+    @patchid.setter
+    def patchid(self, value: int) -> None:
+        """Set the patchid property."""
+        self._cards[0].set_value("patchid", value)
 
     @property
     def nr(self) -> typing.Optional[int]:
@@ -213,8 +214,8 @@ class Iga3DNurbsXyz(KeywordBase):
     def unir(self) -> int:
         """Get or set the Knot vector type in the local r-direction.
         EQ.0: Specify the entire knot vector in the local r - direction.
-        EQ.1 : Uniform open knot vector in the local r - direction.
-        EQ.2 : Uniform periodic knot vector in the local r - direction.
+        EQ.1: Uniform open knot vector in the local r - direction.
+        EQ.2: Uniform periodic knot vector in the local r - direction.
         """ # nopep8
         return self._cards[1].get_value("unir")
 
@@ -229,8 +230,8 @@ class Iga3DNurbsXyz(KeywordBase):
     def unis(self) -> int:
         """Get or set the Knot vector type in the local s-direction.
         EQ.0: Specify the entire knot vector in the local s - direction.
-        EQ.1 : Uniform open knot vector in the local s - direction.
-        EQ.2 : Uniform periodic knot vector in the local s - direction.
+        EQ.1: Uniform open knot vector in the local s - direction.
+        EQ.2: Uniform periodic knot vector in the local s - direction.
         """ # nopep8
         return self._cards[1].get_value("unis")
 
@@ -245,8 +246,8 @@ class Iga3DNurbsXyz(KeywordBase):
     def unit(self) -> int:
         """Get or set the Knot vector type in the local t-direction.
         EQ.0: Specify the entire knot vector in the local t - direction.
-        EQ.1 : Uniform open knot vector in the local t - direction.
-        EQ.2 : Uniform periodic knot vector in the local t - direction.
+        EQ.1: Uniform open knot vector in the local t - direction.
+        EQ.2: Uniform periodic knot vector in the local t - direction.
         """ # nopep8
         return self._cards[1].get_value("unit")
 

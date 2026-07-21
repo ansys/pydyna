@@ -43,6 +43,10 @@ _EOS002AFTERBURN_CARD1 = (
     FieldSchema("qt", float, 10, 10, None),
     FieldSchema("t1", float, 20, 10, None),
     FieldSchema("t2", float, 30, 10, None),
+    FieldSchema("unused", float, 40, 10, None),
+    FieldSchema("unused", float, 50, 10, None),
+    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("unused", float, 70, 10, None),
 )
 
 _EOS002AFTERBURN_CARD2 = (
@@ -298,7 +302,7 @@ class Eos002Afterburn(KeywordBase):
     def conm(self) -> float:
         """Get or set the GT.0.0: Mass conversion factor from model units to calibration units for Miller's extension
         LT.0.0: Use predefined factors to convert model units to published
-        calibration units of g, cm, μs. Choices for model units are:
+        calibration units of g, cm, s. Choices for model units are:
         EQ.-1.0: g, mm, ms
         EQ.-2.0: g, cm, ms
         EQ.-3.0: kg, m, s

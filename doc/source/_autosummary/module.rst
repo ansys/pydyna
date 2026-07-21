@@ -13,6 +13,20 @@ ModuleLoad
     :members:
 
 
+ModuleLoadDp
+------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.module_load_dp
+    :members:
+
+
+ModuleLoadSp
+------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.module_load_sp
+    :members:
+
+
 ModulePath
 ----------
 

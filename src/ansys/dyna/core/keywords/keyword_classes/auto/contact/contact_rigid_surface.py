@@ -239,7 +239,7 @@ class ContactRigidSurface(KeywordBase):
 
     @property
     def sfs(self) -> float:
-        """Get or set the Scale factor on default slave penalty stiffness, see also *CONTROL_ CONTACT.
+        """Get or set the Scale factor on default tracked surface penalty stiffness, see also *CONTROL_ CONTACT.
         Default is set to 1.0.
         """ # nopep8
         return self._cards[2].get_value("sfs")
@@ -251,7 +251,7 @@ class ContactRigidSurface(KeywordBase):
 
     @property
     def stthk(self) -> float:
-        """Get or set the Optional thickness for slave surface (overrides true thickness). This option applies to contact with shell, solid, and beam elements. True thickness is the element thickness of the shell elements. Thickness offsets are not used for solid element unless this option is specified.
+        """Get or set the Optional thickness for tracked surface (overrides true thickness). This option applies to contact with shell, solid, and beam elements. True thickness is the element thickness of the shell elements. Thickness offsets are not used for solid element unless this option is specified.
         Default is set to 0.0.
         """ # nopep8
         return self._cards[2].get_value("stthk")
@@ -263,7 +263,7 @@ class ContactRigidSurface(KeywordBase):
 
     @property
     def sfthk(self) -> float:
-        """Get or set the Scale factor for slave surface thickness (scales true thickness). This option applies only to contact with shell elements. True thickness is the element thickness of the shell elements.
+        """Get or set the Scale factor for tracked surface thickness (scales true thickness). This option applies only to contact with shell elements. True thickness is the element thickness of the shell elements.
         Default is set to 1.0
         """ # nopep8
         return self._cards[2].get_value("sfthk")
@@ -275,7 +275,7 @@ class ContactRigidSurface(KeywordBase):
 
     @property
     def xpene(self) -> float:
-        """Get or set the Contact surface maximum penetration check multiplier. If the penetration of a node through the rigid surface exceeds the product of XPENE and the slave node thickness, the node is set free.
+        """Get or set the Contact surface maximum penetration check multiplier. If the penetration of a node through the rigid surface exceeds the product of XPENE and the tracked node thickness, the node is set free.
         Default is set to 4.0.
         """ # nopep8
         return self._cards[2].get_value("xpene")
@@ -298,7 +298,9 @@ class ContactRigidSurface(KeywordBase):
 
     @property
     def ctype(self) -> int:
-        """Get or set the The contact formulation. The default, CTYPE=0, is equivalent to the ONE_WAY_SURFACE_TO_SURFACE formulation, and CTYPE=1 is a penalty formulation. If the slave surface belongs to a rigid body, CTYPE=1 must be used.
+        """Get or set the Contact formulation:
+        EQ.0: Equivalent to the ONE_WAY_SURFACE_TO_SURFACE formulation(default)
+        EQ.1: Penalty formulation.If the tracked surface belongs to a rigid body, this formulation must be used.
         """ # nopep8
         return self._cards[2].get_value("ctype")
 

@@ -34,8 +34,8 @@ _MAT208_CARD0 = (
     FieldSchema("ro", float, 10, 10, None),
     FieldSchema("kax", float, 20, 10, None),
     FieldSchema("kshr", float, 30, 10, None),
-    FieldSchema("unused", float, 40, 10, None),
-    FieldSchema("unused", float, 50, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
     FieldSchema("fpre", float, 60, 10, None),
     FieldSchema("tramp", float, 70, 10, None),
 )
@@ -55,6 +55,7 @@ _MAT208_CARD2 = (
     FieldSchema("dacfail", float, 0, 10, 1e+20),
     FieldSchema("axshel", int, 10, 10, 0),
     FieldSchema("holshr", int, 20, 10, 0),
+    FieldSchema("iaxis", int, 30, 10, 1),
 )
 
 _MAT208_OPTION0_CARD0 = (
@@ -206,7 +207,7 @@ class Mat208(KeywordBase):
 
     @property
     def clear(self) -> typing.Optional[float]:
-        """Get or set the Radial clearance (gap between bolt shank and the inner diameter of the	hole) (length units).
+        """Get or set the Radial clearance (gap between bolt shank and the inner diameter of the hole) (length units).
         """ # nopep8
         return self._cards[1].get_value("clear")
 
@@ -273,8 +274,8 @@ class Mat208(KeywordBase):
     @property
     def axshel(self) -> int:
         """Get or set the Flag to determine effect on axial response of increase of length of element due to shear displacement. In this context, shear displacement excludes sliding within the clearance gap. See notes.
-        EQ.0:	Shear-induced length increase treated as axial load
-        EQ.1:	Shear-induced length increase is ignored
+        EQ.0: Shear-induced length increase treated as axial load
+        EQ.1: Shear-induced length increase is ignored
         """ # nopep8
         return self._cards[2].get_value("axshel")
 
@@ -288,8 +289,8 @@ class Mat208(KeywordBase):
     @property
     def holshr(self) -> int:
         """Get or set the Flag for hole enlargement due to shear.
-        EQ.0:	 Hole does not enlarge due to shear deformation.
-        NE.0 : Shear deformation after bolt contacts the inner diameter of the hole enlarges the hole.
+        EQ.0: Hole does not enlarge due to shear deformation.
+        NE.0: Shear deformation after bolt contacts the inner diameter of the hole enlarges the hole.
         """ # nopep8
         return self._cards[2].get_value("holshr")
 
@@ -299,6 +300,25 @@ class Mat208(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""holshr must be `None` or one of {0,1}.""")
         self._cards[2].set_value("holshr", value)
+
+    @property
+    def iaxis(self) -> int:
+        """Get or set the Flag to determine how the bolt axis relates to the beam element local axes. See Remark 2.
+        EQ.1: Each element creates own axes, bolt axis(N1 - N2 direction) is local x(default)
+        EQ.2: Each element creates own axes, bolt axis(N1 - N2 direction) is local y
+        EQ.3: Each element creates own axes, bolt axis(N1 - N2 direction) is local z
+        EQ.4: Axis system defined by CID on *SECTION_BEAM, bolt axis is local x
+        EQ.5: Axis system defined by CID on Section card, bolt axis is local y
+        EQ.6: Axis system defined by CID on Section card, bolt axis is local z
+        """ # nopep8
+        return self._cards[2].get_value("iaxis")
+
+    @iaxis.setter
+    def iaxis(self, value: int) -> None:
+        """Set the iaxis property."""
+        if value not in [1, 2, 3, 4, 5, 6, None]:
+            raise Exception("""iaxis must be `None` or one of {1,2,3,4,5,6}.""")
+        self._cards[2].set_value("iaxis", value)
 
     @property
     def title(self) -> typing.Optional[str]:

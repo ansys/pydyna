@@ -55,7 +55,7 @@ class InterfaceCompensation3DRefineRigid(KeywordBase):
         ]
     @property
     def filename1(self) -> typing.Optional[str]:
-        """Get or set the A keyword file name of rigid tool mesh to be refined.  This should be the tooling mesh used in the forming or flanging simulation, before any compensation is done.  The refined rigid tool mesh will be in the file rigid_refined.tmp.  See keyword example.
+        """Get or set the A keyword file name of rigid tool mesh to be refined.  This should be the tooling mesh used in the forming or flanging simulation, before any compensation is done.  The refined rigid tool mesh will be in the file rigid_refined.tmp.  See Remark.
         """ # nopep8
         return self._cards[0].get_value("filename1")
 
@@ -66,7 +66,7 @@ class InterfaceCompensation3DRefineRigid(KeywordBase):
 
     @property
     def filename2(self) -> typing.Optional[str]:
-        """Get or set the A keyword file name with trim curves defined using *DEFINE_CURVE_TRIM_3D.  The curves will be used to refine and realign the FILENAME1 to improve the convergence in the iterative compensation process.  The refined rigid tool mesh will be in the file rigid_refined.tmp.  See keyword example.
+        """Get or set the A keyword file name with trim curves defined using *DEFINE_CURVE_TRIM_3D.  The curves will be used to refine and realign the FILENAME1 to improve the convergence in the iterative compensation process.  The refined rigid tool mesh will be in the file rigid_refined.tmp.  See remark.
         """ # nopep8
         return self._cards[1].get_value("filename2")
 

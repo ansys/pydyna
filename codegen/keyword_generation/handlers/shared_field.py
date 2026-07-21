@@ -93,8 +93,12 @@ def do_negative_shared_fields(kwd_data: typing.Any):
                                 found_in_options = True
 
             # If not found in options, check base cards
-            if not found_in_options and index < num_cards:
-                assert False, "TODO - support negative indices for shared fields for non-options"
+            if not found_in_options:
+                for card in kwd_data.cards:
+                    if card["index"] == index:
+                        for field in card["fields"]:
+                            if field["name"] == setting["name"]:
+                                fields.append(field)
         if len(fields) <= 1:
             import logging
 

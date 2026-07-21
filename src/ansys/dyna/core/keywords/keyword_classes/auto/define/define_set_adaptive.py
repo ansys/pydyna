@@ -80,7 +80,7 @@ class DefineSetAdaptive(KeywordBase):
 
     @property
     def stype(self) -> int:
-        """Get or set the Set type for SETID:   1-element set(shell)   2-part set
+        """Get or set the Set type for SETID: 1-element set(shell)   2-part set
         """ # nopep8
         return self._cards[0].get_value("stype")
 

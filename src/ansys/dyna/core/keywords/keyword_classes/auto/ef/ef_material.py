@@ -83,7 +83,7 @@ class EfMaterial(KeywordBase):
 
     @property
     def name(self) -> typing.Optional[str]:
-        """Get or set the Specifies the material’s name.  This parameter is used only to make the output file easier to read.
+        """Get or set the Specifies the materials name.  This parameter is used only to make the output file easier to read.
         """ # nopep8
         return self._cards[0].get_value("name")
 
@@ -95,11 +95,11 @@ class EfMaterial(KeywordBase):
     @property
     def mtyp(self) -> typing.Optional[int]:
         """Get or set the Specifies if and how emission occurs:
-        EQ. - 2:	There is to be no emission and F_ij = 1 is written to the output file for this surface.
-        EQ. - 1 : There is to be no emission and F_ij = 0 is written to the output file for this surface.
-        EQ.0 : Emission is to be distributed in θ according to :ε(θ) = cos ^ r(θ)
-        EQ.1 : Beam emission is to occur in the direction {E_X,E_Y,E_Z}
-        EQ.2 : This specifies that emission according to user specified function.
+        EQ. - 2: There is to be no emission and F_ij = 1 is written to the output file for this surface.
+        EQ. - 1: There is to be no emission and F_ij = 0 is written to the output file for this surface.
+        EQ.0: Emission is to be distributed in  according to:() = cos ** r()
+        EQ.1: Beam emission is to occur in the direction {E_X,E_Y,E_Z}
+        EQ.2: This specifies that emission according to user specified function.
         """ # nopep8
         return self._cards[1].get_value("mtyp")
 
@@ -187,7 +187,7 @@ class EfMaterial(KeywordBase):
 
     @property
     def rdiffr(self) -> float:
-        """Get or set the LS-DYNA simulates diffuse reflection according to the equation: ε(θ)=cos^r (θ).  The user specifies the value for r with RDIFFR.
+        """Get or set the LS-DYNA simulates diffuse reflection according to the equation: ()=cos**r ().  The user specifies the value for r with RDIFFR.
         """ # nopep8
         return self._cards[2].get_value("rdiffr")
 
@@ -198,7 +198,7 @@ class EfMaterial(KeywordBase):
 
     @property
     def rdifft(self) -> float:
-        """Get or set the LS-DYNA simulates diffuse transmittance according to the equation: ε(θ)=cos^r (θ).  The user specifies the value for r with RDIFFT.
+        """Get or set the LS-DYNA simulates diffuse transmittance according to the equation: ()=cos**r ().  The user specifies the value for r with RDIFFT.
         """ # nopep8
         return self._cards[2].get_value("rdifft")
 

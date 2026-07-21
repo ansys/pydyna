@@ -30,10 +30,10 @@ from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _DEFINEDETOSURFACETIED_CARD0 = (
-    FieldSchema("slave", int, 0, 10, 0),
-    FieldSchema("master", int, 10, 10, 0),
-    FieldSchema("stype", int, 20, 10, 0),
-    FieldSchema("mtype", int, 30, 10, 0),
+    FieldSchema("desid", int, 0, 10, 0),
+    FieldSchema("surfid", int, 10, 10, 0),
+    FieldSchema("destyp", int, 20, 10, 0),
+    FieldSchema("surftyp", int, 30, 10, 0),
 )
 
 _DEFINEDETOSURFACETIED_CARD1 = (
@@ -87,56 +87,58 @@ class DefineDeToSurfaceTied(KeywordBase):
             ),
         ]
     @property
-    def slave(self) -> int:
-        """Get or set the DES nodes.
+    def desid(self) -> int:
+        """Get or set the Node set ID, node ID, part set ID or part ID specifying the DES in the tired interface. DESTYP below indicates the ID type
         """ # nopep8
-        return self._cards[0].get_value("slave")
+        return self._cards[0].get_value("desid")
 
-    @slave.setter
-    def slave(self, value: int) -> None:
-        """Set the slave property."""
-        self._cards[0].set_value("slave", value)
+    @desid.setter
+    def desid(self, value: int) -> None:
+        """Set the desid property."""
+        self._cards[0].set_value("desid", value)
 
     @property
-    def master(self) -> int:
-        """Get or set the Shell set.
+    def surfid(self) -> int:
+        """Get or set the Part set ID or part ID specifying the surface. SURFID below indicates the ID type.
         """ # nopep8
-        return self._cards[0].get_value("master")
+        return self._cards[0].get_value("surfid")
 
-    @master.setter
-    def master(self, value: int) -> None:
-        """Set the master property."""
-        self._cards[0].set_value("master", value)
+    @surfid.setter
+    def surfid(self, value: int) -> None:
+        """Set the surfid property."""
+        self._cards[0].set_value("surfid", value)
 
     @property
-    def stype(self) -> int:
-        """Get or set the EQ.0: Slave node set
-        EQ.1: Slave node
-        EQ.2: Slave part set
-        EQ.3: Slave part.
+    def destyp(self) -> int:
+        """Get or set the Type for DESID:
+        EQ.0: Node set
+        EQ.1: Node
+        EQ.2: Part setn
+        EQ.3: Part
         """ # nopep8
-        return self._cards[0].get_value("stype")
+        return self._cards[0].get_value("destyp")
 
-    @stype.setter
-    def stype(self, value: int) -> None:
-        """Set the stype property."""
+    @destyp.setter
+    def destyp(self, value: int) -> None:
+        """Set the destyp property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""stype must be `None` or one of {0,1,2,3}.""")
-        self._cards[0].set_value("stype", value)
+            raise Exception("""destyp must be `None` or one of {0,1,2,3}.""")
+        self._cards[0].set_value("destyp", value)
 
     @property
-    def mtype(self) -> int:
-        """Get or set the EQ.0: Part set
-        EQ.1: Part.
+    def surftyp(self) -> int:
+        """Get or set the SURFID type:
+        EQ.0: Part set
+        EQ.1: Part
         """ # nopep8
-        return self._cards[0].get_value("mtype")
+        return self._cards[0].get_value("surftyp")
 
-    @mtype.setter
-    def mtype(self, value: int) -> None:
-        """Set the mtype property."""
+    @surftyp.setter
+    def surftyp(self, value: int) -> None:
+        """Set the surftyp property."""
         if value not in [0, 1, None]:
-            raise Exception("""mtype must be `None` or one of {0,1}.""")
-        self._cards[0].set_value("mtype", value)
+            raise Exception("""surftyp must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("surftyp", value)
 
     @property
     def nflf(self) -> typing.Optional[float]:
@@ -207,8 +209,8 @@ class DefineDeToSurfaceTied(KeywordBase):
     @property
     def maxgap(self) -> typing.Optional[float]:
         """Get or set the Maximum gap between DES and master surface:
-        GT.0.0:	defines the ratio of the DES radius as the maximum gap, that is, MAXGAP × r_DES
-        LT.0.0 : absolute value is used as the maximum gap
+        GT.0.0: defines the ratio of the DES radius as the maximum gap, that is, MAXGAP  r_DES
+        LT.0.0: absolute value is used as the maximum gap
         """ # nopep8
         return self._cards[1].get_value("maxgap")
 

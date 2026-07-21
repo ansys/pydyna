@@ -94,8 +94,8 @@ class DefineBeamSolidCoupling(KeywordBase):
     @property
     def lstrtype(self) -> int:
         """Get or set the Type of Lagrangian structures set:
-        EQ.0:	Part set
-        EQ.1:	Part
+        EQ.0: Part set
+        EQ.1: Part
         """ # nopep8
         return self._cards[0].get_value("lstrtype")
 
@@ -109,8 +109,8 @@ class DefineBeamSolidCoupling(KeywordBase):
     @property
     def soltype(self) -> int:
         """Get or set the Type of solid set:
-        EQ.0:	Part set
-        EQ.1:	Part
+        EQ.0: Part set
+        EQ.1: Part
         """ # nopep8
         return self._cards[0].get_value("soltype")
 

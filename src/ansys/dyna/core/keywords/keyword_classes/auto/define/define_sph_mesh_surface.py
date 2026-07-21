@@ -90,8 +90,8 @@ class DefineSphMeshSurface(KeywordBase):
     @property
     def type(self) -> int:
         """Get or set the SID type:
-        EQ.0:	part set ID
-        EQ.1 : part ID.
+        EQ.0: part set ID
+        EQ.1: part ID.
         """ # nopep8
         return self._cards[0].get_value("type")
 
@@ -149,8 +149,8 @@ class DefineSphMeshSurface(KeywordBase):
     @property
     def iout(self) -> int:
         """Get or set the Keyword file output:
-        EQ.0:	no output(default)
-        EQ.1 : output generated nodes, SPH elementsand node set to a keyword file with SPH_surface_ prefix.
+        EQ.0: no output(default)
+        EQ.1: output generated nodes, SPH elementsand node set to a keyword file with SPH_surface_ prefix.
         """ # nopep8
         return self._cards[0].get_value("iout")
 

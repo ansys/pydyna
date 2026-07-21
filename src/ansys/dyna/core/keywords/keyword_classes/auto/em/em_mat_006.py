@@ -57,7 +57,7 @@ class EmMat006(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material ID: refers to MID in the *PART card.
+        """Get or set the Material identification. MID must reference a *MAT material since the electromagnetic properties are added onto the *MAT properties. See Remark 1.
         """ # nopep8
         return self._cards[0].get_value("mid")
 

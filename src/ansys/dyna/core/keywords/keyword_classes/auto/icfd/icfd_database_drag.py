@@ -33,7 +33,6 @@ _ICFDDATABASEDRAG_CARD0 = (
     FieldSchema("perout", int, 30, 10, 0),
     FieldSchema("divi", int, 40, 10, 10),
     FieldSchema("elout", int, 50, 10, 0),
-    FieldSchema("ssout", int, 60, 10, 0),
 )
 
 class IcfdDatabaseDrag(KeywordBase):
@@ -53,7 +52,7 @@ class IcfdDatabaseDrag(KeywordBase):
         ]
     @property
     def pid(self) -> typing.Optional[int]:
-        """Get or set the Part ID of the surface where the drag force will be computed
+        """Get or set the Part ID of the surface (see *ICFD_PART) or fluid volume (see *ICFD_PART_VOL) in the case of the VOL keyword option where the drag force will be computed
         """ # nopep8
         return self._cards[0].get_value("pid")
 
@@ -64,7 +63,7 @@ class IcfdDatabaseDrag(KeywordBase):
 
     @property
     def cpid(self) -> typing.Optional[int]:
-        """Get or set the Center point ID used for the calculation of the force's moment. By default the reference frame center is used (Coordinates (0,0,0)).
+        """Get or set the Center point ID (see *ICFD_DEFINE_POINT) used for the calculation of the force�s moment. By default, the reference frame center is used, that is, (0,0,0).
         """ # nopep8
         return self._cards[0].get_value("cpid")
 
@@ -75,7 +74,7 @@ class IcfdDatabaseDrag(KeywordBase):
 
     @property
     def dtout(self) -> float:
-        """Get or set the Time interval to print the output. If DTOUT is equal to 0.0, then the ICFD timestep will be used.
+        """Get or set the Time interval between outputs. If DTOUT is equal to 0.0, then the ICFD timestep is used.
         """ # nopep8
         return self._cards[0].get_value("dtout")
 
@@ -86,7 +85,9 @@ class IcfdDatabaseDrag(KeywordBase):
 
     @property
     def perout(self) -> int:
-        """Get or set the Outputs the contribution of the different elements on the total drag in fractions of the total drag in the d3plots.
+        """Get or set the Flag for outputting the contribution of the different elements to the total drag in fractions of the total drag in d3plot:
+        EQ.0:	Off
+        GE.1 : On.
         """ # nopep8
         return self._cards[0].get_value("perout")
 
@@ -97,7 +98,7 @@ class IcfdDatabaseDrag(KeywordBase):
 
     @property
     def divi(self) -> int:
-        """Get or set the Number of drag divisions for PEROUT. Default is 10 which means the contributions will be grouped in 10 deciles.
+        """Get or set the Number of drag divisions for PEROUT. The default is 10 which means the contributions will be grouped in 10 deciles
         """ # nopep8
         return self._cards[0].get_value("divi")
 
@@ -108,7 +109,9 @@ class IcfdDatabaseDrag(KeywordBase):
 
     @property
     def elout(self) -> int:
-        """Get or set the Outputs the drag value of each element in the d3plots.
+        """Get or set the Flag for outputting the drag value of each element in the d3plot:
+        EQ.0:	Off
+        GE.1 : On
         """ # nopep8
         return self._cards[0].get_value("elout")
 
@@ -116,15 +119,4 @@ class IcfdDatabaseDrag(KeywordBase):
     def elout(self, value: int) -> None:
         """Set the elout property."""
         self._cards[0].set_value("elout", value)
-
-    @property
-    def ssout(self) -> int:
-        """Get or set the Outputs the pressure loads caused by the fluid on each solid segment set in keyword format. FSI needs to be activated.
-        """ # nopep8
-        return self._cards[0].get_value("ssout")
-
-    @ssout.setter
-    def ssout(self, value: int) -> None:
-        """Set the ssout property."""
-        self._cards[0].set_value("ssout", value)
 

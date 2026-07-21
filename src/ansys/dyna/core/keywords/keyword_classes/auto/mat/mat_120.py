@@ -266,9 +266,7 @@ class Mat120(KeywordBase):
 
     @property
     def en(self) -> typing.Optional[float]:
-        """Get or set the Mean nucleation strain En .
-        GT.0.0:	Constant value,
-        LT.0.0:	Load curve ID = (-EN) which defines mean nucleation strain ε_N  as a function of element length.
+        """Get or set the Mean nucleation strain E_N.
         """ # nopep8
         return self._cards[1].get_value("en")
 
@@ -279,9 +277,7 @@ class Mat120(KeywordBase):
 
     @property
     def sn(self) -> typing.Optional[float]:
-        """Get or set the Standard deviation Sn of the normal distribution of En.
-        GT.0.0:	Constant value,
-        LT.0.0:	Load curve ID = (-SN) which defines standard deviation s_N of the normal distribution of ε_N as a function of element length.
+        """Get or set the Standard deviation S_N of the normal distribution of eps_N.
         """ # nopep8
         return self._cards[1].get_value("sn")
 
@@ -341,7 +337,7 @@ class Mat120(KeywordBase):
 
     @property
     def eps1(self) -> typing.Optional[float]:
-        """Get or set the Effective plastic strain values.The first point must be zero corresponding to the initial yield stress. This option is only used if ATYP equal to 3. At least 2 points should be defined.These values are used if ATYP=3 and LCSS=0.
+        """Get or set the Effective plastic strain values.The first point must be zero corresponding to the initial yield stress. This option is only used if ATYP equals 3. At least 2 points should be defined.These values are used if ATYP=3 and LCSS=0.
         """ # nopep8
         return self._cards[2].get_value("eps1")
 
@@ -517,7 +513,7 @@ class Mat120(KeywordBase):
 
     @property
     def l1(self) -> typing.Optional[float]:
-        """Get or set the Element length values.These values are only used if LCLF=0.
+        """Get or set the Element length values.These values are only used if LCFF=0.
         """ # nopep8
         return self._cards[4].get_value("l1")
 
@@ -561,7 +557,7 @@ class Mat120(KeywordBase):
 
     @property
     def ff1(self) -> typing.Optional[float]:
-        """Get or set the Corresponding failure void volume fraction. These values are only used if LCLF=0.
+        """Get or set the Corresponding failure void volume fraction. These values are only used if LCFF=0.
         """ # nopep8
         return self._cards[4].get_value("ff1")
 
@@ -638,7 +634,7 @@ class Mat120(KeywordBase):
 
     @property
     def lcf0(self) -> int:
-        """Get or set the Load curve ID defining initial void volume fraction   versus element length.  This option is available starting with the second formal release of version 971..
+        """Get or set the Load curve ID defining initial void volume fraction versus element length. This option is available starting with the second formal release of version 971..
         """ # nopep8
         return self._cards[5].get_value("lcf0")
 
@@ -649,7 +645,7 @@ class Mat120(KeywordBase):
 
     @property
     def lcfc(self) -> int:
-        """Get or set the Load curve ID defining critical void volume fraction   versus element length.  This option is available starting with the second formal release of version 971.
+        """Get or set the Load curve ID defining critical void volume fraction versus element length. This option is available starting with the second formal release of version 971.
         """ # nopep8
         return self._cards[5].get_value("lcfc")
 
@@ -660,7 +656,7 @@ class Mat120(KeywordBase):
 
     @property
     def lcfn(self) -> int:
-        """Get or set the Load curve ID defining void volume fraction of nucleating particles   versus element length.  This option is available starting with the second formal release of version 971..
+        """Get or set the Load curve ID defining void volume fraction of nucleating particles versus element length. This option is available starting with the second formal release of version 971..
         """ # nopep8
         return self._cards[5].get_value("lcfn")
 

@@ -33,6 +33,7 @@ _DAMPINGPARTMASS_CARD0 = (
     FieldSchema("lcid", int, 10, 10, 0),
     FieldSchema("sf", float, 20, 10, 1.0),
     FieldSchema("flag", int, 30, 10, 0),
+    FieldSchema("struc", int, 40, 10, 0),
 )
 
 _DAMPINGPARTMASS_CARD1 = (
@@ -80,7 +81,7 @@ class DampingPartMass(KeywordBase):
 
     @property
     def lcid(self) -> int:
-        """Get or set the Load curve ID which specifies system damping for parts.
+        """Get or set the Load curve ID (see *DEFINE_CURVE) that specifies the damping constant as a function of time applied to the part(s) specified in PID/PSID.
         """ # nopep8
         return self._cards[0].get_value("lcid")
 
@@ -112,6 +113,21 @@ class DampingPartMass(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""flag must be `None` or one of {0,1}.""")
         self._cards[0].set_value("flag", value)
+
+    @property
+    def struc(self) -> int:
+        """Get or set the Flag for damping only the structural mass. This field only applies to deformable bodies:
+        EQ.0:	Damp all mass in the part or part set.
+        EQ.1 : Damp only structural mass and exclude mass added with * ELEMENT_MASS(_...) from damping.
+        """ # nopep8
+        return self._cards[0].get_value("struc")
+
+    @struc.setter
+    def struc(self, value: int) -> None:
+        """Set the struc property."""
+        if value not in [0, 1, None]:
+            raise Exception("""struc must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("struc", value)
 
     @property
     def stx(self) -> float:

@@ -58,8 +58,8 @@ class ControlImplicitResidualVector(KeywordBase):
     @property
     def iresvec(self) -> int:
         """Get or set the Residual vector control flag:
-        EQ.0:	do not compute residual vectors.
-        GT.0:	compute residual vectors.
+        EQ.0: do not compute residual vectors.
+        GT.0: compute residual vectors.
         """ # nopep8
         return self._cards[0].get_value("iresvec")
 
@@ -70,9 +70,9 @@ class ControlImplicitResidualVector(KeywordBase):
 
     @property
     def neig(self) -> int:
-        """Get or set the Number of eigenmodes to compute for the purpose of orthogonalizing the computed load:
-        EQ.0:	read the eigenmodes from the file Eigen_‌Vectors which is the file used to for dumping eignevectors; see EVDUMP on *CONTROL_‌IMPLICIT_‌EIGENVALUE.
-        GT.0:	compute NEIG eigenmodes.
+        """Get or set the Number of eigenmodes to compute to orthogonalize the computed load:
+        EQ.0: read the eigenmodes from the file Eigen_Vectors which is the file used to for dumping eignevectors; see EVDUMP on *CONTROL_IMPLICIT_EIGENVALUE.
+        GT.0: compute NEIG eigenmodes.
         """ # nopep8
         return self._cards[0].get_value("neig")
 
@@ -87,13 +87,13 @@ class ControlImplicitResidualVector(KeywordBase):
         If NEIG = 0
         if IRESVEC > 0:
         read from Eigen_Vectors when NEIG = 0:
-        LT.0:	file is in binary format.
-        GT.0:	file is in ASCII format.
+        LT.0: file is in binary format.
+        GT.0: file is in ASCII format.
         Note that if IRSEVEC > 0 and NEIG = 0, IFORMAT = 0 is not allowed.
         If NEIG > 0:
-        EQ.0:	do not dump the computed eigenmodes.
-        LT.0:	dump the computed eigenmodes in binary format.
-        GT.0:	dump the computed eignemodes in ASCII format.
+        EQ.0: do not dump the computed eigenmodes.
+        LT.0: dump the computed eigenmodes in binary format.
+        GT.0: dump the computed eignemodes in ASCII format.
         """ # nopep8
         return self._cards[0].get_value("iformat")
 

@@ -33,6 +33,10 @@ _DATABASEBNDOUT_CARD0 = (
     FieldSchema("binary", int, 10, 10, 0),
     FieldSchema("lcur", int, 20, 10, 0),
     FieldSchema("ioopt", int, 30, 10, 1),
+    FieldSchema("option1", int, 40, 10, 0),
+    FieldSchema("option2", int, 50, 10, 0),
+    FieldSchema("option3", int, 60, 10, 0),
+    FieldSchema("option4", int, 70, 10, 0),
 )
 
 class DatabaseBndout(KeywordBase):
@@ -55,7 +59,7 @@ class DatabaseBndout(KeywordBase):
         ]
     @property
     def dt(self) -> float:
-        """Get or set the Time interval between outputs. If DT is zero, no output is printed, This field will be used for all selected ASCII_options that have no unique DT value specified
+        """Get or set the Time interval between outputs. If DT is zero, no output is printed..  If DT<0, the result will be output every -DT time steps.
         """ # nopep8
         return self._cards[0].get_value("dt")
 
@@ -106,6 +110,58 @@ class DatabaseBndout(KeywordBase):
         if value not in [1, 2, 3, None]:
             raise Exception("""ioopt must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("ioopt", value)
+
+    @property
+    def option1(self) -> int:
+        """Get or set the controls the nodal force group output.
+        If the value is 0 or left blank, the category is included (the default),
+        and if it is 1, the category is not included in the bndout file.
+        """ # nopep8
+        return self._cards[0].get_value("option1")
+
+    @option1.setter
+    def option1(self, value: int) -> None:
+        """Set the option1 property."""
+        self._cards[0].set_value("option1", value)
+
+    @property
+    def option2(self) -> int:
+        """Get or set the controls the concentrated force output.
+        If the value is 0 or left blank, the category is included (the default),
+        and if it is 1, the category is not included in the bndout file
+        """ # nopep8
+        return self._cards[0].get_value("option2")
+
+    @option2.setter
+    def option2(self, value: int) -> None:
+        """Set the option2 property."""
+        self._cards[0].set_value("option2", value)
+
+    @property
+    def option3(self) -> int:
+        """Get or set the controls the pressure boundary condition output.
+        If the value is 0 or left blank, the category is included (the default),
+        and if it is 1, the category is not included in the bndout file
+        """ # nopep8
+        return self._cards[0].get_value("option3")
+
+    @option3.setter
+    def option3(self, value: int) -> None:
+        """Set the option3 property."""
+        self._cards[0].set_value("option3", value)
+
+    @property
+    def option4(self) -> int:
+        """Get or set the controls the velocity/displacement/acceleration nodal boundary conditions.
+        If the value is 0 or left blank, the category is included (the default),
+        and if it is 1, the category is not included in the bndout file
+        """ # nopep8
+        return self._cards[0].get_value("option4")
+
+    @option4.setter
+    def option4(self, value: int) -> None:
+        """Set the option4 property."""
+        self._cards[0].set_value("option4", value)
 
     @property
     def lcur_link(self) -> typing.Optional[DefineCurve]:

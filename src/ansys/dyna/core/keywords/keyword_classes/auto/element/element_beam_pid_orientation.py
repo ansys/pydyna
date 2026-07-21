@@ -265,7 +265,7 @@ class ElementBeamPidOrientation(KeywordBase):
 
     @property
     def vx(self) -> float:
-        """Get or set the Coordinates of an orientation vector relative to node N1. In this
+        """Get or set the Components of an orientation vector relative to node N1. In this
         case, the orientation vector points to a virtual third node, so the
         field N3 should be left undefined.
         """ # nopep8
@@ -278,7 +278,7 @@ class ElementBeamPidOrientation(KeywordBase):
 
     @property
     def vy(self) -> float:
-        """Get or set the Coordinates of an orientation vector relative to node N1. In this
+        """Get or set the Components of an orientation vector relative to node N1. In this
         case, the orientation vector points to a virtual third node, so the
         field N3 should be left undefined.
         """ # nopep8
@@ -291,7 +291,7 @@ class ElementBeamPidOrientation(KeywordBase):
 
     @property
     def vz(self) -> float:
-        """Get or set the Coordinates of an orientation vector relative to node N1. In this
+        """Get or set the Components of an orientation vector relative to node N1. In this
         case, the orientation vector points to a virtual third node, so the
         field N3 should be left undefined.
         """ # nopep8

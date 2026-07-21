@@ -59,7 +59,7 @@ class IcfdDefineNoninertial(KeywordBase):
         ]
     @property
     def w1(self) -> typing.Optional[float]:
-        """Get or set the Rotational Velocity along the X,Y,Z axes
+        """Get or set the Rotational Velocity along the X axes
         """ # nopep8
         return self._cards[0].get_value("w1")
 
@@ -70,7 +70,7 @@ class IcfdDefineNoninertial(KeywordBase):
 
     @property
     def w2(self) -> typing.Optional[float]:
-        """Get or set the Rotational Velocity along the X,Y,Z axes
+        """Get or set the Rotational Velocity along the Y axes
         """ # nopep8
         return self._cards[0].get_value("w2")
 
@@ -81,7 +81,7 @@ class IcfdDefineNoninertial(KeywordBase):
 
     @property
     def w3(self) -> typing.Optional[float]:
-        """Get or set the Rotational Velocity along the X,Y,Z axes
+        """Get or set the Rotational Velocity along the Z axes
         """ # nopep8
         return self._cards[0].get_value("w3")
 
@@ -93,6 +93,8 @@ class IcfdDefineNoninertial(KeywordBase):
     @property
     def r(self) -> typing.Optional[float]:
         """Get or set the Radius of the rotating reference frame
+        GT.0.0: Constant value
+        LT.0.0: | R | refers to a *DEFINE_FUNCTION ID.The function supports the following arguments: f(x, y, z, vx, vy, vz, temp, pres, time).
         """ # nopep8
         return self._cards[0].get_value("r")
 
@@ -125,7 +127,9 @@ class IcfdDefineNoninertial(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve for scaling factor of w.
+        """Get or set the Load curve for scaling factor of .
+        GT.0: Load curve ID(see *DEFINE_CURVE) for the curve giving the scale factor as a function of time
+        LT.0: | LCID | refers to a *DEFINE_FUNCTION ID.The function supports the following arguments: f(x, y, z, vx, vy, vz, temp, pres, time).
         """ # nopep8
         return self._cards[0].get_value("lcid")
 

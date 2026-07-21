@@ -6,6 +6,13 @@ Fatigue keywords
 ================
 
 
+FatigueD3Part
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.fatigue_d3part
+    :members:
+
+
 FatigueD3Plot
 -------------
 
@@ -45,6 +52,13 @@ FatigueMultiaxial
 -----------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.fatigue_multiaxial
+    :members:
+
+
+FatigueStatic
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.fatigue_static
     :members:
 
 

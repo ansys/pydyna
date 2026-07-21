@@ -122,7 +122,7 @@ class ElementSeatbeltSensor(KeywordBase):
         EQ.2: retractor pull-out rate,
         EQ.3: time,
         EQ.4: distance between nodes.
-        EQ.5:	retractor pull-out
+        EQ.5: retractor pull-out
         """ # nopep8
         return self._cards[0].get_value("sbstyp")
 

@@ -60,7 +60,7 @@ class ControlRequireRevision(KeywordBase):
 
     @property
     def svnrev(self) -> typing.Optional[int]:
-        """Get or set the The minimum SVN revision required (ignored by executables made after our move to git). This corresponds to the “SVN Version” field in the d3hsp file for versions of LS-DYNA prior to our move to git for version control.  R12.0 was the last release version made while we were using SVN for version control.
+        """Get or set the The minimum SVN revision required (ignored by executables made after our move to git). This corresponds to the SVN Version field in the d3hsp file for versions of LS-DYNA prior to our move to git for version control.  R12.0 was the last release version made while we were using SVN for version control.
         """ # nopep8
         return self._cards[0].get_value("svnrev")
 
@@ -71,7 +71,7 @@ class ControlRequireRevision(KeywordBase):
 
     @property
     def gitrev(self) -> typing.Optional[int]:
-        """Get or set the The minimum git revision required corresponding to the release of code (ignored by executables made prior to our move to git). This corresponds to part of the git hash given in the “Revision” field in the d3hsp file for versions of LS-DYNA after our move to git for version control. In d3hsp, the last string is “R[Release #]-[number]-[alphanumeric]”. If RELEASE is given, LS-DYNA compares GITREV to that [number]. If RELEASE is not given, see Remark 2.  R11.2 was the first release version made when we moved to git
+        """Get or set the The minimum git revision required corresponding to the release of code (ignored by executables made prior to our move to git). This corresponds to part of the git hash given in the Revision field in the d3hsp file for versions of LS-DYNA after our move to git for version control. In d3hsp, the last string is R[Release #]-[number]-[alphanumeric]. If RELEASE is given, LS-DYNA compares GITREV to that [number]. If RELEASE is not given, see Remark 2.  R11.2 was the first release version made when we moved to git
         """ # nopep8
         return self._cards[0].get_value("gitrev")
 

@@ -489,13 +489,6 @@ ElementShellNurbsPatchTrimmed
     :members:
 
 
-ElementShellNurbsPatchV3
-------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.element_shell_nurbs_patch_v3
-    :members:
-
-
 ElementShellOffset
 ------------------
 
@@ -773,6 +766,13 @@ ElementSolidPeri
 ----------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.element_solid_peri
+    :members:
+
+
+ElementSolidReference
+---------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.element_solid_reference
     :members:
 
 

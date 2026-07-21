@@ -35,6 +35,7 @@ _CONSTRAINEDJOINTCOORROTATIONALMOTOR_CARD0 = (
     FieldSchema("damp", float, 30, 10, None),
     FieldSchema("tmass", float, 40, 10, None),
     FieldSchema("rmass", float, 50, 10, None),
+    FieldSchema("rbidc", float, 60, 10, None),
 )
 
 _CONSTRAINEDJOINTCOORROTATIONALMOTOR_CARD1 = (
@@ -87,6 +88,7 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
     subkeyword = "JOINT_COOR_ROTATIONAL_MOTOR"
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
+        "rbidc": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -161,9 +163,9 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @property
     def damp(self) -> typing.Optional[float]:
-        """Get or set the Damping scale factor on default damping value. (Revolute and Spherical Joints):
+        """Get or set the Damping scale factor on the default damping value. (Revolute and Spherical Joints):
         EQ.0.0: default is set to 1.0,
-        LE.0.01 and GT.0.0: no damping is used.
+        GT.0.0.AND.LE.0.01: no damping is used.
         """ # nopep8
         return self._cards[0].get_value("damp")
 
@@ -193,6 +195,17 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
     def rmass(self, value: float) -> None:
         """Set the rmass property."""
         self._cards[0].set_value("rmass", value)
+
+    @property
+    def rbidc(self) -> typing.Optional[float]:
+        """Get or set the Part ID of rigid body C for harmonic gear joint. See Remark 2.
+        """ # nopep8
+        return self._cards[0].get_value("rbidc")
+
+    @rbidc.setter
+    def rbidc(self, value: float) -> None:
+        """Set the rbidc property."""
+        self._cards[0].set_value("rbidc", value)
 
     @property
     def x1(self) -> typing.Optional[float]:
@@ -394,7 +407,13 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
 
     @property
     def parm(self) -> typing.Optional[float]:
-        """Get or set the Parameter which a function of joint type.  Leave blank for MOTORS
+        """Get or set the Parameter which a function of joint type.
+        Gears:	define R_2/R_1
+        Rack and Pinion:	define h
+        Pulley : define R_2 / R_1
+        Screw : define x ? / ?
+        Motors : leave blank
+        Harmonic : Define gear ratio (see Remark Error! Reference source not found. of *CONSTRAINED_JOINT_...)
         """ # nopep8
         return self._cards[7].get_value("parm")
 
@@ -417,20 +436,22 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
     @property
     def type(self) -> int:
         """Get or set the Define integer flag for MOTOR joints as follows:
-        EQ.0:  translational/rotational velocity
-        EQ.1:  translational/rotational acceleration
-        EQ.2:  translational/rotational displacement
+        EQ.0: translational/rotational velocity
+        EQ.1: translational/rotational acceleration
+        EQ.2: translational/rotational displacement
         """ # nopep8
         return self._cards[7].get_value("type")
 
     @type.setter
     def type(self, value: int) -> None:
         """Set the type property."""
+        if value not in [0, 1, 2, None]:
+            raise Exception("""type must be `None` or one of {0,1,2}.""")
         self._cards[7].set_value("type", value)
 
     @property
     def r1(self) -> typing.Optional[float]:
-        """Get or set the Radius, R_1, for the gear and pulley joint type.  If undefined, nodal points 5 and 6 are assumed to be on the outer radius. The values of R1 and R2 affect the outputted reaction forces. The forces are calculated from the moments by dividing them by the radii
+        """Get or set the Radius, R_1, for the gear and pulley joint type.  If left undefined, nodal points 5 and 6 are assumed to be on the outer radius. R1 is the moment arm that goes into calculating the joint reaction forces. The ratio R_2?R_1  gives the transmitted moments, but not the forces. The force is moment divided by distance R1. For harmonic joints, R2 does not correspond to the actual radius.
         """ # nopep8
         return self._cards[7].get_value("r1")
 
@@ -453,4 +474,9 @@ class ConstrainedJointCoorRotationalMotor(KeywordBase):
     def lcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid."""
         self.lcid = value.lcid
+
+    @property
+    def rbidc_link(self) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given rbidc."""
+        return self._get_link_by_attr("PART", "pid", self.rbidc, "parts")
 

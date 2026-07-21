@@ -58,7 +58,6 @@ class EmOutput(KeywordBase):
         EQ.1: Basic assembly steps
         EQ.2: Basic assembly steps+percentage completed+final statistics
         EQ.3: Basic assembly steps+percentage completed+statistics at each percentage of completion
-
         """ # nopep8
         return self._cards[0].get_value("mats")
 
@@ -76,7 +75,6 @@ class EmOutput(KeywordBase):
         EQ.1: Basic assembly steps
         EQ.2: Basic assembly steps+percentage completed+final statistics
         EQ.3: Basic assembly steps+percentage completed+statistics at each percentage of completion
-
         """ # nopep8
         return self._cards[0].get_value("matf")
 
@@ -93,7 +91,6 @@ class EmOutput(KeywordBase):
         EQ.0: No output
         EQ.1: Global information at each FEM iteration
         EQ.2: Detailed information at each FEM iteration
-
         """ # nopep8
         return self._cards[0].get_value("sols")
 
@@ -110,7 +107,6 @@ class EmOutput(KeywordBase):
         EQ.0: No output
         EQ.1: Global information at each FEM iteration
         EQ.2: Detailed information at each FEM iteration
-
         """ # nopep8
         return self._cards[0].get_value("solf")
 
@@ -126,7 +122,6 @@ class EmOutput(KeywordBase):
         """Get or set the Controls the output of the mesh data to the d3hsp file
         EQ.0: No mesh output
         EQ.1: Mesh info is written to the d3hsp file
-
         """ # nopep8
         return self._cards[0].get_value("mesh")
 
@@ -140,9 +135,8 @@ class EmOutput(KeywordBase):
     @property
     def mem(self) -> int:
         """Get or set the Controls the output of information about the memory used by the EM solve to the messag file:
-        EQ. 0 : no memory information written.
-        EQ .1  memory information written
-
+        EQ. 0: No memory information written.
+        EQ .1  Memory information written
         """ # nopep8
         return self._cards[0].get_value("mem")
 
@@ -156,9 +150,8 @@ class EmOutput(KeywordBase):
     @property
     def timing(self) -> int:
         """Get or set the Controls the output of information about the time spent in the different parts of the EM solver to the messag file
-        EQ. 0 : no timing information written.
-        EQ. 1 : timing information written
-
+        EQ. 0: No timing information written.
+        EQ. 1: Timing information written
         """ # nopep8
         return self._cards[0].get_value("timing")
 

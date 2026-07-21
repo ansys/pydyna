@@ -23,3 +23,4 @@
 # Auto-generated imports for comment domain
 
 from .comment import Comment
+from .comment_noecho import CommentNoecho

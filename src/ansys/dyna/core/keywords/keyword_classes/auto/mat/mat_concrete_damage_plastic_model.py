@@ -296,7 +296,7 @@ class MatConcreteDamagePlasticModel(KeywordBase):
 
     @property
     def bs(self) -> float:
-        """Get or set the Damage ductility exponent during damage.	Default = 1.0.
+        """Get or set the Damage ductility exponent during damage. Default = 1.0.
         """ # nopep8
         return self._cards[2].get_value("bs")
 

@@ -31,6 +31,7 @@ _CONSTRAINEDTIEDNODES_CARD0 = (
     FieldSchema("nsid", int, 0, 10, None),
     FieldSchema("eppf", float, 10, 10, 0.0),
     FieldSchema("etype", int, 20, 10, 0),
+    FieldSchema("pid", int, 30, 10, None),
 )
 
 class ConstrainedTiedNodes(KeywordBase):
@@ -76,8 +77,8 @@ class ConstrainedTiedNodes(KeywordBase):
     @property
     def etype(self) -> int:
         """Get or set the Element type for nodal group:
-        EQ:0: shell,
-        EQ.1: solid element.
+        EQ:0: Shell,
+        EQ.1: Solid element.
         """ # nopep8
         return self._cards[0].get_value("etype")
 
@@ -87,6 +88,17 @@ class ConstrainedTiedNodes(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""etype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("etype", value)
+
+    @property
+    def pid(self) -> typing.Optional[int]:
+        """Get or set the Part ID. With PID>0 and NSID=0, the mesh of the corresponding part is automatically separated (creating new coincident nodes) and reassembled using this tied constraint with failure.This constraint applies to every node in the part. If some original nodes are part of node sets, such as. for boundary conditions, these sets get automatically extended as well. This is currently only supported for shell elements (ETYPE=0).
+        """ # nopep8
+        return self._cards[0].get_value("pid")
+
+    @pid.setter
+    def pid(self, value: int) -> None:
+        """Set the pid property."""
+        self._cards[0].set_value("pid", value)
 
     @property
     def nsid_link(self) -> typing.Optional[KeywordBase]:

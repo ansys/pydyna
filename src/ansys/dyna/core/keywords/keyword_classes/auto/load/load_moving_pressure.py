@@ -158,10 +158,10 @@ class LoadMovingPressure(KeywordBase):
     @property
     def idir(self) -> int:
         """Get or set the Value that determines the direction of the pressure applied on the segments (see Remark 1)
-        EQ.0:	the normal direction of the segments
-        EQ.1 : the direction from the nozzle(NODE1) to the segments
-        EQ.2 : the direction from NODE1 to NODE2
-        EQ.3 : pressure is in the direction from NODE1 to NODE2 but only the normal component is applied on the segments.
+        EQ.0: the normal direction of the segments
+        EQ.1: the direction from the nozzle(NODE1) to the segments
+        EQ.2: the direction from NODE1 to NODE2
+        EQ.3: pressure is in the direction from NODE1 to NODE2 but only the normal component is applied on the segments.
         """ # nopep8
         return self._cards[1].get_value("idir")
 
@@ -175,8 +175,8 @@ class LoadMovingPressure(KeywordBase):
     @property
     def lsflg(self) -> int:
         """Get or set the Line-of-sight flag
-        EQ.0:	see Remark 2
-        EQ.1 : pressure is applied on the first - hit segments from the nozzle
+        EQ.0: see Remark 2
+        EQ.1: pressure is applied on the first - hit segments from the nozzle
         """ # nopep8
         return self._cards[1].get_value("lsflg")
 
@@ -201,10 +201,10 @@ class LoadMovingPressure(KeywordBase):
     @property
     def idtype(self) -> int:
         """Get or set the Value that determines the meaning of variable ID:
-        EQ.0:	ID is a segment set ID,
-        EQ.1:	ID is a shell set ID,
-        EQ.2:	ID is a part set ID,
-        EQ.3:	ID is a part ID,
+        EQ.0: ID is a segment set ID,
+        EQ.1: ID is a shell set ID,
+        EQ.2: ID is a part set ID,
+        EQ.3: ID is a part ID,
         """ # nopep8
         return self._cards[2].get_value("idtype")
 

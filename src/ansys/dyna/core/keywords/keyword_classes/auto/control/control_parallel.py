@@ -62,8 +62,8 @@ class ControlParallel(KeywordBase):
     @property
     def numrhs(self) -> int:
         """Get or set the Number of right-hand sides allocated in memory:
-        EQ.0: same as NCPU, always recommended,
-        EQ.1: allocate only one.
+        EQ.0: Same as NCPU, always recommended,
+        EQ.1: Allocate only one.
         """ # nopep8
         return self._cards[0].get_value("numrhs")
 
@@ -77,8 +77,8 @@ class ControlParallel(KeywordBase):
     @property
     def const(self) -> int:
         """Get or set the Consistency flag for parallel solution (NCPU >1).
-        EQ.1: on
-        EQ.2: off, for a faster solution (default).
+        EQ.1: On
+        EQ.2: Off, for a faster solution (default).
         """ # nopep8
         return self._cards[0].get_value("const")
 
@@ -92,9 +92,9 @@ class ControlParallel(KeywordBase):
     @property
     def para(self) -> int:
         """Get or set the Flag for parallel force assembly if CONST=1.
-        EQ.0: off
-        EQ.1: on
-        EQ.2: on
+        EQ.0: Off
+        EQ.1: On
+        EQ.2: On
         """ # nopep8
         return self._cards[0].get_value("para")
 

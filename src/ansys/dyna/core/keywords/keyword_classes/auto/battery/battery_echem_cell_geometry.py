@@ -27,20 +27,20 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _BATTERYECHEMCELLGEOMETRY_CARD0 = (
-    FieldSchema("imodel", int, 0, 10, None),
+    FieldSchema("cellid", int, 0, 10, None),
     FieldSchema("alen", float, 10, 10, None),
     FieldSchema("slen", float, 20, 10, None),
     FieldSchema("clen", float, 30, 10, None),
-    FieldSchema("acclen", float, 40, 10, None),
-    FieldSchema("cclen", float, 50, 10, None),
+    FieldSchema("cnlen", float, 40, 10, None),
+    FieldSchema("cplen", float, 50, 10, None),
 )
 
 _BATTERYECHEMCELLGEOMETRY_CARD1 = (
-    FieldSchema("amesh", int, 0, 10, None),
-    FieldSchema("smesh", int, 10, 10, None),
-    FieldSchema("cmesh", int, 20, 10, None),
-    FieldSchema("accmesh", int, 30, 10, None),
-    FieldSchema("cccmesh", int, 40, 10, None),
+    FieldSchema("na", int, 0, 10, None),
+    FieldSchema("ns", int, 10, 10, None),
+    FieldSchema("nc", int, 20, 10, None),
+    FieldSchema("nrj", int, 30, 10, 30),
+    FieldSchema("qrad", float, 40, 10, 1.0),
 )
 
 class BatteryEchemCellGeometry(KeywordBase):
@@ -63,19 +63,19 @@ class BatteryEchemCellGeometry(KeywordBase):
             ),
         ]
     @property
-    def imodel(self) -> typing.Optional[int]:
-        """Get or set the A battery model identifier
+    def cellid(self) -> typing.Optional[int]:
+        """Get or set the Optional Battery Cell ID
         """ # nopep8
-        return self._cards[0].get_value("imodel")
+        return self._cards[0].get_value("cellid")
 
-    @imodel.setter
-    def imodel(self, value: int) -> None:
-        """Set the imodel property."""
-        self._cards[0].set_value("imodel", value)
+    @cellid.setter
+    def cellid(self, value: int) -> None:
+        """Set the cellid property."""
+        self._cards[0].set_value("cellid", value)
 
     @property
     def alen(self) -> typing.Optional[float]:
-        """Get or set the The length of anode side electrode
+        """Get or set the Length of the anode side electrode
         """ # nopep8
         return self._cards[0].get_value("alen")
 
@@ -86,7 +86,7 @@ class BatteryEchemCellGeometry(KeywordBase):
 
     @property
     def slen(self) -> typing.Optional[float]:
-        """Get or set the The length of separator
+        """Get or set the Length of the separator
         """ # nopep8
         return self._cards[0].get_value("slen")
 
@@ -97,7 +97,7 @@ class BatteryEchemCellGeometry(KeywordBase):
 
     @property
     def clen(self) -> typing.Optional[float]:
-        """Get or set the The length of cathode side electrode
+        """Get or set the Length of the cathode side electrode
         """ # nopep8
         return self._cards[0].get_value("clen")
 
@@ -107,79 +107,79 @@ class BatteryEchemCellGeometry(KeywordBase):
         self._cards[0].set_value("clen", value)
 
     @property
-    def acclen(self) -> typing.Optional[float]:
-        """Get or set the The length of negative current collector
+    def cnlen(self) -> typing.Optional[float]:
+        """Get or set the Length of the negative current collector
         """ # nopep8
-        return self._cards[0].get_value("acclen")
+        return self._cards[0].get_value("cnlen")
 
-    @acclen.setter
-    def acclen(self, value: float) -> None:
-        """Set the acclen property."""
-        self._cards[0].set_value("acclen", value)
+    @cnlen.setter
+    def cnlen(self, value: float) -> None:
+        """Set the cnlen property."""
+        self._cards[0].set_value("cnlen", value)
 
     @property
-    def cclen(self) -> typing.Optional[float]:
-        """Get or set the The length of positive current collector
+    def cplen(self) -> typing.Optional[float]:
+        """Get or set the Length of the positive current collector
         """ # nopep8
-        return self._cards[0].get_value("cclen")
+        return self._cards[0].get_value("cplen")
 
-    @cclen.setter
-    def cclen(self, value: float) -> None:
-        """Set the cclen property."""
-        self._cards[0].set_value("cclen", value)
+    @cplen.setter
+    def cplen(self, value: float) -> None:
+        """Set the cplen property."""
+        self._cards[0].set_value("cplen", value)
 
     @property
-    def amesh(self) -> typing.Optional[int]:
-        """Get or set the The number of anode side meshes
+    def na(self) -> typing.Optional[int]:
+        """Get or set the Number of elements in the anode electrode
         """ # nopep8
-        return self._cards[1].get_value("amesh")
+        return self._cards[1].get_value("na")
 
-    @amesh.setter
-    def amesh(self, value: int) -> None:
-        """Set the amesh property."""
-        self._cards[1].set_value("amesh", value)
+    @na.setter
+    def na(self, value: int) -> None:
+        """Set the na property."""
+        self._cards[1].set_value("na", value)
 
     @property
-    def smesh(self) -> typing.Optional[int]:
-        """Get or set the The number of separator.
+    def ns(self) -> typing.Optional[int]:
+        """Get or set the Number of elements in the separator.
         """ # nopep8
-        return self._cards[1].get_value("smesh")
+        return self._cards[1].get_value("ns")
 
-    @smesh.setter
-    def smesh(self, value: int) -> None:
-        """Set the smesh property."""
-        self._cards[1].set_value("smesh", value)
+    @ns.setter
+    def ns(self, value: int) -> None:
+        """Set the ns property."""
+        self._cards[1].set_value("ns", value)
 
     @property
-    def cmesh(self) -> typing.Optional[int]:
-        """Get or set the The number of cathode side electrode
+    def nc(self) -> typing.Optional[int]:
+        """Get or set the Number of elements in the cathode electrode
         """ # nopep8
-        return self._cards[1].get_value("cmesh")
+        return self._cards[1].get_value("nc")
 
-    @cmesh.setter
-    def cmesh(self, value: int) -> None:
-        """Set the cmesh property."""
-        self._cards[1].set_value("cmesh", value)
+    @nc.setter
+    def nc(self, value: int) -> None:
+        """Set the nc property."""
+        self._cards[1].set_value("nc", value)
 
     @property
-    def accmesh(self) -> typing.Optional[int]:
-        """Get or set the The number of negative current collector
+    def nrj(self) -> int:
+        """Get or set the Number of particles in the radial direction when solving Solid Phase diffusion equation.
         """ # nopep8
-        return self._cards[1].get_value("accmesh")
+        return self._cards[1].get_value("nrj")
 
-    @accmesh.setter
-    def accmesh(self, value: int) -> None:
-        """Set the accmesh property."""
-        self._cards[1].set_value("accmesh", value)
+    @nrj.setter
+    def nrj(self, value: int) -> None:
+        """Set the nrj property."""
+        self._cards[1].set_value("nrj", value)
 
     @property
-    def cccmesh(self) -> typing.Optional[int]:
-        """Get or set the The number of positive current collector
+    def qrad(self) -> float:
+        """Get or set the Radial mesh geometric grading
         """ # nopep8
-        return self._cards[1].get_value("cccmesh")
+        return self._cards[1].get_value("qrad")
 
-    @cccmesh.setter
-    def cccmesh(self, value: int) -> None:
-        """Set the cccmesh property."""
-        self._cards[1].set_value("cccmesh", value)
+    @qrad.setter
+    def qrad(self, value: float) -> None:
+        """Set the qrad property."""
+        self._cards[1].set_value("qrad", value)
 

@@ -99,7 +99,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @property
     def pida(self) -> typing.Optional[int]:
-        """Get or set the Part ID for rigid body A.  The orientation of PIDB is measured with respect to the coordinate system of PIDA, as defined by LCO on *MAT_RIGID.  If zero then orientation of PIDB is measured with respect to the global reference frame except for BODY=1 in the ANGLES option
+        """Get or set the Part ID for rigid body A. The orientation of PIDB is measured with respect to the coordinate system of PIDA, as defined by LCO on *MAT_RIGID. If zero then orientation of PIDB is measured with respect to the global reference frame except for BODY=1 in the ANGLES option
         """ # nopep8
         return self._cards[0].get_value("pida")
 
@@ -145,9 +145,9 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
     @property
     def toffset(self) -> int:
         """Get or set the Time offset flag:
-        EQ.0:   No time offset is applied.
-        EQ.1:	The time value of all load curves will be offset by the birth time,
-        EQ.0:	no time offset is applied
+        EQ.0: No time offset is applied.
+        EQ.1: The time value of all load curves will be offset by the birth time,
+        EQ.0: no time offset is applied
         """ # nopep8
         return self._cards[0].get_value("toffset")
 
@@ -160,7 +160,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @property
     def lcidc11(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID specifying direction cosine Cij as a function of time.  Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB.  If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
+        """Get or set the Load curve ID specifying direction cosine Cij as a function of time. Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB. If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
         """ # nopep8
         return self._cards[1].get_value("lcidc11")
 
@@ -171,7 +171,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @property
     def lcidc12(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID specifying direction cosine Cij as a function of time.  Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB.  If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
+        """Get or set the Load curve ID specifying direction cosine Cij as a function of time. Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB. If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
         """ # nopep8
         return self._cards[1].get_value("lcidc12")
 
@@ -182,7 +182,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @property
     def lcidc13(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID specifying direction cosine Cij as a function of time.  Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB.  If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
+        """Get or set the Load curve ID specifying direction cosine Cij as a function of time. Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB. If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
         """ # nopep8
         return self._cards[1].get_value("lcidc13")
 
@@ -193,7 +193,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @property
     def lcidc21(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID specifying direction cosine Cij as a function of time.  Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB.  If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
+        """Get or set the Load curve ID specifying direction cosine Cij as a function of time. Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB. If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
         """ # nopep8
         return self._cards[1].get_value("lcidc21")
 
@@ -204,7 +204,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @property
     def lcidc22(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID specifying direction cosine Cij as a function of time.  Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB.  If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
+        """Get or set the Load curve ID specifying direction cosine Cij as a function of time. Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB. If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
         """ # nopep8
         return self._cards[1].get_value("lcidc22")
 
@@ -215,7 +215,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @property
     def lcidc23(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID specifying direction cosine Cij as a function of time.  Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB.  If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
+        """Get or set the Load curve ID specifying direction cosine Cij as a function of time. Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB. If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
         """ # nopep8
         return self._cards[1].get_value("lcidc23")
 
@@ -226,7 +226,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @property
     def lcidc31(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID specifying direction cosine Cij as a function of time.  Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB.  If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
+        """Get or set the Load curve ID specifying direction cosine Cij as a function of time. Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB. If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
         """ # nopep8
         return self._cards[1].get_value("lcidc31")
 
@@ -237,7 +237,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @property
     def lcidc32(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID specifying direction cosine Cij as a function of time.  Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB.  If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
+        """Get or set the Load curve ID specifying direction cosine Cij as a function of time. Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB. If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
         """ # nopep8
         return self._cards[1].get_value("lcidc32")
 
@@ -248,7 +248,7 @@ class BoundaryPrescribedOrientationRigidDircos(KeywordBase):
 
     @property
     def lcidc33(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID specifying direction cosine Cij as a function of time.  Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB.  If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
+        """Get or set the Load curve ID specifying direction cosine Cij as a function of time. Cij is defined as:where ai (i=1,2,3) are mutually perpendicular unit vectors fixed in PIDA and bj (j=1,2,3) are mutually perpendicular unit vectors fixed in PIDB. If PIDA=0 then aj (j=1,2,3) are unit vectors aligned, respectively, with the global axes X, Y, and Z.
         """ # nopep8
         return self._cards[2].get_value("lcidc33")
 

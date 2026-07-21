@@ -114,8 +114,8 @@ class Mat186(KeywordBase):
     @property
     def roflg(self) -> int:
         """Get or set the Flag for whether density is specified per unit area or volume:
-        EQ.0:	Specified density is per unit volume(default).
-        EQ.1 : Specified density is per unit area for controlling the mass of cohesive elements with an initial volume of zero.
+        EQ.0: Specifies density is per unit volume(default).
+        EQ.1: Specifies density is per unit area for controlling the mass of cohesive elements with an initial volume of zero.
         """ # nopep8
         return self._cards[0].get_value("roflg")
 
@@ -128,10 +128,9 @@ class Mat186(KeywordBase):
 
     @property
     def intfail(self) -> typing.Optional[float]:
-        """Get or set the The number of integration points required for the cohesive element to be deleted. The value of INTFAIL may range from 1 to 4 with 1 the recommended value.
-        LT.0.0:	Employs a Newton - Cotes integration scheme and the element will be deleted when | INTFAIL | integration points have failed.
-        EQ.0.0 : Employs a Newton - Cotes integration scheme and the element will not be deleted even if it satisfies the failure criterion.
-        GT.0.0 : Employs a Gauss integration scheme and the element will be deleted when INTFAIL integration points have failed.
+        """Get or set the The number of integration points required for the cohesive element to be deleted.The value of INTFAIL may range from 1 to 4 with 1 the recommended value.
+        EQ.0.0: Employs a Newton - Cotes integration scheme.The element will not be deleted even if it satisfies the failure criterion.
+        GT.0.0 : Employs a Gauss integration scheme.The element will be deleted when INTFAIL integration points have failed.
         """ # nopep8
         return self._cards[0].get_value("intfail")
 
@@ -143,6 +142,9 @@ class Mat186(KeywordBase):
     @property
     def tes(self) -> typing.Optional[float]:
         """Get or set the Type of effective separation parameter (ESP).
+        EQ.0.0: A dimensional separation measure is used.For the interaction between modes I and II, a mixed - mode propagation criterion is given by a power law.See Remarks 1 and 2.
+        EQ.1.0: A dimensional separation measure is used.For the interaction between modes I and II, a mixed - mode propagation criterion is given by the Benzeggagh - Kenane law[1996].See Remarks 1 and 2.
+        EQ.2.0: A dimensionless separation measure is used for the interaction between mode I displacementsand mode II displacements(similar to *MAT_185, but with damage and general traction - separation law).See Remarks 1 and 3.
         """ # nopep8
         return self._cards[0].get_value("tes")
 
@@ -153,7 +155,7 @@ class Mat186(KeywordBase):
 
     @property
     def tslc(self) -> typing.Optional[int]:
-        """Get or set the Normalized traction-separation load curve ID. The curve must be normalized in both coordinates and must contain at least three points: (0.0, 0.0), (lambda_0, 1.0), and (1.0, 0.0), which represents the origin, the peak and the complete failure, respectively (see Figure 186.1). A platform can exist in the curve like the tri-linear TSLC (see MAT_185).
+        """Get or set the Normalized traction-separation load curve ID. The curve must be normalized in both coordinates and must contain at least three points: (0.0,0.0), (lambda_0,1.0), and (1.0,0.0). These points represent the origin, the peak, and the complete failure, respectively (see Figure 0-1). A platform can exist in the curve like the trilinear TSLC (see *MAT_185). See Remark 1
         """ # nopep8
         return self._cards[0].get_value("tslc")
 
@@ -164,7 +166,7 @@ class Mat186(KeywordBase):
 
     @property
     def gic(self) -> typing.Optional[float]:
-        """Get or set the Fracture toughness / energy release rate   for mode I.
+        """Get or set the Fracture toughness / energy release rate for mode I.
         """ # nopep8
         return self._cards[0].get_value("gic")
 
@@ -175,7 +177,7 @@ class Mat186(KeywordBase):
 
     @property
     def giic(self) -> typing.Optional[float]:
-        """Get or set the Fracture toughness / energy release rate   for mode II.
+        """Get or set the Fracture toughness / energy release rate for mode II.
         """ # nopep8
         return self._cards[0].get_value("giic")
 
@@ -219,7 +221,7 @@ class Mat186(KeywordBase):
 
     @property
     def stfsf(self) -> typing.Optional[float]:
-        """Get or set the Penetration stiffness multiplier for compression. Factor = (1.0+STFSF) is used to scale the compressive stiffness, i.e. no scaling is done with STFSF=0.0 (recommended).
+        """Get or set the Penetration stiffness multiplier for compression. Factor = (1.0+STFSF) is used to scale the compressive stiffness, that is no scaling is done with STFSF=0.0 (recommended).
         """ # nopep8
         return self._cards[1].get_value("stfsf")
 
@@ -230,7 +232,7 @@ class Mat186(KeywordBase):
 
     @property
     def tslc2(self) -> typing.Optional[float]:
-        """Get or set the Normalized traction-separation load curve ID for Mode II. The curve must be normalized in both coordinates and must contain at least three points: (0.0,0.0), (λ_0,1.0), and (1.0,0.0), which represents the origin, the peak and the complete failure, respectively. If not specified, TSLC is used for Mode II behavior as well
+        """Get or set the Normalized traction-separation load curve ID for Mode II. The curve must be normalized in both coordinates and must contain at least three points: (0.0,0.0), (lambda_0,1.0), and (1.0,0.0), which represents the origin, the peak and the complete failure, respectively. If not specified, TSLC is used for Mode II behavior as well
         """ # nopep8
         return self._cards[1].get_value("tslc2")
 

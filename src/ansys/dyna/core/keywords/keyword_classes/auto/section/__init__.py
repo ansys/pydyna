@@ -27,9 +27,11 @@ from .section_ale2d import SectionAle2D
 from .section_beam import SectionBeam
 from .section_beam_aisc import SectionBeamAisc
 from .section_discrete import SectionDiscrete
+from .section_efv import SectionEfv
 from .section_fpd import SectionFpd
 from .section_iga_shell import SectionIgaShell
 from .section_iga_solid import SectionIgaSolid
+from .section_ispg import SectionIspg
 from .section_point_source import SectionPointSource
 from .section_point_source_mixture import SectionPointSourceMixture
 from .section_seatbelt import SectionSeatbelt

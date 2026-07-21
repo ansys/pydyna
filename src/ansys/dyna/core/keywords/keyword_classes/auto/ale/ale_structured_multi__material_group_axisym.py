@@ -28,7 +28,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 
 _ALESTRUCTUREDMULTI_MATERIALGROUPAXISYM_CARD0 = (
-    FieldSchema("ammg_name", str, 0, 10, None),
+    FieldSchema("ammgnm", int, 0, 10, None),
     FieldSchema("mid", int, 10, 10, None),
     FieldSchema("eosid", int, 20, 10, None),
     FieldSchema("unused", int, 30, 10, None),
@@ -57,15 +57,15 @@ class AleStructuredMulti_MaterialGroupAxisym(KeywordBase):
             ),
         ]
     @property
-    def ammg_name(self) -> typing.Optional[str]:
+    def ammgnm(self) -> typing.Optional[int]:
         """Get or set the AMMG name. Required to identify the AMMG (S-ALE fluid); Not case sensitive and need to be unique; See remark 2.
         """ # nopep8
-        return self._cards[0].get_value("ammg_name")
+        return self._cards[0].get_value("ammgnm")
 
-    @ammg_name.setter
-    def ammg_name(self, value: str) -> None:
-        """Set the ammg_name property."""
-        self._cards[0].set_value("ammg_name", value)
+    @ammgnm.setter
+    def ammgnm(self, value: int) -> None:
+        """Set the ammgnm property."""
+        self._cards[0].set_value("ammgnm", value)
 
     @property
     def mid(self) -> typing.Optional[int]:

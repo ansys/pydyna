@@ -207,8 +207,7 @@ class Mat211(KeywordBase):
 
     @property
     def lcaxh(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID, see *DEFINE_CURVE, giving axial force versus
-        deformation (head)..
+        """Get or set the Load curve ID, see *DEFINE_CURVE, giving axial force versus deformation (head).
         """ # nopep8
         return self._cards[1].get_value("lcaxh")
 
@@ -219,8 +218,7 @@ class Mat211(KeywordBase):
 
     @property
     def lcshh(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID, see *DEFINE_CURVE, giving shear force versus
-        deformation (head).
+        """Get or set the Load curve ID, see *DEFINE_CURVE, giving shear force versus deformation (head).
         """ # nopep8
         return self._cards[1].get_value("lcshh")
 
@@ -231,8 +229,7 @@ class Mat211(KeywordBase):
 
     @property
     def lcbmh(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID, see *DEFINE_CURVE, giving moment versus
-        rotation (head).
+        """Get or set the Load curve ID, see *DEFINE_CURVE, giving moment versus rotation (head).
         """ # nopep8
         return self._cards[1].get_value("lcbmh")
 

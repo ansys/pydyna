@@ -34,8 +34,8 @@ _SETNODEGENERAL_CARD0 = (
     FieldSchema("da3", float, 30, 10, 0.0),
     FieldSchema("da4", float, 40, 10, 0.0),
     FieldSchema("solver", str, 50, 10, "MECH"),
-    FieldSchema("its", str, 60, 10, "1"),
-    FieldSchema("unused", str, 70, 10, None),
+    FieldSchema("its", int, 60, 10, 1),
+    FieldSchema("unused", int, 70, 10, None),
 )
 
 _SETNODEGENERAL_CARD1 = (
@@ -47,6 +47,17 @@ _SETNODEGENERAL_CARD1 = (
     FieldSchema("e5", int, 50, 10, None),
     FieldSchema("e6", int, 60, 10, None),
     FieldSchema("e7", int, 70, 10, None),
+)
+
+_SETNODEGENERAL_CARD2 = (
+    FieldSchema("option", str, 0, 10, "ALL"),
+    FieldSchema("mshid", int, 10, 10, None),
+    FieldSchema("imin", int, 20, 10, None),
+    FieldSchema("imax", int, 30, 10, None),
+    FieldSchema("jmin", int, 40, 10, None),
+    FieldSchema("jmax", int, 50, 10, None),
+    FieldSchema("kmin", int, 60, 10, None),
+    FieldSchema("kmax", int, 70, 10, None),
 )
 
 _SETNODEGENERAL_OPTION0_CARD0 = (
@@ -73,6 +84,10 @@ class SetNodeGeneral(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _SETNODEGENERAL_CARD1,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _SETNODEGENERAL_CARD2,
                 **kwargs,
             ),
             OptionCardSet(
@@ -157,53 +172,48 @@ class SetNodeGeneral(KeywordBase):
         self._cards[0].set_value("solver", value)
 
     @property
-    def its(self) -> str:
+    def its(self) -> int:
         """Get or set the Specify coupling type across different scales in two-scale co-simulation. This flag should only be included for node sets that provide coupling information in the input file referred to by *INCLUDE_COSIM;
-        EQ.1:	Tied contact coupling
-        EQ.2 : Solid - in - shell immersed coupling
+        EQ.1: Tied contact coupling
+        EQ.2: Solid - in - shell immersed coupling
         """ # nopep8
         return self._cards[0].get_value("its")
 
     @its.setter
-    def its(self, value: str) -> None:
+    def its(self, value: int) -> None:
         """Set the its property."""
-        if value not in ["1", "2", None]:
-            raise Exception("""its must be `None` or one of {"1","2"}.""")
+        if value not in [1, 2, None]:
+            raise Exception("""its must be `None` or one of {1,2}.""")
         self._cards[0].set_value("its", value)
 
     @property
     def option(self) -> str:
-        """Get or set the OPTION.EQ.ALL: All nodes will be included in the set,
-        OPTION.EQ.NODE: Nodes E1...E7 will be included in the current set,
-        OPTION.EQ.DNODE: Nodes E1...E7 previously added will be excluded from the current set,
-        OPTION.EQ.PART: Nodes from parts E1...E7 will be included in the current set,
-        OPTION.EQ.DPART: Nores from parts E1...E7 previously added will be excluded from the current set,
-        OPTION.EQ.BOX: Nodes inside boxes E1...E7 will be included in the current set,
-        OPTION.EQ.DBOX: Nodes inside boxes E1...E7 previously added will be excluded from the current set.
-        OPTION.EQ.SALECPT:	Nodes inside a box in Structured ALE mesh. E1 here is the S-ALE mesh
-        ID (MSHID). E2, E3, E4, E5, E6, E7 correspond to XMIN, XMAX,
-        YMIN, YMAX, ZMIN, ZMAX. They are the minimum and the
-        maximum nodal indices along each direction in S-ALE mesh. This
-        option is only to be used for Structured ALE mesh and should not be
-        used in a mixed manner with other  _GENERAL  options.
-        Please refer to *ALE_STRUCTURED_MESH_CONTROL_POINTS
-        and *ALE_STRUCTURED_MESH_CONTROL for more details.
-        OPTION.EQ.SALEFAC: Nodes on the face of Structured ALE mesh. E1 here is the S-ALE mesh
-        ID (MSHID). E2, E3, E4, E5, E6, E7 correspond to -X, +X, -Y, +Y, -Z,
-        +Z faces. Assigning 1 to these 6 values would include all the surface
-        segments at these faces in the segment set. This option is only to be
-        used for Structured ALE mesh and should not be used in a mixed
-        manner with other  _GENERAL  options.
-        Please refer to *ALE_STRUCTURED_MESH_CONTROL_POINTS
-        and *ALE_STRUCTURED_MESH_CONTROL for more details.
+        """Get or set the EQ.ALL: All nodes will be included in the set.
+        EQ.BRANCH: Nodes inside tree branches E1, E2, E3, � will be included.  (see *SET_PART_TREE)
+        EQ.DBRANCH: Previously added nodes that are inside tree branches E1, E2, E3, � will be excluded.
+        EQ.BOX: Nodes inside boxes E1, E2, E3, � will be included.  (see *DEFINE_BOX)
+        EQ.DBOX: Previously added nodes that are inside boxes E1, E2, E3, � will be excluded.
+        EQ.NODE: Nodes E1, E2, E3, � will be included.
+        EQ.DNODE: Nodes E1, E2, E3, � if previously added will be excluded.
+        EQ.PART: Nodes of parts E1, E2, E3, � will be included.
+        EQ.DPART: Nodes that have been previously added and are of parts E1, E2, E3, � will be excluded.
+        EQ.SALECPT: Nodes inside a box in a structured ALE (S-ALE) mesh. E1 here is the S-ALE mesh ID (MSHID).  E2, E3, E4, E5, E6, E7 correspond to IMIN, IMAX, JMIN, JMAX, KMIN, KMAX.  They are the minimum and the maximum nodal indices along each direction in S-ALE mesh. To include all nodes in the S-ALE mesh defined by E1, set values E2�E7 to zero or leave them blank. This option can only be used for S-ALE meshes. It can be used with options SALECPT, SALEFAC, and SALEBOXL but should not be used with other GENERAL options. Please refer to *ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details.
+        EQ.SALEFAC: Nodes that are on the face of an S-ALE mesh.  E1 gives the S-ALE mesh ID (MSHID).  E2, E3, E4, E5, E6, E7 correspond to -x, +x, -y, +y, -z, +z faces.  Assigning 1, for instance, to these six values would include nodes belonging to all the surface segments at these faces in the node set.  This option is can only be used for S-ALE meshes. It can be used with options SALECPT, SALEFAC, and SALEBOXL but should not be used with other GENERAL options. For trimmed S-ALE meshes (see *ALE_STRUCTURED_MESH_TRIM), a segment is treated as a surface segment as long as it has no neighboring element along the specified direction.  The set, thus, includes the nodes of surface segments belonging to exterior and interior boundaries.Please refer to *ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details.
+        EQ.SALEBOXL: Nodes inside a box in a structured ALE (S-ALE) mesh. E1 here is the S-ALE mesh ID (MSHID).  E2, E3, E4, E5, E6, and E7 correspond to XMIN, XMAX, YMIN, YMAX, ZMIN, and ZMAX.  They are the minimum and the maximum nodal local coordinates, as defined in *ALE_STRUCTURED_MESH_CONTROL_POINTS, along each direction in an S-ALE mesh.  This option can only be used for S-ALE meshes. It can be used with options SALECPT, SALEFAC, and SALEBOXL but should not be used with other GENERAL options.Please refer to *ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details.
+        EQ.SET_NODE: Nodes from node sets with IDs E1, �, E7 will be included.
+        EQ.DSET_NODE: Nodes that have been previously added and are from node sets with IDs E1, �, E7 will be excluded.
+        EQ.SET_XXXX: Include nodal points of element sets defined by *SET_XXXX, where XXXX could be SHELL, SOLID, BEAM, TSHELL, or DISCRETE.
+        EQ.SET_PART: Include nodal points in part sets E1, �, E7.
+        EQ.VOL: Nodes inside contact volumes E1, E2, E3, � will be included.  See *DEFINE_CONTACT_VOLUME.
+        EQ.DVOL: Previously added nodes that are inside contact volumes E1, E2, E3, � will be excluded.
         """ # nopep8
         return self._cards[1].get_value("option")
 
     @option.setter
     def option(self, value: str) -> None:
         """Set the option property."""
-        if value not in ["ALL", "NODE", "DNODE", "PART", "DPART", "BOX", "DBOX", "VOL", "DVOL", "SET_SOLID", "SET_SLDIO", "SET_SHELL", "SALECPT", "SALEFAC", None]:
-            raise Exception("""option must be `None` or one of {"ALL","NODE","DNODE","PART","DPART","BOX","DBOX","VOL","DVOL","SET_SOLID","SET_SLDIO","SET_SHELL","SALECPT","SALEFAC"}.""")
+        if value not in ["ALL", "BRANCH", "DBRANCH", "BOX", "DBOX", "NODE", "DNODE", "PART", "DPART", "SALECPT", "SALEFAC", "SALEBOXL", "SET_NODE", "DSET_NODE", "SET_SHELL", "SET_SOLID", "SET_BEAM", "SET_TSHELL", "SET_PART", "VOL", "DVOL", None]:
+            raise Exception("""option must be `None` or one of {"ALL","BRANCH","DBRANCH","BOX","DBOX","NODE","DNODE","PART","DPART","SALECPT","SALEFAC","SALEBOXL","SET_NODE","DSET_NODE","SET_SHELL","SET_SOLID","SET_BEAM","SET_TSHELL","SET_PART","VOL","DVOL"}.""")
         self._cards[1].set_value("option", value)
 
     @property
@@ -326,15 +336,122 @@ class SetNodeGeneral(KeywordBase):
         self._cards[1].set_value("e7", value)
 
     @property
+    def option(self) -> str:
+        """Get or set the EQ.ALL: All nodes will be included in the set.
+        EQ.BRANCH: Nodes inside tree branches E1, E2, E3, � will be included.  (see *SET_PART_TREE)
+        EQ.DBRANCH: Previously added nodes that are inside tree branches E1, E2, E3, � will be excluded.
+        EQ.BOX: Nodes inside boxes E1, E2, E3, � will be included.  (see *DEFINE_BOX)
+        EQ.DBOX: Previously added nodes that are inside boxes E1, E2, E3, � will be excluded.
+        EQ.NODE: Nodes E1, E2, E3, � will be included.
+        EQ.DNODE: Nodes E1, E2, E3, � if previously added will be excluded.
+        EQ.PART: Nodes of parts E1, E2, E3, � will be included.
+        EQ.DPART: Nodes that have been previously added and are of parts E1, E2, E3, � will be excluded.
+        EQ.SALECPT: Nodes inside a box in a structured ALE (S-ALE) mesh. E1 here is the S-ALE mesh ID (MSHID).  E2, E3, E4, E5, E6, E7 correspond to IMIN, IMAX, JMIN, JMAX, KMIN, KMAX.  They are the minimum and the maximum nodal indices along each direction in S-ALE mesh.  This option can only be used for S-ALE meshes. It can be used with options SALECPT, SALEFAC, and SALEBOXL but should not be used with other GENERAL options. Please refer to *ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details.
+        EQ.SALEFAC: Nodes that are on the face of an S-ALE mesh.  E1 gives the S-ALE mesh ID (MSHID).  E2, E3, E4, E5, E6, E7 correspond to -x, +x, -y, +y, -z, +z faces.  Assigning 1, for instance, to these six values would include nodes belonging to all the surface segments at these faces in the node set.  This option is can only be used for S-ALE meshes. It can be used with options SALECPT, SALEFAC, and SALEBOXL but should not be used with other GENERAL options. For trimmed S-ALE meshes (see *ALE_STRUCTURED_MESH_TRIM), a segment is treated as a surface segment as long as it has no neighboring element along the specified direction.  The set, thus, includes the nodes of surface segments belonging to exterior and interior boundaries.Please refer to *ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details.
+        EQ.SALEBOXL: Nodes inside a box in a structured ALE (S-ALE) mesh. E1 here is the S-ALE mesh ID (MSHID).  E2, E3, E4, E5, E6, and E7 correspond to XMIN, XMAX, YMIN, YMAX, ZMIN, and ZMAX.  They are the minimum and the maximum nodal local coordinates, as defined in *ALE_STRUCTURED_MESH_CONTROL_POINTS, along each direction in an S-ALE mesh.  This option can only be used for S-ALE meshes. It can be used with options SALECPT, SALEFAC, and SALEBOXL but should not be used with other GENERAL options.Please refer to *ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details.
+        EQ.SET_NODE: Nodes from node sets with IDs E1, �, E7 will be included.
+        EQ.DSET_NODE: Nodes that have been previously added and are from node sets with IDs E1, �, E7 will be excluded.
+        EQ.SET_XXXX: Include nodal points of element sets defined by *SET_XXXX, where XXXX could be SHELL, SOLID, BEAM, TSHELL, or DISCRETE.
+        EQ.SET_PART: Include nodal points in part sets E1, �, E7.
+        EQ.VOL: Nodes inside contact volumes E1, E2, E3, � will be included.  See *DEFINE_CONTACT_VOLUME.
+        EQ.DVOL: Previously added nodes that are inside contact volumes E1, E2, E3, � will be excluded.
+        """ # nopep8
+        return self._cards[2].get_value("option")
+
+    @option.setter
+    def option(self, value: str) -> None:
+        """Set the option property."""
+        if value not in ["ALL", "BRANCH", "DBRANCH", "BOX", "DBOX", "NODE", "DNODE", "PART", "DPART", "SALECPT", "SALEFAC", "SALEBOXL", "SET_NODE", "DSET_NODE", "SET_SHELL", "SET_SOLID", "SET_BEAM", "SET_TSHELL", "SET_PART", "VOL", "DVOL", None]:
+            raise Exception("""option must be `None` or one of {"ALL","BRANCH","DBRANCH","BOX","DBOX","NODE","DNODE","PART","DPART","SALECPT","SALEFAC","SALEBOXL","SET_NODE","DSET_NODE","SET_SHELL","SET_SOLID","SET_BEAM","SET_TSHELL","SET_PART","VOL","DVOL"}.""")
+        self._cards[2].set_value("option", value)
+
+    @property
+    def mshid(self) -> typing.Optional[int]:
+        """Get or set the S-ALE mesh ID.
+        """ # nopep8
+        return self._cards[2].get_value("mshid")
+
+    @mshid.setter
+    def mshid(self, value: int) -> None:
+        """Set the mshid property."""
+        self._cards[2].set_value("mshid", value)
+
+    @property
+    def imin(self) -> typing.Optional[int]:
+        """Get or set the The minimum nodal indices along X in S-ALE mesh.
+        """ # nopep8
+        return self._cards[2].get_value("imin")
+
+    @imin.setter
+    def imin(self, value: int) -> None:
+        """Set the imin property."""
+        self._cards[2].set_value("imin", value)
+
+    @property
+    def imax(self) -> typing.Optional[int]:
+        """Get or set the The maximum nodal indices along X in S-ALE mesh.
+        """ # nopep8
+        return self._cards[2].get_value("imax")
+
+    @imax.setter
+    def imax(self, value: int) -> None:
+        """Set the imax property."""
+        self._cards[2].set_value("imax", value)
+
+    @property
+    def jmin(self) -> typing.Optional[int]:
+        """Get or set the The minimum nodal indices along Y in S-ALE mesh.
+        """ # nopep8
+        return self._cards[2].get_value("jmin")
+
+    @jmin.setter
+    def jmin(self, value: int) -> None:
+        """Set the jmin property."""
+        self._cards[2].set_value("jmin", value)
+
+    @property
+    def jmax(self) -> typing.Optional[int]:
+        """Get or set the The maximum nodal indices along Y in S-ALE mesh.
+        """ # nopep8
+        return self._cards[2].get_value("jmax")
+
+    @jmax.setter
+    def jmax(self, value: int) -> None:
+        """Set the jmax property."""
+        self._cards[2].set_value("jmax", value)
+
+    @property
+    def kmin(self) -> typing.Optional[int]:
+        """Get or set the The minimum nodal indices along Z in S-ALE mesh.
+        """ # nopep8
+        return self._cards[2].get_value("kmin")
+
+    @kmin.setter
+    def kmin(self, value: int) -> None:
+        """Set the kmin property."""
+        self._cards[2].set_value("kmin", value)
+
+    @property
+    def kmax(self) -> typing.Optional[int]:
+        """Get or set the The maximum nodal indices along Z in S-ALE mesh.
+        """ # nopep8
+        return self._cards[2].get_value("kmax")
+
+    @kmax.setter
+    def kmax(self, value: int) -> None:
+        """Set the kmax property."""
+        self._cards[2].set_value("kmax", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[2].cards[0].get_value("title")
+        return self._cards[3].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[2].cards[0].set_value("title", value)
+        self._cards[3].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

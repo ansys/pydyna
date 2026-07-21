@@ -81,9 +81,9 @@ class ControlReferenceConfiguration(KeywordBase):
     @property
     def method(self) -> typing.Optional[int]:
         """Get or set the Iterative method
-        EQ.0 : Sellier’s method
-        EQ.1 : Rausch’s method
-        EQ.3:Rausch’s method with an additional line search.
+        EQ.0: Selliers method
+        EQ.1: Rauschs method
+        EQ.3:Rauschs method with an additional line search.
         """ # nopep8
         return self._cards[1].get_value("method")
 
@@ -94,7 +94,7 @@ class ControlReferenceConfiguration(KeywordBase):
 
     @property
     def step(self) -> float:
-        """Get or set the The step size used in the iterations to update the current approximate reference geometry for Sellier’s method. It must be > 0.
+        """Get or set the The step size used in the iterations to update the current approximate reference geometry for Selliers method. It must be > 0.
         """ # nopep8
         return self._cards[1].get_value("step")
 

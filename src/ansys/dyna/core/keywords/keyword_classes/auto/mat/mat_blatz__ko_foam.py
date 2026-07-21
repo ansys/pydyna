@@ -32,6 +32,10 @@ _MATBLATZ_KOFOAM_CARD0 = (
     FieldSchema("ro", float, 10, 10, None),
     FieldSchema("g", float, 20, 10, None),
     FieldSchema("ref", float, 30, 10, 0.0),
+    FieldSchema("imodel", int, 40, 10, 0),
+    FieldSchema("pr", float, 50, 10, 0.25),
+    FieldSchema("fmod", float, 60, 10, 0.0),
+    FieldSchema("xlinv", float, 70, 10, 2.0),
 )
 
 _MATBLATZ_KOFOAM_OPTION0_CARD0 = (
@@ -102,9 +106,9 @@ class MatBlatz_KoFoam(KeywordBase):
 
     @property
     def ref(self) -> float:
-        """Get or set the Use reference geometry to initialize the stress tensor, see *INITIAL_FOAM_REFERENCE_GEOMETRY (only 8-noded solid elements with one point integration):
-        EQ.0.0: off (default),
-        EQ.1.0: on.
+        """Get or set the Use reference geometry to initialize the stress tensor.  *INITIAL_FOAM_REFERENCE_GEOMETRY defines the reference geometry.
+        EQ.0.0: Off
+        EQ.1.0 : On
         """ # nopep8
         return self._cards[0].get_value("ref")
 
@@ -114,6 +118,55 @@ class MatBlatz_KoFoam(KeywordBase):
         if value not in [0.0, 1.0, None]:
             raise Exception("""ref must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("ref", value)
+
+    @property
+    def imodel(self) -> int:
+        """Get or set the Model selection (optional):
+        EQ.0: Default foam model with a constant Poisson's ratio set to 0.25.See Remark 1.
+        EQ.1 : General Blatz - Ko model with an interpolation factor set with FMOD and Poisson's ratio specified in field PR.See Remark 2.
+        EQ.2 : Ciambella model(Ciambella and Saccomandi[2014]) with an interpolation factor set with FMOD and a Poisson's ratio specified with PR.See Remark 3.
+        """ # nopep8
+        return self._cards[0].get_value("imodel")
+
+    @imodel.setter
+    def imodel(self, value: int) -> None:
+        """Set the imodel property."""
+        if value not in [0, 1, 2, None]:
+            raise Exception("""imodel must be `None` or one of {0,1,2}.""")
+        self._cards[0].set_value("imodel", value)
+
+    @property
+    def pr(self) -> float:
+        """Get or set the Poisson's ratio for IMODEL = 1 and 2. This field is optional. Only a physically valid value, meaning -1.0 < PR < 0.5, is accepted. If this value is not given or an invalid value is specified, the default value of 0.25 is used
+        """ # nopep8
+        return self._cards[0].get_value("pr")
+
+    @pr.setter
+    def pr(self, value: float) -> None:
+        """Set the pr property."""
+        self._cards[0].set_value("pr", value)
+
+    @property
+    def fmod(self) -> float:
+        """Get or set the Interpolation factor (0.0 <= f <= 1.0) to adjust the behavior in the General Blatz-Ko (IMODEL = 1) and Ciambella (IMODEL = 2) models.  For the General Blatz-Ko model, f = 0.0 corresponds to a purely foam-like (f = 0.0) and f = 1.0 to a purely rubber-like response. See Remarks 2 and 3.
+        """ # nopep8
+        return self._cards[0].get_value("fmod")
+
+    @fmod.setter
+    def fmod(self, value: float) -> None:
+        """Set the fmod property."""
+        self._cards[0].set_value("fmod", value)
+
+    @property
+    def xlinv(self) -> float:
+        """Get or set the Stretch value, λ_I, at which the material reverts from its auxetic behavior to the normal behavior for the Ciambella model. It is optional and only used by IMODEL = 2. See Remark 3
+        """ # nopep8
+        return self._cards[0].get_value("xlinv")
+
+    @xlinv.setter
+    def xlinv(self, value: float) -> None:
+        """Set the xlinv property."""
+        self._cards[0].set_value("xlinv", value)
 
     @property
     def title(self) -> typing.Optional[str]:

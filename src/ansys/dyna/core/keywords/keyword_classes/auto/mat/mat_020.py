@@ -42,6 +42,10 @@ _MAT020_CARD1 = (
     FieldSchema("cmo", float, 0, 10, 0.0),
     FieldSchema("con1", float, 10, 10, None),
     FieldSchema("con2", float, 20, 10, None),
+    FieldSchema("spcnid", int, 30, 10, None),
+    FieldSchema("xspc", float, 40, 10, None),
+    FieldSchema("yspc", float, 50, 10, None),
+    FieldSchema("zspc", float, 60, 10, None),
 )
 
 _MAT020_CARD2 = (
@@ -51,6 +55,7 @@ _MAT020_CARD2 = (
     FieldSchema("v1", float, 30, 10, None),
     FieldSchema("v2", float, 40, 10, None),
     FieldSchema("v3", float, 50, 10, None),
+    FieldSchema("bndlco", int, 60, 10, 0),
 )
 
 _MAT020_OPTION0_CARD0 = (
@@ -167,8 +172,8 @@ class Mat020(KeywordBase):
     @couple.setter
     def couple(self, value: float) -> None:
         """Set the couple property."""
-        if value not in [0, -1, 1, 2, None]:
-            raise Exception("""couple must be `None` or one of {0,-1,1,2}.""")
+        if value not in [0.0, -1.0, 1.0, 2.0, None]:
+            raise Exception("""couple must be `None` or one of {0.0,-1.0,1.0,2.0}.""")
         self._cards[0].set_value("couple", value)
 
     @property
@@ -197,34 +202,35 @@ class Mat020(KeywordBase):
 
     @property
     def cmo(self) -> float:
-        """Get or set the Center of mass constraint option, CMO:
-        EQ.+1: constraints applied in global directions,
-        EQ.0: no constraints
-        EQ.-1: constraints applied in local directions (SPC constraint).
+        """Get or set the Constraint option, CMO (see Remark 5):
+        EQ.+2.0: Constraints applied in global directions at the coordinate given by XSPC, YSPCand ZSPC or the initial coordinates of node SPCNID.Unless prescribed motion is applied to the rigid body, the constraint coordinates are fixed in time.
+        EQ.+1.0: Constraints applied in global directions,
+        EQ.0.0: No constraints,
+        EQ.-1.0: Constraints applied in local directions(SPC constraint).
+        EQ.-2.0: Constraints applied in local directions(SPC constraint) at the coordinate given by XSPC, YSPCand ZSPC or the initial coordinates of node SPCNID.Unless prescribed motion is applied to the rigid body, the constraint coordinates are fixed in time.
         """ # nopep8
         return self._cards[1].get_value("cmo")
 
     @cmo.setter
     def cmo(self, value: float) -> None:
         """Set the cmo property."""
-        if value not in [0.0, -1.0, 1.0, None]:
-            raise Exception("""cmo must be `None` or one of {0.0,-1.0,1.0}.""")
+        if value not in [0.0, -1.0, 1.0, -2.0, 2.0, None]:
+            raise Exception("""cmo must be `None` or one of {0.0,-1.0,1.0,-2.0,2.0}.""")
         self._cards[1].set_value("cmo", value)
 
     @property
     def con1(self) -> typing.Optional[float]:
-        """Get or set the Global translational constraint:
-        EQ.0: no constraints,
-        EQ.1: constrained x displacement,
-        EQ.2: constrained y displacement,
-        EQ.3: constrained z displacement,
-        EQ.4: constrained x and y displacements,
-        EQ.5: constrained y and z displacements,
-        EQ.6: constrained z and x displacements,
-        EQ.7: constrained x, y, and z displacements.
-
-        If CM0=-1.0:
-        Define local coordinate system ID. See *DEFINE_ COORDINATE_OPTION: This coordinate system is fixed in time.
+        """Get or set the First constraint parameter.
+        If CMO > 0.0, then specify the global translational constraint:
+        EQ.0: No constraints,
+        EQ.1: Constrained x displacement,
+        EQ.2: Constrained y displacement,
+        EQ.3: Constrained z displacement,
+        EQ.4: Constrained x and y displacements,
+        EQ.5: Constrained y and z displacements,
+        EQ.6: Constrained z and x displacements,
+        EQ.7: Constrained x, y,and z displacements.
+        If CMO < 0.0, then specify the local coordinate system ID. See *DEFINE_COORDINATE_OPTION. This coordinate system is fixed in time.
         """ # nopep8
         return self._cards[1].get_value("con1")
 
@@ -235,24 +241,25 @@ class Mat020(KeywordBase):
 
     @property
     def con2(self) -> typing.Optional[float]:
-        """Get or set the Global rotational constraint:
-        EQ.0: no constraints,
-        EQ.1: constrained x rotation,
-        EQ.2: constrained y rotation,
-        EQ.3: constrained z rotation,
-        EQ.4: constrained x and y rotations,
-        EQ.5: constrained y and z rotations,
-        EQ.6: constrained z and x rotations,
-        EQ.7: constrained x, y, and z rotations.
-
-        If CM0=-1.0:
-        EQ.000000 no constraint,
-        EQ.100000 constrained x translation,
-        EQ.010000 constrained y translation,
-        EQ.001000 constrained z translation,
-        EQ.000100 constrained x rotation,
-        EQ.000010 constrained y rotation,
-        EQ.000001 constrained z rotation.
+        """Get or set the Second constraint parameter:
+        If CMO > 0.0, then specify the global rotational constraint:
+        EQ.0: No constraints,
+        EQ.1: Constrained x rotation,
+        EQ.2: Constrained y rotation,
+        EQ.3: Constrained z rotation,
+        EQ.4: Constrained x and y rotations,
+        EQ.5: Constrained y and z rotations,
+        EQ.6: Constrained z and x rotations,
+        EQ.7: Constrained x, y,and z rotations.
+        If CMO < 0.0, then specify the local (SPC) constraint:
+        EQ.000000: No constraint,
+        EQ.100000: Constrained x translation,
+        EQ.010000: Constrained y translation,
+        EQ.001000: Constrained z translation,
+        EQ.000100: Constrained x rotation,
+        EQ.000010: Constrained y rotation,
+        EQ.000001: Constrained z rotation.
+        To specify a combination of local constraints, input the sum of the desired constraints.
         """ # nopep8
         return self._cards[1].get_value("con2")
 
@@ -260,6 +267,50 @@ class Mat020(KeywordBase):
     def con2(self, value: float) -> None:
         """Set the con2 property."""
         self._cards[1].set_value("con2", value)
+
+    @property
+    def spcnid(self) -> typing.Optional[int]:
+        """Get or set the For |CMO| = 2.0, the constraints coordinates (see below) will be the (initial) coordinates of the node with this ID.
+        """ # nopep8
+        return self._cards[1].get_value("spcnid")
+
+    @spcnid.setter
+    def spcnid(self, value: int) -> None:
+        """Set the spcnid property."""
+        self._cards[1].set_value("spcnid", value)
+
+    @property
+    def xspc(self) -> typing.Optional[float]:
+        """Get or set the Coordinate where the constraint will act. Superseded by SPCNID.
+        """ # nopep8
+        return self._cards[1].get_value("xspc")
+
+    @xspc.setter
+    def xspc(self, value: float) -> None:
+        """Set the xspc property."""
+        self._cards[1].set_value("xspc", value)
+
+    @property
+    def yspc(self) -> typing.Optional[float]:
+        """Get or set the Coordinate where the constraint will act. Superseded by SPCNID.
+        """ # nopep8
+        return self._cards[1].get_value("yspc")
+
+    @yspc.setter
+    def yspc(self, value: float) -> None:
+        """Set the yspc property."""
+        self._cards[1].set_value("yspc", value)
+
+    @property
+    def zspc(self) -> typing.Optional[float]:
+        """Get or set the Coordinate where the constraint will act. Superseded by SPCNID.
+        """ # nopep8
+        return self._cards[1].get_value("zspc")
+
+    @zspc.setter
+    def zspc(self, value: float) -> None:
+        """Set the zspc property."""
+        self._cards[1].set_value("zspc", value)
 
     @property
     def lco_or_a1(self) -> typing.Optional[float]:
@@ -327,6 +378,22 @@ class Mat020(KeywordBase):
     def v3(self, value: float) -> None:
         """Set the v3 property."""
         self._cards[2].set_value("v3", value)
+
+    @property
+    def bndlco(self) -> int:
+        """Get or set the Flag specifying whether the forces and moments in the bndout file, generated by *BOUNDARY_PRESCRIBED_MOTION_RIGID,
+        are expressed in the rigid body's local coordinate system.
+        EQ.0: Forces and moments are printed in the global coordinate system (default).
+        EQ.1: Forces and moments are printed in the local coordinate system.
+        """ # nopep8
+        return self._cards[2].get_value("bndlco")
+
+    @bndlco.setter
+    def bndlco(self, value: int) -> None:
+        """Set the bndlco property."""
+        if value not in [0, 1, None]:
+            raise Exception("""bndlco must be `None` or one of {0,1}.""")
+        self._cards[2].set_value("bndlco", value)
 
     @property
     def title(self) -> typing.Optional[str]:

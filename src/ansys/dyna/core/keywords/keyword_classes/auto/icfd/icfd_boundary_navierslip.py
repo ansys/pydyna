@@ -28,7 +28,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _ICFDBOUNDARYNAVIERSLIP_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
-    FieldSchema("fric", float, 0, 10, None),
+    FieldSchema("ls", float, 10, 10, None),
 )
 
 class IcfdBoundaryNavierslip(KeywordBase):
@@ -58,13 +58,13 @@ class IcfdBoundaryNavierslip(KeywordBase):
         self._cards[0].set_value("pid", value)
 
     @property
-    def fric(self) -> typing.Optional[float]:
-        """Get or set the Friction coefficient. If a negative value is entered, it will refer to a Load curve ID used to describe the friction coefficient  value versus time, see *DEFINE_CURVE, *DEFINE_CURVE_FUNCTION, or *DEFINE_FUNCTION.  If a DEFINE_FUNCTION is used, the following parameters are allowed: f(x,y,z,vx,vy,vz,temp,pres,time).
+    def ls(self) -> typing.Optional[float]:
+        """Get or set the Slip length. If a negative value is entered, it will refer to a load curve ID used to describe the slip length value as a function of time; see *DEFINE_CURVE, *DEFINE_CURVE_FUNCTION, or *DEFINE_FUNCTION.  If a *DEFINE_FUNCTION is used, the following parameters are allowed: f(x, y, z, vx, vy, vz, temp, pres, time).
         """ # nopep8
-        return self._cards[0].get_value("fric")
+        return self._cards[0].get_value("ls")
 
-    @fric.setter
-    def fric(self, value: float) -> None:
-        """Set the fric property."""
-        self._cards[0].set_value("fric", value)
+    @ls.setter
+    def ls(self, value: float) -> None:
+        """Set the ls property."""
+        self._cards[0].set_value("ls", value)
 

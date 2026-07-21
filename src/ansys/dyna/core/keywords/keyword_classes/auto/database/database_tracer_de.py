@@ -71,9 +71,9 @@ class DatabaseTracerDe(KeywordBase):
     @property
     def track(self) -> int:
         """Get or set the Tracking option:
-        EQ.0: particle follows material,
-        EQ.1: particle is fixed in space.
-        EQ.2:	particle follows the mesh
+        EQ.0: Particle follows material,
+        EQ.1: Particle is fixed in space.
+        EQ.2: Particle follows the mesh
         """ # nopep8
         return self._cards[0].get_value("track")
 
@@ -119,7 +119,7 @@ class DatabaseTracerDe(KeywordBase):
 
     @property
     def ammgid(self) -> typing.Optional[int]:
-        """Get or set the The AMMG ID (ALE multi-material group) of the material being tracked in a multi-material ALE element. See Remark 1.
+        """Get or set the The ALE multi-material referenced with its AMMGID for general ALE or with either its AMMGID or AMMG name (AMMGNM) for S-ALE, of the material being tracked in a multi-material ALE element. See Remark 1
         """ # nopep8
         return self._cards[0].get_value("ammgid")
 
@@ -131,7 +131,7 @@ class DatabaseTracerDe(KeywordBase):
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the An optional node ID defining the initial position of a tracer particle.
-        If defined, its coordinates will overwrite the X, Y, Z coordinates
+        If defined, its coordinates will overwrite the x, y, and z coordinates
         above. This feature is for TRACK = 0 only and can be applied to ALE tracers and DE tracers
         """ # nopep8
         return self._cards[0].get_value("nid")

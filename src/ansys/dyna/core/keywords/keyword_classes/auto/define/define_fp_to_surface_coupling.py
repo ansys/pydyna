@@ -36,11 +36,11 @@ _DEFINEFPTOSURFACECOUPLING_CARD0 = (
 
 _DEFINEFPTOSURFACECOUPLING_CARD1 = (
     FieldSchema("sbc", int, 0, 10, None),
-    FieldSchema("sca", int, 10, 10, 0),
+    FieldSchema("sca", float, 10, 10, 0.5),
     FieldSchema("unused", int, 20, 10, None),
     FieldSchema("unused", int, 30, 10, None),
     FieldSchema("unused", int, 40, 10, None),
-    FieldSchema("sfp", int, 50, 10, 0),
+    FieldSchema("sfp", float, 50, 10, 0.1),
 )
 
 _DEFINEFPTOSURFACECOUPLING_OPTION0_CARD0 = (
@@ -82,7 +82,7 @@ class DefineFpToSurfaceCoupling(KeywordBase):
         ]
     @property
     def fp(self) -> typing.Optional[int]:
-        """Get or set the Part set ID defined in the coupling on the slave side.
+        """Get or set the Part/Part set ID defined in the coupling on the slave side.
         """ # nopep8
         return self._cards[0].get_value("fp")
 
@@ -106,7 +106,7 @@ class DefineFpToSurfaceCoupling(KeywordBase):
     def fptype(self) -> int:
         """Get or set the Type for SLAVE:
         EQ.0: Part set ID
-        EQ.1 : Part ID.
+        EQ.1: Part ID.
         """ # nopep8
         return self._cards[0].get_value("fptype")
 
@@ -120,7 +120,7 @@ class DefineFpToSurfaceCoupling(KeywordBase):
     @property
     def surftype(self) -> int:
         """Get or set the Type for SURF:
-        EQ.0:	Segment set ID
+        EQ.0: Segment set ID
         """ # nopep8
         return self._cards[0].get_value("surftype")
 
@@ -143,24 +143,24 @@ class DefineFpToSurfaceCoupling(KeywordBase):
         self._cards[1].set_value("sbc", value)
 
     @property
-    def sca(self) -> int:
+    def sca(self) -> float:
         """Get or set the Static (equilibrium) contact angle in radian
         """ # nopep8
         return self._cards[1].get_value("sca")
 
     @sca.setter
-    def sca(self, value: int) -> None:
+    def sca(self, value: float) -> None:
         """Set the sca property."""
         self._cards[1].set_value("sca", value)
 
     @property
-    def sfp(self) -> int:
+    def sfp(self) -> float:
         """Get or set the Stiffness coefficient along the normal direction of the contact interface. SFP should be less than 1.0. If SFPSFPN is too small, large penetrations can occur.
         """ # nopep8
         return self._cards[1].get_value("sfp")
 
     @sfp.setter
-    def sfp(self, value: int) -> None:
+    def sfp(self, value: float) -> None:
         """Set the sfp property."""
         self._cards[1].set_value("sfp", value)
 

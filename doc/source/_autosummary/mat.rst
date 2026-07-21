@@ -601,10 +601,31 @@ Mat081
     :members:
 
 
+Mat081Stochastic
+----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_081_stochastic
+    :members:
+
+
 Mat082
 ------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_082
+    :members:
+
+
+Mat082Rcdc
+----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_082_rcdc
+    :members:
+
+
+Mat082Rcdc1980
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_082_rcdc1980
     :members:
 
 
@@ -626,6 +647,13 @@ Mat0832
 -------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_083_2
+    :members:
+
+
+Mat0833
+-------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_083_3
     :members:
 
 
@@ -1238,13 +1266,6 @@ Mat159
     :members:
 
 
-Mat160
-------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_160
-    :members:
-
-
 Mat161
 ------
 
@@ -1525,6 +1546,13 @@ Mat199
     :members:
 
 
+Mat19927P
+---------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_199_27p
+    :members:
+
+
 Mat1DofGeneralizedSpring
 ------------------------
 
@@ -1550,6 +1578,13 @@ Mat205
 ------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_205
+    :members:
+
+
+Mat207
+------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_207
     :members:
 
 
@@ -1655,6 +1690,13 @@ Mat224Gys
 ---------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_224_gys
+    :members:
+
+
+Mat225
+------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_225
     :members:
 
 
@@ -1854,6 +1896,20 @@ Mat251
     :members:
 
 
+Mat251Log
+---------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_251_log
+    :members:
+
+
+Mat251S
+-------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_251_s
+    :members:
+
+
 Mat252
 ------
 
@@ -1973,6 +2029,13 @@ Mat271
     :members:
 
 
+Mat272
+------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_272
+    :members:
+
+
 Mat273
 ------
 
@@ -2029,6 +2092,20 @@ Mat280
     :members:
 
 
+Mat280Spm
+---------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_280_spm
+    :members:
+
+
+Mat280Sto
+---------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_280_sto
+    :members:
+
+
 Mat291
 ------
 
@@ -2071,10 +2148,31 @@ Mat296
     :members:
 
 
+Mat303
+------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_303
+    :members:
+
+
 Mat305
 ------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_305
+    :members:
+
+
+Mat307
+------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_307
+    :members:
+
+
+Mat317
+------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_317
     :members:
 
 
@@ -2096,6 +2194,20 @@ Mat326
 ------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_326
+    :members:
+
+
+Mat331
+------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_331
+    :members:
+
+
+Mat340
+------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_340
     :members:
 
 
@@ -2162,6 +2274,13 @@ MatAddAirbagPorosityLeakage
     :members:
 
 
+MatAddBasicIncrementalFailure
+-----------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_add_basic_incremental_failure
+    :members:
+
+
 MatAddChemShrinkage
 -------------------
 
@@ -2204,6 +2323,20 @@ MatAddErosion
     :members:
 
 
+MatAddErosionOld
+----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_add_erosion_old
+    :members:
+
+
+MatAddExtvarExpansion
+---------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_add_extvar_expansion
+    :members:
+
+
 MatAddFatigue
 -------------
 
@@ -2229,6 +2362,13 @@ MatAddInelasticity
 ------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_add_inelasticity
+    :members:
+
+
+MatAddMicro
+-----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_add_micro
     :members:
 
 
@@ -2309,6 +2449,13 @@ MatAle02
     :members:
 
 
+MatAle02Adv
+-----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ale_02_adv
+    :members:
+
+
 MatAle03
 --------
 
@@ -2316,10 +2463,38 @@ MatAle03
     :members:
 
 
+MatAle04
+--------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ale_04
+    :members:
+
+
+MatAle05
+--------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ale_05
+    :members:
+
+
+MatAle06
+--------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ale_06
+    :members:
+
+
 MatAleGasMixture
 ----------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ale_gas_mixture
+    :members:
+
+
+MatAleGasMixtureAdv
+-------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ale_gas_mixture_adv
     :members:
 
 
@@ -2474,6 +2649,13 @@ MatBarlatYld2004
 ----------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_barlat_yld2004
+    :members:
+
+
+MatBarlatYld200427P
+-------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_barlat_yld2004_27p
     :members:
 
 
@@ -2904,6 +3086,13 @@ MatDiscreteBeamPointContact
     :members:
 
 
+MatDmnCompositeFrc
+------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_dmn_composite_frc
+    :members:
+
+
 MatDruckerPrager
 ----------------
 
@@ -3142,6 +3331,13 @@ MatFuChangFoamLogLogInterpolation
     :members:
 
 
+MatFuChangFoamPathDependent
+---------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_fu_chang_foam_path_dependent
+    :members:
+
+
 MatGasMixture
 -------------
 
@@ -3191,6 +3387,13 @@ MatGeneralViscoelasticMoisture
     :members:
 
 
+MatGeneralizedAdhesiveCuring
+----------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_generalized_adhesive_curing
+    :members:
+
+
 MatGeneralizedPhaseChange
 -------------------------
 
@@ -3216,6 +3419,20 @@ MatGlass
 --------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_glass
+    :members:
+
+
+MatGlassSpm
+-----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_glass_spm
+    :members:
+
+
+MatGlassStochastic
+------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_glass_stochastic
     :members:
 
 
@@ -3345,6 +3562,13 @@ MatIfpd
     :members:
 
 
+MatImpactOrthotropic
+--------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_impact_orthotropic
+    :members:
+
+
 MatInelastic6DofSpringDiscreteBeam
 ----------------------------------
 
@@ -3391,6 +3615,76 @@ MatIsotropicSmearedCrack
 ------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_isotropic_smeared_crack
+    :members:
+
+
+MatIspg01
+---------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ispg_01
+    :members:
+
+
+MatIspg02
+---------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ispg_02
+    :members:
+
+
+MatIspg03
+---------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ispg_03
+    :members:
+
+
+MatIspg04
+---------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ispg_04
+    :members:
+
+
+MatIspg05
+---------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ispg_05
+    :members:
+
+
+MatIspgCarreau
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ispg_carreau
+    :members:
+
+
+MatIspgCrossCastroMacosko
+-------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ispg_cross_castro_macosko
+    :members:
+
+
+MatIspgCrossWlfModel
+--------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ispg_cross_wlf_model
+    :members:
+
+
+MatIspgCrossmodel
+-----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ispg_crossmodel
+    :members:
+
+
+MatIspgIsoNewtonian
+-------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ispg_iso_newtonian
     :members:
 
 
@@ -3520,6 +3814,13 @@ MatLayeredLinearPlasticity
     :members:
 
 
+MatLee_Tarver
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_lee__tarver
+    :members:
+
+
 MatLinearElasticDiscreteBeam
 ----------------------------
 
@@ -3569,10 +3870,10 @@ MatLungTissue
     :members:
 
 
-MatMaModifiedPiecewiseLinearPlasticityPrestrain
------------------------------------------------
+MatMaSpotweldDaimlerUniaxial
+----------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ma_modified_piecewise_linear_plasticity_prestrain
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_ma_spotweld_daimler_uniaxial
     :members:
 
 
@@ -3891,6 +4192,55 @@ MatPiecewiseLinearPlasticity2D
     :members:
 
 
+MatPiecewiseLinearPlasticity2DLogInterpolation
+----------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_piecewise_linear_plasticity_2d_log_interpolation
+    :members:
+
+
+MatPiecewiseLinearPlasticity2DLogInterpolationMidfail
+-----------------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_piecewise_linear_plasticity_2d_log_interpolation_midfail
+    :members:
+
+
+MatPiecewiseLinearPlasticity2DLogInterpolationMidfailStochastic
+---------------------------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_piecewise_linear_plasticity_2d_log_interpolation_midfail_stochastic
+    :members:
+
+
+MatPiecewiseLinearPlasticity2DLogInterpolationStochastic
+--------------------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_piecewise_linear_plasticity_2d_log_interpolation_stochastic
+    :members:
+
+
+MatPiecewiseLinearPlasticity2DMidfail
+-------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_piecewise_linear_plasticity_2d_midfail
+    :members:
+
+
+MatPiecewiseLinearPlasticity2DMidfailStochastic
+-----------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_piecewise_linear_plasticity_2d_midfail_stochastic
+    :members:
+
+
+MatPiecewiseLinearPlasticity2DStochastic
+----------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_piecewise_linear_plasticity_2d_stochastic
+    :members:
+
+
 MatPiecewiseLinearPlasticityHaz
 -------------------------------
 
@@ -3905,10 +4255,38 @@ MatPiecewiseLinearPlasticityLogInterpolation
     :members:
 
 
+MatPiecewiseLinearPlasticityLogInterpolationMidfail
+---------------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_piecewise_linear_plasticity_log_interpolation_midfail
+    :members:
+
+
+MatPiecewiseLinearPlasticityLogInterpolationMidfailStochastic
+-------------------------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_piecewise_linear_plasticity_log_interpolation_midfail_stochastic
+    :members:
+
+
+MatPiecewiseLinearPlasticityLogInterpolationStochastic
+------------------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_piecewise_linear_plasticity_log_interpolation_stochastic
+    :members:
+
+
 MatPiecewiseLinearPlasticityMidfail
 -----------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_piecewise_linear_plasticity_midfail
+    :members:
+
+
+MatPiecewiseLinearPlasticityMidfailStochastic
+---------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_piecewise_linear_plasticity_midfail_stochastic
     :members:
 
 
@@ -3993,6 +4371,13 @@ MatPlasticityWithDamageOrthoRcdc
 --------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_plasticity_with_damage_ortho_rcdc
+    :members:
+
+
+MatPlasticityWithDamageOrthoRcdc1980
+------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_plasticity_with_damage_ortho_rcdc1980
     :members:
 
 
@@ -4189,6 +4574,13 @@ MatRigidDiscrete
 ----------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_rigid_discrete
+    :members:
+
+
+MatRrrPolymer
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_rrr_polymer
     :members:
 
 
@@ -4500,6 +4892,13 @@ MatSoilConcrete
     :members:
 
 
+MatSoilSanisand
+---------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_soil_sanisand
+    :members:
+
+
 MatSpecialOrthotropic
 ---------------------
 
@@ -4567,6 +4966,13 @@ MatSpotweld
 -----------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_spotweld
+    :members:
+
+
+MatSpotweldDaimler
+------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_spotweld_daimler
     :members:
 
 
@@ -4815,6 +5221,13 @@ MatT17
     :members:
 
 
+MatT18
+------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_t18
+    :members:
+
+
 MatTabulatedJohnsonCook
 -----------------------
 
@@ -4854,6 +5267,20 @@ MatTailoredProperties
 ---------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_tailored_properties
+    :members:
+
+
+MatTailoredPropertiesLogInterpolation
+-------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_tailored_properties_log_interpolation
+    :members:
+
+
+MatTailoredPropertiesStochastic
+-------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_tailored_properties_stochastic
     :members:
 
 
@@ -4917,6 +5344,13 @@ MatThermalIsotropicTdLc
 -----------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_thermal_isotropic_td_lc
+    :members:
+
+
+MatThermalIspg
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.mat_thermal_ispg
     :members:
 
 

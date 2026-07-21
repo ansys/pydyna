@@ -28,60 +28,24 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _BATTERYECHEMCONTROLSOLVER_CARD0 = (
     FieldSchema("imodel", int, 0, 10, None),
-    FieldSchema("igeom", int, 10, 10, None),
+    FieldSchema("idim", int, 10, 10, None),
     FieldSchema("ncycle", int, 20, 10, 1),
-    FieldSchema("aging", int, 30, 10, 1),
-    FieldSchema("tra", int, 40, 10, 0),
-    FieldSchema("gas", int, 50, 10, 0),
-    FieldSchema("esolid", int, 60, 10, 0),
-    FieldSchema("unused", int, 70, 10, None),
+    FieldSchema("iage", int, 30, 10, None),
+    FieldSchema("itra", int, 40, 10, 0),
+    FieldSchema("igas", int, 50, 10, 0),
+    FieldSchema("ip2d", int, 60, 10, 0),
+    FieldSchema("iporo", int, 70, 10, 0),
 )
 
 _BATTERYECHEMCONTROLSOLVER_CARD1 = (
-    FieldSchema("irun", int, 0, 10, None),
-    FieldSchema("lcur", int, 10, 10, None),
-    FieldSchema("curv", float, 20, 10, None),
-    FieldSchema("ctime", float, 30, 10, 0.0),
-    FieldSchema("vcut", float, 40, 10, 0.0),
-)
-
-_BATTERYECHEMCONTROLSOLVER_CARD2 = (
-    FieldSchema("mws", float, 0, 10, None),
-    FieldSchema("dens", float, 10, 10, None),
-    FieldSchema("brugs", float, 20, 10, None),
-    FieldSchema("epss", float, 30, 10, None),
-    FieldSchema("cseio", float, 40, 10, None),
-    FieldSchema("tseio", float, 50, 10, None),
-)
-
-_BATTERYECHEMCONTROLSOLVER_CARD3 = (
-    FieldSchema("ecdo", float, 0, 10, None),
-    FieldSchema("kfs", float, 10, 10, None),
-    FieldSchema("ceco", float, 20, 10, None),
-    FieldSchema("ecdf", float, 30, 10, None),
-)
-
-_BATTERYECHEMCONTROLSOLVER_CARD4 = (
-    FieldSchema("hofeln", int, 0, 10, None),
-    FieldSchema("hofli", int, 10, 10, None),
-    FieldSchema("hofsei", float, 20, 10, None),
-    FieldSchema("hofc2h4", float, 30, 10, None),
-)
-
-_BATTERYECHEMCONTROLSOLVER_CARD5 = (
-    FieldSchema("afi", float, 0, 10, None),
-    FieldSchema("eat", float, 10, 10, None),
-    FieldSchema("hoflc", float, 20, 10, None),
-    FieldSchema("hofco2", float, 30, 10, None),
-    FieldSchema("hofo2", float, 40, 10, None),
-)
-
-_BATTERYECHEMCONTROLSOLVER_CARD6 = (
-    FieldSchema("file1", str, 0, 80, None),
-)
-
-_BATTERYECHEMCONTROLSOLVER_CARD7 = (
-    FieldSchema("file2", str, 0, 80, None),
+    FieldSchema("cmode", int, 0, 10, 1),
+    FieldSchema("ctype", int, 10, 10, 0),
+    FieldSchema("cend", int, 20, 10, None),
+    FieldSchema("tcut", float, 30, 10, None),
+    FieldSchema("vcut", float, 40, 10, 2.0),
+    FieldSchema("curr", float, 50, 10, None),
+    FieldSchema("taper", float, 60, 10, None),
+    FieldSchema("cellid", int, 70, 10, None),
 )
 
 class BatteryEchemControlSolver(KeywordBase):
@@ -102,36 +66,12 @@ class BatteryEchemControlSolver(KeywordBase):
                 _BATTERYECHEMCONTROLSOLVER_CARD1,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _BATTERYECHEMCONTROLSOLVER_CARD2,
-                **kwargs,
-            ),
-            Card.from_field_schemas_with_defaults(
-                _BATTERYECHEMCONTROLSOLVER_CARD3,
-                **kwargs,
-            ),
-            Card.from_field_schemas_with_defaults(
-                _BATTERYECHEMCONTROLSOLVER_CARD4,
-                **kwargs,
-            ),
-            Card.from_field_schemas_with_defaults(
-                _BATTERYECHEMCONTROLSOLVER_CARD5,
-                **kwargs,
-            ),
-            Card.from_field_schemas_with_defaults(
-                _BATTERYECHEMCONTROLSOLVER_CARD6,
-                **kwargs,
-            ),
-            Card.from_field_schemas_with_defaults(
-                _BATTERYECHEMCONTROLSOLVER_CARD7,
-                **kwargs,
-            ),
         ]
     @property
     def imodel(self) -> typing.Optional[int]:
-        """Get or set the Sets the battery model.
-        EQ.1:	A single insertion model
-        EQ.2 : Dual insertion model
+        """Get or set the Sets the battery model:
+        EQ.1 : 6 Equation P2D : ITRA,IAGE and IGAS must be set to 0.
+        EQ.2 : 10 or 15 - Equation Model.With IGAS = 0 and IAGE = 1, the model includes ageing effects(10 Eq model) while with IGAS = 1 and IAGE = 1, the model includes both ageing and gas generation effects.See Remark 1
         """ # nopep8
         return self._cards[0].get_value("imodel")
 
@@ -141,23 +81,21 @@ class BatteryEchemControlSolver(KeywordBase):
         self._cards[0].set_value("imodel", value)
 
     @property
-    def igeom(self) -> typing.Optional[int]:
+    def idim(self) -> typing.Optional[int]:
         """Get or set the Sets the geometric dimension:
-        EQ.1:	1D Electrochemical model
-        EQ.11 : 1D Aging and Thermal Runaway model
-        EQ.101 : 1D ECTM model
-        EQ.111 : 1D ECTM with A & T model
+        EQ.1:	Standalone 1D model:
+        EQ.101:	1D models with EM-thermo-mechanical coupling (available for IMODEL = 1 and 2). See Remark 2
         """ # nopep8
-        return self._cards[0].get_value("igeom")
+        return self._cards[0].get_value("idim")
 
-    @igeom.setter
-    def igeom(self, value: int) -> None:
-        """Set the igeom property."""
-        self._cards[0].set_value("igeom", value)
+    @idim.setter
+    def idim(self, value: int) -> None:
+        """Set the idim property."""
+        self._cards[0].set_value("idim", value)
 
     @property
     def ncycle(self) -> int:
-        """Get or set the The number of cycles to run. Default is 1 cycle
+        """Get or set the Number of cycles to run. The default value is 1 cycle. The maximunm value for this parameter is 100
         """ # nopep8
         return self._cards[0].get_value("ncycle")
 
@@ -167,102 +105,138 @@ class BatteryEchemControlSolver(KeywordBase):
         self._cards[0].set_value("ncycle", value)
 
     @property
-    def aging(self) -> int:
-        """Get or set the Aging model. 1 for ON, and 0 for OFF
+    def iage(self) -> typing.Optional[int]:
+        """Get or set the Ageing model:
+        EQ.0 : Off
+        EQ.1 : On
         """ # nopep8
-        return self._cards[0].get_value("aging")
+        return self._cards[0].get_value("iage")
 
-    @aging.setter
-    def aging(self, value: int) -> None:
-        """Set the aging property."""
-        self._cards[0].set_value("aging", value)
+    @iage.setter
+    def iage(self, value: int) -> None:
+        """Set the iage property."""
+        self._cards[0].set_value("iage", value)
 
     @property
-    def tra(self) -> int:
-        """Get or set the Thermal runaway model. 1for ON, and 0 for OFF.
+    def itra(self) -> int:
+        """Get or set the Ageing heat flag (see Remark 3):
+        EQ.0:Off
+        EQ.1: On
         """ # nopep8
-        return self._cards[0].get_value("tra")
+        return self._cards[0].get_value("itra")
 
-    @tra.setter
-    def tra(self, value: int) -> None:
-        """Set the tra property."""
-        self._cards[0].set_value("tra", value)
+    @itra.setter
+    def itra(self, value: int) -> None:
+        """Set the itra property."""
+        if value not in [0, 1, None]:
+            raise Exception("""itra must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("itra", value)
 
     @property
-    def gas(self) -> int:
-        """Get or set the Gas generation model (scheduled)
+    def igas(self) -> int:
+        """Get or set the Gas generation model flag (see Remark 2):
+        EQ.0:Off
+        EQ.1: On
+        EQ.2:	On and venting model activated
         """ # nopep8
-        return self._cards[0].get_value("gas")
+        return self._cards[0].get_value("igas")
 
-    @gas.setter
-    def gas(self, value: int) -> None:
-        """Set the gas property."""
-        self._cards[0].set_value("gas", value)
+    @igas.setter
+    def igas(self, value: int) -> None:
+        """Set the igas property."""
+        if value not in [0, 1, 2, None]:
+            raise Exception("""igas must be `None` or one of {0,1,2}.""")
+        self._cards[0].set_value("igas", value)
 
     @property
-    def esolid(self) -> int:
-        """Get or set the The concentration of the electrode particle model
-        EQ.0: Superposition method.
-        EQ.1 : Full equation method.
+    def ip2d(self) -> int:
+        """Get or set the Radial diffusion scheme:
+        EQ.0 : Superposition
+        EQ.1 : BDF finite differences.
         """ # nopep8
-        return self._cards[0].get_value("esolid")
+        return self._cards[0].get_value("ip2d")
 
-    @esolid.setter
-    def esolid(self, value: int) -> None:
-        """Set the esolid property."""
-        self._cards[0].set_value("esolid", value)
+    @ip2d.setter
+    def ip2d(self, value: int) -> None:
+        """Set the ip2d property."""
+        if value not in [0, 1, None]:
+            raise Exception("""ip2d must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("ip2d", value)
 
     @property
-    def irun(self) -> typing.Optional[int]:
-        """Get or set the Battery simulation cycle termination criterion
-        EQ.1:	The current cycle runs for a given time
-        EQ.2 : The current cycle runs until the cell voltage reaches VCUT
+    def iporo(self) -> int:
+        """Get or set the Porosity feedback when IAGING=1:
+        EQ.0 : Off
+        EQ.1 : On
         """ # nopep8
-        return self._cards[1].get_value("irun")
+        return self._cards[0].get_value("iporo")
 
-    @irun.setter
-    def irun(self, value: int) -> None:
-        """Set the irun property."""
-        self._cards[1].set_value("irun", value)
+    @iporo.setter
+    def iporo(self, value: int) -> None:
+        """Set the iporo property."""
+        if value not in [0, 1, None]:
+            raise Exception("""iporo must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("iporo", value)
 
     @property
-    def lcur(self) -> typing.Optional[int]:
-        """Get or set the Running current.
-        EQ.0:	Constant current.
-        EQ.1 : Variable current
+    def cmode(self) -> int:
+        """Get or set the Battery running mode flag:
+        EQ.0: Galvanostatic run(imposed current)
+        EQ.1: Potentiostatic run run (current chosen so Voltage is held)
+        EQ.2 : CC - CV run(imposed current switching to constant voltage mode once VCUT is reached)
+        EQ.3 : Constant Resistant run(current chose so Resistance is held)
         """ # nopep8
-        return self._cards[1].get_value("lcur")
+        return self._cards[1].get_value("cmode")
 
-    @lcur.setter
-    def lcur(self, value: int) -> None:
-        """Set the lcur property."""
-        self._cards[1].set_value("lcur", value)
+    @cmode.setter
+    def cmode(self, value: int) -> None:
+        """Set the cmode property."""
+        if value not in [1, 0, 2, 3, None]:
+            raise Exception("""cmode must be `None` or one of {1,0,2,3}.""")
+        self._cards[1].set_value("cmode", value)
 
     @property
-    def curv(self) -> typing.Optional[float]:
-        """Get or set the Current value to run
+    def ctype(self) -> int:
+        """Get or set the Boundary condition type:
+        EQ.0:Constant
+        EQ.1: Variable VCUT, CURR values point to load curve ID function of time
         """ # nopep8
-        return self._cards[1].get_value("curv")
+        return self._cards[1].get_value("ctype")
 
-    @curv.setter
-    def curv(self, value: float) -> None:
-        """Set the curv property."""
-        self._cards[1].set_value("curv", value)
+    @ctype.setter
+    def ctype(self, value: int) -> None:
+        """Set the ctype property."""
+        if value not in [0, 1, None]:
+            raise Exception("""ctype must be `None` or one of {0,1}.""")
+        self._cards[1].set_value("ctype", value)
 
     @property
-    def ctime(self) -> float:
-        """Get or set the Running time for the cycle
+    def cend(self) -> typing.Optional[int]:
+        """Get or set the Cause of battery cycle termination:
+        EQ.1: Cycle run for a given time period.
+        EQ.2: Cycle run until a given cut - off voltage.
         """ # nopep8
-        return self._cards[1].get_value("ctime")
+        return self._cards[1].get_value("cend")
 
-    @ctime.setter
-    def ctime(self, value: float) -> None:
-        """Set the ctime property."""
-        self._cards[1].set_value("ctime", value)
+    @cend.setter
+    def cend(self, value: int) -> None:
+        """Set the cend property."""
+        self._cards[1].set_value("cend", value)
+
+    @property
+    def tcut(self) -> typing.Optional[float]:
+        """Get or set the Total running time for the cycle.(units: s)
+        """ # nopep8
+        return self._cards[1].get_value("tcut")
+
+    @tcut.setter
+    def tcut(self, value: float) -> None:
+        """Set the tcut property."""
+        self._cards[1].set_value("tcut", value)
 
     @property
     def vcut(self) -> float:
-        """Get or set the A voltage to terminate
+        """Get or set the Cut-off voltage for the cycle or holding voltage depending on CMODE .(units: V)
         """ # nopep8
         return self._cards[1].get_value("vcut")
 
@@ -272,233 +246,35 @@ class BatteryEchemControlSolver(KeywordBase):
         self._cards[1].set_value("vcut", value)
 
     @property
-    def mws(self) -> typing.Optional[float]:
-        """Get or set the Molecular weight of the SEI
+    def curr(self) -> typing.Optional[float]:
+        """Get or set the Cycle operating current in the case of constant current. Load curve ID in case of variable current. Initial current guess if CMODE=1 or 3. (units: A.m^(-2))
         """ # nopep8
-        return self._cards[2].get_value("mws")
+        return self._cards[1].get_value("curr")
 
-    @mws.setter
-    def mws(self, value: float) -> None:
-        """Set the mws property."""
-        self._cards[2].set_value("mws", value)
+    @curr.setter
+    def curr(self, value: float) -> None:
+        """Set the curr property."""
+        self._cards[1].set_value("curr", value)
 
     @property
-    def dens(self) -> typing.Optional[float]:
-        """Get or set the Density of the SEI
+    def taper(self) -> typing.Optional[float]:
+        """Get or set the Taper current. Below this absolute current value, the cycle is terminated
         """ # nopep8
-        return self._cards[2].get_value("dens")
+        return self._cards[1].get_value("taper")
 
-    @dens.setter
-    def dens(self, value: float) -> None:
-        """Set the dens property."""
-        self._cards[2].set_value("dens", value)
+    @taper.setter
+    def taper(self, value: float) -> None:
+        """Set the taper property."""
+        self._cards[1].set_value("taper", value)
 
     @property
-    def brugs(self) -> typing.Optional[float]:
-        """Get or set the The Brugmann constant of the SEI
+    def cellid(self) -> typing.Optional[int]:
+        """Get or set the Optional Cell ID that links this particular cycle to a specific Cell
         """ # nopep8
-        return self._cards[2].get_value("brugs")
+        return self._cards[1].get_value("cellid")
 
-    @brugs.setter
-    def brugs(self, value: float) -> None:
-        """Set the brugs property."""
-        self._cards[2].set_value("brugs", value)
-
-    @property
-    def epss(self) -> typing.Optional[float]:
-        """Get or set the Initial SEI porosity
-        """ # nopep8
-        return self._cards[2].get_value("epss")
-
-    @epss.setter
-    def epss(self, value: float) -> None:
-        """Set the epss property."""
-        self._cards[2].set_value("epss", value)
-
-    @property
-    def cseio(self) -> typing.Optional[float]:
-        """Get or set the Initial SEI concentration, [mol/m3]
-        """ # nopep8
-        return self._cards[2].get_value("cseio")
-
-    @cseio.setter
-    def cseio(self, value: float) -> None:
-        """Set the cseio property."""
-        self._cards[2].set_value("cseio", value)
-
-    @property
-    def tseio(self) -> typing.Optional[float]:
-        """Get or set the Initial thickness of the SEI layer
-        """ # nopep8
-        return self._cards[2].get_value("tseio")
-
-    @tseio.setter
-    def tseio(self, value: float) -> None:
-        """Set the tseio property."""
-        self._cards[2].set_value("tseio", value)
-
-    @property
-    def ecdo(self) -> typing.Optional[float]:
-        """Get or set the The exchange current density for the SEI reaction
-        """ # nopep8
-        return self._cards[3].get_value("ecdo")
-
-    @ecdo.setter
-    def ecdo(self, value: float) -> None:
-        """Set the ecdo property."""
-        self._cards[3].set_value("ecdo", value)
-
-    @property
-    def kfs(self) -> typing.Optional[float]:
-        """Get or set the The reaction rate constant for the SEI reaction
-        """ # nopep8
-        return self._cards[3].get_value("kfs")
-
-    @kfs.setter
-    def kfs(self, value: float) -> None:
-        """Set the kfs property."""
-        self._cards[3].set_value("kfs", value)
-
-    @property
-    def ceco(self) -> typing.Optional[float]:
-        """Get or set the Initial concentration of EC (Ethylene Carbonate)
-        """ # nopep8
-        return self._cards[3].get_value("ceco")
-
-    @ceco.setter
-    def ceco(self, value: float) -> None:
-        """Set the ceco property."""
-        self._cards[3].set_value("ceco", value)
-
-    @property
-    def ecdf(self) -> typing.Optional[float]:
-        """Get or set the Diffusion coefficient of EC
-        """ # nopep8
-        return self._cards[3].get_value("ecdf")
-
-    @ecdf.setter
-    def ecdf(self, value: float) -> None:
-        """Set the ecdf property."""
-        self._cards[3].set_value("ecdf", value)
-
-    @property
-    def hofeln(self) -> typing.Optional[int]:
-        """Get or set the Formation enthalpy of electrolyte, [KJ/mol]
-        """ # nopep8
-        return self._cards[4].get_value("hofeln")
-
-    @hofeln.setter
-    def hofeln(self, value: int) -> None:
-        """Set the hofeln property."""
-        self._cards[4].set_value("hofeln", value)
-
-    @property
-    def hofli(self) -> typing.Optional[int]:
-        """Get or set the Formation enthalpy of Li+, [KJ/mol]
-        """ # nopep8
-        return self._cards[4].get_value("hofli")
-
-    @hofli.setter
-    def hofli(self, value: int) -> None:
-        """Set the hofli property."""
-        self._cards[4].set_value("hofli", value)
-
-    @property
-    def hofsei(self) -> typing.Optional[float]:
-        """Get or set the Formation enthalpy of the SEI layer, [KJ/mol]
-        """ # nopep8
-        return self._cards[4].get_value("hofsei")
-
-    @hofsei.setter
-    def hofsei(self, value: float) -> None:
-        """Set the hofsei property."""
-        self._cards[4].set_value("hofsei", value)
-
-    @property
-    def hofc2h4(self) -> typing.Optional[float]:
-        """Get or set the Formation enthalpy of ethylene, [KJ/mol]
-        """ # nopep8
-        return self._cards[4].get_value("hofc2h4")
-
-    @hofc2h4.setter
-    def hofc2h4(self, value: float) -> None:
-        """Set the hofc2h4 property."""
-        self._cards[4].set_value("hofc2h4", value)
-
-    @property
-    def afi(self) -> typing.Optional[float]:
-        """Get or set the Frequency factor for the reaction
-        """ # nopep8
-        return self._cards[5].get_value("afi")
-
-    @afi.setter
-    def afi(self, value: float) -> None:
-        """Set the afi property."""
-        self._cards[5].set_value("afi", value)
-
-    @property
-    def eat(self) -> typing.Optional[float]:
-        """Get or set the Activation energy for the reaction
-        """ # nopep8
-        return self._cards[5].get_value("eat")
-
-    @eat.setter
-    def eat(self, value: float) -> None:
-        """Set the eat property."""
-        self._cards[5].set_value("eat", value)
-
-    @property
-    def hoflc(self) -> typing.Optional[float]:
-        """Get or set the Formation enthalpy of LC (Li2CO3)
-        """ # nopep8
-        return self._cards[5].get_value("hoflc")
-
-    @hoflc.setter
-    def hoflc(self, value: float) -> None:
-        """Set the hoflc property."""
-        self._cards[5].set_value("hoflc", value)
-
-    @property
-    def hofco2(self) -> typing.Optional[float]:
-        """Get or set the Formation enthalpy of CO2
-        """ # nopep8
-        return self._cards[5].get_value("hofco2")
-
-    @hofco2.setter
-    def hofco2(self, value: float) -> None:
-        """Set the hofco2 property."""
-        self._cards[5].set_value("hofco2", value)
-
-    @property
-    def hofo2(self) -> typing.Optional[float]:
-        """Get or set the Formation enthalpy of O2
-        """ # nopep8
-        return self._cards[5].get_value("hofo2")
-
-    @hofo2.setter
-    def hofo2(self, value: float) -> None:
-        """Set the hofo2 property."""
-        self._cards[5].set_value("hofo2", value)
-
-    @property
-    def file1(self) -> typing.Optional[str]:
-        """Get or set the 
-        """ # nopep8
-        return self._cards[6].get_value("file1")
-
-    @file1.setter
-    def file1(self, value: str) -> None:
-        """Set the file1 property."""
-        self._cards[6].set_value("file1", value)
-
-    @property
-    def file2(self) -> typing.Optional[str]:
-        """Get or set the 
-        """ # nopep8
-        return self._cards[7].get_value("file2")
-
-    @file2.setter
-    def file2(self, value: str) -> None:
-        """Set the file2 property."""
-        self._cards[7].set_value("file2", value)
+    @cellid.setter
+    def cellid(self, value: int) -> None:
+        """Set the cellid property."""
+        self._cards[1].set_value("cellid", value)
 

@@ -134,14 +134,14 @@ class DefineContactExclusion(KeywordBase):
     def c1(self) -> typing.Optional[int]:
         """Get or set the The IDs of TIED contacts: 7 on the first card and 8 per additional
         card for as many cards as necessary.
-        Any node which is a slave node in one of these interfaces, and is in
-        fact tied, will not be processed (as a slave node) in the Target interface.
+        Any node which is a tracked node in one of these interfaces, and is in
+        fact tied, will not be processed (as a tracked node) in the Target interface.
         Note that if a node is excluded from the Target by this mechanism,
-        contact forces may still be applied to the node due to any slave or
+        contact forces may still be applied to the node due to any tracked or
         master nodes impacting the contact segments of which it is a part
         (no contact SEGMENTS are deleted, only contact NODES).
         If the Target contact is of type SURFACE_TO_SURFACE, any tied
-        slave nodes are deleted from both the slave side (for the normal
+        tracked nodes are deleted from both the tracked side (for the normal
         treatment) and the master side (for the symmetric treatment).
         """ # nopep8
         return self._cards[1].get_value("c1")
@@ -155,14 +155,14 @@ class DefineContactExclusion(KeywordBase):
     def c2(self) -> typing.Optional[int]:
         """Get or set the The IDs of TIED contacts: 7 on the first card and 8 per additional
         card for as many cards as necessary.
-        Any node which is a slave node in one of these interfaces, and is in
-        fact tied, will not be processed (as a slave node) in the Target interface.
+        Any node which is a tracked node in one of these interfaces, and is in
+        fact tied, will not be processed (as a tracked node) in the Target interface.
         Note that if a node is excluded from the Target by this mechanism,
-        contact forces may still be applied to the node due to any slave or
+        contact forces may still be applied to the node due to any tracked or
         master nodes impacting the contact segments of which it is a part
         (no contact SEGMENTS are deleted, only contact NODES).
         If the Target contact is of type SURFACE_TO_SURFACE, any tied
-        slave nodes are deleted from both the slave side (for the normal
+        tracked nodes are deleted from both the tracked side (for the normal
         treatment) and the master side (for the symmetric treatment).
         """ # nopep8
         return self._cards[1].get_value("c2")
@@ -176,14 +176,14 @@ class DefineContactExclusion(KeywordBase):
     def c3(self) -> typing.Optional[int]:
         """Get or set the The IDs of TIED contacts: 7 on the first card and 8 per additional
         card for as many cards as necessary.
-        Any node which is a slave node in one of these interfaces, and is in
-        fact tied, will not be processed (as a slave node) in the Target interface.
+        Any node which is a tracked node in one of these interfaces, and is in
+        fact tied, will not be processed (as a tracked node) in the Target interface.
         Note that if a node is excluded from the Target by this mechanism,
-        contact forces may still be applied to the node due to any slave or
+        contact forces may still be applied to the node due to any tracked or
         master nodes impacting the contact segments of which it is a part
         (no contact SEGMENTS are deleted, only contact NODES).
         If the Target contact is of type SURFACE_TO_SURFACE, any tied
-        slave nodes are deleted from both the slave side (for the normal
+        tracked nodes are deleted from both the tracked side (for the normal
         treatment) and the master side (for the symmetric treatment).
         """ # nopep8
         return self._cards[1].get_value("c3")
@@ -197,14 +197,14 @@ class DefineContactExclusion(KeywordBase):
     def c4(self) -> typing.Optional[int]:
         """Get or set the The IDs of TIED contacts: 7 on the first card and 8 per additional
         card for as many cards as necessary.
-        Any node which is a slave node in one of these interfaces, and is in
-        fact tied, will not be processed (as a slave node) in the Target interface.
+        Any node which is a tracked node in one of these interfaces, and is in
+        fact tied, will not be processed (as a tracked node) in the Target interface.
         Note that if a node is excluded from the Target by this mechanism,
-        contact forces may still be applied to the node due to any slave or
+        contact forces may still be applied to the node due to any tracked or
         master nodes impacting the contact segments of which it is a part
         (no contact SEGMENTS are deleted, only contact NODES).
         If the Target contact is of type SURFACE_TO_SURFACE, any tied
-        slave nodes are deleted from both the slave side (for the normal
+        tracked nodes are deleted from both the tracked side (for the normal
         treatment) and the master side (for the symmetric treatment).
         """ # nopep8
         return self._cards[1].get_value("c4")
@@ -218,14 +218,14 @@ class DefineContactExclusion(KeywordBase):
     def c5(self) -> typing.Optional[int]:
         """Get or set the The IDs of TIED contacts: 7 on the first card and 8 per additional
         card for as many cards as necessary.
-        Any node which is a slave node in one of these interfaces, and is in
-        fact tied, will not be processed (as a slave node) in the Target interface.
+        Any node which is a tracked node in one of these interfaces, and is in
+        fact tied, will not be processed (as a tracked node) in the Target interface.
         Note that if a node is excluded from the Target by this mechanism,
-        contact forces may still be applied to the node due to any slave or
+        contact forces may still be applied to the node due to any tracked or
         master nodes impacting the contact segments of which it is a part
         (no contact SEGMENTS are deleted, only contact NODES).
         If the Target contact is of type SURFACE_TO_SURFACE, any tied
-        slave nodes are deleted from both the slave side (for the normal
+        tracked nodes are deleted from both the tracked side (for the normal
         treatment) and the master side (for the symmetric treatment).
         """ # nopep8
         return self._cards[1].get_value("c5")
@@ -239,14 +239,14 @@ class DefineContactExclusion(KeywordBase):
     def c6(self) -> typing.Optional[int]:
         """Get or set the The IDs of TIED contacts: 7 on the first card and 8 per additional
         card for as many cards as necessary.
-        Any node which is a slave node in one of these interfaces, and is in
-        fact tied, will not be processed (as a slave node) in the Target interface.
+        Any node which is a tracked node in one of these interfaces, and is in
+        fact tied, will not be processed (as a tracked node) in the Target interface.
         Note that if a node is excluded from the Target by this mechanism,
-        contact forces may still be applied to the node due to any slave or
+        contact forces may still be applied to the node due to any tracked or
         master nodes impacting the contact segments of which it is a part
         (no contact SEGMENTS are deleted, only contact NODES).
         If the Target contact is of type SURFACE_TO_SURFACE, any tied
-        slave nodes are deleted from both the slave side (for the normal
+        tracked nodes are deleted from both the tracked side (for the normal
         treatment) and the master side (for the symmetric treatment).
         """ # nopep8
         return self._cards[1].get_value("c6")
@@ -260,14 +260,14 @@ class DefineContactExclusion(KeywordBase):
     def c7(self) -> typing.Optional[int]:
         """Get or set the The IDs of TIED contacts: 7 on the first card and 8 per additional
         card for as many cards as necessary.
-        Any node which is a slave node in one of these interfaces, and is in
-        fact tied, will not be processed (as a slave node) in the Target interface.
+        Any node which is a tracked node in one of these interfaces, and is in
+        fact tied, will not be processed (as a tracked node) in the Target interface.
         Note that if a node is excluded from the Target by this mechanism,
-        contact forces may still be applied to the node due to any slave or
+        contact forces may still be applied to the node due to any tracked or
         master nodes impacting the contact segments of which it is a part
         (no contact SEGMENTS are deleted, only contact NODES).
         If the Target contact is of type SURFACE_TO_SURFACE, any tied
-        slave nodes are deleted from both the slave side (for the normal
+        tracked nodes are deleted from both the tracked side (for the normal
         treatment) and the master side (for the symmetric treatment).
         """ # nopep8
         return self._cards[1].get_value("c7")
@@ -281,14 +281,14 @@ class DefineContactExclusion(KeywordBase):
     def c8(self) -> typing.Optional[int]:
         """Get or set the The IDs of TIED contacts: 7 on the first card and 8 per additional
         card for as many cards as necessary.
-        Any node which is a slave node in one of these interfaces, and is in
-        fact tied, will not be processed (as a slave node) in the Target interface.
+        Any node which is a tracked node in one of these interfaces, and is in
+        fact tied, will not be processed (as a tracked node) in the Target interface.
         Note that if a node is excluded from the Target by this mechanism,
-        contact forces may still be applied to the node due to any slave or
+        contact forces may still be applied to the node due to any tracked or
         master nodes impacting the contact segments of which it is a part
         (no contact SEGMENTS are deleted, only contact NODES).
         If the Target contact is of type SURFACE_TO_SURFACE, any tied
-        slave nodes are deleted from both the slave side (for the normal
+        tracked nodes are deleted from both the tracked side (for the normal
         treatment) and the master side (for the symmetric treatment).
         """ # nopep8
         return self._cards[2].get_value("c8")
@@ -302,14 +302,14 @@ class DefineContactExclusion(KeywordBase):
     def c9(self) -> typing.Optional[int]:
         """Get or set the The IDs of TIED contacts: 7 on the first card and 8 per additional
         card for as many cards as necessary.
-        Any node which is a slave node in one of these interfaces, and is in
-        fact tied, will not be processed (as a slave node) in the Target interface.
+        Any node which is a tracked node in one of these interfaces, and is in
+        fact tied, will not be processed (as a tracked node) in the Target interface.
         Note that if a node is excluded from the Target by this mechanism,
-        contact forces may still be applied to the node due to any slave or
+        contact forces may still be applied to the node due to any tracked or
         master nodes impacting the contact segments of which it is a part
         (no contact SEGMENTS are deleted, only contact NODES).
         If the Target contact is of type SURFACE_TO_SURFACE, any tied
-        slave nodes are deleted from both the slave side (for the normal
+        tracked nodes are deleted from both the tracked side (for the normal
         treatment) and the master side (for the symmetric treatment).
         """ # nopep8
         return self._cards[2].get_value("c9")
@@ -323,14 +323,14 @@ class DefineContactExclusion(KeywordBase):
     def c10(self) -> typing.Optional[int]:
         """Get or set the The IDs of TIED contacts: 7 on the first card and 8 per additional
         card for as many cards as necessary.
-        Any node which is a slave node in one of these interfaces, and is in
-        fact tied, will not be processed (as a slave node) in the Target interface.
+        Any node which is a tracked node in one of these interfaces, and is in
+        fact tied, will not be processed (as a tracked node) in the Target interface.
         Note that if a node is excluded from the Target by this mechanism,
-        contact forces may still be applied to the node due to any slave or
+        contact forces may still be applied to the node due to any tracked or
         master nodes impacting the contact segments of which it is a part
         (no contact SEGMENTS are deleted, only contact NODES).
         If the Target contact is of type SURFACE_TO_SURFACE, any tied
-        slave nodes are deleted from both the slave side (for the normal
+        tracked nodes are deleted from both the tracked side (for the normal
         treatment) and the master side (for the symmetric treatment).
         """ # nopep8
         return self._cards[2].get_value("c10")
@@ -344,14 +344,14 @@ class DefineContactExclusion(KeywordBase):
     def c11(self) -> typing.Optional[int]:
         """Get or set the The IDs of TIED contacts: 7 on the first card and 8 per additional
         card for as many cards as necessary.
-        Any node which is a slave node in one of these interfaces, and is in
-        fact tied, will not be processed (as a slave node) in the Target interface.
+        Any node which is a tracked node in one of these interfaces, and is in
+        fact tied, will not be processed (as a tracked node) in the Target interface.
         Note that if a node is excluded from the Target by this mechanism,
-        contact forces may still be applied to the node due to any slave or
+        contact forces may still be applied to the node due to any tracked or
         master nodes impacting the contact segments of which it is a part
         (no contact SEGMENTS are deleted, only contact NODES).
         If the Target contact is of type SURFACE_TO_SURFACE, any tied
-        slave nodes are deleted from both the slave side (for the normal
+        tracked nodes are deleted from both the tracked side (for the normal
         treatment) and the master side (for the symmetric treatment).
         """ # nopep8
         return self._cards[2].get_value("c11")
@@ -365,14 +365,14 @@ class DefineContactExclusion(KeywordBase):
     def c12(self) -> typing.Optional[int]:
         """Get or set the The IDs of TIED contacts: 7 on the first card and 8 per additional
         card for as many cards as necessary.
-        Any node which is a slave node in one of these interfaces, and is in
-        fact tied, will not be processed (as a slave node) in the Target interface.
+        Any node which is a tracked node in one of these interfaces, and is in
+        fact tied, will not be processed (as a tracked node) in the Target interface.
         Note that if a node is excluded from the Target by this mechanism,
-        contact forces may still be applied to the node due to any slave or
+        contact forces may still be applied to the node due to any tracked or
         master nodes impacting the contact segments of which it is a part
         (no contact SEGMENTS are deleted, only contact NODES).
         If the Target contact is of type SURFACE_TO_SURFACE, any tied
-        slave nodes are deleted from both the slave side (for the normal
+        tracked nodes are deleted from both the tracked side (for the normal
         treatment) and the master side (for the symmetric treatment).
         """ # nopep8
         return self._cards[2].get_value("c12")
@@ -386,14 +386,14 @@ class DefineContactExclusion(KeywordBase):
     def c13(self) -> typing.Optional[int]:
         """Get or set the The IDs of TIED contacts: 7 on the first card and 8 per additional
         card for as many cards as necessary.
-        Any node which is a slave node in one of these interfaces, and is in
-        fact tied, will not be processed (as a slave node) in the Target interface.
+        Any node which is a tracked node in one of these interfaces, and is in
+        fact tied, will not be processed (as a tracked node) in the Target interface.
         Note that if a node is excluded from the Target by this mechanism,
-        contact forces may still be applied to the node due to any slave or
+        contact forces may still be applied to the node due to any tracked or
         master nodes impacting the contact segments of which it is a part
         (no contact SEGMENTS are deleted, only contact NODES).
         If the Target contact is of type SURFACE_TO_SURFACE, any tied
-        slave nodes are deleted from both the slave side (for the normal
+        tracked nodes are deleted from both the tracked side (for the normal
         treatment) and the master side (for the symmetric treatment).
         """ # nopep8
         return self._cards[2].get_value("c13")
@@ -407,14 +407,14 @@ class DefineContactExclusion(KeywordBase):
     def c14(self) -> typing.Optional[int]:
         """Get or set the The IDs of TIED contacts: 7 on the first card and 8 per additional
         card for as many cards as necessary.
-        Any node which is a slave node in one of these interfaces, and is in
-        fact tied, will not be processed (as a slave node) in the Target interface.
+        Any node which is a tracked node in one of these interfaces, and is in
+        fact tied, will not be processed (as a tracked node) in the Target interface.
         Note that if a node is excluded from the Target by this mechanism,
-        contact forces may still be applied to the node due to any slave or
+        contact forces may still be applied to the node due to any tracked or
         master nodes impacting the contact segments of which it is a part
         (no contact SEGMENTS are deleted, only contact NODES).
         If the Target contact is of type SURFACE_TO_SURFACE, any tied
-        slave nodes are deleted from both the slave side (for the normal
+        tracked nodes are deleted from both the tracked side (for the normal
         treatment) and the master side (for the symmetric treatment).
         """ # nopep8
         return self._cards[2].get_value("c14")
@@ -428,14 +428,14 @@ class DefineContactExclusion(KeywordBase):
     def c15(self) -> typing.Optional[int]:
         """Get or set the The IDs of TIED contacts: 7 on the first card and 8 per additional
         card for as many cards as necessary.
-        Any node which is a slave node in one of these interfaces, and is in
-        fact tied, will not be processed (as a slave node) in the Target interface.
+        Any node which is a tracked node in one of these interfaces, and is in
+        fact tied, will not be processed (as a tracked node) in the Target interface.
         Note that if a node is excluded from the Target by this mechanism,
-        contact forces may still be applied to the node due to any slave or
+        contact forces may still be applied to the node due to any tracked or
         master nodes impacting the contact segments of which it is a part
         (no contact SEGMENTS are deleted, only contact NODES).
         If the Target contact is of type SURFACE_TO_SURFACE, any tied
-        slave nodes are deleted from both the slave side (for the normal
+        tracked nodes are deleted from both the tracked side (for the normal
         treatment) and the master side (for the symmetric treatment).
         """ # nopep8
         return self._cards[2].get_value("c15")

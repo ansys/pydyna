@@ -43,6 +43,11 @@ _DEFINEDEBYPART_CARD1 = (
     FieldSchema("gamma", float, 0, 10, 0.0),
     FieldSchema("vol", float, 10, 10, 0.0),
     FieldSchema("ang", float, 20, 10, 0.0),
+    FieldSchema("ht_de", int, 30, 10, 0),
+    FieldSchema("int_tmp", float, 40, 10, 0.0),
+    FieldSchema("sph_cp", float, 50, 10, 0.0),
+    FieldSchema("te_coef", float, 60, 10, 0.0),
+    FieldSchema("th_cnd", float, 70, 10, 0.0),
 )
 
 _DEFINEDEBYPART_CARD2 = (
@@ -210,6 +215,63 @@ class DefineDeByPart(KeywordBase):
     def ang(self, value: float) -> None:
         """Set the ang property."""
         self._cards[1].set_value("ang", value)
+
+    @property
+    def ht_de(self) -> int:
+        """Get or set the Heat transfer for discrete spheres flag:
+        EQ.0:	Heat transfer between DES is not considered.
+        EQ.1 : Heat transfer between DES is considered.
+        """ # nopep8
+        return self._cards[1].get_value("ht_de")
+
+    @ht_de.setter
+    def ht_de(self, value: int) -> None:
+        """Set the ht_de property."""
+        self._cards[1].set_value("ht_de", value)
+
+    @property
+    def int_tmp(self) -> float:
+        """Get or set the Initial temperature of the DES in K or �C
+        """ # nopep8
+        return self._cards[1].get_value("int_tmp")
+
+    @int_tmp.setter
+    def int_tmp(self, value: float) -> None:
+        """Set the int_tmp property."""
+        self._cards[1].set_value("int_tmp", value)
+
+    @property
+    def sph_cp(self) -> float:
+        """Get or set the Specific heat capacity of DES in J/(kg K)
+        """ # nopep8
+        return self._cards[1].get_value("sph_cp")
+
+    @sph_cp.setter
+    def sph_cp(self, value: float) -> None:
+        """Set the sph_cp property."""
+        self._cards[1].set_value("sph_cp", value)
+
+    @property
+    def te_coef(self) -> float:
+        """Get or set the Thermal expansion coefficient of DES in K-1 or �C-1
+        """ # nopep8
+        return self._cards[1].get_value("te_coef")
+
+    @te_coef.setter
+    def te_coef(self, value: float) -> None:
+        """Set the te_coef property."""
+        self._cards[1].set_value("te_coef", value)
+
+    @property
+    def th_cnd(self) -> float:
+        """Get or set the Thermal conductivity between DES in W/(m K)
+        """ # nopep8
+        return self._cards[1].get_value("th_cnd")
+
+    @th_cnd.setter
+    def th_cnd(self, value: float) -> None:
+        """Set the th_cnd property."""
+        self._cards[1].set_value("th_cnd", value)
 
     @property
     def lnorm(self) -> int:

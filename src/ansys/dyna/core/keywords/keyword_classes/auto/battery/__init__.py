@@ -23,11 +23,21 @@
 # Auto-generated imports for battery domain
 
 from .battery_ba_echem_control_solver import BatteryBaEchemControlSolver
+from .battery_database_history_allnds_on_eleset import BatteryDatabaseHistoryAllndsOnEleset
+from .battery_database_history_globals import BatteryDatabaseHistoryGlobals
+from .battery_database_history_nodelist_on_eleset import BatteryDatabaseHistoryNodelistOnEleset
+from .battery_echem_aging import BatteryEchemAging
 from .battery_echem_cell_geometry import BatteryEchemCellGeometry
+from .battery_echem_control_integration import BatteryEchemControlIntegration
 from .battery_echem_control_solver import BatteryEchemControlSolver
+from .battery_echem_control_thermal import BatteryEchemControlThermal
+from .battery_echem_gas import BatteryEchemGas
 from .battery_echem_initial import BatteryEchemInitial
 from .battery_echem_mat_anode import BatteryEchemMatAnode
 from .battery_echem_mat_cathode import BatteryEchemMatCathode
 from .battery_echem_mat_electrolyte import BatteryEchemMatElectrolyte
-from .battery_echem_part import BatteryEchemPart
+from .battery_echem_mat_thermal import BatteryEchemMatThermal
+from .battery_echem_plating import BatteryEchemPlating
 from .battery_echem_thermal import BatteryEchemThermal
+from .battery_echem_thermal_abuse import BatteryEchemThermalAbuse
+from .battery_echem_vent import BatteryEchemVent

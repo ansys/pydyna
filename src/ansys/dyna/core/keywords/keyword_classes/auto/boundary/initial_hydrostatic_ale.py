@@ -79,7 +79,7 @@ class InitialHydrostaticAle(KeywordBase):
 
     @property
     def stype(self) -> int:
-        """Get or set the Set type for the SID above:  EQ.0:  SID is a part set ID ; EQ.1:  SID is a part ID.
+        """Get or set the Set type for the SID above: EQ.0: SID is a part set ID ; EQ.1: SID is a part ID.
         EQ.2: Solid set ID (SSID).
         """ # nopep8
         return self._cards[0].get_value("stype")

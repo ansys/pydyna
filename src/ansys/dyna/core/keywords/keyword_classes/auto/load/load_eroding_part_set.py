@@ -86,6 +86,7 @@ class LoadErodingPartSet(KeywordBase):
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID defining pressure as a function of time, see *DEFINE_CURVE.
+        LT.0: Pressure determined from certain *LOAD keywords. See Remark 1
         """ # nopep8
         return self._cards[0].get_value("lcid")
 

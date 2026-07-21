@@ -30,6 +30,10 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import De
 
 _DATABASEFREQUENCYBINARYD3PSD_CARD0 = (
     FieldSchema("binary", int, 0, 10, None),
+    FieldSchema("sf", int, 10, 10, 3),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("psetid", int, 40, 10, None),
 )
 
 _DATABASEFREQUENCYBINARYD3PSD_CARD1 = (
@@ -47,6 +51,7 @@ class DatabaseFrequencyBinaryD3Psd(KeywordBase):
     subkeyword = "FREQUENCY_BINARY_D3PSD"
     _link_fields = {
         "lcfreq": LinkType.DEFINE_CURVE,
+        "psetid": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -65,12 +70,12 @@ class DatabaseFrequencyBinaryD3Psd(KeywordBase):
     @property
     def binary(self) -> typing.Optional[int]:
         """Get or set the Flag for writing the binary plot file.  See Remark 1.
-        EQ.0:	Off
-        EQ.1 : Write the binary plot file.
-        EQ.2 : Write the complex variable binary plot file D3SSD(OPTION1 = D3SSD) or include the individual mode response in the binary plot file D3SPCM(OPTION1‌ = D3SPCM).
-        EQ.3 : Write the binary plot file which combines response spectrum analysis results and other structural analysis results provided by the file specified with Card  2c(OPTION1‌ = D3SPCM).
-        EQ.90 : Write only real part of frequency response(D3SSD only).
-        EQ.91 : Write only imaginary part of frequency response(D3SSD only).
+        EQ.0: Off
+        EQ.1: Write the binary plot file.
+        EQ.2: Write the complex variable binary plot file D3SSD(OPTION1 = D3SSD) or include the individual mode response in the binary plot file D3SPCM(OPTION1 = D3SPCM).
+        EQ.3:Write the binary plot file, which combines response spectrum analysis or RMS results, depending on the choice of OPTION1, with other structural analysis results provided by the file specified with Card 2c It is available for OPTION1 = D3SPCM or D3RMS. See Remarks 4 and 5.
+        EQ.90: Write only real part of frequency response(D3SSD only).
+        EQ.91: Write only imaginary part of frequency response(D3SSD only).
         """ # nopep8
         return self._cards[0].get_value("binary")
 
@@ -78,6 +83,28 @@ class DatabaseFrequencyBinaryD3Psd(KeywordBase):
     def binary(self, value: int) -> None:
         """Set the binary property."""
         self._cards[0].set_value("binary", value)
+
+    @property
+    def sf(self) -> int:
+        """Get or set the Scale factor on the RMS response when using OPTION1 = D3RMS with BINARY = 3. See Remark 5
+        """ # nopep8
+        return self._cards[0].get_value("sf")
+
+    @sf.setter
+    def sf(self, value: int) -> None:
+        """Set the sf property."""
+        self._cards[0].set_value("sf", value)
+
+    @property
+    def psetid(self) -> typing.Optional[int]:
+        """Get or set the Part set ID for the parts to be included in the database. If not defined, all the parts are included in the database. Currently it works for D3SSD only.
+        """ # nopep8
+        return self._cards[0].get_value("psetid")
+
+    @psetid.setter
+    def psetid(self, value: int) -> None:
+        """Set the psetid property."""
+        self._cards[0].set_value("psetid", value)
 
     @property
     def fmin(self) -> float:
@@ -118,7 +145,7 @@ class DatabaseFrequencyBinaryD3Psd(KeywordBase):
         EQ.0: linear,
         EQ.1: logarithmic,
         EQ.2: biased.
-        EQ.3:	Eigenfrequencies only
+        EQ.3: Eigenfrequencies only
         """ # nopep8
         return self._cards[1].get_value("fspace")
 
@@ -154,4 +181,14 @@ class DatabaseFrequencyBinaryD3Psd(KeywordBase):
     def lcfreq_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcfreq."""
         self.lcfreq = value.lcid
+
+    @property
+    def psetid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SET_PART_* keyword for psetid."""
+        return self._get_set_link("PART", self.psetid)
+
+    @psetid_link.setter
+    def psetid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psetid."""
+        self.psetid = value.sid
 

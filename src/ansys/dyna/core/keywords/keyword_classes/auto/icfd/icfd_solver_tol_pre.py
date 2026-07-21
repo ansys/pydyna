@@ -31,6 +31,8 @@ _ICFDSOLVERTOLPRE_CARD0 = (
     FieldSchema("rtol", float, 10, 10, 1e-08),
     FieldSchema("unused", int, 20, 10, None),
     FieldSchema("maxit", int, 30, 10, 1000),
+    FieldSchema("preid", int, 40, 10, None),
+    FieldSchema("ptol", float, 50, 10, None),
 )
 
 class IcfdSolverTolPre(KeywordBase):
@@ -50,7 +52,7 @@ class IcfdSolverTolPre(KeywordBase):
         ]
     @property
     def atol(self) -> float:
-        """Get or set the Absolute convergence criteria. Convergence is achieved when Residual𝑖+1 −Residual𝑖 ≤ ATOL. If a negative integer is entered,then that value will be used as a load curve ID for ATOL.
+        """Get or set the Absolute convergence criteria. Convergence is achieved when Residual+1 Residual  ATOL. If a negative integer is entered,then that value will be used as a load curve ID for ATOL.
         """ # nopep8
         return self._cards[0].get_value("atol")
 
@@ -61,7 +63,7 @@ class IcfdSolverTolPre(KeywordBase):
 
     @property
     def rtol(self) -> float:
-        """Get or set the Relative convergence criteria. Convergence is achieved when (Residual𝑖+1 − Residual𝑖)⁄Residualinitial ≤ RTOL. If a negative integer is entered, then that value will be used as a load curve ID for RTOL.
+        """Get or set the Relative convergence criteria. Convergence is achieved when (Residual+1  Residual)Residualinitial  RTOL. If a negative integer is entered, then that value will be used as a load curve ID for RTOL.
         """ # nopep8
         return self._cards[0].get_value("rtol")
 
@@ -80,4 +82,29 @@ class IcfdSolverTolPre(KeywordBase):
     def maxit(self, value: int) -> None:
         """Set the maxit property."""
         self._cards[0].set_value("maxit", value)
+
+    @property
+    def preid(self) -> typing.Optional[int]:
+        """Get or set the Choice of Preconditioner for the Conjugate Gradient Solve:
+        EQ.1: Diagonal Preconditioner.
+        EQ.2: Incomplete LU factorization.
+        EQ.5: Global MUMPS factorization.
+        """ # nopep8
+        return self._cards[0].get_value("preid")
+
+    @preid.setter
+    def preid(self, value: int) -> None:
+        """Set the preid property."""
+        self._cards[0].set_value("preid", value)
+
+    @property
+    def ptol(self) -> typing.Optional[float]:
+        """Get or set the Preconditioner tolerance (a.k.a Drop Tolerance if PREID=2)
+        """ # nopep8
+        return self._cards[0].get_value("ptol")
+
+    @ptol.setter
+    def ptol(self, value: float) -> None:
+        """Set the ptol property."""
+        self._cards[0].set_value("ptol", value)
 

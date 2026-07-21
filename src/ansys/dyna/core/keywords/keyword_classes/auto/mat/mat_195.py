@@ -35,14 +35,14 @@ _MAT195_CARD0 = (
     FieldSchema("e", float, 20, 10, None),
     FieldSchema("pr", float, 30, 10, None),
     FieldSchema("sigy", float, 40, 10, None),
-    FieldSchema("etan", float, 50, 10, None),
+    FieldSchema("etan", float, 50, 10, 0.0),
     FieldSchema("fail", float, 60, 10, 1e+21),
     FieldSchema("tdel", float, 70, 10, 1e+21),
 )
 
 _MAT195_CARD1 = (
-    FieldSchema("c", float, 0, 10, None),
-    FieldSchema("p", float, 10, 10, None),
+    FieldSchema("c", float, 0, 10, 0.0),
+    FieldSchema("p", float, 10, 10, 0.0),
     FieldSchema("lcss", int, 20, 10, 0),
     FieldSchema("lcsr", int, 30, 10, 0),
 )
@@ -50,7 +50,7 @@ _MAT195_CARD1 = (
 _MAT195_CARD2 = (
     FieldSchema("noten", int, 0, 10, 0),
     FieldSchema("tencut", float, 10, 10, 1000000000000000.0),
-    FieldSchema("sdr", float, 20, 10, None),
+    FieldSchema("sdr", float, 20, 10, 0.0),
 )
 
 _MAT195_OPTION0_CARD0 = (
@@ -100,7 +100,7 @@ class Mat195(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification. A unique number has to be used.
+        """Get or set the Material identification. A unique number or label must be specified (see *PART).
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -154,7 +154,7 @@ class Mat195(KeywordBase):
         self._cards[0].set_value("sigy", value)
 
     @property
-    def etan(self) -> typing.Optional[float]:
+    def etan(self) -> float:
         """Get or set the Tangent modulus.
         Ignored if LCSS.GT.0 is defined.
         """ # nopep8
@@ -168,7 +168,7 @@ class Mat195(KeywordBase):
     @property
     def fail(self) -> float:
         """Get or set the Failure flag:
-        LT.0.0: user defined failure subroutine is called to determine failure
+        LT.0.0: User defined failure subroutine is called to determine failure
         EQ.0.0: Failure is not considered. This option is recommended if failure is not of interest since many caluculations will be saved (default),
         GT.0.0: Plastic strain to failure. When the plastic strain reaches this value, the element is deleted from the calculation.
         """ # nopep8
@@ -192,7 +192,7 @@ class Mat195(KeywordBase):
         self._cards[0].set_value("tdel", value)
 
     @property
-    def c(self) -> typing.Optional[float]:
+    def c(self) -> float:
         """Get or set the Strain rate parameter.
         """ # nopep8
         return self._cards[1].get_value("c")
@@ -203,7 +203,7 @@ class Mat195(KeywordBase):
         self._cards[1].set_value("c", value)
 
     @property
-    def p(self) -> typing.Optional[float]:
+    def p(self) -> float:
         """Get or set the Strain rate parameter.
         """ # nopep8
         return self._cards[1].get_value("p")
@@ -238,9 +238,9 @@ class Mat195(KeywordBase):
     @property
     def noten(self) -> int:
         """Get or set the No-tension flag:
-        EQ:0 beam takes tension,
-        EQ:1 beam takes no tension,
-        EQ:2 beam takes tension up to value given by TENCUT.
+        EQ.0: Beam takes tension,
+        EQ.1: Beam takes no tension,
+        EQ.2: Beam takes tension up to value given by TENCUT.
         """ # nopep8
         return self._cards[2].get_value("noten")
 
@@ -263,9 +263,8 @@ class Mat195(KeywordBase):
         self._cards[2].set_value("tencut", value)
 
     @property
-    def sdr(self) -> typing.Optional[float]:
+    def sdr(self) -> float:
         """Get or set the Stiffness degradation factor.
-        Default is set to 0.0
         """ # nopep8
         return self._cards[2].get_value("sdr")
 

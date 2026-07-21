@@ -108,9 +108,8 @@ class MatS08(KeywordBase):
     @property
     def ctf(self) -> float:
         """Get or set the Flag for compression/tension:
-        EQ.-1.0: tension only,
-        EQ.0.0: default is set to 1.0,
-        EQ.1.0: compression only (default).
+        EQ. - 1.0: Tension only
+        EQ.1.0: Compression only(default)
         """ # nopep8
         return self._cards[0].get_value("ctf")
 

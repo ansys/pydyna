@@ -113,24 +113,25 @@ class ControlThermalSolver(KeywordBase):
     @property
     def solver(self) -> int:
         """Get or set the Thermal analysis solver type (see Remarks 1 and 2):
-        EQ.11:	Direct solver
-        EQ.12 : Diagonal scaling(default for MPP) conjugate gradient iterative
-        EQ.13 : Symmetric Gauss - Seidel conjugate gradient iterative
-        EQ.14 : SSOR conjugate gradient iterative
-        EQ.15 : ILDLT0(incomplete factorization) conjugate gradient iterative
-        EQ.16 : Modified ILDLT0(incomplete factorization) conjugate gradient iterative
-        EQ.17 : GMRES solver for conjugate heat transfer problems
-        EQ.18 : ILDLT(T) (incomplete factorization with threshold pivoting)
-        EQ.19 : Preconditioned conjugate gradient with MUMPS(see Remark Error!Reference source not found.in * CONTROL_IMPlICIT_SOLVER)
-        EQ.30 : Direct nonsymmetric factorization
+        EQ.11: Direct solver
+        EQ.12: Diagonal scaling(default for MPP) conjugate gradient iterative
+        EQ.13: Symmetric Gauss - Seidel conjugate gradient iterative
+        EQ.14: SSOR conjugate gradient iterative
+        EQ.15: ILDLT0(incomplete factorization) conjugate gradient iterative
+        EQ.16: Modified ILDLT0(incomplete factorization) conjugate gradient iterative
+        EQ.17: GMRES solver for conjugate heat transfer problems
+        EQ.18: ILDLT(T) (incomplete factorization with threshold pivoting)
+        EQ.19: Preconditioned conjugate gradient with MUMPS(see Remark Error!Reference source not found.in *CONTROL_IMPlICIT_SOLVER)
+        EQ.30: Direct nonsymmetric factorization
+        EQ.90: User-supplied linear equation (see Remark Error! Reference source not found. of *CONTROL_IMPLICIT_SOLVER).
         """ # nopep8
         return self._cards[0].get_value("solver")
 
     @solver.setter
     def solver(self, value: int) -> None:
         """Set the solver property."""
-        if value not in [11, 12, 13, 14, 15, 16, 17, 18, 19, 30, None]:
-            raise Exception("""solver must be `None` or one of {11,12,13,14,15,16,17,18,19,30}.""")
+        if value not in [11, 12, 13, 14, 15, 16, 17, 18, 19, 30, 90, None]:
+            raise Exception("""solver must be `None` or one of {11,12,13,14,15,16,17,18,19,30,90}.""")
         self._cards[0].set_value("solver", value)
 
     @property
@@ -246,8 +247,8 @@ class ControlThermalSolver(KeywordBase):
     @property
     def tsf(self) -> float:
         """Get or set the Thermal Speedup Factor. This factor multiplies all thermal parameters with units of time in the denominator (e.g., thermal conductivity, convection heat transfer coefficients). It is used to artificially time scale the problem.
-        EQ.0.0:	Default value 1.0,
-        LT.0.0 : | TSF | is a load curve ID.Curve defines speedup factor as a function of time.
+        EQ.0.0: Default value 1.0,
+        LT.0.0: | TSF | is a load curve ID.Curve defines speedup factor as a function of time.
         Its main use is in metal stamping.If the velocity of the stamping punch is artificially increased by 1000, then set TSF = 1000 to scale the thermal parameters.
         """ # nopep8
         return self._cards[1].get_value("tsf")
@@ -260,9 +261,9 @@ class ControlThermalSolver(KeywordBase):
     @property
     def mxdmp(self) -> int:
         """Get or set the Matrix Dumping for SOLVER > 11
-        EQ.0:	No Dumping
-        GT.0:	Dump using ASCII format every MXDMP time steps.
-        LT.0:	Dump using binary format every |MXDMP| time steps.
+        EQ.0: No Dumping
+        GT.0: Dump using ASCII format every MXDMP time steps.
+        LT.0: Dump using binary format every |MXDMP| time steps.
         """ # nopep8
         return self._cards[2].get_value("mxdmp")
 
@@ -285,9 +286,9 @@ class ControlThermalSolver(KeywordBase):
     @property
     def varden(self) -> int:
         """Get or set the Variable thermal density for solid elements in a coupled thermal - structural analysis.Setting VARDEN to 1 or 2 will adjust the material density in the thermal solver to account for changes in element volume, for example, due to material compaction, thermal expansion, etc.In applications where volume changes are small, the default is recommended.
-        EQ.0:	Thermal density remains constant and equal to TRO as given in * MAT_THERMAL_option(default).
-        EQ.1 : Thermal density varies to account for change in volume.If an equation of state(*EOS) is used, the initial internal energy specified therein is taken into account.
-        EQ.2 : Thermal density varies to account for change in volume.The initial internal energy is not considered.
+        EQ.0: Thermal density remains constant and equal to TRO as given in *MAT_THERMAL_option(default).
+        EQ.1: Thermal density varies to account for change in volume.If an equation of state(*EOS) is used, the initial internal energy specified therein is taken into account.
+        EQ.2: Thermal density varies to account for change in volume.The initial internal energy is not considered.
         """ # nopep8
         return self._cards[2].get_value("varden")
 

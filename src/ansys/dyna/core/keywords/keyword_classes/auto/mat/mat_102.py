@@ -178,7 +178,7 @@ class Mat102(KeywordBase):
 
     @property
     def n(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the See manual Remark 1
         """ # nopep8
         return self._cards[1].get_value("n")
 
@@ -189,7 +189,7 @@ class Mat102(KeywordBase):
 
     @property
     def a(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the See manual Remark 1
         """ # nopep8
         return self._cards[1].get_value("a")
 
@@ -200,7 +200,7 @@ class Mat102(KeywordBase):
 
     @property
     def q(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the See manual Remark 1
         """ # nopep8
         return self._cards[1].get_value("q")
 
@@ -211,7 +211,7 @@ class Mat102(KeywordBase):
 
     @property
     def g(self) -> typing.Optional[float]:
-        """Get or set the 
+        """Get or set the See manual Remark 1
         """ # nopep8
         return self._cards[1].get_value("g")
 
@@ -234,8 +234,8 @@ class Mat102(KeywordBase):
     @property
     def lcq(self) -> typing.Optional[float]:
         """Get or set the ID of curve specifying parameter Q:
-        GT.0:	Q as function of plastic strain.
-        LT.0 : Q as function of temperature
+        GT.0: Q as function of plastic strain.
+        LT.0: Q as function of temperature
         """ # nopep8
         return self._cards[1].get_value("lcq")
 

@@ -96,7 +96,7 @@ class ConstrainedRivet(KeywordBase):
 
     @property
     def tf(self) -> float:
-        """Get or set the Failure time for nodal constraint set.
+        """Get or set the Failure time for the nodal constraint set.
         """ # nopep8
         return self._cards[0].get_value("tf")
 

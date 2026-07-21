@@ -25,11 +25,14 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.keyword_base import LinkType
-from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _NODEMERGE_CARD0 = (
     FieldSchema("nid", int, 0, 10, None),
+    FieldSchema("x", float, 8, 16, 0.0),
+    FieldSchema("y", float, 24, 16, 0.0),
+    FieldSchema("z", float, 40, 16, 0.0),
+    FieldSchema("tc", int, 56, 8, 0),
+    FieldSchema("rc", int, 64, 8, 0),
 )
 
 class NodeMerge(KeywordBase):
@@ -37,9 +40,6 @@ class NodeMerge(KeywordBase):
 
     keyword = "NODE"
     subkeyword = "MERGE"
-    _link_fields = {
-        "nid": LinkType.NODE,
-    }
 
     def __init__(self, **kwargs):
         """Initialize the NodeMerge class."""
@@ -62,7 +62,73 @@ class NodeMerge(KeywordBase):
         self._cards[0].set_value("nid", value)
 
     @property
-    def nid_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given nid."""
-        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+    def x(self) -> float:
+        """Get or set the x-coordinate.
+        """ # nopep8
+        return self._cards[0].get_value("x")
+
+    @x.setter
+    def x(self, value: float) -> None:
+        """Set the x property."""
+        self._cards[0].set_value("x", value)
+
+    @property
+    def y(self) -> float:
+        """Get or set the y-coordinate.
+        """ # nopep8
+        return self._cards[0].get_value("y")
+
+    @y.setter
+    def y(self, value: float) -> None:
+        """Set the y property."""
+        self._cards[0].set_value("y", value)
+
+    @property
+    def z(self) -> float:
+        """Get or set the z-coordinate.
+        """ # nopep8
+        return self._cards[0].get_value("z")
+
+    @z.setter
+    def z(self, value: float) -> None:
+        """Set the z property."""
+        self._cards[0].set_value("z", value)
+
+    @property
+    def tc(self) -> int:
+        """Get or set the Translational constraint:
+        EQ.0: no constraints,
+        EQ.1: constrained x displacement,
+        EQ.2: constrained y displacement,
+        EQ.3: constrained z displacement,
+        EQ.4: constrained x and y displacements,
+        EQ.5: constrained y and z displacements,
+        EQ.6: constrained z and x displacements,
+        EQ.7: constrained x, y, and z displacements.
+        """ # nopep8
+        return self._cards[0].get_value("tc")
+
+    @tc.setter
+    def tc(self, value: int) -> None:
+        """Set the tc property."""
+        self._cards[0].set_value("tc", value)
+
+    @property
+    def rc(self) -> int:
+        """Get or set the Rotational constraint:
+        EQ.0: no constraints,
+        EQ.1: constrained x rotation,
+        EQ.2: constrained y rotation,
+        EQ.3: constrained z rotation,
+        EQ.4: constrained x and y rotations,
+        EQ.5: constrained y and z rotations,
+        EQ.6: constrained z and x rotations,
+        EQ.7: constrained x, y, and z rotations.
+        """ # nopep8
+        return self._cards[0].get_value("rc")
+
+    @rc.setter
+    def rc(self, value: int) -> None:
+        """Set the rc property."""
+        self._cards[0].set_value("rc", value)
 

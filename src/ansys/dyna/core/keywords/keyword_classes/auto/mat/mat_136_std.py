@@ -43,8 +43,8 @@ _MAT136STD_CARD0 = (
 _MAT136STD_CARD1 = (
     FieldSchema("sys", float, 0, 10, None),
     FieldSchema("sip", float, 10, 10, None),
-    FieldSchema("shs", float, 20, 10, None),
-    FieldSchema("shl", float, 30, 10, None),
+    FieldSchema("shb", float, 20, 10, None),
+    FieldSchema("sho", float, 30, 10, None),
     FieldSchema("esh", float, 40, 10, None),
     FieldSchema("e0", float, 50, 10, None),
     FieldSchema("alpha", float, 60, 10, None),
@@ -146,7 +146,7 @@ class Mat136Std(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.  A unique number or label must be specified
+        """Get or set the Material identification. A unique number or label must be specified
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -190,7 +190,7 @@ class Mat136Std(KeywordBase):
 
     @property
     def n(self) -> typing.Optional[int]:
-        """Get or set the Order of Fourier series (i.e., number of test groups minus one).  The minimum number for N is 2, and the maximum is 12
+        """Get or set the Order of Fourier series (i.e., number of test groups minus one). The minimum number for N is 2, and the maximum is 12
         """ # nopep8
         return self._cards[0].get_value("n")
 
@@ -223,7 +223,10 @@ class Mat136Std(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[float]:
-        """Get or set the Stress-strain curve ID.  If defined, SYS, SIP, SHS, and SHL are ignored
+        """Get or set the Stress-strain curve ID. If defined, SYS, SIP, SHB, and SHO are ignored.
+        Load Curve.  When LCID is a load curve ID, it is taken as defining effective stress as a function of effective plastic strain.
+        Tabular Data.The table ID defines for each strain rate value a load curve ID giving the stress as a function effective plastic strain for that strain rate.Linear interpolation between the discrete strain rates is used by default.
+        Logarithmically Defined Tables.A way to invoke logarithmic interpolation between discrete strain rates is described as follows.If the first value in the table is negative, LS - DYNA assumes that all the table values represent the natural logarithm of a strain rate.There is some additional computational cost associated with invoking logarithmic interpolation.
         """ # nopep8
         return self._cards[0].get_value("lcid")
 
@@ -255,26 +258,26 @@ class Mat136Std(KeywordBase):
         self._cards[1].set_value("sip", value)
 
     @property
-    def shs(self) -> typing.Optional[float]:
-        """Get or set the Strain hardening parameter for small strain
+    def shb(self) -> typing.Optional[float]:
+        """Get or set the Strain hardening parameter for larges strain
         """ # nopep8
-        return self._cards[1].get_value("shs")
+        return self._cards[1].get_value("shb")
 
-    @shs.setter
-    def shs(self, value: float) -> None:
-        """Set the shs property."""
-        self._cards[1].set_value("shs", value)
+    @shb.setter
+    def shb(self, value: float) -> None:
+        """Set the shb property."""
+        self._cards[1].set_value("shb", value)
 
     @property
-    def shl(self) -> typing.Optional[float]:
-        """Get or set the Strain hardening parameter for larger strain
+    def sho(self) -> typing.Optional[float]:
+        """Get or set the Strain hardening parameter for low strain
         """ # nopep8
-        return self._cards[1].get_value("shl")
+        return self._cards[1].get_value("sho")
 
-    @shl.setter
-    def shl(self, value: float) -> None:
-        """Set the shl property."""
-        self._cards[1].set_value("shl", value)
+    @sho.setter
+    def sho(self, value: float) -> None:
+        """Set the sho property."""
+        self._cards[1].set_value("sho", value)
 
     @property
     def esh(self) -> typing.Optional[float]:
@@ -300,7 +303,7 @@ class Mat136Std(KeywordBase):
 
     @property
     def alpha(self) -> typing.Optional[float]:
-        """Get or set the distribution of hardening used in the curve-fitting.    pure kinematic hardening and   provides pure isotropic hardening
+        """Get or set the distribution of hardening used in the curve-fitting.   pure kinematic hardening and   provides pure isotropic hardening
         """ # nopep8
         return self._cards[1].get_value("alpha")
 
@@ -311,7 +314,7 @@ class Mat136Std(KeywordBase):
 
     @property
     def lcid2(self) -> typing.Optional[float]:
-        """Get or set the Curve ID.  The curve defines Young's modulus change with respect to the plastic strain.  By default it is assumed that Young's modulus remains constant.  Effective value is between 0-1
+        """Get or set the Curve ID. The curve defines Young's modulus change with respect to the plastic strain. By default it is assumed that Young's modulus remains constant. Effective value is between 0 and 1
         """ # nopep8
         return self._cards[1].get_value("lcid2")
 
@@ -327,7 +330,7 @@ class Mat136Std(KeywordBase):
         element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
         EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
         *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
         """ # nopep8
@@ -351,7 +354,7 @@ class Mat136Std(KeywordBase):
 
     @property
     def raten(self) -> typing.Optional[float]:
-        """Get or set the Ratio r_enth of Boltzman constant k (8.617E-5 eV/K) and maximum activation enthalpy ΔG_0 (in eV): r_enth=(k/(ΔG_0 ))
+        """Get or set the Ratio r_enth of Boltzman constant k (8.617E-5 eV/K) and maximum activation enthalpy DeltaG_0 (in eV): r_enth=(k/(DeltaG_0 ))
         """ # nopep8
         return self._cards[2].get_value("raten")
 
@@ -362,7 +365,7 @@ class Mat136Std(KeywordBase):
 
     @property
     def srn0(self) -> typing.Optional[float]:
-        """Get or set the Limit strain rate (ε_0 ) ̇
+        """Get or set the Limit strain rate (eps**_0)
         """ # nopep8
         return self._cards[2].get_value("srn0")
 
@@ -483,7 +486,7 @@ class Mat136Std(KeywordBase):
 
     @property
     def d1(self) -> typing.Optional[float]:
-        """Get or set the Components of vector d for AOPT = 4
+        """Get or set the Components of vector d for AOPT = 2
         """ # nopep8
         return self._cards[4].get_value("d1")
 
@@ -494,7 +497,7 @@ class Mat136Std(KeywordBase):
 
     @property
     def d2(self) -> typing.Optional[float]:
-        """Get or set the Components of vector d for AOPT = 4
+        """Get or set the Components of vector d for AOPT = 2
         """ # nopep8
         return self._cards[4].get_value("d2")
 
@@ -505,7 +508,7 @@ class Mat136Std(KeywordBase):
 
     @property
     def d3(self) -> typing.Optional[float]:
-        """Get or set the Components of vector d for AOPT = 4
+        """Get or set the Components of vector d for AOPT = 2
         """ # nopep8
         return self._cards[4].get_value("d3")
 
@@ -516,7 +519,7 @@ class Mat136Std(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Material angle in degrees for AOPT=3, may be overwritten on the element card
+        """Get or set the Material angle in degrees for AOPT0 and =3, may be overwritten on the element card; see *ELEMENT_SHELL_BETA.
         """ # nopep8
         return self._cards[4].get_value("beta")
 
@@ -560,7 +563,7 @@ class Mat136Std(KeywordBase):
 
     @property
     def alps_i(self) -> typing.Optional[float]:
-        """Get or set the Normalized distance of second component of plain stress point between the hinge points on both sides for the ith direction.  See Remarks for details
+        """Get or set the Normalized distance of second component of plain stress point between the hinge points on both sides for the ith direction. See Remarks for details
         """ # nopep8
         return self._cards[5].get_value("alps_i")
 

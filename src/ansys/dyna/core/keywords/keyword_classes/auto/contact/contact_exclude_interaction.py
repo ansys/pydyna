@@ -32,10 +32,10 @@ _CONTACTEXCLUDEINTERACTION_CARD0 = (
 )
 
 _CONTACTEXCLUDEINTERACTION_CARD1 = (
-    FieldSchema("sid2", int, 0, 10, None),
-    FieldSchema("sid1", int, 10, 10, None),
-    FieldSchema("type2", int, 20, 10, 0),
-    FieldSchema("type1", int, 30, 10, 0),
+    FieldSchema("sida", int, 0, 10, None),
+    FieldSchema("sidb", int, 10, 10, None),
+    FieldSchema("typea", int, 20, 10, 0),
+    FieldSchema("typeb", int, 30, 10, 0),
 )
 
 class ContactExcludeInteraction(KeywordBase):
@@ -80,56 +80,56 @@ class ContactExcludeInteraction(KeywordBase):
         self._cards[0].set_value("cid", value)
 
     @property
-    def sid2(self) -> typing.Optional[int]:
-        """Get or set the Set ID of set 2
+    def sida(self) -> typing.Optional[int]:
+        """Get or set the Set ID of set A
         """ # nopep8
-        return self._cards[1].get_value("sid2")
+        return self._cards[1].get_value("sida")
 
-    @sid2.setter
-    def sid2(self, value: int) -> None:
-        """Set the sid2 property."""
-        self._cards[1].set_value("sid2", value)
+    @sida.setter
+    def sida(self, value: int) -> None:
+        """Set the sida property."""
+        self._cards[1].set_value("sida", value)
 
     @property
-    def sid1(self) -> typing.Optional[int]:
-        """Get or set the Set ID of set 1
+    def sidb(self) -> typing.Optional[int]:
+        """Get or set the Set ID of set B
         """ # nopep8
-        return self._cards[1].get_value("sid1")
+        return self._cards[1].get_value("sidb")
 
-    @sid1.setter
-    def sid1(self, value: int) -> None:
-        """Set the sid1 property."""
-        self._cards[1].set_value("sid1", value)
+    @sidb.setter
+    def sidb(self, value: int) -> None:
+        """Set the sidb property."""
+        self._cards[1].set_value("sidb", value)
 
     @property
-    def type2(self) -> int:
-        """Get or set the ID type of set SID2:
-        EQ.0:	Segment set
-        EQ.1 : Shell element set
-        EQ.2 : Part set
+    def typea(self) -> int:
+        """Get or set the ID type of set SIDA:
+        EQ.0: Segment set
+        EQ.1: Shell element set
+        EQ.2: Part set
         """ # nopep8
-        return self._cards[1].get_value("type2")
+        return self._cards[1].get_value("typea")
 
-    @type2.setter
-    def type2(self, value: int) -> None:
-        """Set the type2 property."""
+    @typea.setter
+    def typea(self, value: int) -> None:
+        """Set the typea property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""type2 must be `None` or one of {0,1,2}.""")
-        self._cards[1].set_value("type2", value)
+            raise Exception("""typea must be `None` or one of {0,1,2}.""")
+        self._cards[1].set_value("typea", value)
 
     @property
-    def type1(self) -> int:
-        """Get or set the ID type of set SID1:
-        EQ.0:	Segment set
-        EQ.1 : Shell element set
-        EQ.2 : Part set
+    def typeb(self) -> int:
+        """Get or set the ID type of set SIDB:
+        EQ.0: Segment set
+        EQ.1: Shell element set
+        EQ.2: Part set
         """ # nopep8
-        return self._cards[1].get_value("type1")
+        return self._cards[1].get_value("typeb")
 
-    @type1.setter
-    def type1(self, value: int) -> None:
-        """Set the type1 property."""
+    @typeb.setter
+    def typeb(self, value: int) -> None:
+        """Set the typeb property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""type1 must be `None` or one of {0,1,2}.""")
-        self._cards[1].set_value("type1", value)
+            raise Exception("""typeb must be `None` or one of {0,1,2}.""")
+        self._cards[1].set_value("typeb", value)
 

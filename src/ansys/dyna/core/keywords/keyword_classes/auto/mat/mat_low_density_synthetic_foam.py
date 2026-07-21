@@ -136,7 +136,9 @@ class MatLowDensitySyntheticFoam(KeywordBase):
 
     @property
     def lcid1(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID, see *DEFINE_CURVE, for nominal stress versus strain for the first loading cycle.
+        """Get or set the Load curve or table ID describing nominal stress as a function of strain for the undamaged material (see Remark 2):
+        GT.0: Load curve ID(see * DEFINE_‌CURVE) for nominal stress as a function of strain for the undamaged material.
+        LT.0 : -LCID1 is a table ID(see * DEFINE_‌TABLE) for nominal stress as a function of strain for the undamaged material as a function of strain rate
         """ # nopep8
         return self._cards[0].get_value("lcid1")
 
@@ -147,7 +149,7 @@ class MatLowDensitySyntheticFoam(KeywordBase):
 
     @property
     def lcid2(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID, see *DEFINE_CURVE, for nominal stress versus strain for the loading cycles after the first loading cycle is completed.
+        """Get or set the Load curve or table ID.  The load curve ID (see *DEFINE_‌CURVE) defines the nominal stress as a function of strain for the damaged material.  The table ID (see *DEFINE_‌TABLE) defines the nominal stress as a function of strain for the damaged material as a function of strain rate.  See Remark 2. Note that if LCID1 refers to a table that LCID2 must also refer to a table.
         """ # nopep8
         return self._cards[0].get_value("lcid2")
 

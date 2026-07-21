@@ -39,7 +39,7 @@ _MATADDFATIGUEEN_CARD0 = (
 )
 
 _MATADDFATIGUEEN_CARD1 = (
-    FieldSchema("e", int, 0, 10, None),
+    FieldSchema("e", float, 0, 10, None),
     FieldSchema("pr", float, 10, 10, None),
 )
 
@@ -96,7 +96,7 @@ class MatAddFatigueEn(KeywordBase):
 
     @property
     def kp(self) -> typing.Optional[float]:
-        """Get or set the K^', the cyclic strength coefficient
+        """Get or set the K, the cyclic strength coefficient
         """ # nopep8
         return self._cards[0].get_value("kp")
 
@@ -107,7 +107,7 @@ class MatAddFatigueEn(KeywordBase):
 
     @property
     def np(self) -> typing.Optional[float]:
-        """Get or set the N^', the cyclic strain hardening exponent
+        """Get or set the N, the cyclic strain hardening exponent
         """ # nopep8
         return self._cards[0].get_value("np")
 
@@ -118,7 +118,7 @@ class MatAddFatigueEn(KeywordBase):
 
     @property
     def sigmaf(self) -> typing.Optional[float]:
-        """Get or set the σ_f^', the fatigue strength coefficient
+        """Get or set the Sigma_f, the fatigue strength coefficient
         """ # nopep8
         return self._cards[0].get_value("sigmaf")
 
@@ -129,7 +129,7 @@ class MatAddFatigueEn(KeywordBase):
 
     @property
     def epsp(self) -> typing.Optional[float]:
-        """Get or set the ε_f^', the fatigue ductility coefficient
+        """Get or set the eps_f, the fatigue ductility coefficient
         """ # nopep8
         return self._cards[0].get_value("epsp")
 
@@ -140,7 +140,7 @@ class MatAddFatigueEn(KeywordBase):
 
     @property
     def bp(self) -> typing.Optional[float]:
-        """Get or set the b^', the fatigue strength exponent (Basquin’s exponent)
+        """Get or set the b, the fatigue strength exponent (Basquin's exponent)
         """ # nopep8
         return self._cards[0].get_value("bp")
 
@@ -151,7 +151,7 @@ class MatAddFatigueEn(KeywordBase):
 
     @property
     def cp(self) -> typing.Optional[float]:
-        """Get or set the c^', the fatigue ductility exponent (Coffin-Manson exponent)
+        """Get or set the c, the fatigue ductility exponent (Coffin-Manson exponent)
         """ # nopep8
         return self._cards[0].get_value("cp")
 
@@ -161,19 +161,19 @@ class MatAddFatigueEn(KeywordBase):
         self._cards[0].set_value("cp", value)
 
     @property
-    def e(self) -> typing.Optional[int]:
-        """Get or set the Young’s modulus
+    def e(self) -> typing.Optional[float]:
+        """Get or set the Young's modulus
         """ # nopep8
         return self._cards[1].get_value("e")
 
     @e.setter
-    def e(self, value: int) -> None:
+    def e(self, value: float) -> None:
         """Set the e property."""
         self._cards[1].set_value("e", value)
 
     @property
     def pr(self) -> typing.Optional[float]:
-        """Get or set the Poisson’s ratio.
+        """Get or set the Poisson's ratio.
         """ # nopep8
         return self._cards[1].get_value("pr")
 

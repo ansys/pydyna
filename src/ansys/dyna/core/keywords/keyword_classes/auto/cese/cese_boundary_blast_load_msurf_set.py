@@ -48,7 +48,7 @@ class CeseBoundaryBlastLoadMsurfSet(KeywordBase):
         ]
     @property
     def bid(self) -> typing.Optional[int]:
-        """Get or set the Blast source ID.
+        """Get or set the Blast source ID (see *LOAD_BLAST_ENHANCED).
         """ # nopep8
         return self._cards[0].get_value("bid")
 
@@ -59,7 +59,7 @@ class CeseBoundaryBlastLoadMsurfSet(KeywordBase):
 
     @property
     def msurf_s(self) -> typing.Optional[int]:
-        """Get or set the Identifier of a set of mesh surface part IDs created with a *LSO_ID_SET card.
+        """Get or set the Identifier of a set of mesh surface part IDs created with a *LSO_ID_SET card, where each mesh surface part ID in the set is referenced in *MESH_SURFACE_ELEMENT cards.
         """ # nopep8
         return self._cards[0].get_value("msurf_s")
 

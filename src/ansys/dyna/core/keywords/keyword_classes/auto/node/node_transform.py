@@ -77,9 +77,9 @@ class NodeTransform(KeywordBase):
 
     @property
     def immed(self) -> int:
-        """Get or set the Optional flag for transformation processing :
-        EQ.0:	Node transformation is performed after all input cards are read through.It is more efficient,and the definition sequence of  NODE_TRANSFORMand its NSID is irrelevant, i.e., the referred NSID doesn�t have to be defined prior to* NODE_TRANSFORM.However, for example, if nodes in NSID are used in POS6N of* DEFINE_TRANSFORMATION, its original coordinates, not the transformed coordinates, will be used to define the transformation matrix.
-        EQ.1 : Node transformation is performed immediately after * NODE_TRANSFORM is read.The referred NSID and its nodes have to be defined prior to * NODE_TRANSFORM
+        """Get or set the Optional flag for transformation processing:
+        EQ.0: Node transformation is performed after all input cards are read through.It is more efficient,and the definition sequence of  NODE_TRANSFORMand its NSID is irrelevant, i.e., the referred NSID doesnt have to be defined prior to *NODE_TRANSFORM.However, for example, if nodes in NSID are used in POS6N of *DEFINE_TRANSFORMATION, its original coordinates, not the transformed coordinates, will be used to define the transformation matrix.
+        EQ.1: Node transformation is performed immediately after *NODE_TRANSFORM is read.The referred NSID and its nodes have to be defined prior to *NODE_TRANSFORM
         """ # nopep8
         return self._cards[0].get_value("immed")
 

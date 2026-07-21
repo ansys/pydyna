@@ -63,9 +63,9 @@ _MATHYSTERETICREINFORCEMENT_CARD3 = (
 )
 
 _MATHYSTERETICREINFORCEMENT_CARD4 = (
-    FieldSchema("xp", float, 0, 10, None),
-    FieldSchema("yp", float, 10, 10, None),
-    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("unused", float, 0, 10, None),
+    FieldSchema("unused", float, 10, 10, None),
+    FieldSchema("unused", float, 20, 10, None),
     FieldSchema("a1", float, 30, 10, None),
     FieldSchema("a2", float, 40, 10, None),
     FieldSchema("a3", float, 50, 10, None),
@@ -136,7 +136,7 @@ class MatHystereticReinforcement(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification. A unique number has to be chosen.
+        """Get or set the Material identification. A unique number or label must be specified (see *PART).
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -158,7 +158,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def ym(self) -> typing.Optional[float]:
-        """Get or set the Young's Modulus
+        """Get or set the Young's modulus
         """ # nopep8
         return self._cards[0].get_value("ym")
 
@@ -169,7 +169,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def pr(self) -> typing.Optional[float]:
-        """Get or set the Poisson's Ratio
+        """Get or set the Poisson's ratio
         """ # nopep8
         return self._cards[0].get_value("pr")
 
@@ -246,7 +246,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def lcten(self) -> typing.Optional[float]:
-        """Get or set the Optional curve providing the factor on SIGY versus plastic strain (tension)
+        """Get or set the Optional curve providing the factor on SIGY as a function of plastic strain (tension)
         """ # nopep8
         return self._cards[1].get_value("lcten")
 
@@ -257,7 +257,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def lccomp(self) -> typing.Optional[float]:
-        """Get or set the Optional curve providing the factor on SBUCK versus plastic strain (compression)
+        """Get or set the Optional curve providing the factor on SBUCK as a function of plastic strain (compression)
         """ # nopep8
         return self._cards[1].get_value("lccomp")
 
@@ -268,7 +268,11 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def aopt(self) -> typing.Optional[float]:
-        """Get or set the Option for local axis alignment  - see material type 2
+        """Get or set the Material axes option (see *MAT_OPTIONTROPIC_ELASTIC):
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes as shown in Figure 0 - 1. The a - direction is from node 1 to node 2 of the element. The b - direction is orthogonal to the a - direction and is in the plane formed by nodes 1, 2,and 4. The material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors a and d input below, as with* DEFINE_COORDINATE_VECTOR.
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element(see Figure 0 - 1).a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.
+        LT.0.0: |"AOPT"| is a coordinate system ID(see *DEFINE_COORDINATE_OPTION)
         """ # nopep8
         return self._cards[1].get_value("aopt")
 
@@ -279,7 +283,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def ebu(self) -> typing.Optional[float]:
-        """Get or set the Optional buckling strain (if defined, overrides LAMBDA)
+        """Get or set the Optional buckling strain. If defined, it overrides LAMBDA.
         """ # nopep8
         return self._cards[1].get_value("ebu")
 
@@ -290,7 +294,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def downsl(self) -> float:
-        """Get or set the Initial down-slope of buckling curve as a fraction of YM (dimensionless)
+        """Get or set the Initial downslope of the buckling curve as a fraction of the Young's modulus (dimensionless)
         """ # nopep8
         return self._cards[1].get_value("downsl")
 
@@ -301,7 +305,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def dbar(self) -> typing.Optional[float]:
-        """Get or set the Reinforcement bar diameter used for dowel action. See remarks.
+        """Get or set the Reinforcement bar diameter used for dowel action. See Remark 7.
         """ # nopep8
         return self._cards[2].get_value("dbar")
 
@@ -312,7 +316,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def fcdow(self) -> typing.Optional[float]:
-        """Get or set the Concrete compressive strength used for dowel action. See notes.	This field has units of stress
+        """Get or set the Concrete compressive strength used for dowel action. See Remark 7. This field has units of stress.
         """ # nopep8
         return self._cards[2].get_value("fcdow")
 
@@ -334,7 +338,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def unitc(self) -> float:
-        """Get or set the Factor to convert model stress units to MPa, e.g. is model units are Newtons and meters, UNITC = 10e-6 , [UNITC] = 1/[STRESS].
+        """Get or set the Factor to convert model stress units to MPa. For example, if the model units are Newtons and meters, UNITC = 10e-6 , [UNITC] = 1/[STRESS].
         """ # nopep8
         return self._cards[2].get_value("unitc")
 
@@ -345,7 +349,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def unitl(self) -> float:
-        """Get or set the Factor to convert model length units to millimeters, e.g. if model	units are meters, UNITL = 1000, [UNITL] = 1/[LENGTH].
+        """Get or set the Factor to convert model length units to millimeters. For example, if model units are meters, UNITL = 1000, [UNITL] = 1/[LENGTH].
         """ # nopep8
         return self._cards[2].get_value("unitl")
 
@@ -388,41 +392,8 @@ class MatHystereticReinforcement(KeywordBase):
         self._cards[3].set_value("dresid", value)
 
     @property
-    def xp(self) -> typing.Optional[float]:
-        """Get or set the Coordinates of point p for AOPT = 1 and 4 (see MAT 2)
-        """ # nopep8
-        return self._cards[4].get_value("xp")
-
-    @xp.setter
-    def xp(self, value: float) -> None:
-        """Set the xp property."""
-        self._cards[4].set_value("xp", value)
-
-    @property
-    def yp(self) -> typing.Optional[float]:
-        """Get or set the Coordinates of point p for AOPT = 1 and 4 (see MAT 2)
-        """ # nopep8
-        return self._cards[4].get_value("yp")
-
-    @yp.setter
-    def yp(self, value: float) -> None:
-        """Set the yp property."""
-        self._cards[4].set_value("yp", value)
-
-    @property
-    def zp(self) -> typing.Optional[float]:
-        """Get or set the Coordinates of point p for AOPT = 1 and 4 (see MAT 2)
-        """ # nopep8
-        return self._cards[4].get_value("zp")
-
-    @zp.setter
-    def zp(self, value: float) -> None:
-        """Set the zp property."""
-        self._cards[4].set_value("zp", value)
-
-    @property
     def a1(self) -> typing.Optional[float]:
-        """Get or set the Components of vector a for AOPT = 2 (see MAT 2)
+        """Get or set the Components of vector a for AOPT = 2
         """ # nopep8
         return self._cards[4].get_value("a1")
 
@@ -433,7 +404,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def a2(self) -> typing.Optional[float]:
-        """Get or set the Components of vector a for AOPT = 2 (see MAT 2)
+        """Get or set the Components of vector a for AOPT = 2
         """ # nopep8
         return self._cards[4].get_value("a2")
 
@@ -444,7 +415,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def a3(self) -> typing.Optional[float]:
-        """Get or set the Components of vector a for AOPT = 2 (see MAT 2)
+        """Get or set the Components of vector a for AOPT = 2
         """ # nopep8
         return self._cards[4].get_value("a3")
 
@@ -455,7 +426,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def v1(self) -> typing.Optional[float]:
-        """Get or set the Components of vector v for AOPT = 3 and 4 (see MAT 2)
+        """Get or set the Components of vector v for AOPT = 3
         """ # nopep8
         return self._cards[5].get_value("v1")
 
@@ -466,7 +437,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def v2(self) -> typing.Optional[float]:
-        """Get or set the Components of vector v for AOPT = 3 and 4 (see MAT 2)
+        """Get or set the Components of vector v for AOPT = 3
         """ # nopep8
         return self._cards[5].get_value("v2")
 
@@ -477,7 +448,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def v3(self) -> typing.Optional[float]:
-        """Get or set the Components of vector v for AOPT = 3 and 4 (see MAT 2)
+        """Get or set the Components of vector v for AOPT = 3
         """ # nopep8
         return self._cards[5].get_value("v3")
 
@@ -488,7 +459,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def d1(self) -> typing.Optional[float]:
-        """Get or set the Components of vector d for AOPT = 2 (see MAT 2)
+        """Get or set the Components of vector d for AOPT = 2
         """ # nopep8
         return self._cards[5].get_value("d1")
 
@@ -499,7 +470,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def d2(self) -> typing.Optional[float]:
-        """Get or set the Components of vector d for AOPT = 2 (see MAT 2)
+        """Get or set the Components of vector d for AOPT = 2
         """ # nopep8
         return self._cards[5].get_value("d2")
 
@@ -510,7 +481,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def d3(self) -> typing.Optional[float]:
-        """Get or set the Components of vector d for AOPT = 2 (see MAT 2)
+        """Get or set the Components of vector d for AOPT = 2
         """ # nopep8
         return self._cards[5].get_value("d3")
 
@@ -521,7 +492,7 @@ class MatHystereticReinforcement(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Components of vector d for AOPT = 2 (see MAT 2)
+        """Get or set the Angle for AOPT = 0 and 3.
         """ # nopep8
         return self._cards[5].get_value("beta")
 

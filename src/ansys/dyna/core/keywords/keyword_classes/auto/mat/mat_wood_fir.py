@@ -157,9 +157,9 @@ class MatWoodFir(KeywordBase):
 
     @property
     def iters(self) -> int:
-        """Get or set the Number of plasticity algorithm iterations.  The default is one iteration.
-        GE.0:	Original plasticity iteration developed by Murray [2002].
-        LT.0:	Plasticity iteration (return mapping) with non-associated flow direction for perpendicular yielding. The absolute value of ITERS is used as number of plasticity algorithm iterations.
+        """Get or set the Number of plasticity algorithm iterations. The default is one iteration.
+        GE.0: Original plasticity iteration developed by Murray [2002].
+        LT.0: Plasticity iteration (return mapping) with non-associated flow direction for perpendicular yielding. The absolute value of ITERS is used as number of plasticity algorithm iterations.
         """ # nopep8
         return self._cards[0].get_value("iters")
 
@@ -173,7 +173,7 @@ class MatWoodFir(KeywordBase):
         """Get or set the Rate effects option:
         EQ.0. Rate effects model turned off (default).
         EQ.1. Rate effects model turned on.on with the original rate dependence described by Murray [2002].
-        EQ.2:	Rate effects model turned on with Johnson-Cook like rate dependence of the strength parameters, as described below in the remarks. Only works in combination with ITERS.LT.0 and OPTION=<BLANK>..
+        EQ.2: Rate effects model turned on with Johnson-Cook like rate dependence of the strength parameters, as described below in the remarks. Only works in combination with ITERS.LT.0 and OPTION=<BLANK>..
         """ # nopep8
         return self._cards[0].get_value("irate")
 
@@ -213,8 +213,8 @@ class MatWoodFir(KeywordBase):
     @property
     def ivol(self) -> int:
         """Get or set the Erode on negative volume or strain increments greater than 0.01.
-        EQ.0:  No, do not apply erosion criteria.
-        EQ.1:  Yes, apply volume and strain erosion criteria
+        EQ.0: No, do not apply erosion criteria.
+        EQ.1: Yes, apply volume and strain erosion criteria
         """ # nopep8
         return self._cards[0].get_value("ivol")
 
@@ -287,10 +287,10 @@ class MatWoodFir(KeywordBase):
     @property
     def units(self) -> int:
         """Get or set the Units options:
-        EQ.0: GPa, mm, msec, Kg/mm^3, kN.
-        EQ.1: MPa, cm, msec, g/mm^3, Nt.
-        EQ.2: MPa, mm, sec, Mg/mm^3, Nt.
-        EQ.3: Psi, inch, sec, lb-s^2/inch^4, lb.
+        EQ.0: GPa, mm, msec, Kg/mm**3, kN.
+        EQ.1: MPa, cm, msec, g/mm**3, Nt.
+        EQ.2: MPa, mm, sec, Mg/mm**3, Nt.
+        EQ.3: Psi, inch, sec, lb-s**2/inch**4, lb.
         """ # nopep8
         return self._cards[1].get_value("units")
 
@@ -319,12 +319,12 @@ class MatWoodFir(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC, particularly the Material Directions section, for details):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
-        EQ.2.0:	Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
-        EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
-        LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_OPTION).
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with *DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
+        EQ.1.0: Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
+        EQ.4.0: Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number(CID on *DEFINE_COORDINATE_OPTION).
         """ # nopep8
         return self._cards[2].get_value("aopt")
 

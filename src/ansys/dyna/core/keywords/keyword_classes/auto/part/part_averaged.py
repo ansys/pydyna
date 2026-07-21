@@ -151,13 +151,13 @@ class PartAveraged(KeywordBase):
 
     @property
     def adpopt(self) -> typing.Optional[int]:
-        """Get or set the Indicate if this part is adapted or not. See also *CONTROL_ADAPTIVITY.
+        """Get or set the Indicate if this part is adapted. See also *CONTROL_ADAPTIVITY.
         LT.0: R-adaptive remeshing for 2-D solids, |ADPOPT| gives the load curve ID that defines the element size as a function of time.
         EQ.0:Adaptive remeshing is inactive for this part ID.
-        EQ.1:	h - adaptive for 3D shells and for shell / solid / shell sandwich composites.
-        EQ.2 : r - adaptive remeshing for 2D solids, 3D tetrahedrons and 3D EFG.For a more detailed description of 3D r - adaptivity, see Volume IV of the Keyword User’s Manual(Multiscale Solvers).
-        EQ.3 : Axisymmetric r - adaptive remeshing for 3D solid(see Remark 6).For a more detailed description of 3D r - adaptivity, see Volume IV of the Keyword User’s Manual(Multiscale Solvers).
-        EQ.9 : Passive h - adaptive for 3D shells.The elements in this part will not be split unless their neighboring elements in other parts need to be split more than one level.
+        EQ.1: h - adaptivity for 3D shells and shell/solid/shell sandwich composites.
+        EQ.2: r - adaptive remeshing for 2D solids, 3D tetrahedrons and 3D EFG.For a more detailed description of 3D r - adaptivity, see Volume IV of the Keyword Users Manual(Multiscale Solvers).
+        EQ.3: Axisymmetric r - adaptive remeshing for 3D solid(see Remark 6).For a more detailed description of 3D r - adaptivity, see Volume IV of the Keyword Users Manual(Multiscale Solvers).
+        EQ.9: Passive h - adaptivity for 3D shells.The elements in this part will not be split unless their neighboring elements in other parts need to be split more than one level.
         """ # nopep8
         return self._cards[1].get_value("adpopt")
 
@@ -168,8 +168,8 @@ class PartAveraged(KeywordBase):
 
     @property
     def tmid(self) -> int:
-        """Get or set the Thermal material property identification defined in the *MAT_THERMAL section. Thermal properties must be specified for all solid, shell, and thick shell parts if a thermal or coupled thermal structual/analysis is being performed. Beams and discrete elements are not considered in thermal analyses.
-        EQ.0: defaults to MID.
+        """Get or set the Thermal material property identification defined in the *MAT_THERMAL section. Thermal properties must be specified for all solid, shell,
+        and thick shell parts for thermal or coupled thermal-structual analyses. Beams and discrete elements are not considered in thermal analyses. See Remark 7.
         """ # nopep8
         return self._cards[1].get_value("tmid")
 

@@ -47,9 +47,9 @@ class EmControlMagent(KeywordBase):
         ]
     @property
     def mcomp(self) -> int:
-        """Get or set the Magnetization vector recomputation:
-        EQ.0:	Off.See Remark 1.
-        EQ.1 : On.Magnetization recomputation is controlled by NCYCM.
+        """Get or set the Flag controlling whether the magnetization vector is recomputed.
+        EQ.0: Magnetization vector not recomputed(see Remark 1).
+        EQ.1: Magnetization vector recomputed at the frequency controlled by NCYCM
         """ # nopep8
         return self._cards[0].get_value("mcomp")
 

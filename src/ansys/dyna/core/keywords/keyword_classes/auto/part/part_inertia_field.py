@@ -1,0 +1,600 @@
+# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+"""Module providing the PartInertiaField class."""
+import typing
+from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.hourglass.hourglass import Hourglass
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
+
+_PARTINERTIAFIELD_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
+_PARTINERTIAFIELD_CARD1 = (
+    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("secid", int, 10, 10, None),
+    FieldSchema("mid", int, 20, 10, None),
+    FieldSchema("eosid", int, 30, 10, 0),
+    FieldSchema("hgid", int, 40, 10, 0),
+    FieldSchema("grav", int, 50, 10, 0),
+    FieldSchema("adpopt", int, 60, 10, None),
+    FieldSchema("tmid", int, 70, 10, 0),
+)
+
+_PARTINERTIAFIELD_CARD2 = (
+    FieldSchema("xc", float, 0, 10, None),
+    FieldSchema("yc", float, 10, 10, None),
+    FieldSchema("zc", float, 20, 10, None),
+    FieldSchema("tm", float, 30, 10, None),
+    FieldSchema("ircs", int, 40, 10, 0),
+    FieldSchema("nodeid", int, 50, 10, None),
+)
+
+_PARTINERTIAFIELD_CARD3 = (
+    FieldSchema("ixx", float, 0, 10, None),
+    FieldSchema("ixy", float, 10, 10, None),
+    FieldSchema("ixz", float, 20, 10, None),
+    FieldSchema("iyy", float, 30, 10, None),
+    FieldSchema("iyz", float, 40, 10, None),
+    FieldSchema("izz", float, 50, 10, None),
+)
+
+_PARTINERTIAFIELD_CARD4 = (
+    FieldSchema("vtx", float, 0, 10, None),
+    FieldSchema("vty", float, 10, 10, None),
+    FieldSchema("vtz", float, 20, 10, None),
+    FieldSchema("vrx", float, 30, 10, None),
+    FieldSchema("vry", float, 40, 10, None),
+    FieldSchema("vrz", float, 50, 10, None),
+)
+
+_PARTINERTIAFIELD_CARD5 = (
+    FieldSchema("xl", float, 0, 10, None),
+    FieldSchema("yl", float, 10, 10, None),
+    FieldSchema("zl", float, 20, 10, None),
+    FieldSchema("xlip", float, 30, 10, None),
+    FieldSchema("ylip", float, 40, 10, None),
+    FieldSchema("zlip", float, 50, 10, None),
+    FieldSchema("cid", int, 60, 10, None),
+)
+
+_PARTINERTIAFIELD_CARD6 = (
+    FieldSchema("fidbo", int, 0, 10, 0),
+)
+
+class PartInertiaField(KeywordBase):
+    """DYNA PART_INERTIA_FIELD keyword"""
+
+    keyword = "PART"
+    subkeyword = "INERTIA_FIELD"
+    _link_fields = {
+        "nodeid": LinkType.NODE,
+        "mid": LinkType.MAT,
+        "secid": LinkType.SECTION,
+        "hgid": LinkType.HOURGLASS,
+        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
+    }
+
+    def __init__(self, **kwargs):
+        """Initialize the PartInertiaField class."""
+        super().__init__(**kwargs)
+        self._cards = [
+            Card.from_field_schemas_with_defaults(
+                _PARTINERTIAFIELD_CARD0,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _PARTINERTIAFIELD_CARD1,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _PARTINERTIAFIELD_CARD2,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _PARTINERTIAFIELD_CARD3,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _PARTINERTIAFIELD_CARD4,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _PARTINERTIAFIELD_CARD5,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _PARTINERTIAFIELD_CARD6,
+                **kwargs,
+            ),
+        ]
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Heading for the part.
+        """ # nopep8
+        return self._cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[0].set_value("title", value)
+
+    @property
+    def pid(self) -> typing.Optional[int]:
+        """Get or set the Part ID.
+        """ # nopep8
+        return self._cards[1].get_value("pid")
+
+    @pid.setter
+    def pid(self, value: int) -> None:
+        """Set the pid property."""
+        self._cards[1].set_value("pid", value)
+
+    @property
+    def secid(self) -> typing.Optional[int]:
+        """Get or set the Section ID defined in *SECTION section.
+        """ # nopep8
+        return self._cards[1].get_value("secid")
+
+    @secid.setter
+    def secid(self, value: int) -> None:
+        """Set the secid property."""
+        self._cards[1].set_value("secid", value)
+
+    @property
+    def mid(self) -> typing.Optional[int]:
+        """Get or set the Material ID defined in *MAT section.
+        """ # nopep8
+        return self._cards[1].get_value("mid")
+
+    @mid.setter
+    def mid(self, value: int) -> None:
+        """Set the mid property."""
+        self._cards[1].set_value("mid", value)
+
+    @property
+    def eosid(self) -> int:
+        """Get or set the Equation of state ID defined in the *EOS section. Nonzero only for solid elements using an equation of state to compute pressure.
+        """ # nopep8
+        return self._cards[1].get_value("eosid")
+
+    @eosid.setter
+    def eosid(self, value: int) -> None:
+        """Set the eosid property."""
+        self._cards[1].set_value("eosid", value)
+
+    @property
+    def hgid(self) -> int:
+        """Get or set the Hourglass/bulk viscosity ID defined in *HOURGLASS section.
+        EQ.0: default values are used.
+        """ # nopep8
+        return self._cards[1].get_value("hgid")
+
+    @hgid.setter
+    def hgid(self, value: int) -> None:
+        """Set the hgid property."""
+        self._cards[1].set_value("hgid", value)
+
+    @property
+    def grav(self) -> int:
+        """Get or set the Part initialization for gravity loading. This option initializes hydrostatic pressure in the part due to gravity acting on an overburden material. This option applies to brick elements only and must be used with the *LOAD_DENSITY_DEPTH option:
+        EQ.0: all parts initialized,
+        EQ.1: only current material initialized.
+        """ # nopep8
+        return self._cards[1].get_value("grav")
+
+    @grav.setter
+    def grav(self, value: int) -> None:
+        """Set the grav property."""
+        if value not in [0, 1, None]:
+            raise Exception("""grav must be `None` or one of {0,1}.""")
+        self._cards[1].set_value("grav", value)
+
+    @property
+    def adpopt(self) -> typing.Optional[int]:
+        """Get or set the Indicate if this part is adapted. See also *CONTROL_ADAPTIVITY.
+        LT.0: R-adaptive remeshing for 2-D solids, |ADPOPT| gives the load curve ID that defines the element size as a function of time.
+        EQ.0:Adaptive remeshing is inactive for this part ID.
+        EQ.1: h - adaptivity for 3D shells and for shell / solid / shell sandwich composites.
+        EQ.2: r - adaptive remeshing for 2D solids, 3D tetrahedrons and 3D EFG.For a more detailed description of 3D r - adaptivity, see Volume IV of the Keyword Users Manual(Multiscale Solvers).
+        EQ.3: Axisymmetric r - adaptive remeshing for 3D solid(see Remark 6).For a more detailed description of 3D r - adaptivity, see Volume IV of the Keyword Users Manual(Multiscale Solvers).
+        EQ.9: Passive h - adaptivity for 3D shells.The elements in this part will not be split unless their neighboring elements in other parts need to be split more than one level.
+        """ # nopep8
+        return self._cards[1].get_value("adpopt")
+
+    @adpopt.setter
+    def adpopt(self, value: int) -> None:
+        """Set the adpopt property."""
+        self._cards[1].set_value("adpopt", value)
+
+    @property
+    def tmid(self) -> int:
+        """Get or set the Thermal material property identication defined in the *MAT_THERMAL section. Thermal properties must be specified for all solid, shell, and thick shell parts for thermal or coupled thermal-structural analyses. Discrete elements are not considered in thermal analyses. See Remark 7.
+        """ # nopep8
+        return self._cards[1].get_value("tmid")
+
+    @tmid.setter
+    def tmid(self, value: int) -> None:
+        """Set the tmid property."""
+        self._cards[1].set_value("tmid", value)
+
+    @property
+    def xc(self) -> typing.Optional[float]:
+        """Get or set the x-coordinate of center of mass. If nodal point NODEID is defined, XC, YC, and ZC are ignored, and the corrdinates of NODID are taken as the center of mass.
+        """ # nopep8
+        return self._cards[2].get_value("xc")
+
+    @xc.setter
+    def xc(self, value: float) -> None:
+        """Set the xc property."""
+        self._cards[2].set_value("xc", value)
+
+    @property
+    def yc(self) -> typing.Optional[float]:
+        """Get or set the y-coordinate of center of mass.
+        """ # nopep8
+        return self._cards[2].get_value("yc")
+
+    @yc.setter
+    def yc(self, value: float) -> None:
+        """Set the yc property."""
+        self._cards[2].set_value("yc", value)
+
+    @property
+    def zc(self) -> typing.Optional[float]:
+        """Get or set the z-coordinate of center of mass.
+        """ # nopep8
+        return self._cards[2].get_value("zc")
+
+    @zc.setter
+    def zc(self, value: float) -> None:
+        """Set the zc property."""
+        self._cards[2].set_value("zc", value)
+
+    @property
+    def tm(self) -> typing.Optional[float]:
+        """Get or set the Translational mass.
+        """ # nopep8
+        return self._cards[2].get_value("tm")
+
+    @tm.setter
+    def tm(self, value: float) -> None:
+        """Set the tm property."""
+        self._cards[2].set_value("tm", value)
+
+    @property
+    def ircs(self) -> int:
+        """Get or set the Flag for inertia tensor reference coordinate system:
+        EQ.0: global inertia tensor (default),
+        EQ.1: Local inertia tensor given in a system defined by the orientation vectors.
+        """ # nopep8
+        return self._cards[2].get_value("ircs")
+
+    @ircs.setter
+    def ircs(self, value: int) -> None:
+        """Set the ircs property."""
+        if value not in [0, 1, None]:
+            raise Exception("""ircs must be `None` or one of {0,1}.""")
+        self._cards[2].set_value("ircs", value)
+
+    @property
+    def nodeid(self) -> typing.Optional[int]:
+        """Get or set the Nodal point defining the center of mass of the rigid body. This node should be,but is not required to be, included as an extra node for the rigid body. If this node is free, its motion will not be updated to correspond with the rigid body after the calculation begins.
+        """ # nopep8
+        return self._cards[2].get_value("nodeid")
+
+    @nodeid.setter
+    def nodeid(self, value: int) -> None:
+        """Set the nodeid property."""
+        self._cards[2].set_value("nodeid", value)
+
+    @property
+    def ixx(self) -> typing.Optional[float]:
+        """Get or set the Ixx, xx component of the inertia tensor.
+        """ # nopep8
+        return self._cards[3].get_value("ixx")
+
+    @ixx.setter
+    def ixx(self, value: float) -> None:
+        """Set the ixx property."""
+        self._cards[3].set_value("ixx", value)
+
+    @property
+    def ixy(self) -> typing.Optional[float]:
+        """Get or set the Ixy, xy component of the inertia tensor.
+        """ # nopep8
+        return self._cards[3].get_value("ixy")
+
+    @ixy.setter
+    def ixy(self, value: float) -> None:
+        """Set the ixy property."""
+        self._cards[3].set_value("ixy", value)
+
+    @property
+    def ixz(self) -> typing.Optional[float]:
+        """Get or set the Ixz, xz component of the inertia tensor.
+        """ # nopep8
+        return self._cards[3].get_value("ixz")
+
+    @ixz.setter
+    def ixz(self, value: float) -> None:
+        """Set the ixz property."""
+        self._cards[3].set_value("ixz", value)
+
+    @property
+    def iyy(self) -> typing.Optional[float]:
+        """Get or set the Iyy, yy component of the inertia tensor.
+        """ # nopep8
+        return self._cards[3].get_value("iyy")
+
+    @iyy.setter
+    def iyy(self, value: float) -> None:
+        """Set the iyy property."""
+        self._cards[3].set_value("iyy", value)
+
+    @property
+    def iyz(self) -> typing.Optional[float]:
+        """Get or set the Iyz, xy component of the inertia tensor.
+        """ # nopep8
+        return self._cards[3].get_value("iyz")
+
+    @iyz.setter
+    def iyz(self, value: float) -> None:
+        """Set the iyz property."""
+        self._cards[3].set_value("iyz", value)
+
+    @property
+    def izz(self) -> typing.Optional[float]:
+        """Get or set the Izz, zz component of the inertia tensor.
+        """ # nopep8
+        return self._cards[3].get_value("izz")
+
+    @izz.setter
+    def izz(self, value: float) -> None:
+        """Set the izz property."""
+        self._cards[3].set_value("izz", value)
+
+    @property
+    def vtx(self) -> typing.Optional[float]:
+        """Get or set the Initial translational velocity of the rigid body in the global x-direction.
+        """ # nopep8
+        return self._cards[4].get_value("vtx")
+
+    @vtx.setter
+    def vtx(self, value: float) -> None:
+        """Set the vtx property."""
+        self._cards[4].set_value("vtx", value)
+
+    @property
+    def vty(self) -> typing.Optional[float]:
+        """Get or set the Initial translational velocity of the rigid body in the global y-direction.
+        """ # nopep8
+        return self._cards[4].get_value("vty")
+
+    @vty.setter
+    def vty(self, value: float) -> None:
+        """Set the vty property."""
+        self._cards[4].set_value("vty", value)
+
+    @property
+    def vtz(self) -> typing.Optional[float]:
+        """Get or set the Initial translational velocity of the rigid body in the global z-direction.
+        """ # nopep8
+        return self._cards[4].get_value("vtz")
+
+    @vtz.setter
+    def vtz(self, value: float) -> None:
+        """Set the vtz property."""
+        self._cards[4].set_value("vtz", value)
+
+    @property
+    def vrx(self) -> typing.Optional[float]:
+        """Get or set the Initial rotational velocity of the rigid body about the global x-axis.
+        """ # nopep8
+        return self._cards[4].get_value("vrx")
+
+    @vrx.setter
+    def vrx(self, value: float) -> None:
+        """Set the vrx property."""
+        self._cards[4].set_value("vrx", value)
+
+    @property
+    def vry(self) -> typing.Optional[float]:
+        """Get or set the Initial rotational velocity of the rigid body about the global y-axis.
+        """ # nopep8
+        return self._cards[4].get_value("vry")
+
+    @vry.setter
+    def vry(self, value: float) -> None:
+        """Set the vry property."""
+        self._cards[4].set_value("vry", value)
+
+    @property
+    def vrz(self) -> typing.Optional[float]:
+        """Get or set the Initial rotational velocity of the rigid body about the global z-axis.
+        """ # nopep8
+        return self._cards[4].get_value("vrz")
+
+    @vrz.setter
+    def vrz(self, value: float) -> None:
+        """Set the vrz property."""
+        self._cards[4].set_value("vrz", value)
+
+    @property
+    def xl(self) -> typing.Optional[float]:
+        """Get or set the x-coordinate of the local x-axis. The origin lies at (0,0,0).
+        """ # nopep8
+        return self._cards[5].get_value("xl")
+
+    @xl.setter
+    def xl(self, value: float) -> None:
+        """Set the xl property."""
+        self._cards[5].set_value("xl", value)
+
+    @property
+    def yl(self) -> typing.Optional[float]:
+        """Get or set the y-coordinate of the local x-axis.
+        """ # nopep8
+        return self._cards[5].get_value("yl")
+
+    @yl.setter
+    def yl(self, value: float) -> None:
+        """Set the yl property."""
+        self._cards[5].set_value("yl", value)
+
+    @property
+    def zl(self) -> typing.Optional[float]:
+        """Get or set the z-coordinate of the local x-axis.
+        """ # nopep8
+        return self._cards[5].get_value("zl")
+
+    @zl.setter
+    def zl(self, value: float) -> None:
+        """Set the zl property."""
+        self._cards[5].set_value("zl", value)
+
+    @property
+    def xlip(self) -> typing.Optional[float]:
+        """Get or set the x-coordinate of vector in the local xy-plane.
+        """ # nopep8
+        return self._cards[5].get_value("xlip")
+
+    @xlip.setter
+    def xlip(self, value: float) -> None:
+        """Set the xlip property."""
+        self._cards[5].set_value("xlip", value)
+
+    @property
+    def ylip(self) -> typing.Optional[float]:
+        """Get or set the y-coordinate of vector in the local xy-plane.
+        """ # nopep8
+        return self._cards[5].get_value("ylip")
+
+    @ylip.setter
+    def ylip(self, value: float) -> None:
+        """Set the ylip property."""
+        self._cards[5].set_value("ylip", value)
+
+    @property
+    def zlip(self) -> typing.Optional[float]:
+        """Get or set the z-coordinate of vecotr in the local xy-plane.
+        """ # nopep8
+        return self._cards[5].get_value("zlip")
+
+    @zlip.setter
+    def zlip(self, value: float) -> None:
+        """Set the zlip property."""
+        self._cards[5].set_value("zlip", value)
+
+    @property
+    def cid(self) -> typing.Optional[int]:
+        """Get or set the Local coordinate system ID, see *DEFINE_COORDINATE_...
+        If defined, leave fields 1-6 blank.
+        """ # nopep8
+        return self._cards[5].get_value("cid")
+
+    @cid.setter
+    def cid(self, value: int) -> None:
+        """Set the cid property."""
+        self._cards[5].set_value("cid", value)
+
+    @property
+    def fidbo(self) -> int:
+        """Get or set the Field ID for baseline orientation vectors for the material referenced by MID.
+        """ # nopep8
+        return self._cards[6].get_value("fidbo")
+
+    @fidbo.setter
+    def fidbo(self, value: int) -> None:
+        """Set the fidbo property."""
+        self._cards[6].set_value("fidbo", value)
+
+    @property
+    def nodeid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given nodeid."""
+        return self._get_link_by_attr("NODE", "nid", self.nodeid, "parts")
+
+    @property
+    def mid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
+
+    @property
+    def secid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SECTION_* keyword for secid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("SECTION"):
+            if kwd.secid == self.secid:
+                return kwd
+        return None
+
+    @secid_link.setter
+    def secid_link(self, value: KeywordBase) -> None:
+        """Set the SECTION_* keyword for secid."""
+        self.secid = value.secid
+
+    @property
+    def hgid_link(self) -> typing.Optional[Hourglass]:
+        """Get the Hourglass object for hgid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("HOURGLASS", "HOURGLASS"):
+            if kwd.hgid == self.hgid:
+                return kwd
+        return None
+
+    @hgid_link.setter
+    def hgid_link(self, value: Hourglass) -> None:
+        """Set the Hourglass object for hgid."""
+        self.hgid = value.hgid
+
+    @property
+    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
+        """Get the DefineCoordinateSystem object for cid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
+            if kwd.cid == self.cid:
+                return kwd
+        return None
+
+    @cid_link.setter
+    def cid_link(self, value: DefineCoordinateSystem) -> None:
+        """Set the DefineCoordinateSystem object for cid."""
+        self.cid = value.cid
+

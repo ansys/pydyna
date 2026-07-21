@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _INCLUDEUNITCELL_CARD0 = (
-    FieldSchema("filename", str, 0, 256, None),
+    FieldSchema("filename", str, 0, 80, None),
 )
 
 _INCLUDEUNITCELL_CARD1 = (
@@ -124,8 +124,8 @@ class IncludeUnitcell(KeywordBase):
     @property
     def inpt(self) -> int:
         """Get or set the Type of input:
-        EQ.0:	Read * NODE information from the include file and add periodic boundary conditions to the include file.
-        EQ.1 : Create a unit cell mesh with periodic boundary conditions,and output to the include file
+        EQ.0: Read *NODE information from the include file and add periodic boundary conditions to the include file.
+        EQ.1: Create a unit cell mesh with periodic boundary conditions,and output to the include file
         """ # nopep8
         return self._cards[1].get_value("inpt")
 
@@ -139,7 +139,7 @@ class IncludeUnitcell(KeywordBase):
     @property
     def oupt(self) -> int:
         """Get or set the Type of output:
-        EQ.1:	Create a new main keyword file where the keyword * INCLUDE_?UNITCELL is replaced by * INCLUDE with the include file name
+        EQ.1: Create a new main keyword file where the keyword *INCLUDE_UNITCELL is replaced by *INCLUDE with the include file name
         """ # nopep8
         return self._cards[1].get_value("oupt")
 

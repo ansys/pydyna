@@ -36,6 +36,7 @@ _CONTROLIMPLICITROTATIONALDYNAMICS_CARD0 = (
     FieldSchema("nomeg", int, 40, 10, 0),
     FieldSchema("iref", int, 50, 10, 0),
     FieldSchema("omegadr", float, 60, 10, None),
+    FieldSchema("istfns", int, 70, 10, 3),
 )
 
 _CONTROLIMPLICITROTATIONALDYNAMICS_CARD1 = (
@@ -85,8 +86,8 @@ class ControlImplicitRotationalDynamics(KeywordBase):
     @property
     def stype(self) -> int:
         """Get or set the Set type:
-        EQ.0:	Part;
-        EQ.1:	Part set.
+        EQ.0: Part;
+        EQ.1: Part set.
         """ # nopep8
         return self._cards[0].get_value("stype")
 
@@ -100,7 +101,7 @@ class ControlImplicitRotationalDynamics(KeywordBase):
     @property
     def omega(self) -> typing.Optional[float]:
         """Get or set the Rotating speed.
-        LT.0:	curve ID = (-OMEGA) gives rotating speed as a function of time.
+        LT.0: curve ID = (-OMEGA) gives rotating speed as a function of time.
         """ # nopep8
         return self._cards[0].get_value("omega")
 
@@ -134,9 +135,9 @@ class ControlImplicitRotationalDynamics(KeywordBase):
     @property
     def iref(self) -> int:
         """Get or set the Reference frame:
-        EQ.0:	Rotating coordinate system;
-        EQ.1:	Fixed coordinate system.
-        EQ.2:	Rotating coordinate system, but rotate rotating parts for visualization purpose.
+        EQ.0: Rotating coordinate system;
+        EQ.1: Fixed coordinate system.
+        EQ.2: Rotating coordinate system, but rotate rotating parts for visualization purpose.
         """ # nopep8
         return self._cards[0].get_value("iref")
 
@@ -159,6 +160,22 @@ class ControlImplicitRotationalDynamics(KeywordBase):
     def omegadr(self, value: float) -> None:
         """Set the omegadr property."""
         self._cards[0].set_value("omegadr", value)
+
+    @property
+    def istfns(self) -> int:
+        """Get or set the Flag for adding spin softening and gyroscopic stiffness terms:
+        EQ.1: Add no stiffness for rotational dynamics effects.
+        EQ.2: Add only the spin softening stiffness terms which keep the stiffness matrix symmetric.
+        EQ.3: Add both the spin softening and gyroscopic stiffness terms which make the stiffness matrix nonsymmetric.
+        """ # nopep8
+        return self._cards[0].get_value("istfns")
+
+    @istfns.setter
+    def istfns(self, value: int) -> None:
+        """Set the istfns property."""
+        if value not in [3, 1, 2, None]:
+            raise Exception("""istfns must be `None` or one of {3,1,2}.""")
+        self._cards[0].set_value("istfns", value)
 
     @property
     def omeg1(self) -> typing.Optional[float]:

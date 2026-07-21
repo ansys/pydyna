@@ -137,8 +137,8 @@ class DefineStochasticVariationProperties(KeywordBase):
     def irng(self) -> int:
         """Get or set the 
         Flag for random number generation.
-        EQ.0:	Use deterministic(pseudo - ) random number generator.The same input always leads to the same distribution.
-        EQ.1 : Use non - deterministic(true) random number generator.With the same input, a different distribution is achieved in each run
+        EQ.0: Use deterministic(pseudo - ) random number generator.The same input always leads to the same distribution.
+        EQ.1: Use non - deterministic(true) random number generator.With the same input, a different distribution is achieved in each run
         """ # nopep8
         return self._cards[0].get_value("irng")
 
@@ -174,11 +174,11 @@ class DefineStochasticVariationProperties(KeywordBase):
     @property
     def vartyp(self) -> int:
         """Get or set the Variation type for scaling the material property:
-        EQ.0:	The scale factor is 1.0 everywhere.
-        EQ.1 : The scale factor is a random number in the uniform random distribution in the interval defined by R1 and R2.
-        EQ.2 : The scale factor is a random number obeying the Gaussian distribution defined by R1, R2,and R3.
-        EQ.3 : The scale factor is defined by the probability distribution function defined by curve LCID.
-        EQ.4 : The scale factor is defined by the cumulative distribution function defined by curve LCID.
+        EQ.0: The scale factor is 1.0 everywhere.
+        EQ.1: The scale factor is a random number in the uniform random distribution in the interval defined by R1 and R2.
+        EQ.2: The scale factor is a random number obeying the Gaussian distribution defined by R1, R2,and R3.
+        EQ.3: The scale factor is defined by the probability distribution function defined by curve LCID.
+        EQ.4: The scale factor is defined by the cumulative distribution function defined by curve LCID.
         """ # nopep8
         return self._cards[1].get_value("vartyp")
 

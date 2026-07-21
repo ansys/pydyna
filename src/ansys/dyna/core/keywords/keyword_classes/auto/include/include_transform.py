@@ -53,7 +53,7 @@ _INCLUDETRANSFORM_CARD3 = (
     FieldSchema("fctmas", float, 0, 10, 1.0),
     FieldSchema("fcttim", float, 10, 10, 1.0),
     FieldSchema("fctlen", float, 20, 10, 1.0),
-    FieldSchema("fcttem", str, 30, 10, "1.0"),
+    FieldSchema("fcttem", str, 30, 10, None),
     FieldSchema("incout1", int, 40, 10, 1),
     FieldSchema("fctchg", float, 50, 10, None),
 )
@@ -98,8 +98,9 @@ class IncludeTransform(KeywordBase):
         ]
     @property
     def filename(self) -> typing.Optional[str]:
-        """Get or set the File name of file to be included in this keyword file.
-        Maximum 80 charcters. If the STAMPED_PART option is active, this is the DYNAIN file containing the results from metal stamping.
+        """Get or set the File name of file to be included in this keyword file.Maximum 80 charcters.
+        STAMPED_PART: the option is active, this is the DYNAIN file containing the results from metal stamping.
+        ISPG: Name of file containing the information about the ISPG models. Only one file can be included for each keyword ('*') card.
         """ # nopep8
         return self._cards[0].get_value("filename")
 
@@ -259,8 +260,8 @@ class IncludeTransform(KeywordBase):
         self._cards[3].set_value("fctlen", value)
 
     @property
-    def fcttem(self) -> str:
-        """Get or set the Temperature transformation factor: F to C (Farenheit to Centigrade), C to F, F to K, K to F, and so on.
+    def fcttem(self) -> typing.Optional[str]:
+        """Get or set the Temperature transformation factor: FtoC (Farenheit to Centigrade), CtoF, FtoK, KtoF, KtoC and CtoK.
         """ # nopep8
         return self._cards[3].get_value("fcttem")
 
@@ -296,7 +297,7 @@ class IncludeTransform(KeywordBase):
     @property
     def tranid(self) -> int:
         """Get or set the Transformation ID.
-        EQ.0: no transformation will be applied.  See the input *DEFINE_TRANSFORM.
+        EQ.0: no tranformation will be applied.  See the input *DEFINE_TRANSFORM.
         """ # nopep8
         return self._cards[4].get_value("tranid")
 

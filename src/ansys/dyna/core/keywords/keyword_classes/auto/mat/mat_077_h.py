@@ -45,6 +45,13 @@ _MAT077H_CARD0 = (
 
 _MAT077H_CARD1 = (
     FieldSchema("tbhys", float, 0, 10, None),
+    FieldSchema("lcbi", float, 10, 10, None),
+    FieldSchema("lcpl", float, 20, 10, None),
+    FieldSchema("wbi", float, 30, 10, None),
+    FieldSchema("wpl", float, 40, 10, None),
+    FieldSchema("d1", float, 50, 10, None),
+    FieldSchema("d2", float, 60, 10, None),
+    FieldSchema("d3", float, 70, 10, None),
 )
 
 _MAT077H_CARD2 = (
@@ -156,9 +163,7 @@ class Mat077H(KeywordBase):
 
     @property
     def pr(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio (> .49 is recommended, smaller values may not work
-        and should not be used). If this is set to a negative number, then the
-        absolute value is used and an extra card is read for Mullins effect.
+        """Get or set the Poisson's ratio. If set to a negative number, the Poisson's ratio is the absolute value, and Card 2 is included for extra parameters. Setting to 0.5 activates a U-P formulation for implicit analysis; see Remark Error! Reference source not found. of *MAT_027 (the Mooney-Rivlin rubber model).
         """ # nopep8
         return self._cards[0].get_value("pr")
 
@@ -169,7 +174,8 @@ class Mat077H(KeywordBase):
 
     @property
     def n(self) -> int:
-        """Get or set the Number of constants to solve for:,
+        """Get or set the Number of hyperelastic constants to solve for from LCID1 or combinations of LCID1/LCBI/LCPL:
+        EQ.0: set hyperelastic constants directly
         EQ.1: Solve for C10 and C01,
         EQ.2: Solve for C10, C01, C11, C20, and C02,
         EQ.3: Solve for C10, C01, C11, C20, C02, and C30
@@ -185,7 +191,7 @@ class Mat077H(KeywordBase):
 
     @property
     def nv(self) -> typing.Optional[int]:
-        """Get or set the Number of Prony series terms in fit. The default is 6. Currently, the maximum number is set to 6. Values less than 6, possibly 3-5 are recommended, since each term used adds significantly to the cost. Caution should be exercised when taking the results from the fit. Preferably, all generated coefficients should be positive. Negative values may lead to unstable results. Once a satisfactory fit has been achieved it is recommended that the coefficients which are written into the output file be input in future runs.
+        """Get or set the 
         """ # nopep8
         return self._cards[0].get_value("nv")
 
@@ -220,8 +226,8 @@ class Mat077H(KeywordBase):
     def ref(self) -> float:
         """Get or set the Use reference geometry to initialize the stress tensor. The reference
         geometry is defined by the keyword:*INITIAL_FOAM_REFERENCE_GEOMETRY (see there for more details).
-        EQ.0.0: off,
-        EQ.1.0: on..
+        EQ.0.0: Off,
+        EQ.1.0: On..
         """ # nopep8
         return self._cards[0].get_value("ref")
 
@@ -234,7 +240,7 @@ class Mat077H(KeywordBase):
 
     @property
     def tbhys(self) -> typing.Optional[float]:
-        """Get or set the Table ID for hysteresis, see Remarks.
+        """Get or set the Table ID for hysteresis, which can be positive or negative; see Remarks 1 and 2. This field only applies to solid elements.
         """ # nopep8
         return self._cards[1].get_value("tbhys")
 
@@ -242,6 +248,83 @@ class Mat077H(KeywordBase):
     def tbhys(self, value: float) -> None:
         """Set the tbhys property."""
         self._cards[1].set_value("tbhys", value)
+
+    @property
+    def lcbi(self) -> typing.Optional[float]:
+        """Get or set the Load curve ID giving force as a function of displacement for the biaxial test used for parameter fitting. Make sure N > 0 on Card 1 if setting this parameter. See Remark 3
+        """ # nopep8
+        return self._cards[1].get_value("lcbi")
+
+    @lcbi.setter
+    def lcbi(self, value: float) -> None:
+        """Set the lcbi property."""
+        self._cards[1].set_value("lcbi", value)
+
+    @property
+    def lcpl(self) -> typing.Optional[float]:
+        """Get or set the Load curve ID giving force as a function of displacement for the planar test used for parameter fitting. Make sure N > 0 on Card 1 if setting this parameter. See Remark 3.
+        """ # nopep8
+        return self._cards[1].get_value("lcpl")
+
+    @lcpl.setter
+    def lcpl(self, value: float) -> None:
+        """Set the lcpl property."""
+        self._cards[1].set_value("lcpl", value)
+
+    @property
+    def wbi(self) -> typing.Optional[float]:
+        """Get or set the Weight factor giving the relative influence of the biaxial test data in the fitting of material parameters. A value of 1.0 means that the biaxial test data is of equal importance as the uniaxial test data. Make sure N > 0 on Card 1 if setting this parameter. See Remark 3.
+        """ # nopep8
+        return self._cards[1].get_value("wbi")
+
+    @wbi.setter
+    def wbi(self, value: float) -> None:
+        """Set the wbi property."""
+        self._cards[1].set_value("wbi", value)
+
+    @property
+    def wpl(self) -> typing.Optional[float]:
+        """Get or set the Weight factor giving the relative influence of planar test data in the fitting of material parameters. A value of 1.0 means that the planar test data is of equal importance as the uniaxial test data. Make sure N > 0 on Card 1 if setting this parameter. See Remark 3.
+        """ # nopep8
+        return self._cards[1].get_value("wpl")
+
+    @wpl.setter
+    def wpl(self, value: float) -> None:
+        """Set the wpl property."""
+        self._cards[1].set_value("wpl", value)
+
+    @property
+    def d1(self) -> typing.Optional[float]:
+        """Get or set the Compression compliance constant. If this parameter is greater than zero, then PR is ignored.
+        """ # nopep8
+        return self._cards[1].get_value("d1")
+
+    @d1.setter
+    def d1(self, value: float) -> None:
+        """Set the d1 property."""
+        self._cards[1].set_value("d1", value)
+
+    @property
+    def d2(self) -> typing.Optional[float]:
+        """Get or set the Compression compliance constant.
+        """ # nopep8
+        return self._cards[1].get_value("d2")
+
+    @d2.setter
+    def d2(self, value: float) -> None:
+        """Set the d2 property."""
+        self._cards[1].set_value("d2", value)
+
+    @property
+    def d3(self) -> typing.Optional[float]:
+        """Get or set the Compression compliance constant.
+        """ # nopep8
+        return self._cards[1].get_value("d3")
+
+    @d3.setter
+    def d3(self, value: float) -> None:
+        """Set the d3 property."""
+        self._cards[1].set_value("d3", value)
 
     @property
     def sgl(self) -> typing.Optional[float]:
@@ -278,7 +361,7 @@ class Mat077H(KeywordBase):
 
     @property
     def lcid1(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID giving the force versus actual change in the gauge length.
+        """Get or set the Load curve ID giving the force as a function of actual change in the gauge length. If SGL, SW, and ST are set to unity (1.0), curve LCID1 is also engineering stress as a function of engineering strain. Curve should have both negative (compressive) and positive (tensile) values.
         """ # nopep8
         return self._cards[2].get_value("lcid1")
 
@@ -289,8 +372,7 @@ class Mat077H(KeywordBase):
 
     @property
     def data(self) -> typing.Optional[float]:
-        """Get or set the Type of experimental data.
-        EQ.0.0: uniaxial data (Only option for this model)
+        """Get or set the Type of experimental data (only active if LCBI, LCPL, WBI, and WPL are all zero on Card 2 or Card 2 is not activated):
         """ # nopep8
         return self._cards[2].get_value("data")
 
@@ -301,8 +383,7 @@ class Mat077H(KeywordBase):
 
     @property
     def lcid2(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID of relaxation curve.
-        If constants βi are determined via a least squares fit. This relaxation curve is shown in Figure 20.25. This model ignores the constant stress.
+        """Get or set the Load curve ID of the deviatoric stress relaxation curve, neglecting the long term deviatoric stress. If LCID2 is specified, constants G_i and beta, are determined internally using a least squares fit. The ordinate of the curve is the viscoelastic deviatoric stress divided by 2 times the constant value of deviatoric strain where the stress and strain are in the direction of the prescribed strain, or in non-directional terms, the effective stress divided by 3 times the effective strain.
         """ # nopep8
         return self._cards[2].get_value("lcid2")
 
@@ -313,7 +394,7 @@ class Mat077H(KeywordBase):
 
     @property
     def bstart(self) -> typing.Optional[float]:
-        """Get or set the In the fit, β1 is set to zero, β2 is set to BSTART, β3 is 10 times β2, β4 is 100 times grater than β3, and so on. If zero, BSTART is determined by an iterative trial and error scheme.
+        """Get or set the In the fit, beta_1 is set to zero, beta_2 is set to BSTART, beta_3 is 10 times beta_2, beta_4 is 100 times grater than beta_3, and so on. If zero, BSTART is determined by an iterative trial and error scheme.
         """ # nopep8
         return self._cards[2].get_value("bstart")
 

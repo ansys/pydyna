@@ -27,6 +27,8 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _DEFINEDEINJECTION_CARD0 = (
@@ -51,6 +53,28 @@ _DEFINEDEINJECTION_CARD1 = (
     FieldSchema("tend", float, 70, 10, 1e+20),
 )
 
+_DEFINEDEINJECTION_CARD2 = (
+    FieldSchema("ifunc", int, 0, 10, 0),
+    FieldSchema("nid", int, 10, 10, None),
+    FieldSchema("imulti", int, 20, 10, None),
+    FieldSchema("lcvx", int, 30, 10, None),
+    FieldSchema("lcvy", int, 40, 10, None),
+    FieldSchema("lcvz", int, 50, 10, None),
+    FieldSchema("irand", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_DEFINEDEINJECTION_CARD3 = (
+    FieldSchema("r1", float, 0, 10, 0.0),
+    FieldSchema("p1", float, 10, 10, 0.0),
+    FieldSchema("r2", float, 20, 10, 0.0),
+    FieldSchema("p2", float, 30, 10, 0.0),
+    FieldSchema("r3", float, 40, 10, 0.0),
+    FieldSchema("p3", float, 50, 10, 0.0),
+    FieldSchema("r4", float, 60, 10, 0.0),
+    FieldSchema("p4", float, 70, 10, 0.0),
+)
+
 _DEFINEDEINJECTION_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
@@ -64,6 +88,10 @@ class DefineDeInjection(KeywordBase):
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
+        "nid": LinkType.NODE,
+        "lcvx": LinkType.DEFINE_CURVE,
+        "lcvy": LinkType.DEFINE_CURVE,
+        "lcvz": LinkType.DEFINE_CURVE,
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
         "sid": LinkType.SET_NODE,
         "pid": LinkType.PART,
@@ -80,6 +108,14 @@ class DefineDeInjection(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _DEFINEDEINJECTION_CARD1,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDEINJECTION_CARD2,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDEINJECTION_CARD3,
                 **kwargs,
             ),
             OptionCardSet(
@@ -150,7 +186,7 @@ class DefineDeInjection(KeywordBase):
 
     @property
     def xl(self) -> float:
-        """Get or set the Length of the rectangular injection plane along X-axis in the coordinate	system(CID) defined.
+        """Get or set the Length of the rectangular injection plane along X-axis in the coordinate system(CID) defined.
         """ # nopep8
         return self._cards[0].get_value("xl")
 
@@ -161,7 +197,7 @@ class DefineDeInjection(KeywordBase):
 
     @property
     def yl(self) -> float:
-        """Get or set the Length of the rectangular injection plane along Y-axis in the coordinate	system(CID) defined.
+        """Get or set the Length of the rectangular injection plane along Y-axis in the coordinate system(CID) defined.
         """ # nopep8
         return self._cards[0].get_value("yl")
 
@@ -270,18 +306,239 @@ class DefineDeInjection(KeywordBase):
         self._cards[1].set_value("tend", value)
 
     @property
+    def ifunc(self) -> int:
+        """Get or set the Distribution of particle radii (ignored if IMULTI > 1):
+        EQ.0: Uniform distribution(Default)
+        EQ.1: Gaussian distribution (see Remarks)
+        """ # nopep8
+        return self._cards[2].get_value("ifunc")
+
+    @ifunc.setter
+    def ifunc(self, value: int) -> None:
+        """Set the ifunc property."""
+        if value not in [0, 1, None]:
+            raise Exception("""ifunc must be `None` or one of {0,1}.""")
+        self._cards[2].set_value("ifunc", value)
+
+    @property
+    def nid(self) -> typing.Optional[int]:
+        """Get or set the An optional node ID. If defined, the center of injection plane follows the motion of this node
+        """ # nopep8
+        return self._cards[2].get_value("nid")
+
+    @nid.setter
+    def nid(self, value: int) -> None:
+        """Set the nid property."""
+        self._cards[2].set_value("nid", value)
+
+    @property
+    def imulti(self) -> typing.Optional[int]:
+        """Get or set the Flag for giving a specified mass distribution of injected particles with given radii:
+        EQ.1: Inject the particles with distribution IFUNC using the radii specified with RMINand RMAX(default).
+        GT.1: Inject particles with IMULTI different radii, Ri, with each different size having a specified mass distribution, Pi, given in Card 3.1.IMULTI cannot be greater than 4.
+        """ # nopep8
+        return self._cards[2].get_value("imulti")
+
+    @imulti.setter
+    def imulti(self, value: int) -> None:
+        """Set the imulti property."""
+        self._cards[2].set_value("imulti", value)
+
+    @property
+    def lcvx(self) -> typing.Optional[int]:
+        """Get or set the Load curve defines initial injection velocity in x-direction
+        """ # nopep8
+        return self._cards[2].get_value("lcvx")
+
+    @lcvx.setter
+    def lcvx(self, value: int) -> None:
+        """Set the lcvx property."""
+        self._cards[2].set_value("lcvx", value)
+
+    @property
+    def lcvy(self) -> typing.Optional[int]:
+        """Get or set the Load curve defines initial injection velocity in y-direction
+        """ # nopep8
+        return self._cards[2].get_value("lcvy")
+
+    @lcvy.setter
+    def lcvy(self, value: int) -> None:
+        """Set the lcvy property."""
+        self._cards[2].set_value("lcvy", value)
+
+    @property
+    def lcvz(self) -> typing.Optional[int]:
+        """Get or set the Load curve defines initial injection velocity in z-direction
+        """ # nopep8
+        return self._cards[2].get_value("lcvz")
+
+    @lcvz.setter
+    def lcvz(self, value: int) -> None:
+        """Set the lcvz property."""
+        self._cards[2].set_value("lcvz", value)
+
+    @property
+    def irand(self) -> typing.Optional[int]:
+        """Get or set the Enable more randomized injection patten with IRAND = 1.
+        """ # nopep8
+        return self._cards[2].get_value("irand")
+
+    @irand.setter
+    def irand(self, value: int) -> None:
+        """Set the irand property."""
+        self._cards[2].set_value("irand", value)
+
+    @property
+    def r1(self) -> float:
+        """Get or set the Injected particle radius.IMULTI radii may be specified
+        """ # nopep8
+        return self._cards[3].get_value("r1")
+
+    @r1.setter
+    def r1(self, value: float) -> None:
+        """Set the r1 property."""
+        self._cards[3].set_value("r1", value)
+
+    @property
+    def p1(self) -> float:
+        """Get or set the The mass percentage of injected particle with radius Ri
+        """ # nopep8
+        return self._cards[3].get_value("p1")
+
+    @p1.setter
+    def p1(self, value: float) -> None:
+        """Set the p1 property."""
+        self._cards[3].set_value("p1", value)
+
+    @property
+    def r2(self) -> float:
+        """Get or set the Injected particle radius.IMULTI radii may be specified
+        """ # nopep8
+        return self._cards[3].get_value("r2")
+
+    @r2.setter
+    def r2(self, value: float) -> None:
+        """Set the r2 property."""
+        self._cards[3].set_value("r2", value)
+
+    @property
+    def p2(self) -> float:
+        """Get or set the The mass percentage of injected particle with radius Ri
+        """ # nopep8
+        return self._cards[3].get_value("p2")
+
+    @p2.setter
+    def p2(self, value: float) -> None:
+        """Set the p2 property."""
+        self._cards[3].set_value("p2", value)
+
+    @property
+    def r3(self) -> float:
+        """Get or set the Injected particle radius.IMULTI radii may be specified
+        """ # nopep8
+        return self._cards[3].get_value("r3")
+
+    @r3.setter
+    def r3(self, value: float) -> None:
+        """Set the r3 property."""
+        self._cards[3].set_value("r3", value)
+
+    @property
+    def p3(self) -> float:
+        """Get or set the The mass percentage of injected particle with radius Ri
+        """ # nopep8
+        return self._cards[3].get_value("p3")
+
+    @p3.setter
+    def p3(self, value: float) -> None:
+        """Set the p3 property."""
+        self._cards[3].set_value("p3", value)
+
+    @property
+    def r4(self) -> float:
+        """Get or set the Injected particle radius.IMULTI radii may be specified
+        """ # nopep8
+        return self._cards[3].get_value("r4")
+
+    @r4.setter
+    def r4(self, value: float) -> None:
+        """Set the r4 property."""
+        self._cards[3].set_value("r4", value)
+
+    @property
+    def p4(self) -> float:
+        """Get or set the The mass percentage of injected particle with radius Ri
+        """ # nopep8
+        return self._cards[3].get_value("p4")
+
+    @p4.setter
+    def p4(self, value: float) -> None:
+        """Set the p4 property."""
+        self._cards[3].set_value("p4", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[2].cards[0].get_value("title")
+        return self._cards[4].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[2].cards[0].set_value("title", value)
+        self._cards[4].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def nid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given nid."""
+        return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
+
+    @property
+    def lcvx_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcvx."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvx:
+                return kwd
+        return None
+
+    @lcvx_link.setter
+    def lcvx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvx."""
+        self.lcvx = value.lcid
+
+    @property
+    def lcvy_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcvy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvy:
+                return kwd
+        return None
+
+    @lcvy_link.setter
+    def lcvy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvy."""
+        self.lcvy = value.lcid
+
+    @property
+    def lcvz_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcvz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcvz:
+                return kwd
+        return None
+
+    @lcvz_link.setter
+    def lcvz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcvz."""
+        self.lcvz = value.lcid
 
     @property
     def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:

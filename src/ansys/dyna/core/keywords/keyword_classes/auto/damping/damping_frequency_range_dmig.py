@@ -1,0 +1,158 @@
+# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+"""Module providing the DampingFrequencyRangeDmig class."""
+import typing
+from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DAMPINGFREQUENCYRANGEDMIG_CARD0 = (
+    FieldSchema("cdamp", float, 0, 10, 0.0),
+    FieldSchema("flow", float, 10, 10, 0.0),
+    FieldSchema("fhigh", float, 20, 10, 0.0),
+    FieldSchema("psid", int, 30, 10, 0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("pidrel", int, 50, 10, 0),
+    FieldSchema("iflg", int, 60, 10, 0),
+    FieldSchema("icard2", int, 70, 10, 0),
+)
+
+class DampingFrequencyRangeDmig(KeywordBase):
+    """DYNA DAMPING_FREQUENCY_RANGE_DMIG keyword"""
+
+    keyword = "DAMPING"
+    subkeyword = "FREQUENCY_RANGE_DMIG"
+    _link_fields = {
+        "psid": LinkType.SET_PART,
+        "pidrel": LinkType.PART,
+    }
+
+    def __init__(self, **kwargs):
+        """Initialize the DampingFrequencyRangeDmig class."""
+        super().__init__(**kwargs)
+        self._cards = [
+            Card.from_field_schemas_with_defaults(
+                _DAMPINGFREQUENCYRANGEDMIG_CARD0,
+                **kwargs,
+            ),
+        ]
+    @property
+    def cdamp(self) -> float:
+        """Get or set the Damping in fraction of critical.  Accurate application of this damping depends on the time step being small compared to the period of interest.
+        """ # nopep8
+        return self._cards[0].get_value("cdamp")
+
+    @cdamp.setter
+    def cdamp(self, value: float) -> None:
+        """Set the cdamp property."""
+        self._cards[0].set_value("cdamp", value)
+
+    @property
+    def flow(self) -> float:
+        """Get or set the Lowest frequency in range of interest (cycles per unit time, e.g. Hz if the time unit is seconds.Must be greater than zero)
+        """ # nopep8
+        return self._cards[0].get_value("flow")
+
+    @flow.setter
+    def flow(self, value: float) -> None:
+        """Set the flow property."""
+        self._cards[0].set_value("flow", value)
+
+    @property
+    def fhigh(self) -> float:
+        """Get or set the Highest frequency in the range of interest (cycles per unit time, e.g. Hz if time unit is seconds.Must be greater than FLOW.)
+        """ # nopep8
+        return self._cards[0].get_value("fhigh")
+
+    @fhigh.setter
+    def fhigh(self, value: float) -> None:
+        """Set the fhigh property."""
+        self._cards[0].set_value("fhigh", value)
+
+    @property
+    def psid(self) -> int:
+        """Get or set the Meaning depends on OPTION and OPTION2. If OPTION and/or OPTION2 is blank, PSID is a part set ID (see *SET_PART). The requested damping is applied only to the parts in the set. If PSID = 0, the damping is applied to all parts except those referred to by other *DAMPING_FREQUENCY_RANGE cards.
+        If OPTION is DEFORMand OPTION2 is DMIG, PSID is the ID of a superelement(see EID on* ELEMENT_DIRECT_MATRIX_INPUT).If PSID = 0, the damping is applied to all superelements.
+        """ # nopep8
+        return self._cards[0].get_value("psid")
+
+    @psid.setter
+    def psid(self, value: int) -> None:
+        """Set the psid property."""
+        self._cards[0].set_value("psid", value)
+
+    @property
+    def pidrel(self) -> int:
+        """Get or set the Optional part ID of a rigid body. Damping is then applied to the motion relative to the rigid body motion.  This input does not apply to the DEFORM keyword option.
+        """ # nopep8
+        return self._cards[0].get_value("pidrel")
+
+    @pidrel.setter
+    def pidrel(self, value: int) -> None:
+        """Set the pidrel property."""
+        self._cards[0].set_value("pidrel", value)
+
+    @property
+    def iflg(self) -> int:
+        """Get or set the Method used for internal calculation of damping constants:
+        EQ.0: iterative(more accurate)
+        EQ.1: approximate(same as R9 and previous versions)
+        """ # nopep8
+        return self._cards[0].get_value("iflg")
+
+    @iflg.setter
+    def iflg(self, value: int) -> None:
+        """Set the iflg property."""
+        if value not in [0, 1, None]:
+            raise Exception("""iflg must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("iflg", value)
+
+    @property
+    def icard2(self) -> int:
+        """Get or set the 
+        """ # nopep8
+        return self._cards[0].get_value("icard2")
+
+    @icard2.setter
+    def icard2(self, value: int) -> None:
+        """Set the icard2 property."""
+        if value not in [0, 1, None]:
+            raise Exception("""icard2 must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("icard2", value)
+
+    @property
+    def psid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
+
+    @property
+    def pidrel_link(self) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given pidrel."""
+        return self._get_link_by_attr("PART", "pid", self.pidrel, "parts")
+

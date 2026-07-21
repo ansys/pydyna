@@ -253,7 +253,7 @@ class MatReinforcedThermoplastic(KeywordBase):
 
     @property
     def lcsigy(self) -> typing.Optional[int]:
-        """Get or set the Load curve or table ID for strain hardening of the matrix. If a curve, then it specifies yield stress as a function of effective plastic strain. If a table, then temperatures are the table values indexing curves giving yield stress as a function of effective plastic strain (see *DEFINE_‌TABLE).
+        """Get or set the Load curve or table ID for strain hardening of the matrix. If a curve, then it specifies yield stress as a function of effective plastic strain. If a table, then temperatures are the table values indexing curves giving yield stress as a function of effective plastic strain (see *DEFINE_TABLE).
         """ # nopep8
         return self._cards[0].get_value("lcsigy")
 
@@ -287,10 +287,10 @@ class MatReinforcedThermoplastic(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC for a more complete description):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes, as with* DEFINE_COORDI - NATE_NODES,and then rotated about the shell element normal by the angle MANGL.
-        EQ.2.0 : Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR.
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle.The angle may be set in the keyword input for the element or in the input for this keyword with MANGL.
-        LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM or *DEFINE_COORDINATE_VECTOR).
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes, as with *DEFINE_COORDINATE_NODES,and then rotated about the shell element normal by the angle MANGL.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR.
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle.The angle may be set in the keyword input for the element or in the input for this keyword with MANGL.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number(CID on *DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM or *DEFINE_COORDINATE_VECTOR).
         """ # nopep8
         return self._cards[1].get_value("aopt")
 
@@ -412,8 +412,8 @@ class MatReinforcedThermoplastic(KeywordBase):
     @property
     def thick(self) -> typing.Optional[float]:
         """Get or set the Balance thickness changes of the material due to the matrix description by scaling fiber stresses:
-        EQ.0:	No scaling
-        EQ.1 : Scaling
+        EQ.0: No scaling
+        EQ.1: Scaling
         """ # nopep8
         return self._cards[2].get_value("thick")
 
@@ -756,8 +756,8 @@ class MatReinforcedThermoplastic(KeywordBase):
     @property
     def ihis(self) -> typing.Optional[float]:
         """Get or set the Flag for material properties initialization:
-        EQ.0:	Material properties defined in Cards 1 - 9 are used.
-        GE.1 : Use * INITIAL_‌STRESS_‌SHELL to initialize some material properties on an element - by - element basis
+        EQ.0: Material properties defined in Cards 1 - 9 are used.
+        GE.1: Use *INITIAL_STRESS_SHELL to initialize some material properties on an element - by - element basis
         """ # nopep8
         return self._cards[8].get_value("ihis")
 

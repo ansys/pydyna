@@ -51,7 +51,7 @@ class CeseBoundaryBlastLoadSegment(KeywordBase):
         ]
     @property
     def bid(self) -> typing.Optional[int]:
-        """Get or set the Blast source ID.
+        """Get or set the Blast source ID (see *LOAD_BLAST_ENHANCED)D.
         """ # nopep8
         return self._cards[0].get_value("bid")
 

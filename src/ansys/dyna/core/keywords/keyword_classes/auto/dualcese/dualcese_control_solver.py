@@ -53,8 +53,8 @@ class DualceseControlSolver(KeywordBase):
     @property
     def eqns(self) -> str:
         """Get or set the Select the equations being solved with the dual CESE solver.
-        EQ.NS:	Navier - Stokes equations
-        EQ.EULER : Euler equations
+        EQ.NS: Navier - Stokes equations
+        EQ.EULER: Euler equations
         """ # nopep8
         return self._cards[0].get_value("eqns")
 
@@ -66,9 +66,9 @@ class DualceseControlSolver(KeywordBase):
     @property
     def igeom(self) -> typing.Optional[str]:
         """Get or set the Sets the geometric dimension:
-        EQ.2D:	Two - dimensional(2D) problem
-        EQ.3D : Three - dimensional(3D) problem
-        EQ.AXI : 2D axisymmetric
+        EQ.2D: Two - dimensional(2D) problem
+        EQ.3D: Three - dimensional(3D) problem
+        EQ.AXI: 2D axisymmetric
         """ # nopep8
         return self._cards[0].get_value("igeom")
 
@@ -80,9 +80,9 @@ class DualceseControlSolver(KeywordBase):
     @property
     def iframe(self) -> str:
         """Get or set the Choose the frame of reference:
-        EQ.FIXED:	Usual non - moving reference frame(default).
-        EQ.ROT : Non - inertial rotating reference frame.
-        EQ.ROTATING : Non - inertial rotating reference frame
+        EQ.FIXED: Usual non - moving reference frame(default).
+        EQ.ROT: Non - inertial rotating reference frame.
+        EQ.ROTATING: Non - inertial rotating reference frame
         """ # nopep8
         return self._cards[0].get_value("iframe")
 
@@ -97,8 +97,8 @@ class DualceseControlSolver(KeywordBase):
     def mixtype(self) -> typing.Optional[str]:
         """Get or set the Select the mix or multiphase model solver (if any):
         EQ.<blank>: No mix or multiphase model(default).
-        EQ.HYBRID : Hybrid multiphase model solver.
-        EQ.TWO - PHASE : Two - phase multiphase solver.
+        EQ.HYBRID: Hybrid multiphase model solver.
+        EQ.TWO - PHASE: Two - phase multiphase solver.
         """ # nopep8
         return self._cards[0].get_value("mixtype")
 
@@ -109,7 +109,7 @@ class DualceseControlSolver(KeywordBase):
 
     @property
     def idc(self) -> float:
-        """Get or set the Contact interaction detection coefficient (for FSI and conjugate heat transfer problems).
+        """Get or set the Contact interaction detection coefficient (for FSI problems).
         """ # nopep8
         return self._cards[0].get_value("idc")
 
@@ -122,7 +122,7 @@ class DualceseControlSolver(KeywordBase):
     def isnan(self) -> int:
         """Get or set the Flag to check for a NaN in the dual CESE solver solution arrays at the completion of each time step. This option can be useful for debugging purposes. There is a cost overhead when this option is active.
         EQ.0: No checking,
-        EQ.1 : Checking is active
+        EQ.1: Checking is active
         """ # nopep8
         return self._cards[0].get_value("isnan")
 

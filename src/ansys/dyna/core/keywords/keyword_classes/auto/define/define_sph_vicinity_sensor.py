@@ -93,10 +93,10 @@ class DefineSphVicinitySensor(KeywordBase):
     @property
     def ptype(self) -> int:
         """Get or set the PRTCLSID type:
-        EQ.0:	Node set
-        EQ.1 : Node
-        EQ.2 : Part set
-        EQ.3 : Part
+        EQ.0: Node set
+        EQ.1: Node
+        EQ.2: Part set
+        EQ.3: Part
         """ # nopep8
         return self._cards[0].get_value("ptype")
 
@@ -110,8 +110,8 @@ class DefineSphVicinitySensor(KeywordBase):
     @property
     def stype(self) -> int:
         """Get or set the SURFSID type:
-        EQ. 0:	Part set ID,
-        EQ. 1:	Part ID
+        EQ. 0: Part set ID,
+        EQ. 1: Part ID
 
         """ # nopep8
         return self._cards[0].get_value("stype")

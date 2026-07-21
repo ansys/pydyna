@@ -377,10 +377,24 @@ ContactAutomaticSurfaceToSurfaceComposite
     :members:
 
 
+ContactAutomaticSurfaceToSurfaceLubrication
+-------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.contact_automatic_surface_to_surface_lubrication
+    :members:
+
+
 ContactAutomaticSurfaceToSurfaceMortar
 --------------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.contact_automatic_surface_to_surface_mortar
+    :members:
+
+
+ContactAutomaticSurfaceToSurfaceMortarOrthoFriction
+---------------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.contact_automatic_surface_to_surface_mortar_ortho_friction
     :members:
 
 

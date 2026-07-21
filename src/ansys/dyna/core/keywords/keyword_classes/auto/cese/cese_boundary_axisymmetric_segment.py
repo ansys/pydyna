@@ -58,7 +58,7 @@ class CeseBoundaryAxisymmetricSegment(KeywordBase):
         ]
     @property
     def n1(self) -> typing.Optional[int]:
-        """Get or set the Node IDs defining segment.
+        """Get or set the Node IDs defining a segment.
         """ # nopep8
         return self._cards[0].get_value("n1")
 
@@ -69,7 +69,7 @@ class CeseBoundaryAxisymmetricSegment(KeywordBase):
 
     @property
     def n2(self) -> typing.Optional[int]:
-        """Get or set the Node IDs defining segment.
+        """Get or set the Node IDs defining a segment.
         """ # nopep8
         return self._cards[0].get_value("n2")
 
@@ -80,7 +80,7 @@ class CeseBoundaryAxisymmetricSegment(KeywordBase):
 
     @property
     def n3(self) -> typing.Optional[int]:
-        """Get or set the Node IDs defining segment.
+        """Get or set the Node IDs defining a segment.
         """ # nopep8
         return self._cards[0].get_value("n3")
 
@@ -91,7 +91,7 @@ class CeseBoundaryAxisymmetricSegment(KeywordBase):
 
     @property
     def n4(self) -> typing.Optional[int]:
-        """Get or set the Node IDs defining segment.
+        """Get or set the Node IDs defining a segment.
         """ # nopep8
         return self._cards[0].get_value("n4")
 

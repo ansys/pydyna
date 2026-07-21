@@ -125,6 +125,23 @@ _MATSHAPEMEMORYALLOY_CARD9 = (
     FieldSchema("n16", float, 40, 10, None),
 )
 
+_MATSHAPEMEMORYALLOY_CARD10 = (
+    FieldSchema("kp", float, 0, 10, None),
+    FieldSchema("mp", float, 10, 10, None),
+    FieldSchema("kc", float, 20, 10, None),
+    FieldSchema("mc", float, 30, 10, None),
+)
+
+_MATSHAPEMEMORYALLOY_CARD11 = (
+    FieldSchema("d0p", float, 0, 10, None),
+    FieldSchema("qp", float, 10, 10, None),
+    FieldSchema("np", float, 20, 10, None),
+    FieldSchema("ql", float, 30, 10, None),
+    FieldSchema("nl", float, 40, 10, None),
+    FieldSchema("qm", float, 50, 10, None),
+    FieldSchema("nm", float, 60, 10, None),
+)
+
 _MATSHAPEMEMORYALLOY_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
@@ -181,6 +198,14 @@ class MatShapeMemoryAlloy(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _MATSHAPEMEMORYALLOY_CARD9,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MATSHAPEMEMORYALLOY_CARD10,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MATSHAPEMEMORYALLOY_CARD11,
                 **kwargs,
             ),
             OptionCardSet(
@@ -263,12 +288,12 @@ class MatShapeMemoryAlloy(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[int]:
         """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC, particularly the Material Directions section, for details):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES.
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.
-        EQ.2.0:	Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
-        EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.
-        LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_OPTION).
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with *DEFINE_COORDINATE_NODES.
+        EQ.1.0: Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
+        EQ.4.0: Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number(CID on *DEFINE_COORDINATE_OPTION).
         """ # nopep8
         return self._cards[0].get_value("aopt")
 
@@ -280,8 +305,8 @@ class MatShapeMemoryAlloy(KeywordBase):
     @property
     def stype(self) -> int:
         """Get or set the Initiation/saturation surface type:
-        EQ.0:	uses strain invariants(default)
-        EQ.1 : uses principal strains.
+        EQ.0: uses strain invariants(default)
+        EQ.1: uses principal strains.
         """ # nopep8
         return self._cards[0].get_value("stype")
 
@@ -625,14 +650,14 @@ class MatShapeMemoryAlloy(KeywordBase):
     @property
     def macf(self) -> int:
         """Get or set the Material axes change flag for solid elements:
-        EQ. - 4:	Switch material axes b and c before BETA rotation
-        EQ. - 3 : Switch material axes a and c before BETA rotation
-        EQ. - 2 : Switch material axes a and b before BETA rotation
-        EQ.1 : No change, default
-        EQ.2 : Switch material axes a and b after BETA rotation
-        EQ.3 : Switch material axes a and c after BETA rotation
-        EQ.4 : Switch material axes b and c after BETA rotation
-        Figure Error!Reference source not found.indicates when LS - DYNA applies MACF during the process to obtain the final material axes.If BETA on * ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, for AOPT = 3, the BETA input on Card 7 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed
+        EQ. - 4: Switch material axes b and c before BETA rotation
+        EQ. - 3: Switch material axes a and c before BETA rotation
+        EQ. - 2: Switch material axes a and b before BETA rotation
+        EQ.1: No change, default
+        EQ.2: Switch material axes a and b after BETA rotation
+        EQ.3: Switch material axes a and c after BETA rotation
+        EQ.4: Switch material axes b and c after BETA rotation
+        If BETA on *ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, for AOPT = 3, the BETA input on Card 7 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed
         """ # nopep8
         return self._cards[5].get_value("macf")
 
@@ -711,7 +736,7 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Material angle in degrees for AOPT = 3.  This angle may be overridden on the element card; see *ELEMENT_SOLID_ORTHO.
+        """Get or set the Material angle in degrees for AOPT = 3. This angle may be overridden on the element card; see *ELEMENT_SOLID_ORTHO.
         """ # nopep8
         return self._cards[6].get_value("beta")
 
@@ -722,9 +747,9 @@ class MatShapeMemoryAlloy(KeywordBase):
 
     @property
     def ref(self) -> typing.Optional[float]:
-        """Get or set the Use reference geometry to initialize the stress tensor.  The reference geometry is defined by the keyword:
-        *INITIAL_FOAM_REFERENCE_GEOMETRY.EQ.0.0:	off
-        EQ.1.0:	on
+        """Get or set the Use reference geometry to initialize the stress tensor. The reference geometry is defined by the keyword:
+        *INITIAL_FOAM_REFERENCE_GEOMETRY.EQ.0.0: off
+        EQ.1.0: on
         """ # nopep8
         return self._cards[6].get_value("ref")
 
@@ -965,15 +990,136 @@ class MatShapeMemoryAlloy(KeywordBase):
         self._cards[9].set_value("n16", value)
 
     @property
+    def kp(self) -> typing.Optional[float]:
+        """Get or set the Coefficient in plastic energy.
+        """ # nopep8
+        return self._cards[10].get_value("kp")
+
+    @kp.setter
+    def kp(self, value: float) -> None:
+        """Set the kp property."""
+        self._cards[10].set_value("kp", value)
+
+    @property
+    def mp(self) -> typing.Optional[float]:
+        """Get or set the Exponent in plastic energy.
+        """ # nopep8
+        return self._cards[10].get_value("mp")
+
+    @mp.setter
+    def mp(self, value: float) -> None:
+        """Set the mp property."""
+        self._cards[10].set_value("mp", value)
+
+    @property
+    def kc(self) -> typing.Optional[float]:
+        """Get or set the Coefficient in coupling energy.
+        """ # nopep8
+        return self._cards[10].get_value("kc")
+
+    @kc.setter
+    def kc(self, value: float) -> None:
+        """Set the kc property."""
+        self._cards[10].set_value("kc", value)
+
+    @property
+    def mc(self) -> typing.Optional[float]:
+        """Get or set the Exponent in plastic energy.
+        """ # nopep8
+        return self._cards[10].get_value("mc")
+
+    @mc.setter
+    def mc(self, value: float) -> None:
+        """Set the mc property."""
+        self._cards[10].set_value("mc", value)
+
+    @property
+    def d0p(self) -> typing.Optional[float]:
+        """Get or set the Initial driving force for plastic transformation.
+        """ # nopep8
+        return self._cards[11].get_value("d0p")
+
+    @d0p.setter
+    def d0p(self, value: float) -> None:
+        """Set the d0p property."""
+        self._cards[11].set_value("d0p", value)
+
+    @property
+    def qp(self) -> typing.Optional[float]:
+        """Get or set the Isotropic hardening coefficient in plastic relation.
+        """ # nopep8
+        return self._cards[11].get_value("qp")
+
+    @qp.setter
+    def qp(self, value: float) -> None:
+        """Set the qp property."""
+        self._cards[11].set_value("qp", value)
+
+    @property
+    def np(self) -> typing.Optional[float]:
+        """Get or set the Isotropic hardening exponent in plastic relation.
+        """ # nopep8
+        return self._cards[11].get_value("np")
+
+    @np.setter
+    def np(self, value: float) -> None:
+        """Set the np property."""
+        self._cards[11].set_value("np", value)
+
+    @property
+    def ql(self) -> typing.Optional[float]:
+        """Get or set the Isotropic hardening coefficient in volume fraction relation.
+        """ # nopep8
+        return self._cards[11].get_value("ql")
+
+    @ql.setter
+    def ql(self, value: float) -> None:
+        """Set the ql property."""
+        self._cards[11].set_value("ql", value)
+
+    @property
+    def nl(self) -> typing.Optional[float]:
+        """Get or set the Isotropic hardening exponent in volume fraction relation.
+        """ # nopep8
+        return self._cards[11].get_value("nl")
+
+    @nl.setter
+    def nl(self, value: float) -> None:
+        """Set the nl property."""
+        self._cards[11].set_value("nl", value)
+
+    @property
+    def qm(self) -> typing.Optional[float]:
+        """Get or set the Isotropic hardening coefficient in martensite kinetic relation.
+        """ # nopep8
+        return self._cards[11].get_value("qm")
+
+    @qm.setter
+    def qm(self, value: float) -> None:
+        """Set the qm property."""
+        self._cards[11].set_value("qm", value)
+
+    @property
+    def nm(self) -> typing.Optional[float]:
+        """Get or set the Isotropic hardening exponent in martensite kinetic relation.
+        """ # nopep8
+        return self._cards[11].get_value("nm")
+
+    @nm.setter
+    def nm(self, value: float) -> None:
+        """Set the nm property."""
+        self._cards[11].set_value("nm", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[10].cards[0].get_value("title")
+        return self._cards[12].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[10].cards[0].set_value("title", value)
+        self._cards[12].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

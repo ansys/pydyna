@@ -35,7 +35,7 @@ _MATJOINTEDROCK_CARD0 = (
     FieldSchema("rkf", float, 40, 10, 1.0),
     FieldSchema("phi", float, 50, 10, None),
     FieldSchema("cval", float, 60, 10, None),
-    FieldSchema("psi", float, 70, 10, None),
+    FieldSchema("psi", float, 70, 10, 0.0),
 )
 
 _MATJOINTEDROCK_CARD1 = (
@@ -117,7 +117,7 @@ class MatJointedRock(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification number, must be unique.
+        """Get or set the Material identification. A unique number or label must be specified (see *PART).
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -183,7 +183,7 @@ class MatJointedRock(KeywordBase):
 
     @property
     def cval(self) -> typing.Optional[float]:
-        """Get or set the Cohesion value.
+        """Get or set the Cohesion value (shear strength at zero normal stress).
         """ # nopep8
         return self._cards[0].get_value("cval")
 
@@ -193,7 +193,7 @@ class MatJointedRock(KeywordBase):
         self._cards[0].set_value("cval", value)
 
     @property
-    def psi(self) -> typing.Optional[float]:
+    def psi(self) -> float:
         """Get or set the Dilation angle (radians).
         """ # nopep8
         return self._cards[0].get_value("psi")
@@ -227,18 +227,22 @@ class MatJointedRock(KeywordBase):
 
     @property
     def elastic(self) -> int:
-        """Get or set the Flag = 1 for elastic behaviour only.
+        """Get or set the Behavior of base material (see Remark 3):
+        EQ.0: Nonlinear using all parameters on Cards 1 through 3
+        EQ.1: Linear elastic; only the joint planes are nonlinear
         """ # nopep8
         return self._cards[1].get_value("elastic")
 
     @elastic.setter
     def elastic(self, value: int) -> None:
         """Set the elastic property."""
+        if value not in [0, 1, None]:
+            raise Exception("""elastic must be `None` or one of {0,1}.""")
         self._cards[1].set_value("elastic", value)
 
     @property
     def lccpdr(self) -> int:
-        """Get or set the Loadcurve for extra cohesion for parent material (dynamic relaxation).
+        """Get or set the Loadcurve for extra cohesion for base material (dynamic relaxation) as a function of time.
         """ # nopep8
         return self._cards[1].get_value("lccpdr")
 
@@ -249,7 +253,7 @@ class MatJointedRock(KeywordBase):
 
     @property
     def lccpt(self) -> int:
-        """Get or set the Loadcurve for extra cohesion for parent material (transient).
+        """Get or set the Loadcurve for extra cohesion for base material (transient) as a function of time.
         """ # nopep8
         return self._cards[1].get_value("lccpt")
 
@@ -260,7 +264,7 @@ class MatJointedRock(KeywordBase):
 
     @property
     def lccjdr(self) -> int:
-        """Get or set the Loadcurve for extra cohesion for joints (dynamic relaxation).
+        """Get or set the Loadcurve for extra cohesion for joints (dynamic relaxation) as a function of time.
         """ # nopep8
         return self._cards[1].get_value("lccjdr")
 
@@ -271,7 +275,7 @@ class MatJointedRock(KeywordBase):
 
     @property
     def lccjt(self) -> int:
-        """Get or set the Loadcurve for extra cohesion for joints (transient).
+        """Get or set the Loadcurve for extra cohesion for joints (transient) as a function of time.
         """ # nopep8
         return self._cards[1].get_value("lccjt")
 
@@ -282,7 +286,7 @@ class MatJointedRock(KeywordBase):
 
     @property
     def lcsfac(self) -> int:
-        """Get or set the Loadcurve giving factor on strength vs time.
+        """Get or set the Loadcurve giving factor on strength as a function of time.
         """ # nopep8
         return self._cards[1].get_value("lcsfac")
 
@@ -293,7 +297,7 @@ class MatJointedRock(KeywordBase):
 
     @property
     def gmoddp(self) -> typing.Optional[float]:
-        """Get or set the Depth at which shear modulus (GMOD) is correct.
+        """Get or set the Z-coordinate at which GMOD is correct
         """ # nopep8
         return self._cards[2].get_value("gmoddp")
 
@@ -304,7 +308,7 @@ class MatJointedRock(KeywordBase):
 
     @property
     def phidp(self) -> typing.Optional[float]:
-        """Get or set the Depth at which angle of friction (PHI) is correct.
+        """Get or set the Z-coordinate at which PHI is correct
         """ # nopep8
         return self._cards[2].get_value("phidp")
 
@@ -315,7 +319,7 @@ class MatJointedRock(KeywordBase):
 
     @property
     def cvaldp(self) -> typing.Optional[float]:
-        """Get or set the Depth at which cohesion value (CVAL) is correct.
+        """Get or set the Z-coordinate at which CVAL is correct
         """ # nopep8
         return self._cards[2].get_value("cvaldp")
 
@@ -326,7 +330,7 @@ class MatJointedRock(KeywordBase):
 
     @property
     def psidp(self) -> typing.Optional[float]:
-        """Get or set the Depth at which dilation angle (PSI) is correct.
+        """Get or set the Z-coordinate at which PSI is correct
         """ # nopep8
         return self._cards[2].get_value("psidp")
 
@@ -337,7 +341,7 @@ class MatJointedRock(KeywordBase):
 
     @property
     def gmodgr(self) -> typing.Optional[float]:
-        """Get or set the Gradient at which shear modulus (GMOD) increases with depth.
+        """Get or set the Gradient of GMOD as a function of Z-coordinate (usually negative)
         """ # nopep8
         return self._cards[2].get_value("gmodgr")
 
@@ -348,7 +352,7 @@ class MatJointedRock(KeywordBase):
 
     @property
     def phigr(self) -> typing.Optional[float]:
-        """Get or set the Gradient at which friction angle (PHI) increases with depth.
+        """Get or set the Gradient of PHI as a function of Z-coordinate.
         """ # nopep8
         return self._cards[2].get_value("phigr")
 
@@ -359,7 +363,7 @@ class MatJointedRock(KeywordBase):
 
     @property
     def cvalgr(self) -> typing.Optional[float]:
-        """Get or set the Gradient at which cohesion value (CVAL) increases with depth.
+        """Get or set the Gradient of CVAL as a function of Z-coordinate (usually negative).
         """ # nopep8
         return self._cards[2].get_value("cvalgr")
 
@@ -370,7 +374,7 @@ class MatJointedRock(KeywordBase):
 
     @property
     def psigr(self) -> typing.Optional[float]:
-        """Get or set the Gradient at which dilation angle (PSI) increases with depth.
+        """Get or set the Gradient of PSI as a function of Z-coordinate .
         """ # nopep8
         return self._cards[2].get_value("psigr")
 
@@ -447,8 +451,9 @@ class MatJointedRock(KeywordBase):
 
     @property
     def local(self) -> typing.Optional[float]:
-        """Get or set the EQ=0: DIP and DIPANG are with respect to the global axes.
-        EQ=1: DIP and DIPANG are with respect to the local element axes.
+        """Get or set the Axes (see Remark 10)
+        EQ=0: DIP and STRIKE are with respect to the global axes.
+        EQ=1: DIP and STRIKE are with respect to the local element axes.
         """ # nopep8
         return self._cards[3].get_value("local")
 

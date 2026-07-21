@@ -47,7 +47,9 @@ class ChangeOutput(KeywordBase):
         ]
     @property
     def iascii(self) -> int:
-        """Get or set the If iascii=1, all ascii output will be appended to the result of previous run.
+        """Get or set the Flag to control manner of outputting ASCII data requested by *DATABASE_OPTION commands in a full restart deck:
+        EQ.0:	Full restart overwrites existing ASCII output(default),
+        EQ.1 : Full restart appends to existing ASCII output.
         """ # nopep8
         return self._cards[0].get_value("iascii")
 

@@ -30,6 +30,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _SETSOLIDGENERAL_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
     FieldSchema("solver", str, 10, 10, "MECH"),
+    FieldSchema("its", str, 20, 10, "0"),
 )
 
 _SETSOLIDGENERAL_CARD1 = (
@@ -41,6 +42,17 @@ _SETSOLIDGENERAL_CARD1 = (
     FieldSchema("e5", int, 50, 10, None),
     FieldSchema("e6", int, 60, 10, None),
     FieldSchema("e7", int, 70, 10, None),
+)
+
+_SETSOLIDGENERAL_CARD2 = (
+    FieldSchema("option", str, 0, 10, "ALL"),
+    FieldSchema("mshid", int, 10, 10, None),
+    FieldSchema("imin", int, 20, 10, None),
+    FieldSchema("imax", int, 30, 10, None),
+    FieldSchema("jmin", int, 40, 10, None),
+    FieldSchema("jmax", int, 50, 10, None),
+    FieldSchema("kmin", int, 60, 10, None),
+    FieldSchema("kmax", int, 70, 10, None),
 )
 
 _SETSOLIDGENERAL_OPTION0_CARD0 = (
@@ -67,6 +79,10 @@ class SetSolidGeneral(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _SETSOLIDGENERAL_CARD1,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _SETSOLIDGENERAL_CARD2,
                 **kwargs,
             ),
             OptionCardSet(
@@ -107,24 +123,44 @@ class SetSolidGeneral(KeywordBase):
         self._cards[0].set_value("solver", value)
 
     @property
+    def its(self) -> str:
+        """Get or set the Define coupling type across different scales in two-scale co-simulation. This flag should only be included for solid sets that provide coupling information in the input file referred to by *INCLUDE_COSIM.
+        EQ.3: Solid - in - solid immersed coupling
+        """ # nopep8
+        return self._cards[0].get_value("its")
+
+    @its.setter
+    def its(self, value: str) -> None:
+        """Set the its property."""
+        self._cards[0].set_value("its", value)
+
+    @property
     def option(self) -> str:
         """Get or set the OPTION.EQ.ALL: All solid elements will be included in the set,
-        OPTION.EQ.ELEM: Solid elements E1...E7 will be included in the current set,
+        OPTION.EQ.BOX: Solid elements inside boxes E1...E7 will be included in the current set,
+        OPTION.EQ.DBOX: Solid elements inside boxes E1...E7 previously added will be excluded from the current set.\nOPTION.EQ.ELEM: Solid elements E1...E7 will be included in the current set,
         OPTION.EQ.DELEM: Solid elements E1...E7 previously added will be excluded from the current set,
         OPTION.EQ.PART: Solid elements from parts E1...E7 will be included in the current set,
         OPTION.EQ.DPART: Solid elements from parts E1...E7 previously added will be excluded from the current set,
-        OPTION.EQ.BOX: Solid elements inside boxes E1...E7 will be included in the current set,
-        OPTION.EQ.DBOX: Solid elements inside boxes E1...E7 previously added will be excluded from the current set.
-        OPTION.EQ.SALECPT:Elements inside a box in Structured ALE mesh.E1 here is the S - ALE mesh ID(MSHID).E2, E3, E4, E5, E6,and E7 correspond to IMIN, IMAX, JMIN, JMAX, KMIN,and KMAX.They are the minimumand the maximum nodal indices along each direction in S - ALE mesh.This option is only to be used for Structured ALE mesh.It can be used with SALEFAC but should not be used in a mixed manner with other “_‌GENERAL” options.
-        OPTION.EQ.SALEFAC:Elements on the face of Structured ALE mesh.E1 here is the S - ALE mesh ID(MSHID).E2, E3, E4, E5, E6, and E7 correspond to - X, +X, -Y, +Y, -Z, and +Z faces.Assigning 1 to these 6 values would include all the boundary elements at these faces in the solid element set.This option is only to be used for Structured ALE mesh.It can be used with SALECPT but should not be used in a mixed manner with other “_GENERAL” options.
+        OPTION.EQ.SALEBOXL:Elements inside a box in a structured ALE(S - ALE) mesh.E1 is the S - ALE mesh ID(MSHID).E2, E3, E4, E5, E6, and E7 correspond to XMIN, XMAX, YMIN, YMAX, ZMIN, and ZMAX, respectively.They are the minimum and the maximum nodal local coordinates, as defined in* ALE_STRUCTURED_MESH_CONTROL_POINTS, along each direction in S - ALE mesh.This option is only to be used for S - ALE meshes.It can be used with options SALECPT, SALEFAC, and SALEBOXL but should not be used with other GENERAL options.
+        Please refer to* ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details.
+        OPTION.EQ.SALECPT:lements inside a box in a Structured ALE(S - ALE) mesh.E1 is the S - ALE mesh ID(MSHID).E2, E3, E4, E5, E6, and E7 correspond to IMIN, IMAX, JMIN, JMAX, KMIN, and KMAX.They are the minimum and the maximum nodal indices along each direction in the S - ALE mesh.To include all solids in the S-ALE mesh defined by E1, set values E2�E7 to zero or leave them blank.  This option is only to be used for S - ALE meshes.It can be used with options SALECPT, SALEFAC, and SALEBOXL but should not be used with other GENERAL options.
+        Please refer to* ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details.
+        OPTION.EQ.SALEFAC:Elements on the face of the S - ALE mesh.E1 is the S - ALE mesh ID(MSHID).E2, E3, E4, E5, E6, and E7 correspond to - X, +X, -Y, +Y, -Z, and +Z faces.Assigning 1 to these 6 values would include all the boundary elements at these faces in the solid element set.This option is only to be used for S - ALE mesh.It can be used with options SALECPT, SALEFAC, and SALEBOXL but should not be used with other GENERAL options.
+        For trimmed S - ALE meshes(see * ALE_STRUCTURED_MESH_TRIM), an element is treated as a surface element as long as it has no neighboring element along the specified direction.The set thus includes all surface elements facing that direction at the exterior and interior boundaries.
+        Please refer to* ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details.
+        OPTION.EQ.SET:Elements of beam element sets E1, E2, E3, ... will be included
+        OPTION.EQ.DSET: Previously added elements that are members of beam element sets E1, E2, E3, ... will be excluded.
+        VOL	Elements inside contact volumes E1, E2, E3, � will be included.  See *DEFINE_CONTACT_VOLUME.
+        DVOL	Previously added elements that are inside contact volumes E1, E2, E3, � will be excluded.
         """ # nopep8
         return self._cards[1].get_value("option")
 
     @option.setter
     def option(self, value: str) -> None:
         """Set the option property."""
-        if value not in ["ALL", "ELEM", "DELEM", "PART", "DPART", "BOX", "DBOX", "SALECPT", "SALEFAC", None]:
-            raise Exception("""option must be `None` or one of {"ALL","ELEM","DELEM","PART","DPART","BOX","DBOX","SALECPT","SALEFAC"}.""")
+        if value not in ["ALL", "BOX", "DBOX", "ELEM", "DELEM", "PART", "DPART", "SALEBOXL", "SALECPT", "SALEFAC", "SET", "DSET", "VOL", "DVOL", None]:
+            raise Exception("""option must be `None` or one of {"ALL","BOX","DBOX","ELEM","DELEM","PART","DPART","SALEBOXL","SALECPT","SALEFAC","SET","DSET","VOL","DVOL"}.""")
         self._cards[1].set_value("option", value)
 
     @property
@@ -146,13 +182,13 @@ class SetSolidGeneral(KeywordBase):
 
     @property
     def e2(self) -> typing.Optional[int]:
-        """Get or set the OPTION.EQ.ALL: E2 not used,
-        OPTION.EQ.ELEM: Solid element E2 will be included in the current set,
-        OPTION.EQ.DELEM: Solid element E2 will be excluded from the current set,
-        OPTION.EQ.PART: Solid elements from part E2 will be included in the current set,
-        OPTION.EQ.DPART: Solid elements from part E2 will be excluded from the current set,
-        OPTION.EQ.BOX: Solid elements inside box E2 will be included in the current set,
-        OPTION.EQ.DBOX: Solid elements inside box E2 will be excluded from the current set.
+        """Get or set the OPTION.EQ.ALL: E1 not used,
+        OPTION.EQ.ELEM: Solid element E1 will be included in the current set,
+        OPTION.EQ.DELEM: Solid element E1 will be excluded from the current set,
+        OPTION.EQ.PART: Solid elements from part E1 will be included in the current set,
+        OPTION.EQ.DPART: Solid elements from part E1 will be excluded from the current set,
+        OPTION.EQ.BOX: Solid elements inside box E1 will be included in the current set,
+        OPTION.EQ.DBOX: Solid elements inside box E1 will be excluded from the current set.
         """ # nopep8
         return self._cards[1].get_value("e2")
 
@@ -163,13 +199,13 @@ class SetSolidGeneral(KeywordBase):
 
     @property
     def e3(self) -> typing.Optional[int]:
-        """Get or set the OPTION.EQ.ALL: E3 not used,
-        OPTION.EQ.ELEM: Solid element E3 will be included in the current set,
-        OPTION.EQ.DELEM: Solid element E3 will be excluded from the current set,
-        OPTION.EQ.PART: Solid elements from part E3 will be included in the current set,
-        OPTION.EQ.DPART: Solid elements from part E3 will be excluded from the current set,
-        OPTION.EQ.BOX: Solid elements inside box E3 will be included in the current set,
-        OPTION.EQ.DBOX: Solid elements inside box E3 will be excluded from the current set.
+        """Get or set the OPTION.EQ.ALL: E1 not used,
+        OPTION.EQ.ELEM: Solid element E1 will be included in the current set,
+        OPTION.EQ.DELEM: Solid element E1 will be excluded from the current set,
+        OPTION.EQ.PART: Solid elements from part E1 will be included in the current set,
+        OPTION.EQ.DPART: Solid elements from part E1 will be excluded from the current set,
+        OPTION.EQ.BOX: Solid elements inside box E1 will be included in the current set,
+        OPTION.EQ.DBOX: Solid elements inside box E1 will be excluded from the current set.
         """ # nopep8
         return self._cards[1].get_value("e3")
 
@@ -180,13 +216,13 @@ class SetSolidGeneral(KeywordBase):
 
     @property
     def e4(self) -> typing.Optional[int]:
-        """Get or set the OPTION.EQ.ALL: E4 not used,
-        OPTION.EQ.ELEM: Solid element E4 will be included in the current set,
-        OPTION.EQ.DELEM: Solid element E4 will be excluded from the current set,
-        OPTION.EQ.PART: Solid elements from part E4 will be included in the current set,
-        OPTION.EQ.DPART: Solid elements from part E4 will be excluded from the current set,
-        OPTION.EQ.BOX: Solid elements inside box E4 will be included in the current set,
-        OPTION.EQ.DBOX: Solid elements inside box E4 will be excluded from the current set.
+        """Get or set the OPTION.EQ.ALL: E1 not used,
+        OPTION.EQ.ELEM: Solid element E1 will be included in the current set,
+        OPTION.EQ.DELEM: Solid element E1 will be excluded from the current set,
+        OPTION.EQ.PART: Solid elements from part E1 will be included in the current set,
+        OPTION.EQ.DPART: Solid elements from part E1 will be excluded from the current set,
+        OPTION.EQ.BOX: Solid elements inside box E1 will be included in the current set,
+        OPTION.EQ.DBOX: Solid elements inside box E1 will be excluded from the current set.
         """ # nopep8
         return self._cards[1].get_value("e4")
 
@@ -197,13 +233,13 @@ class SetSolidGeneral(KeywordBase):
 
     @property
     def e5(self) -> typing.Optional[int]:
-        """Get or set the OPTION.EQ.ALL: E5 not used,
-        OPTION.EQ.ELEM: Solid element E5 will be included in the current set,
-        OPTION.EQ.DELEM: Solid element E5 will be excluded from the current set,
-        OPTION.EQ.PART: Solid elements from part E5 will be included in the current set,
-        OPTION.EQ.DPART: Solid elements from part E5 will be excluded from the current set,
-        OPTION.EQ.BOX: Solid elements inside box E5 will be included in the current set,
-        OPTION.EQ.DBOX: Solid elements inside box E5 will be excluded from the current set.
+        """Get or set the OPTION.EQ.ALL: E1 not used,
+        OPTION.EQ.ELEM: Solid element E1 will be included in the current set,
+        OPTION.EQ.DELEM: Solid element E1 will be excluded from the current set,
+        OPTION.EQ.PART: Solid elements from part E1 will be included in the current set,
+        OPTION.EQ.DPART: Solid elements from part E1 will be excluded from the current set,
+        OPTION.EQ.BOX: Solid elements inside box E1 will be included in the current set,
+        OPTION.EQ.DBOX: Solid elements inside box E1 will be excluded from the current set.
         """ # nopep8
         return self._cards[1].get_value("e5")
 
@@ -214,13 +250,13 @@ class SetSolidGeneral(KeywordBase):
 
     @property
     def e6(self) -> typing.Optional[int]:
-        """Get or set the OPTION.EQ.ALL: E6 not used,
-        OPTION.EQ.ELEM: Solid element E6 will be included in the current set,
-        OPTION.EQ.DELEM: Solid element E6 will be excluded from the current set,
-        OPTION.EQ.PART: Solid elements from part E6 will be included in the current set,
-        OPTION.EQ.DPART: Solid elements from part E6 will be excluded from the current set,
-        OPTION.EQ.BOX: Solid elements inside box E6 will be included in the current set,
-        OPTION.EQ.DBOX: Solid elements inside box E6 will be excluded from the current set.
+        """Get or set the OPTION.EQ.ALL: E1 not used,
+        OPTION.EQ.ELEM: Solid element E1 will be included in the current set,
+        OPTION.EQ.DELEM: Solid element E1 will be excluded from the current set,
+        OPTION.EQ.PART: Solid elements from part E1 will be included in the current set,
+        OPTION.EQ.DPART: Solid elements from part E1 will be excluded from the current set,
+        OPTION.EQ.BOX: Solid elements inside box E1 will be included in the current set,
+        OPTION.EQ.DBOX: Solid elements inside box E1 will be excluded from the current set.
         """ # nopep8
         return self._cards[1].get_value("e6")
 
@@ -231,13 +267,13 @@ class SetSolidGeneral(KeywordBase):
 
     @property
     def e7(self) -> typing.Optional[int]:
-        """Get or set the OPTION.EQ.ALL: E7 not used,
-        OPTION.EQ.ELEM: Solid element E7 will be included in the current set,
-        OPTION.EQ.DELEM: Solid element E7 will be excluded from the current set,
-        OPTION.EQ.PART: Solid elements from part E7 will be included in the current set,
-        OPTION.EQ.DPART: Solid elements from part E7 will be excluded from the current set,
-        OPTION.EQ.BOX: Solid elements inside box E7 will be included in the current set,
-        OPTION.EQ.DBOX: Solid elements inside box E7 will be excluded from the current set.
+        """Get or set the OPTION.EQ.ALL: E1 not used,
+        OPTION.EQ.ELEM: Solid element E1 will be included in the current set,
+        OPTION.EQ.DELEM: Solid element E1 will be excluded from the current set,
+        OPTION.EQ.PART: Solid elements from part E1 will be included in the current set,
+        OPTION.EQ.DPART: Solid elements from part E1 will be excluded from the current set,
+        OPTION.EQ.BOX: Solid elements inside box E1 will be included in the current set,
+        OPTION.EQ.DBOX: Solid elements inside box E1 will be excluded from the current set.
         """ # nopep8
         return self._cards[1].get_value("e7")
 
@@ -247,15 +283,121 @@ class SetSolidGeneral(KeywordBase):
         self._cards[1].set_value("e7", value)
 
     @property
+    def option(self) -> str:
+        """Get or set the OPTION.EQ.ALL: All solid elements will be included in the set,
+        OPTION.EQ.BOX: Solid elements inside boxes E1...E7 will be included in the current set,
+        OPTION.EQ.DBOX: Solid elements inside boxes E1...E7 previously added will be excluded from the current set.\nOPTION.EQ.ELEM: Solid elements E1...E7 will be included in the current set,
+        OPTION.EQ.DELEM: Solid elements E1...E7 previously added will be excluded from the current set,
+        OPTION.EQ.PART: Solid elements from parts E1...E7 will be included in the current set,
+        OPTION.EQ.DPART: Solid elements from parts E1...E7 previously added will be excluded from the current set,
+        OPTION.EQ.SALEBOXL:Elements inside a box in a structured ALE(S - ALE) mesh.E1 is the S - ALE mesh ID(MSHID).E2, E3, E4, E5, E6, and E7 correspond to XMIN, XMAX, YMIN, YMAX, ZMIN, and ZMAX, respectively.They are the minimum and the maximum nodal local coordinates, as defined in* ALE_STRUCTURED_MESH_CONTROL_POINTS, along each direction in S - ALE mesh.This option is only to be used for S - ALE meshes.It can be used with options SALECPT, SALEFAC, and SALEBOXL but should not be used with other GENERAL options.
+        Please refer to* ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details.
+        OPTION.EQ.SALECPT:lements inside a box in a Structured ALE(S - ALE) mesh.E1 is the S - ALE mesh ID(MSHID).E2, E3, E4, E5, E6, and E7 correspond to IMIN, IMAX, JMIN, JMAX, KMIN, and KMAX.They are the minimum and the maximum nodal indices along each direction in the S - ALE mesh.This option is only to be used for S - ALE meshes.It can be used with options SALECPT, SALEFAC, and SALEBOXL but should not be used with other GENERAL options.
+        Please refer to* ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details.
+        OPTION.EQ.SALEFAC:Elements on the face of the S - ALE mesh.E1 is the S - ALE mesh ID(MSHID).E2, E3, E4, E5, E6, and E7 correspond to - X, +X, -Y, +Y, -Z, and +Z faces.Assigning 1 to these 6 values would include all the boundary elements at these faces in the solid element set.This option is only to be used for S - ALE mesh.It can be used with options SALECPT, SALEFAC, and SALEBOXL but should not be used with other GENERAL options.
+        For trimmed S - ALE meshes(see * ALE_STRUCTURED_MESH_TRIM), an element is treated as a surface element as long as it has no neighboring element along the specified direction.The set thus includes all surface elements facing that direction at the exterior and interior boundaries.
+        Please refer to* ALE_STRUCTURED_MESH_CONTROL_POINTS and *ALE_STRUCTURED_MESH for more details.
+        OPTION.EQ.SET:Elements of beam element sets E1, E2, E3, ... will be included
+        OPTION.EQ.DSET: Previously added elements that are members of beam element sets E1, E2, E3, ... will be excluded.
+        VOL	Elements inside contact volumes E1, E2, E3, � will be included.  See *DEFINE_CONTACT_VOLUME.
+        DVOL	Previously added elements that are inside contact volumes E1, E2, E3, � will be excluded.
+        """ # nopep8
+        return self._cards[2].get_value("option")
+
+    @option.setter
+    def option(self, value: str) -> None:
+        """Set the option property."""
+        if value not in ["ALL", "BOX", "DBOX", "ELEM", "DELEM", "PART", "DPART", "SALEBOXL", "SALECPT", "SALEFAC", "SET", "DSET", "VOL", "DVOL", None]:
+            raise Exception("""option must be `None` or one of {"ALL","BOX","DBOX","ELEM","DELEM","PART","DPART","SALEBOXL","SALECPT","SALEFAC","SET","DSET","VOL","DVOL"}.""")
+        self._cards[2].set_value("option", value)
+
+    @property
+    def mshid(self) -> typing.Optional[int]:
+        """Get or set the S-ALE mesh ID.
+        """ # nopep8
+        return self._cards[2].get_value("mshid")
+
+    @mshid.setter
+    def mshid(self, value: int) -> None:
+        """Set the mshid property."""
+        self._cards[2].set_value("mshid", value)
+
+    @property
+    def imin(self) -> typing.Optional[int]:
+        """Get or set the The minimum nodal indices along X in S-ALE mesh.
+        """ # nopep8
+        return self._cards[2].get_value("imin")
+
+    @imin.setter
+    def imin(self, value: int) -> None:
+        """Set the imin property."""
+        self._cards[2].set_value("imin", value)
+
+    @property
+    def imax(self) -> typing.Optional[int]:
+        """Get or set the The maximum nodal indices along X in S-ALE mesh.
+        """ # nopep8
+        return self._cards[2].get_value("imax")
+
+    @imax.setter
+    def imax(self, value: int) -> None:
+        """Set the imax property."""
+        self._cards[2].set_value("imax", value)
+
+    @property
+    def jmin(self) -> typing.Optional[int]:
+        """Get or set the The minimum nodal indices along Y in S-ALE mesh.
+        """ # nopep8
+        return self._cards[2].get_value("jmin")
+
+    @jmin.setter
+    def jmin(self, value: int) -> None:
+        """Set the jmin property."""
+        self._cards[2].set_value("jmin", value)
+
+    @property
+    def jmax(self) -> typing.Optional[int]:
+        """Get or set the The maximum nodal indices along Y in S-ALE mesh.
+        """ # nopep8
+        return self._cards[2].get_value("jmax")
+
+    @jmax.setter
+    def jmax(self, value: int) -> None:
+        """Set the jmax property."""
+        self._cards[2].set_value("jmax", value)
+
+    @property
+    def kmin(self) -> typing.Optional[int]:
+        """Get or set the The minimum nodal indices along Z in S-ALE mesh.
+        """ # nopep8
+        return self._cards[2].get_value("kmin")
+
+    @kmin.setter
+    def kmin(self, value: int) -> None:
+        """Set the kmin property."""
+        self._cards[2].set_value("kmin", value)
+
+    @property
+    def kmax(self) -> typing.Optional[int]:
+        """Get or set the The maximum nodal indices along Z in S-ALE mesh.
+        """ # nopep8
+        return self._cards[2].get_value("kmax")
+
+    @kmax.setter
+    def kmax(self, value: int) -> None:
+        """Set the kmax property."""
+        self._cards[2].set_value("kmax", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[2].cards[0].get_value("title")
+        return self._cards[3].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[2].cards[0].set_value("title", value)
+        self._cards[3].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

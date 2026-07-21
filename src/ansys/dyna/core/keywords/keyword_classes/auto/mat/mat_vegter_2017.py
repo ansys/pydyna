@@ -43,8 +43,8 @@ _MATVEGTER2017_CARD0 = (
 _MATVEGTER2017_CARD1 = (
     FieldSchema("sys", float, 0, 10, None),
     FieldSchema("sip", float, 10, 10, None),
-    FieldSchema("shs", float, 20, 10, None),
-    FieldSchema("shl", float, 30, 10, None),
+    FieldSchema("shb", float, 20, 10, None),
+    FieldSchema("sho", float, 30, 10, None),
     FieldSchema("esh", float, 40, 10, None),
     FieldSchema("e0", float, 50, 10, None),
     FieldSchema("alpha", float, 60, 10, None),
@@ -157,7 +157,7 @@ class MatVegter2017(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.  A unique number or label must be specified
+        """Get or set the Material identification. A unique number or label must be specified
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -223,7 +223,10 @@ class MatVegter2017(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[float]:
-        """Get or set the Stress-strain curve ID.  If defined, SYS, SIP, SHS, and SHL are ignored
+        """Get or set the Stress-strain curve ID. If defined, SYS, SIP, SHB, and SHO are ignored.
+        Load Curve.  When LCID is a load curve ID, it is taken as defining effective stress as a function of effective plastic strain.
+        Tabular Data.The table ID defines for each strain rate value a load curve ID giving the stress as a function effective plastic strain for that strain rate.Linear interpolation between the discrete strain rates is used by default.
+        Logarithmically Defined Tables.A way to invoke logarithmic interpolation between discrete strain rates is described as follows.If the first value in the table is negative, LS - DYNA assumes that all the table values represent the natural logarithm of a strain rate.There is some additional computational cost associated with invoking logarithmic interpolation.
         """ # nopep8
         return self._cards[0].get_value("lcid")
 
@@ -255,26 +258,26 @@ class MatVegter2017(KeywordBase):
         self._cards[1].set_value("sip", value)
 
     @property
-    def shs(self) -> typing.Optional[float]:
-        """Get or set the Strain hardening parameter for small strain
+    def shb(self) -> typing.Optional[float]:
+        """Get or set the Strain hardening parameter for large strain
         """ # nopep8
-        return self._cards[1].get_value("shs")
+        return self._cards[1].get_value("shb")
 
-    @shs.setter
-    def shs(self, value: float) -> None:
-        """Set the shs property."""
-        self._cards[1].set_value("shs", value)
+    @shb.setter
+    def shb(self, value: float) -> None:
+        """Set the shb property."""
+        self._cards[1].set_value("shb", value)
 
     @property
-    def shl(self) -> typing.Optional[float]:
-        """Get or set the Strain hardening parameter for larger strain
+    def sho(self) -> typing.Optional[float]:
+        """Get or set the Strain hardening parameter for low strain
         """ # nopep8
-        return self._cards[1].get_value("shl")
+        return self._cards[1].get_value("sho")
 
-    @shl.setter
-    def shl(self, value: float) -> None:
-        """Set the shl property."""
-        self._cards[1].set_value("shl", value)
+    @sho.setter
+    def sho(self, value: float) -> None:
+        """Set the sho property."""
+        self._cards[1].set_value("sho", value)
 
     @property
     def esh(self) -> typing.Optional[float]:
@@ -300,7 +303,7 @@ class MatVegter2017(KeywordBase):
 
     @property
     def alpha(self) -> typing.Optional[float]:
-        """Get or set the distribution of hardening used in the curve-fitting.    pure kinematic hardening and   provides pure isotropic hardening
+        """Get or set the distribution of hardening used in the curve-fitting.   pure kinematic hardening and   provides pure isotropic hardening
         """ # nopep8
         return self._cards[1].get_value("alpha")
 
@@ -311,7 +314,7 @@ class MatVegter2017(KeywordBase):
 
     @property
     def lcid2(self) -> typing.Optional[float]:
-        """Get or set the Curve ID.  The curve defines Young's modulus change with respect to the plastic strain.  By default it is assumed that Young's modulus remains constant.  Effective value is between 0-1
+        """Get or set the Curve ID. The curve defines Young's modulus change with respect to the plastic strain. By default it is assumed that Young's modulus remains constant. Effective value is between 0 and 1
         """ # nopep8
         return self._cards[1].get_value("lcid2")
 
@@ -326,8 +329,7 @@ class MatVegter2017(KeywordBase):
         EQ.0.0: locally orthotropic with material axes determined by
         element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
-        EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
         *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
         """ # nopep8
@@ -351,7 +353,7 @@ class MatVegter2017(KeywordBase):
 
     @property
     def raten(self) -> typing.Optional[float]:
-        """Get or set the Ratio r_enth of Boltzman constant k (8.617E-5 eV/K) and maximum activation enthalpy ΔG_0 (in eV): r_enth=(k/(ΔG_0 ))
+        """Get or set the Ratio r_enth of Boltzman constant k (8.617E-5 eV/K) and maximum activation enthalpy DeltaG_0 (in eV): r_enth=(k/(DeltaG_0 ))
         """ # nopep8
         return self._cards[2].get_value("raten")
 
@@ -362,7 +364,7 @@ class MatVegter2017(KeywordBase):
 
     @property
     def srn0(self) -> typing.Optional[float]:
-        """Get or set the Limit strain rate (ε_0 ) ̇
+        """Get or set the Limit strain rate (eps**_0 )
         """ # nopep8
         return self._cards[2].get_value("srn0")
 
@@ -373,7 +375,7 @@ class MatVegter2017(KeywordBase):
 
     @property
     def exsr(self) -> typing.Optional[float]:
-        """Get or set the Exponent m for strain rate behavior
+        """Get or set the Exponent, m, for strain rate behavior
         """ # nopep8
         return self._cards[2].get_value("exsr")
 
@@ -483,7 +485,7 @@ class MatVegter2017(KeywordBase):
 
     @property
     def d1(self) -> typing.Optional[float]:
-        """Get or set the Components of vector d for AOPT = 4
+        """Get or set the Components of vector d for AOPT = 2
         """ # nopep8
         return self._cards[4].get_value("d1")
 
@@ -494,7 +496,7 @@ class MatVegter2017(KeywordBase):
 
     @property
     def d2(self) -> typing.Optional[float]:
-        """Get or set the Components of vector d for AOPT = 4
+        """Get or set the Components of vector d for AOPT = 2
         """ # nopep8
         return self._cards[4].get_value("d2")
 
@@ -505,7 +507,7 @@ class MatVegter2017(KeywordBase):
 
     @property
     def d3(self) -> typing.Optional[float]:
-        """Get or set the Components of vector d for AOPT = 4
+        """Get or set the Components of vector d for AOPT = 2
         """ # nopep8
         return self._cards[4].get_value("d3")
 
@@ -516,7 +518,7 @@ class MatVegter2017(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Material angle in degrees for AOPT=3, may be overwritten on the element card
+        """Get or set the Material angle in degrees for AOPT=0 and 3, may be overwritten on the element card; see *ELEMENT_SHELL_BETA.
         """ # nopep8
         return self._cards[4].get_value("beta")
 
@@ -527,7 +529,7 @@ class MatVegter2017(KeywordBase):
 
     @property
     def rm_0(self) -> typing.Optional[float]:
-        """Get or set the Tensile strength for uniaxial testing at i° to rolling direction
+        """Get or set the Tensile strength for uniaxial testing at i degrees to rolling direction
         """ # nopep8
         return self._cards[5].get_value("rm_0")
 
@@ -538,7 +540,7 @@ class MatVegter2017(KeywordBase):
 
     @property
     def rm_45(self) -> typing.Optional[float]:
-        """Get or set the Tensile strength for uniaxial testing at i° to rolling direction
+        """Get or set the Tensile strength for uniaxial testing at i degrees to rolling direction
         """ # nopep8
         return self._cards[5].get_value("rm_45")
 
@@ -549,7 +551,7 @@ class MatVegter2017(KeywordBase):
 
     @property
     def rm_90(self) -> typing.Optional[float]:
-        """Get or set the Tensile strength for uniaxial testing at i° to rolling direction
+        """Get or set the Tensile strength for uniaxial testing at i degrees to rolling direction
         """ # nopep8
         return self._cards[5].get_value("rm_90")
 
@@ -560,7 +562,7 @@ class MatVegter2017(KeywordBase):
 
     @property
     def ag_0(self) -> typing.Optional[float]:
-        """Get or set the Uniform elongation for uniaxial testing at i° to rolling direction
+        """Get or set the Uniform elongation for uniaxial testing at i degrees to rolling direction
         """ # nopep8
         return self._cards[5].get_value("ag_0")
 
@@ -571,7 +573,7 @@ class MatVegter2017(KeywordBase):
 
     @property
     def ag_45(self) -> typing.Optional[float]:
-        """Get or set the Uniform elongation for uniaxial testing at i° to rolling direction
+        """Get or set the Uniform elongation for uniaxial testing at i degrees to rolling direction
         """ # nopep8
         return self._cards[5].get_value("ag_45")
 
@@ -582,7 +584,7 @@ class MatVegter2017(KeywordBase):
 
     @property
     def ag_90(self) -> typing.Optional[float]:
-        """Get or set the Uniform elongation for uniaxial testing at i° to rolling direction
+        """Get or set the Uniform elongation for uniaxial testing at i degrees to rolling direction
         """ # nopep8
         return self._cards[5].get_value("ag_90")
 

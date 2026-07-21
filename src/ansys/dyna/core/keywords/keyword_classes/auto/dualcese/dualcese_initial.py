@@ -121,8 +121,8 @@ class DualceseInitial(KeywordBase):
     @property
     def ifunc(self) -> typing.Optional[int]:
         """Get or set the Option to define initial conditions using *DEFINE_cards:
-        EQ.0:	Not in use.
-        EQ.1:All values for initial velocity, pressure, density, and temperature now refer to *DEFINE_IDs. In these functions, the following parameters are allowed: f(x,y,z), meaning that each variable’s initial profile is a function of position
+        EQ.0: Not in use.
+        EQ.1:All values for initial velocity, pressure, density, and temperature now refer to *DEFINE_IDs. In these functions, the following parameters are allowed: f(x,y,z), meaning that each variables initial profile is a function of position
         """ # nopep8
         return self._cards[0].get_value("ifunc")
 

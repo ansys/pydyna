@@ -36,8 +36,8 @@ _SETNODELISTSMOOTHCOLLECT_CARD0 = (
     FieldSchema("da3", float, 30, 10, 0.0),
     FieldSchema("da4", float, 40, 10, 0.0),
     FieldSchema("solver", str, 50, 10, "MECH"),
-    FieldSchema("its", str, 60, 10, "1"),
-    FieldSchema("unused", str, 70, 10, None),
+    FieldSchema("its", int, 60, 10, 1),
+    FieldSchema("unused", int, 70, 10, None),
 )
 
 _SETNODELISTSMOOTHCOLLECT_CARD1 = (
@@ -169,23 +169,24 @@ class SetNodeListSmoothCollect(KeywordBase):
         self._cards[0].set_value("solver", value)
 
     @property
-    def its(self) -> str:
+    def its(self) -> int:
         """Get or set the Specify coupling type across different scales in two-scale co-simulation. This flag should only be included for node sets that provide coupling information in the input file referred to by *INCLUDE_COSIM;
-        EQ.1:	Tied contact coupling
-        EQ.2 : Solid - in - shell immersed coupling
+        EQ.1: Tied contact coupling
+        EQ.2: Solid - in - shell immersed coupling
+        EQ.3: Solid-in-solid immersed coupling
         """ # nopep8
         return self._cards[0].get_value("its")
 
     @its.setter
-    def its(self, value: str) -> None:
+    def its(self, value: int) -> None:
         """Set the its property."""
-        if value not in ["1", "2", None]:
-            raise Exception("""its must be `None` or one of {"1","2"}.""")
+        if value not in [1, 2, 3, None]:
+            raise Exception("""its must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("its", value)
 
     @property
     def nid1(self) -> typing.Optional[int]:
-        """Get or set the First node ID of the set.
+        """Get or set the First node ID (see Remark  1) See Remark 5.
         """ # nopep8
         return self._cards[1].get_value("nid1")
 
@@ -196,7 +197,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @property
     def nid2(self) -> typing.Optional[int]:
-        """Get or set the Second node ID of the set.
+        """Get or set the Second node ID (see Remark  1) See Remark 5.
         """ # nopep8
         return self._cards[1].get_value("nid2")
 
@@ -207,7 +208,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @property
     def nid3(self) -> typing.Optional[int]:
-        """Get or set the Third node ID of the set.
+        """Get or set the Third node ID (see Remark  1) See Remark 5.
         """ # nopep8
         return self._cards[1].get_value("nid3")
 
@@ -218,7 +219,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @property
     def nid4(self) -> typing.Optional[int]:
-        """Get or set the Fourth node ID of the set.
+        """Get or set the Fourth node ID (see Remark  1) See Remark 5.
         """ # nopep8
         return self._cards[1].get_value("nid4")
 
@@ -229,7 +230,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @property
     def nid5(self) -> typing.Optional[int]:
-        """Get or set the Fifth node ID of the set.
+        """Get or set the Fifth node ID (see Remark  1) See Remark 5.
         """ # nopep8
         return self._cards[1].get_value("nid5")
 
@@ -240,7 +241,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @property
     def nid6(self) -> typing.Optional[int]:
-        """Get or set the Sixth node ID of the set.
+        """Get or set the Sixth node ID (see Remark  1) See Remark 5.
         """ # nopep8
         return self._cards[1].get_value("nid6")
 
@@ -251,7 +252,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @property
     def nid7(self) -> typing.Optional[int]:
-        """Get or set the Seventh node ID of the set.
+        """Get or set the Seventh node ID (see Remark  1) See Remark 5.
         """ # nopep8
         return self._cards[1].get_value("nid7")
 
@@ -262,7 +263,7 @@ class SetNodeListSmoothCollect(KeywordBase):
 
     @property
     def nid8(self) -> typing.Optional[int]:
-        """Get or set the Eighth node ID of the set.
+        """Get or set the Eighth node ID (see Remark  1) See Remark 5.
         """ # nopep8
         return self._cards[1].get_value("nid8")
 

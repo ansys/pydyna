@@ -44,7 +44,7 @@ _CONTROLTHERMALFORMING_CARD1 = (
     FieldSchema("h0", float, 20, 10, None),
     FieldSchema("lmin", float, 30, 10, None),
     FieldSchema("lmax", float, 40, 10, None),
-    FieldSchema("ftoslv", float, 50, 10, 0.5),
+    FieldSchema("ftosa", float, 50, 10, 0.5),
     FieldSchema("bc_flg", int, 60, 10, 0),
     FieldSchema("algo", int, 70, 10, 0),
 )
@@ -141,7 +141,7 @@ class ControlThermalForming(KeywordBase):
         """Get or set the Thermal shell option:
         EQ.0: no temperature gradient is considered through the shell
         thickness.
-        EQ.1: a temperature gradient is calculated through the shell	thickness.
+        EQ.1: a temperature gradient is calculated through the shell thickness.
         """ # nopep8
         return self._cards[0].get_value("thshel")
 
@@ -244,9 +244,9 @@ class ControlThermalForming(KeywordBase):
 
     @property
     def lmin(self) -> typing.Optional[float]:
-        """Get or set the Minimum gap, 𝑙min; use the heat transfer conductance defined
+        """Get or set the Minimum gap, min; use the heat transfer conductance defined
         (H0) for gap thicknesses less than this value.
-        LT.0.0: -LMIN is a load curve ID defining 𝑙min as a function of time.
+        LT.0.0: -LMIN is a load curve ID defining min as a function of time.
         """ # nopep8
         return self._cards[1].get_value("lmin")
 
@@ -267,17 +267,17 @@ class ControlThermalForming(KeywordBase):
         self._cards[1].set_value("lmax", value)
 
     @property
-    def ftoslv(self) -> float:
-        """Get or set the Fraction, .. , of sliding friction energy partitioned to the slave
-        surface. Energy partitioned to the master surface is (1 . .. ).EQ.0: Default set to 0.5: The sliding friction energy is
-        partitioned 50% - 50% to the slave and master surfaces in contact.
+    def ftosa(self) -> float:
+        """Get or set the Fraction f of sliding friction energy partitioned to the SURFA
+        surface. Energy partitioned to the SURFB surface is (1 . .. ).EQ.0: Default set to 0.5: The sliding friction energy is
+        partitioned 50% - 50% to the SURFA and SURFB surfaces in contact.
         """ # nopep8
-        return self._cards[1].get_value("ftoslv")
+        return self._cards[1].get_value("ftosa")
 
-    @ftoslv.setter
-    def ftoslv(self, value: float) -> None:
-        """Set the ftoslv property."""
-        self._cards[1].set_value("ftoslv", value)
+    @ftosa.setter
+    def ftosa(self, value: float) -> None:
+        """Set the ftosa property."""
+        self._cards[1].set_value("ftosa", value)
 
     @property
     def bc_flg(self) -> int:
@@ -298,8 +298,8 @@ class ControlThermalForming(KeywordBase):
     def algo(self) -> int:
         """Get or set the Contact algorithm type.
         EQ.0: two way contact; both surfaces change temperature due to contact.
-        EQ.1: one way contact; master surface does not change
-        temperature due to contact. Slave surface does change temperature
+        EQ.1: one way contact; SURFB surface does not change
+        temperature due to contact. SURFA surface does change temperature
         """ # nopep8
         return self._cards[1].get_value("algo")
 
@@ -399,9 +399,9 @@ class ControlThermalForming(KeywordBase):
         *DEFINE_CURVE) or a function ID (see *DEFINE_FUNCTION).
         When LCH is a curve ID (and a function ID) it is interpreted as follows:
         GT.0: the heat transfer coefficient is defined as a function of
-        time, 𝑡, by a curve consisting of (𝑡, ℎ(𝑡)) data pairs.
+        time, , by a curve consisting of (, ()) data pairs.
         LT.0: the heat transfer coefficient is defined as a function of
-        temperature, 𝑇, by a curve consisting of (𝑇, ℎ(𝑇)) data pairs
+        temperature, , by a curve consisting of (, ()) data pairs
         """ # nopep8
         return self._cards[2].get_value("lch")
 

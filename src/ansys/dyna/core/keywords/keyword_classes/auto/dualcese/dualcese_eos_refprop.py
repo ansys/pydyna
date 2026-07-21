@@ -110,10 +110,10 @@ class DualceseEosRefprop(KeywordBase):
     @property
     def type(self) -> typing.Optional[str]:
         """Get or set the The fluid type.
-        EQ.PURE:  A single component fluid(default)
-        EQ.PSEUDOPURE : A predefined fluid mixture
+        EQ.PURE: A single component fluid(default)
+        EQ.PSEUDOPURE: A predefined fluid mixture
         amespace
-        Q.MIXTURE : A fluid mixture made up of NCOMP components
+        Q.MIXTURE: A fluid mixture made up of NCOMP components
         """ # nopep8
         return self._cards[0].get_value("type")
 
@@ -126,7 +126,7 @@ class DualceseEosRefprop(KeywordBase):
     def phase(self) -> str:
         """Get or set the Phase of the fluid.
         EQ.GAS: gas phase
-        EQ.LIQUID : liquid phase
+        EQ.LIQUID: liquid phase
         """ # nopep8
         return self._cards[0].get_value("phase")
 
@@ -139,7 +139,7 @@ class DualceseEosRefprop(KeywordBase):
     def tabular(self) -> typing.Optional[str]:
         """Get or set the Type of lookup tables to build for this EOS.
         EQ.BLANK: Default(no table lookup)
-        EQ.P_EIN : Build tables of pressure and internal energy, both as a function of densityand temperature.
+        EQ.P_EIN: Build tables of pressure and internal energy, both as a function of densityand temperature.
         """ # nopep8
         return self._cards[0].get_value("tabular")
 
@@ -150,7 +150,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @property
     def mol_fr1(self) -> typing.Optional[float]:
-        """Get or set the Mole fraction
+        """Get or set the Mole fraction of the ith component of the fluid.
         """ # nopep8
         return self._cards[1].get_value("mol_fr1")
 
@@ -161,7 +161,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @property
     def mol_fr2(self) -> typing.Optional[float]:
-        """Get or set the Mole fraction
+        """Get or set the Mole fraction of the ith component of the fluid.
         """ # nopep8
         return self._cards[1].get_value("mol_fr2")
 
@@ -172,7 +172,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @property
     def mol_fr3(self) -> typing.Optional[float]:
-        """Get or set the Mole fraction
+        """Get or set the Mole fraction of the ith component of the fluid.
         """ # nopep8
         return self._cards[1].get_value("mol_fr3")
 
@@ -183,7 +183,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @property
     def mol_fr4(self) -> typing.Optional[float]:
-        """Get or set the Mole fraction
+        """Get or set the Mole fraction of the ith component of the fluid.
         """ # nopep8
         return self._cards[1].get_value("mol_fr4")
 
@@ -194,7 +194,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @property
     def mol_fr5(self) -> typing.Optional[float]:
-        """Get or set the Mole fraction
+        """Get or set the Mole fraction of the ith component of the fluid.
         """ # nopep8
         return self._cards[1].get_value("mol_fr5")
 
@@ -205,7 +205,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @property
     def mol_fr6(self) -> typing.Optional[float]:
-        """Get or set the Mole fraction
+        """Get or set the Mole fraction of the ith component of the fluid.
         """ # nopep8
         return self._cards[1].get_value("mol_fr6")
 
@@ -216,7 +216,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @property
     def mol_fr7(self) -> typing.Optional[float]:
-        """Get or set the Mole fraction
+        """Get or set the Mole fraction of the ith component of the fluid.
         """ # nopep8
         return self._cards[1].get_value("mol_fr7")
 
@@ -227,7 +227,7 @@ class DualceseEosRefprop(KeywordBase):
 
     @property
     def mol_fr8(self) -> typing.Optional[float]:
-        """Get or set the Mole fraction
+        """Get or set the Mole fraction of the ith component of the fluid.
         """ # nopep8
         return self._cards[1].get_value("mol_fr8")
 

@@ -27,7 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _EMDATABASECIRCUIT_CARD0 = (
-    FieldSchema("outlv", int, 0, 10, 0),
+    FieldSchema("outlv", int, 0, 10, 1),
     FieldSchema("dtout", float, 10, 10, 0.0),
 )
 
@@ -48,22 +48,22 @@ class EmDatabaseCircuit(KeywordBase):
         ]
     @property
     def outlv(self) -> int:
-        """Get or set the Determines if the output file should be dumped.
-        EQ.0: No output file is generated.
-        EQ.1: The output file is generated.
+        """Get or set the Determines if LS-DYNA creates the output file:
+        EQ.0: Do not generate the output file.
+        EQ.1: Generate the output file.
         """ # nopep8
         return self._cards[0].get_value("outlv")
 
     @outlv.setter
     def outlv(self, value: int) -> None:
         """Set the outlv property."""
-        if value not in [0, 1, None]:
-            raise Exception("""outlv must be `None` or one of {0,1}.""")
+        if value not in [1, 0, None]:
+            raise Exception("""outlv must be `None` or one of {1,0}.""")
         self._cards[0].set_value("outlv", value)
 
     @property
     def dtout(self) -> float:
-        """Get or set the Time interval to print the output. If DTOUT is equal to 0.0, then the EM timestep will be used.
+        """Get or set the Time interval to print the output. If DTOUT is equal to 0.0, LS-DYNA uses the EM timestep..
         """ # nopep8
         return self._cards[0].get_value("dtout")
 

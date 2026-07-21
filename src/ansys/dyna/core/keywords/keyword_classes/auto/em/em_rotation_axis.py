@@ -36,6 +36,15 @@ _EMROTATIONAXIS_CARD0 = (
     FieldSchema("numsec", int, 60, 10, None),
 )
 
+_EMROTATIONAXIS_CARD1 = (
+    FieldSchema("xt", float, 0, 10, None),
+    FieldSchema("yt", float, 10, 10, None),
+    FieldSchema("zt", float, 20, 10, None),
+    FieldSchema("xh", float, 30, 10, None),
+    FieldSchema("yh", float, 40, 10, None),
+    FieldSchema("zh", float, 50, 10, None),
+)
+
 class EmRotationAxis(KeywordBase):
     """DYNA EM_ROTATION_AXIS keyword"""
 
@@ -48,6 +57,10 @@ class EmRotationAxis(KeywordBase):
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _EMROTATIONAXIS_CARD0,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _EMROTATIONAXIS_CARD1,
                 **kwargs,
             ),
         ]
@@ -119,7 +132,7 @@ class EmRotationAxis(KeywordBase):
 
     @property
     def numsec(self) -> typing.Optional[int]:
-        """Get or set the Number of Sectors. This field gives the ratio of the full circle to the angular extension of the mesh.This has to be a power of two. For example, NUMSEC = 4 means that the mesh of the part represents one fourth of the total circle.If NUMSEC = 0 for *EM_2DAXI, the solver will replace it with this value.
+        """Get or set the Number of sectors. This field gives the ratio of the full circle to the angular extension of the mesh.This has to be a power of two. For example, NUMSEC = 4 means that the mesh of the part represents one fourth of the total circle.If NUMSEC = 0 for *EM_2DAXI, the solver replaces it with this value.
         """ # nopep8
         return self._cards[0].get_value("numsec")
 
@@ -127,4 +140,70 @@ class EmRotationAxis(KeywordBase):
     def numsec(self, value: int) -> None:
         """Set the numsec property."""
         self._cards[0].set_value("numsec", value)
+
+    @property
+    def xt(self) -> typing.Optional[float]:
+        """Get or set the Tail and head coordinates of the additional vector orthogonal to the rotation axis gives the direction of the rotation. See Remark 1.
+        """ # nopep8
+        return self._cards[1].get_value("xt")
+
+    @xt.setter
+    def xt(self, value: float) -> None:
+        """Set the xt property."""
+        self._cards[1].set_value("xt", value)
+
+    @property
+    def yt(self) -> typing.Optional[float]:
+        """Get or set the Tail and head coordinates of the additional vector orthogonal to the rotation axis gives the direction of the rotation. See Remark 1.
+        """ # nopep8
+        return self._cards[1].get_value("yt")
+
+    @yt.setter
+    def yt(self, value: float) -> None:
+        """Set the yt property."""
+        self._cards[1].set_value("yt", value)
+
+    @property
+    def zt(self) -> typing.Optional[float]:
+        """Get or set the Tail and head coordinates of the additional vector orthogonal to the rotation axis gives the direction of the rotation. See Remark 1.
+        """ # nopep8
+        return self._cards[1].get_value("zt")
+
+    @zt.setter
+    def zt(self, value: float) -> None:
+        """Set the zt property."""
+        self._cards[1].set_value("zt", value)
+
+    @property
+    def xh(self) -> typing.Optional[float]:
+        """Get or set the Tail and head coordinates of the additional vector orthogonal to the rotation axis gives the direction of the rotation. See Remark 1.
+        """ # nopep8
+        return self._cards[1].get_value("xh")
+
+    @xh.setter
+    def xh(self, value: float) -> None:
+        """Set the xh property."""
+        self._cards[1].set_value("xh", value)
+
+    @property
+    def yh(self) -> typing.Optional[float]:
+        """Get or set the Tail and head coordinates of the additional vector orthogonal to the rotation axis gives the direction of the rotation. See Remark 1.
+        """ # nopep8
+        return self._cards[1].get_value("yh")
+
+    @yh.setter
+    def yh(self, value: float) -> None:
+        """Set the yh property."""
+        self._cards[1].set_value("yh", value)
+
+    @property
+    def zh(self) -> typing.Optional[float]:
+        """Get or set the Tail and head coordinates of the additional vector orthogonal to the rotation axis gives the direction of the rotation. See Remark 1.
+        """ # nopep8
+        return self._cards[1].get_value("zh")
+
+    @zh.setter
+    def zh(self, value: float) -> None:
+        """Set the zh property."""
+        self._cards[1].set_value("zh", value)
 

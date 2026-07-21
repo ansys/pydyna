@@ -82,9 +82,9 @@ class IgaShell(KeywordBase):
     def nisr(self) -> float:
         """Get or set the Interpolation elements in the local r-direction, see Remark 3.
         LT.0.: ABS(NISR) is the average edge length of the interpolation elements in the local r - direction.
-        EQ.0. : The number of interpolation elements per isogeometric element
+        EQ.0.: The number of interpolation elements per isogeometric element
         is equal to the polynomial degree in the local r - direction.
-        GT.0. : NINT(NISR) is the number of interpolation elements per isogeometric element in the local r - direction..
+        GT.0.: NINT(NISR) is the number of interpolation elements per isogeometric element in the local r - direction..
         """ # nopep8
         return self._cards[0].get_value("nisr")
 
@@ -97,9 +97,9 @@ class IgaShell(KeywordBase):
     def niss(self) -> float:
         """Get or set the Interpolation elements in the local s-direction, see Remark 3.
         LT.0.: ABS(NISS) is the average edge length of the interpolation elements in the local s - direction.
-        EQ.0. : The number of interpolation elements per isogeometric element
+        EQ.0.: The number of interpolation elements per isogeometric element
         is equal to the polynomial degree in the local s - direction.
-        GT.0. : NINT(NISS) is the number of interpolation elements per
+        GT.0.: NINT(NISS) is the number of interpolation elements per
         isogeometric element in the local s - direction.
         """ # nopep8
         return self._cards[0].get_value("niss")

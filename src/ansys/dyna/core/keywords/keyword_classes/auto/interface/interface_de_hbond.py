@@ -86,7 +86,7 @@ class InterfaceDeHbond(KeywordBase):
     def pid2(self) -> typing.Optional[int]:
         """Get or set the Second part ID. PID1 and PID2 define the bonds that this fracture
         model is applied to. There are three combinations as
-        Case a: PID1.EQ.0 This is the default model for all bonds, overriding the default	model defined in Card 2 of *DEFINE_DE_HBOND.
+        Case a: PID1.EQ.0 This is the default model for all bonds, overriding the default model defined in Card 2 of *DEFINE_DE_HBOND.
         Case b: PID1.GT.0 and PID2.EQ.0 This model is applied to the bonds within part PID1, instead of the default model.
         Case c: PID1.GT.0 and PID2.GT.0 This model is applied to the bonds between parts PID1 and
         PID2 only, but not to those within part PID1 or part PID2 (as in case b).
@@ -144,7 +144,7 @@ class InterfaceDeHbond(KeywordBase):
 
     @property
     def frgk(self) -> typing.Optional[float]:
-        """Get or set the Fracture energy release rate for volumetric deformation. (same as	FRGK in Card2 of keyword *DEFINE_DE_HBOND.).
+        """Get or set the Fracture energy release rate for volumetric deformation. (same as FRGK in Card2 of keyword *DEFINE_DE_HBOND.).
         """ # nopep8
         return self._cards[1].get_value("frgk")
 

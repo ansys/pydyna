@@ -60,8 +60,10 @@ class IcfdDatabaseSsout(KeywordBase):
     @property
     def out(self) -> int:
         """Get or set the Determines if the solver should retrieve the pressure loads and how to output it:
-        EQ.0:	Inactive
-        EQ.1 : The fluid solver will collect the segment sets (see * SET_SEGMENT) that are part of a FSI boundary and retrieve the pressure for subsequent print out in icfd_pressegand icfd_lcsegid
+        EQ.0: Inactive
+        EQ.1: The fluid solver will collect the segment sets (see *SET_SEGMENT) that are part of a FSI boundary and retrieve the pressure for subsequent print out in icfd_pressegand an icfd_lcsegid pair of files.
+        EQ.2: Same as 1 except the results are collected in a single icfd_presseg/ icfd_plcsegid  pair of files and the load curves associated with each segment are made functions of time, thus taking the transient nature of the CFD analysis into account.
+        EQ.3: Same as 2 except uses a more memory efficient way of handling and outputting the data.
         """ # nopep8
         return self._cards[0].get_value("out")
 
@@ -74,7 +76,7 @@ class IcfdDatabaseSsout(KeywordBase):
 
     @property
     def outdt(self) -> int:
-        """Get or set the Frequency of the pressure extraction. If left as 0., the solver will extract the pressure of the fluid on the FSI boundary at every timestep which is (not recommended due to its high memory and calculation cost).
+        """Get or set the Frequency of the pressure extraction. If left as 0., the solver will extract the pressure of the fluid on the FSI boundary at every time step. This can lead to additional memory and calculation cost.
         """ # nopep8
         return self._cards[0].get_value("outdt")
 
@@ -85,7 +87,7 @@ class IcfdDatabaseSsout(KeywordBase):
 
     @property
     def lcidsf(self) -> typing.Optional[int]:
-        """Get or set the Option load curve ID to apply a scale factor on the fluid pressure output.
+        """Get or set the Optinoal load curve ID to apply a scale factor on the fluid pressure output.
         """ # nopep8
         return self._cards[0].get_value("lcidsf")
 

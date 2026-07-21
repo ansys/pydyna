@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 
 _MATADDPZELECTRIC_CARD0 = (
-    FieldSchema("mid", str, 0, 10, None),
+    FieldSchema("mid", int, 0, 10, None),
     FieldSchema("dtype", str, 10, 10, "S"),
     FieldSchema("gpt", int, 20, 10, 8),
     FieldSchema("aopt", int, 30, 10, 0),
@@ -150,21 +150,21 @@ class MatAddPzelectric(KeywordBase):
             ),
         ]
     @property
-    def mid(self) -> typing.Optional[str]:
+    def mid(self) -> typing.Optional[int]:
         """Get or set the Material ID for which the piezoelectric properties apply
         """ # nopep8
         return self._cards[0].get_value("mid")
 
     @mid.setter
-    def mid(self, value: str) -> None:
+    def mid(self, value: int) -> None:
         """Set the mid property."""
         self._cards[0].set_value("mid", value)
 
     @property
     def dtype(self) -> str:
         """Get or set the Type of piezoelectric property definition (see remarks below)
-        EQ.S:	stress based definition
-        EQ.E : strain based definition
+        EQ.S: stress based definition
+        EQ.E: strain based definition
         """ # nopep8
         return self._cards[0].get_value("dtype")
 
@@ -179,7 +179,7 @@ class MatAddPzelectric(KeywordBase):
     def gpt(self) -> int:
         """Get or set the Number of Gauss points used for integration:
         EQ.0: Default value 8.full integration
-        EQ.1: 	reduced integration
+        EQ.1: reduced integration
         """ # nopep8
         return self._cards[0].get_value("gpt")
 
@@ -191,9 +191,9 @@ class MatAddPzelectric(KeywordBase):
     @property
     def aopt(self) -> int:
         """Get or set the Material axes option (see MAT_OPTION TROPIC_ELASTIC for a more complete description):
-        EQ.0.0:	locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES.
-        EQ.1.0 : locally orthotropic with material axes determined by a point in space and the global location of the element center; this is the a - direction.This option is for solid elements only.
-        EQ.2.0:	globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
+        EQ.0.0: locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with *DEFINE_COORDINATE_NODES.
+        EQ.1.0: locally orthotropic with material axes determined by a point in space and the global location of the element center; this is the a - direction.This option is for solid elements only.
+        EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR
         """ # nopep8
         return self._cards[0].get_value("aopt")
 
@@ -206,7 +206,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def dxx(self) -> typing.Optional[float]:
-        """Get or set the Dielectric permittivity matrix, d_αβ.  α, β = x, y, z
+        """Get or set the Dielectric permittivity matrix, d_ab. a, b = x, y, z
         """ # nopep8
         return self._cards[1].get_value("dxx")
 
@@ -217,7 +217,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def dyy(self) -> typing.Optional[float]:
-        """Get or set the Dielectric permittivity matrix, d_αβ.  α, β = x, y, z
+        """Get or set the Dielectric permittivity matrix, d_ab. a, b = x, y, z
         """ # nopep8
         return self._cards[1].get_value("dyy")
 
@@ -228,7 +228,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def dzz(self) -> typing.Optional[float]:
-        """Get or set the Dielectric permittivity matrix, d_αβ.  α, β = x, y, z
+        """Get or set the Dielectric permittivity matrix, d_ab. a, b = x, y, z
         """ # nopep8
         return self._cards[1].get_value("dzz")
 
@@ -239,7 +239,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def dxy(self) -> typing.Optional[float]:
-        """Get or set the Dielectric permittivity matrix, d_αβ.  α, β = x, y, z
+        """Get or set the Dielectric permittivity matrix, d_ab. a, b = x, y, z
         """ # nopep8
         return self._cards[1].get_value("dxy")
 
@@ -250,7 +250,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def dxz(self) -> typing.Optional[float]:
-        """Get or set the Dielectric permittivity matrix, d_αβ.  α, β = x, y, z
+        """Get or set the Dielectric permittivity matrix, d_ab. a, b = x, y, z
         """ # nopep8
         return self._cards[1].get_value("dxz")
 
@@ -261,7 +261,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def dyz(self) -> typing.Optional[float]:
-        """Get or set the Dielectric permittivity matrix, d_αβ.  α, β = x, y, z
+        """Get or set the Dielectric permittivity matrix, d_ab. a, b = x, y, z
         """ # nopep8
         return self._cards[1].get_value("dyz")
 
@@ -272,7 +272,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def px11(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[2].get_value("px11")
 
@@ -283,7 +283,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def px22(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[2].get_value("px22")
 
@@ -294,7 +294,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def px33(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[2].get_value("px33")
 
@@ -305,7 +305,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def px12(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[2].get_value("px12")
 
@@ -316,7 +316,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def px13(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[2].get_value("px13")
 
@@ -327,7 +327,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def px23(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[2].get_value("px23")
 
@@ -338,7 +338,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def py11(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[2].get_value("py11")
 
@@ -349,7 +349,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def py22(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[2].get_value("py22")
 
@@ -360,7 +360,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def py33(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[3].get_value("py33")
 
@@ -371,7 +371,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def py12(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[3].get_value("py12")
 
@@ -382,7 +382,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def px13(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[3].get_value("px13")
 
@@ -393,7 +393,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def py23(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[3].get_value("py23")
 
@@ -404,7 +404,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def pz11(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[3].get_value("pz11")
 
@@ -415,7 +415,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def pz22(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[3].get_value("pz22")
 
@@ -426,7 +426,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def pz33(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[3].get_value("pz33")
 
@@ -437,7 +437,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def pz12(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[3].get_value("pz12")
 
@@ -448,7 +448,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def pz13(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[4].get_value("pz13")
 
@@ -459,7 +459,7 @@ class MatAddPzelectric(KeywordBase):
 
     @property
     def pz23(self) -> typing.Optional[float]:
-        """Get or set the Piezoelectric matrix which depends on DTYPE.   α = x, y, z and i,j = 1, 2, 3.
+        """Get or set the Piezoelectric matrix which depends on DTYPE.  a = x, y, z and i,j = 1, 2, 3.
         """ # nopep8
         return self._cards[4].get_value("pz23")
 

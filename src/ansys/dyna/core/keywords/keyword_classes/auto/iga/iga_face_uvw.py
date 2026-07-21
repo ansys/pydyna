@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _IGAFACEUVW_CARD0 = (
     FieldSchema("fid", int, 0, 10, None),
     FieldSchema("fxyzid", int, 10, 10, None),
-    FieldSchema("nid", int, 20, 10, None),
+    FieldSchema("patchid", int, 20, 10, None),
     FieldSchema("sense", int, 30, 10, 0),
 )
 
@@ -86,21 +86,21 @@ class IgaFaceUvw(KeywordBase):
         self._cards[0].set_value("fxyzid", value)
 
     @property
-    def nid(self) -> typing.Optional[int]:
-        """Get or set the Parametric bivariate NURBS ID, see *IGA_2D_NURBS_UVW.
+    def patchid(self) -> typing.Optional[int]:
+        """Get or set the Parametric bivariate NURBS patch ID, see *IGA_2D_NURBS_UVW.
         """ # nopep8
-        return self._cards[0].get_value("nid")
+        return self._cards[0].get_value("patchid")
 
-    @nid.setter
-    def nid(self, value: int) -> None:
-        """Set the nid property."""
-        self._cards[0].set_value("nid", value)
+    @patchid.setter
+    def patchid(self, value: int) -> None:
+        """Set the patchid property."""
+        self._cards[0].set_value("patchid", value)
 
     @property
     def sense(self) -> int:
-        """Get or set the Sense of Orientation with respect to the ppysical face.
+        """Get or set the Sense of Orientation with respect to the physical face.
         EQ.0: Same(Default)
-        EQ.1 : Reversed.
+        EQ.1: Reversed.
         """ # nopep8
         return self._cards[0].get_value("sense")
 

@@ -185,7 +185,7 @@ class Mat016(KeywordBase):
 
     @property
     def g(self) -> typing.Optional[float]:
-        """Get or set the Shear modulus.
+        """Get or set the Shear modulus. If PR is set, this field is ignored. The shear modulus in this case is derived from PR and the bulk modulus of the EOS
         """ # nopep8
         return self._cards[0].get_value("g")
 

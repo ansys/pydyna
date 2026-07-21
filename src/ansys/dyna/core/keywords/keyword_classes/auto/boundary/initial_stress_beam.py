@@ -234,8 +234,8 @@ class InitialStressBeam(KeywordBase):
     @property
     def large(self) -> int:
         """Get or set the Format size:
-        EQ.0:	off,
-        EQ.1:	on.  Each field is twice as long for higher precision.
+        EQ.0: off,
+        EQ.1: on.  Each field is twice as long for higher precision.
         """ # nopep8
         return self._cards[0].get_value("large")
 

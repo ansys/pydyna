@@ -68,7 +68,7 @@ class SectionSeatbelt(KeywordBase):
         ]
     @property
     def secid(self) -> typing.Optional[int]:
-        """Get or set the Section ID.
+        """Get or set the Section ID.  A unique number or label must be specified.
         """ # nopep8
         return self._cards[0].get_value("secid")
 
@@ -79,7 +79,7 @@ class SectionSeatbelt(KeywordBase):
 
     @property
     def area(self) -> typing.Optional[float]:
-        """Get or set the Optional Area of cross-section used in contact.
+        """Get or set the Optional area of cross-section used in the calculation of contact stiffness, which is proportional to the cross-section area.
         """ # nopep8
         return self._cards[0].get_value("area")
 
@@ -90,7 +90,7 @@ class SectionSeatbelt(KeywordBase):
 
     @property
     def thick(self) -> typing.Optional[float]:
-        """Get or set the Optional Thickness used in contact.
+        """Get or set the Optional contact thickness which can be overwritten by a nonzero SAST defined in *CONTACT.  If not defined, a value proportional to element length is used as the contact thickness.
         """ # nopep8
         return self._cards[0].get_value("thick")
 

@@ -79,9 +79,9 @@ class InitialAleMapping(KeywordBase):
 
     @property
     def typ(self) -> int:
-        """Get or set the Type of “PID” (see remark 1):
-        EQ.0:  part set ID (PSID).
-        EQ.1:  part ID (PID)
+        """Get or set the Type of PID (see remark 1):
+        EQ.0: part set ID (PSID).
+        EQ.1: part ID (PID)
 
         """ # nopep8
         return self._cards[0].get_value("typ")
@@ -165,16 +165,16 @@ class InitialAleMapping(KeywordBase):
         SYM is a 6-digit parameter. Each digit represents a plane for a box that encloses the previous mesh.
         These planes are parallel to the previous coordinate system:
         EQ.00000p: Rule for the X - plane along the lower previous mesh bound
-        EQ.0000p0 : Rule for the X - plane along the upper previous mesh bound
-        EQ.000p00 : Rule for the Y - plane along the lower previous mesh bound
-        EQ.00p000 : Rule for the Y - plane along the upper previous mesh bound
-        EQ.0p0000 : Rule for the Z - plane along the lower previous mesh bound
-        EQ.p00000 : Rule for the Z - plane along the upper previous mesh bound
-        The value of p defines the rule to apply in relation to the box plane :
-        EQ.0 : Do nothing.
-        EQ.1 : Translational symmetry(direction of translation orthogonal to the box plane)
-        EQ.2 : Mirror - image symmetry about the box plane
-        EQ.3 : Continuity of boundary elements and nodes along the box plane
+        EQ.0000p0: Rule for the X - plane along the upper previous mesh bound
+        EQ.000p00: Rule for the Y - plane along the lower previous mesh bound
+        EQ.00p000: Rule for the Y - plane along the upper previous mesh bound
+        EQ.0p0000: Rule for the Z - plane along the lower previous mesh bound
+        EQ.p00000: Rule for the Z - plane along the upper previous mesh bound
+        The value of p defines the rule to apply in relation to the box plane:
+        EQ.0: Do nothing.
+        EQ.1: Translational symmetry(direction of translation orthogonal to the box plane)
+        EQ.2: Mirror - image symmetry about the box plane
+        EQ.3: Continuity of boundary elements and nodes along the box plane
         """ # nopep8
         return self._cards[1].get_value("sym")
 

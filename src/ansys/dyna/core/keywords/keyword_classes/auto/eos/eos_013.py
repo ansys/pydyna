@@ -38,6 +38,11 @@ _EOS013_CARD0 = (
     FieldSchema("kl", float, 70, 10, None),
 )
 
+_EOS013_CARD1 = (
+    FieldSchema("e0", float, 0, 10, None),
+    FieldSchema("v0", float, 10, 10, None),
+)
+
 _EOS013_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
@@ -58,6 +63,10 @@ class Eos013(KeywordBase):
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _EOS013_CARD0,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _EOS013_CARD1,
                 **kwargs,
             ),
             OptionCardSet(
@@ -160,15 +169,39 @@ class Eos013(KeywordBase):
         self._cards[0].set_value("kl", value)
 
     @property
+    def e0(self) -> typing.Optional[float]:
+        """Get or set the Initial internal energy.
+        """ # nopep8
+        return self._cards[1].get_value("e0")
+
+    @e0.setter
+    def e0(self, value: float) -> None:
+        """Set the e0 property."""
+        self._cards[1].set_value("e0", value)
+
+    @property
+    def v0(self) -> typing.Optional[float]:
+        """Get or set the Initial relative volume or initial pressure.
+        GT.0.0: Initial relative volume.Default = 1
+        LT.0.0: Initial pressure.
+        """ # nopep8
+        return self._cards[1].get_value("v0")
+
+    @v0.setter
+    def v0(self, value: float) -> None:
+        """Set the v0 property."""
+        self._cards[1].set_value("v0", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[1].cards[0].get_value("title")
+        return self._cards[2].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[1].cards[0].set_value("title", value)
+        self._cards[2].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

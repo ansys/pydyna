@@ -138,7 +138,7 @@ class MatMohrCoulomb(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.  A unique number.
+        """Get or set the Material identification. A unique number.
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -216,8 +216,8 @@ class MatMohrCoulomb(KeywordBase):
     @property
     def novoid_(self) -> typing.Optional[int]:
         """Get or set the Voiding behavior flag (see Remarks 8 and 9):
-        EQ.0:	Voiding behavior on
-        EQ.1 : Voiding behavior off.
+        EQ.0: Voiding behavior on
+        EQ.1: Voiding behavior off.
         """ # nopep8
         return self._cards[1].get_value("novoid_")
 
@@ -250,7 +250,7 @@ class MatMohrCoulomb(KeywordBase):
 
     @property
     def lccpdr(self) -> typing.Optional[int]:
-        """Get or set the Load curve for extra cohesion for parent material (dynamic relaxation)
+        """Get or set the Load curve for extra cohesion for base material (dynamic relaxation)
         """ # nopep8
         return self._cards[1].get_value("lccpdr")
 
@@ -261,7 +261,7 @@ class MatMohrCoulomb(KeywordBase):
 
     @property
     def lccpt(self) -> typing.Optional[int]:
-        """Get or set the Load curve for extra cohesion for parent material (transient)
+        """Get or set the Load curve for extra cohesion for base material (transient)
         """ # nopep8
         return self._cards[1].get_value("lccpt")
 
@@ -514,7 +514,8 @@ class MatMohrCoulomb(KeywordBase):
 
     @property
     def local(self) -> typing.Optional[int]:
-        """Get or set the EQ.0: DIP and DIPANG are with respect to the global axes
+        """Get or set the Axes (see Remark 12):
+        EQ.0: DIP and DIPANG are with respect to the global axes
         EQ.1: DIP and DIPANG are with respect to the local element axes
         """ # nopep8
         return self._cards[4].get_value("local")

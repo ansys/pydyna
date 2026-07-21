@@ -26,12 +26,24 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _SETBEAMGENERALCOLLECT_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
 )
 
 _SETBEAMGENERALCOLLECT_CARD1 = (
+    FieldSchema("option", str, 0, 10, "ALL"),
+    FieldSchema("e1", int, 10, 10, None),
+    FieldSchema("e2", int, 20, 10, None),
+    FieldSchema("e3", int, 30, 10, None),
+    FieldSchema("e4", int, 40, 10, None),
+    FieldSchema("e5", int, 50, 10, None),
+    FieldSchema("e6", int, 60, 10, None),
+    FieldSchema("e7", int, 70, 10, None),
+)
+
+_SETBEAMGENERALCOLLECT_CARD2 = (
     FieldSchema("option", str, 0, 10, "ALL"),
     FieldSchema("e1", int, 10, 10, None),
     FieldSchema("e2", int, 20, 10, None),
@@ -54,6 +66,15 @@ class SetBeamGeneralCollect(KeywordBase):
     _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
+    _link_fields = {
+        "e1": LinkType.ELEMENT_BEAM,
+        "e2": LinkType.ELEMENT_BEAM,
+        "e3": LinkType.ELEMENT_BEAM,
+        "e4": LinkType.ELEMENT_BEAM,
+        "e5": LinkType.ELEMENT_BEAM,
+        "e6": LinkType.ELEMENT_BEAM,
+        "e7": LinkType.ELEMENT_BEAM,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the SetBeamGeneralCollect class."""
@@ -66,6 +87,10 @@ class SetBeamGeneralCollect(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _SETBEAMGENERALCOLLECT_CARD1,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _SETBEAMGENERALCOLLECT_CARD2,
                 **kwargs,
             ),
             OptionCardSet(
@@ -93,20 +118,22 @@ class SetBeamGeneralCollect(KeywordBase):
     @property
     def option(self) -> str:
         """Get or set the OPTION.EQ.ALL: All beam elements will be included in the set,
-        OPTION.EQ.ELEM: Beam elements E1...E7 will be included in the current set,
+        OPTION..EQ.ELEM: Beam elements E1...E7 will be included in the current set,
         OPTION.EQ.DELEM: Beam elements E1...E7 previously added will be excluded from the current set,
         OPTION.EQ.PART: Beam elements from parts E1...E7 will be included in the current set,
         OPTION.EQ.DPART: Beam elements from parts E1...E7 previously added will be excluded from the current set,
-        OPTION.EQ.BOX: Beam elements inside boxes E1...E7 will be included in the current set,
-        OPTION.EQ.DBOX: Beam elements inside boxes E1...E7 previously added will be excluded from the current set.
+        OPTION.EQ.BOX:Elements inside boxes E1, E2, E3, ... will be included.  (see *DEFINE_BOX)
+        OPTION.EQ.DBOX:Previously added elements that are inside boxes E1, E2, E3, ... will be excluded.
+        OPTION.EQ.SET:Elements of beam element sets E1, E2, E3, ... will be included
+        OPTION.EQ.DSET: Previously added elements that are members of beam element sets E1, E2, E3, ... will be excluded.
         """ # nopep8
         return self._cards[1].get_value("option")
 
     @option.setter
     def option(self, value: str) -> None:
         """Set the option property."""
-        if value not in ["ALL", "ELEM", "DELEM", "PART", "DPART", "BOX", "DBOX", None]:
-            raise Exception("""option must be `None` or one of {"ALL","ELEM","DELEM","PART","DPART","BOX","DBOX"}.""")
+        if value not in ["ALL", "ELEM", "DELEM", "PART", "DPART", "BOX", "DBOX", "SET", "DSET", None]:
+            raise Exception("""option must be `None` or one of {"ALL","ELEM","DELEM","PART","DPART","BOX","DBOX","SET","DSET"}.""")
         self._cards[1].set_value("option", value)
 
     @property
@@ -229,16 +256,191 @@ class SetBeamGeneralCollect(KeywordBase):
         self._cards[1].set_value("e7", value)
 
     @property
+    def option(self) -> str:
+        """Get or set the OPTION.EQ.ALL: All beam elements will be included in the set,
+        OPTION..EQ.ELEM: Beam elements E1...E7 will be included in the current set,
+        OPTION.EQ.DELEM: Beam elements E1...E7 previously added will be excluded from the current set,
+        OPTION.EQ.PART: Beam elements from parts E1...E7 will be included in the current set,
+        OPTION.EQ.DPART: Beam elements from parts E1...E7 previously added will be excluded from the current set,
+        OPTION.EQ.BOX:Elements inside boxes E1, E2, E3, ... will be included.  (see *DEFINE_BOX)
+        OPTION.EQ.DBOX:Previously added elements that are inside boxes E1, E2, E3, ... will be excluded.
+        OPTION.EQ.SET:Elements of beam element sets E1, E2, E3, ... will be included
+        OPTION.EQ.DSET: Previously added elements that are members of beam element sets E1, E2, E3, ... will be excluded.
+        """ # nopep8
+        return self._cards[2].get_value("option")
+
+    @option.setter
+    def option(self, value: str) -> None:
+        """Set the option property."""
+        if value not in ["ALL", "ELEM", "DELEM", "PART", "DPART", "BOX", "DBOX", "SET", "DSET", None]:
+            raise Exception("""option must be `None` or one of {"ALL","ELEM","DELEM","PART","DPART","BOX","DBOX","SET","DSET"}.""")
+        self._cards[2].set_value("option", value)
+
+    @property
+    def e1(self) -> typing.Optional[int]:
+        """Get or set the OPTION.EQ.ALL: E1 not used,
+        OPTION.EQ.ELEM: Beam element E1 will be included in the current set,
+        OPTION.EQ.DELEM: Beam element E1 will be excluded from the current set,
+        OPTION.EQ.PART: Beam elements from part E1 will be included in the current set,
+        OPTION.EQ.DPART: Beam elements from part E1 will be excluded from the current set,
+        OPTION.EQ.BOX: Beam elements inside box E1 will be included in the current set,
+        OPTION.EQ.DBOX: Beam elements inside box E1 will be excluded from the current set.
+        """ # nopep8
+        return self._cards[2].get_value("e1")
+
+    @e1.setter
+    def e1(self, value: int) -> None:
+        """Set the e1 property."""
+        self._cards[2].set_value("e1", value)
+
+    @property
+    def e2(self) -> typing.Optional[int]:
+        """Get or set the OPTION.EQ.ALL: E2 not used,
+        OPTION.EQ.ELEM: Beam element E2 will be included in the current set,
+        OPTION.EQ.DELEM: Beam element E2 will be excluded from the current set,
+        OPTION.EQ.PART: Beam elements from part E2 will be included in the current set,
+        OPTION.EQ.DPART: Beam elements from part E2 will be excluded from the current set,
+        OPTION.EQ.BOX: Beam elements inside box E2 will be included in the current set,
+        OPTION.EQ.DBOX: Beam elements inside box E2 will be excluded from the current set.
+        """ # nopep8
+        return self._cards[2].get_value("e2")
+
+    @e2.setter
+    def e2(self, value: int) -> None:
+        """Set the e2 property."""
+        self._cards[2].set_value("e2", value)
+
+    @property
+    def e3(self) -> typing.Optional[int]:
+        """Get or set the OPTION.EQ.ALL: E3 not used,
+        OPTION.EQ.ELEM: Beam element E3 will be included in the current set,
+        OPTION.EQ.DELEM: Beam element E3 will be excluded from the current set,
+        OPTION.EQ.PART: Beam elements from part E3 will be included in the current set,
+        OPTION.EQ.DPART: Beam elements from part E3 will be excluded from the current set,
+        OPTION.EQ.BOX: Beam elements inside box E3 will be included in the current set,
+        OPTION.EQ.DBOX: Beam elements inside box E3 will be excluded from the current set.
+        """ # nopep8
+        return self._cards[2].get_value("e3")
+
+    @e3.setter
+    def e3(self, value: int) -> None:
+        """Set the e3 property."""
+        self._cards[2].set_value("e3", value)
+
+    @property
+    def e4(self) -> typing.Optional[int]:
+        """Get or set the OPTION.EQ.ALL: E4 not used,
+        OPTION.EQ.ELEM: Beam element E4 will be included in the current set,
+        OPTION.EQ.DELEM: Beam element E4 will be excluded from the current set,
+        OPTION.EQ.PART: Beam elements from part E4 will be included in the current set,
+        OPTION.EQ.DPART: Beam elements from part E4 will be excluded from the current set,
+        OPTION.EQ.BOX: Beam elements inside box E4 will be included in the current set,
+        OPTION.EQ.DBOX: Beam elements inside box E4 will be excluded from the current set.
+        """ # nopep8
+        return self._cards[2].get_value("e4")
+
+    @e4.setter
+    def e4(self, value: int) -> None:
+        """Set the e4 property."""
+        self._cards[2].set_value("e4", value)
+
+    @property
+    def e5(self) -> typing.Optional[int]:
+        """Get or set the OPTION.EQ.ALL: E5 not used,
+        OPTION.EQ.ELEM: Beam element E5 will be included in the current set,
+        OPTION.EQ.DELEM: Beam element E5 will be excluded from the current set,
+        OPTION.EQ.PART: Beam elements from part E5 will be included in the current set,
+        OPTION.EQ.DPART: Beam elements from part E5 will be excluded from the current set,
+        OPTION.EQ.BOX: Beam elements inside box E5 will be included in the current set,
+        OPTION.EQ.DBOX: Beam elements inside box E5 will be excluded from the current set.
+        """ # nopep8
+        return self._cards[2].get_value("e5")
+
+    @e5.setter
+    def e5(self, value: int) -> None:
+        """Set the e5 property."""
+        self._cards[2].set_value("e5", value)
+
+    @property
+    def e6(self) -> typing.Optional[int]:
+        """Get or set the OPTION.EQ.ALL: E6 not used,
+        OPTION.EQ.ELEM: Beam element E6 will be included in the current set,
+        OPTION.EQ.DELEM: Beam element E6 will be excluded from the current set,
+        OPTION.EQ.PART: Beam elements from part E6 will be included in the current set,
+        OPTION.EQ.DPART: Beam elements from part E6 will be excluded from the current set,
+        OPTION.EQ.BOX: Beam elements inside box E6 will be included in the current set,
+        OPTION.EQ.DBOX: Beam elements inside box E6 will be excluded from the current set.
+        """ # nopep8
+        return self._cards[2].get_value("e6")
+
+    @e6.setter
+    def e6(self, value: int) -> None:
+        """Set the e6 property."""
+        self._cards[2].set_value("e6", value)
+
+    @property
+    def e7(self) -> typing.Optional[int]:
+        """Get or set the OPTION.EQ.ALL: E7 not used,
+        OPTION.EQ.ELEM: Beam element E7 will be included in the current set,
+        OPTION.EQ.DELEM: Beam element E7 will be excluded from the current set,
+        OPTION.EQ.PART: Beam elements from part E7 will be included in the current set,
+        OPTION.EQ.DPART: Beam elements from part E7 will be excluded from the current set,
+        OPTION.EQ.BOX: Beam elements inside box E7 will be included in the current set,
+        OPTION.EQ.DBOX: Beam elements inside box E7 will be excluded from the current set.
+        """ # nopep8
+        return self._cards[2].get_value("e7")
+
+    @e7.setter
+    def e7(self, value: int) -> None:
+        """Set the e7 property."""
+        self._cards[2].set_value("e7", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[2].cards[0].get_value("title")
+        return self._cards[3].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[2].cards[0].set_value("title", value)
+        self._cards[3].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def e1_link(self) -> typing.Optional[KeywordBase]:
+        """Get the ELEMENT keyword containing the given e1."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.e1, "parts")
+
+    @property
+    def e2_link(self) -> typing.Optional[KeywordBase]:
+        """Get the ELEMENT keyword containing the given e2."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.e2, "parts")
+
+    @property
+    def e3_link(self) -> typing.Optional[KeywordBase]:
+        """Get the ELEMENT keyword containing the given e3."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.e3, "parts")
+
+    @property
+    def e4_link(self) -> typing.Optional[KeywordBase]:
+        """Get the ELEMENT keyword containing the given e4."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.e4, "parts")
+
+    @property
+    def e5_link(self) -> typing.Optional[KeywordBase]:
+        """Get the ELEMENT keyword containing the given e5."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.e5, "parts")
+
+    @property
+    def e6_link(self) -> typing.Optional[KeywordBase]:
+        """Get the ELEMENT keyword containing the given e6."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.e6, "parts")
+
+    @property
+    def e7_link(self) -> typing.Optional[KeywordBase]:
+        """Get the ELEMENT keyword containing the given e7."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.e7, "parts")
 

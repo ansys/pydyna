@@ -160,9 +160,7 @@ class Mat266(KeywordBase):
 
     @property
     def f(self) -> typing.Optional[float]:
-        """Get or set the Fiber dispersion parameter governs the extent to which the fiber dispersion extends to the third dimension. F = 0 and F = 1 apply to 2D splay
-        with the normal to the membrane being in the beta and the gama directions,
-        respectively . F = 0.5 applies to 3D splay with transverse isotropy.
+        """Get or set the Fiber dispersion parameter governs the extent to which the fiber dispersion extends to the third dimension. F = 0 and F = 1 apply to 2D splay with the normal to the membrane being in the beta and the gamma directions, respectively . F = 0.5 applies to 3D splay with transverse isotropy.
         Splay will be orthotropic whenever F != 0.5. This parameter is ignored if INIT = 1.
         """ # nopep8
         return self._cards[0].get_value("f")
@@ -174,10 +172,7 @@ class Mat266(KeywordBase):
 
     @property
     def sigma(self) -> typing.Optional[float]:
-        """Get or set the The parameter SIGMA governs the extent of dispersion, such that as
-        SIGMA goes to zero, the material symmetry reduces to pure transverse
-        isotropy. Conversely, as SIGMA becomes large, the material symmetry
-        becomes isotropic in the plane. This parameter is ignored if INIT = 1.
+        """Get or set the The parameter SIGMA governs the extent of dispersion, such that as SIGMA goes to zero, the material symmetry reduces to pure transverse isotropy. Conversely, as SIGMA becomes large, the material symmetry becomes isotropic in the plane. This parameter is ignored if INIT = 1.
         """ # nopep8
         return self._cards[0].get_value("sigma")
 
@@ -210,9 +205,7 @@ class Mat266(KeywordBase):
 
     @property
     def act(self) -> typing.Optional[int]:
-        """Get or set the ACT = 1 indicates that an active model will be used that acts in the mean
-        fiber-direction. The active model, like the passive model, will be dispersed by SIGMA and F, or if INIT = 1, with the
-        *INITIAL_FIELD_SOLID keyword
+        """Get or set the ACT = 1 indicates that an active model will be used that acts in the mean fiber-direction. The active model, like the passive model, will be dispersed by SIGMA and F, or if INIT = 1, with the *INITIAL_FIELD_SOLID keyword
         """ # nopep8
         return self._cards[0].get_value("act")
 
@@ -223,8 +216,7 @@ class Mat266(KeywordBase):
 
     @property
     def init(self) -> typing.Optional[int]:
-        """Get or set the INIT = 1 indicates that the anisotropy eigenvalues will be given by
-        *INITIAL_FIELD_SOLID variables in the global coordinate system
+        """Get or set the INIT = 1 indicates that the anisotropy eigenvalues will be given by *INITIAL_FIELD_SOLID variables in the global coordinate system
         """ # nopep8
         return self._cards[0].get_value("init")
 
@@ -246,9 +238,7 @@ class Mat266(KeywordBase):
 
     @property
     def orth(self) -> typing.Optional[int]:
-        """Get or set the ORTH specifies the number (1 or 2) of fibers used. When ORTH = 2
-        two fiber families are used and arranges symmetrically THETA degrees
-        from the mean fiber direction and lying in the tissue plane
+        """Get or set the ORTH specifies the number (1 or 2) of fibers used. When ORTH = 2 two fiber families are used and arranges symmetrically THETA degrees from the mean fiber direction and lying in the tissue plane
         """ # nopep8
         return self._cards[1].get_value("orth")
 
@@ -292,9 +282,7 @@ class Mat266(KeywordBase):
 
     @property
     def theta(self) -> typing.Optional[float]:
-        """Get or set the The angle between the mean fiber direction and the fiber families. The
-        parameter is active only if ORTH = 2 and is particularly important in
-        vascular tissues (e.g. arteries)
+        """Get or set the The angle between the mean fiber direction and the fiber families. The parameter is active only if ORTH = 2 and is particularly important in vascular tissues (e.g. arteries)
         """ # nopep8
         return self._cards[1].get_value("theta")
 
@@ -305,8 +293,7 @@ class Mat266(KeywordBase):
 
     @property
     def act1(self) -> typing.Optional[float]:
-        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
-        dependent load curve that overrides some of the ACTx values. See section 2 below
+        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time dependent load curve that overrides some of the ACTx values. See section 2 below
         """ # nopep8
         return self._cards[2].get_value("act1")
 
@@ -317,8 +304,7 @@ class Mat266(KeywordBase):
 
     @property
     def act2(self) -> typing.Optional[float]:
-        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
-        dependent load curve that overrides some of the ACTx values. See section 2 below
+        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time dependent load curve that overrides some of the ACTx values. See section 2 below
         """ # nopep8
         return self._cards[2].get_value("act2")
 
@@ -329,8 +315,7 @@ class Mat266(KeywordBase):
 
     @property
     def act3(self) -> typing.Optional[float]:
-        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
-        dependent load curve that overrides some of the ACTx values. See section 2 below
+        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time dependent load curve that overrides some of the ACTx values. See section 2 below
         """ # nopep8
         return self._cards[2].get_value("act3")
 
@@ -341,8 +326,7 @@ class Mat266(KeywordBase):
 
     @property
     def act4(self) -> typing.Optional[float]:
-        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
-        dependent load curve that overrides some of the ACTx values. See section 2 below
+        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time dependent load curve that overrides some of the ACTx values. See section 2 below
         """ # nopep8
         return self._cards[2].get_value("act4")
 
@@ -353,8 +337,7 @@ class Mat266(KeywordBase):
 
     @property
     def act5(self) -> typing.Optional[float]:
-        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
-        dependent load curve that overrides some of the ACTx values. See section 2 below
+        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time dependent load curve that overrides some of the ACTx values. See section 2 below
         """ # nopep8
         return self._cards[2].get_value("act5")
 
@@ -365,8 +348,7 @@ class Mat266(KeywordBase):
 
     @property
     def act6(self) -> typing.Optional[float]:
-        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
-        dependent load curve that overrides some of the ACTx values. See section 2 below
+        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time dependent load curve that overrides some of the ACTx values. See section 2 below
         """ # nopep8
         return self._cards[2].get_value("act6")
 
@@ -377,8 +359,7 @@ class Mat266(KeywordBase):
 
     @property
     def act7(self) -> typing.Optional[float]:
-        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
-        dependent load curve that overrides some of the ACTx values. See section 2 below
+        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time dependent load curve that overrides some of the ACTx values. See section 2 below
         """ # nopep8
         return self._cards[2].get_value("act7")
 
@@ -389,8 +370,7 @@ class Mat266(KeywordBase):
 
     @property
     def act8(self) -> typing.Optional[float]:
-        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
-        dependent load curve that overrides some of the ACTx values. See section 2 below
+        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time dependent load curve that overrides some of the ACTx values. See section 2 below
         """ # nopep8
         return self._cards[2].get_value("act8")
 
@@ -401,8 +381,7 @@ class Mat266(KeywordBase):
 
     @property
     def act9(self) -> typing.Optional[float]:
-        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
-        dependent load curve that overrides some of the ACTx values. See section 2 below
+        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time dependent load curve that overrides some of the ACTx values. See section 2 below
         """ # nopep8
         return self._cards[3].get_value("act9")
 
@@ -413,8 +392,7 @@ class Mat266(KeywordBase):
 
     @property
     def act10(self) -> typing.Optional[float]:
-        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time
-        dependent load curve that overrides some of the ACTx values. See section 2 below
+        """Get or set the Active fiber model parameters. Note that ACT10 is an input for a time dependent load curve that overrides some of the ACTx values. See section 2 below
         """ # nopep8
         return self._cards[3].get_value("act10")
 
@@ -426,11 +404,10 @@ class Mat266(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option:
-        EQ.0.0: locally orthotropic with material axes determined by
-        element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES.
+        EQ.0.0: locally orthotropic with material axes determined by element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
         EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
         *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
         """ # nopep8
@@ -443,7 +420,7 @@ class Mat266(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Material angle in degrees for AOPT = 3, may be overridden on the ele	ment card *ELEMANT_SOLID_ORTHO
+        """Get or set the Material angle in degrees for AOPT = 3, may be overridden on the ele ment card *ELEMANT_SOLID_ORTHO
         """ # nopep8
         return self._cards[4].get_value("beta")
 

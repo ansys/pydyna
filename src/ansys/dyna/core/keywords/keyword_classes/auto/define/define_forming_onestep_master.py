@@ -70,7 +70,7 @@ class DefineFormingOnestepMaster(KeywordBase):
         ]
     @property
     def slpid(self) -> typing.Optional[int]:
-        """Get or set the Part ID of the master blank to which a slave blank is welded using *CONSTRAINED_‌SPOTWELD.
+        """Get or set the Part ID of the master blank to which a slave blank is welded using *CONSTRAINED_SPOTWELD.
         """ # nopep8
         return self._cards[0].get_value("slpid")
 

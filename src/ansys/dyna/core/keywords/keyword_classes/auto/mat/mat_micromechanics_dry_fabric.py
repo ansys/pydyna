@@ -126,7 +126,7 @@ class MatMicromechanicsDryFabric(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.  A unique number or label must be specified.
+        """Get or set the Material identification. A unique number or label must be specified.
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -363,7 +363,7 @@ class MatMicromechanicsDryFabric(KeywordBase):
 
     @property
     def a1(self) -> typing.Optional[float]:
-        """Get or set the Components of vector 𝐚 for AOPT = 2.0
+        """Get or set the Components of vector a for AOPT = 2.0
         """ # nopep8
         return self._cards[3].get_value("a1")
 
@@ -374,7 +374,7 @@ class MatMicromechanicsDryFabric(KeywordBase):
 
     @property
     def a2(self) -> typing.Optional[float]:
-        """Get or set the Components of vector 𝐚 for AOPT = 2.0
+        """Get or set the Components of vector a for AOPT = 2.0
         """ # nopep8
         return self._cards[3].get_value("a2")
 
@@ -385,7 +385,7 @@ class MatMicromechanicsDryFabric(KeywordBase):
 
     @property
     def a3(self) -> typing.Optional[float]:
-        """Get or set the Components of vector 𝐚 for AOPT = 2.0
+        """Get or set the Components of vector a for AOPT = 2.0
         """ # nopep8
         return self._cards[3].get_value("a3")
 
@@ -396,7 +396,7 @@ class MatMicromechanicsDryFabric(KeywordBase):
 
     @property
     def v1(self) -> typing.Optional[float]:
-        """Get or set the Components of vector 𝐯 for AOPT = 3.0
+        """Get or set the Components of vector v for AOPT = 3.0
         """ # nopep8
         return self._cards[4].get_value("v1")
 
@@ -407,7 +407,7 @@ class MatMicromechanicsDryFabric(KeywordBase):
 
     @property
     def v2(self) -> typing.Optional[float]:
-        """Get or set the Components of vector 𝐯 for AOPT = 3.0
+        """Get or set the Components of vector v for AOPT = 3.0
         """ # nopep8
         return self._cards[4].get_value("v2")
 
@@ -418,7 +418,7 @@ class MatMicromechanicsDryFabric(KeywordBase):
 
     @property
     def v3(self) -> typing.Optional[float]:
-        """Get or set the Components of vector 𝐯 for AOPT = 3.0.
+        """Get or set the Components of vector v for AOPT = 3.0.
         """ # nopep8
         return self._cards[4].get_value("v3")
 
@@ -429,7 +429,7 @@ class MatMicromechanicsDryFabric(KeywordBase):
 
     @property
     def d1(self) -> typing.Optional[float]:
-        """Get or set the Components of vector 𝐝 for AOPT = 2.0
+        """Get or set the Components of vector d for AOPT = 2.0
         """ # nopep8
         return self._cards[4].get_value("d1")
 
@@ -440,7 +440,7 @@ class MatMicromechanicsDryFabric(KeywordBase):
 
     @property
     def d2(self) -> typing.Optional[float]:
-        """Get or set the Components of vector 𝐝 for AOPT = 2.0
+        """Get or set the Components of vector d for AOPT = 2.0
         """ # nopep8
         return self._cards[4].get_value("d2")
 
@@ -451,7 +451,7 @@ class MatMicromechanicsDryFabric(KeywordBase):
 
     @property
     def d3(self) -> typing.Optional[float]:
-        """Get or set the Components of vector 𝐝 for AOPT = 2.0
+        """Get or set the Components of vector d for AOPT = 2.0
         """ # nopep8
         return self._cards[4].get_value("d3")
 

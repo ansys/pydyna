@@ -33,16 +33,18 @@ _EMMAT003_CARD0 = (
     FieldSchema("sigma11", float, 20, 10, None),
     FieldSchema("sigma22", float, 30, 10, None),
     FieldSchema("sigma33", float, 40, 10, None),
+    FieldSchema("beta", float, 50, 10, None),
+    FieldSchema("cm", float, 60, 10, None),
 )
 
 _EMMAT003_CARD1 = (
-    FieldSchema("sigma12", int, 0, 10, None),
-    FieldSchema("sigma13", int, 10, 10, None),
+    FieldSchema("sigma12", float, 0, 10, None),
+    FieldSchema("sigma13", float, 10, 10, None),
     FieldSchema("sigma21", float, 20, 10, None),
     FieldSchema("sigma23", float, 30, 10, None),
     FieldSchema("sigma31", float, 40, 10, None),
     FieldSchema("sigma32", float, 50, 10, None),
-    FieldSchema("aopt", int, 60, 10, 0),
+    FieldSchema("aopt", float, 60, 10, 0.0),
     FieldSchema("lambda_", float, 70, 10, None, "lambda"),
 )
 
@@ -97,7 +99,7 @@ class EmMat003(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material ID: refers to MID in the *PART card.
+        """Get or set the Material ID. MID must reference a *MAT material since the electromagnetic properties are added onto the *MAT properties. See Remark 1.
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -109,10 +111,10 @@ class EmMat003(KeywordBase):
     @property
     def mtype(self) -> int:
         """Get or set the Defines the electromagnetism type of the material:
-        EQ.0:	Air or vacuum.
-        EQ.1 : Insulator material : These materials have the same electromagnetism behavior as EQ.0.
-        EQ.2 : Conductor carrying a source.In these conductors, the eddy current problem is solved, which gives the actual current density.Typically, this would correspond to the coil.In Electrophysiology, it corresponds to the tissue where the monodomain equations are solved for EMSOL = 11 or EMSOL = 13. An * EM_EP_CELLMODEL must be associated to this * EM_MAT_003.
-        EQ.4 : Conductor not connected to any current or voltage source, where the Eddy current problem is solved.Typically, this would correspond to the workpiece.In Electrophysiology(EP), for EMSOL = 11, 12 or 13, it corresponds to the batsurrounding the tissue, where only the external potential is solved for.No* EM_EP_CELLMODEL should be associated with these materials
+        EQ.0: Air or vacuum
+        EQ.1: Insulator material.These materials have the same electromagnetism behavior as MTYPE = 0.
+        EQ.2: Conductor carrying a source.For these conductors, the EM solver solves the eddy current problem, which gives the actual current density.Typically, this type would correspond to the coil.In electrophysiology(EP), it corresponds to the tissue where the monodomain equations are solved for EMSOL = 11 or EMSOL = 13. For this case, an *EM_EP_CELLMODEL must be associated with this *EM_MAT_003.
+        EQ.4: Conductor not connected to any current or voltage source, where the Eddy current problem is solved.Typically, this type would correspond to the workpiece.In electrophysiology(EP), for EMSOL = 11, 12 or 13, it corresponds to the bath surrounding the tissue for which only the external potential is found.In the case of electrophysiology, no *EM_EP_CELLMODEL should be associated with this material.
         """ # nopep8
         return self._cards[0].get_value("mtype")
 
@@ -125,7 +127,9 @@ class EmMat003(KeywordBase):
 
     @property
     def sigma11(self) -> typing.Optional[float]:
-        """Get or set the The 1,1 term in the 3 x 3 electromagnetic conductivity tensor matrix. Note that 1 corresponds to the a material direction.If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters.
+        """Get or set the The 1, 1 term in the 3 x 3 electromagnetic conductivity tensor matrix.
+        For the eikonal solvers (EMSOL = 14 and 15 on *EM_CONTROL), this is the 1, 1 term in the 3 x 3 wave velocity tensor. Note that 1 corresponds to the a material direction.
+        LT.0.0: | SIGMA11 | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 2 for available parameters.
         """ # nopep8
         return self._cards[0].get_value("sigma11")
 
@@ -136,7 +140,9 @@ class EmMat003(KeywordBase):
 
     @property
     def sigma22(self) -> typing.Optional[float]:
-        """Get or set the The 2,2 term in the 3 x 3 electromagnetic conductivity tensor matrix.If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters.
+        """Get or set the The 2, 2 term in the 3 x 3 electromagnetic conductivity tensor matrix.
+        For the eikonal solvers (EMSOL = 14 and 15 on *EM_CONTROL), this is the 2, 2 term in the 3 x 3 wave velocity tensor. Note that 2 corresponds to the b material direction.
+        LT.0.0: | SIGMA12 | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 2 for available parameters.
         """ # nopep8
         return self._cards[0].get_value("sigma22")
 
@@ -147,7 +153,9 @@ class EmMat003(KeywordBase):
 
     @property
     def sigma33(self) -> typing.Optional[float]:
-        """Get or set the The 3,3 term in the 3 x 3 electromagnetic conductivity tensor matrix.If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters.
+        """Get or set the The 3, 3 term in the 3 x 3 electromagnetic conductivity tensor matrix.
+        For the eikonal solvers (EMSOL = 14 and 15 on *EM_CONTROL), this is the 3, 3 term in the 3 x 3 wave velocity tensor. Note that 3 corresponds to the c material direction.
+        LT.0.0: | SIGMA33 | corresponds to the ID of a *DEFINE_FUNCTION.See Remark 2 for available parameters.
         """ # nopep8
         return self._cards[0].get_value("sigma33")
 
@@ -157,30 +165,55 @@ class EmMat003(KeywordBase):
         self._cards[0].set_value("sigma33", value)
 
     @property
-    def sigma12(self) -> typing.Optional[int]:
-        """Get or set the The 1,2 term in the 3 x 3 electromagnetic conductivity tensor matrix.Note that 2 corresponds to the b material direction.. If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters.
+    def beta(self) -> typing.Optional[float]:
+        """Get or set the Surface to volume ratio of the cell membrane (to be used only when EMSOL = 11 or 12 in *EM_CONTROL).
+        """ # nopep8
+        return self._cards[0].get_value("beta")
+
+    @beta.setter
+    def beta(self, value: float) -> None:
+        """Set the beta property."""
+        self._cards[0].set_value("beta", value)
+
+    @property
+    def cm(self) -> typing.Optional[float]:
+        """Get or set the Membrane capacitance per unit area (to be used only when EMSOL = 11 or 12 in EM_CONTROL).
+        """ # nopep8
+        return self._cards[0].get_value("cm")
+
+    @cm.setter
+    def cm(self, value: float) -> None:
+        """Set the cm property."""
+        self._cards[0].set_value("cm", value)
+
+    @property
+    def sigma12(self) -> typing.Optional[float]:
+        """Get or set the The 1,2 term in the 3 x 3 electromagnetic conductivity tensor matrix.
+        For the eikonal solvers (EMSOL = 14 and 15 on *EM_CONTROL), this is the 1, 2 term in the 3 x 3 wave velocity tensor. Note that 2 corresponds to the b material direction.. If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters.
         """ # nopep8
         return self._cards[1].get_value("sigma12")
 
     @sigma12.setter
-    def sigma12(self, value: int) -> None:
+    def sigma12(self, value: float) -> None:
         """Set the sigma12 property."""
         self._cards[1].set_value("sigma12", value)
 
     @property
-    def sigma13(self) -> typing.Optional[int]:
-        """Get or set the The 1,3 term in the 3 x 3 electromagnetic conductivity tensor matrix.If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters.
+    def sigma13(self) -> typing.Optional[float]:
+        """Get or set the The 1,3 term in the 3 x 3 electromagnetic conductivity tensor matrix.
+        For the eikonal solvers (EMSOL = 14 and 15 on *EM_CONTROL), this is the 1, 3 term in the 3 x 3 wave velocity tensor. If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters.
         """ # nopep8
         return self._cards[1].get_value("sigma13")
 
     @sigma13.setter
-    def sigma13(self, value: int) -> None:
+    def sigma13(self, value: float) -> None:
         """Set the sigma13 property."""
         self._cards[1].set_value("sigma13", value)
 
     @property
     def sigma21(self) -> typing.Optional[float]:
-        """Get or set the The 2,1 term in the 3 x 3 electromagnetic conductivity tensor matrix. Note that 1 corresponds to the a material direction.If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters.
+        """Get or set the The 2,1 term in the 3 x 3 electromagnetic conductivity tensor matrix.
+        For the eikonal solvers (EMSOL = 14 and 15 on *EM_CONTROL), this is the 2, 1 term in the 3 x 3 wave velocity tensor. Note that 1 corresponds to the a material direction.If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters.
         """ # nopep8
         return self._cards[1].get_value("sigma21")
 
@@ -191,7 +224,8 @@ class EmMat003(KeywordBase):
 
     @property
     def sigma23(self) -> typing.Optional[float]:
-        """Get or set the The 2,3 term in the 3 x 3 electromagnetic conductivity tensor matrix.If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters.
+        """Get or set the The 2,3 term in the 3 x 3 electromagnetic conductivity tensor matrix.
+        For the eikonal solvers (EMSOL = 14 and 15 on *EM_CONTROL), this is the 2, 3 term in the 3 x 3 wave velocity tensor. If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters.
         """ # nopep8
         return self._cards[1].get_value("sigma23")
 
@@ -202,7 +236,8 @@ class EmMat003(KeywordBase):
 
     @property
     def sigma31(self) -> typing.Optional[float]:
-        """Get or set the The 3,1 term in the 3 x 3 electromagnetic conductivity tensor matrix.If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters.
+        """Get or set the The 3,1 term in the 3 x 3 electromagnetic conductivity tensor matrix.
+        For the eikonal solvers (EMSOL = 14 and 15 on *EM_CONTROL), this is the 3, 1 term in the 3 x 3 wave velocity tensor. If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters.
         """ # nopep8
         return self._cards[1].get_value("sigma31")
 
@@ -213,7 +248,8 @@ class EmMat003(KeywordBase):
 
     @property
     def sigma32(self) -> typing.Optional[float]:
-        """Get or set the The 3,2 term in the 3 x 3 electromagnetic conductivity tensor matrix.If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters.
+        """Get or set the The 3,2 term in the 3 x 3 electromagnetic conductivity tensor matrix.
+        For the eikonal solvers (EMSOL = 14 and 15 on *EM_CONTROL), this is the 3, 2 term in the 3 x 3 wave velocity tensor. If a negative value is entered, a *DEFINE_FUNCTION will be expected. See remark 3- for available parameters.
         """ # nopep8
         return self._cards[1].get_value("sigma32")
 
@@ -223,27 +259,26 @@ class EmMat003(KeywordBase):
         self._cards[1].set_value("sigma32", value)
 
     @property
-    def aopt(self) -> int:
-        """Get or set the Material axes option:
-        EQ.0.0: locally orthotropic with material axes determined by element nodes
-        EQ.1.0:locally orthotropic with material axes determined by a point in space and the global location of the element center this is the a-direction.
-        EQ.2.0:globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR.
-        EQ.3.0:locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal. The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.
-        EQ.4.0:locally orthotropic in cylindrical coordinate system with the material axes determined by a vector v, and an originating point, P, which define the centerline axis. This option is for solid elements only.
-        EQ.5.0:globally defined reference frame with (a,b,c)=(X0,Y0,Z0).
+    def aopt(self) -> float:
+        """Get or set the Material axes option (see *MAT_002 for a more detailed description):
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes.The a - direction is from node 1 to node 2 of the element.The b - direction is orthogonal to the a - direction and is in the plane formed by nodes 1, 2,and 4.
+        EQ.1.0: Locally orthotropic with material axes determined by a point in space, P,and the global location of the element center; this is the a - direction.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR.
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element.
+        EQ.4.0: Locally orthotropic in cylindrical coordinate system with the material axes determined by a vector, v,and an originating point, P, which define the centerline axis.
         """ # nopep8
         return self._cards[1].get_value("aopt")
 
     @aopt.setter
-    def aopt(self, value: int) -> None:
+    def aopt(self, value: float) -> None:
         """Set the aopt property."""
-        if value not in [0, 1, 2, 3, 4, 5, None]:
-            raise Exception("""aopt must be `None` or one of {0,1,2,3,4,5}.""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""aopt must be `None` or one of {0,1,2,3,4}.""")
         self._cards[1].set_value("aopt", value)
 
     @property
     def lambda_(self) -> typing.Optional[float]:
-        """Get or set the Intra- to extracellular conductivity ratio. When non-empty, the elliptic equation is solved to compute extracellular potentials
+        """Get or set the Intra- to extracellular conductivity ratio. When non-empty, the elliptic equation is solved to compute extracellular potentials (to be used only when EMSOL = 11 in *EM_CONTROL).
         """ # nopep8
         return self._cards[1].get_value("lambda_")
 
@@ -254,7 +289,7 @@ class EmMat003(KeywordBase):
 
     @property
     def xp(self) -> typing.Optional[float]:
-        """Get or set the Define coordinates of point p for AOPT = 1 and 4.
+        """Get or set the Coordinates of point p for AOPT = 1 and 4.
         """ # nopep8
         return self._cards[2].get_value("xp")
 
@@ -265,7 +300,7 @@ class EmMat003(KeywordBase):
 
     @property
     def yp(self) -> typing.Optional[float]:
-        """Get or set the Define coordinates of point p for AOPT = 1 and 4.
+        """Get or set the Coordinates of point p for AOPT = 1 and 4.
         """ # nopep8
         return self._cards[2].get_value("yp")
 
@@ -276,7 +311,7 @@ class EmMat003(KeywordBase):
 
     @property
     def zp(self) -> typing.Optional[float]:
-        """Get or set the Define coordinates of point p for AOPT = 1 and 4.
+        """Get or set the Coordinates of point p for AOPT = 1 and 4.
         """ # nopep8
         return self._cards[2].get_value("zp")
 
@@ -287,7 +322,7 @@ class EmMat003(KeywordBase):
 
     @property
     def a1(self) -> typing.Optional[float]:
-        """Get or set the Define components of vector a for AOPT = 2.
+        """Get or set the Components of vector a for AOPT = 2.
         """ # nopep8
         return self._cards[2].get_value("a1")
 
@@ -298,7 +333,7 @@ class EmMat003(KeywordBase):
 
     @property
     def a2(self) -> typing.Optional[float]:
-        """Get or set the Define components of vector a for AOPT = 2.
+        """Get or set the Components of vector a for AOPT = 2.
         """ # nopep8
         return self._cards[2].get_value("a2")
 
@@ -309,7 +344,7 @@ class EmMat003(KeywordBase):
 
     @property
     def a3(self) -> typing.Optional[float]:
-        """Get or set the Define components of vector a for AOPT = 2.
+        """Get or set the Components of vector a for AOPT = 2.
         """ # nopep8
         return self._cards[2].get_value("a3")
 
@@ -332,7 +367,7 @@ class EmMat003(KeywordBase):
 
     @property
     def v1(self) -> typing.Optional[float]:
-        """Get or set the Define components of vector v for AOPT = 3 and 4.
+        """Get or set the Components of vector v for AOPT = 3 and 4.
         """ # nopep8
         return self._cards[3].get_value("v1")
 
@@ -343,7 +378,7 @@ class EmMat003(KeywordBase):
 
     @property
     def v2(self) -> typing.Optional[float]:
-        """Get or set the Define components of vector v for AOPT = 3 and 4.
+        """Get or set the Components of vector v for AOPT = 3 and 4.
         """ # nopep8
         return self._cards[3].get_value("v2")
 
@@ -354,7 +389,7 @@ class EmMat003(KeywordBase):
 
     @property
     def v3(self) -> typing.Optional[float]:
-        """Get or set the Define components of vector v for AOPT = 3 and 4.
+        """Get or set the Components of vector v for AOPT = 3 and 4.
         """ # nopep8
         return self._cards[3].get_value("v3")
 
@@ -365,7 +400,7 @@ class EmMat003(KeywordBase):
 
     @property
     def d1(self) -> typing.Optional[float]:
-        """Get or set the Define components of vector d for AOPT = 2.
+        """Get or set the Components of vector d for AOPT = 2.
         """ # nopep8
         return self._cards[3].get_value("d1")
 
@@ -376,7 +411,7 @@ class EmMat003(KeywordBase):
 
     @property
     def d2(self) -> typing.Optional[float]:
-        """Get or set the Define components of vector d for AOPT = 2.
+        """Get or set the Components of vector d for AOPT = 2.
         """ # nopep8
         return self._cards[3].get_value("d2")
 
@@ -387,7 +422,7 @@ class EmMat003(KeywordBase):
 
     @property
     def d3(self) -> typing.Optional[float]:
-        """Get or set the Define components of vector d for AOPT = 2.
+        """Get or set the Components of vector d for AOPT = 2.
         """ # nopep8
         return self._cards[3].get_value("d3")
 

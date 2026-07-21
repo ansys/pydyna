@@ -34,7 +34,6 @@ _MATADDPOREAIR_CARD0 = (
     FieldSchema("pa_rho", float, 10, 10, None),
     FieldSchema("pa_pre", float, 20, 10, None),
     FieldSchema("pore", float, 30, 10, 1.0),
-    FieldSchema("dvimin", float, 40, 10, None),
 )
 
 _MATADDPOREAIR_CARD1 = (
@@ -126,7 +125,7 @@ class MatAddPoreAir(KeywordBase):
 
     @property
     def pore(self) -> float:
-        """Get or set the Porosity, ratio of pores to total volume, default to 1.
+        """Get or set the Porosity, meaning the ratio of pores to total volume (default = 1).  If less than 0, PORE is taken to be a load curve ID for the curve giving the pore air volume ratio as a function of the volume ratio of the current volume to the volume in the stress free state.
         """ # nopep8
         return self._cards[0].get_value("pore")
 
@@ -136,19 +135,8 @@ class MatAddPoreAir(KeywordBase):
         self._cards[0].set_value("pore", value)
 
     @property
-    def dvimin(self) -> typing.Optional[float]:
-        """Get or set the Optional parameters to trigger air flow analysis.  Pore air flow analysis is performed only for these nodes having incremental volume change ratio, abs(V(t)-V(t-dt))/V(t-dt), larger than DVMIN, where V(t) is the nodal volume at time=t.  This parameter may be needed for the material that has very high permeability.  Caution has to be exercised when using DVMIN, a reasonable starting value may equal the inverse of the total number of analysis time steps.  Another option to control pore air analysis can be found in *SENSOR_CONTROL.
-        """ # nopep8
-        return self._cards[0].get_value("dvimin")
-
-    @dvimin.setter
-    def dvimin(self, value: float) -> None:
-        """Set the dvimin property."""
-        self._cards[0].set_value("dvimin", value)
-
-    @property
     def perm1(self) -> float:
-        """Get or set the Permeability of pore air along x-direction, <0 when ABS(PERMX) is the curve defining permeability coefficient as a function of volume ratio,	current-volume)/volume-at-stress-free-state.
+        """Get or set the Permeability of pore air along x-direction, <0 when ABS(PERMX) is the curve defining permeability coefficient as a function of volume ratio, current-volume)/volume-at-stress-free-state.
         """ # nopep8
         return self._cards[1].get_value("perm1")
 
@@ -159,7 +147,7 @@ class MatAddPoreAir(KeywordBase):
 
     @property
     def perm2(self) -> typing.Optional[float]:
-        """Get or set the Permeability of pore air along y-direction, <0 when ABS(PERMY) is the curve defining permeability coefficient as a function of volume ratio,	current-volume)/volume-at-stress-free-state
+        """Get or set the Permeability of pore air along y-direction, <0 when ABS(PERMY) is the curve defining permeability coefficient as a function of volume ratio, current-volume)/volume-at-stress-free-state
         """ # nopep8
         return self._cards[1].get_value("perm2")
 
@@ -170,7 +158,7 @@ class MatAddPoreAir(KeywordBase):
 
     @property
     def perm3(self) -> typing.Optional[float]:
-        """Get or set the Permeability of pore air along z-direction, <0 when ABS(PERMZ) is the curve defining permeability coefficient as a function of volume ratio,	current-volume)/volume-at-stress-free-state.
+        """Get or set the Permeability of pore air along z-direction, <0 when ABS(PERMZ) is the curve defining permeability coefficient as a function of volume ratio, current-volume)/volume-at-stress-free-state.
         """ # nopep8
         return self._cards[1].get_value("perm3")
 

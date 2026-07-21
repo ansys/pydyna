@@ -27,7 +27,8 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _DATABASESALE_CARD0 = (
-    FieldSchema("on_off", int, 0, 10, 1, "on/off"),
+    FieldSchema("d3sale", int, 0, 10, 0),
+    FieldSchema("dmpmsh", int, 10, 10, 0),
 )
 
 class DatabaseSale(KeywordBase):
@@ -46,13 +47,32 @@ class DatabaseSale(KeywordBase):
             ),
         ]
     @property
-    def on_off(self) -> int:
-        """Get or set the Output d3sale option flag.
+    def d3sale(self) -> int:
+        """Get or set the Flag for where to output the S-ALE part data (see Remarks 1 and 2):
+        EQ.0: Output S-ALE part data to d3plot.
+        EQ.1: Write S-ALE part data to binary, LSDA-format database d3sale.
         """ # nopep8
-        return self._cards[0].get_value("on_off")
+        return self._cards[0].get_value("d3sale")
 
-    @on_off.setter
-    def on_off(self, value: int) -> None:
-        """Set the on_off property."""
-        self._cards[0].set_value("on_off", value)
+    @d3sale.setter
+    def d3sale(self, value: int) -> None:
+        """Set the d3sale property."""
+        if value not in [0, 1, None]:
+            raise Exception("""d3sale must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("d3sale", value)
+
+    @property
+    def dmpmsh(self) -> int:
+        """Get or set the Flag for outputting the generated S-ALE mesh (see Remark 3):
+        EQ.0: Do not output the S-ALE mesh.
+        EQ.1: Output the S-ALE mesh into a file named salemsh.inc.
+        """ # nopep8
+        return self._cards[0].get_value("dmpmsh")
+
+    @dmpmsh.setter
+    def dmpmsh(self, value: int) -> None:
+        """Set the dmpmsh property."""
+        if value not in [0, 1, None]:
+            raise Exception("""dmpmsh must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("dmpmsh", value)
 

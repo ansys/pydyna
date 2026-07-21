@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONSTRAINEDJOINTCOORPLANAR_CARD0 = (
     FieldSchema("rbid_a", int, 0, 10, None),
@@ -33,6 +34,7 @@ _CONSTRAINEDJOINTCOORPLANAR_CARD0 = (
     FieldSchema("damp", float, 30, 10, None),
     FieldSchema("tmass", float, 40, 10, None),
     FieldSchema("rmass", float, 50, 10, None),
+    FieldSchema("rbidc", float, 60, 10, None),
 )
 
 _CONSTRAINEDJOINTCOORPLANAR_CARD1 = (
@@ -76,6 +78,9 @@ class ConstrainedJointCoorPlanar(KeywordBase):
 
     keyword = "CONSTRAINED"
     subkeyword = "JOINT_COOR_PLANAR"
+    _link_fields = {
+        "rbidc": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedJointCoorPlanar class."""
@@ -145,9 +150,9 @@ class ConstrainedJointCoorPlanar(KeywordBase):
 
     @property
     def damp(self) -> typing.Optional[float]:
-        """Get or set the Damping scale factor on default damping value. (Revolute and Spherical Joints):
+        """Get or set the Damping scale factor on the default damping value. (Revolute and Spherical Joints):
         EQ.0.0: default is set to 1.0,
-        LE.0.01 and GT.0.0: no damping is used.
+        GT.0.0.AND.LE.0.01: no damping is used.
         """ # nopep8
         return self._cards[0].get_value("damp")
 
@@ -177,6 +182,17 @@ class ConstrainedJointCoorPlanar(KeywordBase):
     def rmass(self, value: float) -> None:
         """Set the rmass property."""
         self._cards[0].set_value("rmass", value)
+
+    @property
+    def rbidc(self) -> typing.Optional[float]:
+        """Get or set the Part ID of rigid body C for harmonic gear joint. See Remark 2.
+        """ # nopep8
+        return self._cards[0].get_value("rbidc")
+
+    @rbidc.setter
+    def rbidc(self, value: float) -> None:
+        """Set the rbidc property."""
+        self._cards[0].set_value("rbidc", value)
 
     @property
     def x1(self) -> typing.Optional[float]:
@@ -375,4 +391,9 @@ class ConstrainedJointCoorPlanar(KeywordBase):
     def z6(self, value: float) -> None:
         """Set the z6 property."""
         self._cards[6].set_value("z6", value)
+
+    @property
+    def rbidc_link(self) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given rbidc."""
+        return self._get_link_by_attr("PART", "pid", self.rbidc, "parts")
 

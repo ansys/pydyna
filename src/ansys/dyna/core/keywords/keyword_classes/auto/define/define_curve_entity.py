@@ -94,7 +94,7 @@ class DefineCurveEntity(KeywordBase):
 
     @property
     def sfa(self) -> float:
-        """Get or set the Scale factor for axis value. This is useful for simple modifications.	EQ.0.0: default set to 1.0.
+        """Get or set the Scale factor for axis value. This is useful for simple modifications. EQ.0.0: default set to 1.0.
         """ # nopep8
         return self._cards[0].get_value("sfa")
 
@@ -105,7 +105,7 @@ class DefineCurveEntity(KeywordBase):
 
     @property
     def sfo(self) -> float:
-        """Get or set the Scale factor for radius values. This is useful for simple modifications.	EQ.0.0: default set to 1.0.
+        """Get or set the Scale factor for radius values. This is useful for simple modifications. EQ.0.0: default set to 1.0.
         """ # nopep8
         return self._cards[0].get_value("sfo")
 
@@ -116,7 +116,7 @@ class DefineCurveEntity(KeywordBase):
 
     @property
     def sfr(self) -> float:
-        """Get or set the Scale factor for circular radius. This is useful for simple	modifications. EQ.0.0: default set to 1.0.
+        """Get or set the Scale factor for circular radius. This is useful for simple modifications. EQ.0.0: default set to 1.0.
         """ # nopep8
         return self._cards[0].get_value("sfr")
 

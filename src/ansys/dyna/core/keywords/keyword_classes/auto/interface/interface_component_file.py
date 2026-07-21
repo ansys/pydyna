@@ -32,6 +32,7 @@ _INTERFACECOMPONENTFILE_CARD0 = (
 
 _INTERFACECOMPONENTFILE_CARD1 = (
     FieldSchema("format", int, 0, 10, 2),
+    FieldSchema("ndof", int, 10, 10, None),
 )
 
 class InterfaceComponentFile(KeywordBase):
@@ -76,4 +77,17 @@ class InterfaceComponentFile(KeywordBase):
     def format(self, value: int) -> None:
         """Set the format property."""
         self._cards[1].set_value("format", value)
+
+    @property
+    def ndof(self) -> typing.Optional[int]:
+        """Get or set the Number of degrees of freedom per node that get written to the file:
+        NE.3: Write as many as the model contains(3 or 6)
+        EQ.3: Only write 3 even if the model has 6
+        """ # nopep8
+        return self._cards[1].get_value("ndof")
+
+    @ndof.setter
+    def ndof(self, value: int) -> None:
+        """Set the ndof property."""
+        self._cards[1].set_value("ndof", value)
 

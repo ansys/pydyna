@@ -48,6 +48,7 @@ _CONTROLFORMINGTEMPLATE_CARD1 = (
     FieldSchema("r90", float, 40, 10, 1.0),
     FieldSchema("e", float, 50, 10, None),
     FieldSchema("density", float, 60, 10, None),
+    FieldSchema("pr", float, 70, 10, None),
 )
 
 _CONTROLFORMINGTEMPLATE_CARD2 = (
@@ -143,7 +144,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def dieid(self) -> typing.Optional[int]:
-        """Get or set the Rigid Body 1 ID, See Figures 8.2a, 8.2b and 8.2c for more information
+        """Get or set the Part or part set ID that defines the die.  See Figures 0-1, 0-2 and 0-3 for more information
         """ # nopep8
         return self._cards[0].get_value("dieid")
 
@@ -154,7 +155,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def pnch(self) -> typing.Optional[int]:
-        """Get or set the Rigid Body 2 ID, See Figures 8.2a, 8.2b and 8.2c for more information
+        """Get or set the Part or part set ID that defines the punch.
         """ # nopep8
         return self._cards[0].get_value("pnch")
 
@@ -165,7 +166,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def bndu(self) -> typing.Optional[int]:
-        """Get or set the Rigid Body 2 ID, See Figures 8.2a, 8.2b and 8.2c for more information
+        """Get or set the Part or part set ID that defines the upper binde
         """ # nopep8
         return self._cards[0].get_value("bndu")
 
@@ -176,7 +177,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def bndl(self) -> typing.Optional[int]:
-        """Get or set the Rigid Body 3 ID, See Figures 8.2a, 8.2b and 8.2c for more information
+        """Get or set the Part or part set ID that defines the lower binder.
         """ # nopep8
         return self._cards[0].get_value("bndl")
 
@@ -187,8 +188,9 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def type(self) -> int:
-        """Get or set the 0:  REST1|REST4 are part IDs
-        1:   REST1|REST4 are PART SET IDs
+        """Get or set the Flag for part or part set ID used in the definition of BLKID, DIEID, PNCHID, BNDUID, and BNDLID:
+        EQ.0:	Part ID
+        EQ.1 : Part set ID
         """ # nopep8
         return self._cards[0].get_value("type")
 
@@ -201,7 +203,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def prebd(self) -> typing.Optional[float]:
-        """Get or set the “Pull-over” distance, for 4 piece stretch draw only.  This is the travel distance of both upper and lower binder together after they are fully closed.  Typically, this distance is below 50 mm.  See Figure 0-3 for more information.
+        """Get or set the Pull-over distance, for 4 piece stretch draw only.  This is the travel distance of both upper and lower binder together after they are fully closed.  Typically, this distance is below 50 mm.  See Figure 0-3 for more information.
         """ # nopep8
         return self._cards[0].get_value("prebd")
 
@@ -212,7 +214,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def lcss(self) -> typing.Optional[int]:
-        """Get or set the If the material for the blank has not been defined, this curve will be used to define the stress-strain relation. Otherwise, this curve is ignored
+        """Get or set the If the material (*MAT_XXX) for the blank is not defined, this curve ID will define the stress-strain relationship; otherwise, this curve is ignored.
         """ # nopep8
         return self._cards[1].get_value("lcss")
 
@@ -224,8 +226,8 @@ class ControlFormingTemplate(KeywordBase):
     @property
     def al_fe(self) -> str:
         """Get or set the This parameter is used to define blank Young's Modulus and density. If this parameter is defined, E and Density will be found by using the proper unit, which is specified below.
-        EQ. A:  the blank is aluminum
-        EQ. F:   the blank is steel (default)
+        EQ. A: the blank is aluminum
+        EQ. F: the blank is steel (default)
         """ # nopep8
         return self._cards[1].get_value("al_fe")
 
@@ -238,7 +240,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def r00(self) -> float:
-        """Get or set the anisotropic parameters
+        """Get or set the Material anisotropic parameters.  For transversely anisotropy the R value is set to the average value of R00, R45, and R90.
         """ # nopep8
         return self._cards[1].get_value("r00")
 
@@ -249,7 +251,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def r45(self) -> float:
-        """Get or set the anisotropic parameters
+        """Get or set the Material anisotropic parameters.  For transversely anisotropy the R value is set to the average value of R00, R45, and R90.
         """ # nopep8
         return self._cards[1].get_value("r45")
 
@@ -260,7 +262,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def r90(self) -> float:
-        """Get or set the anisotropic parameters
+        """Get or set the Material anisotropic parameters.  For transversely anisotropy the R value is set to the average value of R00, R45, and R90.
         """ # nopep8
         return self._cards[1].get_value("r90")
 
@@ -271,7 +273,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def e(self) -> typing.Optional[float]:
-        """Get or set the Material Young's Modulus. If AL/FE is defined, E is not necessary
+        """Get or set the Young�s Modulus.  If AL/FE is user defined, E is unnecessary.
         """ # nopep8
         return self._cards[1].get_value("e")
 
@@ -282,7 +284,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def density(self) -> typing.Optional[float]:
-        """Get or set the Blank density. If AL/FE is defined, this parameter is not necessary
+        """Get or set the Material density of blank.  If AL/FE is user defined, this parameter is unnecessary.
         """ # nopep8
         return self._cards[1].get_value("density")
 
@@ -290,6 +292,17 @@ class ControlFormingTemplate(KeywordBase):
     def density(self, value: float) -> None:
         """Set the density property."""
         self._cards[1].set_value("density", value)
+
+    @property
+    def pr(self) -> typing.Optional[float]:
+        """Get or set the Poissons ratio.
+        """ # nopep8
+        return self._cards[1].get_value("pr")
+
+    @pr.setter
+    def pr(self, value: float) -> None:
+        """Set the pr property."""
+        self._cards[1].set_value("pr", value)
 
     @property
     def k(self) -> typing.Optional[float]:
@@ -315,7 +328,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def mtype(self) -> int:
-        """Get or set the Material model (Only M37 is supported)
+        """Get or set the Only material models *MAT_036 and *MAT_037 are supported
         """ # nopep8
         return self._cards[2].get_value("mtype")
 
@@ -326,7 +339,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def unit(self) -> int:
-        """Get or set the Unit adopted in this simulation. This unit is used to obtain proper punch velocity, acceleration, time step, and material properties
+        """Get or set the Define a number between 1 and 10 (Table 0-4) to indicate the units used in this simulation.  This unit is used to obtain proper punch velocity, acceleration, time step, and material properties.
         """ # nopep8
         return self._cards[2].get_value("unit")
 
@@ -348,7 +361,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def gap(self) -> float:
-        """Get or set the The home gap between rigid tools (see notes below). If *BOUNDARY_PRESCRIBED_RIGID_BODY is defined, this parameter is ignored
+        """Get or set the The gap between rigid tools at their home position.  If *BOUNDARY_?PRESCRIBED_?RIGID_?BODY is user defined, this parameter is ignored.  The default is 1.1 x blank thickness.
         """ # nopep8
         return self._cards[2].get_value("gap")
 
@@ -359,7 +372,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def fs(self) -> float:
-        """Get or set the Friction coefficient. If contact is defined, this parameter is ignored
+        """Get or set the Friction coefficient (default is 0.10).  If the contact (*CONTACT) is user defined, this parameter is ignored.
         """ # nopep8
         return self._cards[2].get_value("fs")
 
@@ -396,7 +409,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def vx(self) -> float:
-        """Get or set the vector components of the described punch moving direction. The default direction is defined by VID
+        """Get or set the Vector components defining the direction of the punch movement.  The default direction is defined by VID.
         """ # nopep8
         return self._cards[3].get_value("vx")
 
@@ -407,7 +420,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def vy(self) -> float:
-        """Get or set the vector components of the described punch moving direction. The default direction is defined by VID
+        """Get or set the Vector components defining the direction of the punch movement.  The default direction is defined by VID.
         """ # nopep8
         return self._cards[3].get_value("vy")
 
@@ -418,7 +431,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def vz(self) -> float:
-        """Get or set the vector components of the described punch moving direction. The default direction is defined by VID
+        """Get or set the Vector components defining the direction of the punch movement.  The default direction is defined by VID.
         """ # nopep8
         return self._cards[3].get_value("vz")
 
@@ -429,7 +442,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def vid(self) -> typing.Optional[int]:
-        """Get or set the VID is the vector ID describing the punch moving direction.  The vector defined in VID overrides the vector defined in (VX,VY,VZ). If neither VID nor (VX,VY,VZ) is not defined, the punch is assumed to move in the negative z direction
+        """Get or set the Vector ID defining the direction of the punch movement.  This variable overrides the vector components (VX, VY,VZ).  If VID and (VX, VY,VZ) are undefined, the punch is assumed to move in the negative z-direction.
         """ # nopep8
         return self._cards[3].get_value("vid")
 
@@ -451,7 +464,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def lvlada(self) -> typing.Optional[int]:
-        """Get or set the Maximum levels of adaptivity for the blank
+        """Get or set the Maximum adaptive level.
         """ # nopep8
         return self._cards[4].get_value("lvlada")
 
@@ -462,7 +475,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def sizeada(self) -> typing.Optional[float]:
-        """Get or set the Minimum element size for adaptivity
+        """Get or set the Minimum element size permitted in the adaptive meshy
         """ # nopep8
         return self._cards[4].get_value("sizeada")
 
@@ -473,7 +486,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def timsada(self) -> int:
-        """Get or set the Total number of adaptivities in this forming simulation
+        """Get or set the Total number of adaptive steps during the forming simulation.
         """ # nopep8
         return self._cards[4].get_value("timsada")
 
@@ -484,7 +497,7 @@ class ControlFormingTemplate(KeywordBase):
 
     @property
     def d3plt(self) -> int:
-        """Get or set the The total number of d3plot output
+        """Get or set the The total number of output states in the D3PLOT database
         """ # nopep8
         return self._cards[4].get_value("d3plt")
 

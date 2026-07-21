@@ -22,6 +22,7 @@
 
 # Auto-generated imports for chemistry domain
 
+from .chemistry_battery import ChemistryBattery
 from .chemistry_composition import ChemistryComposition
 from .chemistry_control_0d import ChemistryControl0D
 from .chemistry_control_1d import ChemistryControl1D

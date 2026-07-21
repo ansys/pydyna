@@ -105,22 +105,21 @@ class ElementSeatbeltAccelerometer(KeywordBase):
     @property
     def igrav(self) -> int:
         """Get or set the Gravitational accelerations due to body force loads.
-        EQ.-6:  Z and X components removed from acceleration output
-        EQ.-5   Y and Z components removed from acceleration output
-        EQ.-4:  X and Y components removed from acceleration output
-        EQ.-3:  Z component removed from acceleration output
-        EQ.-2:  Y component removed from acceleration output
-        EQ.-1:  X component removed from acceleration output
-        EQ. 0:  all components included in acceleration output
-        EQ. 1:  all components removed from acceleration output.
+        EQ.-6: Z and X components removed from acceleration output
+        EQ.-5 Y and Z components removed from acceleration output
+        EQ.-4: X and Y components removed from acceleration output
+        EQ.-3: Z component removed from acceleration output
+        EQ.-2: Y component removed from acceleration output
+        EQ.-1: X component removed from acceleration output
+        EQ. 0: all components included in acceleration output
+        EQ. 1: all components removed from acceleration output.
+        GT.1: IGRAV is a curve ID defining the gravitation-flag versus time. The ordinate values, representing the gravitation-flag, can be -6, -5, -4, -3, -2, -1, 0 or 1, as described above. For example, a curve with 4 data points of (0.,1), (10.,1), (10.000001,0), (200.,0) sets the gravitation flag to be 1 when time <= 10, and 0 when time > 10.  In other words, all components of gravitational accelerations are removed when time <= 10., and then included when time >10.0.
         """ # nopep8
         return self._cards[0].get_value("igrav")
 
     @igrav.setter
     def igrav(self, value: int) -> None:
         """Set the igrav property."""
-        if value not in [0, -6, -5, -5, -3, -1, 1, None]:
-            raise Exception("""igrav must be `None` or one of {0,-6,-5,-5,-3,-1,1}.""")
         self._cards[0].set_value("igrav", value)
 
     @property

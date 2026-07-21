@@ -40,12 +40,12 @@ _MATSPOTWELDDAIMLERCHRYSLER_CARD0 = (
 
 _MATSPOTWELDDAIMLERCHRYSLER_CARD1 = (
     FieldSchema("efail", float, 0, 10, None),
-    FieldSchema("unused", float, 10, 10, None),
-    FieldSchema("unused", float, 20, 10, None),
-    FieldSchema("unused", float, 30, 10, None),
-    FieldSchema("unused", float, 40, 10, None),
-    FieldSchema("unused", float, 50, 10, None),
-    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
     FieldSchema("nf", float, 70, 10, None),
 )
 
@@ -57,6 +57,14 @@ _MATSPOTWELDDAIMLERCHRYSLER_CARD2 = (
     FieldSchema("con_id", int, 40, 10, None),
     FieldSchema("rfiltf", float, 50, 10, None),
     FieldSchema("jtol", float, 60, 10, None),
+    FieldSchema("dmgopt", int, 70, 10, None),
+)
+
+_MATSPOTWELDDAIMLERCHRYSLER_CARD3 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("ttopt", int, 30, 10, None),
 )
 
 _MATSPOTWELDDAIMLERCHRYSLER_OPTION0_CARD0 = (
@@ -87,6 +95,10 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _MATSPOTWELDDAIMLERCHRYSLER_CARD2,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MATSPOTWELDDAIMLERCHRYSLER_CARD3,
                 **kwargs,
             ),
             OptionCardSet(
@@ -124,7 +136,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @property
     def e(self) -> typing.Optional[float]:
-        """Get or set the Young's modulus: LT.0.0:	|"E"| is the Young's modulus. E < 0 invokes uniaxial stress for solid spot welds with the transverse stresses assumed to be zero. See Remark 1.
+        """Get or set the Young's modulus: LT.0.0: |"E"| is the Young's modulus. E < 0 invokes uniaxial stress for solid spot welds with the transverse stresses assumed to be zero. See Remark 1.
         This is for when the keyword option is unset (<BLANK>) only..
         """ # nopep8
         return self._cards[0].get_value("e")
@@ -169,7 +181,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @property
     def efail(self) -> typing.Optional[float]:
-        """Get or set the Effective plastic strain in weld material at failure.  The spot weld element is deleted when the plastic strain at each integration point exceeds EFAIL.  If zero, failure due to effective plastic strain is not considered.
+        """Get or set the Effective plastic strain in weld material at failure. The spot weld element is deleted when the plastic strain at each integration point exceeds EFAIL. If zero, failure due to effective plastic strain is not considered.
         """ # nopep8
         return self._cards[1].get_value("efail")
 
@@ -191,7 +203,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @property
     def rs(self) -> typing.Optional[float]:
-        """Get or set the Rupture strain.  See Remark 2
+        """Get or set the Rupture strain. See Remark 2
         """ # nopep8
         return self._cards[2].get_value("rs")
 
@@ -203,8 +215,8 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
     @property
     def asff(self) -> typing.Optional[int]:
         """Get or set the Weld assembly simultaneous failure flag (see Remark 4):
-        EQ.0:	Damaged elements fail individually.
-        EQ.1 : Damaged elements fail when first reaches failure criterion.
+        EQ.0: Damaged elements fail individually.
+        EQ.1: Damaged elements fail when first reaches failure criterion.
         """ # nopep8
         return self._cards[2].get_value("asff")
 
@@ -215,7 +227,7 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
 
     @property
     def true_t(self) -> typing.Optional[float]:
-        """Get or set the True weld thickness for single hexahedron solid weld elements. See Remark 3
+        """Get or set the True weld thickness for single hexahedron solid weld elements. Note that the behavior of TRUE_T depends on TTOPT. See Remark 8 on *MAT_SPOTWELD.
         """ # nopep8
         return self._cards[2].get_value("true_t")
 
@@ -258,15 +270,41 @@ class MatSpotweldDaimlerchrysler(KeywordBase):
         self._cards[2].set_value("jtol", value)
 
     @property
+    def dmgopt(self) -> typing.Optional[int]:
+        """Get or set the Damage option flag:
+        EQ. - 1: Flag to include Card 3.1 for additional damage fields.
+        """ # nopep8
+        return self._cards[2].get_value("dmgopt")
+
+    @dmgopt.setter
+    def dmgopt(self, value: int) -> None:
+        """Set the dmgopt property."""
+        self._cards[2].set_value("dmgopt", value)
+
+    @property
+    def ttopt(self) -> typing.Optional[int]:
+        """Get or set the Options for TRUE_T / weld failure behavior:
+        EQ.0: TRUE_T behavior of version R9 and later(see Remark 8)
+        EQ.1: TRUE_T behavior of version R8 and earlier(see Remark 8)
+        EQ.2: Weld failure is invariant with respect to the node numbering of weld elements.For this case, there is no need for the TRUE_T correction.We recommend using this option with TRUE_T set to 0.0.See Remark 9 on *MAT_SPOTWELD.
+        """ # nopep8
+        return self._cards[3].get_value("ttopt")
+
+    @ttopt.setter
+    def ttopt(self, value: int) -> None:
+        """Set the ttopt property."""
+        self._cards[3].set_value("ttopt", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[3].cards[0].get_value("title")
+        return self._cards[4].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[3].cards[0].set_value("title", value)
+        self._cards[4].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

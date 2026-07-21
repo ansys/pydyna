@@ -30,7 +30,6 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _MAT318_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
     FieldSchema("ro", float, 10, 10, None),
-    FieldSchema("roflg", int, 20, 10, None),
 )
 
 _MAT318_CARD1 = (
@@ -129,19 +128,6 @@ class Mat318(KeywordBase):
     def ro(self, value: float) -> None:
         """Set the ro property."""
         self._cards[0].set_value("ro", value)
-
-    @property
-    def roflg(self) -> typing.Optional[int]:
-        """Get or set the Flag for whether density is specified per unit area or volume:
-        EQ.0:	Density is per unit volume(default).
-        EQ.1 : Density is per unit area for controlling the mass of cohesive elements with an initial volume of zero
-        """ # nopep8
-        return self._cards[0].get_value("roflg")
-
-    @roflg.setter
-    def roflg(self, value: int) -> None:
-        """Set the roflg property."""
-        self._cards[0].set_value("roflg", value)
 
     @property
     def mua(self) -> typing.Optional[float]:

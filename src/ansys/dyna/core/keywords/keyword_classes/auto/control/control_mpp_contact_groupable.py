@@ -27,7 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _CONTROLMPPCONTACTGROUPABLE_CARD0 = (
-    FieldSchema("grp", int, 0, 10, 1),
+    FieldSchema("grp", int, 0, 10, None),
 )
 
 class ControlMppContactGroupable(KeywordBase):
@@ -46,19 +46,19 @@ class ControlMppContactGroupable(KeywordBase):
             ),
         ]
     @property
-    def grp(self) -> int:
+    def grp(self) -> typing.Optional[int]:
         """Get or set the The sum of these available options (in any combination that makes sense):
-        1: Turn on GROUPABLE for all non-tied contacts
-        2: Turn on GROUPABLE for all tied contacts
-        4: Turn off GROUPABLE for all non-tied contacts
-        8: Turn off GROUPABLE for all tied contacts.
+        EQ.1: Turn on GROUPABLE for all non - tied contacts.This flag does not apply to segment-to-segment contact(SOFT = 2).
+        EQ.2: Turn on GROUPABLE for all tied contacts
+        EQ.4: Turn off GROUPABLE for all non - tied contacts.This flag does not apply to segment-to-segment contact(SOFT = 2).
+        EQ.8: Turn off GROUPABLE for all tied contacts.
+        EQ.16: Turn on GROUPABLE for segment-to-segment contact(SOFT = 2).
+        GRP overrides the setting of GRPABLE on the MPP Cards of *CONTACT_..._MPP for GRPABLE >= 0.
         """ # nopep8
         return self._cards[0].get_value("grp")
 
     @grp.setter
     def grp(self, value: int) -> None:
         """Set the grp property."""
-        if value not in [1, 2, 4, 8, None]:
-            raise Exception("""grp must be `None` or one of {1,2,4,8}.""")
         self._cards[0].set_value("grp", value)
 

@@ -32,7 +32,9 @@ _ICFDCONTROLDEMCOUPLING_CARD0 = (
     FieldSchema("dt", float, 20, 10, 1e+28),
     FieldSchema("sf", float, 30, 10, 1.0),
     FieldSchema("maxvel", float, 40, 10, None),
-    FieldSchema("dtype", int, 50, 10, None),
+    FieldSchema("dtype", int, 50, 10, 0),
+    FieldSchema("sff", float, 60, 10, 1.0),
+    FieldSchema("form", int, 70, 10, 1),
 )
 
 class IcfdControlDemCoupling(KeywordBase):
@@ -52,7 +54,7 @@ class IcfdControlDemCoupling(KeywordBase):
         ]
     @property
     def ctype(self) -> int:
-        """Get or set the Indicates the coupling direction to the solver.
+        """Get or set the Indicates the coupling direction of the solver.
         EQ.0:two-way coupling between the fluid and the solidEQ.
         EQ.1:one-way coupling:The DEM particles transfer their location to the fluid solver.
         EQ.2:one-way coupling. The fluid solver transfers forces to the DEM particles.
@@ -111,15 +113,43 @@ class IcfdControlDemCoupling(KeywordBase):
         self._cards[0].set_value("maxvel", value)
 
     @property
-    def dtype(self) -> typing.Optional[int]:
-        """Get or set the Drag calculation type :
-        EQ.0:	Constant C_d value 0.5 scaled by SF.
-        EQ.1 : Morrison formula for C_d calculation based on local Reynolds number value scaled by SF.
+    def dtype(self) -> int:
+        """Get or set the Drag calculation type:
+        EQ.0: Constant C_d value 0.5 scaled by SF.
+        EQ.1: Formula for C_d calculation from Cheng 2009 based on the local Reynolds number value scaled by SF.
         """ # nopep8
         return self._cards[0].get_value("dtype")
 
     @dtype.setter
     def dtype(self, value: int) -> None:
         """Set the dtype property."""
+        if value not in [0, 1, None]:
+            raise Exception("""dtype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dtype", value)
+
+    @property
+    def sff(self) -> float:
+        """Get or set the Scale factor applied to the force transmitted by the structure to the fluid
+        """ # nopep8
+        return self._cards[0].get_value("sff")
+
+    @sff.setter
+    def sff(self, value: float) -> None:
+        """Set the sff property."""
+        self._cards[0].set_value("sff", value)
+
+    @property
+    def form(self) -> int:
+        """Get or set the Type of formulation used in the coupling:
+        EQ.0: The force at the particle is based on a velocity drag value
+        EQ.1: The force is computed using the fluid pressure gradient
+        """ # nopep8
+        return self._cards[0].get_value("form")
+
+    @form.setter
+    def form(self, value: int) -> None:
+        """Set the form property."""
+        if value not in [1, 0, None]:
+            raise Exception("""form must be `None` or one of {1,0}.""")
+        self._cards[0].set_value("form", value)
 

@@ -149,9 +149,9 @@ class ControlStagedConstruction(KeywordBase):
 
     @property
     def itime(self) -> int:
-        """Get or set the Treatment of “Real Time” on *DEFINE_‌CONSTRUCTION_‌STAGES (see Remark 9):
-        EQ.0:	Real Time is ignored.
-        EQ.1:	Time in output files (d3plot, d3thdt, binout…) is converted to Real Time
+        """Get or set the Treatment of Real Time on *DEFINE_CONSTRUCTION_STAGES (see Remark 9):
+        EQ.0: Real Time is ignored.
+        EQ.1: Time in output files (d3plot, d3thdt, binout) is converted to Real Time
         """ # nopep8
         return self._cards[1].get_value("itime")
 
@@ -165,8 +165,8 @@ class ControlStagedConstruction(KeywordBase):
     @property
     def idynain(self) -> int:
         """Get or set the Flag to control output of dynain file at the end of every stage
-        EQ.0:	write dynain file
-        EQ.1:	do not write dynain file .
+        EQ.0: write dynain file
+        EQ.1: do not write dynain file .
         """ # nopep8
         return self._cards[1].get_value("idynain")
 

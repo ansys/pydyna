@@ -61,7 +61,7 @@ class DualceseMatGas(KeywordBase):
 
     @property
     def c1(self) -> float:
-        """Get or set the Two coefficients in the Sutherland’s formula for viscosity
+        """Get or set the Two coefficients in the Sutherlands formula for viscosity
         """ # nopep8
         return self._cards[0].get_value("c1")
 
@@ -72,7 +72,7 @@ class DualceseMatGas(KeywordBase):
 
     @property
     def c2(self) -> float:
-        """Get or set the Two coefficients in the Sutherland’s formula for viscosity
+        """Get or set the Two coefficients in the Sutherlands formula for viscosity
         """ # nopep8
         return self._cards[0].get_value("c2")
 

@@ -27,7 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _CONTROLMPPDECOMPOSITIONNUMPROC_CARD0 = (
-    FieldSchema("i", int, 0, 10, None),
+    FieldSchema("n", int, 0, 10, None),
 )
 
 class ControlMppDecompositionNumproc(KeywordBase):
@@ -46,13 +46,13 @@ class ControlMppDecompositionNumproc(KeywordBase):
             ),
         ]
     @property
-    def i(self) -> typing.Optional[int]:
+    def n(self) -> typing.Optional[int]:
         """Get or set the The number of processors for decomposition.
         """ # nopep8
-        return self._cards[0].get_value("i")
+        return self._cards[0].get_value("n")
 
-    @i.setter
-    def i(self, value: int) -> None:
-        """Set the i property."""
-        self._cards[0].set_value("i", value)
+    @n.setter
+    def n(self, value: int) -> None:
+        """Set the n property."""
+        self._cards[0].set_value("n", value)
 

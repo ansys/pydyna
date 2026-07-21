@@ -73,7 +73,7 @@ class InterfaceCompensationNewAccelerator(KeywordBase):
 
     @property
     def toly(self) -> float:
-        """Get or set the Part deviation tolerance between current blank and target blank	shape in global y-direction.
+        """Get or set the Part deviation tolerance between current blank and target blank shape in global y-direction.
         """ # nopep8
         return self._cards[0].get_value("toly")
 
@@ -84,7 +84,7 @@ class InterfaceCompensationNewAccelerator(KeywordBase):
 
     @property
     def tolz(self) -> float:
-        """Get or set the Part deviation tolerance between current blank and target blank	shape in global z-direction.
+        """Get or set the Part deviation tolerance between current blank and target blank shape in global z-direction.
         """ # nopep8
         return self._cards[0].get_value("tolz")
 

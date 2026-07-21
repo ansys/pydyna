@@ -63,6 +63,8 @@ _CONSTRAINEDJOINTSTIFFNESSTRANSLATIONAL_CARD3 = (
     FieldSchema("psdy", float, 30, 10, None),
     FieldSchema("nsdz", float, 40, 10, None),
     FieldSchema("psdz", float, 50, 10, None),
+    FieldSchema("fs", float, 60, 10, None),
+    FieldSchema("fd", float, 70, 10, None),
 )
 
 class ConstrainedJointStiffnessTranslational(KeywordBase):
@@ -368,6 +370,28 @@ class ConstrainedJointStiffnessTranslational(KeywordBase):
     def psdz(self, value: float) -> None:
         """Set the psdz property."""
         self._cards[3].set_value("psdz", value)
+
+    @property
+    def fs(self) -> typing.Optional[float]:
+        """Get or set the 
+        """ # nopep8
+        return self._cards[3].get_value("fs")
+
+    @fs.setter
+    def fs(self, value: float) -> None:
+        """Set the fs property."""
+        self._cards[3].set_value("fs", value)
+
+    @property
+    def fd(self) -> typing.Optional[float]:
+        """Get or set the 
+        """ # nopep8
+        return self._cards[3].get_value("fd")
+
+    @fd.setter
+    def fd(self, value: float) -> None:
+        """Set the fd property."""
+        self._cards[3].set_value("fd", value)
 
     @property
     def lcidx_link(self) -> typing.Optional[DefineCurve]:

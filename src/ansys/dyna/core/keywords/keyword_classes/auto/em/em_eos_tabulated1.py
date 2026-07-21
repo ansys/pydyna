@@ -64,7 +64,7 @@ class EmEosTabulated1(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve Id. The load curve describes the electrical conductivity (ordinate) vs the temperature (abscissa). The user needs to make sure the temperature and the electrical conductivity given by the load curve are in the correct units. Also, it is advised to give some bounds to the load curve (conductivities at very low and very high temperatures) to avoid bad extrapolations of the conductivity if the temperature gets out of the load curve bounds.
+        """Get or set the Load curve Id.
         """ # nopep8
         return self._cards[0].get_value("lcid")
 

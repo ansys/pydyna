@@ -96,7 +96,7 @@ class Mat156(KeywordBase):
 
     @property
     def ro(self) -> typing.Optional[float]:
-        """Get or set the Material density in the initial undeformed configuration.  .
+        """Get or set the Material density in the initial undeformed configuration. .
         """ # nopep8
         return self._cards[0].get_value("ro")
 
@@ -107,7 +107,7 @@ class Mat156(KeywordBase):
 
     @property
     def sno(self) -> typing.Optional[float]:
-        """Get or set the Initial stretch ratio,  , i.e., the current length as defined by the nodal points at t=0 divided by the initial length.  The density for the nodal mass calculation is RO/SNO, or  .
+        """Get or set the Initial stretch ratio,  , i.e., the current length as defined by the nodal points at t=0 divided by the initial length. The density for the nodal mass calculation is RO/SNO, or  .
         """ # nopep8
         return self._cards[0].get_value("sno")
 
@@ -151,7 +151,7 @@ class Mat156(KeywordBase):
 
     @property
     def cer(self) -> typing.Optional[float]:
-        """Get or set the Constant, governing the exponential rise of SSP.  Required if SSP=0.
+        """Get or set the Constant, governing the exponential rise of SSP. Required if SSP=0.
         """ # nopep8
         return self._cards[0].get_value("cer")
 
@@ -186,7 +186,7 @@ class Mat156(KeywordBase):
 
     @property
     def sfr(self) -> typing.Optional[float]:
-        """Get or set the Scale factor for strain rate maximum vs. the stretch ratio,  .
+        """Get or set the Scale factor for strain rate maximum vs. the stretch ratio.
         LT.0: absolute value gives load curve ID
         GE.0: constant value of 1.0 is used
         """ # nopep8
@@ -199,7 +199,7 @@ class Mat156(KeywordBase):
 
     @property
     def svs(self) -> typing.Optional[float]:
-        """Get or set the Active dimensionless tensile stress vs. the stretch ratio,  .
+        """Get or set the Active dimensionless tensile stress vs. the stretch ratio.
         LT.0: absolute value gives load curve ID
         GE.0: constant value of 1.0 is used
         """ # nopep8
@@ -212,7 +212,7 @@ class Mat156(KeywordBase):
 
     @property
     def svr(self) -> typing.Optional[float]:
-        """Get or set the Active dimensionless tensile stress vs. the normalized strain rate,  .
+        """Get or set the Active dimensionless tensile stress vs. the normalized strain rate.
         LT.0: absolute value gives load curve ID
         GE.0: constant value of 1.0 is used.
         """ # nopep8
@@ -225,7 +225,7 @@ class Mat156(KeywordBase):
 
     @property
     def ssp(self) -> typing.Optional[float]:
-        """Get or set the Isometric dimensionless stress vs. the stretch ratio,   for the parallel elastic element.
+        """Get or set the Isometric dimensionless stress vs. the stretch ratio, for the parallel elastic element.
         LT.0: absolute value gives load curve ID
         EQ.0: exponential function is used (see below)
         GT.0: constant value of 0.0 is used

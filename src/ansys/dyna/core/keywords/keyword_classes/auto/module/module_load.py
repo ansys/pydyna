@@ -78,7 +78,7 @@ class ModuleLoad(KeywordBase):
 
     @property
     def filename(self) -> typing.Optional[str]:
-        """Get or set the File name of the library to be loaded, 80 characters maximum. If the file name has no path component, LS-DYNA will search in all directories specified in *MODULE_PATH first. If not found and the file name starts with �+� (a plus sign), LS-DYNA will continue to search all directories specified in the system environment variable LD_LIBRARY_PATH..
+        """Get or set the File name of the library to be loaded, 80 characters maximum. If the file name has no path component, LS-DYNA will search in all directories specified in *MODULE_PATH first. If not found and the file name starts with + (a plus sign), LS-DYNA will continue to search all directories specified in the system environment variable LD_LIBRARY_PATH..
         """ # nopep8
         return self._cards[1].get_value("filename")
 

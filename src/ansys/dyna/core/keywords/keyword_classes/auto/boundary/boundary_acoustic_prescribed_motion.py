@@ -68,9 +68,9 @@ class BoundaryAcousticPrescribedMotion(KeywordBase):
     @property
     def vad(self) -> typing.Optional[int]:
         """Get or set the Velocity/acceleration/displacement flag (see Remark 2):
-        EQ.0:	Velocity
-        EQ.1 : Acceleration
-        EQ.2 : Displacement.
+        EQ.0: Velocity
+        EQ.1: Acceleration
+        EQ.2: Displacement.
         """ # nopep8
         return self._cards[0].get_value("vad")
 

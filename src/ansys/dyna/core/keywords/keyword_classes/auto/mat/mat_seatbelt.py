@@ -148,23 +148,23 @@ class MatSeatbelt(KeywordBase):
 
     @property
     def cse(self) -> float:
-        """Get or set the Optional compressive stress elimination option which applies to shell elements only (default 0.0):
-        EQ.0.0:	eliminate compressive stresses in shell fabric
-        EQ.1.0:	don't eliminate compressive stresses.  This option should not be used if retractors and sliprings are present in the model.
-        EQ.2.0:	whether or not compressive stress is eliminated is decided by ls-dyna automatically, recommended for shell belt.
+        """Get or set the Compressive stress elimination option for nonzero FORM that applies to shell elements only (see Remark 6):
+        EQ.0.0: Don't eliminate compressive stresses in the shell fabric.
+        EQ.1.0 : Eliminate compressive stresses in the shell fabric.
+        Note that for FORM = 0, the solver automatically determines whether or not to eliminate the compressive stresses.
         """ # nopep8
         return self._cards[0].get_value("cse")
 
     @cse.setter
     def cse(self, value: float) -> None:
         """Set the cse property."""
-        if value not in [0.0, 1.0, 2.0, None]:
-            raise Exception("""cse must be `None` or one of {0.0,1.0,2.0}.""")
+        if value not in [0.0, 1.0, None]:
+            raise Exception("""cse must be `None` or one of {0.0,1.0}.""")
         self._cards[0].set_value("cse", value)
 
     @property
     def damp(self) -> typing.Optional[float]:
-        """Get or set the Optional Rayleigh damping coefficient, which applies to shell elements only.  A coefficient value of 0.10 is the default corresponding to 10% of critical damping.  Sometimes smaller or larger values work better.
+        """Get or set the Optional Rayleigh damping coefficient, which applies to shell elements only. A coefficient value of 0.10 is the default corresponding to 10% of critical damping. Sometimes smaller or larger values work better.
         """ # nopep8
         return self._cards[0].get_value("damp")
 

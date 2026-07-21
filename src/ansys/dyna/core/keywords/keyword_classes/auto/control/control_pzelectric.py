@@ -54,8 +54,8 @@ class ControlPzelectric(KeywordBase):
     @property
     def solver(self) -> int:
         """Get or set the Piezoelectric solver type:
-        EQ.11:	Direct solver
-        EQ.12 : Diagonal scaling conjugate gradient iterative, recommended for MPP for better scalability
+        EQ.11: Direct solver
+        EQ.12: Diagonal scaling conjugate gradient iterative, recommended for MPP for better scalability
         """ # nopep8
         return self._cards[0].get_value("solver")
 
@@ -69,8 +69,8 @@ class ControlPzelectric(KeywordBase):
     @property
     def msgitr(self) -> int:
         """Get or set the Output iteration message level for SOLVER = 12:
-        EQ.0:	No output(default)
-        EQ.1 : Summary information
+        EQ.0: No output(default)
+        EQ.1: Summary information
         """ # nopep8
         return self._cards[0].get_value("msgitr")
 
@@ -84,7 +84,7 @@ class ControlPzelectric(KeywordBase):
     @property
     def maxitr(self) -> int:
         """Get or set the Maximum number of iterations for SOLVER = 12.
-        EQ.0:	Use default value 100.
+        EQ.0: Use default value 100.
         """ # nopep8
         return self._cards[0].get_value("maxitr")
 
@@ -96,7 +96,7 @@ class ControlPzelectric(KeywordBase):
     @property
     def abstol(self) -> float:
         """Get or set the Absolute convergence tolerance, for SOLVER =12.
-        EQ.0.0:	Use default value 10 - 20.
+        EQ.0.0: Use default value 10 - 20.
         """ # nopep8
         return self._cards[0].get_value("abstol")
 
@@ -108,7 +108,7 @@ class ControlPzelectric(KeywordBase):
     @property
     def reltol(self) -> int:
         """Get or set the Relative convergence tolerance, for SOLVER = 12.
-        EQ.0.0:	Use default value 10 - 10.
+        EQ.0.0: Use default value 10 - 10.
         """ # nopep8
         return self._cards[0].get_value("reltol")
 
@@ -120,7 +120,7 @@ class ControlPzelectric(KeywordBase):
     @property
     def ndtrfk(self) -> int:
         """Get or set the Reform the dielectric stiffness matrix for every NDTRFK time steps.
-        LT.0:	Curve |NDTRFK | defines the stiffness reformation time step as a function of time.
+        LT.0: Curve |NDTRFK | defines the stiffness reformation time step as a function of time.
         """ # nopep8
         return self._cards[0].get_value("ndtrfk")
 
@@ -132,8 +132,8 @@ class ControlPzelectric(KeywordBase):
     @property
     def epzmsg(self) -> int:
         """Get or set the Flag to determine if electric flux and electric field at the element center of piezoelectric material is output to d3plot:
-        EQ.0:	No electric flux or electric field output to d3plot
-        EQ.1 : x, y,and z strain slots in d3plot store the electric flux along the x, y,and z directions, respectively.xy, yz,and zx strain slots in d3plot store the electric field along the x, y,and z directions, respectively
+        EQ.0: No electric flux or electric field output to d3plot
+        EQ.1: x, y,and z strain slots in d3plot store the electric flux along the x, y,and z directions, respectively.xy, yz,and zx strain slots in d3plot store the electric field along the x, y,and z directions, respectively
         """ # nopep8
         return self._cards[0].get_value("epzmsg")
 

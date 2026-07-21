@@ -333,7 +333,9 @@ class MatSteinberg(KeywordBase):
 
     @property
     def flag(self) -> float:
-        """Get or set the Set to 1.0 for mu coefficients for the cold compression energy fit. Default is nu.
+        """Get or set the Flag for cold compression energy fit (see Remarks 2 and 4):
+        EQ.0.0: nu coefficients(default)
+        EQ.1.0: mu coefficients
         """ # nopep8
         return self._cards[2].get_value("flag")
 

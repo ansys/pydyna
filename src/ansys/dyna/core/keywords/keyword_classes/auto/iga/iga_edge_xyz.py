@@ -28,7 +28,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _IGAEDGEXYZ_CARD0 = (
     FieldSchema("eid", int, 0, 10, None),
-    FieldSchema("nid", int, 10, 10, None),
+    FieldSchema("patchid", int, 10, 10, None),
     FieldSchema("ori", int, 20, 10, 0),
     FieldSchema("pidstart", int, 30, 10, None),
     FieldSchema("pidend", int, 40, 10, None),
@@ -62,21 +62,21 @@ class IgaEdgeXyz(KeywordBase):
         self._cards[0].set_value("eid", value)
 
     @property
-    def nid(self) -> typing.Optional[int]:
-        """Get or set the Physical univariate NURBS ID, see *IGA_1D_NURBS_XYZ.
+    def patchid(self) -> typing.Optional[int]:
+        """Get or set the Physical univariate NURBS patch ID, see *IGA_1D_NURBS_XYZ.
         """ # nopep8
-        return self._cards[0].get_value("nid")
+        return self._cards[0].get_value("patchid")
 
-    @nid.setter
-    def nid(self, value: int) -> None:
-        """Set the nid property."""
-        self._cards[0].set_value("nid", value)
+    @patchid.setter
+    def patchid(self, value: int) -> None:
+        """Set the patchid property."""
+        self._cards[0].set_value("patchid", value)
 
     @property
     def ori(self) -> int:
         """Get or set the Orientation with respect to the parametric univariate NURBS.
         EQ. 0:Same(default)
-        EQ.1 : Reversed.
+        EQ.1: Reversed.
         """ # nopep8
         return self._cards[0].get_value("ori")
 
@@ -89,9 +89,7 @@ class IgaEdgeXyz(KeywordBase):
 
     @property
     def pidstart(self) -> typing.Optional[int]:
-        """Get or set the Parametric point ID defining the start of the trimmed physical NURBS. If
-        PIDSTART = 0, the physical univariate NURBS is not trimmed at its start,
-        see Remark 1 and Remark 2.
+        """Get or set the Parametric point ID defining the start of the trimmed physical NURBS. If PIDSTART = 0, the physical univariate NURBS is not trimmed at its start,see Remark 1 and Remark 2.
         """ # nopep8
         return self._cards[0].get_value("pidstart")
 
@@ -102,9 +100,7 @@ class IgaEdgeXyz(KeywordBase):
 
     @property
     def pidend(self) -> typing.Optional[int]:
-        """Get or set the Parametric point ID defining the end of the trimmed physical NURBS. If
-        PIDEND = 0, the physical univariate NURBS is not trimmed at its end, see
-        Remark 1 and Remark 2.
+        """Get or set the Parametric point ID defining the end of the trimmed physical NURBS. If PIDEND = 0, the physical univariate NURBS is not trimmed at its end, see Remark 1 and Remark 2.
         """ # nopep8
         return self._cards[0].get_value("pidend")
 
@@ -115,8 +111,7 @@ class IgaEdgeXyz(KeywordBase):
 
     @property
     def psid(self) -> typing.Optional[int]:
-        """Get or set the Parametric point set ID, see *IGA_POINT_UVW and
-        * SET_IGA_POINT_UVW, see Remark 3.
+        """Get or set the Parametric point set ID, see *IGA_POINT_UVW and *SET_IGA_POINT_UVW, see Remark 3.
         """ # nopep8
         return self._cards[0].get_value("psid")
 

@@ -172,8 +172,8 @@ class Mat122(KeywordBase):
     @property
     def hr(self) -> float:
         """Get or set the Hardening rule:
-        EQ.1.0: linear (default),
-        EQ.2.0: exponential.
+        EQ.1.0: Not applicable.
+        EQ.2.0: Not applicable.
         EQ3.0: load curve.
         """ # nopep8
         return self._cards[0].get_value("hr")
@@ -220,7 +220,7 @@ class Mat122(KeywordBase):
 
     @property
     def lc00(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID for the yield curve in the 0° direction
+        """Get or set the Load curve ID for the yield curve in the 0 degree direction
         """ # nopep8
         return self._cards[1].get_value("lc00")
 
@@ -232,8 +232,8 @@ class Mat122(KeywordBase):
     @property
     def iconv(self) -> typing.Optional[int]:
         """Get or set the Convexity option:
-        EQ.0.0:	convexity of the yield surface is not enforced.
-        EQ.1.0 : convexity of the yield surface is enforced.
+        EQ.0.0: convexity of the yield surface is not enforced.
+        EQ.1.0: convexity of the yield surface is enforced.
         """ # nopep8
         return self._cards[1].get_value("iconv")
 
@@ -244,7 +244,7 @@ class Mat122(KeywordBase):
 
     @property
     def lc90(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID for the yield curve in the 90° direction
+        """Get or set the Load curve ID for the yield curve in the 90 degree direction
         """ # nopep8
         return self._cards[1].get_value("lc90")
 
@@ -255,7 +255,7 @@ class Mat122(KeywordBase):
 
     @property
     def lc45(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID for the yield curve in the 45° direction
+        """Get or set the Load curve ID for the yield curve in the 45 degree direction
         """ # nopep8
         return self._cards[1].get_value("lc45")
 
@@ -267,8 +267,8 @@ class Mat122(KeywordBase):
     @property
     def lcex(self) -> typing.Optional[int]:
         """Get or set the Absolute value is load curve ID for the yield curve in shear or biaxial:
-        GT.0.0:	shear yield is provided
-        LT.0.0 : biaxial yield is provided
+        GT.0.0: Shear yield is provided
+        LT.0.0: Biaxial yield is provided
         """ # nopep8
         return self._cards[1].get_value("lcex")
 
@@ -280,13 +280,13 @@ class Mat122(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[int]:
         """Get or set the Material axes option:
-        EQ.0.0: locally orthotropic with material axes determined by
+        EQ.0.0: Locally orthotropic with material axes determined by
         element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
-        EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
-        EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
-        LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
-        *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
+        EQ.3.0: Locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
+        *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR).
         """ # nopep8
         return self._cards[2].get_value("aopt")
 

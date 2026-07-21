@@ -300,12 +300,12 @@ class Mat058Solid(KeywordBase):
 
     @property
     def ea(self) -> typing.Optional[float]:
-        """Get or set the GT.0.0:	E_a, Young’s modulus - longitudinal direction
-        LT.0.0:	Load Curve ID or Table ID = (-EA).See Remark 8.
+        """Get or set the GT.0.0: E_a, Young's modulus - longitudinal direction
+        LT.0.0: Load Curve ID or Table ID = (-EA).See Remark 8.
         Load Curve.When - EA is equal to a load curve ID, it is taken as defining the uniaxial elastic stress as a function of strain behavior in the longitudinal direction.Negative data
         points correspond to compression and positive values to tension.
-        Tabular Data.When - EA is equal to a table ID, it defines for each strain rate value a load curve ID giving the uniaxial elastic stress as a function of strain behavior in the longitudinal direction.
-        Logarithmically Defined Tables.If the first uniaxial elastic stress as a function of strain curve in the table corresponds to a negative strain rate, LS - DYNA assumes that the natural logarithm of the strain rate value is used for all stress - strain curves.
+        Tabular Data.When - EA is equal to a table ID, it defines a load curve ID for each strain rate value. load curves gives the uniaxial elastic stress as a function of strain behavior in the longitudinal direction.
+        Logarithmically Defined Tables.Suppose the first uniaxial elastic stress as a function of strain curve in the table corresponds to a negative strain rate. In that case, LS - DYNA assumes that the natural logarithm of the strain rate value is used for all stress - strain curves.
         """ # nopep8
         return self._cards[0].get_value("ea")
 
@@ -316,11 +316,11 @@ class Mat058Solid(KeywordBase):
 
     @property
     def eb(self) -> typing.Optional[float]:
-        """Get or set the GT.0.0:	E_b, Young’s modulus - transverse direction
-        LT.0.0:	Load Curve ID or Table ID = (-EB).See Remark 8.
+        """Get or set the GT.0.0: E_b, Young's modulus - transverse direction
+        LT.0.0: Load Curve ID or Table ID = (-EB).See Remark 8.
         Load Curve.When - EB is equal to a load curve ID, it is taken as defining the uniaxial elastic stress as a function of strain behavior in the transverse direction.Negative data points correspond to compression and positive values to tension.
-        Tabular Data.When - EB is equal to a table ID, it defines for each strain rate value a load curve ID giving the uniaxial elastic stress as a function of strain behavior in the transverse direction.
-        Logarithmically Defined Tables.If the first uniaxial elastic stress as a function of strain curve in the table corresponds to a negative strain rate, LS - DYNA assumes that the natural logarithm of the strain rate value is used for all stress - strain curves.
+        Tabular Data.When - EB corresponds to a table ID, it specifies a load curved ID for each strain rate value. The a load curve ID gives the uniaxial elastic stress as a function of strain behavior in the transverse direction.
+        Logarithmically Defined Tables.Suppose the first uniaxial elastic stress as a function of strain curve in the table corresponds to a negative strain rate. In that case, LS - DYNA assumes that the natural logarithm of the strain rate value is used for all stress - strain curves.
         """ # nopep8
         return self._cards[0].get_value("eb")
 
@@ -331,12 +331,12 @@ class Mat058Solid(KeywordBase):
 
     @property
     def ec(self) -> typing.Optional[float]:
-        """Get or set the E_c, Young’s modulus - normal direction (used only by thick shells and solids).  See Remark 6.
-        GT.0.0:	E_c, Young’s modulus - normal direction
-        LT.0.0 : Load Curve ID or Table ID = (-EC) (solids only).See Remark 8.
+        """Get or set the E_c, Young's modulus - normal direction (used only by thick shells and solids). See Remark 6.
+        GT.0.0: E_c, Young's modulus - normal direction
+        LT.0.0: Load Curve ID or Table ID = (-EC) (solids only).See Remark 8.
         Load Curve.When - EC is equal to a load curve ID, it is taken as defining the uniaxial elastic stress as a function of strain behavior in the transverse direction.Negative data points correspond to compression and positive values to tension.
-        Tabular Data.When - EC is equal to a table ID, it defines for each strain rate value a load curve ID giving the uniaxial elastic stress as a function of strain behavior in the transverse direction.
-        Logarithmically Defined Tables.If the first uniaxial elastic stress as a function of strain curve in the table corresponds to a negative strain rate, LS - DYNA assumes that the natural logarithm of the strain rate value is used for all stress - strain curves.
+        Tabular Data.When - EC corresponds to a table ID, it specifies a load curve ID for each strain rate value. The a load curve ID gives the uniaxial elastic stress as a function of strain behavior in the transverse direction.
+        Logarithmically Defined Tables. Suppose the first uniaxial elastic stress as a function of strain curve in the table corresponds to a negative strain rate. In that case, LS - DYNA assumes that the natural logarithm of the strain rate value is used for all stress - strain curves.
         """ # nopep8
         return self._cards[0].get_value("ec")
 
@@ -358,7 +358,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def tau1(self) -> typing.Optional[float]:
-        """Get or set the tau-1, stress limit of the first slightly nonlinear part of the of the shear stress versus shear strain curve. The values tau-1 and gamma-1 are used to define a curve of shear stress versus shear strain. These values are input if FS, defined below, is set to a value of -1.
+        """Get or set the _1, stress limit of the first slightly nonlinear part of the shear stress as a function of shear strain curve. The values _1 and _1 help define a shear stress as a function of shear strain curve. Input these values if you set FS to -1 (see Card 3).
         """ # nopep8
         return self._cards[0].get_value("tau1")
 
@@ -380,10 +380,10 @@ class Mat058Solid(KeywordBase):
 
     @property
     def gab(self) -> typing.Optional[float]:
-        """Get or set the GT.0.0:	G_ab, shear modulus in the ab-direction
-        LT.0.0:	Load Curve ID or Table ID = (-GAB)
-        Load Curve.When - GAB is equal to a load curve ID, it is taken as defining the elastic shear stress as a function of she strain behavior in the ab - direction.
-        Tabular Data.When - GAB is equal to a table ID, it defines for each strain rate value a load curve ID giving the elastic shear stress as a function of shear strain behavior in the ab - direction.
+        """Get or set the GT.0.0: G_ab, shear modulus in the ab-direction
+        LT.0.0: Load Curve ID or Table ID = (-GAB)
+        Load Curve.When - GAB is equal to a load curve ID, it is taken as defining the elastic shear stress as a function of shear strain behavior in the ab - direction.
+        Tabular Data.When - GAB corresponds to a table ID, it defines a load curve ID for each strain rate value.The load curves give the elastic shear stress as a function of shear strain behavior in the ab - direction.
         Logarithmically Defined Tables.If the first elastic shear stress as a function of shear strain curve in the table corresponds to a negative strain rate, LS - DYNA assumes that the natural logarithm of the strain rate value is used for all shear stress - shear strain curves.
         """ # nopep8
         return self._cards[1].get_value("gab")
@@ -395,10 +395,10 @@ class Mat058Solid(KeywordBase):
 
     @property
     def gbc(self) -> typing.Optional[float]:
-        """Get or set the GT.0.0:	G_bc, shear modulus in the cb-direction
-        LT.0.0:	Load Curve ID or Table ID = (-GBC) (solids only)
+        """Get or set the GT.0.0: G_bc, shear modulus in the cb-direction
+        LT.0.0: Load Curve ID or Table ID = (-GBC) (solids only)
         Load Curve.When - GBC is equal to a load curve ID, it is taken as defining the elastic shear stress as a function of shear strain behavior in the bc - direction.
-        Tabular Data.When - GBC is equal to a table ID, it defines for each strain rate value a load curve ID giving the elastic shear stress as a function of shear strain behavior in the bc - direction.
+        Tabular Data.When - GBC corresponds to a table ID, it defines a load curve ID for each strain rate value.The load curves give the elastic shear stress as a function of shear strain behavior in the bc - direction.
         Logarithmically Defined Tables.If the first elastic shear stress as a function of shear strain curve in the table corresponds to a negative strain rate, LS - DYNA assumes that the natural logarithm of the strain rate value is used for all shear stress - shear strain curves.
         """ # nopep8
         return self._cards[1].get_value("gbc")
@@ -410,10 +410,10 @@ class Mat058Solid(KeywordBase):
 
     @property
     def gca(self) -> typing.Optional[float]:
-        """Get or set the GT.0.0:	G_ca, shear modulus in the ca-direction
-        LT.0.0:	Load Curve ID or Table ID = (-GCA) (solids only)
+        """Get or set the GT.0.0: G_ca, shear modulus in the ca-direction
+        LT.0.0: Load Curve ID or Table ID = (-GCA) (solids only)
         Load Curve.When - GCA is equal to a load curve ID, it is taken as defining the elastic shear stress as a function of shear strain behavior in the ca - direction.
-        Tabular Data.When - GCA is equal to a table ID, it defines for each strain rate value a load curve ID giving the elastic shear stress as a function of shear strain behavior in the ca - direction.
+        Tabular Data.When - GCA refers to a table ID, it defines a load curve ID for each strain rate value.The load curves give the elastic shear stress as a function of shear strain behavior in the ca - direction.
         Logarithmically Defined Tables.If the first elastic shear stress as a function of shear strain curve in the table corresponds to a negative strain rate, LS - DYNA assumes that the natural logarithm of the strain rate value is used for all shear stress - shear strain curves.
         """ # nopep8
         return self._cards[1].get_value("gca")
@@ -480,14 +480,13 @@ class Mat058Solid(KeywordBase):
 
     @property
     def aopt(self) -> typing.Optional[float]:
-        """Get or set the Material axes option:
-        EQ.0.0: locally orthotropic with material axes determined by
-        element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
-        EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
-        EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
-        LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
-        *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
+        """Get or set the Material axes option (see *MAT_002 for a more complete description):
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes as shown in Figure 0 - 1. For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
+        EQ.1.0: Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors a and d input below, as with *DEFINE_COORDINATE_VECTOR
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element (see Figure 0-1). The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively. Thus, for solid elements, AOPT = 3 is only available for hexahedrons. a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a, and c is the normal vector. Then an angle BETA, which you set in the elements keyword input or the input for this keyword, rotates a and b about c.
+        EQ.4.0: Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
+        LT.0.0: | AOPT | is a coordinate system ID(see *DEFINE_COORDINATE_OPTION).
         """ # nopep8
         return self._cards[2].get_value("aopt")
 
@@ -745,7 +744,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def lcdfail(self) -> typing.Optional[int]:
-        """Get or set the Load-Curve ID, that defines orientation dependent failure strains.
+        """Get or set the Load curve ID, which defines orientation dependent failure strains.
         The ordinate values in the load-curve define the various failure strains, in the following order:
         1. EF_11T: tensile failure strain in longitudinal a-direction
         2. EF_11C: compressive failure strain in longitudinal a-direction
@@ -756,8 +755,7 @@ class Mat058Solid(KeywordBase):
         7. EF_33C: compressive failure strain in transverse c-direction
         8. EF_23: out-of plane shear failure strain in bc-plane
         9. EF_31: out-of plane shear failure strain in ca-plane
-        Thus, the load-curve to define these values has to have either 5 (shells) or 9 (solids) entries in its definition.
-        A load-curve definition with 9 entries may be used for shells, ignoring the last 4 entries. The abscissa values are ignored.
+        Thus, the load curve to define these values must have either five (shells) or nine (solids) entries in its definition. You may input a load curve with nine entries for shells, but LS-DYNA ignores the last four entries. The ignored abscissa values need to be ascending, such as 1.0, 2.0, , 9.0.
         """ # nopep8
         return self._cards[4].get_value("lcdfail")
 
@@ -1010,7 +1008,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def tau2(self) -> typing.Optional[float]:
-        """Get or set the τ_2, stress limit of the first slightly nonlinear part of the shear stress as a function of shear strain curve.  The values τ_2 and γ_2 are used to define a curve of shear stress as a function of shear strain.  These values are input if FS, defined in Card 3, is set to a value of -1 (bc-plane).
+        """Get or set the _2, stress limit of the first slightly nonlinear part of the shear stress as a function of shear strain curve. The values _2 and _2 are used to define a shear stress as a function of shear strain curve. Input these values if FS = -1 (see Card 3). These values are for the bc-plane.
         """ # nopep8
         return self._cards[9].get_value("tau2")
 
@@ -1021,7 +1019,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def gamma2(self) -> typing.Optional[float]:
-        """Get or set the γ_2, strain limit of the first slightly nonlinear part of the shear stress as a function of engineering shear strain curve (bc-plane).
+        """Get or set the Gamma_2, strain limit of the first slightly nonlinear part of the shear stress as a function of engineering shear strain curve (bc-plane).
         """ # nopep8
         return self._cards[9].get_value("gamma2")
 
@@ -1032,7 +1030,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def tau3(self) -> typing.Optional[float]:
-        """Get or set the τ_3, stress limit of the first slightly nonlinear part of the shear stress as a function of shear strain curve.  The values τ_3 and γ_3 are used to define a curve of shear stress as a function of shear strain.  These values are input if FS, defined in Card 3, is set to a value of -1 (ca-plane).
+        """Get or set the _3, stress limit of the first slightly nonlinear part of the shear stress as a function of shear strain curve. The values _3 and _3 help define a shear stress as a function of shear strain curve. Input these values if FS = -1 on Card 3 (ca-plane).
         """ # nopep8
         return self._cards[9].get_value("tau3")
 
@@ -1043,7 +1041,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def gamma3(self) -> typing.Optional[float]:
-        """Get or set the γ_3, strain limit of the first slightly nonlinear part of the shear stress as a function of engineering shear strain curve (bc-plane).
+        """Get or set the Gamma_3, strain limit of the first slightly nonlinear part of the shear stress as a function of engineering shear strain curve (bc-plane).
         """ # nopep8
         return self._cards[9].get_value("gamma3")
 
@@ -1054,7 +1052,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def lcxc(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining longitudinal compressive strength XC vs. strain rate (XC is ignored with that option). If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as natural logarithm of the strain rate.
+        """Get or set the Load curve ID defining longitudinal compressive strength XC as a function of strain rate (XC is ignored with that option). If the first strain rate value in the curve is negative, LS-DYNA assumes that you input all the strain rate values as the natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[10].get_value("lcxc")
 
@@ -1065,7 +1063,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def lcxt(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining longitudinal tensile strength XT vs. strain rate (XT is ignored with that option) If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as natural logarithm of the strain rate.
+        """Get or set the Load curve ID defining longitudinal tensile strength XT as a function of strain rate (XT is ignored with this option). If the first strain rate value in the curve is negative, LS-DYNA assumes that you input all the strain rate values as the natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[10].get_value("lcxt")
 
@@ -1076,7 +1074,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def lcyc(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining transverse compressive strength YC vs. strain rate (YC is ignored with that option) If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as natural logarithm of the strain rate.
+        """Get or set the Load curve ID defining transverse compressive strength YC as a function of strain rate (YC is ignored with this option). If the first strain rate value in the curve is negative, LS-DYNA assumes that you input all the strain rate values as the natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[10].get_value("lcyc")
 
@@ -1087,7 +1085,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def lcyt(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining transverse tensile strength YT vs. strain rate (YT is ignored with that option) If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as natural logarithm of the strain rate.
+        """Get or set the Load curve ID defining transverse tensile strength YT as a function of strain rate (YT is ignored with this option). If the first strain rate value in the curve is negative, LS-DYNA assumes that you input all the strain rate values as the natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[10].get_value("lcyt")
 
@@ -1098,7 +1096,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def lcsc(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining shear strength SC vs. strain rate (SC is ignored with that option) If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as natural logarithm of the strain rate.
+        """Get or set the Load curve ID defining shear strength SC as a function of strain rate (SC is ignored with this option). If the first strain rate value in the curve is negative, LS-DYNA assumes that you input all the strain rate values as the natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[10].get_value("lcsc")
 
@@ -1109,7 +1107,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def lctau(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining TAU1 vs. strain rate (TAU1 is ignored with that option). This value is only used for FS = -1. If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as natural logarithm of the strain rate.
+        """Get or set the Load curve ID defining TAU1 as a function of strain rate (TAU1 is ignored with this option). This value is only used for FS = -1. If the first strain rate value in the curve is negative, LS-DYNA assumes that you input all the strain rate values as the natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[10].get_value("lctau")
 
@@ -1120,7 +1118,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def lcgam(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining GAMMA1 vs. strain rate (GAMMA1 is ignored with that option). This value is only used for FS = -1. If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as natural logarithm of the strain rate.
+        """Get or set the Load curve ID defining GAMMA1 as a function of strain rate (GAMMA1 is ignored with this option). This value is only used for FS = -1. If the first strain rate value in the curve is negative, LS-DYNA assumes that you input all the strain rate values as the natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[10].get_value("lcgam")
 
@@ -1131,9 +1129,9 @@ class Mat058Solid(KeywordBase):
 
     @property
     def dt(self) -> typing.Optional[float]:
-        """Get or set the Strain rate averaging option.
+        """Get or set the Strain rate averaging option:
         EQ.0.0: Strain rate is evaluated using a running average.
-        LT.0.0: Strain rate is evaluated using average of last 11 time steps.
+        LT.0.0: Strain rate is evaluated using the average over the last 11 time steps.
         GT.0.0: Strain rate is averaged over the last DT time units.
         """ # nopep8
         return self._cards[10].get_value("dt")
@@ -1145,7 +1143,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def lce11c(self) -> int:
-        """Get or set the Load curve ID defining E11C vs. strain rate (E11C is ignored with that option) If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as natural logarithm of the strain rate.
+        """Get or set the Load curve ID defining E11C as a function of strain rate (E11C is ignored with this option). If the first strain rate value in the curve is negative, LS-DYNA assumes that you input all the strain rate values as the natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[11].get_value("lce11c")
 
@@ -1156,7 +1154,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def lce11t(self) -> int:
-        """Get or set the Load curve ID defining E11T vs. strain rate (E11T is ignored with that option) If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as natural logarithm of the strain rate.
+        """Get or set the Load curve ID defining E11T as a function of strain rate (E11T is ignored with this option). If the first strain rate value in the curve is negative, LS-DYNA assumes that you input all the strain rate values as the natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[11].get_value("lce11t")
 
@@ -1167,7 +1165,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def lce22c(self) -> int:
-        """Get or set the Load curve ID defining E22C vs. strain rate (E22C is ignored with that option) If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as natural logarithm of the strain rate.
+        """Get or set the Load curve ID defining E22C as a function of strain rate (E22C is ignored with this option). If the first strain rate value in the curve is negative, LS-DYNA assumes that you input all the strain rate values as the natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[11].get_value("lce22c")
 
@@ -1178,7 +1176,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def lce22t(self) -> int:
-        """Get or set the Load curve ID defining E22T vs. strain rate (E22T is ignored with that option) If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as natural logarithm of the strain rate.
+        """Get or set the Load curve ID defining E22T as a function of strain rate (E22T is ignored with this option). If the first strain rate value in the curve is negative, LS-DYNA assumes that you input all the strain rate values as the natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[11].get_value("lce22t")
 
@@ -1189,7 +1187,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def lcgms(self) -> int:
-        """Get or set the Load curve ID defining GMS vs. strain rate (GMS is ignored with that option) If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as natural logarithm of the strain rate.
+        """Get or set the Load curve ID defining GMS as a function of strain rate (GMS is ignored with this option). If the first strain rate value in the curve is negative, LS-DYNA assumes that you input all the strain rate values as the natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[11].get_value("lcgms")
 
@@ -1200,7 +1198,7 @@ class Mat058Solid(KeywordBase):
 
     @property
     def lcefs(self) -> int:
-        """Get or set the Load curve ID defining ERODS as a function of strain rate (ERODS is ignored with this option). The full strain tensor is used to compute the equivalent strain (new option). If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as natural logarithm of the strain rate.
+        """Get or set the Load curve ID defining ERODS as a function of strain rate (ERODS is ignored with this option). LS-DYNA uses the full strain tensor to compute the equivalent strain. If the first strain rate value in the curve is negative, LS-DYNA assumes that you input all the strain rate values as the natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[11].get_value("lcefs")
 

@@ -96,8 +96,8 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
 
     @property
     def pid(self) -> typing.Optional[int]:
-        """Get or set the Part ID of the target part onto which the source model’s results in FILENAME will be mapped.
-        LT.0:	part ID of the target part is | PID | and the normals of the target part are flipped before mapping.A negative PID would be used if the target part’s normals were oriented exactly opposite those of the source part.
+        """Get or set the Part ID of the target part onto which the source models results in FILENAME will be mapped.
+        LT.0: part ID of the target part is | PID | and the normals of the target part are flipped before mapping.A negative PID would be used if the target parts normals were oriented exactly opposite those of the source part.
         """ # nopep8
         return self._cards[1].get_value("pid")
 
@@ -120,8 +120,8 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
     @property
     def pstrn(self) -> int:
         """Get or set the Flag to map effective plastic strain.  Currently setting this flag with any integer will map the effective plastic strain, and there is no other option.
-        EQ.0:	map effective plastic strain.
-        NE.0 : do not map effective plastic strain.
+        EQ.0: map effective plastic strain.
+        NE.0: do not map effective plastic strain.
         """ # nopep8
         return self._cards[1].get_value("pstrn")
 
@@ -132,9 +132,9 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
 
     @property
     def strain(self) -> int:
-        """Get or set the Flag to map the strain tensor.  Currently setting this flag with any integer will map the tensorial strains, and there is no other option available.  Note “STRFLG” in *DATABASE_‌EXTENT_‌BINARY must be set to “1” for output to d3plot as well as dynain files.
-        EQ.0:	map strain tensor.
-        NE.0 : do not map strain tensor
+        """Get or set the Flag to map the strain tensor.  Currently setting this flag with any integer will map the tensorial strains, and there is no other option available.  Note STRFLG in *DATABASE_EXTENT_BINARY must be set to 1 for output to d3plot as well as dynain files.
+        EQ.0: map strain tensor.
+        NE.0: do not map strain tensor
         """ # nopep8
         return self._cards[1].get_value("strain")
 
@@ -145,9 +145,9 @@ class IncludeStampedPartSolidToSolid(KeywordBase):
 
     @property
     def stress(self) -> int:
-        """Get or set the Flag to map stress tensor.  Currently setting this flag with any integer will map the stresses and history variables, and there is no other option available.  Only the history variables included in the dynain file specified by FILENAME are mapped; see “NSHV” in *INTERFACE_‌SPRINGBACK_‌LSDYNA for control of history variable output to dynain.
-        EQ.0:	map stress tensor and history variables.
-        NE.0 : do not map stress tensorand history variables
+        """Get or set the Flag to map stress tensor.  Currently setting this flag with any integer will map the stresses and history variables, and there is no other option available.  Only the history variables included in the dynain file specified by FILENAME are mapped; see NSHV in *INTERFACE_SPRINGBACK_LSDYNA for control of history variable output to dynain.
+        EQ.0: map stress tensor and history variables.
+        NE.0: do not map stress tensorand history variables
         """ # nopep8
         return self._cards[1].get_value("stress")
 

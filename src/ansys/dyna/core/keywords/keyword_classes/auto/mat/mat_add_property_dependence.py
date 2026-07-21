@@ -85,7 +85,7 @@ class MatAddPropertyDependence(KeywordBase):
 
     @property
     def prop(self) -> typing.Optional[str]:
-        """Get or set the Name of the property (same as the variable for a material model in keyword card). For example, “E” is used for Young’s modulus in *MAT_‌ELASTIC
+        """Get or set the Name of the property (same as the variable for a material model in keyword card). For example, E is used for Young's modulus in *MAT_ELASTIC
         """ # nopep8
         return self._cards[0].get_value("prop")
 

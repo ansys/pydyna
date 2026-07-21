@@ -28,8 +28,11 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _CESEMAT002_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
-    FieldSchema("mu", float, 10, 10, None),
-    FieldSchema("prnd", float, 20, 10, 0.72),
+    FieldSchema("mu0", float, 10, 10, 0.001716),
+    FieldSchema("smu", float, 10, 10, 111.0),
+    FieldSchema("k0", float, 10, 10, 0.0241),
+    FieldSchema("sk", float, 10, 10, 194.0),
+    FieldSchema("t0", float, 10, 10, 273.0),
 )
 
 class CeseMat002(KeywordBase):
@@ -59,24 +62,69 @@ class CeseMat002(KeywordBase):
         self._cards[0].set_value("mid", value)
 
     @property
-    def mu(self) -> typing.Optional[float]:
-        """Get or set the Fluid dynamic viscosity. For Air at 15  C, MU = 1.81E-5 kg/m.s.
+    def mu0(self) -> float:
+        """Get or set the Two coefficients appearing in the equation derived by combining Sutherland's formula with the power law for dilute gases:
+        u / u_0 = (T / T_0) ** (3?2)  (T_0 + S_u) / (T + S_u)   .
+        u_0 is a reference value,and S_u is an effective temperature called the Sutherland constant, which is characteristic of the gas.For air at moderate temperatures,
+        u_0 = 1.716x10 ** (-5)  Ns ?m ** 2 ,S_u = 111 K
         """ # nopep8
-        return self._cards[0].get_value("mu")
+        return self._cards[0].get_value("mu0")
 
-    @mu.setter
-    def mu(self, value: float) -> None:
-        """Set the mu property."""
-        self._cards[0].set_value("mu", value)
+    @mu0.setter
+    def mu0(self, value: float) -> None:
+        """Set the mu0 property."""
+        self._cards[0].set_value("mu0", value)
 
     @property
-    def prnd(self) -> float:
-        """Get or set the The Prandtl Number (used to determine the coefficient of thermal conductivity). It is approximately constant for most gases. For air at standard conditions PRND = 0.72.
+    def smu(self) -> float:
+        """Get or set the Two coefficients appearing in the equation derived by combining Sutherland's formula with the power law for dilute gases:
+        u / u_0 = (T / T_0) ** (3?2)  (T_0 + S_u) / (T + S_u)   .
+        u_0 is a reference value,and S_u is an effective temperature called the Sutherland constant, which is characteristic of the gas.For air at moderate temperatures,
+        u_0 = 1.716x10 ** (-5)  Ns ?m ** 2 ,S_u = 111 K
         """ # nopep8
-        return self._cards[0].get_value("prnd")
+        return self._cards[0].get_value("smu")
 
-    @prnd.setter
-    def prnd(self, value: float) -> None:
-        """Set the prnd property."""
-        self._cards[0].set_value("prnd", value)
+    @smu.setter
+    def smu(self, value: float) -> None:
+        """Set the smu property."""
+        self._cards[0].set_value("smu", value)
+
+    @property
+    def k0(self) -> float:
+        """Get or set the Two coefficients appearing in the equation derived by combining Sutherland's formula with the power law for dilute gases:
+        k / k_0 = (T / T_0) ** (3?2)  (T_0 + S_k) / (T + S_k)   .
+        Here k is the thermal conductivity, k_0 is a reference value,and S_k is the Sutherland constant, which is characteristic of the gas.For air at moderate temperatures,
+        k_0 = 0.0241  W ?m ,S_k = 194 K
+        """ # nopep8
+        return self._cards[0].get_value("k0")
+
+    @k0.setter
+    def k0(self, value: float) -> None:
+        """Set the k0 property."""
+        self._cards[0].set_value("k0", value)
+
+    @property
+    def sk(self) -> float:
+        """Get or set the Two coefficients appearing in the equation derived by combining Sutherland's formula with the power law for dilute gases:
+        k / k_0 = (T / T_0) ** (3?2)  (T_0 + S_k) / (T + S_k)   .
+        Here k is the thermal conductivity, k_0 is a reference value,and S_k is the Sutherland constant, which is characteristic of the gas.For air at moderate temperatures,
+        k_0 = 0.0241  W ?m ,S_k = 194 K
+        """ # nopep8
+        return self._cards[0].get_value("sk")
+
+    @sk.setter
+    def sk(self, value: float) -> None:
+        """Set the sk property."""
+        self._cards[0].set_value("sk", value)
+
+    @property
+    def t0(self) -> float:
+        """Get or set the Reference temperature, T_0. The default value (273.0) is for air, in degrees K.
+        """ # nopep8
+        return self._cards[0].get_value("t0")
+
+    @t0.setter
+    def t0(self, value: float) -> None:
+        """Set the t0 property."""
+        self._cards[0].set_value("t0", value)
 

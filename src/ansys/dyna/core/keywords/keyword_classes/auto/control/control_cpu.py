@@ -28,7 +28,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _CONTROLCPU_CARD0 = (
     FieldSchema("cputim", float, 0, 10, 0.0),
-    FieldSchema("iglst", int, 0, 10, 0),
+    FieldSchema("iglst", int, 10, 10, 0),
 )
 
 class ControlCpu(KeywordBase):
@@ -61,8 +61,8 @@ class ControlCpu(KeywordBase):
     @property
     def iglst(self) -> int:
         """Get or set the Flag for outputting CPU and elapsed times in the glstat file:
-        EQ.0:	no
-        EQ.1 : yes
+        EQ.0: no
+        EQ.1: yes
         """ # nopep8
         return self._cards[0].get_value("iglst")
 

@@ -57,8 +57,9 @@ class IncludeNastran(KeywordBase):
         ]
     @property
     def filename(self) -> typing.Optional[str]:
-        """Get or set the File name of file to be included in this keyword file.
-        Maximum 80 charcters. If the STAMPED_PART option is active, this is the DYNAIN file containing the results from metal stamping.
+        """Get or set the File name of file to be included in this keyword file.Maximum 80 charcters.
+        STAMPED_PART: the option is active, this is the DYNAIN file containing the results from metal stamping.
+        ISPG: Name of file containing the information about the ISPG models. Only one file can be included for each keyword ('*') card.
         """ # nopep8
         return self._cards[0].get_value("filename")
 

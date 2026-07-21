@@ -27,7 +27,6 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
-from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATTAILOREDPROPERTIES_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -85,7 +84,7 @@ class MatTailoredProperties(KeywordBase):
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
-        "lcss": LinkType.DEFINE_CURVE,
+        "lcss": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -144,7 +143,7 @@ class MatTailoredProperties(KeywordBase):
 
     @property
     def e(self) -> typing.Optional[float]:
-        """Get or set the Young's modulus.
+        """Get or set the Young's modulus.Spatial variation is possible using history variable #8 or an external variable, see remarks.
         """ # nopep8
         return self._cards[0].get_value("e")
 
@@ -167,10 +166,9 @@ class MatTailoredProperties(KeywordBase):
     @property
     def fail(self) -> float:
         """Get or set the Failure flag.
-        LT.0.0: User defined failure subroutine, matusr_24 in dyn21.F, is
-        called to determine failure
-        EQ.0.0: Failure is not considered. This option is recommended if failure is not of interest since many calculations will be saved.
-        GT.0.0: Effective plastic strain to failure. When the plastic strain	reaches this value, the element is deleted from the calculation
+        LT.0.0: Call user defined failure subroutine, matusr_24 in dyn21.F, to determine failure
+        EQ.0.0: Do not consider failure. This option is recommended if failure is not of interest since many calculations will be saved.
+        GT.0.0: Effective plastic strain to failure. When the plastic strain reaches this value, the element is deleted from the calculation
         """ # nopep8
         return self._cards[0].get_value("fail")
 
@@ -192,10 +190,11 @@ class MatTailoredProperties(KeywordBase):
 
     @property
     def lcss(self) -> int:
-        """Get or set the Load curve ID or Table ID (see full description of MAT_024). Load
-        curve for stress vs. plastic strain. 2-D table for stress vs. plastic strain
-        as a function of strain rates. 3-D table for stress vs. plastic strain as a
-        function of strain rates as a function of history variable values (see HISVN).
+        """Get or set the Load curve ID or table ID
+        Load Curve.  When LCSS is a load curve ID, it is taken as defining stress as a function of effective plastic strain. If defined, EPS1 - EPS8 and ES1 - ES8 are ignored.
+        Tabular Data.  The table ID defines for each strain rate value a load curve ID giving the stress as a function effective plastic strain for that rate; see Figure 0-1.  When the strain rate falls below the minimum value, the stress as a function of effective plastic strain curve for the lowest value of strain rate is used.  Likewise, when the strain rate exceeds the maximum value the stress as a function of effective plastic strain curve for the highest value of strain rate is used.  EPS1 - EPS8 and ES1 - ES8 are ignored if a table ID is defined.  Linear interpolation between the discrete strain rates is used by default; logarithmic interpolation is used when the LOG_INTERPOLATION option is invoked.
+        Logarithmically Defined Tables.  Logarithmic interpolation between discrete strain rates is assumed if the first value in the table is negative, in which case LS-DYNA assumes that all the table values represent the natural logarithm of a strain rate.  Since the tables are internally discretized to equally space the table values, it makes good sense from an accuracy standpoint that the table values represent the natural log of strain rate when the lowest strain rate and highest strain rate differ by several orders of magnitude. There is some additional computational cost associated with invoking logarithmic interpolation.
+        Multi-Dimensional Tables.  Stress values can also depend on history variables (or external variables). The 3D table gives stress versus plastic strain as a function of strain rates as a function of one history variable (see HISVN) or one external variable. The 4D table gives stress versus plastic strain as a function of strain rates as a function of two history variable values (see HISVN) or two external variables
         """ # nopep8
         return self._cards[1].get_value("lcss")
 
@@ -432,17 +431,26 @@ class MatTailoredProperties(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcss_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcss."""
+    def lcss_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcss."""
         if self.deck is None:
             return None
+        field_value = self.lcss
+        if field_value is None or field_value == 0:
+            return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcss:
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
                 return kwd
         return None
 
     @lcss_link.setter
-    def lcss_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcss."""
-        self.lcss = value.lcid
+    def lcss_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcss."""
+        if hasattr(value, "lcid"):
+            self.lcss = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcss = value.tbid
 

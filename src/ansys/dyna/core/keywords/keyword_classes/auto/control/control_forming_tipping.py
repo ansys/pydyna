@@ -93,8 +93,8 @@ class ControlFormingTipping(KeywordBase):
     @property
     def itype(self) -> int:
         """Get or set the Type of PID (see remark 1):
-        EQ.0:  part set ID (PSID).
-        EQ.1:  part ID (PID)
+        EQ.0: part set ID (PSID).
+        EQ.1: part ID (PID)
 
         """ # nopep8
         return self._cards[0].get_value("itype")

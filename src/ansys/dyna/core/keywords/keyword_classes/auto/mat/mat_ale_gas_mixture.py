@@ -31,6 +31,7 @@ _MATALEGASMIXTURE_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
     FieldSchema("iadiab", int, 10, 10, 0),
     FieldSchema("runiv", float, 20, 10, None),
+    FieldSchema("pdv", int, 30, 10, None),
 )
 
 _MATALEGASMIXTURE_CARD1 = (
@@ -169,10 +170,9 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def iadiab(self) -> int:
-        """Get or set the This flag (default=0) is used to turn ON/OFF adiabatic compression logics for an ideal gas (remark 5).
-        EQ.0:  OFF (default)
-        EQ.1:  ON
-        .
+        """Get or set the Flag to turn on/off adiabatic compression logics for an ideal gas (remark 5).
+        EQ.0: OFF (default)
+        EQ.1: ON.
         """ # nopep8
         return self._cards[0].get_value("iadiab")
 
@@ -193,6 +193,17 @@ class MatAleGasMixture(KeywordBase):
     def runiv(self, value: float) -> None:
         """Set the runiv property."""
         self._cards[0].set_value("runiv", value)
+
+    @property
+    def pdv(self) -> typing.Optional[int]:
+        """Get or set the Using pressure work instead of gamma-law while performing element energy update. See Remark 6.
+        """ # nopep8
+        return self._cards[0].get_value("pdv")
+
+    @pdv.setter
+    def pdv(self, value: int) -> None:
+        """Set the pdv property."""
+        self._cards[0].set_value("pdv", value)
 
     @property
     def cvmass1(self) -> typing.Optional[float]:
@@ -372,7 +383,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def molwt1(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B):  Molecular weight of each ideal gas in the mixture (mass-unit/mole).
+        """Get or set the If RUNIV is nonzero (method B): Molecular weight of each ideal gas in the mixture (mass-unit/mole).
         """ # nopep8
         return self._cards[3].get_value("molwt1")
 
@@ -383,7 +394,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def molwt2(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B):  Molecular weight of each ideal gas in the mixture (mass-unit/mole).
+        """Get or set the If RUNIV is nonzero (method B): Molecular weight of each ideal gas in the mixture (mass-unit/mole).
         """ # nopep8
         return self._cards[3].get_value("molwt2")
 
@@ -394,7 +405,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def molwt3(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B):  Molecular weight of each ideal gas in the mixture (mass-unit/mole).
+        """Get or set the If RUNIV is nonzero (method B): Molecular weight of each ideal gas in the mixture (mass-unit/mole).
         """ # nopep8
         return self._cards[3].get_value("molwt3")
 
@@ -405,7 +416,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def molwt4(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B):  Molecular weight of each ideal gas in the mixture (mass-unit/mole).
+        """Get or set the If RUNIV is nonzero (method B): Molecular weight of each ideal gas in the mixture (mass-unit/mole).
         """ # nopep8
         return self._cards[3].get_value("molwt4")
 
@@ -416,7 +427,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def molwt5(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B):  Molecular weight of each ideal gas in the mixture (mass-unit/mole).
+        """Get or set the If RUNIV is nonzero (method B): Molecular weight of each ideal gas in the mixture (mass-unit/mole).
         """ # nopep8
         return self._cards[3].get_value("molwt5")
 
@@ -427,7 +438,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def molwt6(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B):  Molecular weight of each ideal gas in the mixture (mass-unit/mole).
+        """Get or set the If RUNIV is nonzero (method B): Molecular weight of each ideal gas in the mixture (mass-unit/mole).
         """ # nopep8
         return self._cards[3].get_value("molwt6")
 
@@ -438,7 +449,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def molwt7(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B):  Molecular weight of each ideal gas in the mixture (mass-unit/mole).
+        """Get or set the If RUNIV is nonzero (method B): Molecular weight of each ideal gas in the mixture (mass-unit/mole).
         """ # nopep8
         return self._cards[3].get_value("molwt7")
 
@@ -449,7 +460,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def molwt8(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B):  Molecular weight of each ideal gas in the mixture (mass-unit/mole).
+        """Get or set the If RUNIV is nonzero (method B): Molecular weight of each ideal gas in the mixture (mass-unit/mole).
         """ # nopep8
         return self._cards[3].get_value("molwt8")
 
@@ -460,7 +471,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def cpmole1(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B): Heat capacity at constant pressure for up to eight different gases in per-mole unit.  These are nominal heat capacity values typically at STP.  These are denoted by the variable "A" in the equation in remark 2.
+        """Get or set the If RUNIV is nonzero (method B): Heat capacity at constant pressure for up to eight different gases in per-mole unit. These are nominal heat capacity values typically at STP. These are denoted by the variable "A" in the equation in remark 2.
         """ # nopep8
         return self._cards[4].get_value("cpmole1")
 
@@ -471,7 +482,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def cpmole2(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B): Heat capacity at constant pressure for up to eight different gases in per-mole unit.  These are nominal heat capacity values typically at STP.  These are denoted by the variable "A" in the equation in remark 2.
+        """Get or set the If RUNIV is nonzero (method B): Heat capacity at constant pressure for up to eight different gases in per-mole unit. These are nominal heat capacity values typically at STP. These are denoted by the variable "A" in the equation in remark 2.
         """ # nopep8
         return self._cards[4].get_value("cpmole2")
 
@@ -482,7 +493,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def cpmole3(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B): Heat capacity at constant pressure for up to eight different gases in per-mole unit.  These are nominal heat capacity values typically at STP.  These are denoted by the variable "A" in the equation in remark 2.
+        """Get or set the If RUNIV is nonzero (method B): Heat capacity at constant pressure for up to eight different gases in per-mole unit. These are nominal heat capacity values typically at STP. These are denoted by the variable "A" in the equation in remark 2.
         """ # nopep8
         return self._cards[4].get_value("cpmole3")
 
@@ -493,7 +504,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def cpmole4(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B): Heat capacity at constant pressure for up to eight different gases in per-mole unit.  These are nominal heat capacity values typically at STP.  These are denoted by the variable "A" in the equation in remark 2.
+        """Get or set the If RUNIV is nonzero (method B): Heat capacity at constant pressure for up to eight different gases in per-mole unit. These are nominal heat capacity values typically at STP. These are denoted by the variable "A" in the equation in remark 2.
         """ # nopep8
         return self._cards[4].get_value("cpmole4")
 
@@ -504,7 +515,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def cpmole5(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B): Heat capacity at constant pressure for up to eight different gases in per-mole unit.  These are nominal heat capacity values typically at STP.  These are denoted by the variable "A" in the equation in remark 2.
+        """Get or set the If RUNIV is nonzero (method B): Heat capacity at constant pressure for up to eight different gases in per-mole unit. These are nominal heat capacity values typically at STP. These are denoted by the variable "A" in the equation in remark 2.
         """ # nopep8
         return self._cards[4].get_value("cpmole5")
 
@@ -515,7 +526,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def cpmole6(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B): Heat capacity at constant pressure for up to eight different gases in per-mole unit.  These are nominal heat capacity values typically at STP.  These are denoted by the variable "A" in the equation in remark 2.
+        """Get or set the If RUNIV is nonzero (method B): Heat capacity at constant pressure for up to eight different gases in per-mole unit. These are nominal heat capacity values typically at STP. These are denoted by the variable "A" in the equation in remark 2.
         """ # nopep8
         return self._cards[4].get_value("cpmole6")
 
@@ -526,7 +537,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def cpmole7(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B): Heat capacity at constant pressure for up to eight different gases in per-mole unit.  These are nominal heat capacity values typically at STP.  These are denoted by the variable "A" in the equation in remark 2.
+        """Get or set the If RUNIV is nonzero (method B): Heat capacity at constant pressure for up to eight different gases in per-mole unit. These are nominal heat capacity values typically at STP. These are denoted by the variable "A" in the equation in remark 2.
         """ # nopep8
         return self._cards[4].get_value("cpmole7")
 
@@ -537,7 +548,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def cpmole8(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B): Heat capacity at constant pressure for up to eight different gases in per-mole unit.  These are nominal heat capacity values typically at STP.  These are denoted by the variable"A" in the equation in remark 2.
+        """Get or set the If RUNIV is nonzero (method B): Heat capacity at constant pressure for up to eight different gases in per-mole unit. These are nominal heat capacity values typically at STP. These are denoted by the variable"A" in the equation in remark 2.
         """ # nopep8
         return self._cards[4].get_value("cpmole8")
 
@@ -548,7 +559,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def b1(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B): First order coefficient for a temperature dependent heat capacity at constant pressure for up to eight different gases.  These are denoted by the variable "B" in the equation in remark 2.
+        """Get or set the If RUNIV is nonzero (method B): First order coefficient for a temperature dependent heat capacity at constant pressure for up to eight different gases. These are denoted by the variable "B" in the equation in remark 2.
         """ # nopep8
         return self._cards[5].get_value("b1")
 
@@ -559,7 +570,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def b2(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B): First order coefficient for a temperature dependent heat capacity at constant pressure for up to eight different gases.  These are denoted by the variable "B" in the equation in remark 2.
+        """Get or set the If RUNIV is nonzero (method B): First order coefficient for a temperature dependent heat capacity at constant pressure for up to eight different gases. These are denoted by the variable "B" in the equation in remark 2.
         """ # nopep8
         return self._cards[5].get_value("b2")
 
@@ -570,7 +581,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def b3(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B): First order coefficient for a temperature dependent heat capacity at constant pressure for up to eight different gases.  These are denoted by the variable "B" in the equation in remark 2.
+        """Get or set the If RUNIV is nonzero (method B): First order coefficient for a temperature dependent heat capacity at constant pressure for up to eight different gases. These are denoted by the variable "B" in the equation in remark 2.
         """ # nopep8
         return self._cards[5].get_value("b3")
 
@@ -581,7 +592,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def b4(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B): First order coefficient for a temperature dependent heat capacity at constant pressure for up to eight different gases.  These are denoted by the variable "B" in the equation in remark 2.
+        """Get or set the If RUNIV is nonzero (method B): First order coefficient for a temperature dependent heat capacity at constant pressure for up to eight different gases. These are denoted by the variable "B" in the equation in remark 2.
         """ # nopep8
         return self._cards[5].get_value("b4")
 
@@ -592,7 +603,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def b5(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B): First order coefficient for a temperature dependent heat capacity at constant pressure for up to eight different gases.  These are denoted by the variable "B" in the equation in remark 2.
+        """Get or set the If RUNIV is nonzero (method B): First order coefficient for a temperature dependent heat capacity at constant pressure for up to eight different gases. These are denoted by the variable "B" in the equation in remark 2.
         """ # nopep8
         return self._cards[5].get_value("b5")
 
@@ -603,7 +614,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def b6(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B): First order coefficient for a temperature dependent heat capacity at constant pressure for up to eight different gases.  These are denoted by the variable "B" in the equation in remark 2.
+        """Get or set the If RUNIV is nonzero (method B): First order coefficient for a temperature dependent heat capacity at constant pressure for up to eight different gases. These are denoted by the variable "B" in the equation in remark 2.
         """ # nopep8
         return self._cards[5].get_value("b6")
 
@@ -614,7 +625,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def b7(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B): First order coefficient for a temperature dependent heat capacity at constant pressure for up to eight different gases.  These are denoted by the variable "B" in the equation in remark 2.
+        """Get or set the If RUNIV is nonzero (method B): First order coefficient for a temperature dependent heat capacity at constant pressure for up to eight different gases. These are denoted by the variable "B" in the equation in remark 2.
         """ # nopep8
         return self._cards[5].get_value("b7")
 
@@ -625,7 +636,7 @@ class MatAleGasMixture(KeywordBase):
 
     @property
     def b8(self) -> typing.Optional[float]:
-        """Get or set the If RUNIV is nonzero (method B): First order coefficient for a temperature dependent heat capacity at constant pressure for up to eight different gases.  These are denoted by the variable "B" in the equation in remark 2.
+        """Get or set the If RUNIV is nonzero (method B): First order coefficient for a temperature dependent heat capacity at constant pressure for up to eight different gases. These are denoted by the variable "B" in the equation in remark 2.
         """ # nopep8
         return self._cards[5].get_value("b8")
 

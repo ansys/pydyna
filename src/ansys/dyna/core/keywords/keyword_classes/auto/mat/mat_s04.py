@@ -85,7 +85,7 @@ class MatS04(KeywordBase):
 
     @property
     def lcd(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID (see *DEFINE_CURVE) describing force as a function of displacement or moment as a function of rotation relationship. The load curve must define the response in the negative and positive quadrants and pass through point Image.  Negative data point(s) must come first in the curve definition, where negative values represent compression in the case of a translational spring.
+        """Get or set the Load curve ID (see *DEFINE_CURVE) describing force as a function of displacement or moment as a function of rotation relationship. The load curve must define the response in the negative and positive quadrants and pass through point Image. Negative data point(s) must come first in the curve definition, where negative values represent compression in the case of a translational spring.
         LCD may also be a table ID (see *DEFINE_TABLE). The table gives for each loading rate a load curve ID defining the force-displacement (or moment-rotation) curve. Values between the data points are computed by linear interpolation. If a table ID is specified, LCR will be ignored.
         """ # nopep8
         return self._cards[0].get_value("lcd")

@@ -76,15 +76,14 @@ class LoadNodeSet(KeywordBase):
     @property
     def dof(self) -> int:
         """Get or set the Applicable degrees-of-freedom:
-        EQ.0: Not valid, please use any of the other available options,
-        EQ.1: x-direction of load action,
-        EQ.2: y-direction of load action,
-        EQ.3: z-direction of load action,
-        EQ.4: follower force,
-        EQ.5: moment about the x-axis,
-        EQ.6: moment about the y-axis,
-        EQ.7: moment about the z-axis,
-        EQ.8: follower moment.
+        EQ.1:	x - direction of load action.For a cylindrical or spherical system, this is the direction of the local radial degree of freedom r.
+        EQ.2 : y - direction of load action.For a cylindrical system, this is the direction of the local circumferential degree of freedom ?, and for a spherical system, it is the direction of the local latitude degree of freedom ?.
+        EQ.3 : z - direction of load action.For a cylindrical system, this is the direction of the local z - translational degree of freedom, and for a spherical system, it is the direction of the local longitude degree of freedom ?.
+        EQ.4 : Follower force(see Remark 2),
+        EQ.5 : Moment about the x - axis(see Remark 4).For a cylindrical or spherical system, this is the direction of the local radial degree of freedom r.
+        EQ.6 : Moment about the y - axis axis(see Remark 4).For a cylindrical system, this is the direction of the local circumferential degree of freedom ?, and for a spherical system, it is the direction of the local latitude degree of freedom ?.
+        EQ.7 : Moment about the z - axis axis(see Remark 4).For a cylindrical system, this is the direction of the local z - translational degree of freedom, and for a spherical system, it is the direction of the local longitude degree of freedom ?.
+        EQ.8 : Follower moment(see Remarks 2 and 4).
         """ # nopep8
         return self._cards[0].get_value("dof")
 

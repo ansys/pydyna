@@ -33,7 +33,7 @@ _EOSGRUNEISEN_CARD0 = (
     FieldSchema("s1", float, 20, 10, None),
     FieldSchema("s2", float, 30, 10, None),
     FieldSchema("s3", float, 40, 10, None),
-    FieldSchema("gamao", float, 50, 10, None),
+    FieldSchema("gamma0", float, 50, 10, None),
     FieldSchema("a", float, 60, 10, None),
     FieldSchema("e0", float, 70, 10, None),
 )
@@ -137,15 +137,15 @@ class EosGruneisen(KeywordBase):
         self._cards[0].set_value("s3", value)
 
     @property
-    def gamao(self) -> typing.Optional[float]:
+    def gamma0(self) -> typing.Optional[float]:
         """Get or set the 
         """ # nopep8
-        return self._cards[0].get_value("gamao")
+        return self._cards[0].get_value("gamma0")
 
-    @gamao.setter
-    def gamao(self, value: float) -> None:
-        """Set the gamao property."""
-        self._cards[0].set_value("gamao", value)
+    @gamma0.setter
+    def gamma0(self, value: float) -> None:
+        """Set the gamma0 property."""
+        self._cards[0].set_value("gamma0", value)
 
     @property
     def a(self) -> typing.Optional[float]:
@@ -182,11 +182,11 @@ class EosGruneisen(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID, which can be the ID of *DEFINE_‌CURVE,
-        *DEFINE_‌CURVE_‌FUNCTION or *DEFINE_‌FUNCTION, defining the energy deposition rate.
+        """Get or set the Load curve ID, which can be the ID of *DEFINE_CURVE,
+        *DEFINE_CURVE_FUNCTION or *DEFINE_FUNCTION, defining the energy deposition rate.
         If an energy leak rate is intended, do not specify a negative ordinate in LCID, rather,
         use the constant(s) in the equation of state, e.g., set GAMMA0 or/and A to a negative value.
-        If *DEFINE_‌FUNCTION is used, the input of the defined function is time.
+        If *DEFINE_FUNCTION is used, the input of the defined function is time.
         """ # nopep8
         return self._cards[1].get_value("lcid")
 

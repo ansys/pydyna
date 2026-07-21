@@ -58,7 +58,7 @@ class IcfdBoundaryPeriodic(KeywordBase):
         ]
     @property
     def pid(self) -> typing.Optional[int]:
-        """Get or set the PID for a fluid surface
+        """Get or set the Part ID for a fluid surface
         """ # nopep8
         return self._cards[0].get_value("pid")
 
@@ -70,9 +70,9 @@ class IcfdBoundaryPeriodic(KeywordBase):
     @property
     def ptype(self) -> int:
         """Get or set the Boundary type:
-        EQ.1:	Periodic rotation boundary condition.
-        EQ.2 : Periodic reflective boundary condition.
-        EQ.3 : Sliding mesh boundary condition
+        EQ.1: Periodic rotation boundary condition.
+        EQ.2: Periodic reflective boundary condition.
+        EQ.3: Sliding mesh boundary condition
         .
         """ # nopep8
         return self._cards[0].get_value("ptype")
@@ -86,7 +86,7 @@ class IcfdBoundaryPeriodic(KeywordBase):
 
     @property
     def pid2(self) -> typing.Optional[int]:
-        """Get or set the PID for the second surface mesh. The boundary condition defined in PTYPE will applied between PID and PID2. See Remark 1.
+        """Get or set the Part ID for the second surface mesh. The boundary condition selected with PTYPE will be applied between PID and PID2. See Remark 1.
         """ # nopep8
         return self._cards[0].get_value("pid2")
 
@@ -97,7 +97,7 @@ class IcfdBoundaryPeriodic(KeywordBase):
 
     @property
     def pdlcid(self) -> typing.Optional[int]:
-        """Get or set the Optional load curve ID to describe the pressure drop value versus time between PID and PID2.
+        """Get or set the Optional load curve ID to describe the pressure drop value between PID and PID2 as a function of time. This curve can be specified with *DEFINE_CURVE,*DEFINE_CURVE_FUNCTION, or *DEFINE_FUNCTION. For *DEFINE_FUNCTION, the following parameters are allowed: f(x,y,z,vx,vy,temp,pres,time)..
         """ # nopep8
         return self._cards[0].get_value("pdlcid")
 
@@ -108,14 +108,14 @@ class IcfdBoundaryPeriodic(KeywordBase):
 
     @property
     def axe(self) -> typing.Optional[int]:
-        """Get or set the If PTYPE=1 :
-        EQ.1:	Rotation around X - Axis.
-        EQ.2 : Rotation around Y - Axis.
-        EQ.3 : Rotation around Z - Axis.
-        If PTYPE = 3 :
-        EQ.0 : The contact distance between two faces of PID and PID2 is based on the characteristic local element size.
-        EQ.1 : The contact distance between two faces of PID and PID2 is based on the characteristic local element size scaled by a factor given by ANGLE.
-        EQ.2 : The contact distance between two faces of PID and PID2 is based on the length given by ANGLE.
+        """Get or set the The meaning of AXE depends on PTYPE. It only applies for PTYPE = 1 and 3. For the periodic rotation boundary condition (PTYPE = 1):
+        EQ.1: Rotation around X - axis
+        EQ.2: Rotation around Y - axis
+        EQ.3: Rotation around Z - axis
+        For the sliding mesh boundary condition(PTYPE = 3):
+        EQ.0: The contact distance between two faces of PID and PID2 is based on the characteristic local element size.
+        EQ.1: The contact distance between two faces of PID and PID2 is based on the characteristic local element size scaled by a factor given by ANGLE.
+        EQ.2: The contact distance between two faces of PID and PID2 is based on the length given by ANGLE.
         """ # nopep8
         return self._cards[0].get_value("axe")
 
@@ -137,7 +137,7 @@ class IcfdBoundaryPeriodic(KeywordBase):
 
     @property
     def angle(self) -> typing.Optional[int]:
-        """Get or set the Rotation angle for PTYPE=1. Characterizes contact distance for PTYPE=3 and axe different then 0.
+        """Get or set the Rotation angle for PTYPE=1. Characterizes contact distance for PTYPE=3 and AXE != 0
         """ # nopep8
         return self._cards[0].get_value("angle")
 

@@ -33,7 +33,7 @@ _CONTROLREMESHINGEFG_CARD0 = (
     FieldSchema("mfrac", float, 30, 10, 0.0),
     FieldSchema("dt_min", float, 40, 10, 0.0),
     FieldSchema("icurv", int, 50, 10, 4),
-    FieldSchema("iadp10", int, 60, 10, 0),
+    FieldSchema("cid", int, 60, 10, 0),
     FieldSchema("sefang", float, 70, 10, 0.0),
 )
 
@@ -41,7 +41,7 @@ _CONTROLREMESHINGEFG_CARD1 = (
     FieldSchema("ivt", int, 0, 10, 1),
     FieldSchema("iat", int, 10, 10, 0),
     FieldSchema("iaat", int, 20, 10, 0),
-    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("iconopt", int, 30, 10, 0),
     FieldSchema("mm", int, 40, 10, 0),
 )
 
@@ -76,7 +76,8 @@ class ControlRemeshingEfg(KeywordBase):
         ]
     @property
     def rmin(self) -> typing.Optional[float]:
-        """Get or set the Minimum edge length for the surface mesh surrounding the parts which should be remeshed.
+        """Get or set the Minimum edge length for the surface mesh surrounding the parts which should be remeshed. See Remark 1.
+        LT.0.0: |RMIN| is the id of a load curve controlling the time-dependent minimum edge length for 3D r-adaptivity.
         """ # nopep8
         return self._cards[0].get_value("rmin")
 
@@ -98,7 +99,7 @@ class ControlRemeshingEfg(KeywordBase):
 
     @property
     def vf_loss(self) -> float:
-        """Get or set the Volume fraction loss required in a type 10/13 tetrahedral elements to trigger a remesh.  For the type 13 solid elements, the pressures are computed at the nodal points; therefore, it is possible for overall volume to be conserved but for individual tetrahedrons to experience a significant volume loss or gain.  The volume loss can lead to numerical problems.  Recommended values for VF_‌LOSS in the range of 0.10 to 0.30 may be reasonable.
+        """Get or set the Volume fraction loss required in a type 10/13 tetrahedral elements to trigger a remesh.  For the type 13 solid elements, the pressures are computed at the nodal points; therefore, it is possible for overall volume to be conserved but for individual tetrahedrons to experience a significant volume loss or gain.  The volume loss can lead to numerical problems.  Recommended values for VF_LOSS in the range of 0.10 to 0.30 may be reasonable.
         """ # nopep8
         return self._cards[0].get_value("vf_loss")
 
@@ -141,15 +142,16 @@ class ControlRemeshingEfg(KeywordBase):
         self._cards[0].set_value("icurv", value)
 
     @property
-    def iadp10(self) -> int:
-        """Get or set the Not used.
+    def cid(self) -> int:
+        """Get or set the Coordinate system ID for three dimensional axisymmetric remeshing. The z-axis in the defined coordinate system is the orbital axis and must be parallel to the global z-axis in the current axisymmetric remesher.
+        EQ.0: Use global coordinate,and the global z - axis is the orbital axis(default)
         """ # nopep8
-        return self._cards[0].get_value("iadp10")
+        return self._cards[0].get_value("cid")
 
-    @iadp10.setter
-    def iadp10(self, value: int) -> None:
-        """Set the iadp10 property."""
-        self._cards[0].set_value("iadp10", value)
+    @cid.setter
+    def cid(self, value: int) -> None:
+        """Set the cid property."""
+        self._cards[0].set_value("cid", value)
 
     @property
     def sefang(self) -> float:
@@ -212,9 +214,24 @@ class ControlRemeshingEfg(KeywordBase):
         self._cards[1].set_value("iaat", value)
 
     @property
+    def iconopt(self) -> int:
+        """Get or set the Remeshing option for tied contact surfaces between two adaptive parts
+        EQ. 0: No special remeshing.
+        EQ.-1: The two contact surfaces are matched at the first adaptive step and not remeshed in later adaptive steps.
+        """ # nopep8
+        return self._cards[1].get_value("iconopt")
+
+    @iconopt.setter
+    def iconopt(self, value: int) -> None:
+        """Set the iconopt property."""
+        if value not in [0, 1, None]:
+            raise Exception("""iconopt must be `None` or one of {0,1}.""")
+        self._cards[1].set_value("iconopt", value)
+
+    @property
     def mm(self) -> int:
-        """Get or set the Interactive adaptive remeshing with monotonic resizing:
-        EQ.1:	the adaptive remeshing cannot coarsen a mesh.The current implementation only supports IAT = 1, 2, 3 and IER = 0.
+        """Get or set the Adaptive remeshing with monotonic resizing for either EFG or FEM:
+        EQ.1: the adaptive remeshing cannot coarsen a mesh. The current implementation only supports IAT = 1, 2, 3 for EFG. It is available for FEM tetrahedral remeshing too
         """ # nopep8
         return self._cards[1].get_value("mm")
 

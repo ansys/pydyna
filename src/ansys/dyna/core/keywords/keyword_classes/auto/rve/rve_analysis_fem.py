@@ -39,6 +39,7 @@ _RVEANALYSISFEM_CARD1 = (
     FieldSchema("idof", int, 30, 10, None),
     FieldSchema("bc", int, 40, 10, 0),
     FieldSchema("imatch", int, 50, 10, 1),
+    FieldSchema("image", int, 60, 10, 1),
 )
 
 _RVEANALYSISFEM_CARD2 = (
@@ -48,6 +49,12 @@ _RVEANALYSISFEM_CARD2 = (
     FieldSchema("h12", float, 30, 10, None),
     FieldSchema("h23", float, 40, 10, None),
     FieldSchema("h13", float, 50, 10, None),
+)
+
+_RVEANALYSISFEM_CARD3 = (
+    FieldSchema("px", float, 0, 10, None),
+    FieldSchema("py", float, 10, 10, None),
+    FieldSchema("pz", float, 20, 10, None),
 )
 
 class RveAnalysisFem(KeywordBase):
@@ -75,6 +82,10 @@ class RveAnalysisFem(KeywordBase):
                 _RVEANALYSISFEM_CARD2,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _RVEANALYSISFEM_CARD3,
+                **kwargs,
+            ),
         ]
     @property
     def filename(self) -> typing.Optional[str]:
@@ -93,15 +104,8 @@ class RveAnalysisFem(KeywordBase):
     @property
     def inpt(self) -> int:
         """Get or set the Type of input:
-        EQ.0: RVE boundary conditions are fully defined by two factors: (1) the parameter "BC" of this input card,
-        and (2) the mesh information in the file [MESHFILE]. When running an RVE simulation, LS-DYNA automatically
-        creates a file named "rve_[MESHFILE].k",
-        which contains all the necessary information (e.g., control nodes, displacement constraints, etc.) for boundary condition enforcement.
-        EQ.1: Users provide a file named  rve_[MESHFILE].k  to define the boundary condition keywords
-        (e.g. *CONSTRAINED_MULTIPLE_GLOBAL, *BOUNDARY_SPC_NODE, *BOUNDARY_MOTION_NODE, etc.) and control nodes for
-        enforcing RVE boundary conditions. Note that, it is usually non-trivial to manually define all the keywords for RVE boundary conditions.
-        If the file "rve_[MESHFILE].k" is not given when running RVE simulations, then the option INPT=1 will be ignored, and
-        LS-DYNA will create "rve_[MESHFILE].k" based on the parameter "BC" of this input card and the mesh information in the file [MESHFILE].
+        EQ.0: RVE boundary conditions are fully defined by two factors: (1) the parameter BC of this input card,and (2) the mesh information in the file specified in MESHFILE.When running an RVE simulation, the solver automatically creates a file named rve_[basename].k.This file contains all the necessary information(e.g., dummy nodes, displacement constraints, etc.) for boundary condition enforcement.
+        EQ.1: You provide a file named rve_[basename].k to specify the boundary condition keywords(e.g. *CONSTRAINED_MULTIPLE_GLOBAL, *BOUNDARY_SPC_NODE, etc.) and dummy nodes for enforcing RVE boundary conditions.We do not recommend this option since it is usually nontrivial to manually define all the keywords for RVE boundary conditions.If the file rve_[basename].k is not found when running RVE simulations, then the solver creates rve_[basename].k based on the parameter BC and the mesh information in the file specified with MESHFILE.
         """ # nopep8
         return self._cards[1].get_value("inpt")
 
@@ -112,7 +116,8 @@ class RveAnalysisFem(KeywordBase):
 
     @property
     def oupt(self) -> int:
-        """Get or set the =1: RVE homogenization results will be output to a database file "rveout". Please refer to the keyword *DATABASE_RVE
+        """Get or set the Type of output:
+        EQ.1: RVE homogenization results will be written out to a file named rveout.Please refer to the keyword *DATABASE_RVE.
         """ # nopep8
         return self._cards[1].get_value("oupt")
 
@@ -123,10 +128,9 @@ class RveAnalysisFem(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the ID of the loading curve. To perform RVE analysis, a loading curve defined by the keyword *DEFINE_CURVE
-        is required to specify the loading history. There are two columns in the loading curve, where the first column
-        is adopted as a scaling factor for the user-defined macroscopic deformation measure (H11, H22,   H13, which are defined in CARD3 of this *RVE_ANALYSIS_FEM keyword),
-        and the second column provides the corresponding scaling factor for the loading time (1.0 in the second column denotes the end of the loading).
+        """Get or set the Load curve ID for specifying loading history (see *DEFINE_CURVE) or flag to indicate that each component of the macroscopic deformation measure (H11, H22, ..., H13 on Card 3) is input as a load curve:
+        GT.0: Load curve ID.This curve gives a scale factor for the user - defined macroscopic deformation measure(H11, H22, ..., H13 input on Card 3) as a function of loading time.The scale factor is the ordinate(second column) while the loading time is the abscissa(first column).
+        LT.0: Flag to indicate that each component of the macroscopic dispalcement gradient, Hij, is input as a load curve on Card 3.
         """ # nopep8
         return self._cards[1].get_value("lcid")
 
@@ -150,20 +154,24 @@ class RveAnalysisFem(KeywordBase):
 
     @property
     def bc(self) -> int:
-        """Get or set the Type of the RVE boundary condition:
+        """Get or set the Type of RVE boundary condition:
         EQ. 0: Periodic Displacement Boundary Condition (PDBC).
         EQ. 1: Linear Displacement Boundary Condition (LDBC).
+        EQ.2: Partially Periodic Displacement Boundary Condition (PDBC). Card 4 is required.
+        EQ.3:	Periodic displacement boundary condition for RVEs with zero-thickness cohesive interface elements. It is intended for material interface debonding prediction.
         """ # nopep8
         return self._cards[1].get_value("bc")
 
     @bc.setter
     def bc(self, value: int) -> None:
         """Set the bc property."""
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""bc must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("bc", value)
 
     @property
     def imatch(self) -> int:
-        """Get or set the Type of the given RVE mesh:
+        """Get or set the Type of the given RVE mesh (ignored unless BC = 0 or 2);:
         EQ. 0: The mesh is non-matching for PDBC.
         EQ. 1: The mesh is PDBC-matching. This variable is effective only when the user chooses to impose PDBC by setting BC=0.
         When the mesh is PDBC-matching, the nodal distributions on the RVEs opposite sides match well with each other.
@@ -183,8 +191,26 @@ class RveAnalysisFem(KeywordBase):
         self._cards[1].set_value("imatch", value)
 
     @property
+    def image(self) -> int:
+        """Get or set the Create image RVE in specified directions. This feature is only available for IMATCH = 1. See Remark 11 and Figure 0-2.
+        EQ.110: Create image RVE in x direction
+        EQ.120: Create image RVE in y direction
+        EQ.130: Create image RVE in z direction
+        EQ.212: Create image RVE in both the x and y directions
+        EQ.213: Create image RVE in both the x and z directions
+        EQ.232: Create image RVE in both the y and z directions
+        EQ.300: Create image RVE in the x, yand z directions
+        """ # nopep8
+        return self._cards[1].get_value("image")
+
+    @image.setter
+    def image(self, value: int) -> None:
+        """Set the image property."""
+        self._cards[1].set_value("image", value)
+
+    @property
     def h11(self) -> typing.Optional[float]:
-        """Get or set the Component 11 of the prescribed macroscopic displacement gradient.
+        """Get or set the Component 11 of the prescribed macroscopic displacement gradient, H. H is assumed to be symmetric (see Remark 4). To not impose the corresponding constraints on the RVE, leave the component HIJ empty (instead of setting it to be zero). If LCID < 0 on Card 2, the input value is assumed to be a load curve ID for a load curve giving the component as a function of time. Please refer to Remarks 2 and 8.
         """ # nopep8
         return self._cards[2].get_value("h11")
 
@@ -195,7 +221,7 @@ class RveAnalysisFem(KeywordBase):
 
     @property
     def h22(self) -> typing.Optional[float]:
-        """Get or set the Component 22 of the prescribed macroscopic displacement gradient.
+        """Get or set the Component 22 of the prescribed macroscopic displacement gradient, H. H is assumed to be symmetric (see Remark 4). To not impose the corresponding constraints on the RVE, leave the component HIJ empty (instead of setting it to be zero). If LCID < 0 on Card 2, the input value is assumed to be a load curve ID for a load curve giving the component as a function of time. Please refer to Remarks 2 and 8.
         """ # nopep8
         return self._cards[2].get_value("h22")
 
@@ -206,7 +232,7 @@ class RveAnalysisFem(KeywordBase):
 
     @property
     def h33(self) -> typing.Optional[float]:
-        """Get or set the Component 33 of the prescribed macroscopic displacement gradient.
+        """Get or set the Component 33 of the prescribed macroscopic displacement gradient, H. H is assumed to be symmetric (see Remark 4). To not impose the corresponding constraints on the RVE, leave the component HIJ empty (instead of setting it to be zero). If LCID < 0 on Card 2, the input value is assumed to be a load curve ID for a load curve giving the component as a function of time. Please refer to Remarks 2 and 8.
         """ # nopep8
         return self._cards[2].get_value("h33")
 
@@ -217,7 +243,7 @@ class RveAnalysisFem(KeywordBase):
 
     @property
     def h12(self) -> typing.Optional[float]:
-        """Get or set the Component 12 of the prescribed macroscopic displacement gradient.
+        """Get or set the Component 12 of the prescribed macroscopic displacement gradient, H. H is assumed to be symmetric (see Remark 4). To not impose the corresponding constraints on the RVE, leave the component HIJ empty (instead of setting it to be zero). If LCID < 0 on Card 2, the input value is assumed to be a load curve ID for a load curve giving the component as a function of time. Please refer to Remarks 2 and 8.
         """ # nopep8
         return self._cards[2].get_value("h12")
 
@@ -228,7 +254,7 @@ class RveAnalysisFem(KeywordBase):
 
     @property
     def h23(self) -> typing.Optional[float]:
-        """Get or set the Component 23 of the prescribed macroscopic displacement gradient.
+        """Get or set the Component 23 of the prescribed macroscopic displacement gradient, H. H is assumed to be symmetric (see Remark 4). To not impose the corresponding constraints on the RVE, leave the component HIJ empty (instead of setting it to be zero). If LCID < 0 on Card 2, the input value is assumed to be a load curve ID for a load curve giving the component as a function of time. Please refer to Remarks 2 and 8.
         """ # nopep8
         return self._cards[2].get_value("h23")
 
@@ -239,7 +265,7 @@ class RveAnalysisFem(KeywordBase):
 
     @property
     def h13(self) -> typing.Optional[float]:
-        """Get or set the Component 13 of the prescribed macroscopic displacement gradient.
+        """Get or set the Component 13 of the prescribed macroscopic displacement gradient, H. H is assumed to be symmetric (see Remark 4). To not impose the corresponding constraints on the RVE, leave the component HIJ empty (instead of setting it to be zero). If LCID < 0 on Card 2, the input value is assumed to be a load curve ID for a load curve giving the component as a function of time. Please refer to Remarks 2 and 8.
         """ # nopep8
         return self._cards[2].get_value("h13")
 
@@ -247,6 +273,45 @@ class RveAnalysisFem(KeywordBase):
     def h13(self, value: float) -> None:
         """Set the h13 property."""
         self._cards[2].set_value("h13", value)
+
+    @property
+    def px(self) -> typing.Optional[float]:
+        """Get or set the Flag to apply the periodic boundary condition in the ith direction (i = x, y, or z) for PDBC:
+        EQ.0: Periodic boundary condition is not applied for this direction.
+        EQ.1: Periodic boundary condition is applied for this direction.
+        """ # nopep8
+        return self._cards[3].get_value("px")
+
+    @px.setter
+    def px(self, value: float) -> None:
+        """Set the px property."""
+        self._cards[3].set_value("px", value)
+
+    @property
+    def py(self) -> typing.Optional[float]:
+        """Get or set the Flag to apply the periodic boundary condition in the ith direction (i = x, y, or z) for PDBC:
+        EQ.0: Periodic boundary condition is not applied for this direction.
+        EQ.1: Periodic boundary condition is applied for this direction.
+        """ # nopep8
+        return self._cards[3].get_value("py")
+
+    @py.setter
+    def py(self, value: float) -> None:
+        """Set the py property."""
+        self._cards[3].set_value("py", value)
+
+    @property
+    def pz(self) -> typing.Optional[float]:
+        """Get or set the Flag to apply the periodic boundary condition in the ith direction (i = x, y, or z) for PDBC:
+        EQ.0: Periodic boundary condition is not applied for this direction.
+        EQ.1: Periodic boundary condition is applied for this direction.
+        """ # nopep8
+        return self._cards[3].get_value("pz")
+
+    @pz.setter
+    def pz(self, value: float) -> None:
+        """Set the pz property."""
+        self._cards[3].set_value("pz", value)
 
     @property
     def lcid_link(self) -> typing.Optional[DefineCurve]:

@@ -49,22 +49,26 @@ class EmRandlesShort(KeywordBase):
     @property
     def areatype(self) -> int:
         """Get or set the Works the same way as RDLAREA in *EM_RANDLES_SOLID or in *EM_RANDLES_TSHELL:
-        EQ.1:The resistance in FUNCTID is per unit area.
-        EQ.2:Default. The resistance in FUNCTID is for the whole cell(the whole cell is shorted), and then a factor based on areaLocal/areaGlobal is applied.
-        EQ.3:The resistance in FUNCTID is taken as is in each Randles circuit.
+        EQ.1: The resistance inverse in FUNCTID is per unit area so that, for each local Randles circuit, the result returned by FUNCTID is multiplied by a factor 1./areaLoc (areaLoc is the local area associated with each Randles circuit while areaGlob is the area of the whole cell). Unit consistency in SI Ohms times square meters.
+        EQ.2: The resistance in FUNCTID is for the whole cell(the whole cell is shorted), so that, for each Randles circuit, the result returned by FUNCTID is multiplied by a factor areaGlob / areaLoc (default).Unit consistency in SI Ohms.
+        Q.3: The resistance returned by FUNCTID is taken as is for each Randles circuit.Unit consistency in SI Ohms;
+        EQ.11: Same as 1, except the parameters are defined for the whole cell and are scaled in each Randles
+        circuit by a factor depending on the local volume of the circuit and the global volume of the cell.
+        EQ.22: Same as 2, except the parameters are defined for the whole cell and are scaled in each Randles
+        circuit by a factor depending on the local volume of the circuit and the global volume of the cell.
         """ # nopep8
         return self._cards[0].get_value("areatype")
 
     @areatype.setter
     def areatype(self, value: int) -> None:
         """Set the areatype property."""
-        if value not in [2, 1, 3, None]:
-            raise Exception("""areatype must be `None` or one of {2,1,3}.""")
+        if value not in [2, 1, 3, 11, 22, None]:
+            raise Exception("""areatype must be `None` or one of {2,1,3,11,22}.""")
         self._cards[0].set_value("areatype", value)
 
     @property
     def funcid(self) -> typing.Optional[int]:
-        """Get or set the DEFINE_FUNCTION ID giving the local resistance function of local parameters for the local randle circuit..
+        """Get or set the Function ID (see *DEFINE_FUNCTION) for the function giving the local resistance function of local parameters for the local Randles circuit. See Remark 1. See Table Error! Reference source not found. in *EM_RANDLES for the accepted function arguments.Additionally, external variable introduced with *LOAD_EXTERNAL_VARIABLE can be considered.
         """ # nopep8
         return self._cards[0].get_value("funcid")
 

@@ -34,7 +34,14 @@ _MATELASTIC_CARD0 = (
     FieldSchema("pr", float, 30, 10, None),
     FieldSchema("da", float, 40, 10, None),
     FieldSchema("db", float, 50, 10, None),
-    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
+_MATELASTIC_CARD1 = (
+    FieldSchema("efunc", str, 0, 10, "P"),
+    FieldSchema("cnvt", float, 10, 10, 0.001),
+    FieldSchema("iterlm", int, 20, 10, 3),
 )
 
 _MATELASTIC_OPTION0_CARD0 = (
@@ -57,6 +64,10 @@ class MatElastic(KeywordBase):
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _MATELASTIC_CARD0,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MATELASTIC_CARD1,
                 **kwargs,
             ),
             OptionCardSet(
@@ -94,7 +105,9 @@ class MatElastic(KeywordBase):
 
     @property
     def e(self) -> typing.Optional[float]:
-        """Get or set the Young's modulus.
+        """Get or set the Definition of Young's modulus
+        GT.0: E is the Young's modulus.
+        LT.0: | E | is the ID of a curve defining Young's modulus as a function of elemental variables EFUNC; It is supported for explicit simulation only.
         """ # nopep8
         return self._cards[0].get_value("e")
 
@@ -137,15 +150,48 @@ class MatElastic(KeywordBase):
         self._cards[0].set_value("db", value)
 
     @property
+    def efunc(self) -> str:
+        """Get or set the The element variable used as the independent variable of curve |E|.P: elemental pressure
+        """ # nopep8
+        return self._cards[1].get_value("efunc")
+
+    @efunc.setter
+    def efunc(self, value: str) -> None:
+        """Set the efunc property."""
+        self._cards[1].set_value("efunc", value)
+
+    @property
+    def cnvt(self) -> float:
+        """Get or set the Convergence tolerance, needed when EFUNC is a variant of stress.
+        """ # nopep8
+        return self._cards[1].get_value("cnvt")
+
+    @cnvt.setter
+    def cnvt(self, value: float) -> None:
+        """Set the cnvt property."""
+        self._cards[1].set_value("cnvt", value)
+
+    @property
+    def iterlm(self) -> int:
+        """Get or set the Iteration limit, needed when EFUNC is a variant of stress.
+        """ # nopep8
+        return self._cards[1].get_value("iterlm")
+
+    @iterlm.setter
+    def iterlm(self, value: int) -> None:
+        """Set the iterlm property."""
+        self._cards[1].set_value("iterlm", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[1].cards[0].get_value("title")
+        return self._cards[2].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[1].cards[0].set_value("title", value)
+        self._cards[2].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

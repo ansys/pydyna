@@ -30,11 +30,13 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import De
 
 _ICFDDEFINESOURCE_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
-    FieldSchema("lcidk", int, 10, 10, None),
-    FieldSchema("shape", int, 20, 10, 1),
-    FieldSchema("r", float, 30, 10, None),
-    FieldSchema("pid1", int, 40, 10, None),
-    FieldSchema("pid2", int, 50, 10, None),
+    FieldSchema("lcidx", int, 10, 10, None),
+    FieldSchema("lcidy", int, 20, 10, None),
+    FieldSchema("lcidz", int, 30, 10, None),
+    FieldSchema("shape", int, 40, 10, 1),
+    FieldSchema("r", float, 50, 10, None),
+    FieldSchema("pid1", int, 60, 10, None),
+    FieldSchema("pid2", int, 70, 10, None),
 )
 
 class IcfdDefineSource(KeywordBase):
@@ -43,7 +45,9 @@ class IcfdDefineSource(KeywordBase):
     keyword = "ICFD"
     subkeyword = "DEFINE_SOURCE"
     _link_fields = {
-        "lcidk": LinkType.DEFINE_CURVE,
+        "lcidx": LinkType.DEFINE_CURVE,
+        "lcidy": LinkType.DEFINE_CURVE,
+        "lcidz": LinkType.DEFINE_CURVE,
     }
 
     def __init__(self, **kwargs):
@@ -67,22 +71,44 @@ class IcfdDefineSource(KeywordBase):
         self._cards[0].set_value("sid", value)
 
     @property
-    def lcidk(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID specifying the evolution of the external source term function of time for the turbulent kinetic energy k equation, see *DEFINE_CURVE,*DEFINE_CURVE_FUNCTION or *DEFINE_FUNCTION. If a DEFINE_FUNCTION is used, the following parameters are allowed:  f(x,y,z,vx,vy,vz,temp,pres,time
+    def lcidx(self) -> typing.Optional[int]:
+        """Get or set the Load curve IDs specifying the evolution of the volumetric force as a function of time for the three global components
         """ # nopep8
-        return self._cards[0].get_value("lcidk")
+        return self._cards[0].get_value("lcidx")
 
-    @lcidk.setter
-    def lcidk(self, value: int) -> None:
-        """Set the lcidk property."""
-        self._cards[0].set_value("lcidk", value)
+    @lcidx.setter
+    def lcidx(self, value: int) -> None:
+        """Set the lcidx property."""
+        self._cards[0].set_value("lcidx", value)
+
+    @property
+    def lcidy(self) -> typing.Optional[int]:
+        """Get or set the Load curve IDs specifying the evolution of the volumetric force as a function of time for the three global components
+        """ # nopep8
+        return self._cards[0].get_value("lcidy")
+
+    @lcidy.setter
+    def lcidy(self, value: int) -> None:
+        """Set the lcidy property."""
+        self._cards[0].set_value("lcidy", value)
+
+    @property
+    def lcidz(self) -> typing.Optional[int]:
+        """Get or set the Load curve IDs specifying the evolution of the volumetric force as a function of time for the three global components
+        """ # nopep8
+        return self._cards[0].get_value("lcidz")
+
+    @lcidz.setter
+    def lcidz(self, value: int) -> None:
+        """Set the lcidz property."""
+        self._cards[0].set_value("lcidz", value)
 
     @property
     def shape(self) -> int:
         """Get or set the Shape of the external source:
-        EQ.1 :	Box shape
-        EQ.2 :	Cylinder shape
-        EQ.3 :	Sphere shape
+        EQ.1: Box shape
+        EQ.2: Cylinder shape
+        EQ.3: Sphere shape
         """ # nopep8
         return self._cards[0].get_value("shape")
 
@@ -95,7 +121,7 @@ class IcfdDefineSource(KeywordBase):
 
     @property
     def r(self) -> typing.Optional[float]:
-        """Get or set the Radius of the sphere is SHAPE=3
+        """Get or set the Radius of the cylinder or sphere is SHAPE=2 or 3
         """ # nopep8
         return self._cards[0].get_value("r")
 
@@ -106,7 +132,10 @@ class IcfdDefineSource(KeywordBase):
 
     @property
     def pid1(self) -> typing.Optional[int]:
-        """Get or set the ID of point (See ICFD_DEFINE_POINT) of minimum coordinates if SHAPE=1, tail point if SHAPE=2, origin if SHAPE=3.
+        """Get or set the Point ID (see *ICFD_DEFINE_POINT) whose meaning depends on SHAPE:
+        SHAPE.EQ.1: Minimum coordinates of the box
+        SHAPE.EQ.2: Tail point of the cylinder
+        SHAPE.EQ.3: Origin of the sphere
         """ # nopep8
         return self._cards[0].get_value("pid1")
 
@@ -117,7 +146,9 @@ class IcfdDefineSource(KeywordBase):
 
     @property
     def pid2(self) -> typing.Optional[int]:
-        """Get or set the ID of point of maximum coordinates if SHAPE=2, head point if SHAPE=2.
+        """Get or set the Point ID (see *ICFD_DEFINE_POINT) whose meaning depends on SHAPE:
+        SHAPE.EQ.1: Maximum coordinates of the box
+        SHAPE.EQ.2: Head point of the cylinder
         """ # nopep8
         return self._cards[0].get_value("pid2")
 
@@ -127,17 +158,47 @@ class IcfdDefineSource(KeywordBase):
         self._cards[0].set_value("pid2", value)
 
     @property
-    def lcidk_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcidk."""
+    def lcidx_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcidx."""
         if self.deck is None:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcidk:
+            if kwd.lcid == self.lcidx:
                 return kwd
         return None
 
-    @lcidk_link.setter
-    def lcidk_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcidk."""
-        self.lcidk = value.lcid
+    @lcidx_link.setter
+    def lcidx_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidx."""
+        self.lcidx = value.lcid
+
+    @property
+    def lcidy_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcidy."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidy:
+                return kwd
+        return None
+
+    @lcidy_link.setter
+    def lcidy_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidy."""
+        self.lcidy = value.lcid
+
+    @property
+    def lcidz_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcidz."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcidz:
+                return kwd
+        return None
+
+    @lcidz_link.setter
+    def lcidz_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcidz."""
+        self.lcidz = value.lcid
 

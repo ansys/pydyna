@@ -90,7 +90,7 @@ class LoadPze(KeywordBase):
     def setyp(self) -> str:
         """Get or set the Type of SETID
         EQ.NSET:SETID is a node set.
-        EQ.SEGSET : SETID is a segment set
+        EQ.SEGSET: SETID is a segment set
         """ # nopep8
         return self._cards[0].get_value("setyp")
 

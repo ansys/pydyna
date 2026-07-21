@@ -29,6 +29,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _CONTROLFREQUENCYDOMAIN_CARD0 = (
     FieldSchema("refgeo", int, 0, 10, 0),
     FieldSchema("mpn", float, 10, 10, 0.0),
+    FieldSchema("mcf", int, 20, 10, 0),
 )
 
 class ControlFrequencyDomain(KeywordBase):
@@ -49,8 +50,8 @@ class ControlFrequencyDomain(KeywordBase):
     @property
     def refgeo(self) -> int:
         """Get or set the Flag for reference geometry in acoustic eigenvalue analysis:
-        EQ.0:	use original geometry (t = 0),
-        EQ.1:	use deformed geometry at the end of transient analysis.
+        EQ.0: use original geometry (t = 0),
+        EQ.1: use deformed geometry at the end of transient analysis.
         """ # nopep8
         return self._cards[0].get_value("refgeo")
 
@@ -71,4 +72,19 @@ class ControlFrequencyDomain(KeywordBase):
     def mpn(self, value: float) -> None:
         """Set the mpn property."""
         self._cards[0].set_value("mpn", value)
+
+    @property
+    def mcf(self) -> int:
+        """Get or set the Flag for writing out MCF (Modal Coefficient File) from SSD analysis, to be used in fatigue analysis with nCode Designlife:
+        EQ.0: Dont write out MCF,
+        EQ.1: Write out MCF
+        """ # nopep8
+        return self._cards[0].get_value("mcf")
+
+    @mcf.setter
+    def mcf(self, value: int) -> None:
+        """Set the mcf property."""
+        if value not in [0, 1, None]:
+            raise Exception("""mcf must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("mcf", value)
 

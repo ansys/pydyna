@@ -53,9 +53,9 @@ class EfToggles(KeywordBase):
         ]
     @property
     def iprint1(self) -> int:
-        """Get or set the Controls output of exchange fractions to the d3hsp file. In almost all situations this should be set to 0 because the “exchange factors” are written to the file exchfl.
-        EQ.0:	do not write exchange fractions
-        EQ.1 : write exchange fraction.
+        """Get or set the Controls output of exchange fractions to the d3hsp file. In almost all situations this should be set to 0 because the exchange factors are written to the file exchfl.
+        EQ.0: do not write exchange fractions
+        EQ.1: write exchange fraction.
         """ # nopep8
         return self._cards[0].get_value("iprint1")
 
@@ -69,7 +69,7 @@ class EfToggles(KeywordBase):
     @property
     def iprint2(self) -> int:
         """Get or set the Controls output of a list of lost photons to the d3hsp file. This is useful for debugging.
-        EQ.0:	do not write lost photon listEQ.1 : write lost photon list
+        EQ.0: do not write lost photon listEQ.1: write lost photon list
         """ # nopep8
         return self._cards[0].get_value("iprint2")
 
@@ -83,8 +83,8 @@ class EfToggles(KeywordBase):
     @property
     def iprint3(self) -> int:
         """Get or set the Controls output about the grid algorithm to the d3hsp file
-        EQ.0:	do not write grid algorithm information
-        EQ.1 : write grid algorithm information
+        EQ.0: do not write grid algorithm information
+        EQ.1: write grid algorithm information
         """ # nopep8
         return self._cards[0].get_value("iprint3")
 
@@ -98,8 +98,8 @@ class EfToggles(KeywordBase):
     @property
     def iprint4(self) -> int:
         """Get or set the Controls output about material information pertaining to exchange factors to the d3hsp file.
-        EQ.0:	do not write material information
-        EQ.1 : write material information
+        EQ.0: do not write material information
+        EQ.1: write material information
         """ # nopep8
         return self._cards[0].get_value("iprint4")
 
@@ -113,8 +113,8 @@ class EfToggles(KeywordBase):
     @property
     def idata(self) -> int:
         """Get or set the Controls execution
-        EQ.0:	run proceeds
-        EQ.1 : terminate after input parameter check
+        EQ.0: run proceeds
+        EQ.1: terminate after input parameter check
         """ # nopep8
         return self._cards[0].get_value("idata")
 
@@ -128,8 +128,8 @@ class EfToggles(KeywordBase):
     @property
     def itraces(self) -> int:
         """Get or set the ITRACES Controls output of photon trajectories.
-        EQ.0:	do not write trajectory information
-        EQ.1 : write trajectory information.This file becomes large quickly and is only useful for debugging
+        EQ.0: do not write trajectory information
+        EQ.1: write trajectory information.This file becomes large quickly and is only useful for debugging
         """ # nopep8
         return self._cards[0].get_value("itraces")
 

@@ -29,6 +29,9 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _DUALCESEBOUNDARYPRESCRIBEDMSURF_CARD0 = (
     FieldSchema("mspid", int, 0, 10, None),
     FieldSchema("idcomp", int, 10, 10, None),
+    FieldSchema("dirx", float, 20, 10, None),
+    FieldSchema("diry", float, 30, 10, None),
+    FieldSchema("dirz", float, 40, 10, None),
 )
 
 _DUALCESEBOUNDARYPRESCRIBEDMSURF_CARD1 = (
@@ -85,7 +88,7 @@ class DualceseBoundaryPrescribedMsurf(KeywordBase):
 
     @property
     def idcomp(self) -> typing.Optional[int]:
-        """Get or set the For inflow boundaries in problems involving chemical reacting flows, the chemical mixture of the fluid entering the domain is defined with a *CHEMISTRY_?COMPOSITION card with this ID
+        """Get or set the For inflow boundaries in problems involving chemical reacting flows, the chemical mixture of the fluid entering the domain is defined with a *CHEMISTRY_  COMPOSITION card with this ID
         """ # nopep8
         return self._cards[0].get_value("idcomp")
 
@@ -95,10 +98,43 @@ class DualceseBoundaryPrescribedMsurf(KeywordBase):
         self._cards[0].set_value("idcomp", value)
 
     @property
+    def dirx(self) -> typing.Optional[float]:
+        """Get or set the If this vector is nonzero, then it is used as the prescribed flow direction
+        """ # nopep8
+        return self._cards[0].get_value("dirx")
+
+    @dirx.setter
+    def dirx(self, value: float) -> None:
+        """Set the dirx property."""
+        self._cards[0].set_value("dirx", value)
+
+    @property
+    def diry(self) -> typing.Optional[float]:
+        """Get or set the If this vector is nonzero, then it is used as the prescribed flow direction
+        """ # nopep8
+        return self._cards[0].get_value("diry")
+
+    @diry.setter
+    def diry(self, value: float) -> None:
+        """Set the diry property."""
+        self._cards[0].set_value("diry", value)
+
+    @property
+    def dirz(self) -> typing.Optional[float]:
+        """Get or set the If this vector is nonzero, then it is used as the prescribed flow direction
+        """ # nopep8
+        return self._cards[0].get_value("dirz")
+
+    @dirz.setter
+    def dirz(self, value: float) -> None:
+        """Set the dirz property."""
+        self._cards[0].set_value("dirz", value)
+
+    @property
     def lc_u(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID (see *DEFINE_CURVE) to describe the  -component of the velocity as a function of time or function ID (see *DEFINE_FUNCTION) to give the  -component of the velocity as a function of position, velocity, temperature, pressure, and time, f(x, y, z, vx, vy, vz, temp, pres, time).
-        EQ.0:	 -component of velocity is a constant with value SF_U.
-        EQ.-1:	 -component of velocity is computed by the solver
+        """Get or set the Load curve ID (see *DEFINE_CURVE) to describe the x-component of the velocity as a function of time or function ID (see *DEFINE_FUNCTION) to give the x-component of the velocity as a function of position, velocity, temperature, pressure, and time, f(x, y, z, vx, vy, vz, temp, pres, time).
+        EQ.0: x-component of velocity is a constant with value SF_U.
+        EQ.-1: x-component of velocity is computed by the solver
         """ # nopep8
         return self._cards[1].get_value("lc_u")
 
@@ -109,9 +145,9 @@ class DualceseBoundaryPrescribedMsurf(KeywordBase):
 
     @property
     def lc_v(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID to describe the  -component of the velocity as a function of time or function ID to give the  -component of the velocity as a function of position, velocity, temperature, pressure, and time, f(x, y, z, vx, vy, vz, temp, pres, time).
-        EQ.0:	 -component of velocity is a constant with value SF_V.
-        EQ.-1:	 -component of velocity is computed by the solver.
+        """Get or set the Load curve ID to describe the y-component of the velocity as a function of time or function ID to give the y-component of the velocity as a function of position, velocity, temperature, pressure, and time, f(x, y, z, vx, vy, vz, temp, pres, time).
+        EQ.0: y-component of velocity is a constant with value SF_V.
+        EQ.-1: y-component of velocity is computed by the solver.
         """ # nopep8
         return self._cards[1].get_value("lc_v")
 
@@ -122,9 +158,9 @@ class DualceseBoundaryPrescribedMsurf(KeywordBase):
 
     @property
     def lc_w(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID to describe the  -component of the velocity as a function of time or function ID to give the  -component of the velocity as a function of position, velocity, temperature, pressure, and time, f(x, y, z, vx, vy, vz, temp, pres, time).
-        EQ.0:	 -component of velocity is a constant with value SF_W.
-        EQ.-1:	 -component of velocity is computed by the solver
+        """Get or set the Load curve ID to describe the z-component of the velocity as a function of time or function ID to give the z-component of the velocity as a function of position, velocity, temperature, pressure, and time, f(x, y, z, vx, vy, vz, temp, pres, time).
+        EQ.0: z-component of velocity is a constant with value SF_W.
+        EQ.-1: z-component of velocity is computed by the solver
         """ # nopep8
         return self._cards[1].get_value("lc_w")
 
@@ -136,8 +172,8 @@ class DualceseBoundaryPrescribedMsurf(KeywordBase):
     @property
     def lc_rho(self) -> typing.Optional[int]:
         """Get or set the Load curve ID to describe the density as a function of time or function ID to give the density as a function of position, velocity, temperature, pressure, and time, f(x, y, z, vx, vy, vz, temp, pres, time).
-        EQ.0:	Density is a constant with value SF_RHO.
-        EQ.-1:	Density is computed by the solver
+        EQ.0: Density is a constant with value SF_RHO.
+        EQ.-1: Density is computed by the solver
         """ # nopep8
         return self._cards[1].get_value("lc_rho")
 
@@ -149,8 +185,8 @@ class DualceseBoundaryPrescribedMsurf(KeywordBase):
     @property
     def lc_p(self) -> typing.Optional[int]:
         """Get or set the Load curve ID to describe the pressure as a function of time or function ID to give the pressure as a function of position, velocity, temperature, pressure, and time, f(x, y, z, vx, vy, vz, temp, pres, time).
-        EQ.0:	Pressure is a constant with value SF_P.
-        EQ.-1:	Pressure is computed by the solver
+        EQ.0: Pressure is a constant with value SF_P.
+        EQ.-1: Pressure is computed by the solver
         """ # nopep8
         return self._cards[1].get_value("lc_p")
 
@@ -162,8 +198,8 @@ class DualceseBoundaryPrescribedMsurf(KeywordBase):
     @property
     def lc_t(self) -> typing.Optional[int]:
         """Get or set the Load curve ID to describe the temperature as a function of time or function ID to give the temperature as a function of position, velocity, temperature, pressure, and time, f(x, y, z, vx, vy, vz, temp, pres, time).
-        EQ.0:	Temperature is a constant with value SF_T.
-        EQ.-1:	Temperature is computed by the solver
+        EQ.0: Temperature is a constant with value SF_T.
+        EQ.-1: Temperature is computed by the solver
         """ # nopep8
         return self._cards[1].get_value("lc_t")
 

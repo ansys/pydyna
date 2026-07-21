@@ -67,12 +67,12 @@ class LoadPointUvwSet(KeywordBase):
     @property
     def dof(self) -> typing.Optional[int]:
         """Get or set the Applicable degrees-of-freedom:
-        EQ.1:	x - direction of load action,
-        EQ.2 : y - direction of load action,
-        EQ.3 : z - direction of load action,
-        EQ.5 : Moment about the x - axis,
-        EQ.6 : Moment about the y - axis axis,
-        EQ.7 : Moment about the z - axis axis
+        EQ.1: x - direction of load action,
+        EQ.2: y - direction of load action,
+        EQ.3: z - direction of load action,
+        EQ.5: Moment about the x - axis,
+        EQ.6: Moment about the y - axis axis,
+        EQ.7: Moment about the z - axis axis
         """ # nopep8
         return self._cards[0].get_value("dof")
 

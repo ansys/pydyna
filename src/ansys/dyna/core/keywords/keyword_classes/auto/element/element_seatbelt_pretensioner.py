@@ -42,6 +42,7 @@ _ELEMENTSEATBELTPRETENSIONER_CARD1 = (
     FieldSchema("time", float, 10, 10, 0.0),
     FieldSchema("ptlcid", int, 20, 10, 0),
     FieldSchema("lmtfrc", float, 30, 10, 0.0),
+    FieldSchema("lmtpin", float, 40, 10, 0.0),
 )
 
 class ElementSeatbeltPretensioner(KeywordBase):
@@ -80,15 +81,15 @@ class ElementSeatbeltPretensioner(KeywordBase):
     @property
     def sbprty(self) -> int:
         """Get or set the Pretensioner type (see Activation):
-        EQ.1:	Pyrotechnic retractor with force limits(see Type 1),
-        EQ.2 : Pre - loaded spring becomes active(see Types 2 and 3),
-        EQ.3 : Lock spring removed(see Types 2 and 3),
-        EQ.4 : Force as a function of time retractor with optional force limiter, LMTFRC(see Type 4)
-        EQ.5 : Pyrotechnic retractor(old type in version 950) but with optional force limiter, LMTFRC(see Type 1 and Type 5).
-        EQ.6 : Combination of types 4 and 5 as described in Type 6 below.
-        EQ.7 : Independent pretensioner / retractor with optional force limiter(see Type 7).
-        EQ.8 : Energy as a function of time retractor pretensioner with optional force limiter, LMTFRC(see Type 8).
-        EQ.9 : Energy as a function of time buckle or anchor pretensioner(see Type 9).
+        EQ.1: Pyrotechnic retractor with force limits(see Type 1),
+        EQ.2: Pre - loaded spring becomes active(see Types 2 and 3),
+        EQ.3: Lock spring removed(see Types 2 and 3),
+        EQ.4: Force as a function of time retractor ( see type 4)
+        EQ.5: Pyrotechnic retractor(older implementation of type) but with optional force limiter, LMTFRC(see Type 1 and Type 5).
+        EQ.6: Combination of types 4 and 5 as described in Type 6 below.
+        EQ.7: Independent pretensioner / retractor (see Type 7).
+        EQ.8: Energy as a function of time retractor pretensioner with optional force limiter, LMTFRC(see Type 8).
+        EQ.9: Energy as a function of time buckle or anchor pretensioner(see Type 9).
         """ # nopep8
         return self._cards[0].get_value("sbprty")
 
@@ -178,7 +179,7 @@ class ElementSeatbeltPretensioner(KeywordBase):
 
     @property
     def lmtfrc(self) -> float:
-        """Get or set the Optional limiting force for retractor types 4 through 8.  If zero, this option is ignored.
+        """Get or set the Optional limiting force for pretensione types 5 and 8.  If zero, this option is ignored.See Type 5 and Type 8
         """ # nopep8
         return self._cards[1].get_value("lmtfrc")
 
@@ -186,6 +187,17 @@ class ElementSeatbeltPretensioner(KeywordBase):
     def lmtfrc(self, value: float) -> None:
         """Set the lmtfrc property."""
         self._cards[1].set_value("lmtfrc", value)
+
+    @property
+    def lmtpin(self) -> float:
+        """Get or set the Optional limiting pull-in for retractor types 4, 6, and 7. LMTPIN must be >= 0.0.  If zero, this option is ignored. See Type 4, Type 6, and Type 7.
+        """ # nopep8
+        return self._cards[1].get_value("lmtpin")
+
+    @lmtpin.setter
+    def lmtpin(self, value: float) -> None:
+        """Set the lmtpin property."""
+        self._cards[1].set_value("lmtpin", value)
 
     @property
     def ptlcid_link(self) -> typing.Optional[DefineCurve]:

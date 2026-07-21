@@ -100,8 +100,8 @@ class ControlAle(KeywordBase):
     @property
     def dct(self) -> int:
         """Get or set the Flag to invoke alternate advection logic for ALE (see Remark 2):
-        NE. - 1:	Use default advection logic.
-        EQ. - 1 : Use alternate(improved) advection logic; generally recommended, especially for simulation of explosives.
+        NE. - 1: Use default advection logic.
+        EQ. - 1: Use alternate(improved) advection logic; generally recommended, especially for simulation of explosives.
         Note that for S - ALE DCT is ignored and the alternative advection option is always used.
         """ # nopep8
         return self._cards[0].get_value("dct")
@@ -129,15 +129,16 @@ class ControlAle(KeywordBase):
         EQ.2: Van Leer + half index shift (second order).
         EQ.-2 Modified Van Leer
         EQ.3: donor cell + HIS, first order accurate, conserving total energy over each advection step instead of conserving internal energy
-        EQ.6:	Finite Volume Method with a Flux Corrected Transport. Only supported by ideal gases: the finite volume method is only applied to ALE elements fully filled with materials using *EOS_IDEAL_GAS or *EOS_001 for ideal gases. The advection in mixed ALE elements is handled by a donor cell method.
+        EQ.4: Van Leer with HIS modified to conserve total energy over each advection step, in contrast to METH = 2, which conserves internal energy (see Remark 4).
+        EQ.6: Finite Volume Method with a Flux Corrected Transport. Only supported by ideal gases: the finite volume method is only applied to ALE elements fully filled with materials using *EOS_IDEAL_GAS or *EOS_001 for ideal gases. The advection in mixed ALE elements is handled by a donor cell method.
         """ # nopep8
         return self._cards[0].get_value("meth")
 
     @meth.setter
     def meth(self, value: int) -> None:
         """Set the meth property."""
-        if value not in [2, 1, -2, 3, 6, None]:
-            raise Exception("""meth must be `None` or one of {2,1,-2,3,6}.""")
+        if value not in [2, 1, -2, 3, 4, 6, None]:
+            raise Exception("""meth must be `None` or one of {2,1,-2,3,4,6}.""")
         self._cards[0].set_value("meth", value)
 
     @property
@@ -261,19 +262,22 @@ class ControlAle(KeywordBase):
         EQ.0: off (default),
         EQ.1: on with stick condition,
         EQ.2: on with slip condition.
+        EQ.-2: Generate *ALE_ESSENTIAL_BOUNDARY with slip condition for mesh boundaries that do not already have segment boundary conditions defined with *BOUNDARY_NON_REFLECTING, *LOAD_BLAST_SET_SEGMENT, *BOUNDARY_SPC_SET, *LOAD_SEGMENT, or *LOAD_SEGMENT_SET, applied
         """ # nopep8
         return self._cards[1].get_value("ebc")
 
     @ebc.setter
     def ebc(self, value: int) -> None:
         """Set the ebc property."""
-        if value not in [0, 1, 2, None]:
-            raise Exception("""ebc must be `None` or one of {0,1,2}.""")
+        if value not in [0, 1, 2, -2, None]:
+            raise Exception("""ebc must be `None` or one of {0,1,2,-2}.""")
         self._cards[1].set_value("ebc", value)
 
     @property
     def pref(self) -> float:
-        """Get or set the A pseudo reference pressure equivalent to an environmental pressure that is being applied to the free surfaces of the ALE domain or meh
+        """Get or set the A pseudo reference pressure equivalent to an environmental pressure that is being applied to the free surfaces of the ALE domain or mesh. L
+        T.0: | PREF| is a * DEFINE_CURVE ID ID giving the reference pressure as a function of time.Refer to Remark 8 determine which applications are suitable for this option.
+        GE.0 : Constant reference pressure value value.
         """ # nopep8
         return self._cards[1].get_value("pref")
 
@@ -284,7 +288,7 @@ class ControlAle(KeywordBase):
 
     @property
     def nsidebc(self) -> typing.Optional[int]:
-        """Get or set the A node set ID (NSID) which is to be excluded from the EBC constraint.
+        """Get or set the Node set ID (NSID) for a node set that is to be excluded from the EBC constraint.
         """ # nopep8
         return self._cards[1].get_value("nsidebc")
 
@@ -306,7 +310,7 @@ class ControlAle(KeywordBase):
 
     @property
     def nbkt(self) -> int:
-        """Get or set the Number of Lagrangian cycles between global bucket-sort searches to locate the position of the Lagrangian structure (mesh) relative to the ALE fluid (mesh).  Default is 50.  This is on optional card 3.
+        """Get or set the Number of Lagrangian cycles between global bucket-sort searches to locate the position of the Lagrangian structure (mesh) relative to the ALE fluid (mesh). The default is 50.  This is on optional card 3.
         """ # nopep8
         return self._cards[2].get_value("nbkt")
 
@@ -320,15 +324,16 @@ class ControlAle(KeywordBase):
         """Get or set the A flag for turning ON/OFF mass scaling for ALE parts.  The global mass scaling control (parameter DT2MS under *CONTROL_ TIMESTEP card) must be ON.  If the run dt is lower than the mass scaling dt, then IMASCL has the following effects:
         EQ.0: (Default) No mass scaling for ALE parts.  Print out maximum 20 warnings.
         EQ.1: No mass scaling for ALE parts.  Stop the run.
-        EQ.2: Do mass scaling for ALE parts (the result may not be correct due to this scaling)
+        EQ.2: Do mass scaling for ALE parts (the result may not be correct due to this scaling).
+        EQ.3:	No mass scaling for ALE parts.  Use the ALE time step.  This time step may be small enough to substantially increase the calculation�s run time.
         """ # nopep8
         return self._cards[2].get_value("imascl")
 
     @imascl.setter
     def imascl(self, value: int) -> None:
         """Set the imascl property."""
-        if value not in [0, 1, 2, None]:
-            raise Exception("""imascl must be `None` or one of {0,1,2}.""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""imascl must be `None` or one of {0,1,2,3}.""")
         self._cards[2].set_value("imascl", value)
 
     @property
@@ -344,7 +349,7 @@ class ControlAle(KeywordBase):
 
     @property
     def beamin(self) -> float:
-        """Get or set the Flag to align the dynamics of plain strain and axisymmetric
+        """Get or set the Flag to align the dynamics of plane strain and axisymmetric
         beams in 2D FSI ALE models to their shell counterparts in 3D FSI ALE models:
         EQ.0.0: Off (default)
         EQ.1.0: On
@@ -360,9 +365,12 @@ class ControlAle(KeywordBase):
 
     @property
     def mmgpref(self) -> int:
-        """Get or set the A flag to select the method for assigning a reference pressure to multiple ALE multi-material groups (see Remark 3).
-        EQ.0: OFF(default) PREF applies to every AMMG in the model.
-        LT.0 : Then | MMGPREF | is an ID of either(a) a curve defined via DEFINE_CURVE or (b)a table defined via DEFINE_TABLE.Since by convention Tables and Load curves may not share common ID's, there will be no confusion about which ID is to be read
+        """Get or set the A flag to select the method for assigning a reference pressure to multiple ALE multi-material groups (see Remark 8).
+        EQ.0: Off (default). PREF applies to every AMMG in the model.
+        LT.0: |"MMGPREF"| is an ID of either a curve defined using *DEFINE_CURVE or a table defined using *DEFINE_TABLE.
+        If it is a curve, then its abscissa contains the multi-material group IDs (AMMGID), and the ordinates are the constant
+        reference pressure values associated with each of those AMMGIDs. This is the PREF = constant case for each AMMG.
+        If it is a table, then a load curve for PREF as a function of time must be defined for each AMMGID (the value in the table) in the model.
         """ # nopep8
         return self._cards[2].get_value("mmgpref")
 
@@ -418,8 +426,8 @@ class ControlAle(KeywordBase):
     @property
     def ialedr(self) -> int:
         """Get or set the Include ALE computations in the dynamic relaxation analysis (*CONTROL_DYNAMIC_RELAXATION).
-        EQ.0:	Off (default)
-        EQ.1:	On.
+        EQ.0: Off (default)
+        EQ.1: On.
         """ # nopep8
         return self._cards[3].get_value("ialedr")
 
@@ -431,8 +439,8 @@ class ControlAle(KeywordBase):
     @property
     def bndflx(self) -> int:
         """Get or set the Multi-Material ALE group set ID selecting only the materials in elements at mesh boundaries with influxes that can flow in. By default, when the flow is inwards at boundary faces of ALE elements, every materials in these elements flow in. This option can select only a few of these ALE groups.
-        EQ.0:	Off (default)
-        GT.0:	*SET_MULTI-MATERIAL_GROUP_LIST ID
+        EQ.0: Off (default)
+        GT.0: *SET_MULTI-MATERIAL_GROUP_LIST ID
         EQ.-1: No influx.
         """ # nopep8
         return self._cards[3].get_value("bndflx")
@@ -444,7 +452,8 @@ class ControlAle(KeywordBase):
 
     @property
     def minmas(self) -> float:
-        """Get or set the Factor of the minimum mass allowed in an element: MINMAS*initial_density*element_volume.
+        """Get or set the Factor of the minimum mass allowed in an element(see Remark 11):
+        MINMAS*initial_density*material_volume.
         """ # nopep8
         return self._cards[3].get_value("minmas")
 

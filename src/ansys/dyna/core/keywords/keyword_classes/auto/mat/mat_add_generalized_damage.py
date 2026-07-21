@@ -35,7 +35,7 @@ _MATADDGENERALIZEDDAMAGE_CARD0 = (
     FieldSchema("dtyp", int, 20, 10, 0),
     FieldSchema("refsz", float, 30, 10, None),
     FieldSchema("numfip", float, 40, 10, 1.0),
-    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("lp2bi", float, 50, 10, None),
     FieldSchema("pddt", int, 60, 10, 0),
     FieldSchema("nhis", int, 70, 10, 1),
 )
@@ -47,6 +47,8 @@ _MATADDGENERALIZEDDAMAGE_CARD1 = (
     FieldSchema("iflg1", int, 30, 10, 0),
     FieldSchema("iflg2", int, 40, 10, 0),
     FieldSchema("iflg3", int, 50, 10, 0),
+    FieldSchema("iflg4", int, 60, 10, 0),
+    FieldSchema("unused", int, 70, 10, None),
 )
 
 _MATADDGENERALIZEDDAMAGE_CARD2 = (
@@ -61,10 +63,10 @@ _MATADDGENERALIZEDDAMAGE_CARD2 = (
 _MATADDGENERALIZEDDAMAGE_CARD3 = (
     FieldSchema("d12", int, 0, 10, None),
     FieldSchema("d21", int, 10, 10, None),
-    FieldSchema("d24", int, 20, 10, None),
-    FieldSchema("d42", int, 30, 10, None),
-    FieldSchema("d14", int, 40, 10, None),
-    FieldSchema("d41", int, 50, 10, None),
+    FieldSchema("d24_d23", int, 20, 10, None, "d24/d23"),
+    FieldSchema("d42_d32", int, 30, 10, None, "d42/d32"),
+    FieldSchema("d14_d13", int, 40, 10, None, "d14/d13"),
+    FieldSchema("d41_d31", int, 50, 10, None, "d41/d31"),
 )
 
 _MATADDGENERALIZEDDAMAGE_CARD4 = (
@@ -188,9 +190,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @property
     def refsz(self) -> typing.Optional[float]:
-        """Get or set the Reference element size, for which an additional output of damage
-        will be generated. This is necessary to ensure the applicability of
-        resulting damage quantities when transferred to different mesh sizes.
+        """Get or set the Reference element size, for which an additional output of damage will be generated. This is necessary to ensure the applicability of resulting damage quantities when transferred to different mesh sizes.
         """ # nopep8
         return self._cards[0].get_value("refsz")
 
@@ -212,13 +212,27 @@ class MatAddGeneralizedDamage(KeywordBase):
         self._cards[0].set_value("numfip", value)
 
     @property
+    def lp2bi(self) -> typing.Optional[float]:
+        """Get or set the Option to use a bending indicator instead of the Lode parameter. If active (> 0), the expression 'bending indicator" replaces the term 'Lode parameter" everywhere in this manual page. We adopted the bending indicator from *MAT_258 (compare with variable Ω). LP2BI > 0 is only available for shell elements and requires NUMFIP = 1.
+        EQ.0.0: Inactive.
+        EQ.1.0: Active.Constant regularization(LCREG) applied.
+        EQ.2.0: Active.Regularization(LCREG) fully applied under pure membrane loading(Ω = 0) but not at all under pure bending(Ω = 1).Linear interpolation in between.
+        """ # nopep8
+        return self._cards[0].get_value("lp2bi")
+
+    @lp2bi.setter
+    def lp2bi(self, value: float) -> None:
+        """Set the lp2bi property."""
+        self._cards[0].set_value("lp2bi", value)
+
+    @property
     def pddt(self) -> int:
         """Get or set the Pre-defined damage tensors. If non-zero, damage tensor coefficients D11 to D66 on cards 3 and 4 will be ignored.See remarks for details.
-        EQ.0:	No pre-defined damage tensor is used.
-        EQ.1:	Isotropic damage tensor.
-        EQ.2:	2-parameter isotropic damage tensor for volumetric-deviatoric split.
-        EQ.3:	Anisotropic damage tensor as in MAT_104 (FLAG = -1).
-        EQ.4:	3-parameter damage tensor associated with IFLG1=2.
+        EQ.0: No pre-defined damage tensor is used.
+        EQ.1: Isotropic damage tensor.
+        EQ.2: 2-parameter isotropic damage tensor for volumetric-deviatoric split.
+        EQ.3: Anisotropic damage tensor as in MAT_104 (FLAG = -1).
+        EQ.4: 3-parameter damage tensor associated with IFLG1=2.
         """ # nopep8
         return self._cards[0].get_value("pddt")
 
@@ -231,7 +245,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @property
     def nhis(self) -> int:
-        """Get or set the Number of history variables as driving quantities (min = 1, max = 3).
+        """Get or set the Number of history variables as driving quantities (1<=NHIS<= 3).
         """ # nopep8
         return self._cards[0].get_value("nhis")
 
@@ -243,13 +257,9 @@ class MatAddGeneralizedDamage(KeywordBase):
     @property
     def his1(self) -> int:
         """Get or set the Choice of variable as driving quantity for damage, called "history value" in the following.
-        EQ.0.0: Equivalent plastic strain rate is the driving quantity for
-        the damage if IFLG1 = 0. Alternatively if IFLG1 = 1,
-        components of the plastic strain rate tensor are driving quantities for damage (see remarks).
-        GT.0.0: The rate of the additional history variable HISn is the
-        driving quantity for damage. IFLG1 should be set to 0.
-        LT.0.0: *DEFINE_FUNCTION IDs defining the damage driving
-        quantities as a function of the components of the plastic strain rate tensor, IFLG1 should be set to 1.
+        EQ.0.0: Equivalent plastic strain rate is the driving quantity for the damage if IFLG1 = 0. Alternatively if IFLG1 = 1, components of the plastic strain rate tensor are driving quantities for damage (see remarks).
+        GT.0.0: The rate of the additional history variable HISn is the driving quantity for damage. IFLG1 should be set to 0.
+        LT.0.0: *DEFINE_FUNCTION IDs defining the damage driving quantities as a function of the components of the plastic strain rate tensor, IFLG1 should be set to 1.
         """ # nopep8
         return self._cards[1].get_value("his1")
 
@@ -261,13 +271,9 @@ class MatAddGeneralizedDamage(KeywordBase):
     @property
     def his2(self) -> typing.Optional[int]:
         """Get or set the Choice of variable as driving quantity for damage, called "history value" in the following.
-        EQ.0.0: Equivalent plastic strain rate is the driving quantity for
-        the damage if IFLG1 = 0. Alternatively if IFLG1 = 1,
-        components of the plastic strain rate tensor are driving quantities for damage (see remarks).
-        GT.0.0: The rate of the additional history variable HISn is the
-        driving quantity for damage. IFLG1 should be set to 0.
-        LT.0.0: *DEFINE_FUNCTION IDs defining the damage driving
-        quantities as a function of the components of the plastic strain rate tensor, IFLG1 should be set to 1.
+        EQ.0.0: Equivalent plastic strain rate is the driving quantity for the damage if IFLG1 = 0. Alternatively if IFLG1 = 1, components of the plastic strain rate tensor are driving quantities for damage (see remarks).
+        GT.0.0: The rate of the additional history variable HISn is the driving quantity for damage. IFLG1 should be set to 0.
+        LT.0.0: *DEFINE_FUNCTION IDs defining the damage driving quantities as a function of the components of the plastic strain rate tensor, IFLG1 should be set to 1.
         """ # nopep8
         return self._cards[1].get_value("his2")
 
@@ -279,13 +285,9 @@ class MatAddGeneralizedDamage(KeywordBase):
     @property
     def his3(self) -> typing.Optional[int]:
         """Get or set the Choice of variable as driving quantity for damage, called "history value" in the following.
-        EQ.0.0: Equivalent plastic strain rate is the driving quantity for
-        the damage if IFLG1 = 0. Alternatively if IFLG1 = 1,
-        components of the plastic strain rate tensor are driving quantities for damage (see remarks).
-        GT.0.0: The rate of the additional history variable HISn is the
-        driving quantity for damage. IFLG1 should be set to 0.
-        LT.0.0: *DEFINE_FUNCTION IDs defining the damage driving
-        quantities as a function of the components of the plastic strain rate tensor, IFLG1 should be set to 1.
+        EQ.0.0: Equivalent plastic strain rate is the driving quantity for the damage if IFLG1 = 0. Alternatively if IFLG1 = 1, components of the plastic strain rate tensor are driving quantities for damage (see remarks).
+        GT.0.0: The rate of the additional history variable HISn is the driving quantity for damage. IFLG1 should be set to 0.
+        LT.0.0: *DEFINE_FUNCTION IDs defining the damage driving quantities as a function of the components of the plastic strain rate tensor, IFLG1 should be set to 1.
         """ # nopep8
         return self._cards[1].get_value("his3")
 
@@ -299,23 +301,23 @@ class MatAddGeneralizedDamage(KeywordBase):
         """Get or set the Damage driving quantities
         EQ.0.0: Rates of history variables HISn.
         EQ.1.0: Specific components of the plastic strain rate tensor, see remarks for details.
-        EQ.2.0: Predefined functions of plastic strain rate components for
-        orthotropic damage model, HISn inputs will be ignored, IFLG2 should be set to 1..
+        EQ.2.0: Predefined functions of plastic strain rate components for orthotropic damage model, HISn inputs will be ignored, IFLG2 should be set to 1.This option is available for shell elements only.
+        EQ.3: Specific components of the total strain rate tensor; see Remarks 2 and 3.
         """ # nopep8
         return self._cards[1].get_value("iflg1")
 
     @iflg1.setter
     def iflg1(self, value: int) -> None:
         """Set the iflg1 property."""
-        if value not in [0, 1, 2, None]:
-            raise Exception("""iflg1 must be `None` or one of {0,1,2}.""")
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""iflg1 must be `None` or one of {0,1,2,3}.""")
         self._cards[1].set_value("iflg1", value)
 
     @property
     def iflg2(self) -> int:
         """Get or set the Damage strain coordinate system
         EQ.0.0: Local element system.
-        EQ.1.0: Material system, only applicable for non-isotropic material models.Supported models for shell elements: all materials with AOPT feature. Supported models for solid elements: 22, 33, 41-50, 103, 122, 133, 157, 199, 233.
+        EQ.1.0: Material system, only applicable for non-isotropic material models.Supported models for shell elements: all materials with AOPT feature. Supported models for solid elements: 22, 33, 41-50, 103, 122, 126,133, 157, 199, 233.
         EQ.2.0: Principal strain system (rotating).
         EQ.3.0: Principal strain system (fixed when instability/coupling starts)..
         """ # nopep8
@@ -331,20 +333,30 @@ class MatAddGeneralizedDamage(KeywordBase):
     @property
     def iflg3(self) -> int:
         """Get or set the Erosion criteria and damage coupling system
-        EQ.0.0: Erosion occurs when one of the damage parameters
-        computer reaches unity, the damage tensor components
+        EQ.0.0: Erosion occurs when one of the damage parameters computer reaches unity, the damage tensor components
         are based on the individual damage parameters d1 to d3.
-        EQ.1.0: Erosion occurs when a single damage parameter D
-        reaches unity, the damage tensor components are based	on this single damage parameter.
+        EQ.1.0: Erosion occurs when a single damage parameter D reaches unity, the damage tensor components are based on this single damage parameter. Results in the isotropic limit case will only be correct if DMGEXP is set to 1.0 for all history variables.
+        EQ.2: Activation of the Domain of Shell-to-Solid Equivalence (DSSE) for shell elements, cf. Pack and Mohr (2017). Two damage variables are necessary for this model (a fracture initiation variable D1 and a localization initiation variable D2). If D1 reaches 1.0, stresses are set to zero and the integration point is no longer able to sustain any load. If D2=1.0, no action is taken, and the integration point is still mechanically active. Erosion occurs when at least one of the two damage variables (D1 or D2) reaches unity for all integration points. Additional required settings for this model: NUMFIP=-100, DCRIT=1, PDDT=1, and both NFLOC=0.
         """ # nopep8
         return self._cards[1].get_value("iflg3")
 
     @iflg3.setter
     def iflg3(self, value: int) -> None:
         """Set the iflg3 property."""
-        if value not in [0, 1, None]:
-            raise Exception("""iflg3 must be `None` or one of {0,1}.""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""iflg3 must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("iflg3", value)
+
+    @property
+    def iflg4(self) -> int:
+        """Get or set the Damage drivers' evolution flag. This option is relevant for cyclic loading when IFLG1 is set to 1 or 3. Damage cannot increase with decreasing strain or history variable, but as soon as the strain/history increase again after unloading (i.e., below the previously reached maximum), the damage also increases again (behavior with IFLG4 = 0). This can be prevented with IFLG4 = 1, where the last maximum strain/history is saved.
+        """ # nopep8
+        return self._cards[1].get_value("iflg4")
+
+    @iflg4.setter
+    def iflg4(self, value: int) -> None:
+        """Set the iflg4 property."""
+        self._cards[1].set_value("iflg4", value)
 
     @property
     def d11(self) -> typing.Optional[int]:
@@ -414,7 +426,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @property
     def d12(self) -> typing.Optional[int]:
-        """Get or set the DEFINE_FUNCTION IDs for damage tensor coefficients, see remarks.
+        """Get or set the DEFINE_FUNCTION IDs for damage tensor coefficients. Damage is for Shell and Solid elements. see remarks.
         """ # nopep8
         return self._cards[3].get_value("d12")
 
@@ -425,7 +437,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @property
     def d21(self) -> typing.Optional[int]:
-        """Get or set the DEFINE_FUNCTION IDs for damage tensor coefficients, see remarks.
+        """Get or set the DEFINE_FUNCTION IDs for damage tensor coefficients. Damage is for Shell and Solid elements. see remarks.
         """ # nopep8
         return self._cards[3].get_value("d21")
 
@@ -435,48 +447,48 @@ class MatAddGeneralizedDamage(KeywordBase):
         self._cards[3].set_value("d21", value)
 
     @property
-    def d24(self) -> typing.Optional[int]:
-        """Get or set the DEFINE_FUNCTION IDs for damage tensor coefficients, see remarks.
+    def d24_d23(self) -> typing.Optional[int]:
+        """Get or set the DEFINE_FUNCTION IDs for damage tensor coefficients. Damage is for Shell and Solid elements, see remarks.
         """ # nopep8
-        return self._cards[3].get_value("d24")
+        return self._cards[3].get_value("d24_d23")
 
-    @d24.setter
-    def d24(self, value: int) -> None:
-        """Set the d24 property."""
-        self._cards[3].set_value("d24", value)
+    @d24_d23.setter
+    def d24_d23(self, value: int) -> None:
+        """Set the d24_d23 property."""
+        self._cards[3].set_value("d24_d23", value)
 
     @property
-    def d42(self) -> typing.Optional[int]:
-        """Get or set the DEFINE_FUNCTION IDs for damage tensor coefficients, see remarks.
+    def d42_d32(self) -> typing.Optional[int]:
+        """Get or set the DEFINE_FUNCTION IDs for damage tensor coefficients. Damage is for Shell and Solid elements see remarks.
         """ # nopep8
-        return self._cards[3].get_value("d42")
+        return self._cards[3].get_value("d42_d32")
 
-    @d42.setter
-    def d42(self, value: int) -> None:
-        """Set the d42 property."""
-        self._cards[3].set_value("d42", value)
+    @d42_d32.setter
+    def d42_d32(self, value: int) -> None:
+        """Set the d42_d32 property."""
+        self._cards[3].set_value("d42_d32", value)
 
     @property
-    def d14(self) -> typing.Optional[int]:
-        """Get or set the DEFINE_FUNCTION IDs for damage tensor coefficients, see remarks.
+    def d14_d13(self) -> typing.Optional[int]:
+        """Get or set the DEFINE_FUNCTION IDs for damage tensor coefficients. Damage is for Shell and Solid elements see remarks.
         """ # nopep8
-        return self._cards[3].get_value("d14")
+        return self._cards[3].get_value("d14_d13")
 
-    @d14.setter
-    def d14(self, value: int) -> None:
-        """Set the d14 property."""
-        self._cards[3].set_value("d14", value)
+    @d14_d13.setter
+    def d14_d13(self, value: int) -> None:
+        """Set the d14_d13 property."""
+        self._cards[3].set_value("d14_d13", value)
 
     @property
-    def d41(self) -> typing.Optional[int]:
-        """Get or set the DEFINE_FUNCTION IDs for damage tensor coefficients, see remarks.
+    def d41_d31(self) -> typing.Optional[int]:
+        """Get or set the DEFINE_FUNCTION IDs for damage tensor coefficients. Damage is for Shell and Solid elements see remarks.
         """ # nopep8
-        return self._cards[3].get_value("d41")
+        return self._cards[3].get_value("d41_d31")
 
-    @d41.setter
-    def d41(self, value: int) -> None:
-        """Set the d41 property."""
-        self._cards[3].set_value("d41", value)
+    @d41_d31.setter
+    def d41_d31(self, value: int) -> None:
+        """Set the d41_d31 property."""
+        self._cards[3].set_value("d41_d31", value)
 
     @property
     def lcsdg(self) -> int:
@@ -516,8 +528,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @property
     def dcrit(self) -> typing.Optional[float]:
-        """Get or set the Damage threshold value (critical damage). If a Load curve of critical
-        history value or fixed value is given by ECRIT, input is ignored.
+        """Get or set the Damage threshold value (critical damage). If a Load curve of critical history value or fixed value is given by ECRIT, this input is ignored.
         """ # nopep8
         return self._cards[4].get_value("dcrit")
 
@@ -541,7 +552,9 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @property
     def lcreg(self) -> int:
-        """Get or set the Load curve ID defining element size dependent regularization factors for history value to failure.
+        """Get or set the Load curve ID or table ID defining element size dependent regularization factors for history value to failure:
+        GT.0: Load curve ID(regularization factor as a function of element size) or table ID(regularization factor as a function of element size curves indexed by effective strain rate)
+        LT.0 : | LCREGD | is a table ID for a table indexing regularization factor as a function of element size curves by triaxiality).This table provides an alternative to the use of SHRFand BIAXF for defining the effect of triaxiality on element size regularization of history value to failure.
         """ # nopep8
         return self._cards[4].get_value("lcreg")
 
@@ -553,10 +566,9 @@ class MatAddGeneralizedDamage(KeywordBase):
     @property
     def lcsrs(self) -> int:
         """Get or set the Load curve ID defining failure history value scaling factor for
-        LCSDG vs. history value rate. If the first rate value in the curve is
-        negative, it is assumed that all rate values are given as natural logarithm of the history rate.
-        GT.0: scale ECRIT, too
-        LT.0: do not scale ECRIT.
+        LCSDG vs. history value rate. If the first rate value in the curve is negative, it is assumed that all rate values are given as natural logarithm of the history rate.
+        GT.0: Scale ECRIT as well.
+        LT.0: Do not scale ECRIT.
         """ # nopep8
         return self._cards[5].get_value("lcsrs")
 
@@ -601,11 +613,11 @@ class MatAddGeneralizedDamage(KeywordBase):
     @property
     def midfail(self) -> float:
         """Get or set the Mid-plane failure option for shell elements. If active, then critical strain is only checked at the mid-plane integration point, meaning an odd number for NIP should be used. Damage is computed at the other integration points, but no coupling to the stresses is done first. As soon as the mid-plane IP reaches ECRIT/DCRIT, then all the other IPs are also checked (exception: MIDFAIL = 4).
-        EQ.0.0:	Inactive
-        EQ.1.0 : Active.The stresses immediately begin to reduce for non - mid - plane IPs that are already above their critical value.Coupling only occurs for IPs that reach their criterion.
-        EQ.2.0 : Active.The stresses immediately begin to reduce for all the non - mid - plane IPs.NUMFIP is active
-        EQ.3.0 : Active.Same as 2, but when D = 1 is reached in the middle integration point, the element is eroded instantaneously.NUMFIP is disregarded.
-        EQ.4.0 : Active.Damage and failure is applied only on the midpoint.When D = 1 on the midpoint, the element is eroded.NUMFIP is disregarded.Integration points away from the midplane see no stress reduction and no failure.
+        EQ.0.0: Inactive
+        EQ.1.0: Active.The stresses immediately begin to reduce for non - mid - plane IPs that are already above their critical value.Coupling only occurs for IPs that reach their criterion.
+        EQ.2.0: Active.The stresses immediately begin to reduce for all the non - mid - plane IPs.NUMFIP is active
+        EQ.3.0: Active.Same as 2, but when D = 1 is reached in the middle integration point, the element is eroded instantaneously.NUMFIP is disregarded.
+        EQ.4.0: Active.Damage and failure is applied only on the midpoint.When D = 1 on the midpoint, the element is eroded.NUMFIP is disregarded.Integration points away from the midplane see no stress reduction and no failure.
         """ # nopep8
         return self._cards[5].get_value("midfail")
 
@@ -618,7 +630,7 @@ class MatAddGeneralizedDamage(KeywordBase):
 
     @property
     def nfloc(self) -> typing.Optional[float]:
-        """Get or set the Optional “local” number of failed integration points prior to element deletion. Overwrites the definition of NUMFIP for history variable HISn
+        """Get or set the Optional 'local' number of failed integration points prior to element deletion. Overwrites the definition of NUMFIP for history variable HISn
         """ # nopep8
         return self._cards[5].get_value("nfloc")
 

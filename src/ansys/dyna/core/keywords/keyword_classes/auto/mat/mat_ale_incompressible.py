@@ -80,8 +80,7 @@ class MatAleIncompressible(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material ID. A unique number or label not exceeding 8 charaters
-        must be specified. Material ID is referenced in the *PART card and must be unique.
+        """Get or set the Material ID. A unique number or label must be specified. Material ID is referenced in the *PART card and must be unique.
         """ # nopep8
         return self._cards[0].get_value("mid")
 

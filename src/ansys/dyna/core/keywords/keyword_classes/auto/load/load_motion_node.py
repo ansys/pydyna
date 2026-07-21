@@ -76,12 +76,12 @@ class LoadMotionNode(KeywordBase):
     def dof1(self) -> int:
         """Get or set the Applicable degrees-of-freedom:
         EQ.0: Not valid, please use any of the other available options,
-        EQ.1:  x-direction of load action,
-        EQ.2:  y-direction of load action,
-        EQ.3:  z-direction of load action,
-        EQ.4:  moment about the x-axis,
-        EQ.5:  moment about the y-axis,
-        EQ.6:  moment about the z-axis.
+        EQ.1: x-direction of load action,
+        EQ.2: y-direction of load action,
+        EQ.3: z-direction of load action,
+        EQ.4: moment about the x-axis,
+        EQ.5: moment about the y-axis,
+        EQ.6: moment about the z-axis.
         """ # nopep8
         return self._cards[0].get_value("dof1")
 
@@ -139,21 +139,21 @@ class LoadMotionNode(KeywordBase):
     @property
     def dof2(self) -> int:
         """Get or set the Applicable degrees-of-freedom:
-        EQ. 1:  x-coordinate
-        EQ. 2:  y-coordinate,
-        EQ. 3:  z-coordinate,
-        EQ. 4:  x-translational displacement,
-        EQ. 5:  y-translational displacement,
-        EQ. 6:  z-translational displacement,
-        EQ. 7:  rotational displacement about the x-axis,
-        EQ. 8:  rotational displacement about the y-axis,
-        EQ. 9:  rotational displacement about the z-axis.
-        EQ.10:  x-translational velocity,
-        EQ.11:  y-translational velocity,
-        EQ.12:  z-translational velocity,
-        EQ.13:  rotational velocity about the x-axis,
-        EQ.14:  rotational velocity about the y-axis,
-        EQ.15:  rotational velocity about the z-axis.
+        EQ. 1: x-coordinate
+        EQ. 2: y-coordinate,
+        EQ. 3: z-coordinate,
+        EQ. 4: x-translational displacement,
+        EQ. 5: y-translational displacement,
+        EQ. 6: z-translational displacement,
+        EQ. 7: rotational displacement about the x-axis,
+        EQ. 8: rotational displacement about the y-axis,
+        EQ. 9: rotational displacement about the z-axis.
+        EQ.10: x-translational velocity,
+        EQ.11: y-translational velocity,
+        EQ.12: z-translational velocity,
+        EQ.13: rotational velocity about the x-axis,
+        EQ.14: rotational velocity about the y-axis,
+        EQ.15: rotational velocity about the z-axis.
         """ # nopep8
         return self._cards[0].get_value("dof2")
 

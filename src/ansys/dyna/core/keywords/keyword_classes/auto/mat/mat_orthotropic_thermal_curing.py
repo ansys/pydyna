@@ -308,12 +308,12 @@ class MatOrthotropicThermalCuring(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC, particularly the Material Directions section, for details):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
-        EQ.2.0:	Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
-        EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
-        LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_OPTION).
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with *DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
+        EQ.1.0: Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
+        EQ.4.0: Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number(CID on *DEFINE_COORDINATE_OPTION).
         """ # nopep8
         return self._cards[1].get_value("aopt")
 
@@ -325,14 +325,14 @@ class MatOrthotropicThermalCuring(KeywordBase):
     @property
     def macf(self) -> int:
         """Get or set the Material axes change flag for solid elements:
-        EQ.1 : No change, default
-        EQ.2 : Switch material axes a and b after BETA rotation
-        EQ.3 : Switch material axes a and c after BETA rotation
-        EQ.4 : Switch material axes b and c after BETA rotation
-        EQ. - 4 : Switch material axes b and c before BETA rotation
-        EQ. - 3 : Switch material axes a and c before BETA rotation
-        EQ. - 2 : Switch material axes a and b before BETA rotation
-        Figure Error!Reference source not found.indicates when LS - DYNA applies MACF during the process to obtain the final material axes.If BETA on * ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT = 3, the BETA input on Card 3 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed.
+        EQ.1: No change, default
+        EQ.2: Switch material axes a and b after BETA rotation
+        EQ.3: Switch material axes a and c after BETA rotation
+        EQ.4: Switch material axes b and c after BETA rotation
+        EQ. - 4: Switch material axes b and c before BETA rotation
+        EQ. - 3: Switch material axes a and c before BETA rotation
+        EQ. - 2: Switch material axes a and b before BETA rotation
+        If BETA on *ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT = 3, the BETA input on Card 3 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed.
         """ # nopep8
         return self._cards[1].get_value("macf")
 
@@ -477,7 +477,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Material angle in degrees for AOPT = 0 (shells and tshells only) and AOPT = 3 (all element types).  It may be overridden on the element card; see *ELEMENT_‌SHELL_‌BETA, *ELEMENT_TSHELL_BETA, or *ELEMENT_‌SOLID_‌ORTHO
+        """Get or set the Material angle in degrees for AOPT = 0 (shells and tshells only) and AOPT = 3 (all element types). It may be overridden on the element card; see *ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BETA, or *ELEMENT_SOLID_ORTHO
         """ # nopep8
         return self._cards[3].get_value("beta")
 
@@ -580,7 +580,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
 
     @property
     def lccha(self) -> typing.Optional[int]:
-        """Get or set the Load curve for γ_a, coefficient of chemical shrinkage in the a-direction. Input γ_a as function of state of cure β.
+        """Get or set the Load curve for gamma_a, coefficient of chemical shrinkage in the a-direction. Input gamma_a as function of state of cure beta.
         """ # nopep8
         return self._cards[5].get_value("lccha")
 
@@ -591,7 +591,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
 
     @property
     def lcchb(self) -> typing.Optional[int]:
-        """Get or set the Load curve for γ_b, coefficient of chemical shrinkage in the b-direction. Input γ_b as function of state of cure β.
+        """Get or set the Load curve for gamma_b, coefficient of chemical shrinkage in the b-direction. Input gamma_b as function of state of cure beta.
         """ # nopep8
         return self._cards[5].get_value("lcchb")
 
@@ -602,7 +602,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
 
     @property
     def lcchc(self) -> typing.Optional[int]:
-        """Get or set the Load curve for γ_c, coefficient of chemical shrinkage in the c-direction. Input γ_c as function of state of cure β.
+        """Get or set the Load curve for gamma_c, coefficient of chemical shrinkage in the c-direction. Input gamma_c as function of state of cure beta.
         """ # nopep8
         return self._cards[5].get_value("lcchc")
 
@@ -613,7 +613,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
 
     @property
     def lcaa(self) -> typing.Optional[int]:
-        """Get or set the Load curve or table ID for α_a. If defined, parameter AA is ignored.  If a load curve, then α_a is a function of temperature. If a table ID, the α_a is a function of the state of cure (table values) and temperature (see*DEFINE_TABLE)..
+        """Get or set the Load curve or table ID for alpha_a. If defined, parameter AA is ignored. If a load curve, then alpha_a is a function of temperature. If a table ID, the alpha_a is a function of the state of cure (table values) and temperature (see*DEFINE_TABLE)..
         """ # nopep8
         return self._cards[5].get_value("lcaa")
 
@@ -624,7 +624,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
 
     @property
     def lcab(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID for α_b. If defined parameter, AB is ignored. See LCAA for further details..
+        """Get or set the Load curve ID for alpha_b. If defined parameter, AB is ignored. See LCAA for further details..
         """ # nopep8
         return self._cards[5].get_value("lcab")
 
@@ -635,7 +635,7 @@ class MatOrthotropicThermalCuring(KeywordBase):
 
     @property
     def lcac(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID for α_c. If defined parameter, AC is ignored. See LCAA for further details..
+        """Get or set the Load curve ID for alpha_c. If defined parameter, AC is ignored. See LCAA for further details..
         """ # nopep8
         return self._cards[5].get_value("lcac")
 

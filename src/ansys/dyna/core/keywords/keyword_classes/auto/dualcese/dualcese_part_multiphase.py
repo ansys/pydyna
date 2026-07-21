@@ -97,9 +97,9 @@ class DualcesePartMultiphase(KeywordBase):
     @property
     def fsitype(self) -> typing.Optional[str]:
         """Get or set the FSI type to use on this part:
-        EQ.<BLANK>:	If left blank, no FSI is performed.
-        EQ.IBM:	Immersed boundary FSI solver
-        EQ.MOVMESH:	Moving mesh FSI solver(FSITYPE = MMM may also be used for the same effect)
+        EQ.<BLANK>: If left blank, no FSI is performed.
+        EQ.IBM: Immersed boundary FSI solver
+        EQ.MOVMESH: Moving mesh FSI solver(FSITYPE = MMM may also be used for the same effect)
         """ # nopep8
         return self._cards[0].get_value("fsitype")
 

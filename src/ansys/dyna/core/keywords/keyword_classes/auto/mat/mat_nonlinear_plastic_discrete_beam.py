@@ -46,6 +46,7 @@ _MATNONLINEARPLASTICDISCRETEBEAM_CARD1 = (
     FieldSchema("rdr", float, 30, 10, None),
     FieldSchema("rds", float, 40, 10, None),
     FieldSchema("rdt", float, 50, 10, None),
+    FieldSchema("ryld", int, 60, 10, 0),
 )
 
 _MATNONLINEARPLASTICDISCRETEBEAM_CARD2 = (
@@ -170,7 +171,7 @@ class MatNonlinearPlasticDiscreteBeam(KeywordBase):
     @property
     def tkr(self) -> typing.Optional[float]:
         """Get or set the Translational stiffness about local r-axis.
-        LT.0.0:	|TKR| is the load curve ID defining the elastic translational force along local r-axis as a function of relative translational displacement. Useful for nonlinear elastic behavior.
+        LT.0.0: |TKR| is the load curve ID defining the elastic translational force along local r-axis as a function of relative translational displacement. Useful for nonlinear elastic behavior.
         """ # nopep8
         return self._cards[0].get_value("tkr")
 
@@ -182,7 +183,7 @@ class MatNonlinearPlasticDiscreteBeam(KeywordBase):
     @property
     def tks(self) -> typing.Optional[float]:
         """Get or set the Translational stiffness about local s-axis.
-        LT.0.0:	|TKS| is the load curve ID defining the elastic translational force along local s-axis as a function of relative translational displacement. Useful for nonlinear elastic behavior.
+        LT.0.0: |TKS| is the load curve ID defining the elastic translational force along local s-axis as a function of relative translational displacement. Useful for nonlinear elastic behavior.
         """ # nopep8
         return self._cards[0].get_value("tks")
 
@@ -194,7 +195,7 @@ class MatNonlinearPlasticDiscreteBeam(KeywordBase):
     @property
     def tkt(self) -> typing.Optional[float]:
         """Get or set the Translational stiffness about local t-axis.
-        LT.0.0:	|TKT| is the load curve ID defining the elastic translational force along local t-axis as a function of relative translational displacement. Useful for nonlinear elastic behavior.
+        LT.0.0: |TKT| is the load curve ID defining the elastic translational force along local t-axis as a function of relative translational displacement. Useful for nonlinear elastic behavior.
         """ # nopep8
         return self._cards[0].get_value("tkt")
 
@@ -301,6 +302,21 @@ class MatNonlinearPlasticDiscreteBeam(KeywordBase):
     def rdt(self, value: float) -> None:
         """Set the rdt property."""
         self._cards[1].set_value("rdt", value)
+
+    @property
+    def ryld(self) -> int:
+        """Get or set the Flag for method of computing plastic yielding:
+        EQ.0: Original method of determining plastic yielding(default)
+        EQ.1: Compute yield displacement / rotation by taking the first point of the relevant curve as the yield force / moment and dividing it by the relevant stiffness
+        """ # nopep8
+        return self._cards[1].get_value("ryld")
+
+    @ryld.setter
+    def ryld(self, value: int) -> None:
+        """Set the ryld property."""
+        if value not in [0, 1, None]:
+            raise Exception("""ryld must be `None` or one of {0,1}.""")
+        self._cards[1].set_value("ryld", value)
 
     @property
     def lcpdr(self) -> int:

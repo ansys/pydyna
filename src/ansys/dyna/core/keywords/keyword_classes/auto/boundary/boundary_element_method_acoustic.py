@@ -189,8 +189,8 @@ class BoundaryElementMethodAcoustic(KeywordBase):
     @property
     def type_ext(self) -> int:
         """Get or set the Output exterior field point type.
-        EQ.1:  Node set ID.
-        EQ.2:  Segment set ID.
+        EQ.1: Node set ID.
+        EQ.2: Segment set ID.
         """ # nopep8
         return self._cards[1].get_value("type_ext")
 
@@ -215,8 +215,8 @@ class BoundaryElementMethodAcoustic(KeywordBase):
     @property
     def type_int(self) -> int:
         """Get or set the Output interior field point type.
-        EQ.1:  Node set ID.
-        EQ.2:  Segment set ID.
+        EQ.1: Node set ID.
+        EQ.2: Segment set ID.
         """ # nopep8
         return self._cards[1].get_value("type_int")
 
@@ -248,9 +248,9 @@ class BoundaryElementMethodAcoustic(KeywordBase):
     @property
     def method(self) -> int:
         """Get or set the Method used in acoustic analysis (Default =0)
-        EQ.0:  Rayleigh method (very fast)
+        EQ.0: Rayleigh method (very fast)
         EQ.1: Kirchhoff method coupled to FEM for acoustics (*MAT_ACOUSTIC) (see Remark 1)
-        EQ.2:  BEM
+        EQ.2: BEM
         """ # nopep8
         return self._cards[2].get_value("method")
 
@@ -308,9 +308,9 @@ class BoundaryElementMethodAcoustic(KeywordBase):
     @property
     def sstype(self) -> int:
         """Get or set the Boundary element type.
-        EQ.0:  Part Set ID
-        EQ.1:  Part ID
-        EQ.2:  Segment set ID.
+        EQ.0: Part Set ID
+        EQ.1: Part ID
+        EQ.2: Segment set ID.
         """ # nopep8
         return self._cards[3].get_value("sstype")
 
@@ -340,8 +340,8 @@ class BoundaryElementMethodAcoustic(KeywordBase):
     def bem_type(self) -> typing.Optional[int]:
         """Get or set the Type of input boundary values in BEM Analysis.
         EQ.0: Boundary velocity will be processed in BEM Analysis
-        EQ.1:  Boundary acceleration will be processed in BEM analysis
-        EQ.- n:  Velocity is given in frequency domain, through the load curve n. An amplitude vs. frequency load curve (with Curve ID n) needs to be defined.
+        EQ.1: Boundary acceleration will be processed in BEM analysis
+        EQ.- n: Velocity is given in frequency domain, through the load curve n. An amplitude vs. frequency load curve (with Curve ID n) needs to be defined.
         """ # nopep8
         return self._cards[3].get_value("bem_type")
 
@@ -353,8 +353,8 @@ class BoundaryElementMethodAcoustic(KeywordBase):
     @property
     def restart(self) -> int:
         """Get or set the This Flag is used to save an LS-DYNA analysis if the binary output file in the (bem=filename) option has not been changed. (Default = 0).
-        EQ.0:  LS-DYNA analysis is processed and generates a new binary file.
-        EQ.1:  LS-DYNA analysis is not processed. The binary file from previous run is used.
+        EQ.0: LS-DYNA analysis is processed and generates a new binary file.
+        EQ.1: LS-DYNA analysis is not processed. The binary file from previous run is used.
         """ # nopep8
         return self._cards[3].get_value("restart")
 

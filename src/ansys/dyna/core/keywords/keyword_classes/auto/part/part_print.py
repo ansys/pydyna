@@ -159,13 +159,13 @@ class PartPrint(KeywordBase):
 
     @property
     def adpopt(self) -> typing.Optional[int]:
-        """Get or set the Indicate if this part is adapted or not. See also *CONTROL_ADAPTIVITY.
+        """Get or set the Indicate if this part is adapted. See also *CONTROL_ADAPTIVITY.
         LT.0: R-adaptive remeshing for 2-D solids, |ADPOPT| gives the load curve ID that defines the element size as a function of time.
         EQ.0:Adaptive remeshing is inactive for this part ID.
-        EQ.1:	h - adaptive for 3D shells and for shell / solid / shell sandwich composites.
-        EQ.2 : r - adaptive remeshing for 2D solids, 3D tetrahedrons and 3D EFG.For a more detailed description of 3D r - adaptivity, see Volume IV of the Keyword User’s Manual(Multiscale Solvers).
-        EQ.3 : Axisymmetric r - adaptive remeshing for 3D solid(see Remark 6).For a more detailed description of 3D r - adaptivity, see Volume IV of the Keyword User’s Manual(Multiscale Solvers).
-        EQ.9 : Passive h - adaptive for 3D shells.The elements in this part will not be split unless their neighboring elements in other parts need to be split more than one level.
+        EQ.1: h - adaptivity for 3D shells and shell/solid/shell sandwich composites.
+        EQ.2: r - adaptive remeshing for 2D solids, 3D tetrahedrons and 3D EFG.For a more detailed description of 3D r - adaptivity, see Volume IV of the Keyword Users Manual(Multiscale Solvers).
+        EQ.3: Axisymmetric r - adaptive remeshing for 3D solid(see Remark 6).For a more detailed description of 3D r - adaptivity, see Volume IV of the Keyword Users Manual(Multiscale Solvers).
+        EQ.9: Passive h - adaptivity for 3D shells.The elements in this part will not be split unless their neighboring elements in other parts need to be split more than one level.
         """ # nopep8
         return self._cards[1].get_value("adpopt")
 
@@ -176,8 +176,8 @@ class PartPrint(KeywordBase):
 
     @property
     def tmid(self) -> int:
-        """Get or set the Thermal material property identification defined in the *MAT_THERMAL section. Thermal properties must be specified for all solid, shell, and thick shell parts if a thermal or coupled thermal structual/analysis is being performed. Beams and discrete elements are not considered in thermal analyses.
-        EQ.0: defaults to MID.
+        """Get or set the Thermal material property identification defined in the *MAT_THERMAL section. Thermal properties must be specified for all solid, shell,
+        and thick shell parts for thermal or coupled thermal-structual analyses. Beams and discrete elements are not considered in thermal analyses. See Remark 7.
         """ # nopep8
         return self._cards[1].get_value("tmid")
 
@@ -189,10 +189,10 @@ class PartPrint(KeywordBase):
     @property
     def prbf(self) -> int:
         """Get or set the Print flag for RBDOUT and MATSUM files
-        EQ.0: default is taken from the keyword *CONTROL_OUTPUT
-        EQ.1: write data into RDBOUT file only
-        EQ.2: write data into MATSUM file only
-        EQ.3: do not write data into RBDOUT AND MATSUM files
+        EQ.0: default is taken from *CONTROL_OUTPUT
+        EQ.1: write data into the rdbout file only
+        EQ.2: write data into the matsum file only
+        EQ.3: do not write data into rbdout and matsum.
         """ # nopep8
         return self._cards[2].get_value("prbf")
 

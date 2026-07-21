@@ -29,8 +29,8 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINEFORMINGCONTACT_CARD0 = (
-    FieldSchema("ips", int, 0, 10, None),
-    FieldSchema("ipm", int, 10, 10, None),
+    FieldSchema("ipsa", int, 0, 10, None),
+    FieldSchema("ipsb", int, 10, 10, None),
     FieldSchema("fs", float, 20, 10, None),
     FieldSchema("oneway", int, 30, 10, 0),
 )
@@ -48,8 +48,8 @@ class DefineFormingContact(KeywordBase):
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
-        "ips": LinkType.PART,
-        "ipm": LinkType.PART,
+        "ipsa": LinkType.PART,
+        "ipsb": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -73,26 +73,26 @@ class DefineFormingContact(KeywordBase):
             ),
         ]
     @property
-    def ips(self) -> typing.Optional[int]:
-        """Get or set the Part ID of a slave sliding member, typically a deformable sheet metal blank.
+    def ipsa(self) -> typing.Optional[int]:
+        """Get or set the Part ID of a SURFA sliding member, typically a deformable sheet metal blank.
         """ # nopep8
-        return self._cards[0].get_value("ips")
+        return self._cards[0].get_value("ipsa")
 
-    @ips.setter
-    def ips(self, value: int) -> None:
-        """Set the ips property."""
-        self._cards[0].set_value("ips", value)
+    @ipsa.setter
+    def ipsa(self, value: int) -> None:
+        """Set the ipsa property."""
+        self._cards[0].set_value("ipsa", value)
 
     @property
-    def ipm(self) -> typing.Optional[int]:
-        """Get or set the Part ID of a master sliding member, typically a tool or die defined as a rigid body.
+    def ipsb(self) -> typing.Optional[int]:
+        """Get or set the Part ID of a SURFB sliding member, typically a tool or die defined as a rigid body.
         """ # nopep8
-        return self._cards[0].get_value("ipm")
+        return self._cards[0].get_value("ipsb")
 
-    @ipm.setter
-    def ipm(self, value: int) -> None:
-        """Set the ipm property."""
-        self._cards[0].set_value("ipm", value)
+    @ipsb.setter
+    def ipsb(self, value: int) -> None:
+        """Set the ipsb property."""
+        self._cards[0].set_value("ipsb", value)
 
     @property
     def fs(self) -> typing.Optional[float]:
@@ -108,8 +108,8 @@ class DefineFormingContact(KeywordBase):
     @property
     def oneway(self) -> int:
         """Get or set the Define FORMING contact type:
-        EQ.0:	The contact is FORMING_ONE_WAY_SURFACE_TO_ SURFACE.
-        EQ.1:	The contact is FORMING_ SURFACE_TO_ SURFACE.
+        EQ.0: The contact is FORMING_ONE_WAY_SURFACE_TO_ SURFACE.
+        EQ.1: The contact is FORMING_ SURFACE_TO_ SURFACE.
         """ # nopep8
         return self._cards[0].get_value("oneway")
 
@@ -135,12 +135,12 @@ class DefineFormingContact(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def ips_link(self) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given ips."""
-        return self._get_link_by_attr("PART", "pid", self.ips, "parts")
+    def ipsa_link(self) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given ipsa."""
+        return self._get_link_by_attr("PART", "pid", self.ipsa, "parts")
 
     @property
-    def ipm_link(self) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given ipm."""
-        return self._get_link_by_attr("PART", "pid", self.ipm, "parts")
+    def ipsb_link(self) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given ipsb."""
+        return self._get_link_by_attr("PART", "pid", self.ipsb, "parts")
 

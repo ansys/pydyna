@@ -47,7 +47,7 @@ class NodeMergeTolerance(KeywordBase):
         ]
     @property
     def tolr(self) -> typing.Optional[float]:
-        """Get or set the Physical distance used to determine whether to merge a nodal pair of	nearby nodes.
+        """Get or set the Physical distance used to determine whether to merge a nodal pair of nearby nodes.
         """ # nopep8
         return self._cards[0].get_value("tolr")
 

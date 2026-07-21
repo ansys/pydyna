@@ -32,9 +32,9 @@ _DATABASEFSI_CARD0 = (
 )
 
 _DATABASEFSI_CARD1 = (
-    FieldSchema("dbsfi_id", int, 0, 10, None),
+    FieldSchema("dbfsi_id", int, 0, 10, None),
     FieldSchema("sid", int, 10, 10, None),
-    FieldSchema("stdype", int, 20, 10, 0),
+    FieldSchema("sidtype", int, 20, 10, 0),
     FieldSchema("swid", int, 30, 10, None),
     FieldSchema("convid", int, 40, 10, None),
     FieldSchema("ndsetid", int, 50, 10, None),
@@ -74,10 +74,10 @@ class DatabaseFsi(KeywordBase):
     @property
     def binary(self) -> int:
         """Get or set the Flag for binary output.  See remarks under "Output Files and Post-Processing" in Appendix O, "LS-DYNA MPP User Guide."
-        EQ.1:	ASCII file is written:	This is the default for shared memory parallel (SMP) LS-DYNA executables.
-        EQ.2:	Data written to a binary database binout, which contains data that would otherwise be output to the ASCII file.
+        EQ.1: ASCII file is written: This is the default for shared memory parallel (SMP) LS-DYNA executables.
+        EQ.2: Data written to a binary database binout, which contains data that would otherwise be output to the ASCII file.
         The ASCII file in this case is not created.  This is the default for MPP LS-DYNA executables.
-        EQ.3:	ASCII file is written, and the data is also written to the binary database (NOTE: MPP LS-DYNA executables will only produce the binary database).
+        EQ.3: ASCII file is written, and the data is also written to the binary database (NOTE: MPP LS-DYNA executables will only produce the binary database).
         """ # nopep8
         return self._cards[0].get_value("binary")
 
@@ -89,15 +89,15 @@ class DatabaseFsi(KeywordBase):
         self._cards[0].set_value("binary", value)
 
     @property
-    def dbsfi_id(self) -> typing.Optional[int]:
+    def dbfsi_id(self) -> typing.Optional[int]:
         """Get or set the Surface ID (for reference purposes only)
         """ # nopep8
-        return self._cards[1].get_value("dbsfi_id")
+        return self._cards[1].get_value("dbfsi_id")
 
-    @dbsfi_id.setter
-    def dbsfi_id(self, value: int) -> None:
-        """Set the dbsfi_id property."""
-        self._cards[1].set_value("dbsfi_id", value)
+    @dbfsi_id.setter
+    def dbfsi_id(self, value: int) -> None:
+        """Set the dbfsi_id property."""
+        self._cards[1].set_value("dbfsi_id", value)
 
     @property
     def sid(self) -> typing.Optional[int]:
@@ -111,20 +111,20 @@ class DatabaseFsi(KeywordBase):
         self._cards[1].set_value("sid", value)
 
     @property
-    def stdype(self) -> int:
+    def sidtype(self) -> int:
         """Get or set the Set type:
         EQ.0: Part set,
         EQ.1: Part,
         EQ.2: Segment set.
         """ # nopep8
-        return self._cards[1].get_value("stdype")
+        return self._cards[1].get_value("sidtype")
 
-    @stdype.setter
-    def stdype(self, value: int) -> None:
-        """Set the stdype property."""
+    @sidtype.setter
+    def sidtype(self, value: int) -> None:
+        """Set the sidtype property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""stdype must be `None` or one of {0,1,2}.""")
-        self._cards[1].set_value("stdype", value)
+            raise Exception("""sidtype must be `None` or one of {0,1,2}.""")
+        self._cards[1].set_value("sidtype", value)
 
     @property
     def swid(self) -> typing.Optional[int]:

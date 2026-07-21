@@ -24,10 +24,15 @@
 
 from .damping_frequency_range import DampingFrequencyRange
 from .damping_frequency_range_deform import DampingFrequencyRangeDeform
+from .damping_frequency_range_deform_dmig import DampingFrequencyRangeDeformDmig
+from .damping_frequency_range_dmig import DampingFrequencyRangeDmig
 from .damping_global import DampingGlobal
 from .damping_part_mass import DampingPartMass
 from .damping_part_mass_set import DampingPartMassSet
 from .damping_part_stiffness import DampingPartStiffness
 from .damping_part_stiffness_set import DampingPartStiffnessSet
+from .damping_part_structural import DampingPartStructural
+from .damping_part_structural_set import DampingPartStructuralSet
 from .damping_porosity import DampingPorosity
 from .damping_relative import DampingRelative
+from .damping_structural import DampingStructural

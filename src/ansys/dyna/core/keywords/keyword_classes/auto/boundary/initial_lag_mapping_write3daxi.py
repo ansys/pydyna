@@ -39,6 +39,7 @@ _INITIALLAGMAPPINGWRITE3DAXI_CARD1 = (
     FieldSchema("vecid", int, 30, 10, None),
     FieldSchema("angle", float, 40, 10, None),
     FieldSchema("nelangl", int, 50, 10, None),
+    FieldSchema("tbeg", float, 60, 10, None),
 )
 
 class InitialLagMappingWrite3Daxi(KeywordBase):
@@ -133,10 +134,10 @@ class InitialLagMappingWrite3Daxi(KeywordBase):
     @property
     def nelangl(self) -> typing.Optional[int]:
         """Get or set the Mapping parameter.  See Remark 5.
-        GT. 0:	For a 2D to 3D mapping, number of elements to create in the azimuthal direction for ANGLE
-        EQ.-1:	No mesh is generated or projected.
-        EQ.-2:	For a 3D to 3D mapping, ANGLE only rotates the data from the mapping file (not the current mesh).
-        EQ.-3:	No mesh is generated or projected except that the boundary nodes of the current mesh are projected on the boundary faces of the previous mesh
+        GT. 0: For a 2D to 3D mapping, number of elements to create in the azimuthal direction for ANGLE
+        EQ.-1: No mesh is generated or projected.
+        EQ.-2: For a 3D to 3D mapping, ANGLE only rotates the data from the mapping file (not the current mesh).
+        EQ.-3: No mesh is generated or projected except that the boundary nodes of the current mesh are projected on the boundary faces of the previous mesh
         """ # nopep8
         return self._cards[1].get_value("nelangl")
 
@@ -144,6 +145,17 @@ class InitialLagMappingWrite3Daxi(KeywordBase):
     def nelangl(self, value: int) -> None:
         """Set the nelangl property."""
         self._cards[1].set_value("nelangl", value)
+
+    @property
+    def tbeg(self) -> typing.Optional[float]:
+        """Get or set the Time at which the current run starts if it is greater than the previous run�s termination time. By default, the current run starts at the termination time of the previous run, which is stored in the mapping file. TBEG only replaces the termination time of the previous run if it exceeds that termination time.
+        """ # nopep8
+        return self._cards[1].get_value("tbeg")
+
+    @tbeg.setter
+    def tbeg(self, value: float) -> None:
+        """Set the tbeg property."""
+        self._cards[1].set_value("tbeg", value)
 
     @property
     def vecid_link(self) -> typing.Optional[DefineVector]:

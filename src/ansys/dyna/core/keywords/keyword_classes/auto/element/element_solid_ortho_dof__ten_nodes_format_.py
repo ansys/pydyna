@@ -87,14 +87,6 @@ class ElementSolidOrthoDofTenNodesFormat(KeywordBase):
         "n8": LinkType.NODE,
         "n9": LinkType.NODE,
         "n10": LinkType.NODE,
-        "ns1": LinkType.NODE,
-        "ns2": LinkType.NODE,
-        "ns3": LinkType.NODE,
-        "ns4": LinkType.NODE,
-        "ns5": LinkType.NODE,
-        "ns6": LinkType.NODE,
-        "ns7": LinkType.NODE,
-        "ns8": LinkType.NODE,
         "pid": LinkType.PART,
     }
 
@@ -458,46 +450,6 @@ class ElementSolidOrthoDofTenNodesFormat(KeywordBase):
     def n10_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given n10."""
         return self._get_link_by_attr("NODE", "nid", self.n10, "parts")
-
-    @property
-    def ns1_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given ns1."""
-        return self._get_link_by_attr("NODE", "nid", self.ns1, "parts")
-
-    @property
-    def ns2_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given ns2."""
-        return self._get_link_by_attr("NODE", "nid", self.ns2, "parts")
-
-    @property
-    def ns3_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given ns3."""
-        return self._get_link_by_attr("NODE", "nid", self.ns3, "parts")
-
-    @property
-    def ns4_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given ns4."""
-        return self._get_link_by_attr("NODE", "nid", self.ns4, "parts")
-
-    @property
-    def ns5_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given ns5."""
-        return self._get_link_by_attr("NODE", "nid", self.ns5, "parts")
-
-    @property
-    def ns6_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given ns6."""
-        return self._get_link_by_attr("NODE", "nid", self.ns6, "parts")
-
-    @property
-    def ns7_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given ns7."""
-        return self._get_link_by_attr("NODE", "nid", self.ns7, "parts")
-
-    @property
-    def ns8_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given ns8."""
-        return self._get_link_by_attr("NODE", "nid", self.ns8, "parts")
 
     @property
     def pid_link(self) -> typing.Optional[KeywordBase]:

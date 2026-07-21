@@ -39,7 +39,7 @@ _MAT196_CARD0 = (
     FieldSchema("unused", int, 30, 10, None),
     FieldSchema("unused", int, 40, 10, None),
     FieldSchema("unused", int, 50, 10, None),
-    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("mdfail", int, 60, 10, 0),
     FieldSchema("dospot", int, 70, 10, 0),
 )
 
@@ -56,8 +56,6 @@ class Mat196(KeywordBase):
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
-        "flcid": LinkType.DEFINE_CURVE,
-        "hlcid": LinkType.DEFINE_CURVE,
         "glcid": LinkType.DEFINE_CURVE,
     }
 
@@ -74,7 +72,7 @@ class Mat196(KeywordBase):
                 [
                     (
                         FieldSchema("dof", int, 0, 10, None),
-                        FieldSchema("type", int, 10, 10, None),
+                        FieldSchema("type", int, 10, 10, 0),
                         FieldSchema("k", float, 20, 10, None),
                         FieldSchema("d", float, 30, 10, None),
                         FieldSchema("cdf", float, 40, 10, None),
@@ -128,10 +126,26 @@ class Mat196(KeywordBase):
         self._cards[0].set_value("ro", value)
 
     @property
+    def mdfail(self) -> int:
+        """Get or set the Multidirectional failure calculation method. See Remark 5.
+        EQ.0: Default failure calculation method.It calculates the ratio of actual displacement(or rotation) to its corresponding CDF(or TDF) for each degree of freedom and then uses the maximum of these ratios to evaluate failure.
+        EQ.1 : Two separate criteria, one for compressionand the other for tension.If any criterion is fulfilled, failure occurs.
+        EQ.2 : One criterion that considers the combined effect of all displacements and rotations in tension and compression.
+        """ # nopep8
+        return self._cards[0].get_value("mdfail")
+
+    @mdfail.setter
+    def mdfail(self, value: int) -> None:
+        """Set the mdfail property."""
+        if value not in [0, 1, 2, None]:
+            raise Exception("""mdfail must be `None` or one of {0,1,2}.""")
+        self._cards[0].set_value("mdfail", value)
+
+    @property
     def dospot(self) -> int:
-        """Get or set the Activate thinning of tied shell elements when SPOTHIN>0 on *CONTROL_‌CONTACT.
-        EQ.0:	Spot weld thinning is inactive for shells tied to discrete beams that use this material(default)
-        EQ.1 : Spot weld thinning is active for shells tied to discrete beams that use this material
+        """Get or set the Activate thinning of tied shell elements when SPOTHIN>0 on *CONTROL_CONTACT.
+        EQ.0: Spot weld thinning is inactive for shells tied to discrete beams that use this material(default)
+        EQ.1: Spot weld thinning is active for shells tied to discrete beams that use this material
         """ # nopep8
         return self._cards[0].get_value("dospot")
 
@@ -165,36 +179,6 @@ class Mat196(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
-
-    @property
-    def flcid_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for flcid."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.flcid:
-                return kwd
-        return None
-
-    @flcid_link.setter
-    def flcid_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for flcid."""
-        self.flcid = value.lcid
-
-    @property
-    def hlcid_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for hlcid."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.hlcid:
-                return kwd
-        return None
-
-    @hlcid_link.setter
-    def hlcid_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for hlcid."""
-        self.hlcid = value.lcid
 
     @property
     def glcid_link(self) -> typing.Optional[DefineCurve]:

@@ -35,6 +35,8 @@ _FREQUENCYDOMAINSEASUBSYSTEM_CARD0 = (
     FieldSchema("nfspace", int, 30, 10, 0),
     FieldSchema("lcfreq", int, 40, 10, None),
     FieldSchema("iread", int, 50, 10, 0),
+    FieldSchema("pref", float, 60, 10, 2e-05),
+    FieldSchema("unused", int, 70, 10, None),
 )
 
 _FREQUENCYDOMAINSEASUBSYSTEM_CARD1 = (
@@ -231,8 +233,8 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
     @property
     def iread(self) -> int:
         """Get or set the Type of SEA run:
-        EQ.0:	run SEA analysis.
-        EQ.1 : read FEM keyword input deck and create SEA model..
+        EQ.0: run SEA analysis.
+        EQ.1: read FEM keyword input deck and create SEA model..
         """ # nopep8
         return self._cards[0].get_value("iread")
 
@@ -242,6 +244,17 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""iread must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iread", value)
+
+    @property
+    def pref(self) -> float:
+        """Get or set the Reference pressure used to convert acoustic pressure to SPL (dB)
+        """ # nopep8
+        return self._cards[0].get_value("pref")
+
+    @pref.setter
+    def pref(self, value: float) -> None:
+        """Set the pref property."""
+        self._cards[0].set_value("pref", value)
 
     @property
     def subid(self) -> typing.Optional[int]:
@@ -257,9 +270,9 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
     @property
     def subtyp(self) -> int:
         """Get or set the Type of subsystem:
-        EQ.1: plate
-        EQ.2: cavity
-        EQ.3: beam.
+        EQ.1: Plate
+        EQ.2: Cavity
+        EQ.3: Beam.
         """ # nopep8
         return self._cards[1].get_value("subtyp")
 
@@ -306,8 +319,8 @@ class FrequencyDomainSeaSubsystem(KeywordBase):
     @property
     def output(self) -> int:
         """Get or set the Include this subsystem in output:
-        EQ.0:	no
-        EQ.1 : yes.
+        EQ.0: No
+        EQ.1: Yes.
         """ # nopep8
         return self._cards[1].get_value("output")
 

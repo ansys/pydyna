@@ -234,9 +234,9 @@ class LoadBodyGeneralized(KeywordBase):
     @property
     def angtyp(self) -> str:
         """Get or set the Type of body loads due to angular motion:
-        EQ.CENT:	body load from centrifugal acceleration,ρ[ω×(ω×r)].
-        EQ.CORI : body load from Coriolis - type acceleration,2ρ(ω×v).
-        EQ.ROTA : body load from rotational acceleration,ρ(α×r),	where ω is the angular velocity, α is the angular acceleration, r is the position vector relative to center of rotationand v is the velocity vector
+        EQ.CENT: body load from centrifugal acceleration,[(r)].
+        EQ.CORI: body load from Coriolis - type acceleration,2(v).
+        EQ.ROTA: body load from rotational acceleration,(r), where  is the angular velocity,  is the angular acceleration, r is the position vector relative to center of rotationand v is the velocity vector
         """ # nopep8
         return self._cards[1].get_value("angtyp")
 

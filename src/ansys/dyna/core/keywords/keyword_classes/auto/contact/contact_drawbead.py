@@ -321,8 +321,8 @@ class ContactDrawbead(KeywordBase):
         ]
     @property
     def surfa(self) -> typing.Optional[int]:
-        """Get or set the Segment set ID, node set ID, part set ID, part ID, or shell element set ID for specifying the SURFA side of the contact interface (see Setting the Contact Interface). See *SET_SEGMENT, *SET_NODE_OPTION, *PART, *SET_PART or *SET_SHELL_OPTION. For ERODING_SINGLE_SURFACE and ERODING_SURFACE_TO_SURFACE contact types, use either a part ID or a part set ID. For ERODING_NODES_TO_SURFACE contact, use a node set which includes all nodes that may be exposed to contact as element erosion occurs.
-        EQ.0:	Includes all parts in the case of single surface contact types
+        """Get or set the Segment set ID, node set ID, part set ID, part ID, shell element set ID,or branch ID for specifying the SURFA side of the contact interface (see Setting the Contact Interface). See *SET_SEGMENT, *SET_NODE_OPTION, *PART, *SET_PART or *SET_SHELL_OPTION. For ERODING_SINGLE_SURFACE and ERODING_SURFACE_TO_SURFACE contact types, use either a part ID or a part set ID. For ERODING_NODES_TO_SURFACE contact, use a node set that includes all nodes that may be exposed to contact as element erosion occurs.
+        EQ.0: Includes all parts in the case of single surface contact types
         """ # nopep8
         return self._cards[0].get_value("surfa")
 
@@ -333,8 +333,8 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def surfb(self) -> typing.Optional[int]:
-        """Get or set the Segment set ID, node set ID, part set ID, part ID, or shell element set ID for the SURFB side of the contact (see Setting the Contact Interface).
-        EQ.0:	SURFB side is not applicable for single surface contact types.
+        """Get or set the Segment set ID, part set ID, part ID, shell element set ID, or branch ID for the SURFB side of the contact (see Setting the Contact Interface).
+        EQ.0: SURFB side is not applicable for single surface contact types.
         """ # nopep8
         return self._cards[0].get_value("surfb")
 
@@ -351,9 +351,9 @@ class ContactDrawbead(KeywordBase):
         EQ.2: part set ID,
         EQ.3: part ID,
         EQ.4: node set ID for node to surface contact,
-        EQ.5: include all (SURFA field) is ignored,
+        EQ.5: include all (SURFA field is ignored),
         EQ.6: part set ID for exempted parts. All non-exempted parts are included in the contact.
-        EQ.7:	Branch ID; see *SET_PART_TREE
+        EQ.7: Branch ID; see *SET_PART_TREE
         """ # nopep8
         return self._cards[0].get_value("surfatyp")
 
@@ -372,8 +372,8 @@ class ContactDrawbead(KeywordBase):
         EQ.2: part set ID,
         EQ.3: part ID,
         EQ.5:Include all ( SURFB Field is ignored).
-        EQ.6:	Part set ID for exempted parts.  All non-exempted parts are included in the contact.
-        EQ.7:	Branch ID; see *SET_PART_TREE
+        EQ.6: Part set ID for exempted parts.  All non-exempted parts are included in the contact.
+        EQ.7: Branch ID; see *SET_PART_TREE
         """ # nopep8
         return self._cards[0].get_value("surfbtyp")
 
@@ -386,7 +386,7 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def saboxid(self) -> typing.Optional[int]:
-        """Get or set the Include in contact definition only those SURFA nodes/segments within box SABOXID (corresponding to BOXID in *DEFINE_BOX), or if SABOXID is negative, only those SURFA nodes/segments within contact volume |SABOXID | (corresponding to CVID in *DEFINE_CONTACT_VOLUME). SABOXID can be used only if SURFATYP is set to 2, 3, or 6, that is, SURFA is a part ID or part set ID. SABOXID is not available for ERODING contact types
+        """Get or set the Include in the contact definition only those SURFA nodes/segments within box SABOXID (corresponding to BOXID in *DEFINE_BOX), or if SABOXID is negative, only those SURFA nodes/segments within contact volume |SABOXID | (corresponding to CVID in *DEFINE_CONTACT_VOLUME). SABOXID can be used only if SURFATYP is set to 2, 3, 5, or 6, meaning, SURFA is a part ID or part set ID. SABOXID is not available for ERODING contact types
         """ # nopep8
         return self._cards[0].get_value("saboxid")
 
@@ -397,7 +397,7 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def sbboxid(self) -> typing.Optional[int]:
-        """Get or set the Include in contact definition only those SURFB segments within box SBBOXID (corresponding to BOXID in *DEFINE_BOX), or if SBBOXID is negative, only those SURFB segments within contact volume |SBBOXID | (corresponding to CVID in *DEFINE_CONTACT_VOLUME). SBBOXID can be used only if SURFBTYP is set to 2, 3, or 6, that is, SURFB is a part ID or part set ID.  SBBOXID is not available for ERODING contact types.
+        """Get or set the Include in the contact definition only those SURFB segments within box SBBOXID (corresponding to BOXID in *DEFINE_BOX), or if SBBOXID is negative, only those SURFB segments within contact volume |SBBOXID | (corresponding to CVID in *DEFINE_CONTACT_VOLUME). SBBOXID can be used only if SURFBTYP is set to 2, 3, 5,or 6, meaning, SURFB is a part ID or part set ID.  SBBOXID is not available for ERODING contact types.
         """ # nopep8
         return self._cards[0].get_value("sbboxid")
 
@@ -409,9 +409,9 @@ class ContactDrawbead(KeywordBase):
     @property
     def sapr(self) -> int:
         """Get or set the Include the SURFA side in the *DATABASE_NCFORC and the *DATABASE_BINARY_INTFOR interface force files, and optionally in the dynain file for wear:
-        EQ.0:	Do not include.
-        EQ.1 : SURFA side forces included.
-        EQ.2 : Same as 1 but also allows for SURFA nodes to be written as* INITIAL_CONTACT_WEAR to dynain; see NCYC on* INTERFACE_SPRINGBACK_LSDYNA.
+        EQ.0: Do not include.
+        EQ.1: SURFA side forces included.
+        EQ.2: Same as 1 but also allows SURFA nodes to be written as *INITIAL_CONTACT_WEAR to dynain; see NCYC on *INTERFACE_SPRINGBACK_LSDYNA.
         """ # nopep8
         return self._cards[0].get_value("sapr")
 
@@ -425,9 +425,9 @@ class ContactDrawbead(KeywordBase):
     @property
     def sbpr(self) -> int:
         """Get or set the Include the SURFB side in the *DATABASE_NCFORC and the *DATABASE_BINARY_INTFOR interface force files, and optionally in the dynain file for wear:
-        EQ.0:	Do not include.
-        EQ.1 : SURFB side forces included.
-        EQ.2 : Same as 1, but also allows for SURFB nodes to be written as* INITIAL_CONTACT_WEAR to dynain; see NCYC on* INTERFACE_SPRINGBACK_LSDYNA.
+        EQ.0: Do not include.
+        EQ.1: SURFB side forces included.
+        EQ.2: Same as 1, but also allows SURFB nodes to be written as *INITIAL_CONTACT_WEAR to dynain; see NCYC on *INTERFACE_SPRINGBACK_LSDYNA.
         """ # nopep8
         return self._cards[0].get_value("sbpr")
 
@@ -466,7 +466,7 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def dc(self) -> float:
-        """Get or set the Exponential decay coefficient. The frictional coefficient is assumed to be dependent on the relative velocity v-rel of the surfaces in contact. (default=0.0).
+        """Get or set the Exponential decay coefficient. The frictional coefficient is assumed to depend on the relative velocity v-rel of the surfaces in contact. (default=0.0).
         """ # nopep8
         return self._cards[1].get_value("dc")
 
@@ -488,7 +488,7 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def vdc(self) -> float:
-        """Get or set the Viscous damping coefficient in percent of critical. In order to avoid undesirable oscillation in contact, e.g., for sheet forming simulation, a contact damping perpendicular to the contacting surfaces is applied.
+        """Get or set the Viscous damping coefficient in percent of critical. To avoid undesirable oscillation in contact, e.g., for sheet forming simulation, a contact damping perpendicular to the contacting surfaces is applied.
         """ # nopep8
         return self._cards[1].get_value("vdc")
 
@@ -499,7 +499,7 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def penchk(self) -> typing.Optional[int]:
-        """Get or set the Small penetration in contact search option.  If the tracked node penetrates more than the segment thickness times the factor XPENE (see *CONTROL_CONTACT), the penetration is ignored, and the tracked node is set free.  The thickness is taken as the shell thickness if the segment belongs to a shell element or it is taken as 1/20 of its shortest diagonal if the segment belongs to a solid element.  This option applies to the surface-to-surface contact algorithms.  See Table 0-17 for contact types and more details.
+        """Get or set the Small penetration in the contact search option.  If the tracked node penetrates more than the segment thickness times the factor XPENE (see *CONTROL_CONTACT), the penetration is ignored, and the tracked node is set free.  The thickness is taken as the shell thickness if the segment belongs to a shell element or it is taken as 1/20 of its shortest diagonal if the segment belongs to a solid element.  This option applies to the surface-to-surface contact algorithms.  See Table 0-17 for contact types and more details.
         """ # nopep8
         return self._cards[1].get_value("penchk")
 
@@ -510,7 +510,7 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def bt(self) -> float:
-        """Get or set the Birth time (contact surface becomes active at this time):LT.0:	Birth time is set to | "BT" | .When negative, birth time is followed during the dynamic relaxation phase of the calculation.After dynamic relaxation has completed, contact is activated regardless of the value of BT.EQ.0 : Birth time is inactive, meaning contact is always activeGT.0 : If DT = -9999, BT is interpreted as the curve or table ID defining multiple pairs of birth - time / death - time; see Remark 2 below.Otherwise, if "DT" > 0, birth time applies both duringand after dynamic relaxation.
+        """Get or set the Birth time (contact surface becomes active at this time):LT.0: Birth time is set to | "BT" | .When negative, birth time is followed during the dynamic relaxation phase of the calculation.After the completion of dynamic relaxation, contact is activated regardless of the value of BT.EQ.0: Birth time is inactive, meaning contact is always activeGT.0: If DT = -9999, BT is interpreted as the curve or table ID defining multiple pairs of birth - time / death - time; see Remark 2 below.Otherwise, if "DT" > 0, birth time applies both duringand after dynamic relaxation.
         """ # nopep8
         return self._cards[1].get_value("bt")
 
@@ -521,7 +521,7 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def dt(self) -> float:
-        """Get or set the Death time (contact surface is deactivated at this time):LT.0:	If DT = -9999, BT is interpreted as the curve or table ID defining multiple pairs of birth - time / death - time.Otherwise, negative DT indicates that contact is inactive during dynamic relaxation.After dynamic relaxation the birth and death times are followed and set to | "BT" | and | "DT" | , respectively.EQ.0 : DT defaults to 10e20.GT.0 : DT sets the time at which the contact is deactivated.
+        """Get or set the Death time (contact surface is deactivated at this time):LT.0: If DT = -9999, BT is interpreted as the curve or table ID defining multiple pairs of birth - time / death - time.Otherwise, negative DT indicates that contact is inactive during dynamic relaxation.After dynamic relaxation the birth and death times are followed and set to | "BT" | and | "DT" | , respectively.EQ.0: DT defaults to 10e20.GT.0: DT sets the time at which the contact is deactivated.
         """ # nopep8
         return self._cards[1].get_value("dt")
 
@@ -533,6 +533,7 @@ class ContactDrawbead(KeywordBase):
     @property
     def sfsa(self) -> float:
         """Get or set the Scale factor on default SURFA penalty stiffness when SOFT = 0 or SOFT = 2; see also *CONTROL_CONTACT.For MORTAR frictional contact this is the stiffness scale factor for the entire contact, and SFSB does not apply.
+        LT.0: -SFSA gives the load curve ID for contact pressure as a function of penetration depth. This is supported for Mortar contact only.
         """ # nopep8
         return self._cards[2].get_value("sfsa")
 
@@ -543,7 +544,7 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def sfsb(self) -> float:
-        """Get or set the Scale factor on default SURFA penalty stiffness when SOFT = 0 or SOFT = 2; see also *CONTROL_CONTACT.For MORTAR tied contact, this is an additional stiffness scale factor, resulting in a total stiffness scale of SFSA*SFSB.
+        """Get or set the Scale factor on default SURFB penalty stiffness when SOFT = 0 or SOFT = 2; see also *CONTROL_CONTACT.For MORTAR tied contact, this is an additional stiffness scale factor, resulting in a total stiffness scale of SFSA*SFSB.
         """ # nopep8
         return self._cards[2].get_value("sfsb")
 
@@ -565,7 +566,7 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def sbst(self) -> typing.Optional[float]:
-        """Get or set the Optional thickness for SURFA surface (overrides true thickness). This option applies only to contact with shell elements. True thickness is the element thickness of the shell elements. For the TIED options see SAST above.
+        """Get or set the Optional thickness for SURFB surface (overrides true thickness). This option applies only to contact with shell elements. True thickness is the element thickness of the shell elements. For the TIED options see SAST above.
         """ # nopep8
         return self._cards[2].get_value("sbst")
 
@@ -576,9 +577,7 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def sfsat(self) -> float:
-        """Get or set the Scale factor applied to contact thickness of SURFA surface.  This option applies to contact with shell and beam elements.
-        SFSAT has no bearing on the actual thickness of the elements; it only affects the location of the contact surface.
-        SFSAT is ignored if SAST is nonzero except in the case of MORTAR contact (see Remark 9 in the General Remarks: *Contact section).
+        """Get or set the Scale factor applied to the contact thickness of the SURFA surface.  This option applies to contact with shell and beam elements.  SFSAT has no bearing on the actual thickness of the elements; it only affects the location of the contact surface.  SFSAT is ignored if SAST is nonzero except in the case of MORTAR contact (see Remark 14 in the General Remarks: *Contact section).
         """ # nopep8
         return self._cards[2].get_value("sfsat")
 
@@ -589,9 +588,7 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def sfsbt(self) -> float:
-        """Get or set the Scale factor applied to contact thickness of SURFA surface.  This option applies only to contact with shell elements.
-        SFSAT has no bearing on the actual thickness of the elements; it only affects the location of the contact surface.
-        SFSAT is ignored if SBST is nonzero except in the case of MORTAR contact (see Remark 9 in the General Remarks: *Contact section).
+        """Get or set the Scale factor applied to the contact thickness of the SURFB surface.  This option applies only to contact with shell elements.  SFSBT has no bearing on the actual thickness of the elements; it only affects the location of the contact surface. SFSBT is ignored if SBST is nonzero except in the case of MORTAR contact (see Remark 14 in the General Remarks: *Contact section).
         """ # nopep8
         return self._cards[2].get_value("sfsbt")
 
@@ -602,7 +599,7 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def fsf(self) -> float:
-        """Get or set the Coulomb friction scale factor (default=1.0).The Coulomb friction value is scaled as μ_sc=FSF×μ_c; see Mandatory Card 2.
+        """Get or set the Coulomb friction scale factor (default=1.0).The Coulomb friction value is scaled as _sc=FSF_c; see Mandatory Card 2.
         """ # nopep8
         return self._cards[2].get_value("fsf")
 
@@ -613,7 +610,7 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def vsf(self) -> float:
-        """Get or set the Viscous friction scale factor (default=1.0).If this factor is defined, then the limiting force becomes: F_lim =VSF×VC×A_cont ; see Mandatory Card 2.
+        """Get or set the Viscous friction scale factor (default=1.0).If this factor is defined, the limiting force becomes: F_lim =VSFVCA_cont ; see Mandatory Card 2.
         """ # nopep8
         return self._cards[2].get_value("vsf")
 
@@ -693,7 +690,7 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def eloff(self) -> typing.Optional[int]:
-        """Get or set the Option to specify and element ID offset for the truss elements that are automatically generated for the draw bead display. If undefined LS-DYNA choses a uniquie offset.
+        """Get or set the Option to specify and element ID offset for the truss elements that are automatically generated to display the draw bead during post-processing. If undefined LS-DYNA choses a uniquie offset.
         """ # nopep8
         return self._cards[3].get_value("eloff")
 
@@ -737,7 +734,7 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def width(self) -> typing.Optional[float]:
-        """Get or set the Total bead width defining distance between inner and outer most bead walls.
+        """Get or set the Total bead width defining the distance between inner and outer most bead walls.
         """ # nopep8
         return self._cards[4].get_value("width")
 
@@ -748,7 +745,7 @@ class ContactDrawbead(KeywordBase):
 
     @property
     def effhgt(self) -> typing.Optional[float]:
-        """Get or set the Effective bead height.  Draw bead restraining force starts to take effect when binder gap is less than EFFHGT.
+        """Get or set the Effective bead height. The draw bead restraining force starts to take effect when binder gap is less than EFFHGT.
         """ # nopep8
         return self._cards[4].get_value("effhgt")
 

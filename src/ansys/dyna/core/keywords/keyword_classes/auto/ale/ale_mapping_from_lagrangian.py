@@ -87,8 +87,8 @@ class AleMappingFromLagrangian(KeywordBase):
     @property
     def lagpty(self) -> int:
         """Get or set the Type of LARGPID:
-        EQ.0: ID is a part set id(see * SET_PART)
-        EQ.1 : ID is a part id(see * PART)
+        EQ.0: ID is a part set id(see *SET_PART)
+        EQ.1: ID is a part id(see *PART)
         """ # nopep8
         return self._cards[0].get_value("lagpty")
 
@@ -101,7 +101,7 @@ class AleMappingFromLagrangian(KeywordBase):
 
     @property
     def nx(self) -> typing.Optional[int]:
-        """Get or set the Number of ALE elements in each direction of the global coordinate system. These parameters create a structured box mesh.
+        """Get or set the Number of ALE elements in each direction of the global coordinate system. These parameters create a structured box mesh.For 2D, NZ is ignored.
         """ # nopep8
         return self._cards[1].get_value("nx")
 
@@ -112,7 +112,7 @@ class AleMappingFromLagrangian(KeywordBase):
 
     @property
     def ny(self) -> typing.Optional[int]:
-        """Get or set the Number of ALE elements in each direction of the global coordinate system. These parameters create a structured box mesh.
+        """Get or set the Number of ALE elements in each direction of the global coordinate system. These parameters create a structured box mesh. For 2D, NZ is ignored.
         """ # nopep8
         return self._cards[1].get_value("ny")
 
@@ -123,7 +123,7 @@ class AleMappingFromLagrangian(KeywordBase):
 
     @property
     def nx(self) -> typing.Optional[int]:
-        """Get or set the Number of ALE elements in each direction of the global coordinate system. These parameters create a structured box mesh.
+        """Get or set the Number of ALE elements in each direction of the global coordinate system. These parameters create a structured box mesh.For 2D, NZ is ignored.
         """ # nopep8
         return self._cards[1].get_value("nx")
 
@@ -134,7 +134,7 @@ class AleMappingFromLagrangian(KeywordBase):
 
     @property
     def npx(self) -> typing.Optional[int]:
-        """Get or set the Number of extra elements to pad the box mesh beyond its lower and upper limits in each direction of the global coordinate system
+        """Get or set the Number of extra elements to pad the box mesh beyond its lower and upper limits in each direction of the global coordinate system. For 2D, NPZ is ignored.
         """ # nopep8
         return self._cards[1].get_value("npx")
 
@@ -145,7 +145,7 @@ class AleMappingFromLagrangian(KeywordBase):
 
     @property
     def npy(self) -> typing.Optional[int]:
-        """Get or set the Number of extra elements to pad the box mesh beyond its lower and upper limits in each direction of the global coordinate system
+        """Get or set the Number of extra elements to pad the box mesh beyond its lower and upper limits in each direction of the global coordinate system. For 2D, NPZ is ignored.
         """ # nopep8
         return self._cards[1].get_value("npy")
 
@@ -156,7 +156,7 @@ class AleMappingFromLagrangian(KeywordBase):
 
     @property
     def npz(self) -> typing.Optional[int]:
-        """Get or set the Number of extra elements to pad the box mesh beyond its lower and upper limits in each direction of the global coordinate system
+        """Get or set the Number of extra elements to pad the box mesh beyond its lower and upper limits in each direction of the global coordinate system. For 2D, NPZ is ignored.
         """ # nopep8
         return self._cards[1].get_value("npz")
 
@@ -178,10 +178,10 @@ class AleMappingFromLagrangian(KeywordBase):
 
     @property
     def method(self) -> typing.Optional[int]:
-        """Get or set the Method to compute volumes at the intersection of Lagrangian and ALE elements :
+        """Get or set the Method to compute volumes (areas in 2D) at the intersection of Lagrangian and ALE elements:
         EQ.0: Both METHOD = 1 and METHOD = 2 are applied by default.
-        EQ.1 : The intersection volumes are exactly computed
-        EQ.2 : The intersection volumes are evaluated with DIV.
+        EQ.1: The intersection volumes are exactly computed
+        EQ.2: The intersection volumes are evaluated with DIV.
         """ # nopep8
         return self._cards[2].get_value("method")
 
@@ -192,7 +192,7 @@ class AleMappingFromLagrangian(KeywordBase):
 
     @property
     def div(self) -> typing.Optional[int]:
-        """Get or set the Division of ALE element edges to create subcells, which volumes inside Lagrangian elements are added up by MTH=2 to approximate the intersection volumes at the intersection between ALE and Lagrangian elements
+        """Get or set the Division of ALE element edges to create subcells, in which volumes (areas in 2D) inside Lagrangian elements are added up by MTH=2 to approximate the intersection volumes at the intersection between ALE and Lagrangian elements
         """ # nopep8
         return self._cards[2].get_value("div")
 

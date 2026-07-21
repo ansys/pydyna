@@ -50,6 +50,8 @@ _MAT183_CARD1 = (
 
 _MAT183_CARD2 = (
     FieldSchema("lcunld", int, 0, 10, None),
+    FieldSchema("ref", float, 10, 10, None),
+    FieldSchema("stol", float, 20, 10, None),
 )
 
 _MAT183_OPTION0_CARD0 = (
@@ -143,7 +145,7 @@ class Mat183(KeywordBase):
 
     @property
     def g(self) -> typing.Optional[float]:
-        """Get or set the Shear modulus for frequency independent damping. Frequency independent damping is based of a spring and slider in series. The critical stress for the slider mechanism is SIGF defined below. For the best results, the value of G should be 250-1000 times greater than SIGF.
+        """Get or set the Shear modulus for frequency independent damping. Frequency independent damping is based on a spring and slider in series. The critical stress for the slider mechanism is SIGF defined below. For the best results, the value of G should be 250-1000 times greater than SIGF.
         """ # nopep8
         return self._cards[0].get_value("g")
 
@@ -198,7 +200,10 @@ class Mat183(KeywordBase):
 
     @property
     def lc_tbid(self) -> typing.Optional[float]:
-        """Get or set the Load curve or table ID, see *DEFINE_TABLE, defining the force versus actual change in the gauge length. If the table definition is used a family of curves are defined for discrete strain rates. The load curves should cover the complete range of expected loading, i.e., the smallest stretch ratio to the largest.
+        """Get or set the Load curve ID or table ID (see *DEFINE_TABLE) defining the force as a function of actual change in the gauge length.
+        If SGL, SW, and ST are set to unity (1.0), curve LC is also engineering stress as a function of engineering strain.
+        If the table definition is used, a family of curves is defined for discrete strain rates. The curves should cover the complete
+        range of expected responses, including both compressive (negative values) and tensile (positive values) regimes. See Remark 1.
         """ # nopep8
         return self._cards[1].get_value("lc_tbid")
 
@@ -209,10 +214,10 @@ class Mat183(KeywordBase):
 
     @property
     def tension(self) -> float:
-        """Get or set the Parameter that controls how the rate effects are treated. Applicable to the table definition.
-        EQ.-1.-: rate effects are considered for loading either in tension or compression, but not for unloading,
-        EQ.0.0: rate effects are considered for compressive loading only,
-        EQ.1.0: rate effects are treated identically in tension and compression.
+        """Get or set the Parameter that controls how the rate effects are treated. It is applicable to the table definition.
+        EQ.-1.0: Rate effects are considered for loading either in tension or compression, but not for unloading,
+        EQ.0.0: Rate effects are considered for compressive loading only,
+        EQ.1.0: Rate effects are treated identically in tension and compression.
         """ # nopep8
         return self._cards[1].get_value("tension")
 
@@ -226,8 +231,8 @@ class Mat183(KeywordBase):
     @property
     def rtype(self) -> float:
         """Get or set the Strain rate type if a table is defined:
-        EQ.0.0: true strain rate,
-        EQ.1.0: engineering strain rate.
+        EQ.0.0: True strain rate,
+        EQ.1.0: Engineering strain rate.
         """ # nopep8
         return self._cards[1].get_value("rtype")
 
@@ -240,9 +245,9 @@ class Mat183(KeywordBase):
 
     @property
     def avgopt(self) -> float:
-        """Get or set the Averaging option determine strain rate to reduce numerical noise.
-        EQ.0.0: simple average of twelve time steps,
-        EQ.1.0: running 12 point average.
+        """Get or set the Averaging option for determining strain rate to reduce numerical noise.
+        EQ.0.0: Simple average of twelve time steps
+        EQ.1.0: Running 12 point average.
         """ # nopep8
         return self._cards[1].get_value("avgopt")
 
@@ -255,7 +260,9 @@ class Mat183(KeywordBase):
 
     @property
     def lcunld(self) -> typing.Optional[int]:
-        """Get or set the Load curve, see *DEFINE_CURVE, defining the force versus actual change in the gauge length during unloading. The unload curve should cover exactly the same range as LCLD and its end points should have identical values, i.e., the combination of LCLD and LCUNLD describes a complete cycle of loading and unloading.
+        """Get or set the Load curve (see *DEFINE_CURVE) defining the force as a function of actual change in the gauge length during unloading.
+        The unloading curve should cover exactly the same range as LC (or as the first curve of table TBID) and its endpoints should
+        have identical values, meaning the combination of LC (or the first curve of table TBID) and LCUNLD describes a complete cycle of loading and unloading.
         """ # nopep8
         return self._cards[2].get_value("lcunld")
 
@@ -263,6 +270,30 @@ class Mat183(KeywordBase):
     def lcunld(self, value: int) -> None:
         """Set the lcunld property."""
         self._cards[2].set_value("lcunld", value)
+
+    @property
+    def ref(self) -> typing.Optional[float]:
+        """Get or set the Use reference geometry to initialize the stress tensor. The reference geometry is defined by the keyword: *INITIAL_FOAM_REFERENCE_GEOMETRY.
+        EQ.0.0: Off
+        EQ.1.0: On.
+        """ # nopep8
+        return self._cards[2].get_value("ref")
+
+    @ref.setter
+    def ref(self, value: float) -> None:
+        """Set the ref property."""
+        self._cards[2].set_value("ref", value)
+
+    @property
+    def stol(self) -> typing.Optional[float]:
+        """Get or set the Tolerance in stability check. See Remark 2.
+        """ # nopep8
+        return self._cards[2].get_value("stol")
+
+    @stol.setter
+    def stol(self, value: float) -> None:
+        """Set the stol property."""
+        self._cards[2].set_value("stol", value)
 
     @property
     def title(self) -> typing.Optional[str]:

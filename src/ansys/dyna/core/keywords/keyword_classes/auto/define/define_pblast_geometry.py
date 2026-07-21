@@ -39,6 +39,7 @@ _DEFINEPBLASTGEOMETRY_CARD1 = (
     FieldSchema("xb", float, 30, 10, 0.0),
     FieldSchema("yb", float, 40, 10, 0.0),
     FieldSchema("zb", float, 50, 10, 0.0),
+    FieldSchema("itype", int, 60, 10, 0),
 )
 
 _DEFINEPBLASTGEOMETRY_CARD2 = (
@@ -112,11 +113,11 @@ class DefinePblastGeometry(KeywordBase):
     @property
     def gtype1(self) -> int:
         """Get or set the Geometry type
-        EQ.1: box
-        EQ.2: sphere
-        EQ.3: cylinder
-        EQ.4: ellipsoid
-        EQ.5: hemisphere (see Remark 1).
+        EQ.1: Box
+        EQ.2: Sphere
+        EQ.3: Cylinder
+        EQ.4: Ellipsoid
+        EQ.5: Hemisphere (see Remark 1).
         """ # nopep8
         return self._cards[0].get_value("gtype1")
 
@@ -129,7 +130,8 @@ class DefinePblastGeometry(KeywordBase):
 
     @property
     def xa(self) -> float:
-        """Get or set the (XA, YA, ZA) defines a vector of the x-axis.
+        """Get or set the ITYPE.EQ.0: Local x-axis
+        ITYPE.EQ 1: Starting coordinate of the charge used to internally calculate the local coordinate system
         """ # nopep8
         return self._cards[1].get_value("xa")
 
@@ -140,7 +142,8 @@ class DefinePblastGeometry(KeywordBase):
 
     @property
     def ya(self) -> float:
-        """Get or set the (XA, YA, ZA) defines a vector of the x-axis.
+        """Get or set the ITYPE.EQ.0: Local x-axis
+        ITYPE.EQ.1: Starting coordinate of the charge used to internally calculate the local coordinate system
         """ # nopep8
         return self._cards[1].get_value("ya")
 
@@ -151,7 +154,8 @@ class DefinePblastGeometry(KeywordBase):
 
     @property
     def za(self) -> float:
-        """Get or set the (XA, YA, ZA) defines a vector of the x-axis.
+        """Get or set the ITYPE.EQ.0: Local x-axis
+        ITYPE.EQ.1: Starting coordinate of the charge used to internally calculate the local coordinate system
         """ # nopep8
         return self._cards[1].get_value("za")
 
@@ -162,7 +166,8 @@ class DefinePblastGeometry(KeywordBase):
 
     @property
     def xb(self) -> float:
-        """Get or set the (XB, YB, ZB) defines a vector of the y-axis.
+        """Get or set the ITYPE.EQ.0: Local y-axis
+        ITYPE.EQ.1: Ending coordinate of the charge used to internally calculate the local coordinate system
         """ # nopep8
         return self._cards[1].get_value("xb")
 
@@ -173,7 +178,8 @@ class DefinePblastGeometry(KeywordBase):
 
     @property
     def yb(self) -> float:
-        """Get or set the (XB, YB, ZB) defines a vector of the y-axis.
+        """Get or set the ITYPE.EQ.0: Local y-axis
+        ITYPE.EQ.1: Ending coordinate of the charge used to internally calculate the local coordinate system
         """ # nopep8
         return self._cards[1].get_value("yb")
 
@@ -184,7 +190,8 @@ class DefinePblastGeometry(KeywordBase):
 
     @property
     def zb(self) -> float:
-        """Get or set the (XB, YB, ZB) defines a vector of the y-axis.
+        """Get or set the ITYPE.EQ.0: Local y-axis
+        ITYPE.EQ.1: Ending coordinate of the charge used to internally calculate the local coordinate system
         """ # nopep8
         return self._cards[1].get_value("zb")
 
@@ -192,6 +199,21 @@ class DefinePblastGeometry(KeywordBase):
     def zb(self, value: float) -> None:
         """Set the zb property."""
         self._cards[1].set_value("zb", value)
+
+    @property
+    def itype(self) -> int:
+        """Get or set the Flag for determining how the domain geometry of the high explosive particles is generated:
+        EQ.0: Particles are generated in the given geometry with the local coordinate system provided with XA, YA, ZA, XB, YB,and ZB(default).
+        EQ.1: Particles are generated in the given geometry using startingand ending coordinates given with XA, YA, ZA, XB, YB,and ZB.
+        """ # nopep8
+        return self._cards[1].get_value("itype")
+
+    @itype.setter
+    def itype(self, value: int) -> None:
+        """Set the itype property."""
+        if value not in [0, 1, None]:
+            raise Exception("""itype must be `None` or one of {0,1}.""")
+        self._cards[1].set_value("itype", value)
 
     @property
     def xc(self) -> float:
@@ -229,10 +251,10 @@ class DefinePblastGeometry(KeywordBase):
     @property
     def g1(self) -> float:
         """Get or set the Dimension value depending on GTYPE.
-        GTYPE.EQ.1: length of x edge
+        GTYPE.EQ.1: Length of x edge
         GTYPE.EQ.2: Radius of sphere
         GTYPE.EQ.3: Radius of cross section
-        GTYPE.EQ.4: length of x-axes
+        GTYPE.EQ.4: Length of x-axes
         GTYPE.EQ.5: Radius of hemisphere.
         """ # nopep8
         return self._cards[3].get_value("g1")
@@ -245,9 +267,9 @@ class DefinePblastGeometry(KeywordBase):
     @property
     def g2(self) -> float:
         """Get or set the Dimension value depending on GTYPE.
-        GTYPE.EQ.1: length of y edge
-        GTYPE.EQ.3: length of cylinder
-        GTYPE.EQ.4: length of y-axes.
+        GTYPE.EQ.1: Length of y edge
+        GTYPE.EQ.3: Length of cylinder
+        GTYPE.EQ.4: Length of y-axes.
         """ # nopep8
         return self._cards[3].get_value("g2")
 
@@ -259,8 +281,8 @@ class DefinePblastGeometry(KeywordBase):
     @property
     def g3(self) -> float:
         """Get or set the Dimension value depending on GTYPE.
-        GTYPE.EQ.1: length of z edge
-        GTYPE.EQ.4: length of z-axes.
+        GTYPE.EQ.1: Length of z edge
+        GTYPE.EQ.4: Length of z-axes.
         """ # nopep8
         return self._cards[3].get_value("g3")
 

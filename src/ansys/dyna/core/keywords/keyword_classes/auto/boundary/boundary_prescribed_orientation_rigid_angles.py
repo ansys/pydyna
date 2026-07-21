@@ -83,7 +83,7 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
 
     @property
     def pida(self) -> typing.Optional[int]:
-        """Get or set the Part ID for rigid body A.  The orientation of PIDB is measured with respect to the coordinate system of PIDA, as defined by LCO on *MAT_RIGID.  If zero then orientation of PIDB is measured with respect to the global reference frame except for BODY=1 in the ANGLES option
+        """Get or set the Part ID for rigid body A. The orientation of PIDB is measured with respect to the coordinate system of PIDA, as defined by LCO on *MAT_RIGID. If zero then orientation of PIDB is measured with respect to the global reference frame except for BODY=1 in the ANGLES option
         """ # nopep8
         return self._cards[0].get_value("pida")
 
@@ -129,9 +129,9 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
     @property
     def toffset(self) -> int:
         """Get or set the Time offset flag:
-        EQ.0:   No time offset is applied.
-        EQ.1:	The time value of all load curves will be offset by the birth time,
-        EQ.0:	no time offset is applied
+        EQ.0: No time offset is applied.
+        EQ.1: The time value of all load curves will be offset by the birth time,
+        EQ.0: no time offset is applied
         """ # nopep8
         return self._cards[0].get_value("toffset")
 
@@ -177,21 +177,21 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
 
     @property
     def iseq(self) -> int:
-        """Get or set the Specifies the sequence in which the rotations are effected.  In this first set of sequences three unique axes are involved.
-        EQ.123:  the first rotation is performed about the x axis an amount q1, the second about the y axis an amount q2 and the third about the z axis an amount q3.
-        EQ.231:  the first rotation is performed about the y axis an amount q1, the second about the z axis an amount q2 and the third about the x axis an amount q3.
-        EQ.312:  the first rotation is performed about the z axis an amount q1, the second about the x axis an amount q2 and the third about the y axis an amount q3.
-        EQ.132:  the first rotation is performed about the x axis an amount q1, the second about the z axis an amount q2 and the third about the y axis an amount q3.
-        EQ.213:  the first rotation is performed about the y axis an amount q1, the second about the x axis an amount q2 and the third about the z axis an amount q3.
-        EQ.321:  the first rotation is performed about the z axis an amount q1, the second about the y axis an amount q2 and the third about the x axis an amount q3.
+        """Get or set the Specifies the sequence in which the rotations are effected. In this first set of sequences three unique axes are involved.
+        EQ.123: the first rotation is performed about the x axis an amount q1, the second about the y axis an amount q2 and the third about the z axis an amount q3.
+        EQ.231: the first rotation is performed about the y axis an amount q1, the second about the z axis an amount q2 and the third about the x axis an amount q3.
+        EQ.312: the first rotation is performed about the z axis an amount q1, the second about the x axis an amount q2 and the third about the y axis an amount q3.
+        EQ.132: the first rotation is performed about the x axis an amount q1, the second about the z axis an amount q2 and the third about the y axis an amount q3.
+        EQ.213: the first rotation is performed about the y axis an amount q1, the second about the x axis an amount q2 and the third about the z axis an amount q3.
+        EQ.321: the first rotation is performed about the z axis an amount q1, the second about the y axis an amount q2 and the third about the x axis an amount q3.
         The second set of sequences involve only two unique axes where the first and third are repeated.
-        EQ.121:  the first rotation is performed about the x axis an amount q1, the second about the y axis an amount q2 and the third about the x axis an amount q3.
-        EQ.131:  the first rotation is performed about the x axis an amount q1, the second about the z axis an amount q2 and the third about the x axis an amount q3.
+        EQ.121: the first rotation is performed about the x axis an amount q1, the second about the y axis an amount q2 and the third about the x axis an amount q3.
+        EQ.131: the first rotation is performed about the x axis an amount q1, the second about the z axis an amount q2 and the third about the x axis an amount q3.
         VARIABLE DESCRIPTION
-        EQ.212:  the first rotation is performed about the y axis an amount q1, the second about the x axis an amount q2 and the third about the y axis an amount q3.
-        EQ.232:  the first rotation is performed about the y axis an amount q1, the second about the z axis an amount q2 and the third about the y axis an amount q3.
-        EQ.313:  the first rotation is performed about the z axis an amount q1, the second about the x axis an amount q2 and the third about the z axis an amount q3.
-        EQ.323:  the first rotation is performed about the z axis an amount q1, the second about the x axis an amount q2 and the third about the z axis an amount q3..
+        EQ.212: the first rotation is performed about the y axis an amount q1, the second about the x axis an amount q2 and the third about the y axis an amount q3.
+        EQ.232: the first rotation is performed about the y axis an amount q1, the second about the z axis an amount q2 and the third about the y axis an amount q3.
+        EQ.313: the first rotation is performed about the z axis an amount q1, the second about the x axis an amount q2 and the third about the z axis an amount q3.
+        EQ.323: the first rotation is performed about the z axis an amount q1, the second about the x axis an amount q2 and the third about the z axis an amount q3..
         """ # nopep8
         return self._cards[1].get_value("iseq")
 
@@ -205,7 +205,7 @@ class BoundaryPrescribedOrientationRigidAngles(KeywordBase):
     @property
     def ishft(self) -> int:
         """Get or set the Angle shift.
-        EQ.1:  Angle curves are unaltered.
+        EQ.1: Angle curves are unaltered.
         EQ.2: Shifts angle data in the LCIDQi curves as necessary to eliminate discontinuities. If angles are confined to the range [- , ] and the data contains excursions exceeding   then set ISHFT=2.
         """ # nopep8
         return self._cards[1].get_value("ishft")

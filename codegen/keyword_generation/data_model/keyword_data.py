@@ -107,7 +107,7 @@ class Field:
             property_name=data.get("property_name"),
             property_type=data.get("property_type"),
             readonly=data.get("readonly", False),
-            options=data.get("options", []),  # Default to empty list
+            options=[o for o in data.get("options", []) if str(o).strip()],  # Default to empty list, filter blank values
             redundant=data.get("redundant", False),
             card_indices=data.get("card_indices"),
             link=data.get("link"),
@@ -173,7 +173,7 @@ class Field:
         for bad_char in ["/", "-", " ", "(", ")", ",", ".", "'", "*", "|", "+"]:
             fixed_name = fixed_name.replace(bad_char, "_")
         # Deal with reserved keywords
-        if fixed_name.lower() in ["global", "as", "int", "lambda", "for"]:
+        if fixed_name.lower() in ["global", "as", "int", "lambda", "for", "try"]:
             fixed_name = fixed_name + "_"
         # Deal with names starting with digits
         if fixed_name and fixed_name[0].isdigit():

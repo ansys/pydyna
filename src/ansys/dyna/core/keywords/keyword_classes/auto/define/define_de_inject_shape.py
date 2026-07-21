@@ -103,8 +103,8 @@ class DefineDeInjectShape(KeywordBase):
     @property
     def iauto(self) -> int:
         """Get or set the Flag for how to specify the bonded shape patterns:
-        EQ.0:	Give each particle’s relative position and radius
-        EQ.1 : Use predefined pattern types
+        EQ.0: Give each particles relative position and radius
+        EQ.1: Use predefined pattern types
         """ # nopep8
         return self._cards[0].get_value("iauto")
 
@@ -118,9 +118,9 @@ class DefineDeInjectShape(KeywordBase):
     @property
     def itype(self) -> int:
         """Get or set the Bond particles patterns when IAUTO = 1:
-        EQ.1:	Line
-        EQ.2 : Cuboid
-        EQ.3 : Prism with equilateral triangle faces
+        EQ.1: Line
+        EQ.2: Cuboid
+        EQ.3: Prism with equilateral triangle faces
         """ # nopep8
         return self._cards[0].get_value("itype")
 

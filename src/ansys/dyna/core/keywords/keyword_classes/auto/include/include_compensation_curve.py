@@ -47,7 +47,7 @@ class IncludeCompensationCurve(KeywordBase):
         ]
     @property
     def filename(self) -> typing.Optional[str]:
-        """Get or set the Name of the keyword files containing nodes and elements information, with adaptive constraints if exist. Currently all blanks must have the same numbers of nodes and elements.
+        """Get or set the Name of the keyword file containing x, y, z coordinates of two curves defining the compensation zone, using keywords: *DEFINE_?CURVE_?COMPENSATION_?CONSTRAINT_?BEGIN and *DEFINE_?CURVE_?COMPENSATION_?CONSTRAINT_?END.
         """ # nopep8
         return self._cards[0].get_value("filename")
 

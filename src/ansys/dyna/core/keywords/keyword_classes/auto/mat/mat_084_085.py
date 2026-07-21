@@ -140,7 +140,7 @@ class Mat084085(KeywordBase):
 
     @property
     def tm(self) -> typing.Optional[float]:
-        """Get or set the Tangent modulus (concrete).
+        """Get or set the Initial tangent (Young's) modulus of concrete.
         """ # nopep8
         return self._cards[0].get_value("tm")
 
@@ -184,9 +184,9 @@ class Mat084085(KeywordBase):
 
     @property
     def fe(self) -> typing.Optional[float]:
-        """Get or set the Depends on value of RATE below:
-        RATE.EQ.0.: Fracture energy (energy per unit area dissipated in opening crack).
-        RATE.EQ 1.: Crack width at which crack-normal tensile stress goes to zero.
+        """Get or set the The meaning of FE depends on the value of RATE (see Remark 8):
+        RATE.EQ.0: Fracture energy(energy per unit area dissipated in opening the crack)
+        RATE.GT.0: Crack width at which the crack-normal tensile stress goes to zero
         """ # nopep8
         return self._cards[0].get_value("fe")
 
@@ -197,7 +197,9 @@ class Mat084085(KeywordBase):
 
     @property
     def asize(self) -> typing.Optional[float]:
-        """Get or set the Aggregate size (radius).
+        """Get or set the Aggregate size, depending on the value of RATE.
+        RATE.LE.1: Aggregate radius in model length units.
+        RATE.GE.2: Aggregate diameter in meters.The formula for shear stress carried across cracks with aggregate interlock uses this field; see Remark 11.
         """ # nopep8
         return self._cards[0].get_value("asize")
 
@@ -252,28 +254,30 @@ class Mat084085(KeywordBase):
 
     @property
     def rate(self) -> float:
-        """Get or set the Rate effects:
-        EQ.0.0: Strain rate effects are included (default),
-        EQ.1.0: Strain rate effects are turned off.Crack widths are stored as extra history variables 30, 31, 32.
-        EQ.2.0:Like RATE=1 but includes improved crack algorithm (recommended).  Crack widths are stored as extra history variables 3, 4, 5.
+        """Get or set the Material model option (see Remarks 8 and 13):
+        EQ.0.0: Original Broadhouse implementation with strain rate effects  included. WARNING: This option does not guarantee energy conservation.
+        EQ.1.0: Original Broadhouse implementation with strain rate effects turned off.
+        EQ.2.0: Like RATE = 1 but includes an improved crack algorithm.It is superseded by RATE = 8.
+        EQ.8.0: Improved crack algorithm plus additional inputs on Cards 5 through 7 (recommended).
         """ # nopep8
         return self._cards[1].get_value("rate")
 
     @rate.setter
     def rate(self, value: float) -> None:
         """Set the rate property."""
-        if value not in [0, 1, 2, None]:
-            raise Exception("""rate must be `None` or one of {0,1,2}.""")
+        if value not in [0, 1, 2, 8, None]:
+            raise Exception("""rate must be `None` or one of {0,1,2,8}.""")
         self._cards[1].set_value("rate", value)
 
     @property
     def conm(self) -> typing.Optional[float]:
-        """Get or set the GT.0: Factor to convert model mass units to kg,
-        EQ.-1.: Mass, length, time units in model are lbf*sec 2 /in, inch, sec,
-        EQ -2.: Mass, length, time units in model are g, cm, microsec,
-        EQ.-3.: Mass, length, time units in model are g, mm, msec,
-        EQ.-4.: Mass, length, time units in model are metric ton, mm, sec,
-        EQ.-5.: Mass, length, time units in model are kg, mm, msec.
+        """Get or set the Units (conversion) flag:
+        GT.0.0: Factor to convert model mass units to kg
+        EQ. - 1.0: Mass, length,and time units in the model are lbf*sec2/in, inch,and sec.
+        EQ. - 2.0: Mass, length,and time units in the model are g, cm,and microsec.
+        EQ. - 3.0: Mass, length,and time units in the model are g, mm,and msec.
+        EQ. - 4.0: Mass, length,and time units in the model are metric ton, mm,and sec.
+        EQ. - 5.0: Mass, length,and time units in the model are kg, mm,and msec.
         """ # nopep8
         return self._cards[1].get_value("conm")
 
@@ -284,7 +288,9 @@ class Mat084085(KeywordBase):
 
     @property
     def conl(self) -> typing.Optional[float]:
-        """Get or set the If CONM.GT.0, factor to convert model length units to meters; otherwise CONL is ignored.
+        """Get or set the Length units conversion factor:
+        CONM.GT.0: CONL is the conversion factor from model length units to meters(for instance, CONL = 0.001 for millimeters).
+        CONM.LE.0: CONL is ignored.
         """ # nopep8
         return self._cards[1].get_value("conl")
 
@@ -295,7 +301,9 @@ class Mat084085(KeywordBase):
 
     @property
     def cont(self) -> typing.Optional[float]:
-        """Get or set the If CONM.GT.0, factor to convert model time units to seconds; otherwise CONT is ignored.
+        """Get or set the Time units conversion factor:
+        CONM.GT.0: CONT is the conversion factor from time units to seconds(for example, CONT = 0.001 for milliseconds).
+        CONM.LE.0: CONT is ignored.
         """ # nopep8
         return self._cards[1].get_value("cont")
 
@@ -306,9 +314,8 @@ class Mat084085(KeywordBase):
 
     @property
     def eps1(self) -> typing.Optional[float]:
-        """Get or set the First value of volumetric strain-pressure curve (natural logarithmic values).
-        A maximum of 8 values are allowed. The tabulated values must competely cover the expected values in the analysis.
-        If the first value is not for a volumetric strain value of zero then the point (0.0,0.0) will be automatically generated and up to a further nine additional values may be defined.
+        """Get or set the Volumetric strain values (natural logarithmic values); see Remark 3.
+        If this card is not left blank, a minimum of 2 values must be defined and a maximum of 8 values are allowed.
         """ # nopep8
         return self._cards[2].get_value("eps1")
 
@@ -319,7 +326,8 @@ class Mat084085(KeywordBase):
 
     @property
     def eps2(self) -> typing.Optional[float]:
-        """Get or set the Second value of volumetric strain-pressure curve (natural logarithmic values).
+        """Get or set the Volumetric strain values (natural logarithmic values); see Remark 3.
+        If this card is not left blank, a minimum of 2 values must be defined and a maximum of 8 values are allowed.
         """ # nopep8
         return self._cards[2].get_value("eps2")
 
@@ -330,7 +338,8 @@ class Mat084085(KeywordBase):
 
     @property
     def eps3(self) -> typing.Optional[float]:
-        """Get or set the Third value of volumetric strain-pressure curve (natural logarithmic values).
+        """Get or set the Volumetric strain values (natural logarithmic values); see Remark 3.
+        If this card is not left blank, a minimum of 2 values must be defined and a maximum of 8 values are allowed.
         """ # nopep8
         return self._cards[2].get_value("eps3")
 
@@ -341,7 +350,8 @@ class Mat084085(KeywordBase):
 
     @property
     def eps4(self) -> typing.Optional[float]:
-        """Get or set the Fourth value of volumetric strain-pressure curve (natural logarithmic values).
+        """Get or set the Volumetric strain values (natural logarithmic values); see Remark 3.
+        If this card is not left blank, a minimum of 2 values must be defined and a maximum of 8 values are allowed.
         """ # nopep8
         return self._cards[2].get_value("eps4")
 
@@ -352,7 +362,8 @@ class Mat084085(KeywordBase):
 
     @property
     def eps5(self) -> typing.Optional[float]:
-        """Get or set the Fifth value of volumetric strain-pressure curve (natural logarithmic values).
+        """Get or set the Volumetric strain values (natural logarithmic values); see Remark 3.
+        If this card is not left blank, a minimum of 2 values must be defined and a maximum of 8 values are allowed.
         """ # nopep8
         return self._cards[2].get_value("eps5")
 
@@ -363,7 +374,8 @@ class Mat084085(KeywordBase):
 
     @property
     def eps6(self) -> typing.Optional[float]:
-        """Get or set the Sixth value of volumetric strain-pressure curve (natural logarithmic values).
+        """Get or set the Volumetric strain values (natural logarithmic values); see Remark 3.
+        If this card is not left blank, a minimum of 2 values must be defined and a maximum of 8 values are allowed.
         """ # nopep8
         return self._cards[2].get_value("eps6")
 
@@ -374,7 +386,8 @@ class Mat084085(KeywordBase):
 
     @property
     def eps7(self) -> typing.Optional[float]:
-        """Get or set the Seventh value of volumetric strain-pressure curve (natural logarithmic values).
+        """Get or set the Volumetric strain values (natural logarithmic values); see Remark 3.
+        If this card is not left blank, a minimum of 2 values must be defined and a maximum of 8 values are allowed.
         """ # nopep8
         return self._cards[2].get_value("eps7")
 
@@ -385,7 +398,8 @@ class Mat084085(KeywordBase):
 
     @property
     def eps8(self) -> typing.Optional[float]:
-        """Get or set the Eight value of volumetric strain-pressure curve (natural logarithmic values).
+        """Get or set the Volumetric strain values (natural logarithmic values); see Remark 3.
+        If this card is not left blank, a minimum of 2 values must be defined and a maximum of 8 values are allowed.
         """ # nopep8
         return self._cards[2].get_value("eps8")
 

@@ -71,13 +71,21 @@ class AleMeshInterface(KeywordBase):
 
     @property
     def nowrt(self) -> int:
-        """Get or set the Three digit flag to deselect which file to output:
-        EQ.__0:	Write a first try of the triangular meshes for the material interfaces(see Remark 1).The mesh is output in a keyword file called alemeshmatint.k.
-        EQ.__1 : Do not output alemeshmatint.k.
-        EQ._0_ : Write triangular meshes of the material interfaces, after  their remeshing(see Remark 2), in a keyword file called aleremeshmatint.k.
-        EQ._1_ : Do not output aleremeshmatint.k.
-        EQ.0__ : Write tetrahedral meshes of the material volumes in a keyword file called alemeshmatvol.k.
-        EQ.1__ : Do not output alemeshmatvol.k.
+        """Get or set the File output flag. NOWRT is interpreted digit-wise, NOWRT = [PNML]:
+        NOWRT = L + M�10 + N�100 + P�1000
+        The 1s digit controls the output of the initial triangular mesh on the material interfaces :
+        L.EQ.0: Write the initial triangular meshes for the material interfaces(see Remark 1).The mesh is output to a keyword file called alemeshmatint.k.
+        L.EQ.1: Do not output alemeshmatint.k.
+        The 10s digit controls the output of the remesh for the triangular mesh on the material interface :
+        M.EQ.0: Write triangular mesh on the material interfaces after remeshing(see Remark 2) to a keyword file called aleremeshmatint.k.
+        M.EQ.1: Do not output aleremeshmatint.k.
+        The 100s digit controls the output of the mesh in the material volumes :
+        N.EQ.0: Write a tetrahedral mesh of the material volumes to a keyword file called alemeshmatvol.k.
+        N.EQ.1: Do not output alemeshmatvol.k.
+        N.EQ.2: Write a hexahedral mesh in 3D or a quadrilateral mesh in 2D for the materials selected by MMGSET in alemeshmatvol.k.
+        The 1000s digit controls the output of a mapping file that can be read back with * INITIAL_LAG_MAPPING to initialize the tetrahedral mesh in alemeshmatvol.k :
+        P.EQ.0: Write the Lagrangian mapping file called alemeshmap.
+        P.EQ.1: Do not output alemeshmap.
         """ # nopep8
         return self._cards[0].get_value("nowrt")
 
@@ -88,7 +96,9 @@ class AleMeshInterface(KeywordBase):
 
     @property
     def volrat(self) -> float:
-        """Get or set the Mesh volume ratio beyond which the mesh is output (see Remark 3)
+        """Get or set the Volume ratio:
+        LT.2.0: Mesh volume ratio beyond which the mesh is output(see Remark 3)
+        EQ.2.0 : Volume fraction threshold in an ALE hexahedra beyond which this element is output in aleremeshmatvol.k.
         """ # nopep8
         return self._cards[0].get_value("volrat")
 
@@ -99,9 +109,9 @@ class AleMeshInterface(KeywordBase):
 
     @property
     def interp(self) -> int:
-        """Get or set the Interpolating method :
-        EQ.0‌:     The ALE hexahedron data are interpolated at the Lagrangian tetrahedron centers.
-        EQ.1‌ : The intersection volumes between ALE hexahedra and Lagrangian tetrahedra are computed and the ALE data are mapped to the Lagrangian elements with a volume - averaged method.
+        """Get or set the Interpolating method:
+        EQ.0: The ALE hexahedron data are interpolated at the Lagrangian tetrahedron centers.
+        EQ.1: The intersection volumes between ALE hexahedra and Lagrangian tetrahedra are computed and the ALE data are mapped to the Lagrangian elements with a volume - averaged method.
         """ # nopep8
         return self._cards[0].get_value("interp")
 

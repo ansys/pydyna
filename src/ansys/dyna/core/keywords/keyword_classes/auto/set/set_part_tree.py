@@ -111,7 +111,7 @@ class SetPartTree(KeywordBase):
 
     @property
     def compi(self) -> typing.Optional[int]:
-        """Get or set the Components of branch BRID:
+        """Get or set the Components of branch BRID. (see Remark2):
         GT.0: ID of a sub-branch
         LT.0: ID of a part.
         """ # nopep8
@@ -124,7 +124,7 @@ class SetPartTree(KeywordBase):
 
     @property
     def compi(self) -> typing.Optional[int]:
-        """Get or set the Components of branch BRID:
+        """Get or set the Components of branch BRID. (see Remark2):
         GT.0: ID of a sub-branch
         LT.0: ID of a part.
         """ # nopep8
@@ -137,7 +137,7 @@ class SetPartTree(KeywordBase):
 
     @property
     def compi(self) -> typing.Optional[int]:
-        """Get or set the Components of branch BRID:
+        """Get or set the Components of branch BRID. (see Remark2):
         GT.0: ID of a sub-branch
         LT.0: ID of a part.
         """ # nopep8
@@ -150,7 +150,7 @@ class SetPartTree(KeywordBase):
 
     @property
     def compi(self) -> typing.Optional[int]:
-        """Get or set the Components of branch BRID:
+        """Get or set the Components of branch BRID. (see Remark2):
         GT.0: ID of a sub-branch
         LT.0: ID of a part.
         """ # nopep8
@@ -163,7 +163,7 @@ class SetPartTree(KeywordBase):
 
     @property
     def compi(self) -> typing.Optional[int]:
-        """Get or set the Components of branch BRID:
+        """Get or set the Components of branch BRID. (see Remark2):
         GT.0: ID of a sub-branch
         LT.0: ID of a part.
         """ # nopep8
@@ -176,7 +176,7 @@ class SetPartTree(KeywordBase):
 
     @property
     def compi(self) -> typing.Optional[int]:
-        """Get or set the Components of branch BRID:
+        """Get or set the Components of branch BRID. (see Remark2):
         GT.0: ID of a sub-branch
         LT.0: ID of a part.
         """ # nopep8
@@ -189,7 +189,7 @@ class SetPartTree(KeywordBase):
 
     @property
     def compi(self) -> typing.Optional[int]:
-        """Get or set the Components of branch BRID:
+        """Get or set the Components of branch BRID. (see Remark2):
         GT.0: ID of a sub-branch
         LT.0: ID of a part.
         """ # nopep8
@@ -202,7 +202,7 @@ class SetPartTree(KeywordBase):
 
     @property
     def compi(self) -> typing.Optional[int]:
-        """Get or set the Components of branch BRID:
+        """Get or set the Components of branch BRID. (see Remark2):
         GT.0: ID of a sub-branch
         LT.0: ID of a part.
         """ # nopep8

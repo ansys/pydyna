@@ -46,6 +46,7 @@ class IcfdBoundaryPrescribedPre(KeywordBase):
                     Field("sf", float, 20, 10, 1.0),
                     Field("death", float, 30, 10, 1e+28),
                     Field("birth", float, 40, 10, 0.0),
+                    Field("iso", int, 50, 10, 0),
                 ],
                 None,
                 name="boundaries",

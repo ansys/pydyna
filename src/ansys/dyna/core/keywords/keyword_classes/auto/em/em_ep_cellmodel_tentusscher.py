@@ -208,7 +208,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material ID defined in *MAT_.
+        """Get or set the Material ID defined in the *MAT section. If a negative value is entered,  the cell model is defined on a node set instead of a part, and -MID is the node set where the cell model is defined.
 
         """ # nopep8
         return self._cards[0].get_value("mid")
@@ -829,7 +829,7 @@ class EmEpCellmodelTentusscher(KeywordBase):
 
     @property
     def rpri(self) -> typing.Optional[float]:
-        """Get or set the Initial value of R?in component calcium_dynamics.
+        """Get or set the Initial value of R  in component calcium_dynamics.
         """ # nopep8
         return self._cards[10].get_value("rpri")
 

@@ -64,12 +64,7 @@ _MATDAMAGE3_CARD2 = (
 
 _MATDAMAGE3_CARD3 = (
     FieldSchema("hardk4", float, 0, 10, None),
-    FieldSchema("gamma5", float, 10, 10, None),
-)
-
-_MATDAMAGE3_CARD4 = (
-    FieldSchema("lckh", int, 0, 10, None),
-    FieldSchema("nkh", int, 10, 10, None),
+    FieldSchema("gamma4", float, 10, 10, None),
 )
 
 _MATDAMAGE3_OPTION0_CARD0 = (
@@ -86,7 +81,6 @@ class MatDamage3(KeywordBase):
     ]
     _link_fields = {
         "lcss": LinkType.DEFINE_CURVE,
-        "lckh": LinkType.DEFINE_CURVE,
     }
 
     def __init__(self, **kwargs):
@@ -108,10 +102,6 @@ class MatDamage3(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _MATDAMAGE3_CARD3,
-                **kwargs,
-            ),
-            Card.from_field_schemas_with_defaults(
-                _MATDAMAGE3_CARD4,
                 **kwargs,
             ),
             OptionCardSet(
@@ -150,7 +140,7 @@ class MatDamage3(KeywordBase):
     @property
     def e(self) -> typing.Optional[float]:
         """Get or set the Young's modulus.
-        LT.0:	-E gives the curve ID for E as a function of temperature.
+        LT.0: -E gives the curve ID for E as a function of temperature.
         """ # nopep8
         return self._cards[0].get_value("e")
 
@@ -162,7 +152,7 @@ class MatDamage3(KeywordBase):
     @property
     def pr(self) -> typing.Optional[float]:
         """Get or set the Poisson's ratio.
-        LT.0:	-v gives the curve ID for v as a function of temperature.
+        LT.0: -v gives the curve ID for v as a function of temperature.
         """ # nopep8
         return self._cards[0].get_value("pr")
 
@@ -195,7 +185,7 @@ class MatDamage3(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Isotropic hardening parameter,  beta.  Set  beta=0 for linear isotropic hardening.
+        """Get or set the Isotropic hardening parameter,  beta. Set  beta=0 for linear isotropic hardening.
         """ # nopep8
         return self._cards[0].get_value("beta")
 
@@ -206,7 +196,7 @@ class MatDamage3(KeywordBase):
 
     @property
     def lcss(self) -> typing.Optional[int]:
-        """Get or set the Load curve or table ID defining effective stress as a function of effective plastic strain (and optionally temperature) for isotropic hardening.  The first abscissa value in each curve must be zero corresponding to the initial yield stress. The first ordinate value in each curve is the initial yield stress
+        """Get or set the Load curve or table ID defining effective stress as a function of effective plastic strain (and optionally temperature) for isotropic hardening. The first abscissa value in each curve must be zero corresponding to the initial yield stress. The first ordinate value in each curve is the initial yield stress
         """ # nopep8
         return self._cards[0].get_value("lcss")
 
@@ -218,7 +208,7 @@ class MatDamage3(KeywordBase):
     @property
     def hardk1(self) -> typing.Optional[float]:
         """Get or set the Kinematic hardening modulus C1.
-        LT.0:  -C_j gives the curve ID for C_j as a function of temperature.
+        LT.0: -C_j gives the curve ID for C_j as a function of temperature.
         """ # nopep8
         return self._cards[1].get_value("hardk1")
 
@@ -229,8 +219,8 @@ class MatDamage3(KeywordBase):
 
     @property
     def gamma1(self) -> typing.Optional[float]:
-        """Get or set the Kinematic hardening parameter  Gamma1.γ_j.  Set γ_j = 0 for linear kinematic hardening. Ignored if HARDKj = 0.
-        LT.0:  -γ_j gives the curve ID for γ_j as a function of temperature
+        """Get or set the Kinematic hardening parameter  Gamma1_j. Set Gamma1_j = 0 for linear kinematic hardening. Ignored if HARDKj = 0.
+        LT.0: -Gamma1_j gives the curve ID for Gamma1_j as a function of temperature
         """ # nopep8
         return self._cards[1].get_value("gamma1")
 
@@ -354,7 +344,7 @@ class MatDamage3(KeywordBase):
 
     @property
     def epsd(self) -> typing.Optional[float]:
-        """Get or set the Damage threshold Rd .  Damage accumulation begins when  R>Rd.
+        """Get or set the Damage threshold Rd . Damage accumulation begins when  R>Rd.
         """ # nopep8
         return self._cards[2].get_value("epsd")
 
@@ -376,7 +366,7 @@ class MatDamage3(KeywordBase):
 
     @property
     def t(self) -> float:
-        """Get or set the Damage material constant t.  Default = 1
+        """Get or set the Damage material constant t. Default = 1
         """ # nopep8
         return self._cards[2].get_value("t")
 
@@ -387,7 +377,7 @@ class MatDamage3(KeywordBase):
 
     @property
     def dc(self) -> float:
-        """Get or set the Critical damage value Dc .  When damage value reaches critical, the element is deleted from calculation.  Default = 0.5.
+        """Get or set the Critical damage value Dc . When damage value reaches critical, the element is deleted from calculation. Default = 0.5.
         """ # nopep8
         return self._cards[2].get_value("dc")
 
@@ -399,11 +389,11 @@ class MatDamage3(KeywordBase):
     @property
     def khflg(self) -> int:
         """Get or set the Kinematic hardening flag
-        EQ.0:	Use kinematic hardening parameters HARDKj and GAMMAj (default).
-        EQ.1:	Kinematic hardening parameters(C_j,γ_j) given by load curve or table.NKH data points used(with a maximum of 10) in each curve.HARDKj and GAMMAj fields are ignored.
-        EQ.2 : Fits NKH kinematic hardening parameters(C_j,γ_j) to uniaxial stress - strain data at constant temperature for a half - cycle, that is, it fits
-        EQ.3 : Fits NKH kinematic hardening parameters(C_j, γ_j) to uniaxial stress - strain data for the tensile part of a stabilized cycle, that is, it fits,to N stress as a function of plastic strain data(ε_i ^ p, σ_i, T) given by the load curve or table LCHK.Here the first data point is chosen such that ε_1 ^ p = 0. HARDKj and GAMMAj fields are ignored.
-        EQ.4 : Fits NKH kinematic hardening parameters(C_j, γ_j) to uniaxial stress - strain data for different stabilized cycles, that is, it fits,to max stress as a function of max plastic strain data(ε_i ^ p, σ_i, T) over N cycles, given by the load curve or table LCHK.HARDKj and GAMMAj fields are ignored.
+        EQ.0: Use kinematic hardening parameters HARDKj and GAMMAj (default).
+        EQ.1: Kinematic hardening parameters(C_j,Gamma_j) given by load curve or table.NKH data points used(with a maximum of 10) in each curve.HARDKj and GAMMAj fields are ignored.
+        EQ.2: Fits NKH kinematic hardening parameters(C_j,Gamma_j) to uniaxial stress - strain data at constant temperature for a half - cycle, that is, it fits
+        EQ.3: Fits NKH kinematic hardening parameters(C_j, Gamma_j) to uniaxial stress - strain data for the tensile part of a stabilized cycle, that is, it fits,to N stress as a function of plastic strain data given by the load curve or table LCHK.Here the first data point is chosen such that eps**p_1 = 0. HARDKj and GAMMAj fields are ignored.
+        EQ.4: Fits NKH kinematic hardening parameters(C_j, Gamma_j) to uniaxial stress - strain data for different stabilized cycles, that is, it fits,to max stress as a function of max plastic strain data over N cycles, given by the load curve or table LCHK.HARDKj and GAMMAj fields are ignored.
         """ # nopep8
         return self._cards[2].get_value("khflg")
 
@@ -417,7 +407,7 @@ class MatDamage3(KeywordBase):
     @property
     def hardk4(self) -> typing.Optional[float]:
         """Get or set the Kinematic hardening modulus.
-        LT.0:  -C_4 gives the curve ID for C_4 as a function of temperature
+        LT.0: -HARDK4 gives the curve ID for C4 as a function of temperature
         """ # nopep8
         return self._cards[3].get_value("hardk4")
 
@@ -427,49 +417,27 @@ class MatDamage3(KeywordBase):
         self._cards[3].set_value("hardk4", value)
 
     @property
-    def gamma5(self) -> typing.Optional[float]:
-        """Get or set the Kinematic hardening parameter.γ_4.  Set γ_4 = 0 for linear kinematic hardening. Ignored if HARDK4 = 0.
-        LT.0:  -γ_4 gives the curve ID for γ_4 as a function of temperature.
+    def gamma4(self) -> typing.Optional[float]:
+        """Get or set the Kinematic hardening parameter.Gamma4. Set Gamma4 = 0 for linear kinematic hardening. Ignored if HARDK4 = 0.
+        LT.0: -Gamma4 gives the curve ID for Gamma4 as a function of temperature.
         """ # nopep8
-        return self._cards[3].get_value("gamma5")
+        return self._cards[3].get_value("gamma4")
 
-    @gamma5.setter
-    def gamma5(self, value: float) -> None:
-        """Set the gamma5 property."""
-        self._cards[3].set_value("gamma5", value)
-
-    @property
-    def lckh(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining kinematic hardening when KHFLG > 0. Gives either (C_j,γ_j) values or stress as a function of plastic strain (ε_p,σ) depending on KHFLG.
-        """ # nopep8
-        return self._cards[4].get_value("lckh")
-
-    @lckh.setter
-    def lckh(self, value: int) -> None:
-        """Set the lckh property."""
-        self._cards[4].set_value("lckh", value)
-
-    @property
-    def nkh(self) -> typing.Optional[int]:
-        """Get or set the Number of kinematic hardening parameters when KHFLG > 0. Up to 10 back stresses can be used.
-        """ # nopep8
-        return self._cards[4].get_value("nkh")
-
-    @nkh.setter
-    def nkh(self, value: int) -> None:
-        """Set the nkh property."""
-        self._cards[4].set_value("nkh", value)
+    @gamma4.setter
+    def gamma4(self, value: float) -> None:
+        """Set the gamma4 property."""
+        self._cards[3].set_value("gamma4", value)
 
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[5].cards[0].get_value("title")
+        return self._cards[4].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[5].cards[0].set_value("title", value)
+        self._cards[4].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
@@ -488,19 +456,4 @@ class MatDamage3(KeywordBase):
     def lcss_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcss."""
         self.lcss = value.lcid
-
-    @property
-    def lckh_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lckh."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lckh:
-                return kwd
-        return None
-
-    @lckh_link.setter
-    def lckh_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lckh."""
-        self.lckh = value.lcid
 

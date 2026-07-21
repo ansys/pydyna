@@ -99,9 +99,9 @@ class AleCouplingRigidBody(KeywordBase):
     @property
     def idtype(self) -> int:
         """Get or set the Type of set ID:
-        EQ.0:	Partpart set ID(PSID)).
-        EQ.1:	Partpart ID(PID)).
-        EQ.2:	Segmentsegment set ID(SGSID)).
+        EQ.0: Partpart set ID(PSID)).
+        EQ.1: Partpart ID(PID)).
+        EQ.2: Segmentsegment set ID(SGSID)).
         """ # nopep8
         return self._cards[1].get_value("idtype")
 
@@ -114,8 +114,8 @@ class AleCouplingRigidBody(KeywordBase):
 
     @property
     def ictype(self) -> int:
-        """Get or set the Constraint type:EQ.1:	No flow through all directions.
-        EQ.2 : No flow through normal direction. (slip condition)
+        """Get or set the Constraint type:EQ.1: No flow through all directions.
+        EQ.2: No flow through normal direction. (slip condition)
         """ # nopep8
         return self._cards[1].get_value("ictype")
 

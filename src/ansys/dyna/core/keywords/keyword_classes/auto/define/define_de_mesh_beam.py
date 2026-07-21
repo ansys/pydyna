@@ -99,8 +99,9 @@ class DefineDeMeshBeam(KeywordBase):
 
     @property
     def type(self) -> int:
-        """Get or set the EQ.0:	Part set
-        EQ.1:	Part
+        """Get or set the SID type:
+        EQ.0: Part se ID
+        EQ.1: Part ID
         """ # nopep8
         return self._cards[0].get_value("type")
 
@@ -184,8 +185,8 @@ class DefineDeMeshBeam(KeywordBase):
     @property
     def mass(self) -> typing.Optional[float]:
         """Get or set the DES Mass:
-        GT.0:	DES mass
-        EQ. - 1 : The DES particle radius(r) is 0.5×Beam Length / NQUAD , the DES mass(m) is(4πρr ^ 3)⁄3,and the moment of inertia is 2mr ^ 2 / 5. Input fields INERTIA and RADIUS are ignored.
+        GT.0: DES mass
+        EQ. - 1: The DES particle radius(r) is 0.5Beam Length / NQUAD , the DES mass(m) is(4r ** 3)3,and the moment of inertia is 2mr ** 2 / 5. Input fields INERTIA and RADIUS are ignored.
         """ # nopep8
         return self._cards[1].get_value("mass")
 

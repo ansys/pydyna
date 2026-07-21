@@ -88,10 +88,10 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
 
     @property
     def x2_flc(self) -> typing.Optional[float]:
-        """Get or set the X2 is one of the coefficients of the porosity in the equation of Anagonye  and Wang [1999].  (Defined below in description for X0/X1)
+        """Get or set the X2 is one of the coefficients of the porosity in the equation of Anagonye  and Wang [1999]. (Defined below in description for X0/X1)
         Optional fabric porous leakage flow coefficient:
-        GE.0.0:	fabric porous leakage flow coefficient
-        LT.0.0 : | FLC | is the load curve ID of the curve defining FLC as a function of time.
+        GE.0.0: fabric porous leakage flow coefficient
+        LT.0.0: | FLC | is the load curve ID of the curve defining FLC as a function of time.
         """ # nopep8
         return self._cards[0].get_value("x2_flc")
 
@@ -102,10 +102,10 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
 
     @property
     def x3_fac(self) -> float:
-        """Get or set the X3 is one of the coefficients of the porosity in the equation of Anagonye and Wang [1999].  (Defined below in description for X0/X1)
+        """Get or set the X3 is one of the coefficients of the porosity in the equation of Anagonye and Wang [1999]. (Defined below in description for X0/X1)
         Optional fabric characteristic parameter:
-        GE.0.0:	optional fabric characteristic parameter
-        LT.0.0 : | FAC | is the load curve ID of the curve defining FAC as a function of absolute pressure.
+        GE.0.0: optional fabric characteristic parameter
+        LT.0.0: | FAC | is the load curve ID of the curve defining FAC as a function of absolute pressure.
         """ # nopep8
         return self._cards[0].get_value("x3_fac")
 
@@ -129,14 +129,14 @@ class MatAddAirbagPorosityLeakage(KeywordBase):
     @property
     def fvopt(self) -> typing.Optional[float]:
         """Get or set the Fabric venting option.
-        EQ.1:	Wang - Nefske formulas for venting through an orifice are used.Blockage is not considered.
-        EQ.2 : Wang - Nefske formulas for venting through an orifice are used.Blockage of venting area due to contact is considered.
-        EQ.3 : Leakage formulas of Graefe, Krummheuer,and Siejak[1990] are used.Blockage is not considered.
-        EQ.4 : Leakage formulas of Graefe, Krummheuer,and Siejak[1990] are used.Blockage of venting area due to contact is considered.
-        EQ.5 : Leakage formulas based on flow through a porous media are used.Blockage is not considered.
-        EQ.6 : Leakage formulas based on flow through a porous media are used.Blockage of venting area due to contact is considered.
-        EQ.7 : Leakage is based on gas volume outflow as a function of pressure load curve[Lian, 2000].Blockage is not considered.Absolute pressure is used in the porous - velocity - versus - pressure load curve, given as FAC.
-        EQ.8 : Leakage is based on gas volume outflow as a function of pressure load curve[Lian 2000].Blockage of venting or porous area due to contact is considered.Absolute pressure is used in the porous - velocity - versus - pressure load curve, given as FAC.
+        EQ.1: Wang - Nefske formulas for venting through an orifice are used.Blockage is not considered.
+        EQ.2: Wang - Nefske formulas for venting through an orifice are used.Blockage of venting area due to contact is considered.
+        EQ.3: Leakage formulas of Graefe, Krummheuer,and Siejak[1990] are used.Blockage is not considered.
+        EQ.4: Leakage formulas of Graefe, Krummheuer,and Siejak[1990] are used.Blockage of venting area due to contact is considered.
+        EQ.5: Leakage formulas based on flow through a porous media are used.Blockage is not considered.
+        EQ.6: Leakage formulas based on flow through a porous media are used.Blockage of venting area due to contact is considered.
+        EQ.7: Leakage is based on gas volume outflow as a function of pressure load curve[Lian, 2000].Blockage is not considered.Absolute pressure is used in the porous - velocity - versus - pressure load curve, given as FAC.
+        EQ.8: Leakage is based on gas volume outflow as a function of pressure load curve[Lian 2000].Blockage of venting or porous area due to contact is considered.Absolute pressure is used in the porous - velocity - versus - pressure load curve, given as FAC.
         """ # nopep8
         return self._cards[0].get_value("fvopt")
 
