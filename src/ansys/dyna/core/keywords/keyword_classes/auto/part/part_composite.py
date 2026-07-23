@@ -22,8 +22,11 @@
 
 """Module providing the PartComposite class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.hourglass.hourglass import Hourglass
@@ -41,17 +44,6 @@ _PARTCOMPOSITE_CARD1 = (
     FieldSchema("hgid", int, 50, 10, 0),
     FieldSchema("adpopt", int, 60, 10, 0),
     FieldSchema("thshel", int, 70, 10, 0),
-)
-
-_PARTCOMPOSITE_CARD2 = (
-    FieldSchema("mid1", int, 0, 10, None),
-    FieldSchema("thick1", float, 10, 10, None),
-    FieldSchema("b1", float, 20, 10, None),
-    FieldSchema("tmid1", int, 30, 10, None),
-    FieldSchema("mid2", int, 40, 10, None),
-    FieldSchema("thick2", float, 50, 10, None),
-    FieldSchema("b2", float, 60, 10, None),
-    FieldSchema("tmid2", int, 70, 10, None),
 )
 
 class PartComposite(KeywordBase):
@@ -77,8 +69,19 @@ class PartComposite(KeywordBase):
                 _PARTCOMPOSITE_CARD1,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _PARTCOMPOSITE_CARD2,
+            TableCard(
+                [
+                    Field("mid1", int, 0, 10, None),
+                    Field("thick1", float, 10, 10, None),
+                    Field("b1", float, 20, 10, None),
+                    Field("tmid1", int, 30, 10, None),
+                    Field("mid2", int, 40, 10, None),
+                    Field("thick2", float, 50, 10, None),
+                    Field("b2", float, 60, 10, None),
+                    Field("tmid2", int, 70, 10, None),
+                ],
+                None,
+                name="layers",
                 **kwargs,
             ),
         ]
@@ -209,92 +212,14 @@ class PartComposite(KeywordBase):
         self._cards[1].set_value("thshel", value)
 
     @property
-    def mid1(self) -> typing.Optional[int]:
-        """Get or set the Material ID of integration point i, see *MAT_? Section
-        """ # nopep8
-        return self._cards[2].get_value("mid1")
+    def layers(self) -> pd.DataFrame:
+        """Get the table of layers."""
+        return self._cards[2].table
 
-    @mid1.setter
-    def mid1(self, value: int) -> None:
-        """Set the mid1 property."""
-        self._cards[2].set_value("mid1", value)
-
-    @property
-    def thick1(self) -> typing.Optional[float]:
-        """Get or set the Thickness of integration point .
-        """ # nopep8
-        return self._cards[2].get_value("thick1")
-
-    @thick1.setter
-    def thick1(self, value: float) -> None:
-        """Set the thick1 property."""
-        self._cards[2].set_value("thick1", value)
-
-    @property
-    def b1(self) -> typing.Optional[float]:
-        """Get or set the Material angle of integration point i.
-        """ # nopep8
-        return self._cards[2].get_value("b1")
-
-    @b1.setter
-    def b1(self, value: float) -> None:
-        """Set the b1 property."""
-        self._cards[2].set_value("b1", value)
-
-    @property
-    def tmid1(self) -> typing.Optional[int]:
-        """Get or set the Thermal ID
-        """ # nopep8
-        return self._cards[2].get_value("tmid1")
-
-    @tmid1.setter
-    def tmid1(self, value: int) -> None:
-        """Set the tmid1 property."""
-        self._cards[2].set_value("tmid1", value)
-
-    @property
-    def mid2(self) -> typing.Optional[int]:
-        """Get or set the Material ID of integration point i, see *MAT_? Section
-        """ # nopep8
-        return self._cards[2].get_value("mid2")
-
-    @mid2.setter
-    def mid2(self, value: int) -> None:
-        """Set the mid2 property."""
-        self._cards[2].set_value("mid2", value)
-
-    @property
-    def thick2(self) -> typing.Optional[float]:
-        """Get or set the Thickness of integration point
-        """ # nopep8
-        return self._cards[2].get_value("thick2")
-
-    @thick2.setter
-    def thick2(self, value: float) -> None:
-        """Set the thick2 property."""
-        self._cards[2].set_value("thick2", value)
-
-    @property
-    def b2(self) -> typing.Optional[float]:
-        """Get or set the Material angle of integration point i
-        """ # nopep8
-        return self._cards[2].get_value("b2")
-
-    @b2.setter
-    def b2(self, value: float) -> None:
-        """Set the b2 property."""
-        self._cards[2].set_value("b2", value)
-
-    @property
-    def tmid2(self) -> typing.Optional[int]:
-        """Get or set the Thermal ID
-        """ # nopep8
-        return self._cards[2].get_value("tmid2")
-
-    @tmid2.setter
-    def tmid2(self, value: int) -> None:
-        """Set the tmid2 property."""
-        self._cards[2].set_value("tmid2", value)
+    @layers.setter
+    def layers(self, df: pd.DataFrame):
+        """Set layers from the dataframe df"""
+        self._cards[2].table = df
 
     @property
     def mid1_link(self) -> typing.Optional[KeywordBase]:
