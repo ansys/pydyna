@@ -1,0 +1,73 @@
+ansys.dyna.core.lib.parameters.ParameterSet
+===========================================
+
+.. py:class:: ansys.dyna.core.lib.parameters.ParameterSet
+
+   
+   Deck parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: get(param: str) -> Any
+
+      
+      Get a parameter by name.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add(param: str, value: Any) -> None
+
+      
+      Add a parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

@@ -1,0 +1,68 @@
+ansys.dyna.core.pre.misc.Plain_Report
+=====================================
+
+.. py:class:: ansys.dyna.core.pre.misc.Plain_Report(core, optional=None, additional=None, **kwargs)
+
+   
+   Provides the base class for a plain report.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: additional
+      :value: None
+
+
+
+   .. py:attribute:: core
+
+
+   .. py:attribute:: optional
+      :value: None
+
+
+
+   .. py:attribute:: kwargs
+
+
+   .. py:method:: get_version(package)
+
+
+   .. py:method:: __repr__()
+
+      
+      Return a string representation of the report.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

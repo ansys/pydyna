@@ -1,0 +1,26 @@
+ansys.dyna.core.keywords.keyword_classes.manual.section_tshell
+==============================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.section_tshell
+
+.. autoapi-nested-parse::
+
+   Module for SECTION_TSHELL keyword.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/section_tshell/SectionTShell
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.keyword_classes.manual.section_tshell.SectionTShell
+
+

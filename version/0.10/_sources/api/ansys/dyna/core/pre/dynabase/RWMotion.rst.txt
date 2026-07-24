@@ -1,0 +1,38 @@
+ansys.dyna.core.pre.dynabase.RWMotion
+=====================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.RWMotion(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Rigid wall motion type (velocity or displacement).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: VELOCITY
+      :value: 0
+
+
+
+   .. py:attribute:: DISPLACEMENT
+      :value: 1
+
+

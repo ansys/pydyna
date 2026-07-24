@@ -1,0 +1,316 @@
+ansys.dyna.core.pre.dynamaterial.MatAdditional
+==============================================
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.MatAdditional
+
+   
+   Defines additional properties for a material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: em
+      :value: False
+
+
+
+   .. py:attribute:: em_mat_type
+      :value: 0
+
+
+
+   .. py:attribute:: em_eos
+      :value: None
+
+
+
+   .. py:attribute:: thermal_isotropic
+      :value: False
+
+
+
+   .. py:method:: set_electromagnetic_property(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None)
+
+      
+      Define the electromagnetic material type and properties
+      for a material whose permeability equals the free space permeability.
+
+
+      :Parameters:
+
+          **material_type**
+              ..
+
+          **initial_conductivity**
+              ..
+
+          **eos**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_em_permeability_equal(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None)
+
+      
+      Define the electromagnetic material type and properties
+      for a material whose permeability equals the free space permeability.
+
+
+      :Parameters:
+
+          **material_type**
+              ..
+
+          **initial_conductivity**
+              ..
+
+          **eos**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_em_permeability_different(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None, murel=0)
+
+      
+      Define the electromagnetic material type and properties
+      for a material whose permeability equals the free space permeability.
+
+
+      :Parameters:
+
+          **material_type**
+              ..
+
+          **initial_conductivity**
+              ..
+
+          **eos**
+              ..
+
+          **murel**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_em_conducting_shells_3d(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0)
+
+      
+      Define the electromagnetic material type and properties
+      for a material whose permeability equals the free space permeability.
+
+
+      :Parameters:
+
+          **material_type**
+              ..
+
+          **initial_conductivity**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_em_resistive_heating_2d(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0)
+
+      
+      Define the electromagnetic material type and properties
+      for a material whose permeability equals the free space permeability.
+
+
+      :Parameters:
+
+          **material_type**
+              ..
+
+          **initial_conductivity**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_em_randles_batmac(positive_current_collector_conductivity=0, negative_current_collector_conductivity=0)
+
+      
+      Define two conductivities per EM node for special applications (Randles Batmac).
+
+
+      :Parameters:
+
+          **positive_current_collector_conductivity** : :class:`python:float`
+              conductivities of the positive current collector materials
+
+          **negative_current_collector_conductivity** : :class:`python:float`
+              conductivities of the negative current collector materials
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_thermal_isotropic(density=0, generation_rate=0, generation_rate_multiplier=0, specific_heat=0, conductivity=0)
+
+      
+      Define isotropic thermal properties.
+
+
+      :Parameters:
+
+          **density**
+              ..
+
+          **generation_rate**
+              ..
+
+          **generation_rate_multiplier**
+              ..
+
+          **specific_heat**
+              ..
+
+          **conductivity**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create(stub, matid)
+
+      
+      Define additional properties for a material.
+
+
+      :Parameters:
+
+          **matid**
+              Material ID.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

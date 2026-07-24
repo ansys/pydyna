@@ -1,0 +1,424 @@
+ansys.dyna.core.pre.dynaicfd.ICFDPart
+=====================================
+
+.. py:class:: ansys.dyna.core.pre.dynaicfd.ICFDPart(id)
+
+   
+   Defines a part for the ICFD solver.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: type
+      :value: 'ICFD'
+
+
+
+   .. py:attribute:: id
+
+
+   .. py:attribute:: secid
+      :value: 1
+
+
+
+   .. py:attribute:: mid
+      :value: 0
+
+
+
+   .. py:method:: set_material(mat)
+
+      
+      Set a material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_prescribed_velocity(motion, dof=ICFDDOF.X, velocity_flag=Vel.LINEAR_VELOCITY)
+
+      
+      Impose the fluid velocity on the boundary.
+
+
+      :Parameters:
+
+          **dof** : :class:`python:int`, :obj:`optional`
+              Applicable degrees of freedom. The default is ``ICFDDOF.X``.
+              Options are:
+              
+              - EQ.1: x-degree of freedom
+              - EQ.2: y-degree of freedom
+              - EQ.3: z-degree of freedom
+              - EQ.4: Normal direction degree of freedom
+
+          **velocity_flag** : :class:`python:int`, :obj:`optional`
+              Velocity flag. The default is ``LINEAR_VELOCITY``. Options are:
+              
+              - EQ.1: Linear velocity
+              - EQ.2: Angular velocity
+              - EQ.3: Parabolic velocity profile
+              - EQ.4: Activates synthetic turbulent field on part
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_prescribed_pressure(pressure)
+
+      
+      Impose a fluid pressure on the boundary.
+
+
+      :Parameters:
+
+          **pressure** : :obj:`Curve`
+              Load curve to describe the pressure value versus time.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_prescribed_temperature(temperature)
+
+      
+      Impose a fluid temperature on the boundary.
+
+
+      :Parameters:
+
+          **temperature** : :obj:`Curve`
+              Load curve to describe the temperature value versus time.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_free_slip()
+
+      
+      Specify the fluid boundary with a free-slip boundary condition.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_non_slip()
+
+      
+      Specify the fluid boundary with a non-slip boundary condition.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_fsi()
+
+      
+      Define the fluid surface to consider in contact with the solid surfaces
+      for fluid-structure interaction (FSI) analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: compute_drag_force()
+
+      
+      Enable the computation of drag forces over given surface parts of the model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: compute_flux()
+
+      
+      Enable the computation of the flow rate and average pressure over given parts of the model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: compute_temperature()
+
+      
+      Enable the computation of the average temperature and the heat flux over given parts of the model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_boundary_layer(number=3)
+
+      
+      Define a boundary layer mesh as a refinement on the volume mesh.
+
+
+      :Parameters:
+
+          **number** : :class:`python:int`, :obj:`optional`
+              Number of elements normal to the surface (in the boundary layer).
+              The default is ``3.``
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_boundary_layer_symmetry_condition()
+
+      
+      Specify the part that is to have symmetry conditions for the boundary layer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_imposed_move(vx=None, vy=None, vz=None)
+
+      
+      Impose a velocity on a specific ICFD part.
+
+
+      :Parameters:
+
+          **vx**
+              ..
+
+          **vy**
+              ..
+
+          **vz**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_property()
+
+      
+      Set properties for an ICFD part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

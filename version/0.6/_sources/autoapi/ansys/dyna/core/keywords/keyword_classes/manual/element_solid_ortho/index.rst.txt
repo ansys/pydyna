@@ -1,0 +1,83 @@
+ansys.dyna.core.keywords.keyword_classes.manual.element_solid_ortho
+===================================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.element_solid_ortho
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.keyword_classes.manual.element_solid_ortho.ElementSolidOrtho
+
+
+Module Contents
+---------------
+
+.. py:class:: ElementSolidOrtho(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA ELEMENT_SOLID_ORTHO keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: keyword
+      :value: 'ELEMENT'
+
+
+
+   .. py:attribute:: subkeyword
+      :value: 'SOLID_ORTHO'
+
+
+
+   .. py:method:: before_read(buf: TextIO) -> None
+
+
+   .. py:method:: set_legacy_format()
+
+
+   .. py:property:: elements
+
+      
+      Gets the full table of elements
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

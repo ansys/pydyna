@@ -1,0 +1,576 @@
+ansys.dyna.core.lib.keyword_base.LinkType
+=========================================
+
+.. py:class:: ansys.dyna.core.lib.keyword_base.LinkType(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Enumeration of link types for keyword references.
+
+   Link types identify which kind of keyword a field references.
+   Use with :meth:`KeywordBase.get_links` to filter by link type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ALL
+      :value: 0
+
+
+      
+      All link types.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: NODE
+      :value: 1
+
+
+      
+      Reference to a NODE keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: ELEMENT_BEAM
+      :value: 3
+
+
+      
+      Reference to an ELEMENT_BEAM keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: ELEMENT_SHELL
+      :value: 4
+
+
+      
+      Reference to an ELEMENT_SHELL keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: ELEMENT_SOLID
+      :value: 5
+
+
+      
+      Reference to an ELEMENT_SOLID keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: MAT
+      :value: 14
+
+
+      
+      Reference to a MAT_* material keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: SECTION
+      :value: 15
+
+
+      
+      Reference to a SECTION_* keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: HOURGLASS
+      :value: 17
+
+
+      
+      Reference to a HOURGLASS keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: DEFINE_CURVE
+      :value: 19
+
+
+      
+      Reference to a DEFINE_CURVE keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: DEFINE_BOX
+      :value: 20
+
+
+      
+      Reference to a DEFINE_BOX keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: DEFINE_COORDINATE_SYSTEM
+      :value: 21
+
+
+      
+      Reference to a DEFINE_COORDINATE_SYSTEM keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: DEFINE_VECTOR
+      :value: 22
+
+
+      
+      Reference to a DEFINE_VECTOR keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: DEFINE_TRANSFORMATION
+      :value: 40
+
+
+      
+      Reference to a DEFINE_TRANSFORMATION keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: SET_BEAM
+      :value: 25
+
+
+      
+      Reference to a SET_BEAM keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: SET_DISCRETE
+      :value: 26
+
+
+      
+      Reference to a SET_DISCRETE keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: SET_NODE
+      :value: 27
+
+
+      
+      Reference to a SET_NODE keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: SET_PART
+      :value: 28
+
+
+      
+      Reference to a SET_PART keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: SET_SEGMENT
+      :value: 29
+
+
+      
+      Reference to a SET_SEGMENT keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: SET_SOLID
+      :value: 31
+
+
+      
+      Reference to a SET_SOLID keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: PART
+      :value: 13
+
+
+      
+      Reference to a PART keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: DEFINE_CURVE_OR_TABLE
+      :value: 86
+
+
+      
+      Reference to either DEFINE_CURVE or DEFINE_TABLE (polymorphic).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

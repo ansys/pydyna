@@ -1,0 +1,89 @@
+ansys.dyna.core.lib.validators.UniqueIDValidator
+================================================
+
+.. py:class:: ansys.dyna.core.lib.validators.UniqueIDValidator(keyword_type: str, field_name: str, severity: ValidationSeverity = ValidationSeverity.ERROR)
+
+   Bases: :py:obj:`Validator`
+
+
+   
+   Validator that checks for unique ID fields across keyword types.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: keyword_type
+
+
+   .. py:attribute:: field_name
+
+
+   .. py:method:: get_name() -> str
+
+      
+      Get the name of this validator.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: validate(deck: ansys.dyna.core.lib.deck.Deck, result: ValidationResult) -> None
+
+      
+      Validate that ID field is unique across keywords of the specified type.
+
+
+      :Parameters:
+
+          **deck** : :obj:`Deck`
+              The deck to validate.
+
+          **result** : :obj:`ValidationResult`
+              Result object to accumulate validation errors.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

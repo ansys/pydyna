@@ -1,0 +1,19 @@
+ansys.dyna.core.pre.examples.download_utilities
+===============================================
+
+.. py:module:: ansys.dyna.core.pre.examples.download_utilities
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/pre/examples/download_utilities/DownloadManager
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.examples.download_utilities.DownloadManager
+
+

@@ -1,0 +1,727 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>PyDyna documentation 0.2.1 &#8212; PyDyna</title>
+    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/ansys_sphinx_theme.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    
+        <link href="_static/css/breadcrumbs.css" rel="stylesheet">
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/table.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.2';
+        </script>
+    <link rel="shortcut icon" href="_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting started" href="Resources/Getting_Started.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/index.html" />
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      <!-- Debugging: html_theme_options =  -->
+
+  <!-- If there is no MiliSearch enabled, use the PyData search -->
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+    
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="#">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="Logo image">
+    <img src="_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Resources/Getting_Started.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Resources/User_Guide.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="API/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Resources/Contributing.html">
+                        Contributing
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+      <div class="navbar-end-item">
+        <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-toggle="dropdown">
+        0.2  <!-- this text may get changed later by javascript -->
+        <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyansys/pydyna" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+    
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(text => document.getElementById("announcement_msg").innerHTML = text)
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+    
+
+    
+    <div class="container-xl">
+    <div class="row">
+        <div class="col-12 col-md-3" id="breadcrumbs-spacer"></div>
+        <div class="col-12 col-md-11 col-xl-9" id="breadcrumbs">
+          
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+    
+        <li class="nav-item nav-item-additional-breadcrumb"><a href="https://docs.pyansys.com/">PyAnsys</a> » </li>
+    
+    
+
+        <li class="nav-item nav-item-this"><a href="">PyDyna documentation  0.2.1</a></li> 
+      </ul>
+    </div>
+        </div>
+  </div>
+</div>
+    
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Resources/Getting_Started.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Resources/User_Guide.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="API/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="Resources/Contributing.html">
+                        Contributing
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-toggle="dropdown">
+        0.2  <!-- this text may get changed later by javascript -->
+        <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyansys/pydyna" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      <main id="main-content" class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="pydyna-documentation-version">
+<h1>PyDyna documentation  0.2.1<a class="headerlink" href="#pydyna-documentation-version" title="Permalink to this heading">#</a></h1>
+<section id="pydyna">
+<h2>PyDyna<a class="headerlink" href="#pydyna" title="Permalink to this heading">#</a></h2>
+<p>PyDyna is a pythonic dyna package that aims to provide user a more convenient and complete way to
+build up ansys-dyna input deck, submit to solver and finally post processing their results.</p>
+<section id="project-overview">
+<h3>Project Overview<a class="headerlink" href="#project-overview" title="Permalink to this heading">#</a></h3>
+<p>There are 3 related packages here, pre and solver are all under the ansys/dyna/ directory,
+while pyDPF is used for post-processing.</p>
+<p>pre contains highly abstracted APIs for setting up a LS-DYNA input deck, so far,
+it includes DynaMech, DynaIGA, DynaICFD, DynaSALE, DynaEM, DynaAirbag and so on.</p>
+<p>solver contains code for interfacing with the LS-DYNA solver directly.
+As LS-DYNA is primarily a batch solver with very limited interactive
+capabilities, the code here is similarly limited.  The target
+use case is that LS-DYNA will be running in a container environment
+such as Docker or Kubernetes.  The code here then allows for pushing
+input files to the container, starting LS-DYNA and monitoring its
+progress, and retrieving results files.</p>
+<p>The Data Processing Framework (DPF) is designed to provide numerical
+simulation users/engineers with a toolbox for accessing and
+transforming simulation data. DPF can access data from solver result
+files as well as several neutral formats (csv, hdf5, vtk,
+etc.). Various operators are available allowing the manipulation and
+the transformation of this data.</p>
+<p>The Python <cite>ansys-dpf-post</cite> package provides a simplified Python
+interface to DPF, thus enabling rapid postprocessing without ever
+leaving a Python environment.</p>
+<p>Visit the <a class="reference external" href="https://postdocs.pyansys.com">DPF-Post Documentation</a> for a
+detailed description of the package.</p>
+</section>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">#</a></h3>
+<p>PyDyna has three installation modes: user, developer, and offline.</p>
+<section id="install-in-user-mode">
+<h4>Install in user mode<a class="headerlink" href="#install-in-user-mode" title="Permalink to this heading">#</a></h4>
+<p>Before installing PyDyna in user mode, make sure you have the latest version of
+<a class="reference external" href="https://pypi.org/project/pip/">pip</a> with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>pip
+</pre></div>
+</div>
+<p>Then, install PyDyna with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>ansys-dyna-core
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>PyDyna is currently hosted in a private PyPI repository. You must provide the index
+URL to the private PyPI repository:</p>
+<ul class="simple">
+<li><p>Index URL: <code class="docutils literal notranslate"><span class="pre">https://pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple/</span></code></p></li>
+</ul>
+<p>If access to this package registry is needed, email <a class="reference external" href="mailto:pyansys&#46;support&#37;&#52;&#48;ansys&#46;com">pyansys<span>&#46;</span>support<span>&#64;</span>ansys<span>&#46;</span>com</a>
+to request access. The PyAnsys team can provide you a read-only token to be inserted in <code class="docutils literal notranslate"><span class="pre">${PRIVATE_PYPI_ACCESS_TOKEN}</span></code>.
+Once you have it, run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>ansys-dyna-core<span class="w"> </span>--index-url<span class="o">=</span>https://<span class="si">${</span><span class="nv">PRIVATE_PYPI_ACCESS_TOKEN</span><span class="si">}</span>@pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple/
+</pre></div>
+</div>
+</div>
+</section>
+<section id="install-in-developer-mode">
+<h4>Install in developer mode<a class="headerlink" href="#install-in-developer-mode" title="Permalink to this heading">#</a></h4>
+<p>Installing PyDyna in developer mode allows you to modify the source and enhance it.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before contributing to the project, ensure that you are thoroughly familiar
+with the <a class="reference external" href="https://dev.docs.pyansys.com/">PyAnsys Developer’s Guide</a>.</p>
+</div>
+<p>Start by cloning the repository</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pyansys</span><span class="o">/</span><span class="n">pyDyna</span>
+</pre></div>
+</div>
+<p>and copy the required files.</p>
+</section>
+<section id="install-in-offline-mode">
+<h4>Install in offline mode<a class="headerlink" href="#install-in-offline-mode" title="Permalink to this heading">#</a></h4>
+<p>If you lack an internet connection on your installation machine (or you do not have access to the
+private Ansys PyPI packages repository), you should install PyDyna by downloading the wheelhouse
+archive from the <a class="reference external" href="https://github.com/pyansys/pydyna/releases">Releases Page</a> for your
+corresponding machine architecture.</p>
+<p>Each wheelhouse archive contains all the Python wheels necessary to install PyDyna from scratch on Windows
+and Linux, from Python 3.7 to 3.10. You can install this on an isolated system with a fresh Python
+installation or on a virtual environment.</p>
+<p>For example, on Linux with Python 3.7, unzip the wheelhouse archive and install it with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unzip<span class="w"> </span>ansys-dyna-core-v0.2.1-wheelhouse-Linux-3.7.zip<span class="w"> </span>wheelhouse
+pip<span class="w"> </span>install<span class="w"> </span>ansys-dyna-core<span class="w"> </span>-f<span class="w"> </span>wheelhouse<span class="w"> </span>--no-index<span class="w"> </span>--upgrade<span class="w"> </span>--ignore-installed
+</pre></div>
+</div>
+<p>If you are on Windows with Python 3.9, unzip the corresponding wheelhouse to a wheelhouse directory
+and install using the preceding command.</p>
+<p>Consider installing using a <a class="reference external" href="https://docs.python.org/3/library/venv.html">virtual environment</a>.</p>
+</section>
+</section>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading">#</a></h3>
+<p>For comprehesive information on PyDyna, see the latest release
+<a class="reference external" href="https://dyna.docs.pyansys.com/">documentation</a>.</p>
+<p>On the <a class="reference external" href="https://github.com.mcas.ms/pyansys/pyDyna/issues">PyDyna Issues</a> page, you can create
+issues to submit questions, report bugs, and request new features. To reach
+the PyAnsys support team, email <a class="reference external" href="mailto:pyansys&#46;support&#37;&#52;&#48;ansys&#46;com">pyansys<span>&#46;</span>support<span>&#64;</span>ansys<span>&#46;</span>com</a>.</p>
+</section>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h3>
+<p>Here is a basic pre-processing example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ansys.dyna.core.pre.dynasolution</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">ansys.dyna.core.pre.dynaiga</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">ansys.dyna.core.pre.dynamaterial</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">hostname</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+<span class="n">iga_solution</span> <span class="o">=</span> <span class="n">DynaSolution</span><span class="p">(</span><span class="n">hostname</span><span class="p">)</span>
+<span class="n">fns</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s2">&quot;input&quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s2">&quot;iga_sample&quot;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span>
+<span class="n">fns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;maino.k&quot;</span><span class="p">)</span>
+<span class="n">fns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;rkrwelds.key&quot;</span><span class="p">)</span>
+<span class="n">fns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;27parts.key&quot;</span><span class="p">)</span>
+<span class="n">iga_solution</span><span class="o">.</span><span class="n">open_files</span><span class="p">(</span><span class="n">fns</span><span class="p">)</span>
+<span class="n">iga_solution</span><span class="o">.</span><span class="n">set_termination</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">iga_solution</span><span class="o">.</span><span class="n">create_database_binary</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">iga</span> <span class="o">=</span> <span class="n">DynaIGA</span><span class="p">()</span>
+<span class="n">iga_solution</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">iga</span><span class="p">)</span>
+<span class="n">iga</span><span class="o">.</span><span class="n">set_timestep</span><span class="p">(</span><span class="n">timestep_size_for_mass_scaled</span><span class="o">=-</span><span class="mf">0.0004</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">selfcontact</span> <span class="o">=</span> <span class="n">Contact</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">ContactType</span><span class="o">.</span><span class="n">AUTOMATIC</span><span class="p">)</span>
+<span class="n">selfcontact</span><span class="o">.</span><span class="n">set_friction_coefficient</span><span class="p">(</span><span class="n">static</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">surf1</span><span class="o">=</span><span class="n">ContactSurface</span><span class="p">(</span><span class="n">PartSet</span><span class="p">(</span><span class="n">igaparts</span><span class="p">))</span>
+<span class="n">selfcontact</span><span class="o">.</span><span class="n">set_slave_surface</span><span class="p">(</span><span class="n">surf1</span><span class="p">)</span>
+<span class="n">iga_solution</span><span class="o">.</span><span class="n">save_file</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Here is a basic solving example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">ansys.dyna.core.solver</span> <span class="k">as</span> <span class="nn">solver</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dyna</span><span class="o">=</span><span class="n">solver</span><span class="o">.</span><span class="n">DynaSovler</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span><span class="n">port</span><span class="p">)</span>           <span class="c1"># connect to the container</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dyna</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="s2">&quot;input.k&quot;</span><span class="p">)</span>                            <span class="c1"># push an input file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dyna</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>                                   <span class="c1"># start 4 ranks of mppdyna</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dyna</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;i=input.k memory=10m ncycle=20000&quot;</span><span class="p">)</span>   <span class="c1"># begin execution</span>
+</pre></div>
+</div>
+<p>Here is a basic post-processing example:</p>
+<p>lsdyna::d3plot::stress_von_mises</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ansys.dpf</span> <span class="kn">import</span> <span class="n">core</span> <span class="k">as</span> <span class="n">dpf</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">DataSources</span><span class="p">()</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">set_result_file_path</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;./d3plot&#39;</span><span class="p">,</span> <span class="s1">&#39;d3plot&#39;</span><span class="p">)</span>
+
+<span class="n">resultOp</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">Operator</span><span class="p">(</span><span class="s2">&quot;lsdyna::d3plot::stress_von_mises&quot;</span><span class="p">)</span>
+<span class="n">resultOp</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">data_sources</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+<span class="c1"># set the time</span>
+<span class="n">resultOp</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">time_scoping</span><span class="o">.</span><span class="n">connect</span><span class="p">([</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">resultOp</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">stress_von_mises</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="license">
+<h3>License<a class="headerlink" href="#license" title="Permalink to this heading">#</a></h3>
+<p>Distributed under the MIT license.  See LICENSE in the root directory
+of the repository for details.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pydyna">
+   PyDyna
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#project-overview">
+     Project Overview
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#installation">
+     Installation
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#install-in-user-mode">
+       Install in user mode
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#install-in-developer-mode">
+       Install in developer mode
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#install-in-offline-mode">
+       Install in offline mode
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#documentation">
+     Documentation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#usage">
+     Usage
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#license">
+     License
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+
+<div class="tocsection editthispage">
+    <a href="https://github.com/pyansys/pydyna/edit/main/doc/source/index.rst">
+        <i class="fa-solid fa-pencil"></i> Edit this page
+    </a>
+</div>
+
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="_sources/index.rst.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright (c) 2023 ANSYS, Inc. All rights reserved.<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="theme-version">
+    Built with the
+    <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">
+        PyData Sphinx Theme
+    </a>
+    0.12.0.
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.3.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

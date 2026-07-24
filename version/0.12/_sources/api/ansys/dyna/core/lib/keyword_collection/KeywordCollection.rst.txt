@@ -1,0 +1,332 @@
+ansys.dyna.core.lib.keyword_collection.KeywordCollection
+========================================================
+
+.. py:class:: ansys.dyna.core.lib.keyword_collection.KeywordCollection(keywords: Union[Iterator[ansys.dyna.core.lib.keyword_base.KeywordBase], List[ansys.dyna.core.lib.keyword_base.KeywordBase]])
+
+   
+   A lazy, chainable wrapper around keyword iterables.
+
+   This class provides a fluent interface for filtering and accessing keywords
+   without materializing intermediate results until explicitly requested.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   >>> collection = KeywordCollection(deck.keywords)
+   >>> shells = collection.by_subtype("SHELL")
+   >>> for kwd in shells:
+   ...     print(kwd.secid)
+   >>> first_shell = shells.first()
+   >>> all_shells = shells.to_list()
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: by_subtype(subkeyword: str) -> KeywordCollection
+
+      
+      Filter keywords by subtype.
+
+
+      :Parameters:
+
+          **subkeyword** : :class:`python:str`
+              The subkeyword to filter by (e.g., "SHELL", "SOLID").
+
+
+
+      :Returns:
+
+          :obj:`KeywordCollection`
+              A new collection containing only keywords with the specified subtype.
+
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      >>> sections = deck.sections.by_subtype("SHELL")
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: where(predicate: Callable[[ansys.dyna.core.lib.keyword_base.KeywordBase], bool]) -> KeywordCollection
+
+      
+      Filter keywords using a custom predicate.
+
+
+      :Parameters:
+
+          **predicate** : :obj:`Callable`\[[:obj:`KeywordBase`], :ref:`bool <python:bltin-boolean-values>`]
+              A function that takes a keyword and returns True if it should be included.
+
+
+
+      :Returns:
+
+          :obj:`KeywordCollection`
+              A new collection containing only keywords that satisfy the predicate.
+
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      >>> sections = deck.sections.where(lambda k: k.secid > 10)
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: first() -> Optional[ansys.dyna.core.lib.keyword_base.KeywordBase]
+
+      
+      Get the first keyword in the collection.
+
+
+
+
+
+      :Returns:
+
+          :obj:`Optional`\[:obj:`KeywordBase`]
+              The first keyword, or None if the collection is empty.
+
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      >>> first_section = deck.sections.first()
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: to_list() -> List[ansys.dyna.core.lib.keyword_base.KeywordBase]
+
+      
+      Materialize the collection as a list.
+
+
+
+
+
+      :Returns:
+
+          :obj:`List`\[:obj:`KeywordBase`]
+              A list of all keywords in the collection.
+
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      >>> all_sections = deck.sections.to_list()
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __iter__() -> Iterator[ansys.dyna.core.lib.keyword_base.KeywordBase]
+
+      
+      Iterate over the keywords in the collection.
+
+
+
+
+
+      :Returns:
+
+          :obj:`Iterator`\[:obj:`KeywordBase`]
+              An iterator over the keywords.
+
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      >>> for section in deck.sections:
+      ...     print(section.secid)
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __len__() -> int
+
+      
+      Get the number of keywords in the collection.
+
+      Note: This materializes the collection.
+
+
+
+
+      :Returns:
+
+          :class:`python:int`
+              The number of keywords in the collection.
+
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      >>> num_sections = len(deck.sections)
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __getitem__(index: Union[int, slice]) -> Union[ansys.dyna.core.lib.keyword_base.KeywordBase, List[ansys.dyna.core.lib.keyword_base.KeywordBase]]
+
+      
+      Get a keyword by index or slice.
+
+      Note: This materializes the collection.
+
+      :Parameters:
+
+          **index** : :obj:`Union`\[:class:`python:int`, :obj:`slice`]
+              The index or slice to retrieve.
+
+
+
+      :Returns:
+
+          :obj:`Union`\[:obj:`KeywordBase`, :obj:`List`\[:obj:`KeywordBase`]]
+              The keyword at the index, or a list of keywords for a slice.
+
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      >>> first_section = deck.sections[0]
+      >>> first_three = deck.sections[:3]
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __eq__(other) -> bool
+
+      
+      Check equality with another collection or list.
+
+
+      :Parameters:
+
+          **other** : :obj:`Union`\[:obj:`KeywordCollection`, :obj:`List`]
+              The object to compare with.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              True if the collections contain the same keywords.
+
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      >>> deck.keywords == [kwd1, kwd2]
+      True
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __repr__() -> str
+
+      
+      Get a string representation of the collection.
+
+
+
+
+
+      :Returns:
+
+          :class:`python:str`
+              A string representation showing the number of keywords.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

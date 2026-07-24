@@ -1,0 +1,47 @@
+
+
+.. _sphx_glr_examples_Taylor_Bar:
+
+Taylor bar impact
+=================
+
+This example, inspired by the `https://lsdyna.ansys.com/bar-a/` example, shows how
+to use PyDyna to parameterize a LS-DYNA problem and compare results.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Taylor bar example">
+
+.. only:: html
+
+  .. image:: /examples/Taylor_Bar/images/thumb/sphx_glr_plot_taylor_bar_thumb.png
+    :alt:
+
+  :doc:`/examples/Taylor_Bar/plot_taylor_bar`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Taylor bar example</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/Taylor_Bar/plot_taylor_bar
+

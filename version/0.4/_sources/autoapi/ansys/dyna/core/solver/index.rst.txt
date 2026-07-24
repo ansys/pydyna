@@ -1,0 +1,18 @@
+:py:mod:`ansys.dyna.core.solver`
+================================
+
+.. py:module:: ansys.dyna.core.solver
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   dynalogging/index.rst
+   dynasolver/index.rst
+   grpc_tags/index.rst
+   launcher/index.rst
+
+

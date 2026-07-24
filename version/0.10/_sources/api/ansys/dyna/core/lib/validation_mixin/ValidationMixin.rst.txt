@@ -1,0 +1,222 @@
+ansys.dyna.core.lib.validation_mixin.ValidationMixin
+====================================================
+
+.. py:class:: ansys.dyna.core.lib.validation_mixin.ValidationMixin
+
+   
+   Mixin that provides validation capabilities for Deck.
+
+   This mixin adds methods for validating keywords in a deck using a registry
+   of validators. Default validators check for required fields and unique IDs.
+
+   Attributes expected from the host class:
+       _validator_registry: ValidatorRegistry instance
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: validate() -> ansys.dyna.core.lib.validators.ValidationResult
+
+      
+      Validate the collection of keywords.
+
+
+
+
+
+      :Returns:
+
+          :obj:`ValidationResult`
+              Result object containing errors, warnings, and info messages.
+
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      >>> result = deck.validate()
+      >>> if result.has_errors():
+      ...     print(result.get_summary())
+      ...     for error in result.errors:
+      ...         print(f"  - {error}")
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: register_validator(validator: ansys.dyna.core.lib.validators.Validator) -> None
+
+      
+      Register a custom validator.
+
+
+      :Parameters:
+
+          **validator** : :obj:`Validator`
+              The validator to register.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      >>> from ansys.dyna.core.lib.validators import RequiredFieldValidator, ValidationSeverity
+      >>> validator = RequiredFieldValidator("MAT", "mid", ValidationSeverity.ERROR)
+      >>> deck.register_validator(validator)
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: register_custom_validator(name: str, func: Callable[[ValidationMixin, ansys.dyna.core.lib.validators.ValidationResult], None]) -> None
+
+      
+      Register a custom validation function.
+
+
+      :Parameters:
+
+          **name** : :class:`python:str`
+              Name of the validator.
+
+          **func** : :obj:`Callable`
+              Validation function that takes (deck, result) and adds errors to result.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      >>> def check_part_ids(deck, result):
+      ...     from ansys.dyna.core.pre.errors import ValidationError
+      ...     # Custom validation logic
+      ...     if some_condition:
+      ...         error = ValidationError("Custom error message")
+      ...         result.add_error(error)
+      >>> deck.register_custom_validator("part_id_check", check_part_ids)
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: unregister_validator(validator_name: str) -> bool
+
+      
+      Unregister a validator by name.
+
+
+      :Parameters:
+
+          **validator_name** : :class:`python:str`
+              Name of the validator to remove.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              True if validator was found and removed, False otherwise.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: clear_validators() -> None
+
+      
+      Remove all validators from the registry.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_validators() -> List[ansys.dyna.core.lib.validators.Validator]
+
+      
+      Get all registered validators.
+
+
+
+
+
+      :Returns:
+
+          :obj:`List`\[:obj:`Validator`]
+              List of all registered validators.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

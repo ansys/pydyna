@@ -1,0 +1,29 @@
+ansys.dyna.core.utils.download_utilities
+========================================
+
+.. py:module:: ansys.dyna.core.utils.download_utilities
+
+.. autoapi-nested-parse::
+
+   Module provides example download utilities backed by ``ansys-tools-common``.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.utils.download_utilities.USER_DATA_PATH
+   ansys.dyna.core.utils.download_utilities.EXAMPLES_PATH
+
+
+Module Contents
+---------------
+
+.. py:data:: USER_DATA_PATH
+
+.. py:data:: EXAMPLES_PATH
+

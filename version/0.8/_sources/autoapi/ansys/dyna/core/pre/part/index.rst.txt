@@ -1,0 +1,132 @@
+ansys.dyna.core.pre.part
+========================
+
+.. py:module:: ansys.dyna.core.pre.part
+
+.. autoapi-nested-parse::
+
+   Module containing the ``Part`` class.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.part.Part
+
+
+Module Contents
+---------------
+
+.. py:class:: Part(model, id: int, name: str, type: str, conn: List)
+
+   Bases: :py:obj:`object`
+
+
+   
+   Defines and modifies the parts of a model.
+
+
+   :Parameters:
+
+       **model: ansys.dyna.core.pre.Model**
+           Model in which the part is created.
+
+       **id: int**
+           ID of the part provided by the server.
+
+       **name: str**
+           Part name.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: id
+      :type: int
+
+
+
+   .. py:property:: name
+      :type: str
+
+
+
+   .. py:property:: type
+      :type: str
+
+
+
+   .. py:property:: connectivity
+      :type: List
+
+
+
+   .. py:property:: print_mesh
+      :type: bool
+
+
+      
+      Whether the mesh summary is set to print along with the part summary.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: print_id
+      :type: bool
+
+
+      
+      Whether IDs of TopoEntities or zonelets are set to print along with the part summary.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
