@@ -50,17 +50,6 @@ _CONTROLIMPLICITEIGENVALUE_CARD1 = (
 )
 
 _CONTROLIMPLICITEIGENVALUE_CARD2 = (
-    FieldSchema("unused", int, 0, 10, None),
-    FieldSchema("unused", int, 10, 10, None),
-    FieldSchema("iparm3", int, 20, 10, None),
-    FieldSchema("unused", int, 30, 10, None),
-    FieldSchema("unused", int, 40, 10, None),
-    FieldSchema("unused", int, 50, 10, None),
-    FieldSchema("unused", int, 60, 10, None),
-    FieldSchema("rparm4", float, 70, 10, None),
-)
-
-_CONTROLIMPLICITEIGENVALUE_CARD3 = (
     FieldSchema("iparm1", int, 0, 10, 100),
     FieldSchema("iparm2", int, 10, 10, None),
     FieldSchema("iparm3", int, 20, 10, None),
@@ -71,7 +60,7 @@ _CONTROLIMPLICITEIGENVALUE_CARD3 = (
     FieldSchema("rparm4", float, 70, 10, 0.0),
 )
 
-_CONTROLIMPLICITEIGENVALUE_CARD4 = (
+_CONTROLIMPLICITEIGENVALUE_CARD3 = (
     FieldSchema("iparm1", int, 0, 10, 100),
     FieldSchema("iparm2", int, 10, 10, 100),
     FieldSchema("iparm3", int, 20, 10, None),
@@ -82,7 +71,7 @@ _CONTROLIMPLICITEIGENVALUE_CARD4 = (
     FieldSchema("rparm4", float, 70, 10, 0.0),
 )
 
-_CONTROLIMPLICITEIGENVALUE_CARD5 = (
+_CONTROLIMPLICITEIGENVALUE_CARD4 = (
     FieldSchema("iparm1", int, 0, 10, 40),
     FieldSchema("iparm2", int, 10, 10, 40),
     FieldSchema("iparm3", int, 20, 10, 0),
@@ -93,7 +82,7 @@ _CONTROLIMPLICITEIGENVALUE_CARD5 = (
     FieldSchema("rparm4", float, 70, 10, 0.0),
 )
 
-_CONTROLIMPLICITEIGENVALUE_CARD6 = (
+_CONTROLIMPLICITEIGENVALUE_CARD5 = (
     FieldSchema("iparm1", int, 0, 10, None),
     FieldSchema("iparm2", int, 10, 10, 0),
     FieldSchema("iparm3", int, 20, 10, None),
@@ -104,7 +93,7 @@ _CONTROLIMPLICITEIGENVALUE_CARD6 = (
     FieldSchema("unused", int, 70, 10, None),
 )
 
-_CONTROLIMPLICITEIGENVALUE_CARD7 = (
+_CONTROLIMPLICITEIGENVALUE_CARD6 = (
     FieldSchema("rotscl", float, 0, 10, 0.001),
     FieldSchema("eigmscl", int, 10, 10, 0),
 )
@@ -116,7 +105,6 @@ class ControlImplicitEigenvalue(KeywordBase):
     subkeyword = "IMPLICIT_EIGENVALUE"
     _link_fields = {
         "iparm6": LinkType.DEFINE_VECTOR,
-        "iparm3": LinkType.SET_NODE,
         "iparm3": LinkType.SET_NODE,
         "iparm3": LinkType.SET_NODE,
         "iparm1": LinkType.SET_NODE,
@@ -134,7 +122,7 @@ class ControlImplicitEigenvalue(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUE_CARD1,
-                active_func=lambda: (self.eigmth in [101, 102, 111]) or (self.isolid != 0 or self.ibeam != 0 or self.ishell != 0 or self.itshell != 0 or self.mstres != 0 or self.evdump != 0 or self.mstrscl != 0.001),
+                active_func=lambda: (self.eigmth in [101, 102, 103, 111]) or (self.isolid != 0 or self.ibeam != 0 or self.ishell != 0 or self.itshell != 0 or self.mstres != 0 or self.evdump != 0 or self.mstrscl != 0.001),
                 **kwargs,
             ),
             Card.from_field_schemas_with_defaults(
@@ -149,19 +137,17 @@ class ControlImplicitEigenvalue(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUE_CARD4,
-                active_func=lambda: self.eigmth == 111,
+                active_func=lambda: self.eigmth == 103,
                 **kwargs,
             ),
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUE_CARD5,
+                active_func=lambda: self.eigmth == 111,
                 **kwargs,
             ),
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUE_CARD6,
-                **kwargs,
-            ),
-            Card.from_field_schemas_with_defaults(
-                _CONTROLIMPLICITEIGENVALUE_CARD7,
+                active_func=lambda: self.rotscl != 0.001 or self.eigmscl != 0,
                 **kwargs,
             ),
         ]
@@ -357,8 +343,30 @@ class ControlImplicitEigenvalue(KeywordBase):
         self._cards[1].set_value("mstrscl", value)
 
     @property
+    def iparm1(self) -> int:
+        """Get or set the Minimum block size for the Cholesky factorization
+        """ # nopep8
+        return self._cards[2].get_value("iparm1")
+
+    @iparm1.setter
+    def iparm1(self, value: int) -> None:
+        """Set the iparm1 property."""
+        self._cards[2].set_value("iparm1", value)
+
+    @property
+    def iparm2(self) -> typing.Optional[int]:
+        """Get or set the Maximum block size for the Cholesky factorization. The default is the model size.
+        """ # nopep8
+        return self._cards[2].get_value("iparm2")
+
+    @iparm2.setter
+    def iparm2(self, value: int) -> None:
+        """Set the iparm2 property."""
+        self._cards[2].set_value("iparm2", value)
+
+    @property
     def iparm3(self) -> typing.Optional[int]:
-        """Get or set the Node set to reduce output of entries from each eigenvector. See Remark 6.
+        """Get or set the Node set ID specifying particular nodes in the model where increased accuracy is desired. See Remark 4.
         """ # nopep8
         return self._cards[2].get_value("iparm3")
 
@@ -368,7 +376,29 @@ class ControlImplicitEigenvalue(KeywordBase):
         self._cards[2].set_value("iparm3", value)
 
     @property
-    def rparm4(self) -> typing.Optional[float]:
+    def iparm4(self) -> int:
+        """Get or set the MCMS minimum group/substructure size. See Remark 4.
+        """ # nopep8
+        return self._cards[2].get_value("iparm4")
+
+    @iparm4.setter
+    def iparm4(self, value: int) -> None:
+        """Set the iparm4 property."""
+        self._cards[2].set_value("iparm4", value)
+
+    @property
+    def rparm1(self) -> float:
+        """Get or set the Eigenvalue expansion factor ?. See Remark 4.
+        """ # nopep8
+        return self._cards[2].get_value("rparm1")
+
+    @rparm1.setter
+    def rparm1(self, value: float) -> None:
+        """Set the rparm1 property."""
+        self._cards[2].set_value("rparm1", value)
+
+    @property
+    def rparm4(self) -> float:
         """Get or set the Control output of eigenvectors to the d3eigv database:
         LT.0.0: No output
         EQ.0.0: Write all eigenmodes to d3eigv.
@@ -383,7 +413,7 @@ class ControlImplicitEigenvalue(KeywordBase):
 
     @property
     def iparm1(self) -> int:
-        """Get or set the Minimum block size for the Cholesky factorization
+        """Get or set the Maximum number of iterations.
         """ # nopep8
         return self._cards[3].get_value("iparm1")
 
@@ -393,8 +423,8 @@ class ControlImplicitEigenvalue(KeywordBase):
         self._cards[3].set_value("iparm1", value)
 
     @property
-    def iparm2(self) -> typing.Optional[int]:
-        """Get or set the Maximum block size for the Cholesky factorization. The default is the model size.
+    def iparm2(self) -> int:
+        """Get or set the Block size.
         """ # nopep8
         return self._cards[3].get_value("iparm2")
 
@@ -405,7 +435,7 @@ class ControlImplicitEigenvalue(KeywordBase):
 
     @property
     def iparm3(self) -> typing.Optional[int]:
-        """Get or set the Node set ID specifying particular nodes in the model where increased accuracy is desired. See Remark 4.
+        """Get or set the Node set to reduce output of entries from each eigenvector. See Remark 6.
         """ # nopep8
         return self._cards[3].get_value("iparm3")
 
@@ -415,19 +445,8 @@ class ControlImplicitEigenvalue(KeywordBase):
         self._cards[3].set_value("iparm3", value)
 
     @property
-    def iparm4(self) -> int:
-        """Get or set the MCMS minimum group/substructure size. See Remark 4.
-        """ # nopep8
-        return self._cards[3].get_value("iparm4")
-
-    @iparm4.setter
-    def iparm4(self, value: int) -> None:
-        """Set the iparm4 property."""
-        self._cards[3].set_value("iparm4", value)
-
-    @property
     def rparm1(self) -> float:
-        """Get or set the Eigenvalue expansion factor ?. See Remark 4.
+        """Get or set the Convergence tolerance
         """ # nopep8
         return self._cards[3].get_value("rparm1")
 
@@ -435,6 +454,19 @@ class ControlImplicitEigenvalue(KeywordBase):
     def rparm1(self, value: float) -> None:
         """Set the rparm1 property."""
         self._cards[3].set_value("rparm1", value)
+
+    @property
+    def rparm2(self) -> float:
+        """Get or set the Flag for using a Block Low-Rank (BLR) factorization for the preconditioner:
+        GT.0.0: Use BLR preconditioner with compression threshold RPARM2.
+        LT.0.0: Use exact factorization instead of a BLR preconditioner.
+        """ # nopep8
+        return self._cards[3].get_value("rparm2")
+
+    @rparm2.setter
+    def rparm2(self, value: float) -> None:
+        """Set the rparm2 property."""
+        self._cards[3].set_value("rparm2", value)
 
     @property
     def rparm4(self) -> float:
@@ -452,7 +484,7 @@ class ControlImplicitEigenvalue(KeywordBase):
 
     @property
     def iparm1(self) -> int:
-        """Get or set the Maximum number of iterations.
+        """Get or set the Maximum number of Block Lanczos iterations
         """ # nopep8
         return self._cards[4].get_value("iparm1")
 
@@ -463,7 +495,7 @@ class ControlImplicitEigenvalue(KeywordBase):
 
     @property
     def iparm2(self) -> int:
-        """Get or set the Block size.
+        """Get or set the Block size for the Block Lanczos recurrence
         """ # nopep8
         return self._cards[4].get_value("iparm2")
 
@@ -473,8 +505,8 @@ class ControlImplicitEigenvalue(KeywordBase):
         self._cards[4].set_value("iparm2", value)
 
     @property
-    def iparm3(self) -> typing.Optional[int]:
-        """Get or set the Node set to reduce output of entries from each eigenvector. See Remark 6.
+    def iparm3(self) -> int:
+        """Get or set the Node set to reduce output of entries from each eigenvector. See Remark 6
         """ # nopep8
         return self._cards[4].get_value("iparm3")
 
@@ -485,7 +517,7 @@ class ControlImplicitEigenvalue(KeywordBase):
 
     @property
     def rparm1(self) -> float:
-        """Get or set the Convergence tolerance
+        """Get or set the First shift. Supply the approximate value of the 100th eigenvalue
         """ # nopep8
         return self._cards[4].get_value("rparm1")
 
@@ -496,9 +528,7 @@ class ControlImplicitEigenvalue(KeywordBase):
 
     @property
     def rparm2(self) -> float:
-        """Get or set the Flag for using a Block Low-Rank (BLR) factorization for the preconditioner:
-        GT.0.0: Use BLR preconditioner with compression threshold RPARM2.
-        LT.0.0: Use exact factorization instead of a BLR preconditioner.
+        """Get or set the Shift factor. This field reduces the aggressiveness of the shift logic
         """ # nopep8
         return self._cards[4].get_value("rparm2")
 
@@ -522,8 +552,8 @@ class ControlImplicitEigenvalue(KeywordBase):
         self._cards[4].set_value("rparm4", value)
 
     @property
-    def iparm1(self) -> int:
-        """Get or set the Maximum number of Block Lanczos iterations
+    def iparm1(self) -> typing.Optional[int]:
+        """Get or set the Node set ID for nodes on the left surface of the sector
         """ # nopep8
         return self._cards[5].get_value("iparm1")
 
@@ -534,7 +564,8 @@ class ControlImplicitEigenvalue(KeywordBase):
 
     @property
     def iparm2(self) -> int:
-        """Get or set the Block size for the Block Lanczos recurrence
+        """Get or set the Node set ID for nodes on the axis of rotation.
+        EQ.0: No nodes on the axis of rotation(default)
         """ # nopep8
         return self._cards[5].get_value("iparm2")
 
@@ -544,8 +575,8 @@ class ControlImplicitEigenvalue(KeywordBase):
         self._cards[5].set_value("iparm2", value)
 
     @property
-    def iparm3(self) -> int:
-        """Get or set the Node set to reduce output of entries from each eigenvector. See Remark 6
+    def iparm3(self) -> typing.Optional[int]:
+        """Get or set the Node set ID for nodes on the left surface of the sector
         """ # nopep8
         return self._cards[5].get_value("iparm3")
 
@@ -555,108 +586,38 @@ class ControlImplicitEigenvalue(KeywordBase):
         self._cards[5].set_value("iparm3", value)
 
     @property
-    def rparm1(self) -> float:
-        """Get or set the First shift. Supply the approximate value of the 100th eigenvalue
-        """ # nopep8
-        return self._cards[5].get_value("rparm1")
-
-    @rparm1.setter
-    def rparm1(self, value: float) -> None:
-        """Set the rparm1 property."""
-        self._cards[5].set_value("rparm1", value)
-
-    @property
-    def rparm2(self) -> float:
-        """Get or set the Shift factor. This field reduces the aggressiveness of the shift logic
-        """ # nopep8
-        return self._cards[5].get_value("rparm2")
-
-    @rparm2.setter
-    def rparm2(self, value: float) -> None:
-        """Set the rparm2 property."""
-        self._cards[5].set_value("rparm2", value)
-
-    @property
-    def rparm4(self) -> float:
-        """Get or set the Control output of eigenvectors to the d3eigv database:
-        LT.0.0: No output
-        EQ.0.0: Write all eigenmodes to d3eigv.
-        GT.0.0: Write only the first RPARM4 eigenmodes to d3eigv.
-        """ # nopep8
-        return self._cards[5].get_value("rparm4")
-
-    @rparm4.setter
-    def rparm4(self, value: float) -> None:
-        """Set the rparm4 property."""
-        self._cards[5].set_value("rparm4", value)
-
-    @property
-    def iparm1(self) -> typing.Optional[int]:
-        """Get or set the Node set ID for nodes on the left surface of the sector
-        """ # nopep8
-        return self._cards[6].get_value("iparm1")
-
-    @iparm1.setter
-    def iparm1(self, value: int) -> None:
-        """Set the iparm1 property."""
-        self._cards[6].set_value("iparm1", value)
-
-    @property
-    def iparm2(self) -> int:
-        """Get or set the Node set ID for nodes on the axis of rotation.
-        EQ.0: No nodes on the axis of rotation(default)
-        """ # nopep8
-        return self._cards[6].get_value("iparm2")
-
-    @iparm2.setter
-    def iparm2(self, value: int) -> None:
-        """Set the iparm2 property."""
-        self._cards[6].set_value("iparm2", value)
-
-    @property
-    def iparm3(self) -> typing.Optional[int]:
-        """Get or set the Node set ID for nodes on the left surface of the sector
-        """ # nopep8
-        return self._cards[6].get_value("iparm3")
-
-    @iparm3.setter
-    def iparm3(self, value: int) -> None:
-        """Set the iparm3 property."""
-        self._cards[6].set_value("iparm3", value)
-
-    @property
     def iparm4(self) -> typing.Optional[int]:
         """Get or set the Number of sectors
         """ # nopep8
-        return self._cards[6].get_value("iparm4")
+        return self._cards[5].get_value("iparm4")
 
     @iparm4.setter
     def iparm4(self, value: int) -> None:
         """Set the iparm4 property."""
-        self._cards[6].set_value("iparm4", value)
+        self._cards[5].set_value("iparm4", value)
 
     @property
     def iparm5(self) -> typing.Optional[int]:
         """Get or set the Harmonic index
         """ # nopep8
-        return self._cards[6].get_value("iparm5")
+        return self._cards[5].get_value("iparm5")
 
     @iparm5.setter
     def iparm5(self, value: int) -> None:
         """Set the iparm5 property."""
-        self._cards[6].set_value("iparm5", value)
+        self._cards[5].set_value("iparm5", value)
 
     @property
     def iparm6(self) -> int:
         """Get or set the Vector ID for the axis of rotation.
         EQ.0: Axis of rotation is the global z - axis(default)
         """ # nopep8
-        return self._cards[6].get_value("iparm6")
+        return self._cards[5].get_value("iparm6")
 
     @iparm6.setter
     def iparm6(self, value: int) -> None:
         """Set the iparm6 property."""
-        self._cards[6].set_value("iparm6", value)
+        self._cards[5].set_value("iparm6", value)
 
     @property
     def rotscl(self) -> float:
@@ -664,12 +625,12 @@ class ControlImplicitEigenvalue(KeywordBase):
         EQ.0.0: Default value of 0.001
         EQ.1.0: Inertia not scaled.
         """ # nopep8
-        return self._cards[7].get_value("rotscl")
+        return self._cards[6].get_value("rotscl")
 
     @rotscl.setter
     def rotscl(self, value: float) -> None:
         """Set the rotscl property."""
-        self._cards[7].set_value("rotscl", value)
+        self._cards[6].set_value("rotscl", value)
 
     @property
     def eigmscl(self) -> int:
@@ -677,14 +638,14 @@ class ControlImplicitEigenvalue(KeywordBase):
         EQ.0: Use original mass(default).
         EQ.1: Use scaled mass.
         """ # nopep8
-        return self._cards[7].get_value("eigmscl")
+        return self._cards[6].get_value("eigmscl")
 
     @eigmscl.setter
     def eigmscl(self, value: int) -> None:
         """Set the eigmscl property."""
         if value not in [0, 1, None]:
             raise Exception("""eigmscl must be `None` or one of {0,1}.""")
-        self._cards[7].set_value("eigmscl", value)
+        self._cards[6].set_value("eigmscl", value)
 
     @property
     def iparm6_link(self) -> typing.Optional[DefineVector]:
@@ -700,16 +661,6 @@ class ControlImplicitEigenvalue(KeywordBase):
     def iparm6_link(self, value: DefineVector) -> None:
         """Set the DefineVector object for iparm6."""
         self.iparm6 = value.vid
-
-    @property
-    def iparm3_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_NODE_* keyword for iparm3."""
-        return self._get_set_link("NODE", self.iparm3)
-
-    @iparm3_link.setter
-    def iparm3_link(self, value: KeywordBase) -> None:
-        """Set the SET_NODE_* keyword for iparm3."""
-        self.iparm3 = value.sid
 
     @property
     def iparm3_link(self) -> typing.Optional[KeywordBase]:
