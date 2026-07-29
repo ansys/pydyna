@@ -555,7 +555,7 @@ class TestRecursiveLinkTraversal:
 
         # AirbagParticle has both DEFINE_CURVE links (e.g., hconv) and SET_PART links (sidsv)
         airbag = kwd.AirbagParticle()
-        airbag.hconv = 100  # Links to DefineCurve
+        airbag.lcmi = 100  # Links to DefineCurve
         airbag.sidsv = 50  # Links to SetPartList
 
         deck.extend([curve, set_part, airbag])
