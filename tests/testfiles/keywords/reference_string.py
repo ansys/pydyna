@@ -808,7 +808,11 @@ $#  tranid
 $#  option        a1        a2        a3        a4        a5        a6        a7
 TRANSL           1.0       0.0       0.0                                        
 TRANSL           2.0       0.0       0.0                                        
-TRANSL           3.0       0.0       0.0                                        """
+TRANSL           3.0       0.0       0.0                                        
+$#     m11       m12       m13       m14       m21       m22       m23       m24
+                                                                                
+$#     m31       m32       m33       m34       m41       m42       m43       m44
+                                                                                """
 
 test_mat_plastic_kinematic_ref = """*MAT_PLASTIC_KINEMATIC
 $#     mid        ro         e        pr      sigy      etan      beta
@@ -1406,9 +1410,11 @@ $#      fs        fd        dc        vc       vdc    penchk        bt        dt
 $#     sfs       sfm       sst       mst      sfst      sfmt       fsf       vsf
        1.0       1.0                           1.0       1.0       1.0       1.0"""
 
+# MIGRATION CHANGE: macrodt -> biot, default 0, unused -> eps0sf, default 1.0
+# EMSOL NUMLS  -> default is none
 test_em_control_string = """*EM_CONTROL
-$#   emsol     numls   macrodt   dimtype    nperio    unused   ncylfem   ncylbem
-        -1       100                   0         2                5000      5000"""
+$#   emsol     numls      biot   dimtype    nperio    eps0sf   ncylfem   ncylbem
+                             0         0         2       1.0      5000      5000"""
 
 
 test_parametrized_deck_string = """*KEYWORD
@@ -1516,12 +1522,12 @@ $#   parts     parts     parts     parts     parts     parts     parts     parts
 *END"""
 
 test_default_card_em_isopotential_connect_string = """*EM_ISOPOTENTIAL_CONNECT
-$#   conid   contype    isoid1    isoid2       vallcid/rdlid      psid
-                   1                                                  """
+$#   conid   contype    isoid1    isoid2       vallcid/rdlid      psid    unused
+                   1                                                            """
 
 test_conditional_card_em_isopotential_connect_string = """*EM_ISOPOTENTIAL_CONNECT
-$#   conid   contype    isoid1    isoid2       vallcid/rdlid      psid
-                   6                                                  
+$#   conid   contype    isoid1    isoid2       vallcid/rdlid      psid    unused
+                   6                                                            
 $#       l         c        v0
                               """
 test_contact_tied_shell_edge_to_surface_beam_offset_opt_cards1 = """*CONTACT_TIED_SHELL_EDGE_TO_SURFACE_BEAM_OFFSET
