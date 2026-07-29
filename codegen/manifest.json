@@ -394,15 +394,15 @@
                 {
                     "name": "COUPID",
                     "cards": [
-                        -2,
-                        -3
+                        -3,
+                        -4
                     ]
                 },
                 {
                     "name": "TITLE",
                     "cards": [
-                        -2,
-                        -3
+                        -3,
+                        -4
                     ]
                 }
             ],
@@ -416,12 +416,25 @@
                     "name": "ncoup ",
                     "new-name": "ncoup",
                     "ref": "ncoup_card"
+                },
+                {
+                    "name": "AXFOR ",
+                    "new-name": "axfor",
+                    "ref": "start_card"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "func": "self.axfor == 999",
+                    "ref": "bondc_card"
                 }
             ]
         },
         "labels": {
             "id_title_card": 0,
-            "ncoup_card": 1
+            "ncoup_card": 1,
+            "start_card": 2,
+            "bondc_card": 3
         }
     },
     "DEFINE_TABLE": {

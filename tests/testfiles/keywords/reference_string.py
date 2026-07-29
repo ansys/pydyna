@@ -235,27 +235,28 @@ $#    nsid       dof       vad      lcid        sf       vid     death     birth
 test_boundary_prescribed_motion_set2 = """*BOUNDARY_PRESCRIBED_MOTION_SET
        100         1         2       100       0.0         0       2.0       0.0"""
 
+# !MIGRATION CHANGE: with latest keyword, bside --> bsid, end value from 1e+21 to 1e+20, xint default 1e+16
 test_constrained_beam_in_solid = """*CONSTRAINED_BEAM_IN_SOLID
-$#   bside      ssid     bstyp     sstyp    unused    unused     ncoup      cdir
+$#    bsid      ssid     bstyp     sstyp    unused    unused     ncoup      cdir
                              0         0                             1          
-$#   start       end    unused    axfor     unused      pssf    unused      xint
-       0.0     1e+21                                     0.1                    """
+$#   start       end    unused     axfor    unused      pssf    unused      xint
+       0.0     1e+20                                     0.1               1e+16"""
 
 test_constrained_beam_in_solid_title = """*CONSTRAINED_BEAM_IN_SOLID_TITLE
 $#  coupid                                                                 title
         12                                                                      
-$#   bside      ssid     bstyp     sstyp    unused    unused     ncoup      cdir
+$#    bsid      ssid     bstyp     sstyp    unused    unused     ncoup      cdir
                              0         0                             1          
-$#   start       end    unused    axfor     unused      pssf    unused      xint
-       0.0     1e+21                                     0.1                    """
+$#   start       end    unused     axfor    unused      pssf    unused      xint
+       0.0     1e+20                                     0.1               1e+16"""
 
 test_constrained_beam_in_solid_id = """*CONSTRAINED_BEAM_IN_SOLID_ID
 $#  coupid                                                                 title
         12                                                                      
-$#   bside      ssid     bstyp     sstyp    unused    unused     ncoup      cdir
+$#    bsid      ssid     bstyp     sstyp    unused    unused     ncoup      cdir
                              0         0                             1          
-$#   start       end    unused    axfor     unused      pssf    unused      xint
-       0.0     1e+21                                     0.1                    """
+$#   start       end    unused     axfor    unused      pssf    unused      xint
+       0.0     1e+20                                     0.1               1e+16"""
 
 test_hourglass_title = """*HOURGLASS_TITLE
 $#                                                                         title
