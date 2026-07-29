@@ -1071,16 +1071,18 @@ $#      pc        pt     pcutc     pcutt     pcutf    unused    unused    srfilt
 $#       k
        0.0"""
 
+# MIGRATION CHANGE: cts is required in card 2, no value
 test_mat_cohesive_mixed_mode_ref = """*MAT_COHESIVE_MIXED_MODE
 $#     mid        ro     roflg   intfail        en        et       gic      giic
         24       0.0         0       0.0       0.0       0.0       0.0       0.0
-$#     xmu         t         s       und       utd     gamma
-       0.0       0.0       0.0       0.0       0.0       1.0"""
+$#     xmu         t         s       und       utd     gamma       cts
+       0.0       0.0       0.0       0.0       0.0       1.0          """
 
+# MIGRATION CHANGE: pra -> pr
 test_mat_simplified_rubber_foam_ref = """*MAT_SIMPLIFIED_RUBBER/FOAM
 $#     mid        ro        km        mu         g      sigf       ref     prten
         25       0.0       0.0       0.1       0.0       0.0       0.0       0.0
-$#     sgl        sw        st   lc/tbid   tension     rtype    avgopt       pra
+$#     sgl        sw        st   lc/tbid   tension     rtype    avgopt        pr
        0.0       0.0       0.0         0      -1.0       0.0       0.0       0.0
 $#  lcunld        hu     shape      stol     visco    hisout
          0       1.0       0.0       0.0       0.0       0.0"""
@@ -1088,7 +1090,7 @@ $#  lcunld        hu     shape      stol     visco    hisout
 test_mat_simplified_rubber_foam_log_log_interpolation_ref = """*MAT_SIMPLIFIED_RUBBER/FOAM_LOG_LOG_INTERPOLATION
 $#     mid        ro        km        mu         g      sigf       ref     prten
         26       0.0       0.0       0.1       0.0       0.0       0.0       0.0
-$#     sgl        sw        st   lc/tbid   tension     rtype    avgopt       pra
+$#     sgl        sw        st   lc/tbid   tension     rtype    avgopt        pr
        0.0       0.0       0.0         0      -1.0       0.0       0.0       0.0
 $#  lcunld        hu     shape      stol     visco    hisout
          0       1.0       0.0       0.0       0.0       0.0"""
@@ -1096,7 +1098,7 @@ $#  lcunld        hu     shape      stol     visco    hisout
 test_mat_simplified_rubber_foam_with_failure_ref = """*MAT_SIMPLIFIED_RUBBER/FOAM_WITH_FAILURE
 $#     mid        ro        km        mu         g      sigf       ref     prten
         27       0.0       0.0       0.1       0.0       0.0       0.0       0.0
-$#     sgl        sw        st   lc/tbid   tension     rtype    avgopt       pra
+$#     sgl        sw        st   lc/tbid   tension     rtype    avgopt        pr
        0.0       0.0       0.0         0      -1.0       0.0       0.0       0.0
 $#       k     gama1     gama2        eh
        0.0       0.0       0.0       0.0
@@ -1106,7 +1108,7 @@ $#  lcunld        hu     shape      stol     visco    hisout
 test_mat_simplified_rubber_foam_with_failure_log_log_interpolation_ref = """*MAT_SIMPLIFIED_RUBBER/FOAM_WITH_FAILURE_LOG_LOG_INTERPOLATION
 $#     mid        ro        km        mu         g      sigf       ref     prten
         28       0.0       0.0       0.1       0.0       0.0       0.0       0.0
-$#     sgl        sw        st   lc/tbid   tension     rtype    avgopt       pra
+$#     sgl        sw        st   lc/tbid   tension     rtype    avgopt        pr
        0.0       0.0       0.0         0      -1.0       0.0       0.0       0.0
 $#       k     gama1     gama2        eh
        0.0       0.0       0.0       0.0
