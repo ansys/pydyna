@@ -450,15 +450,15 @@ test_control_implicit_eigenvalue_2 = """*CONTROL_IMPLICIT_EIGENVALUE
 $#    neig    center     lflag    lftend     rflag    rhtend    eigmth    shfscl
        100       0.0         0    -1e+29         0     1e+29         2       0.0
 $#  isolid     ibeam    ishell   itshell    mstres    evdump   mstrscl
-         0         0         1         0         0               0.001"""
+         0         0         1         0         0         0     0.001"""
 
 test_control_implicit_eigenvalue_3 = """*CONTROL_IMPLICIT_EIGENVALUE
 $#    neig    center     lflag    lftend     rflag    rhtend    eigmth    shfscl
        100       0.0         0    -1e+29         0     1e+29       102       0.0
 $#  isolid     ibeam    ishell   itshell    mstres    evdump   mstrscl
-         0         0         0         0         0               0.001
-$#  iparm1    iparm2    unused    unused    rparm1    rparm2
-       100       100                             0         0"""
+         0         0         0         0         0         0     0.001
+$#  iparm1    iparm2    iparm3    unused    rparm1    rparm2    unused    rparm4
+       100       100                         1e-11    0.0001                 0.0"""
 
 test_control_mpp_decomposition_transformation_string_read = """*CONTROL_MPP_DECOMPOSITION_TRANSFORMATION
 $#    type        v1        v2        v3        v4        v5        v6
