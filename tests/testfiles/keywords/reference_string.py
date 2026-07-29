@@ -834,8 +834,8 @@ $#     es1       es2       es3       es4       es5       es6       es7       es8
 test_mat_piecewise_linear_plasticity_2d_ref = """*MAT_PIECEWISE_LINEAR_PLASTICITY_2D
 $#     mid        ro         e        pr      sigy      etan      fail      tdel
          4       0.0       0.0       0.0       0.0       0.0     1e+21       0.0
-$#       c         p      lcss      lcsr        vp
-       0.0       0.0         0         0       0.0
+$#       c         p      lcss      lcsr        vp    unused    rfiltf
+       0.0       0.0         0         0       0.0                    
 $#    eps1      eps2      eps3      eps4      eps5      eps6      eps7      eps8
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#     es1       es2       es3       es4       es5       es6       es7       es8
@@ -844,8 +844,8 @@ $#     es1       es2       es3       es4       es5       es6       es7       es8
 test_mat_piecewise_linear_plasticity_haz_ref = """*MAT_PIECEWISE_LINEAR_PLASTICITY_HAZ
 $#     mid        ro         e        pr      sigy      etan      fail      tdel
          5       0.0       0.0       0.0       0.0       0.0     1e+21       0.0
-$#       c         p      lcss      lcsr        vp
-       0.0       0.0         0         0       0.0
+$#       c         p      lcss      lcsr        vp    unused    rfiltf
+       0.0       0.0         0         0       0.0                    
 $#    eps1      eps2      eps3      eps4      eps5      eps6      eps7      eps8
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#     es1       es2       es3       es4       es5       es6       es7       es8
@@ -854,8 +854,8 @@ $#     es1       es2       es3       es4       es5       es6       es7       es8
 test_mat_piecewise_linear_plasticity_log_interpolation_ref = """*MAT_PIECEWISE_LINEAR_PLASTICITY_LOG_INTERPOLATION
 $#     mid        ro         e        pr      sigy      etan      fail      tdel
          6       0.0       0.0       0.0       0.0       0.0     1e+21       0.0
-$#       c         p      lcss      lcsr        vp
-       0.0       0.0         0         0       0.0
+$#       c         p      lcss      lcsr        vp    unused    rfiltf
+       0.0       0.0         0         0       0.0                    
 $#    eps1      eps2      eps3      eps4      eps5      eps6      eps7      eps8
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#     es1       es2       es3       es4       es5       es6       es7       es8
@@ -864,8 +864,8 @@ $#     es1       es2       es3       es4       es5       es6       es7       es8
 test_mat_piecewise_linear_plasticity_midfail_ref = """*MAT_PIECEWISE_LINEAR_PLASTICITY_MIDFAIL
 $#     mid        ro         e        pr      sigy      etan      fail      tdel
          7       0.0       0.0       0.0       0.0       0.0     1e+21       0.0
-$#       c         p      lcss      lcsr        vp
-       0.0       0.0         0         0       0.0
+$#       c         p      lcss      lcsr        vp    unused    rfiltf
+       0.0       0.0         0         0       0.0                    
 $#    eps1      eps2      eps3      eps4      eps5      eps6      eps7      eps8
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#     es1       es2       es3       es4       es5       es6       es7       es8
@@ -874,8 +874,8 @@ $#     es1       es2       es3       es4       es5       es6       es7       es8
 test_mat_piecewise_linear_plasticity_stochastic_ref = """*MAT_PIECEWISE_LINEAR_PLASTICITY_STOCHASTIC
 $#     mid        ro         e        pr      sigy      etan      fail      tdel
          8       0.0       0.0       0.0       0.0       0.0     1e+21       0.0
-$#       c         p      lcss      lcsr        vp
-       0.0       0.0         0         0       0.0
+$#       c         p      lcss      lcsr        vp    unused    rfiltf
+       0.0       0.0         0         0       0.0                    
 $#    eps1      eps2      eps3      eps4      eps5      eps6      eps7      eps8
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#     es1       es2       es3       es4       es5       es6       es7       es8
