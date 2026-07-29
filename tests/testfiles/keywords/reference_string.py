@@ -231,7 +231,7 @@ $#   secid    elform       aet    unused    unused    unused    cohoff   gaskett
 
 test_boundary_prescribed_motion_set = """*BOUNDARY_PRESCRIBED_MOTION_SET
 $#    nsid       dof       vad      lcid        sf       vid     death     birth
-                   0         0                 1.0        0      1e+28       0.0"""
+                   0         0                 1.0         0     1e+28       0.0"""
                    
 test_boundary_prescribed_motion_set2 = """*BOUNDARY_PRESCRIBED_MOTION_SET
        100         1         2       100       0.0         0       2.0       0.0"""
