@@ -945,6 +945,7 @@ $#     mu1       mu2       mu3       mu4       mu5       mu6       mu7       mu8
 $#  alpha1    alpha2    alpha3    alpha4    alpha5    alpha6    alpha7    alpha8
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0"""
 
+# MIGRATION CHANGE: pdopt is required in card 5, no value
 test_mat_fu_chang_foam_ref = """*MAT_FU_CHANG_FOAM
 $#     mid        ro         e      kcon        tc      fail      damp      tbid
         13       0.0       0.0       0.0     1e+20       0.0       0.0         0
@@ -954,8 +955,8 @@ $#      d0        n0        n1        n2        n3        c0        c1        c2
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#      c3        c4        c5       aij       sij      minr      maxr     shape
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
-$#   expon     riuld
-       1.0       0.0"""
+$#   expon     riuld     pdopt
+       1.0       0.0          """
 
 test_mat_fu_chang_foam_damage_decay_ref = """*MAT_FU_CHANG_FOAM_DAMAGE_DECAY
 $#     mid        ro         e      kcon        tc      fail      damp      tbid
@@ -964,8 +965,8 @@ $#  bvflag     sflag     rflag     tflag      pvid      sraf       ref        hu
        0.0       0.0       0.0       0.0         0       0.0       0.0       0.0
 $#    minr      maxr     shape     betat     betac
        0.0       0.0       0.0       0.0       0.0
-$#   expon     riuld
-       1.0       0.0"""
+$#   expon     riuld     pdopt
+       1.0       0.0          """
 
 test_mat_fu_chang_foam_log_log_interpolation_ref = """*MAT_FU_CHANG_FOAM_LOG_LOG_INTERPOLATION
 $#     mid        ro         e      kcon        tc      fail      damp      tbid
@@ -976,9 +977,10 @@ $#      d0        n0        n1        n2        n3        c0        c1        c2
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#      c3        c4        c5       aij       sij      minr      maxr     shape
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
-$#   expon     riuld
-       1.0       0.0"""
+$#   expon     riuld     pdopt
+       1.0       0.0          """
 
+# MIGRATION CHANGE: d1/na -> d1/phi, d2/na -> d2/gamma; no value change
 test_mat_modified_johnson_cook_ref = """*MAT_MODIFIED_JOHNSON_COOK
 $#     mid        ro         e        pr      beta       xsi        cp     alpha
         16       0.0       0.0       0.0       0.0       0.0       0.0       0.0
@@ -988,7 +990,7 @@ $#  a/siga       b/b   n/beta0   c/beta1      m/na
        0.0       0.0       0.0       0.0       0.0
 $#    q1/a      c1/n q2/alpha0 c2/alpha1
        0.0       0.0       0.0       0.0
-$#   dc/dc     pd/wc     d1/na     d2/na     d3/na     d4/na     d5/na
+$#   dc/dc     pd/wc    d1/phi  d2/gamma     d3/na     d4/na     d5/na
        0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#      tc      tauc
        0.0       0.0"""
