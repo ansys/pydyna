@@ -198,16 +198,16 @@ test_contact_tied_shell_edge_to_surface_id = """*CONTACT_TIED_SHELL_EDGE_TO_SURF
 
 test_section_shell_one_set = """*SECTION_SHELL
 $#   secid    elform      shrf       nip     propt   qr/irid     icomp     setyp
-         1         2       1.0         5       1.0         0         0         1
+         1         2       1.0         5         1         0         0         1
 $#      t1        t2        t3        t4      nloc     marea      idof    edgset
        1.0       1.0       1.0       1.0       0.0       0.0       0.0         0"""
 
 test_section_shell_two_sets = """*SECTION_SHELL
 $#   secid    elform      shrf       nip     propt   qr/irid     icomp     setyp
-         1         2       1.0         5       1.0         0         0         1
+         1         2       1.0         5         1         0         0         1
 $#      t1        t2        t3        t4      nloc     marea      idof    edgset
        1.0       1.0       1.0       1.0       0.0       0.0       0.0         0
-         2         3       1.0         5       1.0         0         0         1
+         2         3       1.0         5         1         0         0         1
        0.0       0.0       0.0       0.0       0.0       1.0       0.0         0"""
 
 test_section_shell_misc = """*SECTION_SHELL_MISC
