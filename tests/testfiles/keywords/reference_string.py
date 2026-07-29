@@ -1366,6 +1366,12 @@ $#   surfa     surfb  surfatyp  surfbtyp   saboxid   sbboxid      sapr      sbpr
 $#  unused    unused    unused    unused    unused    unused    unused    unused
                                                                                 
 $#  unused    unused    unused    unused    unused    unused    unused    unused
+                                                                                
+$#  unused
+          
+$#  unused
+          
+$#  unused    unused    unused    unused    unused    unused    unused   cid_rcf
                                                                                 """
 
 test_contact_force_transducer_penalty_id = """*CONTACT_FORCE_TRANSDUCER_PENALTY_ID
@@ -1376,6 +1382,12 @@ $#   surfa     surfb  surfatyp  surfbtyp   saboxid   sbboxid      sapr      sbpr
 $#  unused    unused    unused    unused    unused    unused    unused    unused
                                                                                 
 $#  unused    unused    unused    unused    unused    unused    unused    unused
+                                                                                
+$#  unused
+          
+$#  unused
+          
+$#  unused    unused    unused    unused    unused    unused    unused   cid_rcf
                                                                                 """
 
 test_contact_automatic_single_surface_id_mpp1_mpp2 = """*CONTACT_AUTOMATIC_SINGLE_SURFACE_ID_MPP
@@ -1612,7 +1624,7 @@ $#            shloff
 
 test_em_randles_batmac_rdltype_0_1 = """*EM_RANDLES_BATMAC
 $#   rdlid   rdltype   rdlarea      psid
-                   1         1          
+                   1         2          
 $#       q        cq   socinit    soctou
                                         
 $#   r0cha     r0dis    r10cha    r10dis    c10cha    c10dis
@@ -1624,7 +1636,7 @@ $# usesocs       tau     flcid
 
 test_em_randles_batmac_rdltype_2_3 = """*EM_RANDLES_BATMAC
 $#   rdlid   rdltype   rdlarea      psid
-                   3         1          
+                   3         2          
 $#       q        cq   socinit    soctou
                                         
 $#   r0cha     r0dis    r10cha    r10dis    c10cha    c10dis
