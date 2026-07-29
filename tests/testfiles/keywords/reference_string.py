@@ -820,11 +820,12 @@ test_mat_null_ref = """*MAT_NULL
 $#     mid        ro        pc        mu     terod     cerod        ym        pr
          2       0.0       0.0       0.0       0.0       0.0       0.0       0.0"""
 
+# MIGRATION CHANGE: unused, rfiltf are required in card 2, no value
 test_mat_piecewise_linear_plasticity_ref = """*MAT_PIECEWISE_LINEAR_PLASTICITY
 $#     mid        ro         e        pr      sigy      etan      fail      tdel
          3       0.0       0.0       0.0       0.0       0.0     1e+21       0.0
-$#       c         p      lcss      lcsr        vp
-       0.0       0.0         0         0       0.0
+$#       c         p      lcss      lcsr        vp    unused    rfiltf
+       0.0       0.0         0         0       0.0                    
 $#    eps1      eps2      eps3      eps4      eps5      eps6      eps7      eps8
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#     es1       es2       es3       es4       es5       es6       es7       es8
