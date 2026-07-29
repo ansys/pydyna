@@ -394,15 +394,15 @@
                 {
                     "name": "COUPID",
                     "cards": [
-                        -2,
-                        -3
+                        -3,
+                        -4
                     ]
                 },
                 {
                     "name": "TITLE",
                     "cards": [
-                        -2,
-                        -3
+                        -3,
+                        -4
                     ]
                 }
             ],
@@ -416,12 +416,25 @@
                     "name": "ncoup ",
                     "new-name": "ncoup",
                     "ref": "ncoup_card"
+                },
+                {
+                    "name": "AXFOR ",
+                    "new-name": "axfor",
+                    "ref": "start_card"
+                }
+            ],
+            "conditional-card": [
+                {
+                    "func": "self.axfor == 999",
+                    "ref": "bondc_card"
                 }
             ]
         },
         "labels": {
             "id_title_card": 0,
-            "ncoup_card": 1
+            "ncoup_card": 1,
+            "start_card": 2,
+            "bondc_card": 3
         }
     },
     "DEFINE_TABLE": {
@@ -727,29 +740,28 @@
     "CONTROL_IMPLICIT_EIGENVALUE": {
         "generation-options": {
             "conditional-card": [
-                {
-                    "func": "(self.eigmth in [101, 102, 111]) or (self.isolid != 0 or self.ibeam != 0 or self.ishell != 0 or self.itshell != 0 or self.mstres != 0 or self.evdump != None or self.mstrscl != 0.001)",
-                    "ref": "solid_beam_shell_options_card"
-                },
-                {
-                    "func": "self.eigmth == 101",
-                    "ref": "eigmth_101_params_card"
-                },
-                {
-                    "func": "self.eigmth == 102",
-                    "ref": "eigmth_102_params_card"
-                },
-                {
-                    "func": "self.eigmth == 111",
-                    "ref": "eigmth_111_params_card"
-                }
-            ]
+                    {
+                        "func": "(self.eigmth in [101, 102, 103, 111]) or (self.isolid != 0 or self.ibeam != 0 or self.ishell != 0 or self.itshell != 0 or self.mstres != 0 or self.evdump != 0 or self.mstrscl != 0.001)",
+                        "ref": "solid_beam_shell_options_card"
+                    },
+                    { "func": "self.eigmth == 101", "ref": "mcms_card" },
+                    { "func": "self.eigmth == 102", "ref": "lobpcg_card" },
+                    { "func": "self.eigmth == 103", "ref": "fast_lanczos_card" },
+                    { "func": "self.eigmth == 111", "ref": "sectoral_symmetry_card" },
+                    { "func": "self.rotscl != 0.001 or self.eigmscl != 0", "ref": "rotscl_card" }
+            ],
+                    "skip-card": [
+            { "ref": "block_lanczos_card" }
+        ]
         },
         "labels": {
             "solid_beam_shell_options_card": 1,
-            "eigmth_101_params_card": 2,
-            "eigmth_102_params_card": 3,
-            "eigmth_111_params_card": 4
+            "block_lanczos_card": 2,
+            "mcms_card": 3, 
+            "lobpcg_card": 4,
+            "fast_lanczos_card": 5,
+            "sectoral_symmetry_card": 6,
+            "rotscl_card": 7
         }
     },
     "CONTROL_IMPLICIT_DYNAMICS": {
