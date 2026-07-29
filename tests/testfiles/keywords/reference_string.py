@@ -219,7 +219,7 @@ $#      t1        t2        t3        t4      nloc     marea      idof    edgset
 $#  thkscl
        2.5"""
 
-# !BREAKING CHANGE: with latest keyword, gaskeit --> gaskett
+# !MIGRATION CHANGE:with latest keyword, gaskeit --> gaskett
 test_section_solid_title_deck_string = """$
 *KEYWORD
 *SECTION_SOLID_TITLE
@@ -335,7 +335,7 @@ $#    lcid        sf        at        n1        n2        n3        n4        n5
 $#      n6        n7        n8
                               """
 
-# !BREAKING CHANGE: with latest keyword, gaskeit --> gaskett, xnod is mandatory, unused is mandatory for nip.
+# !MIGRATION CHANGE:with latest keyword, gaskeit --> gaskett, xnod is mandatory, unused is mandatory for nip.
 test_ss_string = """*SECTION_SOLID
 $#   secid    elform       aet    unused    unused    unused    cohoff   gaskett
                    1         0                                                  """
