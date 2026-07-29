@@ -42,7 +42,7 @@ _CONSTRAINEDBEAMINSOLID_CARD1 = (
     FieldSchema("start", float, 0, 10, 0.0),
     FieldSchema("end", float, 10, 10, 1e+20),
     FieldSchema("unused", int, 20, 10, None),
-    FieldSchema("axfor_", int, 30, 10, None, "axfor "),
+    FieldSchema("axfor", int, 30, 10, None),
     FieldSchema("unused", int, 40, 10, None),
     FieldSchema("pssf", float, 50, 10, 0.1),
     FieldSchema("unused", int, 60, 10, None),
@@ -95,6 +95,7 @@ class ConstrainedBeamInSolid(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDBEAMINSOLID_CARD2,
+                active_func=lambda: self.axfor == 999,
                 **kwargs,
             ),
             OptionCardSet(
@@ -221,19 +222,19 @@ class ConstrainedBeamInSolid(KeywordBase):
         self._cards[1].set_value("end", value)
 
     @property
-    def axfor_(self) -> typing.Optional[int]:
+    def axfor(self) -> typing.Optional[int]:
         """Get or set the Function that calculates the coupling force in the beam axial direction. Only available in constraint form with CDIR = 1.
         GE.0 and LT.900: OFF
         LT.0: |AXFOR| is the function ID in *DEFINE_FUNCTION
         EQ.999: General bond stress-slip relationship,which follows Bulletin 65 of fib Model Code for Concrete Structures 2010.
         GT.1000: Debonding law ID, lawid, in the user defined subroutine rebar_bondslip_get_force().
         """ # nopep8
-        return self._cards[1].get_value("axfor_")
+        return self._cards[1].get_value("axfor")
 
-    @axfor_.setter
-    def axfor_(self, value: int) -> None:
-        """Set the axfor_ property."""
-        self._cards[1].set_value("axfor_", value)
+    @axfor.setter
+    def axfor(self, value: int) -> None:
+        """Set the axfor property."""
+        self._cards[1].set_value("axfor", value)
 
     @property
     def pssf(self) -> float:
@@ -351,6 +352,7 @@ class ConstrainedBeamInSolid(KeywordBase):
     def coupid(self, value: int) -> None:
         """Set the coupid property."""
         self._cards[3].cards[0].set_value("coupid", value)
+        self._cards[4].cards[0].set_value("coupid", value)
 
         if value:
             self.activate_option("COUPID")
@@ -365,33 +367,6 @@ class ConstrainedBeamInSolid(KeywordBase):
     def title(self, value: str) -> None:
         """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
-
-        if value:
-            self.activate_option("TITLE")
-
-    @property
-    def coupid(self) -> typing.Optional[int]:
-        """Get or set the Coupling card ID number
-        """ # nopep8
-        return self._cards[4].cards[0].get_value("coupid")
-
-    @coupid.setter
-    def coupid(self, value: int) -> None:
-        """Set the coupid property."""
-        self._cards[4].cards[0].set_value("coupid", value)
-
-        if value:
-            self.activate_option("COUPID")
-
-    @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the A description of this coupling definition
-        """ # nopep8
-        return self._cards[4].cards[0].get_value("title")
-
-    @title.setter
-    def title(self, value: str) -> None:
-        """Set the title property."""
         self._cards[4].cards[0].set_value("title", value)
 
         if value:

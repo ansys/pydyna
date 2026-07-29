@@ -196,65 +196,68 @@ test_contact_tied_shell_edge_to_surface_id = """*CONTACT_TIED_SHELL_EDGE_TO_SURF
                                                            0         0          
          0         0         1         0                   0         0"""
 
+# MIGRATION CHANGE: with latest keyword, propt 1.0 -> 1, nloc 1.0 ->1
 test_section_shell_one_set = """*SECTION_SHELL
 $#   secid    elform      shrf       nip     propt   qr/irid     icomp     setyp
-         1         2       1.0         5       1.0         0         0         1
+         1         2       1.0         5         1         0         0         1
 $#      t1        t2        t3        t4      nloc     marea      idof    edgset
        1.0       1.0       1.0       1.0       0.0       0.0       0.0         0"""
 
 test_section_shell_two_sets = """*SECTION_SHELL
 $#   secid    elform      shrf       nip     propt   qr/irid     icomp     setyp
-         1         2       1.0         5       1.0         0         0         1
+         1         2       1.0         5         1         0         0         1
 $#      t1        t2        t3        t4      nloc     marea      idof    edgset
        1.0       1.0       1.0       1.0       0.0       0.0       0.0         0
-         2         3       1.0         5       1.0         0         0         1
+         2         3       1.0         5         1         0         0         1
        0.0       0.0       0.0       0.0       0.0       1.0       0.0         0"""
 
 test_section_shell_misc = """*SECTION_SHELL_MISC
 $#   secid    elform      shrf       nip     propt   qr/irid     icomp     setyp
-         1         2       1.0         5       1.0         0         0         1
+         1         2       1.0         5         1         0         0         1
 $#      t1        t2        t3        t4      nloc     marea      idof    edgset
        1.0       1.0       1.0       1.0       0.0       0.0       0.0         0
 $#  thkscl
        2.5"""
 
+# !MIGRATION CHANGE:with latest keyword, gaskeit --> gaskett
 test_section_solid_title_deck_string = """$
 *KEYWORD
 *SECTION_SOLID_TITLE
 $#                                                                         title
 section3                                                                        
-$#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
+$#   secid    elform       aet    unused    unused    unused    cohoff   gaskett
   69000314        13                                                            
 *END"""
 
 test_boundary_prescribed_motion_set = """*BOUNDARY_PRESCRIBED_MOTION_SET
 $#    nsid       dof       vad      lcid        sf       vid     death     birth
-                   0         0                 1.0               1e+28       0.0"""
+                   0         0                 1.0         0     1e+28       0.0"""
                    
 test_boundary_prescribed_motion_set2 = """*BOUNDARY_PRESCRIBED_MOTION_SET
        100         1         2       100       0.0         0       2.0       0.0"""
 
+# !MIGRATION CHANGE: with latest keyword, bside --> bsid, end value from 1e+21 to 1e+20, xint default 1e+16
 test_constrained_beam_in_solid = """*CONSTRAINED_BEAM_IN_SOLID
-$#   bside      ssid     bstyp     sstyp    unused    unused     ncoup      cdir
+$#    bsid      ssid     bstyp     sstyp    unused    unused     ncoup      cdir
                              0         0                             1          
-$#   start       end    unused    axfor     unused      pssf    unused      xint
-       0.0     1e+21                                     0.1                    """
+$#   start       end    unused     axfor    unused      pssf    unused      xint
+       0.0     1e+20                                     0.1               1e+16"""
 
 test_constrained_beam_in_solid_title = """*CONSTRAINED_BEAM_IN_SOLID_TITLE
 $#  coupid                                                                 title
         12                                                                      
-$#   bside      ssid     bstyp     sstyp    unused    unused     ncoup      cdir
+$#    bsid      ssid     bstyp     sstyp    unused    unused     ncoup      cdir
                              0         0                             1          
-$#   start       end    unused    axfor     unused      pssf    unused      xint
-       0.0     1e+21                                     0.1                    """
+$#   start       end    unused     axfor    unused      pssf    unused      xint
+       0.0     1e+20                                     0.1               1e+16"""
 
 test_constrained_beam_in_solid_id = """*CONSTRAINED_BEAM_IN_SOLID_ID
 $#  coupid                                                                 title
         12                                                                      
-$#   bside      ssid     bstyp     sstyp    unused    unused     ncoup      cdir
+$#    bsid      ssid     bstyp     sstyp    unused    unused     ncoup      cdir
                              0         0                             1          
-$#   start       end    unused    axfor     unused      pssf    unused      xint
-       0.0     1e+21                                     0.1                    """
+$#   start       end    unused     axfor    unused      pssf    unused      xint
+       0.0     1e+20                                     0.1               1e+16"""
 
 test_hourglass_title = """*HOURGLASS_TITLE
 $#                                                                         title
@@ -332,30 +335,31 @@ $#    lcid        sf        at        n1        n2        n3        n4        n5
 $#      n6        n7        n8
                               """
 
+# !MIGRATION CHANGE:with latest keyword, gaskeit --> gaskett, xnod is mandatory, unused is mandatory for nip.
 test_ss_string = """*SECTION_SOLID
-$#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
+$#   secid    elform       aet    unused    unused    unused    cohoff   gaskett
                    1         0                                                  """
 
 test_ss_elform_101_string = """*SECTION_SOLID
-$#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
+$#   secid    elform       aet    unused    unused    unused    cohoff   gaskett
                  101         0                                                  
-$#     nip     nxdof      ihgf      itaj       lmc      nhsv
-         0         0         0         0         0         0"""
+$#     nip     nxdof      ihgf      itaj       lmc      nhsv      xnod    unused
+         0         0         0         0         0         0         0          """
 
 test_ss_elform_101_nip_2_string = """*SECTION_SOLID
-$#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
+$#   secid    elform       aet    unused    unused    unused    cohoff   gaskett
                  101         0                                                  
-$#     nip     nxdof      ihgf      itaj       lmc      nhsv
-         2         0         0         0         0         0
+$#     nip     nxdof      ihgf      itaj       lmc      nhsv      xnod    unused
+         2         0         0         0         0         0         0          
 $#      xi       eta      zeta       wgt
        1.0       2.0       3.0          
        0.0                 3.0       5.0"""
 
 test_ss_elform_101_nip_2_lmc_9_string = """*SECTION_SOLID
-$#   secid    elform       aet    unused    unused    unused    cohoff   gaskeit
+$#   secid    elform       aet    unused    unused    unused    cohoff   gaskett
                  101         0                                                  
-$#     nip     nxdof      ihgf      itaj       lmc      nhsv
-         2         0         0         0         9         0
+$#     nip     nxdof      ihgf      itaj       lmc      nhsv      xnod    unused
+         2         0         0         0         9         0         0          
 $#      xi       eta      zeta       wgt
        1.0       2.0       3.0          
        0.0                 3.0       5.0
@@ -446,15 +450,15 @@ test_control_implicit_eigenvalue_2 = """*CONTROL_IMPLICIT_EIGENVALUE
 $#    neig    center     lflag    lftend     rflag    rhtend    eigmth    shfscl
        100       0.0         0    -1e+29         0     1e+29         2       0.0
 $#  isolid     ibeam    ishell   itshell    mstres    evdump   mstrscl
-         0         0         1         0         0               0.001"""
+         0         0         1         0         0         0     0.001"""
 
 test_control_implicit_eigenvalue_3 = """*CONTROL_IMPLICIT_EIGENVALUE
 $#    neig    center     lflag    lftend     rflag    rhtend    eigmth    shfscl
        100       0.0         0    -1e+29         0     1e+29       102       0.0
 $#  isolid     ibeam    ishell   itshell    mstres    evdump   mstrscl
-         0         0         0         0         0               0.001
-$#  iparm1    iparm2    unused    unused    rparm1    rparm2
-       100       100                             0         0"""
+         0         0         0         0         0         0     0.001
+$#  iparm1    iparm2    iparm3    unused    rparm1    rparm2    unused    rparm4
+       100       100                         1e-11    0.0001                 0.0"""
 
 test_control_mpp_decomposition_transformation_string_read = """*CONTROL_MPP_DECOMPOSITION_TRANSFORMATION
 $#    type        v1        v2        v3        v4        v5        v6
@@ -804,7 +808,11 @@ $#  tranid
 $#  option        a1        a2        a3        a4        a5        a6        a7
 TRANSL           1.0       0.0       0.0                                        
 TRANSL           2.0       0.0       0.0                                        
-TRANSL           3.0       0.0       0.0                                        """
+TRANSL           3.0       0.0       0.0                                        
+$#     m11       m12       m13       m14       m21       m22       m23       m24
+                                                                                
+$#     m31       m32       m33       m34       m41       m42       m43       m44
+                                                                                """
 
 test_mat_plastic_kinematic_ref = """*MAT_PLASTIC_KINEMATIC
 $#     mid        ro         e        pr      sigy      etan      beta
@@ -816,11 +824,12 @@ test_mat_null_ref = """*MAT_NULL
 $#     mid        ro        pc        mu     terod     cerod        ym        pr
          2       0.0       0.0       0.0       0.0       0.0       0.0       0.0"""
 
+# MIGRATION CHANGE: unused, rfiltf are required in card 2, no value
 test_mat_piecewise_linear_plasticity_ref = """*MAT_PIECEWISE_LINEAR_PLASTICITY
 $#     mid        ro         e        pr      sigy      etan      fail      tdel
          3       0.0       0.0       0.0       0.0       0.0     1e+21       0.0
-$#       c         p      lcss      lcsr        vp
-       0.0       0.0         0         0       0.0
+$#       c         p      lcss      lcsr        vp    unused    rfiltf
+       0.0       0.0         0         0       0.0                    
 $#    eps1      eps2      eps3      eps4      eps5      eps6      eps7      eps8
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#     es1       es2       es3       es4       es5       es6       es7       es8
@@ -829,8 +838,8 @@ $#     es1       es2       es3       es4       es5       es6       es7       es8
 test_mat_piecewise_linear_plasticity_2d_ref = """*MAT_PIECEWISE_LINEAR_PLASTICITY_2D
 $#     mid        ro         e        pr      sigy      etan      fail      tdel
          4       0.0       0.0       0.0       0.0       0.0     1e+21       0.0
-$#       c         p      lcss      lcsr        vp
-       0.0       0.0         0         0       0.0
+$#       c         p      lcss      lcsr        vp    unused    rfiltf
+       0.0       0.0         0         0       0.0                    
 $#    eps1      eps2      eps3      eps4      eps5      eps6      eps7      eps8
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#     es1       es2       es3       es4       es5       es6       es7       es8
@@ -839,8 +848,8 @@ $#     es1       es2       es3       es4       es5       es6       es7       es8
 test_mat_piecewise_linear_plasticity_haz_ref = """*MAT_PIECEWISE_LINEAR_PLASTICITY_HAZ
 $#     mid        ro         e        pr      sigy      etan      fail      tdel
          5       0.0       0.0       0.0       0.0       0.0     1e+21       0.0
-$#       c         p      lcss      lcsr        vp
-       0.0       0.0         0         0       0.0
+$#       c         p      lcss      lcsr        vp    unused    rfiltf
+       0.0       0.0         0         0       0.0                    
 $#    eps1      eps2      eps3      eps4      eps5      eps6      eps7      eps8
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#     es1       es2       es3       es4       es5       es6       es7       es8
@@ -849,8 +858,8 @@ $#     es1       es2       es3       es4       es5       es6       es7       es8
 test_mat_piecewise_linear_plasticity_log_interpolation_ref = """*MAT_PIECEWISE_LINEAR_PLASTICITY_LOG_INTERPOLATION
 $#     mid        ro         e        pr      sigy      etan      fail      tdel
          6       0.0       0.0       0.0       0.0       0.0     1e+21       0.0
-$#       c         p      lcss      lcsr        vp
-       0.0       0.0         0         0       0.0
+$#       c         p      lcss      lcsr        vp    unused    rfiltf
+       0.0       0.0         0         0       0.0                    
 $#    eps1      eps2      eps3      eps4      eps5      eps6      eps7      eps8
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#     es1       es2       es3       es4       es5       es6       es7       es8
@@ -859,8 +868,8 @@ $#     es1       es2       es3       es4       es5       es6       es7       es8
 test_mat_piecewise_linear_plasticity_midfail_ref = """*MAT_PIECEWISE_LINEAR_PLASTICITY_MIDFAIL
 $#     mid        ro         e        pr      sigy      etan      fail      tdel
          7       0.0       0.0       0.0       0.0       0.0     1e+21       0.0
-$#       c         p      lcss      lcsr        vp
-       0.0       0.0         0         0       0.0
+$#       c         p      lcss      lcsr        vp    unused    rfiltf
+       0.0       0.0         0         0       0.0                    
 $#    eps1      eps2      eps3      eps4      eps5      eps6      eps7      eps8
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#     es1       es2       es3       es4       es5       es6       es7       es8
@@ -869,8 +878,8 @@ $#     es1       es2       es3       es4       es5       es6       es7       es8
 test_mat_piecewise_linear_plasticity_stochastic_ref = """*MAT_PIECEWISE_LINEAR_PLASTICITY_STOCHASTIC
 $#     mid        ro         e        pr      sigy      etan      fail      tdel
          8       0.0       0.0       0.0       0.0       0.0     1e+21       0.0
-$#       c         p      lcss      lcsr        vp
-       0.0       0.0         0         0       0.0
+$#       c         p      lcss      lcsr        vp    unused    rfiltf
+       0.0       0.0         0         0       0.0                    
 $#    eps1      eps2      eps3      eps4      eps5      eps6      eps7      eps8
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#     es1       es2       es3       es4       es5       es6       es7       es8
@@ -940,6 +949,7 @@ $#     mu1       mu2       mu3       mu4       mu5       mu6       mu7       mu8
 $#  alpha1    alpha2    alpha3    alpha4    alpha5    alpha6    alpha7    alpha8
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0"""
 
+# MIGRATION CHANGE: pdopt is required in card 5, no value
 test_mat_fu_chang_foam_ref = """*MAT_FU_CHANG_FOAM
 $#     mid        ro         e      kcon        tc      fail      damp      tbid
         13       0.0       0.0       0.0     1e+20       0.0       0.0         0
@@ -949,8 +959,8 @@ $#      d0        n0        n1        n2        n3        c0        c1        c2
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#      c3        c4        c5       aij       sij      minr      maxr     shape
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
-$#   expon     riuld
-       1.0       0.0"""
+$#   expon     riuld     pdopt
+       1.0       0.0          """
 
 test_mat_fu_chang_foam_damage_decay_ref = """*MAT_FU_CHANG_FOAM_DAMAGE_DECAY
 $#     mid        ro         e      kcon        tc      fail      damp      tbid
@@ -959,8 +969,8 @@ $#  bvflag     sflag     rflag     tflag      pvid      sraf       ref        hu
        0.0       0.0       0.0       0.0         0       0.0       0.0       0.0
 $#    minr      maxr     shape     betat     betac
        0.0       0.0       0.0       0.0       0.0
-$#   expon     riuld
-       1.0       0.0"""
+$#   expon     riuld     pdopt
+       1.0       0.0          """
 
 test_mat_fu_chang_foam_log_log_interpolation_ref = """*MAT_FU_CHANG_FOAM_LOG_LOG_INTERPOLATION
 $#     mid        ro         e      kcon        tc      fail      damp      tbid
@@ -971,9 +981,10 @@ $#      d0        n0        n1        n2        n3        c0        c1        c2
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#      c3        c4        c5       aij       sij      minr      maxr     shape
        0.0       0.0       0.0       0.0       0.0       0.0       0.0       0.0
-$#   expon     riuld
-       1.0       0.0"""
+$#   expon     riuld     pdopt
+       1.0       0.0          """
 
+# MIGRATION CHANGE: d1/na -> d1/phi, d2/na -> d2/gamma; no value change
 test_mat_modified_johnson_cook_ref = """*MAT_MODIFIED_JOHNSON_COOK
 $#     mid        ro         e        pr      beta       xsi        cp     alpha
         16       0.0       0.0       0.0       0.0       0.0       0.0       0.0
@@ -983,7 +994,7 @@ $#  a/siga       b/b   n/beta0   c/beta1      m/na
        0.0       0.0       0.0       0.0       0.0
 $#    q1/a      c1/n q2/alpha0 c2/alpha1
        0.0       0.0       0.0       0.0
-$#   dc/dc     pd/wc     d1/na     d2/na     d3/na     d4/na     d5/na
+$#   dc/dc     pd/wc    d1/phi  d2/gamma     d3/na     d4/na     d5/na
        0.0       0.0       0.0       0.0       0.0       0.0       0.0
 $#      tc      tauc
        0.0       0.0"""
@@ -1064,16 +1075,18 @@ $#      pc        pt     pcutc     pcutt     pcutf    unused    unused    srfilt
 $#       k
        0.0"""
 
+# MIGRATION CHANGE: cts is required in card 2, no value
 test_mat_cohesive_mixed_mode_ref = """*MAT_COHESIVE_MIXED_MODE
 $#     mid        ro     roflg   intfail        en        et       gic      giic
         24       0.0         0       0.0       0.0       0.0       0.0       0.0
-$#     xmu         t         s       und       utd     gamma
-       0.0       0.0       0.0       0.0       0.0       1.0"""
+$#     xmu         t         s       und       utd     gamma       cts
+       0.0       0.0       0.0       0.0       0.0       1.0          """
 
+# MIGRATION CHANGE: pra -> pr
 test_mat_simplified_rubber_foam_ref = """*MAT_SIMPLIFIED_RUBBER/FOAM
 $#     mid        ro        km        mu         g      sigf       ref     prten
         25       0.0       0.0       0.1       0.0       0.0       0.0       0.0
-$#     sgl        sw        st   lc/tbid   tension     rtype    avgopt       pra
+$#     sgl        sw        st   lc/tbid   tension     rtype    avgopt        pr
        0.0       0.0       0.0         0      -1.0       0.0       0.0       0.0
 $#  lcunld        hu     shape      stol     visco    hisout
          0       1.0       0.0       0.0       0.0       0.0"""
@@ -1081,7 +1094,7 @@ $#  lcunld        hu     shape      stol     visco    hisout
 test_mat_simplified_rubber_foam_log_log_interpolation_ref = """*MAT_SIMPLIFIED_RUBBER/FOAM_LOG_LOG_INTERPOLATION
 $#     mid        ro        km        mu         g      sigf       ref     prten
         26       0.0       0.0       0.1       0.0       0.0       0.0       0.0
-$#     sgl        sw        st   lc/tbid   tension     rtype    avgopt       pra
+$#     sgl        sw        st   lc/tbid   tension     rtype    avgopt        pr
        0.0       0.0       0.0         0      -1.0       0.0       0.0       0.0
 $#  lcunld        hu     shape      stol     visco    hisout
          0       1.0       0.0       0.0       0.0       0.0"""
@@ -1089,7 +1102,7 @@ $#  lcunld        hu     shape      stol     visco    hisout
 test_mat_simplified_rubber_foam_with_failure_ref = """*MAT_SIMPLIFIED_RUBBER/FOAM_WITH_FAILURE
 $#     mid        ro        km        mu         g      sigf       ref     prten
         27       0.0       0.0       0.1       0.0       0.0       0.0       0.0
-$#     sgl        sw        st   lc/tbid   tension     rtype    avgopt       pra
+$#     sgl        sw        st   lc/tbid   tension     rtype    avgopt        pr
        0.0       0.0       0.0         0      -1.0       0.0       0.0       0.0
 $#       k     gama1     gama2        eh
        0.0       0.0       0.0       0.0
@@ -1099,7 +1112,7 @@ $#  lcunld        hu     shape      stol     visco    hisout
 test_mat_simplified_rubber_foam_with_failure_log_log_interpolation_ref = """*MAT_SIMPLIFIED_RUBBER/FOAM_WITH_FAILURE_LOG_LOG_INTERPOLATION
 $#     mid        ro        km        mu         g      sigf       ref     prten
         28       0.0       0.0       0.1       0.0       0.0       0.0       0.0
-$#     sgl        sw        st   lc/tbid   tension     rtype    avgopt       pra
+$#     sgl        sw        st   lc/tbid   tension     rtype    avgopt        pr
        0.0       0.0       0.0         0      -1.0       0.0       0.0       0.0
 $#       k     gama1     gama2        eh
        0.0       0.0       0.0       0.0
@@ -1139,11 +1152,11 @@ Default MAT196 MAT_GENERAL_SPRING_DISCRETE_BEAM
          6         0  1000000.        1.                    
                                              """
 
-
+# MIGRATION CHANGE: unused cahnged to mdfail in card 2
 test_mat_general_spring_discrete_beam_ref_out = """*MAT_GENERAL_SPRING_DISCRETE_BEAM_TITLE
 $#                                                                         title
 Default MAT196 MAT_GENERAL_SPRING_DISCRETE_BEAM                                 
-$#     mid        ro    unused    unused    unused    unused    unused    dospot
+$#     mid        ro    unused    unused    unused    unused    mdfail    dospot
   59000001       1.0                                                            
 $#     dof      type         k         d       cdf       tdf
          1         0    1000.0      0.01                    
@@ -1164,7 +1177,7 @@ $#   flcid     hlcid        c1        c2       dle     glcid
 test_mat_196_ref_out = """*MAT_196_TITLE
 $#                                                                         title
 Default MAT196 MAT_GENERAL_SPRING_DISCRETE_BEAM                                 
-$#     mid        ro    unused    unused    unused    unused    unused    dospot
+$#     mid        ro    unused    unused    unused    unused    mdfail    dospot
   59000001       1.0                                                            
 $#     dof      type         k         d       cdf       tdf
          1         0    1000.0      0.01                    
@@ -1353,6 +1366,12 @@ $#   surfa     surfb  surfatyp  surfbtyp   saboxid   sbboxid      sapr      sbpr
 $#  unused    unused    unused    unused    unused    unused    unused    unused
                                                                                 
 $#  unused    unused    unused    unused    unused    unused    unused    unused
+                                                                                
+$#  unused
+          
+$#  unused
+          
+$#  unused    unused    unused    unused    unused    unused    unused   cid_rcf
                                                                                 """
 
 test_contact_force_transducer_penalty_id = """*CONTACT_FORCE_TRANSDUCER_PENALTY_ID
@@ -1363,6 +1382,12 @@ $#   surfa     surfb  surfatyp  surfbtyp   saboxid   sbboxid      sapr      sbpr
 $#  unused    unused    unused    unused    unused    unused    unused    unused
                                                                                 
 $#  unused    unused    unused    unused    unused    unused    unused    unused
+                                                                                
+$#  unused
+          
+$#  unused
+          
+$#  unused    unused    unused    unused    unused    unused    unused   cid_rcf
                                                                                 """
 
 test_contact_automatic_single_surface_id_mpp1_mpp2 = """*CONTACT_AUTOMATIC_SINGLE_SURFACE_ID_MPP
@@ -1397,9 +1422,11 @@ $#      fs        fd        dc        vc       vdc    penchk        bt        dt
 $#     sfs       sfm       sst       mst      sfst      sfmt       fsf       vsf
        1.0       1.0                           1.0       1.0       1.0       1.0"""
 
+# MIGRATION CHANGE: macrodt -> biot, default 0, unused -> eps0sf, default 1.0
+# EMSOL NUMLS  -> default is none
 test_em_control_string = """*EM_CONTROL
-$#   emsol     numls   macrodt   dimtype    nperio    unused   ncylfem   ncylbem
-        -1       100                   0         2                5000      5000"""
+$#   emsol     numls      biot   dimtype    nperio    eps0sf   ncylfem   ncylbem
+                             0         0         2       1.0      5000      5000"""
 
 
 test_parametrized_deck_string = """*KEYWORD
@@ -1507,12 +1534,12 @@ $#   parts     parts     parts     parts     parts     parts     parts     parts
 *END"""
 
 test_default_card_em_isopotential_connect_string = """*EM_ISOPOTENTIAL_CONNECT
-$#   conid   contype    isoid1    isoid2       vallcid/rdlid      psid
-                   1                                                  """
+$#   conid   contype    isoid1    isoid2       vallcid/rdlid      psid    unused
+                   1                                                            """
 
 test_conditional_card_em_isopotential_connect_string = """*EM_ISOPOTENTIAL_CONNECT
-$#   conid   contype    isoid1    isoid2       vallcid/rdlid      psid
-                   6                                                  
+$#   conid   contype    isoid1    isoid2       vallcid/rdlid      psid    unused
+                   6                                                            
 $#       l         c        v0
                               """
 test_contact_tied_shell_edge_to_surface_beam_offset_opt_cards1 = """*CONTACT_TIED_SHELL_EDGE_TO_SURFACE_BEAM_OFFSET
@@ -1597,7 +1624,7 @@ $#            shloff
 
 test_em_randles_batmac_rdltype_0_1 = """*EM_RANDLES_BATMAC
 $#   rdlid   rdltype   rdlarea      psid
-                   1         1          
+                   1         2          
 $#       q        cq   socinit    soctou
                                         
 $#   r0cha     r0dis    r10cha    r10dis    c10cha    c10dis
@@ -1609,7 +1636,7 @@ $# usesocs       tau     flcid
 
 test_em_randles_batmac_rdltype_2_3 = """*EM_RANDLES_BATMAC
 $#   rdlid   rdltype   rdlarea      psid
-                   3         1          
+                   3         2          
 $#       q        cq   socinit    soctou
                                         
 $#   r0cha     r0dis    r10cha    r10dis    c10cha    c10dis
@@ -1721,15 +1748,15 @@ test_mat_023_ref_in = """*MAT_023
    180000.   180000.   180000.      0.30      0.30      0.30
    1.6E-05   1.6E-05   1.6E-05   69230.8   69230.8   69230.8     200.0
 """
-
+# MIGRATION CHANGE: ihypo required in card 1, prabi -> prbai in card 4
 test_mat_023_ref_out = """*MAT_023
-$#     mid        ro      aopt       ref      macf
-         1   7.8e-09       2.0       0.0         1
+$#     mid        ro      aopt       ref      macf     ihypo
+         1   7.8e-09       2.0       0.0         1          
 $#      xp        yp        zp        a1        a2        a3
        0.0       0.0       0.0       1.0       0.0       0.0
 $#      v1        v2        v3        d1        d2        d3      beta
        0.0       1.0       0.0       0.0       0.0       1.0       0.0
-$#     eai       ebi       eci     prabi     prcai     prcbi
+$#     eai       ebi       eci     prbai     prcai     prcbi
   210000.0  210000.0  210000.0       0.3       0.3       0.3
 $#     aai       abi       aci      gabi      gbci      gcai        ti
    1.2e-05   1.2e-05   1.2e-05   80769.2   80769.2   80769.2      20.0
@@ -1777,8 +1804,8 @@ $#   pid         addmass         finmass    lcid
     1464         0.00491             0.0       7"""
 
 test_element_mass_part_set_with_mwd = """*ELEMENT_MASS_PART_SET
-$#   pid         addmass         finmass    lcid     mwd
-    1463         0.00491             0.0       0       1"""
+$#   pid         addmass         finmass            lcid     mwd
+    1463         0.00491             0.0               0       1"""
 
 # Reference strings for *COMMENT multiline tests
 test_comment_multiline_write = """*COMMENT
