@@ -741,7 +741,7 @@
         "generation-options": {
             "conditional-card": [
                 {
-                    "func": "(self.eigmth in [101, 102, 111]) or (self.isolid != 0 or self.ibeam != 0 or self.ishell != 0 or self.itshell != 0 or self.mstres != 0 or self.evdump != None or self.mstrscl != 0.001)",
+                    "func": "(self.eigmth in [101, 102, 111]) or (self.isolid != 0 or self.ibeam != 0 or self.ishell != 0 or self.itshell != 0 or self.mstres != 0 or self.evdump != 0 or self.mstrscl != 0.001)",
                     "ref": "solid_beam_shell_options_card"
                 },
                 {

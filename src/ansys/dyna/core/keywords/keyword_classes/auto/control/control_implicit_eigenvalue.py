@@ -134,7 +134,7 @@ class ControlImplicitEigenvalue(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITEIGENVALUE_CARD1,
-                active_func=lambda: (self.eigmth in [101, 102, 111]) or (self.isolid != 0 or self.ibeam != 0 or self.ishell != 0 or self.itshell != 0 or self.mstres != 0 or self.evdump != None or self.mstrscl != 0.001),
+                active_func=lambda: (self.eigmth in [101, 102, 111]) or (self.isolid != 0 or self.ibeam != 0 or self.ishell != 0 or self.itshell != 0 or self.mstres != 0 or self.evdump != 0 or self.mstrscl != 0.001),
                 **kwargs,
             ),
             Card.from_field_schemas_with_defaults(
