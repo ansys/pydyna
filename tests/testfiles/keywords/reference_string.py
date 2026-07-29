@@ -1148,11 +1148,11 @@ Default MAT196 MAT_GENERAL_SPRING_DISCRETE_BEAM
          6         0  1000000.        1.                    
                                              """
 
-
+# MIGRATION CHANGE: unused cahnged to mdfail in card 2
 test_mat_general_spring_discrete_beam_ref_out = """*MAT_GENERAL_SPRING_DISCRETE_BEAM_TITLE
 $#                                                                         title
 Default MAT196 MAT_GENERAL_SPRING_DISCRETE_BEAM                                 
-$#     mid        ro    unused    unused    unused    unused    unused    dospot
+$#     mid        ro    unused    unused    unused    unused    mdfail    dospot
   59000001       1.0                                                            
 $#     dof      type         k         d       cdf       tdf
          1         0    1000.0      0.01                    
@@ -1173,7 +1173,7 @@ $#   flcid     hlcid        c1        c2       dle     glcid
 test_mat_196_ref_out = """*MAT_196_TITLE
 $#                                                                         title
 Default MAT196 MAT_GENERAL_SPRING_DISCRETE_BEAM                                 
-$#     mid        ro    unused    unused    unused    unused    unused    dospot
+$#     mid        ro    unused    unused    unused    unused    mdfail    dospot
   59000001       1.0                                                            
 $#     dof      type         k         d       cdf       tdf
          1         0    1000.0      0.01                    
@@ -1730,15 +1730,15 @@ test_mat_023_ref_in = """*MAT_023
    180000.   180000.   180000.      0.30      0.30      0.30
    1.6E-05   1.6E-05   1.6E-05   69230.8   69230.8   69230.8     200.0
 """
-
+# MIGRATION CHANGE: ihypo required in card 1, prabi -> prbai in card 4
 test_mat_023_ref_out = """*MAT_023
-$#     mid        ro      aopt       ref      macf
-         1   7.8e-09       2.0       0.0         1
+$#     mid        ro      aopt       ref      macf     ihypo
+         1   7.8e-09       2.0       0.0         1          
 $#      xp        yp        zp        a1        a2        a3
        0.0       0.0       0.0       1.0       0.0       0.0
 $#      v1        v2        v3        d1        d2        d3      beta
        0.0       1.0       0.0       0.0       0.0       1.0       0.0
-$#     eai       ebi       eci     prabi     prcai     prcbi
+$#     eai       ebi       eci     prbai     prcai     prcbi
   210000.0  210000.0  210000.0       0.3       0.3       0.3
 $#     aai       abi       aci      gabi      gbci      gcai        ti
    1.2e-05   1.2e-05   1.2e-05   80769.2   80769.2   80769.2      20.0
