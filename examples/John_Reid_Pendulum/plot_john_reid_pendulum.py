@@ -138,8 +138,8 @@ def write_deck(filepath):
             # Aluminium
             kwd.MatPlasticKinematic(mid=1, ro=2.7e-6, e=68.9, pr=0.330, sigy=0.286, etan=0.00689),
             # Sections
-            kwd.SectionShell(secid=1, elfrom=2, t1=1.0, t2=1.0, t3=1.0, t4=1.0),
-            kwd.SectionShell(secid=2, elfrom=2, t1=1.0, t2=1.0, t3=1.0, t4=1.0),
+            kwd.SectionShell(secid=1, elform=2, t1=1.0, t2=1.0, t3=1.0, t4=1.0),
+            kwd.SectionShell(secid=2, elform=2, t1=1.0, t2=1.0, t3=1.0, t4=1.0),
             # Pendu Wires
             beamPart,
             kwd.SectionBeam(secid=45, elform=3, shrf=1.00000, qr_irid=1.0, a=10.0),
