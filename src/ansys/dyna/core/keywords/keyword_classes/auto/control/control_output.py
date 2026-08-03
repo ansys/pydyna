@@ -118,6 +118,7 @@ class ControlOutput(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _CONTROLOUTPUT_CARD5,
+                active_func=lambda: self._cards[5].has_nondefault_values(),
                 **kwargs,
             ),
         ]
