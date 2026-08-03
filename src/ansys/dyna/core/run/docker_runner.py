@@ -181,6 +181,8 @@ class DockerRunner(BaseRunner):
             If the container fails to start.
         """
         env = self._build_env()
+        # On Linux, host.docker.internal is not auto-resolved; map it to the host gateway
+        extra_hosts = {"host.docker.internal": "host-gateway"} if sys.platform.startswith("linux") else {}
         logger.info(f"Creating Docker container from image {self._name}")
         container = self._client.containers.run(
             self._name,
@@ -190,6 +192,7 @@ class DockerRunner(BaseRunner):
             working_dir="/run",
             detach=True,
             remove=False,
+            extra_hosts=extra_hosts,
         )
         container.reload()
         if container.status != "running":
