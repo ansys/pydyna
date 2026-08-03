@@ -66,3 +66,18 @@ try:
     )
 except ImportError:
     pass
+
+try:
+    from .manual.mat_001 import Mat001  # noqa: F401
+except ImportError:
+    pass
+
+try:
+    from .manual.mat_elastic import MatElastic  # noqa: F401
+except ImportError:
+    pass
+
+try:
+    from .manual.control_output import ControlOutput  # noqa: F401
+except ImportError:
+    pass

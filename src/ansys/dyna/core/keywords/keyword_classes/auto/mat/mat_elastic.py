@@ -68,6 +68,7 @@ class MatElastic(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _MATELASTIC_CARD1,
+                active_func=lambda: self.e is not None and self.e < 0,
                 **kwargs,
             ),
             OptionCardSet(
