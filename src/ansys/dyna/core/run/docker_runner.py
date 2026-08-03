@@ -402,7 +402,7 @@ class DockerRunner(BaseRunner):
                 path = os.path.join(self._working_directory, logfile)
                 if os.path.exists(path):
                     with open(path) as f:
-                        logger.error(f"--- {logfile} ---\n{f.read()}")
+                        sys.stderr.write(f"--- {logfile} ---\n{f.read()}\n")
             raise subprocess.CalledProcessError(exit_code, command)
 
         return self._working_directory
