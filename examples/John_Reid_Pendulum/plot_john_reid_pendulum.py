@@ -177,5 +177,5 @@ deck.plot(cwd=rundir.name)
 # ~~~~~~~~~~~~~~~~~~~
 #
 
-filepath = run_dyna(dynafile, working_directory=rundir.name, memory=30)
+filepath = run_dyna(dynafile, working_directory=rundir.name, memory=500)
 run_post(rundir.name)
