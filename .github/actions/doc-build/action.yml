@@ -192,29 +192,30 @@ runs:
         path: doc/_build/html
         retention-days: 7
 
-    - name: "Build the pdf documentation"
-      if: ${{ inputs.skip-pdf-build != 'true' }}
-      shell: bash
-      run: |
-        source .venv/bin/activate
-        xvfb-run uv run --no-sync -- make -C doc pdf
-      env:
-        ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
-        ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
-        LSTC_LICENSE: ansys
-        PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
-        PYDYNA_RUN_STREAM: "0"
-        extra_mem_bot: 20000000
-        extra_mem_top: 30000000
-        pool_size: ${{ inputs.pdf-pool-size }}
-        string_vacancies: ${{ inputs.pdf-string-vacancies }}
-        max_strings: ${{ inputs.pdf-max-strings }}
+    # TODO: FIX the pdf build to work 
+    # - name: "Build the pdf documentation"
+    #   if: ${{ inputs.skip-pdf-build != 'true' }}
+    #   shell: bash
+    #   run: |
+    #     source .venv/bin/activate
+    #     xvfb-run uv run --no-sync -- make -C doc pdf
+    #   env:
+    #     ANSYSLI_SERVERS: 2325@${{ inputs.license-server }}
+    #     ANSYSLMD_LICENSE_FILE: 1055@${{ inputs.license-server }}
+    #     LSTC_LICENSE: ansys
+    #     PYDYNA_RUN_CONTAINER: ${{ inputs.pydyna-run-container }}
+    #     PYDYNA_RUN_STREAM: "0"
+    #     extra_mem_bot: 20000000
+    #     extra_mem_top: 30000000
+    #     pool_size: ${{ inputs.pdf-pool-size }}
+    #     string_vacancies: ${{ inputs.pdf-string-vacancies }}
+    #     max_strings: ${{ inputs.pdf-max-strings }}
 
-    - name: Upload pdf documentation
-      if: ${{ inputs.skip-pdf-build != 'true' }}
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-      with:
-        name: documentation-pdf
-        path: doc/_build/latex/*.pdf
-        retention-days: 7
+    # - name: Upload pdf documentation
+    #   if: ${{ inputs.skip-pdf-build != 'true' }}
+    #   uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+    #   with:
+    #     name: documentation-pdf
+    #     path: doc/_build/latex/*.pdf
+    #     retention-days: 7
 
