@@ -1044,6 +1044,16 @@
             ]
         }
     },
+    "CONTROL_CONTACT": {
+        "generation-options": {
+            "cascading-card": [
+                {
+                    "start": 2,
+                    "end": 6
+                }
+            ]
+        }
+    },
     "CONTROL_OUTPUT": {
         "generation-options": {
             "cascading-card": [
