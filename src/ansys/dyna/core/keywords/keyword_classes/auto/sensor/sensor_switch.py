@@ -29,9 +29,9 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _SENSORSWITCH_CARD0 = (
     FieldSchema("switid", int, 0, 10, None),
-    FieldSchema("type", str, 10, 10, "SENSOR"),
+    FieldSchema("unused", str, 10, 10, None),
     FieldSchema("sensid", int, 20, 10, None),
-    FieldSchema("logic", str, 30, 10, "LT"),
+    FieldSchema("logic", str, 30, 10, None),
     FieldSchema("value", float, 40, 10, None),
     FieldSchema("filtrid", int, 50, 10, None),
     FieldSchema("timwin", float, 60, 10, None),
@@ -73,7 +73,7 @@ class SensorSwitch(KeywordBase):
         ]
     @property
     def switid(self) -> typing.Optional[int]:
-        """Get or set the Switch ID can be referred directly by *SENSOR_CONTROL to control the status of entities like CONTACT and AIRBAG, or can be referred to by *SENSOR_SWITCH_CALC-LOGIC for logic computation.
+        """Get or set the Switch ID, which can be referred to directly by *SENSOR_CONTROL to control the status of entities like CONTACT and AIRBAG, or can be referred to by *SENSOR_SWITCH_CALC-LOGIC for a logic computation
         """ # nopep8
         return self._cards[0].get_value("switid")
 
@@ -81,21 +81,6 @@ class SensorSwitch(KeywordBase):
     def switid(self, value: int) -> None:
         """Set the switid property."""
         self._cards[0].set_value("switid", value)
-
-    @property
-    def type(self) -> str:
-        """Get or set the Type:
-        EQ.Sensor:
-        EQ.Time:
-        """ # nopep8
-        return self._cards[0].get_value("type")
-
-    @type.setter
-    def type(self, value: str) -> None:
-        """Set the type property."""
-        if value not in ["SENSOR", "TIME", None]:
-            raise Exception("""type must be `None` or one of {"SENSOR","TIME"}.""")
-        self._cards[0].set_value("type", value)
 
     @property
     def sensid(self) -> typing.Optional[int]:
@@ -109,18 +94,14 @@ class SensorSwitch(KeywordBase):
         self._cards[0].set_value("sensid", value)
 
     @property
-    def logic(self) -> str:
-        """Get or set the Logic:
-        EQ.LT: less than
-        EQ.GT: greater than
+    def logic(self) -> typing.Optional[str]:
+        """Get or set the Logic operator that can be wither LT(<) or GT (>).
         """ # nopep8
         return self._cards[0].get_value("logic")
 
     @logic.setter
     def logic(self, value: str) -> None:
         """Set the logic property."""
-        if value not in ["LT", "GT", None]:
-            raise Exception("""logic must be `None` or one of {"LT","GT"}.""")
         self._cards[0].set_value("logic", value)
 
     @property
@@ -136,7 +117,7 @@ class SensorSwitch(KeywordBase):
 
     @property
     def filtrid(self) -> typing.Optional[int]:
-        """Get or set the Filter ID (optional).  Filters may be defined using *DEFINE_FILTER.
+        """Get or set the Filter ID (optional).  See *DEFINE_FILTER for how to define a filter. See Remark 1
         """ # nopep8
         return self._cards[0].get_value("filtrid")
 

@@ -50,7 +50,7 @@ class EmIsopotential(KeywordBase):
         ]
     @property
     def isoid(self) -> typing.Optional[int]:
-        """Get or set the ID of the Isopotential.
+        """Get or set the ID of the isopotential.
         """ # nopep8
         return self._cards[0].get_value("isoid")
 
@@ -88,14 +88,14 @@ class EmIsopotential(KeywordBase):
 
     @property
     def rdltype(self) -> int:
-        """Get or set the Used for the application: composite Tshell battery, with *EM_RANDLES_TSHELL.Selects which layers of the underlying EM mesh is included in the isopotential:
+        """Get or set the Used for the battery application( *EM_RANDLES_BATMACR or *EM_RANDLES_TSHELL ).Selects which layers of the underlying battery cell are associated with the isopotential:
         EQ.0: Default. No specific treatment.
         EQ.1: Current Collector Positive.
         EQ.2: Positive Electrode.
         EQ.3: Separator.
         EQ.4: Negative Electrode.
         EQ.5: Current Collector Negative.
-        The layers functions are defined in *EM_MAT_001.
+        The function of a layer defined in *EM_MAT_001.
         """ # nopep8
         return self._cards[0].get_value("rdltype")
 

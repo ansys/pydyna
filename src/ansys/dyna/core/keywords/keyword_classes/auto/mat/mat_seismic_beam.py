@@ -186,9 +186,9 @@ class MatSeismicBeam(KeywordBase):
     @property
     def asflag(self) -> float:
         """Get or set the Axial strain definition for force-strain curves, degradation and FEMA output:
-        EQ.0.0: true (log) total strain
-        EQ.1.0: change in length
-        EQ.2.0: nominal total strain
+        EQ.0.0: True (log) total strain
+        EQ.1.0: Change in length
+        EQ.2.0: Nominal total strain
         EQ.3.0: FEMA plastic strain ( = nominal total strain minus elastic strain).
         """ # nopep8
         return self._cards[0].get_value("asflag")
@@ -205,8 +205,8 @@ class MatSeismicBeam(KeywordBase):
         """Get or set the Formulation type for interaction:
         EQ:1 Parabolic coefficients, axial load and biaxial bending (default).
         EQ:2 Japanese code, axial force and major axis bending.
-        EQ.4:	AISC utilization calculation but no yielding
-        EQ.5:	AS4100 utilization calculation but no yielding
+        EQ.4: AISC utilization calculation but no yielding
+        EQ.5: AS4100 utilization calculation but no yielding
         """ # nopep8
         return self._cards[0].get_value("ftype")
 

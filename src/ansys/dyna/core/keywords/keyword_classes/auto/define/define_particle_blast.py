@@ -52,6 +52,7 @@ _DEFINEPARTICLEBLAST_CARD2 = (
     FieldSchema("gamma", float, 30, 10, None),
     FieldSchema("covol", float, 40, 10, None),
     FieldSchema("deto_v", float, 50, 10, None),
+    FieldSchema("smooth", float, 60, 10, None),
 )
 
 _DEFINEPARTICLEBLAST_CARD3 = (
@@ -152,8 +153,8 @@ class DefineParticleBlast(KeywordBase):
     @property
     def lagstype(self) -> int:
         """Get or set the Structure type:
-        EQ.0:	Part Set
-        EQ.1 : Part
+        EQ.0: Part Set
+        EQ.1: Part
         """ # nopep8
         return self._cards[0].get_value("lagstype")
 
@@ -166,7 +167,7 @@ class DefineParticleBlast(KeywordBase):
 
     @property
     def nodid(self) -> typing.Optional[int]:
-        """Get or set the Discrete element sphere (DES) or Smooth particle hydrodynamics (SPH) ID for the interaction between particles and nodes
+        """Get or set the Discrete element sphere (DES) or smooth particle hydrodynamics (SPH) ID for the interaction between particles and nodes
         """ # nopep8
         return self._cards[0].get_value("nodid")
 
@@ -178,10 +179,10 @@ class DefineParticleBlast(KeywordBase):
     @property
     def nodtype(self) -> int:
         """Get or set the Nodal type:
-        EQ.0:	Node Set
-        EQ.1 : Node
-        EQ.2 : Part Set
-        EQ.3 : Part
+        EQ.0: Node Set
+        EQ.1: Node
+        EQ.2: Part Set
+        EQ.3: Part
         """ # nopep8
         return self._cards[0].get_value("nodtype")
 
@@ -206,9 +207,9 @@ class DefineParticleBlast(KeywordBase):
     @property
     def hectype(self) -> int:
         """Get or set the Structure type:
-        EQ.0:	Part Set
-        EQ.1 : Part
-        EQ.2 : Geometry, see* DEFINE_‌PBLAST_‌GEOMETRY
+        EQ.0: Part Set
+        EQ.1: Part
+        EQ.2: Geometry, see *DEFINE_PBLAST_GEOMETRY
         """ # nopep8
         return self._cards[0].get_value("hectype")
 
@@ -222,8 +223,8 @@ class DefineParticleBlast(KeywordBase):
     @property
     def aircid(self) -> typing.Optional[int]:
         """Get or set the Initial geometry for air particles:
-        EQ.0:	Filled air particles to entire domain defined by Card 5
-        GT.0 : Reference to * DEFINE_‌PBLAST_‌AIRGEO ID
+        EQ.0: Fill the domain defined by Card 5 with air particles
+        GT.0: ID of an instance to *DEFINE_PBLAST_AIRGEO ID
         """ # nopep8
         return self._cards[0].get_value("aircid")
 
@@ -257,11 +258,11 @@ class DefineParticleBlast(KeywordBase):
     @property
     def iunit(self) -> int:
         """Get or set the Unit System
-        EQ.0:	Kg - mm - ms - K
-        EQ.1 : SI Units
-        EQ.2 : Ton - mm - s - K
-        EQ.3 : g - cm - us - K
-        EQ.4 : blob - in - s - K
+        EQ.0: kg - mm - ms - K
+        EQ.1: SI Units
+        EQ.2: Ton - mm - s - K
+        EQ.3: g - cm - us - K
+        EQ.4: blob - in - s - K
         """ # nopep8
         return self._cards[1].get_value("iunit")
 
@@ -275,9 +276,9 @@ class DefineParticleBlast(KeywordBase):
     @property
     def ihetype(self) -> int:
         """Get or set the High Explosive type (see Remark 1):
-        EQ.0:	User defined
-        EQ.1 : TNT
-        EQ.2 : C4
+        EQ.0: User defined
+        EQ.1: TNT
+        EQ.2: C4
         """ # nopep8
         return self._cards[2].get_value("ihetype")
 
@@ -342,6 +343,19 @@ class DefineParticleBlast(KeywordBase):
     def deto_v(self, value: float) -> None:
         """Set the deto_v property."""
         self._cards[2].set_value("deto_v", value)
+
+    @property
+    def smooth(self) -> typing.Optional[float]:
+        """Get or set the Smoothing factor for the blast load:
+        EQ.1.0:	The blast load is not smoothed.
+        GT.1.0 : The blast load is smoothed by this factor around the contact area.
+        """ # nopep8
+        return self._cards[2].get_value("smooth")
+
+    @smooth.setter
+    def smooth(self, value: float) -> None:
+        """Set the smooth property."""
+        self._cards[2].set_value("smooth", value)
 
     @property
     def detx(self) -> typing.Optional[float]:
@@ -478,8 +492,8 @@ class DefineParticleBlast(KeywordBase):
     @property
     def ibcx0(self) -> typing.Optional[int]:
         """Get or set the Boundary conditions for global domain x-min:
-        EQ.0:	Free
-        EQ.1 : Rigid reflecting boundary
+        EQ.0: Free
+        EQ.1: Rigid reflecting boundary
         """ # nopep8
         return self._cards[5].get_value("ibcx0")
 
@@ -491,8 +505,8 @@ class DefineParticleBlast(KeywordBase):
     @property
     def ibcx1(self) -> typing.Optional[int]:
         """Get or set the Boundary conditions for global domain x-max:
-        EQ.0:	Free
-        EQ.1 : Rigid reflecting boundary
+        EQ.0: Free
+        EQ.1: Rigid reflecting boundary
         """ # nopep8
         return self._cards[5].get_value("ibcx1")
 
@@ -504,8 +518,8 @@ class DefineParticleBlast(KeywordBase):
     @property
     def ibcy0(self) -> typing.Optional[int]:
         """Get or set the Boundary conditions for global domain y-min:
-        EQ.0:	Free
-        EQ.1 : Rigid reflecting boundary
+        EQ.0: Free
+        EQ.1: Rigid reflecting boundary
         """ # nopep8
         return self._cards[5].get_value("ibcy0")
 
@@ -517,8 +531,8 @@ class DefineParticleBlast(KeywordBase):
     @property
     def ibcy1(self) -> typing.Optional[int]:
         """Get or set the Boundary conditions for global domain y-max:
-        EQ.0:	Free
-        EQ.1 : Rigid reflecting boundary
+        EQ.0: Free
+        EQ.1: Rigid reflecting boundary
         """ # nopep8
         return self._cards[5].get_value("ibcy1")
 
@@ -530,8 +544,8 @@ class DefineParticleBlast(KeywordBase):
     @property
     def ibcz0(self) -> typing.Optional[int]:
         """Get or set the Boundary conditions for global domain z-min:
-        EQ.0:	Free
-        EQ.1 : Rigid reflecting boundary
+        EQ.0: Free
+        EQ.1: Rigid reflecting boundary
         """ # nopep8
         return self._cards[5].get_value("ibcz0")
 
@@ -543,8 +557,8 @@ class DefineParticleBlast(KeywordBase):
     @property
     def ibcz1(self) -> typing.Optional[int]:
         """Get or set the Boundary conditions for global domain z-max:
-        EQ.0:	Free
-        EQ.1 : Rigid reflecting boundary
+        EQ.0: Free
+        EQ.1: Rigid reflecting boundary
         """ # nopep8
         return self._cards[5].get_value("ibcz1")
 
@@ -556,8 +570,8 @@ class DefineParticleBlast(KeywordBase):
     @property
     def bc_p(self) -> int:
         """Get or set the Pressure ambient boundary condition for global domain:
-        EQ.0:	Off(Default)
-        EQ.1 : On
+        EQ.0: Off(Default)
+        EQ.1: On
         """ # nopep8
         return self._cards[5].get_value("bc_p")
 

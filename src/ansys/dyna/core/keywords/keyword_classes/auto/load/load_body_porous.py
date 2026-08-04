@@ -74,14 +74,15 @@ class LoadBodyPorous(KeywordBase):
     @property
     def sidtyp(self) -> int:
         """Get or set the Set ID type of the SID above.  If SIDTYP=0 (default), then the SID=PSID (part set ID).  If SIDTYP=1, then SID=PID (part ID).
+        EQ.2: Element set ID (*SET_BEAM in ALE 1D, *SET_SHELL in ALE 2D, *SET_SOLID in ALE 3D)
         """ # nopep8
         return self._cards[0].get_value("sidtyp")
 
     @sidtyp.setter
     def sidtyp(self, value: int) -> None:
         """Set the sidtyp property."""
-        if value not in [0, 1, None]:
-            raise Exception("""sidtyp must be `None` or one of {0,1}.""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""sidtyp must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("sidtyp", value)
 
     @property

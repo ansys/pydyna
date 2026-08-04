@@ -29,8 +29,8 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _CONTACTENTITY_CARD0 = (
     FieldSchema("pid", int, 0, 10, None),
     FieldSchema("geotyp", int, 10, 10, 1),
-    FieldSchema("ssid", int, 20, 10, None),
-    FieldSchema("sstyp", int, 30, 10, 0),
+    FieldSchema("surfa", int, 20, 10, None),
+    FieldSchema("surfatyp", int, 30, 10, 0),
     FieldSchema("sf", float, 40, 10, 1.0),
     FieldSchema("df", float, 50, 10, 0.0),
     FieldSchema("cf", float, 60, 10, 0.0),
@@ -43,7 +43,7 @@ _CONTACTENTITY_CARD1 = (
     FieldSchema("so", int, 20, 10, 0),
     FieldSchema("go", int, 30, 10, 0),
     FieldSchema("ithk", int, 40, 10, 0),
-    FieldSchema("spr", int, 50, 10, 0),
+    FieldSchema("sapr", int, 50, 10, 0),
 )
 
 _CONTACTENTITY_CARD2 = (
@@ -139,31 +139,31 @@ class ContactEntity(KeywordBase):
         self._cards[0].set_value("geotyp", value)
 
     @property
-    def ssid(self) -> typing.Optional[int]:
-        """Get or set the Slave set ID, see *SET_NODE_OPTION, *PART, or *SET_PART.
+    def surfa(self) -> typing.Optional[int]:
+        """Get or set the Tracked surface set ID, see *SET_NODE_OPTION, *PART, or *SET_PART.
         """ # nopep8
-        return self._cards[0].get_value("ssid")
+        return self._cards[0].get_value("surfa")
 
-    @ssid.setter
-    def ssid(self, value: int) -> None:
-        """Set the ssid property."""
-        self._cards[0].set_value("ssid", value)
+    @surfa.setter
+    def surfa(self, value: int) -> None:
+        """Set the surfa property."""
+        self._cards[0].set_value("surfa", value)
 
     @property
-    def sstyp(self) -> int:
+    def surfatyp(self) -> int:
         """Get or set the Slave set type:
         EQ.0: node set (default),
         EQ.1: part ID,
         EQ.2: part set ID.
         """ # nopep8
-        return self._cards[0].get_value("sstyp")
+        return self._cards[0].get_value("surfatyp")
 
-    @sstyp.setter
-    def sstyp(self, value: int) -> None:
-        """Set the sstyp property."""
+    @surfatyp.setter
+    def surfatyp(self, value: int) -> None:
+        """Set the surfatyp property."""
         if value not in [0, 1, 2, None]:
-            raise Exception("""sstyp must be `None` or one of {0,1,2}.""")
-        self._cards[0].set_value("sstyp", value)
+            raise Exception("""surfatyp must be `None` or one of {0,1,2}.""")
+        self._cards[0].set_value("surfatyp", value)
 
     @property
     def sf(self) -> float:
@@ -203,7 +203,7 @@ class ContactEntity(KeywordBase):
 
     @property
     def intord(self) -> int:
-        """Get or set the Integration order (slaved materials only). This option is not available with entity types 8 and 9 where only nodes are checked:
+        """Get or set the Integration order (tracked materials only). This option is not available with entity types 8 and 9 where only nodes are checked:
         EQ.0: check nodes only (default),
         EQ.1: 1-point integration over segments,
         EQ.2: 2x2 integration,
@@ -289,17 +289,17 @@ class ContactEntity(KeywordBase):
         self._cards[1].set_value("ithk", value)
 
     @property
-    def spr(self) -> int:
-        """Get or set the Include the slave side in *DATABASE_BINARY_INTFOR
-        interface force files; valid only when SSTYP > 0:
-        EQ.1: slave side forces included..
+    def sapr(self) -> int:
+        """Get or set the Include the tracked side in *DATABASE_BINARY_INTFOR
+        interface force files; valid only when SURFATYP > 0:
+        EQ.1: tracked side forces included..
         """ # nopep8
-        return self._cards[1].get_value("spr")
+        return self._cards[1].get_value("sapr")
 
-    @spr.setter
-    def spr(self, value: int) -> None:
-        """Set the spr property."""
-        self._cards[1].set_value("spr", value)
+    @sapr.setter
+    def sapr(self, value: int) -> None:
+        """Set the sapr property."""
+        self._cards[1].set_value("sapr", value)
 
     @property
     def xc(self) -> float:
@@ -412,8 +412,8 @@ class ContactEntity(KeywordBase):
     @property
     def inout(self) -> int:
         """Get or set the In-out flag. Allows contact from the inside or the outside of the entity:
-        EQ.0: slave nodes exist outside of the entity (default),
-        EQ.1: slave nodes exist inside the entity.
+        EQ.0: Tracked nodes exist outside of the entity (default),
+        EQ.1: Tracked nodes exist inside the entity.
         """ # nopep8
         return self._cards[4].get_value("inout")
 

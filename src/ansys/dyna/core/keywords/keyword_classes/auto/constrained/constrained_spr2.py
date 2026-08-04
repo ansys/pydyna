@@ -46,7 +46,7 @@ _CONSTRAINEDSPR2_CARD1 = (
     FieldSchema("alpha2", float, 40, 10, None),
     FieldSchema("alpha3", float, 50, 10, None),
     FieldSchema("dens", float, 60, 10, None),
-    FieldSchema("intp", int, 70, 10, 0),
+    FieldSchema("intp", float, 70, 10, None),
 )
 
 _CONSTRAINEDSPR2_CARD2 = (
@@ -157,7 +157,7 @@ class ConstrainedSpr2(KeywordBase):
     def fn(self) -> typing.Optional[float]:
         """Get or set the Rivet strength in tension (pull-out):
         GT.0: Constant value
-        LT.0 : Material data from instantiation of * MAT_CONSTRAINED_SPR2(*MAT_265) with MID of absolutevalue | FN |
+        LT.0: Material data from instantiation of *MAT_CONSTRAINED_SPR2(*MAT_265) with MID of absolutevalue | FN |
         """ # nopep8
         return self._cards[0].get_value("fn")
 
@@ -245,9 +245,9 @@ class ConstrainedSpr2(KeywordBase):
 
     @property
     def alpha3(self) -> typing.Optional[float]:
-        """Get or set the Dimensionless parameter scaling the effective displacement.The sign of ALPHA3 can be used to choose the normal update procedure :
-        GT.0 : Incremental update(default)
-        LT.0 : Total update(recommended)
+        """Get or set the Dimensionless parameter scaling the effective displacement.The sign of ALPHA3 can be used to choose the normal update procedure:
+        GT.0: Incremental update(default)
+        LT.0: Total update(recommended)
         """ # nopep8
         return self._cards[1].get_value("alpha3")
 
@@ -268,24 +268,27 @@ class ConstrainedSpr2(KeywordBase):
         self._cards[1].set_value("dens", value)
 
     @property
-    def intp(self) -> int:
-        """Get or set the Flag for interpolation.
-        EQ.0: Linear (default),
-        EQ.1: Uniform,
-        EQ.2 : Inverse distance weighting.
+    def intp(self) -> typing.Optional[float]:
+        """Get or set the Flag for interpolation. INTP is interpreted digit-wise, namely as,:
+        INTP = [LK] = K + 10�L
+        The first digit, K, controls the interpolation method :
+        K.EQ.0 : Linear(default)),
+        K.EQ.1:	Uniform(not recommended for an asymmetrical arrangement of the upper and lower nodes)),
+        K.EQ.2:	Inverse distance weighting
+        The second digit, L, controls if the nodal area is considered when computing the weight :
+        L.EQ.0 : Nodal area is not considered(default),
+        L.EQ.1 : Nodal area is considered.
         """ # nopep8
         return self._cards[1].get_value("intp")
 
     @intp.setter
-    def intp(self, value: int) -> None:
+    def intp(self, value: float) -> None:
         """Set the intp property."""
-        if value not in [0, 1, 2, None]:
-            raise Exception("""intp must be `None` or one of {0,1,2}.""")
         self._cards[1].set_value("intp", value)
 
     @property
     def expn(self) -> float:
-        """Get or set the Exponent value for load function in normal direction.
+        """Get or set the Exponent value for the load function in the normal direction.
         """ # nopep8
         return self._cards[2].get_value("expn")
 
@@ -296,7 +299,7 @@ class ConstrainedSpr2(KeywordBase):
 
     @property
     def expt(self) -> float:
-        """Get or set the Exponent value for load function in tangential direction.
+        """Get or set the Exponent value for the load function in the tangential direction.
         """ # nopep8
         return self._cards[2].get_value("expt")
 
@@ -308,8 +311,8 @@ class ConstrainedSpr2(KeywordBase):
     @property
     def pidvb(self) -> typing.Optional[int]:
         """Get or set the Part ID for visualization beams representing SPR2 in post-processing.
-        EQ.0:	Part id automatically set (default),
-        GT.0:	PIDVB defines part id .
+        EQ.0: Part id automatically set (default),
+        GT.0: PIDVB defines part id .
         """ # nopep8
         return self._cards[2].get_value("pidvb")
 

@@ -67,7 +67,7 @@ class InitialAxialForceBeam(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining preload stress versus time.  When the load curve ends or goes to zero, the initialization is assumed to be completed
+        """Get or set the Load curve ID defining preload force versus time. When the load curve ends or goes to zero, the initialization is assumed to be completed
         """ # nopep8
         return self._cards[0].get_value("lcid")
 
@@ -90,9 +90,9 @@ class InitialAxialForceBeam(KeywordBase):
     @property
     def kbend(self) -> int:
         """Get or set the Bending stiffness flag
-        EQ.0:	Bending stiffness is negligible since all integration points are assigned the same axial stress
-        EQ.1:	Bending stiffness is retained by keeping the axial stress gradient
-        EQ.2:	Same as 1, but also allows for lining up several beams with prescribed axial force.
+        EQ.0: Bending stiffness is negligible since all integration points are assigned the same axial stress
+        EQ.1: Bending stiffness is retained by keeping the axial stress gradient
+        EQ.2: Same as 1, but also allows for lining up several beams with prescribed axial force.
         """ # nopep8
         return self._cards[0].get_value("kbend")
 

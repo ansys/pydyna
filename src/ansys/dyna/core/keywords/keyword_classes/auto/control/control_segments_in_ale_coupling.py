@@ -97,8 +97,8 @@ class ControlSegmentsInAleCoupling(KeywordBase):
     @property
     def sym(self) -> int:
         """Get or set the Flag to deactivate coupling segments with normal boundary constraints.
-        EQ.0:	Off
-        EQ.1 : On.
+        EQ.0: Off
+        EQ.1: On.
         """ # nopep8
         return self._cards[0].get_value("sym")
 

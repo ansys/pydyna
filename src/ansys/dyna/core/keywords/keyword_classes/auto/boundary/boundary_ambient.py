@@ -76,7 +76,8 @@ class BoundaryAmbient(KeywordBase):
 
     @property
     def mmg(self) -> typing.Optional[int]:
-        """Get or set the ALE multi-material group ID.In case of S-ALE, AMMG name (AMMGNM) could be also used in place of AMMGID
+        """Get or set the ALE multi-material group ID.In the case of S-ALE, the AMMG name (AMMGNM) can be used in place of the AMMGID.
+        EQ.0: Keep the already existing filling. Note that this is only available if the ambient element is prefilled with ALE materials.
         """ # nopep8
         return self._cards[0].get_value("mmg")
 
@@ -88,8 +89,8 @@ class BoundaryAmbient(KeywordBase):
     @property
     def ambtyp(self) -> typing.Optional[int]:
         """Get or set the Ambient element type:
-        EQ.4:	Pressure inflow/outflow (see Remarks 1 and 2)
-        EQ.5:	Receptor for blast load (See *LOAD_BLAST_ENHANCED)
+        EQ.4: Pressure inflow/outflow (see Remarks 1 and 2)
+        EQ.5: Receptor for blast load (See *LOAD_BLAST_ENHANCED)
         """ # nopep8
         return self._cards[0].get_value("ambtyp")
 
@@ -101,9 +102,9 @@ class BoundaryAmbient(KeywordBase):
     @property
     def sidr(self) -> int:
         """Get or set the Flag controlling the use of this keyword during dynamic relaxation.
-        EQ.0:	the keyword is applied in normal analysis phase only,
-        EQ.1:	the keyword is applied in dynamic relaxation phase but not the normal analysis phase,
-        EQ.2:	the keyword is applied in both dynamic relaxation phase and normal analysis phase.
+        EQ.0: LS-DYNA applies the keyword only during the normal analysis phase,
+        EQ.1: LS-DYNA applies the keyword during dynamic relaxation phase but not the normal analysis phase,
+        EQ.2: LS-DYNA applies this keyword during the dynamic relaxation and normal analysis phases.
         """ # nopep8
         return self._cards[0].get_value("sidr")
 
@@ -116,7 +117,7 @@ class BoundaryAmbient(KeywordBase):
 
     @property
     def lcid1(self) -> typing.Optional[int]:
-        """Get or set the A load curve ID for internal energy per unit reference volume (see Remark 4 and the *EOS section for details). If *EOS_‌IDEAL_‌GAS is being used, this ID refers to a temperature load curve ID
+        """Get or set the A load curve ID for internal energy per unit reference volume (see Remark 4 and the *EOS section for details). If using *EOS_IDEAL_GAS, this ID refers to a temperature load curve ID
         """ # nopep8
         return self._cards[1].get_value("lcid1")
 
@@ -127,7 +128,7 @@ class BoundaryAmbient(KeywordBase):
 
     @property
     def lcid2(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID for relative volume, v_r=(v⁄v_0 =ρ_0⁄ρ).  (See Remark 3 and the *EOS section for details).
+        """Get or set the Load curve ID for relative volume, v_r=(vv_0 =_0). (See Remark 3 and the *EOS section for details).
         """ # nopep8
         return self._cards[1].get_value("lcid2")
 

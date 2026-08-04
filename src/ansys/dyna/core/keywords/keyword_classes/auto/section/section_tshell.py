@@ -100,9 +100,9 @@ class SectionTshellCardSet(Cards):
         EQ.1: one point reduced integration (default),
         EQ.2: selective reduced 2x2 in plane integration.
         EQ.3: assumed strain 2x2 in plane integration.
-        EQ.5:  assumed strain reduced integration.
+        EQ.5: assumed strain reduced integration.
         EQ.6: assumed strain reduced integration with shell materials
-        EQ.7:	assumed strain  2×2 in plane integration
+        EQ.7: assumed strain  22 in plane integration
         """ # nopep8
         return self._cards[0].get_value("elform")
 

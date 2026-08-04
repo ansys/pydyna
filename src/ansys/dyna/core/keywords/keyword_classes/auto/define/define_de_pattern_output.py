@@ -107,8 +107,8 @@ class DefineDePatternOutput(KeywordBase):
 
     @property
     def ptype(self) -> int:
-        """Get or set the EQ.0:	Part
-        EQ.1:	Part set
+        """Get or set the EQ.0: Part
+        EQ.1: Part set
         """ # nopep8
         return self._cards[0].get_value("ptype")
 
@@ -154,7 +154,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @property
     def xh(self) -> float:
-        """Get or set the Head of the direction to which the planes are orthogonal .
+        """Get or set the Head of the direction to which the planes are orthogonal.
         """ # nopep8
         return self._cards[0].get_value("xh")
 
@@ -165,7 +165,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @property
     def yh(self) -> float:
-        """Get or set the Head of the direction to which the planes are orthogonal .
+        """Get or set the Head of the direction to which the planes are orthogonal.
         """ # nopep8
         return self._cards[0].get_value("yh")
 
@@ -176,7 +176,7 @@ class DefineDePatternOutput(KeywordBase):
 
     @property
     def zh(self) -> float:
-        """Get or set the Head of the direction to which the planes are orthogonal .
+        """Get or set the Head of the direction to which the planes are orthogonal.
         """ # nopep8
         return self._cards[0].get_value("zh")
 

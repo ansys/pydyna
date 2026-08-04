@@ -40,7 +40,7 @@ _CONSTRAINEDSHELLINSOLID_CARD1 = (
 
 _CONSTRAINEDSHELLINSOLID_CARD2 = (
     FieldSchema("start", float, 0, 10, 0.0),
-    FieldSchema("end", float, 10, 10, 1e+21),
+    FieldSchema("end", float, 10, 10, 1e+20),
     FieldSchema("unused", int, 20, 10, None),
     FieldSchema("unused", int, 30, 10, None),
     FieldSchema("unused", int, 40, 10, None),
@@ -94,7 +94,7 @@ class ConstrainedShellInSolid(KeywordBase):
 
     @property
     def shsid(self) -> typing.Optional[int]:
-        """Get or set the Part or part set ID of the Lagrangian shell structure(see *PART,* SET_PART)
+        """Get or set the Part or part set ID of the Lagrangian shell structure(see *PART, *SET_PART)
         """ # nopep8
         return self._cards[1].get_value("shsid")
 
@@ -105,7 +105,7 @@ class ConstrainedShellInSolid(KeywordBase):
 
     @property
     def ssid(self) -> typing.Optional[int]:
-        """Get or set the Part or part set ID of the Lagrangian solid elements or thick shell element(see *PART,* SET_PART)
+        """Get or set the Part or part set ID of the Lagrangian solid elements or thick shell element(see *PART, *SET_PART)
         """ # nopep8
         return self._cards[1].get_value("ssid")
 
@@ -147,8 +147,8 @@ class ConstrainedShellInSolid(KeywordBase):
     @property
     def start(self) -> float:
         """Get or set the Start time to activate the coupling
-        LT.0:	Start time is set to |START|.  When negative, start time is followed during the dynamic relaxation phase of the calculation.  After the completion of dynamic relaxation, coupling is activated regardless of the value of END.EQ.0:	Start time is inactive, meaning coupling is always active
-        GT.0 : If END = -9999, START is interpreted as the curve or table ID defining multiple pairs of start - time and end - time.Otherwise, if END > 0, start time applies both duringand after dynamic relaxation.
+        LT.0: Start time is set to |START|.  When negative, start time is followed during the dynamic relaxation phase of the calculation.  After the completion of dynamic relaxation, coupling is activated regardless of the value of END.EQ.0: Start time is inactive, meaning coupling is always active
+        GT.0: If END = -9999, START is interpreted as the curve or table ID defining multiple pairs of start - time and end - time.Otherwise, if END > 0, start time applies both duringand after dynamic relaxation.
         """ # nopep8
         return self._cards[2].get_value("start")
 
@@ -160,8 +160,8 @@ class ConstrainedShellInSolid(KeywordBase):
     @property
     def end(self) -> float:
         """Get or set the End time to deactive the coupling
-        LT.0:	If END = -9999, START is interpreted as the curve or table ID defining multiple pairs of start-time and end-time.  Otherwise, negative END indicates that coupling is inactive during dynamic relaxation.  After dynamic relaxation the start and end times are followed and set to |START| and |END|, respectively.EQ.0:	END defaults to 1020.
-        GT.0 : END sets the time at which the coupling is deactivated.
+        LT.0: If END = -9999, START is interpreted as the curve or table ID defining multiple pairs of start-time and end-time.  Otherwise, negative END indicates that coupling is inactive during dynamic relaxation.  After dynamic relaxation the start and end times are followed and set to |START| and |END|, respectively.EQ.0: END defaults to 1020.
+        GT.0: END sets the time at which the coupling is deactivated.
         """ # nopep8
         return self._cards[2].get_value("end")
 

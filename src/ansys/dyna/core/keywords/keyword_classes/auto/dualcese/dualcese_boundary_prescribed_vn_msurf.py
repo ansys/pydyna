@@ -31,9 +31,6 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import De
 _DUALCESEBOUNDARYPRESCRIBEDVNMSURF_CARD0 = (
     FieldSchema("mspid", int, 0, 10, None),
     FieldSchema("idcomp", int, 10, 10, None),
-    FieldSchema("dirx", float, 20, 10, None),
-    FieldSchema("diry", float, 30, 10, None),
-    FieldSchema("dirz", float, 40, 10, None),
 )
 
 _DUALCESEBOUNDARYPRESCRIBEDVNMSURF_CARD1 = (
@@ -95,7 +92,7 @@ class DualceseBoundaryPrescribedVnMsurf(KeywordBase):
 
     @property
     def idcomp(self) -> typing.Optional[int]:
-        """Get or set the For inflow boundaries in problems involving chemical reacting flows, the chemical mixture of the fluid entering the domain is defined with a *CHEMISTRY_?COMPOSITION card with this ID
+        """Get or set the For inflow boundaries in problems involving chemical reacting flows, the chemical mixture of the fluid entering the domain is defined with a *CHEMISTRY_  COMPOSITION card with this ID [Not yet available].
         """ # nopep8
         return self._cards[0].get_value("idcomp")
 
@@ -105,43 +102,10 @@ class DualceseBoundaryPrescribedVnMsurf(KeywordBase):
         self._cards[0].set_value("idcomp", value)
 
     @property
-    def dirx(self) -> typing.Optional[float]:
-        """Get or set the If this vector is non-zero, then it is used as the prescribed flow direction
-        """ # nopep8
-        return self._cards[0].get_value("dirx")
-
-    @dirx.setter
-    def dirx(self, value: float) -> None:
-        """Set the dirx property."""
-        self._cards[0].set_value("dirx", value)
-
-    @property
-    def diry(self) -> typing.Optional[float]:
-        """Get or set the If this vector is non-zero, then it is used as the prescribed flow direction
-        """ # nopep8
-        return self._cards[0].get_value("diry")
-
-    @diry.setter
-    def diry(self, value: float) -> None:
-        """Set the diry property."""
-        self._cards[0].set_value("diry", value)
-
-    @property
-    def dirz(self) -> typing.Optional[float]:
-        """Get or set the If this vector is non-zero, then it is used as the prescribed flow direction
-        """ # nopep8
-        return self._cards[0].get_value("dirz")
-
-    @dirz.setter
-    def dirz(self, value: float) -> None:
-        """Set the dirz property."""
-        self._cards[0].set_value("dirz", value)
-
-    @property
     def lc_vn(self) -> typing.Optional[int]:
         """Get or set the Load curve or function ID to describe the normal velocity as a function of time or a function of position, velocity, temperature, pressure, and time, f(x, y, z, vx, vy, vz, temp, pres, time), respectively.
-        EQ.0:	The normal velocity is a constant with value SF_‌VN.
-        EQ. - 1 : The normal velocity is computed by the solver.
+        EQ.0: The normal velocity is a constant with value SF_VN.
+        EQ. - 1: The normal velocity is computed by the solver.
         """ # nopep8
         return self._cards[1].get_value("lc_vn")
 

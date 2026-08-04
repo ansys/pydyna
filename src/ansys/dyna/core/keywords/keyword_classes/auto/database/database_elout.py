@@ -59,7 +59,7 @@ class DatabaseElout(KeywordBase):
         ]
     @property
     def dt(self) -> float:
-        """Get or set the Time interval between outputs. If DT is zero, no output is printed, This field will be used for all selected ASCII_options that have no unique DT value specified
+        """Get or set the Time interval between outputs. If DT is zero, no output is printed..  If DT<0, the result will be output every -DT time steps.
         """ # nopep8
         return self._cards[0].get_value("dt")
 

@@ -110,7 +110,7 @@ class InitialVelocity(KeywordBase):
 
     @property
     def boxid(self) -> int:
-        """Get or set the All nodes in the box which belong to NSID are initialized. Nodes outside the box are not initalized. Exempted nodes are initialized to velocities defined by VXE, VYE, and VZE below regardless of their location relative to the box.
+        """Get or set the All nodes in the box that belong to NSID are initialized. Nodes outside the box are not initalized. Exempted nodes are initialized to velocities defined by VXE, VYE, and VZE below regardless of their location relative to the box.
         Note VXE,VYE and VZE will only be shown once a value is input for NSIDEX.
         """ # nopep8
         return self._cards[0].get_value("boxid")
@@ -122,10 +122,10 @@ class InitialVelocity(KeywordBase):
 
     @property
     def irigid(self) -> int:
-        """Get or set the Option to overwrite rigid body velocities defined on *PART_INERTIA and *CONSTRAINED_NODAL_RIGID_BODY_INERTIA cards.
-        GE.1: part set ID, containing ID of parts to overwrite. Centre of gravity of part must lie within box BOXID. If BOXID is not defined then all parts defined in the set are overwritten.
-        EQ.-1: Overwrite velocities for all *PART_INERTIA's and *CONSTRAINED_NODAL_RIGID_BODY_INERTIA 's with a centre of gravity within box BOXID. If BOXID is not defined then all are overwritten.
-        EQ.-2: Overwrite velocities for all *PART_INERTIA's and *CONSTRAINED_NODAL_RIGID_BODY_INERTIA's.
+        """Get or set the Option to overwrite rigid body velocities defined on *PART_INERTIA or *CONSTRAINED_NODAL_RIGID_BODY_INERTIA cards.
+        GE.1:	Part set ID containing IDs of parts to overwrite.The center of gravity of a part must lie within box BOXID.If BOXID is not defined, then all parts specified in the set are overwritten.
+        EQ. - 1 : Overwrite velocities for all rigid bodies defined with* PART_INERTIA or *CONSTRAINED_NODAL_RIGID_BODY_INERTIA that have a center of gravity within box BOXID.If BOXID is not defined, then all are overwritten.
+        EQ. - 2 : Overwrite velocities for all rigid bodies defined with* PART_INERTIA or *CONSTRAINED_NODAL_RIGID_BODY_INERTIA.
         """ # nopep8
         return self._cards[0].get_value("irigid")
 

@@ -224,9 +224,9 @@ class MatFrazerNashRubberModel(KeywordBase):
 
     @property
     def exit(self) -> typing.Optional[float]:
-        """Get or set the Exit option:
-        EQ.0.0: stop if strain limits are exceeded (recommended),
-        NE.0.0: continue if strain limits are exceeded. The curve is then extrapolated.
+        """Get or set the Exit option(only in explicit analysis):
+        EQ.1.0: Stop if strain limits are exceeded (recommended),
+        NE.1.0: Continue if strain limits are exceeded. The curve is then extrapolated.
         """ # nopep8
         return self._cards[1].get_value("exit")
 
@@ -259,9 +259,9 @@ class MatFrazerNashRubberModel(KeywordBase):
 
     @property
     def ref(self) -> float:
-        """Get or set the Use reference geometry to initialize the stress tensor ,see *INITIAL_FOAM_REFERENCE_ GEOMETRY (only 8-noded-solid elements with on integration point):
-        EQ.0.0: off (default),
-        EQ.1.0: on.
+        """Get or set the Use reference geometry to initialize the stress tensor ,see *INITIAL_FOAM_REFERENCE_GEOMETRY (only 8-noded-solid elements with on integration point):
+        EQ.0.0: Off (default),
+        EQ.1.0: On.
         """ # nopep8
         return self._cards[1].get_value("ref")
 
@@ -274,7 +274,7 @@ class MatFrazerNashRubberModel(KeywordBase):
 
     @property
     def sgl(self) -> typing.Optional[float]:
-        """Get or set the Specimen gauge length.
+        """Get or set the Specimen gauge length; see Figure Error! Reference source not found.
         """ # nopep8
         return self._cards[2].get_value("sgl")
 
@@ -285,7 +285,7 @@ class MatFrazerNashRubberModel(KeywordBase):
 
     @property
     def sw(self) -> typing.Optional[float]:
-        """Get or set the Specimen width.
+        """Get or set the Specimen width; see Figure Error! Reference source not found.
         """ # nopep8
         return self._cards[2].get_value("sw")
 
@@ -296,7 +296,7 @@ class MatFrazerNashRubberModel(KeywordBase):
 
     @property
     def st(self) -> typing.Optional[float]:
-        """Get or set the Specimen thickness.
+        """Get or set the Specimen thickness; see Figure Error! Reference source not found..
         """ # nopep8
         return self._cards[2].get_value("st")
 
@@ -307,7 +307,7 @@ class MatFrazerNashRubberModel(KeywordBase):
 
     @property
     def lcid(self) -> int:
-        """Get or set the Load curve ID, see DEFINE_CURVE, giving the force versus actual change in gauge length.
+        """Get or set the Load curve ID, see DEFINE_CURVE, giving the force versus actual change in gauge length. See also Figure Error! Reference source not found, for an alternative definition.
         """ # nopep8
         return self._cards[2].get_value("lcid")
 

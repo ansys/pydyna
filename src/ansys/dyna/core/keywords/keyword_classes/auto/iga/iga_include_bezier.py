@@ -68,7 +68,7 @@ class IgaIncludeBezier(KeywordBase):
 
     @property
     def filetype(self) -> typing.Optional[int]:
-        """Get or set the Type of the file to be included:EQ.1:	ASCII
+        """Get or set the Type of the file to be included:EQ.1: ASCII
         """ # nopep8
         return self._cards[1].get_value("filetype")
 
@@ -91,8 +91,8 @@ class IgaIncludeBezier(KeywordBase):
     @property
     def dim(self) -> typing.Optional[int]:
         """Get or set the Parametric dimension:
-        EQ.2:	Surface
-        EQ.3 : Volume
+        EQ.2: Surface
+        EQ.3: Volume
         """ # nopep8
         return self._cards[1].get_value("dim")
 

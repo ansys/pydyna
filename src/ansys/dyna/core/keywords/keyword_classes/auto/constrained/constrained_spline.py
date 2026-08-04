@@ -73,7 +73,7 @@ class ConstrainedSpline(KeywordBase):
 
     @property
     def dlratio(self) -> float:
-        """Get or set the Ratio of bending to torsional stiffness for an elastic tubular beam which connects the independent degrees of freedom. The default value is set to 0.10.
+        """Get or set the Ratio of bending to torsional stiffness for an elastic tubular beam which connects the independent degrees of freedom. The default value is 0.10.
         """ # nopep8
         return self._cards[0].get_value("dlratio")
 
@@ -99,9 +99,9 @@ class ConstrainedSpline(KeywordBase):
         EQ:1 x
         EQ:2 Y
         EQ:3:z
-        EQ:4:rotation about x axis
-        EQ:5:rotation about y axis
-        EQ:6:rotation about z axis
+        EQ:4:Rotation about x axis
+        EQ:5:Rotation about y axis
+        EQ:6:Rotation about z axis
         """ # nopep8
         return self._cards[1].get_value("dof")
 

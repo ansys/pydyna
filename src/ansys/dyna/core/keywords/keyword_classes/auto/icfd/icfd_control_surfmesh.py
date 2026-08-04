@@ -48,11 +48,10 @@ class IcfdControlSurfmesh(KeywordBase):
         ]
     @property
     def rsrf(self) -> int:
-        """Get or set the Indicates whether or not to perform a surface re-meshing.
-        EQ.0: no re-meshing is applied..
-        EQ.1: Laplacian smoothing surface remeshing
-        EQ.2: Curvature preserving surface remeshing.
-
+        """Get or set the Indicates whether or not to perform a surface remeshing:
+        EQ.0: Do not perform surface remeshing.
+        EQ.1: Perform Laplacian smoothing surface remeshing.
+        EQ.2: Perform curvature - preserving surface remeshing
         """ # nopep8
         return self._cards[0].get_value("rsrf")
 
@@ -65,17 +64,17 @@ class IcfdControlSurfmesh(KeywordBase):
 
     @property
     def sadapt(self) -> int:
-        """Get or set the Indicates whether or not to trigger adaptive surface remeshing.
-        EQ.0: no adaptive surface re-meshing is applied.
-        EQ.1: automatic surface remeshing when quality deteriorates (3D only).
-
+        """Get or set the Indicates whether or not to trigger adaptive surface remeshing:
+        EQ.0: Do not apply adaptive surface remeshing.
+        EQ.1: Apply automatic surface remeshing when quality deteriorates
+        EQ.2: Apply automatic surface remeshing when quality deteriorates. Keep the initial element size in the case of adaptive mesh refinement using *ICFD_CONTROL_ADAPT throughout the computation.
         """ # nopep8
         return self._cards[0].get_value("sadapt")
 
     @sadapt.setter
     def sadapt(self, value: int) -> None:
         """Set the sadapt property."""
-        if value not in [0, 1, None]:
-            raise Exception("""sadapt must be `None` or one of {0,1}.""")
+        if value not in [0, 1, 1, None]:
+            raise Exception("""sadapt must be `None` or one of {0,1,1}.""")
         self._cards[0].set_value("sadapt", value)
 

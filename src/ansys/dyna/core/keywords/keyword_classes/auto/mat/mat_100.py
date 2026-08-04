@@ -177,7 +177,7 @@ class Mat100(KeywordBase):
 
     @property
     def efail(self) -> typing.Optional[float]:
-        """Get or set the Effective plastic strain in weld material at failure.  The plastic strain must exceed the rupture strain (RS) at each integration point before deletion occurs.  See Card 3.
+        """Get or set the Effective plastic strain in weld material at failure. The plastic strain must exceed the rupture strain (RS) at each integration point before deletion occurs. See Card 3.
         """ # nopep8
         return self._cards[1].get_value("efail")
 

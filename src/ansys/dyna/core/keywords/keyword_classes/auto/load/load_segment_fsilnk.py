@@ -106,7 +106,7 @@ class LoadSegmentFsilnk(KeywordBase):
 
     @property
     def id1(self) -> typing.Optional[int]:
-        """Get or set the These must match COUPIDs from the *CONSTRAINED_LA-	GRANGE_IN_SOLID card from the previous runs. These IDs
+        """Get or set the These must match COUPIDs from the *CONSTRAINED_LA- GRANGE_IN_SOLID card from the previous runs. These IDs
         specify which of the first run's couplings are propagated into this
         run through pressure data read from the fsilnk file.
         """ # nopep8
@@ -119,7 +119,7 @@ class LoadSegmentFsilnk(KeywordBase):
 
     @property
     def id2(self) -> typing.Optional[int]:
-        """Get or set the These must match COUPIDs from the *CONSTRAINED_LA-	GRANGE_IN_SOLID card from the previous runs. These IDs
+        """Get or set the These must match COUPIDs from the *CONSTRAINED_LA- GRANGE_IN_SOLID card from the previous runs. These IDs
         specify which of the first run's couplings are propagated into this
         run through pressure data read from the fsilnk file.
         """ # nopep8
@@ -132,7 +132,7 @@ class LoadSegmentFsilnk(KeywordBase):
 
     @property
     def id3(self) -> typing.Optional[int]:
-        """Get or set the These must match COUPIDs from the *CONSTRAINED_LA-	GRANGE_IN_SOLID card from the previous runs. These IDs
+        """Get or set the These must match COUPIDs from the *CONSTRAINED_LA- GRANGE_IN_SOLID card from the previous runs. These IDs
         specify which of the first run's couplings are propagated into this
         run through pressure data read from the fsilnk file.
         """ # nopep8
@@ -145,7 +145,7 @@ class LoadSegmentFsilnk(KeywordBase):
 
     @property
     def id4(self) -> typing.Optional[int]:
-        """Get or set the These must match COUPIDs from the *CONSTRAINED_LA-	GRANGE_IN_SOLID card from the previous runs. These IDs
+        """Get or set the These must match COUPIDs from the *CONSTRAINED_LA- GRANGE_IN_SOLID card from the previous runs. These IDs
         specify which of the first run's couplings are propagated into this
         run through pressure data read from the fsilnk file.
         """ # nopep8
@@ -158,7 +158,7 @@ class LoadSegmentFsilnk(KeywordBase):
 
     @property
     def id5(self) -> typing.Optional[int]:
-        """Get or set the These must match COUPIDs from the *CONSTRAINED_LA-	GRANGE_IN_SOLID card from the previous runs. These IDs
+        """Get or set the These must match COUPIDs from the *CONSTRAINED_LA- GRANGE_IN_SOLID card from the previous runs. These IDs
         specify which of the first run's couplings are propagated into this
         run through pressure data read from the fsilnk file.
         """ # nopep8
@@ -171,7 +171,7 @@ class LoadSegmentFsilnk(KeywordBase):
 
     @property
     def id6(self) -> typing.Optional[int]:
-        """Get or set the These must match COUPIDs from the *CONSTRAINED_LA-	GRANGE_IN_SOLID card from the previous runs. These IDs
+        """Get or set the These must match COUPIDs from the *CONSTRAINED_LA- GRANGE_IN_SOLID card from the previous runs. These IDs
         specify which of the first run's couplings are propagated into this
         run through pressure data read from the fsilnk file.
         """ # nopep8
@@ -184,7 +184,7 @@ class LoadSegmentFsilnk(KeywordBase):
 
     @property
     def id7(self) -> typing.Optional[int]:
-        """Get or set the These must match COUPIDs from the *CONSTRAINED_LA-	GRANGE_IN_SOLID card from the previous runs. These IDs
+        """Get or set the These must match COUPIDs from the *CONSTRAINED_LA- GRANGE_IN_SOLID card from the previous runs. These IDs
         specify which of the first run's couplings are propagated into this
         run through pressure data read from the fsilnk file.
         """ # nopep8
@@ -197,7 +197,7 @@ class LoadSegmentFsilnk(KeywordBase):
 
     @property
     def id8(self) -> typing.Optional[int]:
-        """Get or set the These must match COUPIDs from the *CONSTRAINED_LA-	GRANGE_IN_SOLID card from the previous runs. These IDs
+        """Get or set the These must match COUPIDs from the *CONSTRAINED_LA- GRANGE_IN_SOLID card from the previous runs. These IDs
         specify which of the first run's couplings are propagated into this
         run through pressure data read from the fsilnk file.
         """ # nopep8

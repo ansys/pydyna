@@ -37,6 +37,8 @@ _LOADTHERMALBINOUT_CARD1 = (
 _LOADTHERMALBINOUT_CARD2 = (
     FieldSchema("startt", float, 0, 10, 0.0),
     FieldSchema("tsf", float, 10, 10, 1.0),
+    FieldSchema("tmpoff", float, 20, 10, 0.0),
+    FieldSchema("nidoff", int, 30, 10, 0),
 )
 
 class LoadThermalBinout(KeywordBase):
@@ -105,4 +107,26 @@ class LoadThermalBinout(KeywordBase):
     def tsf(self, value: float) -> None:
         """Set the tsf property."""
         self._cards[2].set_value("tsf", value)
+
+    @property
+    def tmpoff(self) -> float:
+        """Get or set the Temperature offset that is added to the temperature data in the specified LSDA input file
+        """ # nopep8
+        return self._cards[2].get_value("tmpoff")
+
+    @tmpoff.setter
+    def tmpoff(self, value: float) -> None:
+        """Set the tmpoff property."""
+        self._cards[2].set_value("tmpoff", value)
+
+    @property
+    def nidoff(self) -> int:
+        """Get or set the Offset to user node ID.  Input value is added to the IDs as specified in the LSDA file before mapping temperature information.
+        """ # nopep8
+        return self._cards[2].get_value("nidoff")
+
+    @nidoff.setter
+    def nidoff(self, value: int) -> None:
+        """Set the nidoff property."""
+        self._cards[2].set_value("nidoff", value)
 

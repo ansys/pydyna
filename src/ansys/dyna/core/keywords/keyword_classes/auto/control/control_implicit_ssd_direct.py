@@ -54,8 +54,8 @@ class ControlImplicitSsdDirect(KeywordBase):
     @property
     def issflg(self) -> int:
         """Get or set the Complex steady state vibration flag:
-        EQ.0:	Off
-        EQ.1 : On.
+        EQ.0: Off
+        EQ.1: On.
         """ # nopep8
         return self._cards[0].get_value("issflg")
 
@@ -68,7 +68,7 @@ class ControlImplicitSsdDirect(KeywordBase):
 
     @property
     def fmin(self) -> typing.Optional[float]:
-        """Get or set the Minimum frequency in the solution. Units are Hertz.
+        """Get or set the Minimum frequency in the solution.
         """ # nopep8
         return self._cards[0].get_value("fmin")
 
@@ -79,7 +79,7 @@ class ControlImplicitSsdDirect(KeywordBase):
 
     @property
     def fmax(self) -> typing.Optional[float]:
-        """Get or set the Maximum frequency in the solution. Units are Hertz.
+        """Get or set the Maximum frequency in the solution.
         """ # nopep8
         return self._cards[0].get_value("fmax")
 
@@ -113,12 +113,12 @@ class ControlImplicitSsdDirect(KeywordBase):
     @property
     def fspace(self) -> float:
         """Get or set the Solution frequency assignment strategy:
-        EQ.0:	The frequency is interpolated linearly between FMIN and FMAX.This is the default strategy.
-        EQ.1 : The frequency is interpolated on a log scale between FMIN and FMAX, so they are biased to lower frequencies.
-        EQ.2 : The frequency is interpolated on a fractional octave scale starting with FMIN.Integer FRACTN is the octave fraction.
-        The formula for the active frequency in Hertz is "FACTIVE" = "FMIN" (2.0) ^ (1 / "FRACTN")) ^ (("IFREQ" - 1)).
+        EQ.0: The frequency is interpolated linearly between FMIN and FMAX.This is the default strategy.
+        EQ.1: The frequency is interpolated on a log scale between FMIN and FMAX, so they are biased to lower frequencies.
+        EQ.2: The frequency is interpolated on a fractional octave scale starting with FMIN.Integer FRACTN is the octave fraction.
+        The formula for the active frequency in Hertz is "FACTIVE" = "FMIN" (2.0) ** (1 / "FRACTN")) ** (("IFREQ" - 1)).
         IFREQ is the ith frequency in the solution.FMAX is ignored.
-        LT.0 : | "FSPACE" | is a load curve ID for assigning active frequencies.The abscissa is frequencies in the solutionand the ordinate is the active frequency in Hertz.FMINand FMAX are ignored.
+        LT.0: | "FSPACE" | is a load curve ID for assigning active frequencies.The abscissa is frequencies in the solutionand the ordinate is the active frequency in Hertz.FMINand FMAX are ignored.
         """ # nopep8
         return self._cards[0].get_value("fspace")
 
@@ -129,7 +129,7 @@ class ControlImplicitSsdDirect(KeywordBase):
 
     @property
     def fractn(self) -> int:
-        """Get or set the Octave fraction. For example, FRACTN = 3 means 1⁄3 octave spacing.
+        """Get or set the Octave fraction. For example, FRACTN = 3 means 13 octave spacing.
         """ # nopep8
         return self._cards[0].get_value("fractn")
 

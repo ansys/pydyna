@@ -121,7 +121,7 @@ class MatThermalIsotropicTd(KeywordBase):
         ]
     @property
     def tmid(self) -> typing.Optional[int]:
-        """Get or set the Thermal conductivity at T1al material identification, a unique number has to be used.
+        """Get or set the Thermal material identification, a unique number has to be used.
         """ # nopep8
         return self._cards[0].get_value("tmid")
 
@@ -145,9 +145,9 @@ class MatThermalIsotropicTd(KeywordBase):
     @property
     def tgrlc(self) -> typing.Optional[float]:
         """Get or set the Thermal generation rate (see *DEFINE_CURVE).
-        GT.0:	Load curve ID giving thermal generation rate as a function of time
-        EQ.0 : Thermal generation rate is the constant multiplier, TGMULT.
-        LT.0 : | TGRLC | is a load curve ID defining thermal generation rate as a function of temperature.
+        GT.0: Load curve ID giving thermal generation rate as a function of time
+        EQ.0: Thermal generation rate is the constant multiplier, TGMULT.
+        LT.0: | TGRLC | is a load curve ID defining thermal generation rate as a function of temperature.
         """ # nopep8
         return self._cards[0].get_value("tgrlc")
 

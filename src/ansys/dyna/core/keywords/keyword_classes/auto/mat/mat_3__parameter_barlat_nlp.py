@@ -74,9 +74,9 @@ _MAT3_PARAMETERBARLATNLP_CARD3 = (
 )
 
 _MAT3_PARAMETERBARLATNLP_CARD4 = (
-    FieldSchema("xp", float, 0, 10, None),
-    FieldSchema("yp", float, 10, 10, None),
-    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
     FieldSchema("a1", float, 30, 10, None),
     FieldSchema("a2", float, 40, 10, None),
     FieldSchema("a3", float, 50, 10, None),
@@ -187,7 +187,9 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
 
     @property
     def e(self) -> typing.Optional[float]:
-        """Get or set the Young's modulus.
+        """Get or set the Young's modulus, E.
+        GT.0.0: Constant value
+        LT.0.0 : Load curve ID = |E|, which defines Young's modulus as a function of plastic strain.See Remark 1
         """ # nopep8
         return self._cards[0].get_value("e")
 
@@ -211,22 +213,23 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
     def hr(self) -> float:
         """Get or set the Hardening rule:
         EQ.1.0: linear (default),
-        EQ.2.0: exponential.
-        EQ.3.0: load curve.
-        EQ.4.0: exponential (Voce)
-        EQ.5.0: exponential (Gosh)
-        EQ.6.0: exponential (Hocket-Sherby)
-        EQ.7.0 load curve in three directions
-        EQ.8.0: table with temperature dependence
-        EQ.9.0: 3d table with temperature and strain rate dependence
+        EQ.2.0: Exponential.
+        EQ.3.0: Load curve.
+        EQ.4.0: Exponential (Voce)
+        EQ.5.0: Exponential (Gosh)
+        EQ.6.0: Exponential (Hocket-Sherby)
+        EQ.7.0 Load curve in three directions
+        EQ.8.0: Table with temperature dependence
+        EQ.9.0: Three dimensional table with temperature and strain rate dependence.
+        EQ.10.0: Table with prestrain dependence.
         """ # nopep8
         return self._cards[0].get_value("hr")
 
     @hr.setter
     def hr(self, value: float) -> None:
         """Set the hr property."""
-        if value not in [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, None]:
-            raise Exception("""hr must be `None` or one of {1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0}.""")
+        if value not in [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, None]:
+            raise Exception("""hr must be `None` or one of {1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0}.""")
         self._cards[0].set_value("hr", value)
 
     @property
@@ -258,8 +261,8 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
     @property
     def iter(self) -> float:
         """Get or set the Iteration flag for speed:
-        ITER.EQ.0.0: fully iterative
-        ITER.EQ.1.0: fixed at three iterations
+        EQ.0.0: Fully iterative
+        EQ.1.0: Fixed at three iterations
         Generally, ITER=0 is recommended. However, ITER=1 is somewhat faster and may give acceptable results in most problems.
         """ # nopep8
         return self._cards[0].get_value("iter")
@@ -284,7 +287,9 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
 
     @property
     def r00(self) -> typing.Optional[float]:
-        """Get or set the R00 , Lankford parmeter determined from experiments.
+        """Get or set the R00,Lankford parameter in the 0° direction:
+        GT.0.0: Constant value
+        LT.0.0 : Load curve or table ID = |R00|  which defines R_00 as a function of plastic strain(curve) or as a function of temperature and plastic strain(table).See Remarks 1, 2, and 3.
         """ # nopep8
         return self._cards[1].get_value("r00")
 
@@ -295,7 +300,9 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
 
     @property
     def r45(self) -> typing.Optional[float]:
-        """Get or set the R45 , Lankford parmeter determined from experiments.
+        """Get or set the R45, Lankford parameter in the 45° direction:
+        GT.0.0: Constant value
+        LT.0.0 : Load curve or table ID = |R45| which defines R_45 as a function of plastic strain(curve) or as a function of temperature and plastic strain(table).See Remarks 1, 2, and 3.
         """ # nopep8
         return self._cards[1].get_value("r45")
 
@@ -306,7 +313,9 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
 
     @property
     def r90(self) -> typing.Optional[float]:
-        """Get or set the R90 , Lankford parmeter determined from experiments.
+        """Get or set the R90, Lankford parameter in the 90° direction:
+        GT.0.0: Constant value
+        LT.0.0 : Load curve or table ID = |R90| which defines R_90 as a function of plastic strain(curve) or as a function of temperature and plastic strain(table).See Remarks 1, 2, and 3.
         """ # nopep8
         return self._cards[1].get_value("r90")
 
@@ -339,10 +348,11 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
 
     @property
     def spi(self) -> typing.Optional[float]:
-        """Get or set the spi, if epsilon-0 is zero above (default = 0.0).
-        EQ.0.0: e0 = (E/k )**[1/(n -1)]
-        LT..02: e0 = spi
-        GT..02: e0 = (spi/k)**[1/n].
+        """Get or set the Case I: If HR = 2.0 and E0 is zero, then ε_0 is determined by (see Remark 5):
+        EQ.0.0: ε_0 = (E / k) ^ [1⁄((n - 1))] , default
+        LE.0.02 : ε_0 = SPI
+        GT.0.02 : ε_0 = (SPI / k) ^ [1⁄n]
+        Case II : If HR = 5.0 and E0 is zero, then the strain at plastic yield is determined by an iterative procedure based on the same principles as for HR = 2.0.See Remark 5.
         """ # nopep8
         return self._cards[1].get_value("spi")
 
@@ -459,7 +469,7 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
         element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
         EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
         *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
         """ # nopep8
@@ -494,7 +504,7 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
 
     @property
     def vlcid(self) -> typing.Optional[int]:
-        """Get or set the Volume correction curve ID defining the relative volume change (change in volume relative to the initial volume) as a function of the effective plastic strain.  This is only used when nonzero.
+        """Get or set the Volume correction curve ID defining the relative volume change (change in volume relative to the initial volume) as a function of the effective plastic strain. This is only used when nonzero.
         """ # nopep8
         return self._cards[3].get_value("vlcid")
 
@@ -516,9 +526,8 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
 
     @property
     def nlp(self) -> typing.Optional[int]:
-        """Get or set the ID of a load curve of the Forming Limit Diagram (FLD) under linear
-        strain paths. In the load curve, abscissas represent minor strains
-        while ordinates represent major strains. Define only when option	NLP is used.
+        """Get or set the ID of a load curve of the Forming Limit Diagram (FLD) under linear strain paths. In the load curve, abscissas represent minor strains
+        while ordinates represent major strains. Define only when option NLP is used.
         """ # nopep8
         return self._cards[3].get_value("nlp")
 
@@ -537,39 +546,6 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
     def htb(self, value: float) -> None:
         """Set the htb property."""
         self._cards[3].set_value("htb", value)
-
-    @property
-    def xp(self) -> typing.Optional[float]:
-        """Get or set the x-coordinates of point p for AOPT = 1.
-        """ # nopep8
-        return self._cards[4].get_value("xp")
-
-    @xp.setter
-    def xp(self, value: float) -> None:
-        """Set the xp property."""
-        self._cards[4].set_value("xp", value)
-
-    @property
-    def yp(self) -> typing.Optional[float]:
-        """Get or set the y-coordinates of point p for AOPT = 1.
-        """ # nopep8
-        return self._cards[4].get_value("yp")
-
-    @yp.setter
-    def yp(self, value: float) -> None:
-        """Set the yp property."""
-        self._cards[4].set_value("yp", value)
-
-    @property
-    def zp(self) -> typing.Optional[float]:
-        """Get or set the z-coordinates of point p for AOPT = 1.
-        """ # nopep8
-        return self._cards[4].get_value("zp")
-
-    @zp.setter
-    def zp(self, value: float) -> None:
-        """Set the zp property."""
-        self._cards[4].set_value("zp", value)
 
     @property
     def a1(self) -> typing.Optional[float]:
@@ -720,8 +696,8 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
     @property
     def usrfail(self) -> float:
         """Get or set the User defined failure flag:
-        EQ.0:	no user subroutine is called.
-        EQ.1 : user subroutine matusr_‌24 in dyn21.f is called
+        EQ.0: No user subroutine is called.
+        EQ.1: User subroutine matusr_24 in dyn21.f is called
         """ # nopep8
         return self._cards[6].get_value("usrfail")
 
@@ -734,8 +710,8 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
 
     @property
     def lcbi(self) -> typing.Optional[float]:
-        """Get or set the HR.EQ.7:	load curve defining biaxial stress as a function of biaxial strain for hardening rule; see discussion in the formulation section below for a definition.
-        HR.NE.7:	ignored
+        """Get or set the HR.EQ.7: Load curve defining biaxial stress as a function of biaxial strain for hardening rule; see discussion in the formulation section below for a definition.
+        HR.NE.7: Ignored
         """ # nopep8
         return self._cards[6].get_value("lcbi")
 
@@ -746,8 +722,8 @@ class Mat3_ParameterBarlatNlp(KeywordBase):
 
     @property
     def lcsh(self) -> typing.Optional[float]:
-        """Get or set the HR.EQ.7:	load curve defining shear stress as a function of shear strain for hardening; see discussion in the formulation section below for a definition.
-        HR.NE.7:	ignored
+        """Get or set the HR.EQ.7: Load curve defining shear stress as a function of shear strain for hardening; see discussion in the formulation section below for a definition.
+        HR.NE.7: Ignored
         """ # nopep8
         return self._cards[6].get_value("lcsh")
 

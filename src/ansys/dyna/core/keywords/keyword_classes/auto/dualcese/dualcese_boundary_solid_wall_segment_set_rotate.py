@@ -59,7 +59,7 @@ class DualceseBoundarySolidWallSegmentSetRotate(KeywordBase):
         ]
     @property
     def ssid(self) -> typing.Optional[int]:
-        """Get or set the Segment set ID created with *DUALCESE_SEGMENTSET
+        """Get or set the Segment set ID for the segment set created with *DUALCESE_SEGMENTSET or *DUALCESE_BLOCKMESH
         """ # nopep8
         return self._cards[0].get_value("ssid")
 

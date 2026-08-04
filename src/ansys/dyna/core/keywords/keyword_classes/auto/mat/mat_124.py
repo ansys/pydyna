@@ -270,8 +270,8 @@ class Mat124(KeywordBase):
     @property
     def srflag(self) -> typing.Optional[float]:
         """Get or set the Formulation for rate effects:
-        EQ.0.0:  Total strain rate,
-        EQ.1.0:  Deviatoric strain rate
+        EQ.0.0: Total strain rate,
+        EQ.1.0: Deviatoric strain rate
         """ # nopep8
         return self._cards[1].get_value("srflag")
 
@@ -360,8 +360,8 @@ class Mat124(KeywordBase):
     @property
     def pcutf(self) -> typing.Optional[float]:
         """Get or set the Pressure cut-off flag.
-        EQ.0.0:  Inactive,
-        EQ.1.0:  Active
+        EQ.0.0: Inactive,
+        EQ.1.0: Active
         """ # nopep8
         return self._cards[2].get_value("pcutf")
 
@@ -372,7 +372,7 @@ class Mat124(KeywordBase):
 
     @property
     def srfilt(self) -> typing.Optional[float]:
-        """Get or set the Strain rate filtering parameter in exponential moving average with admissible values ranging from 0 to 1 (available for LCSRC≠0 or LCSRT≠0 and SRFLAG = 0 or 1)
+        """Get or set the Strain rate filtering parameter in exponential moving average with admissible values ranging from 0 to 1 (available for LCSRC.NE.0 or LCSRT.NE.0 and SRFLAG = 0 or 1)
         """ # nopep8
         return self._cards[2].get_value("srfilt")
 
@@ -383,7 +383,7 @@ class Mat124(KeywordBase):
 
     @property
     def k(self) -> typing.Optional[float]:
-        """Get or set the Optional bulk modulus for the viscoelastic material.  If nonzero a Kelvin type behavior will be obtained.  Generally, K is set to zero.
+        """Get or set the Optional bulk modulus for the viscoelastic material. If nonzero a Kelvin type behavior will be obtained. Generally, K is set to zero.
         """ # nopep8
         return self._cards[3].get_value("k")
 

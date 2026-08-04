@@ -68,8 +68,8 @@ class BoundaryAcousticNonReflecting(KeywordBase):
     @property
     def nrbtyp(self) -> typing.Optional[int]:
         """Get or set the Absorbing boundary type:
-        EQ.1:	Plane wave absorbing boundary
-        EQ.2 : Curved wave absorbing boundary(see CRVOPT).
+        EQ.1: Plane wave absorbing boundary
+        EQ.2: Curved wave absorbing boundary(see CRVOPT).
         """ # nopep8
         return self._cards[0].get_value("nrbtyp")
 
@@ -81,8 +81,8 @@ class BoundaryAcousticNonReflecting(KeywordBase):
     @property
     def crvopt(self) -> typing.Optional[int]:
         """Get or set the Curvature specification option for NRBTYP = 2:
-        EQ.1:	Provide average curvature, 1/R
-        EQ.2 : Provide coordinates of the center of curvature, (Xc,Yc,Zc).
+        EQ.1: Provide average curvature, 1/R
+        EQ.2: Provide coordinates of the center of curvature, (Xc,Yc,Zc).
         """ # nopep8
         return self._cards[0].get_value("crvopt")
 
@@ -93,8 +93,8 @@ class BoundaryAcousticNonReflecting(KeywordBase):
 
     @property
     def data1(self) -> typing.Optional[float]:
-        """Get or set the CRVOPT.EQ.1:	Average curvature, 1/R
-        CRVOPT.EQ.2:	Coordinate Xc.
+        """Get or set the CRVOPT.EQ.1: Average curvature, 1/R
+        CRVOPT.EQ.2: Coordinate Xc.
         """ # nopep8
         return self._cards[0].get_value("data1")
 

@@ -55,8 +55,8 @@ _ELEMENTBEARING_CARD2 = (
 )
 
 _ELEMENTBEARING_CARD3 = (
-    FieldSchema("ao", float, 0, 10, 0.0),
-    FieldSchema("ai", float, 10, 10, 0.0),
+    FieldSchema("a0", float, 0, 10, 0.0),
+    FieldSchema("bi", float, 10, 10, 0.0),
     FieldSchema("bo", float, 20, 10, 0.0),
     FieldSchema("pd", float, 30, 10, 0.0),
 )
@@ -109,7 +109,7 @@ class ElementBearing(KeywordBase):
         ]
     @property
     def id(self) -> typing.Optional[int]:
-        """Get or set the 
+        """Get or set the Bearing ID
         """ # nopep8
         return self._cards[0].get_value("id")
 
@@ -121,8 +121,8 @@ class ElementBearing(KeywordBase):
     @property
     def itype(self) -> int:
         """Get or set the Bearing type: EQ.0: default
-        EQ.1:ball bearing
-        EQ.2:  roller bearing
+        EQ.1:Ball bearing
+        EQ.2: Roller bearing
         """ # nopep8
         return self._cards[0].get_value("itype")
 
@@ -135,7 +135,7 @@ class ElementBearing(KeywordBase):
 
     @property
     def n1(self) -> typing.Optional[int]:
-        """Get or set the Node on centerline of shaft
+        """Get or set the Node on the centerline of the shaft(the shaft rotates)
         """ # nopep8
         return self._cards[0].get_value("n1")
 
@@ -146,7 +146,7 @@ class ElementBearing(KeywordBase):
 
     @property
     def cid1(self) -> typing.Optional[int]:
-        """Get or set the Coordinate ID on shaft. The local z axis defines the axis of rotation.
+        """Get or set the Coordinate system ID orienting the  shaft. The local z axis defines the axis of rotation.
         """ # nopep8
         return self._cards[0].get_value("cid1")
 
@@ -157,7 +157,7 @@ class ElementBearing(KeywordBase):
 
     @property
     def n2(self) -> typing.Optional[int]:
-        """Get or set the Node on centerline of bearing. It should initially coincide with N1.
+        """Get or set the Node on the centerline of the bearing. It should initially coincide with N1.
         """ # nopep8
         return self._cards[0].get_value("n2")
 
@@ -168,7 +168,7 @@ class ElementBearing(KeywordBase):
 
     @property
     def ci2(self) -> typing.Optional[int]:
-        """Get or set the Coordinate ID on bearing. The local z axis defines the axis of rotation.
+        """Get or set the Coordinate system ID orienting the bearing. The local z axis defines the axis of rotation.
         """ # nopep8
         return self._cards[0].get_value("ci2")
 
@@ -234,7 +234,7 @@ class ElementBearing(KeywordBase):
 
     @property
     def stresl(self) -> float:
-        """Get or set the Specified value of the bearing stress required to print a warning message that the value has been reached. If it is 0.0, then no message is printe.
+        """Get or set the Value of the bearing stress that causes LS-DYNA to print a warning message when it has been reached. If it is 0.0, then no message is printe.
         """ # nopep8
         return self._cards[1].get_value("stresl")
 
@@ -288,30 +288,30 @@ class ElementBearing(KeywordBase):
         self._cards[2].set_value("dm", value)
 
     @property
-    def ao(self) -> float:
-        """Get or set the Initial contact angle
+    def a0(self) -> float:
+        """Get or set the Initial contact angle in degrees
         """ # nopep8
-        return self._cards[3].get_value("ao")
+        return self._cards[3].get_value("a0")
 
-    @ao.setter
-    def ao(self, value: float) -> None:
-        """Set the ao property."""
-        self._cards[3].set_value("ao", value)
+    @a0.setter
+    def a0(self, value: float) -> None:
+        """Set the a0 property."""
+        self._cards[3].set_value("a0", value)
 
     @property
-    def ai(self) -> float:
-        """Get or set the Inner groove radius to ball diameter ratio.
+    def bi(self) -> float:
+        """Get or set the Inner groove radius to ball diameter ratio for ball bearings and the roller length for roller bearings.
         """ # nopep8
-        return self._cards[3].get_value("ai")
+        return self._cards[3].get_value("bi")
 
-    @ai.setter
-    def ai(self, value: float) -> None:
-        """Set the ai property."""
-        self._cards[3].set_value("ai", value)
+    @bi.setter
+    def bi(self, value: float) -> None:
+        """Set the bi property."""
+        self._cards[3].set_value("bi", value)
 
     @property
     def bo(self) -> float:
-        """Get or set the Outer race groove radius to ball diameter ratio.
+        """Get or set the Outer race groove radius to ball diameter ratio. Unused for roller bearings.
         """ # nopep8
         return self._cards[3].get_value("bo")
 
@@ -322,7 +322,7 @@ class ElementBearing(KeywordBase):
 
     @property
     def pd(self) -> float:
-        """Get or set the Bearing clearance when no load is applied.
+        """Get or set the Total radial clearance between the ball bearings and races when no load is applied.
         """ # nopep8
         return self._cards[3].get_value("pd")
 
@@ -334,9 +334,9 @@ class ElementBearing(KeywordBase):
     @property
     def ipflag(self) -> int:
         """Get or set the Preload flag
-        EQ.0: no preload.
-        EQ.1: displacement preload specified.
-        EQ.2: force preload specified.
+        EQ.0: No preload.
+        EQ.1: Displacement.
+        EQ.2: Force preload specified.
         """ # nopep8
         return self._cards[4].get_value("ipflag")
 

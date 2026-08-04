@@ -56,8 +56,7 @@ class LoadDensityDepth(KeywordBase):
         ]
     @property
     def psid(self) -> int:
-        """Get or set the Part set ID, see *SET_PART.
-        EQ.0: all parts are initialized.
+        """Get or set the Part set ID, see *SET_PART. If a PSID of zero is defined, all parts are initialized.
         """ # nopep8
         return self._cards[0].get_value("psid")
 
@@ -80,9 +79,9 @@ class LoadDensityDepth(KeywordBase):
     @property
     def dir(self) -> int:
         """Get or set the Direction of loading:
-        EQ.1: global x (default),
-        EQ.2: global y,
-        EQ.3: global z.
+        EQ.1: Global x (default),
+        EQ.2: Global y,
+        EQ.3: Global z.
         """ # nopep8
         return self._cards[0].get_value("dir")
 
@@ -95,7 +94,7 @@ class LoadDensityDepth(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining density versus depth, see *DEFINE_CURVE.
+        """Get or set the Load curve ID defining density as a function of depth; see *DEFINE_CURVE.
         """ # nopep8
         return self._cards[0].get_value("lcid")
 

@@ -61,8 +61,8 @@ class InitialFatigueDamageRatio(KeywordBase):
     @property
     def ptyp(self) -> int:
         """Get or set the Type of PID/PSID:
-        EQ.0: part ID
-        EQ.1: part set ID.
+        EQ.0: Part ID
+        EQ.1: Part set ID.
         """ # nopep8
         return self._cards[0].get_value("ptyp")
 

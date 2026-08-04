@@ -27,12 +27,12 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _EMCONTROL_CARD0 = (
-    FieldSchema("emsol", int, 0, 10, -1),
-    FieldSchema("numls", int, 10, 10, 100),
-    FieldSchema("macrodt", float, 20, 10, None),
+    FieldSchema("emsol", int, 0, 10, None),
+    FieldSchema("numls", int, 10, 10, None),
+    FieldSchema("biot", int, 20, 10, 0),
     FieldSchema("dimtype", int, 30, 10, 0),
     FieldSchema("nperio", int, 40, 10, 2),
-    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("eps0sf", float, 50, 10, 1.0),
     FieldSchema("ncylfem", int, 60, 10, 5000),
     FieldSchema("ncylbem", int, 70, 10, 5000),
 )
@@ -53,29 +53,36 @@ class EmControl(KeywordBase):
             ),
         ]
     @property
-    def emsol(self) -> int:
+    def emsol(self) -> typing.Optional[int]:
         """Get or set the Electromagnetism solver selector:
-        EQ.-1:Turns the EM solver off after reading the EM keywords.
-        EQ.1:eddy current solver.
-        EQ.2:induced heating solver.
-        EQ.3:resistive heating solver.
-        EQ.11:Electrophysiology monodomain.
-        EQ.12:Electrophysiology bidomain.
-        EQ.13:Electrophysiology monodmain coupled with bidomain.
-
+        EQ.-1: Turns the EM solver off after reading the EM keywords.
+        EQ.1: Eddy current and magnetostatics solver
+        EQ.2: Periodic inductive heating solver(see Remark 3)
+        EQ.3: Resistive heating solver
+        EQ.4: Frequency - based Eddy current solver(see Remark 3)
+        EQ.5: Periodic resistive heating solver(see Remark 3)
+        EQ.7: Helmholtz wave equation solver (see Remark 4)
+        EQ.8: Quasistatic electrostatics solver(see Remark 5)
+        EQ.9 : Radiofrequency(RF) Heating solver(see Remark 5)
+        EQ.11: Electrophysiology monodomain
+        EQ.12: Electrophysiology bidomain
+        EQ.13: Electrophysiology monodomain coupled with bidomain
+        EQ.14: Pure eikonal model. Activation times are computed and output in VTK format to the / vtk directory. See *EM_EP_EIKONAL.
+        EQ.15: Reaction eikonal(RE) model based on[1]. See *EM_EP_EIKONAL.
+        EQ.16: Reaction eikonal (RE+) model based on [1]. See *EM_EP_EIKONAL.
         """ # nopep8
         return self._cards[0].get_value("emsol")
 
     @emsol.setter
     def emsol(self, value: int) -> None:
         """Set the emsol property."""
-        if value not in [-1, 1, 2, 3, 11, 12, 13, None]:
-            raise Exception("""emsol must be `None` or one of {-1,1,2,3,11,12,13}.""")
+        if value not in [-1, 1, 2, 3, 4, 5, 7, 8, 9, 11, 12, 13, 14, 15, 16, None]:
+            raise Exception("""emsol must be `None` or one of {-1,1,2,3,4,5,7,8,9,11,12,13,14,15,16}.""")
         self._cards[0].set_value("emsol", value)
 
     @property
-    def numls(self) -> int:
-        """Get or set the Number of local EM steps in A whole period for EMSOL=2 If a negative value is entered, it will give the number of local EM steps as a function of the macro time
+    def numls(self) -> typing.Optional[int]:
+        """Get or set the 
         """ # nopep8
         return self._cards[0].get_value("numls")
 
@@ -85,30 +92,35 @@ class EmControl(KeywordBase):
         self._cards[0].set_value("numls", value)
 
     @property
-    def macrodt(self) -> typing.Optional[float]:
-        """Get or set the Macro timestep when EMSOL = 2.
+    def biot(self) -> int:
+        """Get or set the Biot-Savart type calculations:
+        EQ.0: No extra Biot-Savart type calculations
+        EQ.1: When the resistive heat solver is selected(EMSOL = 3), this option triggers a Lorentz force calculation in beam elements that have been defined as conductors.For a magnetostatic solve(EMSOL = 1), this option causes the output of a binary file embiotout(see Remark 7).
+        EQ.2 : This option causing reading in the embiotout binary file for the Biot - Savart solve.See Remark 7.
         """ # nopep8
-        return self._cards[0].get_value("macrodt")
+        return self._cards[0].get_value("biot")
 
-    @macrodt.setter
-    def macrodt(self, value: float) -> None:
-        """Set the macrodt property."""
-        self._cards[0].set_value("macrodt", value)
+    @biot.setter
+    def biot(self, value: int) -> None:
+        """Set the biot property."""
+        if value not in [0, 1, 2, None]:
+            raise Exception("""biot must be `None` or one of {0,1,2}.""")
+        self._cards[0].set_value("biot", value)
 
     @property
     def dimtype(self) -> int:
         """Get or set the EM dimension type:
         EQ.0:3D solve.
         EQ.1:2D planar with 4-zero thickness shell elements.
-        EQ.3:2D axisymmetric (Y axis only) with zero thickness elements.
+        EQ.2:2D axisymmetric (Y axis only) with zero thickness elements.
         """ # nopep8
         return self._cards[0].get_value("dimtype")
 
     @dimtype.setter
     def dimtype(self, value: int) -> None:
         """Set the dimtype property."""
-        if value not in [0, 1, 3, None]:
-            raise Exception("""dimtype must be `None` or one of {0,1,3}.""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""dimtype must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("dimtype", value)
 
     @property
@@ -121,6 +133,17 @@ class EmControl(KeywordBase):
     def nperio(self, value: int) -> None:
         """Set the nperio property."""
         self._cards[0].set_value("nperio", value)
+
+    @property
+    def eps0sf(self) -> float:
+        """Get or set the Optional scale sactor on Permittivity ?_0 . See Remark 6.
+        """ # nopep8
+        return self._cards[0].get_value("eps0sf")
+
+    @eps0sf.setter
+    def eps0sf(self, value: float) -> None:
+        """Set the eps0sf property."""
+        self._cards[0].set_value("eps0sf", value)
 
     @property
     def ncylfem(self) -> int:

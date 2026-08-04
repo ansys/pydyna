@@ -72,8 +72,8 @@ class AleFragmentation(KeywordBase):
     @property
     def fragtyp(self) -> int:
         """Get or set the Flag defining whether the failed material is completely or partially switched to vacuum.
-        EQ.1:	Fully switch; all failed material is switched to vacuum.
-        EQ.2:	Partially switch; only the volume expansion from the last time step is switched to vacuum
+        EQ.1: Fully switch; all failed material is switched to vacuum.
+        EQ.2: Partially switch; only the volume expansion from the last time step is switched to vacuum
         """ # nopep8
         return self._cards[0].get_value("fragtyp")
 

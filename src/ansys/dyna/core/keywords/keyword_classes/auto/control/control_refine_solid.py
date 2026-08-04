@@ -144,9 +144,9 @@ class ControlRefineSolid(KeywordBase):
     @property
     def ntotrf(self) -> int:
         """Get or set the Total number of elements to refine.  See Remark 2.
-        GT.0:	number of elements to refine
-        EQ.0:	NTOTRF = number of solid elements in IBOX
-        EQ.-1:	add clusters of 8 solids for the refinement during the run.
+        GT.0: number of elements to refine
+        EQ.0: NTOTRF = number of solid elements in IBOX
+        EQ.-1: add clusters of 8 solids for the refinement during the run.
         """ # nopep8
         return self._cards[1].get_value("ntotrf")
 
@@ -272,8 +272,6 @@ class ControlRefineSolid(KeywordBase):
     @critrm.setter
     def critrm(self, value: int) -> None:
         """Set the critrm property."""
-        if value not in [0, 1, 2, 3, 5, None]:
-            raise Exception("""critrm must be `None` or one of {0,1,2,3,5}.""")
         self._cards[2].set_value("critrm", value)
 
     @property

@@ -244,6 +244,20 @@ AleStructuredFsi
     :members:
 
 
+AleStructuredFsiAbext
+---------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_fsi_abext
+    :members:
+
+
+AleStructuredFsiAbint
+---------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_fsi_abint
+    :members:
+
+
 AleStructuredMesh
 -----------------
 
@@ -258,6 +272,13 @@ AleStructuredMeshControlPoints
     :members:
 
 
+AleStructuredMeshJoin
+---------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_mesh_join
+    :members:
+
+
 AleStructuredMeshMotion
 -----------------------
 
@@ -269,6 +290,13 @@ AleStructuredMeshRefine
 -----------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_mesh_refine
+    :members:
+
+
+AleStructuredMeshRefineRegion
+-----------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_mesh_refine_region
     :members:
 
 
@@ -300,6 +328,27 @@ AleStructuredMulti_MaterialGroup
     :members:
 
 
+AleStructuredMulti_MaterialGroup1Daxisym
+----------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_multi__material_group_1daxisym
+    :members:
+
+
+AleStructuredMulti_MaterialGroup1Dsphere
+----------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_multi__material_group_1dsphere
+    :members:
+
+
+AleStructuredMulti_MaterialGroup1Duniaxe
+----------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_multi__material_group_1duniaxe
+    :members:
+
+
 AleStructuredMulti_MaterialGroupAxisym
 --------------------------------------
 
@@ -307,10 +356,24 @@ AleStructuredMulti_MaterialGroupAxisym
     :members:
 
 
+AleStructuredMulti_MaterialGroupAxivol
+--------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_multi__material_group_axivol
+    :members:
+
+
 AleStructuredMulti_MaterialGroupPlneps
 --------------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_multi__material_group_plneps
+    :members:
+
+
+AleStructuredPointSource
+------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.ale_structured_point_source
     :members:
 
 

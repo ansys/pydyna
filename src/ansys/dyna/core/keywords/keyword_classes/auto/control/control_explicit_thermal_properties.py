@@ -121,8 +121,8 @@ class ControlExplicitThermalProperties(KeywordBase):
     @property
     def cptyp(self) -> int:
         """Get or set the Type of CP:
-        EQ.0:	CP is a constant
-        EQ.1 : CP is the ID of a * DEFINE_‌CURVE defining a table of temperature as a function of heat capacity.
+        EQ.0: CP is a constant
+        EQ.1: CP is the ID of a *DEFINE_CURVE defining a table of temperature as a function of heat capacity.
         """ # nopep8
         return self._cards[0].get_value("cptyp")
 
@@ -166,11 +166,11 @@ class ControlExplicitThermalProperties(KeywordBase):
     @property
     def local(self) -> int:
         """Get or set the Flag to activate an element coordinate system:
-        EQ.0:	The vectors VECIDj are considered in a global coordinate system.
-        EQ.1 : The vectors VECIDj are considered in a local system attached to the element.
-        For shells and solids, the system is the same as DIREC = 1 and CTYPE = 12 in * CONSTRAINED_LAGRANGE_IN_SOLID.
+        EQ.0: The vectors VECIDj are considered in a global coordinate system.
+        EQ.1: The vectors VECIDj are considered in a local system attached to the element.
+        For shells and solids, the system is the same as DIREC = 1 and CTYPE = 12 in *CONSTRAINED_LAGRANGE_IN_SOLID.
         For shells, the edge centers replace the face centers.For beams, the x - direction is aligned with
-        the first 2 nodes in * ELEMENT_BEAM and there should be a 3rd node for the y - direction.
+        the first 2 nodes in *ELEMENT_BEAM and there should be a 3rd node for the y - direction.
         """ # nopep8
         return self._cards[0].get_value("local")
 
@@ -217,8 +217,8 @@ class ControlExplicitThermalProperties(KeywordBase):
     @property
     def kxxtyp(self) -> int:
         """Get or set the Type of Kij:
-        EQ.0:	Kij is a constant
-        EQ.1 : Kij is the ID of a * DEFINE_‌CURVE defining a table of temperature as a function of heat conductivity.
+        EQ.0: Kij is a constant
+        EQ.1: Kij is the ID of a *DEFINE_CURVE defining a table of temperature as a function of heat conductivity.
         """ # nopep8
         return self._cards[1].get_value("kxxtyp")
 
@@ -232,8 +232,8 @@ class ControlExplicitThermalProperties(KeywordBase):
     @property
     def kxytyp(self) -> int:
         """Get or set the Type of Kij:
-        EQ.0:	Kij is a constant
-        EQ.1 : Kij is the ID of a * DEFINE_‌CURVE defining a table of temperature as a function of heat conductivity.
+        EQ.0: Kij is a constant
+        EQ.1: Kij is the ID of a *DEFINE_CURVE defining a table of temperature as a function of heat conductivity.
         """ # nopep8
         return self._cards[1].get_value("kxytyp")
 
@@ -247,8 +247,8 @@ class ControlExplicitThermalProperties(KeywordBase):
     @property
     def kxztyp(self) -> int:
         """Get or set the Type of Kij:
-        EQ.0:	Kij is a constant
-        EQ.1 : Kij is the ID of a * DEFINE_‌CURVE defining a table of temperature as a function of heat conductivity.
+        EQ.0: Kij is a constant
+        EQ.1: Kij is the ID of a *DEFINE_CURVE defining a table of temperature as a function of heat conductivity.
         """ # nopep8
         return self._cards[1].get_value("kxztyp")
 
@@ -295,8 +295,8 @@ class ControlExplicitThermalProperties(KeywordBase):
     @property
     def kyxtyp(self) -> int:
         """Get or set the Type of Kij:
-        EQ.0:	Kij is a constant
-        EQ.1 : Kij is the ID of a * DEFINE_‌CURVE defining a table of temperature as a function of heat conductivity.
+        EQ.0: Kij is a constant
+        EQ.1: Kij is the ID of a *DEFINE_CURVE defining a table of temperature as a function of heat conductivity.
         """ # nopep8
         return self._cards[2].get_value("kyxtyp")
 
@@ -310,8 +310,8 @@ class ControlExplicitThermalProperties(KeywordBase):
     @property
     def kyytyp(self) -> int:
         """Get or set the Type of Kij:
-        EQ.0:	Kij is a constant
-        EQ.1 : Kij is the ID of a * DEFINE_‌CURVE defining a table of temperature as a function of heat conductivity.
+        EQ.0: Kij is a constant
+        EQ.1: Kij is the ID of a *DEFINE_CURVE defining a table of temperature as a function of heat conductivity.
         """ # nopep8
         return self._cards[2].get_value("kyytyp")
 
@@ -325,8 +325,8 @@ class ControlExplicitThermalProperties(KeywordBase):
     @property
     def kyztyp(self) -> int:
         """Get or set the Type of Kij:
-        EQ.0:	Kij is a constant
-        EQ.1 : Kij is the ID of a * DEFINE_‌CURVE defining a table of temperature as a function of heat conductivity.
+        EQ.0: Kij is a constant
+        EQ.1: Kij is the ID of a *DEFINE_CURVE defining a table of temperature as a function of heat conductivity.
         """ # nopep8
         return self._cards[2].get_value("kyztyp")
 
@@ -373,8 +373,8 @@ class ControlExplicitThermalProperties(KeywordBase):
     @property
     def kzxtyp(self) -> int:
         """Get or set the Type of Kij:
-        EQ.0:	Kij is a constant
-        EQ.1 : Kij is the ID of a * DEFINE_‌CURVE defining a table of temperature as a function of heat conductivity.
+        EQ.0: Kij is a constant
+        EQ.1: Kij is the ID of a *DEFINE_CURVE defining a table of temperature as a function of heat conductivity.
         """ # nopep8
         return self._cards[3].get_value("kzxtyp")
 
@@ -388,8 +388,8 @@ class ControlExplicitThermalProperties(KeywordBase):
     @property
     def kzytyp(self) -> int:
         """Get or set the Type of Kij:
-        EQ.0:	Kij is a constant
-        EQ.1 : Kij is the ID of a * DEFINE_‌CURVE defining a table of temperature as a function of heat conductivity.
+        EQ.0: Kij is a constant
+        EQ.1: Kij is the ID of a *DEFINE_CURVE defining a table of temperature as a function of heat conductivity.
         """ # nopep8
         return self._cards[3].get_value("kzytyp")
 
@@ -403,8 +403,8 @@ class ControlExplicitThermalProperties(KeywordBase):
     @property
     def kzztyp(self) -> int:
         """Get or set the Type of Kij:
-        EQ.0:	Kij is a constant
-        EQ.1 : Kij is the ID of a * DEFINE_‌CURVE defining a table of temperature as a function of heat conductivity.
+        EQ.0: Kij is a constant
+        EQ.1: Kij is the ID of a *DEFINE_CURVE defining a table of temperature as a function of heat conductivity.
         """ # nopep8
         return self._cards[3].get_value("kzztyp")
 

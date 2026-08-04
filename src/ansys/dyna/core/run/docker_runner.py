@@ -395,11 +395,11 @@ class DockerRunner(BaseRunner):
             logger.info(f"Container {container.short_id} stopped and removed")
 
         if exit_code != 0:
-            # Subprocess is used to run LS-DYNA commands, excluding bandit warning
-            raise subprocess.CalledProcessError(
-                exit_code,
-                command,
-                output=f"LS-DYNA execution failed with exit code {exit_code}",
-            )
+            for logfile in ("d3hsp", "message"):
+                path = os.path.join(self._working_directory, logfile)
+                if os.path.exists(path):
+                    with open(path) as f:
+                        sys.stderr.write(f"--- {logfile} ---\n{f.read()}\n")
+            raise subprocess.CalledProcessError(exit_code, command)
 
         return self._working_directory

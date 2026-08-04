@@ -27,6 +27,13 @@ ParameterExpressionLocal
     :members:
 
 
+ParameterExpressionMutable
+--------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.parameter_expression_mutable
+    :members:
+
+
 ParameterExpressionNoecho
 -------------------------
 
@@ -38,6 +45,13 @@ ParameterLocal
 --------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.parameter_local
+    :members:
+
+
+ParameterMutable
+----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.parameter_mutable
     :members:
 
 

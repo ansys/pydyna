@@ -222,9 +222,9 @@ class DefineSphActiveRegion(KeywordBase):
 
     @property
     def ibuff(self) -> int:
-        """Get or set the Buffer zone flag, only used when STYPE = 0:
+        """Get or set the Buffer zone flag, only used when STYPE=0:
         EQ.0: particles on the edge of the outer box don't get any special treatment.
-        EQ.1 : particles on the edge of the outer box are frozen in space and act as neighbors for active particles inside the box.
+        EQ.1: particles on the edge of the outer box are frozen in space and act as neighbors for active particles inside the box.
         This option is mainly used for fluid simulations to prevent the fluid from spilling out of the activation box..
         """ # nopep8
         return self._cards[0].get_value("ibuff")

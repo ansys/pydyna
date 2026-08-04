@@ -47,19 +47,25 @@ _MATCONSTRAINEDSPR3_CARD1 = (
 )
 
 _MATCONSTRAINEDSPR3_CARD2 = (
-    FieldSchema("upfn", float, 0, 10, None),
-    FieldSchema("upfs", float, 10, 10, None),
-    FieldSchema("alpha2", float, 20, 10, None),
-    FieldSchema("beta2", float, 30, 10, None),
-    FieldSchema("uprn", float, 40, 10, None),
-    FieldSchema("uprs", float, 50, 10, None),
-    FieldSchema("alpha3", float, 60, 10, None),
-    FieldSchema("beta3", float, 70, 10, None),
+    FieldSchema("stiff2", float, 0, 10, None),
+    FieldSchema("stiff3", float, 10, 10, None),
+    FieldSchema("stiff4", float, 20, 10, None),
+    FieldSchema("lcdexp", float, 30, 10, None),
+    FieldSchema("gamma", float, 40, 10, None),
+    FieldSchema("sropt", float, 50, 10, 0.0),
+    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("unused", float, 70, 10, None),
 )
 
 _MATCONSTRAINEDSPR3_CARD3 = (
-    FieldSchema("mrn", float, 0, 10, None),
-    FieldSchema("mrs", float, 10, 10, None),
+    FieldSchema("ffn", float, 0, 10, None),
+    FieldSchema("ffb", float, 10, 10, None),
+    FieldSchema("ffs", float, 20, 10, None),
+    FieldSchema("exfc", float, 30, 10, None),
+    FieldSchema("stifp", float, 40, 10, None),
+    FieldSchema("mfsfc", float, 50, 10, None),
+    FieldSchema("defc", float, 60, 10, None),
+    FieldSchema("npfc", float, 70, 10, None),
 )
 
 _MATCONSTRAINEDSPR3_OPTION0_CARD0 = (
@@ -78,6 +84,7 @@ class MatConstrainedSpr3(KeywordBase):
         "lcf": LinkType.DEFINE_CURVE,
         "lcupf": LinkType.DEFINE_CURVE,
         "lcupr": LinkType.DEFINE_CURVE,
+        "lcdexp": LinkType.DEFINE_CURVE,
     }
 
     def __init__(self, **kwargs):
@@ -137,12 +144,12 @@ class MatConstrainedSpr3(KeywordBase):
     @property
     def model(self) -> int:
         """Get or set the Material behavior and damage model, see remarks.
-        EQ. 1:	SPR3 (default),
-        EQ. 2:	SPR4,
-        EQ.11:	same as 1 with selected material parameters as functions,
-        EQ.12:	same as 2 with selected material parameters as functions,
-        EQ.21:	same as 11 with slight modification, see remarks,
-        EQ.22:	same as 12 with slight modification, see remarks.
+        EQ. 1: SPR3 (default),
+        EQ. 2: SPR4,
+        EQ.11: same as 1 with selected material parameters as functions,
+        EQ.12: same as 2 with selected material parameters as functions,
+        EQ.21: same as 11 with slight modification, see remarks,
+        EQ.22: same as 12 with slight modification, see remarks.
         """ # nopep8
         return self._cards[0].get_value("model")
 
@@ -167,8 +174,8 @@ class MatConstrainedSpr3(KeywordBase):
     @property
     def rn(self) -> typing.Optional[float]:
         """Get or set the Tensile strength factor.
-        GT.0.0:	Constant value unless MODEL > 10.  Function ID if MODEL > 10 (see Remarks section for *CONSTRAINED_INTERPOLATION_SPOTWELD).
-        LT.0.0:	Load curve with ID | RN | giving R_n as a function of peel ratio(see Remarks section for* CONSTRAINED_INTERPOLATION_SPOTWELD)
+        GT.0.0: Constant value unless MODEL > 10. Function ID if MODEL > 10 (see Remarks section for *CONSTRAINED_INTERPOLATION_SPOTWELD).
+        LT.0.0: Load curve with ID | RN | giving R_n as a function of peel ratio(see Remarks section for *CONSTRAINED_INTERPOLATION_SPOTWELD)
         """ # nopep8
         return self._cards[1].get_value("rn")
 
@@ -244,114 +251,162 @@ class MatConstrainedSpr3(KeywordBase):
         self._cards[1].set_value("lcupr", value)
 
     @property
-    def upfn(self) -> typing.Optional[float]:
-        """Get or set the Plastic initiation displacement in normal direction.
+    def stiff2(self) -> typing.Optional[float]:
+        """Get or set the Elastic shear stiffness. It is a function ID if MODEL > 30. See *CONSTRAINED_INTERPOLATION_SPOTWELD for details.
         """ # nopep8
-        return self._cards[2].get_value("upfn")
+        return self._cards[2].get_value("stiff2")
 
-    @upfn.setter
-    def upfn(self, value: float) -> None:
-        """Set the upfn property."""
-        self._cards[2].set_value("upfn", value)
+    @stiff2.setter
+    def stiff2(self, value: float) -> None:
+        """Set the stiff2 property."""
+        self._cards[2].set_value("stiff2", value)
 
     @property
-    def upfs(self) -> typing.Optional[float]:
-        """Get or set the Plastic initiation displacement in shear direction.
+    def stiff3(self) -> typing.Optional[float]:
+        """Get or set the Elastic bending stiffness. It is a function ID if MODEL > 30. See *CONSTRAINED_INTERPOLATION_SPOTWELD for details.
         """ # nopep8
-        return self._cards[2].get_value("upfs")
+        return self._cards[2].get_value("stiff3")
 
-    @upfs.setter
-    def upfs(self, value: float) -> None:
-        """Set the upfs property."""
-        self._cards[2].set_value("upfs", value)
+    @stiff3.setter
+    def stiff3(self, value: float) -> None:
+        """Set the stiff3 property."""
+        self._cards[2].set_value("stiff3", value)
 
     @property
-    def alpha2(self) -> typing.Optional[float]:
-        """Get or set the Plastic initiation displacement scaling factor.
+    def stiff4(self) -> typing.Optional[float]:
+        """Get or set the Elastic torsional stiffness. It is a function ID if MODEL > 30. See *CONSTRAINED_INTERPOLATION_SPOTWELD for details.
         """ # nopep8
-        return self._cards[2].get_value("alpha2")
+        return self._cards[2].get_value("stiff4")
 
-    @alpha2.setter
-    def alpha2(self, value: float) -> None:
-        """Set the alpha2 property."""
-        self._cards[2].set_value("alpha2", value)
+    @stiff4.setter
+    def stiff4(self, value: float) -> None:
+        """Set the stiff4 property."""
+        self._cards[2].set_value("stiff4", value)
 
     @property
-    def beta2(self) -> typing.Optional[float]:
-        """Get or set the Exponent for plastic initiation displacement.
+    def lcdexp(self) -> typing.Optional[float]:
+        """Get or set the Load curve for damage exponent as a function of mode mixity
         """ # nopep8
-        return self._cards[2].get_value("beta2")
+        return self._cards[2].get_value("lcdexp")
 
-    @beta2.setter
-    def beta2(self, value: float) -> None:
-        """Set the beta2 property."""
-        self._cards[2].set_value("beta2", value)
+    @lcdexp.setter
+    def lcdexp(self, value: float) -> None:
+        """Set the lcdexp property."""
+        self._cards[2].set_value("lcdexp", value)
 
     @property
-    def uprn(self) -> typing.Optional[float]:
-        """Get or set the Plastic rupture displacement in normal direction.
+    def gamma(self) -> typing.Optional[float]:
+        """Get or set the Scaling factor, r_1. It is a function ID if MODEL > 30. See *CONSTRAINED_INTERPOLATION_SPOTWELD for details.
         """ # nopep8
-        return self._cards[2].get_value("uprn")
+        return self._cards[2].get_value("gamma")
 
-    @uprn.setter
-    def uprn(self, value: float) -> None:
-        """Set the uprn property."""
-        self._cards[2].set_value("uprn", value)
+    @gamma.setter
+    def gamma(self, value: float) -> None:
+        """Set the gamma property."""
+        self._cards[2].set_value("gamma", value)
 
     @property
-    def uprs(self) -> typing.Optional[float]:
-        """Get or set the Plastic rupture displacement in shear direction.
+    def sropt(self) -> float:
+        """Get or set the Shear rotation option that defines local kinematics system:
+        EQ.0: Pure shear does not create a normal component(default).
+        EQ.1: Pure shear creates a normal component.
         """ # nopep8
-        return self._cards[2].get_value("uprs")
+        return self._cards[2].get_value("sropt")
 
-    @uprs.setter
-    def uprs(self, value: float) -> None:
-        """Set the uprs property."""
-        self._cards[2].set_value("uprs", value)
+    @sropt.setter
+    def sropt(self, value: float) -> None:
+        """Set the sropt property."""
+        if value not in [0, 1, None]:
+            raise Exception("""sropt must be `None` or one of {0,1}.""")
+        self._cards[2].set_value("sropt", value)
 
     @property
-    def alpha3(self) -> typing.Optional[float]:
-        """Get or set the Plastic rupture displacement scaling factor.
+    def ffn(self) -> typing.Optional[float]:
+        """Get or set the Resultant normal force at failure. FFN is a function ID if MODEL > 30. See *CONSTRAINED_INTERPOLATION_SPOTWELD for details.
         """ # nopep8
-        return self._cards[2].get_value("alpha3")
+        return self._cards[3].get_value("ffn")
 
-    @alpha3.setter
-    def alpha3(self, value: float) -> None:
-        """Set the alpha3 property."""
-        self._cards[2].set_value("alpha3", value)
+    @ffn.setter
+    def ffn(self, value: float) -> None:
+        """Set the ffn property."""
+        self._cards[3].set_value("ffn", value)
 
     @property
-    def beta3(self) -> typing.Optional[float]:
-        """Get or set the Exponent for plastic rupture displacement.
+    def ffb(self) -> typing.Optional[float]:
+        """Get or set the Resultant bending force at failure. FFB is a function ID if MODEL > 30. See *CONSTRAINED_INTERPOLATION_SPOTWELD for details.
         """ # nopep8
-        return self._cards[2].get_value("beta3")
+        return self._cards[3].get_value("ffb")
 
-    @beta3.setter
-    def beta3(self, value: float) -> None:
-        """Set the beta3 property."""
-        self._cards[2].set_value("beta3", value)
+    @ffb.setter
+    def ffb(self, value: float) -> None:
+        """Set the ffb property."""
+        self._cards[3].set_value("ffb", value)
 
     @property
-    def mrn(self) -> typing.Optional[float]:
-        """Get or set the Proportionality factor for dependency RN.
+    def ffs(self) -> typing.Optional[float]:
+        """Get or set the Resultant shear force at failure. FFS is a function ID if MODEL > 30. See *CONSTRAINED_INTERPOLATION_SPOTWELD for details.
         """ # nopep8
-        return self._cards[3].get_value("mrn")
+        return self._cards[3].get_value("ffs")
 
-    @mrn.setter
-    def mrn(self, value: float) -> None:
-        """Set the mrn property."""
-        self._cards[3].set_value("mrn", value)
+    @ffs.setter
+    def ffs(self, value: float) -> None:
+        """Set the ffs property."""
+        self._cards[3].set_value("ffs", value)
 
     @property
-    def mrs(self) -> typing.Optional[float]:
-        """Get or set the Proportionality factor for dependency RS.
+    def exfc(self) -> typing.Optional[float]:
+        """Get or set the Failure function exponent. EXFC is a function ID if MODEL > 30. See *CONSTRAINED_INTERPOLATION_SPOTWELD for details.
         """ # nopep8
-        return self._cards[3].get_value("mrs")
+        return self._cards[3].get_value("exfc")
 
-    @mrs.setter
-    def mrs(self, value: float) -> None:
-        """Set the mrs property."""
-        self._cards[3].set_value("mrs", value)
+    @exfc.setter
+    def exfc(self, value: float) -> None:
+        """Set the exfc property."""
+        self._cards[3].set_value("exfc", value)
+
+    @property
+    def stifp(self) -> typing.Optional[float]:
+        """Get or set the Plastic stiffness. If greater than zero, this replaces LCF by a simple linear hardening law. See * CONSTRAINED_INTERPOLATION_SPOTWELD for details.
+        """ # nopep8
+        return self._cards[3].get_value("stifp")
+
+    @stifp.setter
+    def stifp(self, value: float) -> None:
+        """Set the stifp property."""
+        self._cards[3].set_value("stifp", value)
+
+    @property
+    def mfsfc(self) -> typing.Optional[float]:
+        """Get or set the Scaling factor for torsion term in resultant shear force. MFSC is a function ID if MODEL > 30. See *CONSTRAINED_INTERPOLATION_SPOTWELD for details.
+        """ # nopep8
+        return self._cards[3].get_value("mfsfc")
+
+    @mfsfc.setter
+    def mfsfc(self, value: float) -> None:
+        """Set the mfsfc property."""
+        self._cards[3].set_value("mfsfc", value)
+
+    @property
+    def defc(self) -> typing.Optional[float]:
+        """Get or set the Fading energy for damage. DEFC is a function ID if MODEL > 30. See *CONSTRAINED_INTERPOLATION_SPOTWELD for details.
+        """ # nopep8
+        return self._cards[3].get_value("defc")
+
+    @defc.setter
+    def defc(self, value: float) -> None:
+        """Set the defc property."""
+        self._cards[3].set_value("defc", value)
+
+    @property
+    def npfc(self) -> typing.Optional[float]:
+        """Get or set the Plastic displacement offset for damage initiation. NPFC is a function ID if MODEL > 30. See *CONSTRAINED_INTERPOLATION_SPOTWELD for details.
+        """ # nopep8
+        return self._cards[3].get_value("npfc")
+
+    @npfc.setter
+    def npfc(self, value: float) -> None:
+        """Set the npfc property."""
+        self._cards[3].set_value("npfc", value)
 
     @property
     def title(self) -> typing.Optional[str]:
@@ -411,4 +466,19 @@ class MatConstrainedSpr3(KeywordBase):
     def lcupr_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcupr."""
         self.lcupr = value.lcid
+
+    @property
+    def lcdexp_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcdexp."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcdexp:
+                return kwd
+        return None
+
+    @lcdexp_link.setter
+    def lcdexp_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcdexp."""
+        self.lcdexp = value.lcid
 

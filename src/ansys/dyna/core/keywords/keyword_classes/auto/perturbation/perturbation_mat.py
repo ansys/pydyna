@@ -120,10 +120,10 @@ class PerturbationMat(KeywordBase):
     @property
     def type(self) -> int:
         """Get or set the Type of perturbation.
-        EQ.1:	Harmonic Field (see Remark 3)
+        EQ.1: Harmonic Field (see Remark 3)
         EQ.2:unused
-        EQ.3:	Read perturbations from a file
-        EQ.4 : Spectral field
+        EQ.3: Read perturbations from a file
+        EQ.4: Spectral field
         """ # nopep8
         return self._cards[0].get_value("type")
 
@@ -188,7 +188,7 @@ class PerturbationMat(KeywordBase):
 
     @property
     def cid(self) -> int:
-        """Get or set the Coordinate system ID,see *DEFINE_‌COORDINATE_‌NODES.
+        """Get or set the Coordinate system ID,see *DEFINE_COORDINATE_NODES.
         """ # nopep8
         return self._cards[0].get_value("cid")
 
@@ -418,8 +418,8 @@ class PerturbationMat(KeywordBase):
     @property
     def dtype(self) -> float:
         """Get or set the Distribution type:
-        EQ.0.0:	Uniform distribution between SCL×[0,AMPL]
-        EQ.1.0 : Uniform distribution between SCL×[-AMPL ,AMPL]
+        EQ.0.0: Uniform distribution between SCL[0,AMPL]
+        EQ.1.0: Uniform distribution between SCL[-AMPL ,AMPL]
         """ # nopep8
         return self._cards[6].get_value("dtype")
 

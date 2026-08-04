@@ -120,11 +120,11 @@ class PerturbationNode(KeywordBase):
     @property
     def type(self) -> int:
         """Get or set the Type of perturbation.
-        EQ.1:	Harmonic Field (see Remark 3)
-        EQ.2:	Fade out all perturbations at this node set(see Remark 4)
-        EQ.3 : Read perturbations from a file
-        EQ.4 : Spectral field
-        EQ.8 : Random value from uniform distribution
+        EQ.1: Harmonic Field (see Remark 3)
+        EQ.2: Fade out all perturbations at this node set(see Remark 4)
+        EQ.3: Read perturbations from a file
+        EQ.4: Spectral field
+        EQ.8: Random value from uniform distribution
         """ # nopep8
         return self._cards[0].get_value("type")
 
@@ -199,7 +199,7 @@ class PerturbationNode(KeywordBase):
 
     @property
     def cid(self) -> int:
-        """Get or set the Coordinate system ID.see *DEFINE_‌COORDINATE_‌NODES
+        """Get or set the Coordinate system ID.see *DEFINE_COORDINATE_NODES
         """ # nopep8
         return self._cards[0].get_value("cid")
 
@@ -429,8 +429,8 @@ class PerturbationNode(KeywordBase):
     @property
     def dtype(self) -> float:
         """Get or set the Distribution type:
-        EQ.0.0:	Uniform distribution between SCL×[0,AMPL]
-        EQ.1.0 : Uniform distribution between SCL×[-AMPL ,AMPL]
+        EQ.0.0: Uniform distribution between SCL[0,AMPL]
+        EQ.1.0: Uniform distribution between SCL[-AMPL ,AMPL]
         """ # nopep8
         return self._cards[6].get_value("dtype")
 

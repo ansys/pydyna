@@ -29,10 +29,10 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _EOS012_CARD0 = (
     FieldSchema("eosid", int, 0, 10, None),
-    FieldSchema("cv0", float, 10, 10, None),
-    FieldSchema("cp0", float, 20, 10, None),
-    FieldSchema("cl", float, 30, 10, None),
-    FieldSchema("cq", float, 40, 10, None),
+    FieldSchema("cvmas", float, 10, 10, None),
+    FieldSchema("cpmas", float, 20, 10, None),
+    FieldSchema("b", float, 30, 10, None),
+    FieldSchema("c", float, 40, 10, None),
     FieldSchema("t0", float, 50, 10, None),
     FieldSchema("v0", float, 60, 10, None),
     FieldSchema("vc0", float, 70, 10, None),
@@ -81,7 +81,7 @@ class Eos012(KeywordBase):
         ]
     @property
     def eosid(self) -> typing.Optional[int]:
-        """Get or set the Equation of state label
+        """Get or set the Equation of state ID. A unique number or label must be specified (see *PART).
         """ # nopep8
         return self._cards[0].get_value("eosid")
 
@@ -91,48 +91,48 @@ class Eos012(KeywordBase):
         self._cards[0].set_value("eosid", value)
 
     @property
-    def cv0(self) -> typing.Optional[float]:
-        """Get or set the Specific heat constant for definition of Cv
+    def cvmas(self) -> typing.Optional[float]:
+        """Get or set the Nominal constant-volume specific heat coefficient
         """ # nopep8
-        return self._cards[0].get_value("cv0")
+        return self._cards[0].get_value("cvmas")
 
-    @cv0.setter
-    def cv0(self, value: float) -> None:
-        """Set the cv0 property."""
-        self._cards[0].set_value("cv0", value)
+    @cvmas.setter
+    def cvmas(self, value: float) -> None:
+        """Set the cvmas property."""
+        self._cards[0].set_value("cvmas", value)
 
     @property
-    def cp0(self) -> typing.Optional[float]:
-        """Get or set the Specific heat constant for definition of Cp
+    def cpmas(self) -> typing.Optional[float]:
+        """Get or set the Nominal constant-pressure specific heat coefficient
         """ # nopep8
-        return self._cards[0].get_value("cp0")
+        return self._cards[0].get_value("cpmas")
 
-    @cp0.setter
-    def cp0(self, value: float) -> None:
-        """Set the cp0 property."""
-        self._cards[0].set_value("cp0", value)
+    @cpmas.setter
+    def cpmas(self, value: float) -> None:
+        """Set the cpmas property."""
+        self._cards[0].set_value("cpmas", value)
 
     @property
-    def cl(self) -> typing.Optional[float]:
-        """Get or set the Specific heat constant for linear Cv and Cp
+    def b(self) -> typing.Optional[float]:
+        """Get or set the Linear coefficient, b, for the variations of Cv and Cp as a function of T (see Remark 1)
         """ # nopep8
-        return self._cards[0].get_value("cl")
+        return self._cards[0].get_value("b")
 
-    @cl.setter
-    def cl(self, value: float) -> None:
-        """Set the cl property."""
-        self._cards[0].set_value("cl", value)
+    @b.setter
+    def b(self, value: float) -> None:
+        """Set the b property."""
+        self._cards[0].set_value("b", value)
 
     @property
-    def cq(self) -> typing.Optional[float]:
-        """Get or set the Specific heat constant for quadratic Cv nd Cp
+    def c(self) -> typing.Optional[float]:
+        """Get or set the Quadratic coefficient, r, for the variations of Cv and Cp as a function of T (see Remark 1)
         """ # nopep8
-        return self._cards[0].get_value("cq")
+        return self._cards[0].get_value("c")
 
-    @cq.setter
-    def cq(self, value: float) -> None:
-        """Set the cq property."""
-        self._cards[0].set_value("cq", value)
+    @c.setter
+    def c(self, value: float) -> None:
+        """Set the c property."""
+        self._cards[0].set_value("c", value)
 
     @property
     def t0(self) -> typing.Optional[float]:
@@ -147,7 +147,7 @@ class Eos012(KeywordBase):
 
     @property
     def v0(self) -> typing.Optional[float]:
-        """Get or set the Initial relative volume
+        """Get or set the Initial relative volume(see the beginning of the *EOS section)
         """ # nopep8
         return self._cards[0].get_value("v0")
 

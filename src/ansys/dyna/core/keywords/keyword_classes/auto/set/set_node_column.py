@@ -36,8 +36,8 @@ _SETNODECOLUMN_CARD0 = (
     FieldSchema("da3", float, 30, 10, 0.0),
     FieldSchema("da4", float, 40, 10, 0.0),
     FieldSchema("solver", str, 50, 10, "MECH"),
-    FieldSchema("its", str, 60, 10, "1"),
-    FieldSchema("unused", str, 70, 10, None),
+    FieldSchema("its", int, 60, 10, 1),
+    FieldSchema("unused", int, 70, 10, None),
 )
 
 _SETNODECOLUMN_CARD1 = (
@@ -159,18 +159,18 @@ class SetNodeColumn(KeywordBase):
         self._cards[0].set_value("solver", value)
 
     @property
-    def its(self) -> str:
+    def its(self) -> int:
         """Get or set the Specify coupling type across different scales in two-scale co-simulation. This flag should only be included for node sets that provide coupling information in the input file referred to by *INCLUDE_COSIM;
-        EQ.1:	Tied contact coupling
-        EQ.2 : Solid - in - shell immersed coupling
+        EQ.1: Tied contact coupling
+        EQ.2: Solid - in - shell immersed coupling
         """ # nopep8
         return self._cards[0].get_value("its")
 
     @its.setter
-    def its(self, value: str) -> None:
+    def its(self, value: int) -> None:
         """Set the its property."""
-        if value not in ["1", "2", None]:
-            raise Exception("""its must be `None` or one of {"1","2"}.""")
+        if value not in [1, 2, None]:
+            raise Exception("""its must be `None` or one of {1,2}.""")
         self._cards[0].set_value("its", value)
 
     @property

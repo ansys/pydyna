@@ -289,8 +289,8 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
         ]
     @property
     def surfa(self) -> typing.Optional[int]:
-        """Get or set the Segment set ID, node set ID, part set ID, part ID, or shell element set ID for specifying the SURFA side of the contact interface (see Setting the Contact Interface). See *SET_SEGMENT, *SET_NODE_OPTION, *PART, *SET_PART or *SET_SHELL_OPTION. For ERODING_SINGLE_SURFACE and ERODING_SURFACE_TO_SURFACE contact types, use either a part ID or a part set ID. For ERODING_NODES_TO_SURFACE contact, use a node set which includes all nodes that may be exposed to contact as element erosion occurs.
-        EQ.0:	Includes all parts in the case of single surface contact types
+        """Get or set the Segment set ID, node set ID, part set ID, part ID, shell element set ID,or branch ID for specifying the SURFA side of the contact interface (see Setting the Contact Interface). See *SET_SEGMENT, *SET_NODE_OPTION, *PART, *SET_PART or *SET_SHELL_OPTION. For ERODING_SINGLE_SURFACE and ERODING_SURFACE_TO_SURFACE contact types, use either a part ID or a part set ID. For ERODING_NODES_TO_SURFACE contact, use a node set that includes all nodes that may be exposed to contact as element erosion occurs.
+        EQ.0: Includes all parts in the case of single surface contact types
         """ # nopep8
         return self._cards[0].get_value("surfa")
 
@@ -301,8 +301,8 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @property
     def surfb(self) -> typing.Optional[int]:
-        """Get or set the Segment set ID, node set ID, part set ID, part ID, or shell element set ID for the SURFB side of the contact (see Setting the Contact Interface).
-        EQ.0:	SURFB side is not applicable for single surface contact types.
+        """Get or set the Segment set ID, part set ID, part ID, shell element set ID, or branch ID for the SURFB side of the contact (see Setting the Contact Interface).
+        EQ.0: SURFB side is not applicable for single surface contact types.
         """ # nopep8
         return self._cards[0].get_value("surfb")
 
@@ -319,9 +319,9 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
         EQ.2: part set ID,
         EQ.3: part ID,
         EQ.4: node set ID for node to surface contact,
-        EQ.5: include all (SURFA field) is ignored,
+        EQ.5: include all (SURFA field is ignored),
         EQ.6: part set ID for exempted parts. All non-exempted parts are included in the contact.
-        EQ.7:	Branch ID; see *SET_PART_TREE
+        EQ.7: Branch ID; see *SET_PART_TREE
         """ # nopep8
         return self._cards[0].get_value("surfatyp")
 
@@ -340,8 +340,8 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
         EQ.2: part set ID,
         EQ.3: part ID,
         EQ.5:Include all ( SURFB Field is ignored).
-        EQ.6:	Part set ID for exempted parts.  All non-exempted parts are included in the contact.
-        EQ.7:	Branch ID; see *SET_PART_TREE
+        EQ.6: Part set ID for exempted parts.  All non-exempted parts are included in the contact.
+        EQ.7: Branch ID; see *SET_PART_TREE
         """ # nopep8
         return self._cards[0].get_value("surfbtyp")
 
@@ -354,7 +354,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @property
     def saboxid(self) -> typing.Optional[int]:
-        """Get or set the Include in contact definition only those SURFA nodes/segments within box SABOXID (corresponding to BOXID in *DEFINE_BOX), or if SABOXID is negative, only those SURFA nodes/segments within contact volume |SABOXID | (corresponding to CVID in *DEFINE_CONTACT_VOLUME). SABOXID can be used only if SURFATYP is set to 2, 3, or 6, that is, SURFA is a part ID or part set ID. SABOXID is not available for ERODING contact types
+        """Get or set the Include in the contact definition only those SURFA nodes/segments within box SABOXID (corresponding to BOXID in *DEFINE_BOX), or if SABOXID is negative, only those SURFA nodes/segments within contact volume |SABOXID | (corresponding to CVID in *DEFINE_CONTACT_VOLUME). SABOXID can be used only if SURFATYP is set to 2, 3, 5, or 6, meaning, SURFA is a part ID or part set ID. SABOXID is not available for ERODING contact types
         """ # nopep8
         return self._cards[0].get_value("saboxid")
 
@@ -365,7 +365,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @property
     def sbboxid(self) -> typing.Optional[int]:
-        """Get or set the Include in contact definition only those SURFB segments within box SBBOXID (corresponding to BOXID in *DEFINE_BOX), or if SBBOXID is negative, only those SURFB segments within contact volume |SBBOXID | (corresponding to CVID in *DEFINE_CONTACT_VOLUME). SBBOXID can be used only if SURFBTYP is set to 2, 3, or 6, that is, SURFB is a part ID or part set ID.  SBBOXID is not available for ERODING contact types.
+        """Get or set the Include in the contact definition only those SURFB segments within box SBBOXID (corresponding to BOXID in *DEFINE_BOX), or if SBBOXID is negative, only those SURFB segments within contact volume |SBBOXID | (corresponding to CVID in *DEFINE_CONTACT_VOLUME). SBBOXID can be used only if SURFBTYP is set to 2, 3, 5,or 6, meaning, SURFB is a part ID or part set ID.  SBBOXID is not available for ERODING contact types.
         """ # nopep8
         return self._cards[0].get_value("sbboxid")
 
@@ -377,9 +377,9 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
     @property
     def sapr(self) -> int:
         """Get or set the Include the SURFA side in the *DATABASE_NCFORC and the *DATABASE_BINARY_INTFOR interface force files, and optionally in the dynain file for wear:
-        EQ.0:	Do not include.
-        EQ.1 : SURFA side forces included.
-        EQ.2 : Same as 1 but also allows for SURFA nodes to be written as* INITIAL_CONTACT_WEAR to dynain; see NCYC on* INTERFACE_SPRINGBACK_LSDYNA.
+        EQ.0: Do not include.
+        EQ.1: SURFA side forces included.
+        EQ.2: Same as 1 but also allows SURFA nodes to be written as *INITIAL_CONTACT_WEAR to dynain; see NCYC on *INTERFACE_SPRINGBACK_LSDYNA.
         """ # nopep8
         return self._cards[0].get_value("sapr")
 
@@ -393,9 +393,9 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
     @property
     def sbpr(self) -> int:
         """Get or set the Include the SURFB side in the *DATABASE_NCFORC and the *DATABASE_BINARY_INTFOR interface force files, and optionally in the dynain file for wear:
-        EQ.0:	Do not include.
-        EQ.1 : SURFB side forces included.
-        EQ.2 : Same as 1, but also allows for SURFB nodes to be written as* INITIAL_CONTACT_WEAR to dynain; see NCYC on* INTERFACE_SPRINGBACK_LSDYNA.
+        EQ.0: Do not include.
+        EQ.1: SURFB side forces included.
+        EQ.2: Same as 1, but also allows SURFB nodes to be written as *INITIAL_CONTACT_WEAR to dynain; see NCYC on *INTERFACE_SPRINGBACK_LSDYNA.
         """ # nopep8
         return self._cards[0].get_value("sbpr")
 
@@ -408,10 +408,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @property
     def fs(self) -> float:
-        """Get or set the Static coefficient of friction if FS > 0 and not equal to 2.
-        EQ.-1.0: If the frictional coefficients defined in the *PART section are to be used, set FS to a negative number.
-        EQ. 2: For contact types SURFACE_TO_SURFACE and ONE_WAY_ SURFACE_TO_SURFACE, the dynamic coefficient of friction points to the table, see DEFINE_TABLE (The table ID is give by FD below.), giving the coefficient of friction as a function of the relative velocity and pressure. This option must be used in combination with the thickness offset option. See Figure 6.1.
-        Note: For the special contact option TIED_SURFACE_TO_SURFACE_FAILURE only, the variables FS is the Normal tensile stress at failure.,
+        """Get or set the Normal tensile stress at failure,
         """ # nopep8
         return self._cards[1].get_value("fs")
 
@@ -500,6 +497,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
     @property
     def sfsa(self) -> float:
         """Get or set the Scale factor on default SURFA penalty stiffness when SOFT = 0 or SOFT = 2; see also *CONTROL_CONTACT.For MORTAR frictional contact this is the stiffness scale factor for the entire contact, and SFSB does not apply.
+        LT.0: -SFSA gives the load curve ID for contact pressure as a function of penetration depth. This is supported for Mortar contact only.
         """ # nopep8
         return self._cards[2].get_value("sfsa")
 
@@ -510,7 +508,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @property
     def sfsb(self) -> float:
-        """Get or set the Scale factor on default SURFA penalty stiffness when SOFT = 0 or SOFT = 2; see also *CONTROL_CONTACT.For MORTAR tied contact, this is an additional stiffness scale factor, resulting in a total stiffness scale of SFSA*SFSB.
+        """Get or set the Scale factor on default SURFB penalty stiffness when SOFT = 0 or SOFT = 2; see also *CONTROL_CONTACT.For MORTAR tied contact, this is an additional stiffness scale factor, resulting in a total stiffness scale of SFSA*SFSB.
         """ # nopep8
         return self._cards[2].get_value("sfsb")
 
@@ -532,7 +530,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @property
     def sbst(self) -> typing.Optional[float]:
-        """Get or set the Optional thickness for SURFA surface (overrides true thickness). This option applies only to contact with shell elements. True thickness is the element thickness of the shell elements. For the TIED options see SAST above.
+        """Get or set the Optional thickness for SURFB surface (overrides true thickness). This option applies only to contact with shell elements. True thickness is the element thickness of the shell elements. For the TIED options see SAST above.
         """ # nopep8
         return self._cards[2].get_value("sbst")
 
@@ -543,9 +541,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @property
     def sfsat(self) -> float:
-        """Get or set the Scale factor applied to contact thickness of SURFA surface.  This option applies to contact with shell and beam elements.
-        SFSAT has no bearing on the actual thickness of the elements; it only affects the location of the contact surface.
-        SFSAT is ignored if SAST is nonzero except in the case of MORTAR contact (see Remark 9 in the General Remarks: *Contact section).
+        """Get or set the Scale factor applied to the contact thickness of the SURFA surface.  This option applies to contact with shell and beam elements.  SFSAT has no bearing on the actual thickness of the elements; it only affects the location of the contact surface.  SFSAT is ignored if SAST is nonzero except in the case of MORTAR contact (see Remark 14 in the General Remarks: *Contact section).
         """ # nopep8
         return self._cards[2].get_value("sfsat")
 
@@ -556,9 +552,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @property
     def sfsbt(self) -> float:
-        """Get or set the Scale factor applied to contact thickness of SURFA surface.  This option applies only to contact with shell elements.
-        SFSAT has no bearing on the actual thickness of the elements; it only affects the location of the contact surface.
-        SFSAT is ignored if SBST is nonzero except in the case of MORTAR contact (see Remark 9 in the General Remarks: *Contact section).
+        """Get or set the Scale factor applied to the contact thickness of the SURFB surface.  This option applies only to contact with shell elements.  SFSBT has no bearing on the actual thickness of the elements; it only affects the location of the contact surface. SFSBT is ignored if SBST is nonzero except in the case of MORTAR contact (see Remark 14 in the General Remarks: *Contact section).
         """ # nopep8
         return self._cards[2].get_value("sfsbt")
 
@@ -569,7 +563,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @property
     def fsf(self) -> float:
-        """Get or set the Coulomb friction scale factor (default=1.0).The Coulomb friction value is scaled as μ_sc=FSF×μ_c; see Mandatory Card 2.
+        """Get or set the Coulomb friction scale factor (default=1.0).The Coulomb friction value is scaled as _sc=FSF_c; see Mandatory Card 2.
         """ # nopep8
         return self._cards[2].get_value("fsf")
 
@@ -580,7 +574,7 @@ class ContactTiedSurfaceToSurfaceFailure(KeywordBase):
 
     @property
     def vsf(self) -> float:
-        """Get or set the Viscous friction scale factor (default=1.0).If this factor is defined, then the limiting force becomes: F_lim =VSF×VC×A_cont ; see Mandatory Card 2.
+        """Get or set the Viscous friction scale factor (default=1.0).If this factor is defined, the limiting force becomes: F_lim =VSFVCA_cont ; see Mandatory Card 2.
         """ # nopep8
         return self._cards[2].get_value("vsf")
 

@@ -473,21 +473,14 @@ class Mat217Anis(KeywordBase):
     @property
     def aopt1(self) -> typing.Optional[float]:
         """Get or set the Material axes option for phase i, see Figure M2-1.
-        EQ.0.0: locally orthotropic with material axes determined by element nodes as shown in part (a) of Figure M2-1. The
-        a-direction is from node 1 to node 2 of the element. The b-direction is orthogonal to the a-direction and is in the
-        plane formed by nodes 1, 2, and 4. When this option is used in two-dimensional planar and axisymmetric analysis,
-        it is critical that the nodes in the element definition be numbered counterclockwise for this option to work correctly.
-        EQ.1.0: locally orthotropic with material axes determined by a
-        point in space and the global location of the element center; this is the a-direction. This option is for solid elements only.
+        EQ.0.0: locally orthotropic with material axes determined by element nodes as shown in part (a) of Figure M2-1. The a-direction is from node 1 to node 2 of the element. The b-direction is orthogonal to the a-direction and is in the plane formed by nodes 1, 2, and 4. When this option is used in two-dimensional planar and axisymmetric analysis, it is critical that the nodes in the element definition be numbered counterclockwise for this option to work correctly.
+        EQ.1.0: locally orthotropic with material axes determined by a point in space and the global location of the element center; this is the a-direction. This option is for solid elements only.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR.
         EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
         BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
-        The plane of a solid element is the midsurface between the inner surface and outer surface defined by the
-        first four nodes and the last four nodes of the connectivity of the element, respectively.
-        EQ.4.0: locally orthotropic in cylindrical coordinate system with
-        the material axes determined by a vector v, and an originating point, P, which define the centerline axis. This option is for solid elements only.
-        LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
-        *DEFINE_COORDINATE_SYSTEM or *DEFINE_COORDINATE_VECTOR). Available in R3 version of 971 and later.
+        The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.
+        EQ.4.0: locally orthotropic in cylindrical coordinate system with the material axes determined by a vector v, and an originating point, P, which define the centerline axis. This option is for solid elements only.
+        LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM or *DEFINE_COORDINATE_VECTOR). Available in R3 version of 971 and later.
         """ # nopep8
         return self._cards[2].get_value("aopt1")
 
@@ -582,8 +575,8 @@ class Mat217Anis(KeywordBase):
     @property
     def ihis(self) -> int:
         """Get or set the Flag for anisotropic stiffness terms initialization (for solid elements only).
-        EQ.0: C11, C12, … from Cards 1, 2, and 3 are used.
-        EQ.1: C11, C12, … are initialized by *INITIAL_STRESS_SOLID's	history data.
+        EQ.0: C11, C12, ... from Cards 1, 2, and 3 are used.
+        EQ.1: C11, C12, ... are initialized by *INITIAL_STRESS_SOLID's history data.
         """ # nopep8
         return self._cards[3].get_value("ihis")
 
@@ -662,8 +655,7 @@ class Mat217Anis(KeywordBase):
 
     @property
     def beta1(self) -> typing.Optional[float]:
-        """Get or set the Material angle of i th phase in degrees for AOPT = 3, may be
-        overridden on the element card, see *ELEMENT_SHELL_BETA or *ELEMENT_SOLID_ORTHO.
+        """Get or set the Material angle of i th phase in degrees for AOPT = 3, may be overridden on the element card, see *ELEMENT_SHELL_BETA or *ELEMENT_SOLID_ORTHO.
         """ # nopep8
         return self._cards[4].get_value("beta1")
 
@@ -1064,8 +1056,7 @@ class Mat217Anis(KeywordBase):
 
     @property
     def beta2(self) -> typing.Optional[float]:
-        """Get or set the Material angle of i th phase in degrees for AOPT = 3, may be
-        overridden on the element card, see *ELEMENT_SHELL_BETA or *ELEMENT_SOLID_ORTHO.
+        """Get or set the Material angle of i th phase in degrees for AOPT = 3, may be overridden on the element card, see *ELEMENT_SHELL_BETA or *ELEMENT_SOLID_ORTHO.
         """ # nopep8
         return self._cards[9].get_value("beta2")
 

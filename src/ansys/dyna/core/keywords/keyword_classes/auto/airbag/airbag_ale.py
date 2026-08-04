@@ -235,7 +235,7 @@ class AirbagAle(KeywordBase):
 
     @property
     def spsf(self) -> float:
-        """Get or set the Stagnation pressure scale factor, 0≤γ≤1.  SPSF is needed during the CV phase.
+        """Get or set the Stagnation pressure scale factor, 01.  SPSF is needed during the CV phase.
         """ # nopep8
         return self._cards[0].get_value("spsf")
 
@@ -279,7 +279,7 @@ class AirbagAle(KeywordBase):
 
     @property
     def cc(self) -> float:
-        """Get or set the Conversion constant. EQ.0:	Set to 1.0
+        """Get or set the Conversion constant. EQ.0: Set to 1.0
         """ # nopep8
         return self._cards[1].get_value("cc")
 
@@ -295,7 +295,7 @@ class AirbagAle(KeywordBase):
         TNKVOL is the defined tank.  Inlet gas velocity is estimated by LS-DYNA method (testing).
         LCVEL = 0 and TNKFINP is not defined:
         TNKVOL is the estimated inflator canister volume inlet gas velocity is estimated automatically by the Lian-Bhalsod-Olovssonmethod.
-        LCVEL ≠ 0:
+        LCVEL  0:
         This must be left blank
         """ # nopep8
         return self._cards[1].get_value("tnkvol")
@@ -331,8 +331,8 @@ class AirbagAle(KeywordBase):
     @property
     def ctype(self) -> int:
         """Get or set the Coupling type (see Remark 12):
-        EQ.4:	Penalty coupling with coupling in the normal direction under compression only(default).
-        EQ.6 : Penalty coupling in which coupling is under both tension and compression in the normal direction for the unfolded regionand under only compression in the normal direction for folded region.
+        EQ.4: Penalty coupling with coupling in the normal direction under compression only(default).
+        EQ.6: Penalty coupling in which coupling is under both tension and compression in the normal direction for the unfolded regionand under only compression in the normal direction for folded region.
         """ # nopep8
         return self._cards[2].get_value("ctype")
 
@@ -344,8 +344,8 @@ class AirbagAle(KeywordBase):
     @property
     def pfac(self) -> float:
         """Get or set the Penalty factor.  PFAC is a scale factor for scaling the estimated stiffness of the interacting (coupling) system.  It is used to compute the coupling forces to be distributed on lagrangian and ALE parts.  See Remark 13.
-        GT.0:	Fraction of estimated critical stiffness.
-        LT.0:	-PFAC is a load curve ID.  The curve defines the relative coupling pressure (y-axis) as a function of the tolerable fluid penetration distance (x-axis)
+        GT.0: Fraction of estimated critical stiffness.
+        LT.0: -PFAC is a load curve ID.  The curve defines the relative coupling pressure (y-axis) as a function of the tolerable fluid penetration distance (x-axis)
         """ # nopep8
         return self._cards[2].get_value("pfac")
 
@@ -379,8 +379,8 @@ class AirbagAle(KeywordBase):
     @property
     def normtyp(self) -> int:
         """Get or set the Penalty coupling spring direction:
-        EQ.0:	Normal vectors are interpolated from nodal normals
-        EQ.1:	Normal vectors are interpolated from segment normals.
+        EQ.0: Normal vectors are interpolated from nodal normals
+        EQ.1: Normal vectors are interpolated from segment normals.
         """ # nopep8
         return self._cards[2].get_value("normtyp")
 
@@ -443,8 +443,8 @@ class AirbagAle(KeywordBase):
     @property
     def iblock(self) -> int:
         """Get or set the Flag for considering blockage effects for porosity and vents (see Remark 5):
-        EQ.0:	no (blockage is NOT considered, default).
-        EQ.1:	yes (blockage is considered)
+        EQ.0: no (blockage is NOT considered, default).
+        EQ.1: yes (blockage is considered)
         """ # nopep8
         return self._cards[3].get_value("iblock")
 
@@ -503,8 +503,8 @@ class AirbagAle(KeywordBase):
     @property
     def movern(self) -> int:
         """Get or set the ALE mesh automatic motion option.
-        EQ.0:	ALE mesh is fixed in space.
-        GT.0:	Node group ID.  See *ALE_REFERENCE_SYSTEM_NODE ALE mesh can be moved with PRTYP = 5,
+        EQ.0: ALE mesh is fixed in space.
+        GT.0: Node group ID.  See *ALE_REFERENCE_SYSTEM_NODE ALE mesh can be moved with PRTYP = 5,
         mesh motion follows a coordinate system defined by 3 reference nodes.  See Remark 7
         """ # nopep8
         return self._cards[4].get_value("movern")
@@ -517,8 +517,8 @@ class AirbagAle(KeywordBase):
     @property
     def zoom(self) -> int:
         """Get or set the ALE mesh automatic expansion option:
-        EQ.0:	Do not expand ALE mesh
-        EQ.1:	Expand/contract ALE mesh by keeping all airbag parts contained within the ALE mesh (equivalent to PRTYP = 9).  See Remark 8.
+        EQ.0: Do not expand ALE mesh
+        EQ.1: Expand/contract ALE mesh by keeping all airbag parts contained within the ALE mesh (equivalent to PRTYP = 9).  See Remark 8.
         """ # nopep8
         return self._cards[4].get_value("zoom")
 

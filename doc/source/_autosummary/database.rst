@@ -27,6 +27,13 @@ DatabaseAceout
     :members:
 
 
+DatabaseAdams
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_adams
+    :members:
+
+
 DatabaseAle
 -----------
 
@@ -87,6 +94,13 @@ DatabaseBinaryD3Crack
 ---------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_binary_d3crack
+    :members:
+
+
+DatabaseBinaryD3Dat
+-------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_binary_d3dat
     :members:
 
 
@@ -153,6 +167,13 @@ DatabaseBinaryFsilnk
     :members:
 
 
+DatabaseBinaryFsilnkFull
+------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_binary_fsilnk_full
+    :members:
+
+
 DatabaseBinaryIntfor
 --------------------
 
@@ -171,6 +192,13 @@ DatabaseBinaryIsphfor
 ---------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_binary_isphfor
+    :members:
+
+
+DatabaseBinaryIsphforFile
+-------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_binary_isphfor_file
     :members:
 
 
@@ -199,6 +227,13 @@ DatabaseBndout
 --------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_bndout
+    :members:
+
+
+DatabaseCable
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_cable
     :members:
 
 
@@ -251,6 +286,13 @@ DatabaseDcfail
     :members:
 
 
+DatabaseDebond
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_debond
+    :members:
+
+
 DatabaseDefgeo
 --------------
 
@@ -265,10 +307,24 @@ DatabaseDeforc
     :members:
 
 
+DatabaseDefragment
+------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_defragment
+    :members:
+
+
 DatabaseDemassflow
 ------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_demassflow
+    :members:
+
+
+DatabaseDestat
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_destat
     :members:
 
 
@@ -283,6 +339,13 @@ DatabaseElout
 -------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_elout
+    :members:
+
+
+DatabaseEnvelopeBeam
+--------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_envelope_beam
     :members:
 
 
@@ -346,6 +409,20 @@ DatabaseExtentSsstatId
 ----------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_extent_ssstat_id
+    :members:
+
+
+DatabaseFatigueRainflowMatrix
+-----------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_fatigue_rainflow_matrix
+    :members:
+
+
+DatabaseFatigueStressCycle
+--------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_fatigue_stress_cycle
     :members:
 
 
@@ -430,6 +507,13 @@ DatabaseFrequencyAsciiNodoutSsdSubcase
 --------------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_frequency_ascii_nodout_ssd_subcase
+    :members:
+
+
+DatabaseFrequencyAsciiSecforcSsd
+--------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_frequency_ascii_secforc_ssd
     :members:
 
 
@@ -531,6 +615,13 @@ DatabaseFsi
     :members:
 
 
+DatabaseFsiDr
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_fsi_dr
+    :members:
+
+
 DatabaseFsiSensor
 -----------------
 
@@ -549,6 +640,13 @@ DatabaseGlstat
 --------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_glstat
+    :members:
+
+
+DatabaseGlstatDr
+----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_glstat_dr
     :members:
 
 
@@ -584,6 +682,20 @@ DatabaseHistoryBeamSet
 ----------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_history_beam_set
+    :members:
+
+
+DatabaseHistoryDes
+------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_history_des
+    :members:
+
+
+DatabaseHistoryDesSet
+---------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_history_des_set
     :members:
 
 
@@ -776,6 +888,13 @@ DatabaseIcvout
     :members:
 
 
+DatabaseIsphhtc
+---------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_isphhtc
+    :members:
+
+
 DatabaseJntforc
 ---------------
 
@@ -794,6 +913,13 @@ DatabaseMatsum
 --------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_matsum
+    :members:
+
+
+DatabaseMatsumDr
+----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_matsum_dr
     :members:
 
 
@@ -916,6 +1042,13 @@ DatabaseNodalForceGroup
     :members:
 
 
+DatabaseNodalForceGroupId
+-------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_nodal_force_group_id
+    :members:
+
+
 DatabaseNodfor
 --------------
 
@@ -1021,6 +1154,13 @@ DatabaseRcforc
     :members:
 
 
+DatabaseRcforcDr
+----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_rcforc_dr
+    :members:
+
+
 DatabaseRcforcMoment
 --------------------
 
@@ -1084,10 +1224,31 @@ DatabaseSleout
     :members:
 
 
+DatabaseSleoutDr
+----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_sleout_dr
+    :members:
+
+
+DatabaseSnsrout
+---------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_snsrout
+    :members:
+
+
 DatabaseSpcforc
 ---------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_spcforc
+    :members:
+
+
+DatabaseSpgcpl
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.database_spgcpl
     :members:
 
 

@@ -27,6 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import DefineVector
 
 _FREQUENCYDOMAINACOUSTICFEM_CARD0 = (
     FieldSchema("ro", float, 0, 10, None),
@@ -43,6 +44,7 @@ _FREQUENCYDOMAINACOUSTICFEM_CARD1 = (
     FieldSchema("unused", int, 0, 10, None),
     FieldSchema("fftwin", int, 10, 10, 0),
     FieldSchema("mixdmp", int, 20, 10, 0),
+    FieldSchema("restrt", int, 30, 10, 0),
 )
 
 _FREQUENCYDOMAINACOUSTICFEM_CARD2 = (
@@ -76,6 +78,7 @@ class FrequencyDomainAcousticFem(KeywordBase):
     _link_fields = {
         "lcid1": LinkType.DEFINE_CURVE,
         "lcid2": LinkType.DEFINE_CURVE,
+        "vid": LinkType.DEFINE_VECTOR,
     }
 
     def __init__(self, **kwargs):
@@ -196,11 +199,11 @@ class FrequencyDomainAcousticFem(KeywordBase):
     @property
     def fftwin(self) -> int:
         """Get or set the FFT windows (Default=0):
-        EQ.0:	Rectangular window.
-        EQ.1:	Hanning window.
-        EQ.2:	Hamming window.
-        EQ.3:	Blackman window.
-        EQ.4:	Raised cosine window.
+        EQ.0: Rectangular window.
+        EQ.1: Hanning window.
+        EQ.2: Hamming window.
+        EQ.3: Blackman window.
+        EQ.4: Raised cosine window.
         """ # nopep8
         return self._cards[1].get_value("fftwin")
 
@@ -214,8 +217,8 @@ class FrequencyDomainAcousticFem(KeywordBase):
     @property
     def mixdmp(self) -> int:
         """Get or set the Acoustic stiffness and mass matrices dumping (when using the option EIGENVALUE):
-        EQ.0:	no dumping.
-        EQ.1:	dumping globally assembled acoustic stiffness and mass matrices in Harwell-Boeing sparse matrix format.
+        EQ.0: no dumping.
+        EQ.1: dumping globally assembled acoustic stiffness and mass matrices in Harwell-Boeing sparse matrix format.
         """ # nopep8
         return self._cards[1].get_value("mixdmp")
 
@@ -225,6 +228,21 @@ class FrequencyDomainAcousticFem(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""mixdmp must be `None` or one of {0,1}.""")
         self._cards[1].set_value("mixdmp", value)
+
+    @property
+    def restrt(self) -> int:
+        """Get or set the This flag is used to save an LS-DYNA time domain analysis if the binary output file (bin_femac) has not been changed (Default = 0):
+        EQ.0: LS - DYNA time domain analysis is processed and generates a new binary file(bin_femac) which saves the boundary velocity history data.
+        EQ.1: LS - DYNA time domain analysis is not processed.The binary file bin_femac from the last run is used.
+        """ # nopep8
+        return self._cards[1].get_value("restrt")
+
+    @restrt.setter
+    def restrt(self, value: int) -> None:
+        """Set the restrt property."""
+        if value not in [0, 1, None]:
+            raise Exception("""restrt must be `None` or one of {0,1}.""")
+        self._cards[1].set_value("restrt", value)
 
     @property
     def pid(self) -> typing.Optional[int]:
@@ -413,11 +431,11 @@ class FrequencyDomainAcousticFem(KeywordBase):
     @property
     def dba(self) -> int:
         """Get or set the Flag for writing out weighted SPL files with different weighting options.
-        EQ.0:	No writing out weighted SPL files.
-        EQ.1:	write out Press_dB(A) by using A-weighting.
-        EQ.2:	write out Press_dB(B) by using B-weighting.
-        EQ.3:	write out Press_dB(C) by using C-weighting.
-        EQ.4:	write out Press_dB(D) by using D-weighting.
+        EQ.0: No writing out weighted SPL files.
+        EQ.1: write out Press_dB(A) by using A-weighting.
+        EQ.2: write out Press_dB(B) by using B-weighting.
+        EQ.3: write out Press_dB(C) by using C-weighting.
+        EQ.4: write out Press_dB(D) by using D-weighting.
         """ # nopep8
         return self._cards[4].get_value("dba")
 
@@ -457,4 +475,19 @@ class FrequencyDomainAcousticFem(KeywordBase):
     def lcid2_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid2."""
         self.lcid2 = value.lcid
+
+    @property
+    def vid_link(self) -> typing.Optional[DefineVector]:
+        """Get the DefineVector object for vid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
+            if kwd.vid == self.vid:
+                return kwd
+        return None
+
+    @vid_link.setter
+    def vid_link(self, value: DefineVector) -> None:
+        """Set the DefineVector object for vid."""
+        self.vid = value.vid
 

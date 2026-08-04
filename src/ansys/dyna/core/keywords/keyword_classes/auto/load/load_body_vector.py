@@ -71,7 +71,7 @@ class LoadBodyVector(KeywordBase):
         ]
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID, see *DEFINE_CURVE.
+        """Get or set the Load curve ID specifying loading, see *DEFINE_CURVE. See Remark 1.
         """ # nopep8
         return self._cards[0].get_value("lcid")
 

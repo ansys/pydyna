@@ -31,6 +31,7 @@ _MATGASMIXTURE_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
     FieldSchema("iadiab", int, 10, 10, 0),
     FieldSchema("runiv", float, 20, 10, None),
+    FieldSchema("pdv", int, 30, 10, None),
 )
 
 _MATGASMIXTURE_CARD1 = (
@@ -169,13 +170,17 @@ class MatGasMixture(KeywordBase):
 
     @property
     def iadiab(self) -> int:
-        """Get or set the A flag ( if IADIAB=1=ON) to use perfect gas adiabatic condition for the air outside the airbag. The use of this flag may be needed but only when that air is modeled by the *MAT_GAS_MIXTURE card.
+        """Get or set the Flag to turn on/off adiabatic compression logic for an ideal gas.
+        EQ.0: Off(default)
+        EQ.1: On
         """ # nopep8
         return self._cards[0].get_value("iadiab")
 
     @iadiab.setter
     def iadiab(self, value: int) -> None:
         """Set the iadiab property."""
+        if value not in [0, 1, None]:
+            raise Exception("""iadiab must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iadiab", value)
 
     @property
@@ -188,6 +193,19 @@ class MatGasMixture(KeywordBase):
     def runiv(self, value: float) -> None:
         """Set the runiv property."""
         self._cards[0].set_value("runiv", value)
+
+    @property
+    def pdv(self) -> typing.Optional[int]:
+        """Get or set the Element energy update method (see Remark 6):
+        EQ.0: Ideal gas gamma law
+        EQ.1: Pressure work
+        """ # nopep8
+        return self._cards[0].get_value("pdv")
+
+    @pdv.setter
+    def pdv(self, value: int) -> None:
+        """Set the pdv property."""
+        self._cards[0].set_value("pdv", value)
 
     @property
     def cvmass1(self) -> typing.Optional[float]:

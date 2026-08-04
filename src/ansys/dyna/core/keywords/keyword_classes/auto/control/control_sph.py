@@ -146,21 +146,21 @@ class ControlSph(KeywordBase):
     @property
     def form(self) -> int:
         """Get or set the Particle approximation theory (Remark 2):
-        EQ.0:	default formulation
-        EQ.1 : renormalization approximation
-        EQ.2 : symmetric formulation
-        EQ.3 : symmetric renormalized approximation
-        EQ.4 : tensor formulation
-        EQ.5 : fluid particle approximation
-        EQ.6 : fluid particle with renormalization approximation
-        EQ.7 : total Lagrangian formulation
-        EQ.8 : total Lagrangian formulation with renormalization
-        EQ.9 : adaptive SPH formulation(ASPH) with anisotropic smoothing tensor(Remark 2g)
-        EQ.10 : renormalization approximation for adaptive SPH formulation(ASPH) with anisotropic smoothing tensor
-        EQ.12 : moving least - squares based formulation(MPP only, see Remark 2e)
-        EQ.13 : implicit incompressible formulation. (MPP only).
-        EQ.15 : enhanced fluid formulation
-        EQ.16 : enhanced fluid formulation with renormalization
+        EQ.0: default formulation
+        EQ.1: renormalization approximation
+        EQ.2: symmetric formulation
+        EQ.3: symmetric renormalized approximation
+        EQ.4: tensor formulation
+        EQ.5: fluid particle approximation
+        EQ.6: fluid particle with renormalization approximation
+        EQ.7: total Lagrangian formulation
+        EQ.8: total Lagrangian formulation with renormalization
+        EQ.9: adaptive SPH formulation(ASPH) with anisotropic smoothing tensor(Remark 2g)
+        EQ.10: renormalization approximation for adaptive SPH formulation(ASPH) with anisotropic smoothing tensor
+        EQ.12: moving least - squares based formulation(MPP only, see Remark 2e)
+        EQ.13: implicit incompressible formulation. (MPP only).
+        EQ.15: enhanced fluid formulation
+        EQ.16: enhanced fluid formulation with renormalization
         """ # nopep8
         return self._cards[0].get_value("form")
 
@@ -184,7 +184,7 @@ class ControlSph(KeywordBase):
 
     @property
     def maxv(self) -> float:
-        """Get or set the Maximum value for velocity for the SPH particles. Particles with a velocity greater than MAXV are deactivated.
+        """Get or set the Maximum magnitude of the velocity for SPH particles. Particles with a velocity magnitude greater than MAXV are deactivated.  A value of 0.0 will turn off the velocity checking. If a negative value is used, particles with a velocity magnitude greater than |MAXV| will be reassigned a velocity field with a magnitude equal to |MAXV|.
         """ # nopep8
         return self._cards[0].get_value("maxv")
 
@@ -257,8 +257,8 @@ class ControlSph(KeywordBase):
         """Get or set the Deactivation control for SPH particles:
         EQ.0: Particles remain active.
         EQ.1: SPH particles are deactivated and stress states are set to 0 when erosion criteria are satisfied.
-        EQ.2:  SPH particles are totally deactivated and stress states are set to 0 when erosion criteria are satisfied.  See Remark 3.
-        EQ.3:  SPH particles are totally deactivated and stress states are set to 0 when erosion criteria are satisfied If an EOS is defined, the volumetric response is unaffected.  See Remark 3
+        EQ.2: SPH particles are totally deactivated and stress states are set to 0 when erosion criteria are satisfied.  See Remark 3.
+        EQ.3: SPH particles are totally deactivated and stress states are set to 0 when erosion criteria are satisfied If an EOS is defined, the volumetric response is unaffected.  See Remark 3
         """ # nopep8
         return self._cards[1].get_value("ierod")
 
@@ -301,7 +301,7 @@ class ControlSph(KeywordBase):
 
     @property
     def isymp(self) -> int:
-        """Get or set the Defines the percentage of original SPH particles used for memoryallocation of SPH symmetric planes ghost nodes generation process (default is 100%). Recommended for large SPH particles models (value range 10~20) to control the memory allocation for SPH ghost particles with *BOUNDARY_SPH_SYMMETRY_PLANE keyword.
+        """Get or set the Defines the percentage of original SPH particles used for memory allocation when generating the ghost nodes for SPH symmetric planes (default is 100%). Setting this field is recommended for large SPH particle models (value range 10~20) to control the memory allocation for SPH ghost particles when using *BOUNDARY_SPH_SYMMETRY_PLANE.
         """ # nopep8
         return self._cards[1].get_value("isymp")
 
@@ -313,9 +313,9 @@ class ControlSph(KeywordBase):
     @property
     def ithk(self) -> int:
         """Get or set the Contact thickness option:
-        EQ.0:	the contact thickness is set to zero(default).
-        EQ.1 : the contact thickness is automatically calculated based on the volume of each SPH particle.
-        This contact thickness calculation is ignored if a non - zero contact thickness for slave surface(SST) is provided by the contact card.
+        EQ.0:	The contact thickness is set to zero(default).
+        EQ.1 : The contact thickness is automatically calculated based on the volume of each SPH particle.
+        This contact thickness calculation is ignored if the SURFA surface has a nonzero contact thickness(SAST on Card 3 of * CONTACT_...).
         """ # nopep8
         return self._cards[2].get_value("ithk")
 
@@ -328,9 +328,9 @@ class ControlSph(KeywordBase):
 
     @property
     def istab(self) -> int:
-        """Get or set the Stabilization type, only used when IFORM = 12:
-        EQ.0:	incremental stabilization(default).Adequate for most materials.
-        EQ.1 : total stabilization.Only recommended for hyperelastic materials.
+        """Get or set the Stabilization type, only used when IFORM = 12:
+        EQ.0: Incremental stabilization(default).Adequate for most materials.
+        EQ.1: total stabilization.Only recommended for hyperelastic materials.
         """ # nopep8
         return self._cards[2].get_value("istab")
 
@@ -343,7 +343,7 @@ class ControlSph(KeywordBase):
 
     @property
     def ql(self) -> float:
-        """Get or set the Quasi-Linear coefficient, only used when IFORM = 12. See Remark 5.
+        """Get or set the Quasi-linear coefficient, only used when IFORM = 12. See Remark 5.
         """ # nopep8
         return self._cards[2].get_value("ql")
 
@@ -355,8 +355,8 @@ class ControlSph(KeywordBase):
     @property
     def sphsort(self) -> int:
         """Get or set the For the implicit solver, sort and move SPH nodes from *NODE list to the end of the list.
-        EQ.0:	no sorting(default)
-        EQ.1 : perform sorting.
+        EQ.0: no sorting(default)
+        EQ.1: perform sorting.
         """ # nopep8
         return self._cards[2].get_value("sphsort")
 
@@ -370,8 +370,8 @@ class ControlSph(KeywordBase):
     @property
     def ishift(self) -> int:
         """Get or set the Flag for applying the shifting algorithm to SPH particles (available from R13.0). With the shifting algorithm, particles are advanced and then shifted slightly across streamlines. This process reduces particle clustering in the maximum compression and stretching directions.
-        EQ.0:	Do not apply shifting algorithm applied(default).
-        EQ.1:	Apply shifting algorithm applied.
+        EQ.0: Do not apply shifting algorithm applied(default).
+        EQ.1: Apply shifting algorithm applied.
         """ # nopep8
         return self._cards[2].get_value("ishift")
 

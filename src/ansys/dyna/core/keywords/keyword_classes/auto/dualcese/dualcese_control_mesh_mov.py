@@ -63,7 +63,7 @@ class DualceseControlMeshMov(KeywordBase):
     @property
     def ialg(self) -> int:
         """Get or set the Mesh motion selector:.
-        EQ.9 (default) : the IDW scheme
+        EQ.9 (default): the IDW scheme
         """ # nopep8
         return self._cards[0].get_value("ialg")
 

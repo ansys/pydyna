@@ -202,7 +202,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def ro(self) -> typing.Optional[float]:
-        """Get or set the Mass density 𝜌.
+        """Get or set the Mass density.
         """ # nopep8
         return self._cards[0].get_value("ro")
 
@@ -274,10 +274,10 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def tastrt(self) -> typing.Optional[float]:
-        """Get or set the Temperature start for simple linear annealing.  See Remark 4.
+        """Get or set the Temperature start for simple linear annealing. See Remark 4.
         IF TASTAR.gt.0 and TAEND.eq.0, an enhanced annealing algorithm is used.In that case, TASTAR is interpreted as anneal optionand an additional card is required.Possible values for the extended anneal option are
-        EQ.1:	linear annealing
-        EQ.2 : JMAK
+        EQ.1: linear annealing
+        EQ.2: JMAK
         """ # nopep8
         return self._cards[1].get_value("tastrt")
 
@@ -288,7 +288,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def tend(self) -> typing.Optional[float]:
-        """Get or set the Temperature end for simple linear annealing.  See Remark 4.IF TASTAR.gt.0 and TAEND.eq.0, an enhanced annealing algorithm is used..
+        """Get or set the Temperature end for simple linear annealing. See Remark 4.IF TASTAR.gt.0 and TAEND.eq.0, an enhanced annealing algorithm is used..
         """ # nopep8
         return self._cards[1].get_value("tend")
 
@@ -301,8 +301,8 @@ class MatGeneralizedPhaseChange(KeywordBase):
     def cte(self) -> typing.Optional[float]:
         """Get or set the Coefficient of thermal expansion:
         GT.0.0: constant value is used
-        LT.0.0: LCID or TABID. Temperature dependent CTE given	by load curve ID = -CTE or a Table ID = -CTE. Use
-        Table ID to describe temperature dependent CTE for	each phase individually.
+        LT.0.0: LCID or TABID. Temperature dependent CTE given by load curve ID = -CTE or a Table ID = -CTE. Use
+        Table ID to describe temperature dependent CTE for each phase individually.
         """ # nopep8
         return self._cards[1].get_value("cte")
 
@@ -357,7 +357,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def xa1pa1(self) -> typing.Optional[int]:
-        """Get or set the Load curve or table ID defining the i-th parameter of the enhanced annealing option.  Interpretation of the parameter depends on TASTAR..
+        """Get or set the Load curve or table ID defining the i-th parameter of the enhanced annealing option. Interpretation of the parameter depends on TASTAR..
         """ # nopep8
         return self._cards[2].get_value("xa1pa1")
 
@@ -368,7 +368,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def xa1pa2(self) -> typing.Optional[int]:
-        """Get or set the Load curve or table ID defining the i-th parameter of the enhanced annealing option.  Interpretation of the parameter depends on TASTAR..
+        """Get or set the Load curve or table ID defining the i-th parameter of the enhanced annealing option. Interpretation of the parameter depends on TASTAR..
         """ # nopep8
         return self._cards[2].get_value("xa1pa2")
 
@@ -379,7 +379,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def xa1pa3(self) -> typing.Optional[int]:
-        """Get or set the Load curve or table ID defining the i-th parameter of the enhanced annealing option.  Interpretation of the parameter depends on TASTAR..
+        """Get or set the Load curve or table ID defining the i-th parameter of the enhanced annealing option. Interpretation of the parameter depends on TASTAR..
         """ # nopep8
         return self._cards[2].get_value("xa1pa3")
 
@@ -390,7 +390,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def xafpa(self) -> typing.Optional[float]:
-        """Get or set the Scalar parameter of the enhanced annealing option if applicable.  Interpretation of the parameter depends on TASTA.
+        """Get or set the Scalar parameter of the enhanced annealing option if applicable. Interpretation of the parameter depends on TASTA.
         """ # nopep8
         return self._cards[2].get_value("xafpa")
 
@@ -403,8 +403,8 @@ class MatGeneralizedPhaseChange(KeywordBase):
     def cteann(self) -> typing.Optional[float]:
         """Get or set the Annealing option for thermal expansion.
         LT.0: | CTEAN | defines the upper temperature limit(cut - off temperature) for evaluation of thermal strains.
-        EQ.0 : no modification of thermal strains
-        EQ.1 : XAEND defines the upper temperature limit(cut - off temperature) for evaluation of thermal strains
+        EQ.0: no modification of thermal strains
+        EQ.1: XAEND defines the upper temperature limit(cut - off temperature) for evaluation of thermal strains
         """ # nopep8
         return self._cards[2].get_value("cteann")
 
@@ -415,21 +415,21 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def ptlaw(self) -> typing.Optional[int]:
-        """Get or set the Table ID to define the phase transformation model as a function of source phase and target phase.  The values in *DEFINE_TABLE are the phase numbers before transformation.  The curves referenced by the table specify transformation model (ordinate) as a function of phase number after transformation.
-        LT.0:	transformation model used in heating
-        EQ.0 : no transformation
-        GT.0 : transformation model is used in cooling
-        There is a variety of possible transformation models which can be specified as ordinate values of the curves :
-        EQ.1 : Koinstinen - Marburger
-        EQ.2 : Johnson - Mehl - Avrami - Kolmogorov(JMAK)
-        EQ.3 : Akerstrom(only for cooling)
-        EQ.4 : Oddy(only for heating)
-        EQ.5 : Phase Recovery I(only for heating)
-        EQ.6 : Phase Recovery II(only for heating)
-        EQ.7 : Parabolic Dissolution I(only for heating)
-        EQ.8 : Parabolic Dissolution II(only for heating)
-        EQ.9 : extended Koinstinen - Marburger(only for cooling)
-        EQ.12 : JMAK for both coolingand heating
+        """Get or set the Table ID to define the phase transformation model as a function of source phase and target phase. The values in *DEFINE_TABLE are the phase numbers before transformation. The curves referenced by the table specify transformation model (ordinate) as a function of phase number after transformation.
+        LT.0: transformation model used in heating
+        EQ.0: no transformation
+        GT.0: transformation model is used in cooling
+        There is a variety of possible transformation models which can be specified as ordinate values of the curves:
+        EQ.1: Koinstinen - Marburger
+        EQ.2: Johnson - Mehl - Avrami - Kolmogorov(JMAK)
+        EQ.3: Akerstrom(only for cooling)
+        EQ.4: Oddy(only for heating)
+        EQ.5: Phase Recovery I(only for heating)
+        EQ.6: Phase Recovery II(only for heating)
+        EQ.7: Parabolic Dissolution I(only for heating)
+        EQ.8: Parabolic Dissolution II(only for heating)
+        EQ.9: extended Koinstinen - Marburger(only for cooling)
+        EQ.12: JMAK for both coolingand heating
         """ # nopep8
         return self._cards[3].get_value("ptlaw")
 
@@ -440,11 +440,10 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def ptstr(self) -> typing.Optional[int]:
-        """Get or set the Table ID to define start temperatures for the transformations as
-        function of source phase and target phase. The values in
+        """Get or set the Table ID to define start temperatures for the transformations as function of source phase and target phase. The values in
         *DEFINE_TABLE are the phase numbers before transformation
         (source phase). The curves referenced by the table specify start
-        temperature (ordinate) versus phase number after transformation	(abscissa).
+        temperature (ordinate) versus phase number after transformation (abscissa).
         """ # nopep8
         return self._cards[3].get_value("ptstr")
 
@@ -455,11 +454,10 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def ptend(self) -> typing.Optional[int]:
-        """Get or set the Table ID to define end temperatures for the transformations as
-        function of source phase and target phase. The values in
+        """Get or set the Table ID to define end temperatures for the transformations as function of source phase and target phase. The values in
         *DEFINE_TABLE are the phase numbers before transformation
         (source phase). The curves referenced by the table specify end
-        temperature (ordinate) versus phase number after transformation	(abscissa).
+        temperature (ordinate) versus phase number after transformation (abscissa).
         """ # nopep8
         return self._cards[3].get_value("ptend")
 
@@ -470,8 +468,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def ptx1(self) -> typing.Optional[int]:
-        """Get or set the Table ID defining the i-th scalar-valued phase transformation
-        parameter as function of source phase and target phase (see
+        """Get or set the Table ID defining the i-th scalar-valued phase transformation parameter as function of source phase and target phase (see
         description of transformation models below to see which
         parameters apply). The values in *DEFINE_TABLE are the phase
         numbers before transformation (source phase). The curves
@@ -487,8 +484,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def ptx2(self) -> typing.Optional[int]:
-        """Get or set the Table ID defining the i-th scalar-valued phase transformation
-        parameter as function of source phase and target phase (see
+        """Get or set the Table ID defining the i-th scalar-valued phase transformation parameter as function of source phase and target phase (see
         description of transformation models below to see which
         parameters apply). The values in *DEFINE_TABLE are the phase
         numbers before transformation (source phase). The curves
@@ -504,8 +500,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def ptx3(self) -> typing.Optional[int]:
-        """Get or set the Table ID defining the i-th scalar-valued phase transformation
-        parameter as function of source phase and target phase (see
+        """Get or set the Table ID defining the i-th scalar-valued phase transformation parameter as function of source phase and target phase (see
         description of transformation models below to see which
         parameters apply). The values in *DEFINE_TABLE are the phase
         numbers before transformation (source phase). The curves
@@ -521,8 +516,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def ptx4(self) -> typing.Optional[int]:
-        """Get or set the Table ID defining the i-th scalar-valued phase transformation
-        parameter as function of source phase and target phase (see
+        """Get or set the Table ID defining the i-th scalar-valued phase transformation parameter as function of source phase and target phase (see
         description of transformation models below to see which
         parameters apply). The values in *DEFINE_TABLE are the phase
         numbers before transformation (source phase). The curves
@@ -538,8 +532,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def ptx5(self) -> typing.Optional[int]:
-        """Get or set the Table ID defining the i-th scalar-valued phase transformation
-        parameter as function of source phase and target phase (see
+        """Get or set the Table ID defining the i-th scalar-valued phase transformation parameter as function of source phase and target phase (see
         description of transformation models below to see which
         parameters apply). The values in *DEFINE_TABLE are the phase
         numbers before transformation (source phase). The curves
@@ -555,8 +548,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def pttab1(self) -> typing.Optional[int]:
-        """Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
-        parameter as function of source phase and target phase (see
+        """Get or set the Table ID of 3D table defining the i-th tabulated phase transformation parameter as function of source phase and target phase (see
         description of transformation models below to see which
         parameters apply). The values in *DEFINE_TABLE_3D are the
         phase numbers before transformation (source phase). The values in
@@ -574,8 +566,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def pttab2(self) -> typing.Optional[int]:
-        """Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
-        parameter as function of source phase and target phase (see
+        """Get or set the Table ID of 3D table defining the i-th tabulated phase transformation parameter as function of source phase and target phase (see
         description of transformation models below to see which
         parameters apply). The values in *DEFINE_TABLE_3D are the
         phase numbers before transformation (source phase). The values in
@@ -593,8 +584,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def pttab3(self) -> typing.Optional[int]:
-        """Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
-        parameter as function of source phase and target phase (see
+        """Get or set the Table ID of 3D table defining the i-th tabulated phase transformation parameter as function of source phase and target phase (see
         description of transformation models below to see which
         parameters apply). The values in *DEFINE_TABLE_3D are the
         phase numbers before transformation (source phase). The values in
@@ -612,8 +602,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def pttab4(self) -> typing.Optional[int]:
-        """Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
-        parameter as function of source phase and target phase (see
+        """Get or set the Table ID of 3D table defining the i-th tabulated phase transformation parameter as function of source phase and target phase (see
         description of transformation models below to see which
         parameters apply). The values in *DEFINE_TABLE_3D are the
         phase numbers before transformation (source phase). The values in
@@ -631,8 +620,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def pttab5(self) -> typing.Optional[int]:
-        """Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
-        parameter as function of source phase and target phase (see
+        """Get or set the Table ID of 3D table defining the i-th tabulated phase transformation parameter as function of source phase and target phase (see
         description of transformation models below to see which
         parameters apply). The values in *DEFINE_TABLE_3D are the
         phase numbers before transformation (source phase). The values in
@@ -650,8 +638,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def pttab6(self) -> typing.Optional[int]:
-        """Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
-        parameter as function of source phase and target phase (see
+        """Get or set the Table ID of 3D table defining the i-th tabulated phase transformation parameter as function of source phase and target phase (see
         description of transformation models below to see which
         parameters apply). The values in *DEFINE_TABLE_3D are the
         phase numbers before transformation (source phase). The values in
@@ -669,8 +656,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def pttab7(self) -> typing.Optional[int]:
-        """Get or set the Table ID of 3D table defining the i-th tabulated phase transformation
-        parameter as function of source phase and target phase (see
+        """Get or set the Table ID of 3D table defining the i-th tabulated phase transformation parameter as function of source phase and target phase (see
         description of transformation models below to see which
         parameters apply). The values in *DEFINE_TABLE_3D are the
         phase numbers before transformation (source phase). The values in
@@ -688,8 +674,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def pteps(self) -> typing.Optional[int]:
-        """Get or set the Table ID containing transformation induced strains as function of
-        source phase and target phase.
+        """Get or set the Table ID containing transformation induced strains as function of source phase and target phase.
         """ # nopep8
         return self._cards[5].get_value("pteps")
 
@@ -700,8 +685,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def ptrip(self) -> typing.Optional[int]:
-        """Get or set the Flag for transformation induced plasticity (TRIP). Algorithm active
-        for positive value of PTRIP.
+        """Get or set the Flag for transformation induced plasticity (TRIP). Algorithm active for positive value of PTRIP.
         """ # nopep8
         return self._cards[5].get_value("ptrip")
 
@@ -734,7 +718,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def nushis(self) -> typing.Optional[int]:
-        """Get or set the Number of additional user defined history variables.  .
+        """Get or set the Number of additional user defined history variables. .
         """ # nopep8
         return self._cards[5].get_value("nushis")
 
@@ -756,7 +740,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def t1phas(self) -> typing.Optional[int]:
-        """Get or set the Lower temperature limit for cooling rate evaluation.  Cooling rate can be used as input for user defined variables.
+        """Get or set the Lower temperature limit for cooling rate evaluation. Cooling rate can be used as input for user defined variables.
         """ # nopep8
         return self._cards[5].get_value("t1phas")
 
@@ -767,7 +751,7 @@ class MatGeneralizedPhaseChange(KeywordBase):
 
     @property
     def t2phas(self) -> typing.Optional[int]:
-        """Get or set the Upper temperature limit for cooling rate evaluation.  Cooling rate can be used as input for user defined variables.
+        """Get or set the Upper temperature limit for cooling rate evaluation. Cooling rate can be used as input for user defined variables.
         """ # nopep8
         return self._cards[5].get_value("t2phas")
 

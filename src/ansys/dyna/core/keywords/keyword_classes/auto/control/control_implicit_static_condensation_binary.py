@@ -66,9 +66,9 @@ class ControlImplicitStaticCondensationBinary(KeywordBase):
     @property
     def sc_flag(self) -> int:
         """Get or set the Static Condensation Control Flag
-        EQ.0:  no static condensation will be performed
-        EQ.1:  create superelement representation based on static condensation.
-        EQ.2:  use static condensation to build a linearized representation for a part and use that linearized representation in the following analysis.
+        EQ.0: no static condensation will be performed
+        EQ.1: create superelement representation based on static condensation.
+        EQ.2: use static condensation to build a linearized representation for a part and use that linearized representation in the following analysis.
         """ # nopep8
         return self._cards[0].get_value("sc_flag")
 

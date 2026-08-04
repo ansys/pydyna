@@ -52,8 +52,8 @@ class FrequencyDomainAcousticIncidentWave(KeywordBase):
     @property
     def type(self) -> int:
         """Get or set the Type of incident sound wave:
-        EQ.1: plane wave.
-        EQ.2: spherical wave.
+        EQ.1: Plane wave.
+        EQ.2: Spherical wave.
         """ # nopep8
         return self._cards[0].get_value("type")
 

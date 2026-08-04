@@ -71,18 +71,18 @@ class DatabaseRecoverNode(KeywordBase):
     def iax(self) -> str:
         """Get or set the Meaning of "x/y/z-Acceleration" or "x/y/z-Velocity" in d3plot and d3thdt output files
         EQ.SMNPD: the minimum principal deviator stress
-        EQ.SMNPR : the minimum principal stress
-        EQ.SMXPD : the maximum principal deviator stress
-        EQ.SMXPR : the maximum principal stress
-        EQ.SMXSH : the maximum shear stress
-        EQ.SPR : nodal pressure
-        EQ.SVM : nodal von Mises stress
-        EQ.SXX : nodal normal stress along x direction
-        EQ.SYY : nodal normal stress along y direction
-        EQ.SZZ : nodal normal stress along z direction
-        EQ.SXY : nodal shear stress along x - y direction
-        EQ.SYZ : nodal shear stress along y - z direction
-        EQ.SZX : nodal shear stress along z - x direction
+        EQ.SMNPR: the minimum principal stress
+        EQ.SMXPD: the maximum principal deviator stress
+        EQ.SMXPR: the maximum principal stress
+        EQ.SMXSH: the maximum shear stress
+        EQ.SPR: nodal pressure
+        EQ.SVM: nodal von Mises stress
+        EQ.SXX: nodal normal stress along x direction
+        EQ.SYY: nodal normal stress along y direction
+        EQ.SZZ: nodal normal stress along z direction
+        EQ.SXY: nodal shear stress along x - y direction
+        EQ.SYZ: nodal shear stress along y - z direction
+        EQ.SZX: nodal shear stress along z - x direction
         For shell elements append either "B" or "T" to the input string to
         recover nodal stresses at the bottom or top layer of shell elements.
         For example, SPRT recovers the nodal pressure at the top layer.
@@ -100,18 +100,18 @@ class DatabaseRecoverNode(KeywordBase):
     def iay(self) -> str:
         """Get or set the Meaning of "x/y/z-Acceleration" or "x/y/z-Velocity" in d3plot and d3thdt output files
         EQ.SMNPD: the minimum principal deviator stress
-        EQ.SMNPR : the minimum principal stress
-        EQ.SMXPD : the maximum principal deviator stress
-        EQ.SMXPR : the maximum principal stress
-        EQ.SMXSH : the maximum shear stress
-        EQ.SPR : nodal pressure
-        EQ.SVM : nodal von Mises stress
-        EQ.SXX : nodal normal stress along x direction
-        EQ.SYY : nodal normal stress along y direction
-        EQ.SZZ : nodal normal stress along z direction
-        EQ.SXY : nodal shear stress along x - y direction
-        EQ.SYZ : nodal shear stress along y - z direction
-        EQ.SZX : nodal shear stress along z - x direction
+        EQ.SMNPR: the minimum principal stress
+        EQ.SMXPD: the maximum principal deviator stress
+        EQ.SMXPR: the maximum principal stress
+        EQ.SMXSH: the maximum shear stress
+        EQ.SPR: nodal pressure
+        EQ.SVM: nodal von Mises stress
+        EQ.SXX: nodal normal stress along x direction
+        EQ.SYY: nodal normal stress along y direction
+        EQ.SZZ: nodal normal stress along z direction
+        EQ.SXY: nodal shear stress along x - y direction
+        EQ.SYZ: nodal shear stress along y - z direction
+        EQ.SZX: nodal shear stress along z - x direction
         For shell elements append either "B" or "T" to the input string to
         recover nodal stresses at the bottom or top layer of shell elements.
         For example, SPRT recovers the nodal pressure at the top layer.
@@ -129,18 +129,18 @@ class DatabaseRecoverNode(KeywordBase):
     def iaz(self) -> str:
         """Get or set the Meaning of "x/y/z-Acceleration" or "x/y/z-Velocity" in d3plot and d3thdt output files
         EQ.SMNPD: the minimum principal deviator stress
-        EQ.SMNPR : the minimum principal stress
-        EQ.SMXPD : the maximum principal deviator stress
-        EQ.SMXPR : the maximum principal stress
-        EQ.SMXSH : the maximum shear stress
-        EQ.SPR : nodal pressure
-        EQ.SVM : nodal von Mises stress
-        EQ.SXX : nodal normal stress along x direction
-        EQ.SYY : nodal normal stress along y direction
-        EQ.SZZ : nodal normal stress along z direction
-        EQ.SXY : nodal shear stress along x - y direction
-        EQ.SYZ : nodal shear stress along y - z direction
-        EQ.SZX : nodal shear stress along z - x direction
+        EQ.SMNPR: the minimum principal stress
+        EQ.SMXPD: the maximum principal deviator stress
+        EQ.SMXPR: the maximum principal stress
+        EQ.SMXSH: the maximum shear stress
+        EQ.SPR: nodal pressure
+        EQ.SVM: nodal von Mises stress
+        EQ.SXX: nodal normal stress along x direction
+        EQ.SYY: nodal normal stress along y direction
+        EQ.SZZ: nodal normal stress along z direction
+        EQ.SXY: nodal shear stress along x - y direction
+        EQ.SYZ: nodal shear stress along y - z direction
+        EQ.SZX: nodal shear stress along z - x direction
         For shell elements append either "B" or "T" to the input string to
         recover nodal stresses at the bottom or top layer of shell elements.
         For example, SPRT recovers the nodal pressure at the top layer.
@@ -157,8 +157,8 @@ class DatabaseRecoverNode(KeywordBase):
     @property
     def method(self) -> int:
         """Get or set the Method used to recover the nodal stress
-        EQ.0:	Zienkiewicz-Zhu's Superconvergent Patch Recovery method
-        EQ.1:	Elemental extrapolation method.
+        EQ.0: Zienkiewicz-Zhu's Superconvergent Patch Recovery method
+        EQ.1: Elemental extrapolation method.
         """ # nopep8
         return self._cards[0].get_value("method")
 
@@ -173,18 +173,18 @@ class DatabaseRecoverNode(KeywordBase):
     def ivx(self) -> str:
         """Get or set the Meaning of "x/y/z-Acceleration" or "x/y/z-Velocity" in d3plot and d3thdt output files
         EQ.SMNPD: the minimum principal deviator stress
-        EQ.SMNPR : the minimum principal stress
-        EQ.SMXPD : the maximum principal deviator stress
-        EQ.SMXPR : the maximum principal stress
-        EQ.SMXSH : the maximum shear stress
-        EQ.SPR : nodal pressure
-        EQ.SVM : nodal von Mises stress
-        EQ.SXX : nodal normal stress along x direction
-        EQ.SYY : nodal normal stress along y direction
-        EQ.SZZ : nodal normal stress along z direction
-        EQ.SXY : nodal shear stress along x - y direction
-        EQ.SYZ : nodal shear stress along y - z direction
-        EQ.SZX : nodal shear stress along z - x direction
+        EQ.SMNPR: the minimum principal stress
+        EQ.SMXPD: the maximum principal deviator stress
+        EQ.SMXPR: the maximum principal stress
+        EQ.SMXSH: the maximum shear stress
+        EQ.SPR: nodal pressure
+        EQ.SVM: nodal von Mises stress
+        EQ.SXX: nodal normal stress along x direction
+        EQ.SYY: nodal normal stress along y direction
+        EQ.SZZ: nodal normal stress along z direction
+        EQ.SXY: nodal shear stress along x - y direction
+        EQ.SYZ: nodal shear stress along y - z direction
+        EQ.SZX: nodal shear stress along z - x direction
         For shell elements append either "B" or "T" to the input string to
         recover nodal stresses at the bottom or top layer of shell elements.
         For example, SPRT recovers the nodal pressure at the top layer.
@@ -202,18 +202,18 @@ class DatabaseRecoverNode(KeywordBase):
     def ivy(self) -> str:
         """Get or set the Meaning of "x/y/z-Acceleration" or "x/y/z-Velocity" in d3plot and d3thdt output files
         EQ.SMNPD: the minimum principal deviator stress
-        EQ.SMNPR : the minimum principal stress
-        EQ.SMXPD : the maximum principal deviator stress
-        EQ.SMXPR : the maximum principal stress
-        EQ.SMXSH : the maximum shear stress
-        EQ.SPR : nodal pressure
-        EQ.SVM : nodal von Mises stress
-        EQ.SXX : nodal normal stress along x direction
-        EQ.SYY : nodal normal stress along y direction
-        EQ.SZZ : nodal normal stress along z direction
-        EQ.SXY : nodal shear stress along x - y direction
-        EQ.SYZ : nodal shear stress along y - z direction
-        EQ.SZX : nodal shear stress along z - x direction
+        EQ.SMNPR: the minimum principal stress
+        EQ.SMXPD: the maximum principal deviator stress
+        EQ.SMXPR: the maximum principal stress
+        EQ.SMXSH: the maximum shear stress
+        EQ.SPR: nodal pressure
+        EQ.SVM: nodal von Mises stress
+        EQ.SXX: nodal normal stress along x direction
+        EQ.SYY: nodal normal stress along y direction
+        EQ.SZZ: nodal normal stress along z direction
+        EQ.SXY: nodal shear stress along x - y direction
+        EQ.SYZ: nodal shear stress along y - z direction
+        EQ.SZX: nodal shear stress along z - x direction
         For shell elements append either "B" or "T" to the input string to
         recover nodal stresses at the bottom or top layer of shell elements.
         For example, SPRT recovers the nodal pressure at the top layer.
@@ -231,18 +231,18 @@ class DatabaseRecoverNode(KeywordBase):
     def ivz(self) -> str:
         """Get or set the Meaning of "x/y/z-Acceleration" or "x/y/z-Velocity" in d3plot and d3thdt output files
         EQ.SMNPD: the minimum principal deviator stress
-        EQ.SMNPR : the minimum principal stress
-        EQ.SMXPD : the maximum principal deviator stress
-        EQ.SMXPR : the maximum principal stress
-        EQ.SMXSH : the maximum shear stress
-        EQ.SPR : nodal pressure
-        EQ.SVM : nodal von Mises stress
-        EQ.SXX : nodal normal stress along x direction
-        EQ.SYY : nodal normal stress along y direction
-        EQ.SZZ : nodal normal stress along z direction
-        EQ.SXY : nodal shear stress along x - y direction
-        EQ.SYZ : nodal shear stress along y - z direction
-        EQ.SZX : nodal shear stress along z - x direction
+        EQ.SMNPR: the minimum principal stress
+        EQ.SMXPD: the maximum principal deviator stress
+        EQ.SMXPR: the maximum principal stress
+        EQ.SMXSH: the maximum shear stress
+        EQ.SPR: nodal pressure
+        EQ.SVM: nodal von Mises stress
+        EQ.SXX: nodal normal stress along x direction
+        EQ.SYY: nodal normal stress along y direction
+        EQ.SZZ: nodal normal stress along z direction
+        EQ.SXY: nodal shear stress along x - y direction
+        EQ.SYZ: nodal shear stress along y - z direction
+        EQ.SZX: nodal shear stress along z - x direction
         For shell elements append either "B" or "T" to the input string to
         recover nodal stresses at the bottom or top layer of shell elements.
         For example, SPRT recovers the nodal pressure at the top layer.

@@ -28,9 +28,6 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _DUALCESEBOUNDARYNONREFLECTIVESEGMENTSET_CARD0 = (
     FieldSchema("ssid", int, 0, 10, None),
-    FieldSchema("dirx", float, 10, 10, None),
-    FieldSchema("diry", float, 20, 10, None),
-    FieldSchema("dirz", float, 30, 10, None),
 )
 
 class DualceseBoundaryNonReflectiveSegmentSet(KeywordBase):
@@ -50,7 +47,7 @@ class DualceseBoundaryNonReflectiveSegmentSet(KeywordBase):
         ]
     @property
     def ssid(self) -> typing.Optional[int]:
-        """Get or set the Segment set ID created with *DUALCESE_SEGMENTSET
+        """Get or set the Segment set ID for the segment set created with *DUALCESE_SEGMENTSET or *DUALCESE_BLOCKMESH
         """ # nopep8
         return self._cards[0].get_value("ssid")
 
@@ -58,37 +55,4 @@ class DualceseBoundaryNonReflectiveSegmentSet(KeywordBase):
     def ssid(self, value: int) -> None:
         """Set the ssid property."""
         self._cards[0].set_value("ssid", value)
-
-    @property
-    def dirx(self) -> typing.Optional[float]:
-        """Get or set the If this vector is non-zero, then it is used as the prescribed flow direction
-        """ # nopep8
-        return self._cards[0].get_value("dirx")
-
-    @dirx.setter
-    def dirx(self, value: float) -> None:
-        """Set the dirx property."""
-        self._cards[0].set_value("dirx", value)
-
-    @property
-    def diry(self) -> typing.Optional[float]:
-        """Get or set the If this vector is non-zero, then it is used as the prescribed flow direction
-        """ # nopep8
-        return self._cards[0].get_value("diry")
-
-    @diry.setter
-    def diry(self, value: float) -> None:
-        """Set the diry property."""
-        self._cards[0].set_value("diry", value)
-
-    @property
-    def dirz(self) -> typing.Optional[float]:
-        """Get or set the If this vector is non-zero, then it is used as the prescribed flow direction
-        """ # nopep8
-        return self._cards[0].get_value("dirz")
-
-    @dirz.setter
-    def dirz(self, value: float) -> None:
-        """Set the dirz property."""
-        self._cards[0].set_value("dirz", value)
 

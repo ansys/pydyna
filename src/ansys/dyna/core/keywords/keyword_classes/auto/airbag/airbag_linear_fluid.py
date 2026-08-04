@@ -197,6 +197,8 @@ class AirbagLinearFluid(KeywordBase):
     @property
     def ro(self) -> typing.Optional[float]:
         """Get or set the Density of the fluid.
+        GT.0.0:	Constant value
+        LT.0.0: | RO | refers to a load curve ID for a curve giving density as a function of time.
         """ # nopep8
         return self._cards[1].get_value("ro")
 
@@ -262,7 +264,7 @@ class AirbagLinearFluid(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining pressure versus time, see *DEFINE_CURVE.
+        """Get or set the Load curve ID defining pressure versus time.
         """ # nopep8
         return self._cards[1].get_value("lcid")
 
@@ -297,8 +299,8 @@ class AirbagLinearFluid(KeywordBase):
     @property
     def nonull(self) -> typing.Optional[int]:
         """Get or set the A flag to applying pressure on null material.
-        EQ.0:	apply pressure everywhere inside the airbag.
-        NE.0:	do not apply pressure on null material part of the airbag.
+        EQ.0: apply pressure everywhere inside the airbag.
+        NE.0: do not apply pressure on null material part of the airbag.
         This feature is useful in a hydroforming simulation, where typically the part set that makes up the airbag will include a part ID of null shells, defined by *MAT_NULL.
         The null shells and a deformable sheet blank will form an airbag, which upon pressurization, will push the blank into a die cavity, forming the blank.
         This feature is available in SMP from Dev 136254.

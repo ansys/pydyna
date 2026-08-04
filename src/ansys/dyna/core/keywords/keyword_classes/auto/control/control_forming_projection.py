@@ -90,9 +90,9 @@ class ControlFormingProjection(KeywordBase):
     @property
     def nrbst(self) -> int:
         """Get or set the Specify whether the blank will move along its normal direction. If its moves along the normal of blank, then this flag also specifies the direction the normal is pointing with respect to the tool.
-        EQ.0: Move the blank’s nodes along the blank’s normal.The normal to the surface of the blank is pointing towards the tool.
-        EQ.1 : Move the blank’s nodes along the blank’s normal.The normal to the surface of the blank is pointing away from the tool.
-        EQ.2 : Move the blank nodes along the tool's normal direction.This case is useful for contact between a guide pinand blank.
+        EQ.0: Move the blanks nodes along the blanks normal.The normal to the surface of the blank is pointing towards the tool.
+        EQ.1: Move the blanks nodes along the blanks normal.The normal to the surface of the blank is pointing away from the tool.
+        EQ.2: Move the blank nodes along the tool's normal direction.This case is useful for contact between a guide pinand blank.
         """ # nopep8
         return self._cards[0].get_value("nrbst")
 

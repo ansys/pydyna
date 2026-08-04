@@ -30,12 +30,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _DEFINEMULTISCALE_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
     FieldSchema("bset", int, 10, 10, None),
-    FieldSchema("id", int, 20, 10, None),
-    FieldSchema("bset", int, 30, 10, None),
-    FieldSchema("id", int, 40, 10, None),
-    FieldSchema("bset", int, 50, 10, None),
-    FieldSchema("id", int, 60, 10, None),
-    FieldSchema("bset", int, 70, 10, None),
+    FieldSchema("ctype", int, 20, 10, 0),
 )
 
 _DEFINEMULTISCALE_OPTION0_CARD0 = (
@@ -73,7 +68,7 @@ class DefineMultiscale(KeywordBase):
         ]
     @property
     def id(self) -> typing.Optional[int]:
-        """Get or set the MULTISCALE local model ID to use.  See *INCLUDE_‌MULTISCALE.
+        """Get or set the MULTISCALE local model ID to use. See *INCLUDE_MULTISCALE.
         """ # nopep8
         return self._cards[0].get_value("id")
 
@@ -94,70 +89,19 @@ class DefineMultiscale(KeywordBase):
         self._cards[0].set_value("bset", value)
 
     @property
-    def id(self) -> typing.Optional[int]:
-        """Get or set the MULTISCALE local model ID to use.  See *INCLUDE_‌MULTISCALE.
+    def ctype(self) -> int:
+        """Get or set the Coupling type (see Remark 2):
+        EQ.0: Weak coupling(default)
+        EQ.1: Strong coupling
         """ # nopep8
-        return self._cards[0].get_value("id")
+        return self._cards[0].get_value("ctype")
 
-    @id.setter
-    def id(self, value: int) -> None:
-        """Set the id property."""
-        self._cards[0].set_value("id", value)
-
-    @property
-    def bset(self) -> typing.Optional[int]:
-        """Get or set the Beam set which uses this multi-scale local model ID for failure modeling
-        """ # nopep8
-        return self._cards[0].get_value("bset")
-
-    @bset.setter
-    def bset(self, value: int) -> None:
-        """Set the bset property."""
-        self._cards[0].set_value("bset", value)
-
-    @property
-    def id(self) -> typing.Optional[int]:
-        """Get or set the MULTISCALE local model ID to use.  See *INCLUDE_‌MULTISCALE.
-        """ # nopep8
-        return self._cards[0].get_value("id")
-
-    @id.setter
-    def id(self, value: int) -> None:
-        """Set the id property."""
-        self._cards[0].set_value("id", value)
-
-    @property
-    def bset(self) -> typing.Optional[int]:
-        """Get or set the Beam set which uses this multi-scale local model ID for failure modeling
-        """ # nopep8
-        return self._cards[0].get_value("bset")
-
-    @bset.setter
-    def bset(self, value: int) -> None:
-        """Set the bset property."""
-        self._cards[0].set_value("bset", value)
-
-    @property
-    def id(self) -> typing.Optional[int]:
-        """Get or set the MULTISCALE local model ID to use.  See *INCLUDE_‌MULTISCALE.
-        """ # nopep8
-        return self._cards[0].get_value("id")
-
-    @id.setter
-    def id(self, value: int) -> None:
-        """Set the id property."""
-        self._cards[0].set_value("id", value)
-
-    @property
-    def bset(self) -> typing.Optional[int]:
-        """Get or set the Beam set which uses this multi-scale local model ID for failure modeling
-        """ # nopep8
-        return self._cards[0].get_value("bset")
-
-    @bset.setter
-    def bset(self, value: int) -> None:
-        """Set the bset property."""
-        self._cards[0].set_value("bset", value)
+    @ctype.setter
+    def ctype(self, value: int) -> None:
+        """Set the ctype property."""
+        if value not in [0, 1, None]:
+            raise Exception("""ctype must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("ctype", value)
 
     @property
     def title(self) -> typing.Optional[str]:

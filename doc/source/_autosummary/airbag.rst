@@ -27,6 +27,20 @@ AirbagAle
     :members:
 
 
+AirbagCpg
+---------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.airbag_cpg
+    :members:
+
+
+AirbagCpgId
+-----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.airbag_cpg_id
+    :members:
+
+
 AirbagFluidAndGas
 -----------------
 
@@ -1088,6 +1102,34 @@ AirbagReferenceGeometryRdtId
 ----------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.airbag_reference_geometry_rdt_id
+    :members:
+
+
+AirbagSale
+----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.airbag_sale
+    :members:
+
+
+AirbagSaleExtra
+---------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.airbag_sale_extra
+    :members:
+
+
+AirbagSaleExtraId
+-----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.airbag_sale_extra_id
+    :members:
+
+
+AirbagSaleId
+------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.airbag_sale_id
     :members:
 
 

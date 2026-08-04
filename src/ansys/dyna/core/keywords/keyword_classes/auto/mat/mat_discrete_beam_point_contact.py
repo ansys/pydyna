@@ -188,8 +188,8 @@ class MatDiscreteBeamPointContact(KeywordBase):
     @property
     def limpz(self) -> typing.Optional[float]:
         """Get or set the Action when Node 2 passes DMXPZ:
-        EQ.0:	element is deleted
-        EQ.1:	further displacement is resisted by stiffness STIFF.
+        EQ.0: element is deleted
+        EQ.1: further displacement is resisted by stiffness STIFF.
         """ # nopep8
         return self._cards[0].get_value("limpz")
 
@@ -245,8 +245,8 @@ class MatDiscreteBeamPointContact(KeywordBase):
     @property
     def limpx(self) -> typing.Optional[float]:
         """Get or set the Action when Node 2 passes DMXPX:
-        EQ.0:	element is deleted
-        EQ.1:	further displacement is resisted by stiffness STIFF.
+        EQ.0: element is deleted
+        EQ.1: further displacement is resisted by stiffness STIFF.
         """ # nopep8
         return self._cards[1].get_value("limpx")
 
@@ -258,8 +258,8 @@ class MatDiscreteBeamPointContact(KeywordBase):
     @property
     def limnx(self) -> typing.Optional[float]:
         """Get or set the Action when Node 2 passes DMXNX:
-        EQ.0:	element is deleted
-        EQ.1:	further displacement is resisted by stiffness STIFF.
+        EQ.0: element is deleted
+        EQ.1: further displacement is resisted by stiffness STIFF.
         """ # nopep8
         return self._cards[1].get_value("limnx")
 
@@ -271,8 +271,8 @@ class MatDiscreteBeamPointContact(KeywordBase):
     @property
     def limpy(self) -> typing.Optional[float]:
         """Get or set the Action when Node 2 passes DMXPY:
-        EQ.0:	element is deleted
-        EQ.1:	further displacement is resisted by stiffness STIFF.
+        EQ.0: element is deleted
+        EQ.1: further displacement is resisted by stiffness STIFF.
         """ # nopep8
         return self._cards[1].get_value("limpy")
 
@@ -284,8 +284,8 @@ class MatDiscreteBeamPointContact(KeywordBase):
     @property
     def limny(self) -> typing.Optional[float]:
         """Get or set the Action when Node 2 passes DMXNY:
-        EQ.0:	element is deleted
-        EQ.1:	further displacement is resisted by stiffness STIFF.
+        EQ.0: element is deleted
+        EQ.1: further displacement is resisted by stiffness STIFF.
         """ # nopep8
         return self._cards[1].get_value("limny")
 

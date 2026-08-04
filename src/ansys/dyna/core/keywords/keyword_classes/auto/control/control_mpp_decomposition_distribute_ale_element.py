@@ -27,6 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _CONTROLMPPDECOMPOSITIONDISTRIBUTEALEELEMENT_CARD0 = (
+    FieldSchema("overlap", int, 0, 10, None),
 )
 
 class ControlMppDecompositionDistributeAleElement(KeywordBase):
@@ -44,3 +45,16 @@ class ControlMppDecompositionDistributeAleElement(KeywordBase):
                 **kwargs,
             ),
         ]
+    @property
+    def overlap(self) -> typing.Optional[int]:
+        """Get or set the For FSI models where structures are inside ALE meshes (see *CONSTRAINED_LAGRANGE_IN_SOLID), flag to decompose the structure and ALE domains together instead of first the structure and then the ALE (see Remark 2).
+        EQ.0 : Off
+        EQ.1 : On
+        """ # nopep8
+        return self._cards[0].get_value("overlap")
+
+    @overlap.setter
+    def overlap(self, value: int) -> None:
+        """Set the overlap property."""
+        self._cards[0].set_value("overlap", value)
+

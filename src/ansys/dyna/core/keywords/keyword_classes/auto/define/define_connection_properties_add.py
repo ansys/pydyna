@@ -27,6 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _DEFINECONNECTIONPROPERTIESADD_CARD0 = (
     FieldSchema("con_id", int, 0, 10, None),
@@ -55,7 +56,7 @@ _DEFINECONNECTIONPROPERTIESADD_CARD2 = (
     FieldSchema("lcsn", int, 30, 10, None),
     FieldSchema("lcsb", int, 40, 10, None),
     FieldSchema("lcss", int, 50, 10, None),
-    FieldSchema("gfad", int, 60, 10, None),
+    FieldSchema("gfad", float, 60, 10, None),
     FieldSchema("sclmrr", float, 70, 10, 1.0),
 )
 
@@ -73,6 +74,9 @@ class DefineConnectionPropertiesAdd(KeywordBase):
     ]
     _link_fields = {
         "mid": LinkType.MAT,
+        "lcsn": LinkType.DEFINE_CURVE,
+        "lcsb": LinkType.DEFINE_CURVE,
+        "lcss": LinkType.DEFINE_CURVE,
     }
 
     def __init__(self, **kwargs):
@@ -128,9 +132,9 @@ class DefineConnectionPropertiesAdd(KeywordBase):
     @property
     def areaeq(self) -> int:
         """Get or set the Area equation number for the connection area calculation.
-        EQ.0:	(default) area_true=area_modeled
-        EQ.1: 	millimeter form;
-        EQ.-1:	meter form;
+        EQ.0: (default) area_true=area_modeled
+        EQ.1: millimeter form;
+        EQ.-1: meter form;
         """ # nopep8
         return self._cards[0].get_value("areaeq")
 
@@ -144,10 +148,10 @@ class DefineConnectionPropertiesAdd(KeywordBase):
     @property
     def dg_typ(self) -> int:
         """Get or set the Damage type
-        EQ.0:  no damage function is used
-        EQ.1:  strain based damage
-        EQ.2:  failure function based damage
-        EQ.3 or 4:  fading energy based damage
+        EQ.0: no damage function is used
+        EQ.1: strain based damage
+        EQ.2: failure function based damage
+        EQ.3 or 4: fading energy based damage
         """ # nopep8
         return self._cards[0].get_value("dg_typ")
 
@@ -186,7 +190,9 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @property
     def sgiy(self) -> typing.Optional[float]:
-        """Get or set the Yield stress to be used in the spot weld element calculation
+        """Get or set the Yield stress to be used in the spot weld element calculation:
+        GT.0: Constant value
+        LT.0: |"SIGY"| references a yield curve or table; see Remark 6
         """ # nopep8
         return self._cards[1].get_value("sgiy")
 
@@ -219,7 +225,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @property
     def rank(self) -> typing.Optional[float]:
-        """Get or set the Rank value
+        """Get or set the Rank value. See Remark 4.
         """ # nopep8
         return self._cards[1].get_value("rank")
 
@@ -296,7 +302,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @property
     def lcsn(self) -> typing.Optional[int]:
-        """Get or set the Curve ID for normal strength scale factor as a function of strain rate
+        """Get or set the Curve ID for normal strength scale factor as a function of strain rate. If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as a natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[2].get_value("lcsn")
 
@@ -307,7 +313,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @property
     def lcsb(self) -> typing.Optional[int]:
-        """Get or set the Curve ID for bending strength scale factor as a function of strain rate.
+        """Get or set the Curve ID for bending strength scale factor as a function of strain rate. If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as a natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[2].get_value("lcsb")
 
@@ -318,7 +324,7 @@ class DefineConnectionPropertiesAdd(KeywordBase):
 
     @property
     def lcss(self) -> typing.Optional[int]:
-        """Get or set the Curve ID for shear strength scale factor as a function of strain rate
+        """Get or set the Curve ID for shear strength scale factor as a function of strain rate. If the first strain rate value in the curve is negative, it is assumed that all strain rate values are given as a natural logarithm of the strain rate.
         """ # nopep8
         return self._cards[2].get_value("lcss")
 
@@ -328,13 +334,13 @@ class DefineConnectionPropertiesAdd(KeywordBase):
         self._cards[2].set_value("lcss", value)
 
     @property
-    def gfad(self) -> typing.Optional[int]:
-        """Get or set the Fading energy for damage type 3.
+    def gfad(self) -> typing.Optional[float]:
+        """Get or set the Fading energy for damage type 3 and 4.
         """ # nopep8
         return self._cards[2].get_value("gfad")
 
     @gfad.setter
-    def gfad(self, value: int) -> None:
+    def gfad(self, value: float) -> None:
         """Set the gfad property."""
         self._cards[2].set_value("gfad", value)
 
@@ -377,4 +383,49 @@ class DefineConnectionPropertiesAdd(KeywordBase):
     def mid_link(self, value: KeywordBase) -> None:
         """Set the MAT_* keyword for mid."""
         self.mid = value.mid
+
+    @property
+    def lcsn_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcsn."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsn:
+                return kwd
+        return None
+
+    @lcsn_link.setter
+    def lcsn_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsn."""
+        self.lcsn = value.lcid
+
+    @property
+    def lcsb_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcsb."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcsb:
+                return kwd
+        return None
+
+    @lcsb_link.setter
+    def lcsb_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcsb."""
+        self.lcsb = value.lcid
+
+    @property
+    def lcss_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcss."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcss:
+                return kwd
+        return None
+
+    @lcss_link.setter
+    def lcss_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcss."""
+        self.lcss = value.lcid
 

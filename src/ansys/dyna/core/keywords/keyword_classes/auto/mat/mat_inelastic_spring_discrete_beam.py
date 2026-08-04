@@ -228,7 +228,7 @@ class MatInelasticSpringDiscreteBeam(KeywordBase):
 
     @property
     def glcid(self) -> typing.Optional[int]:
-        """Get or set the Optional load curve ID, see *DEFINE_CURVE, defining a scale factor versus deflection  for load curve ID, GLCID.
+        """Get or set the Optional load curve ID, see *DEFINE_CURVE, defining a scale factor versus deflection for load curve ID, GLCID.
         If zero, a scale factor of unity is assumed.
         """ # nopep8
         return self._cards[1].get_value("glcid")

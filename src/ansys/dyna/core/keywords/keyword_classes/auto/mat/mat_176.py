@@ -318,7 +318,7 @@ class Mat176(KeywordBase):
 
     @property
     def form(self) -> int:
-        """Get or set the Formulation of model. FORM=0 gives the original model developed by Fung, which always relaxes to a zero stress state as time approaches infinity, and FORM=1 gives the alternative model, which relaxes to the quasi-static elastic response. In general, the two formulations won't give the same responses.  Formulation, FORM=-1, is an improvement on FORM=0 where the instantaneous elastic response is used in the viscoelastic stress update, not just in the relaxation, as in FORM=0.  Consequently, the constants for the elastic response do not need to be scaled
+        """Get or set the Formulation of model. FORM=0 gives the original model developed by Fung, which always relaxes to a zero stress state as time approaches infinity, and FORM=1 gives the alternative model, which relaxes to the quasi-static elastic response. In general, the two formulations won't give the same responses. Formulation, FORM=-1, is an improvement on FORM=0 where the instantaneous elastic response is used in the viscoelastic stress update, not just in the relaxation, as in FORM=0. Consequently, the constants for the elastic response do not need to be scaled
         """ # nopep8
         return self._cards[1].get_value("form")
 

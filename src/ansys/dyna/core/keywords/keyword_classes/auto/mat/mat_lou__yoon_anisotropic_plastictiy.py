@@ -201,7 +201,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
 
     @property
     def pr(self) -> typing.Optional[float]:
-        """Get or set the Poisson’s ratio
+        """Get or set the Poisson's ratio
         """ # nopep8
         return self._cards[0].get_value("pr")
 
@@ -213,12 +213,12 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
     @property
     def hr(self) -> float:
         """Get or set the Hardening rules (see section Hardening laws below):
-        EQ.1.0:	Linear hardening(default)
-        EQ.2.0 : Exponential hardening(Swift)
-        EQ.3.0 : Load curve
-        EQ.4.0 : Exponential hardening(Voce)
-        EQ.5.0 : Exponential hardening(Gosh)
-        EQ.6.0 : Exponential hardening(Hocken - Sherby)
+        EQ.1.0: Linear hardening(default)
+        EQ.2.0: Exponential hardening(Swift)
+        EQ.3.0: Load curve
+        EQ.4.0: Exponential hardening(Voce)
+        EQ.5.0: Exponential hardening(Gosh)
+        EQ.6.0: Exponential hardening(Hocken - Sherby)
         """ # nopep8
         return self._cards[0].get_value("hr")
 
@@ -232,11 +232,11 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
     @property
     def p1(self) -> typing.Optional[float]:
         """Get or set the Material parameter:
-        HR.EQ.1.0:	Tangent modulus
-        HR.EQ.2.0 : q, coefficient for exponential hardening law(Swift)
-        HR.EQ.4.0 : a, coefficient for exponential hardening law(Voce)
-        HR.EQ.5.0 : q, coefficient for exponential hardening law(Gosh)
-        HR.EQ.6.0 : a, coefficient for exponential hardening law(Hocket - Sherby)
+        HR.EQ.1.0: Tangent modulus
+        HR.EQ.2.0: q, coefficient for exponential hardening law(Swift)
+        HR.EQ.4.0: a, coefficient for exponential hardening law(Voce)
+        HR.EQ.5.0: q, coefficient for exponential hardening law(Gosh)
+        HR.EQ.6.0: a, coefficient for exponential hardening law(Hocket - Sherby)
         """ # nopep8
         return self._cards[0].get_value("p1")
 
@@ -248,11 +248,11 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
     @property
     def p2(self) -> typing.Optional[float]:
         """Get or set the Material parameter:
-        HR.EQ.1.0:	Yield stress for the linear hardening law
-        HR.EQ.2.0 : n, coefficient for (Swift) exponential hardening
-        HR.EQ.4.0 : c, coefficient for exponential hardening law(Voce)
-        HR.EQ.5.0 : n, coefficient for exponential hardening law(Gosh)
-        HR.EQ.6.0 : c, coefficient for exponential hardening law(Hocket - Sherby)
+        HR.EQ.1.0: Yield stress for the linear hardening law
+        HR.EQ.2.0: n, coefficient for (Swift) exponential hardening
+        HR.EQ.4.0: c, coefficient for exponential hardening law(Voce)
+        HR.EQ.5.0: n, coefficient for exponential hardening law(Gosh)
+        HR.EQ.6.0: c, coefficient for exponential hardening law(Hocket - Sherby)
         """ # nopep8
         return self._cards[0].get_value("p2")
 
@@ -264,8 +264,8 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
     @property
     def iter(self) -> float:
         """Get or set the Iteration flag for speed:
-        EQ.0.0:	Fully iterative
-        EQ.1.0 : Fixed at three iterations.Generally, ITER = 0.0 is recommended.However, ITER = 1.0 is faster and may give acceptable results in most problems
+        EQ.0.0: Fully iterative
+        EQ.1.0: Fixed at three iterations.Generally, ITER = 0.0 is recommended.However, ITER = 1.0 is faster and may give acceptable results in most problems
         """ # nopep8
         return self._cards[0].get_value("iter")
 
@@ -277,8 +277,8 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
     @property
     def afr(self) -> typing.Optional[int]:
         """Get or set the Flag to use associated flow rule (AFR):
-        EQ.0:	Use non - AFR.
-        EQ.1 : Use AFR.
+        EQ.0: Use non - AFR.
+        EQ.1: Use AFR.
         """ # nopep8
         return self._cards[1].get_value("afr")
 
@@ -301,10 +301,10 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC for more complete description).
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes.The shells only the material axes are rotated about the normal vector to the surface of the shell by the angle BETA.
-        EQ.2.0 : Globally orthotropic with material axes determined by vectors defined a and d defined below, as with* DEFINED_COORDINATE_VECTOR.
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.The material directions are determined as follows : a is the cross product of v with the normal vector, b is the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element.
-        LT.0.0 : The absolute value of AOPT is a coordinate system ID(CID on * DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM, or *DEFINE_COORDINATE_VECTOR).
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes.The shells only the material axes are rotated about the normal vector to the surface of the shell by the angle BETA.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined a and d defined below, as with *DEFINED_COORDINATE_VECTOR.
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.The material directions are determined as follows: a is the cross product of v with the normal vector, b is the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID(CID on *DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM, or *DEFINE_COORDINATE_VECTOR).
         """ # nopep8
         return self._cards[1].get_value("aopt")
 
@@ -327,10 +327,10 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
     @property
     def e0(self) -> typing.Optional[float]:
         """Get or set the Material parameter:
-        HR.EQ.2.0:	ε_0, initial yield strain for exponential hardening law(Swift) (default = 0.0)
-        HR.EQ.4.0 : b, coefficient for exponential hardening(Voce)
-        HR.EQ.5.0 : ε_0, initial yield strain for exponential hardening(Gosh), Default = 0.0
-        HR.EQ.6.0 : b, coefficient for exponential hardening law(Hocket - Sherby)
+        HR.EQ.2.0: eps_0, initial yield strain for exponential hardening law(Swift) (default = 0.0)
+        HR.EQ.4.0: b, coefficient for exponential hardening(Voce)
+        HR.EQ.5.0: eps_0, initial yield strain for exponential hardening(Gosh), Default = 0.0
+        HR.EQ.6.0: b, coefficient for exponential hardening law(Hocket - Sherby)
         """ # nopep8
         return self._cards[1].get_value("e0")
 
@@ -342,10 +342,10 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
     @property
     def lcf(self) -> int:
         """Get or set the Fracture curve:
-        EQ.0:	No fracture curves(default)
-        GT.0 : Load curve or table ID of customized fracture curve / surface.If referring to a load curve ID, the fracture curve is defined as effective plastic strain as a function of triaxiality.If referring to a table ID, for each load parameter, an effective plastic strain as a function of.triaxiality curve can be defined(only applicable to solids
-        EQ. - 1:	Drucker ductile fracture criterion.Optional Card 7 is needed in this case.VF1, VF2and VF3 in Card 7 will be used as a, band c in the Drucker ductile fracture criterion.See section Fracture criteria for more details.
-        EQ. - 2:	DF2016 fracture criterion.Optional card 7 is needed in this case.VF1, VF2, VF3, VF4and VF5 in Card 7 will be used as C1, C2, C3and C in DF2016 criterion.See section Fracture criteria for more details.
+        EQ.0: No fracture curves(default)
+        GT.0: Load curve or table ID of customized fracture curve / surface.If referring to a load curve ID, the fracture curve is defined as effective plastic strain as a function of triaxiality.If referring to a table ID, for each load parameter, an effective plastic strain as a function of.triaxiality curve can be defined(only applicable to solids
+        EQ. - 1: Drucker ductile fracture criterion.Optional Card 7 is needed in this case.VF1, VF2and VF3 in Card 7 will be used as a, band c in the Drucker ductile fracture criterion.See section Fracture criteria for more details.
+        EQ. - 2: DF2016 fracture criterion.Optional card 7 is needed in this case.VF1, VF2, VF3, VF4and VF5 in Card 7 will be used as C1, C2, C3and C in DF2016 criterion.See section Fracture criteria for more details.
         """ # nopep8
         return self._cards[1].get_value("lcf")
 
@@ -356,7 +356,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
 
     @property
     def p3(self) -> typing.Optional[float]:
-        """Get or set the Material parameter:HR.EQ.5.0:	p, coefficient for exponential hardening(Gosh)HR.EQ.6.0 : n, exponent for exponential hardening law(Hocket - Sherby)
+        """Get or set the Material parameter:HR.EQ.5.0: p, coefficient for exponential hardening(Gosh)HR.EQ.6.0: n, exponent for exponential hardening law(Hocket - Sherby)
         """ # nopep8
         return self._cards[1].get_value("p3")
 
@@ -466,7 +466,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
 
     @property
     def c1(self) -> typing.Optional[float]:
-        """Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+        """Get or set the Anisotropic parameters c_1**' through c_6**' that defines the fourth order linear transformation tensor L'
         """ # nopep8
         return self._cards[4].get_value("c1")
 
@@ -477,7 +477,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
 
     @property
     def c2(self) -> typing.Optional[float]:
-        """Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+        """Get or set the Anisotropic parameters c_1**' through c_6**' that defines the fourth order linear transformation tensor L'
         """ # nopep8
         return self._cards[4].get_value("c2")
 
@@ -488,7 +488,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
 
     @property
     def c3(self) -> typing.Optional[float]:
-        """Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+        """Get or set the Anisotropic parameters c_1**' through c_6**' that defines the fourth order linear transformation tensor L'
         """ # nopep8
         return self._cards[4].get_value("c3")
 
@@ -499,7 +499,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
 
     @property
     def c4(self) -> typing.Optional[float]:
-        """Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+        """Get or set the Anisotropic parameters c_1**' through c_6**' that defines the fourth order linear transformation tensor L'
         """ # nopep8
         return self._cards[4].get_value("c4")
 
@@ -510,7 +510,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
 
     @property
     def c5(self) -> typing.Optional[float]:
-        """Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+        """Get or set the Anisotropic parameters c_1**' through c_6**' that defines the fourth order linear transformation tensor L'
         """ # nopep8
         return self._cards[4].get_value("c5")
 
@@ -521,7 +521,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
 
     @property
     def c6(self) -> typing.Optional[float]:
-        """Get or set the Anisotropic parameters c_1^' through c_6^' that defines the fourth order linear transformation tensor L'
+        """Get or set the Anisotropic parameters c_1**' through c_6**' that defines the fourth order linear transformation tensor L'
         """ # nopep8
         return self._cards[4].get_value("c6")
 
@@ -543,7 +543,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
 
     @property
     def pc1(self) -> typing.Optional[float]:
-        """Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+        """Get or set the Anisotropic parameters c**_1 through c**_6 that defines the fourth order linear transformation tensor L for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
         """ # nopep8
         return self._cards[5].get_value("pc1")
 
@@ -554,7 +554,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
 
     @property
     def pc2(self) -> typing.Optional[float]:
-        """Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+        """Get or set the Anisotropic parameters c**_1 through c**_6 that defines the fourth order linear transformation tensor L for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
         """ # nopep8
         return self._cards[5].get_value("pc2")
 
@@ -565,7 +565,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
 
     @property
     def pc3(self) -> typing.Optional[float]:
-        """Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+        """Get or set the Anisotropic parameters c**_1 through c**_6 that defines the fourth order linear transformation tensor L for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
         """ # nopep8
         return self._cards[5].get_value("pc3")
 
@@ -576,7 +576,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
 
     @property
     def pc4(self) -> typing.Optional[float]:
-        """Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+        """Get or set the Anisotropic parameters c**_1 through c**_6 that defines the fourth order linear transformation tensor L for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
         """ # nopep8
         return self._cards[5].get_value("pc4")
 
@@ -587,7 +587,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
 
     @property
     def pc5(self) -> typing.Optional[float]:
-        """Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+        """Get or set the Anisotropic parameters c**_1 through c**_6 that defines the fourth order linear transformation tensor L for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
         """ # nopep8
         return self._cards[5].get_value("pc5")
 
@@ -598,7 +598,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
 
     @property
     def pc6(self) -> typing.Optional[float]:
-        """Get or set the Anisotropic parameters c ̂_1 through c ̂_6 that defines the fourth order linear transformation tensor L ̂ for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
+        """Get or set the Anisotropic parameters c**_1 through c**_6 that defines the fourth order linear transformation tensor L for the plastic potential in the non-AFR case (see field AFR which is input on Card 2).
         """ # nopep8
         return self._cards[5].get_value("pc6")
 
@@ -609,7 +609,7 @@ class MatLou_YoonAnisotropicPlastictiy(KeywordBase):
 
     @property
     def pcc(self) -> typing.Optional[float]:
-        """Get or set the Material constant c ̂ in Drucker function for the plastic potential. c ̂ is recommended to be 1.226 for BCC metals and 2 for FCC metals unless calibrated otherwise.
+        """Get or set the Material constant c** in Drucker function for the plastic potential. c** is recommended to be 1.226 for BCC metals and 2 for FCC metals unless calibrated otherwise.
         """ # nopep8
         return self._cards[5].get_value("pcc")
 

@@ -141,12 +141,12 @@ class PartModes(KeywordBase):
     @property
     def format(self) -> int:
         """Get or set the Input format of modal information:
-        EQ.0:  NASTRAN.pch file.
-        EQ.1:  (not supported)
-        EQ.2:  NASTRAN.pch file (LS-DYNA binary version).  The binary version of this file is automatically created if a NASTRAN.pch file is read.  The name of the binary file is the name of the NASTRAN.pch file but with ".bin" appended.  The binary file is smaller and can be read much faster.
-        EQ.3:  LS-DYNA d3eigv binary eigenvalue database (see *CONTROL_IMPLICIT_EIGENVALUE).
-        EQ.4:  LS-DYNA d3mode binary constraint/attachment mode database (see *CONTROL_IMPLICIT_MODE).
-        EQ.5:  Both d3eigv and d3mode databases are input.  Database names must be "d3eigv" and "d3mode", and FILENAME below is ignored.  NMFB above gives the total number of modes in both databases.
+        EQ.0: NASTRAN.pch file.
+        EQ.1: (not supported)
+        EQ.2: NASTRAN.pch file (LS-DYNA binary version).  The binary version of this file is automatically created if a NASTRAN.pch file is read.  The name of the binary file is the name of the NASTRAN.pch file but with ".bin" appended.  The binary file is smaller and can be read much faster.
+        EQ.3: LS-DYNA d3eigv binary eigenvalue database (see *CONTROL_IMPLICIT_EIGENVALUE).
+        EQ.4: LS-DYNA d3mode binary constraint/attachment mode database (see *CONTROL_IMPLICIT_MODE).
+        EQ.5: Both d3eigv and d3mode databases are input.  Database names must be "d3eigv" and "d3mode", and FILENAME below is ignored.  NMFB above gives the total number of modes in both databases.
         """ # nopep8
         return self._cards[0].get_value("format")
 

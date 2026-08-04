@@ -461,22 +461,14 @@ class MatCfMicromechanics(KeywordBase):
 
     @property
     def aopt(self) -> typing.Optional[float]:
-        """Get or set the Material axes option (see MAT_OPTION TROPIC_ELASTIC for a
-        more complete description):
-        EQ.0.0: locally orthotropic with material axes determined by
-        element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES.
-        EQ.2.0: globally orthotropic with material axes determined by
-        vectors defined below, as with *DEFINE_COORDINATE_VECTOR.
+        """Get or set the Material axes option (see MAT_OPTION TROPIC_ELASTIC for a more complete description):
+        EQ.0.0: locally orthotropic with material axes determined by element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES.
+        EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR.
         EQ.3.0: locally orthotropic material axes for each integration
         point determined by rotating the material axes about
-        the element normal by an angle, Bi (see
-        *PART_COMPOSITE), from a line in the plane of the
-        element defined by the cross product of the vector ..
+        the element normal by an angle, Bi (see *PART_COMPOSITE), from a line in the plane of the element defined by the cross product of the vector ..
         with the element normal.
-        LT.0.0: the absolute value of AOPT is a coordinate system ID
-        number (CID on *DEFINE_COORDINATE_NODES,
-        *DEFINE_COORDINATE_SYSTEM or *DEFINE_COORDINATE_VECTOR).
-        Available in R3 version of 971 and later.
+        LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM or *DEFINE_COORDINATE_VECTOR). Available in R3 version of 971 and later.
         """ # nopep8
         return self._cards[3].get_value("aopt")
 
@@ -663,7 +655,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @property
     def chexp1(self) -> typing.Optional[float]:
-        """Get or set the Quadratic parameter γ2 for chemical shrinkage.
+        """Get or set the Quadratic parameter gamma_2 for chemical shrinkage.
         """ # nopep8
         return self._cards[7].get_value("chexp1")
 
@@ -674,7 +666,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @property
     def chexp2(self) -> typing.Optional[float]:
-        """Get or set the Quadratic parameter γ1 for chemical shrinkage.
+        """Get or set the Quadratic parameter gamma_1 for chemical shrinkage.
         """ # nopep8
         return self._cards[7].get_value("chexp2")
 
@@ -685,7 +677,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @property
     def chexp3(self) -> typing.Optional[float]:
-        """Get or set the Quadratic parameter γ0 for chemical shrinkage.
+        """Get or set the Quadratic parameter gamma_0 for chemical shrinkage.
         """ # nopep8
         return self._cards[7].get_value("chexp3")
 
@@ -696,9 +688,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @property
     def lcchexp(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID to define the coefficient for chemical shrinkage
-        γ(α) as a function of the state of cure α. If set, parameters
-        CHEXP1, CHEXP2, and CHEXP3 are ignored
+        """Get or set the Load curve ID to define the coefficient for chemical shrinkage gamma(alpha) as a function of the state of cure alpha. If set, parameters CHEXP1, CHEXP2, and CHEXP3 are ignored
         """ # nopep8
         return self._cards[7].get_value("lcchexp")
 
@@ -709,10 +699,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @property
     def lcthexp(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID or table ID defining the instantaneous coefficient
-        of thermal expansion β(α, T) as a function of cure α and
-        temperature T. If referring to a load curve, parameter β(T) is a
-        function of temperature T.
+        """Get or set the Load curve ID or table ID defining the instantaneous coefficient of thermal expansion beta(alpha, T) as a function of cure alpha and temperature T. If referring to a load curve, parameter beta(T) is a function of temperature T.
         """ # nopep8
         return self._cards[7].get_value("lcthexp")
 
@@ -745,7 +732,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @property
     def docref(self) -> typing.Optional[float]:
-        """Get or set the Reference degree of cure α0 for sequential form of chemical expansion.
+        """Get or set the Reference degree of cure alpha_0 for sequential form of chemical expansion.
         """ # nopep8
         return self._cards[7].get_value("docref")
 
@@ -800,7 +787,7 @@ class MatCfMicromechanics(KeywordBase):
 
     @property
     def lck0(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining the instantaneous bulk modulus K0 as a	function of state of cure.
+        """Get or set the Load curve ID defining the instantaneous bulk modulus K0 as a function of state of cure.
         """ # nopep8
         return self._cards[8].get_value("lck0")
 

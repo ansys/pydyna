@@ -92,7 +92,7 @@ class SetBeamGenerateCollect(KeywordBase):
 
     @property
     def b1beg(self) -> typing.Optional[int]:
-        """Get or set the First beam element ID in the first block.
+        """Get or set the First beam element ID in the first block. All defined IDs between and including B[N]BEG to B[N]END are added to the set.  These sets are generated after all input is read so that gaps in the element numbering are not a problem.  B[N]BEG and B[N]END may simply be limits on the IDs and not element IDs.
         """ # nopep8
         return self._cards[1].get_value("b1beg")
 
@@ -103,7 +103,7 @@ class SetBeamGenerateCollect(KeywordBase):
 
     @property
     def b1end(self) -> typing.Optional[int]:
-        """Get or set the Last beam element ID in the first block.
+        """Get or set the Last beam element ID in the first block. All defined IDs between and including B[N]BEG to B[N]END are added to the set.  These sets are generated after all input is read so that gaps in the element numbering are not a problem.  B[N]BEG and B[N]END may simply be limits on the IDs and not element IDs.
         """ # nopep8
         return self._cards[1].get_value("b1end")
 
@@ -114,7 +114,7 @@ class SetBeamGenerateCollect(KeywordBase):
 
     @property
     def b2beg(self) -> typing.Optional[int]:
-        """Get or set the First beam element ID in the second block.
+        """Get or set the First beam element ID in the second block. All defined IDs between and including B[N]BEG to B[N]END are added to the set.  These sets are generated after all input is read so that gaps in the element numbering are not a problem.  B[N]BEG and B[N]END may simply be limits on the IDs and not element IDs.
         """ # nopep8
         return self._cards[1].get_value("b2beg")
 
@@ -125,7 +125,7 @@ class SetBeamGenerateCollect(KeywordBase):
 
     @property
     def b2end(self) -> typing.Optional[int]:
-        """Get or set the Last beam element ID in the second block.
+        """Get or set the Last beam element ID in the second block. All defined IDs between and including B[N]BEG to B[N]END are added to the set.  These sets are generated after all input is read so that gaps in the element numbering are not a problem.  B[N]BEG and B[N]END may simply be limits on the IDs and not element IDs.
         """ # nopep8
         return self._cards[1].get_value("b2end")
 
@@ -136,7 +136,7 @@ class SetBeamGenerateCollect(KeywordBase):
 
     @property
     def b3beg(self) -> typing.Optional[int]:
-        """Get or set the First beam element ID in the third block.
+        """Get or set the First beam element ID in the third block. All defined IDs between and including B[N]BEG to B[N]END are added to the set.  These sets are generated after all input is read so that gaps in the element numbering are not a problem.  B[N]BEG and B[N]END may simply be limits on the IDs and not element IDs.
         """ # nopep8
         return self._cards[1].get_value("b3beg")
 
@@ -147,7 +147,7 @@ class SetBeamGenerateCollect(KeywordBase):
 
     @property
     def b3end(self) -> typing.Optional[int]:
-        """Get or set the Last beam element ID in the third block.
+        """Get or set the Last beam element ID in the third block. All defined IDs between and including B[N]BEG to B[N]END are added to the set.  These sets are generated after all input is read so that gaps in the element numbering are not a problem.  B[N]BEG and B[N]END may simply be limits on the IDs and not element IDs.
         """ # nopep8
         return self._cards[1].get_value("b3end")
 
@@ -158,7 +158,7 @@ class SetBeamGenerateCollect(KeywordBase):
 
     @property
     def b4beg(self) -> typing.Optional[int]:
-        """Get or set the First beam element ID in the fourth block.
+        """Get or set the First beam element ID in the fourth block. All defined IDs between and including B[N]BEG to B[N]END are added to the set.  These sets are generated after all input is read so that gaps in the element numbering are not a problem.  B[N]BEG and B[N]END may simply be limits on the IDs and not element IDs.
         """ # nopep8
         return self._cards[1].get_value("b4beg")
 
@@ -169,7 +169,7 @@ class SetBeamGenerateCollect(KeywordBase):
 
     @property
     def b4end(self) -> typing.Optional[int]:
-        """Get or set the Last beam element ID in the fourth block.
+        """Get or set the Last beam element ID in the fourth block. All defined IDs between and including B[N]BEG to B[N]END are added to the set.  These sets are generated after all input is read so that gaps in the element numbering are not a problem.  B[N]BEG and B[N]END may simply be limits on the IDs and not element IDs.
         """ # nopep8
         return self._cards[1].get_value("b4end")
 

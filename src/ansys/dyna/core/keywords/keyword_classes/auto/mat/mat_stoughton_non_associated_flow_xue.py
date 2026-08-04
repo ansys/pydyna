@@ -183,7 +183,7 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
 
     @property
     def r00(self) -> float:
-        """Get or set the Lankford parameters in rolling (0°), diagonal (45°) and transverse (90°) directions, respectively; determined from experiments.  Note if R00, R45, and R90 are not defined or are set to 0.0, then R00 = R45 = R90 = 1.0, which degenerates to the Von-Mises yield.
+        """Get or set the Lankford parameters in rolling (0 degree), diagonal (45 degrees) and transverse (90 degrees) directions, respectively; determined from experiments. Note if R00, R45, and R90 are not defined or are set to 0.0, then R00 = R45 = R90 = 1.0, which degenerates to the Von-Mises yield.
         """ # nopep8
         return self._cards[0].get_value("r00")
 
@@ -194,7 +194,7 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
 
     @property
     def r45(self) -> float:
-        """Get or set the Lankford parameters in rolling (0°), diagonal (45°) and transverse (90°) directions, respectively; determined from experiments.  Note if R00, R45, and R90 are not defined or are set to 0.0, then R00 = R45 = R90 = 1.0, which degenerates to the Von-Mises yield..
+        """Get or set the Lankford parameters in rolling (0 degree), diagonal (45 degrees) and transverse (90 degrees) directions, respectively; determined from experiments. Note if R00, R45, and R90 are not defined or are set to 0.0, then R00 = R45 = R90 = 1.0, which degenerates to the Von-Mises yield..
         """ # nopep8
         return self._cards[0].get_value("r45")
 
@@ -205,7 +205,7 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
 
     @property
     def r90(self) -> float:
-        """Get or set the Lankford parameters in rolling (0°), diagonal (45°) and transverse (90°) directions, respectively; determined from experiments.  Note if R00, R45, and R90 are not defined or are set to 0.0, then R00 = R45 = R90 = 1.0, which degenerates to the Von-Mises yield..
+        """Get or set the Lankford parameters in rolling (0 degree), diagonal (45 degrees) and transverse (90 degrees) directions, respectively; determined from experiments. Note if R00, R45, and R90 are not defined or are set to 0.0, then R00 = R45 = R90 = 1.0, which degenerates to the Von-Mises yield..
         """ # nopep8
         return self._cards[0].get_value("r90")
 
@@ -216,7 +216,7 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
 
     @property
     def sig00(self) -> typing.Optional[float]:
-        """Get or set the Initial yield stress from uniaxial tension tests in rolling (0°) direction
+        """Get or set the Initial yield stress from uniaxial tension tests in rolling (0 degree) direction
         """ # nopep8
         return self._cards[0].get_value("sig00")
 
@@ -227,7 +227,7 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
 
     @property
     def sig45(self) -> typing.Optional[float]:
-        """Get or set the Initial yield stress from uniaxial tension tests in diagonal (45°) direction
+        """Get or set the Initial yield stress from uniaxial tension tests in diagonal (45 degrees) direction
         """ # nopep8
         return self._cards[1].get_value("sig45")
 
@@ -238,7 +238,7 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
 
     @property
     def sig90(self) -> typing.Optional[float]:
-        """Get or set the Initial yield stress from uniaxial tension tests in transverse (90°) directions
+        """Get or set the Initial yield stress from uniaxial tension tests in transverse (90 degrees) directions
         """ # nopep8
         return self._cards[1].get_value("sig90")
 
@@ -271,7 +271,7 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
 
     @property
     def lcidv(self) -> typing.Optional[int]:
-        """Get or set the ID of a load curve defining stress scale factors vs. strain rates; determined from experiments.  An example of the curve can be found in Figure 0-2.  Furthermore, strain rates are stored in history variable #5.  Strain rate scale factors are stored in history variable #6.  To turn on the variables for viewing in LS-PrePost, set NEIPS to at least "6" in *DATABASE_EXTENT_BINARY.  It is very useful to know what levels of strain rates, and strain rate scale factors in a particular simulation.  Once d3plot files are opened in LS-PrePost, individual element time history can be plotted via menu option Post → History, or a color contour of the entire part can be viewed with the menu option Post → FriComp → Misc.
+        """Get or set the ID of a load curve defining stress scale factors vs. strain rates; determined from experiments. An example of the curve can be found in Figure 0-2. Furthermore, strain rates are stored in history variable #5. Strain rate scale factors are stored in history variable #6. To turn on the variables for viewing in LS-PrePost, set NEIPS to at least "6" in *DATABASE_EXTENT_BINARY. It is very useful to know what levels of strain rates, and strain rate scale factors in a particular simulation. Once d3plot files are opened in LS-PrePost, individual element time history can be plotted via menu option Post -> History, or a color contour of the entire part can be viewed with the menu option Post -> FriComp -> Misc.
         """ # nopep8
         return self._cards[1].get_value("lcidv")
 
@@ -282,7 +282,7 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
 
     @property
     def scale(self) -> float:
-        """Get or set the This variable can be used to speed up the simulation while equalizing the strain rate effect, useful especially in cases where the pulling speed or punch speed is slow.  For example, if the pulling speed is at 15 mm/s but running the simulation at this speed will take a long time, the pulling speed can be increased to 500 mm/s while SCALE can be set to 0.03, giving the same results as those from 15 mm/s, but with the benefit of greatly reduced computational time, see Figures 0-3 and 0-4.  Note the increased absolute value (within a reasonable range) of mass scaling -1.0*dt2ms frequently used in forming simulation does not affect the strain rates, as shown in the Figure 0-5.
+        """Get or set the This variable can be used to speed up the simulation while equalizing the strain rate effect, useful especially in cases where the pulling speed or punch speed is slow. For example, if the pulling speed is at 15 mm/s but running the simulation at this speed will take a long time, the pulling speed can be increased to 500 mm/s while SCALE can be set to 0.03, giving the same results as those from 15 mm/s, but with the benefit of greatly reduced computational time, see Figures 0-3 and 0-4. Note the increased absolute value (within a reasonable range) of mass scaling -1.0*dt2ms frequently used in forming simulation does not affect the strain rates, as shown in the Figure 0-5.
         """ # nopep8
         return self._cards[1].get_value("scale")
 
@@ -293,10 +293,8 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
 
     @property
     def ef0(self) -> typing.Optional[float]:
-        """Get or set the Material parameters for the option XUE. The parameter k in the
-        original paper is assumed to be 1.0. For details, refer to Xue, L.,
-        Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode
-        transition in ductile plates" in the International Journal of Solids and Structures.
+        """Get or set the Material parameters for the option XUE. The parameter k in the original paper is assumed to be 1.0. For details, refer to Xue, L.,
+        Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode transition in ductile plates" in the International Journal of Solids and Structures.
         """ # nopep8
         return self._cards[2].get_value("ef0")
 
@@ -307,10 +305,8 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
 
     @property
     def plim(self) -> typing.Optional[float]:
-        """Get or set the Material parameters for the option XUE. The parameter k in the
-        original paper is assumed to be 1.0. For details, refer to Xue, L.,
-        Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode
-        transition in ductile plates" in the International Journal of Solids and Structures.
+        """Get or set the Material parameters for the option XUE. The parameter k in the original paper is assumed to be 1.0. For details, refer to Xue, L.,
+        Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode transition in ductile plates" in the International Journal of Solids and Structures.
         """ # nopep8
         return self._cards[2].get_value("plim")
 
@@ -321,10 +317,8 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
 
     @property
     def q(self) -> typing.Optional[float]:
-        """Get or set the Material parameters for the option XUE. The parameter k in the
-        original paper is assumed to be 1.0. For details, refer to Xue, L.,
-        Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode
-        transition in ductile plates" in the International Journal of Solids and Structures..
+        """Get or set the Material parameters for the option XUE. The parameter k in the original paper is assumed to be 1.0. For details, refer to Xue, L.,
+        Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode transition in ductile plates" in the International Journal of Solids and Structures..
         """ # nopep8
         return self._cards[2].get_value("q")
 
@@ -335,10 +329,8 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
 
     @property
     def gama(self) -> typing.Optional[float]:
-        """Get or set the Material parameters for the option XUE. The parameter k in the
-        original paper is assumed to be 1.0. For details, refer to Xue, L.,
-        Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode
-        transition in ductile plates" in the International Journal of Solids and Structures.
+        """Get or set the Material parameters for the option XUE. The parameter k in the original paper is assumed to be 1.0. For details, refer to Xue, L.,
+        Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode transition in ductile plates" in the International Journal of Solids and Structures.
         """ # nopep8
         return self._cards[2].get_value("gama")
 
@@ -349,10 +341,8 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
 
     @property
     def m(self) -> typing.Optional[float]:
-        """Get or set the Material parameters for the option XUE. The parameter k in the
-        original paper is assumed to be 1.0. For details, refer to Xue, L.,
-        Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode
-        transition in ductile plates" in the International Journal of Solids and Structures.
+        """Get or set the Material parameters for the option XUE. The parameter k in the original paper is assumed to be 1.0. For details, refer to Xue, L.,
+        Wierzbicki, T.'s 2009 paper "Numerical simulation of fracture mode transition in ductile plates" in the International Journal of Solids and Structures.
         """ # nopep8
         return self._cards[2].get_value("m")
 
@@ -363,7 +353,7 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Material parameters for the option XUE.  The parameter k in the original paper is assumed to be 1.0.  Note the default BETA value of 0.0 means no progressive weakening damage.  For details, refer to Xue, L., Wierzbicki, T.’s 2009 paper “Numerical simulation of fracture mode transition in ductile plates” in the International Journal of Solids and Structures.
+        """Get or set the Material parameters for the option XUE. The parameter k in the original paper is assumed to be 1.0. Note the default BETA value of 0.0 means no progressive weakening damage. For details, refer to Xue, L., Wierzbicki, T.'s 2009 paper 'Numerical simulation of fracture mode transition in ductile plates' in the International Journal of Solids and Structures.
         """ # nopep8
         return self._cards[2].get_value("beta")
 
@@ -375,12 +365,12 @@ class MatStoughtonNonAssociatedFlowXue(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[int]:
         """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC, particularly the Material Directions section, for details):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
-        EQ.2.0:	Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element.
-        EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
-        LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_OPTION)
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with *DEFINE_COORDINATE_NODES.For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
+        EQ.1.0: Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element.
+        EQ.4.0: Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number(CID on *DEFINE_COORDINATE_OPTION)
         """ # nopep8
         return self._cards[3].get_value("aopt")
 

@@ -64,7 +64,7 @@ class IgaTiedEdgeToEdge(KeywordBase):
     @property
     def type(self) -> int:
         """Get or set the Type of ID:
-        EQ.0:	Include all topological connections in the model.No ID required
+        EQ.0: Include all topological connections in the model.No ID required
         """ # nopep8
         return self._cards[0].get_value("type")
 
@@ -76,7 +76,7 @@ class IgaTiedEdgeToEdge(KeywordBase):
     @property
     def form(self) -> int:
         """Get or set the Coupling formulation:
-        EQ.0:	Penalty - based tied contact
+        EQ.0: Penalty - based tied contact
         """ # nopep8
         return self._cards[0].get_value("form")
 

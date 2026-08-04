@@ -27,7 +27,7 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _DUALCESECONTROLLIMITER_CARD0 = (
-    FieldSchema("idlmt", int, 0, 10, 0),
+    FieldSchema("unused", int, 0, 10, None),
     FieldSchema("alfa", float, 10, 10, 0.0),
     FieldSchema("beta", float, 20, 10, 0.0),
     FieldSchema("epsr", float, 30, 10, 0.0),
@@ -49,23 +49,8 @@ class DualceseControlLimiter(KeywordBase):
             ),
         ]
     @property
-    def idlmt(self) -> int:
-        """Get or set the Set the stability limiter option (See dual CESE theory manual):
-        EQ.0:	limiter format 1 (Re - weighting).
-        EQ.1 : limiter format 2 (Relaxing).
-        """ # nopep8
-        return self._cards[0].get_value("idlmt")
-
-    @idlmt.setter
-    def idlmt(self, value: int) -> None:
-        """Set the idlmt property."""
-        if value not in [0, 1, None]:
-            raise Exception("""idlmt must be `None` or one of {0,1}.""")
-        self._cards[0].set_value("idlmt", value)
-
-    @property
     def alfa(self) -> float:
-        """Get or set the Re-weighting coefficient (See dual CESE theory manual)
+        """Get or set the Material viscosity/damping control coefficient, ?. It must be >= 0.
         """ # nopep8
         return self._cards[0].get_value("alfa")
 
@@ -76,7 +61,7 @@ class DualceseControlLimiter(KeywordBase):
 
     @property
     def beta(self) -> float:
-        """Get or set the Numerical viscosity control coefficient (See dual CESE theory manual)
+        """Get or set the Numerical viscosity control coefficient, ?. Note that 0<=?<=1.)
         """ # nopep8
         return self._cards[0].get_value("beta")
 
@@ -87,7 +72,7 @@ class DualceseControlLimiter(KeywordBase):
 
     @property
     def epsr(self) -> float:
-        """Get or set the Stability control coefficient (See dual CESE theory manual)
+        """Get or set the Stability control coefficient, ?. It must be >= 0.
         """ # nopep8
         return self._cards[0].get_value("epsr")
 

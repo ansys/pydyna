@@ -64,9 +64,9 @@ class DampingPartStiffnessSet(KeywordBase):
     @property
     def coef(self) -> typing.Optional[float]:
         """Get or set the Rayleigh damping coefficient.  Two methods are now available:
-        LT.0.0:	Rayleigh damping coefficient in units of time, set based on a given frequencyand applied uniformly to each element in the specified part or part set.This method is typically used for implicit dynamic analysis.See remarks below.
-        EQ.0.0 : Inactive.
-        GT.0.0 : Unitless damping coefficient for stiffness weighted damping.This non - classical method is typically used for explicit analyses as it does not require assembly of a stiffness matrix.Values between 0.01 and 0.25 are recommended.Higher values are strongly discouraged,and values less than 0.01 may have little effect.The damping coefficient is uniquely calculated internally for each element of the part ID.
+        LT.0.0: Rayleigh damping coefficient in units of time, set based on a given frequencyand applied uniformly to each element in the specified part or part set.This method is typically used for implicit dynamic analysis.See remarks below.
+        EQ.0.0: Inactive.
+        GT.0.0: Unitless damping coefficient for stiffness weighted damping.This non - classical method is typically used for explicit analyses as it does not require assembly of a stiffness matrix.Values between 0.01 and 0.25 are recommended.Higher values are strongly discouraged,and values less than 0.01 may have little effect.The damping coefficient is uniquely calculated internally for each element of the part ID.
         """ # nopep8
         return self._cards[0].get_value("coef")
 

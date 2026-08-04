@@ -85,7 +85,7 @@ class SetNodeAddAdvanced(KeywordBase):
         ]
     @property
     def sid(self) -> typing.Optional[int]:
-        """Get or set the Node set ID. All node sets should have a unique set ID.
+        """Get or set the Set ID of the new node set. All node sets should have a unique set ID.
         """ # nopep8
         return self._cards[0].get_value("sid")
 
@@ -140,7 +140,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @property
     def sid1(self) -> typing.Optional[int]:
-        """Get or set the set ID.
+        """Get or set the set ID.See Remark2
         """ # nopep8
         return self._cards[1].get_value("sid1")
 
@@ -151,7 +151,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @property
     def type1(self) -> int:
-        """Get or set the Type Code for SIDn.
+        """Get or set the Type Code for SIDn.See Remark2
         """ # nopep8
         return self._cards[1].get_value("type1")
 
@@ -164,7 +164,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @property
     def sid2(self) -> typing.Optional[int]:
-        """Get or set the set ID.
+        """Get or set the set ID.See Remark2
         """ # nopep8
         return self._cards[1].get_value("sid2")
 
@@ -175,7 +175,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @property
     def type2(self) -> int:
-        """Get or set the Type Code for SIDn.
+        """Get or set the Type Code for SIDn.See Remark2
         """ # nopep8
         return self._cards[1].get_value("type2")
 
@@ -188,7 +188,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @property
     def sid3(self) -> typing.Optional[int]:
-        """Get or set the set ID.
+        """Get or set the set ID.See Remark2
         """ # nopep8
         return self._cards[1].get_value("sid3")
 
@@ -199,7 +199,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @property
     def type3(self) -> int:
-        """Get or set the Type Code for SIDn.
+        """Get or set the Type Code for SIDn.See Remark2
         """ # nopep8
         return self._cards[1].get_value("type3")
 
@@ -212,7 +212,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @property
     def sid4(self) -> typing.Optional[int]:
-        """Get or set the set ID.
+        """Get or set the set ID.See Remark2
         """ # nopep8
         return self._cards[1].get_value("sid4")
 
@@ -223,7 +223,7 @@ class SetNodeAddAdvanced(KeywordBase):
 
     @property
     def type4(self) -> int:
-        """Get or set the Type Code for SIDn..
+        """Get or set the Type Code for SIDn.See Remark2
         """ # nopep8
         return self._cards[1].get_value("type4")
 

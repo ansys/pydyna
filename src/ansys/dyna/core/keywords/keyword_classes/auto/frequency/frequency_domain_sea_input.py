@@ -72,9 +72,9 @@ class FrequencyDomainSeaInput(KeywordBase):
     @property
     def subtyp(self) -> int:
         """Get or set the Subsystem type
-        EQ.1: plate
-        EQ.2: cavity
-        EQ.3: beam.
+        EQ.1: Plate
+        EQ.2: Cavity
+        EQ.3: Beam.
         """ # nopep8
         return self._cards[0].get_value("subtyp")
 
@@ -92,8 +92,8 @@ class FrequencyDomainSeaInput(KeywordBase):
         EQ.1: force
         EQ.2: velocity
         EQ.3: pressure.
-        EQ.4:	bending wave power for plate
-        EQ.5:	shear wave power for plate
+        EQ.4: bending wave power for plate
+        EQ.5: shear wave power for plate
         """ # nopep8
         return self._cards[0].get_value("loadtyp")
 

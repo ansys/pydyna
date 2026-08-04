@@ -62,7 +62,7 @@ class AleSmoothing(KeywordBase):
     def dnid(self) -> typing.Optional[int]:
         """Get or set the Dependent node or node set ID:
         GT.0: DNID is an ALE node.
-        EQ.0 : The dependent nodes are the nodes of an ALE mesh connected to the nodes in INID1.See Remark 2
+        EQ.0: The dependent nodes are the nodes of an ALE mesh connected to the nodes in INID1.See Remark 2
         LT.0: -DNID is the ID of an ALE node set.See Remark 2
         """ # nopep8
         return self._cards[0].get_value("dnid")
@@ -76,7 +76,7 @@ class AleSmoothing(KeywordBase):
     def nid1(self) -> typing.Optional[int]:
         """Get or set the ID of first node or set for constraining the dependent nodes:
         GT.0: NID1 is a node.
-        LT.0 : -NID1 is a segment set ID if XCO = YCO = ZCO = 0.0.
+        LT.0: -NID1 is a segment set ID if XCO = YCO = ZCO = 0.0.
         Otherwise, -NID1 is a node set ID.See Remark 2
         """ # nopep8
         return self._cards[0].get_value("nid1")
@@ -89,10 +89,10 @@ class AleSmoothing(KeywordBase):
     @property
     def nid2(self) -> typing.Optional[int]:
         """Get or set the ID of second node or node set for constraining the dependent nodes:
-        GT.0 : NID2 is a node.
-        EQ.0 : The dependent node motion is solely controlled by
+        GT.0: NID2 is a node.
+        EQ.0: The dependent node motion is solely controlled by
         NID1.See Remarks 2 and 3.
-        LT.0 : -NID2 is a node set ID.See Remark 2.
+        LT.0: -NID2 is a node set ID.See Remark 2.
         """ # nopep8
         return self._cards[0].get_value("nid2")
 

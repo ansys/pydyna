@@ -30,12 +30,12 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_syst
 
 _CONSTRAINEDLOCAL_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
-    FieldSchema("heading", int, 10, 70, None),
+    FieldSchema("heading", str, 10, 70, None),
 )
 
 _CONSTRAINEDLOCAL_CARD1 = (
-    FieldSchema("tc", int, 0, 10, 1),
-    FieldSchema("rc", int, 10, 10, 1),
+    FieldSchema("tc", int, 0, 10, 0),
+    FieldSchema("rc", int, 10, 10, 0),
     FieldSchema("dir", int, 20, 10, 1),
     FieldSchema("x", float, 30, 10, None),
     FieldSchema("y", float, 40, 10, None),
@@ -69,7 +69,7 @@ class ConstrainedLocal(KeywordBase):
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Optional ID which can be referred to by *SENSOR_CONTROL.
-        This ID must be unique and cannot be shared with * BOUNDARY_SPC.
+        This ID must be unique and cannot be shared with *BOUNDARY_SPC.
         """ # nopep8
         return self._cards[0].get_value("id")
 
@@ -79,21 +79,22 @@ class ConstrainedLocal(KeywordBase):
         self._cards[0].set_value("id", value)
 
     @property
-    def heading(self) -> typing.Optional[int]:
+    def heading(self) -> typing.Optional[str]:
         """Get or set the An optional descriptor that will be written into the d3hsp file and the spcforc file.
         """ # nopep8
         return self._cards[0].get_value("heading")
 
     @heading.setter
-    def heading(self, value: int) -> None:
+    def heading(self, value: str) -> None:
         """Set the heading property."""
         self._cards[0].set_value("heading", value)
 
     @property
     def tc(self) -> int:
         """Get or set the Translational Constraint:
+        EQ.0: no translational constraints,
         EQ.1: constrained x translation,
-        EQ.2: constrained y translation
+        EQ.2: constrained y translation,
         EQ.3: constrained z translation,
         EQ.4: constrained x and y translation,
         EQ.5: constrained y and z translation,
@@ -105,15 +106,16 @@ class ConstrainedLocal(KeywordBase):
     @tc.setter
     def tc(self, value: int) -> None:
         """Set the tc property."""
-        if value not in [1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""tc must be `None` or one of {1,2,3,4,5,6,7}.""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""tc must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[1].set_value("tc", value)
 
     @property
     def rc(self) -> int:
         """Get or set the Rotaional Constraint:
+        EQ.0: no rotational constraints,
         EQ.1: constrained x rotation,
-        EQ.2: constrained y rotaion
+        EQ.2: constrained y rotaion,
         EQ.3: constrained z rotation,
         EQ.4: constrained x and y rotations,
         EQ.5: constrained y and z rotations,
@@ -125,8 +127,8 @@ class ConstrainedLocal(KeywordBase):
     @rc.setter
     def rc(self, value: int) -> None:
         """Set the rc property."""
-        if value not in [1, 2, 3, 4, 5, 6, 7, None]:
-            raise Exception("""rc must be `None` or one of {1,2,3,4,5,6,7}.""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
+            raise Exception("""rc must be `None` or one of {0,1,2,3,4,5,6,7}.""")
         self._cards[1].set_value("rc", value)
 
     @property

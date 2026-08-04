@@ -91,7 +91,7 @@ class LoadThermalVariableBeamSet(KeywordBase):
 
     @property
     def ipolar(self) -> int:
-        """Get or set the GT.0: the coordinates SCOOR and TCOOR are given in polar coordinates	(see notes)
+        """Get or set the GT.0: the coordinates SCOOR and TCOOR are given in polar coordinates (see notes)
         """ # nopep8
         return self._cards[0].get_value("ipolar")
 

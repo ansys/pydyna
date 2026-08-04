@@ -34,6 +34,13 @@ InitialContactWear
     :members:
 
 
+InitialCpg
+----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_cpg
+    :members:
+
+
 InitialCrashfront
 -----------------
 
@@ -55,6 +62,20 @@ InitialDetonationGeometry
     :members:
 
 
+InitialDetonationSet
+--------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_detonation_set
+    :members:
+
+
+InitialEosAle
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_eos_ale
+    :members:
+
+
 InitialFatigueDamageRatio
 -------------------------
 
@@ -69,10 +90,24 @@ InitialFatigueDamageRatioD3Ftg
     :members:
 
 
+InitialFatigueDamageRatioD3FtgScaleFactor
+-----------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_fatigue_damage_ratio_d3ftg_scale_factor
+    :members:
+
+
 InitialFatigueDamageRatioD3Plot
 -------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_fatigue_damage_ratio_d3plot
+    :members:
+
+
+InitialFatigueDamageRatioD3PlotScaleFactor
+------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_fatigue_damage_ratio_d3plot_scale_factor
     :members:
 
 
@@ -122,13 +157,6 @@ InitialHydrostaticAle
 ---------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_hydrostatic_ale
-    :members:
-
-
-InitialIiEosAle
----------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_ii_eos_ale
     :members:
 
 
@@ -209,17 +237,24 @@ InitialSolidVolume
     :members:
 
 
+InitialStrainBeam
+-----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_strain_beam
+    :members:
+
+
+InitialStrainIgaShell
+---------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_strain_iga_shell
+    :members:
+
+
 InitialStrainShell
 ------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_strain_shell
-    :members:
-
-
-InitialStrainShellIga
----------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_strain_shell_iga
     :members:
 
 
@@ -342,6 +377,13 @@ InitialStressSolidSet
     :members:
 
 
+InitialStressSpg
+----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_stress_spg
+    :members:
+
+
 InitialStressSph
 ----------------
 
@@ -377,17 +419,17 @@ InitialTemperatureSet
     :members:
 
 
+InitialTiedContactData
+----------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_tied_contact_data
+    :members:
+
+
 InitialVaporPart
 ----------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_vapor_part
-    :members:
-
-
-InitialVehicleKinematics
-------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_vehicle_kinematics
     :members:
 
 
@@ -451,6 +493,13 @@ InitialVolumeFractionGeometry
 -----------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_volume_fraction_geometry
+    :members:
+
+
+InitialVolumeFractionLsda
+-------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.initial_volume_fraction_lsda
     :members:
 
 

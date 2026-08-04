@@ -208,7 +208,7 @@ class MatAdhesiveCuringViscoelastic(KeywordBase):
 
     @property
     def chexp1(self) -> typing.Optional[float]:
-        """Get or set the Quadratic parameter 𝛾2 for chemical shrinkage.
+        """Get or set the Quadratic parameter gamma_2 for chemical shrinkage.
         """ # nopep8
         return self._cards[1].get_value("chexp1")
 
@@ -219,7 +219,7 @@ class MatAdhesiveCuringViscoelastic(KeywordBase):
 
     @property
     def chexp2(self) -> typing.Optional[float]:
-        """Get or set the Linear parameter 𝛾1 for chemical shrinkage.
+        """Get or set the Linear parameter gamma_1 for chemical shrinkage.
         """ # nopep8
         return self._cards[1].get_value("chexp2")
 
@@ -230,7 +230,7 @@ class MatAdhesiveCuringViscoelastic(KeywordBase):
 
     @property
     def chexp3(self) -> typing.Optional[float]:
-        """Get or set the Constant parameter 𝛾0 for chemical shrinkage.
+        """Get or set the Constant parameter gamma_0 for chemical shrinkage.
         """ # nopep8
         return self._cards[1].get_value("chexp3")
 
@@ -241,8 +241,8 @@ class MatAdhesiveCuringViscoelastic(KeywordBase):
 
     @property
     def lcchexp(self) -> typing.Optional[int]:
-        """Get or set the |LCCHEXP| is Load curve ID to define the coefficient for chemical shrinkage 𝛾(𝛼)
-        as a function of the state of cure 𝛼. If set, parameters CHEXP1,
+        """Get or set the |LCCHEXP| is Load curve ID to define the coefficient for chemical shrinkage gamma(alpha)
+        as a function of the state of cure alpha. If set, parameters CHEXP1,
         CHEXP2 and CHEXP3 are ignored.
         """ # nopep8
         return self._cards[1].get_value("lcchexp")
@@ -255,9 +255,9 @@ class MatAdhesiveCuringViscoelastic(KeywordBase):
     @property
     def lcthexp(self) -> typing.Optional[int]:
         """Get or set the |LCTHEXP| is Load curve ID or table ID defining the coefficient of
-        thermal expansion 𝛽(𝛼, 𝑇) as a function of cure 𝛼 and temperature 𝑇.
-        If referring to a load curve, parameter 𝛽(𝑇) is a function of
-        temperature 𝑇.
+        thermal expansion beta(alpha, T) as a function of cure alpha and temperature T.
+        If referring to a load curve, parameter beta(T) is a function of
+        temperature T.
         """ # nopep8
         return self._cards[1].get_value("lcthexp")
 
@@ -268,7 +268,7 @@ class MatAdhesiveCuringViscoelastic(KeywordBase):
 
     @property
     def r(self) -> typing.Optional[float]:
-        """Get or set the Gas constant 𝑅 for Kamal model.
+        """Get or set the Gas constant R for Kamal model.
         """ # nopep8
         return self._cards[1].get_value("r")
 
@@ -279,7 +279,7 @@ class MatAdhesiveCuringViscoelastic(KeywordBase):
 
     @property
     def trefexp(self) -> typing.Optional[float]:
-        """Get or set the Reference temperature 𝑇0 for secant form of thermal expansion. See Remarks below.
+        """Get or set the Reference temperature T_0 for secant form of thermal expansion. See Remarks below.
         """ # nopep8
         return self._cards[1].get_value("trefexp")
 
@@ -290,7 +290,7 @@ class MatAdhesiveCuringViscoelastic(KeywordBase):
 
     @property
     def docrefexp(self) -> typing.Optional[float]:
-        """Get or set the Reference degree of cure 𝛼0 for sequential form of chemical	expansion. See Remarks below.
+        """Get or set the Reference degree of cure alpha_0 for sequential form of chemical expansion. See Remarks below.
         """ # nopep8
         return self._cards[1].get_value("docrefexp")
 

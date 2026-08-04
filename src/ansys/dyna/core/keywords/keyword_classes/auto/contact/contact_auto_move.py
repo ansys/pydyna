@@ -31,7 +31,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_vector import D
 
 _CONTACTAUTOMOVE_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
-    FieldSchema("cid", int, 10, 10, None),
+    FieldSchema("contid", int, 10, 10, None),
     FieldSchema("vid", int, 20, 10, None),
     FieldSchema("lcid", int, 30, 10, None),
     FieldSchema("atime", float, 40, 10, None),
@@ -59,7 +59,9 @@ class ContactAutoMove(KeywordBase):
         ]
     @property
     def id(self) -> typing.Optional[int]:
-        """Get or set the ID for this auto positioning input
+        """Get or set the Move ID for this automatic move input:
+        GT.0: Velocity controlled tool kinematics(the variable VAD = 0 in *BOUNDARY_PRESCRIBED_MOTION_RIGID)
+        LT.0: Displacement controlled tool kinematics(VAD = 2)
         """ # nopep8
         return self._cards[0].get_value("id")
 
@@ -69,19 +71,19 @@ class ContactAutoMove(KeywordBase):
         self._cards[0].set_value("id", value)
 
     @property
-    def cid(self) -> typing.Optional[int]:
-        """Get or set the Contact ID
+    def contid(self) -> typing.Optional[int]:
+        """Get or set the Contact ID, as in *CONTACT_FORMING_..._ID, which defines the surfa and surfb part set IDs.
         """ # nopep8
-        return self._cards[0].get_value("cid")
+        return self._cards[0].get_value("contid")
 
-    @cid.setter
-    def cid(self, value: int) -> None:
-        """Set the cid property."""
-        self._cards[0].set_value("cid", value)
+    @contid.setter
+    def contid(self, value: int) -> None:
+        """Set the contid property."""
+        self._cards[0].set_value("contid", value)
 
     @property
     def vid(self) -> typing.Optional[int]:
-        """Get or set the Vector ID for a vector oriented in the direction of the movement of the master surface. See *DEFINE_VECTOR. The origin of this vector is unimportant since the direction consines of the vector are computed and used
+        """Get or set the Vector ID of a vector oriented in the direction of movement of the surfb surface, as in *DEFINE_VECTOR. The origin of the vector is unimportant since the direction cosines of the vector are computed and used
         """ # nopep8
         return self._cards[0].get_value("vid")
 
@@ -92,7 +94,7 @@ class ContactAutoMove(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Optional loas curve ID defining velocity versus time. The load curve should be defined by four points, and its shape should resemble a trapzoid with the longest parallel side along the abcissa. The abcissa is adjusted(shortened)in the flat part of the curve where the velocity is constant to account for the movement
+        """Get or set the Load curve defining tooling kinematics, either by velocity as a function of time or by displacement as a function of time. This load curve will be adjusted automatically during a simulation to close the empty tool travel
         """ # nopep8
         return self._cards[0].get_value("lcid")
 
@@ -103,7 +105,7 @@ class ContactAutoMove(KeywordBase):
 
     @property
     def atime(self) -> typing.Optional[float]:
-        """Get or set the Activeation time. A this time the master surface is moved
+        """Get or set the Activation time specifying the moment the surfb surface (tool) will be moved
         """ # nopep8
         return self._cards[0].get_value("atime")
 
@@ -114,11 +116,7 @@ class ContactAutoMove(KeywordBase):
 
     @property
     def offset(self) -> float:
-        """Get or set the Time at which a master surface will move to close a gap distance,
-        which may happen following the move of another master surface.
-        This is useful in sequential multiple flanging or press hemming
-        simulation. Simulation time (CPU) is much faster based on the
-        shortened tool travel (no change to the termination time).
+        """Get or set the Time at which a surfb surface will move to close a gap distance, which may happen following the move of another surfb surface. This is useful for sequential multiple flanging or press hemming simulations. Simulation time (CPU) is much faster based on the shortened tool travel (no change to the termination time).
         """ # nopep8
         return self._cards[0].get_value("offset")
 

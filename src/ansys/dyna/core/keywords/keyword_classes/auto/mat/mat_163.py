@@ -41,7 +41,7 @@ _MAT163_CARD0 = (
 )
 
 _MAT163_CARD1 = (
-    FieldSchema("srclmt", float, 0, 10, None),
+    FieldSchema("srclmt", float, 0, 10, 1e+20),
     FieldSchema("srflag", int, 10, 10, None),
 )
 
@@ -174,7 +174,7 @@ class Mat163(KeywordBase):
         self._cards[0].set_value("ncycle", value)
 
     @property
-    def srclmt(self) -> typing.Optional[float]:
+    def srclmt(self) -> float:
         """Get or set the Strain rate change limit.
         """ # nopep8
         return self._cards[1].get_value("srclmt")

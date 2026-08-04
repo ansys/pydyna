@@ -128,13 +128,13 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
     @property
     def half1(self) -> int:
         """Get or set the Create a half sphere by trimming the defined sphere (see Remark 3 and Figure 0-1). Note that (x_0,y_0,z_0 ) below is the center of the sphere.
-        EQ.0:	A full sphere is created, no trimming
-        EQ.1 : Keep x≥x_0
-        EQ. - 1 : Keep x≤x_0
-        EQ.2 : Keep y≥y_0
-        EQ. - 2 : Keep y≤y_0
-        EQ.3 : Keep z≥z_0
-        EQ. - 3 : Keep z≤z_0
+        EQ.0: A full sphere is created, no trimming
+        EQ.1: Keep xx_0
+        EQ. - 1: Keep xx_0
+        EQ.2: Keep yy_0
+        EQ. - 2: Keep yy_0
+        EQ.3: Keep zz_0
+        EQ. - 3: Keep zz_0
         """ # nopep8
         return self._cards[0].get_value("half1")
 
@@ -148,13 +148,13 @@ class FrequencyDomainAcousticFringePlotSphere(KeywordBase):
     @property
     def half2(self) -> int:
         """Get or set the Create a quarter sphere by trimming the half sphere defined with HALF1 (see Remark 3 and Figure 0-1):
-        EQ.0:	No second trimming
-        EQ.1 : Keep x≥x_0
-        EQ. - 1 : Keep x≤x_0
-        EQ.2 : Keep y≥y_0
-        EQ. - 2 : Keep y≤y_0
-        EQ.3 : Keep z≥z_0
-        EQ. - 3 : Keep z≤z_0
+        EQ.0: No second trimming
+        EQ.1: Keep xx_0
+        EQ. - 1: Keep xx_0
+        EQ.2: Keep yy_0
+        EQ. - 2: Keep yy_0
+        EQ.3: Keep zz_0
+        EQ. - 3: Keep zz_0
         """ # nopep8
         return self._cards[0].get_value("half2")
 

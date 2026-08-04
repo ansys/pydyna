@@ -108,17 +108,19 @@ class PartCompositeIgaShell(KeywordBase):
     def elform(self) -> int:
         """Get or set the Element formulation options for IGA shells:
         EQ.0: Reissner - Mindlin with fibers at the control points
-        EQ.1 : Kirchhoff - Love with fibers at the control points
-        EQ.2 : Kirchhoff - Love with fibers at the integration point
-        EQ.3 : Reissner - Mindlin with fibers at the integration poin
+        EQ.1: Kirchhoff - Love with fibers at the control points
+        EQ.2: Kirchhoff - Love with fibers at the integration point
+        EQ.3: Reissner - Mindlin with fibers at the integration poin
+        EQ.5: Shell with thickness stretch based on the ELFORM = 0.
+        EQ.6: Shell with thickness stretch based on ELFORM = 3.
         """ # nopep8
         return self._cards[1].get_value("elform")
 
     @elform.setter
     def elform(self, value: int) -> None:
         """Set the elform property."""
-        if value not in [0, 1, 2, 3, None]:
-            raise Exception("""elform must be `None` or one of {0,1,2,3}.""")
+        if value not in [0, 1, 2, 3, 5, 6, None]:
+            raise Exception("""elform must be `None` or one of {0,1,2,3,5,6}.""")
         self._cards[1].set_value("elform", value)
 
     @property
@@ -134,7 +136,12 @@ class PartCompositeIgaShell(KeywordBase):
 
     @property
     def nloc(self) -> float:
-        """Get or set the Location of reference surface; see the definition of NLOC in *SECTION_IGA_SHELL for more detail
+        """Get or set the Location of reference surface, available for thin shells only.  If nonzero, the offset distance from the plane of the nodal points to the reference surface of the shell in the direction of the shell normal vector is a value:
+        offset = -0.50xNLOCx(average  shell  thickness).
+        This offset is not considered in the contact subroutines unless CNTCO is set to 1 or 3 in *CONTROL_SHELL. Alternatively, the offset can be specified by using the OFFSET option in the *ELEMENT_SHELL input section.
+        EQ.1.0: Top surface,
+        EQ.0.0: Mid - surface(default),
+        EQ. - 1.0: Bottom surface.
         """ # nopep8
         return self._cards[1].get_value("nloc")
 
@@ -147,8 +154,8 @@ class PartCompositeIgaShell(KeywordBase):
     def irl(self) -> int:
         """Get or set the Lamina integration rule:
         EQ.0: Reduced Gauss - Legendre
-        EQ.1 : Gauss - Legendre
-        EQ.2 : Patchwise reduced Gauss - Legendre(for biquadraticNURBS only)
+        EQ.1: Gauss - Legendre
+        EQ.2: Patchwise reduced Gauss - Legendre(for biquadraticNURBS only)
         """ # nopep8
         return self._cards[1].get_value("irl")
 
@@ -159,7 +166,7 @@ class PartCompositeIgaShell(KeywordBase):
 
     @property
     def mid1(self) -> typing.Optional[int]:
-        """Get or set the Material ID of integration point i, see *MAT_? Section
+        """Get or set the Material ID of integration point i, see *MAT_   Section
         """ # nopep8
         return self._cards[2].get_value("mid1")
 
@@ -203,7 +210,7 @@ class PartCompositeIgaShell(KeywordBase):
 
     @property
     def mid2(self) -> typing.Optional[int]:
-        """Get or set the Material ID of integration point i, see *MAT_? Section
+        """Get or set the Material ID of integration point i, see *MAT_   Section
         """ # nopep8
         return self._cards[2].get_value("mid2")
 

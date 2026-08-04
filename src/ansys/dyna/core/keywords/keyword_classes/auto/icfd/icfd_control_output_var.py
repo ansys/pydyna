@@ -82,9 +82,9 @@ class IcfdControlOutputVar(KeywordBase):
         ]
     @property
     def vel(self) -> int:
-        """Get or set the Velocity :
-        EQ.0:	Is output.
-        EQ.1:	Is not output.
+        """Get or set the Velocity:
+        EQ.0: Is output.
+        EQ.1: Is not output.
         """ # nopep8
         return self._cards[0].get_value("vel")
 
@@ -97,9 +97,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @property
     def avgvel(self) -> int:
-        """Get or set the average velocity :
-        EQ.0:	Is output.
-        EQ.1:	Is not output.
+        """Get or set the average velocity:
+        EQ.0: Is output.
+        EQ.1: Is not output.
         """ # nopep8
         return self._cards[0].get_value("avgvel")
 
@@ -112,9 +112,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @property
     def vort(self) -> int:
-        """Get or set the vorticity :
-        EQ.0:	Is output.
-        EQ.1:	Is not output.
+        """Get or set the vorticity:
+        EQ.0: Is output.
+        EQ.1: Is not output.
         """ # nopep8
         return self._cards[0].get_value("vort")
 
@@ -128,8 +128,8 @@ class IcfdControlOutputVar(KeywordBase):
     @property
     def pre(self) -> int:
         """Get or set the pressure:
-        EQ.0:	Is output.
-        EQ.1:	Is not output
+        EQ.0: Is output.
+        EQ.1: Is not output
         """ # nopep8
         return self._cards[1].get_value("pre")
 
@@ -142,9 +142,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @property
     def preavg(self) -> int:
-        """Get or set the average pressure, levelset, Q criterion, CFL number :
-        EQ.0:	Is output.
-        EQ.1:	Is not output
+        """Get or set the average pressure, levelset, Q criterion, CFL number:
+        EQ.0: Is output.
+        EQ.1: Is not output
         """ # nopep8
         return self._cards[1].get_value("preavg")
 
@@ -157,9 +157,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @property
     def lset(self) -> int:
-        """Get or set the levelset :
-        EQ.0:	Is output.
-        EQ.1:	Is not output
+        """Get or set the levelset:
+        EQ.0: Is output.
+        EQ.1: Is not output
         """ # nopep8
         return self._cards[1].get_value("lset")
 
@@ -173,8 +173,8 @@ class IcfdControlOutputVar(KeywordBase):
     @property
     def oc(self) -> int:
         """Get or set the Q criterion:
-        EQ.0:	Is output.
-        EQ.1:	Is not output
+        EQ.0: Is output.
+        EQ.1: Is not output
         """ # nopep8
         return self._cards[1].get_value("oc")
 
@@ -187,9 +187,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @property
     def cfl(self) -> int:
-        """Get or set the CFL number :
-        EQ.0:	Is output.
-        EQ.1:	Is not output
+        """Get or set the CFL number:
+        EQ.0: Is output.
+        EQ.1: Is not output
         """ # nopep8
         return self._cards[1].get_value("cfl")
 
@@ -202,9 +202,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @property
     def temp(self) -> int:
-        """Get or set the Temperature :
-        EQ.0:	Is output.
-        EQ.1:	Is not output
+        """Get or set the Temperature:
+        EQ.0: Is output.
+        EQ.1: Is not output
         """ # nopep8
         return self._cards[2].get_value("temp")
 
@@ -217,9 +217,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @property
     def tempavg(self) -> int:
-        """Get or set the average temperature  :
-        EQ.0:	Is output.
-        EQ.1:	Is not output
+        """Get or set the average temperature:
+        EQ.0: Is output.
+        EQ.1: Is not output
         """ # nopep8
         return self._cards[2].get_value("tempavg")
 
@@ -232,9 +232,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @property
     def kp(self) -> int:
-        """Get or set the RANS output variables, kinetic energy, diffusion, turbulent viscosity, turbulent intensity, Cmu variable ::
-        EQ.0:	Is output.
-        EQ.1:	Is not output
+        """Get or set the RANS output variables, kinetic energy, diffusion, turbulent viscosity, turbulent intensity, Cmu variable::
+        EQ.0: Is output.
+        EQ.1: Is not output
         """ # nopep8
         return self._cards[3].get_value("kp")
 
@@ -247,9 +247,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @property
     def ep(self) -> int:
-        """Get or set the RANS output variables, kinetic energy, diffusion, turbulent viscosity, turbulent intensity, Cmu variable ::
-        EQ.0:	Is output.
-        EQ.1:	Is not output
+        """Get or set the RANS output variables, kinetic energy, diffusion, turbulent viscosity, turbulent intensity, Cmu variable::
+        EQ.0: Is output.
+        EQ.1: Is not output
         """ # nopep8
         return self._cards[3].get_value("ep")
 
@@ -262,9 +262,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @property
     def mut(self) -> int:
-        """Get or set the RANS output variables, kinetic energy, diffusion, turbulent viscosity, turbulent intensity, Cmu variable ::
-        EQ.0:	Is output.
-        EQ.1:	Is not output
+        """Get or set the RANS output variables, kinetic energy, diffusion, turbulent viscosity, turbulent intensity, Cmu variable::
+        EQ.0: Is output.
+        EQ.1: Is not output
         """ # nopep8
         return self._cards[3].get_value("mut")
 
@@ -277,9 +277,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @property
     def int_(self) -> int:
-        """Get or set the RANS output variables, kinetic energy, diffusion, turbulent viscosity, turbulent intensity, Cmu variable ::
-        EQ.0:	Is output.
-        EQ.1:	Is not output
+        """Get or set the RANS output variables, kinetic energy, diffusion, turbulent viscosity, turbulent intensity, Cmu variable::
+        EQ.0: Is output.
+        EQ.1: Is not output
         """ # nopep8
         return self._cards[3].get_value("int_")
 
@@ -292,9 +292,9 @@ class IcfdControlOutputVar(KeywordBase):
 
     @property
     def cmu(self) -> int:
-        """Get or set the RANS output variables, kinetic energy, diffusion, turbulent viscosity, turbulent intensity, Cmu variable ::
-        EQ.0:	Is output.
-        EQ.1:	Is not output
+        """Get or set the RANS output variables, kinetic energy, diffusion, turbulent viscosity, turbulent intensity, Cmu variable::
+        EQ.0: Is output.
+        EQ.1: Is not output
         """ # nopep8
         return self._cards[3].get_value("cmu")
 

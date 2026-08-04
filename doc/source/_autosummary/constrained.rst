@@ -181,6 +181,13 @@ ConstrainedJointCoorGears
     :members:
 
 
+ConstrainedJointCoorHarmonic
+----------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_joint_coor_harmonic
+    :members:
+
+
 ConstrainedJointCoorLocking
 ---------------------------
 
@@ -269,6 +276,13 @@ ConstrainedJointGears
 ---------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_joint_gears
+    :members:
+
+
+ConstrainedJointHarmonic
+------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_joint_harmonic
     :members:
 
 
@@ -461,6 +475,13 @@ ConstrainedNodalRigidBodyInertiaOverride
     :members:
 
 
+ConstrainedNodalRigidBodyInertiaOverrideThermal
+-----------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_nodal_rigid_body_inertia_override_thermal
+    :members:
+
+
 ConstrainedNodalRigidBodyInertiaSpc
 -----------------------------------
 
@@ -468,10 +489,24 @@ ConstrainedNodalRigidBodyInertiaSpc
     :members:
 
 
+ConstrainedNodalRigidBodyInertiaThermal
+---------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_nodal_rigid_body_inertia_thermal
+    :members:
+
+
 ConstrainedNodalRigidBodyOverride
 ---------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_nodal_rigid_body_override
+    :members:
+
+
+ConstrainedNodalRigidBodyOverrideThermal
+----------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_nodal_rigid_body_override_thermal
     :members:
 
 
@@ -503,10 +538,45 @@ ConstrainedNodalRigidBodySpcInertiaOverride
     :members:
 
 
+ConstrainedNodalRigidBodySpcInertiaOverrideThermal
+--------------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_nodal_rigid_body_spc_inertia_override_thermal
+    :members:
+
+
+ConstrainedNodalRigidBodySpcInertiaThermal
+------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_nodal_rigid_body_spc_inertia_thermal
+    :members:
+
+
 ConstrainedNodalRigidBodySpcOverride
 ------------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_nodal_rigid_body_spc_override
+    :members:
+
+
+ConstrainedNodalRigidBodySpcOverrideThermal
+-------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_nodal_rigid_body_spc_override_thermal
+    :members:
+
+
+ConstrainedNodalRigidBodySpcThermal
+-----------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_nodal_rigid_body_spc_thermal
+    :members:
+
+
+ConstrainedNodalRigidBodyThermal
+--------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.constrained_nodal_rigid_body_thermal
     :members:
 
 

@@ -32,8 +32,13 @@ _CONTROLCPM_CARD0 = (
     FieldSchema("ncpmts", int, 20, 10, 0),
     FieldSchema("cpmerr", int, 30, 10, 0),
     FieldSchema("sffdc", float, 40, 10, 1.0),
-    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("blkv", int, 50, 10, None),
     FieldSchema("cpmmf", int, 60, 10, 0),
+    FieldSchema("p2pmix", int, 70, 10, 0),
+)
+
+_CONTROLCPM_CARD1 = (
+    FieldSchema("pmis", int, 0, 10, 0),
 )
 
 class ControlCpm(KeywordBase):
@@ -48,6 +53,10 @@ class ControlCpm(KeywordBase):
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _CONTROLCPM_CARD0,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _CONTROLCPM_CARD1,
                 **kwargs,
             ),
         ]
@@ -100,7 +109,7 @@ class ControlCpm(KeywordBase):
         EQ.1: enable error checking. If it detects any problem, the code
         will error terminate the job, or try to fix the problem. Activated checks include:
         1.  Airbag integrity (see Remark 2)
-        2.  Chamber integrity: this step applies the airbag in	tegrity check to the chamber.
+        2.  Chamber integrity: this step applies the airbag in tegrity check to the chamber.
         3.  Inconsistent orientation between the shell reference geometry and FEM shell connectivity
         """ # nopep8
         return self._cards[0].get_value("cpmerr")
@@ -124,10 +133,21 @@ class ControlCpm(KeywordBase):
         self._cards[0].set_value("sffdc", value)
 
     @property
+    def blkv(self) -> typing.Optional[int]:
+        """Get or set the Allocate additional memory for contact nodal force excluding force transducer and airbag single surface contact using soft=2.  This nodal force will be used for external vents blockage estimation.  The porosity and internal vents blockage are not affected by this option
+        """ # nopep8
+        return self._cards[0].get_value("blkv")
+
+    @blkv.setter
+    def blkv(self, value: int) -> None:
+        """Set the blkv property."""
+        self._cards[0].set_value("blkv", value)
+
+    @property
     def cpmmf(self) -> int:
         """Get or set the Flag to consider airbag system velocity based on the coordinates system defined by fields NID1, NID2, and NID3 on *AIRBAG_PARTICLE:
-        EQ.0:	no(default)
-        EQ.1 : yes.The flow energy from the rigid body motion is fed back to the CPM particles.
+        EQ.0: no(default)
+        EQ.1: yes.The flow energy from the rigid body motion is fed back to the CPM particles.
         """ # nopep8
         return self._cards[0].get_value("cpmmf")
 
@@ -137,4 +157,36 @@ class ControlCpm(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""cpmmf must be `None` or one of {0,1}.""")
         self._cards[0].set_value("cpmmf", value)
+
+    @property
+    def p2pmix(self) -> int:
+        """Get or set the Control the energy transfer during particle-to-particle collision and change the thermalization of the particles.
+        EQ.0:Thermalization considered in all particle-to-particle collisions (default).
+        EQ.1: Thermalization only considered within same gas species
+        EQ.2: Same as 0 but treat temperature dependent (T)
+        EQ.3: Same as 1 but treat temperature dependent (T)
+        """ # nopep8
+        return self._cards[0].get_value("p2pmix")
+
+    @p2pmix.setter
+    def p2pmix(self, value: int) -> None:
+        """Set the p2pmix property."""
+        if value not in [0, 1, 2, 3, None]:
+            raise Exception("""p2pmix must be `None` or one of {0,1,2,3}.""")
+        self._cards[0].set_value("p2pmix", value)
+
+    @property
+    def pmis(self) -> int:
+        """Get or set the Flag for choosing logic to use when a particle leaks out due to undetected contact (see Remark 5):
+        EQ.0: Return particle to around inflator orifice node(default)
+        EQ.1: Return particle to the nearest airbag fabric
+        """ # nopep8
+        return self._cards[1].get_value("pmis")
+
+    @pmis.setter
+    def pmis(self, value: int) -> None:
+        """Set the pmis property."""
+        if value not in [0, 1, None]:
+            raise Exception("""pmis must be `None` or one of {0,1}.""")
+        self._cards[1].set_value("pmis", value)
 

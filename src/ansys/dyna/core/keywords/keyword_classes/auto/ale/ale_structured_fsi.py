@@ -47,8 +47,10 @@ _ALESTRUCTUREDFSI_CARD2 = (
     FieldSchema("end", float, 10, 10, 10000000000.0),
     FieldSchema("pfac", float, 20, 10, 0.1),
     FieldSchema("fric", float, 30, 10, 0.0),
-    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("ilvl", int, 40, 10, None),
     FieldSchema("flip", int, 50, 10, 0),
+    FieldSchema("decay", float, 60, 10, None),
+    FieldSchema("offset", float, 70, 10, None),
 )
 
 class AleStructuredFsi(KeywordBase):
@@ -109,7 +111,7 @@ class AleStructuredFsi(KeywordBase):
 
     @property
     def alesid(self) -> typing.Optional[int]:
-        """Get or set the Set ID defining a part or part set ID of the Structured ALE mesh (see *PART).
+        """Get or set the Set ID defining a part or part set ID of the structured ALE mesh (see *PART).
         """ # nopep8
         return self._cards[1].get_value("alesid")
 
@@ -121,9 +123,9 @@ class AleStructuredFsi(KeywordBase):
     @property
     def lstrstyp(self) -> int:
         """Get or set the Set type of LSTRSID:
-        EQ.0:	part set ID (PSID).
-        EQ.1:	part ID (PID).
-        EQ.2:	segment set ID (SGSID).
+        EQ.0: part set ID (PSID).
+        EQ.1: part ID (PID).
+        EQ.2: segment set ID (SGSID).
         """ # nopep8
         return self._cards[1].get_value("lstrstyp")
 
@@ -137,8 +139,8 @@ class AleStructuredFsi(KeywordBase):
     @property
     def alestyp(self) -> int:
         """Get or set the Set type of ALESID:
-        EQ.0:	part set ID (PSID).
-        EQ.1:	part ID (PID).
+        EQ.0: part set ID (PSID).
+        EQ.1: part ID (PID).
         """ # nopep8
         return self._cards[1].get_value("alestyp")
 
@@ -152,8 +154,8 @@ class AleStructuredFsi(KeywordBase):
     @property
     def mcoup(self) -> typing.Optional[int]:
         """Get or set the Which Multi-material(s) to be coupled (Remark 1):
-        EQ.0:	couple with all multi-material groups,
-        EQ.-N:	-N is the ID of *SET_MULTI-MATERIAL_GROUP.
+        EQ.0: couple with all multi-material groups,
+        EQ.-N: -N is the ID of *SET_MULTI-MATERIAL_GROUP.
         """ # nopep8
         return self._cards[1].get_value("mcoup")
 
@@ -200,8 +202,8 @@ class AleStructuredFsi(KeywordBase):
     @property
     def fric(self) -> float:
         """Get or set the Friction Coefficient.  Friction force is evaluated as normal force multiplied by friction coefficient.
-        GT.0:	Constant friction coefficient
-        EQ. - N : Variable friction coefficient; defined by a TABLE ID = N.The table is to look up the friction coefficient value given a pair of(coupling pressure, relative velocity)..
+        GT.0: Constant friction coefficient
+        EQ. - N: Variable friction coefficient; defined by a TABLE ID = N.The table is to look up the friction coefficient value given a pair of(coupling pressure, relative velocity)..
         """ # nopep8
         return self._cards[2].get_value("fric")
 
@@ -209,6 +211,17 @@ class AleStructuredFsi(KeywordBase):
     def fric(self, value: float) -> None:
         """Set the fric property."""
         self._cards[2].set_value("fric", value)
+
+    @property
+    def ilvl(self) -> typing.Optional[int]:
+        """Get or set the Number of airbag segments to look downstream from the gas front. It is only used for the ABEXT keyword option. Together with DECAY, it activates pre-opening logic for gas-front segments to alleviate constrained flow typically observed in gas flow through long tubes.  Please refer to *AIRBAG_SALE (specifically Remark Error! Reference source not found.) for a detailed explanation.
+        """ # nopep8
+        return self._cards[2].get_value("ilvl")
+
+    @ilvl.setter
+    def ilvl(self, value: int) -> None:
+        """Set the ilvl property."""
+        self._cards[2].set_value("ilvl", value)
 
     @property
     def flip(self) -> int:
@@ -224,4 +237,29 @@ class AleStructuredFsi(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""flip must be `None` or one of {0,1}.""")
         self._cards[2].set_value("flip", value)
+
+    @property
+    def decay(self) -> typing.Optional[float]:
+        """Get or set the Decaying factor. It is only used for the ABEXT keyword option. Together with ILVL, it activates pre-opening logic for gas-front segments to alleviate constrained flow typically observed in gas flow through long tubes.  Please refer to *AIRBAG_SALE (specifically Remark Error! Reference source not found.) for a detailed explanation.
+        """ # nopep8
+        return self._cards[2].get_value("decay")
+
+    @decay.setter
+    def decay(self, value: float) -> None:
+        """Set the decay property."""
+        self._cards[2].set_value("decay", value)
+
+    @property
+    def offset(self) -> typing.Optional[float]:
+        """Get or set the Specofy how much to offset Lagrange segments away from the segment surface:
+        EQ.0.0: No offset
+        GT.0.0: Fraction of Lagrange segment thickness
+        LT.0.0: OFFSET must be an integer,and OFFSET is a load curve ID.The curve defines the offset distance in absolute value on the y - axis as a function of the time along the x - axis.
+        """ # nopep8
+        return self._cards[2].get_value("offset")
+
+    @offset.setter
+    def offset(self, value: float) -> None:
+        """Set the offset property."""
+        self._cards[2].set_value("offset", value)
 

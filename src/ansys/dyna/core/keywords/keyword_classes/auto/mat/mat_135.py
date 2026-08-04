@@ -292,7 +292,7 @@ class Mat135(KeywordBase):
 
     @property
     def k(self) -> typing.Optional[float]:
-        """Get or set the equals half YLD2003 exponent  .  Recommended value for FCC materials is  , i.e.  .
+        """Get or set the equals half YLD2003 exponent  . Recommended value for FCC materials is  , i.e. .
         """ # nopep8
         return self._cards[1].get_value("k")
 
@@ -458,12 +458,12 @@ class Mat135(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option:
-        EQ.0.0:  Locally orthotropic with material axes determined by element nodes as shown in Figure M2-1, and then rotated
-        about the shell element normal by the angle BETA.	Nodes 1, 2 and 4 of an element are identical to the nodes
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes as shown in Figure M2-1, and then rotated
+        about the shell element normal by the angle BETA. Nodes 1, 2 and 4 of an element are identical to the nodes
         used for the definition of a coordinate system as by *DEFINE_COORDINATE_NODES..
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
         EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
         *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
         """ # nopep8

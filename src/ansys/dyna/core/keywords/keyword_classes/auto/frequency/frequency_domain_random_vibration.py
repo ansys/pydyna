@@ -60,6 +60,10 @@ _FREQUENCYDOMAINRANDOMVIBRATION_CARD2 = (
 )
 
 _FREQUENCYDOMAINRANDOMVIBRATION_CARD3 = (
+    FieldSchema("pref", float, 0, 10, 2e-05),
+)
+
+_FREQUENCYDOMAINRANDOMVIBRATION_CARD4 = (
     FieldSchema("ldtyp", int, 0, 10, 0),
     FieldSchema("ipanelu", int, 10, 10, None),
     FieldSchema("ipanelv", int, 20, 10, None),
@@ -70,7 +74,7 @@ _FREQUENCYDOMAINRANDOMVIBRATION_CARD3 = (
     FieldSchema("tcoarse", float, 70, 10, 0.1),
 )
 
-_FREQUENCYDOMAINRANDOMVIBRATION_CARD4 = (
+_FREQUENCYDOMAINRANDOMVIBRATION_CARD5 = (
     FieldSchema("sid", int, 0, 10, None),
     FieldSchema("stype", int, 10, 10, None),
     FieldSchema("dof", int, 20, 10, 0),
@@ -81,7 +85,7 @@ _FREQUENCYDOMAINRANDOMVIBRATION_CARD4 = (
     FieldSchema("cid", int, 70, 10, None),
 )
 
-_FREQUENCYDOMAINRANDOMVIBRATION_CARD5 = (
+_FREQUENCYDOMAINRANDOMVIBRATION_CARD6 = (
     FieldSchema("load_i", int, 0, 10, None),
     FieldSchema("load_j", int, 10, 10, None),
     FieldSchema("lctyp2", int, 20, 10, 0),
@@ -131,6 +135,10 @@ class FrequencyDomainRandomVibration(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINRANDOMVIBRATION_CARD5,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINRANDOMVIBRATION_CARD6,
                 **kwargs,
             ),
         ]
@@ -195,7 +203,7 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @property
     def dampf(self) -> float:
-        """Get or set the Modal damping coefficient, ζ.
+        """Get or set the Modal damping coefficient, .
         """ # nopep8
         return self._cards[1].get_value("dampf")
 
@@ -206,7 +214,7 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @property
     def lcdam(self) -> int:
-        """Get or set the Load Curve ID defining mode dependent modal damping coefficient, ζ.
+        """Get or set the Load Curve ID defining mode dependent modal damping coefficient, .
         """ # nopep8
         return self._cards[1].get_value("lcdam")
 
@@ -232,7 +240,7 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @property
     def dmpmas(self) -> float:
-        """Get or set the Mass proportional damping constant α, in Rayleigh damping.
+        """Get or set the Mass proportional damping constant , in Rayleigh damping.
         """ # nopep8
         return self._cards[1].get_value("dmpmas")
 
@@ -243,7 +251,7 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @property
     def dmpstf(self) -> float:
-        """Get or set the Stiffness proportional damping constant β, in Rayleigh damping.
+        """Get or set the Stiffness proportional damping constant , in Rayleigh damping.
         """ # nopep8
         return self._cards[1].get_value("dmpstf")
 
@@ -313,9 +321,9 @@ class FrequencyDomainRandomVibration(KeywordBase):
         EQ.1: use g as unit for acceleration, and SI units (Newton, kg, meter,
         second, etc.) elsewhere.
         EQ.2: use g as unit for acceleration, and Engineering units (lbf,
-        lbf×second2/inch, inch, second, etc.) elsewhere.
+        lbfsecond2/inch, inch, second, etc.) elsewhere.
         EQ.3:use g as unit for acceleration, and units (kN, kg, mm, ms, GPa, etc.) elsewhere.
-        EQ.4:	Use g as unit for acceleration, and units (Newton, ton, mm, second, MPa, etc.) elsewhere.
+        EQ.4: Use g as unit for acceleration, and units (Newton, ton, mm, second, MPa, etc.) elsewhere.
         EQ.-1 use g as unit for acceleration and provide the multiplier for
         converting g to [length unit]/[time unit]2.
         """ # nopep8
@@ -371,7 +379,7 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @property
     def napsd(self) -> int:
-        """Get or set the Number of auto PSD load definition. Card 5 is repeated "NAPSD" number of times,one for each auto PSD load definition. The default value is 1.
+        """Get or set the Number of auto PSD load definition. Card 5 is repeated "NAPSD" number of times,one for each auto PSD load definition.
         """ # nopep8
         return self._cards[2].get_value("napsd")
 
@@ -382,7 +390,7 @@ class FrequencyDomainRandomVibration(KeywordBase):
 
     @property
     def ncpsd(self) -> int:
-        """Get or set the Number of cross PSD load definition. Card 6 is repeated "NCPSD" times,one for each cross PSD load definition. The default value is 0.
+        """Get or set the Number of cross PSD load definition. Card 6 is repeated "NCPSD" times,one for each cross PSD load definition.
         """ # nopep8
         return self._cards[2].get_value("ncpsd")
 
@@ -392,53 +400,64 @@ class FrequencyDomainRandomVibration(KeywordBase):
         self._cards[2].set_value("ncpsd", value)
 
     @property
+    def pref(self) -> float:
+        """Get or set the Reference pressure used to convert acoustic pressure to SPL (dB). This reference pressure is only needed if VAFLAG = 5, 6, or 7. For VAFLAG = 5, 6, or 7, if this Card 3.1 is not provided, LS-DYNA will use a default value 2.0E-5 as the reference pressure.
+        """ # nopep8
+        return self._cards[3].get_value("pref")
+
+    @pref.setter
+    def pref(self, value: float) -> None:
+        """Set the pref property."""
+        self._cards[3].set_value("pref", value)
+
+    @property
     def ldtyp(self) -> int:
         """Get or set the Excitation load (LDPSD in card 5) type:
         EQ.0: PSD.
         EQ.1: SPL (for plane wave only).
         EQ.2: time history load.
         """ # nopep8
-        return self._cards[3].get_value("ldtyp")
+        return self._cards[4].get_value("ldtyp")
 
     @ldtyp.setter
     def ldtyp(self, value: int) -> None:
         """Set the ldtyp property."""
         if value not in [0, 1, 2, None]:
             raise Exception("""ldtyp must be `None` or one of {0,1,2}.""")
-        self._cards[3].set_value("ldtyp", value)
+        self._cards[4].set_value("ldtyp", value)
 
     @property
     def ipanelu(self) -> typing.Optional[int]:
         """Get or set the Number of strips in U direction (used only for VAFLAG=5, 6, 7).
         """ # nopep8
-        return self._cards[3].get_value("ipanelu")
+        return self._cards[4].get_value("ipanelu")
 
     @ipanelu.setter
     def ipanelu(self, value: int) -> None:
         """Set the ipanelu property."""
-        self._cards[3].set_value("ipanelu", value)
+        self._cards[4].set_value("ipanelu", value)
 
     @property
     def ipanelv(self) -> typing.Optional[int]:
         """Get or set the Number of strips in V direction (used only for VAFLAG=5, 6, 7).
         """ # nopep8
-        return self._cards[3].get_value("ipanelv")
+        return self._cards[4].get_value("ipanelv")
 
     @ipanelv.setter
     def ipanelv(self, value: int) -> None:
         """Set the ipanelv property."""
-        self._cards[3].set_value("ipanelv", value)
+        self._cards[4].set_value("ipanelv", value)
 
     @property
     def temper(self) -> float:
         """Get or set the Temperature.
         """ # nopep8
-        return self._cards[3].get_value("temper")
+        return self._cards[4].get_value("temper")
 
     @temper.setter
     def temper(self, value: float) -> None:
         """Set the temper property."""
-        self._cards[3].set_value("temper", value)
+        self._cards[4].set_value("temper", value)
 
     @property
     def ldflag(self) -> int:
@@ -448,53 +467,53 @@ class FrequencyDomainRandomVibration(KeywordBase):
         EQ.2: Linear-Linear interpolation.
 
         """ # nopep8
-        return self._cards[3].get_value("ldflag")
+        return self._cards[4].get_value("ldflag")
 
     @ldflag.setter
     def ldflag(self, value: int) -> None:
         """Set the ldflag property."""
         if value not in [0, 1, 2, None]:
             raise Exception("""ldflag must be `None` or one of {0,1,2}.""")
-        self._cards[3].set_value("ldflag", value)
+        self._cards[4].set_value("ldflag", value)
 
     @property
     def icoarse(self) -> int:
         """Get or set the Option for PSD curve coarsening:
-        EQ.0:	No coarsening, use original data (default).
-        EQ.1:	Coarsening by keeping only peaks and troughs.
-        EQ.2:	Coarsening by removing intermediate points whose slope change percentage is less than prescribed tolerance (TCOARSE).
+        EQ.0: No coarsening, use original data (default).
+        EQ.1: Coarsening by keeping only peaks and troughs.
+        EQ.2: Coarsening by removing intermediate points whose slope change percentage is less than prescribed tolerance (TCOARSE).
         """ # nopep8
-        return self._cards[3].get_value("icoarse")
+        return self._cards[4].get_value("icoarse")
 
     @icoarse.setter
     def icoarse(self, value: int) -> None:
         """Set the icoarse property."""
         if value not in [0, 1, 2, None]:
             raise Exception("""icoarse must be `None` or one of {0,1,2}.""")
-        self._cards[3].set_value("icoarse", value)
+        self._cards[4].set_value("icoarse", value)
 
     @property
     def tcoarse(self) -> float:
         """Get or set the Tolerance for slope change percentage for removing intermediate points from PSD curve (default is 0.1), for ICOARSE  =  2.
         """ # nopep8
-        return self._cards[3].get_value("tcoarse")
+        return self._cards[4].get_value("tcoarse")
 
     @tcoarse.setter
     def tcoarse(self, value: float) -> None:
         """Set the tcoarse property."""
-        self._cards[3].set_value("tcoarse", value)
+        self._cards[4].set_value("tcoarse", value)
 
     @property
     def sid(self) -> typing.Optional[int]:
         """Get or set the GE.0: Set ID for the panel exposed to acoustic environment,or the nodes subjected to nodal force excitation,or nodal acceleration excitation.For VAFLAG = 1,base acceleration,leave this as blank
         LT.0: used to define the cross-PSD.|SID| is the ID of the load cases.
         """ # nopep8
-        return self._cards[4].get_value("sid")
+        return self._cards[5].get_value("sid")
 
     @sid.setter
     def sid(self, value: int) -> None:
         """Set the sid property."""
-        self._cards[4].set_value("sid", value)
+        self._cards[5].set_value("sid", value)
 
     @property
     def stype(self) -> typing.Optional[int]:
@@ -506,12 +525,12 @@ class FrequencyDomainRandomVibration(KeywordBase):
         EQ. 4: Part Set
         LT.0: used to define the cross-psd.|STYPE| is the ID of the load cases.
         """ # nopep8
-        return self._cards[4].get_value("stype")
+        return self._cards[5].get_value("stype")
 
     @stype.setter
     def stype(self, value: int) -> None:
         """Set the stype property."""
-        self._cards[4].set_value("stype", value)
+        self._cards[5].set_value("stype", value)
 
     @property
     def dof(self) -> int:
@@ -521,58 +540,58 @@ class FrequencyDomainRandomVibration(KeywordBase):
         EQ.2: y-translational degree-of-freedom,
         EQ.3: z-translational degree-of-freedom.
         """ # nopep8
-        return self._cards[4].get_value("dof")
+        return self._cards[5].get_value("dof")
 
     @dof.setter
     def dof(self, value: int) -> None:
         """Set the dof property."""
         if value not in [0, 1, 2, 3, None]:
             raise Exception("""dof must be `None` or one of {0,1,2,3}.""")
-        self._cards[4].set_value("dof", value)
+        self._cards[5].set_value("dof", value)
 
     @property
     def ldpsd(self) -> typing.Optional[int]:
         """Get or set the Load curve for PSD, SPL or time history excitation.
         """ # nopep8
-        return self._cards[4].get_value("ldpsd")
+        return self._cards[5].get_value("ldpsd")
 
     @ldpsd.setter
     def ldpsd(self, value: int) -> None:
         """Set the ldpsd property."""
-        self._cards[4].set_value("ldpsd", value)
+        self._cards[5].set_value("ldpsd", value)
 
     @property
     def ldvel(self) -> typing.Optional[int]:
         """Get or set the Load curve for phase velocity.
         """ # nopep8
-        return self._cards[4].get_value("ldvel")
+        return self._cards[5].get_value("ldvel")
 
     @ldvel.setter
     def ldvel(self, value: int) -> None:
         """Set the ldvel property."""
-        self._cards[4].set_value("ldvel", value)
+        self._cards[5].set_value("ldvel", value)
 
     @property
     def ldflw(self) -> typing.Optional[int]:
         """Get or set the Load curve for exponential decay for TBL in flow-wise direction.
         """ # nopep8
-        return self._cards[4].get_value("ldflw")
+        return self._cards[5].get_value("ldflw")
 
     @ldflw.setter
     def ldflw(self, value: int) -> None:
         """Set the ldflw property."""
-        self._cards[4].set_value("ldflw", value)
+        self._cards[5].set_value("ldflw", value)
 
     @property
     def ldspn(self) -> typing.Optional[int]:
         """Get or set the Load curve for exponential decay for TBL in span-wise direction.
         """ # nopep8
-        return self._cards[4].get_value("ldspn")
+        return self._cards[5].get_value("ldspn")
 
     @ldspn.setter
     def ldspn(self, value: int) -> None:
         """Set the ldspn property."""
-        self._cards[4].set_value("ldspn", value)
+        self._cards[5].set_value("ldspn", value)
 
     @property
     def cid(self) -> typing.Optional[int]:
@@ -580,34 +599,34 @@ class FrequencyDomainRandomVibration(KeywordBase):
         *DEFINE_COORDINATE_SYSTEM; or Vector ID for defining load
         direction for nodal force, or base excitation, see *DEFINE_VECTOR.
         """ # nopep8
-        return self._cards[4].get_value("cid")
+        return self._cards[5].get_value("cid")
 
     @cid.setter
     def cid(self, value: int) -> None:
         """Set the cid property."""
-        self._cards[4].set_value("cid", value)
+        self._cards[5].set_value("cid", value)
 
     @property
     def load_i(self) -> typing.Optional[int]:
         """Get or set the ID of load i for cross PSD.
         """ # nopep8
-        return self._cards[5].get_value("load_i")
+        return self._cards[6].get_value("load_i")
 
     @load_i.setter
     def load_i(self, value: int) -> None:
         """Set the load_i property."""
-        self._cards[5].set_value("load_i", value)
+        self._cards[6].set_value("load_i", value)
 
     @property
     def load_j(self) -> typing.Optional[int]:
         """Get or set the ID of load j for cross PSD.
         """ # nopep8
-        return self._cards[5].get_value("load_j")
+        return self._cards[6].get_value("load_j")
 
     @load_j.setter
     def load_j(self, value: int) -> None:
         """Set the load_j property."""
-        self._cards[5].set_value("load_j", value)
+        self._cards[6].set_value("load_j", value)
 
     @property
     def lctyp2(self) -> int:
@@ -615,36 +634,36 @@ class FrequencyDomainRandomVibration(KeywordBase):
         EQ.0:LDPSD1 defines real part and LDPSD2 defines imaginary part
         EQ.1:LDPSD1 defines magnitude and LDPSD2 defines phase angle.
         """ # nopep8
-        return self._cards[5].get_value("lctyp2")
+        return self._cards[6].get_value("lctyp2")
 
     @lctyp2.setter
     def lctyp2(self, value: int) -> None:
         """Set the lctyp2 property."""
         if value not in [0, 1, None]:
             raise Exception("""lctyp2 must be `None` or one of {0,1}.""")
-        self._cards[5].set_value("lctyp2", value)
+        self._cards[6].set_value("lctyp2", value)
 
     @property
     def ldpsd1(self) -> typing.Optional[int]:
         """Get or set the Load curve for real part or magnitude of cross PSD.
         """ # nopep8
-        return self._cards[5].get_value("ldpsd1")
+        return self._cards[6].get_value("ldpsd1")
 
     @ldpsd1.setter
     def ldpsd1(self, value: int) -> None:
         """Set the ldpsd1 property."""
-        self._cards[5].set_value("ldpsd1", value)
+        self._cards[6].set_value("ldpsd1", value)
 
     @property
     def ldpsd2(self) -> typing.Optional[int]:
         """Get or set the Load curve for imaginary part or phase angle of cross PSD.
         """ # nopep8
-        return self._cards[5].get_value("ldpsd2")
+        return self._cards[6].get_value("ldpsd2")
 
     @ldpsd2.setter
     def ldpsd2(self, value: int) -> None:
         """Set the ldpsd2 property."""
-        self._cards[5].set_value("ldpsd2", value)
+        self._cards[6].set_value("ldpsd2", value)
 
     @property
     def lcdam_link(self) -> typing.Optional[DefineCurve]:

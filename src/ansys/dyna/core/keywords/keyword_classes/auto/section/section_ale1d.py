@@ -90,8 +90,8 @@ class SectionAle1D(KeywordBase):
     @property
     def aleform(self) -> int:
         """Get or set the ALE formulation:
-        EQ.6  : Single material Eulerian formulation
-        EQ.7  : Single material Ambient Eulerian formulation
+        EQ.6: Single material Eulerian formulation
+        EQ.7: Single material Ambient Eulerian formulation
         EQ.11: Multi-Material ALE formulation
 
         """ # nopep8
@@ -119,7 +119,7 @@ class SectionAle1D(KeywordBase):
     def elform(self) -> int:
         """Get or set the Element formulation:
         EQ.7:plane strain (x-y plane ; element volume= 1*dx*thick)
-        EQ.8: : cylindric  (y-axis of symmetry ; element volume= x*dx*thick)
+        EQ.8:: cylindric  (y-axis of symmetry ; element volume= x*dx*thick)
         EQ.-8: spherical (element volume = x*x*dx)
         """ # nopep8
         return self._cards[0].get_value("elform")

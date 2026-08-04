@@ -108,7 +108,7 @@ class EmRandlesLayered(KeywordBase):
     @property
     def rdltype(self) -> typing.Optional[int]:
         """Get or set the Type of Randles Cell
-        EQ.1:	Only option available for now.
+        EQ.1: Only option available for now.
         """ # nopep8
         return self._cards[0].get_value("rdltype")
 
@@ -131,9 +131,9 @@ class EmRandlesLayered(KeywordBase):
     @property
     def rdlarea_(self) -> typing.Optional[int]:
         """Get or set the Randle Area:
-        EQ.0:	Default.The parameters are not scaled by area factors.
-        EQ.1:	The parameters are per unit area and will be scaled in each Randle circuit by a factor depending on the local area of the circuit.
-        EQ.2:	The parameters are defined for the whole cell and will be scaled in each Randle circuit by a factor depending on the local area of the circuit and the global area of the cell.
+        EQ.0: Default.The parameters are not scaled by area factors.
+        EQ.1: The parameters are per unit area and will be scaled in each Randle circuit by a factor depending on the local area of the circuit.
+        EQ.2: The parameters are defined for the whole cell and will be scaled in each Randle circuit by a factor depending on the local area of the circuit and the global area of the cell.
         """ # nopep8
         return self._cards[0].get_value("rdlarea_")
 

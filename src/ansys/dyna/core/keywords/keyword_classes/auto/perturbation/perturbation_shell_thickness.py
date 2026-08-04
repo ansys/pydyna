@@ -32,7 +32,7 @@ _PERTURBATIONSHELLTHICKNESS_CARD0 = (
     FieldSchema("type", int, 0, 10, 1),
     FieldSchema("eid", int, 10, 10, None),
     FieldSchema("scl", float, 20, 10, 1.0),
-    FieldSchema("cmp", int, 30, 10, 7),
+    FieldSchema("cmp", int, 30, 10, None),
     FieldSchema("icoord", int, 40, 10, 0),
     FieldSchema("cid", int, 50, 10, 0),
 )
@@ -123,7 +123,7 @@ class PerturbationShellThickness(KeywordBase):
         EQ.2: Fade out all perturbations at this node set
         EQ.3: Read perturbations from a file
         EQ.4: Spectral field
-        EQ.8:	Random value from uniform distribution.
+        EQ.8: Random value from uniform distribution.
         """ # nopep8
         return self._cards[0].get_value("type")
 
@@ -157,7 +157,7 @@ class PerturbationShellThickness(KeywordBase):
         self._cards[0].set_value("scl", value)
 
     @property
-    def cmp(self) -> int:
+    def cmp(self) -> typing.Optional[int]:
         """Get or set the Component as given below
         EQ.1: x coordinate
         EQ.2: y coordinate
@@ -173,8 +173,8 @@ class PerturbationShellThickness(KeywordBase):
     @cmp.setter
     def cmp(self, value: int) -> None:
         """Set the cmp property."""
-        if value not in [ 7, 1, 2, 3, 4, 5, 6, None]:
-            raise Exception("""cmp must be `None` or one of { 7,1,2,3,4,5,6}.""")
+        if value not in [7, 1, 2, 3, 4, 5, 6, None]:
+            raise Exception("""cmp must be `None` or one of {7,1,2,3,4,5,6}.""")
         self._cards[0].set_value("cmp", value)
 
     @property
@@ -198,7 +198,7 @@ class PerturbationShellThickness(KeywordBase):
 
     @property
     def cid(self) -> int:
-        """Get or set the Coordinate system ID.see *DEFINE_‌COORDINATE_‌NODES
+        """Get or set the Coordinate system ID.see *DEFINE_COORDINATE_NODES
         """ # nopep8
         return self._cards[0].get_value("cid")
 
@@ -428,8 +428,8 @@ class PerturbationShellThickness(KeywordBase):
     @property
     def dtype(self) -> float:
         """Get or set the Distribution type:
-        EQ.0.0:	Uniform distribution between SCL×[0,AMPL]
-        EQ.1.0 : Uniform distribution between SCL×[-AMPL ,AMPL]
+        EQ.0.0: Uniform distribution between SCL[0,AMPL]
+        EQ.1.0: Uniform distribution between SCL[-AMPL ,AMPL]
         """ # nopep8
         return self._cards[6].get_value("dtype")
 

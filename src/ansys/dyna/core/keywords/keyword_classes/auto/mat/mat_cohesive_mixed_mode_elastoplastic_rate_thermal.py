@@ -64,6 +64,11 @@ _MATCOHESIVEMIXEDMODEELASTOPLASTICRATETHERMAL_CARD2 = (
 
 _MATCOHESIVEMIXEDMODEELASTOPLASTICRATETHERMAL_CARD3 = (
     FieldSchema("rfiltf", float, 0, 10, None),
+    FieldSchema("compy", float, 10, 10, None),
+    FieldSchema("smolim", float, 20, 10, None),
+    FieldSchema("xmu", float, 30, 10, 1.0),
+    FieldSchema("unused", int, 40, 10, None),
+    FieldSchema("usrfail", int, 50, 10, 0),
 )
 
 _MATCOHESIVEMIXEDMODEELASTOPLASTICRATETHERMAL_OPTION0_CARD0 = (
@@ -152,10 +157,9 @@ class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
 
     @property
     def intfail(self) -> typing.Optional[float]:
-        """Get or set the The number of integration points required for the cohesive element to be deleted. The value of INTFAIL may range from 1 to 4 with 1 the recommended value.
-        LT.0.0:	Employs a Newton - Cotes integration scheme. The element will be deleted when | INTFAIL | integration points have failed.
-        EQ.0.0 : Employs a Newton - Cotes integration scheme. The element will not be deleted even if it satisfies the failure criterion.
-        GT.0.0 : Employs a Gauss integration scheme. The element will be deleted when INTFAIL integration points have failed.
+        """Get or set the The number of integration points required for the cohesive element to be deleted.The value of INTFAIL may range from 1 to 4 with 1 the recommended value.
+        EQ.0.0: Employs a Newton - Cotes integration scheme.The element will not be deleted even if it satisfies the failure criterion.
+        GT.0.0 : Employs a Gauss integration scheme.The element will be deleted when INTFAIL integration points have failed.
         """ # nopep8
         return self._cards[0].get_value("intfail")
 
@@ -166,7 +170,9 @@ class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
 
     @property
     def emod(self) -> typing.Optional[float]:
-        """Get or set the Young’s modulus of the material (Mode I). It is a curve ID if the THERMAL keyword option is used. It is a function ID if the FUNCTIONS keyword option is used.
+        """Get or set the Young's modulus of the material (Mode I).
+        GT.0.0: Constant value.Curve ID for THERMAL keyword option.Function ID for the FUNCTIONS keyword option.
+        LT.0.0 : Load curve ID = | MOD|,  which defines Young's modulus as a function of strain rate.This feature is only available if the keyword option is unset (<BLANK>). If the first abscissa value is negative, then logarithmic interpolation is used.
         """ # nopep8
         return self._cards[0].get_value("emod")
 
@@ -177,7 +183,9 @@ class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
 
     @property
     def gmod(self) -> typing.Optional[float]:
-        """Get or set the The shear modulus of the material (Mode II). Curve ID for THERMAL keyword option. GMOD is a function ID for the FUNCTIONS keyword option
+        """Get or set the The shear modulus of the material (Mode II).
+        GT.0.0: Constant value.Curve ID for THERMAL keyword option.Function ID for the FUNCTIONS keyword option.
+        LT.0.0 : Load curve ID = |GMOD|, which defines shear modulus as a function of strain rate.This feature is only available if the keyword option is unset (<BLANK>). If the first abscissa value is negative, then logarithmic interpolation is used.
         """ # nopep8
         return self._cards[0].get_value("gmod")
 
@@ -188,7 +196,9 @@ class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
 
     @property
     def thick(self) -> typing.Optional[float]:
-        """Get or set the GT.0.0: Cohesive thickness. LE.0.0: Initial thickness is calculated from nodal coordinates.
+        """Get or set the Initial thickness:
+        GT.0.0: Cohesive thickness.
+        LE.0.0: Initial thickness is calculated from nodal coordinates.
         """ # nopep8
         return self._cards[0].get_value("thick")
 
@@ -200,9 +210,9 @@ class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
     @property
     def inicrt(self) -> float:
         """Get or set the Yield and damage initiation criterion:
-        EQ.0.0:	quadratic nominal stress(default)
-        EQ.1.0 : maximum nominal stress.
-        EQ.2.0:	maximum nominal stress ( same as INICRT=1.0). Additionally flags outputting the maximum strain as history variable #15
+        EQ.0.0: quadratic nominal stress(default)
+        EQ.1.0: maximum nominal stress.
+        EQ.2.0: maximum nominal stress ( same as INICRT=1.0). Additionally flags outputting the maximum strain as history variable #15
         LT.0.0: mixed mode with flexible exponent | INICRT |
         """ # nopep8
         return self._cards[0].get_value("inicrt")
@@ -214,7 +224,9 @@ class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
 
     @property
     def g1c_0(self) -> typing.Optional[float]:
-        """Get or set the GT 0.0: Energy release rate GIC in Mode I. LE. 0.0: Lower bound value of rate-dependent GIC.
+        """Get or set the Energy release rate G_IC in Mode I or the lower bound of the rate-dependent
+        GT.0.0: Energy release rate G_IC in Mode I. G1C_0 is a curve ID if the THERMAL keyword option is used. G1C_0 is a function ID if the FUNCTIONS keyword option is used.
+        LE. 0.0: Lower bound value of rate-dependent.
         """ # nopep8
         return self._cards[1].get_value("g1c_0")
 
@@ -247,7 +259,8 @@ class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
 
     @property
     def t0(self) -> typing.Optional[float]:
-        """Get or set the GT.0.0: Yield stress in Mode I
+        """Get or set the Yield stress in Mode I or a component of the rate-dependent model for determining the yield stress:
+        GT.0.0: Yield stress in Mode I
         LT.0.0: Rate-dependency is considered, Parameter T0.
         """ # nopep8
         return self._cards[1].get_value("t0")
@@ -294,7 +307,7 @@ class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
 
     @property
     def lcg1c(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID which defines fracture energy GIC as a function of cohesive element thickness. G1C_‌0 and G1C_‌INF are ignored in this case.
+        """Get or set the Load curve ID which defines fracture energy GIC as a function of cohesive element thickness. G1C_0 and G1C_INF are ignored in this case.
         """ # nopep8
         return self._cards[1].get_value("lcg1c")
 
@@ -305,7 +318,8 @@ class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
 
     @property
     def g2c_0(self) -> typing.Optional[float]:
-        """Get or set the GT.0.0: Energy release rate GIIC in Mode II
+        """Get or set the Energy release rate G_IIC in Mode II or the lower bound of the rate-dependent
+        GT.0.0: Energy release rate G_IIC in Mode II. If the THERMAL keyword option is used, it is a load curve ID. For the FUNCTIONS keyword option, it is a function ID
         LE.0.0: Lower bound value of rate-dependent GIIC.
         """ # nopep8
         return self._cards[2].get_value("g2c_0")
@@ -339,8 +353,9 @@ class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
 
     @property
     def s0(self) -> typing.Optional[float]:
-        """Get or set the GT.0.0: Yield stress in Mode II
-        LT.0.0: Rate-dependency is considered, Parameter S0.
+        """Get or set the Yield stress in Mode II or a component of the rate-dependent model for determining the yield stress:
+        GT.0.0: Yield stress in Mode II.It is a load curve ID for the THERMAL keyword option.It is a function ID for the FUNCTIONS keyword option.
+        LT.0.0 : Rate - dependency is considered; see S1 and EDOT_‌S
         """ # nopep8
         return self._cards[2].get_value("s0")
 
@@ -375,7 +390,9 @@ class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
 
     @property
     def fg2(self) -> typing.Optional[float]:
-        """Get or set the Parameter fG2 to describe the tri-linear shape of the traction-separation law in Mode II.
+        """Get or set the Describes the trilinear shape of the traction-separation law in Mode II (see remarks). It is a load curve ID for the THERMAL keyword option. It is a function ID for the FUNCTIONS keyword option.
+        GT.0.0: FG2 is the ratio of fracture energies, G_(II,P) / G_IIC.
+        LT.0.0 : | FG2 | is the ratio of displacements, (δ_t2 - δ_t1) / (δ_tf - δ_t1).
         """ # nopep8
         return self._cards[2].get_value("fg2")
 
@@ -386,7 +403,7 @@ class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
 
     @property
     def lcg2c(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID which defines fracture energy GIIC as a function of cohesive element thickness. G2C_‌0 and G2C_‌INF are ignored in that case.
+        """Get or set the Load curve ID for the load curve that defines fracture energy GIIC as a function of cohesive element thickness. G2C_0 and G2C_INF are ignored in that case.
         """ # nopep8
         return self._cards[2].get_value("lcg2c")
 
@@ -399,8 +416,8 @@ class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
     def rfiltf(self) -> typing.Optional[float]:
         """Get or set the Smoothing factor on the equivalent strain rate using an exponential moving average method:
         This option invokes a modified handling of strain rates, see Remarks.
-        GT.0.0:	RFILTF applied on the equivalent plastic strain rate
-        LT.0.0 : | RFILTF | applied on the equivalent total strain rate
+        GT.0.0: RFILTF applied on the equivalent plastic strain rate
+        LT.0.0: | RFILTF | applied on the equivalent total strain rate
         """ # nopep8
         return self._cards[3].get_value("rfiltf")
 
@@ -408,6 +425,58 @@ class MatCohesiveMixedModeElastoplasticRateThermal(KeywordBase):
     def rfiltf(self, value: float) -> None:
         """Set the rfiltf property."""
         self._cards[3].set_value("rfiltf", value)
+
+    @property
+    def compy(self) -> typing.Optional[float]:
+        """Get or set the Yield under compression flag.
+        EQ.0: Off (default)
+        EQ.1: On.
+        """ # nopep8
+        return self._cards[3].get_value("compy")
+
+    @compy.setter
+    def compy(self, value: float) -> None:
+        """Set the compy property."""
+        self._cards[3].set_value("compy", value)
+
+    @property
+    def smolim(self) -> typing.Optional[float]:
+        """Get or set the Smooth treatment of asymptotic limits (e.g., pure shear).
+        EQ.0: Off (default)
+        EQ.1: On.
+        """ # nopep8
+        return self._cards[3].get_value("smolim")
+
+    @smolim.setter
+    def smolim(self, value: float) -> None:
+        """Set the smolim property."""
+        self._cards[3].set_value("smolim", value)
+
+    @property
+    def xmu(self) -> float:
+        """Get or set the Exponent of the mixed mode failure criterion. Default is 1.0.
+        """ # nopep8
+        return self._cards[3].get_value("xmu")
+
+    @xmu.setter
+    def xmu(self, value: float) -> None:
+        """Set the xmu property."""
+        self._cards[3].set_value("xmu", value)
+
+    @property
+    def usrfail(self) -> int:
+        """Get or set the User defined failure flag:
+        EQ.0 : No user subroutine is called (default).
+        EQ.1 : User subroutine ucohfail in dyn21umatc.f is called.
+        """ # nopep8
+        return self._cards[3].get_value("usrfail")
+
+    @usrfail.setter
+    def usrfail(self, value: int) -> None:
+        """Set the usrfail property."""
+        if value not in [0, 1, None]:
+            raise Exception("""usrfail must be `None` or one of {0,1}.""")
+        self._cards[3].set_value("usrfail", value)
 
     @property
     def title(self) -> typing.Optional[str]:

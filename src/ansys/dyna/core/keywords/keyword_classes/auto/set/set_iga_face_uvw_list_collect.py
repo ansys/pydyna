@@ -154,7 +154,7 @@ class SetIgaFaceUvwListCollect(KeywordBase):
 
     @property
     def fid1(self) -> typing.Optional[int]:
-        """Get or set the ith parametric face ID.
+        """Get or set the ith parametric face ID. See Remark 3
         """ # nopep8
         return self._cards[1].get_value("fid1")
 
@@ -165,7 +165,7 @@ class SetIgaFaceUvwListCollect(KeywordBase):
 
     @property
     def fid2(self) -> typing.Optional[int]:
-        """Get or set the ith parametric face ID.
+        """Get or set the ith parametric face ID. See Remark 3
         """ # nopep8
         return self._cards[1].get_value("fid2")
 
@@ -176,7 +176,7 @@ class SetIgaFaceUvwListCollect(KeywordBase):
 
     @property
     def fid3(self) -> typing.Optional[int]:
-        """Get or set the ith parametric face ID.
+        """Get or set the ith parametric face ID. See Remark 3
         """ # nopep8
         return self._cards[1].get_value("fid3")
 
@@ -187,7 +187,7 @@ class SetIgaFaceUvwListCollect(KeywordBase):
 
     @property
     def fid4(self) -> typing.Optional[int]:
-        """Get or set the ith parametric face ID.
+        """Get or set the ith parametric face ID. See Remark 3
         """ # nopep8
         return self._cards[1].get_value("fid4")
 
@@ -198,7 +198,7 @@ class SetIgaFaceUvwListCollect(KeywordBase):
 
     @property
     def fid5(self) -> typing.Optional[int]:
-        """Get or set the ith parametric face ID.
+        """Get or set the ith parametric face ID. See Remark 3
         """ # nopep8
         return self._cards[1].get_value("fid5")
 
@@ -209,7 +209,7 @@ class SetIgaFaceUvwListCollect(KeywordBase):
 
     @property
     def fid6(self) -> typing.Optional[int]:
-        """Get or set the ith parametric face ID.
+        """Get or set the ith parametric face ID. See Remark 3
         """ # nopep8
         return self._cards[1].get_value("fid6")
 
@@ -220,7 +220,7 @@ class SetIgaFaceUvwListCollect(KeywordBase):
 
     @property
     def fid7(self) -> typing.Optional[int]:
-        """Get or set the ith parametric face ID.
+        """Get or set the ith parametric face ID. See Remark 3
         """ # nopep8
         return self._cards[1].get_value("fid7")
 
@@ -231,7 +231,7 @@ class SetIgaFaceUvwListCollect(KeywordBase):
 
     @property
     def fid8(self) -> typing.Optional[int]:
-        """Get or set the ith parametric face ID.
+        """Get or set the ith parametric face ID. See Remark 3
         """ # nopep8
         return self._cards[1].get_value("fid8")
 

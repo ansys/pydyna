@@ -27,10 +27,12 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _CONTROLPOREAIR_CARD0 = (
-    FieldSchema("pa_rho", float, 0, 10, None),
+    FieldSchema("air_rho", float, 0, 10, None),
     FieldSchema("air_p", float, 10, 10, None),
     FieldSchema("eterm", float, 20, 10, None),
     FieldSchema("anamsg", int, 30, 10, 0),
+    FieldSchema("optapa", int, 40, 10, 0),
+    FieldSchema("pa_dr", int, 50, 10, 0),
 )
 
 class ControlPoreAir(KeywordBase):
@@ -49,15 +51,15 @@ class ControlPoreAir(KeywordBase):
             ),
         ]
     @property
-    def pa_rho(self) -> typing.Optional[float]:
+    def air_rho(self) -> typing.Optional[float]:
         """Get or set the Density of atmospheric air, = 1.184 kg/m3 at 25 C
         """ # nopep8
-        return self._cards[0].get_value("pa_rho")
+        return self._cards[0].get_value("air_rho")
 
-    @pa_rho.setter
-    def pa_rho(self, value: float) -> None:
-        """Set the pa_rho property."""
-        self._cards[0].set_value("pa_rho", value)
+    @air_rho.setter
+    def air_rho(self, value: float) -> None:
+        """Set the air_rho property."""
+        self._cards[0].set_value("air_rho", value)
 
     @property
     def air_p(self) -> typing.Optional[float]:
@@ -72,7 +74,7 @@ class ControlPoreAir(KeywordBase):
 
     @property
     def eterm(self) -> typing.Optional[float]:
-        """Get or set the Event termination time, default to ENDTIME of *CONTROL_TERMINATION.
+        """Get or set the Event termination time. The default is ENDTIM of *CONTROL_TERMINATION.  If ETERM is defined and smaller than ENDTIM, the simublation terminates, by default, when the simulation time reaches ETERM.  However, OTAPA below provides options for continuing the simulation beyond ETERM.
         """ # nopep8
         return self._cards[0].get_value("eterm")
 
@@ -96,4 +98,35 @@ class ControlPoreAir(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""anamsg must be `None` or one of {0,1}.""")
         self._cards[0].set_value("anamsg", value)
+
+    @property
+    def optapa(self) -> int:
+        """Get or set the Option when 0.0 < ETERM < ENDTIM:
+        EQ.0: The simulation terminates when time reaches ETERM.
+        EQ.1: The simulation continues beyond time ETERM.However, pore air pressure is not updated after ETERM,and the last updated pore air pressure applies for the rest of the simulation.
+        EQ.2: The simulation continues beyond time ETERM, but pore air pressure does not apply after time ETERM.
+        """ # nopep8
+        return self._cards[0].get_value("optapa")
+
+    @optapa.setter
+    def optapa(self, value: int) -> None:
+        """Set the optapa property."""
+        if value not in [0, 1, 2, None]:
+            raise Exception("""optapa must be `None` or one of {0,1,2}.""")
+        self._cards[0].set_value("optapa", value)
+
+    @property
+    def pa_dr(self) -> int:
+        """Get or set the Flag to turn on pore air flow analysis during dynamic relaxation.  Starting with R13, the pore air analysis is disabled by default during dynamic relaxation. This flag enables reproducing results comparable to R12 or earlier versions in which pore air analysis is active during the dynamic relaxation phase.
+        EQ.0:	Disable pore air analysis is disabled during dynamic relaxation.
+        EQ.1:	Enable pore air analysis during dynamic relaxation
+        """ # nopep8
+        return self._cards[0].get_value("pa_dr")
+
+    @pa_dr.setter
+    def pa_dr(self, value: int) -> None:
+        """Set the pa_dr property."""
+        if value not in [0, 1, None]:
+            raise Exception("""pa_dr must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("pa_dr", value)
 

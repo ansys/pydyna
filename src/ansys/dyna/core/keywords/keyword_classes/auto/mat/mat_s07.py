@@ -139,8 +139,8 @@ class MatS07(KeywordBase):
     @property
     def copt(self) -> typing.Optional[float]:
         """Get or set the Time implementation option:
-        EQ.0.0: incremental time change (default),
-        NE.0: continuous time change.
+        EQ.0.0: Incremental time change (default),
+        NE.0: Continuous time change.
         """ # nopep8
         return self._cards[0].get_value("copt")
 
