@@ -152,7 +152,7 @@ class Contact2DNodeToSolid(KeywordBase):
 
     @property
     def pen(self) -> float:
-        """Get or set the Scale factor for penalty. 	EQ. 0.0: default set to: 1.0
+        """Get or set the Scale factor for penalty.  EQ. 0.0: default set to: 1.0
         """ # nopep8
         return self._cards[1].get_value("pen")
 

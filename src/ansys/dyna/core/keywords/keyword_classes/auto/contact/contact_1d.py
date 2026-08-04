@@ -58,7 +58,7 @@ class Contact1D(KeywordBase):
         ]
     @property
     def nsidr(self) -> typing.Optional[int]:
-        """Get or set the Nodal set ID for the rebar nodes that slide along the concrete; see* SET_NODE
+        """Get or set the Nodal set ID for the rebar nodes that slide along the concrete; see *SET_NODE
         """ # nopep8
         return self._cards[0].get_value("nsidr")
 
@@ -69,7 +69,7 @@ class Contact1D(KeywordBase):
 
     @property
     def nsidc(self) -> typing.Optional[int]:
-        """Get or set the Nodal set ID for the concrete nodes that the rebar nodes may slide along; see* SET_NODE
+        """Get or set the Nodal set ID for the concrete nodes that the rebar nodes may slide along; see *SET_NODE
         """ # nopep8
         return self._cards[0].get_value("nsidc")
 

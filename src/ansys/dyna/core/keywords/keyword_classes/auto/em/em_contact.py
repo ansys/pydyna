@@ -29,9 +29,9 @@ from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EMCONTACT_CARD0 = (
     FieldSchema("contid", int, 0, 10, None),
-    FieldSchema("conttype", int, 10, 10, 1),
-    FieldSchema("psidm", int, 20, 10, None),
-    FieldSchema("psids", int, 30, 10, None),
+    FieldSchema("dtype", int, 10, 10, 0),
+    FieldSchema("psidr", int, 20, 10, None),
+    FieldSchema("psidt", int, 30, 10, None),
     FieldSchema("eps1", float, 40, 10, 0.3),
     FieldSchema("eps2", float, 50, 10, 0.3),
     FieldSchema("eps3", float, 60, 10, 0.3),
@@ -44,8 +44,8 @@ class EmContact(KeywordBase):
     keyword = "EM"
     subkeyword = "CONTACT"
     _link_fields = {
-        "psidm": LinkType.SET_PART,
-        "psids": LinkType.SET_PART,
+        "psidr": LinkType.SET_PART,
+        "psidt": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -69,42 +69,45 @@ class EmContact(KeywordBase):
         self._cards[0].set_value("contid", value)
 
     @property
-    def conttype(self) -> int:
-        """Get or set the Type of EM contact.
-        EQ.1: Face to face.
+    def dtype(self) -> int:
+        """Get or set the Detection type
+        EQ.0: Contact type 0 (default)
+        EQ.1: Contact type 1.
         """ # nopep8
-        return self._cards[0].get_value("conttype")
+        return self._cards[0].get_value("dtype")
 
-    @conttype.setter
-    def conttype(self, value: int) -> None:
-        """Set the conttype property."""
-        self._cards[0].set_value("conttype", value)
+    @dtype.setter
+    def dtype(self, value: int) -> None:
+        """Set the dtype property."""
+        if value not in [0, 1, None]:
+            raise Exception("""dtype must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("dtype", value)
 
     @property
-    def psidm(self) -> typing.Optional[int]:
-        """Get or set the Set of master parts ID.
+    def psidr(self) -> typing.Optional[int]:
+        """Get or set the Reference surface part set s ID.
         """ # nopep8
-        return self._cards[0].get_value("psidm")
+        return self._cards[0].get_value("psidr")
 
-    @psidm.setter
-    def psidm(self, value: int) -> None:
-        """Set the psidm property."""
-        self._cards[0].set_value("psidm", value)
+    @psidr.setter
+    def psidr(self, value: int) -> None:
+        """Set the psidr property."""
+        self._cards[0].set_value("psidr", value)
 
     @property
-    def psids(self) -> typing.Optional[int]:
-        """Get or set the Set of slave parts ID.
+    def psidt(self) -> typing.Optional[int]:
+        """Get or set the Tracked surface part set ID.
         """ # nopep8
-        return self._cards[0].get_value("psids")
+        return self._cards[0].get_value("psidt")
 
-    @psids.setter
-    def psids(self, value: int) -> None:
-        """Set the psids property."""
-        self._cards[0].set_value("psids", value)
+    @psidt.setter
+    def psidt(self, value: int) -> None:
+        """Set the psidt property."""
+        self._cards[0].set_value("psidt", value)
 
     @property
     def eps1(self) -> float:
-        """Get or set the Contact Coefficients for contact detection conditions.
+        """Get or set the Contact coefficients for contact detection conditions.
         """ # nopep8
         return self._cards[0].get_value("eps1")
 
@@ -115,7 +118,7 @@ class EmContact(KeywordBase):
 
     @property
     def eps2(self) -> float:
-        """Get or set the Contact Coefficients for contact detection conditions.
+        """Get or set the Contact coefficients for contact detection conditions.
         """ # nopep8
         return self._cards[0].get_value("eps2")
 
@@ -126,7 +129,7 @@ class EmContact(KeywordBase):
 
     @property
     def eps3(self) -> float:
-        """Get or set the Contact Coefficients for contact detection conditions.
+        """Get or set the Contact coefficients for contact detection conditions.
         """ # nopep8
         return self._cards[0].get_value("eps3")
 
@@ -147,22 +150,22 @@ class EmContact(KeywordBase):
         self._cards[0].set_value("d0", value)
 
     @property
-    def psidm_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_PART_* keyword for psidm."""
-        return self._get_set_link("PART", self.psidm)
+    def psidr_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SET_PART_* keyword for psidr."""
+        return self._get_set_link("PART", self.psidr)
 
-    @psidm_link.setter
-    def psidm_link(self, value: KeywordBase) -> None:
-        """Set the SET_PART_* keyword for psidm."""
-        self.psidm = value.sid
+    @psidr_link.setter
+    def psidr_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psidr."""
+        self.psidr = value.sid
 
     @property
-    def psids_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_PART_* keyword for psids."""
-        return self._get_set_link("PART", self.psids)
+    def psidt_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SET_PART_* keyword for psidt."""
+        return self._get_set_link("PART", self.psidt)
 
-    @psids_link.setter
-    def psids_link(self, value: KeywordBase) -> None:
-        """Set the SET_PART_* keyword for psids."""
-        self.psids = value.sid
+    @psidt_link.setter
+    def psidt_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psidt."""
+        self.psidt = value.sid
 

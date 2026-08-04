@@ -152,7 +152,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @property
     def xc(self) -> float:
-        """Get or set the , 𝑦, 𝑧 coordinates of the center of injection plane
+        """Get or set the , ,  coordinates of the center of injection plane
         """ # nopep8
         return self._cards[0].get_value("xc")
 
@@ -163,7 +163,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @property
     def yc(self) -> float:
-        """Get or set the , 𝑦, 𝑧 coordinates of the center of injection plane
+        """Get or set the , ,  coordinates of the center of injection plane
         """ # nopep8
         return self._cards[0].get_value("yc")
 
@@ -174,7 +174,7 @@ class DefineDeInjectBondedEllipse(KeywordBase):
 
     @property
     def zc(self) -> float:
-        """Get or set the , 𝑦, 𝑧 coordinates of the center of injection plane
+        """Get or set the , ,  coordinates of the center of injection plane
         """ # nopep8
         return self._cards[0].get_value("zc")
 
@@ -219,8 +219,8 @@ class DefineDeInjectBondedEllipse(KeywordBase):
     @property
     def rmass(self) -> float:
         """Get or set the Mass flow rate
-        GE.0.0:	Constant mass flow rate
-        LT.0.0 : RMASS is a curve ID defining the mass flow rate as a function of time.
+        GE.0.0: Constant mass flow rate
+        LT.0.0: RMASS is a curve ID defining the mass flow rate as a function of time.
         """ # nopep8
         return self._cards[1].get_value("rmass")
 
@@ -353,8 +353,8 @@ class DefineDeInjectBondedEllipse(KeywordBase):
     @property
     def maxgap(self) -> float:
         """Get or set the Maximum gap between two bonded spheres
-        GT.0.0:	When MAXGAP is positive, the maximum allowed gap is determined on a bond - by - bond basis as a function of the radii of the two involved spheres.The maximum gap is determined by multiplying the minimum of the two radii by the value of MAXGAP.
-        LT.0.0 : Absolute value is used as the maximum gap
+        GT.0.0: When MAXGAP is positive, the maximum allowed gap is determined on a bond - by - bond basis as a function of the radii of the two involved spheres.The maximum gap is determined by multiplying the minimum of the two radii by the value of MAXGAP.
+        LT.0.0: Absolute value is used as the maximum gap
         """ # nopep8
         return self._cards[2].get_value("maxgap")
 

@@ -115,8 +115,8 @@ class ControlEnergy(KeywordBase):
     @property
     def irgen(self) -> int:
         """Get or set the Initial reference geometry energy option (included in internal energy, resulting from *INITIAL_FOAM_REFERENCE_GEOMETRY):
-        EQ.1:	initial reference geometry energy is not computed,
-        EQ.2:	initial reference geometry energy is computed and included in the energy balance as part of the internal energy (default).
+        EQ.1: initial reference geometry energy is not computed,
+        EQ.2: initial reference geometry energy is computed and included in the energy balance as part of the internal energy (default).
         """ # nopep8
         return self._cards[0].get_value("irgen")
 
@@ -130,8 +130,8 @@ class ControlEnergy(KeywordBase):
     @property
     def maten(self) -> int:
         """Get or set the Detailed material energies option. For a choice of material models (currently supported are 3, 4, 15, 19, 24, 63,81, 82, 98, 104, 105, 106, 107, 123, 124, 188, 224, 225, 240, and 251 for shell and solid elements), internal energy is additionally split into elastic, plastic and damage portions:
-        EQ.1:	detailed material energies are not computed(default).
-        EQ.2 : detailed material energies are computed and reported as mat_energy_elastic, mat_energy_plastic,and mat_energy_ damage in ASCII file glstatand matsum
+        EQ.1: detailed material energies are not computed(default).
+        EQ.2: detailed material energies are computed and reported as mat_energy_elastic, mat_energy_plastic,and mat_energy_ damage in ASCII file glstatand matsum
         """ # nopep8
         return self._cards[0].get_value("maten")
 
@@ -145,8 +145,8 @@ class ControlEnergy(KeywordBase):
     @property
     def drlen(self) -> int:
         """Get or set the Drilling energy calculation option, for implicit and with use of DRCPSID/DRCPRM on *CONTROL_SHELL:
-        EQ.1:	Drilling energy is not computed(default).
-        EQ.2 : Drilling energy is computed and included in the energy balance.The drilling energies are reported in the ASCII file glstat, see* DATABASE_OPTION.
+        EQ.1: Drilling energy is not computed(default).
+        EQ.2: Drilling energy is computed and included in the energy balance.The drilling energies are reported in the ASCII file glstat, see *DATABASE_OPTION.
         """ # nopep8
         return self._cards[0].get_value("drlen")
 
@@ -160,8 +160,8 @@ class ControlEnergy(KeywordBase):
     @property
     def disen(self) -> int:
         """Get or set the Dissipation energy calculation option, for implicit:
-        EQ.1:	Dissipated energy is not computed(default).
-        EQ.2 : Dissipated kinetic and internal energy is computed and included in the energy balance.The dissipation energies are reported in the ASCII file glstat, see* DATABASE_OPTION.
+        EQ.1: Dissipated energy is not computed(default).
+        EQ.2: Dissipated kinetic and internal energy is computed and included in the energy balance.The dissipation energies are reported in the ASCII file glstat, see *DATABASE_OPTION.
         """ # nopep8
         return self._cards[0].get_value("disen")
 

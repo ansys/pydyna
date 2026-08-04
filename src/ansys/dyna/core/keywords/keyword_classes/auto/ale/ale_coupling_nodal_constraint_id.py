@@ -96,7 +96,7 @@ class AleCouplingNodalConstraintId(KeywordBase):
 
     @property
     def strsid(self) -> typing.Optional[int]:
-        """Get or set the Set ID defining a part, part set or segment set ID of the structure (see *PART, *SET_‌PART or *SET_‌SEGMENT). The structure may include Lagrangian solid, shell, beam, thick shell, or discrete sphere elements. EFG, SPH, or EFG nodes may be used, but the boundary conditions may not be satisfied
+        """Get or set the ID for defining a part, part set, segment set, or node set giveing the structure. The structure may include Lagrangian solid, shell, beam, thick shell, or discrete sphere elements. EFG, SPH, or EFG nodes may be used, but the boundary conditions may not be satisfied
         """ # nopep8
         return self._cards[1].get_value("strsid")
 
@@ -107,7 +107,7 @@ class AleCouplingNodalConstraintId(KeywordBase):
 
     @property
     def alesid(self) -> typing.Optional[int]:
-        """Get or set the Set ID defining a part or part set ID of the ALE solid elements (see *PART or *SET_‌PART).
+        """Get or set the ID for defining a part or part set specifying the ALE solid elements.
         """ # nopep8
         return self._cards[1].get_value("alesid")
 
@@ -119,10 +119,10 @@ class AleCouplingNodalConstraintId(KeywordBase):
     @property
     def strsty(self) -> int:
         """Get or set the Set type of STRSID
-        EQ.0: Part set ID (PSID).
-        EQ.1: Part ID (PID).
-        EQ.2: Segment set ID (SGSID).
-        EQ.3: Node set ID(NSID)
+        EQ.0: Part set ID (see *SET_PART).
+        EQ.1: Part ID (see *PART).
+        EQ.2: Segment set ID (see *SET_SEGMENT).
+        EQ.3: Node set ID(see *SET_NODE)
         """ # nopep8
         return self._cards[1].get_value("strsty")
 
@@ -136,8 +136,8 @@ class AleCouplingNodalConstraintId(KeywordBase):
     @property
     def alesty(self) -> int:
         """Get or set the Master set type of "MASTER"
-        EQ.0: Part set ID (PSID).
-        EQ.1: Part ID (PID).
+        EQ.0: Part set ID (see *SET_PART).
+        EQ.1: Part ID (see *PART).
         """ # nopep8
         return self._cards[1].get_value("alesty")
 

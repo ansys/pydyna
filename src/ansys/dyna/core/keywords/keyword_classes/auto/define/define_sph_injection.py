@@ -44,6 +44,10 @@ _DEFINESPHINJECTION_CARD1 = (
     FieldSchema("tbeg", float, 0, 10, 0.0),
     FieldSchema("tend", float, 10, 10, 1e+20),
     FieldSchema("nid", int, 20, 10, 0),
+    FieldSchema("radius", float, 30, 10, 0.0),
+    FieldSchema("xlen", float, 40, 10, 0.0),
+    FieldSchema("ylen", float, 50, 10, 0.0),
+    FieldSchema("psize", float, 60, 10, 0.0),
 )
 
 _DEFINESPHINJECTION_OPTION0_CARD0 = (
@@ -100,7 +104,7 @@ class DefineSphInjection(KeywordBase):
 
     @property
     def nsid(self) -> typing.Optional[int]:
-        """Get or set the Node set ID. Nodes are used for initial injection position for the SPH elements.
+        """Get or set the Node set ID. Nodes are used for initial injection position for the SPH elements.Ignored if RADIUS, XLEN or YLEN are defined below.
         """ # nopep8
         return self._cards[0].get_value("nsid")
 
@@ -155,7 +159,7 @@ class DefineSphInjection(KeywordBase):
 
     @property
     def area(self) -> float:
-        """Get or set the The area of initial injection surface. The density of injection flow comes from the material models see *MAT definition.
+        """Get or set the The area of initial injection surface. The density of injection flow comes from the material models see *MAT definition.This parameter can be left blank if the nodes provided in NSID are uniformly distributed, or if RADIUS, XLEN or YLEN are defined below, in which case AREA will be automatically computed.
         """ # nopep8
         return self._cards[0].get_value("area")
 
@@ -167,8 +171,8 @@ class DefineSphInjection(KeywordBase):
     @property
     def vmag(self) -> int:
         """Get or set the Injected particle velocity multiplier:
-        GT.0:	The velocity of the injected particles is multiplied by VMAG.
-        LT.0 : |VMAG| is a curve ID defining the magnitude of the velocity vector with respect to time, for variable injection speed.
+        GT.0: The velocity of the injected particles is multiplied by VMAG.
+        LT.0: |VMAG| is a curve ID defining the magnitude of the velocity vector with respect to time, for variable injection speed.
         """ # nopep8
         return self._cards[0].get_value("vmag")
 
@@ -201,7 +205,7 @@ class DefineSphInjection(KeywordBase):
 
     @property
     def nid(self) -> int:
-        """Get or set the An optional node ID. If defined, the center of the injection plane follows the motion of this node.
+        """Get or set the Optional node ID. If defined, the center of the injection plane follows the motion of this node.
         """ # nopep8
         return self._cards[1].get_value("nid")
 
@@ -209,6 +213,50 @@ class DefineSphInjection(KeywordBase):
     def nid(self, value: int) -> None:
         """Set the nid property."""
         self._cards[1].set_value("nid", value)
+
+    @property
+    def radius(self) -> float:
+        """Get or set the If this option is nonzero, the node set provided in NSID is ignored. Instead, this parameter defines the radius of a circular injection surface centered at the origin of the coordinate system defined in CID, using the local Z-axis of CID as normal to the injection plane. Particles are uniformly generated with a spacing of PSIZE.
+        """ # nopep8
+        return self._cards[1].get_value("radius")
+
+    @radius.setter
+    def radius(self, value: float) -> None:
+        """Set the radius property."""
+        self._cards[1].set_value("radius", value)
+
+    @property
+    def xlen(self) -> float:
+        """Get or set the If this option is nonzero and RADIUS is zero, the node set provided in NSID is ignored. Instead, a rectangular injection surface is automatically created, centered at the origin of the coordinate system defined in CID, using the local Z-axis of CID as normal to the injection plane. This rectangular injection has dimensions of XLEN and YLEN in the local coordinate system defined by CID. Particles are uniformly generated with a spacing of PSIZE.
+        """ # nopep8
+        return self._cards[1].get_value("xlen")
+
+    @xlen.setter
+    def xlen(self, value: float) -> None:
+        """Set the xlen property."""
+        self._cards[1].set_value("xlen", value)
+
+    @property
+    def ylen(self) -> float:
+        """Get or set the If this option is nonzero and RADIUS is zero, the node set provided in NSID is ignored. Instead, a rectangular injection surface is automatically created, centered at the origin of the coordinate system defined in CID, using the local Z-axis of CID as normal to the injection plane. This rectangular injection has dimensions of XLEN and YLEN in the local coordinate system defined by CID. Particles are uniformly generated with a spacing of PSIZE.
+        """ # nopep8
+        return self._cards[1].get_value("ylen")
+
+    @ylen.setter
+    def ylen(self, value: float) -> None:
+        """Set the ylen property."""
+        self._cards[1].set_value("ylen", value)
+
+    @property
+    def psize(self) -> float:
+        """Get or set the If RADIUS or XLEN /YLEN is defined, the particles are automatically placed on the defined injection geometry, with a spacing of PSIZE
+        """ # nopep8
+        return self._cards[1].get_value("psize")
+
+    @psize.setter
+    def psize(self, value: float) -> None:
+        """Set the psize property."""
+        self._cards[1].set_value("psize", value)
 
     @property
     def title(self) -> typing.Optional[str]:

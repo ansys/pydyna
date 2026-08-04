@@ -84,7 +84,7 @@ class MatAddChemShrinkage(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID (see *DEFINE_CURVE) defining the chemical shrinkage coefficient, β, or a proxy in experiments for the chemical shrinkage coefficient, α as a function of temperature, T. If α as a function of T is defined, α is converted to the chemical shrinkage coefficient by LS-DYNA
+        """Get or set the Load curve ID (see *DEFINE_CURVE) defining the chemical shrinkage coefficient, beta, or a proxy in experiments for the chemical shrinkage coefficient, alpha as a function of temperature, T. If alpha as a function of T is defined, alpha is converted to the chemical shrinkage coefficient by LS-DYNA
         """ # nopep8
         return self._cards[0].get_value("lcid")
 

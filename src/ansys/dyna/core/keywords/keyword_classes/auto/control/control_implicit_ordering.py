@@ -29,6 +29,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _CONTROLIMPLICITORDERING_CARD0 = (
     FieldSchema("order", int, 0, 10, 0),
     FieldSchema("nmetis", int, 10, 10, 0),
+    FieldSchema("reuse", int, 20, 10, 0),
 )
 
 class ControlImplicitOrdering(KeywordBase):
@@ -48,24 +49,25 @@ class ControlImplicitOrdering(KeywordBase):
         ]
     @property
     def order(self) -> int:
-        """Get or set the Ordering option (see Remark 1):
-        EQ.0:	method set automatically by LS - DYNA
-        EQ.1 : MMD, Multiple Minimum Degree.
-        EQ.2 : Metis(see Remark 2)
-        EQ.4 : LS - GPart
+        """Get or set the Ordering option (see Remarks 1 and 2):
+        EQ.0: Method set automatically by LS - DYNA
+        EQ.1: MMD(Multiple Minimum Degree)
+        EQ.2: METIS
+        EQ.3: ParMETIS
+        EQ.4: LS - GPart
         """ # nopep8
         return self._cards[0].get_value("order")
 
     @order.setter
     def order(self, value: int) -> None:
         """Set the order property."""
-        if value not in [0, 1, 2, 4, None]:
-            raise Exception("""order must be `None` or one of {0,1,2,4}.""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""order must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("order", value)
 
     @property
     def nmetis(self) -> int:
-        """Get or set the Number of times to use Metis on each compute node for MPP.
+        """Get or set the Number of times to use METIS on each compute node for MPP.
         """ # nopep8
         return self._cards[0].get_value("nmetis")
 
@@ -73,4 +75,15 @@ class ControlImplicitOrdering(KeywordBase):
     def nmetis(self, value: int) -> None:
         """Set the nmetis property."""
         self._cards[0].set_value("nmetis", value)
+
+    @property
+    def reuse(self) -> int:
+        """Get or set the Control the ordering reuse feature (MPP only). See Remark 3.
+        """ # nopep8
+        return self._cards[0].get_value("reuse")
+
+    @reuse.setter
+    def reuse(self, value: int) -> None:
+        """Set the reuse property."""
+        self._cards[0].set_value("reuse", value)
 

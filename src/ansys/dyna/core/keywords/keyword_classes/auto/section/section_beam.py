@@ -47,6 +47,7 @@ _SECTIONBEAMCARDSET_CARD1 = (
     FieldSchema("tt2", float, 30, 10, None),
     FieldSchema("nsloc", float, 40, 10, None),
     FieldSchema("ntloc", float, 50, 10, None),
+    FieldSchema("itorm", float, 60, 10, None),
 )
 
 _SECTIONBEAMCARDSET_CARD2 = (
@@ -54,8 +55,10 @@ _SECTIONBEAMCARDSET_CARD2 = (
     FieldSchema("iss", float, 10, 10, None),
     FieldSchema("itt", float, 20, 10, None),
     FieldSchema("j", float, 30, 10, None),
-    FieldSchema("sa", float, 40, 10, None),
+    FieldSchema("sas", float, 40, 10, None),
     FieldSchema("ist", float, 50, 10, None),
+    FieldSchema("itorm", float, 60, 10, None),
+    FieldSchema("sat", float, 70, 10, None),
 )
 
 _SECTIONBEAMCARDSET_CARD3 = (
@@ -75,11 +78,11 @@ _SECTIONBEAMCARDSET_CARD5 = (
     FieldSchema("vol", float, 0, 10, None),
     FieldSchema("iner", float, 10, 10, None),
     FieldSchema("cid", int, 20, 10, None),
-    FieldSchema("ca", float, 30, 10, None),
-    FieldSchema("offset", float, 40, 10, None),
-    FieldSchema("rrcon", float, 50, 10, 0.0),
-    FieldSchema("srcon", float, 60, 10, 0.0),
-    FieldSchema("trcon", float, 70, 10, 0.0),
+    FieldSchema("ca_dofn1", float, 30, 10, None, "ca/dofn1"),
+    FieldSchema("offset_dofn2", float, 40, 10, None, "offset/dofn2"),
+    FieldSchema("rrcon_null", float, 50, 10, None, "rrcon/null"),
+    FieldSchema("srcon_null", float, 60, 10, None, "srcon/null"),
+    FieldSchema("trcon_null", float, 70, 10, None, "trcon/null"),
 )
 
 _SECTIONBEAMCARDSET_CARD6 = (
@@ -157,7 +160,7 @@ class SectionBeamCardSet(Cards):
 
     @property
     def secid(self) -> typing.Optional[int]:
-        """Get or set the Section ID. SECID is referenced on the *PART card and must be unique.
+        """Get or set the Section ID.  The *PART card references SECID.  A unique number or label must be specified.
         """ # nopep8
         return self._cards[0].get_value("secid")
 
@@ -183,6 +186,7 @@ class SectionBeamCardSet(Cards):
         EQ.12: resultant warped beam
         EQ.13: Small displacement, linear Timoshenko beam with exact stiffness.
         EQ.14: Integrated tubular Elbow element. User defined integration rule with tubular cross section (9) must be used.
+        Note that the 2D and 3D element types must not be mixed, and different types of 2D elements must not be used together.  For example, the plane strain element type must not be used with the axisymmetric element type.  In 3D, the different beam element types, that is, 1-6, 9, and 11-14, can be freely mixed together.
         """ # nopep8
         return self._cards[0].get_value("elform")
 
@@ -206,13 +210,13 @@ class SectionBeamCardSet(Cards):
 
     @property
     def qr_irid(self) -> int:
-        """Get or set the Quadrature rule or rule number for user defined rule for integrated beams:
-        EQ.1: one integration point,
-        EQ.2: 2x2 Gauss quadrature (default beam),
-        EQ.3: 3x3 Gauss quadrature,
-        EQ.4: 3x3 Lobatto quadrature,
-        EQ.5: 4x4 Gauss quadrature,
-        EQ.-n: where |n| is the number of the user defined rule. IRID integration rule n is defined using *INTEGRATION_BEAM card.
+        """Get or set the Quadrature rule or rule number for user defined rule for integrated beams. For rectangular cross section, Gauss or Lobatto quadrature will be employed. For circular cross sections, the integration points are evenly spaced on the perimeter of the surface. See Remark 10 regarding beam formulations 7 and 8.
+        EQ.1.0: One integration point
+        EQ.2.0: 2 x 2 Gauss or 4 point circular quadrature(default beam)
+        EQ.3.0: 3 x 3 Gauss or 9 point circular quadrature
+        EQ.4.0: 3 x 3 Lobatto or 9 point circular quadrature
+        EQ.5.0: 4 x 4 Gauss or 16 point circular quadrature
+        EQ. -n: |n| is the number of the user defined rule.IRID integration rule n is defined using *INTEGRATION_BEAM card.
         """ # nopep8
         return self._cards[0].get_value("qr_irid")
 
@@ -239,23 +243,34 @@ class SectionBeamCardSet(Cards):
 
     @property
     def scoor(self) -> float:
-        """Get or set the Location of triad for tracking the rotation of the discrete beam element. The force and moment resultants in the output databases are referenced to this triad:
-        EQ.-1.0: beam node 1, the angular velocity of node 1 rotates triad,
-        EQ. 0.0: centered between beam nodes 1 and 2, the average angular velocity of nodes 1 and 2 is used to rotate the triad (default),
-        EQ.+1.0: beam node 2, the angular velocity of node 2 rotates triad.
+        """Get or set the Affects the discrete beam formulation (see Remarks 6 and 14) and the update of the local coordinate system of the discrete beam element. This field does not apply to cable elements. The force and moment resultants in the output databases are output in the local coordinate system. See Remark 8 for more on the local coordinate system update.
+        EQ.-13.0: Like -3.0, but with correction for beam rotation
+        EQ. - 12.0: Like - 2.0, but with correction for beam rotation
+        EQ.-3.0: Beam node 1; the angular velocity of node 1 rotates the triad.
+        EQ.-2.0: Beam node 1. The angular velocity of node 1 rotates the triad, but the r-axis is adjusted to lie along the line between the two beam nodal points.This option is not recommended for zero length discrete beams.
+        EQ.-1.0: Beam node 1; the angular velocity of node 1 rotates the triad.
+        EQ.0.0: Centered between beam nodes 1 and 2. The triad rotates with; the average angular velocity of nodes 1 and 2 is used to rotate the triad.
+        EQ.+1.0: Beam node 2; the angular velocity of node 2 rotates triad.
+        EQ.+2.0: Beam node 2. The angular velocity of node 2 rotates the triad.
+        EQ. + 2.0: Beam node 2. The angular velocity of node 2 rotates the triad, but the rr-axis is adjusted to lie along the line between the two beam nodal points. This option is not recommended for zero length discrete beams.
+        EQ.+3.0: Beam node 2; the angular velocity of node 2 rotates the triad.
+        EQ.+12.0: Like +2.0, but with correction for beam rotation
+        EQ.+13.0: Like +3.0, but with correction for beam rotation
+        EQ.-14.0: Like -13.0, but with improved rotational stability
+        EQ.+14.0: Like +13.0 but with improved rotational stability
         """ # nopep8
         return self._cards[0].get_value("scoor")
 
     @scoor.setter
     def scoor(self, value: float) -> None:
         """Set the scoor property."""
-        if value not in [0.0, 1.0, 2.0, 3.0, 12.0, 13.0, -13.0, -12.0, -3.0, -2.0, -1.0, None]:
-            raise Exception("""scoor must be `None` or one of {0.0,1.0,2.0,3.0,12.0,13.0,-13.0,-12.0,-3.0,-2.0,-1.0}.""")
+        if value not in [0.0, 1.0, 2.0, 3.0, 12.0, 13.0, 14.0, -14.0, -13.0, -12.0, -3.0, -2.0, -1.0, None]:
+            raise Exception("""scoor must be `None` or one of {0.0,1.0,2.0,3.0,12.0,13.0,14.0,-14.0,-13.0,-12.0,-3.0,-2.0,-1.0}.""")
         self._cards[0].set_value("scoor", value)
 
     @property
     def nsm(self) -> float:
-        """Get or set the Nonstructural mass per unit length.  This option applies to beam types 1-5 and does not apply to discrete, 2D, and spotweld beams, respectively.
+        """Get or set the Nonstructural mass per unit length.  This option applies to beam types 141-5 and does not apply to discrete, 2D, and spotweld beams, respectively.
         """ # nopep8
         return self._cards[0].get_value("nsm")
 
@@ -267,8 +282,8 @@ class SectionBeamCardSet(Cards):
     @property
     def naupd(self) -> int:
         """Get or set the Neutral axis update option.  See Remark 11.
-        EQ. 0:	Not used
-        EQ.1.0: 	Update the neutral axis when damage or failure occurs at  one or more integration points.
+        EQ. 0: Not used
+        EQ.1.0: Update the neutral axis when damage or failure occurs at  one or more integration points.
         """ # nopep8
         return self._cards[0].get_value("naupd")
 
@@ -281,7 +296,7 @@ class SectionBeamCardSet(Cards):
 
     @property
     def ts1(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s-direction at node n1. Note that the thickness defined on the *ELEMENT_BEAM_THICKNESS card overrides the definition give here.
+        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s-direction at node n1. The thickness defined on *ELEMENT_BEAM_THICKNESS overrides the definition giving here.
         """ # nopep8
         return self._cards[1].get_value("ts1")
 
@@ -325,7 +340,7 @@ class SectionBeamCardSet(Cards):
 
     @property
     def nsloc(self) -> typing.Optional[float]:
-        """Get or set the Location of reference surface normal to s axis for Hughes-Liu beam elements only:
+        """Get or set the Location of the reference surface normal to the s_axis for Hughes-Liu beam elements only:
         EQ.1.0: side at s=1,
         EQ.0.0: center (default),
         EQ.-1.0: side at s=-1.
@@ -339,7 +354,7 @@ class SectionBeamCardSet(Cards):
 
     @property
     def ntloc(self) -> typing.Optional[float]:
-        """Get or set the Location of reference surface normal to t axis for Hughes-Liu beam elements only:
+        """Get or set the Location of the reference surface normal to the t_axis for Hughes-Liu beam elements only:
         EQ.1.0: side at t=,
         EQ.0.0: center (default),
         EQ.-1: side at t=-1.
@@ -350,6 +365,23 @@ class SectionBeamCardSet(Cards):
     def ntloc(self, value: float) -> None:
         """Set the ntloc property."""
         self._cards[1].set_value("ntloc", value)
+
+    @property
+    def itorm(self) -> typing.Optional[float]:
+        """Get or set the Flag for improved representation of torsional and rotational modes for beam type 1.
+        LT.0.0: The nodal mass related to torsional and rotational modes is computed from the product of the absolute value of ITORM and the nodal translational mass.This option is frame invariant and applies to explicit and implicit analyses.
+        EQ.0.0 : Not active.The torsional and rotational inertia from the structural analysis are used.This may result in too large eigenvalues related to torsional and rotational modes.
+        EQ.1.0 : More accurately recompute the mass related to torsional modes.This option applies to eigenvalue analysis only.
+        EQ.2.0 : More accurately recompute the mass related to torsional and rotational modes.This option applies to eigenvalue analysis only.
+        EQ.3.0 : Average the mass related to torsional and rotational modes from ITORM = 2. This option is frame invariant and applies to explicit and implicit analyses.
+        Note that ITORM < 0 and ITORM = 3 may require reducing the time step size for stability in explicit analysis.
+        """ # nopep8
+        return self._cards[1].get_value("itorm")
+
+    @itorm.setter
+    def itorm(self, value: float) -> None:
+        """Set the itorm property."""
+        self._cards[1].set_value("itorm", value)
 
     @property
     def a(self) -> typing.Optional[float]:
@@ -396,15 +428,15 @@ class SectionBeamCardSet(Cards):
         self._cards[2].set_value("j", value)
 
     @property
-    def sa(self) -> typing.Optional[float]:
-        """Get or set the Shear area. The definition on *ELEMENT_BEAM_THICKNESS overrides the value defined here.
+    def sas(self) -> typing.Optional[float]:
+        """Get or set the Shear area.if ELFORM = 12 or 13. It is the shear area perpendicular to the local s-axis if ELFORM = 2.  The definition on *ELEMENT_?BEAM_?THICKNESS overrides the value defined here
         """ # nopep8
-        return self._cards[2].get_value("sa")
+        return self._cards[2].get_value("sas")
 
-    @sa.setter
-    def sa(self, value: float) -> None:
-        """Set the sa property."""
-        self._cards[2].set_value("sa", value)
+    @sas.setter
+    def sas(self, value: float) -> None:
+        """Set the sas property."""
+        self._cards[2].set_value("sas", value)
 
     @property
     def ist(self) -> typing.Optional[float]:
@@ -416,6 +448,34 @@ class SectionBeamCardSet(Cards):
     def ist(self, value: float) -> None:
         """Set the ist property."""
         self._cards[2].set_value("ist", value)
+
+    @property
+    def itorm(self) -> typing.Optional[float]:
+        """Get or set the Flag for improved representation of torsional and rotational modes for beam type 1.
+        LT.0.0: The nodal mass related to torsional and rotational modes is computed from the product of the absolute value of ITORM and the nodal translational mass.This option is frame invariant and applies to explicit and implicit analyses.
+        EQ.0.0 : Not active.The torsional and rotational inertia from the structural analysis are used.This may result in too large eigenvalues related to torsional and rotational modes.
+        EQ.1.0 : More accurately recompute the mass related to torsional modes.This option applies to eigenvalue analysis only.
+        EQ.2.0 : More accurately recompute the mass related to torsional and rotational modes.This option applies to eigenvalue analysis only.
+        EQ.3.0 : Average the mass related to torsional and rotational modes from ITORM = 2. This option is frame invariant and applies to explicit and implicit analyses.
+        Note that ITORM < 0 and ITORM = 3 may require reducing the time step size for stability in explicit analysis.
+        """ # nopep8
+        return self._cards[2].get_value("itorm")
+
+    @itorm.setter
+    def itorm(self, value: float) -> None:
+        """Set the itorm property."""
+        self._cards[2].set_value("itorm", value)
+
+    @property
+    def sat(self) -> typing.Optional[float]:
+        """Get or set the Shear area perpendicular to local t-axis if ELFORM = 2.  The definition on *ELEMENT_BEAM_THICKNESS overrides the value defined here.This field is ignore ELFORM ? 2.
+        """ # nopep8
+        return self._cards[2].get_value("sat")
+
+    @sat.setter
+    def sat(self, value: float) -> None:
+        """Set the sat property."""
+        self._cards[2].set_value("sat", value)
 
     @property
     def a(self) -> typing.Optional[float]:
@@ -430,7 +490,7 @@ class SectionBeamCardSet(Cards):
 
     @property
     def rampt(self) -> typing.Optional[float]:
-        """Get or set the Optional ramp-up time for dynamic relaxation.
+        """Get or set the Optional ramp-up time for dynamic relaxation.  At the end of the ramp-up time, a uniform stress, STRESS, exists in the truss element.  This option does not work for hyperelastic materials..
         """ # nopep8
         return self._cards[3].get_value("rampt")
 
@@ -441,7 +501,7 @@ class SectionBeamCardSet(Cards):
 
     @property
     def stress(self) -> typing.Optional[float]:
-        """Get or set the Optional initial stress for dynamic relaxation
+        """Get or set the Optional initial stress for dynamic relaxation.  At the end of dynamic relaxation, a uniform stress equal to this value should exist in the truss element.
         """ # nopep8
         return self._cards[3].get_value("stress")
 
@@ -496,7 +556,7 @@ class SectionBeamCardSet(Cards):
 
     @property
     def vol(self) -> typing.Optional[float]:
-        """Get or set the Volume of discrete beam. If the mass density of the material model for the discrete beam is set to unity, the magnitude of the lumped mass can be defined here instead. This lumped mass is partitioned to the two nodes of the beam element. The translational time step size for the type 6 beam is dependent on the volume, mass density, and the translational stiffness values, so it is important to define this parameter. Defining the volume is also essential for mass scaling if the type 6 beam controls the time step size.
+        """Get or set the Volume of discrete beams that is, used in calculating mass.  If VOL = 0 for cable elements, the volume is calculated as the product of cable length and cable area.  If the mass density of the material model for the discrete beam is set to unity, the magnitude of the lumped mass can be defined here instead. This lumped mass is partitioned equally between the two nodes of the element. See Remark 12.
         """ # nopep8
         return self._cards[5].get_value("vol")
 
@@ -507,7 +567,10 @@ class SectionBeamCardSet(Cards):
 
     @property
     def iner(self) -> typing.Optional[float]:
-        """Get or set the I, lumped inertia of discrete beam which have six degrees of freedom. This lumped inertia is partitioned to the two nodes of the beam element. The rotational time step size for the type 6 beam is dependent on the lumped inertia and the rotational stiffness values, so it is important to define this parameter if the rotational springs are active. Defining the rotational inertia is also essential for mass scaling if the type 6 beam rotational stiffness controls the time step size.
+        """Get or set the Mass moment of inertia for discrete beam form 6 when used with materials that have rotational stiffness defined.  Materials that support rotational stiffnesses are 66, 67, 68, 93, 95, 97, 119, and 196. This lumped inertia is partitioned equally between the two nodes of the element. See Remarks 12 and 13.
+        GT.0.0:	Inertia partitioned to the nodes.
+        EQ. - 1.0 : The element inertia is computed as a solid sphere of volume VOL.This inertia, which is reported to d3hsp, is then partitioned to the nodes.
+        EQ. - 2.0 : The element inertia is computed such that the rotational time step matches the translational.It is currently only available for* MAT_196.The computed element inertias are written to the message file(s)
         """ # nopep8
         return self._cards[5].get_value("iner")
 
@@ -528,71 +591,65 @@ class SectionBeamCardSet(Cards):
         self._cards[5].set_value("cid", value)
 
     @property
-    def ca(self) -> typing.Optional[float]:
+    def ca_dofn1(self) -> typing.Optional[float]:
         """Get or set the Cable area, materials type ID 71, *MAT_CABLE.
         """ # nopep8
-        return self._cards[5].get_value("ca")
+        return self._cards[5].get_value("ca_dofn1")
 
-    @ca.setter
-    def ca(self, value: float) -> None:
-        """Set the ca property."""
-        self._cards[5].set_value("ca", value)
+    @ca_dofn1.setter
+    def ca_dofn1(self, value: float) -> None:
+        """Set the ca_dofn1 property."""
+        self._cards[5].set_value("ca_dofn1", value)
 
     @property
-    def offset(self) -> typing.Optional[float]:
+    def offset_dofn2(self) -> typing.Optional[float]:
         """Get or set the Offset for cable. For a definition see materials type ID 71, *MAT_CABLE.
         """ # nopep8
-        return self._cards[5].get_value("offset")
+        return self._cards[5].get_value("offset_dofn2")
 
-    @offset.setter
-    def offset(self, value: float) -> None:
-        """Set the offset property."""
-        self._cards[5].set_value("offset", value)
+    @offset_dofn2.setter
+    def offset_dofn2(self, value: float) -> None:
+        """Set the offset_dofn2 property."""
+        self._cards[5].set_value("offset_dofn2", value)
 
     @property
-    def rrcon(self) -> float:
+    def rrcon_null(self) -> typing.Optional[float]:
         """Get or set the r-rotational constraint for local coordinate system:
         EQ.0.0: Coordinate ID rotates about r axis with nodes (default),
         EQ.1.0: Rotation is constrained about the r-axis
         """ # nopep8
-        return self._cards[5].get_value("rrcon")
+        return self._cards[5].get_value("rrcon_null")
 
-    @rrcon.setter
-    def rrcon(self, value: float) -> None:
-        """Set the rrcon property."""
-        if value not in [0.0, 1.0, None]:
-            raise Exception("""rrcon must be `None` or one of {0.0,1.0}.""")
-        self._cards[5].set_value("rrcon", value)
+    @rrcon_null.setter
+    def rrcon_null(self, value: float) -> None:
+        """Set the rrcon_null property."""
+        self._cards[5].set_value("rrcon_null", value)
 
     @property
-    def srcon(self) -> float:
+    def srcon_null(self) -> typing.Optional[float]:
         """Get or set the s-rotational constraint for local coordinate system:
         EQ.0.0: Coordinate ID rotates about s axis with nodes (default),
         EQ.1.0: Rotation is constrained about the s-axis
         """ # nopep8
-        return self._cards[5].get_value("srcon")
+        return self._cards[5].get_value("srcon_null")
 
-    @srcon.setter
-    def srcon(self, value: float) -> None:
-        """Set the srcon property."""
-        if value not in [0.0, 1.0, None]:
-            raise Exception("""srcon must be `None` or one of {0.0,1.0}.""")
-        self._cards[5].set_value("srcon", value)
+    @srcon_null.setter
+    def srcon_null(self, value: float) -> None:
+        """Set the srcon_null property."""
+        self._cards[5].set_value("srcon_null", value)
 
     @property
-    def trcon(self) -> float:
+    def trcon_null(self) -> typing.Optional[float]:
         """Get or set the t-rotational constraint for local coordinate system:
         EQ.0.0: Coordinate ID rotates about t axis with nodes (default),
         EQ.1.0: Rotation is constrained about the t-axis
         """ # nopep8
-        return self._cards[5].get_value("trcon")
+        return self._cards[5].get_value("trcon_null")
 
-    @trcon.setter
-    def trcon(self, value: float) -> None:
-        """Set the trcon property."""
-        if value not in [0.0, 1.0, None]:
-            raise Exception("""trcon must be `None` or one of {0.0,1.0}.""")
-        self._cards[5].set_value("trcon", value)
+    @trcon_null.setter
+    def trcon_null(self, value: float) -> None:
+        """Set the trcon_null property."""
+        self._cards[5].set_value("trcon_null", value)
 
     @property
     def ts1(self) -> typing.Optional[float]:
@@ -654,8 +711,8 @@ class SectionBeamCardSet(Cards):
     @property
     def itoff(self) -> typing.Optional[float]:
         """Get or set the Option to specify torsional behavior for spot weld beams.
-        EQ.0.0:	Torsional stiffness is active.
-        EQ.1.0 : Torsional stiffness is zero(free to twist).
+        EQ.0.0: Torsional stiffness is active.
+        EQ.1.0: Torsional stiffness is zero(free to twist).
         """ # nopep8
         return self._cards[6].get_value("itoff")
 
@@ -870,6 +927,18 @@ class SectionBeam(KeywordBase):
         self.sets[0].ntloc = value
 
     @property
+    def itorm(self) -> typing.Optional[float]:
+        """Get or set the itorm
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].itorm
+
+    @itorm.setter
+    def itorm(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].itorm = value
+
+    @property
     def a(self) -> typing.Optional[float]:
         """Get or set the a
         """ # nopep8
@@ -918,16 +987,16 @@ class SectionBeam(KeywordBase):
         self.sets[0].j = value
 
     @property
-    def sa(self) -> typing.Optional[float]:
-        """Get or set the sa
+    def sas(self) -> typing.Optional[float]:
+        """Get or set the sas
         """ # nopep8
         ensure_card_set_properties(self, False)
-        return self.sets[0].sa
+        return self.sets[0].sas
 
-    @sa.setter
-    def sa(self, value: float) -> None:
+    @sas.setter
+    def sas(self, value: float) -> None:
         ensure_card_set_properties(self, True)
-        self.sets[0].sa = value
+        self.sets[0].sas = value
 
     @property
     def ist(self) -> typing.Optional[float]:
@@ -940,6 +1009,30 @@ class SectionBeam(KeywordBase):
     def ist(self, value: float) -> None:
         ensure_card_set_properties(self, True)
         self.sets[0].ist = value
+
+    @property
+    def itorm(self) -> typing.Optional[float]:
+        """Get or set the itorm
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].itorm
+
+    @itorm.setter
+    def itorm(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].itorm = value
+
+    @property
+    def sat(self) -> typing.Optional[float]:
+        """Get or set the sat
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].sat
+
+    @sat.setter
+    def sat(self, value: float) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].sat = value
 
     @property
     def a(self) -> typing.Optional[float]:
@@ -1062,64 +1155,64 @@ class SectionBeam(KeywordBase):
         self.sets[0].cid = value
 
     @property
-    def ca(self) -> typing.Optional[float]:
-        """Get or set the ca
+    def ca_dofn1(self) -> typing.Optional[float]:
+        """Get or set the ca_dofn1
         """ # nopep8
         ensure_card_set_properties(self, False)
-        return self.sets[0].ca
+        return self.sets[0].ca_dofn1
 
-    @ca.setter
-    def ca(self, value: float) -> None:
+    @ca_dofn1.setter
+    def ca_dofn1(self, value: float) -> None:
         ensure_card_set_properties(self, True)
-        self.sets[0].ca = value
+        self.sets[0].ca_dofn1 = value
 
     @property
-    def offset(self) -> typing.Optional[float]:
-        """Get or set the offset
+    def offset_dofn2(self) -> typing.Optional[float]:
+        """Get or set the offset_dofn2
         """ # nopep8
         ensure_card_set_properties(self, False)
-        return self.sets[0].offset
+        return self.sets[0].offset_dofn2
 
-    @offset.setter
-    def offset(self, value: float) -> None:
+    @offset_dofn2.setter
+    def offset_dofn2(self, value: float) -> None:
         ensure_card_set_properties(self, True)
-        self.sets[0].offset = value
+        self.sets[0].offset_dofn2 = value
 
     @property
-    def rrcon(self) -> float:
-        """Get or set the rrcon
+    def rrcon_null(self) -> typing.Optional[float]:
+        """Get or set the rrcon_null
         """ # nopep8
         ensure_card_set_properties(self, False)
-        return self.sets[0].rrcon
+        return self.sets[0].rrcon_null
 
-    @rrcon.setter
-    def rrcon(self, value: float) -> None:
+    @rrcon_null.setter
+    def rrcon_null(self, value: float) -> None:
         ensure_card_set_properties(self, True)
-        self.sets[0].rrcon = value
+        self.sets[0].rrcon_null = value
 
     @property
-    def srcon(self) -> float:
-        """Get or set the srcon
+    def srcon_null(self) -> typing.Optional[float]:
+        """Get or set the srcon_null
         """ # nopep8
         ensure_card_set_properties(self, False)
-        return self.sets[0].srcon
+        return self.sets[0].srcon_null
 
-    @srcon.setter
-    def srcon(self, value: float) -> None:
+    @srcon_null.setter
+    def srcon_null(self, value: float) -> None:
         ensure_card_set_properties(self, True)
-        self.sets[0].srcon = value
+        self.sets[0].srcon_null = value
 
     @property
-    def trcon(self) -> float:
-        """Get or set the trcon
+    def trcon_null(self) -> typing.Optional[float]:
+        """Get or set the trcon_null
         """ # nopep8
         ensure_card_set_properties(self, False)
-        return self.sets[0].trcon
+        return self.sets[0].trcon_null
 
-    @trcon.setter
-    def trcon(self, value: float) -> None:
+    @trcon_null.setter
+    def trcon_null(self, value: float) -> None:
         ensure_card_set_properties(self, True)
-        self.sets[0].trcon = value
+        self.sets[0].trcon_null = value
 
     @property
     def ts1(self) -> typing.Optional[float]:

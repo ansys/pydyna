@@ -87,7 +87,7 @@ class MatAddPermeability(KeywordBase):
 
     @property
     def perm(self) -> typing.Optional[float]:
-        """Get or set the Permeability or load curve ID defining permeability, depending on the definition of PMTYP below. If PERMY and PERMZ are nonzero, then PERM gives the permeability in the global X direction.  See Remark 3.
+        """Get or set the Permeability or load curve ID defining permeability, depending on the definition of PMTYP below. If PERMY and PERMZ are nonzero, then PERM gives the permeability in the global X direction. See Remark 3.
         """ # nopep8
         return self._cards[0].get_value("perm")
 
@@ -121,8 +121,8 @@ class MatAddPermeability(KeywordBase):
     @property
     def thexp(self) -> typing.Optional[float]:
         """Get or set the Undrained volumetric thermal expansion coefficient (see Remark 2):
-        GE.0.0:	Constant undrained volumetric thermal expansion coefficient
-        LT.0.0 : | THEXP | is the ID of a load curve giving the thermal expansion coefficient(y - axis) as a function of temperature(x - axis).
+        GE.0.0: Constant undrained volumetric thermal expansion coefficient
+        LT.0.0: | THEXP | is the ID of a load curve giving the thermal expansion coefficient(y - axis) as a function of temperature(x - axis).
         """ # nopep8
         return self._cards[0].get_value("thexp")
 
@@ -145,10 +145,10 @@ class MatAddPermeability(KeywordBase):
     @property
     def pmtyp(self) -> int:
         """Get or set the Permeability definition type:
-        EQ.0:	PERM is a constant.
-        EQ.1 : PERM is a load curve ID giving permeability(y - axis) as a function of the volume ratio of current volume to volume in the stress free state(x - axis).
-        EQ.2 : PERM is a load curve ID giving permeability(y - axis) as a function of effective plastic strain(x - axis) of materials other than MAT_072R3.For MAT_072R3, the x - axis is the output selector specified by NOUT; see* MAT_072R3.
-        EQ.3:	PERM is a load curve ID giving permeability(y - axis) as a function of effective pressure(x - axis) which is positive when in compression.
+        EQ.0: PERM is a constant.
+        EQ.1: PERM is a load curve ID giving permeability(y - axis) as a function of the volume ratio of current volume to volume in the stress free state(x - axis).
+        EQ.2: PERM is a load curve ID giving permeability(y - axis) as a function of effective plastic strain(x - axis) of materials other than MAT_072R3.For MAT_072R3, the x - axis is the output selector specified by NOUT; see *MAT_072R3.
+        EQ.3: PERM is a load curve ID giving permeability(y - axis) as a function of effective pressure(x - axis) which is positive when in compression.
         """ # nopep8
         return self._cards[0].get_value("pmtyp")
 

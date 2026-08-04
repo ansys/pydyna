@@ -219,7 +219,7 @@ class DefineBoxSphLocal(KeywordBase):
         """Get or set the Velocity/Displacement flag:
         EQ.0: velocity,
         EQ.1: displacement
-        EQ.2:  referential node
+        EQ.2: referential node
         """ # nopep8
         return self._cards[1].get_value("vd")
 
@@ -244,8 +244,8 @@ class DefineBoxSphLocal(KeywordBase):
     @property
     def ireact(self) -> int:
         """Get or set the Reactivation flag:
-        EQ.0:	particles outside of the box are permanently deactivated,
-        EQ.1 : deactivated particles get reactivated when they enter the box
+        EQ.0: particles outside of the box are permanently deactivated,
+        EQ.1: deactivated particles get reactivated when they enter the box
         """ # nopep8
         return self._cards[1].get_value("ireact")
 
@@ -259,8 +259,8 @@ class DefineBoxSphLocal(KeywordBase):
     @property
     def ibuff(self) -> int:
         """Get or set the Buffer zone flag:
-        EQ.0: particles on the edge of the box don’t get any special treatment.
-        EQ.1 : particles on the edge of the box are frozen in space and act as neighbors for active particles inside the box.
+        EQ.0: particles on the edge of the box dont get any special treatment.
+        EQ.1: particles on the edge of the box are frozen in space and act as neighbors for active particles inside the box.
         This option is mainly used for fluid simulations to prevent the fluid from spilling out of the activation box.
         """ # nopep8
         return self._cards[1].get_value("ibuff")
@@ -276,7 +276,7 @@ class DefineBoxSphLocal(KeywordBase):
     def ishow(self) -> int:
         """Get or set the Create dummy part to visualize position of activation box in post-processing.
         EQ.0: no part is created.
-        EQ.1 : a dummy part is added for visualization
+        EQ.1: a dummy part is added for visualization
         """ # nopep8
         return self._cards[1].get_value("ishow")
 
@@ -290,8 +290,8 @@ class DefineBoxSphLocal(KeywordBase):
     @property
     def pid(self) -> int:
         """Get or set the Part ID used for visualization if ISHOW=1.
-        EQ.0:	a unique Part ID is automatically created.
-        GT.0 : the part created by ISHOW = 1 is numbered PID.This should be a unique part ID.
+        EQ.0: a unique Part ID is automatically created.
+        GT.0: the part created by ISHOW = 1 is numbered PID.This should be a unique part ID.
         """ # nopep8
         return self._cards[1].get_value("pid")
 

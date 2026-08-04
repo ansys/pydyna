@@ -156,7 +156,7 @@ class BoundaryAleMapping(KeywordBase):
     @property
     def death(self) -> float:
         """Get or set the Death time to write or read the mapping file. If a mapping file is
-        written, the next run will stop to read this file at time DEATH if this parameter for this next run is not smaller.
+        written, the next run will stop reading this file at time DEATH if this parameter for this next run is not smaller.
         """ # nopep8
         return self._cards[0].get_value("death")
 

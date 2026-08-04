@@ -49,9 +49,9 @@ class IcfdControlEmbedshell(KeywordBase):
         ]
     @property
     def gtype(self) -> int:
-        """Get or set the Gap type. Defines the criteria for selecting a distance to build the gap between the embedded nodes and the newly generated :
-        EQ.0:	Automatic and based on the surface mesh size multiplied by a scale factor given by DIST.Default method.
-        EQ.1 : Specific gap size given by the user and defined by DIST
+        """Get or set the Gap type. Defines the criteria for selecting a distance to build the gap between the embedded nodes and the newly generated:
+        EQ.0: Automatic and based on the surface mesh size multiplied by a scale factor given by DIST.Default method.
+        EQ.1: Specific gap size given by the user and defined by DIST
         """ # nopep8
         return self._cards[0].get_value("gtype")
 
@@ -76,8 +76,8 @@ class IcfdControlEmbedshell(KeywordBase):
     @property
     def tps(self) -> int:
         """Get or set the Triple Point Seal. Allows to control the fluid escape through triple points
-        EQ.0:	Off
-        EQ.1 : On.The triple points of embedded shells in contact to walls or among each other are sealed and no flow goes through them
+        EQ.0: Off
+        EQ.1: On.The triple points of embedded shells in contact to walls or among each other are sealed and no flow goes through them
         """ # nopep8
         return self._cards[0].get_value("tps")
 

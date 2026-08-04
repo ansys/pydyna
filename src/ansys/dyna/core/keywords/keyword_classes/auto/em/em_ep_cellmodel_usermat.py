@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EMEPCELLMODELUSERMAT_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -35,6 +36,9 @@ class EmEpCellmodelUsermat(KeywordBase):
 
     keyword = "EM"
     subkeyword = "EP_CELLMODEL_USERMAT"
+    _link_fields = {
+        "mid": LinkType.MAT,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmEpCellmodelUsermat class."""
@@ -47,7 +51,7 @@ class EmEpCellmodelUsermat(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material ID: refers to MID in the *PART card.
+        """Get or set the Material ID.  A unique number must be specified (see *PART). If a negative value is entered,  the cell model is defined on a node set instead of a part, and -MID is the node set where the cell model is defined.
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -55,4 +59,19 @@ class EmEpCellmodelUsermat(KeywordBase):
     def mid(self, value: int) -> None:
         """Set the mid property."""
         self._cards[0].set_value("mid", value)
+
+    @property
+    def mid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the MAT_* keyword for mid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("MAT"):
+            if kwd.mid == self.mid:
+                return kwd
+        return None
+
+    @mid_link.setter
+    def mid_link(self, value: KeywordBase) -> None:
+        """Set the MAT_* keyword for mid."""
+        self.mid = value.mid
 

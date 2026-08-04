@@ -50,7 +50,7 @@ class IcfdSolverTolLset(KeywordBase):
         ]
     @property
     def atol(self) -> float:
-        """Get or set the Absolute convergence criteria. Convergence is achieved when Residual_(i+1)-Residual_i≤ATOL . If a negative integer is entered, then that value will be used as a load curve ID for ATOL.
+        """Get or set the Absolute convergence criteria. Convergence is achieved when Residual_(i+1)-Residual_iATOL . If a negative integer is entered, then that value will be used as a load curve ID for ATOL.
         """ # nopep8
         return self._cards[0].get_value("atol")
 
@@ -61,7 +61,7 @@ class IcfdSolverTolLset(KeywordBase):
 
     @property
     def rtol(self) -> float:
-        """Get or set the Relative convergence criteria. Convergence is achieved when ((Residual_(i+1)-Residual_i ))⁄Residual_initial  ≤RTOL. If a negative integer is entered, then that value will be used as a load curve ID for RTOL.
+        """Get or set the Relative convergence criteria. Convergence is achieved when ((Residual_(i+1)-Residual_i ))Residual_initial  RTOL. If a negative integer is entered, then that value will be used as a load curve ID for RTOL.
         """ # nopep8
         return self._cards[0].get_value("rtol")
 

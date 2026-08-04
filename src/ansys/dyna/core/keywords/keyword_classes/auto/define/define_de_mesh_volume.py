@@ -1,0 +1,209 @@
+# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+"""Module providing the DefineDeMeshVolume class."""
+import typing
+from ansys.dyna.core.lib.card import Card, Field, Flag
+from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
+from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+
+_DEFINEDEMESHVOLUME_CARD0 = (
+    FieldSchema("sid", int, 0, 10, 0),
+    FieldSchema("type", int, 10, 10, 0),
+    FieldSchema("nquad", int, 20, 10, 1),
+    FieldSchema("despid", int, 30, 10, 0),
+    FieldSchema("descid", int, 40, 10, 0),
+    FieldSchema("nsid", int, 50, 10, 0),
+    FieldSchema("rsf", float, 60, 10, 1.0),
+    FieldSchema("iactive", int, 70, 10, 0),
+)
+
+_DEFINEDEMESHVOLUME_OPTION0_CARD0 = (
+    FieldSchema("title", str, 0, 80, None),
+)
+
+class DefineDeMeshVolume(KeywordBase):
+    """DYNA DEFINE_DE_MESH_VOLUME keyword"""
+
+    keyword = "DEFINE"
+    subkeyword = "DE_MESH_VOLUME"
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
+    ]
+    _link_fields = {
+        "descid": LinkType.SECTION,
+        "despid": LinkType.PART,
+    }
+
+    def __init__(self, **kwargs):
+        """Initialize the DefineDeMeshVolume class."""
+        super().__init__(**kwargs)
+        kwargs["parent"] = self
+        self._cards = [
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDEMESHVOLUME_CARD0,
+                **kwargs,
+            ),
+            OptionCardSet(
+                option_spec = DefineDeMeshVolume._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEDEMESHVOLUME_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+        ]
+    @property
+    def sid(self) -> int:
+        """Get or set the Part or part set ID for the region of the mesh upon which the DES elements will be placed
+        """ # nopep8
+        return self._cards[0].get_value("sid")
+
+    @sid.setter
+    def sid(self, value: int) -> None:
+        """Set the sid property."""
+        self._cards[0].set_value("sid", value)
+
+    @property
+    def type(self) -> int:
+        """Get or set the SID type:
+        EQ.0: Part set ID
+        EQ.1: Part ID
+        """ # nopep8
+        return self._cards[0].get_value("type")
+
+    @type.setter
+    def type(self, value: int) -> None:
+        """Set the type property."""
+        if value not in [0, 1, None]:
+            raise Exception("""type must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("type", value)
+
+    @property
+    def nquad(self) -> int:
+        """Get or set the Number of equally spaced DES elements created on a shell element in each local shell direction. For instance, NQUAD  NQUAD DES elements will be created on the surface a quad shell.(Maximum NQUAD=4)
+        """ # nopep8
+        return self._cards[0].get_value("nquad")
+
+    @nquad.setter
+    def nquad(self, value: int) -> None:
+        """Set the nquad property."""
+        self._cards[0].set_value("nquad", value)
+
+    @property
+    def despid(self) -> int:
+        """Get or set the Part ID for generated DES elements
+        """ # nopep8
+        return self._cards[0].get_value("despid")
+
+    @despid.setter
+    def despid(self, value: int) -> None:
+        """Set the despid property."""
+        self._cards[0].set_value("despid", value)
+
+    @property
+    def descid(self) -> int:
+        """Get or set the Section ID for generated DES elements
+        """ # nopep8
+        return self._cards[0].get_value("descid")
+
+    @descid.setter
+    def descid(self, value: int) -> None:
+        """Set the descid property."""
+        self._cards[0].set_value("descid", value)
+
+    @property
+    def nsid(self) -> int:
+        """Get or set the If defined, this card creates a node set with ID NSID (see *SET_NODE) for the nodes generated by this card
+        """ # nopep8
+        return self._cards[0].get_value("nsid")
+
+    @nsid.setter
+    def nsid(self, value: int) -> None:
+        """Set the nsid property."""
+        self._cards[0].set_value("nsid", value)
+
+    @property
+    def rsf(self) -> float:
+        """Get or set the Scale factor for determining the DES radius:
+        GE. 0.0: Scale factor of DES radius. DES radius is based on shell thickness.
+        """ # nopep8
+        return self._cards[0].get_value("rsf")
+
+    @rsf.setter
+    def rsf(self, value: float) -> None:
+        """Set the rsf property."""
+        self._cards[0].set_value("rsf", value)
+
+    @property
+    def iactive(self) -> int:
+        """Get or set the Activate DES:
+        EQ.0: DES is inactive and used as a shadow (default)
+        EQ.1: DES is active
+        """ # nopep8
+        return self._cards[0].get_value("iactive")
+
+    @iactive.setter
+    def iactive(self, value: int) -> None:
+        """Set the iactive property."""
+        if value not in [0, 1, None]:
+            raise Exception("""iactive must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("iactive", value)
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Additional title line
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
+
+    @property
+    def descid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SECTION_* keyword for descid."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_type("SECTION"):
+            if kwd.secid == self.descid:
+                return kwd
+        return None
+
+    @descid_link.setter
+    def descid_link(self, value: KeywordBase) -> None:
+        """Set the SECTION_* keyword for descid."""
+        self.descid = value.secid
+
+    @property
+    def despid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given despid."""
+        return self._get_link_by_attr("PART", "pid", self.despid, "parts")
+

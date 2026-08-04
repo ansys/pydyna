@@ -25,12 +25,14 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EMCIRCUITROGO_CARD0 = (
     FieldSchema("rogoid", int, 0, 10, None),
     FieldSchema("setid", int, 10, 10, None),
     FieldSchema("settype", int, 20, 10, 1),
     FieldSchema("curtyp", int, 30, 10, 1),
+    FieldSchema("pid", int, 40, 10, None),
 )
 
 class EmCircuitRogo(KeywordBase):
@@ -38,6 +40,9 @@ class EmCircuitRogo(KeywordBase):
 
     keyword = "EM"
     subkeyword = "CIRCUIT_ROGO"
+    _link_fields = {
+        "pid": LinkType.PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmCircuitRogo class."""
@@ -91,7 +96,7 @@ class EmCircuitRogo(KeywordBase):
         """Get or set the Type of current measured:
         EQ.1: Volume current
         EQ.2: Surface current (not available yet_
-        EQ.3: Magnetic field flow (B field times Area)
+        EQ.3: Magnetic field flux (B field times Area)
         """ # nopep8
         return self._cards[0].get_value("curtyp")
 
@@ -101,4 +106,20 @@ class EmCircuitRogo(KeywordBase):
         if value not in [1, 2, 3, None]:
             raise Exception("""curtyp must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("curtyp", value)
+
+    @property
+    def pid(self) -> typing.Optional[int]:
+        """Get or set the Part ID. It is only available for 2D axisymmetric Eddy current cases. See Remark 2
+        """ # nopep8
+        return self._cards[0].get_value("pid")
+
+    @pid.setter
+    def pid(self, value: int) -> None:
+        """Set the pid property."""
+        self._cards[0].set_value("pid", value)
+
+    @property
+    def pid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

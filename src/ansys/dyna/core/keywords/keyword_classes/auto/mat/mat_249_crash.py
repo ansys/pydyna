@@ -37,7 +37,7 @@ _MAT249CRASH_CARD0 = (
     FieldSchema("lcsigy", int, 40, 10, None),
     FieldSchema("beta", float, 50, 10, None),
     FieldSchema("pfl", float, 60, 10, None),
-    FieldSchema("visc", float, 70, 10, None),
+    FieldSchema("visc", int, 70, 10, None),
 )
 
 _MAT249CRASH_CARD1 = (
@@ -59,7 +59,7 @@ _MAT249CRASH_CARD2 = (
     FieldSchema("d2", float, 40, 10, None),
     FieldSchema("d3", float, 50, 10, None),
     FieldSchema("mangl", float, 60, 10, None),
-    FieldSchema("thick", float, 70, 10, None),
+    FieldSchema("thick", int, 70, 10, None),
 )
 
 _MAT249CRASH_CARD3 = (
@@ -75,20 +75,20 @@ _MAT249CRASH_CARD3 = (
 
 _MAT249CRASH_CARD4 = (
     FieldSchema("idf1", int, 0, 10, None),
-    FieldSchema("alph1", int, 10, 10, None),
-    FieldSchema("ef1", int, 20, 10, None),
+    FieldSchema("alph1", float, 10, 10, None),
+    FieldSchema("ef1", float, 20, 10, None),
     FieldSchema("lcef1", int, 30, 10, None),
-    FieldSchema("g23_1", int, 40, 10, None),
-    FieldSchema("g31_1", int, 50, 10, None),
+    FieldSchema("g23_1", float, 40, 10, None),
+    FieldSchema("g31_1", float, 50, 10, None),
     FieldSchema("daf1", int, 60, 10, None),
     FieldSchema("dam1", int, 70, 10, None),
 )
 
 _MAT249CRASH_CARD5 = (
-    FieldSchema("g12", int, 0, 10, None),
+    FieldSchema("g12", float, 0, 10, None),
     FieldSchema("lcg12", int, 10, 10, None),
-    FieldSchema("aloc12", int, 20, 10, None),
-    FieldSchema("gloc12", int, 30, 10, None),
+    FieldSchema("aloc12", float, 20, 10, None),
+    FieldSchema("gloc12", float, 30, 10, None),
     FieldSchema("meth12", int, 40, 10, None),
     FieldSchema("dam12", int, 50, 10, None),
 )
@@ -125,9 +125,9 @@ _MAT249CRASH_CARD8 = (
 )
 
 _MAT249CRASH_CARD9 = (
-    FieldSchema("postv", float, 0, 10, None),
+    FieldSchema("postv", int, 0, 10, None),
     FieldSchema("viscs", float, 10, 10, None),
-    FieldSchema("ihis", float, 20, 10, None),
+    FieldSchema("ihis", int, 20, 10, None),
 )
 
 _MAT249CRASH_OPTION0_CARD0 = (
@@ -143,20 +143,20 @@ class Mat249Crash(KeywordBase):
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
-        "lcsigy": LinkType.DEFINE_CURVE,
         "lcef1": LinkType.DEFINE_CURVE,
-        "daf1": LinkType.DEFINE_CURVE,
-        "dam1": LinkType.DEFINE_CURVE,
         "lcg12": LinkType.DEFINE_CURVE,
         "dam12": LinkType.DEFINE_CURVE,
         "lcef2": LinkType.DEFINE_CURVE,
-        "daf2": LinkType.DEFINE_CURVE,
-        "dam2": LinkType.DEFINE_CURVE,
         "lcg23": LinkType.DEFINE_CURVE,
         "dam23": LinkType.DEFINE_CURVE,
         "lcef3": LinkType.DEFINE_CURVE,
-        "daf3": LinkType.DEFINE_CURVE,
-        "dam3": LinkType.DEFINE_CURVE,
+        "lcsigy": LinkType.DEFINE_CURVE_OR_TABLE,
+        "daf1": LinkType.DEFINE_CURVE_OR_TABLE,
+        "dam1": LinkType.DEFINE_CURVE_OR_TABLE,
+        "daf2": LinkType.DEFINE_CURVE_OR_TABLE,
+        "dam2": LinkType.DEFINE_CURVE_OR_TABLE,
+        "daf3": LinkType.DEFINE_CURVE_OR_TABLE,
+        "dam3": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -261,7 +261,7 @@ class Mat249Crash(KeywordBase):
 
     @property
     def lcsigy(self) -> typing.Optional[int]:
-        """Get or set the Load curve or table ID for strain hardening of the matrix. If a curve, then it specifies yield stress as a function of effective plastic strain. If a table, then temperatures are the table values indexing curves giving yield stress as a function of effective plastic strain (see *DEFINE_‌TABLE).
+        """Get or set the Load curve or table ID for strain hardening of the matrix. If a curve, then it specifies yield stress as a function of effective plastic strain. If a table, then temperatures are the table values indexing curves giving yield stress as a function of effective plastic strain (see *DEFINE_TABLE).
         """ # nopep8
         return self._cards[0].get_value("lcsigy")
 
@@ -293,15 +293,15 @@ class Mat249Crash(KeywordBase):
         self._cards[0].set_value("pfl", value)
 
     @property
-    def visc(self) -> typing.Optional[float]:
+    def visc(self) -> typing.Optional[int]:
         """Get or set the Viscous formulation for fibers:
-        EQ.0.0:	Elastic behavior.
-        EQ.1.0 : Viscoelastic behavior modeled with Prony series.
+        EQ.0: Elastic behavior.
+        GE.1: Viscoelastic behavior modeled with Prony series.
         """ # nopep8
         return self._cards[0].get_value("visc")
 
     @visc.setter
-    def visc(self, value: float) -> None:
+    def visc(self, value: int) -> None:
         """Set the visc property."""
         self._cards[0].set_value("visc", value)
 
@@ -323,7 +323,7 @@ class Mat249Crash(KeywordBase):
         element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle MANGL.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
         EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
         *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
         """ # nopep8
@@ -445,15 +445,15 @@ class Mat249Crash(KeywordBase):
         self._cards[2].set_value("mangl", value)
 
     @property
-    def thick(self) -> typing.Optional[float]:
+    def thick(self) -> typing.Optional[int]:
         """Get or set the Balance thickness changes of the material due to the matrix response when calculating the fiber stresses. Stresses can be scaled to account for the fact that fiber cross-sectional usually does not change.
-        EQ.0:	No scaling
-        EQ.1 : Scaling
+        EQ.0: No scaling
+        EQ.1: Scaling
         """ # nopep8
         return self._cards[2].get_value("thick")
 
     @thick.setter
-    def thick(self, value: float) -> None:
+    def thick(self, value: int) -> None:
         """Set the thick property."""
         self._cards[2].set_value("thick", value)
 
@@ -470,7 +470,7 @@ class Mat249Crash(KeywordBase):
 
     @property
     def vb1(self) -> typing.Optional[float]:
-        """Get or set the Decay constant β_k for the k-th term of the Prony series for viscoelastic fibers
+        """Get or set the Decay constant beta_k for the k-th term of the Prony series for viscoelastic fibers
         """ # nopep8
         return self._cards[3].get_value("vb1")
 
@@ -492,7 +492,7 @@ class Mat249Crash(KeywordBase):
 
     @property
     def vb2(self) -> typing.Optional[float]:
-        """Get or set the Decay constant β_k for the k-th term of the Prony series for viscoelastic fibers
+        """Get or set the Decay constant beta_k for the k-th term of the Prony series for viscoelastic fibers
         """ # nopep8
         return self._cards[3].get_value("vb2")
 
@@ -514,7 +514,7 @@ class Mat249Crash(KeywordBase):
 
     @property
     def vb3(self) -> typing.Optional[float]:
-        """Get or set the Decay constant β_k for the k-th term of the Prony series for viscoelastic fibers
+        """Get or set the Decay constant beta_k for the k-th term of the Prony series for viscoelastic fibers
         """ # nopep8
         return self._cards[3].get_value("vb3")
 
@@ -536,7 +536,7 @@ class Mat249Crash(KeywordBase):
 
     @property
     def vb4(self) -> typing.Optional[float]:
-        """Get or set the Decay constant β_k for the k-th term of the Prony series for viscoelastic fibers
+        """Get or set the Decay constant beta_k for the k-th term of the Prony series for viscoelastic fibers
         """ # nopep8
         return self._cards[3].get_value("vb4")
 
@@ -557,24 +557,24 @@ class Mat249Crash(KeywordBase):
         self._cards[4].set_value("idf1", value)
 
     @property
-    def alph1(self) -> typing.Optional[int]:
+    def alph1(self) -> typing.Optional[float]:
         """Get or set the Orientation angle ALPHA for 1st fiber with respect to overall material direction
         """ # nopep8
         return self._cards[4].get_value("alph1")
 
     @alph1.setter
-    def alph1(self, value: int) -> None:
+    def alph1(self, value: float) -> None:
         """Set the alph1 property."""
         self._cards[4].set_value("alph1", value)
 
     @property
-    def ef1(self) -> typing.Optional[int]:
+    def ef1(self) -> typing.Optional[float]:
         """Get or set the Young's modulus for 1st fiber family
         """ # nopep8
         return self._cards[4].get_value("ef1")
 
     @ef1.setter
-    def ef1(self, value: int) -> None:
+    def ef1(self, value: float) -> None:
         """Set the ef1 property."""
         self._cards[4].set_value("ef1", value)
 
@@ -590,31 +590,31 @@ class Mat249Crash(KeywordBase):
         self._cards[4].set_value("lcef1", value)
 
     @property
-    def g23_1(self) -> typing.Optional[int]:
+    def g23_1(self) -> typing.Optional[float]:
         """Get or set the Transversal shear modulus orthogonal to direction of fiber 1
         """ # nopep8
         return self._cards[4].get_value("g23_1")
 
     @g23_1.setter
-    def g23_1(self, value: int) -> None:
+    def g23_1(self, value: float) -> None:
         """Set the g23_1 property."""
         self._cards[4].set_value("g23_1", value)
 
     @property
-    def g31_1(self) -> typing.Optional[int]:
+    def g31_1(self) -> typing.Optional[float]:
         """Get or set the Transversal shear modulus in direction of fiber 1
         """ # nopep8
         return self._cards[4].get_value("g31_1")
 
     @g31_1.setter
-    def g31_1(self, value: int) -> None:
+    def g31_1(self, value: float) -> None:
         """Set the g31_1 property."""
         self._cards[4].set_value("g31_1", value)
 
     @property
     def daf1(self) -> typing.Optional[int]:
-        """Get or set the Load curve or table ID for damage parameter d_1^ffor 1st fiber (see Remark 2). If a curve, DAF1 specifies damage as a function of fiber strain (for compression and elongation). If DAF1 refers to a table, then two different damage functions for tensile and compressive stresses are input. The values in the table are arbitrary and exist only to index the two curves. The first indexed curve is assumed to specify tensile damage as a function of fiber strains while second curve specifies compressive damage as a function of fiber strains. input different damage functions for tensile and compressive stresses. Any other curves input with the table definition are ignored.
-        The damager parameter d_1 ^ f ranges from 0.0 for an undamaged fiber to 1.0 for a failed fiber family.If all families have failed, material failure at the integration point is initiated.
+        """Get or set the Load curve or table ID for damage parameter d_1**ffor 1st fiber (see Remark 2). If a curve, DAF1 specifies damage as a function of fiber strain (for compression and elongation). If DAF1 refers to a table, then two different damage functions for tensile and compressive stresses are input. The values in the table are arbitrary and exist only to index the two curves. The first indexed curve is assumed to specify tensile damage as a function of fiber strains while second curve specifies compressive damage as a function of fiber strains. input different damage functions for tensile and compressive stresses. Any other curves input with the table definition are ignored.
+        The damager parameter d_1 ** f ranges from 0.0 for an undamaged fiber to 1.0 for a failed fiber family.If all families have failed, material failure at the integration point is initiated.
         """ # nopep8
         return self._cards[4].get_value("daf1")
 
@@ -625,8 +625,8 @@ class Mat249Crash(KeywordBase):
 
     @property
     def dam1(self) -> typing.Optional[int]:
-        """Get or set the Load curve or table ID for damage parameter d_1^mfor matrix material based on the current deformation status of the 1st fiber (see Remark 2). If a curve, it specifies damage as a function of fiber strain (for compression and elongation). If a table, then the values are fiber strain rates which index damage as a function of fiber strain curves.
-        The damager parameter d_1 ^ m ranges from 0.0 to 1.5.A value of 0.0 indicates an undamaged matrix, whereas 1.0 refers to a completely damaged matrix.To initiate failure of the composite at the integration point, a matrix damage d_1^ m of 1.5 must be reached.Naturally, the mechanical behavior of the matrix does not change for damage values between 1.0 and 1.5.
+        """Get or set the Load curve or table ID for damage parameter d_1**mfor matrix material based on the current deformation status of the 1st fiber (see Remark 2). If a curve, it specifies damage as a function of fiber strain (for compression and elongation). If a table, then the values are fiber strain rates which index damage as a function of fiber strain curves.
+        The damager parameter d_1 ** m ranges from 0.0 to 1.5.A value of 0.0 indicates an undamaged matrix, whereas 1.0 refers to a completely damaged matrix.To initiate failure of the composite at the integration point, a matrix damage d_1** m of 1.5 must be reached.Naturally, the mechanical behavior of the matrix does not change for damage values between 1.0 and 1.5.
         """ # nopep8
         return self._cards[4].get_value("dam1")
 
@@ -636,13 +636,13 @@ class Mat249Crash(KeywordBase):
         self._cards[4].set_value("dam1", value)
 
     @property
-    def g12(self) -> typing.Optional[int]:
+    def g12(self) -> typing.Optional[float]:
         """Get or set the Linear shear modulus for shearing between fiber 1 and 2
         """ # nopep8
         return self._cards[5].get_value("g12")
 
     @g12.setter
-    def g12(self, value: int) -> None:
+    def g12(self, value: float) -> None:
         """Set the g12 property."""
         self._cards[5].set_value("g12", value)
 
@@ -658,38 +658,38 @@ class Mat249Crash(KeywordBase):
         self._cards[5].set_value("lcg12", value)
 
     @property
-    def aloc12(self) -> typing.Optional[int]:
+    def aloc12(self) -> typing.Optional[float]:
         """Get or set the Locking angle (in radians) for shear between fiber families 1 and 2
         """ # nopep8
         return self._cards[5].get_value("aloc12")
 
     @aloc12.setter
-    def aloc12(self, value: int) -> None:
+    def aloc12(self, value: float) -> None:
         """Set the aloc12 property."""
         self._cards[5].set_value("aloc12", value)
 
     @property
-    def gloc12(self) -> typing.Optional[int]:
+    def gloc12(self) -> typing.Optional[float]:
         """Get or set the Linear shear modulus for shear angles larger than ALOC12
         """ # nopep8
         return self._cards[5].get_value("gloc12")
 
     @gloc12.setter
-    def gloc12(self, value: int) -> None:
+    def gloc12(self, value: float) -> None:
         """Set the gloc12 property."""
         self._cards[5].set_value("gloc12", value)
 
     @property
     def meth12(self) -> typing.Optional[int]:
         """Get or set the Option for shear response between fiber 1 and 2 (see Remark 1):
-        EQ.0:	Elastic shear response.Curve LCG12 specifies shear stress as a function of the scalar product of the fiber directions
-        EQ.1 : Elasto - plastic shear response.Curve LCG12 specifies yield shear stress as a function of the normalized scalar product of the fiber directions.
-        EQ.2 : Elastic shear response.Curve LCG12 specifies shear stress as a function of shear angle(radians) between the fibers.
-        EQ.3 : Elasto - plastic shear response.Curve LCG12 defines yield shear stress as a function of normalized shear angle between the fibers.
-        EQ.4 : Elastic shear response.Curve LCG12 specifies shear stress as a function of shear angle(radians) between the fibers.This option is a special implementation for non - crimped fabrics, where one of the fiber families corresponds to a stitching.
-        EQ.5 : Elasto - plastic shear response.Curve LCG12 specifies yield shear stress as a function of normalized shear angle between the fibers.This option is a special implementation for non - crimped fabrics, where one of the fiber families corresponds to a stitching.
-        EQ.10 : Elastic shear response.Curve LCG12 specifies shear stress as a function of shear angle(radians) between the fibers.This option is tailored for woven fabricsand guarantees a pure shear stress response.
-        EQ.11 : Elasto - plastic shear response.Curve LCG12 specifies yield shear stress as a function of normalized shear angle.This option is tailored for woven fabricsand guarantees a pure shear stress response
+        EQ.0: Elastic shear response.Curve LCG12 specifies shear stress as a function of the scalar product of the fiber directions
+        EQ.1: Elasto - plastic shear response.Curve LCG12 specifies yield shear stress as a function of the normalized scalar product of the fiber directions.
+        EQ.2: Elastic shear response.Curve LCG12 specifies shear stress as a function of shear angle(radians) between the fibers.
+        EQ.3: Elasto - plastic shear response.Curve LCG12 defines yield shear stress as a function of normalized shear angle between the fibers.
+        EQ.4: Elastic shear response.Curve LCG12 specifies shear stress as a function of shear angle(radians) between the fibers.This option is a special implementation for non - crimped fabrics, where one of the fiber families corresponds to a stitching.
+        EQ.5: Elasto - plastic shear response.Curve LCG12 specifies yield shear stress as a function of normalized shear angle between the fibers.This option is a special implementation for non - crimped fabrics, where one of the fiber families corresponds to a stitching.
+        EQ.10: Elastic shear response.Curve LCG12 specifies shear stress as a function of shear angle(radians) between the fibers.This option is tailored for woven fabricsand guarantees a pure shear stress response.
+        EQ.11: Elasto - plastic shear response.Curve LCG12 specifies yield shear stress as a function of normalized shear angle.This option is tailored for woven fabricsand guarantees a pure shear stress response
         """ # nopep8
         return self._cards[5].get_value("meth12")
 
@@ -700,7 +700,7 @@ class Mat249Crash(KeywordBase):
 
     @property
     def dam12(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining the damage parameter d_12^m for the matrix as function of shear angle (radians) between the 1st and 2nd fiber (see Remark 2). The damage parameter d_12^m ranges from 0.0 to 1.5. A value of 0.0 indicates an undamaged matrix, whereas 1.0 refers to a completely damaged matrix. To initiate failure of the composite at the integration point, a matrix damage d_12^m of 1.5 must be reached. Naturally, the mechanical behavior of the matrix does not change for damage values between 1.0 and 1.5.
+        """Get or set the Load curve ID defining the damage parameter d_12**m for the matrix as function of shear angle (radians) between the 1st and 2nd fiber (see Remark 2). The damage parameter d_12**m ranges from 0.0 to 1.5. A value of 0.0 indicates an undamaged matrix, whereas 1.0 refers to a completely damaged matrix. To initiate failure of the composite at the integration point, a matrix damage d_12**m of 1.5 must be reached. Naturally, the mechanical behavior of the matrix does not change for damage values between 1.0 and 1.5.
         """ # nopep8
         return self._cards[5].get_value("dam12")
 
@@ -777,8 +777,8 @@ class Mat249Crash(KeywordBase):
 
     @property
     def daf2(self) -> typing.Optional[int]:
-        """Get or set the Load curve or table ID for damage parameter d_2^ffor 2nd fiber (see Remark 2). If a curve, DAF2 specifies damage as a function of fiber strain (for compression and elongation). If DAF2 refers to a table, then two different damage functions for tensile and compressive stresses are input. The values in the table are arbitrary and exist only to index the two curves. The first indexed curve is assumed to specify tensile damage as a function of fiber strains while second curve specifies compressive damage as a function of fiber strains. input different damage functions for tensile and compressive stresses. Any other curves input with the table definition are ignored.
-        The damager parameter d_2 ^ f ranges from 0.0 for an undamaged fiber to 1.0 for a failed fiber family.If all families have failed, material failure at the integration point is initiated.
+        """Get or set the Load curve or table ID for damage parameter d_2**ffor 2nd fiber (see Remark 2). If a curve, DAF2 specifies damage as a function of fiber strain (for compression and elongation). If DAF2 refers to a table, then two different damage functions for tensile and compressive stresses are input. The values in the table are arbitrary and exist only to index the two curves. The first indexed curve is assumed to specify tensile damage as a function of fiber strains while second curve specifies compressive damage as a function of fiber strains. input different damage functions for tensile and compressive stresses. Any other curves input with the table definition are ignored.
+        The damager parameter d_2 ** f ranges from 0.0 for an undamaged fiber to 1.0 for a failed fiber family.If all families have failed, material failure at the integration point is initiated.
         """ # nopep8
         return self._cards[6].get_value("daf2")
 
@@ -789,8 +789,8 @@ class Mat249Crash(KeywordBase):
 
     @property
     def dam2(self) -> typing.Optional[int]:
-        """Get or set the Load curve or table ID for damage parameter d_2^mfor matrix material based on the current deformation status of the 2nd fiber (see Remark 2). If a curve, it specifies damage as a function of fiber strain (for compression and elongation). If a table, then the values are fiber strain rates which index damage as a function of fiber strain curves.
-        The damager parameter d_2 ^ m ranges from 0.0 to 1.5.A value of 0.0 indicates an undamaged matrix, whereas 1.0 refers to a completely damaged matrix.To initiate failure of the composite at the integration point, a matrix damage d_2^ m of 1.5 must be reached.Naturally, the mechanical behavior of the matrix does not change for damage values between 1.0 and 1.5.
+        """Get or set the Load curve or table ID for damage parameter d_2**mfor matrix material based on the current deformation status of the 2nd fiber (see Remark 2). If a curve, it specifies damage as a function of fiber strain (for compression and elongation). If a table, then the values are fiber strain rates which index damage as a function of fiber strain curves.
+        The damager parameter d_2 ** m ranges from 0.0 to 1.5.A value of 0.0 indicates an undamaged matrix, whereas 1.0 refers to a completely damaged matrix.To initiate failure of the composite at the integration point, a matrix damage d_2** m of 1.5 must be reached.Naturally, the mechanical behavior of the matrix does not change for damage values between 1.0 and 1.5.
         """ # nopep8
         return self._cards[6].get_value("dam2")
 
@@ -862,7 +862,7 @@ class Mat249Crash(KeywordBase):
 
     @property
     def dam23(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining the damage parameter d_23^m for the matrix as function of shear angle (in rad) between 1st and 2nd fiber. The damager parameter d_23^m ranges from 0.0 to 1.5. A value of 0.0 indicates an undamaged matrix, whereas 1.0 refers to a completely damaged matrix. To initiate failure of the composite at the integration point, a matrix damage d_23^m of 1.5 must be reached. Naturally, the mechanical behavior of the matrix does not change for damage values between 1.0 and 1.5.
+        """Get or set the Load curve ID defining the damage parameter d_23**m for the matrix as function of shear angle (in rad) between 1st and 2nd fiber. The damager parameter d_23**m ranges from 0.0 to 1.5. A value of 0.0 indicates an undamaged matrix, whereas 1.0 refers to a completely damaged matrix. To initiate failure of the composite at the integration point, a matrix damage d_23**m of 1.5 must be reached. Naturally, the mechanical behavior of the matrix does not change for damage values between 1.0 and 1.5.
         """ # nopep8
         return self._cards[7].get_value("dam23")
 
@@ -939,8 +939,8 @@ class Mat249Crash(KeywordBase):
 
     @property
     def daf3(self) -> typing.Optional[int]:
-        """Get or set the Load curve or table ID for damage parameter d_3^ffor 3rd fiber (see Remark 2). If a curve, DAF3 specifies damage as a function of fiber strain (for compression and elongation). If DAF3 refers to a table, then two different damage functions for tensile and compressive stresses are input. The values in the table are arbitrary and exist only to index the two curves. The first indexed curve is assumed to specify tensile damage as a function of fiber strains while second curve specifies compressive damage as a function of fiber strains. input different damage functions for tensile and compressive stresses. Any other curves input with the table definition are ignored.
-        The damager parameter d_3 ^ f ranges from 0.0 for an undamaged fiber to 1.0 for a failed fiber family.If all families have failed, material failure at the integration point is initiated.
+        """Get or set the Load curve or table ID for damage parameter d_3**ffor 3rd fiber (see Remark 2). If a curve, DAF3 specifies damage as a function of fiber strain (for compression and elongation). If DAF3 refers to a table, then two different damage functions for tensile and compressive stresses are input. The values in the table are arbitrary and exist only to index the two curves. The first indexed curve is assumed to specify tensile damage as a function of fiber strains while second curve specifies compressive damage as a function of fiber strains. input different damage functions for tensile and compressive stresses. Any other curves input with the table definition are ignored.
+        The damager parameter d_3 ** f ranges from 0.0 for an undamaged fiber to 1.0 for a failed fiber family.If all families have failed, material failure at the integration point is initiated.
         """ # nopep8
         return self._cards[8].get_value("daf3")
 
@@ -951,8 +951,8 @@ class Mat249Crash(KeywordBase):
 
     @property
     def dam3(self) -> typing.Optional[int]:
-        """Get or set the Load curve or table ID for damage parameter d_3^mfor matrix material based on the current deformation status of the 3rd fiber (see Remark 2). If a curve, it specifies damage as a function of fiber strain (for compression and elongation). If a table, then the values are fiber strain rates which index damage as a function of fiber strain curves.
-        The damager parameter d_3 ^ m ranges from 0.0 to 1.5.A value of 0.0 indicates an undamaged matrix, whereas 1.0 refers to a completely damaged matrix.To initiate failure of the composite at the integration point, a matrix damage d_3^ m of 1.5 must be reached.Naturally, the mechanical behavior of the matrix does not change for damage values between 1.0 and 1.5.
+        """Get or set the Load curve or table ID for damage parameter d_3**mfor matrix material based on the current deformation status of the 3rd fiber (see Remark 2). If a curve, it specifies damage as a function of fiber strain (for compression and elongation). If a table, then the values are fiber strain rates which index damage as a function of fiber strain curves.
+        The damager parameter d_3 ** m ranges from 0.0 to 1.5.A value of 0.0 indicates an undamaged matrix, whereas 1.0 refers to a completely damaged matrix.To initiate failure of the composite at the integration point, a matrix damage d_3** m of 1.5 must be reached.Naturally, the mechanical behavior of the matrix does not change for damage values between 1.0 and 1.5.
         """ # nopep8
         return self._cards[8].get_value("dam3")
 
@@ -962,13 +962,13 @@ class Mat249Crash(KeywordBase):
         self._cards[8].set_value("dam3", value)
 
     @property
-    def postv(self) -> typing.Optional[float]:
+    def postv(self) -> typing.Optional[int]:
         """Get or set the Parameter for outputting additional history variables that might be useful for post-processing.
         """ # nopep8
         return self._cards[9].get_value("postv")
 
     @postv.setter
-    def postv(self, value: float) -> None:
+    def postv(self, value: int) -> None:
         """Set the postv property."""
         self._cards[9].set_value("postv", value)
 
@@ -984,15 +984,15 @@ class Mat249Crash(KeywordBase):
         self._cards[9].set_value("viscs", value)
 
     @property
-    def ihis(self) -> typing.Optional[float]:
-        """Get or set the Flag for material properties initialization :
-        EQ.0 : Material properties defined in Cards 1 - 9 are used
-        GE.1 : Use * INITIAL_‌STRESS_‌SHELL to initialize some material properties on an element - by - element basis
+    def ihis(self) -> typing.Optional[int]:
+        """Get or set the Flag for material properties initialization:
+        EQ.0: Material properties defined in Cards 1 - 9 are used
+        GE.1: Use *INITIAL_STRESS_SHELL to initialize some material properties on an element - by - element basis
         """ # nopep8
         return self._cards[9].get_value("ihis")
 
     @ihis.setter
-    def ihis(self, value: float) -> None:
+    def ihis(self, value: int) -> None:
         """Set the ihis property."""
         self._cards[9].set_value("ihis", value)
 
@@ -1011,21 +1011,6 @@ class Mat249Crash(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcsigy_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcsigy."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcsigy:
-                return kwd
-        return None
-
-    @lcsigy_link.setter
-    def lcsigy_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcsigy."""
-        self.lcsigy = value.lcid
-
-    @property
     def lcef1_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcef1."""
         if self.deck is None:
@@ -1039,36 +1024,6 @@ class Mat249Crash(KeywordBase):
     def lcef1_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcef1."""
         self.lcef1 = value.lcid
-
-    @property
-    def daf1_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for daf1."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.daf1:
-                return kwd
-        return None
-
-    @daf1_link.setter
-    def daf1_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for daf1."""
-        self.daf1 = value.lcid
-
-    @property
-    def dam1_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for dam1."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.dam1:
-                return kwd
-        return None
-
-    @dam1_link.setter
-    def dam1_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for dam1."""
-        self.dam1 = value.lcid
 
     @property
     def lcg12_link(self) -> typing.Optional[DefineCurve]:
@@ -1116,36 +1071,6 @@ class Mat249Crash(KeywordBase):
         self.lcef2 = value.lcid
 
     @property
-    def daf2_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for daf2."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.daf2:
-                return kwd
-        return None
-
-    @daf2_link.setter
-    def daf2_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for daf2."""
-        self.daf2 = value.lcid
-
-    @property
-    def dam2_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for dam2."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.dam2:
-                return kwd
-        return None
-
-    @dam2_link.setter
-    def dam2_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for dam2."""
-        self.dam2 = value.lcid
-
-    @property
     def lcg23_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcg23."""
         if self.deck is None:
@@ -1191,32 +1116,170 @@ class Mat249Crash(KeywordBase):
         self.lcef3 = value.lcid
 
     @property
-    def daf3_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for daf3."""
+    def lcsigy_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcsigy."""
         if self.deck is None:
             return None
+        field_value = self.lcsigy
+        if field_value is None or field_value == 0:
+            return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.daf3:
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcsigy_link.setter
+    def lcsigy_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcsigy."""
+        if hasattr(value, "lcid"):
+            self.lcsigy = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcsigy = value.tbid
+
+    @property
+    def daf1_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for daf1."""
+        if self.deck is None:
+            return None
+        field_value = self.daf1
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @daf1_link.setter
+    def daf1_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for daf1."""
+        if hasattr(value, "lcid"):
+            self.daf1 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.daf1 = value.tbid
+
+    @property
+    def dam1_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for dam1."""
+        if self.deck is None:
+            return None
+        field_value = self.dam1
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @dam1_link.setter
+    def dam1_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for dam1."""
+        if hasattr(value, "lcid"):
+            self.dam1 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.dam1 = value.tbid
+
+    @property
+    def daf2_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for daf2."""
+        if self.deck is None:
+            return None
+        field_value = self.daf2
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @daf2_link.setter
+    def daf2_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for daf2."""
+        if hasattr(value, "lcid"):
+            self.daf2 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.daf2 = value.tbid
+
+    @property
+    def dam2_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for dam2."""
+        if self.deck is None:
+            return None
+        field_value = self.dam2
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @dam2_link.setter
+    def dam2_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for dam2."""
+        if hasattr(value, "lcid"):
+            self.dam2 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.dam2 = value.tbid
+
+    @property
+    def daf3_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for daf3."""
+        if self.deck is None:
+            return None
+        field_value = self.daf3
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
                 return kwd
         return None
 
     @daf3_link.setter
-    def daf3_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for daf3."""
-        self.daf3 = value.lcid
+    def daf3_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for daf3."""
+        if hasattr(value, "lcid"):
+            self.daf3 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.daf3 = value.tbid
 
     @property
-    def dam3_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for dam3."""
+    def dam3_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for dam3."""
         if self.deck is None:
             return None
+        field_value = self.dam3
+        if field_value is None or field_value == 0:
+            return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.dam3:
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
                 return kwd
         return None
 
     @dam3_link.setter
-    def dam3_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for dam3."""
-        self.dam3 = value.lcid
+    def dam3_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for dam3."""
+        if hasattr(value, "lcid"):
+            self.dam3 = value.lcid
+        elif hasattr(value, "tbid"):
+            self.dam3 = value.tbid
 

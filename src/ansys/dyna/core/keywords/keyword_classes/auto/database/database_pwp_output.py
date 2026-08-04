@@ -51,9 +51,9 @@ class DatabasePwpOutput(KeywordBase):
         ]
     @property
     def ivel(self) -> int:
-        """Get or set the Meaning of "velocity" in d3plot and d3thdt output files
-        0:  Nodal velocity vector
-        1:  Seepage velocity vector
+        """Get or set the Meaning of nodal "velocity" in d3plot
+        0: Nodal velocity vector
+        1: Seepage velocity vector
         """ # nopep8
         return self._cards[0].get_value("ivel")
 
@@ -66,17 +66,17 @@ class DatabasePwpOutput(KeywordBase):
 
     @property
     def iaccx(self) -> int:
-        """Get or set the Meaning of "X-Acceleration" in d3plot and d3thdt output files
-        0:  Not written
-        1:  Total pwp head
-        2:  Excess pwp head (this is also written as temperature)
+        """Get or set the Meaning of nodal "X-Acceleration" in d3plot, d3thdt and nodout
+        0: Not written
+        1: Total pwp head
+        2: Excess pwp head (this is also written as temperature)
         3: Target rate of volume change
         4: Actual rate of volume change
-        7:  Hydraulic pwp head
-        8:  Error in rate of volume change (calculated from seepage minus actual)
-        9:  Volume at node
-        10:  Rate of volume change calculated from seepage
-        14:  Void volume (generated at suction limit)
+        7: Hydraulic pwp head
+        8: Error in rate of volume change (calculated from seepage minus actual)
+        9: Volume at node
+        10: Rate of volume change calculated from seepage
+        14: Void volume (generated at suction limit)
         17: NFIXCON (e.g. +4/-4 for nodes on suction limit)
         """ # nopep8
         return self._cards[0].get_value("iaccx")
@@ -90,17 +90,17 @@ class DatabasePwpOutput(KeywordBase):
 
     @property
     def iaccy(self) -> int:
-        """Get or set the Meaning of "Y-Acceleration" in d3plot and d3thdt output files
-        0:  Not written
-        1:  Total pwp head
-        2:  Excess pwp head (this is also written as temperature)
+        """Get or set the Meaning of nodal "Y-Acceleration" in d3plot, d3thdt and nodout
+        0: Not written
+        1: Total pwp head
+        2: Excess pwp head (this is also written as temperature)
         3: Target rate of volume change
         4: Actual rate of volume change
-        7:  Hydraulic pwp head
-        8:  Error in rate of volume change (calculated from seepage minus actual)
-        9:  Volume at node
-        10:  Rate of volume change calculated from seepage
-        14:  Void volume (generated at suction limit)
+        7: Hydraulic pwp head
+        8: Error in rate of volume change (calculated from seepage minus actual)
+        9: Volume at node
+        10: Rate of volume change calculated from seepage
+        14: Void volume (generated at suction limit)
         17: NFIXCON (e.g. +4/-4 for nodes on suction limit)
         """ # nopep8
         return self._cards[0].get_value("iaccy")
@@ -114,17 +114,17 @@ class DatabasePwpOutput(KeywordBase):
 
     @property
     def iaccz(self) -> int:
-        """Get or set the Meaning of "Z-Acceleration" in d3plot and d3thdt output files
-        0:  Not written
-        1:  Total pwp head
-        2:  Excess pwp head (this is also written as temperature)
+        """Get or set the Meaning of nodal "Z-Acceleration" in d3plot, d3thdt and nodout
+        0: Not written
+        1: Total pwp head
+        2: Excess pwp head (this is also written as temperature)
         3: Target rate of volume change
         4: Actual rate of volume change
-        7:  Hydraulic pwp head
-        8:  Error in rate of volume change (calculated from seepage minus actual)
-        9:  Volume at node
-        10:  Rate of volume change calculated from seepage
-        14:  Void volume (generated at suction limit)
+        7: Hydraulic pwp head
+        8: Error in rate of volume change (calculated from seepage minus actual)
+        9: Volume at node
+        10: Rate of volume change calculated from seepage
+        14: Void volume (generated at suction limit)
         17: NFIXCON (e.g. +4/-4 for nodes on suction limit)
         """ # nopep8
         return self._cards[0].get_value("iaccz")

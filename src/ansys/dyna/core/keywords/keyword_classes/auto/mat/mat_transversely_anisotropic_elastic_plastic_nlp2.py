@@ -40,6 +40,13 @@ _MATTRANSVERSELYANISOTROPICELASTICPLASTICNLP2_CARD0 = (
     FieldSchema("hlcid", int, 70, 10, 0),
 )
 
+_MATTRANSVERSELYANISOTROPICELASTICPLASTICNLP2_CARD1 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("icfld", int, 30, 10, None),
+)
+
 _MATTRANSVERSELYANISOTROPICELASTICPLASTICNLP2_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
@@ -54,6 +61,7 @@ class MatTransverselyAnisotropicElasticPlasticNlp2(KeywordBase):
     ]
     _link_fields = {
         "hlcid": LinkType.DEFINE_CURVE,
+        "icfld": LinkType.DEFINE_CURVE,
     }
 
     def __init__(self, **kwargs):
@@ -63,6 +71,10 @@ class MatTransverselyAnisotropicElasticPlasticNlp2(KeywordBase):
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _MATTRANSVERSELYANISOTROPICELASTICPLASTICNLP2_CARD0,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MATTRANSVERSELYANISOTROPICELASTICPLASTICNLP2_CARD1,
                 **kwargs,
             ),
             OptionCardSet(
@@ -133,7 +145,8 @@ class MatTransverselyAnisotropicElasticPlasticNlp2(KeywordBase):
 
     @property
     def etan(self) -> typing.Optional[float]:
-        """Get or set the Plastic hardening modulus.
+        """Get or set the Plastic hardening modulus. When this value is negative, normal stresses (either from contact or applied pressure) are considered and *LOAD_SURFACE_STRESS must be used to capture the stresses. This feature is applicable to both shell element types 2 and 16. It is found in some cases this inclusion can improve accuracy.
+        The negative local z - stresses caused by the contact pressure can be viewed from d3plot files..
         """ # nopep8
         return self._cards[0].get_value("etan")
 
@@ -165,15 +178,26 @@ class MatTransverselyAnisotropicElasticPlasticNlp2(KeywordBase):
         self._cards[0].set_value("hlcid", value)
 
     @property
+    def icfld(self) -> typing.Optional[int]:
+        """Get or set the define curve id.
+        """ # nopep8
+        return self._cards[1].get_value("icfld")
+
+    @icfld.setter
+    def icfld(self, value: int) -> None:
+        """Set the icfld property."""
+        self._cards[1].set_value("icfld", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[1].cards[0].get_value("title")
+        return self._cards[2].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[1].cards[0].set_value("title", value)
+        self._cards[2].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
@@ -192,4 +216,19 @@ class MatTransverselyAnisotropicElasticPlasticNlp2(KeywordBase):
     def hlcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for hlcid."""
         self.hlcid = value.lcid
+
+    @property
+    def icfld_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for icfld."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.icfld:
+                return kwd
+        return None
+
+    @icfld_link.setter
+    def icfld_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for icfld."""
+        self.icfld = value.lcid
 

@@ -122,9 +122,7 @@ class MatComprf(KeywordBase):
 
     @property
     def et(self) -> typing.Optional[float]:
-        """Get or set the Tensile modulus along the fiber yarns, corresponding to the slope
-        of the curve in Figure M293-2 in the Stable Modulus region from a
-        uniaxial tension test. See Remark 5.
+        """Get or set the Tensile modulus along the fiber yarns, corresponding to the slope of the curve in Figure M293-2 in the Stable Modulus region from a uniaxial tension test. See Remark 5.
         """ # nopep8
         return self._cards[0].get_value("et")
 
@@ -135,9 +133,7 @@ class MatComprf(KeywordBase):
 
     @property
     def ec(self) -> typing.Optional[float]:
-        """Get or set the Compression modulus along the fiber yarns, reversely calculated
-        using bending tests when all the other material properties are
-        determined. See Remark 5.
+        """Get or set the Compression modulus along the fiber yarns, reversely calculated using bending tests when all the other material properties are determined. See Remark 5.
         """ # nopep8
         return self._cards[0].get_value("ec")
 
@@ -159,9 +155,7 @@ class MatComprf(KeywordBase):
 
     @property
     def g121(self) -> typing.Optional[float]:
-        """Get or set the Coefficients for the bias-extension angle change-engineering stress
-        curve in Figure M293-3. G121 to G126 corresponds to the 6th order
-        to 1st order factors of the loading curve. See Remark 5.
+        """Get or set the Coefficients for the bias-extension angle change-engineering stress curve in Figure M293-3. G121 to G126 corresponds to the 6th order to 1st order factors of the loading curve. See Remark 5.
         """ # nopep8
         return self._cards[0].get_value("g121")
 
@@ -172,9 +166,7 @@ class MatComprf(KeywordBase):
 
     @property
     def g122(self) -> typing.Optional[float]:
-        """Get or set the Coefficients for the bias-extension angle change-engineering stress
-        curve in Figure M293-3. G121 to G126 corresponds to the 6th order
-        to 1st order factors of the loading curve. See Remark 5.
+        """Get or set the Coefficients for the bias-extension angle change-engineering stress curve in Figure M293-3. G121 to G126 corresponds to the 6th order to 1st order factors of the loading curve. See Remark 5.
         """ # nopep8
         return self._cards[0].get_value("g122")
 
@@ -185,9 +177,7 @@ class MatComprf(KeywordBase):
 
     @property
     def g123(self) -> typing.Optional[float]:
-        """Get or set the Coefficients for the bias-extension angle change-engineering stress
-        curve in Figure M293-3. G121 to G126 corresponds to the 6th order
-        to 1st order factors of the loading curve. See Remark 5.
+        """Get or set the Coefficients for the bias-extension angle change-engineering stress curve in Figure M293-3. G121 to G126 corresponds to the 6th order to 1st order factors of the loading curve. See Remark 5.
         """ # nopep8
         return self._cards[0].get_value("g123")
 
@@ -198,9 +188,7 @@ class MatComprf(KeywordBase):
 
     @property
     def g124(self) -> typing.Optional[float]:
-        """Get or set the Coefficients for the bias-extension angle change-engineering stress
-        curve in Figure M293-3. G121 to G126 corresponds to the 6th order
-        to 1st order factors of the loading curve. See Remark 5.
+        """Get or set the Coefficients for the bias-extension angle change-engineering stress curve in Figure M293-3. G121 to G126 corresponds to the 6th order to 1st order factors of the loading curve. See Remark 5.
         """ # nopep8
         return self._cards[1].get_value("g124")
 
@@ -211,9 +199,7 @@ class MatComprf(KeywordBase):
 
     @property
     def g125(self) -> typing.Optional[float]:
-        """Get or set the Coefficients for the bias-extension angle change-engineering stress
-        curve in Figure M293-3. G121 to G126 corresponds to the 6th order
-        to 1st order factors of the loading curve. See Remark 5.
+        """Get or set the Coefficients for the bias-extension angle change-engineering stress curve in Figure M293-3. G121 to G126 corresponds to the 6th order to 1st order factors of the loading curve. See Remark 5.
         """ # nopep8
         return self._cards[1].get_value("g125")
 
@@ -224,9 +210,7 @@ class MatComprf(KeywordBase):
 
     @property
     def g126(self) -> typing.Optional[float]:
-        """Get or set the Coefficients for the bias-extension angle change-engineering stress
-        curve in Figure M293-3. G121 to G126 corresponds to the 6th order
-        to 1st order factors of the loading curve. See Remark 5.
+        """Get or set the Coefficients for the bias-extension angle change-engineering stress curve in Figure M293-3. G121 to G126 corresponds to the 6th order to 1st order factors of the loading curve. See Remark 5.
         """ # nopep8
         return self._cards[1].get_value("g126")
 
@@ -303,8 +287,7 @@ class MatComprf(KeywordBase):
 
     @property
     def epsilon(self) -> typing.Optional[float]:
-        """Get or set the Stretch ratio at the end of undulation stage during the uniaxial
-        tension test. Example shown in Figure M293-2. See Remark 5.
+        """Get or set the Stretch ratio at the end of undulation stage during the uniaxial tension test. Example shown in Figure M293-2. See Remark 5.
         """ # nopep8
         return self._cards[2].get_value("epsilon")
 
@@ -315,9 +298,7 @@ class MatComprf(KeywordBase):
 
     @property
     def theta(self) -> typing.Optional[float]:
-        """Get or set the Initial angle offset between the fiber direction and the element
-        direction. To reduce simulation error, when building the model,
-        the elements should be aligned to the same direction as much as possible.
+        """Get or set the Initial angle offset between the fiber direction and the element direction. To reduce simulation error, when building the model, the elements should be aligned to the same direction as much as possible.
         """ # nopep8
         return self._cards[2].get_value("theta")
 

@@ -48,7 +48,6 @@ _CONSTRAINEDGENERALIZEDWELDBUTT_CARD2 = (
     FieldSchema("beta", float, 30, 10, None),
     FieldSchema("l", float, 40, 10, None),
     FieldSchema("d", float, 50, 10, None),
-    FieldSchema("lt", float, 60, 10, None),
 )
 
 class ConstrainedGeneralizedWeldButt(KeywordBase):
@@ -228,17 +227,6 @@ class ConstrainedGeneralizedWeldButt(KeywordBase):
     def d(self, value: float) -> None:
         """Set the d property."""
         self._cards[2].set_value("d", value)
-
-    @property
-    def lt(self) -> typing.Optional[float]:
-        """Get or set the Lt , transverse length of butt weld.
-        """ # nopep8
-        return self._cards[2].get_value("lt")
-
-    @lt.setter
-    def lt(self, value: float) -> None:
-        """Set the lt property."""
-        self._cards[2].set_value("lt", value)
 
     @property
     def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:

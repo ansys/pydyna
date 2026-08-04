@@ -87,7 +87,7 @@ class DefineFormingClamp(KeywordBase):
 
     @property
     def clp2(self) -> typing.Optional[int]:
-        """Get or set the Part ID of a fixed rigid body clamp, defined by *PART and *MAT_020.  This is sometimes called “net pad.
+        """Get or set the Part ID of a fixed rigid body clamp, defined by *PART and *MAT_020.  This is sometimes called net pad.
         """ # nopep8
         return self._cards[0].get_value("clp2")
 
@@ -99,8 +99,8 @@ class DefineFormingClamp(KeywordBase):
     @property
     def vid(self) -> typing.Optional[int]:
         """Get or set the Define CLP1 moving direction:
-        GT.0:	Vector ID from *DEFINE_VECTOR, specifying the moving direction of CLP1
-        LT.0:	Absolute value is a node ID, whose normal vector will be used to define the moving direction of CLP1.
+        GT.0: Vector ID from *DEFINE_VECTOR, specifying the moving direction of CLP1
+        LT.0: Absolute value is a node ID, whose normal vector will be used to define the moving direction of CLP1.
         """ # nopep8
         return self._cards[0].get_value("vid")
 
@@ -122,7 +122,7 @@ class DefineFormingClamp(KeywordBase):
 
     @property
     def at(self) -> float:
-        """Get or set the Begin time for CLP1’s move.
+        """Get or set the Begin time for CLP1s move.
         """ # nopep8
         return self._cards[0].get_value("at")
 
@@ -133,7 +133,7 @@ class DefineFormingClamp(KeywordBase):
 
     @property
     def dt(self) -> float:
-        """Get or set the Duration of CLP1’s move.
+        """Get or set the Duration of CLP1s move.
         """ # nopep8
         return self._cards[0].get_value("dt")
 

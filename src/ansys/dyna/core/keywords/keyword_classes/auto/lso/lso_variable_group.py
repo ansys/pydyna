@@ -131,7 +131,7 @@ class LsoVariableGroup(KeywordBase):
         x_velocity, y_velocity, z_velocity,
         velocity,
         x_vorticity, y_vorticity, z_vorticity,
-        vorticity,	heat_flux,
+        vorticity, heat_flux,
         NODE (CESE)
         SURFACE_ELEMENT (ICFD)
         element_pressure

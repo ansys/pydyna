@@ -45,7 +45,9 @@ from .include_compensation_trim_node import IncludeCompensationTrimNode
 from .include_compensation_updated_blank_shape import IncludeCompensationUpdatedBlankShape
 from .include_compensation_updated_rigid_tool import IncludeCompensationUpdatedRigidTool
 from .include_cosim import IncludeCosim
+from .include_efv import IncludeEfv
 from .include import Include
+from .include_ispg import IncludeIspg
 from .include_multiscale import IncludeMultiscale
 from .include_multiscale_spotweld import IncludeMultiscaleSpotweld
 from .include_nastran import IncludeNastran
@@ -56,6 +58,8 @@ from .include_stamped_part_matrix import IncludeStampedPartMatrix
 from .include_stamped_part_matrix_inverse import IncludeStampedPartMatrixInverse
 from .include_stamped_part_set import IncludeStampedPartSet
 from .include_stamped_part_solid_to_solid import IncludeStampedPartSolidToSolid
+from .include_stamped_part_solid_to_solid_general import IncludeStampedPartSolidToSolidGeneral
+from .include_stamped_part_solid_to_solid_set_list import IncludeStampedPartSolidToSolidSetList
 from .include_stamped_set import IncludeStampedSet
 from .include_stamped_set_matrix import IncludeStampedSetMatrix
 from .include_stamped_set_matrix_inverse import IncludeStampedSetMatrixInverse

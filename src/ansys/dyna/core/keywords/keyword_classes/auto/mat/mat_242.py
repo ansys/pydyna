@@ -197,8 +197,8 @@ class Mat242(KeywordBase):
 
     @property
     def ea(self) -> typing.Optional[float]:
-        """Get or set the parameter controlling the change of Young’s modulus;
-        LT.0.0:	|EA| is a curve ID giving the change of Young’s modulus as a function of effective plastic strain.
+        """Get or set the parameter controlling the change of Young's modulus;
+        LT.0.0: |EA| is a curve ID giving the change of Young's modulus as a function of effective plastic strain.
         """ # nopep8
         return self._cards[0].get_value("ea")
 
@@ -209,7 +209,7 @@ class Mat242(KeywordBase):
 
     @property
     def coe(self) -> typing.Optional[float]:
-        """Get or set the parameter controlling the change of Young’s modulus; see the remarks of *MAT_125.
+        """Get or set the parameter controlling the change of Young's modulus; see the remarks of *MAT_125.
         """ # nopep8
         return self._cards[0].get_value("coe")
 
@@ -220,7 +220,7 @@ class Mat242(KeywordBase):
 
     @property
     def m(self) -> typing.Optional[float]:
-        """Get or set the m, Flow potential exponent.  For face centered cubic (FCC) materials m=8 is recommended and for body centered cubic (BCC) materials m=6 may be used.
+        """Get or set the m, Flow potential exponent. For face centered cubic (FCC) materials m=8 is recommended and for body centered cubic (BCC) materials m=6 may be used.
         LT.0.0: |M | is a load curve ID specifying the flow potential exponent as a function of effective plastic strain.
         """ # nopep8
         return self._cards[0].get_value("m")
@@ -233,7 +233,7 @@ class Mat242(KeywordBase):
     @property
     def alpha1(self) -> typing.Optional[float]:
         """Get or set the a1, material constant in Barlat's yield equation.
-        LT.0.0:	|ALPHAi| is a load curve ID specifying α_i as a function of effective plastic strain.
+        LT.0.0: |ALPHAi| is a load curve ID specifying alpha_i as a function of effective plastic strain.
         """ # nopep8
         return self._cards[1].get_value("alpha1")
 
@@ -245,7 +245,7 @@ class Mat242(KeywordBase):
     @property
     def alpha2(self) -> typing.Optional[float]:
         """Get or set the a2, material constant in Barlat's yield equation.
-        LT.0.0:	|ALPHAi| is a load curve ID specifying α_i as a function of effective plastic strain.
+        LT.0.0: |ALPHAi| is a load curve ID specifying alpha_i as a function of effective plastic strain.
         """ # nopep8
         return self._cards[1].get_value("alpha2")
 
@@ -257,7 +257,7 @@ class Mat242(KeywordBase):
     @property
     def alpha3(self) -> typing.Optional[float]:
         """Get or set the a3, material constant in Barlat's yield equation.
-        LT.0.0:	|ALPHAi| is a load curve ID specifying α_i as a function of effective plastic strain.
+        LT.0.0: |ALPHAi| is a load curve ID specifying alpha_i as a function of effective plastic strain.
         """ # nopep8
         return self._cards[1].get_value("alpha3")
 
@@ -269,7 +269,7 @@ class Mat242(KeywordBase):
     @property
     def alpha4(self) -> typing.Optional[float]:
         """Get or set the a4, material constant in Barlat's yield equation.
-        LT.0.0:	|ALPHAi| is a load curve ID specifying α_i as a function of effective plastic strain.
+        LT.0.0: |ALPHAi| is a load curve ID specifying alpha_i as a function of effective plastic strain.
         """ # nopep8
         return self._cards[1].get_value("alpha4")
 
@@ -281,7 +281,7 @@ class Mat242(KeywordBase):
     @property
     def alpha5(self) -> typing.Optional[float]:
         """Get or set the a5, material constant in Barlat's yield equation.
-        LT.0.0:	|ALPHAi| is a load curve ID specifying α_i as a function of effective plastic strain.
+        LT.0.0: |ALPHAi| is a load curve ID specifying alpha_i as a function of effective plastic strain.
         """ # nopep8
         return self._cards[1].get_value("alpha5")
 
@@ -293,7 +293,7 @@ class Mat242(KeywordBase):
     @property
     def alpha6(self) -> typing.Optional[float]:
         """Get or set the a6, material constant in Barlat's yield equation.
-        LT.0.0:	|ALPHAi| is a load curve ID specifying α_i as a function of effective plastic strain.
+        LT.0.0: |ALPHAi| is a load curve ID specifying alpha_i as a function of effective plastic strain.
         """ # nopep8
         return self._cards[1].get_value("alpha6")
 
@@ -305,7 +305,7 @@ class Mat242(KeywordBase):
     @property
     def alpha7(self) -> typing.Optional[float]:
         """Get or set the a7, material constant in Barlat's yield equation.
-        LT.0.0:	|ALPHAi| is a load curve ID specifying α_i as a function of effective plastic strain.
+        LT.0.0: |ALPHAi| is a load curve ID specifying alpha_i as a function of effective plastic strain.
         """ # nopep8
         return self._cards[1].get_value("alpha7")
 
@@ -317,7 +317,7 @@ class Mat242(KeywordBase):
     @property
     def alpha8(self) -> typing.Optional[float]:
         """Get or set the a8, material constant in Barlat's yield equation.
-        LT.0.0:	|ALPHAi| is a load curve ID specifying α_i as a function of effective plastic strain.
+        LT.0.0: |ALPHAi| is a load curve ID specifying alpha_i as a function of effective plastic strain.
         """ # nopep8
         return self._cards[1].get_value("alpha8")
 
@@ -410,7 +410,7 @@ class Mat242(KeywordBase):
         element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES.
         EQ.2: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
         EQ.3: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         LT.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
         *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
         """ # nopep8

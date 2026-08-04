@@ -136,7 +136,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
     @property
     def calopt(self) -> int:
         """Get or set the Calculation option:
-        EQ.0:	view factors
+        EQ.0: view factors
         """ # nopep8
         return self._cards[1].get_value("calopt")
 
@@ -148,8 +148,8 @@ class BoundaryRadiationEnclosure(KeywordBase):
     @property
     def outopt(self) -> int:
         """Get or set the Output option:
-        EQ.0:	no output
-        EQ.1 : output in LSDA format
+        EQ.0: no output
+        EQ.1: output in LSDA format
         """ # nopep8
         return self._cards[1].get_value("outopt")
 
@@ -163,7 +163,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
     @property
     def conopt(self) -> int:
         """Get or set the Control option:
-        EQ.0:	calculate view factors matrix and preform thermal analysis
+        EQ.0: calculate view factors matrix and preform thermal analysis
         """ # nopep8
         return self._cards[1].get_value("conopt")
 
@@ -186,8 +186,8 @@ class BoundaryRadiationEnclosure(KeywordBase):
     @property
     def smflag(self) -> int:
         """Get or set the View factor matrix smoothing flag:
-        EQ.0:	no smoothing
-        EQ.1 : smoothing
+        EQ.0: no smoothing
+        EQ.1: smoothing
         """ # nopep8
         return self._cards[3].get_value("smflag")
 
@@ -234,7 +234,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
     @property
     def stype(self) -> int:
         """Get or set the Solver type:
-        EQ.0:	reverse conjugated gradient
+        EQ.0: reverse conjugated gradient
         """ # nopep8
         return self._cards[4].get_value("stype")
 
@@ -279,10 +279,10 @@ class BoundaryRadiationEnclosure(KeywordBase):
     @property
     def slmlev(self) -> int:
         """Get or set the Radiosity solver message level:
-        EQ.0:	no output
-        EQ.1 : debug output level I
-        EQ.2 : debug output level II
-        EQ.3 : debug output level III
+        EQ.0: no output
+        EQ.1: debug output level I
+        EQ.2: debug output level II
+        EQ.3: debug output level III
         """ # nopep8
         return self._cards[4].get_value("slmlev")
 
@@ -295,7 +295,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @property
     def ssid(self) -> typing.Optional[int]:
-        """Get or set the SSID specifies the ID for a set of segments that comprise a portion of, or possibly, the entire enclosure. See *SET_‌SEGMENT.
+        """Get or set the SSID specifies the ID for a set of segments that comprise a portion of, or possibly, the entire enclosure. See *SET_SEGMENT.
         """ # nopep8
         return self._cards[5].get_value("ssid")
 
@@ -306,8 +306,8 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @property
     def nint(self) -> typing.Optional[int]:
-        """Get or set the Number of integration points for view factor calculation, 1 ≤ NINT ≤ 10
-        EQ.0:	LS - DYNA determines the number of integration points based on the segment size and separation distance.
+        """Get or set the Number of integration points for view factor calculation, 1  NINT  10
+        EQ.0: LS - DYNA determines the number of integration points based on the segment size and separation distance.
         """ # nopep8
         return self._cards[6].get_value("nint")
 
@@ -319,8 +319,8 @@ class BoundaryRadiationEnclosure(KeywordBase):
     @property
     def block(self) -> int:
         """Get or set the Flag indicating if this surface blocks the view between any other 2 surfaces:
-        EQ.0:	no blocking(default)
-        EQ.1 : blocking
+        EQ.0: no blocking(default)
+        EQ.1: blocking
         """ # nopep8
         return self._cards[6].get_value("block")
 
@@ -331,10 +331,10 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @property
     def selcid(self) -> int:
-        """Get or set the Load curve ID for surface emissivity (see *DEFINE_‌CURVE):
-        GT.0:	surface emissivity as a function of time
-        EQ.0 : use constant multiplier value, SEMULT
-        LT.0 : surface emissivity as a function of temperature.The value of –SELCID must be an integer,and it is interpreted as a load curve ID.
+        """Get or set the Load curve ID for surface emissivity (see *DEFINE_CURVE):
+        GT.0: surface emissivity as a function of time
+        EQ.0: use constant multiplier value, SEMULT
+        LT.0: surface emissivity as a function of temperature.The value of SELCID must be an integer,and it is interpreted as a load curve ID.
         """ # nopep8
         return self._cards[6].get_value("selcid")
 
@@ -345,7 +345,7 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @property
     def semult(self) -> float:
-        """Get or set the Curve multiplier for surface emissivity; see *DEFINE_‌CURVE
+        """Get or set the Curve multiplier for surface emissivity; see *DEFINE_CURVE
         """ # nopep8
         return self._cards[6].get_value("semult")
 
@@ -356,10 +356,10 @@ class BoundaryRadiationEnclosure(KeywordBase):
 
     @property
     def loc(self) -> int:
-        """Get or set the Application of surface for thermal shell elements (see THSHEL in the *CONTROL_‌SHELL input):
-        EQ. - 1:	lower surface of thermal shell element
-        EQ.0 : middle surface of thermal shell element
-        EQ.1 : upper surface of thermal shell element
+        """Get or set the Application of surface for thermal shell elements (see THSHEL in the *CONTROL_SHELL input):
+        EQ. - 1: lower surface of thermal shell element
+        EQ.0: middle surface of thermal shell element
+        EQ.1: upper surface of thermal shell element
         """ # nopep8
         return self._cards[6].get_value("loc")
 

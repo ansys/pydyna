@@ -272,13 +272,13 @@ class LoadSeismicSsiDeconvId(KeywordBase):
 
     @property
     def vdir(self) -> int:
-        """Get or set the Vertical direction (local if CID ≠ 0) for ground motion propagation (DECONV option only):
-        EQ. - 1:	-x - direction
-        EQ. - 2 : -y - direction
-        EQ. - 3 : -z - direction
-        EQ.1 : x - direction
-        EQ.2 : y - direction
-        EQ.3 : z - direction
+        """Get or set the Vertical direction (local if CID  0) for ground motion propagation (DECONV option only):
+        EQ. - 1: -x - direction
+        EQ. - 2: -y - direction
+        EQ. - 3: -z - direction
+        EQ.1: x - direction
+        EQ.2: y - direction
+        EQ.3: z - direction
         """ # nopep8
         return self._cards[2].get_value("vdir")
 

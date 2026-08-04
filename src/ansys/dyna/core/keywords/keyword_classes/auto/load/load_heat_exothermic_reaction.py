@@ -30,7 +30,7 @@ from ansys.dyna.core.lib.keyword_base import LinkType
 _LOADHEATEXOTHERMICREACTION_CARD0 = (
     FieldSchema("hsid", int, 0, 10, None),
     FieldSchema("stype", int, 10, 10, None),
-    FieldSchema("nsid", int, 20, 10, None),
+    FieldSchema("esid", int, 20, 10, None),
     FieldSchema("bt", float, 30, 10, 0.0),
     FieldSchema("dt", float, 40, 10, 1e+16),
     FieldSchema("tmin", float, 50, 10, 0.0),
@@ -45,7 +45,7 @@ _LOADHEATEXOTHERMICREACTION_CARD1 = (
     FieldSchema("msei", float, 30, 10, 0.0),
     FieldSchema("hsei", float, 40, 10, 0.0),
     FieldSchema("wc", float, 50, 10, 0.0),
-    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
     FieldSchema("ru", float, 70, 10, 8.314),
 )
 
@@ -85,7 +85,7 @@ class LoadHeatExothermicReaction(KeywordBase):
     keyword = "LOAD"
     subkeyword = "HEAT_EXOTHERMIC_REACTION"
     _link_fields = {
-        "nsid": LinkType.SET_NODE,
+        "esid": LinkType.ELEMENT_SOLID,
     }
 
     def __init__(self, **kwargs):
@@ -127,8 +127,8 @@ class LoadHeatExothermicReaction(KeywordBase):
     @property
     def stype(self) -> typing.Optional[int]:
         """Get or set the Heat Source model type:
-        EQ.0 or EQ 1 : heat source defined by NREL's 4 - Equation model.See Remark 1.
-        EQ.2 : heat source defined by 1 - Equation model.See Remark 2.
+        EQ.0 or EQ 1: heat source defined by NREL's 4 - Equation model.See Remark 1.
+        EQ.2: heat source defined by 1 - Equation model.See Remark 2.
         """ # nopep8
         return self._cards[0].get_value("stype")
 
@@ -138,15 +138,15 @@ class LoadHeatExothermicReaction(KeywordBase):
         self._cards[0].set_value("stype", value)
 
     @property
-    def nsid(self) -> typing.Optional[int]:
-        """Get or set the Node Set ID.
+    def esid(self) -> typing.Optional[int]:
+        """Get or set the Solid Element set ID.
         """ # nopep8
-        return self._cards[0].get_value("nsid")
+        return self._cards[0].get_value("esid")
 
-    @nsid.setter
-    def nsid(self, value: int) -> None:
-        """Set the nsid property."""
-        self._cards[0].set_value("nsid", value)
+    @esid.setter
+    def esid(self, value: int) -> None:
+        """Set the esid property."""
+        self._cards[0].set_value("esid", value)
 
     @property
     def bt(self) -> float:
@@ -512,12 +512,7 @@ class LoadHeatExothermicReaction(KeywordBase):
         self._cards[4].set_value("we", value)
 
     @property
-    def nsid_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_NODE_* keyword for nsid."""
-        return self._get_set_link("NODE", self.nsid)
-
-    @nsid_link.setter
-    def nsid_link(self, value: KeywordBase) -> None:
-        """Set the SET_NODE_* keyword for nsid."""
-        self.nsid = value.sid
+    def esid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the ELEMENT keyword containing the given esid."""
+        return self._get_link_by_attr("ELEMENT", "eid", self.esid, "parts")
 

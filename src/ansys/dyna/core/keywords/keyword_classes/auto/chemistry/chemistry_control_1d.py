@@ -34,7 +34,7 @@ _CHEMISTRYCONTROL1D_CARD0 = (
 )
 
 _CHEMISTRYCONTROL1D_CARD1 = (
-    FieldSchema("file", str, 0, 256, None),
+    FieldSchema("file", str, 0, 80, None),
 )
 
 _CHEMISTRYCONTROL1D_CARD2 = (

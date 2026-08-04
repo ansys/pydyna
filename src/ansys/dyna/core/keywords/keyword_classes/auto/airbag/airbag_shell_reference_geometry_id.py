@@ -34,6 +34,7 @@ _AIRBAGSHELLREFERENCEGEOMETRYID_CARD0 = (
     FieldSchema("sy", float, 20, 10, None),
     FieldSchema("sz", float, 30, 10, None),
     FieldSchema("nid", int, 40, 10, None),
+    FieldSchema("iout", int, 50, 10, 0),
 )
 
 _AIRBAGSHELLREFERENCEGEOMETRYID_CARD1 = (
@@ -127,6 +128,21 @@ class AirbagShellReferenceGeometryId(KeywordBase):
     def nid(self, value: int) -> None:
         """Set the nid property."""
         self._cards[0].set_value("nid", value)
+
+    @property
+    def iout(self) -> int:
+        """Get or set the Flag for outputting the current reference node coordinates
+        EQ.0: Do not output the current reference node coordinates.
+        EQ.1: Store the current reference node coordinates for output to a keyword file
+        """ # nopep8
+        return self._cards[0].get_value("iout")
+
+    @iout.setter
+    def iout(self, value: int) -> None:
+        """Set the iout property."""
+        if value not in [0, 1, None]:
+            raise Exception("""iout must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("iout", value)
 
     @property
     def eid(self) -> typing.Optional[int]:

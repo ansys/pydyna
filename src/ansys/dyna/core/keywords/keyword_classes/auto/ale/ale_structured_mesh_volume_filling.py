@@ -35,7 +35,7 @@ _ALESTRUCTUREDMESHVOLUMEFILLING_CARD0 = (
     FieldSchema("unused", int, 30, 10, None),
     FieldSchema("nsample", int, 40, 10, 3),
     FieldSchema("unused", int, 50, 10, None),
-    FieldSchema("unused_", int, 60, 10, None, "unused-"),
+    FieldSchema("unused", int, 60, 10, None),
     FieldSchema("vid", int, 70, 10, 0),
 )
 
@@ -96,7 +96,7 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
     @property
     def nsample(self) -> int:
         """Get or set the Number of sampling points.  In case an element is partially filled, in each direction, 2 * NSAMPLE + 1 points are generated.
-        These (2*"NSAMPLE" +1)^3 points, each representing a volume, are used to determine if its volume is in or out.
+        These (2*"NSAMPLE" +1)**3 points, each representing a volume, are used to determine if its volume is in or out.
         """ # nopep8
         return self._cards[0].get_value("nsample")
 
@@ -104,17 +104,6 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
     def nsample(self, value: int) -> None:
         """Set the nsample property."""
         self._cards[0].set_value("nsample", value)
-
-    @property
-    def unused_(self) -> typing.Optional[int]:
-        """Get or set the -.
-        """ # nopep8
-        return self._cards[0].get_value("unused_")
-
-    @unused_.setter
-    def unused_(self, value: int) -> None:
-        """Set the unused_ property."""
-        self._cards[0].set_value("unused_", value)
 
     @property
     def vid(self) -> int:
@@ -130,23 +119,22 @@ class AleStructuredMeshVolumeFilling(KeywordBase):
 
     @property
     def geom(self) -> str:
-        """Get or set the Geometry types. They are: PARTSET, PART, SEGSET, PLANE, CYLINDER, BOXCOR, BOXCPT and SPHERE.
-        See the table below for more details.
+        """Get or set the Geometry types. They are: PARTSET, PART, SEGSET, PLANE, CYLINDER, BOXCOR, BOXCPT and ELLIPSOID. Refer to the table below for more information.
         """ # nopep8
         return self._cards[1].get_value("geom")
 
     @geom.setter
     def geom(self, value: str) -> None:
         """Set the geom property."""
-        if value not in ["ALL", "PARTSET", "PART", "SEGSET", "PLANE", "CYLINDER", "BOXCOR", "BOXCPT", "ELLIPSOID", None]:
-            raise Exception("""geom must be `None` or one of {"ALL","PARTSET","PART","SEGSET","PLANE","CYLINDER","BOXCOR","BOXCPT","ELLIPSOID"}.""")
+        if value not in ["ALL", "PARTSET", "PART", "SEGSET", "SLDSET", "SHLSET", "BEAMSET", "PLANE", "CYLINDER", "BOXCOR", "BOXCPT", "ELLIPSOID", None]:
+            raise Exception("""geom must be `None` or one of {"ALL","PARTSET","PART","SEGSET","SLDSET","SHLSET","BEAMSET","PLANE","CYLINDER","BOXCOR","BOXCPT","ELLIPSOID"}.""")
         self._cards[1].set_value("geom", value)
 
     @property
     def in_out(self) -> int:
-        """Get or set the To fill inside or outside of the geometry.  For PARTSET‌ / PART / SEGSET options, inside is taken as in the normal direction of the container’s segments (see Remark 1).
-        EQ.0:	Inside(default)
-        EQ.1 : Outside
+        """Get or set the To fill inside or outside of the geometry.  For the PARTSET, PART, SEGSET, SLDSET, SHLSET,BEAMSET, options, inside is taken as in the normal direction of the container's segments (see Remark 1).
+        EQ.0: Inside(default)
+        EQ.1: Outside
         """ # nopep8
         return self._cards[1].get_value("in_out")
 

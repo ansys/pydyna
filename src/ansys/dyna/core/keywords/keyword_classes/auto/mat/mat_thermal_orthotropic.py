@@ -135,9 +135,9 @@ class MatThermalOrthotropic(KeywordBase):
     @property
     def tgrlc(self) -> typing.Optional[int]:
         """Get or set the Thermal generation rate (see *DEFINE_CURVE):
-        GT.0:	Load curve ID defining thermal generation rate as a function of time
-        EQ.0 : Thermal generation rate is the constant multiplier, TGMULT.
-        LT.0 : | TGRLC | is a load curve ID giving thermal generation rate as a function of temperature.
+        GT.0: Load curve ID defining thermal generation rate as a function of time
+        EQ.0: Thermal generation rate is the constant multiplier, TGMULT.
+        LT.0: | TGRLC | is a load curve ID giving thermal generation rate as a function of temperature.
         """ # nopep8
         return self._cards[0].get_value("tgrlc")
 
@@ -164,8 +164,8 @@ class MatThermalOrthotropic(KeywordBase):
         EQ.0.0: locally orthotropic with material axes by element nodes N1, N2 and N4,
         EQ.1.0: locally orthotropic with material axes determined by a point in space and global location of element center,
         EQ.2.0: globally orthotropic with material axes determined by vectors.
-        EQ.3.0:	Locally orthotropic with first material axis orthogonal to element normal (defined by element nodes N1, N2 and N4) and to a vector d- Third material direction corresponds to element normal.
-        EQ.4.0:	Local orthogonal in cylindrical coordinates with the material axes determined by a vector d,and an originating point, P, which define the centerline axis.
+        EQ.3.0: Locally orthotropic with first material axis orthogonal to element normal (defined by element nodes N1, N2 and N4) and to a vector d- Third material direction corresponds to element normal.
+        EQ.4.0: Local orthogonal in cylindrical coordinates with the material axes determined by a vector d,and an originating point, P, which define the centerline axis.
         """ # nopep8
         return self._cards[0].get_value("aopt")
 

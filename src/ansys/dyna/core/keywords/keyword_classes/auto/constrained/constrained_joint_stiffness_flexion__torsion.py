@@ -36,6 +36,7 @@ _CONSTRAINEDJOINTSTIFFNESSFLEXION_TORSION_CARD0 = (
     FieldSchema("cida", int, 30, 10, None),
     FieldSchema("cidb", int, 40, 10, 0),
     FieldSchema("jid", int, 50, 10, None),
+    FieldSchema("rps", float, 60, 10, 1.0),
 )
 
 _CONSTRAINEDJOINTSTIFFNESSFLEXION_TORSION_CARD1 = (
@@ -165,6 +166,17 @@ class ConstrainedJointStiffnessFlexion_Torsion(KeywordBase):
     def jid(self, value: int) -> None:
         """Set the jid property."""
         self._cards[0].set_value("jid", value)
+
+    @property
+    def rps(self) -> float:
+        """Get or set the Relative penalty stiffness used for joint friction calculation. It is the same parameter as RPS in *CONSTRAINED_JOINT_TYPE. It only applies for keyword options TRANSLATIONAL and CYLINDRICAL. FS and FD must be defined in either Card 2c. 3 or Card 2d. 3.  It can be used to calculate the joint force, so we can define it here instead of in *CONSTRAINED_JOINT_TYPE.
+        """ # nopep8
+        return self._cards[0].get_value("rps")
+
+    @rps.setter
+    def rps(self, value: float) -> None:
+        """Set the rps property."""
+        self._cards[0].set_value("rps", value)
 
     @property
     def lcidal(self) -> int:

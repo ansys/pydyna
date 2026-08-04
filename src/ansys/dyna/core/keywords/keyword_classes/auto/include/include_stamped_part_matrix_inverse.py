@@ -47,6 +47,8 @@ _INCLUDESTAMPEDPARTMATRIXINVERSE_CARD2 = (
     FieldSchema("r12", float, 10, 10, None),
     FieldSchema("r13", float, 20, 10, None),
     FieldSchema("xp", float, 30, 10, None),
+    FieldSchema("tensor", int, 40, 10, 0),
+    FieldSchema("thkscl", float, 50, 10, 1.0),
 )
 
 _INCLUDESTAMPEDPARTMATRIXINVERSE_CARD3 = (
@@ -70,6 +72,7 @@ _INCLUDESTAMPEDPARTMATRIXINVERSE_CARD5 = (
     FieldSchema("iortho", int, 30, 10, None),
     FieldSchema("unused", int, 40, 10, None),
     FieldSchema("isrocut", int, 50, 10, None),
+    FieldSchema("mtype", int, 60, 10, None),
 )
 
 _INCLUDESTAMPEDPARTMATRIXINVERSE_CARD6 = (
@@ -135,8 +138,9 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
         ]
     @property
     def filename(self) -> typing.Optional[str]:
-        """Get or set the File name of file to be included in this keyword file.
-        Maximum 80 charcters. If the STAMPED_PART option is active, this is the DYNAIN file containing the results from metal stamping.
+        """Get or set the File name of file to be included in this keyword file.Maximum 80 charcters.
+        STAMPED_PART: the option is active, this is the DYNAIN file containing the results from metal stamping.
+        ISPG: Name of file containing the information about the ISPG models. Only one file can be included for each keyword ('*') card.
         """ # nopep8
         return self._cards[0].get_value("filename")
 
@@ -161,7 +165,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
         """Get or set the Thickness remap:
         EQ.0: map thickness
         EQ.1: do not map thickness
-        EQ.2:	Average value inside a circle defined by RMAX
+        EQ.2: Average value inside a circle defined by RMAX
         """ # nopep8
         return self._cards[1].get_value("thick")
 
@@ -177,7 +181,7 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
         """Get or set the Plastic strain remap:
         EQ.0: map plastic strain
         EQ.1: do not plastic strain
-        EQ.2:	Average value inside a circle defined by RMAX
+        EQ.2: Average value inside a circle defined by RMAX
         """ # nopep8
         return self._cards[1].get_value("pstrn")
 
@@ -208,9 +212,9 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
         """Get or set the Stress tensor remap:
         EQ.0: map stress tensorand history variables
         EQ.1:do not map stress tensor. only history varibales
-        EQ.2:	Do not map stress tensor or history variables
-        EQ. - 1:	Map stress tensor in an internal large format(binary files)
-        EQ. - 3 : Do not map stress tensor in an internal large format, only history variables(binary files)
+        EQ.2: Do not map stress tensor or history variables
+        EQ. - 1: Map stress tensor in an internal large format(binary files)
+        EQ. - 3: Do not map stress tensor in an internal large format, only history variables(binary files)
         """ # nopep8
         return self._cards[1].get_value("stress")
 
@@ -224,17 +228,18 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
     @property
     def incout(self) -> int:
         """Get or set the Save mapped data:
-        EQ.1:	Save the mapped data for the part / part set(PID) to a file called dyna.inc.This option is useful for when the mapped data may be required in a future simulation.
-        EQ.2 : Save the mapped data for the specified part or part set(PID) to a file called dynain_‌xx(xx is the part or part set ID).
-        EQ.3 : Save the mapped data for the specified part or part set(PID) to a file called nastran_‌xx(in nastran format).xx is the part or part set ID.
+        EQ.1: Save the mapped data for the part / part set(PID) to a file called dyna.inc.This option is useful for when the mapped data may be required in a future simulation.
+        EQ.2: Save the mapped data for the specified part or part set(PID) to a file called dynain_xx(xx is the part or part set ID).
+        EQ.3: Save the mapped data for the specified part or part set(PID) to a file called nastran_xx(in nastran format).xx is the part or part set ID./nEQ.4: 	Same as 2, but treated as an �only mapping� run, meaning, the calculation stops right after the data is mapped.
+        Note that INCOUT does not account for changes in the number of in - plane or through - thickness integration points.
         """ # nopep8
         return self._cards[1].get_value("incout")
 
     @incout.setter
     def incout(self, value: int) -> None:
         """Set the incout property."""
-        if value not in [0, 1, 2, 3, None]:
-            raise Exception("""incout must be `None` or one of {0,1,2,3}.""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""incout must be `None` or one of {0,1,2,3,4}.""")
         self._cards[1].set_value("incout", value)
 
     @property
@@ -291,6 +296,32 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
     def xp(self, value: float) -> None:
         """Set the xp property."""
         self._cards[2].set_value("xp", value)
+
+    @property
+    def tensor(self) -> int:
+        """Get or set the Tensor remap:
+        EQ.0: map tensor data from history variables.
+        EQ.1: Do not map tensor data from history variables.
+        """ # nopep8
+        return self._cards[2].get_value("tensor")
+
+    @tensor.setter
+    def tensor(self, value: int) -> None:
+        """Set the tensor property."""
+        if value not in [0, 1, None]:
+            raise Exception("""tensor must be `None` or one of {0,1}.""")
+        self._cards[2].set_value("tensor", value)
+
+    @property
+    def thkscl(self) -> float:
+        """Get or set the Thickness scale factor.
+        """ # nopep8
+        return self._cards[2].get_value("thkscl")
+
+    @thkscl.setter
+    def thkscl(self, value: float) -> None:
+        """Set the thkscl property."""
+        self._cards[2].set_value("thkscl", value)
 
     @property
     def r21(self) -> typing.Optional[float]:
@@ -438,8 +469,8 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
     @property
     def isrocut(self) -> typing.Optional[int]:
         """Get or set the Optional output of stamped part after transformation(s)
-        EQ.0:	No output is written.
-        NE.0 : Keyword output file “srcmsh_‌<ISRCOUT>” is created
+        EQ.0: No output is written.
+        NE.0: Keyword output file srcmsh_<ISRCOUT> is created
         """ # nopep8
         return self._cards[5].get_value("isrocut")
 
@@ -447,6 +478,17 @@ class IncludeStampedPartMatrixInverse(KeywordBase):
     def isrocut(self, value: int) -> None:
         """Set the isrocut property."""
         self._cards[5].set_value("isrocut", value)
+
+    @property
+    def mtype(self) -> typing.Optional[int]:
+        """Get or set the Expected material model. If given, the target part must have the material model given by MTYPE. Otherwise, an error termination occurs. Use the material number for MTYPE. Helpful, if history variables are mapped and an unintended replacement of the material model should be detected.
+        """ # nopep8
+        return self._cards[5].get_value("mtype")
+
+    @mtype.setter
+    def mtype(self, value: int) -> None:
+        """Set the mtype property."""
+        self._cards[5].set_value("mtype", value)
 
     @property
     def x01(self) -> typing.Optional[float]:

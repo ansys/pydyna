@@ -63,10 +63,10 @@ _MAT188_CARD2 = (
 )
 
 _MAT188_CARD3 = (
-    FieldSchema("lcc", float, 0, 10, None),
-    FieldSchema("lcp", float, 10, 10, None),
-    FieldSchema("lccr", float, 20, 10, None),
-    FieldSchema("lccx", float, 30, 10, None),
+    FieldSchema("lcc", int, 0, 10, None),
+    FieldSchema("lcp", int, 10, 10, None),
+    FieldSchema("lccr", int, 20, 10, None),
+    FieldSchema("lccx", int, 30, 10, None),
     FieldSchema("crpa", float, 40, 10, None),
     FieldSchema("crpb", float, 50, 10, None),
     FieldSchema("crpq", float, 60, 10, None),
@@ -90,7 +90,6 @@ class Mat188(KeywordBase):
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
-        "lcss": LinkType.DEFINE_CURVE,
         "lce": LinkType.DEFINE_CURVE,
         "lcpr": LinkType.DEFINE_CURVE,
         "lcsigy": LinkType.DEFINE_CURVE,
@@ -101,6 +100,7 @@ class Mat188(KeywordBase):
         "lcp": LinkType.DEFINE_CURVE,
         "lccr": LinkType.DEFINE_CURVE,
         "lccx": LinkType.DEFINE_CURVE,
+        "lcss": LinkType.DEFINE_CURVE_OR_TABLE,
     }
 
     def __init__(self, **kwargs):
@@ -404,52 +404,54 @@ class Mat188(KeywordBase):
         self._cards[2].set_value("lcalph", value)
 
     @property
-    def lcc(self) -> typing.Optional[float]:
+    def lcc(self) -> typing.Optional[int]:
         """Get or set the Load curve for scaling the viscous material parameter C as a function of temperature
         """ # nopep8
         return self._cards[3].get_value("lcc")
 
     @lcc.setter
-    def lcc(self, value: float) -> None:
+    def lcc(self, value: int) -> None:
         """Set the lcc property."""
         self._cards[3].set_value("lcc", value)
 
     @property
-    def lcp(self) -> typing.Optional[float]:
+    def lcp(self) -> typing.Optional[int]:
         """Get or set the Load curve for scaling the viscous material parameter P as a function of temperature
         """ # nopep8
         return self._cards[3].get_value("lcp")
 
     @lcp.setter
-    def lcp(self, value: float) -> None:
+    def lcp(self, value: int) -> None:
         """Set the lcp property."""
         self._cards[3].set_value("lcp", value)
 
     @property
-    def lccr(self) -> typing.Optional[float]:
+    def lccr(self) -> typing.Optional[int]:
         """Get or set the Load curve for scaling the isotropic hardening parameters CR1 and CR2 as a function of temperature
         """ # nopep8
         return self._cards[3].get_value("lccr")
 
     @lccr.setter
-    def lccr(self, value: float) -> None:
+    def lccr(self, value: int) -> None:
         """Set the lccr property."""
         self._cards[3].set_value("lccr", value)
 
     @property
-    def lccx(self) -> typing.Optional[float]:
+    def lccx(self) -> typing.Optional[int]:
         """Get or set the Load curve for scaling the kinematic hardening parameters CX1 and CX2 as a function of temperature
         """ # nopep8
         return self._cards[3].get_value("lccx")
 
     @lccx.setter
-    def lccx(self, value: float) -> None:
+    def lccx(self, value: int) -> None:
         """Set the lccx property."""
         self._cards[3].set_value("lccx", value)
 
     @property
     def crpa(self) -> typing.Optional[float]:
-        """Get or set the Constant A of Garafalo's hyperbolic sine creep law.
+        """Get or set the Creep law parameter A
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-CRPA) which defines A as a function of temperature, A(T).
         """ # nopep8
         return self._cards[3].get_value("crpa")
 
@@ -460,7 +462,9 @@ class Mat188(KeywordBase):
 
     @property
     def crpb(self) -> typing.Optional[float]:
-        """Get or set the Constant B of Garafalo's hyperbolic sine creep law.
+        """Get or set the Creep law parameter B
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-CRPB) which defines B as a function of temperature, B(T).
         """ # nopep8
         return self._cards[3].get_value("crpb")
 
@@ -471,7 +475,9 @@ class Mat188(KeywordBase):
 
     @property
     def crpq(self) -> typing.Optional[float]:
-        """Get or set the Constant Q of Garafalo's hyperbolic sine creep law.
+        """Get or set the Creep law parameter Q=E/R where E is the activation energy and R is the universal gas constant.
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-CRPQ) which defines Q as a function of temperature, Q(T).
         """ # nopep8
         return self._cards[3].get_value("crpq")
 
@@ -482,7 +488,9 @@ class Mat188(KeywordBase):
 
     @property
     def crpm(self) -> typing.Optional[float]:
-        """Get or set the Constant m of Garafalo's hyperbolic sine creep law.
+        """Get or set the Creep law parameter m
+        GT.0.0: Constant value
+        LT.0.0: Load curve ID = (-CRPM) which defines m as a function of temperature, m(T).
         """ # nopep8
         return self._cards[3].get_value("crpm")
 
@@ -519,21 +527,6 @@ class Mat188(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
-
-    @property
-    def lcss_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcss."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcss:
-                return kwd
-        return None
-
-    @lcss_link.setter
-    def lcss_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcss."""
-        self.lcss = value.lcid
 
     @property
     def lce_link(self) -> typing.Optional[DefineCurve]:
@@ -684,4 +677,28 @@ class Mat188(KeywordBase):
     def lccx_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lccx."""
         self.lccx = value.lcid
+
+    @property
+    def lcss_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcss."""
+        if self.deck is None:
+            return None
+        field_value = self.lcss
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcss_link.setter
+    def lcss_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcss."""
+        if hasattr(value, "lcid"):
+            self.lcss = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcss = value.tbid
 

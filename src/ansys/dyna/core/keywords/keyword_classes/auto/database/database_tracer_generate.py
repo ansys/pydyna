@@ -124,9 +124,9 @@ class DatabaseTracerGenerate(KeywordBase):
     @property
     def setype(self) -> int:
         """Get or set the Type of set (See Remark 2):
-        EQ.0:	solid set
-        EQ.1:	segment set
-        EQ.2:	node set
+        EQ.0: solid set
+        EQ.1: segment set
+        EQ.2: node set
         """ # nopep8
         return self._cards[0].get_value("setype")
 
@@ -162,18 +162,18 @@ class DatabaseTracerGenerate(KeywordBase):
     @property
     def varloc(self) -> int:
         """Get or set the Variable location in trcrgen_binout to be replaced with the variable specified in the VALTYPE2 field:
-        EQ.4:	-velocity
-        EQ.5:	-velocity
-        EQ.6:	-velocity
-        EQ.7:	-stress
-        EQ.8:	-stress
-        EQ.9:	-stress
-        EQ.10:	-stress
-        EQ.11:	-stress
-        EQ.12:	-stress
-        EQ.13:	plastic strain
-        EQ.14:	density
-        EQ.15:	relative volume
+        EQ.4: -velocity
+        EQ.5: -velocity
+        EQ.6: -velocity
+        EQ.7: -stress
+        EQ.8: -stress
+        EQ.9: -stress
+        EQ.10: -stress
+        EQ.11: -stress
+        EQ.12: -stress
+        EQ.13: plastic strain
+        EQ.14: density
+        EQ.15: relative volume
         """ # nopep8
         return self._cards[1].get_value("varloc")
 
@@ -185,36 +185,36 @@ class DatabaseTracerGenerate(KeywordBase):
     @property
     def valtype2(self) -> int:
         """Get or set the Data to be output to the trcrgen_binout file.  The interpretation of VALTYPE1 and VALTYPE2 is enumerated in the following list:
-        EQ.1:	-stress
-        EQ.2:	-stress
-        EQ.3:	-stress
-        EQ.4:	-stress
-        EQ.5:	-stress
-        EQ.6:	-stress
-        EQ.7:	plastic strain
-        EQ.8:	internal energy
-        EQ.9:	bulk viscosity
-        EQ.10:	relative volume
-        GE.11 and LE.19:	other auxiliary variables
-        EQ.20:	pressure
-        EQ.21:	density
-        EQ.22:	material volume
-        EQ.23:	compression ratio
-        EQ.24:	element volume fraction.
-        EQ.25:	nodal volume fraction
-        EQ.26:	-position
-        EQ.27:	-position
-        EQ.28:	-position
-        EQ.29:	-velocity
-        EQ.30:	-velocity
-        EQ.31:	-velocity
-        EQ.31:	velocity
-        EQ.33:	-acceleration
-        EQ.34:	- acceleration
-        EQ.35:	- acceleration
-        EQ.36:	acceleration
-        EQ.37:	nodal mass
-        EQ.38:	nodal temperature.
+        EQ.1: -stress
+        EQ.2: -stress
+        EQ.3: -stress
+        EQ.4: -stress
+        EQ.5: -stress
+        EQ.6: -stress
+        EQ.7: plastic strain
+        EQ.8: internal energy
+        EQ.9: bulk viscosity
+        EQ.10: relative volume
+        GE.11 and LE.19: other auxiliary variables
+        EQ.20: pressure
+        EQ.21: density
+        EQ.22: material volume
+        EQ.23: compression ratio
+        EQ.24: element volume fraction.
+        EQ.25: nodal volume fraction
+        EQ.26: -position
+        EQ.27: -position
+        EQ.28: -position
+        EQ.29: -velocity
+        EQ.30: -velocity
+        EQ.31: -velocity
+        EQ.31: velocity
+        EQ.33: -acceleration
+        EQ.34: - acceleration
+        EQ.35: - acceleration
+        EQ.36: acceleration
+        EQ.37: nodal mass
+        EQ.38: nodal temperature.
         """ # nopep8
         return self._cards[1].get_value("valtype2")
 

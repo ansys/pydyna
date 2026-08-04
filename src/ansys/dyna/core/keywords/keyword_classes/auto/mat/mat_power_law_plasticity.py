@@ -39,9 +39,9 @@ _MATPOWERLAWPLASTICITY_CARD0 = (
 )
 
 _MATPOWERLAWPLASTICITY_CARD1 = (
-    FieldSchema("sigy", float, 0, 10, None),
-    FieldSchema("vp", float, 10, 10, 0.0),
-    FieldSchema("epsf", float, 20, 10, None),
+    FieldSchema("sigy", float, 0, 10, 0.0),
+    FieldSchema("epsf", float, 10, 10, 0.0),
+    FieldSchema("vp", float, 20, 10, 0.0),
 )
 
 _MATPOWERLAWPLASTICITY_OPTION0_CARD0 = (
@@ -149,8 +149,7 @@ class MatPowerLawPlasticity(KeywordBase):
 
     @property
     def src(self) -> typing.Optional[float]:
-        """Get or set the Strain rate parameter, C.
-        EQ.0: rate effects are ignored.
+        """Get or set the Strain rate parameter, C. If zero, rate effects are ignored.
         """ # nopep8
         return self._cards[0].get_value("src")
 
@@ -161,8 +160,7 @@ class MatPowerLawPlasticity(KeywordBase):
 
     @property
     def srp(self) -> typing.Optional[float]:
-        """Get or set the Strain rate parameter, P.
-        EQ.0: rate effects are ignored.
+        """Get or set the Strain rate parameter, P. If zero, rate effects are ignored.
         """ # nopep8
         return self._cards[0].get_value("srp")
 
@@ -172,10 +170,12 @@ class MatPowerLawPlasticity(KeywordBase):
         self._cards[0].set_value("srp", value)
 
     @property
-    def sigy(self) -> typing.Optional[float]:
-        """Get or set the Optional input parameter for defining the initial yield stress. The strain to yield is calculated as described in keyword manual page 75 (volume two).
-        LT.0.02: epsilon-yp = SIGY
-        GE.0.02: Please see keyword manual page 75 (volume two).
+    def sigy(self) -> float:
+        """Get or set the Optional input parameter for defining the initial yield stress, σ(y,0). Generally, this parameter is not necessary
+        and the elastic strain to initial yield, ε0, is calculated as described in the remarks section below.
+        EQ.0.0: ε0 is internally calculated. See Remarks.
+        GT.0.0.and.LT.0.02: ε0 is SIGY.
+        GE.0.02: ε0 is internally calculated with σ(y,0) = SIGY. See Remarks
         """ # nopep8
         return self._cards[1].get_value("sigy")
 
@@ -183,6 +183,17 @@ class MatPowerLawPlasticity(KeywordBase):
     def sigy(self, value: float) -> None:
         """Set the sigy property."""
         self._cards[1].set_value("sigy", value)
+
+    @property
+    def epsf(self) -> float:
+        """Get or set the Plastic failure strain for element deletion.
+        """ # nopep8
+        return self._cards[1].get_value("epsf")
+
+    @epsf.setter
+    def epsf(self, value: float) -> None:
+        """Set the epsf property."""
+        self._cards[1].set_value("epsf", value)
 
     @property
     def vp(self) -> float:
@@ -198,17 +209,6 @@ class MatPowerLawPlasticity(KeywordBase):
         if value not in [0.0, 1.0, None]:
             raise Exception("""vp must be `None` or one of {0.0,1.0}.""")
         self._cards[1].set_value("vp", value)
-
-    @property
-    def epsf(self) -> typing.Optional[float]:
-        """Get or set the Plastic failure strain for element deletion.
-        """ # nopep8
-        return self._cards[1].get_value("epsf")
-
-    @epsf.setter
-    def epsf(self, value: float) -> None:
-        """Set the epsf property."""
-        self._cards[1].set_value("epsf", value)
 
     @property
     def title(self) -> typing.Optional[str]:

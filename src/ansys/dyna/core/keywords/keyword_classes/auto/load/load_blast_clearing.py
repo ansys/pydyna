@@ -66,7 +66,7 @@ class LoadBlastClearing(KeywordBase):
         ]
     @property
     def bid(self) -> typing.Optional[int]:
-        """Get or set the Blast source ID .
+        """Get or set the Blast source ID (see *LOAD_?BLAST_?ENHANCED)
         """ # nopep8
         return self._cards[0].get_value("bid")
 

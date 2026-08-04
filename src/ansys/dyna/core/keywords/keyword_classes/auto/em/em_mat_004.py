@@ -38,6 +38,17 @@ _EMMAT004_CARD0 = (
     FieldSchema("deatht", float, 70, 10, 1e+28),
 )
 
+_EMMAT004_CARD1 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("unused", float, 10, 10, None),
+    FieldSchema("epsrr", float, 20, 10, None),
+    FieldSchema("eosid2", int, 30, 10, None),
+    FieldSchema("epsri", float, 40, 10, None),
+    FieldSchema("epsid3", int, 50, 10, None),
+    FieldSchema("unused", float, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
+)
+
 class EmMat004(KeywordBase):
     """DYNA EM_MAT_004 keyword"""
 
@@ -55,10 +66,14 @@ class EmMat004(KeywordBase):
                 _EMMAT004_CARD0,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _EMMAT004_CARD1,
+                **kwargs,
+            ),
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material ID: refers to MID in the *PART card.
+        """Get or set the Material ID. For all MTYPE except MTYPE = 3, MID must reference a *MAT material since the electromagnetic properties are added onto the *MAT properties. If MTYPE = 3, MID can be left blank for the electromagnetic properties to apply to the entire ICFD fluid or it can be the PID of a *ICFD_PART_VOL to apply to an ICFD fluid part. See Remark 1.
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -71,8 +86,9 @@ class EmMat004(KeywordBase):
     def mtype(self) -> int:
         """Get or set the Defines the electromagnetism type of the material:
         EQ.0: Air or vacuum
-        EQ.1: Insulator material: these materials have the same electromagnetism behavior as EQ.0
+        EQ.1: Insulator material: These materials have the same electromagnetism behavior as MTYPE=0
         EQ.2: Conductor carrying a source. In these conductors, the eddy current problem is solved, which gives the actual current density. Typically, this would correspond to the coil.
+        EQ.3: Fluid conductor. In this case, MID refers to the ID given in *ICFD_PART_VOL. Note that this is only available for ICFD in 2D. See Remark 2.
         EQ.4: Conductor not connected to any current or voltage source, where the Eddy current problem is solved. Typically, this would correspond to the workpiece
         .
         """ # nopep8
@@ -81,8 +97,8 @@ class EmMat004(KeywordBase):
     @mtype.setter
     def mtype(self, value: int) -> None:
         """Set the mtype property."""
-        if value not in [0, 1, 2, 4, None]:
-            raise Exception("""mtype must be `None` or one of {0,1,2,4}.""")
+        if value not in [0, 1, 2, 3, 4, None]:
+            raise Exception("""mtype must be `None` or one of {0,1,2,3,4}.""")
         self._cards[0].set_value("mtype", value)
 
     @property
@@ -109,7 +125,7 @@ class EmMat004(KeywordBase):
 
     @property
     def nele(self) -> int:
-        """Get or set the Number of elements in the thickness of the shell. It is up to the user to make sure his mesh is fine enough to correctly capture the inductive-diffusive effects (see skin depth definition).
+        """Get or set the Number of elements in the thickness of the shell. Note that you must make sure your mesh is fine enough to capture the inductive-diffusive effects correctly (see the skin depth definition).
         """ # nopep8
         return self._cards[0].get_value("nele")
 
@@ -131,7 +147,7 @@ class EmMat004(KeywordBase):
 
     @property
     def eosmu(self) -> typing.Optional[int]:
-        """Get or set the ID of the EOS to be used to define the nonlinear behavior of μ. Note: if EOSMU is defined, MUREL will be used for the initial value only. See EM_EOS_PERMEABILITY.
+        """Get or set the ID of the EOS to be used to define the nonlinear behavior of . Note that: if EOSMU is defined, MUREL will be used for the initial value only. See EM_EOS_PERMEABILITY.
         """ # nopep8
         return self._cards[0].get_value("eosmu")
 
@@ -145,7 +161,7 @@ class EmMat004(KeywordBase):
         """Get or set the Death time for the material. After DEATHT, the material will no longer be considered a conductor and will be removed from the EM solve.
         If a negative value is entered, a *DEFINE_FUNCTION will be expected. The following parameters are allowed:
         (vx, vy, vz, temp, vol, mass, Ex, Ey, Ez, Bx, By, Bz, Fx, Fy, Fz, JHrate, time). Fx, Fy, and Fz refer to the components of the Lorentz force vector.
-        A negative value returned by the *DEFINE_‌FUNCTION corresponds to a ‘dead’ or inactive element. Once an element has been removed from the EM solve, it cannot return.
+        A negative value returned by the *DEFINE_FUNCTION corresponds to a dead or inactive element. Once an element has been removed from the EM solve, it cannot return.
         """ # nopep8
         return self._cards[0].get_value("deatht")
 
@@ -153,6 +169,50 @@ class EmMat004(KeywordBase):
     def deatht(self, value: float) -> None:
         """Set the deatht property."""
         self._cards[0].set_value("deatht", value)
+
+    @property
+    def epsrr(self) -> typing.Optional[float]:
+        """Get or set the Real and imaginary parts of the relative permeability (dielectric constant and dielectric loss terms).In cases that use the quasi-static electrostatic solver, EPSRR directly represents the relative permeability.
+        """ # nopep8
+        return self._cards[1].get_value("epsrr")
+
+    @epsrr.setter
+    def epsrr(self, value: float) -> None:
+        """Set the epsrr property."""
+        self._cards[1].set_value("epsrr", value)
+
+    @property
+    def eosid2(self) -> typing.Optional[int]:
+        """Get or set the Optional IDs defining equations of states for EPSRR and EPSRI respectively
+        """ # nopep8
+        return self._cards[1].get_value("eosid2")
+
+    @eosid2.setter
+    def eosid2(self, value: int) -> None:
+        """Set the eosid2 property."""
+        self._cards[1].set_value("eosid2", value)
+
+    @property
+    def epsri(self) -> typing.Optional[float]:
+        """Get or set the Real and imaginary parts of the relative permeability (dielectric constant and dielectric loss terms).In cases that use the quasi-static electrostatic solver, EPSRR directly represents the relative permeability.
+        """ # nopep8
+        return self._cards[1].get_value("epsri")
+
+    @epsri.setter
+    def epsri(self, value: float) -> None:
+        """Set the epsri property."""
+        self._cards[1].set_value("epsri", value)
+
+    @property
+    def epsid3(self) -> typing.Optional[int]:
+        """Get or set the Optional IDs defining equations of states for EPSRR and EPSRI respectively
+        """ # nopep8
+        return self._cards[1].get_value("epsid3")
+
+    @epsid3.setter
+    def epsid3(self, value: int) -> None:
+        """Set the epsid3 property."""
+        self._cards[1].set_value("epsid3", value)
 
     @property
     def mid_link(self) -> typing.Optional[KeywordBase]:

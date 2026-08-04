@@ -75,6 +75,7 @@ _MAT079_CARD4 = (
     FieldSchema("sigth", float, 0, 10, None),
     FieldSchema("sigr", float, 10, 10, None),
     FieldSchema("chi", float, 20, 10, None),
+    FieldSchema("tpinit", float, 30, 10, None),
 )
 
 _MAT079_OPTION0_CARD0 = (
@@ -177,7 +178,7 @@ class Mat079(KeywordBase):
 
     @property
     def b(self) -> typing.Optional[float]:
-        """Get or set the Exponent for pressure-sensitive modulis b. b must lie in the range 0 <= b < 1. Values close to 1 are not recommended because the pressure becomes indeterminate.
+        """Get or set the Exponent for the pressure-sensitive elastic moduli, b. B must be in the range 0<=B<1. We do not recommend values too close to 1 because the pressure becomes indeterminate. See Remark 1.
         """ # nopep8
         return self._cards[0].get_value("b")
 
@@ -245,7 +246,7 @@ class Mat079(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining shear strain verses shear stress. Upto 20 points may be defined in the load curve. See *DEFINE_CURVE.
+        """Get or set the Load curve ID defining shear strain verses shear stress. Upto 20 points may be specified in the load curve. See *DEFINE_CURVE.
         """ # nopep8
         return self._cards[1].get_value("lcid")
 
@@ -366,7 +367,7 @@ class Mat079(KeywordBase):
 
     @property
     def lcd(self) -> typing.Optional[int]:
-        """Get or set the Optional load curve ID defining damping ratio of hysteresis at different strain amplitudes (overrides Masing rules for unload/reload).  The x-axis is shear strain; the y-axis is the damping ratio (such as 0.05 for 5% damping). The strains (x-axis values) of curve LCD must be identical to those of curve LCID.
+        """Get or set the Optional load curve ID defining damping ratio of hysteresis at different strain amplitudes (overrides Masing rules for unload/reload). The x-axis is shear strain; the y-axis is the damping ratio (such as 0.05 for 5% damping). The strains (x-axis values) of curve LCD must be identical to those of curve LCID.
         """ # nopep8
         return self._cards[2].get_value("lcd")
 
@@ -377,7 +378,7 @@ class Mat079(KeywordBase):
 
     @property
     def lcsr(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining plastic strain rate scaling effect on yield stress. See *DEFINE_CURVE.  The x-axis is plastic strain rate; the y-axis is the yield enhancement factor.
+        """Get or set the Load curve ID defining plastic strain rate scaling effect on yield stress. See *DEFINE_CURVE. The x-axis is plastic strain rate; the y-axis is the yield enhancement factor.
         """ # nopep8
         return self._cards[2].get_value("lcsr")
 
@@ -388,7 +389,7 @@ class Mat079(KeywordBase):
 
     @property
     def pinit(self) -> int:
-        """Get or set the Flag for pressure sensitivity (B and A0, A1, A2 equations):
+        """Get or set the Flag for pressure sensitivity. Positive values apply to both B (elastic stiffness scaling) and the A0, A1, A2 equations (strength scaling). Negative values apply only to B, while the A0, A1, A2 equations use the current pressure like PINIT = 0. See TPINIT below for changing the time at which PINIT applies. See section Pressure Sensitivity below.:
         EQ.0: Use current pressure (will vary during the analysis)
         EQ.1: Use pressure from initial stress state
         EQ.2: Use initial "plane stress" pressure
@@ -501,6 +502,17 @@ class Mat079(KeywordBase):
     def chi(self, value: float) -> None:
         """Set the chi property."""
         self._cards[4].set_value("chi", value)
+
+    @property
+    def tpinit(self) -> typing.Optional[float]:
+        """Get or set the Time at which PINIT applies. See section Pressure Sensitivity below.
+        """ # nopep8
+        return self._cards[4].get_value("tpinit")
+
+    @tpinit.setter
+    def tpinit(self, value: float) -> None:
+        """Set the tpinit property."""
+        self._cards[4].set_value("tpinit", value)
 
     @property
     def title(self) -> typing.Optional[str]:

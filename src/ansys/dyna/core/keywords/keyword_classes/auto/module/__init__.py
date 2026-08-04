@@ -23,6 +23,8 @@
 # Auto-generated imports for module domain
 
 from .module_load import ModuleLoad
+from .module_load_dp import ModuleLoadDp
+from .module_load_sp import ModuleLoadSp
 from .module_path import ModulePath
 from .module_path_relative import ModulePathRelative
 from .module_use import ModuleUse

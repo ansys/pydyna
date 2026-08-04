@@ -33,7 +33,7 @@ _CONTROLIMPLICITAUTO_CARD0 = (
     FieldSchema("dtmin", float, 30, 10, None),
     FieldSchema("dtmax", float, 40, 10, None),
     FieldSchema("dtexp", float, 50, 10, None),
-    FieldSchema("kfail", int, 60, 10, None),
+    FieldSchema("kfail", int, 60, 10, 1),
     FieldSchema("kcycle", int, 70, 10, None),
 )
 
@@ -71,11 +71,11 @@ class ControlImplicitAuto(KeywordBase):
     @property
     def iauto(self) -> int:
         """Get or set the Automatic time step control flag
-        EQ.0:	constant time step size
-        EQ.1 : automatically adjust time step size
-        EQ.2 : automatically adjust time step size and synchronize with thermal mechanical time step.
-        EQ.3 : same as 1, but accounting for mid step residual values with respect to parameters on card 2 and according to the Remark for IAUTO.
-        LT.0 : Curve ID = (-IAUTO) gives time step size as a function of time.If specified, DTMIN and DTMAX will still be applied
+        EQ.0: constant time step size
+        EQ.1: automatically adjust time step size
+        EQ.2: automatically adjust time step size and synchronize with thermal mechanical time step.
+        EQ.3: same as 1, but accounting for mid step residual values with respect to parameters on card 2 and according to the Remark for IAUTO.
+        LT.0: Curve ID = (-IAUTO) gives time step size as a function of time.If specified, DTMIN and DTMAX will still be applied
         """ # nopep8
         return self._cards[0].get_value("iauto")
 
@@ -109,7 +109,7 @@ class ControlImplicitAuto(KeywordBase):
     @property
     def dtmin(self) -> typing.Optional[float]:
         """Get or set the Minimum allowable time step size.  Simulation stops with error termination if time step falls below DTMIN.
-        LT.0:	enable automatic key point generation.Minimum allowable time step is |DTMIN|.
+        LT.0: enable automatic key point generation.Minimum allowable time step is |DTMIN|.
         """ # nopep8
         return self._cards[0].get_value("dtmin")
 
@@ -121,6 +121,7 @@ class ControlImplicitAuto(KeywordBase):
     @property
     def dtmax(self) -> typing.Optional[float]:
         """Get or set the Maximum allowable time step size (default = DT*10).
+        LT.0: curve ID = (-DTMAX) gives max step size as a function of time.  Also, the step size is adjusted automatically so that the time value of each point in the curve is reached exactly.
         """ # nopep8
         return self._cards[0].get_value("dtmax")
 
@@ -132,9 +133,10 @@ class ControlImplicitAuto(KeywordBase):
     @property
     def dtexp(self) -> typing.Optional[float]:
         """Get or set the Time interval to run in explicit mode before returning to implicit mode.
-        Applies only when automatic implicit-explicit switching is active (IMFLAG= 4 or 5 on *CONTROL_IMPLICIT_GENERAL).  Also, see KCYCLE.
-        EQ.0:	defaults to the current implicit time step size.
-        LT.0 : curve ID = (-DTEXP) gives the time interval as a function of time.
+        Applies only when automatic implicit-explicit switching is active (IMFLAG= 4 or 5 on *CONTROL_IMPLICIT_GENERAL).
+        Also, see KCYCLE.
+        EQ.0: defaults to the current implicit time step size.
+        LT.0: curve ID = (-DTEXP) gives the time interval as a function of time.
         """ # nopep8
         return self._cards[0].get_value("dtexp")
 
@@ -144,7 +146,7 @@ class ControlImplicitAuto(KeywordBase):
         self._cards[0].set_value("dtexp", value)
 
     @property
-    def kfail(self) -> typing.Optional[int]:
+    def kfail(self) -> int:
         """Get or set the Number of failed attempts to converge implicitly for the current time
         step before automatically switching to explicit time integration.
         Applies only when automatic implicit-explicit switching is active. The
@@ -172,8 +174,8 @@ class ControlImplicitAuto(KeywordBase):
 
     @property
     def hcmin(self) -> typing.Optional[float]:
-        """Get or set the Mid-point relative Euclidian residual norm min and max tolerance, to be seen as a confidence interval, see Remark for IAUTO = 3.
-        Only active if RCTOL on *CONTROL_‌IMPLICIT_‌SOLUTION is set.
+        """Get or set the Mid-point relative Euclidian residual norm min and max tolerance, to be seen as a confidence interval, see Remark for IAUTO = 3.
+        Only active if RCTOL on *CONTROL_IMPLICIT_SOLUTION is set.
         """ # nopep8
         return self._cards[1].get_value("hcmin")
 
@@ -184,8 +186,8 @@ class ControlImplicitAuto(KeywordBase):
 
     @property
     def hcmax(self) -> typing.Optional[float]:
-        """Get or set the Mid-point relative Euclidian residual norm min and max tolerance, to be seen as a confidence interval, see Remark for IAUTO = 3.
-        Only active if RCTOL on *CONTROL_‌IMPLICIT_‌SOLUTION is set.
+        """Get or set the Mid-point relative Euclidian residual norm min and max tolerance, to be seen as a confidence interval, see Remark for IAUTO = 3.
+        Only active if RCTOL on *CONTROL_IMPLICIT_SOLUTION is set.
         """ # nopep8
         return self._cards[1].get_value("hcmax")
 
@@ -196,8 +198,8 @@ class ControlImplicitAuto(KeywordBase):
 
     @property
     def hmmin(self) -> typing.Optional[float]:
-        """Get or set the Mid-point relative maximum residual norm min and max tolerance, to be seen as a confidence interval, see Remark for IAUTO = 3.
-        Only active if RMTOL on *CONTROL_‌IMPLICIT_‌SOLUTION is set.
+        """Get or set the Mid-point relative maximum residual norm min and max tolerance, to be seen as a confidence interval, see Remark for IAUTO = 3.
+        Only active if RMTOL on *CONTROL_IMPLICIT_SOLUTION is set.
         """ # nopep8
         return self._cards[1].get_value("hmmin")
 
@@ -208,8 +210,8 @@ class ControlImplicitAuto(KeywordBase):
 
     @property
     def hmmax(self) -> typing.Optional[float]:
-        """Get or set the Mid-point relative maximum residual norm min and max tolerance, to be seen as a confidence interval, see Remark for IAUTO = 3.
-        Only active if RMTOL on *CONTROL_‌IMPLICIT_‌SOLUTION is set.
+        """Get or set the Mid-point relative maximum residual norm min and max tolerance, to be seen as a confidence interval, see Remark for IAUTO = 3.
+        Only active if RMTOL on *CONTROL_IMPLICIT_SOLUTION is set.
         """ # nopep8
         return self._cards[1].get_value("hmmax")
 
@@ -220,8 +222,8 @@ class ControlImplicitAuto(KeywordBase):
 
     @property
     def hntmax(self) -> typing.Optional[float]:
-        """Get or set the Mid-point absolute Nodal Translational norm tolerance, see Remark for IAUTO = 3.
-        Only active if NTTOL on *CONTROL_‌IMPLICIT_‌SOLUTION is set.
+        """Get or set the Mid-point absolute Nodal Translational norm tolerance, see Remark for IAUTO = 3.
+        Only active if NTTOL on *CONTROL_IMPLICIT_SOLUTION is set.
         """ # nopep8
         return self._cards[1].get_value("hntmax")
 
@@ -232,8 +234,8 @@ class ControlImplicitAuto(KeywordBase):
 
     @property
     def hnrmax(self) -> typing.Optional[float]:
-        """Get or set the Mid-point absolute Nodal Rotational norm tolerance, see Remark for IAUTO = 3.
-        Only active if NRTOL on *CONTROL_‌IMPLICIT_‌SOLUTION is set.
+        """Get or set the Mid-point absolute Nodal Rotational norm tolerance, see Remark for IAUTO = 3.
+        Only active if NRTOL on *CONTROL_IMPLICIT_SOLUTION is set.
         """ # nopep8
         return self._cards[1].get_value("hnrmax")
 
@@ -244,8 +246,8 @@ class ControlImplicitAuto(KeywordBase):
 
     @property
     def hrtmax(self) -> typing.Optional[float]:
-        """Get or set the Mid-point absolute Rigid body Translational norm tolerance, see Remark for IAUTO = 3.
-        Only active if RTTOL on *CONTROL_‌IMPLICIT_‌SOLUTION is set.
+        """Get or set the Mid-point absolute Rigid body Translational norm tolerance, see Remark for IAUTO = 3.
+        Only active if RTTOL on *CONTROL_IMPLICIT_SOLUTION is set.
         """ # nopep8
         return self._cards[1].get_value("hrtmax")
 
@@ -257,7 +259,7 @@ class ControlImplicitAuto(KeywordBase):
     @property
     def hrrmax(self) -> typing.Optional[float]:
         """Get or set the Mid-point absolute Rigid body Rotational norm tolerance, see Remark for IAUTO=3.
-        Only active if RRTOL on *CONTROL_‌IMPLICIT_‌SOLUTION is set.
+        Only active if RRTOL on *CONTROL_IMPLICIT_SOLUTION is set.
         """ # nopep8
         return self._cards[1].get_value("hrrmax")
 

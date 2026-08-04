@@ -74,16 +74,9 @@ class AleUpSwitch(KeywordBase):
         ]
     @property
     def upid(self) -> int:
-        """Get or set the An ID defines a corresponding *AIRBAG_HYBRID_ID card for use in
-        an ALE-method-switching-to-CV-method simulation. The simulation
-        starts with ALE computational method, then switches to a CV (or UP)
-        method at some given time.
-        EQ.0: (or blank) The code will construct an equivalent
-        *AIRBAG_HYBRID_ID card automatically internally, (default).
-        The 3rd optional line is then a required input.
-        NE.0: An ID points to a corresponding *AIRBAG_HYBRID_ID
-        card which must be defined for use after the switch. If UPID is
-        defined, do not define the 3rd optional card.
+        """Get or set the ID corresponding to an instantiation of *AIRBAG_HYBRID_ID card for use in an ALE or S-ALE method switching to CV method simulation.  The simulation starts with the ALE or S-ALE computational method and then switches to a CV (or UP) method at some given time.
+        EQ.0: The code constructs an equivalent *AIRBAG_HYBRID_ID card automatically internally (default).  Card 3 is then a required input.
+        NE.0: An ID points to a corresponding *AIRBAG_HYBRID_ID card which must be defined for use after the switch.If UPID is defined, do not define Card 3.
         """ # nopep8
         return self._cards[0].get_value("upid")
 
@@ -94,7 +87,7 @@ class AleUpSwitch(KeywordBase):
 
     @property
     def swtime(self) -> float:
-        """Get or set the The time at which the computation does a switch from an ALE-method-to-CV-method.
+        """Get or set the The time at which the computation does a switch from an ALE or S-ALE method to CV method.
         """ # nopep8
         return self._cards[0].get_value("swtime")
 
@@ -105,8 +98,7 @@ class AleUpSwitch(KeywordBase):
 
     @property
     def fsi_id1(self) -> int:
-        """Get or set the Coupling IDs for one or more ALE fluid-structure-interaction (FSI)
-        *CONSTRAINED_LAGRANGE_IN_SOLID_ID cards. These couplings are deleted during the 2nd, CV computational phase.
+        """Get or set the Coupling IDs for one or more ALE fluid-structure-interaction (FSI) *CONSTRAINED_LAGRANGE_IN_SOLID_ID cards or S-ALE FSI *ALE_STRUCTURED_FSI_TITLE cards . These couplings are deleted during the 2nd, CV computational phase.
         """ # nopep8
         return self._cards[1].get_value("fsi_id1")
 
@@ -117,8 +109,7 @@ class AleUpSwitch(KeywordBase):
 
     @property
     def fsi_id2(self) -> int:
-        """Get or set the Coupling IDs for one or more ALE fluid-structure-interaction (FSI)
-        *CONSTRAINED_LAGRANGE_IN_SOLID_ID cards. These couplings are deleted during the 2nd, CV computational phase.
+        """Get or set the Coupling IDs for one or more ALE fluid-structure-interaction (FSI) *CONSTRAINED_LAGRANGE_IN_SOLID_ID cards or S-ALE FSI *ALE_STRUCTURED_FSI_TITLE cards . These couplings are deleted during the 2nd, CV computational phase.
         """ # nopep8
         return self._cards[1].get_value("fsi_id2")
 
@@ -129,8 +120,7 @@ class AleUpSwitch(KeywordBase):
 
     @property
     def fsi_id3(self) -> int:
-        """Get or set the Coupling IDs for one or more ALE fluid-structure-interaction (FSI)
-        *CONSTRAINED_LAGRANGE_IN_SOLID_ID cards. These couplings are deleted during the 2nd, CV computational phase
+        """Get or set the Coupling IDs for one or more ALE fluid-structure-interaction (FSI) *CONSTRAINED_LAGRANGE_IN_SOLID_ID cards or S-ALE FSI *ALE_STRUCTURED_FSI_TITLE cards . These couplings are deleted during the 2nd, CV computational phase
         """ # nopep8
         return self._cards[1].get_value("fsi_id3")
 
@@ -141,8 +131,7 @@ class AleUpSwitch(KeywordBase):
 
     @property
     def fsi_id4(self) -> int:
-        """Get or set the Coupling IDs for one or more ALE fluid-structure-interaction (FSI)
-        *CONSTRAINED_LAGRANGE_IN_SOLID_ID cards. These couplings are deleted during the 2nd, CV computational phase.
+        """Get or set the Coupling IDs for one or more ALE fluid-structure-interaction (FSI) *CONSTRAINED_LAGRANGE_IN_SOLID_ID cards or S-ALE FSI *ALE_STRUCTURED_FSI_TITLE cards . These couplings are deleted during the 2nd, CV computational phase.
         """ # nopep8
         return self._cards[1].get_value("fsi_id4")
 
@@ -153,8 +142,7 @@ class AleUpSwitch(KeywordBase):
 
     @property
     def fsi_id5(self) -> int:
-        """Get or set the Coupling IDs for one or more ALE fluid-structure-interaction (FSI)
-        *CONSTRAINED_LAGRANGE_IN_SOLID_ID cards. These couplings are deleted during the 2nd, CV computational phase.
+        """Get or set the Coupling IDs for one or more ALE fluid-structure-interaction (FSI) *CONSTRAINED_LAGRANGE_IN_SOLID_ID cards or S-ALE FSI *ALE_STRUCTURED_FSI_TITLE cards . These couplings are deleted during the 2nd, CV computational phase.
         """ # nopep8
         return self._cards[1].get_value("fsi_id5")
 
@@ -165,8 +153,7 @@ class AleUpSwitch(KeywordBase):
 
     @property
     def fsi_id6(self) -> int:
-        """Get or set the Coupling IDs for one or more ALE fluid-structure-interaction (FSI)
-        *CONSTRAINED_LAGRANGE_IN_SOLID_ID cards. These couplings are deleted during the 2nd, CV computational phase.
+        """Get or set the Coupling IDs for one or more ALE fluid-structure-interaction (FSI) *CONSTRAINED_LAGRANGE_IN_SOLID_ID cards or S-ALE FSI *ALE_STRUCTURED_FSI_TITLE cards . These couplings are deleted during the 2nd, CV computational phase.
         """ # nopep8
         return self._cards[1].get_value("fsi_id6")
 
@@ -177,8 +164,7 @@ class AleUpSwitch(KeywordBase):
 
     @property
     def fsi_id7(self) -> int:
-        """Get or set the Coupling IDs for one or more ALE fluid-structure-interaction (FSI)
-        *CONSTRAINED_LAGRANGE_IN_SOLID_ID cards. These couplings are deleted during the 2nd, CV computational phase.
+        """Get or set the Coupling IDs for one or more ALE fluid-structure-interaction (FSI) *CONSTRAINED_LAGRANGE_IN_SOLID_ID cards or S-ALE FSI *ALE_STRUCTURED_FSI_TITLE cards . These couplings are deleted during the 2nd, CV computational phase.
         """ # nopep8
         return self._cards[1].get_value("fsi_id7")
 
@@ -189,8 +175,7 @@ class AleUpSwitch(KeywordBase):
 
     @property
     def fsi_id8(self) -> int:
-        """Get or set the Coupling IDs for one or more ALE fluid-structure-interaction (FSI)
-        *CONSTRAINED_LAGRANGE_IN_SOLID_ID cards. These couplings are deleted during the 2nd, CV computational phase.
+        """Get or set the Coupling IDs for one or more ALE fluid-structure-interaction (FSI) *CONSTRAINED_LAGRANGE_IN_SOLID_ID cards or S-ALE FSI *ALE_STRUCTURED_FSI_TITLE cards . These couplings are deleted during the 2nd, CV computational phase.
         """ # nopep8
         return self._cards[1].get_value("fsi_id8")
 
@@ -212,10 +197,9 @@ class AleUpSwitch(KeywordBase):
 
     @property
     def sidtype(self) -> int:
-        """Get or set the Set ID type for the above SETID (following the conventions in
-        *AIRBAG_HYBRID card).
-        EQ.0: SID is a segment set ID (SGSID).
-        NE.0: SID is a part set ID (PSID).
+        """Get or set the Set ID type for the above SETID (following the conventions in *AIRBAG_HYBRID card).
+        EQ.0: SID is a segment set ID.
+        NE.0: SID is a part set ID.
         """ # nopep8
         return self._cards[2].get_value("sidtype")
 
@@ -226,7 +210,7 @@ class AleUpSwitch(KeywordBase):
 
     @property
     def mmgair(self) -> int:
-        """Get or set the The AMMG (ALE multi-material group) ID of surrounding air.
+        """Get or set the The AMMG (ALE multi-material group) ID of the surrounding air.
         """ # nopep8
         return self._cards[2].get_value("mmgair")
 

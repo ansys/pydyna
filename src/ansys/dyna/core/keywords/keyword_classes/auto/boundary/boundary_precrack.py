@@ -93,7 +93,7 @@ class BoundaryPrecrack(KeywordBase):
 
     @property
     def x(self) -> typing.Optional[float]:
-        """Get or set the Coordinates of the points defining the pre-crack.  It is recommended that these points be defined such that the pre-crack does not coincide with mesh lines.   A pre-crack coinciding with mesh lines will be automatically moved with sometimes unexpected results, e.g., the moved pre-crack location does not lie on part PID and the pre-crack cannot be created
+        """Get or set the Coordinates of the points defining the pre-crack. It is recommended that these points be defined such that the pre-crack does not coincide with mesh lines.  A pre-crack coinciding with mesh lines will be automatically moved with sometimes unexpected results, e.g., the moved pre-crack location does not lie on part PID and the pre-crack cannot be created
         """ # nopep8
         return self._cards[1].get_value("x")
 
@@ -104,7 +104,7 @@ class BoundaryPrecrack(KeywordBase):
 
     @property
     def y(self) -> typing.Optional[float]:
-        """Get or set the Coordinates of the points defining the pre-crack.  It is recommended that these points be defined such that the pre-crack does not coincide with mesh lines.   A pre-crack coinciding with mesh lines will be automatically moved with sometimes unexpected results, e.g., the moved pre-crack location does not lie on part PID and the pre-crack cannot be created
+        """Get or set the Coordinates of the points defining the pre-crack. It is recommended that these points be defined such that the pre-crack does not coincide with mesh lines.  A pre-crack coinciding with mesh lines will be automatically moved with sometimes unexpected results, e.g., the moved pre-crack location does not lie on part PID and the pre-crack cannot be created
         """ # nopep8
         return self._cards[1].get_value("y")
 
@@ -115,7 +115,7 @@ class BoundaryPrecrack(KeywordBase):
 
     @property
     def z(self) -> typing.Optional[float]:
-        """Get or set the Coordinates of the points defining the pre-crack.  It is recommended that these points be defined such that the pre-crack does not coincide with mesh lines.   A pre-crack coinciding with mesh lines will be automatically moved with sometimes unexpected results, e.g., the moved pre-crack location does not lie on part PID and the pre-crack cannot be created
+        """Get or set the Coordinates of the points defining the pre-crack. It is recommended that these points be defined such that the pre-crack does not coincide with mesh lines.  A pre-crack coinciding with mesh lines will be automatically moved with sometimes unexpected results, e.g., the moved pre-crack location does not lie on part PID and the pre-crack cannot be created
         """ # nopep8
         return self._cards[1].get_value("z")
 

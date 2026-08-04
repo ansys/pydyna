@@ -78,6 +78,7 @@ _CONTROLIMPLICITSOLUTIONSPR_CARD4 = (
     FieldSchema("srad", float, 30, 10, 0.0),
     FieldSchema("awgt", float, 40, 10, 0.0),
     FieldSchema("sred", float, 50, 10, 0.0),
+    FieldSchema("kssize", int, 60, 10, 10),
 )
 
 class ControlImplicitSolutionSpr(KeywordBase):
@@ -123,15 +124,16 @@ class ControlImplicitSolutionSpr(KeywordBase):
         EQ.7: Nonlinear with Broyden updates + arclength,
         EQ.8: Nonlinear with DFP updates + arclength,
         EQ.9: Nonlinear with Davidon updates + arclength.
-        EQ.12: Nonlinear with BFGS updates.This solver incorporates different line search and integration schemes as compared to obsolete NSOLVR=2.  Inclusion of an arc length method is optional and is invoked by setting ARCMTH=3.
+        EQ.12: Nonlinear with BFGS updates (default). This solver incorporates different line search and integration schemes as compared to obsolete NSOLVR = 2. This solver optionally allows the inclusion of an arc length method. Setting ARCMTH = 3 invokes an arc length method.
+        EQ.13: Nonlinear with JFNK updates.See parameter KSSIZE on Card 4 and Remark 8.
         """ # nopep8
         return self._cards[0].get_value("nsolvr")
 
     @nsolvr.setter
     def nsolvr(self, value: int) -> None:
         """Set the nsolvr property."""
-        if value not in [12, -1, 1, 6, 7, 8, 9, None]:
-            raise Exception("""nsolvr must be `None` or one of {12,-1,1,6,7,8,9}.""")
+        if value not in [12, -1, 1, 6, 7, 8, 9, 13, None]:
+            raise Exception("""nsolvr must be `None` or one of {12,-1,1,6,7,8,9,13}.""")
         self._cards[0].set_value("nsolvr", value)
 
     @property
@@ -149,7 +151,7 @@ class ControlImplicitSolutionSpr(KeywordBase):
     @property
     def maxref(self) -> int:
         """Get or set the Stiffness reformation limit per time step.
-        LT.0:	If  matrix reformations occur, convergence for that time step is forced; see Remark 4.
+        LT.0: If  matrix reformations occur, convergence for that time step is forced; see Remark 4.
         """ # nopep8
         return self._cards[0].get_value("maxref")
 
@@ -161,7 +163,7 @@ class ControlImplicitSolutionSpr(KeywordBase):
     @property
     def dctol(self) -> float:
         """Get or set the Displacement relative convergence tolerance (see Remark 5).
-        LT.0:	-DCTOL references a curve that defines tolerance as a function of time.
+        LT.0: -DCTOL references a curve that defines tolerance as a function of time.
         """ # nopep8
         return self._cards[0].get_value("dctol")
 
@@ -173,7 +175,7 @@ class ControlImplicitSolutionSpr(KeywordBase):
     @property
     def ectol(self) -> float:
         """Get or set the Energy relative convergence tolerance (see Remark 5).
-        LT.0:	-ECTOL references a curve that defines tolerance as a function of time.
+        LT.0: -ECTOL references a curve that defines tolerance as a function of time.
         """ # nopep8
         return self._cards[0].get_value("ectol")
 
@@ -185,7 +187,7 @@ class ControlImplicitSolutionSpr(KeywordBase):
     @property
     def rctol(self) -> float:
         """Get or set the Residual (force) relative convergence tolerance (see Remark 5).
-        LT.0:	-RCTOL references a curve that defines tolerance as a function of time
+        LT.0: -RCTOL references a curve that defines tolerance as a function of time
         """ # nopep8
         return self._cards[0].get_value("rctol")
 
@@ -210,7 +212,7 @@ class ControlImplicitSolutionSpr(KeywordBase):
     @property
     def abstol(self) -> float:
         """Get or set the Absolute convergence tolerance.
-        LT.0:	Convergence detected when the residual norm is less than.Note : To drive convergence based on , set DCTOLand ECTOL to 10 - 20
+        LT.0: Convergence detected when the residual norm is less than.Note: To drive convergence based on , set DCTOLand ECTOL to 10 - 20
         """ # nopep8
         return self._cards[0].get_value("abstol")
 
@@ -445,7 +447,8 @@ class ControlImplicitSolutionSpr(KeywordBase):
         """Get or set the Arc length method:
         EQ.1: Crisfield (default),
         EQ.2: Ramm.
-        EQ.3: Modified Crisfield (used with NSOLVR = 12 only)
+        EQ.3: Modified Crisfield (used with NSOLVR = 12 only).
+        Note: When using the arc-length method, termination should be based on some *TERMINATION_OPTION criteria.
         """ # nopep8
         return self._cards[3].get_value("arcmth")
 
@@ -586,6 +589,17 @@ class ControlImplicitSolutionSpr(KeywordBase):
     def sred(self, value: float) -> None:
         """Set the sred property."""
         self._cards[4].set_value("sred", value)
+
+    @property
+    def kssize(self) -> int:
+        """Get or set the Size of Krylov space in JFNK iterative method. The default is 10. Decreasing the default value tends to make the problem more robust but potentially more expensive to solve. Increasing it could save simulation time but may also result in a less robust scheme. See Remark 8.
+        """ # nopep8
+        return self._cards[4].get_value("kssize")
+
+    @kssize.setter
+    def kssize(self, value: int) -> None:
+        """Set the kssize property."""
+        self._cards[4].set_value("kssize", value)
 
     @property
     def arcctl_link(self) -> typing.Optional[KeywordBase]:

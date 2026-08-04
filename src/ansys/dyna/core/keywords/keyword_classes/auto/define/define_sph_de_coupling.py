@@ -96,7 +96,7 @@ class DefineSphDeCoupling(KeywordBase):
 
     @property
     def heading(self) -> typing.Optional[str]:
-        """Get or set the Definition descriptor. It is suggested that unique descriptions be	used.
+        """Get or set the Definition descriptor. It is suggested that unique descriptions be used.
         """ # nopep8
         return self._cards[0].get_value("heading")
 

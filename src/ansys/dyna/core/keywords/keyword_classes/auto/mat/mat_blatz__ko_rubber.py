@@ -69,7 +69,7 @@ class MatBlatz_KoRubber(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification. A unique number has to be used.
+        """Get or set the Material identification. A unique number or label must be specified (see *PART).
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -102,9 +102,9 @@ class MatBlatz_KoRubber(KeywordBase):
 
     @property
     def ref(self) -> float:
-        """Get or set the Use reference geometry to initialize the stress tensor, see *INITIAL_FOAM_REFERENCE_GEOMETRY (only 8 noded solid elements with one point integration).
-        EQ.0.0: off (default),
-        EQ.1.0: on.
+        """Get or set the Use reference geometry to initialize the stress tensor. *INITIAL_FOAM_REFERENCE_GEOMETRY (see there for more details) defines the reference geometry.
+        EQ.0.0: off
+        EQ.1.0 : on
         """ # nopep8
         return self._cards[0].get_value("ref")
 

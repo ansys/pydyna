@@ -167,7 +167,7 @@ class SetPartCollect(KeywordBase):
 
     @property
     def pid1(self) -> typing.Optional[int]:
-        """Get or set the First part ID of the set.
+        """Get or set the First part ID (see Remark  1) see Remark4
         """ # nopep8
         return self._cards[1].get_value("pid1")
 
@@ -178,7 +178,7 @@ class SetPartCollect(KeywordBase):
 
     @property
     def pid2(self) -> typing.Optional[int]:
-        """Get or set the Second part ID of the set.
+        """Get or set the Second part ID (see Remark  1) see Remark4
         """ # nopep8
         return self._cards[1].get_value("pid2")
 
@@ -189,7 +189,7 @@ class SetPartCollect(KeywordBase):
 
     @property
     def pid3(self) -> typing.Optional[int]:
-        """Get or set the Third part ID of the set.
+        """Get or set the Third part ID (see Remark  1) see Remark4
         """ # nopep8
         return self._cards[1].get_value("pid3")
 
@@ -200,7 +200,7 @@ class SetPartCollect(KeywordBase):
 
     @property
     def pid4(self) -> typing.Optional[int]:
-        """Get or set the Fourth part ID of the set.
+        """Get or set the Fourth part ID (see Remark  1) see Remark4
         """ # nopep8
         return self._cards[1].get_value("pid4")
 
@@ -211,7 +211,7 @@ class SetPartCollect(KeywordBase):
 
     @property
     def pid5(self) -> typing.Optional[int]:
-        """Get or set the Fifth part ID of the set.
+        """Get or set the Fifth part ID (see Remark  1) see Remark4
         """ # nopep8
         return self._cards[1].get_value("pid5")
 
@@ -222,7 +222,7 @@ class SetPartCollect(KeywordBase):
 
     @property
     def pid6(self) -> typing.Optional[int]:
-        """Get or set the Sixth part ID of the set.
+        """Get or set the Sixth part ID (see Remark  1) see Remark4
         """ # nopep8
         return self._cards[1].get_value("pid6")
 
@@ -233,7 +233,7 @@ class SetPartCollect(KeywordBase):
 
     @property
     def pid7(self) -> typing.Optional[int]:
-        """Get or set the Seventh part ID of the set.
+        """Get or set the Seventh part ID (see Remark  1) see Remark4
         """ # nopep8
         return self._cards[1].get_value("pid7")
 
@@ -244,7 +244,7 @@ class SetPartCollect(KeywordBase):
 
     @property
     def pid8(self) -> typing.Optional[int]:
-        """Get or set the Eighth part ID of the set.
+        """Get or set the Eighth part ID (see Remark  1) see Remark4
         """ # nopep8
         return self._cards[1].get_value("pid8")
 

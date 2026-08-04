@@ -73,14 +73,14 @@ class IcfdModelNonnewt(KeywordBase):
     @property
     def nnid(self) -> int:
         """Get or set the Non-Newtonian fluid model type:
-        EQ.1 : Power-Law model.
-        EQ.2 : Carreau model.
-        EQ.3 : Cross model.
-        EQ.4 : Herschel-Bulkley model.
-        EQ.5 : Cross II model.
-        EQ.6 : Sutherland formula for temperature dependent viscosity.
-        EQ.7 : Power-Law for temperature dependent viscosity.
-        EQ.8 : Viscosity defined by Load Curve ID or Function ID.
+        EQ.1: Power-Law model.
+        EQ.2: Carreau model.
+        EQ.3: Cross model.
+        EQ.4: Herschel-Bulkley model.
+        EQ.5: Cross II model.
+        EQ.6: Sutherland formula for temperature dependent viscosity.
+        EQ.7: Power-Law for temperature dependent viscosity.
+        EQ.8: Viscosity defined by Load Curve ID or Function ID.
         """ # nopep8
         return self._cards[0].get_value("nnid")
 

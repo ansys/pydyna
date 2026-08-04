@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _EMCONTACTRESISTANCE_CARD0 = (
     FieldSchema("crid", int, 0, 10, None),
     FieldSchema("contid", int, 10, 10, None),
-    FieldSchema("ctype", int, 20, 10, 1),
+    FieldSchema("crtyp", int, 20, 10, None),
     FieldSchema("unused", int, 30, 10, None),
     FieldSchema("jhrtype", int, 40, 10, 0),
 )
@@ -71,6 +71,7 @@ class EmContactResistance(KeywordBase):
     @property
     def contid(self) -> typing.Optional[int]:
         """Get or set the EM contact ID defined in *EM_CONTACT.
+        EQ.0: This contact resistance applies to all detected contacts that are not part of any *EM_CONTACT
         """ # nopep8
         return self._cards[0].get_value("contid")
 
@@ -80,22 +81,16 @@ class EmContactResistance(KeywordBase):
         self._cards[0].set_value("contid", value)
 
     @property
-    def ctype(self) -> int:
-        """Get or set the Contact Resistance type :
-        EQ.1: Contact resistance defined by user defined load curve.
-        EQ.2: Classic Holm's formula for contact resistances (See Remark 1).
-        EQ.3: Modified contact resistance for cases with plastic deformation in the contact area (See Remarks 2 and 3).
-        EQ.4: Modified contact resistance for cases with elasticdeformation in the contact area (See Remarks 2 and 3).
-        EQ.5: Basic contact resistance definition (See Remark 4).
+    def crtyp(self) -> typing.Optional[int]:
+        """Get or set the Contact Resistance type:
+        EQ.1: EQ.1: Electric contact resistance defined with a *DEFINE_FUNCTION
         """ # nopep8
-        return self._cards[0].get_value("ctype")
+        return self._cards[0].get_value("crtyp")
 
-    @ctype.setter
-    def ctype(self, value: int) -> None:
-        """Set the ctype property."""
-        if value not in [1, 2, 3, 4, 5, None]:
-            raise Exception("""ctype must be `None` or one of {1,2,3,4,5}.""")
-        self._cards[0].set_value("ctype", value)
+    @crtyp.setter
+    def crtyp(self, value: int) -> None:
+        """Set the crtyp property."""
+        self._cards[0].set_value("crtyp", value)
 
     @property
     def jhrtype(self) -> int:
@@ -114,7 +109,7 @@ class EmContactResistance(KeywordBase):
 
     @property
     def dfid(self) -> typing.Optional[int]:
-        """Get or set the Load Function ID defining the contact resistance.
+        """Get or set the *DEFINE_FUNCTION ID
         """ # nopep8
         return self._cards[1].get_value("dfid")
 

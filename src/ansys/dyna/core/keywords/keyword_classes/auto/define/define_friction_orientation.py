@@ -89,7 +89,7 @@ class DefineFrictionOrientation(KeywordBase):
 
     @property
     def lcid(self) -> int:
-        """Get or set the ID of the load curve defining COF vs. orientation in degree.
+        """Get or set the ID of the load curve defining COF vs. orientation in degrees.
         """ # nopep8
         return self._cards[0].get_value("lcid")
 

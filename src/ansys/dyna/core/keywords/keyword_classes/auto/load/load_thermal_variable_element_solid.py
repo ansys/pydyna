@@ -89,7 +89,7 @@ class LoadThermalVariableElementSolid(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining a scale factor that multiplies the scaled temperature	as a function of time, (see *DEFINE_CURVE).
+        """Get or set the Load curve ID defining a scale factor that multiplies the scaled temperature as a function of time, (see *DEFINE_CURVE).
         """ # nopep8
         return self._cards[0].get_value("lcid")
 

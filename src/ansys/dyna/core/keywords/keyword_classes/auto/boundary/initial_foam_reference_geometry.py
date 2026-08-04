@@ -55,7 +55,7 @@ class InitialFoamReferenceGeometry(KeywordBase):
         ]
     @property
     def nid(self) -> typing.Optional[int]:
-        """Get or set the Node ID.
+        """Get or set the Node ID
         """ # nopep8
         return self._cards[0].get_value("nid")
 

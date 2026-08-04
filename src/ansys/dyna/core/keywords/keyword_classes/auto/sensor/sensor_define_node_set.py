@@ -90,7 +90,7 @@ class SensorDefineNodeSet(KeywordBase):
     def node1(self) -> typing.Optional[int]:
         """Get or set the For an accelerometer sensor, these fields are the nodes defining the accelerometer.  If CTYPE = TEMP, then the temperature at NODE1 will be output. If both NODE1 and NODE2 are defined, then the difference in temperature between these two nodes will be output.
         When the keyword option SET is active, NODE1 is a node set ID.If NODE2 is needed, it must be a node set of the same length as NODE1 with SETOPT defined, but it can be either a node or node set without SETOPT defined.
-        When the SET option is active but SETOPT is not defined, determining the status of a related* SENSOR_SWITCH depends on the sign of NODE1.See Remark 2 for details
+        When the SET option is active but SETOPT is not defined, determining the status of a related *SENSOR_SWITCH depends on the sign of NODE1.See Remark 2 for details
         """ # nopep8
         return self._cards[0].get_value("node1")
 
@@ -103,7 +103,7 @@ class SensorDefineNodeSet(KeywordBase):
     def node2(self) -> typing.Optional[int]:
         """Get or set the For an accelerometer sensor, these fields are the nodes defining the accelerometer.If CTYPE = TEMP, then the temperature at NODE1 will be output.If both NODE1 and NODE2 are defined, then the difference in temperature between these two nodes will be output.
         When the keyword option SET is active, NODE1 is a node set ID.If NODE2 is needed, it must be a node set of the same length as NODE1 with SETOPT defined, but it can be either a node or node set without SETOPT defined.
-        When the SET option is active but SETOPT is not defined, determining the status of a related * SENSOR_SWITCH depends on the sign of NODE1.See Remark 2 for details
+        When the SET option is active but SETOPT is not defined, determining the status of a related *SENSOR_SWITCH depends on the sign of NODE1.See Remark 2 for details
         """ # nopep8
         return self._cards[0].get_value("node2")
 
@@ -114,7 +114,7 @@ class SensorDefineNodeSet(KeywordBase):
 
     @property
     def vid(self) -> typing.Optional[str]:
-        """Get or set the ID of vector along which the nodal values are measured, see *DEFINE_?VECTOR.  The magnitude of nodal values (coordinate, velocity, or acceleration) will be output if VID is 0 or undefined.
+        """Get or set the ID of vector along which the nodal values are measured, see *DEFINE_  VECTOR.  The magnitude of nodal values (coordinate, velocity, or acceleration) will be output if VID is 0 or undefined.
         """ # nopep8
         return self._cards[0].get_value("vid")
 
@@ -126,10 +126,10 @@ class SensorDefineNodeSet(KeywordBase):
     @property
     def ctype(self) -> str:
         """Get or set the Output component type:
-        EQ.ACC:	acceleration
-        EQ.VEL:	velocity
+        EQ.ACC: acceleration
+        EQ.VEL: velocity
         EQ.COORD: Coordinate
-        EQ.TEMP:	Temperature
+        EQ.TEMP: Temperature
         """ # nopep8
         return self._cards[0].get_value("ctype")
 
@@ -143,10 +143,10 @@ class SensorDefineNodeSet(KeywordBase):
     @property
     def setopt(self) -> str:
         """Get or set the Option to process set of data when SET option is specified.  When SETOPT is specified, a single value will be reported.  The single reported value could be:
-        EQ.AVG:	the average value of the dataset
-        EQ.MAX:	the maximum value of the dataset
-        EQ.MIN:	the minimum value of the dataset
-        EQ.SUM:	the sum of the dataset.
+        EQ.AVG: the average value of the dataset
+        EQ.MAX: the maximum value of the dataset
+        EQ.MIN: the minimum value of the dataset
+        EQ.SUM: the sum of the dataset.
         """ # nopep8
         return self._cards[0].get_value("setopt")
 

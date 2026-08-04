@@ -106,39 +106,6 @@ _MAT209_CARD6 = (
     FieldSchema("soft2", float, 70, 10, 4.0),
 )
 
-_MAT209_CARD7 = (
-    FieldSchema("prs1", float, 0, 10, 1e+20),
-    FieldSchema("prs2", float, 10, 10, 2e+20),
-    FieldSchema("prs3", float, 20, 10, 3e+20),
-    FieldSchema("prs4", float, 30, 10, 4e+20),
-    FieldSchema("prt1", float, 40, 10, 1e+20),
-    FieldSchema("prt2", float, 50, 10, 2e+20),
-    FieldSchema("prt3", float, 60, 10, 3e+20),
-    FieldSchema("prt4", float, 70, 10, 4e+20),
-)
-
-_MAT209_CARD8 = (
-    FieldSchema("ts1", float, 0, 10, 1e+20),
-    FieldSchema("ts2", float, 10, 10, 2e+20),
-    FieldSchema("ts3", float, 20, 10, 3e+20),
-    FieldSchema("ts4", float, 30, 10, 4e+20),
-    FieldSchema("cs1", float, 40, 10, 1e+20),
-    FieldSchema("cs2", float, 50, 10, 2e+20),
-    FieldSchema("cs3", float, 60, 10, 3e+20),
-    FieldSchema("cs4", float, 70, 10, 4e+20),
-)
-
-_MAT209_CARD9 = (
-    FieldSchema("ss1", float, 0, 10, 1e+20),
-    FieldSchema("ss2", float, 10, 10, 2e+20),
-    FieldSchema("ss3", float, 20, 10, 3e+20),
-    FieldSchema("ss4", float, 30, 10, 4e+20),
-    FieldSchema("st1", float, 40, 10, 1e+20),
-    FieldSchema("st2", float, 50, 10, 2e+20),
-    FieldSchema("st3", float, 60, 10, 3e+20),
-    FieldSchema("st4", float, 70, 10, 4e+20),
-)
-
 _MAT209_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
@@ -193,18 +160,6 @@ class Mat209(KeywordBase):
                 _MAT209_CARD6,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _MAT209_CARD7,
-                **kwargs,
-            ),
-            Card.from_field_schemas_with_defaults(
-                _MAT209_CARD8,
-                **kwargs,
-            ),
-            Card.from_field_schemas_with_defaults(
-                _MAT209_CARD9,
-                **kwargs,
-            ),
             OptionCardSet(
                 option_spec = Mat209._option_spec_list[0],
                 cards = [
@@ -240,7 +195,7 @@ class Mat209(KeywordBase):
 
     @property
     def e(self) -> typing.Optional[float]:
-        """Get or set the Young’s modulus.
+        """Get or set the Young's modulus.
         """ # nopep8
         return self._cards[0].get_value("e")
 
@@ -251,7 +206,7 @@ class Mat209(KeywordBase):
 
     @property
     def pr(self) -> typing.Optional[float]:
-        """Get or set the Poisson’s ratio
+        """Get or set the Poisson's ratio
         """ # nopep8
         return self._cards[0].get_value("pr")
 
@@ -263,8 +218,8 @@ class Mat209(KeywordBase):
     @property
     def iax(self) -> int:
         """Get or set the Abscissa definition for axial yield force as a function of inelastic deformation/strain curves (LCAT and LCAC on Card 2):
-        EQ.1:	plastic deformation(change in length)
-        EQ.2 : nominal plastic strain, that is,
+        EQ.1: plastic deformation(change in length)
+        EQ.2: nominal plastic strain, that is,
         plastic deformation/ initial length.
         """ # nopep8
         return self._cards[0].get_value("iax")
@@ -279,9 +234,9 @@ class Mat209(KeywordBase):
     @property
     def isurf(self) -> int:
         """Get or set the Yield surface type for interaction:
-        EQ.1:	simple power law(default)
-        EQ.2 : power law based on resultant moment
-        EQ.3 : skewed yield surface version of ISURF = 2
+        EQ.1: simple power law(default)
+        EQ.2: power law based on resultant moment
+        EQ.3: skewed yield surface version of ISURF = 2
         """ # nopep8
         return self._cards[0].get_value("isurf")
 
@@ -295,10 +250,10 @@ class Mat209(KeywordBase):
     @property
     def ihard(self) -> int:
         """Get or set the Hardening type during cyclic response
-        EQ.1:	cumulative absolute deformation
-        EQ.2:	peak deformation
-        EQ.3 : peak deformation, yield - oriented
-        EQ.4 : peak deformation, peak - oriented
+        EQ.1: cumulative absolute deformation
+        EQ.2: peak deformation
+        EQ.3: peak deformation, yield - oriented
+        EQ.4: peak deformation, peak - oriented
         """ # nopep8
         return self._cards[0].get_value("ihard")
 
@@ -312,10 +267,10 @@ class Mat209(KeywordBase):
     @property
     def ifema(self) -> int:
         """Get or set the Flag for input of FEMA thresholds
-        EQ.0:	no input
-        EQ.1:	input of rotation thresholds only
-        EQ.2 : input of rotation and axial strain thresholds
-        EQ.3 : input of rotation, axial strainand shear strain thresholds
+        EQ.0: no input
+        EQ.1: input of rotation thresholds only
+        EQ.2: input of rotation and axial strain thresholds
+        EQ.3: input of rotation, axial strainand shear strain thresholds
         """ # nopep8
         return self._cards[0].get_value("ifema")
 
@@ -372,7 +327,7 @@ class Mat209(KeywordBase):
 
     @property
     def lcat(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID (See *DEFINE_‌CURVE) giving normalized axial tensile yield force as a function of inelastic deformation/strain.  See IAX above for definition of deformation/strain.  All values are positive. See *DEFINE_‌CURVE.
+        """Get or set the Load curve ID (See *DEFINE_CURVE) giving normalized axial tensile yield force as a function of inelastic deformation/strain. See IAX above for definition of deformation/strain. All values are positive. See *DEFINE_CURVE.
         """ # nopep8
         return self._cards[1].get_value("lcat")
 
@@ -394,7 +349,7 @@ class Mat209(KeywordBase):
 
     @property
     def lcac(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID (See *DEFINE_‌CURVE) giving normalized axial compressive yield force as a function of inelastic deformation/strain.  See IAX above for definition of deformation/strain.  All values are positive. See *DEFINE_‌CURVE.
+        """Get or set the Load curve ID (See *DEFINE_CURVE) giving normalized axial compressive yield force as a function of inelastic deformation/strain. See IAX above for definition of deformation/strain. All values are positive. See *DEFINE_CURVE.
         """ # nopep8
         return self._cards[1].get_value("lcac")
 
@@ -417,8 +372,8 @@ class Mat209(KeywordBase):
     @property
     def alpha(self) -> float:
         """Get or set the Parameter to define moment-axial yield surface:
-        GT.0.0:	yield surface parameter ALPHA(must not be < 1.1); see Remark 2.
-        LT.0.0:	user - defined yield surface for the local s - axis. | ALPHA | is the load curve ID giving the yield locus.The abscissa is the moment about the local s - axis; the ordinate is the axial force(tensile positive).
+        GT.0.0: yield surface parameter ALPHA(must not be < 1.1); see Remark 2.
+        LT.0.0: user - defined yield surface for the local s - axis. | ALPHA | is the load curve ID giving the yield locus.The abscissa is the moment about the local s - axis; the ordinate is the axial force(tensile positive).
         """ # nopep8
         return self._cards[2].get_value("alpha")
 
@@ -430,8 +385,8 @@ class Mat209(KeywordBase):
     @property
     def beta(self) -> float:
         """Get or set the Parameter to define moment-axial yield surface:
-        GT.0.0:	yield surface parameter BETA(must not be < 1.1); see Remark 2.
-        LT.0.0:	user - defined yield surface for the local t - axis. | BETA | is the load curve ID giving the yield locus.Abscissa is moment about the local t - axis; the ordinate is the axial force(tensile positive)..
+        GT.0.0: yield surface parameter BETA(must not be < 1.1); see Remark 2.
+        LT.0.0: user - defined yield surface for the local t - axis. | BETA | is the load curve ID giving the yield locus.Abscissa is moment about the local t - axis; the ordinate is the axial force(tensile positive)..
         """ # nopep8
         return self._cards[2].get_value("beta")
 
@@ -464,7 +419,7 @@ class Mat209(KeywordBase):
 
     @property
     def pinm(self) -> float:
-        """Get or set the Pinching factor for flexural hysteresis (for IHARD = 3 or 4 only).  .
+        """Get or set the Pinching factor for flexural hysteresis (for IHARD = 3 or 4 only). .
         """ # nopep8
         return self._cards[2].get_value("pinm")
 
@@ -487,11 +442,11 @@ class Mat209(KeywordBase):
     @property
     def hloc1(self) -> typing.Optional[float]:
         """Get or set the Location of plastic Hinge 1 from Node 1 (see Remark 1):
-        GE.0.0:	HLOC1 is the distance of Hinge 1 to Node 1 divided by element length.
-        LT.0.0.AND.GT. - 1.0 : -HLOC1 is the distance of Hinge 1 to Node 1 divided by element length; deactivate shear yielding.
-        EQ. - 1.0:	deactivate Hinge 1.
-        EQ. - 10.0 : deactivate shear yielding; Hinge 1 is located at Node 1.
-        EQ. - 11.0:	deactivate Hinge 1 and shear yielding.
+        GE.0.0: HLOC1 is the distance of Hinge 1 to Node 1 divided by element length.
+        LT.0.0.AND.GT. - 1.0: -HLOC1 is the distance of Hinge 1 to Node 1 divided by element length; deactivate shear yielding.
+        EQ. - 1.0: deactivate Hinge 1.
+        EQ. - 10.0: deactivate shear yielding; Hinge 1 is located at Node 1.
+        EQ. - 11.0: deactivate Hinge 1 and shear yielding.
         """ # nopep8
         return self._cards[2].get_value("hloc1")
 
@@ -503,11 +458,11 @@ class Mat209(KeywordBase):
     @property
     def hloc2(self) -> typing.Optional[float]:
         """Get or set the Location of plastic Hinge 2 from Node 2 (see Remark 1):
-        GE.0.0:	HLOC2 is the distance of Hinge 2 to Node 2 divided by element length.
-        LT.0.0.AND.GT. - 1.0 : HLOC2 is the distance of Hinge 2 to Node 2 divided by element length; deactivate shear yielding.
-        EQ. - 1.0:	deactivate Hinge 2.
-        EQ. - 10.0 : deactivate shear yielding; Hinge 2 is located at Node 2.
-        EQ. - 11.0:	deactivate Hinge 2 and shear yielding.
+        GE.0.0: HLOC2 is the distance of Hinge 2 to Node 2 divided by element length.
+        LT.0.0.AND.GT. - 1.0: HLOC2 is the distance of Hinge 2 to Node 2 divided by element length; deactivate shear yielding.
+        EQ. - 1.0: deactivate Hinge 2.
+        EQ. - 10.0: deactivate shear yielding; Hinge 2 is located at Node 2.
+        EQ. - 11.0: deactivate Hinge 2 and shear yielding.
         """ # nopep8
         return self._cards[2].get_value("hloc2")
 
@@ -562,7 +517,9 @@ class Mat209(KeywordBase):
 
     @property
     def lcshs(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID (see *DEFINE_CURVE) giving yield shear force as a function of inelastic shear strain (shear angle) in the local s-direction .
+        """Get or set the Load curve ID (see *DEFINE_CURVE) giving yield shear force as a function of inelastic shear strain (shear angle) in the local s-direction.
+        GT.0: Same inelastic response for positive-direction shear force as for negative-direction shear force, controlled by input fields LCSHS through SFSHT.
+        LT.0: Different inelastic response for positive - direction shear force versus negative - direction shear force(invokes Card 4a).The absolute value of LCSHS and input fields SFSHS through SFSHT control shear in the positive s - and t - directions.Negative - direction shear behavior is controlled by input fields LCSHSN through SFSHTN on Card 4a.
         """ # nopep8
         return self._cards[3].get_value("lcshs")
 
@@ -574,8 +531,8 @@ class Mat209(KeywordBase):
     @property
     def sfshs(self) -> float:
         """Get or set the Scale factor on yield shear force in the local s-direction (scales the force from LCSHS):
-        GT.0.0:	constant scale factor
-        LT.0.0 : user - defined interaction with axial force. | SFSHS | is the load curve ID giving scale factor as a function of normalized axial force(tensile is positive).The normalization uses SFAT for tensile forceand SFAC for compressive force.For example, point(-1.0,0.5) on the curve defines a scale factor of 0.5 for compressive force of - SFAC
+        GT.0.0: constant scale factor
+        LT.0.0: User - defined interaction with axial force. | SFSHS | is the load curve ID giving the scale factor as a function of normalized axial force(tensile is positive).The normalization uses SFAT for tensile forceand SFAC for compressive force.For example, point(-1.0,0.5) on the curve defines a scale factor of 0.5 for compressive force of - SFAC
         """ # nopep8
         return self._cards[3].get_value("sfshs")
 
@@ -598,8 +555,8 @@ class Mat209(KeywordBase):
     @property
     def sfsht(self) -> float:
         """Get or set the Scale factor on yield shear force in the local t-direction (scales the force from LCSHS).
-        GT.0.0:	constant scale factor
-        LT.0.0 : user - defined interaction with axial force. | SFSHT|  is the load curve ID giving scale factor as a function of normalized axial force(tensile is positive).The normalization uses SFAT for tensile forceand SFAC for compressive force.For example, point(-1.0,0.5) on the curve defines a scale factor of 0.5 for compressive force of - SFAC
+        GT.0.0: constant scale factor
+        LT.0.0: User - defined interaction with the axial force. | SFSHT|  is the load curve ID giving the scale factor as a function of normalized axial force(tensile is positive).The normalization uses SFAT for tensile forceand SFAC for compressive force.For example, point(-1.0,0.5) on the curve defines a scale factor of 0.5 for compressive force of - SFAC
         """ # nopep8
         return self._cards[3].get_value("sfsht")
 
@@ -698,7 +655,7 @@ class Mat209(KeywordBase):
 
     @property
     def omgms1(self) -> typing.Optional[float]:
-        """Get or set the Damage evolution parameter ω_s1 for moment about the local s-axis
+        """Get or set the Damage evolution parameter omega_s1 for moment about the local s-axis
         """ # nopep8
         return self._cards[5].get_value("omgms1")
 
@@ -709,7 +666,7 @@ class Mat209(KeywordBase):
 
     @property
     def omgms2(self) -> typing.Optional[float]:
-        """Get or set the Damage evolution parameter ω_s2 for moment about the local s-axis.
+        """Get or set the Damage evolution parameter omega_s2 for moment about the local s-axis.
         """ # nopep8
         return self._cards[5].get_value("omgms2")
 
@@ -720,7 +677,7 @@ class Mat209(KeywordBase):
 
     @property
     def omgmt1(self) -> float:
-        """Get or set the Damage evolution parameter ω_t1 for moment about the local t-axis.
+        """Get or set the Damage evolution parameter omega_t1 for moment about the local t-axis.
         """ # nopep8
         return self._cards[5].get_value("omgmt1")
 
@@ -731,7 +688,7 @@ class Mat209(KeywordBase):
 
     @property
     def omgmt2(self) -> float:
-        """Get or set the Damage evolution parameter ω_t2 for moment about the local t-axis
+        """Get or set the Damage evolution parameter omega_t2 for moment about the local t-axis
         """ # nopep8
         return self._cards[5].get_value("omgmt2")
 
@@ -742,7 +699,7 @@ class Mat209(KeywordBase):
 
     @property
     def omgat1(self) -> typing.Optional[float]:
-        """Get or set the Damage evolution parameter ω_at1 for tensile force.
+        """Get or set the Damage evolution parameter omega_at1 for tensile force.
         """ # nopep8
         return self._cards[5].get_value("omgat1")
 
@@ -753,7 +710,7 @@ class Mat209(KeywordBase):
 
     @property
     def omgat2(self) -> typing.Optional[float]:
-        """Get or set the Damage evolution parameter ω_at2 for tensile force
+        """Get or set the Damage evolution parameter omega_at2 for tensile force
         """ # nopep8
         return self._cards[5].get_value("omgat2")
 
@@ -764,7 +721,7 @@ class Mat209(KeywordBase):
 
     @property
     def omgac1(self) -> float:
-        """Get or set the Damage evolution parameter ω_ac1 for compressive force.
+        """Get or set the Damage evolution parameter omega_ac1 for compressive force.
         """ # nopep8
         return self._cards[5].get_value("omgac1")
 
@@ -775,7 +732,7 @@ class Mat209(KeywordBase):
 
     @property
     def omgac2(self) -> float:
-        """Get or set the Damage evolution parameter ω_ac2 for compressive force
+        """Get or set the Damage evolution parameter omega_ac2 for compressive force
         """ # nopep8
         return self._cards[5].get_value("omgac2")
 
@@ -852,7 +809,9 @@ class Mat209(KeywordBase):
 
     @property
     def soft1(self) -> float:
-        """Get or set the Threshold index at which softening starts .
+        """Get or set the Threshold index at which softening starts.
+        LE.4.0: Threshold index for start of softening, see Cards 8 thru 10
+        EQ.5.0: Softening and element deletion are disabled.
         """ # nopep8
         return self._cards[6].get_value("soft1")
 
@@ -863,7 +822,7 @@ class Mat209(KeywordBase):
 
     @property
     def soft2(self) -> float:
-        """Get or set the Threshold index at which the element is fully softened and to be removed
+        """Get or set the Threshold index at which the element is fully softened and to be removed (ignored if SOFT1 = 5)
         """ # nopep8
         return self._cards[6].get_value("soft2")
 
@@ -873,279 +832,15 @@ class Mat209(KeywordBase):
         self._cards[6].set_value("soft2", value)
 
     @property
-    def prs1(self) -> float:
-        """Get or set the Plastic rotation thresholds 1 to 4 about s-axis
-        """ # nopep8
-        return self._cards[7].get_value("prs1")
-
-    @prs1.setter
-    def prs1(self, value: float) -> None:
-        """Set the prs1 property."""
-        self._cards[7].set_value("prs1", value)
-
-    @property
-    def prs2(self) -> float:
-        """Get or set the Plastic rotation thresholds 1 to 4 about s-axis.
-        """ # nopep8
-        return self._cards[7].get_value("prs2")
-
-    @prs2.setter
-    def prs2(self, value: float) -> None:
-        """Set the prs2 property."""
-        self._cards[7].set_value("prs2", value)
-
-    @property
-    def prs3(self) -> float:
-        """Get or set the Plastic rotation thresholds 1 to 4 about s-axis.
-        """ # nopep8
-        return self._cards[7].get_value("prs3")
-
-    @prs3.setter
-    def prs3(self, value: float) -> None:
-        """Set the prs3 property."""
-        self._cards[7].set_value("prs3", value)
-
-    @property
-    def prs4(self) -> float:
-        """Get or set the Plastic rotation thresholds 1 to 4 about s-axis
-        """ # nopep8
-        return self._cards[7].get_value("prs4")
-
-    @prs4.setter
-    def prs4(self, value: float) -> None:
-        """Set the prs4 property."""
-        self._cards[7].set_value("prs4", value)
-
-    @property
-    def prt1(self) -> float:
-        """Get or set the Plastic rotation thresholds 1 to 4 about t-axis.
-        """ # nopep8
-        return self._cards[7].get_value("prt1")
-
-    @prt1.setter
-    def prt1(self, value: float) -> None:
-        """Set the prt1 property."""
-        self._cards[7].set_value("prt1", value)
-
-    @property
-    def prt2(self) -> float:
-        """Get or set the Plastic rotation thresholds 1 to 4 about t-axis
-        """ # nopep8
-        return self._cards[7].get_value("prt2")
-
-    @prt2.setter
-    def prt2(self, value: float) -> None:
-        """Set the prt2 property."""
-        self._cards[7].set_value("prt2", value)
-
-    @property
-    def prt3(self) -> float:
-        """Get or set the Plastic rotation thresholds 1 to 4 about t-axis.
-        """ # nopep8
-        return self._cards[7].get_value("prt3")
-
-    @prt3.setter
-    def prt3(self, value: float) -> None:
-        """Set the prt3 property."""
-        self._cards[7].set_value("prt3", value)
-
-    @property
-    def prt4(self) -> float:
-        """Get or set the Plastic rotation thresholds 1 to 4 about t-axis
-        """ # nopep8
-        return self._cards[7].get_value("prt4")
-
-    @prt4.setter
-    def prt4(self, value: float) -> None:
-        """Set the prt4 property."""
-        self._cards[7].set_value("prt4", value)
-
-    @property
-    def ts1(self) -> float:
-        """Get or set the Tensile plastic axial deformation/strain thresholds 1 to 4
-        """ # nopep8
-        return self._cards[8].get_value("ts1")
-
-    @ts1.setter
-    def ts1(self, value: float) -> None:
-        """Set the ts1 property."""
-        self._cards[8].set_value("ts1", value)
-
-    @property
-    def ts2(self) -> float:
-        """Get or set the Tensile plastic axial deformation/strain thresholds 1 to 4.
-        """ # nopep8
-        return self._cards[8].get_value("ts2")
-
-    @ts2.setter
-    def ts2(self, value: float) -> None:
-        """Set the ts2 property."""
-        self._cards[8].set_value("ts2", value)
-
-    @property
-    def ts3(self) -> float:
-        """Get or set the Tensile plastic axial deformation/strain thresholds 1 to 4.
-        """ # nopep8
-        return self._cards[8].get_value("ts3")
-
-    @ts3.setter
-    def ts3(self, value: float) -> None:
-        """Set the ts3 property."""
-        self._cards[8].set_value("ts3", value)
-
-    @property
-    def ts4(self) -> float:
-        """Get or set the Tensile plastic axial deformation/strain thresholds 1 to 4
-        """ # nopep8
-        return self._cards[8].get_value("ts4")
-
-    @ts4.setter
-    def ts4(self, value: float) -> None:
-        """Set the ts4 property."""
-        self._cards[8].set_value("ts4", value)
-
-    @property
-    def cs1(self) -> float:
-        """Get or set the Compressive plastic axial deformation/strain thresholds 1 to 4.
-        """ # nopep8
-        return self._cards[8].get_value("cs1")
-
-    @cs1.setter
-    def cs1(self, value: float) -> None:
-        """Set the cs1 property."""
-        self._cards[8].set_value("cs1", value)
-
-    @property
-    def cs2(self) -> float:
-        """Get or set the Compressive plastic axial deformation/strain thresholds 1 to 4
-        """ # nopep8
-        return self._cards[8].get_value("cs2")
-
-    @cs2.setter
-    def cs2(self, value: float) -> None:
-        """Set the cs2 property."""
-        self._cards[8].set_value("cs2", value)
-
-    @property
-    def cs3(self) -> float:
-        """Get or set the Compressive plastic axial deformation/strain thresholds 1 to 4.
-        """ # nopep8
-        return self._cards[8].get_value("cs3")
-
-    @cs3.setter
-    def cs3(self, value: float) -> None:
-        """Set the cs3 property."""
-        self._cards[8].set_value("cs3", value)
-
-    @property
-    def cs4(self) -> float:
-        """Get or set the Compressive plastic axial deformation/strain thresholds 1 to 4
-        """ # nopep8
-        return self._cards[8].get_value("cs4")
-
-    @cs4.setter
-    def cs4(self, value: float) -> None:
-        """Set the cs4 property."""
-        self._cards[8].set_value("cs4", value)
-
-    @property
-    def ss1(self) -> float:
-        """Get or set the Plastic shear strain thresholds 1 to 4 in the s-direction
-        """ # nopep8
-        return self._cards[9].get_value("ss1")
-
-    @ss1.setter
-    def ss1(self, value: float) -> None:
-        """Set the ss1 property."""
-        self._cards[9].set_value("ss1", value)
-
-    @property
-    def ss2(self) -> float:
-        """Get or set the Plastic shear strain thresholds 1 to 4 in the s-direction.
-        """ # nopep8
-        return self._cards[9].get_value("ss2")
-
-    @ss2.setter
-    def ss2(self, value: float) -> None:
-        """Set the ss2 property."""
-        self._cards[9].set_value("ss2", value)
-
-    @property
-    def ss3(self) -> float:
-        """Get or set the Plastic shear strain thresholds 1 to 4 in the s-direction.
-        """ # nopep8
-        return self._cards[9].get_value("ss3")
-
-    @ss3.setter
-    def ss3(self, value: float) -> None:
-        """Set the ss3 property."""
-        self._cards[9].set_value("ss3", value)
-
-    @property
-    def ss4(self) -> float:
-        """Get or set the Plastic shear strain thresholds 1 to 4 in the s-direction
-        """ # nopep8
-        return self._cards[9].get_value("ss4")
-
-    @ss4.setter
-    def ss4(self, value: float) -> None:
-        """Set the ss4 property."""
-        self._cards[9].set_value("ss4", value)
-
-    @property
-    def st1(self) -> float:
-        """Get or set the Plastic shear strain thresholds 1 to 4 in the t-direction.
-        """ # nopep8
-        return self._cards[9].get_value("st1")
-
-    @st1.setter
-    def st1(self, value: float) -> None:
-        """Set the st1 property."""
-        self._cards[9].set_value("st1", value)
-
-    @property
-    def st2(self) -> float:
-        """Get or set the Plastic shear strain thresholds 1 to 4 in the t-direction
-        """ # nopep8
-        return self._cards[9].get_value("st2")
-
-    @st2.setter
-    def st2(self, value: float) -> None:
-        """Set the st2 property."""
-        self._cards[9].set_value("st2", value)
-
-    @property
-    def st3(self) -> float:
-        """Get or set the Plastic shear strain thresholds 1 to 4 in the t-direction.
-        """ # nopep8
-        return self._cards[9].get_value("st3")
-
-    @st3.setter
-    def st3(self, value: float) -> None:
-        """Set the st3 property."""
-        self._cards[9].set_value("st3", value)
-
-    @property
-    def st4(self) -> float:
-        """Get or set the Plastic shear strain thresholds 1 to 4 in the t-direction
-        """ # nopep8
-        return self._cards[9].get_value("st4")
-
-    @st4.setter
-    def st4(self, value: float) -> None:
-        """Set the st4 property."""
-        self._cards[9].set_value("st4", value)
-
-    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[10].cards[0].get_value("title")
+        return self._cards[7].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[10].cards[0].set_value("title", value)
+        self._cards[7].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

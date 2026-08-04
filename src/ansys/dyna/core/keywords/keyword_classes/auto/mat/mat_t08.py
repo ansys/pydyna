@@ -141,10 +141,10 @@ class MatT08(KeywordBase):
 
     @property
     def tgrlc(self) -> typing.Optional[int]:
-        """Get or set the Thermal generation rate curve / table ID(see * DEFINE_‌CURVE) :
-        GT.0 : Load curve giving thermal generation rate as a function of the mechanical history variable specified by ITGHSV.
-        EQ.0 : Use mechanical history variable specified by ITGHSV times constant multiplier value TGMULT.
-        LT.0 : Table of load curves for different temperatures.Each curve gives the thermal generation rate as a function of the mechanical history variable specified by ITGHSV
+        """Get or set the Thermal generation rate curve / table ID(see *DEFINE_CURVE):
+        GT.0: Load curve giving thermal generation rate as a function of the mechanical history variable specified by ITGHSV.
+        EQ.0: Use mechanical history variable specified by ITGHSV times constant multiplier value TGMULT.
+        LT.0: Table of load curves for different temperatures.Each curve gives the thermal generation rate as a function of the mechanical history variable specified by ITGHSV
         """ # nopep8
         return self._cards[0].get_value("tgrlc")
 
@@ -155,7 +155,7 @@ class MatT08(KeywordBase):
 
     @property
     def tgmult(self) -> typing.Optional[float]:
-        """Get or set the Thermal generation rate multiplier.Defines a volumetric heat rate (W/m^3 in SI units system).:
+        """Get or set the Thermal generation rate multiplier.Defines a volumetric heat rate (W/m**3 in SI units system).:
         EQ.0.0: no heat generation
         """ # nopep8
         return self._cards[0].get_value("tgmult")
@@ -171,8 +171,8 @@ class MatT08(KeywordBase):
         EQ.0.0: locally orthotropic with material axes by element nodes N1, N2 and N4,
         EQ.1.0: locally orthotropic with material axes determined by a point in space and global location of element center,
         EQ.2.0: globally orthotropic with material axes determined by vectors.
-        EQ.3.0:	Locally orthotropic with first material axis orthogonal to element normal (defined by element nodes N1, N2 and N4) and to a vector d- Third material direction corresponds to element normal.
-        EQ.4.0:	Local orthogonal in cylindrical coordinates with the material axes determined by a vector d,and an originating point, P, which define the centerline axis.
+        EQ.3.0: Locally orthotropic with first material axis orthogonal to element normal (defined by element nodes N1, N2 and N4) and to a vector d- Third material direction corresponds to element normal.
+        EQ.4.0: Local orthogonal in cylindrical coordinates with the material axes determined by a vector d,and an originating point, P, which define the centerline axis.
         """ # nopep8
         return self._cards[0].get_value("aopt")
 
@@ -208,8 +208,8 @@ class MatT08(KeywordBase):
     @property
     def lcc(self) -> typing.Optional[int]:
         """Get or set the Load curve ID defining specific heat as a function of temperature, or if |ILCCHSV| > 0:
-        GT.0:	Load curve as function of mechanical history variable specified by ILCCHSV.
-        LT.0 : Table of load curves for different temperatures.Each curve is a function of the mechanical history variable specified by ILCCHSV.
+        GT.0: Load curve as function of mechanical history variable specified by ILCCHSV.
+        LT.0: Table of load curves for different temperatures.Each curve is a function of the mechanical history variable specified by ILCCHSV.
         """ # nopep8
         return self._cards[1].get_value("lcc")
 
@@ -221,8 +221,8 @@ class MatT08(KeywordBase):
     @property
     def lck1(self) -> typing.Optional[int]:
         """Get or set the Load curve ID defining thermal conductivity, K_i(i = 1,2,3), in the local(x,y,z) - direction as a function of temperature, or if |ILCKHSV > 0:
-        GT.0 : Load curve giving thermal conductivity in the local direction as a function of the mechanical history variable specified by ILCKHSV.
-        LT.0 : Table of load curves for different temperatures.Each curve giving thermal conductivity in the local direction as a function of the mechanical history variable specified by ILCKHSV.
+        GT.0: Load curve giving thermal conductivity in the local direction as a function of the mechanical history variable specified by ILCKHSV.
+        LT.0: Table of load curves for different temperatures.Each curve giving thermal conductivity in the local direction as a function of the mechanical history variable specified by ILCKHSV.
         """ # nopep8
         return self._cards[1].get_value("lck1")
 
@@ -234,8 +234,8 @@ class MatT08(KeywordBase):
     @property
     def lck2(self) -> typing.Optional[int]:
         """Get or set the Load curve ID defining thermal conductivity, K_i(i = 1,2,3), in the local(x,y,z) - direction as a function of temperature, or if |ILCKHSV > 0:
-        GT.0 : Load curve giving thermal conductivity in the local direction as a function of the mechanical history variable specified by ILCKHSV.
-        LT.0 : Table of load curves for different temperatures.Each curve giving thermal conductivity in the local direction as a function of the mechanical history variable specified by ILCKHSV.
+        GT.0: Load curve giving thermal conductivity in the local direction as a function of the mechanical history variable specified by ILCKHSV.
+        LT.0: Table of load curves for different temperatures.Each curve giving thermal conductivity in the local direction as a function of the mechanical history variable specified by ILCKHSV.
         """ # nopep8
         return self._cards[1].get_value("lck2")
 
@@ -247,8 +247,8 @@ class MatT08(KeywordBase):
     @property
     def lck3(self) -> typing.Optional[int]:
         """Get or set the Load curve ID defining thermal conductivity, K_i(i = 1,2,3), in the local(x,y,z) - direction as a function of temperature, or if |ILCKHSV > 0:
-        GT.0 : Load curve giving thermal conductivity in the local direction as a function of the mechanical history variable specified by ILCKHSV.
-        LT.0 : Table of load curves for different temperatures.Each curve giving thermal conductivity in the local direction as a function of the mechanical history variable specified by ILCKHSV.
+        GT.0: Load curve giving thermal conductivity in the local direction as a function of the mechanical history variable specified by ILCKHSV.
+        LT.0: Table of load curves for different temperatures.Each curve giving thermal conductivity in the local direction as a function of the mechanical history variable specified by ILCKHSV.
         """ # nopep8
         return self._cards[1].get_value("lck3")
 
@@ -260,8 +260,8 @@ class MatT08(KeywordBase):
     @property
     def ilcchsv(self) -> typing.Optional[int]:
         """Get or set the Optional:
-        GT.0.0:	Mechanical history variable # used by LCC
-        LT.0.0:	As above but | ILCCHSV |= 1 - 6 points to the six stress components, | ILCCHSV |= 7 to plastic strain,and | ILCCHSV |= 7 + k points to history variable k
+        GT.0.0: Mechanical history variable # used by LCC
+        LT.0.0: As above but | ILCCHSV |= 1 - 6 points to the six stress components, | ILCCHSV |= 7 to plastic strain,and | ILCCHSV |= 7 + k points to history variable k
         """ # nopep8
         return self._cards[1].get_value("ilcchsv")
 
@@ -273,8 +273,8 @@ class MatT08(KeywordBase):
     @property
     def ilckhsv(self) -> typing.Optional[float]:
         """Get or set the Optional:
-        GT.0.0:	Mechanical history variable # used by LCK1, LCK2, LCK3
-        LT.0.0:	As above but | ILCKHSV |= 1 - 6 points to the six stress components, | ILCKHSV |= 7 to plastic strain,and | ILCKHSV |= 7 + k points to history variable k
+        GT.0.0: Mechanical history variable # used by LCK1, LCK2, LCK3
+        LT.0.0: As above but | ILCKHSV |= 1 - 6 points to the six stress components, | ILCKHSV |= 7 to plastic strain,and | ILCKHSV |= 7 + k points to history variable k
         """ # nopep8
         return self._cards[1].get_value("ilckhsv")
 
@@ -286,8 +286,8 @@ class MatT08(KeywordBase):
     @property
     def itghsv(self) -> typing.Optional[int]:
         """Get or set the Optional:
-        GT.0.0:	Mechanical history variable # used by TGRLC
-        LT.0.0:	As above but | ITGHSV |= 1 - 6 points to the six stress components, | ITGHSV |= 7 to plastic strain,and | ITGHSV |= 7 + k points to history variable k
+        GT.0.0: Mechanical history variable # used by TGRLC
+        LT.0.0: As above but | ITGHSV |= 1 - 6 points to the six stress components, | ITGHSV |= 7 to plastic strain,and | ITGHSV |= 7 + k points to history variable k
         """ # nopep8
         return self._cards[1].get_value("itghsv")
 

@@ -50,7 +50,7 @@ class ElementMassPart(KeywordBase):
                     Field("pid", int, 0, 8, None),
                     Field("addmass", float, 8, 16, 0.0),
                     Field("finmass", float, 24, 16, 0.0),
-                    Field("lcid", int, 40, 8, None),
+                    Field("lcid", int, 40, 16, None),
                 ],
                 None,
                 name="elements",

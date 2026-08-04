@@ -54,6 +54,7 @@ from .rigidwall_geometric_sphere_display import RigidwallGeometricSphereDisplay
 from .rigidwall_geometric_sphere_motion import RigidwallGeometricSphereMotion
 from .rigidwall_geometric_sphere_motion_display import RigidwallGeometricSphereMotionDisplay
 from .rigidwall_planar import RigidwallPlanar
+from .rigidwall_planar_display import RigidwallPlanarDisplay
 from .rigidwall_planar_finite import RigidwallPlanarFinite
 from .rigidwall_planar_finite_display import RigidwallPlanarFiniteDisplay
 from .rigidwall_planar_finite_forces import RigidwallPlanarFiniteForces

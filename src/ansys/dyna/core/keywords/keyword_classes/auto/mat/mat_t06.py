@@ -223,7 +223,7 @@ class MatT06(KeywordBase):
 
     @property
     def cend(self) -> typing.Optional[float]:
-        """Get or set the Concentration for reaction termination
+        """Get or set the Concentration for reaction termination.Reactions are terminated when concentration of species ICEND exceeds CEND.
         """ # nopep8
         return self._cards[0].get_value("cend")
 
@@ -234,7 +234,7 @@ class MatT06(KeywordBase):
 
     @property
     def gasc(self) -> typing.Optional[float]:
-        """Get or set the Gas constant: 1.987 cal/(g-mole K), 8314. J/(kg-mole K).
+        """Get or set the Gas constant: 1.987 cal/(mol K), 8,314. J/(mol K).
         """ # nopep8
         return self._cards[0].get_value("gasc")
 
@@ -258,7 +258,7 @@ class MatT06(KeywordBase):
     def mf(self) -> int:
         """Get or set the ODE solver method:
         EQ.0: default
-        EQ.1: an alternative ODE solver
+        EQ.1: an alternative ODE solver for stiff differential equations
         """ # nopep8
         return self._cards[0].get_value("mf")
 
@@ -370,7 +370,7 @@ class MatT06(KeywordBase):
 
     @property
     def rci1(self) -> typing.Optional[float]:
-        """Get or set the Reaction coefficient for species i in reaction j. Leave blank for undefined reactions
+        """Get or set the Reaction coefficient nij_ for species i in reaction j. Leave blank for undefined reactions
         """ # nopep8
         return self._cards[3].get_value("rci1")
 
@@ -381,7 +381,7 @@ class MatT06(KeywordBase):
 
     @property
     def rci2(self) -> typing.Optional[float]:
-        """Get or set the Reaction coefficient for species i in reaction j. Leave blank for undefined reactions
+        """Get or set the Reaction coefficient nij_ for species i in reaction j. Leave blank for undefined reactions
         """ # nopep8
         return self._cards[3].get_value("rci2")
 
@@ -392,7 +392,7 @@ class MatT06(KeywordBase):
 
     @property
     def rci3(self) -> typing.Optional[float]:
-        """Get or set the Reaction coefficient for species i in reaction j. Leave blank for undefined reactions
+        """Get or set the Reaction coefficient nij_ for species i in reaction j. Leave blank for undefined reactions
         """ # nopep8
         return self._cards[3].get_value("rci3")
 
@@ -403,7 +403,7 @@ class MatT06(KeywordBase):
 
     @property
     def rci4(self) -> typing.Optional[float]:
-        """Get or set the Reaction coefficient for species i in reaction j. Leave blank for undefined reactions
+        """Get or set the Reaction coefficient nij_ for species i in reaction j. Leave blank for undefined reactions
         """ # nopep8
         return self._cards[3].get_value("rci4")
 
@@ -414,7 +414,7 @@ class MatT06(KeywordBase):
 
     @property
     def rci5(self) -> typing.Optional[float]:
-        """Get or set the Reaction coefficient for species i in reaction j. Leave blank for undefined reactions
+        """Get or set the Reaction coefficient nij_ for species i in reaction j. Leave blank for undefined reactions
         """ # nopep8
         return self._cards[3].get_value("rci5")
 
@@ -425,7 +425,7 @@ class MatT06(KeywordBase):
 
     @property
     def rci6(self) -> typing.Optional[float]:
-        """Get or set the Reaction coefficient for species i in reaction j. Leave blank for undefined reactions
+        """Get or set the Reaction coefficient nij_ for species i in reaction j. Leave blank for undefined reactions
         """ # nopep8
         return self._cards[3].get_value("rci6")
 
@@ -436,7 +436,7 @@ class MatT06(KeywordBase):
 
     @property
     def rci7(self) -> typing.Optional[float]:
-        """Get or set the Reaction coefficient for species i in reaction j. Leave blank for undefined reactions
+        """Get or set the Reaction coefficient nij_ for species i in reaction j. Leave blank for undefined reactions
         """ # nopep8
         return self._cards[3].get_value("rci7")
 
@@ -447,7 +447,7 @@ class MatT06(KeywordBase):
 
     @property
     def rci8(self) -> typing.Optional[float]:
-        """Get or set the Reaction coefficient for species i in reaction j. Leave blank for undefined reactions
+        """Get or set the Reaction coefficient nij_ for species i in reaction j. Leave blank for undefined reactions
         """ # nopep8
         return self._cards[3].get_value("rci8")
 
@@ -458,7 +458,7 @@ class MatT06(KeywordBase):
 
     @property
     def rxi1(self) -> typing.Optional[float]:
-        """Get or set the Rate exponent for species i in reaction j. Leave blank for undefined reactions.
+        """Get or set the Rate exponent _Pij_ for species i in reaction j. Leave blank for undefined reactions.
         """ # nopep8
         return self._cards[4].get_value("rxi1")
 
@@ -469,7 +469,7 @@ class MatT06(KeywordBase):
 
     @property
     def rxi2(self) -> typing.Optional[float]:
-        """Get or set the Rate exponent for species i in reaction j. Leave blank for undefined reactions.
+        """Get or set the Rate exponent _Pij_ for species i in reaction j. Leave blank for undefined reactions.
         """ # nopep8
         return self._cards[4].get_value("rxi2")
 
@@ -480,7 +480,7 @@ class MatT06(KeywordBase):
 
     @property
     def rxi3(self) -> typing.Optional[float]:
-        """Get or set the Rate exponent for species i in reaction j. Leave blank for undefined reactions.
+        """Get or set the Rate exponent _Pij_ for species i in reaction j. Leave blank for undefined reactions.
         """ # nopep8
         return self._cards[4].get_value("rxi3")
 
@@ -491,7 +491,7 @@ class MatT06(KeywordBase):
 
     @property
     def rxi4(self) -> typing.Optional[float]:
-        """Get or set the Rate exponent for species i in reaction j. Leave blank for undefined reactions.
+        """Get or set the Rate exponent _Pij_ for species i in reaction j. Leave blank for undefined reactions.
         """ # nopep8
         return self._cards[4].get_value("rxi4")
 
@@ -502,7 +502,7 @@ class MatT06(KeywordBase):
 
     @property
     def rxi5(self) -> typing.Optional[float]:
-        """Get or set the Rate exponent for species i in reaction j. Leave blank for undefined reactions.
+        """Get or set the Rate exponent _Pij_ for species i in reaction j. Leave blank for undefined reactions.
         """ # nopep8
         return self._cards[4].get_value("rxi5")
 
@@ -513,7 +513,7 @@ class MatT06(KeywordBase):
 
     @property
     def rxi6(self) -> typing.Optional[float]:
-        """Get or set the Rate exponent for species i in reaction j. Leave blank for undefined reactions.
+        """Get or set the Rate exponent _Pij_ for species i in reaction j. Leave blank for undefined reactions.
         """ # nopep8
         return self._cards[4].get_value("rxi6")
 
@@ -524,7 +524,7 @@ class MatT06(KeywordBase):
 
     @property
     def rxi7(self) -> typing.Optional[float]:
-        """Get or set the Rate exponent for species i in reaction j. Leave blank for undefined reactions.
+        """Get or set the Rate exponent _Pij_ for species i in reaction j. Leave blank for undefined reactions.
         """ # nopep8
         return self._cards[4].get_value("rxi7")
 
@@ -535,7 +535,7 @@ class MatT06(KeywordBase):
 
     @property
     def rxi8(self) -> typing.Optional[float]:
-        """Get or set the Rate exponent for species i in reaction j. Leave blank for undefined reactions.
+        """Get or set the Rate exponent _Pij_ for species i in reaction j. Leave blank for undefined reactions.
         """ # nopep8
         return self._cards[4].get_value("rxi8")
 

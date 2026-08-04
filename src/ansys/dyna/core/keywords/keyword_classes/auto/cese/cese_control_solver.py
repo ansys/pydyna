@@ -50,7 +50,7 @@ class CeseControlSolver(KeywordBase):
         ]
     @property
     def icese(self) -> int:
-        """Get or set the Sets the framework of the CESE solver:   EQ.0: Fixed Eulerian
+        """Get or set the Sets the framework of the CESE solver: EQ.0: Fixed Eulerian
         EQ. 100: Moving Mesh FSI
         EQ. 200: Immersed boundary FSI.
         """ # nopep8
@@ -82,9 +82,9 @@ class CeseControlSolver(KeywordBase):
     @property
     def igeom(self) -> int:
         """Get or set the Set the geometric dimension:
-        EQ.0:   2D or 3D, it will be decided by the mesh & and the given boundary conditions.
-        EQ.2:   two dimension (2D) problem
-        EQ.3:   three dimension (3D) problem
+        EQ.0: 2D or 3D, it will be decided by the mesh & and the given boundary conditions.
+        EQ.2: two dimension (2D) problem
+        EQ.3: three dimension (3D) problem
         EQ.101  2D axis-symmetric
         .
         """ # nopep8

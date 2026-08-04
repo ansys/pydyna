@@ -308,12 +308,12 @@ class Mat221(KeywordBase):
     @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC, particularly the Material Directions section, for details):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES.
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
-        EQ.2.0:	Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
-        EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
-        LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_OPTION)
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with *DEFINE_COORDINATE_NODES.
+        EQ.1.0: Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
+        EQ.4.0: Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
+        LT.0.0: The absolute value of AOPT is a coordinate system ID number(CID on *DEFINE_COORDINATE_OPTION)
         """ # nopep8
         return self._cards[1].get_value("aopt")
 
@@ -325,14 +325,14 @@ class Mat221(KeywordBase):
     @property
     def macf(self) -> int:
         """Get or set the Material axes change flag for solid elements:
-        EQ. - 4:	Switch material axes b and c before BETA rotation
-        EQ. - 3 : Switch material axes a and c before BETA rotation
-        EQ. - 2 : Switch material axes a and b before BETA rotation
-        EQ.1 : No change, default
-        EQ.2 : Switch material axes a and b after BETA rotation
-        EQ.3 : Switch material axes a and c after BETA rotation
-        EQ.4 : Switch material axes b and c after BETA rotation
-        Figure Error!Reference source not found.indicates when LS - DYNA applies MACF during the process to obtain the final material axes.If BETA on * ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT = 3, the BETA input on Card 4 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed.
+        EQ. - 4: Switch material axes b and c before BETA rotation
+        EQ. - 3: Switch material axes a and c before BETA rotation
+        EQ. - 2: Switch material axes a and b before BETA rotation
+        EQ.1: No change, default
+        EQ.2: Switch material axes a and b after BETA rotation
+        EQ.3: Switch material axes a and c after BETA rotation
+        EQ.4: Switch material axes b and c after BETA rotation
+        If BETA on *ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT = 3, the BETA input on Card 4 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed.
         """ # nopep8
         return self._cards[1].get_value("macf")
 
@@ -488,38 +488,32 @@ class Mat221(KeywordBase):
 
     @property
     def nerode(self) -> int:
-        """Get or set the Failure and erosion flag:
-        EQ. 0: No failure (default)
-        EQ. 1: Failure as soon as one failure criterion is reached in all
-        integration points
-        EQ. 2: Failure as soon as one failure criterion is reached in at least
-        one integration point
-        EQ. 3: Failure as soon as a tension or compression failure criterion
-        in the a-direction is reached for one integration point
-        EQ. 4: Failure as soon as a tension or compression failure criterion
-        in the b-direction is reached for one integration point
-        EQ. 5: Failure as soon as a tension or compression failure criterion
-        in the c-direction is reached for one integration point
-        EQ. 6: Failure as soon as tension or compression failure criteria in
-        both the a- and b-directions are reached at a single integration
-        point or at 2 different integration points
-        EQ. 7: Failure as soon as tension or compression failure criteria in
-        both the b- and c-directions are reached at a single integration
-        point or at 2 different integration points
-        EQ. 8: Failure as soon as tension or compression failure criteria in
-        both the a- and c-directions are reached at a single integration
-        point or at 2 different integration points
-        EQ. 9: Failure as soon as tension or compression failure criteria in
-        the 3 directions are reached at a single integration point or at
-        different integration points.
+        """Get or set the Element erosion flag.
+        For multi-integration point elements, each of the failure strains mentioned below for NERODE >= 2 need only
+        occur in one integration point to trigger element erosion. For NERODE values 6 to 11,
+        which require more than one failure strain be reached, those failure strains need not occur in the same integration point.
+        EQ.0: No erosion(default)
+        EQ.1: Erosion occurs when one failure strain is reached in all integration points.
+        EQ.2: Erosion occurs when one failure strain is reached.
+        EQ.3: Erosion occurs when a tension or compression failure strain in the a - direction is reached.
+        EQ.4: Erosion occurs when as a tension or compression failure strain in the b - direction is reached.
+        EQ.5: Erosion occurs when a tension or compression failure strain in the c - direction is reached.
+        EQ.6: Erosion occurs when tension or compression failure strain in both the a - and b - directions are reached.
+        EQ.7: Erosion occurs when tension or compression failure strain in both the b - and c - directions are reached.
+        EQ.8: Erosion occurs when tension or compression failure strain in both the a - and c - directions are reached.
+        EQ.9: Erosion occurs when tension or compression failure strain in all 3 directions are reached.
+        EQ.10: Erosion occurs when tension or compression failure strain in both the a - and b - directions
+        is reached and either of the out - of - plane failure shear strains(bc or ac) is reached.
+        EQ.11: Erosion occurs when tension failure strain in either the a - or b - directions
+        is reached and either of the out - of - plane failure shear strains(bc or ac) is reached.
         """ # nopep8
         return self._cards[4].get_value("nerode")
 
     @nerode.setter
     def nerode(self, value: int) -> None:
         """Set the nerode property."""
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, None]:
-            raise Exception("""nerode must be `None` or one of {0,1,2,3,4,5,6,7,8,9}.""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, None]:
+            raise Exception("""nerode must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10,11}.""")
         self._cards[4].set_value("nerode", value)
 
     @property

@@ -189,7 +189,7 @@ class EmDatabaseFieldline(KeywordBase):
     @property
     def btype(self) -> int:
         """Get or set the Method to compute the magnetic field:
-        EQ.1: Direct method (every contribution is computed by the Biot Savart Law and summed up : very slow).
+        EQ.1: Direct method (every contribution is computed by the Biot Savart Law and summed up: very slow).
         EQ.2: Multipole method (approximation of the direct method using the multipole expansion).
         EQ.3: Multicenter method (approximation of the direct method using a weighted subset of points only in order to compute the magnetic field).
         """ # nopep8

@@ -64,7 +64,7 @@ class DatabaseD3Ftg(KeywordBase):
     @property
     def dt(self) -> float:
         """Get or set the Time interval between output states in time domain fatigue analysis (see *FATIGUE_OPTION)
-        EQ.0.0:	only fatigue results at the end of the analysis are output
+        EQ.0.0: only fatigue results at the end of the analysis are output
         """ # nopep8
         return self._cards[0].get_value("dt")
 

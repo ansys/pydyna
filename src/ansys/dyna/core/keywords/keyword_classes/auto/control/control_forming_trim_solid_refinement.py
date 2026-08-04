@@ -49,7 +49,7 @@ class ControlFormingTrimSolidRefinement(KeywordBase):
     @property
     def irefine(self) -> int:
         """Get or set the A flag to activate the adaptive trimming of a multi-layer sandwiched part. Currently setting this to either 0 or 1 will turn on the adaptive trimming.
-        EQ.1:	Activate the adaptive trimming.
+        EQ.1: Activate the adaptive trimming.
         """ # nopep8
         return self._cards[0].get_value("irefine")
 
@@ -61,8 +61,8 @@ class ControlFormingTrimSolidRefinement(KeywordBase):
     @property
     def ilevel(self) -> int:
         """Get or set the Adaptive refinement level.  Currently setting this variable to any integer other than 0 will refine the mesh one level down along the trim curve.
-        EQ.0:	no refinement
-        EQ.1 : refine one level down.
+        EQ.0: no refinement
+        EQ.1: refine one level down.
         """ # nopep8
         return self._cards[0].get_value("ilevel")
 

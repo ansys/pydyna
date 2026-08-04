@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EMPERMANENTMAGNET_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
-    FieldSchema("partid", int, 10, 10, None),
+    FieldSchema("pid", int, 10, 10, None),
     FieldSchema("mtype", int, 20, 10, 0),
     FieldSchema("north", int, 30, 10, None),
     FieldSchema("south", int, 40, 10, None),
@@ -37,9 +37,14 @@ _EMPERMANENTMAGNET_CARD0 = (
 )
 
 _EMPERMANENTMAGNET_CARD1 = (
-    FieldSchema("x_nid1", float, 0, 10, None, "x/nid1"),
-    FieldSchema("y_nid2", float, 10, 10, None, "y/nid2"),
+    FieldSchema("x", float, 0, 10, None),
+    FieldSchema("y", float, 10, 10, None),
     FieldSchema("z", float, 20, 10, None),
+)
+
+_EMPERMANENTMAGNET_CARD2 = (
+    FieldSchema("nid1", float, 0, 10, None),
+    FieldSchema("nid2", float, 10, 10, None),
 )
 
 class EmPermanentMagnet(KeywordBase):
@@ -48,7 +53,7 @@ class EmPermanentMagnet(KeywordBase):
     keyword = "EM"
     subkeyword = "PERMANENT_MAGNET"
     _link_fields = {
-        "partid": LinkType.PART,
+        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -63,10 +68,14 @@ class EmPermanentMagnet(KeywordBase):
                 _EMPERMANENTMAGNET_CARD1,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _EMPERMANENTMAGNET_CARD2,
+                **kwargs,
+            ),
         ]
     @property
     def id(self) -> typing.Optional[int]:
-        """Get or set the MID
+        """Get or set the ID of the magnet
         """ # nopep8
         return self._cards[0].get_value("id")
 
@@ -76,36 +85,40 @@ class EmPermanentMagnet(KeywordBase):
         self._cards[0].set_value("id", value)
 
     @property
-    def partid(self) -> typing.Optional[int]:
+    def pid(self) -> typing.Optional[int]:
         """Get or set the PART ID
         """ # nopep8
-        return self._cards[0].get_value("partid")
+        return self._cards[0].get_value("pid")
 
-    @partid.setter
-    def partid(self, value: int) -> None:
-        """Set the partid property."""
-        self._cards[0].set_value("partid", value)
+    @pid.setter
+    def pid(self, value: int) -> None:
+        """Set the pid property."""
+        self._cards[0].set_value("pid", value)
 
     @property
     def mtype(self) -> int:
-        """Get or set the Magnet definition type :
-        EQ.0 : Magnet defined by two node sets for Northand South Poles.
-        EQ.1 : Magnet defined by two segments sets for Northand South Poles.
-        EQ.3 : Magnet defined by a global vector orientation.
-        EQ.4 : Magnet defined by a global vector orientation given by two node IDs.
+        """Get or set the Magnet definition type:
+        EQ.0: Magnet defined by two node sets for Northand South Poles.
+        EQ.1: Magnet defined by two segments sets for Northand South Poles.
+        EQ.3: Magnet defined by a global vector orientation.
+        EQ.4: Magnet defined by a global vector orientation given by two node IDs.
+        EQ.5: Magnetic gear defined by an number of magnets (NDIVIS) around an AXIS, with an alternance of north pole, south pole orientations given by 360/NDIVIS and starting along the vector given by X2/Y2/Z2.
+        EQ.6: Magnetic gear defined by a number of magnets(NDIVIS) around an AXIS, with an alternance of north pole, south pole orientations given by 360 / NDIVIS and starting along the vector given by DIR.
+        EQ.7: Same as 5 except the North and South orientation of the magnets follows the gear rotation axis (see AXIS in Card 2c.) rather than its radial direction.
+        EQ.8: Same as 6 except the North and South orientation of the magnets follows the gear rotation axis (see AXIS in Card 2c) rather than its radial direction.
         """ # nopep8
         return self._cards[0].get_value("mtype")
 
     @mtype.setter
     def mtype(self, value: int) -> None:
         """Set the mtype property."""
-        if value not in [0, 1, 3, 4, None]:
-            raise Exception("""mtype must be `None` or one of {0,1,3,4}.""")
+        if value not in [0, 1, 3, 4, 5, 6, 7, 8, None]:
+            raise Exception("""mtype must be `None` or one of {0,1,3,4,5,6,7,8}.""")
         self._cards[0].set_value("mtype", value)
 
     @property
     def north(self) -> typing.Optional[int]:
-        """Get or set the Set of nodes/segments  of the north face of magnet
+        """Get or set the Set ID of the magnet north face for MTYPE = 0 and 1
         """ # nopep8
         return self._cards[0].get_value("north")
 
@@ -116,7 +129,7 @@ class EmPermanentMagnet(KeywordBase):
 
     @property
     def south(self) -> typing.Optional[int]:
-        """Get or set the Set of nodes/segments  of the south face of magnet
+        """Get or set the Set ID of the magnet south face for MTYPE = 0 and 1
         """ # nopep8
         return self._cards[0].get_value("south")
 
@@ -127,7 +140,8 @@ class EmPermanentMagnet(KeywordBase):
 
     @property
     def hc(self) -> typing.Optional[float]:
-        """Get or set the Coercive force. If a negative value is entered, it will give the value as a function of time
+        """Get or set the Coercive force, H_c. See Remark 1.
+        LT.0.0: | HC | refers to a load curve ID giving the coercive force as a function of time
         """ # nopep8
         return self._cards[0].get_value("hc")
 
@@ -137,28 +151,26 @@ class EmPermanentMagnet(KeywordBase):
         self._cards[0].set_value("hc", value)
 
     @property
-    def x_nid1(self) -> typing.Optional[float]:
-        """Get or set the Orientation of magnetization vector if MTYPE=3.
-        Two node IDs defining the magnetization vector if MTYPE=4.
+    def x(self) -> typing.Optional[float]:
+        """Get or set the Orientation of magnetization vector if MTYPE=3
         """ # nopep8
-        return self._cards[1].get_value("x_nid1")
+        return self._cards[1].get_value("x")
 
-    @x_nid1.setter
-    def x_nid1(self, value: float) -> None:
-        """Set the x_nid1 property."""
-        self._cards[1].set_value("x_nid1", value)
+    @x.setter
+    def x(self, value: float) -> None:
+        """Set the x property."""
+        self._cards[1].set_value("x", value)
 
     @property
-    def y_nid2(self) -> typing.Optional[float]:
-        """Get or set the Orientation of magnetization vector if MTYPE=3.
-        Two node IDs defining the magnetization vector if MTYPE=4.
+    def y(self) -> typing.Optional[float]:
+        """Get or set the Orientation of magnetization vector if MTYPE=3
         """ # nopep8
-        return self._cards[1].get_value("y_nid2")
+        return self._cards[1].get_value("y")
 
-    @y_nid2.setter
-    def y_nid2(self, value: float) -> None:
-        """Set the y_nid2 property."""
-        self._cards[1].set_value("y_nid2", value)
+    @y.setter
+    def y(self, value: float) -> None:
+        """Set the y property."""
+        self._cards[1].set_value("y", value)
 
     @property
     def z(self) -> typing.Optional[float]:
@@ -172,7 +184,29 @@ class EmPermanentMagnet(KeywordBase):
         self._cards[1].set_value("z", value)
 
     @property
-    def partid_link(self) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given partid."""
-        return self._get_link_by_attr("PART", "pid", self.partid, "parts")
+    def nid1(self) -> typing.Optional[float]:
+        """Get or set the Two node IDs defining the magnetization vector for MTYPE=4
+        """ # nopep8
+        return self._cards[2].get_value("nid1")
+
+    @nid1.setter
+    def nid1(self, value: float) -> None:
+        """Set the nid1 property."""
+        self._cards[2].set_value("nid1", value)
+
+    @property
+    def nid2(self) -> typing.Optional[float]:
+        """Get or set the Two node IDs defining the magnetization vector for MTYPE=4
+        """ # nopep8
+        return self._cards[2].get_value("nid2")
+
+    @nid2.setter
+    def nid2(self, value: float) -> None:
+        """Set the nid2 property."""
+        self._cards[2].set_value("nid2", value)
+
+    @property
+    def pid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given pid."""
+        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

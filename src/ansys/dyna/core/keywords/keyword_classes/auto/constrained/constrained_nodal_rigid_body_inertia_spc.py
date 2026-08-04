@@ -42,8 +42,12 @@ _CONSTRAINEDNODALRIGIDBODYINERTIASPC_CARD0 = (
 
 _CONSTRAINEDNODALRIGIDBODYINERTIASPC_CARD1 = (
     FieldSchema("cmo", float, 0, 10, 0.0),
-    FieldSchema("con1", float, 10, 10, 0.0),
-    FieldSchema("con2", float, 20, 10, 0.0),
+    FieldSchema("con1", int, 10, 10, 0),
+    FieldSchema("con2", int, 20, 10, 0),
+    FieldSchema("spcnid", int, 30, 10, 0),
+    FieldSchema("xspc", float, 40, 10, 0.0),
+    FieldSchema("yspc", float, 50, 10, 0.0),
+    FieldSchema("zspc", float, 60, 10, 0.0),
 )
 
 _CONSTRAINEDNODALRIGIDBODYINERTIASPC_CARD2 = (
@@ -178,7 +182,7 @@ class ConstrainedNodalRigidBodyInertiaSpc(KeywordBase):
 
     @property
     def pnode(self) -> int:
-        """Get or set the An optional, possibly massless, nodal point located at the mass center of the nodal rigid body. The initial nodal coordinates will be reset if necessary to ensure that they lie at the mass center. In the output files, the coordinates, accelerations, velocites, and displacements of this node will coorespond to the mass center of the nodal rigid body. If CID is defined, the velocities and accelerations of PNODE will be output in the local system in the D3PLOT and D3THDT files unless PNODE is specified as a negative number in which case the global system is used.
+        """Get or set the An optional node (a massless node is allowed) used for post-processing rigid body data. If PNODE is not located at the rigid bodys center of mass, LS-DYNA resets the initial coordinates of PNODE to the center of mass.  If CID is defined, LS-DYNA outputs the velocities and accelerations of PNODE in the local system to the d3plot and d3thdt files unless you specify PNODE as a negative number, in which case the global system is used.
         """ # nopep8
         return self._cards[0].get_value("pnode")
 
@@ -189,10 +193,15 @@ class ConstrainedNodalRigidBodyInertiaSpc(KeywordBase):
 
     @property
     def iprt(self) -> int:
-        """Get or set the Print flag.  For nodal rigid bodies the following values apply:
-        EQ.1:	Write data into rbdout.
-        EQ.2 : Do not write data into rbdout.
-        Except for in the case of two - noded rigid bodies, IPRT(if 0 or unset) defaults to the value of IPRTF in* CONTROL_OUTPUT.For two - noded rigid bodies, printing is suppressed(IPRT = 2) unless IPRT is set to 1.  This is to avoid excessively large rbdout files when the model contains many two - noded welds.
+        """Get or set the Print flag.  For nodal rigid bodies, the following values apply:
+        EQ.-2: Do not write data into rbdout. Output the forces and moments in bndout with respect to the nodal rigid body�s local coordinate system.
+        EQ.-1: Write data into rbdout. Output the forces and moments in bndout with respect to the nodal rigid body�s local coordinate system.
+        EQ.0: Defaults to the value of IPRTF in *CONTROL_OUTPUT for all nodal rigid bodies except two-noded rigid bodies.
+        For two-noded rigid bodies, printing to rbdout is suppressed. This behavior exists to avoid excessively large rbdout files when the model
+        contains many two-noded welds. Note that IPRTF does not change the coordinate system for bndout. Thus, for all nodal rigid bodies, the forces
+        and moments in the bndout file are expressed in the global coordinate system.
+        EQ.1: Write data into rbdout.  Output the forces and moments in bndout with respect to the global coordinate system.
+        EQ.2: Do not write data into rbdout. Output the forces and moments in bndout with respect to the global coordinate system.
         """ # nopep8
         return self._cards[0].get_value("iprt")
 
@@ -259,24 +268,26 @@ class ConstrainedNodalRigidBodyInertiaSpc(KeywordBase):
 
     @property
     def cmo(self) -> float:
-        """Get or set the Center of mass constraint option, CMO:
-        EQ.+1.0: constraints applied in global directions,
-        EQ. 0.0: no constraints,
-        EQ. -1.0: constraints applied in local directions (SPC constraint).
+        """Get or set the Constraint option, CMO (see Remark 4):
+        EQ. + 2.0: Constraints applied in global directions at the coordinate given by XSPC, YSPCand ZSPC or the initial coordinates of node SPCNID.Unless prescribed motion is applied to the rigid body, the constraint coordinates are fixed in time.
+        EQ. + 1.0: Constraints applied in global directions,
+        EQ.0.0: No constraints,
+        EQ. - 1.0: Constraints applied in local directions(SPC constraint).
+        EQ. - 2.0: Constraints applied in local directions(SPC constraint) at the coordinate given by XSPC, YSPCand ZSPC or the initial coordinates of node SPCNID.Unless prescribed motion is applied to the rigid body, the constraint coordinates are fixed in time.
         """ # nopep8
         return self._cards[1].get_value("cmo")
 
     @cmo.setter
     def cmo(self, value: float) -> None:
         """Set the cmo property."""
-        if value not in [0.0, -1.0, 1.0, None]:
-            raise Exception("""cmo must be `None` or one of {0.0,-1.0,1.0}.""")
+        if value not in [0.0, -1.0, -2.0, 1.0, 2.0, None]:
+            raise Exception("""cmo must be `None` or one of {0.0,-1.0,-2.0,1.0,2.0}.""")
         self._cards[1].set_value("cmo", value)
 
     @property
-    def con1(self) -> float:
+    def con1(self) -> int:
         """Get or set the First constraint parameter:
-        If CMO=+1.0, then specify global translational constraint:
+        If CMO>0, then specify global translational constraint:
         EQ.0: no constraints,
         EQ.1: constrained x displacement,
         EQ.2: constrained y displacement,
@@ -285,18 +296,18 @@ class ConstrainedNodalRigidBodyInertiaSpc(KeywordBase):
         EQ.5: constrained y and z displacements,
         EQ.6: constrained z and x displacements,
         EQ.7: constrained x, y, and z displacements.
-        If CM0=-1.0, then specify local coordinate system ID. See *DEFINE_ COORDINATE_OPTION: This coordinate system is fixed in time.
+        If CM0<0, then specify local coordinate system ID. See *DEFINE_ COORDINATE_OPTION: This coordinate system is fixed in time.
         """ # nopep8
         return self._cards[1].get_value("con1")
 
     @con1.setter
-    def con1(self, value: float) -> None:
+    def con1(self, value: int) -> None:
         """Set the con1 property."""
         self._cards[1].set_value("con1", value)
 
     @property
-    def con2(self) -> float:
-        """Get or set the If CMO=+1.0, then specify global rotational constraint:
+    def con2(self) -> int:
+        """Get or set the If CMO>0, then specify global rotational constraint:
         EQ.0: no constraints,
         EQ.1: constrained x rotation,
         EQ.2: constrained y rotation,
@@ -305,7 +316,7 @@ class ConstrainedNodalRigidBodyInertiaSpc(KeywordBase):
         EQ.5: constrained y and z rotations,
         EQ.6: constrained z and x rotations,
         EQ.7: constrained x, y, and z rotations.
-        If CM0=-1.0, then specify local (SPC) constraint:
+        If CM0<0, then specify local (SPC) constraint:
         EQ.000000 no constraint,
         EQ.100000 constrained x translation,
         EQ.010000 constrained y translation,
@@ -313,14 +324,58 @@ class ConstrainedNodalRigidBodyInertiaSpc(KeywordBase):
         EQ.000100 constrained x rotation,
         EQ.000010 constrained y rotation,
         EQ.000001 constrained z rotation.
-        Any combination of local constraints can be achieved by adding the number 1 into the corresponding column.
+        To specify a combination of local constraints, input the sum of the desired constraints
         """ # nopep8
         return self._cards[1].get_value("con2")
 
     @con2.setter
-    def con2(self, value: float) -> None:
+    def con2(self, value: int) -> None:
         """Set the con2 property."""
         self._cards[1].set_value("con2", value)
+
+    @property
+    def spcnid(self) -> int:
+        """Get or set the For |CMO| = 2.0, the constraint coordinates (see below) are the (initial) coordinates of the node with this ID.
+        """ # nopep8
+        return self._cards[1].get_value("spcnid")
+
+    @spcnid.setter
+    def spcnid(self, value: int) -> None:
+        """Set the spcnid property."""
+        self._cards[1].set_value("spcnid", value)
+
+    @property
+    def xspc(self) -> float:
+        """Get or set the Coordinate where the constraints act. Superseded by SPCNID.
+        """ # nopep8
+        return self._cards[1].get_value("xspc")
+
+    @xspc.setter
+    def xspc(self, value: float) -> None:
+        """Set the xspc property."""
+        self._cards[1].set_value("xspc", value)
+
+    @property
+    def yspc(self) -> float:
+        """Get or set the Coordinate where the constraints act. Superseded by SPCNID.
+        """ # nopep8
+        return self._cards[1].get_value("yspc")
+
+    @yspc.setter
+    def yspc(self, value: float) -> None:
+        """Set the yspc property."""
+        self._cards[1].set_value("yspc", value)
+
+    @property
+    def zspc(self) -> float:
+        """Get or set the Coordinate where the constraints act. Superseded by SPCNID.
+        """ # nopep8
+        return self._cards[1].get_value("zspc")
+
+    @zspc.setter
+    def zspc(self, value: float) -> None:
+        """Set the zspc property."""
+        self._cards[1].set_value("zspc", value)
 
     @property
     def xc(self) -> float:

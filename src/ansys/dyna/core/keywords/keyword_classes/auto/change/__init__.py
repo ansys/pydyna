@@ -30,12 +30,13 @@ from .change_rigidwall_geometric import ChangeRigidwallGeometric
 from .change_rigidwall_planar import ChangeRigidwallPlanar
 from .change_rigid_body_constraint import ChangeRigidBodyConstraint
 from .change_rigid_body_inertia import ChangeRigidBodyInertia
-from .change_rigid_body_stopper import ChangeRigidBodyStopper
+from .change_rigid_body_stoppers import ChangeRigidBodyStoppers
 from .change_status_report_frequency import ChangeStatusReportFrequency
 from .change_thermal_parameters import ChangeThermalParameters
 from .change_velocity import ChangeVelocity
 from .change_velocity_generation import ChangeVelocityGeneration
 from .change_velocity_node import ChangeVelocityNode
 from .change_velocity_node_only import ChangeVelocityNodeOnly
+from .change_velocity_only import ChangeVelocityOnly
 from .change_velocity_rigid_body import ChangeVelocityRigidBody
 from .change_velocity_zero import ChangeVelocityZero

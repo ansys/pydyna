@@ -30,9 +30,10 @@ from ansys.dyna.core.lib.keyword_base import LinkType
 _CONTROLACCURACY_CARD0 = (
     FieldSchema("osu", int, 0, 10, 0),
     FieldSchema("inn", int, 10, 10, 1),
-    FieldSchema("pidosu", int, 20, 10, None),
-    FieldSchema("iacc", int, 30, 10, None),
-    FieldSchema("exacc", float, 40, 10, None),
+    FieldSchema("pidos", int, 20, 10, None),
+    FieldSchema("iacc", int, 30, 10, 0),
+    FieldSchema("exacc", float, 40, 10, 0.0),
+    FieldSchema("srtflg", int, 50, 10, 0),
 )
 
 class ControlAccuracy(KeywordBase):
@@ -41,7 +42,7 @@ class ControlAccuracy(KeywordBase):
     keyword = "CONTROL"
     subkeyword = "ACCURACY"
     _link_fields = {
-        "pidosu": LinkType.SET_PART,
+        "pidos": LinkType.SET_PART,
     }
 
     def __init__(self, **kwargs):
@@ -88,35 +89,38 @@ class ControlAccuracy(KeywordBase):
         self._cards[0].set_value("inn", value)
 
     @property
-    def pidosu(self) -> typing.Optional[int]:
-        """Get or set the Part set ID for objective stress updates. If this part set ID is given only those part IDs listed will use the objective stress update; therefore, OSU is ignored.
+    def pidos(self) -> typing.Optional[int]:
+        """Get or set the Part set ID for objective stress updates.  If this part set ID is given only those part IDs listed will use the objective stress update; therefore, OSU is ignored.
         """ # nopep8
-        return self._cards[0].get_value("pidosu")
+        return self._cards[0].get_value("pidos")
 
-    @pidosu.setter
-    def pidosu(self, value: int) -> None:
-        """Set the pidosu property."""
-        self._cards[0].set_value("pidosu", value)
+    @pidos.setter
+    def pidos(self, value: int) -> None:
+        """Set the pidos property."""
+        self._cards[0].set_value("pidos", value)
 
     @property
-    def iacc(self) -> typing.Optional[int]:
+    def iacc(self) -> int:
         """Get or set the Implicit accuracy flag, turns on some specific accuracy considerations in implicit analysis at an extra CPU cost.
-        EQ.0: Off (default)
-        EQ.1: On
-        EQ.2:	on (partially also for explicit, for compatibility when switching between implicit and explicit)
+        -1: Off
+        EQ.0: On (only for implicit)
+        EQ.1: On (only for implicit)
+        EQ.2: On (partially also for explicit, for compatibility when switching between implicit and explicit)
         """ # nopep8
         return self._cards[0].get_value("iacc")
 
     @iacc.setter
     def iacc(self, value: int) -> None:
         """Set the iacc property."""
+        if value not in [0, -1, 1, 2, None]:
+            raise Exception("""iacc must be `None` or one of {0,-1,1,2}.""")
         self._cards[0].set_value("iacc", value)
 
     @property
-    def exacc(self) -> typing.Optional[float]:
+    def exacc(self) -> float:
         """Get or set the Explicit accuracy parameter:
-        EQ.0.0:	Off(default)
-        GT.0.0 : On(see Remark 5)
+        EQ.0.0: Off(default)
+        GT.0.0: On(see Remark 5)
         """ # nopep8
         return self._cards[0].get_value("exacc")
 
@@ -126,12 +130,27 @@ class ControlAccuracy(KeywordBase):
         self._cards[0].set_value("exacc", value)
 
     @property
-    def pidosu_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_PART_* keyword for pidosu."""
-        return self._get_set_link("PART", self.pidosu)
+    def srtflg(self) -> int:
+        """Get or set the Flag to process parts, contacts, nodal rigid bodies, and elements in a sequence sorted by their respective user IDs, regardless of the order they appear in the input files. When turned on, it ensures consistent results if the user modifies the order of these entities in the input files, such as by changing the order of include files between runs of the same model. See Remark 6.
+        EQ.0:	Off(default)
+        EQ.1 : On
+        """ # nopep8
+        return self._cards[0].get_value("srtflg")
 
-    @pidosu_link.setter
-    def pidosu_link(self, value: KeywordBase) -> None:
-        """Set the SET_PART_* keyword for pidosu."""
-        self.pidosu = value.sid
+    @srtflg.setter
+    def srtflg(self, value: int) -> None:
+        """Set the srtflg property."""
+        if value not in [0, 1, None]:
+            raise Exception("""srtflg must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("srtflg", value)
+
+    @property
+    def pidos_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SET_PART_* keyword for pidos."""
+        return self._get_set_link("PART", self.pidos)
+
+    @pidos_link.setter
+    def pidos_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for pidos."""
+        self.pidos = value.sid
 

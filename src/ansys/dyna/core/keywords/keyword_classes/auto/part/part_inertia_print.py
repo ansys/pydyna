@@ -216,13 +216,13 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def adpopt(self) -> typing.Optional[int]:
-        """Get or set the Indicate if this part is adapted or not. See also *CONTROL_ADAPTIVITY.
+        """Get or set the Indicate if this part is adapted. See also *CONTROL_ADAPTIVITY.
         LT.0: R-adaptive remeshing for 2-D solids, |ADPOPT| gives the load curve ID that defines the element size as a function of time.
         EQ.0:Adaptive remeshing is inactive for this part ID.
-        EQ.1:	h - adaptive for 3D shells and for shell / solid / shell sandwich composites.
-        EQ.2 : r - adaptive remeshing for 2D solids, 3D tetrahedrons and 3D EFG.For a more detailed description of 3D r - adaptivity, see Volume IV of the Keyword User’s Manual(Multiscale Solvers).
-        EQ.3 : Axisymmetric r - adaptive remeshing for 3D solid(see Remark 6).For a more detailed description of 3D r - adaptivity, see Volume IV of the Keyword User’s Manual(Multiscale Solvers).
-        EQ.9 : Passive h - adaptive for 3D shells.The elements in this part will not be split unless their neighboring elements in other parts need to be split more than one level.
+        EQ.1: h - adaptivity for 3D shells and for shell / solid / shell sandwich composites.
+        EQ.2: r - adaptive remeshing for 2D solids, 3D tetrahedrons and 3D EFG.For a more detailed description of 3D r - adaptivity, see Volume IV of the Keyword Users Manual(Multiscale Solvers).
+        EQ.3: Axisymmetric r - adaptive remeshing for 3D solid(see Remark 6).For a more detailed description of 3D r - adaptivity, see Volume IV of the Keyword Users Manual(Multiscale Solvers).
+        EQ.9: Passive h - adaptivity for 3D shells.The elements in this part will not be split unless their neighboring elements in other parts need to be split more than one level.
         """ # nopep8
         return self._cards[1].get_value("adpopt")
 
@@ -233,8 +233,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def tmid(self) -> int:
-        """Get or set the Thermal material property identication defined in the *MAT_THERMAL section. Thermal properties must be specified for all solid, shell, and thick shell parts if a thermal or coupled thermal structual/analysis is being performed. Beams and discrete elements are not considered in thermal analyses.
-        EQ.0: defaults to MID.
+        """Get or set the Thermal material property identication defined in the *MAT_THERMAL section. Thermal properties must be specified for all solid, shell, and thick shell parts for thermal or coupled thermal-structural analyses. Discrete elements are not considered in thermal analyses. See Remark 7.
         """ # nopep8
         return self._cards[1].get_value("tmid")
 
@@ -245,7 +244,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def xc(self) -> typing.Optional[float]:
-        """Get or set the x-coordinate of center of mass. If nodal point, NODEID, is defined XC, YC, and ZC are ignored and the corrdinates of the nodal point, NODID, are taken as the center of mass.
+        """Get or set the x-coordinate of center of mass. If nodal point NODEID is defined, XC, YC, and ZC are ignored, and the corrdinates of NODID are taken as the center of mass.
         """ # nopep8
         return self._cards[2].get_value("xc")
 
@@ -291,7 +290,7 @@ class PartInertiaPrint(KeywordBase):
     def ircs(self) -> int:
         """Get or set the Flag for inertia tensor reference coordinate system:
         EQ.0: global inertia tensor (default),
-        EQ.1: principal moments of inertia with orientation vectors.
+        EQ.1: Local inertia tensor given in a system defined by the orientation vectors.
         """ # nopep8
         return self._cards[2].get_value("ircs")
 
@@ -304,7 +303,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def nodeid(self) -> typing.Optional[int]:
-        """Get or set the Nodal point defining the CG of the rigid body. This node should be included as an extra node for the rigid body; however, this is not a requirement. If this node is free, its motion will not be updated to correspond with the rigid body after the calculation begins.
+        """Get or set the Nodal point defining the center of mass of the rigid body. This node should be,but is not required to be, included as an extra node for the rigid body. If this node is free, its motion will not be updated to correspond with the rigid body after the calculation begins.
         """ # nopep8
         return self._cards[2].get_value("nodeid")
 
@@ -315,7 +314,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def ixx(self) -> typing.Optional[float]:
-        """Get or set the Ixx, xx component of inertia tensor.
+        """Get or set the Ixx, xx component of the inertia tensor.
         """ # nopep8
         return self._cards[3].get_value("ixx")
 
@@ -326,7 +325,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def ixy(self) -> typing.Optional[float]:
-        """Get or set the Ixy, xy component of inertia tensor.
+        """Get or set the Ixy, xy component of the inertia tensor.
         """ # nopep8
         return self._cards[3].get_value("ixy")
 
@@ -337,7 +336,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def ixz(self) -> typing.Optional[float]:
-        """Get or set the Ixz, xz component of inertia tensor.
+        """Get or set the Ixz, xz component of the inertia tensor.
         """ # nopep8
         return self._cards[3].get_value("ixz")
 
@@ -348,7 +347,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def iyy(self) -> typing.Optional[float]:
-        """Get or set the Iyy, yy component of inertia tensor.
+        """Get or set the Iyy, yy component of the inertia tensor.
         """ # nopep8
         return self._cards[3].get_value("iyy")
 
@@ -359,7 +358,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def iyz(self) -> typing.Optional[float]:
-        """Get or set the Iyz, xy component of inertia tensor.
+        """Get or set the Iyz, xy component of the inertia tensor.
         """ # nopep8
         return self._cards[3].get_value("iyz")
 
@@ -370,7 +369,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def izz(self) -> typing.Optional[float]:
-        """Get or set the Izz , zz component of inertia tensor.
+        """Get or set the Izz, zz component of the inertia tensor.
         """ # nopep8
         return self._cards[3].get_value("izz")
 
@@ -381,7 +380,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def vtx(self) -> typing.Optional[float]:
-        """Get or set the Initial translational velocity of rigid body in x-direction.
+        """Get or set the Initial translational velocity of the rigid body in the global x-direction.
         """ # nopep8
         return self._cards[4].get_value("vtx")
 
@@ -392,7 +391,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def vty(self) -> typing.Optional[float]:
-        """Get or set the Initial translational velocity of rigid body in y-direction.
+        """Get or set the Initial translational velocity of the rigid body in the global y-direction.
         """ # nopep8
         return self._cards[4].get_value("vty")
 
@@ -403,7 +402,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def vtz(self) -> typing.Optional[float]:
-        """Get or set the Initial translational velocity of rigid body in z-direction.
+        """Get or set the Initial translational velocity of the rigid body in the global z-direction.
         """ # nopep8
         return self._cards[4].get_value("vtz")
 
@@ -414,7 +413,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def vrx(self) -> typing.Optional[float]:
-        """Get or set the Initial rotational velocity of rigid body about x-axis.
+        """Get or set the Initial rotational velocity of the rigid body about the global x-axis.
         """ # nopep8
         return self._cards[4].get_value("vrx")
 
@@ -425,7 +424,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def vry(self) -> typing.Optional[float]:
-        """Get or set the Initial rotational velocity of rigid body about y-axis.
+        """Get or set the Initial rotational velocity of the rigid body about the global y-axis.
         """ # nopep8
         return self._cards[4].get_value("vry")
 
@@ -436,7 +435,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def vrz(self) -> typing.Optional[float]:
-        """Get or set the Initial rotational velocity of rigid body about z-axis.
+        """Get or set the Initial rotational velocity of the rigid body about the global z-axis.
         """ # nopep8
         return self._cards[4].get_value("vrz")
 
@@ -447,7 +446,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def xl(self) -> typing.Optional[float]:
-        """Get or set the x-coordinate of local x-axis. Origin lies at (0,0,0).
+        """Get or set the x-coordinate of the local x-axis. The origin lies at (0,0,0).
         """ # nopep8
         return self._cards[5].get_value("xl")
 
@@ -458,7 +457,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def yl(self) -> typing.Optional[float]:
-        """Get or set the y-coordinate of local x-axis.
+        """Get or set the y-coordinate of the local x-axis.
         """ # nopep8
         return self._cards[5].get_value("yl")
 
@@ -469,7 +468,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def zl(self) -> typing.Optional[float]:
-        """Get or set the z-coordinate of local x-axis.
+        """Get or set the z-coordinate of the local x-axis.
         """ # nopep8
         return self._cards[5].get_value("zl")
 
@@ -480,7 +479,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def xlip(self) -> typing.Optional[float]:
-        """Get or set the x-coordinate of vector in local x-y plane.
+        """Get or set the x-coordinate of vector in the local xy-plane.
         """ # nopep8
         return self._cards[5].get_value("xlip")
 
@@ -491,7 +490,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def ylip(self) -> typing.Optional[float]:
-        """Get or set the y-coordinate of vector in local x-y plane.
+        """Get or set the y-coordinate of vector in the local xy-plane.
         """ # nopep8
         return self._cards[5].get_value("ylip")
 
@@ -502,7 +501,7 @@ class PartInertiaPrint(KeywordBase):
 
     @property
     def zlip(self) -> typing.Optional[float]:
-        """Get or set the z-coordinate of vecotr in local x-y plane.
+        """Get or set the z-coordinate of vecotr in the local xy-plane.
         """ # nopep8
         return self._cards[5].get_value("zlip")
 
@@ -526,10 +525,10 @@ class PartInertiaPrint(KeywordBase):
     @property
     def prbf(self) -> int:
         """Get or set the Print flag for RBDOUT and MATSUM files
-        EQ.0: default is taken from the keyword *CONTROL_OUTPUT
-        EQ.1: write data into RDBOUT file only
-        EQ.2: write data into MATSUM file only
-        EQ.3: do not write data into RBDOUT AND MATSUM files
+        EQ.0: default is taken from *CONTROL_OUTPUT
+        EQ.1: write data into the rdbout file only
+        EQ.2: write data into the matsum file only
+        EQ.3: do not write data into rbdout and matsum.
         """ # nopep8
         return self._cards[6].get_value("prbf")
 

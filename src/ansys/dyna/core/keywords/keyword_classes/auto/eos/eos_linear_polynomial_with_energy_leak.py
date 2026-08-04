@@ -193,11 +193,7 @@ class EosLinearPolynomialWithEnergyLeak(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID, which can be the ID of *DEFINE_‌CURVE,
-        *DEFINE_‌CURVE_‌FUNCTION or *DEFINE_‌FUNCTION, defining the energy deposition rate.
-        If an energy leak rate is intended, do not specify a negative ordinate in LCID,
-        rather, use the constant(s) in the equation of state, e.g., set C4 to a negative value.
-        If *DEFINE_‌FUNCTION is used, the input of the defined function is time.
+        """Get or set the Load curve ID, which can be the ID of *DEFINE_CURVE, *DEFINE_CURVE_FUNCTION or *DEFINE_FUNCTION, defining the specific energy deposition rate as a function of time. If a specific energy leak rate is intended, do not specify a negative ordinate in LCID, rather, use the constant(s) in the equation of state, such as setting C4 to a negative value. If *DEFINE_FUNCTION is used, the input of the defined function is time. Note that the specific energy rate has units of energy per time and volume.
         """ # nopep8
         return self._cards[1].get_value("lcid")
 

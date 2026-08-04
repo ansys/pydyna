@@ -91,7 +91,6 @@ from .element_shell_mcid import ElementShellMcid
 from .element_shell_mcid_offset import ElementShellMcidOffset
 from .element_shell_nurbs_patch import ElementShellNurbsPatch
 from .element_shell_nurbs_patch_trimmed import ElementShellNurbsPatchTrimmed
-from .element_shell_nurbs_patch_v3 import ElementShellNurbsPatchV3
 from .element_shell_offset import ElementShellOffset
 from .element_shell_offset_composite import ElementShellOffsetComposite
 from .element_shell_offset_composite_long import ElementShellOffsetCompositeLong
@@ -132,6 +131,7 @@ from .element_solid_p40 import ElementSolidP40
 from .element_solid_p6top21 import ElementSolidP6Top21
 from .element_solid_p6top21_format2 import ElementSolidP6Top21Format2
 from .element_solid_peri import ElementSolidPeri
+from .element_solid_reference import ElementSolidReference
 from .element_solid_t15 import ElementSolidT15
 from .element_solid_t20 import ElementSolidT20
 from .element_solid_t4tot10 import ElementSolidT4Tot10

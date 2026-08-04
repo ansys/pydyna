@@ -26,6 +26,8 @@ from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATWTMSTM_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
@@ -45,7 +47,7 @@ _MATWTMSTM_CARD1 = (
     FieldSchema("qr2", float, 30, 10, None),
     FieldSchema("cr2", float, 40, 10, None),
     FieldSchema("k", float, 50, 10, None),
-    FieldSchema("lc", float, 60, 10, None),
+    FieldSchema("lc", int, 60, 10, None),
     FieldSchema("flg", int, 70, 10, 0),
 )
 
@@ -95,9 +97,9 @@ _MATWTMSTM_CARD6 = (
 )
 
 _MATWTMSTM_CARD7 = (
-    FieldSchema("xp", float, 0, 10, None),
-    FieldSchema("yp", float, 10, 10, None),
-    FieldSchema("zp", float, 20, 10, None),
+    FieldSchema("unused", float, 0, 10, None),
+    FieldSchema("unused", float, 10, 10, None),
+    FieldSchema("unused", float, 20, 10, None),
     FieldSchema("a1", float, 30, 10, None),
     FieldSchema("a2", float, 40, 10, None),
     FieldSchema("a3", float, 50, 10, None),
@@ -124,6 +126,9 @@ class MatWtmStm(KeywordBase):
     _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
     ]
+    _link_fields = {
+        "lc": LinkType.DEFINE_CURVE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the MatWtmStm class."""
@@ -234,7 +239,7 @@ class MatWtmStm(KeywordBase):
 
     @property
     def npsc(self) -> typing.Optional[float]:
-        """Get or set the Critical value   of the plastic thickness strain (used in the CTS fracture criterion).
+        """Get or set the Critical value of the plastic thickness strain (used in the CTS fracture criterion).
         """ # nopep8
         return self._cards[0].get_value("npsc")
 
@@ -245,7 +250,7 @@ class MatWtmStm(KeywordBase):
 
     @property
     def wc(self) -> typing.Optional[float]:
-        """Get or set the Critical value   for the Cockcroft-Latham fracture criterion
+        """Get or set the Critical value for the Cockcroft-Latham fracture criterion
         """ # nopep8
         return self._cards[0].get_value("wc")
 
@@ -256,7 +261,7 @@ class MatWtmStm(KeywordBase):
 
     @property
     def tauc(self) -> typing.Optional[float]:
-        """Get or set the Critical value   for the Bressan-Williams shear fracture criterion
+        """Get or set the Critical value for the Bressan-Williams shear fracture criterion
         """ # nopep8
         return self._cards[0].get_value("tauc")
 
@@ -267,7 +272,9 @@ class MatWtmStm(KeywordBase):
 
     @property
     def sigma0(self) -> typing.Optional[float]:
-        """Get or set the Initial mean value of yield stress  .
+        """Get or set the Initial mean value of yield stress o_0:
+        GT.0.0:Constant value
+        LT.0.0: Load curve ID = -SIGMA0 which defines yield stress as a function of plastic strain.Hardening parameters QR1, CR1, QR2,and CR2 are ignored in that case.
         """ # nopep8
         return self._cards[1].get_value("sigma0")
 
@@ -322,7 +329,7 @@ class MatWtmStm(KeywordBase):
 
     @property
     def k(self) -> typing.Optional[float]:
-        """Get or set the equals half YLD2003 exponent  .  Recommended value for FCC materials is  , i.e.  .
+        """Get or set the k, equals half YLD2003 exponent m. Recommended value for FCC materials is m=8, that is, k=4
         """ # nopep8
         return self._cards[1].get_value("k")
 
@@ -332,19 +339,22 @@ class MatWtmStm(KeywordBase):
         self._cards[1].set_value("k", value)
 
     @property
-    def lc(self) -> typing.Optional[float]:
-        """Get or set the First load curve number for process effects, i.e. the load curve describing the relation between the pre-strain and the yield stress  .  Similar curves for  ,  ,  ,  , and must follow consecutively from this number
+    def lc(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID giving the relation between the pre-strain and the yield stress o_0. Similar curves for Q_R1, C_R1, Q_R2, C_R2, and W_c must follow consecutively from this number
         """ # nopep8
         return self._cards[1].get_value("lc")
 
     @lc.setter
-    def lc(self, value: float) -> None:
+    def lc(self, value: int) -> None:
         """Set the lc property."""
         self._cards[1].set_value("lc", value)
 
     @property
     def flg(self) -> int:
-        """Get or set the flag
+        """Get or set the Flag to determine the card for defining yield:
+        EQ.0: Use Card 3a for YLD2003(STM).
+        EQ.1: Use Card 3b for yield surface(STM - alternative input).
+        EQ.2: Use Card 3c forYLD89(WTM).
         """ # nopep8
         return self._cards[1].get_value("flg")
 
@@ -445,7 +455,7 @@ class MatWtmStm(KeywordBase):
 
     @property
     def s00(self) -> typing.Optional[float]:
-        """Get or set the Yield stress in   direction.
+        """Get or set the Yield stress in 0 degree direction.
         """ # nopep8
         return self._cards[3].get_value("s00")
 
@@ -456,7 +466,7 @@ class MatWtmStm(KeywordBase):
 
     @property
     def s45(self) -> typing.Optional[float]:
-        """Get or set the Yield stress in   direction.
+        """Get or set the Yield stress in 45 degree direction.
         """ # nopep8
         return self._cards[3].get_value("s45")
 
@@ -467,7 +477,7 @@ class MatWtmStm(KeywordBase):
 
     @property
     def s90(self) -> typing.Optional[float]:
-        """Get or set the Yield stress in   direction
+        """Get or set the Yield stress in 90 degree direction
         """ # nopep8
         return self._cards[3].get_value("s90")
 
@@ -489,7 +499,7 @@ class MatWtmStm(KeywordBase):
 
     @property
     def r00(self) -> typing.Optional[float]:
-        """Get or set the R-ratio in   direction
+        """Get or set the R-ratio in 0 degree direction
         """ # nopep8
         return self._cards[3].get_value("r00")
 
@@ -500,7 +510,7 @@ class MatWtmStm(KeywordBase):
 
     @property
     def r45(self) -> typing.Optional[float]:
-        """Get or set the R-ratio in   direction
+        """Get or set the R-ratio in 45 degree direction
         """ # nopep8
         return self._cards[3].get_value("r45")
 
@@ -511,7 +521,7 @@ class MatWtmStm(KeywordBase):
 
     @property
     def r90(self) -> typing.Optional[float]:
-        """Get or set the R-ratio in   direction
+        """Get or set the R-ratio in 90 degree direction
         """ # nopep8
         return self._cards[3].get_value("r90")
 
@@ -643,7 +653,7 @@ class MatWtmStm(KeywordBase):
 
     @property
     def emin(self) -> typing.Optional[float]:
-        """Get or set the Lower limit of the isotropic hardening rate  .  This feature is included to model a non-zero and linear isotropic work hardening rate at large values of effective plastic strain.  If the isotropic work hardening rate predicted by the utilized Voce-type work hardening rule falls below the specified value it is substituted by the prescribed value.  This option should be considered for problems involving extensive plastic deformations.  If process dependent material characteristics are prescribed, i.e. if LC .GT. 0 the same minimum tangent modulus is assumed for all the prescribed work hardening curves
+        """Get or set the Lower limit of the isotropic hardening rate. This feature is included to model a non-zero and linear isotropic work hardening rate at large values of effective plastic strain. If the isotropic work hardening rate predicted by the utilized Voce-type work hardening rule falls below the specified value it is substituted by the prescribed value. This option should be considered for problems involving extensive plastic deformations. If process dependent material characteristics are prescribed, i.e. if LC .GT. 0 the same minimum tangent modulus is assumed for all the prescribed work hardening curves
         """ # nopep8
         return self._cards[5].get_value("emin")
 
@@ -670,7 +680,7 @@ class MatWtmStm(KeywordBase):
         element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
         EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
         *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
         """ # nopep8
@@ -683,7 +693,7 @@ class MatWtmStm(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Material angle in degrees for AOPT=3, may be overwritten on the element card, see *ELEMENT_SHELL_BETA or *ELEMENT_ SOLID_ORTHO..
+        """Get or set the Material angle in degrees for AOPT=0 or 3. It may be overwritten on the element card, see *ELEMENT_SHELL_BETA.
         """ # nopep8
         return self._cards[6].get_value("beta")
 
@@ -691,39 +701,6 @@ class MatWtmStm(KeywordBase):
     def beta(self, value: float) -> None:
         """Set the beta property."""
         self._cards[6].set_value("beta", value)
-
-    @property
-    def xp(self) -> typing.Optional[float]:
-        """Get or set the Coordinates of point p for AOPT = 1..
-        """ # nopep8
-        return self._cards[7].get_value("xp")
-
-    @xp.setter
-    def xp(self, value: float) -> None:
-        """Set the xp property."""
-        self._cards[7].set_value("xp", value)
-
-    @property
-    def yp(self) -> typing.Optional[float]:
-        """Get or set the Coordinates of point p for AOPT = 1..
-        """ # nopep8
-        return self._cards[7].get_value("yp")
-
-    @yp.setter
-    def yp(self, value: float) -> None:
-        """Set the yp property."""
-        self._cards[7].set_value("yp", value)
-
-    @property
-    def zp(self) -> typing.Optional[float]:
-        """Get or set the Coordinates of point p for AOPT = 1..
-        """ # nopep8
-        return self._cards[7].get_value("zp")
-
-    @zp.setter
-    def zp(self, value: float) -> None:
-        """Set the zp property."""
-        self._cards[7].set_value("zp", value)
 
     @property
     def a1(self) -> typing.Optional[float]:
@@ -837,4 +814,19 @@ class MatWtmStm(KeywordBase):
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def lc_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lc."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lc:
+                return kwd
+        return None
+
+    @lc_link.setter
+    def lc_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lc."""
+        self.lc = value.lcid
 

@@ -152,10 +152,10 @@ class MatBrainLinearViscoelastic(KeywordBase):
 
     @property
     def so(self) -> typing.Optional[float]:
-        """Get or set the Strain (logarithmic) output option to be plotted as component 7 in LS TAURUS (D3PLOT file) which is the effective plastic strain component.  The maximum values are updated for each element each time step:
-        EQ.0.0:  maximum principal strain that occurs during the calculation,
-        EQ.1.0:  maximum magnitude of the principal strain values that occurs during the calculation,
-        EQ.2.0:  maximum effective strain that occurs during the calculation.
+        """Get or set the Strain (logarithmic) output option to be plotted as component 7 in LS TAURUS (D3PLOT file) which is the effective plastic strain component. The maximum values are updated for each element each time step:
+        EQ.0.0: maximum principal strain that occurs during the calculation,
+        EQ.1.0: maximum magnitude of the principal strain values that occurs during the calculation,
+        EQ.2.0: maximum effective strain that occurs during the calculation.
         """ # nopep8
         return self._cards[0].get_value("so")
 

@@ -34,6 +34,13 @@ NodeNodes
     :members:
 
 
+NodeReference
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.node_reference
+    :members:
+
+
 NodeRigidSurface
 ----------------
 
@@ -66,6 +73,13 @@ NodeThicknessGenerate
 ---------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.node_thickness_generate
+    :members:
+
+
+NodeThicknessGenerateSet
+------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.node_thickness_generate_set
     :members:
 
 

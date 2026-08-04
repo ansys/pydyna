@@ -36,6 +36,7 @@ _CONSTRAINEDJOINTSTIFFNESSCYLINDRICAL_CARD0 = (
     FieldSchema("cida", int, 30, 10, None),
     FieldSchema("cidb", int, 40, 10, 0),
     FieldSchema("jid", int, 50, 10, None),
+    FieldSchema("rps", float, 60, 10, 1.0),
 )
 
 _CONSTRAINEDJOINTSTIFFNESSCYLINDRICAL_CARD1 = (
@@ -67,6 +68,8 @@ _CONSTRAINEDJOINTSTIFFNESSCYLINDRICAL_CARD3 = (
     FieldSchema("unused", int, 30, 10, None),
     FieldSchema("nsdz", float, 40, 10, 0.0),
     FieldSchema("psdz", float, 50, 10, 0.0),
+    FieldSchema("fs", float, 60, 10, None),
+    FieldSchema("fd", float, 70, 10, None),
 )
 
 class ConstrainedJointStiffnessCylindrical(KeywordBase):
@@ -177,9 +180,20 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
         self._cards[0].set_value("jid", value)
 
     @property
+    def rps(self) -> float:
+        """Get or set the Relative penalty stiffness used for joint friction calculation. It is the same parameter as RPS in *CONSTRAINED_JOINT_TYPE. It only applies for keyword options TRANSLATIONAL and CYLINDRICAL. FS and FD must be defined in either Card 2c. 3 or Card 2d. 3.  It can be used to calculate the joint force, so we can define it here instead of in *CONSTRAINED_JOINT_TYPE.
+        """ # nopep8
+        return self._cards[0].get_value("rps")
+
+    @rps.setter
+    def rps(self, value: float) -> None:
+        """Set the rps property."""
+        self._cards[0].set_value("rps", value)
+
+    @property
     def lcidr(self) -> int:
         """Get or set the Load curve ID for r-force as a function of r-distance between the origins of
-        CIDAand CIDB.See * DEFINE_CURVE.
+        CIDAand CIDB.See *DEFINE_CURVE.
         EQ.0: The applied force is set to 0.0.
         """ # nopep8
         return self._cards[1].get_value("lcidr")
@@ -192,7 +206,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
     @property
     def lcidz(self) -> int:
         """Get or set the Load curve ID for z-force as a function of z-distance between the origins of
-        CIDAand CIDB.See * DEFINE_CURVE.
+        CIDAand CIDB.See *DEFINE_CURVE.
         EQ.0: The applied force is set to 0.0.
         """ # nopep8
         return self._cards[1].get_value("lcidz")
@@ -206,7 +220,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
     def dlcidr(self) -> int:
         """Get or set the Load curve or table ID for r-damping force as a function of rate of
         r-distance per unit timeand optionally r - distance(if table) between the
-        origins of CIDAand CIDB.See * DEFINE_CURVE or *DEFINE_TABLE.
+        origins of CIDAand CIDB.See *DEFINE_CURVE or *DEFINE_TABLE.
         EQ.0: Damping is not considered.
         """ # nopep8
         return self._cards[1].get_value("dlcidr")
@@ -220,7 +234,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
     def dlcidp(self) -> int:
         """Get or set the Load curve or table ID for p-damping force as a function of rate of
         p-distance per unit timeand optionally r - distance(if table) between the
-        origins of CIDAand CIDB.See * DEFINE_CURVE or *DEFINE_TABLE.
+        origins of CIDAand CIDB.See *DEFINE_CURVE or *DEFINE_TABLE.
         EQ.0: Damping is not considered.
         """ # nopep8
         return self._cards[1].get_value("dlcidp")
@@ -234,7 +248,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
     def dlcidz(self) -> int:
         """Get or set the Load curve or table ID for z-damping force as a function of rate of
         z-distance per unit timeand optionally r - distance(if table) between the
-        origins of CIDAand CIDB.See * DEFINE_CURVE or *DEFINE_TABLE.
+        origins of CIDAand CIDB.See *DEFINE_CURVE or *DEFINE_TABLE.
         EQ.0: Damping is not considered.
         """ # nopep8
         return self._cards[1].get_value("dlcidz")
@@ -247,7 +261,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
     @property
     def lcidt(self) -> int:
         """Get or set the Load curve ID for theta-moment as a function of angle theta between the
-        z-directions of CIDAand CIDB.See * DEFINE_CURVE.
+        z-directions of CIDAand CIDB.See *DEFINE_CURVE.
         EQ.0: The applied moment is set to 0.0.
         """ # nopep8
         return self._cards[1].get_value("lcidt")
@@ -260,7 +274,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
     @property
     def dlcidt(self) -> int:
         """Get or set the Load curve ID for theta-moment as a function of rate of angle theta between the
-        z-directions of CIDAand CIDB.See * DEFINE_CURVE.
+        z-directions of CIDAand CIDB.See *DEFINE_CURVE.
         EQ.0: The applied moment is set to 0.0.
         """ # nopep8
         return self._cards[1].get_value("dlcidt")
@@ -287,7 +301,7 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
         """Get or set the Frictional force limiting value for r-translation. This option may also be
         thought of as an elastic - plastic spring.See Figure 0 - 3.
         EQ.0.0: Friction is inactive for r - translation.
-        LT.0 : -FFR is the load curve ID defining the yield force as a function r - translation.
+        LT.0: -FFR is the load curve ID defining the yield force as a function r - translation.
         """ # nopep8
         return self._cards[2].get_value("ffr")
 
@@ -310,9 +324,9 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
 
     @property
     def ffz(self) -> float:
-        """Get or set the Frictional force limiting value for 𝑧-translation. This option may also be thought of as an elastic - plastic spring.
+        """Get or set the Frictional force limiting value for -translation. This option may also be thought of as an elastic - plastic spring.
         EQ.0.0: Friction is inactive for z - translation.
-        LT.0 : -FFZ is the load curve ID defining the yield force as a function of z - translation.
+        LT.0: -FFZ is the load curve ID defining the yield force as a function of z - translation.
         """ # nopep8
         return self._cards[2].get_value("ffz")
 
@@ -375,6 +389,28 @@ class ConstrainedJointStiffnessCylindrical(KeywordBase):
     def psdz(self, value: float) -> None:
         """Set the psdz property."""
         self._cards[3].set_value("psdz", value)
+
+    @property
+    def fs(self) -> typing.Optional[float]:
+        """Get or set the 
+        """ # nopep8
+        return self._cards[3].get_value("fs")
+
+    @fs.setter
+    def fs(self, value: float) -> None:
+        """Set the fs property."""
+        self._cards[3].set_value("fs", value)
+
+    @property
+    def fd(self) -> typing.Optional[float]:
+        """Get or set the 
+        """ # nopep8
+        return self._cards[3].get_value("fd")
+
+    @fd.setter
+    def fd(self, value: float) -> None:
+        """Set the fd property."""
+        self._cards[3].set_value("fd", value)
 
     @property
     def lcidr_link(self) -> typing.Optional[DefineCurve]:

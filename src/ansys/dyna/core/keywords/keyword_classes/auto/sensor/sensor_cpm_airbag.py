@@ -36,6 +36,7 @@ _SENSORCPMAIRBAG_CARD0 = (
     FieldSchema("tdr", float, 40, 10, None),
     FieldSchema("defps", int, 50, 10, None),
     FieldSchema("rbpid", int, 60, 10, None),
+    FieldSchema("tfire", float, 70, 10, None),
 )
 
 _SENSORCPMAIRBAG_OPTION0_CARD0 = (
@@ -154,6 +155,17 @@ class SensorCpmAirbag(KeywordBase):
     def rbpid(self, value: int) -> None:
         """Set the rbpid property."""
         self._cards[0].set_value("rbpid", value)
+
+    @property
+    def tfire(self) -> typing.Optional[float]:
+        """Get or set the Control activation time for mass flow rate and temperature curves
+        """ # nopep8
+        return self._cards[0].get_value("tfire")
+
+    @tfire.setter
+    def tfire(self, value: float) -> None:
+        """Set the tfire property."""
+        self._cards[0].set_value("tfire", value)
 
     @property
     def title(self) -> typing.Optional[str]:

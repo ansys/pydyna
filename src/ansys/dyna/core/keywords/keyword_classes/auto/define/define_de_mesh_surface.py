@@ -89,8 +89,9 @@ class DefineDeMeshSurface(KeywordBase):
 
     @property
     def type(self) -> int:
-        """Get or set the EQ.0:	Part set
-        EQ.1:	Part
+        """Get or set the SID Type:
+        EQ.0: Part set ID
+        EQ.1: Part ID
         """ # nopep8
         return self._cards[0].get_value("type")
 
@@ -103,7 +104,7 @@ class DefineDeMeshSurface(KeywordBase):
 
     @property
     def nquad(self) -> int:
-        """Get or set the Number of equally spaced DES elements created on a shell element in each local shell direction. For instance, NQUAD × NQUAD DES elements will be created on the surface a quad shell.
+        """Get or set the Number of equally spaced DES elements created on a shell element in each local shell direction. For instance, NQUAD  NQUAD DES elements will be created on the surface a quad shell.
         """ # nopep8
         return self._cards[0].get_value("nquad")
 

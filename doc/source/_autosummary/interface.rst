@@ -139,6 +139,13 @@ InterfaceCompensationNewPartChange
     :members:
 
 
+InterfaceCompensationTrimmingCurve
+----------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.interface_compensation_trimming_curve
+    :members:
+
+
 InterfaceComponentFile
 ----------------------
 
@@ -307,13 +314,6 @@ InterfaceSpringbackExclude
     :members:
 
 
-InterfaceSpringbackExcludeThickness
------------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_exclude_thickness
-    :members:
-
-
 InterfaceSpringbackLsdyna
 -------------------------
 
@@ -325,13 +325,6 @@ InterfaceSpringbackLsdynaNothickness
 ------------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_lsdyna_nothickness
-    :members:
-
-
-InterfaceSpringbackLsdynaThickness
-----------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_lsdyna_thickness
     :members:
 
 
@@ -349,27 +342,6 @@ InterfaceSpringbackNastranNothickness
     :members:
 
 
-InterfaceSpringbackNastranThickness
------------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nastran_thickness
-    :members:
-
-
-InterfaceSpringbackNike3D
--------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nike3d
-    :members:
-
-
-InterfaceSpringbackNike3DThickness
-----------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_nike3d_thickness
-    :members:
-
-
 InterfaceSpringbackSeamless
 ---------------------------
 
@@ -377,10 +349,10 @@ InterfaceSpringbackSeamless
     :members:
 
 
-InterfaceSpringbackSeamlessThickness
-------------------------------------
+InterfaceSpringbackSeamlessNothickness
+--------------------------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_seamless_thickness
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.interface_springback_seamless_nothickness
     :members:
 
 

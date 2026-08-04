@@ -33,19 +33,19 @@ _SECTIONFPD_CARD0 = (
 )
 
 _SECTIONFPD_CARD1 = (
-    FieldSchema("dx", float, 0, 10, None),
-    FieldSchema("dy", float, 10, 10, None),
-    FieldSchema("dz", float, 20, 10, None),
-    FieldSchema("unused", float, 30, 10, None),
-    FieldSchema("kernel", int, 40, 10, None),
+    FieldSchema("dx", float, 0, 10, 1.5),
+    FieldSchema("dy", float, 10, 10, 1.5),
+    FieldSchema("dz", float, 20, 10, 1.5),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("unused", int, 40, 10, None),
 )
 
 _SECTIONFPD_CARD2 = (
-    FieldSchema("unused", float, 0, 10, None),
-    FieldSchema("unused", float, 10, 10, None),
-    FieldSchema("unused", float, 20, 10, None),
-    FieldSchema("tstart", float, 30, 10, 0.0),
-    FieldSchema("dt_imp", float, 40, 10, None),
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("tstart", float, 20, 10, 0.0),
+    FieldSchema("dt_imp", float, 30, 10, None),
+    FieldSchema("rcforch", float, 40, 10, None),
     FieldSchema("dtscl", float, 50, 10, 0.1),
 )
 
@@ -104,7 +104,7 @@ class SectionFpd(KeywordBase):
     @property
     def elform(self) -> typing.Optional[int]:
         """Get or set the Element formulation options.
-        EQ.49:	Incompressible smoothed particle Galerkin formulation
+        EQ.49: Incompressible smoothed particle Galerkin formulation
         """ # nopep8
         return self._cards[0].get_value("elform")
 
@@ -114,8 +114,8 @@ class SectionFpd(KeywordBase):
         self._cards[0].set_value("elform", value)
 
     @property
-    def dx(self) -> typing.Optional[float]:
-        """Get or set the Normalized dilation parameters of the kernel function in x, y and z directions.  The normalized dilation parameters of the kernel function are introduced to provide the smoothness and compact support properties on the construction of the mesh-free shape functions.  Values between 1.5 and 1.8 are recommended. The nodal support size of particles will be automatically adjusted with the material’s deformation, but it is not allowed to be decreased.
+    def dx(self) -> float:
+        """Get or set the Normalized dilation parameters of the kernel function in x, y and z directions.  The normalized dilation parameters of the kernel function are introduced to provide the smoothness and compact support properties on the construction of the mesh-free shape functions.  Values between 1.5 and 1.8 are recommended. The nodal support size of particles are automatically adjusted with the materials deformation, but be decreased. An Updated Lagrangian (UL) kernel is used.
         """ # nopep8
         return self._cards[1].get_value("dx")
 
@@ -125,8 +125,8 @@ class SectionFpd(KeywordBase):
         self._cards[1].set_value("dx", value)
 
     @property
-    def dy(self) -> typing.Optional[float]:
-        """Get or set the Normalized dilation parameters of the kernel function in x, y and z directions.  The normalized dilation parameters of the kernel function are introduced to provide the smoothness and compact support properties on the construction of the mesh-free shape functions.  Values between 1.5 and 1.8 are recommended. The nodal support size of particles will be automatically adjusted with the material’s deformation, but it is not allowed to be decreased.
+    def dy(self) -> float:
+        """Get or set the Normalized dilation parameters of the kernel function in x, y and z directions.  The normalized dilation parameters of the kernel function are introduced to provide the smoothness and compact support properties on the construction of the mesh-free shape functions.  Values between 1.5 and 1.8 are recommended. The nodal support size of particles are automatically adjusted with the materials deformation, but be decreased. An Updated Lagrangian (UL) kernel is used.
         """ # nopep8
         return self._cards[1].get_value("dy")
 
@@ -136,8 +136,8 @@ class SectionFpd(KeywordBase):
         self._cards[1].set_value("dy", value)
 
     @property
-    def dz(self) -> typing.Optional[float]:
-        """Get or set the Normalized dilation parameters of the kernel function in x, y and z directions.  The normalized dilation parameters of the kernel function are introduced to provide the smoothness and compact support properties on the construction of the mesh-free shape functions.  Values between 1.5 and 1.8 are recommended. The nodal support size of particles will be automatically adjusted with the material’s deformation, but it is not allowed to be decreased.
+    def dz(self) -> float:
+        """Get or set the Normalized dilation parameters of the kernel function in x, y and z directions.  The normalized dilation parameters of the kernel function are introduced to provide the smoothness and compact support properties on the construction of the mesh-free shape functions.  Values between 1.5 and 1.8 are recommended. The nodal support size of particles are automatically adjusted with the materials deformation, but be decreased. An Updated Lagrangian (UL) kernel is used.
         """ # nopep8
         return self._cards[1].get_value("dz")
 
@@ -147,19 +147,8 @@ class SectionFpd(KeywordBase):
         self._cards[1].set_value("dz", value)
 
     @property
-    def kernel(self) -> typing.Optional[int]:
-        """Get or set the Kernel type. KERNEL=0 is for Updated Lagrangian (UL) kernel. Currently, only UL kernel is supported
-        """ # nopep8
-        return self._cards[1].get_value("kernel")
-
-    @kernel.setter
-    def kernel(self, value: int) -> None:
-        """Set the kernel property."""
-        self._cards[1].set_value("kernel", value)
-
-    @property
     def tstart(self) -> float:
-        """Get or set the Starting time for the fully implicit ISPG iterations. Before TSTART, only 10 ISPG iterations are done in each structural implicit step to guarantee the fluid moves with the solid boundaries. After TSTART, the ISPG will do a full iteration in the structural implicit step. This option is very useful for cases where the structural simulation time is very long (e.g. in seconds or minutes), while the reflow process to a steady state is very short. With this option, we can let the full ISPG iteration start from TSTART and save some computational resources
+        """Get or set the Starting time for the fully implicit ISPG iterations. Before TSTART, only 10 ISPG iterations are done in each thermal-structural implicit step with one-way coupling (no forces from the fluid are returned to the structure) to guarantee that the fluid moves with the solid boundaries. After TSTART, the ISPG algorithm performs full iterations in the two-way coupled thermal-structural implicit analysis. This option is very useful for cases where the structural simulation time is very long (e.g., in seconds or minutes) while the reflow process to a steady state is very short. With this option, the full ISPG iterations start from TSTART, saving e some computational resources.
         """ # nopep8
         return self._cards[2].get_value("tstart")
 
@@ -170,7 +159,7 @@ class SectionFpd(KeywordBase):
 
     @property
     def dt_imp(self) -> typing.Optional[float]:
-        """Get or set the Reset the implicit structural time step size to DT_IMP after TSTART. Because the solder reflow process is very fast, a small implicit structural time step size is needed. Generally, the value of DT_IMP should be around 10~50 times of ISPG time step size to guarantee the convergence of the solution if the gravity-driven simulation is deployed.This field is optional
+        """Get or set the Reset the implicit structural time step size to DT_IMP after TSTART. Because the solder reflow process is very fast, a small implicit structural time step size is needed. Generally, the value of DT_IMP should be around 10~50 times of ISPG time step size to guarantee convergence of the solution if the gravity-driven simulation is deployed.This field is optional
         """ # nopep8
         return self._cards[2].get_value("dt_imp")
 
@@ -178,6 +167,17 @@ class SectionFpd(KeywordBase):
     def dt_imp(self, value: float) -> None:
         """Set the dt_imp property."""
         self._cards[2].set_value("dt_imp", value)
+
+    @property
+    def rcforch(self) -> typing.Optional[float]:
+        """Get or set the Define the z coordinate of the cutting plane for evaluating the reaction forces between all the solders and the structure. If RCFORCH is nonzero, two files are generated in the working folders: fpdcpl_u.txt and fpdcpl_l.txt. The first file contains the reaction force history of the solders that are above the cutting plane, while the second file contains the reaction force history of those below the cutting plane.
+        """ # nopep8
+        return self._cards[2].get_value("rcforch")
+
+    @rcforch.setter
+    def rcforch(self, value: float) -> None:
+        """Set the rcforch property."""
+        self._cards[2].set_value("rcforch", value)
 
     @property
     def dtscl(self) -> float:

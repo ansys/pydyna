@@ -28,7 +28,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _DUALCESEBOUNDARYCYCLICSEGMENTSET_CARD0 = (
     FieldSchema("ssid1", int, 0, 10, None),
-    FieldSchema("ssid2", int, 0, 10, None),
+    FieldSchema("ssid2", int, 10, 10, None),
     FieldSchema("cyctyp", int, 20, 10, 0),
 )
 
@@ -72,9 +72,9 @@ class DualceseBoundaryCyclicSegmentSet(KeywordBase):
     @property
     def cyctyp(self) -> int:
         """Get or set the Relationship between the two cyclic boundary condition surfaces:
-        EQ.0:	none assumed(default)
-        EQ.1 : The first surface is rotated about an axis to match the second surface.
-        EQ.2 : The faces of the first surface are translated in a given direction to obtain the corresponding faces on the second surface
+        EQ.0: none assumed(default)
+        EQ.1: The first surface is rotated about an axis to match the second surface.
+        EQ.2: The faces of the first surface are translated in a given direction to obtain the corresponding faces on the second surface
         """ # nopep8
         return self._cards[0].get_value("cyctyp")
 

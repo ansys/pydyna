@@ -47,7 +47,7 @@ class CeseBoundaryConjHeatMsurf(KeywordBase):
         ]
     @property
     def msurfid(self) -> typing.Optional[int]:
-        """Get or set the Mesh surface part ID.
+        """Get or set the Mesh surface part ID referenced in *MESH_SURFACE_ELEMENT cards.
         """ # nopep8
         return self._cards[0].get_value("msurfid")
 

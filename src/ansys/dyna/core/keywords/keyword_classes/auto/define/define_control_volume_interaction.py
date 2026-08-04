@@ -86,7 +86,7 @@ class DefineControlVolumeInteraction(KeywordBase):
 
     @property
     def cvid1(self) -> typing.Optional[int]:
-        """Get or set the First control volume ID
+        """Get or set the First control volume ID(see *DEFINE_CONTROL_VOLUME)
         """ # nopep8
         return self._cards[0].get_value("cvid1")
 
@@ -97,7 +97,7 @@ class DefineControlVolumeInteraction(KeywordBase):
 
     @property
     def cvid2(self) -> typing.Optional[int]:
-        """Get or set the Second control volume ID
+        """Get or set the Second control volume ID(see *DEFINE_CONTROL_VOLUME)
         """ # nopep8
         return self._cards[0].get_value("cvid2")
 
@@ -108,9 +108,9 @@ class DefineControlVolumeInteraction(KeywordBase):
 
     @property
     def lcid_(self) -> typing.Optional[int]:
-        """Get or set the Load curve id (*DEFINE_CURVE_FUNCTION). Tables, see *DEFINE_TABLE, and load curves may not share common IDs.
-        LS-DYNA allows load curves IDs and table IDs to be used interchangeably.
-        A unique number has to be defined.
+        """Get or set the Load curve ID for a *DEFINE_CURVE_FUNCTION or user subroutine specifying the pressure gradient driven interaction between the connected cavities (see Remarks 1 and 2):
+        GT.0: ID for *DEFINE_CURVE_FUNCTION.The input arguments for the function are time, pressure difference, the area between the control volumes, the current time step size,and a flag for the start of a new time step.Currently, LS - DYNA will pass the current time and cavity pressures as input arguments.
+        LT.0: User subroutine usr_icvflow in dyn21umat.F determines the pressure gradient.
         """ # nopep8
         return self._cards[0].get_value("lcid_")
 

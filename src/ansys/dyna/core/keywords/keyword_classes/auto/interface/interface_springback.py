@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import LinkType
 
 _INTERFACESPRINGBACK_CARD0 = (
     FieldSchema("psid", int, 0, 10, None),
-    FieldSchema("nshv", int, 10, 10, None),
+    FieldSchema("nhsv", int, 10, 10, None),
     FieldSchema("ftype", int, 20, 10, 0),
     FieldSchema("unused", int, 30, 10, None),
     FieldSchema("ftensr", int, 40, 10, 0),
@@ -39,13 +39,18 @@ _INTERFACESPRINGBACK_CARD0 = (
 )
 
 _INTERFACESPRINGBACK_CARD1 = (
-    FieldSchema("optc", str, 0, 10, "OPTCARD"),
+    FieldSchema("optc", str, 0, 10, "0"),
     FieldSchema("sldo", int, 10, 10, 0),
     FieldSchema("ncyc", int, 20, 10, None),
     FieldSchema("fsplit", int, 30, 10, 0),
     FieldSchema("ndflag", int, 40, 10, 0),
     FieldSchema("cflag", int, 50, 10, 0),
     FieldSchema("hflag", int, 60, 10, None),
+)
+
+_INTERFACESPRINGBACK_CARD2 = (
+    FieldSchema("optc", str, 0, 10, "0"),
+    FieldSchema("dtwrt", float, 10, 10, None),
 )
 
 class InterfaceSpringback(KeywordBase):
@@ -69,10 +74,14 @@ class InterfaceSpringback(KeywordBase):
                 _INTERFACESPRINGBACK_CARD1,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _INTERFACESPRINGBACK_CARD2,
+                **kwargs,
+            ),
         ]
     @property
     def psid(self) -> typing.Optional[int]:
-        """Get or set the Part set ID for springback, see * SET_PART.
+        """Get or set the Part set ID for springback, see *SET_PART.
         """ # nopep8
         return self._cards[0].get_value("psid")
 
@@ -82,15 +91,15 @@ class InterfaceSpringback(KeywordBase):
         self._cards[0].set_value("psid", value)
 
     @property
-    def nshv(self) -> typing.Optional[int]:
-        """Get or set the Number of additional shell history variables to be initialized. The shell stresses and plastic strains are written to the interface file. If NSHV is nonzero, the shell formulations and constitutive models should not change between runs.
+    def nhsv(self) -> typing.Optional[int]:
+        """Get or set the Number of shell or solid history variables (beyond the six stresses and effective plastic strain) to be initialized in the interface file. For solids, LS-DYNA writes one additional state variable (initial volume).  If NHSV is nonzero, the element formulations, unit system, and constitutive models should not change between runs. If NHSV exceeds the number of integration point history variables required by the constitutive model, LS-DYNA only writes the number required. Thus, if in doubt, set NHSV to a large number, such as 100
         """ # nopep8
-        return self._cards[0].get_value("nshv")
+        return self._cards[0].get_value("nhsv")
 
-    @nshv.setter
-    def nshv(self, value: int) -> None:
-        """Set the nshv property."""
-        self._cards[0].set_value("nshv", value)
+    @nhsv.setter
+    def nhsv(self, value: int) -> None:
+        """Set the nhsv property."""
+        self._cards[0].set_value("nhsv", value)
 
     @property
     def ftype(self) -> int:
@@ -141,8 +150,8 @@ class InterfaceSpringback(KeywordBase):
     @property
     def rflag(self) -> typing.Optional[int]:
         """Get or set the Flag to carry over reference quantities, for hyperelastic materials and such.
-        EQ.0:	default, do not output.
-        EQ.1:	output reference coordinates and nodal masses.
+        EQ.0: default, do not output.
+        EQ.1: output reference coordinates and nodal masses.
         """ # nopep8
         return self._cards[0].get_value("rflag")
 
@@ -171,15 +180,15 @@ class InterfaceSpringback(KeywordBase):
     @optc.setter
     def optc(self, value: str) -> None:
         """Set the optc property."""
-        if value not in ["OPTCARD", None]:
-            raise Exception("""optc must be `None` or one of {"OPTCARD"}.""")
+        if value not in ["0", "OPTCARD", None]:
+            raise Exception("""optc must be `None` or one of {"0","OPTCARD"}.""")
         self._cards[1].set_value("optc", value)
 
     @property
     def sldo(self) -> int:
         """Get or set the Output of solid element data as
-        EQ.0:	*ELEMENT_SOLID, or
-        EQ.1:	*ELEMENT_SOLID_ORTHO(only for anisotropic material).
+        EQ.0: *ELEMENT_SOLID, or
+        EQ.1: *ELEMENT_SOLID_ORTHO(only for anisotropic material).
         """ # nopep8
         return self._cards[1].get_value("sldo")
 
@@ -204,8 +213,8 @@ class InterfaceSpringback(KeywordBase):
     @property
     def fsplit(self) -> int:
         """Get or set the Flag for splitting of the dynain file (only for ASCII format).
-        EQ.0:	dynain file written in one piece.
-        EQ.1:	Output is divided into two files, dynain_geo including the geometry data and dynain_ini including initial stresses and strains.
+        EQ.0: dynain file written in one piece.
+        EQ.1: Output is divided into two files, dynain_geo including the geometry data and dynain_ini including initial stresses and strains.
         """ # nopep8
         return self._cards[1].get_value("fsplit")
 
@@ -249,8 +258,8 @@ class InterfaceSpringback(KeywordBase):
     @property
     def hflag(self) -> typing.Optional[int]:
         """Get or set the Output hourglass state, only valid for FTYPE=3:
-        EQ.0:	default, do not output.
-        EQ.1:	output hourglass stresses for carrying over to next simulation.
+        EQ.0: default, do not output.
+        EQ.1: output hourglass stresses for carrying over to next simulation.
         """ # nopep8
         return self._cards[1].get_value("hflag")
 
@@ -258,6 +267,30 @@ class InterfaceSpringback(KeywordBase):
     def hflag(self, value: int) -> None:
         """Set the hflag property."""
         self._cards[1].set_value("hflag", value)
+
+    @property
+    def optc(self) -> str:
+        """Get or set the &
+        """ # nopep8
+        return self._cards[2].get_value("optc")
+
+    @optc.setter
+    def optc(self, value: str) -> None:
+        """Set the optc property."""
+        if value not in ["0", "OPTCARD", None]:
+            raise Exception("""optc must be `None` or one of {"0","OPTCARD"}.""")
+        self._cards[2].set_value("optc", value)
+
+    @property
+    def dtwrt(self) -> typing.Optional[float]:
+        """Get or set the Time interval between two consecutive writes of the dynain.lsda file.
+        """ # nopep8
+        return self._cards[2].get_value("dtwrt")
+
+    @dtwrt.setter
+    def dtwrt(self, value: float) -> None:
+        """Set the dtwrt property."""
+        self._cards[2].set_value("dtwrt", value)
 
     @property
     def psid_link(self) -> typing.Optional[KeywordBase]:

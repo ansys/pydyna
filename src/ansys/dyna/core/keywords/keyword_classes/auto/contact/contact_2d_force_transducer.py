@@ -74,7 +74,7 @@ class Contact2DForceTransducer(KeywordBase):
         ]
     @property
     def surfa(self) -> typing.Optional[int]:
-        """Get or set the Set ID for SURFA.  If SURFA > 0, a part set is assumed; see *SET_‌PART.  If SURFA < 0, a node set with ID equal to the absolute value of SURFA is assumed; see *SET_‌NODE. For nonsymmetric contact, this surface is the tracked surface.
+        """Get or set the Set ID for SURFA.  If SURFA > 0, a part set is assumed; see *SET_PART.  If SURFA < 0, a node set with ID equal to the absolute value of SURFA is assumed; see *SET_NODE. For nonsymmetric contact, this surface is the tracked surface.
         """ # nopep8
         return self._cards[0].get_value("surfa")
 
@@ -85,7 +85,7 @@ class Contact2DForceTransducer(KeywordBase):
 
     @property
     def surfb(self) -> typing.Optional[int]:
-        """Get or set the Set ID to define the SURFB surface.  If SURFB > 0, a part set is assumed; see *SET_‌PART.  If SURFB < 0, a node set with ID equal to the absolute value of SURFB is assumed; see *SET_‌NODE.  Do not define for single surface contact. For nonsymmetric contact, this surface is the reference surface.
+        """Get or set the Set ID to define the SURFB surface.  If SURFB > 0, a part set is assumed; see *SET_PART.  If SURFB < 0, a node set with ID equal to the absolute value of SURFB is assumed; see *SET_NODE.  Do not define for single surface contact. For nonsymmetric contact, this surface is the reference surface.
         """ # nopep8
         return self._cards[0].get_value("surfb")
 
@@ -151,7 +151,10 @@ class Contact2DForceTransducer(KeywordBase):
 
     @property
     def tbirth(self) -> float:
-        """Get or set the Birth time for contact (default=0.0).
+        """Get or set the Birth time (contact surface becomes active at this time):
+        LT.0.0: Birth time is set to | TBIRTH | .When negative, birth time is followed during the dynamic relaxation phase of the calculation.After dynamic relaxation has completed, contact is activated regardless of the value of TBIRTH.
+        EQ.0.0: Birth time is inactive, meaning contact is always active
+        GT.0.0: If TDEATH = -9999, TBIRTH is interpreted as the curve defining multiple pairs of birth - time / death - time.Otherwise, if TDEATH > 0, birth time applies both duringand after dynamic relaxation.
         """ # nopep8
         return self._cards[1].get_value("tbirth")
 
@@ -162,7 +165,10 @@ class Contact2DForceTransducer(KeywordBase):
 
     @property
     def tdeath(self) -> float:
-        """Get or set the Death time for contact (default=1.0E+20).
+        """Get or set the Death time (contact surface is deactivated at this time):
+        LT.0.0: If TDEATH = -9999, TBIRTH is interpreted as the curve ID defining multiple pairs of birth - time / death - time.Otherwise, negative TDEATH indicates that contact is inactive during dynamic relaxation.After dynamic relaxation the birthand death times are followedand set to |TBIRTH| and |TDEATH| , respectively.
+        EQ.0.0: TDEATH defaults to 1020.
+        GT.0.0: TDEATH sets the time at which the contact is deactivated.
         """ # nopep8
         return self._cards[1].get_value("tdeath")
 

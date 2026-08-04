@@ -64,7 +64,7 @@ class EfControl(KeywordBase):
         ]
     @property
     def nphton(self) -> typing.Optional[int]:
-        """Get or set the The base number of photons emitted per band per surface per convergence loop.  Note that NPHT from *BOUNDARY_‌RADIATION_‌SET_‌EF_‌CALCULATE also effects the number of photons emitted per surface per band per convergence loop
+        """Get or set the The base number of photons emitted per band per surface per convergence loop.  Note that NPHT from *BOUNDARY_RADIATION_SET_EF_CALCULATE also effects the number of photons emitted per surface per band per convergence loop
         """ # nopep8
         return self._cards[0].get_value("nphton")
 
@@ -119,7 +119,7 @@ class EfControl(KeywordBase):
 
     @property
     def errodef(self) -> typing.Optional[float]:
-        """Get or set the Specifies that tolerance for convergence of the surface exchange fractions.  This may be overridden on a surface by surface basis with the ERRMAX setting. (see *BOUNDARY_‌RADIATION_‌SET_‌EF_‌CALCULATE)
+        """Get or set the Specifies that tolerance for convergence of the surface exchange fractions.  This may be overridden on a surface by surface basis with the ERRMAX setting. (see *BOUNDARY_RADIATION_SET_EF_CALCULATE)
         """ # nopep8
         return self._cards[0].get_value("errodef")
 
@@ -131,9 +131,9 @@ class EfControl(KeywordBase):
     @property
     def inseed(self) -> typing.Optional[int]:
         """Get or set the Tells LS-DYNA how to obtain an initial seed for the Monte Carlo random number generator.
-        EQ.0:	use date and time.
-        GT.0 : use INSEED as seed.
-        LT.0 : use a default seed.
+        EQ.0: use date and time.
+        GT.0: use INSEED as seed.
+        LT.0: use a default seed.
         """ # nopep8
         return self._cards[0].get_value("inseed")
 
@@ -144,7 +144,7 @@ class EfControl(KeywordBase):
 
     @property
     def nphton(self) -> typing.Optional[int]:
-        """Get or set the The base number of photons emitted per band per surface per convergence loop.  Note that NPHT from *BOUNDARY_‌RADIATION_‌SET_‌EF_‌CALCULATE also effects the number of photons emitted per surface per band per convergence loop
+        """Get or set the The base number of photons emitted per band per surface per convergence loop.  Note that NPHT from *BOUNDARY_RADIATION_SET_EF_CALCULATE also effects the number of photons emitted per surface per band per convergence loop
         """ # nopep8
         return self._cards[1].get_value("nphton")
 

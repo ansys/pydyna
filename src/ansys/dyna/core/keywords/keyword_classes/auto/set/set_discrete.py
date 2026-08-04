@@ -92,7 +92,7 @@ class SetDiscrete(KeywordBase):
 
     @property
     def k1(self) -> typing.Optional[int]:
-        """Get or set the First discrete element ID of the set.
+        """Get or set the First discrete element ID (see Remark  1) See Remark 1
         """ # nopep8
         return self._cards[1].get_value("k1")
 
@@ -103,7 +103,7 @@ class SetDiscrete(KeywordBase):
 
     @property
     def k2(self) -> typing.Optional[int]:
-        """Get or set the Second discrete element ID of the set.
+        """Get or set the Second discrete element ID (see Remark  1) See Remark 1
         """ # nopep8
         return self._cards[1].get_value("k2")
 
@@ -114,7 +114,7 @@ class SetDiscrete(KeywordBase):
 
     @property
     def k3(self) -> typing.Optional[int]:
-        """Get or set the Third discrete element ID of the set.
+        """Get or set the Third discrete element ID (see Remark  1) See Remark 1
         """ # nopep8
         return self._cards[1].get_value("k3")
 
@@ -125,7 +125,7 @@ class SetDiscrete(KeywordBase):
 
     @property
     def k4(self) -> typing.Optional[int]:
-        """Get or set the Fourth discrete element ID of the set.
+        """Get or set the Fourth discrete element ID (see Remark  1) See Remark 1
         """ # nopep8
         return self._cards[1].get_value("k4")
 
@@ -136,7 +136,7 @@ class SetDiscrete(KeywordBase):
 
     @property
     def k5(self) -> typing.Optional[int]:
-        """Get or set the Fifth discrete element ID of the set.
+        """Get or set the Fifth discrete element ID (see Remark  1) See Remark 1
         """ # nopep8
         return self._cards[1].get_value("k5")
 
@@ -147,7 +147,7 @@ class SetDiscrete(KeywordBase):
 
     @property
     def k6(self) -> typing.Optional[int]:
-        """Get or set the Sixth discrete element ID of the set.
+        """Get or set the Sixth discrete element ID (see Remark  1) See Remark 1
         """ # nopep8
         return self._cards[1].get_value("k6")
 
@@ -158,7 +158,7 @@ class SetDiscrete(KeywordBase):
 
     @property
     def k7(self) -> typing.Optional[int]:
-        """Get or set the Seventh discrete element ID of the set.
+        """Get or set the Seventh discrete element ID (see Remark  1) See Remark 1
         """ # nopep8
         return self._cards[1].get_value("k7")
 
@@ -169,7 +169,7 @@ class SetDiscrete(KeywordBase):
 
     @property
     def k8(self) -> typing.Optional[int]:
-        """Get or set the Eighth discrete element ID of the set.
+        """Get or set the Eighth discrete element ID (see Remark  1) See Remark 1
         """ # nopep8
         return self._cards[1].get_value("k8")
 

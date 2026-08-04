@@ -188,6 +188,34 @@ BoundaryElementMethodWake
     :members:
 
 
+BoundaryFluidm
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.boundary_fluidm
+    :members:
+
+
+BoundaryFluidmBottom
+--------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.boundary_fluidm_bottom
+    :members:
+
+
+BoundaryFluidmBottomInterior
+----------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.boundary_fluidm_bottom_interior
+    :members:
+
+
+BoundaryFluidmFreeSurface
+-------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.boundary_fluidm_free_surface
+    :members:
+
+
 BoundaryFluxSegment
 -------------------
 
@@ -307,6 +335,13 @@ BoundaryPrescribedMotionEdgeUvw
     :members:
 
 
+BoundaryPrescribedMotionFaceUvw
+-------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.boundary_prescribed_motion_face_uvw
+    :members:
+
+
 BoundaryPrescribedMotionFaceXyz
 -------------------------------
 
@@ -374,6 +409,13 @@ BoundaryPrescribedMotionSetEdgeUvw
 ----------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.boundary_prescribed_motion_set_edge_uvw
+    :members:
+
+
+BoundaryPrescribedMotionSetFaceUvw
+----------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.boundary_prescribed_motion_set_face_uvw
     :members:
 
 
@@ -615,6 +657,13 @@ BoundarySphFlow
     :members:
 
 
+BoundarySphHeatConvection
+-------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.boundary_sph_heat_convection
+    :members:
+
+
 BoundarySphNonReflecting
 ------------------------
 
@@ -622,10 +671,31 @@ BoundarySphNonReflecting
     :members:
 
 
+BoundarySphNoslip
+-----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.boundary_sph_noslip
+    :members:
+
+
+BoundarySphPeriodic
+-------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.boundary_sph_periodic
+    :members:
+
+
 BoundarySphSymmetryPlane
 ------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.boundary_sph_symmetry_plane
+    :members:
+
+
+BoundarySphTrackSurface
+-----------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.boundary_sph_track_surface
     :members:
 
 

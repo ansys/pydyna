@@ -167,6 +167,20 @@ LoadDensityDepth
     :members:
 
 
+LoadEdgeUvw
+-----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.load_edge_uvw
+    :members:
+
+
+LoadEdgeUvwSet
+--------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.load_edge_uvw_set
+    :members:
+
+
 LoadErodingPartSet
 ------------------
 
@@ -178,6 +192,13 @@ LoadExpansionPressure
 ---------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.load_expansion_pressure
+    :members:
+
+
+LoadExternalVariable
+--------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.load_external_variable
     :members:
 
 
@@ -269,6 +290,20 @@ LoadHeatGenerationSolid
 -----------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.load_heat_generation_solid
+    :members:
+
+
+LoadHeatLaserAbsorption
+-----------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.load_heat_laser_absorption
+    :members:
+
+
+LoadLoSeismicFreeField
+----------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.load_lo_seismic_free_field
     :members:
 
 
@@ -381,6 +416,13 @@ LoadSegment
 -----------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.load_segment
+    :members:
+
+
+LoadSegmentAleIni
+-----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.load_segment_ale_ini
     :members:
 
 

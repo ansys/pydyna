@@ -203,7 +203,9 @@ class Mat060C(KeywordBase):
 
     @property
     def v_lc(self) -> typing.Optional[int]:
-        """Get or set the Load curve (see *DEFINE_CURVE) defining the viscosity as a function of temperature.
+        """Get or set the Load curve (see *DEFINE_CURVE) or table for defining the dynamic viscosity
+        GT.0: Load curve ID for defining dynamic viscosity as a function of temperature
+        LT.0: | V_LC | is table ID giving dynamic viscosity as a function of shear strain rate and temperature.The dynamic viscosity as a function of temperature curves are indexed by the shear strain rate. .
         """ # nopep8
         return self._cards[1].get_value("v_lc")
 

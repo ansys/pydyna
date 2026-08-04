@@ -96,7 +96,7 @@ class AleCouplingNodalDragId(KeywordBase):
 
     @property
     def strsid(self) -> typing.Optional[int]:
-        """Get or set the Set ID defining a part, part set or segment set ID of the particles (see *PART, *SET_PART or *SET_SEGMENT).The particles can be SPH or discrete elements
+        """Get or set the ID for defining a part, part set, segment set, or node set giveing the structure. The structure may include Lagrangian solid, shell, beam, thick shell, or discrete sphere elements. EFG, SPH, or EFG nodes may be used, but the boundary conditions may not be satisfied
         """ # nopep8
         return self._cards[1].get_value("strsid")
 
@@ -107,7 +107,7 @@ class AleCouplingNodalDragId(KeywordBase):
 
     @property
     def alesid(self) -> typing.Optional[int]:
-        """Get or set the Set ID defining a part or part set ID of the ALE solid elements (see *PART or *SET_PART, and see Remark 1)
+        """Get or set the ID for defining a part or part set specifying the ALE solid elements.
         """ # nopep8
         return self._cards[1].get_value("alesid")
 
@@ -118,11 +118,11 @@ class AleCouplingNodalDragId(KeywordBase):
 
     @property
     def strsty(self) -> int:
-        """Get or set the Particle set type:
-        EQ.0: Part set ID (PSID).
-        EQ.1: Part ID (PID).
-        EQ.2: Segment set ID (SSID).
-        EQ.3: Node set ID (NSID).
+        """Get or set the Set type of STRSID
+        EQ.0: Part set ID (see *SET_PART).
+        EQ.1: Part ID (see *PART).
+        EQ.2: Segment set ID (see *SET_SEGMENT).
+        EQ.3: Node set ID(see *SET_NODE)
         """ # nopep8
         return self._cards[1].get_value("strsty")
 
@@ -136,8 +136,8 @@ class AleCouplingNodalDragId(KeywordBase):
     @property
     def alesty(self) -> int:
         """Get or set the Master set type of "MASTER"
-        EQ.0: Part set ID (PSID).
-        EQ.1: Part ID (PID).
+        EQ.0: Part set ID (see *SET_PART).
+        EQ.1: Part ID (see *PART).
         """ # nopep8
         return self._cards[1].get_value("alesty")
 
@@ -173,8 +173,8 @@ class AleCouplingNodalDragId(KeywordBase):
     @property
     def fcoef(self) -> int:
         """Get or set the Drag coefficient scale factor or function ID to calculate drag coefficient
-        GT.0:	Drag coefficient scale factor.
-        LT.0 : The absolute value of FCOEF is the Function ID of the user provided function to calculate drag coefficient; See Remark 1
+        GT.0: Drag coefficient scale factor.
+        LT.0: The absolute value of FCOEF is the Function ID of the user provided function to calculate drag coefficient; See Remark 1
         """ # nopep8
         return self._cards[2].get_value("fcoef")
 
@@ -186,9 +186,9 @@ class AleCouplingNodalDragId(KeywordBase):
     @property
     def direcg(self) -> int:
         """Get or set the Gravity force direction.
-        EQ.1:	Global x direction
-        EQ.2 : Global y direction
-        EQ.3 : Global z direction
+        EQ.1: Global x direction
+        EQ.2: Global y direction
+        EQ.3: Global z direction
         """ # nopep8
         return self._cards[2].get_value("direcg")
 

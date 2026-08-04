@@ -103,7 +103,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @property
     def ssid1(self) -> typing.Optional[int]:
-        """Get or set the The nth shell set ID.
+        """Get or set the The nth shell set ID. (see Remark2)
         """ # nopep8
         return self._cards[1].get_value("ssid1")
 
@@ -114,7 +114,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @property
     def ssid2(self) -> typing.Optional[int]:
-        """Get or set the The nth shell set ID.
+        """Get or set the The nth shell set ID. (see Remark2)
         """ # nopep8
         return self._cards[1].get_value("ssid2")
 
@@ -125,7 +125,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @property
     def ssid3(self) -> typing.Optional[int]:
-        """Get or set the The nth shell set ID.
+        """Get or set the The nth shell set ID. (see Remark2)
         """ # nopep8
         return self._cards[1].get_value("ssid3")
 
@@ -136,7 +136,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @property
     def ssid4(self) -> typing.Optional[int]:
-        """Get or set the The nth shell set ID.
+        """Get or set the The nth shell set ID. (see Remark2)
         """ # nopep8
         return self._cards[1].get_value("ssid4")
 
@@ -147,7 +147,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @property
     def ssid5(self) -> typing.Optional[int]:
-        """Get or set the The nth shell set ID.
+        """Get or set the The nth shell set ID. (see Remark2)
         """ # nopep8
         return self._cards[1].get_value("ssid5")
 
@@ -158,7 +158,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @property
     def ssid6(self) -> typing.Optional[int]:
-        """Get or set the The nth shell set ID.
+        """Get or set the The nth shell set ID. (see Remark2)
         """ # nopep8
         return self._cards[1].get_value("ssid6")
 
@@ -169,7 +169,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @property
     def ssid7(self) -> typing.Optional[int]:
-        """Get or set the The nth shell set ID.
+        """Get or set the The nth shell set ID. (see Remark2)
         """ # nopep8
         return self._cards[1].get_value("ssid7")
 
@@ -180,7 +180,7 @@ class SetSegmentIntersect(KeywordBase):
 
     @property
     def ssid8(self) -> typing.Optional[int]:
-        """Get or set the The nth shell set ID.
+        """Get or set the The nth shell set ID. (see Remark2)
         """ # nopep8
         return self._cards[1].get_value("ssid8")
 

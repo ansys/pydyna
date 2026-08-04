@@ -28,13 +28,13 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EMEPCREATEFIBERORIENTATION_CARD0 = (
-    FieldSchema("parstld", int, 0, 10, None),
-    FieldSchema("solvelde", int, 10, 10, None),
-    FieldSchema("solvelde", int, 20, 10, None),
-    FieldSchema("alpha", int, 30, 10, None),
-    FieldSchema("beta", int, 40, 10, None),
-    FieldSchema("w_file", int, 50, 10, None),
-    FieldSchema("prerun", int, 60, 10, None),
+    FieldSchema("psid", int, 0, 10, None),
+    FieldSchema("ldid1", int, 10, 10, None),
+    FieldSchema("ldid2", int, 20, 10, None),
+    FieldSchema("alpha", float, 30, 10, None),
+    FieldSchema("beta", float, 40, 10, None),
+    FieldSchema("iexpor", int, 50, 10, None),
+    FieldSchema("ipreru", int, 60, 10, None),
 )
 
 class EmEpCreatefiberorientation(KeywordBase):
@@ -43,7 +43,7 @@ class EmEpCreatefiberorientation(KeywordBase):
     keyword = "EM"
     subkeyword = "EP_CREATEFIBERORIENTATION"
     _link_fields = {
-        "parstld": LinkType.PART,
+        "psid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -56,88 +56,90 @@ class EmEpCreatefiberorientation(KeywordBase):
             ),
         ]
     @property
-    def parstld(self) -> typing.Optional[int]:
-        """Get or set the Part set on which the system is solved
+    def psid(self) -> typing.Optional[int]:
+        """Get or set the Part set ID of the part set on which the system is solved
         """ # nopep8
-        return self._cards[0].get_value("parstld")
+        return self._cards[0].get_value("psid")
 
-    @parstld.setter
-    def parstld(self, value: int) -> None:
-        """Set the parstld property."""
-        self._cards[0].set_value("parstld", value)
+    @psid.setter
+    def psid(self, value: int) -> None:
+        """Set the psid property."""
+        self._cards[0].set_value("psid", value)
 
     @property
-    def solvelde(self) -> typing.Optional[int]:
+    def ldid1(self) -> typing.Optional[int]:
         """Get or set the ID of the Laplace system that is solved in the transmural direction
         """ # nopep8
-        return self._cards[0].get_value("solvelde")
+        return self._cards[0].get_value("ldid1")
 
-    @solvelde.setter
-    def solvelde(self, value: int) -> None:
-        """Set the solvelde property."""
-        self._cards[0].set_value("solvelde", value)
+    @ldid1.setter
+    def ldid1(self, value: int) -> None:
+        """Set the ldid1 property."""
+        self._cards[0].set_value("ldid1", value)
 
     @property
-    def solvelde(self) -> typing.Optional[int]:
+    def ldid2(self) -> typing.Optional[int]:
         """Get or set the ID of the Laplace system that is solved in the apicobasal direction
         """ # nopep8
-        return self._cards[0].get_value("solvelde")
+        return self._cards[0].get_value("ldid2")
 
-    @solvelde.setter
-    def solvelde(self, value: int) -> None:
-        """Set the solvelde property."""
-        self._cards[0].set_value("solvelde", value)
+    @ldid2.setter
+    def ldid2(self, value: int) -> None:
+        """Set the ldid2 property."""
+        self._cards[0].set_value("ldid2", value)
 
     @property
-    def alpha(self) -> typing.Optional[int]:
-        """Get or set the helical angle with respect to the counterclockwise circumferential direction in the heart when looking from the base towards the apex. If a negative value is entered, a *DEFINE_‌FUNCTION will be expected. See remark 1- for available parameters
+    def alpha(self) -> typing.Optional[float]:
+        """Get or set the Helical angle with respect to the counterclockwise circumferential direction in the heart when looking from the base towards the apex.
+        LT.0: | ALPHA | is the ID for the *DEFINE_FUNCTION giving the helical angle.See Remark 1 for available arguments.
         """ # nopep8
         return self._cards[0].get_value("alpha")
 
     @alpha.setter
-    def alpha(self, value: int) -> None:
+    def alpha(self, value: float) -> None:
         """Set the alpha property."""
         self._cards[0].set_value("alpha", value)
 
     @property
-    def beta(self) -> typing.Optional[int]:
-        """Get or set the angle with respect to the outward transmural axis of the heart. If a negative value is entered, a *DEFINE_‌FUNCTION will be expected. See remark 1- for available parameters
+    def beta(self) -> typing.Optional[float]:
+        """Get or set the Angle with respect to the outward transmural axis of the heart.
+        LT.0: | BETA | is the ID for the *DEFINE_FUNCTION giving the angle.See Remark 1 for available arguments.
         """ # nopep8
         return self._cards[0].get_value("beta")
 
     @beta.setter
-    def beta(self, value: int) -> None:
+    def beta(self, value: float) -> None:
         """Set the beta property."""
         self._cards[0].set_value("beta", value)
 
     @property
-    def w_file(self) -> typing.Optional[int]:
-        """Get or set the Selects whether result files (ELEMENT_‌SOLID_‌ORTHO.k and vtk files) are exported:
-        EQ.0:	not exported
-        EQ.1 : exported
+    def iexpor(self) -> typing.Optional[int]:
+        """Get or set the Selects whether result files (ELEMENT_SOLID_ORTHO.k and vtk files) are exported:
+        EQ.0: Not exported
+        EQ.1: Exported
         """ # nopep8
-        return self._cards[0].get_value("w_file")
+        return self._cards[0].get_value("iexpor")
 
-    @w_file.setter
-    def w_file(self, value: int) -> None:
-        """Set the w_file property."""
-        self._cards[0].set_value("w_file", value)
+    @iexpor.setter
+    def iexpor(self, value: int) -> None:
+        """Set the iexpor property."""
+        self._cards[0].set_value("iexpor", value)
 
     @property
-    def prerun(self) -> typing.Optional[int]:
+    def ipreru(self) -> typing.Optional[int]:
         """Get or set the Select whether the run is stopped after creating fibers:
-        EQ.0:	do not stop after fiber creation
-        EQ.1 : stop after fiber creation
+        EQ.0: Do not stop after fiber creation
+        EQ.1: Stop after fiber creation
         """ # nopep8
-        return self._cards[0].get_value("prerun")
+        return self._cards[0].get_value("ipreru")
 
-    @prerun.setter
-    def prerun(self, value: int) -> None:
-        """Set the prerun property."""
-        self._cards[0].set_value("prerun", value)
+    @ipreru.setter
+    def ipreru(self, value: int) -> None:
+        """Set the ipreru property."""
+        self._cards[0].set_value("ipreru", value)
 
     @property
-    def parstld_link(self) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given parstld."""
-        return self._get_link_by_attr("PART", "pid", self.parstld, "parts")
+    def psid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given psid."""
+        return self._get_link_by_attr("PART", "pid", self.psid, "parts")
 

@@ -27,6 +27,13 @@ Fatigue
     :members:
 
 
+Hash
+----
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.hash
+    :members:
+
+
 Hourglass
 ---------
 

@@ -123,8 +123,8 @@ class Mat279(KeywordBase):
     @property
     def roflg(self) -> int:
         """Get or set the Flag for whether density is specified per unit area or volume:
-        EQ.0:	Specified density is per unit volume(default).
-        EQ.1 : Specified density is per unit area for controlling the mass of cohesive elements with an initial volume of zero.
+        EQ.0: Specified density is per unit volume(default).
+        EQ.1: Specified density is per unit area for controlling the mass of cohesive elements with an initial volume of zero.
         """ # nopep8
         return self._cards[0].get_value("roflg")
 
@@ -138,9 +138,9 @@ class Mat279(KeywordBase):
     @property
     def intfail(self) -> typing.Optional[float]:
         """Get or set the The number of integration points required for the cohesive element to be deleted. The value of INTFAIL may range from 1 to 4 with 1 the recommended value.
-        LT.0.0:	Employs a Newton - Cotes integration scheme. The element will be deleted when |INTFAIL| integration points have failed.
-        EQ.0.0 : Employs a Newton - Cotes integration scheme. The element will not be deleted even if it satisfies the failure criterion.
-        GT.0.0 : Employs a Gauss integration scheme. The element will be deleted when INTFAIL integration points have failed.
+        LT.0.0: Employs a Newton - Cotes integration scheme. The element will be deleted when |INTFAIL| integration points have failed.
+        EQ.0.0: Employs a Newton - Cotes integration scheme. The element will not be deleted even if it satisfies the failure criterion.
+        GT.0.0: Employs a Gauss integration scheme. The element will be deleted when INTFAIL integration points have failed.
         """ # nopep8
         return self._cards[0].get_value("intfail")
 
@@ -151,8 +151,7 @@ class Mat279(KeywordBase):
 
     @property
     def en0(self) -> typing.Optional[float]:
-        """Get or set the The initial tensile stiffness (units of stress / length) normal to the
-        plane of the cohesive element.
+        """Get or set the The initial tensile stiffness (units of stress / length) normal to the plane of the cohesive element.
         """ # nopep8
         return self._cards[0].get_value("en0")
 
@@ -163,8 +162,7 @@ class Mat279(KeywordBase):
 
     @property
     def et0(self) -> typing.Optional[float]:
-        """Get or set the The initial stiffness (units of stress / length) tangential to the plane
-        of the cohesive element.
+        """Get or set the The initial stiffness (units of stress / length) tangential to the plane of the cohesive element.
         """ # nopep8
         return self._cards[0].get_value("et0")
 
@@ -175,8 +173,7 @@ class Mat279(KeywordBase):
 
     @property
     def en1(self) -> typing.Optional[float]:
-        """Get or set the The final tensile stiffness (units of stress / length) normal to the
-        plane of the cohesive element.
+        """Get or set the The final tensile stiffness (units of stress / length) normal to the plane of the cohesive element.
         """ # nopep8
         return self._cards[0].get_value("en1")
 
@@ -187,8 +184,7 @@ class Mat279(KeywordBase):
 
     @property
     def et1(self) -> typing.Optional[float]:
-        """Get or set the The final stiffness (units of stress / length) tangential to the plane of
-        the cohesive element.
+        """Get or set the The final stiffness (units of stress / length) tangential to the plane of the cohesive element.
         """ # nopep8
         return self._cards[0].get_value("et1")
 
@@ -232,8 +228,7 @@ class Mat279(KeywordBase):
 
     @property
     def t0t(self) -> typing.Optional[float]:
-        """Get or set the Peak tensile traction in tangential direction. If negative, the absolute
-        value indicates a curve with respect to the normal traction.
+        """Get or set the Peak tensile traction in tangential direction. If negative, the absolute value indicates a curve with respect to the normal traction.
         """ # nopep8
         return self._cards[1].get_value("t0t")
 
@@ -244,8 +239,7 @@ class Mat279(KeywordBase):
 
     @property
     def dt(self) -> typing.Optional[float]:
-        """Get or set the Scale factor (unit of length). If negative, the absolute value indicates
-        a curve with respect to the normal stress.
+        """Get or set the Scale factor (unit of length). If negative, the absolute value indicates a curve with respect to the normal stress.
         """ # nopep8
         return self._cards[1].get_value("dt")
 
@@ -256,8 +250,7 @@ class Mat279(KeywordBase):
 
     @property
     def t1t(self) -> typing.Optional[float]:
-        """Get or set the Final traction in tangential direction. If negative, the absolute value
-        indicates a curve with respect to the normal traction.
+        """Get or set the Final traction in tangential direction. If negative, the absolute value indicates a curve with respect to the normal traction.
         """ # nopep8
         return self._cards[1].get_value("t1t")
 
@@ -323,8 +316,7 @@ class Mat279(KeywordBase):
 
     @property
     def failn(self) -> typing.Optional[float]:
-        """Get or set the Maximum effective separation distance in normal direction. Beyond
-        this distance failure occurs.
+        """Get or set the Maximum effective separation distance in normal direction. Beyond this distance failure occurs.
         """ # nopep8
         return self._cards[2].get_value("failn")
 
@@ -335,8 +327,7 @@ class Mat279(KeywordBase):
 
     @property
     def failt(self) -> typing.Optional[float]:
-        """Get or set the Maximum effective separation distance in tangential direction.
-        Beyond this distance failure occurs.
+        """Get or set the Maximum effective separation distance in tangential direction. Beyond this distance failure occurs.
         """ # nopep8
         return self._cards[2].get_value("failt")
 

@@ -35,9 +35,16 @@ _MAT001FLUID_CARD0 = (
     FieldSchema("da", float, 40, 10, None),
     FieldSchema("db", float, 50, 10, None),
     FieldSchema("k", float, 60, 10, 0.0),
+    FieldSchema("unused", int, 70, 10, None),
 )
 
 _MAT001FLUID_CARD1 = (
+    FieldSchema("efunc", str, 0, 10, "P"),
+    FieldSchema("cnvt", float, 10, 10, 0.001),
+    FieldSchema("iterlm", int, 20, 10, 3),
+)
+
+_MAT001FLUID_CARD2 = (
     FieldSchema("vc", float, 0, 10, None),
     FieldSchema("cp", float, 10, 10, 1e+20),
 )
@@ -66,6 +73,10 @@ class Mat001Fluid(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _MAT001FLUID_CARD1,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MAT001FLUID_CARD2,
                 **kwargs,
             ),
             OptionCardSet(
@@ -103,7 +114,9 @@ class Mat001Fluid(KeywordBase):
 
     @property
     def e(self) -> typing.Optional[float]:
-        """Get or set the Young's modulus.
+        """Get or set the Definition of Young's modulus
+        GT.0: E is the Young's modulus.
+        LT.0: | E | is the ID of a curve defining Young's modulus as a function of elemental variables EFUNC; It is supported for explicit simulation only.
         """ # nopep8
         return self._cards[0].get_value("e")
 
@@ -157,37 +170,70 @@ class Mat001Fluid(KeywordBase):
         self._cards[0].set_value("k", value)
 
     @property
+    def efunc(self) -> str:
+        """Get or set the The element variable used as the independent variable of curve |E|.P: elemental pressure
+        """ # nopep8
+        return self._cards[1].get_value("efunc")
+
+    @efunc.setter
+    def efunc(self, value: str) -> None:
+        """Set the efunc property."""
+        self._cards[1].set_value("efunc", value)
+
+    @property
+    def cnvt(self) -> float:
+        """Get or set the Convergence tolerance, needed when EFUNC is a variant of stress.
+        """ # nopep8
+        return self._cards[1].get_value("cnvt")
+
+    @cnvt.setter
+    def cnvt(self, value: float) -> None:
+        """Set the cnvt property."""
+        self._cards[1].set_value("cnvt", value)
+
+    @property
+    def iterlm(self) -> int:
+        """Get or set the Iteration limit, needed when EFUNC is a variant of stress.
+        """ # nopep8
+        return self._cards[1].get_value("iterlm")
+
+    @iterlm.setter
+    def iterlm(self, value: int) -> None:
+        """Set the iterlm property."""
+        self._cards[1].set_value("iterlm", value)
+
+    @property
     def vc(self) -> typing.Optional[float]:
         """Get or set the Tensor viscosity coefficient, values between 0.1 and 0.5 should be okay.
         """ # nopep8
-        return self._cards[1].get_value("vc")
+        return self._cards[2].get_value("vc")
 
     @vc.setter
     def vc(self, value: float) -> None:
         """Set the vc property."""
-        self._cards[1].set_value("vc", value)
+        self._cards[2].set_value("vc", value)
 
     @property
     def cp(self) -> float:
         """Get or set the Cavitation pressure (default = 1.0e+20).
         """ # nopep8
-        return self._cards[1].get_value("cp")
+        return self._cards[2].get_value("cp")
 
     @cp.setter
     def cp(self, value: float) -> None:
         """Set the cp property."""
-        self._cards[1].set_value("cp", value)
+        self._cards[2].set_value("cp", value)
 
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[2].cards[0].get_value("title")
+        return self._cards[3].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[2].cards[0].set_value("title", value)
+        self._cards[3].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

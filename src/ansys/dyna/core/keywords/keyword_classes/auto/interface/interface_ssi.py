@@ -35,8 +35,8 @@ _INTERFACESSI_CARD0 = (
 _INTERFACESSI_CARD1 = (
     FieldSchema("strid", int, 0, 10, None),
     FieldSchema("soilid", int, 10, 10, None),
-    FieldSchema("spr", int, 20, 10, None),
-    FieldSchema("mpr", int, 30, 10, None),
+    FieldSchema("strpr", int, 20, 10, None),
+    FieldSchema("soilpr", int, 30, 10, None),
 )
 
 _INTERFACESSI_CARD2 = (
@@ -119,30 +119,28 @@ class InterfaceSsi(KeywordBase):
         self._cards[1].set_value("soilid", value)
 
     @property
-    def spr(self) -> typing.Optional[int]:
-        """Get or set the Include the slave side in the *DATABASE_NCFORC and the
-        *DATABASE_BINARY_INTFOR interface force files:
-        EQ.1: slave side forces included.
+    def strpr(self) -> typing.Optional[int]:
+        """Get or set the Include the structure side in the *DATABASE_NCFORC and the *DATABASE_BINARY_INTFOR interface force files:
+        EQ.1: Structure side forces included.Note that for ncforc the forces for this side will be listed under surfa.
         """ # nopep8
-        return self._cards[1].get_value("spr")
+        return self._cards[1].get_value("strpr")
 
-    @spr.setter
-    def spr(self, value: int) -> None:
-        """Set the spr property."""
-        self._cards[1].set_value("spr", value)
+    @strpr.setter
+    def strpr(self, value: int) -> None:
+        """Set the strpr property."""
+        self._cards[1].set_value("strpr", value)
 
     @property
-    def mpr(self) -> typing.Optional[int]:
-        """Get or set the Include the master side in the *DATABASE_NCFORC and the
-        *DATABASE_BINARY_INTFOR interface force files:
-        EQ.1: master side forces included.
+    def soilpr(self) -> typing.Optional[int]:
+        """Get or set the Include the soil side in the *DATABASE_NCFORC and the *DATABASE_BINARY_INTFOR interface force files:
+        EQ.1: Soil side forces included.Note that for ncforc the forces for this side will be under surfb.
         """ # nopep8
-        return self._cards[1].get_value("mpr")
+        return self._cards[1].get_value("soilpr")
 
-    @mpr.setter
-    def mpr(self, value: int) -> None:
-        """Set the mpr property."""
-        self._cards[1].set_value("mpr", value)
+    @soilpr.setter
+    def soilpr(self, value: int) -> None:
+        """Set the soilpr property."""
+        self._cards[1].set_value("soilpr", value)
 
     @property
     def gmset(self) -> typing.Optional[int]:
@@ -179,7 +177,7 @@ class InterfaceSsi(KeywordBase):
 
     @property
     def death(self) -> float:
-        """Get or set the Time at which specified recorded motion is removed:	EQ.0.0: default set to 1028.
+        """Get or set the Time at which specified recorded motion is removed: EQ.0.0: default set to 1028.
         """ # nopep8
         return self._cards[2].get_value("death")
 

@@ -76,9 +76,9 @@ class ConstrainedRigidBodiesSet(KeywordBase):
 
     @property
     def iflag(self) -> typing.Optional[int]:
-        """Get or set the This flag is meaningful if and only if the inertia properties of the lead part, PIDL, are defined in *PART_‌INERTIA.  See Remark 1.
-        EQ.1:	Update the center - of - gravity, the translational mass,and the inertia matrix of PIDL to reflect its merging with the constrained rigid body(PIDC).
-        EQ.0 : The merged PIDC will not affect the properties defined in * PART_‌INERTIA for PIDL since the properties are assumed to already account for merged parts.If the properties are not defined in a* PART_‌INERTIA definition, the inertia properties of PIDC will be computed from its nodal masses.
+        """Get or set the This flag is meaningful if and only if the inertia properties of the lead part, PIDL, are defined in *PART_INERTIA.  See Remark 1.
+        EQ.1: Update the center - of - gravity, the translational mass,and the inertia matrix of PIDL to reflect its merging with the constrained rigid body(PIDC).
+        EQ.0: The merged PIDC will not affect the properties defined in *PART_INERTIA for PIDL since the properties are assumed to already account for merged parts.If the properties are not defined in a *PART_INERTIA definition, the inertia properties of PIDC will be computed from its nodal masses.
         """ # nopep8
         return self._cards[0].get_value("iflag")
 

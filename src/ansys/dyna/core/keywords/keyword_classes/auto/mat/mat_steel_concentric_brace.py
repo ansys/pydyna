@@ -102,7 +102,7 @@ class MatSteelConcentricBrace(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.  A unique number must be specified.
+        """Get or set the Material identification. A unique number must be specified.
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -157,7 +157,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @property
     def lamda(self) -> typing.Optional[float]:
-        """Get or set the Slenderness ratio (optional ¨C see note)
+        """Get or set the Slenderness ratio (optional - see note)
         """ # nopep8
         return self._cards[0].get_value("lamda")
 
@@ -168,7 +168,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @property
     def fbuck(self) -> typing.Optional[float]:
-        """Get or set the Initial buckling load (optional ¨C see note. If used, should be positive)
+        """Get or set the Initial buckling load (optional - see note. If used, should be positive)
         """ # nopep8
         return self._cards[0].get_value("fbuck")
 
@@ -179,7 +179,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @property
     def fbuck2(self) -> typing.Optional[float]:
-        """Get or set the Optional extra term in initial buckling load ¨C see note.
+        """Get or set the Optional extra term in initial buckling load - see note.
         """ # nopep8
         return self._cards[0].get_value("fbuck2")
 
@@ -212,7 +212,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @property
     def ts1(self) -> float:
-        """Get or set the Tensile axial strain thresholds 1.
+        """Get or set the Tensile axial strain FEMA thresholds 1.
         """ # nopep8
         return self._cards[2].get_value("ts1")
 
@@ -223,7 +223,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @property
     def ts2(self) -> float:
-        """Get or set the Tensile axial strain thresholds 2.
+        """Get or set the Tensile axial strain FEMA thresholds 2.
         """ # nopep8
         return self._cards[2].get_value("ts2")
 
@@ -234,7 +234,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @property
     def ts3(self) -> float:
-        """Get or set the Tensile axial strain thresholds 3
+        """Get or set the Tensile axial strain FEMA thresholds 3
         """ # nopep8
         return self._cards[2].get_value("ts3")
 
@@ -245,7 +245,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @property
     def ts4(self) -> float:
-        """Get or set the Tensile axial strain thresholds 4
+        """Get or set the Tensile axial strain FEMA thresholds 4
         """ # nopep8
         return self._cards[2].get_value("ts4")
 
@@ -256,7 +256,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @property
     def cs1(self) -> float:
-        """Get or set the Compressive axial strain thresholds 1
+        """Get or set the Compressive axial strain FEMA thresholds 1
         """ # nopep8
         return self._cards[2].get_value("cs1")
 
@@ -267,7 +267,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @property
     def cs2(self) -> float:
-        """Get or set the Compressive axial strain thresholds 2
+        """Get or set the Compressive axial strain FEMA thresholds 2
         """ # nopep8
         return self._cards[2].get_value("cs2")
 
@@ -278,7 +278,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @property
     def cs3(self) -> float:
-        """Get or set the Compressive axial strain thresholds 3
+        """Get or set the Compressive axial strain FEMA thresholds 3
         """ # nopep8
         return self._cards[2].get_value("cs3")
 
@@ -289,7 +289,7 @@ class MatSteelConcentricBrace(KeywordBase):
 
     @property
     def cs4(self) -> float:
-        """Get or set the Compressive axial strain thresholds 4.
+        """Get or set the Compressive axial strain FEMA thresholds 4.
         """ # nopep8
         return self._cards[2].get_value("cs4")
 

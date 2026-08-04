@@ -237,7 +237,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
 
     @property
     def _ec_(self) -> typing.Optional[float]:
-        """Get or set the Ec, Young's modulus - normal direction (not used).
+        """Get or set the Ec, Young's modulus - normal direction.
         """ # nopep8
         return self._cards[0].get_value("_ec_")
 
@@ -248,7 +248,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
 
     @property
     def prba(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio ba  (not used).
+        """Get or set the Poisson's ratio ba.
         """ # nopep8
         return self._cards[0].get_value("prba")
 
@@ -259,7 +259,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
 
     @property
     def _prca_(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio ca (not used).
+        """Get or set the Poisson's ratio ca.
         """ # nopep8
         return self._cards[0].get_value("_prca_")
 
@@ -270,7 +270,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
 
     @property
     def _prcb_(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio cb (not used).
+        """Get or set the Poisson's ratio cb.
         """ # nopep8
         return self._cards[0].get_value("_prcb_")
 
@@ -343,8 +343,8 @@ class MatEnhancedCompositeDamage(KeywordBase):
     @property
     def _2way(self) -> typing.Optional[float]:
         """Get or set the Flag to turn on 2-way fiber action.
-        EQ.0.0:	Standard unidirectional behavior.
-        EQ.1.0:	2-way fiber behavior.  The meaning of the fields DFAILT, DFAILC, YC, YT, SLIMT2 and SLIMC are altered if this flag is set.  This option is only available for MAT 54 using thin shells.
+        EQ.0.0: Standard unidirectional behavior.
+        EQ.1.0: 2-way fiber behavior. The meaning of the fields DFAILT, DFAILC, YC, YT, SLIMT2 and SLIMC are altered if this flag is set. This option is only available for MAT 54 using thin shells.
         """ # nopep8
         return self._cards[1].get_value("_2way")
 
@@ -356,8 +356,8 @@ class MatEnhancedCompositeDamage(KeywordBase):
     @property
     def ti(self) -> typing.Optional[float]:
         """Get or set the Flag to turn on transversal isotropic behavior for *MAT_054 solid elements.
-        EQ.0.0:	Standard unidirectional behavior
-        EQ.1.0 : Transversal isotropic behavior
+        EQ.0.0: Standard unidirectional behavior
+        EQ.1.0: Transversal isotropic behavior
         """ # nopep8
         return self._cards[1].get_value("ti")
 
@@ -730,7 +730,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
     @property
     def epsr(self) -> typing.Optional[float]:
         """Get or set the Final rupture transverse shear strain. (MAT_054 only)
-        LT.0.0:	|EPSR| is final rupture transverse shear strain. In addition, the element erodes if transverse shear damage reaches TSMD.
+        LT.0.0: |EPSR| is final rupture transverse shear strain. In addition, the element erodes if transverse shear damage reaches TSMD.
         """ # nopep8
         return self._cards[6].get_value("epsr")
 
@@ -752,7 +752,7 @@ class MatEnhancedCompositeDamage(KeywordBase):
 
     @property
     def soft2(self) -> float:
-        """Get or set the Ï„ptional â€œorthogonalâ€ softening reduction factor for material strength in crashfront elements (default = 1.0). See remarks.
+        """Get or set the Optional 'orthogonal' softening reduction factor for material strength in crashfront elements (default = 1.0). See remarks.
         """ # nopep8
         return self._cards[6].get_value("soft2")
 

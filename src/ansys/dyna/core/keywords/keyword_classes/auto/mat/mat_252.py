@@ -61,7 +61,7 @@ _MAT252_CARD2 = (
 )
 
 _MAT252_CARD3 = (
-    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("ihis", int, 0, 10, 0),
     FieldSchema("unused", int, 10, 10, None),
     FieldSchema("d1", float, 20, 10, None),
     FieldSchema("d2", float, 30, 10, None),
@@ -165,7 +165,7 @@ class Mat252(KeywordBase):
 
     @property
     def flg(self) -> int:
-        """Get or set the Flag to choose between yield functions f and f^, see Remarks.
+        """Get or set the Flag to choose between yield functions f and f**, see Remarks.
         EQ.0.0: Cap in tension and nonlinear Drucker & Prager in compression,
         EQ.2.0: Cap in tension. and von Mises in compression
         """ # nopep8
@@ -195,9 +195,8 @@ class Mat252(KeywordBase):
 
     @property
     def dopt(self) -> typing.Optional[int]:
-        """Get or set the Damage criterion flag D or D^, see Remarks.
-        EQ.0.0: damage model uses damage plastic strain r.
-        damage model uses plastic arc length rv
+        """Get or set the Damage criterion flag D or D**, see Remarks.
+        EQ.0.0: damage model uses damage plastic strain r. damage model uses plastic arc length rv
         """ # nopep8
         return self._cards[0].get_value("dopt")
 
@@ -370,6 +369,21 @@ class Mat252(KeywordBase):
     def srfilt(self, value: float) -> None:
         """Set the srfilt property."""
         self._cards[2].set_value("srfilt", value)
+
+    @property
+    def ihis(self) -> int:
+        """Get or set the Flag for additional material properties initialization based on a prior process simulation:
+        EQ.0: No additional initialization
+        GE.1: Use *INITIAL_STRESS_SOLID to initialize additional material properties on an element - by - element basis(see Remarks below).
+        """ # nopep8
+        return self._cards[3].get_value("ihis")
+
+    @ihis.setter
+    def ihis(self, value: int) -> None:
+        """Set the ihis property."""
+        if value not in [0, 1, None]:
+            raise Exception("""ihis must be `None` or one of {0,1}.""")
+        self._cards[3].set_value("ihis", value)
 
     @property
     def d1(self) -> typing.Optional[float]:

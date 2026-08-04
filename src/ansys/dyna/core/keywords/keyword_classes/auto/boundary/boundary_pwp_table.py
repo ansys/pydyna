@@ -103,9 +103,9 @@ class BoundaryPwpTable(KeywordBase):
     @property
     def itotex(self) -> int:
         """Get or set the Flag for type of pressure boundary condition: (see notes)
-        =0: 	Total head
-        =1: 	Excess head
-        =2:	Hydraulic head
+        =0: Total head
+        =1: Excess head
+        =2: Hydraulic head
         """ # nopep8
         return self._cards[1].get_value("itotex")
 

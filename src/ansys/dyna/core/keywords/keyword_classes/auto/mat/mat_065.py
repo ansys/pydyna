@@ -384,7 +384,7 @@ class Mat065(KeywordBase):
 
     @property
     def m(self) -> float:
-        """Get or set the m, exponent for FCC metal (default = 0.5).  This field is only used when N = 0.0 on Card 1.
+        """Get or set the m, exponent for FCC metal (default = 0.5). This field is only used when N = 0.0 on Card 1.
         """ # nopep8
         return self._cards[3].get_value("m")
 

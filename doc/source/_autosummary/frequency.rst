@@ -27,10 +27,24 @@ FrequencyDomainAcousticBemAtv
     :members:
 
 
+FrequencyDomainAcousticBemAtvHalfSpace
+--------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.frequency_domain_acoustic_bem_atv_half_space
+    :members:
+
+
 FrequencyDomainAcousticBemHalfSpace
 -----------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.frequency_domain_acoustic_bem_half_space
+    :members:
+
+
+FrequencyDomainAcousticBemHalfSpaceAtv
+--------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.frequency_domain_acoustic_bem_half_space_atv
     :members:
 
 
@@ -48,6 +62,20 @@ FrequencyDomainAcousticBemPanelContribution
     :members:
 
 
+FrequencyDomainAcousticBemPower
+-------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.frequency_domain_acoustic_bem_power
+    :members:
+
+
+FrequencyDomainAcousticDirectivity
+----------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.frequency_domain_acoustic_directivity
+    :members:
+
+
 FrequencyDomainAcousticFem
 --------------------------
 
@@ -59,6 +87,27 @@ FrequencyDomainAcousticFemEigenvalue
 ------------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.frequency_domain_acoustic_fem_eigenvalue
+    :members:
+
+
+FrequencyDomainAcousticFemModal
+-------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.frequency_domain_acoustic_fem_modal
+    :members:
+
+
+FrequencyDomainAcousticFrequency
+--------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.frequency_domain_acoustic_frequency
+    :members:
+
+
+FrequencyDomainAcousticFringePlotCube
+-------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.frequency_domain_acoustic_fringe_plot_cube
     :members:
 
 
@@ -115,6 +164,20 @@ FrequencyDomainFrf
 ------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.frequency_domain_frf
+    :members:
+
+
+FrequencyDomainFrfReduced
+-------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.frequency_domain_frf_reduced
+    :members:
+
+
+FrequencyDomainFrfSubcase
+-------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.frequency_domain_frf_subcase
     :members:
 
 
@@ -251,6 +314,13 @@ FrequencyDomainPathPartition
     :members:
 
 
+FrequencyDomainPathResidualVector
+---------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.frequency_domain_path_residual_vector
+    :members:
+
+
 FrequencyDomainRandomVibration
 ------------------------------
 
@@ -276,6 +346,20 @@ FrequencyDomainResponseSpectrumDdam
 -----------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.frequency_domain_response_spectrum_ddam
+    :members:
+
+
+FrequencyDomainResponseSpectrumDdamMissingMassCorrection
+--------------------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.frequency_domain_response_spectrum_ddam_missing_mass_correction
+    :members:
+
+
+FrequencyDomainResponseSpectrumMissingMassCorrection
+----------------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.frequency_domain_response_spectrum_missing_mass_correction
     :members:
 
 

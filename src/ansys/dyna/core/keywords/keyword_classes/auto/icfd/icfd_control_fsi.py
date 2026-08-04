@@ -39,6 +39,10 @@ _ICFDCONTROLFSI_CARD0 = (
 
 _ICFDCONTROLFSI_CARD1 = (
     FieldSchema("nsub", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("idetec", int, 30, 10, None),
+    FieldSchema("vforc", int, 40, 10, 0),
 )
 
 class IcfdControlFsi(KeywordBase):
@@ -66,10 +70,10 @@ class IcfdControlFsi(KeywordBase):
     @property
     def owc(self) -> int:
         """Get or set the Indicates the coupling direction to the solver.
-        EQ.0:	Two - way coupling.Loads and displacements are transferred across the FSI interface and the full non - linear problem is solved.Weak FSI coupling when coupled to explicit mechanical solver, strong FSI coupling when coupled to implicit mechanical solver.
-        EQ.1 : One - way coupling.The solid mechanics solver transfers displacements to the fluid solver.
-        EQ.2 : One - way coupling.The fluid solver transfers stresses to the solid mechanics solver.
-        EQ.3 : Two - way coupling.Forces weak coupling(no sub - stepping) with implicit mechanical solver.
+        EQ.0: Two-way coupling. Loads and displacements are transferred across the FSI interface, and the full non-linear problem is solved. It gives weak FSI coupling when coupled to explicit mechanical solver and strong FSI coupling when coupled to implicit mechanical solver.
+        EQ.1: One - way coupling.The solid mechanics solver transfers displacements to the fluid solver.
+        EQ.2: One - way coupling.The fluid solver transfers stresses to the solid mechanics solver.
+        EQ.3: Two - way coupling. It causes weak coupling(no sub - stepping) with the implicit mechanical solver.
         """ # nopep8
         return self._cards[0].get_value("owc")
 
@@ -115,7 +119,7 @@ class IcfdControlFsi(KeywordBase):
 
     @property
     def lcidsf(self) -> typing.Optional[int]:
-        """Get or set the Optional load curve ID to apply a scaling factor on the forces transferred to the solid :
+        """Get or set the Optional load curve ID to apply a scaling factor on the forces transferred to the solid:
         GT.0: Load curve ID function of iterations.
         LT.0: Load curve ID function of time.
         """ # nopep8
@@ -151,6 +155,36 @@ class IcfdControlFsi(KeywordBase):
     def nsub(self, value: int) -> None:
         """Set the nsub property."""
         self._cards[1].set_value("nsub", value)
+
+    @property
+    def idetec(self) -> typing.Optional[int]:
+        """Get or set the Fluid-structure interface detection frequency (see Remark 3):
+        LT.0: | IDETEC | refers to a load curve ID for the curve that gives the detection frequency as a function of time.
+        EQ.0 : The interface detection is performed only once at the beginning of the simulation.
+        GT.0 : The interface is detected every IDETEC time steps.
+        """ # nopep8
+        return self._cards[1].get_value("idetec")
+
+    @idetec.setter
+    def idetec(self, value: int) -> None:
+        """Set the idetec property."""
+        self._cards[1].set_value("idetec", value)
+
+    @property
+    def vforc(self) -> int:
+        """Get or set the Add viscous tangential forces to the FSI coupling:
+        EQ.0: Only normal pressure forces are used.
+        EQ.1: Viscous forces are added to normal forces.
+        EQ.2: Viscous forces are recomputed at every sub - step during the nonlinear iterations and added to normal forces.
+        """ # nopep8
+        return self._cards[1].get_value("vforc")
+
+    @vforc.setter
+    def vforc(self, value: int) -> None:
+        """Set the vforc property."""
+        if value not in [0, 1, 2, None]:
+            raise Exception("""vforc must be `None` or one of {0,1,2}.""")
+        self._cards[1].set_value("vforc", value)
 
     @property
     def lcidsf_link(self) -> typing.Optional[DefineCurve]:

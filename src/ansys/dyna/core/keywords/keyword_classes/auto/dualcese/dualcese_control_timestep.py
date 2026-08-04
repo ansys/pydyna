@@ -50,8 +50,8 @@ class DualceseControlTimestep(KeywordBase):
     @property
     def iddt(self) -> int:
         """Get or set the Sets the time step option:
-        Q.0:	Fixed time step size(DTINT, i.e., given initial time step size)
-        NE.0 : the time step size will be calculated based on the given CFL - number and the flow solution at the previous time step
+        Q.0: Fixed time step size(DTINT, i.e., given initial time step size)
+        NE.0: the time step size will be calculated based on the given CFL - number and the flow solution at the previous time step
         """ # nopep8
         return self._cards[0].get_value("iddt")
 

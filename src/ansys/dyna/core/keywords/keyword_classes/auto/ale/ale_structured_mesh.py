@@ -32,8 +32,8 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_syst
 _ALESTRUCTUREDMESH_CARD0 = (
     FieldSchema("mshid", int, 0, 10, 0),
     FieldSchema("dpid", int, 10, 10, None),
-    FieldSchema("nbid", int, 20, 10, 0),
-    FieldSchema("ebid", int, 30, 10, 0),
+    FieldSchema("nbid", int, 20, 10, None),
+    FieldSchema("ebid", int, 30, 10, None),
     FieldSchema("unused", int, 40, 10, None),
     FieldSchema("unused", int, 50, 10, None),
     FieldSchema("unused", int, 60, 10, None),
@@ -85,10 +85,7 @@ class AleStructuredMesh(KeywordBase):
     @property
     def dpid(self) -> typing.Optional[int]:
         """Get or set the Default Part ID. The elements generated will be with DPID.
-        DPID refers to an empty part contains no material and used to
-        reference the mesh only. This part definition is automatically
-        generated during the input phase and contains no material and
-        element formulation information. Please see remark 1.
+        DPID refers to an empty part contains no material and used to reference the mesh only. This part definition is automatically generated during the input phase and contains no material and element formulation information. Please see remark 1.
         """ # nopep8
         return self._cards[0].get_value("dpid")
 
@@ -98,8 +95,8 @@ class AleStructuredMesh(KeywordBase):
         self._cards[0].set_value("dpid", value)
 
     @property
-    def nbid(self) -> int:
-        """Get or set the Nodes are generated and assigned with node IDs starting from NBID.
+    def nbid(self) -> typing.Optional[int]:
+        """Get or set the Nodes are generated and assigned with node IDs starting from NBID. If setting to a nonzero value (recommended), use an ID larger than the maximum existing node ID.  If unset or 0 (not recommended), NBID is internally set to the maximum node ID + an offset. See Remark 6.
         """ # nopep8
         return self._cards[0].get_value("nbid")
 
@@ -109,8 +106,8 @@ class AleStructuredMesh(KeywordBase):
         self._cards[0].set_value("nbid", value)
 
     @property
-    def ebid(self) -> int:
-        """Get or set the Elements are generated and assigned with element IDs starting from EBID.
+    def ebid(self) -> typing.Optional[int]:
+        """Get or set the Elements are generated and assigned with element IDs starting from EBID.  If setting to a nonzero value (recommended), use an ID larger than the maximum existing element ID.  If unset or 0 (not recommended), EBID is internally set to the maximum element ID + an offset. See Remark 6.
         """ # nopep8
         return self._cards[0].get_value("ebid")
 
@@ -132,7 +129,7 @@ class AleStructuredMesh(KeywordBase):
 
     @property
     def cpidx(self) -> typing.Optional[int]:
-        """Get or set the Control point IDs defining node ID/value pairs along each local	axis. See *ALE_STRUCTURED_MESH_CONTROL_POINTS.Setting CPIDX to 0 or -1 invokes the ALE to S-ALE converter. Please see Remark 4. Note that for 2D problems CPIDZ is ignored.
+        """Get or set the Control point IDs defining node ID/value pairs along each local axis. See *ALE_STRUCTURED_MESH_CONTROL_POINTS.Setting CPIDX to 0 or -1 invokes the ALE to S-ALE converter. Please see Remark 4. Note that for 2D problems CPIDZ is ignored.
         """ # nopep8
         return self._cards[1].get_value("cpidx")
 
@@ -154,7 +151,7 @@ class AleStructuredMesh(KeywordBase):
 
     @property
     def cpidz(self) -> typing.Optional[int]:
-        """Get or set the Control point IDs defining node ID/value pairs along each local	axis. See *ALE_STRUCTURED_MESH_CONTROL_POINTS.Setting CPIDX to 0 or -1 invokes the ALE to S-ALE converter. Please see Remark 4. Note that for 2D problems CPIDZ is ignored.
+        """Get or set the Control point IDs defining node ID/value pairs along each local axis. See *ALE_STRUCTURED_MESH_CONTROL_POINTS.Setting CPIDX to 0 or -1 invokes the ALE to S-ALE converter. Please see Remark 4. Note that for 2D problems CPIDZ is ignored.
         """ # nopep8
         return self._cards[1].get_value("cpidz")
 

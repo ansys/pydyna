@@ -44,7 +44,7 @@ _ALECOUPLINGNODALPENALTY_CARD2 = (
     FieldSchema("start", float, 0, 10, 0.0),
     FieldSchema("end", float, 10, 10, 10000000000.0),
     FieldSchema("pform", int, 20, 10, None),
-    FieldSchema("pfac", int, 30, 10, None),
+    FieldSchema("pfac", float, 30, 10, 0.1),
     FieldSchema("unused", int, 40, 10, None),
     FieldSchema("frcmin", float, 50, 10, 0.5),
 )
@@ -96,7 +96,7 @@ class AleCouplingNodalPenalty(KeywordBase):
 
     @property
     def strsid(self) -> typing.Optional[int]:
-        """Get or set the Set ID defining a part, part set or segment set ID of structure (see *PART, *SET_PART or *SET_SEGMENT). The structure may include Lagrangian elements, EFG, SPG, or SPH.
+        """Get or set the ID for defining a part, part set, segment set, or node set giveing the structure. The structure may include Lagrangian solid, shell, beam, thick shell, or discrete sphere elements. EFG, SPH, or EFG nodes may be used, but the boundary conditions may not be satisfied
         """ # nopep8
         return self._cards[1].get_value("strsid")
 
@@ -107,7 +107,7 @@ class AleCouplingNodalPenalty(KeywordBase):
 
     @property
     def alesid(self) -> typing.Optional[int]:
-        """Get or set the Master set ID defining a part or part set ID of the ALE or master solid elements (see *PART or *SET_PART)
+        """Get or set the ID for defining a part or part set specifying the ALE solid elements.
         """ # nopep8
         return self._cards[1].get_value("alesid")
 
@@ -118,11 +118,11 @@ class AleCouplingNodalPenalty(KeywordBase):
 
     @property
     def strsty(self) -> int:
-        """Get or set the Slave set type of "SLAVE"
-        EQ.0: Part set ID (PSID).
-        EQ.1: Part ID (PID).
-        EQ.2: Segment set ID (SSID).
-        EQ 3: Node set ID (NSID)
+        """Get or set the Set type of STRSID
+        EQ.0: Part set ID (see *SET_PART).
+        EQ.1: Part ID (see *PART).
+        EQ.2: Segment set ID (see *SET_SEGMENT).
+        EQ.3: Node set ID(see *SET_NODE)
         """ # nopep8
         return self._cards[1].get_value("strsty")
 
@@ -136,8 +136,8 @@ class AleCouplingNodalPenalty(KeywordBase):
     @property
     def alesty(self) -> int:
         """Get or set the Master set type of "MASTER"
-        EQ.0: Part set ID (PSID).
-        EQ.1: Part ID (PID).
+        EQ.0: Part set ID (see *SET_PART).
+        EQ.1: Part ID (see *PART).
         """ # nopep8
         return self._cards[1].get_value("alesty")
 
@@ -186,10 +186,10 @@ class AleCouplingNodalPenalty(KeywordBase):
     @property
     def pform(self) -> typing.Optional[int]:
         """Get or set the Penalty stiffness formulations:
-        EQ.0:	Mass based penalty stiffness
-        EQ.1 : Bulk modulus based penalty stiffness
+        EQ.0: Mass based penalty stiffness
+        EQ.1: Bulk modulus based penalty stiffness
         amespace
-        Q.2 : Penalty stiffness is determined by the user - provided load curve between penetration and penalty pressure.
+        Q.2: Penalty stiffness is determined by the user - provided load curve between penetration and penalty pressure.
         """ # nopep8
         return self._cards[2].get_value("pform")
 
@@ -199,13 +199,13 @@ class AleCouplingNodalPenalty(KeywordBase):
         self._cards[2].set_value("pform", value)
 
     @property
-    def pfac(self) -> typing.Optional[int]:
+    def pfac(self) -> float:
         """Get or set the Penalty stiffness factor (PFORM = 0 or 1) for scaling the estimated stiffness of the interacting (coupling) system or load curve ID (PFORM = 2).
         """ # nopep8
         return self._cards[2].get_value("pfac")
 
     @pfac.setter
-    def pfac(self, value: int) -> None:
+    def pfac(self, value: float) -> None:
         """Set the pfac property."""
         self._cards[2].set_value("pfac", value)
 

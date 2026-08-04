@@ -47,7 +47,7 @@ class IncludeCosim(KeywordBase):
         ]
     @property
     def filename(self) -> typing.Optional[str]:
-        """Get or set the Name of a keyword input file that contains the coupling information, which  includes sets of segments in the global scale model and sets of nodes in the local scale one. See Remark 1
+        """Get or set the Name of a keyword input file that contains the coupling information, which  includes sets of segments/solids in the global scale model and sets of nodes in the local scale one. See Remark 1
         """ # nopep8
         return self._cards[0].get_value("filename")
 
