@@ -1044,6 +1044,26 @@
             ]
         }
     },
+    "CONTROL_CONTACT": {
+        "generation-options": {
+            "cascading-card": [
+                {
+                    "start": 2,
+                    "end": 6
+                }
+            ]
+        }
+    },
+    "CONTROL_OUTPUT": {
+        "generation-options": {
+            "cascading-card": [
+                {
+                    "start": 5,
+                    "end": 5
+                }
+            ]
+        }
+    },
     "CONTROL_REFERENCE_CONFIGURAION": {
         "type": "multiple",
         "generations": [
@@ -1534,6 +1554,32 @@
         },
         "labels": {
             "constants_card": 1
+        }
+    },
+    "MAT_001": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.e is not None and self.e < 0",
+                    "ref": "efunc_card"
+                }
+            ]
+        },
+        "labels": {
+            "efunc_card": 1
+        }
+    },
+    "MAT_ELASTIC": {
+        "generation-options": {
+            "conditional-card": [
+                {
+                    "func": "self.e is not None and self.e < 0",
+                    "ref": "efunc_card"
+                }
+            ]
+        },
+        "labels": {
+            "efunc_card": 1
         }
     },
     "MAT_NULL": {

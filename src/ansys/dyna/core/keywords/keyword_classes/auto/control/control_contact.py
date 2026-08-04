@@ -121,22 +121,27 @@ class ControlContact(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _CONTROLCONTACT_CARD2,
+                active_func=lambda: self._cards[2].has_nondefault_values() or self._cards[3].active,
                 **kwargs,
             ),
             Card.from_field_schemas_with_defaults(
                 _CONTROLCONTACT_CARD3,
+                active_func=lambda: self._cards[3].has_nondefault_values() or self._cards[4].active,
                 **kwargs,
             ),
             Card.from_field_schemas_with_defaults(
                 _CONTROLCONTACT_CARD4,
+                active_func=lambda: self._cards[4].has_nondefault_values() or self._cards[5].active,
                 **kwargs,
             ),
             Card.from_field_schemas_with_defaults(
                 _CONTROLCONTACT_CARD5,
+                active_func=lambda: self._cards[5].has_nondefault_values() or self._cards[6].active,
                 **kwargs,
             ),
             Card.from_field_schemas_with_defaults(
                 _CONTROLCONTACT_CARD6,
+                active_func=lambda: self._cards[6].has_nondefault_values(),
                 **kwargs,
             ),
         ]
