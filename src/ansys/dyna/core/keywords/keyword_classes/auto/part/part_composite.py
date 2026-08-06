@@ -110,26 +110,43 @@ class PartComposite(KeywordBase):
     @property
     def elform(self) -> int:
         """Get or set the Element formulation options, see Remarks 1 and 2 below:
-        EQ.1:  Hughes-Liu,
-        EQ.2:  Belytschko-Tsay,
-        EQ.3:  BCIZ triangular shell,
-        EQ.4:  C0 triangular shell,
-        EQ.6:  S/R Hughes-Liu,
-        EQ.7:   S/R co-rotational Hughes-Liu,
-        EQ.8:   Belytschko-Leviathan shell,
-        EQ.9:   Fully integrated Belytschko-Tsay membrane,
+        EQ.1: Hughes-Liu,
+        EQ.2: Belytschko-Tsay,
+        EQ.3: BCIZ triangular shell,
+        EQ.4: C0 triangular shell,
+        EQ.6: S/R Hughes-Liu,
+        EQ.7: S/R co-rotational Hughes-Liu,
+        EQ.8: Belytschko-Leviathan shell,
+        EQ.9: Fully integrated Belytschko-Tsay membrane,
         EQ.10: Belytschko-Wong-Chiang,
         EQ.11: Fast (co-rotational) Hughes-Liu,
-        EQ.16:  Fully integrated shell element (very fast)
+        EQ.16: Fully integrated shell element (very fast)
         EQ.-16: Fully integrated shell element modified for higher accuracy
+        EQ.17: Fully integrated DKT, triangular shell element,
+        EQ.18: Fully integrated linear DK quadrilateral / triangular shell,
+        EQ.20: Fully integrated linear assumed strain C0 shell,
+        EQ.21: Fully integrated linear assumed strain C0 shell(5 DOF),
+        EQ.23: 8 - node quadratic quadrilateral shell(see IRQUAD in *CONTROL_SHELL),
+        EQ.24: 6 - node quadratic triangular shell,
+        EQ.25: Belytschko - Tsay shell with thickness stretch,
+        EQ.26: Fully integrated shell with thickness stretch,
+        EQ.27: C0 triangular shell with thickness stretch,
+        EQ.30: Fast fully integrated element with 2 in-plane integration points based on ELFORM 16
+        EQ.41: Mesh - free(EFG) shell local approach(more suitable for crashworthiness analysis),
+        EQ.42: Mesh - free(EFG) shell global approach(more suitable for metal forming analysis),
+        EQ.101: User defined shell,
+        EQ.102: User defined shell,
+        EQ.103: User defined shell,
+        EQ.104: User defined shell,
+        EQ.105: User defined shell.
         """ # nopep8
         return self._cards[1].get_value("elform")
 
     @elform.setter
     def elform(self, value: int) -> None:
         """Set the elform property."""
-        if value not in [2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 16, -16, None]:
-            raise Exception("""elform must be `None` or one of {2,1,3,4,5,6,7,8,9,10,11,16,-16}.""")
+        if value not in [2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 16, -16, 17, 18, 20, 21, 23, 24, 25, 26, 27, 30, 41, 42, 101, 102, 103, 104, 105, None]:
+            raise Exception("""elform must be `None` or one of {2,1,3,4,5,6,7,8,9,10,11,16,-16,17,18,20,21,23,24,25,26,27,30,41,42,101,102,103,104,105}.""")
         self._cards[1].set_value("elform", value)
 
     @property
@@ -145,10 +162,12 @@ class PartComposite(KeywordBase):
 
     @property
     def nloc(self) -> float:
-        """Get or set the Location of reference surface for three dimensional shell elements.  If nonzero, the mid-surface of the shell is offset by a value equal to  .  Alternatively, the offset can be specified by using the OFFSET option in the *ELEMENT_SHELL input section.
-        EQ. 1.0:  top surface,
-        EQ. 0.0:  mid-surface (default),
-        EQ.-1.0:  bottom surface..
+        """Get or set the Location of reference surface, available for thin shells only.  If nonzero, the offset distance from the plane of the nodal points to the reference surface of the shell in the direction of the shell normal vector is a value:
+        offset = -0.50xNLOCx(average  shell  thickness).
+        This offset is not considered in the contact subroutines unless CNTCO is set to 1 or 3 in *CONTROL_SHELL.Alternatively, the offset can be specified by using the OFFSET option in the *ELEMENT_SHELL input section.
+        EQ.1.0: Top surface,
+        EQ.0.0: Mid - surface(default),
+        EQ. - 1.0: Bottom surface.
         """ # nopep8
         return self._cards[1].get_value("nloc")
 
@@ -171,7 +190,7 @@ class PartComposite(KeywordBase):
     @property
     def hgid(self) -> int:
         """Get or set the Hourglass/bulk viscosity identification defined in the *HOURGLASS Section:
-        EQ.0:  default values are used..
+        EQ.0: default values are used..
         """ # nopep8
         return self._cards[1].get_value("hgid")
 
@@ -182,7 +201,7 @@ class PartComposite(KeywordBase):
 
     @property
     def adpopt(self) -> int:
-        """Get or set the Indicate if this part is adapted or not. See also *CONTROL_ADAPTIVITY.
+        """Get or set the Indicate if this part is adapted. See also *CONTROL_ADAPTIVITY.
         EQ.0: no adaptivity (default),
         EQ.1: H-adaptive for 3D shells,
         EQ.2: R-adaptive remeshing for 2D shells.
@@ -212,14 +231,92 @@ class PartComposite(KeywordBase):
         self._cards[1].set_value("thshel", value)
 
     @property
-    def layers(self) -> pd.DataFrame:
-        """Get the table of layers."""
-        return self._cards[2].table
+    def mid1(self) -> typing.Optional[int]:
+        """Get or set the Material ID of integration point i, see *MAT_   Section
+        """ # nopep8
+        return self._cards[2].get_value("mid1")
 
-    @layers.setter
-    def layers(self, df: pd.DataFrame):
-        """Set layers from the dataframe df"""
-        self._cards[2].table = df
+    @mid1.setter
+    def mid1(self, value: int) -> None:
+        """Set the mid1 property."""
+        self._cards[2].set_value("mid1", value)
+
+    @property
+    def thick1(self) -> typing.Optional[float]:
+        """Get or set the Thickness of integration point .
+        """ # nopep8
+        return self._cards[2].get_value("thick1")
+
+    @thick1.setter
+    def thick1(self, value: float) -> None:
+        """Set the thick1 property."""
+        self._cards[2].set_value("thick1", value)
+
+    @property
+    def b1(self) -> typing.Optional[float]:
+        """Get or set the Material angle of integration point i.
+        """ # nopep8
+        return self._cards[2].get_value("b1")
+
+    @b1.setter
+    def b1(self, value: float) -> None:
+        """Set the b1 property."""
+        self._cards[2].set_value("b1", value)
+
+    @property
+    def tmid1(self) -> typing.Optional[int]:
+        """Get or set the Thermal ID
+        """ # nopep8
+        return self._cards[2].get_value("tmid1")
+
+    @tmid1.setter
+    def tmid1(self, value: int) -> None:
+        """Set the tmid1 property."""
+        self._cards[2].set_value("tmid1", value)
+
+    @property
+    def mid2(self) -> typing.Optional[int]:
+        """Get or set the Material ID of integration point i, see *MAT_   Section
+        """ # nopep8
+        return self._cards[2].get_value("mid2")
+
+    @mid2.setter
+    def mid2(self, value: int) -> None:
+        """Set the mid2 property."""
+        self._cards[2].set_value("mid2", value)
+
+    @property
+    def thick2(self) -> typing.Optional[float]:
+        """Get or set the Thickness of integration point
+        """ # nopep8
+        return self._cards[2].get_value("thick2")
+
+    @thick2.setter
+    def thick2(self, value: float) -> None:
+        """Set the thick2 property."""
+        self._cards[2].set_value("thick2", value)
+
+    @property
+    def b2(self) -> typing.Optional[float]:
+        """Get or set the Material angle of integration point i
+        """ # nopep8
+        return self._cards[2].get_value("b2")
+
+    @b2.setter
+    def b2(self, value: float) -> None:
+        """Set the b2 property."""
+        self._cards[2].set_value("b2", value)
+
+    @property
+    def tmid2(self) -> typing.Optional[int]:
+        """Get or set the Thermal ID
+        """ # nopep8
+        return self._cards[2].get_value("tmid2")
+
+    @tmid2.setter
+    def tmid2(self, value: int) -> None:
+        """Set the tmid2 property."""
+        self._cards[2].set_value("tmid2", value)
 
     @property
     def mid1_link(self) -> typing.Optional[KeywordBase]:

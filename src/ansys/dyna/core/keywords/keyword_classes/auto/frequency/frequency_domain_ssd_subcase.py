@@ -77,6 +77,11 @@ _FREQUENCYDOMAINSSDSUBCASE_CARD4 = (
     FieldSchema("vid", int, 70, 10, 0),
 )
 
+_FREQUENCYDOMAINSSDSUBCASE_CARD5 = (
+    FieldSchema("mass", float, 0, 10, None),
+    FieldSchema("e", float, 10, 10, None),
+)
+
 class FrequencyDomainSsdSubcase(KeywordBase):
     """DYNA FREQUENCY_DOMAIN_SSD_SUBCASE keyword"""
 
@@ -111,6 +116,10 @@ class FrequencyDomainSsdSubcase(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _FREQUENCYDOMAINSSDSUBCASE_CARD4,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _FREQUENCYDOMAINSSDSUBCASE_CARD5,
                 **kwargs,
             ),
         ]
@@ -177,16 +186,18 @@ class FrequencyDomainSsdSubcase(KeywordBase):
     @property
     def restdp(self) -> int:
         """Get or set the Restart option.
-        EQ.0: A new run without dumpssd,
-        EQ.1: Restart with dumpssd.
+        EQ.-1: A new run with writing dumpssd for future restart,
+        EQ.0: A new run without writing dumpssd,
+        EQ.1: Restart with dumpssd with writing new dumpssd for future restart,
+        EQ.2: Restart with dumpssd without writing new dumpssd.
         """ # nopep8
         return self._cards[0].get_value("restdp")
 
     @restdp.setter
     def restdp(self, value: int) -> None:
         """Set the restdp property."""
-        if value not in [0, 1, None]:
-            raise Exception("""restdp must be `None` or one of {0,1}.""")
+        if value not in [0, 1, -1, 2, None]:
+            raise Exception("""restdp must be `None` or one of {0,1,-1,2}.""")
         self._cards[0].set_value("restdp", value)
 
     @property
@@ -221,7 +232,7 @@ class FrequencyDomainSsdSubcase(KeywordBase):
 
     @property
     def dampf(self) -> float:
-        """Get or set the Modal damping coefficient, ζ.
+        """Get or set the Modal damping coefficient
         """ # nopep8
         return self._cards[1].get_value("dampf")
 
@@ -232,7 +243,7 @@ class FrequencyDomainSsdSubcase(KeywordBase):
 
     @property
     def lcdam(self) -> int:
-        """Get or set the Load Curve ID defining mode dependent modal damping coefficient ζ.
+        """Get or set the Load Curve ID defining mode dependent modal damping coefficient .
         """ # nopep8
         return self._cards[1].get_value("lcdam")
 
@@ -256,7 +267,7 @@ class FrequencyDomainSsdSubcase(KeywordBase):
 
     @property
     def dmpmas(self) -> float:
-        """Get or set the Mass proportional damping constant α, in Rayleigh damping..
+        """Get or set the Mass proportional damping constant , in Rayleigh damping.
         """ # nopep8
         return self._cards[1].get_value("dmpmas")
 
@@ -267,7 +278,7 @@ class FrequencyDomainSsdSubcase(KeywordBase):
 
     @property
     def dmpstf(self) -> float:
-        """Get or set the Stiffness proportional damping constant β, in Rayleigh damping.
+        """Get or set the Stiffness proportional damping constant , in Rayleigh damping.
         """ # nopep8
         return self._cards[1].get_value("dmpstf")
 
@@ -279,8 +290,8 @@ class FrequencyDomainSsdSubcase(KeywordBase):
     @property
     def dmpflg(self) -> int:
         """Get or set the Damping flag:
-        EQ.0: use modal damping coefficient ζ,defined by DAMPF, or LCDAM, or Rayleigh damping defined by DMPMAS and DMPSTF in this card.
-        EQ.1: use damping defined by *DAMPING_PART_MASS and *DAMPING_PART_STIFFNESS.
+        EQ.0: use modal damping coefficient ,defined by DAMPF, or LCDAM, or Rayleigh damping defined by DMPMAS and DMPSTF in this card.
+        EQ.1:	Use damping defined by *DAMPING_PART_MASS, and *DAMPING_PART_STIFFNESS, or a material model like *MAT_LINEAR_ELASTIC_DISCRETE_BEAM.
         """ # nopep8
         return self._cards[1].get_value("dmpflg")
 
@@ -376,8 +387,8 @@ class FrequencyDomainSsdSubcase(KeywordBase):
     @property
     def nova(self) -> int:
         """Get or set the Response output type:
-        EQ.0: velocity,
-        EQ.1: acceleration.
+        EQ.0: Velocity,
+        EQ.1: Acceleration.
         """ # nopep8
         return self._cards[2].get_value("nova")
 
@@ -423,7 +434,7 @@ class FrequencyDomainSsdSubcase(KeywordBase):
 
     @property
     def nid(self) -> typing.Optional[int]:
-        """Get or set the Node, Node set,Segment set ID for excitation input.See NTYP below.
+        """Get or set the ID of the entity to which the excitation input is applied.  See NTYP below for the types.  See Remark 7
         """ # nopep8
         return self._cards[4].get_value("nid")
 
@@ -438,14 +449,18 @@ class FrequencyDomainSsdSubcase(KeywordBase):
         EQ.0: node ID,
         EQ.1: node set ID,
         EQ.2: segment set ID.
+        EQ.3: IGA parametric point ID (see *IGA_POINT_UVW)
+        EQ.4: IGA parametric point set ID(see * SET_IGA_POINT_UVW)
+        EQ.7: IGA physical face ID(see * IGA_FACE_XYZ)
+        EQ.8: IGA physical face set ID(see * SET_IGA_FACE_XYZ)
         """ # nopep8
         return self._cards[4].get_value("ntyp")
 
     @ntyp.setter
     def ntyp(self, value: int) -> None:
         """Set the ntyp property."""
-        if value not in [0, 1, 2, None]:
-            raise Exception("""ntyp must be `None` or one of {0,1,2}.""")
+        if value not in [0, 1, 2, 3, 4, 7, 8, None]:
+            raise Exception("""ntyp must be `None` or one of {0,1,2,3,4,7,8}.""")
         self._cards[4].set_value("ntyp", value)
 
     @property
@@ -483,14 +498,15 @@ class FrequencyDomainSsdSubcase(KeywordBase):
         EQ.12: enforced velocity (for DIRECT type keyword options only)
         EQ.13: enforced acceleration (for DIRECT type keyword options only)
         EQ.14: enforced displacement (for DIRECT type keyword options only)
+        EQ.15:	Rotating structure with mass imbalance (Card 7a is required)
         """ # nopep8
         return self._cards[4].get_value("vad")
 
     @vad.setter
     def vad(self, value: int) -> None:
         """Set the vad property."""
-        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, None]:
-            raise Exception("""vad must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14}.""")
+        if value not in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, None]:
+            raise Exception("""vad must be `None` or one of {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}.""")
         self._cards[4].set_value("vad", value)
 
     @property
@@ -536,6 +552,28 @@ class FrequencyDomainSsdSubcase(KeywordBase):
     def vid(self, value: int) -> None:
         """Set the vid property."""
         self._cards[4].set_value("vid", value)
+
+    @property
+    def mass(self) -> typing.Optional[float]:
+        """Get or set the Rotating mass
+        """ # nopep8
+        return self._cards[5].get_value("mass")
+
+    @mass.setter
+    def mass(self, value: float) -> None:
+        """Set the mass property."""
+        self._cards[5].set_value("mass", value)
+
+    @property
+    def e(self) -> typing.Optional[float]:
+        """Get or set the Eccentricity(distance between the rotating mass and the center of rotation).
+        """ # nopep8
+        return self._cards[5].get_value("e")
+
+    @e.setter
+    def e(self, value: float) -> None:
+        """Set the e property."""
+        self._cards[5].set_value("e", value)
 
     @property
     def lcdam_link(self) -> typing.Optional[DefineCurve]:

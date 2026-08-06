@@ -32,7 +32,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import De
 _MATT07_CARD0 = (
     FieldSchema("tmid", int, 0, 10, None),
     FieldSchema("tro", float, 10, 10, None),
-    FieldSchema("tgrlc", float, 20, 10, None),
+    FieldSchema("tgrlc", int, 20, 10, None),
     FieldSchema("tgmult", float, 30, 10, None),
     FieldSchema("hdead", float, 40, 10, None),
     FieldSchema("tdead", float, 50, 10, None),
@@ -106,7 +106,7 @@ class MatT07(KeywordBase):
 
     @property
     def tro(self) -> typing.Optional[float]:
-        """Get or set the Thermal density:	EQ.0.0: default to structural density.
+        """Get or set the Thermal density: EQ.0.0: default to structural density.
         """ # nopep8
         return self._cards[0].get_value("tro")
 
@@ -116,17 +116,17 @@ class MatT07(KeywordBase):
         self._cards[0].set_value("tro", value)
 
     @property
-    def tgrlc(self) -> typing.Optional[float]:
-        """Get or set the Thermal generation rate (see *DEFINE_‌CURVE):
-        GT.0:	load curve ID defining thermal generation rate as a function of time
-        EQ.0 : thermal generation rate is the constant multiplier, TGMULT.
-        LT.0 : | TGRLC | is a load curve ID defining thermal generation rate as a function of temperature.
-        Feature is similar to the volumetric heat generation rate in * LOAD_HEAT_GENERATION and has units W / m ^ 3 in the SI units system.
+    def tgrlc(self) -> typing.Optional[int]:
+        """Get or set the Thermal generation rate (see *DEFINE_CURVE):
+        GT.0: load curve ID defining thermal generation rate as a function of time
+        EQ.0: thermal generation rate is the constant multiplier, TGMULT.
+        LT.0: | TGRLC | is a load curve ID defining thermal generation rate as a function of temperature.
+        Feature is similar to the volumetric heat generation rate in *LOAD_HEAT_GENERATION and has units W / m ** 3 in the SI units system.
         """ # nopep8
         return self._cards[0].get_value("tgrlc")
 
     @tgrlc.setter
-    def tgrlc(self, value: float) -> None:
+    def tgrlc(self, value: int) -> None:
         """Set the tgrlc property."""
         self._cards[0].set_value("tgrlc", value)
 

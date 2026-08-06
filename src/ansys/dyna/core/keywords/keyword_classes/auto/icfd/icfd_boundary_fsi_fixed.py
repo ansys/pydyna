@@ -47,7 +47,7 @@ class IcfdBoundaryFsiFixed(KeywordBase):
         ]
     @property
     def pid(self) -> typing.Optional[int]:
-        """Get or set the PID of the fluid surface in contact with the solid domain
+        """Get or set the Part ID of the fluid surface that can be considered for contract with solid domain
         """ # nopep8
         return self._cards[0].get_value("pid")
 

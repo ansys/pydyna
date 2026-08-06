@@ -30,13 +30,14 @@ from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _MATADDTHERMALEXPANSION_CARD0 = (
-    FieldSchema("pid", int, 0, 10, None),
+    FieldSchema("id", int, 0, 10, None),
     FieldSchema("lcid", int, 10, 10, None),
     FieldSchema("mult", float, 20, 10, 1.0),
     FieldSchema("lcid", int, 30, 10, None),
     FieldSchema("multy", float, 40, 10, 1.0),
     FieldSchema("lcid", int, 50, 10, None),
     FieldSchema("multz", float, 60, 10, 1.0),
+    FieldSchema("tref", float, 70, 10, 0.0),
 )
 
 _MATADDTHERMALEXPANSION_OPTION0_CARD0 = (
@@ -55,7 +56,7 @@ class MatAddThermalExpansion(KeywordBase):
         "lcid": LinkType.DEFINE_CURVE,
         "lcid": LinkType.DEFINE_CURVE,
         "lcid": LinkType.DEFINE_CURVE,
-        "pid": LinkType.PART,
+        "id": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -79,15 +80,17 @@ class MatAddThermalExpansion(KeywordBase):
             ),
         ]
     @property
-    def pid(self) -> typing.Optional[int]:
-        """Get or set the Part ID for which the thermal expansion property applies
+    def id(self) -> typing.Optional[int]:
+        """Get or set the Part or material ID for which the thermal expansion property applies:
+        GT.0: Part ID
+        LT.0: Material ID given by abs(ID)
         """ # nopep8
-        return self._cards[0].get_value("pid")
+        return self._cards[0].get_value("id")
 
-    @pid.setter
-    def pid(self, value: int) -> None:
-        """Set the pid property."""
-        self._cards[0].set_value("pid", value)
+    @id.setter
+    def id(self, value: int) -> None:
+        """Set the id property."""
+        self._cards[0].set_value("id", value)
 
     @property
     def lcid(self) -> typing.Optional[int]:
@@ -114,7 +117,7 @@ class MatAddThermalExpansion(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining thermal expansion coefficient in local y-direction as a function of temperature.  If zero, the thermal  expansion coefficient in local y-direction given by constant MULTY, if MULTY=0 as well, the properties in x-direction are used.
+        """Get or set the Load curve ID defining thermal expansion coefficient in local y-direction as a function of temperature. If zero, the thermal  expansion coefficient in local y-direction given by constant MULTY, if MULTY=0 as well, the properties in x-direction are used.
         """ # nopep8
         return self._cards[0].get_value("lcid")
 
@@ -136,7 +139,7 @@ class MatAddThermalExpansion(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining thermal expansion coefficient in local z-direction as a function of temperature.  If zero, the thermal  expansion coefficient in local z-direction given by constant MULTZ, if MULTZ=0 as well, the properties in x-direction are used.
+        """Get or set the Load curve ID defining thermal expansion coefficient in local z-direction as a function of temperature. If zero, the thermal  expansion coefficient in local z-direction given by constant MULTZ, if MULTZ=0 as well, the properties in x-direction are used.
         """ # nopep8
         return self._cards[0].get_value("lcid")
 
@@ -155,6 +158,17 @@ class MatAddThermalExpansion(KeywordBase):
     def multz(self, value: float) -> None:
         """Set the multz property."""
         self._cards[0].set_value("multz", value)
+
+    @property
+    def tref(self) -> float:
+        """Get or set the Reference temperature. A nonzero value activates the secant approach, see Remarks below.
+        """ # nopep8
+        return self._cards[0].get_value("tref")
+
+    @tref.setter
+    def tref(self, value: float) -> None:
+        """Set the tref property."""
+        self._cards[0].set_value("tref", value)
 
     @property
     def title(self) -> typing.Optional[str]:
@@ -216,7 +230,7 @@ class MatAddThermalExpansion(KeywordBase):
         self.lcid = value.lcid
 
     @property
-    def pid_link(self) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given pid."""
-        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
+    def id_link(self) -> typing.Optional[KeywordBase]:
+        """Get the PART keyword containing the given id."""
+        return self._get_link_by_attr("PART", "pid", self.id, "parts")
 

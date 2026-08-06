@@ -28,7 +28,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _DUALCESEMODEL_CARD0 = (
     FieldSchema("unitsys", str, 0, 10, None),
-    FieldSchema("filename", str, 10, 70, None),
+    FieldSchema("filename", str, 10, 60, None),
 )
 
 class DualceseModel(KeywordBase):
@@ -49,7 +49,7 @@ class DualceseModel(KeywordBase):
     @property
     def unitsys(self) -> typing.Optional[str]:
         """Get or set the Name of the unit system of this dual CESE model (defined with *UNIT_SYSTEM).
-        EQ.<BLANK>:	Use same units as the presumed units of the entire problem
+        EQ.<BLANK>: Use same units as the presumed units of the entire problem
         """ # nopep8
         return self._cards[0].get_value("unitsys")
 

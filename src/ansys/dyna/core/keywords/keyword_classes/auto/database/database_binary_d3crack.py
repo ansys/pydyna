@@ -68,7 +68,7 @@ class DatabaseBinaryD3Crack(KeywordBase):
 
     @property
     def lcdt(self) -> typing.Optional[int]:
-        """Get or set the Optional load curve ID specifying the output time interval as a function of time. This variable is only available for options D3PLOT, D3PART, D3THDT, INTFOR and BLSTFOR.
+        """Get or set the Optional load curve ID specifying the output time interval as a function of time. This variable is only available for options D3DAT, D3DUMP, D3PART, D3PLOT, D3THDT, INTFOR and BLSTFOR.
         """ # nopep8
         return self._cards[0].get_value("lcdt")
 
@@ -79,13 +79,13 @@ class DatabaseBinaryD3Crack(KeywordBase):
 
     @property
     def beam(self) -> int:
-        """Get or set the Discrete element option flag (*DATABASE_‌BINARY_‌D3PLOT only):
-        EQ.0:	Discrete spring and damper elements are added to the d3plot database where they are displayed as beam elements.The discrete elements’ global x, global y, global zand resultant forces(moments) and change in length(rotation) are written to the database where LS - PrePost(incorrectly) labels them as though they were beam quantities, such as axial force, S - shear resultant, T - shear resultant, etc.
-        EQ.1 : No discrete spring, damperand seatbelt elements are added to the d3plot database.This option is useful when translating old LS - DYNA input decks to KEYWORD input.In older input decks there is no requirement that beam and spring elements have unique IDs,and beam elements may be created for the springand dampers with identical IDs to existing beam elements causing a fatal error.However, this option comes with some limitationsand, therefore, should be used with caution.
+        """Get or set the Discrete element option flag (*DATABASE_BINARY_D3PLOT only):
+        EQ.0: Discrete spring and damper elements are added to the d3plot database where they are displayed as beam elements.The discrete elements' global x, global y, global zand resultant forces(moments) and change in length(rotation) are written to the database where LS - PrePost(incorrectly) labels them as though they were beam quantities, such as axial force, S - shear resultant, T - shear resultant, etc.
+        EQ.1: No discrete spring, damperand seatbelt elements are added to the d3plot database.This option is useful when translating old LS - DYNA input decks to KEYWORD input.In older input decks there is no requirement that beam and spring elements have unique IDs,and beam elements may be created for the springand dampers with identical IDs to existing beam elements causing a fatal error.However, this option comes with some limitationsand, therefore, should be used with caution.
         Contact interfaces which are based on part IDs of seatbelt elements will not be properly generated if this option is used.
         DEFORMABLE_TO_RIGID will not work if PID refers to discrete, damper, or seatbelt elements.
-        EQ.2 : Discrete spring and damper elements are added to the d3plot database where they are displayed as beam elements(similar to option 0).In this option the element resultant force is written to its first database position allowing beam axial forces and spring resultant forces to be plotted at the same time.This can be useful during some post - processing applications.
-        This flag, set in* DATABASE_BINARY_D3PLOT, also affects the display of discrete elements in several other databases, such as d3drlfand d3part.
+        EQ.2: Discrete spring and damper elements are added to the d3plot database where they are displayed as beam elements(similar to option 0).In this option the element resultant force is written to its first database position allowing beam axial forces and spring resultant forces to be plotted at the same time.This can be useful during some post - processing applications.
+        This flag, set in *DATABASE_BINARY_D3PLOT, also affects the display of discrete elements in several other databases, such as d3drlfand d3part.
         """ # nopep8
         return self._cards[0].get_value("beam")
 
@@ -96,7 +96,7 @@ class DatabaseBinaryD3Crack(KeywordBase):
 
     @property
     def npltc(self) -> typing.Optional[int]:
-        """Get or set the DT=ENDTIM/NPLTC.  Applies to D3PLOT, D3PART, DEMFOR, and INTFOR options only.  This overrides the DT specified in the first field. ENDTIM is specified in *CONTROL_TERMINATION
+        """Get or set the DT=ENDTIM/NPLTC.  Applies to D3PLOT, D3PART, D3DAT,DEMFOR, and INTFOR options only.  This overrides the DT specified in the first field. ENDTIM is specified in *CONTROL_TERMINATION
         """ # nopep8
         return self._cards[0].get_value("npltc")
 
@@ -107,7 +107,9 @@ class DatabaseBinaryD3Crack(KeywordBase):
 
     @property
     def psetid(self) -> typing.Optional[int]:
-        """Get or set the Part set ID for D3PART and D3PLOT options only.  See *SET_‌PART.  Parts in PSETID will excluded in the d3plot database.  Only parts in PSETID are included in the d3part database.
+        """Get or set the Part set ID for D3PART and D3PLOT options only. See *SET_PART. Parts in PSETID are excluded from the d3plot database.
+        The d3dat database also honors excluding the parts excluded from d3plot, but this option may not be provided to d3dat directly.
+        Only parts in PSETID are included in the d3part database.
         """ # nopep8
         return self._cards[0].get_value("psetid")
 

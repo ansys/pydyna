@@ -100,7 +100,7 @@ class Mat121(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification.  A unique number has to be chosen.
+        """Get or set the Material identification. A unique number has to be chosen.
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -134,10 +134,10 @@ class Mat121(KeywordBase):
     @property
     def iunld(self) -> typing.Optional[int]:
         """Get or set the Unloading option (Also see Figure 20.34 in the User's manual):
-        EQ.0.0:  Loading and unloading follow loading curve
-        EQ.1.0:  Loading follows loading curve, unloading follows loading curve.  (Also see Figure 20.35 in the User's Manual).  The unloading curve ID if defined is ignored.
-        EQ.2.0:  Loading follows loading curve, unloading follows unloading stiffness, K,  to the unloading curve.  The loading and unloading curves intersect at the origin of the axes.
-        EQ.3.0:  Quadratic unloading from peak displacement value to permanent set.
+        EQ.0.0: Loading and unloading follow loading curve
+        EQ.1.0: Loading follows loading curve, unloading follows loading curve. (Also see Figure 20.35 in the User's Manual). The unloading curve ID if defined is ignored.
+        EQ.2.0: Loading follows loading curve, unloading follows unloading stiffness, K,  to the unloading curve. The loading and unloading curves intersect at the origin of the axes.
+        EQ.3.0: Quadratic unloading from peak displacement value to permanent set.
         """ # nopep8
         return self._cards[0].get_value("iunld")
 
@@ -148,7 +148,7 @@ class Mat121(KeywordBase):
 
     @property
     def offset(self) -> typing.Optional[float]:
-        """Get or set the Offset to determine a permanent set upon unloading if the UNLDOPT=3.0.  The permanent sets in compression and tension are equal to the product of this offset value and the maximum compressive and tensile displacements, respectively.
+        """Get or set the Offset to determine a permanent set upon unloading if the UNLDOPT=3.0. The permanent sets in compression and tension are equal to the product of this offset value and the maximum compressive and tensile displacements, respectively.
         """ # nopep8
         return self._cards[0].get_value("offset")
 
@@ -159,7 +159,7 @@ class Mat121(KeywordBase):
 
     @property
     def dampf(self) -> typing.Optional[float]:
-        """Get or set the Damping factor for stability.  Values in the neighborhood of unity are recommended.  This damping factor is properly scaled to eliminate time step size dependency.  Also, it is active if and only if the local stiffness is defined.
+        """Get or set the Damping factor for stability. Values in the neighborhood of unity are recommended. This damping factor is properly scaled to eliminate time step size dependency. Also, it is active if and only if the local stiffness is defined.
         """ # nopep8
         return self._cards[0].get_value("dampf")
 
@@ -170,7 +170,7 @@ class Mat121(KeywordBase):
 
     @property
     def lcidt(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining translational force resultant along the axis versus relative translational displacement.  If zero, no stiffness related forces are generated for this degree of freedom.  The loading curves must be defined from the most negative displacement to the most positive displacement.  The force does not need to increase montonically for the loading curve.  The curves in this input are extrapolated when the displacement range falls outside the curve definition.
+        """Get or set the Load curve ID defining translational force resultant along the axis versus relative translational displacement. If zero, no stiffness related forces are generated for this degree of freedom. The loading curves must be defined from the most negative displacement to the most positive displacement. The force does not need to increase montonically for the loading curve. The curves in this input are extrapolated when the displacement range falls outside the curve definition.
         """ # nopep8
         return self._cards[1].get_value("lcidt")
 
@@ -181,7 +181,7 @@ class Mat121(KeywordBase):
 
     @property
     def lcidtu(self) -> typing.Optional[int]:
-        """Get or set the Load curve ID defining translational force resultant along the axis versus relative translational displacement during unloading.  The force values defined by this curve must increase monotonically from the most negative displacement to the most positive displacement.  For UNLDOPT=1.0, the slope of this curve must equal or exceed the loading curve for stability reasons.  This is not the case for UNLDOPT=2.0.   For loading and unloading to follow the same path simply set LCIDTU=LCIDT.
+        """Get or set the Load curve ID defining translational force resultant along the axis versus relative translational displacement during unloading. The force values defined by this curve must increase monotonically from the most negative displacement to the most positive displacement. For UNLDOPT=1.0, the slope of this curve must equal or exceed the loading curve for stability reasons. This is not the case for UNLDOPT=2.0.  For loading and unloading to follow the same path simply set LCIDTU=LCIDT.
         """ # nopep8
         return self._cards[1].get_value("lcidtu")
 
@@ -214,7 +214,7 @@ class Mat121(KeywordBase):
 
     @property
     def utfail(self) -> typing.Optional[float]:
-        """Get or set the Optional, translational displacement at failure in tension.  If zero, failure in tension is not considered.
+        """Get or set the Optional, translational displacement at failure in tension. If zero, failure in tension is not considered.
         """ # nopep8
         return self._cards[2].get_value("utfail")
 
@@ -225,7 +225,7 @@ class Mat121(KeywordBase):
 
     @property
     def ucfail(self) -> typing.Optional[float]:
-        """Get or set the Optional, translational displacement at failure in compression.  If zero, failure in compression is not considered.
+        """Get or set the Optional, translational displacement at failure in compression. If zero, failure in compression is not considered.
         """ # nopep8
         return self._cards[2].get_value("ucfail")
 

@@ -41,12 +41,13 @@ _MATTABULATEDJOHNSONCOOKLOGINTERPOLATION_CARD0 = (
 )
 
 _MATTABULATEDJOHNSONCOOKLOGINTERPOLATION_CARD1 = (
-    FieldSchema("tabk1", int, 0, 10, 0),
-    FieldSchema("tabkt", int, 10, 10, 0),
+    FieldSchema("lck1", int, 0, 10, 0),
+    FieldSchema("lckt", int, 10, 10, 0),
     FieldSchema("lcf", int, 20, 10, 0),
     FieldSchema("lcg", int, 30, 10, 0),
     FieldSchema("lch", int, 40, 10, 0),
     FieldSchema("lci", int, 50, 10, 0),
+    FieldSchema("bflgi", int, 60, 10, 0),
 )
 
 _MATTABULATEDJOHNSONCOOKLOGINTERPOLATION_CARD2 = (
@@ -72,7 +73,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
     _link_fields = {
         "lcg": LinkType.DEFINE_CURVE,
         "lch": LinkType.DEFINE_CURVE,
-        "tabk1": LinkType.DEFINE_CURVE_OR_TABLE,
+        "lck1": LinkType.DEFINE_CURVE_OR_TABLE,
         "lcf": LinkType.DEFINE_CURVE_OR_TABLE,
         "lci": LinkType.DEFINE_CURVE_OR_TABLE,
     }
@@ -130,8 +131,8 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
     @property
     def e(self) -> typing.Optional[float]:
         """Get or set the Young's modulus.
-        GT.0.0:	constant value is used
-        LT.0.0:	-E gives curve ID for temperature dependence
+        GT.0.0: constant value is used
+        LT.0.0: -E gives curve ID for temperature dependence
         """ # nopep8
         return self._cards[0].get_value("e")
 
@@ -176,9 +177,10 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
     @property
     def beta(self) -> float:
         """Get or set the Fraction of plastic work converted into heat(supersedes FWORK in *CONTROL_THERMAL_SOLVER if a coupled thermal/structural analysis):
-        GT.0.0:	constant value is used
-        LT.0.0:	-BETA gives either a curve ID for strain rate dependence, or a table ID for strain rate and temperature dependence,
-        or a 3-dimensional table ID for temperature (TABLE_3D), strain rate (TABLE) and plastic strain (CURVE) dependence.
+        EQ.0.0: Defaults to 1.0.
+        GT.0.0: constant value is used
+        LT.0.0: -BETA gives either a curve ID for strain rate dependence, or a table ID for strain rate and temperature dependence,
+        or a 3-dimensional table ID for temperature (TABLE_3D), strain rate (TABLE) and plastic strain (CURVE) dependence.Please see description of BFLG below for an alternative interpretation of TABLE_3D arguments.
         """ # nopep8
         return self._cards[0].get_value("beta")
 
@@ -189,8 +191,9 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @property
     def numint(self) -> float:
-        """Get or set the Number of integration points which must fail before the element is deleted. Available for shells and solids.
-        LT.0.0: |NUMINT| is percentage of integration points/layers which must fail before element fails. For fully integrated shells, a methodology is used where a layer fails if one integrationpoint fails and then the given percentage of layers must fail before the element fails.
+        """Get or set the Number of integration points that must fail before the element is deleted. Available for shells and solids.
+        LT.0.0: |NUMINT| is the percentage of integration points/layers that must fail before element fails. For fully integrated shells, a methodology is used where a layer fails if one integrationpoint fails. Then the given percentage of layers must fail before the element fails.
+        It is only available for shells
         """ # nopep8
         return self._cards[0].get_value("numint")
 
@@ -200,26 +203,26 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
         self._cards[0].set_value("numint", value)
 
     @property
-    def tabk1(self) -> int:
+    def lck1(self) -> int:
         """Get or set the Load curve ID or Table ID. The load curve ID defines effective stress as a function of effective plastic strain. The table ID defines for each plastic strain rate value a load curve ID giving the (isothermal) effective stress versus effective plastic strain for that rate.
         """ # nopep8
-        return self._cards[1].get_value("tabk1")
+        return self._cards[1].get_value("lck1")
 
-    @tabk1.setter
-    def tabk1(self, value: int) -> None:
-        """Set the tabk1 property."""
-        self._cards[1].set_value("tabk1", value)
+    @lck1.setter
+    def lck1(self, value: int) -> None:
+        """Set the lck1 property."""
+        self._cards[1].set_value("lck1", value)
 
     @property
-    def tabkt(self) -> int:
+    def lckt(self) -> int:
         """Get or set the Table ID defining for each temperature value a load curve ID giving the (quasi-static) effective stress versus effective plastic strain for that temperature.
         """ # nopep8
-        return self._cards[1].get_value("tabkt")
+        return self._cards[1].get_value("lckt")
 
-    @tabkt.setter
-    def tabkt(self, value: int) -> None:
-        """Set the tabkt property."""
-        self._cards[1].set_value("tabkt", value)
+    @lckt.setter
+    def lckt(self, value: int) -> None:
+        """Set the lckt property."""
+        self._cards[1].set_value("lckt", value)
 
     @property
     def lcf(self) -> int:
@@ -258,7 +261,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @property
     def lci(self) -> int:
-        """Get or set the Load curve ID, Table ID, or Table_3D ID. The load curve ID defines plastic failure strain (or scale factor – see Remarks) as a function of element size. The table ID defines for each triaxiality a load curve ID giving the plastic failure strain versus element size for that triaxiality. If a three dimensional table ID is referred, plastic failure strain can be a function of Lode parameter (TABLE_3D), triaxiality (TABLE), and element size (CURVE).
+        """Get or set the Load curve ID, Table ID, or Table_3D ID. The load curve ID defines plastic failure strain (or scale factor - see Remarks) as a function of element size. The table ID defines for each triaxiality a load curve ID giving the plastic failure strain versus element size for that triaxiality. If a three dimensional table ID is referred, plastic failure strain can be a function of the Lode parameter (TABLE_3D), triaxiality (TABLE), and element size (CURVE).
         """ # nopep8
         return self._cards[1].get_value("lci")
 
@@ -268,10 +271,25 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
         self._cards[1].set_value("lci", value)
 
     @property
+    def bflgi(self) -> int:
+        """Get or set the Flag for treatment of case BETA<0 with TABLE_3D. (available for solid elements only):
+        EQ.0: Dissipation factor beta is a function of temperature, strain rate,and plastic strain(as described above).
+        EQ.1: Dissipation factor beta is a function of maximum shear strain(TABLE 3D), strain rate (TABLE),and element size(CURVE).
+        """ # nopep8
+        return self._cards[1].get_value("bflgi")
+
+    @bflgi.setter
+    def bflgi(self, value: int) -> None:
+        """Set the bflgi property."""
+        if value not in [0, 1, None]:
+            raise Exception("""bflgi must be `None` or one of {0,1}.""")
+        self._cards[1].set_value("bflgi", value)
+
+    @property
     def failopt(self) -> int:
         """Get or set the Flag for additional failure criterion F_2,
-        EQ.0.0:	off (default)
-        EQ.1.0:	on.
+        EQ.0.0: off (default)
+        EQ.1.0: on.
         """ # nopep8
         return self._cards[2].get_value("failopt")
 
@@ -284,7 +302,7 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
 
     @property
     def numavg(self) -> int:
-        """Get or set the Number of time steps for running average of plastic failure strain in the additional failure criterion.Default is 1 (no averaging).
+        """Get or set the Number of time steps for the running average of the plastic failure strain in the additional failure criterion. The default is 1 (no averaging).
         """ # nopep8
         return self._cards[2].get_value("numavg")
 
@@ -307,21 +325,22 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
     @property
     def erode(self) -> int:
         """Get or set the Erosion flag (only for solid elements):
-        EQ.0.0:	default, element erosion is allowed.
-        EQ.1.0:	element does not erode; deviatoric stresses set to zero when element fails..
+        EQ.0: default, element erosion is allowed.
+        EQ.1: element does not erode; deviatoric stresses set to zero when element fails..
+        EQ.2: Element does not erode. The stress response is uncoupled from material damage. We intend this option for forging simulations with 3D r-adaptivity
         """ # nopep8
         return self._cards[2].get_value("erode")
 
     @erode.setter
     def erode(self, value: int) -> None:
         """Set the erode property."""
-        if value not in [0, 1, None]:
-            raise Exception("""erode must be `None` or one of {0,1}.""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""erode must be `None` or one of {0,1,2}.""")
         self._cards[2].set_value("erode", value)
 
     @property
     def lcps(self) -> typing.Optional[int]:
-        """Get or set the Table ID with first principal stress limit as a function of plastic strain (curves) and plastic strain rate (table). This option is for post-processing purposes only and gives an indication of areas in the structure where failure is likely to occur. History variable #17 shows a value of 1.0 for integration points that exceeded the limit, else a value of 0.0.
+        """Get or set the Table ID with first principal stress limit as a function of plastic strain (curves) and plastic strain rate (table). This option is for post-processing purposes only and gives an indication of areas in the structure where failure is likely to occur. History variable #17 is 1.0 for integration points that have exceeded the limit; otherwise, it has a value of 0.0.
         """ # nopep8
         return self._cards[2].get_value("lcps")
 
@@ -375,11 +394,11 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
         self.lch = value.lcid
 
     @property
-    def tabk1_link(self) -> typing.Optional[KeywordBase]:
-        """Get the linked DEFINE_CURVE or DEFINE_TABLE for tabk1."""
+    def lck1_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lck1."""
         if self.deck is None:
             return None
-        field_value = self.tabk1
+        field_value = self.lck1
         if field_value is None or field_value == 0:
             return None
         for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
@@ -390,13 +409,13 @@ class MatTabulatedJohnsonCookLogInterpolation(KeywordBase):
                 return kwd
         return None
 
-    @tabk1_link.setter
-    def tabk1_link(self, value: KeywordBase) -> None:
-        """Set the linked keyword for tabk1."""
+    @lck1_link.setter
+    def lck1_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lck1."""
         if hasattr(value, "lcid"):
-            self.tabk1 = value.lcid
+            self.lck1 = value.lcid
         elif hasattr(value, "tbid"):
-            self.tabk1 = value.tbid
+            self.lck1 = value.tbid
 
     @property
     def lcf_link(self) -> typing.Optional[KeywordBase]:

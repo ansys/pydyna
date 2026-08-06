@@ -42,6 +42,12 @@ _CONTROLIMPLICITMODESBINARY_CARD1 = (
     FieldSchema("filename", str, 0, 256, None),
 )
 
+_CONTROLIMPLICITMODESBINARY_CARD2 = (
+    FieldSchema("iresvec", int, 0, 10, None),
+    FieldSchema("istress", int, 10, 10, None),
+    FieldSchema("id3mode", int, 20, 10, None),
+)
+
 class ControlImplicitModesBinary(KeywordBase):
     """DYNA CONTROL_IMPLICIT_MODES_BINARY keyword"""
 
@@ -62,6 +68,10 @@ class ControlImplicitModesBinary(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _CONTROLIMPLICITMODESBINARY_CARD1,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _CONTROLIMPLICITMODESBINARY_CARD2,
                 **kwargs,
             ),
         ]
@@ -91,7 +101,7 @@ class ControlImplicitModesBinary(KeywordBase):
 
     @property
     def neig(self) -> typing.Optional[int]:
-        """Get or set the Number of eigenmodes. EQ.0:  no attachment modes will be generated
+        """Get or set the Number of eigenmodes. EQ.0: no attachment modes will be generated
         """ # nopep8
         return self._cards[0].get_value("neig")
 
@@ -165,6 +175,45 @@ class ControlImplicitModesBinary(KeywordBase):
     def filename(self, value: str) -> None:
         """Set the filename property."""
         self._cards[1].set_value("filename", value)
+
+    @property
+    def iresvec(self) -> typing.Optional[int]:
+        """Get or set the Converting the attachment modes to residual vectors flag (see Remark 5):
+        EQ.0: No conversion
+        EQ.1: Conversion by orthogonalizing them to the eigenvectors.
+        """ # nopep8
+        return self._cards[2].get_value("iresvec")
+
+    @iresvec.setter
+    def iresvec(self, value: int) -> None:
+        """Set the iresvec property."""
+        self._cards[2].set_value("iresvec", value)
+
+    @property
+    def istress(self) -> typing.Optional[int]:
+        """Get or set the Flag to compute stresses:
+        EQ.0: No stresses are computed.
+        EQ.1: Stresses are computed for the mode shapesand added to the d3mode database.
+        """ # nopep8
+        return self._cards[2].get_value("istress")
+
+    @istress.setter
+    def istress(self, value: int) -> None:
+        """Set the istress property."""
+        self._cards[2].set_value("istress", value)
+
+    @property
+    def id3mode(self) -> typing.Optional[int]:
+        """Get or set the Write d3mode file flag:
+        EQ.0: Write the d3mode file.
+        EQ.1: Do not write the d3mode file.This is useful when *CONTROL_IMPLICIT_MODES is being used to create superelement matrices and you do not care about the contents of the d3mode file.
+        """ # nopep8
+        return self._cards[2].get_value("id3mode")
+
+    @id3mode.setter
+    def id3mode(self, value: int) -> None:
+        """Set the id3mode property."""
+        self._cards[2].set_value("id3mode", value)
 
     @property
     def nsidc_link(self) -> typing.Optional[KeywordBase]:

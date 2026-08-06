@@ -192,7 +192,7 @@ class MatSpotweldDamage_FailureUniaxial(KeywordBase):
 
     @property
     def efail(self) -> typing.Optional[float]:
-        """Get or set the Effective plastic strain in weld material at failure.  The plastic strain must exceed the rupture strain (RS) at each integration point before deletion occurs.  See Card 3.
+        """Get or set the Effective plastic strain in weld material at failure. The plastic strain must exceed the rupture strain (RS) at each integration point before deletion occurs. See Card 3.
         """ # nopep8
         return self._cards[1].get_value("efail")
 
@@ -286,7 +286,7 @@ class MatSpotweldDamage_FailureUniaxial(KeywordBase):
 
     @property
     def efail(self) -> typing.Optional[float]:
-        """Get or set the Effective plastic strain in weld material at failure.  The plastic strain must exceed the rupture strain (RS) at each integration point before deletion occurs.  See Card 3
+        """Get or set the Effective plastic strain in the weld material at failure. The plastic strain must exceed the rupture strain (RS) at each integration point before deletion occurs. See Card 3
         """ # nopep8
         return self._cards[2].get_value("efail")
 

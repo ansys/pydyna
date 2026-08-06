@@ -49,8 +49,8 @@ class ControlFormingToleranc(KeywordBase):
     @property
     def dt_cycle(self) -> typing.Optional[float]:
         """Get or set the Flag for output option (time interval or cycle number).
-        LT.0:	the absolute value is the time interval between outputs.
-        GT.0:	number of cycles between outputs
+        LT.0: the absolute value is the time interval between outputs.
+        GT.0: number of cycles between outputs
         """ # nopep8
         return self._cards[0].get_value("dt_cycle")
 

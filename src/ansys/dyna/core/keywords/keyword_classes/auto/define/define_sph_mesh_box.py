@@ -201,9 +201,9 @@ class DefineSphMeshBox(KeywordBase):
     @property
     def idseg(self) -> int:
         """Get or set the Segment set ID that can be used to removed generated SPH elements. segment set is used to split the box into two regions, one that has SPH elements and one without SPH (see Remark 2). The sign of IDSEG determines which region keeps the SPH elements. Also, to avoid sudden movement, elements that are "too close" to the segment set will be removed, regardless of the sign of IDSEG. Too close means the normal distance from the center of the SPH element to the nearest segment is smaller than the SPH smoothing length scaled by SFSP.
-        EQ.0 : No generated elements are removed.
-        GT.0 : Keep the SPH element if it lies nominally in the normal direction of the segments in the segment set.
-        LT.0 : Keep the SPH element if it lies nominally in the reverse normal direction of segments in the segment set.
+        EQ.0: No generated elements are removed.
+        GT.0: Keep the SPH element if it lies nominally in the normal direction of the segments in the segment set.
+        LT.0: Keep the SPH element if it lies nominally in the reverse normal direction of segments in the segment set.
         """ # nopep8
         return self._cards[1].get_value("idseg")
 

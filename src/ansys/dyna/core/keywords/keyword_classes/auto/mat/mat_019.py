@@ -220,7 +220,7 @@ class Mat019(KeywordBase):
         """Get or set the Redefinition of failure curve:
         EQ.1.0: Effective plastic strain (default),
         EQ.2.0: Maximum principal stress.
-        EQ.3.0:  Maximum principal stress
+        EQ.3.0: Maximum principal stress
         """ # nopep8
         return self._cards[1].get_value("rdef")
 

@@ -263,13 +263,13 @@ class Mat192(KeywordBase):
     @property
     def theory(self) -> int:
         """Get or set the Version of material subroutines used (see Remarks 7 and 8):
-        EQ.0:	1995 version(default)
-        EQ.4 : 2003 version, load / unload initialization
-        EQ.7 : 2003 version, load / unload initialization, anisotropy from Ellison et al(2012)
-        EQ.104 : 2003 version, load / unload / reload initialization
-        EQ.107 : 2003 version, load / unload / reload initialization, anisotropy from Ellison et al(2012)
-        EQ.204 : 2015 version, load / unload initialization
-        EQ.304 : 2015 version, load / unload / reload initialization.
+        EQ.0: 1995 version(default)
+        EQ.4: 2003 version, load / unload initialization
+        EQ.7: 2003 version, load / unload initialization, anisotropy from Ellison et al(2012)
+        EQ.104: 2003 version, load / unload / reload initialization
+        EQ.107: 2003 version, load / unload / reload initialization, anisotropy from Ellison et al(2012)
+        EQ.204: 2015 version, load / unload initialization
+        EQ.304: 2015 version, load / unload / reload initialization.
         """ # nopep8
         return self._cards[1].get_value("theory")
 

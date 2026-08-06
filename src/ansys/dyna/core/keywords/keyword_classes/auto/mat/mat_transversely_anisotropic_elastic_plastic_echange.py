@@ -144,7 +144,8 @@ class MatTransverselyAnisotropicElasticPlasticEchange(KeywordBase):
 
     @property
     def etan(self) -> typing.Optional[float]:
-        """Get or set the Plastic hardening modulus.
+        """Get or set the Plastic hardening modulus. When this value is negative, normal stresses (either from contact or applied pressure) are considered and *LOAD_SURFACE_STRESS must be used to capture the stresses. This feature is applicable to both shell element types 2 and 16. It is found in some cases this inclusion can improve accuracy.
+        The negative local z - stresses caused by the contact pressure can be viewed from d3plot files..
         """ # nopep8
         return self._cards[0].get_value("etan")
 

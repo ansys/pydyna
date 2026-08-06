@@ -25,6 +25,7 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTACT2DSLIDINGVOIDS_CARD0 = (
     FieldSchema("surfa", int, 0, 10, None),
@@ -49,6 +50,10 @@ class Contact2DSlidingVoids(KeywordBase):
 
     keyword = "CONTACT"
     subkeyword = "2D_SLIDING_VOIDS"
+    _link_fields = {
+        "surfa": LinkType.SET_NODE,
+        "surfb": LinkType.SET_NODE,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the Contact2DSlidingVoids class."""
@@ -65,7 +70,7 @@ class Contact2DSlidingVoids(KeywordBase):
         ]
     @property
     def surfa(self) -> typing.Optional[int]:
-        """Get or set the Nodal set ID for the SURFA nodes, see *SET_‌NODE.  The surface specified with SURFA must be to the left of the surface specified with SURFB. For nonsymmetric contact, this surface is the tracked surface (all contacts in this section except PENALTY and PENALTY_FRICTION).
+        """Get or set the Nodal set ID for the SURFA nodes, see *SET_NODE.  The surface specified with SURFA must be to the left of the surface specified with SURFB. For nonsymmetric contact, this surface is the tracked surface (all contacts in this section except PENALTY and PENALTY_FRICTION).
         """ # nopep8
         return self._cards[0].get_value("surfa")
 
@@ -76,7 +81,7 @@ class Contact2DSlidingVoids(KeywordBase):
 
     @property
     def surfb(self) -> typing.Optional[int]:
-        """Get or set the Nodal set ID for the SURFB nodes, see *SET_‌NODE.  For nonsymmetric contact, this surface is the reference surface (all contacts in this section except PENALTY and PENALTY_FRICTION).
+        """Get or set the Nodal set ID for the SURFB nodes, see *SET_NODE.  For nonsymmetric contact, this surface is the reference surface (all contacts in this section except PENALTY and PENALTY_FRICTION).
         """ # nopep8
         return self._cards[0].get_value("surfb")
 
@@ -200,4 +205,24 @@ class Contact2DSlidingVoids(KeywordBase):
     def oneway(self, value: float) -> None:
         """Set the oneway property."""
         self._cards[1].set_value("oneway", value)
+
+    @property
+    def surfa_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SET_NODE_* keyword for surfa."""
+        return self._get_set_link("NODE", self.surfa)
+
+    @surfa_link.setter
+    def surfa_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for surfa."""
+        self.surfa = value.sid
+
+    @property
+    def surfb_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SET_NODE_* keyword for surfb."""
+        return self._get_set_link("NODE", self.surfb)
+
+    @surfb_link.setter
+    def surfb_link(self, value: KeywordBase) -> None:
+        """Set the SET_NODE_* keyword for surfb."""
+        self.surfb = value.sid
 

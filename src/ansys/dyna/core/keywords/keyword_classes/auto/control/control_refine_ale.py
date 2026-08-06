@@ -88,6 +88,7 @@ class ControlRefineAle(KeywordBase):
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Set ID.
+        LT.0: Parent elements can be hidden in LS-PrePost as they are replaced by their children.
         """ # nopep8
         return self._cards[0].get_value("id")
 
@@ -130,7 +131,7 @@ class ControlRefineAle(KeywordBase):
     def mmsid(self) -> int:
         """Get or set the Multi-Material Set ID (see Remark 4):
         LT.0: only ALE elements with all the multi-material groups listed in
-        *SET_MULTI_MATERIAL_GROUP_LIST can be refined (or re	moved otherwise)
+        *SET_MULTI_MATERIAL_GROUP_LIST can be refined (or re moved otherwise)
         GT.0: ALE elements with at least one of the multi-material groups
         can be refined (or removed).
         """ # nopep8
@@ -166,8 +167,8 @@ class ControlRefineAle(KeywordBase):
     @property
     def ntotrf(self) -> int:
         """Get or set the Total number of ALE elements to refine (see Remark 5):
-        GT.0:	Number of elements to refine
-        EQ.0:	Number of shell elements in IBOX (see Remark 2)
+        GT.0: Number of elements to refine
+        EQ.0: Number of shell elements in IBOX (see Remark 2)
         EQ.-1: Add clusters of 4 shells for the refinement during the run.
         """ # nopep8
         return self._cards[1].get_value("ntotrf")

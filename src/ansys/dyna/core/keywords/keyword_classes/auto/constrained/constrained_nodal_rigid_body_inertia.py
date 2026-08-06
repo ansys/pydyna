@@ -169,7 +169,7 @@ class ConstrainedNodalRigidBodyInertia(KeywordBase):
 
     @property
     def pnode(self) -> int:
-        """Get or set the An optional, possibly massless, nodal point located at the mass center of the nodal rigid body. The initial nodal coordinates will be reset if necessary to ensure that they lie at the mass center. In the output files, the coordinates, accelerations, velocites, and displacements of this node will coorespond to the mass center of the nodal rigid body. If CID is defined, the velocities and accelerations of PNODE will be output in the local system in the D3PLOT and D3THDT files unless PNODE is specified as a negative number in which case the global system is used.
+        """Get or set the An optional node (a massless node is allowed) used for post-processing rigid body data. If PNODE is not located at the rigid bodys center of mass, LS-DYNA resets the initial coordinates of PNODE to the center of mass.  If CID is defined, LS-DYNA outputs the velocities and accelerations of PNODE in the local system to the d3plot and d3thdt files unless you specify PNODE as a negative number, in which case the global system is used.
         """ # nopep8
         return self._cards[0].get_value("pnode")
 
@@ -180,10 +180,15 @@ class ConstrainedNodalRigidBodyInertia(KeywordBase):
 
     @property
     def iprt(self) -> int:
-        """Get or set the Print flag.  For nodal rigid bodies the following values apply:
-        EQ.1:	Write data into rbdout.
-        EQ.2 : Do not write data into rbdout.
-        Except for in the case of two - noded rigid bodies, IPRT(if 0 or unset) defaults to the value of IPRTF in* CONTROL_OUTPUT.For two - noded rigid bodies, printing is suppressed(IPRT = 2) unless IPRT is set to 1.  This is to avoid excessively large rbdout files when the model contains many two - noded welds.
+        """Get or set the Print flag.  For nodal rigid bodies, the following values apply:
+        EQ.-2: Do not write data into rbdout. Output the forces and moments in bndout with respect to the nodal rigid body�s local coordinate system.
+        EQ.-1: Write data into rbdout. Output the forces and moments in bndout with respect to the nodal rigid body�s local coordinate system.
+        EQ.0: Defaults to the value of IPRTF in *CONTROL_OUTPUT for all nodal rigid bodies except two-noded rigid bodies.
+        For two-noded rigid bodies, printing to rbdout is suppressed. This behavior exists to avoid excessively large rbdout files when the model
+        contains many two-noded welds. Note that IPRTF does not change the coordinate system for bndout. Thus, for all nodal rigid bodies, the forces
+        and moments in the bndout file are expressed in the global coordinate system.
+        EQ.1: Write data into rbdout.  Output the forces and moments in bndout with respect to the global coordinate system.
+        EQ.2: Do not write data into rbdout. Output the forces and moments in bndout with respect to the global coordinate system.
         """ # nopep8
         return self._cards[0].get_value("iprt")
 

@@ -33,6 +33,7 @@ _CONTROLIMPLICITTERMINATION_CARD0 = (
     FieldSchema("ietol", float, 30, 10, 0.0),
     FieldSchema("tetol", float, 40, 10, 0.0),
     FieldSchema("nstep", int, 50, 10, 3),
+    FieldSchema("abstol", float, 60, 10, 0.0),
 )
 
 class ControlImplicitTermination(KeywordBase):
@@ -52,9 +53,8 @@ class ControlImplicitTermination(KeywordBase):
         ]
     @property
     def deltau(self) -> float:
-        """Get or set the Alternate termination criteria for implicit transient simulation.
-        EQ.0.0:  terminate based on ENDTIM (default)
-        NE.0.0:  terminate when displacement for last time step relative to the total displacement is less than DELTAU.
+        """Get or set the Terminate based on relative total displacement in the Euclidean norm:
+        GT.0.0:	Terminate when the displacement in the Euclidean norm for the last time step relative to the total displacement in the Euclidean norm is less than DELTAU
         """ # nopep8
         return self._cards[0].get_value("deltau")
 
@@ -65,7 +65,8 @@ class ControlImplicitTermination(KeywordBase):
 
     @property
     def delta1(self) -> float:
-        """Get or set the If _| max displacement for single dof |_characteristic length of model is less than DELTA1 then implicit will terminate
+        """Get or set the Terminate based on relative total displacement in the max norm:
+        GT.0.0:	Terminate when the displacement in the max norm for the last time step relative to the total displacement in the max norm is less than DELTAU
         """ # nopep8
         return self._cards[0].get_value("delta1")
 
@@ -76,7 +77,8 @@ class ControlImplicitTermination(KeywordBase):
 
     @property
     def ketol(self) -> float:
-        """Get or set the If Kinetic Energy drops below KETOL for STEP  consecutive implicit time steps then implicit will terminate
+        """Get or set the Terminate based on kinetic energy
+        GT.0.0:	Terminate when kinetic energy drops below KETOL for NSTEP consecutive implicit time steps.
         """ # nopep8
         return self._cards[0].get_value("ketol")
 
@@ -87,7 +89,8 @@ class ControlImplicitTermination(KeywordBase):
 
     @property
     def ietol(self) -> float:
-        """Get or set the If Internal Energy drops below IETOL for STEP consecutive implicit time steps then implicit will terminate
+        """Get or set the Terminate based on internal energy:
+        GT.0.0:	Terminate when internal energy drops below IETOL for NSTEP consecutive implicit time steps
         """ # nopep8
         return self._cards[0].get_value("ietol")
 
@@ -98,7 +101,8 @@ class ControlImplicitTermination(KeywordBase):
 
     @property
     def tetol(self) -> float:
-        """Get or set the If Total Energy drops below TETOL for NSTEP  consecutive implicit time steps then implicit will terminate
+        """Get or set the Terminate based on total energy:
+        GT.0.0:	Terminate when total energy drops below TETOL for NSTEP consecutive implicit time steps
         """ # nopep8
         return self._cards[0].get_value("tetol")
 
@@ -109,7 +113,7 @@ class ControlImplicitTermination(KeywordBase):
 
     @property
     def nstep(self) -> int:
-        """Get or set the Number of time steps used in tests for Kinetic Energy, Internal Energy, and/or Total Energy.
+        """Get or set the Number of steps used in the early termination tests for kinetic, internal, and total energy
         """ # nopep8
         return self._cards[0].get_value("nstep")
 
@@ -117,4 +121,16 @@ class ControlImplicitTermination(KeywordBase):
     def nstep(self, value: int) -> None:
         """Set the nstep property."""
         self._cards[0].set_value("nstep", value)
+
+    @property
+    def abstol(self) -> float:
+        """Get or set the Terminate based on absolute total displacement in the Euclidean norm:
+        GT.0.0:	Terminate when displacement in the Euclidean norm for last time step is less than ABSTOL.
+        """ # nopep8
+        return self._cards[0].get_value("abstol")
+
+    @abstol.setter
+    def abstol(self, value: float) -> None:
+        """Set the abstol property."""
+        self._cards[0].set_value("abstol", value)
 

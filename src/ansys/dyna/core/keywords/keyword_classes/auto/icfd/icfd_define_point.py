@@ -94,7 +94,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @property
     def x(self) -> typing.Optional[float]:
-        """Get or set the x coordinate for the point.
+        """Get or set the x coordinate of the point.
         """ # nopep8
         return self._cards[0].get_value("x")
 
@@ -105,7 +105,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @property
     def y(self) -> typing.Optional[float]:
-        """Get or set the y coordinate for the point.
+        """Get or set the y coordinate of the point.
         """ # nopep8
         return self._cards[0].get_value("y")
 
@@ -116,7 +116,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @property
     def z(self) -> typing.Optional[float]:
-        """Get or set the z coordinate for the point.
+        """Get or set the z coordinate of the point.
         """ # nopep8
         return self._cards[0].get_value("z")
 
@@ -127,7 +127,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @property
     def constpid(self) -> typing.Optional[int]:
-        """Get or set the Surface Part ID to which the point is constrained. This means that if the selected surface moves, then the localization of the point will update as well.
+        """Get or set the Surface part ID to which the point is constrained. If the selected surface moves, the localization of the point also updates accordingly.
         """ # nopep8
         return self._cards[0].get_value("constpid")
 
@@ -138,7 +138,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @property
     def lcidx(self) -> typing.Optional[int]:
-        """Get or set the The point can be made to translate.three load curve IDs for the three translation components.
+        """Get or set the Load curve IDs giving the components of translational velocity for the point as a function of time. This translational velocity is optional.
         """ # nopep8
         return self._cards[1].get_value("lcidx")
 
@@ -149,7 +149,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @property
     def lcidy(self) -> typing.Optional[int]:
-        """Get or set the The point can be made to translate.three load curve IDs for the three translation components.
+        """Get or set the Load curve IDs giving the components of translational velocity for the point as a function of time. This translational velocity is optional.
         """ # nopep8
         return self._cards[1].get_value("lcidy")
 
@@ -160,7 +160,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @property
     def lcidz(self) -> typing.Optional[int]:
-        """Get or set the The point can be made to translate.three load curve IDs for the three translation components.
+        """Get or set the Load curve IDs giving the components of translational velocity for the point as a function of time. This translational velocity is optional.
         """ # nopep8
         return self._cards[1].get_value("lcidz")
 
@@ -171,7 +171,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @property
     def lcidw(self) -> typing.Optional[int]:
-        """Get or set the The point can also be made to rotate. This load curve specifies the angular velocity.
+        """Get or set the Load curve ID giving the angular velocity of the point as a function of time. This angular velocity is optional
         """ # nopep8
         return self._cards[2].get_value("lcidw")
 
@@ -182,7 +182,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @property
     def xt(self) -> typing.Optional[float]:
-        """Get or set the Rotation axis tail point coordinates.
+        """Get or set the Coordinates of the tail point for specifying the rotation axis. Only define if LCIDW is nonzero.
         """ # nopep8
         return self._cards[2].get_value("xt")
 
@@ -193,7 +193,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @property
     def yt(self) -> typing.Optional[float]:
-        """Get or set the Rotation axis tail point coordinates.
+        """Get or set the Coordinates of the tail point for specifying the rotation axis. Only define if LCIDW is nonzero.
         """ # nopep8
         return self._cards[2].get_value("yt")
 
@@ -204,7 +204,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @property
     def zt(self) -> typing.Optional[float]:
-        """Get or set the Rotation axis tail point coordinates.
+        """Get or set the Coordinates of the tail point for specifying the rotation axis. Only define if LCIDW is nonzero.
         """ # nopep8
         return self._cards[2].get_value("zt")
 
@@ -215,7 +215,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @property
     def xh(self) -> typing.Optional[float]:
-        """Get or set the Rotation axis head point coordinates.
+        """Get or set the Coordinates of the head point for specifying the rotation axis. Only define if LCIDW is nonzero.
         """ # nopep8
         return self._cards[2].get_value("xh")
 
@@ -226,7 +226,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @property
     def yh(self) -> typing.Optional[float]:
-        """Get or set the Rotation axis head point coordinates.
+        """Get or set the Coordinates of the head point for specifying the rotation axis. Only define if LCIDW is nonzero.
         """ # nopep8
         return self._cards[2].get_value("yh")
 
@@ -237,7 +237,7 @@ class IcfdDefinePoint(KeywordBase):
 
     @property
     def zh(self) -> typing.Optional[float]:
-        """Get or set the Rotation axis head point coordinates.
+        """Get or set the Coordinates of the head point for specifying the rotation axis. Only define if LCIDW is nonzero.
         """ # nopep8
         return self._cards[2].get_value("zh")
 

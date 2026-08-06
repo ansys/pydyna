@@ -45,8 +45,8 @@ _MAT041050_CARD1 = (
     FieldSchema("ihyper", int, 30, 10, 0),
     FieldSchema("ieos", int, 40, 10, 0),
     FieldSchema("lmca", int, 50, 10, None),
-    FieldSchema("unused", int, 60, 10, None),
-    FieldSchema("unused", int, 70, 10, None),
+    FieldSchema("ext", int, 60, 10, None),
+    FieldSchema("epshv", int, 70, 10, None),
 )
 
 _MAT041050_CARD2 = (
@@ -208,10 +208,10 @@ class Mat041050(KeywordBase):
     @property
     def iortho(self) -> int:
         """Get or set the Orthotropic/spot weld thinning flag:
-        EQ.0:	if the material is not orthotropic and is not used with spot weld thinning
-        EQ.1:	if the material is orthotropic
-        EQ.2:	if material is used with spot weld thinning
-        EQ.3:	if material is orthotropic and used with spot weld thinning.
+        EQ.0: if the material is not orthotropic and is not used with spot weld thinning
+        EQ.1: if the material is orthotropic
+        EQ.2: if material is used with spot weld thinning
+        EQ.3: if material is orthotropic and used with spot weld thinning.
         """ # nopep8
         return self._cards[0].get_value("iortho")
 
@@ -262,9 +262,9 @@ class Mat041050(KeywordBase):
     @property
     def ifail(self) -> typing.Optional[int]:
         """Get or set the Failure flag.
-        EQ.0:  No failure;
-        EQ.1:  Allows failure of shell and solid elements;
-        LT.0:  |IFAIL| is the address of NUMINT in the material constants array.  NUMINT is defined as the number of failed integration points that will trigger element deletion.  This option applies only to shell and solid elements (release 5 of v.971).
+        EQ.0: No failure;
+        EQ.1: Allows failure of shell and solid elements;
+        LT.0: |IFAIL| is the address of NUMINT in the material constants array. NUMINT is defined as the number of failed integration points that will trigger element deletion. This option applies only to shell and solid elements (release 5 of v.971).
         """ # nopep8
         return self._cards[1].get_value("ifail")
 
@@ -288,20 +288,26 @@ class Mat041050(KeywordBase):
 
     @property
     def ihyper(self) -> int:
-        """Get or set the IHYPER
+        """Get or set the Deformation gradient flag (see Appendix A):
+        EQ.0: Do not compute deformation gradient.
+        EQ. - 1: Same as 1, except if IORTHO = 1 or 3, the deformation gradient is in the global coordinate system.
+        EQ. - 10: Same as - 1, except that this will enforce full integration for elements - 1, -2 and 2.
+        EQ.1: Compute deformation gradient for bricksand shells.If IORTHO = 1 or 3, the deformation gradient is in the local coordinate system instead of the global coordinate system.
+        EQ.10: Same as 1, except that this will enforce full integration for elements - 1, -2 and 2.
+        EQ.3: Compute deformation gradient for shells from the nodal coordinates in the global coordinate system
         """ # nopep8
         return self._cards[1].get_value("ihyper")
 
     @ihyper.setter
     def ihyper(self, value: int) -> None:
         """Set the ihyper property."""
-        if value not in [0, 1, -1, -2, None]:
-            raise Exception("""ihyper must be `None` or one of {0,1,-1,-2}.""")
         self._cards[1].set_value("ihyper", value)
 
     @property
     def ieos(self) -> int:
-        """Get or set the IEOS
+        """Get or set the Equation of state flag:
+        EQ.0: Off
+        EQ.1: On
         """ # nopep8
         return self._cards[1].get_value("ieos")
 
@@ -324,16 +330,38 @@ class Mat041050(KeywordBase):
         self._cards[1].set_value("lmca", value)
 
     @property
+    def ext(self) -> typing.Optional[int]:
+        """Get or set the Flag to call external user material routines from other codes. See the file dyn21extumat.F for documentation.
+        """ # nopep8
+        return self._cards[1].get_value("ext")
+
+    @ext.setter
+    def ext(self, value: int) -> None:
+        """Set the ext property."""
+        self._cards[1].set_value("ext", value)
+
+    @property
+    def epshv(self) -> typing.Optional[int]:
+        """Get or set the Indicates which history variable is used to store effective plastic strain (if used). EPSHV is used in conjunction with EXT.NE.0 to facilitate post-processing.
+        """ # nopep8
+        return self._cards[1].get_value("epshv")
+
+    @epshv.setter
+    def epshv(self, value: int) -> None:
+        """Set the epshv property."""
+        self._cards[1].set_value("epshv", value)
+
+    @property
     def aopt(self) -> typing.Optional[float]:
         """Get or set the Material axes option:
         EQ.0.0: locally orthotropic with material axes determined by element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES,
-        and then, for shells only, rotated about	the shell element normal by an angle BETA,
+        and then, for shells only, rotated about the shell element normal by an angle BETA,
         EQ.1.0: locally orthotropic with material axes determined by a point in space and the global location of the element center, this is the a-direction.
         This option is for solid elements only.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR,
-        EQ.3.0:  locally orthotropic material axes determined by rotating
+        EQ.3.0: locally orthotropic material axes determined by rotating
         the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         EQ.4.0: locally orthotropic in cylindrical coordinate system with
         the material axes determined by a vector v, and an originating point, p, which define  the centerline axis. This option is for solid elements only
         LT.0.0: the absolute value of AOPT is the coordinate system ID number (CID on *DEFINE_COORDINATE_NODES, _SYSTEM or _VECTOR). Available in R3 version of 971 and later
@@ -347,22 +375,24 @@ class Mat041050(KeywordBase):
 
     @property
     def macf(self) -> int:
-        """Get or set the Material axes change flag for brick elements for quick changes: EQ.1: default,
+        """Get or set the Material axes change flag for brick elements for quick changes:
+        EQ.1: No change, default,
         EQ.2: switch material axes a and b,
         EQ.3: switch material axes a and c.
+        EQ.4: Switch material axes b and c
         """ # nopep8
         return self._cards[2].get_value("macf")
 
     @macf.setter
     def macf(self, value: int) -> None:
         """Set the macf property."""
-        if value not in [1, 2, 3, None]:
-            raise Exception("""macf must be `None` or one of {1,2,3}.""")
+        if value not in [1, 2, 3, 4, None]:
+            raise Exception("""macf must be `None` or one of {1,2,3,4}.""")
         self._cards[2].set_value("macf", value)
 
     @property
     def xp(self) -> typing.Optional[float]:
-        """Get or set the x-coordinate of point p for AOPT = 1.
+        """Get or set the x-coordinate of point p for AOPT = 1 and 4.
         """ # nopep8
         return self._cards[2].get_value("xp")
 
@@ -373,7 +403,7 @@ class Mat041050(KeywordBase):
 
     @property
     def yp(self) -> typing.Optional[float]:
-        """Get or set the y-coordinate of point p for AOPT = 1.
+        """Get or set the y-coordinate of point p for AOPT = 1 and 4.
         """ # nopep8
         return self._cards[2].get_value("yp")
 
@@ -384,7 +414,7 @@ class Mat041050(KeywordBase):
 
     @property
     def zp(self) -> typing.Optional[float]:
-        """Get or set the z-coordinate of point p for AOPT = 1.
+        """Get or set the z-coordinate of point p for AOPT = 1 and 4.
         """ # nopep8
         return self._cards[2].get_value("zp")
 
@@ -428,7 +458,7 @@ class Mat041050(KeywordBase):
 
     @property
     def v1(self) -> typing.Optional[float]:
-        """Get or set the Component of vector v for AOPT = 3.
+        """Get or set the Component of vector v for AOPT = 3 and 4.
         """ # nopep8
         return self._cards[3].get_value("v1")
 
@@ -439,7 +469,7 @@ class Mat041050(KeywordBase):
 
     @property
     def v2(self) -> typing.Optional[float]:
-        """Get or set the Component of vector v for AOPT = 3.
+        """Get or set the Component of vector v for AOPT = 3 and 4.
         """ # nopep8
         return self._cards[3].get_value("v2")
 
@@ -450,7 +480,7 @@ class Mat041050(KeywordBase):
 
     @property
     def v3(self) -> typing.Optional[float]:
-        """Get or set the Component of vector v for AOPT = 3.
+        """Get or set the Component of vector v for AOPT = 3 and 4.
         """ # nopep8
         return self._cards[3].get_value("v3")
 

@@ -51,7 +51,7 @@ class FatigueMultiaxial(KeywordBase):
         """Get or set the Multiaxial fatigue analysis criterion:
         EQ.0: fatigue analysis using equivalent stress or strain index (defined by INDEX in *FATIGUE)
         EQ.1: fatigue analysis on multiple planes
-        EQ.2: fatigue analysis on critical plane which is determined	by the highest 1st principal stress or strain
+        EQ.2: fatigue analysis on critical plane which is determined by the highest 1st principal stress or strain
         """ # nopep8
         return self._cards[0].get_value("maxial")
 

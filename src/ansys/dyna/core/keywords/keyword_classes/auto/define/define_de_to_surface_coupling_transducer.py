@@ -28,13 +28,18 @@ from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
+from ansys.dyna.core.keywords.keyword_classes.auto.define.define_box import DefineBox
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD0 = (
-    FieldSchema("slave", int, 0, 10, None),
-    FieldSchema("master", int, 10, 10, None),
-    FieldSchema("stype", int, 20, 10, 0),
-    FieldSchema("mtype", int, 30, 10, 0),
+    FieldSchema("desid", int, 0, 10, 0),
+    FieldSchema("surfid", int, 10, 10, 0),
+    FieldSchema("destyp", int, 20, 10, 0),
+    FieldSchema("surftyp", int, 30, 10, 0),
+    FieldSchema("isoft", int, 40, 10, 0),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("sbox", int, 70, 10, None),
 )
 
 _DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD1 = (
@@ -62,12 +67,18 @@ _DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD2 = (
 _DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD3 = (
     FieldSchema("sfp", float, 0, 10, 1.0),
     FieldSchema("sft", float, 10, 10, 1.0),
-    FieldSchema("unused", float, 20, 10, None),
-    FieldSchema("unused", float, 30, 10, None),
-    FieldSchema("unused", float, 40, 10, None),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("ideact", int, 40, 10, None),
     FieldSchema("cid_rcf", int, 50, 10, 0),
     FieldSchema("bt", float, 60, 10, 0.0),
     FieldSchema("dt", float, 70, 10, 1e+20),
+)
+
+_DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD4 = (
+    FieldSchema("ht_trsf", int, 0, 10, 0),
+    FieldSchema("th_cnd", float, 10, 10, None),
+    FieldSchema("surf_ht", float, 20, 10, None),
 )
 
 _DEFINEDETOSURFACECOUPLINGTRANSDUCER_OPTION0_CARD0 = (
@@ -86,6 +97,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
         "lcvx": LinkType.DEFINE_CURVE,
         "lcvy": LinkType.DEFINE_CURVE,
         "lcvz": LinkType.DEFINE_CURVE,
+        "sbox": LinkType.DEFINE_BOX,
         "cid_rcf": LinkType.DEFINE_COORDINATE_SYSTEM,
     }
 
@@ -110,6 +122,10 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
                 _DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD3,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _DEFINEDETOSURFACECOUPLINGTRANSDUCER_CARD4,
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = DefineDeToSurfaceCouplingTransducer._option_spec_list[0],
                 cards = [
@@ -122,57 +138,84 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
             ),
         ]
     @property
-    def slave(self) -> typing.Optional[int]:
-        """Get or set the Slave Set ID
+    def desid(self) -> int:
+        """Get or set the Node set ID, node ID, part set ID or part ID specifying the DES in the coupling. DESTYP below indicates the ID type
         """ # nopep8
-        return self._cards[0].get_value("slave")
+        return self._cards[0].get_value("desid")
 
-    @slave.setter
-    def slave(self, value: int) -> None:
-        """Set the slave property."""
-        self._cards[0].set_value("slave", value)
+    @desid.setter
+    def desid(self, value: int) -> None:
+        """Set the desid property."""
+        self._cards[0].set_value("desid", value)
 
     @property
-    def master(self) -> typing.Optional[int]:
-        """Get or set the Master shell Set ID
+    def surfid(self) -> int:
+        """Get or set the Part set ID or part ID specifying the surface. SURFID below indicates the ID type.
         """ # nopep8
-        return self._cards[0].get_value("master")
+        return self._cards[0].get_value("surfid")
 
-    @master.setter
-    def master(self, value: int) -> None:
-        """Set the master property."""
-        self._cards[0].set_value("master", value)
+    @surfid.setter
+    def surfid(self, value: int) -> None:
+        """Set the surfid property."""
+        self._cards[0].set_value("surfid", value)
 
     @property
-    def stype(self) -> int:
-        """Get or set the EQ.0: Slave node set
-        EQ.1: Slave node
-        EQ.2: Slave part set
-        EQ.3: Slave part
+    def destyp(self) -> int:
+        """Get or set the Type for DESID:
+        EQ.0: Node set
+        EQ.1: Node
+        EQ.2: Part setn
+        EQ.3: Part
         """ # nopep8
-        return self._cards[0].get_value("stype")
+        return self._cards[0].get_value("destyp")
 
-    @stype.setter
-    def stype(self, value: int) -> None:
-        """Set the stype property."""
+    @destyp.setter
+    def destyp(self, value: int) -> None:
+        """Set the destyp property."""
         if value not in [0, 1, 2, 3, None]:
-            raise Exception("""stype must be `None` or one of {0,1,2,3}.""")
-        self._cards[0].set_value("stype", value)
+            raise Exception("""destyp must be `None` or one of {0,1,2,3}.""")
+        self._cards[0].set_value("destyp", value)
 
     @property
-    def mtype(self) -> int:
-        """Get or set the EQ.0: Part set
+    def surftyp(self) -> int:
+        """Get or set the SURFID type:
+        EQ.0: Part set
         EQ.1: Part
-        EQ.2: Segment set. (only work for TRANSDUCER
+        EQ.2: Segment set (TRANSDUCER keyword option only; see Remark 5)
         """ # nopep8
-        return self._cards[0].get_value("mtype")
+        return self._cards[0].get_value("surftyp")
 
-    @mtype.setter
-    def mtype(self, value: int) -> None:
-        """Set the mtype property."""
-        if value not in [0, 1, 2, None]:
-            raise Exception("""mtype must be `None` or one of {0,1,2}.""")
-        self._cards[0].set_value("mtype", value)
+    @surftyp.setter
+    def surftyp(self, value: int) -> None:
+        """Set the surftyp property."""
+        if value not in [0, 1, None]:
+            raise Exception("""surftyp must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("surftyp", value)
+
+    @property
+    def isoft(self) -> int:
+        """Get or set the Contact stiffness evaluation:
+        EQ.0: Default is based on DES properties only
+        EQ.1: Geometric mean is based on both DES and contact segment's properties.
+        EQ.2: Soft option is based on mass of the system and time step size.
+        """ # nopep8
+        return self._cards[0].get_value("isoft")
+
+    @isoft.setter
+    def isoft(self, value: int) -> None:
+        """Set the isoft property."""
+        self._cards[0].set_value("isoft", value)
+
+    @property
+    def sbox(self) -> typing.Optional[int]:
+        """Get or set the BOX ID.Exclude segments belonging to SURFID that are outside of the box during initialization.
+        """ # nopep8
+        return self._cards[0].get_value("sbox")
+
+    @sbox.setter
+    def sbox(self, value: int) -> None:
+        """Set the sbox property."""
+        self._cards[0].set_value("sbox", value)
 
     @property
     def frics(self) -> typing.Optional[float]:
@@ -209,7 +252,8 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @property
     def bsort(self) -> int:
-        """Get or set the Number of cycle between bucket sort. (Default=100) .LT.0: ABS(BSORT) is the minimum number of cycle between bucket sort.  This value can be increased during runtime by tracking the velocity of potential coupling pair.  This feature only works with MPP currently.
+        """Get or set the Number of cycles between bucket sort. Number of cycles between bucket sorts; the default value is 100. For blast simulations with very high DEM particle velocity, we suggest setting BSORT = 20 or smaller.
+        LT.0: | BSORT | is the minimum number of cycles between bucket sorts.This value can be increased during runtime by tracking the velocity of potential coupling pairs.This feature only works with MPP currently.
         """ # nopep8
         return self._cards[1].get_value("bsort")
 
@@ -220,7 +264,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @property
     def lcvx(self) -> int:
-        """Get or set the Load curve defines surface velocity in X direction.
+        """Get or set the Load curve defining surface velocity in X direction.
         """ # nopep8
         return self._cards[1].get_value("lcvx")
 
@@ -231,7 +275,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @property
     def lcvy(self) -> int:
-        """Get or set the Load curve defines surface velocity in Y direction.
+        """Get or set the Load curve defining surface velocity in Y direction.
         """ # nopep8
         return self._cards[1].get_value("lcvy")
 
@@ -242,7 +286,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @property
     def lcvz(self) -> int:
-        """Get or set the Load curve defines surface velocity in Z direction.
+        """Get or set the Load curve defining surface velocity in Z direction.
         """ # nopep8
         return self._cards[1].get_value("lcvz")
 
@@ -253,7 +297,10 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @property
     def wearc(self) -> float:
-        """Get or set the WEARC is the wear coefficient..
+        """Get or set the WEARC is the wear coefficient.
+        GT.0: Archard's Wear Law; see Remark 1.
+        EQ. - 1: Finnie Wear Law; an additional card is required
+        LE. - 100: User - defined wear model; an additional card is required.
         """ # nopep8
         return self._cards[1].get_value("wearc")
 
@@ -352,7 +399,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @property
     def sfp(self) -> float:
-        """Get or set the Scale factor on contact stiffness. By default, SFP = 1.0
+        """Get or set the Scale factor on contact stiffness.
         """ # nopep8
         return self._cards[3].get_value("sfp")
 
@@ -363,8 +410,7 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
 
     @property
     def sft(self) -> float:
-        """Get or set the Scale factor for surface thickness (scales true thickness). This option
-        applies only to contact with shell elements. True thickness is the	element thickness of the shell elements
+        """Get or set the Scale factor for surface thickness (scales true thickness). True thickness is the element thickness of the shell elements. This option applies only to contact with shell elements.
         """ # nopep8
         return self._cards[3].get_value("sft")
 
@@ -372,6 +418,17 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
     def sft(self, value: float) -> None:
         """Set the sft property."""
         self._cards[3].set_value("sft", value)
+
+    @property
+    def ideact(self) -> typing.Optional[int]:
+        """Get or set the DES particles will be automatically deactivated after contacting with surface when IDEACT = 1.
+        """ # nopep8
+        return self._cards[3].get_value("ideact")
+
+    @ideact.setter
+    def ideact(self, value: int) -> None:
+        """Set the ideact property."""
+        self._cards[3].set_value("ideact", value)
 
     @property
     def cid_rcf(self) -> int:
@@ -407,15 +464,52 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
         self._cards[3].set_value("dt", value)
 
     @property
+    def ht_trsf(self) -> int:
+        """Get or set the Flag to enable heat transfer between DES and the surface:
+        EQ.0:	No heat transfer between DES and the surface
+        EQ.1 : Consider heat transfer between DES and the surface
+        """ # nopep8
+        return self._cards[4].get_value("ht_trsf")
+
+    @ht_trsf.setter
+    def ht_trsf(self, value: int) -> None:
+        """Set the ht_trsf property."""
+        if value not in [0, 1, None]:
+            raise Exception("""ht_trsf must be `None` or one of {0,1}.""")
+        self._cards[4].set_value("ht_trsf", value)
+
+    @property
+    def th_cnd(self) -> typing.Optional[float]:
+        """Get or set the Thermal conductivity between DES and the surface in W/(m K).
+        """ # nopep8
+        return self._cards[4].get_value("th_cnd")
+
+    @th_cnd.setter
+    def th_cnd(self, value: float) -> None:
+        """Set the th_cnd property."""
+        self._cards[4].set_value("th_cnd", value)
+
+    @property
+    def surf_ht(self) -> typing.Optional[float]:
+        """Get or set the Constant surface temperature in K or �C
+        """ # nopep8
+        return self._cards[4].get_value("surf_ht")
+
+    @surf_ht.setter
+    def surf_ht(self, value: float) -> None:
+        """Set the surf_ht property."""
+        self._cards[4].set_value("surf_ht", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[4].cards[0].get_value("title")
+        return self._cards[5].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[4].cards[0].set_value("title", value)
+        self._cards[5].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
@@ -464,6 +558,21 @@ class DefineDeToSurfaceCouplingTransducer(KeywordBase):
     def lcvz_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcvz."""
         self.lcvz = value.lcid
+
+    @property
+    def sbox_link(self) -> typing.Optional[DefineBox]:
+        """Get the DefineBox object for sbox."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "BOX"):
+            if kwd.boxid == self.sbox:
+                return kwd
+        return None
+
+    @sbox_link.setter
+    def sbox_link(self, value: DefineBox) -> None:
+        """Set the DefineBox object for sbox."""
+        self.sbox = value.boxid
 
     @property
     def cid_rcf_link(self) -> typing.Optional[DefineCoordinateSystem]:

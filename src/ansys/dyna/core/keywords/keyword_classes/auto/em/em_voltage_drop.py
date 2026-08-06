@@ -62,7 +62,7 @@ class EmVoltageDrop(KeywordBase):
 
     @property
     def vdtype(self) -> typing.Optional[int]:
-        """Get or set the Voltage Drop Type:EQ.1:	Voltage drop between the two corresponding nodes of the two segment sets SSID1 and SSID2.
+        """Get or set the Voltage Drop Type:EQ.1: Voltage drop between the two corresponding nodes of the two segment sets SSID1 and SSID2.
         """ # nopep8
         return self._cards[0].get_value("vdtype")
 

@@ -45,6 +45,13 @@ _MAT077O_CARD0 = (
 
 _MAT077O_CARD1 = (
     FieldSchema("tbhys", float, 0, 10, None),
+    FieldSchema("lcbi", float, 10, 10, None),
+    FieldSchema("lcpl", float, 20, 10, None),
+    FieldSchema("wbi", float, 30, 10, None),
+    FieldSchema("wpl", float, 40, 10, None),
+    FieldSchema("d1", float, 50, 10, None),
+    FieldSchema("d2", float, 60, 10, None),
+    FieldSchema("d3", float, 70, 10, None),
 )
 
 _MAT077O_CARD2 = (
@@ -171,7 +178,7 @@ class Mat077O(KeywordBase):
 
     @property
     def pr(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio ( => 0.49 is recommended, smaller values may not work and should not be used).
+        """Get or set the Poissons ratio. If set to a negative number, the Poissons ratio is the absolute value, and Card 2 is included for extra parameters.
         """ # nopep8
         return self._cards[0].get_value("pr")
 
@@ -182,7 +189,9 @@ class Mat077O(KeywordBase):
 
     @property
     def n(self) -> int:
-        """Get or set the Order of fit to the Ogden model, (currently <9, 2 generally works okay).  The constants generated during the fit are printed in the output file and can be directly input in future runs, thereby, saving the cost of performing the nonlinear fit.
+        """Get or set the Order of fit to curve LCID1 or combinations of LCID1, LCBI, and LCPL for the Ogden model (currently < 9, 2 generally works okay). LS-DYNA prints the constants generated during the fit to d3hsp. To save the cost of performing the nonlinear fit in future runs, directly input the constants from this fit. You can visually evaluate the goodness of the fit by plotting data in the output file curveplot*. To do this with LS-PrePost, click  XYplot  Add to read the curveplot* file.
+        EQ.0: Allows you to specify the material parameters directly with Cards 3b.1 and 3b.2
+        EQ. - 1: Same as N = 0 but invokes a thermal option: parameters MUi and ALPHAi are read as load curves IDs and thereby define these parameters as functions of temperature.It is available only for solid elements.VFLAG must be 0.
         """ # nopep8
         return self._cards[0].get_value("n")
 
@@ -195,8 +204,7 @@ class Mat077O(KeywordBase):
 
     @property
     def nv(self) -> int:
-        """Get or set the Number of terms in fit. Currently, the maximum number is set to 6. Values less than 6, possibly 3-5 are recommended, since each term used adds significantly to the cost. Caution should be exercised when taking the results from the fit. Preferably, all generated coefficients should be positive. Negative values may lead to unstable results. Once a satisfactory fit has been achieved it is recommended that the coefficients which are written into the output file be input in future runs.
-        Default is set to 6.
+        """Get or set the Number of Prony series terms for fitting curve LCID2. If zero, the default is 6. Currently, 12 is the maximum number. We recommend values less than 12, possibly 3  5, since each term used adds significantly to the cost. Exercise caution when taking the results from the fit. Preferably, all generated coefficients should be positive. Negative values may lead to unstable results. Once you have achieved a satisfactory fit, we recommend inputting the coefficients written into the output file for future runs.
         """ # nopep8
         return self._cards[0].get_value("nv")
 
@@ -229,10 +237,9 @@ class Mat077O(KeywordBase):
 
     @property
     def ref(self) -> float:
-        """Get or set the Use reference geometry to initialize the stress tensor. The reference
-        geometry is defined by the keyword: *INITIAL_FOAM_REFERENCE_GEOMETRY (see there for more details).
-        EQ.0.0: off
-        EQ.1.0: on.
+        """Get or set the Use reference geometry to initialize the stress tensor. *INITIAL_FOAM_REFERENCE_GEOMETRY  defines the reference geometry.
+        EQ.0.0: Off
+        EQ.1.0: On
         """ # nopep8
         return self._cards[0].get_value("ref")
 
@@ -245,7 +252,7 @@ class Mat077O(KeywordBase):
 
     @property
     def tbhys(self) -> typing.Optional[float]:
-        """Get or set the Table ID for hysteresis.
+        """Get or set the Table ID for hysteresis, could be positive or negative; see Remarks in the manual page for *MAT_HYPERELASTIC_RUBBER. This filed only applies to solid elements.
         """ # nopep8
         return self._cards[1].get_value("tbhys")
 
@@ -253,6 +260,83 @@ class Mat077O(KeywordBase):
     def tbhys(self, value: float) -> None:
         """Set the tbhys property."""
         self._cards[1].set_value("tbhys", value)
+
+    @property
+    def lcbi(self) -> typing.Optional[float]:
+        """Get or set the Load curve ID giving force as a function of displacement for the biaxial test used in parameter fitting. Make sure N > 0 on Card 1 if setting this parameter. See Remark in the manual page for *MAT_HYPERELASTIC_RUBBER.
+        """ # nopep8
+        return self._cards[1].get_value("lcbi")
+
+    @lcbi.setter
+    def lcbi(self, value: float) -> None:
+        """Set the lcbi property."""
+        self._cards[1].set_value("lcbi", value)
+
+    @property
+    def lcpl(self) -> typing.Optional[float]:
+        """Get or set the Load curve ID giving force as a function of displacement for the planar test used in parameter fitting. Make sure N > 0 on Card 1 if setting this parameter. See Remark in the manual page for *MAT_HYPERELASTIC_RUBBER.
+        """ # nopep8
+        return self._cards[1].get_value("lcpl")
+
+    @lcpl.setter
+    def lcpl(self, value: float) -> None:
+        """Set the lcpl property."""
+        self._cards[1].set_value("lcpl", value)
+
+    @property
+    def wbi(self) -> typing.Optional[float]:
+        """Get or set the Weight factor giving the relative influence of the biaxial test data in the fitting of material parameters, a value of 1.0 means that it is of equal importance as the uniaxial test data. Make sure N > 0 on Card 1 if setting this parameter. See in the manual page for *MAT_HYPERELASTIC_RUBBER.
+        """ # nopep8
+        return self._cards[1].get_value("wbi")
+
+    @wbi.setter
+    def wbi(self, value: float) -> None:
+        """Set the wbi property."""
+        self._cards[1].set_value("wbi", value)
+
+    @property
+    def wpl(self) -> typing.Optional[float]:
+        """Get or set the Weight factor giving the relative influence of the planar test data in the fitting of material parameters, a value of 1.0 means that it is of equal importance as the uniaxial test data. Make sure N > 0 on Card 1 if setting this parameter. See in the manual page for *MAT_HYPERELASTIC_RUBBER.
+        """ # nopep8
+        return self._cards[1].get_value("wpl")
+
+    @wpl.setter
+    def wpl(self, value: float) -> None:
+        """Set the wpl property."""
+        self._cards[1].set_value("wpl", value)
+
+    @property
+    def d1(self) -> typing.Optional[float]:
+        """Get or set the Compression compliance constant. If this parameter is greater than zero, then LS-DYNA does not use the value of PR set on Card 1 for Poissons ratio.
+        """ # nopep8
+        return self._cards[1].get_value("d1")
+
+    @d1.setter
+    def d1(self, value: float) -> None:
+        """Set the d1 property."""
+        self._cards[1].set_value("d1", value)
+
+    @property
+    def d2(self) -> typing.Optional[float]:
+        """Get or set the Compression compliance constant.
+        """ # nopep8
+        return self._cards[1].get_value("d2")
+
+    @d2.setter
+    def d2(self, value: float) -> None:
+        """Set the d2 property."""
+        self._cards[1].set_value("d2", value)
+
+    @property
+    def d3(self) -> typing.Optional[float]:
+        """Get or set the Compression compliance constant.
+        """ # nopep8
+        return self._cards[1].get_value("d3")
+
+    @d3.setter
+    def d3(self, value: float) -> None:
+        """Set the d3 property."""
+        self._cards[1].set_value("d3", value)
 
     @property
     def sgl(self) -> typing.Optional[float]:
@@ -300,7 +384,7 @@ class Mat077O(KeywordBase):
 
     @property
     def data(self) -> float:
-        """Get or set the Type of experimental data:
+        """Get or set the Type of experimental data (only active if LCBI, LCPL, WBI, and WPL are all zero on Card 2 or Card 2 is not activated):
         EQ.1.0: uniaxial data (default),
         EQ.2.0: biaxial data.
         EQ.3.0: pure shear data
@@ -350,7 +434,8 @@ class Mat077O(KeywordBase):
 
     @property
     def mu1(self) -> typing.Optional[float]:
-        """Get or set the mu-1, first shear modulus.
+        """Get or set the mu-1, first shear modulus(N=0).
+        For N = -1, load curve ids can be defined to specify shear moduli as functions of temperature, i.e., nu_i (T). If individual curve ids are zero, then the corresponding shear modulus is constantly zero.
         """ # nopep8
         return self._cards[3].get_value("mu1")
 
@@ -361,7 +446,8 @@ class Mat077O(KeywordBase):
 
     @property
     def mu2(self) -> typing.Optional[float]:
-        """Get or set the mu-2, second shear modulus.
+        """Get or set the mu-2, second shear modulus(N=0).
+        For N = -1, load curve ids can be defined to specify shear moduli as functions of temperature, i.e., nu_i (T). If individual curve ids are zero, then the corresponding shear modulus is constantly zero.
         """ # nopep8
         return self._cards[3].get_value("mu2")
 
@@ -372,7 +458,8 @@ class Mat077O(KeywordBase):
 
     @property
     def mu3(self) -> typing.Optional[float]:
-        """Get or set the mu-3, third shear modulus.
+        """Get or set the mu-3, third shear modulus(N=0).
+        For N = -1, load curve ids can be defined to specify shear moduli as functions of temperature, i.e., nu_i (T). If individual curve ids are zero, then the corresponding shear modulus is constantly zero.
         """ # nopep8
         return self._cards[3].get_value("mu3")
 
@@ -383,7 +470,8 @@ class Mat077O(KeywordBase):
 
     @property
     def mu4(self) -> typing.Optional[float]:
-        """Get or set the mu-4, fourth shear modulus.
+        """Get or set the mu-4, fourth shear modulus(N=0).
+        For N = -1, load curve ids can be defined to specify shear moduli as functions of temperature, i.e., nu_i (T). If individual curve ids are zero, then the corresponding shear modulus is constantly zero.
         """ # nopep8
         return self._cards[3].get_value("mu4")
 
@@ -394,7 +482,8 @@ class Mat077O(KeywordBase):
 
     @property
     def mu5(self) -> typing.Optional[float]:
-        """Get or set the mu-5, fifth shear modulus.
+        """Get or set the mu-5, fifth shear modulus(N=0).
+        For N = -1, load curve ids can be defined to specify shear moduli as functions of temperature, i.e., nu_i (T). If individual curve ids are zero, then the corresponding shear modulus is constantly zero.
         """ # nopep8
         return self._cards[3].get_value("mu5")
 
@@ -405,7 +494,8 @@ class Mat077O(KeywordBase):
 
     @property
     def mu6(self) -> typing.Optional[float]:
-        """Get or set the mu-6, sixth shear modulus.
+        """Get or set the mu-6, sixth shear modulus(N=0).
+        For N = -1, load curve ids can be defined to specify shear moduli as functions of temperature, i.e., nu_i (T). If individual curve ids are zero, then the corresponding shear modulus is constantly zero.
         """ # nopep8
         return self._cards[3].get_value("mu6")
 
@@ -416,7 +506,8 @@ class Mat077O(KeywordBase):
 
     @property
     def mu7(self) -> typing.Optional[float]:
-        """Get or set the mu-7, seventh shear modulus.
+        """Get or set the mu-7, seventh shear modulus(N=0).
+        For N = -1, load curve ids can be defined to specify shear moduli as functions of temperature, i.e., nu_i (T). If individual curve ids are zero, then the corresponding shear modulus is constantly zero.
         """ # nopep8
         return self._cards[3].get_value("mu7")
 
@@ -427,7 +518,8 @@ class Mat077O(KeywordBase):
 
     @property
     def mu8(self) -> typing.Optional[float]:
-        """Get or set the mu-8, eighth shear modulus.
+        """Get or set the mu-8, eighth shear modulus(N=0).
+        For N = -1, load curve ids can be defined to specify shear moduli as functions of temperature, i.e., nu_i (T). If individual curve ids are zero, then the corresponding shear modulus is constantly zero.
         """ # nopep8
         return self._cards[3].get_value("mu8")
 
@@ -438,7 +530,8 @@ class Mat077O(KeywordBase):
 
     @property
     def alpha1(self) -> typing.Optional[float]:
-        """Get or set the alpha-1, first exponent.
+        """Get or set the alpha-1, first exponent(N=0)..
+        For N = -1, load curve ids can be defined to specify exponents as functions of temperature, i.e., alpha_i (T). If individual curve ids are zero, then the corresponding exponent is constantly zero.
         """ # nopep8
         return self._cards[4].get_value("alpha1")
 
@@ -449,7 +542,8 @@ class Mat077O(KeywordBase):
 
     @property
     def alpha2(self) -> typing.Optional[float]:
-        """Get or set the alpha-2, second exponent.
+        """Get or set the alpha-2, second exponent(N=0)..
+        For N = -1, load curve ids can be defined to specify exponents as functions of temperature, i.e., alpha_i (T). If individual curve ids are zero, then the corresponding exponent is constantly zero.
         """ # nopep8
         return self._cards[4].get_value("alpha2")
 
@@ -460,7 +554,8 @@ class Mat077O(KeywordBase):
 
     @property
     def alpha3(self) -> typing.Optional[float]:
-        """Get or set the alpha-3, third exponent.
+        """Get or set the alpha-3, third exponent(N=0)..
+        For N = -1, load curve ids can be defined to specify exponents as functions of temperature, i.e., alpha_i (T). If individual curve ids are zero, then the corresponding exponent is constantly zero.
         """ # nopep8
         return self._cards[4].get_value("alpha3")
 
@@ -471,7 +566,8 @@ class Mat077O(KeywordBase):
 
     @property
     def alpha4(self) -> typing.Optional[float]:
-        """Get or set the alpha-4, fourth exponent.
+        """Get or set the alpha-4, fourth exponent(N=0)..
+        For N = -1, load curve ids can be defined to specify exponents as functions of temperature, i.e., alpha_i (T). If individual curve ids are zero, then the corresponding exponent is constantly zero.
         """ # nopep8
         return self._cards[4].get_value("alpha4")
 
@@ -482,7 +578,8 @@ class Mat077O(KeywordBase):
 
     @property
     def alpha5(self) -> typing.Optional[float]:
-        """Get or set the alpha-5, fifth exponent.
+        """Get or set the alpha-5, fifth exponent(N=0)..
+        For N = -1, load curve ids can be defined to specify exponents as functions of temperature, i.e., alpha_i (T). If individual curve ids are zero, then the corresponding exponent is constantly zero.
         """ # nopep8
         return self._cards[4].get_value("alpha5")
 
@@ -493,7 +590,8 @@ class Mat077O(KeywordBase):
 
     @property
     def alpha6(self) -> typing.Optional[float]:
-        """Get or set the alpha-6, sixth exponent.
+        """Get or set the alpha-6, sixth exponent(N=0)..
+        For N = -1, load curve ids can be defined to specify exponents as functions of temperature, i.e., alpha_i (T). If individual curve ids are zero, then the corresponding exponent is constantly zero.
         """ # nopep8
         return self._cards[4].get_value("alpha6")
 
@@ -504,7 +602,8 @@ class Mat077O(KeywordBase):
 
     @property
     def alpha7(self) -> typing.Optional[float]:
-        """Get or set the alpha-7, seventh exponent.
+        """Get or set the alpha-7, seventh exponent(N=0)..
+        For N = -1, load curve ids can be defined to specify exponents as functions of temperature, i.e., alpha_i (T). If individual curve ids are zero, then the corresponding exponent is constantly zero.
         """ # nopep8
         return self._cards[4].get_value("alpha7")
 
@@ -515,7 +614,8 @@ class Mat077O(KeywordBase):
 
     @property
     def alpha8(self) -> typing.Optional[float]:
-        """Get or set the alpha-8, eighth exponent.
+        """Get or set the alpha-8, eighth exponent(N=0)..
+        For N = -1, load curve ids can be defined to specify exponents as functions of temperature, i.e., alpha_i (T). If individual curve ids are zero, then the corresponding exponent is constantly zero.
         """ # nopep8
         return self._cards[4].get_value("alpha8")
 

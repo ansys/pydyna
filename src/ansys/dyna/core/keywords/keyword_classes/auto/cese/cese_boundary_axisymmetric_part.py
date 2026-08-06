@@ -47,7 +47,7 @@ class CeseBoundaryAxisymmetricPart(KeywordBase):
         ]
     @property
     def msurfid(self) -> typing.Optional[int]:
-        """Get or set the Surface part ID referenced in *MESH_SURFACE_ELEMENT cards.
+        """Get or set the Mesh Surface part ID referenced in *MESH_SURFACE_ELEMENT cards.
         """ # nopep8
         return self._cards[0].get_value("msurfid")
 

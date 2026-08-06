@@ -28,9 +28,9 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _ALESTRUCTUREDMESHREFINE_CARD0 = (
     FieldSchema("mshid", int, 0, 10, 0),
-    FieldSchema("ifx_", int, 10, 10, 1, "ifx,"),
-    FieldSchema("ify_", int, 20, 10, 1, "ify,"),
-    FieldSchema("ifz_", int, 30, 10, 1, "ifz,"),
+    FieldSchema("ifx", int, 10, 10, 1),
+    FieldSchema("ify", int, 20, 10, 1),
+    FieldSchema("ifz", int, 30, 10, 1),
 )
 
 class AleStructuredMeshRefine(KeywordBase):
@@ -50,7 +50,7 @@ class AleStructuredMeshRefine(KeywordBase):
         ]
     @property
     def mshid(self) -> int:
-        """Get or set the S-ALE Mesh ID. The ID of the Structured ALE mesh to be refined.
+        """Get or set the S-ALE mesh ID for S-ALE mesh to be refined.
         """ # nopep8
         return self._cards[0].get_value("mshid")
 
@@ -60,35 +60,35 @@ class AleStructuredMeshRefine(KeywordBase):
         self._cards[0].set_value("mshid", value)
 
     @property
-    def ifx_(self) -> int:
-        """Get or set the Refinement factor at each local direction. Please see remark 1.
+    def ifx(self) -> int:
+        """Get or set the Refinement factor for each local direction.  The number of elements in each direction of the new mesh is the refinement factor for that direction multiplied by the current number of elements in that direction.  They must be integers..
         """ # nopep8
-        return self._cards[0].get_value("ifx_")
+        return self._cards[0].get_value("ifx")
 
-    @ifx_.setter
-    def ifx_(self, value: int) -> None:
-        """Set the ifx_ property."""
-        self._cards[0].set_value("ifx_", value)
+    @ifx.setter
+    def ifx(self, value: int) -> None:
+        """Set the ifx property."""
+        self._cards[0].set_value("ifx", value)
 
     @property
-    def ify_(self) -> int:
-        """Get or set the Refinement factor at each local direction. Please see remark 1.
+    def ify(self) -> int:
+        """Get or set the Refinement factor for each local direction.  The number of elements in each direction of the new mesh is the refinement factor for that direction multiplied by the current number of elements in that direction.  They must be integers..
         """ # nopep8
-        return self._cards[0].get_value("ify_")
+        return self._cards[0].get_value("ify")
 
-    @ify_.setter
-    def ify_(self, value: int) -> None:
-        """Set the ify_ property."""
-        self._cards[0].set_value("ify_", value)
+    @ify.setter
+    def ify(self, value: int) -> None:
+        """Set the ify property."""
+        self._cards[0].set_value("ify", value)
 
     @property
-    def ifz_(self) -> int:
-        """Get or set the Refinement factor at each local direction. Please see remark 1.
+    def ifz(self) -> int:
+        """Get or set the Refinement factor for each local direction.  The number of elements in each direction of the new mesh is the refinement factor for that direction multiplied by the current number of elements in that direction.  They must be integers..
         """ # nopep8
-        return self._cards[0].get_value("ifz_")
+        return self._cards[0].get_value("ifz")
 
-    @ifz_.setter
-    def ifz_(self, value: int) -> None:
-        """Set the ifz_ property."""
-        self._cards[0].set_value("ifz_", value)
+    @ifz.setter
+    def ifz(self, value: int) -> None:
+        """Set the ifz property."""
+        self._cards[0].set_value("ifz", value)
 

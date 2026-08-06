@@ -119,7 +119,7 @@ class ConstrainedMultipleGlobal(KeywordBase):
 
     @property
     def coef(self) -> typing.Optional[float]:
-        """Get or set the Coefficient ¦Ánid in constraint equation.
+        """Get or set the Coefficient nid in constraint equation.
         """ # nopep8
         return self._cards[2].get_value("coef")
 

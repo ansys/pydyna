@@ -87,7 +87,7 @@ class MatThermalDiscreteBeam(KeywordBase):
 
     @property
     def tro(self) -> typing.Optional[float]:
-        """Get or set the Thermal density:	EQ.0.0: default to structural density.
+        """Get or set the Thermal density: EQ.0.0: default to structural density.
         """ # nopep8
         return self._cards[0].get_value("tro")
 
@@ -99,6 +99,7 @@ class MatThermalDiscreteBeam(KeywordBase):
     @property
     def hc(self) -> typing.Optional[float]:
         """Get or set the Specific heat.
+        HC = (heat transfer coefficient) x (beam cross-sectional area)   [W / K] = [W / m*m K] x[m*m]
         """ # nopep8
         return self._cards[1].get_value("hc")
 
@@ -109,7 +110,7 @@ class MatThermalDiscreteBeam(KeywordBase):
 
     @property
     def tc(self) -> typing.Optional[float]:
-        """Get or set the Thermal conductance (SI units are W/K).HC = (heat transfer coefficient)x(beam cross section area)
+        """Get or set the Thermal conductance (SI units are W/K)
         """ # nopep8
         return self._cards[1].get_value("tc")
 

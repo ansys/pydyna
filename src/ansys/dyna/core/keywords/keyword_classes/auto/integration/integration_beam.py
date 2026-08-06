@@ -111,14 +111,28 @@ class IntegrationBeam(KeywordBase):
     @property
     def icst(self) -> int:
         """Get or set the Standard cross section type, ICST. If this type is nonzero then NIP and the relative area above should be input as zero.
-        EQ.1: W-section,
-        EQ.2: C-section,
-        EQ.3: Angle section,
-        EQ.4: T-section,
-        EQ.5: Rectangular tubing,
-        EQ.6: Z-section,
-        EQ.7: Trapezoidal section.
-        For further information see Users Manual section 17.1.
+        EQ.1: I-Shape
+        EQ.2: Channel
+        EQ.3: L-Shape
+        EQ.4: T-Shape
+        EQ.5: Tubular box
+        EQ.6: Z-Shape
+        EQ.7: Trapezoidal
+        EQ.8: Circular
+        EQ.9: Tubular
+        EQ.10: I-Shape2
+        EQ.11: Solid Box
+        EQ.12: Cross
+        EQ.13: H-Shape
+        EQ.14: T-Shape
+        EQ.15: I-SHape 3
+        EQ.16: Channel 2
+        EQ.17: Channel 3
+        EQ.18: T-Shape 3
+        EQ.19: Box-Shape 2
+        EQ.20: Hexagon
+        EQ.21: Hat-Shape
+        EQ.22: Hat-Shape 2
         """ # nopep8
         return self._cards[0].get_value("icst")
 
@@ -263,7 +277,7 @@ class IntegrationBeam(KeywordBase):
 
     @property
     def pid(self) -> typing.Optional[int]:
-        """Get or set the Optional PID, used to identify material properties for this integration point.  If zero, the  master  PID (referenced on *ELEMENT) will be used.
+        """Get or set the Optional PID, used to identify material properties for this integration point.  If zero, the PID (referenced on *ELEMENT_BEAM) will be used.
         """ # nopep8
         return self._cards[2].get_value("pid")
 

@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _IGAFACEXYZ_CARD0 = (
     FieldSchema("fid", int, 0, 10, None),
-    FieldSchema("nid", int, 10, 10, None),
+    FieldSchema("patchid", int, 10, 10, None),
     FieldSchema("ori", int, 20, 10, 0),
     FieldSchema("psid", int, 30, 10, None),
     FieldSchema("esid", int, 40, 10, None),
@@ -69,21 +69,21 @@ class IgaFaceXyz(KeywordBase):
         self._cards[0].set_value("fid", value)
 
     @property
-    def nid(self) -> typing.Optional[int]:
-        """Get or set the Physical bivariate NURBS ID, see *IGA_2D_NURBS_XYZ.
+    def patchid(self) -> typing.Optional[int]:
+        """Get or set the Depending on the keyword option either a physical bivariate NURBS patch ID for no keyword option (see *IGA_2D_NURBS_XYZ) or a bivariate basis transform patch ID for BASIS_TRANSFORM keyword option (see *IGA_2D_BASIS_TRANSFORM_XYZ).
         """ # nopep8
-        return self._cards[0].get_value("nid")
+        return self._cards[0].get_value("patchid")
 
-    @nid.setter
-    def nid(self, value: int) -> None:
-        """Set the nid property."""
-        self._cards[0].set_value("nid", value)
+    @patchid.setter
+    def patchid(self, value: int) -> None:
+        """Set the patchid property."""
+        self._cards[0].set_value("patchid", value)
 
     @property
     def ori(self) -> int:
         """Get or set the Orientation with respect to the physical bivariate NURBS.
         EQ.0: Same
-        EQ.1 : Reversed.
+        EQ.1: Reversed.
         """ # nopep8
         return self._cards[0].get_value("ori")
 

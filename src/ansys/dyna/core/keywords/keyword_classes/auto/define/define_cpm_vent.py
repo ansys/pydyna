@@ -60,6 +60,7 @@ _DEFINECPMVENT_CARD2 = (
     FieldSchema("psetpv", int, 40, 10, None),
     FieldSchema("sfpv", int, 50, 10, None),
     FieldSchema("lpatm", int, 60, 10, None),
+    FieldSchema("iblkof", int, 70, 10, None),
 )
 
 _DEFINECPMVENT_CARD3 = (
@@ -159,7 +160,9 @@ class DefineCpmVent(KeywordBase):
 
     @property
     def lcpc23(self) -> typing.Optional[int]:
-        """Get or set the Load curve defining vent hole coefficient as a function of pressure.
+        """Get or set the Load curve or function defining vent hole coefficient as a function of pressure.
+        GT.0: Load curve ID for *DEFINE_CURVE_FUNCTION and *DEFINE_CURVE
+        LT.0: *DEFINE_FUNCTION ID.
         """ # nopep8
         return self._cards[0].get_value("lcpc23")
 
@@ -208,14 +211,14 @@ class DefineCpmVent(KeywordBase):
     @property
     def iopt(self) -> typing.Optional[int]:
         """Get or set the Directional venting:
-        EQ.1:	In shell normal
-        EQ.2:	Against shell normal
+        EQ.1: In shell normal
+        EQ.2: Against shell normal
         One-way venting:
-        EQ.10:	In shell normal
-        EQ.20:	Against shell normal
+        EQ.10: In shell normal
+        EQ.20: Against shell normal
         Special vent option::
-        EQ.100:	Enable compression seal vent. Vent area is adjusted according to the formula below. See Remark 1.A_
-        EQ.200:	Enable push-out vent. Particle remains active while going through this external vent within the range of 2 times of its characteristic length
+        EQ.100: Enable compression seal vent. Vent area is adjusted according to the formula below. See Remark 1.A_
+        EQ.200: Enable push-out vent. Particle remains active while going through this external vent within the range of 2 times of its characteristic length
         """ # nopep8
         return self._cards[0].get_value("iopt")
 
@@ -278,7 +281,7 @@ class DefineCpmVent(KeywordBase):
     def pid1(self) -> typing.Optional[int]:
         """Get or set the PID1 and PID2 indicate parts for determining the local part pressures that can be used to evaluate the vent probability function. Depending on if a chamber is defined, how the local part pressures are evaluated changes (see *DEFINE_CPM_CHAMBER). PID1 and PID2 are optional if a chamber is defined, otherwise they are required input.
         When a chamber is defined, specifying PID1and PID2 causes the vent probability function to be evaluated from the difference of local part pressures between PID1and PID2.Otherwise the calculation involves the chamber pressure.This option is usually used for vents near a long sleeve which causes unrealistic venting using chamber pressure alone.
-        When a chamber is not defined, the vent probability function is evaluated from the difference of local part pressures between PID1and PID2, using the location of the part centers to help determine vent direction..If the part is an external part, the part pressure will be used.If the part is an internal part, the pressure on the shell’s positive normal side will be used.If the vent is an external vent, PID1 should be the same as PID2 to avoid input error.
+        When a chamber is not defined, the vent probability function is evaluated from the difference of local part pressures between PID1and PID2, using the location of the part centers to help determine vent direction..If the part is an external part, the part pressure will be used.If the part is an internal part, the pressure on the shells positive normal side will be used.If the vent is an external vent, PID1 should be the same as PID2 to avoid input error.
         """ # nopep8
         return self._cards[1].get_value("pid1")
 
@@ -291,7 +294,7 @@ class DefineCpmVent(KeywordBase):
     def pid2(self) -> typing.Optional[int]:
         """Get or set the PID1 and PID2 indicate parts for determining the local part pressures that can be used to evaluate the vent probability function. Depending on if a chamber is defined, how the local part pressures are evaluated changes (see *DEFINE_CPM_CHAMBER). PID1 and PID2 are optional if a chamber is defined, otherwise they are required input.
         When a chamber is defined, specifying PID1and PID2 causes the vent probability function to be evaluated from the difference of local part pressures between PID1and PID2.Otherwise the calculation involves the chamber pressure.This option is usually used for vents near a long sleeve which causes unrealistic venting using chamber pressure alone.
-        When a chamber is not defined, the vent probability function is evaluated from the difference of local part pressures between PID1and PID2, using the location of the part centers to help determine vent direction..If the part is an external part, the part pressure will be used.If the part is an internal part, the pressure on the shell’s positive normal side will be used.If the vent is an external vent, PID1 should be the same as PID2 to avoid input error.
+        When a chamber is not defined, the vent probability function is evaluated from the difference of local part pressures between PID1and PID2, using the location of the part centers to help determine vent direction..If the part is an external part, the part pressure will be used.If the part is an internal part, the pressure on the shells positive normal side will be used.If the vent is an external vent, PID1 should be the same as PID2 to avoid input error.
         """ # nopep8
         return self._cards[1].get_value("pid2")
 
@@ -303,7 +306,7 @@ class DefineCpmVent(KeywordBase):
     @property
     def vang(self) -> float:
         """Get or set the Cone angle in degrees. Particle goes through this vent will be redirection based on this angle.  This option is only valid with internal vent.
-        GT.0:	cone angle (maximum 270)
+        GT.0: cone angle (maximum 270)
         EQ.0: disabled (Default)
         EQ.-1: direction follows the vent normal
         EQ.-2: direction follows local coordinates system defined by the following three nodes
@@ -373,8 +376,8 @@ class DefineCpmVent(KeywordBase):
     @property
     def psetpv(self) -> typing.Optional[int]:
         """Get or set the |PSETPV | is a part set ID for internal airbag parts that interact with the push-out vent (IOPT = 200). The sign determines where the ambient pressure is applied:
-        GT.0:	Ambient pressure is applied to elements in these parts that are at least a distance of SFPV×CL  away from the vent.
-        LT.0 : Ambient pressure is applied to elements in these parts that are within a distance of SFPV×CL  of the vent.
+        GT.0: Ambient pressure is applied to elements in these parts that are at least a distance of SFPVCL  away from the vent.
+        LT.0: Ambient pressure is applied to elements in these parts that are within a distance of SFPVCL  of the vent.
         """ # nopep8
         return self._cards[2].get_value("psetpv")
 
@@ -406,10 +409,23 @@ class DefineCpmVent(KeywordBase):
         self._cards[2].set_value("lpatm", value)
 
     @property
+    def iblkof(self) -> typing.Optional[int]:
+        """Get or set the Flag for turning off blockage treatment. This flag only applies when IBLOCK is nonzero on *AIRBAG_PARTICLE.
+        EQ.0: Use IBLOCK from *AIRBAG_PARTICLE(default).
+        EQ.1: Turn off blockage treatment.
+        """ # nopep8
+        return self._cards[2].get_value("iblkof")
+
+    @iblkof.setter
+    def iblkof(self, value: int) -> None:
+        """Set the iblkof property."""
+        self._cards[2].set_value("iblkof", value)
+
+    @property
     def jtnd(self) -> typing.Optional[int]:
         """Get or set the Node/Node Set for applying vent reaction force
-        GT.0:	Node ID
-        LT.0 : Node Set ID.The average force is evenly applied among the nodes in the node set.
+        GT.0: Node ID
+        LT.0: Node Set ID.The average force is evenly applied among the nodes in the node set.
         """ # nopep8
         return self._cards[3].get_value("jtnd")
 

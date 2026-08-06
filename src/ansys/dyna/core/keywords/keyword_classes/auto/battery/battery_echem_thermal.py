@@ -27,13 +27,13 @@ from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _BATTERYECHEMTHERMAL_CARD0 = (
-    FieldSchema("thame", str, 0, 10, None),
-    FieldSchema("tid", int, 10, 10, None),
-    FieldSchema("iprt", int, 20, 10, None),
-    FieldSchema("cp", float, 30, 10, None),
-    FieldSchema("hconv", float, 40, 10, None),
-    FieldSchema("temp", float, 50, 10, None),
-    FieldSchema("dudt", float, 60, 10, None),
+    FieldSchema("tname", str, 0, 10, None),
+    FieldSchema("ittype", int, 10, 10, 0),
+    FieldSchema("iprt", int, 20, 10, 0),
+    FieldSchema("unused", float, 30, 10, None),
+    FieldSchema("unused", float, 40, 10, None),
+    FieldSchema("unused", float, 50, 10, None),
+    FieldSchema("iarr", float, 60, 10, 0.0),
 )
 
 _BATTERYECHEMTHERMAL_CARD1 = (
@@ -60,89 +60,61 @@ class BatteryEchemThermal(KeywordBase):
             ),
         ]
     @property
-    def thame(self) -> typing.Optional[str]:
+    def tname(self) -> typing.Optional[str]:
         """Get or set the Thermal material identifier
         """ # nopep8
-        return self._cards[0].get_value("thame")
+        return self._cards[0].get_value("tname")
 
-    @thame.setter
-    def thame(self, value: str) -> None:
-        """Set the thame property."""
-        self._cards[0].set_value("thame", value)
+    @tname.setter
+    def tname(self, value: str) -> None:
+        """Set the tname property."""
+        self._cards[0].set_value("tname", value)
 
     @property
-    def tid(self) -> typing.Optional[int]:
-        """Get or set the Material identifier
-        EQ.0:	Constant temperature mode.
-        EQ.1 : Isothermal temperature with time.
-        EQ.2 : Thermal coupling with LS - DYNA thermal solver
+    def ittype(self) -> int:
+        """Get or set the Flag for how temperature is determined:
+        EQ.0:Constant temperature mode.
+        EQ.1:Isothermal temperature with time.
+        EQ.2:Thermal coupling with LS - DYNA thermal solver
         """ # nopep8
-        return self._cards[0].get_value("tid")
+        return self._cards[0].get_value("ittype")
 
-    @tid.setter
-    def tid(self, value: int) -> None:
-        """Set the tid property."""
-        self._cards[0].set_value("tid", value)
+    @ittype.setter
+    def ittype(self, value: int) -> None:
+        """Set the ittype property."""
+        if value not in [0, 1, None]:
+            raise Exception("""ittype must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("ittype", value)
 
     @property
-    def iprt(self) -> typing.Optional[int]:
+    def iprt(self) -> int:
         """Get or set the Data print in ASCII format
-        EQ.0:	No data print out.
-        EQ.1 : Time vs.heat flux print out for thermal solver.
-        EQ.2 : Time vs.cell temperature print out
+        EQ.0:No data print out.
+        EQ.1:Time versus heat flux print out for thermal solver.
         """ # nopep8
         return self._cards[0].get_value("iprt")
 
     @iprt.setter
     def iprt(self, value: int) -> None:
         """Set the iprt property."""
+        if value not in [0, 1, None]:
+            raise Exception("""iprt must be `None` or one of {0,1}.""")
         self._cards[0].set_value("iprt", value)
 
     @property
-    def cp(self) -> typing.Optional[float]:
-        """Get or set the The specific heat coefficient of the cell. (J/Kg K)
+    def iarr(self) -> float:
+        """Get or set the Arrhenius temperature corrections (See Remark 2):
+        EQ.0 : Off
+        EQ.1 : On
         """ # nopep8
-        return self._cards[0].get_value("cp")
+        return self._cards[0].get_value("iarr")
 
-    @cp.setter
-    def cp(self, value: float) -> None:
-        """Set the cp property."""
-        self._cards[0].set_value("cp", value)
-
-    @property
-    def hconv(self) -> typing.Optional[float]:
-        """Get or set the Convective heat transfer coefficient with external medium. (W/m2K)
-        """ # nopep8
-        return self._cards[0].get_value("hconv")
-
-    @hconv.setter
-    def hconv(self, value: float) -> None:
-        """Set the hconv property."""
-        self._cards[0].set_value("hconv", value)
-
-    @property
-    def temp(self) -> typing.Optional[float]:
-        """Get or set the Ambient temperature around the cell stack. (K)
-        """ # nopep8
-        return self._cards[0].get_value("temp")
-
-    @temp.setter
-    def temp(self, value: float) -> None:
-        """Set the temp property."""
-        self._cards[0].set_value("temp", value)
-
-    @property
-    def dudt(self) -> typing.Optional[float]:
-        """Get or set the The temperature coefficient of open circuit potential (V/K).
-        EQ.0:	Constant coefficient given by MULT.
-        EQ.1 : Coefficient as function of temperature
-        """ # nopep8
-        return self._cards[0].get_value("dudt")
-
-    @dudt.setter
-    def dudt(self, value: float) -> None:
-        """Set the dudt property."""
-        self._cards[0].set_value("dudt", value)
+    @iarr.setter
+    def iarr(self, value: float) -> None:
+        """Set the iarr property."""
+        if value not in [0, 1, None]:
+            raise Exception("""iarr must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("iarr", value)
 
     @property
     def filename(self) -> typing.Optional[str]:

@@ -76,12 +76,12 @@ class DatabaseProfile(KeywordBase):
     @property
     def stype(self) -> int:
         """Get or set the Set type:
-        EQ.1:	Node Set,
-        EQ.2:	Solid Set,
-        EQ.3:	Shell Set,
-        EQ.4:	Segment Set,
-        EQ.5:	Beam Set.
-        EQ.6:	tshell set
+        EQ.1: Node Set,
+        EQ.2: Solid Set,
+        EQ.3: Shell Set,
+        EQ.4: Segment Set,
+        EQ.5: Beam Set.
+        EQ.6: tshell set
         """ # nopep8
         return self._cards[0].get_value("stype")
 
@@ -95,33 +95,33 @@ class DatabaseProfile(KeywordBase):
     @property
     def data(self) -> int:
         """Get or set the Data type:
-        EQ.1:	x-velocity,
-        EQ.2:	y-velocity,
-        EQ.3:	z-velocity,
-        EQ.4:	velocity magnitude,
-        EQ.5:	x-acceleration,
-        EQ.6:	y-acceleration,
-        EQ.7:	z-acceleration,
-        EQ.8:	acceleration magnitude,
-        EQ.9:	pressure,
-        EQ.10:	xx-stress,
-        EQ.11:	yy-stress,
-        EQ.12:	zz-stress,
-        EQ.13:	xy-stress,
-        EQ.14:	yz-stress,
-        EQ.15:	zx-stress,
-        EQ.16:	temperature,
-        EQ.17:	volume fraction,
-        EQ.18:	kinetic energy,
-        EQ.19:	internal energy,
-        EQ.20:	density.
-        EQ.21:	xx-strain,
-        EQ.22:	yy-strain,
-        EQ.23:	zz-strain,
-        EQ.24:	xy-strain,
-        EQ.25:	yz-strain,
-        EQ.26:	zx-strain.
-        EQ.27:	effective plastic strain
+        EQ.1: x-velocity,
+        EQ.2: y-velocity,
+        EQ.3: z-velocity,
+        EQ.4: velocity magnitude,
+        EQ.5: x-acceleration,
+        EQ.6: y-acceleration,
+        EQ.7: z-acceleration,
+        EQ.8: acceleration magnitude,
+        EQ.9: pressure,
+        EQ.10: xx-stress,
+        EQ.11: yy-stress,
+        EQ.12: zz-stress,
+        EQ.13: xy-stress,
+        EQ.14: yz-stress,
+        EQ.15: zx-stress,
+        EQ.16: temperature,
+        EQ.17: volume fraction,
+        EQ.18: kinetic energy,
+        EQ.19: internal energy,
+        EQ.20: density.
+        EQ.21: xx-strain,
+        EQ.22: yy-strain,
+        EQ.23: zz-strain,
+        EQ.24: xy-strain,
+        EQ.25: yz-strain,
+        EQ.26: zx-strain.
+        EQ.27: effective plastic strain
         """ # nopep8
         return self._cards[0].get_value("data")
 
@@ -135,10 +135,10 @@ class DatabaseProfile(KeywordBase):
     @property
     def dir(self) -> int:
         """Get or set the Direction:
-        EQ.1:	x-direction,
-        EQ.2:	y-direction,
-        EQ.3:	z-direction,
-        EQ.4:	Curvilinear (relative distances between elements of set ID are added up in the order defined by the set)
+        EQ.1: x-direction,
+        EQ.2: y-direction,
+        EQ.3: z-direction,
+        EQ.4: Curvilinear (relative distances between elements of set ID are added up in the order defined by the set)
         """ # nopep8
         return self._cards[0].get_value("dir")
 
@@ -152,8 +152,8 @@ class DatabaseProfile(KeywordBase):
     @property
     def updloc(self) -> int:
         """Get or set the Flag to update the set location
-        EQ.0:	Only the initial position of set ID is considered
-        EQ.1:	The positions of the elements composing the set are updated each DT
+        EQ.0: Only the initial position of set ID is considered
+        EQ.1: The positions of the elements composing the set are updated each DT
         """ # nopep8
         return self._cards[0].get_value("updloc")
 
@@ -167,8 +167,8 @@ class DatabaseProfile(KeywordBase):
     @property
     def mmg(self) -> typing.Optional[int]:
         """Get or set the Multi-Material ALE group id. See Remark 2.
-        GT.0:	Multi-Material ALE group id
-        LT.0:	|MMG| is the id of a *SET_MULTI-MATERIAL_GROUP_LIST that can list several Multi-Material ALE group ids.
+        GT.0: Multi-Material ALE group id
+        LT.0: |MMG| is the id of a *SET_MULTI-MATERIAL_GROUP_LIST that can list several Multi-Material ALE group ids.
         """ # nopep8
         return self._cards[0].get_value("mmg")
 

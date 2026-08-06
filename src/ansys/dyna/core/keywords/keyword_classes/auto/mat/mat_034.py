@@ -53,8 +53,8 @@ _MAT034_CARD1 = (
 
 _MAT034_CARD2 = (
     FieldSchema("aopt", float, 0, 10, None),
-    FieldSchema("flc", float, 10, 10, None),
-    FieldSchema("fac", float, 20, 10, None),
+    FieldSchema("flc_x2", float, 10, 10, None, "flc/x2"),
+    FieldSchema("fac_x3", float, 20, 10, None, "fac/x3"),
     FieldSchema("ela", float, 30, 10, None),
     FieldSchema("lnrc", float, 40, 10, 0.0),
     FieldSchema("form", int, 50, 10, 0),
@@ -106,7 +106,7 @@ _MAT034_CARD7 = (
     FieldSchema("lcaa", int, 0, 10, None),
     FieldSchema("lcbb", int, 10, 10, None),
     FieldSchema("h", float, 20, 10, None),
-    FieldSchema("dt", int, 30, 10, None),
+    FieldSchema("dt", float, 30, 10, None),
     FieldSchema("unused", int, 40, 10, None),
     FieldSchema("ecoat", float, 50, 10, None),
     FieldSchema("scoat", float, 60, 10, None),
@@ -314,7 +314,7 @@ class Mat034(KeywordBase):
 
     @property
     def damp(self) -> typing.Optional[float]:
-        """Get or set the Rayleigh damping coefficient.  A 0.05 coefficient is recommended corresponding to 5% of critical damping.  Sometimes larger values are necessary
+        """Get or set the Rayleigh damping coefficient. A 0.05 coefficient is recommended corresponding to 5% of critical damping. Sometimes larger values are necessary
         """ # nopep8
         return self._cards[1].get_value("damp")
 
@@ -325,14 +325,11 @@ class Mat034(KeywordBase):
 
     @property
     def aopt(self) -> typing.Optional[float]:
-        """Get or set the Material axes option:
-        EQ.0.0: locally orthotropic with material axes determined by
-        element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
-        EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
-        EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
-        LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
-        *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
+        """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC for a more complete description). Also, please refer to Remark 5 for additional information specific to fiber directions for fabrics:
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES,and then rotated about the element normal by an angle BETA
+        EQ.2.0 : Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
+        EQ.3.0 : Locally orthotropic material axes determined by rotating the material axes about the element normal by an angle, BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal
+        LT.0.0 : The absolute value of AOPT is a coordinate system ID number(CID on * DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM or *DEFINE_COORDINATE_VECTOR).
         """ # nopep8
         return self._cards[2].get_value("aopt")
 
@@ -342,33 +339,33 @@ class Mat034(KeywordBase):
         self._cards[2].set_value("aopt", value)
 
     @property
-    def flc(self) -> typing.Optional[float]:
+    def flc_x2(self) -> typing.Optional[float]:
         """Get or set the Fabric leakage coefficient (optional), FLC
         LT.0.0: |FLC| is the load curve ID of the curve defining FLC versus time.
         """ # nopep8
-        return self._cards[2].get_value("flc")
+        return self._cards[2].get_value("flc_x2")
 
-    @flc.setter
-    def flc(self, value: float) -> None:
-        """Set the flc property."""
-        self._cards[2].set_value("flc", value)
+    @flc_x2.setter
+    def flc_x2(self, value: float) -> None:
+        """Set the flc_x2 property."""
+        self._cards[2].set_value("flc_x2", value)
 
     @property
-    def fac(self) -> typing.Optional[float]:
+    def fac_x3(self) -> typing.Optional[float]:
         """Get or set the Fabric area coefficient (optional), FAC
         LT.0.0: |FAC| is the load curve ID of the curve defining FAC versus ABSOLUTE pressure.
         """ # nopep8
-        return self._cards[2].get_value("fac")
+        return self._cards[2].get_value("fac_x3")
 
-    @fac.setter
-    def fac(self, value: float) -> None:
-        """Set the fac property."""
-        self._cards[2].set_value("fac", value)
+    @fac_x3.setter
+    def fac_x3(self, value: float) -> None:
+        """Set the fac_x3 property."""
+        self._cards[2].set_value("fac_x3", value)
 
     @property
     def ela(self) -> typing.Optional[float]:
         """Get or set the Effective leakage area for blocked fabric, ELA.
-        LT.0.0: |ELA| is the load curve ID of the curve defining ELA versus time. The default value of zero assumes that no leakage occurs. A value of .10 would assume that 10% of the blocked fabric is leaking gas.
+        LT.0.0: |ELA| is the load curve ID of the curve defining ELA versus time. The default value of zero means that no leakage occurs. A value of .10 would assume that 10% of the blocked fabric is leaking gas.
         """ # nopep8
         return self._cards[2].get_value("ela")
 
@@ -379,7 +376,7 @@ class Mat034(KeywordBase):
 
     @property
     def lnrc(self) -> float:
-        """Get or set the Flag to turn off compression in liner until the reference geometry is reached.
+        """Get or set the Flag to turn off compression in the liner until the reference geometry is reached.
         EQ.0.0: off (default),
         EQ.1.0: on.
         """ # nopep8
@@ -399,7 +396,7 @@ class Mat034(KeywordBase):
         EQ.1:invarient local membrane coordinate system
         EQ.2:Green-Lagrange strain formulation
         EQ.3:large strain with nonorthogonal material angles.
-        EQ.4:large strain with nonorthogonal material angles and nonlinear stress strain behavior. Define optional load curve IDs on optional card.
+        EQ.4:large strain with nonorthogonal material angles and nonlinear stress strain behavior. Define optional load curve IDs on the optional card.
         EQ12,13,14 are the updated versions of forms 2,3,4 respectively
         EQ.#14.0: Same as form 14, but invokes reading of card 7
         EQ.24.0: Enhanced version of formulation 14. See Remark 11.
@@ -415,7 +412,7 @@ class Mat034(KeywordBase):
 
     @property
     def fvopt(self) -> int:
-        """Get or set the Fabric venting option.
+        """Get or set the Fabric venting option (see Remarks 9, 17, and 18):
         EQ. 1: Wang-Nefske formulas for venting through an orifice are used. Blockage is not considered.
         EQ. 2: Wang-Nefske formulas for venting through an orifice are used. Blockage of venting area due to contact is considered.
         EQ. 3: Leakage formulas of Graefe, Krummheuer, and Siejak [1990] are used. Blockage is not considered.
@@ -424,7 +421,7 @@ class Mat034(KeywordBase):
         EQ. 6: Leakage formulas based on flow through a porous media are used. Blockage of venting area due to contact is considered.
         EQ. 7: Leakage is based on gas volume outflow versus pressure load curve. Blockage is not considered. Absolute pressure is used in the porous-velocity-versus-pressure load curve, given as FAC in the *MAT_FABRIC card.
         EQ. 8: Leakage is based on gas volume outflow versus pressure load curve. Blockage of venting or porous area due to contact is considered. Absolute pressure is used in the porous-velocity-versus-pressure load curve, given as FAC in the *MAT_FABRIC card.
-        LT.0:	|FVOPT| defines the same fabric venting options as above, but a new formula for the leakage area is used to replace the element area. See Remark 16.
+        LT.0: |FVOPT| defines the same fabric venting options as above, but a new formula for the leakage area is used to replace the element area. See Remark 16.
         """ # nopep8
         return self._cards[2].get_value("fvopt")
 
@@ -437,8 +434,8 @@ class Mat034(KeywordBase):
     def tsrfac(self) -> float:
         """Get or set the Tensile stress cutoff reduction factor:
         LT.0: |TSRFAC| is the load curve ID of the curve defining TSRFAC versus time.
-        GT.0 and LT.1:	TSRFAC applied from time 0.
-        GE.1:	TSRFAC is the ID of a curve that defines TSRFAC versus time using an alternate method (not available for FORM=0 or 1).
+        GT.0 and LT.1: TSRFAC applied from time 0.
+        GE.1: TSRFAC is the ID of a curve that defines TSRFAC versus time using an alternate method (not available for FORM=0 or 1).
         """ # nopep8
         return self._cards[2].get_value("tsrfac")
 
@@ -504,7 +501,7 @@ class Mat034(KeywordBase):
 
     @property
     def rgbrth(self) -> typing.Optional[float]:
-        """Get or set the Material dependent birth time of airbag reference geometry. Nonzero
+        """Get or set the Material dependent birth time of the airbag reference geometry. Nonzero
         RGBRTH overwrites the birth time defined in the *AIRBAG_REFERENCE_GEOMETRY_BIRTH section. RGBRTH also applies to
         reference geometry defined by *AIRBAG_SHELL_REFERENCE_GEOMETRY
         """ # nopep8
@@ -518,8 +515,8 @@ class Mat034(KeywordBase):
     @property
     def a0ref(self) -> int:
         """Get or set the Calculation option of initial area, A0, used for airbag porosity leakage calculation.
-        EQ.0.:	default.  Use the initial geometry defined in *NODE.
-        EQ.1.:	Use the reference geometry defined in *AIRBAG_REFERENCE_GEOMETRY or *AIRBAG_SHELL_REFERENCE_GEOMETRY.
+        EQ.0.: default. Use the initial geometry defined in *NODE.
+        EQ.1.: Use the reference geometry defined in *AIRBAG_REFERENCE_GEOMETRY or *AIRBAG_SHELL_REFERENCE_GEOMETRY.
         """ # nopep8
         return self._cards[4].get_value("a0ref")
 
@@ -566,6 +563,7 @@ class Mat034(KeywordBase):
     @property
     def x0(self) -> typing.Optional[float]:
         """Get or set the Coefficients of Anagonye and Wang [1999] porosity equation for the leakage area:
+        EQ.-1: Compressing seal vent option
         """ # nopep8
         return self._cards[4].get_value("x0")
 
@@ -632,8 +630,8 @@ class Mat034(KeywordBase):
     @property
     def isrefg(self) -> int:
         """Get or set the Initial stress by reference geometry for FORM=12
-        EQ.0.0:  default.  Not active.
-        EQ.1.0:  active
+        EQ.0.0: default. Not active.
+        EQ.1.0: active
         """ # nopep8
         return self._cards[5].get_value("isrefg")
 
@@ -712,7 +710,7 @@ class Mat034(KeywordBase):
 
     @property
     def rl(self) -> typing.Optional[float]:
-        """Get or set the Optional reloading parameter for FORM=14.  Values between 0.0 (reloading on unloading curve-default) and 1.0 (reloading on a minimum linear slope between unloading curve and loading curve) are possible.
+        """Get or set the Optional reloading parameter for FORM=14. Values between 0.0 (reloading on unloading curve-default) and 1.0 (reloading on a minimum linear slope between unloading curve and loading curve) are possible.
         """ # nopep8
         return self._cards[6].get_value("rl")
 
@@ -755,7 +753,7 @@ class Mat034(KeywordBase):
         self._cards[7].set_value("h", value)
 
     @property
-    def dt(self) -> typing.Optional[int]:
+    def dt(self) -> typing.Optional[float]:
         """Get or set the Strain rate averaging option.
         EQ.0.0: Strain rate is evaluated using a running average.
         LT.0.0: Strain rate is evaluated using average of last 11 time steps.
@@ -764,7 +762,7 @@ class Mat034(KeywordBase):
         return self._cards[7].get_value("dt")
 
     @dt.setter
-    def dt(self, value: int) -> None:
+    def dt(self, value: float) -> None:
         """Set the dt property."""
         self._cards[7].set_value("dt", value)
 

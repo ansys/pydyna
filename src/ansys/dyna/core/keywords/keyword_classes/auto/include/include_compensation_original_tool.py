@@ -47,7 +47,7 @@ class IncludeCompensationOriginalTool(KeywordBase):
         ]
     @property
     def filename(self) -> typing.Optional[str]:
-        """Get or set the Name of the keyword files containing nodes and elements information, with adaptive constraints if exist. Currently all blanks must have the same numbers of nodes and elements.
+        """Get or set the Original tool (without any compensation) mesh file that contains node and element information in keyword format.
         """ # nopep8
         return self._cards[0].get_value("filename")
 

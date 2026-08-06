@@ -42,6 +42,17 @@ _SETDISCRETEGENERAL_CARD1 = (
     FieldSchema("e7", int, 70, 10, None),
 )
 
+_SETDISCRETEGENERAL_CARD2 = (
+    FieldSchema("option", str, 0, 10, "ALL"),
+    FieldSchema("e1", int, 10, 10, None),
+    FieldSchema("e2", int, 20, 10, None),
+    FieldSchema("e3", int, 30, 10, None),
+    FieldSchema("e4", int, 40, 10, None),
+    FieldSchema("e5", int, 50, 10, None),
+    FieldSchema("e6", int, 60, 10, None),
+    FieldSchema("e7", int, 70, 10, None),
+)
+
 _SETDISCRETEGENERAL_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
@@ -68,6 +79,10 @@ class SetDiscreteGeneral(KeywordBase):
                 _SETDISCRETEGENERAL_CARD1,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _SETDISCRETEGENERAL_CARD2,
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = SetDiscreteGeneral._option_spec_list[0],
                 cards = [
@@ -92,21 +107,23 @@ class SetDiscreteGeneral(KeywordBase):
 
     @property
     def option(self) -> str:
-        """Get or set the OPTION.EQ.ALL: All discrete elements will be included in the set,
-        OPTION.EQ.ELEM: Discrete elements E1...E7 will be included in the current set,
-        OPTION.EQ.DELEM: Discrete elements E1...E7 previously added will be excluded from the current set,
-        OPTION.EQ.PART: Discrete elements from parts E1...E7 will be included in the current set,
-        OPTION.EQ.DPART: Discrete elements from parts E1...E7 previously added will be excluded from the current set,
-        OPTION.EQ.BOX: Discrete elements inside boxes E1...E7 will be included in the current set,
-        OPTION.EQ.DBOX: Discrete elements inside boxes E1...E7 previously added will be excluded from the current set.
+        """Get or set the OPTION.EQ.ALL: All discrete elements will be included in the set.See Remark 1.
+        OPTION..EQ.ELEM: Discrete elements E1...E7 will be included. See Remark 1.
+        OPTION.EQ.DELEM: Discrete elements E1...E7 previously added will be excluded from the current set.See Remark 1.
+        OPTION.EQ.PART: Discrete elements from parts E1...E7 will be included in the current set.See Remark 1.
+        OPTION.EQ.DPART: Discrete elements from parts E1...E7 previously added will be excluded from the current set.See Remark 1.
+        OPTION.EQ.BOX:Elements inside boxes E1, E2, E3, ... will be included. See *DEFINE_BOX. See Remark 1.
+        OPTION.EQ.DBOX:Previously added elements that are inside boxes E1, E2, E3, ... will be excluded.See Remark 1.
+        OPTION.EQ.SET:Elements of discrete element sets E1, E2, E3, ... will be included.See Remark 1.
+        OPTION.EQ.DSET: Previously added elements that are members of discrete element sets E1, E2, E3, ... will be excluded.See Remark 1.
         """ # nopep8
         return self._cards[1].get_value("option")
 
     @option.setter
     def option(self, value: str) -> None:
         """Set the option property."""
-        if value not in ["ALL", "ELEM", "DELEM", "PART", "DPART", "BOX", "DBOX", None]:
-            raise Exception("""option must be `None` or one of {"ALL","ELEM","DELEM","PART","DPART","BOX","DBOX"}.""")
+        if value not in ["ALL", "ELEM", "DELEM", "PART", "DPART", "BOX", "DBOX", "SET", "DSET", None]:
+            raise Exception("""option must be `None` or one of {"ALL","ELEM","DELEM","PART","DPART","BOX","DBOX","SET","DSET"}.""")
         self._cards[1].set_value("option", value)
 
     @property
@@ -229,15 +246,155 @@ class SetDiscreteGeneral(KeywordBase):
         self._cards[1].set_value("e7", value)
 
     @property
+    def option(self) -> str:
+        """Get or set the OPTION.EQ.ALL: All discrete elements will be included in the set,
+        OPTION..EQ.ELEM: Discrete elements E1...E7 will be included in the current set,
+        OPTION.EQ.DELEM: Discrete elements E1...E7 previously added will be excluded from the current set,
+        OPTION.EQ.PART: Discrete elements from parts E1...E7 will be included in the current set,
+        OPTION.EQ.DPART: Discrete elements from parts E1...E7 previously added will be excluded from the current set,
+        OPTION.EQ.BOX:Elements inside boxes E1, E2, E3, ... will be included.  (see *DEFINE_BOX)
+        OPTION.EQ.DBOX:Previously added elements that are inside boxes E1, E2, E3, ... will be excluded.
+        OPTION.EQ.SET:Elements of discrete element sets E1, E2, E3, ... will be included
+        OPTION.EQ.DSET: Previously added elements that are members of discrete element sets E1, E2, E3, ... will be excluded.
+        """ # nopep8
+        return self._cards[2].get_value("option")
+
+    @option.setter
+    def option(self, value: str) -> None:
+        """Set the option property."""
+        if value not in ["ALL", "ELEM", "DELEM", "PART", "DPART", "BOX", "DBOX", "SET", "DSET", None]:
+            raise Exception("""option must be `None` or one of {"ALL","ELEM","DELEM","PART","DPART","BOX","DBOX","SET","DSET"}.""")
+        self._cards[2].set_value("option", value)
+
+    @property
+    def e1(self) -> typing.Optional[int]:
+        """Get or set the OPTION.EQ.ALL: E1 not used,
+        OPTION.EQ.ELEM: Discrete element E1 will be included in the current set,
+        OPTION.EQ.DELEM: Discrete element E1 will be excluded from the current set,
+        OPTION.EQ.PART: Discrete elements from part E1 will be included in the current set,
+        OPTION.EQ.DPART: Discrete elements from part E1 will be excluded from the current set,
+        OPTION.EQ.BOX: Discrete elements inside box E1 will be included in the current set,
+        OPTION.EQ.DBOX: Discrete elements inside box E1 will be excluded from the current set.
+        """ # nopep8
+        return self._cards[2].get_value("e1")
+
+    @e1.setter
+    def e1(self, value: int) -> None:
+        """Set the e1 property."""
+        self._cards[2].set_value("e1", value)
+
+    @property
+    def e2(self) -> typing.Optional[int]:
+        """Get or set the OPTION.EQ.ALL: E2 not used,
+        OPTION.EQ.ELEM: Discrete element E2 will be included in the current set,
+        OPTION.EQ.DELEM: Discrete element E2 will be excluded from the current set,
+        OPTION.EQ.PART: Discrete elements from part E2 will be included in the current set,
+        OPTION.EQ.DPART: Discrete elements from part E2 will be excluded from the current set,
+        OPTION.EQ.BOX: Discrete elements inside box E2 will be included in the current set,
+        OPTION.EQ.DBOX: Discrete elements inside box E2 will be excluded from the current set.
+        """ # nopep8
+        return self._cards[2].get_value("e2")
+
+    @e2.setter
+    def e2(self, value: int) -> None:
+        """Set the e2 property."""
+        self._cards[2].set_value("e2", value)
+
+    @property
+    def e3(self) -> typing.Optional[int]:
+        """Get or set the OPTION.EQ.ALL: E3 not used,
+        OPTION.EQ.ELEM: Discrete element E3 will be included in the current set,
+        OPTION.EQ.DELEM: Discrete element E3 will be excluded from the current set,
+        OPTION.EQ.PART: Discrete elements from part E3 will be included in the current set,
+        OPTION.EQ.DPART: Discrete elements from part E3 will be excluded from the current set,
+        OPTION.EQ.BOX: Discrete elements inside box E3 will be included in the current set,
+        OPTION.EQ.DBOX: Discrete elements inside box E3 will be excluded from the current set.
+        """ # nopep8
+        return self._cards[2].get_value("e3")
+
+    @e3.setter
+    def e3(self, value: int) -> None:
+        """Set the e3 property."""
+        self._cards[2].set_value("e3", value)
+
+    @property
+    def e4(self) -> typing.Optional[int]:
+        """Get or set the OPTION.EQ.ALL: E4 not used,
+        OPTION.EQ.ELEM: Discrete element E4 will be included in the current set,
+        OPTION.EQ.DELEM: Discrete element E4 will be excluded from the current set,
+        OPTION.EQ.PART: Discrete elements from part E4 will be included in the current set,
+        OPTION.EQ.DPART: Discrete elements from part E4 will be excluded from the current set,
+        OPTION.EQ.BOX: Discrete elements inside box E4 will be included in the current set,
+        OPTION.EQ.DBOX: Discrete elements inside box E4 will be excluded from the current set.
+        """ # nopep8
+        return self._cards[2].get_value("e4")
+
+    @e4.setter
+    def e4(self, value: int) -> None:
+        """Set the e4 property."""
+        self._cards[2].set_value("e4", value)
+
+    @property
+    def e5(self) -> typing.Optional[int]:
+        """Get or set the OPTION.EQ.ALL: E5 not used,
+        OPTION.EQ.ELEM: Discrete element E5 will be included in the current set,
+        OPTION.EQ.DELEM: Discrete element E5 will be excluded from the current set,
+        OPTION.EQ.PART: Discrete elements from part E5 will be included in the current set,
+        OPTION.EQ.DPART: Discrete elements from part E5 will be excluded from the current set,
+        OPTION.EQ.BOX: Discrete elements inside box E5 will be included in the current set,
+        OPTION.EQ.DBOX: Discrete elements inside box E5 will be excluded from the current set.
+        """ # nopep8
+        return self._cards[2].get_value("e5")
+
+    @e5.setter
+    def e5(self, value: int) -> None:
+        """Set the e5 property."""
+        self._cards[2].set_value("e5", value)
+
+    @property
+    def e6(self) -> typing.Optional[int]:
+        """Get or set the OPTION.EQ.ALL: E6 not used,
+        OPTION.EQ.ELEM: Discrete element E6 will be included in the current set,
+        OPTION.EQ.DELEM: Discrete element E6 will be excluded from the current set,
+        OPTION.EQ.PART: Discrete elements from part E6 will be included in the current set,
+        OPTION.EQ.DPART: Discrete elements from part E6 will be excluded from the current set,
+        OPTION.EQ.BOX: Discrete elements inside box E6 will be included in the current set,
+        OPTION.EQ.DBOX: Discrete elements inside box E6 will be excluded from the current set.
+        """ # nopep8
+        return self._cards[2].get_value("e6")
+
+    @e6.setter
+    def e6(self, value: int) -> None:
+        """Set the e6 property."""
+        self._cards[2].set_value("e6", value)
+
+    @property
+    def e7(self) -> typing.Optional[int]:
+        """Get or set the OPTION.EQ.ALL: E7 not used,
+        OPTION.EQ.ELEM: Discrete element E7 will be included in the current set,
+        OPTION.EQ.DELEM: Discrete element E7 will be excluded from the current set,
+        OPTION.EQ.PART: Discrete elements from part E7 will be included in the current set,
+        OPTION.EQ.DPART: Discrete elements from part E7 will be excluded from the current set,
+        OPTION.EQ.BOX: Discrete elements inside box E7 will be included in the current set,
+        OPTION.EQ.DBOX: Discrete elements inside box E7 will be excluded from the current set.
+        """ # nopep8
+        return self._cards[2].get_value("e7")
+
+    @e7.setter
+    def e7(self, value: int) -> None:
+        """Set the e7 property."""
+        self._cards[2].set_value("e7", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[2].cards[0].get_value("title")
+        return self._cards[3].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[2].cards[0].set_value("title", value)
+        self._cards[3].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

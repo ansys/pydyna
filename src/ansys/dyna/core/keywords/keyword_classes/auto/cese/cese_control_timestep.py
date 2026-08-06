@@ -62,7 +62,7 @@ class CeseControlTimestep(KeywordBase):
 
     @property
     def cfl(self) -> float:
-        """Get or set the CFL number (Courant�CFriedrichs�CLewy condition)
+        """Get or set the CFL number (CourantCFriedrichsCLewy condition)
         ( 0.0 < CFL <= 1.0 )
         .
         """ # nopep8

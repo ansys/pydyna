@@ -66,17 +66,20 @@ class LoadBeamElement(KeywordBase):
     @property
     def dal(self) -> int:
         """Get or set the Direction of applied load:
-        EQ.1: along r-axis of beam,
-        EQ.2: along s-axis of beam,
-        EQ.3: along t-axis of beam.
+        EQ.1: Paralle to r-axis of beam,
+        EQ.2: Paralle to s-axis of beam,
+        EQ.3: Paralle to t-axis of beam.
+        EQ.4: Paralle to global x-axis,
+        EQ.5: Paralle to global y - axis,
+        EQ.6: Paralle to global z - axis.
         """ # nopep8
         return self._cards[0].get_value("dal")
 
     @dal.setter
     def dal(self, value: int) -> None:
         """Set the dal property."""
-        if value not in [1, 2, 3, None]:
-            raise Exception("""dal must be `None` or one of {1,2,3}.""")
+        if value not in [1, 2, 3, 4, 5, 6, None]:
+            raise Exception("""dal must be `None` or one of {1,2,3,4,5,6}.""")
         self._cards[0].set_value("dal", value)
 
     @property

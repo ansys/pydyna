@@ -95,13 +95,13 @@ class DatabaseAleOperation(KeywordBase):
 
     @property
     def wrt(self) -> int:
-        """Get or set the File output flag. WRT must be a two digit number:WRT = L + M×10
-        The 1 digit controls the replacement of the history variable number HISVN in d3plot :
-        L.EQ.1 : For each ALE element in the mesh, replace the values of the history variable with values computed by the function FCT
-        L.EQ.0 : Do not modify d3plot.
-        The 10s digit controls the history output of values computed by the function FCT :
-        M.EQ.1 : For each ALE element in the set SETID, write.xy file that stores values computed by FCT at a frequency DT. (See Remarks 3 and 4.)
-        M.EQ.0 : Do not output this history file.
+        """Get or set the File output flag. WRT must be a two digit number:WRT = L + M10
+        The 1 digit controls the replacement of the history variable number HISVN in d3plot:
+        L.EQ.1: For each ALE element in the mesh, replace the values of the history variable with values computed by the function FCT
+        L.EQ.0: Do not modify d3plot.
+        The 10s digit controls the history output of values computed by the function FCT:
+        M.EQ.1: For each ALE element in the set SETID, write.xy file that stores values computed by FCT at a frequency DT. (See Remarks 3 and 4.)
+        M.EQ.0: Do not output this history file.
         """ # nopep8
         return self._cards[0].get_value("wrt")
 
@@ -123,7 +123,7 @@ class DatabaseAleOperation(KeywordBase):
 
     @property
     def setid(self) -> typing.Optional[int]:
-        """Get or set the ALE element set ID.See Remarks 3 and 4. If the model is 2D(*SECTION_ALE2D), the set should be a shell set(see* SET_SHELL).If the model is 3D(*SECTION_SOLID), the set should be a solid set(see* SET_SOLID
+        """Get or set the ALE element set ID.See Remarks 3 and 4. If the model is 2D(*SECTION_ALE2D), the set should be a shell set(see *SET_SHELL).If the model is 3D(*SECTION_SOLID), the set should be a solid set(see *SET_SOLID
         """ # nopep8
         return self._cards[1].get_value("setid")
 
@@ -135,27 +135,27 @@ class DatabaseAleOperation(KeywordBase):
     @property
     def var(self) -> int:
         """Get or set the Arguments that can be included in function FCT (see Remark 1):
-        EQ.1:	xx - stress
-        EQ.2 : yy - stress
-        EQ.3 : zz - stress
-        EQ.4 : xy - stress
-        EQ.5 : yz - stress
-        EQ.6 : zx - stress
-        EQ.7 : Plastic strain
-        EQ.8 : Internal energy
-        EQ.9 : Bulk viscosity
-        EQ.10 : Previous volume
-        EQ.11 : Mass
-        EQ.12 : Volume
-        EQ.13 : Nodal x - positions
-        EQ.14 : Nodal y - positions
-        EQ.15 : Nodal z - positions
-        EQ.16 : Nodal x - velocities
-        EQ.17 : Nodal y - velocities
-        EQ.18 : Nodal z - velocities
-        EQ.19 : Nodal x - accelerations
-        EQ.20 : Nodal y - accelerations
-        EQ.21 : Nodal z - accelerations
+        EQ.1: xx - stress
+        EQ.2: yy - stress
+        EQ.3: zz - stress
+        EQ.4: xy - stress
+        EQ.5: yz - stress
+        EQ.6: zx - stress
+        EQ.7: Plastic strain
+        EQ.8: Internal energy
+        EQ.9: Bulk viscosity
+        EQ.10: Previous volume
+        EQ.11: Mass
+        EQ.12: Volume
+        EQ.13: Nodal x - positions
+        EQ.14: Nodal y - positions
+        EQ.15: Nodal z - positions
+        EQ.16: Nodal x - velocities
+        EQ.17: Nodal y - velocities
+        EQ.18: Nodal z - velocities
+        EQ.19: Nodal x - accelerations
+        EQ.20: Nodal y - accelerations
+        EQ.21: Nodal z - accelerations
         """ # nopep8
         return self._cards[2].get_value("var")
 
@@ -167,27 +167,27 @@ class DatabaseAleOperation(KeywordBase):
     @property
     def var(self) -> int:
         """Get or set the Arguments that can be included in function FCT (see Remark 1):
-        EQ.1:	xx - stress
-        EQ.2 : yy - stress
-        EQ.3 : zz - stress
-        EQ.4 : xy - stress
-        EQ.5 : yz - stress
-        EQ.6 : zx - stress
-        EQ.7 : Plastic strain
-        EQ.8 : Internal energy
-        EQ.9 : Bulk viscosity
-        EQ.10 : Previous volume
-        EQ.11 : Mass
-        EQ.12 : Volume
-        EQ.13 : Nodal x - positions
-        EQ.14 : Nodal y - positions
-        EQ.15 : Nodal z - positions
-        EQ.16 : Nodal x - velocities
-        EQ.17 : Nodal y - velocities
-        EQ.18 : Nodal z - velocities
-        EQ.19 : Nodal x - accelerations
-        EQ.20 : Nodal y - accelerations
-        EQ.21 : Nodal z - accelerations
+        EQ.1: xx - stress
+        EQ.2: yy - stress
+        EQ.3: zz - stress
+        EQ.4: xy - stress
+        EQ.5: yz - stress
+        EQ.6: zx - stress
+        EQ.7: Plastic strain
+        EQ.8: Internal energy
+        EQ.9: Bulk viscosity
+        EQ.10: Previous volume
+        EQ.11: Mass
+        EQ.12: Volume
+        EQ.13: Nodal x - positions
+        EQ.14: Nodal y - positions
+        EQ.15: Nodal z - positions
+        EQ.16: Nodal x - velocities
+        EQ.17: Nodal y - velocities
+        EQ.18: Nodal z - velocities
+        EQ.19: Nodal x - accelerations
+        EQ.20: Nodal y - accelerations
+        EQ.21: Nodal z - accelerations
         """ # nopep8
         return self._cards[2].get_value("var")
 
@@ -199,27 +199,27 @@ class DatabaseAleOperation(KeywordBase):
     @property
     def var(self) -> int:
         """Get or set the Arguments that can be included in function FCT (see Remark 1):
-        EQ.1:	xx - stress
-        EQ.2 : yy - stress
-        EQ.3 : zz - stress
-        EQ.4 : xy - stress
-        EQ.5 : yz - stress
-        EQ.6 : zx - stress
-        EQ.7 : Plastic strain
-        EQ.8 : Internal energy
-        EQ.9 : Bulk viscosity
-        EQ.10 : Previous volume
-        EQ.11 : Mass
-        EQ.12 : Volume
-        EQ.13 : Nodal x - positions
-        EQ.14 : Nodal y - positions
-        EQ.15 : Nodal z - positions
-        EQ.16 : Nodal x - velocities
-        EQ.17 : Nodal y - velocities
-        EQ.18 : Nodal z - velocities
-        EQ.19 : Nodal x - accelerations
-        EQ.20 : Nodal y - accelerations
-        EQ.21 : Nodal z - accelerations
+        EQ.1: xx - stress
+        EQ.2: yy - stress
+        EQ.3: zz - stress
+        EQ.4: xy - stress
+        EQ.5: yz - stress
+        EQ.6: zx - stress
+        EQ.7: Plastic strain
+        EQ.8: Internal energy
+        EQ.9: Bulk viscosity
+        EQ.10: Previous volume
+        EQ.11: Mass
+        EQ.12: Volume
+        EQ.13: Nodal x - positions
+        EQ.14: Nodal y - positions
+        EQ.15: Nodal z - positions
+        EQ.16: Nodal x - velocities
+        EQ.17: Nodal y - velocities
+        EQ.18: Nodal z - velocities
+        EQ.19: Nodal x - accelerations
+        EQ.20: Nodal y - accelerations
+        EQ.21: Nodal z - accelerations
         """ # nopep8
         return self._cards[2].get_value("var")
 
@@ -231,27 +231,27 @@ class DatabaseAleOperation(KeywordBase):
     @property
     def var(self) -> int:
         """Get or set the Arguments that can be included in function FCT (see Remark 1):
-        EQ.1:	xx - stress
-        EQ.2 : yy - stress
-        EQ.3 : zz - stress
-        EQ.4 : xy - stress
-        EQ.5 : yz - stress
-        EQ.6 : zx - stress
-        EQ.7 : Plastic strain
-        EQ.8 : Internal energy
-        EQ.9 : Bulk viscosity
-        EQ.10 : Previous volume
-        EQ.11 : Mass
-        EQ.12 : Volume
-        EQ.13 : Nodal x - positions
-        EQ.14 : Nodal y - positions
-        EQ.15 : Nodal z - positions
-        EQ.16 : Nodal x - velocities
-        EQ.17 : Nodal y - velocities
-        EQ.18 : Nodal z - velocities
-        EQ.19 : Nodal x - accelerations
-        EQ.20 : Nodal y - accelerations
-        EQ.21 : Nodal z - accelerations
+        EQ.1: xx - stress
+        EQ.2: yy - stress
+        EQ.3: zz - stress
+        EQ.4: xy - stress
+        EQ.5: yz - stress
+        EQ.6: zx - stress
+        EQ.7: Plastic strain
+        EQ.8: Internal energy
+        EQ.9: Bulk viscosity
+        EQ.10: Previous volume
+        EQ.11: Mass
+        EQ.12: Volume
+        EQ.13: Nodal x - positions
+        EQ.14: Nodal y - positions
+        EQ.15: Nodal z - positions
+        EQ.16: Nodal x - velocities
+        EQ.17: Nodal y - velocities
+        EQ.18: Nodal z - velocities
+        EQ.19: Nodal x - accelerations
+        EQ.20: Nodal y - accelerations
+        EQ.21: Nodal z - accelerations
         """ # nopep8
         return self._cards[2].get_value("var")
 
@@ -263,27 +263,27 @@ class DatabaseAleOperation(KeywordBase):
     @property
     def var(self) -> int:
         """Get or set the Arguments that can be included in function FCT (see Remark 1):
-        EQ.1:	xx - stress
-        EQ.2 : yy - stress
-        EQ.3 : zz - stress
-        EQ.4 : xy - stress
-        EQ.5 : yz - stress
-        EQ.6 : zx - stress
-        EQ.7 : Plastic strain
-        EQ.8 : Internal energy
-        EQ.9 : Bulk viscosity
-        EQ.10 : Previous volume
-        EQ.11 : Mass
-        EQ.12 : Volume
-        EQ.13 : Nodal x - positions
-        EQ.14 : Nodal y - positions
-        EQ.15 : Nodal z - positions
-        EQ.16 : Nodal x - velocities
-        EQ.17 : Nodal y - velocities
-        EQ.18 : Nodal z - velocities
-        EQ.19 : Nodal x - accelerations
-        EQ.20 : Nodal y - accelerations
-        EQ.21 : Nodal z - accelerations
+        EQ.1: xx - stress
+        EQ.2: yy - stress
+        EQ.3: zz - stress
+        EQ.4: xy - stress
+        EQ.5: yz - stress
+        EQ.6: zx - stress
+        EQ.7: Plastic strain
+        EQ.8: Internal energy
+        EQ.9: Bulk viscosity
+        EQ.10: Previous volume
+        EQ.11: Mass
+        EQ.12: Volume
+        EQ.13: Nodal x - positions
+        EQ.14: Nodal y - positions
+        EQ.15: Nodal z - positions
+        EQ.16: Nodal x - velocities
+        EQ.17: Nodal y - velocities
+        EQ.18: Nodal z - velocities
+        EQ.19: Nodal x - accelerations
+        EQ.20: Nodal y - accelerations
+        EQ.21: Nodal z - accelerations
         """ # nopep8
         return self._cards[2].get_value("var")
 
@@ -295,27 +295,27 @@ class DatabaseAleOperation(KeywordBase):
     @property
     def var(self) -> int:
         """Get or set the Arguments that can be included in function FCT (see Remark 1):
-        EQ.1:	xx - stress
-        EQ.2 : yy - stress
-        EQ.3 : zz - stress
-        EQ.4 : xy - stress
-        EQ.5 : yz - stress
-        EQ.6 : zx - stress
-        EQ.7 : Plastic strain
-        EQ.8 : Internal energy
-        EQ.9 : Bulk viscosity
-        EQ.10 : Previous volume
-        EQ.11 : Mass
-        EQ.12 : Volume
-        EQ.13 : Nodal x - positions
-        EQ.14 : Nodal y - positions
-        EQ.15 : Nodal z - positions
-        EQ.16 : Nodal x - velocities
-        EQ.17 : Nodal y - velocities
-        EQ.18 : Nodal z - velocities
-        EQ.19 : Nodal x - accelerations
-        EQ.20 : Nodal y - accelerations
-        EQ.21 : Nodal z - accelerations
+        EQ.1: xx - stress
+        EQ.2: yy - stress
+        EQ.3: zz - stress
+        EQ.4: xy - stress
+        EQ.5: yz - stress
+        EQ.6: zx - stress
+        EQ.7: Plastic strain
+        EQ.8: Internal energy
+        EQ.9: Bulk viscosity
+        EQ.10: Previous volume
+        EQ.11: Mass
+        EQ.12: Volume
+        EQ.13: Nodal x - positions
+        EQ.14: Nodal y - positions
+        EQ.15: Nodal z - positions
+        EQ.16: Nodal x - velocities
+        EQ.17: Nodal y - velocities
+        EQ.18: Nodal z - velocities
+        EQ.19: Nodal x - accelerations
+        EQ.20: Nodal y - accelerations
+        EQ.21: Nodal z - accelerations
         """ # nopep8
         return self._cards[2].get_value("var")
 
@@ -327,27 +327,27 @@ class DatabaseAleOperation(KeywordBase):
     @property
     def var(self) -> int:
         """Get or set the Arguments that can be included in function FCT (see Remark 1):
-        EQ.1:	xx - stress
-        EQ.2 : yy - stress
-        EQ.3 : zz - stress
-        EQ.4 : xy - stress
-        EQ.5 : yz - stress
-        EQ.6 : zx - stress
-        EQ.7 : Plastic strain
-        EQ.8 : Internal energy
-        EQ.9 : Bulk viscosity
-        EQ.10 : Previous volume
-        EQ.11 : Mass
-        EQ.12 : Volume
-        EQ.13 : Nodal x - positions
-        EQ.14 : Nodal y - positions
-        EQ.15 : Nodal z - positions
-        EQ.16 : Nodal x - velocities
-        EQ.17 : Nodal y - velocities
-        EQ.18 : Nodal z - velocities
-        EQ.19 : Nodal x - accelerations
-        EQ.20 : Nodal y - accelerations
-        EQ.21 : Nodal z - accelerations
+        EQ.1: xx - stress
+        EQ.2: yy - stress
+        EQ.3: zz - stress
+        EQ.4: xy - stress
+        EQ.5: yz - stress
+        EQ.6: zx - stress
+        EQ.7: Plastic strain
+        EQ.8: Internal energy
+        EQ.9: Bulk viscosity
+        EQ.10: Previous volume
+        EQ.11: Mass
+        EQ.12: Volume
+        EQ.13: Nodal x - positions
+        EQ.14: Nodal y - positions
+        EQ.15: Nodal z - positions
+        EQ.16: Nodal x - velocities
+        EQ.17: Nodal y - velocities
+        EQ.18: Nodal z - velocities
+        EQ.19: Nodal x - accelerations
+        EQ.20: Nodal y - accelerations
+        EQ.21: Nodal z - accelerations
         """ # nopep8
         return self._cards[2].get_value("var")
 
@@ -359,27 +359,27 @@ class DatabaseAleOperation(KeywordBase):
     @property
     def var(self) -> int:
         """Get or set the Arguments that can be included in function FCT (see Remark 1):
-        EQ.1:	xx - stress
-        EQ.2 : yy - stress
-        EQ.3 : zz - stress
-        EQ.4 : xy - stress
-        EQ.5 : yz - stress
-        EQ.6 : zx - stress
-        EQ.7 : Plastic strain
-        EQ.8 : Internal energy
-        EQ.9 : Bulk viscosity
-        EQ.10 : Previous volume
-        EQ.11 : Mass
-        EQ.12 : Volume
-        EQ.13 : Nodal x - positions
-        EQ.14 : Nodal y - positions
-        EQ.15 : Nodal z - positions
-        EQ.16 : Nodal x - velocities
-        EQ.17 : Nodal y - velocities
-        EQ.18 : Nodal z - velocities
-        EQ.19 : Nodal x - accelerations
-        EQ.20 : Nodal y - accelerations
-        EQ.21 : Nodal z - accelerations
+        EQ.1: xx - stress
+        EQ.2: yy - stress
+        EQ.3: zz - stress
+        EQ.4: xy - stress
+        EQ.5: yz - stress
+        EQ.6: zx - stress
+        EQ.7: Plastic strain
+        EQ.8: Internal energy
+        EQ.9: Bulk viscosity
+        EQ.10: Previous volume
+        EQ.11: Mass
+        EQ.12: Volume
+        EQ.13: Nodal x - positions
+        EQ.14: Nodal y - positions
+        EQ.15: Nodal z - positions
+        EQ.16: Nodal x - velocities
+        EQ.17: Nodal y - velocities
+        EQ.18: Nodal z - velocities
+        EQ.19: Nodal x - accelerations
+        EQ.20: Nodal y - accelerations
+        EQ.21: Nodal z - accelerations
         """ # nopep8
         return self._cards[2].get_value("var")
 

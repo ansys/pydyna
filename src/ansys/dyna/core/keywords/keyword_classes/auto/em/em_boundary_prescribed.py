@@ -35,11 +35,17 @@ _EMBOUNDARYPRESCRIBED_CARD0 = (
     FieldSchema("setid", int, 30, 10, None),
     FieldSchema("val", float, 40, 10, 0.0),
     FieldSchema("lcid", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("systype", int, 70, 10, None),
 )
 
 _EMBOUNDARYPRESCRIBED_CARD1 = (
     FieldSchema("birtht", float, 0, 10, 0.0),
     FieldSchema("deatht", float, 10, 10, 1e+28),
+    FieldSchema("unused", int, 20, 10, None),
+    FieldSchema("unused", int, 30, 10, None),
+    FieldSchema("val2", int, 40, 10, None),
+    FieldSchema("lcid2", int, 50, 10, None),
 )
 
 class EmBoundaryPrescribed(KeywordBase):
@@ -49,6 +55,7 @@ class EmBoundaryPrescribed(KeywordBase):
     subkeyword = "BOUNDARY_PRESCRIBED"
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
+        "lcid2": LinkType.DEFINE_CURVE,
     }
 
     def __init__(self, **kwargs):
@@ -66,7 +73,7 @@ class EmBoundaryPrescribed(KeywordBase):
         ]
     @property
     def bpid(self) -> typing.Optional[int]:
-        """Get or set the ID of the Prescribed boundary.
+        """Get or set the ID of the prescribed boundary.
         .
         """ # nopep8
         return self._cards[0].get_value("bpid")
@@ -78,7 +85,7 @@ class EmBoundaryPrescribed(KeywordBase):
 
     @property
     def bptype(self) -> int:
-        """Get or set the Boundary Prescribed type:
+        """Get or set the Prescribed boundary type:
         EQ.1:Short (Scalar Potential set to 0.)
         EQ.2:Prescribed Resistance (Robin B.C).
         EQ.3:Prescribed Scalar Potential (Dirichlet B.C)
@@ -96,8 +103,8 @@ class EmBoundaryPrescribed(KeywordBase):
     @property
     def settype(self) -> int:
         """Get or set the Set type:
-        EQ.1:Segment Set.
-        EQ.2: Node Set.
+        EQ.1:Segment set.
+        EQ.2: Node set.
         EQ.3: Fluid part. See *ICFD_PART.
         """ # nopep8
         return self._cards[0].get_value("settype")
@@ -123,7 +130,7 @@ class EmBoundaryPrescribed(KeywordBase):
 
     @property
     def val(self) -> float:
-        """Get or set the Value of the Resistance, current density or potential depending on BPTYPE.Ignored if LCID is defined
+        """Get or set the Value of the resistance, current density or potential depending on BPTYPE.Ignored if LCID is defined
         .
         """ # nopep8
         return self._cards[0].get_value("val")
@@ -144,6 +151,19 @@ class EmBoundaryPrescribed(KeywordBase):
     def lcid(self, value: int) -> None:
         """Set the lcid property."""
         self._cards[0].set_value("lcid", value)
+
+    @property
+    def systype(self) -> typing.Optional[int]:
+        """Get or set the Flag for the type of system on which the boundary condition is applied (applies only for cardiac electrophysiology when *EM_BOUNDARY_PRESCRIBED is used with EMSOL = 11 or 12):
+        EQ.0: Applied on extracellular potential
+        EQ.1: Applied on transmembrane potential
+        """ # nopep8
+        return self._cards[0].get_value("systype")
+
+    @systype.setter
+    def systype(self, value: int) -> None:
+        """Set the systype property."""
+        self._cards[0].set_value("systype", value)
 
     @property
     def birtht(self) -> float:
@@ -170,6 +190,28 @@ class EmBoundaryPrescribed(KeywordBase):
         self._cards[1].set_value("deatht", value)
 
     @property
+    def val2(self) -> typing.Optional[int]:
+        """Get or set the Value of the impedance in radiofrequency problems to be used in conjunction with BPTYE = 2.
+        """ # nopep8
+        return self._cards[1].get_value("val2")
+
+    @val2.setter
+    def val2(self, value: int) -> None:
+        """Set the val2 property."""
+        self._cards[1].set_value("val2", value)
+
+    @property
+    def lcid2(self) -> typing.Optional[int]:
+        """Get or set the Load curve ID for defining the impedance value as a function of time. It is only available in radiofrequency problems with BPTYPE = 2.
+        """ # nopep8
+        return self._cards[1].get_value("lcid2")
+
+    @lcid2.setter
+    def lcid2(self, value: int) -> None:
+        """Set the lcid2 property."""
+        self._cards[1].set_value("lcid2", value)
+
+    @property
     def lcid_link(self) -> typing.Optional[DefineCurve]:
         """Get the DefineCurve object for lcid."""
         if self.deck is None:
@@ -183,4 +225,19 @@ class EmBoundaryPrescribed(KeywordBase):
     def lcid_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcid."""
         self.lcid = value.lcid
+
+    @property
+    def lcid2_link(self) -> typing.Optional[DefineCurve]:
+        """Get the DefineCurve object for lcid2."""
+        if self.deck is None:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == self.lcid2:
+                return kwd
+        return None
+
+    @lcid2_link.setter
+    def lcid2_link(self, value: DefineCurve) -> None:
+        """Set the DefineCurve object for lcid2."""
+        self.lcid2 = value.lcid
 

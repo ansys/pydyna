@@ -49,8 +49,8 @@ class FatigueFailure(KeywordBase):
     @property
     def ifailure(self) -> int:
         """Get or set the Treatment of elements failed due to fatigue:
-        EQ.0:	keep the elements in the model.
-        EQ.1:	delete the elements from the model
+        EQ.0: keep the elements in the model.
+        EQ.1: delete the elements from the model
         """ # nopep8
         return self._cards[0].get_value("ifailure")
 

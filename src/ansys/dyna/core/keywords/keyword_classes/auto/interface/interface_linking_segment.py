@@ -30,6 +30,7 @@ from ansys.dyna.core.lib.keyword_base import LinkType
 _INTERFACELINKINGSEGMENT_CARD0 = (
     FieldSchema("ssid", int, 0, 10, None),
     FieldSchema("ifid", int, 10, 10, None),
+    FieldSchema("death", float, 20, 10, None),
 )
 
 class InterfaceLinkingSegment(KeywordBase):
@@ -71,6 +72,17 @@ class InterfaceLinkingSegment(KeywordBase):
     def ifid(self, value: int) -> None:
         """Set the ifid property."""
         self._cards[0].set_value("ifid", value)
+
+    @property
+    def death(self) -> typing.Optional[float]:
+        """Get or set the Death time for this interface, The default is infinity.
+        """ # nopep8
+        return self._cards[0].get_value("death")
+
+    @death.setter
+    def death(self, value: float) -> None:
+        """Set the death property."""
+        self._cards[0].set_value("death", value)
 
     @property
     def ssid_link(self) -> typing.Optional[KeywordBase]:

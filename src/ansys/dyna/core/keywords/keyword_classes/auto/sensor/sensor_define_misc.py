@@ -85,39 +85,72 @@ class SensorDefineMisc(KeywordBase):
     @property
     def mtype(self) -> str:
         """Get or set the Entity to be traced:
-        EQ.ANGLE:  Angular accelerometer sensor tracing the angle between two lines.
-        The fields I1 and I2 are node numbers defining the 1st line, while I3
-        and I4 are node numbers defining the 2nd line.
-        EQ.BNDOUT:	Boundary condition energy as reported in file bndout?  I1 is the ID as defined in *BOUNDARY_RESCRIBED_MOTION
-        EQ.CURVE:       The value of a time-dependent curve defined by *DEFINE_CURVE_FUNCTION or *DEFINE_CURVE.  I1 is the curve ID.
+        EQ.ANGLE: Angle between two lines. The fields I1 and I2 are node numbers defining the 1st line, while I3 and I4 are node numbers defining the 2nd line.
+        EQ.BNDOUT: Boundary condition energy as reported in file bndout I1 is the ID as defined in *BOUNDARY_RESCRIBED_MOTION
+        EQ.CURVE: The value of a time-dependent curve defined by *DEFINE_CURVE_FUNCTION or *DEFINE_CURVE. I1 is the curve ID.
         EQ.CVBAG: Information reported in ABSTAT for control volume airbag I1, including
         I0.EQ.TEMP: airbag temperature
         I0.EQ.VOL: airbag volume
-        EQ.ICVOL:	Information reported in ICVOUT for incompressible control volume I1, see *DEFINE_CONTROL_VOLUME, including
-        I0.EQ.PRES:	Temperature of control volume
-        I0.EQ.VOL : Volume of control volume
-        EQ.MATSUM:	Information reported in MATSUM for part set I1, including.I0.eq.KINETIC: kinetic energy;I0.eq.INTERNAL: internal energy;I0.eq.ERODEKE: eroded kinetic energy;I0.eq.ERODEIE: eroded internal energy
-        EQ.NFAILE: Number of failed elements of type I0 in set I1 will be traced. I0, element type, can be  SOLID
+        EQ.EMROGO: Information about Rogowsky coil I1 (see *EM_CIRCUIT_ROGO), including:
+        I0.EQ.CRNT: Current
+        I0.EQ.CRNTRTE: Current rate
+        I0.EQ.FX: Electromotive force along x
+        I0.EQ.FY: Electromotive force along y
+        I0.EQ.FZ: Electromotive force along z
+        EQ.ICVOL: Information reported in ICVOUT for incompressible control volume I1, see *DEFINE_CONTROL_VOLUME, including
+        I0.EQ.PRES: Temperature of control volume
+        I0.EQ.VOL: Volume of control volume
+        EQ.JNTSTG:	Information reported in JNTFORC for general stiffness joint I1, see CONSTRAINED_JOINT_STIFFNESS_GENERALIZED, including
+        I0.EQ.PHI:	rotation φ in degree
+        I0.EQ.PHIR:	rate of rotation φ
+        I0.EQ.THETA:	rotation θ in degree
+        I0.EQ.THETAR:	rate of rotation θ
+        I0.EQ.IPSI:	rotation ψ in degree.
+        I0.EQ.PSIR:	rate of rotation ψ
+        EQ.MATSUM: Information reported in MATSUM for part set I1, including:
+        I0.EQ.ADDMASS: Added mass
+        I0.EQ.ERODEIE: Eroded internal energy
+        I0.EQ.ERODEKE: Eroded kinetic energy
+        I0.EQ.HOURGLASS:	Hourglass energy
+        I0.EQ.INTERNAL: Internal energy
+        I0.EQ.KINETIC: Kinetic energy
+        EQ.NFAILE: Number of failed elements of type I0 in set I1. I0, element type, can be  SOLID
         for solid elements,  SHELL  for thin shell elements,  TSHELL  for thick shell elements,
         BEAM  for beam elements or  DISC  for discrete elements. I1 is the related element set
         number. If undefined, the failure of all elements of type I0 will be traced
-        EQ.RETRACTOR: The seatbelt retractor payout rate is traced. I1 is the retractor ID.
-        EQ.RIGIDBODY: Accelerometer sensor tracing the kinematics of
-        a rigid body with id I1. The I2 field specifies which kinematical component is to be traced.
-        It may be set to  TX ,  TY , or  TZ  for X, Y, and Z translations and to  RX ,  RY , or  RZ
-        for the X, Y, and Z components of the rotation. The I3 field specifies the kinematics type:  D
-        for displacement,  V  for velocity and  A  for acceleration. Output is calculated with respect
+        EQ.PULLEY:	Information about beam pulley I1, including:
+        I0.EQ.SLIP:	Slippage
+        I0.EQ.WRAP : Wrap angle
+        I0.EQ.FN : Normal contact force
+        I0.EQ.FBM1 : Force in the  element on side 1
+        I0.EQ.FBM2 : Force in the element on side 2
+        EQ.RETRACTOR: Information about seat belt retractor I1, including:
+        I0.EQ.PULLRATE: Pull - out rate, default
+        I0.EQ.PULLOUT: Total pull-out
+        I0.EQ.FORCE: Force of the attached belt.
+        EQ.RIGIDBODY: Kinematics of a rigid body with id I1. The I2 field specifies which kinematical component to be traced.
+        It may be set to TX, TY, or TZ for X, Y, and Z translations and to RX, RY, or RZ
+        for the X, Y, and Z components of the rotation. The I3 field specifies the kinematics type: D
+        for displacement, V for velocity and A for acceleration. Output is calculated with respect
         to the global coordinate system when the I4 field is set to  0 , its default value; the local
         rigid-body coordinate system is used when I4 is set to  1 .
-        EQ.TIME:  The current analysis time is traced.
+        EQ.SLIPRING: Information about seat belt:
+        I0.EQ.SLIP: Slippage.
+        I0.EQ.WRAP: Wrap angle,theta.
+        I0.EQ.SKEW: Skew angle, alpha.
+        I0.EQ.FC: Friction coefficient.
+        I0.EQ.FN: Normal contact force.
+        I0.EQ.FSB1: Force of element on side 1.
+        I0.EQ.FSB2: Force of element on side 2.
+        EQ.TIME: Current analysis time.
         """ # nopep8
         return self._cards[0].get_value("mtype")
 
     @mtype.setter
     def mtype(self, value: str) -> None:
         """Set the mtype property."""
-        if value not in ["ANGLE", "BNDOUT", "CURVE", "CVBAG", "ICVOL", "MATSUM", "NFAILE", "RETRACTOR", "RIGIDBODY", "TIME", None]:
-            raise Exception("""mtype must be `None` or one of {"ANGLE","BNDOUT","CURVE","CVBAG","ICVOL","MATSUM","NFAILE","RETRACTOR","RIGIDBODY","TIME"}.""")
+        if value not in ["ANGLE", "BNDOUT", "CURVE", "CVBAG", "EMROGO", "ICVOL", "JNTSTG", "MATSUM", "NFAILE", "PULLEY", "RETRACTOR", "RIGIDBODY", "SLIPRING", "TIME", None]:
+            raise Exception("""mtype must be `None` or one of {"ANGLE","BNDOUT","CURVE","CVBAG","EMROGO","ICVOL","JNTSTG","MATSUM","NFAILE","PULLEY","RETRACTOR","RIGIDBODY","SLIPRING","TIME"}.""")
         self._cards[0].set_value("mtype", value)
 
     @property

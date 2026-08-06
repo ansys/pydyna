@@ -159,7 +159,7 @@ class DefineFibers(KeywordBase):
     @property
     def efb(self) -> typing.Optional[float]:
         """Get or set the Effective stiffness of the fiber in its orientation, which typically equals to
-        Young’s Modulus times fiber cross sectional area fraction.
+        Youngs Modulus times fiber cross sectional area fraction.
         Fiber cross sectional area fraction is typically between 0.25 and 0.5.
         """ # nopep8
         return self._cards[0].get_value("efb")
@@ -172,8 +172,8 @@ class DefineFibers(KeywordBase):
     @property
     def shr(self) -> typing.Optional[float]:
         """Get or set the Shear stiffness of the fiber:
-        GT.0:	shear stiffness,
-        LT.0:	|SHR| is theload curve ID defining shear stiffness vs. shear strain.
+        GT.0: shear stiffness,
+        LT.0: |SHR| is theload curve ID defining shear stiffness vs. shear strain.
         """ # nopep8
         return self._cards[0].get_value("shr")
 

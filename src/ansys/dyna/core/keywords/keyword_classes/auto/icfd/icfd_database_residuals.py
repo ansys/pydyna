@@ -47,7 +47,7 @@ class IcfdDatabaseResiduals(KeywordBase):
         ]
     @property
     def rlvl(self) -> int:
-        """Get or set the Residual output level :
+        """Get or set the Residual output level:
         EQ.0: No output.
         EQ.1: Only outputs the number of iterations needed for solving the pressure Poisson equation.
         EQ.2: Outputs the number of iterations for the momentum, pressure, mesh movement and temperature equations.

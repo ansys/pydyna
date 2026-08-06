@@ -139,6 +139,34 @@ Eos021
     :members:
 
 
+Eos041
+------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.eos_041
+    :members:
+
+
+Eos043
+------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.eos_043
+    :members:
+
+
+Eos044
+------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.eos_044
+    :members:
+
+
+EosAeratedWater
+---------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.eos_aerated_water
+    :members:
+
+
 EosGasket
 ---------
 
@@ -150,6 +178,13 @@ EosGruneisen
 ------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.eos_gruneisen
+    :members:
+
+
+EosHvrb
+-------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.eos_hvrb
     :members:
 
 
@@ -185,6 +220,13 @@ EosJwlb
 -------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.eos_jwlb
+    :members:
+
+
+EosLee_Tarver
+-------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.eos_lee__tarver
     :members:
 
 

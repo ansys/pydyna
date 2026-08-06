@@ -98,7 +98,7 @@ class DefineAdaptiveSolidToSph(KeywordBase):
 
     @property
     def heading(self) -> typing.Optional[str]:
-        """Get or set the Definition descriptor. It is suggested that unique descriptions be	used.
+        """Get or set the Definition descriptor. It is suggested that unique descriptions be used.
         """ # nopep8
         return self._cards[0].get_value("heading")
 
@@ -175,9 +175,9 @@ class DefineAdaptiveSolidToSph(KeywordBase):
     @property
     def icpl(self) -> int:
         """Get or set the Coupling of newly generated SPH elements to the adjacent solid elements:
-        EQ.0:	Failure without coupling (debris simulation),
-        EQ.1:	Coupled to solid element,
-        EQ.3:	Provide only thermal coupling between SPH part and solid part (must be combined with IOPT = 0 option; see Remark 4).
+        EQ.0: Failure without coupling (debris simulation),
+        EQ.1: Coupled to solid element,
+        EQ.3: Provide only thermal coupling between SPH part and solid part (must be combined with IOPT = 0 option; see Remark 4).
         """ # nopep8
         return self._cards[1].get_value("icpl")
 

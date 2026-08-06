@@ -61,8 +61,8 @@ class IcfdBoundaryPrescribedMovemesh(KeywordBase):
 
     @property
     def dofx(self) -> int:
-        """Get or set the Degrees of freedom in the X,Y and Z directions :
-        EQ.0: degree of freedom left free (Surface nodes can translate in the
+        """Get or set the Degrees of freedom in the X,Y and Z directions:
+        EQ.0: Degree of freedom left free (surface nodes can translate in the
         chosen direction)
         EQ. 1: prescribed degree of freedom (Surface nodes are blocked).
         """ # nopep8
@@ -77,8 +77,8 @@ class IcfdBoundaryPrescribedMovemesh(KeywordBase):
 
     @property
     def dofy(self) -> int:
-        """Get or set the Degrees of freedom in the X,Y and Z directions :
-        EQ.0: degree of freedom left free (Surface nodes can translate in the
+        """Get or set the Degrees of freedom in the X,Y and Z directions:
+        EQ.0: Degree of freedom left free (surface nodes can translate in the
         chosen direction)
         EQ. 1: prescribed degree of freedom (Surface nodes are blocked).
         """ # nopep8
@@ -93,8 +93,8 @@ class IcfdBoundaryPrescribedMovemesh(KeywordBase):
 
     @property
     def dofz(self) -> int:
-        """Get or set the Degrees of freedom in the X,Y and Z directions :
-        EQ.0: degree of freedom left free (Surface nodes can translate in the
+        """Get or set the Degrees of freedom in the X,Y and Z directions:
+        EQ.0: Degree of freedom left free (surface nodes can translate in the
         chosen direction)
         EQ. 1: prescribed degree of freedom (Surface nodes are blocked).
         """ # nopep8

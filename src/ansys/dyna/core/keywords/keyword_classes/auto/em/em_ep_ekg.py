@@ -25,9 +25,10 @@ import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.keyword_base import KeywordBase
+from ansys.dyna.core.lib.keyword_base import LinkType
 
 _EMEPEKG_CARD0 = (
-    FieldSchema("ekgid", int, 0, 10, None),
+    FieldSchema("ecgid", int, 0, 10, None),
     FieldSchema("psid", float, 10, 10, None),
 )
 
@@ -36,6 +37,9 @@ class EmEpEkg(KeywordBase):
 
     keyword = "EM"
     subkeyword = "EP_EKG"
+    _link_fields = {
+        "psid": LinkType.SET_PART,
+    }
 
     def __init__(self, **kwargs):
         """Initialize the EmEpEkg class."""
@@ -47,19 +51,19 @@ class EmEpEkg(KeywordBase):
             ),
         ]
     @property
-    def ekgid(self) -> typing.Optional[int]:
-        """Get or set the Id of the EKG computation.
+    def ecgid(self) -> typing.Optional[int]:
+        """Get or set the Id of the ECG computation.
         """ # nopep8
-        return self._cards[0].get_value("ekgid")
+        return self._cards[0].get_value("ecgid")
 
-    @ekgid.setter
-    def ekgid(self, value: int) -> None:
-        """Set the ekgid property."""
-        self._cards[0].set_value("ekgid", value)
+    @ecgid.setter
+    def ecgid(self, value: int) -> None:
+        """Set the ecgid property."""
+        self._cards[0].set_value("ecgid", value)
 
     @property
     def psid(self) -> typing.Optional[float]:
-        """Get or set the Point set id containing the list of virtual points on which the pseudo-EKGs are computed
+        """Get or set the Point set id containing the list of virtual points on which the pseudo-ECGs are computed
         """ # nopep8
         return self._cards[0].get_value("psid")
 
@@ -67,4 +71,14 @@ class EmEpEkg(KeywordBase):
     def psid(self, value: float) -> None:
         """Set the psid property."""
         self._cards[0].set_value("psid", value)
+
+    @property
+    def psid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SET_PART_* keyword for psid."""
+        return self._get_set_link("PART", self.psid)
+
+    @psid_link.setter
+    def psid_link(self, value: KeywordBase) -> None:
+        """Set the SET_PART_* keyword for psid."""
+        self.psid = value.sid
 

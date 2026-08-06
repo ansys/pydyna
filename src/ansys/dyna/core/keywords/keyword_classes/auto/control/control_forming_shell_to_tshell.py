@@ -77,10 +77,10 @@ class ControlFormingShellToTshell(KeywordBase):
 
     @property
     def midsf(self) -> float:
-        """Get or set the TSHELL’s mid-plane position definition (see Figure 0-1 and Remark 4):
-        EQ.0:	Mid - plane is at thin shell surface.
-        EQ.1 : Mid - plane is at one half of THICK above thin shell surface.
-        EQ. - 1 : Mid - plane is at one half of THICK below thin shell surface.
+        """Get or set the TSHELLs mid-plane position definition (see Figure 0-1 and Remark 4):
+        EQ.0: Mid - plane is at thin shell surface.
+        EQ.1: Mid - plane is at one half of THICK above thin shell surface.
+        EQ. - 1: Mid - plane is at one half of THICK below thin shell surface.
         """ # nopep8
         return self._cards[0].get_value("midsf")
 
@@ -93,7 +93,8 @@ class ControlFormingShellToTshell(KeywordBase):
 
     @property
     def idsegb(self) -> typing.Optional[float]:
-        """Get or set the Set ID of the segments to be generated at the bottom layer of the TSHELLs, which can be used for segment-based contact.  The bottom layer of the TSHELLs has an outward normal that points in the opposite direction to the positive normal side of thin shells
+        """Get or set the Set ID of the segments to be generated at the bottom layer of the TSHELLs, which can be used for defining a contact surface with segments.  The bottom layer of the TSHELLs has an outward normal that points in the opposite direction to the positive normal side of thin shells; see Figure 0-1.
+        Note the default normal of the generated segments are consistent with the thin shells� normal.To reverse this default normal, set the IDSEGB to a negative number.See Remark 2.
         """ # nopep8
         return self._cards[0].get_value("idsegb")
 
@@ -104,7 +105,8 @@ class ControlFormingShellToTshell(KeywordBase):
 
     @property
     def idsegt(self) -> typing.Optional[float]:
-        """Get or set the Set ID of the segments to be generated at the top layer of the TSHELLs, which can be used for segment-based contact.  The top side of a TSHELL has an outward normal that points in the same direction as the positive normal side of the thin shells
+        """Get or set the Set ID of the segments to be generated at the top layer of the TSHELLs, which can be used for defining a contact surface with segments.  The top side of a TSHELL has an outward normal that points in the same direction as the positive normal side of the thin shells; see Figure 0-1.
+        The normal of the generated segments are consistent with the thin shells� normal.To reverse this default normal, set the IDSEGT to a negative number.See Remark 2.
         """ # nopep8
         return self._cards[0].get_value("idsegt")
 

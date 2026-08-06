@@ -148,10 +148,10 @@ class ControlDamping(KeywordBase):
 
     @property
     def idrflg(self) -> int:
-        """Get or set the Dynamic relaxation flag for stress initialization:
-        EQ.-999: dynamic relaxation not activated even if specified on a load curve, see *DEFINE_CURVE,
-        EQ.-3:	dynamic relaxation is activated as with IDRFLG = 1, but the convergence check is made based only on the part set specified by DRPSET.
-        All parts are active during the dynamic relaxation phase
+        """Get or set the Dynamic relaxation flag for stress initialization:T.
+        EQ.0: Not active
+        EQ.-999:	Dynamic relaxation not activated even if specified on a load curve, see *DEFINE_CURVE.  See Remark 3. 2.
+        EQ. - 3:	Dynamic relaxation is activated as with IDRFLG = 1, but the convergence check is made based only on the part set specified by DRPSET.All parts are active during the dynamic relaxation phase.
         EQ.-1: dynamic relaxation is activated and time history output is produced during dynamic relaxation,
         EQ.0: not active,
         EQ.1: dynamic relaxation is activated,
@@ -165,8 +165,8 @@ class ControlDamping(KeywordBase):
     @idrflg.setter
     def idrflg(self, value: int) -> None:
         """Set the idrflg property."""
-        if value not in [0, -999, -3, -1, 1, 2, 3, 5, 6, None]:
-            raise Exception("""idrflg must be `None` or one of {0,-999,-3,-1,1,2,3,5,6}.""")
+        if value not in [0, -999, -3, -1, 1, 2, 3, 4, 5, 6, None]:
+            raise Exception("""idrflg must be `None` or one of {0,-999,-3,-1,1,2,3,4,5,6}.""")
         self._cards[0].set_value("idrflg", value)
 
     @property

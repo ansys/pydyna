@@ -345,7 +345,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @property
     def lce(self) -> typing.Optional[float]:
-        """Get or set the Load curve defining Young's modulus as a function of temperature.
+        """Get or set the Load curve defining Young's modulus as a function of temperature or external variable .
         E on card 1 is ignored with this option.
         """ # nopep8
         return self._cards[2].get_value("lce")
@@ -357,7 +357,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @property
     def lcpr(self) -> typing.Optional[float]:
-        """Get or set the Load curve defining Poisson's ratio as a function of temperature.
+        """Get or set the Load curve defining Poisson's ratio as a function of temperature or external variable .
         PR on card 1 is ignored with this option.
         """ # nopep8
         return self._cards[2].get_value("lcpr")
@@ -369,7 +369,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @property
     def lcsigy(self) -> typing.Optional[float]:
-        """Get or set the Load curve defining the initial yield stress as a function of temperature.
+        """Get or set the Load curve defining the initial yield stress as a function of temperature or external variable .
         SIGY on card 1 is ignored with this option.
         """ # nopep8
         return self._cards[2].get_value("lcsigy")
@@ -381,7 +381,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @property
     def lcr(self) -> typing.Optional[float]:
-        """Get or set the Load curve for scaling the isotropic hardening parameters QR1 and QR2 or the stress given by the load curve LCSS as a function of temperature.
+        """Get or set the Load curve for scaling the isotropic hardening parameters QR1 and QR2 or the stress given by the load curve LCSS as a function of temperature or external variable .
         """ # nopep8
         return self._cards[2].get_value("lcr")
 
@@ -392,7 +392,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @property
     def lcx(self) -> typing.Optional[float]:
-        """Get or set the Load curve for scaling the isotropic hardening parameters QX1 and QX2 as a function of temperature.
+        """Get or set the Load curve for scaling the isotropic hardening parameters QX1 and QX2 as a function of temperature or external variable .
         """ # nopep8
         return self._cards[2].get_value("lcx")
 
@@ -403,7 +403,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @property
     def lcalph(self) -> typing.Optional[float]:
-        """Get or set the Load curve defining the coefficient of thermal expansion as a function of temperature.
+        """Get or set the Load curve defining the coefficient of thermal expansion as a function of temperature or external variable .
         ALPHA on card 1 is ignored with this option.
         """ # nopep8
         return self._cards[2].get_value("lcalph")
@@ -415,7 +415,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @property
     def lcc(self) -> typing.Optional[int]:
-        """Get or set the Load curve for scaling the viscous materal parameter C as a function of temperature.
+        """Get or set the Load curve for scaling the viscous materal parameter C as a function of temperature or external variable .
         """ # nopep8
         return self._cards[3].get_value("lcc")
 
@@ -426,7 +426,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @property
     def lcp(self) -> typing.Optional[int]:
-        """Get or set the Load curve for scaling the viscous material parameter P as a function of temperature.
+        """Get or set the Load curve for scaling the viscous material parameter P as a function of temperature or external variable .
         """ # nopep8
         return self._cards[3].get_value("lcp")
 
@@ -437,7 +437,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @property
     def tref(self) -> typing.Optional[float]:
-        """Get or set the Reference temperature required if and only if LCALPH is given with a negative curve ID.
+        """Get or set the Reference temperature required if LCALPH is given with a negative curve ID.
         """ # nopep8
         return self._cards[3].get_value("tref")
 
@@ -448,7 +448,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @property
     def lcfail(self) -> typing.Optional[float]:
-        """Get or set the Load curve defining the plastic failure strain as a function of temperature. FAIL on card 1 is ignored with this option.
+        """Get or set the Load curve defining the plastic failure strain as a function of temperature or external variable. FAIL on card 1 is ignored with this option.
         """ # nopep8
         return self._cards[3].get_value("lcfail")
 
@@ -459,7 +459,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @property
     def nuhis(self) -> typing.Optional[int]:
-        """Get or set the Number of additional user defined history variables
+        """Get or set the Number of additional user defined history variables, not used for  EXTVAR keyword option.
         """ # nopep8
         return self._cards[3].get_value("nuhis")
 
@@ -470,7 +470,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @property
     def t1phas(self) -> typing.Optional[float]:
-        """Get or set the Lower temperature limit for cooling rate evaluation.  Cooling rate can be used as input for user defined variables
+        """Get or set the Lower temperature limit for cooling rate evaluation. Cooling rate can be used as input for user defined variables
         """ # nopep8
         return self._cards[3].get_value("t1phas")
 
@@ -481,7 +481,7 @@ class MatElasticViscoplasticThermal(KeywordBase):
 
     @property
     def t2phas(self) -> typing.Optional[float]:
-        """Get or set the Upper temperature limit for cooling rate evaluation.  Cooling rate can be used as input for user defined variables
+        """Get or set the Upper temperature limit for cooling rate evaluation. Cooling rate can be used as input for user defined variables
         """ # nopep8
         return self._cards[3].get_value("t2phas")
 

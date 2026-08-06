@@ -255,8 +255,8 @@ class MatSoilAndFoam(KeywordBase):
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID for pressure as a function of volumetric strain. If it is
-        defined, then the curve is used instead of the input for EPS1…, and
-        P1…. The response is extended to being temperature dependent if LCID refers to a table.
+        defined, then the curve is used instead of the input for EPSi, and
+        Pi. The response is extended to being temperature dependent if LCID refers to a table.
         """ # nopep8
         return self._cards[1].get_value("lcid")
 

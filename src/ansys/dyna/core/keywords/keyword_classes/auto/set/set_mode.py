@@ -92,7 +92,7 @@ class SetMode(KeywordBase):
 
     @property
     def mid1(self) -> typing.Optional[int]:
-        """Get or set the Mode ID.
+        """Get or set the Mode ID N. (see Remark  2)
         """ # nopep8
         return self._cards[1].get_value("mid1")
 
@@ -103,7 +103,7 @@ class SetMode(KeywordBase):
 
     @property
     def mid2(self) -> typing.Optional[int]:
-        """Get or set the Mode ID.
+        """Get or set the Mode ID N. (see Remark  2)
         """ # nopep8
         return self._cards[1].get_value("mid2")
 
@@ -114,7 +114,7 @@ class SetMode(KeywordBase):
 
     @property
     def mid3(self) -> typing.Optional[int]:
-        """Get or set the Mode ID.
+        """Get or set the Mode ID N. (see Remark  2)
         """ # nopep8
         return self._cards[1].get_value("mid3")
 
@@ -125,7 +125,7 @@ class SetMode(KeywordBase):
 
     @property
     def mid4(self) -> typing.Optional[int]:
-        """Get or set the Mode ID.
+        """Get or set the Mode ID N. (see Remark  2)
         """ # nopep8
         return self._cards[1].get_value("mid4")
 
@@ -136,7 +136,7 @@ class SetMode(KeywordBase):
 
     @property
     def mid5(self) -> typing.Optional[int]:
-        """Get or set the Mode ID.
+        """Get or set the Mode ID N. (see Remark  2)
         """ # nopep8
         return self._cards[1].get_value("mid5")
 
@@ -147,7 +147,7 @@ class SetMode(KeywordBase):
 
     @property
     def mid6(self) -> typing.Optional[int]:
-        """Get or set the Mode ID.
+        """Get or set the Mode ID N. (see Remark  2)
         """ # nopep8
         return self._cards[1].get_value("mid6")
 
@@ -158,7 +158,7 @@ class SetMode(KeywordBase):
 
     @property
     def mid7(self) -> typing.Optional[int]:
-        """Get or set the Mode ID.
+        """Get or set the Mode ID N. (see Remark  2)
         """ # nopep8
         return self._cards[1].get_value("mid7")
 
@@ -169,7 +169,7 @@ class SetMode(KeywordBase):
 
     @property
     def mid8(self) -> typing.Optional[int]:
-        """Get or set the Mode ID.
+        """Get or set the Mode ID N. (see Remark  2)
         """ # nopep8
         return self._cards[1].get_value("mid8")
 

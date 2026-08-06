@@ -47,7 +47,7 @@ class IncludeCompensationOriginalDynain(KeywordBase):
         ]
     @property
     def filename(self) -> typing.Optional[str]:
-        """Get or set the Name of the keyword files containing nodes and elements information, with adaptive constraints if exist. Currently all blanks must have the same numbers of nodes and elements.
+        """Get or set the The dynain file name that contains model information, adaptive constraints, and stress and strain tensor information.
         """ # nopep8
         return self._cards[0].get_value("filename")
 

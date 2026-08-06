@@ -24,3 +24,5 @@
 
 from .cosim_fmi_control import CosimFmiControl
 from .cosim_fmi_interface import CosimFmiInterface
+from .cosim_syc_control import CosimSycControl
+from .cosim_syc_interface import CosimSycInterface

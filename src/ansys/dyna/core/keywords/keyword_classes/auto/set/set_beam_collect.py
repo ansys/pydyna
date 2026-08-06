@@ -103,7 +103,7 @@ class SetBeamCollect(KeywordBase):
 
     @property
     def k1(self) -> typing.Optional[int]:
-        """Get or set the First beam ID.
+        """Get or set the First beam ID  (see Remark 1).
         """ # nopep8
         return self._cards[1].get_value("k1")
 
@@ -114,7 +114,7 @@ class SetBeamCollect(KeywordBase):
 
     @property
     def k2(self) -> typing.Optional[int]:
-        """Get or set the Second beam ID.
+        """Get or set the Second beam ID (see Remark 1).
         """ # nopep8
         return self._cards[1].get_value("k2")
 
@@ -125,7 +125,7 @@ class SetBeamCollect(KeywordBase):
 
     @property
     def k3(self) -> typing.Optional[int]:
-        """Get or set the Third beam ID.
+        """Get or set the Third beam ID (see Remark 1).
         """ # nopep8
         return self._cards[1].get_value("k3")
 
@@ -136,7 +136,7 @@ class SetBeamCollect(KeywordBase):
 
     @property
     def k4(self) -> typing.Optional[int]:
-        """Get or set the Fourth beam ID.
+        """Get or set the Fourth beam ID (see Remark 1).
         """ # nopep8
         return self._cards[1].get_value("k4")
 
@@ -147,7 +147,7 @@ class SetBeamCollect(KeywordBase):
 
     @property
     def k5(self) -> typing.Optional[int]:
-        """Get or set the Fifth beam ID.
+        """Get or set the Fifth beam ID (see Remark 1).
         """ # nopep8
         return self._cards[1].get_value("k5")
 
@@ -158,7 +158,7 @@ class SetBeamCollect(KeywordBase):
 
     @property
     def k6(self) -> typing.Optional[int]:
-        """Get or set the Sixth beam ID.
+        """Get or set the Sixth beam ID (see Remark 1).
         """ # nopep8
         return self._cards[1].get_value("k6")
 
@@ -169,7 +169,7 @@ class SetBeamCollect(KeywordBase):
 
     @property
     def k7(self) -> typing.Optional[int]:
-        """Get or set the Seventh beam ID.
+        """Get or set the Seventh beam ID (see Remark 1).
         """ # nopep8
         return self._cards[1].get_value("k7")
 
@@ -180,7 +180,7 @@ class SetBeamCollect(KeywordBase):
 
     @property
     def k8(self) -> typing.Optional[int]:
-        """Get or set the Eighth beam ID.
+        """Get or set the Eighth beam ID (see Remark 1).
         """ # nopep8
         return self._cards[1].get_value("k8")
 

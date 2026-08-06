@@ -33,6 +33,8 @@ _DATABASEBINARYRUNRSF_CARD0 = (
     FieldSchema("beam", int, 20, 10, 0),
     FieldSchema("npltc", int, 30, 10, None),
     FieldSchema("psetid", int, 40, 10, None),
+    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("nskip", int, 60, 10, None),
 )
 
 class DatabaseBinaryRunrsf(KeywordBase):
@@ -111,6 +113,17 @@ class DatabaseBinaryRunrsf(KeywordBase):
     def psetid(self, value: int) -> None:
         """Set the psetid property."""
         self._cards[0].set_value("psetid", value)
+
+    @property
+    def nskip(self) -> typing.Optional[int]:
+        """Get or set the Options D3DUMP and RUNRSF, MPP/HYBRID execution output both local and global restart files. Each processor creates its own local file for small or simple restart. Then, processor 0 collects data from all processors and outputs the full deck restart file but this output requires lots of data communication and disk space. This option gives the multiplication number of time steps for full deck restart output states to save CPU time. The last full deck restart is always output with the regular restart file at the end of the job.
+        """ # nopep8
+        return self._cards[0].get_value("nskip")
+
+    @nskip.setter
+    def nskip(self, value: int) -> None:
+        """Set the nskip property."""
+        self._cards[0].set_value("nskip", value)
 
     @property
     def psetid_link(self) -> typing.Optional[KeywordBase]:

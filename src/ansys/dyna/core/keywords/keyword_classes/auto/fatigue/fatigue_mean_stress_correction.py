@@ -62,7 +62,8 @@ class FatigueMeanStressCorrection(KeywordBase):
     def method(self) -> int:
         """Get or set the Mean stress correction method:
         EQ.0: Goodman equation
-        EQ.1: Soderberg equation
+        EQ.1: Soderberg equation.
+        EQ.-1: Interpolation on multiple SN curves
         EQ.2: Gerber equation
         EQ.3: Goodman tension only
         EQ.4: Gerber tension only
@@ -74,8 +75,8 @@ class FatigueMeanStressCorrection(KeywordBase):
     @method.setter
     def method(self, value: int) -> None:
         """Set the method property."""
-        if value not in [0, 1, 2, 3, 4, 11, 12, None]:
-            raise Exception("""method must be `None` or one of {0,1,2,3,4,11,12}.""")
+        if value not in [0, 1, -1, 2, 3, 4, 11, 12, None]:
+            raise Exception("""method must be `None` or one of {0,1,-1,2,3,4,11,12}.""")
         self._cards[0].set_value("method", value)
 
     @property

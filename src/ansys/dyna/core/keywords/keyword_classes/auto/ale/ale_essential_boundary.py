@@ -54,7 +54,7 @@ class AleEssentialBoundary(KeywordBase):
         ]
     @property
     def id(self) -> typing.Optional[int]:
-        """Get or set the Set ID defining a part, part set or segment set ID of the ALE mesh boundary.
+        """Get or set the Set ID defining a part, part set or segment set ID of the ALE or S-ALE mesh boundary.
         """ # nopep8
         return self._cards[0].get_value("id")
 
@@ -66,9 +66,9 @@ class AleEssentialBoundary(KeywordBase):
     @property
     def idtype(self) -> int:
         """Get or set the Type of set ID:
-        EQ.0: part set ID (PSID).
-        EQ.1: part ID (PID).
-        EQ.2: segment set ID (SGSID).
+        EQ.0: Part set ID (PSID).
+        EQ.1: Part ID (PID).
+        EQ.2: Segment set ID (SGSID).
         """ # nopep8
         return self._cards[0].get_value("idtype")
 
@@ -96,7 +96,7 @@ class AleEssentialBoundary(KeywordBase):
 
     @property
     def iexcl(self) -> typing.Optional[int]:
-        """Get or set the Segment Set ID to be excluded from applying ALE essential boundary condition. For example, inlet/outlet segments.
+        """Get or set the Segment set ID to be excluded from applying ALE or S-ALE essential boundary condition. For example, inlet/outlet segments.
         """ # nopep8
         return self._cards[0].get_value("iexcl")
 

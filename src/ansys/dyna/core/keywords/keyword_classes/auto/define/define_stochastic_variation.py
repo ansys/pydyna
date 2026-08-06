@@ -37,25 +37,30 @@ _DEFINESTOCHASTICVARIATION_CARD0 = (
     FieldSchema("var_s", int, 40, 10, 0),
     FieldSchema("var_f", int, 50, 10, 0),
     FieldSchema("irng", int, 60, 10, 0),
+    FieldSchema("iextra", int, 70, 10, 0),
 )
 
 _DEFINESTOCHASTICVARIATION_CARD1 = (
-    FieldSchema("r1", float, 0, 10, None),
-    FieldSchema("r2", float, 10, 10, None),
-    FieldSchema("r3", float, 20, 10, None),
+    FieldSchema("ishlflg", int, 0, 10, 0),
 )
 
 _DEFINESTOCHASTICVARIATION_CARD2 = (
-    FieldSchema("lcid", int, 0, 10, None),
-)
-
-_DEFINESTOCHASTICVARIATION_CARD3 = (
     FieldSchema("r1", float, 0, 10, None),
     FieldSchema("r2", float, 10, 10, None),
     FieldSchema("r3", float, 20, 10, None),
 )
 
+_DEFINESTOCHASTICVARIATION_CARD3 = (
+    FieldSchema("lcid", int, 0, 10, None),
+)
+
 _DEFINESTOCHASTICVARIATION_CARD4 = (
+    FieldSchema("r1", float, 0, 10, None),
+    FieldSchema("r2", float, 10, 10, None),
+    FieldSchema("r3", float, 20, 10, None),
+)
+
+_DEFINESTOCHASTICVARIATION_CARD5 = (
     FieldSchema("lcid", int, 0, 10, None),
 )
 
@@ -101,6 +106,10 @@ class DefineStochasticVariation(KeywordBase):
                 _DEFINESTOCHASTICVARIATION_CARD4,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _DEFINESTOCHASTICVARIATION_CARD5,
+                **kwargs,
+            ),
             OptionCardSet(
                 option_spec = DefineStochasticVariation._option_spec_list[0],
                 cards = [
@@ -125,7 +134,7 @@ class DefineStochasticVariation(KeywordBase):
 
     @property
     def pid(self) -> typing.Optional[int]:
-        """Get or set the *PART ID or *SET_PART ID
+        """Get or set the Part, part set, or material ID depending on PID_TYP
         """ # nopep8
         return self._cards[0].get_value("pid")
 
@@ -136,19 +145,18 @@ class DefineStochasticVariation(KeywordBase):
 
     @property
     def pid_typ(self) -> int:
-        """Get or set the Flag for PID type. If PID and PID_TYP are both 0, then the
-        properties defined here apply to all shell and solid parts using
-        materials with the STOCHASTIC option.
-        EQ.0: PID is a *PART ID.
-        EQ.1: PID is a *SET_PART ID
+        """Get or set the Flag for PID type. If PID and PID_TYP are both 0, then the properties defined here apply to all shell and solid parts using materials with the STOCHASTIC option.
+        EQ.0: PID is a part (*PART) ID.
+        EQ.1: PID is a part set (*SET_PART) ID.
+        EQ.2:	PID is a material ID (MID defined on *MAT_...).
         """ # nopep8
         return self._cards[0].get_value("pid_typ")
 
     @pid_typ.setter
     def pid_typ(self, value: int) -> None:
         """Set the pid_typ property."""
-        if value not in [0, 1, None]:
-            raise Exception("""pid_typ must be `None` or one of {0,1}.""")
+        if value not in [0, 1, 2, None]:
+            raise Exception("""pid_typ must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("pid_typ", value)
 
     @property
@@ -168,7 +176,7 @@ class DefineStochasticVariation(KeywordBase):
 
     @property
     def var_s(self) -> int:
-        """Get or set the Variation type for scaling the yield stress.
+        """Get or set the Variation type for scaling the yield stress(or tensile strength for material 280).
         EQ.0: The scale factor is 1.0 everywhere.
         EQ.1: The scale factor is random number in the uniform random distribution in the interval defined by R1 and R2.
         EQ.2: The scale factor is a random number obeying the Gaussian distribution defined by R1, R2, and R3.
@@ -205,8 +213,8 @@ class DefineStochasticVariation(KeywordBase):
     @property
     def irng(self) -> int:
         """Get or set the Flag for random number generation.
-        EQ.0:	Use deterministic(pseudo - ) random number generator.The same input always leads to the same distribution.
-        EQ.1 : Use non - deterministic(true) random number generator.With the same input, a different distribution is achieved in each run
+        EQ.0: Use deterministic(pseudo - ) random number generator.The same input always leads to the same distribution.
+        EQ.1: Use non - deterministic(true) random number generator.With the same input, a different distribution is achieved in each run
         """ # nopep8
         return self._cards[0].get_value("irng")
 
@@ -218,103 +226,133 @@ class DefineStochasticVariation(KeywordBase):
         self._cards[0].set_value("irng", value)
 
     @property
-    def r1(self) -> typing.Optional[float]:
-        """Get or set the Real values to define the stochastic distribution
+    def iextra(self) -> int:
+        """Get or set the Flag to include card1.1:
+        EQ.0: Do not include Card 1.1
+        EQ.1: Include Card 1.1.
         """ # nopep8
-        return self._cards[1].get_value("r1")
+        return self._cards[0].get_value("iextra")
 
-    @r1.setter
-    def r1(self, value: float) -> None:
-        """Set the r1 property."""
-        self._cards[1].set_value("r1", value)
+    @iextra.setter
+    def iextra(self, value: int) -> None:
+        """Set the iextra property."""
+        if value not in [0, 1, None]:
+            raise Exception("""iextra must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("iextra", value)
 
     @property
-    def r2(self) -> typing.Optional[float]:
-        """Get or set the Real values to define the stochastic distribution
+    def ishlflg(self) -> int:
+        """Get or set the Flag to use the same random number for all in-plane integration points in a shell layer, such as when using shell type 16:
+        EQ.0:Do not use the same number.
+        EQ.1: Use the same number.
         """ # nopep8
-        return self._cards[1].get_value("r2")
+        return self._cards[1].get_value("ishlflg")
 
-    @r2.setter
-    def r2(self, value: float) -> None:
-        """Set the r2 property."""
-        self._cards[1].set_value("r2", value)
-
-    @property
-    def r3(self) -> typing.Optional[float]:
-        """Get or set the Real values to define the stochastic distribution
-        """ # nopep8
-        return self._cards[1].get_value("r3")
-
-    @r3.setter
-    def r3(self, value: float) -> None:
-        """Set the r3 property."""
-        self._cards[1].set_value("r3", value)
-
-    @property
-    def lcid(self) -> typing.Optional[int]:
-        """Get or set the Curve ID defining the stochastic distribution
-        """ # nopep8
-        return self._cards[2].get_value("lcid")
-
-    @lcid.setter
-    def lcid(self, value: int) -> None:
-        """Set the lcid property."""
-        self._cards[2].set_value("lcid", value)
+    @ishlflg.setter
+    def ishlflg(self, value: int) -> None:
+        """Set the ishlflg property."""
+        if value not in [0, 1, None]:
+            raise Exception("""ishlflg must be `None` or one of {0,1}.""")
+        self._cards[1].set_value("ishlflg", value)
 
     @property
     def r1(self) -> typing.Optional[float]:
         """Get or set the Real values to define the stochastic distribution
         """ # nopep8
-        return self._cards[3].get_value("r1")
+        return self._cards[2].get_value("r1")
 
     @r1.setter
     def r1(self, value: float) -> None:
         """Set the r1 property."""
-        self._cards[3].set_value("r1", value)
+        self._cards[2].set_value("r1", value)
 
     @property
     def r2(self) -> typing.Optional[float]:
         """Get or set the Real values to define the stochastic distribution
         """ # nopep8
-        return self._cards[3].get_value("r2")
+        return self._cards[2].get_value("r2")
 
     @r2.setter
     def r2(self, value: float) -> None:
         """Set the r2 property."""
-        self._cards[3].set_value("r2", value)
+        self._cards[2].set_value("r2", value)
 
     @property
     def r3(self) -> typing.Optional[float]:
         """Get or set the Real values to define the stochastic distribution
         """ # nopep8
-        return self._cards[3].get_value("r3")
+        return self._cards[2].get_value("r3")
 
     @r3.setter
     def r3(self, value: float) -> None:
         """Set the r3 property."""
-        self._cards[3].set_value("r3", value)
+        self._cards[2].set_value("r3", value)
 
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Curve ID defining the stochastic distribution
         """ # nopep8
-        return self._cards[4].get_value("lcid")
+        return self._cards[3].get_value("lcid")
 
     @lcid.setter
     def lcid(self, value: int) -> None:
         """Set the lcid property."""
-        self._cards[4].set_value("lcid", value)
+        self._cards[3].set_value("lcid", value)
+
+    @property
+    def r1(self) -> typing.Optional[float]:
+        """Get or set the Real values to define the stochastic distribution
+        """ # nopep8
+        return self._cards[4].get_value("r1")
+
+    @r1.setter
+    def r1(self, value: float) -> None:
+        """Set the r1 property."""
+        self._cards[4].set_value("r1", value)
+
+    @property
+    def r2(self) -> typing.Optional[float]:
+        """Get or set the Real values to define the stochastic distribution
+        """ # nopep8
+        return self._cards[4].get_value("r2")
+
+    @r2.setter
+    def r2(self, value: float) -> None:
+        """Set the r2 property."""
+        self._cards[4].set_value("r2", value)
+
+    @property
+    def r3(self) -> typing.Optional[float]:
+        """Get or set the Real values to define the stochastic distribution
+        """ # nopep8
+        return self._cards[4].get_value("r3")
+
+    @r3.setter
+    def r3(self, value: float) -> None:
+        """Set the r3 property."""
+        self._cards[4].set_value("r3", value)
+
+    @property
+    def lcid(self) -> typing.Optional[int]:
+        """Get or set the Curve ID defining the stochastic distribution
+        """ # nopep8
+        return self._cards[5].get_value("lcid")
+
+    @lcid.setter
+    def lcid(self, value: int) -> None:
+        """Set the lcid property."""
+        self._cards[5].set_value("lcid", value)
 
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[5].cards[0].get_value("title")
+        return self._cards[6].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[5].cards[0].set_value("title", value)
+        self._cards[6].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

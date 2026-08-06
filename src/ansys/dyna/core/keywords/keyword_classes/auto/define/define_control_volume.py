@@ -29,9 +29,10 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINECONTROLVOLUME_CARD0 = (
-    FieldSchema("id", int, 0, 10, None),
-    FieldSchema("sid", int, 10, 10, None),
-    FieldSchema("p0", float, 20, 10, None),
+    FieldSchema("cvid", int, 0, 10, None),
+    FieldSchema("ssid", int, 10, 10, None),
+    FieldSchema("rho", float, 20, 10, None),
+    FieldSchema("lcsrc", int, 30, 10, None),
 )
 
 _DEFINECONTROLVOLUME_OPTION0_CARD0 = (
@@ -47,7 +48,7 @@ class DefineControlVolume(KeywordBase):
         OptionSpec("TITLE", "pre/1", 1),
     ]
     _link_fields = {
-        "sid": LinkType.SET_SEGMENT,
+        "ssid": LinkType.SET_SEGMENT,
     }
 
     def __init__(self, **kwargs):
@@ -71,37 +72,48 @@ class DefineControlVolume(KeywordBase):
             ),
         ]
     @property
-    def id(self) -> typing.Optional[int]:
+    def cvid(self) -> typing.Optional[int]:
         """Get or set the Control volume ID.
         """ # nopep8
-        return self._cards[0].get_value("id")
+        return self._cards[0].get_value("cvid")
 
-    @id.setter
-    def id(self, value: int) -> None:
-        """Set the id property."""
-        self._cards[0].set_value("id", value)
-
-    @property
-    def sid(self) -> typing.Optional[int]:
-        """Get or set the Segment set ID
-        """ # nopep8
-        return self._cards[0].get_value("sid")
-
-    @sid.setter
-    def sid(self, value: int) -> None:
-        """Set the sid property."""
-        self._cards[0].set_value("sid", value)
+    @cvid.setter
+    def cvid(self, value: int) -> None:
+        """Set the cvid property."""
+        self._cards[0].set_value("cvid", value)
 
     @property
-    def p0(self) -> typing.Optional[float]:
-        """Get or set the Initial pressure
+    def ssid(self) -> typing.Optional[int]:
+        """Get or set the Segment set ID giving the control volume geometry
         """ # nopep8
-        return self._cards[0].get_value("p0")
+        return self._cards[0].get_value("ssid")
 
-    @p0.setter
-    def p0(self, value: float) -> None:
-        """Set the p0 property."""
-        self._cards[0].set_value("p0", value)
+    @ssid.setter
+    def ssid(self, value: int) -> None:
+        """Set the ssid property."""
+        self._cards[0].set_value("ssid", value)
+
+    @property
+    def rho(self) -> typing.Optional[float]:
+        """Get or set the Density of fluid contained in the domain (and entering the domain through the source curve)
+        """ # nopep8
+        return self._cards[0].get_value("rho")
+
+    @rho.setter
+    def rho(self, value: float) -> None:
+        """Set the rho property."""
+        self._cards[0].set_value("rho", value)
+
+    @property
+    def lcsrc(self) -> typing.Optional[int]:
+        """Get or set the Load curve specifying the flow rate density (mass/time) into the domain, note that RHO must be set to a nonzero number for this to work
+        """ # nopep8
+        return self._cards[0].get_value("lcsrc")
+
+    @lcsrc.setter
+    def lcsrc(self, value: int) -> None:
+        """Set the lcsrc property."""
+        self._cards[0].set_value("lcsrc", value)
 
     @property
     def title(self) -> typing.Optional[str]:
@@ -118,12 +130,12 @@ class DefineControlVolume(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def sid_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_SEGMENT_* keyword for sid."""
-        return self._get_set_link("SEGMENT", self.sid)
+    def ssid_link(self) -> typing.Optional[KeywordBase]:
+        """Get the SET_SEGMENT_* keyword for ssid."""
+        return self._get_set_link("SEGMENT", self.ssid)
 
-    @sid_link.setter
-    def sid_link(self, value: KeywordBase) -> None:
-        """Set the SET_SEGMENT_* keyword for sid."""
-        self.sid = value.sid
+    @ssid_link.setter
+    def ssid_link(self, value: KeywordBase) -> None:
+        """Set the SET_SEGMENT_* keyword for ssid."""
+        self.ssid = value.sid
 

@@ -82,7 +82,7 @@ class Mat013(KeywordBase):
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material identification. A unique number has to be used.
+        """Get or set the Material identification. A unique number or label must be specified (see *PART).
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -137,7 +137,7 @@ class Mat013(KeywordBase):
 
     @property
     def bulk(self) -> typing.Optional[float]:
-        """Get or set the Bulk modulus, K.
+        """Get or set the Bulk modulus
         """ # nopep8
         return self._cards[0].get_value("bulk")
 

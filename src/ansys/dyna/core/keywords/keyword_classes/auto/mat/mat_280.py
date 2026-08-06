@@ -64,6 +64,9 @@ _MAT280_CARD3 = (
     FieldSchema("radcrt", float, 20, 10, None),
     FieldSchema("ratenl", float, 30, 10, None),
     FieldSchema("rfiltf", float, 40, 10, None),
+    FieldSchema("fracen", float, 50, 10, None),
+    FieldSchema("ctrack", int, 60, 10, 0),
+    FieldSchema("grpft", float, 70, 10, None),
 )
 
 _MAT280_OPTION0_CARD0 = (
@@ -158,12 +161,12 @@ class Mat280(KeywordBase):
     @property
     def imod(self) -> float:
         """Get or set the Flag to choose degradation procedure, when critical stress is reached.
-        EQ.0.0:	Softening in NCYCR load steps. Define SFSTI, SFSTR, and NCYCR (default).
-        EQ.1.0:	Damage model for softening. Define ILAW, AT, BT, AC, and BC.
-        EQ.2.0 : Drucker - Prager
-        EQ.10.0 : Rankine with modified compressive failure
-        EQ.11.0 : Mohr - Coulomb with modified compressive failure
-        EQ.12.0 : Drucker - Prager with modified compressive failure
+        EQ.0.0: Softening in NCYCR load steps. Define SFSTI, SFSTR, and NCYCR (default).
+        EQ.1.0: Damage model for softening. Define ILAW, AT, BT, AC, and BC.
+        EQ.2.0: Drucker - Prager
+        EQ.10.0: Rankine with modified compressive failure
+        EQ.11.0: Mohr - Coulomb with modified compressive failure
+        EQ.12.0: Drucker - Prager with modified compressive failure
         """ # nopep8
         return self._cards[0].get_value("imod")
 
@@ -177,8 +180,8 @@ class Mat280(KeywordBase):
     @property
     def ilaw(self) -> float:
         """Get or set the Flag to choose damage evolution law if IMOD=1.0, see Remarks.
-        EQ.0.0:	Same damage evolution for tensile and compressive failure (default).
-        EQ.1.0:	Different damage evolution for tensile failure and compressive failure.
+        EQ.0.0: Same damage evolution for tensile and compressive failure (default).
+        EQ.1.0: Different damage evolution for tensile failure and compressive failure.
         """ # nopep8
         return self._cards[0].get_value("ilaw")
 
@@ -207,8 +210,10 @@ class Mat280(KeywordBase):
 
     @property
     def ft(self) -> typing.Optional[float]:
-        """Get or set the GT.0.0:	constant value
-        LT.0.0:	load curve ID = |FT| , which defines tensile strength as a function of effective strain rate(RFILTF is recommended).If used with FTSCL>0, |FT| defines a curve for tensile strength vs. strain rate and FTSCL scales the strength values from that curve as long as the material is intact. If cracked, neighbors get non-scaled values from that curve. RATENL is set to zero in that case.
+        """Get or set the Tensile strength, f_t.
+        GT.0.0: constant value
+        LT.0.0: Load curve ID = |FT|, which gives tensile strength as a function of effective strain rate (RFILTF is recommended). If used with FTSCL > 0, |FT| specifies a curve for tensile strength vs. strain rate, and FTSCL scales the strength values from that curve as long as the material is intact. If cracked, neighbors get non-scaled values from that curve. RATENL is set to zero in that case. Logarithmic interpolation between strain rates is assumed if the first abscissa value in the curve is negative; in this case, all the abscissa values are assumed to represent the natural logarithm of a strain rate.
+        Note that a spatially - varying scale factor can be applied to FT through * INITIAL_STRESS_SHELL by setting history variable #13 or through the STOCHASTIC keyword option by using* DEFINE_STOCHASTIC_VARIATION.This scale factor scales FT regardless of RATENL.As a result, depending on the value of RATENL, both this scale factor and FTSCL may scale FT.
         """ # nopep8
         return self._cards[1].get_value("ft")
 
@@ -230,7 +235,7 @@ class Mat280(KeywordBase):
 
     @property
     def at(self) -> typing.Optional[float]:
-        """Get or set the Tensile damage evolution parameter α_t. Can be interpreted as the residual load carrying capacity ratio for tensile failure ranging from 0 to 1..
+        """Get or set the Tensile damage evolution parameter alpha_t. Can be interpreted as the residual load carrying capacity ratio for tensile failure ranging from 0 to 1..
         """ # nopep8
         return self._cards[1].get_value("at")
 
@@ -241,7 +246,7 @@ class Mat280(KeywordBase):
 
     @property
     def bt(self) -> typing.Optional[int]:
-        """Get or set the Tensile damage evolution parameter β_t. It controls the softening velocity for tensile failure.
+        """Get or set the Tensile damage evolution parameter beta_t. It controls the softening velocity for tensile failure.
         """ # nopep8
         return self._cards[1].get_value("bt")
 
@@ -252,7 +257,7 @@ class Mat280(KeywordBase):
 
     @property
     def ac(self) -> typing.Optional[int]:
-        """Get or set the Compressive damage evolution parameter α_t. Can be interpreted as the residual load carrying capacity ratio for compressive failure ranging from 0 to 1.
+        """Get or set the Compressive damage evolution parameter alpha_c. Can be interpreted as the residual load carrying capacity ratio for compressive failure ranging from 0 to 1.
         """ # nopep8
         return self._cards[1].get_value("ac")
 
@@ -263,7 +268,7 @@ class Mat280(KeywordBase):
 
     @property
     def bc(self) -> typing.Optional[float]:
-        """Get or set the Compressive damage evolution parameter β_t. It controls the softening velocity for compressive failure.
+        """Get or set the Compressive damage evolution parameter beta_c. It controls the softening velocity for compressive failure.
         """ # nopep8
         return self._cards[1].get_value("bc")
 
@@ -274,9 +279,10 @@ class Mat280(KeywordBase):
 
     @property
     def ftscl(self) -> float:
-        """Get or set the Scale factor for the tensile strength: FTmod = FTSCL * FT.
-        As soon as the first crack happens in the associated part, tensile strength drops to its original value, FT.
-        Default value is 1.0, values >1.0 can be helpful to grasp high force peaks in impact events.
+        """Get or set the Scale factor for the tensile strength (default = 1.0):
+        FT _mod = FTSCLxFT
+        If RATENL = 0.0 (see Card 4), then the tensile strength drops to its original value, FT, as soon as the first crack happens in the associated part.In this case, FTSCL > 1.0 can be helpful in modeling high - force peaks in impact events.
+        If RATENL != 0.0, the tensile strength of an element is evaluated depending on the smoothed effective strain rate when a crack forms in a neighboring element(see Remark 7).
         """ # nopep8
         return self._cards[1].get_value("ftscl")
 
@@ -312,7 +318,7 @@ class Mat280(KeywordBase):
     @property
     def crin(self) -> float:
         """Get or set the Flag for crack strain initialization
-        EQ.0.0: initial crack strain is strain at failure (default),
+        EQ.0.0: initial crack strain is the strain at failure (default),
         EQ.1.0: initial crack strain is zero.
         """ # nopep8
         return self._cards[2].get_value("crin")
@@ -326,7 +332,7 @@ class Mat280(KeywordBase):
 
     @property
     def ecrcl(self) -> typing.Optional[float]:
-        """Get or set the Crack strain necessary to reactivate certain stress components after	crack closure..
+        """Get or set the Crack strain necessary to reactivate certain stress components after crack closure..
         """ # nopep8
         return self._cards[2].get_value("ecrcl")
 
@@ -371,6 +377,8 @@ class Mat280(KeywordBase):
     @property
     def engcrt(self) -> typing.Optional[float]:
         """Get or set the Critical energy for nonlocal failure criterion; see Remark 6.
+        GT.0.0: Constant value.
+        LT.0.0 : | ENGCRT | refers to a * DEFINE_FUNCTION giving the critical energy as a function of the minimum distance of the center of impact to the edge of the windshield. Thus the critical energy value can now depend on this distance, for example, larger in the middle area and smaller toward the edge.
         """ # nopep8
         return self._cards[3].get_value("engcrt")
 
@@ -403,7 +411,7 @@ class Mat280(KeywordBase):
 
     @property
     def rfiltf(self) -> typing.Optional[float]:
-        """Get or set the Smoothing factor on the effective strain rate for the evaluation of the current tensile strength if RATENL > 0.0; see Remark 7.
+        """Get or set the Smoothing factor on the effective strain rate for the evaluation of the current tensile strength if RATENL > 0.0; see Remark 7.
         """ # nopep8
         return self._cards[3].get_value("rfiltf")
 
@@ -411,6 +419,43 @@ class Mat280(KeywordBase):
     def rfiltf(self, value: float) -> None:
         """Set the rfiltf property."""
         self._cards[3].set_value("rfiltf", value)
+
+    @property
+    def fracen(self) -> typing.Optional[float]:
+        """Get or set the Fracture energy (units of stress * length). An alternative orthotropic damage model with linear softening is invoked with this option. Values smaller than 0.5*FT*FT/E*l_e (element size) lead to immediate failure. This is the area under the elastic stress-displacement line until FT is reached. Only larger values result in actual residual energy after crack initiation. Variables SFSTI, SFSTR, and NCYCR are ignored with this option.You can specify a spatially-varying scale factor for FRACEN by setting history variable #14 with *INITIAL_STRESS_SHELL.
+        """ # nopep8
+        return self._cards[3].get_value("fracen")
+
+    @fracen.setter
+    def fracen(self, value: float) -> None:
+        """Set the fracen property."""
+        self._cards[3].set_value("fracen", value)
+
+    @property
+    def ctrack(self) -> int:
+        """Get or set the Flag for optional crack tracking algorithm (see Remark 10):
+        EQ.0.0: Inactive
+        EQ.1.0: Active
+        """ # nopep8
+        return self._cards[3].get_value("ctrack")
+
+    @ctrack.setter
+    def ctrack(self, value: int) -> None:
+        """Set the ctrack property."""
+        if value not in [0, 1, None]:
+            raise Exception("""ctrack must be `None` or one of {0,1}.""")
+        self._cards[3].set_value("ctrack", value)
+
+    @property
+    def grpft(self) -> typing.Optional[float]:
+        """Get or set the Optional group number for strength reduction. If several parts use *MAT_280 with potentially different material parameters, giving them the same value of GRPT causes them to experience tensile strength reduction by FTSCL at the same time (RATENL = 0).
+        """ # nopep8
+        return self._cards[3].get_value("grpft")
+
+    @grpft.setter
+    def grpft(self, value: float) -> None:
+        """Set the grpft property."""
+        self._cards[3].set_value("grpft", value)
 
     @property
     def title(self) -> typing.Optional[str]:

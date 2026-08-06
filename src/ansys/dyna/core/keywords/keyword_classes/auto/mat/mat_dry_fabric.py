@@ -196,7 +196,7 @@ class MatDryFabric(KeywordBase):
 
     @property
     def gab1(self) -> typing.Optional[float]:
-        """Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments.  See the figure to the right.  The shear moduli GABi corre-spond to the slope of the ith segment.  The start and end points for the segments are specified in the GAMAB[1-2] fields.
+        """Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments. See the figure to the right. The shear moduli GABi corre-spond to the slope of the ith segment. The start and end points for the segments are specified in the GAMAB[1-2] fields.
         """ # nopep8
         return self._cards[0].get_value("gab1")
 
@@ -207,7 +207,7 @@ class MatDryFabric(KeywordBase):
 
     @property
     def gab2(self) -> typing.Optional[float]:
-        """Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments.  See the figure to the right.  The shear moduli GABi corre-spond to the slope of the ith segment.  The start and end points for the segments are specified in the GAMAB[1-2] fields.
+        """Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments. See the figure to the right. The shear moduli GABi corre-spond to the slope of the ith segment. The start and end points for the segments are specified in the GAMAB[1-2] fields.
         """ # nopep8
         return self._cards[0].get_value("gab2")
 
@@ -218,7 +218,7 @@ class MatDryFabric(KeywordBase):
 
     @property
     def gab3(self) -> typing.Optional[float]:
-        """Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments.  See the figure to the right.  The shear moduli GABi corre-spond to the slope of the ith segment.  The start and end points for the segments are specified in the GAMAB[1-2] fields.
+        """Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments. See the figure to the right. The shear moduli GABi corre-spond to the slope of the ith segment. The start and end points for the segments are specified in the GAMAB[1-2] fields.
         """ # nopep8
         return self._cards[0].get_value("gab3")
 
@@ -251,7 +251,7 @@ class MatDryFabric(KeywordBase):
 
     @property
     def gamab1(self) -> typing.Optional[float]:
-        """Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments.  See the figure to the right.  The shear moduli GABi corre-spond to the slope of the ith segment.  The start and end points for the segments are specified in the GAMAB[1-2] fields.
+        """Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments. See the figure to the right. The shear moduli GABi corre-spond to the slope of the ith segment. The start and end points for the segments are specified in the GAMAB[1-2] fields.
         """ # nopep8
         return self._cards[1].get_value("gamab1")
 
@@ -262,7 +262,7 @@ class MatDryFabric(KeywordBase):
 
     @property
     def gamab2(self) -> typing.Optional[float]:
-        """Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments.  See the figure to the right.  The shear moduli GABi corre-spond to the slope of the ith segment.  The start and end points for the segments are specified in the GAMAB[1-2] fields.
+        """Get or set the Shear stress-strain behavior is modeled as piecewise linear in three segments. See the figure to the right. The shear moduli GABi corre-spond to the slope of the ith segment. The start and end points for the segments are specified in the GAMAB[1-2] fields.
         """ # nopep8
         return self._cards[1].get_value("gamab2")
 
@@ -273,11 +273,11 @@ class MatDryFabric(KeywordBase):
 
     @property
     def aopt(self) -> typing.Optional[float]:
-        """Get or set the Material axes option.  See *MAT_OPTIONTROPIC_ELAS¬TIC for a more complete description:
-        EQ.0.0:	locally orthotropic with material axes determined by ele-ment nodes 1, 2, and 4, as with *DEFINECOORDINATE_NODES, and then rotated about the element normal by an angle BETA.
-        EQ.2.0:	globally orthotropic with material axes determined by vec-tors defined below, as with *DEFINE_COORDINATE_VECTOR.
-        EQ.3.0:	locally orthotropic material axes determined by rotating the material axes about the element normal by an angle, BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
-        LT.0.0:	the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM or *DEFINE_COORDINATE_VECTOR).  Available in R3 version of 971 and later.
+        """Get or set the Material axes option. See *MAT_OPTIONTROPIC_ELASTIC for a more complete description:
+        EQ.0.0: locally orthotropic with material axes determined by ele-ment nodes 1, 2, and 4, as with *DEFINECOORDINATE_NODES, and then rotated about the element normal by an angle BETA.
+        EQ.2.0: globally orthotropic with material axes determined by vec-tors defined below, as with *DEFINE_COORDINATE_VECTOR.
+        EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle, BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
+        LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES, *DEFINE_COORDINATE_SYSTEM or *DEFINE_COORDINATE_VECTOR). Available in R3 version of 971 and later.
         """ # nopep8
         return self._cards[2].get_value("aopt")
 

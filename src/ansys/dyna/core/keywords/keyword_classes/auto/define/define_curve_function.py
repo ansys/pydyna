@@ -92,9 +92,9 @@ class DefineCurveFunction(KeywordBase):
     @property
     def sidr(self) -> int:
         """Get or set the Stress initialization by dynamic relaxation:
-        EQ.0:  load curve used in transient analysis only or for other applications,
-        EQ.1:  load curve used in stress initialization but not transient analysis,
-        EQ.2:  load curve applies to both initialization and transient analysis.
+        EQ.0: load curve used in transient analysis only or for other applications,
+        EQ.1: load curve used in stress initialization but not transient analysis,
+        EQ.2: load curve applies to both initialization and transient analysis.
         """ # nopep8
         return self._cards[0].get_value("sidr")
 
@@ -108,7 +108,7 @@ class DefineCurveFunction(KeywordBase):
     @property
     def sfa(self) -> float:
         """Get or set the Scale factor for abscissa value.  This is useful for simple modifications.
-        EQ.0.0:  default set to 1.0.
+        EQ.0.0: default set to 1.0.
         """ # nopep8
         return self._cards[0].get_value("sfa")
 
@@ -120,7 +120,7 @@ class DefineCurveFunction(KeywordBase):
     @property
     def sfo(self) -> float:
         """Get or set the Scale factor for ordinate value (function).  This is useful for simple modifications.
-        EQ.0.0:  default set to 1.0..
+        EQ.0.0: default set to 1.0..
         """ # nopep8
         return self._cards[0].get_value("sfo")
 

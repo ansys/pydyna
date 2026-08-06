@@ -64,7 +64,8 @@ class IcfdDatabaseNtempout(KeywordBase):
 
     @property
     def dtout(self) -> float:
-        """Get or set the Output frequency. If 0., the ICFD timestep will be used.
+        """Get or set the Output frequency.
+        EQ.0: The ICFD timestep will be used.
         """ # nopep8
         return self._cards[0].get_value("dtout")
 

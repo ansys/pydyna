@@ -76,9 +76,9 @@ class DatabaseCpmSensor(KeywordBase):
     @property
     def binary(self) -> int:
         """Get or set the Flag for the binary file
-        EQ.1:  ASCII file is written,
-        EQ.2:  Data written to the binary file binout,
-        EQ.3:  ASCII file  is written and the data written to the binary file binout
+        EQ.1: ASCII file is written,
+        EQ.2: Data written to the binary file binout,
+        EQ.3: ASCII file  is written and the data written to the binary file binout
         """ # nopep8
         return self._cards[0].get_value("binary")
 

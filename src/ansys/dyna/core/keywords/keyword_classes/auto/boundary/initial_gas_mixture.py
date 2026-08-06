@@ -92,7 +92,7 @@ class InitialGasMixture(KeywordBase):
     @property
     def mmgid(self) -> typing.Optional[int]:
         """Get or set the ALE Multi-material group ID of the material that may be present at t = 0 in the ALE mesh set defined by SID.  For general ALE, it must be AMMGID.
-        For S - ALE, either AMMGID or AMMG name(AMMGNM) could be used here.Please refer to * ALE_STRUCTURED_MULTI - MATERIALS_GROUP for more details..
+        For S - ALE, either AMMGID or AMMG name(AMMGNM) could be used here.Please refer to *ALE_STRUCTURED_MULTI - MATERIALS_GROUP for more details..
         """ # nopep8
         return self._cards[0].get_value("mmgid")
 

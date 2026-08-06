@@ -189,7 +189,7 @@ class Mat1222D(KeywordBase):
 
     @property
     def prxy(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio, ν, in xy, yz and xz directions, respectively. Negative values indicate (positive) curve numbers, where each curve is a function of temperature.
+        """Get or set the Poisson's ratio, nu_xy, in xy, yz and xz directions, respectively. Negative values indicate (positive) curve numbers, where each curve is a function of temperature.
         """ # nopep8
         return self._cards[0].get_value("prxy")
 
@@ -200,7 +200,7 @@ class Mat1222D(KeywordBase):
 
     @property
     def pryz(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio, ν, in xy, yz and xz directions, respectively. Negative values indicate (positive) curve numbers, where each curve is a function of temperature.
+        """Get or set the Poisson's ratio, nu_yz, in xy, yz and xz directions, respectively. Negative values indicate (positive) curve numbers, where each curve is a function of temperature.
         """ # nopep8
         return self._cards[0].get_value("pryz")
 
@@ -211,7 +211,7 @@ class Mat1222D(KeywordBase):
 
     @property
     def prxz(self) -> typing.Optional[float]:
-        """Get or set the Poisson's ratio, ν, in xy, yz and xz directions, respectively. Negative values indicate (positive) curve numbers, where each curve is a function of temperature.
+        """Get or set the Poisson's ratio, nu_xy, in xy, yz and xz directions, respectively. Negative values indicate (positive) curve numbers, where each curve is a function of temperature.
         """ # nopep8
         return self._cards[0].get_value("prxz")
 
@@ -322,8 +322,8 @@ class Mat1222D(KeywordBase):
     @property
     def hr(self) -> int:
         """Get or set the Hardening rule:
-        EQ.1:	Stress-strain relationship is defined by load curve or 2D-table ID with parameter P1. P2 is ignored.
-        EQ.2:	Stress-strain relationship is defined by strength coefficient K (P1) and strain hardening coefficient n (P2), as in Swift's exponential hardening equation: σ_yield =k(ε+0.01)^n..
+        EQ.1: Stress-strain relationship is defined by load curve or 2D-table ID with parameter P1. P2 is ignored.
+        EQ.2: Stress-strain relationship is defined by strength coefficient K (P1) and strain hardening coefficient n (P2), as in Swift's exponential hardening equation: Sigma_yield =k(eps+0.01)**n.
         """ # nopep8
         return self._cards[2].get_value("hr")
 
@@ -337,8 +337,8 @@ class Mat1222D(KeywordBase):
     @property
     def p1(self) -> typing.Optional[float]:
         """Get or set the Material parameter:
-        HR.EQ.1:	Load curve or 2D-table ID defining stress-strain curve. If 2D-table ID, the table gives stress-strain curves for different temperatures.
-        HR.EQ.2:	k, strength coefficient in σ_yield =k(ε+0.01)^n.
+        HR.EQ.1: Load curve or 2D-table ID defining stress-strain curve. If 2D-table ID, the table gives stress-strain curves for different temperatures.
+        HR.EQ.2: k, strength coefficient in Sigma_yield =k(eps+0.01)**n.
         """ # nopep8
         return self._cards[2].get_value("p1")
 
@@ -350,8 +350,8 @@ class Mat1222D(KeywordBase):
     @property
     def p2(self) -> typing.Optional[float]:
         """Get or set the Material parameter:
-        HR.EQ.1:	not used.
-        HR.EQ.2.0:	n, the exponent in σ_yield=k(ε+0.01)^n.
+        HR.EQ.1: not used.
+        HR.EQ.2.0: n, the exponent in Sigma_yield=k(eps+0.01)**n.
         """ # nopep8
         return self._cards[2].get_value("p2")
 
@@ -367,9 +367,9 @@ class Mat1222D(KeywordBase):
         element nodes 1, 2, and 4, as with *DEFINE_COORDINATE_NODES, and then rotated about the shell element normal by the angle BETA.
         EQ.2.0: globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDI_NATE_VECTOR.
         EQ.3.0: locally orthotropic material axes determined by rotating the material axes about the element normal by an angle,
-        BETA, from a line in the plane of the element defined by	the cross product of the vector v with the element normal.
+        BETA, from a line in the plane of the element defined by the cross product of the vector v with the element normal.
         LT.0.0: the absolute value of AOPT is a coordinate system ID number (CID on *DEFINE_COORDINATE_NODES,
-        *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR). Available with the R3 release of Version 971 and later.
+        *DEFINE_COORDINATE_SYSTEM or *DEFINE_COOR_DINATE_VECTOR).
         """ # nopep8
         return self._cards[3].get_value("aopt")
 

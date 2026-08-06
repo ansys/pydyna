@@ -83,7 +83,7 @@ class SetNodeAdd(KeywordBase):
         ]
     @property
     def sid(self) -> typing.Optional[int]:
-        """Get or set the Node set ID. All node sets should have a unique set ID.
+        """Get or set the Set ID of the new node set. All node sets should have a unique set ID.
         """ # nopep8
         return self._cards[0].get_value("sid")
 

@@ -31,6 +31,7 @@ from ansys.dyna.core.lib.keyword_base import LinkType
 _SETSOLIDCOLLECT_CARD0 = (
     FieldSchema("sid", int, 0, 10, None),
     FieldSchema("solver", str, 10, 10, "MECH"),
+    FieldSchema("its", str, 20, 10, "0"),
 )
 
 _SETSOLIDCOLLECT_CARD1 = (
@@ -118,8 +119,20 @@ class SetSolidCollect(KeywordBase):
         self._cards[0].set_value("solver", value)
 
     @property
+    def its(self) -> str:
+        """Get or set the Define coupling type across different scales in two-scale co-simulation. This flag should only be included for solid sets that provide coupling information in the input file referred to by *INCLUDE_COSIM.
+        EQ.3: Solid - in - solid immersed coupling
+        """ # nopep8
+        return self._cards[0].get_value("its")
+
+    @its.setter
+    def its(self, value: str) -> None:
+        """Set the its property."""
+        self._cards[0].set_value("its", value)
+
+    @property
     def k1(self) -> typing.Optional[int]:
-        """Get or set the First solid element ID of the set.
+        """Get or set the First solid element ID (see Remark 2)
         """ # nopep8
         return self._cards[1].get_value("k1")
 
@@ -130,7 +143,7 @@ class SetSolidCollect(KeywordBase):
 
     @property
     def k2(self) -> typing.Optional[int]:
-        """Get or set the Second solid element ID of the set.
+        """Get or set the Second solid element ID (see Remark 2)
         """ # nopep8
         return self._cards[1].get_value("k2")
 
@@ -141,7 +154,7 @@ class SetSolidCollect(KeywordBase):
 
     @property
     def k3(self) -> typing.Optional[int]:
-        """Get or set the Third solid element ID of the set.
+        """Get or set the Third solid element ID (see Remark 2)
         """ # nopep8
         return self._cards[1].get_value("k3")
 
@@ -152,7 +165,7 @@ class SetSolidCollect(KeywordBase):
 
     @property
     def k4(self) -> typing.Optional[int]:
-        """Get or set the Fourth solid element ID of the set.
+        """Get or set the Fourth solid element ID (see Remark 2)
         """ # nopep8
         return self._cards[1].get_value("k4")
 
@@ -163,7 +176,7 @@ class SetSolidCollect(KeywordBase):
 
     @property
     def k5(self) -> typing.Optional[int]:
-        """Get or set the Fifth solid element ID of the set.
+        """Get or set the Fifth solid element ID (see Remark 2)
         """ # nopep8
         return self._cards[1].get_value("k5")
 
@@ -174,7 +187,7 @@ class SetSolidCollect(KeywordBase):
 
     @property
     def k6(self) -> typing.Optional[int]:
-        """Get or set the Sixth solid element ID of the set.
+        """Get or set the Sixth solid element ID (see Remark 2)
         """ # nopep8
         return self._cards[1].get_value("k6")
 
@@ -185,7 +198,7 @@ class SetSolidCollect(KeywordBase):
 
     @property
     def k7(self) -> typing.Optional[int]:
-        """Get or set the Seventh solid element ID of the set.
+        """Get or set the Seventh solid element ID (see Remark 2)
         """ # nopep8
         return self._cards[1].get_value("k7")
 
@@ -196,7 +209,7 @@ class SetSolidCollect(KeywordBase):
 
     @property
     def k8(self) -> typing.Optional[int]:
-        """Get or set the Eighth solid element ID of the set.
+        """Get or set the Eighth solid element ID (see Remark 2)
         """ # nopep8
         return self._cards[1].get_value("k8")
 

@@ -334,7 +334,7 @@ class AirbagWangNefske(KeywordBase):
 
     @property
     def lcc23(self) -> int:
-        """Get or set the Load curve number defining the vent orifice coefficient which applies to exit hole as a function of time. A nonzero value for C23 overrides LCC23.
+        """Get or set the The absolute value, |LCC23 |, is a load curve ID.  If the ID is positive, the load curve defines the vent orifice coefficient which applies to exit hole as a function of time.  If the ID is negative, the vent orifice coefficient is defined as a function of relative pressure, P_air /P_bag ; see [Anagonye and Wang 1999].  In addition, LCC23 can be defined through *DEFINE_CURVE_FUNCTION.  A nonzero value for C23 overrides LCC23.
         """ # nopep8
         return self._cards[2].get_value("lcc23")
 
@@ -345,7 +345,10 @@ class AirbagWangNefske(KeywordBase):
 
     @property
     def a23(self) -> typing.Optional[float]:
-        """Get or set the Vent orifice area which applies to exit hole. Set to zero if LCA23 is defined below.
+        """Get or set the Vent orifice area:
+        GT.0.0: vent orifice area which applies to exit hole
+        LT.0.0: the absolute value | A23 | is a part ID, see[Anagonye and Wang, 1999].With LCA23 = -1, | A23 | is a part set representing venting holes.The venting leakage through each venting hole represented by a part in part set | A23 | is output to abstat.The area of this part / set becomes the vent orifice area.With SIDTYP > 0, airbagAirbag pressure will not be applied to part / set | A23 | representing venting holes if part / set | A23 | is not included in SID, the part set representing the airbag.
+        EQ.0.0: set A23 to zero if LCA23 is  0
         """ # nopep8
         return self._cards[2].get_value("a23")
 
@@ -356,7 +359,7 @@ class AirbagWangNefske(KeywordBase):
 
     @property
     def lca23(self) -> int:
-        """Get or set the Load curve number defining the vent orifice area which applies to exit hole as a function of absolute pressure. A nonzero value for A23 overrides LCA23.
+        """Get or set the Load curve defining the vent orifice area which applies to exit hole as a function of absolute pressure, or LCA23 can be defined through *DEFINE_CURVE_FUNCTION.  A nonzero value for A23 overrides LCA23.
         """ # nopep8
         return self._cards[2].get_value("lca23")
 
@@ -378,7 +381,7 @@ class AirbagWangNefske(KeywordBase):
 
     @property
     def lccp23(self) -> int:
-        """Get or set the Load curve number defining the orifice coefficient for leakage (fabric porosity) as a function of time. A nonzero value for CP23 overrides LCCP23.
+        """Get or set the Load curve defining the orifice coefficient for leakage (fabric porosity) as a function of time, or LCCP23 can be defined through *DEFINE_CURVE_FUNCTION.  A nonzero value for CP23 overrides LCCP23.
         """ # nopep8
         return self._cards[2].get_value("lccp23")
 
@@ -400,7 +403,7 @@ class AirbagWangNefske(KeywordBase):
 
     @property
     def lcap23(self) -> int:
-        """Get or set the Load curve number defining the area for leakage (fabric porosity) as a function of (absolute) pressure. A nonzero value for AP23 overrides LCAP23.
+        """Get or set the Load curve defining the area for leakage (fabric porosity) as a function of (absolute) pressure, or LCAP23 can be defined through *DEFINE_CURVE_FUNCTION.  A nonzero value for AP23 overrides LCAP23.
         """ # nopep8
         return self._cards[2].get_value("lcap23")
 

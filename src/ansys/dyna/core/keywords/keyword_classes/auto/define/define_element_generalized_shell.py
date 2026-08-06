@@ -159,7 +159,7 @@ class DefineElementGeneralizedShell(KeywordBase):
     def form(self) -> int:
         """Get or set the Shell formulation to be used
         EQ.0: shear deformable shell theory with rotational DOFs (shell normal evaluated at the nodes)
-        EQ.1: shear deformable shell theory without rotational DOFs (shell	normal evaluated at the nodes)
+        EQ.1: shear deformable shell theory without rotational DOFs (shell normal evaluated at the nodes)
         EQ.2: thin shell theory without rotational DOFs (shell normal evaluated at the integration points)
         EQ.3: thin shell theory with rotational DOFs (shell normal evaluated at the integration points).
         """ # nopep8

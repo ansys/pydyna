@@ -351,7 +351,7 @@ class MatNonQuadraticFailure(KeywordBase):
 
     @property
     def thick(self) -> typing.Optional[float]:
-        """Get or set the Element thickness if using shell formulation 16.
+        """Get or set the Element thickness if using shell formulation 16. Since releases R12.1 and R13.0, setting THICK to zero causes the thickness to be taken from *SECTION_SHELL or *ELEMENT_SHELL_THICKNESS.
         """ # nopep8
         return self._cards[3].get_value("thick")
 

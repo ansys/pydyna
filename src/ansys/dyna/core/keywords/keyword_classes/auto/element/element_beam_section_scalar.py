@@ -251,17 +251,17 @@ class ElementBeamSectionScalar(KeywordBase):
     @property
     def stype(self) -> str:
         """Get or set the Section type (A format):
-        EQ.SECTION_01: I-shape		EQ.SECTION_12: Cross
-        EQ.SECTION_02: Channel	EQ.SECTION_13: H-shape
-        EQ.SECTION_03: L-shape		EQ.SECTION_14: T-shape2
-        EQ.SECTION_04: T-shape		EQ.SECTION_15: I-shape3
-        EQ.SECTION_05: Tubular box	EQ.SECTION_16: Channel2
-        EQ.SECTION_06: Z-shape		EQ.SECTION_17: Channel3
-        EQ.SECTION_07: Trapezoidal	EQ.SECTION_18: T-shape3
-        EQ.SECTION_08: Circular		EQ.SECTION_19: Box-shape2
-        EQ.SECTION_09: Tubular		EQ.SECTION_20: Hexagon
-        EQ.SECTION_10: I-shape2	EQ.SECTION_21: Hat-shape
-        EQ.SECTION_11: Solid box	EQ.SECTION_22: Hat-shape2
+        EQ.SECTION_01: I-shape  EQ.SECTION_12: Cross
+        EQ.SECTION_02: Channel EQ.SECTION_13: H-shape
+        EQ.SECTION_03: L-shape  EQ.SECTION_14: T-shape2
+        EQ.SECTION_04: T-shape  EQ.SECTION_15: I-shape3
+        EQ.SECTION_05: Tubular box EQ.SECTION_16: Channel2
+        EQ.SECTION_06: Z-shape  EQ.SECTION_17: Channel3
+        EQ.SECTION_07: Trapezoidal EQ.SECTION_18: T-shape3
+        EQ.SECTION_08: Circular  EQ.SECTION_19: Box-shape2
+        EQ.SECTION_09: Tubular  EQ.SECTION_20: Hexagon
+        EQ.SECTION_10: I-shape2 EQ.SECTION_21: Hat-shape
+        EQ.SECTION_11: Solid box EQ.SECTION_22: Hat-shape2
         """ # nopep8
         return self._cards[1].get_value("stype")
 

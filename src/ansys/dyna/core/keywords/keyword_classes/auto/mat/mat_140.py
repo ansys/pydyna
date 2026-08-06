@@ -78,7 +78,7 @@ class Mat140(KeywordBase):
 
     @property
     def rho(self) -> typing.Optional[float]:
-        """Get or set the Estimated material density.  This is used only as a stability check.
+        """Get or set the Estimated material density. This is used only as a stability check.
         """ # nopep8
         return self._cards[0].get_value("rho")
 

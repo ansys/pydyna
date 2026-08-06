@@ -33,9 +33,20 @@ _EMMAT001_CARD0 = (
     FieldSchema("sigma", float, 20, 10, None),
     FieldSchema("eosid", int, 30, 10, None),
     FieldSchema("unused", int, 40, 10, None),
-    FieldSchema("unused", int, 50, 10, None),
+    FieldSchema("eplambda", float, 50, 10, None),
     FieldSchema("deatht", float, 60, 10, 1e+28),
     FieldSchema("rdltype", int, 70, 10, 0),
+)
+
+_EMMAT001_CARD1 = (
+    FieldSchema("unused", int, 0, 10, None),
+    FieldSchema("unused", int, 10, 10, None),
+    FieldSchema("epsrr", float, 20, 10, None),
+    FieldSchema("eosid2", int, 30, 10, None),
+    FieldSchema("epsri", float, 40, 10, None),
+    FieldSchema("epsid3", int, 50, 10, None),
+    FieldSchema("unused", int, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
 )
 
 class EmMat001(KeywordBase):
@@ -55,10 +66,14 @@ class EmMat001(KeywordBase):
                 _EMMAT001_CARD0,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _EMMAT001_CARD1,
+                **kwargs,
+            ),
         ]
     @property
     def mid(self) -> typing.Optional[int]:
-        """Get or set the Material ID: refers to MID in the *PART card.
+        """Get or set the Material ID. For all MTYPE except MTYPE = 3, MID must reference a *MAT material since the electromagnetic properties are added onto the *MAT properties. If MTYPE = 3, MID can be left blank for the electromagnetic properties to apply to the ICFD entire fluid or it can be the PID of a *ICFD_PART_VOL to apply to an ICFD fluid part. See Remark 1.
         """ # nopep8
         return self._cards[0].get_value("mid")
 
@@ -69,12 +84,12 @@ class EmMat001(KeywordBase):
 
     @property
     def mtype(self) -> int:
-        """Get or set the defines the electromagnetism type of the material:
-        EQ.0: Air or vacuum
-        EQ.1: Insulator material: these materials have the same electromagnetism behavior as EQ.0
-        EQ.2: Conductor carrying a source. In these conductors, the eddy current problem is solved, which gives the actual current density. Typically, this would correspond to the coil.
-        EQ.3: Fluid conductor. In that case, MID refers to the ID given in * ICFD_PART.
-        EQ.4: Conductor not connected to any current or voltage source, where the Eddy current problem is solved. Typically, this would correspond to the workpiece.
+        """Get or set the Defines the electromagnetism type of the material:
+        EQ.0:	Air or vacuum
+        EQ.1 : Insulator material.These materials have the same electromagnetism behavior as MTYPE = 0.
+        EQ.2 : Conductor carrying a source.In these conductors, the eddy - current problem is solved, yielding the actual current density.Typically, this material would correspond to the coil.In Electro - Physiology, it corresponds to the tissue when solving the monodomain equations(EMSOL = 11 or 13 on * EM_CONTROL).For this case, an* EM_EP_CELLMODEL must be associated with this* EM_MAT_001.
+        EQ.3:	Fluid conductor.In this case, MID refers to the ID given in* ICFD_?PART_VOL.See Remark 2.
+        EQ.4:	Conductor not connected to any current or voltage source, where the eddy current problem is solved.Typically, this material would correspond to the workpiece.
         """ # nopep8
         return self._cards[0].get_value("mtype")
 
@@ -87,7 +102,7 @@ class EmMat001(KeywordBase):
 
     @property
     def sigma(self) -> typing.Optional[float]:
-        """Get or set the initial electrical conductivity of the material.
+        """Get or set the initial electrical conductivity of the material. For the eikonal solvers (EMSOL = 14 and 15 on *EM_CONTROL), SIGMA is the wave velocity.
         """ # nopep8
         return self._cards[0].get_value("sigma")
 
@@ -108,8 +123,19 @@ class EmMat001(KeywordBase):
         self._cards[0].set_value("eosid", value)
 
     @property
+    def eplambda(self) -> typing.Optional[float]:
+        """Get or set the Optional. When defined, this field activates the computation of extracellular potentials in the Purkinje network with the anisotropy ratio given by EPLAMDA
+        """ # nopep8
+        return self._cards[0].get_value("eplambda")
+
+    @eplambda.setter
+    def eplambda(self, value: float) -> None:
+        """Set the eplambda property."""
+        self._cards[0].set_value("eplambda", value)
+
+    @property
     def deatht(self) -> float:
-        """Get or set the Death time for the material. After DEATHT, the material will no longer be considered a conductor and removed from the EM solve.
+        """Get or set the Death time for the material. After DEATHT, the material will no longer be considered a conductor and will be removed from the EM solve. If a negative value is entered, a *DEFINE_?FUNCTION will be expected. The following parameters are allowed: (vx, vy, vz, temp, vol, mass, Ex, Ey, Ez, Bx, By, Bz, Fx, Fy, Fz, JHrate, time). Fx, Fy, and Fz denote the components of the Lorentz force vector. A negative value returned by the *DEFINE_?FUNCTION corresponds to a �dead� or inactive element. Once an element has been removed from the EM solve, it cannot return.
         """ # nopep8
         return self._cards[0].get_value("deatht")
 
@@ -120,8 +146,8 @@ class EmMat001(KeywordBase):
 
     @property
     def rdltype(self) -> int:
-        """Get or set the Used for the application: composite Tshell battery, with **EM_RANDLES_TSHELL.Defines the function of the layer associated to MID:
-        EQ.0:	Default. Conductor which is not part of a battery cell
+        """Get or set the Used for the composite Tshell batteries modeled, with **EM_RANDLES_TSHELL. RDLTYPE specifies the function of the layer associated to MID:
+        EQ.0: Default. Conductor which is not part of a battery cell
         EQ.1:Current Collector Positive
         EQ.2: Positive Electrode
         EQ.3:Separator
@@ -136,6 +162,50 @@ class EmMat001(KeywordBase):
         if value not in [0, 1, 2, 3, 4, 5, None]:
             raise Exception("""rdltype must be `None` or one of {0,1,2,3,4,5}.""")
         self._cards[0].set_value("rdltype", value)
+
+    @property
+    def epsrr(self) -> typing.Optional[float]:
+        """Get or set the Real and imaginary part of the relative permeability (dielectric constant and dielectric loss terms)
+        """ # nopep8
+        return self._cards[1].get_value("epsrr")
+
+    @epsrr.setter
+    def epsrr(self, value: float) -> None:
+        """Set the epsrr property."""
+        self._cards[1].set_value("epsrr", value)
+
+    @property
+    def eosid2(self) -> typing.Optional[int]:
+        """Get or set the Optional IDs defining equation of states for EPSRR and EPSRI respectfully
+        """ # nopep8
+        return self._cards[1].get_value("eosid2")
+
+    @eosid2.setter
+    def eosid2(self, value: int) -> None:
+        """Set the eosid2 property."""
+        self._cards[1].set_value("eosid2", value)
+
+    @property
+    def epsri(self) -> typing.Optional[float]:
+        """Get or set the Real and imaginary part of the relative permeability (dielectric constant and dielectric loss terms)
+        """ # nopep8
+        return self._cards[1].get_value("epsri")
+
+    @epsri.setter
+    def epsri(self, value: float) -> None:
+        """Set the epsri property."""
+        self._cards[1].set_value("epsri", value)
+
+    @property
+    def epsid3(self) -> typing.Optional[int]:
+        """Get or set the Optional IDs defining equation of states for EPSRR and EPSRI respectfully
+        """ # nopep8
+        return self._cards[1].get_value("epsid3")
+
+    @epsid3.setter
+    def epsid3(self, value: int) -> None:
+        """Set the epsid3 property."""
+        self._cards[1].set_value("epsid3", value)
 
     @property
     def mid_link(self) -> typing.Optional[KeywordBase]:

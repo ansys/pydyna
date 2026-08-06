@@ -379,7 +379,7 @@ class EmRandlesMeshless(KeywordBase):
 
     @property
     def tempu(self) -> int:
-        """Get or set the Temperature Unit :
+        """Get or set the Temperature Unit:
         EQ.0: The temperature is in Celsius
         EQ.1: The Temperature is in Kelvin.
         """ # nopep8

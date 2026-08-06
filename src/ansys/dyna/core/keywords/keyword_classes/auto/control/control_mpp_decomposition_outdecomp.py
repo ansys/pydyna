@@ -49,7 +49,7 @@ class ControlMppDecompositionOutdecomp(KeywordBase):
     def itype(self) -> int:
         """Get or set the 1: database in ls-prepost format to file decomp_parts.lsprepost.
         2: database in animator format to file decomp_parts.ses
-        EQ.3:	database in LS-PrePost format with d3plot state number.
+        EQ.3: database in LS-PrePost format with d3plot state number.
         This allows lsprepost to show the matching d3plot with the decomposition for
         *CONTROL_MPP_DECOMPOSITION_REDECOMPOSITION decomp_parts.lsprepost_s######
         """ # nopep8

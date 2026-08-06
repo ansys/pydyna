@@ -28,6 +28,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _ICFDCONTROLPOROUS_CARD0 = (
     FieldSchema("pmstype", int, 0, 10, 0),
+    FieldSchema("velmeth", int, 10, 10, 0),
 )
 
 class IcfdControlPorous(KeywordBase):
@@ -59,4 +60,19 @@ class IcfdControlPorous(KeywordBase):
         if value not in [0, 1, None]:
             raise Exception("""pmstype must be `None` or one of {0,1}.""")
         self._cards[0].set_value("pmstype", value)
+
+    @property
+    def velmeth(self) -> int:
+        """Get or set the Method for determining advection velocity:
+        EQ.0: Uses FEM approximation for advection velocity
+        EQ.1: Uses PFEM2 for advection velocity
+        """ # nopep8
+        return self._cards[0].get_value("velmeth")
+
+    @velmeth.setter
+    def velmeth(self, value: int) -> None:
+        """Set the velmeth property."""
+        if value not in [0, 1, None]:
+            raise Exception("""velmeth must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("velmeth", value)
 

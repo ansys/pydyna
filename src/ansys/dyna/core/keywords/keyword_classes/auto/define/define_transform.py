@@ -92,48 +92,49 @@ class DefineTransform(KeywordBase):
 
     @property
     def option(self) -> str:
-        """Get or set the .
-        Parameters.  0-1 below for the available options.
-        MIRROR
+        """Get or set the Option Parameters availble:MIRROR
         a1, a2, a3, a4, a5, a6, a7
-        Reflect, about a mirror plane defined to contain the point (a1, a2, a3) having its normal pointing from point (a1, a2, a3) toward (a4, a5, a6).  Setting a7=1 reflects the coordinate system as well, i.e., the mirrored coordinate system uses the left-hand-rule to determine the local z-axis.
+        Reflect about a mirror plane defined to contain the point (a1,a2,a3 ) having its normal pointing from point (a1,a2,a3) toward (a4,a5,a6). Setting a7 = 1 reflects the coordinate system as well, that this, the mirrored coordinate system uses the left-hand-rule to determine the local z-axis.
+        MATRIX
+        Mij in Cards 3 & 4
+        Direct input of a 4x4 space transformation matrix.  A node with coordinates (x,y,z) will be transformed according to (x,y,z,1)M.  In most cases M14 = M24 = M34 = 0 and M44 = 1.0.  The matrix can be equivalent to other options.  For example, TRANSL is equivalent to M41 = a1, M42 = a2 and M43 = a3, and SCALE is the same as M11 = a1, M22 = a2 and M33 = a3.
+        POINT
+        a1,a2,a3,a4
+        Define a point with ID, a1, with the initial coordinates a2, a3, and a4.
+        POS6Pa1, a2, a3, a4, a5, a6
+        Positioning by 6 points. Affine transformation (rotation and translation, no scaling) given by three start points a1, a2, and a3 and three target points a4, a5, and a6. The six POINTs must be defined before they are referenced. Only 1 POS6P option is permitted within a *DEFINE_TRANSFORMATION definition.
+        POS6N
+        a1, a2, a3, a4, a5, a6
+        Positioning by 6 nodes. Affine transformation (rotation and translation, no scaling) given by three start nodes a1, a2, and a3 and three target nodes a4, a5, and a6. The six nodes must be defined before they are referenced. Only 1 POS6N option is permitted within a *DEFINE_TRANSFORMATION definition.
+        ROTATE
+        a1, a2, a3, a4, a5, a6, a7
+        Rotate through an angle (deg), a7, about a line with direction cosines a1, a2, and a3 passing through the point with coordinates a4, a5, and a6.
+        If a4 through a7 are zero, then a1 and a2 are the IDs of two POINTs and a3 defines the rotation angle. The axis of rotation is defined by a vector going from point with ID a1 to point with ID a2.
+        ROTATE3NA
+        a1, a2, a3, a4
+        Rotate through an angle (deg), a4. The axis of rotation is defined by a vector going from the node with ID a1 to the node with ID a2 and passing through the node with ID a3 (a3 could be the same as a1 or a2). The three nodes must be defined before they are referenced. Only 1 ROTATE3NA option is permitted within a *DEFINE_TRANSFORMATION definition.
         SCALE
         a1, a2, a3
         Scale the global x, y, and z coordinates of a point by a1, a2, and a3, respectively.  If zero, a default of unity is set.
-        ROTATE
-        a1, a2, a3, a4, a5, a6, a7Rotate through an angle (deg), a7, about a line with direction cosines a1, a2, and a3 passing through the point with coordinates a4, a5, and a6.If a4 through a7 are zero, then a1 and a2 are the ID's of two POINTs and a3 defines the rotation angle. The axis of rotation is defined by a vector going from point with ID a1 to point with ID a2.
-        ROTATE3NA
-        a1, a2, a3, a4
-        Rotate through an angle (deg), a4. The axis of rotation is defined by a vector going from node with ID a1 to node with ID a2 and passing through node with ID a3 (a3 could be the same as a1 or a2). The three nodes must be defined before they are referenced.
         TRANSL
         a1, a2, a3
         Translate the x, y, and z coordinates of a point by a1, a2, and a3, respectively.
         TRANSL2ND
         a1, a2, a3
-        Translate by distance a3. The direction is defined by a vector going from node with ID a1 to node with ID a2. The two nodes must be defined before they are referenced.
-        POINT
-        a1,a2,a3,a4
-        Define a point with ID, a1, with the initial coordinates a2, a3, and a4.
-        POS6P
-        a1, a2, a3, a4, a5, a6
-        Positioning by 6 points. Affine transformation (rotation and translation, no scaling) given by three start points a1, a2, and a3 and three target points a4, a5, and a6. The six POINTs must be defined before they are referenced. Only 1 POS6P option is permitted within a *DEFINE_TRANSFORMATION definition.
-        POS6N
-        a1, a2, a3, a4, a5, a6
-        Positioning by 6 nodes. Affine transformation (rotation and translation, no scaling) given by three start nodes a1, a2, and a3 and three target nodes a4, a5, and a6. The six nodes must be defined before they are referenced. Only 1 POS6N option is permitted within a *DEFINE_TRANSFORMATION definition..
+        Translate by distance a3. The direction is defined by a vector going from node with ID a1 to node with ID a2. The two nodes must be defined before they are referenced. Only 1 TRANSL2ND option is permitted within a *DEFINE_TRANSFORMATION definition.
         """ # nopep8
         return self._cards[1].get_value("option")
 
     @option.setter
     def option(self, value: str) -> None:
         """Set the option property."""
-        if value not in ["MIRROR", "SCALE", "ROTATE", "ROTATE3NA", "TRANSL", "TRANSL2ND", "POINT", "POS6P", "POS6N", None]:
-            raise Exception("""option must be `None` or one of {"MIRROR","SCALE","ROTATE","ROTATE3NA","TRANSL","TRANSL2ND","POINT","POS6P","POS6N"}.""")
+        if value not in ["MIRROR", "MATRIX", "POINT", "POS6P", "POS6N", "ROTATE", "ROTATE3NA", "SCALE", "TRANSL", "TRANSL2ND", None]:
+            raise Exception("""option must be `None` or one of {"MIRROR","MATRIX","POINT","POS6P","POS6N","ROTATE","ROTATE3NA","SCALE","TRANSL","TRANSL2ND"}.""")
         self._cards[1].set_value("option", value)
 
     @property
     def a1(self) -> typing.Optional[float]:
-        """Get or set the Specified entity.
-        See Keyword Manual Section 10.25.
+        """Get or set the Parameters.  See Manual Table 0-1
         """ # nopep8
         return self._cards[1].get_value("a1")
 
@@ -144,8 +145,7 @@ class DefineTransform(KeywordBase):
 
     @property
     def a2(self) -> typing.Optional[float]:
-        """Get or set the Specified entity.
-        See Keyword Manual Section 10.25.
+        """Get or set the Parameters.  See Manual Table 0-1
         """ # nopep8
         return self._cards[1].get_value("a2")
 
@@ -156,8 +156,7 @@ class DefineTransform(KeywordBase):
 
     @property
     def a3(self) -> typing.Optional[float]:
-        """Get or set the Specified entity.
-        See Keyword Manual Section 10.25.
+        """Get or set the Parameters.  See Manual Table 0-1
         """ # nopep8
         return self._cards[1].get_value("a3")
 
@@ -168,8 +167,7 @@ class DefineTransform(KeywordBase):
 
     @property
     def a4(self) -> typing.Optional[float]:
-        """Get or set the Specified entity.
-        See Keyword Manual Section 10.25.
+        """Get or set the Parameters.  See Manual Table 0-1
         """ # nopep8
         return self._cards[1].get_value("a4")
 
@@ -180,8 +178,7 @@ class DefineTransform(KeywordBase):
 
     @property
     def a5(self) -> typing.Optional[float]:
-        """Get or set the Specified entity.
-        See Keyword Manual Section 10.25.
+        """Get or set the Parameters.  See Manual Table 0-1
         """ # nopep8
         return self._cards[1].get_value("a5")
 
@@ -192,8 +189,7 @@ class DefineTransform(KeywordBase):
 
     @property
     def a6(self) -> typing.Optional[float]:
-        """Get or set the Specified entity.
-        See Keyword Manual Section 10.25.
+        """Get or set the Parameters.  See Manual Table 0-1
         """ # nopep8
         return self._cards[1].get_value("a6")
 
@@ -204,8 +200,7 @@ class DefineTransform(KeywordBase):
 
     @property
     def a7(self) -> typing.Optional[float]:
-        """Get or set the Specified entity.
-        See Keyword Manual Section 10.25.
+        """Get or set the Parameters.  See Manual Table 0-1
         """ # nopep8
         return self._cards[1].get_value("a7")
 

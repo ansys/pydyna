@@ -71,7 +71,10 @@ class IcfdBoundaryPrescribedLevelset(KeywordBase):
 
     @property
     def axe(self) -> typing.Optional[int]:
-        """Get or set the Global axis specifying the direction of the fluid (X=1, Y=2, Z=3).
+        """Get or set the Global axis specifying the direction of the fluid:
+        EQ.1: X-axis
+        EQ.2: Y - axis
+        EQ.3: Z - axis.
         """ # nopep8
         return self._cards[0].get_value("axe")
 

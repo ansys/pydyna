@@ -145,7 +145,7 @@ class InitialImpulseMine(KeywordBase):
     @property
     def unit(self) -> int:
         """Get or set the Unit system. This must match the units used by finite element model.
-        EQ.1: inch, dozen slugs (i.e., lbf-s^2/in), second, psi (default)
+        EQ.1: inch, dozen slugs (i.e., lbf-s**2/in), second, psi (default)
         EQ.2: meter, kilogram, second, Pascal
         EQ.3: centimeter, gram, microsecond, megabar
         EQ.4: millimeter, kilogram, millisecond, GPa
@@ -229,7 +229,7 @@ class InitialImpulseMine(KeywordBase):
 
     @property
     def psid(self) -> int:
-        """Get or set the Part set ID identifying the parts affected by the mine.  See *SET_‌PART.  If the segment set defined by SSID includes segments of more than one part, PSID may be used to load only segments of identified parts. Otherwise, if PSID is set to zero, the part affected by the mine defaults to the part comprised by the nodes of the segment set
+        """Get or set the Part set ID identifying the parts affected by the mine.  See *SET_PART.  If the segment set defined by SSID includes segments of more than one part, PSID may be used to load only segments of identified parts. Otherwise, if PSID is set to zero, the part affected by the mine defaults to the part comprised by the nodes of the segment set
         """ # nopep8
         return self._cards[1].get_value("psid")
 

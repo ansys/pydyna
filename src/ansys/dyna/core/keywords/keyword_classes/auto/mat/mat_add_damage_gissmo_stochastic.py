@@ -32,9 +32,12 @@ from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import De
 _MATADDDAMAGEGISSMOSTOCHASTIC_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
     FieldSchema("unused", int, 10, 10, None),
-    FieldSchema("dtyp", float, 20, 10, 0.0),
+    FieldSchema("dtyp", float, 20, 10, None),
     FieldSchema("refsz", float, 30, 10, None),
     FieldSchema("numfip", float, 40, 10, 1.0),
+    FieldSchema("volfrac", float, 50, 10, 0.5),
+    FieldSchema("tetsf", float, 60, 10, None),
+    FieldSchema("unused", int, 70, 10, None),
 )
 
 _MATADDDAMAGEGISSMOSTOCHASTIC_CARD1 = (
@@ -45,6 +48,7 @@ _MATADDDAMAGEGISSMOSTOCHASTIC_CARD1 = (
     FieldSchema("fadexp", float, 40, 10, 1.0),
     FieldSchema("lcregd", int, 50, 10, 0),
     FieldSchema("instf", int, 60, 10, None),
+    FieldSchema("lcsoft", int, 70, 10, None),
 )
 
 _MATADDDAMAGEGISSMOSTOCHASTIC_CARD2 = (
@@ -56,6 +60,11 @@ _MATADDDAMAGEGISSMOSTOCHASTIC_CARD2 = (
     FieldSchema("hisvn", float, 50, 10, None),
     FieldSchema("soft", float, 60, 10, None),
     FieldSchema("lp2bi", float, 70, 10, None),
+)
+
+_MATADDDAMAGEGISSMOSTOCHASTIC_CARD3 = (
+    FieldSchema("rgtr1", float, 0, 10, None),
+    FieldSchema("rgtr2", float, 10, 10, None),
 )
 
 _MATADDDAMAGEGISSMOSTOCHASTIC_OPTION0_CARD0 = (
@@ -73,6 +82,7 @@ class MatAddDamageGissmoStochastic(KeywordBase):
     _link_fields = {
         "mid": LinkType.MAT,
         "lcdlim": LinkType.DEFINE_CURVE,
+        "lcsdg": LinkType.DEFINE_CURVE_OR_TABLE,
         "lcregd": LinkType.DEFINE_CURVE_OR_TABLE,
         "lcsrs": LinkType.DEFINE_CURVE_OR_TABLE,
     }
@@ -92,6 +102,10 @@ class MatAddDamageGissmoStochastic(KeywordBase):
             ),
             Card.from_field_schemas_with_defaults(
                 _MATADDDAMAGEGISSMOSTOCHASTIC_CARD2,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _MATADDDAMAGEGISSMOSTOCHASTIC_CARD3,
                 **kwargs,
             ),
             OptionCardSet(
@@ -117,21 +131,18 @@ class MatAddDamageGissmoStochastic(KeywordBase):
         self._cards[0].set_value("mid", value)
 
     @property
-    def dtyp(self) -> float:
+    def dtyp(self) -> typing.Optional[float]:
         """Get or set the DTYP is interpreted digit-wise as follows:
-        DTYP=[NM]=M+10×N
-        M.EQ.0:	damage is accumulated, but there is no coupling to flow stress and no failure.
-        M.EQ.1:	damage is accumulated, and element failure occurs for D=1.  Coupling of damage to flow stress depending on parameters, see remarks below.
-        N.EQ.0:	equivalent plastic strain is the driving quantity for the damage.  (To be more precise, it’s the history variable that LS-PrePost blindly labels as “plastic strain.”  What this history variable actually represents depends on the material model.)
-        N.GT.0:	the Nth additional history variable is the driving quantity for damage.  These additional history variables are the same ones flagged by the *DATABASE_EXTENT_BINARY keyword’s NEIPS and NEIPH fields.  For example, for solid elements with *MAT_187, setting N=6 causes volumetric plastic strain to be the driving quantity for the GISSMO damage.
+        DTYP=[NM]=M+10*N.EQ.0: damage is accumulated, but there is no coupling to flow stress and no failure.
+        M.EQ.1: damage is accumulated, and element failure occurs for D=1. Coupling of damage to flow stress depending on parameters, see GISSMO Damage Model below.
+        N.EQ.0: equivalent plastic strain is the driving quantity for the damage. (To be more precise, it's the history variable that LS-PrePost blindly labels as plastic strain. What this history variable actually represents depends on the material model.)
+        N.GT.0: the Nth additional history variable is the driving quantity for damage. These additional history variables are the same ones flagged by the *DATABASE_EXTENT_BINARY keywords NEIPS and NEIPH fields. For example, for solid elements with *MAT_187, setting N=6 causes volumetric plastic strain to be the driving quantity for the GISSMO damage.
         """ # nopep8
         return self._cards[0].get_value("dtyp")
 
     @dtyp.setter
     def dtyp(self, value: float) -> None:
         """Set the dtyp property."""
-        if value not in [0, 1, None]:
-            raise Exception("""dtyp must be `None` or one of {0,1}.""")
         self._cards[0].set_value("dtyp", value)
 
     @property
@@ -148,9 +159,9 @@ class MatAddDamageGissmoStochastic(KeywordBase):
 
     @property
     def numfip(self) -> float:
-        """Get or set the Number or percentage of failed integration points prior to element deletion (default value is 1).
-        GT.0.0:	Number of integration points which must fail before element is deleted.
-        LT.0.0:	Applies only to shells. |NUMFIP| is the percentage of layers which must fail before element fails.
+        """Get or set the Number or percentage of failed integration points prior to element deletion (default value is 1). NUMFIP does not apply to higher order solid element types 24, 25, 26, 27, 28, and 29, rather see the variable VOLFRAC. Also, when the material is a composite defined with *PART_COMPOSITE with different materials through-the-thickness, do not use NUMFIP; use *DEFINE_ELEMENT_EROSION instead.
+        GT.0.0: Number of integration points which must fail before element is deleted.
+        LT.0.0: Applies only to shells. |NUMFIP| is the percentage of layers which must fail before element fails.
         For shell formulations with 4 integration points per layer, the layer is considered failed if any of the integration points in the layer fails
         """ # nopep8
         return self._cards[0].get_value("numfip")
@@ -161,10 +172,32 @@ class MatAddDamageGissmoStochastic(KeywordBase):
         self._cards[0].set_value("numfip", value)
 
     @property
+    def volfrac(self) -> float:
+        """Get or set the Volume fraction required to fail before element deletion. The default is 0.5. It is used for higher-order solid element types 24, 25, 26, 27, 28, and 29, and all isogeometric solids and shell elements. See Remark 3.
+        """ # nopep8
+        return self._cards[0].get_value("volfrac")
+
+    @volfrac.setter
+    def volfrac(self, value: float) -> None:
+        """Set the volfrac property."""
+        self._cards[0].set_value("volfrac", value)
+
+    @property
+    def tetsf(self) -> typing.Optional[float]:
+        """Get or set the Scale factor applied to the element size of tetrahedral elements when obtaining the regularization factor with LCREGD. To achieve similar results with hexahedral and tetrahedral element meshes, a value of 2.0 is a good starting point.
+        """ # nopep8
+        return self._cards[0].get_value("tetsf")
+
+    @tetsf.setter
+    def tetsf(self, value: float) -> None:
+        """Set the tetsf property."""
+        self._cards[0].set_value("tetsf", value)
+
+    @property
     def lcsdg(self) -> int:
         """Get or set the Failure strain curve/table or function:
-        GT.0.0:	Load curve ID or table ID.As a load curve, it defines equivalent plastic strain to failure as a function of triaxiality.As a table, it defines for each Lode parameter value(between - 1 and 1) a load curve ID giving the equivalent plastic strain to failure as a function of triaxiality for that Lode parameter value.With HISVN ≠ 0, a 3D table can be used, where failure strain is a function of the history variable(TABLE_3D), Lode parameter(TABLE),and triaxiality(CURVE).With HISVN = 0, a 3D table introduces thermal effects, that is, failure strain is a function of temperature(TABLE_3D), Lode parameter(TABLE),and triaxiality(CURVE).As a 4D table, failure strain is a function of strain rate(TABLE_4D), temperature(TABLE_3D), Lode parameter(TABLE),and triaxiality(CURVE).
-        LT.0.0 : | LCSDG | is the ID of a function(*DEFINE_FUNCTION) with the arguments triaxiality η, Lode parameter L, plastic strain rate ε ̇^ p, temperature T, history variable HISVN ,and element size l_e : f(η,L,ε ̇ ^ p,T,HISVN,l_e).Note that the sequence of the arguments is important, not their names.
+        GT.0.0: Load curve ID or table ID.As a load curve, it defines equivalent plastic strain to failure as a function of triaxiality.As a table, it defines for each Lode parameter value(between - 1 and 1) a load curve ID giving the equivalent plastic strain to failure as a function of triaxiality for that Lode parameter value.With HISVN.NE.0, a 3D table can be used, where failure strain is a function of the history variable(TABLE_3D), Lode parameter(TABLE),and triaxiality(CURVE).With HISVN = 0, a 3D table introduces thermal effects, that is, failure strain is a function of temperature(TABLE_3D), Lode parameter(TABLE),and triaxiality(CURVE).As a 4D table, failure strain is a function of strain rate(TABLE_4D), temperature(TABLE_3D), Lode parameter(TABLE),and triaxiality(CURVE).
+        LT.0.0: |LCSDG| is the ID of a function(*DEFINE_FUNCTION) with the arguments triaxiality eta. Lode parameter L, plastic strain rate ep, temperature T, history variable HISVN ,and element size l_e: f(eta,L,ep,T,HISVN,l_e).Note that the sequence of the arguments is important, not their names.
         """ # nopep8
         return self._cards[1].get_value("lcsdg")
 
@@ -176,9 +209,9 @@ class MatAddDamageGissmoStochastic(KeywordBase):
     @property
     def ecrit(self) -> typing.Optional[float]:
         """Get or set the Critical plastic strain (material instability); see below.
-        LT.0.0: | ECRIT | is either a load curve ID defining critical equivalent plastic strain versus triaxiality or a table ID defining critical equivalent plastic strain as a function of triaxiality and Lode parameter(as in LCSDG).With HISVN ≠ 0, a 3D table can be used, where critical strain is a function of the history variable(TABLE_3D), Lode parameter(TABLE),and triaxiality(CURVE).With HISVN = 0, a 3D table introduces thermal effects, that is, critical strain is a function of temperature(TABLE_3D), Lode parameter(TABLE),and triaxiality(CURVE).As a 4D table, critical strain is a function of strain rate(TABLE_4D), temperature(TABLE_3D), Lode parameter(TABLE),and triaxiality(CURVE).
-        EQ.0.0 : Fixed value DCRIT defining critical damage is read(see below).
-        GT.0.0 : Fixed value for stress - state independent critical equivalent plastic strain
+        LT.0.0: |ECRIT| is either a load curve ID defining critical equivalent plastic strain versus triaxiality or a table ID defining critical equivalent plastic strain as a function of triaxiality and Lode parameter(as in LCSDG).With HISVN=0, a 3D table can be used, where critical strain is a function of the history variable(TABLE_3D), Lode parameter(TABLE),and triaxiality(CURVE).With HISVN=0, a 3D table introduces thermal effects, that is, critical strain is a function of temperature(TABLE_3D), Lode parameter(TABLE),and triaxiality(CURVE).As a 4D table, critical strain is a function of strain rate(TABLE_4D), temperature(TABLE_3D), Lode parameter(TABLE),and triaxiality(CURVE).
+        EQ.0.0: Fixed value DCRIT defining critical damage is read(see below).
+        GT.0.0: Fixed value for stress - state independent critical equivalent plastic strain
         """ # nopep8
         return self._cards[1].get_value("ecrit")
 
@@ -212,8 +245,8 @@ class MatAddDamageGissmoStochastic(KeywordBase):
     @property
     def fadexp(self) -> float:
         """Get or set the Exponent for damage-related stress fadeout.
-        LT.0.0:	|FADEXP|  is a load curve ID or table ID. As a load curve it gives the fading exponent as a function of element size. As a table, it specifies the fading exponent as a function triaxiality (TABLE) and element size (CURVE). For 3D tables, it specifies the fading exponent as a function Lode parameter (TABLE_3D), triaxiality (TABLE), and element size (CURVE).
-        GT.0.0:	Constant fading exponent.
+        LT.0.0: |FADEXP|  is a load curve ID or table ID. As a load curve it gives the fading exponent as a function of element size. As a table, it specifies the fading exponent as a function triaxiality (TABLE) and element size (CURVE). For 3D tables, it specifies the fading exponent as a function Lode parameter (TABLE_3D), triaxiality (TABLE), and element size (CURVE).
+        GT.0.0: Constant fading exponent.
         """ # nopep8
         return self._cards[1].get_value("fadexp")
 
@@ -224,10 +257,9 @@ class MatAddDamageGissmoStochastic(KeywordBase):
 
     @property
     def lcregd(self) -> int:
-        """Get or set the Load curve ID or Table ID defining element size dependent regulari-zation factors for equivalent plastic strain to failure.
-        GT.0.0:	Load curve ID (reg. factor vs. element size) or Table ID (reg. factor vs. element size curves vs. effective rate)
-        LT.0.0:	|LCREGD| is Table ID (reg. factor vs. element size curves vs. triaxiality) or a 3D table ID (regularization factor as function of Lode parameter, triaxiality, and element size).
-        This table provides an alternative to the use of SHRF and BIAXF for defining the effect of triaxiality on element size regularization of equivalent plastic strain to failure.
+        """Get or set the Load curve ID or table ID defining element size dependent regularization factors for equivalent plastic strain to failure:
+        GT.0.0: Load curve ID(regularization factor as a function of element size) or table ID(regularization factor as a function of element size curves indexed by effective strain rate)
+        LT.0.0 : | LCREGD | is a table ID(regularization factor as a function of element size curves indexed by triaxiality) or a 3D table ID(regularization factor as function of Lode parameter, triaxiality,and element size).This table provides an alternative to the use of SHRF and BIAXF for defining the effect of triaxiality on element size regularization of equivalent plastic strain to failure.
         """ # nopep8
         return self._cards[1].get_value("lcregd")
 
@@ -239,10 +271,9 @@ class MatAddDamageGissmoStochastic(KeywordBase):
     @property
     def instf(self) -> typing.Optional[int]:
         """Get or set the Flag for governing the behavior of instability measure, F, and fading exponent, FADEXP (see Remarks):
-        EQ.0:	F is incrementally updated,and FADEXP, if from a table, is allowed to vary.
-        EQ.1 : F is incrementally updated,and FADEXP is kept constant after F = 1.
-        EQ.0 : F is only 0 or 1 (after ECRIT is reached),and FADEXP, if from a table, is allowed to vary.
-        EQ.1 : F is only 0 or 1 (after ECRIT is reached),and FADEXP is kept constant after F = 1.
+        EQ.0: F is incrementally updated,and FADEXP, if from a table, is allowed to vary.
+        EQ.1: F is incrementally updated,and FADEXP is kept constant after F = 1.nEQ.2: F is only 0 or 1 (after ECRIT is reached),and FADEXP, if from a table, is allowed to vary.
+        EQ.3: F is only 0 or 1 (after ECRIT is reached),and FADEXP is kept constant after F = 1.
         """ # nopep8
         return self._cards[1].get_value("instf")
 
@@ -252,11 +283,26 @@ class MatAddDamageGissmoStochastic(KeywordBase):
         self._cards[1].set_value("instf", value)
 
     @property
+    def lcsoft(self) -> typing.Optional[int]:
+        """Get or set the Load curve or table with ID |LCSOFT| giving the soft reduction factor for failure strain in crashfront elements. Crashfront elements are elements that are direct neighbors of failed (deleted) elements. A load curve specifies the soft reduction factor as a function of triaxiality. A table gives the soft reduction factor as a function of triaxiality (curve) and element size (table). The sign of LCSOFT determines which strains are scaled:
+        EQ.0: Inactive
+        GT.0: Plastic failure strain, e_f(LCSDG),and critical plastic strain, e_(p,loc) (ECRIT), will be scaled by LCSOFT.
+        LT.0: Only plastic failure strain, e_f(LCSDG), will be scaled by LCSOFT.
+        SOFT is ignored when LCSOFT is active.
+        """ # nopep8
+        return self._cards[1].get_value("lcsoft")
+
+    @lcsoft.setter
+    def lcsoft(self, value: int) -> None:
+        """Set the lcsoft property."""
+        self._cards[1].set_value("lcsoft", value)
+
+    @property
     def lcsrs(self) -> typing.Optional[int]:
         """Get or set the Load curve ID defining failure strain scaling factor for LCSDG vs. strain rate. If the first strain rate value in the curve is negative,
         it is assumed that all strain rate values are given as natural logarithm of the strain rate. The curve should not extrapolate to zero or failure may occur at low strain.
-        GT.0:	scale ECRIT, too
-        LT.0:	do not scale ECRIT.
+        GT.0: scale ECRIT, too
+        LT.0: do not scale ECRIT.
         """ # nopep8
         return self._cards[2].get_value("lcsrs")
 
@@ -306,8 +352,8 @@ class MatAddDamageGissmoStochastic(KeywordBase):
         As soon as the mid-plane IP reaches ECRIT/DCRIT, then all the other IP's are also checked.
         Those of them that are already above their critical value immediately start to reduce the stresses.
         Those who are still below critical still do not couple, only if they reach their criterion.
-        EQ.0.0:	Inactive,
-        EQ.1.0:	Active.
+        EQ.0.0: Inactive,
+        EQ.1.0: Active.
         """ # nopep8
         return self._cards[2].get_value("midfail")
 
@@ -319,8 +365,8 @@ class MatAddDamageGissmoStochastic(KeywordBase):
     @property
     def hisvn(self) -> typing.Optional[float]:
         """Get or set the History variable used to evaluate the 3D table LCSDG:
-        GT.0.0:	constant value
-        LT.0.0 : the constant value found at position  where  is the location in the history array of * INITIAL_STRESS_ SHELL / SOLID.
+        GT.0.0: constant value
+        LT.0.0: the constant value found at position  where  is the location in the history array of *INITIAL_STRESS_SHELL/SOLID.
         """ # nopep8
         return self._cards[2].get_value("hisvn")
 
@@ -332,9 +378,9 @@ class MatAddDamageGissmoStochastic(KeywordBase):
     @property
     def soft(self) -> typing.Optional[float]:
         """Get or set the Softening reduction factor for failure strain in crashfront elements. Crashfront elements are elements that are direct neighbors of failed (deleted) elements.
-        EQ.0.0:	inactive
-        GT.0.0 : plastic failure strain,  (LCSDG),and critical plastic strain,  (ECRIT), will be scaled by SOFT.
-        LT.0.0 : only plastic failure strain,  (LCSDG), will be scaled by | SOFT |.
+        EQ.0.0: inactive
+        GT.0.0: plastic failure strain,  (LCSDG),and critical plastic strain,  (ECRIT), will be scaled by SOFT.
+        LT.0.0: only plastic failure strain,  (LCSDG), will be scaled by | SOFT |.
         """ # nopep8
         return self._cards[2].get_value("soft")
 
@@ -345,10 +391,10 @@ class MatAddDamageGissmoStochastic(KeywordBase):
 
     @property
     def lp2bi(self) -> typing.Optional[float]:
-        """Get or set the Option to use a bending indicator instead of the Lode parameter. Everyhwere in this keyword’s manual description, the term “Lode parameter” can/should be replaced by the expression “bending indicator”, which is adopted from *MAT_258 (cf. variable Ω). Only available for shell elements.
-        EQ.0.0:	inactive.
-        EQ.1.0:	active. Constant regularization (LCREGD) applied.
-        EQ.2.0:	active. Regularization (LCRGED) fully applied under pure membrane loading (Ω=0), but not at all under pure bending (Ω=1). Linear interpolation in between.
+        """Get or set the Option to use a bending indicator instead of the Lode parameter. If active (> 0), the expression 'bending indicator" replaces the term 'Lode parameter" everywhere in this manual page. We adopted the bending indicator from *MAT_258 (compare with variable Ω). LP2BI > 0 is only available for shell elements and requires NUMFIP = 1.
+        EQ.0.0: Inactive.
+        EQ.1.0: Active.Constant regularization(LCREGD) applied.
+        EQ.2.0: Active.Regularization(LCRGED) fully applied under pure membrane loading(Ω = 0) but not at all under pure bending(Ω = 1).Linear interpolation in between.
         """ # nopep8
         return self._cards[2].get_value("lp2bi")
 
@@ -358,15 +404,37 @@ class MatAddDamageGissmoStochastic(KeywordBase):
         self._cards[2].set_value("lp2bi", value)
 
     @property
+    def rgtr1(self) -> typing.Optional[float]:
+        """Get or set the First triaxiality value for optional "tub-shaped" regularization. See Remark 1.
+        """ # nopep8
+        return self._cards[3].get_value("rgtr1")
+
+    @rgtr1.setter
+    def rgtr1(self, value: float) -> None:
+        """Set the rgtr1 property."""
+        self._cards[3].set_value("rgtr1", value)
+
+    @property
+    def rgtr2(self) -> typing.Optional[float]:
+        """Get or set the Second triaxiality value for optional "tub-shaped" regularization. See Remark 1
+        """ # nopep8
+        return self._cards[3].get_value("rgtr2")
+
+    @rgtr2.setter
+    def rgtr2(self, value: float) -> None:
+        """Set the rgtr2 property."""
+        self._cards[3].set_value("rgtr2", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[3].cards[0].get_value("title")
+        return self._cards[4].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[3].cards[0].set_value("title", value)
+        self._cards[4].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
@@ -400,6 +468,30 @@ class MatAddDamageGissmoStochastic(KeywordBase):
     def lcdlim_link(self, value: DefineCurve) -> None:
         """Set the DefineCurve object for lcdlim."""
         self.lcdlim = value.lcid
+
+    @property
+    def lcsdg_link(self) -> typing.Optional[KeywordBase]:
+        """Get the linked DEFINE_CURVE or DEFINE_TABLE for lcsdg."""
+        if self.deck is None:
+            return None
+        field_value = self.lcsdg
+        if field_value is None or field_value == 0:
+            return None
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
+            if kwd.lcid == field_value:
+                return kwd
+        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "TABLE"):
+            if kwd.tbid == field_value:
+                return kwd
+        return None
+
+    @lcsdg_link.setter
+    def lcsdg_link(self, value: KeywordBase) -> None:
+        """Set the linked keyword for lcsdg."""
+        if hasattr(value, "lcid"):
+            self.lcsdg = value.lcid
+        elif hasattr(value, "tbid"):
+            self.lcsdg = value.tbid
 
     @property
     def lcregd_link(self) -> typing.Optional[KeywordBase]:

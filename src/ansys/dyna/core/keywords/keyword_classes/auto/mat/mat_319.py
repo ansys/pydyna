@@ -30,8 +30,8 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _MAT319_CARD0 = (
     FieldSchema("mid", int, 0, 10, None),
     FieldSchema("ro", float, 10, 10, None),
-    FieldSchema("dynvis", float, 10, 10, None),
-    FieldSchema("sften", float, 10, 10, None),
+    FieldSchema("dynvis", float, 20, 10, None),
+    FieldSchema("sften", float, 30, 10, None),
 )
 
 _MAT319_OPTION0_CARD0 = (

@@ -49,9 +49,9 @@ class ControlExplicitThermalInitial(KeywordBase):
         ]
     @property
     def id(self) -> typing.Optional[int]:
-        """Get or set the Set ID :
-        GT.0:	ID is a set
-        LT.0 : | ID | is an element.
+        """Get or set the Set ID:
+        GT.0: ID is a set
+        LT.0: | ID | is an element.
         """ # nopep8
         return self._cards[0].get_value("id")
 
@@ -66,7 +66,7 @@ class ControlExplicitThermalInitial(KeywordBase):
         EQ.1: solid
         EQ.2: shell
         EQ.3: beam.
-        EQ.4:	thick shell
+        EQ.4: thick shell
         """ # nopep8
         return self._cards[0].get_value("idtyp")
 

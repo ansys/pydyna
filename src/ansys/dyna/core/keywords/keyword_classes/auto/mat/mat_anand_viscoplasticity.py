@@ -115,7 +115,9 @@ class MatAnandViscoplasticity(KeywordBase):
 
     @property
     def ym(self) -> typing.Optional[float]:
-        """Get or set the Young's Modulus.
+        """Get or set the Young's modulus:
+        GT.0.0:	Constant value
+        LT.0.0:	|YM| refers to a load curve ID for a curve giving the Young’s modulus as a function of temperature
         """ # nopep8
         return self._cards[0].get_value("ym")
 
@@ -127,6 +129,8 @@ class MatAnandViscoplasticity(KeywordBase):
     @property
     def pr(self) -> typing.Optional[float]:
         """Get or set the Poisson's ratio.
+        GT.0.0:	Constant value
+        LT.0.0:	|PR| refers to a load curve ID for a curve giving the Poisson’s ratio as a function of temperature.
         """ # nopep8
         return self._cards[0].get_value("pr")
 

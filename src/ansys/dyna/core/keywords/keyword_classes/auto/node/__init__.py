@@ -27,11 +27,13 @@ from .node_merge_set import NodeMergeSet
 from .node_merge_tolerance import NodeMergeTolerance
 from .node import Node
 from .node_nodes import NodeNodes
+from .node_reference import NodeReference
 from .node_rigid_surface import NodeRigidSurface
 from .node_scalar import NodeScalar
 from .node_scalar_value import NodeScalarValue
 from .node_thickness import NodeThickness
 from .node_thickness_generate import NodeThicknessGenerate
+from .node_thickness_generate_set import NodeThicknessGenerateSet
 from .node_thickness_set import NodeThicknessSet
 from .node_thickness_set_generate import NodeThicknessSetGenerate
 from .node_to_target_vector import NodeToTargetVector

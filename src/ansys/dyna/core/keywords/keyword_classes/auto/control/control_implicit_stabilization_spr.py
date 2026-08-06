@@ -50,9 +50,9 @@ class ControlImplicitStabilizationSpr(KeywordBase):
         ]
     @property
     def ias(self) -> int:
-        """Get or set the Artificial Stabilization flag
-        EQ.1: active
-        EQ.2: inactive (default)
+        """Get or set the Artificial stabilization flag
+        EQ.1: Active
+        EQ.2: Inactive (default)
         """ # nopep8
         return self._cards[0].get_value("ias")
 
@@ -65,7 +65,8 @@ class ControlImplicitStabilizationSpr(KeywordBase):
 
     @property
     def scale(self) -> float:
-        """Get or set the Scale factor for artificial stabilization. Values greater than 1.0 cause less springback in the first few steps, while values less than 1.0 allow the part to springback more freely over the first few steps.
+        """Get or set the Scale factor for artificial stabilization (see Remark 3).  For flexible parts with large springback, like outer body panels, a value of 0.001 may be required.
+        EQ.-n : Curve ID = n gives SCALE as a function of time
         """ # nopep8
         return self._cards[0].get_value("scale")
 

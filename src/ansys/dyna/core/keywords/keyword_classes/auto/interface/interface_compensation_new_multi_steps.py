@@ -80,7 +80,7 @@ class InterfaceCompensationNewMultiSteps(KeywordBase):
 
     @property
     def sf(self) -> float:
-        """Get or set the This scales how much of the shape deviation is compensated. For example, if 10 mm springback is predicted, and the scale factor is chosen as 0.75, then the compensation in the opposite direction will only be 7.5 mm.Through many parameter studies, it is found that the best scale factor is case dependent. For some cases, a scale factor of 0.75 is best, while for others, larger values are better. Sometimes, the best value can be larger than 1.1.	Since it is impossible to choose the best value for each application it is suggested that for a new application, the initial trial is 0.75.  If the springback cannot be effectively compensated, more iterations must be used to compensate the remaining shape deviation.For channel with twisting, the scale factor is more important. It was found that a small change of the tool shape might change the twisting mode.  If this occurs, using a small value (<0.5) is suggested.
+        """Get or set the This scales how much of the shape deviation is compensated. For example, if 10 mm springback is predicted, and the scale factor is chosen as 0.75, then the compensation in the opposite direction will only be 7.5 mm.Through many parameter studies, it is found that the best scale factor is case dependent. For some cases, a scale factor of 0.75 is best, while for others, larger values are better. Sometimes, the best value can be larger than 1.1. Since it is impossible to choose the best value for each application it is suggested that for a new application, the initial trial is 0.75.  If the springback cannot be effectively compensated, more iterations must be used to compensate the remaining shape deviation.For channel with twisting, the scale factor is more important. It was found that a small change of the tool shape might change the twisting mode.  If this occurs, using a small value (<0.5) is suggested.
         """ # nopep8
         return self._cards[0].get_value("sf")
 
@@ -105,7 +105,7 @@ class InterfaceCompensationNewMultiSteps(KeywordBase):
 
     @property
     def psidm(self) -> typing.Optional[float]:
-        """Get or set the Define the Part set ID for master parts.  It is important to properly choose the parts for the master side.  Usually, only one side (master side) of the tool will be chosen as the master side, and the modification of the other side (slave side) depends solely on the change, which occurs in the master side.  In this way, the two sides are coupled and a constant gap between the two sides is maintained. If both sides are chosen as master side, the gap between the two sides might change and the gap might become inhomogeneous.	The choice of Master side will have effect on the final result for method 7 for three-piece draw. At this time, when the punch and binder are chosen as the master side, the binder region will not be changed. Otherwise, when the die is chosen as Master side the binder will be changed, since the changes extend to the edges of the Master tool.
+        """Get or set the Define the Part set ID for master parts.  It is important to properly choose the parts for the master side.  Usually, only one side (master side) of the tool will be chosen as the master side, and the modification of the other side (slave side) depends solely on the change, which occurs in the master side.  In this way, the two sides are coupled and a constant gap between the two sides is maintained. If both sides are chosen as master side, the gap between the two sides might change and the gap might become inhomogeneous. The choice of Master side will have effect on the final result for method 7 for three-piece draw. At this time, when the punch and binder are chosen as the master side, the binder region will not be changed. Otherwise, when the die is chosen as Master side the binder will be changed, since the changes extend to the edges of the Master tool.
         """ # nopep8
         return self._cards[0].get_value("psidm")
 
@@ -116,7 +116,7 @@ class InterfaceCompensationNewMultiSteps(KeywordBase):
 
     @property
     def undct(self) -> float:
-        """Get or set the EQ.0: Default	EQ.1: Check and fix undercut.
+        """Get or set the EQ.0: Default EQ.1: Check and fix undercut.
         """ # nopep8
         return self._cards[0].get_value("undct")
 

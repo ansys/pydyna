@@ -109,15 +109,17 @@ class PartCompositeTshellLong(KeywordBase):
         EQ.1: one point reduced integration (default),
         EQ.2: selective reduced 2x2 in plane integration.
         EQ.3: assumed strain 2x2 in plane integration.
-        EQ.5:  assumed strain reduced integration.
+        EQ.5: assumed strain reduced integration.
+        EQ.6: Assumed strain reduced integration with shell materials
+        EQ.7: Assumed strain 2*2 in plane integration
         """ # nopep8
         return self._cards[1].get_value("elform")
 
     @elform.setter
     def elform(self, value: int) -> None:
         """Set the elform property."""
-        if value not in [1, 2, 3, 5, None]:
-            raise Exception("""elform must be `None` or one of {1,2,3,5}.""")
+        if value not in [1, 2, 3, 5, 6, 7, None]:
+            raise Exception("""elform must be `None` or one of {1,2,3,5,6,7}.""")
         self._cards[1].set_value("elform", value)
 
     @property
@@ -134,7 +136,7 @@ class PartCompositeTshellLong(KeywordBase):
     @property
     def hgid(self) -> int:
         """Get or set the Hourglass/bulk viscosity identification defined in the *HOURGLASS Section:
-        EQ.0:  default values are used..
+        EQ.0: default values are used..
         """ # nopep8
         return self._cards[1].get_value("hgid")
 
@@ -160,7 +162,7 @@ class PartCompositeTshellLong(KeywordBase):
 
     @property
     def mid1(self) -> typing.Optional[int]:
-        """Get or set the Material ID of integration point i, see *MAT_? Section
+        """Get or set the Material ID of integration point i, see *MAT_   Section
         """ # nopep8
         return self._cards[2].get_value("mid1")
 

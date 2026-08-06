@@ -39,11 +39,11 @@ _EOS015_CARD0 = (
 
 _EOS015_CARD1 = (
     FieldSchema("unload", float, 0, 10, 0.0),
-    FieldSchema("et", float, 10, 10, None),
+    FieldSchema("k", float, 10, 10, None),
     FieldSchema("dmpf", float, 20, 10, None),
     FieldSchema("tfs", float, 30, 10, None),
     FieldSchema("cfs", float, 40, 10, None),
-    FieldSchema("loffset", float, 50, 10, None),
+    FieldSchema("offset", float, 50, 10, None),
     FieldSchema("ivs", float, 60, 10, None),
 )
 
@@ -164,15 +164,15 @@ class Eos015(KeywordBase):
         self._cards[1].set_value("unload", value)
 
     @property
-    def et(self) -> typing.Optional[float]:
-        """Get or set the 
+    def k(self) -> typing.Optional[float]:
+        """Get or set the Unloading stiffness, for UNLOAD=2 only
         """ # nopep8
-        return self._cards[1].get_value("et")
+        return self._cards[1].get_value("k")
 
-    @et.setter
-    def et(self, value: float) -> None:
-        """Set the et property."""
-        self._cards[1].set_value("et", value)
+    @k.setter
+    def k(self, value: float) -> None:
+        """Set the k property."""
+        self._cards[1].set_value("k", value)
 
     @property
     def dmpf(self) -> typing.Optional[float]:
@@ -208,15 +208,15 @@ class Eos015(KeywordBase):
         self._cards[1].set_value("cfs", value)
 
     @property
-    def loffset(self) -> typing.Optional[float]:
+    def offset(self) -> typing.Optional[float]:
         """Get or set the Offset factor between 0 and 1.0 to determine permanent set upon unloading if the UNLOAD=3.0.  The permanent sets in compression and tension are equal to the product of this offset value and the maximum compressive and tensile displacements, respectively
         """ # nopep8
-        return self._cards[1].get_value("loffset")
+        return self._cards[1].get_value("offset")
 
-    @loffset.setter
-    def loffset(self, value: float) -> None:
-        """Set the loffset property."""
-        self._cards[1].set_value("loffset", value)
+    @offset.setter
+    def offset(self, value: float) -> None:
+        """Set the offset property."""
+        self._cards[1].set_value("offset", value)
 
     @property
     def ivs(self) -> typing.Optional[float]:

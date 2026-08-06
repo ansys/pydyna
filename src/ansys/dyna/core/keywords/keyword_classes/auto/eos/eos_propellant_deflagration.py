@@ -376,7 +376,7 @@ class EosPropellantDeflagration(KeywordBase):
 
     @property
     def tmp0(self) -> float:
-        """Get or set the Initial Temperature (default = 298°K).
+        """Get or set the Initial Temperature (default = 298K).
         """ # nopep8
         return self._cards[3].get_value("tmp0")
 

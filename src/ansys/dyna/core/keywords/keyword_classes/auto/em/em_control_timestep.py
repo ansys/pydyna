@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _EMCONTROLTIMESTEP_CARD0 = (
-    FieldSchema("tstype", int, 0, 10, 1),
+    FieldSchema("tstype", int, 0, 10, None),
     FieldSchema("dtcons", float, 10, 10, None),
     FieldSchema("lcid", int, 20, 10, None),
     FieldSchema("factor", float, 30, 10, 1.0),
@@ -58,19 +58,18 @@ class EmControlTimestep(KeywordBase):
             ),
         ]
     @property
-    def tstype(self) -> int:
+    def tstype(self) -> typing.Optional[int]:
         """Get or set the Time Step type
-        EQ.1 : constant time step given in DTCONST
-        EQ.2 : time step as a function of time given by a load curve specified in LCID
-        EQ.3 : Automatic time step computation, depending on the solver type. This time step is then multiplied by FACTOR
+        EQ.1: Constant time step given in DTCONST
+        EQ.2: Time step as a function of time given by a load curve specified in LCID
+        EQ.3: Automatic time step computation, depending on the solver type. This time step is then multiplied by FACTO
+        EQ.5: EM time step forced to be the same as the thermal time step in problems with the EM solver coupled to the thermal solver. In other words, the thermal solver determines the EM time step.
         """ # nopep8
         return self._cards[0].get_value("tstype")
 
     @tstype.setter
     def tstype(self, value: int) -> None:
         """Set the tstype property."""
-        if value not in [1, 2, 3, None]:
-            raise Exception("""tstype must be `None` or one of {1,2,3}.""")
         self._cards[0].set_value("tstype", value)
 
     @property

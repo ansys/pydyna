@@ -36,6 +36,7 @@ _ELEMENTBEAMSOURCE_CARD0 = (
     FieldSchema("lfed", float, 40, 10, 0.0),
     FieldSchema("fpull", float, 50, 10, 0.0),
     FieldSchema("lmin", float, 60, 10, 0.0),
+    FieldSchema("ncut", int, 70, 10, 0),
 )
 
 class ElementBeamSource(KeywordBase):
@@ -133,6 +134,20 @@ class ElementBeamSource(KeywordBase):
     def lmin(self, value: float) -> None:
         """Set the lmin property."""
         self._cards[0].set_value("lmin", value)
+
+    @property
+    def ncut(self) -> int:
+        """Get or set the Option to cut the last element from the source node:
+        EQ.0: Last element remains attached to the source node(default).
+        EQ.1: Last element gets cut from the source node along with sudden release of the pull - out force, FPULL.
+        GT.1: Similar to NCUT = 1 but the pull - out force, FPULL, decreases linearly to zero over the last NCUT elements to avoid the sudden release of the pull - out force.
+        """ # nopep8
+        return self._cards[0].get_value("ncut")
+
+    @ncut.setter
+    def ncut(self, value: int) -> None:
+        """Set the ncut property."""
+        self._cards[0].set_value("ncut", value)
 
     @property
     def bsnid_link(self) -> typing.Optional[KeywordBase]:

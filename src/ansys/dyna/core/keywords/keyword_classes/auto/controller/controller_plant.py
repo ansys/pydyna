@@ -39,7 +39,7 @@ _CONTROLLERPLANT_CARD0 = (
 
 _CONTROLLERPLANT_CARD1 = (
     FieldSchema("fscilab", str, 0, 20, None),
-    FieldSchema("flsdyna", str, 20, 20, None),
+    FieldSchema("unused", str, 20, 20, None),
     FieldSchema("fmatlab", str, 40, 20, None),
     FieldSchema("unused", str, 60, 20, None),
 )
@@ -192,8 +192,8 @@ class ControllerPlant(KeywordBase):
     @property
     def mopt(self) -> typing.Optional[int]:
         """Get or set the Modal order reduction method (see Remark 1):
-        EQ.0:	Modal truncation method
-        EQ.1 : Krylov subspace method
+        EQ.0: Modal truncation method
+        EQ.1: Krylov subspace method
         """ # nopep8
         return self._cards[0].get_value("mopt")
 
@@ -204,7 +204,7 @@ class ControllerPlant(KeywordBase):
 
     @property
     def fscilab(self) -> typing.Optional[str]:
-        """Get or set the File name in LSDYNA format “SCI”. If specified, the reduced matrices will be written accordingly. If left blank, no such file will be generated.
+        """Get or set the File name in LSDYNA format SCI. If specified, the reduced matrices will be written accordingly. If left blank, no such file will be generated.
         """ # nopep8
         return self._cards[1].get_value("fscilab")
 
@@ -212,17 +212,6 @@ class ControllerPlant(KeywordBase):
     def fscilab(self, value: str) -> None:
         """Set the fscilab property."""
         self._cards[1].set_value("fscilab", value)
-
-    @property
-    def flsdyna(self) -> typing.Optional[str]:
-        """Get or set the File name in LS-DYNA format .k. If specified, the reduced matrices will be written accordingly. If left blank, no such file will be generated
-        """ # nopep8
-        return self._cards[1].get_value("flsdyna")
-
-    @flsdyna.setter
-    def flsdyna(self, value: str) -> None:
-        """Set the flsdyna property."""
-        self._cards[1].set_value("flsdyna", value)
 
     @property
     def fmatlab(self) -> typing.Optional[str]:
@@ -251,10 +240,10 @@ class ControllerPlant(KeywordBase):
     @property
     def dofi1(self) -> int:
         """Get or set the Degree-of-freedom for input:
-        EQ.1:	Nodal force in the x - direction, f_x
-        EQ.2 : Nodal force in the y - direction, f_y
-        EQ.3 : Nodal force in the z - direction, f_z
-        EQ.7 : Voltage if piezoelectric materials are defined.See Remark 2.
+        EQ.1: Nodal force in the x - direction, f_x
+        EQ.2: Nodal force in the y - direction, f_y
+        EQ.3: Nodal force in the z - direction, f_z
+        EQ.7: Voltage if piezoelectric materials are defined.See Remark 2.
         """ # nopep8
         return self._cards[2].get_value("dofi1")
 
@@ -281,10 +270,10 @@ class ControllerPlant(KeywordBase):
     @property
     def dofi2(self) -> int:
         """Get or set the Degree-of-freedom for input:
-        EQ.1:	Nodal force in the x - direction, f_x
-        EQ.2 : Nodal force in the y - direction, f_y
-        EQ.3 : Nodal force in the z - direction, f_z
-        EQ.7 : Voltage if piezoelectric materials are defined.See Remark 2.
+        EQ.1: Nodal force in the x - direction, f_x
+        EQ.2: Nodal force in the y - direction, f_y
+        EQ.3: Nodal force in the z - direction, f_z
+        EQ.7: Voltage if piezoelectric materials are defined.See Remark 2.
         """ # nopep8
         return self._cards[2].get_value("dofi2")
 
@@ -311,10 +300,10 @@ class ControllerPlant(KeywordBase):
     @property
     def dofi3(self) -> int:
         """Get or set the Degree-of-freedom for input:
-        EQ.1:	Nodal force in the x - direction, f_x
-        EQ.2 : Nodal force in the y - direction, f_y
-        EQ.3 : Nodal force in the z - direction, f_z
-        EQ.7 : Voltage if piezoelectric materials are defined.See Remark 2.
+        EQ.1: Nodal force in the x - direction, f_x
+        EQ.2: Nodal force in the y - direction, f_y
+        EQ.3: Nodal force in the z - direction, f_z
+        EQ.7: Voltage if piezoelectric materials are defined.See Remark 2.
         """ # nopep8
         return self._cards[2].get_value("dofi3")
 
@@ -341,10 +330,10 @@ class ControllerPlant(KeywordBase):
     @property
     def dofi4(self) -> int:
         """Get or set the Degree-of-freedom for input:
-        EQ.1:	Nodal force in the x - direction, f_x
-        EQ.2 : Nodal force in the y - direction, f_y
-        EQ.3 : Nodal force in the z - direction, f_z
-        EQ.7 : Voltage if piezoelectric materials are defined.See Remark 2.
+        EQ.1: Nodal force in the x - direction, f_x
+        EQ.2: Nodal force in the y - direction, f_y
+        EQ.3: Nodal force in the z - direction, f_z
+        EQ.7: Voltage if piezoelectric materials are defined.See Remark 2.
         """ # nopep8
         return self._cards[2].get_value("dofi4")
 
@@ -369,10 +358,10 @@ class ControllerPlant(KeywordBase):
     @property
     def dofo1(self) -> int:
         """Get or set the Degree-of-freedom for output:
-        EQ.1:	Displacement along the x - direction
-        EQ.2 : Displacement along the y - direction
-        EQ.3 : Displacement along the z - direction
-        EQ.7 : Voltage output if piezoelectric materials are defined.
+        EQ.1: Displacement along the x - direction
+        EQ.2: Displacement along the y - direction
+        EQ.3: Displacement along the z - direction
+        EQ.7: Voltage output if piezoelectric materials are defined.
         """ # nopep8
         return self._cards[3].get_value("dofo1")
 
@@ -397,10 +386,10 @@ class ControllerPlant(KeywordBase):
     @property
     def dofo2(self) -> int:
         """Get or set the Degree-of-freedom for output:
-        EQ.1:	Displacement along the x - direction
-        EQ.2 : Displacement along the y - direction
-        EQ.3 : Displacement along the z - direction
-        EQ.7 : Voltage output if piezoelectric materials are defined.
+        EQ.1: Displacement along the x - direction
+        EQ.2: Displacement along the y - direction
+        EQ.3: Displacement along the z - direction
+        EQ.7: Voltage output if piezoelectric materials are defined.
         """ # nopep8
         return self._cards[3].get_value("dofo2")
 
@@ -425,10 +414,10 @@ class ControllerPlant(KeywordBase):
     @property
     def dofo3(self) -> int:
         """Get or set the Degree-of-freedom for output:
-        EQ.1:	Displacement along the x - direction
-        EQ.2 : Displacement along the y - direction
-        EQ.3 : Displacement along the z - direction
-        EQ.7 : Voltage output if piezoelectric materials are defined.
+        EQ.1: Displacement along the x - direction
+        EQ.2: Displacement along the y - direction
+        EQ.3: Displacement along the z - direction
+        EQ.7: Voltage output if piezoelectric materials are defined.
         """ # nopep8
         return self._cards[3].get_value("dofo3")
 
@@ -453,10 +442,10 @@ class ControllerPlant(KeywordBase):
     @property
     def dofo4(self) -> int:
         """Get or set the Degree-of-freedom for output:
-        EQ.1:	Displacement along the x - direction
-        EQ.2 : Displacement along the y - direction
-        EQ.3 : Displacement along the z - direction
-        EQ.7 : Voltage output if piezoelectric materials are defined.
+        EQ.1: Displacement along the x - direction
+        EQ.2: Displacement along the y - direction
+        EQ.3: Displacement along the z - direction
+        EQ.7: Voltage output if piezoelectric materials are defined.
         """ # nopep8
         return self._cards[3].get_value("dofo4")
 
@@ -491,7 +480,7 @@ class ControllerPlant(KeywordBase):
 
     @property
     def mod1(self) -> typing.Optional[int]:
-        """Get or set the List all NMODE mode indexes for the modal truncation method, or NFEQ shifting frequencies (unit: rad/s) for the Krylov method. The default setting of a single frequency at 0 rad/s works in most Krylov cases.For the model truncation method, a negative MODx triggers mode generation between MODx-1 and -MODx, meaning all modes between MODx-1 and -MODx will be considered.
+        """Get or set the List all NMODE mode indexes for the modal truncation method, or NFEQ shifting frequencies (unit: rad/s) for the Krylov method. The default setting of a single frequency at 0 rad/s works in most Krylov cases.For the modal truncation method, a negative MODx triggers mode generation between MODx-1 and -MODx, meaning all modes between MODx-1 and -MODx will be considered.
         """ # nopep8
         return self._cards[5].get_value("mod1")
 

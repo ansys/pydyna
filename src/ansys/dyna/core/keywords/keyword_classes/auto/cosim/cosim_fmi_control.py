@@ -70,8 +70,8 @@ class CosimFmiControl(KeywordBase):
     @property
     def opt(self) -> str:
         """Get or set the LS-DYNA's role (see Remark 1):
-        EQ.G:	Generation mode.LS - DYNA will generate a new FMU.
-        EQ.C : Co - simulation mode.LS - DYNA will co - simulate with an existing FMU.
+        EQ.G: Generation mode.LS - DYNA will generate a new FMU.
+        EQ.C: Co - simulation mode.LS - DYNA will co - simulate with an existing FMU.
         """ # nopep8
         return self._cards[0].get_value("opt")
 
@@ -85,8 +85,8 @@ class CosimFmiControl(KeywordBase):
     @property
     def mode(self) -> str:
         """Get or set the LS-DYNA's mode
-        EQ.P:	LS - DYNA is Primary,and another software is secondary.
-        EQ.S : LS - DYNA is Secondary,and another software is primary..
+        EQ.P: LS - DYNA is Primary,and another software is secondary.
+        EQ.S: LS - DYNA is Secondary,and another software is primary..
         """ # nopep8
         return self._cards[0].get_value("mode")
 
@@ -99,9 +99,9 @@ class CosimFmiControl(KeywordBase):
 
     @property
     def fmi(self) -> int:
-        """Get or set the FMI1.0 or FMI2.0
+        """Get or set the Flag to select FMI standard
         EQ.1: the generated or co - simulated FMU is based on FMI1.0 standard.
-        EQ.0 or 2 : the generated or co - simulated FMU is based on FMI2.0 standard.If the FMI option is left blank, the default FMU 2 will be used.
+        EQ.0 or 2: the generated or co - simulated FMU is based on FMI2.0 standard.If the FMI option is left blank, the default FMU 2 will be used.
         """ # nopep8
         return self._cards[0].get_value("fmi")
 

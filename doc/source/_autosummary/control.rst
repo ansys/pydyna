@@ -111,10 +111,10 @@ ControlCoarsen
     :members:
 
 
-ControlConstranined
--------------------
+ControlConstrained
+------------------
 
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_constranined
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_constrained
     :members:
 
 
@@ -132,6 +132,20 @@ ControlCoupling
     :members:
 
 
+ControlCpg
+----------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_cpg
+    :members:
+
+
+ControlCpgOutput
+----------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_cpg_output
+    :members:
+
+
 ControlCpm
 ----------
 
@@ -143,27 +157,6 @@ ControlCpu
 ----------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_cpu
-    :members:
-
-
-ControlCrMppDecompositionDeformedGeometry
------------------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_cr_mpp_decomposition_deformed_geometry
-    :members:
-
-
-ControlCrMppDecompositionFlagStressStrainCurve
-----------------------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_cr_mpp_decomposition_flag_stress_strain_curve
-    :members:
-
-
-ControlCrMppMaterialModelDriver
--------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_cr_mpp_material_model_driver
     :members:
 
 
@@ -272,6 +265,13 @@ ControlExplosiveShadow
     :members:
 
 
+ControlExplosiveShadowSet
+-------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_explosive_shadow_set
+    :members:
+
+
 ControlFormingAutoNet
 ---------------------
 
@@ -332,6 +332,13 @@ ControlFormingBlankmesh
 -----------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_forming_blankmesh
+    :members:
+
+
+ControlFormingDrawbeadTransition
+--------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_forming_drawbead_transition
     :members:
 
 
@@ -472,6 +479,13 @@ ControlFormingRemoveAdaptiveConstraints
 ---------------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_forming_remove_adaptive_constraints
+    :members:
+
+
+ControlFormingScale
+-------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_forming_scale
     :members:
 
 
@@ -930,6 +944,13 @@ ControlLsda
     :members:
 
 
+ControlMappingShiftByDt
+-----------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_mapping_shift_by_dt
+    :members:
+
+
 ControlMat
 ----------
 
@@ -948,6 +969,20 @@ ControlMppDecompositionAdaptive
 -------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_mpp_decomposition_adaptive
+    :members:
+
+
+ControlMppDecompositionAdjustMtypeCost
+--------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_mpp_decomposition_adjust_mtype_cost
+    :members:
+
+
+ControlMppDecompositionAdjustPartCost
+-------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_mpp_decomposition_adjust_part_cost
     :members:
 
 
@@ -990,6 +1025,13 @@ ControlMppDecompositionContactIsolate
 -------------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_mpp_decomposition_contact_isolate
+    :members:
+
+
+ControlMppDecompositionDeformedGeometry
+---------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_mpp_decomposition_deformed_geometry
     :members:
 
 
@@ -1053,6 +1095,13 @@ ControlMppDecompositionFileWrite
 --------------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_mpp_decomposition_file_write
+    :members:
+
+
+ControlMppDecompositionFlagStressStrainCurve
+--------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_mpp_decomposition_flag_stress_strain_curve
     :members:
 
 
@@ -1147,6 +1196,13 @@ ControlMppDecompositionTransformation
     :members:
 
 
+ControlMppDecompositionTransformationKeyword
+--------------------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_mpp_decomposition_transformation_keyword
+    :members:
+
+
 ControlMppIoBinoutonly
 ----------------------
 
@@ -1189,10 +1245,24 @@ ControlMppIoNofull
     :members:
 
 
+ControlMppIoNotiedio
+--------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_mpp_io_notiedio
+    :members:
+
+
 ControlMppIoSwapbytes
 ---------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_mpp_io_swapbytes
+    :members:
+
+
+ControlMppMaterialModelDriver
+-----------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_mpp_material_model_driver
     :members:
 
 
@@ -1252,24 +1322,17 @@ ControlPzelectric
     :members:
 
 
-ControlReferenceConfiguraion
-----------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_reference_configuraion
-    :members:
-
-
-ControlReferenceConfiguraionIter
---------------------------------
-
-.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_reference_configuraion_iter
-    :members:
-
-
 ControlReferenceConfiguration
 -----------------------------
 
 .. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_reference_configuration
+    :members:
+
+
+ControlReferenceConfigurationIter
+---------------------------------
+
+.. automodule:: ansys.dyna.core.keywords.keyword_classes.auto.control_reference_configuration_iter
     :members:
 
 

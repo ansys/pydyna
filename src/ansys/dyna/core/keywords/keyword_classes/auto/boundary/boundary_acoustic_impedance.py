@@ -63,7 +63,7 @@ class BoundaryAcousticImpedance(KeywordBase):
 
     @property
     def zee(self) -> float:
-        """Get or set the Value of the acoustic impedance .
+        """Get or set the Value of the acoustic impedance pc .
         """ # nopep8
         return self._cards[0].get_value("zee")
 

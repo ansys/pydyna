@@ -36,7 +36,7 @@ _BOUNDARYPRESCRIBEDMOTIONSET_CARD0 = (
     FieldSchema("vad", int, 20, 10, 0),
     FieldSchema("lcid", int, 30, 10, None),
     FieldSchema("sf", float, 40, 10, 1.0),
-    FieldSchema("vid", int, 50, 10, None),
+    FieldSchema("vid", int, 50, 10, 0),
     FieldSchema("death", float, 60, 10, 1e+28),
     FieldSchema("birth", float, 70, 10, 0.0),
 )
@@ -107,25 +107,24 @@ class BoundaryPrescribedMotionSet(KeywordBase):
 
     @property
     def dof(self) -> int:
-        """Get or set the Applicable degrees-of-freedom:
-        EQ.0: Not valid, please use any of the other available options,
-        EQ.1: x-translational DOF,
-        EQ.2: y-translational DOF,
-        EQ.3: z-translational DOF,
-        EQ.4: translational motion only in direction given by the VID. Movement on plane normal to the vector is permitted,
-        EQ.-4: Same as 4, except translation on the plane normal to the vector is NOT permitted,
-        EQ.5: x-rotational DOF,
-        EQ.6: y-rotational DOF,
-        EQ.7: z-rotational DOF,
-        EQ.8: rotational motion about an axis which is passing through the center-of-gravity of the node, node set, or rigid body and is parallel to vector VID.  Rotation about the normal axes is permitted,
-        EQ.-8:rotational motion about an axis which is passing through the center-of-gravity of the node or node set and is parallel to vector VID.  Rotation about the normal axes is not permitted.  This option does not apply to rigid bodies.,
-        EQ.9: y/z DOF for node rotating about the x-axis at location (OFFSET1,OFFSET2) in the yz-plane, point (y,z). Radial motion is NOT permitted,
-        EQ.-9: Same as 9, except radial motion is permitted,
-        EQ.10: z/x DOF for node rotating about the y-axis at location (OFFSET1,OFFSET2) in the zx-plane, point(z,x). Radial motion is NOT permitted,
-        EQ.-10:Same as  10, except radial motion is permitted,
-        EQ.11: x/y DOF for node rotating about the z-axis at location (OFFSET1,OFFSET2) in the xy-plane, point (x,y). Radial motion is NOT permitted,
-        EQ.-11: Same as 11, except radial motion is permitted.
-        EQ.12: Translational motion in direction given by the normals to the segments. Applicable to SET_SEGMENT option only
+        """Get or set the Applicable degrees of freedom:
+        EQ.1: x - translational degree of freedom for Cartesian systems(local or global).For a cylindrical or spherical system, this is the local radial degree of freedom r.To specify a local coordinate system, set VID to the negative of the local coordinate system ID.See Remark 9 and Figure 0 - 1.
+        EQ.2: y - translational degree of freedom for Cartesian systems(local or global).For a cylindrical system, this is the local circumferential degree of freedom ?, and for a spherical system, it is the local latitude degree of freedom ?.To specify a local coordinate system, set VID to the negative of the local coordinate system ID.See Remark 9 and Figure 0 - 1.
+        EQ.3: z - translational degree of freedom for Cartesian systems(local or global).For a cylindrical system, this is the local z - translational degree of freedom, and for a spherical system, it is the local longitude degree of freedom ?.To specify a local coordinate system, set VID to the negative of the local coordinate system ID.See Remark 9 and Figure 0 - 1.
+        EQ.4: Translational motion in the direction given by the VID.Movement on a plane normal to the vector is permitted.
+        EQ. - 4: Translational motion in the direction given by the VID.Movement on a plane normal to the vector is not permitted. In explicit analyses, this option only applies to rigid bodies if | CMO |= 2 on * MAT_RIGID or *CONSTRAINED_NODAL_RIGID_BODY.
+        EQ.5: x - rotational degree of freedom.For a cylindrical or spherical system, this is the local radial degree of freedom r.To specify a local coordinate system, set VID to the negative of the local coordinate system ID.See Remark 9 and Figure 0 - 1.
+        EQ.6: y - rotational degree of freedom.For a cylindrical system, this is the local circumferential degree of freedom ?, and for a spherical system, it is the local latitude degree of freedom ?.To specify a local coordinate system, set VID to the negative of the local coordinate system ID.See Remark 9 and Figure 0 - 1.
+        EQ.7: z - rotational degree of freedom.For a cylindrical system, this is the local z - translational degree of freedom, and for a spherical system, it is the local longitude degree of freedom ?.To specify a local coordinate system, set VID to the negative of the local coordinate system ID.See Remark 9 and Figure 0 - 1.
+        EQ.8: Rotational motion about an axis, parallel to vector VID,  passing through the center of gravity of the node, node set, or rigid body(or passing through a specified point when | CMO |= 2 on * MAT_RIGID or *CONSTRAINED_NODAL_RIGID_BODY).Rotation about the normal axes, namely, axes in a plane normal to VID, is permitted.
+        EQ. - 8: Rotational motion about an axis, parallel to vector VID,  passing through the center of gravity of the node, node set, or rigid body(or passing through a specified point when | CMO |= 2 on * MAT_RIGID or *CONSTRAINED_NODAL_RIGID_BODY).Rotation about the normal axes is not permitted.This option only applies to rigid bodies if | CMO |= 2.
+        EQ.9: Rotation with axis parallel to the x - axis and passing through the yz - plane at y = OFFSET1 and z = OFFSET2. Radial motion is NOT permitted.This option is not applicable to rigid bodies.
+        EQ. - 9: Rotation with axis parallel to the x - axis and passing through the yz - plane at y = OFFSET1 and z = OFFSET2. Radial motion is permitted.This option is not applicable to rigid bodies.
+        EQ.10: Rotation with axis parallel to the y - axis and passing through the zx - plane at z = OFFSET1 and x = OFFSET2. Radial motion is NOT permitted.This option is not applicable to rigid bodies.
+        EQ. - 10: Rotation with axis parallel to the y - axis and passing through the zx - plane at z = OFFSET1 and x = OFFSET2. Radial motion is permitted.This option is not applicable to rigid bodies.
+        EQ.11: Rotation with axis parallel to the z - axis and passing through the xy - plane at x = OFFSET1 and y = OFFSET2. Radial motion is NOT permitted.This option is not applicable to rigid bodies.
+        EQ. - 11: Rotation with axis parallel to the z - axis and passing through the xy - plane at x = OFFSET1 and y = OFFSET2. Radial motion is permitted.This option is not applicable to rigid bodies.
+        EQ.12: Translational motion in the direction given by the normals to the segments.This option is available only when using the SET_SEGMENT keyword option.
         """ # nopep8
         return self._cards[0].get_value("dof")
 
@@ -139,11 +138,11 @@ class BoundaryPrescribedMotionSet(KeywordBase):
     @property
     def vad(self) -> int:
         """Get or set the Velocity/Acceleration/Displacement flag:
-        EQ.0: velocity(rigid bodies and nodes),
-        EQ.1: acceleration(nodes only),
-        EQ.2: displacement(rigid bodies and nodes).
-        EQ.3: velocity versus displacement(rigid bodies),
-        EQ.4: relative displacement(rigid bodies only)
+        EQ.0: Velocity(rigid bodies and nodes)
+        EQ.1: Acceleration(rigid bodies and nodes)
+        EQ.2: Displacement(rigid bodies and nodes; see Remark 2)
+        EQ.3: Velocity as a function of displacement.This option only applies to rigid bodies with | CMO | !=2 on *MAT_RIGID or *CONSTRAINED_NODAL_RIGID_BODY.See Remark 3.
+        EQ.4: Relative displacement.This option only applies to rigid bodies with | CMO | !=2 on * MAT_RIGID or *CONSTRAINED_NODAL_RIGID_BODY.See Remark 4.
         """ # nopep8
         return self._cards[0].get_value("vad")
 
@@ -156,7 +155,7 @@ class BoundaryPrescribedMotionSet(KeywordBase):
 
     @property
     def lcid(self) -> typing.Optional[int]:
-        """Get or set the Curve ID or function ID to describe motion value as a function of time; see *DEFINE_CURVE, *DEFINE_CURVE_FUNCTION, or *DEFINE_FUNCTION.  If LCID refers to *DEFINE_FUNCTION, the function has four arguments: time and x, y and z coordinates of the node or rigid body, such as f(t,x,y,z)=10.0×t+max⁡(x-100,0.). If VAD = 2, the function has one argument which is time, such as f(t)=10.0×t (see Remark 2). See BIRTH below.
+        """Get or set the Curve ID or function ID to describe motion value as a function of time; see *DEFINE_CURVE, *DEFINE_CURVE_FUNCTION, or *DEFINE_FUNCTION. If LCID refers to *DEFINE_FUNCTION, the function has four arguments: time and x, y and z coordinates of the node or rigid body, such as f(t,x,y,z)=10.0t+max(x-100,0.). If VAD = 2, the function has one argument which is time, such as f(t)=10.0t (see Remark 2). See BIRTH below.
         """ # nopep8
         return self._cards[0].get_value("lcid")
 
@@ -167,7 +166,7 @@ class BoundaryPrescribedMotionSet(KeywordBase):
 
     @property
     def sf(self) -> float:
-        """Get or set the Load curve scale factor (default=1.0).
+        """Get or set the Load curve scale factor.The default is 1.0).
         """ # nopep8
         return self._cards[0].get_value("sf")
 
@@ -177,8 +176,10 @@ class BoundaryPrescribedMotionSet(KeywordBase):
         self._cards[0].set_value("sf", value)
 
     @property
-    def vid(self) -> typing.Optional[int]:
-        """Get or set the Vector ID for DOF values of 4 or 8, see *DEFINE_VECTOR.
+    def vid(self) -> int:
+        """Get or set the Direction and update option for the constraint.
+        GT.0: Vector ID for DOF values of 4 or 8; see *DEFINE_VECTOR.The direction of this vector is not updated with time.
+        LT.0: -VID is the coordinate system ID(see *DEFINE_COORDINATE_NODES and *DEFINE_COORDINATE_SYSTEM) for DOF values 1 through 3 when using a local coordinate system.See Remark 9 and Figure 0 - 1.
         """ # nopep8
         return self._cards[0].get_value("vid")
 
@@ -189,7 +190,8 @@ class BoundaryPrescribedMotionSet(KeywordBase):
 
     @property
     def death(self) -> float:
-        """Get or set the Time imposed motion/constraint is removed (default=1.0E+28).
+        """Get or set the Removal time for the imposed motion/constraint. For alternatives to DEATH and BIRTH for specifying the transitory application of prescribed motion, see the SET_BOX option, or *DEFINE_DEATH_TIMES, or *SENSOR_CONTROL.
+        EQ.0.0: default set to 1028
         """ # nopep8
         return self._cards[0].get_value("death")
 
@@ -200,7 +202,7 @@ class BoundaryPrescribedMotionSet(KeywordBase):
 
     @property
     def birth(self) -> float:
-        """Get or set the Time imposed motion/constraint is activated (default=0.0).
+        """Get or set the Activation time for the imposed motion/constraint. The prescribed motion begins acting at time = BIRTH but with the motion from the zero abscissa value of the curve or function (*DEFINE_FUNCTION). In other words, the abscissae are shifted by an amount BIRTH, such that it has the same effect as setting OFFA = BIRTH in *DEFINE_CURVE. Warning: BIRTH is ignored if the LCID is defined as a function, as in *DEFINE_CURVE_FUNCTION.
         """ # nopep8
         return self._cards[0].get_value("birth")
 

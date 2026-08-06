@@ -54,7 +54,6 @@ class InitialDetonation(KeywordBase):
     subkeyword = "DETONATION"
     _link_fields = {
         "nid": LinkType.NODE,
-        "pid": LinkType.PART,
     }
 
     def __init__(self, **kwargs):
@@ -72,10 +71,11 @@ class InitialDetonation(KeywordBase):
         ]
     @property
     def pid(self) -> typing.Optional[int]:
-        """Get or set the Part ID of the high explosive to be lit, except in the case where the high explosive is modeled using an ALE formulation, in which case PID is the part ID of the mesh where the high explosive material to be lit initially resides.  However, two other options are available:
-        EQ.-1:	an acoustic boundary, also, *BOUNDARY_USA_SURFACE,
-        EQ.0:	all high explosive materials are considered.
-        LT.-1:    |PID| is the ID of a part set (*SET_PART)
+        """Get or set the Part or part set ID of the high explosive to be lit, except in the case where the high explosive is modeled using an ALE formulation, in which case PID is the part, part set, or element set ID of the mesh where the high explosive material to be lit initially resides.  However, two other options are available:
+        LT. - 1: | PID | is the ID of a part set(*SET_PART)
+        EQ. - 1 : An acoustic boundary or *BOUNDARY_?USA_?SURFACE
+        EQ.0 : All high explosive materials are considered.
+        GT.0 : PID is a part ID unless using the SET keyword option.For the SET keyword option, it is an element set(*SET_BEAM for ALE 1D models, *SET_SHELL for ALE 2D models, or *SET_SOLID for ALE 3D models).
         """ # nopep8
         return self._cards[0].get_value("pid")
 
@@ -209,9 +209,4 @@ class InitialDetonation(KeywordBase):
     def nid_link(self) -> typing.Optional[KeywordBase]:
         """Get the NODE keyword containing the given nid."""
         return self._get_link_by_attr("NODE", "nid", self.nid, "parts")
-
-    @property
-    def pid_link(self) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given pid."""
-        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
 

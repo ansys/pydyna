@@ -54,14 +54,14 @@ class ControlImplicitGeneralSpr(KeywordBase):
         ]
     @property
     def imflag(self) -> int:
-        """Get or set the Implicit/Explicit switching flag
-        EQ.0: explicit analysis (default)
-        EQ.1: implicit analysis
-        EQ.2: explicit followed by one implicit step (springback analysis)
-        EQ.4: implicit with automatic implicit-explicit switching
-        EQ.5: implicit with automatic switching and mandatory implicit finish
-        EQ.6: explicit with intermittent eigenvalue extraction
-        EQ.-n: curve ID=n gives IMFLAG as a function of time.
+        """Get or set the Implicit/explicit switching flag
+        EQ.0:Explicit analysis (default)
+        EQ.1: Implicit analysis
+        EQ.2: Explicit followed by one implicit step (springback analysis)
+        EQ.4: Implicit with automatic implicit-explicit switching
+        EQ.5: Implicit with automatic switching and mandatory implicit finish
+        EQ.6: Explicit with intermittent eigenvalue extraction
+        EQ.-n: Curve ID=n gives IMFLAG as a function of time.
         """ # nopep8
         return self._cards[0].get_value("imflag")
 
@@ -73,7 +73,7 @@ class ControlImplicitGeneralSpr(KeywordBase):
     @property
     def dt0(self) -> typing.Optional[float]:
         """Get or set the Initial time step size for implicit analysis.  See Remarks 2 and 5.
-        LT.0:	eliminate negative principal stresses in geometric(initial stress) stiffness.Initial time step is |DT0|.
+        LT.0.0: Eliminate negative principal stresses in geometric(initial stress) stiffness.Initial time step is |DT0|.
         """ # nopep8
         return self._cards[0].get_value("dt0")
 
@@ -85,8 +85,8 @@ class ControlImplicitGeneralSpr(KeywordBase):
     @property
     def imform(self) -> int:
         """Get or set the Element formulation switching flag
-        EQ.1: switch to fully integrated formulation for implicit springback
-        EQ.2: retain original element formulation (default).
+        EQ.1: Switch to fully integrated formulation for implicit springback
+        EQ.2: Retain original element formulation (default).
         """ # nopep8
         return self._cards[0].get_value("imform")
 
@@ -111,24 +111,22 @@ class ControlImplicitGeneralSpr(KeywordBase):
     @property
     def igs(self) -> int:
         """Get or set the Geometric (initial stress) stiffness flag
-        EQ.2: ignore(default)
-        EQ.1: include
-        LT.0:	include on part set |IGS|
+        EQ.2: Ignore(default)
+        EQ.1: Include
+        LT.0: include on part set |IGS|
         """ # nopep8
         return self._cards[0].get_value("igs")
 
     @igs.setter
     def igs(self, value: int) -> None:
         """Set the igs property."""
-        if value not in [2, 1, None]:
-            raise Exception("""igs must be `None` or one of {2,1}.""")
         self._cards[0].set_value("igs", value)
 
     @property
     def cnstn(self) -> int:
         """Get or set the Indicator for consistent tangent stiffness:
-        EQ.0: do not use (default)
-        EQ.1: use.
+        EQ.0: Do not use (default)
+        EQ.1: Use.
         """ # nopep8
         return self._cards[0].get_value("cnstn")
 
@@ -142,8 +140,8 @@ class ControlImplicitGeneralSpr(KeywordBase):
     @property
     def form(self) -> int:
         """Get or set the Element formulation when using IMFORM flag.
-        EQ.0: type 16
-        EQ.1: type 6.
+        EQ.0: Type 16
+        EQ.1: Type 6.
         """ # nopep8
         return self._cards[0].get_value("form")
 

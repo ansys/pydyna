@@ -47,7 +47,7 @@ class IncludeCompensationBeforeSpringback(KeywordBase):
         ]
     @property
     def filename(self) -> typing.Optional[str]:
-        """Get or set the Name of the keyword files containing nodes and elements information, with adaptive constraints if exist. Currently all blanks must have the same numbers of nodes and elements.
+        """Get or set the A dynain file from a forming simulation; the varied, non-homogeneous thickness of the sheet blank will be used to change the uniform tool gap.
         """ # nopep8
         return self._cards[0].get_value("filename")
 

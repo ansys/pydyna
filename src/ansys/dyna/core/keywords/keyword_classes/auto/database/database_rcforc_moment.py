@@ -30,8 +30,8 @@ from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _DATABASERCFORCMOMENT_CARD0 = (
     FieldSchema("cid", int, 0, 10, None),
-    FieldSchema("nodes", int, 10, 10, None),
-    FieldSchema("nodem", int, 20, 10, None),
+    FieldSchema("nodesa", int, 10, 10, None),
+    FieldSchema("nodesb", int, 20, 10, None),
 )
 
 class DatabaseRcforcMoment(KeywordBase):
@@ -40,8 +40,8 @@ class DatabaseRcforcMoment(KeywordBase):
     keyword = "DATABASE"
     subkeyword = "RCFORC_MOMENT"
     _link_fields = {
-        "nodes": LinkType.NODE,
-        "nodem": LinkType.NODE,
+        "nodesa": LinkType.NODE,
+        "nodesb": LinkType.NODE,
     }
 
     def __init__(self, **kwargs):
@@ -65,34 +65,34 @@ class DatabaseRcforcMoment(KeywordBase):
         self._cards[0].set_value("cid", value)
 
     @property
-    def nodes(self) -> typing.Optional[int]:
-        """Get or set the Node  for moment calculation on slave surface.
+    def nodesa(self) -> typing.Optional[int]:
+        """Get or set the Node  for moment calculation on SURFA surface.
         """ # nopep8
-        return self._cards[0].get_value("nodes")
+        return self._cards[0].get_value("nodesa")
 
-    @nodes.setter
-    def nodes(self, value: int) -> None:
-        """Set the nodes property."""
-        self._cards[0].set_value("nodes", value)
+    @nodesa.setter
+    def nodesa(self, value: int) -> None:
+        """Set the nodesa property."""
+        self._cards[0].set_value("nodesa", value)
 
     @property
-    def nodem(self) -> typing.Optional[int]:
-        """Get or set the Node for moment calculation on master surface.
+    def nodesb(self) -> typing.Optional[int]:
+        """Get or set the Node for moment calculation on SURFB surface.
         """ # nopep8
-        return self._cards[0].get_value("nodem")
+        return self._cards[0].get_value("nodesb")
 
-    @nodem.setter
-    def nodem(self, value: int) -> None:
-        """Set the nodem property."""
-        self._cards[0].set_value("nodem", value)
-
-    @property
-    def nodes_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given nodes."""
-        return self._get_link_by_attr("NODE", "nid", self.nodes, "parts")
+    @nodesb.setter
+    def nodesb(self, value: int) -> None:
+        """Set the nodesb property."""
+        self._cards[0].set_value("nodesb", value)
 
     @property
-    def nodem_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given nodem."""
-        return self._get_link_by_attr("NODE", "nid", self.nodem, "parts")
+    def nodesa_link(self) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given nodesa."""
+        return self._get_link_by_attr("NODE", "nid", self.nodesa, "parts")
+
+    @property
+    def nodesb_link(self) -> typing.Optional[KeywordBase]:
+        """Get the NODE keyword containing the given nodesb."""
+        return self._get_link_by_attr("NODE", "nid", self.nodesb, "parts")
 

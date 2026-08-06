@@ -35,7 +35,7 @@ _COSIMFMIINTERFACE_CARD1 = (
     FieldSchema("regtyp", str, 10, 10, "NODE"),
     FieldSchema("regid", int, 20, 10, None),
     FieldSchema("field", str, 30, 10, None),
-    FieldSchema("winit", float, 40, 10, None),
+    FieldSchema("vinit", float, 40, 10, None),
     FieldSchema("ratio", float, 50, 10, None),
     FieldSchema("cid", int, 60, 10, 0),
     FieldSchema("ref", int, 70, 10, 0),
@@ -74,8 +74,8 @@ class CosimFmiInterface(KeywordBase):
     @property
     def impexp(self) -> str:
         """Get or set the Import/export flag:
-        EQ.IMP:	Variables are to be imported into LS - DYNA.
-        EQ.EXP : Variables are to be exported from LS - DYNA.
+        EQ.IMP: Variables are to be imported into LS - DYNA.
+        EQ.EXP: Variables are to be exported from LS - DYNA.
         """ # nopep8
         return self._cards[1].get_value("impexp")
 
@@ -89,14 +89,14 @@ class CosimFmiInterface(KeywordBase):
     @property
     def regtyp(self) -> str:
         """Get or set the Type of interface region:
-        EQ.NODE:	Single node
-        EQ.NSET : Node set
-        EQ.SSET : Segment set
-        EQ.PART : Rigid part
-        EQ.FUNC : User defined curve function to be exported only.See Remark 1 and Example 2.
-        EQ.CURV : User defined curve to be imported only.See Remark 2 and Example 3.
-        EQ.SESW : Sense switch to be imported only.REGID is neglected with the sense switch specified in FIELD.See Remark 3 and Example 4.
-        EQ.BAG:	Control-volume airbag.
+        EQ.NODE: Single node
+        EQ.NSET: Node set
+        EQ.SSET: Segment set
+        EQ.PART: Rigid part
+        EQ.FUNC: User defined curve function to be exported only.See Remark 1 and Example 2.
+        EQ.CURV: User defined curve to be imported only.See Remark 2 and Example 3.
+        EQ.SESW: Sense switch to be imported only.REGID is neglected with the sense switch specified in FIELD.See Remark 3 and Example 4.
+        EQ.BAG: Control-volume airbag.
         """ # nopep8
         return self._cards[1].get_value("regtyp")
 
@@ -130,19 +130,19 @@ class CosimFmiInterface(KeywordBase):
         self._cards[1].set_value("field", value)
 
     @property
-    def winit(self) -> typing.Optional[float]:
-        """Get or set the Initial value
+    def vinit(self) -> typing.Optional[float]:
+        """Get or set the Initial value.For variables to be exported, VINIT is the initial value for the FMU.  Therefore, its unit must be the same as the FMUs units
         """ # nopep8
-        return self._cards[1].get_value("winit")
+        return self._cards[1].get_value("vinit")
 
-    @winit.setter
-    def winit(self, value: float) -> None:
-        """Set the winit property."""
-        self._cards[1].set_value("winit", value)
+    @vinit.setter
+    def vinit(self, value: float) -> None:
+        """Set the vinit property."""
+        self._cards[1].set_value("vinit", value)
 
     @property
     def ratio(self) -> typing.Optional[float]:
-        """Get or set the Scale factor applied during co-simulation (not FMU generation). When LS-DYNA exports variables, the actual value to be sent is RATIO ?LS-DYNA value. When LS-DYNA imports data from FMU, the actual value received is the FMU value / RATIO.
+        """Get or set the Scale factor applied during co-simulation (not FMU generation). When LS-DYNA exports variables, the actual value to be sent is RATIO   LS-DYNA value. When LS-DYNA imports data from FMU, the actual value received is the FMU value / RATIO.
         """ # nopep8
         return self._cards[1].get_value("ratio")
 
@@ -153,8 +153,8 @@ class CosimFmiInterface(KeywordBase):
 
     @property
     def cid(self) -> int:
-        """Get or set the Coordinate system ID (see *DEFINE_?COORDINATE).
-        EQ.0:	global(default)
+        """Get or set the Coordinate system ID (see *DEFINE_  COORDINATE).
+        EQ.0: Global(default)
         """ # nopep8
         return self._cards[1].get_value("cid")
 
@@ -165,10 +165,10 @@ class CosimFmiInterface(KeywordBase):
 
     @property
     def ref(self) -> int:
-        """Get or set the Control how the coordinate system is used for the variable output when CID? > 0 (see Remark 5):
-        EQ.0:	Variable output is in the local system fixed from the beginning.Note that you should set FLAG = 0 in * DEFINE_COORDINATE_NODES.
-        EQ.1 : Variable output is projected onto the moving local system.
-        EQ.2 : Variable output is the projection of the nodal translation motion relative to node N1 of the local coordinate system, COOR.Double precision LS - DYNA is recommended with REF = 2
+        """Get or set the Control how the coordinate system is used for the variable output when CID   > 0 (see Remark 5):
+        EQ.0: Variable output is in the local system fixed from the beginning.Note that you should set FLAG = 0 in *DEFINE_COORDINATE_NODES.
+        EQ.1: Variable output is projected onto the moving local system.
+        EQ.2: Variable output is the projection of the nodal translation motion relative to node N1 of the local coordinate system, COOR.Double precision LS - DYNA is recommended with REF = 2
         """ # nopep8
         return self._cards[1].get_value("ref")
 

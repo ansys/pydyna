@@ -33,7 +33,7 @@ _DEFINEBOXDRAWBEAD_CARD0 = (
     FieldSchema("boxid", int, 0, 10, 0),
     FieldSchema("pid", int, 10, 10, 0),
     FieldSchema("sid", int, 20, 10, 0),
-    FieldSchema("idir", int, 30, 10, 1),
+    FieldSchema("idir", int, 30, 10, 3),
     FieldSchema("stype", int, 40, 10, 4),
     FieldSchema("radius", float, 50, 10, 0.0),
     FieldSchema("cid", int, 60, 10, 0),
@@ -100,7 +100,9 @@ class DefineBoxDrawbead(KeywordBase):
 
     @property
     def sid(self) -> int:
-        """Get or set the set ID defining along the drawbead.
+        """Get or set the Set ID that defines the nodal points that lie along the draw bead. If a node set is defined, the nodes in the set must be consecutive along the draw bead.
+        If a part or part set is defined, the set must consist of beam or truss elements. Within the part set, no ordering of the elements is assumed, but the number
+        of nodes must equal the number of beam elements plus 1.
         """ # nopep8
         return self._cards[0].get_value("sid")
 
@@ -112,25 +114,25 @@ class DefineBoxDrawbead(KeywordBase):
     @property
     def idir(self) -> int:
         """Get or set the Direction of tooling movement:
-        EQ.1: tooling moves in x-direction (default),
-        EQ.2: tooling moves in y-direction,
-        EQ.3: tooling moves in z-direction.
+        EQ.1: Tooling moves in the x-direction,
+        EQ.2: Tooling moves in the y-direction,
+        EQ.3: Tooling moves in the z-direction(default).
         """ # nopep8
         return self._cards[0].get_value("idir")
 
     @idir.setter
     def idir(self, value: int) -> None:
         """Set the idir property."""
-        if value not in [1, 2, 3, None]:
-            raise Exception("""idir must be `None` or one of {1,2,3}.""")
+        if value not in [3, 1, 2, None]:
+            raise Exception("""idir must be `None` or one of {3,1,2}.""")
         self._cards[0].set_value("idir", value)
 
     @property
     def stype(self) -> int:
         """Get or set the Set type:
-        EQ.2:  part set ID,
-        EQ.3:  part ID,
-        EQ.4:  node set ID.
+        EQ.2: Part set ID,
+        EQ.3: Part ID,
+        EQ.4: Node set ID.
         """ # nopep8
         return self._cards[0].get_value("stype")
 
@@ -154,7 +156,7 @@ class DefineBoxDrawbead(KeywordBase):
 
     @property
     def cid(self) -> int:
-        """Get or set the Optional coordinate system ID. This optional is only available for the tubular drawbead
+        """Get or set the Optional coordinate system ID. This optional is only available for the tubular draw bead
         """ # nopep8
         return self._cards[0].get_value("cid")
 

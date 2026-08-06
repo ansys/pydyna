@@ -28,9 +28,6 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _DUALCESEBOUNDARYNONREFLECTIVEMSURF_CARD0 = (
     FieldSchema("mspid", int, 0, 10, None),
-    FieldSchema("dirx", float, 10, 10, None),
-    FieldSchema("diry", float, 20, 10, None),
-    FieldSchema("dirz", float, 30, 10, None),
 )
 
 class DualceseBoundaryNonReflectiveMsurf(KeywordBase):
@@ -58,37 +55,4 @@ class DualceseBoundaryNonReflectiveMsurf(KeywordBase):
     def mspid(self, value: int) -> None:
         """Set the mspid property."""
         self._cards[0].set_value("mspid", value)
-
-    @property
-    def dirx(self) -> typing.Optional[float]:
-        """Get or set the If this vector is non-zero, then it is used as the prescribed flow direction
-        """ # nopep8
-        return self._cards[0].get_value("dirx")
-
-    @dirx.setter
-    def dirx(self, value: float) -> None:
-        """Set the dirx property."""
-        self._cards[0].set_value("dirx", value)
-
-    @property
-    def diry(self) -> typing.Optional[float]:
-        """Get or set the If this vector is non-zero, then it is used as the prescribed flow direction
-        """ # nopep8
-        return self._cards[0].get_value("diry")
-
-    @diry.setter
-    def diry(self, value: float) -> None:
-        """Set the diry property."""
-        self._cards[0].set_value("diry", value)
-
-    @property
-    def dirz(self) -> typing.Optional[float]:
-        """Get or set the If this vector is non-zero, then it is used as the prescribed flow direction
-        """ # nopep8
-        return self._cards[0].get_value("dirz")
-
-    @dirz.setter
-    def dirz(self, value: float) -> None:
-        """Set the dirz property."""
-        self._cards[0].set_value("dirz", value)
 

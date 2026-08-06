@@ -255,7 +255,7 @@ class Mat267(KeywordBase):
 
     @property
     def mu(self) -> typing.Optional[float]:
-        """Get or set the Shear modulus.MU is the product of the number of molecular chains	per unit volume (n), Boltzmann's constant (k) and the absolute temperature (T). Thus MU=nkT
+        """Get or set the Shear modulus.MU is the product of the number of molecular chains per unit volume (n), Boltzmann's constant (k) and the absolute temperature (T). Thus MU=nkT
         """ # nopep8
         return self._cards[0].get_value("mu")
 
@@ -302,7 +302,7 @@ class Mat267(KeywordBase):
         used, see the theory section for details.
         EQ.0: No viscoplasticity.
         EQ.1: 2 parameters standard model, K1 and S1 must be set.
-        EQ.¦Â: 6 parameters G'Sells model, K1,K¦Â,K¦Ã,S1,S¦Â and S¦Ã must be set.
+        EQ.2: 6 parameters G'Sells model, K1,K2,K3,S1,S2 and S3 must be set.
         EQ.3: 4 parameters Strain hardening model, K1,K2,S1,S2 must be set.
         """ # nopep8
         return self._cards[0].get_value("vispl")
@@ -489,7 +489,7 @@ class Mat267(KeywordBase):
 
     @property
     def time(self) -> typing.Optional[float]:
-        """Get or set the A time filter that is used to smoothen out the time derivate of the strain	invariant over a TIME interval. Default is no smoothening but a value	100*TIMESTEP is recommended.
+        """Get or set the A time filter that is used to smoothen out the time derivate of the strain invariant over a TIME interval. Default is no smoothening but a value 100*TIMESTEP is recommended.
         """ # nopep8
         return self._cards[2].get_value("time")
 
@@ -684,11 +684,11 @@ class Mat267(KeywordBase):
     @property
     def aopt(self) -> float:
         """Get or set the Material axes option (see MAT_OPTIONTROPIC_ELASTIC, particularly the Material Directions section, for details):
-        EQ.0.0:	Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with* DEFINE_COORDINATE_NODES.
-        EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
-        EQ.2.0:	Globally orthotropic with material axes determined by vectors defined below, as with* DEFINE_COORDINATE_VECTOR
-        EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
-        EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
+        EQ.0.0: Locally orthotropic with material axes determined by element nodes 1, 2,and 4, as with *DEFINE_COORDINATE_NODES.
+        EQ.1.0: Locally orthotropic with material axes determined by a point, P, in spaceand the global location of the element center; this is the a - direction.This option is for solid elements only.
+        EQ.2.0: Globally orthotropic with material axes determined by vectors defined below, as with *DEFINE_COORDINATE_VECTOR
+        EQ.3.0: Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a,and c is the normal vector.Then aand b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on the value of MACF.
+        EQ.4.0: Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v,and an originating point, P, which define the centerline axis.This option is for solid elements only.
         """ # nopep8
         return self._cards[5].get_value("aopt")
 
@@ -702,14 +702,14 @@ class Mat267(KeywordBase):
     @property
     def macf(self) -> int:
         """Get or set the Material axes change flag for solid elements:
-        EQ. - 4:	Switch material axes b and c before BETA rotation
-        EQ. - 3 : Switch material axes a and c before BETA rotation
-        EQ. - 2 : Switch material axes a and b before BETA rotation
-        EQ.1 : No change, default
-        EQ.2 : Switch material axes a and b after BETA rotation
-        EQ.3 : Switch material axes a and c after BETA rotation
-        EQ.4 : Switch material axes b and c after BETA rotation
-        Figure Error!Reference source not found.indicates when LS - DYNA applies MACF during the process to obtain the final material axes.If BETA on * ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT = 3, the BETA input on Card 7 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed.
+        EQ. - 4: Switch material axes b and c before BETA rotation
+        EQ. - 3: Switch material axes a and c before BETA rotation
+        EQ. - 2: Switch material axes a and b before BETA rotation
+        EQ.1: No change, default
+        EQ.2: Switch material axes a and b after BETA rotation
+        EQ.3: Switch material axes a and c after BETA rotation
+        EQ.4: Switch material axes b and c after BETA rotation
+        If BETA on *ELEMENT_SOLID_{OPTION} is defined, then that BETA is used for the rotation for all AOPT options.Otherwise, if AOPT = 3, the BETA input on Card 7 rotates the axes.For all other values of AOPT, the material axes will be switched as specified by MACF, but no BETA rotation will be performed.
         """ # nopep8
         return self._cards[5].get_value("macf")
 
@@ -854,7 +854,7 @@ class Mat267(KeywordBase):
 
     @property
     def beta(self) -> typing.Optional[float]:
-        """Get or set the Material angle in degrees for AOPT = 3. It may be overridden on the element card; see *ELEMENT_‌SOLID_‌ORTHO
+        """Get or set the Material angle in degrees for AOPT = 3. It may be overridden on the element card; see *ELEMENT_SOLID_ORTHO
         """ # nopep8
         return self._cards[6].get_value("beta")
 

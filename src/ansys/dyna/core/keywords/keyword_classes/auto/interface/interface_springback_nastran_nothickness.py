@@ -30,7 +30,7 @@ from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 
 _INTERFACESPRINGBACKNASTRANNOTHICKNESS_CARD0 = (
     FieldSchema("psid", int, 0, 10, None),
-    FieldSchema("nshv", int, 10, 10, None),
+    FieldSchema("nhsv", int, 10, 10, None),
     FieldSchema("ftype", int, 20, 10, 0),
     FieldSchema("unused", int, 30, 10, None),
     FieldSchema("ftensr", int, 40, 10, 0),
@@ -40,7 +40,7 @@ _INTERFACESPRINGBACKNASTRANNOTHICKNESS_CARD0 = (
 )
 
 _INTERFACESPRINGBACKNASTRANNOTHICKNESS_CARD1 = (
-    FieldSchema("optc", str, 0, 10, "OPTCARD"),
+    FieldSchema("optc", str, 0, 10, "0"),
     FieldSchema("sldo", int, 10, 10, 0),
     FieldSchema("ncyc", int, 20, 10, None),
     FieldSchema("fsplit", int, 30, 10, 0),
@@ -50,6 +50,17 @@ _INTERFACESPRINGBACKNASTRANNOTHICKNESS_CARD1 = (
 )
 
 _INTERFACESPRINGBACKNASTRANNOTHICKNESS_CARD2 = (
+    FieldSchema("optc", str, 0, 10, "0"),
+    FieldSchema("dtwrt", float, 10, 10, None),
+)
+
+_INTERFACESPRINGBACKNASTRANNOTHICKNESS_CARD3 = (
+    FieldSchema("optc", str, 0, 10, "0"),
+    FieldSchema("nmwrt", int, 10, 10, None),
+    FieldSchema("ivflg", int, 20, 10, 0),
+)
+
+_INTERFACESPRINGBACKNASTRANNOTHICKNESS_CARD4 = (
     FieldSchema("nid", int, 0, 10, None),
     FieldSchema("tc", int, 10, 10, 0),
     FieldSchema("rc", int, 20, 10, 0),
@@ -81,10 +92,18 @@ class InterfaceSpringbackNastranNothickness(KeywordBase):
                 _INTERFACESPRINGBACKNASTRANNOTHICKNESS_CARD2,
                 **kwargs,
             ),
+            Card.from_field_schemas_with_defaults(
+                _INTERFACESPRINGBACKNASTRANNOTHICKNESS_CARD3,
+                **kwargs,
+            ),
+            Card.from_field_schemas_with_defaults(
+                _INTERFACESPRINGBACKNASTRANNOTHICKNESS_CARD4,
+                **kwargs,
+            ),
         ]
     @property
     def psid(self) -> typing.Optional[int]:
-        """Get or set the Part set ID for springback, see * SET_PART.
+        """Get or set the Part set ID for springback, see *SET_PART.
         """ # nopep8
         return self._cards[0].get_value("psid")
 
@@ -94,15 +113,15 @@ class InterfaceSpringbackNastranNothickness(KeywordBase):
         self._cards[0].set_value("psid", value)
 
     @property
-    def nshv(self) -> typing.Optional[int]:
-        """Get or set the Number of additional shell history variables to be initialized. The shell stresses and plastic strains are written to the interface file. If NSHV is nonzero, the shell formulations and constitutive models should not change between runs.
+    def nhsv(self) -> typing.Optional[int]:
+        """Get or set the Number of shell or solid history variables (beyond the six stresses and effective plastic strain) to be initialized in the interface file. For solids, LS-DYNA writes one additional state variable (initial volume).  If NHSV is nonzero, the element formulations, unit system, and constitutive models should not change between runs. If NHSV exceeds the number of integration point history variables required by the constitutive model, LS-DYNA only writes the number required. Thus, if in doubt, set NHSV to a large number, such as 100
         """ # nopep8
-        return self._cards[0].get_value("nshv")
+        return self._cards[0].get_value("nhsv")
 
-    @nshv.setter
-    def nshv(self, value: int) -> None:
-        """Set the nshv property."""
-        self._cards[0].set_value("nshv", value)
+    @nhsv.setter
+    def nhsv(self, value: int) -> None:
+        """Set the nhsv property."""
+        self._cards[0].set_value("nhsv", value)
 
     @property
     def ftype(self) -> int:
@@ -153,8 +172,8 @@ class InterfaceSpringbackNastranNothickness(KeywordBase):
     @property
     def rflag(self) -> typing.Optional[int]:
         """Get or set the Flag to carry over reference quantities, for hyperelastic materials and such.
-        EQ.0:	default, do not output.
-        EQ.1:	output reference coordinates and nodal masses.
+        EQ.0: default, do not output.
+        EQ.1: output reference coordinates and nodal masses.
         """ # nopep8
         return self._cards[0].get_value("rflag")
 
@@ -183,15 +202,15 @@ class InterfaceSpringbackNastranNothickness(KeywordBase):
     @optc.setter
     def optc(self, value: str) -> None:
         """Set the optc property."""
-        if value not in ["OPTCARD", None]:
-            raise Exception("""optc must be `None` or one of {"OPTCARD"}.""")
+        if value not in ["0", "OPTCARD", None]:
+            raise Exception("""optc must be `None` or one of {"0","OPTCARD"}.""")
         self._cards[1].set_value("optc", value)
 
     @property
     def sldo(self) -> int:
         """Get or set the Output of solid element data as
-        EQ.0:	*ELEMENT_SOLID, or
-        EQ.1:	*ELEMENT_SOLID_ORTHO(only for anisotropic material).
+        EQ.0: *ELEMENT_SOLID, or
+        EQ.1: *ELEMENT_SOLID_ORTHO(only for anisotropic material).
         """ # nopep8
         return self._cards[1].get_value("sldo")
 
@@ -216,8 +235,8 @@ class InterfaceSpringbackNastranNothickness(KeywordBase):
     @property
     def fsplit(self) -> int:
         """Get or set the Flag for splitting of the dynain file (only for ASCII format).
-        EQ.0:	dynain file written in one piece.
-        EQ.1:	Output is divided into two files, dynain_geo including the geometry data and dynain_ini including initial stresses and strains.
+        EQ.0: dynain file written in one piece.
+        EQ.1: Output is divided into two files, dynain_geo including the geometry data and dynain_ini including initial stresses and strains.
         """ # nopep8
         return self._cards[1].get_value("fsplit")
 
@@ -261,8 +280,8 @@ class InterfaceSpringbackNastranNothickness(KeywordBase):
     @property
     def hflag(self) -> typing.Optional[int]:
         """Get or set the Output hourglass state, only valid for FTYPE=3:
-        EQ.0:	default, do not output.
-        EQ.1:	output hourglass stresses for carrying over to next simulation.
+        EQ.0: default, do not output.
+        EQ.1: output hourglass stresses for carrying over to next simulation.
         """ # nopep8
         return self._cards[1].get_value("hflag")
 
@@ -272,15 +291,78 @@ class InterfaceSpringbackNastranNothickness(KeywordBase):
         self._cards[1].set_value("hflag", value)
 
     @property
+    def optc(self) -> str:
+        """Get or set the &
+        """ # nopep8
+        return self._cards[2].get_value("optc")
+
+    @optc.setter
+    def optc(self, value: str) -> None:
+        """Set the optc property."""
+        if value not in ["0", "OPTCARD", None]:
+            raise Exception("""optc must be `None` or one of {"0","OPTCARD"}.""")
+        self._cards[2].set_value("optc", value)
+
+    @property
+    def dtwrt(self) -> typing.Optional[float]:
+        """Get or set the Time interval between two consecutive writes of the dynain.lsda file.
+        """ # nopep8
+        return self._cards[2].get_value("dtwrt")
+
+    @dtwrt.setter
+    def dtwrt(self, value: float) -> None:
+        """Set the dtwrt property."""
+        self._cards[2].set_value("dtwrt", value)
+
+    @property
+    def optc(self) -> str:
+        """Get or set the &
+        """ # nopep8
+        return self._cards[3].get_value("optc")
+
+    @optc.setter
+    def optc(self, value: str) -> None:
+        """Set the optc property."""
+        if value not in ["0", "OPTCARD", None]:
+            raise Exception("""optc must be `None` or one of {"0","OPTCARD"}.""")
+        self._cards[3].set_value("optc", value)
+
+    @property
+    def nmwrt(self) -> typing.Optional[int]:
+        """Get or set the Number of dynain.lsda files to keep in store. To save space these files are overwritten periodically
+        """ # nopep8
+        return self._cards[3].get_value("nmwrt")
+
+    @nmwrt.setter
+    def nmwrt(self, value: int) -> None:
+        """Set the nmwrt property."""
+        self._cards[3].set_value("nmwrt", value)
+
+    @property
+    def ivflg(self) -> int:
+        """Get or set the Flag to not write out the initial volume for solid elements. See IVEFLG on *INITIAL_STRESS_SOLID.
+        EQ.0: IVEFLG = 1 for the written *INITIAL_STRESS_SOLID keywords.The output file contains the initial volume.
+        EQ.1: IVEFLG = 0 for the written *INITIAL_STRESS_SOLID keywords.The output file does not contain the initial volume.
+        """ # nopep8
+        return self._cards[3].get_value("ivflg")
+
+    @ivflg.setter
+    def ivflg(self, value: int) -> None:
+        """Set the ivflg property."""
+        if value not in [0, 1, None]:
+            raise Exception("""ivflg must be `None` or one of {0,1}.""")
+        self._cards[3].set_value("ivflg", value)
+
+    @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID, see *NODE.
         """ # nopep8
-        return self._cards[2].get_value("nid")
+        return self._cards[4].get_value("nid")
 
     @nid.setter
     def nid(self, value: int) -> None:
         """Set the nid property."""
-        self._cards[2].set_value("nid", value)
+        self._cards[4].set_value("nid", value)
 
     @property
     def tc(self) -> int:
@@ -294,14 +376,14 @@ class InterfaceSpringbackNastranNothickness(KeywordBase):
         EQ.6: constrained z and x displacements,
         EQ.7: constrained x, y, and z displacements.
         """ # nopep8
-        return self._cards[2].get_value("tc")
+        return self._cards[4].get_value("tc")
 
     @tc.setter
     def tc(self, value: int) -> None:
         """Set the tc property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
             raise Exception("""tc must be `None` or one of {0,1,2,3,4,5,6,7}.""")
-        self._cards[2].set_value("tc", value)
+        self._cards[4].set_value("tc", value)
 
     @property
     def rc(self) -> int:
@@ -315,14 +397,14 @@ class InterfaceSpringbackNastranNothickness(KeywordBase):
         EQ.6: constrained z and x rotations,
         EQ.7: constrained x, y, and z rotations.
         """ # nopep8
-        return self._cards[2].get_value("rc")
+        return self._cards[4].get_value("rc")
 
     @rc.setter
     def rc(self, value: int) -> None:
         """Set the rc property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
             raise Exception("""rc must be `None` or one of {0,1,2,3,4,5,6,7}.""")
-        self._cards[2].set_value("rc", value)
+        self._cards[4].set_value("rc", value)
 
     @property
     def nid_link(self) -> typing.Optional[KeywordBase]:

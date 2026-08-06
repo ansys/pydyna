@@ -29,7 +29,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 _IGAEDGEUVW_CARD0 = (
     FieldSchema("eid", int, 0, 10, None),
     FieldSchema("exyzid", int, 10, 10, None),
-    FieldSchema("nid", int, 20, 10, None),
+    FieldSchema("patchid", int, 20, 10, None),
     FieldSchema("sense", int, 30, 10, 0),
     FieldSchema("rstart", float, 40, 20, None),
     FieldSchema("rend", float, 60, 20, None),
@@ -63,7 +63,7 @@ class IgaEdgeUvw(KeywordBase):
 
     @property
     def exyzid(self) -> typing.Optional[int]:
-        """Get or set the Physical edge IDs, see *IGA_EDGE_XYZ and Remark 1.
+        """Get or set the Physical edge IDs, see *IGA_EDGE_XYZ and Remark 1 and 3.
         """ # nopep8
         return self._cards[0].get_value("exyzid")
 
@@ -73,21 +73,21 @@ class IgaEdgeUvw(KeywordBase):
         self._cards[0].set_value("exyzid", value)
 
     @property
-    def nid(self) -> typing.Optional[int]:
-        """Get or set the Parametric univariate NURBS ID, see *IGA_1D_NURBS_UVW, see Remark 2.
+    def patchid(self) -> typing.Optional[int]:
+        """Get or set the Parametric univariate NURBS patch ID. See *IGA_1D_NURBS_UVW and Remarks 2, 3, and 5. PATCHID is ignored for the BASIS_TRANSFORM keyword option.
         """ # nopep8
-        return self._cards[0].get_value("nid")
+        return self._cards[0].get_value("patchid")
 
-    @nid.setter
-    def nid(self, value: int) -> None:
-        """Set the nid property."""
-        self._cards[0].set_value("nid", value)
+    @patchid.setter
+    def patchid(self, value: int) -> None:
+        """Set the patchid property."""
+        self._cards[0].set_value("patchid", value)
 
     @property
     def sense(self) -> int:
         """Get or set the Sense of Orientation with respect to the physical edge.
         EQ. 0:Same(default)
-        EQ.1 : Reversed.
+        EQ.1: Reversed.
         """ # nopep8
         return self._cards[0].get_value("sense")
 
@@ -100,7 +100,7 @@ class IgaEdgeUvw(KeywordBase):
 
     @property
     def rstart(self) -> typing.Optional[float]:
-        """Get or set the Parametric coordinate defining the start of the trimmed parametric NURBS, see Remark 3.
+        """Get or set the Parametric coordinate defining the start of the trimmed parametric NURBS, see Remark 4 and 5.
         """ # nopep8
         return self._cards[0].get_value("rstart")
 
@@ -111,7 +111,7 @@ class IgaEdgeUvw(KeywordBase):
 
     @property
     def rend(self) -> typing.Optional[float]:
-        """Get or set the Parametric coordinate defining the end of the trimmed parametric NURBS, see Remark 3.
+        """Get or set the Parametric coordinate defining the end of the trimmed parametric NURBS, see Remark 4 and 5.
         """ # nopep8
         return self._cards[0].get_value("rend")
 

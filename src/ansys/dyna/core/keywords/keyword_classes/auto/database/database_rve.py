@@ -28,7 +28,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _DATABASERVE_CARD0 = (
     FieldSchema("dt", float, 0, 10, 0.0),
-    FieldSchema("bina", int, 10, 10, 0),
+    FieldSchema("binary", int, 10, 10, 0),
 )
 
 class DatabaseRve(KeywordBase):
@@ -58,17 +58,14 @@ class DatabaseRve(KeywordBase):
         self._cards[0].set_value("dt", value)
 
     @property
-    def bina(self) -> int:
+    def binary(self) -> int:
         """Get or set the Type of the output file:
-        EQ. 0:	ASCII database file named “rveout”.
-        EQ. 1 : LS - DYNA binary database.
+        EQ. 0: ASCII database file named rveout.
         """ # nopep8
-        return self._cards[0].get_value("bina")
+        return self._cards[0].get_value("binary")
 
-    @bina.setter
-    def bina(self, value: int) -> None:
-        """Set the bina property."""
-        if value not in [0, 1, None]:
-            raise Exception("""bina must be `None` or one of {0,1}.""")
-        self._cards[0].set_value("bina", value)
+    @binary.setter
+    def binary(self, value: int) -> None:
+        """Set the binary property."""
+        self._cards[0].set_value("binary", value)
 

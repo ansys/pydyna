@@ -67,7 +67,7 @@ class DualceseEle3D(KeywordBase):
 
     @property
     def pid(self) -> typing.Optional[int]:
-        """Get or set the Part ID, see *DUALCESE_PART
+        """Get or set the Part ID, see *DUALCESE_MESH_PART
         """ # nopep8
         return self._cards[0].get_value("pid")
 

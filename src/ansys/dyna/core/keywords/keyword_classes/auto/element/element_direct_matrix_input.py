@@ -67,7 +67,7 @@ class ElementDirectMatrixInput(KeywordBase):
         ]
     @property
     def eid(self) -> typing.Optional[int]:
-        """Get or set the Super element ID.
+        """Get or set the Superelement ID.
         """ # nopep8
         return self._cards[0].get_value("eid")
 
@@ -79,8 +79,8 @@ class ElementDirectMatrixInput(KeywordBase):
     @property
     def ifrmt(self) -> typing.Optional[int]:
         """Get or set the Format:
-        EQ.0: standard format
-        NE.0:  extended precision format
+        EQ.0: Standard format
+        NE.0: Extended precision format
         """ # nopep8
         return self._cards[0].get_value("ifrmt")
 

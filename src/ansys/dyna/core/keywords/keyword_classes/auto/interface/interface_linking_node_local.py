@@ -35,6 +35,8 @@ _INTERFACELINKINGNODELOCAL_CARD0 = (
     FieldSchema("fx", int, 20, 10, None),
     FieldSchema("fy", int, 30, 10, None),
     FieldSchema("fz", int, 40, 10, None),
+    FieldSchema("spline", int, 50, 10, None),
+    FieldSchema("death", float, 60, 10, None),
 )
 
 _INTERFACELINKINGNODELOCAL_CARD1 = (
@@ -122,6 +124,31 @@ class InterfaceLinkingNodeLocal(KeywordBase):
     def fz(self, value: int) -> None:
         """Set the fz property."""
         self._cards[0].set_value("fz", value)
+
+    @property
+    def spline(self) -> typing.Optional[int]:
+        """Get or set the Interpolation option for recorded sample points
+        LE.1:	Linear interpolation; continuity in displacements, but jumps in velocity and accelerations may result in oscillatory behavior if not sufficient sample points
+        EQ.2:	Quadratic interpolation; continuity in velocities, but jumps in accelerations, intermediate smoothness level of interpolation
+        EQ.3: Cubic interpolation; continuity in accelerations, smoothest level of interpolation
+        """ # nopep8
+        return self._cards[0].get_value("spline")
+
+    @spline.setter
+    def spline(self, value: int) -> None:
+        """Set the spline property."""
+        self._cards[0].set_value("spline", value)
+
+    @property
+    def death(self) -> typing.Optional[float]:
+        """Get or set the Death time for interpolation, if intention of recorded sample points is to initiate a pulse for a remaining simulation, or similar
+        """ # nopep8
+        return self._cards[0].get_value("death")
+
+    @death.setter
+    def death(self, value: float) -> None:
+        """Set the death property."""
+        self._cards[0].set_value("death", value)
 
     @property
     def lcid(self) -> typing.Optional[int]:
