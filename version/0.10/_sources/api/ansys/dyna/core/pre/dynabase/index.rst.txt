@@ -1,0 +1,163 @@
+ansys.dyna.core.pre.dynabase
+============================
+
+.. py:module:: ansys.dyna.core.pre.dynabase
+
+.. autoapi-nested-parse::
+
+   Base
+   ====
+
+   Module for creating a DYNA input deck.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/pre/dynabase/Motion
+   /api/ansys/dyna/core/pre/dynabase/RWMotion
+   /api/ansys/dyna/core/pre/dynabase/DOF
+   /api/ansys/dyna/core/pre/dynabase/Switch
+   /api/ansys/dyna/core/pre/dynabase/InvariantNode
+   /api/ansys/dyna/core/pre/dynabase/EnergyFlag
+   /api/ansys/dyna/core/pre/dynabase/HourglassControl
+   /api/ansys/dyna/core/pre/dynabase/BulkViscosity
+   /api/ansys/dyna/core/pre/dynabase/CaseType
+   /api/ansys/dyna/core/pre/dynabase/OutputEcho
+   /api/ansys/dyna/core/pre/dynabase/Box
+   /api/ansys/dyna/core/pre/dynabase/Curve
+   /api/ansys/dyna/core/pre/dynabase/Function
+   /api/ansys/dyna/core/pre/dynabase/Table2D
+   /api/ansys/dyna/core/pre/dynabase/Point
+   /api/ansys/dyna/core/pre/dynabase/Direction
+   /api/ansys/dyna/core/pre/dynabase/Transform
+   /api/ansys/dyna/core/pre/dynabase/Velocity
+   /api/ansys/dyna/core/pre/dynabase/RotVelocity
+   /api/ansys/dyna/core/pre/dynabase/BaseObj
+   /api/ansys/dyna/core/pre/dynabase/ParameterType
+   /api/ansys/dyna/core/pre/dynabase/DynaBase
+   /api/ansys/dyna/core/pre/dynabase/BaseSet
+   /api/ansys/dyna/core/pre/dynabase/NodeSet
+   /api/ansys/dyna/core/pre/dynabase/SetType
+   /api/ansys/dyna/core/pre/dynabase/NodesetGeneral
+   /api/ansys/dyna/core/pre/dynabase/NodeSetBox
+   /api/ansys/dyna/core/pre/dynabase/PartSet
+   /api/ansys/dyna/core/pre/dynabase/SegmentSet
+   /api/ansys/dyna/core/pre/dynabase/BeamFormulation
+   /api/ansys/dyna/core/pre/dynabase/ShellFormulation
+   /api/ansys/dyna/core/pre/dynabase/IGAFormulation
+   /api/ansys/dyna/core/pre/dynabase/SolidFormulation
+   /api/ansys/dyna/core/pre/dynabase/HourglassType
+   /api/ansys/dyna/core/pre/dynabase/BeamSection
+   /api/ansys/dyna/core/pre/dynabase/ShellSection
+   /api/ansys/dyna/core/pre/dynabase/IGASection
+   /api/ansys/dyna/core/pre/dynabase/Part
+   /api/ansys/dyna/core/pre/dynabase/BeamPart
+   /api/ansys/dyna/core/pre/dynabase/ShellPart
+   /api/ansys/dyna/core/pre/dynabase/IGAPart
+   /api/ansys/dyna/core/pre/dynabase/SolidPart
+   /api/ansys/dyna/core/pre/dynabase/DRO
+   /api/ansys/dyna/core/pre/dynabase/DiscretePart
+   /api/ansys/dyna/core/pre/dynabase/Parts
+   /api/ansys/dyna/core/pre/dynabase/AnalysisType
+   /api/ansys/dyna/core/pre/dynabase/TimestepCtrol
+   /api/ansys/dyna/core/pre/dynabase/Integration
+   /api/ansys/dyna/core/pre/dynabase/ImplicitAnalysis
+   /api/ansys/dyna/core/pre/dynabase/ThermalAnalysisType
+   /api/ansys/dyna/core/pre/dynabase/ThermalAnalysisTimestep
+   /api/ansys/dyna/core/pre/dynabase/ThermalAnalysis
+   /api/ansys/dyna/core/pre/dynabase/ContactCategory
+   /api/ansys/dyna/core/pre/dynabase/ContactType
+   /api/ansys/dyna/core/pre/dynabase/OffsetType
+   /api/ansys/dyna/core/pre/dynabase/ContactFormulation
+   /api/ansys/dyna/core/pre/dynabase/SBOPT
+   /api/ansys/dyna/core/pre/dynabase/ContactSurface
+   /api/ansys/dyna/core/pre/dynabase/Contact
+   /api/ansys/dyna/core/pre/dynabase/ContactGroup
+   /api/ansys/dyna/core/pre/dynabase/Constraint
+   /api/ansys/dyna/core/pre/dynabase/BoundaryCondition
+   /api/ansys/dyna/core/pre/dynabase/InitialCondition
+   /api/ansys/dyna/core/pre/dynabase/RigidwallCylinder
+   /api/ansys/dyna/core/pre/dynabase/RigidwallSphere
+   /api/ansys/dyna/core/pre/dynabase/RigidwallPlanar
+   /api/ansys/dyna/core/pre/dynabase/GravityOption
+   /api/ansys/dyna/core/pre/dynabase/Gravity
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynabase.Motion
+   ansys.dyna.core.pre.dynabase.RWMotion
+   ansys.dyna.core.pre.dynabase.DOF
+   ansys.dyna.core.pre.dynabase.Switch
+   ansys.dyna.core.pre.dynabase.InvariantNode
+   ansys.dyna.core.pre.dynabase.EnergyFlag
+   ansys.dyna.core.pre.dynabase.HourglassControl
+   ansys.dyna.core.pre.dynabase.BulkViscosity
+   ansys.dyna.core.pre.dynabase.CaseType
+   ansys.dyna.core.pre.dynabase.OutputEcho
+   ansys.dyna.core.pre.dynabase.Box
+   ansys.dyna.core.pre.dynabase.Curve
+   ansys.dyna.core.pre.dynabase.Function
+   ansys.dyna.core.pre.dynabase.Table2D
+   ansys.dyna.core.pre.dynabase.Point
+   ansys.dyna.core.pre.dynabase.Direction
+   ansys.dyna.core.pre.dynabase.Transform
+   ansys.dyna.core.pre.dynabase.Velocity
+   ansys.dyna.core.pre.dynabase.RotVelocity
+   ansys.dyna.core.pre.dynabase.BaseObj
+   ansys.dyna.core.pre.dynabase.ParameterType
+   ansys.dyna.core.pre.dynabase.DynaBase
+   ansys.dyna.core.pre.dynabase.BaseSet
+   ansys.dyna.core.pre.dynabase.NodeSet
+   ansys.dyna.core.pre.dynabase.SetType
+   ansys.dyna.core.pre.dynabase.NodesetGeneral
+   ansys.dyna.core.pre.dynabase.NodeSetBox
+   ansys.dyna.core.pre.dynabase.PartSet
+   ansys.dyna.core.pre.dynabase.SegmentSet
+   ansys.dyna.core.pre.dynabase.BeamFormulation
+   ansys.dyna.core.pre.dynabase.ShellFormulation
+   ansys.dyna.core.pre.dynabase.IGAFormulation
+   ansys.dyna.core.pre.dynabase.SolidFormulation
+   ansys.dyna.core.pre.dynabase.HourglassType
+   ansys.dyna.core.pre.dynabase.BeamSection
+   ansys.dyna.core.pre.dynabase.ShellSection
+   ansys.dyna.core.pre.dynabase.IGASection
+   ansys.dyna.core.pre.dynabase.Part
+   ansys.dyna.core.pre.dynabase.BeamPart
+   ansys.dyna.core.pre.dynabase.ShellPart
+   ansys.dyna.core.pre.dynabase.IGAPart
+   ansys.dyna.core.pre.dynabase.SolidPart
+   ansys.dyna.core.pre.dynabase.DRO
+   ansys.dyna.core.pre.dynabase.DiscretePart
+   ansys.dyna.core.pre.dynabase.Parts
+   ansys.dyna.core.pre.dynabase.AnalysisType
+   ansys.dyna.core.pre.dynabase.TimestepCtrol
+   ansys.dyna.core.pre.dynabase.Integration
+   ansys.dyna.core.pre.dynabase.ImplicitAnalysis
+   ansys.dyna.core.pre.dynabase.ThermalAnalysisType
+   ansys.dyna.core.pre.dynabase.ThermalAnalysisTimestep
+   ansys.dyna.core.pre.dynabase.ThermalAnalysis
+   ansys.dyna.core.pre.dynabase.ContactCategory
+   ansys.dyna.core.pre.dynabase.ContactType
+   ansys.dyna.core.pre.dynabase.OffsetType
+   ansys.dyna.core.pre.dynabase.ContactFormulation
+   ansys.dyna.core.pre.dynabase.SBOPT
+   ansys.dyna.core.pre.dynabase.ContactSurface
+   ansys.dyna.core.pre.dynabase.Contact
+   ansys.dyna.core.pre.dynabase.ContactGroup
+   ansys.dyna.core.pre.dynabase.Constraint
+   ansys.dyna.core.pre.dynabase.BoundaryCondition
+   ansys.dyna.core.pre.dynabase.InitialCondition
+   ansys.dyna.core.pre.dynabase.RigidwallCylinder
+   ansys.dyna.core.pre.dynabase.RigidwallSphere
+   ansys.dyna.core.pre.dynabase.RigidwallPlanar
+   ansys.dyna.core.pre.dynabase.GravityOption
+   ansys.dyna.core.pre.dynabase.Gravity
+
+

@@ -1,0 +1,110 @@
+ansys.dyna.core.keywords.keyword_classes.manual.element_solid_ortho.ElementSolidOrtho
+=====================================================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.element_solid_ortho.ElementSolidOrtho(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA ELEMENT_SOLID_ORTHO keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: keyword
+      :value: 'ELEMENT'
+
+
+
+   .. py:attribute:: subkeyword
+      :value: 'SOLID_ORTHO'
+
+
+
+   .. py:method:: before_read(buf: TextIO) -> None
+
+      
+      Runs before reading the keyword from a buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_legacy_format()
+
+      
+      Set the card format to legacy.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: elements
+
+      
+      Gets the full table of elements
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

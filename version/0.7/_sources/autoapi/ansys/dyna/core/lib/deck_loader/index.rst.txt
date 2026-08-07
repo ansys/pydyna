@@ -1,0 +1,92 @@
+ansys.dyna.core.lib.deck_loader
+===============================
+
+.. py:module:: ansys.dyna.core.lib.deck_loader
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.deck_loader.IterState
+   ansys.dyna.core.lib.deck_loader.DeckLoaderResult
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.deck_loader.load_deck
+   ansys.dyna.core.lib.deck_loader.load_deck_from_buffer
+
+
+Module Contents
+---------------
+
+.. py:class:: IterState
+
+   .. py:attribute:: USERCOMMENT
+      :value: 0
+
+
+
+   .. py:attribute:: KEYWORD_BLOCK
+      :value: 1
+
+
+
+   .. py:attribute:: TITLE
+      :value: 2
+
+
+
+   .. py:attribute:: KEYWORDS
+      :value: 3
+
+
+
+   .. py:attribute:: END
+      :value: 4
+
+
+
+   .. py:attribute:: ENCRYPTED
+      :value: 5
+
+
+
+.. py:class:: DeckLoaderResult
+
+   
+   A class containing the result of an attempted deck load.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: add_unprocessed_keyword(name)
+
+
+   .. py:method:: get_summary() -> str
+
+
+.. py:function:: load_deck(deck: ansys.dyna.core.deck.Deck, text: str, context: Optional[ansys.dyna.core.lib.import_handler.ImportContext], import_handlers: List[ansys.dyna.core.lib.import_handler.ImportHandler]) -> DeckLoaderResult
+
+.. py:function:: load_deck_from_buffer(deck: ansys.dyna.core.deck.Deck, buffer: TextIO, context: Optional[ansys.dyna.core.lib.import_handler.ImportContext], import_handlers: List[ansys.dyna.core.lib.import_handler.ImportHandler]) -> DeckLoaderResult
+

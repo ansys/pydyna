@@ -1,0 +1,58 @@
+ansys.dyna.core.keywords.keyword_classes.manual.mat_295.Mat295
+==============================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.mat_295.Mat295(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.keywords.keyword_classes.auto.mat.mat_295.Mat295`
+
+
+   
+   MAT_295 keyword with before_read support for self-referential conditionals.
+
+   This subclass adds peek-ahead logic to detect ANISO and ACTIVE title cards
+   before reading, allowing the conditional cards to be properly activated.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: before_read(buf: TextIO) -> None
+
+      
+      Peek into the buffer before reading to activate conditional cards.
+
+      The ANISO and ACTIVE cards need to be activated before reading because
+      their conditional functions depend on atype and actype values which
+      are read from those very cards. This method peeks ahead to find these
+      title lines and pre-sets the fields.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

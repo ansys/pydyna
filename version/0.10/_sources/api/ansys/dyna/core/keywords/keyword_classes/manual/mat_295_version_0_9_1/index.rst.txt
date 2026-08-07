@@ -1,0 +1,37 @@
+ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1
+=====================================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1
+
+.. autoapi-nested-parse::
+
+   Legacy MAT_295 implementation from pydyna v0.9.1.
+
+   This module contains the legacy implementation of MAT_295 that uses a TableCardGroup
+   for anisotropic settings. It has a known limitation: all fiber families must use
+   the same FTYPE value, preventing mixed fiber models (e.g., one Holzapfel-Gasser-Ogden
+   and one Freed-Doehring fiber family).
+
+   This legacy class is preserved for backward compatibility. Users who depend on the
+   old DataFrame-based API (mat.anisotropic_settings) can register this class with
+   their Deck instance using ImportContext.keyword_overrides.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/mat_295_version_0_9_1/Mat295Legacy
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/mat_295_version_0_9_1/MatAnisotropicHyperelasticLegacy
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy
+   ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.MatAnisotropicHyperelasticLegacy
+
+

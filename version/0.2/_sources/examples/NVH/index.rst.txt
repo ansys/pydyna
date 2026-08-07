@@ -1,0 +1,43 @@
+
+
+.. _sphx_glr_examples_NVH:
+
+NVH examples
+~~~~~~~~~~~~~
+
+These examples show how to create NVH model.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to setup the keywords for FRF computation. ">
+
+.. only:: html
+
+  .. image:: /examples/NVH/images/thumb/sphx_glr_frf_plate_damping_thumb.png
+    :alt: FRF for a rectangular plate
+
+  :ref:`sphx_glr_examples_NVH_frf_plate_damping.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">FRF for a rectangular plate</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/NVH/frf_plate_damping
+

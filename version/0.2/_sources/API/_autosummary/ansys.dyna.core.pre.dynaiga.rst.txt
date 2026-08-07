@@ -1,0 +1,6 @@
+﻿dynaiga
+=======
+
+.. currentmodule:: ansys.dyna.core.pre
+
+.. automodule:: dynaiga

@@ -1,0 +1,64 @@
+
+
+.. _sphx_glr_examples_Explicit:
+
+Explicit examples
+~~~~~~~~~~~~~~~~~
+
+These examples show how to create and use explicit models.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Ball plate">
+
+.. only:: html
+
+  .. image:: /examples/Explicit/images/thumb/sphx_glr_ball_plate_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Explicit_ball_plate.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Ball plate</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Belted dummy">
+
+.. only:: html
+
+  .. image:: /examples/Explicit/images/thumb/sphx_glr_belted_dummy_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Explicit_belted_dummy.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Belted dummy</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/Explicit/ball_plate
+   /examples/Explicit/belted_dummy
+

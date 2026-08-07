@@ -1,0 +1,31 @@
+ansys.dyna.core.lib.field_schema
+================================
+
+.. py:module:: ansys.dyna.core.lib.field_schema
+
+.. autoapi-nested-parse::
+
+   Field schema definitions for efficient Card operations.
+
+   This module provides immutable schema definitions that can be shared across
+   all Card instances of the same type, avoiding repeated object creation.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/field_schema/FieldSchema
+   /api/ansys/dyna/core/lib/field_schema/CardSchema
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.field_schema.FieldSchema
+   ansys.dyna.core.lib.field_schema.CardSchema
+
+

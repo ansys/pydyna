@@ -1,0 +1,1183 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ansys.dyna.core.pre.dynaem.DynaEM &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/styles/ansys-sphinx-theme.css?v=300e4a82" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/styles/ansys-sphinx-theme.css?v=300e4a82" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../../../../../_static/documentation_options.js?v=016a97bc"></script>
+    <script src="../../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/ansys/dyna/core/pre/dynaem/DynaEM';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.9';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+    <link rel="next" title="ansys.dyna.core.pre.dynaem.EMType" href="EMType.html" />
+    <link rel="prev" title="ansys.dyna.core.pre.dynaem.Isopotential_ConnType" href="Isopotential_ConnType.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.9.1" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/api/ansys/dyna/core/pre/dynaem/DynaEM.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../../../../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../../../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../../../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../index.html"><span class="nf nf-md-package"></span> ansys.dyna.core</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../keywords/index.html">ansys.dyna.core.keywords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lib/index.html">ansys.dyna.core.lib</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../index.html">ansys.dyna.core.pre</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../dynabase/index.html">ansys.dyna.core.pre.dynabase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynadem/index.html">ansys.dyna.core.pre.dynadem</a></li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="index.html">ansys.dyna.core.pre.dynaem</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Isopotential_ConnType.html">ansys.dyna.core.pre.dynaem.Isopotential_ConnType</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">ansys.dyna.core.pre.dynaem.DynaEM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EMType.html">ansys.dyna.core.pre.dynaem.EMType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EMDimension.html">ansys.dyna.core.pre.dynaem.EMDimension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BEMSOLVER.html">ansys.dyna.core.pre.dynaem.BEMSOLVER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FEMSOLVER.html">ansys.dyna.core.pre.dynaem.FEMSOLVER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EMAnalysis.html">ansys.dyna.core.pre.dynaem.EMAnalysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="CircuitType.html">ansys.dyna.core.pre.dynaem.CircuitType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Circuit.html">ansys.dyna.core.pre.dynaem.Circuit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EMContactType.html">ansys.dyna.core.pre.dynaem.EMContactType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EMContact.html">ansys.dyna.core.pre.dynaem.EMContact</a></li>
+<li class="toctree-l4"><a class="reference internal" href="EMRandlesLayer.html">ansys.dyna.core.pre.dynaem.EMRandlesLayer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Isopotential.html">ansys.dyna.core.pre.dynaem.Isopotential</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RogoCoil.html">ansys.dyna.core.pre.dynaem.RogoCoil</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RandlesCellType.html">ansys.dyna.core.pre.dynaem.RandlesCellType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RandlesCell.html">ansys.dyna.core.pre.dynaem.RandlesCell</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynaicfd/index.html">ansys.dyna.core.pre.dynaicfd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynaiga/index.html">ansys.dyna.core.pre.dynaiga</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynaisph/index.html">ansys.dyna.core.pre.dynaisph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynalogging/index.html">ansys.dyna.core.pre.dynalogging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamaterial/index.html">ansys.dyna.core.pre.dynamaterial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamech/index.html">ansys.dyna.core.pre.dynamech</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynanvh/index.html">ansys.dyna.core.pre.dynanvh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynasale/index.html">ansys.dyna.core.pre.dynasale</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynasolution/index.html">ansys.dyna.core.pre.dynasolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../errors/index.html">ansys.dyna.core.pre.errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/index.html">ansys.dyna.core.pre.examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graphics/index.html">ansys.dyna.core.pre.graphics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../launcher/index.html">ansys.dyna.core.pre.launcher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../misc/index.html">ansys.dyna.core.pre.misc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../model/index.html">ansys.dyna.core.pre.model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../part/index.html">ansys.dyna.core.pre.part</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../run/index.html">ansys.dyna.core.run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../solver/index.html">ansys.dyna.core.solver</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../_autosummary/index.html"><span class="nf nf-md-package"></span> Auto Keyword classes</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../../../index.html" class="nav-link">API reference</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../index.html" class="nav-link">ansys.dyna.core</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../index.html" class="nav-link">ansys.dyna.core.pre</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">ansys.dyna.core.pre.dynaem</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ansys.dyna.core.pre.dynaem.DynaEM</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="ansys-dyna-core-pre-dynaem-dynaem">
+<h1>ansys.dyna.core.pre.dynaem.DynaEM<a class="headerlink" href="#ansys-dyna-core-pre-dynaem-dynaem" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynaem.DynaEM">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynaem.</span></span><span class="sig-name descname"><span class="pre">DynaEM</span></span><a class="headerlink" href="#ansys.dyna.core.pre.dynaem.DynaEM" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../dynabase/DynaBase.html#ansys.dyna.core.pre.dynabase.DynaBase" title="ansys.dyna.core.pre.dynabase.DynaBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.DynaBase</span></code></a></p>
+<p>Contains methods for creating keywords related to EM.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynaem.DynaEM.analysis">
+<span class="sig-name descname"><span class="pre">analysis</span></span><a class="headerlink" href="#ansys.dyna.core.pre.dynaem.DynaEM.analysis" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynaem.DynaEM.create_em_control">
+<span class="sig-name descname"><span class="pre">create_em_control</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">emsol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">macrodt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncylfem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncylbem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_control" title="Link to this definition">#</a></dt>
+<dd><p>Enable the EM solver and set its options.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>emsol</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>EM solver. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>. Options are:</p>
+<ul class="simple">
+<li><p>EQ.-1: Turn off the EM solver after reading the EM keywords.</p></li>
+<li><p>EQ.1: Eddy current solver.</p></li>
+<li><p>EQ.2: Induced heating solver.</p></li>
+<li><p>EQ.3: Resistive heating solver.</p></li>
+<li><p>EQ.11: Electrophysiology monodomain.</p></li>
+<li><p>EQ.12: Electrophysiology bidomain.</p></li>
+<li><p>EQ.13: Electrophysiology monodomain coupled with bidomain.</p></li>
+</ul>
+</dd>
+<dt><strong>numls</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Number of local EM steps in a whole period for when <code class="docutils literal notranslate"><span class="pre">emsol</span> <span class="pre">=</span> <span class="pre">2</span></code>.
+The default is <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p>
+</dd>
+<dt><strong>macrodt</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Macro time step for when <code class="docutils literal notranslate"><span class="pre">emsol</span> <span class="pre">=</span> <span class="pre">2</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>ncylfem</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Number of electromagnetism cycles between the recalculation of FEM matrices.
+The default is <code class="docutils literal notranslate"><span class="pre">5000</span></code>.</p>
+</dd>
+<dt><strong>ncylbem</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Number of electromagnetism cycles between the recalculation of BEM matrices.
+The default is <code class="docutils literal notranslate"><span class="pre">5000</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynaem.DynaEM.create_em_timestep">
+<span class="sig-name descname"><span class="pre">create_em_timestep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tstype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtconst</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_timestep" title="Link to this definition">#</a></dt>
+<dd><p>Control the EM time step and its evolution.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>tstype</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Time step type. Options are:</p>
+<ul class="simple">
+<li><p>EQ.1: Constant time step given in DTCONST</p></li>
+<li><p>EQ.2: Time step as a function of time given by a load curve specified in LCID</p></li>
+<li><p>EQ.3: Automatic time step computation, depending on the solver type</p></li>
+</ul>
+<p>This time step is then multiplied by FACTOR.</p>
+</dd>
+<dt><strong>dtconst</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>Constant value for the time step for when <code class="docutils literal notranslate"><span class="pre">tstype</span> <span class="pre">=</span> <span class="pre">1</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynaem.DynaEM.create_em_contact">
+<span class="sig-name descname"><span class="pre">create_em_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psidm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_contact" title="Link to this definition">#</a></dt>
+<dd><p>Create an optional card for defining options on electromagnetic contacts between two sets of parts.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>contid</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Electromagnetic contact ID. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>dtype</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Detection type.  The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>. Options are:</p>
+<ul class="simple">
+<li><p>EQ.0: Contact type 0</p></li>
+<li><p>EQ.1: Contact type 1</p></li>
+</ul>
+</dd>
+<dt><strong>psidm</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Master part set ID. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>psids</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Slave part set ID.  The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>eps1</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>First contact coefficient for contact detection conditions.
+The default is <code class="docutils literal notranslate"><span class="pre">0.3</span></code>.</p>
+</dd>
+<dt><strong>eps2</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Second contact coefficient for contact detection conditions.
+The default is <code class="docutils literal notranslate"><span class="pre">0.3</span></code>.</p>
+</dd>
+<dt><strong>eps3</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Third contact coefficient for contact detection conditions.
+The default is <code class="docutils literal notranslate"><span class="pre">0.3</span></code>.</p>
+</dd>
+<dt><strong>d0</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Contact condition 3 when <code class="docutils literal notranslate"><span class="pre">dtype</span> <span class="pre">=</span> <span class="pre">1</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynaem.DynaEM.set_rogowsky_coil_to_output_current">
+<span class="sig-name descname"><span class="pre">set_rogowsky_coil_to_output_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">segmentset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SegmentSet([[]])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curtyp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynaem.DynaEM.set_rogowsky_coil_to_output_current" title="Link to this definition">#</a></dt>
+<dd><p>Define Rogowsky coils to measure a global current versus time through a segment set or a node set.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>rogid</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Rogowsky coil ID.</p>
+</dd>
+<dt><strong>setid</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Segment or node set ID.</p>
+</dd>
+<dt><strong>settype</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Type of set. The default is <code class="docutils literal notranslate"><span class="pre">1</span></code>. Options are:</p>
+<ul class="simple">
+<li><p>EQ.1: Segment set</p></li>
+<li><p>EQ.2: Node set</p></li>
+</ul>
+</dd>
+<dt><strong>curtyp</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Type of current measured. The default is <code class="docutils literal notranslate"><span class="pre">1</span></code>. Options are:</p>
+<ul class="simple">
+<li><p>EQ.1: Volume current</p></li>
+<li><p>EQ.2: Surface current (not available yet}</p></li>
+<li><p>EQ.3: Magnetic field flow (B field times area)</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynaem.DynaEM.create_em_mat001">
+<span class="sig-name descname"><span class="pre">create_em_mat001</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_mat001" title="Link to this definition">#</a></dt>
+<dd><p>Create an electromagnetic material type and set properties
+for a material whose permeability equals the free space permeability.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>mid</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Material ID.</p>
+</dd>
+<dt><strong>mtype</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Electromagnetism type of the material. Options are:</p>
+<ul class="simple">
+<li><p>EQ.0: Air or vacuum</p></li>
+<li><p>EQ.1: Insulator material (These materials have the same electromagnetism behavior as EQ.0.)</p></li>
+<li><p>EQ.2: Conductor carrying a source</p></li>
+<li><p>EQ.3: Fluid conductor</p></li>
+<li><p>EQ.4: Conductor not connected to any current or voltage source, where the eddy current problem is solved</p></li>
+</ul>
+</dd>
+<dt><strong>sigma</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>Initial electrical conductivity of the material.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynaem.DynaEM.create_em_mat002">
+<span class="sig-name descname"><span class="pre">create_em_mat002</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eosid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">murel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_mat002" title="Link to this definition">#</a></dt>
+<dd><p>Create an electromagnetic material type and set properties
+whose permeability is different than the free space permeability.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>mid</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Material ID.</p>
+</dd>
+<dt><strong>mtype</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Electromagnetism type of the material. Options are:</p>
+<ul class="simple">
+<li><p>EQ.0: Air or vacuum</p></li>
+<li><p>EQ.1: Insulator material (These materials have the same electromagnetism behavior as EQ.0.)</p></li>
+<li><p>EQ.2: Conductor carrying a source</p></li>
+<li><p>EQ.4: Conductor not connected to any current or voltage source, where the wddy current problem is solved</p></li>
+</ul>
+</dd>
+<dt><strong>sigma</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>Initial electrical conductivity of the material.</p>
+</dd>
+<dt><strong>eosid</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>ID of the EOS to use for the electrical conductivity.</p>
+</dd>
+<dt><strong>murel</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>Relative permeability, which is the ratio of the permeability of a specific
+medium to the permeability of the free space.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynaem.DynaEM.create_em_solver_fembem_monolithic">
+<span class="sig-name descname"><span class="pre">create_em_solver_fembem_monolithic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">abstol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reltol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_solver_fembem_monolithic" title="Link to this definition">#</a></dt>
+<dd><p>Turn on the monolithic FEM-BEM solver.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>mtype</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Monolithic solver type. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>. The only option is EQ.0: Direct symmetric solver.</p>
+</dd>
+<dt><strong>stype</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Solver type. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>. Options are:</p>
+<ul class="simple">
+<li><p>EQ.0: MINRES iterative solver</p></li>
+<li><p>EQ.1: GMRES iterative solver</p></li>
+</ul>
+</dd>
+<dt><strong>abstol</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Absolute tolerance. The default is <code class="docutils literal notranslate"><span class="pre">1e-6</span></code>.</p>
+</dd>
+<dt><strong>reltol</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Relative tolerance. The default is <code class="docutils literal notranslate"><span class="pre">1e-4</span></code>.</p>
+</dd>
+<dt><strong>maxit</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, optional.</span></dt><dd><p>Maximum number of iterations. The default is 500.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynaem.DynaEM.create_em_output">
+<span class="sig-name descname"><span class="pre">create_em_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_output" title="Link to this definition">#</a></dt>
+<dd><p>Define the level of EM-related output on the screen and in the message file.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>mats</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Level of matrix assembly output to show on the screen. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+Options are:</p>
+<ul class="simple">
+<li><p>EQ.0: No output</p></li>
+<li><p>EQ.1: Basic assembly steps</p></li>
+<li><p>EQ.2: Basic assembly steps + percentage completed + final statistics</p></li>
+<li><p>EQ.3: Basic assembly steps + percentage completed + statistics at each percentage of completion</p></li>
+</ul>
+</dd>
+<dt><strong>matf</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Level of matrix assembly output to write to the message file. The default
+is <code class="docutils literal notranslate"><span class="pre">0</span></code>. Options are:</p>
+<ul class="simple">
+<li><p>EQ.0: No output</p></li>
+<li><p>EQ.1: Basic assembly steps</p></li>
+<li><p>EQ.2: Basic assembly steps + percentage completed + final statistics</p></li>
+<li><p>EQ.3: Vasic assembly steps + percentage completed + statistics at each percentage of completion</p></li>
+</ul>
+</dd>
+<dt><strong>sols</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Level of solver output to show on the screen. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>. Options are:</p>
+<ul class="simple">
+<li><p>EQ.0: No output</p></li>
+<li><p>EQ.1: Global information at each FEM iteration</p></li>
+<li><p>EQ.2: Detailed information at each FEM iteration</p></li>
+</ul>
+</dd>
+<dt><strong>solf</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Level of solver output to write to the message file. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+Options are:</p>
+<ul class="simple">
+<li><p>EQ.0: No output</p></li>
+<li><p>EQ.1: Global information at each FEM iteration</p></li>
+<li><p>EQ.2: Detailed information at each FEM iteration</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynaem.DynaEM.connect_isopotential">
+<span class="sig-name descname"><span class="pre">connect_isopotential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Isopotential_ConnType.SHORT_CIRCUIT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isopotential1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isopotential2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inductance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capacity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_voltage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynaem.DynaEM.connect_isopotential" title="Link to this definition">#</a></dt>
+<dd><p>Define a connection between two isopotentials or between an isopotential and the ground.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>contype</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Isopotential_ConnType</span></code></span></dt><dd><p>Isopotential connection type. The default is <code class="docutils literal notranslate"><span class="pre">SHORT_CIRCUIT</span></code>.</p>
+</dd>
+<dt><strong>isopotential1</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Isopotential</span></code></span></dt><dd><p>First isopotential to connect.</p>
+</dd>
+<dt><strong>isopotential2</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Isopotential</span></code></span></dt><dd><p>Second isopotential to connect.</p>
+</dd>
+<dt><strong>value</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Value of the resistance, voltage, or current depending on the isopotential
+connection type. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>func</strong></dt><dd></dd>
+<dt><strong>curve</strong></dt><dd></dd>
+<dt><strong>inductance</strong></dt><dd></dd>
+<dt><strong>capacity</strong></dt><dd></dd>
+<dt><strong>initial voltage</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>Connection ID.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynaem.DynaEM.create_em_database_globalenergy">
+<span class="sig-name descname"><span class="pre">create_em_database_globalenergy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outlv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_database_globalenergy" title="Link to this definition">#</a></dt>
+<dd><p>Enable the output of global EM.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>outlv</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Flag for whether to generate the output file. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+Options are:</p>
+<ul class="simple">
+<li><p>EQ.0: No output file is generated.</p></li>
+<li><p>EQ.1: The output file is generated.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynaem.DynaEM.create_Permanent_magnet">
+<span class="sig-name descname"><span class="pre">create_Permanent_magnet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">north</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sourth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_Permanent_magnet" title="Link to this definition">#</a></dt>
+<dd><p>Create a permanent magnet.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>id</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>ID of the magnet.</p>
+</dd>
+<dt><strong>partid</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Part ID.</p>
+</dd>
+<dt><strong>mtype</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Magnet definition type. Options are:</p>
+<ul class="simple">
+<li><p>EQ.0: Magnet defined by two node set for the north and south poles</p></li>
+<li><p>EQ.1: Magnet defined by two segments set for the north and south poles</p></li>
+<li><p>EQ.3: Magnet defined by a global vector orientation</p></li>
+<li><p>EQ.4: Magnet defined by a global vector orientation given by two node IDs</p></li>
+</ul>
+</dd>
+<dt><strong>north</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>ID of the magnet’s north face for <code class="docutils literal notranslate"><span class="pre">mtype</span> <span class="pre">=</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">mtype</span> <span class="pre">=</span> <span class="pre">1</span></code>.</p>
+</dd>
+<dt><strong>sourth</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>ID of the magnet’s south face for <code class="docutils literal notranslate"><span class="pre">mtype</span> <span class="pre">=</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">mtype</span> <span class="pre">=</span> <span class="pre">1</span></code>.</p>
+</dd>
+<dt><strong>hc</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Coercive force.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynaem.DynaEM.create_em_eos_permeability">
+<span class="sig-name descname"><span class="pre">create_em_eos_permeability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eosid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eostype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lcid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_eos_permeability" title="Link to this definition">#</a></dt>
+<dd><p>Define the parameters for the behavior of a material’s permeability.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>eosid</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>EM EOS ID.</p>
+</dd>
+<dt><strong>eostype</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Define the type of EOS. Options are:</p>
+<ul class="simple">
+<li><p>EQ.1: Permeability defined by a B function of the H curve</p></li>
+<li><p>EQ.2: Permeability defined by an H function of the B curve</p></li>
+</ul>
+</dd>
+<dt><strong>lcid</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>Load curve ID.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.14)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynaem.DynaEM.save_file">
+<span class="sig-name descname"><span class="pre">save_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.pre.dynaem.DynaEM.save_file" title="Link to this definition">#</a></dt>
+<dd><p>Save keyword files.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynaem.DynaEM"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaem.DynaEM</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynaem.DynaEM.analysis"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaem.DynaEM.analysis</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_control"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaem.DynaEM.create_em_control()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_timestep"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaem.DynaEM.create_em_timestep()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_contact"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaem.DynaEM.create_em_contact()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynaem.DynaEM.set_rogowsky_coil_to_output_current"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaem.DynaEM.set_rogowsky_coil_to_output_current()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_mat001"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaem.DynaEM.create_em_mat001()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_mat002"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaem.DynaEM.create_em_mat002()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_solver_fembem_monolithic"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaem.DynaEM.create_em_solver_fembem_monolithic()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_output"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaem.DynaEM.create_em_output()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynaem.DynaEM.connect_isopotential"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaem.DynaEM.connect_isopotential()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_database_globalenergy"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaem.DynaEM.create_em_database_globalenergy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_Permanent_magnet"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaem.DynaEM.create_Permanent_magnet()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynaem.DynaEM.create_em_eos_permeability"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaem.DynaEM.create_em_eos_permeability()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynaem.DynaEM.save_file"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaem.DynaEM.save_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="http://github.com/ansys/pydyna/edit/main/ansys/dyna/core/pre/dynaem/DynaEM.py">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../../../../../_sources/api/ansys/dyna/core/pre/dynaem/DynaEM.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../../../../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../../../../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../../../../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2025 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.6.1. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+
+:orphan:
+
+.. _sphx_glr_examples_SALE_sg_execution_times:
+
+Computation times
+=================
+**00:01.887** total execution time for **examples_SALE** files:
+
++-------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_examples_SALE_sale_efp.py` (``sale_efp.py``) | 00:01.887 | 0.0 MB |
++-------------------------------------------------------------+-----------+--------+

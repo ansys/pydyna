@@ -1,0 +1,99 @@
+ansys.dyna.core.lib.field
+=========================
+
+.. py:module:: ansys.dyna.core.lib.field
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.field.Flag
+   ansys.dyna.core.lib.field.Field
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.field.to_long
+
+
+Module Contents
+---------------
+
+.. py:class:: Flag
+
+   .. py:attribute:: value
+      :type:  bool
+      :value: None
+
+
+
+   .. py:attribute:: true_value
+      :type:  str
+      :value: None
+
+
+
+   .. py:attribute:: false_value
+      :type:  str
+      :value: None
+
+
+
+.. py:class:: Field(name: str, type: Field.__init__.type, offset: int, width: int, value: Any = None)
+
+   .. py:property:: name
+      :type: str
+
+
+
+   .. py:property:: type
+      :type: type
+
+
+
+   .. py:property:: offset
+      :type: int
+
+
+
+   .. py:property:: width
+      :type: int
+
+
+
+   .. py:property:: value
+      :type: Any
+
+
+
+   .. py:method:: io_info() -> Tuple[str, Type]
+
+      
+      Return the value and type used for io.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:function:: to_long(field: Field, offset: int) -> Field
+

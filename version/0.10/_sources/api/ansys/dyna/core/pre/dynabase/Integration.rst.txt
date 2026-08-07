@@ -1,0 +1,38 @@
+ansys.dyna.core.pre.dynabase.Integration
+========================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.Integration(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Integration method for implicit analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: NEWMARK_TIME_INTEGRATION
+      :value: 1
+
+
+
+   .. py:attribute:: MODAL_SUPERPOSITION_FOLLOWING_EIGENVALUE
+      :value: 2
+
+

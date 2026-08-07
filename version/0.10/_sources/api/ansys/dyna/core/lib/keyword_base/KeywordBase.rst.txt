@@ -1,0 +1,406 @@
+ansys.dyna.core.lib.keyword_base.KeywordBase
+============================================
+
+.. py:class:: ansys.dyna.core.lib.keyword_base.KeywordBase(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.cards.Cards`
+
+
+   
+   Base class for all keywords.
+
+   Derived class must provide::
+       - _cards
+       - keyword
+       - subkeyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: user_comment
+      :type: str
+
+
+      
+      Get or set the "user comment" for this keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: deck
+      :type: Optional[ansys.dyna.core.lib.deck.Deck]
+
+
+      
+      Get the deck that this keyword is associated to.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: format
+      :type: ansys.dyna.core.lib.format_type.format_type
+
+
+      
+      Get or set the format for this keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_title(format_symbol: str = '') -> str
+
+      
+      Get the title of this keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: cards
+      :type: List[ansys.dyna.core.lib.card_interface.CardInterface]
+
+
+      
+      Gets the cards of the keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: included_from
+      :type: str
+
+
+      
+      Get the filename this was included from.
+
+      If the keyword was not read from a file,
+      return None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __repr__() -> str
+
+      
+      Returns a console-friendly representation of the keyword data as it would appear in the .k file
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(buf: Optional[TextIO] = None, format: Optional[ansys.dyna.core.lib.format_type.format_type] = None, deck_format: ansys.dyna.core.lib.format_type.format_type = format_type.default, retain_parameters: bool = False) -> str
+
+      
+      Renders the keyword in the dyna keyword format.
+
+
+      :Parameters:
+
+          **buf: IO**
+              Optional - buffer to write to.
+
+          **format: format_type, optional**
+              Format to use for writing.
+
+          **deck_format: format_type, optional**
+              The deck's format (used to determine if format symbol needed).
+
+          **retain_parameters: bool, optional**
+              If True, write original parameter references (e.g., &myvar) instead of
+              substituted values for fields that were read from parameters. Default is False.
+
+
+
+      :Returns:
+
+          :obj:`_______`
+              ..
+
+          :obj:`If` `buf` :obj:`is` :data:`python:None`, :obj:`the` :obj:`output` :obj:`is` :obj:`returned` :obj:`as` :obj:`a` :class:`python:str`
+              ..
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: dumps() -> str
+
+      
+      Return the string representation of the keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: before_read(buf: TextIO) -> None
+
+      
+      Run any pre-processing before reading the keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: read(buf: TextIO, parameters: ansys.dyna.core.lib.parameters.ParameterSet = None) -> None
+
+      
+      Read the keyword from a buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: loads(value: str, parameters: ansys.dyna.core.lib.parameters.ParameterSet = None) -> Any
+
+      
+      Load the keyword from string.
+
+      Return `self` to support chaining
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_links(link_type: LinkType = None, level: int = 1, _seen: Optional[Set] = None) -> List[KeywordBase]
+
+      
+      Get all keywords referenced by this keyword.
+
+      Traverses the fields of this keyword that reference other keywords
+      and returns the linked keyword objects from the parent deck.
+
+      :Parameters:
+
+          **link_type** : :obj:`LinkType`, :obj:`optional`
+              Filter results by link type. If ``None`` or ``LinkType.ALL``,
+              returns all linked keywords. Otherwise, returns only keywords
+              matching the specified link type.
+
+          **level** : :class:`python:int`, default=1
+              Traversal depth. ``1`` returns only direct links (default),
+              ``-1`` traverses recursively without limit, ``0`` returns empty list,
+              and any positive integer ``n`` traverses up to ``n`` levels deep.
+
+          **_seen** : :obj:`set`, :obj:`optional`
+              Internal parameter for cycle prevention. Do not pass explicitly.
+
+
+
+      :Returns:
+
+          :obj:`List`\[:obj:`KeywordBase`]
+              List of referenced keyword objects. Returns an empty list if
+              the keyword is not associated with a deck or if no links are found.
+
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      >>> mat = deck.keywords[0]  # A material keyword with curve references
+      >>> curves = mat.get_links(LinkType.DEFINE_CURVE)
+      >>> all_links = mat.get_links()  # Get all referenced keywords
+      >>> # Get full dependency tree
+      >>> all_deps = mat.get_links(level=-1)
+
+      ..
+          !! processed by numpydoc !!
+

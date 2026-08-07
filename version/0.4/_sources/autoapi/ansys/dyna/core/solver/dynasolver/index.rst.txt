@@ -1,0 +1,787 @@
+:py:mod:`ansys.dyna.core.solver.dynasolver`
+===========================================
+
+.. py:module:: ansys.dyna.core.solver.dynasolver
+
+.. autoapi-nested-parse::
+
+   Dyna solver
+   ===========
+
+   Module for defining the PyDNYA ``solver`` service.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   ansys.dyna.core.solver.dynasolver.DynaSolver
+
+
+
+
+.. py:exception:: RunningError
+
+
+   Bases: :py:obj:`Exception`
+
+   
+   Documentation missing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:exception:: NotFound
+
+
+   Bases: :py:obj:`Exception`
+
+   
+   Documentation missing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:exception:: UnexpectedResponse
+
+
+   Bases: :py:obj:`Exception`
+
+   
+   Documentation missing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: DynaSolver(hostname='localhost', port='5000', channel=None, server_path='')
+
+
+   
+   Provides the gRPC client-side of Ansys LS-DYNA.
+
+
+   :Parameters:
+
+       **hostname** : :class:`python:str`
+           Host name or IP address to connect to.
+
+       **port** : :class:`python:str`
+           Port the gRPC server is to listen on.
+
+   :Returns:
+
+       :obj:`An` :obj:`instance` :obj:`of` :obj:`the` :obj:`client`, :obj:`which` :obj:`can` :obj:`be` :obj:`used` :obj:`to` :obj:`communicate`
+           ..
+
+       :obj:`with` :obj:`the` :obj:`gRPC` :obj:`server` :obj:`running` :obj:`at` :obj:`the` :obj:`given` :obj:`host` :obj:`name` :obj:`and` port.
+           ..
+
+       :obj:`The` :obj:`client` :obj:`can` :obj:`then` :obj:`interact` :obj:`with` LS-DYNA :obj:`via` gRPC.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:method:: get_appdata_path()
+      :staticmethod:
+
+
+   .. py:method:: downloadfile(url: str, fname: str)
+      :staticmethod:
+
+
+   .. py:method:: grpc_local_server_on() -> bool
+      :staticmethod:
+
+      
+      Check if the server is launched locally.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: list_files(subname=None)
+
+      
+      Get size information about one or more files in the LS-DYNA
+      working directory.
+
+
+      :Parameters:
+
+          **subname** : :class:`python:str`, :obj:`default` : :data:`python:None`
+              If given, only files whose names contain subname as a substring are
+              returned. This check is case insensitive.
+
+      :Returns:
+
+          :obj:`Array` :obj:`of` (:obj:`filename`, :obj:`size` :obj:`in` :obj:`bytes`) pairs.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: node(n)
+
+      
+      Get size information about a node in the model's working directory.
+
+
+      :Parameters:
+
+          **n** : :obj:`integer`
+              User ID of a node in the model.
+
+      :Returns:
+
+          :obj:`A` :obj:`pair` :obj:`of` 3-tuples :obj:`are` :obj:`returned`, :obj:`giving` :obj:`the` ``(x, y, z)`` :obj:`coordinates` :obj:`and`
+              ..
+
+          :obj:`velocities` :obj:`of` :obj:`the` node. :obj:`If` :obj:`the` :obj:`node` :obj:`number` :obj:`given` :obj:`does` :obj:`not` :obj:`exist`
+              ..
+
+          :obj:`in` :obj:`the` :obj:`model`, :obj:`then` ``(None, None)`` :obj:`is` returned.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: pause()
+
+      
+      Pause LS-DYNA execution.
+
+      Execution stops until told to resume or quit.  Most ``switch``"
+      commands result in one cycle being executed so that the switch can
+      be handled, and then LS-DYNA pauses again.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: pull(fname)
+
+      
+      Provide an alias for the ``download`` method for backward compatibility.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: download(fname)
+
+      
+      Download a file from the gRPC server.
+
+
+      :Parameters:
+
+          **fname** : :class:`python:str`
+              Name of the file to download. The file is downloaded to the current
+              working directory of the calling process. The file name should not
+              begin with a leading ``/``. The file is interpreted relative to the
+              LS-DYNA working directory.
+
+      :Returns:
+
+          :class:`python:int`
+              Number of bytes received.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: push(fname)
+
+      
+      Provide an alias for the ``upload` method for backward compatibility.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: upload(fname)
+
+      
+      Upload a file to the LS-DYNA working directory.
+
+
+      :Parameters:
+
+          **fname** : :class:`python:str`
+              Name of the local file to upload. The contents of this file are copied
+              into the LS-DYNA working directory in a file of the same name, but
+              with any path components removed.
+
+      :Returns:
+
+          :class:`python:int`
+              Number of bytes sent.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: quit()
+
+      
+      Terminate the gRPC server program. This does not terminate LS-DYNA.
+
+      If the server is running inside a container, it ignore this
+      command and continues running.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: resume(cycle=None, time=None)
+
+      
+      Resume execution.
+
+
+      :Parameters:
+
+          **cycle** : :obj:`integer`, :obj:`optional`
+              Cycle to pause execution on. The default is ``None``.
+
+          **time** : :class:`python:float`, :obj:`optional`
+              Ssimulation time to pause execution at. The default is ``None``.
+
+          **This command can be given whether LS-DYNA is paused or running.**
+              ..
+
+          **LS-DYNA runs until the given cycle number or simulation time. If**
+              ..
+
+          **both are given, it stops based on whichever occurs first. If**
+              ..
+
+          **neither are given, it runs until termination or until paused.**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: run(args)
+
+      
+      Begin execution with the given string as the command-line arguments.
+
+
+      :Parameters:
+
+          **args** : :class:`python:str`
+              Command line to pass to LS-DYNA.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: setlc(lc, value)
+
+      
+      Set a load curve to a constant value.
+
+
+      :Parameters:
+
+          **lc** : :class:`python:int`
+              User ID of the load curve to set.
+
+          **value** : :class:`python:float`
+              Value to set the load curve to.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: start(nproc)
+
+      
+      Start LS-DYNA.
+
+      The program starts and awaits further input. To begin a
+      simulation, the ``run`` command must used to send the command line
+      arguments.
+
+      After starting but before running, a ``resume`` command can be sent to
+      set a pause time or cycle.
+
+      :Parameters:
+
+          **nproc** : :class:`python:int`
+              Number of cores (MPI ranks) to run.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: start_locally(preset='MPP', input='', nproc=1, memory=20)
+
+      
+      Begin execution with the given string as the command-line arguments.
+
+
+      :Parameters:
+
+          **args** : :class:`python:str`
+              Command line to pass to LS-DYNA.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: switch(args)
+
+      
+      Send a "sense switch" to LS-DYNA.
+
+
+      :Parameters:
+
+          **args** : :class:`python:str`
+              Sense switch string.
+
+      :Returns:
+
+          :obj:`If` :obj:`the` :obj:`switch` :obj:`sent` :obj:`is` ``sw2.``, :obj:`a` :class:`python:str` :obj:`is` :obj:`returned` :obj:`with` :obj:`the`
+              ..
+
+          :obj:`usual` :obj:`status` :obj:`update` :obj:`information` :obj:`that` :obj:`a` :obj:`switch` generates. Otherwise,
+              ..
+
+          :obj:`an` :obj:`empty` :class:`python:str` :obj:`is` returned.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: tail(which=1, how=2, queuesize=0)
+
+      
+      Monitor the stdout or stderr of the running job.
+
+
+      :Parameters:
+
+          **which** : :class:`python:int`, :obj:`optional`
+              Which stream to monitor. The default is ``1``, in which case
+              stdout is used. Otherwise, stderr is used.
+
+          **how** : :class:`python:int`, :obj:`optional`
+              How to handle the file data. The default is ``2``. Options are:
+              
+              - 0: The file contents are printed to stdout, and this
+                method does not return until LS-DYNA terminates.
+              - 1: A ``Queue`` instance is returned. The queue holds raw blocks
+                of text as returned by the server.
+              - 2: A ``Queue`` instance is returned.The queue holds individual
+                lines of text.
+
+          **queuesize** : :class:`python:int`, :obj:`optional`
+              Size to use for the ``Queue`` instance if the ``how`` parameter is set to
+              a value greater than ``0``.
+
+      :Returns:
+
+          :obj:`If` :obj:`the` :obj:`value` :obj:`for` :obj:`the` ``how`` :obj:`parameter` :obj:`is` :obj:`greater` :obj:`than` 0, :obj:`a` ``Queue instance``
+              ..
+
+          :obj:`is` returned. :obj:`When` :obj:`a` :obj:`call` :obj:`to` :obj:`the` ``q.get()`` :obj:`method` :obj:`returns` ``None``, :obj:`all` :obj:`data`
+              ..
+
+          :obj:`has` :obj:`been` returned.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: time()
+
+      
+      Get the current cycle count and simulation time.
+
+
+
+      :Returns:
+
+          :obj:`A` (:obj:`cycle_count`, :obj:`simulation_time`) pair.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: send(cmdin)
+
+      
+      Send one request to LS-DYNA using the command-line interface.
+
+
+      :Parameters:
+
+          **cmdin** : :class:`python:str`
+              Command to send.
+
+      :Returns:
+
+          :data:`python:None`
+              There is no data returned. Data that is returned from the underlying
+              method call is just printed to the screen. This method is used to
+              support the sample interactive ``client.py`` program.
+              
+              +-------------------------------------------+-----------------------+
+              | Description                               | Example               |
+              +===========================================+=======================+
+              | "list" then optional file name            | list d3plot           |
+              +-------------------------------------------+-----------------------+
+              | "list" then optional file name            | list d3plot           |
+              +-------------------------------------------+-----------------------+
+              | "node" user node number                   | node 43444            |
+              +-------------------------------------------+-----------------------+
+              | "pause" (no arguments)                    | pause                 |
+              +-------------------------------------------+-----------------------+
+              | "download" then file name                 | download glstat       |
+              +-------------------------------------------+-----------------------+
+              | "upload" then file name                   | upload input.k        |
+              +-------------------------------------------+-----------------------+
+              | "quit" (no arguments)                     | quit                  |
+              +-------------------------------------------+-----------------------+
+              | "resume" optional cycle and/or time       | resume 5000 0.25      |
+              +-------------------------------------------+-----------------------+
+              | "run" then the command line               | run i=input.k jobid=xx|
+              +-------------------------------------------+-----------------------+
+              | "setlc" user load curve number and value  | setlc 1075 0.245      |
+              +-------------------------------------------+-----------------------+
+              | "start" number of processors              | start 5               |
+              +-------------------------------------------+-----------------------+
+              | "switch" then switch text                 | switch sw2            |
+              +-------------------------------------------+-----------------------+
+              | "tail" then 1 for stdout, 2 for stderr    | tail 1                |
+              +-------------------------------------------+-----------------------+
+              | "time" (no arguments)                     | time.                 |
+              +-------------------------------------------+-----------------------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:method:: runfile(fname)
+
+      
+      Read command lines from a file and execute them.
+
+      Each line is read from the file and echoed to the screen. You
+      must hit the **enter** key to trigger execution of the command.
+
+      :Parameters:
+
+          **fname** : :class:`python:str`
+              File to read commands from.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

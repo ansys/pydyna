@@ -1,0 +1,21 @@
+ansys.dyna.core.keywords.keyword_classes.manual.mat_295
+=======================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.mat_295
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/mat_295/Mat295
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/mat_295/MatAnisotropicHyperelastic
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.keyword_classes.manual.mat_295.Mat295
+   ansys.dyna.core.keywords.keyword_classes.manual.mat_295.MatAnisotropicHyperelastic
+
+

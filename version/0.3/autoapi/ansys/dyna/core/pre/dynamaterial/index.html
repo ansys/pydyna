@@ -1,0 +1,1449 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ansys.dyna.core.pre.dynamaterial &#8212; PyDYNA</title>
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/graphviz.css?v=eafc0fe6" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-dataframe.css?v=e5fbc548" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/ansys_sphinx_theme.css?v=068850c2" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+ 
+<link href="../../../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js?v=e83b937b"></script>
+    <script src="../../../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../../../../_static/js/table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'autoapi/ansys/dyna/core/pre/dynamaterial/index';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.3';
+        </script>
+    <link rel="icon" href="../../../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+    <link rel="next" title="ansys.dyna.core.pre.dynamech" href="../dynamech/index.html" />
+    <link rel="prev" title="ansys.dyna.core.pre.dynalogging" href="../dynalogging/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/autoapi/ansys/dyna/core/pre/dynamaterial/index.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+
+<!-- If there is no MiliSearch enabled, use the PyData search -->
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+   
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../../../../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../../getting-started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../../user-guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../../../../../index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../../contributing.html">
+                        Contribute
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.3  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyansys/pydyna" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>   <div class="container-xl">
+  <div class="row">
+    <div class="col-12 col-md-3" id="breadcrumbs-spacer"></div>
+    <div class="col-12 col-md-11 col-xl-9" id="breadcrumbs">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul> 
+<li class="nav-item nav-item-additional-breadcrumb">
+  <a href="https://docs.pyansys.com/">PyAnsys</a> » 
+</li>
+ 
+<li class="nav-item nav-item-0">
+  <a href="../../../../../../index.html">PyDYNA</a> » 
+</li>
+ 
+          <li class="nav-item nav-item-1"><a href="../../../../../index.html" >API reference</a> » </li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core</span></code></a> » </li>
+          <li class="nav-item nav-item-3"><a href="../index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre</span></code></a> » </li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynamaterial</span></code></a></li> 
+      </ul>
+    </div></div>
+  </div>
+</div>
+ 
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../../getting-started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../../user-guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../../../../../index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../../../contributing.html">
+                        Contribute
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.3  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyansys/pydyna" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core</span></code></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre</span></code></a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../examples/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.examples</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynabase/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynadem/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynadem</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynaem/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaem</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynaicfd/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaicfd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynaiga/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaiga</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynaisph/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynaisph</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynalogging/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynalogging</span></code></a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynamaterial</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamech/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynamech</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynanvh/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynanvh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynasale/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynasale</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynasolution/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynasolution</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../errors/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.errors</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../launcher/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.launcher</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../misc/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.misc</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../solver/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.solver</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="module-ansys.dyna.core.pre.dynamaterial">
+<span id="ansys-dyna-core-pre-dynamaterial"></span><h1><a class="reference internal" href="#module-ansys.dyna.core.pre.dynamaterial" title="ansys.dyna.core.pre.dynamaterial"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynamaterial</span></code></a><a class="headerlink" href="#module-ansys.dyna.core.pre.dynamaterial" title="Permalink to this heading">#</a></h1>
+<section id="material-api">
+<p>Module for creating a material.</p>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading">#</a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.Air" title="ansys.dyna.core.pre.dynamaterial.Air"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Air</span></code></a></p></td>
+<td><p>Defines an air material.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.Liner" title="ansys.dyna.core.pre.dynamaterial.Liner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Liner</span></code></a></p></td>
+<td><p>Defines a liner material.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.HighExplosive" title="ansys.dyna.core.pre.dynamaterial.HighExplosive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HighExplosive</span></code></a></p></td>
+<td><p>Defines a high-explosive material.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.Vacuum" title="ansys.dyna.core.pre.dynamaterial.Vacuum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vacuum</span></code></a></p></td>
+<td><p>Defines a vacuum material.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatNull" title="ansys.dyna.core.pre.dynamaterial.MatNull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatNull</span></code></a></p></td>
+<td><p>Defines a null material.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.EMEOSTabulated1" title="ansys.dyna.core.pre.dynamaterial.EMEOSTabulated1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EMEOSTabulated1</span></code></a></p></td>
+<td><p>Defines electrical conductivity or permeability.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.EMMATTYPE" title="ansys.dyna.core.pre.dynamaterial.EMMATTYPE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EMMATTYPE</span></code></a></p></td>
+<td><p>Generic enumeration.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional" title="ansys.dyna.core.pre.dynamaterial.MatAdditional"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatAdditional</span></code></a></p></td>
+<td><p>Defines additional properties for a material.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatElastic" title="ansys.dyna.core.pre.dynamaterial.MatElastic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatElastic</span></code></a></p></td>
+<td><p>Defines an isotropic hypoelastic material.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatPlasticKinematic" title="ansys.dyna.core.pre.dynamaterial.MatPlasticKinematic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatPlasticKinematic</span></code></a></p></td>
+<td><p>Define material of modelling isotropic and kinematic hardening plasticity.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal" title="ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatElasticPlasticThermal</span></code></a></p></td>
+<td><p>Defines temperature-dependent material coefficients.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatRigid" title="ansys.dyna.core.pre.dynamaterial.MatRigid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatRigid</span></code></a></p></td>
+<td><p>Defines a rigid material.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatCrushableFoam" title="ansys.dyna.core.pre.dynamaterial.MatCrushableFoam"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatCrushableFoam</span></code></a></p></td>
+<td><p>Define material of modelling crushable foam.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatThermalIsotropic" title="ansys.dyna.core.pre.dynamaterial.MatThermalIsotropic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatThermalIsotropic</span></code></a></p></td>
+<td><p>Defines isotropic thermal properties.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatThermalOrthotropic" title="ansys.dyna.core.pre.dynamaterial.MatThermalOrthotropic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatThermalOrthotropic</span></code></a></p></td>
+<td><p>Defines orthotropic thermal properties.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatRigidDiscrete" title="ansys.dyna.core.pre.dynamaterial.MatRigidDiscrete"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatRigidDiscrete</span></code></a></p></td>
+<td><p>Defines a rigid material for shells or solids.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatPiecewiseLinearPlasticity" title="ansys.dyna.core.pre.dynamaterial.MatPiecewiseLinearPlasticity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatPiecewiseLinearPlasticity</span></code></a></p></td>
+<td><p>Defines an elasto-plastic material with an arbitrary stress.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity" title="ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatModifiedPiecewiseLinearPlasticity</span></code></a></p></td>
+<td><p>Defines an elasto-plastic material supporting an arbitrary stress.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatSpotweld" title="ansys.dyna.core.pre.dynamaterial.MatSpotweld"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatSpotweld</span></code></a></p></td>
+<td><p>Defines a spotweld material.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatFabric" title="ansys.dyna.core.pre.dynamaterial.MatFabric"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatFabric</span></code></a></p></td>
+<td><p>Define an airbag material.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatSpringNonlinearElastic" title="ansys.dyna.core.pre.dynamaterial.MatSpringNonlinearElastic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatSpringNonlinearElastic</span></code></a></p></td>
+<td><p>Provides a nonlinear elastic translational and rotational spring with an arbitrary force.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatDamperViscous" title="ansys.dyna.core.pre.dynamaterial.MatDamperViscous"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatDamperViscous</span></code></a></p></td>
+<td><p>Provides a linear translational or rotational damper located between two nodes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatDamperNonlinearViscous" title="ansys.dyna.core.pre.dynamaterial.MatDamperNonlinearViscous"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatDamperNonlinearViscous</span></code></a></p></td>
+<td><p>Provides a viscous translational damper with an arbitrary force.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleFluid" title="ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleFluid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatSPHIncompressibleFluid</span></code></a></p></td>
+<td><p>Defines an ISPH (incompressible smooth particle hyrodynamics) fluid material.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleStructure" title="ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleStructure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatSPHIncompressibleStructure</span></code></a></p></td>
+<td><p>Defines an ISPH structure material.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.Air">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">Air</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.00128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1e-09</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_internal_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.5331e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_relative_volume</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equation_coefficient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0.4,</span> <span class="pre">0.4,</span> <span class="pre">0]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#Air"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.Air" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines an air material.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>name</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Material name.</p>
+</dd>
+<dt><strong>mass_density</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Mass density. The default is <code class="docutils literal notranslate"><span class="pre">0.00128</span></code>.</p>
+</dd>
+<dt><strong>pressure_cutoff</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>pressure cutoff. The default is <code class="docutils literal notranslate"><span class="pre">1e-09</span></code>.</p>
+</dd>
+<dt><strong>initial_internal_energy</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Initial internal energy per unit reference volume.
+The default is <code class="docutils literal notranslate"><span class="pre">2.5331e-06</span></code>.</p>
+</dd>
+<dt><strong>initial_relative_volume</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Initial relative volume. The default is <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p>
+</dd>
+<dt><strong>equation_coefficient</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Six polynomial equation coefficient. The default is
+<code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0.4,</span> <span class="pre">0.4,</span> <span class="pre">0])</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.11)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.Air.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#Air.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.Air.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create an air material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.Liner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">Liner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.96</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shear_modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.46</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">youngs_modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poissons_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.34</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constants</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.0009,</span> <span class="pre">0.00292,</span> <span class="pre">0.31,</span> <span class="pre">0.025,</span> <span class="pre">1.09]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">melt_temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1356</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">room_temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">293</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strain_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specific_heat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.83e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tensile_failure_stress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-0.012</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spall_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iteration_option</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failure_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.54,</span> <span class="pre">4.89,</span> <span class="pre">3.03,</span> <span class="pre">0.014,</span> <span class="pre">1.12]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">equation_constants</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.394,</span> <span class="pre">1.489,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">2.02]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_correction_coefficient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.47</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_internal_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#Liner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.Liner" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines a liner material.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>mass_density</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Mass density. The default is <code class="docutils literal notranslate"><span class="pre">8.96</span></code>.</p>
+</dd>
+<dt><strong>shear_modulus</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd></dd>
+<dt><strong>youngs_modulus</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd></dd>
+<dt><strong>poissons_ratio</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a> <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd></dd>
+<dt><strong>constants</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd></dd>
+<dt><strong>melt_temperature</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd></dd>
+<dt><strong>room_temperature</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd></dd>
+<dt><strong>strain_rate</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd></dd>
+<dt><strong>specific_heat</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd></dd>
+<dt><strong>tensile_failure_stress</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd></dd>
+<dt><strong>spall_type, int, optional</strong></dt><dd></dd>
+<dt><strong>iteration_option ; int, optional</strong></dt><dd></dd>
+<dt><strong>failure_parameters</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd></dd>
+<dt><strong>equation_constants, list, optional</strong></dt><dd></dd>
+<dt><strong>volume_correction_coefficient</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd></dd>
+<dt><strong>initial_internal_energy</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Initial internal energy per unit reference volume.
+The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.11)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.Liner.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#Liner.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.Liner.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a liner material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.HighExplosive">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">HighExplosive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.835</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detonation_velocity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.88</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chapman_jouget_pressure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.37</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jwl_equation_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[8.261,</span> <span class="pre">0.1724,</span> <span class="pre">4.55,</span> <span class="pre">1.32,</span> <span class="pre">0.38,</span> <span class="pre">0.102,</span> <span class="pre">1.0]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#HighExplosive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.HighExplosive" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines a high-explosive material.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>mass_density</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Mass density. The default is <code class="docutils literal notranslate"><span class="pre">8.96</span></code>.</p>
+</dd>
+<dt><strong>detonation_velocity</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd></dd>
+<dt><strong>chapman_jouget_pressure</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd></dd>
+<dt><strong>jwl_equation_parameters</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.11)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.HighExplosive.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#HighExplosive.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.HighExplosive.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a high-explosive material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.Vacuum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">Vacuum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimated_material_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-09</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#Vacuum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.Vacuum" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines a vacuum material.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>estimated_material_density</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>Estimated material density. The default is <code class="docutils literal notranslate"><span class="pre">1e-09</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.11)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when successful, <code class="docutils literal notranslate"><span class="pre">False</span></code> when failed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.Vacuum.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#Vacuum.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.Vacuum.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a null material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatNull">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatNull</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatNull"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatNull" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines a null material.</p>
+<p>Young’s modulus and Poisson’s ratio are used to set the contact stiffness.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>mass_density</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Mass density. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>pressure_cutoff</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatNull.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatNull.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatNull.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a null material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.EMEOSTabulated1">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">EMEOSTabulated1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">curve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#EMEOSTabulated1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.EMEOSTabulated1" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines electrical conductivity or permeability.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>curve</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Curve</span></code></span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.EMEOSTabulated1.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#EMEOSTabulated1.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.EMEOSTabulated1.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create an EM EOS tabulated1.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.EMMATTYPE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">EMMATTYPE</span></span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#EMMATTYPE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.EMMATTYPE" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">ansys.dyna.core.pre.dynabase.Enum</span></code></p>
+<p>Generic enumeration.</p>
+<p>Derive from this class to define new enumerations.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.EMMATTYPE.AIR_OR_VACUUM">
+<span class="sig-name descname"><span class="pre">AIR_OR_VACUUM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#EMMATTYPE.AIR_OR_VACUUM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.EMMATTYPE.AIR_OR_VACUUM" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.EMMATTYPE.INSULATOR">
+<span class="sig-name descname"><span class="pre">INSULATOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#EMMATTYPE.INSULATOR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.EMMATTYPE.INSULATOR" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.EMMATTYPE.CONDUCTOR">
+<span class="sig-name descname"><span class="pre">CONDUCTOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#EMMATTYPE.CONDUCTOR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.EMMATTYPE.CONDUCTOR" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatAdditional">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatAdditional</span></span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatAdditional"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines additional properties for a material.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatAdditional.set_electromagnetic_property">
+<span class="sig-name descname"><span class="pre">set_electromagnetic_property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">EMMATTYPE.CONDUCTOR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_conductivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatAdditional.set_electromagnetic_property"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional.set_electromagnetic_property" title="Permalink to this definition">#</a></dt>
+<dd><p>Define the electromagnetic material type and properties
+for a material whose permeability equals the free space permeability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>material_type</strong></dt><dd></dd>
+<dt><strong>initial_conductivity</strong></dt><dd></dd>
+<dt><strong>eos</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatAdditional.set_em_permeability_equal">
+<span class="sig-name descname"><span class="pre">set_em_permeability_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">EMMATTYPE.CONDUCTOR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_conductivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatAdditional.set_em_permeability_equal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional.set_em_permeability_equal" title="Permalink to this definition">#</a></dt>
+<dd><p>Define the electromagnetic material type and properties
+for a material whose permeability equals the free space permeability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>material_type</strong></dt><dd></dd>
+<dt><strong>initial_conductivity</strong></dt><dd></dd>
+<dt><strong>eos</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatAdditional.set_em_permeability_different">
+<span class="sig-name descname"><span class="pre">set_em_permeability_different</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">EMMATTYPE.CONDUCTOR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_conductivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">murel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatAdditional.set_em_permeability_different"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional.set_em_permeability_different" title="Permalink to this definition">#</a></dt>
+<dd><p>Define the electromagnetic material type and properties
+for a material whose permeability equals the free space permeability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>material_type</strong></dt><dd></dd>
+<dt><strong>initial_conductivity</strong></dt><dd></dd>
+<dt><strong>eos</strong></dt><dd></dd>
+<dt><strong>murel</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatAdditional.set_em_conducting_shells_3d">
+<span class="sig-name descname"><span class="pre">set_em_conducting_shells_3d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">EMMATTYPE.CONDUCTOR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_conductivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatAdditional.set_em_conducting_shells_3d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional.set_em_conducting_shells_3d" title="Permalink to this definition">#</a></dt>
+<dd><p>Define the electromagnetic material type and properties
+for a material whose permeability equals the free space permeability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>material_type</strong></dt><dd></dd>
+<dt><strong>initial_conductivity</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatAdditional.set_em_resistive_heating_2d">
+<span class="sig-name descname"><span class="pre">set_em_resistive_heating_2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">EMMATTYPE.CONDUCTOR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_conductivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatAdditional.set_em_resistive_heating_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional.set_em_resistive_heating_2d" title="Permalink to this definition">#</a></dt>
+<dd><p>Define the electromagnetic material type and properties
+for a material whose permeability equals the free space permeability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>material_type</strong></dt><dd></dd>
+<dt><strong>initial_conductivity</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatAdditional.set_em_randles_batmac">
+<span class="sig-name descname"><span class="pre">set_em_randles_batmac</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">positive_current_collector_conductivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">negative_current_collector_conductivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatAdditional.set_em_randles_batmac"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional.set_em_randles_batmac" title="Permalink to this definition">#</a></dt>
+<dd><p>Define two conductivities per EM node for special applications (Randles Batmac).</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>positive_current_collector_conductivity</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>conductivities of the positive current collector materials</p>
+</dd>
+<dt><strong>negative_current_collector_conductivity</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></span></dt><dd><p>conductivities of the negative current collector materials</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatAdditional.set_thermal_isotropic">
+<span class="sig-name descname"><span class="pre">set_thermal_isotropic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation_rate_multiplier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specific_heat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conductivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatAdditional.set_thermal_isotropic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional.set_thermal_isotropic" title="Permalink to this definition">#</a></dt>
+<dd><p>Define isotropic thermal properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>density</strong></dt><dd></dd>
+<dt><strong>generation_rate</strong></dt><dd></dd>
+<dt><strong>generation_rate_multiplier</strong></dt><dd></dd>
+<dt><strong>specific_heat</strong></dt><dd></dd>
+<dt><strong>conductivity</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatAdditional.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatAdditional.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Define additional properties for a material.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>matid</strong></dt><dd><p>Material ID.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatElastic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatElastic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young_modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatElastic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatElastic" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional" title="ansys.dyna.core.pre.dynamaterial.MatAdditional"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatAdditional</span></code></a></p>
+<p>Defines an isotropic hypoelastic material.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatElastic.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatElastic.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatElastic.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create an elastic material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatPlasticKinematic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatPlasticKinematic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young_modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yield_stress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tangent_modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hardening</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatPlasticKinematic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatPlasticKinematic" title="Permalink to this definition">#</a></dt>
+<dd><p>Define material of modelling isotropic and kinematic hardening plasticity.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatPlasticKinematic.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatPlasticKinematic.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatPlasticKinematic.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create plastic kinematic material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatElasticPlasticThermal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperatures</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young_modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thermal_expansion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yield_stress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatElasticPlasticThermal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional" title="ansys.dyna.core.pre.dynamaterial.MatAdditional"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatAdditional</span></code></a></p>
+<p>Defines temperature-dependent material coefficients.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatElasticPlasticThermal.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create elastic plastic thermal material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatRigid">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatRigid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young_modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_of_mass_constraint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">translational_constraint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotational_constraint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatRigid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatRigid" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional" title="ansys.dyna.core.pre.dynamaterial.MatAdditional"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatAdditional</span></code></a></p>
+<p>Defines a rigid material.</p>
+<p>Parts made from a rigid material are considered to belong to a rigid body.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatRigid.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatRigid.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatRigid.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create rigid material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatCrushableFoam">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatCrushableFoam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young_modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yield_stress_curve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tensile_stress_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatCrushableFoam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatCrushableFoam" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional" title="ansys.dyna.core.pre.dynamaterial.MatAdditional"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MatAdditional</span></code></a></p>
+<p>Define material of modelling crushable foam.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatCrushableFoam.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatCrushableFoam.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatCrushableFoam.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create crushable foam material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatThermalIsotropic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatThermalIsotropic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation_rate_multiplier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specific_heat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conductivity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatThermalIsotropic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatThermalIsotropic" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines isotropic thermal properties.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatThermalIsotropic.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatThermalIsotropic.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatThermalIsotropic.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create isotropic thermal material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatThermalOrthotropic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatThermalOrthotropic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specific_heat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conductivity_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conductivity_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conductivity_z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatThermalOrthotropic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatThermalOrthotropic" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines orthotropic thermal properties.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatThermalOrthotropic.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatThermalOrthotropic.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatThermalOrthotropic.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create orthotropic thermal material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatRigidDiscrete">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatRigidDiscrete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young_modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatRigidDiscrete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatRigidDiscrete" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines a rigid material for shells or solids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mass_density</strong></dt><dd></dd>
+<dt><strong>young_modulus</strong></dt><dd></dd>
+<dt><strong>poisson_ratio</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatRigidDiscrete.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatRigidDiscrete.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatRigidDiscrete.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a rigid material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatPiecewiseLinearPlasticity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatPiecewiseLinearPlasticity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young_modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yield_stress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tangent_modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatPiecewiseLinearPlasticity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatPiecewiseLinearPlasticity" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines an elasto-plastic material with an arbitrary stress.</p>
+<p>The arbitrary stress is defined as a function of strain curve
+that can also have an arbitrary strain rate dependency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mass_density</strong></dt><dd></dd>
+<dt><strong>young_modulus</strong></dt><dd></dd>
+<dt><strong>poisson_ratio</strong></dt><dd></dd>
+<dt><strong>yield_stress</strong></dt><dd></dd>
+<dt><strong>tangent_modulus</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatPiecewiseLinearPlasticity.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatPiecewiseLinearPlasticity.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatPiecewiseLinearPlasticity.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a piecewise linear plasticity material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatModifiedPiecewiseLinearPlasticity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young_modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yield_stress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tangent_modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plastic_strain_to_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integration_points_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatModifiedPiecewiseLinearPlasticity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines an elasto-plastic material supporting an arbitrary stress.</p>
+<p>The arbitrary stress is defined as a function of strain curve and arbitrary
+strain rate dependency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mass_density</strong></dt><dd></dd>
+<dt><strong>young_modulus</strong></dt><dd></dd>
+<dt><strong>poisson_ratio</strong></dt><dd></dd>
+<dt><strong>yield_stress</strong></dt><dd></dd>
+<dt><strong>tangent_modulus</strong></dt><dd></dd>
+<dt><strong>plastic_strain_to_failure</strong></dt><dd></dd>
+<dt><strong>integration_points_number</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatModifiedPiecewiseLinearPlasticity.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a modified piecewise linear plasticity.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatSpotweld">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatSpotweld</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young_modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yield_stress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plastic_hardening_modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axial_force_resultant_at_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_resultant_nrs_at_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_resultant_nrt_at_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatSpotweld"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatSpotweld" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines a spotweld material.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mass_density</strong></dt><dd></dd>
+<dt><strong>young_modulus</strong></dt><dd></dd>
+<dt><strong>poisson_ratio</strong></dt><dd></dd>
+<dt><strong>yield_stress</strong></dt><dd></dd>
+<dt><strong>plastic_hardening_modulus</strong></dt><dd></dd>
+<dt><strong>axial_force_resultant_at_failure</strong></dt><dd></dd>
+<dt><strong>force_resultant_nrs_at_failure</strong></dt><dd></dd>
+<dt><strong>force_resultant_nrt_at_failure</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatSpotweld.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatSpotweld.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatSpotweld.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a spotweld material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatFabric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatFabric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young_modulus_longitudinal_direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young_modulus_transverse_direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minor_poisson_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.35</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">major_poisson_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.35</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shear_modulus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatFabric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatFabric" title="Permalink to this definition">#</a></dt>
+<dd><p>Define an airbag material.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>mass_density</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Mass density. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>young_modulus_longitudinal_direction</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Young’s modulus-longitudinal direction. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>young_modulus_transverse_direction</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Young’s modulus-transverse direction. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>minor_poisson_ratio</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Minor Poisson’s ratio ba direction. The default is <code class="docutils literal notranslate"><span class="pre">0.35</span></code>.</p>
+</dd>
+<dt><strong>major_poisson_ratio</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Major Poisson’s ratio ab direction. The default is <code class="docutils literal notranslate"><span class="pre">0.35</span></code>.</p>
+</dd>
+<dt><strong>shear_modulus</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Shear modulus in the ab direction. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatFabric.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatFabric.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatFabric.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create an airbag material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatSpringNonlinearElastic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatSpringNonlinearElastic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">curve</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatSpringNonlinearElastic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatSpringNonlinearElastic" title="Permalink to this definition">#</a></dt>
+<dd><p>Provides a nonlinear elastic translational and rotational spring with an arbitrary force.</p>
+<p>The arbitrary force is defined as a function of displacement. The moment is defined
+as a function of rotation.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>curve</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Curve</span></code></span></dt><dd><p>Load curve describing force as a function of displacement or moment as a function of rotation relationship.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatSpringNonlinearElastic.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatSpringNonlinearElastic.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatSpringNonlinearElastic.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create material spring nonlinear elastic.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatDamperViscous">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatDamperViscous</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">damping_constant</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatDamperViscous"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatDamperViscous" title="Permalink to this definition">#</a></dt>
+<dd><p>Provides a linear translational or rotational damper located between two nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>damping_constant</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatDamperViscous.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatDamperViscous.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatDamperViscous.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a material damper viscous.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatDamperNonlinearViscous">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatDamperNonlinearViscous</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">curve</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatDamperNonlinearViscous"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatDamperNonlinearViscous" title="Permalink to this definition">#</a></dt>
+<dd><p>Provides a viscous translational damper with an arbitrary force.</p>
+<p>The arbitrary force is defined as a function of velocity dependency or a rotational
+damper with an arbitrary moment as a function of rotational velocity dependency.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>curve</strong><span class="classifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Curve</span></code></span></dt><dd><p>Load curve defining force as a function of rate-of-displacement
+relationship or a moment as a function of rate-of-rotation relationship.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatDamperNonlinearViscous.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatDamperNonlinearViscous.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatDamperNonlinearViscous.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a material damper nonlinear viscous.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleFluid">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatSPHIncompressibleFluid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_viscosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tension_coefficient1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tension_coefficient2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatSPHIncompressibleFluid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleFluid" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines an ISPH (incompressible smooth particle hyrodynamics) fluid material.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>mass_density</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Mass density. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>dynamic_viscosity</strong></dt><dd></dd>
+<dt><strong>tension_coefficient1</strong></dt><dd></dd>
+<dt><strong>tension_coefficient2</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleFluid.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatSPHIncompressibleFluid.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleFluid.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create an ISPH fluid material.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleStructure">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.pre.dynamaterial.</span></span><span class="sig-name descname"><span class="pre">MatSPHIncompressibleStructure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass_density</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adhesion_coefficient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roughness_coefficient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adhesion_scaling_coefficient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatSPHIncompressibleStructure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleStructure" title="Permalink to this definition">#</a></dt>
+<dd><p>Defines an ISPH structure material.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>mass_density</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Mass density. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd>
+<dt><strong>adhension_coefficient</strong></dt><dd></dd>
+<dt><strong>roughness_coefficient</strong></dt><dd></dd>
+<dt><strong>adhesion_scaling_coefficient</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleStructure.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stub</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../../_modules/ansys/dyna/core/pre/dynamaterial.html#MatSPHIncompressibleStructure.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleStructure.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Create an ISPH structure material.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#material-api">Module for creating a material.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-contents">Module Contents</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.Air"><code class="docutils literal notranslate"><span class="pre">Air</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.Air.create"><code class="docutils literal notranslate"><span class="pre">Air.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.Liner"><code class="docutils literal notranslate"><span class="pre">Liner</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.Liner.create"><code class="docutils literal notranslate"><span class="pre">Liner.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.HighExplosive"><code class="docutils literal notranslate"><span class="pre">HighExplosive</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.HighExplosive.create"><code class="docutils literal notranslate"><span class="pre">HighExplosive.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.Vacuum"><code class="docutils literal notranslate"><span class="pre">Vacuum</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.Vacuum.create"><code class="docutils literal notranslate"><span class="pre">Vacuum.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatNull"><code class="docutils literal notranslate"><span class="pre">MatNull</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatNull.create"><code class="docutils literal notranslate"><span class="pre">MatNull.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.EMEOSTabulated1"><code class="docutils literal notranslate"><span class="pre">EMEOSTabulated1</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.EMEOSTabulated1.create"><code class="docutils literal notranslate"><span class="pre">EMEOSTabulated1.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.EMMATTYPE"><code class="docutils literal notranslate"><span class="pre">EMMATTYPE</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.EMMATTYPE.AIR_OR_VACUUM"><code class="docutils literal notranslate"><span class="pre">EMMATTYPE.AIR_OR_VACUUM</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.EMMATTYPE.INSULATOR"><code class="docutils literal notranslate"><span class="pre">EMMATTYPE.INSULATOR</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.EMMATTYPE.CONDUCTOR"><code class="docutils literal notranslate"><span class="pre">EMMATTYPE.CONDUCTOR</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional"><code class="docutils literal notranslate"><span class="pre">MatAdditional</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional.set_electromagnetic_property"><code class="docutils literal notranslate"><span class="pre">MatAdditional.set_electromagnetic_property()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional.set_em_permeability_equal"><code class="docutils literal notranslate"><span class="pre">MatAdditional.set_em_permeability_equal()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional.set_em_permeability_different"><code class="docutils literal notranslate"><span class="pre">MatAdditional.set_em_permeability_different()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional.set_em_conducting_shells_3d"><code class="docutils literal notranslate"><span class="pre">MatAdditional.set_em_conducting_shells_3d()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional.set_em_resistive_heating_2d"><code class="docutils literal notranslate"><span class="pre">MatAdditional.set_em_resistive_heating_2d()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional.set_em_randles_batmac"><code class="docutils literal notranslate"><span class="pre">MatAdditional.set_em_randles_batmac()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional.set_thermal_isotropic"><code class="docutils literal notranslate"><span class="pre">MatAdditional.set_thermal_isotropic()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatAdditional.create"><code class="docutils literal notranslate"><span class="pre">MatAdditional.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatElastic"><code class="docutils literal notranslate"><span class="pre">MatElastic</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatElastic.create"><code class="docutils literal notranslate"><span class="pre">MatElastic.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatPlasticKinematic"><code class="docutils literal notranslate"><span class="pre">MatPlasticKinematic</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatPlasticKinematic.create"><code class="docutils literal notranslate"><span class="pre">MatPlasticKinematic.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal"><code class="docutils literal notranslate"><span class="pre">MatElasticPlasticThermal</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal.create"><code class="docutils literal notranslate"><span class="pre">MatElasticPlasticThermal.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatRigid"><code class="docutils literal notranslate"><span class="pre">MatRigid</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatRigid.create"><code class="docutils literal notranslate"><span class="pre">MatRigid.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatCrushableFoam"><code class="docutils literal notranslate"><span class="pre">MatCrushableFoam</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatCrushableFoam.create"><code class="docutils literal notranslate"><span class="pre">MatCrushableFoam.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatThermalIsotropic"><code class="docutils literal notranslate"><span class="pre">MatThermalIsotropic</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatThermalIsotropic.create"><code class="docutils literal notranslate"><span class="pre">MatThermalIsotropic.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatThermalOrthotropic"><code class="docutils literal notranslate"><span class="pre">MatThermalOrthotropic</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatThermalOrthotropic.create"><code class="docutils literal notranslate"><span class="pre">MatThermalOrthotropic.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatRigidDiscrete"><code class="docutils literal notranslate"><span class="pre">MatRigidDiscrete</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatRigidDiscrete.create"><code class="docutils literal notranslate"><span class="pre">MatRigidDiscrete.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatPiecewiseLinearPlasticity"><code class="docutils literal notranslate"><span class="pre">MatPiecewiseLinearPlasticity</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatPiecewiseLinearPlasticity.create"><code class="docutils literal notranslate"><span class="pre">MatPiecewiseLinearPlasticity.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity"><code class="docutils literal notranslate"><span class="pre">MatModifiedPiecewiseLinearPlasticity</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity.create"><code class="docutils literal notranslate"><span class="pre">MatModifiedPiecewiseLinearPlasticity.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatSpotweld"><code class="docutils literal notranslate"><span class="pre">MatSpotweld</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatSpotweld.create"><code class="docutils literal notranslate"><span class="pre">MatSpotweld.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatFabric"><code class="docutils literal notranslate"><span class="pre">MatFabric</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatFabric.create"><code class="docutils literal notranslate"><span class="pre">MatFabric.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatSpringNonlinearElastic"><code class="docutils literal notranslate"><span class="pre">MatSpringNonlinearElastic</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatSpringNonlinearElastic.create"><code class="docutils literal notranslate"><span class="pre">MatSpringNonlinearElastic.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatDamperViscous"><code class="docutils literal notranslate"><span class="pre">MatDamperViscous</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatDamperViscous.create"><code class="docutils literal notranslate"><span class="pre">MatDamperViscous.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatDamperNonlinearViscous"><code class="docutils literal notranslate"><span class="pre">MatDamperNonlinearViscous</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatDamperNonlinearViscous.create"><code class="docutils literal notranslate"><span class="pre">MatDamperNonlinearViscous.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleFluid"><code class="docutils literal notranslate"><span class="pre">MatSPHIncompressibleFluid</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleFluid.create"><code class="docutils literal notranslate"><span class="pre">MatSPHIncompressibleFluid.create()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleStructure"><code class="docutils literal notranslate"><span class="pre">MatSPHIncompressibleStructure</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleStructure.create"><code class="docutils literal notranslate"><span class="pre">MatSPHIncompressibleStructure.create()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/pyansys/pydyna/edit/main/doc/source/autoapi/ansys/dyna/core/pre/dynamaterial/index.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../../../../../_sources/autoapi/ansys/dyna/core/pre/dynamaterial/index.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright (c) 2023 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  0.10.2. <br />Last updated on
+  <span id="date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("date").innerHTML = date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

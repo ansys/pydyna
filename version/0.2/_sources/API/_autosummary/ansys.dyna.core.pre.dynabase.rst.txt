@@ -1,0 +1,6 @@
+﻿dynabase
+========
+
+.. currentmodule:: ansys.dyna.core.pre
+
+.. automodule:: dynabase

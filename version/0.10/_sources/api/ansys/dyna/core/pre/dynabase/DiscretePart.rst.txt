@@ -1,0 +1,92 @@
+ansys.dyna.core.pre.dynabase.DiscretePart
+=========================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.DiscretePart(pid)
+
+   Bases: :py:obj:`Part`
+
+
+   
+   Defines a discrete part.
+
+   The part definition consists of the combined material information,
+   section properties, hourglass type, thermal properties, and a flag
+   for part adaptivity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: type
+      :value: 'DISCRETE'
+
+
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: displacement_option
+      :value: 0
+
+
+
+   .. py:method:: set_displacement_option(displacement_option=DRO.DESCRIBES_TRANSLATIONAL_SPRING)
+
+      
+      Set the displacement, which defines the rotation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_property()
+
+      
+      Set properties for the discrete part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

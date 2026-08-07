@@ -1,0 +1,157 @@
+ansys.dyna.core.lib.option_card.OptionsInterface
+================================================
+
+.. py:class:: ansys.dyna.core.lib.option_card.OptionsInterface
+
+   
+   Abstract base class for option card api interface.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: get_option_spec(name: str) -> OptionSpec
+      :abstractmethod:
+
+
+      
+      Get the option specification for the given name.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: deactivate_option(name: str) -> None
+      :abstractmethod:
+
+
+      
+      Deactivate the option with the given name.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: activate_option(name: str) -> None
+      :abstractmethod:
+
+
+      
+      Activate the option with the given name.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: is_option_active(name: str) -> bool
+      :abstractmethod:
+
+
+      
+      Indicates whether the option is active.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: option_specs
+      :type: Iterable[OptionSpec]
+
+      :abstractmethod:
+
+
+      
+      Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

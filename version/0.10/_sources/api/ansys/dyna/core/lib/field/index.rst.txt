@@ -1,0 +1,62 @@
+ansys.dyna.core.lib.field
+=========================
+
+.. py:module:: ansys.dyna.core.lib.field
+
+.. autoapi-nested-parse::
+
+   Module for handling fields.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/field/Flag
+   /api/ansys/dyna/core/lib/field/Field
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.field.Flag
+   ansys.dyna.core.lib.field.Field
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.field.to_long
+
+
+Module Contents
+---------------
+
+.. py:function:: to_long(field: Field, offset: int) -> Field
+
+   
+   Convert a field to its long format representation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

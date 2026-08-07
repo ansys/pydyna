@@ -1,0 +1,193 @@
+ansys.dyna.core.lib.field_schema.FieldSchema
+============================================
+
+.. py:class:: ansys.dyna.core.lib.field_schema.FieldSchema
+
+   Bases: :py:obj:`NamedTuple`
+
+
+   
+   Immutable schema for a single field in a Card.
+
+   This is designed to be shared across all instances of a Card type.
+   The `default` can be a value or a Flag instance for flag fields.
+
+
+   :Attributes:
+
+       **name** : :class:`python:str`
+           The lookup key used for get_value/set_value and kwargs matching.
+           This should be the Python property name (e.g., "w_mode").
+
+       **type** : :obj:`Type`
+           The field type (int, float, str, bool).
+
+       **offset** : :class:`python:int`
+           Column position in the card.
+
+       **width** : :class:`python:int`
+           Column width.
+
+       **default** : :obj:`Any`
+           Default value, or a Flag instance for flag fields.
+
+       **display_name** : :class:`python:str`, :obj:`optional`
+           The original field name for display in comments (e.g., "w-mode").
+           If not provided, uses `name`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: name
+      :type:  str
+
+
+   .. py:attribute:: type
+      :type:  Type
+
+
+   .. py:attribute:: offset
+      :type:  int
+
+
+   .. py:attribute:: width
+      :type:  int
+
+
+   .. py:attribute:: default
+      :type:  Any
+      :value: None
+
+
+
+   .. py:attribute:: display_name
+      :type:  str
+      :value: ''
+
+
+
+   .. py:method:: get_display_name() -> str
+
+      
+      Get the display name for comments.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: is_flag() -> bool
+
+      
+      Check if this field is a Flag type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: to_field(value: Any = None) -> ansys.dyna.core.lib.field.Field
+
+      
+      Create a Field instance from this schema with the given value.
+
+
+      :Parameters:
+
+          **value** : :obj:`Any`, :obj:`optional`
+              The value to set. If None, uses the default.
+
+
+
+      :Returns:
+
+          :obj:`Field`
+              A new Field instance.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: from_field(field: ansys.dyna.core.lib.field.Field) -> FieldSchema
+      :classmethod:
+
+
+      
+      Create a FieldSchema from an existing Field.
+
+
+      :Parameters:
+
+          **field** : :obj:`Field`
+              The field to extract schema from.
+
+
+
+      :Returns:
+
+          :obj:`FieldSchema`
+              An immutable schema representation.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

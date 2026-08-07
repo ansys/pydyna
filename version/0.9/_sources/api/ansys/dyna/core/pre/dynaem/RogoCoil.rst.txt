@@ -1,0 +1,74 @@
+ansys.dyna.core.pre.dynaem.RogoCoil
+===================================
+
+.. py:class:: ansys.dyna.core.pre.dynaem.RogoCoil(set=None)
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.BaseObj`
+
+
+   
+   Measures the total current flowing through a given section of the conductor.
+
+
+   :Parameters:
+
+       **set** : :obj:`Set`
+           Segment set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: set
+      :value: None
+
+
+
+   .. py:attribute:: id
+      :value: 0
+
+
+
+   .. py:attribute:: type
+      :value: 'rogocoil'
+
+
+
+   .. py:method:: create()
+
+      
+      Create a Rogowsky coil.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

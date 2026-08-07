@@ -1,0 +1,59 @@
+ansys.dyna.core.pre.dynaem
+==========================
+
+.. py:module:: ansys.dyna.core.pre.dynaem
+
+.. autoapi-nested-parse::
+
+   EM API
+   ======
+
+   Module for creating an electromagnetism (EM) input deck.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/pre/dynaem/Isopotential_ConnType
+   /api/ansys/dyna/core/pre/dynaem/DynaEM
+   /api/ansys/dyna/core/pre/dynaem/EMType
+   /api/ansys/dyna/core/pre/dynaem/EMDimension
+   /api/ansys/dyna/core/pre/dynaem/BEMSOLVER
+   /api/ansys/dyna/core/pre/dynaem/FEMSOLVER
+   /api/ansys/dyna/core/pre/dynaem/EMAnalysis
+   /api/ansys/dyna/core/pre/dynaem/CircuitType
+   /api/ansys/dyna/core/pre/dynaem/Circuit
+   /api/ansys/dyna/core/pre/dynaem/EMContactType
+   /api/ansys/dyna/core/pre/dynaem/EMContact
+   /api/ansys/dyna/core/pre/dynaem/EMRandlesLayer
+   /api/ansys/dyna/core/pre/dynaem/Isopotential
+   /api/ansys/dyna/core/pre/dynaem/RogoCoil
+   /api/ansys/dyna/core/pre/dynaem/RandlesCellType
+   /api/ansys/dyna/core/pre/dynaem/RandlesCell
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynaem.Isopotential_ConnType
+   ansys.dyna.core.pre.dynaem.DynaEM
+   ansys.dyna.core.pre.dynaem.EMType
+   ansys.dyna.core.pre.dynaem.EMDimension
+   ansys.dyna.core.pre.dynaem.BEMSOLVER
+   ansys.dyna.core.pre.dynaem.FEMSOLVER
+   ansys.dyna.core.pre.dynaem.EMAnalysis
+   ansys.dyna.core.pre.dynaem.CircuitType
+   ansys.dyna.core.pre.dynaem.Circuit
+   ansys.dyna.core.pre.dynaem.EMContactType
+   ansys.dyna.core.pre.dynaem.EMContact
+   ansys.dyna.core.pre.dynaem.EMRandlesLayer
+   ansys.dyna.core.pre.dynaem.Isopotential
+   ansys.dyna.core.pre.dynaem.RogoCoil
+   ansys.dyna.core.pre.dynaem.RandlesCellType
+   ansys.dyna.core.pre.dynaem.RandlesCell
+
+

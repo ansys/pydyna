@@ -1,0 +1,1387 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../../../../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../../../../../../../_static/documentation_options.js?v=7e54ce6f"></script>
+    <script src="../../../../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../../../../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/ansys/dyna/core/keywords/keyword_classes/manual/mat_295_version_0_9_1/Mat295Legacy';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.10';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../../../../../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../../../search.html" />
+    <link rel="next" title="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.MatAnisotropicHyperelasticLegacy" href="MatAnisotropicHyperelasticLegacy.html" />
+    <link rel="prev" title="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1" href="index.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.10.0" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="Structures" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/api/ansys/dyna/core/keywords/keyword_classes/manual/mat_295_version_0_9_1/Mat295Legacy.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are deprecated and will be removed starting version v0.11.0.</div>
+</aside>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../../../../../../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../../../../../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../../../../../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../../../../../../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../../../index.html"><span class="nf nf-md-package"></span> ansys.dyna.core</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../../../index.html">ansys.dyna.core.keywords</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="../../index.html">ansys.dyna.core.keywords.keyword_classes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4 current active"><a class="reference internal" href="../index.html">ansys.dyna.core.keywords.keyword_classes.manual</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../manual_keywords/index.html">ansys.dyna.core.keywords.keyword_classes.manual_keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../parameter_expression_custom/index.html">ansys.dyna.core.keywords.keyword_classes.parameter_expression_custom</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../type_mapping/index.html">ansys.dyna.core.keywords.keyword_classes.type_mapping</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../lib/index.html">ansys.dyna.core.lib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../pre/index.html">ansys.dyna.core.pre</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../run/index.html">ansys.dyna.core.run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../solver/index.html">ansys.dyna.core.solver</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../../../_autosummary/index.html"><span class="nf nf-md-package"></span> Auto Keyword classes</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../../../../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../../../../../index.html" class="nav-link">API reference</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../../index.html" class="nav-link">ansys.dyna.core</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../index.html" class="nav-link">ansys.dyna.core.keywords</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../index.html" class="nav-link">ansys.dyna.core.keywords.keyword_classes</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../index.html" class="nav-link">ansys.dyna.core.keywords.keyword_classes.manual</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="ansys-dyna-core-keywords-keyword-classes-manual-mat-295-version-0-9-1-mat295legacy">
+<h1>ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy<a class="headerlink" href="#ansys-dyna-core-keywords-keyword-classes-manual-mat-295-version-0-9-1-mat295legacy" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.</span></span><span class="sig-name descname"><span class="pre">Mat295Legacy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../../../../lib/keyword_base/KeywordBase.html#ansys.dyna.core.lib.keyword_base.KeywordBase" title="ansys.dyna.core.lib.keyword_base.KeywordBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ansys.dyna.core.lib.keyword_base.KeywordBase</span></code></a></p>
+<p>Legacy DYNA MAT_295 keyword implementation from pydyna v0.9.1.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.10.0: </span>Use <code class="xref py py-class docutils literal notranslate"><span class="pre">Mat295</span></code> instead.
+This legacy version uses TableCardGroup/DataFrame API which does not support multiple fiber families.
+The new version uses CardSet API with proper support for mixed fiber types.</p>
+</div>
+<p>To use this legacy class when loading decks:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.lib.deck</span><span class="w"> </span><span class="kn">import</span> <span class="n">Deck</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.lib.import_handler</span><span class="w"> </span><span class="kn">import</span> <span class="n">ImportContext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Mat295Legacy</span><span class="p">,</span>
+    <span class="n">MatAnisotropicHyperelasticLegacy</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">deck</span> <span class="o">=</span> <span class="n">Deck</span><span class="p">()</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">ImportContext</span><span class="p">(</span>
+    <span class="n">deck</span><span class="o">=</span><span class="n">deck</span><span class="p">,</span>
+    <span class="n">keyword_overrides</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;*MAT_ANISOTROPIC_HYPERELASTIC&quot;</span><span class="p">:</span> <span class="n">MatAnisotropicHyperelasticLegacy</span><span class="p">,</span>
+        <span class="s2">&quot;*MAT_295&quot;</span><span class="p">:</span> <span class="n">Mat295Legacy</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+<span class="n">deck</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.keyword">
+<span class="sig-name descname"><span class="pre">keyword</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MAT'</span></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.keyword" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.subkeyword">
+<span class="sig-name descname"><span class="pre">subkeyword</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'295'</span></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.subkeyword" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.option_specs">
+<span class="sig-name descname"><span class="pre">option_specs</span></span><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.option_specs" title="Link to this definition">#</a></dt>
+<dd><p>Gets all option specs for this keyword.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.before_read">
+<span class="sig-name descname"><span class="pre">before_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TextIO</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.before_read" title="Link to this definition">#</a></dt>
+<dd><p>Peek into the buffer before reading to detect optional modules.</p>
+<p>This method scans the keyword content to detect ANISO and ACTIVE modules,
+setting the appropriate type flags so the conditional cards become active.</p>
+<p>Note: This implementation sets ftype globally, meaning all fiber families
+will use the same fiber model type. This is a known limitation of this
+legacy implementation.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ftype">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ftype</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ftype" title="Link to this definition">#</a></dt>
+<dd><p>Fiber model type (global for all fiber families in this legacy implementation).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mid">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mid" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Material identification.  A unique number or label must be specified.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.rho">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rho</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.rho" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Mass density.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.aopt">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">aopt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.aopt" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Material axes option (see <em>MAT_002 for a more complete description):
+EQ.0.0: Locally orthotropic with material axes determined by element nodes.The a - direction is from node 1 to node 2 of the element.The b - direction is orthogonal to the a - direction and is in the plane formed by nodes 1, 2, and 4. For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
+EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in space and the global location of the element center; this is the a - direction.This option is for solid elements only.
+EQ.2.0: Globally orthotropic with material axes determined by vectors a and d input below, as with</em> DEFINE_COORDINATE_VECTOR
+EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a, and c is the normal vector.Then a and b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on MACF.
+EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v, and an originating point, P, which define the centerline axis.This option is for solid elements only.
+LT.0.0 : | AOPT | is a coordinate system ID(see * DEFINE_COORDINATE_OPTION).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.isotropic_title">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isotropic_title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.isotropic_title" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Module title.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.itype">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">itype</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.itype" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Type of isotropic model (see remarks 1 and 2):
+EQ.-1/+1:       compressible/nearly-incompressible Ogden [12] (see notes 1-3)
+EQ.-2:  Yeoh [13]
+EQ.-3/+3:       compressible/nearly-incompressible Holzapfel-Ogden [1], [7].</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.beta">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">beta</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.beta" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Volumetric response function coefficient.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.nu">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nu</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.nu" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Poisson’s ratio (see remark 3).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu1">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mu1</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu1" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ogden moduli, with i = 1,…,8.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu2">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mu2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu2" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ogden moduli, with i = 1,…,8.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu3">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mu3</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu3" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ogden moduli, with i = 1,…,8.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu4">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mu4</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu4" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ogden moduli, with i = 1,…,8.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu5">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mu5</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu5" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ogden moduli, with i = 1,…,8.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu6">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mu6</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu6" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ogden moduli, with i = 1,…,8.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu7">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mu7</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu7" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ogden moduli, with i = 1,…,8.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu8">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mu8</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu8" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ogden moduli, with i = 1,…,8.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha1">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">alpha1</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha1" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ogden constants, with i = 1,…,8.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha2">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">alpha2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha2" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ogden constants, with i = 1,…,8.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha3">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">alpha3</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha3" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ogden constants, with i = 1,…,8.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha4">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">alpha4</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha4" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ogden constants, with i = 1,…,8.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha5">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">alpha5</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha5" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ogden constants, with i = 1,…,8.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha6">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">alpha6</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha6" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ogden constants, with i = 1,…,8.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha7">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">alpha7</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha7" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ogden constants, with i = 1,…,8.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha8">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">alpha8</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha8" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Ogden constants, with i = 1,…,8.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.c1">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">c1</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.c1" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Yeoh moduli, with i = 1,2,3.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.c2">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">c2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.c2" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Yeoh moduli, with i = 1,2,3.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.c3">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">c3</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.c3" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Yeoh moduli, with i = 1,2,3.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.k1">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">k1</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.k1" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Holzapfel-Ogden modulus.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.k2">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">k2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.k2" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Holzapfel-Ogden constant.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.anisotropic_title">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">anisotropic_title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.anisotropic_title" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Module title.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.atype">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">atype</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.atype" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Type of anisotropic model:
+EQ.-1/+1:       general structure tensor-based, see Holzapfel et al. [8] (see remark 4 and note 4)</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.intype">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">intype</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.intype" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Type of interaction between the fiber families (see remarks 5 and 6):
+EQ.0:   none
+EQ.1:   Holzapfel-Ogden [1], [5].</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.nf">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nf</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.nf" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Number of fiber families (see remark 4).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.anisotropic_settings">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">anisotropic_settings</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v3.0.0)"><span class="pre">pandas.DataFrame</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.anisotropic_settings" title="Link to this definition">#</a></dt>
+<dd><p>Gets the full table of anisotropic_settings.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.coupling_k1">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coupling_k1</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.coupling_k1" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Coupling modulus between the fiber and sheet directions</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.coupling_k2">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coupling_k2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.coupling_k2" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Coupling constant between the fiber and sheet directions</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.active_title">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active_title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.active_title" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Module title.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.actype">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">actype</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.actype" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Type of active model:
+EQ.1:   Guccione-Waldman-McCulloch [4]
+EQ.2:   Guccione-Waldman-McCulloch [4] and Hunter-Nash-Sands [9]
+EQ.3:   Hunter-Nash-Sands       [9]
+EQ.4:   Hunter-Nash-Sands [9] and Hunter-McCulloch-ter Keurs [10].
+EQ.5: Martins-Pato-Pires [14]</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.acdir">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">acdir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.acdir" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Direction of active tension: GT.0:       Active tension develops along the mean orientation of the ACDIRth fiber family.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.acid">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">acid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.acid" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Activation curve ID (takes priority over T0 for ACTYPE = 1, 2, 3, or 4 when defined, see Remark 8</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.acthr">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">acthr</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.acthr" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the (De/re)activation threshold (see Remark 8)</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.sf">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sf</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.sf" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Active stress scaling factor in the fiber direction (see Remark 9)</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ss">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ss</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ss" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Active stress scaling factor in the transverse sheet direction (see Remark 9)</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.sn">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sn</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.sn" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Active stress scaling factor in the transverse normal direction (see Remark 9)</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.t0">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">t0</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.t0" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Starting time of active stress development.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ion">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ca2ion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ion" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Intercellular calcium ion concentration</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ionm">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ca2ionm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ionm" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Maximum intercellular calcium ion concentration.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.n">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.n" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Hill coefficient.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.taumax">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">taumax</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.taumax" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Peak isometric tension under maximum activation.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.stf">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stf</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.stf" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Transverse fiber stress scaling factor.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.b">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">b</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.b" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Shape coefficient.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.l0">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">l0</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.l0" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Sarcomere length with no active tension.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.l">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">l</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.l" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Reference (stress-free) sarcomere length.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.dtmax">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dtmax</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.dtmax" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Time to peak tension.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mr">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mr</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mr" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Slope of linear relaxation versus sarcomere length relation.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.tr">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tr</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.tr" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Time intercept of linear relaxation versus sarcomere length relation.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.eta">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">eta</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.eta" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Scaling parameter.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ion50">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ca2ion50</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ion50" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Intercellular calcium ion concentration at half of peak isometric tension.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.sigmax">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sigmax</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.sigmax" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Peak isometric tension under maximum activation.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.f">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">f</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.f" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Transverse fiber stress scaling factor.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ionmax">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ca2ionmax</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ionmax" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Maximum intercellular calcium ion concentration.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ion0">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ca2ion0</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ion0" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Intercellular calcium ion concentration at rest.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.tca">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tca</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.tca" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Shape coefficient.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.fseid">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fseid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.fseid" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Serial stress function ID</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.flid">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">flid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.flid" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Normalized force-contractile stretch curve ID</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.fvid">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fvid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.fvid" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Normalized force-contractile stretch rate curve ID</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alphaid">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">alphaid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alphaid" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Activation curve ID</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.xp">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">xp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.xp" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Coordinates of point  for AOPT = 1 and 4.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.yp">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">yp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.yp" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Coordinates of point  for AOPT = 1 and 4.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.zp">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">zp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.zp" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Coordinates of point  for AOPT = 1 and 4.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.a1">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">a1</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.a1" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Components of vector  for AOPT = 2.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.a2">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">a2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.a2" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Components of vector  for AOPT = 2.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.a3">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">a3</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.a3" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Components of vector  for AOPT = 2.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.macf">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">macf</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.macf" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Material axes change flag for brick elements:
+EQ.1:   no change (default)
+EQ.2:   switch material axes a and b
+EQ.3:   switch material axes a and c
+EQ.4:   switch material axes b and c.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.v1">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v1</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.v1" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Components of vector  for AOPT = 3 and 4.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.v2">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.v2" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Components of vector  for AOPT = 3 and 4.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.v3">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v3</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.v3" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Components of vector  for AOPT = 3 and 4.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.d1">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">d1</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.d1" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Components of vector  for AOPT = 2.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.d2">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">d2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.d2" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Components of vector  for AOPT = 2.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.d3">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">d3</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.d3" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Components of vector  for AOPT = 2.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.material_angle_beta">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">material_angle_beta</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.material_angle_beta" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Material angle in degrees for AOPT = 0 (shells and thick shells only) and AOPT = 3 (all element types).
+This angle may be overridden on the element card;
+see <a href="#id1"><span class="problematic" id="id2">*</span></a>ELEMENT_SHELL_BETA, <a href="#id3"><span class="problematic" id="id4">*</span></a>ELEMENT_TSHELL_BETA, and <a href="#id5"><span class="problematic" id="id6">*</span></a>ELEMENT_SOLID_ORTHO.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ref">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ref</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ref" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Use reference geometry to initialize the stress tensor. The reference geometry is defined by the keyword:
+<a href="#id7"><span class="problematic" id="id8">*</span></a>INITIAL_FOAM_REFERENCE_GEOMETRY.
+EQ.0.0: off
+EQ.1.0: on.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.title">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.title" title="Link to this definition">#</a></dt>
+<dd><p>Get or set the Additional title line</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.keyword"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.keyword</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.subkeyword"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.subkeyword</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.option_specs"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.option_specs</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.before_read"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.before_read()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ftype"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ftype</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mid"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mid</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.rho"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.rho</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.aopt"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.aopt</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.isotropic_title"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.isotropic_title</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.itype"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.itype</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.beta"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.beta</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.nu"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.nu</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu1"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu2"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu3"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu3</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu4"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu4</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu5"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu5</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu6"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu6</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu7"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu7</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu8"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mu8</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha1"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha2"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha3"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha3</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha4"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha4</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha5"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha5</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha6"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha6</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha7"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha7</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha8"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alpha8</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.c1"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.c1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.c2"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.c2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.c3"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.c3</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.k1"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.k1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.k2"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.k2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.anisotropic_title"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.anisotropic_title</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.atype"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.atype</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.intype"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.intype</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.nf"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.nf</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.anisotropic_settings"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.anisotropic_settings</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.coupling_k1"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.coupling_k1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.coupling_k2"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.coupling_k2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.active_title"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.active_title</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.actype"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.actype</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.acdir"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.acdir</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.acid"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.acid</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.acthr"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.acthr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.sf"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.sf</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ss"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ss</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.sn"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.sn</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.t0"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.t0</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ion"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ion</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ionm"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ionm</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.n"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.n</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.taumax"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.taumax</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.stf"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.stf</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.b"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.b</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.l0"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.l0</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.l"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.l</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.dtmax"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.dtmax</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mr"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.mr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.tr"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.tr</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.eta"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.eta</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ion50"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ion50</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.sigmax"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.sigmax</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.f"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.f</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ionmax"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ionmax</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ion0"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ca2ion0</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.tca"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.tca</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.fseid"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.fseid</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.flid"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.flid</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.fvid"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.fvid</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alphaid"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.alphaid</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.xp"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.xp</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.yp"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.yp</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.zp"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.zp</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.a1"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.a1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.a2"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.a2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.a3"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.a3</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.macf"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.macf</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.v1"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.v1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.v2"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.v2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.v3"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.v3</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.d1"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.d1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.d2"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.d2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.d3"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.d3</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.material_angle_beta"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.material_angle_beta</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ref"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.ref</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.title"><code class="docutils literal notranslate"><span class="pre">ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy.title</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="http://github.com/ansys/pydyna/edit/main/ansys/dyna/core/keywords/keyword_classes/manual/mat_295_version_0_9_1/Mat295Legacy.py">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../../../../../../../_sources/api/ansys/dyna/core/keywords/keyword_classes/manual/mat_295_version_0_9_1/Mat295Legacy.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../../../../../../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../../../../../../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../../../../../../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.6.4. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

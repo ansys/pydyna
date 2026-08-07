@@ -1,0 +1,26 @@
+ansys.dyna.core.lib.format_type
+===============================
+
+.. py:module:: ansys.dyna.core.lib.format_type
+
+.. autoapi-nested-parse::
+
+   Format type for dyna keywords.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/format_type/format_type
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.format_type.format_type
+
+

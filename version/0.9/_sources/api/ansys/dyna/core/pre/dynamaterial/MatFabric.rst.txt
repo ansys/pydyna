@@ -1,0 +1,98 @@
+ansys.dyna.core.pre.dynamaterial.MatFabric
+==========================================
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.MatFabric(mass_density=0, young_modulus_longitudinal_direction=0, young_modulus_transverse_direction=0, minor_poisson_ratio=0.35, major_poisson_ratio=0.35, shear_modulus=0)
+
+   
+   Define an airbag material.
+
+
+   :Parameters:
+
+       **mass_density** : :class:`python:float`, :obj:`optional`
+           Mass density. The default is ``0``.
+
+       **young_modulus_longitudinal_direction** : :class:`python:float`, :obj:`optional`
+           Young's modulus-longitudinal direction. The default is ``0``.
+
+       **young_modulus_transverse_direction** : :class:`python:float`, :obj:`optional`
+           Young's modulus-transverse direction. The default is ``0``.
+
+       **minor_poisson_ratio** : :class:`python:float`, :obj:`optional`
+           Minor Poisson's ratio ba direction. The default is ``0.35``.
+
+       **major_poisson_ratio** : :class:`python:float`, :obj:`optional`
+           Major Poisson's ratio ab direction. The default is ``0.35``.
+
+       **shear_modulus** : :class:`python:float`, :obj:`optional`
+           Shear modulus in the ab direction. The default is ``0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+      :value: 0
+
+
+
+   .. py:attribute:: ea
+      :value: 0
+
+
+
+   .. py:attribute:: eb
+      :value: 0
+
+
+
+   .. py:attribute:: prba
+      :value: 0.35
+
+
+
+   .. py:attribute:: prab
+      :value: 0.35
+
+
+
+   .. py:attribute:: gab
+      :value: 0
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create an airbag material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

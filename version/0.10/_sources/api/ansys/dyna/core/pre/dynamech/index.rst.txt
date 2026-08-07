@@ -1,0 +1,30 @@
+ansys.dyna.core.pre.dynamech
+============================
+
+.. py:module:: ansys.dyna.core.pre.dynamech
+
+.. autoapi-nested-parse::
+
+   Module for setting up explicit or implicit analysis.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/pre/dynamech/AnalysisType
+   /api/ansys/dyna/core/pre/dynamech/DynaMech
+   /api/ansys/dyna/core/pre/dynamech/Airbag
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynamech.AnalysisType
+   ansys.dyna.core.pre.dynamech.DynaMech
+   ansys.dyna.core.pre.dynamech.Airbag
+
+

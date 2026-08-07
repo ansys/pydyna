@@ -1,0 +1,114 @@
+ansys.dyna.core.pre.dynamaterial.MatSpotweld
+============================================
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.MatSpotweld(mass_density=0, young_modulus=0, poisson_ratio=0, yield_stress=0, plastic_hardening_modulus=0, axial_force_resultant_at_failure=0, force_resultant_nrs_at_failure=0, force_resultant_nrt_at_failure=0)
+
+   
+   Defines a spotweld material.
+
+
+   :Parameters:
+
+       **mass_density**
+           ..
+
+       **young_modulus**
+           ..
+
+       **poisson_ratio**
+           ..
+
+       **yield_stress**
+           ..
+
+       **plastic_hardening_modulus**
+           ..
+
+       **axial_force_resultant_at_failure**
+           ..
+
+       **force_resultant_nrs_at_failure**
+           ..
+
+       **force_resultant_nrt_at_failure**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+      :value: 0
+
+
+
+   .. py:attribute:: e
+      :value: 0
+
+
+
+   .. py:attribute:: pr
+      :value: 0
+
+
+
+   .. py:attribute:: sigy
+      :value: 0
+
+
+
+   .. py:attribute:: eh
+      :value: 0
+
+
+
+   .. py:attribute:: nrr
+      :value: 0
+
+
+
+   .. py:attribute:: nrs
+      :value: 0
+
+
+
+   .. py:attribute:: nrt
+      :value: 0
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a spotweld material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

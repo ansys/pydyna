@@ -1,0 +1,69 @@
+ansys.dyna.core.lib.card_writer
+===============================
+
+.. py:module:: ansys.dyna.core.lib.card_writer
+
+.. autoapi-nested-parse::
+
+   Function to write cards.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.card_writer.write_cards
+
+
+Module Contents
+---------------
+
+.. py:function:: write_cards(cards: List[ansys.dyna.core.lib.card_interface.CardInterface], buf: TextIO, write_format: ansys.dyna.core.lib.format_type.format_type, comment: Optional[bool] = True, retain_parameters: bool = False, parameter_set: Optional[ansys.dyna.core.lib.parameters.ParameterSet] = None, keyword_id: Optional[str] = None)
+
+   
+   Write the cards.
+
+
+   :Parameters:
+
+       **cards** : :class:`python:list` :obj:`of` :obj:`CardInterface`
+           The cards to write.
+
+       **buf** : :obj:`TextIO`
+           Buffer to write to.
+
+       **write_format** : :obj:`format_type`
+           The format to use for writing.
+
+       **comment** : :ref:`bool <python:bltin-boolean-values>`, :obj:`optional`
+           Whether to write field name comments. Default True.
+
+       **retain_parameters** : :ref:`bool <python:bltin-boolean-values>`, :obj:`optional`
+           If True, write original parameter references instead of values.
+
+       **parameter_set** : :obj:`ParameterSet`, :obj:`optional`
+           The parameter set containing stored refs (when retain_parameters=True).
+
+       **keyword_id** : :class:`python:str`, :obj:`optional`
+           The keyword's ID for building URI paths (when retain_parameters=True).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

@@ -1,0 +1,43 @@
+ansys.dyna.core.pre.dynabase.ParameterType
+==========================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.ParameterType(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Contains the parameter types.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: R
+      :value: 1
+
+
+
+   .. py:attribute:: I
+      :value: 2
+
+
+
+   .. py:attribute:: C
+      :value: 3
+
+

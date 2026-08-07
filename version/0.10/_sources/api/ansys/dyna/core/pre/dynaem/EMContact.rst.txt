@@ -1,0 +1,59 @@
+ansys.dyna.core.pre.dynaem.EMContact
+====================================
+
+.. py:class:: ansys.dyna.core.pre.dynaem.EMContact(contact_type=EMContactType.NODE_TO_NODE_PENALTY_BASED_CONTACT)
+
+   
+   Detects contact between conductors.
+
+   If no contact parts are defined, this method detects contact between
+   all active parts associated with a conducting material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: contacttype
+      :value: 0
+
+
+
+   .. py:method:: create()
+
+      
+      Create an EM contact.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

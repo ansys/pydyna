@@ -1,0 +1,86 @@
+ansys.dyna.core.pre.dynamaterial.HighExplosive
+==============================================
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.HighExplosive(mass_density=1.835, detonation_velocity=0.88, chapman_jouget_pressure=0.37, jwl_equation_parameters=[8.261, 0.1724, 4.55, 1.32, 0.38, 0.102, 1.0])
+
+   
+   Defines a high-explosive material.
+
+
+   :Parameters:
+
+       **mass_density** : :class:`python:float`, :obj:`optional`
+           Mass density. The default is ``8.96``.
+
+       **detonation_velocity** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **chapman_jouget_pressure** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **jwl_equation_parameters** : :class:`python:list`, :obj:`optional`
+           ..
+
+
+
+   :Returns:
+
+       :ref:`bool <python:bltin-boolean-values>`
+           ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: mass_density
+      :value: 1.835
+
+
+
+   .. py:attribute:: detonation_velocity
+      :value: 0.88
+
+
+
+   .. py:attribute:: chapman_jouget_pressure
+      :value: 0.37
+
+
+
+   .. py:attribute:: jwl_equation_parameters
+      :value: [8.261, 0.1724, 4.55, 1.32, 0.38, 0.102, 1.0]
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a high-explosive material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

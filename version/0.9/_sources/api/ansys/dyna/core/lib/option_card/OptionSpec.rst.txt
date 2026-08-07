@@ -1,0 +1,22 @@
+ansys.dyna.core.lib.option_card.OptionSpec
+==========================================
+
+.. py:class:: ansys.dyna.core.lib.option_card.OptionSpec(name: str, card_order: int, title_order: int)
+
+   .. py:property:: name
+      :type: str
+
+
+
+   .. py:property:: card_order
+      :type: int
+
+
+
+   .. py:property:: title_order
+      :type: int
+
+
+
+   .. py:method:: __repr__() -> str
+

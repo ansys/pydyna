@@ -1,0 +1,29 @@
+ansys.dyna.core
+===============
+
+.. py:module:: ansys.dyna.core
+
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/ansys/dyna/core/pre/index
+   /autoapi/ansys/dyna/core/solver/index
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.__version__
+
+
+Package Contents
+----------------
+
+.. py:data:: __version__
+

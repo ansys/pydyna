@@ -1,0 +1,30 @@
+ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1
+==================================================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1
+
+.. autoapi-nested-parse::
+
+   Legacy INITIAL_STRESS_SHELL implementation (version 0.9.1).
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/initial_stress_shell_version_0_9_1/InitialStressShellLegacyThicknessLargeCardSet
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/initial_stress_shell_version_0_9_1/InitialStressShellLegacyCardSet
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/initial_stress_shell_version_0_9_1/InitialStressShellLegacy
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1.InitialStressShellLegacyThicknessLargeCardSet
+   ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1.InitialStressShellLegacyCardSet
+   ansys.dyna.core.keywords.keyword_classes.manual.initial_stress_shell_version_0_9_1.InitialStressShellLegacy
+
+

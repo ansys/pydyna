@@ -1,0 +1,131 @@
+ansys.dyna.core.pre.dynabase.NodeSet
+====================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.NodeSet(nodes=[])
+
+   
+   Defines a nodal set with some identical or unique attributes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: nodes
+      :value: []
+
+
+
+   .. py:attribute:: type
+      :value: 'NODESET'
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a node set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: num()
+
+      
+      Get the number of nodes in the node set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: id(pos)
+
+      
+      Get the node ID by position.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_nid()
+
+      
+      Get the node ID.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

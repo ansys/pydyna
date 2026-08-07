@@ -1,0 +1,229 @@
+ansys.dyna.core.pre.dynaisph.ISPHAnalysis
+=========================================
+
+.. py:class:: ansys.dyna.core.pre.dynaisph.ISPHAnalysis(num_timestep=1)
+
+   
+   Provide controls related to ISPH.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: num_timestep
+      :value: 1
+
+
+
+   .. py:attribute:: box
+      :value: None
+
+
+
+   .. py:attribute:: space_dimension
+      :value: 3
+
+
+
+   .. py:attribute:: neighbors
+      :value: 150
+
+
+
+   .. py:attribute:: approximation_theory
+      :value: 13
+
+
+
+   .. py:attribute:: particle_deactivation
+      :value: 1000000000000000.0
+
+
+
+   .. py:attribute:: velocity_scaling
+      :value: 0
+
+
+
+   .. py:method:: set_num_timestep(num_timestep)
+
+      
+      Set the number of time steps between particle sorting.
+
+
+      :Parameters:
+
+          **num_timestep** : :class:`python:int`, :obj:`optional`
+              Number of time steps between particle sorting. The default
+              is ``1``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_box(box)
+
+      
+      Set the box. ISPH approximations are computed inside a specified box.
+
+
+      :Parameters:
+
+          **box** : :obj:`Box`
+              Box for computing ISHPH approximattions. When a particle has gone
+              outside this box, it is deactivated.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_neighbors(neighbors)
+
+      
+      Set the initial number of neighbors per particle.
+
+
+      :Parameters:
+
+          **neighbors** : :class:`python:int`, :obj:`optional`
+              Initial number of neighbors per particle.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_particle_deactivation(deactivation)
+
+      
+      Set the type of BEM matrices and the way they are assembled.
+
+
+      :Parameters:
+
+          **deactivation**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_velocity_scaling(scaling)
+
+      
+      Set the type of BEM matrices and the way they are assembled.
+
+
+      :Parameters:
+
+          **scaling**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create an ISPH analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

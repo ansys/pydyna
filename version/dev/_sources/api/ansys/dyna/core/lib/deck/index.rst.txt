@@ -1,0 +1,26 @@
+ansys.dyna.core.lib.deck
+========================
+
+.. py:module:: ansys.dyna.core.lib.deck
+
+.. autoapi-nested-parse::
+
+   Module provides a collection of keywords that can read and write to a keyword file.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/deck/Deck
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.deck.Deck
+
+

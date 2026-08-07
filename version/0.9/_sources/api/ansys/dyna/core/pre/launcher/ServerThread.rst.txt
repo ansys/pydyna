@@ -1,0 +1,89 @@
+ansys.dyna.core.pre.launcher.ServerThread
+=========================================
+
+.. py:class:: ansys.dyna.core.pre.launcher.ServerThread(threadID, port, ip, server_path)
+
+   Bases: :py:obj:`threading.Thread`
+
+
+   
+   Provides server thread properties.
+
+
+   :Parameters:
+
+       **threadID**
+           ..
+
+       **port**
+           ..
+
+       **ip**
+           ..
+
+       **server_path**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: threadID
+
+
+   .. py:attribute:: port
+
+
+   .. py:attribute:: ip
+
+
+   .. py:attribute:: server_path
+
+
+   .. py:attribute:: process
+      :value: None
+
+
+
+   .. py:method:: run()
+
+      
+      Method representing the thread's activity.
+
+      You may override this method in a subclass. The standard run() method
+      invokes the callable object passed to the object's constructor as the
+      target argument, if any, with sequential and keyword arguments taken
+      from the args and kwargs arguments, respectively.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: termination()
+

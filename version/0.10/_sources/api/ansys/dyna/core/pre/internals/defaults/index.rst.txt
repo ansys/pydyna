@@ -1,0 +1,240 @@
+ansys.dyna.core.pre.internals.defaults
+======================================
+
+.. py:module:: ansys.dyna.core.pre.internals.defaults
+
+.. autoapi-nested-parse::
+
+   Default configuration for PyDYNA pre.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.internals.defaults.ip
+   ansys.dyna.core.pre.internals.defaults.port
+   ansys.dyna.core.pre.internals.defaults.connection_timeout
+   ansys.dyna.core.pre.internals.defaults.print_communicator_stats
+   ansys.dyna.core.pre.internals.defaults.max_message_length
+   ansys.dyna.core.pre.internals.defaults.get_examples_path
+   ansys.dyna.core.pre.internals.defaults.get_examples_path_for_containers
+   ansys.dyna.core.pre.internals.defaults.get_output_path
+   ansys.dyna.core.pre.internals.defaults.get_output_path_for_containers
+
+
+Module Contents
+---------------
+
+.. py:function:: ip()
+
+   
+   Get the default IP address used throughout the library.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: port()
+
+   
+   Get the default port used throughout the library.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: connection_timeout()
+
+   
+   Get the default connection timeout used throughout the library.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: print_communicator_stats()
+
+   
+   Get the flag to decide whether to print communicator stats(INTERNAL ONLY).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: max_message_length()
+
+   
+   Get the maximum message length for a grpc channel.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_examples_path()
+
+   
+   Get the client-side default container path.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_examples_path_for_containers()
+
+   
+   Get the server-side default container path in case of containers.
+
+   In case of a container, the user data directory is mounted within the container image.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_output_path()
+
+   
+   Get the client-side output directory used by containers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_output_path_for_containers()
+
+   
+   Get the server-side output directory used by containers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

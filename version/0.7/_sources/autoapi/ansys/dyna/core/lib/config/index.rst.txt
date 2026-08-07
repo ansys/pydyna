@@ -1,0 +1,34 @@
+ansys.dyna.core.lib.config
+==========================
+
+.. py:module:: ansys.dyna.core.lib.config
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.config.USE_LSPP_DEFAULTS
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.config.use_lspp_defaults
+   ansys.dyna.core.lib.config.disable_lspp_defaults
+
+
+Module Contents
+---------------
+
+.. py:data:: USE_LSPP_DEFAULTS
+   :value: True
+
+
+.. py:function:: use_lspp_defaults()
+
+.. py:function:: disable_lspp_defaults()
+

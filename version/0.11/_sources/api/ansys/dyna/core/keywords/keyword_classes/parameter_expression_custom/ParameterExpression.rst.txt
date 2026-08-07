@@ -1,0 +1,53 @@
+ansys.dyna.core.keywords.keyword_classes.parameter_expression_custom.ParameterExpression
+========================================================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.parameter_expression_custom.ParameterExpression(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.keywords.keyword_classes.auto.parameter.parameter_expression.ParameterExpression`
+
+
+   
+   PARAMETER_EXPRESSION with custom loads() that preserves expression text.
+
+   Prevents parameter substitution during loading. Expressions evaluated later.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: loads(data: str, parameters: Optional[ansys.dyna.core.lib.parameters.ParameterSet] = None) -> None
+
+      
+      Load keyword data without parameter substitution.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

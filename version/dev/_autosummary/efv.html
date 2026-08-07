@@ -1,0 +1,1391 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Efv keywords &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=5ffe81b6" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=5ffe81b6" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../_static/documentation_options.js?v=e95de808"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/efv';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.18.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="icon" href="../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Element keywords" href="element.html" />
+    <link rel="prev" title="Ef keywords" href="ef.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.13.dev0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="Structures" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/_autosummary/efv.html" />
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are removed in version v0.11.0.</div>
+</aside>
+
+  
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    
+<!--
+  Announcement Version Loader
+  Dynamically loads the announcement.html content into the announcement_msg div.
+-->
+<div id="announcement_msg" aria-live="polite"></div>
+<script>
+  // Fetch and inject the announcement HTML content
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status} Announcement.html file not found, Please ignore this, if you are in dev/stable documentation`);
+      }
+      return response.text();
+    })
+    .then((text) => {
+      var msgDiv = document.getElementById("announcement_msg");
+      if (msgDiv) {
+        msgDiv.innerHTML = text;
+      }
+    })
+    .catch((error) => {
+      // Log only unexpected fetch errors
+      if (!(error.message && error.message.startsWith("HTTP error: 404"))) {
+        console.error(`Fetch problem: ${error.message} Announcement.html could not be loaded.`);
+      }
+    });
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar"><svg class="pst-icon svg-inline--fa" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Keyword Categories</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="airbag.html">Airbag keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ale.html">Ale keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="battery.html">Battery keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary.html">Boundary keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case.html">Case keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cese.html">Cese keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change.html">Change keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chemistry.html">Chemistry keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comment.html">Comment keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="component.html">Component keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constrained.html">Constrained keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Control keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cosim.html">Cosim keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="damping.html">Damping keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define.html">Define keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deformable.html">Deformable keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delete.html">Delete keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dualcese.html">Dualcese keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ef.html">Ef keywords</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Efv keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="element.html">Element keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="em.html">Em keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos.html">Eos keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fatigue.html">Fatigue keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frequency.html">Frequency keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hash.html">Hash keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="icfd.html">Icfd keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iga.html">Iga keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="include.html">Include keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initial.html">Initial keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration.html">Integration keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface.html">Interface keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ispg.html">Ispg keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyword.html">Keyword keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="load.html">Load keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lso.html">Lso keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mat.html">Mat keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh.html">Mesh keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">Module keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node.html">Node keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other.html">Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter.html">Parameter keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="part.html">Part keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particle.html">Particle keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="perturbation.html">Perturbation keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rail.html">Rail keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rigid.html">Rigid keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rigidwall.html">Rigidwall keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rve.html">Rve keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section.html">Section keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sensor.html">Sensor keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set.html">Set keywords</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../api/index.html" class="nav-link">API reference</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">All keyword class summaries</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Efv keywords</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <span class="target" id="autodoc-efv"></span><section id="efv-keywords">
+<h1>Efv keywords<a class="headerlink" href="#efv-keywords" title="Link to this heading">#</a></h1>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_acceleration">
+<span id="efvacceleration"></span><h2>EfvAcceleration<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_acceleration" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvAcceleration class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_boundary_flow_in">
+<span id="efvboundaryflowin"></span><h2>EfvBoundaryFlowIn<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_boundary_flow_in" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvBoundaryFlowIn class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_boundary_flow_out">
+<span id="efvboundaryflowout"></span><h2>EfvBoundaryFlowOut<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_boundary_flow_out" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvBoundaryFlowOut class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_boundary_mesh_face">
+<span id="efvboundarymeshface"></span><h2>EfvBoundaryMeshFace<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_boundary_mesh_face" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvBoundaryMeshFace class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_boundary_transmit">
+<span id="efvboundarytransmit"></span><h2>EfvBoundaryTransmit<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_boundary_transmit" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvBoundaryTransmit class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_box_mesh">
+<span id="efvboxmesh"></span><h2>EfvBoxMesh<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_box_mesh" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvBoxMesh class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_control_global_cutoffs">
+<span id="efvcontrolglobalcutoffs"></span><h2>EfvControlGlobalCutoffs<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_control_global_cutoffs" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvControlGlobalCutoffs class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_control_solver">
+<span id="efvcontrolsolver"></span><h2>EfvControlSolver<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_control_solver" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvControlSolver class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_control_time_step">
+<span id="efvcontroltimestep"></span><h2>EfvControlTimeStep<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_control_time_step" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvControlTimeStep class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_control_transport">
+<span id="efvcontroltransport"></span><h2>EfvControlTransport<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_control_transport" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvControlTransport class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_coupling">
+<span id="efvcoupling"></span><h2>EfvCoupling<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_coupling" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvCoupling class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_coupling_erosion">
+<span id="efvcouplingerosion"></span><h2>EfvCouplingErosion<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_coupling_erosion" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvCouplingErosion class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_coupling_rigid">
+<span id="efvcouplingrigid"></span><h2>EfvCouplingRigid<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_coupling_rigid" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvCouplingRigid class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_cylindrical_mesh">
+<span id="efvcylindricalmesh"></span><h2>EfvCylindricalMesh<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_cylindrical_mesh" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvCylindricalMesh class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_damping">
+<span id="efvdamping"></span><h2>EfvDamping<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_damping" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvDamping class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_decomposition">
+<span id="efvdecomposition"></span><h2>EfvDecomposition<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_decomposition" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvDecomposition class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_detonation">
+<span id="efvdetonation"></span><h2>EfvDetonation<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_detonation" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvDetonation class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_001">
+<span id="efveos001"></span><h2>EfvEos001<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_001" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEos001 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_002">
+<span id="efveos002"></span><h2>EfvEos002<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_002" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEos002 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_003">
+<span id="efveos003"></span><h2>EfvEos003<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_003" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEos003 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_004">
+<span id="efveos004"></span><h2>EfvEos004<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_004" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEos004 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_005">
+<span id="efveos005"></span><h2>EfvEos005<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_005" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEos005 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_006">
+<span id="efveos006"></span><h2>EfvEos006<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_006" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEos006 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_008">
+<span id="efveos008"></span><h2>EfvEos008<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_008" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEos008 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_009">
+<span id="efveos009"></span><h2>EfvEos009<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_009" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEos009 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_010">
+<span id="efveos010"></span><h2>EfvEos010<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_010" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEos010 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_011">
+<span id="efveos011"></span><h2>EfvEos011<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_011" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEos011 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_012">
+<span id="efveos012"></span><h2>EfvEos012<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_012" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEos012 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_013">
+<span id="efveos013"></span><h2>EfvEos013<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_013" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEos013 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_014">
+<span id="efveos014"></span><h2>EfvEos014<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_014" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEos014 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_018">
+<span id="efveos018"></span><h2>EfvEos018<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_018" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEos018 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_compaction">
+<span id="efveoscompaction"></span><h2>EfvEosCompaction<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_compaction" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEosCompaction class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_ideal_gas">
+<span id="efveosidealgas"></span><h2>EfvEosIdealGas<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_ideal_gas" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEosIdealGas class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_jwl">
+<span id="efveosjwl"></span><h2>EfvEosJwl<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_jwl" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEosJwl class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_lee__tarver">
+<span id="efveoslee-tarver"></span><h2>EfvEosLee_Tarver<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_lee__tarver" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEosLee_Tarver class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_linear">
+<span id="efveoslinear"></span><h2>EfvEosLinear<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_linear" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEosLinear class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_p__alpha">
+<span id="efveosp-alpha"></span><h2>EfvEosP_Alpha<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_p__alpha" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEosP_Alpha class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_polynomial">
+<span id="efveospolynomial"></span><h2>EfvEosPolynomial<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_polynomial" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEosPolynomial class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_porous">
+<span id="efveosporous"></span><h2>EfvEosPorous<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_porous" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEosPorous class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_powder_burn">
+<span id="efveospowderburn"></span><h2>EfvEosPowderBurn<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_powder_burn" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEosPowderBurn class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_puff">
+<span id="efveospuff"></span><h2>EfvEosPuff<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_puff" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEosPuff class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_shock">
+<span id="efveosshock"></span><h2>EfvEosShock<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_shock" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEosShock class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_tillotson">
+<span id="efveostillotson"></span><h2>EfvEosTillotson<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_tillotson" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEosTillotson class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_user">
+<span id="efveosuser"></span><h2>EfvEosUser<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_user" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEosUser class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_user_library">
+<span id="efveosuserlibrary"></span><h2>EfvEosUserLibrary<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_user_library" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvEosUserLibrary class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_001">
+<span id="efvfailure001"></span><h2>EfvFailure001<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_001" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailure001 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_002">
+<span id="efvfailure002"></span><h2>EfvFailure002<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_002" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailure002 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_003">
+<span id="efvfailure003"></span><h2>EfvFailure003<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_003" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailure003 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_004">
+<span id="efvfailure004"></span><h2>EfvFailure004<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_004" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailure004 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_005">
+<span id="efvfailure005"></span><h2>EfvFailure005<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_005" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailure005 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_009">
+<span id="efvfailure009"></span><h2>EfvFailure009<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_009" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailure009 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_010">
+<span id="efvfailure010"></span><h2>EfvFailure010<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_010" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailure010 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_014">
+<span id="efvfailure014"></span><h2>EfvFailure014<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_014" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailure014 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_016">
+<span id="efvfailure016"></span><h2>EfvFailure016<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_016" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailure016 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_017">
+<span id="efvfailure017"></span><h2>EfvFailure017<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_017" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailure017 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_add_crack_softening">
+<span id="efvfailureaddcracksoftening"></span><h2>EfvFailureAddCrackSoftening<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_add_crack_softening" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailureAddCrackSoftening class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_add_stochastic">
+<span id="efvfailureaddstochastic"></span><h2>EfvFailureAddStochastic<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_add_stochastic" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailureAddStochastic class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_cumulative_damage">
+<span id="efvfailurecumulativedamage"></span><h2>EfvFailureCumulativeDamage<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_cumulative_damage" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailureCumulativeDamage class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_hydro">
+<span id="efvfailurehydro"></span><h2>EfvFailureHydro<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_hydro" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailureHydro class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_hydro_user">
+<span id="efvfailurehydrouser"></span><h2>EfvFailureHydroUser<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_hydro_user" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailureHydroUser class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_johnson_cook">
+<span id="efvfailurejohnsoncook"></span><h2>EfvFailureJohnsonCook<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_johnson_cook" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailureJohnsonCook class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_johnson_holmquist">
+<span id="efvfailurejohnsonholmquist"></span><h2>EfvFailureJohnsonHolmquist<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_johnson_holmquist" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailureJohnsonHolmquist class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_mo_granular">
+<span id="efvfailuremogranular"></span><h2>EfvFailureMoGranular<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_mo_granular" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailureMoGranular class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_plastic_strain">
+<span id="efvfailureplasticstrain"></span><h2>EfvFailurePlasticStrain<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_plastic_strain" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailurePlasticStrain class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_principal">
+<span id="efvfailureprincipal"></span><h2>EfvFailurePrincipal<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_principal" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailurePrincipal class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_principal_strain">
+<span id="efvfailureprincipalstrain"></span><h2>EfvFailurePrincipalStrain<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_principal_strain" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailurePrincipalStrain class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_principal_stress">
+<span id="efvfailureprincipalstress"></span><h2>EfvFailurePrincipalStress<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_principal_stress" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFailurePrincipalStress class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_filling">
+<span id="efvfilling"></span><h2>EfvFilling<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_filling" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFilling class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_filling_block">
+<span id="efvfillingblock"></span><h2>EfvFillingBlock<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_filling_block" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvFillingBlock class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_initial">
+<span id="efvinitial"></span><h2>EfvInitial<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_initial" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvInitial class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_join">
+<span id="efvjoin"></span><h2>EfvJoin<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_join" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvJoin class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_mapping">
+<span id="efvmapping"></span><h2>EfvMapping<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_mapping" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvMapping class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_mapping_fct">
+<span id="efvmappingfct"></span><h2>EfvMappingFct<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_mapping_fct" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvMappingFct class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_mat">
+<span id="efvmat"></span><h2>EfvMat<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_mat" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvMat class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_cutoff">
+<span id="efvmaterialcutoff"></span><h2>EfvMaterialCutoff<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_cutoff" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvMaterialCutoff class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_eos">
+<span id="efvmaterialeos"></span><h2>EfvMaterialEos<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_eos" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvMaterialEos class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_erosion">
+<span id="efvmaterialerosion"></span><h2>EfvMaterialErosion<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_erosion" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvMaterialErosion class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_failure">
+<span id="efvmaterialfailure"></span><h2>EfvMaterialFailure<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_failure" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvMaterialFailure class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_library">
+<span id="efvmateriallibrary"></span><h2>EfvMaterialLibrary<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_library" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvMaterialLibrary class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_strength">
+<span id="efvmaterialstrength"></span><h2>EfvMaterialStrength<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_strength" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvMaterialStrength class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output">
+<span id="efvoutput"></span><h2>EfvOutput<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvOutput class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output_fsi">
+<span id="efvoutputfsi"></span><h2>EfvOutputFsi<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output_fsi" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvOutputFsi class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output_gauge">
+<span id="efvoutputgauge"></span><h2>EfvOutputGauge<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output_gauge" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvOutputGauge class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output_restart">
+<span id="efvoutputrestart"></span><h2>EfvOutputRestart<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output_restart" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvOutputRestart class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output_results">
+<span id="efvoutputresults"></span><h2>EfvOutputResults<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output_results" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvOutputResults class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output_summary">
+<span id="efvoutputsummary"></span><h2>EfvOutputSummary<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output_summary" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvOutputSummary class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_001">
+<span id="efvstrength001"></span><h2>EfvStrength001<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_001" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrength001 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_002">
+<span id="efvstrength002"></span><h2>EfvStrength002<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_002" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrength002 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_003">
+<span id="efvstrength003"></span><h2>EfvStrength003<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_003" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrength003 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_004">
+<span id="efvstrength004"></span><h2>EfvStrength004<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_004" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrength004 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_005">
+<span id="efvstrength005"></span><h2>EfvStrength005<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_005" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrength005 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_006">
+<span id="efvstrength006"></span><h2>EfvStrength006<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_006" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrength006 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_007">
+<span id="efvstrength007"></span><h2>EfvStrength007<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_007" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrength007 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_008">
+<span id="efvstrength008"></span><h2>EfvStrength008<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_008" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrength008 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_009">
+<span id="efvstrength009"></span><h2>EfvStrength009<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_009" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrength009 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_010">
+<span id="efvstrength010"></span><h2>EfvStrength010<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_010" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrength010 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_011">
+<span id="efvstrength011"></span><h2>EfvStrength011<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_011" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrength011 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_012">
+<span id="efvstrength012"></span><h2>EfvStrength012<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_012" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrength012 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_019">
+<span id="efvstrength019"></span><h2>EfvStrength019<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_019" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrength019 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_cowper_symonds">
+<span id="efvstrengthcowpersymonds"></span><h2>EfvStrengthCowperSymonds<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_cowper_symonds" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrengthCowperSymonds class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_drucker_prager">
+<span id="efvstrengthdruckerprager"></span><h2>EfvStrengthDruckerPrager<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_drucker_prager" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrengthDruckerPrager class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_elastic">
+<span id="efvstrengthelastic"></span><h2>EfvStrengthElastic<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_elastic" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrengthElastic class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_johnson_cook">
+<span id="efvstrengthjohnsoncook"></span><h2>EfvStrengthJohnsonCook<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_johnson_cook" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrengthJohnsonCook class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_johnson_holmquist">
+<span id="efvstrengthjohnsonholmquist"></span><h2>EfvStrengthJohnsonHolmquist<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_johnson_holmquist" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrengthJohnsonHolmquist class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_mo_granular">
+<span id="efvstrengthmogranular"></span><h2>EfvStrengthMoGranular<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_mo_granular" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrengthMoGranular class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_piecewise_johnson_cook">
+<span id="efvstrengthpiecewisejohnsoncook"></span><h2>EfvStrengthPiecewiseJohnsonCook<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_piecewise_johnson_cook" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrengthPiecewiseJohnsonCook class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_rht_concrete">
+<span id="efvstrengthrhtconcrete"></span><h2>EfvStrengthRhtConcrete<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_rht_concrete" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrengthRhtConcrete class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_steinberg_guinan">
+<span id="efvstrengthsteinbergguinan"></span><h2>EfvStrengthSteinbergGuinan<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_steinberg_guinan" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrengthSteinbergGuinan class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_user">
+<span id="efvstrengthuser"></span><h2>EfvStrengthUser<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_user" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrengthUser class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_viscoelastic">
+<span id="efvstrengthviscoelastic"></span><h2>EfvStrengthViscoelastic<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_viscoelastic" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrengthViscoelastic class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_von_mises">
+<span id="efvstrengthvonmises"></span><h2>EfvStrengthVonMises<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_von_mises" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrengthVonMises class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_zerilli_armstrong">
+<span id="efvstrengthzerilliarmstrong"></span><h2>EfvStrengthZerilliArmstrong<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_zerilli_armstrong" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStrengthZerilliArmstrong class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_structured_mesh">
+<span id="efvstructuredmesh"></span><h2>EfvStructuredMesh<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_structured_mesh" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStructuredMesh class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_structured_mesh_control_points">
+<span id="efvstructuredmeshcontrolpoints"></span><h2>EfvStructuredMeshControlPoints<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_structured_mesh_control_points" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStructuredMeshControlPoints class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_structured_mesh_refine">
+<span id="efvstructuredmeshrefine"></span><h2>EfvStructuredMeshRefine<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_structured_mesh_refine" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvStructuredMeshRefine class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_symmetry">
+<span id="efvsymmetry"></span><h2>EfvSymmetry<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_symmetry" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvSymmetry class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.efv_units">
+<span id="efvunits"></span><h2>EfvUnits<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_units" title="Link to this heading">#</a></h2>
+<p>Module providing the EfvUnits class.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_acceleration">EfvAcceleration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_boundary_flow_in">EfvBoundaryFlowIn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_boundary_flow_out">EfvBoundaryFlowOut</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_boundary_mesh_face">EfvBoundaryMeshFace</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_boundary_transmit">EfvBoundaryTransmit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_box_mesh">EfvBoxMesh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_control_global_cutoffs">EfvControlGlobalCutoffs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_control_solver">EfvControlSolver</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_control_time_step">EfvControlTimeStep</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_control_transport">EfvControlTransport</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_coupling">EfvCoupling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_coupling_erosion">EfvCouplingErosion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_coupling_rigid">EfvCouplingRigid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_cylindrical_mesh">EfvCylindricalMesh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_damping">EfvDamping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_decomposition">EfvDecomposition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_detonation">EfvDetonation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_001">EfvEos001</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_002">EfvEos002</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_003">EfvEos003</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_004">EfvEos004</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_005">EfvEos005</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_006">EfvEos006</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_008">EfvEos008</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_009">EfvEos009</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_010">EfvEos010</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_011">EfvEos011</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_012">EfvEos012</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_013">EfvEos013</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_014">EfvEos014</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_018">EfvEos018</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_compaction">EfvEosCompaction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_ideal_gas">EfvEosIdealGas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_jwl">EfvEosJwl</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_lee__tarver">EfvEosLee_Tarver</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_linear">EfvEosLinear</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_p__alpha">EfvEosP_Alpha</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_polynomial">EfvEosPolynomial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_porous">EfvEosPorous</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_powder_burn">EfvEosPowderBurn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_puff">EfvEosPuff</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_shock">EfvEosShock</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_tillotson">EfvEosTillotson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_user">EfvEosUser</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_eos_user_library">EfvEosUserLibrary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_001">EfvFailure001</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_002">EfvFailure002</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_003">EfvFailure003</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_004">EfvFailure004</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_005">EfvFailure005</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_009">EfvFailure009</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_010">EfvFailure010</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_014">EfvFailure014</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_016">EfvFailure016</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_017">EfvFailure017</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_add_crack_softening">EfvFailureAddCrackSoftening</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_add_stochastic">EfvFailureAddStochastic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_cumulative_damage">EfvFailureCumulativeDamage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_hydro">EfvFailureHydro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_hydro_user">EfvFailureHydroUser</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_johnson_cook">EfvFailureJohnsonCook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_johnson_holmquist">EfvFailureJohnsonHolmquist</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_mo_granular">EfvFailureMoGranular</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_plastic_strain">EfvFailurePlasticStrain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_principal">EfvFailurePrincipal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_principal_strain">EfvFailurePrincipalStrain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_failure_principal_stress">EfvFailurePrincipalStress</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_filling">EfvFilling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_filling_block">EfvFillingBlock</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_initial">EfvInitial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_join">EfvJoin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_mapping">EfvMapping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_mapping_fct">EfvMappingFct</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_mat">EfvMat</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_cutoff">EfvMaterialCutoff</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_eos">EfvMaterialEos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_erosion">EfvMaterialErosion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_failure">EfvMaterialFailure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_library">EfvMaterialLibrary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_material_strength">EfvMaterialStrength</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output">EfvOutput</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output_fsi">EfvOutputFsi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output_gauge">EfvOutputGauge</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output_restart">EfvOutputRestart</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output_results">EfvOutputResults</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_output_summary">EfvOutputSummary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_001">EfvStrength001</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_002">EfvStrength002</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_003">EfvStrength003</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_004">EfvStrength004</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_005">EfvStrength005</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_006">EfvStrength006</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_007">EfvStrength007</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_008">EfvStrength008</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_009">EfvStrength009</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_010">EfvStrength010</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_011">EfvStrength011</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_012">EfvStrength012</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_019">EfvStrength019</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_cowper_symonds">EfvStrengthCowperSymonds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_drucker_prager">EfvStrengthDruckerPrager</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_elastic">EfvStrengthElastic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_johnson_cook">EfvStrengthJohnsonCook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_johnson_holmquist">EfvStrengthJohnsonHolmquist</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_mo_granular">EfvStrengthMoGranular</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_piecewise_johnson_cook">EfvStrengthPiecewiseJohnsonCook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_rht_concrete">EfvStrengthRhtConcrete</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_steinberg_guinan">EfvStrengthSteinbergGuinan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_user">EfvStrengthUser</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_viscoelastic">EfvStrengthViscoelastic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_von_mises">EfvStrengthVonMises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_strength_zerilli_armstrong">EfvStrengthZerilliArmstrong</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_structured_mesh">EfvStructuredMesh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_structured_mesh_control_points">EfvStructuredMeshControlPoints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_structured_mesh_refine">EfvStructuredMeshRefine</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_symmetry">EfvSymmetry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.efv_units">EfvUnits</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+
+  
+  <nav class="tocsection editthispage" aria-label="Edit this page">
+    <a href="https://github.com/ansys/pydyna/edit/main/doc/source/_autosummary/efv.rst" rel="noopener noreferrer">
+      <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </nav>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/efv.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<!--
+  Theme Version Footer
+  Displays the Sphinx theme version and the last updated date.
+  Accessibility and semantic improvements included.
+-->
+<footer class="theme-version" aria-label="Theme version and last update">
+  <span>
+    
+      Built with the
+      <a href="https://sphinxdocs.ansys.com/version/stable/index.html" target="_blank" rel="noopener noreferrer">
+        Ansys Sphinx Theme
+      </a>
+      1.9.0.
+    
+  </span>
+  <br />
+  <span>Last updated on <time id="ast_build_date"></time></span>
+</footer>
+<script>
+  // Set the last updated date in a readable format
+  (function() {
+    var options = { day: "numeric", month: "long", year: "numeric" };
+    var ast_lastModifiedDate = new Date(document.lastModified);
+    var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+    var dateElem = document.getElementById("ast_build_date");
+    if (dateElem) {
+      dateElem.textContent = ast_build_date;
+    }
+  })();
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

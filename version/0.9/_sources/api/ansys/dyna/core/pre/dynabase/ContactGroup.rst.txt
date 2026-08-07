@@ -1,0 +1,105 @@
+ansys.dyna.core.pre.dynabase.ContactGroup
+=========================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.ContactGroup
+
+   
+   Create a contact group.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: contactlist
+      :value: []
+
+
+
+   .. py:method:: add(contact)
+
+      
+      Add a contact in the group.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create contacts.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: num()
+
+      
+      Get the number of contact objects.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

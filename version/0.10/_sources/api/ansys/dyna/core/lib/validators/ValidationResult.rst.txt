@@ -1,0 +1,213 @@
+ansys.dyna.core.lib.validators.ValidationResult
+===============================================
+
+.. py:class:: ansys.dyna.core.lib.validators.ValidationResult
+
+   
+   Result of a validation operation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: errors
+      :type:  List[ansys.dyna.core.pre.errors.ValidationError]
+      :value: []
+
+
+
+   .. py:attribute:: warnings
+      :type:  List[ansys.dyna.core.pre.errors.ValidationError]
+      :value: []
+
+
+
+   .. py:attribute:: info
+      :type:  List[ansys.dyna.core.pre.errors.ValidationError]
+      :value: []
+
+
+
+   .. py:method:: add_error(error: ansys.dyna.core.pre.errors.ValidationError) -> None
+
+      
+      Add an error to the result.
+
+
+      :Parameters:
+
+          **error** : :obj:`ValidationError`
+              The validation error to add.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: has_errors() -> bool
+
+      
+      Check if there are any errors.
+
+
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              True if there are errors, False otherwise.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: has_warnings() -> bool
+
+      
+      Check if there are any warnings.
+
+
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              True if there are warnings, False otherwise.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: is_valid
+      :type: bool
+
+
+      
+      Check if validation passed (no errors).
+
+
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              True if no errors, False otherwise.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_summary() -> str
+
+      
+      Get a summary of validation results.
+
+
+
+
+
+      :Returns:
+
+          :class:`python:str`
+              Summary string with counts of errors, warnings, and info messages.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: raise_if_errors() -> None
+
+      
+      Raise an exception if there are any errors.
+
+
+
+
+
+
+
+
+
+      :Raises:
+
+          :obj:`ValidationError`
+              If there are any errors in the result.
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

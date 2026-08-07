@@ -1,0 +1,39 @@
+ansys.dyna.core.lib.transforms.node_transform
+=============================================
+
+.. py:module:: ansys.dyna.core.lib.transforms.node_transform
+
+.. autoapi-nested-parse::
+
+   Transformation handler for *NODE.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/transforms/node_transform/TransformNode
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.transforms.node_transform.TransformNode
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.transforms.node_transform.apply_rigid_transform
+
+
+Module Contents
+---------------
+
+.. py:function:: apply_rigid_transform(mtx: numpy.ndarray, nodes: pandas.DataFrame) -> None
+

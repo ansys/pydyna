@@ -1,0 +1,1358 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Set keywords &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../_static/documentation_options.js?v=7e54ce6f"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/set';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.10';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Examples" href="../examples/index.html" />
+    <link rel="prev" title="Sensor keywords" href="sensor.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.10.0" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="Structures" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/_autosummary/set.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are deprecated and will be removed starting version v0.11.0.</div>
+</aside>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Keyword Categories</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="airbag.html">Airbag keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ale.html">Ale keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="battery.html">Battery keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary.html">Boundary keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case.html">Case keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cese.html">Cese keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change.html">Change keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chemistry.html">Chemistry keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="component.html">Component keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constrained.html">Constrained keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Control keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cosim.html">Cosim keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="damping.html">Damping keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define.html">Define keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deformable.html">Deformable keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delete.html">Delete keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dualcese.html">Dualcese keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ef.html">Ef keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="element.html">Element keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="em.html">Em keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos.html">Eos keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fatigue.html">Fatigue keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frequency.html">Frequency keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="icfd.html">Icfd keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iga.html">Iga keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="include.html">Include keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initial.html">Initial keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration.html">Integration keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface.html">Interface keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyword.html">Keyword keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="load.html">Load keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lso.html">Lso keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mat.html">Mat keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh.html">Mesh keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">Module keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node.html">Node keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other.html">Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter.html">Parameter keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="part.html">Part keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particle.html">Particle keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="perturbation.html">Perturbation keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rail.html">Rail keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rigid.html">Rigid keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rigidwall.html">Rigidwall keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rve.html">Rve keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section.html">Section keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sensor.html">Sensor keywords</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Set keywords</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../api/index.html" class="nav-link">API reference</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">All keyword class summaries</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Set keywords</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <span class="target" id="autodoc-set"></span><section id="set-keywords">
+<h1>Set keywords<a class="headerlink" href="#set-keywords" title="Link to this heading">#</a></h1>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_2d_segment">
+<span id="set2dsegment"></span><h2>Set2DSegment<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_2d_segment" title="Link to this heading">#</a></h2>
+<p>Module providing the Set2DSegment class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_2d_segment_collect">
+<span id="set2dsegmentcollect"></span><h2>Set2DSegmentCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_2d_segment_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the Set2DSegmentCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_2d_segment_set">
+<span id="set2dsegmentset"></span><h2>Set2DSegmentSet<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_2d_segment_set" title="Link to this heading">#</a></h2>
+<p>Module providing the Set2DSegmentSet class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_2d_segment_set_collect">
+<span id="set2dsegmentsetcollect"></span><h2>Set2DSegmentSetCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_2d_segment_set_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the Set2DSegmentSetCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam">
+<span id="setbeam"></span><h2>SetBeam<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam" title="Link to this heading">#</a></h2>
+<p>Module providing the SetBeam class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_add">
+<span id="setbeamadd"></span><h2>SetBeamAdd<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_add" title="Link to this heading">#</a></h2>
+<p>Module providing the SetBeamAdd class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_collect">
+<span id="setbeamcollect"></span><h2>SetBeamCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetBeamCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_general">
+<span id="setbeamgeneral"></span><h2>SetBeamGeneral<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_general" title="Link to this heading">#</a></h2>
+<p>Module providing the SetBeamGeneral class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_general_collect">
+<span id="setbeamgeneralcollect"></span><h2>SetBeamGeneralCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_general_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetBeamGeneralCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_generate">
+<span id="setbeamgenerate"></span><h2>SetBeamGenerate<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_generate" title="Link to this heading">#</a></h2>
+<p>Module providing the SetBeamGenerate class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_generate_collect">
+<span id="setbeamgeneratecollect"></span><h2>SetBeamGenerateCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_generate_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetBeamGenerateCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_generate_increment">
+<span id="setbeamgenerateincrement"></span><h2>SetBeamGenerateIncrement<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_generate_increment" title="Link to this heading">#</a></h2>
+<p>Module providing the SetBeamGenerateIncrement class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_generate_increment_collect">
+<span id="setbeamgenerateincrementcollect"></span><h2>SetBeamGenerateIncrementCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_generate_increment_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetBeamGenerateIncrementCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_intersect">
+<span id="setbeamintersect"></span><h2>SetBeamIntersect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_intersect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetBeamIntersect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_box">
+<span id="setbox"></span><h2>SetBox<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_box" title="Link to this heading">#</a></h2>
+<p>Module providing the SetBox class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete">
+<span id="setdiscrete"></span><h2>SetDiscrete<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete" title="Link to this heading">#</a></h2>
+<p>Module providing the SetDiscrete class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_add">
+<span id="setdiscreteadd"></span><h2>SetDiscreteAdd<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_add" title="Link to this heading">#</a></h2>
+<p>Module providing the SetDiscreteAdd class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_collect">
+<span id="setdiscretecollect"></span><h2>SetDiscreteCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetDiscreteCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_general">
+<span id="setdiscretegeneral"></span><h2>SetDiscreteGeneral<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_general" title="Link to this heading">#</a></h2>
+<p>Module providing the SetDiscreteGeneral class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_general_collect">
+<span id="setdiscretegeneralcollect"></span><h2>SetDiscreteGeneralCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_general_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetDiscreteGeneralCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_generate">
+<span id="setdiscretegenerate"></span><h2>SetDiscreteGenerate<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_generate" title="Link to this heading">#</a></h2>
+<p>Module providing the SetDiscreteGenerate class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_generate_collect">
+<span id="setdiscretegeneratecollect"></span><h2>SetDiscreteGenerateCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_generate_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetDiscreteGenerateCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw">
+<span id="setigaedgeuvw"></span><h2>SetIgaEdgeUvw<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaEdgeUvw class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_collect">
+<span id="setigaedgeuvwcollect"></span><h2>SetIgaEdgeUvwCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaEdgeUvwCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list">
+<span id="setigaedgeuvwlist"></span><h2>SetIgaEdgeUvwList<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaEdgeUvwList class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list_collect">
+<span id="setigaedgeuvwlistcollect"></span><h2>SetIgaEdgeUvwListCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaEdgeUvwListCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list_generate">
+<span id="setigaedgeuvwlistgenerate"></span><h2>SetIgaEdgeUvwListGenerate<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list_generate" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaEdgeUvwListGenerate class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list_generate_collect">
+<span id="setigaedgeuvwlistgeneratecollect"></span><h2>SetIgaEdgeUvwListGenerateCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list_generate_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaEdgeUvwListGenerateCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list_generate_increment">
+<span id="setigaedgeuvwlistgenerateincrement"></span><h2>SetIgaEdgeUvwListGenerateIncrement<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list_generate_increment" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaEdgeUvwListGenerateIncrement class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list_generate_increment_collect">
+<span id="setigaedgeuvwlistgenerateincrementcollect"></span><h2>SetIgaEdgeUvwListGenerateIncrementCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list_generate_increment_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaEdgeUvwListGenerateIncrementCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz">
+<span id="setigaedgexyz"></span><h2>SetIgaEdgeXyz<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaEdgeXyz class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_collect">
+<span id="setigaedgexyzcollect"></span><h2>SetIgaEdgeXyzCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaEdgeXyzCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list">
+<span id="setigaedgexyzlist"></span><h2>SetIgaEdgeXyzList<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaEdgeXyzList class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list_collect">
+<span id="setigaedgexyzlistcollect"></span><h2>SetIgaEdgeXyzListCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaEdgeXyzListCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list_generate">
+<span id="setigaedgexyzlistgenerate"></span><h2>SetIgaEdgeXyzListGenerate<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list_generate" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaEdgeXyzListGenerate class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list_generate_collect">
+<span id="setigaedgexyzlistgeneratecollect"></span><h2>SetIgaEdgeXyzListGenerateCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list_generate_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaEdgeXyzListGenerateCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list_generate_increment">
+<span id="setigaedgexyzlistgenerateincrement"></span><h2>SetIgaEdgeXyzListGenerateIncrement<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list_generate_increment" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaEdgeXyzListGenerateIncrement class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list_generate_increment_collect">
+<span id="setigaedgexyzlistgenerateincrementcollect"></span><h2>SetIgaEdgeXyzListGenerateIncrementCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list_generate_increment_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaEdgeXyzListGenerateIncrementCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw">
+<span id="setigafaceuvw"></span><h2>SetIgaFaceUvw<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaFaceUvw class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_collect">
+<span id="setigafaceuvwcollect"></span><h2>SetIgaFaceUvwCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaFaceUvwCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list">
+<span id="setigafaceuvwlist"></span><h2>SetIgaFaceUvwList<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaFaceUvwList class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list_collect">
+<span id="setigafaceuvwlistcollect"></span><h2>SetIgaFaceUvwListCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaFaceUvwListCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list_generate">
+<span id="setigafaceuvwlistgenerate"></span><h2>SetIgaFaceUvwListGenerate<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list_generate" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaFaceUvwListGenerate class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list_generate_collect">
+<span id="setigafaceuvwlistgeneratecollect"></span><h2>SetIgaFaceUvwListGenerateCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list_generate_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaFaceUvwListGenerateCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list_generate_increment">
+<span id="setigafaceuvwlistgenerateincrement"></span><h2>SetIgaFaceUvwListGenerateIncrement<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list_generate_increment" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaFaceUvwListGenerateIncrement class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list_generate_increment_collect">
+<span id="setigafaceuvwlistgenerateincrementcollect"></span><h2>SetIgaFaceUvwListGenerateIncrementCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list_generate_increment_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaFaceUvwListGenerateIncrementCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz">
+<span id="setigafacexyz"></span><h2>SetIgaFaceXyz<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaFaceXyz class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_collect">
+<span id="setigafacexyzcollect"></span><h2>SetIgaFaceXyzCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaFaceXyzCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list">
+<span id="setigafacexyzlist"></span><h2>SetIgaFaceXyzList<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaFaceXyzList class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list_collect">
+<span id="setigafacexyzlistcollect"></span><h2>SetIgaFaceXyzListCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaFaceXyzListCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list_generate">
+<span id="setigafacexyzlistgenerate"></span><h2>SetIgaFaceXyzListGenerate<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list_generate" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaFaceXyzListGenerate class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list_generate_collect">
+<span id="setigafacexyzlistgeneratecollect"></span><h2>SetIgaFaceXyzListGenerateCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list_generate_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaFaceXyzListGenerateCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list_generate_increment">
+<span id="setigafacexyzlistgenerateincrement"></span><h2>SetIgaFaceXyzListGenerateIncrement<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list_generate_increment" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaFaceXyzListGenerateIncrement class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list_generate_increment_collect">
+<span id="setigafacexyzlistgenerateincrementcollect"></span><h2>SetIgaFaceXyzListGenerateIncrementCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list_generate_increment_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaFaceXyzListGenerateIncrementCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw">
+<span id="setigapointuvw"></span><h2>SetIgaPointUvw<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaPointUvw class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_collect">
+<span id="setigapointuvwcollect"></span><h2>SetIgaPointUvwCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaPointUvwCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list">
+<span id="setigapointuvwlist"></span><h2>SetIgaPointUvwList<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaPointUvwList class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list_collect">
+<span id="setigapointuvwlistcollect"></span><h2>SetIgaPointUvwListCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaPointUvwListCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list_generate">
+<span id="setigapointuvwlistgenerate"></span><h2>SetIgaPointUvwListGenerate<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list_generate" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaPointUvwListGenerate class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list_generate_collect">
+<span id="setigapointuvwlistgeneratecollect"></span><h2>SetIgaPointUvwListGenerateCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list_generate_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaPointUvwListGenerateCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list_generate_increment">
+<span id="setigapointuvwlistgenerateincrement"></span><h2>SetIgaPointUvwListGenerateIncrement<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list_generate_increment" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaPointUvwListGenerateIncrement class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list_generate_increment_collect">
+<span id="setigapointuvwlistgenerateincrementcollect"></span><h2>SetIgaPointUvwListGenerateIncrementCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list_generate_increment_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetIgaPointUvwListGenerateIncrementCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_mode">
+<span id="setmode"></span><h2>SetMode<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_mode" title="Link to this heading">#</a></h2>
+<p>Module providing the SetMode class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_mode_list">
+<span id="setmodelist"></span><h2>SetModeList<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_mode_list" title="Link to this heading">#</a></h2>
+<p>Module providing the SetModeList class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_mode_list_generate">
+<span id="setmodelistgenerate"></span><h2>SetModeListGenerate<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_mode_list_generate" title="Link to this heading">#</a></h2>
+<p>Module providing the SetModeListGenerate class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_multi_material_group_list_gpname">
+<span id="setmultimaterialgrouplistgpname"></span><h2>SetMultiMaterialGroupListGpname<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_multi_material_group_list_gpname" title="Link to this heading">#</a></h2>
+<p>Module providing the SetMultiMaterialGroupListGpname class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_multi__material_group_list">
+<span id="setmulti-materialgrouplist"></span><h2>SetMulti_MaterialGroupList<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_multi__material_group_list" title="Link to this heading">#</a></h2>
+<p>Module providing the SetMulti_MaterialGroupList class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list">
+<span id="setnode"></span><h2>SetNode<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list" title="Link to this heading">#</a></h2>
+<p>Module providing the SetNodeList class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_add">
+<span id="setnodeadd"></span><h2>SetNodeAdd<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_add" title="Link to this heading">#</a></h2>
+<p>Module providing the SetNodeAdd class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_add_advanced">
+<span id="setnodeaddadvanced"></span><h2>SetNodeAddAdvanced<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_add_advanced" title="Link to this heading">#</a></h2>
+<p>Module providing the SetNodeAddAdvanced class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_column">
+<span id="setnodecolumn"></span><h2>SetNodeColumn<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_column" title="Link to this heading">#</a></h2>
+<p>Module providing the SetNodeColumn class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_column_collect">
+<span id="setnodecolumncollect"></span><h2>SetNodeColumnCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_column_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetNodeColumnCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_general">
+<span id="setnodegeneral"></span><h2>SetNodeGeneral<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_general" title="Link to this heading">#</a></h2>
+<p>Module providing the SetNodeGeneral class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_general_collect">
+<span id="setnodegeneralcollect"></span><h2>SetNodeGeneralCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_general_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetNodeGeneralCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_intersect">
+<span id="setnodeintersect"></span><h2>SetNodeIntersect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_intersect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetNodeIntersect class.</p>
+</section>
+<section id="module-0">
+<span id="setnodelist"></span><h2>SetNodeList<a class="headerlink" href="#module-0" title="Link to this heading">#</a></h2>
+<p>Module providing the SetNodeList class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_collect">
+<span id="setnodelistcollect"></span><h2>SetNodeListCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetNodeListCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_generate">
+<span id="setnodelistgenerate"></span><h2>SetNodeListGenerate<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_generate" title="Link to this heading">#</a></h2>
+<p>Module providing the SetNodeListGenerate class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_generate_collect">
+<span id="setnodelistgeneratecollect"></span><h2>SetNodeListGenerateCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_generate_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetNodeListGenerateCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_generate_increment">
+<span id="setnodelistgenerateincrement"></span><h2>SetNodeListGenerateIncrement<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_generate_increment" title="Link to this heading">#</a></h2>
+<p>Module providing the SetNodeListGenerateIncrement class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_generate_increment_collect">
+<span id="setnodelistgenerateincrementcollect"></span><h2>SetNodeListGenerateIncrementCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_generate_increment_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetNodeListGenerateIncrementCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_smooth">
+<span id="setnodelistsmooth"></span><h2>SetNodeListSmooth<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_smooth" title="Link to this heading">#</a></h2>
+<p>Module providing the SetNodeListSmooth class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_smooth_collect">
+<span id="setnodelistsmoothcollect"></span><h2>SetNodeListSmoothCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_smooth_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetNodeListSmoothCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_add">
+<span id="setpartadd"></span><h2>SetPartAdd<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_add" title="Link to this heading">#</a></h2>
+<p>Module providing the SetPartAdd class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_collect">
+<span id="setpartcollect"></span><h2>SetPartCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetPartCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_column">
+<span id="setpartcolumn"></span><h2>SetPartColumn<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_column" title="Link to this heading">#</a></h2>
+<p>Module providing the SetPartColumn class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_column_collect">
+<span id="setpartcolumncollect"></span><h2>SetPartColumnCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_column_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetPartColumnCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list">
+<span id="setpartlist"></span><h2>SetPartList<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list" title="Link to this heading">#</a></h2>
+<p>Module providing the SetPartList class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list_collect">
+<span id="setpartlistcollect"></span><h2>SetPartListCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetPartListCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list_generate">
+<span id="setpartlistgenerate"></span><h2>SetPartListGenerate<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list_generate" title="Link to this heading">#</a></h2>
+<p>Module providing the SetPartListGenerate class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list_generate_collect">
+<span id="setpartlistgeneratecollect"></span><h2>SetPartListGenerateCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list_generate_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetPartListGenerateCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list_generate_increment">
+<span id="setpartlistgenerateincrement"></span><h2>SetPartListGenerateIncrement<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list_generate_increment" title="Link to this heading">#</a></h2>
+<p>Module providing the SetPartListGenerateIncrement class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list_generate_increment_collect">
+<span id="setpartlistgenerateincrementcollect"></span><h2>SetPartListGenerateIncrementCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list_generate_increment_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetPartListGenerateIncrementCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_tree">
+<span id="setparttree"></span><h2>SetPartTree<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_tree" title="Link to this heading">#</a></h2>
+<p>Module providing the SetPartTree class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_peri_laminate">
+<span id="setperilaminate"></span><h2>SetPeriLaminate<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_peri_laminate" title="Link to this heading">#</a></h2>
+<p>Module providing the SetPeriLaminate class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_point_list">
+<span id="setpointlist"></span><h2>SetPointList<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_point_list" title="Link to this heading">#</a></h2>
+<p>Module providing the SetPointList class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_porous_ale">
+<span id="setporousale"></span><h2>SetPorousAle<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_porous_ale" title="Link to this heading">#</a></h2>
+<p>Module providing the SetPorousAle class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_porous_lagrangian">
+<span id="setporouslagrangian"></span><h2>SetPorousLagrangian<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_porous_lagrangian" title="Link to this heading">#</a></h2>
+<p>Module providing the SetPorousLagrangian class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment">
+<span id="setsegment"></span><h2>SetSegment<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment" title="Link to this heading">#</a></h2>
+<p>Module providing the SetSegment class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment_add">
+<span id="setsegmentadd"></span><h2>SetSegmentAdd<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment_add" title="Link to this heading">#</a></h2>
+<p>Module providing the SetSegmentAdd class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment_collect">
+<span id="setsegmentcollect"></span><h2>SetSegmentCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetSegmentCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment_general">
+<span id="setsegmentgeneral"></span><h2>SetSegmentGeneral<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment_general" title="Link to this heading">#</a></h2>
+<p>Module providing the SetSegmentGeneral class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment_general_collect">
+<span id="setsegmentgeneralcollect"></span><h2>SetSegmentGeneralCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment_general_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetSegmentGeneralCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment_intersect">
+<span id="setsegmentintersect"></span><h2>SetSegmentIntersect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment_intersect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetSegmentIntersect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_add">
+<span id="setshelladd"></span><h2>SetShellAdd<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_add" title="Link to this heading">#</a></h2>
+<p>Module providing the SetShellAdd class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_column">
+<span id="setshellcolumn"></span><h2>SetShellColumn<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_column" title="Link to this heading">#</a></h2>
+<p>Module providing the SetShellColumn class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_column_collect">
+<span id="setshellcolumncollect"></span><h2>SetShellColumnCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_column_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetShellColumnCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_general">
+<span id="setshellgeneral"></span><h2>SetShellGeneral<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_general" title="Link to this heading">#</a></h2>
+<p>Module providing the SetShellGeneral class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_general_collect">
+<span id="setshellgeneralcollect"></span><h2>SetShellGeneralCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_general_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetShellGeneralCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_intersect">
+<span id="setshellintersect"></span><h2>SetShellIntersect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_intersect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetShellIntersect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list">
+<span id="setshelllist"></span><h2>SetShellList<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list" title="Link to this heading">#</a></h2>
+<p>Module providing the SetShellList class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list_collect">
+<span id="setshelllistcollect"></span><h2>SetShellListCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetShellListCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list_generate">
+<span id="setshelllistgenerate"></span><h2>SetShellListGenerate<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list_generate" title="Link to this heading">#</a></h2>
+<p>Module providing the SetShellListGenerate class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list_generate_collect">
+<span id="setshelllistgeneratecollect"></span><h2>SetShellListGenerateCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list_generate_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetShellListGenerateCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list_generate_increment">
+<span id="setshelllistgenerateincrement"></span><h2>SetShellListGenerateIncrement<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list_generate_increment" title="Link to this heading">#</a></h2>
+<p>Module providing the SetShellListGenerateIncrement class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list_generate_increment_collect">
+<span id="setshelllistgenerateincrementcollect"></span><h2>SetShellListGenerateIncrementCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list_generate_increment_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetShellListGenerateIncrementCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid">
+<span id="setsolid"></span><h2>SetSolid<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid" title="Link to this heading">#</a></h2>
+<p>Module providing the SetSolid class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_add">
+<span id="setsolidadd"></span><h2>SetSolidAdd<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_add" title="Link to this heading">#</a></h2>
+<p>Module providing the SetSolidAdd class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_collect">
+<span id="setsolidcollect"></span><h2>SetSolidCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetSolidCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_general">
+<span id="setsolidgeneral"></span><h2>SetSolidGeneral<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_general" title="Link to this heading">#</a></h2>
+<p>Module providing the SetSolidGeneral class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_general_collect">
+<span id="setsolidgeneralcollect"></span><h2>SetSolidGeneralCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_general_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetSolidGeneralCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_generate">
+<span id="setsolidgenerate"></span><h2>SetSolidGenerate<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_generate" title="Link to this heading">#</a></h2>
+<p>Module providing the SetSolidGenerate class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_generate_collect">
+<span id="setsolidgeneratecollect"></span><h2>SetSolidGenerateCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_generate_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetSolidGenerateCollect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_generate_increment">
+<span id="setsolidgenerateincrement"></span><h2>SetSolidGenerateIncrement<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_generate_increment" title="Link to this heading">#</a></h2>
+<p>Module providing the SetSolidGenerateIncrement class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_generate_increment_collect">
+<span id="setsolidgenerateincrementcollect"></span><h2>SetSolidGenerateIncrementCollect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_generate_increment_collect" title="Link to this heading">#</a></h2>
+<p>Module providing the SetSolidGenerateIncrementCollect class.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_2d_segment">Set2DSegment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_2d_segment_collect">Set2DSegmentCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_2d_segment_set">Set2DSegmentSet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_2d_segment_set_collect">Set2DSegmentSetCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam">SetBeam</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_add">SetBeamAdd</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_collect">SetBeamCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_general">SetBeamGeneral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_general_collect">SetBeamGeneralCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_generate">SetBeamGenerate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_generate_collect">SetBeamGenerateCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_generate_increment">SetBeamGenerateIncrement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_generate_increment_collect">SetBeamGenerateIncrementCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_beam_intersect">SetBeamIntersect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_box">SetBox</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete">SetDiscrete</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_add">SetDiscreteAdd</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_collect">SetDiscreteCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_general">SetDiscreteGeneral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_general_collect">SetDiscreteGeneralCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_generate">SetDiscreteGenerate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_discrete_generate_collect">SetDiscreteGenerateCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw">SetIgaEdgeUvw</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_collect">SetIgaEdgeUvwCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list">SetIgaEdgeUvwList</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list_collect">SetIgaEdgeUvwListCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list_generate">SetIgaEdgeUvwListGenerate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list_generate_collect">SetIgaEdgeUvwListGenerateCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list_generate_increment">SetIgaEdgeUvwListGenerateIncrement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_uvw_list_generate_increment_collect">SetIgaEdgeUvwListGenerateIncrementCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz">SetIgaEdgeXyz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_collect">SetIgaEdgeXyzCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list">SetIgaEdgeXyzList</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list_collect">SetIgaEdgeXyzListCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list_generate">SetIgaEdgeXyzListGenerate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list_generate_collect">SetIgaEdgeXyzListGenerateCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list_generate_increment">SetIgaEdgeXyzListGenerateIncrement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_edge_xyz_list_generate_increment_collect">SetIgaEdgeXyzListGenerateIncrementCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw">SetIgaFaceUvw</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_collect">SetIgaFaceUvwCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list">SetIgaFaceUvwList</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list_collect">SetIgaFaceUvwListCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list_generate">SetIgaFaceUvwListGenerate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list_generate_collect">SetIgaFaceUvwListGenerateCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list_generate_increment">SetIgaFaceUvwListGenerateIncrement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_uvw_list_generate_increment_collect">SetIgaFaceUvwListGenerateIncrementCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz">SetIgaFaceXyz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_collect">SetIgaFaceXyzCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list">SetIgaFaceXyzList</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list_collect">SetIgaFaceXyzListCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list_generate">SetIgaFaceXyzListGenerate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list_generate_collect">SetIgaFaceXyzListGenerateCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list_generate_increment">SetIgaFaceXyzListGenerateIncrement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_face_xyz_list_generate_increment_collect">SetIgaFaceXyzListGenerateIncrementCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw">SetIgaPointUvw</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_collect">SetIgaPointUvwCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list">SetIgaPointUvwList</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list_collect">SetIgaPointUvwListCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list_generate">SetIgaPointUvwListGenerate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list_generate_collect">SetIgaPointUvwListGenerateCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list_generate_increment">SetIgaPointUvwListGenerateIncrement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_iga_point_uvw_list_generate_increment_collect">SetIgaPointUvwListGenerateIncrementCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_mode">SetMode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_mode_list">SetModeList</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_mode_list_generate">SetModeListGenerate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_multi_material_group_list_gpname">SetMultiMaterialGroupListGpname</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_multi__material_group_list">SetMulti_MaterialGroupList</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list">SetNode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_add">SetNodeAdd</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_add_advanced">SetNodeAddAdvanced</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_column">SetNodeColumn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_column_collect">SetNodeColumnCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_general">SetNodeGeneral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_general_collect">SetNodeGeneralCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_intersect">SetNodeIntersect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-0">SetNodeList</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_collect">SetNodeListCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_generate">SetNodeListGenerate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_generate_collect">SetNodeListGenerateCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_generate_increment">SetNodeListGenerateIncrement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_generate_increment_collect">SetNodeListGenerateIncrementCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_smooth">SetNodeListSmooth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_node_list_smooth_collect">SetNodeListSmoothCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_add">SetPartAdd</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_collect">SetPartCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_column">SetPartColumn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_column_collect">SetPartColumnCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list">SetPartList</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list_collect">SetPartListCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list_generate">SetPartListGenerate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list_generate_collect">SetPartListGenerateCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list_generate_increment">SetPartListGenerateIncrement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_list_generate_increment_collect">SetPartListGenerateIncrementCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_part_tree">SetPartTree</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_peri_laminate">SetPeriLaminate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_point_list">SetPointList</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_porous_ale">SetPorousAle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_porous_lagrangian">SetPorousLagrangian</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment">SetSegment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment_add">SetSegmentAdd</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment_collect">SetSegmentCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment_general">SetSegmentGeneral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment_general_collect">SetSegmentGeneralCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_segment_intersect">SetSegmentIntersect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_add">SetShellAdd</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_column">SetShellColumn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_column_collect">SetShellColumnCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_general">SetShellGeneral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_general_collect">SetShellGeneralCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_intersect">SetShellIntersect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list">SetShellList</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list_collect">SetShellListCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list_generate">SetShellListGenerate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list_generate_collect">SetShellListGenerateCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list_generate_increment">SetShellListGenerateIncrement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_shell_list_generate_increment_collect">SetShellListGenerateIncrementCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid">SetSolid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_add">SetSolidAdd</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_collect">SetSolidCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_general">SetSolidGeneral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_general_collect">SetSolidGeneralCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_generate">SetSolidGenerate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_generate_collect">SetSolidGenerateCollect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_generate_increment">SetSolidGenerateIncrement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.set_solid_generate_increment_collect">SetSolidGenerateIncrementCollect</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="None">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/set.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.6.4. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

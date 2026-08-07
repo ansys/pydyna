@@ -1,0 +1,38 @@
+ansys.dyna.core.lib.cards_
+==========================
+
+.. py:module:: ansys.dyna.core.lib.cards_
+
+.. autoapi-nested-parse::
+
+   
+   Module for card handling.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /api/ansys/dyna/core/lib/cards_/special/index
+
+

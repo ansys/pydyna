@@ -1,0 +1,26 @@
+ansys.dyna.core.pre.part
+========================
+
+.. py:module:: ansys.dyna.core.pre.part
+
+.. autoapi-nested-parse::
+
+   Module containing the ``Part`` class.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/pre/part/Part
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.part.Part
+
+

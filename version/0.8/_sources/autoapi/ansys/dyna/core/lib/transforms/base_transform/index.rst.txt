@@ -1,0 +1,29 @@
+ansys.dyna.core.lib.transforms.base_transform
+=============================================
+
+.. py:module:: ansys.dyna.core.lib.transforms.base_transform
+
+.. autoapi-nested-parse::
+
+   Base Transform class.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.transforms.base_transform.Transform
+
+
+Module Contents
+---------------
+
+.. py:class:: Transform(xform: ansys.dyna.core.keywords.IncludeTransform)
+
+   .. py:method:: transform(keyword) -> None
+
+

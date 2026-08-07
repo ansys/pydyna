@@ -1,0 +1,48 @@
+ansys.dyna.core.pre.dynabase.ContactCategory
+============================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.ContactCategory(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Contact category for contact definitions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: SURFACE_TO_SURFACE_CONTACT
+      :value: 2
+
+
+
+   .. py:attribute:: SINGLE_SURFACE_CONTACT
+      :value: 3
+
+
+
+   .. py:attribute:: SHELL_EDGE_TO_SURFACE_CONTACT
+      :value: 4
+
+
+
+   .. py:attribute:: NODES_TO_SURFACE
+      :value: 5
+
+

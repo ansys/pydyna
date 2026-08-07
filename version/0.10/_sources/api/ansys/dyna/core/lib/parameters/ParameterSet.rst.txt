@@ -1,0 +1,296 @@
+ansys.dyna.core.lib.parameters.ParameterSet
+===========================================
+
+.. py:class:: ansys.dyna.core.lib.parameters.ParameterSet(parent: Optional[ParameterSet] = None)
+
+   
+   Hierarchical parameter storage for LS-DYNA deck parameters.
+
+   Child scopes see parent parameters but local parameters don't leak upward.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: get(param: str) -> Any
+
+      
+      Get a parameter by name, checking local then parent scopes.
+
+
+      :Parameters:
+
+          **param** : :class:`python:str`
+              Parameter name to lookup.
+
+
+
+      :Returns:
+
+          :obj:`Any`
+              Parameter value.
+
+
+
+
+      :Raises:
+
+          :obj:`KeyError`
+              If parameter is not found in this scope or any parent scope.
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add(param: str, value: Any) -> None
+
+      
+      Add a parameter to the local scope.
+
+      This method is for global parameters (PARAMETER keyword).
+      They are added to the local scope but will be visible to child scopes.
+
+      :Parameters:
+
+          **param** : :class:`python:str`
+              Parameter name.
+
+          **value** : :obj:`Any`
+              Parameter value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_local(param: str, value: Any) -> None
+
+      
+      Add a parameter to local scope only (PARAMETER_LOCAL).
+
+      Local parameters are only visible within the current scope and child scopes
+      created from it, but won't leak to parent or sibling scopes.
+
+      :Parameters:
+
+          **param** : :class:`python:str`
+              Parameter name.
+
+          **value** : :obj:`Any`
+              Parameter value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: copy_with_child_scope() -> ParameterSet
+
+      
+      Create a new ParameterSet with this as the parent scope.
+
+      The child scope will be able to see parameters from this scope,
+      but parameters added to the child won't leak back to this scope.
+
+
+
+
+      :Returns:
+
+          :obj:`ParameterSet`
+              New ParameterSet with this as parent.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: scope(segment: str) -> Generator[None, None, None]
+
+      
+      Context manager to scope a URI segment during card reading.
+
+      As the read stack descends (keyword -> card -> field), each layer
+      pushes its segment and pops on exit. Parameter references are
+      recorded at the current full URI path.
+
+      :Parameters:
+
+          **segment** : :class:`python:str`
+              URI segment to push (e.g., keyword id, card index, field name).
+
+
+
+
+      :Yields:
+
+          :data:`python:None`
+              ..
+
+
+
+
+
+
+
+
+
+      .. rubric:: Examples
+
+      >>> with parameter_set.scope("12345"):  # keyword id
+      ...     with parameter_set.scope("card0"):
+      ...         parameter_set.record_ref("secid", "&mysec")
+      ...         # Records at URI: "12345/card0/secid"
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: record_ref(field: str, ref: str) -> None
+
+      
+      Record a parameter reference at the current URI path.
+
+      Called during card reading when a parameter reference (e.g., &myvar)
+      is resolved. Stores the original reference string so it can be
+      written back instead of the resolved value.
+
+      :Parameters:
+
+          **field** : :class:`python:str`
+              Field name or index to append to current URI path.
+
+          **ref** : :class:`python:str`
+              The original parameter reference string (e.g., "&myvar", "-&density").
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_ref(*path_segments: str) -> Optional[str]
+
+      
+      Get the parameter reference string for a URI path.
+
+      Called during card writing to check if a field value came from
+      a parameter reference that should be written instead of the value.
+
+      :Parameters:
+
+          **\*path_segments** : :class:`python:str`
+              URI path segments to join (e.g., keyword_id, card_index, field_name).
+
+
+
+      :Returns:
+
+          :class:`python:str` or :data:`python:None`
+              The original parameter reference string if one was recorded,
+              or None if the value was a literal.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_current_uri() -> str
+
+      
+      Get the current URI path as a string.
+
+
+
+
+
+      :Returns:
+
+          :class:`python:str`
+              The current URI path joined with '/'.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

@@ -1,0 +1,44 @@
+ansys.dyna.core.lib.card_interface.ReadResult
+=============================================
+
+.. py:class:: ansys.dyna.core.lib.card_interface.ReadResult
+
+   
+   Result of reading a card from a buffer.
+
+
+
+   :Attributes:
+
+       **warnings** : :class:`python:list` :obj:`of` :class:`python:str`
+           Warning messages generated during card parsing.
+
+       **reached_end** : :ref:`bool <python:bltin-boolean-values>`
+           Whether reading reached the end of the keyword (for unbounded reads).
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: warnings
+      :type:  List[str]
+      :value: []
+
+
+
+   .. py:attribute:: reached_end
+      :type:  bool
+      :value: False
+
+

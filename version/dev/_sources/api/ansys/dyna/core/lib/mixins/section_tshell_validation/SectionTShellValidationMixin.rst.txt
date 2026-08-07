@@ -1,0 +1,57 @@
+ansys.dyna.core.lib.mixins.section_tshell_validation.SectionTShellValidationMixin
+=================================================================================
+
+.. py:class:: ansys.dyna.core.lib.mixins.section_tshell_validation.SectionTShellValidationMixin
+
+   
+   Mixin that validates SECTION_TSHELL card set items.
+
+   For each section defined in the card set, enforces that when ``icomp == 1``
+   (layered composite mode), ``nip`` must be a positive integer since each
+   through-thickness integration point maps to one composite layer.
+
+   Attributes expected from the host class:
+       sets: list of SectionTshellCardSet items, each having ``icomp`` and ``nip``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: sets
+      :type: List[ansys.dyna.core.keywords.keyword_classes.auto.section.section_tshell.SectionTshellCardSet]
+
+
+      
+      List of card set items belonging to this keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

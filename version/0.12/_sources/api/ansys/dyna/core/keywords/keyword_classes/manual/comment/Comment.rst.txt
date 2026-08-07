@@ -1,0 +1,66 @@
+ansys.dyna.core.keywords.keyword_classes.manual.comment.Comment
+===============================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.comment.Comment(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   DYNA COMMENT keyword.
+
+   Supports multiline free-form text comments.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: keyword
+      :value: 'COMMENT'
+
+
+
+   .. py:attribute:: subkeyword
+      :value: 'COMMENT'
+
+
+
+   .. py:property:: comment
+      :type: Optional[str]
+
+
+      
+      Get or set the comment text.
+
+      The comment can span multiple lines. Lines are separated by newline characters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

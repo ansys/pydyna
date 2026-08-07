@@ -1,0 +1,914 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ansys.dyna.core.solver.launcher &#8212; PyDYNA</title>
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/ansys_sphinx_theme.css?v=d2ac875c" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+ 
+<link href="../../../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script src="../../../../../_static/documentation_options.js?v=70f82a29"></script>
+    <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/js/table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ansys/dyna/core/solver/launcher';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.5';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/_modules/ansys/dyna/core/solver/launcher.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+
+  <!-- If there is no MeiliSearch enabled, use the PyData search -->
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+   
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <script>document.write(`<img src="../../../../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark" alt="PyDYNA - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../getting-started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../autoapi/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../getting-started/index.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../autoapi/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../contributing.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../../../index.html" class="nav-link">Module code</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../core.html" class="nav-link">ansys.dyna.core</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page">ansys.dyna.core.solver.launcher</li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ansys.dyna.core.solver.launcher</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Module for launching the pydyna solver service locally.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">platform</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">zipfile</span> <span class="kn">import</span> <span class="n">ZipFile</span>
+
+<span class="kn">from</span> <span class="nn">ansys.dyna.core.solver.dynalogging</span> <span class="kn">import</span> <span class="n">LOG</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">ansys.platform.instancemanagement</span> <span class="k">as</span> <span class="nn">pypim</span>
+
+    <span class="n">_HAS_PIM</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+    <span class="n">_HAS_PIM</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="kn">from</span> <span class="nn">ansys.dyna.core.solver</span> <span class="kn">import</span> <span class="n">DynaSolver</span>
+
+<div class="viewcode-block" id="LOCALHOST">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.LOCALHOST">[docs]</a>
+<span class="n">LOCALHOST</span> <span class="o">=</span> <span class="s2">&quot;127.0.0.1&quot;</span></div>
+
+<div class="viewcode-block" id="DYNA_DEFAULT_PORT">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.DYNA_DEFAULT_PORT">[docs]</a>
+<span class="n">DYNA_DEFAULT_PORT</span> <span class="o">=</span> <span class="mi">5000</span></div>
+
+<div class="viewcode-block" id="SERVER_SOLVER_VERSION">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.SERVER_SOLVER_VERSION">[docs]</a>
+<span class="n">SERVER_SOLVER_VERSION</span> <span class="o">=</span> <span class="s2">&quot;v0.4.12&quot;</span></div>
+
+<div class="viewcode-block" id="MAX_MESSAGE_LENGTH">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.MAX_MESSAGE_LENGTH">[docs]</a>
+<span class="n">MAX_MESSAGE_LENGTH</span> <span class="o">=</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">2</span></div>
+
+
+
+<div class="viewcode-block" id="check_ports">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.check_ports">[docs]</a>
+<span class="k">def</span> <span class="nf">check_ports</span><span class="p">(</span><span class="n">port_range</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check the state of ports in a port range.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    port_range :</span>
+<span class="sd">    ip : str, optional</span>
+<span class="sd">        IP address. The default is ``&quot;localhost&quot;``, in which case</span>
+<span class="sd">        ``&quot;127.0.0.1&quot;``is used.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ports</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="n">port_range</span><span class="p">:</span>
+        <span class="n">ports</span><span class="p">[</span><span class="n">port</span><span class="p">]</span> <span class="o">=</span> <span class="n">port_in_use</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">ip</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ports</span></div>
+
+
+
+<div class="viewcode-block" id="port_in_use">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.port_in_use">[docs]</a>
+<span class="k">def</span> <span class="nf">port_in_use</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">LOCALHOST</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine if a port is in use at a given host.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    port : int</span>
+<span class="sd">       Port.</span>
+<span class="sd">    host :</span>
+<span class="sd">       Host. The default is ``LOCALHOST``, in which case ``&quot;127.0.0.1&quot;``</span>
+<span class="sd">        is used.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ``True`` when a port is in use at the given host, ``False`` otherwise.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The port must &quot;bind&quot; the address. Just checking if a socket can be created</span>
+<span class="sd">    is insufficient because it is possible to run into permission</span>
+<span class="sd">    errors like this one:</span>
+
+<span class="sd">    &quot;An attempt was made to access a socket in a way forbidden by its</span>
+<span class="sd">    access permissions.&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span> <span class="k">as</span> <span class="n">sock</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">sock</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span></div>
+
+
+
+<div class="viewcode-block" id="launch_grpc">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.launch_grpc">[docs]</a>
+<span class="k">def</span> <span class="nf">launch_grpc</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="n">DYNA_DEFAULT_PORT</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="n">LOCALHOST</span><span class="p">,</span> <span class="n">server_path</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Launch the solver service locally in gRPC mode.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    port : int, optional</span>
+<span class="sd">        Port to launch the solver service on. The default is ``DYNAPRE_DEFAULT_PORT``.</span>
+<span class="sd">        The final port is the first port available after (or including) this</span>
+<span class="sd">        port.</span>
+<span class="sd">    ip : str, optional</span>
+<span class="sd">        IP address. The default is ``LOCALHOST``, in which case ``&quot;127.0.0.1&quot;``</span>
+<span class="sd">        is used.</span>
+<span class="sd">    server_path : string, optional</span>
+<span class="sd">        Path to the solver service. The default is ``None``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        Port number that the gRPC instance started on.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># start server locally</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ip</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;localhost&quot;</span> <span class="ow">or</span> <span class="n">ip</span> <span class="o">==</span> <span class="n">LOCALHOST</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">DynaSolver</span><span class="o">.</span><span class="n">grpc_local_server_on</span><span class="p">():</span>
+        <span class="c1"># LOG.debug(&quot;Starting solver server&quot;)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">server_path</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># server_path = os.getenv(&quot;ANSYS_PYDYNA_SOLVER_SERVER_PATH&quot;)</span>
+            <span class="c1"># if server_path is None:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/ansys/pydyna/releases/download/v0.4.12/ansys-pydyna-solver-server.zip&quot;</span>
+            <span class="n">directory</span> <span class="o">=</span> <span class="n">DynaSolver</span><span class="o">.</span><span class="n">get_appdata_path</span><span class="p">()</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">directory</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s2">&quot;ansys-pydyna-solver-server.zip&quot;</span>
+            <span class="n">server_package</span> <span class="o">=</span> <span class="n">directory</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s2">&quot;ansys-pydyna-solver-server&quot;</span>
+            <span class="n">extractpath</span> <span class="o">=</span> <span class="n">directory</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">server_package</span><span class="p">):</span>
+                <span class="n">DynaSolver</span><span class="o">.</span><span class="n">downloadfile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+                <span class="k">with</span> <span class="n">ZipFile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zipf</span><span class="p">:</span>
+                    <span class="n">zipf</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">extractpath</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">ZipFile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zipf</span><span class="p">:</span>
+                    <span class="n">zipinfo</span> <span class="o">=</span> <span class="n">zipf</span><span class="o">.</span><span class="n">getinfo</span><span class="p">(</span><span class="s2">&quot;ansys-pydyna-solver-server/&quot;</span><span class="p">)</span>
+                    <span class="n">version</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">zipinfo</span><span class="o">.</span><span class="n">comment</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">version</span> <span class="o">!=</span> <span class="n">SERVER_SOLVER_VERSION</span><span class="p">:</span>
+                        <span class="n">DynaSolver</span><span class="o">.</span><span class="n">downloadfile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+                        <span class="k">with</span> <span class="n">ZipFile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zipf</span><span class="p">:</span>
+                            <span class="n">zipf</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">extractpath</span><span class="p">)</span>
+            <span class="n">server_path</span> <span class="o">=</span> <span class="n">server_package</span>
+            <span class="c1"># os.environ[&quot;ANSYS_PYDYNA_SOLVER_SERVER_PATH&quot;] = server_path</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">server_path</span><span class="p">):</span>
+            <span class="c1"># threadserver = ServerThread(1, port=port, ip=ip, server_path=server_path)</span>
+            <span class="c1"># threadserver.run()</span>
+            <span class="c1"># threadserver.setDaemon(True)</span>
+            <span class="c1"># threadserver.start()</span>
+            <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span><span class="p">:</span>
+                <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="s2">&quot;python server.py&quot;</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">server_path</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="s2">&quot;python3 server.py&quot;</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">server_path</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">waittime</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">DynaSolver</span><span class="o">.</span><span class="n">grpc_local_server_on</span><span class="p">():</span>
+                <span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+                <span class="n">waittime</span> <span class="o">+=</span> <span class="mi">5</span>
+                <span class="k">if</span> <span class="n">waittime</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed to start pydyna solver server locally&quot;</span><span class="p">)</span>
+                    <span class="k">break</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed to start pydyna solver server locally,Invalid server path!&quot;</span><span class="p">)</span>
+
+    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Starting &#39;launch_grpc&#39;.&quot;</span><span class="p">)</span>
+
+    <span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;python server.py&quot;</span>
+    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting the solver service with command: </span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># env_vars = update_env_vars(add_env_vars, replace_env_vars)</span>
+    <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running in </span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2"> the following command: &#39;</span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;the solver service starting in background.&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># if platform.system() == &quot;Windows&quot;:</span>
+    <span class="c1"># process = subprocess.Popen(&quot;python server.py&quot;, cwd=server_path, shell=True)</span>
+    <span class="c1"># else:</span>
+    <span class="c1"># process = subprocess.Popen(&quot;python3 server.py&quot;, cwd=server_path, shell=True)</span>
+    <span class="c1"># process.wait()</span>
+    <span class="c1"># return port</span>
+
+
+<div class="viewcode-block" id="launch_remote_dyna">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.launch_remote_dyna">[docs]</a>
+<span class="k">def</span> <span class="nf">launch_remote_dyna</span><span class="p">(</span>
+    <span class="n">version</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">cleanup_on_exit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DynaSolver</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Start DYNA remotely using the product instance management API.</span>
+
+<span class="sd">    When calling this method, you need to ensure that you are in an environment where PyPIM is configured.</span>
+<span class="sd">    This can be verified with :func:`pypim.is_configured &lt;ansys.platform.instancemanagement.is_configured&gt;`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    version : str, optional</span>
+<span class="sd">        The DYNA version to run, in the 3 digits format, such as &quot;212&quot;.</span>
+
+<span class="sd">        If unspecified, the version will be chosen by the server.</span>
+
+<span class="sd">    cleanup_on_exit : bool, optional</span>
+<span class="sd">        Exit DYNA when python exits or the dyna Python instance is</span>
+<span class="sd">        garbage collected.</span>
+
+<span class="sd">        If unspecified, it will be cleaned up.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ansys.dyna.core.solver.DynaSolver</span>
+<span class="sd">        An instance of DynaSolver.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_HAS_PIM</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="k">raise</span> <span class="ne">ModuleNotFoundError</span><span class="p">(</span><span class="s2">&quot;The package &#39;ansys-platform-instancemanagement&#39; is required to use this function.&quot;</span><span class="p">)</span>
+
+    <span class="n">pim</span> <span class="o">=</span> <span class="n">pypim</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+    <span class="n">instance</span> <span class="o">=</span> <span class="n">pim</span><span class="o">.</span><span class="n">create_instance</span><span class="p">(</span><span class="n">product_name</span><span class="o">=</span><span class="s2">&quot;dynasolver&quot;</span><span class="p">,</span> <span class="n">product_version</span><span class="o">=</span><span class="n">version</span><span class="p">)</span>
+    <span class="n">instance</span><span class="o">.</span><span class="n">wait_for_ready</span><span class="p">()</span>
+    <span class="n">channel</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">build_grpc_channel</span><span class="p">(</span>
+        <span class="n">options</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;grpc.max_receive_message_length&quot;</span><span class="p">,</span> <span class="n">MAX_MESSAGE_LENGTH</span><span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">DynaSolver</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="n">channel</span><span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">pim_client</span> <span class="o">=</span> <span class="n">pim</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">remote_instance</span> <span class="o">=</span> <span class="n">instance</span>
+    <span class="k">return</span> <span class="n">client</span></div>
+
+
+
+<div class="viewcode-block" id="launch_dyna">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.launch_dyna">[docs]</a>
+<span class="k">def</span> <span class="nf">launch_dyna</span><span class="p">(</span>
+    <span class="n">port</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">ip</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DynaSolver</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Start DYNA locally.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    port : int</span>
+<span class="sd">        Port to launch DYNA gRPC on.  Final port will be the first</span>
+<span class="sd">        port available after (or including) this port.  Defaults to</span>
+<span class="sd">        5000.</span>
+
+<span class="sd">    ip : bool, optional</span>
+<span class="sd">        You can provide a hostname as an alternative to an IP address.</span>
+<span class="sd">        Defaults to ``&#39;127.0.0.1&#39;``.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Launch DYNA using the best protocol.</span>
+
+<span class="sd">    &gt;&gt;&gt; from ansys.dyna.core.solver import launch_dyna</span>
+<span class="sd">    &gt;&gt;&gt; solution = launch_dyna()</span>
+
+
+<span class="sd">    Connect to an existing instance of DYNA at IP 192.168.1.30 and</span>
+<span class="sd">    port 5000.</span>
+
+<span class="sd">    &gt;&gt;&gt; solution = launch_dyna(ip=&#39;192.168.1.30&#39;,port=5000)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># check_valid_ip(ip)  # double check</span>
+
+    <span class="c1"># check_valid_port(port)</span>
+
+    <span class="c1"># Start DYNA with PyPIM if the environment is configured for it</span>
+    <span class="c1"># and the user did not pass a directive on how to launch it.</span>
+    <span class="k">if</span> <span class="n">_HAS_PIM</span> <span class="ow">and</span> <span class="n">pypim</span><span class="o">.</span><span class="n">is_configured</span><span class="p">():</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting DYNA remotely. The startup configuration will be ignored.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">launch_remote_dyna</span><span class="p">()</span>
+
+    <span class="n">launch_grpc</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="n">ip</span><span class="p">)</span>
+
+    <span class="n">dyna</span> <span class="o">=</span> <span class="n">DynaSolver</span><span class="p">(</span>
+        <span class="n">hostname</span><span class="o">=</span><span class="n">ip</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dyna</span></div>
+
+
+
+<span class="c1"># class ServerThread(threading.Thread):</span>
+<div class="viewcode-block" id="ServerThread">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.ServerThread">[docs]</a>
+<span class="k">class</span> <span class="nc">ServerThread</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Provides server thread properties.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    threadID :</span>
+<span class="sd">    port :</span>
+<span class="sd">    ip :</span>
+<span class="sd">    server_path :</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">server_path</span><span class="p">):</span>
+        <span class="c1"># threading.Thread.__init__(self)</span>
+<div class="viewcode-block" id="ServerThread.threadID">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.ServerThread.threadID">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span></div>
+
+<div class="viewcode-block" id="ServerThread.port">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.ServerThread.port">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span></div>
+
+<div class="viewcode-block" id="ServerThread.ip">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.ServerThread.ip">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span></div>
+
+<div class="viewcode-block" id="ServerThread.server_path">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.ServerThread.server_path">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server_path</span> <span class="o">=</span> <span class="n">server_path</span></div>
+
+<div class="viewcode-block" id="ServerThread.process">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.ServerThread.process">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="ServerThread.run">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.ServerThread.run">[docs]</a>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="n">launch_grpc</span><span class="p">(</span><span class="n">ip</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">,</span> <span class="n">server_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">server_path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ServerThread.termination">
+<a class="viewcode-back" href="../../../../../autoapi/ansys/dyna/core/solver/launcher/index.html#ansys.dyna.core.solver.launcher.ServerThread.termination">[docs]</a>
+    <span class="k">def</span> <span class="nf">termination</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">termination</span><span class="p">()</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<!-- If there is no fix edit button function, use the PyData edit-this-button-->
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2024 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.0.7. <br />Last updated on
+  <span id="date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("date").innerHTML = date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

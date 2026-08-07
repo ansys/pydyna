@@ -1,0 +1,204 @@
+ansys.dyna.core.pre.dynabase.Constraint
+=======================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.Constraint
+
+   
+   Provides a way of constraining degrees of freedom to move together in some way.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: spotweldlist
+      :value: []
+
+
+
+   .. py:attribute:: cnrbsetidlist
+      :value: []
+
+
+
+   .. py:attribute:: jointsphericallist
+      :value: []
+
+
+
+   .. py:attribute:: mergerigidlist
+      :value: []
+
+
+
+   .. py:method:: create_spotweld(nodeid1, nodeid2)
+
+      
+      Define massless spot welds between non-contiguous nodal pairs.
+
+
+      :Parameters:
+
+          **nodeid1** : :class:`python:int`
+              ID for the first node.
+
+          **nodeid2** : :class:`python:int`
+              ID for the second node.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_cnrb(nodeset)
+
+      
+      Create a nodal rigid body, which is a rigid body that consists of defined nodes.
+
+
+      :Parameters:
+
+          **nodeset** : :obj:`NodeSet`
+              Node set that defines the rigid body.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_joint_spherical(nodes, relative_penalty_stiffness=1.0, damping_scale_factor=1.0)
+
+      
+      Create a joint between two rigid bodies.
+
+
+      :Parameters:
+
+          **nodes** : :class:`python:list`
+              List of nodes for creating the joint.
+
+          **relative_penalty_stiffness** : :class:`python:int`, :obj:`optional`
+              Relative penalty stiffness. The default is ``1.0``.
+
+          **damping_scale_factor** : :class:`python:int`, :obj:`optional`
+              Damping scale factor on the default damping value.
+              The default is ``1.0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: merge_two_rigid_bodies(lead_rigidbody=0, constrained_rigidbody=0)
+
+      
+      Merge two rigid bodies.
+
+      One rigid body, called the constrained rigid body,
+      is merged into another rigid body, called the lead rigid body.
+
+      :Parameters:
+
+          **lead_rigidbody** : :class:`python:int`, :obj:`optional`
+              Part ID for the lead rigid body. The default is ``0``.
+
+          **constrained_rigidbody** : :class:`python:int`
+              Part ID for the constrained rigid body. The default is ``0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create a constraint.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

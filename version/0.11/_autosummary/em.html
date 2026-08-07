@@ -1,0 +1,1098 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Em keywords &#8212; PyDYNA</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=9e79609d" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../_static/documentation_options.js?v=1a9b1e2b"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/em';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://dyna.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.11';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Eos keywords" href="eos.html" />
+    <link rel="prev" title="Element keywords" href="element.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.11.0" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="Structures" />
+  <link rel="canonical" href="https://dyna.docs.pyansys.com/version/stable/_autosummary/em.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content"><style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are removed in version v0.11.0.</div>
+</aside>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyDYNA - Home"/>
+    <img src="../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyDYNA - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../changelog.html">
+    Release notes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyDYNA home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user-guide/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../changelog.html">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pydyna" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Keyword Categories</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="airbag.html">Airbag keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ale.html">Ale keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="battery.html">Battery keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary.html">Boundary keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="case.html">Case keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cese.html">Cese keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change.html">Change keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chemistry.html">Chemistry keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="component.html">Component keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constrained.html">Constrained keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Control keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="controller.html">Controller keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cosim.html">Cosim keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="damping.html">Damping keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define.html">Define keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deformable.html">Deformable keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delete.html">Delete keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dualcese.html">Dualcese keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ef.html">Ef keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="element.html">Element keywords</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Em keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eos.html">Eos keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fatigue.html">Fatigue keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frequency.html">Frequency keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="icfd.html">Icfd keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iga.html">Iga keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="include.html">Include keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initial.html">Initial keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration.html">Integration keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface.html">Interface keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keyword.html">Keyword keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="load.html">Load keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lso.html">Lso keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mat.html">Mat keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh.html">Mesh keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">Module keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node.html">Node keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="other.html">Other keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameter.html">Parameter keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="part.html">Part keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="particle.html">Particle keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="perturbation.html">Perturbation keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rail.html">Rail keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rigid.html">Rigid keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rigidwall.html">Rigidwall keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rve.html">Rve keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section.html">Section keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sensor.html">Sensor keywords</a></li>
+<li class="toctree-l1"><a class="reference internal" href="set.html">Set keywords</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../api/index.html" class="nav-link">API reference</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">All keyword class summaries</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Em keywords</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <span class="target" id="autodoc-em"></span><section id="em-keywords">
+<h1>Em keywords<a class="headerlink" href="#em-keywords" title="Link to this heading">#</a></h1>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_2daxi">
+<span id="em2daxi"></span><h2>Em2Daxi<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_2daxi" title="Link to this heading">#</a></h2>
+<p>Module providing the Em2Daxi class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_battery_randles">
+<span id="embatteryrandles"></span><h2>EmBatteryRandles<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_battery_randles" title="Link to this heading">#</a></h2>
+<p>Module providing the EmBatteryRandles class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_boundary">
+<span id="emboundary"></span><h2>EmBoundary<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_boundary" title="Link to this heading">#</a></h2>
+<p>Module providing the EmBoundary class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_boundary_prescribed">
+<span id="emboundaryprescribed"></span><h2>EmBoundaryPrescribed<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_boundary_prescribed" title="Link to this heading">#</a></h2>
+<p>Module providing the EmBoundaryPrescribed class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_circuit">
+<span id="emcircuit"></span><h2>EmCircuit<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_circuit" title="Link to this heading">#</a></h2>
+<p>Module providing the EmCircuit class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_circuit_connect">
+<span id="emcircuitconnect"></span><h2>EmCircuitConnect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_circuit_connect" title="Link to this heading">#</a></h2>
+<p>Module providing the EmCircuitConnect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_circuit_rogo">
+<span id="emcircuitrogo"></span><h2>EmCircuitRogo<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_circuit_rogo" title="Link to this heading">#</a></h2>
+<p>Module providing the EmCircuitRogo class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_circuit_source">
+<span id="emcircuitsource"></span><h2>EmCircuitSource<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_circuit_source" title="Link to this heading">#</a></h2>
+<p>Module providing the EmCircuitSource class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_contact">
+<span id="emcontact"></span><h2>EmContact<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_contact" title="Link to this heading">#</a></h2>
+<p>Module providing the EmContact class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_contact_resistance">
+<span id="emcontactresistance"></span><h2>EmContactResistance<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_contact_resistance" title="Link to this heading">#</a></h2>
+<p>Module providing the EmContactResistance class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_contact_subdom">
+<span id="emcontactsubdom"></span><h2>EmContactSubdom<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_contact_subdom" title="Link to this heading">#</a></h2>
+<p>Module providing the EmContactSubdom class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_control">
+<span id="emcontrol"></span><h2>EmControl<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control" title="Link to this heading">#</a></h2>
+<p>Module providing the EmControl class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_contact">
+<span id="emcontrolcontact"></span><h2>EmControlContact<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_contact" title="Link to this heading">#</a></h2>
+<p>Module providing the EmControlContact class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_coupling">
+<span id="emcontrolcoupling"></span><h2>EmControlCoupling<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_coupling" title="Link to this heading">#</a></h2>
+<p>Module providing the EmControlCoupling class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_ep">
+<span id="emcontrolep"></span><h2>EmControlEp<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_ep" title="Link to this heading">#</a></h2>
+<p>Module providing the EmControlEp class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_erosion">
+<span id="emcontrolerosion"></span><h2>EmControlErosion<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_erosion" title="Link to this heading">#</a></h2>
+<p>Module providing the EmControlErosion class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_magent">
+<span id="emcontrolmagent"></span><h2>EmControlMagent<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_magent" title="Link to this heading">#</a></h2>
+<p>Module providing the EmControlMagent class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_solution">
+<span id="emcontrolsolution"></span><h2>EmControlSolution<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_solution" title="Link to this heading">#</a></h2>
+<p>Module providing the EmControlSolution class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_switch">
+<span id="emcontrolswitch"></span><h2>EmControlSwitch<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_switch" title="Link to this heading">#</a></h2>
+<p>Module providing the EmControlSwitch class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_switch_contact">
+<span id="emcontrolswitchcontact"></span><h2>EmControlSwitchContact<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_switch_contact" title="Link to this heading">#</a></h2>
+<p>Module providing the EmControlSwitchContact class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_timestep">
+<span id="emcontroltimestep"></span><h2>EmControlTimestep<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_timestep" title="Link to this heading">#</a></h2>
+<p>Module providing the EmControlTimestep class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_circuit">
+<span id="emdatabasecircuit"></span><h2>EmDatabaseCircuit<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_circuit" title="Link to this heading">#</a></h2>
+<p>Module providing the EmDatabaseCircuit class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_circuit0d">
+<span id="emdatabasecircuit0d"></span><h2>EmDatabaseCircuit0D<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_circuit0d" title="Link to this heading">#</a></h2>
+<p>Module providing the EmDatabaseCircuit0D class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_elout">
+<span id="emdatabaseelout"></span><h2>EmDatabaseElout<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_elout" title="Link to this heading">#</a></h2>
+<p>Module providing the EmDatabaseElout class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_fieldline">
+<span id="emdatabasefieldline"></span><h2>EmDatabaseFieldline<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_fieldline" title="Link to this heading">#</a></h2>
+<p>Module providing the EmDatabaseFieldline class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_globalenergy">
+<span id="emdatabaseglobalenergy"></span><h2>EmDatabaseGlobalenergy<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_globalenergy" title="Link to this heading">#</a></h2>
+<p>Module providing the EmDatabaseGlobalenergy class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_nodout">
+<span id="emdatabasenodout"></span><h2>EmDatabaseNodout<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_nodout" title="Link to this heading">#</a></h2>
+<p>Module providing the EmDatabaseNodout class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_partdata">
+<span id="emdatabasepartdata"></span><h2>EmDatabasePartdata<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_partdata" title="Link to this heading">#</a></h2>
+<p>Module providing the EmDatabasePartdata class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_pointout">
+<span id="emdatabasepointout"></span><h2>EmDatabasePointout<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_pointout" title="Link to this heading">#</a></h2>
+<p>Module providing the EmDatabasePointout class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_rogo">
+<span id="emdatabaserogo"></span><h2>EmDatabaseRogo<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_rogo" title="Link to this heading">#</a></h2>
+<p>Module providing the EmDatabaseRogo class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_timestep">
+<span id="emdatabasetimestep"></span><h2>EmDatabaseTimestep<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_timestep" title="Link to this heading">#</a></h2>
+<p>Module providing the EmDatabaseTimestep class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_eos_burgess">
+<span id="emeosburgess"></span><h2>EmEosBurgess<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_eos_burgess" title="Link to this heading">#</a></h2>
+<p>Module providing the EmEosBurgess class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_eos_meadon">
+<span id="emeosmeadon"></span><h2>EmEosMeadon<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_eos_meadon" title="Link to this heading">#</a></h2>
+<p>Module providing the EmEosMeadon class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_eos_permeability">
+<span id="emeospermeability"></span><h2>EmEosPermeability<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_eos_permeability" title="Link to this heading">#</a></h2>
+<p>Module providing the EmEosPermeability class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_eos_tabulated1">
+<span id="emeostabulated1"></span><h2>EmEosTabulated1<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_eos_tabulated1" title="Link to this heading">#</a></h2>
+<p>Module providing the EmEosTabulated1 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_eos_tabulated2">
+<span id="emeostabulated2"></span><h2>EmEosTabulated2<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_eos_tabulated2" title="Link to this heading">#</a></h2>
+<p>Module providing the EmEosTabulated2 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_definefunction">
+<span id="emepcellmodeldefinefunction"></span><h2>EmEpCellmodelDefinefunction<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_definefunction" title="Link to this heading">#</a></h2>
+<p>Module providing the EmEpCellmodelDefinefunction class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_fentonkarma">
+<span id="emepcellmodelfentonkarma"></span><h2>EmEpCellmodelFentonkarma<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_fentonkarma" title="Link to this heading">#</a></h2>
+<p>Module providing the EmEpCellmodelFentonkarma class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_fitzhughnagumo">
+<span id="emepcellmodelfitzhughnagumo"></span><h2>EmEpCellmodelFitzhughnagumo<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_fitzhughnagumo" title="Link to this heading">#</a></h2>
+<p>Module providing the EmEpCellmodelFitzhughnagumo class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_tentusscher">
+<span id="emepcellmodeltentusscher"></span><h2>EmEpCellmodelTentusscher<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_tentusscher" title="Link to this heading">#</a></h2>
+<p>Module providing the EmEpCellmodelTentusscher class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_tomek">
+<span id="emepcellmodeltomek"></span><h2>EmEpCellmodelTomek<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_tomek" title="Link to this heading">#</a></h2>
+<p>Module providing the EmEpCellmodelTomek class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_usermat">
+<span id="emepcellmodelusermat"></span><h2>EmEpCellmodelUsermat<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_usermat" title="Link to this heading">#</a></h2>
+<p>Module providing the EmEpCellmodelUsermat class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_createfiberorientation">
+<span id="emepcreatefiberorientation"></span><h2>EmEpCreatefiberorientation<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_createfiberorientation" title="Link to this heading">#</a></h2>
+<p>Module providing the EmEpCreatefiberorientation class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_ekg">
+<span id="emepekg"></span><h2>EmEpEkg<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_ekg" title="Link to this heading">#</a></h2>
+<p>Module providing the EmEpEkg class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_fiberinitial">
+<span id="emepfiberinitial"></span><h2>EmEpFiberinitial<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_fiberinitial" title="Link to this heading">#</a></h2>
+<p>Module providing the EmEpFiberinitial class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_purkinje_network">
+<span id="emeppurkinjenetwork"></span><h2>EmEpPurkinjeNetwork<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_purkinje_network" title="Link to this heading">#</a></h2>
+<p>Module providing the EmEpPurkinjeNetwork class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_external_field">
+<span id="emexternalfield"></span><h2>EmExternalField<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_external_field" title="Link to this heading">#</a></h2>
+<p>Module providing the EmExternalField class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_isopotential">
+<span id="emisopotential"></span><h2>EmIsopotential<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_isopotential" title="Link to this heading">#</a></h2>
+<p>Module providing the EmIsopotential class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_isopotential_connect">
+<span id="emisopotentialconnect"></span><h2>EmIsopotentialConnect<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_isopotential_connect" title="Link to this heading">#</a></h2>
+<p>Module providing the EmIsopotentialConnect class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_isopotential_rogo">
+<span id="emisopotentialrogo"></span><h2>EmIsopotentialRogo<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_isopotential_rogo" title="Link to this heading">#</a></h2>
+<p>Module providing the EmIsopotentialRogo class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_001">
+<span id="emmat001"></span><h2>EmMat001<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_001" title="Link to this heading">#</a></h2>
+<p>Module providing the EmMat001 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_002">
+<span id="emmat002"></span><h2>EmMat002<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_002" title="Link to this heading">#</a></h2>
+<p>Module providing the EmMat002 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_003">
+<span id="emmat003"></span><h2>EmMat003<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_003" title="Link to this heading">#</a></h2>
+<p>Module providing the EmMat003 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_004">
+<span id="emmat004"></span><h2>EmMat004<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_004" title="Link to this heading">#</a></h2>
+<p>Module providing the EmMat004 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_005">
+<span id="emmat005"></span><h2>EmMat005<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_005" title="Link to this heading">#</a></h2>
+<p>Module providing the EmMat005 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_006">
+<span id="emmat006"></span><h2>EmMat006<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_006" title="Link to this heading">#</a></h2>
+<p>Module providing the EmMat006 class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_output">
+<span id="emoutput"></span><h2>EmOutput<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_output" title="Link to this heading">#</a></h2>
+<p>Module providing the EmOutput class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_permanent_magnet">
+<span id="empermanentmagnet"></span><h2>EmPermanentMagnet<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_permanent_magnet" title="Link to this heading">#</a></h2>
+<p>Module providing the EmPermanentMagnet class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_point_set">
+<span id="empointset"></span><h2>EmPointSet<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_point_set" title="Link to this heading">#</a></h2>
+<p>Module providing the EmPointSet class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_batmac">
+<span id="emrandlesbatmac"></span><h2>EmRandlesBatmac<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_batmac" title="Link to this heading">#</a></h2>
+<p>Module providing the EmRandlesBatmac class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_exothermic_reaction">
+<span id="emrandlesexothermicreaction"></span><h2>EmRandlesExothermicReaction<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_exothermic_reaction" title="Link to this heading">#</a></h2>
+<p>Module providing the EmRandlesExothermicReaction class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_layered">
+<span id="emrandleslayered"></span><h2>EmRandlesLayered<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_layered" title="Link to this heading">#</a></h2>
+<p>Module providing the EmRandlesLayered class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_meshless">
+<span id="emrandlesmeshless"></span><h2>EmRandlesMeshless<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_meshless" title="Link to this heading">#</a></h2>
+<p>Module providing the EmRandlesMeshless class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_short">
+<span id="emrandlesshort"></span><h2>EmRandlesShort<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_short" title="Link to this heading">#</a></h2>
+<p>Module providing the EmRandlesShort class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_solid">
+<span id="emrandlessolid"></span><h2>EmRandlesSolid<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_solid" title="Link to this heading">#</a></h2>
+<p>Module providing the EmRandlesSolid class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_tshell">
+<span id="emrandlestshell"></span><h2>EmRandlesTshell<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_tshell" title="Link to this heading">#</a></h2>
+<p>Module providing the EmRandlesTshell class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_rotation_axis">
+<span id="emrotationaxis"></span><h2>EmRotationAxis<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_rotation_axis" title="Link to this heading">#</a></h2>
+<p>Module providing the EmRotationAxis class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_solver_bem">
+<span id="emsolverbem"></span><h2>EmSolverBem<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_solver_bem" title="Link to this heading">#</a></h2>
+<p>Module providing the EmSolverBem class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_solver_bemmat">
+<span id="emsolverbemmat"></span><h2>EmSolverBemmat<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_solver_bemmat" title="Link to this heading">#</a></h2>
+<p>Module providing the EmSolverBemmat class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_solver_fem">
+<span id="emsolverfem"></span><h2>EmSolverFem<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_solver_fem" title="Link to this heading">#</a></h2>
+<p>Module providing the EmSolverFem class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_solver_fembem">
+<span id="emsolverfembem"></span><h2>EmSolverFembem<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_solver_fembem" title="Link to this heading">#</a></h2>
+<p>Module providing the EmSolverFembem class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_solver_fembem_monolithic">
+<span id="emsolverfembemmonolithic"></span><h2>EmSolverFembemMonolithic<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_solver_fembem_monolithic" title="Link to this heading">#</a></h2>
+<p>Module providing the EmSolverFembemMonolithic class.</p>
+</section>
+<section id="module-ansys.dyna.core.keywords.keyword_classes.auto.em_voltage_drop">
+<span id="emvoltagedrop"></span><h2>EmVoltageDrop<a class="headerlink" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_voltage_drop" title="Link to this heading">#</a></h2>
+<p>Module providing the EmVoltageDrop class.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_2daxi">Em2Daxi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_battery_randles">EmBatteryRandles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_boundary">EmBoundary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_boundary_prescribed">EmBoundaryPrescribed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_circuit">EmCircuit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_circuit_connect">EmCircuitConnect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_circuit_rogo">EmCircuitRogo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_circuit_source">EmCircuitSource</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_contact">EmContact</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_contact_resistance">EmContactResistance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_contact_subdom">EmContactSubdom</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control">EmControl</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_contact">EmControlContact</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_coupling">EmControlCoupling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_ep">EmControlEp</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_erosion">EmControlErosion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_magent">EmControlMagent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_solution">EmControlSolution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_switch">EmControlSwitch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_switch_contact">EmControlSwitchContact</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_control_timestep">EmControlTimestep</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_circuit">EmDatabaseCircuit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_circuit0d">EmDatabaseCircuit0D</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_elout">EmDatabaseElout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_fieldline">EmDatabaseFieldline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_globalenergy">EmDatabaseGlobalenergy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_nodout">EmDatabaseNodout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_partdata">EmDatabasePartdata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_pointout">EmDatabasePointout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_rogo">EmDatabaseRogo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_database_timestep">EmDatabaseTimestep</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_eos_burgess">EmEosBurgess</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_eos_meadon">EmEosMeadon</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_eos_permeability">EmEosPermeability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_eos_tabulated1">EmEosTabulated1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_eos_tabulated2">EmEosTabulated2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_definefunction">EmEpCellmodelDefinefunction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_fentonkarma">EmEpCellmodelFentonkarma</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_fitzhughnagumo">EmEpCellmodelFitzhughnagumo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_tentusscher">EmEpCellmodelTentusscher</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_tomek">EmEpCellmodelTomek</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_cellmodel_usermat">EmEpCellmodelUsermat</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_createfiberorientation">EmEpCreatefiberorientation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_ekg">EmEpEkg</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_fiberinitial">EmEpFiberinitial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_ep_purkinje_network">EmEpPurkinjeNetwork</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_external_field">EmExternalField</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_isopotential">EmIsopotential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_isopotential_connect">EmIsopotentialConnect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_isopotential_rogo">EmIsopotentialRogo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_001">EmMat001</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_002">EmMat002</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_003">EmMat003</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_004">EmMat004</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_005">EmMat005</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_mat_006">EmMat006</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_output">EmOutput</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_permanent_magnet">EmPermanentMagnet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_point_set">EmPointSet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_batmac">EmRandlesBatmac</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_exothermic_reaction">EmRandlesExothermicReaction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_layered">EmRandlesLayered</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_meshless">EmRandlesMeshless</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_short">EmRandlesShort</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_solid">EmRandlesSolid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_randles_tshell">EmRandlesTshell</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_rotation_axis">EmRotationAxis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_solver_bem">EmSolverBem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_solver_bemmat">EmSolverBemmat</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_solver_fem">EmSolverFem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_solver_fembem">EmSolverFembem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_solver_fembem_monolithic">EmSolverFembemMonolithic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-ansys.dyna.core.keywords.keyword_classes.auto.em_voltage_drop">EmVoltageDrop</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="None">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/em.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.6.4. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

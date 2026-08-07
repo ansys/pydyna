@@ -1,0 +1,214 @@
+ansys.dyna.core.keywords.keyword_classes.manual.initial_strain_shell_version_0_9_1.InitialStrainShellLegacyCardSet
+==================================================================================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.initial_strain_shell_version_0_9_1.InitialStrainShellLegacyCardSet(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.cards.Cards`
+
+
+   
+   CardSet.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: eid
+      :type: Optional[int]
+
+
+      
+      Get or set the Shell element ID.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: nplane
+      :type: Optional[int]
+
+
+      
+      Get or set the Number of in#plane integration points being output.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: nthick
+      :type: Optional[int]
+
+
+      
+      Get or set the Number of integration points through the thickness.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: large
+      :type: int
+
+
+      
+      Get or set the Large format flag:
+      EQ.0:   off
+      EQ.1 : on.Each strain field is twice as long for higher precision.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: ilocal
+      :type: int
+
+
+      
+      Get or set the Flag for coordinate system of strain components:
+      EQ.0:   global,
+      EQ.1 : local(not supported).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: strains
+      :type: pandas.DataFrame
+
+
+      
+      Get the table of strains.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: parent
+      :type: ansys.dyna.core.lib.keyword_base.KeywordBase
+
+
+      
+      Get the parent keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

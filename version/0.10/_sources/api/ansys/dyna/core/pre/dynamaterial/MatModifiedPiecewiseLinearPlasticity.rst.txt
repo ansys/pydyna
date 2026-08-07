@@ -1,0 +1,108 @@
+ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity
+=====================================================================
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity(mass_density=0, young_modulus=0, poisson_ratio=0, yield_stress=0, tangent_modulus=0, plastic_strain_to_failure=0, integration_points_number=0)
+
+   
+   Defines an elasto-plastic material supporting an arbitrary stress.
+
+   The arbitrary stress is defined as a function of strain curve and arbitrary
+   strain rate dependency.
+
+   :Parameters:
+
+       **mass_density**
+           ..
+
+       **young_modulus**
+           ..
+
+       **poisson_ratio**
+           ..
+
+       **yield_stress**
+           ..
+
+       **tangent_modulus**
+           ..
+
+       **plastic_strain_to_failure**
+           ..
+
+       **integration_points_number**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+      :value: 0
+
+
+
+   .. py:attribute:: e
+      :value: 0
+
+
+
+   .. py:attribute:: pr
+      :value: 0
+
+
+
+   .. py:attribute:: sigy
+      :value: 0
+
+
+
+   .. py:attribute:: etan
+      :value: 0
+
+
+
+   .. py:attribute:: fail
+      :value: 0
+
+
+
+   .. py:attribute:: numint
+      :value: 0
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a modified piecewise linear plasticity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

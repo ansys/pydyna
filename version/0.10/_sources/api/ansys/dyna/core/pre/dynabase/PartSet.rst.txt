@@ -1,0 +1,129 @@
+ansys.dyna.core.pre.dynabase.PartSet
+====================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.PartSet(parts=[])
+
+   Bases: :py:obj:`BaseSet`
+
+
+   
+   Defines a set of parts with optional attributes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: parts
+      :value: []
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a part set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: num()
+
+      
+      Get the number of parts in the part set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: pos(pos)
+
+      
+      Get a part ID by position.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_pid()
+
+      
+      Get the part ID.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

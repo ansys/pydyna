@@ -1,0 +1,7 @@
+ansys.dyna.core.pre.dynalogging.PymapdlPercentStyle
+===================================================
+
+.. py:class:: ansys.dyna.core.pre.dynalogging.PymapdlPercentStyle(fmt, *, defaults=None)
+
+   Bases: :py:obj:`logging.PercentStyle`
+

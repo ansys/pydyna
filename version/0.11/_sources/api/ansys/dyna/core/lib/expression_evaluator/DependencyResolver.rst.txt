@@ -1,0 +1,61 @@
+ansys.dyna.core.lib.expression_evaluator.DependencyResolver
+===========================================================
+
+.. py:class:: ansys.dyna.core.lib.expression_evaluator.DependencyResolver
+
+   
+   Resolves expression dependencies using topological sort (Kahn's algorithm).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: resolve(expressions: List[Tuple[str, str, str]]) -> List[Tuple[str, str, str]]
+
+      
+      Order expressions by dependency using topological sort.
+
+
+      :Parameters:
+
+          **expressions** : :class:`python:list` :obj:`of` :class:`python:tuple`
+              (param_type, param_name, expression) tuples.
+
+
+
+      :Returns:
+
+          :class:`python:list` :obj:`of` :class:`python:tuple`
+              Expressions ordered for evaluation (dependencies first).
+
+
+
+
+      :Raises:
+
+          :obj:`ValueError`
+              If circular dependencies detected.
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

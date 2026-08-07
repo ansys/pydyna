@@ -1,0 +1,28 @@
+ansys.dyna.core.lib.card_position
+=================================
+
+.. py:module:: ansys.dyna.core.lib.card_position
+
+.. autoapi-nested-parse::
+
+   Card position type for option card ordering.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/card_position/CardPlacement
+   /api/ansys/dyna/core/lib/card_position/CardPosition
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.card_position.CardPlacement
+   ansys.dyna.core.lib.card_position.CardPosition
+
+

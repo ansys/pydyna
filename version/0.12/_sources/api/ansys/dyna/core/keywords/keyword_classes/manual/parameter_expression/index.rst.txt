@@ -1,0 +1,34 @@
+ansys.dyna.core.keywords.keyword_classes.manual.parameter_expression
+====================================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual.parameter_expression
+
+.. autoapi-nested-parse::
+
+   Custom PARAMETER_EXPRESSION keywords with raw parsing.
+
+   Expression keywords contain &param references as expression operands,
+   not parameter substitutions. These classes override _read_data to use
+   raw parsing from lib/parameter_keyword_helpers.py.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/parameter_expression/ParameterExpression
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/parameter_expression/ParameterExpressionLocal
+   /api/ansys/dyna/core/keywords/keyword_classes/manual/parameter_expression/ParameterExpressionNoecho
+
+.. autoapisummary::
+
+   ansys.dyna.core.keywords.keyword_classes.manual.parameter_expression.ParameterExpression
+   ansys.dyna.core.keywords.keyword_classes.manual.parameter_expression.ParameterExpressionLocal
+   ansys.dyna.core.keywords.keyword_classes.manual.parameter_expression.ParameterExpressionNoecho
+
+

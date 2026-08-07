@@ -1,0 +1,117 @@
+ansys.dyna.core.lib.kwd_line_formatter
+======================================
+
+.. py:module:: ansys.dyna.core.lib.kwd_line_formatter
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.kwd_line_formatter.read_line
+   ansys.dyna.core.lib.kwd_line_formatter.at_end_of_keyword
+   ansys.dyna.core.lib.kwd_line_formatter.buffer_to_lines
+   ansys.dyna.core.lib.kwd_line_formatter.load_dataline
+
+
+Module Contents
+---------------
+
+.. py:function:: read_line(buf: TextIO, skip_comment=True) -> Tuple[str, bool]
+
+   
+   Read and return the line, and a flag on whether to stop reading.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: at_end_of_keyword(buf: TextIO) -> bool
+
+   
+   Return whether the buffer is at the end of the keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: buffer_to_lines(buf: TextIO, max_num_lines: int = -1) -> List[str]
+
+   
+   Read from the buffer into a list of string.
+   buf: buffer to read from
+   max_num_lines: number of lines to read. -1 means no limit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: load_dataline(spec: List[tuple], line_data: str, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet = None) -> List
+
+   
+   loads a keyword card line with fixed column offsets and width from string
+   spec: list of tuples representing the (offset, width, type) of each field
+   type can be a Flag which represents the True and False value
+   line_data: string with keyword data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

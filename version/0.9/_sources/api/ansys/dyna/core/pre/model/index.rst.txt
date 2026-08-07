@@ -1,0 +1,26 @@
+ansys.dyna.core.pre.model
+=========================
+
+.. py:module:: ansys.dyna.core.pre.model
+
+.. autoapi-nested-parse::
+
+   Module containing the managing logic of the PyDYNA model.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/pre/model/Model
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.model.Model
+
+

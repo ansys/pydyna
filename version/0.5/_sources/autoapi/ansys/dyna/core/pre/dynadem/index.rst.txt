@@ -1,0 +1,293 @@
+ansys.dyna.core.pre.dynadem
+===========================
+
+.. py:module:: ansys.dyna.core.pre.dynadem
+
+.. autoapi-nested-parse::
+
+   DEM API
+   =======
+
+   Module for creating a DEM DYNA input deck.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynadem.DynaDEM
+   ansys.dyna.core.pre.dynadem.DEMAnalysis
+
+
+Module Contents
+---------------
+
+.. py:class:: DynaDEM
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.DynaBase`
+
+
+   
+   Contains methods for creating a keyword related to a discrete element method.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: set_des(ndamp=0.0, tdamp=0.0, frics=0.0, fricr=0.0, normk=0.01, sheark=0.2857)
+
+      
+      Set global control parameters for discrete element spheres.
+
+
+      :Parameters:
+
+          **ndamp** : :class:`python:float`, :obj:`optional`
+              Normal damping coefficient. The default is ``0.0``.
+
+          **tdamp** : :class:`python:float`, :obj:`optional`
+              Tangential damping coefficient. The default is ``0.0``.
+
+          **frics** : :class:`python:float`, :obj:`optional`
+              Static coefficient of friction. The default is ``0.0``.
+              
+              - EQ.0: 3 DOF
+              - NE.0: 6 DOF
+
+          **fricr** : :class:`python:float`, :obj:`optional`
+              Rolling friction coefficient. The default is ``0.0``.
+
+          **normk** : :class:`python:float`, :obj:`optional`
+              Scale factor of the normal spring constant.  The default is ``0.01``.
+
+          **sheark** : :class:`python:float`, :obj:`optional`
+              Ratio between the sheark/normk. The default is ``0.2857``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_define_de_mesh_surface(sid, type, despid, desxid, nquad=1, nsid=0, rsf=1.0)
+
+      
+      Create discrete element sphere (DES) elements on the surface of shell elements.
+
+
+      :Parameters:
+
+          **sid** : :class:`python:int`
+              Part or part set ID for the region of the mesh to place DES elements on.
+
+          **type** : :class:`python:int`
+              SID type:
+              
+              - type=0: Part set ID
+              - type=1: Part ID
+
+          **despid** : :class:`python:int`
+              Part ID for the generated DES elements.
+
+          **desxid** : :class:`python:int`
+              Section ID for the generated DES elements.
+
+          **nquad** : :class:`python:int`, :obj:`optional`
+              Number of equally spaced DES elements created on a shell element in each
+              local shell direction. The default is ``1``.
+
+          **nsid** : :class:`python:int`, :obj:`optional`
+              If defined, this card creates a node set with ID NSID for the nodes generated
+              by this card. The default is ``0``.
+
+          **rsf** : :class:`python:float`, :obj:`optional`
+              Scale factor for determining the DES radius. The default is ``1.0``.
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: save_file()
+
+      
+      Save keyword files.
+
+
+
+
+
+      :Returns:
+
+          :ref:`bool <python:bltin-boolean-values>`
+              ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: DEMAnalysis
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.BaseObj`
+
+
+   
+   Activates DEM analysis and defines associated control parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: defined_des
+      :value: False
+
+
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: type
+      :value: 'analysis_dem'
+
+
+
+   .. py:method:: set_des(normal_damping_coeff=0.0, tangential_damping_coeff=0.0, static_friction_coeff=0.0, rolling_friction_coeff=0.0, normal_spring_constant_sf=0.01, ratio=0.2857)
+
+      
+      Set global control parameters for discrete element spheres.
+
+
+      :Parameters:
+
+          **normal_damping_coeff** : :class:`python:float`, :obj:`optional`
+              Normal damping coefficient. The default value is ``0.0``.
+
+          **tangential_damping_coeff** : :class:`python:float`, :obj:`optional`
+              Tangential damping coefficient. The default value is ``0.0``.
+
+          **static_friction_coeff** : :class:`python:float`, :obj:`optional`
+              Static coefficient of friction. The default is ``0.0``.
+
+          **rolling_friction_coeff** : :class:`python:float`, :obj:`optional`
+              Rolling coefficient of friction. The default is ``0.0``.
+
+          **normal_spring_constant_sf** : :class:`python:float`, :obj:`optional`
+              Normal spring constant. The default is ``0.01``.
+
+          **ratio** : :class:`python:float`, :obj:`optional`
+              Ratio. The default is ``0.2857``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create a DEM analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

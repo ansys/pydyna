@@ -1,0 +1,35 @@
+ansys.dyna.core.run.options.Precision
+=====================================
+
+.. py:class:: ansys.dyna.core.run.options.Precision
+
+   
+   Precision for LS-DYNA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: SINGLE
+      :value: 0
+
+
+
+   .. py:attribute:: DOUBLE
+      :value: 1
+
+

@@ -1,0 +1,33 @@
+ansys.dyna.core.keywords.keyword_classes.manual.section_tshell.SectionTShell
+============================================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.section_tshell.SectionTShell(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.keywords.keyword_classes.auto.section.section_tshell.SectionTShell`
+
+
+   
+   DYNA SECTION_TSHELL keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ERR
+      :value: 'nip must be equal to a non-negative integer if icomp is 1'
+
+

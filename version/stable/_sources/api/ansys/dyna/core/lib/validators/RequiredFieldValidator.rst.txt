@@ -1,0 +1,89 @@
+ansys.dyna.core.lib.validators.RequiredFieldValidator
+=====================================================
+
+.. py:class:: ansys.dyna.core.lib.validators.RequiredFieldValidator(keyword_pattern: str, field_name: str, severity: ValidationSeverity = ValidationSeverity.ERROR)
+
+   Bases: :py:obj:`Validator`
+
+
+   
+   Validator that checks for required fields in keywords.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: keyword_pattern
+
+
+   .. py:attribute:: field_name
+
+
+   .. py:method:: get_name() -> str
+
+      
+      Get the name of this validator.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: validate(deck: ansys.dyna.core.lib.deck.Deck, result: ValidationResult) -> None
+
+      
+      Validate that required field exists and is not None.
+
+
+      :Parameters:
+
+          **deck** : :obj:`Deck`
+              The deck to validate.
+
+          **result** : :obj:`ValidationResult`
+              Result object to accumulate validation errors.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

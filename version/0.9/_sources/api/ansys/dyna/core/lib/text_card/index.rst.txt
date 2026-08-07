@@ -1,0 +1,19 @@
+ansys.dyna.core.lib.text_card
+=============================
+
+.. py:module:: ansys.dyna.core.lib.text_card
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/text_card/TextCard
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.text_card.TextCard
+
+

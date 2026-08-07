@@ -1,0 +1,26 @@
+ansys.dyna.core.utils.download_utilities
+========================================
+
+.. py:module:: ansys.dyna.core.utils.download_utilities
+
+.. autoapi-nested-parse::
+
+   Module provides a thread-safe singleton download manager for handling example file downloads.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/utils/download_utilities/DownloadManager
+
+.. autoapisummary::
+
+   ansys.dyna.core.utils.download_utilities.DownloadManager
+
+

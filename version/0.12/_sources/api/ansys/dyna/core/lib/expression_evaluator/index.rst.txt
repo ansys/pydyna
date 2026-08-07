@@ -1,0 +1,95 @@
+ansys.dyna.core.lib.expression_evaluator
+========================================
+
+.. py:module:: ansys.dyna.core.lib.expression_evaluator
+
+.. autoapi-nested-parse::
+
+   Expression evaluator for LS-DYNA PARAMETER_EXPRESSION keywords.
+
+   Provides AST-based safe evaluation of arithmetic expressions with:
+   - Dependency resolution via topological sort (Kahn's algorithm)
+   - LS-DYNA function support (sin, cos, sqrt, abs, etc.)
+   - Parameter reference handling (param, &param, -&param)
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.expression_evaluator.logger
+   ansys.dyna.core.lib.expression_evaluator.LSDYNA_FUNCTIONS
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/expression_evaluator/ExpressionEvaluator
+   /api/ansys/dyna/core/lib/expression_evaluator/DependencyResolver
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.expression_evaluator.ExpressionEvaluator
+   ansys.dyna.core.lib.expression_evaluator.DependencyResolver
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.expression_evaluator.evaluate_parameter_expressions
+
+
+Module Contents
+---------------
+
+.. py:data:: logger
+
+.. py:data:: LSDYNA_FUNCTIONS
+
+.. py:function:: evaluate_parameter_expressions(parameter_set: ansys.dyna.core.lib.parameters.ParameterSet, expressions: List[Tuple[str, str, str]]) -> None
+
+   
+   Evaluate PARAMETER_EXPRESSION keywords and add results to parameter set.
+
+   Resolves dependencies, evaluates in order, adds results to parameter_set.
+
+   :Parameters:
+
+       **parameter_set** : :obj:`ParameterSet`
+           Target parameter set.
+
+       **expressions** : :class:`python:list` :obj:`of` :class:`python:tuple`
+           (param_type, param_name, expression) tuples.
+
+
+
+
+
+
+
+   :Raises:
+
+       :obj:`ValueError`
+           If circular dependencies or invalid expressions.
+
+       :obj:`KeyError`
+           If undefined parameter referenced.
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

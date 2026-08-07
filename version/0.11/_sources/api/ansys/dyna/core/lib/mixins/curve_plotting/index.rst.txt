@@ -1,0 +1,39 @@
+ansys.dyna.core.lib.mixins.curve_plotting
+=========================================
+
+.. py:module:: ansys.dyna.core.lib.mixins.curve_plotting
+
+.. autoapi-nested-parse::
+
+   Mixin providing curve plotting functionality for DefineCurve classes.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.mixins.curve_plotting.logger
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/mixins/curve_plotting/CurvePlottingMixin
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.mixins.curve_plotting.CurvePlottingMixin
+
+
+Module Contents
+---------------
+
+.. py:data:: logger
+
