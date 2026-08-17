@@ -22,8 +22,11 @@
 
 """Module providing the PartCompositeIgaShellLongContact class."""
 import typing
+import pandas as pd
+
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.table_card import TableCard
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.hourglass.hourglass import Hourglass
@@ -54,17 +57,6 @@ _PARTCOMPOSITEIGASHELLLONGCONTACT_CARD2 = (
     FieldSchema("cparm8", float, 70, 10, None),
 )
 
-_PARTCOMPOSITEIGASHELLLONGCONTACT_CARD3 = (
-    FieldSchema("mid1", int, 0, 10, None),
-    FieldSchema("thick1", float, 10, 10, None),
-    FieldSchema("b1", float, 20, 10, None),
-    FieldSchema("tmid1", int, 30, 10, None),
-    FieldSchema("plyid", int, 40, 10, None),
-    FieldSchema("shrfac", float, 50, 10, None),
-    FieldSchema("unused", int, 60, 10, None),
-    FieldSchema("unused", int, 70, 10, None),
-)
-
 class PartCompositeIgaShellLongContact(KeywordBase):
     """DYNA PART_COMPOSITE_IGA_SHELL_LONG_CONTACT keyword"""
 
@@ -91,8 +83,19 @@ class PartCompositeIgaShellLongContact(KeywordBase):
                 _PARTCOMPOSITEIGASHELLLONGCONTACT_CARD2,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _PARTCOMPOSITEIGASHELLLONGCONTACT_CARD3,
+            TableCard(
+                [
+                    Field("mid1", int, 0, 10, None),
+                    Field("thick1", float, 10, 10, None),
+                    Field("b1", float, 20, 10, None),
+                    Field("tmid1", int, 30, 10, None),
+                    Field("plyid", int, 40, 10, None),
+                    Field("shrfac", float, 50, 10, None),
+                    Field("unused", int, 60, 10, None),
+                    Field("unused", int, 70, 10, None),
+                ],
+                None,
+                name="layers",
                 **kwargs,
             ),
         ]
@@ -276,70 +279,14 @@ class PartCompositeIgaShellLongContact(KeywordBase):
         self._cards[2].set_value("cparm8", value)
 
     @property
-    def mid1(self) -> typing.Optional[int]:
-        """Get or set the Material ID of integration point i, see *MAT_   Section
-        """ # nopep8
-        return self._cards[3].get_value("mid1")
+    def layers(self) -> pd.DataFrame:
+        """Get the table of layers."""
+        return self._cards[3].table
 
-    @mid1.setter
-    def mid1(self, value: int) -> None:
-        """Set the mid1 property."""
-        self._cards[3].set_value("mid1", value)
-
-    @property
-    def thick1(self) -> typing.Optional[float]:
-        """Get or set the Thickness of integration point .
-        """ # nopep8
-        return self._cards[3].get_value("thick1")
-
-    @thick1.setter
-    def thick1(self, value: float) -> None:
-        """Set the thick1 property."""
-        self._cards[3].set_value("thick1", value)
-
-    @property
-    def b1(self) -> typing.Optional[float]:
-        """Get or set the Material angle of integration point i.
-        """ # nopep8
-        return self._cards[3].get_value("b1")
-
-    @b1.setter
-    def b1(self, value: float) -> None:
-        """Set the b1 property."""
-        self._cards[3].set_value("b1", value)
-
-    @property
-    def tmid1(self) -> typing.Optional[int]:
-        """Get or set the Thermal ID
-        """ # nopep8
-        return self._cards[3].get_value("tmid1")
-
-    @tmid1.setter
-    def tmid1(self, value: int) -> None:
-        """Set the tmid1 property."""
-        self._cards[3].set_value("tmid1", value)
-
-    @property
-    def plyid(self) -> typing.Optional[int]:
-        """Get or set the Ply ID of integration point i (for post-processing purposes)
-        """ # nopep8
-        return self._cards[3].get_value("plyid")
-
-    @plyid.setter
-    def plyid(self, value: int) -> None:
-        """Set the plyid property."""
-        self._cards[3].set_value("plyid", value)
-
-    @property
-    def shrfac(self) -> typing.Optional[float]:
-        """Get or set the Transverse shear scale factor
-        """ # nopep8
-        return self._cards[3].get_value("shrfac")
-
-    @shrfac.setter
-    def shrfac(self, value: float) -> None:
-        """Set the shrfac property."""
-        self._cards[3].set_value("shrfac", value)
+    @layers.setter
+    def layers(self, df: pd.DataFrame):
+        """Set layers from the dataframe df"""
+        self._cards[3].table = df
 
     @property
     def mid1_link(self) -> typing.Optional[KeywordBase]:

@@ -631,6 +631,162 @@
             "include_card": 0
         }
     },
+    "PART_COMPOSITE": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "layers",
+                    "ref": "layers_card"
+                }
+            ]
+        },
+        "labels": {
+            "layers_card": 2
+        }
+    },
+    "PART_COMPOSITE_CONTACT": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "layers",
+                    "ref": "layers_card"
+                }
+            ]
+        },
+        "labels": {
+            "layers_card": 3
+        }
+    },
+    "PART_COMPOSITE_IGA_SHELL": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "layers",
+                    "ref": "layers_card"
+                }
+            ]
+        },
+        "labels": {
+            "layers_card": 2
+        }
+    },
+    "PART_COMPOSITE_IGA_SHELL_CONTACT": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "layers",
+                    "ref": "layers_card"
+                }
+            ]
+        },
+        "labels": {
+            "layers_card": 3
+        }
+    },
+    "PART_COMPOSITE_IGA_SHELL_LONG": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "layers",
+                    "ref": "layers_card"
+                }
+            ]
+        },
+        "labels": {
+            "layers_card": 2
+        }
+    },
+    "PART_COMPOSITE_IGA_SHELL_LONG_CONTACT": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "layers",
+                    "ref": "layers_card"
+                }
+            ]
+        },
+        "labels": {
+            "layers_card": 3
+        }
+    },
+    "PART_COMPOSITE_LONG": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "layers",
+                    "ref": "layers_card"
+                }
+            ]
+        },
+        "labels": {
+            "layers_card": 2
+        }
+    },
+    "PART_COMPOSITE_LONG_CONTACT": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "layers",
+                    "ref": "layers_card"
+                }
+            ]
+        },
+        "labels": {
+            "layers_card": 3
+        }
+    },
+    "PART_COMPOSITE_TSHELL": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "layers",
+                    "ref": "layers_card"
+                }
+            ]
+        },
+        "labels": {
+            "layers_card": 2
+        }
+    },
+    "PART_COMPOSITE_TSHELL_CONTACT": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "layers",
+                    "ref": "layers_card"
+                }
+            ]
+        },
+        "labels": {
+            "layers_card": 3
+        }
+    },
+    "PART_COMPOSITE_TSHELL_LONG": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "layers",
+                    "ref": "layers_card"
+                }
+            ]
+        },
+        "labels": {
+            "layers_card": 2
+        }
+    },
+    "PART_COMPOSITE_TSHELL_LONG_CONTACT": {
+        "generation-options": {
+            "table-card": [
+                {
+                    "property-name": "layers",
+                    "ref": "layers_card"
+                }
+            ]
+        },
+        "labels": {
+            "layers_card": 3
+        }
+    },
     "PART_PART": {
         "generation-options": {
             "replace-card": [
