@@ -42,6 +42,11 @@ inputs:
     description: Bot token for authentication
     required: true
 
+  dpf-server-token:
+    description: DPF server token for authentication
+    required: false
+    default: ""
+
   github-actor:
     description: GitHub actor for authentication
     required: true
@@ -139,7 +144,7 @@ runs:
       uses: ansys/pydpf-actions/install-dpf-server@195207a462b23da5645fde44ac685e81b29035a4 # v2.3-uses
       if: ${{ inputs.build-examples == 'true' }}
       with:
-        dpf-standalone-TOKEN: ${{ inputs.bot-token }}
+        dpf-standalone-TOKEN: ${{ inputs.dpf-server-token }}
         ANSYS_VERSION: "271"
 
     - name: Login to GitHub container registry
