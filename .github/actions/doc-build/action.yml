@@ -140,7 +140,7 @@ runs:
       if: ${{ inputs.build-examples == 'true' }}
       with:
         dpf-standalone-TOKEN: ${{ inputs.bot-token }}
-        ANSYS_VERSION: "261"
+        ANSYS_VERSION: "271"
 
     - name: Login to GitHub container registry
       if: ${{ inputs.pydyna-run-container != '' && inputs.build_examples != 'false' }}
