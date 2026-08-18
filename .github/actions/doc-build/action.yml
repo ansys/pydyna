@@ -42,6 +42,11 @@ inputs:
     description: Bot token for authentication
     required: true
 
+  dpf-server-token:
+    description: DPF server token for authentication
+    required: false
+    default: ""
+
   github-actor:
     description: GitHub actor for authentication
     required: true
@@ -93,7 +98,7 @@ runs:
         enable-cache: true
 
     - name: Set up Python
-      uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
+      uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55 # v5.5.0
       with:
         python-version: ${{ inputs.python-version }}
         cache: 'pip'
@@ -139,16 +144,27 @@ runs:
       uses: ansys/pydpf-actions/install-dpf-server@v2.3 # zizmor: ignore[unpinned-uses]
       if: ${{ inputs.build-examples == 'true' }}
       with:
-        dpf-standalone-TOKEN: ${{ inputs.bot-token }}
-        ANSYS_VERSION : "252"
+        dpf-standalone-TOKEN: ${{ inputs.dpf-server-token }}
+        ANSYS_VERSION: "261"
+
+    - name: Install DPF server into venv
+      if: ${{ inputs.build-examples == 'true' }}
+      run: |
+        source .venv/bin/activate
+        uv pip install "${GITHUB_WORKSPACE}/dpf-standalone/v261"
+      shell: bash
 
     - name: Set DPF environment
       if: ${{ inputs.build-examples == 'true' }}
       run: |
-        DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v252/ansys/dpf/server_2025_2_pre0"
+        DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v261/ansys/dpf/server_2026_1_pre0"
+        if [ ! -d "${DPF_PATH}" ]; then
+          echo "DPF server directory not found at ${DPF_PATH}, skipping DPF env setup"
+          exit 0
+        fi
         echo "Setting DPF server path to: ${DPF_PATH}"
         {
-          echo "AWP_ROOT252=${DPF_PATH}"
+          echo "AWP_ROOT261=${DPF_PATH}"
           echo "ANSYS_DPF_PATH=${DPF_PATH}"
           echo "ANSYS_DPF_SERVER_ROOT=${DPF_PATH}"
         } >> "$GITHUB_ENV"
@@ -186,7 +202,7 @@ runs:
       shell: bash
 
     - name: Upload html documentation
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       with:
         name: documentation-html
         path: doc/_build/html
