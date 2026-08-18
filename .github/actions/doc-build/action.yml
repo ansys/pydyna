@@ -141,7 +141,7 @@ runs:
       shell: bash
 
     - name: Install DPF
-      uses: ansys/pydpf-actions/install-dpf-server@195207a462b23da5645fde44ac685e81b29035a4 # v2.3
+      uses: ansys/pydpf-actions/install-dpf-server@v2.3 # zizmor: ignore[unpinned-uses]
       if: ${{ inputs.build-examples == 'true' }}
       with:
         dpf-standalone-TOKEN: ${{ inputs.dpf-server-token }}
