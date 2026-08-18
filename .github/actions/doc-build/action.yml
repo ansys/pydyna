@@ -133,38 +133,32 @@ runs:
       if: ${{ inputs.build-examples == 'true' }}
       run: |
         echo "ANSYS_DPF_ACCEPT_LA=Y" >> $GITHUB_ENV
-      shell: bash
-
-    - name: Install DPF
-      uses: ansys/pydpf-actions/install-dpf-server@v2.3 # zizmor: ignore[unpinned-uses]
-      if: ${{ inputs.build-examples == 'true' }}
-      with:
-        dpf-standalone-TOKEN: ${{ inputs.bot-token }}
-        ANSYS_VERSION: "261"
-
-    - name: Set DPF environment
-      if: ${{ inputs.build-examples == 'true' }}
-      run: |
-        DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v261/ansys/dpf/server_2026_1_pre0"
-        if [ ! -d "${DPF_PATH}" ]; then
-          echo "DPF server directory not found at ${DPF_PATH}, skipping DPF env setup"
-          exit 0
-        fi
-        echo "Setting DPF server path to: ${DPF_PATH}"
-        {
-          echo "AWP_ROOT261=${DPF_PATH}"
-          echo "ANSYS_DPF_PATH=${DPF_PATH}"
-          echo "ANSYS_DPF_SERVER_ROOT=${DPF_PATH}"
-        } >> "$GITHUB_ENV"
+        echo "DPF_PORT=21004" >> $GITHUB_ENV
+        echo "DPF_START_SERVER=False" >> $GITHUB_ENV
       shell: bash
 
     - name: Login to GitHub container registry
-      if: ${{ inputs.pydyna-run-container != '' && inputs.build_examples != 'false' }}
+      if: ${{ inputs.build-examples == 'true' || (inputs.pydyna-run-container != '' && inputs.build_examples != 'false') }}
       uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
       with:
         registry: ghcr.io
         username: ${{ inputs.github-actor }}
         password: ${{ inputs.github-token }}
+
+    - name: Start DPF server
+      if: ${{ inputs.build-examples == 'true' }}
+      env:
+        LICENSE_SERVER: ${{ inputs.license-server }}
+        DPF_DOCKER_IMAGE: ghcr.io/ansys/dpf-core:v26.1
+      run: |
+        docker pull "${DPF_DOCKER_IMAGE}"
+        docker run -d --name dpf_server \
+          --env ANSYS_DPF_ACCEPT_LA=Y \
+          --env ANSYSLMD_LICENSE_FILE="1055@${LICENSE_SERVER}" \
+          -p "${DPF_PORT}:50052" \
+          "${DPF_DOCKER_IMAGE}"
+        echo "DPF server started on port ${DPF_PORT}"
+      shell: bash
 
     - name: Pull PyDyna-run image
       if: ${{ inputs.pydyna-run-container != '' && inputs.build_examples != 'false' && inputs.skip-pull != 'true' }}
