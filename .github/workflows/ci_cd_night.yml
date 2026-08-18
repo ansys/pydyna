@@ -172,6 +172,7 @@ jobs:
           github-actor: ${{ github.actor }}
           persist-credentials: true
           use_cache_examples: false
+          dpf-server-token: ${{ secrets.DPF_SERVER_TOKEN }}
 
   doc-deploy-dev:
     name: "Deploy development documentation"

@@ -141,11 +141,27 @@ runs:
       shell: bash
 
     - name: Install DPF
-      uses: ansys/pydpf-actions/install-dpf-server@195207a462b23da5645fde44ac685e81b29035a4 # v2.3-uses
+      uses: ansys/pydpf-actions/install-dpf-server@195207a462b23da5645fde44ac685e81b29035a4 # v2.3
       if: ${{ inputs.build-examples == 'true' }}
       with:
         dpf-standalone-TOKEN: ${{ inputs.dpf-server-token }}
-        ANSYS_VERSION: "271"
+        ANSYS_VERSION: "261"
+
+    - name: Set DPF environment
+      if: ${{ inputs.build-examples == 'true' }}
+      run: |
+        DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v261/ansys/dpf/server_2026_1_pre0"
+        if [ ! -d "${DPF_PATH}" ]; then
+          echo "DPF server directory not found at ${DPF_PATH}, skipping DPF env setup"
+          exit 0
+        fi
+        echo "Setting DPF server path to: ${DPF_PATH}"
+        {
+          echo "AWP_ROOT261=${DPF_PATH}"
+          echo "ANSYS_DPF_PATH=${DPF_PATH}"
+          echo "ANSYS_DPF_SERVER_ROOT=${DPF_PATH}"
+        } >> "$GITHUB_ENV"
+      shell: bash
 
     - name: Login to GitHub container registry
       if: ${{ inputs.pydyna-run-container != '' && inputs.build_examples != 'false' }}
