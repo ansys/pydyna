@@ -135,6 +135,7 @@ runs:
         echo "ANSYS_DPF_ACCEPT_LA=Y" >> $GITHUB_ENV
         echo "DPF_PORT=21004" >> $GITHUB_ENV
         echo "DPF_START_SERVER=False" >> $GITHUB_ENV
+        echo "DPF_DEFAULT_GRPC_MODE=insecure" >> $GITHUB_ENV
       shell: bash
 
     - name: Login to GitHub container registry
@@ -150,6 +151,7 @@ runs:
       env:
         LICENSE_SERVER: ${{ inputs.license-server }}
         DPF_DOCKER_IMAGE: ghcr.io/ansys/mapdl:v25.2-rocky-dpf-standalone
+        DPF_DEFAULT_GRPC_MODE: insecure
       run: |
         $(docker pull $DPF_DOCKER_IMAGE && docker run -d --name dpfserver --env ANSYS_DPF_ACCEPT_LA=Y --env ANSYSLMD_LICENSE_FILE="1055@${LICENSE_SERVER}" -p ${DPF_PORT}:50052 $DPF_DOCKER_IMAGE && echo "DPF Server active on port ${DPF_PORT}.") &
       shell: bash
@@ -172,7 +174,6 @@ runs:
         LSTC_LICENSE: ansys
         BUILD_EXAMPLES: ${{ inputs.build-examples }}
         BUILD_API: ${{ inputs.build-api }}
-        DPF_DEFAULT_GRPC_MODE: insecure
       run: |
         source .venv/bin/activate
         timeout 7200 xvfb-run uv run --no-sync -- make -C doc html SPHINXOPTS="-j auto"
