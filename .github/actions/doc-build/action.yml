@@ -172,6 +172,7 @@ runs:
         LSTC_LICENSE: ansys
         BUILD_EXAMPLES: ${{ inputs.build-examples }}
         BUILD_API: ${{ inputs.build-api }}
+        DPF_DEFAULT_GRPC_MODE: insecure
       run: |
         source .venv/bin/activate
         timeout 7200 xvfb-run uv run --no-sync -- make -C doc html SPHINXOPTS="-j auto"
