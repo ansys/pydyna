@@ -145,14 +145,14 @@ runs:
     - name: Set DPF environment
       if: ${{ inputs.build-examples == 'true' }}
       run: |
-        DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v252/ansys/dpf/server_2025_2_pre0"
+        DPF_PATH="${GITHUB_WORKSPACE}/dpf-standalone/v261/ansys/dpf/server_2026_1_pre0"
         if [ ! -d "${DPF_PATH}" ]; then
           echo "DPF server directory not found at ${DPF_PATH}, skipping DPF env setup"
           exit 0
         fi
         echo "Setting DPF server path to: ${DPF_PATH}"
         {
-          echo "AWP_ROOT252=${DPF_PATH}"
+          echo "AWP_ROOT261=${DPF_PATH}"
           echo "ANSYS_DPF_PATH=${DPF_PATH}"
           echo "ANSYS_DPF_SERVER_ROOT=${DPF_PATH}"
         } >> "$GITHUB_ENV"
