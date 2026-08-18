@@ -147,6 +147,13 @@ runs:
         dpf-standalone-TOKEN: ${{ inputs.dpf-server-token }}
         ANSYS_VERSION: "261"
 
+    - name: Install DPF server into venv
+      if: ${{ inputs.build-examples == 'true' }}
+      run: |
+        source .venv/bin/activate
+        uv pip install "${GITHUB_WORKSPACE}/dpf-standalone/v261"
+      shell: bash
+
     - name: Set DPF environment
       if: ${{ inputs.build-examples == 'true' }}
       run: |
