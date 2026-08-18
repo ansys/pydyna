@@ -160,11 +160,11 @@ jobs:
           skip-existing: false
 
       - name: "Release to GitHub"
-        uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # v3.0.2 # zizmor: ignore[superfluous-actions]
-        with:
-          files: 
-            ./**/*.whl
-            ./**/*.tar.gz
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          gh release upload "$REF_NAME" ./**/*.whl ./**/*.tar.gz
 
   doc-deploy-stable:
     name: "Deploy stable documentation"

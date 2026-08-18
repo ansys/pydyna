@@ -93,7 +93,7 @@ runs:
         enable-cache: true
 
     - name: Set up Python
-      uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
+      uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55 # v5.5.0
       with:
         python-version: ${{ inputs.python-version }}
         cache: 'pip'
@@ -186,7 +186,7 @@ runs:
       shell: bash
 
     - name: Upload html documentation
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
       with:
         name: documentation-html
         path: doc/_build/html
