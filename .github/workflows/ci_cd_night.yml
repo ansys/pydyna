@@ -44,7 +44,7 @@ jobs:
       contents: read  # Needed to checkout code
       packages: write # Needed for pushing Docker image to GHCR
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
@@ -52,7 +52,7 @@ jobs:
         uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
 
       - name: Set up Python
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
@@ -172,6 +172,7 @@ jobs:
           github-actor: ${{ github.actor }}
           persist-credentials: true
           use_cache_examples: false
+          dpf-server-token: ${{ secrets.DPF_SERVER_TOKEN }}
 
   doc-deploy-dev:
     name: "Deploy development documentation"
@@ -181,7 +182,7 @@ jobs:
       contents: write # Needed to push documentation to gh-pages branch
       pages: write # Needed to deploy to GitHub Pages
     steps:
-      - uses: ansys/actions/doc-deploy-dev@9dc4e3161033d2c2485fbf9687d40cfb7a661fb2 # v10.3.6
+      - uses: ansys/actions/doc-deploy-dev@e2075e950bdec40b816670160e98c4c184c7b281 # v11.0.0
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ env.BOT_TOKEN }}
