@@ -143,7 +143,7 @@ runs:
       with:
         registry: ghcr.io
         username: ${{ inputs.github-actor }}
-        password: ${{ inputs.github-token }}
+        password: ${{ inputs.bot-token }}
 
     - name: Start DPF server
       if: ${{ inputs.build-examples == 'true' }}
@@ -151,7 +151,9 @@ runs:
         LICENSE_SERVER: ${{ inputs.license-server }}
         DPF_DOCKER_IMAGE: ghcr.io/ansys/mapdl:v25.2-rocky-dpf-standalone
       run: |
-        $(docker pull $DPF_DOCKER_IMAGE && docker run -d --name dpfserver --env ANSYS_DPF_ACCEPT_LA=Y --env ANSYSLMD_LICENSE_FILE="1055@${LICENSE_SERVER}" -p 50052:50052 $DPF_DOCKER_IMAGE && echo "DPF Server active on port 50052.") &
+        docker pull $DPF_DOCKER_IMAGE
+        docker run -d --name dpfserver --env ANSYS_DPF_ACCEPT_LA=Y --env ANSYSLMD_LICENSE_FILE="1055@${LICENSE_SERVER}" -p 50052:50052 $DPF_DOCKER_IMAGE
+        echo "DPF Server started on port 50052."
       shell: bash
 
     - name: Pull PyDyna-run image
