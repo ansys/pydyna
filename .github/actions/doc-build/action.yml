@@ -133,28 +133,22 @@ runs:
       if: ${{ inputs.build-examples == 'true' }}
       run: |
         echo "ANSYS_DPF_ACCEPT_LA=Y" >> $GITHUB_ENV
-        echo "DPF_START_SERVER=False" >> $GITHUB_ENV
-        echo "DPF_DEFAULT_GRPC_MODE=insecure" >> $GITHUB_ENV
       shell: bash
 
+    - name: Install DPF
+      uses: ansys/pydpf-actions/install-dpf-server@195207a462b23da5645fde44ac685e81b29035a4 # v2.3-uses
+      if: ${{ inputs.build-examples == 'true' }}
+      with:
+        dpf-standalone-TOKEN: ${{ inputs.bot-token }}
+        ANSYS_VERSION: "261"
+
     - name: Login to GitHub container registry
-      if: ${{ inputs.build-examples == 'true' || (inputs.pydyna-run-container != '' && inputs.build_examples != 'false') }}
+      if: ${{ inputs.pydyna-run-container != '' && inputs.build_examples != 'false' }}
       uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
       with:
         registry: ghcr.io
         username: ${{ inputs.github-actor }}
-        password: ${{ inputs.bot-token }}
-
-    - name: Start DPF server
-      if: ${{ inputs.build-examples == 'true' }}
-      env:
-        LICENSE_SERVER: ${{ inputs.license-server }}
-        DPF_DOCKER_IMAGE: ghcr.io/ansys/mapdl:v25.2-rocky-dpf-standalone
-      run: |
-        docker pull $DPF_DOCKER_IMAGE
-        docker run -d --name dpfserver --env ANSYS_DPF_ACCEPT_LA=Y --env ANSYSLMD_LICENSE_FILE="1055@${LICENSE_SERVER}" -p 50052:50052 $DPF_DOCKER_IMAGE
-        echo "DPF Server started on port 50052."
-      shell: bash
+        password: ${{ inputs.github-token }}
 
     - name: Pull PyDyna-run image
       if: ${{ inputs.pydyna-run-container != '' && inputs.build_examples != 'false' && inputs.skip-pull != 'true' }}
