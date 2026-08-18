@@ -151,6 +151,7 @@ jobs:
           build-examples: ${{ !contains(github.event.pull_request.labels.*.name, 'docs:example:skip') }}
           build-api: ${{ !contains(github.event.pull_request.labels.*.name, 'docs:api:skip') }}
           skip-pdf-build: ${{ contains(github.event.pull_request.labels.*.name, 'docs:pdf:skip') }}
+          dpf-server-token: ${{ secrets.DPF_SERVER_TOKEN }}
 
   run-tests:
     name: Test the "run" subpackage

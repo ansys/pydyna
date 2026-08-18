@@ -42,6 +42,11 @@ inputs:
     description: Bot token for authentication
     required: true
 
+  dpf-server-token:
+    description: DPF server token for authentication
+    required: false
+    default: ""
+
   github-actor:
     description: GitHub actor for authentication
     required: true
@@ -139,8 +144,15 @@ runs:
       uses: ansys/pydpf-actions/install-dpf-server@v2.3 # zizmor: ignore[unpinned-uses]
       if: ${{ inputs.build-examples == 'true' }}
       with:
-        dpf-standalone-TOKEN: ${{ inputs.bot-token }}
+        dpf-standalone-TOKEN: ${{ inputs.dpf-server-token }}
         ANSYS_VERSION: "261"
+
+    - name: Install DPF server into venv
+      if: ${{ inputs.build-examples == 'true' }}
+      run: |
+        source .venv/bin/activate
+        uv pip install "${GITHUB_WORKSPACE}/dpf-standalone/v261"
+      shell: bash
 
     - name: Set DPF environment
       if: ${{ inputs.build-examples == 'true' }}
