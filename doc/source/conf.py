@@ -153,7 +153,7 @@ html_theme_options = {
     },
     "announcement_banner": [
     {
-        "message": "The 'ansys.dyna.core.pre' and 'ansys.dyna.core.run' subpackages are removed in version v0.11.0.",
+        "message": "The 'ansys.dyna.core.pre' and 'ansys.dyna.core.run' subpackages were removed in version v0.11.0.",
         "type": "info",
     },
     ],
