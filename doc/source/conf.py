@@ -151,7 +151,12 @@ html_theme_options = {
         ],
         "output": "api",
     },
-    "announcement": "<style>.bd-header-announcement{background-color:#f2bebd;}The </style><span>ansys.dyna.core.pre</span> and <span>ansys.dyna.core.run</span> subpackages are removed in version v0.11.0.",
+    "announcement_banner": [
+    {
+        "message": "The 'ansys.dyna.core.pre' and 'ansys.dyna.core.run' subpackages are removed in version v0.11.0.",
+        "type": "info",
+    },
+    ],
 }
 
 # static path
