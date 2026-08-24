@@ -522,6 +522,53 @@ def test_deck_expand_transform_custom_handler(file_utils):
     assert deck.keywords[1].elements["pid"][3] == 44
 
 
+def test_deck_expand_transform_part_ids(file_utils):
+    """Test that *PART's own pid is offset by IDPOFF, consistent with *ELEMENT pid references."""
+    deck = Deck()
+    include_path = file_utils.get_asset_file_path("transform")
+    xform = kwd.IncludeTransform(filename=os.path.join(include_path, "test_part.k"))
+    xform.idpoff = 100
+    deck.append(xform)
+    deck = deck.expand(recurse=True)
+    assert len(deck.keywords) == 4
+    # pid=1 is offset
+    assert deck.keywords[0].parts["pid"][0] == 101
+    # pid=0 is a corner case (unset/no-part) and must not be offset
+    assert deck.keywords[1].parts["pid"][0] == 0
+    # the *ELEMENT_SHELL pid reference is offset consistently with the *PART pid
+    assert deck.keywords[2].elements["pid"][0] == 101
+
+
+def test_deck_expand_transform_part_ids_no_offset(file_utils):
+    """Test that *PART pid is left untouched when IDPOFF is unset."""
+    deck = Deck()
+    include_path = file_utils.get_asset_file_path("transform")
+    xform = kwd.IncludeTransform(filename=os.path.join(include_path, "test_part.k"))
+    deck.append(xform)
+    deck = deck.expand(recurse=True)
+    assert deck.keywords[0].parts["pid"][0] == 1
+    assert deck.keywords[1].parts["pid"][0] == 0
+
+
+def test_deck_expand_transform_part_ids_custom_handler(file_utils):
+    """Test overriding the default *PART transform handler."""
+    deck = Deck()
+    include_path = file_utils.get_asset_file_path("transform")
+    xform = kwd.IncludeTransform(filename=os.path.join(include_path, "test_part.k"))
+    xform.idpoff = 100
+    deck.append(xform)
+
+    from ansys.dyna.core.lib.transform import Transform
+
+    class TransformPartCustom(Transform):
+        def transform(self, keyword):
+            keyword.parts["pid"] = keyword.parts["pid"] + 5
+
+    deck.transform_handler.register_transform_handler(("PART", "PART"), TransformPartCustom)
+    deck = deck.expand(recurse=True)
+    assert deck.keywords[0].parts["pid"][0] == 6
+    assert deck.keywords[1].parts["pid"][0] == 5
+
 
 def test_deck_expand_with_define_transform(file_utils):
     """Test using a custom transform handler as an override."""
@@ -822,10 +869,10 @@ def test_deck_expand_local_parameters_sibling_isolation(file_utils):
 
 def test_deck_expand_sibling_parameters(file_utils):
     """Test that global parameters from one include are visible in sibling includes.
-    
+
     This tests the fix for issue #1081 where parameters defined in one include file
     (params.k) should be visible in a sibling include file (contact.k).
-    
+
     Structure:
     main.k
       |--- params.k (defines parameters)
@@ -835,26 +882,26 @@ def test_deck_expand_sibling_parameters(file_utils):
     cwd = file_utils.assets_folder / "expand_parameters" / "sibling"
     filename = cwd / "main.k"
     deck.import_file(filename)
-    
+
     # Expand the deck
     expanded_deck = deck.expand(recurse=True, cwd=cwd)
-    
+
     # After expansion, parameters from params.k should be accessible
     # and contact.k should be properly parsed as a keyword
     assert "ssid" in expanded_deck.parameters._params or (
-        expanded_deck.parameters._parent is not None and 
+        expanded_deck.parameters._parent is not None and
         "ssid" in expanded_deck.parameters._parent._params
     )
-    
+
     # Get the section keyword
     sections = list(expanded_deck.get_kwds_by_type("SECTION"))
     assert len(sections) == 1
-    
+
     section = sections[0]
     # Verify it was parsed as a keyword, not as a string
     assert section.keyword == "SECTION"
     assert section.subkeyword == "SOLID"
-    
+
     # Verify the parameter values were substituted
     assert section.secid == 1234.0
     assert section.elform == 5678.0
@@ -863,15 +910,15 @@ def test_deck_expand_sibling_parameters(file_utils):
 
 def test_deck_expand_global_parameter_collision(file_utils):
     """Test that global parameters from sibling includes collide (last one wins).
-    
+
     This demonstrates the behavior AFTER the fix for issue #1081.
-    
+
     KEY INSIGHT: Parameters are substituted DURING import, not after expansion.
     So module_a gets scale=1.0 and module_b gets scale=2.0 at their import time.
-    
+
     The collision is visible when module_c (consumer) tries to use &scale without
     defining it - it gets the LAST value from the parent deck (2.0 from module_b).
-    
+
     BEFORE the fix: module_c would get KeyError (bug - params were isolated).
     AFTER the fix: module_c gets 2.0 (correct - global params are shared).
     """
@@ -879,26 +926,26 @@ def test_deck_expand_global_parameter_collision(file_utils):
     cwd = file_utils.assets_folder / "expand_parameters" / "collision"
     filename = cwd / "main_with_consumer.k"
     deck.import_file(filename)
-    
+
     # Expand the deck
     expanded_deck = deck.expand(recurse=True, cwd=cwd)
-    
+
     # Get the sections
     sections = list(expanded_deck.get_kwds_by_type("SECTION"))
     assert len(sections) == 3
-    
+
     # Find sections by secid
     section_100 = next(s for s in sections if s.secid == 100)
     section_200 = next(s for s in sections if s.secid == 200)
     section_300 = next(s for s in sections if s.secid == 300)
-    
+
     # Each module that DEFINES the parameter uses its own value at import time
     assert section_100.elform == 1.0, "Module A uses its own value (1.0) at import time"
     assert section_200.elform == 2.0, "Module B uses its own value (2.0) at import time"
-    
+
     # Module C (consumer) gets the LAST value from parent deck (demonstrates collision)
     assert section_300.elform == 2.0, "Module C gets last value (2.0) from parent - collision!"
-    
+
     # The parameter in expanded deck should be the last one
     assert expanded_deck.parameters.get("scale") == 2.0
 
@@ -906,7 +953,7 @@ def test_deck_expand_global_parameter_collision(file_utils):
 
 def test_deck_expand_local_parameter_no_collision(file_utils):
     """Test that local parameters from sibling includes do NOT collide.
-    
+
     This demonstrates the CORRECT way to avoid collision: use *PARAMETER_LOCAL.
     When two sibling includes define the same *PARAMETER_LOCAL, each gets its own
     isolated value.
@@ -915,22 +962,22 @@ def test_deck_expand_local_parameter_no_collision(file_utils):
     cwd = file_utils.assets_folder / "expand_parameters" / "collision_local"
     filename = cwd / "main.k"
     deck.import_file(filename)
-    
+
     # Expand the deck
     expanded_deck = deck.expand(recurse=True, cwd=cwd)
-    
+
     # Get the sections
     sections = list(expanded_deck.get_kwds_by_type("SECTION"))
     assert len(sections) == 2
-    
+
     # Find sections by secid
     section_100 = next(s for s in sections if s.secid == 100)
     section_200 = next(s for s in sections if s.secid == 200)
-    
+
     # With PARAMETER_LOCAL: Each module gets its own value (no collision)
     assert section_100.elform == 1.0, "Module A should use its own local value (1.0)"
     assert section_200.elform == 2.0, "Module B should use its own local value (2.0)"
-    
+
     # Local parameters should NOT be in the parent deck
     with pytest.raises(KeyError):
         expanded_deck.parameters.get("scale")
@@ -939,7 +986,7 @@ def test_deck_expand_local_parameter_no_collision(file_utils):
 
 def test_deck_nodeset_extraction(file_utils):
     """Test extracting node set information from a deck.
-    
+
     This test demonstrates basic node set extraction capabilities
     similar to postprocessing workflows in set27_timehistory_analysis.ipynb.
     Uses a real-world case file from lsdyna_python_parser test cases.
@@ -947,7 +994,7 @@ def test_deck_nodeset_extraction(file_utils):
     deck = Deck()
     filename = file_utils.assets_folder / "test_node_sets.k"
     deck.import_file(filename)
-    
+
     # Get all SET keywords
     sets = list(deck.get_kwds_by_type("SET"))
     assert len(sets) > 3, "There should be more than 3 SET keywords"
@@ -957,19 +1004,19 @@ def test_deck_nodeset_extraction(file_utils):
     node_sets = list(deck.get_kwds_by_full_type("SET", "NODE"))
     # node_sets = list(deck.get_kwds_by_full_type("SET", "NODE", "LIST")) ##DOESN'T WORK
     # node_sets = list(deck.get_kwds_by_full_type("SET", "NODE", "LIST", "TITLE")) ##DOESN'T WORK
-    
+
     define_curves = list(deck.get_kwds_by_full_type("DEFINE", "CURVE")) ## WORKS
 
     # Test: There should be 3 node sets in the deck
     assert len(node_sets) == 3, "There are 3 node sets in this input deck"
-    
+
     # Test that access by list index and access with get_set_by_id are equivalent
     set_1 = deck.get_set_by_id(1)
     for set_1_access in [node_sets[0], set_1]:
         assert set_1_access is not None, "Set with ID 1 should exist"
         assert set_1_access.sid == 1, "Retrieved set should have sid=1"
         assert set_1_access.keyword == "SET"
-        
+
         # Test: Largest node in set 1 should be 4964
         assert hasattr(set_1_access, 'nodes'), "Set 1 should have nodes attribute"
         assert hasattr(set_1_access.nodes, 'data'), "Nodes should have data attribute"
@@ -977,23 +1024,23 @@ def test_deck_nodeset_extraction(file_utils):
         assert len(set_1_nodes) > 0, "Set 1 should contain nodes"
         largest_node = max(set_1_nodes)
         assert largest_node == 4964, f"Largest node in set 1 should be 4964, got {largest_node}"
-        
+
         # Test: All nodes in set 1 should be consecutive
         sorted_nodes = sorted(set_1_nodes)
         expected_consecutive = list(range(sorted_nodes[0], sorted_nodes[-1] + 1))
         assert sorted_nodes == expected_consecutive, \
             f"Nodes in set 1 are not consecutive: {sorted_nodes[:10]} ... {sorted_nodes[-10:]}"
-    
+
     set_2 = deck.get_set_by_id(2)
     for set_2_access in [node_sets[1], set_2]:
         assert set_2_access is not None, "Set with ID 2 should exist"
-        assert set_2_access.sid == 2, "Retrieved set should have sid=2"        
-        
+        assert set_2_access.sid == 2, "Retrieved set should have sid=2"
+
         assert hasattr(set_2_access, 'nodes'), "Set 2 should have nodes attribute"
         assert hasattr(set_2_access.nodes, 'data'), "Nodes should have data attribute"
         set_2_nodes = set_2_access.nodes.data
         assert len(set_2_nodes) == 164, f"Set 2 should have 164 nodes, found {len(set_2_nodes)}"
-    
+
     # Test that non-existent ID returns None
     set_999 = deck.get_set_by_id(999)
-    assert set_999 is None, "Non-existent set ID should return None"    
+    assert set_999 is None, "Non-existent set ID should return None"

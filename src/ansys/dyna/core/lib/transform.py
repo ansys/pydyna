@@ -30,6 +30,7 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.transforms.base_transform import Transform
 from ansys.dyna.core.lib.transforms.element_transform import TransformElement
 from ansys.dyna.core.lib.transforms.node_transform import TransformNode
+from ansys.dyna.core.lib.transforms.part_transform import TransformPart
 
 
 class TransformHandler(ImportHandler):
@@ -37,6 +38,7 @@ class TransformHandler(ImportHandler):
         self._handlers: typing.Dict[typing.Union[str, typing.Tuple[str, str]], Transform] = {
             "NODE": TransformNode,
             "ELEMENT": TransformElement,
+            "PART": TransformPart,
         }
 
     def register_transform_handler(
