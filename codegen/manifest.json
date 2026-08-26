@@ -770,7 +770,7 @@
         "labels": {
             "solid_beam_shell_options_card": 1,
             "block_lanczos_card": 2,
-            "mcms_card": 3, 
+            "mcms_card": 3,
             "lobpcg_card": 4,
             "fast_lanczos_card": 5,
             "sectoral_symmetry_card": 6,
@@ -883,6 +883,12 @@
                     "func": "self.elform == 9",
                     "ref": "spotweld_thickness_card"
                 }
+            ],
+            "shared-field": [
+                {"name": "TS1", "cards": [1, 4, 6]},
+                {"name": "TS2", "cards": [1, 4, 6]},
+                {"name": "TT1", "cards": [1, 4, 6]},
+                {"name": "TT2", "cards": [1, 4, 6]}
             ]
         },
         "comment": "card 6 (mat146_discrete_card) is skipped because of the condition for mat 146 - which we cannot easily check here. Maybe that can be handled in a subclass. card 7 (discrete_dof_card) is skipped because its a duplicate of card 4. card 9 (duplicate_inertia_card) is skipped because its a duplicate of card 2"

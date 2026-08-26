@@ -304,6 +304,8 @@ class SectionBeamCardSet(Cards):
     def ts1(self, value: float) -> None:
         """Set the ts1 property."""
         self._cards[1].set_value("ts1", value)
+        self._cards[4].set_value("ts1", value)
+        self._cards[6].set_value("ts1", value)
 
     @property
     def ts2(self) -> typing.Optional[float]:
@@ -315,6 +317,8 @@ class SectionBeamCardSet(Cards):
     def ts2(self, value: float) -> None:
         """Set the ts2 property."""
         self._cards[1].set_value("ts2", value)
+        self._cards[4].set_value("ts2", value)
+        self._cards[6].set_value("ts2", value)
 
     @property
     def tt1(self) -> typing.Optional[float]:
@@ -326,6 +330,8 @@ class SectionBeamCardSet(Cards):
     def tt1(self, value: float) -> None:
         """Set the tt1 property."""
         self._cards[1].set_value("tt1", value)
+        self._cards[4].set_value("tt1", value)
+        self._cards[6].set_value("tt1", value)
 
     @property
     def tt2(self) -> typing.Optional[float]:
@@ -337,6 +343,8 @@ class SectionBeamCardSet(Cards):
     def tt2(self, value: float) -> None:
         """Set the tt2 property."""
         self._cards[1].set_value("tt2", value)
+        self._cards[4].set_value("tt2", value)
+        self._cards[6].set_value("tt2", value)
 
     @property
     def nsloc(self) -> typing.Optional[float]:
@@ -511,50 +519,6 @@ class SectionBeamCardSet(Cards):
         self._cards[3].set_value("stress", value)
 
     @property
-    def ts1(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s direction at node n1 . Note that the thickness defined on the *ELEMENT_ BEAM_THICKNESS card overrides the definition give here.
-        """ # nopep8
-        return self._cards[4].get_value("ts1")
-
-    @ts1.setter
-    def ts1(self, value: float) -> None:
-        """Set the ts1 property."""
-        self._cards[4].set_value("ts1", value)
-
-    @property
-    def ts2(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s direction at node n2 .
-        """ # nopep8
-        return self._cards[4].get_value("ts2")
-
-    @ts2.setter
-    def ts2(self, value: float) -> None:
-        """Set the ts2 property."""
-        self._cards[4].set_value("ts2", value)
-
-    @property
-    def tt1(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t direction at node n1 .
-        """ # nopep8
-        return self._cards[4].get_value("tt1")
-
-    @tt1.setter
-    def tt1(self, value: float) -> None:
-        """Set the tt1 property."""
-        self._cards[4].set_value("tt1", value)
-
-    @property
-    def tt2(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t direction at node n2 .
-        """ # nopep8
-        return self._cards[4].get_value("tt2")
-
-    @tt2.setter
-    def tt2(self, value: float) -> None:
-        """Set the tt2 property."""
-        self._cards[4].set_value("tt2", value)
-
-    @property
     def vol(self) -> typing.Optional[float]:
         """Get or set the Volume of discrete beams that is, used in calculating mass.  If VOL = 0 for cable elements, the volume is calculated as the product of cable length and cable area.  If the mass density of the material model for the discrete beam is set to unity, the magnitude of the lumped mass can be defined here instead. This lumped mass is partitioned equally between the two nodes of the element. See Remark 12.
         """ # nopep8
@@ -650,50 +614,6 @@ class SectionBeamCardSet(Cards):
     def trcon_null(self, value: float) -> None:
         """Set the trcon_null property."""
         self._cards[5].set_value("trcon_null", value)
-
-    @property
-    def ts1(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s direction at node n1 . Note that the thickness defined on the *ELEMENT_ BEAM_THICKNESS card overrides the definition give here.
-        """ # nopep8
-        return self._cards[6].get_value("ts1")
-
-    @ts1.setter
-    def ts1(self, value: float) -> None:
-        """Set the ts1 property."""
-        self._cards[6].set_value("ts1", value)
-
-    @property
-    def ts2(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or outer diameter (CST = 1.0) in s direction at node n2 .
-        """ # nopep8
-        return self._cards[6].get_value("ts2")
-
-    @ts2.setter
-    def ts2(self, value: float) -> None:
-        """Set the ts2 property."""
-        self._cards[6].set_value("ts2", value)
-
-    @property
-    def tt1(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t direction at node n1 .
-        """ # nopep8
-        return self._cards[6].get_value("tt1")
-
-    @tt1.setter
-    def tt1(self, value: float) -> None:
-        """Set the tt1 property."""
-        self._cards[6].set_value("tt1", value)
-
-    @property
-    def tt2(self) -> typing.Optional[float]:
-        """Get or set the Beam thickness (CST=0.0, 2.0) or inner diameter (CST = 1.0) in t direction at node n2 .
-        """ # nopep8
-        return self._cards[6].get_value("tt2")
-
-    @tt2.setter
-    def tt2(self, value: float) -> None:
-        """Set the tt2 property."""
-        self._cards[6].set_value("tt2", value)
 
     @property
     def print(self) -> typing.Optional[float]:
@@ -1071,54 +991,6 @@ class SectionBeam(KeywordBase):
         self.sets[0].stress = value
 
     @property
-    def ts1(self) -> typing.Optional[float]:
-        """Get or set the ts1
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].ts1
-
-    @ts1.setter
-    def ts1(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].ts1 = value
-
-    @property
-    def ts2(self) -> typing.Optional[float]:
-        """Get or set the ts2
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].ts2
-
-    @ts2.setter
-    def ts2(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].ts2 = value
-
-    @property
-    def tt1(self) -> typing.Optional[float]:
-        """Get or set the tt1
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].tt1
-
-    @tt1.setter
-    def tt1(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].tt1 = value
-
-    @property
-    def tt2(self) -> typing.Optional[float]:
-        """Get or set the tt2
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].tt2
-
-    @tt2.setter
-    def tt2(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].tt2 = value
-
-    @property
     def vol(self) -> typing.Optional[float]:
         """Get or set the vol
         """ # nopep8
@@ -1213,54 +1085,6 @@ class SectionBeam(KeywordBase):
     def trcon_null(self, value: float) -> None:
         ensure_card_set_properties(self, True)
         self.sets[0].trcon_null = value
-
-    @property
-    def ts1(self) -> typing.Optional[float]:
-        """Get or set the ts1
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].ts1
-
-    @ts1.setter
-    def ts1(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].ts1 = value
-
-    @property
-    def ts2(self) -> typing.Optional[float]:
-        """Get or set the ts2
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].ts2
-
-    @ts2.setter
-    def ts2(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].ts2 = value
-
-    @property
-    def tt1(self) -> typing.Optional[float]:
-        """Get or set the tt1
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].tt1
-
-    @tt1.setter
-    def tt1(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].tt1 = value
-
-    @property
-    def tt2(self) -> typing.Optional[float]:
-        """Get or set the tt2
-        """ # nopep8
-        ensure_card_set_properties(self, False)
-        return self.sets[0].tt2
-
-    @tt2.setter
-    def tt2(self, value: float) -> None:
-        ensure_card_set_properties(self, True)
-        self.sets[0].tt2 = value
 
     @property
     def print(self) -> typing.Optional[float]:
