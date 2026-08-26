@@ -89,6 +89,9 @@ class FiberFamily(Cards):
             cards_with_field=[1, 2],
         )
 
+    def after_read(self) -> None:
+        self._sync_shared_field("ftype", [1, 2])
+
     @property
     def theta(self) -> typing.Optional[float]:
         """Get or set the Mean fiber family orientation angle with respect to the a material axis in the a-b material plane in degrees.
@@ -1556,6 +1559,17 @@ see *ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BETA, and *ELEMENT_SOLID_ORTHO.
     def ref(self, value: float) -> None:
         """Set the ref property."""
         self._cards[18].set_value("ref", value)
+
+
+    def after_read(self) -> None:
+        self._sync_shared_field("eta", [12, 13, 15])
+        self._sync_shared_field("f", [13, 14])
+        self._sync_shared_field("sigmax", [13, 14])
+        self._sync_shared_field("n", [10, 13, 14])
+        self._sync_shared_field("ca2ion50", [13, 14])
+        self._sync_shared_field("ca2ion", [10, 13])
+        self._sync_shared_field("t0", [10, 13, 14])
+        self._sync_shared_field("l", [11, 12, 13, 15])
 
     @property
     def title(self) -> typing.Optional[str]:

@@ -418,6 +418,8 @@ class KeywordData:
     )  # Empty list for templates
     links: Union[List[LinkData], List[Dict[str, Any]]] = field(default_factory=list)  # Empty list for templates
     negative_shared_fields: List[Any] = field(default_factory=list)  # Empty list for templates
+    has_shared_fields: bool = False  # True when any positive shared-field was processed
+    sync_shared_fields: List[Any] = field(default_factory=list)  # Entries for keyword-level after_read
     card_insertions: List[Any] = field(default_factory=list)
     additional_imports: List[str] = field(default_factory=list)  # Extra stdlib/third-party imports (e.g. ["math"])
     label_registry: Optional["LabelRegistry"] = None  # Initialized before handlers run

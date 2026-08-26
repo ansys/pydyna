@@ -158,6 +158,12 @@ class SectionBeamCardSet(Cards):
             ),
         ]
 
+    def after_read(self) -> None:
+        self._sync_shared_field("ts1", [1, 4, 6])
+        self._sync_shared_field("ts2", [1, 4, 6])
+        self._sync_shared_field("tt1", [1, 4, 6])
+        self._sync_shared_field("tt2", [1, 4, 6])
+
     @property
     def secid(self) -> typing.Optional[int]:
         """Get or set the Section ID.  The *PART card references SECID.  A unique number or label must be specified.
