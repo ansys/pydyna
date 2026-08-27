@@ -142,9 +142,24 @@ def handle_shared_field(kwd_data, settings):
                         fields.append(field)
             assert len(fields) > 1
             fields[0]["card_indices"] = cards
+            kwd_data.has_shared_fields = True
             setting["applied_card_indices"] = True
             for field in fields[1:]:
                 field["redundant"] = True
+            # Update sync_shared_fields on the card_set that owns this field (if any)
+            prop_name = setting["name"].lower()
+            _placed = False
+            if kwd_data.card_sets:
+                for cs in (kwd_data.card_sets.get("sets", []) if isinstance(kwd_data.card_sets, dict) else []):
+                    for src_card in cs.get("source_cards", []):
+                        if any(f is fields[0] for f in src_card.get("fields", [])):
+                            cs.setdefault("sync_shared_fields", []).append(
+                                {"name": prop_name, "card_indices": cards}
+                            )
+                            _placed = True
+                            break
+            if not _placed:
+                kwd_data.sync_shared_fields.append({"name": prop_name, "card_indices": cards})
         else:
             if len(kwd_data.negative_shared_fields) == 0:
                 kwd_data.negative_shared_fields = []

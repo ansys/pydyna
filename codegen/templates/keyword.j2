@@ -85,6 +85,15 @@ _{{keyword_data.classname | upper}}_OPTION{{option_loop.index0}}_CARD{{loop.inde
 {% for card in keyword_data.cards %}
 {% include 'keyword/card_properties.j2' %}
 {% endfor %}
+{# after_read for non-card-set keywords with shared fields #}
+{% if keyword_data.sync_shared_fields %}
+
+    def after_read(self) -> None:
+{% for sf in keyword_data.sync_shared_fields %}
+        self._sync_shared_field("{{sf.name}}", {{sf.card_indices}})
+{% endfor %}
+
+{% endif %}{# keyword_data.sync_shared_fields #}
 {# Option card properties #}
 {% if keyword_data.options %}
 {% set activate_target = "self" %}

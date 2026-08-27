@@ -302,6 +302,11 @@ class DefineContactVolume(KeywordBase):
         """Set the d_angs property."""
         self._cards[3].set_value("d_angs", value)
 
+
+    def after_read(self) -> None:
+        self._sync_shared_field("rinner", [2, 3])
+        self._sync_shared_field("router", [2, 3])
+
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line

@@ -192,11 +192,11 @@ $#   eid     pid      n1      n2      n3      n4      n5      n6      n7      n8
 
 def test_element_solid_read_legacy_format_no_spaces():
     """Test reading ElementSolid from legacy format with no spaces between node IDs.
-    
+
     This tests the edge case from the issue where node IDs have no spaces:
     *ELEMENT_SOLID
     10061258101301001010292910102928100957511009575710102925101029241009583510095830
-    
+
     The parser must correctly detect this as legacy format (line length > 16) and parse
     the 80-character line as 10 fields of 8 characters each.
     """
@@ -467,11 +467,11 @@ def test_section_shell_misc(ref_string):
     # CARD3 (nipp/nxdof) is only active for elform in [101..105], so with elform=2
     # the output ends at the thkscl card - confirm no card follows it
     assert lines[-1].strip() == "2.5"
-    
+
     # Issue #1153: Test deck loading via type_mapping resolves correctly
     # SECTION_SHELL_MISC should resolve to SectionShell (not a non-existent SectionShellMisc class)
     from ansys.dyna.core.lib.deck import Deck
-    
+
     deck_str = """*KEYWORD
 *SECTION_SHELL_MISC_TITLE
 Test Section
@@ -479,7 +479,7 @@ Test Section
        1.0       1.0       1.0       1.0
        1.5
 *END"""
-    
+
     deck = Deck()
     deck.loads(deck_str)
     loaded_shell = deck.keywords[0]
@@ -1717,7 +1717,7 @@ def test_control_shell(ref_string):
     s = kwd.ControlShell()
     s.loads(control_shell_string)
     print(s)
-    
+
 def test_element_mass_part_multirow(ref_string):
     """Regression #1120: multiple rows are all read without out-of-bound warnings."""
     kw = kwd.ElementMassPart()
@@ -1725,7 +1725,7 @@ def test_element_mass_part_multirow(ref_string):
     kw.loads(ref_string.test_element_mass_part_multirow)
     assert len(kw.elements) == 5
     assert list(kw.elements["pid"]) == [1463, 1464, 415, 520, 405]
-    
+
 
 def test_element_mass_part_set_multirow(ref_string):
     """Regression #1120: multiple rows are all read without out-of-bound warnings."""
@@ -1734,14 +1734,14 @@ def test_element_mass_part_set_multirow(ref_string):
     assert len(kw.elements) == 2
     assert list(kw.elements["psid"]) == [10501, 10502]
 
-    
+
 def test_element_mass_part_set(ref_string):
     """Regression #1120: single row is read without out-of-bound warnings."""
     kw = kwd.ElementMassPartSet()
     kw.loads(ref_string.test_element_mass_part_set)
     assert len(kw.elements) == 1
     assert list(kw.elements["psid"]) == [10501]
-    
+
 def test_element_mass_part_with_lcid(ref_string):
     """Regression: second row used to trigger 'out of bound card characters'."""
     deck = kwd.ElementMassPart()
@@ -1762,4 +1762,36 @@ def test_element_mass_part_set_with_mwd(ref_string):
     kw.loads(ref_string.test_element_mass_part_set_with_mwd)
     assert len(kw.elements) == 1
     assert list(kw.elements["mwd"]) == [1]
-    
+
+
+@pytest.mark.parametrize("elform", [1, 4, 9])
+def test_section_beam_thickness_fields_exported(elform):
+    """Regression #1270: ts1/ts2/tt1/tt2 must appear in output for integrated beam ELFORMs."""
+    beam = kwd.SectionBeam()
+    beam.secid = 1
+    beam.elform = elform
+    beam.ts1 = 0.5
+    beam.ts2 = 0.5
+    beam.tt1 = 0.3
+    beam.tt2 = 0.3
+    output = beam.write()
+    assert "0.5" in output, f"ts1/ts2 missing from ELFORM={elform} output"
+    assert "0.3" in output, f"tt1/tt2 missing from ELFORM={elform} output"
+
+
+@pytest.mark.parametrize("elform", [1, 4, 9])
+def test_section_beam_thickness_roundtrip(elform):
+    """Regression #1270: ts1/ts2/tt1/tt2 survive a write/parse round-trip for all integrated ELFORMs."""
+    beam = kwd.SectionBeam()
+    beam.secid = 1
+    beam.elform = elform
+    beam.ts1 = 0.5
+    beam.ts2 = 0.6
+    beam.tt1 = 0.3
+    beam.tt2 = 0.4
+    beam2 = kwd.SectionBeam()
+    beam2.loads(beam.write())
+    assert beam2.ts1 == 0.5
+    assert beam2.ts2 == 0.6
+    assert beam2.tt1 == 0.3
+    assert beam2.tt2 == 0.4

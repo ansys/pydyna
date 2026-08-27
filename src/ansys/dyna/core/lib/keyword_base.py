@@ -421,11 +421,6 @@ class KeywordBase(Cards, OptionsInterface):
         warnings.warn("dumps is deprecated - use write instead")
         return self.write()
 
-    def before_read(self, buf: typing.TextIO) -> None:
-        """Run any pre-processing before reading the keyword."""
-        # subclasses can do custom logic before reading.
-        return
-
     def _process_title(self, title_line: str) -> None:
         # Verify the title line and set the format, remove trailing +/- if set
         title_line = title_line.strip()
@@ -486,7 +481,6 @@ class KeywordBase(Cards, OptionsInterface):
         """
         title_line = buf.readline()
         title_line = self._process_title(title_line)
-        self.before_read(buf)
         if title_line != self.get_title():
             self._activate_options(title_line.strip("*"))
         # TODO: self.user_comment should come from somewhere.

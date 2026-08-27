@@ -191,9 +191,26 @@ class Cards:
                 warnings.warn(enriched_msg)
         return True
 
+    def before_read(self, buf: typing.TextIO) -> None:
+        """Pre-read hook; subclasses may peek the buffer before card iteration."""
+        pass
+
+    def after_read(self) -> None:
+        """Post-read hook; subclasses may synchronize state after all cards are read."""
+        pass
+
+    def _sync_shared_field(self, name: str, card_indices: typing.List[int]) -> None:
+        """Write the first non-None value found across card_indices into card_indices[0]."""
+        for i in card_indices:
+            val = self._cards[i].get_value(name)
+            if val is not None:
+                self._cards[card_indices[0]].set_value(name, val)
+                return
+
     def _read_data(
         self, buf: typing.TextIO, parameters: ParameterSet, import_context: typing.Optional["ImportContext"] = None
     ) -> None:
+        self.before_read(buf)
         card_index = 0
         for card in self._get_all_cards():
             if parameters is not None:
@@ -204,3 +221,4 @@ class Cards:
             card_index += 1
 
         self._try_read_options_with_no_title(buf, parameters)
+        self.after_read()

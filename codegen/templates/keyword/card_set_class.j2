@@ -87,6 +87,13 @@ class {{card_set.name}}(Cards):
             cards_with_field={{card_set.discriminator.cards_with_field}},
         )
 {% endif %}{# card_set.discriminator #}
+{% if card_set.sync_shared_fields %}
+
+    def after_read(self) -> None:
+{% for sf in card_set.sync_shared_fields %}
+        self._sync_shared_field("{{sf.name}}", {{sf.card_indices}})
+{% endfor %}
+{% endif %}{# card_set.sync_shared_fields #}
 
 {% for card in card_set.source_cards %}
 {% include 'keyword/card_properties.j2' %}

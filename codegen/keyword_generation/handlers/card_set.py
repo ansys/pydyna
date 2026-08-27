@@ -363,6 +363,11 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
                         }
                     )
                 card_set["shared_fields"] = shared_fields_data
+                # Build sync_shared_fields from Case 1 (card-set-level shared-fields config)
+                card_set["sync_shared_fields"] = [
+                    {"name": sf["name"].lower(), "card_indices": sf["card_indices"]}
+                    for sf in shared_fields_data
+                ]
 
             # Bounded is inferred from length-func: if set, CardSet size is controlled externally
             is_bounded = card_settings.bounded
