@@ -28,7 +28,7 @@ deck.load("model.k")
 for mat in deck.get_kwds_by_type("MAT"):
     if mat.mid == 1:
         mat.e = 2.5e11  # Update Young's modulus
-        mat.pr = 0.33   # Update Poisson's ratio
+        mat.pr = 0.33  # Update Poisson's ratio
 
 # Save
 deck.write("modified_model.k")
@@ -88,7 +88,7 @@ deck.append(control_term)
 # Material
 mat = keywords.Mat001()  # MAT_ELASTIC
 mat.mid = 1
-mat.ro = 7850   # kg/m³
+mat.ro = 7850  # kg/m³
 mat.e = 2.1e11  # Pa
 mat.pr = 0.3
 deck.append(mat)
@@ -109,13 +109,13 @@ deck.append(part)
 # Nodes
 for i in range(11):
     node = keywords.Node()
-    node.nodes = pd.DataFrame({"nid": [i+1], "x": [i * 10.0 ], "y": [0.0], "z": [0.0]})
+    node.nodes = pd.DataFrame({"nid": [i + 1], "x": [i * 10.0], "y": [0.0], "z": [0.0]})
     deck.append(node)
 
 # Elements (beam between consecutive nodes)
 for i in range(10):
     elem = keywords.ElementBeam()
-    elem.elements = pd.DataFrame({"eid": [i+1], "pid": [1], "n1": [i+1], "n2": [i+2]})
+    elem.elements = pd.DataFrame({"eid": [i + 1], "pid": [1], "n1": [i + 1], "n2": [i + 2]})
     deck.append(elem)
 
 # Save
@@ -187,6 +187,7 @@ deck.write("shell_plate.k")
 ```python
 from ansys.dyna.core import Deck, keywords
 
+
 def create_steel_material(mid):
     """Create a steel material."""
     mat = keywords.Mat001()
@@ -197,6 +198,7 @@ def create_steel_material(mid):
     mat.user_comment = "Structural steel"
     return mat
 
+
 def create_aluminum_material(mid):
     """Create an aluminum material."""
     mat = keywords.Mat001()
@@ -206,6 +208,7 @@ def create_aluminum_material(mid):
     mat.pr = 0.33
     mat.user_comment = "Aluminum 6061"
     return mat
+
 
 # Build material library
 materials = Deck(title="Material Library")
@@ -232,6 +235,7 @@ def replace_material(deck, old_mid, new_mid):
 
     for idx in reversed(indices_to_remove):
         deck.remove(idx)
+
 
 # Usage
 deck = Deck()
@@ -328,10 +332,11 @@ else:
 import os
 from ansys.dyna.core import Deck
 
+
 def process_directory(input_dir, output_dir, transform_func):
     """Process all .k files in directory."""
     for filename in os.listdir(input_dir):
-        if filename.endswith('.k'):
+        if filename.endswith(".k"):
             input_path = os.path.join(input_dir, filename)
             output_path = os.path.join(output_dir, filename)
 
@@ -340,6 +345,7 @@ def process_directory(input_dir, output_dir, transform_func):
             transform_func(deck)
             deck.write(output_path)
             print(f"Processed: {filename}")
+
 
 # Process all files
 process_directory("input_models/", "output_models/", scale_model)

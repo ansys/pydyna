@@ -46,10 +46,10 @@ The `Deck` is the main container for keywords. [See detailed guide](ansys.dyna.c
 
 ```python
 deck = Deck()
-deck.import_file("model.k")        # Load from file
-deck.append(keyword)        # Add keyword
-deck.remove(index)          # Remove keyword
-deck.export_file("output.k")      # Save to file
+deck.import_file("model.k")  # Load from file
+deck.append(keyword)  # Add keyword
+deck.remove(index)  # Remove keyword
+deck.export_file("output.k")  # Save to file
 ```
 
 ### Keywords Module
@@ -59,9 +59,9 @@ Keywords are Python classes representing LS-DYNA cards. [See detailed guide](ans
 ```python
 from ansys.dyna.core import keywords
 
-mat = keywords.Mat001()     # MAT_ELASTIC (type 001)
-mat.mid = 1                 # Material ID
-mat.ro = 7850               # Density
+mat = keywords.Mat001()  # MAT_ELASTIC (type 001)
+mat.mid = 1  # Material ID
+mat.ro = 7850  # Density
 ```
 
 **Naming**: `Mat001` = MAT type 1, `Section002` = SECTION type 2, etc.
@@ -102,8 +102,8 @@ deck.append(keyword)
 deck.extend([kw1, kw2, kw3])
 
 # Remove
-deck.remove(0)              # By index
-deck.remove([0, 2, 4])      # Multiple indices
+deck.remove(0)  # By index
+deck.remove([0, 2, 4])  # Multiple indices
 ```
 
 ### Includes

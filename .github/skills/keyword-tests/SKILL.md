@@ -68,8 +68,7 @@ Tests that require a live LS-DYNA installation must be marked with `@pytest.mark
 
 ```python
 @pytest.mark.run
-def test_something_that_needs_lsdyna(runner):
-    ...
+def test_something_that_needs_lsdyna(runner): ...
 ```
 
 - **Skipped by default** when running `pytest tests/` without `-m run`
@@ -83,6 +82,7 @@ Pattern: instantiate keyword, set fields, call `.write()`, compare to expected s
 ```python
 from ansys.dyna.core import keywords as kwd
 import pytest
+
 
 def test_my_keyword_renders(file_utils):
     k = kwd.MyKeyword()
@@ -104,6 +104,7 @@ Pattern: use `string_utils.as_buffer()` or load a `.k` file via `file_utils`, ca
 ```python
 from ansys.dyna.core import Deck, keywords as kwd
 
+
 def test_my_keyword_parses(string_utils):
     input_str = "*MY_KEYWORD\n        42\n*END\n"
     deck = Deck()
@@ -120,6 +121,7 @@ Use `Card.from_field_schemas` for low-level card tests:
 ```python
 from ansys.dyna.core.lib.card import Card
 from ansys.dyna.core.lib.field_schema import FieldSchema
+
 
 def test_card_reads_correctly(string_utils):
     field_schemas = (
