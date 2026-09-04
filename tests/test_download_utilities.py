@@ -169,6 +169,10 @@ class TestDownloadManagerUnit:
         cached = tmp_path / "mesh.k"
         cached.write_bytes(b"cached content")
 
+        mock_response = MagicMock()
+        mock_response.raise_for_status.return_value = None
+        mock_response.content = b"fresh content"
+
         with (
             patch.object(
                 download_manager,
@@ -176,7 +180,7 @@ class TestDownloadManagerUnit:
                 side_effect=RuntimeError("git unavailable"),
             ),
             patch.object(download_manager, "_add_file"),
-            patch.object(requests, "get") as mock_get,
+            patch.object(requests, "get", return_value=mock_response) as mock_get,
         ):
             result = download_manager.download_file(
                 "mesh.k", "ls-dyna/Buckling_Beer_Can", destination=str(tmp_path), force=False
