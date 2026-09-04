@@ -62,7 +62,7 @@ jobs:
             FTP_LOGIN=${{ env.FTP_LOGIN }}
 
       - name: "Build documentation"
-        uses: ./.github/actions/doc-build
+        uses: $/.github/actions/doc-build
         with:
           build-autokeywords-api: "True"
           pydyna-run-container: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ env.IMAGE_TAG }}
