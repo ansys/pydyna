@@ -76,14 +76,10 @@ The `keywords` property returns a `KeywordCollection` with fluent filtering:
 from ansys.dyna.core import keywords
 
 # Filter with lambda
-high_id_materials = deck.keywords.where(
-    lambda k: isinstance(k, keywords.Mat001) and k.mid > 100
-)
+high_id_materials = deck.keywords.where(lambda k: isinstance(k, keywords.Mat001) and k.mid > 100)
 
 # Chain filters
-steel_materials = deck.keywords.where(
-    lambda k: k.keyword == "MAT" and k.ro > 7000
-)
+steel_materials = deck.keywords.where(lambda k: k.keyword == "MAT" and k.ro > 7000)
 ```
 
 ## Modifying Decks
@@ -102,7 +98,7 @@ deck.append(mat)
 # Add multiple keywords
 contacts = []
 for i in range(10):
-    contact = keywords.ContactAutomaticSingleSurface(ssid=i+1)
+    contact = keywords.ContactAutomaticSingleSurface(ssid=i + 1)
     contacts.append(contact)
 deck.extend(contacts)
 ```
@@ -160,7 +156,7 @@ deck.import_file("main.k")
 # Expand includes (brings included files into main deck)
 deck.expand(
     search_paths=["/path/to/includes", "/another/path"],
-    recurse=True  # Also expand includes within includes
+    recurse=True,  # Also expand includes within includes
 )
 ```
 
@@ -215,7 +211,7 @@ from ansys.dyna.core.lib.format_type import format_type
 
 # Set deck format
 deck.format = format_type.default  # Standard format
-deck.format = format_type.long      # Long format (wider fields)
+deck.format = format_type.long  # Long format (wider fields)
 
 # Format affects write output
 deck.export_file("output_long.k")
@@ -294,10 +290,12 @@ Advanced: Register custom handlers that process keywords during import:
 ```python
 from ansys.dyna.core.lib.import_handler import ImportHandler
 
+
 class MyHandler(ImportHandler):
     def after_import(self, context, keyword):
         # Custom processing
         pass
+
 
 deck.register_import_handler(MyHandler())
 deck.import_file("model.k")  # Handler runs during load

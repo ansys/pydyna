@@ -23,15 +23,10 @@ When LS-DYNA has repeating rows (nodes, elements, parts):
 import pandas as pd
 
 node = keywords.Node()
-node.nodes = pd.DataFrame({
-    "nid": [1, 2, 3],
-    "x": [0.0, 1.0, 2.0],
-    "y": [0.0, 0.0, 0.0],
-    "z": [0.0, 0.0, 0.0]
-})
+node.nodes = pd.DataFrame({"nid": [1, 2, 3], "x": [0.0, 1.0, 2.0], "y": [0.0, 0.0, 0.0], "z": [0.0, 0.0, 0.0]})
 
 part = keywords.Part()
-part.parts = pd.DataFrame({"pid": [1,2], "secid": [1,2], "mid": [1,2]})
+part.parts = pd.DataFrame({"pid": [1, 2], "secid": [1, 2], "mid": [1, 2]})
 
 elem = keywords.ElementShell()
 elem.elements = pd.DataFrame({"eid": [1], "pid": [1], "n1": [1], "n2": [2], "n3": [3], "n4": [4]})
@@ -62,8 +57,8 @@ Keyword classes use **CamelCase**:
 ```python
 from ansys.dyna.core import keywords
 
-keywords.MatElastic()      # *MAT_ELASTIC
-keywords.MatRigid()      # *MAT_RIGID
+keywords.MatElastic()  # *MAT_ELASTIC
+keywords.MatRigid()  # *MAT_RIGID
 keywords.SectionBeam()  # *SECTION_BEAM
 keywords.SectionShell()  # *SECTION_SHELL
 ```
@@ -86,10 +81,10 @@ from ansys.dyna.core import keywords
 
 # Create a material
 mat = keywords.Mat001()  # MAT_001
-mat.mid = 1              # Material ID
-mat.ro = 7850            # Density
-mat.e = 2.1e11           # Young's modulus
-mat.pr = 0.3             # Poisson's ratio
+mat.mid = 1  # Material ID
+mat.ro = 7850  # Density
+mat.e = 2.1e11  # Young's modulus
+mat.pr = 0.3  # Poisson's ratio
 
 # or
 
@@ -97,7 +92,7 @@ mat = keywords.Mat001(mid=1, ro=7850, e=2.1e11, pr=0.3)
 
 # Create nodes
 node = keywords.Node()
-node.nodes = pd.DataFrame({"nid": [1,2,3], "x": [0.0, 0.1, 0.2], "y": [0.0, 0.0, 0.0], "z": [0.0, 0.0, 0.0]})
+node.nodes = pd.DataFrame({"nid": [1, 2, 3], "x": [0.0, 0.1, 0.2], "y": [0.0, 0.0, 0.0], "z": [0.0, 0.0, 0.0]})
 ```
 
 # Displaying keywords
@@ -149,14 +144,14 @@ node.x = 10.0
 
 ```python
 # Get keyword type
-print(mat.keyword)      # "MAT"
-print(mat.subkeyword)   # "ELASTIC" or "001"
+print(mat.keyword)  # "MAT"
+print(mat.subkeyword)  # "ELASTIC" or "001"
 
 # Get title as it appears in file
 print(mat.get_title())  # "*MAT_ELASTIC"
 
 # Check format
-print(mat.format)       # format_type.default
+print(mat.format)  # format_type.default
 ```
 
 ### Deck Association
@@ -196,7 +191,7 @@ curve = keywords.DefineCurve()
 curve.lcid = 1
 curve.title = "Load curve"
 
-#curve.curves is a pandas dataframe with columns a1 and o1
+# curve.curves is a pandas dataframe with columns a1 and o1
 ```
 
 ### Option Keywords
@@ -206,7 +201,7 @@ Keywords with optional cards:
 ```pycon
 # Some keywords have optional additional cards
 # Access via specific attributes defined in the class
->>> c=kwd.ContactAutomaticSingleSurface()
+>>> c = kwd.ContactAutomaticSingleSurface()
 >>> c.options
 Options:
     ID option is not active.
@@ -218,7 +213,7 @@ Options:
     E option is not active.
     F option is not active.
     G option is not active.
->>> c.options["ID"].active=True
+>>> c.options["ID"].active = True
 >>> c
 *CONTACT_AUTOMATIC_SINGLE_SURFACE_ID
 $#     cid                                                               heading
@@ -306,7 +301,7 @@ section_beam.elform = 1
 section_shell = keywords.Section002()
 section_shell.secid = 2
 section_shell.elform = 16  # Fully integrated shell
-section_shell.t1 = 1.0     # Thickness
+section_shell.t1 = 1.0  # Thickness
 ```
 
 ### Parts
@@ -319,7 +314,6 @@ part.parts = pd.DataFrame({"pid": [1], "secid": [1], "mid": [1]})
 ### Elements
 
 ```python
-
 # Element (varies by type)
 elem = keywords.ElementShell()
 elem.elements = pd.DataFrame({"eid": [200], "pid": [1], "n1": [100], "n2": [101], "n3": [102], "n4": [103]})
@@ -344,6 +338,7 @@ Use these strategies to discover keyword capabilities:
 ### 1. IDE Autocomplete
 ```python
 from ansys.dyna.core import keywords
+
 keywords.Mat  # <-- Autocomplete shows Mat001, Mat002, etc.
 ```
 
@@ -414,7 +409,7 @@ Some keywords reference others (e.g., Part references Section and Material):
 part = keywords.Part()
 part.pid = 1
 part.secid = 1  # References SECTION with secid=1
-part.mid = 1    # References MAT with mid=1
+part.mid = 1  # References MAT with mid=1
 
 # PyDyna can track these relationships (see linking documentation)
 ```

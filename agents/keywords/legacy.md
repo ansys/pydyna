@@ -33,6 +33,7 @@ In the `__init__` method, emit a `DeprecationWarning`:
 ```python
 import warnings
 
+
 class Mat295Legacy(KeywordBase):
     def __init__(self, **kwargs):
         warnings.warn(

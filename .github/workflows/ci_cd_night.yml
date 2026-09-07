@@ -135,7 +135,7 @@ jobs:
           persist-credentials: false
 
       - name: Run tests
-        uses: ./.github/actions/unit-test
+        uses: $/.github/actions/unit-test
         with:
           python-version: ${{ matrix.python-version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -158,7 +158,7 @@ jobs:
           persist-credentials: true
 
       - name: "Build documentation"
-        uses: ./.github/actions/doc-build
+        uses: $/.github/actions/doc-build
         with:
           build-autokeywords-api: "True"
           pdf-pool-size: 15000000

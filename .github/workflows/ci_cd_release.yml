@@ -52,7 +52,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: ./.github/actions/test-codegen
+      - uses: $/.github/actions/test-codegen
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
@@ -76,7 +76,7 @@ jobs:
           persist-credentials: false
 
       - name: "Build documentation"
-        uses: ./.github/actions/doc-build
+        uses: $/.github/actions/doc-build
         with:
           build-autokeywords-api: "True"
           pydyna-run-container: ${{ env.PYDYNA_RUN_CONTAINER }}
@@ -96,7 +96,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: ./.github/actions/unit-test
+      - uses: $/.github/actions/unit-test
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -119,7 +119,7 @@ jobs:
           persist-credentials: false
 
       - name: Run tests
-        uses: ./.github/actions/unit-test
+        uses: $/.github/actions/unit-test
         with:
           python-version: ${{ matrix.python-version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}

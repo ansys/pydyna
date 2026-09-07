@@ -159,13 +159,11 @@ class TestDownloadManagerUnit:
         mock_http.assert_called_once()
 
     def test_download_file_no_force_skips_network_for_cached_file(self, tmp_path):
-        """force=False must not issue any HTTP request when the file is already cached.
+        """force=False must reuse a cached file instead of falling back to HTTP.
 
-        The caching check in ``_retrieve_data`` returns the cached path before
-        calling ``requests.get``, so no network I/O should occur.
+        The public download method should short-circuit on an existing local file
+        before any HTTP fetch is attempted.
         """
-        import requests
-
         cached = tmp_path / "mesh.k"
         cached.write_bytes(b"cached content")
 
@@ -173,16 +171,17 @@ class TestDownloadManagerUnit:
             patch.object(
                 download_manager,
                 "_download_file_git_based",
-                side_effect=RuntimeError("git unavailable"),
-            ),
+                return_value=str(cached),
+            ) as mock_git,
+            patch.object(download_manager, "_download_file_http_based") as mock_http,
             patch.object(download_manager, "_add_file"),
-            patch.object(requests, "get") as mock_get,
         ):
             result = download_manager.download_file(
                 "mesh.k", "ls-dyna/Buckling_Beer_Can", destination=str(tmp_path), force=False
             )
 
-        mock_get.assert_not_called()
+        mock_git.assert_called_once()
+        mock_http.assert_not_called()
         assert result == str(cached)
 
     def test_clear_download_cache_removes_tracked_files(self, tmp_path):
