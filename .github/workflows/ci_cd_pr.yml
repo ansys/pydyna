@@ -57,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
-    - uses: ansys/actions/doc-changelog@7e7af221736bc4d9fb84a2ab28f99518e9bca84c # v11.0.5
+    - uses: ansys/actions/doc-changelog@3ad3b285bd9b67045477dafc7f9865a3aa39f692 # v11.0.6
       with:
         token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
         bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
@@ -69,7 +69,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check commit name
-        uses: ansys/actions/check-pr-title@7e7af221736bc4d9fb84a2ab28f99518e9bca84c # v11.0.5
+        uses: ansys/actions/check-pr-title@3ad3b285bd9b67045477dafc7f9865a3aa39f692 # v11.0.6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -77,7 +77,7 @@ jobs:
     name: Vulnerabilities
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/check-vulnerabilities@7e7af221736bc4d9fb84a2ab28f99518e9bca84c # v11.0.5
+      - uses: ansys/actions/check-vulnerabilities@3ad3b285bd9b67045477dafc7f9865a3aa39f692 # v11.0.6
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           python-package-name: ${{ env.PACKAGE_NAME }}
@@ -89,7 +89,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [vulnerabilities]
     steps:
-      - uses: ansys/actions/code-style@7e7af221736bc4d9fb84a2ab28f99518e9bca84c # v11.0.5
+      - uses: ansys/actions/code-style@3ad3b285bd9b67045477dafc7f9865a3aa39f692 # v11.0.6
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
@@ -98,7 +98,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [vulnerabilities]
     steps:
-      - uses: ansys/actions/check-actions-security@7e7af221736bc4d9fb84a2ab28f99518e9bca84c # v11.0.5
+      - uses: ansys/actions/check-actions-security@3ad3b285bd9b67045477dafc7f9865a3aa39f692 # v11.0.6
         with:
           generate-summary: true
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -122,7 +122,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PyAnsys documentation style checks
-        uses: ansys/actions/doc-style@7e7af221736bc4d9fb84a2ab28f99518e9bca84c # v11.0.5
+        uses: ansys/actions/doc-style@3ad3b285bd9b67045477dafc7f9865a3aa39f692 # v11.0.6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -201,7 +201,7 @@ jobs:
     needs: [doc, run-tests, unit-tests]
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/build-library@7e7af221736bc4d9fb84a2ab28f99518e9bca84c # v11.0.5
+      - uses: ansys/actions/build-library@3ad3b285bd9b67045477dafc7f9865a3aa39f692 # v11.0.6
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
