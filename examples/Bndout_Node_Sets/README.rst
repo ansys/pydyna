@@ -61,6 +61,9 @@ Missing nodes, incomplete sections, repeated records, invalid numbers, empty set
 and unsupported set types raise errors rather than silently reducing coverage.
 Repeated IDs within an input set count as one member.
 
+The selected node sets must be defined in the file passed with ``--deck``.
+This example does not expand ``*INCLUDE`` files.
+
 The reader supports the demonstrated ASCII record layouts, including E and D
 exponents. It ignores other section types and does not resolve generated sets
 or process rigid-body moments. It preserves the output's coordinate basis and
