@@ -189,9 +189,10 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
     # TODO: license_server_check, license_type => as in pymapdl
     wdir, input_file = __prepare(input, **kwargs)
 
+    container = kwargs.get("container", None)
     if "container" not in kwargs:
         container = os.environ.get("PYDYNA_RUN_CONTAINER", None)
-        if container != None:
+        if container is not None:
             kwargs["container"] = container
             if "container_env" not in kwargs:
                 kwargs["container_env"] = dict(
@@ -200,13 +201,13 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
 
     if "stream" not in kwargs:
         stream = os.environ.get("PYDYNA_RUN_STREAM", None)
-        if stream != None:
+        if stream is not None:
             kwargs["stream"] = bool(int(stream))
 
     runner = get_runner(**kwargs)
     runner.set_input(input_file, wdir)
 
     result = runner.run()
-    if container != None and kwargs.get("stream", True) is False:
+    if container is not None and kwargs.get("stream", True) is False:
         return result
     return wdir
