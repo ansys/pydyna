@@ -35,8 +35,8 @@ Windows
 Unified Ansys installations ship an environment script under the
 ``lsprepost*/LS-Run`` directory (``lsdynaintelvar.bat`` for Intel MPI,
 ``lsdynamsvar.bat`` otherwise). When that script is found, the run calls it
-before launching the solver. If it is not available — for example with a
-standalone executable outside a unified installation — the solver is launched
+before launching the solver. If it is not available (for example, with a
+standalone executable outside a unified installation), the solver is launched
 directly and a warning is logged. MPI modes additionally need a working MPI
 runtime available on ``PATH``.
 
@@ -74,7 +74,7 @@ The most commonly used parameters are:
    Full path to the LS-DYNA solver binary. Accepted on both platforms.
 
 ``ncpu``
-   Number of CPUs. Defaults to ``1``.
+   Number of CPU cores. Defaults to ``1``.
 
 ``memory``
    Solver memory amount. Defaults to ``20``.
@@ -154,7 +154,7 @@ Current limitations
 - On Windows, paths containing commas (common with OneDrive locations)
   are converted to their 8.3 short form automatically. When the
   conversion is unavailable, the path is used as given.
-- Custom MPI installations or non-default MPI runtimes are not
-  configurable through ``run_dyna``.
+- Custom or non-default MPI installations are not configurable through
+  ``run_dyna``.
 - Docker-based runs are configured separately through the ``container``
   parameter and are outside the scope of this page.
