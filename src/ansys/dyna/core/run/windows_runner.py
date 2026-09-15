@@ -22,6 +22,7 @@
 
 """Windows implementation of LS-DYNA runner."""
 
+import ctypes
 import logging
 import os
 from pathlib import Path
@@ -37,6 +38,38 @@ from ansys.dyna.core.run.base_runner import BaseRunner
 from ansys.dyna.core.run.options import MpiOption, Precision
 
 log = logging.getLogger(__name__)
+
+
+def _get_short_path(path: str) -> str:
+    """Convert a Windows path to 8.3 short format if it contains commas.
+
+    LS-DYNA cannot parse paths with commas. Windows OneDrive paths often
+    contain commas (e.g., "OneDrive - Company Name"). This function uses
+    the Windows API to convert such paths to their 8.3 short format.
+
+    Parameters
+    ----------
+    path : str
+        The path to convert.
+
+    Returns
+    -------
+    str
+        The short path if conversion succeeds, otherwise the original path.
+    """
+    if "," not in path:
+        return path
+
+    try:
+        buffer = ctypes.create_unicode_buffer(260)
+        result = ctypes.windll.kernel32.GetShortPathNameW(path, buffer, len(buffer))
+        if result == 0:
+            log.warning(f"GetShortPathNameW failed for {path}, using original path")
+            return path
+        return buffer.value
+    except Exception as e:
+        log.warning(f"Failed to convert path {path}: {e}, using original path")
+        return path
 
 
 class WindowsRunner(BaseRunner):
@@ -63,8 +96,8 @@ class WindowsRunner(BaseRunner):
 
     def set_input(self, input_file: str, working_directory: str) -> None:
         """Set input file and working directory."""
-        self.input_file = input_file
-        self.working_directory = working_directory
+        self.input_file = _get_short_path(input_file)
+        self.working_directory = _get_short_path(working_directory)
 
     def _find_solver(self, version: int, executable: str = None) -> None:
         """Find LS-DYNA solver location."""

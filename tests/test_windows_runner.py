@@ -135,3 +135,46 @@ def test_run_failure(mock_popen, tmp_workdir):
 
     with pytest.raises(RuntimeError):
         runner.run()
+
+
+def test_get_short_path_no_comma(tmp_workdir):
+    """Test that paths without commas are returned unchanged."""
+    path = str(tmp_workdir / "normal_path" / "input.k")
+    result = windows_runner._get_short_path(path)
+    assert result == path
+
+
+def test_get_short_path_with_comma_returns_string(tmp_workdir):
+    """Test that paths with commas are processed and return a string."""
+    comma_path = str(tmp_workdir / "OneDrive - Company" / "input.k")
+    result = windows_runner._get_short_path(comma_path)
+    # On Windows, this may convert to short path or return original
+    # The key is that it returns a string and doesn't crash
+    assert isinstance(result, str)
+    assert len(result) > 0
+
+
+def test_get_short_path_with_comma_handles_errors(tmp_workdir):
+    """Test that _get_short_path handles errors gracefully."""
+    comma_path = str(tmp_workdir / "OneDrive - Company" / "input.k")
+    # This should not raise an exception even if Windows API fails
+    result = windows_runner._get_short_path(comma_path)
+    assert isinstance(result, str)
+
+
+@patch("ansys.dyna.core.run.windows_runner._get_short_path")
+def test_set_input_calls_get_short_path(mock_get_short, tmp_workdir):
+    """Test that set_input calls _get_short_path on both paths."""
+    mock_get_short.side_effect = lambda p: f"SHORT({p})"
+
+    exe = tmp_workdir / "lsdyna.exe"
+    exe.write_text("dummy")
+    runner = windows_runner.WindowsRunner(executable=str(exe))
+
+    input_file = str(tmp_workdir / "input.k")
+    workdir = str(tmp_workdir)
+    runner.set_input(input_file, workdir)
+
+    assert mock_get_short.call_count == 2
+    assert runner.input_file == f"SHORT({input_file})"
+    assert runner.working_directory == f"SHORT({workdir})"
