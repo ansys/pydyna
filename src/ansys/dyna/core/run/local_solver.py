@@ -140,26 +140,27 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
             Defaults to Precision.DOUBLE.
         version : int
             Integer identifying the Ansys release to use, for example ``241``
-            for 2025 R1. When omitted, the latest discoverable Ansys
-            installation is used.
+            for 2024 R1. Used when neither an explicit executable nor a saved
+            solver path is selected. If version is also omitted, the latest
+            discoverable Ansys installation is used.
         executable : str
             Full path to the LS-DYNA solver executable. Accepted on both
-            Windows and Linux. The file must exist. When omitted, the solver
-            is discovered automatically: on Linux, a path previously saved
-            with ``save-ansys-path --name dyna`` is tried first, then the
-            latest discoverable Ansys installation; on Windows, the latest
-            discoverable Ansys installation is used. On Windows the run still
-            requires the ``LS-Run`` environment script shipped alongside the
-            solver under the ``lsprepost*/LS-Run`` directory.
+            Windows and Linux. The file must exist. When omitted, both
+            platforms try ``get_dyna_path(find=True, allow_input=False)``,
+            then the requested version, and then the latest installation.
+            Windows checks that the returned saved path exists.
+            On Windows, an environment script under ``lsprepost*/LS-Run``
+            is used when a matching directory is found. Without that directory,
+            the solver is launched directly with a warning. MPI modes require
+            a working MPI command and libraries in the process environment.
         ncpu : int
-            Number of cpus.
+            Number of CPU cores.
             Defaults to 1.
         memory : int
             Amount of memory units, as defined by `memory_unit` for DYNA to use.
             Defaults to 20.
         memory_unit : int
-            Memory unit.  Choose from the values defined in ``MemoryUnit``.
-            Defaults to MemoryUnit.MB.
+            Memory unit. Use ``MemoryUnit.MB`` (default) or ``MemoryUnit.GB``.
         working_directory : str
             Working directory.
             If the `input` parameter is a path to the input file,

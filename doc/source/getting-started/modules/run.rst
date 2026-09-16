@@ -19,7 +19,8 @@ Ansys unified installation or a path saved with the ``save-ansys-path`` CLI.
 Solver discovery
 ****************
 
-The discovery order depends on the platform.
+Both platforms try an explicit executable, a saved solver path, a requested
+version, and then the latest installation.
 
 Windows
 ^^^^^^^
@@ -28,17 +29,17 @@ Windows
 2. Otherwise ``get_dyna_path(find=True, allow_input=False)`` is called to
    retrieve a path previously saved with ``save-ansys-path --name dyna``.
    The saved path is used only if the file exists.
-3. Otherwise, if ``version`` is provided (for example ``241`` for 2025 R1),
+3. Otherwise, if ``version`` is provided (for example ``241`` for 2024 R1),
    the matching unified installation is located.
 4. Otherwise the latest discoverable Ansys installation is used.
 
 Unified Ansys installations ship an environment script under the
 ``lsprepost*/LS-Run`` directory (``lsdynaintelvar.bat`` for Intel MPI,
 ``lsdynamsvar.bat`` otherwise). When that script is found, the run calls it
-before launching the solver. If it is not available (for example, with a
-standalone executable outside a unified installation), the solver is launched
-directly and a warning is logged. MPI modes additionally need a working MPI
-runtime available on ``PATH``.
+before launching the solver. If no matching ``lsprepost`` directory is found,
+the solver is launched directly and a warning is logged. If that directory
+exists, the expected script must be present and usable. MPI modes additionally
+need a working ``mpiexec`` command and the required libraries on ``PATH``.
 
 Linux
 ^^^^^
@@ -67,8 +68,9 @@ The most commonly used parameters are:
    ``Precision.DOUBLE`` (default) or ``Precision.SINGLE``.
 
 ``version``
-   Integer identifying the Ansys release, for example ``241`` for 2025 R1.
-   When omitted, the latest discoverable installation is used.
+   Integer identifying the Ansys release, for example ``241`` for 2024 R1.
+   Used when neither an explicit executable nor a saved path is selected.
+   When also omitted, the latest discoverable installation is used.
 
 ``executable``
    Full path to the LS-DYNA solver binary. Accepted on both platforms.
@@ -80,7 +82,7 @@ The most commonly used parameters are:
    Solver memory amount. Defaults to ``20``.
 
 ``memory_unit``
-   ``MemoryUnit.MB`` (default), ``MemoryUnit.KB``, or ``MemoryUnit.GB``.
+   ``MemoryUnit.MB`` (default) or ``MemoryUnit.GB``.
 
 ``working_directory``
    Working directory for the solve. Defaults to the directory containing the
@@ -104,9 +106,9 @@ Windows
         working_directory=r"C:\work\my-simulation",
     )
 
-The ``executable`` path must point to a solver installed as part of an
-Ansys unified installation. The run relies on the ``LS-Run`` environment
-script found alongside the solver.
+This example uses a unified installation. A standalone executable can also
+be selected. Without an ``LS-Run`` environment script, the required solver
+libraries must already be available in the process environment.
 
 Linux
 ^^^^^
@@ -139,21 +141,22 @@ calls to ``run_dyna`` do not need ``executable`` every time::
     save-ansys-path --name dyna /path/to/dyna
 
 Both platforms pick up the saved path through
-``get_dyna_path(find=True, allow_input=False)``. The saved path is used
-only when the file exists; otherwise discovery continues with ``version``
-or the latest discoverable installation.
+``get_dyna_path(find=True, allow_input=False)``. Windows additionally checks
+that the returned file exists. Linux uses the path returned by the dependency.
+When no usable path is selected, discovery continues with ``version`` or the
+latest discoverable installation.
 
 
 Current limitations
 *******************
 
-- On Windows, MPI modes rely on the ``lsprepost*/LS-Run`` environment
-  scripts shipped with unified Ansys installations. A standalone
-  executable runs for ``SMP`` without those scripts, but MPI runs still
-  require them along with a working MPI runtime.
-- On Windows, paths containing commas (common with OneDrive locations)
-  are converted to their 8.3 short form automatically. When the
-  conversion is unavailable, the path is used as given.
+- On Windows, MPI modes need a working ``mpiexec`` command and the required
+  libraries. An ``LS-Run`` environment script can configure these when present,
+  but the runner can also launch directly with a prepared environment.
+- On Windows, paths containing commas are converted to a short filename
+  when one is available. If conversion fails or the result still contains
+  commas, the original path is retained with a warning. Such paths can still
+  fail in LS-DYNA; use a directory without commas in that case.
 - Custom or non-default MPI installations are not configurable through
   ``run_dyna``.
 - Docker-based runs are configured separately through the ``container``
