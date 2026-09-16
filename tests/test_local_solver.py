@@ -106,3 +106,19 @@ def test_run_dyna_ignores_environment_when_container_is_given(monkeypatch, input
     local_solver.run_dyna(input_file, container="img-from-args", working_directory=str(tmp_path))
 
     assert call_kwargs["container"] == "img-from-args"
+
+
+def test_run_dyna_explicit_none_disables_container_environment(monkeypatch, input_file, tmp_path):
+    """Explicit None disables the container even when the environment requests one."""
+    runner, call_kwargs = _patch_runner(monkeypatch)
+    monkeypatch.setenv("PYDYNA_RUN_CONTAINER", "img-from-env")
+    monkeypatch.setenv("LSTC_LICENSE", "1055@server")
+    monkeypatch.setenv("ANSYSLI_SERVERS", "2325@server")
+    monkeypatch.setenv("ANSYSLMD_LICENSE_FILE", "1055@server")
+
+    result = local_solver.run_dyna(input_file, container=None, working_directory=str(tmp_path), stream=False)
+
+    assert call_kwargs["container"] is None
+    assert "container_env" not in call_kwargs
+    assert result == str(tmp_path)
+    runner.run.assert_called_once()
