@@ -43,9 +43,9 @@ log = logging.getLogger(__name__)
 def _get_short_path(path: str) -> str:
     """Convert a Windows path to 8.3 short format if it contains commas.
 
-    LS-DYNA cannot parse paths with commas. Windows OneDrive paths often
-    contain commas (e.g., "OneDrive - Company Name"). This function uses
-    the Windows API to convert such paths to their 8.3 short format.
+    LS-DYNA cannot parse paths with commas. This function uses the Windows
+    API to obtain a short path when one exists. Short names are not available
+    on every filesystem, so conversion can leave the original path unchanged.
 
     Parameters
     ----------
@@ -61,14 +61,23 @@ def _get_short_path(path: str) -> str:
         return path
 
     try:
-        buffer = ctypes.create_unicode_buffer(260)
-        result = ctypes.windll.kernel32.GetShortPathNameW(path, buffer, len(buffer))
-        if result == 0:
-            log.warning(f"GetShortPathNameW failed for {path}, using original path")
+        get_short_path = ctypes.windll.kernel32.GetShortPathNameW
+        size = get_short_path(path, None, 0)
+        if size == 0:
+            log.warning("GetShortPathNameW failed for %s, using original path", path)
             return path
-        return buffer.value
-    except Exception as e:
-        log.warning(f"Failed to convert path {path}: {e}, using original path")
+        buffer = ctypes.create_unicode_buffer(size)
+        result = get_short_path(path, buffer, size)
+        if result == 0 or result >= size:
+            log.warning("GetShortPathNameW failed for %s, using original path", path)
+            return path
+        short_path = buffer.value
+        if not short_path or "," in short_path:
+            log.warning("No comma-free short path available for %s, using original path", path)
+            return path
+        return short_path
+    except Exception as exc:
+        log.warning("Failed to convert path %s: %s, using original path", path, exc)
         return path
 
 
