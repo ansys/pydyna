@@ -36,14 +36,42 @@ def test_find_solver_with_explicit_executable(tmp_workdir):
     assert runner.solver.endswith("lsdyna.exe\"")
 
 
+@patch("ansys.dyna.core.run.windows_runner.get_dyna_path")
 @patch("ansys.dyna.core.run.windows_runner._get_unified_install_base_for_version")
-def test_find_solver_with_version(mock_install_base, tmp_workdir):
+def test_find_solver_with_version(mock_install_base, mock_dyna_path, tmp_workdir):
     exe = tmp_workdir / "ansys" / "bin" / "winx64" / "lsdyna_sp.exe"
     exe.parent.mkdir(parents=True)
     exe.write_text("dummy")
 
+    mock_dyna_path.return_value = None  # no path saved via save-ansys-path
     mock_install_base.return_value = (tmp_workdir, None)
     runner = windows_runner.WindowsRunner(version=241, precision=Precision.SINGLE)
+    assert runner.solver.endswith("lsdyna_sp.exe\"")
+
+
+@patch("ansys.dyna.core.run.windows_runner.get_dyna_path")
+def test_find_solver_uses_saved_dyna_path(mock_dyna_path, tmp_workdir):
+    """A path saved via `save-ansys-path --name dyna` takes precedence, as on Linux."""
+    saved = tmp_workdir / "custom_lsdyna.exe"
+    saved.write_text("dummy")
+
+    mock_dyna_path.return_value = str(saved)
+    runner = windows_runner.WindowsRunner()
+    assert runner.solver == f'"{str(saved)}"'
+    assert runner.solver_location == str(tmp_workdir)
+
+
+@patch("ansys.dyna.core.run.windows_runner.get_latest_ansys_installation")
+@patch("ansys.dyna.core.run.windows_runner.get_dyna_path")
+def test_find_solver_skips_missing_saved_dyna_path(mock_dyna_path, mock_latest, tmp_workdir):
+    """A saved path that no longer exists falls through to the latest install."""
+    exe = tmp_workdir / "ansys" / "bin" / "winx64" / "lsdyna_sp.exe"
+    exe.parent.mkdir(parents=True)
+    exe.write_text("dummy")
+
+    mock_dyna_path.return_value = str(tmp_workdir / "gone.exe")  # saved path missing
+    mock_latest.return_value = (None, tmp_workdir)
+    runner = windows_runner.WindowsRunner(precision=Precision.SINGLE)
     assert runner.solver.endswith("lsdyna_sp.exe\"")
 
 def test_find_solver_executable_not_found(tmp_workdir):
@@ -135,3 +163,34 @@ def test_run_failure(mock_popen, tmp_workdir):
 
     with pytest.raises(RuntimeError):
         runner.run()
+
+
+def test_get_env_script_missing_lsprepost(tmp_workdir, caplog):
+    """No lsprepost directory returns None with a warning instead of raising."""
+    import logging
+
+    caplog.set_level(logging.WARNING)
+    runner = make_runner(tmp_workdir)  # solver_location has no lsprepost dir
+    assert runner._get_env_script() is None
+    assert "No lsprepost directory" in caplog.text
+
+
+def test_command_line_without_env_script(tmp_workdir):
+    """Without an env script the command line runs the solver directly."""
+    runner = make_runner(tmp_workdir)
+    runner._get_env_script = MagicMock(return_value=None)
+
+    cmd = runner._get_command_line()
+    assert "call" not in cmd
+    assert runner.solver in cmd
+    assert cmd.endswith("> lsrun.out.txt 2>&1")
+
+
+def test_command_line_with_env_script(tmp_workdir):
+    """With an env script the command line still calls it first."""
+    runner = make_runner(tmp_workdir)
+    runner._get_env_script = MagicMock(return_value=r"C:\lsrun\env.bat")
+
+    cmd = runner._get_command_line()
+    assert cmd.startswith('call "C:\\lsrun\\env.bat" && ')
+    assert cmd.endswith("> lsrun.out.txt 2>&1")
