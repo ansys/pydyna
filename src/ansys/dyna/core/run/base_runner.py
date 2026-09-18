@@ -53,5 +53,9 @@ class BaseRunner:
 
     def get_memory_string(self) -> str:
         """Return memory string for the runner."""
-        unit = {MemoryUnit.MB: "m", MemoryUnit.GB: "G"}[self.memory_unit]
-        return f"{self.memory}{unit}"
+        units = {MemoryUnit.MB: "m", MemoryUnit.GB: "G"}
+        if self.memory_unit not in units:
+            raise ValueError(
+                f"Unsupported memory unit: {self.memory_unit}. Only MemoryUnit.MB and MemoryUnit.GB are supported."
+            )
+        return f"{self.memory}{units[self.memory_unit]}"
