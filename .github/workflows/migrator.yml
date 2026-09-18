@@ -1,0 +1,242 @@
+# Fork PR Handler GitHub Action
+#
+# Migrate a pull request from a fork into a branch in this repository so that
+# workflows requiring repository secrets can run on the migrated pull request.
+# Comment "@pyansys-ci-bot migrate" or "@pyansys-ci-bot sync" on a fork PR.
+
+name: Fork PR Handler
+
+on:
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Issue number
+        required: true
+        type: number
+      comment_body:
+        description: Comment body
+        required: false
+        default: '@pyansys-ci-bot migrate'
+        type: string
+      comment_id:
+        description: Comment ID
+        required: true
+        type: number
+      actor:
+        description: Actor triggering the workflow
+        required: true
+        type: string
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  migrate:
+    name: Migrate PR from fork to main repository
+    if: |
+      (github.event.issue.pull_request != null &&
+       (contains(github.event.comment.body, '@pyansys-ci-bot migrate') ||
+        contains(github.event.comment.body, '@pyansys-ci-bot sync'))) ||
+      github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to create and push migration branches
+      pull-requests: write # Needed to create mirror pull requests and comments
+    steps:
+      - name: Set up migration configuration
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          DISPATCH_PR_NUMBER: ${{ github.event.inputs.issue_number }}
+          DISPATCH_USER: ${{ github.event.inputs.actor }}
+          DISPATCH_COMMENT_BODY: ${{ github.event.inputs.comment_body }}
+          DISPATCH_COMMENT_ID: ${{ github.event.inputs.comment_id }}
+          COMMENT_PR_NUMBER: ${{ github.event.issue.number }}
+          COMMENT_USER: ${{ github.event.comment.user.login }}
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_ID: ${{ github.event.comment.id }}
+        with:
+          github-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          script: |
+            const isDispatch = process.env.EVENT_NAME === 'workflow_dispatch';
+            const prNumber = isDispatch ? process.env.DISPATCH_PR_NUMBER : process.env.COMMENT_PR_NUMBER;
+            const user = isDispatch ? process.env.DISPATCH_USER : process.env.COMMENT_USER;
+            const body = isDispatch ? process.env.DISPATCH_COMMENT_BODY : process.env.COMMENT_BODY;
+            const commentId = isDispatch ? process.env.DISPATCH_COMMENT_ID : process.env.COMMENT_ID;
+
+            core.exportVariable('PR_NUMBER', prNumber);
+            core.exportVariable('USER_TRIGGERING', user);
+            core.exportVariable('COMMENT_ID', commentId);
+
+            let mode = '';
+            if (body.includes('pyansys-ci-bot sync theirs') || body.includes('pyansys-ci-bot migrate theirs')) {
+              mode = '--theirs';
+            } else if (body.includes('pyansys-ci-bot sync ours') || body.includes('pyansys-ci-bot migrate ours')) {
+              mode = '--ours';
+            }
+            core.exportVariable('MODE', mode);
+
+      - name: Check maintainer permissions
+        id: organization-member
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          github-token: ${{ secrets.TOKEN_TEAMS_USER_READ }}
+          script: |
+            try {
+              const { data } = await github.rest.teams.getMembershipForUserInOrg({
+                org: 'ansys',
+                team_slug: 'pydyna-maintainers',
+                username: process.env.USER_TRIGGERING,
+              });
+              const allowed = data && data.state === 'active' &&
+                (data.role === 'member' || data.role === 'maintainer');
+              core.setOutput('is_member', allowed);
+              core.exportVariable('CONTINUE', allowed ? 'true' : 'false');
+            } catch (error) {
+              core.error(`Error fetching team membership: ${error.message}`);
+              core.exportVariable('CONTINUE', 'false');
+            }
+
+      - name: Remove previous reaction
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          github-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          script: |
+            const { data: reactions } = await github.rest.reactions.listForIssueComment({
+              owner: 'ansys', repo: 'pydyna', comment_id: process.env.COMMENT_ID,
+            });
+            for (const reaction of reactions) {
+              if (reaction.user.login === 'pyansys-ci-bot') {
+                await github.rest.reactions.deleteForIssueComment({
+                  owner: 'ansys', repo: 'pydyna', comment_id: process.env.COMMENT_ID,
+                  reaction_id: reaction.id,
+                });
+              }
+            }
+
+      - name: Reply to triggering comment
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          github-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          script: |
+            const allowed = process.env.CONTINUE === 'true';
+            await github.rest.reactions.createForIssueComment({
+              owner: 'ansys', repo: 'pydyna', comment_id: process.env.COMMENT_ID,
+              content: allowed ? '+1' : '-1',
+            });
+            if (!allowed) {
+              await github.rest.issues.createComment({
+                owner: 'ansys', repo: 'pydyna', issue_number: process.env.PR_NUMBER,
+                body: '**:stop_sign: Insufficient permissions :stop_sign:**\n\n' +
+                  'You must be a member of the pydyna-maintainers team to migrate this PR.',
+              });
+            }
+
+      - name: Get pull request details
+        if: ${{ env.CONTINUE == 'true' }}
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          github-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          script: |
+            const { data } = await github.rest.pulls.get({
+              owner: 'ansys', repo: 'pydyna', pull_number: process.env.PR_NUMBER,
+            });
+            if (!data.head || !data.base) throw new Error('Pull request data is incomplete');
+            if (data.head.repo.full_name === 'ansys/pydyna') {
+              core.warning('The PR is already in the main repository. No migration needed.');
+              core.exportVariable('CONTINUE', 'false');
+              await github.rest.reactions.createForIssueComment({
+                owner: 'ansys', repo: 'pydyna', comment_id: process.env.COMMENT_ID, content: 'confused',
+              });
+              return;
+            }
+            core.exportVariable('PR_HEAD_BRANCH', data.head.ref);
+            core.exportVariable('PR_HEAD_REPO', data.head.repo.full_name);
+            core.exportVariable('PR_BASE_BRANCH', `migration/pr-${process.env.PR_NUMBER}`);
+            core.exportVariable('PR_BASE_REPO', data.base.repo.full_name);
+
+      - name: Check out repository
+        if: ${{ env.CONTINUE == 'true' }}
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: true # zizmor: ignore[artipacked]
+
+      - name: Clone fork branch, merge main, and push migration branch
+        if: ${{ env.CONTINUE == 'true' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          BOT_USERNAME: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          BOT_EMAIL: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
+        run: |
+          git config user.name "${BOT_USERNAME}"
+          git config user.email "${BOT_EMAIL}"
+          git config pull.rebase true
+          git remote add head_repo "https://x-access-token:${GITHUB_TOKEN}@github.com/${PR_HEAD_REPO}.git"
+          git fetch head_repo "${PR_HEAD_BRANCH}"
+          git checkout -b "${PR_BASE_BRANCH}" "head_repo/${PR_HEAD_BRANCH}"
+          git merge origin/main
+          conflicts=$(git ls-files -u | wc -l)
+          if [[ "${conflicts}" -gt 0 && -n "${MODE}" ]]; then
+            git checkout "${MODE}" .
+            git add .
+            [[ "$(git ls-files -u | wc -l)" -eq 0 ]] || exit 1
+            git -c core.editor=true merge --continue
+          elif [[ "${conflicts}" -gt 0 ]]; then
+            echo '::error::Merge conflicts detected. Retry with migrate theirs or migrate ours.'
+            exit 1
+          fi
+          git push origin "${PR_BASE_BRANCH}" --force-with-lease
+          if [[ "${MODE}" == '--ours' ]]; then
+            git push origin "head_repo/${PR_HEAD_BRANCH}" --force-with-lease
+          fi
+
+      - name: Open mirror pull request
+        if: ${{ env.CONTINUE == 'true' }}
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          github-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          script: |
+            const { data: existing } = await github.rest.pulls.list({
+              owner: 'ansys', repo: 'pydyna', base: process.env.PR_BASE_BRANCH, state: 'open',
+            });
+            if (existing.length > 0) return;
+            const { data: original } = await github.rest.pulls.get({
+              owner: 'ansys', repo: 'pydyna', pull_number: process.env.PR_NUMBER,
+            });
+            const { data: migrated } = await github.rest.pulls.create({
+              owner: 'ansys', repo: 'pydyna', head: process.env.PR_BASE_BRANCH, base: 'main',
+              title: `migrated (PR ${process.env.PR_NUMBER}): ${original.title}`,
+              body: `This PR mirrors [${original.title}](${original.html_url}) so repository CI secrets are available.\n\n` +
+                `Original PR by @${original.user.login}:\n\n${original.body || ''}\n\nCloses #${original.number}`,
+            });
+            await github.rest.issues.addAssignees({
+              owner: 'ansys', repo: 'pydyna', issue_number: migrated.number,
+              assignees: [process.env.USER_TRIGGERING, original.user.login],
+            });
+            await github.rest.reactions.createForIssueComment({
+              owner: 'ansys', repo: 'pydyna', comment_id: process.env.COMMENT_ID, content: 'rocket',
+            });
+            await github.rest.issues.createComment({
+              owner: 'ansys', repo: 'pydyna', issue_number: process.env.PR_NUMBER,
+              body: `## :rocket: Migration completed!\n\n[The migrated PR](${migrated.html_url}) has been created successfully.`,
+            });
+
+      - name: Report failed migration
+        if: ${{ failure() && github.run_attempt == 1 && github.event_name != 'workflow_dispatch' }}
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          github-token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          script: |
+            await github.rest.reactions.createForIssueComment({
+              owner: 'ansys', repo: 'pydyna', comment_id: process.env.COMMENT_ID, content: '-1',
+            });
+            await github.rest.issues.createComment({
+              owner: 'ansys', repo: 'pydyna', issue_number: process.env.PR_NUMBER,
+              body: '**:x: Migration failed :x:**\n\nAn error occurred while migrating or syncing the PR. Pinging @pydyna-maintainers for assistance.',
+            });
