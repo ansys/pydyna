@@ -22,6 +22,7 @@
 
 """Windows implementation of LS-DYNA runner."""
 
+import ctypes
 import logging
 import os
 from pathlib import Path
@@ -37,6 +38,47 @@ from ansys.dyna.core.run.base_runner import BaseRunner
 from ansys.dyna.core.run.options import MpiOption, Precision
 
 log = logging.getLogger(__name__)
+
+
+def _get_short_path(path: str) -> str:
+    """Convert a Windows path to 8.3 short format if it contains commas.
+
+    LS-DYNA cannot parse paths with commas. This function uses the Windows
+    API to obtain a short path when one exists. Short names are not available
+    on every filesystem, so conversion can leave the original path unchanged.
+
+    Parameters
+    ----------
+    path : str
+        The path to convert.
+
+    Returns
+    -------
+    str
+        The short path if conversion succeeds, otherwise the original path.
+    """
+    if "," not in path:
+        return path
+
+    try:
+        get_short_path = ctypes.windll.kernel32.GetShortPathNameW
+        size = get_short_path(path, None, 0)
+        if size == 0:
+            log.warning("GetShortPathNameW failed for %s, using original path", path)
+            return path
+        buffer = ctypes.create_unicode_buffer(size)
+        result = get_short_path(path, buffer, size)
+        if result == 0 or result >= size:
+            log.warning("GetShortPathNameW failed for %s, using original path", path)
+            return path
+        short_path = buffer.value
+        if not short_path or "," in short_path:
+            log.warning("No comma-free short path available for %s, using original path", path)
+            return path
+        return short_path
+    except Exception as exc:
+        log.warning("Failed to convert path %s: %s, using original path", path, exc)
+        return path
 
 
 class WindowsRunner(BaseRunner):
@@ -63,8 +105,8 @@ class WindowsRunner(BaseRunner):
 
     def set_input(self, input_file: str, working_directory: str) -> None:
         """Set input file and working directory."""
-        self.input_file = input_file
-        self.working_directory = working_directory
+        self.input_file = _get_short_path(input_file)
+        self.working_directory = _get_short_path(working_directory)
 
     def _find_solver(self, version: int, executable: str = None) -> None:
         """Find LS-DYNA solver location."""
