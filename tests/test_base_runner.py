@@ -20,9 +20,8 @@ def test_memory_string_supported(memory_unit, expected):
 )
 def test_memory_string_unsupported_raises_value_error(memory_unit):
     runner = BaseRunner(memory=20, memory_unit=memory_unit)
-    with pytest.raises(ValueError, match="Only MemoryUnit.MB and MemoryUnit.GB are supported"):
+    with pytest.raises(ValueError, match="Only MemoryUnit.MB and MemoryUnit.GB are supported") as excinfo:
         runner.get_memory_string()
-        
         assert str(memory_unit) in str(excinfo.value)
 
 
