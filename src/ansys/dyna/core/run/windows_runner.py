@@ -30,8 +30,9 @@ from pathlib import Path
 # Subprocess is used to run LS-DYNA commands, excluding bandit warning
 import subprocess  # nosec: B404
 import time
+from typing import Optional
 
-from ansys.tools.common.path import get_latest_ansys_installation
+from ansys.tools.common.path import get_dyna_path, get_latest_ansys_installation
 from ansys.tools.common.path.path import _get_unified_install_base_for_version
 
 from ansys.dyna.core.run.base_runner import BaseRunner
@@ -119,6 +120,13 @@ class WindowsRunner(BaseRunner):
             self.solver = f'"{exe_path}"'  # Proper quoting for Windows paths with spaces
             return
 
+        # Mirror the Linux runner: prefer a path saved via `save-ansys-path --name dyna`.
+        atp_dyna_path = get_dyna_path(find=True, allow_input=False)
+        if atp_dyna_path and Path(atp_dyna_path).is_file():
+            self.solver_location = str(Path(atp_dyna_path).parent)
+            self.solver = f'"{atp_dyna_path}"'
+            return
+
         if version:
             install_base, _ = _get_unified_install_base_for_version(version)
         else:
@@ -133,14 +141,25 @@ class WindowsRunner(BaseRunner):
         self.solver_location = str(solver_dir)
         self.solver = f'"{str(solver_exe)}"'
 
-    def _get_env_script(self) -> str:
-        """Get env script when running using lsrun from workbench."""
+    def _get_env_script(self) -> Optional[str]:
+        """Get env script when running using lsrun from workbench.
+
+        Returns the LS-Run environment script shipped with the unified Ansys
+        installation, or ``None`` when the solver location does not provide
+        one (for example a standalone executable).
+        """
         if self.mpi_option == MpiOption.MPP_INTEL_MPI:
             script_name = "lsdynaintelvar.bat"
         else:
             script_name = "lsdynamsvar.bat"
-        lsprepost = [p for p in os.listdir(self.solver_location) if "lsprepost" in p][0]
-        env_script_path = os.path.join(self.solver_location, lsprepost, "LS-Run", script_name)
+        lsprepost_dirs = [p for p in os.listdir(self.solver_location) if "lsprepost" in p]
+        if not lsprepost_dirs:
+            log.warning(
+                f"No lsprepost directory found in {self.solver_location}; "
+                "running without the LS-Run environment script."
+            )
+            return None
+        env_script_path = os.path.join(self.solver_location, lsprepost_dirs[0], "LS-Run", script_name)
 
         return env_script_path
 
@@ -221,7 +240,8 @@ class WindowsRunner(BaseRunner):
 
     def _get_command_line(self) -> str:
         """Get the command line to run LS-DYNA, including *CASE support."""
-        script = f'call "{self._get_env_script()}"'
+        env_script = self._get_env_script()
+        script = f'call "{env_script}" && ' if env_script else ""
         ncpu = self.ncpu
         mem = self.get_memory_string()
         input_file = self.input_file
@@ -243,4 +263,4 @@ class WindowsRunner(BaseRunner):
             command = f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem} {case_option}'  # noqa: E501
         elif self.mpi_option == MpiOption.MPP_MS_MPI:
             command = f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {self.solver} i={input_file} memory={mem} {case_option}'  # noqa: E501
-        return f"{script} && {command} > lsrun.out.txt 2>&1"
+        return f"{script}{command} > lsrun.out.txt 2>&1"
