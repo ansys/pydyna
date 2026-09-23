@@ -399,7 +399,7 @@ R result   a*b+c
         assert deck.parameters.get("result") == 10.0
 
     def test_deck_with_uppercase_functions_and_pi(self):
-        """Test the reported issue #1118 deck with uppercase functions and PI constant."""
+        """Test the deck with uppercase functions and PI constant."""
         deck_text = """*KEYWORD long=s
 *PARAMETER_EXPRESSION
 R A_FSO15 15.0*pi/180.0
