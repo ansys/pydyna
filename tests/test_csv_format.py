@@ -18,6 +18,7 @@ from ansys.dyna.core.lib.format_type import card_format
 from ansys.dyna.core.lib.kwd_line_formatter import (
     _is_comma_delimited,
     load_dataline,
+    load_dataline_with_format,
     parse_dataline,
 )
 from ansys.dyna.core.lib.parameters import ParameterSet
@@ -65,6 +66,48 @@ class TestCommaDelimitedDetection:
         """Fixed-width lines with embedded commas should not be detected as CSV."""
         # Fixed-width data often has many leading spaces
         assert _is_comma_delimited("         1,2,3,4") is False
+
+    def test_title_field_with_commas_is_not_csv(self):
+        """A trailing string title field should consume the rest of the line, even with commas."""
+        title = "alpha, beta, gamma"
+        spec = [(0, 10, int), (10, 40, str)]
+        card = Card(
+            [
+                Field("id", int, 0, 10, value=1),
+                Field("title", str, 10, 40, value=title),
+            ]
+        )
+        line = card.write().splitlines()[-1]
+
+        assert "," in title
+        assert _is_comma_delimited(line, num_fields=len(spec)) is False
+        parsed, warnings = load_dataline(spec, line)
+        assert parsed == (1, title)
+        assert warnings == []
+
+    def test_title_field_with_commas_in_csv_like_keyword_line_parses_whole_field(self):
+        """A trailing string field with commas should absorb all remaining CSV fields."""
+        title = "Contact, Edge Only, Region A"
+        spec = [(0, 10, int), (10, 80, str)]
+        line = "123,Contact, Edge Only, Region A"
+
+        assert "," in title
+        # The line is genuinely CSV; the trailing string field must absorb the
+        # extra commas rather than truncating at the first comma.
+        assert _is_comma_delimited(line, num_fields=len(spec)) is True
+        parsed, warnings = load_dataline(spec, line)
+        assert parsed == (123, title)
+        assert warnings == []
+
+    def test_title_field_with_commas_in_csv_like_keyword_line_reports_csv_format(self):
+        """Format reporting should match the trailing-string CSV parsing path."""
+        spec = [(0, 10, int), (10, 80, str)]
+        line = "123,Contact, Edge Only, Region A"
+
+        parsed, detected_format, warnings = load_dataline_with_format(spec, line)
+        assert parsed == (123, "Contact, Edge Only, Region A")
+        assert detected_format == card_format.csv
+        assert warnings == []
 
 
 class TestCommaDelimitedParsing:
