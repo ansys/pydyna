@@ -66,6 +66,36 @@ class TestCommaDelimitedDetection:
         # Fixed-width data often has many leading spaces
         assert _is_comma_delimited("         1,2,3,4") is False
 
+    def test_title_field_with_commas_is_not_csv(self):
+        """A trailing string title field should consume the rest of the line, even with commas."""
+        title = "alpha, beta, gamma"
+        spec = [(0, 10, int), (10, 40, str)]
+        card = Card(
+            [
+                Field("id", int, 0, 10, value=1),
+                Field("title", str, 10, 40, value=title),
+            ]
+        )
+        line = card.write().splitlines()[-1]
+
+        assert "," in title
+        assert _is_comma_delimited(line, num_fields=len(spec)) is False
+        parsed, warnings = load_dataline(spec, line)
+        assert parsed == (1, title)
+        assert warnings == []
+
+    def test_title_field_with_commas_in_csv_like_keyword_line_is_not_csv(self):
+        """A trailing heading/title field with commas should not be treated as CSV data."""
+        title = "Contact, Edge Only, Region A"
+        spec = [(0, 10, int), (10, 80, str)]
+        line = "123,Contact, Edge Only, Region A"
+
+        assert "," in title
+        assert _is_comma_delimited(line, num_fields=len(spec)) is False
+        parsed, warnings = load_dataline(spec, line)
+        assert parsed == (123, title)
+        assert warnings == []
+
 
 class TestCommaDelimitedParsing:
     """Tests for parsing comma-delimited card lines."""
