@@ -431,15 +431,13 @@ def _is_comma_delimited(line_data: str, num_fields: int = None) -> bool:
     csv_fields = line_data.split(",")
     num_csv_fields = len(csv_fields)
 
-    # A trailing string field that absorbs commas should not be classified as
-    # true CSV format, even though it resembles CSV at a glance.
-    if num_fields is not None and num_csv_fields > num_fields:
-        return False
-
     # If we know expected field count, check if CSV count matches.
     if num_fields is not None:
-        # CSV format allows trailing fields to be omitted.
-        if num_csv_fields <= num_fields:
+        # CSV format allows trailing fields to be omitted. It also allows a
+        # trailing string field to absorb extra commas (handled separately by
+        # _has_trailing_string_csv/_load_dataline_csv), so tolerate a small
+        # amount of overshoot here.
+        if num_csv_fields <= num_fields + 2:
             # Additional check: first field shouldn't have many leading spaces
             # (which would indicate fixed-width format with embedded commas)
             first_field = csv_fields[0]
@@ -703,7 +701,7 @@ def parse_dataline(
     tuple
         (parsed_values, warnings). Values are raw; '&' in str fields is literal.
     """
-    num_fields = len(spec)
+    num_fields = len(_expand_spec(spec))
     if _is_comma_delimited(line_data, num_fields) or _has_trailing_string_csv(spec, line_data):
         logger.debug("parse_dataline: comma-delimited format")
         values = _load_dataline_csv(spec, line_data, parameter_set=None)
@@ -808,7 +806,7 @@ def load_dataline(
     if parameter_set is None:
         return parse_dataline(spec, line_data)
 
-    num_fields = len(spec)
+    num_fields = len(_expand_spec(spec))
     if _is_comma_delimited(line_data, num_fields) or _has_trailing_string_csv(spec, line_data):
         logger.debug("Detected comma-delimited format for line")
         return _load_dataline_csv(spec, line_data, parameter_set), []
@@ -832,7 +830,7 @@ def load_dataline_with_format(
     """
     from ansys.dyna.core.lib.format_type import card_format
 
-    num_fields = len(spec)
+    num_fields = len(_expand_spec(spec))
     is_csv = _is_comma_delimited(line_data, num_fields) or _has_trailing_string_csv(spec, line_data)
     values, warnings = load_dataline(spec, line_data, parameter_set)
     detected_format = card_format.csv if is_csv else card_format.fixed

@@ -85,14 +85,16 @@ class TestCommaDelimitedDetection:
         assert parsed == (1, title)
         assert warnings == []
 
-    def test_title_field_with_commas_in_csv_like_keyword_line_is_not_csv(self):
-        """A trailing heading/title field with commas should not be treated as CSV data."""
+    def test_title_field_with_commas_in_csv_like_keyword_line_parses_whole_field(self):
+        """A trailing string field with commas should absorb all remaining CSV fields."""
         title = "Contact, Edge Only, Region A"
         spec = [(0, 10, int), (10, 80, str)]
         line = "123,Contact, Edge Only, Region A"
 
         assert "," in title
-        assert _is_comma_delimited(line, num_fields=len(spec)) is False
+        # The line is genuinely CSV; the trailing string field must absorb the
+        # extra commas rather than truncating at the first comma.
+        assert _is_comma_delimited(line, num_fields=len(spec)) is True
         parsed, warnings = load_dataline(spec, line)
         assert parsed == (123, title)
         assert warnings == []
