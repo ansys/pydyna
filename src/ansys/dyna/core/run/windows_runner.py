@@ -58,28 +58,42 @@ def _get_short_path(path: str) -> str:
     str
         The short path if conversion succeeds, otherwise the original path.
     """
+
+    def _api_failed(reason: str) -> str:
+        log.warning(f"{reason} for {path}, using original path")
+        return path
+
     if "," not in path:
         return path
 
     try:
-        get_short_path = ctypes.windll.kernel32.GetShortPathNameW
-        size = get_short_path(path, None, 0)
+        get_short_path_name_w = ctypes.windll.kernel32.GetShortPathNameW
+        get_short_path_name_w.argtypes = [ctypes.c_wchar_p, ctypes.c_wchar_p, ctypes.c_uint32]
+        get_short_path_name_w.restype = ctypes.c_uint32
+    except (OSError, AttributeError) as exc:
+        return _api_failed(f"Failed to convert path {path}: {exc}")
+
+    try:
+        # A first call with no buffer returns the required buffer size, including the
+        # terminating null character. A return value of 0 means the call failed.
+        size = get_short_path_name_w(path, None, 0)
         if size == 0:
-            log.warning("GetShortPathNameW failed for %s, using original path", path)
-            return path
+            return _api_failed("GetShortPathNameW failed")
+
+        # A second call with a sufficiently sized buffer performs the actual conversion.
+        # A return value of 0 means failure; a value >= size means the buffer was too
+        # small, which should not happen given the size obtained above.
         buffer = ctypes.create_unicode_buffer(size)
-        result = get_short_path(path, buffer, size)
+        result = get_short_path_name_w(path, buffer, size)
         if result == 0 or result >= size:
-            log.warning("GetShortPathNameW failed for %s, using original path", path)
-            return path
-        short_path = buffer.value
-        if not short_path or "," in short_path:
-            log.warning("No comma-free short path available for %s, using original path", path)
-            return path
-        return short_path
-    except Exception as exc:
-        log.warning("Failed to convert path %s: %s, using original path", path, exc)
-        return path
+            return _api_failed("GetShortPathNameW failed")
+    except OSError as exc:
+        return _api_failed(f"Failed to convert path {path}: {exc}")
+
+    short_path = buffer.value
+    if not short_path or "," in short_path:
+        return _api_failed("No comma-free short path available")
+    return short_path
 
 
 class WindowsRunner(BaseRunner):
