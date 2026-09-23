@@ -231,6 +231,43 @@ R result  max(5, 3)
         )
         assert deck.parameters.get("result") == 5.0
 
+    def test_function_names_are_case_insensitive(self):
+        """Test that function names can be uppercase or mixed case."""
+        deck = Deck()
+        deck.loads(
+            """*KEYWORD
+*PARAMETER_EXPRESSION
+R rootup   SQRT(16)
+R trigmix  Sin(0.0)
+R maxup    MAX(5, 3)
+*END"""
+        )
+        assert deck.parameters.get("rootup") == 4.0
+        assert deck.parameters.get("trigmix") == 0.0
+        assert deck.parameters.get("maxup") == 5.0
+
+    def test_function_names_case_insensitive_with_parameter_references(self):
+        """Test case-insensitive functions with &parameter references across expression blocks."""
+        deck = Deck()
+        deck.loads(
+            """*KEYWORD long=s
+*PARAMETER
+R volfrac   0.1
+*PARAMETER_EXPRESSION
+R value1    sqrt( &volfrac )
+*PARAMETER_EXPRESSION
+R value2    SQRT( &volfrac )
+*PARAMETER_EXPRESSION
+R value3    max( &volfrac, 0 )
+R value4    MAX( &volfrac, 0 )
+*END"""
+        )
+
+        assert deck.parameters.get("value1") == pytest.approx(math.sqrt(0.1))
+        assert deck.parameters.get("value2") == pytest.approx(math.sqrt(0.1))
+        assert deck.parameters.get("value3") == pytest.approx(0.1)
+        assert deck.parameters.get("value4") == pytest.approx(0.1)
+
     def test_integer_type_result(self):
         """Test integer type parameter (I prefix)."""
         deck_text = """*KEYWORD
