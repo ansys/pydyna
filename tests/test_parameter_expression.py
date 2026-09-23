@@ -398,6 +398,44 @@ R result   a*b+c
         # 2*3 + 4 = 10
         assert deck.parameters.get("result") == 10.0
 
+    def test_deck_with_uppercase_functions_and_pi(self):
+        """Test the reported issue #1118 deck with uppercase functions and PI constant."""
+        deck_text = """*KEYWORD long=s
+*PARAMETER_EXPRESSION
+R A_FSO15 15.0*pi/180.0
+R     XVA      -208
+R    XaVA      240
+R     XHA      2928
+R    XaHA      1735
+R     aVA   237.0
+R     aHA   230.1
+R SwRota    0
+*PARAMETER_EXPRESSION
+R F_FSO15 COS(&A_FSO15)+SIN(&A_FSO15)*TAN(&A_FSO15)
+*PARAMETER_EXPRESSION
+R SINUS     ((&aHA - &aVA)/(&XaHA - &XaVA))
+R COSINUS   COS(ASIN(&SINUS))
+R TANGENS   TAN(ASIN(&SINUS))
+*PARAMETER_EXPRESSION
+R COSINUS   1.0
+R TANGENS   1.0
+R bBa          (180/PI)*ATAN(&TANGENS)*&SwRota
+*PARAMETER_EXPRESSION
+R bBa       1.0
+*END"""
+        deck = Deck()
+        deck.loads(deck_text)
+
+        assert deck.parameters.get("A_FSO15") == pytest.approx(15.0 * math.pi / 180.0)
+        assert deck.parameters.get("F_FSO15") == pytest.approx(
+            math.cos(15.0 * math.pi / 180.0) + math.sin(15.0 * math.pi / 180.0) * math.tan(15.0 * math.pi / 180.0)
+        )
+
+        # Later PARAMETER_EXPRESSION assignments should override earlier values.
+        assert deck.parameters.get("COSINUS") == pytest.approx(1.0)
+        assert deck.parameters.get("TANGENS") == pytest.approx(1.0)
+        assert deck.parameters.get("bBa") == pytest.approx(1.0)
+
 
 
 class TestDependencyResolution:
