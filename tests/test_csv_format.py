@@ -18,6 +18,7 @@ from ansys.dyna.core.lib.format_type import card_format
 from ansys.dyna.core.lib.kwd_line_formatter import (
     _is_comma_delimited,
     load_dataline,
+    load_dataline_with_format,
     parse_dataline,
 )
 from ansys.dyna.core.lib.parameters import ParameterSet
@@ -94,6 +95,16 @@ class TestCommaDelimitedDetection:
         assert _is_comma_delimited(line, num_fields=len(spec)) is False
         parsed, warnings = load_dataline(spec, line)
         assert parsed == (123, title)
+        assert warnings == []
+
+    def test_title_field_with_commas_in_csv_like_keyword_line_reports_csv_format(self):
+        """Format reporting should match the trailing-string CSV parsing path."""
+        spec = [(0, 10, int), (10, 80, str)]
+        line = "123,Contact, Edge Only, Region A"
+
+        parsed, detected_format, warnings = load_dataline_with_format(spec, line)
+        assert parsed == (123, "Contact, Edge Only, Region A")
+        assert detected_format == card_format.csv
         assert warnings == []
 
 
