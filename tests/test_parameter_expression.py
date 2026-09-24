@@ -231,6 +231,43 @@ R result  max(5, 3)
         )
         assert deck.parameters.get("result") == 5.0
 
+    def test_function_names_are_case_insensitive(self):
+        """Test that function names can be uppercase or mixed case."""
+        deck = Deck()
+        deck.loads(
+            """*KEYWORD
+*PARAMETER_EXPRESSION
+R rootup   SQRT(16)
+R trigmix  Sin(0.0)
+R maxup    MAX(5, 3)
+*END"""
+        )
+        assert deck.parameters.get("rootup") == 4.0
+        assert deck.parameters.get("trigmix") == 0.0
+        assert deck.parameters.get("maxup") == 5.0
+
+    def test_function_names_case_insensitive_with_parameter_references(self):
+        """Test case-insensitive functions with &parameter references across expression blocks."""
+        deck = Deck()
+        deck.loads(
+            """*KEYWORD long=s
+*PARAMETER
+R volfrac   0.1
+*PARAMETER_EXPRESSION
+R value1    sqrt( &volfrac )
+*PARAMETER_EXPRESSION
+R value2    SQRT( &volfrac )
+*PARAMETER_EXPRESSION
+R value3    max( &volfrac, 0 )
+R value4    MAX( &volfrac, 0 )
+*END"""
+        )
+
+        assert deck.parameters.get("value1") == pytest.approx(math.sqrt(0.1))
+        assert deck.parameters.get("value2") == pytest.approx(math.sqrt(0.1))
+        assert deck.parameters.get("value3") == pytest.approx(0.1)
+        assert deck.parameters.get("value4") == pytest.approx(0.1)
+
     def test_integer_type_result(self):
         """Test integer type parameter (I prefix)."""
         deck_text = """*KEYWORD
@@ -360,6 +397,44 @@ R result   a*b+c
 
         # 2*3 + 4 = 10
         assert deck.parameters.get("result") == 10.0
+
+    def test_deck_with_uppercase_functions_and_pi(self):
+        """Test the deck with uppercase functions and PI constant."""
+        deck_text = """*KEYWORD long=s
+*PARAMETER_EXPRESSION
+R A_FSO15 15.0*pi/180.0
+R     XVA      -208
+R    XaVA      240
+R     XHA      2928
+R    XaHA      1735
+R     aVA   237.0
+R     aHA   230.1
+R SwRota    0
+*PARAMETER_EXPRESSION
+R F_FSO15 COS(&A_FSO15)+SIN(&A_FSO15)*TAN(&A_FSO15)
+*PARAMETER_EXPRESSION
+R SINUS     ((&aHA - &aVA)/(&XaHA - &XaVA))
+R COSINUS   COS(ASIN(&SINUS))
+R TANGENS   TAN(ASIN(&SINUS))
+*PARAMETER_EXPRESSION
+R COSINUS   1.0
+R TANGENS   1.0
+R bBa          (180/PI)*ATAN(&TANGENS)*&SwRota
+*PARAMETER_EXPRESSION
+R bBa       1.0
+*END"""
+        deck = Deck()
+        deck.loads(deck_text)
+
+        assert deck.parameters.get("A_FSO15") == pytest.approx(15.0 * math.pi / 180.0)
+        assert deck.parameters.get("F_FSO15") == pytest.approx(
+            math.cos(15.0 * math.pi / 180.0) + math.sin(15.0 * math.pi / 180.0) * math.tan(15.0 * math.pi / 180.0)
+        )
+
+        # Later PARAMETER_EXPRESSION assignments should override earlier values.
+        assert deck.parameters.get("COSINUS") == pytest.approx(1.0)
+        assert deck.parameters.get("TANGENS") == pytest.approx(1.0)
+        assert deck.parameters.get("bBa") == pytest.approx(1.0)
 
 
 
