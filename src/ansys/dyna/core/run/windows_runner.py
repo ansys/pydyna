@@ -22,6 +22,7 @@
 
 """Windows implementation of LS-DYNA runner."""
 
+import ctypes
 import logging
 import os
 from pathlib import Path
@@ -29,14 +30,70 @@ from pathlib import Path
 # Subprocess is used to run LS-DYNA commands, excluding bandit warning
 import subprocess  # nosec: B404
 import time
+from typing import Optional
 
-from ansys.tools.common.path import get_latest_ansys_installation
+from ansys.tools.common.path import get_dyna_path, get_latest_ansys_installation
 from ansys.tools.common.path.path import _get_unified_install_base_for_version
 
 from ansys.dyna.core.run.base_runner import BaseRunner
 from ansys.dyna.core.run.options import MpiOption, Precision
 
 log = logging.getLogger(__name__)
+
+
+def _get_short_path(path: str) -> str:
+    """Convert a Windows path to 8.3 short format if it contains commas.
+
+    LS-DYNA cannot parse paths with commas. This function uses the Windows
+    API to obtain a short path when one exists. Short names are not available
+    on every filesystem, so conversion can leave the original path unchanged.
+
+    Parameters
+    ----------
+    path : str
+        The path to convert.
+
+    Returns
+    -------
+    str
+        The short path if conversion succeeds, otherwise the original path.
+    """
+
+    def _api_failed(reason: str) -> str:
+        log.warning(f"{reason} for {path}, using original path")
+        return path
+
+    if "," not in path:
+        return path
+
+    try:
+        get_short_path_name_w = ctypes.windll.kernel32.GetShortPathNameW
+        get_short_path_name_w.argtypes = [ctypes.c_wchar_p, ctypes.c_wchar_p, ctypes.c_uint32]
+        get_short_path_name_w.restype = ctypes.c_uint32
+    except (OSError, AttributeError) as exc:
+        return _api_failed(f"Failed to convert path {path}: {exc}")
+
+    try:
+        # A first call with no buffer returns the required buffer size, including the
+        # terminating null character. A return value of 0 means the call failed.
+        size = get_short_path_name_w(path, None, 0)
+        if size == 0:
+            return _api_failed("GetShortPathNameW failed")
+
+        # A second call with a sufficiently sized buffer performs the actual conversion.
+        # A return value of 0 means failure; a value >= size means the buffer was too
+        # small, which should not happen given the size obtained above.
+        buffer = ctypes.create_unicode_buffer(size)
+        result = get_short_path_name_w(path, buffer, size)
+        if result == 0 or result >= size:
+            return _api_failed("GetShortPathNameW failed")
+    except OSError as exc:
+        return _api_failed(f"Failed to convert path {path}: {exc}")
+
+    short_path = buffer.value
+    if not short_path or "," in short_path:
+        return _api_failed("No comma-free short path available")
+    return short_path
 
 
 class WindowsRunner(BaseRunner):
@@ -63,8 +120,8 @@ class WindowsRunner(BaseRunner):
 
     def set_input(self, input_file: str, working_directory: str) -> None:
         """Set input file and working directory."""
-        self.input_file = input_file
-        self.working_directory = working_directory
+        self.input_file = _get_short_path(input_file)
+        self.working_directory = _get_short_path(working_directory)
 
     def _find_solver(self, version: int, executable: str = None) -> None:
         """Find LS-DYNA solver location."""
@@ -75,6 +132,13 @@ class WindowsRunner(BaseRunner):
 
             self.solver_location = str(exe_path.parent)
             self.solver = f'"{exe_path}"'  # Proper quoting for Windows paths with spaces
+            return
+
+        # Mirror the Linux runner: prefer a path saved via `save-ansys-path --name dyna`.
+        atp_dyna_path = get_dyna_path(find=True, allow_input=False)
+        if atp_dyna_path and Path(atp_dyna_path).is_file():
+            self.solver_location = str(Path(atp_dyna_path).parent)
+            self.solver = f'"{atp_dyna_path}"'
             return
 
         if version:
@@ -91,14 +155,25 @@ class WindowsRunner(BaseRunner):
         self.solver_location = str(solver_dir)
         self.solver = f'"{str(solver_exe)}"'
 
-    def _get_env_script(self) -> str:
-        """Get env script when running using lsrun from workbench."""
+    def _get_env_script(self) -> Optional[str]:
+        """Get env script when running using lsrun from workbench.
+
+        Returns the LS-Run environment script shipped with the unified Ansys
+        installation, or ``None`` when the solver location does not provide
+        one (for example a standalone executable).
+        """
         if self.mpi_option == MpiOption.MPP_INTEL_MPI:
             script_name = "lsdynaintelvar.bat"
         else:
             script_name = "lsdynamsvar.bat"
-        lsprepost = [p for p in os.listdir(self.solver_location) if "lsprepost" in p][0]
-        env_script_path = os.path.join(self.solver_location, lsprepost, "LS-Run", script_name)
+        lsprepost_dirs = [p for p in os.listdir(self.solver_location) if "lsprepost" in p]
+        if not lsprepost_dirs:
+            log.warning(
+                f"No lsprepost directory found in {self.solver_location}; "
+                "running without the LS-Run environment script."
+            )
+            return None
+        env_script_path = os.path.join(self.solver_location, lsprepost_dirs[0], "LS-Run", script_name)
 
         return env_script_path
 
@@ -179,7 +254,8 @@ class WindowsRunner(BaseRunner):
 
     def _get_command_line(self) -> str:
         """Get the command line to run LS-DYNA, including *CASE support."""
-        script = f'call "{self._get_env_script()}"'
+        env_script = self._get_env_script()
+        script = f'call "{env_script}" && ' if env_script else ""
         ncpu = self.ncpu
         mem = self.get_memory_string()
         input_file = self.input_file
@@ -201,4 +277,4 @@ class WindowsRunner(BaseRunner):
             command = f'mpiexec -wdir "{self.working_directory}" -localonly -np {ncpu} {self.solver} i={input_file} memory={mem} {case_option}'  # noqa: E501
         elif self.mpi_option == MpiOption.MPP_MS_MPI:
             command = f'mpiexec -wdir "{self.working_directory}" -c {ncpu} -aa {self.solver} i={input_file} memory={mem} {case_option}'  # noqa: E501
-        return f"{script} && {command} > lsrun.out.txt 2>&1"
+        return f"{script}{command} > lsrun.out.txt 2>&1"
