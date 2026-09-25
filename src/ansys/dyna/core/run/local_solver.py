@@ -138,24 +138,29 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
         precision : int
             Floating point precision. Choose from the values defined in ``Precision``.
             Defaults to Precision.DOUBLE.
-        version : str
-            Version of Ansys Unified installed to use.
-            Defaults to: TODO (find the latest one?).
+        version : int
+            Integer identifying the Ansys release to use, for example ``241``
+            for 2024 R1. Used when neither an explicit executable nor a saved
+            solver path is selected. If version is also omitted, the latest
+            discoverable Ansys installation is used.
         executable : str
-            Optional and Linux-Only: The name of the DYNA solver executable.
-            Default is s based on the value of the ``mpi_option`` argument.
-            On linux: it can be the full path.
-            Also on linux, ansys-tools-path can be used to save a custom location of
-            a dyna executable so that it doesn't need to be set here each time.
+            Full path to the LS-DYNA solver executable. Accepted on both
+            Windows and Linux. The file must exist. When omitted, both
+            platforms try ``get_dyna_path(find=True, allow_input=False)``,
+            then the requested version, and then the latest installation.
+            Windows checks that the returned saved path exists.
+            On Windows, an environment script under ``lsprepost*/LS-Run``
+            is used when a matching directory is found. Without that directory,
+            the solver is launched directly with a warning. MPI modes require
+            a working MPI command and libraries in the process environment.
         ncpu : int
-            Number of cpus.
+            Number of CPU cores.
             Defaults to 1.
         memory : int
             Amount of memory units, as defined by `memory_unit` for DYNA to use.
             Defaults to 20.
         memory_unit : int
-            Memory unit.  Choose from the values defined in ``MemoryUnit``.
-            Defaults to MemoryUnit.MB.
+            Memory unit. Use ``MemoryUnit.MB`` (default) or ``MemoryUnit.GB``.
         working_directory : str
             Working directory.
             If the `input` parameter is a path to the input file,
@@ -171,9 +176,9 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
             If False, the solver stdout is printed once after the container exits.
             Defaults to True.
         activate_case : bool
-            If provided, aappends CASE cammad line for *CASE keywords support
+            If provided, appends CASE command line for ``*CASE`` keywords support.
         case_ids : list[int] or None
-            If provided, appends CASE or CASE=... to the LS-DYNA command line for *CASE support.
+            If provided, appends CASE or CASE=... to the LS-DYNA command line for ``*CASE`` support.
 
     Returns
     -------
@@ -189,9 +194,10 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
     # TODO: license_server_check, license_type => as in pymapdl
     wdir, input_file = __prepare(input, **kwargs)
 
+    container = kwargs.get("container", None)
     if "container" not in kwargs:
         container = os.environ.get("PYDYNA_RUN_CONTAINER", None)
-        if container != None:
+        if container is not None:
             kwargs["container"] = container
             if "container_env" not in kwargs:
                 kwargs["container_env"] = dict(
@@ -200,13 +206,13 @@ def run_dyna(input: typing.Union[str, object], **kwargs) -> str:
 
     if "stream" not in kwargs:
         stream = os.environ.get("PYDYNA_RUN_STREAM", None)
-        if stream != None:
+        if stream is not None:
             kwargs["stream"] = bool(int(stream))
 
     runner = get_runner(**kwargs)
     runner.set_input(input_file, wdir)
 
     result = runner.run()
-    if container != None and kwargs.get("stream", True) is False:
+    if container is not None and kwargs.get("stream", True) is False:
         return result
     return wdir

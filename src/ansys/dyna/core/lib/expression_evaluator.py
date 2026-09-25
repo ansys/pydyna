@@ -79,6 +79,8 @@ LSDYNA_FUNCTIONS = {
     "anint": lambda x: float(round(x)),  # Round to nearest integer, return as float
 }
 
+_LSDYNA_FUNCTIONS_LOWER = {name.lower(): func for name, func in LSDYNA_FUNCTIONS.items()}
+
 
 class ExpressionEvaluator:
     """Safe evaluator for LS-DYNA parameter expressions using AST.
@@ -202,7 +204,7 @@ class ExpressionEvaluator:
                 return str(value)
 
             # Check if this is actually a function name
-            if param_name in LSDYNA_FUNCTIONS:
+            if param_name.lower() in _LSDYNA_FUNCTIONS_LOWER:
                 # Don't replace function names
                 return match.group(0)
 
@@ -274,14 +276,15 @@ class ExpressionEvaluator:
                 raise ValueError("Only simple function calls are supported")
 
             func_name = node.func.id
-            if func_name not in LSDYNA_FUNCTIONS:
+            func_key = func_name.lower()
+            if func_key not in _LSDYNA_FUNCTIONS_LOWER:
                 raise ValueError(f"Unsupported function: {func_name}")
 
             # Evaluate arguments
             args = [self._eval_node(arg) for arg in node.args]
 
             # Call the function
-            func = LSDYNA_FUNCTIONS[func_name]
+            func = _LSDYNA_FUNCTIONS_LOWER[func_key]
             try:
                 return func(*args)
             except Exception as e:
@@ -384,7 +387,7 @@ class DependencyResolver:
         matches = re.findall(param_pattern, expression)
 
         # Filter out function names
-        params = {m for m in matches if m not in LSDYNA_FUNCTIONS}
+        params = {m for m in matches if m.lower() not in _LSDYNA_FUNCTIONS_LOWER}
 
         logger.debug(f"Extracted parameters from '{expression}': {params}")
         return params
