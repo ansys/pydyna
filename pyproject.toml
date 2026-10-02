@@ -74,14 +74,14 @@ doc = [
     "pytest-sphinx==0.7.1",
     "sphinx-notfound-page==1.1.0",
     "sphinx-copybutton==0.5.2",
-    "sphinx-gallery==0.22.0",
+    "sphinx-gallery==0.22.1",
     "sphinx-autodoc-typehints==3.1.0",
     "ansys-sphinx-theme[autoapi]==1.10.0",
     "pypandoc==1.17",
     "nbsphinx==0.9.8",
     "joblib==1.6.0",
     "ipython==8.39.0",
-    "jupyterlab==4.6.3",
+    "jupyterlab==4.6.4",
     "pyvista==0.49.0",
 ]
 
