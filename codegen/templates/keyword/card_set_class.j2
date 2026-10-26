@@ -49,7 +49,16 @@ class {{card_set.name}}(Cards):
 
     _option_spec_list = [
 {% for option in card_set.options %}
+{% if option.aliases %}
+        OptionSpec(
+            "{{option.name}}",
+            "{{option.card_order}}",
+            {{option.title_order}},
+            ("{{ option.aliases|join('", "') }}",),
+        ),
+{% else %}
         OptionSpec("{{option.name}}", "{{option.card_order}}", {{option.title_order}}),
+{% endif %}
 {% endfor %}
     ]
 {% endif %}

@@ -37,7 +37,13 @@ from ansys.dyna.core.lib.parameters import ParameterSet
 class OptionSpec:
     """Represents the specification of an option card."""
 
-    def __init__(self, name: str, card_order: "str | int", title_order: int):
+    def __init__(
+        self,
+        name: str,
+        card_order: "str | int",
+        title_order: int,
+        aliases: typing.Iterable[str] = (),
+    ):
         """Initialize an OptionSpec with name, card order, and title order.
 
         Parameters
@@ -49,10 +55,14 @@ class OptionSpec:
             integer (negative → ``pre``, positive → ``post``).
         title_order : int
             Order of this option in the keyword title.
+        aliases : iterable of str
+            Other title spellings of this same card. ``TITLE`` is an alias of
+            ``ID`` when both suffixes introduce one header line.
         """
         self._name = name
         self._position = CardPosition.parse(card_order)
         self._title_order = title_order
+        self._aliases = tuple(aliases)
 
     @property
     def name(self) -> str:
@@ -86,6 +96,11 @@ class OptionSpec:
     def title_order(self, value: int) -> None:
         """Set the title order of the option."""
         self._title_order = value
+
+    @property
+    def aliases(self) -> typing.Tuple[str, ...]:
+        """Other title spellings that select this same card."""
+        return self._aliases
 
     def __repr__(self) -> str:
         return f"OptionSpec(name={self.name}, position={self.position!r}, title_order={self.title_order})"
@@ -203,6 +218,10 @@ class OptionsInterface(metaclass=abc.ABCMeta):
         """Activate the option with the given name."""
         raise NotImplementedError
 
+    def select_option_label(self, name: str) -> None:
+        """Select this spelling of an option, replacing any other spelling."""
+        self.activate_option(name)
+
     @abc.abstractmethod
     def is_option_active(self, name: str) -> bool:
         """Indicates whether the option is active."""
@@ -233,7 +252,9 @@ class OptionAPI:
         option_spec: OptionSpec = self._options_api.get_option_spec(self._name)
 
         if value:
-            self._options_api.activate_option(self._name)
+            # Selecting a label switches the spelling of this card. Field
+            # setters call activate_option and leave an existing spelling alone.
+            self._options_api.select_option_label(self._name)
 
             # Determine if we should use cascading activation based on card order
             # If title_order exists (not None/0), use title-based mutual exclusion
@@ -241,7 +262,7 @@ class OptionAPI:
             if option_spec.title_order:
                 # Title-based behavior: deactivate mutually exclusive options
                 for any_option_spec in self._options_api.option_specs:
-                    if any_option_spec.name == self._name:
+                    if any_option_spec is option_spec:
                         continue
                     if (
                         any_option_spec.title_order == option_spec.title_order
@@ -252,7 +273,7 @@ class OptionAPI:
                 # Position-based logic
                 current_position = option_spec.position
                 for any_option_spec in self._options_api.option_specs:
-                    if any_option_spec.name == self._name:
+                    if any_option_spec is option_spec:
                         continue
                     if any_option_spec.title_order == 0:  # Only affect options without title_order
                         if any_option_spec.position == current_position:
@@ -282,9 +303,18 @@ class Options:
         sio = io.StringIO()
         sio.write("Options:")
         for option_spec in option_specs:
-            active = self._api.is_option_active(option_spec.name)
-            active_string = "active" if active else "not active"
-            sio.write(f"\n    {option_spec.name} option is {active_string}.")
+            selected = option_spec.name if self._api.is_option_active(option_spec.name) else None
+            if selected is None:
+                for alias in option_spec.aliases:
+                    if self._api.is_option_active(alias):
+                        selected = alias
+                        break
+            if selected is None:
+                sio.write(f"\n    {option_spec.name} option is not active.")
+            elif selected == option_spec.name:
+                sio.write(f"\n    {option_spec.name} option is active.")
+            else:
+                sio.write(f"\n    {option_spec.name} option is active as {selected}.")
         return sio.getvalue()
 
     @property

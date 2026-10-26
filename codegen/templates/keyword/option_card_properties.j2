@@ -9,7 +9,18 @@
         """Get or set the {% filter indent(width=8) %}{{field.help}}
         {% endfilter %}
         """ # nopep8
+{% if field.card_indices %}
+        for _shared_card in (
+{% for card_index in field.card_indices %}
+            self._cards[{{card_index}}],
+{% endfor %}
+        ):
+            if self.is_option_active(_shared_card.name):
+                return _shared_card.cards[{{card_loop.index-1}}].get_value("{{field.property_name}}")
+        return self._cards[{{field.card_indices[0]}}].cards[{{card_loop.index-1}}].get_value("{{field.property_name}}")
+{% else %}
         return self._cards[{{card.index}}].cards[{{card_loop.index-1}}].get_value("{{field.property_name}}")
+{% endif %}
 
 {% if not field.readonly %}
     @{{field.property_name}}.setter
@@ -20,7 +31,6 @@
             raise Exception("""{{field.property_name}} must be one of {{openbrace}}{{ field.options|join(',')}}{{closebrace}}""")
         {% endif %}
 {% if field.card_indices %}
-{# This is COMPLETELY wrong but it works for CONSTRAINED_BEAM_IN_SOLID. REVISIT! #}
 {% for card_index in field.card_indices %}
         self._cards[{{card_index}}].cards[{{card_loop.index-1}}].set_value("{{field.property_name}}", value)
 {% endfor %}{# card_index in field.card_indices #}
