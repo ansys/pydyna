@@ -93,7 +93,12 @@ class ContactForceTransducer(KeywordBase):
     keyword = "CONTACT"
     subkeyword = "FORCE_TRANSDUCER"
     _option_spec_list = [
-        OptionSpec("ID", "pre/2", 1),
+        OptionSpec(
+            "ID",
+            "pre/2",
+            1,
+            ("TITLE",),
+        ),
     ]
     _link_fields = {
         "saboxid": LinkType.DEFINE_BOX,

@@ -65,19 +65,18 @@ _CONSTRAINEDBEAMINSOLID_OPTION0_CARD0 = (
     FieldSchema("title", str, 10, 70, None),
 )
 
-_CONSTRAINEDBEAMINSOLID_OPTION1_CARD0 = (
-    FieldSchema("coupid", int, 0, 10, None),
-    FieldSchema("title", str, 10, 70, None),
-)
-
 class ConstrainedBeamInSolid(KeywordBase):
     """DYNA CONSTRAINED_BEAM_IN_SOLID keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "BEAM_IN_SOLID"
     _option_spec_list = [
-        OptionSpec("ID", "pre/1", 1),
-        OptionSpec("TITLE", "pre/1", 1),
+        OptionSpec(
+            "ID",
+            "pre/1",
+            1,
+            ("TITLE",),
+        ),
     ]
 
     def __init__(self, **kwargs):
@@ -103,16 +102,6 @@ class ConstrainedBeamInSolid(KeywordBase):
                 cards = [
                     Card.from_field_schemas_with_defaults(
                         _CONSTRAINEDBEAMINSOLID_OPTION0_CARD0,
-                        **kwargs,
-                    ),
-                ],
-                **kwargs
-            ),
-            OptionCardSet(
-                option_spec = ConstrainedBeamInSolid._option_spec_list[1],
-                cards = [
-                    Card.from_field_schemas_with_defaults(
-                        _CONSTRAINEDBEAMINSOLID_OPTION1_CARD0,
                         **kwargs,
                     ),
                 ],
@@ -352,7 +341,6 @@ class ConstrainedBeamInSolid(KeywordBase):
     def coupid(self, value: int) -> None:
         """Set the coupid property."""
         self._cards[3].cards[0].set_value("coupid", value)
-        self._cards[4].cards[0].set_value("coupid", value)
 
         if value:
             self.activate_option("COUPID")
@@ -367,7 +355,6 @@ class ConstrainedBeamInSolid(KeywordBase):
     def title(self, value: str) -> None:
         """Set the title property."""
         self._cards[3].cards[0].set_value("title", value)
-        self._cards[4].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")

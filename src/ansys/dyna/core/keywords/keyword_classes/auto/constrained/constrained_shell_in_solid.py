@@ -24,21 +24,17 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _CONSTRAINEDSHELLINSOLID_CARD0 = (
-    FieldSchema("coupid", int, 0, 10, None),
-    FieldSchema("title", str, 10, 70, None),
-)
-
-_CONSTRAINEDSHELLINSOLID_CARD1 = (
     FieldSchema("shsid", int, 0, 10, None),
     FieldSchema("ssid", int, 10, 10, None),
     FieldSchema("shstyp", int, 20, 10, 0),
     FieldSchema("sstyp", int, 30, 10, 0),
 )
 
-_CONSTRAINEDSHELLINSOLID_CARD2 = (
+_CONSTRAINEDSHELLINSOLID_CARD1 = (
     FieldSchema("start", float, 0, 10, 0.0),
     FieldSchema("end", float, 10, 10, 1e+20),
     FieldSchema("unused", int, 20, 10, None),
@@ -47,15 +43,29 @@ _CONSTRAINEDSHELLINSOLID_CARD2 = (
     FieldSchema("pssf", float, 50, 10, 0.1),
 )
 
+_CONSTRAINEDSHELLINSOLID_OPTION0_CARD0 = (
+    FieldSchema("coupid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class ConstrainedShellInSolid(KeywordBase):
     """DYNA CONSTRAINED_SHELL_IN_SOLID keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "SHELL_IN_SOLID"
+    _option_spec_list = [
+        OptionSpec(
+            "ID",
+            "pre/1",
+            1,
+            ("TITLE",),
+        ),
+    ]
 
     def __init__(self, **kwargs):
         """Initialize the ConstrainedShellInSolid class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDSHELLINSOLID_CARD0,
@@ -65,54 +75,38 @@ class ConstrainedShellInSolid(KeywordBase):
                 _CONSTRAINEDSHELLINSOLID_CARD1,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _CONSTRAINEDSHELLINSOLID_CARD2,
-                **kwargs,
+            OptionCardSet(
+                option_spec = ConstrainedShellInSolid._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDSHELLINSOLID_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
             ),
         ]
-    @property
-    def coupid(self) -> typing.Optional[int]:
-        """Get or set the Coupling card ID number
-        """ # nopep8
-        return self._cards[0].get_value("coupid")
-
-    @coupid.setter
-    def coupid(self, value: int) -> None:
-        """Set the coupid property."""
-        self._cards[0].set_value("coupid", value)
-
-    @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the A description of this coupling definition
-        """ # nopep8
-        return self._cards[0].get_value("title")
-
-    @title.setter
-    def title(self, value: str) -> None:
-        """Set the title property."""
-        self._cards[0].set_value("title", value)
-
     @property
     def shsid(self) -> typing.Optional[int]:
         """Get or set the Part or part set ID of the Lagrangian shell structure(see *PART, *SET_PART)
         """ # nopep8
-        return self._cards[1].get_value("shsid")
+        return self._cards[0].get_value("shsid")
 
     @shsid.setter
     def shsid(self, value: int) -> None:
         """Set the shsid property."""
-        self._cards[1].set_value("shsid", value)
+        self._cards[0].set_value("shsid", value)
 
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the Part or part set ID of the Lagrangian solid elements or thick shell element(see *PART, *SET_PART)
         """ # nopep8
-        return self._cards[1].get_value("ssid")
+        return self._cards[0].get_value("ssid")
 
     @ssid.setter
     def ssid(self, value: int) -> None:
         """Set the ssid property."""
-        self._cards[1].set_value("ssid", value)
+        self._cards[0].set_value("ssid", value)
 
     @property
     def shstyp(self) -> int:
@@ -120,14 +114,14 @@ class ConstrainedShellInSolid(KeywordBase):
         EQ.0: part set ID (PSID).
         EQ.1: part ID (PID).
         """ # nopep8
-        return self._cards[1].get_value("shstyp")
+        return self._cards[0].get_value("shstyp")
 
     @shstyp.setter
     def shstyp(self, value: int) -> None:
         """Set the shstyp property."""
         if value not in [0, 1, None]:
             raise Exception("""shstyp must be `None` or one of {0,1}.""")
-        self._cards[1].set_value("shstyp", value)
+        self._cards[0].set_value("shstyp", value)
 
     @property
     def sstyp(self) -> int:
@@ -135,14 +129,14 @@ class ConstrainedShellInSolid(KeywordBase):
         EQ.0: part set ID (PSID).
         EQ.1: part ID (PID).
         """ # nopep8
-        return self._cards[1].get_value("sstyp")
+        return self._cards[0].get_value("sstyp")
 
     @sstyp.setter
     def sstyp(self, value: int) -> None:
         """Set the sstyp property."""
         if value not in [0, 1, None]:
             raise Exception("""sstyp must be `None` or one of {0,1}.""")
-        self._cards[1].set_value("sstyp", value)
+        self._cards[0].set_value("sstyp", value)
 
     @property
     def start(self) -> float:
@@ -150,12 +144,12 @@ class ConstrainedShellInSolid(KeywordBase):
         LT.0: Start time is set to |START|.  When negative, start time is followed during the dynamic relaxation phase of the calculation.  After the completion of dynamic relaxation, coupling is activated regardless of the value of END.EQ.0: Start time is inactive, meaning coupling is always active
         GT.0: If END = -9999, START is interpreted as the curve or table ID defining multiple pairs of start - time and end - time.Otherwise, if END > 0, start time applies both duringand after dynamic relaxation.
         """ # nopep8
-        return self._cards[2].get_value("start")
+        return self._cards[1].get_value("start")
 
     @start.setter
     def start(self, value: float) -> None:
         """Set the start property."""
-        self._cards[2].set_value("start", value)
+        self._cards[1].set_value("start", value)
 
     @property
     def end(self) -> float:
@@ -163,21 +157,49 @@ class ConstrainedShellInSolid(KeywordBase):
         LT.0: If END = -9999, START is interpreted as the curve or table ID defining multiple pairs of start-time and end-time.  Otherwise, negative END indicates that coupling is inactive during dynamic relaxation.  After dynamic relaxation the start and end times are followed and set to |START| and |END|, respectively.EQ.0: END defaults to 1020.
         GT.0: END sets the time at which the coupling is deactivated.
         """ # nopep8
-        return self._cards[2].get_value("end")
+        return self._cards[1].get_value("end")
 
     @end.setter
     def end(self, value: float) -> None:
         """Set the end property."""
-        self._cards[2].set_value("end", value)
+        self._cards[1].set_value("end", value)
 
     @property
     def pssf(self) -> float:
         """Get or set the Penalty spring stiffness scale factor. Only available in penalty form.
         """ # nopep8
-        return self._cards[2].get_value("pssf")
+        return self._cards[1].get_value("pssf")
 
     @pssf.setter
     def pssf(self, value: float) -> None:
         """Set the pssf property."""
-        self._cards[2].set_value("pssf", value)
+        self._cards[1].set_value("pssf", value)
+
+    @property
+    def coupid(self) -> typing.Optional[int]:
+        """Get or set the Coupling card ID number
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("coupid")
+
+    @coupid.setter
+    def coupid(self, value: int) -> None:
+        """Set the coupid property."""
+        self._cards[2].cards[0].set_value("coupid", value)
+
+        if value:
+            self.activate_option("COUPID")
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the A description of this coupling definition
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 
