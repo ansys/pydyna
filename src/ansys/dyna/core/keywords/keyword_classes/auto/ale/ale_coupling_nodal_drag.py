@@ -24,21 +24,17 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _ALECOUPLINGNODALDRAG_CARD0 = (
-    FieldSchema("coupid", int, 0, 10, None),
-    FieldSchema("title", str, 10, 70, None),
-)
-
-_ALECOUPLINGNODALDRAG_CARD1 = (
     FieldSchema("strsid", int, 0, 10, None),
     FieldSchema("alesid", int, 10, 10, None),
     FieldSchema("strsty", int, 20, 10, 0),
     FieldSchema("alesty", int, 30, 10, 0),
 )
 
-_ALECOUPLINGNODALDRAG_CARD2 = (
+_ALECOUPLINGNODALDRAG_CARD1 = (
     FieldSchema("start", float, 0, 10, 0.0),
     FieldSchema("end", float, 10, 10, 10000000000.0),
     FieldSchema("unused", int, 20, 10, None),
@@ -49,15 +45,29 @@ _ALECOUPLINGNODALDRAG_CARD2 = (
     FieldSchema("grav", float, 70, 10, 0.0),
 )
 
+_ALECOUPLINGNODALDRAG_OPTION0_CARD0 = (
+    FieldSchema("coupid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class AleCouplingNodalDrag(KeywordBase):
     """DYNA ALE_COUPLING_NODAL_DRAG keyword"""
 
     keyword = "ALE"
     subkeyword = "COUPLING_NODAL_DRAG"
+    _option_spec_list = [
+        OptionSpec(
+            "ID",
+            "pre/1",
+            1,
+            ("TITLE",),
+        ),
+    ]
 
     def __init__(self, **kwargs):
         """Initialize the AleCouplingNodalDrag class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _ALECOUPLINGNODALDRAG_CARD0,
@@ -67,54 +77,38 @@ class AleCouplingNodalDrag(KeywordBase):
                 _ALECOUPLINGNODALDRAG_CARD1,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _ALECOUPLINGNODALDRAG_CARD2,
-                **kwargs,
+            OptionCardSet(
+                option_spec = AleCouplingNodalDrag._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _ALECOUPLINGNODALDRAG_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
             ),
         ]
-    @property
-    def coupid(self) -> typing.Optional[int]:
-        """Get or set the Coupling (card) ID number (I10). If not defined, LSDYNA will assign an internal coupling ID based on the order of appearance in the input deck.
-        """ # nopep8
-        return self._cards[0].get_value("coupid")
-
-    @coupid.setter
-    def coupid(self, value: int) -> None:
-        """Set the coupid property."""
-        self._cards[0].set_value("coupid", value)
-
-    @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the A description of this coupling definition (A70).
-        """ # nopep8
-        return self._cards[0].get_value("title")
-
-    @title.setter
-    def title(self, value: str) -> None:
-        """Set the title property."""
-        self._cards[0].set_value("title", value)
-
     @property
     def strsid(self) -> typing.Optional[int]:
         """Get or set the ID for defining a part, part set, segment set, or node set giveing the structure. The structure may include Lagrangian solid, shell, beam, thick shell, or discrete sphere elements. EFG, SPH, or EFG nodes may be used, but the boundary conditions may not be satisfied
         """ # nopep8
-        return self._cards[1].get_value("strsid")
+        return self._cards[0].get_value("strsid")
 
     @strsid.setter
     def strsid(self, value: int) -> None:
         """Set the strsid property."""
-        self._cards[1].set_value("strsid", value)
+        self._cards[0].set_value("strsid", value)
 
     @property
     def alesid(self) -> typing.Optional[int]:
         """Get or set the ID for defining a part or part set specifying the ALE solid elements.
         """ # nopep8
-        return self._cards[1].get_value("alesid")
+        return self._cards[0].get_value("alesid")
 
     @alesid.setter
     def alesid(self, value: int) -> None:
         """Set the alesid property."""
-        self._cards[1].set_value("alesid", value)
+        self._cards[0].set_value("alesid", value)
 
     @property
     def strsty(self) -> int:
@@ -124,14 +118,14 @@ class AleCouplingNodalDrag(KeywordBase):
         EQ.2: Segment set ID (see *SET_SEGMENT).
         EQ.3: Node set ID(see *SET_NODE)
         """ # nopep8
-        return self._cards[1].get_value("strsty")
+        return self._cards[0].get_value("strsty")
 
     @strsty.setter
     def strsty(self, value: int) -> None:
         """Set the strsty property."""
         if value not in [0, 1, 2, 3, None]:
             raise Exception("""strsty must be `None` or one of {0,1,2,3}.""")
-        self._cards[1].set_value("strsty", value)
+        self._cards[0].set_value("strsty", value)
 
     @property
     def alesty(self) -> int:
@@ -139,36 +133,36 @@ class AleCouplingNodalDrag(KeywordBase):
         EQ.0: Part set ID (see *SET_PART).
         EQ.1: Part ID (see *PART).
         """ # nopep8
-        return self._cards[1].get_value("alesty")
+        return self._cards[0].get_value("alesty")
 
     @alesty.setter
     def alesty(self, value: int) -> None:
         """Set the alesty property."""
         if value not in [0, 1, None]:
             raise Exception("""alesty must be `None` or one of {0,1}.""")
-        self._cards[1].set_value("alesty", value)
+        self._cards[0].set_value("alesty", value)
 
     @property
     def start(self) -> float:
         """Get or set the Start time for coupling.
         """ # nopep8
-        return self._cards[2].get_value("start")
+        return self._cards[1].get_value("start")
 
     @start.setter
     def start(self, value: float) -> None:
         """Set the start property."""
-        self._cards[2].set_value("start", value)
+        self._cards[1].set_value("start", value)
 
     @property
     def end(self) -> float:
         """Get or set the End time for coupling.
         """ # nopep8
-        return self._cards[2].get_value("end")
+        return self._cards[1].get_value("end")
 
     @end.setter
     def end(self, value: float) -> None:
         """Set the end property."""
-        self._cards[2].set_value("end", value)
+        self._cards[1].set_value("end", value)
 
     @property
     def fcoef(self) -> int:
@@ -176,12 +170,12 @@ class AleCouplingNodalDrag(KeywordBase):
         GT.0: Drag coefficient scale factor.
         LT.0: The absolute value of FCOEF is the Function ID of the user provided function to calculate drag coefficient; See Remark 1
         """ # nopep8
-        return self._cards[2].get_value("fcoef")
+        return self._cards[1].get_value("fcoef")
 
     @fcoef.setter
     def fcoef(self, value: int) -> None:
         """Set the fcoef property."""
-        self._cards[2].set_value("fcoef", value)
+        self._cards[1].set_value("fcoef", value)
 
     @property
     def direcg(self) -> int:
@@ -190,23 +184,51 @@ class AleCouplingNodalDrag(KeywordBase):
         EQ.2: Global y direction
         EQ.3: Global z direction
         """ # nopep8
-        return self._cards[2].get_value("direcg")
+        return self._cards[1].get_value("direcg")
 
     @direcg.setter
     def direcg(self, value: int) -> None:
         """Set the direcg property."""
         if value not in [1, 2, 3, None]:
             raise Exception("""direcg must be `None` or one of {1,2,3}.""")
-        self._cards[2].set_value("direcg", value)
+        self._cards[1].set_value("direcg", value)
 
     @property
     def grav(self) -> float:
         """Get or set the Gravity value. This value is used to calculate buoyance force
         """ # nopep8
-        return self._cards[2].get_value("grav")
+        return self._cards[1].get_value("grav")
 
     @grav.setter
     def grav(self, value: float) -> None:
         """Set the grav property."""
-        self._cards[2].set_value("grav", value)
+        self._cards[1].set_value("grav", value)
+
+    @property
+    def coupid(self) -> typing.Optional[int]:
+        """Get or set the Coupling (card) ID number (I10). If not defined, LSDYNA will assign an internal coupling ID based on the order of appearance in the input deck.
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("coupid")
+
+    @coupid.setter
+    def coupid(self, value: int) -> None:
+        """Set the coupid property."""
+        self._cards[2].cards[0].set_value("coupid", value)
+
+        if value:
+            self.activate_option("COUPID")
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the A description of this coupling definition (A70).
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

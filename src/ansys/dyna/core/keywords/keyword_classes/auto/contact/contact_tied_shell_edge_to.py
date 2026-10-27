@@ -159,7 +159,12 @@ class ContactTiedShellEdgeTo(KeywordBase):
     keyword = "CONTACT"
     subkeyword = "TIED_SHELL_EDGE_TO"
     _option_spec_list = [
-        OptionSpec("ID", "pre/2", 1),
+        OptionSpec(
+            "ID",
+            "pre/2",
+            1,
+            ("TITLE",),
+        ),
         OptionSpec("MPP", "pre/1", 2),
         OptionSpec("A", "post/1", 0),
         OptionSpec("B", "post/2", 0),

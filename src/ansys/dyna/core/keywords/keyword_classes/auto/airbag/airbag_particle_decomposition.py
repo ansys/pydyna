@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
@@ -158,11 +159,24 @@ _AIRBAGPARTICLEDECOMPOSITION_CARD12 = (
     FieldSchema("xoff", float, 0, 10, 0.0),
 )
 
+_AIRBAGPARTICLEDECOMPOSITION_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class AirbagParticleDecomposition(KeywordBase):
     """DYNA AIRBAG_PARTICLE_DECOMPOSITION keyword"""
 
     keyword = "AIRBAG"
     subkeyword = "PARTICLE_DECOMPOSITION"
+    _option_spec_list = [
+        OptionSpec(
+            "ID",
+            "pre/1",
+            1,
+            ("TITLE",),
+        ),
+    ]
     _link_fields = {
         "nid1": LinkType.NODE,
         "nid2": LinkType.NODE,
@@ -180,6 +194,7 @@ class AirbagParticleDecomposition(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the AirbagParticleDecomposition class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEDECOMPOSITION_CARD0,
@@ -232,6 +247,16 @@ class AirbagParticleDecomposition(KeywordBase):
             Card.from_field_schemas_with_defaults(
                 _AIRBAGPARTICLEDECOMPOSITION_CARD12,
                 **kwargs,
+            ),
+            OptionCardSet(
+                option_spec = AirbagParticleDecomposition._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _AIRBAGPARTICLEDECOMPOSITION_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
             ),
         ]
     @property
@@ -1305,6 +1330,34 @@ class AirbagParticleDecomposition(KeywordBase):
     def xoff(self, value: float) -> None:
         """Set the xoff property."""
         self._cards[12].set_value("xoff", value)
+
+    @property
+    def id(self) -> typing.Optional[int]:
+        """Get or set the Optional Airbag ID.
+        """ # nopep8
+        return self._cards[13].cards[0].get_value("id")
+
+    @id.setter
+    def id(self, value: int) -> None:
+        """Set the id property."""
+        self._cards[13].cards[0].set_value("id", value)
+
+        if value:
+            self.activate_option("ID")
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Airbag id descriptor. It is suggested that unique descriptions be used.
+        """ # nopep8
+        return self._cards[13].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[13].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 
     @property
     def nid1_link(self) -> typing.Optional[KeywordBase]:

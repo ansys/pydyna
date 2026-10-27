@@ -24,20 +24,21 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _LOADSHELLSET_CARD0 = (
-    FieldSchema("id", int, 0, 10, None),
-    FieldSchema("heading", str, 10, 70, None),
-)
-
-_LOADSHELLSET_CARD1 = (
     FieldSchema("esid", int, 0, 10, None),
     FieldSchema("lcid", int, 10, 10, None),
     FieldSchema("sf", float, 20, 10, 1.0),
     FieldSchema("at", float, 30, 10, 0.0),
+)
+
+_LOADSHELLSET_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
 )
 
 class LoadShellSet(KeywordBase):
@@ -45,6 +46,9 @@ class LoadShellSet(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "SHELL_SET"
+    _option_spec_list = [
+        OptionSpec("ID", "pre/1", 1),
+    ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
     }
@@ -52,81 +56,94 @@ class LoadShellSet(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the LoadShellSet class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _LOADSHELLSET_CARD0,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _LOADSHELLSET_CARD1,
-                **kwargs,
+            OptionCardSet(
+                option_spec = LoadShellSet._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _LOADSHELLSET_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
             ),
         ]
-    @property
-    def id(self) -> typing.Optional[int]:
-        """Get or set the loading ID
-        """ # nopep8
-        return self._cards[0].get_value("id")
-
-    @id.setter
-    def id(self, value: int) -> None:
-        """Set the id property."""
-        self._cards[0].set_value("id", value)
-
-    @property
-    def heading(self) -> typing.Optional[str]:
-        """Get or set the A description of the loading.
-        """ # nopep8
-        return self._cards[0].get_value("heading")
-
-    @heading.setter
-    def heading(self, value: str) -> None:
-        """Set the heading property."""
-        self._cards[0].set_value("heading", value)
-
     @property
     def esid(self) -> typing.Optional[int]:
         """Get or set the Shell set ID, see *SET_SHELL.
         """ # nopep8
-        return self._cards[1].get_value("esid")
+        return self._cards[0].get_value("esid")
 
     @esid.setter
     def esid(self, value: int) -> None:
         """Set the esid property."""
-        self._cards[1].set_value("esid", value)
+        self._cards[0].set_value("esid", value)
 
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID, see *DEFINE_CURVE.
         """ # nopep8
-        return self._cards[1].get_value("lcid")
+        return self._cards[0].get_value("lcid")
 
     @lcid.setter
     def lcid(self, value: int) -> None:
         """Set the lcid property."""
-        self._cards[1].set_value("lcid", value)
+        self._cards[0].set_value("lcid", value)
 
     @property
     def sf(self) -> float:
         """Get or set the Load curve scale factor.
         """ # nopep8
-        return self._cards[1].get_value("sf")
+        return self._cards[0].get_value("sf")
 
     @sf.setter
     def sf(self, value: float) -> None:
         """Set the sf property."""
-        self._cards[1].set_value("sf", value)
+        self._cards[0].set_value("sf", value)
 
     @property
     def at(self) -> float:
         """Get or set the Arrival time for pressure or birth time of pressure.
         """ # nopep8
-        return self._cards[1].get_value("at")
+        return self._cards[0].get_value("at")
 
     @at.setter
     def at(self, value: float) -> None:
         """Set the at property."""
-        self._cards[1].set_value("at", value)
+        self._cards[0].set_value("at", value)
+
+    @property
+    def id(self) -> typing.Optional[int]:
+        """Get or set the loading ID
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("id")
+
+    @id.setter
+    def id(self, value: int) -> None:
+        """Set the id property."""
+        self._cards[1].cards[0].set_value("id", value)
+
+        if value:
+            self.activate_option("ID")
+
+    @property
+    def heading(self) -> typing.Optional[str]:
+        """Get or set the A description of the loading.
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("heading")
+
+    @heading.setter
+    def heading(self, value: str) -> None:
+        """Set the heading property."""
+        self._cards[1].cards[0].set_value("heading", value)
+
+        if value:
+            self.activate_option("HEADING")
 
     @property
     def lcid_link(self) -> typing.Optional[DefineCurve]:

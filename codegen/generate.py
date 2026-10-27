@@ -49,11 +49,14 @@ def get_loader():
 
 def is_wildcard_excluded(keyword, wildcard):
     exclusions = wildcard.get("exclusions", [])
-    if len(exclusions) > 0:
-        if wildcard["type"] != "prefix":
-            raise Exception("Exclusions not only allowed for prefix wildcard")
+    if len(exclusions) > 0 and wildcard["type"] != "prefix":
+        raise Exception("Exclusions not only allowed for prefix wildcard")
     for exclusion in exclusions:
         if keyword.startswith(exclusion):
+            return True
+    # Suffixes keep dedicated *_ID and *_TITLE classes out of a prefix wildcard.
+    for suffix in wildcard.get("exclude-suffixes", []):
+        if keyword.endswith(suffix):
             return True
     return False
 

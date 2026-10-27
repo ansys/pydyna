@@ -24,16 +24,17 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _ALEFAILSWITCHMMG_CARD0 = (
-    FieldSchema("id", int, 0, 10, None),
-    FieldSchema("title", str, 10, 70, None),
-)
-
-_ALEFAILSWITCHMMG_CARD1 = (
     FieldSchema("fr_mmg", int, 0, 10, None),
     FieldSchema("to_mmg", int, 10, 10, None),
+)
+
+_ALEFAILSWITCHMMG_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
 )
 
 class AleFailSwitchMmg(KeywordBase):
@@ -41,61 +42,82 @@ class AleFailSwitchMmg(KeywordBase):
 
     keyword = "ALE"
     subkeyword = "FAIL_SWITCH_MMG"
+    _option_spec_list = [
+        OptionSpec(
+            "ID",
+            "pre/1",
+            1,
+            ("TITLE",),
+        ),
+    ]
 
     def __init__(self, **kwargs):
         """Initialize the AleFailSwitchMmg class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _ALEFAILSWITCHMMG_CARD0,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _ALEFAILSWITCHMMG_CARD1,
-                **kwargs,
+            OptionCardSet(
+                option_spec = AleFailSwitchMmg._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _ALEFAILSWITCHMMG_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
             ),
         ]
-    @property
-    def id(self) -> typing.Optional[int]:
-        """Get or set the Switch list ID,
-        """ # nopep8
-        return self._cards[0].get_value("id")
-
-    @id.setter
-    def id(self, value: int) -> None:
-        """Set the id property."""
-        self._cards[0].set_value("id", value)
-
-    @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the Switch list title .
-        """ # nopep8
-        return self._cards[0].get_value("title")
-
-    @title.setter
-    def title(self, value: str) -> None:
-        """Set the title property."""
-        self._cards[0].set_value("title", value)
-
     @property
     def fr_mmg(self) -> typing.Optional[int]:
         """Get or set the This is the AMMG-SID before the switch.  The AMMG-SID corresponds to the SID defined under the *SET_MULTI-MATERIAL_GROUP_LIST (SMMGL) card.  This SID points to one or more AMMGs (remark 1).
         """ # nopep8
-        return self._cards[1].get_value("fr_mmg")
+        return self._cards[0].get_value("fr_mmg")
 
     @fr_mmg.setter
     def fr_mmg(self, value: int) -> None:
         """Set the fr_mmg property."""
-        self._cards[1].set_value("fr_mmg", value)
+        self._cards[0].set_value("fr_mmg", value)
 
     @property
     def to_mmg(self) -> typing.Optional[int]:
         """Get or set the This is the AMMG-SID after the switch.  The AMMG-SID corresponds to the SID defined under the *SET_MULTI-MATERIAL_GROUP_LIST card. This SID points to one or more AMMGs (remark 1).
         """ # nopep8
-        return self._cards[1].get_value("to_mmg")
+        return self._cards[0].get_value("to_mmg")
 
     @to_mmg.setter
     def to_mmg(self, value: int) -> None:
         """Set the to_mmg property."""
-        self._cards[1].set_value("to_mmg", value)
+        self._cards[0].set_value("to_mmg", value)
+
+    @property
+    def id(self) -> typing.Optional[int]:
+        """Get or set the Switch list ID,
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("id")
+
+    @id.setter
+    def id(self, value: int) -> None:
+        """Set the id property."""
+        self._cards[1].cards[0].set_value("id", value)
+
+        if value:
+            self.activate_option("ID")
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Switch list title .
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

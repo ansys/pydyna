@@ -24,14 +24,10 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _ALECOUPLINGNODALPENALTY_CARD0 = (
-    FieldSchema("coupid", int, 0, 10, None),
-    FieldSchema("title", str, 10, 70, None),
-)
-
-_ALECOUPLINGNODALPENALTY_CARD1 = (
     FieldSchema("strsid", int, 0, 10, None),
     FieldSchema("alesid", int, 10, 10, None),
     FieldSchema("strsty", int, 20, 10, 0),
@@ -40,7 +36,7 @@ _ALECOUPLINGNODALPENALTY_CARD1 = (
     FieldSchema("mcoup", int, 50, 10, 0),
 )
 
-_ALECOUPLINGNODALPENALTY_CARD2 = (
+_ALECOUPLINGNODALPENALTY_CARD1 = (
     FieldSchema("start", float, 0, 10, 0.0),
     FieldSchema("end", float, 10, 10, 10000000000.0),
     FieldSchema("pform", int, 20, 10, None),
@@ -49,15 +45,29 @@ _ALECOUPLINGNODALPENALTY_CARD2 = (
     FieldSchema("frcmin", float, 50, 10, 0.5),
 )
 
+_ALECOUPLINGNODALPENALTY_OPTION0_CARD0 = (
+    FieldSchema("coupid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class AleCouplingNodalPenalty(KeywordBase):
     """DYNA ALE_COUPLING_NODAL_PENALTY keyword"""
 
     keyword = "ALE"
     subkeyword = "COUPLING_NODAL_PENALTY"
+    _option_spec_list = [
+        OptionSpec(
+            "ID",
+            "pre/1",
+            1,
+            ("TITLE",),
+        ),
+    ]
 
     def __init__(self, **kwargs):
         """Initialize the AleCouplingNodalPenalty class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _ALECOUPLINGNODALPENALTY_CARD0,
@@ -67,54 +77,38 @@ class AleCouplingNodalPenalty(KeywordBase):
                 _ALECOUPLINGNODALPENALTY_CARD1,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _ALECOUPLINGNODALPENALTY_CARD2,
-                **kwargs,
+            OptionCardSet(
+                option_spec = AleCouplingNodalPenalty._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _ALECOUPLINGNODALPENALTY_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
             ),
         ]
-    @property
-    def coupid(self) -> typing.Optional[int]:
-        """Get or set the Coupling (card) ID number (I10). If not defined, LSDYNA will assign an internal coupling ID based on the order of appearance in the input deck.
-        """ # nopep8
-        return self._cards[0].get_value("coupid")
-
-    @coupid.setter
-    def coupid(self, value: int) -> None:
-        """Set the coupid property."""
-        self._cards[0].set_value("coupid", value)
-
-    @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the A description of this coupling definition (A70).
-        """ # nopep8
-        return self._cards[0].get_value("title")
-
-    @title.setter
-    def title(self, value: str) -> None:
-        """Set the title property."""
-        self._cards[0].set_value("title", value)
-
     @property
     def strsid(self) -> typing.Optional[int]:
         """Get or set the ID for defining a part, part set, segment set, or node set giveing the structure. The structure may include Lagrangian solid, shell, beam, thick shell, or discrete sphere elements. EFG, SPH, or EFG nodes may be used, but the boundary conditions may not be satisfied
         """ # nopep8
-        return self._cards[1].get_value("strsid")
+        return self._cards[0].get_value("strsid")
 
     @strsid.setter
     def strsid(self, value: int) -> None:
         """Set the strsid property."""
-        self._cards[1].set_value("strsid", value)
+        self._cards[0].set_value("strsid", value)
 
     @property
     def alesid(self) -> typing.Optional[int]:
         """Get or set the ID for defining a part or part set specifying the ALE solid elements.
         """ # nopep8
-        return self._cards[1].get_value("alesid")
+        return self._cards[0].get_value("alesid")
 
     @alesid.setter
     def alesid(self, value: int) -> None:
         """Set the alesid property."""
-        self._cards[1].set_value("alesid", value)
+        self._cards[0].set_value("alesid", value)
 
     @property
     def strsty(self) -> int:
@@ -124,14 +118,14 @@ class AleCouplingNodalPenalty(KeywordBase):
         EQ.2: Segment set ID (see *SET_SEGMENT).
         EQ.3: Node set ID(see *SET_NODE)
         """ # nopep8
-        return self._cards[1].get_value("strsty")
+        return self._cards[0].get_value("strsty")
 
     @strsty.setter
     def strsty(self, value: int) -> None:
         """Set the strsty property."""
         if value not in [0, 1, 2, 3, None]:
             raise Exception("""strsty must be `None` or one of {0,1,2,3}.""")
-        self._cards[1].set_value("strsty", value)
+        self._cards[0].set_value("strsty", value)
 
     @property
     def alesty(self) -> int:
@@ -139,14 +133,14 @@ class AleCouplingNodalPenalty(KeywordBase):
         EQ.0: Part set ID (see *SET_PART).
         EQ.1: Part ID (see *PART).
         """ # nopep8
-        return self._cards[1].get_value("alesty")
+        return self._cards[0].get_value("alesty")
 
     @alesty.setter
     def alesty(self, value: int) -> None:
         """Set the alesty property."""
         if value not in [0, 1, None]:
             raise Exception("""alesty must be `None` or one of {0,1}.""")
-        self._cards[1].set_value("alesty", value)
+        self._cards[0].set_value("alesty", value)
 
     @property
     def mcoup(self) -> int:
@@ -154,34 +148,34 @@ class AleCouplingNodalPenalty(KeywordBase):
         EQ.0: Couple with all multi-material groups,
         EQ.-n: refers to a set ID of an ALE multi-material groups defined in *SET_MULTI-MATERIAL_GROUP card in which its set ID=n.
         """ # nopep8
-        return self._cards[1].get_value("mcoup")
+        return self._cards[0].get_value("mcoup")
 
     @mcoup.setter
     def mcoup(self, value: int) -> None:
         """Set the mcoup property."""
-        self._cards[1].set_value("mcoup", value)
+        self._cards[0].set_value("mcoup", value)
 
     @property
     def start(self) -> float:
         """Get or set the Start time for coupling.
         """ # nopep8
-        return self._cards[2].get_value("start")
+        return self._cards[1].get_value("start")
 
     @start.setter
     def start(self, value: float) -> None:
         """Set the start property."""
-        self._cards[2].set_value("start", value)
+        self._cards[1].set_value("start", value)
 
     @property
     def end(self) -> float:
         """Get or set the End time for coupling.
         """ # nopep8
-        return self._cards[2].get_value("end")
+        return self._cards[1].get_value("end")
 
     @end.setter
     def end(self, value: float) -> None:
         """Set the end property."""
-        self._cards[2].set_value("end", value)
+        self._cards[1].set_value("end", value)
 
     @property
     def pform(self) -> typing.Optional[int]:
@@ -191,32 +185,60 @@ class AleCouplingNodalPenalty(KeywordBase):
         amespace
         Q.2: Penalty stiffness is determined by the user - provided load curve between penetration and penalty pressure.
         """ # nopep8
-        return self._cards[2].get_value("pform")
+        return self._cards[1].get_value("pform")
 
     @pform.setter
     def pform(self, value: int) -> None:
         """Set the pform property."""
-        self._cards[2].set_value("pform", value)
+        self._cards[1].set_value("pform", value)
 
     @property
     def pfac(self) -> float:
         """Get or set the Penalty stiffness factor (PFORM = 0 or 1) for scaling the estimated stiffness of the interacting (coupling) system or load curve ID (PFORM = 2).
         """ # nopep8
-        return self._cards[2].get_value("pfac")
+        return self._cards[1].get_value("pfac")
 
     @pfac.setter
     def pfac(self, value: float) -> None:
         """Set the pfac property."""
-        self._cards[2].set_value("pfac", value)
+        self._cards[1].set_value("pfac", value)
 
     @property
     def frcmin(self) -> float:
         """Get or set the Only to be used with nonzero MCOUP. Minimum volume fraction of the fluid materials included in the list of AMMGs to activate coupling. Default value is 0.5. Reducing FRCMIN (typically, between 0.1 and 0.3) would turn on coupling earlier to prevent leakage in hypervelocity impact cases.
         """ # nopep8
-        return self._cards[2].get_value("frcmin")
+        return self._cards[1].get_value("frcmin")
 
     @frcmin.setter
     def frcmin(self, value: float) -> None:
         """Set the frcmin property."""
-        self._cards[2].set_value("frcmin", value)
+        self._cards[1].set_value("frcmin", value)
+
+    @property
+    def coupid(self) -> typing.Optional[int]:
+        """Get or set the Coupling (card) ID number (I10). If not defined, LSDYNA will assign an internal coupling ID based on the order of appearance in the input deck.
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("coupid")
+
+    @coupid.setter
+    def coupid(self, value: int) -> None:
+        """Set the coupid property."""
+        self._cards[2].cards[0].set_value("coupid", value)
+
+        if value:
+            self.activate_option("COUPID")
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the A description of this coupling definition (A70).
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

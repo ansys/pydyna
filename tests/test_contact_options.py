@@ -163,10 +163,11 @@ def test_contact_card_with_parameters_and_options():
 
 
 def test_contact_automatic_surface_to_surface_title_loads_without_warning(file_utils):
-    """Regression test: *CONTACT_AUTOMATIC_SURFACE_TO_SURFACE_TITLE should load
-    without warnings.  Previously, the '_TITLE' suffix was not mapped to the 'ID'
-    option, causing the CID+heading line to be parsed as the SSID/MSID card, which
-    raised 'could not convert string to float' for the NAME field value.
+    """*CONTACT_..._TITLE uses the ID card and keeps the TITLE spelling.
+
+    The manual documents only ID. LS-DYNA also accepts TITLE for that same
+    CID and heading line. Before that alias existed, the heading was parsed
+    as the SSID/MSID card and the NAME failed float conversion.
     """
     deck = Deck()
     input_deck = file_utils.get_asset_file_path("contact_surface_inputdeck.txt")
@@ -179,8 +180,10 @@ def test_contact_automatic_surface_to_surface_title_loads_without_warning(file_u
 
     assert len(list(deck.keywords)) == 1
     kw = list(deck.keywords)[0]
-    # ID option is activated via the TITLE suffix → CID + heading card is read
-    assert kw.is_option_active("ID")
+    assert kw.is_option_active("TITLE")
+    assert kw.is_option_active("ID") is False
+    assert kw.get_title() == "*CONTACT_AUTOMATIC_SURFACE_TO_SURFACE_TITLE"
+    assert kw.cid == 9700000
     assert kw.surfa == 9700101
     assert kw.surfb == 101
     assert kw.surfatyp == 2

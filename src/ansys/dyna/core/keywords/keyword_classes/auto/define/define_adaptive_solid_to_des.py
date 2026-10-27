@@ -29,11 +29,6 @@ from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 
 _DEFINEADAPTIVESOLIDTODES_CARD0 = (
-    FieldSchema("did", int, 0, 10, None),
-    FieldSchema("heading", str, 10, 70, None),
-)
-
-_DEFINEADAPTIVESOLIDTODES_CARD1 = (
     FieldSchema("ipid", int, 0, 10, None),
     FieldSchema("itype", int, 10, 10, 0),
     FieldSchema("nq", int, 20, 10, 1),
@@ -44,7 +39,7 @@ _DEFINEADAPTIVESOLIDTODES_CARD1 = (
     FieldSchema("ibond", int, 70, 10, 0),
 )
 
-_DEFINEADAPTIVESOLIDTODES_CARD2 = (
+_DEFINEADAPTIVESOLIDTODES_CARD1 = (
     FieldSchema("pbn", float, 0, 10, None),
     FieldSchema("pbs", float, 10, 10, None),
     FieldSchema("pbn_s", float, 20, 10, None),
@@ -57,6 +52,11 @@ _DEFINEADAPTIVESOLIDTODES_OPTION0_CARD0 = (
     FieldSchema("title", str, 0, 80, None),
 )
 
+_DEFINEADAPTIVESOLIDTODES_OPTION1_CARD0 = (
+    FieldSchema("did", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
 class DefineAdaptiveSolidToDes(KeywordBase):
     """DYNA DEFINE_ADAPTIVE_SOLID_TO_DES keyword"""
 
@@ -64,6 +64,7 @@ class DefineAdaptiveSolidToDes(KeywordBase):
     subkeyword = "ADAPTIVE_SOLID_TO_DES"
     _option_spec_list = [
         OptionSpec("TITLE", "pre/1", 1),
+        OptionSpec("ID", "pre/2", 2),
     ]
     _link_fields = {
         "isdes": LinkType.SECTION,
@@ -83,10 +84,6 @@ class DefineAdaptiveSolidToDes(KeywordBase):
                 _DEFINEADAPTIVESOLIDTODES_CARD1,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _DEFINEADAPTIVESOLIDTODES_CARD2,
-                **kwargs,
-            ),
             OptionCardSet(
                 option_spec = DefineAdaptiveSolidToDes._option_spec_list[0],
                 cards = [
@@ -97,39 +94,27 @@ class DefineAdaptiveSolidToDes(KeywordBase):
                 ],
                 **kwargs
             ),
+            OptionCardSet(
+                option_spec = DefineAdaptiveSolidToDes._option_spec_list[1],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _DEFINEADAPTIVESOLIDTODES_OPTION1_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
         ]
-    @property
-    def did(self) -> typing.Optional[int]:
-        """Get or set the Definition ID. This must be a unique number..
-        """ # nopep8
-        return self._cards[0].get_value("did")
-
-    @did.setter
-    def did(self, value: int) -> None:
-        """Set the did property."""
-        self._cards[0].set_value("did", value)
-
-    @property
-    def heading(self) -> typing.Optional[str]:
-        """Get or set the Definition descriptor. It is suggested that unique descriptions be used.
-        """ # nopep8
-        return self._cards[0].get_value("heading")
-
-    @heading.setter
-    def heading(self, value: str) -> None:
-        """Set the heading property."""
-        self._cards[0].set_value("heading", value)
-
     @property
     def ipid(self) -> typing.Optional[int]:
         """Get or set the ID of the solid part or part set to transform.
         """ # nopep8
-        return self._cards[1].get_value("ipid")
+        return self._cards[0].get_value("ipid")
 
     @ipid.setter
     def ipid(self, value: int) -> None:
         """Set the ipid property."""
-        self._cards[1].set_value("ipid", value)
+        self._cards[0].set_value("ipid", value)
 
     @property
     def itype(self) -> int:
@@ -137,14 +122,14 @@ class DefineAdaptiveSolidToDes(KeywordBase):
         EQ. 0: Part ID
         NE. 0: Part set ID
         """ # nopep8
-        return self._cards[1].get_value("itype")
+        return self._cards[0].get_value("itype")
 
     @itype.setter
     def itype(self, value: int) -> None:
         """Set the itype property."""
         if value not in [0, 1, None]:
             raise Exception("""itype must be `None` or one of {0,1}.""")
-        self._cards[1].set_value("itype", value)
+        self._cards[0].set_value("itype", value)
 
     @property
     def nq(self) -> int:
@@ -154,47 +139,47 @@ class DefineAdaptiveSolidToDes(KeywordBase):
         EQ.2: Adapt one solid element to 8 discrete elements,
         EQ.3: Adapt one solid element to 27 discrete elements.
         """ # nopep8
-        return self._cards[1].get_value("nq")
+        return self._cards[0].get_value("nq")
 
     @nq.setter
     def nq(self, value: int) -> None:
         """Set the nq property."""
         if value not in [1, 2, 3, None]:
             raise Exception("""nq must be `None` or one of {1,2,3}.""")
-        self._cards[1].set_value("nq", value)
+        self._cards[0].set_value("nq", value)
 
     @property
     def ipdes(self) -> typing.Optional[int]:
         """Get or set the Part ID for newly generated discrete elements, See Remark 2.
         """ # nopep8
-        return self._cards[1].get_value("ipdes")
+        return self._cards[0].get_value("ipdes")
 
     @ipdes.setter
     def ipdes(self, value: int) -> None:
         """Set the ipdes property."""
-        self._cards[1].set_value("ipdes", value)
+        self._cards[0].set_value("ipdes", value)
 
     @property
     def isdes(self) -> typing.Optional[int]:
         """Get or set the Section ID for discrete elements, See Remark 2.
         """ # nopep8
-        return self._cards[1].get_value("isdes")
+        return self._cards[0].get_value("isdes")
 
     @isdes.setter
     def isdes(self, value: int) -> None:
         """Set the isdes property."""
-        self._cards[1].set_value("isdes", value)
+        self._cards[0].set_value("isdes", value)
 
     @property
     def rsf(self) -> float:
         """Get or set the DES radius scale down factor, which is the ratio of the radius of the generated DES to the calculated radius based on volume consistency.
         """ # nopep8
-        return self._cards[1].get_value("rsf")
+        return self._cards[0].get_value("rsf")
 
     @rsf.setter
     def rsf(self, value: float) -> None:
         """Set the rsf property."""
-        self._cards[1].set_value("rsf", value)
+        self._cards[0].set_value("rsf", value)
 
     @property
     def outdes(self) -> int:
@@ -202,14 +187,14 @@ class DefineAdaptiveSolidToDes(KeywordBase):
         EQ.0: No output. (Default)
         EQ.1: Write data under filename, desvfill.inc.
         """ # nopep8
-        return self._cards[1].get_value("outdes")
+        return self._cards[0].get_value("outdes")
 
     @outdes.setter
     def outdes(self, value: int) -> None:
         """Set the outdes property."""
         if value not in [0, 1, None]:
             raise Exception("""outdes must be `None` or one of {0,1}.""")
-        self._cards[1].set_value("outdes", value)
+        self._cards[0].set_value("outdes", value)
 
     @property
     def ibond(self) -> int:
@@ -217,94 +202,122 @@ class DefineAdaptiveSolidToDes(KeywordBase):
         EQ.0: No bonds. (Default)
         EQ.1: Bonds generated, need to define Card 2.
         """ # nopep8
-        return self._cards[1].get_value("ibond")
+        return self._cards[0].get_value("ibond")
 
     @ibond.setter
     def ibond(self, value: int) -> None:
         """Set the ibond property."""
         if value not in [0, 1, None]:
             raise Exception("""ibond must be `None` or one of {0,1}.""")
-        self._cards[1].set_value("ibond", value)
+        self._cards[0].set_value("ibond", value)
 
     @property
     def pbn(self) -> typing.Optional[float]:
         """Get or set the Parallel-bond modulus [Pa]. See Remark 1 in *DEFINE_DE_BOND.
         """ # nopep8
-        return self._cards[2].get_value("pbn")
+        return self._cards[1].get_value("pbn")
 
     @pbn.setter
     def pbn(self, value: float) -> None:
         """Set the pbn property."""
-        self._cards[2].set_value("pbn", value)
+        self._cards[1].set_value("pbn", value)
 
     @property
     def pbs(self) -> typing.Optional[float]:
         """Get or set the Parallel-bond stiffness ratio. Shear stiffness/normal stiffness. See Remark 2 in *DEFINE_DE_BOND
         """ # nopep8
-        return self._cards[2].get_value("pbs")
+        return self._cards[1].get_value("pbs")
 
     @pbs.setter
     def pbs(self, value: float) -> None:
         """Set the pbs property."""
-        self._cards[2].set_value("pbs", value)
+        self._cards[1].set_value("pbs", value)
 
     @property
     def pbn_s(self) -> typing.Optional[float]:
         """Get or set the Parallel-bond maximum normal stress. A zero value defines an infinite maximum normal stress
         """ # nopep8
-        return self._cards[2].get_value("pbn_s")
+        return self._cards[1].get_value("pbn_s")
 
     @pbn_s.setter
     def pbn_s(self, value: float) -> None:
         """Set the pbn_s property."""
-        self._cards[2].set_value("pbn_s", value)
+        self._cards[1].set_value("pbn_s", value)
 
     @property
     def pbs_s(self) -> typing.Optional[float]:
         """Get or set the Parallel-bond maximum shear stress. A zero value defines an infinite maximum shear stress.
         """ # nopep8
-        return self._cards[2].get_value("pbs_s")
+        return self._cards[1].get_value("pbs_s")
 
     @pbs_s.setter
     def pbs_s(self, value: float) -> None:
         """Set the pbs_s property."""
-        self._cards[2].set_value("pbs_s", value)
+        self._cards[1].set_value("pbs_s", value)
 
     @property
     def sfa(self) -> float:
         """Get or set the Bond radius multiplier. Default is 1.
         """ # nopep8
-        return self._cards[2].get_value("sfa")
+        return self._cards[1].get_value("sfa")
 
     @sfa.setter
     def sfa(self, value: float) -> None:
         """Set the sfa property."""
-        self._cards[2].set_value("sfa", value)
+        self._cards[1].set_value("sfa", value)
 
     @property
     def alpha(self) -> float:
         """Get or set the Numerical damping.
         """ # nopep8
-        return self._cards[2].get_value("alpha")
+        return self._cards[1].get_value("alpha")
 
     @alpha.setter
     def alpha(self, value: float) -> None:
         """Set the alpha property."""
-        self._cards[2].set_value("alpha", value)
+        self._cards[1].set_value("alpha", value)
 
     @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
-        return self._cards[3].cards[0].get_value("title")
+        return self._cards[2].cards[0].get_value("title")
 
     @title.setter
     def title(self, value: str) -> None:
         """Set the title property."""
-        self._cards[3].cards[0].set_value("title", value)
+        self._cards[2].cards[0].set_value("title", value)
 
         if value:
             self.activate_option("TITLE")
+
+    @property
+    def did(self) -> typing.Optional[int]:
+        """Get or set the Definition ID. This must be a unique number..
+        """ # nopep8
+        return self._cards[3].cards[0].get_value("did")
+
+    @did.setter
+    def did(self, value: int) -> None:
+        """Set the did property."""
+        self._cards[3].cards[0].set_value("did", value)
+
+        if value:
+            self.activate_option("DID")
+
+    @property
+    def heading(self) -> typing.Optional[str]:
+        """Get or set the Definition descriptor. It is suggested that unique descriptions be used.
+        """ # nopep8
+        return self._cards[3].cards[0].get_value("heading")
+
+    @heading.setter
+    def heading(self, value: str) -> None:
+        """Set the heading property."""
+        self._cards[3].cards[0].set_value("heading", value)
+
+        if value:
+            self.activate_option("HEADING")
 
     @property
     def isdes_link(self) -> typing.Optional[KeywordBase]:
