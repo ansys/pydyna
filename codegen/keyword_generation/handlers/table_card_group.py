@@ -25,9 +25,10 @@ Table Card Group Handler: Creates table card groups for table-like data.
 
 This handler groups multiple cards together to form a repeating structure,
 commonly used for table or matrix data where multiple related cards repeat as a unit.
+A row condition makes a sub-card present only in the rows that satisfy it.
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import logging
 import typing
 from typing import Any, Dict, List, Optional
@@ -35,11 +36,30 @@ from typing import Any, Dict, List, Optional
 import keyword_generation.data_model as gen
 from keyword_generation.data_model.keyword_data import Card, KeywordData
 from keyword_generation.data_model.label_registry import LabelRegistry
+from keyword_generation.data_model.row_condition import ROW_CONDITION_DEFS
 from keyword_generation.handlers.base_settings import parse_settings_list
 import keyword_generation.handlers.handler_base
 from keyword_generation.handlers.handler_base import handler
 
 logger = logging.getLogger(__name__)
+
+
+@dataclass
+class RowConditionSettings:
+    """Row condition of one sub-card of a table card group.
+
+    Attributes
+    ----------
+        ref: Label reference of the sub-card
+        active_if: Expression over fields of earlier sub-cards, see ``keyword_generation.data_model.row_condition``
+    """
+
+    ref: str
+    active_if: Dict[str, Any]
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "RowConditionSettings":
+        return cls(ref=data["ref"], active_if=data["active-if"])
 
 
 @dataclass
@@ -53,6 +73,7 @@ class TableCardGroupSettings:
         length_func: Optional function to compute group count
         active_func: Optional function to determine if group is active
         key_field: Key field name for table-aware link properties (e.g., 'pid' for Part)
+        row_conditions: Sub-cards present only in the rows that satisfy a condition
     """
 
     refs: List[str]
@@ -60,6 +81,7 @@ class TableCardGroupSettings:
     length_func: Optional[str] = None
     active_func: Optional[str] = None
     key_field: Optional[str] = None
+    row_conditions: List[RowConditionSettings] = field(default_factory=list)
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "TableCardGroupSettings":
@@ -69,6 +91,7 @@ class TableCardGroupSettings:
             length_func=data.get("length-func"),
             active_func=data.get("active-func"),
             key_field=data.get("key-field"),
+            row_conditions=[RowConditionSettings.from_dict(item) for item in data.get("row-conditions", [])],
         )
 
     def resolve_indices(self, registry: LabelRegistry, cards: List[Any]) -> List[int]:
@@ -96,9 +119,23 @@ class TableCardGroupSettings:
                     "type": "string",
                     "description": "Key field name for table-aware link properties (e.g., 'pid' for Part)",
                 },
+                "row-conditions": {
+                    "type": "array",
+                    "description": "Sub-cards present only in the rows that satisfy a condition",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "ref": {"type": "string", "description": "Label reference of the sub-card"},
+                            "active-if": {"$ref": "#/$defs/row_condition"},
+                        },
+                        "required": ["ref", "active-if"],
+                        "additionalProperties": False,
+                    },
+                },
             },
             "required": ["refs", "overall-name"],
         },
+        "$defs": ROW_CONDITION_DEFS,
     },
     output_description=(
         "Sets kwd_data['table_group']=True, adds card insertion with table card group, marks source cards for removal"
@@ -122,7 +159,13 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
                 "refs": ["row_card_1", "row_card_2", "row_card_3"],
                 "overall-name": "table_row",
                 "length-func": "self.nrows",
-                "active-func": "self.has_table"
+                "active-func": "self.has_table",
+                "row-conditions": [
+                    {
+                        "ref": "row_card_3",
+                        "active-if": {"op": "ne", "left": {"field": "n5"}, "right": {"literal": 0}}
+                    }
+                ]
             }
         ]
 
@@ -138,6 +181,8 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
           }
         - Inserts group at minimum index position
         - Marks all source cards with "mark_for_removal" = 1
+        - Sets "row_active_if" on sub-cards with a row condition. It is compiled
+          once field names are normalized, since it names fields by their property names.
     """
 
     def handle(
@@ -181,6 +226,15 @@ class TableCardGroupHandler(keyword_generation.handlers.handler_base.KeywordHand
                 sub_card = kwd_data.cards[index]
                 sub_card.mark_for_removal = 1
                 sub_cards.append(sub_card)
+
+            for row_condition in card_settings.row_conditions:
+                index = registry.resolve_index(row_condition.ref, kwd_data.cards)
+                if index not in indices:
+                    raise ValueError(
+                        f"table-card-group '{card_settings.property_name}': row condition ref "
+                        f"'{row_condition.ref}' is not one of its refs {card_settings.refs}"
+                    )
+                kwd_data.cards[index].row_active_if = row_condition.active_if
 
             # Build the card group as a Card instance
             group = Card(

@@ -474,16 +474,17 @@ $#      v7        v8        v9
 test_control_mpp_decomposition_transformation_string_write = """*CONTROL_MPP_DECOMPOSITION_TRANSFORMATION
 $#    type        v1        v2        v3        v4        v5        v6
 VEC3             0.0       0.0       0.0       0.0       0.0       0.0
-0.0              0.0       0.0                                        
+$#      v7        v8        v9
+       0.0       0.0       0.0
 SY               0.0       0.0       0.0       0.0       0.0       0.0
 MAT              0.0       0.0       0.0       0.0       0.0       0.0
-0.0              0.0       0.0                                        
+       0.0       0.0       0.0
 RX               0.0       0.0       0.0       0.0       0.0       0.0
 S2R              0.0       0.0       0.0       0.0       0.0       0.0
-0.0              0.0       0.0                                        
+       0.0       0.0       0.0
 RZ               0.0       0.0       0.0       0.0       0.0       0.0
 VEC3             0.0       0.0       0.0       0.0       0.0       0.0
-0.0              0.0       0.0                                        """
+       0.0       0.0       0.0"""
 
 
 test_control_time_step_string = """*CONTROL_TIME_STEP

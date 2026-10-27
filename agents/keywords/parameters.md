@@ -361,8 +361,12 @@ assert node.nodes.table["x"][0] == 7850.0
 - No performance impact when parameters not present
 
 **TableCardGroup** (`src/ansys/dyna/core/lib/table_card_group.py`):
-- Passes `parameter_set` to child `TableCard` instances
-- No special handling needed (inherits from TableCard)
+- Passes `parameter_set` to child `TableCard` instances, scoped by `subcard{index}`
+- Retained refs use group row indices: `subcard{index}/row{row}/{field}`. With row conditions a
+  sub-card has lines for only some rows, so a ref stays with its row when other rows gain or lose
+  the sub-card
+- A field read by a row condition may be a parameter: it is resolved while the lines are scanned,
+  so it decides whether the conditional line follows
 
 ### Testing
 
