@@ -3704,7 +3704,6 @@ TypeMapping = {
     "*SET_SOLID_GENERATE": "SetSolidGenerate",
     "*SET_SOLID_GENERATE_COLLECT": "SetSolidGenerateCollect",
     "*SET_SOLID_GENERATE_INCREMENT": "SetSolidGenerateIncrement",
-    "*LOAD_SEGMENT_ID": "LoadSegmentId",
     "*LOAD_SEGMENT_SET_ID": "LoadSegmentSetId",
     "*MAT_009": "Mat009",
     "*SET_NODE": "SetNode",

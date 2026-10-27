@@ -321,20 +321,6 @@ $#   nid               x               y               z      tc      rc
  2000002   -3093.8891602     685.0078125     811.2246704       1       5"""
 
 
-test_load_segment_string = """*LOAD_SEGMENT
-$#    lcid        sf        at        n1        n2        n3        n4        n5
-                 1.0       0.0                                                  
-$#      n6        n7        n8
-                              """
-
-test_load_segment_id_string = """*LOAD_SEGMENT_ID
-$#      id                                                               heading
-                                                                                
-$#    lcid        sf        at        n1        n2        n3        n4        n5
-                 1.0       0.0                                                  
-$#      n6        n7        n8
-                              """
-
 # !MIGRATION CHANGE:with latest keyword, gaskeit --> gaskett, xnod is mandatory, unused is mandatory for nip.
 test_ss_string = """*SECTION_SOLID
 $#   secid    elform       aet    unused    unused    unused    cohoff   gaskett

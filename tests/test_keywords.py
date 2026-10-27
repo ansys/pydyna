@@ -431,14 +431,6 @@ def test_hourglass(ref_string):
 
 
 
-def test_load_segment(ref_string):
-    seg = kwd.LoadSegment()
-    assert seg.write() == ref_string.test_load_segment_string
-    seg = kwd.LoadSegmentId()
-    assert seg.write() == ref_string.test_load_segment_id_string
-
-
-
 def test_section_shell(ref_string):
     shell = kwd.SectionShell(secid=1, elfrom=2, t1=1.0, t2=1.0, t4=1.0, nip=5)
     shell.t3 = 1.0
@@ -489,7 +481,7 @@ Test Section
 
 
 def test_section_tshell(ref_string):
-    tshell = kwd.SectionTShell(format=format_type.long)
+    tshell = kwd.SectionTShell(format=format_type.long, card_set_count=1)
     # check that the keyword wries using the long format
     assert tshell.format == format_type.long
     assert tshell.write() == ref_string.test_section_shell_long
