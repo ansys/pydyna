@@ -58,24 +58,32 @@
                 "table-card-group": [
                     {
                         "refs": [
-                            "elements_card",
-                            "elements_n5_n6_n7_n8_card",
-                            "elements_n5_card"
+                            "element_card",
+                            "thickness_card",
+                            "midside_thickness_card"
                         ],
-                        "overall-name": "elements"
-                    }
-                ],
-                "conditional-card": [
-                    {
-                        "func": "self.elements['n5'].any()",
-                        "ref": "elements_n5_card"
+                        "overall-name": "elements",
+                        "row-conditions": [
+                            {
+                                "ref": "midside_thickness_card",
+                                "active-if": {
+                                    "op": "ne",
+                                    "left": {
+                                        "field": "n5"
+                                    },
+                                    "right": {
+                                        "literal": 0
+                                    }
+                                }
+                            }
+                        ]
                     }
                 ]
             },
             "labels": {
-                "elements_card": 0,
-                "elements_n5_n6_n7_n8_card": 1,
-                "elements_n5_card": 2
+                "element_card": 0,
+                "thickness_card": 1,
+                "midside_thickness_card": 2
             }
         },
         {
@@ -1522,19 +1530,32 @@
     },
     "CONTROL_MPP_DECOMPOSITION_TRANSFORMATION": {
         "generation-options": {
-            "conditional-card": [
-                {
-                    "func": "not self.transformation.empty and self.transformation['type'].iloc[-1] in ['VEC3', 'C2R', 'S2R', 'MAT']",
-                    "ref": "extended_vector_card"
-                }
-            ],
             "table-card-group": [
                 {
                     "refs": [
                         "transformation_card",
                         "extended_vector_card"
                     ],
-                    "overall-name": "transformation"
+                    "overall-name": "transformation",
+                    "row-conditions": [
+                        {
+                            "ref": "extended_vector_card",
+                            "active-if": {
+                                "op": "in",
+                                "left": {
+                                    "field": "type"
+                                },
+                                "right": {
+                                    "literal": [
+                                        "VEC3",
+                                        "C2R",
+                                        "S2R",
+                                        "MAT"
+                                    ]
+                                }
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -2691,26 +2712,47 @@
         }
     },
     "LOAD_SEGMENT": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "LOAD_SEGMENT",
-                "generation-options": {
-                    "skip-card": [
+        "generation-options": {
+            "skip-card": [
+                {
+                    "ref": "id_title_card"
+                }
+            ],
+            "add-option": [
+                {
+                    "card-order": "pre/1",
+                    "title-order": 1,
+                    "cards": [
                         {
-                            "ref": "id_title_card"
+                            "source": "kwd-data",
+                            "card-index": 0
+                        }
+                    ],
+                    "option-name": "ID"
+                }
+            ],
+            "card-set": [
+                {
+                    "source-refs": [
+                        "segment_card",
+                        "midside_nodes_card"
+                    ],
+                    "target-ref": "segment_card",
+                    "name": "LoadSegmentCardSet",
+                    "internal-conditionals": [
+                        {
+                            "index": 1,
+                            "func": "self.n5"
                         }
                     ]
-                },
-                "labels": {
-                    "id_title_card": 0
                 }
-            },
-            {
-                "keyword": "LOAD_SEGMENT_ID",
-                "source-keyword": "LOAD_SEGMENT"
-            }
-        ]
+            ]
+        },
+        "labels": {
+            "id_title_card": 0,
+            "segment_card": 1,
+            "midside_nodes_card": 2
+        }
     },
     "LOAD_SEGMENT_SET": {
         "type": "multiple",

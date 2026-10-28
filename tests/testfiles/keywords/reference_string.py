@@ -321,20 +321,6 @@ $#   nid               x               y               z      tc      rc
  2000002   -3093.8891602     685.0078125     811.2246704       1       5"""
 
 
-test_load_segment_string = """*LOAD_SEGMENT
-$#    lcid        sf        at        n1        n2        n3        n4        n5
-                 1.0       0.0                                                  
-$#      n6        n7        n8
-                              """
-
-test_load_segment_id_string = """*LOAD_SEGMENT_ID
-$#      id                                                               heading
-                                                                                
-$#    lcid        sf        at        n1        n2        n3        n4        n5
-                 1.0       0.0                                                  
-$#      n6        n7        n8
-                              """
-
 # !MIGRATION CHANGE:with latest keyword, gaskeit --> gaskett, xnod is mandatory, unused is mandatory for nip.
 test_ss_string = """*SECTION_SOLID
 $#   secid    elform       aet    unused    unused    unused    cohoff   gaskett
@@ -488,16 +474,17 @@ $#      v7        v8        v9
 test_control_mpp_decomposition_transformation_string_write = """*CONTROL_MPP_DECOMPOSITION_TRANSFORMATION
 $#    type        v1        v2        v3        v4        v5        v6
 VEC3             0.0       0.0       0.0       0.0       0.0       0.0
-0.0              0.0       0.0                                        
+$#      v7        v8        v9
+       0.0       0.0       0.0
 SY               0.0       0.0       0.0       0.0       0.0       0.0
 MAT              0.0       0.0       0.0       0.0       0.0       0.0
-0.0              0.0       0.0                                        
+       0.0       0.0       0.0
 RX               0.0       0.0       0.0       0.0       0.0       0.0
 S2R              0.0       0.0       0.0       0.0       0.0       0.0
-0.0              0.0       0.0                                        
+       0.0       0.0       0.0
 RZ               0.0       0.0       0.0       0.0       0.0       0.0
 VEC3             0.0       0.0       0.0       0.0       0.0       0.0
-0.0              0.0       0.0                                        """
+       0.0       0.0       0.0"""
 
 
 test_control_time_step_string = """*CONTROL_TIME_STEP

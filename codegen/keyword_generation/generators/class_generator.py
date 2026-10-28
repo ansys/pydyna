@@ -30,6 +30,7 @@ from output_manager import OutputManager
 
 import keyword_generation.data_model as data_model
 from keyword_generation.data_model.keyword_data import Card, KeywordData
+from keyword_generation.data_model.row_condition import compile_row_condition
 from keyword_generation.generators.template_context import KeywordTemplateContext
 from keyword_generation.handlers.registry import HandlerRegistry, create_default_registry
 from keyword_generation.utils import (
@@ -135,6 +136,29 @@ def _transform_data(data: KeywordData):
     # Assign indices to main cards
     for index, card in enumerate(data.cards):
         card["index"] = index
+
+
+def _compile_row_conditions(data: KeywordData) -> None:
+    """Compiles the row conditions of table card group sub-cards.
+
+    Must run after ``_transform_data``: conditions name fields by their normalized
+    property names, and may only read fields of earlier sub-cards of the group.
+    """
+    for card in data.cards:
+        if not card.get("table_group") or not card.get("sub_cards"):
+            continue
+        field_types = {}
+        for sub_card in card["sub_cards"]:
+            expression = sub_card.get("row_active_if")
+            if expression is not None:
+                try:
+                    sub_card["row_condition"] = compile_row_condition(expression, field_types)
+                except ValueError as error:
+                    raise ValueError(f"table-card-group '{card.get('overall_name')}': {error}") from error
+                data.row_conditions = True
+            for field in sub_card.get("fields", []):
+                if field.used:
+                    field_types.setdefault(field.property_name or field.name, field.type)
 
 
 def _get_insertion_index_for_cards(
@@ -823,6 +847,7 @@ def _get_keyword_data(
 
     # default transformations to a valid format we need for jinja
     _transform_data(kwd_data)
+    _compile_row_conditions(kwd_data)
     _add_links(kwd_data)
 
     logger.debug(f"Keyword data prepared for '{keyword_name}' with {len(kwd_data.cards)} cards")

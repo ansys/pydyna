@@ -3701,7 +3701,6 @@ from ansys.dyna.core.keywords.keyword_classes.auto import SetSolidGeneralCollect
 from ansys.dyna.core.keywords.keyword_classes.auto import SetSolidGenerate
 from ansys.dyna.core.keywords.keyword_classes.auto import SetSolidGenerateCollect
 from ansys.dyna.core.keywords.keyword_classes.auto import SetSolidGenerateIncrement
-from ansys.dyna.core.keywords.keyword_classes.auto import LoadSegmentId
 from ansys.dyna.core.keywords.keyword_classes.auto import LoadSegmentSetId
 from ansys.dyna.core.keywords.keyword_classes.auto import Mat009
 from ansys.dyna.core.keywords.keyword_classes.auto import SetNode

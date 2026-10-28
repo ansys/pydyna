@@ -376,10 +376,13 @@ class TableCard(Card):
         self,
         data_lines: typing.List[str],
         parameter_set: ParameterSet,
+        row_indices: typing.Optional[typing.Sequence[int]] = None,
     ) -> typing.List[str]:
         """Load lines using load_dataline for parameter substitution.
 
         Used when a ParameterSet is provided and data contains parameter refs or CSV format.
+        Parameter refs are recorded under ``row_indices[i]`` for line ``i``, or under ``i``
+        when ``row_indices`` is not given.
         """
         from ansys.dyna.core.lib.kwd_line_formatter import load_dataline
 
@@ -388,7 +391,8 @@ class TableCard(Card):
 
         rows = []
         all_warnings = []
-        for row_index, line in enumerate(data_lines):
+        for position, line in enumerate(data_lines):
+            row_index = position if row_indices is None else row_indices[position]
             with parameter_set.scope(f"row{row_index}"):
                 values, line_warnings = load_dataline(format_spec, line, parameter_set)
             all_warnings.extend(line_warnings)
@@ -403,13 +407,17 @@ class TableCard(Card):
         self,
         data_lines: typing.List[str],
         parameter_set: ParameterSet,
+        row_indices: typing.Optional[typing.Sequence[int]] = None,
     ) -> typing.List[str]:
-        """Load data lines into the table with parameter substitution."""
+        """Load data lines into the table with parameter substitution.
+
+        ``row_indices`` gives the row that each line belongs to, for recording parameter refs.
+        """
         has_params = self._has_parameters(data_lines)
         has_csv = self._has_csv_format(data_lines)
 
         if has_params or has_csv:
-            return self._load_lines_with_parameters(data_lines, parameter_set)
+            return self._load_lines_with_parameters(data_lines, parameter_set, row_indices)
 
         # Fast pandas path for fixed-width, parameter-using but no refs in this data
         fields = self._get_fields()
@@ -439,20 +447,38 @@ class TableCard(Card):
                 if comment:
                     buf.write(self._get_comment(format))
                     buf.write("\n")
-
-                if retain_parameters and parameter_set is not None and uri_prefix is not None:
-                    # Write row-by-row with parameter ref substitution
-                    self._write_with_parameters(buf, format, parameter_set, uri_prefix)
-                else:
-                    # Fast path: use holler.write_table
-                    write_c_dataframe(buf, self._fields, self.table, format)
+                table = self.table
+                self._write_rows(buf, format, table, range(len(table)), retain_parameters, parameter_set, uri_prefix)
 
         return write_or_return(buf, _write)
+
+    def _write_rows(
+        self,
+        buf: typing.TextIO,
+        format: format_type,
+        table: pd.DataFrame,
+        row_indices: typing.Sequence[int],
+        retain_parameters: bool = False,
+        parameter_set: ParameterSet = None,
+        uri_prefix: str = None,
+    ) -> None:
+        """Write the data lines of ``table``, a subset of this card's columns.
+
+        ``row_indices`` gives the row of each line, under which its parameter refs were recorded.
+        """
+        if retain_parameters and parameter_set is not None and uri_prefix is not None:
+            # Write row-by-row with parameter ref substitution
+            self._write_with_parameters(buf, format, table, row_indices, parameter_set, uri_prefix)
+        else:
+            # Fast path: use holler.write_table
+            write_c_dataframe(buf, self._fields, table, format)
 
     def _write_with_parameters(
         self,
         buf: typing.TextIO,
         format: format_type,
+        table: pd.DataFrame,
+        row_indices: typing.Sequence[int],
         parameter_set: ParameterSet,
         uri_prefix: str,
     ) -> None:
@@ -463,9 +489,9 @@ class TableCard(Card):
         if format == format_type.long:
             fields = self._convert_fields_to_long_format()
 
-        for row_index in range(len(self.table)):
+        for position, row_index in enumerate(row_indices):
             # Get row values from DataFrame
-            row_values = [self.table[field.name].iloc[row_index] for field in fields if field.name in self.table]
+            row_values = [table[field.name].iloc[position] for field in fields if field.name in table]
 
             # Check for parameter refs and substitute
             row_fields, row_values = self._substitute_parameter_refs(

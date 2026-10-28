@@ -27,6 +27,7 @@ import pandas as pd
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
+from ansys.dyna.core.lib.row_condition import RowCondition, is_missing
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 class ControlMppDecompositionTransformation(KeywordBase):
@@ -59,9 +60,13 @@ class ControlMppDecompositionTransformation(KeywordBase):
                 None,
                 None,
                 "transformation",
-                card_active_funcs=[
+                row_conditions=[
                     None,
-                    lambda: not self.transformation.empty and self.transformation['type'].iloc[-1] in ['VEC3', 'C2R', 'S2R', 'MAT'],
+                    RowCondition(
+                        ("type",),
+                        lambda type: not is_missing(type) and type in ("VEC3", "C2R", "S2R", "MAT"),
+                        lambda table: table["type"].isin(["VEC3", "C2R", "S2R", "MAT"]).to_numpy(dtype=bool),
+                    ),
                 ],
                 **kwargs,
             ),

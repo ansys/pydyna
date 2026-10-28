@@ -20,14 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import io
-
 import pandas as pd
 
 from ansys.dyna.core.lib.card import Card, Field
 from ansys.dyna.core.lib.field_schema import FieldSchema
-from ansys.dyna.core.lib.table_card_group import TableCard, TableCardGroup
-from ansys.dyna.core.lib.field_writer import write_fields
+from ansys.dyna.core.lib.table_card_group import TableCardGroup
 from ansys.dyna.core.lib.format_type import format_type
 
 import pytest
@@ -69,18 +66,8 @@ def _get_test_table_card_group(bounded: bool, default_size: int=2, name = None, 
 
 
 def _get_row_data(dcg: TableCardGroup, index: int) -> str:
-    which_card_index = dcg._get_index_of_which_card(index)
-    card_index = dcg._get_index_of_given_card(index)
-    card = dcg._get_active_cards()[which_card_index]
-
-    def _get_card_row_data(card: TableCard, index: int, format: format_type) -> str:
-        """this is not optimized - used only by test cases"""
-        values = card._get_row_values(index)
-        s = io.StringIO()
-        write_fields(s, card._fields, values, format)
-        return s.getvalue()
-
-    return _get_card_row_data(card, card_index, dcg.format)
+    """Return data line ``index`` of the group as written."""
+    return dcg.write(comment=False).split("\n")[index]
 
 
 

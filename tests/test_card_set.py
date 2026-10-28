@@ -452,3 +452,80 @@ class TestInitialStrainShellFix:
         assert strains_list[0].epsxx == 0.001
         assert strains_list[1].epsxx == 0.002
         assert strains_list[1].t == 1.0
+
+
+class TestUnboundedImplicitInitialization:
+    """Constructor kwargs create the first item of an unbounded CardSet.
+
+    Keyword constructors pass every kwarg to every card. Kwargs that only belong
+    to other cards of the keyword must not create an empty item.
+    """
+
+    @staticmethod
+    def _make_card_set(**kwargs):
+        from ansys.dyna.core.lib.card import Card
+        from ansys.dyna.core.lib.cards import Cards
+        from ansys.dyna.core.lib.field_schema import FieldSchema
+
+        schema = (
+            FieldSchema("a", int, 0, 10, None),
+            FieldSchema("b", float, 10, 10, None),
+        )
+
+        class Item(Cards):
+            def __init__(self, **kwargs):
+                super().__init__(kwargs["keyword"])
+                self._parent = kwargs["parent"]
+                self._cards = [Card.from_field_schemas_with_defaults(schema, **kwargs)]
+
+            @property
+            def a(self):
+                return self._cards[0].get_value("a")
+
+            @property
+            def b(self):
+                return self._cards[0].get_value("b")
+
+        parent = Parent()
+        return CardSet(Item, parent=parent, keyword=parent, **kwargs)
+
+    def test_no_kwargs_creates_no_item(self):
+        assert len(self._make_card_set()) == 0
+
+    def test_item_field_kwargs_create_item(self):
+        card_set = self._make_card_set(a=1, b=2.0)
+        assert len(card_set) == 1
+        assert card_set.items()[0].a == 1
+        assert card_set.items()[0].b == 2.0
+
+    def test_kwargs_for_other_cards_create_no_item(self):
+        assert len(self._make_card_set(id=5, heading="h")) == 0
+
+    def test_item_field_with_other_card_kwargs_creates_item(self):
+        card_set = self._make_card_set(id=5, a=1)
+        assert len(card_set) == 1
+        assert card_set.items()[0].a == 1
+
+    @pytest.mark.parametrize(
+        "kwargs",
+        [{"format": format_type.long}, {"user_comment": "c"}, {"format": format_type.long, "user_comment": "c"}],
+    )
+    def test_infrastructure_only_kwargs_create_no_item(self, kwargs):
+        assert len(self._make_card_set(**kwargs)) == 0
+
+    def test_infrastructure_with_other_card_kwargs_creates_no_item(self):
+        assert len(self._make_card_set(format=format_type.long, id=5)) == 0
+
+    def test_bounded_card_set_ignores_kwargs(self):
+        from ansys.dyna.core.lib.cards import Cards
+
+        class Item(Cards):
+            def __init__(self, **kwargs):
+                super().__init__(kwargs["keyword"])
+                self._parent = kwargs["parent"]
+                self._cards = []
+
+        parent = Parent()
+        card_set = CardSet(Item, lambda: 2, parent=parent, keyword=parent, id=5)
+        assert len(card_set) == 2
+        assert len(card_set.items()) == 2
