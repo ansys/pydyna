@@ -191,7 +191,12 @@ class ContactAutomaticSurfaceToSurfaceTiebreakUser(KeywordBase):
     keyword = "CONTACT"
     subkeyword = "AUTOMATIC_SURFACE_TO_SURFACE_TIEBREAK_USER"
     _option_spec_list = [
-        OptionSpec("ID", "pre/2", 1),
+        OptionSpec(
+            "ID",
+            "pre/2",
+            1,
+            ("TITLE",),
+        ),
         OptionSpec("MPP", "pre/1", 2),
         OptionSpec("A", "post/1", 0),
         OptionSpec("B", "post/2", 0),

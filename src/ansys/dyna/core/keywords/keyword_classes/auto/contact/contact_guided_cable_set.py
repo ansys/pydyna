@@ -24,15 +24,11 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 
 _CONTACTGUIDEDCABLESET_CARD0 = (
-    FieldSchema("cid", int, 0, 10, None),
-    FieldSchema("title", str, 10, 70, None),
-)
-
-_CONTACTGUIDEDCABLESET_CARD1 = (
     FieldSchema("nsid", int, 0, 10, None),
     FieldSchema("psid", int, 10, 10, None),
     FieldSchema("soft", int, 20, 10, 0),
@@ -41,11 +37,24 @@ _CONTACTGUIDEDCABLESET_CARD1 = (
     FieldSchema("endtol", float, 50, 10, None),
 )
 
+_CONTACTGUIDEDCABLESET_OPTION0_CARD0 = (
+    FieldSchema("cid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class ContactGuidedCableSet(KeywordBase):
     """DYNA CONTACT_GUIDED_CABLE_SET keyword"""
 
     keyword = "CONTACT"
     subkeyword = "GUIDED_CABLE_SET"
+    _option_spec_list = [
+        OptionSpec(
+            "ID",
+            "pre/1",
+            1,
+            ("TITLE",),
+        ),
+    ]
     _link_fields = {
         "nsid": LinkType.SET_NODE,
         "psid": LinkType.SET_PART,
@@ -54,103 +63,116 @@ class ContactGuidedCableSet(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the ContactGuidedCableSet class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _CONTACTGUIDEDCABLESET_CARD0,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _CONTACTGUIDEDCABLESET_CARD1,
-                **kwargs,
+            OptionCardSet(
+                option_spec = ContactGuidedCableSet._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _CONTACTGUIDEDCABLESET_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
             ),
         ]
-    @property
-    def cid(self) -> typing.Optional[int]:
-        """Get or set the Contact interface ID. This must be a unique number.
-        """ # nopep8
-        return self._cards[0].get_value("cid")
-
-    @cid.setter
-    def cid(self, value: int) -> None:
-        """Set the cid property."""
-        self._cards[0].set_value("cid", value)
-
-    @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the Interface descriptor. It is suggested that unique descriptions be used.
-        """ # nopep8
-        return self._cards[0].get_value("title")
-
-    @title.setter
-    def title(self, value: str) -> None:
-        """Set the title property."""
-        self._cards[0].set_value("title", value)
-
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID that guides the 1D elements
         """ # nopep8
-        return self._cards[1].get_value("nsid")
+        return self._cards[0].get_value("nsid")
 
     @nsid.setter
     def nsid(self, value: int) -> None:
         """Set the nsid property."""
-        self._cards[1].set_value("nsid", value)
+        self._cards[0].set_value("nsid", value)
 
     @property
     def psid(self) -> typing.Optional[int]:
         """Get or set the Part ID or part set ID if SET is included in the keyword line
         """ # nopep8
-        return self._cards[1].get_value("psid")
+        return self._cards[0].get_value("psid")
 
     @psid.setter
     def psid(self, value: int) -> None:
         """Set the psid property."""
-        self._cards[1].set_value("psid", value)
+        self._cards[0].set_value("psid", value)
 
     @property
     def soft(self) -> int:
         """Get or set the Flag for soft constraint option.  Set to 1 for soft constraint.
         """ # nopep8
-        return self._cards[1].get_value("soft")
+        return self._cards[0].get_value("soft")
 
     @soft.setter
     def soft(self, value: int) -> None:
         """Set the soft property."""
-        self._cards[1].set_value("soft", value)
+        self._cards[0].set_value("soft", value)
 
     @property
     def ssfac(self) -> float:
         """Get or set the Stiffness scale factor for penalty stiffness value.  The default value is unity.  This applies to SOFT set to 0 and 1.
         """ # nopep8
-        return self._cards[1].get_value("ssfac")
+        return self._cards[0].get_value("ssfac")
 
     @ssfac.setter
     def ssfac(self, value: float) -> None:
         """Set the ssfac property."""
-        self._cards[1].set_value("ssfac", value)
+        self._cards[0].set_value("ssfac", value)
 
     @property
     def fric(self) -> typing.Optional[float]:
         """Get or set the Coefficient of friction.
         """ # nopep8
-        return self._cards[1].get_value("fric")
+        return self._cards[0].get_value("fric")
 
     @fric.setter
     def fric(self, value: float) -> None:
         """Set the fric property."""
-        self._cards[1].set_value("fric", value)
+        self._cards[0].set_value("fric", value)
 
     @property
     def endtol(self) -> typing.Optional[float]:
         """Get or set the Tolerance, in length units, applied at the ends of the cable elements beyond which contact will pass to the next cable element. The default is 0.002 times the element length
         """ # nopep8
-        return self._cards[1].get_value("endtol")
+        return self._cards[0].get_value("endtol")
 
     @endtol.setter
     def endtol(self, value: float) -> None:
         """Set the endtol property."""
-        self._cards[1].set_value("endtol", value)
+        self._cards[0].set_value("endtol", value)
+
+    @property
+    def cid(self) -> typing.Optional[int]:
+        """Get or set the Contact interface ID. This must be a unique number.
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("cid")
+
+    @cid.setter
+    def cid(self, value: int) -> None:
+        """Set the cid property."""
+        self._cards[1].cards[0].set_value("cid", value)
+
+        if value:
+            self.activate_option("CID")
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Interface descriptor. It is suggested that unique descriptions be used.
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 
     @property
     def nsid_link(self) -> typing.Optional[KeywordBase]:

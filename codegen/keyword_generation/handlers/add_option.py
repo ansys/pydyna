@@ -67,6 +67,11 @@ class AddOptionSettings:
             "type": "object",
             "properties": {
                 "option-name": {"type": "string", "description": "Name of the option (e.g., 'ID')"},
+                "aliases": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "Other title spellings of this same card, such as TITLE for ID",
+                },
                 "card-order": {
                     "oneOf": [
                         {
@@ -87,7 +92,10 @@ class AddOptionSettings:
                 "title-order": {"type": "integer", "description": "Order in keyword title"},
                 "cards": {
                     "type": "array",
-                    "description": "List of card definitions or references",
+                    "description": (
+                        "Card definitions or references. A kwd-data card may omit keyword-name "
+                        "to copy that card from the keyword being generated."
+                    ),
                 },
             },
             "required": ["option-name", "card-order", "title-order", "cards"],
@@ -141,6 +149,15 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
         """Keep dict settings for add-option - uses 'option-name' not 'name'."""
         return settings
 
+    @staticmethod
+    def _resolve_card(card: typing.Dict[str, typing.Any], kwd_data: KeywordData) -> typing.Dict[str, typing.Any]:
+        """Fill in keyword-name so one wildcard can copy each keyword's own card."""
+        if card.get("source") == "kwd-data" and "keyword-name" not in card:
+            resolved = dict(card)
+            resolved["keyword-name"] = kwd_data.title
+            return resolved
+        return card
+
     def handle(
         self,
         kwd_data: KeywordData,
@@ -181,7 +198,7 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
 
         new_options = []
         for option_settings in typed_settings:
-            cards = [get_card(card) for card in option_settings["cards"]]
+            cards = [get_card(self._resolve_card(card, kwd_data)) for card in option_settings["cards"]]
             cards = [expand(card) for card in cards]
             card_order = resolve_card_order(option_settings["card-order"])
             new_option = {
@@ -190,5 +207,7 @@ class AddOptionHandler(keyword_generation.handlers.handler_base.KeywordHandler):
                 "name": option_settings["option-name"],
                 "cards": cards,
             }
+            if option_settings.get("aliases"):
+                new_option["aliases"] = list(option_settings["aliases"])
             new_options.append(new_option)
         kwd_data.options = new_options

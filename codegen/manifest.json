@@ -58,24 +58,32 @@
                 "table-card-group": [
                     {
                         "refs": [
-                            "elements_card",
-                            "elements_n5_n6_n7_n8_card",
-                            "elements_n5_card"
+                            "element_card",
+                            "thickness_card",
+                            "midside_thickness_card"
                         ],
-                        "overall-name": "elements"
-                    }
-                ],
-                "conditional-card": [
-                    {
-                        "func": "self.elements['n5'].any()",
-                        "ref": "elements_n5_card"
+                        "overall-name": "elements",
+                        "row-conditions": [
+                            {
+                                "ref": "midside_thickness_card",
+                                "active-if": {
+                                    "op": "ne",
+                                    "left": {
+                                        "field": "n5"
+                                    },
+                                    "right": {
+                                        "literal": 0
+                                    }
+                                }
+                            }
+                        ]
                     }
                 ]
             },
             "labels": {
-                "elements_card": 0,
-                "elements_n5_n6_n7_n8_card": 1,
-                "elements_n5_card": 2
+                "element_card": 0,
+                "thickness_card": 1,
+                "midside_thickness_card": 2
             }
         },
         {
@@ -183,6 +191,7 @@
             }
         },
         {
+            "comment": "TITLE is an alias of ID for the same undocumented solver behavior as other *CONTACT keywords.",
             "type": "prefix",
             "patterns": [
                 "CONTACT_FORCE_TRANSDUCER"
@@ -198,12 +207,16 @@
                                 "card-name": "CONTACT_ID"
                             }
                         ],
-                        "option-name": "ID"
+                        "option-name": "ID",
+                        "aliases": [
+                            "TITLE"
+                        ]
                     }
                 ]
             }
         },
         {
+            "comment": "TITLE is an alias of ID for solver compatibility. The keyword manual documents only the ID option for *CONTACT, but LS-DYNA accepts the TITLE spelling on this same CID and heading card (pydyna issues 1120 and 1183).",
             "type": "prefix",
             "patterns": [
                 "CONTACT"
@@ -234,7 +247,10 @@
                                 "card-name": "CONTACT_ID"
                             }
                         ],
-                        "option-name": "ID"
+                        "option-name": "ID",
+                        "aliases": [
+                            "TITLE"
+                        ]
                     },
                     {
                         "card-order": "pre/1",
@@ -360,57 +376,524 @@
             "labels": {
                 "id_title_card": 0
             }
+        },
+        {
+            "type": "prefix",
+            "patterns": [
+                "AIRBAG_PARTICLE"
+            ],
+            "exclusions": [
+                "AIRBAG_PARTICLE_MPP"
+            ],
+            "exclude-suffixes": [
+                "_ID"
+            ],
+            "generation-options": {
+                "skip-card": [
+                    {
+                        "ref": "id_title_card"
+                    }
+                ],
+                "add-option": [
+                    {
+                        "card-order": "pre/1",
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "kwd-data",
+                                "card-index": 0
+                            }
+                        ],
+                        "option-name": "ID",
+                        "aliases": [
+                            "TITLE"
+                        ]
+                    }
+                ]
+            },
+            "labels": {
+                "id_title_card": 0
+            }
+        },
+        {
+            "type": "prefix",
+            "patterns": [
+                "AIRBAG_PARTICLE_MPP"
+            ],
+            "exclude-suffixes": [
+                "_ID"
+            ],
+            "generation-options": {
+                "skip-card": [
+                    {
+                        "ref": "id_title_card"
+                    }
+                ],
+                "add-option": [
+                    {
+                        "card-order": {
+                            "position": "main",
+                            "after": "mpp_card"
+                        },
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "kwd-data",
+                                "card-index": 1
+                            }
+                        ],
+                        "option-name": "ID",
+                        "aliases": [
+                            "TITLE"
+                        ]
+                    }
+                ]
+            },
+            "labels": {
+                "mpp_card": 0,
+                "id_title_card": 1
+            }
+        },
+        {
+            "type": "exact",
+            "patterns": [
+                "CONSTRAINED_GENERALIZED_WELD_BUTT",
+                "CONSTRAINED_GENERALIZED_WELD_COMBINED",
+                "CONSTRAINED_GENERALIZED_WELD_CROSS_FILLET",
+                "CONSTRAINED_GENERALIZED_WELD_FILLET",
+                "CONSTRAINED_GENERALIZED_WELD_SPOT"
+            ],
+            "generation-options": {
+                "skip-card": [
+                    {
+                        "ref": "id_title_card"
+                    }
+                ],
+                "add-option": [
+                    {
+                        "card-order": "pre/1",
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "kwd-data",
+                                "keyword-name": "CONSTRAINED_GENERALIZED_WELD_SPOT",
+                                "card-index": 0
+                            }
+                        ],
+                        "option-name": "ID"
+                    }
+                ]
+            },
+            "labels": {
+                "id_title_card": 0
+            }
+        },
+        {
+            "type": "exact",
+            "patterns": [
+                "CONSTRAINED_SPOTWELD",
+                "CONSTRAINED_SPOTWELD_FILTERED_FORCE"
+            ],
+            "generation-options": {
+                "skip-card": [
+                    {
+                        "ref": "id_title_card"
+                    }
+                ],
+                "add-option": [
+                    {
+                        "card-order": "pre/1",
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "kwd-data",
+                                "keyword-name": "CONSTRAINED_SPOTWELD",
+                                "card-index": 0
+                            }
+                        ],
+                        "option-name": "ID"
+                    }
+                ]
+            },
+            "labels": {
+                "id_title_card": 0
+            }
+        },
+        {
+            "type": "exact",
+            "patterns": [
+                "CONSTRAINED_JOINT_SPHERICAL",
+                "CONSTRAINED_JOINT_REVOLUTE",
+                "CONSTRAINED_JOINT_CYLINDRICAL",
+                "CONSTRAINED_JOINT_PLANAR",
+                "CONSTRAINED_JOINT_UNIVERSAL",
+                "CONSTRAINED_JOINT_TRANSLATIONAL",
+                "CONSTRAINED_JOINT_LOCKING",
+                "CONSTRAINED_JOINT_TRANSLATIONAL_MOTOR",
+                "CONSTRAINED_JOINT_ROTATIONAL_MOTOR",
+                "CONSTRAINED_JOINT_GEARS",
+                "CONSTRAINED_JOINT_RACK_AND_PINION",
+                "CONSTRAINED_JOINT_CONSTANT_VELOCITY",
+                "CONSTRAINED_JOINT_PULLEY",
+                "CONSTRAINED_JOINT_SCREW",
+                "CONSTRAINED_JOINT_HARMONIC",
+                "CONSTRAINED_JOINT_COOR_SPHERICAL",
+                "CONSTRAINED_JOINT_COOR_REVOLUTE",
+                "CONSTRAINED_JOINT_COOR_CYLINDRICAL",
+                "CONSTRAINED_JOINT_COOR_PLANAR",
+                "CONSTRAINED_JOINT_COOR_UNIVERSAL",
+                "CONSTRAINED_JOINT_COOR_TRANSLATIONAL",
+                "CONSTRAINED_JOINT_COOR_LOCKING",
+                "CONSTRAINED_JOINT_COOR_TRANSLATIONAL_MOTOR",
+                "CONSTRAINED_JOINT_COOR_ROTATIONAL_MOTOR",
+                "CONSTRAINED_JOINT_COOR_GEARS",
+                "CONSTRAINED_JOINT_COOR_RACK_AND_PINION",
+                "CONSTRAINED_JOINT_COOR_CONSTANT_VELOCITY",
+                "CONSTRAINED_JOINT_COOR_PULLEY",
+                "CONSTRAINED_JOINT_COOR_SCREW",
+                "CONSTRAINED_JOINT_COOR_HARMONIC"
+            ],
+            "generation-options": {
+                "add-option": [
+                    {
+                        "card-order": "post/1",
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "JOINT_LOCAL"
+                            }
+                        ],
+                        "option-name": "LOCAL"
+                    },
+                    {
+                        "card-order": "pre/1",
+                        "title-order": 2,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "JOINT_ID"
+                            }
+                        ],
+                        "option-name": "ID"
+                    },
+                    {
+                        "card-order": "post/2",
+                        "title-order": 3,
+                        "cards": [
+                            {
+                                "source": "additional-cards",
+                                "card-name": "JOINT_FAILURE_1"
+                            },
+                            {
+                                "source": "additional-cards",
+                                "card-name": "JOINT_FAILURE_2"
+                            }
+                        ],
+                        "option-name": "FAILURE"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "prefix",
+            "patterns": [
+                "CONSTRAINED_BEAM_IN_SOLID",
+                "CONSTRAINED_SHELL_IN_SOLID",
+                "CONSTRAINED_SOLID_IN_SOLID"
+            ],
+            "exclude-suffixes": [
+                "_ID",
+                "_TITLE"
+            ],
+            "generation-options": {
+                "skip-card": [
+                    {
+                        "ref": "id_title_card"
+                    }
+                ],
+                "add-option": [
+                    {
+                        "card-order": "pre/1",
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "kwd-data",
+                                "card-index": 0
+                            }
+                        ],
+                        "option-name": "ID",
+                        "aliases": [
+                            "TITLE"
+                        ]
+                    }
+                ]
+            },
+            "labels": {
+                "id_title_card": 0
+            }
+        },
+        {
+            "type": "prefix",
+            "patterns": [
+                "ALE_COUPLING_NODAL_DRAG",
+                "ALE_COUPLING_NODAL_PENALTY"
+            ],
+            "exclude-suffixes": [
+                "_ID",
+                "_TITLE"
+            ],
+            "generation-options": {
+                "skip-card": [
+                    {
+                        "ref": "id_title_card"
+                    }
+                ],
+                "add-option": [
+                    {
+                        "card-order": "pre/1",
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "kwd-data",
+                                "card-index": 0
+                            }
+                        ],
+                        "option-name": "ID",
+                        "aliases": [
+                            "TITLE"
+                        ]
+                    }
+                ]
+            },
+            "labels": {
+                "id_title_card": 0
+            }
+        },
+        {
+            "type": "exact",
+            "patterns": [
+                "ALE_FAIL_SWITCH_MMG",
+                "ALE_FSI_SWITCH_MMG"
+            ],
+            "generation-options": {
+                "skip-card": [
+                    {
+                        "ref": "id_title_card"
+                    }
+                ],
+                "add-option": [
+                    {
+                        "card-order": "pre/1",
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "kwd-data",
+                                "card-index": 0
+                            }
+                        ],
+                        "option-name": "ID",
+                        "aliases": [
+                            "TITLE"
+                        ]
+                    }
+                ]
+            },
+            "labels": {
+                "id_title_card": 0
+            }
+        },
+        {
+            "type": "prefix",
+            "patterns": [
+                "CONSTRAINED_LAGRANGE_IN_SOLID"
+            ],
+            "generation-options": {
+                "skip-card": [
+                    {
+                        "ref": "id_title_card"
+                    }
+                ],
+                "add-option": [
+                    {
+                        "card-order": "pre/1",
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "kwd-data",
+                                "card-index": 0
+                            }
+                        ],
+                        "option-name": "TITLE"
+                    }
+                ]
+            },
+            "labels": {
+                "id_title_card": 0
+            }
+        },
+        {
+            "type": "prefix",
+            "patterns": [
+                "ALE_STRUCTURED_FSI"
+            ],
+            "generation-options": {
+                "skip-card": [
+                    {
+                        "ref": "id_title_card"
+                    }
+                ],
+                "add-option": [
+                    {
+                        "card-order": "pre/1",
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "kwd-data",
+                                "card-index": 0
+                            }
+                        ],
+                        "option-name": "TITLE"
+                    }
+                ]
+            },
+            "labels": {
+                "id_title_card": 0
+            }
+        },
+        {
+            "type": "exact",
+            "patterns": [
+                "INTERFACE_COMPONENT_NODE",
+                "INTERFACE_COMPONENT_SEGMENT",
+                "INTERFACE_COMPONENT_SPH"
+            ],
+            "generation-options": {
+                "skip-card": [
+                    {
+                        "ref": "id_title_card"
+                    }
+                ],
+                "add-option": [
+                    {
+                        "card-order": "pre/1",
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "kwd-data",
+                                "card-index": 0
+                            }
+                        ],
+                        "option-name": "TITLE"
+                    }
+                ]
+            },
+            "labels": {
+                "id_title_card": 0
+            }
+        },
+        {
+            "type": "exact",
+            "patterns": [
+                "LOAD_ALE_CONVECTION",
+                "LOAD_NURBS_SHELL",
+                "LOAD_SEGMENT_NONUNIFORM",
+                "LOAD_SEGMENT_SET_NONUNIFORM",
+                "LOAD_SHELL_ELEMENT",
+                "LOAD_SHELL_SET"
+            ],
+            "generation-options": {
+                "skip-card": [
+                    {
+                        "ref": "id_title_card"
+                    }
+                ],
+                "add-option": [
+                    {
+                        "card-order": "pre/1",
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "kwd-data",
+                                "card-index": 0
+                            }
+                        ],
+                        "option-name": "ID"
+                    }
+                ]
+            },
+            "labels": {
+                "id_title_card": 0
+            }
+        },
+        {
+            "type": "exact",
+            "patterns": [
+                "DEFINE_ADAPTIVE_SOLID_TO_DES",
+                "DEFINE_ADAPTIVE_SOLID_TO_SPH",
+                "DEFINE_SPH_DE_COUPLING"
+            ],
+            "generation-options": {
+                "skip-card": [
+                    {
+                        "ref": "id_title_card"
+                    }
+                ],
+                "add-option": [
+                    {
+                        "card-order": "pre/2",
+                        "title-order": 2,
+                        "cards": [
+                            {
+                                "source": "kwd-data",
+                                "card-index": 0
+                            }
+                        ],
+                        "option-name": "ID"
+                    }
+                ]
+            },
+            "labels": {
+                "id_title_card": 0
+            }
+        },
+        {
+            "type": "exact",
+            "patterns": [
+                "CONTACT_GUIDED_CABLE",
+                "CONTACT_GUIDED_CABLE_SET"
+            ],
+            "comment": "TITLE is an alias of ID for the same undocumented solver behavior as other *CONTACT keywords.",
+            "generation-options": {
+                "skip-card": [
+                    {
+                        "ref": "id_title_card"
+                    }
+                ],
+                "add-option": [
+                    {
+                        "card-order": "pre/1",
+                        "title-order": 1,
+                        "cards": [
+                            {
+                                "source": "kwd-data",
+                                "card-index": 0
+                            }
+                        ],
+                        "option-name": "ID",
+                        "aliases": [
+                            "TITLE"
+                        ]
+                    }
+                ]
+            },
+            "labels": {
+                "id_title_card": 0
+            }
         }
     ],
     "CONSTRAINED_BEAM_IN_SOLID": {
         "generation-options": {
-            "add-option": [
-                {
-                    "card-order": "pre/1",
-                    "title-order": 1,
-                    "cards": [
-                        {
-                            "source": "kwd-data",
-                            "keyword-name": "CONSTRAINED_BEAM_IN_SOLID",
-                            "card-index": 0
-                        }
-                    ],
-                    "option-name": "ID"
-                },
-                {
-                    "card-order": "pre/1",
-                    "title-order": 1,
-                    "cards": [
-                        {
-                            "source": "kwd-data",
-                            "keyword-name": "CONSTRAINED_BEAM_IN_SOLID",
-                            "card-index": 0
-                        }
-                    ],
-                    "option-name": "TITLE"
-                }
-            ],
-            "shared-field": [
-                {
-                    "name": "COUPID",
-                    "cards": [
-                        -3,
-                        -4
-                    ]
-                },
-                {
-                    "name": "TITLE",
-                    "cards": [
-                        -3,
-                        -4
-                    ]
-                }
-            ],
-            "skip-card": [
-                {
-                    "ref": "id_title_card"
-                }
-            ],
             "override-field": [
                 {
                     "name": "ncoup ",
@@ -435,6 +918,32 @@
             "ncoup_card": 1,
             "start_card": 2,
             "bondc_card": 3
+        }
+    },
+    "CONSTRAINED_LOCAL": {
+        "generation-options": {
+            "skip-card": [
+                {
+                    "ref": "id_title_card"
+                }
+            ],
+            "add-option": [
+                {
+                    "card-order": "pre/1",
+                    "title-order": 1,
+                    "cards": [
+                        {
+                            "source": "kwd-data",
+                            "keyword-name": "CONSTRAINED_LOCAL",
+                            "card-index": 0
+                        }
+                    ],
+                    "option-name": "ID"
+                }
+            ]
+        },
+        "labels": {
+            "id_title_card": 0
         }
     },
     "DEFINE_TABLE": {
@@ -1021,19 +1530,32 @@
     },
     "CONTROL_MPP_DECOMPOSITION_TRANSFORMATION": {
         "generation-options": {
-            "conditional-card": [
-                {
-                    "func": "not self.transformation.empty and self.transformation['type'].iloc[-1] in ['VEC3', 'C2R', 'S2R', 'MAT']",
-                    "ref": "extended_vector_card"
-                }
-            ],
             "table-card-group": [
                 {
                     "refs": [
                         "transformation_card",
                         "extended_vector_card"
                     ],
-                    "overall-name": "transformation"
+                    "overall-name": "transformation",
+                    "row-conditions": [
+                        {
+                            "ref": "extended_vector_card",
+                            "active-if": {
+                                "op": "in",
+                                "left": {
+                                    "field": "type"
+                                },
+                                "right": {
+                                    "literal": [
+                                        "VEC3",
+                                        "C2R",
+                                        "S2R",
+                                        "MAT"
+                                    ]
+                                }
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -2190,26 +2712,47 @@
         }
     },
     "LOAD_SEGMENT": {
-        "type": "multiple",
-        "generations": [
-            {
-                "keyword": "LOAD_SEGMENT",
-                "generation-options": {
-                    "skip-card": [
+        "generation-options": {
+            "skip-card": [
+                {
+                    "ref": "id_title_card"
+                }
+            ],
+            "add-option": [
+                {
+                    "card-order": "pre/1",
+                    "title-order": 1,
+                    "cards": [
                         {
-                            "ref": "id_title_card"
+                            "source": "kwd-data",
+                            "card-index": 0
+                        }
+                    ],
+                    "option-name": "ID"
+                }
+            ],
+            "card-set": [
+                {
+                    "source-refs": [
+                        "segment_card",
+                        "midside_nodes_card"
+                    ],
+                    "target-ref": "segment_card",
+                    "name": "LoadSegmentCardSet",
+                    "internal-conditionals": [
+                        {
+                            "index": 1,
+                            "func": "self.n5"
                         }
                     ]
-                },
-                "labels": {
-                    "id_title_card": 0
                 }
-            },
-            {
-                "keyword": "LOAD_SEGMENT_ID",
-                "source-keyword": "LOAD_SEGMENT"
-            }
-        ]
+            ]
+        },
+        "labels": {
+            "id_title_card": 0,
+            "segment_card": 1,
+            "midside_nodes_card": 2
+        }
     },
     "LOAD_SEGMENT_SET": {
         "type": "multiple",
@@ -2331,11 +2874,6 @@
     },
     "AIRBAG_PARTICLE": {
         "generation-options": {
-            "skip-card": [
-                {
-                    "ref": "id_title_card"
-                }
-            ],
             "conditional-card": [
                 {
                     "func": "self._cards[2].has_nondefault_values()",

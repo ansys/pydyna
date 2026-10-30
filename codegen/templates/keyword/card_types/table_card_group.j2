@@ -36,5 +36,21 @@
 {% endfor %}
                 ],
 {% endif %}
+{% if card.sub_cards | selectattr('row_condition') | list | length > 0 %}
+                row_conditions=[
+{% for sub_card in card.sub_cards %}
+{% if sub_card.row_condition %}
+{% set row_condition = sub_card.row_condition %}
+                    RowCondition(
+                        ({% for name in row_condition.fields %}"{{name}}"{% if not loop.last %}, {% elif loop.length == 1 %},{% endif %}{% endfor %}),
+                        lambda {{row_condition.fields | join(", ")}}: {{row_condition.evaluate_row}},
+                        lambda table: {{row_condition.evaluate_all}},
+                    ),
+{% else %}
+                    None,
+{% endif %}
+{% endfor %}
+                ],
+{% endif %}
                 **kwargs,
             ),

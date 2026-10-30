@@ -64,6 +64,9 @@ class OptionAPIImplementation:
     def activate_option(self, option: str) -> None:
         self._active_options.add(option)
 
+    def select_option_label(self, option: str) -> None:
+        self._active_options.add(option)
+
     def deactivate_option(self, option: str) -> None:
         if option in self._active_options:
             self._active_options.remove(option)

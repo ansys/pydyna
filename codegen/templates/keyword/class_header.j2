@@ -26,7 +26,16 @@ class {{keyword_data.classname}}(KeywordBase):
 {% if keyword_data.options %}
     _option_spec_list = [
 {% for option in keyword_data.options %}
+{% if option.aliases %}
+        OptionSpec(
+            "{{option.name}}",
+            "{{option.card_order}}",
+            {{option.title_order}},
+            ("{{ option.aliases|join('", "') }}",),
+        ),
+{% else %}
         OptionSpec("{{option.name}}", "{{option.card_order}}", {{option.title_order}}),
+{% endif %}
 {% endfor %}
     ]
 {% endif %}

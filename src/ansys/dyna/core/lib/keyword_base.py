@@ -188,28 +188,74 @@ class KeywordBase(Cards, OptionsInterface):
     # -- OptionsInterface implementation (option state lives here) --
 
     def is_option_active(self, option: str) -> bool:
-        """Returns True if the given option is active."""
+        """Returns True if this spelling of an option is the selected one."""
         return option in self._active_options
 
+    def _spec_for_label(self, name: str) -> typing.Optional[OptionSpec]:
+        """Return the spec whose canonical name or alias is ``name``."""
+        for spec in self.option_specs:
+            if name == spec.name or name in spec.aliases:
+                return spec
+        return None
+
+    def _selected_label(self, spec: OptionSpec) -> typing.Optional[str]:
+        """Return the spelling currently selected for this spec, if any."""
+        for label in (spec.name, *spec.aliases):
+            if label in self._active_options:
+                return label
+        return None
+
     def activate_option(self, option: str) -> None:
-        """Activate the given option."""
-        self._active_options.add(option)
+        """Turn an option on without changing a spelling that is already selected.
+
+        Field setters use this. ``options["TITLE"].active = True`` uses
+        ``select_option_label`` and does change the spelling.
+        """
+        spec = self._spec_for_label(option)
+        if spec is None:
+            self._active_options.add(option)
+            return
+        if self._selected_label(spec) is not None:
+            return
+        self.select_option_label(option)
+
+    def select_option_label(self, name: str) -> None:
+        """Select this spelling of a card and clear its other spellings."""
+        spec = self._spec_for_label(name)
+        if spec is None:
+            self._active_options.add(name)
+            return
+        for label in (spec.name, *spec.aliases):
+            self._active_options.discard(label)
+        self._active_options.add(name)
 
     def deactivate_option(self, option: str) -> None:
-        """Deactivate the given option."""
-        if option in self._active_options:
-            self._active_options.remove(option)
+        """Turn an option off, whichever spelling is selected."""
+        spec = self._spec_for_label(option)
+        if spec is None:
+            self._active_options.discard(option)
+            return
+        for label in (spec.name, *spec.aliases):
+            self._active_options.discard(label)
 
     def _try_activate_options(self, names: typing.List[str]) -> None:
-        # In LS-DYNA, '_TITLE' in the keyword name activates the 'ID' option
-        # (which adds the CID + heading card) when no explicit 'TITLE' option spec
-        # is defined for this keyword.
-        has_title_option = any(o.name == "TITLE" for o in self.option_specs)
-        if "TITLE" in names and not has_title_option:
-            names = list(names) + ["ID"]
-        for option in self.option_specs:
-            if option.name in names:
-                self.activate_option(option.name)
+        """Select each title token that names an option or one of its aliases.
+
+        The last token for a card wins, so ``*_ID_TITLE`` keeps the TITLE spelling
+        when TITLE is an alias of that card.
+        """
+        chosen: typing.Dict[int, str] = {}
+        order: typing.List[int] = []
+        for token in names:
+            spec = self._spec_for_label(token)
+            if spec is None:
+                continue
+            key = id(spec)
+            if key not in chosen:
+                order.append(key)
+            chosen[key] = token
+        for key in order:
+            self.select_option_label(chosen[key])
 
     def _activate_options(self, title: str) -> None:
         if self.options is None:
@@ -218,11 +264,11 @@ class KeywordBase(Cards, OptionsInterface):
         self._try_activate_options(title_list)
 
     def get_option_spec(self, name: str) -> OptionSpec:
-        """Gets the option spec for the given name."""
-        for option_spec in self.option_specs:
-            if option_spec.name == name:
-                return option_spec
-        raise Exception(f"No option spec with name `{name}` found")
+        """Gets the option spec for the given name or alias."""
+        spec = self._spec_for_label(name)
+        if spec is None:
+            raise Exception(f"No option spec with name `{name}` found")
+        return spec
 
     @property
     def option_specs(self) -> typing.Iterable[OptionSpec]:
@@ -240,11 +286,13 @@ class KeywordBase(Cards, OptionsInterface):
         base_title = self._get_base_title()
         titles = [base_title]
         if self.options != None:
-            options_specs = self.option_specs
-            title_suffix_options = [o for o in options_specs if self.is_option_active(o.name) and o.title_order > 0]
-            title_suffix_options.sort(key=lambda option: option.title_order)
-            suffix_names = [op.name for op in title_suffix_options]
-            titles = titles + suffix_names
+            labeled = []
+            for spec in self.option_specs:
+                label = self._selected_label(spec)
+                if label and spec.title_order > 0:
+                    labeled.append((spec.title_order, label))
+            labeled.sort(key=lambda item: item[0])
+            titles = titles + [label for _, label in labeled]
         return f"*{'_'.join(titles)}{format_symbol}"
 
     @property

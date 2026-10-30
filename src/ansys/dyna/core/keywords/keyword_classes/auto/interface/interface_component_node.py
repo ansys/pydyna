@@ -24,20 +24,21 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _INTERFACECOMPONENTNODE_CARD0 = (
-    FieldSchema("id", int, 0, 10, None),
-    FieldSchema("title", str, 10, 70, None),
-)
-
-_INTERFACECOMPONENTNODE_CARD1 = (
     FieldSchema("nsid", int, 0, 10, None),
     FieldSchema("cid", int, 10, 10, None),
     FieldSchema("nid", int, 20, 10, None),
+)
+
+_INTERFACECOMPONENTNODE_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
 )
 
 class InterfaceComponentNode(KeywordBase):
@@ -45,6 +46,9 @@ class InterfaceComponentNode(KeywordBase):
 
     keyword = "INTERFACE"
     subkeyword = "COMPONENT_NODE"
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
+    ]
     _link_fields = {
         "nid": LinkType.NODE,
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
@@ -54,70 +58,83 @@ class InterfaceComponentNode(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the InterfaceComponentNode class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _INTERFACECOMPONENTNODE_CARD0,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _INTERFACECOMPONENTNODE_CARD1,
-                **kwargs,
+            OptionCardSet(
+                option_spec = InterfaceComponentNode._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _INTERFACECOMPONENTNODE_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
             ),
         ]
-    @property
-    def id(self) -> typing.Optional[int]:
-        """Get or set the ID for this interface in the linking file.
-        """ # nopep8
-        return self._cards[0].get_value("id")
-
-    @id.setter
-    def id(self, value: int) -> None:
-        """Set the id property."""
-        self._cards[0].set_value("id", value)
-
-    @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the Title for this interface.
-        """ # nopep8
-        return self._cards[0].get_value("title")
-
-    @title.setter
-    def title(self, value: str) -> None:
-        """Set the title property."""
-        self._cards[0].set_value("title", value)
-
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID, see *SET_NODE(for NODE and SPH options) .
         """ # nopep8
-        return self._cards[1].get_value("nsid")
+        return self._cards[0].get_value("nsid")
 
     @nsid.setter
     def nsid(self, value: int) -> None:
         """Set the nsid property."""
-        self._cards[1].set_value("nsid", value)
+        self._cards[0].set_value("nsid", value)
 
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Coordinate system ID.
         """ # nopep8
-        return self._cards[1].get_value("cid")
+        return self._cards[0].get_value("cid")
 
     @cid.setter
     def cid(self, value: int) -> None:
         """Set the cid property."""
-        self._cards[1].set_value("cid", value)
+        self._cards[0].set_value("cid", value)
 
     @property
     def nid(self) -> typing.Optional[int]:
         """Get or set the Node ID.
         """ # nopep8
-        return self._cards[1].get_value("nid")
+        return self._cards[0].get_value("nid")
 
     @nid.setter
     def nid(self, value: int) -> None:
         """Set the nid property."""
-        self._cards[1].set_value("nid", value)
+        self._cards[0].set_value("nid", value)
+
+    @property
+    def id(self) -> typing.Optional[int]:
+        """Get or set the ID for this interface in the linking file.
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("id")
+
+    @id.setter
+    def id(self, value: int) -> None:
+        """Set the id property."""
+        self._cards[1].cards[0].set_value("id", value)
+
+        if value:
+            self.activate_option("ID")
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the Title for this interface.
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[1].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 
     @property
     def nid_link(self) -> typing.Optional[KeywordBase]:

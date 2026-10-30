@@ -159,7 +159,12 @@ class ContactAutomaticNodesToSurfaceSmooth(KeywordBase):
     keyword = "CONTACT"
     subkeyword = "AUTOMATIC_NODES_TO_SURFACE_SMOOTH"
     _option_spec_list = [
-        OptionSpec("ID", "pre/2", 1),
+        OptionSpec(
+            "ID",
+            "pre/2",
+            1,
+            ("TITLE",),
+        ),
         OptionSpec("MPP", "pre/1", 2),
         OptionSpec("A", "post/1", 0),
         OptionSpec("B", "post/2", 0),

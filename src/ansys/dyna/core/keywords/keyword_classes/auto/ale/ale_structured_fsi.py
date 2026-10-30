@@ -24,14 +24,10 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 
 _ALESTRUCTUREDFSI_CARD0 = (
-    FieldSchema("coupid", int, 0, 10, None),
-    FieldSchema("title", str, 10, 70, None),
-)
-
-_ALESTRUCTUREDFSI_CARD1 = (
     FieldSchema("lstrsid", int, 0, 10, None),
     FieldSchema("alesid", int, 10, 10, None),
     FieldSchema("lstrstyp", int, 20, 10, 0),
@@ -42,7 +38,7 @@ _ALESTRUCTUREDFSI_CARD1 = (
     FieldSchema("mcoup", int, 70, 10, None),
 )
 
-_ALESTRUCTUREDFSI_CARD2 = (
+_ALESTRUCTUREDFSI_CARD1 = (
     FieldSchema("start", float, 0, 10, 0.0),
     FieldSchema("end", float, 10, 10, 10000000000.0),
     FieldSchema("pfac", float, 20, 10, 0.1),
@@ -53,15 +49,24 @@ _ALESTRUCTUREDFSI_CARD2 = (
     FieldSchema("offset", float, 70, 10, None),
 )
 
+_ALESTRUCTUREDFSI_OPTION0_CARD0 = (
+    FieldSchema("coupid", int, 0, 10, None),
+    FieldSchema("title", str, 10, 70, None),
+)
+
 class AleStructuredFsi(KeywordBase):
     """DYNA ALE_STRUCTURED_FSI keyword"""
 
     keyword = "ALE"
     subkeyword = "STRUCTURED_FSI"
+    _option_spec_list = [
+        OptionSpec("TITLE", "pre/1", 1),
+    ]
 
     def __init__(self, **kwargs):
         """Initialize the AleStructuredFsi class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _ALESTRUCTUREDFSI_CARD0,
@@ -71,54 +76,38 @@ class AleStructuredFsi(KeywordBase):
                 _ALESTRUCTUREDFSI_CARD1,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _ALESTRUCTUREDFSI_CARD2,
-                **kwargs,
+            OptionCardSet(
+                option_spec = AleStructuredFsi._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _ALESTRUCTUREDFSI_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
             ),
         ]
-    @property
-    def coupid(self) -> typing.Optional[int]:
-        """Get or set the Coupling (card) ID number.  If not defined, LS-DYNA will assign an internal coupling ID based on the order of appearance in the input deck.
-        """ # nopep8
-        return self._cards[0].get_value("coupid")
-
-    @coupid.setter
-    def coupid(self, value: int) -> None:
-        """Set the coupid property."""
-        self._cards[0].set_value("coupid", value)
-
-    @property
-    def title(self) -> typing.Optional[str]:
-        """Get or set the A description of this coupling definition (A70).
-        """ # nopep8
-        return self._cards[0].get_value("title")
-
-    @title.setter
-    def title(self, value: str) -> None:
-        """Set the title property."""
-        self._cards[0].set_value("title", value)
-
     @property
     def lstrsid(self) -> typing.Optional[int]:
         """Get or set the Set ID defining a part, part set, or segment set ID of the Lagrangian structure (see *PART, *SET_PART or *SET_SEGMENT).
         """ # nopep8
-        return self._cards[1].get_value("lstrsid")
+        return self._cards[0].get_value("lstrsid")
 
     @lstrsid.setter
     def lstrsid(self, value: int) -> None:
         """Set the lstrsid property."""
-        self._cards[1].set_value("lstrsid", value)
+        self._cards[0].set_value("lstrsid", value)
 
     @property
     def alesid(self) -> typing.Optional[int]:
         """Get or set the Set ID defining a part or part set ID of the structured ALE mesh (see *PART).
         """ # nopep8
-        return self._cards[1].get_value("alesid")
+        return self._cards[0].get_value("alesid")
 
     @alesid.setter
     def alesid(self, value: int) -> None:
         """Set the alesid property."""
-        self._cards[1].set_value("alesid", value)
+        self._cards[0].set_value("alesid", value)
 
     @property
     def lstrstyp(self) -> int:
@@ -127,14 +116,14 @@ class AleStructuredFsi(KeywordBase):
         EQ.1: part ID (PID).
         EQ.2: segment set ID (SGSID).
         """ # nopep8
-        return self._cards[1].get_value("lstrstyp")
+        return self._cards[0].get_value("lstrstyp")
 
     @lstrstyp.setter
     def lstrstyp(self, value: int) -> None:
         """Set the lstrstyp property."""
         if value not in [0, 1, 2, None]:
             raise Exception("""lstrstyp must be `None` or one of {0,1,2}.""")
-        self._cards[1].set_value("lstrstyp", value)
+        self._cards[0].set_value("lstrstyp", value)
 
     @property
     def alestyp(self) -> int:
@@ -142,14 +131,14 @@ class AleStructuredFsi(KeywordBase):
         EQ.0: part set ID (PSID).
         EQ.1: part ID (PID).
         """ # nopep8
-        return self._cards[1].get_value("alestyp")
+        return self._cards[0].get_value("alestyp")
 
     @alestyp.setter
     def alestyp(self, value: int) -> None:
         """Set the alestyp property."""
         if value not in [0, 1, None]:
             raise Exception("""alestyp must be `None` or one of {0,1}.""")
-        self._cards[1].set_value("alestyp", value)
+        self._cards[0].set_value("alestyp", value)
 
     @property
     def mcoup(self) -> typing.Optional[int]:
@@ -157,34 +146,34 @@ class AleStructuredFsi(KeywordBase):
         EQ.0: couple with all multi-material groups,
         EQ.-N: -N is the ID of *SET_MULTI-MATERIAL_GROUP.
         """ # nopep8
-        return self._cards[1].get_value("mcoup")
+        return self._cards[0].get_value("mcoup")
 
     @mcoup.setter
     def mcoup(self, value: int) -> None:
         """Set the mcoup property."""
-        self._cards[1].set_value("mcoup", value)
+        self._cards[0].set_value("mcoup", value)
 
     @property
     def start(self) -> float:
         """Get or set the Start time for coupling.
         """ # nopep8
-        return self._cards[2].get_value("start")
+        return self._cards[1].get_value("start")
 
     @start.setter
     def start(self, value: float) -> None:
         """Set the start property."""
-        self._cards[2].set_value("start", value)
+        self._cards[1].set_value("start", value)
 
     @property
     def end(self) -> float:
         """Get or set the End time for coupling.
         """ # nopep8
-        return self._cards[2].get_value("end")
+        return self._cards[1].get_value("end")
 
     @end.setter
     def end(self, value: float) -> None:
         """Set the end property."""
-        self._cards[2].set_value("end", value)
+        self._cards[1].set_value("end", value)
 
     @property
     def pfac(self) -> float:
@@ -192,12 +181,12 @@ class AleStructuredFsi(KeywordBase):
         GT.0:Fraction of estimated critical stiffness.
         LT.1:PFAC must be an integer, and PFAC is a load curve ID. The curve defines the coupling pressure on the axis as a function of the penetration along the axis.
         """ # nopep8
-        return self._cards[2].get_value("pfac")
+        return self._cards[1].get_value("pfac")
 
     @pfac.setter
     def pfac(self, value: float) -> None:
         """Set the pfac property."""
-        self._cards[2].set_value("pfac", value)
+        self._cards[1].set_value("pfac", value)
 
     @property
     def fric(self) -> float:
@@ -205,23 +194,23 @@ class AleStructuredFsi(KeywordBase):
         GT.0: Constant friction coefficient
         EQ. - N: Variable friction coefficient; defined by a TABLE ID = N.The table is to look up the friction coefficient value given a pair of(coupling pressure, relative velocity)..
         """ # nopep8
-        return self._cards[2].get_value("fric")
+        return self._cards[1].get_value("fric")
 
     @fric.setter
     def fric(self, value: float) -> None:
         """Set the fric property."""
-        self._cards[2].set_value("fric", value)
+        self._cards[1].set_value("fric", value)
 
     @property
     def ilvl(self) -> typing.Optional[int]:
         """Get or set the Number of airbag segments to look downstream from the gas front. It is only used for the ABEXT keyword option. Together with DECAY, it activates pre-opening logic for gas-front segments to alleviate constrained flow typically observed in gas flow through long tubes.  Please refer to *AIRBAG_SALE (specifically Remark Error! Reference source not found.) for a detailed explanation.
         """ # nopep8
-        return self._cards[2].get_value("ilvl")
+        return self._cards[1].get_value("ilvl")
 
     @ilvl.setter
     def ilvl(self, value: int) -> None:
         """Set the ilvl property."""
-        self._cards[2].set_value("ilvl", value)
+        self._cards[1].set_value("ilvl", value)
 
     @property
     def flip(self) -> int:
@@ -229,25 +218,25 @@ class AleStructuredFsi(KeywordBase):
         EQ.0:N o action.
         EQ.1:Flip the segment normal so it points to fluids to be coupled.
         """ # nopep8
-        return self._cards[2].get_value("flip")
+        return self._cards[1].get_value("flip")
 
     @flip.setter
     def flip(self, value: int) -> None:
         """Set the flip property."""
         if value not in [0, 1, None]:
             raise Exception("""flip must be `None` or one of {0,1}.""")
-        self._cards[2].set_value("flip", value)
+        self._cards[1].set_value("flip", value)
 
     @property
     def decay(self) -> typing.Optional[float]:
         """Get or set the Decaying factor. It is only used for the ABEXT keyword option. Together with ILVL, it activates pre-opening logic for gas-front segments to alleviate constrained flow typically observed in gas flow through long tubes.  Please refer to *AIRBAG_SALE (specifically Remark Error! Reference source not found.) for a detailed explanation.
         """ # nopep8
-        return self._cards[2].get_value("decay")
+        return self._cards[1].get_value("decay")
 
     @decay.setter
     def decay(self, value: float) -> None:
         """Set the decay property."""
-        self._cards[2].set_value("decay", value)
+        self._cards[1].set_value("decay", value)
 
     @property
     def offset(self) -> typing.Optional[float]:
@@ -256,10 +245,38 @@ class AleStructuredFsi(KeywordBase):
         GT.0.0: Fraction of Lagrange segment thickness
         LT.0.0: OFFSET must be an integer,and OFFSET is a load curve ID.The curve defines the offset distance in absolute value on the y - axis as a function of the time along the x - axis.
         """ # nopep8
-        return self._cards[2].get_value("offset")
+        return self._cards[1].get_value("offset")
 
     @offset.setter
     def offset(self, value: float) -> None:
         """Set the offset property."""
-        self._cards[2].set_value("offset", value)
+        self._cards[1].set_value("offset", value)
+
+    @property
+    def coupid(self) -> typing.Optional[int]:
+        """Get or set the Coupling (card) ID number.  If not defined, LS-DYNA will assign an internal coupling ID based on the order of appearance in the input deck.
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("coupid")
+
+    @coupid.setter
+    def coupid(self, value: int) -> None:
+        """Set the coupid property."""
+        self._cards[2].cards[0].set_value("coupid", value)
+
+        if value:
+            self.activate_option("COUPID")
+
+    @property
+    def title(self) -> typing.Optional[str]:
+        """Get or set the A description of this coupling definition (A70).
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("title")
+
+    @title.setter
+    def title(self, value: str) -> None:
+        """Set the title property."""
+        self._cards[2].cards[0].set_value("title", value)
+
+        if value:
+            self.activate_option("TITLE")
 

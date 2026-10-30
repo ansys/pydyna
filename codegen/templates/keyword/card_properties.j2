@@ -38,7 +38,7 @@
 
     def add_{{card.item_name}}(self, **kwargs):
         """Adds a {{card.item_name}}."""
-        self._cards[{{card.target_index}}].add_item(**kwargs)
+        self._cards[{{card.index}}].add_item(**kwargs)
 {% endif %}
 
 {% elif card.table_group %}

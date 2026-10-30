@@ -24,6 +24,7 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
@@ -39,11 +40,41 @@ _CONSTRAINEDJOINTPLANAR_CARD0 = (
     FieldSchema("damp", float, 70, 10, 0.0),
 )
 
+_CONSTRAINEDJOINTPLANAR_OPTION0_CARD0 = (
+    FieldSchema("raid", int, 0, 10, 0),
+    FieldSchema("lst", int, 10, 10, 0),
+)
+
+_CONSTRAINEDJOINTPLANAR_OPTION1_CARD0 = (
+    FieldSchema("jid", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
+_CONSTRAINEDJOINTPLANAR_OPTION2_CARD0 = (
+    FieldSchema("cid", int, 0, 10, 0),
+    FieldSchema("tfail", float, 10, 10, 0.0),
+    FieldSchema("coupl", float, 20, 10, 0.0),
+)
+
+_CONSTRAINEDJOINTPLANAR_OPTION2_CARD1 = (
+    FieldSchema("nxx", float, 0, 10, 0.0),
+    FieldSchema("nyy", float, 10, 10, 0.0),
+    FieldSchema("nzz", float, 20, 10, 0.0),
+    FieldSchema("mxx", float, 30, 10, 0.0),
+    FieldSchema("myy", float, 40, 10, 0.0),
+    FieldSchema("mzz", float, 50, 10, 0.0),
+)
+
 class ConstrainedJointPlanar(KeywordBase):
     """DYNA CONSTRAINED_JOINT_PLANAR keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "JOINT_PLANAR"
+    _option_spec_list = [
+        OptionSpec("LOCAL", "post/1", 1),
+        OptionSpec("ID", "pre/1", 2),
+        OptionSpec("FAILURE", "post/2", 3),
+    ]
     _link_fields = {
         "n1": LinkType.NODE,
         "n2": LinkType.NODE,
@@ -54,10 +85,45 @@ class ConstrainedJointPlanar(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the ConstrainedJointPlanar class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDJOINTPLANAR_CARD0,
                 **kwargs,
+            ),
+            OptionCardSet(
+                option_spec = ConstrainedJointPlanar._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDJOINTPLANAR_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+            OptionCardSet(
+                option_spec = ConstrainedJointPlanar._option_spec_list[1],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDJOINTPLANAR_OPTION1_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
+            ),
+            OptionCardSet(
+                option_spec = ConstrainedJointPlanar._option_spec_list[2],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDJOINTPLANAR_OPTION2_CARD0,
+                        **kwargs,
+                    ),
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDJOINTPLANAR_OPTION2_CARD1,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
             ),
         ]
     @property
@@ -147,6 +213,188 @@ class ConstrainedJointPlanar(KeywordBase):
     def damp(self, value: float) -> None:
         """Set the damp property."""
         self._cards[0].set_value("damp", value)
+
+    @property
+    def raid(self) -> int:
+        """Get or set the Rigid body or accelerometer ID. The force resultants are output in the local system of the rigid body or accelerometer.
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("raid")
+
+    @raid.setter
+    def raid(self, value: int) -> None:
+        """Set the raid property."""
+        self._cards[1].cards[0].set_value("raid", value)
+
+        if value:
+            self.activate_option("RAID")
+
+    @property
+    def lst(self) -> int:
+        """Get or set the Flag for local system type. EQ.0: rigid body. EQ.1: accelerometer.
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("lst")
+
+    @lst.setter
+    def lst(self, value: int) -> None:
+        """Set the lst property."""
+        self._cards[1].cards[0].set_value("lst", value)
+
+        if value:
+            self.activate_option("LST")
+
+    @property
+    def jid(self) -> typing.Optional[int]:
+        """Get or set the Joint ID. This must be a unique number.
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("jid")
+
+    @jid.setter
+    def jid(self, value: int) -> None:
+        """Set the jid property."""
+        self._cards[2].cards[0].set_value("jid", value)
+
+        if value:
+            self.activate_option("JID")
+
+    @property
+    def heading(self) -> typing.Optional[str]:
+        """Get or set the Joint descriptor. It is suggested that unique descriptions be used.
+        """ # nopep8
+        return self._cards[2].cards[0].get_value("heading")
+
+    @heading.setter
+    def heading(self, value: str) -> None:
+        """Set the heading property."""
+        self._cards[2].cards[0].set_value("heading", value)
+
+        if value:
+            self.activate_option("HEADING")
+
+    @property
+    def cid(self) -> int:
+        """Get or set the Coordinate ID for resultants in the failure criteria. EQ.0: global coordinate system.
+        """ # nopep8
+        return self._cards[3].cards[0].get_value("cid")
+
+    @cid.setter
+    def cid(self, value: int) -> None:
+        """Set the cid property."""
+        self._cards[3].cards[0].set_value("cid", value)
+
+        if value:
+            self.activate_option("CID")
+
+    @property
+    def tfail(self) -> float:
+        """Get or set the Time for joint failure. EQ.0.0: joint never fails.
+        """ # nopep8
+        return self._cards[3].cards[0].get_value("tfail")
+
+    @tfail.setter
+    def tfail(self, value: float) -> None:
+        """Set the tfail property."""
+        self._cards[3].cards[0].set_value("tfail", value)
+
+        if value:
+            self.activate_option("TFAIL")
+
+    @property
+    def coupl(self) -> float:
+        """Get or set the Coupling between the force and moment failure criteria. LE.0.0: spot-weld criteria. GT.0.0: force and moment considered independently.
+        """ # nopep8
+        return self._cards[3].cards[0].get_value("coupl")
+
+    @coupl.setter
+    def coupl(self, value: float) -> None:
+        """Set the coupl property."""
+        self._cards[3].cards[0].set_value("coupl", value)
+
+        if value:
+            self.activate_option("COUPL")
+
+    @property
+    def nxx(self) -> float:
+        """Get or set the Axial force resultant at failure. EQ.0.0: failure due to this component is not considered.
+        """ # nopep8
+        return self._cards[3].cards[1].get_value("nxx")
+
+    @nxx.setter
+    def nxx(self, value: float) -> None:
+        """Set the nxx property."""
+        self._cards[3].cards[1].set_value("nxx", value)
+
+        if value:
+            self.activate_option("NXX")
+
+    @property
+    def nyy(self) -> float:
+        """Get or set the Force resultant at failure. EQ.0.0: failure due to this component is not considered.
+        """ # nopep8
+        return self._cards[3].cards[1].get_value("nyy")
+
+    @nyy.setter
+    def nyy(self, value: float) -> None:
+        """Set the nyy property."""
+        self._cards[3].cards[1].set_value("nyy", value)
+
+        if value:
+            self.activate_option("NYY")
+
+    @property
+    def nzz(self) -> float:
+        """Get or set the Force resultant at failure. EQ.0.0: failure due to this component is not considered.
+        """ # nopep8
+        return self._cards[3].cards[1].get_value("nzz")
+
+    @nzz.setter
+    def nzz(self, value: float) -> None:
+        """Set the nzz property."""
+        self._cards[3].cards[1].set_value("nzz", value)
+
+        if value:
+            self.activate_option("NZZ")
+
+    @property
+    def mxx(self) -> float:
+        """Get or set the Torsional moment resultant at failure. EQ.0.0: failure due to this component is not considered.
+        """ # nopep8
+        return self._cards[3].cards[1].get_value("mxx")
+
+    @mxx.setter
+    def mxx(self, value: float) -> None:
+        """Set the mxx property."""
+        self._cards[3].cards[1].set_value("mxx", value)
+
+        if value:
+            self.activate_option("MXX")
+
+    @property
+    def myy(self) -> float:
+        """Get or set the Moment resultant at failure. EQ.0.0: failure due to this component is not considered.
+        """ # nopep8
+        return self._cards[3].cards[1].get_value("myy")
+
+    @myy.setter
+    def myy(self, value: float) -> None:
+        """Set the myy property."""
+        self._cards[3].cards[1].set_value("myy", value)
+
+        if value:
+            self.activate_option("MYY")
+
+    @property
+    def mzz(self) -> float:
+        """Get or set the Moment resultant at failure. EQ.0.0: failure due to this component is not considered.
+        """ # nopep8
+        return self._cards[3].cards[1].get_value("mzz")
+
+    @mzz.setter
+    def mzz(self, value: float) -> None:
+        """Set the mzz property."""
+        self._cards[3].cards[1].set_value("mzz", value)
+
+        if value:
+            self.activate_option("MZZ")
 
     @property
     def n1_link(self) -> typing.Optional[KeywordBase]:

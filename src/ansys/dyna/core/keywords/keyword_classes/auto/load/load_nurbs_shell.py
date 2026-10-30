@@ -24,16 +24,12 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_curve import DefineCurve
 
 _LOADNURBSSHELL_CARD0 = (
-    FieldSchema("id", int, 0, 10, None),
-    FieldSchema("heading", str, 10, 70, None),
-)
-
-_LOADNURBSSHELL_CARD1 = (
     FieldSchema("ssid", int, 0, 10, None),
     FieldSchema("lcid", int, 10, 10, None),
     FieldSchema("sf", float, 20, 10, 1.0),
@@ -43,21 +39,21 @@ _LOADNURBSSHELL_CARD1 = (
     FieldSchema("regdef", str, 60, 10, "RS"),
 )
 
-_LOADNURBSSHELL_CARD2 = (
+_LOADNURBSSHELL_CARD1 = (
     FieldSchema("cid", int, 0, 10, 0),
     FieldSchema("v1", float, 10, 10, None),
     FieldSchema("v2", float, 20, 10, None),
     FieldSchema("v3", float, 30, 10, None),
 )
 
-_LOADNURBSSHELL_CARD3 = (
+_LOADNURBSSHELL_CARD2 = (
     FieldSchema("rmin", float, 0, 10, None),
     FieldSchema("smin", float, 10, 10, None),
     FieldSchema("rmax", float, 20, 10, None),
     FieldSchema("smax", float, 30, 10, None),
 )
 
-_LOADNURBSSHELL_CARD4 = (
+_LOADNURBSSHELL_CARD3 = (
     FieldSchema("ne1", int, 0, 10, None),
     FieldSchema("ne2", int, 10, 10, None),
     FieldSchema("ne3", int, 20, 10, None),
@@ -68,7 +64,7 @@ _LOADNURBSSHELL_CARD4 = (
     FieldSchema("ne8", int, 70, 10, None),
 )
 
-_LOADNURBSSHELL_CARD5 = (
+_LOADNURBSSHELL_CARD4 = (
     FieldSchema("nt1", int, 0, 10, None),
     FieldSchema("nt2", int, 10, 10, None),
     FieldSchema("nt3", int, 20, 10, None),
@@ -76,17 +72,22 @@ _LOADNURBSSHELL_CARD5 = (
     FieldSchema("nte", int, 40, 10, None),
 )
 
-_LOADNURBSSHELL_CARD6 = (
+_LOADNURBSSHELL_CARD5 = (
     FieldSchema("r1", float, 0, 10, None),
     FieldSchema("s1", float, 10, 10, None),
     FieldSchema("r2", float, 20, 10, None),
     FieldSchema("s2", float, 30, 10, None),
 )
 
-_LOADNURBSSHELL_CARD7 = (
+_LOADNURBSSHELL_CARD6 = (
     FieldSchema("nc1", int, 0, 10, None),
     FieldSchema("nc2", int, 10, 10, None),
     FieldSchema("nce", int, 20, 10, None),
+)
+
+_LOADNURBSSHELL_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
 )
 
 class LoadNurbsShell(KeywordBase):
@@ -94,6 +95,9 @@ class LoadNurbsShell(KeywordBase):
 
     keyword = "LOAD"
     subkeyword = "NURBS_SHELL"
+    _option_spec_list = [
+        OptionSpec("ID", "pre/1", 1),
+    ]
     _link_fields = {
         "lcid": LinkType.DEFINE_CURVE,
     }
@@ -101,6 +105,7 @@ class LoadNurbsShell(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the LoadNurbsShell class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _LOADNURBSSHELL_CARD0,
@@ -130,87 +135,71 @@ class LoadNurbsShell(KeywordBase):
                 _LOADNURBSSHELL_CARD6,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _LOADNURBSSHELL_CARD7,
-                **kwargs,
+            OptionCardSet(
+                option_spec = LoadNurbsShell._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _LOADNURBSSHELL_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
             ),
         ]
-    @property
-    def id(self) -> typing.Optional[int]:
-        """Get or set the loading ID
-        """ # nopep8
-        return self._cards[0].get_value("id")
-
-    @id.setter
-    def id(self, value: int) -> None:
-        """Set the id property."""
-        self._cards[0].set_value("id", value)
-
-    @property
-    def heading(self) -> typing.Optional[str]:
-        """Get or set the A description of the loading.
-        """ # nopep8
-        return self._cards[0].get_value("heading")
-
-    @heading.setter
-    def heading(self, value: str) -> None:
-        """Set the heading property."""
-        self._cards[0].set_value("heading", value)
-
     @property
     def ssid(self) -> typing.Optional[int]:
         """Get or set the NURBS shell patch ID.
         """ # nopep8
-        return self._cards[1].get_value("ssid")
+        return self._cards[0].get_value("ssid")
 
     @ssid.setter
     def ssid(self, value: int) -> None:
         """Set the ssid property."""
-        self._cards[1].set_value("ssid", value)
+        self._cards[0].set_value("ssid", value)
 
     @property
     def lcid(self) -> typing.Optional[int]:
         """Get or set the Load curve ID.
         """ # nopep8
-        return self._cards[1].get_value("lcid")
+        return self._cards[0].get_value("lcid")
 
     @lcid.setter
     def lcid(self, value: int) -> None:
         """Set the lcid property."""
-        self._cards[1].set_value("lcid", value)
+        self._cards[0].set_value("lcid", value)
 
     @property
     def sf(self) -> float:
         """Get or set the Load curve scale factor.
         """ # nopep8
-        return self._cards[1].get_value("sf")
+        return self._cards[0].get_value("sf")
 
     @sf.setter
     def sf(self, value: float) -> None:
         """Set the sf property."""
-        self._cards[1].set_value("sf", value)
+        self._cards[0].set_value("sf", value)
 
     @property
     def at(self) -> float:
         """Get or set the Arrival/birth time for load.
         """ # nopep8
-        return self._cards[1].get_value("at")
+        return self._cards[0].get_value("at")
 
     @at.setter
     def at(self, value: float) -> None:
         """Set the at property."""
-        self._cards[1].set_value("at", value)
+        self._cards[0].set_value("at", value)
 
     @property
     def dt(self) -> float:
         """Get or set the Death time for load.
         """ # nopep8
-        return self._cards[1].get_value("dt")
+        return self._cards[0].get_value("dt")
 
     @dt.setter
     def dt(self, value: float) -> None:
         """Set the dt property."""
-        self._cards[1].set_value("dt", value)
+        self._cards[0].set_value("dt", value)
 
     @property
     def ltype(self) -> str:
@@ -221,335 +210,363 @@ class LoadNurbsShell(KeywordBase):
         EQ.CRVT:Loading, force per unit length, is applied on a curve on the surface of a NURBS patch, along the local transverse direction, CT direction.EQ.CRVN:Loading, force per unit length, is applied on a curve on the surface of a NURBS patch, along the local normal direction, CN direction.
         EQ.TRACT:Surface traction, force per unit area, is applied on a region on a NURBS patch, along (V1,V2,V3) of the coordinate system CID.
         """ # nopep8
-        return self._cards[1].get_value("ltype")
+        return self._cards[0].get_value("ltype")
 
     @ltype.setter
     def ltype(self, value: str) -> None:
         """Set the ltype property."""
         if value not in ["PRESS", "CRV", "CRVS", "CRVT", "CRVN", "TRACT", None]:
             raise Exception("""ltype must be `None` or one of {"PRESS","CRV","CRVS","CRVT","CRVN","TRACT"}.""")
-        self._cards[1].set_value("ltype", value)
+        self._cards[0].set_value("ltype", value)
 
     @property
     def regdef(self) -> str:
         """Get or set the The method of defining the region of a NURBS shell patch on which the loading is applied.
         """ # nopep8
-        return self._cards[1].get_value("regdef")
+        return self._cards[0].get_value("regdef")
 
     @regdef.setter
     def regdef(self, value: str) -> None:
         """Set the regdef property."""
         if value not in ["RS", "NBEW", "NBEP", None]:
             raise Exception("""regdef must be `None` or one of {"RS","NBEW","NBEP"}.""")
-        self._cards[1].set_value("regdef", value)
+        self._cards[0].set_value("regdef", value)
 
     @property
     def cid(self) -> int:
         """Get or set the Coordinate system ID.
         """ # nopep8
-        return self._cards[2].get_value("cid")
+        return self._cards[1].get_value("cid")
 
     @cid.setter
     def cid(self, value: int) -> None:
         """Set the cid property."""
-        self._cards[2].set_value("cid", value)
+        self._cards[1].set_value("cid", value)
 
     @property
     def v1(self) -> typing.Optional[float]:
         """Get or set the Vector direction cosines defining the direction of the traction loading.
         """ # nopep8
-        return self._cards[2].get_value("v1")
+        return self._cards[1].get_value("v1")
 
     @v1.setter
     def v1(self, value: float) -> None:
         """Set the v1 property."""
-        self._cards[2].set_value("v1", value)
+        self._cards[1].set_value("v1", value)
 
     @property
     def v2(self) -> typing.Optional[float]:
         """Get or set the Vector direction cosines defining the direction of the traction loading.
         """ # nopep8
-        return self._cards[2].get_value("v2")
+        return self._cards[1].get_value("v2")
 
     @v2.setter
     def v2(self, value: float) -> None:
         """Set the v2 property."""
-        self._cards[2].set_value("v2", value)
+        self._cards[1].set_value("v2", value)
 
     @property
     def v3(self) -> typing.Optional[float]:
         """Get or set the Vector direction cosines defining the direction of the traction loading.
         """ # nopep8
-        return self._cards[2].get_value("v3")
+        return self._cards[1].get_value("v3")
 
     @v3.setter
     def v3(self, value: float) -> None:
         """Set the v3 property."""
-        self._cards[2].set_value("v3", value)
+        self._cards[1].set_value("v3", value)
 
     @property
     def rmin(self) -> typing.Optional[float]:
         """Get or set the The minimum and maximum values of the univariate knot vector in local r and s-directions of the area on which the pressure loading is applied.
         """ # nopep8
-        return self._cards[3].get_value("rmin")
+        return self._cards[2].get_value("rmin")
 
     @rmin.setter
     def rmin(self, value: float) -> None:
         """Set the rmin property."""
-        self._cards[3].set_value("rmin", value)
+        self._cards[2].set_value("rmin", value)
 
     @property
     def smin(self) -> typing.Optional[float]:
         """Get or set the The minimum and maximum values of the univariate knot vector in local r and s-directions of the area on which the pressure loading is applied.
         """ # nopep8
-        return self._cards[3].get_value("smin")
+        return self._cards[2].get_value("smin")
 
     @smin.setter
     def smin(self, value: float) -> None:
         """Set the smin property."""
-        self._cards[3].set_value("smin", value)
+        self._cards[2].set_value("smin", value)
 
     @property
     def rmax(self) -> typing.Optional[float]:
         """Get or set the The minimum and maximum values of the univariate knot vector in local r and s-directions of the area on which the pressure loading is applied.
         """ # nopep8
-        return self._cards[3].get_value("rmax")
+        return self._cards[2].get_value("rmax")
 
     @rmax.setter
     def rmax(self, value: float) -> None:
         """Set the rmax property."""
-        self._cards[3].set_value("rmax", value)
+        self._cards[2].set_value("rmax", value)
 
     @property
     def smax(self) -> typing.Optional[float]:
         """Get or set the The minimum and maximum values of the univariate knot vector in local r and s-directions of the area on which the pressure loading is applied.
         """ # nopep8
-        return self._cards[3].get_value("smax")
+        return self._cards[2].get_value("smax")
 
     @smax.setter
     def smax(self, value: float) -> None:
         """Set the smax property."""
-        self._cards[3].set_value("smax", value)
+        self._cards[2].set_value("smax", value)
 
     @property
     def ne1(self) -> typing.Optional[int]:
         """Get or set the An interior node on the surface of the NURBS element on which the traction loading is applied.
         """ # nopep8
-        return self._cards[4].get_value("ne1")
+        return self._cards[3].get_value("ne1")
 
     @ne1.setter
     def ne1(self, value: int) -> None:
         """Set the ne1 property."""
-        self._cards[4].set_value("ne1", value)
+        self._cards[3].set_value("ne1", value)
 
     @property
     def ne2(self) -> typing.Optional[int]:
         """Get or set the An interior node on the surface of the NURBS element on which the traction loading is applied.
         """ # nopep8
-        return self._cards[4].get_value("ne2")
+        return self._cards[3].get_value("ne2")
 
     @ne2.setter
     def ne2(self, value: int) -> None:
         """Set the ne2 property."""
-        self._cards[4].set_value("ne2", value)
+        self._cards[3].set_value("ne2", value)
 
     @property
     def ne3(self) -> typing.Optional[int]:
         """Get or set the An interior node on the surface of the NURBS element on which the traction loading is applied.
         """ # nopep8
-        return self._cards[4].get_value("ne3")
+        return self._cards[3].get_value("ne3")
 
     @ne3.setter
     def ne3(self, value: int) -> None:
         """Set the ne3 property."""
-        self._cards[4].set_value("ne3", value)
+        self._cards[3].set_value("ne3", value)
 
     @property
     def ne4(self) -> typing.Optional[int]:
         """Get or set the An interior node on the surface of the NURBS element on which the traction loading is applied.
         """ # nopep8
-        return self._cards[4].get_value("ne4")
+        return self._cards[3].get_value("ne4")
 
     @ne4.setter
     def ne4(self, value: int) -> None:
         """Set the ne4 property."""
-        self._cards[4].set_value("ne4", value)
+        self._cards[3].set_value("ne4", value)
 
     @property
     def ne5(self) -> typing.Optional[int]:
         """Get or set the An interior node on the surface of the NURBS element on which the traction loading is applied.
         """ # nopep8
-        return self._cards[4].get_value("ne5")
+        return self._cards[3].get_value("ne5")
 
     @ne5.setter
     def ne5(self, value: int) -> None:
         """Set the ne5 property."""
-        self._cards[4].set_value("ne5", value)
+        self._cards[3].set_value("ne5", value)
 
     @property
     def ne6(self) -> typing.Optional[int]:
         """Get or set the An interior node on the surface of the NURBS element on which the traction loading is applied.
         """ # nopep8
-        return self._cards[4].get_value("ne6")
+        return self._cards[3].get_value("ne6")
 
     @ne6.setter
     def ne6(self, value: int) -> None:
         """Set the ne6 property."""
-        self._cards[4].set_value("ne6", value)
+        self._cards[3].set_value("ne6", value)
 
     @property
     def ne7(self) -> typing.Optional[int]:
         """Get or set the An interior node on the surface of the NURBS element on which the traction loading is applied.
         """ # nopep8
-        return self._cards[4].get_value("ne7")
+        return self._cards[3].get_value("ne7")
 
     @ne7.setter
     def ne7(self, value: int) -> None:
         """Set the ne7 property."""
-        self._cards[4].set_value("ne7", value)
+        self._cards[3].set_value("ne7", value)
 
     @property
     def ne8(self) -> typing.Optional[int]:
         """Get or set the An interior node on the surface of the NURBS element on which the traction loading is applied.
         """ # nopep8
-        return self._cards[4].get_value("ne8")
+        return self._cards[3].get_value("ne8")
 
     @ne8.setter
     def ne8(self, value: int) -> None:
         """Set the ne8 property."""
-        self._cards[4].set_value("ne8", value)
+        self._cards[3].set_value("ne8", value)
 
     @property
     def nt1(self) -> typing.Optional[int]:
         """Get or set the Nodes defining an area on the surface of a NURBS element where loading is applied.
         """ # nopep8
-        return self._cards[5].get_value("nt1")
+        return self._cards[4].get_value("nt1")
 
     @nt1.setter
     def nt1(self, value: int) -> None:
         """Set the nt1 property."""
-        self._cards[5].set_value("nt1", value)
+        self._cards[4].set_value("nt1", value)
 
     @property
     def nt2(self) -> typing.Optional[int]:
         """Get or set the Nodes defining an area on the surface of a NURBS element where loading is applied.
         """ # nopep8
-        return self._cards[5].get_value("nt2")
+        return self._cards[4].get_value("nt2")
 
     @nt2.setter
     def nt2(self, value: int) -> None:
         """Set the nt2 property."""
-        self._cards[5].set_value("nt2", value)
+        self._cards[4].set_value("nt2", value)
 
     @property
     def nt3(self) -> typing.Optional[int]:
         """Get or set the Nodes defining an area on the surface of a NURBS element where loading is applied.
         """ # nopep8
-        return self._cards[5].get_value("nt3")
+        return self._cards[4].get_value("nt3")
 
     @nt3.setter
     def nt3(self, value: int) -> None:
         """Set the nt3 property."""
-        self._cards[5].set_value("nt3", value)
+        self._cards[4].set_value("nt3", value)
 
     @property
     def nt4(self) -> typing.Optional[int]:
         """Get or set the Nodes defining an area on the surface of a NURBS element where loading is applied.
         """ # nopep8
-        return self._cards[5].get_value("nt4")
+        return self._cards[4].get_value("nt4")
 
     @nt4.setter
     def nt4(self, value: int) -> None:
         """Set the nt4 property."""
-        self._cards[5].set_value("nt4", value)
+        self._cards[4].set_value("nt4", value)
 
     @property
     def nte(self) -> typing.Optional[int]:
         """Get or set the Optional node used to identify the NURBS element on which the load application area defined by the NTi's is located.
         """ # nopep8
-        return self._cards[5].get_value("nte")
+        return self._cards[4].get_value("nte")
 
     @nte.setter
     def nte(self, value: int) -> None:
         """Set the nte property."""
-        self._cards[5].set_value("nte", value)
+        self._cards[4].set_value("nte", value)
 
     @property
     def r1(self) -> typing.Optional[float]:
         """Get or set the The univariate knot vector in local r and s-directions of the starting and ending points of the curve on which the curve loading is applied.
         """ # nopep8
-        return self._cards[6].get_value("r1")
+        return self._cards[5].get_value("r1")
 
     @r1.setter
     def r1(self, value: float) -> None:
         """Set the r1 property."""
-        self._cards[6].set_value("r1", value)
+        self._cards[5].set_value("r1", value)
 
     @property
     def s1(self) -> typing.Optional[float]:
         """Get or set the The univariate knot vector in local r and s-directions of the starting and ending points of the curve on which the curve loading is applied.
         """ # nopep8
-        return self._cards[6].get_value("s1")
+        return self._cards[5].get_value("s1")
 
     @s1.setter
     def s1(self, value: float) -> None:
         """Set the s1 property."""
-        self._cards[6].set_value("s1", value)
+        self._cards[5].set_value("s1", value)
 
     @property
     def r2(self) -> typing.Optional[float]:
         """Get or set the The univariate knot vector in local r and s-directions of the starting and ending points of the curve on which the curve loading is applied.
         """ # nopep8
-        return self._cards[6].get_value("r2")
+        return self._cards[5].get_value("r2")
 
     @r2.setter
     def r2(self, value: float) -> None:
         """Set the r2 property."""
-        self._cards[6].set_value("r2", value)
+        self._cards[5].set_value("r2", value)
 
     @property
     def s2(self) -> typing.Optional[float]:
         """Get or set the The univariate knot vector in local r and s-directions of the starting and ending points of the curve on which the curve loading is applied.
         """ # nopep8
-        return self._cards[6].get_value("s2")
+        return self._cards[5].get_value("s2")
 
     @s2.setter
     def s2(self, value: float) -> None:
         """Set the s2 property."""
-        self._cards[6].set_value("s2", value)
+        self._cards[5].set_value("s2", value)
 
     @property
     def nc1(self) -> typing.Optional[int]:
         """Get or set the Nodes defining a curve on the surface of a NURBS element where loading is applied.
         """ # nopep8
-        return self._cards[7].get_value("nc1")
+        return self._cards[6].get_value("nc1")
 
     @nc1.setter
     def nc1(self, value: int) -> None:
         """Set the nc1 property."""
-        self._cards[7].set_value("nc1", value)
+        self._cards[6].set_value("nc1", value)
 
     @property
     def nc2(self) -> typing.Optional[int]:
         """Get or set the Nodes defining a curve on the surface of a NURBS element where loading is applied.
         """ # nopep8
-        return self._cards[7].get_value("nc2")
+        return self._cards[6].get_value("nc2")
 
     @nc2.setter
     def nc2(self, value: int) -> None:
         """Set the nc2 property."""
-        self._cards[7].set_value("nc2", value)
+        self._cards[6].set_value("nc2", value)
 
     @property
     def nce(self) -> typing.Optional[int]:
         """Get or set the Optional node used to identify the NURBS element on which the load application curve defined by the NTi's is located.
         """ # nopep8
-        return self._cards[7].get_value("nce")
+        return self._cards[6].get_value("nce")
 
     @nce.setter
     def nce(self, value: int) -> None:
         """Set the nce property."""
-        self._cards[7].set_value("nce", value)
+        self._cards[6].set_value("nce", value)
+
+    @property
+    def id(self) -> typing.Optional[int]:
+        """Get or set the loading ID
+        """ # nopep8
+        return self._cards[7].cards[0].get_value("id")
+
+    @id.setter
+    def id(self, value: int) -> None:
+        """Set the id property."""
+        self._cards[7].cards[0].set_value("id", value)
+
+        if value:
+            self.activate_option("ID")
+
+    @property
+    def heading(self) -> typing.Optional[str]:
+        """Get or set the A description of the loading.
+        """ # nopep8
+        return self._cards[7].cards[0].get_value("heading")
+
+    @heading.setter
+    def heading(self, value: str) -> None:
+        """Set the heading property."""
+        self._cards[7].cards[0].set_value("heading", value)
+
+        if value:
+            self.activate_option("HEADING")
 
     @property
     def lcid_link(self) -> typing.Optional[DefineCurve]:

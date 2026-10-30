@@ -44,6 +44,7 @@ from .metadata import (
     TextCardMetadata,
     VariableCardMetadata,
 )
+from .row_condition import RowConditionCode
 
 if TYPE_CHECKING:
     from .label_registry import LabelRegistry
@@ -248,6 +249,8 @@ class Card:
         active_func: Function to determine if card is active
         overall_name: Name for card groups
         key_field: Key field name for table-aware link properties (e.g., 'pid' for Part)
+        row_active_if: Row condition expression of a table card group sub-card, from the manifest
+        row_condition: Compiled ``row_active_if``, set once field names are normalized
     """
 
     index: int
@@ -268,6 +271,8 @@ class Card:
     overall_name: Optional[str] = None
     active: Optional[str] = None  # Activation condition for option cards
     key_field: Optional[str] = None  # Key field for table-aware link properties
+    row_active_if: Optional[Dict[str, Any]] = None
+    row_condition: Optional[RowConditionCode] = None
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Card":
@@ -311,6 +316,7 @@ class Card:
             overall_name=data.get("overall_name"),
             active=data.get("active"),
             key_field=data.get("key_field"),
+            row_active_if=data.get("row_active_if"),
         )
 
     def __getitem__(self, key: str) -> Any:
@@ -387,6 +393,7 @@ class KeywordData:
         card_sets: Card set metadata (added by CardSetHandler)
         table: Table card flag (added by TableCardHandler)
         table_group: Table card group flag (added by TableCardGroupHandler)
+        row_conditions: Whether a table card group sub-card has a row condition
         variable: Series card flag (added by SeriesCardHandler)
         text_card: Text card flag (added by TextCardHandler)
         dataclasses: Custom dataclass definitions (added by SeriesCardHandler)
@@ -407,6 +414,7 @@ class KeywordData:
     card_sets: Optional[Union[CardSetsContainer, Dict[str, Any]]] = None
     table: bool = False
     table_group: bool = False
+    row_conditions: bool = False
     variable: bool = False
     text_card: bool = False
     dataclasses: Union[List[DataclassDefinition], List[Dict[str, Any]]] = field(

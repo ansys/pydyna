@@ -60,10 +60,18 @@ def get_post_options_with_no_title_order(cards: typing.List[CardInterface]) -> t
     return [o for o in option_cards if o.position.placement == CardPlacement.POST]
 
 
+def _option_set_is_active(option_set: OptionCardSet, options_api: OptionsInterface) -> bool:
+    """True when the selected spelling is the spec name or one of its aliases."""
+    spec = option_set.option_spec
+    if options_api.is_option_active(spec.name):
+        return True
+    return any(options_api.is_option_active(alias) for alias in spec.aliases)
+
+
 def get_active_options(cards: typing.List[CardInterface], options_api: OptionsInterface) -> typing.List[OptionCardSet]:
     """Return active option card sets, sorted by position."""
     option_cards = get_sorted_option_cards(cards)
-    return [o for o in option_cards if options_api.is_option_active(o.name)]
+    return [o for o in option_cards if _option_set_is_active(o, options_api)]
 
 
 def get_pre_option_cards(

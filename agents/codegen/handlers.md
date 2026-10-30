@@ -167,9 +167,50 @@ Groups adjacent cards that repeat together as 2D tables.
 ```json
 "table-card-group": [{
   "refs": ["stress_data", "hisv"],
-  "length_func": "num_elements"
+  "overall-name": "stresses",
+  "length-func": "self.num_elements"
 }]
 ```
+
+`conditional-card` on a sub-card (`card_active_funcs`) enables or disables it for every row. When a
+sub-card exists only in some rows, give it a row condition instead. `*ELEMENT_SHELL_THICKNESS` has a
+THIC5-THIC8 line only for elements with mid-side nodes:
+
+```json
+"table-card-group": [{
+  "refs": ["element_card", "thickness_card", "midside_thickness_card"],
+  "overall-name": "elements",
+  "row-conditions": [{
+    "ref": "midside_thickness_card",
+    "active-if": {"op": "ne", "left": {"field": "n5"}, "right": {"literal": 0}}
+  }]
+}]
+```
+
+`active-if` is an expression tree over fields of **earlier** sub-cards, named by their generated
+property names:
+
+| Expression | Meaning |
+|------------|---------|
+| `{"op": "and" \| "or", "args": [e1, e2, ...]}` | All / any of at least two expressions |
+| `{"op": "not", "arg": e}` | Negation |
+| `{"op": "is_set", "field": f}` | Field is not blank |
+| `{"op": "eq" \| "ne" \| "lt" \| "le" \| "gt" \| "ge", "left": o, "right": o}` | Comparison; operands are `{"field": f}` or `{"literal": v}` |
+| `{"op": "in", "left": {"field": f}, "right": {"literal": [v1, ...]}}` | Membership |
+
+A comparison or `in` with a blank field is false, so `not` of a comparison is true for a blank field.
+Codegen checks literal types against the field types, then emits a `RowCondition` with a scalar form,
+used while reading line by line, and a vectorized pandas form, used for writing:
+
+```python
+RowCondition(
+    ("n5",),
+    lambda n5: not is_missing(n5) and n5 != 0,
+    lambda table: (table["n5"].notna() & table["n5"].ne(0)).to_numpy(dtype=bool),
+)
+```
+
+A sub-card disabled by `conditional-card` has no rows, whatever its row condition.
 
 ### shared-field
 

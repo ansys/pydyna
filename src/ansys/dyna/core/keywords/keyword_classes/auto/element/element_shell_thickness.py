@@ -27,6 +27,7 @@ import pandas as pd
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
 from ansys.dyna.core.lib.table_card_group import TableCardGroup
+from ansys.dyna.core.lib.row_condition import RowCondition, is_missing
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.node.node import Node
@@ -83,10 +84,14 @@ class ElementShellThickness(KeywordBase):
                 None,
                 None,
                 "elements",
-                card_active_funcs=[
+                row_conditions=[
                     None,
                     None,
-                    lambda: self.elements['n5'].any(),
+                    RowCondition(
+                        ("n5",),
+                        lambda n5: not is_missing(n5) and n5 != 0,
+                        lambda table: (table["n5"].notna() & table["n5"].ne(0)).to_numpy(dtype=bool),
+                    ),
                 ],
                 **kwargs,
             ),

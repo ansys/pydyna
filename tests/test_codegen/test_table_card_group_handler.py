@@ -26,10 +26,14 @@ import pytest
 
 from keyword_generation.data_model.keyword_data import Card, Field, KeywordData
 from keyword_generation.data_model.label_registry import LabelRegistry, UndefinedLabelError
+from keyword_generation.handlers.handler_base import validate_handler_settings
 from keyword_generation.handlers.table_card_group import (
+    RowConditionSettings,
     TableCardGroupHandler,
     TableCardGroupSettings,
 )
+
+ROW_A_IS_NONZERO = {"op": "ne", "left": {"field": "row_a"}, "right": {"literal": 0}}
 
 
 class TestTableCardGroupSettings:
@@ -74,6 +78,17 @@ class TestTableCardGroupSettings:
         settings = TableCardGroupSettings.from_dict(data)
         assert settings.length_func == "self.count"
         assert settings.active_func == "self.active"
+
+    def test_from_dict_with_row_conditions(self):
+        """Test from_dict parses row conditions."""
+        data = {
+            "refs": ["c1", "c2"],
+            "overall-name": "row",
+            "row-conditions": [{"ref": "c2", "active-if": ROW_A_IS_NONZERO}],
+        }
+        settings = TableCardGroupSettings.from_dict(data)
+        assert settings.row_conditions == [RowConditionSettings(ref="c2", active_if=ROW_A_IS_NONZERO)]
+        assert TableCardGroupSettings.from_dict({"refs": ["c1"], "overall-name": "row"}).row_conditions == []
 
     def test_resolve_indices(self):
         """Test resolve_indices resolves all refs to indices."""
@@ -325,3 +340,70 @@ class TestTableCardGroupHandler:
         original_insertions = sample_kwd_data.card_insertions.copy()
         handler.post_process(sample_kwd_data)
         assert sample_kwd_data.card_insertions == original_insertions
+
+    def test_handle_with_row_condition(self, handler, sample_kwd_data):
+        """Test that a row condition is set on its sub-card, to be compiled after field normalization."""
+        settings = [
+            {
+                "refs": ["row_a", "row_b"],
+                "overall-name": "row",
+                "row-conditions": [{"ref": "row_b", "active-if": ROW_A_IS_NONZERO}],
+            }
+        ]
+
+        handler.handle(sample_kwd_data, settings)
+
+        group_card = sample_kwd_data.card_insertions[0].card
+        assert group_card["sub_cards"][1].row_active_if == ROW_A_IS_NONZERO
+        assert group_card["sub_cards"][0].row_active_if is None
+        assert group_card["sub_cards"][1].row_condition is None
+
+    def test_handle_row_condition_outside_group_raises(self, handler, sample_kwd_data):
+        """Test that a row condition must be on a card of its group."""
+        settings = [
+            {
+                "refs": ["row_a", "row_b"],
+                "overall-name": "row",
+                "row-conditions": [{"ref": "row_c", "active-if": ROW_A_IS_NONZERO}],
+            }
+        ]
+
+        with pytest.raises(ValueError, match="'row_c' is not one of its refs"):
+            handler.handle(sample_kwd_data, settings)
+
+
+class TestTableCardGroupSchema:
+    """Test the settings schema, including the row condition expression tree."""
+
+    @staticmethod
+    def _settings(active_if):
+        return [{"refs": ["a", "b"], "overall-name": "row", "row-conditions": [{"ref": "b", "active-if": active_if}]}]
+
+    @pytest.mark.parametrize(
+        "active_if",
+        [
+            ROW_A_IS_NONZERO,
+            {"op": "in", "left": {"field": "type"}, "right": {"literal": ["VEC3", "MAT"]}},
+            {"op": "not", "arg": {"op": "is_set", "field": "n5"}},
+            {"op": "or", "args": [ROW_A_IS_NONZERO, {"op": "is_set", "field": "n5"}]},
+        ],
+    )
+    def test_valid(self, active_if):
+        pytest.importorskip("jsonschema")
+        validate_handler_settings("table-card-group", self._settings(active_if))
+
+    @pytest.mark.parametrize(
+        "active_if",
+        [
+            {"op": "xor", "args": [ROW_A_IS_NONZERO, ROW_A_IS_NONZERO]},
+            {"op": "and", "args": [ROW_A_IS_NONZERO]},
+            {"op": "ne", "left": {"field": "row_a"}, "right": {"value": 0}},
+            {"op": "ne", "left": {"field": "row_a"}},
+            {"op": "is_set", "field": "n5", "left": {"field": "n5"}},
+            "row_a != 0",
+        ],
+    )
+    def test_invalid(self, active_if):
+        pytest.importorskip("jsonschema")
+        with pytest.raises(ValueError, match="Invalid settings for handler 'table-card-group'"):
+            validate_handler_settings("table-card-group", self._settings(active_if))

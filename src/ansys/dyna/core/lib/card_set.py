@@ -59,9 +59,9 @@ class CardSet(CardInterface):
             option_specs = []
         self._option_specs = option_specs
         self._initialized: bool = False
+        _infrastructure_keys = {"format", "user_comment"}
         if card_set_count is not None:
             if not self._bounded:
-                _infrastructure_keys = {"format", "user_comment"}
                 field_kwargs = {k: v for k, v in kwargs.items() if k not in _infrastructure_keys}
                 if field_kwargs:
                     raise ValueError(
@@ -71,9 +71,11 @@ class CardSet(CardInterface):
                     )
                 self._initialize_data(card_set_count)
                 self._initialized = True
-        elif len(kwargs) > 0 and not self._bounded:
-            # implicit unbounded initializer!
-            self._initialize(**kwargs)
+        elif not self._bounded and kwargs:
+            # implicit unbounded initializer! Kwargs that only set fields on other
+            # cards of the keyword must not create an empty item.
+            if any(hasattr(set_type, key) for key in kwargs):
+                self._initialize(**kwargs)
         kwargs["parent"] = self._parent
         kwargs["keyword"] = self._keyword
 

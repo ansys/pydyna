@@ -24,16 +24,12 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _CONSTRAINEDLOCAL_CARD0 = (
-    FieldSchema("id", int, 0, 10, None),
-    FieldSchema("heading", str, 10, 70, None),
-)
-
-_CONSTRAINEDLOCAL_CARD1 = (
     FieldSchema("tc", int, 0, 10, 0),
     FieldSchema("rc", int, 10, 10, 0),
     FieldSchema("dir", int, 20, 10, 1),
@@ -44,11 +40,19 @@ _CONSTRAINEDLOCAL_CARD1 = (
     FieldSchema("tol", float, 70, 10, 0.0),
 )
 
+_CONSTRAINEDLOCAL_OPTION0_CARD0 = (
+    FieldSchema("id", int, 0, 10, None),
+    FieldSchema("heading", str, 10, 70, None),
+)
+
 class ConstrainedLocal(KeywordBase):
     """DYNA CONSTRAINED_LOCAL keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "LOCAL"
+    _option_spec_list = [
+        OptionSpec("ID", "pre/1", 1),
+    ]
     _link_fields = {
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
     }
@@ -56,39 +60,23 @@ class ConstrainedLocal(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the ConstrainedLocal class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDLOCAL_CARD0,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _CONSTRAINEDLOCAL_CARD1,
-                **kwargs,
+            OptionCardSet(
+                option_spec = ConstrainedLocal._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDLOCAL_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
             ),
         ]
-    @property
-    def id(self) -> typing.Optional[int]:
-        """Get or set the Optional ID which can be referred to by *SENSOR_CONTROL.
-        This ID must be unique and cannot be shared with *BOUNDARY_SPC.
-        """ # nopep8
-        return self._cards[0].get_value("id")
-
-    @id.setter
-    def id(self, value: int) -> None:
-        """Set the id property."""
-        self._cards[0].set_value("id", value)
-
-    @property
-    def heading(self) -> typing.Optional[str]:
-        """Get or set the An optional descriptor that will be written into the d3hsp file and the spcforc file.
-        """ # nopep8
-        return self._cards[0].get_value("heading")
-
-    @heading.setter
-    def heading(self, value: str) -> None:
-        """Set the heading property."""
-        self._cards[0].set_value("heading", value)
-
     @property
     def tc(self) -> int:
         """Get or set the Translational Constraint:
@@ -101,14 +89,14 @@ class ConstrainedLocal(KeywordBase):
         EQ.6: constrained z and x translation,
         EQ.7: constrained x,y and z translation.
         """ # nopep8
-        return self._cards[1].get_value("tc")
+        return self._cards[0].get_value("tc")
 
     @tc.setter
     def tc(self, value: int) -> None:
         """Set the tc property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
             raise Exception("""tc must be `None` or one of {0,1,2,3,4,5,6,7}.""")
-        self._cards[1].set_value("tc", value)
+        self._cards[0].set_value("tc", value)
 
     @property
     def rc(self) -> int:
@@ -122,14 +110,14 @@ class ConstrainedLocal(KeywordBase):
         EQ.6: constrained z and x rotations,
         EQ.7: constrained x,y and z rotations.
         """ # nopep8
-        return self._cards[1].get_value("rc")
+        return self._cards[0].get_value("rc")
 
     @rc.setter
     def rc(self, value: int) -> None:
         """Set the rc property."""
         if value not in [0, 1, 2, 3, 4, 5, 6, 7, None]:
             raise Exception("""rc must be `None` or one of {0,1,2,3,4,5,6,7}.""")
-        self._cards[1].set_value("rc", value)
+        self._cards[0].set_value("rc", value)
 
     @property
     def dir(self) -> int:
@@ -138,69 +126,98 @@ class ConstrainedLocal(KeywordBase):
         EQ.2: local y,
         EQ.3:local z
         """ # nopep8
-        return self._cards[1].get_value("dir")
+        return self._cards[0].get_value("dir")
 
     @dir.setter
     def dir(self, value: int) -> None:
         """Set the dir property."""
         if value not in [1, 2, 3, None]:
             raise Exception("""dir must be `None` or one of {1,2,3}.""")
-        self._cards[1].set_value("dir", value)
+        self._cards[0].set_value("dir", value)
 
     @property
     def x(self) -> typing.Optional[float]:
         """Get or set the Local x-coordinate of a point on the local constraint plane
         """ # nopep8
-        return self._cards[1].get_value("x")
+        return self._cards[0].get_value("x")
 
     @x.setter
     def x(self, value: float) -> None:
         """Set the x property."""
-        self._cards[1].set_value("x", value)
+        self._cards[0].set_value("x", value)
 
     @property
     def y(self) -> typing.Optional[float]:
         """Get or set the Local y-coordinate of a point on the local constraint plane
         """ # nopep8
-        return self._cards[1].get_value("y")
+        return self._cards[0].get_value("y")
 
     @y.setter
     def y(self, value: float) -> None:
         """Set the y property."""
-        self._cards[1].set_value("y", value)
+        self._cards[0].set_value("y", value)
 
     @property
     def z(self) -> typing.Optional[float]:
         """Get or set the Local z-coordinate of a point on the local constraint plane
         """ # nopep8
-        return self._cards[1].get_value("z")
+        return self._cards[0].get_value("z")
 
     @z.setter
     def z(self, value: float) -> None:
         """Set the z property."""
-        self._cards[1].set_value("z", value)
+        self._cards[0].set_value("z", value)
 
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Coordinate system ID for orientation of the local coordinate system
         """ # nopep8
-        return self._cards[1].get_value("cid")
+        return self._cards[0].get_value("cid")
 
     @cid.setter
     def cid(self, value: int) -> None:
         """Set the cid property."""
-        self._cards[1].set_value("cid", value)
+        self._cards[0].set_value("cid", value)
 
     @property
     def tol(self) -> float:
         """Get or set the User-defined tolerance in length units. If non-zero, the internal mesh-size dependent tolerance gets replaced by this value.
         """ # nopep8
-        return self._cards[1].get_value("tol")
+        return self._cards[0].get_value("tol")
 
     @tol.setter
     def tol(self, value: float) -> None:
         """Set the tol property."""
-        self._cards[1].set_value("tol", value)
+        self._cards[0].set_value("tol", value)
+
+    @property
+    def id(self) -> typing.Optional[int]:
+        """Get or set the Optional ID which can be referred to by *SENSOR_CONTROL.
+        This ID must be unique and cannot be shared with *BOUNDARY_SPC.
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("id")
+
+    @id.setter
+    def id(self, value: int) -> None:
+        """Set the id property."""
+        self._cards[1].cards[0].set_value("id", value)
+
+        if value:
+            self.activate_option("ID")
+
+    @property
+    def heading(self) -> typing.Optional[str]:
+        """Get or set the An optional descriptor that will be written into the d3hsp file and the spcforc file.
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("heading")
+
+    @heading.setter
+    def heading(self, value: str) -> None:
+        """Set the heading property."""
+        self._cards[1].cards[0].set_value("heading", value)
+
+        if value:
+            self.activate_option("HEADING")
 
     @property
     def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:

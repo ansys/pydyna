@@ -24,15 +24,12 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.option_card import OptionCardSet, OptionSpec
 from ansys.dyna.core.lib.keyword_base import KeywordBase
 from ansys.dyna.core.lib.keyword_base import LinkType
 from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
 _CONSTRAINEDGENERALIZEDWELDCOMBINED_CARD0 = (
-    FieldSchema("wid", int, 0, 10, None),
-)
-
-_CONSTRAINEDGENERALIZEDWELDCOMBINED_CARD1 = (
     FieldSchema("nsid", int, 0, 10, None),
     FieldSchema("cid", int, 10, 10, None),
     FieldSchema("filter", int, 20, 10, None),
@@ -41,11 +38,18 @@ _CONSTRAINEDGENERALIZEDWELDCOMBINED_CARD1 = (
     FieldSchema("nprt", int, 50, 10, 0),
 )
 
+_CONSTRAINEDGENERALIZEDWELDCOMBINED_OPTION0_CARD0 = (
+    FieldSchema("wid", int, 0, 10, None),
+)
+
 class ConstrainedGeneralizedWeldCombined(KeywordBase):
     """DYNA CONSTRAINED_GENERALIZED_WELD_COMBINED keyword"""
 
     keyword = "CONSTRAINED"
     subkeyword = "GENERALIZED_WELD_COMBINED"
+    _option_spec_list = [
+        OptionSpec("ID", "pre/1", 1),
+    ]
     _link_fields = {
         "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
         "nsid": LinkType.SET_NODE,
@@ -54,48 +58,44 @@ class ConstrainedGeneralizedWeldCombined(KeywordBase):
     def __init__(self, **kwargs):
         """Initialize the ConstrainedGeneralizedWeldCombined class."""
         super().__init__(**kwargs)
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
                 _CONSTRAINEDGENERALIZEDWELDCOMBINED_CARD0,
                 **kwargs,
             ),
-            Card.from_field_schemas_with_defaults(
-                _CONSTRAINEDGENERALIZEDWELDCOMBINED_CARD1,
-                **kwargs,
+            OptionCardSet(
+                option_spec = ConstrainedGeneralizedWeldCombined._option_spec_list[0],
+                cards = [
+                    Card.from_field_schemas_with_defaults(
+                        _CONSTRAINEDGENERALIZEDWELDCOMBINED_OPTION0_CARD0,
+                        **kwargs,
+                    ),
+                ],
+                **kwargs
             ),
         ]
-    @property
-    def wid(self) -> typing.Optional[int]:
-        """Get or set the Optional weld ID
-        """ # nopep8
-        return self._cards[0].get_value("wid")
-
-    @wid.setter
-    def wid(self, value: int) -> None:
-        """Set the wid property."""
-        self._cards[0].set_value("wid", value)
-
     @property
     def nsid(self) -> typing.Optional[int]:
         """Get or set the Node set ID, see *SET_NODE.
         """ # nopep8
-        return self._cards[1].get_value("nsid")
+        return self._cards[0].get_value("nsid")
 
     @nsid.setter
     def nsid(self, value: int) -> None:
         """Set the nsid property."""
-        self._cards[1].set_value("nsid", value)
+        self._cards[0].set_value("nsid", value)
 
     @property
     def cid(self) -> typing.Optional[int]:
         """Get or set the Coordinate system ID for output of data in local system, see *DEFINE_COORDINATE_OPTION. CID is not required for spotwelds if the nodes are not coincident.
         """ # nopep8
-        return self._cards[1].get_value("cid")
+        return self._cards[0].get_value("cid")
 
     @cid.setter
     def cid(self, value: int) -> None:
         """Set the cid property."""
-        self._cards[1].set_value("cid", value)
+        self._cards[0].set_value("cid", value)
 
     @property
     def filter(self) -> typing.Optional[int]:
@@ -103,35 +103,35 @@ class ConstrainedGeneralizedWeldCombined(KeywordBase):
         LE.1: no filtering,
         EQ.n: simple average of force components divided by n or the maximum number of force vectors that are stored for the time window option below.
         """ # nopep8
-        return self._cards[1].get_value("filter")
+        return self._cards[0].get_value("filter")
 
     @filter.setter
     def filter(self, value: int) -> None:
         """Set the filter property."""
-        self._cards[1].set_value("filter", value)
+        self._cards[0].set_value("filter", value)
 
     @property
     def window(self) -> float:
         """Get or set the Time window for filtering. This option requires the specification of the maximum number of steps which can occur within the filtering time window. If the time step decreases too far, then the filtering time window will be ignored and the simple average is used.
         EQ.0: time window is not used.
         """ # nopep8
-        return self._cards[1].get_value("window")
+        return self._cards[0].get_value("window")
 
     @window.setter
     def window(self, value: float) -> None:
         """Set the window property."""
-        self._cards[1].set_value("window", value)
+        self._cards[0].set_value("window", value)
 
     @property
     def npr(self) -> typing.Optional[int]:
         """Get or set the NFW, number of individual nodal pairs (only cross fillet or combined general weld.)
         """ # nopep8
-        return self._cards[1].get_value("npr")
+        return self._cards[0].get_value("npr")
 
     @npr.setter
     def npr(self, value: int) -> None:
         """Set the npr property."""
-        self._cards[1].set_value("npr", value)
+        self._cards[0].set_value("npr", value)
 
     @property
     def nprt(self) -> int:
@@ -140,14 +140,28 @@ class ConstrainedGeneralizedWeldCombined(KeywordBase):
         EQ.1: data is printed,
         EQ.2: data is not printed.
         """ # nopep8
-        return self._cards[1].get_value("nprt")
+        return self._cards[0].get_value("nprt")
 
     @nprt.setter
     def nprt(self, value: int) -> None:
         """Set the nprt property."""
         if value not in [0, 1, 2, None]:
             raise Exception("""nprt must be `None` or one of {0,1,2}.""")
-        self._cards[1].set_value("nprt", value)
+        self._cards[0].set_value("nprt", value)
+
+    @property
+    def wid(self) -> typing.Optional[int]:
+        """Get or set the Optional weld ID
+        """ # nopep8
+        return self._cards[1].cards[0].get_value("wid")
+
+    @wid.setter
+    def wid(self, value: int) -> None:
+        """Set the wid property."""
+        self._cards[1].cards[0].set_value("wid", value)
+
+        if value:
+            self.activate_option("WID")
 
     @property
     def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
