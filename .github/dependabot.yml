@@ -44,3 +44,24 @@ updates:
       actions:
         patterns:
           - "*"
+
+  - package-ecosystem: "pre-commit"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+      exclude:
+        - "ansys/pre-commit-hooks/*"
+    labels:
+      - "maintenance"
+    commit-message:
+      prefix: "chore"
+    groups:
+      pre-commit-hooks:
+        patterns:
+          - "*"
+    assignees:
+      - "RaphaelHeiniger"
+      - "Revathyvenugopal162"
+      - "koubaa"
