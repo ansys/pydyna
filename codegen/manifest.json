@@ -920,6 +920,32 @@
             "bondc_card": 3
         }
     },
+    "SENSOR_CONTROL": {
+        "generation-options": {
+            "replace-card": [
+                {
+                    "card": {
+                        "source": "additional-cards",
+                        "card-name": "SENSOR_CONTROL_CARD_1"
+                    },
+                    "ref": "control_card"
+                }
+            ],
+            "skip-card": [
+                {
+                    "ref": "curve_card"
+                },
+                {
+                    "ref": "eleset_card"
+                }
+            ]
+        },
+        "labels": {
+            "control_card": 0,
+            "curve_card": 2,
+            "eleset_card": 3
+        }
+    },
     "CONSTRAINED_LOCAL": {
         "generation-options": {
             "skip-card": [

@@ -270,5 +270,99 @@
             {"name": "MYY", "type": "real", "default": 0.0, "position": 40, "width": 10, "help": "Moment resultant at failure. EQ.0.0: failure due to this component is not considered."},
             {"name": "MZZ", "type": "real", "default": 0.0, "position": 50, "width": 10, "help": "Moment resultant at failure. EQ.0.0: failure due to this component is not considered."}
         ]
+    },
+    "SENSOR_CONTROL_CARD_1": {
+            "fields": [
+                    {
+                            "default": null,
+                            "help": "Sensor control ID",
+                            "name": "CNTLID",
+                            "position": 0,
+                            "type": "integer",
+                            "width": 10
+                    },
+                    {
+                            "default": "AIRBAG",
+                            "help": "Entity to be controlled:\nEQ.AIRBAG: *AIRBAG\nEQ.BAGVENTPOP: to close/open the airbag venting holes (see remark 1)\nEQ.BELTPRET: to fire belt pretensioner (see remark 2)\nEQ.BELTRETRA: to lock belt retractor (see remark 2)\nEQ.BELTSLIP: for one-way slip ring element (see remark 3)\nEQ.CONTACT: *CONTACT\nEQ.CONTACT2D: *CONTACT_2D\nEQ.CONSTRL: *CONSTRAINED_LOCAL\nEQ.CNRB: *CONSTRAINED_NODAL_RIGID_BODY\nEQ.CPM: *AIRBAG_PARTICLE\nEQ.DEF2RIG: *DEFORMABLE_TO_RIGID_AUTOMATIC (see remark 4)\nEQ.ELESET: Element set, see ESTYP below.\nEQ.EM: EM solver \nEQ.FUNCTION: *DEFINE_CURVE_FUNCTION (see remarks 5 & 6)\nEQ.JOINT: *CONSTRAINED_JOINT\nEQ.JOINTSTIF: *CONSTRAINED_JOINT_STIFFNESS\nEQ.M PRESSURE: *LOAD_MOVING_PRESSURE\nEQ.POREAIR: *MAT_ADD_PORE_AIR\nEQ.PRESC-MOT: *BOUNDARY_PRESCRIBED_MOTION\nEQ.PRESC-ORI: *BOUNDARY_PRESCRIBED_ORIENTATION_RIGID\nEQ.PRESSURE: *LOAD_SEGMENT_SET\nEQ.PZBC: *BOUNDARY PZEPOT\nEQ.RWALL: *RIGID_WALL\nEQ.SPC: *BOUNDARY_SPC\nEQ.BPWPN: *BOUNDARY_PWP_NODE/SET_ID\nEQ.CURVE: *DEFINE_CURVE, time dependent curve\nEQ.PRESC - MOT: *BOUNDARY_PRESCRIBED_MOTION\nEQ.PRESC - ORI: *BOUNDARY_PRESCRIBED_ORIENTATION_RIGID\nEQ.PRESSURE: *LOAD_SEGMENT_SET\nEQ.ELESET: Element set; see 'ESTYP' below.",
+                            "name": "TYPE",
+                            "options": [
+                                    "AIRBAG",
+                                    "BAGVENTPOP",
+                                    "BELTPRET",
+                                    "BELTRETRA",
+                                    "BELTSLIP",
+                                    "CONTACT",
+                                    "CONTACT2D",
+                                    "CONSTRL",
+                                    "CNRB",
+                                    "CPM",
+                                    "DEF2RIG",
+                                    "EM",
+                                    "FUNCTION",
+                                    "JOINT",
+                                    "JOINTSTIF",
+                                    "LOADTHM",
+                                    "M PRESSURE",
+                                    "POREAIR",
+                                    "PZBC",
+                                    "RWALL",
+                                    "SPC",
+                                    "SPOTWELD",
+                                    "BPWPN",
+                                    "CURVE",
+                                    "PRESC-MOT",
+                                    "PRESC-ORI",
+                                    "PRESSURE",
+                                    "ELESET"
+                            ],
+                            "position": 10,
+                            "type": "string",
+                            "width": 10
+                    },
+                    {
+                            "default": null,
+                            "help": "ID of entity to be controlled if TYPE  FUNCTION, LOADTHM, or POREAIR.  If TYPE = FUNCTION, see Remark 5.  For TYPE = LOADTHM, TYPEID is the node set for which the temperature boundary condition specified by either *LOAD_THERMAL_VARIABLE or *LOAD_THERMAL_VARIABLE_NODE will be controlled.  For TYPE = POREAIR, TYPEID is the ID of the part containing material with pore air.  ",
+                            "name": "TYPEID",
+                            "position": 20,
+                            "type": "integer",
+                            "width": 10
+                    },
+                    {
+                            "default": 0,
+                            "help": "Flag to offset time in curve:\nEQ.0: No offset is applied.\nEQ.1: Offset the abscissa of the time - dependent curve by the time value at which the sensor is triggered\nFor TYPE = ELESET and ESTYP = DISC, this field is IDISCL:\nFor ESTYP = DISC, flag for updating the reference length of the discrete element with its length when it is turned on: \nEQ.0: Discrete element's reference length remains the same when it is turned on.\nEQ.1: Discrete element's length when it is turned on is used as its new reference length",
+                            "name": "TIMEOFF",
+                            "options": [
+                                    "0",
+                                    "1"
+                            ],
+                            "position": 30,
+                            "type": "integer",
+                            "width": 10
+                    },
+                    {
+                            "default": 0,
+                            "help": "Number of times to repeat a cycle of switches, SWITn, defined on Card 2. For example, a definition of SWITn like '601, 602, 601, 602, 601, 602' can be replaced by setting NREP to 3 and SWITn to '601, 602'. Setting NREP = -1 repeats the cycle an infinite number of times. The default is 0.",
+                            "name": "NREP",
+                            "position": 40,
+                            "type": "integer",
+                            "width": 10
+                    },
+                    {
+                            "default": null,
+                            "help": "Default curve value when a curve is not active for TYPE = CURVE only. If DEFCRV = 'LASTSTEP', the curve value right before the curve is turned off becomes the default curve value\nFor TYPE = ELESET, this field is ESTYP:\nType of element set to be controlled. With initial status set to 'ON,' all the elements included in set TYPEID can be eroded when the controller status is changed to 'OFF'. When TYPEID is not defined, all elements of type ESTYP in the whole system will be eroded",
+                            "name": "DEFCV",
+                            "position": 50,
+                            "type": "string",
+                            "width": 10
+                    },
+                    {
+                            "default": null,
+                            "help": "Flag controlling use of sensor control during dynamic relaxation.  \nEQ.0:\tUsed in the normal analysis phase only,\nEQ.1 : Used in the dynamic relaxation phase but not the normal analysis phase,\nEQ.2 : Used in both the dynamic relaxation phase and normal analysis phase.",
+                            "name": "SIDR",
+                            "position": 60,
+                            "type": "integer",
+                            "width": 10
+                    }
+            ]
     }
 }
