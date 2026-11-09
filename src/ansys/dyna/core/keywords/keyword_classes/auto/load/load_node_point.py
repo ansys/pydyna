@@ -76,6 +76,102 @@ class LoadNodePoint(KeywordBase):
         self._cards[0].table = df
 
     @property
+    def nid(self) -> pd.Series:
+        """Get or set the Node ID, see also *NODE.
+        """ # nopep8
+        return self._cards[0].get_column("nid")
+
+    @nid.setter
+    def nid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the nid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("nid", value)
+
+    @property
+    def dof(self) -> pd.Series:
+        """Get or set the Applicable degrees-of-freedom:
+        EQ.1:	x - direction of load action.For a cylindrical or spherical system, this is the direction of the local radial degree of freedom r.
+        EQ.2 : y - direction of load action.For a cylindrical system, this is the direction of the local circumferential degree of freedom ?, and for a spherical system, it is the direction of the local latitude degree of freedom ?.
+        EQ.3 : z - direction of load action.For a cylindrical system, this is the direction of the local z - translational degree of freedom, and for a spherical system, it is the direction of the local longitude degree of freedom ?.
+        EQ.4 : Follower force(see Remark 2),
+        EQ.5 : Moment about the x - axis(see Remark 4).For a cylindrical or spherical system, this is the direction of the local radial degree of freedom r.
+        EQ.6 : Moment about the y - axis axis(see Remark 4).For a cylindrical system, this is the direction of the local circumferential degree of freedom ?, and for a spherical system, it is the direction of the local latitude degree of freedom ?.
+        EQ.7 : Moment about the z - axis axis(see Remark 4).For a cylindrical system, this is the direction of the local z - translational degree of freedom, and for a spherical system, it is the direction of the local longitude degree of freedom ?.
+        EQ.8 : Follower moment(see Remarks 2 and 4).
+        """ # nopep8
+        return self._cards[0].get_column("dof")
+
+    @dof.setter
+    def dof(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the dof column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("dof", value)
+
+    @property
+    def lcid(self) -> pd.Series:
+        """Get or set the Load curve ID(see *DEFINE_CURVE) or function ID(see *DEFINE_FUNCTION).
+        """ # nopep8
+        return self._cards[0].get_column("lcid")
+
+    @lcid.setter
+    def lcid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the lcid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("lcid", value)
+
+    @property
+    def sf(self) -> pd.Series:
+        """Get or set the Load curve scale factor.
+        """ # nopep8
+        return self._cards[0].get_column("sf")
+
+    @sf.setter
+    def sf(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the sf column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("sf", value)
+
+    @property
+    def cid(self) -> pd.Series:
+        """Get or set the Coordinate system ID (optional).
+        """ # nopep8
+        return self._cards[0].get_column("cid")
+
+    @cid.setter
+    def cid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the cid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("cid", value)
+
+    @property
+    def m1(self) -> pd.Series:
+        """Get or set the Node 1 ID. Only necessary if DOF EQ.4 or EQ.8.
+        """ # nopep8
+        return self._cards[0].get_column("m1")
+
+    @m1.setter
+    def m1(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the m1 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("m1", value)
+
+    @property
+    def m2(self) -> pd.Series:
+        """Get or set the Node 2 ID. Only necessary if DOF EQ.4 or EQ.8.
+        """ # nopep8
+        return self._cards[0].get_column("m2")
+
+    @m2.setter
+    def m2(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the m2 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("m2", value)
+
+    @property
+    def m3(self) -> pd.Series:
+        """Get or set the Node 3 ID. Only necessary if DOF EQ.4 or EQ.8.
+        """ # nopep8
+        return self._cards[0].get_column("m3")
+
+    @m3.setter
+    def m3(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the m3 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("m3", value)
+
+    @property
     def nid_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for nid, keyed by nid value."""
         return self._get_links_from_table("NODE", "nid", "nodes", "nid", "")
@@ -112,17 +208,7 @@ class LoadNodePoint(KeywordBase):
         return self._get_link_by_attr("NODE", "nid", m3, "")
 
     @property
-    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
-        """Get the DefineCoordinateSystem object for cid."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
-            if kwd.cid == self.cid:
-                return kwd
-        return None
-
-    @cid_link.setter
-    def cid_link(self, value: DefineCoordinateSystem) -> None:
-        """Set the DefineCoordinateSystem object for cid."""
-        self.cid = value.cid
+    def cid_links(self) -> typing.Dict[typing.Any, KeywordBase]:
+        """Get the keywords linked by the cid column, keyed by cid value."""
+        return self._get_column_links(self.cid, lambda value: self._find_keyword("DEFINE", "COORDINATE_SYSTEM", "cid", value))
 

@@ -201,6 +201,28 @@ class DefineCurve(
         self._cards[1].table = df
 
     @property
+    def a1(self) -> pd.Series:
+        """Get or set the Abscissa values. Only pairs have to be defined.
+        """ # nopep8
+        return self._cards[1].get_column("a1")
+
+    @a1.setter
+    def a1(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the a1 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("a1", value)
+
+    @property
+    def o1(self) -> pd.Series:
+        """Get or set the Ordinate (function) values. Only pairs have to be defined.
+        """ # nopep8
+        return self._cards[1].get_column("o1")
+
+    @o1.setter
+    def o1(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the o1 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("o1", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8

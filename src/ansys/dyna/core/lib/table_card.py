@@ -57,26 +57,107 @@ def try_initialize_table(card, name: str, **kwargs):
     return False
 
 
-def get_first_row(fields: typing.List[Field], **kwargs) -> typing.Dict[str, typing.Any]:
-    """Get the first row data from the kwargs."""
-    result = dict()
+def _get_initial_columns(names: typing.Iterable[str], **kwargs) -> typing.Dict[str, typing.Any]:
+    """Get the column values given in the constructor kwargs, keyed by column name."""
+    return {name: kwargs[name] for name in names if name in kwargs}
+
+
+def _is_scalar(value: typing.Any) -> bool:
+    return not isinstance(value, pd.Series) and np.ndim(value) == 0
+
+
+def _initial_length(columns: typing.Dict[str, typing.Any]) -> int:
+    """Return the number of rows needed to hold the initial column values of an unbounded table.
+
+    A scalar needs one row, an array-like needs one row per value.
+    """
+    return max((1 if _is_scalar(value) else len(value) for value in columns.values()), default=0)
+
+
+def _column_dtype(field_type: type):
+    if field_type == float:
+        return np.float64
+    if field_type == int:
+        return pd.Int32Dtype()
+    return object
+
+
+def _cast_column(column: pd.Series, field_type: type) -> pd.Series:
+    """Cast ``column`` to the dtype of ``field_type``.
+
+    A string column holds ``str`` values, with NaN for missing values.
+    """
+    if field_type == str:
+        return column.astype(str).astype(object).where(column.notna(), np.nan)
+    return column.astype(_column_dtype(field_type))
+
+
+def _field_default(field: Field) -> typing.Optional[typing.Any]:
+    if field.value is not None:
+        return field.value
+    if field.type in (float, str):
+        return np.nan
+    return None
+
+
+def _grow_table(table: pd.DataFrame, fields: typing.List[Field], length: int) -> pd.DataFrame:
+    """Return ``table`` grown to ``length`` rows, with the schema defaults in the new rows."""
+    num_rows = len(table)
+    if length <= num_rows:
+        return table
+    fields_by_name = {}
     for field in fields:
-        if field.name in kwargs:
-            result[field.name] = kwargs[field.name]
-    if len(result) == 0:
-        return None
-    return result
+        fields_by_name.setdefault(field.name, field)
+    columns = {}
+    for name in table.columns:
+        field = fields_by_name[name]
+        dtype = _column_dtype(field.type)
+        new_rows = pd.Series([_field_default(field)] * (length - num_rows), dtype=dtype)
+        columns[name] = pd.concat([table[name].astype(dtype), new_rows], ignore_index=True)
+    return pd.DataFrame(columns)
 
 
-def _get_first_row_from_schemas(
-    field_schemas: typing.Tuple[FieldSchema, ...], **kwargs
-) -> typing.Optional[typing.Dict[str, typing.Any]]:
-    """Get the first row data from kwargs using field schemas."""
-    result = {}
-    for fs in field_schemas:
-        if fs.name in kwargs:
-            result[fs.name] = kwargs[fs.name]
-    return result if result else None
+def _pad_column(column: pd.Series, length: int, dtype) -> pd.Series:
+    """Return ``column`` padded with missing values to ``length``."""
+    missing = length - len(column)
+    if missing <= 0:
+        return column
+    return pd.concat([column, pd.Series([np.nan] * missing, dtype=dtype)], ignore_index=True)
+
+
+def _set_column(
+    table: pd.DataFrame, fields: typing.List[Field], name: str, value: typing.Any, bounded: bool
+) -> pd.DataFrame:
+    """Return ``table`` with column ``name`` set to ``value``.
+
+    A scalar is copied to every row; an unbounded table with no rows gets one row.
+    An array-like is assigned by position. If it is shorter than the table, the remaining
+    rows are missing; if it is longer, the table grows, unless it is bounded.
+    A Series must have a default index (0, 1, ..., n-1).
+    The values are cast to the dtype of the column's schema.
+    """
+    field = next((f for f in fields if f.name == name), None)
+    if field is None:
+        raise KeyError(f"'{name}' is not a column of the table.")
+    dtype = _column_dtype(field.type)
+    num_rows = len(table)
+    if _is_scalar(value):
+        length = num_rows if bounded or num_rows > 0 else 1
+        column = _cast_column(pd.Series([value] * length, dtype=object), field.type)
+    else:
+        if isinstance(value, pd.Series):
+            if not value.index.equals(pd.RangeIndex(len(value))):
+                raise ValueError(f"The index of the Series for '{name}' must be a default index 0, 1, ..., n-1.")
+            value = value.array
+        column = _cast_column(pd.Series(value, dtype=dtype), field.type)
+        length = max(num_rows, len(column))
+        if bounded and length > num_rows:
+            raise ValueError(f"Cannot set '{name}' with {len(column)} values: the table is bounded to {num_rows} rows.")
+        column = _pad_column(column, length, dtype)
+    table = _grow_table(table, fields, length)
+    column.index = table.index
+    table[name] = column
+    return table
 
 
 class TableCard(Card):
@@ -109,9 +190,10 @@ class TableCard(Card):
             self._length_func = length_func
 
         self._format_type = format
+        self._initial_columns = {}
         self._initialized = try_initialize_table(self, name, **kwargs)
         if not self._initialized:
-            self._first_row = get_first_row(self._fields, **kwargs)
+            self._initial_columns = _get_initial_columns((f.name for f in fields), **kwargs)
 
     @classmethod
     def from_field_schemas(
@@ -164,9 +246,10 @@ class TableCard(Card):
             instance._bounded = True
             instance._length_func = length_func
 
+        instance._initial_columns = {}
         instance._initialized = try_initialize_table(instance, name, **kwargs)
         if not instance._initialized:
-            instance._first_row = _get_first_row_from_schemas(field_schemas, **kwargs)
+            instance._initial_columns = _get_initial_columns((fs.name for fs in field_schemas), **kwargs)
 
         return instance
 
@@ -176,35 +259,35 @@ class TableCard(Card):
         This can not be done in the constructor because the length function
         might be unusable until after the keyword is fully initialized.
 
-        If the card is bounded, the table should be initialized with the
-        bounded length
-
-        If the card is not bounded, the table should be initialized either
-        using the input data, if it is given, or with exactly one row
-        if the constructor **kwargs included any of the fields used by
-        the table. This is called the "first row"
-
-        Since TableCard is used internally by TableCardGroup,
-        it could be initialized by the table card group, the first
-        row may contain fields used by other tables in the group.
+        If the card is bounded, the table is initialized with the bounded length.
+        Otherwise, it is initialized with as many rows as the longest column value
+        given in the constructor **kwargs, counting a scalar as one row.
+        The column values are then set as if by ``set_column``.
         """
-        handle_first_row = self._first_row is not None
         if self._bounded:
             length = self._length_func()
-            self._initialize_data(length)
-            if length == 0:
-                handle_first_row = False
         else:
-            initial_size = 1 if handle_first_row else 0
-            self._initialize_data(initial_size)
-
-        if handle_first_row:
-            for k, v in self._first_row.items():
-                if k in self._table:
-                    self._table.loc[0, k] = v
-
-        self._first_row = None
+            length = _initial_length(self._initial_columns)
+        self._initialize_data(length)
         self._initialized = True
+        initial_columns, self._initial_columns = self._initial_columns, {}
+        for name, value in initial_columns.items():
+            self.set_column(name, value)
+
+    def get_column(self, name: str) -> pd.Series:
+        """Get the column ``name`` of the table."""
+        return self.table[name]
+
+    def set_column(self, name: str, value: typing.Any) -> None:
+        """Set the column ``name`` of the table from a scalar, a Series, or an array-like.
+
+        A scalar is copied to every row; an unbounded table with no rows gets one row.
+        An array-like is assigned by position. If it is shorter than the table, the remaining
+        rows are missing; if it is longer, the table grows, with the schema defaults in the
+        other columns of the new rows. A bounded table can not grow.
+        A Series must have a default index (0, 1, ..., n-1).
+        """
+        self._table = _set_column(self.table, self._fields, name, value, self._bounded)
 
     @property
     def table(self) -> pd.DataFrame:
@@ -221,15 +304,10 @@ class TableCard(Card):
         columns = {}
         for field in self._fields:
             if field.name in value:
-                field_type = field.type
-                if field_type == float:
-                    field_type = np.float64
-                elif field_type == int:
-                    field_type = pd.Int32Dtype()
-                columns[field.name] = value[field.name].astype(field_type)
+                columns[field.name] = _cast_column(value[field.name], field.type)
             else:
                 columns[field.name] = self._make_column(field, len(value))
-        self._table = pd.DataFrame(columns)
+        self._table = pd.DataFrame(columns).reset_index(drop=True)
         self._initialized = True
 
     @property
@@ -243,11 +321,7 @@ class TableCard(Card):
         self._format_type = value
 
     def _get_default_value(self, field: Field) -> typing.Optional[typing.Any]:
-        if field.value is not None:
-            return field.value
-        if field.type == float:
-            return np.nan
-        return None
+        return _field_default(field)
 
     def _make_column(self, field, length):
         default_value = self._get_default_value(field)

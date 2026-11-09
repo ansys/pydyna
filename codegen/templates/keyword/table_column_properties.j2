@@ -1,0 +1,15 @@
+{# Properties for the columns of a table card or table card group #}
+{% for column in card.table_columns %}
+    @property
+    def {{column.property_name}}(self) -> pd.Series:
+        """Get or set the {% filter indent(width=8) %}{{column.help}}
+        {% endfilter %}
+        """ # nopep8
+        return self._cards[{{card.index}}].get_column("{{column.column}}")
+
+    @{{column.property_name}}.setter
+    def {{column.property_name}}(self, value: typing.Union[{{column.type}}, typing.Sequence[{{column.type}}], pd.Series]) -> None:
+        """Set the {{column.property_name}} column from a scalar, a Series, or an array-like."""
+        self._cards[{{card.index}}].set_column("{{column.column}}", value)
+
+{% endfor %}

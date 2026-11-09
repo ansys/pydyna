@@ -80,6 +80,39 @@ class IcfdPart(KeywordBase):
         self._cards[0].table = df
 
     @property
+    def pid(self) -> pd.Series:
+        """Get or set the Part identification.
+        """ # nopep8
+        return self._cards[0].get_column("pid")
+
+    @pid.setter
+    def pid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the pid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("pid", value)
+
+    @property
+    def secid(self) -> pd.Series:
+        """Get or set the Section identification defined in the *ICFD_SECTION section.
+        """ # nopep8
+        return self._cards[0].get_column("secid")
+
+    @secid.setter
+    def secid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the secid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("secid", value)
+
+    @property
+    def mid(self) -> pd.Series:
+        """Get or set the Material identification.
+        """ # nopep8
+        return self._cards[0].get_column("mid")
+
+    @mid.setter
+    def mid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the mid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("mid", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8

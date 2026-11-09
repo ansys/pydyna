@@ -33,6 +33,26 @@
         """Get the {{link.keyword_type}}_* keyword for the given {{field.key_field}}."""
         return self._get_table_group_link("{{link.keyword_type}}", "{{link.linkid}}", "{{field.table_name}}", "{{field.name}}", "{{field.key_field}}", {{field.key_field}})
 
+{% elif (field.is_table or field.is_table_group) and not link.is_table_lookup %}
+{# A table column has many values, so it links to one keyword per value #}
+    @property
+    def {{field.name}}_links(self) -> typing.Dict[typing.Any, KeywordBase]:
+        """Get the keywords linked by the {{field.name}} column, keyed by {{field.name}} value."""
+{% if link.is_multi_target %}
+        return self._get_column_links(
+            self.{{field.name}},
+            lambda value: {% for target in link.targets %}self._find_keyword("{{target.type}}", "{{target.subtype}}", "{{target.id_field}}", value){% if not loop.last %} or {% endif %}{% endfor %},
+        )
+{% elif link.is_subtype_prefix %}
+        return self._get_column_links(self.{{field.name}}, lambda value: self._get_set_link("{{link.keyword_subtype}}", value))
+{% elif link.is_polymorphic %}
+        return self._get_column_links(self.{{field.name}}, lambda value: self._find_keyword("{{link.keyword_type}}", None, "{{link.linkid}}", value))
+{% else %}
+        return self._get_column_links(self.{{field.name}}, lambda value: self._find_keyword("{{link.keyword_type}}", "{{link.keyword_subtype}}", "{{link.linkid}}", value))
+{% endif %}
+
+{% elif field.is_table or field.is_table_group %}
+{# A table lookup link of a table column without a key field is not supported #}
 {% elif link.is_multi_target %}
     @property
     def {{field.name}}_link(self) -> typing.Optional[KeywordBase]:

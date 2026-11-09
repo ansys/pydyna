@@ -66,6 +66,42 @@ class InitialTemperatureNode(KeywordBase):
         self._cards[0].table = df
 
     @property
+    def nid(self) -> pd.Series:
+        """Get or set the Node ID.
+        """ # nopep8
+        return self._cards[0].get_column("nid")
+
+    @nid.setter
+    def nid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the nid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("nid", value)
+
+    @property
+    def temp(self) -> pd.Series:
+        """Get or set the Temperature at node.
+        """ # nopep8
+        return self._cards[0].get_column("temp")
+
+    @temp.setter
+    def temp(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the temp column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("temp", value)
+
+    @property
+    def loc(self) -> pd.Series:
+        """Get or set the Application of surface for thermal shell elements, see parameter, TSHELL, in the *CONTROL_SHELL input.
+        EQ.-1: lower surface of thermal shell element.
+        EQ. 0 middle surface of thermal shell element.
+        EQ. 1: upper surface of thermal shell element.
+        """ # nopep8
+        return self._cards[0].get_column("loc")
+
+    @loc.setter
+    def loc(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the loc column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("loc", value)
+
+    @property
     def nid_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for nid, keyed by nid value."""
         return self._get_links_from_table("NODE", "nid", "nodes", "nid", "")

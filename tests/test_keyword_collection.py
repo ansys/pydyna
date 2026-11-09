@@ -256,9 +256,10 @@ class TestDeckSplit:
     def test_split_by_custom_predicate(self, populated_deck):
         """Test splitting with custom logic."""
         def by_id_range(kwd):
-            if hasattr(kwd, 'secid'):
+            keyword = getattr(kwd, "keyword", None)
+            if keyword == "SECTION":
                 return "low" if kwd.secid < 2 else "high"
-            elif hasattr(kwd, 'mid'):
+            elif keyword == "MAT":
                 return "low" if kwd.mid < 15 else "high"
             return "other"
         

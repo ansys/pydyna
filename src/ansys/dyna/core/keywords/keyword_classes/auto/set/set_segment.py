@@ -191,6 +191,94 @@ class SetSegment(KeywordBase):
         self._cards[1].table = df
 
     @property
+    def n1(self) -> pd.Series:
+        """Get or set the Nodal point N1 of set.
+        """ # nopep8
+        return self._cards[1].get_column("n1")
+
+    @n1.setter
+    def n1(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n1 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("n1", value)
+
+    @property
+    def n2(self) -> pd.Series:
+        """Get or set the Nodal point N2 of set.
+        """ # nopep8
+        return self._cards[1].get_column("n2")
+
+    @n2.setter
+    def n2(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n2 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("n2", value)
+
+    @property
+    def n3(self) -> pd.Series:
+        """Get or set the Nodal point N3 of set.
+        """ # nopep8
+        return self._cards[1].get_column("n3")
+
+    @n3.setter
+    def n3(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n3 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("n3", value)
+
+    @property
+    def n4(self) -> pd.Series:
+        """Get or set the Nodal point N4 of set.
+        """ # nopep8
+        return self._cards[1].get_column("n4")
+
+    @n4.setter
+    def n4(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n4 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("n4", value)
+
+    @property
+    def a1(self) -> pd.Series:
+        """Get or set the First segment attribute.
+        """ # nopep8
+        return self._cards[1].get_column("a1")
+
+    @a1.setter
+    def a1(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the a1 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("a1", value)
+
+    @property
+    def a2(self) -> pd.Series:
+        """Get or set the Second segment attribute.
+        """ # nopep8
+        return self._cards[1].get_column("a2")
+
+    @a2.setter
+    def a2(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the a2 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("a2", value)
+
+    @property
+    def a3(self) -> pd.Series:
+        """Get or set the Third segment attribute.
+        """ # nopep8
+        return self._cards[1].get_column("a3")
+
+    @a3.setter
+    def a3(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the a3 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("a3", value)
+
+    @property
+    def a4(self) -> pd.Series:
+        """Get or set the Fourth segment attribute.
+        """ # nopep8
+        return self._cards[1].get_column("a4")
+
+    @a4.setter
+    def a4(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the a4 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("a4", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8

@@ -817,6 +817,156 @@ class AirbagParticle(KeywordBase):
         self._cards[6].table = df
 
     @property
+    def sidup(self) -> pd.Series:
+        """Get or set the Part or part set ID defining the internal parts that pressure will be applied to.
+        This internal structure acts as a valve to control the external vent hole area.
+        Pressure will be applied only after switch to UP (uniform pressure) using TSW.
+        """ # nopep8
+        return self._cards[6].get_column("sidup")
+
+    @sidup.setter
+    def sidup(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the sidup column from a scalar, a Series, or an array-like."""
+        self._cards[6].set_column("sidup", value)
+
+    @property
+    def styup(self) -> pd.Series:
+        """Get or set the Set defining internal parts will be applied pressure
+        Set type EQ.0: Part
+        EQ.1: Part set.
+        """ # nopep8
+        return self._cards[6].get_column("styup")
+
+    @styup.setter
+    def styup(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the styup column from a scalar, a Series, or an array-like."""
+        self._cards[6].set_column("styup", value)
+
+    @property
+    def pfrac(self) -> pd.Series:
+        """Get or set the Part or part set ID defining the internal parts that pressure will be applied to.
+        This internal structure acts as a valve to control the external vent hole area.
+        Pressure will be applied only after switch to UP (uniform pressure) using TSW.
+        """ # nopep8
+        return self._cards[6].get_column("pfrac")
+
+    @pfrac.setter
+    def pfrac(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the pfrac column from a scalar, a Series, or an array-like."""
+        self._cards[6].set_column("pfrac", value)
+
+    @property
+    def linking(self) -> pd.Series:
+        """Get or set the Part ID of an internal part that is coupled to the external vent definition.
+        The minimum area of this part or the vent hole will be used for actual venting area.
+        """ # nopep8
+        return self._cards[6].get_column("linking")
+
+    @linking.setter
+    def linking(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the linking column from a scalar, a Series, or an array-like."""
+        self._cards[6].set_column("linking", value)
+
+    @property
+    def sidh(self) -> pd.Series:
+        """Get or set the Part or part set ID defining part data.
+        """ # nopep8
+        return self._cards[6].get_column("sidh")
+
+    @sidh.setter
+    def sidh(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the sidh column from a scalar, a Series, or an array-like."""
+        self._cards[6].set_column("sidh", value)
+
+    @property
+    def stypeh(self) -> pd.Series:
+        """Get or set the Set type EQ.0: Part
+        EQ.1: Part set.
+        EQ.2: part and HCONV is the *DEFINE_CPM_NPDATA ID
+        EQ.3: part set and HCONV is the *DEFINE_CPM_NPDATA ID
+        """ # nopep8
+        return self._cards[6].get_column("stypeh")
+
+    @stypeh.setter
+    def stypeh(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the stypeh column from a scalar, a Series, or an array-like."""
+        self._cards[6].set_column("stypeh", value)
+
+    @property
+    def hconv(self) -> pd.Series:
+        """Get or set the Heat convection coefficient used to calculate heat loss from the airbag external surface to the ambient (W/K/m2).
+        See *AIRBAG_HYBRID developments (Resp. P.O. Marklund).
+        LT.0: |HCONV| is a load curve ID that defines the heat convection coefficient as a function of time.*DEFINE_CURVE_FUNCTION is supported for specifying this curve.
+        When STYPEH is greater than 1, HCONV is an integer of *DEFINE_CPM_NPDATA ID.
+        """ # nopep8
+        return self._cards[6].get_column("hconv")
+
+    @hconv.setter
+    def hconv(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the hconv column from a scalar, a Series, or an array-like."""
+        self._cards[6].set_column("hconv", value)
+
+    @property
+    def pfric(self) -> pd.Series:
+        """Get or set the Friction factor.if -1.0 < PFRIC <= 1.0.  Defaults to FRIC from Card 1 if undefined.  Otherwise,
+        LE. - 1.0: | PFRIC | is the curve ID thatwhich defines F_r as a function of the part pressure.
+        GT.1.0 : PFRIC is the * DEFINE_FUNCTION ID that defines F_r.See Remark 2.
+        """ # nopep8
+        return self._cards[6].get_column("pfric")
+
+    @pfric.setter
+    def pfric(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the pfric column from a scalar, a Series, or an array-like."""
+        self._cards[6].set_column("pfric", value)
+
+    @property
+    def sdfblk(self) -> pd.Series:
+        """Get or set the Scale down factor for blockage factor (Default=1, no scale down). The val-id factor will be (0,1]. If 0, it will set to 1.
+        """ # nopep8
+        return self._cards[6].get_column("sdfblk")
+
+    @sdfblk.setter
+    def sdfblk(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the sdfblk column from a scalar, a Series, or an array-like."""
+        self._cards[6].set_column("sdfblk", value)
+
+    @property
+    def kp(self) -> pd.Series:
+        """Get or set the Thermal conductivity of the part.
+        """ # nopep8
+        return self._cards[6].get_column("kp")
+
+    @kp.setter
+    def kp(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the kp column from a scalar, a Series, or an array-like."""
+        self._cards[6].set_column("kp", value)
+
+    @property
+    def inip(self) -> pd.Series:
+        """Get or set the Place initial air particles on surface.
+        EQ.0: yes (default)
+        EQ.1: no
+        This feature exclude surfaces from initial particle placement.  This option is useful for preventing particles from being trapped between adjacent fabric layers..
+        """ # nopep8
+        return self._cards[6].get_column("inip")
+
+    @inip.setter
+    def inip(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the inip column from a scalar, a Series, or an array-like."""
+        self._cards[6].set_column("inip", value)
+
+    @property
+    def cp(self) -> pd.Series:
+        """Get or set the Specific heat (see Remark 16).
+        """ # nopep8
+        return self._cards[6].get_column("cp")
+
+    @cp.setter
+    def cp(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the cp column from a scalar, a Series, or an array-like."""
+        self._cards[6].set_column("cp", value)
+
+    @property
     def vents(self) -> pd.DataFrame:
         """Get the table of vents."""
         return self._cards[7].table
@@ -825,6 +975,92 @@ class AirbagParticle(KeywordBase):
     def vents(self, df: pd.DataFrame):
         """Set vents from the dataframe df"""
         self._cards[7].table = df
+
+    @property
+    def sid3(self) -> pd.Series:
+        """Get or set the Part or part set ID defining vent holes.
+        """ # nopep8
+        return self._cards[7].get_column("sid3")
+
+    @sid3.setter
+    def sid3(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the sid3 column from a scalar, a Series, or an array-like."""
+        self._cards[7].set_column("sid3", value)
+
+    @property
+    def stype3(self) -> pd.Series:
+        """Get or set the Set type:
+        EQ.0: Part
+        EQ.1: Part set which each part being treated separately.
+        EQ.2: Part set and all parts are treated as one vent.  See Remark 13
+        """ # nopep8
+        return self._cards[7].get_column("stype3")
+
+    @stype3.setter
+    def stype3(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the stype3 column from a scalar, a Series, or an array-like."""
+        self._cards[7].set_column("stype3", value)
+
+    @property
+    def c23(self) -> pd.Series:
+        """Get or set the GE.0: Vent hole coefficient, a parameter of Wang-Nefske leakage.  A value between 0.0 and 1.0 can be input.  See Remark 1.
+        LT.0: ID for *DEFINE_CPM_VENT.
+        """ # nopep8
+        return self._cards[7].get_column("c23")
+
+    @c23.setter
+    def c23(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the c23 column from a scalar, a Series, or an array-like."""
+        self._cards[7].set_column("c23", value)
+
+    @property
+    def lctc23(self) -> pd.Series:
+        """Get or set the Load curve defining vent hole coefficient as a function of time.  LCTC23 can be defined through *DEFINE_CURVE_FUNCTION.  If omitted, a curve equal to 1.0 used.
+        """ # nopep8
+        return self._cards[7].get_column("lctc23")
+
+    @lctc23.setter
+    def lctc23(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the lctc23 column from a scalar, a Series, or an array-like."""
+        self._cards[7].set_column("lctc23", value)
+
+    @property
+    def lcpc23(self) -> pd.Series:
+        """Get or set the Load curve or function defining vent hole coefficient as a function of pressure.  If omitted a curve equal to 1.0 is used.
+        GT.0: Load curve ID for *DEFINE_CURVE_FUNCTION and *DEFINE_CURVE
+        LT.0: *DEFINE_FUNCTION ID.
+        """ # nopep8
+        return self._cards[7].get_column("lcpc23")
+
+    @lcpc23.setter
+    def lcpc23(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the lcpc23 column from a scalar, a Series, or an array-like."""
+        self._cards[7].set_column("lcpc23", value)
+
+    @property
+    def enh_v(self) -> pd.Series:
+        """Get or set the Enhanced venting option. See Remark 8.
+        EQ.0: Off (default)
+        EQ.1: On
+        EQ.2: Two way flow for internal vent; treated as hole for external vent .
+        """ # nopep8
+        return self._cards[7].get_column("enh_v")
+
+    @enh_v.setter
+    def enh_v(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the enh_v column from a scalar, a Series, or an array-like."""
+        self._cards[7].set_column("enh_v", value)
+
+    @property
+    def ppop(self) -> pd.Series:
+        """Get or set the Pressure difference between interior and ambient pressure (PATM) to open the vent holes.  Once the vents are open, they will stay open.
+        """ # nopep8
+        return self._cards[7].get_column("ppop")
+
+    @ppop.setter
+    def ppop(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the ppop column from a scalar, a Series, or an array-like."""
+        self._cards[7].set_column("ppop", value)
 
     @property
     def pair(self) -> typing.Optional[float]:
@@ -929,6 +1165,86 @@ class AirbagParticle(KeywordBase):
         self._cards[9].table = df
 
     @property
+    def lcmi(self) -> pd.Series:
+        """Get or set the Mass flow rate curve for gas component i, unless the MOLEFRACTION option is used.
+        If the MOLEFRACTION option is used, then it is the time dependent molar fraction of the total flow for gas component i.
+        """ # nopep8
+        return self._cards[9].get_column("lcmi")
+
+    @lcmi.setter
+    def lcmi(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the lcmi column from a scalar, a Series, or an array-like."""
+        self._cards[9].set_column("lcmi", value)
+
+    @property
+    def lcti(self) -> pd.Series:
+        """Get or set the Temperature curve for gas component i.
+        """ # nopep8
+        return self._cards[9].get_column("lcti")
+
+    @lcti.setter
+    def lcti(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the lcti column from a scalar, a Series, or an array-like."""
+        self._cards[9].set_column("lcti", value)
+
+    @property
+    def xmi(self) -> pd.Series:
+        """Get or set the Molar mass of gas component i.
+        LT.0: the absolute value of XMi references the ID of a *DEFINE_CPM_GAS_PROPERTIES keyword that defines the gas thermodynamic properties.
+        Note that Ai, Bi, and Ci are ignored
+        """ # nopep8
+        return self._cards[9].get_column("xmi")
+
+    @xmi.setter
+    def xmi(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the xmi column from a scalar, a Series, or an array-like."""
+        self._cards[9].set_column("xmi", value)
+
+    @property
+    def ai(self) -> pd.Series:
+        """Get or set the Constant, linear, and quadratic heat capacity parameters for gas component i.
+        """ # nopep8
+        return self._cards[9].get_column("ai")
+
+    @ai.setter
+    def ai(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the ai column from a scalar, a Series, or an array-like."""
+        self._cards[9].set_column("ai", value)
+
+    @property
+    def bi(self) -> pd.Series:
+        """Get or set the Constant, linear, and quadratic heat capacity parameters for gas component i.
+        """ # nopep8
+        return self._cards[9].get_column("bi")
+
+    @bi.setter
+    def bi(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the bi column from a scalar, a Series, or an array-like."""
+        self._cards[9].set_column("bi", value)
+
+    @property
+    def ci(self) -> pd.Series:
+        """Get or set the Constant, linear, and quadratic heat capacity parameters for gas component i.
+        """ # nopep8
+        return self._cards[9].get_column("ci")
+
+    @ci.setter
+    def ci(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the ci column from a scalar, a Series, or an array-like."""
+        self._cards[9].set_column("ci", value)
+
+    @property
+    def infgi(self) -> pd.Series:
+        """Get or set the Inflator ID that this gas component belongs to (Default 1).
+        """ # nopep8
+        return self._cards[9].get_column("infgi")
+
+    @infgi.setter
+    def infgi(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the infgi column from a scalar, a Series, or an array-like."""
+        self._cards[9].set_column("infgi", value)
+
+    @property
     def orifices(self) -> pd.DataFrame:
         """Get the table of orifices."""
         return self._cards[10].table
@@ -937,6 +1253,103 @@ class AirbagParticle(KeywordBase):
     def orifices(self, df: pd.DataFrame):
         """Set orifices from the dataframe df"""
         self._cards[10].table = df
+
+    @property
+    def nidi(self) -> pd.Series:
+        """Get or set the Node ID/Shell ID defining the location of nozzle i.
+        """ # nopep8
+        return self._cards[10].get_column("nidi")
+
+    @nidi.setter
+    def nidi(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the nidi column from a scalar, a Series, or an array-like."""
+        self._cards[10].set_column("nidi", value)
+
+    @property
+    def ani(self) -> pd.Series:
+        """Get or set the Area of nozzle i (Default all nozzles are given the same area).
+        """ # nopep8
+        return self._cards[10].get_column("ani")
+
+    @ani.setter
+    def ani(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the ani column from a scalar, a Series, or an array-like."""
+        self._cards[10].set_column("ani", value)
+
+    @property
+    def vdi(self) -> pd.Series:
+        """Get or set the GT.0: Vector ID. Initial direction of gas inflow at nozzle i.
+        LT.0: Values in the NIDi fields are interpreted as shell IDs. See Remark 12.
+        EQ.-1: direction of gas inflow is using shell normal
+        EQ.-2: direction of gas inflow is in reversed shell normal.
+        EQ.-3: Direction of gas inflow is using shell normal and requires additional card for center point offset
+        EQ.-4: Direction of gas inflow is in reversed shell normal and requires additional card for center point offset
+        """ # nopep8
+        return self._cards[10].get_column("vdi")
+
+    @vdi.setter
+    def vdi(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the vdi column from a scalar, a Series, or an array-like."""
+        self._cards[10].set_column("vdi", value)
+
+    @property
+    def cai(self) -> pd.Series:
+        """Get or set the Cone angle in degrees (defaults to30). This option is used only when IANG is equal to 1.
+        """ # nopep8
+        return self._cards[10].get_column("cai")
+
+    @cai.setter
+    def cai(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the cai column from a scalar, a Series, or an array-like."""
+        self._cards[10].set_column("cai", value)
+
+    @property
+    def infoi(self) -> pd.Series:
+        """Get or set the Inflator ID for this orifice. (default = 1).
+        """ # nopep8
+        return self._cards[10].get_column("infoi")
+
+    @infoi.setter
+    def infoi(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the infoi column from a scalar, a Series, or an array-like."""
+        self._cards[10].set_column("infoi", value)
+
+    @property
+    def imom(self) -> pd.Series:
+        """Get or set the Inflator reaction forces
+        EQ.0: Off
+        EQ.1: On
+        """ # nopep8
+        return self._cards[10].get_column("imom")
+
+    @imom.setter
+    def imom(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the imom column from a scalar, a Series, or an array-like."""
+        self._cards[10].set_column("imom", value)
+
+    @property
+    def iang(self) -> pd.Series:
+        """Get or set the Activation for cone angle to use for friction calibration(should not use in the normal runs)
+        EQ.0: Off(Default)
+        EQ.1: On.
+        """ # nopep8
+        return self._cards[10].get_column("iang")
+
+    @iang.setter
+    def iang(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the iang column from a scalar, a Series, or an array-like."""
+        self._cards[10].set_column("iang", value)
+
+    @property
+    def chm_id(self) -> pd.Series:
+        """Get or set the Chamber ID where the inflator node resides. Chambers are defined using the *DEFINE_CPM_CHAMBER keyword.
+        """ # nopep8
+        return self._cards[10].get_column("chm_id")
+
+    @chm_id.setter
+    def chm_id(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the chm_id column from a scalar, a Series, or an array-like."""
+        self._cards[10].set_column("chm_id", value)
 
     @property
     def xoff(self) -> float:
@@ -1002,79 +1415,29 @@ class AirbagParticle(KeywordBase):
         return self._get_link_by_attr("NODE", "nid", nidi, "")
 
     @property
-    def lctc23_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lctc23."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lctc23:
-                return kwd
-        return None
-
-    @lctc23_link.setter
-    def lctc23_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lctc23."""
-        self.lctc23 = value.lcid
+    def lctc23_links(self) -> typing.Dict[typing.Any, KeywordBase]:
+        """Get the keywords linked by the lctc23 column, keyed by lctc23 value."""
+        return self._get_column_links(self.lctc23, lambda value: self._find_keyword("DEFINE", "CURVE", "lcid", value))
 
     @property
-    def lcpc23_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcpc23."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcpc23:
-                return kwd
-        return None
-
-    @lcpc23_link.setter
-    def lcpc23_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcpc23."""
-        self.lcpc23 = value.lcid
+    def lcpc23_links(self) -> typing.Dict[typing.Any, KeywordBase]:
+        """Get the keywords linked by the lcpc23 column, keyed by lcpc23 value."""
+        return self._get_column_links(self.lcpc23, lambda value: self._find_keyword("DEFINE", "CURVE", "lcid", value))
 
     @property
-    def lcmi_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcmi."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcmi:
-                return kwd
-        return None
-
-    @lcmi_link.setter
-    def lcmi_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcmi."""
-        self.lcmi = value.lcid
+    def lcmi_links(self) -> typing.Dict[typing.Any, KeywordBase]:
+        """Get the keywords linked by the lcmi column, keyed by lcmi value."""
+        return self._get_column_links(self.lcmi, lambda value: self._find_keyword("DEFINE", "CURVE", "lcid", value))
 
     @property
-    def lcti_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcti."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcti:
-                return kwd
-        return None
-
-    @lcti_link.setter
-    def lcti_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcti."""
-        self.lcti = value.lcid
+    def lcti_links(self) -> typing.Dict[typing.Any, KeywordBase]:
+        """Get the keywords linked by the lcti column, keyed by lcti value."""
+        return self._get_column_links(self.lcti, lambda value: self._find_keyword("DEFINE", "CURVE", "lcid", value))
 
     @property
-    def vdi_link(self) -> typing.Optional[DefineVector]:
-        """Get the DefineVector object for vdi."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "VECTOR"):
-            if kwd.vid == self.vdi:
-                return kwd
-        return None
-
-    @vdi_link.setter
-    def vdi_link(self, value: DefineVector) -> None:
-        """Set the DefineVector object for vdi."""
-        self.vdi = value.vid
+    def vdi_links(self) -> typing.Dict[typing.Any, KeywordBase]:
+        """Get the keywords linked by the vdi column, keyed by vdi value."""
+        return self._get_column_links(self.vdi, lambda value: self._find_keyword("DEFINE", "VECTOR", "vid", value))
 
     @property
     def sidsv_link(self) -> typing.Optional[KeywordBase]:

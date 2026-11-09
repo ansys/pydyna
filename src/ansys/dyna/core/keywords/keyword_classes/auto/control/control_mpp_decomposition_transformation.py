@@ -81,3 +81,113 @@ class ControlMppDecompositionTransformation(KeywordBase):
         """sets transformation from the dataframe df."""
         self._cards[0].table = df
 
+    @property
+    def type(self) -> pd.Series:
+        """Get or set the Which transformation to apply. The possible values are:VEC3,C2R,S2R,MAT.
+        """ # nopep8
+        return self._cards[0].get_column("type")
+
+    @type.setter
+    def type(self, value: typing.Union[str, typing.Sequence[str], pd.Series]) -> None:
+        """Set the type column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("type", value)
+
+    @property
+    def v1(self) -> pd.Series:
+        """Get or set the Parameters to the transformation.
+        """ # nopep8
+        return self._cards[0].get_column("v1")
+
+    @v1.setter
+    def v1(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the v1 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("v1", value)
+
+    @property
+    def v2(self) -> pd.Series:
+        """Get or set the Parameters to the transformation.
+        """ # nopep8
+        return self._cards[0].get_column("v2")
+
+    @v2.setter
+    def v2(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the v2 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("v2", value)
+
+    @property
+    def v3(self) -> pd.Series:
+        """Get or set the Parameters to the transformation.
+        """ # nopep8
+        return self._cards[0].get_column("v3")
+
+    @v3.setter
+    def v3(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the v3 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("v3", value)
+
+    @property
+    def v4(self) -> pd.Series:
+        """Get or set the Parameters to the transformation.
+        """ # nopep8
+        return self._cards[0].get_column("v4")
+
+    @v4.setter
+    def v4(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the v4 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("v4", value)
+
+    @property
+    def v5(self) -> pd.Series:
+        """Get or set the Parameters to the transformation.
+        """ # nopep8
+        return self._cards[0].get_column("v5")
+
+    @v5.setter
+    def v5(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the v5 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("v5", value)
+
+    @property
+    def v6(self) -> pd.Series:
+        """Get or set the Parameters to the transformation.
+        """ # nopep8
+        return self._cards[0].get_column("v6")
+
+    @v6.setter
+    def v6(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the v6 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("v6", value)
+
+    @property
+    def v7(self) -> pd.Series:
+        """Get or set the Parameters to the transformation.
+        """ # nopep8
+        return self._cards[0].get_column("v7")
+
+    @v7.setter
+    def v7(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the v7 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("v7", value)
+
+    @property
+    def v8(self) -> pd.Series:
+        """Get or set the Parameters to the transformation.
+        """ # nopep8
+        return self._cards[0].get_column("v8")
+
+    @v8.setter
+    def v8(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the v8 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("v8", value)
+
+    @property
+    def v9(self) -> pd.Series:
+        """Get or set the Parameters to the transformation.
+        """ # nopep8
+        return self._cards[0].get_column("v9")
+
+    @v9.setter
+    def v9(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the v9 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("v9", value)
+

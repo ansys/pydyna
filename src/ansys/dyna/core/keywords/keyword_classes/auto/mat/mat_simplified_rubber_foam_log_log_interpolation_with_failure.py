@@ -465,6 +465,42 @@ class MatSimplifiedRubberFoamLogLogInterpolationWithFailure(KeywordBase):
         self._cards[4].table = df
 
     @property
+    def gi(self) -> pd.Series:
+        """Get or set the Optional shear relaxation modulus for the ith term.
+        The Gi and BETAi terms are used only for solid elements when VISCO=1.
+        """ # nopep8
+        return self._cards[4].get_column("gi")
+
+    @gi.setter
+    def gi(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the gi column from a scalar, a Series, or an array-like."""
+        self._cards[4].set_column("gi", value)
+
+    @property
+    def betai(self) -> pd.Series:
+        """Get or set the Optional decay constant if ith term.
+        """ # nopep8
+        return self._cards[4].get_column("betai")
+
+    @betai.setter
+    def betai(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the betai column from a scalar, a Series, or an array-like."""
+        self._cards[4].set_column("betai", value)
+
+    @property
+    def vflag(self) -> pd.Series:
+        """Get or set the Type of viscoelasticity formulation. This appears only on the first line defining Gi, BETAi, and VFLAG.
+        If VFLAG=0, the standard viscoelasticity formulation is used (the default),
+        and if VFLAG=1, the viscoelasticity formulation using the instantaneous elastic stress is used
+        """ # nopep8
+        return self._cards[4].get_column("vflag")
+
+    @vflag.setter
+    def vflag(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the vflag column from a scalar, a Series, or an array-like."""
+        self._cards[4].set_column("vflag", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8

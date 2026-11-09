@@ -81,6 +81,116 @@ class ElementTshell(KeywordBase):
         self._cards[0].table = df
 
     @property
+    def eid(self) -> pd.Series:
+        """Get or set the Element ID. A unique number has to be used.
+        """ # nopep8
+        return self._cards[0].get_column("eid")
+
+    @eid.setter
+    def eid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the eid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("eid", value)
+
+    @property
+    def pid(self) -> pd.Series:
+        """Get or set the Part ID, see *PART.
+        """ # nopep8
+        return self._cards[0].get_column("pid")
+
+    @pid.setter
+    def pid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the pid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("pid", value)
+
+    @property
+    def n1(self) -> pd.Series:
+        """Get or set the Nodal point 1
+        """ # nopep8
+        return self._cards[0].get_column("n1")
+
+    @n1.setter
+    def n1(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n1 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n1", value)
+
+    @property
+    def n2(self) -> pd.Series:
+        """Get or set the Nodal point 2
+        """ # nopep8
+        return self._cards[0].get_column("n2")
+
+    @n2.setter
+    def n2(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n2 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n2", value)
+
+    @property
+    def n3(self) -> pd.Series:
+        """Get or set the Nodal point 3
+        """ # nopep8
+        return self._cards[0].get_column("n3")
+
+    @n3.setter
+    def n3(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n3 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n3", value)
+
+    @property
+    def n4(self) -> pd.Series:
+        """Get or set the Nodal point 4
+        """ # nopep8
+        return self._cards[0].get_column("n4")
+
+    @n4.setter
+    def n4(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n4 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n4", value)
+
+    @property
+    def n5(self) -> pd.Series:
+        """Get or set the Nodal point 5
+        """ # nopep8
+        return self._cards[0].get_column("n5")
+
+    @n5.setter
+    def n5(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n5 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n5", value)
+
+    @property
+    def n6(self) -> pd.Series:
+        """Get or set the Nodal point 6
+        """ # nopep8
+        return self._cards[0].get_column("n6")
+
+    @n6.setter
+    def n6(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n6 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n6", value)
+
+    @property
+    def n7(self) -> pd.Series:
+        """Get or set the Nodal point 7
+        """ # nopep8
+        return self._cards[0].get_column("n7")
+
+    @n7.setter
+    def n7(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n7 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n7", value)
+
+    @property
+    def n8(self) -> pd.Series:
+        """Get or set the Nodal point 8
+        """ # nopep8
+        return self._cards[0].get_column("n8")
+
+    @n8.setter
+    def n8(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n8 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n8", value)
+
+    @property
     def n1_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for n1, keyed by n1 value."""
         return self._get_links_from_table("NODE", "nid", "elements", "n1", "")

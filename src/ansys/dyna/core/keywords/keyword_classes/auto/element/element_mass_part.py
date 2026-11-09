@@ -68,19 +68,53 @@ class ElementMassPart(KeywordBase):
         self._cards[0].table = df
 
     @property
-    def lcid_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcid."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcid:
-                return kwd
-        return None
+    def pid(self) -> pd.Series:
+        """Get or set the Part id, a unique number must be used.
+        """ # nopep8
+        return self._cards[0].get_column("pid")
 
-    @lcid_link.setter
-    def lcid_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcid."""
-        self.lcid = value.lcid
+    @pid.setter
+    def pid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the pid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("pid", value)
+
+    @property
+    def addmass(self) -> pd.Series:
+        """Get or set the Added translational mass to be distributed to nodes of PID.
+        """ # nopep8
+        return self._cards[0].get_column("addmass")
+
+    @addmass.setter
+    def addmass(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the addmass column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("addmass", value)
+
+    @property
+    def finmass(self) -> pd.Series:
+        """Get or set the Final translational mass of the part ID or part set ID.  The total mass of the PID or SID is computed and subtracted from the final mass of the part or part set to obtain the added translational mass, which must exceed zero.  Set FINMASS to zero if ADDMASS is nonzero.  FINMASS is available in the R3 release of version 971.
+        """ # nopep8
+        return self._cards[0].get_column("finmass")
+
+    @finmass.setter
+    def finmass(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the finmass column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("finmass", value)
+
+    @property
+    def lcid(self) -> pd.Series:
+        """Get or set the Optional load curve ID to scale the added mass at time = 0.  This curve defines the scale factor as a function versus time.  The curve must start at unity at t=0.  This option applies to deformable bodies only.
+        """ # nopep8
+        return self._cards[0].get_column("lcid")
+
+    @lcid.setter
+    def lcid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the lcid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("lcid", value)
+
+    @property
+    def lcid_links(self) -> typing.Dict[typing.Any, KeywordBase]:
+        """Get the keywords linked by the lcid column, keyed by lcid value."""
+        return self._get_column_links(self.lcid, lambda value: self._find_keyword("DEFINE", "CURVE", "lcid", value))
 
     @property
     def pid_links(self) -> typing.Dict[int, KeywordBase]:

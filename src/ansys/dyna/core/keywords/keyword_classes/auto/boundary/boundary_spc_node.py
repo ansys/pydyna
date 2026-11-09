@@ -93,6 +93,94 @@ class BoundarySpcNode(KeywordBase):
         self._cards[0].table = df
 
     @property
+    def nid(self) -> pd.Series:
+        """Get or set the Node ID.
+        """ # nopep8
+        return self._cards[0].get_column("nid")
+
+    @nid.setter
+    def nid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the nid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("nid", value)
+
+    @property
+    def cid(self) -> pd.Series:
+        """Get or set the Coordinate system ID, see *DEFINE_COORDINATE_SYSTEM.
+        """ # nopep8
+        return self._cards[0].get_column("cid")
+
+    @cid.setter
+    def cid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the cid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("cid", value)
+
+    @property
+    def dofx(self) -> pd.Series:
+        """Get or set the Insert 1 for a translational constraint in the local x-direction for a Cartesiaon system or the local radial degree of freedom r for a cylindrical or spherical system.
+        """ # nopep8
+        return self._cards[0].get_column("dofx")
+
+    @dofx.setter
+    def dofx(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the dofx column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("dofx", value)
+
+    @property
+    def dofy(self) -> pd.Series:
+        """Get or set the Insert 1 for a translational constraint in the local y-direction for a Cartesian system, the direction of the local circumferential degree of freedom ? for a cylindrical system, or the direction of the local latitude degree of freedom  ? for a spherical system.
+        """ # nopep8
+        return self._cards[0].get_column("dofy")
+
+    @dofy.setter
+    def dofy(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the dofy column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("dofy", value)
+
+    @property
+    def dofz(self) -> pd.Series:
+        """Get or set the Insert 1 for a translational constraint in the local z-direction for a Cartesian system, the direction of the local z-translational degree of freedom for a cylindrical system, or the direction of the local longitude degree of freedom ? for a spherical system.
+        """ # nopep8
+        return self._cards[0].get_column("dofz")
+
+    @dofz.setter
+    def dofz(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the dofz column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("dofz", value)
+
+    @property
+    def dofrx(self) -> pd.Series:
+        """Get or set the Insert 1 for rotational constraint about the local x-axis for a Cartesian system or about the axis of  the local radial degree of freedom r for a cylindrical or spherical system.
+        """ # nopep8
+        return self._cards[0].get_column("dofrx")
+
+    @dofrx.setter
+    def dofrx(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the dofrx column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("dofrx", value)
+
+    @property
+    def dofry(self) -> pd.Series:
+        """Get or set the Insert 1 for rotational constraint about the local y-axis for a Cartesian system, about the axis of the local circumferential degree of freedom ? for a cylindrical system, or about  the axis of the local latitude degree of freedom ? for a spherical system.
+        """ # nopep8
+        return self._cards[0].get_column("dofry")
+
+    @dofry.setter
+    def dofry(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the dofry column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("dofry", value)
+
+    @property
+    def dofrz(self) -> pd.Series:
+        """Get or set the Insert 1 for rotational constraint about the local z-axis for a Cartesian system, about the axis of the local z-translational degree of freedom for a cylindrical system, or about the axis of the local longitude degree of freedom ? for a spherical system.
+        """ # nopep8
+        return self._cards[0].get_column("dofrz")
+
+    @dofrz.setter
+    def dofrz(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the dofrz column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("dofrz", value)
+
+    @property
     def id(self) -> typing.Optional[int]:
         """Get or set the ID keyword option
         """ # nopep8
@@ -130,17 +218,7 @@ class BoundarySpcNode(KeywordBase):
         return self._get_link_by_attr("NODE", "nid", nid, "")
 
     @property
-    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
-        """Get the DefineCoordinateSystem object for cid."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
-            if kwd.cid == self.cid:
-                return kwd
-        return None
-
-    @cid_link.setter
-    def cid_link(self, value: DefineCoordinateSystem) -> None:
-        """Set the DefineCoordinateSystem object for cid."""
-        self.cid = value.cid
+    def cid_links(self) -> typing.Dict[typing.Any, KeywordBase]:
+        """Get the keywords linked by the cid column, keyed by cid value."""
+        return self._get_column_links(self.cid, lambda value: self._find_keyword("DEFINE", "COORDINATE_SYSTEM", "cid", value))
 
