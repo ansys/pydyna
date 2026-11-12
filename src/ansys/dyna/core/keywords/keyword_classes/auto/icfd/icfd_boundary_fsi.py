@@ -58,3 +58,14 @@ class IcfdBoundaryFsi(KeywordBase):
         """Set boundaries from the dataframe df"""
         self._cards[0].table = df
 
+    @property
+    def pid(self) -> pd.Series:
+        """Get or set the Part ID of the fluid surface in contact with the structure domain
+        """ # nopep8
+        return self._cards[0].get_column("pid")
+
+    @pid.setter
+    def pid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the pid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("pid", value)
+

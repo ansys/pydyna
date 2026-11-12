@@ -66,6 +66,41 @@ class ConstrainedRigidBodies(KeywordBase):
         self._cards[0].table = df
 
     @property
+    def pidl(self) -> pd.Series:
+        """Get or set the Lead rigid body part ID, see *PART.
+        """ # nopep8
+        return self._cards[0].get_column("pidl")
+
+    @pidl.setter
+    def pidl(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the pidl column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("pidl", value)
+
+    @property
+    def pidc(self) -> pd.Series:
+        """Get or set the Constrained rigid body part ID (see *PART) or constrained rigid body part set ID for the SET keyword option (see *SET_PART)
+        """ # nopep8
+        return self._cards[0].get_column("pidc")
+
+    @pidc.setter
+    def pidc(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the pidc column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("pidc", value)
+
+    @property
+    def iflag(self) -> pd.Series:
+        """Get or set the This flag is meaningful if and only if the inertia properties of the lead part, PIDL, are defined in *PART_INERTIA.  See Remark 1.
+        EQ.1: Update the center - of - gravity, the translational mass,and the inertia matrix of PIDL to reflect its merging with the constrained rigid body(PIDC).
+        EQ.0: The merged PIDC will not affect the properties defined in *PART_INERTIA for PIDL since the properties are assumed to already account for merged parts.If the properties are not defined in a *PART_INERTIA definition, the inertia properties of PIDC will be computed from its nodal masses.
+        """ # nopep8
+        return self._cards[0].get_column("iflag")
+
+    @iflag.setter
+    def iflag(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the iflag column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("iflag", value)
+
+    @property
     def pidl_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all PART keywords for pidl, keyed by pidl value."""
         return self._get_links_from_table("PART", "pid", "pairs", "pidl", "parts")

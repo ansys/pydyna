@@ -120,3 +120,39 @@ class AleStructuredMeshControlPoints(KeywordBase):
         """Set control_points from the dataframe df"""
         self._cards[1].table = df
 
+    @property
+    def n(self) -> pd.Series:
+        """Get or set the Control point node number.
+        """ # nopep8
+        return self._cards[1].get_column("n")
+
+    @n.setter
+    def n(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("n", value)
+
+    @property
+    def x(self) -> pd.Series:
+        """Get or set the Control point position.
+        """ # nopep8
+        return self._cards[1].get_column("x")
+
+    @x.setter
+    def x(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the x column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("x", value)
+
+    @property
+    def ratio_xl(self) -> pd.Series:
+        """Get or set the Ratio for progressive mesh spacing.  A progressively larger or smaller mesh will be generated between the control point that has a nonzero ratio specified and the control point following it.. If a control point and the one following it both have RATIO as zero, the mesh is uniform between them. See Remarks 2 and 3.
+        GT.0.0: mesh size increases; dl(n+1)=dl_n*(1+ratio)
+        LT.0.0: mesh size decreases; dl(n+1)=dl_n/(1-ratio).
+        XL: Length of element at the control. For ICASE = 1, see Remark 4 for details about when to enter this value. This input is required for ICASE = 2.
+        """ # nopep8
+        return self._cards[1].get_column("ratio/xl")
+
+    @ratio_xl.setter
+    def ratio_xl(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the ratio_xl column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("ratio/xl", value)
+

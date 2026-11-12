@@ -368,6 +368,149 @@ class Mat023(KeywordBase):
         self._cards[3].table = df
 
     @property
+    def eai(self) -> pd.Series:
+        """Get or set the Young's modulus in a-direction at temperature Ti.
+        """ # nopep8
+        return self._cards[3].get_column("eai")
+
+    @eai.setter
+    def eai(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the eai column from a scalar, a Series, or an array-like."""
+        self._cards[3].set_column("eai", value)
+
+    @property
+    def ebi(self) -> pd.Series:
+        """Get or set the Young's modulus in b-direction at temperature Ti.
+        """ # nopep8
+        return self._cards[3].get_column("ebi")
+
+    @ebi.setter
+    def ebi(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the ebi column from a scalar, a Series, or an array-like."""
+        self._cards[3].set_column("ebi", value)
+
+    @property
+    def eci(self) -> pd.Series:
+        """Get or set the Young's modulus in c-direction at temperature Ti.
+        """ # nopep8
+        return self._cards[3].get_column("eci")
+
+    @eci.setter
+    def eci(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the eci column from a scalar, a Series, or an array-like."""
+        self._cards[3].set_column("eci", value)
+
+    @property
+    def prbai(self) -> pd.Series:
+        """Get or set the Poisson's ratio ba at temperature Ti.
+        """ # nopep8
+        return self._cards[3].get_column("prbai")
+
+    @prbai.setter
+    def prbai(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the prbai column from a scalar, a Series, or an array-like."""
+        self._cards[3].set_column("prbai", value)
+
+    @property
+    def prcai(self) -> pd.Series:
+        """Get or set the Poisson's ratio ca at temperature Ti.
+        """ # nopep8
+        return self._cards[3].get_column("prcai")
+
+    @prcai.setter
+    def prcai(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the prcai column from a scalar, a Series, or an array-like."""
+        self._cards[3].set_column("prcai", value)
+
+    @property
+    def prcbi(self) -> pd.Series:
+        """Get or set the Poisson's ratio cb at temperature Ti.
+        """ # nopep8
+        return self._cards[3].get_column("prcbi")
+
+    @prcbi.setter
+    def prcbi(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the prcbi column from a scalar, a Series, or an array-like."""
+        self._cards[3].set_column("prcbi", value)
+
+    @property
+    def aai(self) -> pd.Series:
+        """Get or set the Coefficient of thermal expansion in a-direction at temperature Ti.
+        """ # nopep8
+        return self._cards[3].get_column("aai")
+
+    @aai.setter
+    def aai(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the aai column from a scalar, a Series, or an array-like."""
+        self._cards[3].set_column("aai", value)
+
+    @property
+    def abi(self) -> pd.Series:
+        """Get or set the Coefficient of thermal expansion in b-direction at temperature Ti.
+        """ # nopep8
+        return self._cards[3].get_column("abi")
+
+    @abi.setter
+    def abi(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the abi column from a scalar, a Series, or an array-like."""
+        self._cards[3].set_column("abi", value)
+
+    @property
+    def aci(self) -> pd.Series:
+        """Get or set the Coefficient of thermal expansion in c-direction at temperature Ti.
+        """ # nopep8
+        return self._cards[3].get_column("aci")
+
+    @aci.setter
+    def aci(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the aci column from a scalar, a Series, or an array-like."""
+        self._cards[3].set_column("aci", value)
+
+    @property
+    def gabi(self) -> pd.Series:
+        """Get or set the Shear modulus ab at temperature Ti.
+        """ # nopep8
+        return self._cards[3].get_column("gabi")
+
+    @gabi.setter
+    def gabi(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the gabi column from a scalar, a Series, or an array-like."""
+        self._cards[3].set_column("gabi", value)
+
+    @property
+    def gbci(self) -> pd.Series:
+        """Get or set the Shear modulus bc at temperature Ti.
+        """ # nopep8
+        return self._cards[3].get_column("gbci")
+
+    @gbci.setter
+    def gbci(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the gbci column from a scalar, a Series, or an array-like."""
+        self._cards[3].set_column("gbci", value)
+
+    @property
+    def gcai(self) -> pd.Series:
+        """Get or set the Shear modulus ca at temperature Ti.
+        """ # nopep8
+        return self._cards[3].get_column("gcai")
+
+    @gcai.setter
+    def gcai(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the gcai column from a scalar, a Series, or an array-like."""
+        self._cards[3].set_column("gcai", value)
+
+    @property
+    def ti(self) -> pd.Series:
+        """Get or set the i'th temperature.
+        """ # nopep8
+        return self._cards[3].get_column("ti")
+
+    @ti.setter
+    def ti(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the ti column from a scalar, a Series, or an array-like."""
+        self._cards[3].set_column("ti", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8

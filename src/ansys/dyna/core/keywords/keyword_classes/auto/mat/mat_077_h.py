@@ -502,6 +502,61 @@ class Mat077H(KeywordBase):
         self._cards[4].table = df
 
     @property
+    def gi(self) -> pd.Series:
+        """Get or set the Optional shear relaxation modulus for the i'th term.
+        """ # nopep8
+        return self._cards[4].get_column("gi")
+
+    @gi.setter
+    def gi(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the gi column from a scalar, a Series, or an array-like."""
+        self._cards[4].set_column("gi", value)
+
+    @property
+    def betai(self) -> pd.Series:
+        """Get or set the Optional decay constant for the i'th term.
+        """ # nopep8
+        return self._cards[4].get_column("betai")
+
+    @betai.setter
+    def betai(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the betai column from a scalar, a Series, or an array-like."""
+        self._cards[4].set_column("betai", value)
+
+    @property
+    def gj(self) -> pd.Series:
+        """Get or set the Optional shear modulus for frequency independent damping represented as the j'th spring and slider in series in parallel to the rest of the stress contributions.
+        """ # nopep8
+        return self._cards[4].get_column("gj")
+
+    @gj.setter
+    def gj(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the gj column from a scalar, a Series, or an array-like."""
+        self._cards[4].set_column("gj", value)
+
+    @property
+    def sigfj(self) -> pd.Series:
+        """Get or set the Limit stress for frequency independent, frictional, damping represented as the j'th spring and slider in series in parallel to the rest of the stress contributions.
+        """ # nopep8
+        return self._cards[4].get_column("sigfj")
+
+    @sigfj.setter
+    def sigfj(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the sigfj column from a scalar, a Series, or an array-like."""
+        self._cards[4].set_column("sigfj", value)
+
+    @property
+    def vflag(self) -> pd.Series:
+        """Get or set the Flag for the viscoelasticity formulation. This appears only on the first line defining Gi, BETAi, and VFLAG. If VFLAG = 0, the standard viscoelasticity formulation is used (the default), and if VFLAG = 1 (only applicable to solid elements), the viscoelasticity formulation using the instantaneous elastic stress is used.
+        """ # nopep8
+        return self._cards[4].get_column("vflag")
+
+    @vflag.setter
+    def vflag(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the vflag column from a scalar, a Series, or an array-like."""
+        self._cards[4].set_column("vflag", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8

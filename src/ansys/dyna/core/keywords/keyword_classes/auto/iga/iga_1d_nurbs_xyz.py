@@ -152,6 +152,50 @@ class Iga1DNurbsXyz(KeywordBase):
         self._cards[2].table = df
 
     @property
+    def r1(self) -> pd.Series:
+        """Get or set the Knot values in the local r-direction with i = 1, NR+PR+1.
+        """ # nopep8
+        return self._cards[2].get_column("r1")
+
+    @r1.setter
+    def r1(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the r1 column from a scalar, a Series, or an array-like."""
+        self._cards[2].set_column("r1", value)
+
+    @property
+    def r2(self) -> pd.Series:
+        """Get or set the Knot values in the local r-direction with i = 1, NR+PR+1.
+        """ # nopep8
+        return self._cards[2].get_column("r2")
+
+    @r2.setter
+    def r2(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the r2 column from a scalar, a Series, or an array-like."""
+        self._cards[2].set_column("r2", value)
+
+    @property
+    def r3(self) -> pd.Series:
+        """Get or set the Knot values in the local r-direction with i = 1, NR+PR+1.
+        """ # nopep8
+        return self._cards[2].get_column("r3")
+
+    @r3.setter
+    def r3(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the r3 column from a scalar, a Series, or an array-like."""
+        self._cards[2].set_column("r3", value)
+
+    @property
+    def r4(self) -> pd.Series:
+        """Get or set the Knot values in the local r-direction with i = 1, NR+PR+1.
+        """ # nopep8
+        return self._cards[2].get_column("r4")
+
+    @r4.setter
+    def r4(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the r4 column from a scalar, a Series, or an array-like."""
+        self._cards[2].set_column("r4", value)
+
+    @property
     def rfirst(self) -> typing.Optional[float]:
         """Get or set the First knot value in the local r-direction.
         """ # nopep8
@@ -182,4 +226,48 @@ class Iga1DNurbsXyz(KeywordBase):
     def points(self, df: pd.DataFrame):
         """Set points from the dataframe df"""
         self._cards[4].table = df
+
+    @property
+    def x(self) -> pd.Series:
+        """Get or set the Non-homogeneous control point coordinates in the global x-direction with j = 1, NR.
+        """ # nopep8
+        return self._cards[4].get_column("x")
+
+    @x.setter
+    def x(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the x column from a scalar, a Series, or an array-like."""
+        self._cards[4].set_column("x", value)
+
+    @property
+    def y(self) -> pd.Series:
+        """Get or set the Non-homogeneous control point coordinates in the global y-direction with j = 1, NR.
+        """ # nopep8
+        return self._cards[4].get_column("y")
+
+    @y.setter
+    def y(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the y column from a scalar, a Series, or an array-like."""
+        self._cards[4].set_column("y", value)
+
+    @property
+    def z(self) -> pd.Series:
+        """Get or set the Non-homogeneous control point coordinates in the global z-direction with j = 1, NR.
+        """ # nopep8
+        return self._cards[4].get_column("z")
+
+    @z.setter
+    def z(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the z column from a scalar, a Series, or an array-like."""
+        self._cards[4].set_column("z", value)
+
+    @property
+    def wgt(self) -> pd.Series:
+        """Get or set the Control weights with j = 1, NR, see Remark 2.
+        """ # nopep8
+        return self._cards[4].get_column("wgt")
+
+    @wgt.setter
+    def wgt(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the wgt column from a scalar, a Series, or an array-like."""
+        self._cards[4].set_column("wgt", value)
 

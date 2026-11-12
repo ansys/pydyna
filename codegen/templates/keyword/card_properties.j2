@@ -9,6 +9,7 @@
         """Set {{card.table.name}} from the dataframe df"""
         self._cards[{{card.index}}].table = df
 
+{% include 'keyword/table_column_properties.j2' %}
 {% elif card.text %}
     @property
     def {{card.text.name}}(self) -> typing.Optional[str]:
@@ -52,6 +53,7 @@
         """sets {{card.overall_name}} from the dataframe df."""
         self._cards[{{card.index}}].table = df
 
+{% include 'keyword/table_column_properties.j2' %}
 {% elif card.external %}
 {% else %}
 {% for field in card.fields %}

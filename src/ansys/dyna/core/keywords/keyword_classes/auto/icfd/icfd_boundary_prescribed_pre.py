@@ -63,3 +63,71 @@ class IcfdBoundaryPrescribedPre(KeywordBase):
         """Set boundaries from the dataframe df"""
         self._cards[0].table = df
 
+    @property
+    def pid(self) -> pd.Series:
+        """Get or set the PID for a fluid surface.
+        """ # nopep8
+        return self._cards[0].get_column("pid")
+
+    @pid.setter
+    def pid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the pid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("pid", value)
+
+    @property
+    def lcid(self) -> pd.Series:
+        """Get or set the Load curve ID to describe the pressure value as a function of time. See *DEFINE_CURVE, *DEFINE_CURVE_FUNCTION, or *DEFINE_FUNCTION. If using a *DEFINE_FUNCTION, the following parameters are allowed: f(x, y, z, vx, vy, vz, temp, pres, time).
+        """ # nopep8
+        return self._cards[0].get_column("lcid")
+
+    @lcid.setter
+    def lcid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the lcid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("lcid", value)
+
+    @property
+    def sf(self) -> pd.Series:
+        """Get or set the Load curve scale factor.  The default is =1.0.
+        """ # nopep8
+        return self._cards[0].get_column("sf")
+
+    @sf.setter
+    def sf(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the sf column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("sf", value)
+
+    @property
+    def death(self) -> pd.Series:
+        """Get or set the Time imposed motion/constraint is removed. EQ.0.0: Default set to 10E28
+        """ # nopep8
+        return self._cards[0].get_column("death")
+
+    @death.setter
+    def death(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the death column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("death", value)
+
+    @property
+    def birth(self) -> pd.Series:
+        """Get or set the Time imposed motion/constraint is activated starting from the initial abscissa value of the curve.
+        """ # nopep8
+        return self._cards[0].get_column("birth")
+
+    @birth.setter
+    def birth(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the birth column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("birth", value)
+
+    @property
+    def iso(self) -> pd.Series:
+        """Get or set the Adds an additional isovelocity condition to the system on top of the user defined imposed pressure (See Remark 1):
+        EQ.0: Off
+        EQ.1: On
+        """ # nopep8
+        return self._cards[0].get_column("iso")
+
+    @iso.setter
+    def iso(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the iso column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("iso", value)
+

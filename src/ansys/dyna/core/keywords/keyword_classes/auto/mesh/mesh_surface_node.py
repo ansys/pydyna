@@ -61,3 +61,47 @@ class MeshSurfaceNode(KeywordBase):
         """Set nodes from the dataframe df"""
         self._cards[0].table = df
 
+    @property
+    def nid(self) -> pd.Series:
+        """Get or set the Node ID.  This NID must be unique within the set of surface nodes.
+        """ # nopep8
+        return self._cards[0].get_column("nid")
+
+    @nid.setter
+    def nid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the nid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("nid", value)
+
+    @property
+    def x(self) -> pd.Series:
+        """Get or set the X coordinate
+        """ # nopep8
+        return self._cards[0].get_column("x")
+
+    @x.setter
+    def x(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the x column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("x", value)
+
+    @property
+    def y(self) -> pd.Series:
+        """Get or set the Y coordinate
+        """ # nopep8
+        return self._cards[0].get_column("y")
+
+    @y.setter
+    def y(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the y column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("y", value)
+
+    @property
+    def z(self) -> pd.Series:
+        """Get or set the Z coordinate
+        """ # nopep8
+        return self._cards[0].get_column("z")
+
+    @z.setter
+    def z(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the z column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("z", value)
+

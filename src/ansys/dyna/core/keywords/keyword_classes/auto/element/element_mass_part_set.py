@@ -69,27 +69,70 @@ class ElementMassPartSet(KeywordBase):
         self._cards[0].table = df
 
     @property
-    def lcid_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcid."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcid:
-                return kwd
-        return None
+    def psid(self) -> pd.Series:
+        """Get or set the Part set id, a unique number must be used.
+        """ # nopep8
+        return self._cards[0].get_column("psid")
 
-    @lcid_link.setter
-    def lcid_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcid."""
-        self.lcid = value.lcid
+    @psid.setter
+    def psid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the psid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("psid", value)
 
     @property
-    def psid_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_PART_* keyword for psid."""
-        return self._get_set_link("PART", self.psid)
+    def addmass(self) -> pd.Series:
+        """Get or set the Added translational mass to be distributed to nodes of PID.
+        """ # nopep8
+        return self._cards[0].get_column("addmass")
 
-    @psid_link.setter
-    def psid_link(self, value: KeywordBase) -> None:
-        """Set the SET_PART_* keyword for psid."""
-        self.psid = value.sid
+    @addmass.setter
+    def addmass(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the addmass column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("addmass", value)
+
+    @property
+    def finmass(self) -> pd.Series:
+        """Get or set the Final translational mass of the part set ID.  The total mass of PSID is computed and subtracted from the final mass of the part or part set to obtain the added translational mass, which must exceed zero.  Set FINMASS to zero if ADDMASS is nonzero.  FINMASS is available in the R3 release of version 971.
+        """ # nopep8
+        return self._cards[0].get_column("finmass")
+
+    @finmass.setter
+    def finmass(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the finmass column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("finmass", value)
+
+    @property
+    def lcid(self) -> pd.Series:
+        """Get or set the Optional load curve ID to scale the added mass at time = 0.  This curve defines the scale factor as a function versus time.  The curve must start at unity at t=0.  This option applies to deformable bodies only.
+        """ # nopep8
+        return self._cards[0].get_column("lcid")
+
+    @lcid.setter
+    def lcid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the lcid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("lcid", value)
+
+    @property
+    def mwd(self) -> pd.Series:
+        """Get or set the Optional flag for mass-weighted distribution, valid for SET option only:
+        EQ.0: non - structural mass is distributed by area(shell) / volume(solid) weighted distribution,
+        EQ.1: non - structural mass is distributed by mass weighted, area x density x thickness(shell) / volume  density(solid), distribution.
+        Mixed uses with MWD for the same part should be avoided.
+        """ # nopep8
+        return self._cards[0].get_column("mwd")
+
+    @mwd.setter
+    def mwd(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the mwd column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("mwd", value)
+
+    @property
+    def lcid_links(self) -> typing.Dict[typing.Any, KeywordBase]:
+        """Get the keywords linked by the lcid column, keyed by lcid value."""
+        return self._get_column_links(self.lcid, lambda value: self._find_keyword("DEFINE", "CURVE", "lcid", value))
+
+    @property
+    def psid_links(self) -> typing.Dict[typing.Any, KeywordBase]:
+        """Get the keywords linked by the psid column, keyed by psid value."""
+        return self._get_column_links(self.psid, lambda value: self._get_set_link("PART", value))
 

@@ -73,6 +73,98 @@ class ElementDiscrete(KeywordBase):
         self._cards[0].table = df
 
     @property
+    def eid(self) -> pd.Series:
+        """Get or set the Element ID. A unique number has to be used.
+        """ # nopep8
+        return self._cards[0].get_column("eid")
+
+    @eid.setter
+    def eid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the eid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("eid", value)
+
+    @property
+    def pid(self) -> pd.Series:
+        """Get or set the Part ID, see *PART.
+        """ # nopep8
+        return self._cards[0].get_column("pid")
+
+    @pid.setter
+    def pid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the pid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("pid", value)
+
+    @property
+    def n1(self) -> pd.Series:
+        """Get or set the Nodal point 1.
+        """ # nopep8
+        return self._cards[0].get_column("n1")
+
+    @n1.setter
+    def n1(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n1 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n1", value)
+
+    @property
+    def n2(self) -> pd.Series:
+        """Get or set the Nodal point 2. If zero, the spring/damper connects node N1 to ground.
+        """ # nopep8
+        return self._cards[0].get_column("n2")
+
+    @n2.setter
+    def n2(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n2 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n2", value)
+
+    @property
+    def vid(self) -> pd.Series:
+        """Get or set the Orientation option: The orientation option should be used cautiously since forces, which are generated as the nodal points displace, are not orthogonal to rigid body rotation unless the nodes are coincident.. The type 6, 3D beam element, is recommended when orientation is required with the absolute value of the parameter SCOOR set to 2 or 3, since this option avoids rotational constraints.
+        EQ.0: the spring/damper acts along the axis from node N1 to N2,
+        NE.0: the spring/damper acts along the axis defined by the orientation vector, VID defined in the *DEFINE_SD_ORIENTATION section.
+        """ # nopep8
+        return self._cards[0].get_column("vid")
+
+    @vid.setter
+    def vid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the vid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("vid", value)
+
+    @property
+    def s(self) -> pd.Series:
+        """Get or set the Scale factor on forces.
+        """ # nopep8
+        return self._cards[0].get_column("s")
+
+    @s.setter
+    def s(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the s column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("s", value)
+
+    @property
+    def pf(self) -> pd.Series:
+        """Get or set the Print flag:
+        EQ.0: forces are printed in DEFORC file, see *DATABASE_OPTION,
+        EQ.1: forces are not printed in DEFORC file.
+        """ # nopep8
+        return self._cards[0].get_column("pf")
+
+    @pf.setter
+    def pf(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the pf column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("pf", value)
+
+    @property
+    def offset(self) -> pd.Series:
+        """Get or set the Initial offset. The initial offset is a displacement or rotation at time zero.
+        """ # nopep8
+        return self._cards[0].get_column("offset")
+
+    @offset.setter
+    def offset(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the offset column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("offset", value)
+
+    @property
     def n1_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for n1, keyed by n1 value."""
         return self._get_links_from_table("NODE", "nid", "elements", "n1", "")

@@ -29,7 +29,7 @@ from jinja2 import Environment
 from output_manager import OutputManager
 
 import keyword_generation.data_model as data_model
-from keyword_generation.data_model.keyword_data import Card, KeywordData
+from keyword_generation.data_model.keyword_data import Card, KeywordData, TableColumn
 from keyword_generation.data_model.row_condition import compile_row_condition
 from keyword_generation.generators.template_context import KeywordTemplateContext
 from keyword_generation.handlers.registry import HandlerRegistry, create_default_registry
@@ -812,6 +812,86 @@ def _add_links(kwd_data: KeywordData) -> None:
     logger.debug(f"Added {link_count} links to keyword data")
 
 
+_KEYWORD_BASE_ATTRIBUTES = {
+    "activate_option",
+    "after_read",
+    "before_read",
+    "cards",
+    "deactivate_option",
+    "deck",
+    "dumps",
+    "format",
+    "get_links",
+    "get_option_spec",
+    "get_title",
+    "included_from",
+    "is_option_active",
+    "keyword",
+    "loads",
+    "option_specs",
+    "options",
+    "parameter_set",
+    "read",
+    "select_option_label",
+    "subkeyword",
+    "user_comment",
+    "write",
+}
+
+
+def _get_metadata_name(metadata: typing.Any) -> str:
+    return metadata["name"] if isinstance(metadata, dict) else metadata.name
+
+
+def _get_card_property_names(card: typing.Union[Card, typing.Dict]) -> typing.Set[str]:
+    """Get the names of the properties generated for a card, other than table columns."""
+    for kind in ("table", "text", "variable"):
+        if card.get(kind):
+            return {_get_metadata_name(card.get(kind))}
+    if card.get("table_group"):
+        return {card.get("overall_name")}
+    if card.get("set"):
+        names = {card.get("items_name")}
+        if card.get("item_name"):
+            names.add(f"add_{card.get('item_name')}")
+        return names
+    return {field.property_name for field in card.get("fields", []) if field.used}
+
+
+def _add_table_columns(kwd_data: KeywordData) -> None:
+    """Add a property for each column of the table cards and table card groups of the keyword.
+
+    A column is skipped if its property name is already taken by another property of the keyword.
+    """
+    taken = set(_KEYWORD_BASE_ATTRIBUTES)
+    for card in kwd_data.cards:
+        taken.update(_get_card_property_names(card))
+    if kwd_data.card_sets:
+        sets = kwd_data.card_sets.sets if hasattr(kwd_data.card_sets, "sets") else kwd_data.card_sets["sets"]
+        for card_set in sets:
+            for card in card_set.get_all_cards() if hasattr(card_set, "get_all_cards") else card_set["source_cards"]:
+                taken.update(_get_card_property_names(card))
+    for option in kwd_data.options or []:
+        for card in option.cards if hasattr(option, "cards") else option["cards"]:
+            taken.update(_get_card_property_names(card))
+
+    for card in kwd_data.cards:
+        if card.get("table"):
+            fields = [(field, field.name) for field in card.fields]
+        elif card.get("table_group"):
+            fields = [(field, field.property_name or field.name) for field in card.get_all_fields()]
+        else:
+            continue
+        for field, column in fields:
+            if not field.used:
+                continue
+            if field.property_name in taken:
+                logger.debug(f"Skipping table column property '{field.property_name}': the name is taken")
+                continue
+            taken.add(field.property_name)
+            card.table_columns.append(TableColumn(field.property_name, column, field.type, field.help))
+
+
 def _get_keyword_data(
     keyword_name: str,
     keyword: str,
@@ -849,6 +929,7 @@ def _get_keyword_data(
     _transform_data(kwd_data)
     _compile_row_conditions(kwd_data)
     _add_links(kwd_data)
+    _add_table_columns(kwd_data)
 
     logger.debug(f"Keyword data prepared for '{keyword_name}' with {len(kwd_data.cards)} cards")
 
