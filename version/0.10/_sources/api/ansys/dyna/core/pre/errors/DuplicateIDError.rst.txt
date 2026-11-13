@@ -1,0 +1,37 @@
+ansys.dyna.core.pre.errors.DuplicateIDError
+===========================================
+
+.. py:exception:: ansys.dyna.core.pre.errors.DuplicateIDError(keyword_type, field_name, duplicate_values)
+
+   Bases: :py:obj:`ValidationError`
+
+
+   
+   Error raised when duplicate IDs are found.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: keyword_type
+
+
+   .. py:attribute:: field_name
+
+
+   .. py:attribute:: duplicate_values
+

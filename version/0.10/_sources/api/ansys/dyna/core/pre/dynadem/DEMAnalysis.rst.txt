@@ -1,0 +1,108 @@
+ansys.dyna.core.pre.dynadem.DEMAnalysis
+=======================================
+
+.. py:class:: ansys.dyna.core.pre.dynadem.DEMAnalysis
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.BaseObj`
+
+
+   
+   Activates DEM analysis and defines associated control parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: defined_des
+      :value: False
+
+
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: type
+      :value: 'analysis_dem'
+
+
+
+   .. py:method:: set_des(normal_damping_coeff=0.0, tangential_damping_coeff=0.0, static_friction_coeff=0.0, rolling_friction_coeff=0.0, normal_spring_constant_sf=0.01, ratio=0.2857)
+
+      
+      Set global control parameters for discrete element spheres.
+
+
+      :Parameters:
+
+          **normal_damping_coeff** : :class:`python:float`, :obj:`optional`
+              Normal damping coefficient. The default value is ``0.0``.
+
+          **tangential_damping_coeff** : :class:`python:float`, :obj:`optional`
+              Tangential damping coefficient. The default value is ``0.0``.
+
+          **static_friction_coeff** : :class:`python:float`, :obj:`optional`
+              Static coefficient of friction. The default is ``0.0``.
+
+          **rolling_friction_coeff** : :class:`python:float`, :obj:`optional`
+              Rolling coefficient of friction. The default is ``0.0``.
+
+          **normal_spring_constant_sf** : :class:`python:float`, :obj:`optional`
+              Normal spring constant. The default is ``0.01``.
+
+          **ratio** : :class:`python:float`, :obj:`optional`
+              Ratio. The default is ``0.2857``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create a DEM analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

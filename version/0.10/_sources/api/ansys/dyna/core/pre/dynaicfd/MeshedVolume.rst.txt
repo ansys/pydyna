@@ -1,0 +1,202 @@
+ansys.dyna.core.pre.dynaicfd.MeshedVolume
+=========================================
+
+.. py:class:: ansys.dyna.core.pre.dynaicfd.MeshedVolume(surfaces)
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.BaseObj`
+
+
+   
+   Defines the volume space to mesh.
+
+
+   :Parameters:
+
+       **surfaces** : :class:`python:list`
+           List of part IDs for the surface elements to use to define the volume.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: surfaces
+
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: meshsizeshape
+      :value: []
+
+
+
+   .. py:attribute:: embeded_surf
+      :value: []
+
+
+
+   .. py:attribute:: meshsize_surf
+      :value: []
+
+
+
+   .. py:attribute:: fluid_interfaces
+      :value: []
+
+
+
+   .. py:attribute:: type
+      :value: 'meshedvolume'
+
+
+
+   .. py:method:: embed_shell(embeded)
+
+      
+      Define surfaces that the mesher is to embed inside the volume mesh.
+
+
+      :Parameters:
+
+          **embeded** : :class:`python:list`
+              List of part IDs for the surface elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: meshsize_box(size, min_point, max_point)
+
+      
+      Define a local mesh size in specific zones corresponding to given geometrical shapes.
+
+
+      :Parameters:
+
+          **size** : :class:`python:float`
+              Mesh size to apply in the zone of the shape defined by ``SNAME``.
+
+          **parameter** : :class:`python:list`
+              List of the parameters that define the shape.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_meshsize(surfaces)
+
+      
+      Define the surfaces that the mesher is to use to specify a local mesh size inside the volume.
+
+
+      :Parameters:
+
+          **surfaces** : :class:`python:list`
+              List of part IDs for the surface elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_fluid_interfaces(surfaces)
+
+      
+      Define the surfaces that the mesher is to use to specify fluid interfaces in multi-fluid simulations.
+
+
+      :Parameters:
+
+          **surfaces** : :class:`python:list`
+              List of part IDs for the surface elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create mesh volume.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

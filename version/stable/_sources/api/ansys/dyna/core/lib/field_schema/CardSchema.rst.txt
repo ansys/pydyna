@@ -1,0 +1,143 @@
+ansys.dyna.core.lib.field_schema.CardSchema
+===========================================
+
+.. py:class:: ansys.dyna.core.lib.field_schema.CardSchema
+
+   Bases: :py:obj:`NamedTuple`
+
+
+   
+   Immutable schema for an entire Card.
+
+   Contains the field schemas and a precomputed name-to-index mapping
+   for fast value lookups.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: fields
+      :type:  Tuple[FieldSchema, Ellipsis]
+
+
+   .. py:attribute:: name_to_index
+      :type:  Dict[str, int]
+
+
+   .. py:method:: from_fields(fields: List[ansys.dyna.core.lib.field.Field]) -> CardSchema
+      :classmethod:
+
+
+      
+      Create a CardSchema from a list of Field objects.
+
+
+      :Parameters:
+
+          **fields** : :obj:`List`\[:obj:`Field`]
+              The fields to extract schema from.
+
+
+
+      :Returns:
+
+          :obj:`CardSchema`
+              An immutable schema representation.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: to_fields(values: List[Any]) -> List[ansys.dyna.core.lib.field.Field]
+
+      
+      Create Field instances from this schema with the given values.
+
+
+      :Parameters:
+
+          **values** : :obj:`List`\[:obj:`Any`]
+              Values for each field.
+
+
+
+      :Returns:
+
+          :obj:`List`\[:obj:`Field`]
+              New Field instances with values set.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_index(name: str) -> int
+
+      
+      Get the index of a field by name.
+
+
+      :Parameters:
+
+          **name** : :class:`python:str`
+              The field name.
+
+
+
+      :Returns:
+
+          :class:`python:int`
+              The field index.
+
+
+
+
+      :Raises:
+
+          :obj:`KeyError`
+              If the field name is not found.
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __len__() -> int
+

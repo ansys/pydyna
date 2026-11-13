@@ -1,0 +1,53 @@
+ansys.dyna.core.run.linux_runner
+================================
+
+.. py:module:: ansys.dyna.core.run.linux_runner
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.run.linux_runner.LinuxRunner
+
+
+Module Contents
+---------------
+
+.. py:class:: LinuxRunner(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.run.base_runner.BaseRunner`
+
+
+   
+   Linux implementation to Run LS-DYNA. Tested with a custom exutable
+   and when LS-DYNA is installed as part of the unified Ansys installation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: executable
+
+
+   .. py:method:: set_input(input_file: str, working_directory: str) -> None
+
+
+   .. py:method:: run() -> None
+
+

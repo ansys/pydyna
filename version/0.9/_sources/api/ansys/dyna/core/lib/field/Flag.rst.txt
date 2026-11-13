@@ -1,0 +1,22 @@
+ansys.dyna.core.lib.field.Flag
+==============================
+
+.. py:class:: ansys.dyna.core.lib.field.Flag
+
+   .. py:attribute:: value
+      :type:  bool
+      :value: None
+
+
+
+   .. py:attribute:: true_value
+      :type:  str
+      :value: None
+
+
+
+   .. py:attribute:: false_value
+      :type:  str
+      :value: None
+
+

@@ -1,0 +1,436 @@
+ansys.dyna.core.pre.graphics.graphics
+=====================================
+
+.. py:module:: ansys.dyna.core.pre.graphics.graphics
+
+.. autoapi-nested-parse::
+
+   Module for graphics-related implementations.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.graphics.graphics.color_matrix
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.graphics.graphics.DisplayMeshType
+   ansys.dyna.core.pre.graphics.graphics.ColorByType
+   ansys.dyna.core.pre.graphics.graphics.Picker
+   ansys.dyna.core.pre.graphics.graphics.Graphics
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.graphics.graphics.compute_distance
+
+
+Module Contents
+---------------
+
+.. py:class:: DisplayMeshType
+
+   Bases: :py:obj:`enum.IntEnum`
+
+
+   
+   Contains the mesh types to display.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: FACE
+      :value: 0
+
+
+
+   .. py:attribute:: BEAM
+      :value: 1
+
+
+
+   .. py:attribute:: CYLINDER
+      :value: 2
+
+
+
+   .. py:attribute:: SPHERE
+      :value: 3
+
+
+
+   .. py:attribute:: PLANAR
+      :value: 4
+
+
+
+.. py:class:: ColorByType
+
+   Bases: :py:obj:`enum.IntEnum`
+
+
+   
+   Contains the zone types to display.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ZONE
+      :value: 0
+
+
+
+   .. py:attribute:: ZONELET
+      :value: 1
+
+
+
+   .. py:attribute:: PART
+      :value: 2
+
+
+
+.. py:data:: color_matrix
+
+.. py:function:: compute_distance(point1, point2)
+
+   
+   Compute the distance between two points.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: Picker(plotter: pyvista.Plotter, graphics)
+
+   
+   Contains the items that can be selected from the display with the mouse.
+
+
+   :Parameters:
+
+       **plotter** : :obj:`Plotter`
+           PyVista plotter to manipulate.
+
+       **graphics** : :obj:`Graphics`
+           Class for providing callbacks.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: plotter
+
+
+   .. py:property:: selections
+      
+      All selected meshes in the display.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: clear_selection()
+
+      
+      Clear all picked selections in the display.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: ignore(ignore_pick)
+
+      
+      Setter for ignore_pick.
+
+
+      :Parameters:
+
+          **ignore_pick** : :obj:`Any`
+              Picked selection to ignore.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __call__(*args, **kwargs)
+
+      
+      Call the code to run when something is clicked in the display.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Graphics(model: ansys.dyna.core.pre.Model, use_trame: bool = False, view_position: str = 'xy')
+
+   Bases: :py:obj:`object`
+
+
+   
+   Manages graphics in PyDYNA.
+
+
+   :Parameters:
+
+       **model** : :obj:`pydyna.pre.Model`
+           Model to show.
+
+       **use_trame** : :ref:`bool <python:bltin-boolean-values>`, :obj:`optional`
+           Whether to use the Trame visualizer. The default is ``False``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: __call__(parts: List = None, update: bool = True)
+
+      
+      Show the appropriate display based on parameters.
+
+
+      :Parameters:
+
+          **parts** : :obj:`Any`, :obj:`optional`
+              Parts to show. The default is ``None``.
+
+          **update** : :ref:`bool <python:bltin-boolean-values>`, :obj:`optional`
+              Whether to update the display. The default is ``True``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_face_mesh_data()
+
+      
+      Get the mesh data from a face.
+
+
+
+
+
+      :Returns:
+
+          :obj:`List`
+              Mesh data for the face.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: show()
+
+      
+      Show the current set display.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_color_by_type() -> ColorByType
+
+      
+      Get the color by zone type.
+
+
+
+
+
+      :Returns:
+
+          :obj:`ColorByType`
+              Color by zone type.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

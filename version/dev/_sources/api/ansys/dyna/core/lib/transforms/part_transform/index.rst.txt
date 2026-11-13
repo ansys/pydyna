@@ -1,0 +1,33 @@
+ansys.dyna.core.lib.transforms.part_transform
+=============================================
+
+.. py:module:: ansys.dyna.core.lib.transforms.part_transform
+
+.. autoapi-nested-parse::
+
+   Module for transforming *PART data.
+
+   NOTE: this only offsets the "pid" defined by the *PART card itself, matching what
+   TransformElement does for "pid" references on *ELEMENT_* cards. LS-DYNA's IDPOFF
+   actually applies to every part ID reference in the include file (e.g. *SET_PART,
+   *CONTACT_*, *INITIAL_VELOCITY_RIGID_BODY, ...). Handling those generically would
+   require walking each keyword's `_link_fields` for LinkType.PART, which is a larger
+   change left for a follow-up.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/transforms/part_transform/TransformPart
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.transforms.part_transform.TransformPart
+
+

@@ -1,0 +1,139 @@
+ansys.dyna.core.lib.cards
+=========================
+
+.. py:module:: ansys.dyna.core.lib.cards
+
+.. autoapi-nested-parse::
+
+   Base class for cards and I/O.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.cards.Cards
+
+
+Module Contents
+---------------
+
+.. py:class:: Cards(keyword)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.option_card.OptionsInterface`
+
+
+   
+   Abstract base class for option card api interface.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: options
+      :type: ansys.dyna.core.lib.option_card.Options
+
+
+      
+      Gets the options_api of this keyword, if any
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: is_option_active(option: str) -> bool
+
+
+   .. py:method:: activate_option(option: str) -> None
+
+
+   .. py:method:: deactivate_option(option: str) -> None
+
+
+   .. py:method:: get_option_spec(name: str) -> ansys.dyna.core.lib.option_card.OptionSpec
+
+
+   .. py:property:: option_specs
+      :type: Iterable[ansys.dyna.core.lib.option_card.OptionSpec]
+
+
+      
+      Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(buf: TextIO, format: ansys.dyna.core.lib.format_type.format_type, comment: Optional[bool] = True) -> bool
+
+      
+      Writes the cards to `buf` using `format`.
+      Returns whether a superfluous newline is added
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

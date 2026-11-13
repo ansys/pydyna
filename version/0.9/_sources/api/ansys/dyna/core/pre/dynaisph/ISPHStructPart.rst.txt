@@ -1,0 +1,163 @@
+ansys.dyna.core.pre.dynaisph.ISPHStructPart
+===========================================
+
+.. py:class:: ansys.dyna.core.pre.dynaisph.ISPHStructPart(pid, couple_partset, space)
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Part`
+
+
+   
+   Generates and places ISPH elements on the surface of triangular shell elements.
+
+
+   :Parameters:
+
+       **pid** : :class:`python:int`
+           Part ID.
+
+       **couple_partset** : :obj:`PartSet`
+           Part or part set ID for the region of the mesh to place the ISPH elements on.
+
+       **space** : :class:`python:float`
+           Maximum space between ISPH elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: type
+      :value: 'ISPHSTRUCT'
+
+
+
+   .. py:attribute:: couple_partset
+
+
+   .. py:attribute:: space
+
+
+   .. py:attribute:: cslh
+      :value: 1.2
+
+
+
+   .. py:attribute:: hmin
+      :value: 0.2
+
+
+
+   .. py:attribute:: hmax
+      :value: 2.0
+
+
+
+   .. py:attribute:: sphini
+      :value: 0
+
+
+
+   .. py:method:: set_smoothing_length(initial, min, max, optional)
+
+      
+      Calculate the smoothing length of the particles.
+
+
+      :Parameters:
+
+          **Parameters**
+              ..
+
+          **----------**
+              ..
+
+          **initial** : :class:`python:float`
+              Constant for calculating the initial smoothing length of the particles.
+
+          **min** : :class:`python:float`
+              Scale factor for the minimum smoothing length.
+
+          **max** : :class:`python:float`
+              Scale factor for the maximum smoothing length.
+
+          **optional** : :class:`python:float`, :obj:`optional`
+              Initial smoothing length, which overrides the true smoothing length.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create_particles()
+
+      
+      Create ISPH elements on the surface of triangular shell elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_property()
+
+      
+      Set properties for the ISPH structural part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

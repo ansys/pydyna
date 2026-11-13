@@ -1,0 +1,13 @@
+ansys.dyna.core.keywords.keyword_classes.manual_keywords
+========================================================
+
+.. py:module:: ansys.dyna.core.keywords.keyword_classes.manual_keywords
+
+.. autoapi-nested-parse::
+
+   Module for manual keyword overrides.
+
+   ..
+       !! processed by numpydoc !!
+
+

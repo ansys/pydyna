@@ -1,0 +1,83 @@
+ansys.dyna.core.lib.validators.GloballyUniqueKeywordValidator
+=============================================================
+
+.. py:class:: ansys.dyna.core.lib.validators.GloballyUniqueKeywordValidator(severity: ValidationSeverity = ValidationSeverity.ERROR)
+
+   Bases: :py:obj:`Validator`
+
+
+   
+   Validator that checks for keywords that should appear at most once in a deck.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: get_name() -> str
+
+      
+      Get the name of this validator.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: validate(deck: ansys.dyna.core.lib.deck.Deck, result: ValidationResult) -> None
+
+      
+      Validate that globally unique keywords appear at most once.
+
+
+      :Parameters:
+
+          **deck** : :obj:`Deck`
+              The deck to validate.
+
+          **result** : :obj:`ValidationResult`
+              Result object to accumulate validation errors.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

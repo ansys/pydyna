@@ -1,0 +1,144 @@
+ansys.dyna.core.lib.card_position.CardPosition
+==============================================
+
+.. py:class:: ansys.dyna.core.lib.card_position.CardPosition
+
+   
+   Position of an option card set within a keyword's card sequence.
+
+   Specified as a URI string of the form ``"pre/N"`` or ``"post/N"``
+   where N is a positive integer used to order multiple option sets
+   within the same placement group.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   - ``"pre/2"``   -- placed before ``"pre/1"`` (further before main cards)
+   - ``"pre/1"``   -- placed immediately before main cards
+   - ``"main/2"``  -- inserted after the 3rd main card (0-based index 2)
+   - ``"post/1"``  -- placed immediately after all main cards
+   - ``"post/3"``  -- placed after ``"post/1"`` and ``"post/2"``
+
+   Legacy integer values are accepted for backward compatibility:
+   negative integers map to ``pre`` (e.g. ``-2`` → ``"pre/2"``),
+   positive integers map to ``post`` (e.g. ``1`` → ``"post/1"``).
+   There is no legacy integer form for ``main``.
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: placement
+      :type:  CardPlacement
+
+
+   .. py:attribute:: index
+      :type:  int
+
+
+   .. py:method:: from_str(s: str) -> CardPosition
+      :classmethod:
+
+
+      
+      Parse a URI string such as ``"pre/1"`` or ``"post/2"``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: from_int(n: int) -> CardPosition
+      :classmethod:
+
+
+      
+      Create from a legacy integer value (negative → pre, positive → post).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: parse(value: str | int) -> CardPosition
+      :classmethod:
+
+
+      
+      Accept either a URI string or a legacy integer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __lt__(other: CardPosition) -> bool
+
+
+   .. py:method:: __le__(other: CardPosition) -> bool
+
+
+   .. py:method:: __gt__(other: CardPosition) -> bool
+
+
+   .. py:method:: __ge__(other: CardPosition) -> bool
+
+
+   .. py:method:: __repr__() -> str
+
+
+   .. py:method:: __str__() -> str
+

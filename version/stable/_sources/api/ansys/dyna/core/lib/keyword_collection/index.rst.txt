@@ -1,0 +1,39 @@
+ansys.dyna.core.lib.keyword_collection
+======================================
+
+.. py:module:: ansys.dyna.core.lib.keyword_collection
+
+.. autoapi-nested-parse::
+
+   Provides a chainable collection wrapper for filtering keywords.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.keyword_collection.logger
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/keyword_collection/KeywordCollection
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.keyword_collection.KeywordCollection
+
+
+Module Contents
+---------------
+
+.. py:data:: logger
+

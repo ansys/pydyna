@@ -1,0 +1,79 @@
+ansys.dyna.core.lib.row_condition.RowCondition
+==============================================
+
+.. py:class:: ansys.dyna.core.lib.row_condition.RowCondition
+
+   
+   Condition deciding, row by row, whether a sub-card of a ``TableCardGroup`` has a data line.
+
+
+   :Parameters:
+
+       **fields** : :class:`python:tuple` :obj:`of` :class:`python:str`
+           Names of the fields the condition reads. They must belong to earlier sub-cards of the group,
+           because a reader only knows the values of the lines it has already read.
+
+       **evaluate_row** : :func:`python:callable`
+           Called with the values of ``fields`` of a single row, in order. Values may be missing
+           (see ``is_missing``). Returns whether the sub-card has a line in that row.
+
+       **evaluate_all** : :func:`python:callable`, :obj:`optional`
+           Called with a table holding at least the ``fields`` columns. Returns one boolean per row
+           and must agree with ``evaluate_row``. When omitted, ``evaluate_row`` is applied to each row.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: fields
+      :type:  Tuple[str, ...]
+
+
+   .. py:attribute:: evaluate_row
+      :type:  Callable[..., bool]
+
+
+   .. py:attribute:: evaluate_all
+      :type:  Optional[Callable[[pandas.DataFrame], Any]]
+      :value: None
+
+
+
+   .. py:method:: __post_init__()
+
+
+   .. py:method:: evaluate(table: pandas.DataFrame) -> numpy.ndarray
+
+      
+      Return one boolean per row of ``table``, ``True`` where the sub-card has a line.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

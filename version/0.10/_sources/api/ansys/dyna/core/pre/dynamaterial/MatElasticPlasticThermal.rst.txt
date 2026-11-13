@@ -1,0 +1,82 @@
+ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal
+=========================================================
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal(mass_density=0, temperatures=None, young_modulus=None, poisson_ratio=None, thermal_expansion=None, yield_stress=None)
+
+   Bases: :py:obj:`MatAdditional`
+
+
+   
+   Defines temperature-dependent material coefficients.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+      :value: 0
+
+
+
+   .. py:attribute:: ti
+      :value: None
+
+
+
+   .. py:attribute:: ei
+      :value: None
+
+
+
+   .. py:attribute:: pri
+      :value: None
+
+
+
+   .. py:attribute:: alphai
+      :value: None
+
+
+
+   .. py:attribute:: sigyi
+      :value: None
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create elastic plastic thermal material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

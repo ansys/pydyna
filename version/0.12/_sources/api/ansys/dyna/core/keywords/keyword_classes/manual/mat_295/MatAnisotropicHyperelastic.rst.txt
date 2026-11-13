@@ -1,0 +1,33 @@
+ansys.dyna.core.keywords.keyword_classes.manual.mat_295.MatAnisotropicHyperelastic
+==================================================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.mat_295.MatAnisotropicHyperelastic(**kwargs)
+
+   Bases: :py:obj:`Mat295`
+
+
+   
+   Alias for MAT_ANISOTROPIC_HYPERELASTIC keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: subkeyword
+      :value: 'ANISOTROPIC_HYPERELASTIC'
+
+

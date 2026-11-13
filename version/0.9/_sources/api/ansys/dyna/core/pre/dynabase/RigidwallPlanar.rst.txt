@@ -1,0 +1,107 @@
+ansys.dyna.core.pre.dynabase.RigidwallPlanar
+============================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.RigidwallPlanar(tail=Point(0, 0, 0), head=Point(0, 0, 0), coulomb_friction_coefficient=0.5)
+
+   Bases: :py:obj:`BaseObj`
+
+
+   
+   Defines planar rigid walls with either finite or infinite size.
+
+
+   :Parameters:
+
+       **tail** : :obj:`Point`
+           Coordinate of the tail of the normal vector.
+           The default is ``(0, 0, 0)``.
+
+       **head** : :obj:`Point`
+           Coordinate of the head of the normal vector.
+           The default is ``(0, 0, 0)``.
+
+       **coulomb_friction_coefficient** : :class:`python:float`, :obj:`optional`
+           Friction coefficieint in coulomb units. The default is ``0.5``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: tail
+
+
+   .. py:attribute:: head
+
+
+   .. py:attribute:: fric
+      :value: 0.5
+
+
+
+   .. py:attribute:: type
+      :value: 'rigidwall_planar'
+
+
+
+   .. py:method:: get_data() -> List
+
+      
+      Get the rigidwall data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create()
+
+      
+      Create planar rigid walls.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

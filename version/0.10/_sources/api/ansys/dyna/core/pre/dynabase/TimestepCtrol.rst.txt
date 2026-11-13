@@ -1,0 +1,38 @@
+ansys.dyna.core.pre.dynabase.TimestepCtrol
+==========================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.TimestepCtrol(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Timestep control options for analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: CONSTANT_TIMESTEP_SIZE
+      :value: 0
+
+
+
+   .. py:attribute:: AUTOMATICALLY_ADJUST_TIMESTEP_SIZE
+      :value: 1
+
+

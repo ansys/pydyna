@@ -1,0 +1,106 @@
+ansys.dyna.core.lib.option_card.OptionSpec
+==========================================
+
+.. py:class:: ansys.dyna.core.lib.option_card.OptionSpec(name: str, card_order: int, title_order: int)
+
+   
+   Represents the specification of an option card.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: name
+      :type: str
+
+
+      
+      Get the name of the option.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: card_order
+      :type: int
+
+
+      
+      Get the card order of the option.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: title_order
+      :type: int
+
+
+      
+      Get the title order of the option.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __repr__() -> str
+

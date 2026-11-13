@@ -1,0 +1,86 @@
+ansys.dyna.core.lib.deck_loader
+===============================
+
+.. py:module:: ansys.dyna.core.lib.deck_loader
+
+.. autoapi-nested-parse::
+
+   Module for loading decks.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/deck_loader/IterState
+   /api/ansys/dyna/core/lib/deck_loader/DeckLoaderResult
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.deck_loader.IterState
+   ansys.dyna.core.lib.deck_loader.DeckLoaderResult
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.deck_loader.load_deck
+   ansys.dyna.core.lib.deck_loader.load_deck_from_buffer
+
+
+Module Contents
+---------------
+
+.. py:function:: load_deck(deck: ansys.dyna.core.deck.Deck, text: str, context: Optional[ansys.dyna.core.lib.import_handler.ImportContext], import_handlers: List[ansys.dyna.core.lib.import_handler.ImportHandler]) -> DeckLoaderResult
+
+   
+   Load a deck from a text string.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: load_deck_from_buffer(deck: ansys.dyna.core.deck.Deck, buffer: TextIO, context: Optional[ansys.dyna.core.lib.import_handler.ImportContext], import_handlers: List[ansys.dyna.core.lib.import_handler.ImportHandler]) -> DeckLoaderResult
+
+   
+   Load a deck from a text buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

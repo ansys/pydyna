@@ -1,0 +1,76 @@
+ansys.dyna.core.pre.graphics.graphics
+=====================================
+
+.. py:module:: ansys.dyna.core.pre.graphics.graphics
+
+.. autoapi-nested-parse::
+
+   Module for graphics-related implementations.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.graphics.graphics.color_matrix
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/pre/graphics/graphics/DisplayMeshType
+   /api/ansys/dyna/core/pre/graphics/graphics/ColorByType
+   /api/ansys/dyna/core/pre/graphics/graphics/Picker
+   /api/ansys/dyna/core/pre/graphics/graphics/Graphics
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.graphics.graphics.DisplayMeshType
+   ansys.dyna.core.pre.graphics.graphics.ColorByType
+   ansys.dyna.core.pre.graphics.graphics.Picker
+   ansys.dyna.core.pre.graphics.graphics.Graphics
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.graphics.graphics.compute_distance
+
+
+Module Contents
+---------------
+
+.. py:data:: color_matrix
+
+.. py:function:: compute_distance(point1, point2)
+
+   
+   Compute the distance between two points.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

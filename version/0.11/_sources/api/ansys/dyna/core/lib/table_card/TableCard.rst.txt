@@ -1,0 +1,228 @@
+ansys.dyna.core.lib.table_card.TableCard
+========================================
+
+.. py:class:: ansys.dyna.core.lib.table_card.TableCard(fields: List[ansys.dyna.core.lib.card.Field], length_func, active_func: Optional[Callable] = None, name: str = None, format: ansys.dyna.core.lib.format_type.format_type = format_type.default, **kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.card.Card`
+
+
+   
+   A Card represents a single line of data in a keyword.
+
+   This implementation separates schema (shared) from values (per-instance)
+   for memory efficiency and faster loading of keywords with many cards.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: from_field_schemas(field_schemas: Tuple[ansys.dyna.core.lib.field_schema.FieldSchema, Ellipsis], length_func: Callable, active_func: Optional[Callable] = None, name: str = None, format: ansys.dyna.core.lib.format_type.format_type = format_type.default, **kwargs) -> TableCard
+      :classmethod:
+
+
+      
+      Create a TableCard from FieldSchema tuples.
+
+      This is the preferred way to create TableCard instances as it avoids
+      creating intermediate Field objects.
+
+      :Parameters:
+
+          **field_schemas** : :obj:`Tuple`\[:obj:`FieldSchema`, ...]
+              Tuple of FieldSchema objects defining the card structure.
+
+          **length_func** : :func:`python:callable`
+              Function returning the number of rows, or None for unbounded.
+
+          **active_func** : :func:`python:callable`, :obj:`optional`
+              Function returning bool to determine if card is active.
+
+          **name** : :class:`python:str`, :obj:`optional`
+              Name for table initialization from kwargs.
+
+          **format** : :obj:`format_type`, :obj:`optional`
+              The format type (default, standard, or long).
+
+
+
+      :Returns:
+
+          :obj:`TableCard`
+              A new TableCard instance.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: table
+      :type: pandas.DataFrame
+
+
+      
+      Get the table as a pandas DataFrame.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: format
+      :type: ansys.dyna.core.lib.format_type.format_type
+
+
+      
+      Format type of the table card.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: read(buf: TextIO, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet = None) -> None
+
+      
+      Read the table card content from a buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(format: Optional[ansys.dyna.core.lib.format_type.format_type] = None, buf: Optional[TextIO] = None, comment: Optional[bool] = True, retain_parameters: bool = False, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet = None, uri_prefix: str = None, **kwargs) -> str
+
+      
+      Write the table card to a string or buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: bounded
+      :type: bool
+
+
+      
+      Indicates whether the card is bounded.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __repr__() -> str
+
+      
+      Returns a console-friendly representation of the desired parameters for the card
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

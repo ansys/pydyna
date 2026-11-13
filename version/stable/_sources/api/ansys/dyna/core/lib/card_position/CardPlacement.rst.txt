@@ -1,0 +1,43 @@
+ansys.dyna.core.lib.card_position.CardPlacement
+===============================================
+
+.. py:class:: ansys.dyna.core.lib.card_position.CardPlacement(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Placement of an option card set relative to the keyword's main cards.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: PRE
+      :value: 'pre'
+
+
+
+   .. py:attribute:: MAIN
+      :value: 'main'
+
+
+
+   .. py:attribute:: POST
+      :value: 'post'
+
+

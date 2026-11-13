@@ -1,0 +1,7 @@
+ansys.dyna.core.lib.transforms.base_transform.Transform
+=======================================================
+
+.. py:class:: ansys.dyna.core.lib.transforms.base_transform.Transform(xform: ansys.dyna.core.keywords.IncludeTransform)
+
+   .. py:method:: transform(keyword) -> None
+

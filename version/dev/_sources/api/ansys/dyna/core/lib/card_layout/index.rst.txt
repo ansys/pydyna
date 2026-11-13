@@ -1,0 +1,226 @@
+ansys.dyna.core.lib.card_layout
+===============================
+
+.. py:module:: ansys.dyna.core.lib.card_layout
+
+.. autoapi-nested-parse::
+
+   Pure functions for assembling a keyword's card sequence.
+
+   Given a flat list of ``CardInterface`` objects (which may include
+   ``OptionCardSet`` entries) and an ``OptionsInterface`` that knows which
+   options are active, these functions compute the ordered card list used
+   for reading and writing keyword data.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.card_layout.get_non_option_cards
+   ansys.dyna.core.lib.card_layout.get_sorted_option_cards
+   ansys.dyna.core.lib.card_layout.get_post_options_with_no_title_order
+   ansys.dyna.core.lib.card_layout.get_active_options
+   ansys.dyna.core.lib.card_layout.get_pre_option_cards
+   ansys.dyna.core.lib.card_layout.get_post_option_cards
+   ansys.dyna.core.lib.card_layout.get_main_option_cards_by_index
+   ansys.dyna.core.lib.card_layout.get_all_cards
+
+
+Module Contents
+---------------
+
+.. py:function:: get_non_option_cards(cards: List[ansys.dyna.core.lib.card_interface.CardInterface]) -> List[ansys.dyna.core.lib.card_interface.CardInterface]
+
+   
+   Return cards that are not ``OptionCardSet`` entries.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_sorted_option_cards(cards: List[ansys.dyna.core.lib.card_interface.CardInterface]) -> List[ansys.dyna.core.lib.option_card.OptionCardSet]
+
+   
+   Return ``OptionCardSet`` entries sorted by position.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_post_options_with_no_title_order(cards: List[ansys.dyna.core.lib.card_interface.CardInterface]) -> List[ansys.dyna.core.lib.option_card.OptionCardSet]
+
+   
+   Return POST-placed option cards that have ``title_order == 0``.
+
+   These represent options whose presence is discovered at read time
+   (they don't appear in the keyword title line).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_active_options(cards: List[ansys.dyna.core.lib.card_interface.CardInterface], options_api: ansys.dyna.core.lib.option_card.OptionsInterface) -> List[ansys.dyna.core.lib.option_card.OptionCardSet]
+
+   
+   Return active option card sets, sorted by position.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_pre_option_cards(cards: List[ansys.dyna.core.lib.card_interface.CardInterface], options_api: ansys.dyna.core.lib.option_card.OptionsInterface) -> List[ansys.dyna.core.lib.card_interface.CardInterface]
+
+   
+   Return the inner cards of active PRE-placed option sets.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_post_option_cards(cards: List[ansys.dyna.core.lib.card_interface.CardInterface], options_api: ansys.dyna.core.lib.option_card.OptionsInterface) -> List[ansys.dyna.core.lib.card_interface.CardInterface]
+
+   
+   Return the inner cards of active POST-placed option sets.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_main_option_cards_by_index(cards: List[ansys.dyna.core.lib.card_interface.CardInterface], options_api: ansys.dyna.core.lib.option_card.OptionsInterface) -> Dict[int, List[ansys.dyna.core.lib.card_interface.CardInterface]]
+
+   
+   Return active MAIN option cards grouped by their insertion index.
+
+   The key *N* is the 0-based index of the non-option card **after
+   which** the option cards are inserted.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_all_cards(cards: List[ansys.dyna.core.lib.card_interface.CardInterface], options_api: ansys.dyna.core.lib.option_card.OptionsInterface) -> List[ansys.dyna.core.lib.card_interface.CardInterface]
+
+   
+   Assemble the full card sequence with active option cards interleaved.
+
+   Layout order: PRE options, then non-option cards with MAIN options
+   inserted at their designated indices, then POST options.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

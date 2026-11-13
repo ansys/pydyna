@@ -1,0 +1,82 @@
+ansys.dyna.core.pre.errors
+==========================
+
+.. py:module:: ansys.dyna.core.pre.errors
+
+.. autoapi-nested-parse::
+
+   Module containing PyDYNA-specific errors.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.errors.SIGINT_TRACKER
+   ansys.dyna.core.pre.errors.LOCKFILE_MSG
+
+
+Exceptions
+----------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/pre/errors/VersionError
+   /api/ansys/dyna/core/pre/errors/PydynaRuntimeError
+   /api/ansys/dyna/core/pre/errors/PydynaInvalidRoutineError
+   /api/ansys/dyna/core/pre/errors/LockFileException
+   /api/ansys/dyna/core/pre/errors/KwserverDidNotStart
+   /api/ansys/dyna/core/pre/errors/ValidationError
+   /api/ansys/dyna/core/pre/errors/RequiredFieldError
+   /api/ansys/dyna/core/pre/errors/DuplicateIDError
+   /api/ansys/dyna/core/pre/errors/DuplicateKeywordError
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.errors.VersionError
+   ansys.dyna.core.pre.errors.PydynaRuntimeError
+   ansys.dyna.core.pre.errors.PydynaInvalidRoutineError
+   ansys.dyna.core.pre.errors.LockFileException
+   ansys.dyna.core.pre.errors.KwserverDidNotStart
+   ansys.dyna.core.pre.errors.ValidationError
+   ansys.dyna.core.pre.errors.RequiredFieldError
+   ansys.dyna.core.pre.errors.DuplicateIDError
+   ansys.dyna.core.pre.errors.DuplicateKeywordError
+
+
+Module Contents
+---------------
+
+.. py:data:: SIGINT_TRACKER
+   :value: []
+
+
+.. py:data:: LOCKFILE_MSG
+   :value: Multiline-String
+
+   .. raw:: html
+
+      <details><summary>Show Value</summary>
+
+   .. code-block:: python
+
+      """
+      Either another Ansys job with the same job name is already running in this
+      directory or the lock file has not been deleted from an abnormally
+      terminated Ansys run.
+      
+      Disable this check by passing ``override=True``
+      
+      """
+
+   .. raw:: html
+
+      </details>
+
+
+

@@ -1,0 +1,79 @@
+ansys.dyna.core.pre.dynabase.Box
+================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.Box(xmin=0, xmax=0, ymin=0, ymax=0, zmin=0, zmax=0)
+
+   
+   Defines a box-shaped volume.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: xmin
+      :value: 0
+
+
+
+   .. py:attribute:: xmax
+      :value: 0
+
+
+
+   .. py:attribute:: ymin
+      :value: 0
+
+
+
+   .. py:attribute:: ymax
+      :value: 0
+
+
+
+   .. py:attribute:: zmin
+      :value: 0
+
+
+
+   .. py:attribute:: zmax
+      :value: 0
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create box.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

@@ -1,0 +1,161 @@
+ansys.dyna.core.lib.duplicate_card
+==================================
+
+.. py:module:: ansys.dyna.core.lib.duplicate_card
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.duplicate_card.CHECK_TYPE
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.duplicate_card.DuplicateCard
+
+
+Module Contents
+---------------
+
+.. py:data:: CHECK_TYPE
+   :value: True
+
+
+.. py:class:: DuplicateCard(fields: List[ansys.dyna.core.lib.card.Field], length_func, active_func=None, data=None, format=format_type.default)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.card.Card`
+
+
+   
+   Abstract base class for all the implementations of keyword cards.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: table
+
+
+   .. py:property:: format
+
+      
+      Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: read(buf: TextIO) -> None
+
+      
+      Reads the card data from an input text buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(format: Optional[ansys.dyna.core.lib.format_type.format_type] = None, buf: Optional[TextIO] = None, comment: Optional[bool] = True) -> str
+
+      
+      Renders the card in the dyna keyword format.
+      :param buf: Buffer to write to. If None, the output is returned as a string
+      :param format: format_type to use. Default to standard.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: bounded
+      :type: bool
+
+
+
+   .. py:method:: __repr__() -> str
+
+      
+      Returns a console-friendly representation of the desired parameters for the card
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

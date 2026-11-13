@@ -1,0 +1,2196 @@
+ansys.dyna.core.pre.dynamaterial
+================================
+
+.. py:module:: ansys.dyna.core.pre.dynamaterial
+
+.. autoapi-nested-parse::
+
+   Material API
+   =============
+
+   Module for creating a material.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynamaterial.Air
+   ansys.dyna.core.pre.dynamaterial.Liner
+   ansys.dyna.core.pre.dynamaterial.HighExplosive
+   ansys.dyna.core.pre.dynamaterial.Vacuum
+   ansys.dyna.core.pre.dynamaterial.MatNull
+   ansys.dyna.core.pre.dynamaterial.EMEOSTabulated1
+   ansys.dyna.core.pre.dynamaterial.EMMATTYPE
+   ansys.dyna.core.pre.dynamaterial.MatAdditional
+   ansys.dyna.core.pre.dynamaterial.MatElastic
+   ansys.dyna.core.pre.dynamaterial.MatPlasticKinematic
+   ansys.dyna.core.pre.dynamaterial.MatElasticPlasticThermal
+   ansys.dyna.core.pre.dynamaterial.MatRigid
+   ansys.dyna.core.pre.dynamaterial.MatShapeMemory
+   ansys.dyna.core.pre.dynamaterial.MatCrushableFoam
+   ansys.dyna.core.pre.dynamaterial.MatOgdenRubber
+   ansys.dyna.core.pre.dynamaterial.MatThermalIsotropic
+   ansys.dyna.core.pre.dynamaterial.MatThermalOrthotropic
+   ansys.dyna.core.pre.dynamaterial.MatRigidDiscrete
+   ansys.dyna.core.pre.dynamaterial.MatPiecewiseLinearPlasticity
+   ansys.dyna.core.pre.dynamaterial.MatModifiedPiecewiseLinearPlasticity
+   ansys.dyna.core.pre.dynamaterial.MatSpotweld
+   ansys.dyna.core.pre.dynamaterial.MatFabric
+   ansys.dyna.core.pre.dynamaterial.MatSpringNonlinearElastic
+   ansys.dyna.core.pre.dynamaterial.MatDamperViscous
+   ansys.dyna.core.pre.dynamaterial.MatDamperNonlinearViscous
+   ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleFluid
+   ansys.dyna.core.pre.dynamaterial.MatSPHIncompressibleStructure
+
+
+Module Contents
+---------------
+
+.. py:class:: Air(mass_density=0.00128, pressure_cutoff=-1e-09, initial_internal_energy=2.5331e-06, initial_relative_volume=1.0, equation_coefficient=[0, 0, 0, 0, 0.4, 0.4, 0])
+
+   
+   Defines an air material.
+
+
+   :Parameters:
+
+       **name** : :class:`python:str`
+           Material name.
+
+       **mass_density** : :class:`python:float`, :obj:`optional`
+           Mass density. The default is ``0.00128``.
+
+       **pressure_cutoff** : :class:`python:float`, :obj:`optional`
+           pressure cutoff. The default is ``1e-09``.
+
+       **initial_internal_energy** : :class:`python:float`, :obj:`optional`
+           Initial internal energy per unit reference volume.
+           The default is ``2.5331e-06``.
+
+       **initial_relative_volume** : :class:`python:float`, :obj:`optional`
+           Initial relative volume. The default is ``1.0``.
+
+       **equation_coefficient** : :class:`python:list`, :obj:`optional`
+           Six polynomial equation coefficient. The default is
+           ``[0, 0, 0, 0, 0.4, 0.4, 0])``.
+
+
+
+   :Returns:
+
+       :ref:`bool <python:bltin-boolean-values>`
+           ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: mass_density
+
+
+   .. py:attribute:: pressure_cutoff
+
+
+   .. py:attribute:: initial_internal_energy
+
+
+   .. py:attribute:: initial_relative_volume
+
+
+   .. py:attribute:: equation_coefficient
+
+
+   .. py:method:: create(stub)
+
+      
+      Create an air material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Liner(mass_density=8.96, shear_modulus=0.46, youngs_modulus=0, poissons_ratio=0.34, constants=[0.0009, 0.00292, 0.31, 0.025, 1.09], melt_temperature=1356, room_temperature=293, strain_rate=1e-06, specific_heat=3.83e-06, tensile_failure_stress=-0.012, spall_type=2, iteration_option=0, failure_parameters=[0.54, 4.89, 3.03, 0.014, 1.12], equation_constants=[0.394, 1.489, 0, 0, 2.02], volume_correction_coefficient=0.47, initial_internal_energy=0)
+
+   
+   Defines a liner material.
+
+
+   :Parameters:
+
+       **mass_density** : :class:`python:float`, :obj:`optional`
+           Mass density. The default is ``8.96``.
+
+       **shear_modulus** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **youngs_modulus** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **poissons_ratio** : :class:`python:float` :obj:`optional`
+           ..
+
+       **constants** : :class:`python:list`, :obj:`optional`
+           ..
+
+       **melt_temperature** : :class:`python:int`, :obj:`optional`
+           ..
+
+       **room_temperature** : :class:`python:int`, :obj:`optional`
+           ..
+
+       **strain_rate** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **specific_heat** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **tensile_failure_stress** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **spall_type, int, optional**
+           ..
+
+       **iteration_option ; int, optional**
+           ..
+
+       **failure_parameters** : :class:`python:list`, :obj:`optional`
+           ..
+
+       **equation_constants, list, optional**
+           ..
+
+       **volume_correction_coefficient** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **initial_internal_energy** : :class:`python:float`, :obj:`optional`
+           Initial internal energy per unit reference volume.
+           The default is ``0``.
+
+
+
+   :Returns:
+
+       :ref:`bool <python:bltin-boolean-values>`
+           ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: mass_density
+
+
+   .. py:attribute:: shear_modulus
+
+
+   .. py:attribute:: youngs_modulus
+
+
+   .. py:attribute:: poissons_ratio
+
+
+   .. py:attribute:: constants
+
+
+   .. py:attribute:: melt_temperature
+
+
+   .. py:attribute:: room_temperature
+
+
+   .. py:attribute:: strain_rate
+
+
+   .. py:attribute:: specific_heat
+
+
+   .. py:attribute:: tensile_failure_stress
+
+
+   .. py:attribute:: spall_type
+
+
+   .. py:attribute:: iteration_option
+
+
+   .. py:attribute:: failure_parameters
+
+
+   .. py:attribute:: equation_constants
+
+
+   .. py:attribute:: volume_correction_coefficient
+
+
+   .. py:attribute:: initial_internal_energy
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a liner material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: HighExplosive(mass_density=1.835, detonation_velocity=0.88, chapman_jouget_pressure=0.37, jwl_equation_parameters=[8.261, 0.1724, 4.55, 1.32, 0.38, 0.102, 1.0])
+
+   
+   Defines a high-explosive material.
+
+
+   :Parameters:
+
+       **mass_density** : :class:`python:float`, :obj:`optional`
+           Mass density. The default is ``8.96``.
+
+       **detonation_velocity** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **chapman_jouget_pressure** : :class:`python:float`, :obj:`optional`
+           ..
+
+       **jwl_equation_parameters** : :class:`python:list`, :obj:`optional`
+           ..
+
+
+
+   :Returns:
+
+       :ref:`bool <python:bltin-boolean-values>`
+           ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: mass_density
+
+
+   .. py:attribute:: detonation_velocity
+
+
+   .. py:attribute:: chapman_jouget_pressure
+
+
+   .. py:attribute:: jwl_equation_parameters
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a high-explosive material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Vacuum(estimated_material_density=1e-09)
+
+   
+   Defines a vacuum material.
+
+
+   :Parameters:
+
+       **estimated_material_density** : :class:`python:float`
+           Estimated material density. The default is ``1e-09``.
+
+
+
+   :Returns:
+
+       :ref:`bool <python:bltin-boolean-values>`
+           ``True`` when successful, ``False`` when failed.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: estimated_material_density
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a null material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatNull(mass_density=0, pressure_cutoff=0)
+
+   
+   Defines a null material.
+
+   Young's modulus and Poisson's ratio are used to set the contact stiffness.
+
+   :Parameters:
+
+       **mass_density** : :class:`python:float`, :obj:`optional`
+           Mass density. The default is ``0``.
+
+       **pressure_cutoff**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+
+
+   .. py:attribute:: pc
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a null material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: EMEOSTabulated1(curve=None)
+
+   
+   Defines electrical conductivity or permeability.
+
+
+   :Parameters:
+
+       **curve** : :obj:`Curve`
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: curve
+
+
+   .. py:method:: create(stub)
+
+      
+      Create an EM EOS tabulated1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: EMMATTYPE
+
+   Bases: :py:obj:`ansys.dyna.core.pre.dynabase.Enum`
+
+
+   
+   Generic enumeration.
+
+   Derive from this class to define new enumerations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: AIR_OR_VACUUM
+      :value: 0
+
+
+
+   .. py:attribute:: INSULATOR
+      :value: 1
+
+
+
+   .. py:attribute:: CONDUCTOR
+      :value: 2
+
+
+
+.. py:class:: MatAdditional
+
+   
+   Defines additional properties for a material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: em
+      :value: False
+
+
+
+   .. py:attribute:: em_mat_type
+      :value: 0
+
+
+
+   .. py:attribute:: em_eos
+      :value: None
+
+
+
+   .. py:attribute:: thermal_isotropic
+      :value: False
+
+
+
+   .. py:method:: set_electromagnetic_property(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None)
+
+      
+      Define the electromagnetic material type and properties
+      for a material whose permeability equals the free space permeability.
+
+
+      :Parameters:
+
+          **material_type**
+              ..
+
+          **initial_conductivity**
+              ..
+
+          **eos**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_em_permeability_equal(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None)
+
+      
+      Define the electromagnetic material type and properties
+      for a material whose permeability equals the free space permeability.
+
+
+      :Parameters:
+
+          **material_type**
+              ..
+
+          **initial_conductivity**
+              ..
+
+          **eos**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_em_permeability_different(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0, eos=None, murel=0)
+
+      
+      Define the electromagnetic material type and properties
+      for a material whose permeability equals the free space permeability.
+
+
+      :Parameters:
+
+          **material_type**
+              ..
+
+          **initial_conductivity**
+              ..
+
+          **eos**
+              ..
+
+          **murel**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_em_conducting_shells_3d(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0)
+
+      
+      Define the electromagnetic material type and properties
+      for a material whose permeability equals the free space permeability.
+
+
+      :Parameters:
+
+          **material_type**
+              ..
+
+          **initial_conductivity**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_em_resistive_heating_2d(material_type=EMMATTYPE.CONDUCTOR, initial_conductivity=0)
+
+      
+      Define the electromagnetic material type and properties
+      for a material whose permeability equals the free space permeability.
+
+
+      :Parameters:
+
+          **material_type**
+              ..
+
+          **initial_conductivity**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_em_randles_batmac(positive_current_collector_conductivity=0, negative_current_collector_conductivity=0)
+
+      
+      Define two conductivities per EM node for special applications (Randles Batmac).
+
+
+      :Parameters:
+
+          **positive_current_collector_conductivity** : :class:`python:float`
+              conductivities of the positive current collector materials
+
+          **negative_current_collector_conductivity** : :class:`python:float`
+              conductivities of the negative current collector materials
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_thermal_isotropic(density=0, generation_rate=0, generation_rate_multiplier=0, specific_heat=0, conductivity=0)
+
+      
+      Define isotropic thermal properties.
+
+
+      :Parameters:
+
+          **density**
+              ..
+
+          **generation_rate**
+              ..
+
+          **generation_rate_multiplier**
+              ..
+
+          **specific_heat**
+              ..
+
+          **conductivity**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: create(stub, matid)
+
+      
+      Define additional properties for a material.
+
+
+      :Parameters:
+
+          **matid**
+              Material ID.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatElastic(mass_density=0, young_modulus=0, poisson_ratio=0.3)
+
+   Bases: :py:obj:`MatAdditional`
+
+
+   
+   Defines an isotropic hypoelastic material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+
+
+   .. py:attribute:: e
+
+
+   .. py:attribute:: pr
+
+
+   .. py:method:: create(stub)
+
+      
+      Create an elastic material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatPlasticKinematic(mass_density=0, young_modulus=0, poisson_ratio=0.3, yield_stress=0, tangent_modulus=0, hardening=0)
+
+   
+   Define material of modelling isotropic and kinematic hardening plasticity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+
+
+   .. py:attribute:: e
+
+
+   .. py:attribute:: pr
+
+
+   .. py:attribute:: sigy
+
+
+   .. py:attribute:: etan
+
+
+   .. py:attribute:: beta
+
+
+   .. py:method:: create(stub)
+
+      
+      Create plastic kinematic material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatElasticPlasticThermal(mass_density=0, temperatures=None, young_modulus=None, poisson_ratio=None, thermal_expansion=None, yield_stress=None)
+
+   Bases: :py:obj:`MatAdditional`
+
+
+   
+   Defines temperature-dependent material coefficients.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+
+
+   .. py:attribute:: ti
+
+
+   .. py:attribute:: ei
+
+
+   .. py:attribute:: pri
+
+
+   .. py:attribute:: alphai
+
+
+   .. py:attribute:: sigyi
+
+
+   .. py:method:: create(stub)
+
+      
+      Create elastic plastic thermal material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatRigid(mass_density=0, young_modulus=0, poisson_ratio=0.3, center_of_mass_constraint=0, translational_constraint=0, rotational_constraint=0)
+
+   Bases: :py:obj:`MatAdditional`
+
+
+   
+   Defines a rigid material.
+
+   Parts made from a rigid material are considered to belong to a rigid body.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+
+
+   .. py:attribute:: e
+
+
+   .. py:attribute:: pr
+
+
+   .. py:attribute:: cmo
+
+
+   .. py:attribute:: con1
+
+
+   .. py:attribute:: con2
+
+
+   .. py:method:: create(stub)
+
+      
+      Create rigid material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatShapeMemory(mass_density=0, young_modulus=0, poisson_ratio=0.3, effective_stress=None, forward_phase_transformation_start=None, forward_phase_transformation_final=None, reverse_phase_transformation_start=None, reverse_phase_transformation_final=None, recoverable_strain=0)
+
+   
+   Describe the superelastic response present in shape-memory alloys,
+   the peculiar material ability to undergo large deformations
+   with a full recovery in loading-unloading cycles.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+
+
+   .. py:attribute:: e
+
+
+   .. py:attribute:: pr
+
+
+   .. py:attribute:: lcss
+
+
+   .. py:attribute:: params
+
+
+   .. py:method:: create(stub)
+
+      
+      Create shape memory material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatCrushableFoam(mass_density=0, young_modulus=0, poisson_ratio=0.3, yield_stress_curve=None, tensile_stress_cutoff=0)
+
+   Bases: :py:obj:`MatAdditional`
+
+
+   
+   Define material of modelling crushable foam.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+
+
+   .. py:attribute:: e
+
+
+   .. py:attribute:: pr
+
+
+   .. py:attribute:: lcid
+
+
+   .. py:attribute:: tsl
+
+
+   .. py:method:: create(stub)
+
+      
+      Create crushable foam material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatOgdenRubber(mass_density=0, poisson_ratio=0.3, limit_stress=0, shear_modulus=None, exponent=None)
+
+   
+   Provides the Ogden rubber model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+
+
+   .. py:attribute:: pr
+
+
+   .. py:attribute:: sigf
+
+
+   .. py:attribute:: mu
+
+
+   .. py:attribute:: alpha
+
+
+   .. py:method:: create(stub)
+
+      
+      Create ogden rubber material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatThermalIsotropic(density=0, generation_rate=0, generation_rate_multiplier=0, specific_heat=0, conductivity=0)
+
+   
+   Defines isotropic thermal properties.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: tro
+
+
+   .. py:attribute:: tgrlc
+
+
+   .. py:attribute:: tgmult
+
+
+   .. py:attribute:: hc
+
+
+   .. py:attribute:: tc
+
+
+   .. py:method:: create(stub)
+
+      
+      Create isotropic thermal material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatThermalOrthotropic(specific_heat=0, conductivity_x=0, conductivity_y=0, conductivity_z=0)
+
+   
+   Defines orthotropic thermal properties.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: hc
+
+
+   .. py:attribute:: k1
+
+
+   .. py:attribute:: k2
+
+
+   .. py:attribute:: k3
+
+
+   .. py:method:: create(stub)
+
+      
+      Create orthotropic thermal material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatRigidDiscrete(mass_density=0, young_modulus=0, poisson_ratio=0.3)
+
+   
+   Defines a rigid material for shells or solids.
+
+
+   :Parameters:
+
+       **mass_density**
+           ..
+
+       **young_modulus**
+           ..
+
+       **poisson_ratio**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+
+
+   .. py:attribute:: e
+
+
+   .. py:attribute:: pr
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a rigid material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatPiecewiseLinearPlasticity(mass_density=0, young_modulus=0, poisson_ratio=0.3, yield_stress=0, tangent_modulus=0)
+
+   
+   Defines an elasto-plastic material with an arbitrary stress.
+
+   The arbitrary stress is defined as a function of strain curve
+   that can also have an arbitrary strain rate dependency.
+
+   :Parameters:
+
+       **mass_density**
+           ..
+
+       **young_modulus**
+           ..
+
+       **poisson_ratio**
+           ..
+
+       **yield_stress**
+           ..
+
+       **tangent_modulus**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+
+
+   .. py:attribute:: e
+
+
+   .. py:attribute:: pr
+
+
+   .. py:attribute:: sigy
+
+
+   .. py:attribute:: etan
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a piecewise linear plasticity material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatModifiedPiecewiseLinearPlasticity(mass_density=0, young_modulus=0, poisson_ratio=0, yield_stress=0, tangent_modulus=0, plastic_strain_to_failure=0, integration_points_number=0)
+
+   
+   Defines an elasto-plastic material supporting an arbitrary stress.
+
+   The arbitrary stress is defined as a function of strain curve and arbitrary
+   strain rate dependency.
+
+   :Parameters:
+
+       **mass_density**
+           ..
+
+       **young_modulus**
+           ..
+
+       **poisson_ratio**
+           ..
+
+       **yield_stress**
+           ..
+
+       **tangent_modulus**
+           ..
+
+       **plastic_strain_to_failure**
+           ..
+
+       **integration_points_number**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+
+
+   .. py:attribute:: e
+
+
+   .. py:attribute:: pr
+
+
+   .. py:attribute:: sigy
+
+
+   .. py:attribute:: etan
+
+
+   .. py:attribute:: fail
+
+
+   .. py:attribute:: numint
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a modified piecewise linear plasticity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatSpotweld(mass_density=0, young_modulus=0, poisson_ratio=0, yield_stress=0, plastic_hardening_modulus=0, axial_force_resultant_at_failure=0, force_resultant_nrs_at_failure=0, force_resultant_nrt_at_failure=0)
+
+   
+   Defines a spotweld material.
+
+
+   :Parameters:
+
+       **mass_density**
+           ..
+
+       **young_modulus**
+           ..
+
+       **poisson_ratio**
+           ..
+
+       **yield_stress**
+           ..
+
+       **plastic_hardening_modulus**
+           ..
+
+       **axial_force_resultant_at_failure**
+           ..
+
+       **force_resultant_nrs_at_failure**
+           ..
+
+       **force_resultant_nrt_at_failure**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+
+
+   .. py:attribute:: e
+
+
+   .. py:attribute:: pr
+
+
+   .. py:attribute:: sigy
+
+
+   .. py:attribute:: eh
+
+
+   .. py:attribute:: nrr
+
+
+   .. py:attribute:: nrs
+
+
+   .. py:attribute:: nrt
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a spotweld material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatFabric(mass_density=0, young_modulus_longitudinal_direction=0, young_modulus_transverse_direction=0, minor_poisson_ratio=0.35, major_poisson_ratio=0.35, shear_modulus=0)
+
+   
+   Define an airbag material.
+
+
+   :Parameters:
+
+       **mass_density** : :class:`python:float`, :obj:`optional`
+           Mass density. The default is ``0``.
+
+       **young_modulus_longitudinal_direction** : :class:`python:float`, :obj:`optional`
+           Young's modulus-longitudinal direction. The default is ``0``.
+
+       **young_modulus_transverse_direction** : :class:`python:float`, :obj:`optional`
+           Young's modulus-transverse direction. The default is ``0``.
+
+       **minor_poisson_ratio** : :class:`python:float`, :obj:`optional`
+           Minor Poisson's ratio ba direction. The default is ``0.35``.
+
+       **major_poisson_ratio** : :class:`python:float`, :obj:`optional`
+           Major Poisson's ratio ab direction. The default is ``0.35``.
+
+       **shear_modulus** : :class:`python:float`, :obj:`optional`
+           Shear modulus in the ab direction. The default is ``0``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+
+
+   .. py:attribute:: ea
+
+
+   .. py:attribute:: eb
+
+
+   .. py:attribute:: prba
+
+
+   .. py:attribute:: prab
+
+
+   .. py:attribute:: gab
+
+
+   .. py:method:: create(stub)
+
+      
+      Create an airbag material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatSpringNonlinearElastic(curve)
+
+   
+   Provides a nonlinear elastic translational and rotational spring with an arbitrary force.
+
+   The arbitrary force is defined as a function of displacement. The moment is defined
+   as a function of rotation.
+
+   :Parameters:
+
+       **curve** : :obj:`Curve`
+           Load curve describing force as a function of displacement or moment as a function of rotation relationship.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: curve
+
+
+   .. py:method:: create(stub)
+
+      
+      Create material spring nonlinear elastic.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatDamperViscous(damping_constant=0)
+
+   
+   Provides a linear translational or rotational damper located between two nodes.
+
+
+   :Parameters:
+
+       **damping_constant**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: dc
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a material damper viscous.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatDamperNonlinearViscous(curve)
+
+   
+   Provides a viscous translational damper with an arbitrary force.
+
+   The arbitrary force is defined as a function of velocity dependency or a rotational
+   damper with an arbitrary moment as a function of rotational velocity dependency.
+
+   :Parameters:
+
+       **curve** : :obj:`Curve`
+           Load curve defining force as a function of rate-of-displacement
+           relationship or a moment as a function of rate-of-rotation relationship.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: curve
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a material damper nonlinear viscous.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatSPHIncompressibleFluid(mass_density=0, dynamic_viscosity=0, tension_coefficient1=0, tension_coefficient2=0)
+
+   
+   Defines an ISPH (incompressible smooth particle hyrodynamics) fluid material.
+
+
+   :Parameters:
+
+       **mass_density** : :class:`python:float`, :obj:`optional`
+           Mass density. The default is ``0``.
+
+       **dynamic_viscosity**
+           ..
+
+       **tension_coefficient1**
+           ..
+
+       **tension_coefficient2**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+
+
+   .. py:attribute:: mu
+
+
+   .. py:attribute:: gamma1
+
+
+   .. py:attribute:: gamma2
+
+
+   .. py:method:: create(stub)
+
+      
+      Create an ISPH fluid material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: MatSPHIncompressibleStructure(mass_density=0, adhesion_coefficient=0, roughness_coefficient=0, adhesion_scaling_coefficient=0)
+
+   
+   Defines an ISPH structure material.
+
+
+   :Parameters:
+
+       **mass_density** : :class:`python:float`, :obj:`optional`
+           Mass density. The default is ``0``.
+
+       **adhension_coefficient**
+           ..
+
+       **roughness_coefficient**
+           ..
+
+       **adhesion_scaling_coefficient**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+
+
+   .. py:attribute:: beta
+
+
+   .. py:attribute:: rough
+
+
+   .. py:attribute:: adh
+
+
+   .. py:method:: create(stub)
+
+      
+      Create an ISPH structure material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

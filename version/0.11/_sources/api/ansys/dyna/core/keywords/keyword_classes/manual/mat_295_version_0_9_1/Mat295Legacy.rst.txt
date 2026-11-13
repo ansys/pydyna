@@ -1,0 +1,2301 @@
+ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy
+==================================================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1.Mat295Legacy(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.keyword_base.KeywordBase`
+
+
+   
+   Legacy DYNA MAT_295 keyword implementation from pydyna v0.9.1.
+
+   .. deprecated:: 0.10.0
+       Use :class:`~ansys.dyna.core.keywords.Mat295` instead.
+       This legacy version uses TableCardGroup/DataFrame API which does not support multiple fiber families.
+       The new version uses CardSet API with proper support for mixed fiber types.
+
+   To use this legacy class when loading decks:
+
+   .. code-block:: python
+
+       from ansys.dyna.core.lib.deck import Deck
+       from ansys.dyna.core.lib.import_handler import ImportContext
+       from ansys.dyna.core.keywords.keyword_classes.manual.mat_295_version_0_9_1 import (
+           Mat295Legacy,
+           MatAnisotropicHyperelasticLegacy,
+       )
+
+       deck = Deck()
+       context = ImportContext(
+           deck=deck,
+           keyword_overrides={
+               "*MAT_ANISOTROPIC_HYPERELASTIC": MatAnisotropicHyperelasticLegacy,
+               "*MAT_295": Mat295Legacy,
+           },
+       )
+       deck.loads(data, context=context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: keyword
+      :value: 'MAT'
+
+
+
+   .. py:attribute:: subkeyword
+      :value: '295'
+
+
+
+   .. py:attribute:: option_specs
+
+      
+      Gets all option specs for this keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: before_read(buf: TextIO) -> None
+
+      
+      Peek into the buffer before reading to detect optional modules.
+
+      This method scans the keyword content to detect ANISO and ACTIVE modules,
+      setting the appropriate type flags so the conditional cards become active.
+
+      Note: This implementation sets ftype globally, meaning all fiber families
+      will use the same fiber model type. This is a known limitation of this
+      legacy implementation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: ftype
+      :type: Optional[int]
+
+
+      
+      Fiber model type (global for all fiber families in this legacy implementation).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: mid
+      :type: Optional[int]
+
+
+      
+      Get or set the Material identification.  A unique number or label must be specified.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: rho
+      :type: Optional[float]
+
+
+      
+      Get or set the Mass density.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: aopt
+      :type: Optional[float]
+
+
+      
+      Get or set the Material axes option (see *MAT_002 for a more complete description):
+      EQ.0.0: Locally orthotropic with material axes determined by element nodes.The a - direction is from node 1 to node 2 of the element.The b - direction is orthogonal to the a - direction and is in the plane formed by nodes 1, 2, and 4. For shells only, the material axes are then rotated about the normal vector to the surface of the shell by the angle BETA.
+      EQ.1.0 : Locally orthotropic with material axes determined by a point, P, in space and the global location of the element center; this is the a - direction.This option is for solid elements only.
+      EQ.2.0: Globally orthotropic with material axes determined by vectors a and d input below, as with* DEFINE_COORDINATE_VECTOR
+      EQ.3.0 : Locally orthotropic material axes determined by a vector v and the normal vector to the plane of the element.The plane of a solid element is the midsurface between the inner surface and outer surface defined by the first four nodes and the last four nodes of the connectivity of the element, respectively.Thus, for solid elements, AOPT = 3 is only available for hexahedrons.a is determined by taking the cross product of v with the normal vector, b is determined by taking the cross product of the normal vector with a, and c is the normal vector.Then a and b are rotated about c by an angle BETA.BETA may be set in the keyword input for the element or in the input for this keyword.Note that for solids, the material axes may be switched depending on the choice of MACF.The switch may occur before or after applying BETA depending on MACF.
+      EQ.4.0 : Locally orthotropic in a cylindrical coordinate system with the material axes determined by a vector v, and an originating point, P, which define the centerline axis.This option is for solid elements only.
+      LT.0.0 : | AOPT | is a coordinate system ID(see * DEFINE_COORDINATE_OPTION).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: isotropic_title
+      :type: str
+
+
+      
+      Get or set the Module title.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: itype
+      :type: Optional[int]
+
+
+      
+      Get or set the Type of isotropic model (see remarks 1 and 2):
+      EQ.-1/+1:       compressible/nearly-incompressible Ogden [12] (see notes 1-3)
+      EQ.-2:  Yeoh [13]
+      EQ.-3/+3:       compressible/nearly-incompressible Holzapfel-Ogden [1], [7].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: beta
+      :type: Optional[float]
+
+
+      
+      Get or set the Volumetric response function coefficient.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: nu
+      :type: Optional[float]
+
+
+      
+      Get or set the Poisson's ratio (see remark 3).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: mu1
+      :type: Optional[float]
+
+
+      
+      Get or set the Ogden moduli, with i = 1,…,8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: mu2
+      :type: Optional[float]
+
+
+      
+      Get or set the Ogden moduli, with i = 1,…,8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: mu3
+      :type: Optional[float]
+
+
+      
+      Get or set the Ogden moduli, with i = 1,…,8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: mu4
+      :type: Optional[float]
+
+
+      
+      Get or set the Ogden moduli, with i = 1,…,8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: mu5
+      :type: Optional[float]
+
+
+      
+      Get or set the Ogden moduli, with i = 1,…,8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: mu6
+      :type: Optional[float]
+
+
+      
+      Get or set the Ogden moduli, with i = 1,…,8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: mu7
+      :type: Optional[float]
+
+
+      
+      Get or set the Ogden moduli, with i = 1,…,8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: mu8
+      :type: Optional[float]
+
+
+      
+      Get or set the Ogden moduli, with i = 1,…,8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: alpha1
+      :type: Optional[float]
+
+
+      
+      Get or set the Ogden constants, with i = 1,…,8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: alpha2
+      :type: Optional[float]
+
+
+      
+      Get or set the Ogden constants, with i = 1,…,8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: alpha3
+      :type: Optional[float]
+
+
+      
+      Get or set the Ogden constants, with i = 1,…,8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: alpha4
+      :type: Optional[float]
+
+
+      
+      Get or set the Ogden constants, with i = 1,…,8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: alpha5
+      :type: Optional[float]
+
+
+      
+      Get or set the Ogden constants, with i = 1,…,8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: alpha6
+      :type: Optional[float]
+
+
+      
+      Get or set the Ogden constants, with i = 1,…,8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: alpha7
+      :type: Optional[float]
+
+
+      
+      Get or set the Ogden constants, with i = 1,…,8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: alpha8
+      :type: Optional[float]
+
+
+      
+      Get or set the Ogden constants, with i = 1,…,8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: c1
+      :type: Optional[float]
+
+
+      
+      Get or set the Yeoh moduli, with i = 1,2,3.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: c2
+      :type: Optional[float]
+
+
+      
+      Get or set the Yeoh moduli, with i = 1,2,3.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: c3
+      :type: Optional[float]
+
+
+      
+      Get or set the Yeoh moduli, with i = 1,2,3.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: k1
+      :type: Optional[float]
+
+
+      
+      Get or set the Holzapfel-Ogden modulus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: k2
+      :type: Optional[float]
+
+
+      
+      Get or set the Holzapfel-Ogden constant.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: anisotropic_title
+      :type: str
+
+
+      
+      Get or set the Module title.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: atype
+      :type: Optional[int]
+
+
+      
+      Get or set the Type of anisotropic model:
+      EQ.-1/+1:       general structure tensor-based, see Holzapfel et al. [8] (see remark 4 and note 4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: intype
+      :type: Optional[int]
+
+
+      
+      Get or set the Type of interaction between the fiber families (see remarks 5 and 6):
+      EQ.0:   none
+      EQ.1:   Holzapfel-Ogden [1], [5].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: nf
+      :type: Optional[int]
+
+
+      
+      Get or set the Number of fiber families (see remark 4).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: anisotropic_settings
+      :type: pandas.DataFrame
+
+
+      
+      Gets the full table of anisotropic_settings.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: coupling_k1
+      :type: Optional[float]
+
+
+      
+      Get or set the Coupling modulus between the fiber and sheet directions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: coupling_k2
+      :type: Optional[float]
+
+
+      
+      Get or set the Coupling constant between the fiber and sheet directions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: active_title
+      :type: str
+
+
+      
+      Get or set the Module title.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: actype
+      :type: Optional[int]
+
+
+      
+      Get or set the Type of active model:
+      EQ.1:   Guccione-Waldman-McCulloch [4]
+      EQ.2:   Guccione-Waldman-McCulloch [4] and Hunter-Nash-Sands [9]
+      EQ.3:   Hunter-Nash-Sands       [9]
+      EQ.4:   Hunter-Nash-Sands [9] and Hunter-McCulloch-ter Keurs [10].
+      EQ.5: Martins-Pato-Pires [14]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: acdir
+      :type: int
+
+
+      
+      Get or set the Direction of active tension: GT.0:       Active tension develops along the mean orientation of the ACDIRth fiber family.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: acid
+      :type: Optional[int]
+
+
+      
+      Get or set the Activation curve ID (takes priority over T0 for ACTYPE = 1, 2, 3, or 4 when defined, see Remark 8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: acthr
+      :type: float
+
+
+      
+      Get or set the (De/re)activation threshold (see Remark 8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: sf
+      :type: float
+
+
+      
+      Get or set the Active stress scaling factor in the fiber direction (see Remark 9)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: ss
+      :type: float
+
+
+      
+      Get or set the Active stress scaling factor in the transverse sheet direction (see Remark 9)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: sn
+      :type: float
+
+
+      
+      Get or set the Active stress scaling factor in the transverse normal direction (see Remark 9)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: t0
+      :type: Optional[float]
+
+
+      
+      Get or set the Starting time of active stress development.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: ca2ion
+      :type: Optional[float]
+
+
+      
+      Get or set the Intercellular calcium ion concentration
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: ca2ionm
+      :type: Optional[float]
+
+
+      
+      Get or set the Maximum intercellular calcium ion concentration.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: n
+      :type: Optional[float]
+
+
+      
+      Get or set the Hill coefficient.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: taumax
+      :type: Optional[float]
+
+
+      
+      Get or set the Peak isometric tension under maximum activation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: stf
+      :type: Optional[float]
+
+
+      
+      Get or set the Transverse fiber stress scaling factor.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: b
+      :type: Optional[float]
+
+
+      
+      Get or set the Shape coefficient.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: l0
+      :type: Optional[float]
+
+
+      
+      Get or set the Sarcomere length with no active tension.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: l
+      :type: Optional[float]
+
+
+      
+      Get or set the Reference (stress-free) sarcomere length.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: dtmax
+      :type: Optional[float]
+
+
+      
+      Get or set the Time to peak tension.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: mr
+      :type: Optional[float]
+
+
+      
+      Get or set the Slope of linear relaxation versus sarcomere length relation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: tr
+      :type: Optional[float]
+
+
+      
+      Get or set the Time intercept of linear relaxation versus sarcomere length relation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: eta
+      :type: Optional[float]
+
+
+      
+      Get or set the Scaling parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: ca2ion50
+      :type: Optional[float]
+
+
+      
+      Get or set the Intercellular calcium ion concentration at half of peak isometric tension.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: sigmax
+      :type: Optional[float]
+
+
+      
+      Get or set the Peak isometric tension under maximum activation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: f
+      :type: Optional[float]
+
+
+      
+      Get or set the Transverse fiber stress scaling factor.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: ca2ionmax
+      :type: Optional[float]
+
+
+      
+      Get or set the Maximum intercellular calcium ion concentration.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: ca2ion0
+      :type: Optional[float]
+
+
+      
+      Get or set the Intercellular calcium ion concentration at rest.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: tca
+      :type: Optional[float]
+
+
+      
+      Get or set the Shape coefficient.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: fseid
+      :type: Optional[int]
+
+
+      
+      Get or set the Serial stress function ID
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: flid
+      :type: Optional[int]
+
+
+      
+      Get or set the Normalized force-contractile stretch curve ID
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: fvid
+      :type: Optional[int]
+
+
+      
+      Get or set the Normalized force-contractile stretch rate curve ID
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: alphaid
+      :type: Optional[int]
+
+
+      
+      Get or set the Activation curve ID
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: xp
+      :type: Optional[float]
+
+
+      
+      Get or set the Coordinates of point  for AOPT = 1 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: yp
+      :type: Optional[float]
+
+
+      
+      Get or set the Coordinates of point  for AOPT = 1 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: zp
+      :type: Optional[float]
+
+
+      
+      Get or set the Coordinates of point  for AOPT = 1 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: a1
+      :type: Optional[float]
+
+
+      
+      Get or set the Components of vector  for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: a2
+      :type: Optional[float]
+
+
+      
+      Get or set the Components of vector  for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: a3
+      :type: Optional[float]
+
+
+      
+      Get or set the Components of vector  for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: macf
+      :type: int
+
+
+      
+      Get or set the Material axes change flag for brick elements:
+      EQ.1:   no change (default)
+      EQ.2:   switch material axes a and b
+      EQ.3:   switch material axes a and c
+      EQ.4:   switch material axes b and c.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: v1
+      :type: Optional[float]
+
+
+      
+      Get or set the Components of vector  for AOPT = 3 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: v2
+      :type: Optional[float]
+
+
+      
+      Get or set the Components of vector  for AOPT = 3 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: v3
+      :type: Optional[float]
+
+
+      
+      Get or set the Components of vector  for AOPT = 3 and 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: d1
+      :type: Optional[float]
+
+
+      
+      Get or set the Components of vector  for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: d2
+      :type: Optional[float]
+
+
+      
+      Get or set the Components of vector  for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: d3
+      :type: Optional[float]
+
+
+      
+      Get or set the Components of vector  for AOPT = 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: material_angle_beta
+      :type: Optional[float]
+
+
+      
+      Get or set the Material angle in degrees for AOPT = 0 (shells and thick shells only) and AOPT = 3 (all element types).
+      This angle may be overridden on the element card;
+      see *ELEMENT_SHELL_BETA, *ELEMENT_TSHELL_BETA, and *ELEMENT_SOLID_ORTHO.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: ref
+      :type: Optional[float]
+
+
+      
+      Get or set the Use reference geometry to initialize the stress tensor. The reference geometry is defined by the keyword:
+      *INITIAL_FOAM_REFERENCE_GEOMETRY.
+      EQ.0.0: off
+      EQ.1.0: on.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: title
+      :type: Optional[str]
+
+
+      
+      Get or set the Additional title line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

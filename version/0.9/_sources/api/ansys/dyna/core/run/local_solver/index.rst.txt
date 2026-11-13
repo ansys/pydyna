@@ -1,0 +1,102 @@
+ansys.dyna.core.run.local_solver
+================================
+
+.. py:module:: ansys.dyna.core.run.local_solver
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.run.local_solver.HAS_DOCKER
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.run.local_solver.run_dyna
+
+
+Module Contents
+---------------
+
+.. py:data:: HAS_DOCKER
+   :value: True
+
+
+.. py:function:: run_dyna(input: Union[str, object], **kwargs) -> str
+
+   
+   Run the Ls-Dyna solver with the given input file.
+
+
+   :Parameters:
+
+       **input** : :class:`python:str` or :obj:`object`
+           Either the path to a dyna keyword file or an instance of
+           ``ansys.dyna.keywords.Deck``.
+
+       **\*\*kwargs** : :class:`python:dict`
+           mpi_option : int
+               The mpi option to use. Choose from the values defined in ``MpiOption``.
+               Defaults to MpiOption.SMP.
+           precision : int
+               Floating point precision. Choose from the values defined in ``Precision``.
+               Defaults to Precision.DOUBLE.
+           version : str
+               Version of Ansys Unified installed to use.
+               Defaults to: TODO (find the latest one?).
+           executable : str
+               Optional and Linux-Only: The name of the DYNA solver executable.
+               Default is s based on the value of the ``mpi_option`` argument.
+               On linux: it can be the full path.
+               Also on linux, ansys-tools-path can be used to save a custom location of
+               a dyna executable so that it doesn't need to be set here each time.
+           ncpu : int
+               Number of cpus.
+               Defaults to 1.
+           memory : int
+               Amount of memory units, as defined by `memory_unit` for DYNA to use.
+               Defaults to 20.
+           memory_unit : int
+               Memory unit.  Choose from the values defined in ``MemoryUnit``.
+               Defaults to MemoryUnit.MB.
+           working_directory : str
+               Working directory.
+               If the `input` parameter is a path to the input file,
+               defaults to the same folder as that file.  Otherwise, the job is run
+               in a new folder under $TMP/ansys/pydyna/jobs.
+           container : str
+               DockerContainer to run LS-DYNA in.
+           container_env : dict()
+               Environment variables to pass into the docker container.
+           stream : bool
+               Currently only affects runs using the `container` option.
+               If True, the stdout of solver is streamed to python's stdout during the solve.
+               If False, the solver stdout is printed once after the container exits.
+               Defaults to True.
+
+
+
+   :Returns:
+
+       **result** : :class:`python:str`
+           The working directory where the solver is launched.
+           If `stream` is `False` and `container` is set, returns the stdout of the run
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

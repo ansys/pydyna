@@ -1,0 +1,66 @@
+ansys.dyna.core.pre.dynabase.NodeSetBox
+=======================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.NodeSetBox(boxes=[])
+
+   Bases: :py:obj:`BaseSet`
+
+
+   
+   include the nodes inside boxes.
+
+
+   :Parameters:
+
+       **boxes** : :class:`python:list`
+           A list of BOX.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: boxes
+      :value: []
+
+
+
+   .. py:attribute:: type
+      :value: 'NODESETBOX'
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a node set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

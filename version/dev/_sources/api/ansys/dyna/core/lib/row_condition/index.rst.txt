@@ -1,0 +1,65 @@
+ansys.dyna.core.lib.row_condition
+=================================
+
+.. py:module:: ansys.dyna.core.lib.row_condition
+
+.. autoapi-nested-parse::
+
+   Per-row conditions for the sub-cards of a ``TableCardGroup``.
+
+   Each row of a ``TableCardGroup`` is written as one data line per sub-card. A row
+   condition makes a sub-card's line depend on the row's own values, for example the
+   THIC5-THIC8 line of ``*ELEMENT_SHELL_THICKNESS``, which only elements with mid-side
+   nodes have.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/row_condition/RowCondition
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.row_condition.RowCondition
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.row_condition.is_missing
+
+
+Module Contents
+---------------
+
+.. py:function:: is_missing(value: Any) -> bool
+
+   
+   Return whether a field value is unset: ``None``, ``pd.NA`` or NaN.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

@@ -1,0 +1,46 @@
+
+
+.. _sphx_glr_examples_Implicit:
+
+Implicit examples
+~~~~~~~~~~~~~~~~~~
+
+These examples show how to create and use implicit models.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Implicit model">
+
+.. only:: html
+
+  .. image:: /examples/Implicit/images/thumb/sphx_glr_camry_rc_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_Implicit_camry_rc.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Implicit model</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/Implicit/camry_rc
+

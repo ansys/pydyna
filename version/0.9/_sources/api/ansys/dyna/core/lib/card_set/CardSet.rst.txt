@@ -1,0 +1,168 @@
+ansys.dyna.core.lib.card_set.CardSet
+====================================
+
+.. py:class:: ansys.dyna.core.lib.card_set.CardSet(set_type: type, length_func: Callable = None, active_func: Callable = None, option_specs: List[ansys.dyna.core.lib.option_card.OptionSpec] = None, **kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.card_interface.CardInterface`
+
+
+   
+   Abstract base class for all the implementations of keyword cards.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: initialize()
+
+
+   .. py:property:: option_specs
+
+
+   .. py:property:: active
+      :type: bool
+
+
+      
+      Return whether the card is active.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_item(**kwargs) -> int
+
+      
+      Add a card to the set. Return the index of the added card.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: items() -> List[ansys.dyna.core.lib.cards.Cards]
+
+
+   .. py:property:: bounded
+      :type: bool
+
+
+
+   .. py:property:: format
+      :type: ansys.dyna.core.lib.format_type.format_type
+
+
+      
+      Get the card format type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(format: Optional[ansys.dyna.core.lib.format_type.format_type] = None, buf: Optional[TextIO] = None, comment: Optional[bool] = True) -> Union[str, None]
+
+      
+      Renders the card in the dyna keyword format.
+      :param buf: Buffer to write to. If None, the output is returned as a string
+      :param format: format_type to use. Default to standard.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: read(buf: TextIO, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet = None) -> bool
+
+      
+      Reads the card data from an input text buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

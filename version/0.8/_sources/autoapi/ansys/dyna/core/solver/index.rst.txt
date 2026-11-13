@@ -1,0 +1,18 @@
+ansys.dyna.core.solver
+======================
+
+.. py:module:: ansys.dyna.core.solver
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/ansys/dyna/core/solver/dynalogging/index
+   /autoapi/ansys/dyna/core/solver/dynasolver/index
+   /autoapi/ansys/dyna/core/solver/grpc_tags/index
+   /autoapi/ansys/dyna/core/solver/launcher/index
+
+

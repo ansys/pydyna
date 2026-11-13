@@ -1,0 +1,52 @@
+ansys.dyna.core.lib.transforms.part_transform.TransformPart
+===========================================================
+
+.. py:class:: ansys.dyna.core.lib.transforms.part_transform.TransformPart(xform: ansys.dyna.core.keywords.IncludeTransform)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.transform.Transform`
+
+
+   
+   Transform base class.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: transform(keyword: Any)
+
+      
+      Transform the part IDs defined by the given *PART keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

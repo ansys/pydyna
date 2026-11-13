@@ -1,0 +1,23 @@
+:py:mod:`ansys.dyna.core`
+=========================
+
+.. py:module:: ansys.dyna.core
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   pre/index.rst
+   solver/index.rst
+
+
+Package Contents
+----------------
+
+.. py:data:: __version__
+
+   
+

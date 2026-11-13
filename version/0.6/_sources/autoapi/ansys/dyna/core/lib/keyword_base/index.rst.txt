@@ -1,0 +1,273 @@
+ansys.dyna.core.lib.keyword_base
+================================
+
+.. py:module:: ansys.dyna.core.lib.keyword_base
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.keyword_base.KeywordBase
+
+
+Module Contents
+---------------
+
+.. py:class:: KeywordBase(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.cards.Cards`
+
+
+   
+   Base class for all keywords.
+
+   Derived class must provide::
+       - _cards
+       - keyword
+       - subkeyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:property:: user_comment
+      :type: str
+
+
+      
+      Get or set the "user comment" for this keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: format
+      :type: ansys.dyna.core.lib.format_type.format_type
+
+
+      
+      Get or set the format for this keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_title(format_symbol: str = '') -> str
+
+      
+      Get the title of this keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: cards
+      :type: List[ansys.dyna.core.lib.card_interface.CardInterface]
+
+
+      
+      Gets the cards of the keyword
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: is_option_active(option: str) -> bool
+
+
+   .. py:method:: activate_option(option: str) -> None
+
+
+   .. py:method:: deactivate_option(option: str) -> None
+
+
+   .. py:method:: __repr__() -> str
+
+      
+      Returns a console-friendly representation of the keyword data as it would appear in the .k file
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(buf: Optional[TextIO] = None, format: Optional[ansys.dyna.core.lib.format_type.format_type] = None, deck_format: ansys.dyna.core.lib.format_type.format_type = format_type.default) -> str
+
+      
+      Renders the keyword in the dyna keyword format.
+
+
+      :Parameters:
+
+          **buf: IO**
+              Optional - buffer to write to.
+
+          **Returns**
+              ..
+
+          **_______**
+              ..
+
+          **If `buf` is None, the output is returned as a string**
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: dumps() -> str
+
+      
+      Return the string representation of the keyword.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: before_read(buf: TextIO) -> None
+
+
+   .. py:method:: read(buf: TextIO) -> None
+
+
+   .. py:method:: loads(value: str) -> None
+
+      
+      Load the keyword from string.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

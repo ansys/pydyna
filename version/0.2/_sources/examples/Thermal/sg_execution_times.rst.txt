@@ -1,0 +1,12 @@
+
+:orphan:
+
+.. _sphx_glr_examples_Thermal_sg_execution_times:
+
+Computation times
+=================
+**00:01.692** total execution time for **examples_Thermal** files:
+
++----------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_examples_Thermal_thermal_stress.py` (``thermal_stress.py``) | 00:01.692 | 0.0 MB |
++----------------------------------------------------------------------------+-----------+--------+

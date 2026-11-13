@@ -1,0 +1,10 @@
+ansys.dyna.core.lib.field.Field.ReadOnlyValue
+=============================================
+
+.. py:class:: ansys.dyna.core.lib.field.Field.ReadOnlyValue
+
+   .. py:attribute:: value
+      :type:  Any
+      :value: None
+
+

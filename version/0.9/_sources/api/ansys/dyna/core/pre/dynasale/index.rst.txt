@@ -1,0 +1,37 @@
+ansys.dyna.core.pre.dynasale
+============================
+
+.. py:module:: ansys.dyna.core.pre.dynasale
+
+.. autoapi-nested-parse::
+
+   Airbag API
+   ==========
+
+   Module for creating a S-ALE (Structured ALE) DYNA input deck.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/pre/dynasale/AdvectionMethod
+   /api/ansys/dyna/core/pre/dynasale/FillDirection
+   /api/ansys/dyna/core/pre/dynasale/ControlPoint
+   /api/ansys/dyna/core/pre/dynasale/StructuredMesh
+   /api/ansys/dyna/core/pre/dynasale/DynaSALE
+
+.. autoapisummary::
+
+   ansys.dyna.core.pre.dynasale.AdvectionMethod
+   ansys.dyna.core.pre.dynasale.FillDirection
+   ansys.dyna.core.pre.dynasale.ControlPoint
+   ansys.dyna.core.pre.dynasale.StructuredMesh
+   ansys.dyna.core.pre.dynasale.DynaSALE
+
+

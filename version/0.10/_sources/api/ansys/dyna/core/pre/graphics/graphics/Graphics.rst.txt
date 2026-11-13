@@ -1,0 +1,146 @@
+ansys.dyna.core.pre.graphics.graphics.Graphics
+==============================================
+
+.. py:class:: ansys.dyna.core.pre.graphics.graphics.Graphics(model: ansys.dyna.core.pre.Model, use_trame: bool = False, view_position: str = 'xy')
+
+   Bases: :py:obj:`object`
+
+
+   
+   Manages graphics in PyDYNA.
+
+
+   :Parameters:
+
+       **model** : :obj:`pydyna.pre.Model`
+           Model to show.
+
+       **use_trame** : :ref:`bool <python:bltin-boolean-values>`, :obj:`optional`
+           Whether to use the Trame visualizer. The default is ``False``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: __call__(parts: List = None, update: bool = True)
+
+      
+      Show the appropriate display based on parameters.
+
+
+      :Parameters:
+
+          **parts** : :obj:`Any`, :obj:`optional`
+              Parts to show. The default is ``None``.
+
+          **update** : :ref:`bool <python:bltin-boolean-values>`, :obj:`optional`
+              Whether to update the display. The default is ``True``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_face_mesh_data()
+
+      
+      Get the mesh data from a face.
+
+
+
+
+
+      :Returns:
+
+          :obj:`List`
+              Mesh data for the face.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: show()
+
+      
+      Show the current set display.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_color_by_type() -> ColorByType
+
+      
+      Get the color by zone type.
+
+
+
+
+
+      :Returns:
+
+          :obj:`ColorByType`
+              Color by zone type.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

@@ -1,0 +1,43 @@
+ansys.dyna.core.pre.dynabase.ContactFormulation
+===============================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.ContactFormulation(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Contact formulation for penalty or constraint methods.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: STANDARD_PENALTY
+      :value: 0
+
+
+
+   .. py:attribute:: SOFT_CONSTRAINT_PENALTY
+      :value: 1
+
+
+
+   .. py:attribute:: SEGMENT_BASED_CONTACT_PENALTY
+      :value: 2
+
+

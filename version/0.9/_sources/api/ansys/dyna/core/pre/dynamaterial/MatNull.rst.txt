@@ -1,0 +1,67 @@
+ansys.dyna.core.pre.dynamaterial.MatNull
+========================================
+
+.. py:class:: ansys.dyna.core.pre.dynamaterial.MatNull(mass_density=0, pressure_cutoff=0)
+
+   
+   Defines a null material.
+
+   Young's modulus and Poisson's ratio are used to set the contact stiffness.
+
+   :Parameters:
+
+       **mass_density** : :class:`python:float`, :obj:`optional`
+           Mass density. The default is ``0``.
+
+       **pressure_cutoff**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: ro
+      :value: 0
+
+
+
+   .. py:attribute:: pc
+      :value: 0
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a null material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

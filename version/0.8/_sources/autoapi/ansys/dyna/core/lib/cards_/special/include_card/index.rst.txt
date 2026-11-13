@@ -1,0 +1,124 @@
+ansys.dyna.core.lib.cards_.special.include_card
+===============================================
+
+.. py:module:: ansys.dyna.core.lib.cards_.special.include_card
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.cards_.special.include_card.IncludeCard
+   ansys.dyna.core.lib.cards_.special.include_card.IncludeCardMixin
+
+
+Module Contents
+---------------
+
+.. py:class:: IncludeCard(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.card.Card`
+
+
+   
+   Abstract base class for all the implementations of keyword cards.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: read(buf: TextIO, parameter_set) -> None
+
+      
+      Reads the card data from an input text buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(format: Optional[ansys.dyna.core.lib.format_type.format_type] = None, buf: Optional[TextIO] = None, comment: Optional[bool] = True) -> Union[str, None]
+
+      
+      Renders the card in the dyna keyword format.
+      :param buf: Buffer to write to. If None, the output is returned as a string
+      :param format: format_type to use. Default to standard.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: IncludeCardMixin
+
+   .. py:property:: filename
+      :type: Optional[str]
+
+
+      
+      Get or set the File name of file to be included in this keyword file.
+      Maximum 80 characters. If the STAMPED_PART option is active, this is the
+      DYNAIN file containing the results from metal stamping.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

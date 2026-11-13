@@ -1,0 +1,26 @@
+ansys.dyna.core.lib.transforms.utils.define_transformation
+==========================================================
+
+.. py:module:: ansys.dyna.core.lib.transforms.utils.define_transformation
+
+.. autoapi-nested-parse::
+
+   Algorithms to compute 4x4 transformation matrices from a *DEFINE_TRANSFORMATION keyword.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.transforms.utils.define_transformation.get_transform_matrix
+
+
+Module Contents
+---------------
+
+.. py:function:: get_transform_matrix(kwd: Optional[ansys.dyna.core.keywords.keyword_classes.auto.define_transformation.DefineTransformation]) -> Optional[numpy.ndarray]
+

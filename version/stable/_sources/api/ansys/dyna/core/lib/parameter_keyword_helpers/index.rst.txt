@@ -1,0 +1,100 @@
+ansys.dyna.core.lib.parameter_keyword_helpers
+=============================================
+
+.. py:module:: ansys.dyna.core.lib.parameter_keyword_helpers
+
+.. autoapi-nested-parse::
+
+   Helpers for parameter-defining keywords that require raw parsing.
+
+   Expression keywords (PARAMETER_EXPRESSION, etc.) contain &param references as
+   expression operands, not parameter substitutions. These helpers load table
+   and card data without parameter substitution, treating '&' as literal text.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.parameter_keyword_helpers.load_table_lines_raw
+   ansys.dyna.core.lib.parameter_keyword_helpers.load_card_line_raw
+
+
+Module Contents
+---------------
+
+.. py:function:: load_table_lines_raw(data_lines: List[str], fields: List[ansys.dyna.core.lib.card.Field]) -> Tuple[pandas.DataFrame, List[str]]
+
+   
+   Load table lines without parameter substitution.
+
+   Used by parameter-defining keywords where '&' is literal expression syntax.
+
+   :Parameters:
+
+       **data_lines** : :class:`python:list` :obj:`of` :class:`python:str`
+           Raw data lines (no comment filtering; caller must handle).
+
+       **fields** : :class:`python:list` :obj:`of` :obj:`Field`
+           Field definitions (offset, width, type) for parsing.
+
+
+
+   :Returns:
+
+       :class:`python:tuple` :obj:`of` (:obj:`DataFrame`, :class:`python:list` :obj:`of` :class:`python:str`)
+           Parsed table and any warning messages.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: load_card_line_raw(line: str, schema: ansys.dyna.core.lib.field_schema.CardSchema) -> Tuple[Tuple, List[str]]
+
+   
+   Load a single card line without parameter substitution.
+
+   Used by parameter-defining keywords (e.g. PARAMETER_EXPRESSION_NOECHO)
+   where '&' is literal expression syntax.
+
+   :Parameters:
+
+       **line** : :class:`python:str`
+           Raw data line.
+
+       **schema** : :obj:`CardSchema`
+           Card schema with field definitions.
+
+
+
+   :Returns:
+
+       :class:`python:tuple` :obj:`of` (:obj:`values` :class:`python:tuple`, :class:`python:list` :obj:`of` :class:`python:str`)
+           Parsed values in schema order and any warning messages.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

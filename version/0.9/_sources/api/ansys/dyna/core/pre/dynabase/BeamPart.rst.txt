@@ -1,0 +1,116 @@
+ansys.dyna.core.pre.dynabase.BeamPart
+=====================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.BeamPart(pid)
+
+   Bases: :py:obj:`Part`
+
+
+   
+   Defines a beam part.
+
+   A beam part definition consists of the combined material information,
+   section properties, hourglass type, thermal properties, and a flag
+   for part adaptivity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: stub
+
+
+   .. py:attribute:: type
+      :value: 'BEAM'
+
+
+
+   .. py:attribute:: crosstype
+      :value: 1
+
+
+
+   .. py:method:: set_cross_type(cross)
+
+      
+      Set the type for the cross section.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_diameter(diameter)
+
+      
+      Set the outer diameter for the cross section.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_property()
+
+      
+      Set properties for the beam part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

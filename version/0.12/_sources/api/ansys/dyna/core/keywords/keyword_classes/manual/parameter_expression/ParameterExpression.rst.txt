@@ -1,0 +1,28 @@
+ansys.dyna.core.keywords.keyword_classes.manual.parameter_expression.ParameterExpression
+========================================================================================
+
+.. py:class:: ansys.dyna.core.keywords.keyword_classes.manual.parameter_expression.ParameterExpression(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.keywords.keyword_classes.auto.parameter.parameter_expression.ParameterExpression`
+
+
+   
+   PARAMETER_EXPRESSION with raw parsing that preserves expression text.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!

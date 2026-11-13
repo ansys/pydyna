@@ -1,0 +1,15 @@
+
+:orphan:
+
+.. _sphx_glr_examples_NVH_sg_execution_times:
+
+
+Computation times
+=================
+**00:00.098** total execution time for **examples_NVH** files:
+
++------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_examples_NVH_nvh_frf_solid.py` (``nvh_frf_solid.py``)         | 00:00.050 | 0.0 MB |
++------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_examples_NVH_frf_plate_damping.py` (``frf_plate_damping.py``) | 00:00.048 | 0.0 MB |
++------------------------------------------------------------------------------+-----------+--------+

@@ -1,0 +1,59 @@
+ansys.dyna.core.lib.array
+=========================
+
+.. py:module:: ansys.dyna.core.lib.array
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.array.array
+
+
+Module Contents
+---------------
+
+.. py:function:: array(element_type: type, reserved_size: int = 0, default_value=None)
+
+   
+   A resizable array that supports optional values for any type
+   Right now - array.array is used for single and double precision floating points
+   for everything else - python list is used.  This is because no existing array
+   type in numpy, pandas, and python meet the above requirements.  Specifically,
+   numpy integer arrays do not have optional values and are not resizable, pandas
+   integer arrays support optional values but are also not resizable, while python
+   array arrays are resizable but do not support optional values.
+
+   The problem with this approach is memory usage.  For 100k integers, a python list
+   appears to take about 5300K, while a pandas array and numpy array take 488K and 584K
+   respectively.  pandas arrays take more memory than numpy because of the masking used
+   to support optional integer values.
+
+   Given a python list of optional integer, where None is used to represent a missing value,
+   - this is how you convert to either type:
+   numpy:  np.array([item or 0 for item in the_list], dtype=np.int32)
+   pandas: pd.array(the_list,dtype=pd.Int32Dtype())
+
+   In the future - A dynamic array class based on some of the above types can be used for
+   integer arrays.  For string arrays, pandas arrays don't offer any value over python
+   lists.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

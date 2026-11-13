@@ -1,0 +1,123 @@
+ansys.dyna.core.lib.deck_loader.DeckLoaderResult
+================================================
+
+.. py:class:: ansys.dyna.core.lib.deck_loader.DeckLoaderResult
+
+   
+   A class containing the result of an attempted deck load.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: add_unprocessed_keyword(name: str) -> None
+
+      
+      Add a keyword that was not processed during the deck load.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_warning(message: str) -> None
+
+      
+      Add a warning message (e.g. from parameter processing errors).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: warnings
+      :type: List[str]
+
+
+      
+      Warnings collected during the load (parameter errors, etc.).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_summary() -> str
+
+      
+      Get a summary of unprocessed keywords.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

@@ -1,0 +1,262 @@
+ansys.dyna.core.lib.series_card.SeriesCard
+==========================================
+
+.. py:class:: ansys.dyna.core.lib.series_card.SeriesCard(name: str, fields_per_card: int, element_width: int, input_type: Union[type, List[type]], length_func: Callable = None, active_fn: Callable = None, type_names: Optional[List[str]] = None, data=None, format: ansys.dyna.core.lib.format_type.format_type = format_type.default)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.card_interface.CardInterface`
+
+
+   
+   Card holding a series of values.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: __iter__() -> Iterator
+
+
+   .. py:property:: format
+      :type: ansys.dyna.core.lib.format_type.format_type
+
+
+      
+      Format type of the series card.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: active
+      :type: bool
+
+
+      
+      Indicates whether the series card is active.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __getitem__(index)
+
+
+   .. py:method:: __setitem__(index: int, value)
+
+
+   .. py:method:: append(value) -> None
+
+      
+      Append a value to the series card.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: extend(valuelist: Iterable) -> None
+
+      
+      Extend the series card with a list of values.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: read(buf: TextIO, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet = None) -> bool
+
+      
+      Read the series card content from a buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(format: Optional[ansys.dyna.core.lib.format_type.format_type] = None, buf: Optional[TextIO] = None, comment: Optional[bool] = True, retain_parameters: bool = False, parameter_set: ansys.dyna.core.lib.parameters.ParameterSet = None, uri_prefix: str = None, **kwargs) -> str
+
+      
+      Write the series card to a string or buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __len__() -> int
+
+
+   .. py:property:: bounded
+      :type: bool
+
+
+      
+      Indicates whether the series card is bounded.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: __repr__() -> str
+
+      
+      Returns a console-friendly representation of the desired parameters for the card
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:property:: data
+
+      
+      Gets or sets the data list of parameter values
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

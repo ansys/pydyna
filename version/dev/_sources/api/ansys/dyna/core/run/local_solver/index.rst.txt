@@ -1,0 +1,118 @@
+ansys.dyna.core.run.local_solver
+================================
+
+.. py:module:: ansys.dyna.core.run.local_solver
+
+.. autoapi-nested-parse::
+
+   Module for defining the PyDyna local solver.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.run.local_solver.HAS_DOCKER
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.run.local_solver.run_dyna
+
+
+Module Contents
+---------------
+
+.. py:data:: HAS_DOCKER
+   :value: True
+
+
+.. py:function:: run_dyna(input: Union[str, object], **kwargs) -> str
+
+   
+   Run the Ls-Dyna solver with the given input file.
+
+
+   :Parameters:
+
+       **input** : :class:`python:str` or :obj:`object`
+           Either the path to a dyna keyword file or an instance of
+           ``ansys.dyna.core.lib.deck.Deck``.
+
+       **\*\*kwargs** : :class:`python:dict`
+           mpi_option : int
+               The mpi option to use. Choose from the values defined in ``MpiOption``.
+               Defaults to MpiOption.SMP.
+           precision : int
+               Floating point precision. Choose from the values defined in ``Precision``.
+               Defaults to Precision.DOUBLE.
+           version : int
+               Integer identifying the Ansys release to use, for example ``241``
+               for 2024 R1. Used when neither an explicit executable nor a saved
+               solver path is selected. If version is also omitted, the latest
+               discoverable Ansys installation is used.
+           executable : str
+               Full path to the LS-DYNA solver executable. Accepted on both
+               Windows and Linux. The file must exist. When omitted, both
+               platforms try ``get_dyna_path(find=True, allow_input=False)``,
+               then the requested version, and then the latest installation.
+               Windows checks that the returned saved path exists.
+               On Windows, an environment script under ``lsprepost*/LS-Run``
+               is used when a matching directory is found. Without that directory,
+               the solver is launched directly with a warning. MPI modes require
+               a working MPI command and libraries in the process environment.
+           ncpu : int
+               Number of CPU cores.
+               Defaults to 1.
+           memory : int
+               Amount of memory units, as defined by `memory_unit` for DYNA to use.
+               Defaults to 20.
+           memory_unit : int
+               Memory unit. Use ``MemoryUnit.MB`` (default) or ``MemoryUnit.GB``.
+           working_directory : str
+               Working directory.
+               If the `input` parameter is a path to the input file,
+               defaults to the same folder as that file.  Otherwise, the job is run
+               in a new folder under $TMP/ansys/pydyna/jobs.
+           container : str
+               DockerContainer to run LS-DYNA in.
+           container_env : dict()
+               Environment variables to pass into the docker container.
+           stream : bool
+               Currently only affects runs using the `container` option.
+               If True, the stdout of solver is streamed to python's stdout during the solve.
+               If False, the solver stdout is printed once after the container exits.
+               Defaults to True.
+           activate_case : bool
+               If provided, appends CASE command line for ``*CASE`` keywords support.
+           case_ids : list[int] or None
+               If provided, appends CASE or CASE=... to the LS-DYNA command line for ``*CASE`` support.
+
+
+
+   :Returns:
+
+       **result** : :class:`python:str`
+           The working directory where the solver is launched.
+           If `stream` is `False` and `container` is set, returns the stdout of the run
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

@@ -1,0 +1,66 @@
+ansys.dyna.core.pre.dynabase.SegmentSet
+=======================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.SegmentSet(segments=[])
+
+   Bases: :py:obj:`BaseSet`
+
+
+   
+   Defines a set of segments with optional identical or unique attributes.
+
+
+   :Parameters:
+
+       **segments** : :class:`python:list` [[point1,point2,point3,point4],[point5,point6,point7,point8]...]
+           Define segments.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: segments
+      :value: []
+
+
+
+   .. py:attribute:: type
+      :value: 'SEGMENTSET'
+
+
+
+   .. py:method:: create(stub)
+
+      
+      Create a segment set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

@@ -1,0 +1,329 @@
+ansys.dyna.core.lib.field_writer
+================================
+
+.. py:module:: ansys.dyna.core.lib.field_writer
+
+.. autoapi-nested-parse::
+
+   Module for writing fields to buffers.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.field_writer.logger
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.field_writer.check_field_type
+   ansys.dyna.core.lib.field_writer.write_field_c
+   ansys.dyna.core.lib.field_writer.write_field
+   ansys.dyna.core.lib.field_writer.write_c_dataframe
+   ansys.dyna.core.lib.field_writer.write_fields
+   ansys.dyna.core.lib.field_writer.write_comment_line
+   ansys.dyna.core.lib.field_writer.write_fields_csv
+   ansys.dyna.core.lib.field_writer.write_c_dataframe_csv
+
+
+Module Contents
+---------------
+
+.. py:data:: logger
+
+.. py:function:: check_field_type(field_type: type)
+
+   
+   Check that the field type is valid.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: write_field_c(buf: IO[AnyStr], field_type: type, value: Any, width: int) -> None
+
+   
+   Write a single field to the buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: write_field(buf: IO[AnyStr], field_type: type, value: Any, width: int) -> None
+
+   
+   Write a single field to the buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: write_c_dataframe(buf: IO[AnyStr], fields: List[ansys.dyna.core.lib.field.Field], table: pandas.DataFrame, format: ansys.dyna.core.lib.format_type.format_type) -> None
+
+   
+   Method to write a DataFrame to a buffer using hollerith format.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: write_fields(buf: IO[AnyStr], fields: List[ansys.dyna.core.lib.field.Field], values: Optional[List[Any]] = None, format: Optional[ansys.dyna.core.lib.format_type.format_type] = format_type.default) -> None
+
+   
+   Write `fields` representing a line of a keyword to `buf`.
+
+   Use the fixed column offsets and width
+
+   :Parameters:
+
+       **buf: IO**
+           buffer to write to
+
+       **fields: List**
+           fields to write
+
+       **values: List**
+           optional - list of values for the field. If not set, use the value property of each field.
+           used by TableCard
+
+       **format: format_type**
+           optional - format to write
+
+       **>>> s=io.String()**
+           ..
+
+       **>>> fields = [**
+           ..
+
+       **...     Field("a", int, 0, 10, 1),**
+           ..
+
+       **...     Field("b", str, 10, 10, "hello")**
+           ..
+
+       **... ]**
+           ..
+
+       **>>> write_fields(s, fields)**
+           ..
+
+       **>>> s.getvalue()**
+           ..
+
+       **'         1     hello'**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: write_comment_line(buf: IO[AnyStr], fields: List[ansys.dyna.core.lib.field.Field], format: Optional[ansys.dyna.core.lib.format_type.format_type] = format_type.default) -> None
+
+   
+   Writes the comment line to the buffer.
+
+
+   :Parameters:
+
+       **buf: IO**
+           buffer to write to
+
+       **fields: List**
+           fields to write
+
+       **format: format_type**
+           format to write in
+
+       **>>> s=io.String()**
+           ..
+
+       **>>> fields = [**
+           ..
+
+       **...     Field("a", int, 0, 10, 1),**
+           ..
+
+       **...     Field("b", str, 10, 10, "hello")**
+           ..
+
+       **... ]**
+           ..
+
+       **>>> write_comment_line(s, fields)**
+           ..
+
+       **>>> s.getvalue()**
+           ..
+
+       **'         a         b'**
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: write_fields_csv(buf: IO[AnyStr], fields: List[ansys.dyna.core.lib.field.Field], values: Optional[List[Any]] = None) -> None
+
+   
+   Write `fields` representing a line of a keyword to `buf` in comma-delimited format.
+
+   This produces LS-DYNA compatible comma-delimited (free format) output.
+
+   :Parameters:
+
+       **buf** : :obj:`IO`
+           Buffer to write to.
+
+       **fields** : :obj:`List`\[:obj:`Field`]
+           Fields to write.
+
+       **values** : :obj:`List`\[:obj:`Any`], :obj:`optional`
+           List of values for the fields. If not set, use the value property of each field.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   >>> s = io.StringIO()
+   >>> fields = [
+   ...     Field("a", int, 0, 10, value=1),
+   ...     Field("b", str, 10, 10, value="hello")
+   ... ]
+   >>> write_fields_csv(s, fields)
+   >>> s.getvalue()
+   '1,hello'
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: write_c_dataframe_csv(buf: IO[AnyStr], fields: List[ansys.dyna.core.lib.field.Field], table: pandas.DataFrame) -> None
+
+   
+   Write a DataFrame to `buf` in comma-delimited format.
+
+
+   :Parameters:
+
+       **buf** : :obj:`IO`
+           Buffer to write to.
+
+       **fields** : :obj:`List`\[:obj:`Field`]
+           Field definitions for the columns.
+
+       **table** : :obj:`pd.DataFrame`
+           The data to write.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

@@ -1,0 +1,47 @@
+ansys.dyna.core.lib.card_writer
+===============================
+
+.. py:module:: ansys.dyna.core.lib.card_writer
+
+.. autoapi-nested-parse::
+
+   Function to write cards.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.card_writer.write_cards
+
+
+Module Contents
+---------------
+
+.. py:function:: write_cards(cards: List[ansys.dyna.core.lib.card_interface.CardInterface], buf: TextIO, write_format: ansys.dyna.core.lib.format_type.format_type, comment: Optional[bool] = True) -> bool
+
+   
+   Write the cards. Return whether a superfluous trailing newline was added.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

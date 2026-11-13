@@ -1,0 +1,78 @@
+ansys.dyna.core.lib.cards_.special.include_card.IncludeCard
+===========================================================
+
+.. py:class:: ansys.dyna.core.lib.cards_.special.include_card.IncludeCard(**kwargs)
+
+   Bases: :py:obj:`ansys.dyna.core.lib.card.Card`
+
+
+   
+   A Card represents a single line of data in a keyword.
+
+   This implementation separates schema (shared) from values (per-instance)
+   for memory efficiency and faster loading of keywords with many cards.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:method:: read(buf: TextIO, parameter_set) -> None
+
+      
+      Reads the card data from an input text buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: write(format: Optional[ansys.dyna.core.lib.format_type.format_type] = None, buf: Optional[TextIO] = None, comment: Optional[bool] = True, **kwargs) -> Union[str, None]
+
+      
+      Writes the card data to an output text buffer or returns it as a string.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

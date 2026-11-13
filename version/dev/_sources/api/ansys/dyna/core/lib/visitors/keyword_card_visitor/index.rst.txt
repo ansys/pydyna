@@ -1,0 +1,60 @@
+ansys.dyna.core.lib.visitors.keyword_card_visitor
+=================================================
+
+.. py:module:: ansys.dyna.core.lib.visitors.keyword_card_visitor
+
+.. autoapi-nested-parse::
+
+   Base visitor class for traversing the cards of a keyword.
+
+   This module provides a template-method pattern where the traversal skeleton
+   (dispatch on card type, recursion, special handling) is shared by all subclasses,
+   and only the leaf actions vary per subclass depending on the card type visited.
+
+   Card-type dispatch notes
+   ------------------------
+   * :class:`~ansys.dyna.core.lib.card.Card` — fixed schema; field values stored in
+     ``card._values``.  Routed to :meth:`visit_card` (default: no-op).
+   * :class:`~ansys.dyna.core.lib.table_card.TableCard` — subclasses ``Card`` but
+     stores all data in a pandas DataFrame (``card.table``); ``card._values`` is
+     stale scratch space and must not be used.  Routed to :meth:`visit_table_card`.
+   * :class:`~ansys.dyna.core.lib.table_card_group.TableCardGroup` — composite of
+     ``TableCard`` instances sharing a single DataFrame.  Routed to
+     :meth:`visit_table_card_group`.
+   * :class:`~ansys.dyna.core.lib.option_card.OptionCardSet` — recurses into child
+     cards via :meth:`_visit_card`.
+   * :class:`~ansys.dyna.core.lib.card_set.CardSet` — recurses into items.
+   * :class:`~ansys.dyna.core.lib.series_card.SeriesCard` — variable-length array;
+     routed to :meth:`visit_series_card` (default: debug-log and skip).
+   * Anything else — routed to :meth:`visit_unknown_card` (default: warning).
+
+   ..
+       !! processed by numpydoc !!
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.visitors.keyword_card_visitor.logger
+
+
+Classes
+-------
+
+.. toctree::
+   :hidden:
+
+   /api/ansys/dyna/core/lib/visitors/keyword_card_visitor/KeywordCardVisitor
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.visitors.keyword_card_visitor.KeywordCardVisitor
+
+
+Module Contents
+---------------
+
+.. py:data:: logger
+

@@ -1,0 +1,61 @@
+
+
+.. _sphx_glr_examples_NVH:
+
+NVH examples
+~~~~~~~~~~~~~
+
+These examples show how to create and use NVH (noise, vibration, and harshness) models.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows how to set up the keywords for computation of a FRF (frequency response func...">
+
+.. only:: html
+
+  .. image:: /examples/NVH/images/thumb/sphx_glr_frf_plate_damping_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_NVH_frf_plate_damping.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">FRF for a rectangular plate</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example shows a column with a hole using solid elements. The executable file for LS-DYNA i...">
+
+.. only:: html
+
+  .. image:: /examples/NVH/images/thumb/sphx_glr_nvh_frf_solid_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_NVH_nvh_frf_solid.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">FRF for a colume model with a hole</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/NVH/frf_plate_damping
+   /examples/NVH/nvh_frf_solid
+

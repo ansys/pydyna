@@ -1,0 +1,12 @@
+
+:orphan:
+
+.. _sphx_glr_examples_EM_sg_execution_times:
+
+Computation times
+=================
+**00:01.759** total execution time for **examples_EM** files:
+
++---------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_examples_EM_em_railgun.py` (``em_railgun.py``) | 00:01.759 | 0.0 MB |
++---------------------------------------------------------------+-----------+--------+

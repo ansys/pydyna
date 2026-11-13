@@ -1,0 +1,28 @@
+ansys.dyna.core.solver.dynasolver.NotFound
+==========================================
+
+.. py:exception:: ansys.dyna.core.solver.dynasolver.NotFound
+
+   Bases: :py:obj:`Exception`
+
+
+   
+   Documentation missing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!

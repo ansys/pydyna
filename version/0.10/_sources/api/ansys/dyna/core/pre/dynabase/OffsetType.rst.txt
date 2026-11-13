@@ -1,0 +1,48 @@
+ansys.dyna.core.pre.dynabase.OffsetType
+=======================================
+
+.. py:class:: ansys.dyna.core.pre.dynabase.OffsetType(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   
+   Offset type for contact or beam definitions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: NULL
+      :value: ''
+
+
+
+   .. py:attribute:: OFFSET
+      :value: 'OFFSET'
+
+
+
+   .. py:attribute:: BEAM_OFFSET
+      :value: 'BEAM_OFFSET'
+
+
+
+   .. py:attribute:: CONSTRAINED_OFFSET
+      :value: 'CONSTRAINED_OFFSET'
+
+

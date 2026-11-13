@@ -1,0 +1,173 @@
+ansys.dyna.core.pre.dynalogging.PymapdlCustomAdapter
+====================================================
+
+.. py:class:: ansys.dyna.core.pre.dynalogging.PymapdlCustomAdapter(logger, extra=None)
+
+   Bases: :py:obj:`logging.LoggerAdapter`
+
+
+   
+   Adapter for keeping the reference to an MAPDL instance name dynamic.
+
+   Using the standard approach, extra parameters must be supplied
+   to the logger to indicate the MAPDL instance for which messages
+   must be logged.
+
+   With this class, you only have to specify the MAPDL instance
+   that you are referring to once.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: level
+      :value: None
+
+
+
+   .. py:attribute:: file_handler
+      :value: None
+
+
+
+   .. py:attribute:: stdout_handler
+      :value: None
+
+
+
+   .. py:attribute:: logger
+
+
+   .. py:attribute:: std_out_handler
+
+
+   .. py:method:: process(msg, kwargs)
+
+      
+      Process the logging message and keyword arguments passed in to
+      a logging call to insert contextual information. You can either
+      manipulate the message itself, the keyword args or both. Return
+      the message and kwargs modified (or not) to suit your needs.
+
+      Normally, you'll only need to override this one method in a
+      LoggerAdapter subclass for your specific needs.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: log_to_file(filename=FILE_NAME, level=LOG_LEVEL)
+
+      
+      Add a file handler to the logger.
+
+
+      :Parameters:
+
+          **filename** : :class:`python:str`, :obj:`optional`
+              Name of the file where logs are recorded. The default is ``FILE_NAME``.
+
+          **level** : :class:`python:str`, :obj:`optional`
+              Level of logging. The default is ``LOG_LEVEL``, which causes all messages
+              to be recorded. For example, you can set the level of logging to ``DEBUG``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: log_to_stdout(level=LOG_LEVEL)
+
+      
+      Add a standard output handler to the logger.
+
+
+      :Parameters:
+
+          **level** : :class:`python:str`, :obj:`optional`
+              Level of logging record. The default is ``LOG_LEVEL``, which causes all messages
+              to be recorded. For example, you can set the level of logging to ``"DEBUG"``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setLevel(level='DEBUG')
+
+      
+      Change the log level of the object and the attached handlers.
+
+
+      :Parameters:
+
+          **level** : :class:`python:str`, :obj:`optional`
+              Level of logging record. The default is ``"DEBUG``.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+

@@ -1,0 +1,89 @@
+ansys.dyna.core.lib.algorithms.apply_lspp_defaults
+==================================================
+
+.. py:module:: ansys.dyna.core.lib.algorithms.apply_lspp_defaults
+
+.. autoapi-nested-parse::
+
+   Apply LSPP defaults to keyword fields.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   ansys.dyna.core.lib.algorithms.apply_lspp_defaults.apply_lspp_defaults
+
+
+Module Contents
+---------------
+
+.. py:function:: apply_lspp_defaults(keyword: ansys.dyna.core.lib.keyword_base.KeywordBase) -> None
+
+   
+   Retroactively apply LSPP defaults to all ``None``-valued fields in a keyword.
+
+   When a keyword is created inside a :func:`~ansys.dyna.core.lib.config.disable_lspp_defaults`
+   context, fields that have no LSPP default are left as ``None``.  This function
+   walks every card in *keyword* and fills in any ``None`` value whose
+   :class:`~ansys.dyna.core.lib.field_schema.FieldSchema` carries a non-``None``
+   LSPP default.  Fields that were already explicitly set (including to ``None``
+   intentionally) are indistinguishable from unset ones, so only the schema default
+   is used as the fill criterion — existing non-``None`` values are never overwritten.
+
+   Supported card types and their behaviour:
+
+   * :class:`~ansys.dyna.core.lib.card.Card` — each ``None`` value is replaced
+     with its schema default.
+   * :class:`~ansys.dyna.core.lib.table_card.TableCard` — if the DataFrame has
+     not yet been lazily initialized, ``_values`` is updated so that
+     ``_make_column`` uses the schema defaults when the DataFrame is first
+     built.  If the DataFrame already exists, ``None``/``NaN`` cells in each
+     column are filled with the corresponding schema default.
+   * :class:`~ansys.dyna.core.lib.table_card_group.TableCardGroup` — delegates
+     to each sub-card's ``TableCard`` handling, then rebuilds the merged
+     DataFrame if the group had already been initialized.
+   * :class:`~ansys.dyna.core.lib.option_card.OptionCardSet` — recurses into
+     its child cards.
+   * :class:`~ansys.dyna.core.lib.card_set.CardSet` — recurses into items.
+   * :class:`~ansys.dyna.core.lib.series_card.SeriesCard` — skipped; series cards
+     hold a variable-length array whose element defaults are not meaningful in this
+     context.  A debug message is emitted.
+   * Any other :class:`~ansys.dyna.core.lib.card_interface.CardInterface` subclass —
+     skipped with a warning.
+
+   :Parameters:
+
+       **keyword** : :obj:`KeywordBase`
+           The keyword whose cards should have LSPP defaults applied.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   >>> from ansys.dyna.core.lib.config import disable_lspp_defaults
+   >>> from ansys.dyna.core.lib.algorithms import apply_lspp_defaults
+   >>> from ansys.dyna.core import keywords as kwd
+   >>> with disable_lspp_defaults():
+   ...     k = kwd.SectionSolid()
+   >>> k.elform  # None — no LSPP default applied yet
+   >>> apply_lspp_defaults(k)
+   >>> k.elform  # 1 — LSPP default restored
+
+   ..
+       !! processed by numpydoc !!
+

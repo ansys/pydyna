@@ -1,0 +1,6 @@
+﻿dynaisph
+========
+
+.. currentmodule:: ansys.dyna.core.pre
+
+.. automodule:: dynaisph
