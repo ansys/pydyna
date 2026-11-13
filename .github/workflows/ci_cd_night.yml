@@ -37,88 +37,88 @@ env:
 
 jobs:
 
-  # docker-build-and-push:
-  #   name: Build unified Docker image (SMP + MPP) and push
-  #   runs-on: ubuntu-latest
-  #   if: github.event.inputs.skip-docker-build != 'true'
-  #   permissions:
-  #     contents: read  # Needed to checkout code
-  #     packages: write # Needed for pushing Docker image to GHCR
-  #   steps:
-  #     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-  #       with:
-  #         persist-credentials: false
+  docker-build-and-push:
+    name: Build unified Docker image (SMP + MPP) and push
+    runs-on: ubuntu-latest
+    if: github.event.inputs.skip-docker-build != 'true'
+    permissions:
+      contents: read  # Needed to checkout code
+      packages: write # Needed for pushing Docker image to GHCR
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
-  #     - name: Setup Docker Buildx
-  #       uses: docker/setup-buildx-action@594f3bf4285d9ea8dc53c9a0c9c4092420091003 # v4.4.0
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@594f3bf4285d9ea8dc53c9a0c9c4092420091003 # v4.4.0
 
-  #     - name: Set up Python
-  #       uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
-  #       with:
-  #         python-version: ${{ env.MAIN_PYTHON_VERSION }}
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
-  #     - name: Install PyDyna and dependencies
-  #       run: |
-  #         python -m pip install --upgrade pip
-  #         pip install uv
-  #         python -m venv .venv
-  #         source .venv/bin/activate
-  #         uv pip install -e .[tests]
+      - name: Install PyDyna and dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install uv
+          python -m venv .venv
+          source .venv/bin/activate
+          uv pip install -e .[tests]
 
-  #     - name: Build unified Docker image
-  #       env:
-  #         DOCKER_IMAGE: pydyna-run:dev
-  #       run: |
-  #         echo "Building unified Docker image with both SMP and MPP LS-DYNA executables..."
-  #         docker buildx build \
-  #           --build-arg FTP_USER=${FTP_USER} \
-  #           --build-arg FTP_LOGIN=${FTP_LOGIN} \
-  #           --file docker/run/Dockerfile \
-  #           --load \
-  #           -t "${DOCKER_IMAGE}" \
-  #           docker/run
+      - name: Build unified Docker image
+        env:
+          DOCKER_IMAGE: pydyna-run:dev
+        run: |
+          echo "Building unified Docker image with both SMP and MPP LS-DYNA executables..."
+          docker buildx build \
+            --build-arg FTP_USER=${FTP_USER} \
+            --build-arg FTP_LOGIN=${FTP_LOGIN} \
+            --file docker/run/Dockerfile \
+            --load \
+            -t "${DOCKER_IMAGE}" \
+            docker/run
 
-  #         echo "Verifying Docker image was built successfully..."
-  #         docker images "${DOCKER_IMAGE}"
+          echo "Verifying Docker image was built successfully..."
+          docker images "${DOCKER_IMAGE}"
 
-  #         echo "Testing basic Docker image functionality..."
-  #         docker run --rm -v $(pwd):/run "${DOCKER_IMAGE}" ls /run
+          echo "Testing basic Docker image functionality..."
+          docker run --rm -v $(pwd):/run "${DOCKER_IMAGE}" ls /run
 
-  #     - name: Test with unified image
-  #       env:
-  #         PYDYNA_RUN_CONTAINER: pydyna-run:dev
-  #         ANSYSLI_SERVERS: 2325@${{ env.LICENSE_SERVER }}
-  #         ANSYSLMD_LICENSE_FILE: 1055@${{ env.LICENSE_SERVER }}
-  #         LSTC_LICENSE: ansys
-  #       run: |
-  #         echo "Running tests with unified image (supports both SMP and MPP)..."
-  #         source .venv/bin/activate
-  #         python -m pytest -m 'run' -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
+      - name: Test with unified image
+        env:
+          PYDYNA_RUN_CONTAINER: pydyna-run:dev
+          ANSYSLI_SERVERS: 2325@${{ env.LICENSE_SERVER }}
+          ANSYSLMD_LICENSE_FILE: 1055@${{ env.LICENSE_SERVER }}
+          LSTC_LICENSE: ansys
+        run: |
+          echo "Running tests with unified image (supports both SMP and MPP)..."
+          source .venv/bin/activate
+          python -m pytest -m 'run' -ra --cov=ansys.dyna.core --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv
 
-  #     - name: Login to ghcr.io
-  #       uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
-  #       with:
-  #         registry: ${{ env.REGISTRY }}
-  #         username: ${{ github.actor }}
-  #         password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Login to ghcr.io
+        uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-  #     - name: Resolve Docker image tag
-  #       id: resolve-tag
-  #       env:
-  #         INPUT_TAG: ${{ github.event.inputs.pydyna-run-tag || 'dev' }}
-  #       run: |
-  #         echo "TAG=$INPUT_TAG" >> $GITHUB_OUTPUT
+      - name: Resolve Docker image tag
+        id: resolve-tag
+        env:
+          INPUT_TAG: ${{ github.event.inputs.pydyna-run-tag || 'dev' }}
+        run: |
+          echo "TAG=$INPUT_TAG" >> $GITHUB_OUTPUT
 
-  #     - name: Build and push Docker image to GHCR
-  #       uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
-  #       with:
-  #         context: docker/run
-  #         file: docker/run/Dockerfile
-  #         push: true
-  #         tags: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ steps.resolve-tag.outputs.TAG }}
-  #         build-args: |
-  #           FTP_USER=${{ env.FTP_USER }}
-  #           FTP_LOGIN=${{ env.FTP_LOGIN }}
+      - name: Build and push Docker image to GHCR
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: docker/run
+          file: docker/run/Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ steps.resolve-tag.outputs.TAG }}
+          build-args: |
+            FTP_USER=${{ env.FTP_USER }}
+            FTP_LOGIN=${{ env.FTP_LOGIN }}
 
   unit-tests:
     name: "Unit testing for ${{ matrix.os }} Python ${{ matrix.python-version }}"
