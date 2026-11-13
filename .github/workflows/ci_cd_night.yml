@@ -15,7 +15,7 @@ on:
       skip-docker-build:
         description: 'Skip Docker image build and use existing images'
         required: false
-        default: 'false'
+        default: 'true'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -40,7 +40,7 @@ jobs:
   docker-build-and-push:
     name: Build unified Docker image (SMP + MPP) and push
     runs-on: ubuntu-latest
-    if: github.event.inputs.skip-docker-build != 'true'
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.skip-docker-build != 'true' }}
     permissions:
       contents: read  # Needed to checkout code
       packages: write # Needed for pushing Docker image to GHCR
@@ -165,7 +165,7 @@ jobs:
           pdf-pool-size: 15000000
           pdf-string-vacancies: 90000
           pdf-max-strings: 600000
-          pydyna-run-container: ${{ env.REGISTRY }}/ansys/pydyna-run:${{ github.event.inputs.pydyna-run-tag || 'dev' }}
+          pydyna-run-container: ${{ env.REGISTRY }}/ansys/pydyna-run:dev
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           license-server: ${{ env.LICENSE_SERVER }}
