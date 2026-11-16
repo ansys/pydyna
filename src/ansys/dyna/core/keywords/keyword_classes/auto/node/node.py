@@ -63,3 +63,85 @@ class Node(KeywordBase):
         """Set nodes from the dataframe df"""
         self._cards[0].table = df
 
+    @property
+    def nid(self) -> pd.Series:
+        """Get or set the Node ID.
+        """ # nopep8
+        return self._cards[0].get_column("nid")
+
+    @nid.setter
+    def nid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the nid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("nid", value)
+
+    @property
+    def x(self) -> pd.Series:
+        """Get or set the x-coordinate.
+        """ # nopep8
+        return self._cards[0].get_column("x")
+
+    @x.setter
+    def x(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the x column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("x", value)
+
+    @property
+    def y(self) -> pd.Series:
+        """Get or set the y-coordinate.
+        """ # nopep8
+        return self._cards[0].get_column("y")
+
+    @y.setter
+    def y(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the y column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("y", value)
+
+    @property
+    def z(self) -> pd.Series:
+        """Get or set the z-coordinate.
+        """ # nopep8
+        return self._cards[0].get_column("z")
+
+    @z.setter
+    def z(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the z column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("z", value)
+
+    @property
+    def tc(self) -> pd.Series:
+        """Get or set the Translational constraint:
+        EQ.0: no constraints,
+        EQ.1: constrained x displacement,
+        EQ.2: constrained y displacement,
+        EQ.3: constrained z displacement,
+        EQ.4: constrained x and y displacements,
+        EQ.5: constrained y and z displacements,
+        EQ.6: constrained z and x displacements,
+        EQ.7: constrained x, y, and z displacements.
+        """ # nopep8
+        return self._cards[0].get_column("tc")
+
+    @tc.setter
+    def tc(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the tc column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("tc", value)
+
+    @property
+    def rc(self) -> pd.Series:
+        """Get or set the Rotational constraint:
+        EQ.0: no constraints,
+        EQ.1: constrained x rotation,
+        EQ.2: constrained y rotation,
+        EQ.3: constrained z rotation,
+        EQ.4: constrained x and y rotations,
+        EQ.5: constrained y and z rotations,
+        EQ.6: constrained z and x rotations,
+        EQ.7: constrained x, y, and z rotations.
+        """ # nopep8
+        return self._cards[0].get_column("rc")
+
+    @rc.setter
+    def rc(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the rc column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("rc", value)
+

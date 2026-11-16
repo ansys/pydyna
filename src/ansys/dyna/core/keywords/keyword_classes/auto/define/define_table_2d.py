@@ -127,6 +127,28 @@ class DefineTable2D(KeywordBase):
         self._cards[1].table = df
 
     @property
+    def value(self) -> pd.Series:
+        """Get or set the Load curve will be defined corresponding to this value, e.g., this value could be a strain rate, see purpose above.
+        """ # nopep8
+        return self._cards[1].get_column("value")
+
+    @value.setter
+    def value(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the value column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("value", value)
+
+    @property
+    def lcid(self) -> pd.Series:
+        """Get or set the Load curve ID used by this value.
+        """ # nopep8
+        return self._cards[1].get_column("lcid")
+
+    @lcid.setter
+    def lcid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the lcid column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("lcid", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
@@ -141,17 +163,7 @@ class DefineTable2D(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def lcid_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for lcid."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.lcid:
-                return kwd
-        return None
-
-    @lcid_link.setter
-    def lcid_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for lcid."""
-        self.lcid = value.lcid
+    def lcid_links(self) -> typing.Dict[typing.Any, KeywordBase]:
+        """Get the keywords linked by the lcid column, keyed by lcid value."""
+        return self._get_column_links(self.lcid, lambda value: self._find_keyword("DEFINE", "CURVE", "lcid", value))
 

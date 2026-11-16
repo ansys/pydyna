@@ -107,47 +107,211 @@ class ElementShellThickness(KeywordBase):
         self._cards[0].table = df
 
     @property
-    def n1_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given n1."""
-        return self._get_link_by_attr("NODE", "nid", self.n1, "parts")
+    def eid(self) -> pd.Series:
+        """Get or set the Element ID. A unique number has to be used.
+        """ # nopep8
+        return self._cards[0].get_column("eid")
+
+    @eid.setter
+    def eid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the eid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("eid", value)
 
     @property
-    def n2_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given n2."""
-        return self._get_link_by_attr("NODE", "nid", self.n2, "parts")
+    def pid(self) -> pd.Series:
+        """Get or set the Part ID, see *PART.
+        """ # nopep8
+        return self._cards[0].get_column("pid")
+
+    @pid.setter
+    def pid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the pid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("pid", value)
 
     @property
-    def n3_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given n3."""
-        return self._get_link_by_attr("NODE", "nid", self.n3, "parts")
+    def n1(self) -> pd.Series:
+        """Get or set the Nodal point 1.
+        """ # nopep8
+        return self._cards[0].get_column("n1")
+
+    @n1.setter
+    def n1(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n1 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n1", value)
 
     @property
-    def n4_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given n4."""
-        return self._get_link_by_attr("NODE", "nid", self.n4, "parts")
+    def n2(self) -> pd.Series:
+        """Get or set the Nodal point 2.
+        """ # nopep8
+        return self._cards[0].get_column("n2")
+
+    @n2.setter
+    def n2(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n2 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n2", value)
 
     @property
-    def n5_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given n5."""
-        return self._get_link_by_attr("NODE", "nid", self.n5, "parts")
+    def n3(self) -> pd.Series:
+        """Get or set the Nodal point 3.
+        """ # nopep8
+        return self._cards[0].get_column("n3")
+
+    @n3.setter
+    def n3(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n3 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n3", value)
 
     @property
-    def n6_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given n6."""
-        return self._get_link_by_attr("NODE", "nid", self.n6, "parts")
+    def n4(self) -> pd.Series:
+        """Get or set the Nodal point 4.
+        """ # nopep8
+        return self._cards[0].get_column("n4")
+
+    @n4.setter
+    def n4(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n4 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n4", value)
 
     @property
-    def n7_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given n7."""
-        return self._get_link_by_attr("NODE", "nid", self.n7, "parts")
+    def n5(self) -> pd.Series:
+        """Get or set the Mid side nodal point 5.
+        """ # nopep8
+        return self._cards[0].get_column("n5")
+
+    @n5.setter
+    def n5(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n5 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n5", value)
 
     @property
-    def n8_link(self) -> typing.Optional[KeywordBase]:
-        """Get the NODE keyword containing the given n8."""
-        return self._get_link_by_attr("NODE", "nid", self.n8, "parts")
+    def n6(self) -> pd.Series:
+        """Get or set the Mid side nodal point 6.
+        """ # nopep8
+        return self._cards[0].get_column("n6")
+
+    @n6.setter
+    def n6(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n6 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n6", value)
 
     @property
-    def pid_link(self) -> typing.Optional[KeywordBase]:
-        """Get the PART keyword containing the given pid."""
-        return self._get_link_by_attr("PART", "pid", self.pid, "parts")
+    def n7(self) -> pd.Series:
+        """Get or set the Mid side nodal point 7.
+        """ # nopep8
+        return self._cards[0].get_column("n7")
+
+    @n7.setter
+    def n7(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n7 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n7", value)
+
+    @property
+    def n8(self) -> pd.Series:
+        """Get or set the Mid side nodal point 8.
+        """ # nopep8
+        return self._cards[0].get_column("n8")
+
+    @n8.setter
+    def n8(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the n8 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("n8", value)
+
+    @property
+    def thic1(self) -> pd.Series:
+        """Get or set the Shell thickness at node 1.
+        """ # nopep8
+        return self._cards[0].get_column("thic1")
+
+    @thic1.setter
+    def thic1(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the thic1 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("thic1", value)
+
+    @property
+    def thic2(self) -> pd.Series:
+        """Get or set the Shell thickness at node 2.
+        """ # nopep8
+        return self._cards[0].get_column("thic2")
+
+    @thic2.setter
+    def thic2(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the thic2 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("thic2", value)
+
+    @property
+    def thic3(self) -> pd.Series:
+        """Get or set the Shell thickness at node 3.
+        """ # nopep8
+        return self._cards[0].get_column("thic3")
+
+    @thic3.setter
+    def thic3(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the thic3 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("thic3", value)
+
+    @property
+    def thic4(self) -> pd.Series:
+        """Get or set the Shell thickness at node 4.
+        """ # nopep8
+        return self._cards[0].get_column("thic4")
+
+    @thic4.setter
+    def thic4(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the thic4 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("thic4", value)
+
+    @property
+    def beta(self) -> pd.Series:
+        """Get or set the Orthotropic material angle offset measured from the reference (1-2 element side) axis, the angle is in degrees.
+        """ # nopep8
+        return self._cards[0].get_column("beta")
+
+    @beta.setter
+    def beta(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the beta column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("beta", value)
+
+    @property
+    def thic5(self) -> pd.Series:
+        """Get or set the Shell thickness at node 5.
+        """ # nopep8
+        return self._cards[0].get_column("thic5")
+
+    @thic5.setter
+    def thic5(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the thic5 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("thic5", value)
+
+    @property
+    def thic6(self) -> pd.Series:
+        """Get or set the Shell thickness at node 6.
+        """ # nopep8
+        return self._cards[0].get_column("thic6")
+
+    @thic6.setter
+    def thic6(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the thic6 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("thic6", value)
+
+    @property
+    def thic7(self) -> pd.Series:
+        """Get or set the Shell thickness at node 7.
+        """ # nopep8
+        return self._cards[0].get_column("thic7")
+
+    @thic7.setter
+    def thic7(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the thic7 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("thic7", value)
+
+    @property
+    def thic8(self) -> pd.Series:
+        """Get or set the Shell thickness at node 8.
+        """ # nopep8
+        return self._cards[0].get_column("thic8")
+
+    @thic8.setter
+    def thic8(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the thic8 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("thic8", value)
 

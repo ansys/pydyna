@@ -403,6 +403,28 @@ class Mat124(KeywordBase):
         self._cards[4].table = df
 
     @property
+    def gi(self) -> pd.Series:
+        """Get or set the Optional shear relaxation modulus for the ith term
+        """ # nopep8
+        return self._cards[4].get_column("gi")
+
+    @gi.setter
+    def gi(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the gi column from a scalar, a Series, or an array-like."""
+        self._cards[4].set_column("gi", value)
+
+    @property
+    def betai(self) -> pd.Series:
+        """Get or set the Optional shear decay constant for the ith term
+        """ # nopep8
+        return self._cards[4].get_column("betai")
+
+    @betai.setter
+    def betai(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the betai column from a scalar, a Series, or an array-like."""
+        self._cards[4].set_column("betai", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8

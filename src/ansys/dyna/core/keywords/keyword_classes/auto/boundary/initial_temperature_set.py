@@ -65,12 +65,44 @@ class InitialTemperatureSet(KeywordBase):
         self._cards[0].table = df
 
     @property
-    def nsid_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_NODE_* keyword for nsid."""
-        return self._get_set_link("NODE", self.nsid)
+    def nsid(self) -> pd.Series:
+        """Get or set the Nodal set ID, see also *SET_NODE.
+        EQ.0: all nodes are included.
+        """ # nopep8
+        return self._cards[0].get_column("nsid")
 
-    @nsid_link.setter
-    def nsid_link(self, value: KeywordBase) -> None:
-        """Set the SET_NODE_* keyword for nsid."""
-        self.nsid = value.sid
+    @nsid.setter
+    def nsid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the nsid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("nsid", value)
+
+    @property
+    def temp(self) -> pd.Series:
+        """Get or set the Temperature at node set.
+        """ # nopep8
+        return self._cards[0].get_column("temp")
+
+    @temp.setter
+    def temp(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the temp column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("temp", value)
+
+    @property
+    def loc(self) -> pd.Series:
+        """Get or set the Application of surface for thermal shell elements, see parameter, TSHELL, in the *CONTROL_SHELL input.
+        EQ.-1: lower surface of thermal shell element.
+        EQ. 0 middle surface of thermal shell element.
+        EQ. 1: upper surface of thermal shell element.
+        """ # nopep8
+        return self._cards[0].get_column("loc")
+
+    @loc.setter
+    def loc(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the loc column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("loc", value)
+
+    @property
+    def nsid_links(self) -> typing.Dict[typing.Any, KeywordBase]:
+        """Get the keywords linked by the nsid column, keyed by nsid value."""
+        return self._get_column_links(self.nsid, lambda value: self._get_set_link("NODE", value))
 

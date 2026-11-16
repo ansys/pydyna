@@ -140,6 +140,94 @@ class IcfdPartVol(KeywordBase):
         self._cards[1].table = df
 
     @property
+    def spid1(self) -> pd.Series:
+        """Get or set the Part ID for the surface elements that define the volume mesh.
+        """ # nopep8
+        return self._cards[1].get_column("spid1")
+
+    @spid1.setter
+    def spid1(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the spid1 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("spid1", value)
+
+    @property
+    def spid2(self) -> pd.Series:
+        """Get or set the Part ID for the surface elements that define the volume mesh.
+        """ # nopep8
+        return self._cards[1].get_column("spid2")
+
+    @spid2.setter
+    def spid2(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the spid2 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("spid2", value)
+
+    @property
+    def spid3(self) -> pd.Series:
+        """Get or set the Part ID for the surface elements that define the volume mesh.
+        """ # nopep8
+        return self._cards[1].get_column("spid3")
+
+    @spid3.setter
+    def spid3(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the spid3 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("spid3", value)
+
+    @property
+    def spid4(self) -> pd.Series:
+        """Get or set the Part ID for the surface elements that define the volume mesh.
+        """ # nopep8
+        return self._cards[1].get_column("spid4")
+
+    @spid4.setter
+    def spid4(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the spid4 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("spid4", value)
+
+    @property
+    def spid5(self) -> pd.Series:
+        """Get or set the Part ID for the surface elements that define the volume mesh.
+        """ # nopep8
+        return self._cards[1].get_column("spid5")
+
+    @spid5.setter
+    def spid5(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the spid5 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("spid5", value)
+
+    @property
+    def spid6(self) -> pd.Series:
+        """Get or set the Part ID for the surface elements that define the volume mesh.
+        """ # nopep8
+        return self._cards[1].get_column("spid6")
+
+    @spid6.setter
+    def spid6(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the spid6 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("spid6", value)
+
+    @property
+    def spid7(self) -> pd.Series:
+        """Get or set the Part ID for the surface elements that define the volume mesh.
+        """ # nopep8
+        return self._cards[1].get_column("spid7")
+
+    @spid7.setter
+    def spid7(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the spid7 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("spid7", value)
+
+    @property
+    def spid8(self) -> pd.Series:
+        """Get or set the Part ID for the surface elements that define the volume mesh.
+        """ # nopep8
+        return self._cards[1].get_column("spid8")
+
+    @spid8.setter
+    def spid8(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the spid8 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("spid8", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8

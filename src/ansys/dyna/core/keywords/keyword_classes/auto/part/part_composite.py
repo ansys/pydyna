@@ -241,34 +241,102 @@ class PartComposite(KeywordBase):
         self._cards[2].table = df
 
     @property
-    def mid1_link(self) -> typing.Optional[KeywordBase]:
-        """Get the MAT_* keyword for mid1."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_type("MAT"):
-            if kwd.mid == self.mid1:
-                return kwd
-        return None
+    def mid1(self) -> pd.Series:
+        """Get or set the Material ID of integration point i, see *MAT_   Section
+        """ # nopep8
+        return self._cards[2].get_column("mid1")
 
-    @mid1_link.setter
-    def mid1_link(self, value: KeywordBase) -> None:
-        """Set the MAT_* keyword for mid1."""
-        self.mid1 = value.mid
+    @mid1.setter
+    def mid1(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the mid1 column from a scalar, a Series, or an array-like."""
+        self._cards[2].set_column("mid1", value)
 
     @property
-    def mid2_link(self) -> typing.Optional[KeywordBase]:
-        """Get the MAT_* keyword for mid2."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_type("MAT"):
-            if kwd.mid == self.mid2:
-                return kwd
-        return None
+    def thick1(self) -> pd.Series:
+        """Get or set the Thickness of integration point .
+        """ # nopep8
+        return self._cards[2].get_column("thick1")
 
-    @mid2_link.setter
-    def mid2_link(self, value: KeywordBase) -> None:
-        """Set the MAT_* keyword for mid2."""
-        self.mid2 = value.mid
+    @thick1.setter
+    def thick1(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the thick1 column from a scalar, a Series, or an array-like."""
+        self._cards[2].set_column("thick1", value)
+
+    @property
+    def b1(self) -> pd.Series:
+        """Get or set the Material angle of integration point i.
+        """ # nopep8
+        return self._cards[2].get_column("b1")
+
+    @b1.setter
+    def b1(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the b1 column from a scalar, a Series, or an array-like."""
+        self._cards[2].set_column("b1", value)
+
+    @property
+    def tmid1(self) -> pd.Series:
+        """Get or set the Thermal ID
+        """ # nopep8
+        return self._cards[2].get_column("tmid1")
+
+    @tmid1.setter
+    def tmid1(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the tmid1 column from a scalar, a Series, or an array-like."""
+        self._cards[2].set_column("tmid1", value)
+
+    @property
+    def mid2(self) -> pd.Series:
+        """Get or set the Material ID of integration point i, see *MAT_   Section
+        """ # nopep8
+        return self._cards[2].get_column("mid2")
+
+    @mid2.setter
+    def mid2(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the mid2 column from a scalar, a Series, or an array-like."""
+        self._cards[2].set_column("mid2", value)
+
+    @property
+    def thick2(self) -> pd.Series:
+        """Get or set the Thickness of integration point
+        """ # nopep8
+        return self._cards[2].get_column("thick2")
+
+    @thick2.setter
+    def thick2(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the thick2 column from a scalar, a Series, or an array-like."""
+        self._cards[2].set_column("thick2", value)
+
+    @property
+    def b2(self) -> pd.Series:
+        """Get or set the Material angle of integration point i
+        """ # nopep8
+        return self._cards[2].get_column("b2")
+
+    @b2.setter
+    def b2(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the b2 column from a scalar, a Series, or an array-like."""
+        self._cards[2].set_column("b2", value)
+
+    @property
+    def tmid2(self) -> pd.Series:
+        """Get or set the Thermal ID
+        """ # nopep8
+        return self._cards[2].get_column("tmid2")
+
+    @tmid2.setter
+    def tmid2(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the tmid2 column from a scalar, a Series, or an array-like."""
+        self._cards[2].set_column("tmid2", value)
+
+    @property
+    def mid1_links(self) -> typing.Dict[typing.Any, KeywordBase]:
+        """Get the keywords linked by the mid1 column, keyed by mid1 value."""
+        return self._get_column_links(self.mid1, lambda value: self._find_keyword("MAT", None, "mid", value))
+
+    @property
+    def mid2_links(self) -> typing.Dict[typing.Any, KeywordBase]:
+        """Get the keywords linked by the mid2 column, keyed by mid2 value."""
+        return self._get_column_links(self.mid2, lambda value: self._find_keyword("MAT", None, "mid", value))
 
     @property
     def hgid_link(self) -> typing.Optional[Hourglass]:
