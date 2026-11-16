@@ -23,7 +23,6 @@
 """Module for transforming element data."""
 
 import typing
-import warnings
 
 import pandas as pd
 
@@ -43,13 +42,12 @@ class TransformElement(Transform):
 
     def _get_elements_dataframe(self, keyword) -> typing.Optional[pd.DataFrame]:
         """Get the elements DataFrame from the keyword, if available."""
-        warning = f"keyword {keyword.keyword}_{keyword.subkeyword} not transformed!"
         if not hasattr(keyword, "elements"):
-            warnings.warn(warning)
+            self._warn_not_transformed(keyword)
             return None
         elements = keyword.elements
         if not is_dataframe(elements):
-            warnings.warn(warning)
+            self._warn_not_transformed(keyword)
             return None
         return elements
 

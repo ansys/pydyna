@@ -22,6 +22,7 @@
 
 """*PART_CONTACT is a repeating parts table, so IDPOFF offsets its pid (issue #1369)."""
 
+import os
 import warnings
 
 import pytest
@@ -112,3 +113,35 @@ def test_part_contact_idpoff_on_expand(tmp_path):
     rewritten = kwd.PartContact()
     rewritten.loads(part.write())
     assert rewritten.pid.tolist() == [101, 0]
+
+
+_PART_PRINT = """\
+*KEYWORD
+*PART_PRINT
+printed-part
+         7         1         1         0         0         0         0         0
+         1
+*END
+"""
+
+
+def test_untransformed_part_warning_includes_file_and_line(tmp_path):
+    """A *PART form that is not offset names the include file and keyword line (issue #1369)."""
+    include = tmp_path / "sub-keyfile.k"
+    include.write_text(_PART_PRINT, encoding="utf-8")
+
+    deck = Deck()
+    transform = kwd.IncludeTransform(filename="sub-keyfile.k")
+    transform.idpoff = 100
+    deck.append(transform)
+
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        expanded = deck.expand(cwd=str(tmp_path))
+
+    part = expanded.keywords[0]
+    assert isinstance(part, kwd.PartPrint)
+    assert part.pid == 7
+    expected_path = os.path.join(str(tmp_path), "sub-keyfile.k")
+    messages = [str(item.message) for item in caught if "not transformed" in str(item.message)]
+    assert messages == [f"keyword PART_PRINT not transformed! in '{expected_path}' line 2"]
