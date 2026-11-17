@@ -24,10 +24,11 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
+from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.keyword_base import LinkType
 
-_DATABASEHISTORYDISCRETESET_CARD0 = (
+_HISTORYCARDSET_CARD0 = (
     FieldSchema("id1", int, 0, 10, None),
     FieldSchema("id2", int, 10, 10, None),
     FieldSchema("id3", int, 20, 10, None),
@@ -38,31 +39,21 @@ _DATABASEHISTORYDISCRETESET_CARD0 = (
     FieldSchema("id8", int, 70, 10, None),
 )
 
-class DatabaseHistoryDiscreteSet(KeywordBase):
-    """DYNA DATABASE_HISTORY_DISCRETE_SET keyword"""
-
-    keyword = "DATABASE"
-    subkeyword = "HISTORY_DISCRETE_SET"
-    _link_fields = {
-        "id1": LinkType.SET_DISCRETE,
-        "id2": LinkType.SET_DISCRETE,
-        "id3": LinkType.SET_DISCRETE,
-        "id4": LinkType.SET_DISCRETE,
-        "id5": LinkType.SET_DISCRETE,
-        "id6": LinkType.SET_DISCRETE,
-        "id7": LinkType.SET_DISCRETE,
-        "id8": LinkType.SET_DISCRETE,
-    }
+class HistoryCardSet(Cards):
+    """ CardSet."""
 
     def __init__(self, **kwargs):
-        """Initialize the DatabaseHistoryDiscreteSet class."""
-        super().__init__(**kwargs)
+        """Initialize the HistoryCardSet CardSet."""
+        super().__init__(kwargs["keyword"])
+        self._parent = kwargs["parent"]
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
-                _DATABASEHISTORYDISCRETESET_CARD0,
+                _HISTORYCARDSET_CARD0,
                 **kwargs,
             ),
         ]
+
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the Set ID of the first discrete element set.
@@ -152,82 +143,129 @@ class DatabaseHistoryDiscreteSet(KeywordBase):
         self._cards[0].set_value("id8", value)
 
     @property
-    def id1_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_DISCRETE_* keyword for id1."""
-        return self._get_set_link("DISCRETE", self.id1)
+    def parent(self) -> KeywordBase:
+        """Get the parent keyword."""
+        return self._parent
 
-    @id1_link.setter
-    def id1_link(self, value: KeywordBase) -> None:
-        """Set the SET_DISCRETE_* keyword for id1."""
-        self.id1 = value.sid
+class DatabaseHistoryDiscreteSet(KeywordBase):
+    """DYNA DATABASE_HISTORY_DISCRETE_SET keyword"""
+
+    keyword = "DATABASE"
+    subkeyword = "HISTORY_DISCRETE_SET"
+
+    def __init__(self, **kwargs):
+        """Initialize the DatabaseHistoryDiscreteSet class."""
+        super().__init__(**kwargs)
+        kwargs["parent"] = self
+        kwargs["keyword"] = self
+        self._cards = [
+            CardSet(
+                HistoryCardSet,
+                **kwargs
+            ),
+        ]
+    @property
+    def id1(self) -> typing.Optional[int]:
+        """Get or set the id1
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].id1
+
+    @id1.setter
+    def id1(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].id1 = value
 
     @property
-    def id2_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_DISCRETE_* keyword for id2."""
-        return self._get_set_link("DISCRETE", self.id2)
+    def id2(self) -> typing.Optional[int]:
+        """Get or set the id2
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].id2
 
-    @id2_link.setter
-    def id2_link(self, value: KeywordBase) -> None:
-        """Set the SET_DISCRETE_* keyword for id2."""
-        self.id2 = value.sid
-
-    @property
-    def id3_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_DISCRETE_* keyword for id3."""
-        return self._get_set_link("DISCRETE", self.id3)
-
-    @id3_link.setter
-    def id3_link(self, value: KeywordBase) -> None:
-        """Set the SET_DISCRETE_* keyword for id3."""
-        self.id3 = value.sid
+    @id2.setter
+    def id2(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].id2 = value
 
     @property
-    def id4_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_DISCRETE_* keyword for id4."""
-        return self._get_set_link("DISCRETE", self.id4)
+    def id3(self) -> typing.Optional[int]:
+        """Get or set the id3
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].id3
 
-    @id4_link.setter
-    def id4_link(self, value: KeywordBase) -> None:
-        """Set the SET_DISCRETE_* keyword for id4."""
-        self.id4 = value.sid
-
-    @property
-    def id5_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_DISCRETE_* keyword for id5."""
-        return self._get_set_link("DISCRETE", self.id5)
-
-    @id5_link.setter
-    def id5_link(self, value: KeywordBase) -> None:
-        """Set the SET_DISCRETE_* keyword for id5."""
-        self.id5 = value.sid
+    @id3.setter
+    def id3(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].id3 = value
 
     @property
-    def id6_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_DISCRETE_* keyword for id6."""
-        return self._get_set_link("DISCRETE", self.id6)
+    def id4(self) -> typing.Optional[int]:
+        """Get or set the id4
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].id4
 
-    @id6_link.setter
-    def id6_link(self, value: KeywordBase) -> None:
-        """Set the SET_DISCRETE_* keyword for id6."""
-        self.id6 = value.sid
-
-    @property
-    def id7_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_DISCRETE_* keyword for id7."""
-        return self._get_set_link("DISCRETE", self.id7)
-
-    @id7_link.setter
-    def id7_link(self, value: KeywordBase) -> None:
-        """Set the SET_DISCRETE_* keyword for id7."""
-        self.id7 = value.sid
+    @id4.setter
+    def id4(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].id4 = value
 
     @property
-    def id8_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_DISCRETE_* keyword for id8."""
-        return self._get_set_link("DISCRETE", self.id8)
+    def id5(self) -> typing.Optional[int]:
+        """Get or set the id5
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].id5
 
-    @id8_link.setter
-    def id8_link(self, value: KeywordBase) -> None:
-        """Set the SET_DISCRETE_* keyword for id8."""
-        self.id8 = value.sid
+    @id5.setter
+    def id5(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].id5 = value
+
+    @property
+    def id6(self) -> typing.Optional[int]:
+        """Get or set the id6
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].id6
+
+    @id6.setter
+    def id6(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].id6 = value
+
+    @property
+    def id7(self) -> typing.Optional[int]:
+        """Get or set the id7
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].id7
+
+    @id7.setter
+    def id7(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].id7 = value
+
+    @property
+    def id8(self) -> typing.Optional[int]:
+        """Get or set the id8
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].id8
+
+    @id8.setter
+    def id8(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].id8 = value
+
+    @property
+    def sets(self) -> typing.List[HistoryCardSet]:
+        """Gets the list of sets."""
+        return self._cards[0].items()
+
+    def add_set(self, **kwargs):
+        """Adds a set."""
+        self._cards[0].add_item(**kwargs)
 

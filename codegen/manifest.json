@@ -890,6 +890,31 @@
             "labels": {
                 "id_title_card": 0
             }
+        },
+        {
+            "type": "prefix",
+            "patterns": [
+                "DATABASE_HISTORY"
+            ],
+            "exclusions": [
+                "DATABASE_HISTORY_NODE_LOCAL_ID",
+                "DATABASE_HISTORY_ACOUSTIC"
+            ],
+            "comment": "DATABASE_HISTORY_OPTION cards repeat until the next keyword. NODE_LOCAL_ID is a two-card pair (card 1c plus heading) and is defined on its own entry. ACOUSTIC is a single non-repeating card.",
+            "generation-options": {
+                "card-set": [
+                    {
+                        "source-refs": [
+                            "history_card"
+                        ],
+                        "target-ref": "history_card",
+                        "name": "HistoryCardSet"
+                    }
+                ]
+            },
+            "labels": {
+                "history_card": 0
+            }
         }
     ],
     "CONSTRAINED_BEAM_IN_SOLID": {
@@ -3609,6 +3634,41 @@
         },
         "labels": {
             "heading_card": 0
+        }
+    },
+    "DATABASE_HISTORY_NODE_LOCAL_ID": {
+        "comment": "Manual Card 1c (NODE_LOCAL, NODE_LOCAL_ID, NODE_SET_LOCAL) includes HFO. kwd.json omits it on the _ID form, so the fourth field is read as out-of-bound data.",
+        "generation-options": {
+            "add-field": [
+                {
+                    "ref": "node_card",
+                    "fields": [
+                        {
+                            "name": "HFO",
+                            "type": "integer",
+                            "position": 30,
+                            "width": 10,
+                            "default": "0",
+                            "options": ["0", "1"],
+                            "help": "Flag for high frequency output into NODOUTHF.\nEQ.0: Nodal data written to NODOUT file only,\nEQ.1: Nodal data also written to NODOUTHF at the higher frequency."
+                        }
+                    ]
+                }
+            ],
+            "card-set": [
+                {
+                    "source-refs": [
+                        "node_card",
+                        "heading_card"
+                    ],
+                    "target-ref": "node_card",
+                    "name": "HistoryCardSet"
+                }
+            ]
+        },
+        "labels": {
+            "node_card": 0,
+            "heading_card": 1
         }
     },
     "SET_NODE_ADD": {
