@@ -64,9 +64,9 @@ class TransformHandler(ImportHandler):
                 warnings.warn()
                 return
 
-        # if a handler was found, initialize it with the xform from the context
+        # if a handler was found, initialize it with the xform and import context
         # and transform the keyword with it
-        handler(context.xform).transform(keyword)
+        handler(context.xform, context).transform(keyword)
 
     def on_error(self, error, context=None, result=None):
         """Handle errors during import."""

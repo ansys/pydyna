@@ -1153,6 +1153,26 @@
             "layers_card": 2
         }
     },
+    "PART_CONTACT": {
+        "generation-options": {
+            "table-card-group": [
+                {
+                    "refs": [
+                        "title_card",
+                        "part_data_card",
+                        "contact_card"
+                    ],
+                    "overall-name": "parts",
+                    "key-field": "pid"
+                }
+            ]
+        },
+        "labels": {
+            "title_card": 0,
+            "part_data_card": 1,
+            "contact_card": 2
+        }
+    },
     "PART_PART": {
         "generation-options": {
             "replace-card": [
