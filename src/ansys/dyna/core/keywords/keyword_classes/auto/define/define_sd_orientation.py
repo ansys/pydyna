@@ -90,6 +90,87 @@ class DefineSdOrientation(KeywordBase):
         self._cards[0].table = df
 
     @property
+    def vid(self) -> pd.Series:
+        """Get or set the Orientation vector ID. A unique number must be used.
+        """ # nopep8
+        return self._cards[0].get_column("vid")
+
+    @vid.setter
+    def vid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the vid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("vid", value)
+
+    @property
+    def iop(self) -> pd.Series:
+        """Get or set the Option:
+        EQ.0: deflections/rotations are measured and forces/moments applied along the following orientation vector,
+        EQ.1: deflections/rotations are measured and forces/moments applied along the axis between the two spring/damper nodes projected onto the plane normal to the following orientation vector,
+        EQ.2: deflections/rotations are measured and forces/moments applied along a vector defined by the following two nodes,
+        EQ.3: deflections/rotations are measured and forces/moments applied along the axis between the two spring/damper nodes projected onto the plane normal to the vector defined by the following two nodes.
+        """ # nopep8
+        return self._cards[0].get_column("iop")
+
+    @iop.setter
+    def iop(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the iop column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("iop", value)
+
+    @property
+    def xt(self) -> pd.Series:
+        """Get or set the x-value of orientation vector. Define if IOP=0,1.
+        """ # nopep8
+        return self._cards[0].get_column("xt")
+
+    @xt.setter
+    def xt(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the xt column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("xt", value)
+
+    @property
+    def yt(self) -> pd.Series:
+        """Get or set the y-value of orientation vector. Define if IOP=0,1.
+        """ # nopep8
+        return self._cards[0].get_column("yt")
+
+    @yt.setter
+    def yt(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the yt column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("yt", value)
+
+    @property
+    def zt(self) -> pd.Series:
+        """Get or set the z-value of orientation vector. Define if IOP=0,1.
+        """ # nopep8
+        return self._cards[0].get_column("zt")
+
+    @zt.setter
+    def zt(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the zt column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("zt", value)
+
+    @property
+    def nid1(self) -> pd.Series:
+        """Get or set the Node 1 ID. Define if IOP=2,3.
+        """ # nopep8
+        return self._cards[0].get_column("nid1")
+
+    @nid1.setter
+    def nid1(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the nid1 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("nid1", value)
+
+    @property
+    def nid2(self) -> pd.Series:
+        """Get or set the Node 2 ID. Define if IOP=2,3.
+        """ # nopep8
+        return self._cards[0].get_column("nid2")
+
+    @nid2.setter
+    def nid2(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the nid2 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("nid2", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
