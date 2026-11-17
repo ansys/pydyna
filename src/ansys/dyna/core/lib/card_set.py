@@ -200,21 +200,15 @@ class CardSet(CardInterface):
             for card in item._cards:
                 card.format = self._format_type
 
-        # Custom _read_data replaces Cards._read_data and therefore skips after_read.
-        # Sync shared fields after the peek-and-read so inactive variant cards
-        # carry the values that were read on the active card.
+        # A custom _read_data replaces Cards._read_data, which is what runs after_read
+        # and records parameter references. Call after_read once the peek-and-read
+        # finishes so inactive variant cards carry the values that were read.
         if type(item)._read_data is not Cards._read_data:
             reached_end = item._read_data(buf, parameter_set)
             item.after_read()
             return bool(reached_end)
 
-        # Default: iterate through all cards
-        for card in item._get_all_cards():
-            result = card.read(buf, parameter_set)
-            if result.reached_end:
-                # according to the card, we are at the end of the keyword, so
-                # we can break out of the card reading loop.
-                return True
+        item._read_data(buf, parameter_set)
         return False
 
     def _load_bounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet) -> None:
@@ -320,7 +314,7 @@ def read_cards_with_discriminator(
     return False
 
 
-def _default_discriminator_value(discriminator: "Field"):
+def _default_discriminator_value(discriminator: "Field"):  # noqa: F821
     """Value used when the peeked column is blank or not convertible."""
     if discriminator.value is not None:
         return discriminator.value
@@ -329,7 +323,7 @@ def _default_discriminator_value(discriminator: "Field"):
     return None
 
 
-def _parse_discriminator_value(text: str, discriminator: "Field"):
+def _parse_discriminator_value(text: str, discriminator: "Field"):  # noqa: F821
     """Convert a peeked column to the discriminator field's type."""
     if not text:
         return _default_discriminator_value(discriminator)
