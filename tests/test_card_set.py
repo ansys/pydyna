@@ -338,6 +338,71 @@ class TestCardSetWithDiscriminator:
         assert items[0]._cards[2].get_value("val2") == 3.0
         assert items[0]._cards[2].get_value("val3") == 4.0
 
+    def test_discriminator_read_string_field(self, string_utils):
+        """A string discriminator selects the card. TYPE on *SENSOR_CONTROL is a string."""
+        from ansys.dyna.core.lib.card import Card
+        from ansys.dyna.core.lib.card_set import read_cards_with_discriminator
+        from ansys.dyna.core.lib.cards import Cards
+        from ansys.dyna.core.lib.field_schema import FieldSchema
+
+        _CARD0_SCHEMA = (
+            FieldSchema("cntlid", int, 0, 10),
+            FieldSchema("type", str, 10, 10, "AIRBAG"),
+            FieldSchema("sidr", int, 20, 10),
+        )
+        _CARD1_SCHEMA = (
+            FieldSchema("cntlid", int, 0, 10),
+            FieldSchema("type", str, 10, 10, "AIRBAG"),
+            FieldSchema("estyp", str, 20, 10),
+        )
+
+        class MockStringDiscriminatorItem(Cards):
+            def __init__(self, **kwargs):
+                super().__init__(kwargs.get("keyword"))
+                self._parent = kwargs.get("parent")
+                self._cards = [
+                    Card.from_field_schemas(
+                        _CARD0_SCHEMA,
+                        active_func=lambda: self.type != "ELESET",
+                    ),
+                    Card.from_field_schemas(
+                        _CARD1_SCHEMA,
+                        active_func=lambda: self.type == "ELESET",
+                    ),
+                ]
+
+            @property
+            def type(self):
+                return self._cards[0].get_value("type")
+
+            def _read_data(self, buf, parameters) -> bool:
+                return read_cards_with_discriminator(
+                    self._cards,
+                    buf,
+                    parameters,
+                    discriminator=self._cards[0]._fields[1],
+                    cards_with_field=[0, 1],
+                )
+
+            def after_read(self) -> None:
+                self._sync_shared_field("cntlid", [0, 1])
+                self._sync_shared_field("type", [0, 1])
+
+        parent = Parent()
+        kwargs = {"parent": parent, "keyword": parent}
+        card_set = CardSet(MockStringDiscriminatorItem, lambda: 1, **kwargs)
+        parent._cards = [card_set]
+
+        data = "         7ELESET    SOLID     "
+        card_set.read(string_utils.as_buffer(data))
+
+        item = card_set.items()[0]
+        assert item.type == "ELESET"
+        assert item._cards[1].get_value("estyp") == "SOLID"
+        assert item._cards[1].get_value("cntlid") == 7
+        assert item._cards[0].get_value("cntlid") == 7
+        assert item._cards[0].active is False
+
 
 class TestInitialStrainShellFix:
     """Tests for INITIAL_STRAIN_SHELL fix for issue #656.

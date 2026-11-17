@@ -200,12 +200,31 @@ class Cards:
         pass
 
     def _sync_shared_field(self, name: str, card_indices: typing.List[int]) -> None:
-        """Write the first non-None value found across card_indices into card_indices[0]."""
+        """Copy a shared field onto every listed card.
+
+        Prefer the active card. That is the card the reader filled. Unread
+        variant cards still hold schema defaults, and a default such as ``0``
+        must not hide the value that was actually read.
+        """
+        source = None
+        found = False
         for i in card_indices:
-            val = self._cards[i].get_value(name)
-            if val is not None:
-                self._cards[card_indices[0]].set_value(name, val)
-                return
+            card = self._cards[i]
+            if card.active:
+                source = card.get_value(name)
+                found = True
+                break
+        if not found:
+            for i in card_indices:
+                val = self._cards[i].get_value(name)
+                if val is not None:
+                    source = val
+                    found = True
+                    break
+        if not found:
+            return
+        for i in card_indices:
+            self._cards[i].set_value(name, source)
 
     def _read_data(
         self, buf: typing.TextIO, parameters: ParameterSet, import_context: typing.Optional["ImportContext"] = None

@@ -2617,6 +2617,7 @@
                     "items-name": "fiber_families",
                     "discriminator": {
                         "field": "ftype",
+                        "field-index": 0,
                         "cards-with-field": [
                             1,
                             2
@@ -4486,6 +4487,54 @@
         "labels": {
             "g1c_card": 5,
             "g2c_card": 6
+        }
+    },
+    "SENSOR_CONTROL": {
+        "comment": "Cards 1a/1b/1c are mutually exclusive and selected by TYPE. Card 2 always follows. The pair repeats until the next keyword.",
+        "generation-options": {
+            "reorder-card": [
+                {
+                    "order": [0, 2, 3, 1]
+                }
+            ],
+            "card-set": [
+                {
+                    "source-refs": ["default_card", "curve_card", "eleset_card", "switch_card"],
+                    "target-ref": "default_card",
+                    "name": "SensorControlSet",
+                    "discriminator": {
+                        "field": "type",
+                        "field-index": 1,
+                        "cards-with-field": [0, 1, 2]
+                    },
+                    "internal-conditionals": [
+                        {
+                            "index": 0,
+                            "func": "self.type not in [\"CURVE\", \"PRESC-MOT\", \"PRESC-ORI\", \"PRESSURE\", \"ELESET\"]"
+                        },
+                        {
+                            "index": 1,
+                            "func": "self.type in [\"CURVE\", \"PRESC-MOT\", \"PRESC-ORI\", \"PRESSURE\"]"
+                        },
+                        {
+                            "index": 2,
+                            "func": "self.type == \"ELESET\""
+                        }
+                    ],
+                    "shared-fields": [
+                        {"name": "cntlid", "card-indices": [0, 1, 2]},
+                        {"name": "type", "card-indices": [0, 1, 2]},
+                        {"name": "typeid", "card-indices": [0, 1, 2]},
+                        {"name": "nrep", "card-indices": [0, 1, 2]}
+                    ]
+                }
+            ]
+        },
+        "labels": {
+            "default_card": 0,
+            "switch_card": 1,
+            "curve_card": 2,
+            "eleset_card": 3
         }
     }
 }
