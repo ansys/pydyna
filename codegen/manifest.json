@@ -890,6 +890,31 @@
             "labels": {
                 "id_title_card": 0
             }
+        },
+        {
+            "type": "prefix",
+            "patterns": [
+                "DATABASE_HISTORY"
+            ],
+            "exclusions": [
+                "DATABASE_HISTORY_NODE_LOCAL_ID",
+                "DATABASE_HISTORY_ACOUSTIC"
+            ],
+            "comment": "DATABASE_HISTORY_OPTION cards repeat until the next keyword. NODE_LOCAL_ID is a two-card pair (card 1c plus heading) and is defined on its own entry. ACOUSTIC is a single non-repeating card.",
+            "generation-options": {
+                "card-set": [
+                    {
+                        "source-refs": [
+                            "history_card"
+                        ],
+                        "target-ref": "history_card",
+                        "name": "HistoryCardSet"
+                    }
+                ]
+            },
+            "labels": {
+                "history_card": 0
+            }
         }
     ],
     "CONSTRAINED_BEAM_IN_SOLID": {
@@ -3629,10 +3654,21 @@
                         }
                     ]
                 }
+            ],
+            "card-set": [
+                {
+                    "source-refs": [
+                        "node_card",
+                        "heading_card"
+                    ],
+                    "target-ref": "node_card",
+                    "name": "HistoryCardSet"
+                }
             ]
         },
         "labels": {
-            "node_card": 0
+            "node_card": 0,
+            "heading_card": 1
         }
     },
     "SET_NODE_ADD": {

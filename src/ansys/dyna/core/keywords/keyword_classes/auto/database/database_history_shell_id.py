@@ -24,32 +24,30 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
+from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.keyword_base import LinkType
 
-_DATABASEHISTORYSHELLID_CARD0 = (
+_HISTORYCARDSET_CARD0 = (
     FieldSchema("id1", int, 0, 10, None),
     FieldSchema("heading", str, 10, 70, None),
 )
 
-class DatabaseHistoryShellId(KeywordBase):
-    """DYNA DATABASE_HISTORY_SHELL_ID keyword"""
-
-    keyword = "DATABASE"
-    subkeyword = "HISTORY_SHELL_ID"
-    _link_fields = {
-        "id1": LinkType.ELEMENT_SHELL,
-    }
+class HistoryCardSet(Cards):
+    """ CardSet."""
 
     def __init__(self, **kwargs):
-        """Initialize the DatabaseHistoryShellId class."""
-        super().__init__(**kwargs)
+        """Initialize the HistoryCardSet CardSet."""
+        super().__init__(kwargs["keyword"])
+        self._parent = kwargs["parent"]
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
-                _DATABASEHISTORYSHELLID_CARD0,
+                _HISTORYCARDSET_CARD0,
                 **kwargs,
             ),
         ]
+
     @property
     def id1(self) -> typing.Optional[int]:
         """Get or set the ID of the shell element.
@@ -73,7 +71,57 @@ class DatabaseHistoryShellId(KeywordBase):
         self._cards[0].set_value("heading", value)
 
     @property
-    def id1_link(self) -> typing.Optional[KeywordBase]:
-        """Get the ELEMENT keyword containing the given id1."""
-        return self._get_link_by_attr("ELEMENT", "eid", self.id1, "parts")
+    def parent(self) -> KeywordBase:
+        """Get the parent keyword."""
+        return self._parent
+
+class DatabaseHistoryShellId(KeywordBase):
+    """DYNA DATABASE_HISTORY_SHELL_ID keyword"""
+
+    keyword = "DATABASE"
+    subkeyword = "HISTORY_SHELL_ID"
+
+    def __init__(self, **kwargs):
+        """Initialize the DatabaseHistoryShellId class."""
+        super().__init__(**kwargs)
+        kwargs["parent"] = self
+        kwargs["keyword"] = self
+        self._cards = [
+            CardSet(
+                HistoryCardSet,
+                **kwargs
+            ),
+        ]
+    @property
+    def id1(self) -> typing.Optional[int]:
+        """Get or set the id1
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].id1
+
+    @id1.setter
+    def id1(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].id1 = value
+
+    @property
+    def heading(self) -> typing.Optional[str]:
+        """Get or set the heading
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].heading
+
+    @heading.setter
+    def heading(self, value: str) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].heading = value
+
+    @property
+    def sets(self) -> typing.List[HistoryCardSet]:
+        """Gets the list of sets."""
+        return self._cards[0].items()
+
+    def add_set(self, **kwargs):
+        """Adds a set."""
+        self._cards[0].add_item(**kwargs)
 
