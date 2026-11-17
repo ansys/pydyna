@@ -33,6 +33,7 @@ _DATABASEHISTORYNODELOCALID_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
     FieldSchema("cid", int, 10, 10, None),
     FieldSchema("ref", int, 20, 10, 0),
+    FieldSchema("hfo", int, 30, 10, 0),
 )
 
 _DATABASEHISTORYNODELOCALID_CARD1 = (
@@ -99,6 +100,21 @@ class DatabaseHistoryNodeLocalId(KeywordBase):
         if value not in [0, 1, 2, None]:
             raise Exception("""ref must be `None` or one of {0,1,2}.""")
         self._cards[0].set_value("ref", value)
+
+    @property
+    def hfo(self) -> int:
+        """Get or set the Flag for high frequency output into NODOUTHF.
+        EQ.0: Nodal data written to NODOUT file only,
+        EQ.1: Nodal data also written to NODOUTHF at the higher frequency.
+        """ # nopep8
+        return self._cards[0].get_value("hfo")
+
+    @hfo.setter
+    def hfo(self, value: int) -> None:
+        """Set the hfo property."""
+        if value not in [0, 1, None]:
+            raise Exception("""hfo must be `None` or one of {0,1}.""")
+        self._cards[0].set_value("hfo", value)
 
     @property
     def heading(self) -> typing.Optional[str]:

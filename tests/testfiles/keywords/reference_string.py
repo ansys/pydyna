@@ -1814,3 +1814,16 @@ Line1
 Line2
 Line3
 *END"""
+
+# Regression #1371: HFO is column 4 of card 1c on *DATABASE_HISTORY_NODE_LOCAL_ID
+test_database_history_node_local_id_with_hfo = """*DATABASE_HISTORY_NODE_LOCAL_ID
+$#      id       cid       ref       hfo
+      5802      5802         1         1
+$# heading
+node1"""
+
+test_database_history_node_local_id_without_hfo = """*DATABASE_HISTORY_NODE_LOCAL_ID
+$#      id       cid       ref
+      5801      5801         1
+$# heading
+node2"""

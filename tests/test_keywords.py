@@ -1787,3 +1787,27 @@ def test_section_beam_thickness_roundtrip(elform):
     assert beam2.ts2 == 0.6
     assert beam2.tt1 == 0.3
     assert beam2.tt2 == 0.4
+
+
+def test_database_history_node_local_id_reads_hfo(ref_string):
+    """Regression #1371: Card 1c HFO is read on *DATABASE_HISTORY_NODE_LOCAL_ID."""
+    with warnings.catch_warnings():
+        warnings.simplefilter("error", UserWarning)
+        with_hfo = kwd.DatabaseHistoryNodeLocalId()
+        with_hfo.loads(ref_string.test_database_history_node_local_id_with_hfo)
+        without_hfo = kwd.DatabaseHistoryNodeLocalId()
+        without_hfo.loads(ref_string.test_database_history_node_local_id_without_hfo)
+    assert (with_hfo.id, with_hfo.cid, with_hfo.ref, with_hfo.hfo, with_hfo.heading.strip()) == (
+        5802,
+        5802,
+        1,
+        1,
+        "node1",
+    )
+    assert (
+        without_hfo.id,
+        without_hfo.cid,
+        without_hfo.ref,
+        without_hfo.hfo,
+        without_hfo.heading.strip(),
+    ) == (5801, 5801, 1, None, "node2")

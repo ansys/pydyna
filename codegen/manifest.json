@@ -3611,6 +3611,30 @@
             "heading_card": 0
         }
     },
+    "DATABASE_HISTORY_NODE_LOCAL_ID": {
+        "comment": "Manual Card 1c (NODE_LOCAL, NODE_LOCAL_ID, NODE_SET_LOCAL) includes HFO. kwd.json omits it on the _ID form, so the fourth field is read as out-of-bound data.",
+        "generation-options": {
+            "add-field": [
+                {
+                    "ref": "node_card",
+                    "fields": [
+                        {
+                            "name": "HFO",
+                            "type": "integer",
+                            "position": 30,
+                            "width": 10,
+                            "default": "0",
+                            "options": ["0", "1"],
+                            "help": "Flag for high frequency output into NODOUTHF.\nEQ.0: Nodal data written to NODOUT file only,\nEQ.1: Nodal data also written to NODOUTHF at the higher frequency."
+                        }
+                    ]
+                }
+            ]
+        },
+        "labels": {
+            "node_card": 0
+        }
+    },
     "SET_NODE_ADD": {
         "generation-options": {
             "series-card": [
