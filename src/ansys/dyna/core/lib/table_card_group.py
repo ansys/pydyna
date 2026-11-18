@@ -47,7 +47,14 @@ from ansys.dyna.core.lib.kwd_line_formatter import (
 )
 from ansys.dyna.core.lib.parameters import ParameterSet
 from ansys.dyna.core.lib.row_condition import RowCondition
-from ansys.dyna.core.lib.table_card import TableCard, _get_first_row_from_schemas, try_initialize_table
+from ansys.dyna.core.lib.table_card import (
+    TableCard,
+    _get_initial_columns,
+    _grow_table,
+    _initial_length,
+    _set_column,
+    try_initialize_table,
+)
 
 # Lines read for each sub-card, the row each of those lines belongs to, and the number of rows.
 _Layout = typing.Tuple[typing.List[typing.List[str]], typing.List[typing.Sequence[int]], int]
@@ -143,13 +150,11 @@ class TableCardGroup(CardInterface):
         else:
             self._bounded = True
             self._length_func = length_func
+        self._initial_columns = {}
         self._initialized = try_initialize_table(self, name, **kwargs)
         if not self._initialized:
-            # Collect all field schemas for first row lookup
-            all_schemas = tuple(fs for schemas in card_schemas for fs in schemas)
-            first_row = _get_first_row_from_schemas(all_schemas, **kwargs)
-            for card in self._cards:
-                card._first_row = first_row
+            names = (fs.name for schemas in card_schemas for fs in schemas)
+            self._initial_columns = _get_initial_columns(names, **kwargs)
 
     def _get_fields(self):
         fields = []
@@ -158,12 +163,24 @@ class TableCardGroup(CardInterface):
         return fields
 
     def _initialize(self) -> None:
+        """Lazy initialization routine for the data frame.
+
+        If the group is bounded, the table is initialized with the bounded length.
+        Otherwise, it is initialized with as many rows as the longest column value
+        given in the constructor **kwargs, counting a scalar as one row.
+        The column values are then set as if by ``set_column``.
+        """
         if self._initialized:
             return
         [card._initialize(True) for card in self._cards]
         data = pd.concat([card.table for card in self._cards], axis=1)
-        self._table = data
-        self._initialized = True
+        data = data.loc[:, ~data.columns.duplicated()]
+        if not self._bounded:
+            data = _grow_table(data, self._get_fields(), _initial_length(self._initial_columns))
+        self.table = data
+        initial_columns, self._initial_columns = self._initial_columns, {}
+        for name, value in initial_columns.items():
+            self.set_column(name, value)
 
     @property
     def table(self) -> pd.DataFrame:
@@ -175,12 +192,23 @@ class TableCardGroup(CardInterface):
     def table(self, value: pd.DataFrame):
         """Set the table from a pandas DataFrame."""
         # remove duplicate columns
-        value = value.loc[:, ~value.columns.duplicated()]
+        value = value.loc[:, ~value.columns.duplicated()].reset_index(drop=True)
         # store the table
         self._table = value
         # propagate table to child duplicate card objects
         self._propagate()
         self._initialized = True
+
+    def get_column(self, name: str) -> pd.Series:
+        """Get the column ``name`` of the table."""
+        return self.table[name]
+
+    def set_column(self, name: str, value: typing.Any) -> None:
+        """Set the column ``name`` of the table from a scalar, a Series, or an array-like.
+
+        See ``TableCard.set_column``.
+        """
+        self.table = _set_column(self.table, self._get_fields(), name, value, self._bounded)
 
     @property
     def format(self) -> format_type:

@@ -59,3 +59,25 @@ class IcfdDatabaseFlux(KeywordBase):
         """Set boundaries from the dataframe df"""
         self._cards[0].table = df
 
+    @property
+    def pid(self) -> pd.Series:
+        """Get or set the Part ID of the surface where the flow rates will be computed.
+        """ # nopep8
+        return self._cards[0].get_column("pid")
+
+    @pid.setter
+    def pid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the pid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("pid", value)
+
+    @property
+    def dtout(self) -> pd.Series:
+        """Get or set the Output frequency. Default is at every fluid timestep.
+        """ # nopep8
+        return self._cards[0].get_column("dtout")
+
+    @dtout.setter
+    def dtout(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the dtout column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("dtout", value)
+

@@ -167,6 +167,145 @@ class Mat196(KeywordBase):
         self._cards[1].table = df
 
     @property
+    def dof(self) -> pd.Series:
+        """Get or set the Active degree-of-freedom, a number between 1 and 6 inclusive. Each value of DOF can only be used once. The active degree-of-freedom is measured in the local coordinate system for the discrete beam element.
+        """ # nopep8
+        return self._cards[1].get_column("dof")
+
+    @dof.setter
+    def dof(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the dof column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("dof", value)
+
+    @property
+    def type(self) -> pd.Series:
+        """Get or set the Material behavior:
+        EQ.0: Elastic(default)
+        EQ.1 : Inelastic
+        """ # nopep8
+        return self._cards[1].get_column("type")
+
+    @type.setter
+    def type(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the type column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("type", value)
+
+    @property
+    def k(self) -> pd.Series:
+        """Get or set the Elastic loading/unloading stiffness. This is required input for inelastic behavior.
+        """ # nopep8
+        return self._cards[1].get_column("k")
+
+    @k.setter
+    def k(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the k column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("k", value)
+
+    @property
+    def d(self) -> pd.Series:
+        """Get or set the Optional viscous damping coefficient.
+        """ # nopep8
+        return self._cards[1].get_column("d")
+
+    @d.setter
+    def d(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the d column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("d", value)
+
+    @property
+    def cdf(self) -> pd.Series:
+        """Get or set the Compressive displacement at failure. Input as a positive number. After failure, no forces are carried. This option does not apply to zero length springs.
+        EQ.0.0: Inactive.
+        """ # nopep8
+        return self._cards[1].get_column("cdf")
+
+    @cdf.setter
+    def cdf(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the cdf column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("cdf", value)
+
+    @property
+    def tdf(self) -> pd.Series:
+        """Get or set the Tensile displacement at failure. After failure, no forces are carried.
+        EQ.0.0: Inactive.
+        """ # nopep8
+        return self._cards[1].get_column("tdf")
+
+    @tdf.setter
+    def tdf(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the tdf column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("tdf", value)
+
+    @property
+    def flcid(self) -> pd.Series:
+        """Get or set the Load curve ID (see *DEFINE_CURVE).
+        TYPE.EQ.0: This curve defines force or moment as a function of deflection for nonlinear elastic behavior.
+        TYPE.EQ.1 : This curve defines the yield force as a function of plastic deflection.If the abscissa of the first point of the curve is 0. the force magnitude is identical in tension and compression, that is, only the sign changes.If not, the yield stress in the compression is used when the spring force is negative.The plastic displacement increases monotonically in this implementation.The load curve is required input.
+        """ # nopep8
+        return self._cards[1].get_column("flcid")
+
+    @flcid.setter
+    def flcid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the flcid column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("flcid", value)
+
+    @property
+    def hlcid(self) -> pd.Series:
+        """Get or set the Optional load curve ID (see *DEFINE_CURVE) defining force as a function of relative velocity.  If the origin of the curve is at (0,0), the force magnitude is identical for a given magnitude of the relative velocity, meaning only the sign changes.
+        """ # nopep8
+        return self._cards[1].get_column("hlcid")
+
+    @hlcid.setter
+    def hlcid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the hlcid column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("hlcid", value)
+
+    @property
+    def c1(self) -> pd.Series:
+        """Get or set the Damping coefficient.
+        """ # nopep8
+        return self._cards[1].get_column("c1")
+
+    @c1.setter
+    def c1(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the c1 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("c1", value)
+
+    @property
+    def c2(self) -> pd.Series:
+        """Get or set the Damping coefficient.
+        """ # nopep8
+        return self._cards[1].get_column("c2")
+
+    @c2.setter
+    def c2(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the c2 column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("c2", value)
+
+    @property
+    def dle(self) -> pd.Series:
+        """Get or set the Factor to scale time units.
+        """ # nopep8
+        return self._cards[1].get_column("dle")
+
+    @dle.setter
+    def dle(self, value: typing.Union[float, typing.Sequence[float], pd.Series]) -> None:
+        """Set the dle column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("dle", value)
+
+    @property
+    def glcid(self) -> pd.Series:
+        """Get or set the Optional load curve ID, see *DEFINE_CURVE, defining a scale factor versus deflection for load curve ID, GLCID.
+        If zero, a scale factor of unity is assumed.
+        """ # nopep8
+        return self._cards[1].get_column("glcid")
+
+    @glcid.setter
+    def glcid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the glcid column from a scalar, a Series, or an array-like."""
+        self._cards[1].set_column("glcid", value)
+
+    @property
     def title(self) -> typing.Optional[str]:
         """Get or set the Additional title line
         """ # nopep8
@@ -181,19 +320,9 @@ class Mat196(KeywordBase):
             self.activate_option("TITLE")
 
     @property
-    def glcid_link(self) -> typing.Optional[DefineCurve]:
-        """Get the DefineCurve object for glcid."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "CURVE"):
-            if kwd.lcid == self.glcid:
-                return kwd
-        return None
-
-    @glcid_link.setter
-    def glcid_link(self, value: DefineCurve) -> None:
-        """Set the DefineCurve object for glcid."""
-        self.glcid = value.lcid
+    def glcid_links(self) -> typing.Dict[typing.Any, KeywordBase]:
+        """Get the keywords linked by the glcid column, keyed by glcid value."""
+        return self._get_column_links(self.glcid, lambda value: self._find_keyword("DEFINE", "CURVE", "lcid", value))
 
 
 class MatGeneralSpringDiscreteBeam(Mat196):

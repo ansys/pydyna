@@ -68,6 +68,39 @@ class ConstrainedAdaptivity(KeywordBase):
         self._cards[0].table = df
 
     @property
+    def dnid(self) -> pd.Series:
+        """Get or set the Dependent node. This is the node constrained at the midpoint of an edge of an element.
+        """ # nopep8
+        return self._cards[0].get_column("dnid")
+
+    @dnid.setter
+    def dnid(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the dnid column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("dnid", value)
+
+    @property
+    def nid1(self) -> pd.Series:
+        """Get or set the Node at one end of an element edge
+        """ # nopep8
+        return self._cards[0].get_column("nid1")
+
+    @nid1.setter
+    def nid1(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the nid1 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("nid1", value)
+
+    @property
+    def nid2(self) -> pd.Series:
+        """Get or set the Node at the other end of that same element edge.
+        """ # nopep8
+        return self._cards[0].get_column("nid2")
+
+    @nid2.setter
+    def nid2(self, value: typing.Union[int, typing.Sequence[int], pd.Series]) -> None:
+        """Set the nid2 column from a scalar, a Series, or an array-like."""
+        self._cards[0].set_column("nid2", value)
+
+    @property
     def dnid_links(self) -> typing.Dict[int, KeywordBase]:
         """Get all NODE keywords for dnid, keyed by dnid value."""
         return self._get_links_from_table("NODE", "nid", "constrains", "dnid", "")

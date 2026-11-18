@@ -27,6 +27,9 @@ import enum
 import io
 import typing
 
+import numpy as np
+import pandas as pd
+
 from ansys.dyna.core.lib.card_interface import CardInterface
 from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.format_type import format_type
@@ -584,6 +587,47 @@ class KeywordBase(Cards, OptionsInterface):
             if kwd.subkeyword.startswith(subtype_prefix) and kwd.sid == value:
                 return kwd
         return None
+
+    def _find_keyword(
+        self,
+        keyword_type: str,
+        keyword_subtype: typing.Optional[str],
+        id_attr: str,
+        value: typing.Any,
+    ) -> typing.Optional["KeywordBase"]:
+        """Get the keyword of the given type whose scalar ``id_attr`` equals ``value``.
+
+        If ``keyword_subtype`` is ``None``, keywords of every subtype are searched.
+        """
+        if self.deck is None or value is None:
+            return None
+        if keyword_subtype is None:
+            kwds = self.deck.get_kwds_by_type(keyword_type)
+        else:
+            kwds = self.deck.get_kwds_by_full_type(keyword_type, keyword_subtype)
+        for kwd in kwds:
+            kwd_id = getattr(kwd, id_attr, None)
+            if np.ndim(kwd_id) == 0 and kwd_id == value:
+                return kwd
+        return None
+
+    def _get_column_links(
+        self,
+        values: pd.Series,
+        find: typing.Callable[[typing.Any], typing.Optional["KeywordBase"]],
+    ) -> typing.Dict[typing.Any, "KeywordBase"]:
+        """Get the keywords linked by the values of a table column, keyed by value.
+
+        ``find`` returns the keyword linked by a value, or ``None``.
+        """
+        if self.deck is None:
+            return {}
+        links = {}
+        for value in values.dropna().unique():
+            kwd = find(value)
+            if kwd is not None:
+                links[value] = kwd
+        return links
 
     def _get_link_by_attr(
         self,

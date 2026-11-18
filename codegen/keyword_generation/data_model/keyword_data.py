@@ -227,6 +227,24 @@ class Field:
 
 
 @dataclass
+class TableColumn:
+    """A column of a table card or table card group, exposed as a keyword property.
+
+    Attributes
+    ----------
+        property_name: Python property name
+        column: Column name in the table
+        type: Column type (int, float, str)
+        help: Documentation/help text
+    """
+
+    property_name: str
+    column: str
+    type: str
+    help: str = ""
+
+
+@dataclass
 class Card:
     """
     Represents a card within a keyword.
@@ -251,6 +269,7 @@ class Card:
         key_field: Key field name for table-aware link properties (e.g., 'pid' for Part)
         row_active_if: Row condition expression of a table card group sub-card, from the manifest
         row_condition: Compiled ``row_active_if``, set once field names are normalized
+        table_columns: Columns of a table card or table card group exposed as keyword properties
     """
 
     index: int
@@ -273,6 +292,7 @@ class Card:
     key_field: Optional[str] = None  # Key field for table-aware link properties
     row_active_if: Optional[Dict[str, Any]] = None
     row_condition: Optional[RowConditionCode] = None
+    table_columns: List[TableColumn] = field(default_factory=list)
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Card":
