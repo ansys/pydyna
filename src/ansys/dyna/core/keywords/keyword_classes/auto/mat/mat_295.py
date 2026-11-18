@@ -209,13 +209,15 @@ class FiberFamily(Cards):
     @property
     def ftype(self) -> typing.Optional[int]:
         """Get or set the Type of fiber model:
-EQ.1: Holzapfel-Gasser-Ogden [6]
-EQ.2: Freed-Doehring [2].
+        EQ.1: Holzapfel-Gasser-Ogden [6]
+        EQ.2: Freed-Doehring [2].
         """ # nopep8
         return self._cards[1].get_value("ftype")
 
     @ftype.setter
     def ftype(self, value: int) -> None:
+        if value not in [1, 2, None]:
+            raise Exception("""ftype must be `None` or one of {1,2}.""")
         self._cards[1].set_value("ftype", value)
         self._cards[2].set_value("ftype", value)
 

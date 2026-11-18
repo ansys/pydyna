@@ -143,7 +143,14 @@ class Field:
         - Default value conversion (string wrapping, int conversion)
         - Flag type conversion (flag fields become bool)
         - Help text cleanup
+
+        Safe to call more than once. Card-set shared fields are normalized while
+        the handler copies their metadata, and the generator normalizes every
+        field again afterwards.
         """
+        if getattr(self, "_normalized", False):
+            return
+
         # Set default 'used' flag if not present
         if not hasattr(self, "used") or self.used is None:
             self.used = True
@@ -158,6 +165,7 @@ class Field:
             self.default = None
             self.help = ""
             self.name = "unused"
+            self._normalized = True
             return
 
         # Handle flag fields - convert to bool type
@@ -224,6 +232,7 @@ class Field:
             # Add trailing space if help ends with quote
             if self.help.endswith('"'):
                 self.help = self.help + " "
+        self._normalized = True
 
 
 @dataclass

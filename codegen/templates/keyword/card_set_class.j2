@@ -92,7 +92,7 @@ class {{card_set.name}}(Cards):
             self._cards,
             buf,
             parameters,
-            discriminator=self._cards[{{card_set.discriminator.cards_with_field[0]}}]._fields[0],
+            discriminator=self._cards[{{card_set.discriminator.cards_with_field[0]}}]._fields[{{card_set.discriminator.field_index}}],
             cards_with_field={{card_set.discriminator.cards_with_field}},
         )
 {% endif %}{# card_set.discriminator #}
@@ -111,12 +111,17 @@ class {{card_set.name}}(Cards):
 {% for shared in card_set.shared_fields %}
     @property
     def {{shared.name}}(self) -> typing.Optional[{{shared.type}}]:
-        """Get or set the {{shared.help}}
+        """Get or set the {% filter indent(width=8) %}{{shared.help}}
+        {% endfilter %}
         """ # nopep8
         return self._cards[{{shared.card_indices[0]}}].get_value("{{shared.name}}")
 
     @{{shared.name}}.setter
     def {{shared.name}}(self, value: {{shared.type}}) -> None:
+{% if shared.options %}
+        if value not in [{{ shared.options|join(', ')}}, None]:
+            raise Exception("""{{shared.name}} must be `None` or one of {{openbrace}}{{ shared.options|join(',')}}{{closebrace}}.""")
+{% endif %}
 {% for card_idx in shared.card_indices %}
         self._cards[{{card_idx}}].set_value("{{shared.name}}", value)
 {% endfor %}
