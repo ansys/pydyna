@@ -52,16 +52,21 @@ class DiscriminatorConfig:
     FTYPE=1 means use card format A, FTYPE=2 means use card format B.
 
     The field position, width, and default value are obtained from the Field object at
-    runtime, so only the field name and which cards contain it need to be specified.
+    runtime. ``field-index`` is the field's position on ``cards-with-field[0]`` and is
+    required. The reader peeks that column, and it is not always the first field.
     """
 
     field: str  # Field name (e.g., "ftype")
+    field_index: int  # Index of the field on cards_with_field[0]
     cards_with_field: List[int] = None  # Card indices containing this field
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "DiscriminatorConfig":
+        if "field-index" not in data:
+            raise ValueError(f"Discriminator '{data.get('field')}' requires field-index")
         return cls(
             field=data["field"],
+            field_index=data["field-index"],
             cards_with_field=data.get("cards-with-field"),
         )
 
@@ -172,6 +177,33 @@ class CardSetSettings:
             shared_fields=shared_fields,
             item_name=data.get("item-name"),
             items_name=data.get("items-name"),
+        )
+
+
+def _check_discriminator_field(
+    source_cards: List[Any],
+    cards_with_field: List[int],
+    field_name: str,
+    field_index: int,
+    card_set_name: str,
+) -> None:
+    """Check that field-index on the first discriminator card names field_name."""
+    if not cards_with_field:
+        raise ValueError(f"Card set '{card_set_name}' discriminator '{field_name}' has no cards-with-field")
+    probe_index = cards_with_field[0]
+    if probe_index >= len(source_cards):
+        raise ValueError(f"Card set '{card_set_name}' discriminator card index {probe_index} is out of range")
+    fields = source_cards[probe_index].get("fields", [])
+    if field_index < 0 or field_index >= len(fields):
+        raise ValueError(
+            f"Card set '{card_set_name}' discriminator field-index {field_index} "
+            f"is out of range for card {probe_index}"
+        )
+    actual = str(fields[field_index].get("name", "")).lower()
+    if actual != field_name.lower():
+        raise ValueError(
+            f"Card set '{card_set_name}' discriminator field-index {field_index} "
+            f"is '{actual}', expected '{field_name}'"
         )
 
 
@@ -322,9 +354,18 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
 
             # Add discriminator configuration if present
             if card_settings.discriminator:
+                cards_with_field = card_settings.discriminator.cards_with_field or []
+                _check_discriminator_field(
+                    card_set["source_cards"],
+                    cards_with_field,
+                    card_settings.discriminator.field,
+                    card_settings.discriminator.field_index,
+                    card_settings.name,
+                )
                 card_set["discriminator"] = {
                     "field": card_settings.discriminator.field,
-                    "cards_with_field": card_settings.discriminator.cards_with_field,
+                    "cards_with_field": cards_with_field,
+                    "field_index": card_settings.discriminator.field_index,
                 }
 
             # Add internal conditionals if present
@@ -344,6 +385,7 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
                     # Get metadata from source_index card, mark all as redundant
                     field_type = "int"
                     field_help = shared_field.name
+                    field_options: List[Any] = []
                     for card_idx in shared_field.card_indices:
                         if card_idx < len(card_set["source_cards"]):
                             source_card = card_set["source_cards"][card_idx]
@@ -353,6 +395,7 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
                                     if card_idx == shared_field.source_index:
                                         field_type = field.type
                                         field_help = field.help or shared_field.name
+                                        field_options = list(field.options or [])
                                     field.redundant = True
                     shared_fields_data.append(
                         {
@@ -360,6 +403,7 @@ class CardSetHandler(keyword_generation.handlers.handler_base.KeywordHandler):
                             "card_indices": shared_field.card_indices,
                             "type": field_type,
                             "help": field_help,
+                            "options": list(field_options),
                         }
                     )
                 card_set["shared_fields"] = shared_fields_data

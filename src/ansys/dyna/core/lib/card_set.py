@@ -200,17 +200,15 @@ class CardSet(CardInterface):
             for card in item._cards:
                 card.format = self._format_type
 
-        # Check if item has custom read logic
-        if hasattr(item, "_read_data"):
-            return item._read_data(buf, parameter_set)
+        # A custom _read_data replaces Cards._read_data, which is what runs after_read
+        # and records parameter references. Call after_read once the peek-and-read
+        # finishes so inactive variant cards carry the values that were read.
+        if type(item)._read_data is not Cards._read_data:
+            reached_end = item._read_data(buf, parameter_set)
+            item.after_read()
+            return bool(reached_end)
 
-        # Default: iterate through all cards
-        for card in item._get_all_cards():
-            result = card.read(buf, parameter_set)
-            if result.reached_end:
-                # according to the card, we are at the end of the keyword, so
-                # we can break out of the card reading loop.
-                return True
+        item._read_data(buf, parameter_set)
         return False
 
     def _load_bounded_from_buffer(self, buf: typing.TextIO, parameter_set: ParameterSet) -> None:
@@ -291,14 +289,18 @@ def read_cards_with_discriminator(
     line, _ = read_line(buf)
     buf.seek(pos)
 
-    # Parse discriminator field value using Field's offset and width
-    default_val = discriminator.value if discriminator.value is not None else 1
-    try:
-        end_pos = discriminator.offset + discriminator.width
-        field_str = line[discriminator.offset : end_pos].strip()
-        field_val = int(field_str) if field_str else default_val
-    except (ValueError, IndexError):
+    # Parse the peeked column with the field's own type. TYPE on *SENSOR_CONTROL
+    # is a string; FTYPE on *MAT_295 is an int. A failed conversion keeps the default.
+    default_val = _default_discriminator_value(discriminator)
+    if not line:
         field_val = default_val
+    else:
+        try:
+            end_pos = discriminator.offset + discriminator.width
+            field_str = line[discriminator.offset : end_pos].strip()
+            field_val = _parse_discriminator_value(field_str, discriminator)
+        except (ValueError, IndexError, TypeError):
+            field_val = default_val
 
     # Set field on all cards that have it so conditionals work
     for card_idx in cards_with_field:
@@ -310,6 +312,28 @@ def read_cards_with_discriminator(
             card.read(buf, parameters)
 
     return False
+
+
+def _default_discriminator_value(discriminator: "Field"):  # noqa: F821
+    """Value used when the peeked column is blank or not convertible."""
+    if discriminator.value is not None:
+        return discriminator.value
+    if discriminator.type is int:
+        return 1
+    return None
+
+
+def _parse_discriminator_value(text: str, discriminator: "Field"):  # noqa: F821
+    """Convert a peeked column to the discriminator field's type."""
+    if not text:
+        return _default_discriminator_value(discriminator)
+    if discriminator.type is str:
+        return text
+    if discriminator.type is int:
+        return int(text)
+    if discriminator.type is float:
+        return float(text)
+    return discriminator.type(text)
 
 
 def ensure_card_set_properties(kwd, for_setter: bool) -> None:

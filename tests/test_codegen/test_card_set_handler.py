@@ -31,18 +31,20 @@ class TestDiscriminatorConfig:
 
     def test_discriminator_creation(self):
         """Test creating a discriminator config."""
-        disc = DiscriminatorConfig(field="ftype", cards_with_field=[0, 1, 2])
+        disc = DiscriminatorConfig(field="ftype", field_index=0, cards_with_field=[0, 1, 2])
 
         assert disc.field == "ftype"
+        assert disc.field_index == 0
         assert disc.cards_with_field == [0, 1, 2]
 
     def test_from_dict(self):
         """Test parsing from dict."""
         disc = DiscriminatorConfig.from_dict(
-            {"field": "ftype", "cards-with-field": [0, 1, 2]}
+            {"field": "ftype", "field-index": 0, "cards-with-field": [0, 1, 2]}
         )
 
         assert disc.field == "ftype"
+        assert disc.field_index == 0
         assert disc.cards_with_field == [0, 1, 2]
 
 
@@ -186,12 +188,14 @@ class TestCardSetSettings:
             "target-ref": "a",
             "discriminator": {
                 "field": "ftype",
+                "field-index": 0,
                 "cards-with-field": [0, 1, 2]
             }
         })
 
         assert settings.discriminator is not None
         assert settings.discriminator.field == "ftype"
+        assert settings.discriminator.field_index == 0
         assert settings.discriminator.cards_with_field == [0, 1, 2]
 
     def test_from_dict_with_internal_conditionals(self):
@@ -407,24 +411,79 @@ class TestCardSetHandler:
         assert card_set["item_name"] == "set"
         assert card_set["items_name"] == "sets"
 
-    def test_handle_with_discriminator(self, handler, sample_kwd_data):
-        """Test card set with discriminator field."""
+    def test_handle_with_discriminator(self, handler):
+        """Test card set with discriminator field.
+
+        The field is not assumed to be column 1. TYPE on SENSOR_CONTROL is the second field.
+        """
+        cards = [
+            Card(index=0, fields=[
+                Field(name="cntlid", type="int", position=0, width=10),
+                Field(name="ftype", type="int", position=10, width=10),
+            ]),
+            Card(index=1, fields=[
+                Field(name="cntlid", type="int", position=0, width=10),
+                Field(name="ftype", type="int", position=10, width=10),
+            ]),
+        ]
+        kwd = KeywordData(
+            keyword="MAT",
+            subkeyword="TEST",
+            title="*MAT_TEST",
+            classname="",
+            cards=cards,
+            options=[],
+            label_registry=make_registry_with_labels(cards, card_a=0, card_b=1),
+        )
         settings = [{
             "name": "FiberSet",
-            "source-refs": ["load_a", "load_b"],
-            "target-ref": "load_a",
+            "source-refs": ["card_a", "card_b"],
+            "target-ref": "card_a",
             "discriminator": {
                 "field": "ftype",
+                "field-index": 1,
                 "cards-with-field": [0, 1]
             }
         }]
 
-        handler.handle(sample_kwd_data, settings)
+        handler.handle(kwd, settings)
 
-        card_set = sample_kwd_data.card_sets["sets"][0]
+        card_set = kwd.card_sets["sets"][0]
         assert "discriminator" in card_set
         assert card_set["discriminator"]["field"] == "ftype"
         assert card_set["discriminator"]["cards_with_field"] == [0, 1]
+        assert card_set["discriminator"]["field_index"] == 1
+
+    def test_handle_with_discriminator_rejects_wrong_field_index(self, handler):
+        """field-index must name the discriminator field. There is no fallback index."""
+        cards = [
+            Card(index=0, fields=[
+                Field(name="cntlid", type="int", position=0, width=10),
+                Field(name="ftype", type="int", position=10, width=10),
+            ]),
+        ]
+        kwd = KeywordData(
+            keyword="MAT",
+            subkeyword="TEST",
+            title="*MAT_TEST",
+            classname="",
+            cards=cards,
+            options=[],
+            label_registry=make_registry_with_labels(cards, card_a=0),
+        )
+        settings = [{
+            "name": "FiberSet",
+            "source-refs": ["card_a"],
+            "target-ref": "card_a",
+            "discriminator": {
+                "field": "ftype",
+                "field-index": 0,
+                "cards-with-field": [0]
+            }
+        }]
+
+        with pytest.raises(ValueError, match="expected 'ftype'"):
+            handler.handle(kwd, settings)
 
     def test_handle_with_internal_conditionals(self, handler, sample_kwd_data):
         """Test card set with internal conditionals."""

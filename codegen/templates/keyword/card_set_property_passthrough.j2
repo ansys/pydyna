@@ -1,3 +1,20 @@
+{% if card.index == 0 and card_set.items_name == "sets" and card_set.shared_fields %}
+{% for shared in card_set.shared_fields %}
+    @property
+    def {{shared.name}}(self) -> typing.Optional[{{shared.type}}]:
+        """Get or set the {{shared.name}}.
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].{{shared.name}}
+
+    @{{shared.name}}.setter
+    def {{shared.name}}(self, value: {{shared.type}}) -> None:
+        """Set the {{shared.name}} property."""
+        ensure_card_set_properties(self, True)
+        self.sets[0].{{shared.name}} = value
+
+{% endfor %}
+{% endif %}
 {% if card.table %}
     @property
     def {{card.table.name}}(self) -> pd.DataFrame:

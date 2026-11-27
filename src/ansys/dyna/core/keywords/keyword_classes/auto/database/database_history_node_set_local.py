@@ -24,36 +24,32 @@
 import typing
 from ansys.dyna.core.lib.card import Card, Field, Flag
 from ansys.dyna.core.lib.field_schema import FieldSchema
+from ansys.dyna.core.lib.card_set import CardSet, ensure_card_set_properties
+from ansys.dyna.core.lib.cards import Cards
 from ansys.dyna.core.lib.keyword_base import KeywordBase
-from ansys.dyna.core.lib.keyword_base import LinkType
-from ansys.dyna.core.keywords.keyword_classes.auto.define.define_coordinate_system import DefineCoordinateSystem
 
-_DATABASEHISTORYNODESETLOCAL_CARD0 = (
+_HISTORYCARDSET_CARD0 = (
     FieldSchema("id", int, 0, 10, None),
     FieldSchema("cid", int, 10, 10, None),
     FieldSchema("ref", int, 20, 10, 0),
     FieldSchema("hfo", int, 30, 10, 0),
 )
 
-class DatabaseHistoryNodeSetLocal(KeywordBase):
-    """DYNA DATABASE_HISTORY_NODE_SET_LOCAL keyword"""
-
-    keyword = "DATABASE"
-    subkeyword = "HISTORY_NODE_SET_LOCAL"
-    _link_fields = {
-        "cid": LinkType.DEFINE_COORDINATE_SYSTEM,
-        "id": LinkType.SET_NODE,
-    }
+class HistoryCardSet(Cards):
+    """ CardSet."""
 
     def __init__(self, **kwargs):
-        """Initialize the DatabaseHistoryNodeSetLocal class."""
-        super().__init__(**kwargs)
+        """Initialize the HistoryCardSet CardSet."""
+        super().__init__(kwargs["keyword"])
+        self._parent = kwargs["parent"]
+        kwargs["parent"] = self
         self._cards = [
             Card.from_field_schemas_with_defaults(
-                _DATABASEHISTORYNODESETLOCAL_CARD0,
+                _HISTORYCARDSET_CARD0,
                 **kwargs,
             ),
         ]
+
     @property
     def id(self) -> typing.Optional[int]:
         """Get or set the Node set ID. The contents of the files are given in Table 9.1 in the Keyword Manual section 9.14 for nodes.
@@ -108,27 +104,81 @@ class DatabaseHistoryNodeSetLocal(KeywordBase):
         self._cards[0].set_value("hfo", value)
 
     @property
-    def cid_link(self) -> typing.Optional[DefineCoordinateSystem]:
-        """Get the DefineCoordinateSystem object for cid."""
-        if self.deck is None:
-            return None
-        for kwd in self.deck.get_kwds_by_full_type("DEFINE", "COORDINATE_SYSTEM"):
-            if kwd.cid == self.cid:
-                return kwd
-        return None
+    def parent(self) -> KeywordBase:
+        """Get the parent keyword."""
+        return self._parent
 
-    @cid_link.setter
-    def cid_link(self, value: DefineCoordinateSystem) -> None:
-        """Set the DefineCoordinateSystem object for cid."""
-        self.cid = value.cid
+class DatabaseHistoryNodeSetLocal(KeywordBase):
+    """DYNA DATABASE_HISTORY_NODE_SET_LOCAL keyword"""
+
+    keyword = "DATABASE"
+    subkeyword = "HISTORY_NODE_SET_LOCAL"
+
+    def __init__(self, **kwargs):
+        """Initialize the DatabaseHistoryNodeSetLocal class."""
+        super().__init__(**kwargs)
+        kwargs["parent"] = self
+        kwargs["keyword"] = self
+        self._cards = [
+            CardSet(
+                HistoryCardSet,
+                **kwargs
+            ),
+        ]
+    @property
+    def id(self) -> typing.Optional[int]:
+        """Get or set the id
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].id
+
+    @id.setter
+    def id(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].id = value
 
     @property
-    def id_link(self) -> typing.Optional[KeywordBase]:
-        """Get the SET_NODE_* keyword for id."""
-        return self._get_set_link("NODE", self.id)
+    def cid(self) -> typing.Optional[int]:
+        """Get or set the cid
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].cid
 
-    @id_link.setter
-    def id_link(self, value: KeywordBase) -> None:
-        """Set the SET_NODE_* keyword for id."""
-        self.id = value.sid
+    @cid.setter
+    def cid(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].cid = value
+
+    @property
+    def ref(self) -> int:
+        """Get or set the ref
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].ref
+
+    @ref.setter
+    def ref(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].ref = value
+
+    @property
+    def hfo(self) -> int:
+        """Get or set the hfo
+        """ # nopep8
+        ensure_card_set_properties(self, False)
+        return self.sets[0].hfo
+
+    @hfo.setter
+    def hfo(self, value: int) -> None:
+        ensure_card_set_properties(self, True)
+        self.sets[0].hfo = value
+
+    @property
+    def sets(self) -> typing.List[HistoryCardSet]:
+        """Gets the list of sets."""
+        return self._cards[0].items()
+
+    def add_set(self, **kwargs):
+        """Adds a set."""
+        self._cards[0].add_item(**kwargs)
 

@@ -31,7 +31,6 @@ change left for a follow-up.
 """
 
 import typing
-import warnings
 
 import pandas as pd
 
@@ -49,13 +48,12 @@ class TransformPart(Transform):
 
     def _get_parts_dataframe(self, keyword) -> typing.Optional[pd.DataFrame]:
         """Get the parts DataFrame from the keyword, if available."""
-        warning = f"keyword {keyword.keyword}_{keyword.subkeyword} not transformed!"
         if not hasattr(keyword, "parts"):
-            warnings.warn(warning)
+            self._warn_not_transformed(keyword)
             return None
         parts = keyword.parts
         if not is_dataframe(parts):
-            warnings.warn(warning)
+            self._warn_not_transformed(keyword)
             return None
         return parts
 
