@@ -19,7 +19,6 @@ PyDYNA documentation  |version|
       :link: user-guide/index
       :link-type: doc
 
-
       Understand how to use PyDYNA's features and capabilities,.
 
    .. jinja:: main_toctree

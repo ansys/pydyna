@@ -198,7 +198,8 @@ runs:
         BUILD_API: ${{ inputs.build-api }}
       run: |
         source .venv/bin/activate
-        timeout 7200 xvfb-run uv run --no-sync -- make -C doc html SPHINXOPTS="-j auto"
+        # Rebuild the Sphinx environment: the cache does not include generated API sources.
+        timeout 7200 xvfb-run uv run --no-sync -- make -C doc html SPHINXOPTS="-j auto -E"
       shell: bash
 
     - name: Upload html documentation
