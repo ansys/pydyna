@@ -26,7 +26,8 @@
 name: Fork PR Handler
 
 on:
-  issue_comment:
+  # Migration is restricted to active members of the PyDyna team below.
+  issue_comment: # zizmor: ignore[dangerous-triggers]
     types: [created]
 
   workflow_dispatch:
